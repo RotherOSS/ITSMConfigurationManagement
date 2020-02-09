@@ -1,0 +1,73 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    <h1>[% Translate("Add") | html %]: [% Translate("Config Item") | html %]</h1>
+
+    <div class="SidebarColumn">
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterClasses">[% Translate("Filter for Classes") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterClasses" class="FilterBox" name="FilterClasses" value="" title="[% Translate("Filter for Classes") | html %]" placeholder="[% Translate("Just start typing to filter...") | html %]" />
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Select a Class from the list to create a new Config Item.") | html %]
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ContentColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable" id="Classes">
+                    <thead>
+                        <tr>
+                            <th class="W100pc">[% Translate("Class") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="FilterMessage Hidden">
+                            <td>[% Translate("No matches found.") | html %]</td>
+                        </tr>
+[% RenderBlockStart("OverviewItemList") %]
+                        <tr>
+                            <td>
+                                <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemEdit;ClassID=[% Data.ClassID | uri %]">[% Translate(Data.Name) | html %]</a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewItemList") %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="Clear"></div>
+</div>

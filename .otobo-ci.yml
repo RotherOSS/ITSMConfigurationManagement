@@ -1,0 +1,34 @@
+Active: 1
+
+PlatformSets:
+ - ondemand-otobo10
+
+DeployOTOBOBranch: rel-10_0
+
+DeployOTOBOPackages:
+ - GeneralCatalog@rel-10_0
+ - ITSMCore@rel-10_0
+ - ITSMIncidentProblemManagement@rel-10_0
+ - ImportExport@rel-10_0
+
+TestModes:
+ Merge:
+  PlatformSets:
+   - ondemand-merge-otobo10
+  DeployOTOBOPackages:
+   - FAQ@rel-10_0
+   - TimeAccounting@rel-10_0
+   - Survey@rel-10_0
+   - SystemMonitoring@rel-10_0
+   - OTOBOMasterSlave@rel-10_0
+   - GeneralCatalog@rel-10_0
+   - ITSMCore@rel-10_0
+   - ITSMIncidentProblemManagement@rel-10_0
+   - ITSMChangeManagement@rel-10_0
+   - ITSMServiceLevelManagement@rel-10_0
+   - ImportExport@rel-10_0
+   - OTOBOBusiness@rel-10_0
+   - OTOBOBusinessSeleniumTesting@master
+
+ Silent:
+  Active: 0
