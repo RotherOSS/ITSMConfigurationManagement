@@ -124,6 +124,9 @@ sub CodeInstall {
     # set default permission group
     $Self->_SetDefaultPermission();
 
+    # add the ConfigItem management invoker to the Elasticsearch webservice
+    $Self->_UpdateElasticsearchWebService( Action => 'Add' );
+
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
         FilePrefix => $Self->{FilePrefix},
@@ -291,6 +294,9 @@ sub CodeUninstall {
 
     # delete 'CurInciStateTypeFromCIs' service preferences
     $Self->_DeleteServicePreferences();
+    
+    # remove the ConfigItem management invoker from the Elasticsearch webservice
+    $Self->_UpdateElasticsearchWebService( Action => 'Remove' );
 
     return 1;
 }
@@ -1515,6 +1521,105 @@ sub _ConvertPerlDefinitions2YAML {
 
     return;
 }
+
+=head2 _UpdateElasticsearchWebService()
+
+Adds the ConfigItem management invoker.
+
+    my $Result = $CodeObject->_UpdateElasticsearchWebService(
+        Mode => 'Add|Remove'
+    );
+
+=cut
+
+sub _UpdateElasticsearchWebService {
+    my ( $Self, %Param ) = @_;
+
+    my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $Webservice = $WebserviceObject->WebserviceGet(
+        Name => 'Elasticsearch',
+    );
+
+    if (!$Webservice) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Did not find the Elasticsearch webservice!",
+        );
+        return;
+    }
+
+    if ( $Param{Action} eq 'Add' ) {
+        $Webservice->{Config}{Requester}{Invoker}{ConfigItemIngestAttachment} = {
+            Description => '',
+            Type        => 'Elasticsearch::ConfigItemManagement',
+        };
+        $Webservice->{Config}{Requester}{Invoker}{ConfigItemManagement} = {
+            Description => '',
+            Events      => [
+                {
+                    Asynchronous => '0',
+                    Event        => 'ConfigItemCreate',
+                },
+                {
+                    Asynchronous => '0',
+                    Event        => 'VersionCreate',
+                },
+                {
+                    Asynchronous => '0',
+                    Event        => 'AttachmentAddPost',
+                },
+                {
+                    Asynchronous => '0',
+                    Event        => 'AttachmentDeletePost',
+                },
+                {
+                    Asynchronous => '0',
+                    Event        => 'ConfigItemDelete',
+                },
+            ],
+            Type => 'Elasticsearch::ConfigItemManagement',
+        };
+        $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemIngestAttachment} = {
+            Command    => 'POST',
+            Controller => '/tmpattachments/:docapi/:id?pipeline=:path',
+        };
+        $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemManagement} = {
+            Command    => 'POST',
+            Controller => '/configitem/:docapi/:id',
+        };
+    }
+
+    elsif ( $Param{Action} eq 'Remove' ) {
+        delete $Webservice->{Config}{Requester}{Invoker}{ConfigItemIngestAttachment};
+        delete $Webservice->{Config}{Requester}{Invoker}{ConfigItemManagement};
+        delete $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemIngestAttachment};
+        delete $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemManagement};
+    }
+
+    else {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "No Action provided!",
+        );
+        return;
+    }
+
+    my $Success = $WebserviceObject->WebserviceUpdate(
+        %{ $Webservice },
+        UserID  => 1,
+    );
+
+    if ( !$Success ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Could not update the Elasticsearch webservice!",
+        );
+        return;
+    }
+    return 1;
+
+}
+
 
 1;
 
