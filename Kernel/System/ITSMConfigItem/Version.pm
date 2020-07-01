@@ -1004,6 +1004,7 @@ sub VersionAdd {
         Data  => {
             ConfigItemID => $Param{ConfigItemID},
             Comment      => $VersionID,
+            OldDeplState => $ConfigItemInfo->{CurDeplState},
         },
         UserID => $Param{UserID},
     );

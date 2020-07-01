@@ -1303,5 +1303,98 @@
             </Array>
         </Value>
     </Setting>
-
+    <Setting Name="Elasticsearch::ExcludedCIClasses" Required="0" Valid="0">
+        <Description Translatable="1">ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Elasticsearch::ExcludedCIDeploymentStates" Required="0" Valid="0">
+        <Description Translatable="1">ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Elasticsearch::ConfigItemStoreFields" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Basic">
+                    <Array>
+                        <Item>ConfigItemID</Item>
+                        <Item>ClassID</Item>
+                        <Item>CurDeplStateID</Item>
+                        <Item>Number</Number>
+                    </Array>
+                </Item>
+                <Item Key="XML">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Elasticsearch::ConfigItemSearchFields" Required="0" Valid="0">
+        <Description Translatable="1">Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Basic">
+                    <Array>
+                        <Item>Name</Item>
+                        <Item>Number</Item>
+                    </Array>
+                </Item>
+                <Item Key="XML">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Attachments">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Elasticsearch::QuickSearchShow###ConfigItem" Required="0" Valid="0">
+        <Description Translatable="1">Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Count">5</Item>
+                <Item Key="Attributes">
+                    <Array>
+                        <Item>Number</Item>
+                        <Item>Name</Item>
+                    </Array>
+                </Item>
+                <Item Key="AttributeHeader">
+                    <Hash>
+                        <Item Key="Number">Number</Item>
+                        <Item Key="Name">Name</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Events###ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">List of all Package events to be displayed in the GUI.</Description>
+        <Navigation>Frontend::Admin</Navigation>
+        <Value>
+            <Array>
+                <Item>ConfigItemCreate</Item>
+                <Item>VersionCreate</Item>
+                <Item>DeploymentStateUpdate</Item>
+                <Item>IncidentStateUpdate</Item>
+                <Item>ConfigItemDelete</Item>
+                <Item>ValueUpdate</Item>
+                <Item>NameUpdate</Item>
+                <Item>AttachmentAddPost</Item>
+                <Item>AttachmentDeletePost</Item>
+                <Item>VersionDelete</Item>
+            </Array>
+        </Value>
+    </Setting>
 </otobo_config>
