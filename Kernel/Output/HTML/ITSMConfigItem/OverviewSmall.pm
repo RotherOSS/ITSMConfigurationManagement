@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -459,8 +459,7 @@ END
                         next COLUMN if !$ExtendedVersionData->{$Column}->{Name};
 
                         # Convert to ascii text in case the value contains html.
-                        my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')
-                            ->ToAscii( String => $ExtendedVersionData->{$Column}->{Value} // '' ) // '';
+                        my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $ExtendedVersionData->{$Column}->{Value} // '' ) // '';
 
                         # convert all whitespace and newlines to single spaces
                         $Value =~ s{ \s+ }{ }gxms;

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -154,14 +154,14 @@ sub PrepareRequest {
                 StopCommunication => 1,
             };
         }
-        
+
         return {
             Success => 1,
             Data    => {
                 docapi      => '_doc',
                 path        => 'Attachments',
                 id          => '',
-                Attachments => [\%Data],
+                Attachments => [ \%Data ],
             },
         };
     }
@@ -173,7 +173,7 @@ sub PrepareRequest {
     # exclusions
     my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
     my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
-    $ExcludedClasses    = $ExcludedClasses ? { map { $_ => 1 } @{$ExcludedClasses} } : undef;
+    $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
     $ExcludedDeplStates = $ExcludedDeplStates ? { map { $_ => 1 } @{$ExcludedDeplStates} } : undef;
 
     # define the default API
@@ -244,7 +244,7 @@ sub PrepareRequest {
             Invoker      => 'ConfigItemIngestAttachment',
             Asynchronous => 0,
             Data         => {
-                %{$Param{Data}},
+                %{ $Param{Data} },
                 Event => 'PutTMPAttachment',
             },
         );
@@ -351,9 +351,10 @@ sub PrepareRequest {
         # prepare processed data to be appended to the attachment array of the CI
         my @AttachmentArray = ();
         for my $Attachment ( @{ $Result->{Data}->{_source}->{Attachments} } ) {
+
             # sort out deleted attachment
             if ( $Attachment->{Filename} ne $Param{Data}{Filename} ) {
-                push @AttachmentArray, \%{ $Attachment };
+                push @AttachmentArray, \%{$Attachment};
             }
         }
 
@@ -375,10 +376,10 @@ sub PrepareRequest {
     my $Store  = $ConfigObject->Get('Elasticsearch::ConfigItemStoreFields');
     my $Search = $ConfigObject->Get('Elasticsearch::ConfigItemSearchFields');
     my %DataToStore;
-    for my $Field ( @{$Store->{Basic}}, @{$Search->{Basic}} ) {
+    for my $Field ( @{ $Store->{Basic} }, @{ $Search->{Basic} } ) {
         $DataToStore{Basic}{$Field} = 1;
     }
-    for my $Field ( @{$Store->{XML}}, @{$Search->{XML}} ) {
+    for my $Field ( @{ $Store->{XML} }, @{ $Search->{XML} } ) {
         $DataToStore{XML}{$Field} = 1;
     }
 
@@ -402,7 +403,7 @@ sub PrepareRequest {
     }
     else {
         my $Version = $ConfigItemObject->VersionGet(
-             ConfigItemID => $Param{Data}{ConfigItemID},
+            ConfigItemID => $Param{Data}{ConfigItemID},
         );
         my $FlattenedXML = {};
         if ( $DataToStore{XML} ) {
@@ -421,7 +422,7 @@ sub PrepareRequest {
             ( map { $_ => $Version->{$_} } keys %{ $DataToStore{Basic} } ),
             ( map { $_ => $FlattenedXML->{$_}{Value} } keys %{ $DataToStore{XML} } ),
         );
-    } 
+    }
 
     return {
         Success => 1,

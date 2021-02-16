@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package var::packagesetup::ITSMConfigurationManagement;    ## no critic
+package var::packagesetup::ITSMConfigurationManagement;
 
 use strict;
 use warnings;
@@ -26,6 +26,7 @@ use Kernel::Output::Template::Provider;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML',
     'Kernel::System::DB',
     'Kernel::System::GeneralCatalog',
@@ -188,7 +189,7 @@ my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_2();
 
 =cut
 
-sub CodeUpgradeFromLowerThan_4_0_2 {    ## no critic
+sub CodeUpgradeFromLowerThan_4_0_2 {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, %Param ) = @_;
 
     # migrate the template Content in the SysConfig
@@ -205,7 +206,7 @@ my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_8();
 
 =cut
 
-sub CodeUpgradeFromLowerThan_4_0_8 {    ## no critic
+sub CodeUpgradeFromLowerThan_4_0_8 {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, %Param ) = @_;
 
     # fix a typo in the general catalog
@@ -222,7 +223,7 @@ my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_91();
 
 =cut
 
-sub CodeUpgradeFromLowerThan_4_0_91 {    ## no critic
+sub CodeUpgradeFromLowerThan_4_0_91 {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, %Param ) = @_;
 
     # change configurations to match the new module location.
@@ -294,7 +295,7 @@ sub CodeUninstall {
 
     # delete 'CurInciStateTypeFromCIs' service preferences
     $Self->_DeleteServicePreferences();
-    
+
     # remove the ConfigItem management invoker from the Elasticsearch webservice
     $Self->_UpdateElasticsearchWebService( Action => 'Remove' );
 
@@ -1501,14 +1502,13 @@ Converts Perl definitions to YAML.
 
 sub _ConvertPerlDefinitions2YAML {
 
-    my $CommandObject
-        = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
+    my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
 
     my ( $Result, $ExitCode );
 
     {
         local *STDOUT;
-        open STDOUT, '>:utf8', \$Result;    ## no critic
+        open STDOUT, '>:utf8', \$Result;    ## no critic qw(InputOutput::RequireEncodingWithUTF8Layer)
         $ExitCode = $CommandObject->Execute();
     }
 
@@ -1536,11 +1536,11 @@ sub _UpdateElasticsearchWebService {
     my ( $Self, %Param ) = @_;
 
     my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
-    my $Webservice = $WebserviceObject->WebserviceGet(
+    my $Webservice       = $WebserviceObject->WebserviceGet(
         Name => 'Elasticsearch',
     );
 
-    if (!$Webservice) {
+    if ( !$Webservice ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Did not find the Elasticsearch webservice!",
@@ -1605,8 +1605,8 @@ sub _UpdateElasticsearchWebService {
     }
 
     my $Success = $WebserviceObject->WebserviceUpdate(
-        %{ $Webservice },
-        UserID  => 1,
+        %{$Webservice},
+        UserID => 1,
     );
 
     if ( !$Success ) {
@@ -1619,7 +1619,6 @@ sub _UpdateElasticsearchWebService {
     return 1;
 
 }
-
 
 1;
 

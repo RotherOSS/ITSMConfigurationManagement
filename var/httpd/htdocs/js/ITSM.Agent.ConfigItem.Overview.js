@@ -2,7 +2,7 @@
 // OTOBO is a web-based ticketing system for service organisations.
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-// Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+// Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 // --
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
@@ -12,6 +12,7 @@
 // FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
+// --
 
 "use strict";
 
@@ -40,12 +41,17 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
         var ITSMConfigItemActionRow = Core.Config.Get('ITSMConfigItemActionRow') || {};
 
         $('#ShowContextSettingsDialog').on('click', function (Event) {
-            Core.UI.Dialog.ShowContentDialog($('#ContextSettingsDialogContainer'), Core.Language.Translate("Settings"), '20%', 'Center', true,                                                                             [
-                    {                                                                                                                                                                                                             Label: Core.Language.Translate("Submit"),
-                        Type: 'Submit',                                                                                                                                                                                           Class: 'Primary'
-                    }                                                                                                                                                                                                     ]
-            );                                                                                                                                                                                                        Event.preventDefault();
-            Event.stopPropagation();                                                                                                                                                                                  return false;
+            Core.UI.Dialog.ShowContentDialog($('#ContextSettingsDialogContainer'), Core.Language.Translate("Settings"), '20%', 'Center', true, [
+                {
+                    Label: Core.Language.Translate("Submit"),
+                    Type: 'Submit',
+                    Class: 'Primary'
+                }
+            ]);
+            Event.preventDefault();
+            Event.stopPropagation();
+
+            return false;
         });
 
         if (ITSMConfigItemSearch) {

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -1720,8 +1720,8 @@ sub _FindChangedXMLValues {
     my %SuppressVersionAdd;
 
     for my $TagKey ( sort keys %UniqueTagKeys ) {
-        my $NewContent = eval '$NewXMLData->' . $TagKey . '->{Content}' || '';    ## no critic
-        my $OldContent = eval '$OldXMLData->' . $TagKey . '->{Content}' || '';    ## no critic
+        my $NewContent = eval '$NewXMLData->' . $TagKey . '->{Content}' || '';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
+        my $OldContent = eval '$OldXMLData->' . $TagKey . '->{Content}' || '';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
 
         if ( $NewContent ne $OldContent ) {
 
@@ -1745,7 +1745,7 @@ sub _FindChangedXMLValues {
                     $SuppressVersionAdd{UpdateLastVersion}->{$TagKey} = join '%%', $OldContent, $NewContent;
 
                     # Build a new data structire only with the update values.
-                    eval '$SuppressVersionAdd{UpdateXMLData}->' . $TagKey . '->{Content} = $NewContent';    ## no critic
+                    eval '$SuppressVersionAdd{UpdateXMLData}->' . $TagKey . '->{Content} = $NewContent';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
                 }
                 elsif ( $AttributeInfo->{SuppressVersionAdd} eq 'Ignore' ) {
                     $SuppressVersionAdd{Ignore}->{$TagKey} = join '%%', $OldContent, $NewContent;

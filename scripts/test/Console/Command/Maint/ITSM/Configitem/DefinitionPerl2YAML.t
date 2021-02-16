@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -14,7 +14,6 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -129,7 +128,7 @@ my ( $Result, $ExitCode );
 
 {
     local *STDOUT;
-    open STDOUT, '>:utf8', \$Result;    ## no critic
+    open STDOUT, '>:utf8', \$Result;    ## no critic qw(InputOutput::RequireEncodingWithUTF8Layer)
     $ExitCode = $CommandObject->Execute();
 }
 
@@ -142,7 +141,7 @@ $Self->Is(
 $Definition = $GetDefinition->( DefinitionID => $DefinitionID );
 
 my $YAMLDefinition = $Kernel::OM->Get('Kernel::System::YAML')->Dump(
-    Data => eval $PerlDefinition,    ## no critic
+    Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
 );
 
 $Self->IsDeeply(
