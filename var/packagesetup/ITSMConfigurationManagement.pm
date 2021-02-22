@@ -232,6 +232,23 @@ sub CodeUpgradeFromLowerThan_4_0_91 {    ## no critic qw(OTOBO::RequireCamelCase
     return 1;
 }
 
+=head2 CodeUpgradeFromLowerThan_10_0_3()
+
+This function is only executed if the installed module version is smaller than 10.0.3.
+
+my $Result = $CodeObject->CodeUpgradeFromLowerThan_10_0_3();
+
+=cut
+
+sub CodeUpgradeFromLowerThan_10_0_3 {    ## no critic qw(OTOBO::RequireCamelCase)
+    my ( $Self, %Param ) = @_;
+
+    # add the ConfigItem management invoker to the Elasticsearch webservice
+    $Self->_UpdateElasticsearchWebService( Action => 'Add' );
+
+    return 1;
+}
+
 =head2 CodeUpgrade()
 
 run the code upgrade part
