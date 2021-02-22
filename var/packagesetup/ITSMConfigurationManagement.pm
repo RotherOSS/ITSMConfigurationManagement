@@ -1579,11 +1579,11 @@ sub _UpdateElasticsearchWebService {
             ],
             Type => 'Elasticsearch::ConfigItemManagement',
         };
-        $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemIngestAttachment} = {
+        $Webservice->{Config}{Requester}{Transport}{Config}{InvokerControllerMapping}{ConfigItemIngestAttachment} = {
             Command    => 'POST',
             Controller => '/tmpattachments/:docapi/:id?pipeline=:path',
         };
-        $Webservice->{Config}{Requester}{Transport}{InvokerControllerMapping}{ConfigItemManagement} = {
+        $Webservice->{Config}{Requester}{Transport}{Config}{InvokerControllerMapping}{ConfigItemManagement} = {
             Command    => 'POST',
             Controller => '/configitem/:docapi/:id',
         };

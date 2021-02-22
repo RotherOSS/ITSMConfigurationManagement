@@ -1332,6 +1332,20 @@
         $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_4_0_91();
 
     ]]></CodeUpgrade>
+    <CodeUpgrade Type="post" Version="10.0.3"><![CDATA[
+
+        # create the package name
+        my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+
+        # discard internally stored object, so that the next access to object creates them newly
+        $Kernel::OM->ObjectsDiscard(
+            Objects            => [$CodeModule],
+            ForcePackageReload => 1,
+        );
+
+        $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_10_0_3();
+
+    ]]></CodeUpgrade>
     <CodeUpgrade Type="post"><![CDATA[
 
         # create the package name
