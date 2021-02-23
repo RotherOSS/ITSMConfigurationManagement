@@ -95,6 +95,14 @@ sub PrepareRequest {
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
+    # do nothing if ConfigItems are not configured
+    if ( !$ConfigObject->Get('Elasticsearch::ConfigItemStoreFields') ) {
+        return {
+            Success           => 1,
+            StopCommunication => 1,
+        };
+    }
+
     # handle all events which are neither update nor creation first
     # delete the ticket
     if ( $Param{Data}{Event} eq 'ConfigItemDelete' ) {
