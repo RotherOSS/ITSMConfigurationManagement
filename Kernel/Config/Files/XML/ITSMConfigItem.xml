@@ -1328,7 +1328,7 @@
                     <Array>
                         <Item>ConfigItemID</Item>
                         <Item>ClassID</Item>
-                        <Item>CurDeplStateID</Item>
+                        <Item>Class</Item>
                         <Item>Number</Item>
                     </Array>
                 </Item>
