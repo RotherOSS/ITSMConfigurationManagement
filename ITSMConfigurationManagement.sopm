@@ -4,7 +4,7 @@
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
     <Framework>10.0.x</Framework>
-    <PackageRequired Version="10.0.2">ITSMCore</PackageRequired>
+    <PackageRequired Version="10.0.3">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.de/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
@@ -1390,7 +1390,7 @@
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1408,7 +1408,7 @@
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1426,7 +1426,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1444,7 +1444,7 @@
         <br/>
         <strong>SZÜKSÉGES OTOBO CSOMAGOK</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1528,7 +1528,7 @@
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1546,7 +1546,7 @@
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1564,7 +1564,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1582,7 +1582,7 @@
         <br/>
         <strong>SZÜKSÉGES OTOBO CSOMAGOK</strong>
         <ul>
-        <li>ITSMCore 10.0.2</li>
+        <li>ITSMCore 10.0.3</li>
         </ul>
         <br/>
         ((enjoy))<br/>
