@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2021-06-19 21:21+0000\n"
+"PO-Revision-Date: 2021-06-25 19:53+0000\n"
 "Last-Translator: Fredy Aragón <fredmac48@hotmail.com>\n"
 "Language-Team: Spanish (Mexico) <https://translate.otobo.org/projects/"
 "otobo10/itsmconfigurationmanagement/es_MX/>\n"
@@ -335,15 +335,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "operacional"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "advertencia"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "incidente"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -980,7 +980,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Parámetros para el ejemplo de permisos de grupo del catálogo general de atributos"
+msgstr ""
+"Parámetros para el ejemplo de permisos de grupo del catálogo general de "
+"atributos."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
@@ -988,7 +990,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Permisos de grupo"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
