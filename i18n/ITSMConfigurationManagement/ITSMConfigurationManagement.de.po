@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-07-01 02:17+0000\n"
+"Last-Translator: Grit Rother <mr@otobo.de>\n"
+"Language-Team: German <https://translate.otobo.org/projects/otobo10/"
+"itsmconfigurationmanagement/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -48,7 +51,7 @@ msgstr "Verwendungsstatus-Typ"
 
 #. Template: AgentDashboardITSMConfigItemGeneric
 msgid "Current Incident State"
-msgstr "Aktueller Vorfallsstatus"
+msgstr "Aktueller Vorfallstatus"
 
 #. Template: AgentDashboardITSMConfigItemGeneric
 msgid "Current Incident State Type"
@@ -124,7 +127,7 @@ msgstr "Detailansicht"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Context Settings"
-msgstr "Kontext-Eintstellungen"
+msgstr "Kontext-Einstellungen"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
@@ -132,7 +135,7 @@ msgstr "Configuration Items pro Seite"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "A generic ITSM Configuration Item table"
-msgstr "Eine generische ITSM Configuration Item-Tabelle."
+msgstr "Eine generische ITSM Configuration Item-Tabelle"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -172,7 +175,7 @@ msgstr "Vorfallstatus-Version"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Deployment State"
-msgstr "Version des Verwendungsstatus."
+msgstr "Version des Verwendungsstatus"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Number"
@@ -220,7 +223,7 @@ msgstr "Keine Version für Configuration Item-ID %s gefunden!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No ConfigItemID, DuplicateID or ClassID is given!"
-msgstr "Keine Configuration Item-ID, Duplikats-ID oder Klassen-ID angegeben."
+msgstr "Keine Configuration Item-ID, Duplikats-ID oder Klassen-ID angegeben!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
@@ -284,7 +287,7 @@ msgstr "Version %s gelöscht"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
-msgstr "Keine Configuration Item-ID oder Versions-ID angegeben."
+msgstr "Keine Configuration Item-ID oder Versions-ID angegeben!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
@@ -292,7 +295,7 @@ msgstr "Configuration Item kann nicht angezeigt werden, keine Zugriffsrechte ver
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr "Configuration Item-ID %s in Datenbank nicht gefunden."
+msgstr "Configuration Item-ID %s in Datenbank nicht gefunden!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
@@ -328,7 +331,9 @@ msgstr "Config Item-Suchergebnisse"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr "Kann das Configuration Item nicht anzeigen, keine Zugriffsrechte für Configuration Items vergeben."
+msgstr ""
+"Kann das Element nicht anzeigen, keine Zugriffsrechte für das ConfigItem "
+"vergeben!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -364,7 +369,7 @@ msgstr "Maximale Anzahl eines Elements"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Empty fields indicate that the current values are kept"
-msgstr "Leere Felder zeigen an, dass die aktuellen Werte beibehalten werden."
+msgstr "Leere Felder zeigen an, dass die aktuellen Werte beibehalten werden"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Skipped"
@@ -772,7 +777,9 @@ msgstr "Configuration Item bearbeiten."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr "Configuration Item-Ereignismodul, dass die Protokollierung der Historie im Agenten-Interface ermöglicht."
+msgstr ""
+"Configuration Item-Event-Modul, das die Protokollierung der Historie im "
+"Agenten-Interface ermöglicht."
 
 #. SysConfig
 msgid "Config item history."
@@ -788,7 +795,7 @@ msgstr "Configuration Item-Detailansicht."
 
 #. SysConfig
 msgid "ConfigItemNumber"
-msgstr "Configuration Item-Nummer"
+msgstr "ConfigItemNumber"
 
 #. SysConfig
 msgid "Configuration Item Limit"
@@ -816,7 +823,13 @@ msgstr "Die Definitionen von Configuration Item-Limit erstellen und verwalten."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "Definieren Sie Actions, in denen im Verknüpfte-Objekte-Widget ein Einstellungen-Knopf verfügbar sein soll (LinkObject::ViewMode = \"complex\"). Bitte beachten Sie, dass für diese Actions die folgenden JS- und CSS-Dateien registriert sein müssen:  Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js und Core.Agent.LinkObject.js."
+msgstr ""
+"Definieren Sie Actions, in denen im Verknüpfte-Objekte-Widget ein "
+"Einstellungen-Knopf verfügbar sein soll (LinkObject::ViewMode = \"complex\")"
+". Bitte beachten Sie, dass für diese Actions die folgenden JS- und CSS-"
+"Dateien registriert sein müssen: Core.AllocationList.css, "
+"Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js "
+"und Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -908,7 +921,7 @@ msgstr "Definiert, welcher Typ von Ticket den Status eines verknüpften Configur
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr "Configuration Item löschen."
+msgstr "Configuration Item löschen"
 
 #. SysConfig
 msgid "Deployment State Color"
@@ -936,7 +949,7 @@ msgstr "Ein Ereignismodul das beim Verknüpfen von Tickets mit Configuration Ite
 
 #. SysConfig
 msgid "ITSM config item overview."
-msgstr "ITSM Configuration Item-Übersicht"
+msgstr "ITSM Configuration Item-Übersicht."
 
 #. SysConfig
 msgid "Module to check the group responsible for a class."
@@ -980,7 +993,7 @@ msgstr "Parameter für die Seiten, in denen Configuration Items angezeigt werden
 
 #. SysConfig
 msgid "Permission Group"
-msgstr "Berechtigungsgruppe \\\\*"
+msgstr "Berechtigungsgruppe"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1101,4 +1114,3 @@ msgstr "Pre-produktiv"
 #. SysConfig
 msgid "productive"
 msgstr "Produktiv"
-
