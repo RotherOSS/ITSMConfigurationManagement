@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:09+0000\n"
-"PO-Revision-Date: 2021-07-01 02:17+0000\n"
-"Last-Translator: Fredy Aragón <fredmac48@hotmail.com>\n"
+"PO-Revision-Date: 2021-07-28 02:14+0000\n"
+"Last-Translator: Pau Nadeu Rabat <PAU.NADEU@networkhero.tech>\n"
 "Language-Team: Spanish <https://translate.otobo.org/projects/otobo10/"
 "itsmconfigurationmanagement/es/>\n"
 "Language: es\n"
@@ -51,7 +51,7 @@ msgstr "Tipo de estado de implementación"
 
 #. Template: AgentDashboardITSMConfigItemGeneric
 msgid "Current Incident State"
-msgstr "Estado Actual del Incidente"
+msgstr "Estado del Incidente Actual"
 
 #. Template: AgentDashboardITSMConfigItemGeneric
 msgid "Current Incident State Type"
@@ -335,15 +335,15 @@ msgstr "¡No se puede mostrar el elemento, no se han proporcionado permisos de a
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "operacional"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "advertencia"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "incidente"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -379,7 +379,7 @@ msgstr "Modelo"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Empresa cliente"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -901,6 +901,9 @@ msgstr "De las columnas de elemento de configuración mostradas en el widget seg
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
 msgstr ""
+"Define las columnas de CI mostradas en la vista compleja de la tabla de "
+"vínculos para todas las clases de CI. Si no hay ninguna entrada, se muestran "
+"las columnas predeterminadas."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
@@ -988,7 +991,7 @@ msgstr "Parámetros para las páginas (donde se muestran los elementos de config
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Grupo de permisos"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
