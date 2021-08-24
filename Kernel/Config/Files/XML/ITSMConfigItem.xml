@@ -1303,6 +1303,16 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Elasticsearch::IndexSettings###ConfigItem" Required="0" Valid="0">
+        <Description Translatable="1">Number of shards (NS), replicas (NR) and fields limit for the index 'ticket'.</Description>
+        <Navigation>Core::Elasticsearch::Settings</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="NS">1</Item>
+                <Item Key="NR">0</Item>
+           </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Elasticsearch::ExcludedCIClasses" Required="0" Valid="0">
         <Description Translatable="1">ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.</Description>
         <Navigation>Core::Elasticsearch::Settings</Navigation>
