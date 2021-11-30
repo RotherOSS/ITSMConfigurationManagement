@@ -228,8 +228,6 @@ sub Run {
         Refresh => $Refresh,
     );
     $Output .= $LayoutObject->NavigationBar();
-    $LayoutObject->Print( Output => \$Output );
-    $Output = '';
 
     # display all navbar filters
     my %NavBarFilter;
