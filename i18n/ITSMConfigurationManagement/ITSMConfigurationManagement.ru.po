@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2022-06-09 09:26+0000\n"
+"PO-Revision-Date: 2022-06-10 02:54+0000\n"
 "Last-Translator: Philipp Kesler <philipp.kesler@hein.de>\n"
 "Language-Team: Russian <https://translate.otobo.org/projects/otobo10/"
 "itsmconfigurationmanagement/ru/>\n"
@@ -744,19 +744,19 @@ msgstr "Ok"
 
 #. SysConfig
 msgid "Assigned CIs"
-msgstr ""
+msgstr "Назначаемые КИ"
 
 #. SysConfig
 msgid "CIs assigned to customer company"
-msgstr ""
+msgstr "КИ, закрепленные за компанией-клиентом"
 
 #. SysConfig
 msgid "CIs assigned to customer user"
-msgstr ""
+msgstr "КИ, назначенные пользователю клиента"
 
 #. SysConfig
 msgid "CMDB Settings"
-msgstr ""
+msgstr "Настройки CMDB"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
@@ -893,10 +893,25 @@ msgstr "Задает список отображаемых столбцов в �
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"Определяет отображаемые столбцы CI в виджете элемента конфигурации в "
+"зависимости от класса CI. Каждая запись должна иметь префикс с именем класса "
+"и двойное двоеточие (например, Computer::). Есть несколько CI-атрибутов, "
+"общих для всех CI (пример для класса Computer: Computer::Name, Computer::"
+"CurDeplState, Computer::CreateTime). Чтобы показать отдельные CI-атрибуты, "
+"определенные в CI-определении, необходимо использовать следующую схему ("
+"пример для класса Computer): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Если для класса CI нет записи, то "
+"отображаются колонки по умолчанию, определенные в настройке "
+"AgentCustomerInformationCenter::Backend###0060-CIC-"
+"ITSMConfigItemCustomerCompany (ключ DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
 msgstr ""
+"Определяет отображаемые столбцы КИ в комплексном представлении таблицы "
+"связей для всех классов КИ. Если запись отсутствует, то отображаются столбцы "
+"по умолчанию."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
@@ -965,6 +980,9 @@ msgstr "Обзор"
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"Определяет отображаемые столбцы КИ в комплексном представлении таблицы "
+"связей для всех классов КИ. Если запись отсутствует, то отображаются столбцы "
+"по умолчанию."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
