@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2021-07-01 02:17+0000\n"
-"Last-Translator: Grit Rother <mr@otobo.de>\n"
+"PO-Revision-Date: 2022-10-05 14:54+0000\n"
+"Last-Translator: Stefan Abel <sta@rother-oss.com>\n"
 "Language-Team: German <https://translate.otobo.org/projects/otobo10/"
 "itsmconfigurationmanagement/de/>\n"
 "Language: de\n"
@@ -815,7 +815,7 @@ msgstr "Configuration Item-Sammelaktion."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Configuration Item Such-Backend Navigation des Agenten-Interface."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
