@@ -1397,4 +1397,15 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="DynamicFields::ObjectType###ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField object registration.</Description>
+        <Navigation>Core::DynamicFields::ObjectTypeRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">ITSM ConfigItem</Item>
+                <Item Key="Module">Kernel::System::DynamicField::ObjectType::ITSMConfigItem</Item>
+                <Item Key="Prio">115</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
