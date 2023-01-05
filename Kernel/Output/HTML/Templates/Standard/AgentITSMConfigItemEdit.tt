@@ -115,6 +115,19 @@
 [% RenderBlockEnd("XMLRow") %]
 
                     <fieldset class="TableLike">
+[% RenderBlockStart("DynamicField") %]
+                        <div class="Row Row_DynamicField_[% Data.Name | html %][% Data.HiddenClass | html %]" [% Data.HiddenStyle | html %]>
+                        [% Data.Label %]
+                            <div class="Field">
+                            [% Data.Field %]
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("DynamicField") %]
+                    </fieldset>
+
+                    <fieldset class="TableLike">
                         <label>[% Translate("Attachments") | html %]:</label>
                         <div class="Field">
                             [% INCLUDE "FormElements/AttachmentList.tt" %]
