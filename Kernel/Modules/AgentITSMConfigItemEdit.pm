@@ -51,13 +51,23 @@ sub Run {
     my $HasAccess;
 
     # get needed objects
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $GeneralCatalogObject      = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject              = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get config of frontend module
     $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+
+    my %DynamicFieldValues;
+
+    # get the dynamic fields for this screen
+    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => [ 'ITSMConfigItem' ],
+#         FieldFilter => {},
+    );
 
     # get needed data
     if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
@@ -364,6 +374,34 @@ sub Run {
                 }
             }
 
+            # get the dynamic fields for this screen
+            my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+                Valid       => 1,
+                ObjectType  => [ 'ITSMConfigItem' ],
+#                 FieldFilter => {},
+            );
+
+            # write dynamic field values
+            DYNAMICFIELD:
+            for my $DynamicFieldConfig ( $DynamicField->@* ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ParamObject        => $ParamObject,
+                    LayoutObject       => $LayoutObject,
+                );
+
+                # set the value
+                my $Success = $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $ConfigItem->{ConfigItemID},
+                    Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+                    UserID             => $Self->{UserID},
+                );
+
+            }
+
             # write the new attachments
             ATTACHMENT:
             for my $Attachment ( values %NewAttachment ) {
@@ -588,26 +626,41 @@ sub Run {
         },
     );
 
-    # get the dynamic fields for this screen
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-        Valid       => 1,
-        ObjectType  => [ 'ConfigItem' ],
-        FieldFilter => {},
-    )
-
     # cycle trough the activated Dynamic Fields for this screen
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( @{$DynamicField} ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
 
-        # extract the dynamic field value from the web request
-        $DynamicFieldValues{ $DynamicFieldConfig->{Name} } =
-            $DynamicFieldBackendObject->EditFieldValueGet(
-                DynamicFieldConfig => $DynamicFieldConfig,
-                ParamObject        => $ParamObject,
-                LayoutObject       => $LayoutObject,
-            );
-    };
+        $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->ValueGet(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            ObjectID           => $ConfigItem->{ConfigItemID}
+        );
+
+        # get field html
+        my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
+            DynamicFieldConfig   => $DynamicFieldConfig,
+#             PossibleValuesFilter => defined $DynFieldStates{Fields}{$i}
+#             ? $DynFieldStates{Fields}{$i}{PossibleValues}
+#             : undef,
+            Value           => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+            LayoutObject    => $LayoutObject,
+            ParamObject     => $ParamObject,
+            AJAXUpdate      => 1,
+#             UpdatableFields => $Self->_GetFieldsToUpdate(),
+#             Mandatory       => $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
+#             %UseDefault,
+        );
+
+        $LayoutObject->Block(
+            Name => 'DynamicField',
+            Data => {
+                Name  => $DynamicFieldConfig->{Name},
+                Label => $DynamicFieldHTML->{Label},
+                Field => $DynamicFieldHTML->{Field},
+            },
+        );
+
+    }
 
     # output xml form
     if ( $XMLDefinition->{Definition} ) {
