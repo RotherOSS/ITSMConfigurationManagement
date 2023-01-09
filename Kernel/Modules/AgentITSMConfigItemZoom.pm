@@ -57,8 +57,9 @@ sub Run {
     }
 
     # get needed object
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # check for access rights
     my $HasAccess = $ConfigItemObject->Permission(
@@ -85,7 +86,8 @@ sub Run {
 
     # get content
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $ConfigItemID,
+        ConfigItemID  => $ConfigItemID,
+        DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
         return $LayoutObject->ErrorScreen(
@@ -365,6 +367,37 @@ sub Run {
             CurDeplSignal => $DeplSignals{ $LastVersion->{DeplState} },
         },
     );
+
+    # display dynamic fields
+    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => [ 'ITSMConfigItem' ],
+#         FieldFilter => {},
+    );
+
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( $DynamicField->@* ) {
+
+        # use translation here to be able to reduce the character length in the template
+        my $Label = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+
+        my $DynamicFieldDisplayData = $DynamicFieldBackendObject->DisplayValueRender(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Value              => $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+            LayoutObject       => $LayoutObject,
+            ValueMaxChars      => 18,
+        );
+
+        $LayoutObject->Block(
+            Name => 'DynamicField',
+            Data => {
+                $DynamicFieldConfig->{Name} => $DynamicFieldDisplayData->{Title},
+                Label                       => $Label,
+                Title                       => $DynamicFieldDisplayData->{Title},
+                Value                       => $DynamicFieldDisplayData->{Value},
+            },
+        );
+    }
 
     # get linked objects
     my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(

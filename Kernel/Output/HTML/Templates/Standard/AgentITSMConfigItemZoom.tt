@@ -86,6 +86,14 @@
                         </p>
                         <div class="Clear"></div>
                     </fieldset>
+                    <fieldset class="TableLike FixedLabelSmall Tight">
+[% RenderBlockStart("DynamicField") %]
+                    <label>[% Translate(Data.Label) | html %]:</label>
+                    <p class="Value">
+                        <span title="[% Data.Title %]">[% Data.Value %]</span>
+                    </p>
+[% RenderBlockEnd("DynamicField") %]
+                    </fieldset>
                 </div>
             </div>
 [% RenderBlockEnd("Meta") %]

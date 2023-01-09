@@ -220,8 +220,9 @@ sub ConfigItemResultList {
 return a config item as hash reference
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => 123,
-        Cache        => 0,    # (optional) default 1 (0|1)
+        ConfigItemID  => 123,
+        Cache         => 0,    # (optional) default 1 (0|1)
+        DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
 A hashref with the following keys is returned:
@@ -302,6 +303,38 @@ sub ConfigItemGet {
             Message  => "No such ConfigItemID ($Param{ConfigItemID})!",
         );
         return;
+    }
+
+    # check if need to return DynamicFields
+    if ( $Param{DynamicFields} ) {
+
+        # get dynamic field objects
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        # get all dynamic fields for the object type Ticket
+        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem'
+        );
+
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+
+            # validate each dynamic field
+            next DYNAMICFIELD if !$DynamicFieldConfig;
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+            # get the current value for each dynamic field
+            my $Value = $DynamicFieldBackendObject->ValueGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                ObjectID           => $ConfigItem{ConfigItemID},
+            );
+
+            # set the dynamic field name and value into the ticket hash
+            $ConfigItem{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $Value;
+        }
+
     }
 
     # get class list
