@@ -192,7 +192,10 @@
                     <Array>
                         <Item>thirdparty/jquery-tablesorter-2.0.5/jquery.tablesorter.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.UI.InputFields.js</Item>
                         <Item>Core.UI.Table.Sort.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBDetailedSearch.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBSearch.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                         <Item>Core.Agent.LinkObject.js</Item>
                         <Item>ITSM.Agent.Zoom.js</Item>
@@ -237,6 +240,9 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.DynamicFieldDBDetailedSearch.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBSearch.js</Item>
+                        <Item>Core.UI.InputFields.js</Item>
                         <Item>ITSM.Agent.ConfigItem.CustomerSearch.js</Item>
                         <Item>ITSM.Agent.ConfigItem.Edit.js</Item>
                     </Array>
