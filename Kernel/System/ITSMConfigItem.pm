@@ -221,7 +221,6 @@ return a config item as hash reference
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => 123,
-        Cache         => 0,    # (optional) default 1 (0|1)
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
@@ -243,6 +242,8 @@ A hashref with the following keys is returned:
     $ConfigItem{ChangeTime}
     $ConfigItem{ChangeBy}
 
+Caching can't be turned off.
+
 =cut
 
 sub ConfigItemGet {
@@ -257,18 +258,17 @@ sub ConfigItemGet {
         return;
     }
 
-    # enable cache per default
-    if ( !defined $Param{Cache} ) {
-        $Param{Cache} = 1;
-    }
+    # ignore DynamicFields per default
+    $Param{DynamicFields} //= 0;
 
-    # check if result is already cached
-    my $CacheKey    = 'ConfigItemGet::ConfigItemID::' . $Param{ConfigItemID};
+    # check if result is already cached, considering the DynamicFields parameter
+    my $CacheKey    = join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields) };
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $Cache       = $CacheObject->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
     );
+
     return Storable::dclone($Cache) if $Cache;
 
     # ask database
