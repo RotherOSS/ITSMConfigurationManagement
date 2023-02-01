@@ -41,7 +41,11 @@ sub Run {
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
+
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
+# RotherOSS / ITSMConfigurationManagement
+    $Param{ObjectType} = $ParamObject->GetParam( Param => 'ObjectType' ) || 'Ticket';
+# EO ITSMConfigurationManagement
 
     my $ACLID = $ParamObject->GetParam( Param => 'ID' ) || '';
 
@@ -209,6 +213,9 @@ sub Run {
             StopAfterMatch => $ACLData->{StopAfterMatch},
             ValidID        => $ACLData->{ValidID},
             UserID         => $Self->{UserID},
+# RotherOSS / ITSMConfigurationManagement
+            ObjectType     => $Param{ObjectType},
+# EO ITSMConfigurationManagement
         );
 
         # show error if can't create
@@ -219,7 +226,10 @@ sub Run {
         }
 
         # redirect to edit screen
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=ACLEdit;ID=$ACLID" );
+# RotherOSS / ITSMConfigurationManagement
+#         return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=ACLEdit;ID=$ACLID" );
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=ACLEdit;ID=$ACLID;ObjectType=$Param{ObjectType}" );
+# EO ITSMConfigurationManagement
     }
 
     # ------------------------------------------------------------ #
@@ -291,6 +301,9 @@ sub Run {
         $ACLData->{ValidID}        = $GetParam->{ValidID};
         $ACLData->{ConfigMatch}    = $GetParam->{ConfigMatch}  || '';
         $ACLData->{ConfigChange}   = $GetParam->{ConfigChange} || '';
+# RotherOSS / ITSMConfigurationManagement
+        $ACLData->{ObjectType}     = $GetParam->{ObjectType} || 'Ticket';
+# EO ITSMConfigurationManagement
 
         # check required parameters
         my %Error;
@@ -329,6 +342,9 @@ sub Run {
             ConfigMatch    => $ACLData->{ConfigMatch}  || '',
             ConfigChange   => $ACLData->{ConfigChange} || '',
             UserID         => $Self->{UserID},
+# RotherOSS / ITSMConfigurationManagement
+            ObjectType     => $Param{ObjectType},
+# EO ITSMConfigurationManagement
         );
 
         # show error if can't update
@@ -347,13 +363,19 @@ sub Run {
             # if the user would like to continue editing the ACL, just redirect to the edit screen
             return $LayoutObject->Redirect(
                 OP =>
-                    "Action=AdminACL;Subaction=ACLEdit;ID=$ACLID"
+# RotherOSS / ITSMConfigurationManagement
+#                     "Action=AdminACL;Subaction=ACLEdit;ID=$ACLID"
+                    "Action=AdminACL;Subaction=ACLEdit;ID=$ACLID;ObjectType=$Param{ObjectType}"
+# EO ITSMConfigurationManagement
             );
         }
         else {
 
             # otherwise return to overview
-            return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+# RotherOSS / ITSMConfigurationManagement
+#             return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+            return $LayoutObject->Redirect( OP => "Action=$Self->{Action};ObjectType=$Param{ObjectType}" );
+# EO ITSMConfigurationManagement
         }
     }
 
@@ -368,6 +390,9 @@ sub Run {
             ResultType => 'FILE',
             Location   => $Location,
             UserID     => $Self->{UserID},
+# RotherOSS / ITSMConfigurationManagement
+            ObjectType => $Param{ObjectType},
+# EO ITSMConfigurationManagement
         );
 
         if ($ACLDumpSuccess) {
@@ -382,7 +407,10 @@ sub Run {
             );
 
             if ($Success) {
-                return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+# RotherOSS / ITSMConfigurationManagement
+#                 return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+                return $LayoutObject->Redirect( OP => "Action=$Self->{Action};ObjectType=$Param{ObjectType}" );
+# EO ITSMConfigurationManagement
             }
             else {
 
@@ -464,7 +492,10 @@ sub Run {
         my $ACLID = $ParamObject->GetParam( Param => 'ID' ) || '';
         my $ACLData;
         my $ACLSingleData;
-        my $Filename = 'Export_ACL.yml';
+# RotherOSS / ITSMConfigurationManagement
+#         my $Filename = 'Export_ACL.yml';
+        my $Filename =  'Export_' . $Param{ObjectType} . '_ACL.yml';
+# EO ITSMConfigurationManagement
 
         if ($ACLID) {
 
@@ -482,7 +513,10 @@ sub Run {
             my $ACLName = $ACLSingleData->{Name};
             $ACLName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;    # cleanup name for saving
 
-            $Filename = 'Export_ACL_' . $ACLName . '.yml';
+# RotherOSS / ITSMConfigurationManagement
+#             $Filename = 'Export_ACL_' . $ACLName . '.yml';
+            $Filename = 'Export_' . $Param{ObjectType} . '_ACL_' . $ACLName . '.yml';
+# EO ITSMConfigurationManagement
             $ACLData  = [$ACLSingleData];
         }
         else {
@@ -495,6 +529,9 @@ sub Run {
             $ACLData = $ACLObject->ACLListGet(
                 UserID   => 1,
                 ValidIDs => \@ValidListIDs,
+# RotherOSS / ITSMConfigurationManagement
+                ObjectType => $Param{ObjectType},
+# EO ITSMConfigurationManagement
             );
         }
 
@@ -519,6 +556,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
+# RotherOSS / ITSMConfigurationManagement
+        # TODO Decide wether aclget should differentiate between object types
+# EO ITSMConfigurationManagement
         # get ACL data
         my $ACLData = $ACLObject->ACLGet(
             ID     => $ACLID,
@@ -555,6 +595,9 @@ sub Run {
             StopAfterMatch => $ACLData->{StopAfterMatch} || 0,
             ValidID        => $ACLData->{ValidID},
             UserID         => $Self->{UserID},
+# RotherOSS / ITSMConfigurationManagement
+            ObjectType     => $Param{ObjectType},
+# EO ITSMConfigurationManagement
         );
 
         # show error if can't create
@@ -565,7 +608,10 @@ sub Run {
         }
 
         # return to overview
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+# RotherOSS / ITSMConfigurationManagement
+#         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action};ObjectType=$Param{ObjectType}" );
+# EO ITSMConfigurationManagement
     }
 
     # ------------------------------------------------------------ #
@@ -606,21 +652,28 @@ sub _ShowOverview {
     }
 
 # RotherOSS / ITSMConfigurationManagement
-    $Param{ObjectSelectionStrg} = $LayoutObject->BuildSelection(
-        Name          => 'ObjectSelection',
+    $Param{ObjectTypeSelectionStrg} = $LayoutObject->BuildSelection(
+        Name          => 'ObjectType',
         Data          => {
             Ticket         => 'Ticket',
             ITSMConfigItem => 'ITSM ConfigItem',
         },
         PossibleNone  => 0,
         Translation   => 0,
-        SelectedValue => 'Ticket',
+        SelectedValue => $Param{ObjectType} || 'Ticket',
         Class         => 'Modernize W75pc',
     );
 # EO ITSMConfigurationManagement
 
     # get ACL list
-    my $ACLList = $ACLObject->ACLList( UserID => $Self->{UserID} );
+# RotherOSS / ITSMConfigurationManagement
+#     my $ACLList = $ACLObject->ACLList( UserID => $Self->{UserID} );
+    my $ACLList = $ACLObject->ACLList(
+        UserID     => $Self->{UserID},
+        ObjectType => $Param{ObjectType},
+    );
+# EO ITSMConfigurationManagement
+
 
     if ( IsHashRefWithData($ACLList) ) {
 
@@ -694,6 +747,9 @@ sub _ShowEdit {
         Class      => 'Modernize Validate_Required ' . ( $Param{Errors}->{'ValidIDInvalid'} || '' ),
     );
 
+# RotherOSS / ITSMConfigurationManagement
+    # TODO Build new ACL Key data
+# EO ITSMConfigurationManagement
     my $ACLKeysLevel1Match = $ConfigObject->Get('ACLKeysLevel1Match') || {};
     $Param{ACLKeysLevel1Match} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel1Match,
@@ -786,7 +842,10 @@ sub _ShowEdit {
 
     # get list of all possible dynamic fields
     my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
-        ObjectType => 'Ticket',
+# RotherOSS / ITSMConfigurationManagement
+#         ObjectType => 'Ticket',
+        ObjectType => $Param{ObjectType},
+# EO ITSMConfigurationManagement
         ResultType => 'HASH',
     );
     my %DynamicFieldNames = reverse %{$DynamicFieldList};
@@ -854,6 +913,9 @@ sub _ShowEdit {
         Value => \@ACLEditPossibleActionsList,
     );
 
+# RotherOSS / ITSMConfigurationManagement
+    # TODO Decide wether to handle the object type differentiation
+# EO ITSMConfigurationManagement
     $Output .= $LayoutObject->Output(
         TemplateFile => "AdminACL$Param{Action}",
         Data         => {
@@ -875,7 +937,10 @@ sub _GetParams {
 
     # get parameters from web browser
     for my $ParamName (
-        qw( Name EntityID Comment Description StopAfterMatch ValidID ConfigMatch ConfigChange )
+# RotherOSS / ITSMConfigurationManagement
+#         qw( Name EntityID Comment Description StopAfterMatch ValidID ConfigMatch ConfigChange )
+        qw( Name ObjectType EntityID Comment Description StopAfterMatch ValidID ConfigMatch ConfigChange )
+# EO ITSMConfigurationManagement
         )
     {
         $GetParam->{$ParamName} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $ParamName )
