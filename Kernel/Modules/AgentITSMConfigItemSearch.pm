@@ -701,8 +701,7 @@ sub Run {
                             Format => '%F_%H-%M',
                         ),
                     ),
-                    ContentType => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset="
-                        . $LayoutObject->{UserCharset},
+                    ContentType => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     Content => $Excel,
                 );
             }
