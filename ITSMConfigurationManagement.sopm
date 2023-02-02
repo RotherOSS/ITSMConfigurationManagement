@@ -15,6 +15,9 @@
     <Filelist>
         <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
+        <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemTicketLink.xml" />
@@ -169,6 +172,7 @@
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/Delete.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.t" />
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.CustomerSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Search.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Add.js" />
@@ -307,6 +311,9 @@
                 <Reference Local="create_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
+        <TableAlter Name="acl">
+            <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
+        </TableAlter>
         <Insert Table="general_catalog">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class</Data>
             <Data Key="name" Type="Quote" Translatable="1">Computer</Data>
@@ -1140,6 +1147,9 @@
                 <Reference Local="type_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
+        <TableAlter Name="acl">
+            <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
+        </TableAlter>
         <Insert Table="general_catalog" Version="1.1.90">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class</Data>
             <Data Key="name" Type="Quote" Translatable="1">Location</Data>
