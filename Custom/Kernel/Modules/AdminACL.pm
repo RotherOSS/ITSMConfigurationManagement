@@ -530,7 +530,7 @@ sub Run {
                 UserID   => 1,
                 ValidIDs => \@ValidListIDs,
 # RotherOSS / ITSMConfigurationManagement
-                ObjectType => $Param{ObjectType},
+                ObjectTypes => [$Param{ObjectType}],
 # EO ITSMConfigurationManagement
             );
         }
@@ -669,8 +669,8 @@ sub _ShowOverview {
 # RotherOSS / ITSMConfigurationManagement
 #     my $ACLList = $ACLObject->ACLList( UserID => $Self->{UserID} );
     my $ACLList = $ACLObject->ACLList(
-        UserID     => $Self->{UserID},
-        ObjectType => $Param{ObjectType},
+        UserID      => $Self->{UserID},
+        ObjectTypes => [$Param{ObjectType}],
     );
 # EO ITSMConfigurationManagement
 
