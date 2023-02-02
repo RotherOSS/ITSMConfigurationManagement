@@ -638,7 +638,7 @@ get an ACL list
         ValidIDs        => ['1','2'],           # optional, to filter ACLs that match listed valid IDs
         UserID          => 1,
 # RotherOSS / ITSMConfigurationManagement
-        ObjectType      => ['Ticket']           # optional, currently Ticket or ITSMConfigItem
+        ObjectTypes     => ['Ticket']           # optional, currently Ticket or ITSMConfigItem
 # EO ITSMConfigurationManagement
     );
 
@@ -702,9 +702,9 @@ sub ACLList {
     }
 # RotherOSS / ITSMConfigurationManagement
 
-    if ( IsHashRefWithData($Param{ObjectTypes}) ) {
+    if ( IsArrayRefWithData($Param{ObjectTypes}) ) {
 
-        my $ObjectTypesStrgDB = join ',', map { $DBObject->Quote( $_, 'String' ) } $Param{ObjectTypes}->@*;
+        my $ObjectTypesStrgDB = join ',', map { "'" . $DBObject->Quote( $_ ) . "'" } $Param{ObjectTypes}->@*;
 
         $SQL .= "$GlueStrg object_type IN ($ObjectTypesStrgDB)";
 
@@ -755,7 +755,7 @@ Returns:
             CreateTime    => '2012-07-04 15:08:00',
             ChangeTime    => '2012-07-04 15:08:00',
 # RotherOSS / ITSMConfigurationManagement
-            ObjectType    => 'Ticket',
+            ObjectTypes   => ['Ticket'],
 # EO ITSMConfigurationManagement
         },
         {
@@ -828,9 +828,9 @@ sub ACLListGet {
     }
 # RotherOSS / ITSMConfigurationManagement
 
-    if ( IsHashRefWithData($Param{ObjectTypes}) ) {
+    if ( IsArrayRefWithData($Param{ObjectTypes}) ) {
 
-        my $ObjectTypesStrgDB = join ',', map { $DBObject->Quote( $_, 'String' ) } $Param{ObjectTypes}->@*;
+        my $ObjectTypesStrgDB = join ',', map { "'" . $DBObject->Quote( $_ ) . "'" } $Param{ObjectTypes}->@*;
 
         $SQL .= "$GlueStrg object_type IN ($ObjectTypesStrgDB)";
 
