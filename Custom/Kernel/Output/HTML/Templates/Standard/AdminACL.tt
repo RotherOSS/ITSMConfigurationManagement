@@ -38,7 +38,7 @@
                 <fieldset class="TableLike">
                     <label for="ObjectSelection">[% Translate("Object Type") | html %]:</label>
                     <div class="Field">
-                        [% Data.ObjectSelectionStrg %]
+                        [% Data.ObjectTypeSelectionStrg %]
                     </div>
                 </fieldset>
                 <div class="Clear"></div>
