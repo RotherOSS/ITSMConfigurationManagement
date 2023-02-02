@@ -17,6 +17,8 @@
         <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.pm" />
         <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
