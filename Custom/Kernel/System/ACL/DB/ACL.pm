@@ -669,12 +669,24 @@ sub ACLList {
     else {
         $ValidIDsStrg = join ',', @{ $Param{ValidIDs} };
     }
+# RotherOSS / ITSMConfigurationManagement
+    my $ObjectTypesStrg;
+    if ( !IsArrayRefWithData( $Param{ObjectTypes} ) ) {
+        $ObjectTypesStrg = 'ALL';
+    }
+    else {
+        $ObjectTypesStrg = join ',', @{ $Param{ObjectTypes} };
+    }
+# EO ITSMConfigurationManagement
 
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     # check cache
-    my $CacheKey = 'ACLList::ValidIDs::' . $ValidIDsStrg;
+# RotherOSS / ITSMConfigurationManagement
+#     my $CacheKey = 'ACLList::ValidIDs::' . $ValidIDsStrg;
+    my $CacheKey = 'ACLList::ValidIDs::' . $ValidIDsStrg . '::ObjectTypes::' . $ObjectTypesStrg;
+# EO ITSMConfigurationManagement
     my $Cache    = $CacheObject->Get(
         Type => 'ACLEditor_ACL',
         Key  => $CacheKey,
@@ -795,12 +807,25 @@ sub ACLListGet {
     else {
         $ValidIDsStrg = join ',', @{ $Param{ValidIDs} };
     }
+# RotherOSS / ITSMConfigurationManagement
+    my $ObjectTypesStrg;
+    if ( !IsArrayRefWithData( $Param{ObjectTypes} ) ) {
+        $ObjectTypesStrg = 'ALL';
+    }
+    else {
+        $ObjectTypesStrg = join ',', @{ $Param{ObjectTypes} };
+    }
+# EO ITSMConfigurationManagement
 
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     # check cache
-    my $CacheKey = 'ACLListGet::ValidIDs::' . $ValidIDsStrg;
+# RotherOSS / ITSMConfigurationManagement
+#     my $CacheKey = 'ACLListGet::ValidIDs::' . $ValidIDsStrg;
+    my $CacheKey = 'ACLListGet::ValidIDs::' . $ValidIDsStrg . '::ObjectTypes::' . $ObjectTypesStrg;
+# EO ITSMConfigurationManagement
+
     my $Cache    = $CacheObject->Get(
         Type => 'ACLEditor_ACL',
         Key  => $CacheKey,
