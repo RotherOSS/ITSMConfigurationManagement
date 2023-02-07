@@ -101,6 +101,15 @@
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldContactWD.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDB.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDropdown.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldMultiselect.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldText.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldTitle.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebService.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemBulk.tt" />
