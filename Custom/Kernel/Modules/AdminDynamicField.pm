@@ -181,6 +181,13 @@ sub _ShowOverview {
 
     # cycle thought all objects to create the select add field selects
     my @ObjectTypes;
+
+# Rother OSS / CMDB
+
+    my @ObjectTypesTranslated;
+
+# EO CMDB
+
     OBJECTTYPE:
     for my $ObjectType (
         sort {
@@ -218,6 +225,12 @@ sub _ShowOverview {
 
         push @ObjectTypes, $ObjectType;
 
+# Rother OSS / CMDB
+
+        push (@ObjectTypesTranslated, $LayoutObject->{LanguageObject}->Translate( $ObjectTypeName ));
+
+# EO CMDB
+
         # call ActionAddDynamicField block
         $LayoutObject->Block(
             Name => 'ActionAddDynamicField',
@@ -232,23 +245,6 @@ sub _ShowOverview {
     }
 
 # Rother OSS / CMDB
-
-    my @ObjectTypesTranslated;
-    for my $ObjectType ( @ObjectTypes ) {
-
-        my $ObjectTypeName;
-        if ( $ObjectType eq 'CustomerCompany' ) {
-            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( 'Customer' );
-        }
-        elsif ( $ObjectType eq 'CustomerUser' ) {
-            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( 'Customer User' );
-        }
-        else {
-            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( $ObjectType );
-        }
-
-        push (@ObjectTypesTranslated, $ObjectTypeName);
-    }
 
     my $DynamicFieldTypeStrg = $LayoutObject->BuildSelection(
         Data          => \@ObjectTypesTranslated,
