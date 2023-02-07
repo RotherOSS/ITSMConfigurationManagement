@@ -136,36 +136,13 @@ sub _ShowOverview {
         );
     }
 
-# Rother OSS / CMDB
-
-    # create the Filter Dynamic Field Types select
-    my @ObjectTypes = (
-        'Ticket',
-        'Article',
-        'ITSMConfigItem',
-        'CustomerCompany',
-        'CustomerUser',
-    );
-    my $DynamicFieldTypeStrg = $LayoutObject->BuildSelection(
-        Data          => \@ObjectTypes,
-        Name          => 'FilterDynamicFieldTypes',
-        PossibleNone  => 1,
-        Translation   => 1,
-        Sort          => 'AlphanumericValue',
-        SelectedValue => '-',
-        Class         => 'Modernize W95pc',
-    );
-
     # call all needed template blocks
     $LayoutObject->Block(
         Name => 'Main',
         Data => {
             %Param,
-            DynamicFieldTypeStrg => $DynamicFieldTypeStrg,
         }
     );
-
-# EO CMDB
 
     my %FieldTypes;
     my %FieldDialogs;
@@ -253,6 +230,45 @@ sub _ShowOverview {
             },
         );
     }
+
+# Rother OSS / CMDB
+
+    my @ObjectTypesTranslated;
+    for my $ObjectType ( @ObjectTypes ) {
+
+        my $ObjectTypeName;
+        if ( $ObjectType eq 'CustomerCompany' ) {
+            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( 'Customer' );
+        }
+        elsif ( $ObjectType eq 'CustomerUser' ) {
+            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( 'Customer User' );
+        }
+        else {
+            $ObjectTypeName = $LayoutObject->{LanguageObject}->Translate( $ObjectType );
+        }
+
+        push (@ObjectTypesTranslated, $ObjectTypeName);
+    }
+
+    my $DynamicFieldTypeStrg = $LayoutObject->BuildSelection(
+        Data          => \@ObjectTypesTranslated,
+        Name          => 'FilterDynamicFieldTypes',
+        PossibleNone  => 1,
+        Sort          => 'AlphanumericValue',
+        SelectedValue => '-',
+        Class         => 'Modernize W95pc',
+    );
+
+# EO CMDB
+
+    # call hint block
+    $LayoutObject->Block(
+        Name => 'DynamicFieldTypeFilter',
+        Data => {
+            %Param,
+            DynamicFieldTypeStrg => $DynamicFieldTypeStrg,
+        },
+    );
 
     # send data to JS
     $LayoutObject->AddJSData(
