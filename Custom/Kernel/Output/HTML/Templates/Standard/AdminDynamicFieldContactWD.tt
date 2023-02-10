@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="Clear"></div>
 
-# Rother OSS / CMDB
+# Rother OSS / ITSMConfigurationManagement
 
 [% RenderBlockStart("DynamicFieldClass") %]
 
@@ -139,7 +139,7 @@
 
 [% RenderBlockEnd("DynamicFieldClass") %]
 
-# EO CMDB
+# EO ITSMConfigurationManagement
 
                                 <label for="TooltipValue">[% Translate("Tooltip message:") | html %]</label>
                                 <div class="Field">

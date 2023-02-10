@@ -182,11 +182,11 @@ sub _ShowOverview {
     # cycle thought all objects to create the select add field selects
     my @ObjectTypes;
 
-# Rother OSS / CMDB
+# Rother OSS / ITSMConfigurationManagement
 
     my @ObjectTypesTranslated;
 
-# EO CMDB
+# EO ITSMConfigurationManagement
 
     OBJECTTYPE:
     for my $ObjectType (
@@ -225,11 +225,11 @@ sub _ShowOverview {
 
         push @ObjectTypes, $ObjectType;
 
-# Rother OSS / CMDB
+# Rother OSS / ITSMConfigurationManagement
 
         push (@ObjectTypesTranslated, $LayoutObject->{LanguageObject}->Translate( $ObjectTypeName ));
 
-# EO CMDB
+# EO ITSMConfigurationManagement
 
         # call ActionAddDynamicField block
         $LayoutObject->Block(
@@ -244,7 +244,7 @@ sub _ShowOverview {
         );
     }
 
-# Rother OSS / CMDB
+# Rother OSS / ITSMConfigurationManagement
 
     my $DynamicFieldTypeStrg = $LayoutObject->BuildSelection(
         Data          => \@ObjectTypesTranslated,
@@ -255,7 +255,7 @@ sub _ShowOverview {
         Class         => 'Modernize W95pc',
     );
 
-# EO CMDB
+# EO ITSMConfigurationManagement
 
     # call hint block
     $LayoutObject->Block(

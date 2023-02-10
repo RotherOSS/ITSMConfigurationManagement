@@ -31,7 +31,7 @@
 
     <div class="SidebarColumn">
 
-# Rother OSS / CMDB
+# Rother OSS / ITSMConfigurationManagement
 
         <div class="WidgetSimple">
             <div class="Header">
@@ -50,7 +50,7 @@
 [% RenderBlockEnd("DynamicFieldTypeFilter") %]
         </div>
 
-# EO CMDB
+# EO ITSMConfigurationManagement
 
         <div class="WidgetSimple">
             <div class="Header">
