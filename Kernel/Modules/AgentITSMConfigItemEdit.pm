@@ -69,6 +69,7 @@ sub Run {
 #         FieldFilter => {},
     );
 
+    my %DynamicFieldValueCount;
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
@@ -79,7 +80,41 @@ sub Run {
             ParamObject        => $ParamObject,
             LayoutObject       => $LayoutObject,
         );
+        $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } = 1;
     }
+
+    # create html strings for all dynamic fields
+    my %DynamicFieldHTML;
+    my %GetParam = ();
+    DYNAMICFIELD:
+    for my $i ( 0 .. $#{ $DynamicFieldList } ) {
+        next DYNAMICFIELD if !IsHashRefWithData( $DynamicFieldList->[$i] );
+
+        my $DynamicFieldConfig = $DynamicFieldList->[$i];
+
+        # Fill dynamic field values with empty strings till it matches the maximum value count
+        if ( $DynamicFieldConfig->{Config}{MultiValue} ) {
+            if (ref $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ne 'ARRAY') {
+                $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} = [ $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ];
+            }
+            # $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ||= [];
+
+            while ( ( scalar $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@* ) < $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } ) {
+                push $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@*, '';
+            }
+        }
+
+        # get field html
+        $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
+            DynamicFieldConfig   => $DynamicFieldConfig,
+            Value                => $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"},
+            LayoutObject         => $LayoutObject,
+            ParamObject          => $ParamObject,
+            AJAXUpdate           => 1,
+        );
+    }
+
+    $Param{DynamicFieldHTMl} = \%DynamicFieldHTML;
 
     # get needed data
     if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
@@ -663,23 +698,22 @@ sub Run {
 #             %UseDefault,
         );
 
-        $LayoutObject->Block(
-            Name => 'DynamicField',
-            Data => {
-                Name  => $DynamicFieldConfig->{Name},
-                Label => $DynamicFieldHTML->{Label},
-                Field => $DynamicFieldHTML->{Field},
-            },
-        );
+        $Param{DynamicFieldHTML}->{$DynamicFieldConfig->{Name}} = $DynamicFieldHTML;
 
     }
 
     # output xml form
     if ( $XMLDefinition->{Definition} ) {
         $Self->{CustomerSearchItemIDs} = [];
-        $Self->_XMLFormOutput(
-            XMLDefinition => $XMLDefinition->{DefinitionRef},
-            %XMLFormOutputParam,
+        my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+        my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem',
+        );
+        $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Mask')->RenderInput(
+            GetParam            => \%Param,
+            LayoutObject        => $LayoutObject,
+            MaskDefinition      => $XMLDefinition->{DefinitionRef},
+            DynamicFieldConfigs => $DynamicField,
         );
     }
 
@@ -890,257 +924,6 @@ sub _XMLDefaultSet {
     }
 
     return $DefaultData;
-}
-
-sub _XMLFormOutput {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-
-    $Param{Level}  ||= 0;
-    $Param{Prefix} ||= '';
-
-    # get submit save
-    my $SubmitSave = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'SubmitSave' );
-
-    # set data present mode
-    my $DataPresentMode = 0;
-    if ( $Param{XMLData} && ref $Param{XMLData} eq 'HASH' ) {
-        $DataPresentMode = 1;
-    }
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    my $ItemCounter = 1;
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        # set loop
-        my $Loop = $Item->{CountDefault};
-        if ($DataPresentMode) {
-            $Loop = 0;
-
-            # search the last content
-            COUNTER:
-            for my $Counter ( 1 .. $Item->{CountMax} ) {
-                last COUNTER if !defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content};
-                $Loop = $Counter;
-            }
-
-            # set absolut minimum
-            if ( $Loop < $Item->{CountMin} ) {
-                $Loop = $Item->{CountMin};
-            }
-        }
-
-        # set delete
-        my $Delete = 0;
-        if ( $Loop > $Item->{CountMin} ) {
-            $Delete = 1;
-        }
-
-        # output content rows
-        for my $Counter ( 1 .. $Loop ) {
-
-            # output row block
-            $LayoutObject->Block( Name => 'XMLRow' );
-
-            if ( !$Param{Level} ) {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetStart' );
-            }
-
-            # create inputkey and addkey
-            my $InputKey = $Item->{Key} . '::' . $Counter;
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-            }
-
-            # output blue required star
-            my $XMLRowValueContentRequired = 0;
-            my $LabelClass                 = '';
-            if ( $Item->{Input}->{Required} ) {
-                $XMLRowValueContentRequired = 1;
-                $LabelClass                 = 'Mandatory';
-            }
-
-            # output red invalid star
-            my $XMLRowValueContentInvalid = 0;
-            if ( $Item->{Form}->{$InputKey}->{Invalid} && $SubmitSave ) {
-                $XMLRowValueContentInvalid = 1;
-            }
-
-            my $ItemID = 'Item' . $ItemCounter++ . $Param{Prefix} . $Param{Level};
-
-            if ( $Item->{Input}->{Type} eq 'Customer' ) {
-                push @{ $Self->{CustomerSearchItemIDs} }, $ItemID;
-            }
-
-            # create input element
-            my $InputString = $LayoutObject->ITSMConfigItemInputCreate(
-                Key              => $InputKey,
-                Item             => $Item,
-                Value            => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content},
-                ItemId           => $ItemID,
-                Required         => $XMLRowValueContentRequired,
-                Invalid          => $XMLRowValueContentInvalid,
-                OverrideTimeZone => 1,
-            );
-
-            # ID?
-            my $LabelFor = $ItemID;
-            if ( $Item->{Input}->{Type} eq 'Date' || $Item->{Input}->{Type} eq 'DateTime' ) {
-                $LabelFor = '';
-            }
-
-            # id needed?
-            if ($LabelFor) {
-                $LabelFor = 'for="' . $LabelFor . '"';
-            }
-
-            # is this a sub field?
-            my $Class = '';
-            if ( $Param{Level} ) {
-                $Class = 'SubElement';
-            }
-
-            # class needed?
-            if ($LabelClass) {
-                $LabelClass = 'class="' . "$Class  $LabelClass" . '"';
-            }
-            else {
-                $LabelClass = 'class="' . $Class . '"';
-            }
-
-            # output row value content block
-            $LayoutObject->Block(
-                Name => 'XMLRowValue',
-                Data => {
-                    Name        => $Item->{Name},
-                    ItemID      => $ItemID,
-                    LabelFor    => $LabelFor || '',
-                    Description => $Item->{Description} || $Item->{Name},
-                    InputString => $InputString,
-                    LabelClass  => $LabelClass || '',
-                    Class       => $Class || '',
-                },
-            );
-
-            if ( $Item->{Input}->{Required} ) {
-                $LayoutObject->Block( Name => 'XMLRowValueContentRequired' );
-            }
-
-            # output delete button
-            if ($Delete) {
-                $LayoutObject->Block(
-                    Name => 'XMLRowValueContentDelete',
-                    Data => {
-                        InputKey => $InputKey,
-                    },
-                );
-            }
-
-            # the content is invalid
-            if ($XMLRowValueContentInvalid) {
-
-                # show regex error message block
-                if ( $Item->{Form}->{$InputKey}->{RegExErrorMessage} ) {
-
-                    $LayoutObject->Block(
-                        Name => 'XMLRowValueRegExError',
-                        Data => {
-                            ItemID            => $ItemID,
-                            RegExErrorMessage => $Item->{Form}->{$InputKey}->{RegExErrorMessage},
-                        },
-                    );
-                }
-
-                # otherwise show normal server error block
-                else {
-                    $LayoutObject->Block(
-                        Name => 'XMLRowValueServerError',
-                        Data => {
-                            ItemID => $ItemID,
-                        },
-                    );
-                }
-            }
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                my %XMLFormOutputParam;
-                if (
-                    $DataPresentMode
-                    && defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content}
-                    )
-                {
-                    $XMLFormOutputParam{XMLData} = $Param{XMLData}->{ $Item->{Key} }->[$Counter];
-                }
-
-                $Self->_XMLFormOutput(
-                    XMLDefinition => $Item->{Sub},
-                    %XMLFormOutputParam,
-                    Level  => $Param{Level} + 1,
-                    Prefix => $InputKey,
-                );
-            }
-
-            if ( !$Param{Level} ) {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetEnd' );
-            }
-
-            # output row to sort rows correctly
-            $LayoutObject->Block( Name => 'XMLRow' );
-        }
-
-        # output add button
-        if ( $Loop < $Item->{CountMax} ) {
-
-            # if no item should be shown we need to show the add button
-            # and therefore we need to show the XMLRow block
-            if ( !$Loop ) {
-                $LayoutObject->Block( Name => 'XMLRow' );
-            }
-
-            my $Class = '';
-            if ( $Param{Level} ) {
-                $Class = 'class="SubElement"';
-            }
-            else {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetEnd' );
-                $LayoutObject->Block( Name => 'XMLRowFieldsetStart' );
-            }
-
-            # set prefix
-            my $InputKey = $Item->{Key};
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-            }
-
-            # output row add content block
-            $LayoutObject->Block(
-                Name => 'XMLRowAddContent',
-                Data => {
-                    ItemID      => $InputKey . 'Add',
-                    Name        => $Item->{Name},
-                    Description => $Item->{Description} || $Item->{Name},
-                    InputKey    => $InputKey,
-                    Class       => $Class,
-                },
-            );
-        }
-    }
-
-    if ( IsArrayRefWithData( $Self->{CustomerSearchItemIDs} ) ) {
-
-        $LayoutObject->AddJSData(
-            Key   => 'CustomerSearchItemIDs',
-            Value => $Self->{CustomerSearchItemIDs},
-        );
-    }
-
-    return 1;
 }
 
 1;

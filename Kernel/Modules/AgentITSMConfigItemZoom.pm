@@ -22,6 +22,7 @@ use warnings;
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -348,6 +349,35 @@ sub Run {
             XMLDefinition => $Version->{XMLDefinition},
             XMLData       => $Version->{XMLData}->[1]->{Version}->[1],
         );
+
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        # dynamic fields
+        my $DynamicFields = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem',
+        );
+
+        DYNAMICFIELD:
+        for my $DynamicField ( $DynamicFields->@* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
+
+            my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
+                DynamicFieldConfig => $DynamicField,
+                Value              => 1, #$Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+                HTMLOutput         => 1,
+                LayoutObject       => $LayoutObject,
+            );
+
+            $LayoutObject->Block(
+                Name => 'DynamicFieldRow',
+                Data => {
+                    $ValueStrg->%*,
+                    Label => $DynamicField->{Label},
+                },
+            );
+
+        }
     }
 
     # get create & change user data
