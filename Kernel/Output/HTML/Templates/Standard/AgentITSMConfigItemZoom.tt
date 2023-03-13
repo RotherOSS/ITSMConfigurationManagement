@@ -252,6 +252,16 @@
                                     </td>
                                 </tr>
 [% RenderBlockEnd("AttachmentRow") %]
+[% RenderBlockStart("DynamicFieldRow") %]
+                                <tr>
+                                    <td class="W25pc" title="[% Translate(Data.Description) | html %]">
+                                        [% Translate(Data.Label) | html %]
+                                    </td>
+                                    <td>
+                                        [% Data.Value %]
+                                    </td>
+                                </tr>
+[% RenderBlockEnd("DynamicFieldRow") %]
                             </tbody>
                         </table>
                     </div>
