@@ -68,10 +68,7 @@
         <Navigation>Core::ITSMConfigItem::ACL</Navigation>
         <Value>
             <Hash>
-                <Item Key="Number" Translatable="1">Number</Item>
-                <Item Key="CurDeplState" Translatable="1">CurDeplState</Item>
-                <Item Key="CurInciState" Translatable="1">CurInciState</Item>
-                <Item Key="DynamicField" Translatable="1">DynamicField</Item>
+                <Item Key="ITSMConfigItem" Translatable="1">ITSMConfigItem</Item>
             </Hash>
         </Value>
     </Setting>
@@ -80,10 +77,7 @@
         <Navigation>Core::ITSMConfigItem::ACL</Navigation>
         <Value>
             <Hash>
-                <Item Key="Number" Translatable="1">Number</Item>
-                <Item Key="CurDeplState" Translatable="1">CurDeplState</Item>
-                <Item Key="CurInciState" Translatable="1">CurInciState</Item>
-                <Item Key="DynamicField" Translatable="1">DynamicField</Item>
+                <Item Key="ITSMConfigItem" Translatable="1">ITSMConfigItem</Item>
             </Hash>
         </Value>
     </Setting>

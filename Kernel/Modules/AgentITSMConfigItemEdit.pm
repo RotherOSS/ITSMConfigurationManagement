@@ -83,9 +83,20 @@ sub Run {
         $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } = 1;
     }
 
+    my %GetParam = ();
+    # convert dynamic field values into a structure for ACLs
+    my %DynamicFieldACLParameters;
+    DYNAMICFIELD:
+    for my $DynamicField ( sort keys %DynamicFieldValues ) {
+        next DYNAMICFIELD if !$DynamicField;
+        next DYNAMICFIELD if !$DynamicFieldValues{$DynamicField};
+
+        $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicField } = $DynamicFieldValues{$DynamicField};
+    }
+    $GetParam{DynamicField} = \%DynamicFieldACLParameters;
+
     # create html strings for all dynamic fields
     my %DynamicFieldHTML;
-    my %GetParam = ();
     DYNAMICFIELD:
     for my $i ( 0 .. $#{ $DynamicFieldList } ) {
         next DYNAMICFIELD if !IsHashRefWithData( $DynamicFieldList->[$i] );
@@ -498,6 +509,90 @@ sub Run {
                 );
             }
         }
+    }
+    elsif ($Self->{Subaction} eq 'AJAXUpdate') {
+
+        # getting necessary objects
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        my $TreeView = 0;
+        if ($ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree') {
+            $TreeView = 1;
+        }
+
+        # fetch Dynamic Fields
+        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem',
+        );
+
+        # update Dynamic Fields Possible Values via AJAX
+        my @DynamicFieldAJAX;
+
+        # cycle through the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ($DynamicFieldList->@*) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsACLReducible'
+            );
+            next DYNAMICFIELD if !$IsACLReducible;
+
+            my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            # convert possible values key => value to key => key for ACLs using a Hash slice
+            my %AclData = $PossibleValues->%*;
+            @AclData{ keys %AclData } = keys %AclData;
+
+            # set possible values filter from ACLs
+            my $ACL = $ConfigItemObject->ITSMConfigItemAcl(
+                %GetParam,
+                Action         => $Self->{Action},
+                ReturnType     => 'ITSMConfigItem',
+                ReturnSubType  => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                Data           => \%AclData,
+                UserID         => $Self->{UserID},
+            );
+
+            if ($ACL) {
+                my %Filter = $ConfigItemObject->ITSMConfigItemAclData();
+
+                # convert Filter key => key back to key => value using map
+                %{$PossibleValues} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+            }
+
+            my $DataValues = $DynamicFieldBackendObject->BuildSelectionDataGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                PossibleValues     => $PossibleValues,
+                Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+            ) || $PossibleValues;
+
+            # add dynamic field to the list of fields to update
+            push @DynamicFieldAJAX, {
+                Name        => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                Data        => $DataValues,
+                SelectedID  => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+                Translation => $DynamicFieldConfig->{Config}->{TranslatableValues} || 0,
+                Max         => 100,
+            };
+        }
+
+        my $JSON = $LayoutObject->BuildSelectionJSON(
+            [
+                @DynamicFieldAJAX,
+            ],
+        );
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+
     }
     elsif ($DuplicateID) {
         my $VersionID = $ParamObject->GetParam( Param => 'VersionID' );

@@ -22,6 +22,7 @@ use warnings;
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
 
 use Kernel::System::EventHandler;
+use Kernel::System::ITSMConfigItem::ITSMConfigItemACL;
 use Kernel::System::ITSMConfigItem::Definition;
 use Kernel::System::ITSMConfigItem::History;
 use Kernel::System::ITSMConfigItem::Number;
@@ -79,6 +80,7 @@ sub new {
     $Self->{CacheTTL}  = 60 * 60 * 24 * 20;
 
     @ISA = qw(
+        Kernel::System::ITSMConfigItem::ITSMConfigItemACL
         Kernel::System::ITSMConfigItem::Definition
         Kernel::System::ITSMConfigItem::History
         Kernel::System::ITSMConfigItem::Number
