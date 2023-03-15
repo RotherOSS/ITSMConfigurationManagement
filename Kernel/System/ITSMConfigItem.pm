@@ -578,6 +578,129 @@ sub ConfigItemDelete {
     return $Success;
 }
 
+=head2 ConfigItemUpdate()
+
+update a config item
+
+    my $Success = $ConfigItemObject->ConfigItemUpdate(
+        ConfigItemID   => 27,
+        Number         => '111',    # ID or Number is required
+        UserID         => 1,
+        Name           => 'Name',   # optional
+        DeplStateID    => 3,        # optional
+        InciStateID    => 2,        # optional
+        DynamicField_X => $Value,   # optional
+    );
+
+=cut
+
+sub ConfigItemUpdate {
+    my ( $Self, %Param ) = @_;
+
+    # lookup
+    $Param{ConfigItemID} //= $Self->ConfigItemLookup(
+        ConfigItemNumber => $Param{Number},
+    );
+
+    # check needed parameters
+    for my $Key ( /ConfigItemID UserID/ ) {
+        if ( !$Param{ $Key } ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need " . ( $Key eq 'ConfigItemID' ? 'ConfigItemID or Number' : $Key ),
+            );
+
+            return;
+        }
+    }
+
+    # gather dynamic field keys
+    my @DynamicFieldNames;
+    KEY:
+    for my $Key ( keys %Param ) {
+        next KEY if $Key !~ /^DynamicField_(.+)/;
+
+        push @DynamicFieldNames, $1;
+    }
+
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
+
+    # get current
+    my %ConfigItem = $Self->ConfigItemGet(
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => @DynamicFieldNames ? 1 : 0,
+    );
+
+    my $Changed;
+    my $AddVersion;
+
+    # name, deployment and incident state
+    ATTR:
+    for my $Attribute ( qw/Name DeplStateID InciStateID/ ) {
+        next ATTR if !$Param{ $Attribute };
+        next ATTR if $Param{ $Attribute } eq $ConfigItem{ $Attribute };
+
+        $Param{ $Attribute } ||= $ConfigItem{ $Attribute };
+
+        $Changed    = 1;
+        $AddVersion = $VersionTrigger{ $Attribute } || $AddVersion;
+    }
+
+    if ( $Changed ) {
+        # update config item
+        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL => 'UPDATE configitem SET name = ?, depl_state_id = ?, inci_state_id = ?'.
+                .', change_time = current_timestamp, change_by = ?',
+            Bind => [ \$Param{Name}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{UserID} ],
+        );
+
+        return if !$Success;
+    }
+
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # dynamic fields
+    DYNAMICFIELD:
+    for my $Name ( @DynamicFieldNames ) {
+        my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+            Name => $Name,
+        );
+
+        next DYNAMICFIELD if !$DynamicFieldBackendObject->ValueIsDifferent(
+            DynamicFieldConfig => $DynamicField,
+            Value1             => $Param{"DynamicField_$Name"},
+            Value2             => $ConfigItem{"DynamicField_$Name"},
+        );
+
+        my $Success = $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $DynamicField,
+            ObjectID           => $Param{ConfigItemID},
+            Value              => $Param{"DynamicField_$Name"},
+            UserID             => $Param{UserID},
+        );
+
+        if ( !$Success ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not Update DynamicField $Name!",
+            );
+
+            return;
+        }
+
+        $AddVersion = $DynamicField->{Config}{VersionTrigger} || $AddVersion;
+    }
+
+    if ( $AddVersion ) {
+        $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Version')->VersionAdd(
+            %ConfigItem,
+            %Param,
+        );
+    }
+}
+
 =head2 ConfigItemAttachmentAdd()
 
 adds an attachment to a config item

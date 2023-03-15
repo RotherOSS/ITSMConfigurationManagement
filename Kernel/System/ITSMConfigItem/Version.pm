@@ -308,6 +308,7 @@ The returned hash contains following attributes.
     $Version{Class}
     $Version{LastVersionID}
     $Version{Name}
+    $Version{Definition}
     $Version{DefinitionID}
     $Version{DeplStateID}
     $Version{DeplState}
@@ -321,28 +322,13 @@ The returned hash contains following attributes.
     $Version{CurInciStateID}
     $Version{CurInciState}
     $Version{CurInciStateType}
-    $Version{XMLDefinition}
-    $Version{XMLData}
+    $Version{DynamicField_Name}
     $Version{CreateTime}
     $Version{CreateBy}
 
     my $VersionRef = $ConfigItemObject->VersionGet(
-        VersionID  => 123,
-        XMLDataGet => 1,    # (optional) default 1 (0|1)
-    );
-
-    or
-
-    my $VersionRef = $ConfigItemObject->VersionGet(
-        ConfigItemID => 123,
-    );
-
-When the data from the XML storage is not needed then fetching the XML data can be
-explicitly turned off by passing XMLDataGet => 0.
-
-    my $VersionRef = $ConfigItemObject->VersionGet(
-        ConfigItemID => 123,
-        XMLDataGet   => 0,
+        VersionID    => 123,
+        DynamicField => 1,    # (optional) default 0 (0|1)
     );
 
 =cut
@@ -351,59 +337,32 @@ sub VersionGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    if ( !$Param{VersionID} && !$Param{ConfigItemID} ) {
+    if ( !$Param{VersionID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Need VersionID or ConfigItemID!',
+            Message  => 'Need VersionID!',
         );
         return;
     }
 
-    if ( !defined $Param{XMLDataGet} ) {
-        $Param{XMLDataGet} = 1;
-    }
-
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-    if ( $Param{VersionID} ) {
+    # check if result is already cached
+    my $CacheKey = 'VersionGet::VersionID::' . $Param{VersionID} . '::DF::' . $Param{DynamicField};
+    my $Cache    = $CacheObject->Get(
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
+    );
+    return Storable::dclone($Cache) if $Cache;
 
-        # check if result is already cached
-        my $CacheKey = 'VersionGet::VersionID::' . $Param{VersionID} . '::XMLData::' . $Param{XMLDataGet};
-        my $Cache    = $CacheObject->Get(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey,
-        );
-        return Storable::dclone($Cache) if $Cache;
-
-        # get version
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, configitem_id, name, definition_id, '
-                . 'depl_state_id, inci_state_id, create_time, create_by '
-                . 'FROM configitem_version WHERE id = ?',
-            Bind  => [ \$Param{VersionID} ],
-            Limit => 1,
-        );
-    }
-    else {
-
-        # check if result is already cached
-        my $CacheKey = 'VersionGet::ConfigItemID::' . $Param{ConfigItemID} . '::XMLData::' . $Param{XMLDataGet};
-        my $Cache    = $CacheObject->Get(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey,
-        );
-        return Storable::dclone($Cache) if $Cache;
-
-        # get version
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, configitem_id, name, definition_id, '
-                . 'depl_state_id, inci_state_id, create_time, create_by '
-                . 'FROM configitem_version '
-                . 'WHERE configitem_id = ? ORDER BY id DESC',
-            Bind  => [ \$Param{ConfigItemID} ],
-            Limit => 1,
-        );
-    }
+    # get version
+    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        SQL => 'SELECT id, configitem_id, name, definition_id, '
+            . 'depl_state_id, inci_state_id, create_time, create_by '
+            . 'FROM configitem_version WHERE id = ?',
+        Bind  => [ \$Param{VersionID} ],
+        Limit => 1,
+    );
 
     # fetch the result
     my %Version;
@@ -470,7 +429,7 @@ sub VersionGet {
     $Version{CurInciStateType} = $ConfigItem->{CurInciStateType};
 
     # set cache for VersionID without xml data (always)
-    my $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::XMLData::0';
+    my $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::0';
     $CacheObject->Set(
         Type  => $Self->{CacheType},
         TTL   => $Self->{CacheTTL},
@@ -478,51 +437,24 @@ sub VersionGet {
         Value => Storable::dclone( \%Version ),
     );
 
-    # set cache for ConfigItemID without xml data (only if called with ConfigItemID)
-    if ( $Param{ConfigItemID} ) {
-        $CacheKey = 'VersionGet::ConfigItemID::' . $Version{ConfigItemID} . '::XMLData::0';
-        $CacheObject->Set(
-            Type  => $Self->{CacheType},
-            TTL   => $Self->{CacheTTL},
-            Key   => $CacheKey,
-            Value => Storable::dclone( \%Version ),
-        );
-    }
-
     # done if we don't need xml data
-    return \%Version if !$Param{XMLDataGet};
+    return \%Version if !$Param{DynamicField};
 
     # get xml definition
     my $Definition = $Self->DefinitionGet(
         DefinitionID => $Version{DefinitionID},
     );
-    $Version{XMLDefinition} = $Definition->{DefinitionRef};
-
-    # get xml data
-    $Version{XMLData} = $Self->_XMLVersionGet(
-        ClassID   => $ConfigItem->{ClassID},
-        VersionID => $Version{VersionID},
-    );
+    $Version{Definition}    = $Definition->{DefinitionRef};
+    $Version{DynamicFields} = $Definition->{DynamicFieldRef};
 
     # set cache for VersionID (always)
-    $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::XMLData::1';
+    $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::1';
     $CacheObject->Set(
         Type  => $Self->{CacheType},
         TTL   => $Self->{CacheTTL},
         Key   => $CacheKey,
         Value => Storable::dclone( \%Version ),
     );
-
-    # set cache for ConfigItemID (only if called with ConfigItemID)
-    if ( $Param{ConfigItemID} ) {
-        $CacheKey = 'VersionGet::ConfigItemID::' . $Version{ConfigItemID} . '::XMLData::1';
-        $CacheObject->Set(
-            Type  => $Self->{CacheType},
-            TTL   => $Self->{CacheTTL},
-            Key   => $CacheKey,
-            Value => Storable::dclone( \%Version ),
-        );
-    }
 
     return \%Version;
 }
@@ -684,13 +616,12 @@ sub VersionConfigItemIDGet {
 add a new version
 
     my $VersionID = $ConfigItemObject->VersionAdd(
-        ConfigItemID => 123,
-        Name         => 'The Name',
-        DefinitionID => 1212,
-        DeplStateID  => 8,
-        InciStateID  => 4,
-        XMLData      => $ArrayHashRef,  # (optional)
-        UserID       => 1,
+        ConfigItemID      => 123,
+        Name              => 'The Name',
+        DeplStateID       => 8,
+        InciStateID       => 4,
+        DynamicField_Name => $Value,    # optional
+        UserID            => 1,
     );
 
 =cut
@@ -699,7 +630,7 @@ sub VersionAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Attribute (qw(ConfigItemID Name DefinitionID DeplStateID InciStateID UserID)) {
+    for my $Attribute (qw(ConfigItemID Name DeplStateID InciStateID UserID)) {
         if ( !$Param{$Attribute} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -761,7 +692,6 @@ sub VersionAdd {
         # this is needed to trigger some events
         $ConfigItemInfo = $Self->VersionGet(
             ConfigItemID => $Param{ConfigItemID},
-            XMLDataGet   => 0,
         );
     }
     else {
@@ -775,6 +705,7 @@ sub VersionAdd {
     return if !$ConfigItemInfo;
     return if ref $ConfigItemInfo ne 'HASH';
 
+    # TODO: In ConfigItemUpdate/Add?
     # check, whether the feature to check for a unique name is enabled
     if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
 
@@ -807,107 +738,16 @@ sub VersionAdd {
     my $ReturnVersionID = scalar @{$VersionList} ? $VersionList->[-1] : 0;
     return $ReturnVersionID if !( $Events && keys %{$Events} );
 
-    # Special case that only XML attributes have been changed that should not create a new version
-    if ( $Events->{UpdateLastVersion} && $Events->{UpdateXMLData} && ref $Events->{UpdateXMLData} eq 'ARRAY' ) {
+    my $DefinitionID = $Self->_GetDefinitionID(
+        Param          => \%Param,
+        ConfigItemInfo => $ConfigItemInfo,
+    );
 
-        my %ValueHash2D = $Kernel::OM->Get('Kernel::System::XML')->XMLHash2D(
-            XMLHash => $Events->{UpdateXMLData},
-        );
-
-        UPDATEVALUE:
-        for my $UpdateValue ( sort keys %{ $Events->{ValueUpdate} } ) {
-
-            my $ContentString = $UpdateValue . '{\'Content\'}';
-
-            # Check if the key exists.
-            next UPDATEVALUE if !exists $ValueHash2D{$ContentString};
-
-            my $Type = 'ITSM::ConfigItem::' . $ConfigItemInfo->{ClassID};
-
-            # Delete old entries from the database.
-            return if !$DBObject->Do(
-                SQL => '
-                    DELETE FROM xml_storage
-                    WHERE xml_type = ?
-                    AND xml_key = ?
-                    AND xml_content_key = ?
-                ',
-                Bind => [
-                    \$Type,
-                    \$ReturnVersionID,
-                    \$ContentString,
-                ],
-            );
-
-            # Add updated entry to the database.
-            return if !$DBObject->Do(
-                SQL => '
-                    INSERT INTO xml_storage
-                    (xml_type, xml_key, xml_content_key, xml_content_value)
-                    VALUES (?, ?, ?, ?)
-                ',
-                Bind => [
-                    \$Type,
-                    \$ReturnVersionID,
-                    \$ContentString,
-                    \$ValueHash2D{$ContentString},
-                ],
-            );
-
-            # Delete cache.
-            $CacheObject->Delete(
-                Type => 'XML',
-                Key  => "$Type-$ReturnVersionID",
-            );
-        }
-
-        # delete affected caches
-        my $CacheKey = 'VersionGet::ConfigItemID::' . $Param{ConfigItemID} . '::XMLData::';
-        for my $XMLData (qw(0 1)) {
-            $CacheObject->Delete(
-                Type => $Self->{CacheType},
-                Key  => $CacheKey . $XMLData,
-            );
-        }
-
-        # delete affected caches
-        $CacheKey = 'VersionGet::VersionID::' . $ReturnVersionID . '::XMLData::';
-        for my $XMLData (qw(0 1)) {
-            $CacheObject->Delete(
-                Type => $Self->{CacheType},
-                Key  => $CacheKey . $XMLData,
-            );
-        }
-
-        # update change_time and change_by of the config item
-        return if !$DBObject->Do(
-            SQL => '
-                UPDATE configitem
-                SET change_time = current_timestamp,
-                change_by = ?
-                WHERE id = ?',
-            Bind => [
-                \$Param{UserID},
-                \$Param{ConfigItemID},
-            ],
-        );
-
-        # delete config item cache
-        $CacheKey = 'ConfigItemGet::ConfigItemID::' . $Param{ConfigItemID};
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey,
-        );
-
-        # Trigger ValueUpdate event.
-        $Self->_EventHandlerForChangedXMLValues(
-            ConfigItemID => $Param{ConfigItemID},
-            UpdateValues => $Events->{ValueUpdate},
-            UserID       => $Param{UserID},
-        );
-
-        return $ReturnVersionID;
-    }
+#    # Special case that only XML attributes have been changed that should not create a new version
+#    if ( $Events->{UpdateLastVersion} && $Events->{UpdateXMLData} && ref $Events->{UpdateXMLData} eq 'ARRAY' ) {
+#        ... old stuff
+#        return $ReturnVersionID;
+#    }
 
     # insert new version
     my $Success = $DBObject->Do(
@@ -926,19 +766,6 @@ sub VersionAdd {
     );
 
     return if !$Success;
-
-    # delete affected caches
-    my $CacheKey = 'VersionGet::ConfigItemID::' . $Param{ConfigItemID} . '::XMLData::';
-    for my $XMLData (qw(0 1)) {
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey . $XMLData,
-        );
-    }
-    $CacheObject->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'VersionNameGet::ConfigItemID::' . $Param{ConfigItemID},
-    );
 
     # get id of new version
     $DBObject->Prepare(
@@ -965,38 +792,7 @@ sub VersionAdd {
         return;
     }
 
-    # add xml data
-    if ( $Param{XMLData} && ref $Param{XMLData} eq 'ARRAY' ) {
-        $Self->_XMLVersionAdd(
-            ClassID      => $ConfigItemInfo->{ClassID},
-            ConfigItemID => $Param{ConfigItemID},
-            VersionID    => $VersionID,
-            XMLData      => $Param{XMLData},
-        );
-    }
-
-    # update last_version_id, cur_depl_state_id, cur_inci_state_id, change_time and change_by
-    $DBObject->Do(
-        SQL => 'UPDATE configitem SET last_version_id = ?, '
-            . 'cur_depl_state_id = ?, cur_inci_state_id = ?, '
-            . 'change_time = ?, change_by = ? '
-            . 'WHERE id = ?',
-        Bind => [
-            \$VersionID,
-            \$Param{DeplStateID},
-            \$Param{InciStateID},
-            \$CreateTime,
-            \$Param{UserID},
-            \$Param{ConfigItemID},
-        ],
-    );
-
-    # delete config item cache
-    $CacheKey = 'ConfigItemGet::ConfigItemID::' . $Param{ConfigItemID};
-    $CacheObject->Delete(
-        Type => $Self->{CacheType},
-        Key  => $CacheKey,
-    );
+    # TODO: DF
 
     # trigger VersionCreate event
     $Self->EventHandler(

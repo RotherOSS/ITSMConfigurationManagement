@@ -20,6 +20,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -136,6 +137,7 @@ Return
     $Definition->{Class}
     $Definition->{Definition}
     $Definition->{DefinitionRef}
+    $Definition->{DynamicFieldRef}
     $Definition->{Version}
     $Definition->{CreateTime}
     $Definition->{CreateBy}
@@ -172,7 +174,7 @@ sub DefinitionGet {
 
         # ask database
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, class_id, configitem_definition, version, create_time, create_by '
+            SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition WHERE id = ?',
             Bind  => [ \$Param{DefinitionID} ],
             Limit => 1,
@@ -182,7 +184,7 @@ sub DefinitionGet {
 
         # ask database
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, class_id, configitem_definition, version, create_time, create_by '
+            SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition '
                 . 'WHERE class_id = ? ORDER BY version DESC',
             Bind  => [ \$Param{ClassID} ],
@@ -197,9 +199,10 @@ sub DefinitionGet {
         $Definition{DefinitionID} = $Row[0];
         $Definition{ClassID}      = $Row[1];
         $Definition{Definition}   = $Row[2] || "--- []";
-        $Definition{Version}      = $Row[3];
-        $Definition{CreateTime}   = $Row[4];
-        $Definition{CreateBy}     = $Row[5];
+        my $DynamicFields         = $Row[3] || "--- []";
+        $Definition{Version}      = $Row[4];
+        $Definition{CreateTime}   = $Row[5];
+        $Definition{CreateBy}     = $Row[6];
 
         # Check if definition code is not a YAML string.
         if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
@@ -217,12 +220,16 @@ sub DefinitionGet {
         $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Definition{Definition},
         );
+        $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $DynamicFields,
+        );
     }
 
     return {} if !$Definition{DefinitionID};
 
     # prepare definition
     if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
+        # TODO: Rework
         $Self->_DefinitionPrepare(
             DefinitionRef => $Definition{DefinitionRef},
         );
@@ -289,8 +296,14 @@ sub DefinitionAdd {
             Priority => 'error',
             Message  => "Can't add new definition! The definition was not changed.",
         );
+
         return;
     }
+
+    # add dynamic field info
+    my $DynamicFieldDefinition = $Self->_DefinitionDynamicFieldGet(
+        %Param,
+    ) || '--- []';
 
     # set version
     my $Version = 1;
@@ -302,9 +315,9 @@ sub DefinitionAdd {
     # insert new definition
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'INSERT INTO configitem_definition '
-            . '(class_id, configitem_definition, version, create_time, create_by) VALUES '
-            . '(?, ?, ?, current_timestamp, ?)',
-        Bind => [ \$Param{ClassID}, \$Param{Definition}, \$Version, \$Param{UserID} ],
+            . '(class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by) VALUES '
+            . '(?, ?, ?, ?, current_timestamp, ?)',
+        Bind => [ \$Param{ClassID}, \$Param{Definition}, \$DynamicFieldDefinition, \$Version, \$Param{UserID} ],
     );
 
     return if !$Success;
@@ -388,70 +401,71 @@ sub DefinitionCheck {
         return;
     }
 
+# TODO: add real check, check valid keys etc.
     # definition must be an array
-    if ( ref $Definition ne 'ARRAY' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Invalid Definition! Definition is not an array reference.',
-        );
-        return;
-    }
+#    if ( ref $Definition ne 'ARRAY' ) {
+#        $Kernel::OM->Get('Kernel::System::Log')->Log(
+#            Priority => 'error',
+#            Message  => 'Invalid Definition! Definition is not an array reference.',
+#        );
+#        return;
+#    }
 
     # check each definition attribute
-    for my $Attribute ( @{$Definition} ) {
-
-        # each definition attribute must be a hash reference with data
-        if ( !$Attribute || ref $Attribute ne 'HASH' || !%{$Attribute} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Invalid Definition! At least one definition attribute is not a hash reference.',
-            );
-            return;
-        }
-
-        # check if the key contains no spaces
-        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ \s }xms ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain whitespace!",
-            );
-            return;
-        }
-
-        # check if the key contains non-ascii characters
-        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ ([^\x{00}-\x{7f}]) }xms ) {
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain non ASCII characters '$1'!",
-            );
-            return;
-        }
-
-        # recursion check for Sub-Elements
-        for my $Key ( sort keys %{$Attribute} ) {
-
-            my $Value = $Attribute->{$Key};
-
-            if ( $Key eq 'Sub' && ref $Value eq 'ARRAY' ) {
-
-                # check the sub array
-                my $Check = $Self->DefinitionCheck(
-                    Definition      => $Value,
-                    CheckSubElement => 1,
-                );
-
-                if ( !$Check ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message =>
-                            "Invalid Sub-Definition of element with the key '$Attribute->{Key}'.",
-                    );
-                    return;
-                }
-            }
-        }
-    }
+#    for my $Attribute ( @{$Definition} ) {
+#
+#        # each definition attribute must be a hash reference with data
+#        if ( !$Attribute || ref $Attribute ne 'HASH' || !%{$Attribute} ) {
+#            $Kernel::OM->Get('Kernel::System::Log')->Log(
+#                Priority => 'error',
+#                Message  => 'Invalid Definition! At least one definition attribute is not a hash reference.',
+#            );
+#            return;
+#        }
+#
+#        # check if the key contains no spaces
+#        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ \s }xms ) {
+#            $Kernel::OM->Get('Kernel::System::Log')->Log(
+#                Priority => 'error',
+#                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain whitespace!",
+#            );
+#            return;
+#        }
+#
+#        # check if the key contains non-ascii characters
+#        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ ([^\x{00}-\x{7f}]) }xms ) {
+#
+#            $Kernel::OM->Get('Kernel::System::Log')->Log(
+#                Priority => 'error',
+#                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain non ASCII characters '$1'!",
+#            );
+#            return;
+#        }
+#
+#        # recursion check for Sub-Elements
+#        for my $Key ( sort keys %{$Attribute} ) {
+#
+#            my $Value = $Attribute->{$Key};
+#
+#            if ( $Key eq 'Sub' && ref $Value eq 'ARRAY' ) {
+#
+#                # check the sub array
+#                my $Check = $Self->DefinitionCheck(
+#                    Definition      => $Value,
+#                    CheckSubElement => 1,
+#                );
+#
+#                if ( !$Check ) {
+#                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+#                        Priority => 'error',
+#                        Message =>
+#                            "Invalid Sub-Definition of element with the key '$Attribute->{Key}'.",
+#                    );
+#                    return;
+#                }
+#            }
+#        }
+#    }
 
     return 1;
 }
@@ -602,6 +616,77 @@ sub _DefinitionPrepare {
     }
 
     return 1;
+}
+
+sub _DefinitionDynamicFieldGet {
+    my ( $Self, %Param ) = @_;
+
+    $Param{DefinitionPerl} //= $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $Param{Definition},
+    );
+
+    my %ContentHash  = IsHashRef( $Param{DefinitionPerl} )  ? $Param{DefinitionPerl}->%* : ();
+    my @ContentArray = IsArrayRef( $Param{DefinitionPerl} ) ? $Param{DefinitionPerl}->@* : ();
+
+    if ( !%ContentHash && !@ContentArray ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Definition or DefinitionPerl as hash or array!",
+        );
+
+        return;
+    }
+
+    my %DynamicFields;
+
+    for my $Key ( keys %ContentHash ) {
+        # TODO: Change to 'DF' probably
+        if ( $Key eq 'Name' ) {
+            $DynamicFields{ $ContentHash{ $Key } } = 1;
+        }
+        elsif ( IsHashRef( $ContentHash{ $Key } ) || IsArrayRef( $ContentHash{ $Key } ) ) {
+            %DynamicFields = (
+                %DynamicFields,
+                $Self->_DefinitionDynamicFieldAdd( DefinitionPerl => $ContentHash{ $Key } ),
+            );
+        }
+    }
+
+    for my $Entry ( @ContentArray ) {
+        if ( IsHashRef( $Entry ) || IsArrayRef( $Entry ) ) {
+            %DynamicFields = (
+                %DynamicFields,
+                $Self->_DefinitionDynamicFieldAdd( DefinitionPerl => $Entry ),
+            );
+        }
+    }
+
+    if ( $Param{Definition} ) {
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+        my %ReturnDynamicFields;
+
+        DYNAMICFIELD:
+        for my $Name ( keys %DynamicFields ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
+
+            next DYNAMICFIELD if !$DynamicField;
+            next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
+
+            $ReturnDynamicFields{ $Name } = {
+                ID        => $DynamicField->{ID},
+                Label     => $DynamicField->{Label},
+                Config    => $DynamicField->{Config},
+                FieldType => $DynamicField->{FieldType},
+            };
+        }
+
+        return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
+            Data => \%ReturnDynamicFields,
+        );
+    }
+
+    return %DynamicFields;
 }
 
 1;
