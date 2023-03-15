@@ -650,8 +650,8 @@ sub ConfigItemUpdate {
     if ( $Changed ) {
         # update config item
         my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-            SQL => 'UPDATE configitem SET name = ?, depl_state_id = ?, inci_state_id = ?'.
-                .', change_time = current_timestamp, change_by = ?',
+            SQL => 'UPDATE configitem SET name = ?, depl_state_id = ?, inci_state_id = ?'
+                . ', change_time = current_timestamp, change_by = ?',
             Bind => [ \$Param{Name}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{UserID} ],
         );
 

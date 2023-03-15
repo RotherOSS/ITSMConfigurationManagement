@@ -20,7 +20,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(all);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -625,8 +625,8 @@ sub _DefinitionDynamicFieldGet {
         Data => $Param{Definition},
     );
 
-    my %ContentHash  = IsHashRef( $Param{DefinitionPerl} )  ? $Param{DefinitionPerl}->%* : ();
-    my @ContentArray = IsArrayRef( $Param{DefinitionPerl} ) ? $Param{DefinitionPerl}->@* : ();
+    my %ContentHash  = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'HASH'  ? $Param{DefinitionPerl}->%* : ();
+    my @ContentArray = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'ARRAY' ? $Param{DefinitionPerl}->@* : ();
 
     if ( !%ContentHash && !@ContentArray ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -644,19 +644,19 @@ sub _DefinitionDynamicFieldGet {
         if ( $Key eq 'Name' ) {
             $DynamicFields{ $ContentHash{ $Key } } = 1;
         }
-        elsif ( IsHashRef( $ContentHash{ $Key } ) || IsArrayRef( $ContentHash{ $Key } ) ) {
+        elsif ( ref $ContentHash{ $Key } ) {
             %DynamicFields = (
                 %DynamicFields,
-                $Self->_DefinitionDynamicFieldAdd( DefinitionPerl => $ContentHash{ $Key } ),
+                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $ContentHash{ $Key } ),
             );
         }
     }
 
     for my $Entry ( @ContentArray ) {
-        if ( IsHashRef( $Entry ) || IsArrayRef( $Entry ) ) {
+        if ( ref $Entry ) {
             %DynamicFields = (
                 %DynamicFields,
-                $Self->_DefinitionDynamicFieldAdd( DefinitionPerl => $Entry ),
+                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $Entry ),
             );
         }
     }

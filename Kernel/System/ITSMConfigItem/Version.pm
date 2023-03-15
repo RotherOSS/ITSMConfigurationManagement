@@ -429,7 +429,7 @@ sub VersionGet {
     $Version{CurInciStateType} = $ConfigItem->{CurInciStateType};
 
     # set cache for VersionID without xml data (always)
-    my $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::0';
+    $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::0';
     $CacheObject->Set(
         Type  => $Self->{CacheType},
         TTL   => $Self->{CacheTTL},
