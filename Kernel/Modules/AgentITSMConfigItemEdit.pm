@@ -69,6 +69,7 @@ sub Run {
 #         FieldFilter => {},
     );
 
+    my %DynamicFieldValueCount;
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
@@ -79,7 +80,41 @@ sub Run {
             ParamObject        => $ParamObject,
             LayoutObject       => $LayoutObject,
         );
+        $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } = 1;
     }
+
+    # create html strings for all dynamic fields
+    my %DynamicFieldHTML;
+    my %GetParam = ();
+    DYNAMICFIELD:
+    for my $i ( 0 .. $#{ $DynamicFieldList } ) {
+        next DYNAMICFIELD if !IsHashRefWithData( $DynamicFieldList->[$i] );
+
+        my $DynamicFieldConfig = $DynamicFieldList->[$i];
+
+        # Fill dynamic field values with empty strings till it matches the maximum value count
+        if ( $DynamicFieldConfig->{Config}{MultiValue} ) {
+            if (ref $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ne 'ARRAY') {
+                $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} = [ $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ];
+            }
+            # $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ||= [];
+
+            while ( ( scalar $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@* ) < $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } ) {
+                push $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@*, '';
+            }
+        }
+
+        # get field html
+        $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
+            DynamicFieldConfig   => $DynamicFieldConfig,
+            Value                => $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"},
+            LayoutObject         => $LayoutObject,
+            ParamObject          => $ParamObject,
+            AJAXUpdate           => 1,
+        );
+    }
+
+    $Param{DynamicFieldHTMl} = \%DynamicFieldHTML;
 
     # get needed data
     if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
@@ -663,14 +698,7 @@ sub Run {
 #             %UseDefault,
         );
 
-        $LayoutObject->Block(
-            Name => 'DynamicField',
-            Data => {
-                Name  => $DynamicFieldConfig->{Name},
-                Label => $DynamicFieldHTML->{Label},
-                Field => $DynamicFieldHTML->{Field},
-            },
-        );
+        $Param{DynamicFieldHTML}->{$DynamicFieldConfig->{Name}} = $DynamicFieldHTML;
 
     }
 
