@@ -102,6 +102,46 @@ sub Run {
         next DYNAMICFIELD if !IsHashRefWithData( $DynamicFieldList->[$i] );
 
         my $DynamicFieldConfig = $DynamicFieldList->[$i];
+        my $PossibleValuesFilter;
+
+        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsACLReducible',
+        );
+
+        if ($IsACLReducible) {
+
+            # get PossibleValues
+            my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            # check if field has PossibleValues property in its configuration
+            if (IsHashRefWithData($PossibleValues)) {
+
+                # convert possible values key => value to key => key for ACLs using a Hash slice
+                my %AclData = %{$PossibleValues};
+                @AclData{ keys %AclData } = keys %AclData;
+
+                # set possible values filter from ACLs
+                my $ACL = $ConfigItemObject->ITSMConfigItemAcl(
+                    %GetParam,
+                    Action        => $Self->{Action},
+                    ReturnType    => 'ITSMConfigItem',
+                    ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                    Data          => \%AclData,
+                    UserID        => $Self->{UserID},
+                );
+                if ($ACL) {
+                    my %Filter = $ConfigItemObject->ITSMConfigItemAclData();
+
+                    # convert Filter key => key back to key => value using map
+                    %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+                }
+
+            }
+
+        }
 
         # Fill dynamic field values with empty strings till it matches the maximum value count
         if ( $DynamicFieldConfig->{Config}{MultiValue} ) {
@@ -119,6 +159,7 @@ sub Run {
         $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
             Value                => $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"},
+            PossibleValuesFilter => $PossibleValuesFilter,
             LayoutObject         => $LayoutObject,
             ParamObject          => $ParamObject,
             AJAXUpdate           => 1,
@@ -773,6 +814,47 @@ sub Run {
     for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
 
+        my $PossibleValuesFilter;
+
+        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsACLReducible',
+        );
+
+        if ($IsACLReducible) {
+
+            # get PossibleValues
+            my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            # check if field has PossibleValues property in its configuration
+            if (IsHashRefWithData($PossibleValues)) {
+
+                # convert possible values key => value to key => key for ACLs using a Hash slice
+                my %AclData = %{$PossibleValues};
+                @AclData{ keys %AclData } = keys %AclData;
+
+                # set possible values filter from ACLs
+                my $ACL = $ConfigItemObject->ITSMConfigItemAcl(
+                    %GetParam,
+                    Action        => $Self->{Action},
+                    ReturnType    => 'ITSMConfigItem',
+                    ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                    Data          => \%AclData,
+                    UserID        => $Self->{UserID},
+                );
+                if ($ACL) {
+                    my %Filter = $ConfigItemObject->ITSMConfigItemAclData();
+
+                    # convert Filter key => key back to key => value using map
+                    %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+                }
+
+            }
+
+        }
+
         $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->ValueGet(
             DynamicFieldConfig => $DynamicFieldConfig,
             ObjectID           => $ConfigItem->{ConfigItemID}
@@ -781,9 +863,7 @@ sub Run {
         # get field html
         my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
-#             PossibleValuesFilter => defined $DynFieldStates{Fields}{$i}
-#             ? $DynFieldStates{Fields}{$i}{PossibleValues}
-#             : undef,
+            PossibleValuesFilter => $PossibleValuesFilter,
             Value           => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
             LayoutObject    => $LayoutObject,
             ParamObject     => $ParamObject,
