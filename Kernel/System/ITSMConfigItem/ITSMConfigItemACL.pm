@@ -32,7 +32,7 @@ Kernel::System::ITSMConfigItem::ITSMConfigItemACL - config item ACL lib
 All config item ACL functions.
 
 
-=head2 ITSMConfigItemAcl()
+=head2 ConfigItemAcl()
 
 Restricts the Data parameter sent to a subset of it, depending on a group of user defied rules
 called ACLs. The reduced subset can be access from ITSMConfigItemACLData() if ReturnType parameter is set
@@ -48,7 +48,7 @@ The rest of the attributes define the matching options for the ACL rules.
 
 Example to restrict config item actions:
 
-    my $Success = $ITSMConfigItemObject->ITSMConfigItemAcl(
+    my $Success = $ITSMConfigItemObject->ConfigItemAcl(
         Data => {                            # Values to restrict
             1 => AgentITSMConfigItemEdit,
             # ...
@@ -71,7 +71,7 @@ Example to restrict config item actions:
 
 or to restrict config item states:
 
-    $Success = $ITSMConfigItemObject->ITSMConfigItemAcl(
+    $Success = $ITSMConfigItemObject->ConfigItemAcl(
         Data => {
             1 => 'new',
             2 => 'open',
@@ -86,7 +86,7 @@ returns:
     $Success = 1,                                     # if an ACL matches, or false otherwise.
 
 If ACL modules are configured in the C<ITSMConfigItem::Acl::Module> config key, they are invoked
-during the call to C<ITSMConfigItemAcl>. The configuration of a module looks like this:
+during the call to C<ConfigItemAcl>. The configuration of a module looks like this:
 
      $ConfigObject->{'ITSMConfigItem::Acl::Module'}->{'TheName'} = {
          Module => 'Kernel::System::ITSMConfigItem::Acl::TheAclModule',
@@ -96,7 +96,7 @@ during the call to C<ITSMConfigItemAcl>. The configuration of a module looks lik
      };
 
 Each time the C<ReturnType> and one of the C<ReturnSubType> entries is identical to the same
-arguments passed to C<ITSMConfigItemAcl>, the module of the name in C<Module> is loaded, the C<new> method
+arguments passed to C<ConfigItemAcl>, the module of the name in C<Module> is loaded, the C<new> method
 is called on it, and then the C<Run> method is called.
 
 The C<Checks> array reference in the configuration controls what arguments are passed. to the
@@ -113,7 +113,7 @@ The return value of the C<Run> method is ignored.
 
 =cut
 
-sub ITSMConfigItemAcl {
+sub ConfigItemAcl {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
@@ -133,7 +133,7 @@ sub ITSMConfigItemAcl {
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    my $ACLs       = $ConfigObject->Get('ITSMConfigItemAcl');
+    my $ACLs       = $ConfigObject->Get('ConfigItemAcl');
     my $AclModules = $ConfigObject->Get('ITSMConfigItem::Acl::Module');
 
     # only execute ACLs if ACL or ACL module is configured
@@ -211,8 +211,8 @@ sub ITSMConfigItemAcl {
 
     # check ACL configuration
     my %Acls;
-    if ( $ConfigObject->Get('ITSMConfigItemAcl') ) {
-        %Acls = %{ $ConfigObject->Get('ITSMConfigItemAcl') };
+    if ( $ConfigObject->Get('ConfigItemAcl') ) {
+        %Acls = %{ $ConfigObject->Get('ConfigItemAcl') };
     }
 
     # check ACL module
@@ -274,10 +274,10 @@ sub ITSMConfigItemAcl {
             }
         }
 
-        $Self->{DefaultITSMConfigItemAclActionData} = \%NewActionData;
+        $Self->{DefaultConfigItemAclActionData} = \%NewActionData;
 
         for my $Action (@ActionsToDelete) {
-            delete $Self->{DefaultITSMConfigItemAclActionData}->{$Action};
+            delete $Self->{DefaultConfigItemAclActionData}->{$Action};
         }
     }
 
@@ -860,7 +860,7 @@ sub ITSMConfigItemAcl {
 
         # return new params if stop after this step
         if ( $UseNewParams && $Step{StopAfterMatch} ) {
-            $Self->{ITSMConfigItemAclData} = \%NewData;
+            $Self->{ConfigItemAclData} = \%NewData;
 
             # if we stop after the first match
             # exit the ACLRULES loop
@@ -871,38 +871,38 @@ sub ITSMConfigItemAcl {
     # return if no new param exists
     return if !$UseNewMasterParams;
 
-    $Self->{ITSMConfigItemAclData} = \%NewData;
+    $Self->{ConfigItemAclData} = \%NewData;
 
     return 1;
 }
 
-=head2 ITSMConfigItemAclData()
+=head2 ConfigItemAclData()
 
-return the current ACL data hash after ITSMConfigItemAcl()
+return the current ACL data hash after ConfigItemAcl()
 
-    my %Acl = $ITSMConfigItemObject->ITSMConfigItemAclData();
+    my %Acl = $ITSMConfigItemObject->ConfigItemAclData();
 
 =cut
 
-sub ITSMConfigItemAclData {
+sub ConfigItemAclData {
     my ( $Self, %Param ) = @_;
 
-    return %{ $Self->{ITSMConfigItemAclData} || {} };
+    return %{ $Self->{ConfigItemAclData} || {} };
 }
 
-=head2 ITSMConfigItemAclActionData()
+=head2 ConfigItemAclActionData()
 
-return the current ACL action data hash after ITSMConfigItemAcl()
+return the current ACL action data hash after ConfigItemAcl()
 
-    my %AclAction = $ITSMConfigItemObject->ITSMConfigItemAclActionData();
+    my %AclAction = $ITSMConfigItemObject->ConfigItemAclActionData();
 
 =cut
 
-sub ITSMConfigItemAclActionData {
+sub ConfigItemAclActionData {
     my ( $Self, %Param ) = @_;
 
-    if ( $Self->{ITSMConfigItemAclData} ) {
-        return %{ $Self->{ITSMConfigItemAclData} };
+    if ( $Self->{ConfigItemAclData} ) {
+        return %{ $Self->{ConfigItemAclData} };
     }
     return %{ $Self->{DefaultITSMConfigItemActionData} || {} };
 }
@@ -1126,7 +1126,7 @@ sub _GetChecks {
             # The parameter type can contain not only the wanted config item type, because also
             # some other functions in Kernel/System/ITSMConfigItem.pm use a type parameter, for example
             # MoveList() etc... These functions could be rewritten to not
-            # use a Type parameter, or the functions that call ITSMConfigItemAcl() could be modified to
+            # use a Type parameter, or the functions that call ConfigItemAcl() could be modified to
             # not just pass the complete Param-Hash, but instead a new parameter, like FrontEndParameter.
             #
             # As a workaround we lookup the TypeList first, and compare if the type parameter

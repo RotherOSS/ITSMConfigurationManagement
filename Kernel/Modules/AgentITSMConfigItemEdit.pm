@@ -125,7 +125,7 @@ sub Run {
                 @AclData{ keys %AclData } = keys %AclData;
 
                 # set possible values filter from ACLs
-                my $ACL = $ConfigItemObject->ITSMConfigItemAcl(
+                my $ACL = $ConfigItemObject->ConfigItemAcl(
                     %GetParam,
                     Action        => $Self->{Action},
                     ReturnType    => 'ITSMConfigItem',
@@ -134,7 +134,7 @@ sub Run {
                     UserID        => $Self->{UserID},
                 );
                 if ($ACL) {
-                    my %Filter = $ConfigItemObject->ITSMConfigItemAclData();
+                    my %Filter = $ConfigItemObject->ConfigItemAclData();
 
                     # convert Filter key => key back to key => value using map
                     %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} } keys %Filter;
@@ -594,7 +594,7 @@ sub Run {
             @AclData{ keys %AclData } = keys %AclData;
 
             # set possible values filter from ACLs
-            my $ACL = $ConfigItemObject->ITSMConfigItemAcl(
+            my $ACL = $ConfigItemObject->ConfigItemAcl(
                 %GetParam,
                 Action         => $Self->{Action},
                 ReturnType     => 'ITSMConfigItem',
@@ -604,7 +604,7 @@ sub Run {
             );
 
             if ($ACL) {
-                my %Filter = $ConfigItemObject->ITSMConfigItemAclData();
+                my %Filter = $ConfigItemObject->ConfigItemAclData();
 
                 # convert Filter key => key back to key => value using map
                 %{$PossibleValues} = map { $_ => $PossibleValues->{$_} } keys %Filter;
