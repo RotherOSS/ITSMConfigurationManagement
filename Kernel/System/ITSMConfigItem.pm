@@ -38,6 +38,8 @@ use vars qw(@ISA);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
     'Kernel::System::Cache',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::LinkObject',
