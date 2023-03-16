@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -258,7 +258,7 @@ sub Run {
 
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "The name $Version->{Name} is already in use by the ConfigItemID(s): "
                         . $NameDuplicatesString,
                 );
@@ -506,7 +506,7 @@ sub Run {
         if ( $ConfigObject->{Debug} > 0 ) {
             $LogObject->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "Rendering block for duplicates (CI-Numbers: $DuplicateString) error message",
             );
         }
@@ -933,11 +933,11 @@ sub _XMLFormOutput {
                 Data => {
                     Name        => $Item->{Name},
                     ItemID      => $ItemID,
-                    LabelFor    => $LabelFor || '',
+                    LabelFor    => $LabelFor            || '',
                     Description => $Item->{Description} || $Item->{Name},
                     InputString => $InputString,
                     LabelClass  => $LabelClass || '',
-                    Class       => $Class || '',
+                    Class       => $Class      || '',
                 },
             );
 

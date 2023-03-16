@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -3060,11 +3060,11 @@ my @ImportDataTests = (
         ReferenceImportData => {
             VersionNumber => 2,
             LastVersion   => {
-                Name                     => 'UnitTest - ConfigItem 3 Version 2',
-                DeplState                => 'Production',
-                InciState                => 'Operational',
-                'Main1::1'               => 'Main1 (1)',
-                'Main1::1::Main1Sub1::1' => 'Main1 (1) Main1Sub1 (1)',
+                Name                                          => 'UnitTest - ConfigItem 3 Version 2',
+                DeplState                                     => 'Production',
+                InciState                                     => 'Operational',
+                'Main1::1'                                    => 'Main1 (1)',
+                'Main1::1::Main1Sub1::1'                      => 'Main1 (1) Main1Sub1 (1)',
                 'Main1::1::Main1Sub1::1::Main1Sub1SubSub1::1' =>
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (1)',
                 'Main1::1::Main1Sub1::1::Main1Sub1SubSub1::2' =>
@@ -3073,7 +3073,7 @@ my @ImportDataTests = (
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (3)',
                 'Main1::1::Main1Sub1::1::Main1Sub1SubSub2::1' =>
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub2 (1)',
-                'Main1::1::Main1Sub1::2' => 'Main1 (1) Main1Sub1 (2)',
+                'Main1::1::Main1Sub1::2'                      => 'Main1 (1) Main1Sub1 (2)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub1::1' =>
                     'Main1 (1) Main1Sub1 (2) Main1Sub1SubSub1 (1)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub2::1' =>
@@ -3176,7 +3176,7 @@ my @ImportDataTests = (
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (2)',
                 'Main1::1::Main1Sub1::1::Main1Sub1SubSub1::3' =>
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (3)',
-                'Main1::1::Main1Sub1::2' => 'Main1 (1) Main1Sub1 (2)',
+                'Main1::1::Main1Sub1::2'                      => 'Main1 (1) Main1Sub1 (2)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub1::1' =>
                     'Main1 (1) Main1Sub1 (2) Main1Sub1SubSub1 (1)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub2::1' =>
@@ -3275,7 +3275,7 @@ my @ImportDataTests = (
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (2)',
                 'Main1::1::Main1Sub1::1::Main1Sub1SubSub1::3' =>
                     'Main1 (1) Main1Sub1 (1) Main1Sub1SubSub1 (3)',
-                'Main1::1::Main1Sub1::2' => 'Main1 (1) Main1Sub1 (2)',
+                'Main1::1::Main1Sub1::2'                      => 'Main1 (1) Main1Sub1 (2)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub1::1' =>
                     'Main1 (1) Main1Sub1 (2) Main1Sub1SubSub1 (1)',
                 'Main1::1::Main1Sub1::2::Main1Sub1SubSub2::1' =>

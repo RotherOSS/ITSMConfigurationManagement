@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -66,7 +66,7 @@ sub Init {
 
     if ( !IsHashRefWithData($Webservice) ) {
         return {
-            Success => 0,
+            Success      => 0,
             ErrorMessage =>
                 'Could not determine Web service configuration'
                 . ' in Kernel::GenericInterface::Operation::ConfigItem::Common::new()',
@@ -743,7 +743,7 @@ sub CheckXMLData {
             )
         {
             return {
-                ErrorCode => "$Self->{OperationName}.MissingParameter",
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter"
                     . " is missing!",
@@ -776,7 +776,7 @@ sub CheckXMLData {
                 }
                 else {
                     return {
-                        ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                        ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                         ErrorMessage =>
                             "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter"
                             . " is invalid!",
@@ -821,7 +821,7 @@ sub CheckXMLData {
                 )
             {
                 return {
-                    ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                    ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                     ErrorMessage =>
                         "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter"
                         . " repetitions is higher than the maxium value!",
@@ -1444,7 +1444,7 @@ sub _CheckValue {
         )
     {
         return {
-            ErrorCode => "$Self->{OperationName}.MissingParameter",
+            ErrorCode    => "$Self->{OperationName}.MissingParameter",
             ErrorMessage =>
                 "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                 . " is required and is missing!",
@@ -1456,7 +1456,7 @@ sub _CheckValue {
         # run Text validations
         if ( !$Self->ValidateInputText(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " excedes the maxium length!",
@@ -1468,7 +1468,7 @@ sub _CheckValue {
         # run Date validations
         if ( !$Self->ValidateInputDate(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid Date format!",
@@ -1480,7 +1480,7 @@ sub _CheckValue {
         # run DateTime validations
         if ( !$Self->ValidateInputDateTime(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid DateTime format!",
@@ -1492,7 +1492,7 @@ sub _CheckValue {
         # run Customer validations
         if ( !$Self->ValidateInputCustomer(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid customer!",
@@ -1504,7 +1504,7 @@ sub _CheckValue {
         # run CustomerCompany validations
         if ( !$Self->ValidateInputCustomerCompany(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid customer company!",
@@ -1516,7 +1516,7 @@ sub _CheckValue {
         # run Integer validations
         if ( !$Self->ValidateInputInteger(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid Integer or out of range!",
@@ -1528,7 +1528,7 @@ sub _CheckValue {
         # run General Catalog validations
         if ( !$Self->ValidateInputGeneralCatalog(%Param) ) {
             return {
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->CIXMLData->$Parent$ItemKey parameter value"
                     . " is not a valid for General Catalog '$Param{Input}->{Class}'!",

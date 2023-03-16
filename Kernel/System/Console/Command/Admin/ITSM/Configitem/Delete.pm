@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -99,9 +99,9 @@ sub PreRun {
     my $All               = $Self->GetOption('all');
     my $Class             = $Self->GetOption('class') // '';
     my @ConfigItemNumbers = @{ $Self->GetOption('configitem-number') // [] };
-    my $DeploymentState   = $Self->GetOption('deployment-state') // '';
-    my $AllOldVersions    = $Self->GetOption('all-old-versions') // '';
-    my $AllButKeepLast    = $Self->GetOption('all-but-keep-last-versions') // '';
+    my $DeploymentState   = $Self->GetOption('deployment-state')             // '';
+    my $AllOldVersions    = $Self->GetOption('all-old-versions')             // '';
+    my $AllButKeepLast    = $Self->GetOption('all-but-keep-last-versions')   // '';
     my $AllOlderThanDays  = $Self->GetOption('all-older-than-days-versions') // '';
 
     if (
@@ -155,9 +155,9 @@ sub Run {
     my $All               = $Self->GetOption('all');
     my $Class             = $Self->GetOption('class') // '';
     my @ConfigItemNumbers = @{ $Self->GetOption('configitem-number') // [] };
-    my $DeploymentState   = $Self->GetOption('deployment-state') // '';
-    my $AllOldVersions    = $Self->GetOption('all-old-versions') // '';
-    my $AllButKeepLast    = $Self->GetOption('all-but-keep-last-versions') // '';
+    my $DeploymentState   = $Self->GetOption('deployment-state')             // '';
+    my $AllOldVersions    = $Self->GetOption('all-old-versions')             // '';
+    my $AllButKeepLast    = $Self->GetOption('all-but-keep-last-versions')   // '';
     my $AllOlderThanDays  = $Self->GetOption('all-older-than-days-versions') // '';
 
     # delete all config items

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -115,7 +115,7 @@ sub FormDataGet {
     my $Day    = $ParamObject->GetParam( Param => $Param{Key} . '::Day' );
     my $Month  = $ParamObject->GetParam( Param => $Param{Key} . '::Month' );
     my $Year   = $ParamObject->GetParam( Param => $Param{Key} . '::Year' );
-    my $Hour   = $ParamObject->GetParam( Param => $Param{Key} . '::Hour' ) || 0;
+    my $Hour   = $ParamObject->GetParam( Param => $Param{Key} . '::Hour' )   || 0;
     my $Minute = $ParamObject->GetParam( Param => $Param{Key} . '::Minute' ) || 0;
 
     if ( $Day && $Month && $Year ) {
@@ -196,7 +196,7 @@ sub InputCreate {
     my $String = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildDateSelection(
         Prefix           => $Param{Key} . '::',
         Format           => 'DateInputFormatLong',
-        YearPeriodPast   => $Param{Item}->{Input}->{YearPeriodPast} || 10,
+        YearPeriodPast   => $Param{Item}->{Input}->{YearPeriodPast}   || 10,
         YearPeriodFuture => $Param{Item}->{Input}->{YearPeriodFuture} || 10,
         %Values,
         $Param{Key} . '::' . 'Class' => $Class,
