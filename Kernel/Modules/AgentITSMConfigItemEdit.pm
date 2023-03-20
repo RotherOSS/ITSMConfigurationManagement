@@ -70,6 +70,7 @@ sub Run {
     );
 
     my %DynamicFieldValueCount;
+    my %ACLReducibleDynamicFields;
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
@@ -81,7 +82,20 @@ sub Run {
             LayoutObject       => $LayoutObject,
         );
         $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } = 1;
+
+        # perform ACLs on values
+        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsACLReducible'
+        );
+
+        if ( $IsACLReducible ) {
+            $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
+        }
     }
+
+    my @UpdatableFields = qw(DeplStateID InciStateID);
+    push @UpdatableFields, keys %ACLReducibleDynamicFields;
 
     my %GetParam = ();
     # convert dynamic field values into a structure for ACLs
@@ -104,13 +118,7 @@ sub Run {
 
         my $PossibleValuesFilter;
 
-        # perform ACLs on values
-        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            Behavior           => 'IsACLReducible'
-        );
-
-        if ($IsACLReducible) {
+        if ($ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} }) {
 
             # get PossibleValues
             my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
@@ -182,6 +190,7 @@ sub Run {
             LayoutObject         => $LayoutObject,
             ParamObject          => $ParamObject,
             AJAXUpdate           => 1,
+            UpdatableFields      => \@UpdatableFields,
         );
 
     }
