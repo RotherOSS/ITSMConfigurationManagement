@@ -730,6 +730,7 @@ sub VersionAdd {
         }
     }
 
+    # TODO: change this to DF, probably use "$Param{Changed}" or so, as checks are already done in ConfigItemUpdate()
     my $Events = $Self->_GetEvents(
         Param          => \%Param,
         ConfigItemInfo => $ConfigItemInfo,
@@ -792,8 +793,26 @@ sub VersionAdd {
         return;
     }
 
-    # TODO: DF
+    my $Definition = $Self->DefinitionGet(
+        DefinitionID => $Param{DefinitionID},
+    );
 
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    DYNAMICFIELD:
+    for my $DynamicField ( keys $Definition->{DynamicFieldRef}->@* ) {
+        next DYNAMICFIELD if !defined $Param{ $DynamicField->{NameNoVersion} };
+
+        $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $DynamicField,
+            ObjectID           => $VersionID,
+            Value              => $Param{ $DynamicField->{Name} },
+            UserID             => $Param{UserID},
+        );
+    }
+
+# TODO: check what is needed / has to be changed
+return $VersionID;
     # trigger VersionCreate event
     $Self->EventHandler(
         Event => 'VersionCreate',

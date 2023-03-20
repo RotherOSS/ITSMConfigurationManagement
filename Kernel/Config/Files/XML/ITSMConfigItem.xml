@@ -1462,7 +1462,6 @@
             </Hash>
         </Value>
     </Setting>
-
     <Setting Name="DynamicFieldScreens###ITSMConfigurationManagement" Required="1" Valid="1">
         <Description Translatable="1">This configuration defines all possible screens to enable or disable dynamic fields.</Description>
         <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
@@ -1474,5 +1473,15 @@
             </Hash>
         </Value>
     </Setting>
-
+    <Setting Name="DynamicField::EventModulePost###100-DynamicFieldVersion" Required="0" Valid="1">
+        <Description Translatable="1">Add a copy of the dynamic field to store version data.</Description>
+        <Navigation>Core::Event::DynamicField</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::DynamicField::Event::ITSMConfigItemDynamicFieldVersion</Item>
+                <Item Key="Event">(DynamicFieldAdd|DynamicFieldUpdate|DynamicFieldDelete)</Item>
+                <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
