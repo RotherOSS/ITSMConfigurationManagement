@@ -684,23 +684,27 @@ sub VersionAdd {
         ConfigItemID => $Param{ConfigItemID},
     );
 
-    my $ConfigItemInfo = {};
-
-    if ( @{$VersionList} ) {
-
-        # get old version info for comparisons with current version
-        # this is needed to trigger some events
-        $ConfigItemInfo = $Self->VersionGet(
-            ConfigItemID => $Param{ConfigItemID},
-        );
-    }
-    else {
-
-        # get config item
-        $ConfigItemInfo = $Self->ConfigItemGet(
-            ConfigItemID => $Param{ConfigItemID},
-        );
-    }
+# TODO: can probably be removed, check events, whether the last "real version" makes sense, anywhere, nonetheless
+#    my $ConfigItemInfo = {};
+#    if ( @{$VersionList} ) {
+#
+#        # get old version info for comparisons with current version
+#        # this is needed to trigger some events
+#        $ConfigItemInfo = $Self->VersionGet(
+#            ConfigItemID => $Param{ConfigItemID},
+#        );
+#    }
+#    else {
+#
+#        # get config item
+#        $ConfigItemInfo = $Self->ConfigItemGet(
+#            ConfigItemID => $Param{ConfigItemID},
+#        );
+#    }
+    # get config item
+    my $ConfigItemInfo = $Self->ConfigItemGet(
+        ConfigItemID => $Param{ConfigItemID},
+    );
 
     return if !$ConfigItemInfo;
     return if ref $ConfigItemInfo ne 'HASH';
