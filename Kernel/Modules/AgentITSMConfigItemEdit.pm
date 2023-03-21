@@ -129,11 +129,13 @@ sub Run {
 
         # get config item
         $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
+            ConfigItemID  => $ConfigItem->{ConfigItemID},
+            DynamicFields => 1,
         );
     }
     elsif ($DuplicateID) {
 
+        # TODO: Check duplication
         # get config item to duplicate
         $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $DuplicateID,
@@ -187,12 +189,12 @@ sub Run {
     }
 
     # get definition
-    my $XMLDefinition = $ConfigItemObject->DefinitionGet(
+    my $Definition = $ConfigItemObject->DefinitionGet(
         ClassID => $ConfigItem->{ClassID},
     );
 
     # abort, if no definition is defined
-    if ( !$XMLDefinition->{DefinitionID} ) {
+    if ( !$Definition->{DefinitionID} ) {
         return $LayoutObject->ErrorScreen(
             Message => $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ConfigItem->{Class} ),
             Comment => Translatable('Please contact the administrator.'),
@@ -246,7 +248,7 @@ sub Run {
     # get log object
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
-    # get xml data
+    # TODO: do not use "Version" here
     my $Version = {};
     my $NameDuplicates;
     my $CINameRegexErrorMessage;
@@ -276,13 +278,6 @@ sub Run {
                 $AllRequired = 0;
             }
         }
-
-        # get xml form data
-        $Version->{XMLData}->[1]->{Version}->[1] = $Self->_XMLFormGet(
-            XMLDefinition => $XMLDefinition->{DefinitionRef},
-            AllRequired   => \$AllRequired,
-            ConfigItemID  => $ConfigItem->{ConfigItemID},
-        );
 
         # check, whether the feature to check for a unique name is enabled
         if (
@@ -421,33 +416,24 @@ sub Run {
                 }
             }
 
-            # get the dynamic fields for this screen
-            my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-                Valid       => 1,
-                ObjectType  => [ 'ITSMConfigItem' ],
-#                 FieldFilter => {},
-            );
-
             # write dynamic field values
             DYNAMICFIELD:
-            for my $DynamicFieldConfig ( $DynamicField->@* ) {
-                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            for my $DynamicField ( $Definition->{DynamicFieldRef}->@* ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
 
-                $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
-                    DynamicFieldConfig => $DynamicFieldConfig,
+                $Version->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                    DynamicFieldConfig => $DynamicField,
                     ParamObject        => $ParamObject,
                     LayoutObject       => $LayoutObject,
                 );
-
-                # set the value
-                my $Success = $DynamicFieldBackendObject->ValueSet(
-                    DynamicFieldConfig => $DynamicFieldConfig,
-                    ObjectID           => $ConfigItem->{ConfigItemID},
-                    Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
-                    UserID             => $Self->{UserID},
-                );
-
             }
+
+            # add version
+            $ConfigItemObject->ConfigItemUpdate(
+                $Version->%*,
+                ConfigItemID => $ConfigItem->{ConfigItemID},
+                UserID       => $Self->{UserID},
+            );
 
             # write the new attachments
             ATTACHMENT:
@@ -465,14 +451,6 @@ sub Run {
                     return $LayoutObject->FatalError();
                 }
             }
-
-            # add version
-            $ConfigItemObject->VersionAdd(
-                %{$Version},
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-                DefinitionID => $XMLDefinition->{DefinitionID},
-                UserID       => $Self->{UserID},
-            );
 
             # redirect to zoom mask
             my $ScreenType = $ParamObject->GetParam( Param => 'ScreenType' ) || 0;
@@ -511,6 +489,7 @@ sub Run {
         else {
 
             # get last version data to duplicate config item
+            # TODO: Use ConfigItemGet for "newest version" - check other instances
             $Version = $ConfigItemObject->VersionGet(
                 ConfigItemID => $DuplicateID,
             );
@@ -519,14 +498,9 @@ sub Run {
     elsif ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
 
         # get last version data
-        $Version = $ConfigItemObject->VersionGet(
+        $Version = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItem->{ConfigItemID},
         );
-    }
-
-    my %XMLFormOutputParam;
-    if ( $Version->{XMLData}->[1]->{Version}->[1] ) {
-        $XMLFormOutputParam{XMLData} = $Version->{XMLData}->[1]->{Version}->[1];
     }
 
     # output name invalid block
@@ -702,17 +676,18 @@ sub Run {
 
     }
 
-    # output xml form
-    if ( $XMLDefinition->{Definition} ) {
+    # output dynamic fields
+    if ( $Definition->{Definition} ) {
         $Self->{CustomerSearchItemIDs} = [];
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+        # TODO: use only the fields in the definition
         my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
             ObjectType => 'ITSMConfigItem',
         );
         $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Mask')->RenderInput(
             GetParam            => \%Param,
             LayoutObject        => $LayoutObject,
-            MaskDefinition      => $XMLDefinition->{DefinitionRef},
+            MaskDefinition      => $Definition->{DefinitionRef},
             DynamicFieldConfigs => $DynamicField,
         );
     }
@@ -819,111 +794,6 @@ sub Run {
     }
 
     return $Output;
-}
-
-sub _XMLFormGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{AllRequired};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{AllRequired} ne 'SCALAR';
-    return if !$Param{ConfigItemID};
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-
-    my $FormData = {};
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        my $CounterInsert = 1;
-
-        COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
-
-            # create inputkey and addkey
-            my $InputKey = $Item->{Key} . '::' . $Counter;
-            my $AddKey   = $Item->{Key} . '::Add';
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-                $AddKey   = $Param{Prefix} . '::' . $AddKey;
-            }
-
-            # get param
-            my $FormValues = $LayoutObject->ITSMConfigItemFormDataGet(
-                Key          => $InputKey,
-                Item         => $Item,
-                ConfigItemID => $Param{ConfigItemID},
-            );
-
-            if ( defined $FormValues->{Value} ) {
-
-                # check required value
-                if ( $FormValues->{Invalid} ) {
-                    ${ $Param{AllRequired} } = 0;
-                }
-
-                # check delete button
-                next COUNTER if $ParamObject->GetParam( Param => $InputKey . '::Delete' );
-
-                # start recursion, if "Sub" was found
-                if ( $Item->{Sub} ) {
-                    my $SubFormData = $Self->_XMLFormGet(
-                        XMLDefinition => $Item->{Sub},
-                        Prefix        => $InputKey,
-                        AllRequired   => $Param{AllRequired},
-                        ConfigItemID  => $Param{ConfigItemID},
-                    );
-                    $FormData->{ $Item->{Key} }->[$CounterInsert] = $SubFormData;
-                }
-                $FormData->{ $Item->{Key} }->[$CounterInsert]->{Content} = $FormValues->{Value};
-                $CounterInsert++;
-            }
-            else {
-
-                # check add button
-                if ( $ParamObject->GetParam( Param => $AddKey ) ) {
-                    if ( $Item->{Sub} ) {
-                        $FormData->{ $Item->{Key} }->[$CounterInsert] = $Self->_XMLDefaultSet(
-                            XMLDefinition => $Item->{Sub},
-                        );
-                    }
-                    $FormData->{ $Item->{Key} }->[$CounterInsert]->{Content} = '';
-                }
-                last COUNTER;
-            }
-        }
-    }
-
-    return $FormData;
-}
-
-sub _XMLDefaultSet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-
-    my $DefaultData = {};
-
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        for my $Counter ( 1 .. $Item->{CountDefault} ) {
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                $DefaultData->{ $Item->{Key} }->[$Counter] = $Self->_XMLDefaultSet(
-                    XMLDefinition => $Item->{Sub},
-                );
-            }
-
-            $DefaultData->{ $Item->{Key} }->[$Counter]->{Content} = '';
-        }
-    }
-
-    return $DefaultData;
 }
 
 1;

@@ -603,7 +603,7 @@ sub ConfigItemUpdate {
     );
 
     # check needed parameters
-    for my $Key ( /ConfigItemID UserID/ ) {
+    for my $Key ( qw/ConfigItemID UserID/ ) {
         if ( !$Param{ $Key } ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -624,10 +624,11 @@ sub ConfigItemUpdate {
     }
 
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    # TODO: class specific triggers? (Prio 3)
     my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
 
     # get current
-    my %ConfigItem = $Self->ConfigItemGet(
+    my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
         DynamicFields => @DynamicFieldNames ? 1 : 0,
     );
@@ -638,10 +639,10 @@ sub ConfigItemUpdate {
     # name, deployment and incident state
     ATTR:
     for my $Attribute ( qw/Name DeplStateID InciStateID/ ) {
-        next ATTR if !$Param{ $Attribute };
-        next ATTR if $Param{ $Attribute } eq $ConfigItem{ $Attribute };
+        next ATTR if ( $Param{ $Attribute } // '' ) eq ( $ConfigItem->{ $Attribute } // '' );
 
-        $Param{ $Attribute } ||= $ConfigItem{ $Attribute };
+        # TODO: Think about resetting name to empty (Prio 3)
+        $Param{ $Attribute } ||= $ConfigItem->{ $Attribute };
 
         $Changed    = 1;
         $AddVersion = $VersionTrigger{ $Attribute } || $AddVersion;
@@ -650,7 +651,8 @@ sub ConfigItemUpdate {
     if ( $Changed ) {
         # update config item
         my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-            SQL => 'UPDATE configitem SET name = ?, depl_state_id = ?, inci_state_id = ?'
+            # TODO: Change all instances of "cur_depl_" and "cur_inci_state_id" and remove "cur_"
+            SQL => 'UPDATE configitem SET name = ?, cur_depl_state_id = ?, cur_inci_state_id = ?'
                 . ', change_time = current_timestamp, change_by = ?',
             Bind => [ \$Param{Name}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{UserID} ],
         );
@@ -671,7 +673,7 @@ sub ConfigItemUpdate {
         next DYNAMICFIELD if !$DynamicFieldBackendObject->ValueIsDifferent(
             DynamicFieldConfig => $DynamicField,
             Value1             => $Param{"DynamicField_$Name"},
-            Value2             => $ConfigItem{"DynamicField_$Name"},
+            Value2             => $ConfigItem->{"DynamicField_$Name"},
         );
 
         my $Success = $DynamicFieldBackendObject->ValueSet(
@@ -694,8 +696,8 @@ sub ConfigItemUpdate {
     }
 
     if ( $AddVersion ) {
-        $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Version')->VersionAdd(
-            %ConfigItem,
+        $Self->VersionAdd(
+            $ConfigItem->%*,
             %Param,
         );
     }

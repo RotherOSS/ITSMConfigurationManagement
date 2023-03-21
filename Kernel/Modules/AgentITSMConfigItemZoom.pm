@@ -102,25 +102,10 @@ sub Run {
     my $VersionList = $ConfigItemObject->VersionZoomList(
         ConfigItemID => $ConfigItemID,
     );
-    if ( !$VersionList->[0]->{VersionID} ) {
-        return $LayoutObject->ErrorScreen(
-            Message =>
-                $LayoutObject->{LanguageObject}->Translate( 'No version found for ConfigItemID %s!', $ConfigItemID ),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
 
-    # set version id
-    if ( !$VersionID ) {
-        $VersionID = $VersionList->[-1]->{VersionID};
-    }
-    if ( $VersionID ne $VersionList->[-1]->{VersionID} ) {
+    # TODO: Catch VersionID not in VersionList
+    if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
         $Param{ShowVersions} = 1;
-    }
-
-    # set version id in param hash (only for menu module)
-    if ($VersionID) {
-        $Param{VersionID} = $VersionID;
     }
 
     # run config item menu modules
@@ -167,13 +152,10 @@ sub Run {
     # build version tree
     $LayoutObject->Block( Name => 'Tree' );
     my $Counter = 1;
-    if ( !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
+    if ( $VersionID && !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
         $Counter     = @{$VersionList};
         $VersionList = [ $VersionList->[-1] ];
     }
-
-    # get last version
-    my $LastVersion = $VersionList->[-1];
 
     # set incident signal
     my %InciSignals = (
@@ -282,27 +264,18 @@ sub Run {
     $Output .= $LayoutObject->NavigationBar();
 
     # get version
-    my $Version = $ConfigItemObject->VersionGet(
-        VersionID => $VersionID,
-    );
+    if ( $VersionID ) {
+        my $ConfigItem = $ConfigItemObject->VersionGet(
+            VersionID     => $VersionID,
+            DynamicFields => 1,
+        );
+    }
 
-    if (
-        $Version
-        && ref $Version eq 'HASH'
-        && $Version->{XMLDefinition}
-        && $Version->{XMLData}
-        && ref $Version->{XMLDefinition} eq 'ARRAY'
-        && ref $Version->{XMLData} eq 'ARRAY'
-        && $Version->{XMLData}->[1]
-        && ref $Version->{XMLData}->[1] eq 'HASH'
-        && $Version->{XMLData}->[1]->{Version}
-        && ref $Version->{XMLData}->[1]->{Version} eq 'ARRAY'
-        )
-    {
+    if ( $ConfigItem ) {
 
         # transform ascii to html
-        $Version->{Name} = $LayoutObject->Ascii2Html(
-            Text           => $Version->{Name},
+        $ConfigItem->{Name} = $LayoutObject->Ascii2Html(
+            Text           => $ConfigItem->{Name},
             HTMLResultMode => 1,
             LinkFeature    => 1,
         );
@@ -313,7 +286,7 @@ sub Run {
             Data => {
                 Name        => Translatable('Name'),
                 Description => Translatable('The name of this config item'),
-                Value       => $Version->{Name},
+                Value       => $ConfigItem->{Name},
                 Identation  => 10,
             },
         );
@@ -325,7 +298,7 @@ sub Run {
                 Name        => Translatable('Deployment State'),
                 Description => Translatable('The deployment state of this config item'),
                 Value       => $LayoutObject->{LanguageObject}->Translate(
-                    $Version->{DeplState},
+                    $ConfigItem->{DeplState},
                 ),
                 Identation => 10,
             },
@@ -338,18 +311,13 @@ sub Run {
                 Name        => Translatable('Incident State'),
                 Description => Translatable('The incident state of this config item'),
                 Value       => $LayoutObject->{LanguageObject}->Translate(
-                    $Version->{InciState},
+                    $ConfigItem->{InciState},
                 ),
                 Identation => 10,
             },
         );
 
-        # start xml output
-        $Self->_XMLOutput(
-            XMLDefinition => $Version->{XMLDefinition},
-            XMLData       => $Version->{XMLData}->[1]->{Version}->[1],
-        );
-
+        # TODO: Remove all XML stuff also from the template files
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -391,10 +359,9 @@ sub Run {
     $LayoutObject->Block(
         Name => 'Meta',
         Data => {
-            %{$LastVersion},
             %{$ConfigItem},
-            CurInciSignal => $InciSignals{ $LastVersion->{CurInciStateType} },
-            CurDeplSignal => $DeplSignals{ $LastVersion->{DeplState} },
+            CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
+            CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
         },
     );
 
@@ -545,10 +512,9 @@ sub Run {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AgentITSMConfigItemZoom',
         Data         => {
-            %{$LastVersion},
             %{$ConfigItem},
-            CurInciSignal => $InciSignals{ $LastVersion->{CurInciStateType} },
-            CurDeplSignal => $DeplSignals{ $LastVersion->{DeplState} },
+            CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
+            CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
             StyleClasses  => $StyleClasses,
         },
     );
@@ -557,72 +523,6 @@ sub Run {
     $Output .= $LayoutObject->Footer();
 
     return $Output;
-}
-
-sub _XMLOutput {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLData};
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLData} ne 'HASH';
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-
-    $Param{Level} ||= 0;
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
-
-            # stop loop, if no content was given
-            last COUNTER if !defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content};
-
-            # lookup value
-            my $Value = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLValueLookup(
-                Item  => $Item,
-                Value => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content},
-            );
-
-            # get layout object
-            my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-            # create output string
-            $Value = $LayoutObject->ITSMConfigItemOutputStringCreate(
-                Value => $Value,
-                Item  => $Item,
-            );
-
-            # calculate indentation for left-padding css based on 15px per level and 10px as default
-            my $Indentation = 10;
-
-            if ( $Param{Level} ) {
-                $Indentation += 15 * $Param{Level};
-            }
-
-            # output data block
-            $LayoutObject->Block(
-                Name => 'Data',
-                Data => {
-                    Name        => $Item->{Name},
-                    Description => $Item->{Description} || $Item->{Name},
-                    Value       => $Value,
-                    Indentation => $Indentation,
-                },
-            );
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                $Self->_XMLOutput(
-                    XMLDefinition => $Item->{Sub},
-                    XMLData       => $Param{XMLData}->{ $Item->{Key} }->[$Counter],
-                    Level         => $Param{Level} + 1,
-                );
-            }
-        }
-    }
-
-    return 1;
 }
 
 1;

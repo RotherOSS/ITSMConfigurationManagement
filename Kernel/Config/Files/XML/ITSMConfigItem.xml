@@ -574,6 +574,14 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::VersionTrigger" Required="0" Valid="1">
+        <Description Translatable="1">Define which standard attribute changes should trigger the creation of a new version (e.g. DeplStateID, InciStateID, Name).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="LinkObject::DefaultSubObject###ITSMConfigItem" Required="1" Valid="1">
         <Description Translatable="1">Defines the default subobject of the class 'ITSMConfigItem'.</Description>
         <Navigation>Core::LinkObject</Navigation>

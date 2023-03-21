@@ -676,12 +676,13 @@ sub _DefinitionDynamicFieldGet {
             next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
 
             push @ReturnDynamicFields, {
-                ID            => $VersionDynamicField->{ID},
-                Name          => $VersionDynamicField->{Name},
-                NameNoVersion => $DynamicField->{Name},
-                Label         => $DynamicField->{Label},
-                Config        => $DynamicField->{Config},
-                FieldType     => $DynamicField->{FieldType},
+                ID         => $DynamicField->{ID},
+                Name       => $DynamicField->{Name},
+                Label      => $DynamicField->{Label},
+                Config     => $DynamicField->{Config},
+                FieldType  => $DynamicField->{FieldType},
+                ObjectType => $DynamicField->{ObjectType},
+                IDVersion  => $VersionDynamicField->{ID},
             };
         }
 

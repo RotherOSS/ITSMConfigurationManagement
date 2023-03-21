@@ -739,9 +739,8 @@ sub VersionAdd {
     my $ReturnVersionID = scalar @{$VersionList} ? $VersionList->[-1] : 0;
     return $ReturnVersionID if !( $Events && keys %{$Events} );
 
-    my $DefinitionID = $Self->_GetDefinitionID(
-        Param          => \%Param,
-        ConfigItemInfo => $ConfigItemInfo,
+    my $Definition = $Self->DefinitionGet(
+        ClassID      => $ConfigItemInfo->{ClassID},
     );
 
 #    # Special case that only XML attributes have been changed that should not create a new version
@@ -759,7 +758,7 @@ sub VersionAdd {
         Bind => [
             \$Param{ConfigItemID},
             \$Param{Name},
-            \$Param{DefinitionID},
+            \$Definition->{DefinitionID},
             \$Param{DeplStateID},
             \$Param{InciStateID},
             \$Param{UserID},
@@ -793,20 +792,21 @@ sub VersionAdd {
         return;
     }
 
-    my $Definition = $Self->DefinitionGet(
-        DefinitionID => $Param{DefinitionID},
-    );
-
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     DYNAMICFIELD:
-    for my $DynamicField ( keys $Definition->{DynamicFieldRef}->@* ) {
-        next DYNAMICFIELD if !defined $Param{ $DynamicField->{NameNoVersion} };
+    for my $DynamicField ( $Definition->{DynamicFieldRef}->@* ) {
+        next DYNAMICFIELD if !exists $Param{ 'DynamicField_' . $DynamicField->{Name} };
 
         $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $DynamicField,
+            DynamicFieldConfig => {
+                $DynamicField->%*,
+                Name       => $DynamicField->{Name} . '-Version',
+                ID         => $DynamicField->{IDVersion},
+                ObjectType => 'ITSMConfigItemVersion',
+            },
             ObjectID           => $VersionID,
-            Value              => $Param{ $DynamicField->{Name} },
+            Value              => $Param{ 'DynamicField_' . $DynamicField->{Name} },
             UserID             => $Param{UserID},
         );
     }
