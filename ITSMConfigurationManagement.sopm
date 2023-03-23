@@ -81,6 +81,7 @@
         <File Permission="660" Location="Kernel/Language/vi_VN_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Language/zh_CN_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Language/zh_TW_ITSMConfigurationManagement.pm" />
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicField.pm" />
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
@@ -105,6 +106,16 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldContactWD.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDB.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDropdown.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldMultiselect.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldText.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldTitle.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebService.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemBulk.tt" />
@@ -178,6 +189,7 @@
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.t" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.CustomerSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Search.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Add.js" />
