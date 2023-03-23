@@ -83,14 +83,84 @@ sub Run {
         $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } = 1;
     }
 
-    # create html strings for all dynamic fields
-    my %DynamicFieldHTML;
     my %GetParam = ();
+    # convert dynamic field values into a structure for ACLs
+    my %DynamicFieldACLParameters;
     DYNAMICFIELD:
-    for my $i ( 0 .. $#{ $DynamicFieldList } ) {
-        next DYNAMICFIELD if !IsHashRefWithData( $DynamicFieldList->[$i] );
+    for my $DynamicField ( sort keys %DynamicFieldValues ) {
+        next DYNAMICFIELD if !$DynamicField;
+        next DYNAMICFIELD if !$DynamicFieldValues{$DynamicField};
 
-        my $DynamicFieldConfig = $DynamicFieldList->[$i];
+        $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicField } = $DynamicFieldValues{$DynamicField};
+    }
+    $GetParam{DynamicField} = \%DynamicFieldACLParameters;
+
+    # create html strings for all dynamic fields
+    my %Error;
+    my %DynamicFieldHTML;
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $PossibleValuesFilter;
+
+        # perform ACLs on values
+        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsACLReducible'
+        );
+
+        if ($IsACLReducible) {
+
+            # get PossibleValues
+            my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            # check if field has PossibleValues property in its configuration
+            if (IsHashRefWithData($PossibleValues)) {
+
+                # convert possible values key => value to key => key for ACLs using a Hash slice
+                my %AclData = %{$PossibleValues};
+                @AclData{ keys %AclData } = keys %AclData;
+
+                # set possible values filter from ACLs
+                my $ACL = $ConfigItemObject->ConfigItemAcl(
+                    %GetParam,
+                    Action        => $Self->{Action},
+                    ReturnType    => 'ITSMConfigItem',
+                    ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                    Data          => \%AclData,
+                    UserID        => $Self->{UserID},
+                );
+                if ($ACL) {
+                    my %Filter = $ConfigItemObject->ConfigItemAclData();
+
+                    # convert Filter key => key back to key => value using map
+                    %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+                }
+            }
+        }
+
+        # perform validation
+        my $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
+            DynamicFieldConfig   => $DynamicFieldConfig,
+            PossibleValuesFilter => $PossibleValuesFilter,
+            ParamObject          => $ParamObject,
+        );
+
+        if (!IsHashRefWithData($ValidationResult)) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate("Could not perform validation on field $DynamicFieldConfig->{Label}!"),
+                Comment => Translatable('Please contact the administrator.'),
+            );
+        }
+
+        # propagate validation error to the Error variable to be detected by the frontend
+        if ($ValidationResult->{ServerError}) {
+            $Error{ $DynamicFieldConfig->{Name} } = ' ServerError';
+        }
+
 
         # Fill dynamic field values with empty strings till it matches the maximum value count
         if ( $DynamicFieldConfig->{Config}{MultiValue} ) {
@@ -104,17 +174,19 @@ sub Run {
             }
         }
 
-        # get field html
         $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
-            Value                => $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"},
+            PossibleValuesFilter => $PossibleValuesFilter,
+            ServerError          => $ValidationResult->{ServerError} || '',
+            ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
             LayoutObject         => $LayoutObject,
             ParamObject          => $ParamObject,
             AJAXUpdate           => 1,
         );
+
     }
 
-    $Param{DynamicFieldHTMl} = \%DynamicFieldHTML;
+    $Param{DynamicFieldHTML} = \%DynamicFieldHTML;
 
     # get needed data
     if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
@@ -344,6 +416,8 @@ sub Run {
             }
         }
 
+        $AllRequired = %Error ? 0 : 1;
+
         # save version to database
         if ( $SubmitSave && $AllRequired ) {
 
@@ -351,6 +425,16 @@ sub Run {
                 $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
                     ClassID => $ConfigItem->{ClassID},
                     UserID  => $Self->{UserID},
+                );
+            }
+
+            for my $DynamicFieldConfig ($DynamicFieldList->@*) {
+                # set the value
+                my $Success = $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $ConfigItem->{ConfigItemID},
+                    Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+                    UserID             => $Self->{UserID},
                 );
             }
 
@@ -476,6 +560,90 @@ sub Run {
                 );
             }
         }
+    }
+    elsif ($Self->{Subaction} eq 'AJAXUpdate') {
+
+        # getting necessary objects
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        my $TreeView = 0;
+        if ($ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree') {
+            $TreeView = 1;
+        }
+
+        # fetch Dynamic Fields
+        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem',
+        );
+
+        # update Dynamic Fields Possible Values via AJAX
+        my @DynamicFieldAJAX;
+
+        # cycle through the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ($DynamicFieldList->@*) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsACLReducible'
+            );
+            next DYNAMICFIELD if !$IsACLReducible;
+
+            my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            # convert possible values key => value to key => key for ACLs using a Hash slice
+            my %AclData = $PossibleValues->%*;
+            @AclData{ keys %AclData } = keys %AclData;
+
+            # set possible values filter from ACLs
+            my $ACL = $ConfigItemObject->ConfigItemAcl(
+                %GetParam,
+                Action         => $Self->{Action},
+                ReturnType     => 'ITSMConfigItem',
+                ReturnSubType  => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                Data           => \%AclData,
+                UserID         => $Self->{UserID},
+            );
+
+            if ($ACL) {
+                my %Filter = $ConfigItemObject->ConfigItemAclData();
+
+                # convert Filter key => key back to key => value using map
+                %{$PossibleValues} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+            }
+
+            my $DataValues = $DynamicFieldBackendObject->BuildSelectionDataGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                PossibleValues     => $PossibleValues,
+                Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+            ) || $PossibleValues;
+
+            # add dynamic field to the list of fields to update
+            push @DynamicFieldAJAX, {
+                Name        => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                Data        => $DataValues,
+                SelectedID  => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+                Translation => $DynamicFieldConfig->{Config}->{TranslatableValues} || 0,
+                Max         => 100,
+            };
+        }
+
+        my $JSON = $LayoutObject->BuildSelectionJSON(
+            [
+                @DynamicFieldAJAX,
+            ],
+        );
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+
     }
     elsif ($DuplicateID) {
         my $VersionID = $ParamObject->GetParam( Param => 'VersionID' );

@@ -1072,7 +1072,18 @@ sub ACLDump {
 # }
 # 1;
 # END_PM_FILE
-    my $PMFileOutput = '';
+    my $PMFileOutput = <<'END_PM_FILE';
+# OTOBO config file (automatically generated)
+# VERSION:1.1
+package Kernel::Config::Files::ZZZACL;
+use strict;
+use warnings;
+no warnings 'redefine'; ## no critic qw(TestingAndDebugging::ProhibitNoWarnings)
+use utf8;
+sub Load {
+    my ($File, $Self) = @_;
+
+END_PM_FILE
     for my $ObjectType ( qw(Ticket ITSMConfigItem) ) {
         # get valid ACLs
         my $ACLList = $Self->ACLListGet(
@@ -1144,23 +1155,14 @@ sub ACLDump {
 
         # build comment (therefore we need to trick out the filter)
         $PMFileOutput .= sprintf <<'END_PM_FILE', $ACLItemsOutput;
-# OTOBO config file (automatically generated)
-# VERSION:1.1
-package Kernel::Config::Files::ZZZACL;
-use strict;
-use warnings;
-no warnings 'redefine'; ## no critic qw(TestingAndDebugging::ProhibitNoWarnings)
-use utf8;
-sub Load {
-    my ($File, $Self) = @_;
-
 %s
-
+END_PM_FILE
+    }
+    $PMFileOutput .= <<'END_PM_FILE';
     return;
 }
 1;
 END_PM_FILE
-    }
 # EO ITSMConfigurationManagement
 
     if ( $Self->{S3Active} ) {

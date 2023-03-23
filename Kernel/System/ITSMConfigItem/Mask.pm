@@ -25,6 +25,10 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Log',
+    'Kernel::System::Web::Request',
+    'Kernel::System::YAML',
 );
 
 =head1 NAME
