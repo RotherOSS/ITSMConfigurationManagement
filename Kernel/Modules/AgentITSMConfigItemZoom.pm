@@ -332,7 +332,7 @@ sub Run {
 
             my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
                 DynamicFieldConfig => $DynamicField,
-                Value              => 1, #$Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+                Value              => $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} },
                 HTMLOutput         => 1,
                 LayoutObject       => $LayoutObject,
             );
