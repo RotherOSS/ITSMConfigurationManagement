@@ -24,6 +24,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 use Storable;
+use List::Util qw(any);
 
 our $ObjectManagerDisabled = 1;
 
@@ -296,169 +297,6 @@ sub VersionList {
     return \@VersionList;
 }
 
-=head2 VersionGet()
-
-returns a version of a config item as hash reference.
-The returned hash contains following attributes.
-
-    $Version{VersionID}
-    $Version{ConfigItemID}
-    $Version{Number}
-    $Version{ClassID}
-    $Version{Class}
-    $Version{LastVersionID}
-    $Version{Name}
-    $Version{Definition}
-    $Version{DefinitionID}
-    $Version{DeplStateID}
-    $Version{DeplState}
-    $Version{DeplStateType}
-    $Version{CurDeplStateID}
-    $Version{CurDeplState}
-    $Version{CurDeplStateType}
-    $Version{InciStateID}
-    $Version{InciState}
-    $Version{InciStateType}
-    $Version{CurInciStateID}
-    $Version{CurInciState}
-    $Version{CurInciStateType}
-    $Version{DynamicField_Name}
-    $Version{CreateTime}
-    $Version{CreateBy}
-
-    my $VersionRef = $ConfigItemObject->VersionGet(
-        VersionID    => 123,
-        DynamicField => 1,    # (optional) default 0 (0|1)
-    );
-
-=cut
-
-sub VersionGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    if ( !$Param{VersionID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Need VersionID!',
-        );
-        return;
-    }
-
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-    # check if result is already cached
-    my $CacheKey = 'VersionGet::VersionID::' . $Param{VersionID} . '::DF::' . $Param{DynamicField};
-    my $Cache    = $CacheObject->Get(
-        Type => $Self->{CacheType},
-        Key  => $CacheKey,
-    );
-    return Storable::dclone($Cache) if $Cache;
-
-    # get version
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id, configitem_id, name, definition_id, '
-            . 'depl_state_id, inci_state_id, create_time, create_by '
-            . 'FROM configitem_version WHERE id = ?',
-        Bind  => [ \$Param{VersionID} ],
-        Limit => 1,
-    );
-
-    # fetch the result
-    my %Version;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $Version{VersionID}    = $Row[0];
-        $Version{ConfigItemID} = $Row[1];
-        $Version{Name}         = $Row[2];
-        $Version{DefinitionID} = $Row[3];
-        $Version{DeplStateID}  = $Row[4];
-        $Version{InciStateID}  = $Row[5];
-        $Version{CreateTime}   = $Row[6];
-        $Version{CreateBy}     = $Row[7];
-    }
-
-    # check version
-    if ( !$Version{VersionID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'No such config item version!',
-        );
-        return;
-    }
-
-    # get deployment state functionality
-    my $DeplState = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-        ItemID => $Version{DeplStateID},
-    );
-
-    $Version{DeplState}     = $DeplState->{Name};
-    $Version{DeplStateType} = $DeplState->{Functionality};
-
-    # get incident state functionality
-    my $InciState = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-        ItemID => $Version{InciStateID},
-    );
-
-    $Version{InciState}     = $InciState->{Name};
-    $Version{InciStateType} = $InciState->{Functionality};
-
-    # get config item
-    my $ConfigItem = $Self->ConfigItemGet(
-        ConfigItemID => $Version{ConfigItemID},
-        Cache        => 0,
-    );
-
-    # check config item data
-    if ( !$ConfigItem || ref $ConfigItem ne 'HASH' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Can't get config item $Version{ConfigItemID}!",
-        );
-        return;
-    }
-
-    $Version{ClassID}          = $ConfigItem->{ClassID};
-    $Version{Class}            = $ConfigItem->{Class};
-    $Version{LastVersionID}    = $ConfigItem->{LastVersionID};
-    $Version{Number}           = $ConfigItem->{Number};
-    $Version{CurDeplStateID}   = $ConfigItem->{CurDeplStateID};
-    $Version{CurDeplState}     = $ConfigItem->{CurDeplState};
-    $Version{CurDeplStateType} = $ConfigItem->{CurDeplStateType};
-    $Version{CurInciStateID}   = $ConfigItem->{CurInciStateID};
-    $Version{CurInciState}     = $ConfigItem->{CurInciState};
-    $Version{CurInciStateType} = $ConfigItem->{CurInciStateType};
-
-    # set cache for VersionID without xml data (always)
-    $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::0';
-    $CacheObject->Set(
-        Type  => $Self->{CacheType},
-        TTL   => $Self->{CacheTTL},
-        Key   => $CacheKey,
-        Value => Storable::dclone( \%Version ),
-    );
-
-    # done if we don't need xml data
-    return \%Version if !$Param{DynamicField};
-
-    # get xml definition
-    my $Definition = $Self->DefinitionGet(
-        DefinitionID => $Version{DefinitionID},
-    );
-    $Version{Definition}    = $Definition->{DefinitionRef};
-    $Version{DynamicFields} = $Definition->{DynamicFieldRef};
-
-    # set cache for VersionID (always)
-    $CacheKey = 'VersionGet::VersionID::' . $Version{VersionID} . '::DF::1';
-    $CacheObject->Set(
-        Type  => $Self->{CacheType},
-        TTL   => $Self->{CacheTTL},
-        Key   => $CacheKey,
-        Value => Storable::dclone( \%Version ),
-    );
-
-    return \%Version;
-}
-
 =head2 VersionNameGet()
 
 returns the name of a version of a config item.
@@ -617,11 +455,12 @@ add a new version
 
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID      => 123,
-        Name              => 'The Name',
-        DeplStateID       => 8,
-        InciStateID       => 4,
-        DynamicField_Name => $Value,    # optional
+        LastVersion       => {...}          # either ConfigItemID or LastVersion is mandatory
         UserID            => 1,
+        Name              => 'The Name',    # optional
+        DeplStateID       => 8,             # optional
+        InciStateID       => 4,             # optional
+        DynamicField_Name => $Value,        # optional
     );
 
 =cut
@@ -629,129 +468,42 @@ add a new version
 sub VersionAdd {
     my ( $Self, %Param ) = @_;
 
+    my $LastVersion = $Param{LastVersion} ? $Param{LastVersion} : $Self->ConfigItemGet(
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => 1,
+    );
+
+    my %Version = (
+        $LastVersion->%*,
+        %Param,
+    );
+
     # check needed stuff
     for my $Attribute (qw(ConfigItemID Name DeplStateID InciStateID UserID)) {
-        if ( !$Param{$Attribute} ) {
+        if ( !$Version{$Attribute} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Attribute!",
             );
+
             return;
         }
     }
-
-    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-    # get deployment state list
-    my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::DeploymentState',
-    );
-
-    return if !$DeplStateList;
-    return if ref $DeplStateList ne 'HASH';
-
-    # check the deployment state id
-    if ( !$DeplStateList->{ $Param{DeplStateID} } ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'No valid deployment state id given!',
-        );
-        return;
-    }
-
-    # get incident state list
-    my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::Core::IncidentState',
-    );
-
-    return if !$InciStateList;
-    return if ref $InciStateList ne 'HASH';
-
-    # check the incident state id
-    if ( !$InciStateList->{ $Param{InciStateID} } ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'No valid incident state id given!',
-        );
-        return;
-    }
-
-    # get VersionList
-    my $VersionList = $Self->VersionList(
-        ConfigItemID => $Param{ConfigItemID},
-    );
-
-# TODO: can probably be removed, check events, whether the last "real version" makes sense, anywhere, nonetheless
-#    my $ConfigItemInfo = {};
-#    if ( @{$VersionList} ) {
-#
-#        # get old version info for comparisons with current version
-#        # this is needed to trigger some events
-#        $ConfigItemInfo = $Self->VersionGet(
-#            ConfigItemID => $Param{ConfigItemID},
-#        );
-#    }
-#    else {
-#
-#        # get config item
-#        $ConfigItemInfo = $Self->ConfigItemGet(
-#            ConfigItemID => $Param{ConfigItemID},
-#        );
-#    }
-    # get config item
-    my $ConfigItemInfo = $Self->ConfigItemGet(
-        ConfigItemID => $Param{ConfigItemID},
-    );
-
-    return if !$ConfigItemInfo;
-    return if ref $ConfigItemInfo ne 'HASH';
-
-    # TODO: In ConfigItemUpdate/Add?
-    # check, whether the feature to check for a unique name is enabled
-    if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
-
-        my $NameDuplicates = $Self->UniqueNameCheck(
-            ConfigItemID => $Param{ConfigItemID},
-            ClassID      => $ConfigItemInfo->{ClassID},
-            Name         => $Param{Name},
-        );
-
-        # stop processing if the name is not unique
-        if ( IsArrayRefWithData($NameDuplicates) ) {
-
-            # build a string of all duplicate IDs
-            my $Duplicates = join ', ', @{$NameDuplicates};
-
-            # write an error log message containing all the duplicate IDs
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
-            );
-            return;
-        }
-    }
-
-    # TODO: change this to DF, probably use "$Param{Changed}" or so, as checks are already done in ConfigItemUpdate()
-    my $Events = $Self->_GetEvents(
-        Param          => \%Param,
-        ConfigItemInfo => $ConfigItemInfo,
-    );
-
-    my $ReturnVersionID = scalar @{$VersionList} ? $VersionList->[-1] : 0;
-    return $ReturnVersionID if !( $Events && keys %{$Events} );
 
     my $Definition = $Self->DefinitionGet(
-        ClassID      => $ConfigItemInfo->{ClassID},
+        ClassID => $Version{ClassID},
     );
 
-#    # Special case that only XML attributes have been changed that should not create a new version
-#    if ( $Events->{UpdateLastVersion} && $Events->{UpdateXMLData} && ref $Events->{UpdateXMLData} eq 'ARRAY' ) {
-#        ... old stuff
-#        return $ReturnVersionID;
-#    }
+    if ( !$Definition ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Definition!",
+        );
+
+        return;
+    }
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # insert new version
     my $Success = $DBObject->Do(
@@ -760,11 +512,11 @@ sub VersionAdd {
             . 'depl_state_id, inci_state_id, create_time, create_by) VALUES '
             . '(?, ?, ?, ?, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{ConfigItemID},
-            \$Param{Name},
+            \$Version{ConfigItemID},
+            \$Version{Name},
             \$Definition->{DefinitionID},
-            \$Param{DeplStateID},
-            \$Param{InciStateID},
+            \$Version{DeplStateID},
+            \$Version{InciStateID},
             \$Param{UserID},
         ],
     );
@@ -775,7 +527,7 @@ sub VersionAdd {
     $DBObject->Prepare(
         SQL => 'SELECT id, create_time FROM configitem_version WHERE '
             . 'configitem_id = ? ORDER BY id DESC',
-        Bind  => [ \$Param{ConfigItemID} ],
+        Bind  => [ \$Version{ConfigItemID} ],
         Limit => 1,
     );
 
@@ -793,104 +545,199 @@ sub VersionAdd {
             Priority => 'error',
             Message  => "Can't get the new version id!",
         );
+
         return;
     }
+
+    # update last version of config item
+    $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ?',
+        Bind => [ \$VersionID, \$CreateTime, \$Param{UserID} ],
+    );
+
+    return if !$Success;
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     DYNAMICFIELD:
-    for my $DynamicField ( $Definition->{DynamicFieldRef}->@* ) {
-        next DYNAMICFIELD if !exists $Param{ 'DynamicField_' . $DynamicField->{Name} };
+    for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
+        next DYNAMICFIELD if !defined $Version{ 'DynamicField_' . $DynamicField->{Name} };
 
         $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => {
-                $DynamicField->%*,
-                Name       => $DynamicField->{Name} . '-Version',
-                ID         => $DynamicField->{IDVersion},
-                ObjectType => 'ITSMConfigItemVersion',
-            },
+            DynamicFieldConfig => $DynamicField,
             ObjectID           => $VersionID,
-            Value              => $Param{ 'DynamicField_' . $DynamicField->{Name} },
+            Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
             UserID             => $Param{UserID},
         );
     }
 
-# TODO: check what is needed / has to be changed
-return $VersionID;
     # trigger VersionCreate event
     $Self->EventHandler(
         Event => 'VersionCreate',
         Data  => {
-            ConfigItemID => $Param{ConfigItemID},
+            ConfigItemID => $Version{ConfigItemID},
             Comment      => $VersionID,
-            OldDeplState => $ConfigItemInfo->{CurDeplState},
+            OldDeplState => $LastVersion->{CurDeplState},
         },
         UserID => $Param{UserID},
     );
 
-    # compare current and old values
-    if ( $Events->{ValueUpdate} ) {
-        $Self->_EventHandlerForChangedXMLValues(
-            ConfigItemID => $Param{ConfigItemID},
-            UpdateValues => $Events->{ValueUpdate},
-            UserID       => $Param{UserID},
-        );
-    }
+# TODO: Incorporate somewhere probably
+#    # trigger definition update event
+#    if ( $Events->{DefinitionUpdate} ) {
+#        $Self->EventHandler(
+#            Event => 'DefinitionUpdate',
+#            Data  => {
+#                ConfigItemID => $Param{ConfigItemID},
+#                Comment      => $Events->{DefinitionUpdate},
+#            },
+#            UserID => $Param{UserID},
+#        );
+#    }
 
-    # trigger definition update event
-    if ( $Events->{DefinitionUpdate} ) {
-        $Self->EventHandler(
-            Event => 'DefinitionUpdate',
-            Data  => {
-                ConfigItemID => $Param{ConfigItemID},
-                Comment      => $Events->{DefinitionUpdate},
-            },
-            UserID => $Param{UserID},
-        );
-    }
-
-    # check old and new name
-    if ( $Events->{NameUpdate} ) {
-        $Self->EventHandler(
-            Event => 'NameUpdate',
-            Data  => {
-                ConfigItemID => $Param{ConfigItemID},
-                Comment      => $Events->{NameUpdate},
-            },
-            UserID => $Param{UserID},
-        );
-    }
-
-    # trigger incident state update event
-    if ( $Events->{IncidentStateUpdate} ) {
-        $Self->EventHandler(
-            Event => 'IncidentStateUpdate',
-            Data  => {
-                ConfigItemID => $Param{ConfigItemID},
-                Comment      => $Events->{IncidentStateUpdate},
-            },
-            UserID => $Param{UserID},
-        );
-    }
-
-    # trigger deployment state update event
-    if ( $Events->{DeploymentStateUpdate} ) {
-        $Self->EventHandler(
-            Event => 'DeploymentStateUpdate',
-            Data  => {
-                ConfigItemID => $Param{ConfigItemID},
-                Comment      => $Events->{DeploymentStateUpdate},
-            },
-            UserID => $Param{UserID},
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    for my $DFData (qw(0 1)) {
+        $CacheObject->Delete(
+            Type => $Self->{CacheType},
+            Key  => 'ConfigItemGet::ConfigItemID::' . $Version{ConfigItemID} . '::DF::' . $DFData,
         );
     }
 
     # recalculate the current incident state of all linked config items
     $Self->CurInciStateRecalc(
-        ConfigItemID => $Param{ConfigItemID},
+        ConfigItemID => $Version{ConfigItemID},
     );
 
     return $VersionID;
+}
+
+=head2 VersionUpdate()
+
+update a version
+
+    my $VersionID = $ConfigItemObject->VersionUpdate(
+        VersionID         => 123,
+        Version           => {...}          # either VersionID or Version is mandatory
+        UserID            => 1,
+        Name              => 'The Name',    # optional
+        DeplStateID       => 8,             # optional
+        InciStateID       => 4,             # optional
+        DynamicField_Name => $Value,        # optional
+    );
+
+=cut
+
+sub VersionUpdate {
+    my ( $Self, %Param ) = @_;
+
+    my $Version = $Param{Version} ? $Param{Version} : $Self->ConfigItemGet(
+        VersionID     => $Param{VersionID},
+        DynamicFields => 1,
+    );
+
+    # check needed stuff
+    for my $Attribute (qw(UserID)) {
+        if ( !$Param{ $Attribute } ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Attribute!",
+            );
+
+            return;
+        }
+    }
+
+    if ( !$Version ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Version or VersionID!",
+        );
+
+        return;
+    }
+
+    my $CurInciStateRecalc = $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ? 1 : 0;
+
+    if ( any { defined $Param{ $_ } } qw/Name DeplStateID InciStateID DefinitionID/ ) {
+        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+        for my $Attribute ( qw/Name DeplStateID InciStateID DefinitionID/ ) {
+            $Param{ $Attribute } ||= $Version->{ $Attribute };
+        }
+
+        # TODO: maybe include change_time change_by
+        # insert new version
+        my $Success = $DBObject->Do(
+            SQL => 'UPDATE configitem_version SET name = ?, definition_id = ?, '
+                . 'depl_state_id = ?, inci_state_id = ? WHERE id = ?',
+            Bind => [
+                \$Param{Name},
+                \$Param{DefinitionID},
+                \$Param{DeplStateID},
+                \$Param{InciStateID},
+                \$Version->{VersionID},
+            ],
+        );
+
+        return if !$Success;
+    }
+
+    my $Definition = $Self->DefinitionGet(
+        ClassID => $Version->{ClassID},
+    );
+
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    DYNAMICFIELD:
+    for my $Attribute ( keys %Param ) {
+        next DYNAMICFIELD if $Attribute !~ /^DynamicField_(.+)/;
+        next DYNAMICFIELD if !$Definition->{DynamicFieldRef}{ $1 };
+
+        $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{ $1 },
+            ObjectID           => $Version->{VersionID},
+            Value              => $Param{ $Attribute },
+            UserID             => $Param{UserID},
+        );
+    }
+
+#    # TODO: a separate VersionUpdate event is probably not necessary
+#    # trigger VersionCreate event
+#    $Self->EventHandler(
+#        Event => 'VersionCreate',
+#        Data  => {
+#            ConfigItemID => $Version{ConfigItemID},
+#            Comment      => $VersionID,
+#            OldDeplState => $LastVersion->{CurDeplState},
+#        },
+#        UserID => $Param{UserID},
+#    );
+
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    for my $DFData (qw(0 1)) {
+        $CacheObject->Delete(
+            Type => $Self->{CacheType},
+            Key  => 'ConfigItemGet::VersionID::' . $Version->{VersionID} . '::DF::' . $DFData,
+        );
+        $CacheObject->Delete(
+            Type => $Self->{CacheType},
+            Key  => 'ConfigItemGet::ConfigItemID::' . $Version->{ConfigItemID} . '::DF::' . $DFData,
+        );
+    }
+    # TODO: Think about this when including VersionNumber
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'VersionNameGet::VersionID::' . $Version->{VersionID},
+    );
+
+    if ( $CurInciStateRecalc ) {
+        # recalculate the current incident state of all linked config items
+        $Self->CurInciStateRecalc(
+            ConfigItemID => $Version->{ConfigItemID},
+        );
+    }
+
+    return 1;
 }
 
 =head2 VersionDelete()
@@ -998,11 +845,11 @@ sub VersionDelete {
             );
 
             # delete affected caches
-            my $CacheKey = 'VersionGet::VersionID::' . $VersionID . '::XMLData::';
-            for my $XMLData (qw(0 1)) {
+            my $CacheKey = 'ConfigItemGet::VersionID::' . $VersionID . '::DFData::';
+            for my $DFData (qw(0 1)) {
                 $CacheObject->Delete(
                     Type => $Self->{CacheType},
-                    Key  => $CacheKey . $XMLData,
+                    Key  => $CacheKey . $DFData,
                 );
             }
             $CacheObject->Delete(
@@ -1017,11 +864,11 @@ sub VersionDelete {
     for my $ConfigItemID ( sort keys %ConfigItemIDs ) {
 
         # delete affected caches for ConfigItemID (most recent version might have been removed)
-        my $CacheKey = 'VersionGet::ConfigItemID::' . $ConfigItemID . '::XMLData::';
-        for my $XMLData (qw(0 1)) {
+        my $CacheKey = 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::DFData::';
+        for my $DFData (qw(0 1)) {
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
-                Key  => $CacheKey . $XMLData,
+                Key  => $CacheKey . $DFData,
             );
         }
         $CacheObject->Delete(
@@ -1289,372 +1136,5 @@ sub VersionSearch {
     return \@ConfigItemList;
 }
 
-=head1 INTERNAL INTERFACE
-
-=head2 _GetEvents()
-
-This method checks what values were changed and what events have to be triggered.
-It returns a hash reference with all event names as keys that should be triggered.
-
-    my $Events = $CIObject->_GetEvents(
-        Param => {
-            DeplStateID => 123,
-        },
-        ConfigItemInfo => {
-            DeplStateID => 234,
-        },
-    );
-
-    print keys %{$Events}; # prints "DeploymentStateUpdate"
-
-=cut
-
-sub _GetEvents {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Needed (qw(ConfigItemInfo Param)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
-    }
-
-    my $Events = {};
-
-    # check old and new name
-    my $OldName = $Param{ConfigItemInfo}->{Name} || '';
-    my $NewName = $Param{Param}->{Name}          || '';
-
-    if ( $OldName ne $NewName ) {
-        $Events->{NameUpdate} = $NewName . '%%' . $OldName;
-    }
-
-    # if depl_state is updated
-    my $LastDeplStateID = $Param{ConfigItemInfo}->{DeplStateID} || '';
-    my $CurDeplStateID  = $Param{Param}->{DeplStateID}          || '';
-
-    if ( $LastDeplStateID ne $CurDeplStateID ) {
-        $Events->{DeploymentStateUpdate} = $CurDeplStateID . '%%' . $LastDeplStateID;
-    }
-
-    # if incistate is updated
-    my $LastInciStateID = $Param{ConfigItemInfo}->{InciStateID} || '';
-    my $CurInciStateID  = $Param{Param}->{InciStateID}          || '';
-
-    if ( $LastInciStateID ne $CurInciStateID ) {
-        $Events->{IncidentStateUpdate} = $CurInciStateID . '%%' . $LastInciStateID;
-    }
-
-    # check old and new definition_id
-    my $OldDefinitionID = $Param{ConfigItemInfo}->{DefinitionID} || '';
-    my $NewDefinitionID = $Param{Param}->{DefinitionID}          || '';
-
-    if ( $OldDefinitionID ne $NewDefinitionID ) {
-        $Events->{DefinitionUpdate} = $NewDefinitionID;
-    }
-
-    # store if anything like Name, DeploymentState, IncidentState, Definition has been changed.
-    my $NothingElseChanged;
-    if ( !%{$Events} ) {
-        $NothingElseChanged = 1;
-    }
-
-    # check for changes in XML data
-    if ( $Param{Param}->{XMLData} && ref $Param{Param}->{XMLData} eq 'ARRAY' ) {
-        my %UpdateValues = $Self->_FindChangedXMLValues(
-            ConfigItemID       => $Param{Param}->{ConfigItemID},
-            NewXMLData         => $Param{Param}->{XMLData},
-            DefinitionID       => $NewDefinitionID,
-            NothingElseChanged => $NothingElseChanged,
-        );
-
-        if (%UpdateValues) {
-
-            # if only attributes have changed that should not create a new version
-            if ( $UpdateValues{UpdateLastVersion} && $NothingElseChanged ) {
-
-                $Events->{UpdateLastVersion} = 1;
-
-                # Clone the data structure, so we can delete the origial.
-                $Events->{UpdateXMLData} = $Kernel::OM->Get('Kernel::System::Storable')->Clone(
-                    Data => $UpdateValues{UpdateXMLData},
-                );
-
-                # We need to delete the flag and data again, to not cause any problems later
-                #   when processing the values.
-                delete $UpdateValues{UpdateLastVersion};
-                delete $UpdateValues{UpdateXMLData};
-            }
-
-            $Events->{ValueUpdate} = \%UpdateValues;
-        }
-    }
-
-    return $Events;
-}
-
-=head2 _EventHandlerForChangedXMLValues()
-
-This method calls the event handler for each changed value of the config item.
-The changed values are passed in C<UpdateValues> as an hashref with tag-keys as keys.
-Please note that this only handles values inside the XML structure, not general
-attributes like C<CurInciState>.
-
-    my $Success = $ConfigItemObject->_EventHandlerForChangedXMLValues(
-        ConfigItemID => 123,
-        UpdateValues =>
-            {
-               "[1]{'Version'}[1]{'Vendor'}[1]" => 'OldVendor%%NewVendor',
-               "[1]{'Version'}[1]{'Type'}[1]"   => '127%%128',
-            }
-        UserID       => 1,
-    );
-
-=cut
-
-sub _EventHandlerForChangedXMLValues {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Needed (qw(UpdateValues ConfigItemID UserID)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
-    }
-
-    # trigger ValueUpdate event for each changed value
-    for my $Key ( sort keys %{ $Param{UpdateValues} } ) {
-        $Self->EventHandler(
-            Event => 'ValueUpdate',
-            Data  => {
-                ConfigItemID => $Param{ConfigItemID},
-                Comment      => $Key . '%%' . $Param{UpdateValues}->{$Key},
-            },
-            UserID => $Param{UserID},
-        );
-    }
-
-    return 1;
-}
-
-=head2 _FindChangedXMLValues()
-
-compares the new xml data C<NewXMLData> with the xml data of the latest version
-of the config item C<ConfigItemID>. Note that the new XML data does not contain tag keys.
-All values of the two data sets are compared.
-When a changed value is encountered, the tag key and the old and the new value are stored in a hash.
-The hash with the updated values is returned.
-
-    my %UpdateValues = $ConfigItemObject->_FindChangedXMLValues(
-        ConfigItemID => 123,
-        NewXMLData   =>
-            [
-                undef,
-                {
-                    'Version' =>
-                        [
-                            undef,
-                            {
-                                'Owner' =>
-                                    [
-                                       undef,
-                                       {
-                                           'Content' => ''
-                                       },
-                                    ],
-                            },
-                        ],
-                },
-            ],
-    );
-
-The returned hash looks like:
-
-    %UpdateValues = (
-       "[1]{'Version'}[1]{'Vendor'}[1]" => 'OldVendor%%NewVendor',
-       "[1]{'Version'}[1]{'Type'}[1]"   => '127%%128',
-    );
-
-The key is a tag key. The values contains the old and the new XML value.
-
-=cut
-
-sub _FindChangedXMLValues {
-    my ( $Self, %Param ) = @_;
-
-    # check for needed stuff
-    for my $Needed (qw(ConfigItemID NewXMLData DefinitionID)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
-    }
-
-    # get a list with all versionnumbers that exist for the
-    # given config item
-    my $VersionList = $Self->VersionList(
-        ConfigItemID => $Param{ConfigItemID},
-    );
-
-    # skip the check if this is the first version of the item
-    return if !@{$VersionList};
-
-    # get old version
-    my $OldVersion = $Self->VersionGet(
-        VersionID => $VersionList->[-1],
-    );
-
-    # The short names for new and old xml data are used in the 'eval' below,
-    #    and we do not want to modify the original parameter data NewXMLData
-    #    due to side effects of Perls autovivification feature used later here
-    #    in another eval statement.
-    my $NewXMLData = Storable::dclone( $Param{NewXMLData} );
-    my $OldXMLData = $OldVersion->{XMLData};
-
-    # get xml definition
-    my $Definition = $Self->DefinitionGet(
-        DefinitionID => $Param{DefinitionID},
-    );
-
-    # get all tagkeys in new and old XML data
-    # use a side effect of XMLHash2D(), which adds the tag keys to the passed in data structure
-    $Kernel::OM->Get('Kernel::System::XML')->XMLHash2D( XMLHash => $NewXMLData );
-    my @TagKeys = $Self->_GrabTagKeys( Data => [ $OldXMLData, $NewXMLData ] );
-
-    # get an unique list of all tag keys
-    my %UniqueTagKeys = map { $_ => 1 } @TagKeys;
-
-    my %UpdateValues;
-    my %SuppressVersionAdd;
-
-    for my $TagKey ( sort keys %UniqueTagKeys ) {
-        my $NewContent = eval '$NewXMLData->' . $TagKey . '->{Content}' || '';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-        my $OldContent = eval '$OldXMLData->' . $TagKey . '->{Content}' || '';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-
-        if ( $NewContent ne $OldContent ) {
-
-            # extract attribute path name
-            my $AttributePath = $TagKey;
-            $AttributePath =~ s{ \A \[.*?\] \{'Version'\} \[.*?\] \{' }{}xms;
-            $AttributePath =~ s{ '\} \[.*?\] \{' }{::}xmsg;
-            $AttributePath =~ s{ '\} \[.*?\] \z }{}xms;
-
-            # get definition info about attribute
-            my $AttributeInfo = $Self->DefinitionAttributeInfo(
-                Definition    => $Definition->{DefinitionRef},
-                AttributePath => $AttributePath,
-            );
-
-            # check if this attribute should be suppressed and nothing else of
-            #    Name, DeploymentState, IncidentState, Definition has been changed.
-            if ( $AttributeInfo->{SuppressVersionAdd} && $Param{NothingElseChanged} ) {
-
-                if ( $AttributeInfo->{SuppressVersionAdd} eq 'UpdateLastVersion' ) {
-                    $SuppressVersionAdd{UpdateLastVersion}->{$TagKey} = join '%%', $OldContent, $NewContent;
-
-                    # Build a new data structire only with the update values.
-                    eval '$SuppressVersionAdd{UpdateXMLData}->' . $TagKey . '->{Content} = $NewContent';    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-                }
-                elsif ( $AttributeInfo->{SuppressVersionAdd} eq 'Ignore' ) {
-                    $SuppressVersionAdd{Ignore}->{$TagKey} = join '%%', $OldContent, $NewContent;
-                }
-            }
-
-            # change was found
-            $UpdateValues{$TagKey} = join '%%', $OldContent, $NewContent;
-        }
-    }
-
-    # count how many of each SuppressVersionAdd types we have.
-    my $UpdateValuesCount      = scalar keys %UpdateValues;
-    my $IgnoreCount            = scalar keys %{ $SuppressVersionAdd{Ignore} };
-    my $UpdateLastVersionCount = scalar keys %{ $SuppressVersionAdd{UpdateLastVersion} };
-
-    if (%UpdateValues) {
-
-        # Update values contains only values that should be ignored.
-        if ( $UpdateValuesCount == $IgnoreCount ) {
-            %UpdateValues = ();
-        }
-
-        # Update values contains only values that should update the last version or should be ignored,
-        elsif (
-            ( $UpdateValuesCount == $UpdateLastVersionCount )
-            || ( $UpdateValuesCount == ( $UpdateLastVersionCount + $IgnoreCount ) )
-            )
-        {
-            %UpdateValues                    = %{ $SuppressVersionAdd{UpdateLastVersion} };
-            $UpdateValues{UpdateXMLData}     = $SuppressVersionAdd{UpdateXMLData};
-            $UpdateValues{UpdateLastVersion} = 1;
-        }
-    }
-
-    return %UpdateValues;
-}
-
-=head2 _GrabTagKeys()
-
-recursively scans a perl data structure for the hash key 'TagKey' and returns a
-list of all the values for that key.
-
-    my @TagKeys = $ConfigItemObject->_GrabTagKeys(
-        Data => $XMLHashReferenz,
-    );
-
-=cut
-
-sub _GrabTagKeys {
-    my ( $Self, %Param ) = @_;
-
-    return () if !$Param{Data};
-
-    my @TagKeys;
-    if ( ref $Param{Data} eq 'ARRAY' ) {
-
-        ELEM:
-        for my $Elem ( @{ $Param{Data} } ) {
-
-            next ELEM if !$Elem;
-            next ELEM if !ref $Elem;
-
-            push @TagKeys, $Self->_GrabTagKeys( Data => $Elem );
-        }
-    }
-    elsif ( ref $Param{Data} eq 'HASH' ) {
-
-        for my $Key ( sort keys %{ $Param{Data} } ) {
-
-            if ( $Key eq 'TagKey' ) {
-                push @TagKeys, $Param{Data}->{$Key};
-            }
-            elsif ( ref $Param{Data}->{$Key} ) {
-                push @TagKeys, $Self->_GrabTagKeys( Data => $Param{Data}->{$Key} );
-            }
-        }
-    }
-
-    return @TagKeys;
-}
-
 1;
 
-=head1 TERMS AND CONDITIONS
-
-This software is part of the OTOBO project (L<https://otobo.org/>).
-
-This software comes with ABSOLUTELY NO WARRANTY. For details, see
-the enclosed file COPYING for license information (GPL). If you
-did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
-
-=cut

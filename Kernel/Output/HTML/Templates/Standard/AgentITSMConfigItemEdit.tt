@@ -32,12 +32,11 @@
 [% RenderBlockEnd("StartSmall") %]
                 <div class="Content">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="VersionSave"/>
+                    <input type="hidden" name="Subaction" value="Save"/>
                     <input type="hidden" name="ClassID" value="[% Data.ClassID | html %]"/>
                     <input type="hidden" name="ConfigItemID" value="[% Data.ConfigItemID | html %]"/>
                     <input type="hidden" name="DuplicateID" value="[% Data.DuplicateID | html %]"/>
                     <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
-                    <input type="hidden" name="SubmitSave" value="[% Data.SubmitSave | html %]"/>
                     <fieldset class="TableLike">
 [% RenderBlockStart("RowName") %]
                         <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]: </label>
@@ -76,78 +75,7 @@
 [% RenderBlockEnd("RowInciState") %]
                     </fieldset>
 
-[% RenderBlockStart("XMLRow") %]
-[% RenderBlockStart("XMLRowFieldsetStart") %]
-                    <fieldset class="TableLike">
-[% RenderBlockEnd("XMLRowFieldsetStart") %]
-[% RenderBlockStart("XMLRowValue") %]
-                        <label [% Data.LabelClass %] [% Data.LabelFor %]>
-[% RenderBlockStart("XMLRowValueContentRequired") %]
-                            <span class="Marker">*</span>
-[% RenderBlockEnd("XMLRowValueContentRequired") %]
-                            [% Translate(Data.Name) | html %]:
-                        </label>
-                        <div class="[% Data.Class %] Field">
-                            [% Data.InputString %]
-[% RenderBlockStart("XMLRowValueContentDelete") %]
-                            <button class="DisableValidation Remove" type="submit" name="[% Data.InputKey | html %]::Delete" value="[% Translate("Delete") | html %]">[% Translate("Delete") | html %]</button>
-[% RenderBlockEnd("XMLRowValueContentDelete") %]
-                            <div id="[% Data.ItemID | html %]Error" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-[% RenderBlockStart("XMLRowValueServerError") %]
-                            <div id="[% Data.ItemID | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-[% RenderBlockEnd("XMLRowValueServerError") %]
-[% RenderBlockStart("XMLRowValueRegExError") %]
-                            <div id="[% Data.ItemID | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.RegExErrorMessage) | html %]</p></div>
-[% RenderBlockEnd("XMLRowValueRegExError") %]
-                        </div>
-[% RenderBlockEnd("XMLRowValue") %]
-
-[% RenderBlockStart("XMLRowAddContent") %]
-                        <label [% Data.Class %] for="[% Data.ItemID | html %]">[% Translate(Data.Name) | html %]: </label>
-                        <div class="Field">
-                            <button class="DisableValidation Add" id="[% Data.ItemID | html %]" type="submit" name="[% Data.InputKey | html %]::Add" value="[% Translate("Add") | html %]" title="[% Translate(Data.Description) | html %]" ></button>
-                        </div>
-[% RenderBlockEnd("XMLRowAddContent") %]
-
-[% RenderBlockStart("XMLRowFieldsetEnd") %]
-                    </fieldset>
-[% RenderBlockEnd("XMLRowFieldsetEnd") %]
-[% RenderBlockEnd("XMLRow") %]
-
-                    <fieldset class="TableLike">
-[% RenderBlockStart("Row_DynamicField") %]
-                        <div class="Row Row_DynamicField[% Data.RowClasses | html %]" style="grid-template-columns: [% Data.TemplateColumns | html %]">
-[% RenderBlockStart("DynamicField") %]
-                            <div class="FieldCell[% Data.ColumnClasses %]" style="[% Data.ColumnStyle | html %]">
-                                [% Data.Label %]
-                                <div class="Field">
-                                [% Data.Field %]
-                                </div>
-                                [% IF Data.MultiValue && !Data.RowReadOnly %]
-                                <div class="AddRemoveValueRow">
-                                    [% IF Data.Index %]
-                                    <a class="RemoveValueRow"><i class="fa fa-minus-square"></i></a>
-                                    [% END %]
-                                    <a class="AddValueRow"><i class="fa fa-plus-square"></i></a>
-                                </div>
-                                [% END %]
-                                <div class="Clear"></div>
-                            </div>
-[% RenderBlockEnd("DynamicField") %]
-[% RenderBlockStart("DynamicFieldMultiValueTemplate") %]
-                    <div class="MultiValue_Template" style="[% Data.ColumnStyle | html %]">
-                        <div class="Field">
-                            [% Data.Field %]
-                        </div>
-                        <div class="AddRemoveValueRow">
-                            <a class="RemoveValueRow"><i class="fa fa-minus-square"></i></a>
-                            <a class="AddValueRow"><i class="fa fa-plus-square"></i></a>
-                        </div>
-                    </div>
-[% RenderBlockEnd("DynamicFieldMultiValueTemplate") %]
-                        </div>
-[% RenderBlockEnd("Row_DynamicField") %]
-                    </fieldset>
+[% INCLUDE "DynamicField/AgentEditField.tt" %]
 
                     <fieldset class="TableLike">
                         <label>[% Translate("Attachments") | html %]:</label>

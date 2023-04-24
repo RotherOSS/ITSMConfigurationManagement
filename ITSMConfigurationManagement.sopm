@@ -207,7 +207,6 @@
         <TableCreate Name="configitem">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
             <Column Name="configitem_number" Required="true" Size="100" Type="VARCHAR" />
-            <Column Name="name" Required="false" Size="191" Type="VARCHAR" />
             <Column Name="class_id" Required="true" Type="INTEGER" />
             <Column Name="last_version_id" Required="false" Type="BIGINT" />
             <Column Name="cur_depl_state_id" Required="false" Type="INTEGER" />
@@ -1153,9 +1152,6 @@
                 <Reference Local="change_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <TableAlter Name="configitem" Version="11.0.0">
-            <ColumnAdd Name="name" Required="false" Size="191" Type="VARCHAR" />
-        </TableAlter>
         <TableAlter Name="configitem_definition" Version="11.0.0">
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>

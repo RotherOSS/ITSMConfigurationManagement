@@ -199,7 +199,7 @@ sub DefinitionGet {
         $Definition{DefinitionID} = $Row[0];
         $Definition{ClassID}      = $Row[1];
         $Definition{Definition}   = $Row[2] || "--- []";
-        my $DynamicFields         = $Row[3] || "--- []";
+        my $DynamicFields         = $Row[3] || "--- {}";
         $Definition{Version}      = $Row[4];
         $Definition{CreateTime}   = $Row[5];
         $Definition{CreateBy}     = $Row[6];
@@ -640,8 +640,7 @@ sub _DefinitionDynamicFieldGet {
     my %DynamicFields;
 
     for my $Key ( keys %ContentHash ) {
-        # TODO: Change to 'DF' probably
-        if ( $Key eq 'Name' ) {
+        if ( $Key eq 'DF' ) {
             $DynamicFields{ $ContentHash{ $Key } } = 1;
         }
         elsif ( ref $ContentHash{ $Key } ) {
@@ -664,30 +663,27 @@ sub _DefinitionDynamicFieldGet {
     if ( $Param{Definition} ) {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
-        my @ReturnDynamicFields;
+        my %ReturnDynamicFields;
 
         DYNAMICFIELD:
         for my $Name ( keys %DynamicFields ) {
-            my $DynamicField        = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
-            my $VersionDynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name . '-Version' );
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
 
             next DYNAMICFIELD if !$DynamicField;
-            next DYNAMICFIELD if !$VersionDynamicField;
             next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
 
-            push @ReturnDynamicFields, {
+            $ReturnDynamicFields{ $Name } = {
                 ID         => $DynamicField->{ID},
                 Name       => $DynamicField->{Name},
                 Label      => $DynamicField->{Label},
                 Config     => $DynamicField->{Config},
                 FieldType  => $DynamicField->{FieldType},
                 ObjectType => $DynamicField->{ObjectType},
-                IDVersion  => $VersionDynamicField->{ID},
             };
         }
 
         return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
-            Data => \@ReturnDynamicFields,
+            Data => \%ReturnDynamicFields,
         );
     }
 

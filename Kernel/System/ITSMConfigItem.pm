@@ -208,12 +208,12 @@ sub ConfigItemResultList {
     for my $ConfigItemID (@ConfigItemIDList) {
 
         # get version data
-        my $LastVersion = $Self->VersionGet(
-            ConfigItemID => $ConfigItemID,
-            XMLDataGet   => 0,
+        my $ConfigItem = $Self->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 0,
         );
 
-        push @ConfigItemList, $LastVersion;
+        push @ConfigItemList, $ConfigItem;
     }
 
     return \@ConfigItemList;
@@ -225,26 +225,28 @@ return a config item as hash reference
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => 123,
+        VersionID     => 243,  # to get a different version than the default
+                               # either ConfigItemID or VersionID is required
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
 A hashref with the following keys is returned:
 
-    $ConfigItem{ConfigItemID}
-    $ConfigItem{Number}
-    $ConfigItem{ClassID}
-    $ConfigItem{Class}
-    $ConfigItem{LastVersionID}
-    $ConfigItem{CurDeplStateID}
-    $ConfigItem{CurDeplState}
-    $ConfigItem{CurDeplStateType}
-    $ConfigItem{CurInciStateID}
-    $ConfigItem{CurInciState}
-    $ConfigItem{CurInciStateType}
-    $ConfigItem{CreateTime}
-    $ConfigItem{CreateBy}
-    $ConfigItem{ChangeTime}
-    $ConfigItem{ChangeBy}
+    $ConfigItem->{ConfigItemID}
+    $ConfigItem->{Number}
+    $ConfigItem->{ClassID}
+    $ConfigItem->{Class}
+    $ConfigItem->{LastVersionID}
+    $ConfigItem->{CurDeplStateID}
+    $ConfigItem->{CurDeplState}
+    $ConfigItem->{CurDeplStateType}
+    $ConfigItem->{CurInciStateID}
+    $ConfigItem->{CurInciState}
+    $ConfigItem->{CurInciStateType}
+    $ConfigItem->{CreateTime}
+    $ConfigItem->{CreateBy}
+    $ConfigItem->{ChangeTime}
+    $ConfigItem->{ChangeBy}
 
 Caching can't be turned off.
 
@@ -254,10 +256,10 @@ sub ConfigItemGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    if ( !$Param{ConfigItemID} ) {
+    if ( !$Param{ConfigItemID} && !$Param{VersionID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Need ConfigItemID!',
+            Message  => 'Need ConfigItemID or VersionID!',
         );
         return;
     }
@@ -266,7 +268,10 @@ sub ConfigItemGet {
     $Param{DynamicFields} //= 0;
 
     # check if result is already cached, considering the DynamicFields parameter
-    my $CacheKey    = join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields) };
+    my $CacheKey    = $Param{VersionID} ? 
+        join '::', 'ConfigItemGet::VersionID',    @Param{qw(VersionID DynamicFields) } :
+        join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields) };
+
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $Cache       = $CacheObject->Get(
         Type => $Self->{CacheType},
@@ -275,15 +280,37 @@ sub ConfigItemGet {
 
     return Storable::dclone($Cache) if $Cache;
 
-    # ask database
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id, configitem_number, class_id, last_version_id, '
-            . 'cur_depl_state_id, cur_inci_state_id, '
-            . 'create_time, create_by, change_time, change_by '
-            . 'FROM configitem WHERE id = ?',
-        Bind  => [ \$Param{ConfigItemID} ],
-        Limit => 1,
-    );
+    # get specific ConfigItemVersion
+    if ( $Param{VersionID} ) {
+        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+            SQL => 'SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,'
+                . ' ci.cur_depl_state_id, ci.cur_inci_state_id,'
+# TODO: implement version string
+#                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
+                . ' v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,'
+                . ' v.create_time, v.create_by, v.change_time, v.change_by'
+                . ' FROM configitem_version v INNER JOIN configitem ci'
+                . ' ON v.configitem_id = ci.id WHERE v.id = ?',
+            Bind  => [ \$Param{VersionID} ],
+            Limit => 1,
+        );
+    }
+
+    # get latest ConfigItemVersion
+    else {
+        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+            SQL => 'SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,'
+                . ' ci.cur_depl_state_id, ci.cur_inci_state_id,'
+# TODO: implement version string
+#                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
+                . ' v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,'
+                . ' ci.create_time, ci.create_by, ci.change_time, ci.change_by'
+                . ' FROM configitem ci LEFT JOIN configitem_version v'
+                . ' ON ci.last_version_id = v.id WHERE ci.id = ?',
+            Bind  => [ \$Param{ConfigItemID} ],
+            Limit => 1,
+        );
+    }
 
     # fetch the result
     my %ConfigItem;
@@ -294,10 +321,16 @@ sub ConfigItemGet {
         $ConfigItem{LastVersionID}  = $Row[3];
         $ConfigItem{CurDeplStateID} = $Row[4];
         $ConfigItem{CurInciStateID} = $Row[5];
-        $ConfigItem{CreateTime}     = $Row[6];
-        $ConfigItem{CreateBy}       = $Row[7];
-        $ConfigItem{ChangeTime}     = $Row[8];
-        $ConfigItem{ChangeBy}       = $Row[9];
+        $ConfigItem{VersionID}      = $Row[6];
+        $ConfigItem{Name}           = $Row[7];
+        $ConfigItem{Version}        = $Row[8];
+        $ConfigItem{DefinitionID}   = $Row[9];
+        $ConfigItem{DeplStateID}    = $Row[10];
+        $ConfigItem{InciStateID}    = $Row[11];
+        $ConfigItem{CreateTime}     = $Row[12];
+        $ConfigItem{CreateBy}       = $Row[13];
+        $ConfigItem{ChangeTime}     = $Row[14];
+        $ConfigItem{ChangeBy}       = $Row[15];
     }
 
     # check config item
@@ -306,6 +339,7 @@ sub ConfigItemGet {
             Priority => 'error',
             Message  => "No such ConfigItemID ($Param{ConfigItemID})!",
         );
+
         return;
     }
 
@@ -332,7 +366,7 @@ sub ConfigItemGet {
             # get the current value for each dynamic field
             my $Value = $DynamicFieldBackendObject->ValueGet(
                 DynamicFieldConfig => $DynamicFieldConfig,
-                ObjectID           => $ConfigItem{ConfigItemID},
+                ObjectID           => $ConfigItem{VersionID},
             );
 
             # set the dynamic field name and value into the ticket hash
@@ -341,30 +375,26 @@ sub ConfigItemGet {
 
     }
 
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
     # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
 
     $ConfigItem{Class} = $ClassList->{ $ConfigItem{ClassID} };
 
-    return \%ConfigItem if !$ConfigItem{CurDeplStateID} || !$ConfigItem{CurInciStateID};
+    STATE:
+    for my $State ( qw/DeplState CurDeplState InciState CurInciState/ ) {
+        next STATE if !$ConfigItem{ $State . 'ID' };
 
-    # get deployment state functionality
-    my $DeplState = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-        ItemID => $ConfigItem{CurDeplStateID},
-    );
+        my $Item = $GeneralCatalogObject->ItemGet(
+            ItemID => $ConfigItem{ $State . 'ID' },
+        );
 
-    $ConfigItem{CurDeplState}     = $DeplState->{Name};
-    $ConfigItem{CurDeplStateType} = $DeplState->{Functionality};
-
-    # get incident state functionality
-    my $InciState = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-        ItemID => $ConfigItem{CurInciStateID},
-    );
-
-    $ConfigItem{CurInciState}     = $InciState->{Name};
-    $ConfigItem{CurInciStateType} = $InciState->{Functionality};
+        $ConfigItem{ $State }          = $Item->{Name};
+        $ConfigItem{ $State . 'Type' } = $Item->{Functionality};
+    }
 
     # cache the result
     $CacheObject->Set(
@@ -382,9 +412,13 @@ sub ConfigItemGet {
 add a new config item
 
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Number  => '111',  # (optional)
-        ClassID => 123,
-        UserID  => 1,
+        ClassID        => 123,
+        Name           => 'Name',
+        DeplStateID    => 3,
+        InciStateID    => 2,
+        UserID         => 1,
+        Number         => '111',    # (optional)
+        DynamicField_X => $Value,   # optional
     );
 
 =cut
@@ -393,7 +427,7 @@ sub ConfigItemAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(ClassID UserID)) {
+    for my $Argument (qw(ClassID UserID DeplStateID InciStateID Name)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -403,8 +437,10 @@ sub ConfigItemAdd {
         }
     }
 
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
     # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
 
@@ -413,13 +449,51 @@ sub ConfigItemAdd {
 
     # check the class id
     if ( !$ClassList->{ $Param{ClassID} } ) {
-
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => 'No valid class id given!',
         );
+
         return;
     }
+
+    # get deployment state list
+    my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::DeploymentState',
+    );
+
+    return if !$DeplStateList;
+    return if ref $DeplStateList ne 'HASH';
+
+    # check the deployment state id
+    if ( !$DeplStateList->{ $Param{DeplStateID} } ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'No valid deployment state id given!',
+        );
+
+        return;
+    }
+
+    # get incident state list
+    my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Core::IncidentState',
+    );
+
+    return if !$InciStateList;
+    return if ref $InciStateList ne 'HASH';
+
+    # check the incident state id
+    if ( !$InciStateList->{ $Param{InciStateID} } ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'No valid incident state id given!',
+        );
+
+        return;
+    }
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # create config item number
     if ( $Param{Number} ) {
@@ -441,17 +515,43 @@ sub ConfigItemAdd {
 
         # create config item number
         $Param{Number} = $Self->ConfigItemNumberCreate(
-            Type    => $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
             ClassID => $Param{ClassID},
         );
     }
 
+    # TODO: Also do this in CIUpdate
+    # check, whether the feature to check for a unique name is enabled
+    if ( $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+        my $NameDuplicates = $Self->UniqueNameCheck(
+            ConfigItemID => $Param{ConfigItemID},
+            ClassID      => $Param{ClassID},
+            Name         => $Param{Name},
+        );
+
+        # stop processing if the name is not unique
+        if ( IsArrayRefWithData($NameDuplicates) ) {
+
+            # build a string of all duplicate IDs
+            my $Duplicates = join ', ', @{$NameDuplicates};
+
+            # write an error log message containing all the duplicate IDs
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+            );
+            return;
+        }
+    }
+
     # insert new config item
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => 'INSERT INTO configitem '
-            . '(configitem_number, class_id, create_time, create_by, change_time, change_by) '
-            . 'VALUES (?, ?, current_timestamp, ?, current_timestamp, ?)',
-        Bind => [ \$Param{Number}, \$Param{ClassID}, \$Param{UserID}, \$Param{UserID} ],
+        SQL => 'INSERT INTO configitem ('
+            . 'configitem_number, cur_depl_state_id, cur_inci_state_id'
+            . ', class_id, create_time, create_by, change_time, change_by'
+            . ') VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
+        Bind => [ \$Param{Number}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{ClassID}, \$Param{UserID}, \$Param{UserID} ],
     );
 
     return if !$Success;
@@ -465,22 +565,29 @@ sub ConfigItemAdd {
     );
 
     # fetch the result
-    my $ConfigItemID;
     while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $ConfigItemID = $Row[0];
+        $Param{ConfigItemID} = $Row[0];
     }
+
+    # add the first version
+    $Self->VersionAdd(
+        %Param,
+        LastVersion => {
+            ConfigItemID => $Param{ConfigItemID},
+        }
+    );
 
     # trigger ConfigItemCreate
     $Self->EventHandler(
         Event => 'ConfigItemCreate',
         Data  => {
-            ConfigItemID => $ConfigItemID,
-            Comment      => $ConfigItemID . '%%' . $Param{Number},
+            ConfigItemID => $Param{ConfigItemID},
+            Comment      => $Param{ConfigItemID} . '%%' . $Param{Number},
         },
         UserID => $Param{UserID},
     );
 
-    return $ConfigItemID;
+    return $Param{ConfigItemID};
 }
 
 =head2 ConfigItemDelete()
@@ -618,6 +725,10 @@ sub ConfigItemUpdate {
         }
     }
 
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    # TODO: class specific triggers? (Prio 3)
+    my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
+
     # gather dynamic field keys
     my @DynamicFieldNames;
     KEY:
@@ -627,84 +738,92 @@ sub ConfigItemUpdate {
         push @DynamicFieldNames, $1;
     }
 
-    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
-    # TODO: class specific triggers? (Prio 3)
-    my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
-
     # get current
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
         DynamicFields => @DynamicFieldNames ? 1 : 0,
     );
 
-    my $Changed;
-    my $AddVersion;
+    my %Changed;
+    my $AddVersion = 0;
 
     # name, deployment and incident state
     ATTR:
     for my $Attribute ( qw/Name DeplStateID InciStateID/ ) {
-        next ATTR if ( $Param{ $Attribute } // '' ) eq ( $ConfigItem->{ $Attribute } // '' );
+        next ATTR if !defined $Param{ $Attribute } || $Param{ $Attribute } eq $ConfigItem->{ $Attribute };
 
-        # TODO: Think about resetting name to empty (Prio 3)
-        $Param{ $Attribute } ||= $ConfigItem->{ $Attribute };
+        $Changed{ $Attribute } = {
+            Old => $ConfigItem->{ $Attribute },
+            New => $Param{ $Attribute },
+        };
 
-        $Changed    = 1;
         $AddVersion = $VersionTrigger{ $Attribute } || $AddVersion;
     }
+    # TODO: Think about DefinitionID changes
 
-    if ( $Changed ) {
-        # update config item
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-            # TODO: Change all instances of "cur_depl_" and "cur_inci_state_id" and remove "cur_"
-            SQL => 'UPDATE configitem SET name = ?, cur_depl_state_id = ?, cur_inci_state_id = ?'
-                . ', change_time = current_timestamp, change_by = ?',
-            Bind => [ \$Param{Name}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{UserID} ],
-        );
+    if ( !$AddVersion && @DynamicFieldNames ) {
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-        return if !$Success;
-    }
-
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
-    # dynamic fields
-    DYNAMICFIELD:
-    for my $Name ( @DynamicFieldNames ) {
-        my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
-            Name => $Name,
-        );
-
-        next DYNAMICFIELD if !$DynamicFieldBackendObject->ValueIsDifferent(
-            DynamicFieldConfig => $DynamicField,
-            Value1             => $Param{"DynamicField_$Name"},
-            Value2             => $ConfigItem->{"DynamicField_$Name"},
-        );
-
-        my $Success = $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $DynamicField,
-            ObjectID           => $Param{ConfigItemID},
-            Value              => $Param{"DynamicField_$Name"},
-            UserID             => $Param{UserID},
-        );
-
-        if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not Update DynamicField $Name!",
+        # dynamic fields
+        DYNAMICFIELD:
+        for my $Name ( @DynamicFieldNames ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Name,
             );
 
-            return;
-        }
+            next DYNAMICFIELD if !$DynamicFieldBackendObject->ValueIsDifferent(
+                DynamicFieldConfig => $DynamicField,
+                Value1             => $Param{"DynamicField_$Name"},
+                Value2             => $ConfigItem->{"DynamicField_$Name"},
+            );
 
-        $AddVersion = $DynamicField->{Config}{VersionTrigger} || $AddVersion;
+            if ( $DynamicField->{Config}{VersionTrigger} ) {
+                $AddVersion = 1;
+
+                last DYNAMICFIELD;
+            };
+        }
     }
 
     if ( $AddVersion ) {
         $Self->VersionAdd(
-            $ConfigItem->%*,
             %Param,
+            LastVersion => $ConfigItem,
         );
     }
+
+    else {
+        $Self->VersionUpdate(
+            %Param,
+            Version => $ConfigItem,
+        );
+
+        # update config item change time
+        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL  => 'UPDATE configitem SET change_time = current_timestamp, change_by = ?',
+            Bind => [ \$Param{UserID} ],
+        );
+    }
+
+    my %Events = (
+        Name        => 'NameUpdate',
+        DeplStateID => 'DeploymentStateUpdate',
+        InciStateID => 'IncidentStateUpdate',
+    );
+
+    for my $Key ( keys %Changed ) {
+        $Self->EventHandler(
+            Event => $Events{ $Key },
+            Data  => {
+                ConfigItemID => $ConfigItem->{ConfigItemID},
+                Comment      => $Changed{ $Key }{New} . '%%' . $Changed{ $Key }{Old},
+            },
+            UserID => $Param{UserID},
+        );
+    }    
+
+    return 1;
 }
 
 =head2 ConfigItemAttachmentAdd()
@@ -1858,9 +1977,9 @@ sub CurInciStateRecalc {
         my $InciStateType = $Param{NewConfigItemIncidentState}->{$ConfigItemID};
 
         # get last version
-        my $LastVersion = $Self->VersionGet(
-            ConfigItemID => $ConfigItemID,
-            XMLDataGet   => 0,
+        my $LastVersion = $Self->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 0,
         );
 
         my $CurInciStateID;
@@ -1885,6 +2004,7 @@ sub CurInciStateRecalc {
             Bind => [ \$CurInciStateID, \$ConfigItemID ],
         );
 
+        # TODO: Instead of deleting, if present, update cache with new cur_inci
         # delete the cache
         my $CacheKey = 'ConfigItemGet::ConfigItemID::' . $ConfigItemID;
         $CacheObject->Delete(
@@ -1905,6 +2025,7 @@ sub CurInciStateRecalc {
             Key  => 'VersionNameGet::ConfigItemID::' . $ConfigItemID,
         );
 
+        # TODO: Check what is necessary here
         # delete affected caches for last version
         my $VersionList = $Self->VersionList(
             ConfigItemID => $ConfigItemID,

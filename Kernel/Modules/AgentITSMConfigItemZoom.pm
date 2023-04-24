@@ -265,7 +265,7 @@ sub Run {
 
     # get version
     if ( $VersionID ) {
-        my $ConfigItem = $ConfigItemObject->VersionGet(
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             VersionID     => $VersionID,
             DynamicFields => 1,
         );

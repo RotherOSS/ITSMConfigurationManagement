@@ -62,6 +62,7 @@ sub Run {
 
     my %DynamicFieldValues;
 
+    # TODO: Take the definition here
     # get the dynamic fields for this screen
     my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
         Valid       => 1,
@@ -69,6 +70,7 @@ sub Run {
 #         FieldFilter => {},
     );
 
+    # TODO: Use the dynamic fields of the definition only
     my %DynamicFieldValueCount;
     my %ACLReducibleDynamicFields;
     DYNAMICFIELD:
@@ -111,7 +113,11 @@ sub Run {
 
     # create html strings for all dynamic fields
     my %Error;
-    my %DynamicFieldHTML;
+
+    # remember dynamic field validation results if erroneous
+    my %DynamicFieldValidationResult;
+    my %DynamicFieldPossibleValues;
+
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
@@ -150,6 +156,8 @@ sub Run {
             }
         }
 
+        $DynamicFieldPossibleValues{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $PossibleValuesFilter;
+
         # perform validation
         my $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
             DynamicFieldConfig   => $DynamicFieldConfig,
@@ -167,35 +175,9 @@ sub Run {
         # propagate validation error to the Error variable to be detected by the frontend
         if ($ValidationResult->{ServerError}) {
             $Error{ $DynamicFieldConfig->{Name} } = ' ServerError';
+            $DynamicFieldValidationResult{ $DynamicFieldConfig->{Name} } = $ValidationResult;
         }
-
-
-        # Fill dynamic field values with empty strings till it matches the maximum value count
-        if ( $DynamicFieldConfig->{Config}{MultiValue} ) {
-            if (ref $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ne 'ARRAY') {
-                $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} = [ $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ];
-            }
-            # $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"} ||= [];
-
-            while ( ( scalar $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@* ) < $DynamicFieldValueCount{ $DynamicFieldConfig->{Name} } ) {
-                push $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"}->@*, '';
-            }
-        }
-
-        $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
-            DynamicFieldConfig   => $DynamicFieldConfig,
-            PossibleValuesFilter => $PossibleValuesFilter,
-            ServerError          => $ValidationResult->{ServerError} || '',
-            ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
-            LayoutObject         => $LayoutObject,
-            ParamObject          => $ParamObject,
-            AJAXUpdate           => 1,
-            UpdatableFields      => \@UpdatableFields,
-        );
-
     }
-
-    $Param{DynamicFieldHTML} = \%DynamicFieldHTML;
 
     # get needed data
     if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
@@ -323,17 +305,14 @@ sub Run {
         }
     }
 
-    # get submit save
-    my $SubmitSave = $ParamObject->GetParam( Param => 'SubmitSave' );
-
     # get log object
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
-    # TODO: do not use "Version" here
-    my $Version = {};
+    # TODO: check the usage of "$Version" and "$ConfigItem"
+    my $Version;
     my $NameDuplicates;
     my $CINameRegexErrorMessage;
-    if ( $Self->{Subaction} eq 'VersionSave' ) {
+    if ( $Self->{Subaction} eq 'Save' ) {
 
         # get the uploaded attachment
         my %UploadStuff = $ParamObject->GetUploadAll(
@@ -354,15 +333,15 @@ sub Run {
 
         # get general form data
         for my $FormParam (qw(Name DeplStateID InciStateID)) {
-            $Version->{$FormParam} = $ParamObject->GetParam( Param => $FormParam );
-            if ( !$Version->{$FormParam} ) {
+            $ConfigItem->{$FormParam} = $ParamObject->GetParam( Param => $FormParam );
+            if ( !$ConfigItem->{$FormParam} ) {
                 $AllRequired = 0;
             }
         }
 
         # check, whether the feature to check for a unique name is enabled
         if (
-            IsStringWithData( $Version->{Name} )
+            IsStringWithData( $ConfigItem->{Name} )
             && $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck')
             )
         {
@@ -371,14 +350,14 @@ sub Run {
                 $LogObject->Log(
                     Priority => 'debug',
                     Message  => "Checking for duplicate names (ClassID: $ConfigItem->{ClassID}, "
-                        . "Name: $Version->{Name}, ConfigItemID: $ConfigItem->{ConfigItemID})",
+                        . "Name: $ConfigItem->{Name}, ConfigItemID: $ConfigItem->{ConfigItemID})",
                 );
             }
 
             $NameDuplicates = $ConfigItemObject->UniqueNameCheck(
                 ConfigItemID => $ConfigItem->{ConfigItemID},
                 ClassID      => $ConfigItem->{ClassID},
-                Name         => $Version->{Name},
+                Name         => $ConfigItem->{Name},
             );
 
             # stop processing if the name is not unique
@@ -392,7 +371,7 @@ sub Run {
                 $LogObject->Log(
                     Priority => 'error',
                     Message =>
-                        "The name $Version->{Name} is already in use by the ConfigItemID(s): "
+                        "The name $ConfigItem->{Name} is already in use by the ConfigItemID(s): "
                         . $NameDuplicatesString,
                 );
             }
@@ -402,7 +381,7 @@ sub Run {
         my $CINameRegexConfig = $ConfigObject->Get("ITSMConfigItem::CINameRegex");
 
         # check if the CI name is given and should be checked with a regular expression
-        if ( IsStringWithData( $Version->{Name} ) && $CINameRegexConfig ) {
+        if ( IsStringWithData( $ConfigItem->{Name} ) && $CINameRegexConfig ) {
 
             # get class list
             my $ClassList = $GeneralCatalogObject->ItemList(
@@ -416,7 +395,7 @@ sub Run {
             my $CINameRegex = $CINameRegexConfig->{ $ClassName . '::' . 'CINameRegex' } || '';
 
             # if a regex is defined and the CI name does not match the regular expression
-            if ( $CINameRegex && $Version->{Name} !~ m{ $CINameRegex }xms ) {
+            if ( $CINameRegex && $ConfigItem->{Name} !~ m{ $CINameRegex }xms ) {
 
                 $AllRequired = 0;
 
@@ -428,24 +407,7 @@ sub Run {
         $AllRequired = %Error ? 0 : 1;
 
         # save version to database
-        if ( $SubmitSave && $AllRequired ) {
-
-            if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
-                $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
-                    ClassID => $ConfigItem->{ClassID},
-                    UserID  => $Self->{UserID},
-                );
-            }
-
-            for my $DynamicFieldConfig ($DynamicFieldList->@*) {
-                # set the value
-                my $Success = $DynamicFieldBackendObject->ValueSet(
-                    DynamicFieldConfig => $DynamicFieldConfig,
-                    ObjectID           => $ConfigItem->{ConfigItemID},
-                    Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
-                    UserID             => $Self->{UserID},
-                );
-            }
+        if ( $AllRequired ) {
 
             # get all attachments from upload cache
             my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
@@ -465,68 +427,82 @@ sub Run {
                 $NewAttachment{$Key} = $Attachment;
             }
 
-            # get all attachments meta data
-            my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-            );
-
-            # check the existing attachments
-            FILENAME:
-            for my $Filename (@ExistingAttachments) {
-
-                # get the existing attachment data
-                my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
+            # for existing ConfigItems compare with the current data
+            if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
+                # get all attachments meta data
+                my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
                     ConfigItemID => $ConfigItem->{ConfigItemID},
-                    Filename     => $Filename,
-                    UserID       => $Self->{UserID},
                 );
 
-                # the key is the filename + filesize + content type
-                # (no content id, as existing attachments don't have it)
-                my $Key = $AttachmentData->{Filename}
-                    . $AttachmentData->{Filesize}
-                    . $AttachmentData->{ContentType};
+                # check the existing attachments
+                FILENAME:
+                for my $Filename (@ExistingAttachments) {
 
-                # attachment is already existing, we can delete it from the new attachment hash
-                if ( $NewAttachment{$Key} ) {
-                    delete $NewAttachment{$Key};
-                }
-
-                # existing attachment is no longer in new attachments hash
-                else {
-
-                    # delete the existing attachment
-                    my $DeleteSuccessful = $ConfigItemObject->ConfigItemAttachmentDelete(
+                    # get the existing attachment data
+                    my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
                         ConfigItemID => $ConfigItem->{ConfigItemID},
                         Filename     => $Filename,
                         UserID       => $Self->{UserID},
                     );
 
-                    # check error
-                    if ( !$DeleteSuccessful ) {
-                        return $LayoutObject->FatalError();
+                    # the key is the filename + filesize + content type
+                    # (no content id, as existing attachments don't have it)
+                    my $Key = $AttachmentData->{Filename}
+                        . $AttachmentData->{Filesize}
+                        . $AttachmentData->{ContentType};
+
+                    # attachment is already existing, we can delete it from the new attachment hash
+                    if ( $NewAttachment{$Key} ) {
+                        delete $NewAttachment{$Key};
+                    }
+
+                    # existing attachment is no longer in new attachments hash
+                    else {
+
+                        # delete the existing attachment
+                        my $DeleteSuccessful = $ConfigItemObject->ConfigItemAttachmentDelete(
+                            ConfigItemID => $ConfigItem->{ConfigItemID},
+                            Filename     => $Filename,
+                            UserID       => $Self->{UserID},
+                        );
+
+                        # check error
+                        if ( !$DeleteSuccessful ) {
+                            return $LayoutObject->FatalError();
+                        }
                     }
                 }
             }
 
-            # write dynamic field values
+            # TODO: better align with the initial EditFieldValueGet
+            # prepare dynamic field values
             DYNAMICFIELD:
-            for my $DynamicField ( $Definition->{DynamicFieldRef}->@* ) {
+            for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
 
-                $Version->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
-                    DynamicFieldConfig => $DynamicField,
-                    ParamObject        => $ParamObject,
-                    LayoutObject       => $LayoutObject,
-                );
+                $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldValues{ $DynamicField->{Name} };
             }
 
-            # add version
-            $ConfigItemObject->ConfigItemUpdate(
-                $Version->%*,
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-                UserID       => $Self->{UserID},
-            );
+            if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+                # delete temporary number # TODO: check, whether setting new as number is necessary in the first place
+                delete $ConfigItem->{Number};
+
+                $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
+                    $ConfigItem->%*,
+                    UserID => $Self->{UserID},
+                );
+
+                # check error
+                if ( !$ConfigItem->{ConfigItemID} ) {
+                    return $LayoutObject->FatalError();
+                }
+            }
+            else {
+                $ConfigItemObject->ConfigItemUpdate(
+                    $ConfigItem->%*,
+                    UserID => $Self->{UserID},
+                );
+            }
 
             # write the new attachments
             ATTACHMENT:
@@ -659,15 +635,14 @@ sub Run {
         if ($VersionID) {
 
             # get version data to duplicate config item
-            $Version = $ConfigItemObject->VersionGet(
+            $Version = $ConfigItemObject->ConfigItemGet(
                 VersionID => $VersionID,
             );
         }
         else {
 
             # get last version data to duplicate config item
-            # TODO: Use ConfigItemGet for "newest version" - check other instances
-            $Version = $ConfigItemObject->VersionGet(
+            $Version = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID => $DuplicateID,
             );
         }
@@ -682,7 +657,7 @@ sub Run {
 
     # output name invalid block
     my $RowNameInvalid = '';
-    if ( !$Version->{Name} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$Version->{Name} && $Self->{Subaction} eq 'Save' ) {
         $RowNameInvalid = 'ServerError';
     }
 
@@ -772,7 +747,7 @@ sub Run {
 
     # output deployment state invalid block
     my $RowDeplStateInvalid = '';
-    if ( !$Version->{DeplStateID} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$Version->{DeplStateID} && $Self->{Subaction} eq 'Save' ) {
         $RowDeplStateInvalid = ' ServerError';
     }
 
@@ -803,7 +778,7 @@ sub Run {
 
     # output incident state invalid block
     my $RowInciStateInvalid = '';
-    if ( !$Version->{InciStateID} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$Version->{InciStateID} && $Self->{Subaction} eq 'Save' ) {
         $RowInciStateInvalid = ' ServerError';
     }
 
@@ -824,48 +799,22 @@ sub Run {
         },
     );
 
-    # cycle trough the activated Dynamic Fields for this screen
-    DYNAMICFIELD:
-    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-
-        $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->ValueGet(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            ObjectID           => $ConfigItem->{ConfigItemID}
-        );
-
-        # get field html
-        my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
-            DynamicFieldConfig   => $DynamicFieldConfig,
-#             PossibleValuesFilter => defined $DynFieldStates{Fields}{$i}
-#             ? $DynFieldStates{Fields}{$i}{PossibleValues}
-#             : undef,
-            Value           => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
-            LayoutObject    => $LayoutObject,
-            ParamObject     => $ParamObject,
-            AJAXUpdate      => 1,
-#             UpdatableFields => $Self->_GetFieldsToUpdate(),
-#             Mandatory       => $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-#             %UseDefault,
-        );
-
-        $Param{DynamicFieldHTML}->{$DynamicFieldConfig->{Name}} = $DynamicFieldHTML;
-
-    }
-
-    # output dynamic fields
-    if ( $Definition->{Definition} ) {
-        $Self->{CustomerSearchItemIDs} = [];
-        my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-        # TODO: use only the fields in the definition
-        my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-            ObjectType => 'ITSMConfigItem',
-        );
-        $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Mask')->RenderInput(
-            GetParam            => \%Param,
-            LayoutObject        => $LayoutObject,
-            MaskDefinition      => $Definition->{DefinitionRef},
-            DynamicFieldConfigs => $DynamicField,
+    # render dynamic fields
+    if ( IsArrayRefWithData( $Definition->{DefinitionRef} ) ) {
+# TODO: look what this was/is about
+#        $Self->{CustomerSearchItemIDs} = [];
+        $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
+            Content              => $Definition->{DefinitionRef},
+            DynamicFields        => $Definition->{DynamicFieldRef},
+# TODO: Implement
+#            UpdatableFields      => $Self->_GetFieldsToUpdate(),
+            LayoutObject         => $LayoutObject,
+            ParamObject          => $ParamObject,
+# TODO: Using ACLs this will be necessary
+#            DynamicFieldValues   => $Param{DynamicField},
+            PossibleValuesFilter => $Param{DFPossibleValues},
+            Errors               => $Param{DFErrors},
+            Visibility           => $Param{Visibility},
         );
     }
 
