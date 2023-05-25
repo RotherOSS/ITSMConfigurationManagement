@@ -228,15 +228,15 @@ sub DefinitionGet {
     return {} if !$Definition{DefinitionID};
 
     # prepare definition
-    if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
-        # TODO: Rework
-        $Self->_DefinitionPrepare(
-            DefinitionRef => $Definition{DefinitionRef},
-        );
-    }
-    else {
-        $Definition{DefinitionRef} = '';
-    }
+    # TODO: Rework?
+    #if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
+    #    $Self->_DefinitionPrepare(
+    #        DefinitionRef => $Definition{DefinitionRef},
+    #    );
+    #}
+    #else {
+    #    $Definition{DefinitionRef} = '';
+    #}
 
     # get class list
     my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
@@ -680,6 +680,8 @@ sub _DefinitionDynamicFieldGet {
                 FieldType  => $DynamicField->{FieldType},
                 ObjectType => $DynamicField->{ObjectType},
             };
+
+            # TODO: save versions of DynamicFieldSet-DFs (and use them!)
         }
 
         return $Kernel::OM->Get('Kernel::System::YAML')->Dump(

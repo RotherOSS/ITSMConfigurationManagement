@@ -75,7 +75,7 @@
 [% RenderBlockEnd("RowInciState") %]
                     </fieldset>
 
-[% INCLUDE "DynamicField/AgentEditField.tt" %]
+                    [% Data.DynamicFieldHTML %]
 
                     <fieldset class="TableLike">
                         <label>[% Translate("Attachments") | html %]:</label>

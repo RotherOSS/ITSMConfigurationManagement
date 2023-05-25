@@ -800,22 +800,26 @@ sub Run {
     );
 
     # render dynamic fields
-    if ( IsArrayRefWithData( $Definition->{DefinitionRef} ) ) {
+    my $DynamicFieldHTML;
+    if ( IsHashRefWithData( $Definition->{DefinitionRef} ) && $Definition->{DefinitionRef}{Sections} ) {
 # TODO: look what this was/is about
 #        $Self->{CustomerSearchItemIDs} = [];
-        $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
-            Content              => $Definition->{DefinitionRef},
-            DynamicFields        => $Definition->{DynamicFieldRef},
+        # TODO: order by pages and only render the first page
+        for my $Section ( $Definition->{DefinitionRef}{Sections}->@* ) {
+            $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
+                Content              => $Section->{Content},
+                DynamicFields        => $Definition->{DynamicFieldRef},
 # TODO: Implement
-#            UpdatableFields      => $Self->_GetFieldsToUpdate(),
-            LayoutObject         => $LayoutObject,
-            ParamObject          => $ParamObject,
+#                UpdatableFields      => $Self->_GetFieldsToUpdate(),
+                LayoutObject         => $LayoutObject,
+                ParamObject          => $ParamObject,
 # TODO: Using ACLs this will be necessary
-#            DynamicFieldValues   => $Param{DynamicField},
-            PossibleValuesFilter => $Param{DFPossibleValues},
-            Errors               => $Param{DFErrors},
-            Visibility           => $Param{Visibility},
-        );
+#                DynamicFieldValues   => $Param{DynamicField},
+                PossibleValuesFilter => $Param{DFPossibleValues},
+                Errors               => $Param{DFErrors},
+                Visibility           => $Param{Visibility},
+            );
+        }
     }
 
     # get all attachments meta data
@@ -850,8 +854,9 @@ sub Run {
             Data         => {
                 %Param,
                 %{$ConfigItem},
-                DuplicateID => $DuplicateID,
-                FormID      => $Self->{FormID},
+                DynamicFieldHTML => $DynamicFieldHTML,
+                DuplicateID      => $DuplicateID,
+                FormID           => $Self->{FormID},
             },
         );
         $Output .= $LayoutObject->Footer( Type => 'Small' );
@@ -912,8 +917,9 @@ sub Run {
             Data         => {
                 %Param,
                 %{$ConfigItem},
-                DuplicateID => $DuplicateID,
-                FormID      => $Self->{FormID},
+                DynamicFieldHTML => $DynamicFieldHTML,
+                DuplicateID      => $DuplicateID,
+                FormID           => $Self->{FormID},
             },
         );
         $Output .= $LayoutObject->Footer();
