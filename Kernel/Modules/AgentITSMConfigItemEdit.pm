@@ -60,17 +60,96 @@ sub Run {
     # get config of frontend module
     $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
 
-    my %DynamicFieldValues;
+    # get needed data
+    if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
 
-    # TODO: Take the definition here
-    # get the dynamic fields for this screen
-    my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-        Valid       => 1,
-        ObjectType  => [ 'ITSMConfigItem' ],
-#         FieldFilter => {},
+        # check access for config item
+        $HasAccess = $ConfigItemObject->Permission(
+            Scope  => 'Item',
+            ItemID => $ConfigItem->{ConfigItemID},
+            UserID => $Self->{UserID},
+            Type   => $Self->{Config}->{Permission},
+        );
+
+        # get config item
+        $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $ConfigItem->{ConfigItemID},
+            DynamicFields => 1,
+        );
+    }
+    elsif ($DuplicateID) {
+
+        # TODO: Check duplication
+        # get config item to duplicate
+        $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $DuplicateID,
+        );
+
+        # check access for config item
+        $HasAccess = $ConfigItemObject->Permission(
+            Scope  => 'Item',
+            ItemID => $ConfigItem->{ConfigItemID},
+            UserID => $Self->{UserID},
+            Type   => $Self->{Config}->{Permission},
+        );
+
+        # set config item id and number
+        $ConfigItem->{ConfigItemID} = 'NEW';
+        $ConfigItem->{Number}       = Translatable('New');
+    }
+    elsif ( $ConfigItem->{ClassID} ) {
+
+        # set config item id and number
+        $ConfigItem->{ConfigItemID} = 'NEW';
+        $ConfigItem->{Number}       = Translatable('New');
+
+        # check access for config item
+        $HasAccess = $ConfigItemObject->Permission(
+            Scope   => 'Class',
+            ClassID => $ConfigItem->{ClassID},
+            UserID  => $Self->{UserID},
+            Type    => $Self->{Config}->{Permission},
+        );
+
+        # get class list
+        my $ClassList = $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+        $ConfigItem->{Class} = $ClassList->{ $ConfigItem->{ClassID} };
+    }
+    else {
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable('No ConfigItemID, DuplicateID or ClassID is given!'),
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
+    # if user has no access rights show error page
+    if ( !$HasAccess ) {
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable('No access is given!'),
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
+    # get definition
+    my $Definition = $ConfigItemObject->DefinitionGet(
+        ClassID => $ConfigItem->{ClassID},
     );
 
-    # TODO: Use the dynamic fields of the definition only
+    # abort, if no definition is defined
+    if ( !$Definition->{DefinitionID} ) {
+        return $LayoutObject->ErrorScreen(
+            Message => $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ConfigItem->{Class} ),
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
+    my %DynamicFieldValues;
+
+    # get the dynamic fields for this screen
+    my $DynamicFieldList = $Definition->{DynamicFieldRef} ? [ values $Definition->{DynamicFieldRef}->%* ] : [];
+
     my %DynamicFieldValueCount;
     my %ACLReducibleDynamicFields;
     DYNAMICFIELD:
@@ -158,6 +237,9 @@ sub Run {
 
         $DynamicFieldPossibleValues{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $PossibleValuesFilter;
 
+        # TODO: check again where all Dynamic Field Validation etc. has to go
+        next DYNAMICFIELD unless $Self->{Subaction} eq 'Save';
+
         # perform validation
         my $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
             DynamicFieldConfig   => $DynamicFieldConfig,
@@ -177,91 +259,6 @@ sub Run {
             $Error{ $DynamicFieldConfig->{Name} } = ' ServerError';
             $DynamicFieldValidationResult{ $DynamicFieldConfig->{Name} } = $ValidationResult;
         }
-    }
-
-    # get needed data
-    if ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) {
-
-        # check access for config item
-        $HasAccess = $ConfigItemObject->Permission(
-            Scope  => 'Item',
-            ItemID => $ConfigItem->{ConfigItemID},
-            UserID => $Self->{UserID},
-            Type   => $Self->{Config}->{Permission},
-        );
-
-        # get config item
-        $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $ConfigItem->{ConfigItemID},
-            DynamicFields => 1,
-        );
-    }
-    elsif ($DuplicateID) {
-
-        # TODO: Check duplication
-        # get config item to duplicate
-        $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $DuplicateID,
-        );
-
-        # check access for config item
-        $HasAccess = $ConfigItemObject->Permission(
-            Scope  => 'Item',
-            ItemID => $ConfigItem->{ConfigItemID},
-            UserID => $Self->{UserID},
-            Type   => $Self->{Config}->{Permission},
-        );
-
-        # set config item id and number
-        $ConfigItem->{ConfigItemID} = 'NEW';
-        $ConfigItem->{Number}       = Translatable('New');
-    }
-    elsif ( $ConfigItem->{ClassID} ) {
-
-        # set config item id and number
-        $ConfigItem->{ConfigItemID} = 'NEW';
-        $ConfigItem->{Number}       = Translatable('New');
-
-        # check access for config item
-        $HasAccess = $ConfigItemObject->Permission(
-            Scope   => 'Class',
-            ClassID => $ConfigItem->{ClassID},
-            UserID  => $Self->{UserID},
-            Type    => $Self->{Config}->{Permission},
-        );
-
-        # get class list
-        my $ClassList = $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        );
-        $ConfigItem->{Class} = $ClassList->{ $ConfigItem->{ClassID} };
-    }
-    else {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('No ConfigItemID, DuplicateID or ClassID is given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
-
-    # if user has no access rights show error page
-    if ( !$HasAccess ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('No access is given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
-
-    # get definition
-    my $Definition = $ConfigItemObject->DefinitionGet(
-        ClassID => $ConfigItem->{ClassID},
-    );
-
-    # abort, if no definition is defined
-    if ( !$Definition->{DefinitionID} ) {
-        return $LayoutObject->ErrorScreen(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ConfigItem->{Class} ),
-            Comment => Translatable('Please contact the administrator.'),
-        );
     }
 
     # get upload cache object
@@ -557,11 +554,6 @@ sub Run {
             $TreeView = 1;
         }
 
-        # fetch Dynamic Fields
-        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
-            ObjectType => 'ITSMConfigItem',
-        );
-
         # update Dynamic Fields Possible Values via AJAX
         my @DynamicFieldAJAX;
 
@@ -805,7 +797,7 @@ sub Run {
 # TODO: look what this was/is about
 #        $Self->{CustomerSearchItemIDs} = [];
         # TODO: order by pages and only render the first page
-        for my $Section ( $Definition->{DefinitionRef}{Sections}->@* ) {
+        for my $Section ( values $Definition->{DefinitionRef}{Sections}->%* ) {
             $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
                 Content              => $Section->{Content},
                 DynamicFields        => $Definition->{DynamicFieldRef},

@@ -261,6 +261,7 @@ sub ConfigItemGet {
             Priority => 'error',
             Message  => 'Need ConfigItemID or VersionID!',
         );
+
         return;
     }
 
@@ -278,7 +279,18 @@ sub ConfigItemGet {
         Key  => $CacheKey,
     );
 
-    return Storable::dclone($Cache) if $Cache;
+    if ( $Cache ) {
+        if ( $Param{VersionID} && $Param{ConfigItemID} && $Param{ConfigItemID} ne $Cache->{ConfigItemID} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
+            );
+
+            return;
+        }
+
+        return Storable::dclone($Cache) if $Cache;
+    }
 
     # get specific ConfigItemVersion
     if ( $Param{VersionID} ) {
@@ -338,6 +350,14 @@ sub ConfigItemGet {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "No such ConfigItemID ($Param{ConfigItemID})!",
+        );
+
+        return;
+    }
+    if ( $Param{VersionID} && $Param{ConfigItemID} && $Param{ConfigItemID} ne $ConfigItem{ConfigItemID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
         );
 
         return;

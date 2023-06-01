@@ -43,8 +43,8 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get params
-    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' ) || 0;
-    my $VersionID    = $ParamObject->GetParam( Param => 'VersionID' )    || 0;
+    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    my $VersionID    = $ParamObject->GetParam( Param => 'VersionID' );
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -60,7 +60,6 @@ sub Run {
     # get needed object
     my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # check for access rights
     my $HasAccess = $ConfigItemObject->Permission(
@@ -88,12 +87,13 @@ sub Run {
     # get content
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => $ConfigItemID,
+        VersionID     => $VersionID,
         DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
         return $LayoutObject->ErrorScreen(
             Message =>
-                $LayoutObject->{LanguageObject}->Translate( 'ConfigItemID %s not found in database!', $ConfigItemID ),
+                $LayoutObject->{LanguageObject}->Translate( 'ConfigItem not found!' ),
             Comment => Translatable('Please contact the administrator.'),
         );
     }
@@ -103,10 +103,12 @@ sub Run {
         ConfigItemID => $ConfigItemID,
     );
 
-    # TODO: Catch VersionID not in VersionList
     if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
         $Param{ShowVersions} = 1;
     }
+
+    # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
+    $VersionID ||= $ConfigItem->{VersionID};
 
     # run config item menu modules
     if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::MenuModule') eq 'HASH' ) {
@@ -263,15 +265,8 @@ sub Run {
     my $Output = $LayoutObject->Header( Value => $ConfigItem->{Number} );
     $Output .= $LayoutObject->NavigationBar();
 
-    # get version
-    if ( $VersionID ) {
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            VersionID     => $VersionID,
-            DynamicFields => 1,
-        );
-    }
-
-    if ( $ConfigItem ) {
+    # if a version already exists (TODO: When does it not?)
+    if ( $ConfigItem->{Name} ) {
 
         # transform ascii to html
         $ConfigItem->{Name} = $LayoutObject->Ascii2Html(
@@ -317,35 +312,14 @@ sub Run {
             },
         );
 
-        # TODO: Remove all XML stuff also from the template files
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
-        # dynamic fields
-        my $DynamicFields = $DynamicFieldObject->DynamicFieldListGet(
-            ObjectType => 'ITSMConfigItem',
+        my $Definition = $ConfigItemObject->DefinitionGet(
+            DefinitionID => $ConfigItem->{DefinitionID},
         );
 
-        DYNAMICFIELD:
-        for my $DynamicField ( $DynamicFields->@* ) {
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
-
-            my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
-                DynamicFieldConfig => $DynamicField,
-                Value              => $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} },
-                HTMLOutput         => 1,
-                LayoutObject       => $LayoutObject,
-            );
-
-            $LayoutObject->Block(
-                Name => 'DynamicFieldRow',
-                Data => {
-                    $ValueStrg->%*,
-                    Label => $DynamicField->{Label},
-                },
-            );
-
-        }
+        $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
+            ConfigItem => $ConfigItem,
+            Definition => $Definition,
+        );
     }
 
     # get create & change user data
@@ -364,37 +338,6 @@ sub Run {
             CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
         },
     );
-
-    # display dynamic fields
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-        Valid       => 1,
-        ObjectType  => [ 'ITSMConfigItem' ],
-#         FieldFilter => {},
-    );
-
-    DYNAMICFIELD:
-    for my $DynamicFieldConfig ( $DynamicField->@* ) {
-
-        # use translation here to be able to reduce the character length in the template
-        my $Label = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
-
-        my $DynamicFieldDisplayData = $DynamicFieldBackendObject->DisplayValueRender(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            Value              => $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
-            LayoutObject       => $LayoutObject,
-            ValueMaxChars      => 18,
-        );
-
-        $LayoutObject->Block(
-            Name => 'DynamicField',
-            Data => {
-                $DynamicFieldConfig->{Name} => $DynamicFieldDisplayData->{Title},
-                Label                       => $Label,
-                Title                       => $DynamicFieldDisplayData->{Title},
-                Value                       => $DynamicFieldDisplayData->{Value},
-            },
-        );
-    }
 
     # get linked objects
     my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
@@ -431,29 +374,12 @@ sub Run {
 
     if (@Attachments) {
 
-        # get the metadata of the 1st attachment
-        my $FirstAttachment = $ConfigItemObject->ConfigItemAttachmentGet(
-            ConfigItemID => $ConfigItemID,
-            Filename     => $Attachments[0],
-        );
-
         $LayoutObject->Block(
             Name => 'Attachments',
-            Data => {
-                ConfigItemID => $ConfigItemID,
-                Filename     => $FirstAttachment->{Filename},
-                Filesize     => $FirstAttachment->{Filesize},
-            },
         );
 
-        # the 1st attachment was directly rendered into the 1st row's right cell, all further
-        # attachments are rendered into a separate row
         ATTACHMENT:
         for my $Attachment (@Attachments) {
-
-            # skip the 1st attachment
-            next ATTACHMENT if $Attachment eq $Attachments[0];
-
             # get the metadata of the current attachment
             my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
                 ConfigItemID => $ConfigItemID,

@@ -85,14 +85,19 @@
                             [% Data.ChangeByUserFullName | html %]
                         </p>
                         <div class="Clear"></div>
-                    </fieldset>
-                    <fieldset class="TableLike FixedLabelSmall Tight">
-[% RenderBlockStart("DynamicField") %]
-                    <label>[% Translate(Data.Label) | html %]:</label>
-                    <p class="Value">
-                        <span title="[% Data.Title %]">[% Data.Value %]</span>
-                    </p>
-[% RenderBlockEnd("DynamicField") %]
+
+[% RenderBlockStart("Attachments") %]
+                        <label>[% Translate("Attachments") | html %]:</label>
+                        <p class="Value">
+[% RenderBlockStart("AttachmentRow") %]
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadAttachment;Filename=[% Data.Filename | uri %];ConfigItemID=[% Data.ConfigItemID | uri %]">
+                                            [% Data.Filename | html %]
+                                        </a>
+                                        ([% Data.Filesize | Localize('Filesize') | html %])
+[% RenderBlockEnd("AttachmentRow") %]
+                        </p>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("Attachments") %]
                     </fieldset>
                 </div>
             </div>
@@ -203,69 +208,7 @@
 [% RenderBlockEnd("Tree") %]
             </div>
             <div id="ITSMItems">
-                <div class="WidgetBox SpacingTop Expanded">
-                    <div class="LightRow Header">
-                        <div class="WidgetAction Toggle"><a href="#" title="[% Translate("Show or hide the content.") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a></div>
-                        <h2>[% Translate("Configuration Item Version Details") | html %]</h2>
-                    </div>
-                    <div class="WithPadding Content NoDoubleBorders">
-                        <table class="DataTable">
-                            <thead>
-                                <tr>
-                                    <th>[% Translate("Property") | html %]</th>
-                                    <th>[% Translate("Value") | html %]</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-[% RenderBlockStart("Data") %]
-                                <tr>
-                                    <td class="W25pc" style="padding-left: [% Translate(Data.Indentation) | html %]px;" title="[% Translate(Data.Description) | html %]">
-                                        [% Translate(Data.Name) | html %]:
-                                    </td>
-                                    <td style="padding-left: [% Translate(Data.Indentation) | html %]px;">
-                                        [% Data.Value %]
-                                    </td>
-                                </tr>
-[% RenderBlockEnd("Data") %]
-[% RenderBlockStart("Attachments") %]
-                                <tr>
-                                    <td class="W25pc" title="[% Translate("Attachments") | html %]">
-                                        [% Translate("Attachments") | html %]
-                                    </td>
-                                    <td>
-                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadAttachment;Filename=[% Data.Filename | uri %];ConfigItemID=[% Data.ConfigItemID | uri %]">
-                                            [% Data.Filename | html %]
-                                        </a>
-                                        ([% Data.Filesize | Localize('Filesize') | html %])
-                                    </td>
-                                </tr>
-[% RenderBlockEnd("Attachments") %]
-[% RenderBlockStart("AttachmentRow") %]
-                                <tr>
-                                    <td class="W25pc">
-                                    </td>
-                                    <td>
-                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadAttachment;Filename=[% Data.Filename | uri %];ConfigItemID=[% Data.ConfigItemID | uri %]">
-                                            [% Data.Filename | html %]
-                                        </a>
-                                        ([% Data.Filesize | Localize('Filesize') | html %])
-                                    </td>
-                                </tr>
-[% RenderBlockEnd("AttachmentRow") %]
-[% RenderBlockStart("DynamicFieldRow") %]
-                                <tr>
-                                    <td class="W25pc" title="[% Translate(Data.Description) | html %]">
-                                        [% Translate(Data.Label) | html %]
-                                    </td>
-                                    <td>
-                                        [% Data.Value %]
-                                    </td>
-                                </tr>
-[% RenderBlockEnd("DynamicFieldRow") %]
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+[% Data.DynamicFieldHTML %]
             </div>
 [% RenderBlockStart("LinkTableComplex") %]
             <div class="Content">

@@ -73,9 +73,8 @@
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowInciState") %]
+[% Data.DynamicFieldHTML %]
                     </fieldset>
-
-                    [% Data.DynamicFieldHTML %]
 
                     <fieldset class="TableLike">
                         <label>[% Translate("Attachments") | html %]:</label>
