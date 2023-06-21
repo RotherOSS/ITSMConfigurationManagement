@@ -183,6 +183,7 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>ITSM.Agent.Default.css</Item>
+                        <Item>ITSM.Agent.ConfigItem.Zoom.css</Item>
                         <Item>ITSM.Agent.Detail.css</Item>
                         <Item>Core.AllocationList.css</Item>
                         <Item>ITSM.Print.css</Item>
