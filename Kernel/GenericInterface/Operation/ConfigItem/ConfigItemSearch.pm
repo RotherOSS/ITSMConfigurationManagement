@@ -680,7 +680,7 @@ sub _ConfigItemSearch {
         Data    => \%SearchParams,
     );
 
-    my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearchExtended(%SearchParams);
+    my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParams);
 
     if ( IsArrayRefWithData($ConfigItemIDs) ) {
         return {

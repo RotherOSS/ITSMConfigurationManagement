@@ -769,7 +769,7 @@ sub _AssignedCIsGet {
                 );
 
                 # Perform config item search (extended).
-                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearchExtended(
+                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
                     ClassIDs => [$ClassID],
                     What     => \@SearchKey,
                 );
@@ -806,7 +806,7 @@ sub _AssignedCIsGet {
                 );
 
                 # Perform config item search (extended).
-                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearchExtended(
+                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
                     ClassIDs => [$ClassID],
                     What     => \@SearchKey,
                 );

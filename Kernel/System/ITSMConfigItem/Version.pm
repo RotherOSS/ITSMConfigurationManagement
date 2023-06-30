@@ -551,8 +551,8 @@ sub VersionAdd {
 
     # update last version of config item
     $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ?',
-        Bind => [ \$VersionID, \$CreateTime, \$Param{UserID} ],
+        SQL => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ? WHERE id = ?',
+        Bind => [ \$VersionID, \$CreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
     );
 
     return if !$Success;

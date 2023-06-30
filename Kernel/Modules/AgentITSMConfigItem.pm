@@ -241,7 +241,7 @@ sub Run {
     }
 
     # search config items which match the selected filter
-    my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearchExtended(
+    my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
         %{ $Filters{ $Self->{Filter} }->{Search} },
     );
 

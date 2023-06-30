@@ -508,7 +508,7 @@ sub ExportDataGet {
     }
 
     # search the config items
-    my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearchExtended(
+    my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %SearchParams,
         ClassIDs              => [ $ObjectData->{ClassID} ],
         PreviousVersionSearch => 0,
@@ -915,7 +915,7 @@ sub ImportDataSave {
         }
 
         # search existing config item with the same identifiers
-        my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearchExtended(
+        my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
             %SearchParams,
             ClassIDs              => [ $ObjectData->{ClassID} ],
             PreviousVersionSearch => 0,
