@@ -140,6 +140,7 @@ Result: 'COUNT'
 
 =cut
 
+# TODO: Check all instances where this is called. Change DynamicFields, OrderBy -> SortBy, OrderByDirection -> OrderBy, Return => ARRAY returns not a ref
 sub ConfigItemSearch {
     my ( $Self, %Param ) = @_;
 
@@ -152,6 +153,7 @@ sub ConfigItemSearch {
     my %SortOptions = (
         ConfigItem       => 'ci.configitem_number',
         ConfigItemNumber => 'ci.configitem_number',
+        Number           => 'ci.configitem_number',
         Name             => 'v.name',
         DeplState        => 'gc_depl.name',
         InciState        => 'gc_inci.name',
