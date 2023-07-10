@@ -16,20 +16,26 @@
 
 package Kernel::Modules::AgentITSMConfigItemAdd;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -77,23 +83,18 @@ sub Run {
     }
 
     # output header
-    my $Output = $LayoutObject->Header(
-        Title => Translatable('Add'),
-    );
-    $Output .= $LayoutObject->NavigationBar();
-
-    # output overview
-    $Output .= $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemAdd',
-        Data         => {
-            %Param,
-        },
-    );
-
-    # output footer
-    $Output .= $LayoutObject->Footer();
-
-    return $Output;
+    return join '',
+        $LayoutObject->Header(
+            Title => Translatable('Add'),
+        ),
+        $LayoutObject->NavigationBar,
+        $LayoutObject->Output(
+            TemplateFile => 'AgentITSMConfigItemAdd',
+            Data         => {
+                %Param,
+            },
+        ),
+        $LayoutObject->Footer;
 }
 
 1;
