@@ -50,6 +50,7 @@ sub Run {
     );
 
     # check for access rights
+    CLASS_ID:
     for my $ClassID ( sort keys %{$ClassList} ) {
         my $HasAccess = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->Permission(
             Type    => $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{Permission},
@@ -58,7 +59,10 @@ sub Run {
             UserID  => $Self->{UserID},
         );
 
-        delete $ClassList->{$ClassID} if !$HasAccess;
+        next CLASS_ID if $HasAccess;
+
+        # remove from class list when access is denied
+        delete $ClassList->{$ClassID}
     }
 
     # get layout object
