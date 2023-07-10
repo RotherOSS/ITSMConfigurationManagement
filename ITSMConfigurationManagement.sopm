@@ -263,6 +263,8 @@
             <Column Name="inci_state_id" Required="false" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
+            <Column Name="change_time" Required="true" Type="DATE" />
+            <Column Name="change_by" Required="true" Type="INTEGER" />
             <Index Name="configitem_version_configitem_id">
                 <IndexColumn Name="configitem_id" />
             </Index>
