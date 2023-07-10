@@ -14,9 +14,9 @@
     <Description Lang="hu">Az OTOBO::ITSM konfigurációmenedzsment csomag.</Description>
     <Filelist>
         <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
-        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.pm" />
-        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.pm" />
-        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
@@ -104,6 +104,8 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLEdit.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLNew.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentDashboardITSMConfigItemGeneric.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
@@ -115,12 +117,15 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemSearch.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItemVersion.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Definition.pm" />
@@ -190,8 +195,10 @@
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Overview.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Search.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Zoom.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.DynamicFieldITSMConfigItemLensSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.UI.ConfigItemActionRow.js" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Edit.css" />
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Zoom.css" />
         <File Permission="660" Location="var/packagesetup/ITSMConfigurationManagement.pm" />
     </Filelist>
     <DatabaseInstall Type="post">
