@@ -599,7 +599,7 @@ sub VersionAdd {
     for my $DFData (qw(0 1)) {
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::ConfigItemID::' . $Version{ConfigItemID} . '::DF::' . $DFData,
+            Key  => 'ConfigItemGet::ConfigItemID::' . $Version{ConfigItemID} . '::' . $DFData,
         );
     }
 
@@ -717,13 +717,14 @@ sub VersionUpdate {
     for my $DFData (qw(0 1)) {
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::VersionID::' . $Version->{VersionID} . '::DF::' . $DFData,
+            Key  => 'ConfigItemGet::VersionID::' . $Version->{VersionID} . '::' . $DFData,
         );
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::ConfigItemID::' . $Version->{ConfigItemID} . '::DF::' . $DFData,
+            Key  => 'ConfigItemGet::ConfigItemID::' . $Version->{ConfigItemID} . '::' . $DFData,
         );
     }
+
     # TODO: Think about this when including VersionNumber
     $CacheObject->Delete(
         Type => $Self->{CacheType},

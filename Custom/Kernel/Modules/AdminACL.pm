@@ -652,8 +652,8 @@ sub _ShowOverview {
     $Param{ObjectTypeSelectionStrg} = $LayoutObject->BuildSelection(
         Name          => 'ObjectType',
         Data          => {
-            Ticket         => 'Ticket',
-            ITSMConfigItem => 'ITSM ConfigItem',
+            Ticket     => 'Ticket',
+            ConfigItem => 'ITSM ConfigItem',
         },
         PossibleNone  => 0,
         Translation   => 0,
@@ -746,7 +746,7 @@ sub _ShowEdit {
 
 # RotherOSS / ITSMConfigurationManagement
 #     my $ACLKeysLevel1Match = $ConfigObject->Get('ACLKeysLevel1Match') || {};
-    my $ConfigPrefix       = $Param{ObjectType} eq 'ITSMConfigItem' ? $Param{ObjectType} : '';
+    my $ConfigPrefix       = $Param{ObjectType} eq 'ConfigItem' ? 'ITSMConfigItem' : '';
     my $ACLKeysLevel1Match = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Match') || {};
 # EO ITSMConfigurationManagement
     $Param{ACLKeysLevel1Match} = $LayoutObject->BuildSelection(

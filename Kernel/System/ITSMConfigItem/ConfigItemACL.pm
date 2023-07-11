@@ -31,12 +31,11 @@ Kernel::System::ITSMConfigItem::ConfigItemACL - config item ACL lib
 
 All config item ACL functions.
 
-
 =head2 ConfigItemAcl()
 
 Restricts the Data parameter sent to a subset of it, depending on a group of user defied rules
-called ACLs. The reduced subset can be access from ITSMConfigItemACLData() if ReturnType parameter is set
-to: ITSMConfigItem, or in ITSMConfigItemACLActionData(), if ReturnType Action is used.
+called ACLs. The reduced subset can be access from ConfigItemACLData() if ReturnType parameter is set
+to: ConfigItem, or in ConfigItemACLActionData(), if ReturnType Action is used.
 
 Each ACL can contain different restrictions for different objects the ReturnType parameter defines
 which object is considered for this restrictions, in the case of the Config Item object a second
@@ -48,7 +47,7 @@ The rest of the attributes define the matching options for the ACL rules.
 
 Example to restrict config item actions:
 
-    my $Success = $ITSMConfigItemObject->ConfigItemAcl(
+    my $Success = $ConfigItemObject->ConfigItemAcl(
         Data => {                            # Values to restrict
             1 => AgentITSMConfigItemEdit,
             # ...
@@ -71,13 +70,13 @@ Example to restrict config item actions:
 
 or to restrict config item states:
 
-    $Success = $ITSMConfigItemObject->ConfigItemAcl(
+    $Success = $ConfigItemObject->ConfigItemAcl(
         Data => {
             1 => 'new',
             2 => 'open',
             # ...
         },
-        ReturnType    => 'ITSMConfigItem',
+        ReturnType    => 'ConfigItem',
         ReturnSubType => 'State',
         UserID        => 123,
     );
@@ -91,7 +90,7 @@ during the call to C<ConfigItemAcl>. The configuration of a module looks like th
      $ConfigObject->{'ITSMConfigItem::Acl::Module'}->{'TheName'} = {
          Module => 'Kernel::System::ITSMConfigItem::Acl::TheAclModule',
          Checks => ['TBD'],
-         ReturnType => 'ITSMConfigItem',
+         ReturnType => 'ConfigItem',
          ReturnSubType => ['TBD'],
      };
 
@@ -101,7 +100,7 @@ is called on it, and then the C<Run> method is called.
 
 The C<Checks> array reference in the configuration controls what arguments are passed. to the
 C<Run> method.
-Valid keys are C<DynamicField>, C<Frontend>, C<Process>, C<State>, C<ITSMConfigItem> and C<Type>.
+Valid keys are C<Frontend> and C<ConfigItem>.
 If any of those are present, the C<Checks> argument passed to C<Run> contains an entry with the same
 name, and as a value the associated data.
 
@@ -187,7 +186,7 @@ sub ConfigItemAcl {
                 $CleanedUp =~ s/(?:ID|Name|Login)$//;
                 $CleanedUp =~ s/^(?:Next|New|Old)//;
                 $RequiredChecks{$CleanedUp} = 1;
-                if ( $Check eq 'ITSMConfigItem' ) {
+                if ( $Check eq 'ConfigItem' ) {
                     if ( ref( $ACL->{Properties}{$Check} ) eq 'HASH' ) {
                         for my $InnerCheck ( sort keys %{ $ACL->{$Source}{$Check} } ) {
                             $InnerCheck =~ s/(?:ID|Name|Login)$//;
@@ -308,10 +307,10 @@ sub ConfigItemAcl {
                 my $ITSMConfigItemParam = $1;
 
                 if (
-                    defined $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemParam}
-                    && $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemParam}
+                    defined $ChecksDatabase{ConfigItem}->{$ITSMConfigItemParam}
+                    && $ChecksDatabase{ConfigItem}->{$ITSMConfigItemParam}
                     && $Self->{ACLDebugFilters}->{$DebugFilter} ne
-                    $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemParam}
+                    $ChecksDatabase{ConfigItem}->{$ITSMConfigItemParam}
                     )
                 {
                     $Self->{ACLDebug} = 0;
@@ -405,7 +404,7 @@ sub ConfigItemAcl {
                                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                                         Priority => $Self->{ACLDebugLogPriority},
                                         Message  =>
-                                            "ITSMConfigItemACL '$Acl' $PropertiesHash:'$Key->$Data' MatchedARRAY ($Item eq $MatchedArrayDataItem)",
+                                            "ConfigItemACL '$Acl' $PropertiesHash:'$Key->$Data' MatchedARRAY ($Item eq $MatchedArrayDataItem)",
                                     );
                                 }
                             }
@@ -427,7 +426,7 @@ sub ConfigItemAcl {
                                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                                         Priority => $Self->{ACLDebugLogPriority},
                                         Message  =>
-                                            "ITSMConfigItemACL '$Acl' $PropertiesHash:'$Key->$Data' Matched ($Item eq $UsedChecks{$Key}->{$Data})",
+                                            "ConfigItemACL '$Acl' $PropertiesHash:'$Key->$Data' Matched ($Item eq $UsedChecks{$Key}->{$Data})",
                                     );
                                 }
                             }
@@ -490,7 +489,7 @@ sub ConfigItemAcl {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => $Self->{ACLDebugLogPriority},
                     Message  =>
-                        "ITSMConfigItemACL '$Acl' Matched for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                        "ConfigItemACL '$Acl' Matched for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                 );
             }
         }
@@ -527,12 +526,12 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with Possible:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with Possible:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Reset return data:'$Param{ReturnType}:$Param{ReturnSubType}''",
+                            "ConfigItemACL '$Acl' Reset return data:'$Param{ReturnType}:$Param{ReturnSubType}''",
                     );
                 }
 
@@ -551,7 +550,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' Possible param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' Possible param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -560,7 +559,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' Possible param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' Possible param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -585,7 +584,7 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with PossibleAdd:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with PossibleAdd:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                 }
 
@@ -604,7 +603,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -613,7 +612,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -638,7 +637,7 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with PossibleNot:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with PossibleNot:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                 }
 
@@ -660,7 +659,7 @@ sub ConfigItemAcl {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => $Self->{ACLDebugLogPriority},
                                 Message  =>
-                                    "ITSMConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' removed from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                    "ConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' removed from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                             );
                         }
                         if ( $NewTmpData{$ID} ) {
@@ -672,7 +671,7 @@ sub ConfigItemAcl {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => $Self->{ACLDebugLogPriority},
                                 Message  =>
-                                    "ITSMConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' leaved for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                    "ConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' leaved for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                             );
                         }
                     }
@@ -680,15 +679,15 @@ sub ConfigItemAcl {
             }
         }
 
-        elsif ( $Param{ReturnType} eq 'ITSMConfigItem' ) {
+        elsif ( $Param{ReturnType} eq 'ConfigItem' ) {
 
             # build new config item data hash
-            # Step ITSMConfigItem Possible (Resets White list)
+            # Step ConfigItem Possible (Resets White list)
             if (
                 ( %Checks || %ChecksDatabase )
                 && $Match
                 && $MatchTry
-                && $Step{Possible}->{ITSMConfigItem}->{ $Param{ReturnSubType} }
+                && $Step{Possible}->{ConfigItem}->{ $Param{ReturnSubType} }
                 )
             {
                 $UseNewParams = 1;
@@ -703,19 +702,19 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with Possible:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with Possible:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Reset return data:'$Param{ReturnType}:$Param{ReturnSubType}''",
+                            "ConfigItemACL '$Acl' Reset return data:'$Param{ReturnType}:$Param{ReturnSubType}''",
                     );
                 }
 
                 # possible list
                 for my $ID ( sort keys %Data ) {
 
-                    for my $New ( @{ $Step{Possible}->{ITSMConfigItem}->{ $Param{ReturnSubType} } } ) {
+                    for my $New ( @{ $Step{Possible}->{ConfigItem}->{ $Param{ReturnSubType} } } ) {
                         my $MatchResult = $Self->_CompareMatchWithData(
                             Match      => $New,
                             Data       => $Data{$ID},
@@ -727,7 +726,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' Possible param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' Possible param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -736,7 +735,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' Possible param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' Possible param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -744,12 +743,12 @@ sub ConfigItemAcl {
                 }
             }
 
-            # Step ITSMConfigItem PossibleAdd (Add new options to the white list)
+            # Step ConfigItem PossibleAdd (Add new options to the white list)
             if (
                 ( %Checks || %ChecksDatabase )
                 && $Match
                 && $MatchTry
-                && $Step{PossibleAdd}->{ITSMConfigItem}->{ $Param{ReturnSubType} }
+                && $Step{PossibleAdd}->{ConfigItem}->{ $Param{ReturnSubType} }
                 )
             {
                 $UseNewParams = 1;
@@ -759,14 +758,14 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with PossibleAdd:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with PossibleAdd:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                 }
 
                 # possible add list
                 for my $ID ( sort keys %Data ) {
 
-                    for my $New ( @{ $Step{PossibleAdd}->{ITSMConfigItem}->{ $Param{ReturnSubType} } } ) {
+                    for my $New ( @{ $Step{PossibleAdd}->{ConfigItem}->{ $Param{ReturnSubType} } } ) {
                         my $MatchResult = $Self->_CompareMatchWithData(
                             Match      => $New,
                             Data       => $Data{$ID},
@@ -778,7 +777,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' added to return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -787,7 +786,7 @@ sub ConfigItemAcl {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => $Self->{ACLDebugLogPriority},
                                     Message  =>
-                                        "ITSMConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                        "ConfigItemACL '$Acl' PossibleAdd param '$Data{$ID}' skipped from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                                 );
                             }
                         }
@@ -795,12 +794,12 @@ sub ConfigItemAcl {
                 }
             }
 
-            # Step ITSMConfigItem PossibleNot (removes options from white list)
+            # Step ConfigItem PossibleNot (removes options from white list)
             if (
                 ( %Checks || %ChecksDatabase )
                 && $Match
                 && $MatchTry
-                && $Step{PossibleNot}->{ITSMConfigItem}->{ $Param{ReturnSubType} }
+                && $Step{PossibleNot}->{ConfigItem}->{ $Param{ReturnSubType} }
                 )
             {
                 $UseNewParams = 1;
@@ -810,14 +809,14 @@ sub ConfigItemAcl {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => $Self->{ACLDebugLogPriority},
                         Message  =>
-                            "ITSMConfigItemACL '$Acl' Used with PossibleNot:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                            "ConfigItemACL '$Acl' Used with PossibleNot:'$Param{ReturnType}:$Param{ReturnSubType}'",
                     );
                 }
 
                 # not possible list
                 for my $ID ( sort keys %Data ) {
                     my $Match = 1;
-                    for my $New ( @{ $Step{PossibleNot}->{ITSMConfigItem}->{ $Param{ReturnSubType} } } ) {
+                    for my $New ( @{ $Step{PossibleNot}->{ConfigItem}->{ $Param{ReturnSubType} } } ) {
                         my $LoopMatchResult = $Self->_CompareMatchWithData(
                             Match      => $New,
                             Data       => $Data{$ID},
@@ -832,7 +831,7 @@ sub ConfigItemAcl {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => $Self->{ACLDebugLogPriority},
                                 Message  =>
-                                    "ITSMConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' removed from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                    "ConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' removed from return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                             );
                         }
                         if ( $NewTmpData{$ID} ) {
@@ -844,7 +843,7 @@ sub ConfigItemAcl {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => $Self->{ACLDebugLogPriority},
                                 Message  =>
-                                    "ITSMConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' leaved for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
+                                    "ConfigItemACL '$Acl' PossibleNot param '$Data{$ID}' leaved for return data:'$Param{ReturnType}:$Param{ReturnSubType}'",
                             );
                         }
                     }
@@ -880,7 +879,7 @@ sub ConfigItemAcl {
 
 return the current ACL data hash after ConfigItemAcl()
 
-    my %Acl = $ITSMConfigItemObject->ConfigItemAclData();
+    my %Acl = $ConfigItemObject->ConfigItemAclData();
 
 =cut
 
@@ -894,7 +893,7 @@ sub ConfigItemAclData {
 
 return the current ACL action data hash after ConfigItemAcl()
 
-    my %AclAction = $ITSMConfigItemObject->ConfigItemAclActionData();
+    my %AclAction = $ConfigItemObject->ConfigItemAclActionData();
 
 =cut
 
@@ -904,7 +903,7 @@ sub ConfigItemAclActionData {
     if ( $Self->{ConfigItemAclData} ) {
         return %{ $Self->{ConfigItemAclData} };
     }
-    return %{ $Self->{DefaultITSMConfigItemActionData} || {} };
+    return %{ $Self->{DefaultConfigItemActionData} || {} };
 }
 
 =begin Internal:
@@ -916,7 +915,7 @@ sub ConfigItemAclActionData {
 creates two check hashes (one for current data updatable via AJAX refreshes and another for
 static config item data stored in the DB) with the required data to use as a basis to match the ACLs
 
-    my $ChecskResult = $ITSMConfigItemObject->_GetChecks(
+    my $ChecskResult = $ConfigItemObject->_GetChecks(
         CheckAll => '1',                              # Optional
         RequiredChecks => $RequiredCheckHashRef,      # Optional a hash reference with the
                                                       #    attributes to gather:
@@ -924,7 +923,7 @@ static config item data stored in the DB) with the required data to use as a bas
                                                       #    information from the database, this data
                                                       #    will be tried to match with current ACLs
         Action        => 'AgentITSMConfigItemZoom',           # Optional
-        ITSMConfigItemID      => 123,                         # Optional
+        ConfigItemID      => 123,                         # Optional
         DynamicField  => {                            # Optional
             DynamicField_NameX => 123,
             DynamicField_NameZ => 'some value',
@@ -943,16 +942,16 @@ returns:
     $ChecksResult = {
         Checks => {
             # ...
-            ITSMConfigItem => {
-                ITSMConfigItemID => 123,
+            ConfigItem => {
+                ConfigItemID => 123,
                 # ...
             },
             # ...
         },
         ChecksDatabase =>
             # ...
-            ITSMConfigItem => {
-                ITSMConfigItemID => 123,
+            ConfigItem => {
+                ConfigItemID => 123,
                 # ...
             },
             # ...
@@ -989,18 +988,18 @@ sub _GetChecks {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # use config item data if config item id is given
-    # do that always, even if $RequiredChecks{ITSMConfigItem} is not that
+    # do that always, even if $RequiredChecks{ConfigItem} is not that
     # (because too much stuff depends on it)
-    if ( $Param{ITSMConfigItemID} ) {
-        my %ITSMConfigItem = $Self->ITSMConfigItemGet(
+    if ( $Param{ConfigItemID} ) {
+        my %ConfigItem = $Self->ConfigItemGet(
             %Param,
             DynamicFields => 1,
         );
-        $Checks{ITSMConfigItem} = \%ITSMConfigItem;
+        $Checks{ConfigItem} = \%ConfigItem;
 
         # keep database config item data separated since the reference is affected below
-        my %ITSMConfigItemDatabase = %ITSMConfigItem;
-        $ChecksDatabase{ITSMConfigItem} = \%ITSMConfigItemDatabase;
+        my %ConfigItemDatabase = %ConfigItem;
+        $ChecksDatabase{ConfigItem} = \%ConfigItemDatabase;
     }
 
     # check for dynamic fields
@@ -1009,7 +1008,7 @@ sub _GetChecks {
 
         # update or add dynamic fields information to the config item check
         for my $DynamicFieldName ( sort keys %{ $Param{DynamicField} } ) {
-            $Checks{ITSMConfigItem}->{$DynamicFieldName} = $Param{DynamicField}->{$DynamicFieldName};
+            $Checks{ConfigItem}->{$DynamicFieldName} = $Param{DynamicField}->{$DynamicFieldName};
         }
     }
 
@@ -1017,17 +1016,17 @@ sub _GetChecks {
     # different. this can be done because in the previous step config item info was updated. but maybe
     # config item has more information stored than in the DynamicField parameter.
     ITSMCONFIGITEMATTRIBUTE:
-    for my $ITSMConfigItemAttribute ( sort keys %{ $Checks{ITSMConfigItem} // {} } ) {
-        next ITSMCONFIGITEMATTRIBUTE if !$ITSMConfigItemAttribute;
+    for my $ConfigItemAttribute ( sort keys %{ $Checks{ConfigItem} // {} } ) {
+        next ITSMCONFIGITEMATTRIBUTE if !$ConfigItemAttribute;
 
         # check if is a dynamic field with data
-        next ITSMCONFIGITEMATTRIBUTE if $ITSMConfigItemAttribute !~ m{ \A DynamicField_ }smx;
-        next ITSMCONFIGITEMATTRIBUTE if !defined $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute};
-        next ITSMCONFIGITEMATTRIBUTE if !length $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute};
+        next ITSMCONFIGITEMATTRIBUTE if $ConfigItemAttribute !~ m{ \A DynamicField_ }smx;
+        next ITSMCONFIGITEMATTRIBUTE if !defined $Checks{ConfigItem}->{$ConfigItemAttribute};
+        next ITSMCONFIGITEMATTRIBUTE if !length $Checks{ConfigItem}->{$ConfigItemAttribute};
 
         if (
-            ref $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute} eq 'ARRAY'
-            && !IsArrayRefWithData( $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute} )
+            ref $Checks{ConfigItem}->{$ConfigItemAttribute} eq 'ARRAY'
+            && !IsArrayRefWithData( $Checks{ConfigItem}->{$ConfigItemAttribute} )
             )
         {
             next ITSMCONFIGITEMATTRIBUTE;
@@ -1035,38 +1034,38 @@ sub _GetChecks {
 
         # compare if data is different and skip on same data
         if (
-            $Checks{DynamicField}->{$ITSMConfigItemAttribute}
+            $Checks{DynamicField}->{$ConfigItemAttribute}
             && !DataIsDifferent(
-                Data1 => $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute},
-                Data2 => $Checks{DynamicField}->{$ITSMConfigItemAttribute},
+                Data1 => $Checks{ConfigItem}->{$ConfigItemAttribute},
+                Data2 => $Checks{DynamicField}->{$ConfigItemAttribute},
             )
             )
         {
             next ITSMCONFIGITEMATTRIBUTE;
         }
 
-        $Checks{DynamicField}->{$ITSMConfigItemAttribute} = $Checks{ITSMConfigItem}->{$ITSMConfigItemAttribute};
+        $Checks{DynamicField}->{$ConfigItemAttribute} = $Checks{ConfigItem}->{$ConfigItemAttribute};
     }
 
     # also copy the database information to the appropriate hash
     ITSMCONFIGITEMATTRIBUTE:
-    for my $ITSMConfigItemAttribute ( sort keys %{ $ChecksDatabase{ITSMConfigItem} } ) {
-        next ITSMCONFIGITEMATTRIBUTE if !$ITSMConfigItemAttribute;
+    for my $ConfigItemAttribute ( sort keys %{ $ChecksDatabase{ConfigItem} } ) {
+        next ITSMCONFIGITEMATTRIBUTE if !$ConfigItemAttribute;
 
         # check if is a dynamic field with data
-        next ITSMCONFIGITEMATTRIBUTE if $ITSMConfigItemAttribute !~ m{ \A DynamicField_ }smx;
-        next ITSMCONFIGITEMATTRIBUTE if !defined $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemAttribute};
-        next ITSMCONFIGITEMATTRIBUTE if !length $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemAttribute};
+        next ITSMCONFIGITEMATTRIBUTE if $ConfigItemAttribute !~ m{ \A DynamicField_ }smx;
+        next ITSMCONFIGITEMATTRIBUTE if !defined $ChecksDatabase{ConfigItem}->{$ConfigItemAttribute};
+        next ITSMCONFIGITEMATTRIBUTE if !length $ChecksDatabase{ConfigItem}->{$ConfigItemAttribute};
 
         if (
-            ref $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemAttribute} eq 'ARRAY'
-            && !IsArrayRefWithData( $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemAttribute} )
+            ref $ChecksDatabase{ConfigItem}->{$ConfigItemAttribute} eq 'ARRAY'
+            && !IsArrayRefWithData( $ChecksDatabase{ConfigItem}->{$ConfigItemAttribute} )
             )
         {
             next ITSMCONFIGITEMATTRIBUTE;
         }
 
-        $ChecksDatabase{DynamicField}->{$ITSMConfigItemAttribute} = $ChecksDatabase{ITSMConfigItem}->{$ITSMConfigItemAttribute};
+        $ChecksDatabase{DynamicField}->{$ConfigItemAttribute} = $ChecksDatabase{ConfigItem}->{$ConfigItemAttribute};
     }
 
     # use user data
@@ -1116,8 +1115,8 @@ sub _GetChecks {
             $Checks{Type} = \%Type;
 
             # update or add config item type information to the config item check
-            $Checks{ITSMConfigItem}->{Type}   = $Checks{Type}->{Name};
-            $Checks{ITSMConfigItem}->{TypeID} = $Checks{Type}->{ID};
+            $Checks{ConfigItem}->{Type}   = $Checks{Type}->{Name};
+            $Checks{ConfigItem}->{TypeID} = $Checks{Type}->{ID};
         }
         elsif ( $Param{Type} ) {
 
@@ -1144,16 +1143,16 @@ sub _GetChecks {
                 $Checks{Type} = \%Type;
 
                 # update or add config item type information to the config item check
-                $Checks{ITSMConfigItem}->{Type}   = $Checks{Type}->{Name};
-                $Checks{ITSMConfigItem}->{TypeID} = $Checks{Type}->{ID};
+                $Checks{ConfigItem}->{Type}   = $Checks{Type}->{Name};
+                $Checks{ConfigItem}->{TypeID} = $Checks{Type}->{ID};
             }
         }
         elsif ( !$Param{TypeID} && !$Param{Type} ) {
-            if ( IsPositiveInteger( $Checks{ITSMConfigItem}->{TypeID} ) ) {
+            if ( IsPositiveInteger( $Checks{ConfigItem}->{TypeID} ) ) {
 
                 # get type data from the config item
                 my %Type = $TypeObject->TypeGet(
-                    ID     => $Checks{ITSMConfigItem}->{TypeID},
+                    ID     => $Checks{ConfigItem}->{TypeID},
                     UserID => 1,
                 );
                 $Checks{Type} = \%Type;
@@ -1161,12 +1160,12 @@ sub _GetChecks {
         }
 
         # create hash with the config item information stored in the database
-        if ( IsPositiveInteger( $ChecksDatabase{ITSMConfigItem}->{TypeID} ) ) {
+        if ( IsPositiveInteger( $ChecksDatabase{ConfigItem}->{TypeID} ) ) {
 
             # check if database data matches current data (performance)
             if (
                 defined $Checks{Type}->{ID}
-                && $ChecksDatabase{ITSMConfigItem}->{TypeID} eq $Checks{Type}->{ID}
+                && $ChecksDatabase{ConfigItem}->{TypeID} eq $Checks{Type}->{ID}
                 )
             {
                 $ChecksDatabase{Type} = $Checks{Type};
@@ -1175,7 +1174,7 @@ sub _GetChecks {
             # otherwise complete the data querying the database again
             else {
                 my %Type = $TypeObject->TypeGet(
-                    ID     => $ChecksDatabase{ITSMConfigItem}->{TypeID},
+                    ID     => $ChecksDatabase{ConfigItem}->{TypeID},
                     UserID => 1,
                 );
                 $ChecksDatabase{Type} = \%Type;
@@ -1200,7 +1199,7 @@ Compares a properties element with the data sent to the ACL, the compare results
 ACL properties where defined including normal, negated, regular expression and negated regular
 expression comparisons.
 
-    my $Result = $ITSMConfigItemObject->_CompareMatchWithData(
+    my $Result = $ConfigItemObject->_CompareMatchWithData(
         Match => 'a value',         # or '[Not]a value', or '[RegExp]val' or '[NotRegExp]val'
                                     #    or '[Notregexp]val' or '[Notregexp]'
         Data => 'a value',

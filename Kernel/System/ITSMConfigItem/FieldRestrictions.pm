@@ -151,8 +151,8 @@ sub GetFieldStates {
     my $DFParam = $Param{GetParam}{DynamicField};
 
     # TODO: needed, because ConfigItemAcl tampers with the DynamicField reference, if ConfigItemID is given
-    for my $Key ( keys $Param{DynamicFields}->%* ) {
-        $Param{GetParam}{DynamicField}{$Key} //= $Param{GetParam}{DynamicField}{$Key};    # all keys have to exist
+    for my $Name ( keys $Param{DynamicFields}->%* ) {
+        $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name  } //= $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name };    # all keys have to exist
     }
 
     # transform dynamic field data into DFName => DFName pair
@@ -400,7 +400,7 @@ sub GetFieldStates {
 
                         # ...the changed element affects the current field
                         if (
-                            $Param{ACLPreselection}{Rules}{ITSMConfigItem}{$Element}
+                            $Param{ACLPreselection}{Rules}{ConfigItem}{$Element}
                             { 'DynamicField_' . $DynamicFieldConfig->{Name} }
                             )
                         {
@@ -660,9 +660,9 @@ sub SetACLPreselectionCache {
         # get controlling elements (ElementChanged later on)
         my %Controller;
         for my $PropertiesHash (qw(Properties PropertiesDatabase)) {
-            if ( $ACL->{$PropertiesHash}{ITSMConfigItem} ) {
+            if ( $ACL->{$PropertiesHash}{ConfigItem} ) {
                 NAME:
-                for my $Name ( sort keys %{ $ACL->{$PropertiesHash}{ITSMConfigItem} } ) {
+                for my $Name ( sort keys %{ $ACL->{$PropertiesHash}{ConfigItem} } ) {
                     if ( !$Fields{$Name} ) {
                         $Kernel::OM->Get('Kernel::System::Log')->Log(
                             Priority => 'info',
@@ -698,9 +698,9 @@ sub SetACLPreselectionCache {
         for my $Impact (qw(Possible PossibleAdd PossibleNot)) {
 
             # ConfigItem Rules
-            if ( $ACL->{$Impact}{ITSMConfigItem} ) {
+            if ( $ACL->{$Impact}{ConfigItem} ) {
                 AFFECTED:
-                for my $Affected ( sort keys %{ $ACL->{$Impact}{ITSMConfigItem} } ) {
+                for my $Affected ( sort keys %{ $ACL->{$Impact}{ConfigItem} } ) {
                     if ( !$Fields{$Affected} ) {
                         $Kernel::OM->Get('Kernel::System::Log')->Log(
                             Priority => 'info',
@@ -709,7 +709,7 @@ sub SetACLPreselectionCache {
                         next AFFECTED;
                     }
                     for my $ElementChanged ( sort keys %Controller ) {
-                        $PreselectionRules{ITSMConfigItem}{ $Fields{$ElementChanged} }{ $Fields{$Affected} } = 1;
+                        $PreselectionRules{ConfigItem}{ $Fields{$ElementChanged} }{ $Fields{$Affected} } = 1;
                     }
                 }
             }

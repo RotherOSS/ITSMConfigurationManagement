@@ -98,7 +98,7 @@ returns the id of the created ACL if success or undef otherwise
         ValidID        => 1,                    # mandatory
         UserID         => 123,                  # mandatory
 # RotherOSS / ITSMConfigurationManagement
-        ObjectType     => 'Ticket',             # optional (currently Ticket or ITSMConfigItem)
+        ObjectType     => 'Ticket',             # optional (currently Ticket or ConfigItem)
 # EO ITSMConfigurationManagement
     );
 
@@ -314,7 +314,7 @@ Returns:
         ConfigMatch    => $ConfigMatchHashRef,
         ConfigChange   => $ConfigChangeHashRef,
 # RotherOSS / ITSMConfigurationManagement
-        ObjectType     => ('Ticket'|'ITSMConfigItem')
+        ObjectType     => ('Ticket'|'ConfigItem')
 # EO ITSMConfigurationManagement
         ValidID        => 1,
         CreateTime     => '2012-07-04 15:08:00',
@@ -638,7 +638,7 @@ get an ACL list
         ValidIDs        => ['1','2'],           # optional, to filter ACLs that match listed valid IDs
         UserID          => 1,
 # RotherOSS / ITSMConfigurationManagement
-        ObjectTypes     => ['Ticket']           # optional, currently Ticket or ITSMConfigItem
+        ObjectTypes     => ['Ticket']           # optional, currently Ticket or ConfigItem
 # EO ITSMConfigurationManagement
     );
 
@@ -749,7 +749,7 @@ get an ACL list with all ACL details
         UserID   => 1,
         ValidIDs => ['1','2'], # optional, to filter ACLs that match listed valid IDs
 # RotherOSS / ITSMConfigurationManagement
-        ObjectType      => ['Ticket']           # optional, currently Ticket or ITSMConfigItem
+        ObjectType      => ['Ticket']           # optional, currently Ticket or ConfigItem
 # EO ITSMConfigurationManagement
     );
 
@@ -781,7 +781,7 @@ Returns:
             CreateTime    => '2012-07-04 15:08:00',
             ChangeTime    => '2012-07-04 15:08:00',
 # RotherOSS / ITSMConfigurationManagement
-            ObjectType    => 'ITSMConfigItem',
+            ObjectType    => 'ConfigItem',
 # EO ITSMConfigurationManagement
         },
     ];
@@ -1084,7 +1084,7 @@ sub Load {
     my ($File, $Self) = @_;
 
 END_PM_FILE
-    for my $ObjectType ( qw(Ticket ITSMConfigItem) ) {
+    for my $ObjectType ( qw(Ticket ConfigItem) ) {
         # get valid ACLs
         my $ACLList = $Self->ACLListGet(
             UserID      => 1,

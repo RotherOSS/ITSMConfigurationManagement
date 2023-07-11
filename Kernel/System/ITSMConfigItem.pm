@@ -272,8 +272,8 @@ sub ConfigItemGet {
 
     # check if result is already cached, considering the DynamicFields parameter
     my $CacheKey    = $Param{VersionID} ? 
-        join '::', 'ConfigItemGet::VersionID',    @Param{qw(VersionID DynamicFields) } :
-        join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields) };
+        join '::', 'ConfigItemGet::VersionID',    @Param{ qw(VersionID DynamicFields) } :
+        join '::', 'ConfigItemGet::ConfigItemID', @Param{ qw(ConfigItemID DynamicFields) };
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $Cache       = $CacheObject->Get(
@@ -302,7 +302,8 @@ sub ConfigItemGet {
 # TODO: implement version string
 #                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
                 . ' v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,'
-                . ' v.create_time, v.create_by, v.change_time, v.change_by'
+# TODO: add version change time?
+                . ' v.create_time, v.create_by, ci.change_time, ci.change_by'
                 . ' FROM configitem_version v INNER JOIN configitem ci'
                 . ' ON v.configitem_id = ci.id WHERE v.id = ?',
             Bind  => [ \$Param{VersionID} ],
