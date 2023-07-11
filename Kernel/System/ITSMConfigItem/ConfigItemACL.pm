@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::ITSMConfigItemACL;
+package Kernel::System::ITSMConfigItem::ConfigItemACL;
 
 use strict;
 use warnings;
@@ -25,7 +25,7 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::ITSMConfigItemACL - config item ACL lib
+Kernel::System::ITSMConfigItem::ConfigItemACL - config item ACL lib
 
 =head1 DESCRIPTION
 

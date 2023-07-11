@@ -23,7 +23,7 @@ use warnings;
 
 use Kernel::System::EventHandler;
 use Kernel::System::ITSMConfigItem::ConfigItemSearch;
-use Kernel::System::ITSMConfigItem::ITSMConfigItemACL;
+use Kernel::System::ITSMConfigItem::ConfigItemACL;
 use Kernel::System::ITSMConfigItem::Definition;
 use Kernel::System::ITSMConfigItem::History;
 use Kernel::System::ITSMConfigItem::Number;
@@ -84,7 +84,7 @@ sub new {
 
     @ISA = qw(
         Kernel::System::ITSMConfigItem::ConfigItemSearch
-        Kernel::System::ITSMConfigItem::ITSMConfigItemACL
+        Kernel::System::ITSMConfigItem::ConfigItemACL
         Kernel::System::ITSMConfigItem::Definition
         Kernel::System::ITSMConfigItem::History
         Kernel::System::ITSMConfigItem::Number
