@@ -401,9 +401,9 @@ sub DefinitionCheck {
         return;
     }
 
-=for never
+    # TODO: add real check, check valid keys etc.
 
-TODO: add real check, check valid keys etc.
+=for never
 
     # definition must be an array
     if ( ref $Definition ne 'ARRAY' ) {

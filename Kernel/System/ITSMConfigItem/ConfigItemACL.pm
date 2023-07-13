@@ -40,7 +40,7 @@ to: ConfigItem, or in ConfigItemACLActionData(), if ReturnType Action is used.
 Each ACL can contain different restrictions for different objects the ReturnType parameter defines
 which object is considered for this restrictions, in the case of the Config Item object a second
 parameter called ReturnSubtype is needed, to specify the config item attribute to be restricted, like:
-TBD, etc. While for the rest of the objects a "-" value must be set. The ReturnType
+C<"TBD">, etc. While for the rest of the objects a "-" value must be set. The ReturnType
 and ReturnSubType must be set according to the Data parameter sent.
 
 The rest of the attributes define the matching options for the ACL rules.
