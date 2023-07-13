@@ -401,71 +401,76 @@ sub DefinitionCheck {
         return;
     }
 
-# TODO: add real check, check valid keys etc.
+=for never
+
+TODO: add real check, check valid keys etc.
+
     # definition must be an array
-#    if ( ref $Definition ne 'ARRAY' ) {
-#        $Kernel::OM->Get('Kernel::System::Log')->Log(
-#            Priority => 'error',
-#            Message  => 'Invalid Definition! Definition is not an array reference.',
-#        );
-#        return;
-#    }
+    if ( ref $Definition ne 'ARRAY' ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Invalid Definition! Definition is not an array reference.',
+        );
+        return;
+    }
 
     # check each definition attribute
-#    for my $Attribute ( @{$Definition} ) {
-#
-#        # each definition attribute must be a hash reference with data
-#        if ( !$Attribute || ref $Attribute ne 'HASH' || !%{$Attribute} ) {
-#            $Kernel::OM->Get('Kernel::System::Log')->Log(
-#                Priority => 'error',
-#                Message  => 'Invalid Definition! At least one definition attribute is not a hash reference.',
-#            );
-#            return;
-#        }
-#
-#        # check if the key contains no spaces
-#        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ \s }xms ) {
-#            $Kernel::OM->Get('Kernel::System::Log')->Log(
-#                Priority => 'error',
-#                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain whitespace!",
-#            );
-#            return;
-#        }
-#
-#        # check if the key contains non-ascii characters
-#        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ ([^\x{00}-\x{7f}]) }xms ) {
-#
-#            $Kernel::OM->Get('Kernel::System::Log')->Log(
-#                Priority => 'error',
-#                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain non ASCII characters '$1'!",
-#            );
-#            return;
-#        }
-#
-#        # recursion check for Sub-Elements
-#        for my $Key ( sort keys %{$Attribute} ) {
-#
-#            my $Value = $Attribute->{$Key};
-#
-#            if ( $Key eq 'Sub' && ref $Value eq 'ARRAY' ) {
-#
-#                # check the sub array
-#                my $Check = $Self->DefinitionCheck(
-#                    Definition      => $Value,
-#                    CheckSubElement => 1,
-#                );
-#
-#                if ( !$Check ) {
-#                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-#                        Priority => 'error',
-#                        Message =>
-#                            "Invalid Sub-Definition of element with the key '$Attribute->{Key}'.",
-#                    );
-#                    return;
-#                }
-#            }
-#        }
-#    }
+    for my $Attribute ( @{$Definition} ) {
+
+        # each definition attribute must be a hash reference with data
+        if ( !$Attribute || ref $Attribute ne 'HASH' || !%{$Attribute} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Invalid Definition! At least one definition attribute is not a hash reference.',
+            );
+            return;
+        }
+
+        # check if the key contains no spaces
+        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ \s }xms ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain whitespace!",
+            );
+            return;
+        }
+
+        # check if the key contains non-ascii characters
+        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ ([^\x{00}-\x{7f}]) }xms ) {
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain non ASCII characters '$1'!",
+            );
+            return;
+        }
+
+        # recursion check for Sub-Elements
+        for my $Key ( sort keys %{$Attribute} ) {
+
+            my $Value = $Attribute->{$Key};
+
+            if ( $Key eq 'Sub' && ref $Value eq 'ARRAY' ) {
+
+                # check the sub array
+                my $Check = $Self->DefinitionCheck(
+                    Definition      => $Value,
+                    CheckSubElement => 1,
+                );
+
+                if ( !$Check ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message =>
+                            "Invalid Sub-Definition of element with the key '$Attribute->{Key}'.",
+                    );
+                    return;
+                }
+            }
+        }
+    }
+
+=cut
 
     return 1;
 }
