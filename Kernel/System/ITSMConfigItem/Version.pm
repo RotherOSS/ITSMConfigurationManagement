@@ -297,8 +297,8 @@ sub VersionList {
 
     # fetch the result
     my @VersionList;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        push @VersionList, $Row[0];
+    while ( my ($Id) = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+        push @VersionList, $Id;
     }
 
     return \@VersionList;
@@ -374,9 +374,9 @@ sub VersionNameGet {
 
     # fetch the result
     my %Version;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $Version{VersionID} = $Row[0];
-        $Version{Name}      = $Row[1];
+    while ( my ( $Id, $Name ) = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+        $Version{VersionID} = $Id;
+        $Version{Name}      = $Name;
     }
 
     # check version
@@ -446,8 +446,8 @@ sub VersionConfigItemIDGet {
 
     # fetch the result
     my $ConfigItemID;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $ConfigItemID = $Row[0];
+    while ( my ($Id) = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+        $ConfigItemID = $Id;
     }
 
     # cache the result
@@ -542,9 +542,9 @@ sub VersionAdd {
     # fetch the result
     my $VersionID;
     my $CreateTime;
-    while ( my @Row = $DBObject->FetchrowArray() ) {
-        $VersionID  = $Row[0];
-        $CreateTime = $Row[1];
+    while ( my ( $Id, $Time ) = $DBObject->FetchrowArray() ) {
+        $VersionID  = $Id;
+        $CreateTime = $Time;
     }
 
     # check version id
@@ -1141,8 +1141,8 @@ sub VersionSearch {
 
     # fetch the result
     my @ConfigItemList;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        push @ConfigItemList, $Row[0];
+    while ( my ($Id) = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+        push @ConfigItemList, $Id;
     }
 
     return \@ConfigItemList;
