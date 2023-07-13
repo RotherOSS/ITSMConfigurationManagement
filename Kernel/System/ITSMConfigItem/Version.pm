@@ -16,15 +16,19 @@
 
 package Kernel::System::ITSMConfigItem::Version;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
-use Kernel::System::VariableCheck qw(:all);
-
-use Storable;
+# core modules
 use List::Util qw(any);
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -34,7 +38,7 @@ Kernel::System::ITSMConfigItem::Version - sub module of Kernel::System::ITSMConf
 
 =head1 DESCRIPTION
 
-All version functions.
+All version functions for ITSMConfigItem objects.
 
 =head1 PUBLIC INTERFACE
 
@@ -75,15 +79,18 @@ sub VersionZoomList {
     # fetch the result
     my @VersionList;
     while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        my %Version;
-        $Version{VersionID}   = $Row[0];
-        $Version{Name}        = $Row[1];
-        $Version{DeplStateID} = $Row[2];
-        $Version{InciStateID} = $Row[3];
-        $Version{CreateTime}  = $Row[4];
-        $Version{CreateBy}    = $Row[5];
+        push @VersionList,
+            {
+                VersionID   => $Row[0],
+                Name        => $Row[1],
+                DeplStateID => $Row[2],
+                InciStateID => $Row[3],
+                CreateTime  => $Row[4],
+                CreateBy    => $Row[5],
+                ChangeTime  => $Row[6],
+                ChangeBy    => $Row[7],
+            };
 
-        push @VersionList, \%Version;
     }
 
     for my $Version (@VersionList) {
@@ -305,7 +312,7 @@ returns the name of a version of a config item.
         VersionID => 123,
     );
 
-    or
+or
 
     my $VersionName = $ConfigItemObject->VersionNameGet(
         ConfigItemID => 123,
@@ -521,9 +528,10 @@ sub VersionAdd {
         ],
     );
 
-    return if !$Success;
+    return unless $Success;
 
     # get id of new version
+    # TODO: what about concurrent inserts ?
     $DBObject->Prepare(
         SQL => 'SELECT id, create_time FROM configitem_version WHERE '
             . 'configitem_id = ? ORDER BY id DESC',
@@ -555,7 +563,7 @@ sub VersionAdd {
         Bind => [ \$VersionID, \$CreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
     );
 
-    return if !$Success;
+    return unless $Success;
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -679,7 +687,7 @@ sub VersionUpdate {
             ],
         );
 
-        return if !$Success;
+        return unless $Success;
     }
 
     my $Definition = $Self->DefinitionGet(
@@ -751,12 +759,14 @@ delete an existing version or versions
         UserID    => 1,
     );
 
-    or
+or
 
     my $True = $ConfigItemObject->VersionDelete(
         ConfigItemID => 321,
         UserID       => 1,
     );
+
+or
 
     my $True = $ConfigItemObject->VersionDelete(
         VersionIDs => [ 1, 2, 3, 4 ],
@@ -830,7 +840,7 @@ sub VersionDelete {
 
         # delete version
         $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-            SQL  => "DELETE FROM configitem_version WHERE id = ?",
+            SQL  => 'DELETE FROM configitem_version WHERE id = ?',
             Bind => [ \$VersionID ],
         );
 

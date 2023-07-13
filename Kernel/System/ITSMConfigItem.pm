@@ -16,8 +16,11 @@
 
 package Kernel::System::ITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
 use parent qw(
     Kernel::System::ITSMConfigItem::ConfigItemSearch
@@ -30,8 +33,6 @@ use parent qw(
     Kernel::System::ITSMConfigItem::XML
     Kernel::System::EventHandler
 );
-
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
 
 # core modules
 use Storable;
