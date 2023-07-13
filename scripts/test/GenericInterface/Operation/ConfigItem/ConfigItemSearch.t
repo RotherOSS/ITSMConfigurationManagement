@@ -1319,4 +1319,4 @@ for my $ConfigItemID ( sort @AddedConfigItemIDs ) {
     );
 }
 
-1;
+$Self->DoneTesting;

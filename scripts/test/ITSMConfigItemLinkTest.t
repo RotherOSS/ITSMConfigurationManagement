@@ -863,4 +863,4 @@ for my $CIID (@CIIDs) {
 
 # cleanup is done by RestoreDatabase
 
-1;
+$Self->DoneTesting;

@@ -840,4 +840,4 @@ for my $ConfigItemID ( sort keys %AddedConfigItems ) {
     );
 }
 
-1;
+$Self->DoneTesting;

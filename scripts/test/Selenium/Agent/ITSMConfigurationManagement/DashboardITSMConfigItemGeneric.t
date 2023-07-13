@@ -345,4 +345,4 @@ EOF
     }
 );
 
-1;
+$Self->DoneTesting;

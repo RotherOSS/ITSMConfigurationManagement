@@ -1364,4 +1364,4 @@ $Self->True(
     "Deleted Webservice $WebserviceID",
 );
 
-1;
+$Self->DoneTesting;

@@ -32,4 +32,4 @@ $Self->Is(
     "Admin::ITSM::IncidentState::Recalculate exit code",
 );
 
-1;
+$Self->DoneTesting;

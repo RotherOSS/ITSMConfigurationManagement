@@ -3600,4 +3600,4 @@ for my $ConfigItemID (@ConfigItemIDs) {
 
 # cleanup is done by RestoreDatabase
 
-1;
+$Self->DoneTesting;

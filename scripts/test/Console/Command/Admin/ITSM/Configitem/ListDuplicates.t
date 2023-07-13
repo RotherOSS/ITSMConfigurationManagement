@@ -185,4 +185,4 @@ $Self->Is(
 
 # cleanup is done by RestoreDatabse
 
-1;
+$Self->DoneTesting;

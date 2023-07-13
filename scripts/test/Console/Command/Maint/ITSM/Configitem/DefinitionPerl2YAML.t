@@ -154,4 +154,4 @@ $Self->IsDeeply(
     "Definition before run (YAML)",
 );
 
-1;
+$Self->DoneTesting;

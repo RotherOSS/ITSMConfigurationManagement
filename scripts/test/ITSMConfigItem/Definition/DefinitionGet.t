@@ -140,4 +140,4 @@ for my $Test (@Tests) {
     );
 }
 
-1;
+$Self->DoneTesting;

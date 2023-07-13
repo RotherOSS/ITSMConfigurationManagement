@@ -195,4 +195,4 @@ $Selenium->RunTest(
     }
 );
 
-1;
+$Self->DoneTesting;

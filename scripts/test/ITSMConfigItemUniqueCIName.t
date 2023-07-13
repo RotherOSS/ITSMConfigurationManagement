@@ -340,4 +340,4 @@ $ConfigObject->Set(
 
 # cleanup is done by RestoreDatabase
 
-1;
+$Self->DoneTesting;
