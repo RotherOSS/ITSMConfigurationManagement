@@ -19,22 +19,29 @@ package Kernel::System::ITSMConfigItem;
 use strict;
 use warnings;
 
+use parent qw(
+    Kernel::System::ITSMConfigItem::ConfigItemSearch
+    Kernel::System::ITSMConfigItem::ConfigItemACL
+    Kernel::System::ITSMConfigItem::Definition
+    Kernel::System::ITSMConfigItem::History
+    Kernel::System::ITSMConfigItem::Number
+    Kernel::System::ITSMConfigItem::Permission
+    Kernel::System::ITSMConfigItem::Version
+    Kernel::System::ITSMConfigItem::XML
+    Kernel::System::EventHandler
+);
+
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
 
-use Kernel::System::EventHandler;
-use Kernel::System::ITSMConfigItem::ConfigItemSearch;
-use Kernel::System::ITSMConfigItem::ConfigItemACL;
-use Kernel::System::ITSMConfigItem::Definition;
-use Kernel::System::ITSMConfigItem::History;
-use Kernel::System::ITSMConfigItem::Number;
-use Kernel::System::ITSMConfigItem::Permission;
-use Kernel::System::ITSMConfigItem::Version;
-use Kernel::System::ITSMConfigItem::XML;
-use Kernel::System::VariableCheck qw(:all);
-
+# core modules
 use Storable;
 
-our $Self;
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
+
+our $Self;    # TODO: what is the package variable used for ???
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -81,18 +88,6 @@ sub new {
 
     $Self->{CacheType} = 'ITSMConfigurationManagement';
     $Self->{CacheTTL}  = 60 * 60 * 24 * 20;
-
-    @ISA = qw(
-        Kernel::System::ITSMConfigItem::ConfigItemSearch
-        Kernel::System::ITSMConfigItem::ConfigItemACL
-        Kernel::System::ITSMConfigItem::Definition
-        Kernel::System::ITSMConfigItem::History
-        Kernel::System::ITSMConfigItem::Number
-        Kernel::System::ITSMConfigItem::Permission
-        Kernel::System::ITSMConfigItem::Version
-        Kernel::System::ITSMConfigItem::XML
-        Kernel::System::EventHandler
-    );
 
     # init of event handler
     $Self->EventHandlerInit(
