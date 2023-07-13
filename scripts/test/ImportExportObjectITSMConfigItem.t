@@ -18,7 +18,7 @@ use strict;
 use warnings;
 use utf8;
 
-use vars qw($Self);
+our $Self;
 
 # run this test only if the ImportExport package is installed
 {

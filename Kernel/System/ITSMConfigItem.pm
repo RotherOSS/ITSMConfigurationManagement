@@ -34,7 +34,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 use Storable;
 
-use vars qw(@ISA);
+our $Self;
 
 our @ObjectDependencies = (
     'Kernel::Config',

@@ -18,7 +18,7 @@ use strict;
 use warnings;
 use utf8;
 
-use vars (qw($Self));
+our $Self;
 
 use Kernel::Language qw(Translatable);
 

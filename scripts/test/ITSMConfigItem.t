@@ -21,7 +21,7 @@ use warnings;
 
 use utf8;
 
-use vars qw($Self);
+our $Self;
 
 # get needed objects
 my $DBObject             = $Kernel::OM->Get('Kernel::System::DB');
