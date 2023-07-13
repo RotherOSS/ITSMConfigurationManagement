@@ -127,11 +127,12 @@
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItemVersion.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Definition.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/FieldRestrictions.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/History.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Mask.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Number.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Number/AutoIncrement.pm" />
