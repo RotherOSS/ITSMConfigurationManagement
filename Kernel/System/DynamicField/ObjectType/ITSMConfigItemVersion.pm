@@ -31,11 +31,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::ObjectType::ITSMConfigItem
+Kernel::System::DynamicField::ObjectType::ITSMConfigItemVersion - version of a ITSMConfigItem as an object type
 
 =head1 DESCRIPTION
 
-ITSMChange object handler for DynamicFields
+Attach dynamic fields to a specific version of an ITSMConfigItem.
 
 =head1 PUBLIC INTERFACE
 
@@ -50,10 +50,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 PostValueSet()
@@ -170,7 +167,7 @@ sub ObjectDataGet {
         Param => 'VersionID',
     );
 
-    return if !$VersionID;
+    return unless $VersionID;
 
     my %Version = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Version')->VersionGet(
         VersionID => $VersionID,

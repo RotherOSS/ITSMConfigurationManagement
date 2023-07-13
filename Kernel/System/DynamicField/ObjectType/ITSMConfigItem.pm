@@ -30,11 +30,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::ObjectType::ITSMConfigItem
+Kernel::System::DynamicField::ObjectType::ITSMConfigItem - ITSMConfigItem as an object type
 
 =head1 DESCRIPTION
 
-ITSMChange object handler for DynamicFields
+Attach dynamic fields to an ITSMConfigItem.
 
 =head1 PUBLIC INTERFACE
 
@@ -49,10 +49,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 PostValueSet()
@@ -169,7 +166,7 @@ sub ObjectDataGet {
         Param => 'ConfigItemID',
     );
 
-    return if !$ConfigItemID;
+    return unless $ConfigItemID;
 
     my %ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
         ConfigItemID => $ConfigItemID,
