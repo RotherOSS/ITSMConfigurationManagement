@@ -71,8 +71,12 @@ sub VersionZoomList {
 
     # get version zoom list
     $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id, name, depl_state_id, inci_state_id, create_time, create_by '
-            . 'FROM configitem_version WHERE configitem_id = ? ORDER BY id',
+        SQL => <<'END_SQL',
+SELECT id, name, depl_state_id, inci_state_id, create_time, create_by, change_time, change_by
+  FROM configitem_version
+  WHERE configitem_id = ?
+  ORDER BY id
+END_SQL
         Bind => [ \$Param{ConfigItemID} ],
     );
 
@@ -149,86 +153,95 @@ then followed by the version data as hash reference.
 
 Returns:
 
-$VersionListRef = {
+    $VersionListRef = {
 
-    # ConfigItemID
-    1 => {
+        # ConfigItemID
+        1 => {
 
-        # VersionID
-        100 => {
-            VersionID    => 100,
-            ConfigItemID => 1,
-            Name         => 'ConfigItem1',
-            DefinitionID => 5,
-            DeplStateID  => 3,
-            InciStateID  => 2,
-            CreateTime   => '2016-03-22 17:58:00',
-            CreateBy     => 1,
+            # VersionID
+            100 => {
+                VersionID    => 100,
+                ConfigItemID => 1,
+                Name         => 'ConfigItem1',
+                DefinitionID => 5,
+                DeplStateID  => 3,
+                InciStateID  => 2,
+                CreateTime   => '2016-03-22 17:58:00',
+                CreateBy     => 1,
+            },
+
+            # VersionID
+            101 => {
+                VersionID    => 101,
+                ConfigItemID => 1,
+                Name         => 'ConfigItem2',
+                DefinitionID => 5,
+                DeplStateID  => 3,
+                InciStateID  => 2,
+                CreateTime   => '2016-03-22 17:58:00',
+                CreateBy     => 1,
+            },
         },
 
-        # VersionID
-        101 => {
-            VersionID    => 101,
-            ConfigItemID => 1,
-            Name         => 'ConfigItem2',
-            DefinitionID => 5,
-            DeplStateID  => 3,
-            InciStateID  => 2,
-            CreateTime   => '2016-03-22 17:58:00',
-            CreateBy     => 1,
-        },
-    },
+        # ConfigItemID
+        2 => {
 
-    # ConfigItemID
-    2 => {
+            # VersionID
+            150 => {
+                VersionID    => 150,
+                ConfigItemID => 2,
+                Name         => 'ConfigItem1',
+                DefinitionID => 5,
+                DeplStateID  => 3,
+                InciStateID  => 2,
+                CreateTime   => '2016-03-22 17:58:00',
+                CreateBy     => 1,
+            },
 
-        # VersionID
-        150 => {
-            VersionID    => 150,
-            ConfigItemID => 2,
-            Name         => 'ConfigItem1',
-            DefinitionID => 5,
-            DeplStateID  => 3,
-            InciStateID  => 2,
-            CreateTime   => '2016-03-22 17:58:00',
-            CreateBy     => 1,
+            # VersionID
+            151 => {
+                VersionID    => 151,
+                ConfigItemID => 2,
+                Name         => 'ConfigItem1',
+                DefinitionID => 5,
+                DeplStateID  => 3,
+                InciStateID  => 2,
+                CreateTime   => '2016-03-22 17:58:00',
+                CreateBy     => 1,
+            },
         },
-
-        # VersionID
-        151 => {
-            VersionID    => 151,
-            ConfigItemID => 2,
-            Name         => 'ConfigItem1',
-            DefinitionID => 5,
-            DeplStateID  => 3,
-            InciStateID  => 2,
-            CreateTime   => '2016-03-22 17:58:00',
-            CreateBy     => 1,
-        },
-    },
-};
+    };
 
 =cut
 
 sub VersionListAll {
     my ( $Self, %Param ) = @_;
 
-    # build sql
-    my $SQL = 'SELECT id, configitem_id, name, definition_id,
-        depl_state_id, inci_state_id, create_time, create_by
-        FROM configitem_version WHERE 1=1';
+    # collect the conditions for the WHERE clause
+    my @Conditions;
+    my @BindParameter;
 
     # if we got ConfigItemIDs make sure we just have numeric ids,
     # extract those and use it for the query
     if ( IsArrayRefWithData( $Param{ConfigItemIDs} ) ) {
-        my @ConfigItemIDs = grep { $_ =~ /^\d+$/ } @{ $Param{ConfigItemIDs} };
-        $SQL .= ' AND configitem_id IN (' . join ', ', @ConfigItemIDs . ')';
+        my @ConfigItemIDs = grep { $_ =~ m/^\d+$/ } @{ $Param{ConfigItemIDs} };
+        push @Conditions, 'configitem_id IN (' . join ', ', @ConfigItemIDs . ')';
     }
 
-    my @BindParameter;
-    if ( $Param{OlderDate} && $Param{OlderDate} =~ /^\d{4}\-\d{2}\-\d{2}\ \d{2}\:\d{2}:\d{2}$/ ) {
-        $SQL .= ' AND create_time < ?';
+    if ( $Param{OlderDate} && $Param{OlderDate} =~ m/^\d{4}\-\d{2}\-\d{2}\ \d{2}\:\d{2}:\d{2}$/ ) {
+        push @Conditions,    'create_time < ?';
         push @BindParameter, \$Param{OlderDate};
+    }
+
+    # build sql
+    my $SQL = <<'END_SQL';
+SELECT id, configitem_id, name, definition_id, depl_state_id, inci_state_id,
+    create_time, create_by, change_time, change_by
+  FROM configitem_version
+END_SQL
+
+    if (@Conditions) {
+        $SQL .= 'WHERE ' . join ' AND ', @Conditions;
     }
 
     # set limit
@@ -261,6 +274,8 @@ sub VersionListAll {
             InciStateID  => $Row[5] || '',
             CreateTime   => $Row[6] || '',
             CreateBy     => $Row[7] || '',
+            ChangeTime   => $Row[8] || '',
+            ChangeBy     => $Row[9] || '',
         };
     }
 
@@ -514,16 +529,23 @@ sub VersionAdd {
 
     # insert new version
     my $Success = $DBObject->Do(
-        SQL => 'INSERT INTO configitem_version '
-            . '(configitem_id, name, definition_id, '
-            . 'depl_state_id, inci_state_id, create_time, create_by) VALUES '
-            . '(?, ?, ?, ?, ?, current_timestamp, ?)',
+        SQL => <<'END_SQL',
+INSERT INTO configitem_version (
+    configitem_id, name, definition_id, depl_state_id, inci_state_id,
+    create_time, create_by, change_time, change_by
+)
+VALUES (
+    ?, ?, ?, ?, ?,
+   current_timestamp, ?, current_timestamp, ?
+)
+END_SQL
         Bind => [
             \$Version{ConfigItemID},
             \$Version{Name},
             \$Definition->{DefinitionID},
             \$Version{DeplStateID},
             \$Version{InciStateID},
+            \$Param{UserID},
             \$Param{UserID},
         ],
     );
@@ -676,13 +698,17 @@ sub VersionUpdate {
         # TODO: maybe include change_time change_by
         # insert new version
         my $Success = $DBObject->Do(
-            SQL => 'UPDATE configitem_version SET name = ?, definition_id = ?, '
-                . 'depl_state_id = ?, inci_state_id = ? WHERE id = ?',
+            SQL => <<'END_SQL',
+UPDATE configitem_version
+  SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, change_time = current_timestamp, change_by = ?
+  WHERE id = ?
+END_SQL
             Bind => [
                 \$Param{Name},
                 \$Param{DefinitionID},
                 \$Param{DeplStateID},
                 \$Param{InciStateID},
+                \$Param{UserID},
                 \$Version->{VersionID},
             ],
         );
