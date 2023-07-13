@@ -21,6 +21,12 @@ use warnings;
 
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
 
+# core modules
+
+# CPAN modules
+use Capture::Tiny qw(capture);
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::Output::Template::Provider;
 
@@ -1367,8 +1373,8 @@ sub _MigrateDTLInSysConfig {
     NAME:
     for my $Name (
         qw(
-        ITSMConfigItem::Frontend::MenuModule
-        ITSMConfigItem::Frontend::PreMenuModule
+            ITSMConfigItem::Frontend::MenuModule
+            ITSMConfigItem::Frontend::PreMenuModule
         )
         )
     {
@@ -1521,15 +1527,11 @@ sub _ConvertPerlDefinitions2YAML {
 
     my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
 
-    my ( $Result, $ExitCode );
+    my ( $Result, undef, $ExitCode ) = capture {
+        return $CommandObject->Execute();
+    };
 
-    {
-        local *STDOUT;
-        open STDOUT, '>:utf8', \$Result;    ## no critic qw(InputOutput::RequireEncodingWithUTF8Layer)
-        $ExitCode = $CommandObject->Execute();
-    }
-
-    return 1 if !$ExitCode;
+    return 1 unless $ExitCode;
 
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'error',

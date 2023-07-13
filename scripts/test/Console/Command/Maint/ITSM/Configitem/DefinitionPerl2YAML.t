@@ -20,6 +20,12 @@ use utf8;
 
 our $Self;
 
+# core modules
+
+# CPAN modules
+use Capture::Tiny qw(capture);
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 
 $Kernel::OM->ObjectParamAdd(
@@ -124,13 +130,9 @@ $Self->IsDeeply(
 
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
 
-my ( $Result, $ExitCode );
-
-{
-    local *STDOUT;
-    open STDOUT, '>:utf8', \$Result;    ## no critic qw(InputOutput::RequireEncodingWithUTF8Layer)
-    $ExitCode = $CommandObject->Execute();
-}
+my ( $Result, undef, $ExitCode ) = capture {
+    return $CommandObject->Execute;
+};
 
 $Self->Is(
     $ExitCode,
