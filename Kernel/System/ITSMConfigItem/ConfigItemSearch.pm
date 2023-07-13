@@ -242,6 +242,7 @@ sub ConfigItemSearch {
 
     # create sql
     my $SQLSelect;
+
     # TODO: add version search
     if ( $Result eq 'COUNT' ) {
         $SQLSelect = 'SELECT COUNT(DISTINCT(ci.id))';
@@ -277,13 +278,15 @@ sub ConfigItemSearch {
     if ( $Param{Classes} ) {
 
         # get class list
-        my %ClassLookup = reverse %{ $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        ) // {} };
+        my %ClassLookup = reverse %{
+            $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::ConfigItem::Class',
+            ) // {}
+        };
 
         for my $Class ( @{ $Param{Classes} } ) {
 
-            if ( !$ClassLookup{ $Class } ) {
+            if ( !$ClassLookup{$Class} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "No ID for $Class found!",
@@ -292,7 +295,7 @@ sub ConfigItemSearch {
                 return;
             }
 
-            push @{ $Param{ClassIDs} }, $ClassLookup{ $Class };
+            push @{ $Param{ClassIDs} }, $ClassLookup{$Class};
         }
     }
 
@@ -308,7 +311,7 @@ sub ConfigItemSearch {
 
         my @AllowedClassIDs;
 
-        for my $ClassID ( @ClassIDs ) {
+        for my $ClassID (@ClassIDs) {
             my $HasAccess = $Self->Permission(
                 Scope   => 'Class',
                 ClassID => $ClassID,
@@ -316,14 +319,14 @@ sub ConfigItemSearch {
                 Type    => $Param{Permission} // 'ro',
             );
 
-            if ( $HasAccess ) {
+            if ($HasAccess) {
                 push @AllowedClassIDs, $ClassID;
-            }            
+            }
         }
 
         return if !@AllowedClassIDs;
 
-        $Param{ClassIDs} = \@AllowedClassIDs;;
+        $Param{ClassIDs} = \@AllowedClassIDs;
     }
 
     # class ids
@@ -341,13 +344,15 @@ sub ConfigItemSearch {
     if ( $Param{DeplStates} ) {
 
         # get class list
-        my %DeplStateLookup = reverse %{ $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::DeploymentState',
-        ) // {} };
+        my %DeplStateLookup = reverse %{
+            $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::ConfigItem::DeploymentState',
+            ) // {}
+        };
 
         for my $DeplState ( @{ $Param{DeplStates} } ) {
 
-            if ( !$DeplStateLookup{ $DeplState } ) {
+            if ( !$DeplStateLookup{$DeplState} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "No ID for $DeplState found!",
@@ -356,7 +361,7 @@ sub ConfigItemSearch {
                 return;
             }
 
-            push @{ $Param{DeplStateIDs} }, $DeplStateLookup{ $DeplState };
+            push @{ $Param{DeplStateIDs} }, $DeplStateLookup{$DeplState};
         }
     }
 
@@ -375,13 +380,15 @@ sub ConfigItemSearch {
     if ( $Param{InciStates} ) {
 
         # get class list
-        my %InciStateLookup = reverse %{ $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::Core::IncidentState',
-        ) // {} };
+        my %InciStateLookup = reverse %{
+            $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::Core::IncidentState',
+            ) // {}
+        };
 
         for my $InciState ( @{ $Param{InciStates} } ) {
 
-            if ( !$InciStateLookup{ $InciState } ) {
+            if ( !$InciStateLookup{$InciState} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "No ID for $InciState found!",
@@ -390,7 +397,7 @@ sub ConfigItemSearch {
                 return;
             }
 
-            push @{ $Param{InciStateIDs} }, $InciStateLookup{ $InciState };
+            push @{ $Param{InciStateIDs} }, $InciStateLookup{$InciState};
         }
     }
 
@@ -407,8 +414,8 @@ sub ConfigItemSearch {
 
     # other config item stuff
     my %FieldSQLMap = (
-        ConfigItemNumber     => 'ci.configitem_number',
-        Name                 => 'v.name',
+        ConfigItemNumber => 'ci.configitem_number',
+        Name             => 'v.name',
     );
 
     ATTRIBUTE:
@@ -593,7 +600,7 @@ sub ConfigItemSearch {
 
     # get config items created older/newer than x minutes
     my %ConfigItemTime = (
-        ConfigItemCreateTime             => 'ci.create_time',
+        ConfigItemCreateTime => 'ci.create_time',
     );
     for my $Key ( sort keys %ConfigItemTime ) {
 
@@ -833,7 +840,7 @@ sub ConfigItemSearch {
                     );
 
                     return;
-                } 
+                }
 
                 # If the table was already joined for searching, we reuse it.
                 if ( !$DynamicFieldJoinTables{$DynamicFieldName} ) {
@@ -978,8 +985,8 @@ sub ConfigItemSearch {
 sub _VersionSearchIndexSQLJoinNeeded {
     my ( $Self, %Param ) = @_;
 
-    for my $Attribute ( qw/Name DeplStates InciStates DeplStateIDs InciStateIDs/ ) {
-        return 1 if $Param{SearchParams}{ $Attribute };
+    for my $Attribute (qw/Name DeplStates InciStates DeplStateIDs InciStateIDs/) {
+        return 1 if $Param{SearchParams}{$Attribute};
     }
 
     for my $Key ( keys $Param{SearchParams}->%* ) {

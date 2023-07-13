@@ -153,7 +153,7 @@ sub GetFieldStates {
 
     # TODO: needed, because ConfigItemAcl tampers with the DynamicField reference, if ConfigItemID is given
     for my $Name ( keys $Param{DynamicFields}->%* ) {
-        $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name  } //= $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name };    # all keys have to exist
+        $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name } //= $Param{GetParam}{DynamicField}{ 'DynamicField_' . $Name };    # all keys have to exist
     }
 
     # transform dynamic field data into DFName => DFName pair
@@ -170,6 +170,7 @@ sub GetFieldStates {
         # check whether form-ACLs are affected by any of the changed elements
         ELEMENT:
         for my $Element ( sort keys %{ $Param{ChangedElements} } ) {
+
             # autovivification could be avoided
             if ( $Param{ACLPreselection}{Rules}{Form}{$Element} ) {
                 $VisCheck = 1;
@@ -191,12 +192,12 @@ sub GetFieldStates {
         # call config item ACLs for DynamicFields to check field visibility
         my $ACLResult = $Param{ConfigItemObject}->ConfigItemAcl(
             %{ $Param{GetParam} },
-            ConfigItemID   => $Param{ConfigItemID},
-            Action         => $Param{Action},
-            UserID         => $Param{UserID},
-            ReturnType     => 'Form',
-            ReturnSubType  => '-',
-            Data           => \%DynamicFieldAcl,
+            ConfigItemID  => $Param{ConfigItemID},
+            Action        => $Param{Action},
+            UserID        => $Param{UserID},
+            ReturnType    => 'Form',
+            ReturnSubType => '-',
+            Data          => \%DynamicFieldAcl,
         );
 
         if ($ACLResult) {
@@ -233,14 +234,15 @@ sub GetFieldStates {
                 DynamicFieldConfig => $DynamicFieldConfig,
                 Behavior           => 'IsScriptField',
             )
-        ) {
+            )
+        {
             my %GetParam = $Param{GetParam}->%*;
 
             # the required args have to be present
             for my $Required ( @{ $DynamicFieldConfig->{Config}{RequiredArgs} // [] } ) {
-                my $Value = $GetParam{DynamicField}{ $Required } // $GetParam{ $Required };
+                my $Value = $GetParam{DynamicField}{$Required} // $GetParam{$Required};
 
-                next DYNAMICFIELD if !$Value || ( ref $Value && !IsArrayRefWithData( $Value ) );
+                next DYNAMICFIELD if !$Value || ( ref $Value && !IsArrayRefWithData($Value) );
             }
 
             my %ChangedElements = map { $_ => 1 } keys $Param{ChangedElements}->%*;
@@ -251,7 +253,7 @@ sub GetFieldStates {
 
             # if specific AJAX triggers are defined only update on changes to them...
             if ( IsArrayRefWithData( $DynamicFieldConfig->{Config}{AJAXTriggers} ) ) {
-                next DYNAMICFIELD if !any { $ChangedElements{ $_ } } $DynamicFieldConfig->{Config}{AJAXTriggers}->@*;
+                next DYNAMICFIELD if !any { $ChangedElements{$_} } $DynamicFieldConfig->{Config}{AJAXTriggers}->@*;
             }
 
             # ...if not, only check in the first run
@@ -259,14 +261,13 @@ sub GetFieldStates {
                 next DYNAMICFIELD;
             }
 
-
             next DYNAMICFIELD if IsArrayRefWithData( $DynamicFieldConfig->{Config}{AJAXTriggers} )
                 && !$Param{InitialRun}
-                && !any { $ChangedElements{ $_ } } $DynamicFieldConfig->{Config}{AJAXTriggers}->@*;
+                && !any { $ChangedElements{$_} } $DynamicFieldConfig->{Config}{AJAXTriggers}->@*;
 
             my $NewValue = $Param{DynamicFieldBackendObject}->Evaluate(
                 DynamicFieldConfig => $DynamicFieldConfig,
-                Object => {
+                Object             => {
                     ConfigItemID => $Param{ConfigItemID},
                     %GetParam,
                 },
@@ -437,12 +438,12 @@ sub GetFieldStates {
         # set possible values filter from ACLs
         my $ACL = $Param{ConfigItemObject}->ConfigItemAcl(
             %{ $Param{GetParam} },
-            ConfigItemID   => $Param{ConfigItemID},
-            Action         => $Param{Action},
-            UserID         => $Param{UserID},
-            ReturnType     => 'ConfigItem',
-            ReturnSubType  => 'DynamicField_' . $DynamicFieldConfig->{Name},
-            Data           => \%AclData,
+            ConfigItemID  => $Param{ConfigItemID},
+            Action        => $Param{Action},
+            UserID        => $Param{UserID},
+            ReturnType    => 'ConfigItem',
+            ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+            Data          => \%AclData,
         );
         if ($ACL) {
             my %Filter = $Param{ConfigItemObject}->ConfigItemAclData();
@@ -731,7 +732,7 @@ sub SetACLPreselectionCache {
     };
 
     $Self->{CacheObject}->Set(
-        Type  => 'ConfigItemACL',           # only [a-zA-Z0-9_] chars usable
+        Type  => 'ConfigItemACL',       # only [a-zA-Z0-9_] chars usable
         Key   => 'Preselection',
         Value => $Return,
         TTL   => 60 * 60 * 24 * 100,    # seconds, this means 100 days

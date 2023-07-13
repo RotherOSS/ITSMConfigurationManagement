@@ -551,7 +551,7 @@ sub VersionAdd {
 
     # update last version of config item
     $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ? WHERE id = ?',
+        SQL  => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ? WHERE id = ?',
         Bind => [ \$VersionID, \$CreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
     );
 
@@ -582,18 +582,18 @@ sub VersionAdd {
         UserID => $Param{UserID},
     );
 
-# TODO: Incorporate somewhere probably
-#    # trigger definition update event
-#    if ( $Events->{DefinitionUpdate} ) {
-#        $Self->EventHandler(
-#            Event => 'DefinitionUpdate',
-#            Data  => {
-#                ConfigItemID => $Param{ConfigItemID},
-#                Comment      => $Events->{DefinitionUpdate},
-#            },
-#            UserID => $Param{UserID},
-#        );
-#    }
+    # TODO: Incorporate somewhere probably
+    #    # trigger definition update event
+    #    if ( $Events->{DefinitionUpdate} ) {
+    #        $Self->EventHandler(
+    #            Event => 'DefinitionUpdate',
+    #            Data  => {
+    #                ConfigItemID => $Param{ConfigItemID},
+    #                Comment      => $Events->{DefinitionUpdate},
+    #            },
+    #            UserID => $Param{UserID},
+    #        );
+    #    }
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $DFData (qw(0 1)) {
@@ -637,7 +637,7 @@ sub VersionUpdate {
 
     # check needed stuff
     for my $Attribute (qw(UserID)) {
-        if ( !$Param{ $Attribute } ) {
+        if ( !$Param{$Attribute} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Attribute!",
@@ -658,11 +658,11 @@ sub VersionUpdate {
 
     my $CurInciStateRecalc = $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ? 1 : 0;
 
-    if ( any { defined $Param{ $_ } } qw/Name DeplStateID InciStateID DefinitionID/ ) {
+    if ( any { defined $Param{$_} } qw/Name DeplStateID InciStateID DefinitionID/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-        for my $Attribute ( qw/Name DeplStateID InciStateID DefinitionID/ ) {
-            $Param{ $Attribute } ||= $Version->{ $Attribute };
+        for my $Attribute (qw/Name DeplStateID InciStateID DefinitionID/) {
+            $Param{$Attribute} ||= $Version->{$Attribute};
         }
 
         # TODO: maybe include change_time change_by
@@ -696,22 +696,22 @@ sub VersionUpdate {
         $DynamicFieldBackendObject->ValueSet(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$1},
             ObjectID           => $Version->{VersionID},
-            Value              => $Param{ $Attribute },
+            Value              => $Param{$Attribute},
             UserID             => $Param{UserID},
         );
     }
 
-#    # TODO: a separate VersionUpdate event is probably not necessary
-#    # trigger VersionCreate event
-#    $Self->EventHandler(
-#        Event => 'VersionCreate',
-#        Data  => {
-#            ConfigItemID => $Version{ConfigItemID},
-#            Comment      => $VersionID,
-#            OldDeplState => $LastVersion->{CurDeplState},
-#        },
-#        UserID => $Param{UserID},
-#    );
+    #    # TODO: a separate VersionUpdate event is probably not necessary
+    #    # trigger VersionCreate event
+    #    $Self->EventHandler(
+    #        Event => 'VersionCreate',
+    #        Data  => {
+    #            ConfigItemID => $Version{ConfigItemID},
+    #            Comment      => $VersionID,
+    #            OldDeplState => $LastVersion->{CurDeplState},
+    #        },
+    #        UserID => $Param{UserID},
+    #    );
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $DFData (qw(0 1)) {
@@ -731,7 +731,8 @@ sub VersionUpdate {
         Key  => 'VersionNameGet::VersionID::' . $Version->{VersionID},
     );
 
-    if ( $CurInciStateRecalc ) {
+    if ($CurInciStateRecalc) {
+
         # recalculate the current incident state of all linked config items
         $Self->CurInciStateRecalc(
             ConfigItemID => $Version->{ConfigItemID},
@@ -924,8 +925,8 @@ sub VersionSearch {
     ARGUMENT:
     for my $Argument (
         qw(
-        OrderBy
-        OrderByDirection
+            OrderBy
+            OrderByDirection
         )
         )
     {

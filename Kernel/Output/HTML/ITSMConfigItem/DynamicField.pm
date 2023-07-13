@@ -91,7 +91,7 @@ sub PageRender {
         ? ( grep { $_->{Name} eq $Param{Page} } $Param{Definition}{DefinitionRef}{Pages}->@* )[0]
         : $Param{Definition}{DefinitionRef}{Pages}[0];
 
-    if ( !IsHashRefWithData( $Page ) || !IsArrayRefWithData( $Page->{Content} )) {
+    if ( !IsHashRefWithData($Page) || !IsArrayRefWithData( $Page->{Content} ) ) {
         $Param{Page} //= 1;
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -135,12 +135,12 @@ sub PageRender {
             next CONTENTBLOCK if !$Sections{ $ContentBlock->{Section} };
 
             my $GridArea;
-            for my $Key ( qw/Row Column/ ) {
+            for my $Key (qw/Row Column/) {
                 if ( $ContentBlock->{ $Key . 'Start' } ) {
-                    $GridArea .= 'grid-' . $KeyToCss{ $Key } . '-start:' . int( $ContentBlock->{ $Key . 'Start' } ) . ';';
+                    $GridArea .= 'grid-' . $KeyToCss{$Key} . '-start:' . int( $ContentBlock->{ $Key . 'Start' } ) . ';';
                 }
                 if ( $ContentBlock->{ $Key . 'Span' } ) {
-                    $GridArea .= 'grid-' . $KeyToCss{ $Key } . '-end:span ' . int( $ContentBlock->{ $Key . 'Span' } ) . ';';
+                    $GridArea .= 'grid-' . $KeyToCss{$Key} . '-end:span ' . int( $ContentBlock->{ $Key . 'Span' } ) . ';';
                 }
             }
 
@@ -162,7 +162,7 @@ sub PageRender {
     return $LayoutObject->Output(
         TemplateFile => 'ITSMConfigItemDetails',
         Data         => \%Layout,
-    );    
+    );
 }
 
 sub _SectionRender {
@@ -170,6 +170,7 @@ sub _SectionRender {
 
     # Get HTML from additional modules
     if ( $Param{Section}{Module} ) {
+
         # TODO: handle non dynamic field stuff
         # my $Object = $MainObject->Require( $ConfigObject->Get('ModuleMap')->{ $Param{Section}{Module} } ) ...;
         # my $HTML = $Object->Run( %Param );
@@ -185,13 +186,13 @@ sub _SectionRender {
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    my $RowHasValue  = sub {
+    my $RowHasValue = sub {
         return 1 if grep { defined $Param{ConfigItem}{ 'DynamicField_' . $_->{DF} } } $_[0]->@*;
         return 0;
     };
     my $GridHasValue = sub {
         for my $Row ( $_[0]->@* ) {
-            return 1 if $RowHasValue->( $Row );
+            return 1 if $RowHasValue->($Row);
         }
         return 0;
     };
@@ -277,13 +278,14 @@ sub _SectionRender {
             $Param{LayoutObject}->Block(
                 Name => 'FieldDisplayRow',
                 Data => {
-                    Widths => join( ' ', @Widths[ 0 .. $Columns - 1 ] ),,
+                    Widths => join( ' ', @Widths[ 0 .. $Columns - 1 ] ),
+                    ,
                 }
             );
 
             GRIDROW:
             for my $GridRow ( $Row->{Grid}{Rows}->@* ) {
-                next GRIDROW if !$RowHasValue->( $GridRow );
+                next GRIDROW if !$RowHasValue->($GridRow);
 
                 my $ColumnIndex = 0;
                 my @DisplayValues;

@@ -266,9 +266,11 @@ sub ConfigItemGet {
     $Param{DynamicFields} //= 0;
 
     # check if result is already cached, considering the DynamicFields parameter
-    my $CacheKey    = $Param{VersionID} ? 
-        join '::', 'ConfigItemGet::VersionID',    @Param{ qw(VersionID DynamicFields) } :
-        join '::', 'ConfigItemGet::ConfigItemID', @Param{ qw(ConfigItemID DynamicFields) };
+    my $CacheKey = $Param{VersionID}
+        ?
+        join '::', 'ConfigItemGet::VersionID', @Param{qw(VersionID DynamicFields)}
+        :
+        join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields)};
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $Cache       = $CacheObject->Get(
@@ -276,7 +278,7 @@ sub ConfigItemGet {
         Key  => $CacheKey,
     );
 
-    if ( $Cache ) {
+    if ($Cache) {
         if ( $Param{VersionID} && $Param{ConfigItemID} && $Param{ConfigItemID} ne $Cache->{ConfigItemID} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -294,10 +296,12 @@ sub ConfigItemGet {
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
             SQL => 'SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,'
                 . ' ci.cur_depl_state_id, ci.cur_inci_state_id,'
-# TODO: implement version string
-#                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
+
+                # TODO: implement version string
+                #                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
                 . ' v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,'
-# TODO: add version change time?
+
+                # TODO: add version change time?
                 . ' v.create_time, v.create_by, ci.change_time, ci.change_by'
                 . ' FROM configitem_version v INNER JOIN configitem ci'
                 . ' ON v.configitem_id = ci.id WHERE v.id = ?',
@@ -311,8 +315,9 @@ sub ConfigItemGet {
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
             SQL => 'SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,'
                 . ' ci.cur_depl_state_id, ci.cur_inci_state_id,'
-# TODO: implement version string
-#                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
+
+                # TODO: implement version string
+                #                . ' v.id, v.name, v.version, v.definition_id, v.depl_state_id, v.inci_state_id,'
                 . ' v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,'
                 . ' ci.create_time, ci.create_by, ci.change_time, ci.change_by'
                 . ' FROM configitem ci LEFT JOIN configitem_version v'
@@ -403,14 +408,14 @@ sub ConfigItemGet {
     $ConfigItem{Class} = $ClassList->{ $ConfigItem{ClassID} };
 
     STATE:
-    for my $State ( qw/DeplState CurDeplState InciState CurInciState/ ) {
+    for my $State (qw/DeplState CurDeplState InciState CurInciState/) {
         next STATE if !$ConfigItem{ $State . 'ID' };
 
         my $Item = $GeneralCatalogObject->ItemGet(
             ItemID => $ConfigItem{ $State . 'ID' },
         );
 
-        $ConfigItem{ $State }          = $Item->{Name};
+        $ConfigItem{$State} = $Item->{Name};
         $ConfigItem{ $State . 'Type' } = $Item->{Functionality};
     }
 
@@ -732,8 +737,8 @@ sub ConfigItemUpdate {
     );
 
     # check needed parameters
-    for my $Key ( qw/ConfigItemID UserID/ ) {
-        if ( !$Param{ $Key } ) {
+    for my $Key (qw/ConfigItemID UserID/) {
+        if ( !$Param{$Key} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need " . ( $Key eq 'ConfigItemID' ? 'ConfigItemID or Number' : $Key ),
@@ -743,7 +748,8 @@ sub ConfigItemUpdate {
         }
     }
 
-    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # TODO: class specific triggers? (Prio 3)
     my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
 
@@ -759,7 +765,7 @@ sub ConfigItemUpdate {
     # get current
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
-        DynamicFields => (@DynamicFieldNames ? 1 : 0),
+        DynamicFields => ( @DynamicFieldNames ? 1 : 0 ),
     );
 
     my %Changed;
@@ -767,16 +773,17 @@ sub ConfigItemUpdate {
 
     # name, deployment and incident state
     ATTR:
-    for my $Attribute ( qw/Name DeplStateID InciStateID/ ) {
-        next ATTR if !defined $Param{ $Attribute } || $Param{ $Attribute } eq $ConfigItem->{ $Attribute };
+    for my $Attribute (qw/Name DeplStateID InciStateID/) {
+        next ATTR if !defined $Param{$Attribute} || $Param{$Attribute} eq $ConfigItem->{$Attribute};
 
-        $Changed{ $Attribute } = {
-            Old => $ConfigItem->{ $Attribute },
-            New => $Param{ $Attribute },
+        $Changed{$Attribute} = {
+            Old => $ConfigItem->{$Attribute},
+            New => $Param{$Attribute},
         };
 
-        $AddVersion = $VersionTrigger{ $Attribute } || $AddVersion;
+        $AddVersion = $VersionTrigger{$Attribute} || $AddVersion;
     }
+
     # TODO: Think about DefinitionID changes
 
     if ( !$AddVersion && @DynamicFieldNames ) {
@@ -785,7 +792,7 @@ sub ConfigItemUpdate {
 
         # dynamic fields
         DYNAMICFIELD:
-        for my $Name ( @DynamicFieldNames ) {
+        for my $Name (@DynamicFieldNames) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $Name,
             );
@@ -800,11 +807,11 @@ sub ConfigItemUpdate {
                 $AddVersion = 1;
 
                 last DYNAMICFIELD;
-            };
+            }
         }
     }
 
-    if ( $AddVersion ) {
+    if ($AddVersion) {
         $Self->VersionAdd(
             %Param,
             LastVersion => $ConfigItem,
@@ -832,14 +839,14 @@ sub ConfigItemUpdate {
 
     for my $Key ( keys %Changed ) {
         $Self->EventHandler(
-            Event => $Events{ $Key },
+            Event => $Events{$Key},
             Data  => {
                 ConfigItemID => $ConfigItem->{ConfigItemID},
-                Comment      => $Changed{ $Key }{New} . '%%' . $Changed{ $Key }{Old},
+                Comment      => $Changed{$Key}{New} . '%%' . $Changed{$Key}{Old},
             },
             UserID => $Param{UserID},
         );
-    }    
+    }
 
     return 1;
 }
