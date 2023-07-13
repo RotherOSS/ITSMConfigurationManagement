@@ -1494,4 +1494,12 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::NameModule" Required="0" Valid="1">
+        <Description Translatable="1">This configuration defines modules to suggest and check names for config items per config item class.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>

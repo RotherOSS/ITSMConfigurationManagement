@@ -160,6 +160,30 @@ sub Run {
             #for my $Param (qw(Name DeplStateID InciStateID)) {
             #    $GetParam{$Param} = ;
             #}
+
+            # check for name module based on classname
+            my $ConfigItemName;
+            my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+            if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+
+                # check if name module exists
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Can't load name module for class $ConfigItem->{Class}!",
+                    );
+                    return;
+                }
+
+                # create a backend object
+                my $NameModuleObject = $NameModule->new( %{$Self} );
+
+                # get name from name module backend
+                $ConfigItemName = $NameModuleObject->GetFreeName();
+            }
+            $GetParam{Name} = $ConfigItemName;
         }
 
         else {

@@ -591,6 +591,33 @@ sub ConfigItemAdd {
 
     return if !$Success;
 
+    # check for name module
+    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+    if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+
+        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+            );
+            return;
+        }
+
+        # create a backend object
+        my $NameModuleObject = $NameModule->new( %{$Self} );
+
+        # set name used
+        $NameModuleObject->SetUsed(
+            Name => $Param{Name},
+            Used => 1,
+        );
+
+    }
+
     # find id of new item
     $Kernel::OM->Get('Kernel::System::DB')->Prepare(
         SQL => 'SELECT id FROM configitem WHERE '
@@ -690,6 +717,43 @@ sub ConfigItemDelete {
                 Message  => "Unknown problem when deleting attachment $Filename of ConfigItem "
                     . "$Param{ConfigItemID}. Please check the VirtualFS backend for stale "
                     . "files!",
+            );
+        }
+    }
+
+    # check for name module
+    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
+
+    if ( IsHashRefWithData($NameModuleConfig) ) {
+
+        # get class list
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        my $ConfigItemClass = $ClassList->{ $ConfigItemData->{ClassID} };
+
+        if ( $NameModuleConfig->{$ConfigItemClass} ) {
+
+            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItemClass}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load name module for class $ConfigItemClass!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            my $NameModuleObject = $NameModule->new( %{$Self} );
+
+            # set name free
+            $NameModuleObject->SetUsed(
+                Name => $ConfigItemData->{Name},
+                Used => 0,
             );
         }
     }
@@ -844,6 +908,47 @@ sub ConfigItemUpdate {
             SQL  => 'UPDATE configitem SET change_time = current_timestamp, change_by = ?',
             Bind => [ \$Param{UserID} ],
         );
+    }
+
+    # check for name module
+    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+    if ( IsHashRefWithData($NameModuleConfig) ) {
+
+        # get class list
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        if ( $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+
+            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            my $NameModuleObject = $NameModule->new( %{$Self} );
+
+            # set new name used
+            $NameModuleObject->SetUsed(
+                Name => $Param{Name},
+                Used => 1,
+            );
+
+            # set old name free
+            $NameModuleObject->SetUsed(
+                Name => $ConfigItem->{Name},
+                Used => 0,
+            );
+        }
     }
 
     my %Events = (
