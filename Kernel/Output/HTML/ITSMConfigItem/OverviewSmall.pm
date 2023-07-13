@@ -276,7 +276,6 @@ END
 
     # check ShowColumns parameter
     my @ShowColumns;
-    my @XMLShowColumns;
     if ( $Param{ShowColumns} && ref $Param{ShowColumns} eq 'ARRAY' ) {
         @ShowColumns = @{ $Param{ShowColumns} };
     }
@@ -370,10 +369,10 @@ END
 
                 next CONFIGITEMID if !$ConfigItem;
 
-# TODO: Show Dynamic Fields - Prio 3
-#                # convert the XML data into a hash
-#                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-#                );
+                # TODO: Show Dynamic Fields - Prio 3
+                #                # convert the XML data into a hash
+                #                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
+                #                );
 
                 # store config item data,
                 %Data = %{$ConfigItem};
@@ -407,7 +406,7 @@ END
                 # make a deep copy of the action items to avoid changing the definition
                 my $ClonedActionItems = Storable::dclone( \@ActionItems );
 
-                $ConfigItem->{VersionID} //= '';                
+                $ConfigItem->{VersionID} //= '';
 
                 # substitute TT variables
                 for my $ActionItem ( @{$ClonedActionItems} ) {

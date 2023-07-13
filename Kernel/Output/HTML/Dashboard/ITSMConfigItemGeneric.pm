@@ -216,9 +216,6 @@ sub Run {
     # Define position of the filter in the frontend.
     my $PrioCounter = 1000;
 
-    # To store the total number of config items in all classes that the user has access.
-    my $TotalCount;
-
     # To store all the clases that the user has access, used in search for filter 'All'.
     my $AccessClassList;
 

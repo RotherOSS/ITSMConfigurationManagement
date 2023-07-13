@@ -158,10 +158,9 @@ sub GetFieldStates {
     # transform dynamic field data into DFName => DFName pair
     my %DynamicFieldAcl = map { $_ => $_ } keys $Param{DynamicFields}->%*;
 
-    my %UserPreferences = ();
+    my %UserPreferences;
     my %Visibility;
     my $VisCheck = 1;
-    my $Queue;
 
     # whether to use ACLPreselection
     if ( !$CompleteRun ) {
