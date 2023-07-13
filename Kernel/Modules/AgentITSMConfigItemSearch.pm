@@ -56,8 +56,8 @@ sub Run {
     $Self->{OrderBy} = $ParamObject->GetParam( Param => 'OrderBy' )
         || $Self->{Config}->{'Order::Default'}
         || 'Down';
-    $Self->{Profile}     = $ParamObject->GetParam( Param => 'Profile' )     || '';
-    $Self->{SaveProfile} = $ParamObject->GetParam( Param => 'SaveProfile' ) || '';
+    $Self->{Profile}        = $ParamObject->GetParam( Param => 'Profile' )     || '';
+    $Self->{SaveProfile}    = $ParamObject->GetParam( Param => 'SaveProfile' ) || '';
     $Self->{TakeLastSearch} = $ParamObject->GetParam( Param => 'TakeLastSearch' );
 
     # get general catalog object
@@ -347,7 +347,7 @@ sub Run {
                 ResultFormStrg            => $Param{ResultFormStrg},
                 ProfilesStrg              => $Param{ProfilesStrg},
                 Number                    => $GetParam{Number} || '',
-                Name                      => $GetParam{Name} || '',
+                Name                      => $GetParam{Name}   || '',
             },
         );
 
@@ -1064,14 +1064,14 @@ sub _XMLSearchFormOutput {
             if ( $Item->{Input}->{Type} eq 'Date' ) {
                 $Value =
                     {
-                    $InputKey                      => $GetParam{$InputKey},
-                    $InputKey . '::TimeStart::Day' => $GetParam{ $InputKey . '::TimeStart::Day' },
-                    $InputKey
-                        . '::TimeStart::Month' => $GetParam{ $InputKey . '::TimeStart::Month' },
-                    $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
-                    $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
-                    $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
-                    $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
+                        $InputKey                      => $GetParam{$InputKey},
+                        $InputKey . '::TimeStart::Day' => $GetParam{ $InputKey . '::TimeStart::Day' },
+                        $InputKey
+                        . '::TimeStart::Month'          => $GetParam{ $InputKey . '::TimeStart::Month' },
+                        $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
+                        $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
+                        $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
+                        $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
                     } || '';
             }
 
@@ -1079,20 +1079,20 @@ sub _XMLSearchFormOutput {
             elsif ( $Item->{Input}->{Type} eq 'DateTime' ) {
                 $Value =
                     {
-                    $InputKey => $GetParam{$InputKey},
-                    $InputKey
-                        . '::TimeStart::Minute' => $GetParam{ $InputKey . '::TimeStart::Minute' },
-                    $InputKey . '::TimeStart::Hour' => $GetParam{ $InputKey . '::TimeStart::Hour' },
-                    $InputKey . '::TimeStart::Day'  => $GetParam{ $InputKey . '::TimeStart::Day' },
-                    $InputKey
-                        . '::TimeStart::Month' => $GetParam{ $InputKey . '::TimeStart::Month' },
-                    $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
-                    $InputKey
-                        . '::TimeStop::Minute' => $GetParam{ $InputKey . '::TimeStop::Minute' },
-                    $InputKey . '::TimeStop::Hour'  => $GetParam{ $InputKey . '::TimeStop::Hour' },
-                    $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
-                    $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
-                    $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
+                        $InputKey => $GetParam{$InputKey},
+                        $InputKey
+                        . '::TimeStart::Minute'         => $GetParam{ $InputKey . '::TimeStart::Minute' },
+                        $InputKey . '::TimeStart::Hour' => $GetParam{ $InputKey . '::TimeStart::Hour' },
+                        $InputKey . '::TimeStart::Day'  => $GetParam{ $InputKey . '::TimeStart::Day' },
+                        $InputKey
+                        . '::TimeStart::Month'          => $GetParam{ $InputKey . '::TimeStart::Month' },
+                        $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
+                        $InputKey
+                        . '::TimeStop::Minute'          => $GetParam{ $InputKey . '::TimeStop::Minute' },
+                        $InputKey . '::TimeStop::Hour'  => $GetParam{ $InputKey . '::TimeStop::Hour' },
+                        $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
+                        $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
+                        $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
                     } || '';
             }
 
@@ -1170,14 +1170,14 @@ sub _XMLSearchFormGet {
         if ( $Item->{Input}->{Type} eq 'Date' && $Param{$InputKey} ) {
             $Param{$InputKey} =
                 {
-                $InputKey                      => $Param{$InputKey},
-                $InputKey . '::TimeStart::Day' => $Param{ $InputKey . '::TimeStart::Day' },
-                $InputKey
-                    . '::TimeStart::Month' => $Param{ $InputKey . '::TimeStart::Month' },
-                $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
-                $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
-                $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
-                $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
+                    $InputKey                      => $Param{$InputKey},
+                    $InputKey . '::TimeStart::Day' => $Param{ $InputKey . '::TimeStart::Day' },
+                    $InputKey
+                    . '::TimeStart::Month'          => $Param{ $InputKey . '::TimeStart::Month' },
+                    $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
+                    $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
+                    $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
+                    $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
                 } || '';
         }
 
@@ -1185,20 +1185,20 @@ sub _XMLSearchFormGet {
         elsif ( $Item->{Input}->{Type} eq 'DateTime' && $Param{$InputKey} ) {
             $Param{$InputKey} =
                 {
-                $InputKey => $Param{$InputKey},
-                $InputKey
-                    . '::TimeStart::Minute' => $Param{ $InputKey . '::TimeStart::Minute' },
-                $InputKey . '::TimeStart::Hour' => $Param{ $InputKey . '::TimeStart::Hour' },
-                $InputKey . '::TimeStart::Day'  => $Param{ $InputKey . '::TimeStart::Day' },
-                $InputKey
-                    . '::TimeStart::Month' => $Param{ $InputKey . '::TimeStart::Month' },
-                $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
-                $InputKey
-                    . '::TimeStop::Minute' => $Param{ $InputKey . '::TimeStop::Minute' },
-                $InputKey . '::TimeStop::Hour'  => $Param{ $InputKey . '::TimeStop::Hour' },
-                $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
-                $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
-                $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
+                    $InputKey => $Param{$InputKey},
+                    $InputKey
+                    . '::TimeStart::Minute'         => $Param{ $InputKey . '::TimeStart::Minute' },
+                    $InputKey . '::TimeStart::Hour' => $Param{ $InputKey . '::TimeStart::Hour' },
+                    $InputKey . '::TimeStart::Day'  => $Param{ $InputKey . '::TimeStart::Day' },
+                    $InputKey
+                    . '::TimeStart::Month'          => $Param{ $InputKey . '::TimeStart::Month' },
+                    $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
+                    $InputKey
+                    . '::TimeStop::Minute'          => $Param{ $InputKey . '::TimeStop::Minute' },
+                    $InputKey . '::TimeStop::Hour'  => $Param{ $InputKey . '::TimeStop::Hour' },
+                    $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
+                    $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
+                    $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
                 } || '';
         }
 
@@ -1263,9 +1263,9 @@ sub _XMLSearchFormGet {
                     if ( $Values->{'-between'} ) {
 
                         # get time elemet values
-                        my ( $StartDateTime, $StopDateTime ) = @{ $Values->{'-between'} };
-                        my ( $StartDate,     $StartTime )    = split( /\s/, $StartDateTime );
-                        my ( $StartYear, $StartMonth,  $StartDay )    = split( /-/,  $StartDate );
+                        my ( $StartDateTime, $StopDateTime )          = @{ $Values->{'-between'} };
+                        my ( $StartDate, $StartTime )                 = split( /\s/, $StartDateTime );
+                        my ( $StartYear, $StartMonth, $StartDay )     = split( /-/, $StartDate );
                         my ( $StartHour, $StartMinute, $StartSecond ) = split( /\:/, $StartTime );
 
                         my ( $StopDate, $StopTime ) = split( /\s/, $StopDateTime );

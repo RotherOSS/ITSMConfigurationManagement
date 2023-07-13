@@ -44,7 +44,7 @@ sub Run {
 
     # get configitem id and class id
     my $ConfigItem;
-    my $DuplicateID             = $ParamObject->GetParam( Param => 'DuplicateID' ) || 0;
+    my $DuplicateID = $ParamObject->GetParam( Param => 'DuplicateID' ) || 0;
     $ConfigItem->{ConfigItemID} = $ParamObject->GetParam( Param => 'ConfigItemID' ) || 0;
     $ConfigItem->{ClassID}      = $ParamObject->GetParam( Param => 'ClassID' )      || 0;
 
@@ -157,6 +157,7 @@ sub Run {
     # get initial values for the configitem
     if ( !$Self->{Subaction} ) {
         if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+
             # TODO Prio3: set default data
             #for my $Param (qw(Name DeplStateID InciStateID)) {
             #    $GetParam{$Param} = ;
@@ -166,7 +167,7 @@ sub Run {
         else {
             # get general form data
             for my $Param (qw(Name DeplStateID InciStateID)) {
-                $GetParam{$Param} = $ConfigItem->{ $Param };
+                $GetParam{$Param} = $ConfigItem->{$Param};
             }
 
             DYNAMICFIELD:
@@ -181,7 +182,7 @@ sub Run {
                     Behavior           => 'IsACLReducible'
                 );
 
-                if ( $IsACLReducible ) {
+                if ($IsACLReducible) {
                     $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
                 }
             }
@@ -211,7 +212,7 @@ sub Run {
                 Behavior           => 'IsACLReducible'
             );
 
-            if ( $IsACLReducible ) {
+            if ($IsACLReducible) {
                 $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
             }
         }
@@ -279,6 +280,7 @@ sub Run {
     my $Autoselect = $ConfigObject->Get('ConfigItemACL::Autoselect') || undef;
     my $ACLPreselection;
     if ( $ConfigObject->Get('TicketACL::ACLPreselection') ) {
+
         # get cached preselection rules
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
         $ACLPreselection = $CacheObject->Get(
@@ -317,9 +319,9 @@ sub Run {
 
         # get general form data
         for my $Param (qw(Name DeplStateID InciStateID)) {
-            $ConfigItem->{ $Param } = $GetParam{ $Param };
+            $ConfigItem->{$Param} = $GetParam{$Param};
 
-            if ( !$ConfigItem->{ $Param } ) {
+            if ( !$ConfigItem->{$Param} ) {
                 $AllRequired = 0;
             }
         }
@@ -355,7 +357,7 @@ sub Run {
 
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "The name $ConfigItem->{Name} is already in use by the ConfigItemID(s): "
                         . $NameDuplicatesString,
                 );
@@ -395,15 +397,15 @@ sub Run {
         # call ticket ACLs for DynamicFields to check field visibility
         my $ACLResult = $ConfigItemObject->ConfigItemAcl(
             %GetParam,
-            Action         => $Self->{Action},
-            ReturnType     => 'Form',
-            ReturnSubType  => '-',
-            Data           => \%DynamicFieldAcl,
-            UserID         => $Self->{UserID},
+            Action        => $Self->{Action},
+            ReturnType    => 'Form',
+            ReturnSubType => '-',
+            Data          => \%DynamicFieldAcl,
+            UserID        => $Self->{UserID},
         );
         if ($ACLResult) {
             %DynamicFieldVisibility = map { 'DynamicField_' . $_->{Name} => 0 } $DynamicFieldList->@*;
-            my %AclData             = $ConfigItemObject->ConfigItemAclData();
+            my %AclData = $ConfigItemObject->ConfigItemAclData();
             for my $Field ( sort keys %AclData ) {
                 $DynamicFieldVisibility{ 'DynamicField_' . $Field } = 1;
             }
@@ -418,7 +420,7 @@ sub Run {
 
             my $PossibleValuesFilter;
 
-            if ($ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} }) {
+            if ( $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } ) {
 
                 # get PossibleValues
                 my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
@@ -426,7 +428,7 @@ sub Run {
                 );
 
                 # check if field has PossibleValues property in its configuration
-                if (IsHashRefWithData($PossibleValues)) {
+                if ( IsHashRefWithData($PossibleValues) ) {
 
                     # convert possible values key => value to key => key for ACLs using a Hash slice
                     my %AclData = %{$PossibleValues};
@@ -459,7 +461,7 @@ sub Run {
                 ParamObject          => $ParamObject,
             );
 
-            if (!IsHashRefWithData($ValidationResult)) {
+            if ( !IsHashRefWithData($ValidationResult) ) {
                 return $LayoutObject->ErrorScreen(
                     Message => $LayoutObject->{LanguageObject}->Translate("Could not perform validation on field $DynamicFieldConfig->{Label}!"),
                     Comment => Translatable('Please contact the administrator.'),
@@ -467,8 +469,8 @@ sub Run {
             }
 
             # propagate validation error to the Error variable to be detected by the frontend
-            if ($ValidationResult->{ServerError}) {
-                $Error{ $DynamicFieldConfig->{Name} } = ' ServerError';
+            if ( $ValidationResult->{ServerError} ) {
+                $Error{ $DynamicFieldConfig->{Name} }                        = ' ServerError';
                 $DynamicFieldValidationResult{ $DynamicFieldConfig->{Name} } = $ValidationResult;
             }
         }
@@ -476,7 +478,7 @@ sub Run {
         $AllRequired = %Error ? 0 : 1;
 
         # save version to database
-        if ( $AllRequired ) {
+        if ($AllRequired) {
 
             # get all attachments from upload cache
             my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
@@ -498,6 +500,7 @@ sub Run {
 
             # for existing ConfigItems compare with the current data
             if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
+
                 # get all attachments meta data
                 my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
                     ConfigItemID => $ConfigItem->{ConfigItemID},
@@ -554,6 +557,7 @@ sub Run {
             }
 
             if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+
                 # delete temporary number # TODO: check, whether setting new as number is necessary in the first place
                 delete $ConfigItem->{Number};
 
@@ -616,7 +620,7 @@ sub Run {
             }
         }
     }
-    elsif ($Self->{Subaction} eq 'AJAXUpdate') {
+    elsif ( $Self->{Subaction} eq 'AJAXUpdate' ) {
         my $ElementChanged  = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
         my %ChangedElements = $ElementChanged ? ( $ElementChanged => 1 ) : ();
         my $LoopProtection  = 100;
@@ -626,12 +630,12 @@ sub Run {
             ConfigItemObject          => $ConfigItemObject,
             DynamicFields             => $Definition->{DynamicFieldRef},
             DynamicFieldBackendObject => $DynamicFieldBackendObject,
-            ChangedElements           => \%ChangedElements,            # optional to reduce ACL evaluation
+            ChangedElements           => \%ChangedElements,                # optional to reduce ACL evaluation
             Action                    => $Self->{Action},
             UserID                    => $Self->{UserID},
             ConfigItemID              => $Self->{ConfigItemID},
             FormID                    => $Self->{FormID},
-            GetParam                  => { %GetParam },
+            GetParam                  => {%GetParam},
             Autoselect                => $Autoselect,
             ACLPreselection           => $ACLPreselection,
             LoopProtection            => \$LoopProtection,
@@ -649,7 +653,7 @@ sub Run {
         # cycle through the activated Dynamic Fields for this screen
         DYNAMICFIELD:
         for my $Name ( keys %{ $DynFieldStates{Fields} } ) {
-            my $DynamicFieldConfig = $Self->{DynamicField}{ $Name };
+            my $DynamicFieldConfig = $Self->{DynamicField}{$Name};
 
             if ( $DynamicFieldConfig->{Config}{MultiValue} && ref $GetParam{DynamicField}{"DynamicField_$Name"} eq 'ARRAY' ) {
                 for my $i ( 0 .. $#{ $GetParam{DynamicField}{"DynamicField_$Name"} } ) {
@@ -721,7 +725,7 @@ sub Run {
         );
     }
     else {
-        my $LoopProtection  = 100;
+        my $LoopProtection = 100;
 
         # get values and visibility of dynamic fields
         my %DynFieldStates = $FieldRestrictionsObject->GetFieldStates(
@@ -732,7 +736,7 @@ sub Run {
             UserID                    => $Self->{UserID},
             ConfigItemID              => $Self->{ConfigItemID},
             FormID                    => $Self->{FormID},
-            GetParam                  => { %GetParam },
+            GetParam                  => {%GetParam},
             Autoselect                => $Autoselect,
             ACLPreselection           => $ACLPreselection,
             LoopProtection            => \$LoopProtection,
@@ -811,7 +815,7 @@ sub Run {
         if ( $ConfigObject->{Debug} > 0 ) {
             $LogObject->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "Rendering block for duplicates (CI-Numbers: $DuplicateString) error message",
             );
         }
@@ -896,8 +900,9 @@ sub Run {
     # render dynamic fields
     my $DynamicFieldHTML;
     if ( IsHashRefWithData( $Definition->{DefinitionRef} ) && $Definition->{DefinitionRef}{Sections} ) {
-# TODO: look what this was/is about
-#        $Self->{CustomerSearchItemIDs} = [];
+
+        # TODO: look what this was/is about
+        #        $Self->{CustomerSearchItemIDs} = [];
         # TODO: order by pages and only render the first page
         for my $Section ( values $Definition->{DefinitionRef}{Sections}->%* ) {
             $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(

@@ -199,10 +199,10 @@ sub DefinitionGet {
         $Definition{DefinitionID} = $Row[0];
         $Definition{ClassID}      = $Row[1];
         $Definition{Definition}   = $Row[2] || "--- []";
-        my $DynamicFields         = $Row[3] || "--- {}";
-        $Definition{Version}      = $Row[4];
-        $Definition{CreateTime}   = $Row[5];
-        $Definition{CreateBy}     = $Row[6];
+        my $DynamicFields = $Row[3] || "--- {}";
+        $Definition{Version}    = $Row[4];
+        $Definition{CreateTime} = $Row[5];
+        $Definition{CreateBy}   = $Row[6];
 
         # Check if definition code is not a YAML string.
         if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
@@ -641,17 +641,17 @@ sub _DefinitionDynamicFieldGet {
 
     for my $Key ( keys %ContentHash ) {
         if ( $Key eq 'DF' ) {
-            $DynamicFields{ $ContentHash{ $Key } } = 1;
+            $DynamicFields{ $ContentHash{$Key} } = 1;
         }
-        elsif ( ref $ContentHash{ $Key } ) {
+        elsif ( ref $ContentHash{$Key} ) {
             %DynamicFields = (
                 %DynamicFields,
-                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $ContentHash{ $Key } ),
+                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $ContentHash{$Key} ),
             );
         }
     }
 
-    for my $Entry ( @ContentArray ) {
+    for my $Entry (@ContentArray) {
         if ( ref $Entry ) {
             %DynamicFields = (
                 %DynamicFields,
@@ -672,7 +672,7 @@ sub _DefinitionDynamicFieldGet {
             next DYNAMICFIELD if !$DynamicField;
             next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
 
-            $ReturnDynamicFields{ $Name } = {
+            $ReturnDynamicFields{$Name} = {
                 ID         => $DynamicField->{ID},
                 Name       => $DynamicField->{Name},
                 Label      => $DynamicField->{Label},

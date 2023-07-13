@@ -88,8 +88,8 @@ $Selenium->RunTest(
 
             push @ConfigItems,
                 {
-                ID               => $ConfigItemID,
-                ConfigItemNumber => $ConfigItemNumber,
+                    ID               => $ConfigItemID,
+                    ConfigItemNumber => $ConfigItemNumber,
                 };
         }
 

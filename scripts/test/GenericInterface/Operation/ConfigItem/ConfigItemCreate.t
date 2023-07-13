@@ -474,7 +474,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.MissingParameter',
+                    ErrorCode    => 'ConfigItemCreate.MissingParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->NIC parameter value is required and is missing!',
                 }
@@ -535,7 +535,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.MissingParameter',
+                    ErrorCode    => 'ConfigItemCreate.MissingParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->NIC parameter value is required and is missing!',
                 },
@@ -597,7 +597,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->NIC->IPoverDHCP parameter value is not a valid for General Catalog \'ITSM::ConfigItem::YesNo\'!',
                 },
@@ -632,7 +632,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->NIC[1]->IPoverDHCP parameter value is not a valid for General Catalog \'ITSM::ConfigItem::YesNo\'!',
                 },
@@ -668,7 +668,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->Vendor parameter value excedes the maxium length!',
                 },
@@ -705,7 +705,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->WarrantyExpirationDate parameter value is not a valid Date format!',
                 },
@@ -743,7 +743,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->Owner parameter value is not a valid customer!',
                 },
@@ -794,7 +794,7 @@ my @Tests = (
         ExpectedData => {
             Data => {
                 Error => {
-                    ErrorCode => 'ConfigItemCreate.InvalidParameter',
+                    ErrorCode    => 'ConfigItemCreate.InvalidParameter',
                     ErrorMessage =>
                         'ConfigItemCreate: ConfigItem->CIXMLData->Ram parameter repetitions is higher than the maxium value!',
                 },

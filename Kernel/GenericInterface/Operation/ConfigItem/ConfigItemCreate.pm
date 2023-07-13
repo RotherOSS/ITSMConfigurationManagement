@@ -194,7 +194,7 @@ sub Run {
         )
     {
         return $Self->ReturnError(
-            ErrorCode => "$Self->{OperationName}.MissingParameter",
+            ErrorCode    => "$Self->{OperationName}.MissingParameter",
             ErrorMessage =>
                 "$Self->{OperationName}: UserLogin or SessionID is required!",
         );
@@ -225,7 +225,7 @@ sub Run {
     for my $Needed (qw(ConfigItem)) {
         if ( !IsHashRefWithData( $Param{Data}->{$Needed} ) ) {
             return $Self->ReturnError(
-                ErrorCode => "$Self->{OperationName}.MissingParameter",
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: $Needed parameter is missing or not valid!",
             );
@@ -299,7 +299,7 @@ sub Run {
         }
         else {
             return $Self->ReturnError(
-                ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: ConfigItem->Attachment parameter is invalid!",
             );
@@ -309,7 +309,7 @@ sub Run {
         for my $AttachmentItem (@AttachmentList) {
             if ( !IsHashRefWithData($AttachmentItem) ) {
                 return $Self->ReturnError(
-                    ErrorCode => "$Self->{OperationName}.InvalidParameter",
+                    ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                     ErrorMessage =>
                         "$Self->{OperationName}: ConfigItem->Attachment parameter is invalid!",
                 );
@@ -452,7 +452,7 @@ sub _CheckConfigItem {
     # check ConfigItem->Class
     if ( !$Self->ValidateClass( %{$ConfigItem} ) ) {
         return {
-            ErrorCode => "$Self->{OperationName}.InvalidParameter",
+            ErrorCode    => "$Self->{OperationName}.InvalidParameter",
             ErrorMessage =>
                 "$Self->{OperationName}: ConfigItem->Class parameter is invalid!",
         };
@@ -461,7 +461,7 @@ sub _CheckConfigItem {
     # check ConfigItem->DeplState
     if ( !$Self->ValidateDeplState( %{$ConfigItem} ) ) {
         return {
-            ErrorCode => "$Self->{OperationName}.InvalidParameter",
+            ErrorCode    => "$Self->{OperationName}.InvalidParameter",
             ErrorMessage =>
                 "$Self->{OperationName}: ConfigItem->DeplState parameter is invalid!",
         };
@@ -470,7 +470,7 @@ sub _CheckConfigItem {
     # check ConfigItem->DeplState
     if ( !$Self->ValidateInciState( %{$ConfigItem} ) ) {
         return {
-            ErrorCode => "$Self->{OperationName}.InvalidParameter",
+            ErrorCode    => "$Self->{OperationName}.InvalidParameter",
             ErrorMessage =>
                 "$Self->{OperationName}: ConfigItem->InciState parameter is invalid!",
         };
@@ -526,7 +526,7 @@ sub _CheckAttachment {
     for my $Needed (qw(Content ContentType Filename)) {
         if ( !$Attachment->{$Needed} ) {
             return {
-                ErrorCode => "$Self->{OperationName}.MissingParameter",
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
                 ErrorMessage =>
                     "$Self->{OperationName}: Attachment->$Needed parameter is missing!",
             };

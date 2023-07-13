@@ -58,8 +58,8 @@ sub Run {
     }
 
     # get needed object
-    my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
     # check for access rights
     my $HasAccess = $ConfigItemObject->Permission(
@@ -93,7 +93,7 @@ sub Run {
     if ( !$ConfigItem->{ConfigItemID} ) {
         return $LayoutObject->ErrorScreen(
             Message =>
-                $LayoutObject->{LanguageObject}->Translate( 'ConfigItem not found!' ),
+                $LayoutObject->{LanguageObject}->Translate('ConfigItem not found!'),
             Comment => Translatable('Please contact the administrator.'),
         );
     }
@@ -380,6 +380,7 @@ sub Run {
 
         ATTACHMENT:
         for my $Attachment (@Attachments) {
+
             # get the metadata of the current attachment
             my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
                 ConfigItemID => $ConfigItemID,

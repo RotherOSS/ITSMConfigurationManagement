@@ -993,21 +993,21 @@ sub ACLDump {
 #         UserID   => 1,
 #         ValidIDs => [1],
 #     );
-# 
+#
 #     my %ACLDump;
-# 
+#
 #     ACL:
 #     for my $ACLData ( @{$ACLList} ) {
-# 
+#
 #         next ACL if !IsHashRefWithData($ACLData);
-# 
+#
 #         my $Properties;
 #         my $PropertiesDatabase;
 #         if ( IsHashRefWithData( $ACLData->{ConfigMatch} ) ) {
 #             $Properties         = $ACLData->{ConfigMatch}->{Properties};
 #             $PropertiesDatabase = $ACLData->{ConfigMatch}->{PropertiesDatabase};
 #         }
-# 
+#
 #         my $Possible;
 #         my $PossibleAdd;
 #         my $PossibleNot;
@@ -1016,7 +1016,7 @@ sub ACLDump {
 #             $PossibleAdd = $ACLData->{ConfigChange}->{PossibleAdd};
 #             $PossibleNot = $ACLData->{ConfigChange}->{PossibleNot};
 #         }
-# 
+#
 #         $ACLDump{ $ACLData->{Name} } = {
 #             CreateTime => $ACLData->{CreateTime},
 #             ChangeTime => $ACLData->{ChangeTime},
@@ -1033,15 +1033,15 @@ sub ACLDump {
 #             },
 #         };
 #     }
-# 
+#
 #     # delete cache
 #     $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
 #         Type => 'ACLEditor_ACL',
 #     );
-# 
+#
 #     my $ACLItemsOutput = '';
 #     for my $ACLName ( sort keys %ACLDump ) {
-# 
+#
 #         # create output
 #         $ACLItemsOutput .= $Self->_ACLItemOutput(
 #             Key        => $ACLName,
@@ -1053,7 +1053,7 @@ sub ACLDump {
 #             ChangeBy   => $ACLDump{$ACLName}{ChangeBy},
 #         );
 #     }
-# 
+#
 #     # build comment (therefore we need to trick out the filter)
 #     my $PMFileOutput = sprintf <<'END_PM_FILE', $ACLItemsOutput;
 # # OTOBO config file (automatically generated)
@@ -1065,9 +1065,9 @@ sub ACLDump {
 # use utf8;
 # sub Load {
 #     my ($File, $Self) = @_;
-# 
+#
 # %s
-# 
+#
 #     return;
 # }
 # 1;

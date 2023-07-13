@@ -62,7 +62,7 @@ sub Run {
         next CLASS_ID if $HasAccess;
 
         # remove from class list when access is denied
-        delete $ClassList->{$ClassID}
+        delete $ClassList->{$ClassID};
     }
 
     # get layout object
