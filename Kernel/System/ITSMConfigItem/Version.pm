@@ -690,11 +690,11 @@ sub VersionUpdate {
 
     DYNAMICFIELD:
     for my $Attribute ( keys %Param ) {
-        next DYNAMICFIELD if $Attribute !~ /^DynamicField_(.+)/;
-        next DYNAMICFIELD if !$Definition->{DynamicFieldRef}{ $1 };
+        next DYNAMICFIELD unless $Attribute =~ m/^DynamicField_(.+)/;
+        next DYNAMICFIELD unless $Definition->{DynamicFieldRef}{$1};
 
         $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $Definition->{DynamicFieldRef}{ $1 },
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$1},
             ObjectID           => $Version->{VersionID},
             Value              => $Param{ $Attribute },
             UserID             => $Param{UserID},

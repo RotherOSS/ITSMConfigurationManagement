@@ -83,7 +83,8 @@ sub Run {
         }
 
         # check if link event concerns a ticket
-        return 1 if $Param{Data}->{Comment} !~ m{ \A ( \d+ ) %%Ticket \z }xms;
+        return 1 unless $Param{Data}->{Comment} =~ m{ \A ( \d+ ) %%Ticket \z }xms;
+
         $TicketID = $1;
     }
     else {

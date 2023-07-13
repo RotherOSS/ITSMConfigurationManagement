@@ -756,7 +756,7 @@ sub ConfigItemUpdate {
     my @DynamicFieldNames;
     KEY:
     for my $Key ( keys %Param ) {
-        next KEY if $Key !~ /^DynamicField_(.+)/;
+        next KEY unless $Key =~ m/^DynamicField_(.+)/;
 
         push @DynamicFieldNames, $1;
     }
@@ -764,7 +764,7 @@ sub ConfigItemUpdate {
     # get current
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
-        DynamicFields => @DynamicFieldNames ? 1 : 0,
+        DynamicFields => (@DynamicFieldNames ? 1 : 0),
     );
 
     my %Changed;

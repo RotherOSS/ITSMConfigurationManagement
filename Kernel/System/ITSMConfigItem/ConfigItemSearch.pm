@@ -462,7 +462,7 @@ sub ConfigItemSearch {
 
     DYNAMICFIELD:
     for my $ParamName ( keys %Param ) {
-        next DYNAMICFIELD if $ParamName !~ /^DynamicField_(.+)/;
+        next DYNAMICFIELD unless $ParamName =~ m/^DynamicField_(.+)/;
 
         my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
             Name => $1,
