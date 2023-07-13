@@ -18,6 +18,8 @@ use strict;
 use warnings;
 use utf8;
 
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
 our $Self;
 
 # get selenium object
