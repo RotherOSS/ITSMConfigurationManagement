@@ -29,6 +29,8 @@ use Kernel::System::VariableCheck qw(IsHashRefWithData IsArrayRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::DynamicField::Backend',
 );
 
 =head1 NAME

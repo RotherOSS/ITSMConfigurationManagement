@@ -29,6 +29,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Web::Request',
     'Kernel::System::YAML',
+    'Kernel::System::DB',
 );
 
 =head1 NAME

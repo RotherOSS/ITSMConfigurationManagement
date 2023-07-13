@@ -28,6 +28,7 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DynamicField',
     'Kernel::System::Log',
+    'Kernel::System::User',
 );
 
 =head1 NAME

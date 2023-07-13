@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
     'Kernel::System::Web::Request',
+    'Kernel::System::ITSMConfigItem::Version',
 );
 
 =head1 NAME
