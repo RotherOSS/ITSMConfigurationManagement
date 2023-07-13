@@ -150,10 +150,9 @@ prepare search value for export
 sub ExportSearchValuePrepare {
     my ( $Self, %Param ) = @_;
 
-    return if !defined $Param{Value};
+    return unless defined $Param{Value};
 
-    my @Values = split '#####', $Param{Value};
-    @Values = grep {$_} @Values;
+    my @Values = grep {$_} split /#####/, $Param{Value};
 
     return \@Values;
 }

@@ -188,7 +188,7 @@ sub Run {
                 );
 
                 # split the type identifier
-                my @Type = split q{::}, $GetParam{LinkType};
+                my @Type = split /::/, $GetParam{LinkType};
 
                 if ( $Type[0] && $Type[1] && ( $Type[1] eq 'Source' || $Type[1] eq 'Target' ) ) {
 
@@ -220,7 +220,7 @@ sub Run {
             if ( $GetParam{'LinkTogether'} ) {
 
                 # split the type identifier
-                my @Type = split q{::}, $GetParam{LinkTogetherLinkType};
+                my @Type = split /::/, $GetParam{LinkTogetherLinkType};
 
                 if ( $Type[0] && $Type[1] && ( $Type[1] eq 'Source' || $Type[1] eq 'Target' ) ) {
                     for my $ConfigItemIDPartner (@ConfigItemIDs) {

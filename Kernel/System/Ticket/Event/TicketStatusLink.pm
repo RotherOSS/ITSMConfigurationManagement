@@ -123,7 +123,7 @@ sub Run {
         LINE:
         for my $Line ( reverse @HistoryLines ) {
             next LINE if $Line->{HistoryType} ne 'TypeUpdate';
-            my @CommentParts = split '%%', $Line->{Name};
+            my @CommentParts = split /%%/, $Line->{Name};
             $OldTicketType = $CommentParts[3];
             last LINE;
         }

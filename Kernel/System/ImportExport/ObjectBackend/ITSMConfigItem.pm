@@ -482,14 +482,14 @@ sub ExportDataGet {
 
     # add deployment state to the search params
     if ( $SearchData->{DeplStateIDs} ) {
-        my @DeplStateIDs = split '#####', $SearchData->{DeplStateIDs};
+        my @DeplStateIDs = split /#####/, $SearchData->{DeplStateIDs};
         $SearchParams{DeplStateIDs} = \@DeplStateIDs;
         delete $SearchData->{DeplStateIDs};
     }
 
     # add incident state to the search params
     if ( $SearchData->{InciStateIDs} ) {
-        my @InciStateIDs = split '#####', $SearchData->{InciStateIDs};
+        my @InciStateIDs = split /#####/, $SearchData->{InciStateIDs};
         $SearchParams{InciStateIDs} = \@InciStateIDs;
         delete $SearchData->{InciStateIDs};
     }
