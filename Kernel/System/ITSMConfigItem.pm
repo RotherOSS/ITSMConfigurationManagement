@@ -591,6 +591,19 @@ sub ConfigItemAdd {
 
     return if !$Success;
 
+    # find id of new item
+    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        SQL => 'SELECT id FROM configitem WHERE '
+            . 'configitem_number = ? AND class_id = ? ORDER BY id DESC',
+        Bind  => [ \$Param{Number}, \$Param{ClassID} ],
+        Limit => 1,
+    );
+
+    # fetch the result
+    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+        $Param{ConfigItemID} = $Row[0];
+    }
+
     # check for name module
     my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
 
@@ -610,25 +623,12 @@ sub ConfigItemAdd {
         # create a backend object
         my $NameModuleObject = $NameModule->new( %{$Self} );
 
-        # set name used
-        $NameModuleObject->SetUsed(
-            Name => $Param{Name},
-            Used => 1,
+        # set name used by configitem
+        $NameModuleObject->Set(
+            Name         => $Param{Name},
+            ConfigItemID => $Param{ConfigItemID},
         );
 
-    }
-
-    # find id of new item
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id FROM configitem WHERE '
-            . 'configitem_number = ? AND class_id = ? ORDER BY id DESC',
-        Bind  => [ \$Param{Number}, \$Param{ClassID} ],
-        Limit => 1,
-    );
-
-    # fetch the result
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $Param{ConfigItemID} = $Row[0];
     }
 
     # add the first version
@@ -751,9 +751,8 @@ sub ConfigItemDelete {
             my $NameModuleObject = $NameModule->new( %{$Self} );
 
             # set name free
-            $NameModuleObject->SetUsed(
+            $NameModuleObject->Set(
                 Name => $ConfigItemData->{Name},
-                Used => 0,
             );
         }
     }
@@ -910,45 +909,48 @@ sub ConfigItemUpdate {
         );
     }
 
-    # check for name module
-    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+    if ( $Param{Name} ne $ConfigItem->{Name} ) {
 
-    if ( IsHashRefWithData($NameModuleConfig) ) {
+        # check for name module
+        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
 
-        # get class list
-        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        );
+        if ( IsHashRefWithData($NameModuleConfig) ) {
 
-        if ( $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+            # get class list
+            my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::ConfigItem::Class',
+            );
 
-            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+            if ( $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
 
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+                # check if name module exists
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+                    );
+
+                    return;
+                }
+
+                # create a backend object
+                my $NameModuleObject = $NameModule->new( %{$Self} );
+
+                # set new name used
+                $NameModuleObject->Set(
+                    Name         => $Param{Name},
+                    ConfigItemID => $Param{ConfigItemID},
                 );
 
-                return;
+                # set old name free
+                $NameModuleObject->Set(
+                    Name => $ConfigItem->{Name},
+                );
             }
-
-            # create a backend object
-            my $NameModuleObject = $NameModule->new( %{$Self} );
-
-            # set new name used
-            $NameModuleObject->SetUsed(
-                Name => $Param{Name},
-                Used => 1,
-            );
-
-            # set old name free
-            $NameModuleObject->SetUsed(
-                Name => $ConfigItem->{Name},
-                Used => 0,
-            );
         }
+
     }
 
     my %Events = (
