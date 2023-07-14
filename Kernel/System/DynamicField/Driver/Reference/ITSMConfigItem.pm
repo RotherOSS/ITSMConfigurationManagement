@@ -156,10 +156,12 @@ This is used in auto completion when searching for possible object IDs.
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
+    # return a list of config item IDs
     return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         Number => $Param{Term},
         Limit  => $Param{MaxResults},
-    )->@*;
+        Result => 'ARRAY',
+    );
 }
 
 1;
