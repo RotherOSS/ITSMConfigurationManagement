@@ -394,9 +394,9 @@ END_SQL
         for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
 
             # validate each dynamic field
-            next DYNAMICFIELD if !$DynamicFieldConfig;
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD unless $DynamicFieldConfig;
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
 
             # get the current value for each dynamic field
             my $Value = $DynamicFieldBackendObject->ValueGet(

@@ -15,9 +15,17 @@
 
 package Kernel::System::ITSMConfigItem::ConfigItemSearch;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsStringWithData);
 
 our $ObjectManagerDisabled = 1;
@@ -163,8 +171,7 @@ sub ConfigItemSearch {
     );
 
     # check types of given arguments
-    # references to an empty array are not accepted
-    ARGUMENT:
+    KEY:
     for my $Key (
         qw(
             ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs InciStateIDs CreateBy ChangeBy
@@ -172,8 +179,8 @@ sub ConfigItemSearch {
         )
         )
     {
-        next ARGUMENT if !$Param{$Key};
-        next ARGUMENT if ref $Param{$Key} eq 'ARRAY' && @{ $Param{$Key} };
+        next KEY if !$Param{$Key};                                      # why no search for '0' ???
+        next KEY if ref $Param{$Key} eq 'ARRAY' && @{ $Param{$Key} };
 
         # log error
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -258,7 +265,7 @@ sub ConfigItemSearch {
         $VersionTableJoined = 1;
     }
 
-    my $SQLExt = ' WHERE 1=1';
+    my $SQLExt = ' WHERE 1 = 1';
 
     # Limit the search to just one (or a list) ConfigItemID
     if ( IsStringWithData( $Param{ConfigItemID} ) || IsArrayRefWithData( $Param{ConfigItemID} ) ) {
