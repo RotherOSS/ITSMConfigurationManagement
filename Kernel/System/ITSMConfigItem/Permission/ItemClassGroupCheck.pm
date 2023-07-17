@@ -19,8 +19,6 @@ package Kernel::System::ITSMConfigItem::Permission::ItemClassGroupCheck;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',

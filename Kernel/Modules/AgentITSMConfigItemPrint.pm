@@ -19,8 +19,6 @@ package Kernel::Modules::AgentITSMConfigItemPrint;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;

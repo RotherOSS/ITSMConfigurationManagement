@@ -19,8 +19,6 @@ package Kernel::Modules::AgentITSMConfigItemZoom;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 

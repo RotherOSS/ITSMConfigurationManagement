@@ -19,8 +19,6 @@ package var::packagesetup::ITSMConfigurationManagement;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 # core modules
 
 # CPAN modules

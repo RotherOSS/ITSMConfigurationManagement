@@ -19,8 +19,6 @@ package Kernel::System::Console::Command::Admin::ITSM::IncidentState::Recalculat
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (

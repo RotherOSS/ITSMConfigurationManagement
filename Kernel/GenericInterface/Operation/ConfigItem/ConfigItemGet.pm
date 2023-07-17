@@ -19,8 +19,6 @@ package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use MIME::Base64;
 use Kernel::System::VariableCheck qw(:all);
 

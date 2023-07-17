@@ -19,8 +19,6 @@ package Kernel::System::Console::Command::Admin::ITSM::Configitem::ListDuplicate
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::System::VariableCheck qw(IsArrayRefWithData);
 
 use parent qw(Kernel::System::Console::BaseCommand);
