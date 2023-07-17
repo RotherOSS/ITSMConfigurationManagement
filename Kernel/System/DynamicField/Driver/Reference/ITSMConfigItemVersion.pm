@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem;
+package Kernel::System::DynamicField::Driver::Reference::ITSMConfigItemVersion;
 
 use v5.24;
 use strict;
@@ -38,11 +38,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::Reference::ITSMConfigItemVersion - backend for the Reference dynamic field
 
 =head1 DESCRIPTION
 
-ITSMConfigItem backend for the Reference dynamic field.
+ITSMConfigItemVersion backend for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
 
@@ -66,7 +66,7 @@ sub GetFieldTypeSettings {
 
 checks read permission for a given object and UserID.
 
-    $Permission = $LinkObject->ObjectPermission(
+    $Permission = $PluginObject->ObjectPermission(
         Key     => 123,
         UserID  => 1,
     );
@@ -110,8 +110,8 @@ return a hash of object descriptions.
 Return
 
     %Description = (
-        Normal => "Ticket# 1234455",
-        Long   => "Ticket# 1234455: Need a sample ticket title",
+        Normal => "CI# 1234455",
+        Long   => "CI# 1234455: Need a sample config item title",
     );
 
 =cut
@@ -132,7 +132,7 @@ sub ObjectDescriptionGet {
     }
 
     my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-        ConfigItemID => $Param{ObjectID},
+        VersionID => $Param{ObjectID},
     );
 
     return unless $ConfigItem;
@@ -143,6 +143,7 @@ sub ObjectDescriptionGet {
         Normal => $ConfigItem->{Number},
 
         # TODO: necessary?
+        # TODO: add version information?
         Long => "$ConfigItem->{Number}: $ConfigItem->{Name}",
     );
 }
@@ -157,12 +158,25 @@ sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
     # return a list of config item IDs
+    # TODO: this only searches the latest versions
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    return $ConfigItemObject->ConfigItemSearch(
+    my @ConfigItemIDs    = $ConfigItemObject->ConfigItemSearch(
         Name   => ["%$Param{Term}%"],    # substring search
         Limit  => $Param{MaxResults},
         Result => 'ARRAY',
     );
+
+    # actually store latest version ID
+    my @VersionIDs;
+    for my $ConfigItemID (@ConfigItemIDs) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+        );
+
+        push @VersionIDs, $ConfigItem->{VersionID};
+    }
+
+    return @VersionIDs;
 }
 
 1;
