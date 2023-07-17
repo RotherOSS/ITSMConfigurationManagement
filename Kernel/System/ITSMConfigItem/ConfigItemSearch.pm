@@ -24,11 +24,11 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::ConfigItemSearch - config item search lib
+Kernel::System::ITSMConfigItem::ConfigItemSearch - sub module of Kernel::System::ITSMConfigItem for config item search
 
 =head1 DESCRIPTION
 
-All config item search functions.
+All config item search functions. The functions are available via the C<Kernel::System::ITSMConfigItem> object.
 
 =head2 ConfigItemSearch()
 
@@ -120,13 +120,11 @@ To find config items in your system.
         CacheTTL => 60 * 15,
     );
 
-Returns:
-
-Result: 'ARRAY'
+Returns for C<Result => 'ARRAY'>:
 
     @ConfigItemIDs = ( 1, 2, 3 );
 
-Result: 'HASH'
+Returns for C<Result => 'HASH'> or when no result type is specified:
 
     %ConfigItemIDs = (
         1 => '2010102700001',
@@ -134,9 +132,9 @@ Result: 'HASH'
         3 => '2010102700003',
     );
 
-Result: 'COUNT'
+Returns for C<Result => 'COUNT'>:
 
-    $ConfigItemIDs = 123;
+    $NumConfigItemIDs = 3; # three results
 
 =cut
 

@@ -219,14 +219,21 @@ sub ConfigItemResultList {
 
 =head2 ConfigItemGet()
 
-return a config item as hash reference
+return a config item as hash reference. The latest version is retrieved when the config item ID is passed.
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => 123,
-        VersionID     => 243,  # to get a different version than the default
-                               # either ConfigItemID or VersionID is required
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
+
+A specific version is returned when the Version ID is passed.
+
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        VersionID     => 243,
+        DynamicFields => 1,    # (optional) default 0 (0|1)
+    );
+
+When both C<ConfigItemID> and C<VersionID> are passed, then an consistency check is performed.
 
 A hashref with the following keys is returned:
 
