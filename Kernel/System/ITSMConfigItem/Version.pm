@@ -477,7 +477,8 @@ add a new version
 
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID      => 123,
-        LastVersion       => {...}          # either ConfigItemID or LastVersion is mandatory
+        LastVersionID     => 123,
+        LastVersion       => {...}          # either ConfigItemID or LastVersion(ID) is mandatory
         UserID            => 1,
         Name              => 'The Name',    # optional
         DeplStateID       => 8,             # optional
@@ -492,6 +493,7 @@ sub VersionAdd {
 
     my $LastVersion = $Param{LastVersion} ? $Param{LastVersion} : $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
+        VersionID     => $Param{LastVersionID},
         DynamicFields => 1,
     );
 
@@ -587,20 +589,6 @@ END_SQL
 
     return unless $Success;
 
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
-    DYNAMICFIELD:
-    for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
-        next DYNAMICFIELD if !defined $Version{ 'DynamicField_' . $DynamicField->{Name} };
-
-        $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $DynamicField,
-            ObjectID           => $VersionID,
-            Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
-            UserID             => $Param{UserID},
-        );
-    }
-
     # trigger VersionCreate event
     $Self->EventHandler(
         Event => 'VersionCreate',
@@ -611,6 +599,49 @@ END_SQL
         },
         UserID => $Param{UserID},
     );
+
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    DYNAMICFIELD:
+    for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
+        next DYNAMICFIELD if !defined $Version{ 'DynamicField_' . $DynamicField->{Name} };
+
+        my $Success = $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $DynamicField,
+            ObjectID           => $VersionID,
+            Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
+            UserID             => $Param{UserID},
+            ConfigItemHandled  => 1,
+        );
+
+        # only throw events for fields changed from the last version - checked by ConfigItemUpdate()
+        if ( $Success && exists $Param{ 'DynamicField_' . $DynamicField->{Name} } ) {
+            # prepare readable values for the history
+            my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+                DynamicFieldConfig => $DynamicField,
+                Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
+            );
+            my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
+                DynamicFieldConfig => $DynamicField,
+                Value              => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
+            );
+
+            # trigger dynamic field update event
+            $Self->EventHandler(
+                Event => 'ConfigItemDynamicFieldUpdate_' . $Param{DynamicFieldConfig}->{Name},
+                Data  => {
+                    FieldName        => $DynamicField->{Name},
+                    Value            => $Version{ 'DynamicField_' . $DynamicField->{Name} },
+                    OldValue         => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
+                    ReadableValue    => $ReadableValue->{Value},
+                    ReadableOldValue => $ReadableOldValue->{Value},
+                    ConfigItemID     => $Version{ConfigItemID},
+                    UserID           => $Param{UserID},
+                },
+                UserID => $Param{UserID},
+            );
+        }
+    }
 
     # TODO: Incorporate somewhere probably
     #    # trigger definition update event
@@ -695,7 +726,6 @@ sub VersionUpdate {
             $Param{$Attribute} ||= $Version->{$Attribute};
         }
 
-        # TODO: maybe include change_time change_by
         # insert new version
         my $Success = $DBObject->Do(
             SQL => <<'END_SQL',
@@ -727,12 +757,41 @@ END_SQL
         next DYNAMICFIELD unless $Attribute =~ m/^DynamicField_(.+)/;
         next DYNAMICFIELD unless $Definition->{DynamicFieldRef}{$1};
 
-        $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$1},
+        my $DynamicField = $Definition->{DynamicFieldRef}{$1};
+        my $Success      = $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $DynamicField,
             ObjectID           => $Version->{VersionID},
             Value              => $Param{$Attribute},
             UserID             => $Param{UserID},
+            ConfigItemHandled  => 1,
         );
+
+        if ( $Success ) {
+            # prepare readable values for the history
+            my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+                DynamicFieldConfig => $DynamicField,
+                Value              => $Param{ 'DynamicField_' . $DynamicField->{Name} },
+            );
+            my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
+                DynamicFieldConfig => $DynamicField,
+                Value              => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
+            );
+
+            # trigger dynamic field update event
+            $Self->EventHandler(
+                Event => 'ConfigItemDynamicFieldUpdate_' . $Param{DynamicFieldConfig}->{Name},
+                Data  => {
+                    FieldName        => $DynamicField->{Name},
+                    Value            => $Param{ 'DynamicField_' . $DynamicField->{Name} },
+                    OldValue         => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
+                    ReadableValue    => $ReadableValue->{Value},
+                    ReadableOldValue => $ReadableOldValue->{Value},
+                    ConfigItemID     => $Version->{ConfigItemID},
+                    UserID           => $Param{UserID},
+                },
+                UserID => $Param{UserID},
+            );
+        }
     }
 
     #    # TODO: a separate VersionUpdate event is probably not necessary
@@ -759,7 +818,6 @@ END_SQL
         );
     }
 
-    # TODO: Think about this when including VersionNumber
     $CacheObject->Delete(
         Type => $Self->{CacheType},
         Key  => 'VersionNameGet::VersionID::' . $Version->{VersionID},

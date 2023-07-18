@@ -85,6 +85,16 @@ sub Run {
         }
     }
 
+    # check for dynamic fields first, most events will be this
+    if ( $Param{Event} =~ /^ConfigItemDynamicFieldUpdate_/ ) {
+        return $Self->_HistoryAdd(
+            ConfigItemID => $Param{Data}{ConfigItemID},
+            HistoryType  => 'ValueUpdate',
+            Comment      => "$Param{Data}{FieldName}%%$Param{Data}{ReadableOldValue}%%$Param{Data}{ReadableValue}",
+            UserID       => $Param{UserID},
+        );
+    }
+
     # due to consistency with ticket history, we need HistoryType
     $Param{HistoryType} = $Param{Event};
 
@@ -99,7 +109,7 @@ sub Run {
         DeploymentStateUpdate => \&_HistoryAdd,
         DefinitionUpdate      => \&_HistoryAdd,
         VersionCreate         => \&_HistoryAdd,
-        ValueUpdate           => \&_HistoryAdd,
+        VersionUpdate         => \&_HistoryAdd,
         DefinitionCreate      => \&_HistoryAdd,
         VersionDelete         => \&_HistoryAdd,
         AttachmentAddPost     => \&_HistoryAdd,

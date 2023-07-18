@@ -52,6 +52,64 @@ sub new {
     return bless {}, $Type;
 }
 
+=head2 PreValueSet()
+
+Perform specific functions before the Value set for this object type.
+
+    my $Success = $DynamicFieldITSMChangeHandlerObject->PreValueSet(
+        Param              => \%Param,
+        ConfigItemHandled  => 1,            # optional, skips this if handled elsewhere
+    );
+
+=cut
+
+sub PreValueSet {
+    my ( $Self, %Param ) = @_;
+
+    # if we are coming from Version.pm nothing has to be changed
+    return 1 if $Param{ConfigItemHandled};
+
+    # all needed params are checked by the backend before
+    if ( !$Param{Param} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Param of backend!",
+        );
+
+        return;
+    }
+    
+    # make sure to upgrade version of subsequent dynamic field changes if a version was added request
+    if ( $Self->{VersionUpgrade} && $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} } ) {
+        $Param{Param}{ObjectID} = $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} };
+
+        return 1;
+    }
+
+    # check whether the changed field triggers a new configitem version and if so, add a new one
+    if ( $Param{Param}{DynamicFieldConfig}{NewVersionTrigger} && $Param{Param}{DynamicFieldConfig}{NewVersionTrigger} eq 1 ) {
+        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+        my $NewVersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
+            LastVersionID => $Param{Param}{ObjectID},
+        );
+
+        if ( !$NewVersionID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not create new version for LastVersionID $Param{Param}{ObjectID}!",
+            );
+
+            return;
+        }
+
+        $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} } = $NewVersionID;
+        $Param{Param}{ObjectID}                            = $NewVersionID;
+    }
+
+    return 1;
+}
+
 =head2 PostValueSet()
 
 Perform specific functions after the Value set for this object type.
@@ -62,6 +120,7 @@ Perform specific functions after the Value set for this object type.
                                                         # must be linked to, e. g. ITSMChangeID
         Value              => $Value,                   # Value to store, depends on backend type
         UserID             => 123,
+        ConfigItemHandled  => 1,                        # optional, skips this if handled elsewhere
     );
 
 =cut
@@ -69,38 +128,51 @@ Perform specific functions after the Value set for this object type.
 sub PostValueSet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(DynamicFieldConfig ObjectID UserID)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
-    }
+    # if we are coming from Version.pm nothing has to be changed
+    return 1 if $Param{ConfigItemHandled};
+    
+    # all needed params are checked by the backend before
 
-    # check DynamicFieldConfig (general)
-    if ( !IsHashRefWithData( $Param{DynamicFieldConfig} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "The field configuration is invalid",
-        );
-        return;
-    }
+    my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $CacheObject               = $Kernel::OM->Get('Kernel::System::Cache');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    # check DynamicFieldConfig (internally)
-    for my $Needed (qw(ID FieldType ObjectType)) {
-        if ( !$Param{DynamicFieldConfig}->{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed in DynamicFieldConfig!",
-            );
-            return;
-        }
-    }
+    my $ConfigItemID = $ConfigItemObject->VersionConfigItemIDGet( VersionID => $Param{ObjectID} );
 
-    # nothing to do
+    # delete cache
+    $CacheObject->Delete(
+        Type => $ConfigItemObject->{CacheType},
+        Key  => 'ConfigItemGet::VersionID::' . $Param{ObjectID} . '::1',
+    );
+    $CacheObject->Delete(
+        Type => $ConfigItemObject->{CacheType},
+        Key  => 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::1',
+    );
+
+    # prepare readable values for the history
+    my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+        DynamicFieldConfig => $Param{DynamicFieldConfig},
+        Value              => $Param{Value}
+    );
+    my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
+        DynamicFieldConfig => $Param{DynamicFieldConfig},
+        Value              => $Param{Value},
+    );
+
+    # trigger event
+    $ConfigItemObject->EventHandler(
+        Event => 'ConfigItemDynamicFieldUpdate_' . $Param{DynamicFieldConfig}{Name},
+        Data  => {
+            FieldName        => $Param{DynamicFieldConfig}{Name},
+            Value            => $Param{Value},
+            OldValue         => $Param{OldValue},
+            ReadableValue    => $ReadableValue,
+            ReadableOldValue => $ReadableOldValue,
+            ConfigItemID     => $ConfigItemID,
+            UserID           => $Param{UserID},
+        },
+        UserID => $Param{UserID},
+    );
 
     return 1;
 }

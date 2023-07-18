@@ -316,15 +316,12 @@ END_SQL
     else {
 
         # TODO: implement version string: v.version
-        # TODO: must versions be ordered ???
-        # TODO: is ci.create_time and ci.create_by correct ???
-        # TODO: is v.change_time and v.change_by correct ???
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
     v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,
-    ci.create_time, ci.create_by, v.change_time, v.change_by
+    ci.create_time, ci.create_by, ci.change_time, ci.change_by
   FROM configitem ci
   LEFT JOIN configitem_version v
     ON ci.last_version_id = v.id
@@ -794,7 +791,8 @@ sub ConfigItemUpdate {
 
     # TODO: Think about DefinitionID changes
 
-    if ( !$AddVersion && @DynamicFieldNames ) {
+    # check for changed dynamic fields to trigger versions and filter history entries
+    if ( @DynamicFieldNames ) {
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -805,16 +803,18 @@ sub ConfigItemUpdate {
                 Name => $Name,
             );
 
-            next DYNAMICFIELD if !$DynamicFieldBackendObject->ValueIsDifferent(
+            if ( !$DynamicFieldBackendObject->ValueIsDifferent(
                 DynamicFieldConfig => $DynamicField,
                 Value1             => $Param{"DynamicField_$Name"},
                 Value2             => $ConfigItem->{"DynamicField_$Name"},
-            );
+            ) ) {
+                delete $Param{"DynamicField_$Name"};
 
-            if ( $DynamicField->{Config}{VersionTrigger} ) {
+                next DYNAMICFIELD;
+            }
+
+            if ( $DynamicField->{NewVersionTrigger} && $DynamicField->{NewVersionTrigger} eq 1 ) {
                 $AddVersion = 1;
-
-                last DYNAMICFIELD;
             }
         }
     }

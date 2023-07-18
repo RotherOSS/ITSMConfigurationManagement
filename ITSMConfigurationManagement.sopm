@@ -125,7 +125,6 @@
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
-        <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItemVersion.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
@@ -1076,6 +1075,14 @@
             <Data Key="change_by">1</Data>
         </Insert>
         <Insert Table="configitem_history_type">
+            <Data Key="name" Type="Quote">VersionUpdate</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="configitem_history_type">
             <Data Key="name" Type="Quote">ValueUpdate</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
@@ -1156,6 +1163,18 @@
         <TableAlter Name="configitem_definition" Version="11.0.0">
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>
+        <TableAlter Name="configitem_version" Version="11.0.0">
+            <ColumnAdd Name="change_time" Required="true" Type="DATE" />
+            <ColumnAdd Name="change_by" Required="true" Type="INTEGER" />
+        </TableAlter>
+        <Insert Table="configitem_history_type" Version="11.0.0">
+            <Data Key="name" Type="Quote">VersionUpdate</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
     </DatabaseUpgrade>
     <DatabaseUninstall Type="pre">
         <TableDrop Name="configitem_counter" />
