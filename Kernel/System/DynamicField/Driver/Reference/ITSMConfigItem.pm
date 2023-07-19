@@ -29,10 +29,12 @@ use parent qw(Kernel::System::DynamicField::Driver::Reference::Base);
 # CPAN modules
 
 # OTOBO modules
+use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
+    'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
 );
 
@@ -57,7 +59,22 @@ sub GetFieldTypeSettings {
 
     my @FieldTypeSettings;
 
-    # TODO: select CI classes
+    # add the selection for the config item class
+    {
+        my $ClassID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        push @FieldTypeSettings,
+            {
+                ConfigParamName => 'ClassID',
+                Label           => Translatable('Class of the config item'),
+                Explanation     => Translatable('Select the class of the config item'),
+                InputType       => 'Selection',
+                SelectionData   => $ClassID2Name,
+                PossibleNone    => 0,                                                     # the class is required
+            };
+    }
 
     return @FieldTypeSettings;
 }
@@ -156,12 +173,25 @@ This is used in auto completion when searching for possible object IDs.
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
+    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+
+    # Support restriction by class
+    my %SearchParams;
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    {
+        if ( $DynamicFieldConfig->{Config}->{ClassID} ) {
+            $SearchParams{ClassIDs} = [ $DynamicFieldConfig->{Config}->{ClassID} ];
+        }
+    }
+
     # return a list of config item IDs
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
     return $ConfigItemObject->ConfigItemSearch(
-        Name   => ["%$Param{Term}%"],    # substring search
         Limit  => $Param{MaxResults},
         Result => 'ARRAY',
+        %SearchParams,
+        Name => ["%$Param{Term}%"],    # substring search
     );
 }
 
