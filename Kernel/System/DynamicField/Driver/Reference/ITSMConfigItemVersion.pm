@@ -22,7 +22,7 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
-use parent qw(Kernel::System::DynamicField::Driver::Reference::Base);
+use parent qw(Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem);
 
 # core modules
 
@@ -46,57 +46,7 @@ ITSMConfigItemVersion backend for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
 
-=head2 GetFieldTypeSettings()
 
-Get field type settings that are specific to the specific referenced object type.
-
-=cut
-
-sub GetFieldTypeSettings {
-    my ( $Self, %Param ) = @_;
-
-    my @FieldTypeSettings;
-
-    # TODO: select CI classes
-
-    return @FieldTypeSettings;
-}
-
-=head2 ObjectPermission()
-
-checks read permission for a given object and UserID.
-
-    $Permission = $PluginObject->ObjectPermission(
-        Key     => 123,
-        UserID  => 1,
-    );
-
-=cut
-
-sub ObjectPermission {
-    my ( $Self, %Param ) = @_;
-
-    # TODO: Check how (and if at all) permissions should be checked
-
-    # check needed stuff
-    for my $Argument (qw(Key UserID)) {
-        if ( !$Param{$Argument} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Argument!",
-            );
-
-            return;
-        }
-    }
-
-    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->Permission(
-        Scope  => 'Item',
-        ItemID => $Param{Key},
-        UserID => $Param{UserID},
-        Type   => 'ro',
-    );
-}
 
 =head2 ObjectDescriptionGet()
 
@@ -157,17 +107,15 @@ This is used in auto completion when searching for possible object IDs.
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
-    # return a list of config item IDs
+    # get a list of config item IDs
     # TODO: this only searches the latest versions
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my @ConfigItemIDs    = $ConfigItemObject->ConfigItemSearch(
-        Name   => ["%$Param{Term}%"],    # substring search
-        Limit  => $Param{MaxResults},
-        Result => 'ARRAY',
+    my @ConfigItemIDs = $Self->SUPER::ConfigItemSearch(
+        %Param,
     );
 
     # actually store latest version ID
     my @VersionIDs;
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     for my $ConfigItemID (@ConfigItemIDs) {
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItemID,

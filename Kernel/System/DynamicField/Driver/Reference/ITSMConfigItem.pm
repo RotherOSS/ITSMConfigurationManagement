@@ -38,17 +38,17 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - plugin module for the Reference dynamic field
 
 =head1 DESCRIPTION
 
-ITSMConfigItem backend for the Reference dynamic field.
+ITSMConfigItem plugin for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
 
 =head2 GetFieldTypeSettings()
 
-Get field type settings that are specific to the specific referenced object type.
+Get field type settings that are specific to the referenced object type ITSMConfigItem.
 
 =cut
 
@@ -66,7 +66,7 @@ sub GetFieldTypeSettings {
 
 checks read permission for a given object and UserID.
 
-    $Permission = $LinkObject->ObjectPermission(
+    $Permission = $PluginObject->ObjectPermission(
         Key     => 123,
         UserID  => 1,
     );
@@ -110,8 +110,8 @@ return a hash of object descriptions.
 Return
 
     %Description = (
-        Normal => "Ticket# 1234455",
-        Long   => "Ticket# 1234455: Need a sample ticket title",
+        Normal => "CI# 1234455",
+        Long   => "CI# 1234455: Need a sample config item title",
     );
 
 =cut
