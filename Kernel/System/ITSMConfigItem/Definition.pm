@@ -562,7 +562,7 @@ sub _DefinitionDynamicFieldGet {
 
     for my $Key ( keys %ContentHash ) {
         if ( $Key eq 'DF' ) {
-            $DynamicFields{ $ContentHash{$Key} } = 1;
+            $DynamicFields{ $ContentHash{$Key} } = \%ContentHash;
         }
         elsif ( ref $ContentHash{$Key} ) {
             %DynamicFields = (
@@ -584,6 +584,12 @@ sub _DefinitionDynamicFieldGet {
     if ( $Param{Definition} ) {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
+        # Store config item class to check for version triggers in dynamic field object handler
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+        my $Class = $ClassList->{ $Param{ClassID} };
+
         my %ReturnDynamicFields;
 
         DYNAMICFIELD:
@@ -600,7 +606,14 @@ sub _DefinitionDynamicFieldGet {
                 Config     => $DynamicField->{Config},
                 FieldType  => $DynamicField->{FieldType},
                 ObjectType => $DynamicField->{ObjectType},
+                CIClass    => $Class,
             };
+
+            for my $Attribute ( qw/Mandatory Label Readonly/ ) {
+                if ( defined $DynamicFields{ $Name }{ $Attribute } ) {
+                    $ReturnDynamicFields{ $Name }{ $Attribute } = $DynamicFields{ $Name }{ $Attribute };
+                }
+            }
 
             # TODO: save versions of DynamicFieldSet-DFs (and use them!)
         }

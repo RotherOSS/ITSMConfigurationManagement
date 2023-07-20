@@ -755,9 +755,6 @@ sub ConfigItemUpdate {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # TODO: class specific triggers? (Prio 3)
-    my %VersionTrigger = %{ $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {} };
-
     # gather dynamic field keys
     my @DynamicFieldNames;
     KEY:
@@ -773,6 +770,23 @@ sub ConfigItemUpdate {
         DynamicFields => ( @DynamicFieldNames ? 1 : 0 ),
     );
 
+    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+    );
+    my $Class = $ClassList->{ $ConfigItem->{ClassID} };
+
+    if ( !$Class ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "No valid class found for id '$ConfigItem->{ClassID}' (ConfigItem#$ConfigItem->{Number})!",
+        );
+
+        return;
+    }
+
+    my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
+    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Class } // [] };
+
     my %Changed;
     my $AddVersion = 0;
 
@@ -786,7 +800,9 @@ sub ConfigItemUpdate {
             New => $Param{$Attribute},
         };
 
-        $AddVersion = $VersionTrigger{$Attribute} || $AddVersion;
+        if ( $VersionTrigger{ $Attribute } ) {
+            $AddVersion = 1;
+        }
     }
 
     # TODO: Think about DefinitionID changes
@@ -813,7 +829,7 @@ sub ConfigItemUpdate {
                 next DYNAMICFIELD;
             }
 
-            if ( $DynamicField->{NewVersionTrigger} && $DynamicField->{NewVersionTrigger} eq 1 ) {
+            if ( $VersionTrigger{"DynamicField_$Name"} ) {
                 $AddVersion = 1;
             }
         }

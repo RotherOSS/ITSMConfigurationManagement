@@ -58,16 +58,12 @@ Perform specific functions before the Value set for this object type.
 
     my $Success = $DynamicFieldITSMChangeHandlerObject->PreValueSet(
         Param              => \%Param,
-        ConfigItemHandled  => 1,            # optional, skips this if handled elsewhere
     );
 
 =cut
 
 sub PreValueSet {
     my ( $Self, %Param ) = @_;
-
-    # if we are coming from Version.pm nothing has to be changed
-    return 1 if $Param{ConfigItemHandled};
 
     # all needed params are checked by the backend before
     if ( !$Param{Param} ) {
@@ -79,7 +75,10 @@ sub PreValueSet {
         return;
     }
     
-    # make sure to upgrade version of subsequent dynamic field changes if a version was added request
+    # if we are coming from Version.pm nothing has to be changed
+    return 1 if $Param{Param}{ConfigItemHandled};
+
+    # upgrade version of subsequent dynamic field changes if a version was added in this request
     if ( $Self->{VersionUpgrade} && $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} } ) {
         $Param{Param}{ObjectID} = $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} };
 
@@ -87,7 +86,10 @@ sub PreValueSet {
     }
 
     # check whether the changed field triggers a new configitem version and if so, add a new one
-    if ( $Param{Param}{DynamicFieldConfig}{NewVersionTrigger} && $Param{Param}{DynamicFieldConfig}{NewVersionTrigger} eq 1 ) {
+    my $TriggerConfig  = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionTrigger') // {};
+    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Param{Param}{DynamicFieldConfig}{CIClass} } // [] };
+
+    if ( $VersionTrigger{ 'DynamicField_' . $Param{Param}{DynamicFieldConfig}{Name} } ) {
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
         my $NewVersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
