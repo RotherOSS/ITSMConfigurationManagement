@@ -1461,6 +1461,8 @@
             </Array>
         </Value>
     </Setting>
+
+    <!-- dynamic field related settings -->
     <Setting Name="DynamicFields::ObjectType###ITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">DynamicField object registration.</Description>
         <Navigation>Core::DynamicFields::ObjectTypeRegistration</Navigation>
@@ -1480,6 +1482,24 @@
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###DynamicField">AgentITSMConfigItemEdit</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField">AgentITSMConfigItemPrint</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField">AgentITSMConfigItemZoom</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver###Reference###ReferencedObjectTypes###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Referenced object types that are available when ITSMConfigurationManagement is activated.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Array>
+                <Item>ITSMConfigItem</Item>
+                <Item>ITSMConfigItemVersion</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::NameModule" Required="0" Valid="1">
+        <Description Translatable="1">This configuration defines modules to suggest and check names for config items per config item class.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
+        <Value>
+            <Hash>
             </Hash>
         </Value>
     </Setting>

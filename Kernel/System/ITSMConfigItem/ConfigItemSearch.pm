@@ -15,20 +15,28 @@
 
 package Kernel::System::ITSMConfigItem::ConfigItemSearch;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsStringWithData);
 
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::ConfigItemSearch - config item search lib
+Kernel::System::ITSMConfigItem::ConfigItemSearch - sub module of Kernel::System::ITSMConfigItem for config item search
 
 =head1 DESCRIPTION
 
-All config item search functions.
+All config item search functions. The functions are available via the C<Kernel::System::ITSMConfigItem> object.
 
 =head2 ConfigItemSearch()
 
@@ -120,13 +128,11 @@ To find config items in your system.
         CacheTTL => 60 * 15,
     );
 
-Returns:
-
-Result: 'ARRAY'
+Returns for C<Result => 'ARRAY'>:
 
     @ConfigItemIDs = ( 1, 2, 3 );
 
-Result: 'HASH'
+Returns for C<Result => 'HASH'> or when no result type is specified:
 
     %ConfigItemIDs = (
         1 => '2010102700001',
@@ -134,9 +140,9 @@ Result: 'HASH'
         3 => '2010102700003',
     );
 
-Result: 'COUNT'
+Returns for C<Result => 'COUNT'>:
 
-    $ConfigItemIDs = 123;
+    $NumConfigItemIDs = 3; # three results
 
 =cut
 
@@ -165,8 +171,7 @@ sub ConfigItemSearch {
     );
 
     # check types of given arguments
-    # references to an empty array are not accepted
-    ARGUMENT:
+    KEY:
     for my $Key (
         qw(
             ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs InciStateIDs CreateBy ChangeBy
@@ -174,8 +179,8 @@ sub ConfigItemSearch {
         )
         )
     {
-        next ARGUMENT if !$Param{$Key};
-        next ARGUMENT if ref $Param{$Key} eq 'ARRAY' && @{ $Param{$Key} };
+        next KEY if !$Param{$Key};                                      # why no search for '0' ???
+        next KEY if ref $Param{$Key} eq 'ARRAY' && @{ $Param{$Key} };
 
         # log error
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -260,7 +265,7 @@ sub ConfigItemSearch {
         $VersionTableJoined = 1;
     }
 
-    my $SQLExt = ' WHERE 1=1';
+    my $SQLExt = ' WHERE 1 = 1';
 
     # Limit the search to just one (or a list) ConfigItemID
     if ( IsStringWithData( $Param{ConfigItemID} ) || IsArrayRefWithData( $Param{ConfigItemID} ) ) {

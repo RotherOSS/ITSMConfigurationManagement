@@ -219,14 +219,21 @@ sub ConfigItemResultList {
 
 =head2 ConfigItemGet()
 
-return a config item as hash reference
+return a config item as hash reference. The latest version is retrieved when the config item ID is passed.
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => 123,
-        VersionID     => 243,  # to get a different version than the default
-                               # either ConfigItemID or VersionID is required
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
+
+A specific version is returned when the Version ID is passed.
+
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        VersionID     => 243,
+        DynamicFields => 1,    # (optional) default 0 (0|1)
+    );
+
+When both C<ConfigItemID> and C<VersionID> are passed, then an consistency check is performed.
 
 A hashref with the following keys is returned:
 
@@ -387,9 +394,9 @@ END_SQL
         for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
 
             # validate each dynamic field
-            next DYNAMICFIELD if !$DynamicFieldConfig;
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD unless $DynamicFieldConfig;
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
 
             # get the current value for each dynamic field
             my $Value = $DynamicFieldBackendObject->ValueGet(
@@ -597,6 +604,33 @@ sub ConfigItemAdd {
         $Param{ConfigItemID} = $Row[0];
     }
 
+    # check for name module
+    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+    if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+
+        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+            );
+            return;
+        }
+
+        # create a backend object
+        my $NameModuleObject = $NameModule->new( %{$Self} );
+
+        # set name used by configitem
+        $NameModuleObject->Set(
+            Name         => $Param{Name},
+            ConfigItemID => $Param{ConfigItemID},
+        );
+
+    }
+
     # add the first version
     $Self->VersionAdd(
         %Param,
@@ -683,6 +717,42 @@ sub ConfigItemDelete {
                 Message  => "Unknown problem when deleting attachment $Filename of ConfigItem "
                     . "$Param{ConfigItemID}. Please check the VirtualFS backend for stale "
                     . "files!",
+            );
+        }
+    }
+
+    # check for name module
+    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
+
+    if ( IsHashRefWithData($NameModuleConfig) ) {
+
+        # get class list
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        my $ConfigItemClass = $ClassList->{ $ConfigItemData->{ClassID} };
+
+        if ( $NameModuleConfig->{$ConfigItemClass} ) {
+
+            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItemClass}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load name module for class $ConfigItemClass!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            my $NameModuleObject = $NameModule->new( %{$Self} );
+
+            # set name free
+            $NameModuleObject->Set(
+                Name => $ConfigItemData->{Name},
             );
         }
     }
@@ -853,6 +923,50 @@ sub ConfigItemUpdate {
             SQL  => 'UPDATE configitem SET change_time = current_timestamp, change_by = ?',
             Bind => [ \$Param{UserID} ],
         );
+    }
+
+    if ( $Param{Name} ne $ConfigItem->{Name} ) {
+
+        # check for name module
+        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+        if ( IsHashRefWithData($NameModuleConfig) ) {
+
+            # get class list
+            my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::ConfigItem::Class',
+            );
+
+            if ( $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+
+                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+                # check if name module exists
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
+                    );
+
+                    return;
+                }
+
+                # create a backend object
+                my $NameModuleObject = $NameModule->new( %{$Self} );
+
+                # set new name used
+                $NameModuleObject->Set(
+                    Name         => $Param{Name},
+                    ConfigItemID => $Param{ConfigItemID},
+                );
+
+                # set old name free
+                $NameModuleObject->Set(
+                    Name => $ConfigItem->{Name},
+                );
+            }
+        }
+
     }
 
     my %Events = (

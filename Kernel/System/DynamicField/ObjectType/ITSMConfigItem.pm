@@ -16,16 +16,25 @@
 
 package Kernel::System::DynamicField::ObjectType::ITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
-use Scalar::Util;
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
     'Kernel::System::Web::Request',
+    'Kernel::System::Cache',
+    'Kernel::System::DynamicField::Backend',
 );
 
 =head1 NAME
@@ -106,7 +115,7 @@ sub PreValueSet {
         }
 
         $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} } = $NewVersionID;
-        $Param{Param}{ObjectID}                            = $NewVersionID;
+        $Param{Param}{ObjectID} = $NewVersionID;
     }
 
     return 1;
@@ -132,7 +141,7 @@ sub PostValueSet {
 
     # if we are coming from Version.pm nothing has to be changed
     return 1 if $Param{ConfigItemHandled};
-    
+
     # all needed params are checked by the backend before
 
     my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
@@ -151,14 +160,15 @@ sub PostValueSet {
         Key  => 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::1',
     );
 
-    # prepare readable values for the history
-    my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+    # prepare readable values for the history,
+    # the result is a hashref with the keys Value and Label
+    my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         Value              => $Param{Value}
     );
     my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
-        Value              => $Param{Value},
+        Value              => $Param{OldValue},
     );
 
     # trigger event

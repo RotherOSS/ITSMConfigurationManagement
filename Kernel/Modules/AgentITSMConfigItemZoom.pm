@@ -16,11 +16,18 @@
 
 package Kernel::Modules::AgentITSMConfigItemZoom;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -28,10 +35,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -434,20 +438,18 @@ sub Run {
     );
 
     # start template output
-    $Output .= $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemZoom',
-        Data         => {
-            %{$ConfigItem},
-            CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
-            CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
-            StyleClasses  => $StyleClasses,
-        },
-    );
-
-    # add footer
-    $Output .= $LayoutObject->Footer();
-
-    return $Output;
+    return join '',
+        $Output,
+        $LayoutObject->Output(
+            TemplateFile => 'AgentITSMConfigItemZoom',
+            Data         => {
+                $ConfigItem->%*,
+                CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
+                CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
+                StyleClasses  => $StyleClasses,
+            },
+        ),
+        $LayoutObject->Footer;
 }
 
 1;
