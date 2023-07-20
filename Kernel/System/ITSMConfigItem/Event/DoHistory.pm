@@ -97,7 +97,7 @@ sub Run {
         return $Self->_HistoryAdd(
             ConfigItemID => $Param{Data}{ConfigItemID},
             HistoryType  => 'ValueUpdate',
-            Comment      => "$Param{Data}{FieldName}%%$Param{Data}{ReadableOldValue}{Value}%%$Param{Data}{ReadableValue}{Value}",
+            Comment      => "$Param{Data}{FieldName}%%$Param{Data}{ReadableOldValue}%%$Param{Data}{ReadableValue}",
             UserID       => $Param{UserID},
         );
     }

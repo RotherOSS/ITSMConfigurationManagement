@@ -779,7 +779,7 @@ END_SQL
 
             # trigger dynamic field update event
             $Self->EventHandler(
-                Event => 'ConfigItemDynamicFieldUpdate_' . $Param{DynamicFieldConfig}->{Name},
+                Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
                 Data  => {
                     FieldName        => $DynamicField->{Name},
                     Value            => $Param{ 'DynamicField_' . $DynamicField->{Name} },
@@ -793,18 +793,6 @@ END_SQL
             );
         }
     }
-
-    #    # TODO: a separate VersionUpdate event is probably not necessary
-    #    # trigger VersionCreate event
-    #    $Self->EventHandler(
-    #        Event => 'VersionCreate',
-    #        Data  => {
-    #            ConfigItemID => $Version{ConfigItemID},
-    #            Comment      => $VersionID,
-    #            OldDeplState => $LastVersion->{CurDeplState},
-    #        },
-    #        UserID => $Param{UserID},
-    #    );
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $DFData (qw(0 1)) {
