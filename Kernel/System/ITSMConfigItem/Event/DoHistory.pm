@@ -92,7 +92,8 @@ sub Run {
         }
     }
 
-    # check for dynamic fields first, most events will be this
+    # check for dynamic fields first, most events will be this,
+    # ReadableValue and ReadableOldValue are expected to the strings
     if ( $Param{Event} =~ m/^ConfigItemDynamicFieldUpdate_/ ) {
         return $Self->_HistoryAdd(
             ConfigItemID => $Param{Data}{ConfigItemID},

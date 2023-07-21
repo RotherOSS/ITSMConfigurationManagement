@@ -30,6 +30,7 @@ use utf8;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
     'Kernel::System::Web::Request',
@@ -178,8 +179,8 @@ sub PostValueSet {
             FieldName        => $Param{DynamicFieldConfig}{Name},
             Value            => $Param{Value},
             OldValue         => $Param{OldValue},
-            ReadableValue    => $ReadableValue,
-            ReadableOldValue => $ReadableOldValue,
+            ReadableValue    => $ReadableValue->{Value},
+            ReadableOldValue => $ReadableOldValue->{Value},
             ConfigItemID     => $ConfigItemID,
             UserID           => $Param{UserID},
         },
