@@ -109,7 +109,7 @@ sub SearchObjects {
 
     # get a list of config item IDs
     # TODO: this only searches the latest versions
-    my @ConfigItemIDs = $Self->SUPER::ConfigItemSearch(
+    my @ConfigItemIDs = $Self->SUPER::SearchObjects(
         %Param,
     );
 
