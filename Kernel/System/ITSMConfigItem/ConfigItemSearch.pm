@@ -175,7 +175,6 @@ sub ConfigItemSearch {
     for my $Key (
         qw(
             ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs InciStateIDs CreateBy ChangeBy
-            OrderBy SortBy
         )
         )
     {
@@ -409,7 +408,7 @@ sub ConfigItemSearch {
     # incident state ids
     if ( $Param{InciStateIDs} ) {
         my $SQLQueryInCondition = $Kernel::OM->Get('Kernel::System::DB')->QueryInCondition(
-            Key       => 'v.depl_state_id',
+            Key       => 'v.inci_state_id',
             Values    => $Param{InciStateIDs},
             QuoteType => 'Integer',
             BindMode  => 0,
