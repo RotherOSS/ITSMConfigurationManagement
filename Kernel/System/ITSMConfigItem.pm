@@ -855,7 +855,7 @@ sub ConfigItemUpdate {
     }
 
     my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
-    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Class } // [] };
+    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{$Class} // [] };
 
     my %Changed;
     my $AddVersion = 0;
@@ -870,7 +870,7 @@ sub ConfigItemUpdate {
             New => $Param{$Attribute},
         };
 
-        if ( $VersionTrigger{ $Attribute } ) {
+        if ( $VersionTrigger{$Attribute} ) {
             $AddVersion = 1;
         }
     }
@@ -878,7 +878,7 @@ sub ConfigItemUpdate {
     # TODO: Think about DefinitionID changes
 
     # check for changed dynamic fields to trigger versions and filter history entries
-    if ( @DynamicFieldNames ) {
+    if (@DynamicFieldNames) {
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -889,11 +889,14 @@ sub ConfigItemUpdate {
                 Name => $Name,
             );
 
-            if ( !$DynamicFieldBackendObject->ValueIsDifferent(
-                DynamicFieldConfig => $DynamicField,
-                Value1             => $Param{"DynamicField_$Name"},
-                Value2             => $ConfigItem->{"DynamicField_$Name"},
-            ) ) {
+            if (
+                !$DynamicFieldBackendObject->ValueIsDifferent(
+                    DynamicFieldConfig => $DynamicField,
+                    Value1             => $Param{"DynamicField_$Name"},
+                    Value2             => $ConfigItem->{"DynamicField_$Name"},
+                )
+                )
+            {
                 delete $Param{"DynamicField_$Name"};
 
                 next DYNAMICFIELD;

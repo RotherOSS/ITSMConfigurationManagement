@@ -84,7 +84,7 @@ sub PreValueSet {
 
         return;
     }
-    
+
     # if we are coming from Version.pm nothing has to be changed
     return 1 if $Param{Param}{ConfigItemHandled};
 

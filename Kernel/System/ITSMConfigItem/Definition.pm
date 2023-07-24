@@ -609,9 +609,9 @@ sub _DefinitionDynamicFieldGet {
                 CIClass    => $Class,
             };
 
-            for my $Attribute ( qw/Mandatory Label Readonly/ ) {
-                if ( defined $DynamicFields{ $Name }{ $Attribute } ) {
-                    $ReturnDynamicFields{ $Name }{ $Attribute } = $DynamicFields{ $Name }{ $Attribute };
+            for my $Attribute (qw/Mandatory Label Readonly/) {
+                if ( defined $DynamicFields{$Name}{$Attribute} ) {
+                    $ReturnDynamicFields{$Name}{$Attribute} = $DynamicFields{$Name}{$Attribute};
                 }
             }
 
