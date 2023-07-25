@@ -29,6 +29,7 @@ use utf8;
 # OTOBO modules
 
 our @ObjectDependencies = (
+    'Kernel::System::DB',
     'Kernel::System::Log',
 );
 

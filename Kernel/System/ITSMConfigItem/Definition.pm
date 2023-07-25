@@ -294,8 +294,9 @@ sub DefinitionAdd {
 
     # check whether the definition itself or the containing dynamic fields changed
     my $DefinitionChanged = !$LastDefinition->{DefinitionID} || $LastDefinition->{Definition} ne $Param{Definition};
+
     # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
-    $DefinitionChanged  ||= $Param{Force};
+    $DefinitionChanged ||= $Param{Force};
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
@@ -527,7 +528,7 @@ sub DefinitionNeedSync {
         Type  => 'ConfigItemDefinition',
         Key   => 'OutOfSyncClasses',
         Value => \%OutOfSync,
-        TTL   => 72000, # 20 d
+        TTL   => 72000,                    # 20 d
     );
 
     return %OutOfSync;
@@ -564,15 +565,15 @@ sub DefinitionSetOutOfSync {
 
     CLASS:
     for my $ClassID ( keys $Param{Classes}->%* ) {
-        if ( !$Current{ $ClassID } ) {
-            $New{ $ClassID } = $Param{Classes}{ $ClassID };
+        if ( !$Current{$ClassID} ) {
+            $New{$ClassID} = $Param{Classes}{$ClassID};
 
             next CLASS;
         }
 
-        for my $FieldID ( $Param{Classes}{ $ClassID }->@* ) {
-            if ( !grep { $_ == $FieldID } $Current{ $ClassID }->@* ) {
-                push @{ $New{ $ClassID } }, $FieldID;
+        for my $FieldID ( $Param{Classes}{$ClassID}->@* ) {
+            if ( !grep { $_ == $FieldID } $Current{$ClassID}->@* ) {
+                push @{ $New{$ClassID} }, $FieldID;
             }
         }
     }
@@ -581,12 +582,13 @@ sub DefinitionSetOutOfSync {
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    my $Success = 1;    
+    my $Success = 1;
     for my $ClassID ( keys %New ) {
-        for my $FieldID ( $New{ $ClassID }->@* ) {
+        for my $FieldID ( $New{$ClassID}->@* ) {
+
             # insert new out of sync relations
             $Success = $DBObject->Do(
-                SQL => 'INSERT INTO configitem_definition_sync (class_id, field_id) VALUES (?, ?)',
+                SQL  => 'INSERT INTO configitem_definition_sync (class_id, field_id) VALUES (?, ?)',
                 Bind => [ \$ClassID, \$FieldID ],
             ) ? $Success : 0;
         }
@@ -624,7 +626,7 @@ sub DefinitionSetSynced {
     }
 
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => 'DELETE FROM configitem_definition_sync WHERE class_id = ?',
+        SQL  => 'DELETE FROM configitem_definition_sync WHERE class_id = ?',
         Bind => [ \$Param{ClassID} ],
     );
 
@@ -656,7 +658,8 @@ sub DefinitionSync {
     my @ClassIDs = keys %OutOfSync;
 
     CLASS:
-    for my $ClassID ( @ClassIDs ) {
+    for my $ClassID (@ClassIDs) {
+
         # check whether meaningful content is (still) affected
         my $NeedsSync  = 0;
         my $Definition = $Self->DefinitionGet(
@@ -665,13 +668,14 @@ sub DefinitionSync {
         my $DynamicFieldDefinition;
 
         DYNAMICFIELD:
-        for my $FieldID ( $OutOfSync{ $ClassID }->@* ) {
+        for my $FieldID ( $OutOfSync{$ClassID}->@* ) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 ID => $FieldID,
             );
 
             my $OldDynamicField = $Definition->{DynamicFieldRef}{ $DynamicField->{Name} };
             if ( !$OldDynamicField || $OldDynamicField->{ID} ne $DynamicField->{ID} ) {
+
                 # consider name changes
                 $NeedsSync = 1;
 
@@ -679,6 +683,7 @@ sub DefinitionSync {
             }
 
             if ( $OldDynamicField->{Label} ne $DynamicField->{Label} ) {
+
                 # different labels can be due to the section definition
                 if ( !$DynamicFieldDefinition ) {
                     my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
@@ -702,7 +707,8 @@ sub DefinitionSync {
                     Data1 => $OldDynamicField->{Config},
                     Data2 => $DynamicField->{Config},
                 )
-            ) {
+                )
+            {
                 $NeedsSync = 1;
 
                 last DYNAMICFIELD;
@@ -862,9 +868,9 @@ sub _DefinitionDynamicFieldGet {
                 CIClass    => $Class,
             };
 
-            for my $Attribute ( qw/Mandatory Label Readonly/ ) {
-                if ( defined $DynamicFields{ $Name }{ $Attribute } ) {
-                    $ReturnDynamicFields{ $Name }{ $Attribute } = $DynamicFields{ $Name }{ $Attribute };
+            for my $Attribute (qw/Mandatory Label Readonly/) {
+                if ( defined $DynamicFields{$Name}{$Attribute} ) {
+                    $ReturnDynamicFields{$Name}{$Attribute} = $DynamicFields{$Name}{$Attribute};
                 }
             }
 
