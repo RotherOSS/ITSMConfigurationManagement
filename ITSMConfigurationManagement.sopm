@@ -13,10 +13,13 @@
     <Description Lang="es">El paquete OTOBO::ITSM Configuration Management.</Description>
     <Description Lang="hu">Az OTOBO::ITSM konfigurációmenedzsment csomag.</Description>
     <Filelist>
+        <!-- TODO: move to Kernel? -->
         <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicField.pm" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
@@ -125,11 +128,13 @@
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Definition.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DefinitionConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/FieldRestrictions.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/History.pm" />
@@ -329,6 +334,21 @@
             </ForeignKey>
             <ForeignKey ForeignTable="users">
                 <Reference Local="create_by" Foreign="id" />
+            </ForeignKey>
+        </TableCreate>
+        <TableCreate Name="configitem_counter">
+            <Column Name="class_id" Required="true" PrimaryKey="true" Type="INTEGER" />
+            <Column Name="counter_type" Required="true" Size="50" Type="VARCHAR" />
+            <Column Name="counter" Required="true" Size="50" Type="VARCHAR" />
+        </TableCreate>
+        <TableCreate Name="configitem_definition_sync">
+            <Column Name="class_id" Required="true" Type="INTEGER" />
+            <Column Name="field_id" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="general_catalog">
+                <Reference Local="class_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
         <TableAlter Name="acl">
@@ -1161,12 +1181,25 @@
                 <Reference Local="change_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
+        <TableCreate Name="configitem_definition_sync" Version="11.0.0">
+            <Column Name="class_id" Required="true" Type="INTEGER" />
+            <Column Name="field_id" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="general_catalog">
+                <Reference Local="class_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="field_id" Foreign="id" />
+            </ForeignKey>
+        </TableCreate>
         <TableAlter Name="configitem_definition" Version="11.0.0">
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>
         <TableAlter Name="configitem_version" Version="11.0.0">
             <ColumnAdd Name="change_time" Required="true" Type="DATE" />
             <ColumnAdd Name="change_by" Required="true" Type="INTEGER" />
+        </TableAlter>
+        <TableAlter Name="acl" Version="11.0.0">
+            <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
         </TableAlter>
         <Insert Table="configitem_history_type" Version="11.0.0">
             <Data Key="name" Type="Quote">VersionUpdate</Data>
@@ -1178,12 +1211,16 @@
         </Insert>
     </DatabaseUpgrade>
     <DatabaseUninstall Type="pre">
+        <TableDrop Name="configitem_definition_sync" />
         <TableDrop Name="configitem_counter" />
         <TableDrop Name="configitem_version" />
         <TableDrop Name="configitem_definition" />
         <TableDrop Name="configitem_history" />
         <TableDrop Name="configitem_history_type" />
         <TableDrop Name="configitem" />
+        <TableAlter Name="acl">
+            <ColumnDrop Name="object_type" />
+        </TableAlter>
     </DatabaseUninstall>
     <CodeInstall Type="post"><![CDATA[
 

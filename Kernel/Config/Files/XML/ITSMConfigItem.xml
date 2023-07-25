@@ -576,7 +576,9 @@
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::VersionTrigger" Required="0" Valid="1">
-        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState, Name, as well as Definition, if changes to the class definition should trigger a new version to be created. Additionally all dynamic fields can be triggers, the value here are then "DynamicField_Name".</Description>
+        <!-- TODO: Do we need to write a new version on definition changes? Was not the case in 10.1
+        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState, Name, as well as Definition, if changes to the class definition should trigger a new version to be created. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>-->
+        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState and Name. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
@@ -646,8 +648,19 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoHistory</Item>
-                <Item Key="Event"></Item>
+                <Item Key="Event">(ConfigItemCreate|VersionCreate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|ValueUpdate|DefinitionCreate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
                 <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module that upates config items to their current definition.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DefinitionConfigItemUpdate</Item>
+                <Item Key="Event">DefinitionCreate</Item>
+                <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1500,6 +1513,17 @@
         <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
         <Value>
             <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicField::EventModulePost###200-DynamicFieldSync" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::DynamicField::Event::ITSMConfigItemDefinitionSync</Item>
+                <Item Key="Event">DynamicFieldUpdate</Item>
+                <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
     </Setting>
