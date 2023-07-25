@@ -616,8 +616,9 @@ END_SQL
 
         # only throw events for fields changed from the last version - checked by ConfigItemUpdate()
         if ( $Success && exists $Param{ 'DynamicField_' . $DynamicField->{Name} } ) {
+
             # prepare readable values for the history
-            my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+            my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
                 DynamicFieldConfig => $DynamicField,
                 Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
             );
@@ -628,7 +629,7 @@ END_SQL
 
             # trigger dynamic field update event
             $Self->EventHandler(
-                Event => 'ConfigItemDynamicFieldUpdate_' . $Param{DynamicFieldConfig}->{Name},
+                Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
                 Data  => {
                     FieldName        => $DynamicField->{Name},
                     Value            => $Version{ 'DynamicField_' . $DynamicField->{Name} },
@@ -766,9 +767,10 @@ END_SQL
             ConfigItemHandled  => 1,
         );
 
-        if ( $Success ) {
+        if ($Success) {
+
             # prepare readable values for the history
-            my $ReadableValue    = $DynamicFieldBackendObject->ReadableValueRender(
+            my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
                 DynamicFieldConfig => $DynamicField,
                 Value              => $Param{ 'DynamicField_' . $DynamicField->{Name} },
             );

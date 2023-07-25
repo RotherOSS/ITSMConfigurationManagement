@@ -29,26 +29,28 @@ use parent qw(Kernel::System::DynamicField::Driver::Reference::Base);
 # CPAN modules
 
 # OTOBO modules
+use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
+    'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
 );
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - plugin module for the Reference dynamic field
 
 =head1 DESCRIPTION
 
-ITSMConfigItem backend for the Reference dynamic field.
+ITSMConfigItem plugin for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
 
 =head2 GetFieldTypeSettings()
 
-Get field type settings that are specific to the specific referenced object type.
+Get field type settings that are specific to the referenced object type ITSMConfigItem.
 
 =cut
 
@@ -57,7 +59,22 @@ sub GetFieldTypeSettings {
 
     my @FieldTypeSettings;
 
-    # TODO: select CI classes
+    # add the selection for the config item class
+    {
+        my $ClassID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        push @FieldTypeSettings,
+            {
+                ConfigParamName => 'ClassID',
+                Label           => Translatable('Class of the config item'),
+                Explanation     => Translatable('Select the class of the config item'),
+                InputType       => 'Selection',
+                SelectionData   => $ClassID2Name,
+                PossibleNone    => 0,                                                     # the class is required
+            };
+    }
 
     return @FieldTypeSettings;
 }
@@ -66,7 +83,7 @@ sub GetFieldTypeSettings {
 
 checks read permission for a given object and UserID.
 
-    $Permission = $LinkObject->ObjectPermission(
+    $Permission = $PluginObject->ObjectPermission(
         Key     => 123,
         UserID  => 1,
     );
@@ -110,8 +127,8 @@ return a hash of object descriptions.
 Return
 
     %Description = (
-        Normal => "Ticket# 1234455",
-        Long   => "Ticket# 1234455: Need a sample ticket title",
+        Normal => "CI# 1234455",
+        Long   => "CI# 1234455: Need a sample config item title",
     );
 
 =cut
@@ -156,12 +173,25 @@ This is used in auto completion when searching for possible object IDs.
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
+    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+
+    # Support restriction by class
+    my %SearchParams;
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    {
+        if ( $DynamicFieldConfig->{Config}->{ClassID} ) {
+            $SearchParams{ClassIDs} = [ $DynamicFieldConfig->{Config}->{ClassID} ];
+        }
+    }
+
     # return a list of config item IDs
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
     return $ConfigItemObject->ConfigItemSearch(
-        Name   => ["%$Param{Term}%"],    # substring search
         Limit  => $Param{MaxResults},
         Result => 'ARRAY',
+        %SearchParams,
+        Name => ["%$Param{Term}%"],    # substring search
     );
 }
 
