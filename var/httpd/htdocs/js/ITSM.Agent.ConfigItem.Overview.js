@@ -40,17 +40,36 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
         var ITSMConfigItemSearch    = Core.Config.Get('ITSMConfigItemSearch');
         var ITSMConfigItemActionRow = Core.Config.Get('ITSMConfigItemActionRow') || {};
 
+        var URL, ColumnFilter, NewColumnFilterStrg, MyRegEx, SessionInformation, $MasterActionLink;
+
         $('#ShowContextSettingsDialog').on('click', function (Event) {
-            Core.UI.Dialog.ShowContentDialog($('#ContextSettingsDialogContainer'), Core.Language.Translate("Settings"), '20%', 'Center', true, [
-                {
-                    Label: Core.Language.Translate("Submit"),
-                    Type: 'Submit',
-                    Class: 'Primary'
-                }
-            ]);
+            Core.UI.Dialog.ShowContentDialog($('#ContextSettingsDialogContainer'), Core.Language.Translate("Settings"), '15%', 'Center', true,
+                [
+                    {
+                        Label: Core.Language.Translate("Submit"),
+                        Type: 'Submit',
+                        Class: 'Primary',
+                        Function: function () {
+                            var $ListContainer = $('.AllocationListContainer').find('.AssignedFields'),
+                                FieldID;
+                            if (isJQueryObject($ListContainer) && $ListContainer.length) {
+                                $.each($ListContainer.find('li'), function() {
+                                    FieldID = 'UserFilterColumnsEnabled-' + $(this).attr('data-fieldname');
+
+                                    // only add this field if its not already there. This could happen
+                                    // if e.g. the save button is clicked multiple times
+                                    if (!$('#' + Core.App.EscapeSelector(FieldID)).length) {
+                                        $('<input name="UserFilterColumnsEnabled" type="hidden" />').attr('id', FieldID).val($(this).attr('data-fieldname')).appendTo($ListContainer.closest('div'));
+                                    }
+                                });
+                            }
+                            return true;
+                        }
+                    }
+                ], true);
             Event.preventDefault();
             Event.stopPropagation();
-
+            Core.Agent.TableFilters.SetAllocationList();
             return false;
         });
 
@@ -72,6 +91,124 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
         ITSM.UI.ConfigItemActionRow.Init();
 
         Core.UI.InitCheckboxSelection($('table td.Checkbox'));
+
+        // change event for column filter
+        $('.ColumnFilter').on('change', function () {
+
+            // define variables
+            URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage');
+            SessionInformation = Core.App.GetSessionInformation();
+            $.each(SessionInformation, function (Key, Value) {
+                URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
+            });
+            ColumnFilter = $(this)[0].name;
+            NewColumnFilterStrg = $(this)[0].name + '=' + encodeURIComponent($(this).val()) + ';';
+
+            MyRegEx = new  RegExp(ColumnFilter+"=[^;]*;");
+
+            // check for already set parameter and replace
+            if (URL.match(MyRegEx)) {
+                URL = URL.replace(MyRegEx, NewColumnFilterStrg);
+            }
+
+            // otherwise add the new column filter
+            else {
+                URL = URL + NewColumnFilterStrg;
+            }
+
+            // redirect
+            window.location.href =  URL;
+        });
+
+        // click event on table header trigger
+        $('.OverviewHeader').off('click').on('click', '.ColumnSettingsTrigger', function() {
+            var $TriggerObj = $(this),
+                FilterName;
+
+            if ($TriggerObj.hasClass('Active')) {
+                $TriggerObj
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeOut('fast', function() {
+                        $TriggerObj.removeClass('Active');
+                    });
+            }
+            else {
+
+                // slide up all open settings widgets
+                $('.ColumnSettingsTrigger')
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeOut('fast', function() {
+                        $(this).parent().prev('.ColumnSettingsTrigger').removeClass('Active');
+                    });
+
+                // show THIS settings widget
+                $TriggerObj
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeIn('fast', function() {
+
+                        $TriggerObj.addClass('Active');
+
+                        // refresh filter dropdown
+                        FilterName = $TriggerObj
+                            .next('.ColumnSettingsContainer')
+                            .find('select')
+                            .attr('name');
+
+                        if (
+                                $TriggerObj.closest('th').hasClass('CustomerID') ||
+                                $TriggerObj.closest('th').hasClass('CustomerUserID') ||
+                                $TriggerObj.closest('th').hasClass('Responsible') ||
+                                $TriggerObj.closest('th').hasClass('Owner')
+                            ) {
+
+                            if (!$TriggerObj.parent().find('.SelectedValue').length) {
+                                Core.AJAX.FormUpdate($('#Nothing'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
+                                    var AutoCompleteValue = $TriggerObj
+                                            .next('.ColumnSettingsContainer')
+                                            .find('select')
+                                            .val(),
+                                        AutoCompleteText  = $TriggerObj
+                                            .next('.ColumnSettingsContainer')
+                                            .find('select')
+                                            .find('option:selected')
+                                            .text();
+
+                                    if (AutoCompleteValue !== 'DeleteFilter') {
+
+                                        $TriggerObj
+                                            .next('.ColumnSettingsContainer')
+                                            .find('select')
+                                            .after('<span class="SelectedValue Hidden">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span>')
+                                            .parent()
+                                            .find('input[type=text]')
+                                            .after('<a href="#" class="DeleteFilter"><i class="fa fa-trash-o"></i></a>')
+                                            .parent()
+                                            .find('a.DeleteFilter')
+                                            .off()
+                                            .on('click', function() {
+                                                $(this)
+                                                    .closest('.ColumnSettingsContainer')
+                                                    .find('select')
+                                                    .val('DeleteFilter')
+                                                    .trigger('change');
+
+                                                return false;
+                                            });
+                                    }
+                                });
+                            }
+                        }
+                        else {
+                            Core.AJAX.FormUpdate($('#ColumnFilterAttributes'), 'AJAXFilterUpdate', FilterName, [ FilterName ]);
+                        }
+                });
+            }
+
+            return false;
+        });
 
         $('.MasterAction').on('click', function (Event) {
             var $MasterActionLink = $(this).find('.MasterActionLink');
