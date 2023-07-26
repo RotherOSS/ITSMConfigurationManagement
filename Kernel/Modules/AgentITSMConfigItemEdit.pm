@@ -925,19 +925,26 @@ sub Run {
 
         # TODO: look what this was/is about
         #        $Self->{CustomerSearchItemIDs} = [];
-        # TODO: order by pages and only render the first page
-        for my $Section ( values $Definition->{DefinitionRef}{Sections}->%* ) {
-            $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
-                Content              => $Section->{Content},
-                DynamicFields        => $Definition->{DynamicFieldRef},
-                UpdatableFields      => \@UpdatableFields,
-                LayoutObject         => $LayoutObject,
-                ParamObject          => $ParamObject,
-                DynamicFieldValues   => $GetParam{DynamicField},
-                PossibleValuesFilter => \%DynamicFieldPossibleValues,
-                Errors               => \%DynamicFieldValidationResult,
-                Visibility           => \%DynamicFieldVisibility,
-            );
+        for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+            SECTION:
+            for my $SectionConfig ( $Page->{Content}->@* ) {
+                my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+                next SECTION if !$Section;
+
+                $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
+                    Content              => $Section->{Content},
+                    DynamicFields        => $Definition->{DynamicFieldRef},
+                    UpdatableFields      => \@UpdatableFields,
+                    LayoutObject         => $LayoutObject,
+                    ParamObject          => $ParamObject,
+                    DynamicFieldValues   => $GetParam{DynamicField},
+                    PossibleValuesFilter => \%DynamicFieldPossibleValues,
+                    Errors               => \%DynamicFieldValidationResult,
+                    Visibility           => \%DynamicFieldVisibility,
+                );
+            }
         }
     }
 
