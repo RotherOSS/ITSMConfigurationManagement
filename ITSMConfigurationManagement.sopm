@@ -126,6 +126,7 @@
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/RebuildReferenceTable.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
@@ -350,6 +351,31 @@
             </ForeignKey>
             <ForeignKey ForeignTable="dynamic_field">
                 <Reference Local="field_id" Foreign="id" />
+            </ForeignKey>
+        </TableCreate>
+        <TableCreate Name="configitem_reference">
+            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
+            <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
+            <Column Name="link_type_id" Required="true" Type="INTEGER" />
+            <Column Name="dynamic_field_value_id" Required="true" Type="INTEGER" />
+            <Column Name="create_time" Required="true" Type="DATE" />
+            <Column Name="create_by" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="configitem_version">
+                <Reference Local="source_configitem_version_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="configitem">
+                <Reference Local="target_configitem_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version">
+                <Reference Local="target_configitem_version_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="link_type">
+                <Reference Local="link_type_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field_value">
+                <Reference Local="dynamic_field_value_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
         <TableAlter Name="acl">
@@ -1192,6 +1218,31 @@
                 <Reference Local="field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
+        <TableCreate Name="configitem_reference" Version="11.0.0">
+            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
+            <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
+            <Column Name="link_type_id" Required="true" Type="INTEGER" />
+            <Column Name="dynamic_field_value_id" Required="true" Type="INTEGER" />
+            <Column Name="create_time" Required="true" Type="DATE" />
+            <Column Name="create_by" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="configitem_version">
+                <Reference Local="source_configitem_version_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="configitem">
+                <Reference Local="target_configitem_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version">
+                <Reference Local="target_configitem_version_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="link_type">
+                <Reference Local="link_type_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field_value">
+                <Reference Local="dynamic_field_value_id" Foreign="id" />
+            </ForeignKey>
+        </TableCreate>
         <TableAlter Name="configitem_definition" Version="11.0.0">
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>
@@ -1213,6 +1264,7 @@
     </DatabaseUpgrade>
     <DatabaseUninstall Type="pre">
         <TableDrop Name="configitem_definition_sync" />
+        <TableDrop Name="configitem_reference" />
         <TableDrop Name="configitem_counter" />
         <TableDrop Name="configitem_version" />
         <TableDrop Name="configitem_definition" />
