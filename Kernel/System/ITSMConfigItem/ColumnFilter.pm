@@ -78,9 +78,6 @@ sub DeplStateFilterValuesGet {
     my $DeplStates = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
         Valid => 1,
-
-        # TODO Do Preferences make sense here?
-        Preferences => {},
     );
 
     return $DeplStates;
@@ -107,9 +104,6 @@ sub InciStateFilterValuesGet {
     my $InciStates = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::Core::IncidentState',
         Valid => 1,
-
-        # TODO Do Preferences make sense here?
-        Preferences => {},
     );
 
     return $InciStates;
