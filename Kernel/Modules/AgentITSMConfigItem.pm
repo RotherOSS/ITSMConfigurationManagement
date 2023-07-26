@@ -162,11 +162,11 @@ sub Run {
             Prio   => $PrioCounter,
             Count  => $ClassCount,
             Search => {
-                ClassIDs         => [$ClassID],
-                DeplStateIDs     => $DeplStateIDs,
-                OrderBy          => \@SortByArray,
-                OrderByDirection => \@OrderByArray,
-                Limit            => $Self->{SearchLimit},
+                ClassIDs     => [$ClassID],
+                DeplStateIDs => $DeplStateIDs,
+                SortBy       => \@SortByArray,
+                OrderBy      => \@OrderByArray,
+                Limit        => $Self->{SearchLimit},
             },
         };
 
@@ -194,11 +194,11 @@ sub Run {
             Prio   => 1000,
             Count  => $TotalCount,
             Search => {
-                ClassIDs         => $AccessClassList,
-                DeplStateIDs     => $DeplStateIDs,
-                OrderBy          => \@SortByArray,
-                OrderByDirection => \@OrderByArray,
-                Limit            => $Self->{SearchLimit},
+                ClassIDs     => $AccessClassList,
+                DeplStateIDs => $DeplStateIDs,
+                SortBy       => \@SortByArray,
+                OrderBy      => \@OrderByArray,
+                Limit        => $Self->{SearchLimit},
             },
         };
 
@@ -241,8 +241,9 @@ sub Run {
     }
 
     # search config items which match the selected filter
-    my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearchExtended(
+    my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
         %{ $Filters{ $Self->{Filter} }->{Search} },
+        Result => 'ARRAY',
     );
 
     # find out which columns should be shown
@@ -309,8 +310,8 @@ sub Run {
 
     # show config item list
     $Output .= $LayoutObject->ITSMConfigItemListShow(
-        ConfigItemIDs => $ConfigItemIDs,
-        Total         => scalar @{$ConfigItemIDs},
+        ConfigItemIDs => \@ConfigItemIDs,
+        Total         => scalar @ConfigItemIDs,
         View          => $Self->{View},
         Filter        => $Self->{Filter},
         Filters       => \%NavBarFilter,

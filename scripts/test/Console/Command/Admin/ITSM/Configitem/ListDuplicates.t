@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars (qw($Self));
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 # get command object
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::ListDuplicates');
@@ -183,4 +185,4 @@ $Self->Is(
 
 # cleanup is done by RestoreDatabse
 
-1;
+$Self->DoneTesting;

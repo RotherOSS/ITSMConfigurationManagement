@@ -19,8 +19,6 @@ package Kernel::System::Console::Command::Admin::ITSM::Configitem::Delete;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::Console::BaseCommand);

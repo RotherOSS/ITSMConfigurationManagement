@@ -129,32 +129,6 @@ sub Run {
             $Data{VersionID} = $Data{Comment};
             $Version = $Data{Comment};
         }
-        elsif ( $Data{HistoryType} eq 'ValueUpdate' ) {
-
-            # beautify comment
-            my @Parts = split /%%/, $Data{Comment};
-            $Parts[0] =~ s{ \A \[.*?\] \{'Version'\} \[.*?\] \{' }{}xms;
-            $Parts[0] =~ s{ '\} \[.*?\] \{' }{::}xmsg;
-            $Parts[0] =~ s{ '\} \[.*?\] \z }{}xms;
-
-            # get definition info about attribute
-            my $AttributeInfo = $ConfigItemObject->DefinitionAttributeInfo(
-                Definition    => $Definition->{DefinitionRef},
-                AttributePath => $Parts[0],
-            );
-
-            if ( $AttributeInfo && $AttributeInfo->{Input}->{Type} eq 'GeneralCatalog' ) {
-                my $ItemList = $GeneralCatalogObject->ItemList(
-                    Class => $AttributeInfo->{Input}->{Class},
-                );
-
-                $Parts[1] = $ItemList->{ $Parts[1] || '' } || '';
-                $Parts[2] = $ItemList->{ $Parts[2] || '' } || '';
-            }
-
-            # assemble parts
-            $Data{Comment} = join '%%', @Parts;
-        }
         elsif ( $Data{HistoryType} eq 'DeploymentStateUpdate' ) {
 
             # get deployment state list
@@ -190,9 +164,6 @@ sub Run {
 
         # replace text
         if ( $Data{Comment} ) {
-
-            my %Info;
-
             $Data{Comment} =~ s{ \A %% }{}xmsg;
             my @Values = split /%%/, $Data{Comment};
 

@@ -19,8 +19,6 @@ package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(

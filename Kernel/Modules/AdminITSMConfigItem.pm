@@ -310,7 +310,7 @@ sub Run {
         my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Definition{Definition},
         );
-        return $LayoutObject->ErrorScreen() if ref $DefinitionRef ne 'ARRAY';
+        return $LayoutObject->ErrorScreen() if ref $DefinitionRef ne 'HASH';
 
         # add to database
         my $DefinitionID = $ConfigItemObject->DefinitionAdd(

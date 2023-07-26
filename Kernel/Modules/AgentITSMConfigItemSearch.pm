@@ -575,7 +575,7 @@ sub Run {
         if ( $SearchDialog || $Self->{TakeLastSearch} ) {
 
             # start search
-            $SearchResultList = $ConfigItemObject->ConfigItemSearchExtended(
+            $SearchResultList = $ConfigItemObject->ConfigItemSearch(
                 %GetParam,
                 OrderBy          => [ $Self->{SortBy} ],
                 OrderByDirection => [ $Self->{OrderBy} ],

@@ -20,6 +20,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -136,6 +137,7 @@ Return
     $Definition->{Class}
     $Definition->{Definition}
     $Definition->{DefinitionRef}
+    $Definition->{DynamicFieldRef}
     $Definition->{Version}
     $Definition->{CreateTime}
     $Definition->{CreateBy}
@@ -172,7 +174,7 @@ sub DefinitionGet {
 
         # ask database
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, class_id, configitem_definition, version, create_time, create_by '
+            SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition WHERE id = ?',
             Bind  => [ \$Param{DefinitionID} ],
             Limit => 1,
@@ -182,7 +184,7 @@ sub DefinitionGet {
 
         # ask database
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL => 'SELECT id, class_id, configitem_definition, version, create_time, create_by '
+            SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition '
                 . 'WHERE class_id = ? ORDER BY version DESC',
             Bind  => [ \$Param{ClassID} ],
@@ -197,9 +199,10 @@ sub DefinitionGet {
         $Definition{DefinitionID} = $Row[0];
         $Definition{ClassID}      = $Row[1];
         $Definition{Definition}   = $Row[2] || "--- []";
-        $Definition{Version}      = $Row[3];
-        $Definition{CreateTime}   = $Row[4];
-        $Definition{CreateBy}     = $Row[5];
+        my $DynamicFields = $Row[3] || "--- {}";
+        $Definition{Version}    = $Row[4];
+        $Definition{CreateTime} = $Row[5];
+        $Definition{CreateBy}   = $Row[6];
 
         # Check if definition code is not a YAML string.
         if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
@@ -217,19 +220,23 @@ sub DefinitionGet {
         $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Definition{Definition},
         );
+        $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $DynamicFields,
+        );
     }
 
     return {} if !$Definition{DefinitionID};
 
     # prepare definition
-    if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
-        $Self->_DefinitionPrepare(
-            DefinitionRef => $Definition{DefinitionRef},
-        );
-    }
-    else {
-        $Definition{DefinitionRef} = '';
-    }
+    # TODO: Rework?
+    #if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
+    #    $Self->_DefinitionPrepare(
+    #        DefinitionRef => $Definition{DefinitionRef},
+    #    );
+    #}
+    #else {
+    #    $Definition{DefinitionRef} = '';
+    #}
 
     # get class list
     my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
@@ -253,6 +260,8 @@ add a new definition
         ClassID    => 123,
         Definition => 'the definition code',
         UserID     => 1,
+        Force      => 1,    # optional, for internal use, force add even if definition is unchanged
+                            # (used if dynamic fields changed)
     );
 
 =cut
@@ -283,14 +292,26 @@ sub DefinitionAdd {
         ClassID => $Param{ClassID},
     );
 
+    # check whether the definition itself or the containing dynamic fields changed
+    my $DefinitionChanged = !$LastDefinition->{DefinitionID} || $LastDefinition->{Definition} ne $Param{Definition};
+
+    # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
+    $DefinitionChanged ||= $Param{Force};
+
     # stop add, if definition was not changed
-    if ( $LastDefinition->{DefinitionID} && $LastDefinition->{Definition} eq $Param{Definition} ) {
+    if ( !$DefinitionChanged ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't add new definition! The definition was not changed.",
         );
+
         return;
     }
+
+    # add dynamic field info
+    my $DynamicFieldDefinition = $Self->_DefinitionDynamicFieldGet(
+        %Param,
+    ) || '--- []';
 
     # set version
     my $Version = 1;
@@ -302,9 +323,9 @@ sub DefinitionAdd {
     # insert new definition
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'INSERT INTO configitem_definition '
-            . '(class_id, configitem_definition, version, create_time, create_by) VALUES '
-            . '(?, ?, ?, current_timestamp, ?)',
-        Bind => [ \$Param{ClassID}, \$Param{Definition}, \$Version, \$Param{UserID} ],
+            . '(class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by) VALUES '
+            . '(?, ?, ?, ?, current_timestamp, ?)',
+        Bind => [ \$Param{ClassID}, \$Param{Definition}, \$DynamicFieldDefinition, \$Version, \$Param{UserID} ],
     );
 
     return if !$Success;
@@ -324,11 +345,18 @@ sub DefinitionAdd {
         $DefinitionID = $Row[0];
     }
 
+    # dynamic fields are synced
+    $Self->DefinitionSetSynced(
+        ClassID => $Param{ClassID},
+    );
+
     # trigger DefinitionCreate event
     $Self->EventHandler(
         Event => 'DefinitionCreate',
         Data  => {
-            Comment => $DefinitionID,
+            DefinitionID => $DefinitionID,
+            ClassID      => $Param{ClassID},
+            Comment      => $DefinitionID,
         },
         UserID => $Param{UserID},
     );
@@ -387,6 +415,10 @@ sub DefinitionCheck {
         );
         return;
     }
+
+    # TODO: add real check, check valid keys etc.
+
+=for never
 
     # definition must be an array
     if ( ref $Definition ne 'ARRAY' ) {
@@ -453,91 +485,253 @@ sub DefinitionCheck {
         }
     }
 
+=cut
+
     return 1;
 }
 
-=head2 DefinitionAttributeInfo()
+=head2 DefinitionNeedSync()
 
-Return attribute information from the definition for a given attribute path name
+return a hash of class ids with current definitions with dynamic fields not synced
 
-    my $AttributeInfo = $ConfigItemObject->DefinitionAttributeInfo(
-        AttributePath => 'HardDisk::Capacity',
-        Definition    => '
-            [
-                # ...
+    my %DefinitionsOutOfSync = $ConfigItemObject->DefinitionNeedSync();
 
-                {
-                    Key => 'HardDisk',
-                    Name => 'Hard Disk',
-                    Input => {
-                        Type => 'Text',
-                        Size => 50,
-                        MaxLength => 100,
-                    },
-                    CountMax => 10,
-                    Sub => [
-                        {
-                            Key => 'Capacity',
-                            Name => 'Capacity',
-                            Input => {
-                                Type => 'Text',
-                                Size => 20,
-                                MaxLength => 10,
-                            },
-                        },
-                    ],
-                },
-
-                # ...
-            ];
-        ',
+Return
+    %DefinitionsOutOfSync = (
+        ClassID1 => [ DynamicFieldID1, DynamicFieldID2 ],
+        ClassID2 => [ DynamicFieldID1, DynamicFieldID3 ],
     );
-
-    Returns:
-
-        my $AttributeInfo =  {
-            CountDefault => 1,
-            CountMax     => 1,
-            Input => {
-                Size      => 20,
-                Type      => 'Text',
-                MaxLength => 10
-            },
-            Name     => 'Capacity',
-            CountMin => 1,
-            Key      => 'Capacity'
-        };
 
 =cut
 
-sub DefinitionAttributeInfo {
+sub DefinitionNeedSync {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Argument (qw(Definition AttributePath)) {
-        if ( !$Param{$Argument} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Argument!",
-            );
-            return;
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+        Type => 'ConfigItemDefinition',
+        Key  => 'OutOfSyncClasses',
+    );
+
+    $DBObject->Prepare(
+        SQL => 'SELECT class_id, field_id FROM configitem_definition_sync',
+    );
+
+    my %OutOfSync;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        push @{ $OutOfSync{ $Row[0] } }, $Row[1];
+    }
+
+    # cache the result
+    $Kernel::OM->Get('Kernel::System::Cache')->Set(
+        Type  => 'ConfigItemDefinition',
+        Key   => 'OutOfSyncClasses',
+        Value => \%OutOfSync,
+        TTL   => 72000,                    # 20 d
+    );
+
+    return %OutOfSync;
+}
+
+=head2 DefinitionSetOutOfSync()
+
+Declare current class definitions as out of sync with their dynamic fields
+
+    my $Success = $ConfigItemObject->DefinitionSetOutOfSync(
+        Classes => {
+            ClassID1 => [ DynamicFieldID1, DynamicFieldID2 ],
+            ClassID2 => [ DynamicFieldID1, DynamicFieldID3 ],
+        },
+    );
+
+=cut
+
+sub DefinitionSetOutOfSync {
+    my ( $Self, %Param ) = @_;
+
+    # check needed
+    if ( !$Param{Classes} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need Classes hash!',
+        );
+
+        return;
+    }
+
+    my %Current = $Self->DefinitionNeedSync();
+    my %New;
+
+    CLASS:
+    for my $ClassID ( keys $Param{Classes}->%* ) {
+        if ( !$Current{$ClassID} ) {
+            $New{$ClassID} = $Param{Classes}{$ClassID};
+
+            next CLASS;
+        }
+
+        for my $FieldID ( $Param{Classes}{$ClassID}->@* ) {
+            if ( !grep { $_ == $FieldID } $Current{$ClassID}->@* ) {
+                push @{ $New{$ClassID} }, $FieldID;
+            }
         }
     }
 
-    my $Subtree = $Param{Definition};
-    my $Info;
+    return 1 if !%New;
 
-    PART:
-    for my $Part ( split /::/, $Param{AttributePath} ) {
-        my ($Found) = grep { $_->{Key} eq $Part } @{$Subtree};
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-        last PART if !$Found;
+    my $Success = 1;
+    for my $ClassID ( keys %New ) {
+        for my $FieldID ( $New{$ClassID}->@* ) {
 
-        $Subtree = $Found->{Sub};
-        $Info    = $Found;
+            # insert new out of sync relations
+            $Success = $DBObject->Do(
+                SQL  => 'INSERT INTO configitem_definition_sync (class_id, field_id) VALUES (?, ?)',
+                Bind => [ \$ClassID, \$FieldID ],
+            ) ? $Success : 0;
+        }
     }
 
-    return $Info;
+    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => 'ConfigItemDefinition',
+        Key  => 'OutOfSyncClasses',
+    );
+
+    return $Success;
+}
+
+=head2 DefinitionSetSynced()
+
+Declare current class definition as in sync with its dynamic fields
+
+    my $Success = $ConfigItemObject->DefinitionSetSynced(
+        ClassID => 123,
+    );
+
+=cut
+
+sub DefinitionSetSynced {
+    my ( $Self, %Param ) = @_;
+
+    # check needed
+    if ( !$Param{ClassID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need ClassID!',
+        );
+
+        return;
+    }
+
+    my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL  => 'DELETE FROM configitem_definition_sync WHERE class_id = ?',
+        Bind => [ \$Param{ClassID} ],
+    );
+
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => 'ConfigItemDefinition',
+        Key  => 'OutOfSyncClasses',
+    );
+
+    return $Success;
+}
+
+=head2 DefinitionSync()
+
+Add new definitions for all classes where dynamic field contents changed compared to the current definition
+
+    my $Success = $ConfigItemObject->DefinitionSync();
+
+=cut
+
+sub DefinitionSync {
+    my ( $Self, %Param ) = @_;
+
+    my %OutOfSync = $Self->DefinitionNeedSync();
+
+    return 1 if !%OutOfSync;
+
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+    my @ClassIDs = keys %OutOfSync;
+
+    CLASS:
+    for my $ClassID (@ClassIDs) {
+
+        # check whether meaningful content is (still) affected
+        my $NeedsSync  = 0;
+        my $Definition = $Self->DefinitionGet(
+            ClassID => $ClassID,
+        );
+        my $DynamicFieldDefinition;
+
+        DYNAMICFIELD:
+        for my $FieldID ( $OutOfSync{$ClassID}->@* ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+                ID => $FieldID,
+            );
+
+            my $OldDynamicField = $Definition->{DynamicFieldRef}{ $DynamicField->{Name} };
+            if ( !$OldDynamicField || $OldDynamicField->{ID} ne $DynamicField->{ID} ) {
+
+                # consider name changes
+                $NeedsSync = 1;
+
+                last DYNAMICFIELD;
+            }
+
+            if ( $OldDynamicField->{Label} ne $DynamicField->{Label} ) {
+
+                # different labels can be due to the section definition
+                if ( !$DynamicFieldDefinition ) {
+                    my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
+                        Definition => $Definition->{Definition},
+                    ) || '--- []';
+
+                    $DynamicFieldDefinition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+                        Data => $DynamicFieldDefinitionYAML,
+                    );
+                }
+
+                if ( $OldDynamicField->{Label} ne $DynamicFieldDefinition->{ $DynamicField->{Name} }{Label} ) {
+                    $NeedsSync = 1;
+
+                    last DYNAMICFIELD;
+                }
+            }
+
+            if (
+                DataIsDifferent(
+                    Data1 => $OldDynamicField->{Config},
+                    Data2 => $DynamicField->{Config},
+                )
+                )
+            {
+                $NeedsSync = 1;
+
+                last DYNAMICFIELD;
+            }
+        }
+
+        if ( !$NeedsSync ) {
+            $Self->DefinitionSetSynced(
+                ClassID => $Param{ClassID},
+            );
+
+            next CLASS if !$NeedsSync;
+        }
+
+        $Self->DefinitionAdd(
+            ClassID    => $ClassID,
+            Definition => $Definition->{Definition},
+            UserID     => 1,
+            Force      => 1,
+        );
+    }
+
+    return 1;
 }
 
 =begin Internal:
@@ -602,6 +796,93 @@ sub _DefinitionPrepare {
     }
 
     return 1;
+}
+
+sub _DefinitionDynamicFieldGet {
+    my ( $Self, %Param ) = @_;
+
+    $Param{DefinitionPerl} //= $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $Param{Definition},
+    );
+
+    my %ContentHash  = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'HASH'  ? $Param{DefinitionPerl}->%* : ();
+    my @ContentArray = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'ARRAY' ? $Param{DefinitionPerl}->@* : ();
+
+    if ( !%ContentHash && !@ContentArray ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Definition or DefinitionPerl as hash or array!",
+        );
+
+        return;
+    }
+
+    my %DynamicFields;
+
+    for my $Key ( keys %ContentHash ) {
+        if ( $Key eq 'DF' ) {
+            $DynamicFields{ $ContentHash{$Key} } = \%ContentHash;
+        }
+        elsif ( ref $ContentHash{$Key} ) {
+            %DynamicFields = (
+                %DynamicFields,
+                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $ContentHash{$Key} ),
+            );
+        }
+    }
+
+    for my $Entry (@ContentArray) {
+        if ( ref $Entry ) {
+            %DynamicFields = (
+                %DynamicFields,
+                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $Entry ),
+            );
+        }
+    }
+
+    if ( $Param{Definition} ) {
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+        # Store config item class to check for version triggers in dynamic field object handler
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+        my $Class = $ClassList->{ $Param{ClassID} };
+
+        my %ReturnDynamicFields;
+
+        DYNAMICFIELD:
+        for my $Name ( keys %DynamicFields ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
+
+            next DYNAMICFIELD if !$DynamicField;
+            next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
+
+            $ReturnDynamicFields{$Name} = {
+                ID         => $DynamicField->{ID},
+                Name       => $DynamicField->{Name},
+                Label      => $DynamicField->{Label},
+                Config     => $DynamicField->{Config},
+                FieldType  => $DynamicField->{FieldType},
+                ObjectType => $DynamicField->{ObjectType},
+                CIClass    => $Class,
+            };
+
+            for my $Attribute (qw/Mandatory Label Readonly/) {
+                if ( defined $DynamicFields{$Name}{$Attribute} ) {
+                    $ReturnDynamicFields{$Name}{$Attribute} = $DynamicFields{$Name}{$Attribute};
+                }
+            }
+
+            # TODO: save versions of DynamicFieldSet-DFs (and use them!)
+        }
+
+        return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
+            Data => \%ReturnDynamicFields,
+        );
+    }
+
+    return %DynamicFields;
 }
 
 1;

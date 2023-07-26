@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -19,8 +19,12 @@ package var::packagesetup::ITSMConfigurationManagement;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
+# core modules
 
+# CPAN modules
+use Capture::Tiny qw(capture);
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::Output::Template::Provider;
 
@@ -1367,8 +1371,8 @@ sub _MigrateDTLInSysConfig {
     NAME:
     for my $Name (
         qw(
-        ITSMConfigItem::Frontend::MenuModule
-        ITSMConfigItem::Frontend::PreMenuModule
+            ITSMConfigItem::Frontend::MenuModule
+            ITSMConfigItem::Frontend::PreMenuModule
         )
         )
     {
@@ -1521,15 +1525,11 @@ sub _ConvertPerlDefinitions2YAML {
 
     my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
 
-    my ( $Result, $ExitCode );
+    my ( $Result, undef, $ExitCode ) = capture {
+        return $CommandObject->Execute();
+    };
 
-    {
-        local *STDOUT;
-        open STDOUT, '>:utf8', \$Result;    ## no critic qw(InputOutput::RequireEncodingWithUTF8Layer)
-        $ExitCode = $CommandObject->Execute();
-    }
-
-    return 1 if !$ExitCode;
+    return 1 unless $ExitCode;
 
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'error',

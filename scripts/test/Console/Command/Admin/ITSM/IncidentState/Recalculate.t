@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars (qw($Self));
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::IncidentState::Recalculate');
 
@@ -30,4 +32,4 @@ $Self->Is(
     "Admin::ITSM::IncidentState::Recalculate exit code",
 );
 
-1;
+$Self->DoneTesting;

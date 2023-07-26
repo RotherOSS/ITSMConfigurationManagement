@@ -37,23 +37,11 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
     *      This function initializes the form submittion.
     */
     TargetNS.Init = function () {
-        $('#SubmitButton').on('click', function () {
-            $('input[name=SubmitSave]').val('1');
-        });
-
         $('#CancelButton').on('click', function () {
             if (Core.UI.Popup.CurrentIsPopupWindow()) {
                 Core.UI.Popup.ClosePopup();
                 return false;
             }
-        });
-
-        $('.DisableValidation').on('click', function () {
-            $('input[name=SubmitSave]').val('0');
-            Core.Form.Validate.DisableValidation($('#ClassItem'));
-            // fix for Safari: race condition with submit in Core.Form.Validate.js
-            // fixed in OTOBO 3.0.5, this line remains here for backwards compatibility reasons
-            $('#ClassItem').removeClass('PreventMultipleSubmits');
         });
 
         // Register return key. But not in textareas.

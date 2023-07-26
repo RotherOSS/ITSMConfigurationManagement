@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otobo_config version="2.0" init="Config">
+<!-- TODO: merge file into standard configitem.xml -->
+    <Setting Name="ITSMConfigItemACLKeysLevel1Match" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in first level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Properties">Properties</Item>
+                <Item Key="PropertiesDatabase">PropertiesDatabase</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel1Change" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in first level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Possible">Possible</Item>
+                <Item Key="PossibleAdd">PossibleAdd</Item>
+                <Item Key="PossibleNot">PossibleNot</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel2::Possible" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in second level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ConfigItem">ConfigItem</Item>
+<!-- TODO                <Item Key="Action">Action</Item> -->
+                <Item Key="Form">Form</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel2::PossibleAdd" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in second level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ConfigItem">ConfigItem</Item>
+<!-- TODO                <Item Key="Action">Action</Item> -->
+                <Item Key="Form">Form</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel2::PossibleNot" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in second level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ConfigItem">ConfigItem</Item>
+<!-- TODO                <Item Key="Action">Action</Item> -->
+                <Item Key="Form">Form</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel2::Properties" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in second level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ConfigItem" Translatable="1">ConfigItem</Item>
+                <Item Key="Action" Translatable="1">Action</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel2::PropertiesDatabase" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available in second level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ConfigItem" Translatable="1">ConfigItem</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItemACLKeysLevel3::Actions###100-Default" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentITSMConfigItemEdit</Item>
+                <Item>AgentITSMConfigItem</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="ConfigItemACL::ACLPreselection" Required="0" Valid="1">
+        <Description Translatable="1">Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ConfigItemACL::Autoselect" Required="0" Valid="0">
+        <Description Translatable="1">Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).</Description>
+        <Navigation>Core::ITSMConfigItem::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DynamicField">
+                    <Hash>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otobo_config>

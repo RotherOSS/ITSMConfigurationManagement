@@ -16,8 +16,17 @@
 
 package Kernel::System::ITSMConfigItem::Event::DoHistory;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
+
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 
 our @ObjectDependencies = (
     'Kernel::System::ITSMConfigItem',
@@ -26,7 +35,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::DoHistory - Event handler that does the history
+Kernel::System::ITSMConfigItem::Event::DoHistory - Event handler that records the history
 
 =head1 PUBLIC INTERFACE
 
@@ -35,6 +44,7 @@ Kernel::System::ITSMConfigItem::Event::DoHistory - Event handler that does the h
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $DoHistoryObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Event::DoHistory');
 
@@ -44,10 +54,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 Run()
@@ -85,6 +92,17 @@ sub Run {
         }
     }
 
+    # check for dynamic fields first, most events will be this,
+    # ReadableValue and ReadableOldValue are expected to the strings
+    if ( $Param{Event} =~ m/^ConfigItemDynamicFieldUpdate_/ ) {
+        return $Self->_HistoryAdd(
+            ConfigItemID => $Param{Data}{ConfigItemID},
+            HistoryType  => 'ValueUpdate',
+            Comment      => "$Param{Data}{FieldName}%%$Param{Data}{ReadableOldValue}%%$Param{Data}{ReadableValue}",
+            UserID       => $Param{UserID},
+        );
+    }
+
     # due to consistency with ticket history, we need HistoryType
     $Param{HistoryType} = $Param{Event};
 
@@ -99,7 +117,7 @@ sub Run {
         DeploymentStateUpdate => \&_HistoryAdd,
         DefinitionUpdate      => \&_HistoryAdd,
         VersionCreate         => \&_HistoryAdd,
-        ValueUpdate           => \&_HistoryAdd,
+        VersionUpdate         => \&_HistoryAdd,
         DefinitionCreate      => \&_HistoryAdd,
         VersionDelete         => \&_HistoryAdd,
         AttachmentAddPost     => \&_HistoryAdd,

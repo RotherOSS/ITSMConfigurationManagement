@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars (qw($Self));
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
@@ -803,4 +805,4 @@ $Self->True(
     "Deleted Webservice $WebserviceID",
 );
 
-1;
+$Self->DoneTesting;

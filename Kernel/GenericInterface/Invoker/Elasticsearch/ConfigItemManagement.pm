@@ -143,10 +143,8 @@ sub PrepareRequest {
             };
         }
 
-        $ContentType =~ /^.*?\/([\d\w]+)/;
-        my $TypeFormat = $1;
-        $Filename =~ /\.([\d\w]+)$/;
-        my $NameFormat = $1;
+        my ($TypeFormat) = $ContentType =~ m/^.*?\/([\d\w]+)/;
+        my ($NameFormat) = $Filename    =~ m/\.([\d\w]+)$/;
 
         my %Data;
         if ( $FormatHash{$TypeFormat} || $FormatHash{$NameFormat} ) {

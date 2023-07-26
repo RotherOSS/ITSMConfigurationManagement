@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars qw($Self);
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 # get needed objects
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
@@ -338,4 +340,4 @@ $ConfigObject->Set(
 
 # cleanup is done by RestoreDatabase
 
-1;
+$Self->DoneTesting;

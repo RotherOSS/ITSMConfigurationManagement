@@ -282,7 +282,7 @@ sub ObjectSearch {
     return if !$Param{SubObject};
 
     # search the config items
-    my $ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearchExtended(
+    my $ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %{ $Param{SearchParams} },
         %Search,
         ClassIDs              => [ $Param{SubObject} ],

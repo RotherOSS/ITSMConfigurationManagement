@@ -17,11 +17,11 @@
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use utf8;
 
-use vars qw($Self);
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 # get needed objects
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
@@ -861,4 +861,4 @@ for my $CIID (@CIIDs) {
 
 # cleanup is done by RestoreDatabase
 
-1;
+$Self->DoneTesting;

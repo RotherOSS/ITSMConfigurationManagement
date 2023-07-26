@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars qw($Self);
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
@@ -179,4 +181,4 @@ for my $Test (@Tests) {
 
 }
 
-1;
+$Self->DoneTesting;

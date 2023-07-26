@@ -83,7 +83,8 @@ sub Run {
         }
 
         # check if link event concerns a ticket
-        return 1 if $Param{Data}->{Comment} !~ m{ \A ( \d+ ) %%Ticket \z }xms;
+        return 1 unless $Param{Data}->{Comment} =~ m{ \A ( \d+ ) %%Ticket \z }xms;
+
         $TicketID = $1;
     }
     else {
@@ -122,7 +123,7 @@ sub Run {
         LINE:
         for my $Line ( reverse @HistoryLines ) {
             next LINE if $Line->{HistoryType} ne 'TypeUpdate';
-            my @CommentParts = split '%%', $Line->{Name};
+            my @CommentParts = split /%%/, $Line->{Name};
             $OldTicketType = $CommentParts[3];
             last LINE;
         }

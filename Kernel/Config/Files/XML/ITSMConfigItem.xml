@@ -183,6 +183,7 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>ITSM.Agent.Default.css</Item>
+                        <Item>ITSM.Agent.ConfigItem.Zoom.css</Item>
                         <Item>ITSM.Agent.Detail.css</Item>
                         <Item>Core.AllocationList.css</Item>
                         <Item>ITSM.Print.css</Item>
@@ -192,7 +193,10 @@
                     <Array>
                         <Item>thirdparty/jquery-tablesorter-2.0.5/jquery.tablesorter.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.UI.InputFields.js</Item>
                         <Item>Core.UI.Table.Sort.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBDetailedSearch.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBSearch.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                         <Item>Core.Agent.LinkObject.js</Item>
                         <Item>ITSM.Agent.Zoom.js</Item>
@@ -237,6 +241,9 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.DynamicFieldDBDetailedSearch.js</Item>
+                        <Item>Core.Agent.DynamicFieldDBSearch.js</Item>
+                        <Item>Core.UI.InputFields.js</Item>
                         <Item>ITSM.Agent.ConfigItem.CustomerSearch.js</Item>
                         <Item>ITSM.Agent.ConfigItem.Edit.js</Item>
                     </Array>
@@ -568,6 +575,17 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::VersionTrigger" Required="0" Valid="1">
+        <!-- TODO: Do we need to write a new version on definition changes? Was not the case in 10.1
+        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState, Name, as well as Definition, if changes to the class definition should trigger a new version to be created. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>-->
+        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState and Name. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem><Array></Array></DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="LinkObject::DefaultSubObject###ITSMConfigItem" Required="1" Valid="1">
         <Description Translatable="1">Defines the default subobject of the class 'ITSMConfigItem'.</Description>
         <Navigation>Core::LinkObject</Navigation>
@@ -630,8 +648,19 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoHistory</Item>
-                <Item Key="Event">(ConfigItemCreate|VersionCreate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|ValueUpdate|DefinitionCreate|VersionDelete|AttachmentAddPost|AttachmentDeletePost)</Item>
+                <Item Key="Event">(ConfigItemCreate|VersionCreate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|ValueUpdate|DefinitionCreate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
                 <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module that upates config items to their current definition.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DefinitionConfigItemUpdate</Item>
+                <Item Key="Event">DefinitionCreate</Item>
+                <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -745,6 +774,8 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemEdit -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the edit ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -752,6 +783,20 @@
             <Item ValueType="String" ValueRegex="">rw</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the additional ITSM field screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::AgentITSMConfigItemEdit</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the add ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -766,6 +811,8 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemPrint -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the print ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -773,6 +820,20 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the additional ITSM field screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::AgentITSMConfigItemHistory</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required privileges to delete config items.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemDelete</Navigation>
@@ -780,6 +841,8 @@
             <Item ValueType="String" ValueRegex="">rw</Item>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemZoom -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ITSM configuration item zoom screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -787,6 +850,20 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the additional ITSM field screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::AgentITSMConfigItemZoom</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ITSM configuration item search screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -1395,6 +1472,59 @@
                 <Item>AttachmentDeletePost</Item>
                 <Item>VersionDelete</Item>
             </Array>
+        </Value>
+    </Setting>
+
+    <!-- dynamic field related settings -->
+    <Setting Name="DynamicFields::ObjectType###ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField object registration.</Description>
+        <Navigation>Core::DynamicFields::ObjectTypeRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">ITSM ConfigItem</Item>
+                <Item Key="Module">Kernel::System::DynamicField::ObjectType::ITSMConfigItem</Item>
+                <Item Key="Prio">115</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldScreens###ITSMConfigurationManagement" Required="1" Valid="1">
+        <Description Translatable="1">This configuration defines all possible screens to enable or disable dynamic fields.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###DynamicField">AgentITSMConfigItemEdit</Item>
+                <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField">AgentITSMConfigItemPrint</Item>
+                <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField">AgentITSMConfigItemZoom</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver###Reference###ReferencedObjectTypes###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Referenced object types that are available when ITSMConfigurationManagement is activated.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Array>
+                <Item>ITSMConfigItem</Item>
+                <Item>ITSMConfigItemVersion</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::NameModule" Required="0" Valid="1">
+        <Description Translatable="1">This configuration defines modules to suggest and check names for config items per config item class.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicField::EventModulePost###200-DynamicFieldSync" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::DynamicField::Event::ITSMConfigItemDefinitionSync</Item>
+                <Item Key="Event">DynamicFieldUpdate</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
         </Value>
     </Setting>
 </otobo_config>

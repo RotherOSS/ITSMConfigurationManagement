@@ -295,7 +295,7 @@ sub HistoryAdd {
     # shorten the comment if it is bigger than max length
     if ( length( $Param{Comment} ) > 255 ) {
 
-        my ( $Field, $Old, $New ) = split '%%', $Param{Comment}, 3;
+        my ( $Field, $Old, $New ) = split /%%/, $Param{Comment}, 3;
 
         my $Length = int( ( 255 - length($Field) - 4 ) / 2 );
 

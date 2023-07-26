@@ -18,7 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-use vars (qw($Self));
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+
+our $Self;
 
 # get selenium object
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
@@ -208,4 +210,4 @@ $Selenium->RunTest(
 
 );
 
-1;
+$Self->DoneTesting;

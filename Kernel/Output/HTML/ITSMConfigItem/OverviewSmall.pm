@@ -276,7 +276,6 @@ END
 
     # check ShowColumns parameter
     my @ShowColumns;
-    my @XMLShowColumns;
     if ( $Param{ShowColumns} && ref $Param{ShowColumns} eq 'ARRAY' ) {
         @ShowColumns = @{ $Param{ShowColumns} };
     }
@@ -332,45 +331,6 @@ END
                 },
             );
         }
-
-        # get the XML column headers only if the filter is not set to 'all'
-        # and if there are CIs to show
-        if ( $Param{Filter} && $Param{Filter} ne 'All' && @ConfigItemIDs ) {
-
-            # get the version data of the first config item, including all the XML data
-            # to get the column header names
-            my $ConfigItem = $ConfigItemObject->VersionGet(
-                ConfigItemID => $ConfigItemIDs[0],
-                XMLDataGet   => 1,
-            );
-
-            # convert the XML data into a hash
-            my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-                XMLDefinition => $ConfigItem->{XMLDefinition},
-                XMLData       => $ConfigItem->{XMLData}->[1]->{Version}->[1],
-                Attributes    => \@ShowColumns,
-                Print         => 1,
-            );
-
-            # get the xml columns (they contain ::)
-            @XMLShowColumns = grep {/::/} @ShowColumns;
-
-            COLUMN:
-            for my $Column (@XMLShowColumns) {
-
-                # check if column exists in CI-Data
-                next COLUMN if !$ExtendedVersionData->{$Column}->{Name};
-
-                # show the xml attribute header
-                $LayoutObject->Block(
-                    Name => 'RecordXMLAttributeHeader',
-                    Data => {
-                        %Param,
-                        XMLAttributeHeader => $ExtendedVersionData->{$Column}->{Name},
-                    },
-                );
-            }
-        }
     }
 
     my $Output  = '';
@@ -402,30 +362,20 @@ END
                 next CONFIGITEMID if !$HasAccess;
 
                 # get config item data
-                my $ConfigItem = $ConfigItemObject->VersionGet(
-                    ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 1,
+                my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                    ConfigItemID  => $ConfigItemID,
+                    DynamicFields => 1,
                 );
 
                 next CONFIGITEMID if !$ConfigItem;
 
-                # convert the XML data into a hash
-                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-                    XMLDefinition => $ConfigItem->{XMLDefinition},
-                    XMLData       => $ConfigItem->{XMLData}->[1]->{Version}->[1],
-                    Attributes    => \@ShowColumns,
-                    Print         => 1,
-                );
+                # TODO: Show Dynamic Fields - Prio 3
+                #                # convert the XML data into a hash
+                #                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
+                #                );
 
                 # store config item data,
                 %Data = %{$ConfigItem};
-
-                # Get config item data for 'CreateTime' and 'ChangeTime'.
-                my $ConfigItemData = $ConfigItemObject->ConfigItemGet(
-                    ConfigItemID => $ConfigItemID,
-                );
-                $Data{CreateTime} = $ConfigItemData->{CreateTime};
-                $Data{ChangeTime} = $ConfigItemData->{ChangeTime};
 
                 # build record block
                 $LayoutObject->Block(
@@ -451,32 +401,12 @@ END
                             },
                         );
                     }
-
-                    COLUMN:
-                    for my $Column (@XMLShowColumns) {
-
-                        # check if column exists in CI-Data
-                        next COLUMN if !$ExtendedVersionData->{$Column}->{Name};
-
-                        # Convert to ascii text in case the value contains html.
-                        my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $ExtendedVersionData->{$Column}->{Value} // '' ) // '';
-
-                        # convert all whitespace and newlines to single spaces
-                        $Value =~ s{ \s+ }{ }gxms;
-
-                        # show the xml attribute data
-                        $LayoutObject->Block(
-                            Name => 'RecordXMLAttribute',
-                            Data => {
-                                %Param,
-                                XMLAttributeData => $Value,
-                            },
-                        );
-                    }
                 }
 
                 # make a deep copy of the action items to avoid changing the definition
                 my $ClonedActionItems = Storable::dclone( \@ActionItems );
+
+                $ConfigItem->{VersionID} //= '';
 
                 # substitute TT variables
                 for my $ActionItem ( @{$ClonedActionItems} ) {

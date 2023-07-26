@@ -19,8 +19,6 @@ package Kernel::Modules::AgentITSMConfigItemEdit;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
@@ -43,18 +41,19 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get configitem id and class id
-    my $ConfigItem = {};
+    my $ConfigItem;
+    my $DuplicateID = $ParamObject->GetParam( Param => 'DuplicateID' ) || 0;
     $ConfigItem->{ConfigItemID} = $ParamObject->GetParam( Param => 'ConfigItemID' ) || 0;
     $ConfigItem->{ClassID}      = $ParamObject->GetParam( Param => 'ClassID' )      || 0;
-    my $DuplicateID = $ParamObject->GetParam( Param => 'DuplicateID' ) || 0;
 
     my $HasAccess;
 
     # get needed objects
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $GeneralCatalogObject      = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject              = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get config of frontend module
     $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
@@ -72,14 +71,20 @@ sub Run {
 
         # get config item
         $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
+            ConfigItemID  => $ConfigItem->{ConfigItemID},
+            DynamicFields => 1,
         );
     }
     elsif ($DuplicateID) {
 
+        my $VersionID = $ParamObject->GetParam( Param => 'VersionID' );
+
+        # TODO: Check duplication
         # get config item to duplicate
         $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $DuplicateID,
+            ConfigItemID  => $DuplicateID,
+            VersionID     => $VersionID,
+            DynamicFields => 1,
         );
 
         # check access for config item
@@ -130,17 +135,124 @@ sub Run {
     }
 
     # get definition
-    my $XMLDefinition = $ConfigItemObject->DefinitionGet(
+    my $Definition = $ConfigItemObject->DefinitionGet(
         ClassID => $ConfigItem->{ClassID},
     );
 
     # abort, if no definition is defined
-    if ( !$XMLDefinition->{DefinitionID} ) {
+    if ( !$Definition->{DefinitionID} ) {
         return $LayoutObject->ErrorScreen(
             Message => $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ConfigItem->{Class} ),
             Comment => Translatable('Please contact the administrator.'),
         );
     }
+
+    my %GetParam;
+    my %DynamicFieldValues;
+    my %ACLReducibleDynamicFields;
+    my $DynamicFieldList = $Definition->{DynamicFieldRef} ? [ values $Definition->{DynamicFieldRef}->%* ] : [];
+
+    # get initial values for the configitem
+    if ( !$Self->{Subaction} ) {
+        if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+
+            # TODO Prio3: set default data
+            #for my $Param (qw(Name DeplStateID InciStateID)) {
+            #    $GetParam{$Param} = ;
+            #}
+
+            # check for name module based on classname
+            my $ConfigItemName;
+            my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+
+            if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+
+                # check if name module exists
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Can't load name module for class $ConfigItem->{Class}!",
+                    );
+                    return;
+                }
+
+                # create a backend object
+                my $NameModuleObject = $NameModule->new( %{$Self} );
+
+                # get name from name module backend
+                $ConfigItemName = $NameModuleObject->GetFreeName();
+            }
+            $GetParam{Name} = $ConfigItemName;
+        }
+
+        else {
+            # get general form data
+            for my $Param (qw(Name DeplStateID InciStateID)) {
+                $GetParam{$Param} = $ConfigItem->{$Param};
+            }
+
+            DYNAMICFIELD:
+            for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} };
+
+                # perform ACLs on values
+                my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Behavior           => 'IsACLReducible'
+                );
+
+                if ($IsACLReducible) {
+                    $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
+                }
+            }
+        }
+    }
+
+    else {
+        # get general form data
+        for my $Param (qw(Name DeplStateID InciStateID)) {
+            $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
+        }
+
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            # extract the dynamic field value from the web request
+            $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                ParamObject        => $ParamObject,
+                LayoutObject       => $LayoutObject,
+            );
+
+            # perform ACLs on values
+            my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsACLReducible'
+            );
+
+            if ($IsACLReducible) {
+                $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
+            }
+        }
+    }
+
+    my @UpdatableFields = qw(DeplStateID InciStateID);
+    push @UpdatableFields, keys %ACLReducibleDynamicFields;
+
+    # convert dynamic field values into a structure for ACLs
+    my %DynamicFieldACLParameters;
+    DYNAMICFIELD:
+    for my $DynamicField ( sort keys %DynamicFieldValues ) {
+        next DYNAMICFIELD if !$DynamicField;
+        next DYNAMICFIELD if !$DynamicFieldValues{$DynamicField};
+
+        $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicField } = $DynamicFieldValues{$DynamicField};
+    }
+    $GetParam{DynamicField} = \%DynamicFieldACLParameters;
 
     # get upload cache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
@@ -183,17 +295,32 @@ sub Run {
         }
     }
 
-    # get submit save
-    my $SubmitSave = $ParamObject->GetParam( Param => 'SubmitSave' );
-
     # get log object
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $FieldRestrictionsObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::FieldRestrictions');
 
-    # get xml data
-    my $Version = {};
+    my $Autoselect = $ConfigObject->Get('ConfigItemACL::Autoselect') || undef;
+    my $ACLPreselection;
+    if ( $ConfigObject->Get('TicketACL::ACLPreselection') ) {
+
+        # get cached preselection rules
+        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+        $ACLPreselection = $CacheObject->Get(
+            Type => 'TicketACL',
+            Key  => 'Preselection',
+        );
+        if ( !$ACLPreselection ) {
+            $ACLPreselection = $FieldRestrictionsObject->SetACLPreselectionCache();
+        }
+    }
+
+    my %Error;
     my $NameDuplicates;
     my $CINameRegexErrorMessage;
-    if ( $Self->{Subaction} eq 'VersionSave' ) {
+    my %DynamicFieldValidationResult;
+    my %DynamicFieldPossibleValues;
+    my %DynamicFieldVisibility;
+    if ( $Self->{Subaction} eq 'Save' ) {
 
         # get the uploaded attachment
         my %UploadStuff = $ParamObject->GetUploadAll(
@@ -213,23 +340,17 @@ sub Run {
         my $AllRequired = 1;
 
         # get general form data
-        for my $FormParam (qw(Name DeplStateID InciStateID)) {
-            $Version->{$FormParam} = $ParamObject->GetParam( Param => $FormParam );
-            if ( !$Version->{$FormParam} ) {
+        for my $Param (qw(Name DeplStateID InciStateID)) {
+            $ConfigItem->{$Param} = $GetParam{$Param};
+
+            if ( !$ConfigItem->{$Param} ) {
                 $AllRequired = 0;
             }
         }
 
-        # get xml form data
-        $Version->{XMLData}->[1]->{Version}->[1] = $Self->_XMLFormGet(
-            XMLDefinition => $XMLDefinition->{DefinitionRef},
-            AllRequired   => \$AllRequired,
-            ConfigItemID  => $ConfigItem->{ConfigItemID},
-        );
-
         # check, whether the feature to check for a unique name is enabled
         if (
-            IsStringWithData( $Version->{Name} )
+            IsStringWithData( $ConfigItem->{Name} )
             && $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck')
             )
         {
@@ -238,14 +359,14 @@ sub Run {
                 $LogObject->Log(
                     Priority => 'debug',
                     Message  => "Checking for duplicate names (ClassID: $ConfigItem->{ClassID}, "
-                        . "Name: $Version->{Name}, ConfigItemID: $ConfigItem->{ConfigItemID})",
+                        . "Name: $ConfigItem->{Name}, ConfigItemID: $ConfigItem->{ConfigItemID})",
                 );
             }
 
             $NameDuplicates = $ConfigItemObject->UniqueNameCheck(
                 ConfigItemID => $ConfigItem->{ConfigItemID},
                 ClassID      => $ConfigItem->{ClassID},
-                Name         => $Version->{Name},
+                Name         => $ConfigItem->{Name},
             );
 
             # stop processing if the name is not unique
@@ -259,7 +380,7 @@ sub Run {
                 $LogObject->Log(
                     Priority => 'error',
                     Message  =>
-                        "The name $Version->{Name} is already in use by the ConfigItemID(s): "
+                        "The name $ConfigItem->{Name} is already in use by the ConfigItemID(s): "
                         . $NameDuplicatesString,
                 );
             }
@@ -269,7 +390,7 @@ sub Run {
         my $CINameRegexConfig = $ConfigObject->Get("ITSMConfigItem::CINameRegex");
 
         # check if the CI name is given and should be checked with a regular expression
-        if ( IsStringWithData( $Version->{Name} ) && $CINameRegexConfig ) {
+        if ( IsStringWithData( $ConfigItem->{Name} ) && $CINameRegexConfig ) {
 
             # get class list
             my $ClassList = $GeneralCatalogObject->ItemList(
@@ -283,7 +404,7 @@ sub Run {
             my $CINameRegex = $CINameRegexConfig->{ $ClassName . '::' . 'CINameRegex' } || '';
 
             # if a regex is defined and the CI name does not match the regular expression
-            if ( $CINameRegex && $Version->{Name} !~ m{ $CINameRegex }xms ) {
+            if ( $CINameRegex && $ConfigItem->{Name} !~ m{ $CINameRegex }xms ) {
 
                 $AllRequired = 0;
 
@@ -292,15 +413,94 @@ sub Run {
             }
         }
 
-        # save version to database
-        if ( $SubmitSave && $AllRequired ) {
+        # transform dynamic field data into DFName => DFName pair
+        my %DynamicFieldAcl = map { $_->{Name} => $_->{Name} } $DynamicFieldList->@*;
 
-            if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
-                $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
-                    ClassID => $ConfigItem->{ClassID},
-                    UserID  => $Self->{UserID},
+        # call ticket ACLs for DynamicFields to check field visibility
+        my $ACLResult = $ConfigItemObject->ConfigItemAcl(
+            %GetParam,
+            Action        => $Self->{Action},
+            ReturnType    => 'Form',
+            ReturnSubType => '-',
+            Data          => \%DynamicFieldAcl,
+            UserID        => $Self->{UserID},
+        );
+        if ($ACLResult) {
+            %DynamicFieldVisibility = map { 'DynamicField_' . $_->{Name} => 0 } $DynamicFieldList->@*;
+            my %AclData = $ConfigItemObject->ConfigItemAclData();
+            for my $Field ( sort keys %AclData ) {
+                $DynamicFieldVisibility{ 'DynamicField_' . $Field } = 1;
+            }
+        }
+        else {
+            %DynamicFieldVisibility = map { 'DynamicField_' . $_->{Name} => 1 } $DynamicFieldList->@*;
+        }
+
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $PossibleValuesFilter;
+
+            if ( $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } ) {
+
+                # get PossibleValues
+                my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                );
+
+                # check if field has PossibleValues property in its configuration
+                if ( IsHashRefWithData($PossibleValues) ) {
+
+                    # convert possible values key => value to key => key for ACLs using a Hash slice
+                    my %AclData = %{$PossibleValues};
+                    @AclData{ keys %AclData } = keys %AclData;
+
+                    # set possible values filter from ACLs
+                    my $ACL = $ConfigItemObject->ConfigItemAcl(
+                        %GetParam,
+                        Action        => $Self->{Action},
+                        ReturnType    => 'ITSMConfigItem',
+                        ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                        Data          => \%AclData,
+                        UserID        => $Self->{UserID},
+                    );
+                    if ($ACL) {
+                        my %Filter = $ConfigItemObject->ConfigItemAclData();
+
+                        # convert Filter key => key back to key => value using map
+                        %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} } keys %Filter;
+                    }
+                }
+            }
+
+            $DynamicFieldPossibleValues{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $PossibleValuesFilter;
+
+            # perform validation
+            my $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
+                DynamicFieldConfig   => $DynamicFieldConfig,
+                PossibleValuesFilter => $PossibleValuesFilter,
+                ParamObject          => $ParamObject,
+            );
+
+            if ( !IsHashRefWithData($ValidationResult) ) {
+                return $LayoutObject->ErrorScreen(
+                    Message => $LayoutObject->{LanguageObject}->Translate("Could not perform validation on field $DynamicFieldConfig->{Label}!"),
+                    Comment => Translatable('Please contact the administrator.'),
                 );
             }
+
+            # propagate validation error to the Error variable to be detected by the frontend
+            if ( $ValidationResult->{ServerError} ) {
+                $Error{ $DynamicFieldConfig->{Name} }                        = ' ServerError';
+                $DynamicFieldValidationResult{ $DynamicFieldConfig->{Name} } = $ValidationResult;
+            }
+        }
+
+        $AllRequired = %Error ? 0 : 1;
+
+        # save version to database
+        if ($AllRequired) {
 
             # get all attachments from upload cache
             my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
@@ -320,48 +520,84 @@ sub Run {
                 $NewAttachment{$Key} = $Attachment;
             }
 
-            # get all attachments meta data
-            my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-            );
+            # for existing ConfigItems compare with the current data
+            if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
 
-            # check the existing attachments
-            FILENAME:
-            for my $Filename (@ExistingAttachments) {
-
-                # get the existing attachment data
-                my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
+                # get all attachments meta data
+                my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
                     ConfigItemID => $ConfigItem->{ConfigItemID},
-                    Filename     => $Filename,
-                    UserID       => $Self->{UserID},
                 );
 
-                # the key is the filename + filesize + content type
-                # (no content id, as existing attachments don't have it)
-                my $Key = $AttachmentData->{Filename}
-                    . $AttachmentData->{Filesize}
-                    . $AttachmentData->{ContentType};
+                # check the existing attachments
+                FILENAME:
+                for my $Filename (@ExistingAttachments) {
 
-                # attachment is already existing, we can delete it from the new attachment hash
-                if ( $NewAttachment{$Key} ) {
-                    delete $NewAttachment{$Key};
-                }
-
-                # existing attachment is no longer in new attachments hash
-                else {
-
-                    # delete the existing attachment
-                    my $DeleteSuccessful = $ConfigItemObject->ConfigItemAttachmentDelete(
+                    # get the existing attachment data
+                    my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
                         ConfigItemID => $ConfigItem->{ConfigItemID},
                         Filename     => $Filename,
                         UserID       => $Self->{UserID},
                     );
 
-                    # check error
-                    if ( !$DeleteSuccessful ) {
-                        return $LayoutObject->FatalError();
+                    # the key is the filename + filesize + content type
+                    # (no content id, as existing attachments don't have it)
+                    my $Key = $AttachmentData->{Filename}
+                        . $AttachmentData->{Filesize}
+                        . $AttachmentData->{ContentType};
+
+                    # attachment is already existing, we can delete it from the new attachment hash
+                    if ( $NewAttachment{$Key} ) {
+                        delete $NewAttachment{$Key};
+                    }
+
+                    # existing attachment is no longer in new attachments hash
+                    else {
+
+                        # delete the existing attachment
+                        my $DeleteSuccessful = $ConfigItemObject->ConfigItemAttachmentDelete(
+                            ConfigItemID => $ConfigItem->{ConfigItemID},
+                            Filename     => $Filename,
+                            UserID       => $Self->{UserID},
+                        );
+
+                        # check error
+                        if ( !$DeleteSuccessful ) {
+                            return $LayoutObject->FatalError();
+                        }
                     }
                 }
+            }
+
+            # TODO: better align with the initial EditFieldValueGet?
+            # TODO: Visibility
+            # prepare dynamic field values
+            DYNAMICFIELD:
+            for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
+
+                $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldValues{ $DynamicField->{Name} };
+            }
+
+            if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+
+                # delete temporary number # TODO: check, whether setting new as number is necessary in the first place
+                delete $ConfigItem->{Number};
+
+                $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
+                    $ConfigItem->%*,
+                    UserID => $Self->{UserID},
+                );
+
+                # check error
+                if ( !$ConfigItem->{ConfigItemID} ) {
+                    return $LayoutObject->FatalError();
+                }
+            }
+            else {
+                $ConfigItemObject->ConfigItemUpdate(
+                    $ConfigItem->%*,
+                    UserID => $Self->{UserID},
+                );
             }
 
             # write the new attachments
@@ -380,14 +616,6 @@ sub Run {
                     return $LayoutObject->FatalError();
                 }
             }
-
-            # add version
-            $ConfigItemObject->VersionAdd(
-                %{$Version},
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-                DefinitionID => $XMLDefinition->{DefinitionID},
-                UserID       => $Self->{UserID},
-            );
 
             # redirect to zoom mask
             my $ScreenType = $ParamObject->GetParam( Param => 'ScreenType' ) || 0;
@@ -414,39 +642,142 @@ sub Run {
             }
         }
     }
-    elsif ($DuplicateID) {
-        my $VersionID = $ParamObject->GetParam( Param => 'VersionID' );
-        if ($VersionID) {
+    elsif ( $Self->{Subaction} eq 'AJAXUpdate' ) {
+        my $ElementChanged  = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
+        my %ChangedElements = $ElementChanged ? ( $ElementChanged => 1 ) : ();
+        my $LoopProtection  = 100;
 
-            # get version data to duplicate config item
-            $Version = $ConfigItemObject->VersionGet(
-                VersionID => $VersionID,
-            );
+        # get values and visibility of dynamic fields
+        my %DynFieldStates = $FieldRestrictionsObject->GetFieldStates(
+            ConfigItemObject          => $ConfigItemObject,
+            DynamicFields             => $Definition->{DynamicFieldRef},
+            DynamicFieldBackendObject => $DynamicFieldBackendObject,
+            ChangedElements           => \%ChangedElements,                # optional to reduce ACL evaluation
+            Action                    => $Self->{Action},
+            UserID                    => $Self->{UserID},
+            ConfigItemID              => $Self->{ConfigItemID},
+            FormID                    => $Self->{FormID},
+            GetParam                  => {%GetParam},
+            Autoselect                => $Autoselect,
+            ACLPreselection           => $ACLPreselection,
+            LoopProtection            => \$LoopProtection,
+        );
+
+        # store new values
+        $GetParam{DynamicField} = {
+            %{ $GetParam{DynamicField} },
+            %{ $DynFieldStates{NewValues} },
+        };
+
+        # update Dynamic Fields Possible Values via AJAX
+        my @DynamicFieldAJAX;
+
+        # cycle through the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $Name ( keys %{ $DynFieldStates{Fields} } ) {
+            my $DynamicFieldConfig = $Self->{DynamicField}{$Name};
+
+            if ( $DynamicFieldConfig->{Config}{MultiValue} && ref $GetParam{DynamicField}{"DynamicField_$Name"} eq 'ARRAY' ) {
+                for my $i ( 0 .. $#{ $GetParam{DynamicField}{"DynamicField_$Name"} } ) {
+                    my $DataValues = $DynFieldStates{Fields}{$Name}{NotACLReducible}
+                        ? $GetParam{DynamicField}{"DynamicField_$Name"}[$i]
+                        :
+                        (
+                            $DynamicFieldBackendObject->BuildSelectionDataGet(
+                                DynamicFieldConfig => $DynamicFieldConfig,
+                                PossibleValues     => $DynFieldStates{Fields}{$Name}{PossibleValues},
+                                Value              => [ $GetParam{DynamicField}{"DynamicField_$Name"}[$i] ],
+                            )
+                            || $DynFieldStates{Fields}{$Name}{PossibleValues}
+                        );
+
+                    # add dynamic field to the list of fields to update
+                    push @DynamicFieldAJAX, {
+                        Name        => $Name . '_' . $i,
+                        Data        => $DataValues,
+                        SelectedID  => $GetParam{DynamicField}{"DynamicField_$Name"}[$i],
+                        Translation => $DynamicFieldConfig->{Config}->{TranslatableValues} || 0,
+                        Max         => 100,
+                    };
+                }
+
+                next DYNAMICFIELD;
+            }
+
+            my $DataValues = $DynFieldStates{Fields}{$Name}{NotACLReducible}
+                ? $GetParam{DynamicField}{"DynamicField_$Name"}
+                :
+                (
+                    $DynamicFieldBackendObject->BuildSelectionDataGet(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                        PossibleValues     => $DynFieldStates{Fields}{$Name}{PossibleValues},
+                        Value              => $GetParam{DynamicField}{"DynamicField_$Name"},
+                    )
+                    || $DynFieldStates{Fields}{$Name}{PossibleValues}
+                );
+
+            # add dynamic field to the list of fields to update
+            push @DynamicFieldAJAX, {
+                Name        => 'DynamicField_' . $Name,
+                Data        => $DataValues,
+                SelectedID  => $GetParam{DynamicField}{"DynamicField_$Name"},
+                Translation => $DynamicFieldConfig->{Config}->{TranslatableValues} || 0,
+                Max         => 100,
+            };
         }
-        else {
 
-            # get last version data to duplicate config item
-            $Version = $ConfigItemObject->VersionGet(
-                ConfigItemID => $DuplicateID,
-            );
+        if ( IsHashRefWithData( $DynFieldStates{Visibility} ) ) {
+            push @DynamicFieldAJAX, {
+                Name => 'Restrictions_Visibility',
+                Data => $DynFieldStates{Visibility},
+            };
         }
-    }
-    elsif ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
 
-        # get last version data
-        $Version = $ConfigItemObject->VersionGet(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
+        my $JSON = $LayoutObject->BuildSelectionJSON(
+            [
+                @DynamicFieldAJAX,
+            ],
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
         );
     }
+    else {
+        my $LoopProtection = 100;
 
-    my %XMLFormOutputParam;
-    if ( $Version->{XMLData}->[1]->{Version}->[1] ) {
-        $XMLFormOutputParam{XMLData} = $Version->{XMLData}->[1]->{Version}->[1];
+        # get values and visibility of dynamic fields
+        my %DynFieldStates = $FieldRestrictionsObject->GetFieldStates(
+            ConfigItemObject          => $ConfigItemObject,
+            DynamicFields             => $Definition->{DynamicFieldRef},
+            DynamicFieldBackendObject => $DynamicFieldBackendObject,
+            Action                    => $Self->{Action},
+            UserID                    => $Self->{UserID},
+            ConfigItemID              => $Self->{ConfigItemID},
+            FormID                    => $Self->{FormID},
+            GetParam                  => {%GetParam},
+            Autoselect                => $Autoselect,
+            ACLPreselection           => $ACLPreselection,
+            LoopProtection            => \$LoopProtection,
+            InitialRun                => 1,
+        );
+
+        # store new values
+        $GetParam{DynamicField} = {
+            %{ $GetParam{DynamicField} },
+            %{ $DynFieldStates{NewValues} },
+        };
+
+        %DynamicFieldVisibility     = $DynFieldStates{Visibility}->%*;
+        %DynamicFieldPossibleValues = map { 'DynamicField_' . $_ => $DynFieldStates{Fields}{$_}{PossibleValues} } keys $DynFieldStates{Fields}->%*;
     }
 
     # output name invalid block
     my $RowNameInvalid = '';
-    if ( !$Version->{Name} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$ConfigItem->{Name} && $Self->{Subaction} eq 'Save' ) {
         $RowNameInvalid = 'ServerError';
     }
 
@@ -464,7 +795,7 @@ sub Run {
     $LayoutObject->Block(
         Name => 'RowName',
         Data => {
-            %{$Version},
+            %GetParam,
             RowNameInvalid => $RowNameInvalid,
         },
     );
@@ -536,7 +867,7 @@ sub Run {
 
     # output deployment state invalid block
     my $RowDeplStateInvalid = '';
-    if ( !$Version->{DeplStateID} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$ConfigItem->{DeplStateID} && $Self->{Subaction} eq 'Save' ) {
         $RowDeplStateInvalid = ' ServerError';
     }
 
@@ -546,7 +877,7 @@ sub Run {
         Name         => 'DeplStateID',
         PossibleNone => 1,
         Class        => 'Validate_Required Modernize' . $RowDeplStateInvalid,
-        SelectedID   => $Version->{DeplStateID},
+        SelectedID   => $GetParam{DeplStateID},
     );
 
     # output deployment state block
@@ -567,7 +898,7 @@ sub Run {
 
     # output incident state invalid block
     my $RowInciStateInvalid = '';
-    if ( !$Version->{InciStateID} && $Self->{Subaction} eq 'VersionSave' && $SubmitSave ) {
+    if ( !$ConfigItem->{InciStateID} && $Self->{Subaction} eq 'Save' ) {
         $RowInciStateInvalid = ' ServerError';
     }
 
@@ -577,7 +908,7 @@ sub Run {
         Name         => 'InciStateID',
         PossibleNone => 1,
         Class        => 'Validate_Required Modernize' . $RowInciStateInvalid,
-        SelectedID   => $Version->{InciStateID},
+        SelectedID   => $GetParam{InciStateID},
     );
 
     # output incident state block
@@ -588,13 +919,26 @@ sub Run {
         },
     );
 
-    # output xml form
-    if ( $XMLDefinition->{Definition} ) {
-        $Self->{CustomerSearchItemIDs} = [];
-        $Self->_XMLFormOutput(
-            XMLDefinition => $XMLDefinition->{DefinitionRef},
-            %XMLFormOutputParam,
-        );
+    # render dynamic fields
+    my $DynamicFieldHTML;
+    if ( IsHashRefWithData( $Definition->{DefinitionRef} ) && $Definition->{DefinitionRef}{Sections} ) {
+
+        # TODO: look what this was/is about
+        #        $Self->{CustomerSearchItemIDs} = [];
+        # TODO: order by pages and only render the first page
+        for my $Section ( values $Definition->{DefinitionRef}{Sections}->%* ) {
+            $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
+                Content              => $Section->{Content},
+                DynamicFields        => $Definition->{DynamicFieldRef},
+                UpdatableFields      => \@UpdatableFields,
+                LayoutObject         => $LayoutObject,
+                ParamObject          => $ParamObject,
+                DynamicFieldValues   => $GetParam{DynamicField},
+                PossibleValuesFilter => \%DynamicFieldPossibleValues,
+                Errors               => \%DynamicFieldValidationResult,
+                Visibility           => \%DynamicFieldVisibility,
+            );
+        }
     }
 
     # get all attachments meta data
@@ -629,8 +973,9 @@ sub Run {
             Data         => {
                 %Param,
                 %{$ConfigItem},
-                DuplicateID => $DuplicateID,
-                FormID      => $Self->{FormID},
+                DynamicFieldHTML => $DynamicFieldHTML,
+                DuplicateID      => $DuplicateID,
+                FormID           => $Self->{FormID},
             },
         );
         $Output .= $LayoutObject->Footer( Type => 'Small' );
@@ -691,370 +1036,15 @@ sub Run {
             Data         => {
                 %Param,
                 %{$ConfigItem},
-                DuplicateID => $DuplicateID,
-                FormID      => $Self->{FormID},
+                DynamicFieldHTML => $DynamicFieldHTML,
+                DuplicateID      => $DuplicateID,
+                FormID           => $Self->{FormID},
             },
         );
         $Output .= $LayoutObject->Footer();
     }
 
     return $Output;
-}
-
-sub _XMLFormGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{AllRequired};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{AllRequired} ne 'SCALAR';
-    return if !$Param{ConfigItemID};
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-
-    my $FormData = {};
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        my $CounterInsert = 1;
-
-        COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
-
-            # create inputkey and addkey
-            my $InputKey = $Item->{Key} . '::' . $Counter;
-            my $AddKey   = $Item->{Key} . '::Add';
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-                $AddKey   = $Param{Prefix} . '::' . $AddKey;
-            }
-
-            # get param
-            my $FormValues = $LayoutObject->ITSMConfigItemFormDataGet(
-                Key          => $InputKey,
-                Item         => $Item,
-                ConfigItemID => $Param{ConfigItemID},
-            );
-
-            if ( defined $FormValues->{Value} ) {
-
-                # check required value
-                if ( $FormValues->{Invalid} ) {
-                    ${ $Param{AllRequired} } = 0;
-                }
-
-                # check delete button
-                next COUNTER if $ParamObject->GetParam( Param => $InputKey . '::Delete' );
-
-                # start recursion, if "Sub" was found
-                if ( $Item->{Sub} ) {
-                    my $SubFormData = $Self->_XMLFormGet(
-                        XMLDefinition => $Item->{Sub},
-                        Prefix        => $InputKey,
-                        AllRequired   => $Param{AllRequired},
-                        ConfigItemID  => $Param{ConfigItemID},
-                    );
-                    $FormData->{ $Item->{Key} }->[$CounterInsert] = $SubFormData;
-                }
-                $FormData->{ $Item->{Key} }->[$CounterInsert]->{Content} = $FormValues->{Value};
-                $CounterInsert++;
-            }
-            else {
-
-                # check add button
-                if ( $ParamObject->GetParam( Param => $AddKey ) ) {
-                    if ( $Item->{Sub} ) {
-                        $FormData->{ $Item->{Key} }->[$CounterInsert] = $Self->_XMLDefaultSet(
-                            XMLDefinition => $Item->{Sub},
-                        );
-                    }
-                    $FormData->{ $Item->{Key} }->[$CounterInsert]->{Content} = '';
-                }
-                last COUNTER;
-            }
-        }
-    }
-
-    return $FormData;
-}
-
-sub _XMLDefaultSet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-
-    my $DefaultData = {};
-
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        for my $Counter ( 1 .. $Item->{CountDefault} ) {
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                $DefaultData->{ $Item->{Key} }->[$Counter] = $Self->_XMLDefaultSet(
-                    XMLDefinition => $Item->{Sub},
-                );
-            }
-
-            $DefaultData->{ $Item->{Key} }->[$Counter]->{Content} = '';
-        }
-    }
-
-    return $DefaultData;
-}
-
-sub _XMLFormOutput {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-
-    $Param{Level}  ||= 0;
-    $Param{Prefix} ||= '';
-
-    # get submit save
-    my $SubmitSave = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'SubmitSave' );
-
-    # set data present mode
-    my $DataPresentMode = 0;
-    if ( $Param{XMLData} && ref $Param{XMLData} eq 'HASH' ) {
-        $DataPresentMode = 1;
-    }
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    my $ItemCounter = 1;
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        # set loop
-        my $Loop = $Item->{CountDefault};
-        if ($DataPresentMode) {
-            $Loop = 0;
-
-            # search the last content
-            COUNTER:
-            for my $Counter ( 1 .. $Item->{CountMax} ) {
-                last COUNTER if !defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content};
-                $Loop = $Counter;
-            }
-
-            # set absolut minimum
-            if ( $Loop < $Item->{CountMin} ) {
-                $Loop = $Item->{CountMin};
-            }
-        }
-
-        # set delete
-        my $Delete = 0;
-        if ( $Loop > $Item->{CountMin} ) {
-            $Delete = 1;
-        }
-
-        # output content rows
-        for my $Counter ( 1 .. $Loop ) {
-
-            # output row block
-            $LayoutObject->Block( Name => 'XMLRow' );
-
-            if ( !$Param{Level} ) {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetStart' );
-            }
-
-            # create inputkey and addkey
-            my $InputKey = $Item->{Key} . '::' . $Counter;
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-            }
-
-            # output blue required star
-            my $XMLRowValueContentRequired = 0;
-            my $LabelClass                 = '';
-            if ( $Item->{Input}->{Required} ) {
-                $XMLRowValueContentRequired = 1;
-                $LabelClass                 = 'Mandatory';
-            }
-
-            # output red invalid star
-            my $XMLRowValueContentInvalid = 0;
-            if ( $Item->{Form}->{$InputKey}->{Invalid} && $SubmitSave ) {
-                $XMLRowValueContentInvalid = 1;
-            }
-
-            my $ItemID = 'Item' . $ItemCounter++ . $Param{Prefix} . $Param{Level};
-
-            if ( $Item->{Input}->{Type} eq 'Customer' ) {
-                push @{ $Self->{CustomerSearchItemIDs} }, $ItemID;
-            }
-
-            # create input element
-            my $InputString = $LayoutObject->ITSMConfigItemInputCreate(
-                Key              => $InputKey,
-                Item             => $Item,
-                Value            => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content},
-                ItemId           => $ItemID,
-                Required         => $XMLRowValueContentRequired,
-                Invalid          => $XMLRowValueContentInvalid,
-                OverrideTimeZone => 1,
-            );
-
-            # ID?
-            my $LabelFor = $ItemID;
-            if ( $Item->{Input}->{Type} eq 'Date' || $Item->{Input}->{Type} eq 'DateTime' ) {
-                $LabelFor = '';
-            }
-
-            # id needed?
-            if ($LabelFor) {
-                $LabelFor = 'for="' . $LabelFor . '"';
-            }
-
-            # is this a sub field?
-            my $Class = '';
-            if ( $Param{Level} ) {
-                $Class = 'SubElement';
-            }
-
-            # class needed?
-            if ($LabelClass) {
-                $LabelClass = 'class="' . "$Class  $LabelClass" . '"';
-            }
-            else {
-                $LabelClass = 'class="' . $Class . '"';
-            }
-
-            # output row value content block
-            $LayoutObject->Block(
-                Name => 'XMLRowValue',
-                Data => {
-                    Name        => $Item->{Name},
-                    ItemID      => $ItemID,
-                    LabelFor    => $LabelFor            || '',
-                    Description => $Item->{Description} || $Item->{Name},
-                    InputString => $InputString,
-                    LabelClass  => $LabelClass || '',
-                    Class       => $Class      || '',
-                },
-            );
-
-            if ( $Item->{Input}->{Required} ) {
-                $LayoutObject->Block( Name => 'XMLRowValueContentRequired' );
-            }
-
-            # output delete button
-            if ($Delete) {
-                $LayoutObject->Block(
-                    Name => 'XMLRowValueContentDelete',
-                    Data => {
-                        InputKey => $InputKey,
-                    },
-                );
-            }
-
-            # the content is invalid
-            if ($XMLRowValueContentInvalid) {
-
-                # show regex error message block
-                if ( $Item->{Form}->{$InputKey}->{RegExErrorMessage} ) {
-
-                    $LayoutObject->Block(
-                        Name => 'XMLRowValueRegExError',
-                        Data => {
-                            ItemID            => $ItemID,
-                            RegExErrorMessage => $Item->{Form}->{$InputKey}->{RegExErrorMessage},
-                        },
-                    );
-                }
-
-                # otherwise show normal server error block
-                else {
-                    $LayoutObject->Block(
-                        Name => 'XMLRowValueServerError',
-                        Data => {
-                            ItemID => $ItemID,
-                        },
-                    );
-                }
-            }
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                my %XMLFormOutputParam;
-                if (
-                    $DataPresentMode
-                    && defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content}
-                    )
-                {
-                    $XMLFormOutputParam{XMLData} = $Param{XMLData}->{ $Item->{Key} }->[$Counter];
-                }
-
-                $Self->_XMLFormOutput(
-                    XMLDefinition => $Item->{Sub},
-                    %XMLFormOutputParam,
-                    Level  => $Param{Level} + 1,
-                    Prefix => $InputKey,
-                );
-            }
-
-            if ( !$Param{Level} ) {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetEnd' );
-            }
-
-            # output row to sort rows correctly
-            $LayoutObject->Block( Name => 'XMLRow' );
-        }
-
-        # output add button
-        if ( $Loop < $Item->{CountMax} ) {
-
-            # if no item should be shown we need to show the add button
-            # and therefore we need to show the XMLRow block
-            if ( !$Loop ) {
-                $LayoutObject->Block( Name => 'XMLRow' );
-            }
-
-            my $Class = '';
-            if ( $Param{Level} ) {
-                $Class = 'class="SubElement"';
-            }
-            else {
-                $LayoutObject->Block( Name => 'XMLRowFieldsetEnd' );
-                $LayoutObject->Block( Name => 'XMLRowFieldsetStart' );
-            }
-
-            # set prefix
-            my $InputKey = $Item->{Key};
-            if ( $Param{Prefix} ) {
-                $InputKey = $Param{Prefix} . '::' . $InputKey;
-            }
-
-            # output row add content block
-            $LayoutObject->Block(
-                Name => 'XMLRowAddContent',
-                Data => {
-                    ItemID      => $InputKey . 'Add',
-                    Name        => $Item->{Name},
-                    Description => $Item->{Description} || $Item->{Name},
-                    InputKey    => $InputKey,
-                    Class       => $Class,
-                },
-            );
-        }
-    }
-
-    if ( IsArrayRefWithData( $Self->{CustomerSearchItemIDs} ) ) {
-
-        $LayoutObject->AddJSData(
-            Key   => 'CustomerSearchItemIDs',
-            Value => $Self->{CustomerSearchItemIDs},
-        );
-    }
-
-    return 1;
 }
 
 1;

@@ -3,7 +3,7 @@
     <Name>ITSMConfigurationManagement</Name>
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
-    <Framework>10.1.x</Framework>
+    <Framework>11.0.x</Framework>
     <PackageRequired Version="10.1.2">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.de/</URL>
@@ -13,9 +13,16 @@
     <Description Lang="es">El paquete OTOBO::ITSM Configuration Management.</Description>
     <Description Lang="hu">Az OTOBO::ITSM konfigurációmenedzsment csomag.</Description>
     <Filelist>
-        <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
-        <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
+        <!-- TODO: move to Kernel? -->
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicField.pm" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
+        <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
+        <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemTicketLink.xml" />
         <File Permission="660" Location="Kernel/GenericInterface/Event/ObjectType/ITSMConfigItem.pm" />
@@ -86,6 +93,7 @@
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemZoom.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/DynamicField.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomer.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomerCompany.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm" />
@@ -99,7 +107,10 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLEdit.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLNew.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentDashboardITSMConfigItemGeneric.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemBulk.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemDelete.tt" />
@@ -109,23 +120,32 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemSearch.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentDashboardITSMConfigItemGeneric.tt" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
-        <File Permission="660" Location="Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Definition.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/History.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Number.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Version.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DefinitionConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/FieldRestrictions.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/History.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Mask.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Number.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Number/AutoIncrement.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission/ClassGroupCheck.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission/ItemClassGroupCheck.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Version.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Customer.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/CustomerCompany.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Date.pm" />
@@ -135,15 +155,29 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Integer.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Text.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/TextArea.pm" />
+        <File Permission="660" Location="Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
+        <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
+        <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/Delete.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/ListDuplicates.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemCreate.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemDelete.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemGet.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemSearch.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemUpdate.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionAdd.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionGet.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionList.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
+        <File Permission="660" Location="scripts/test/ImportExportObjectITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Layout/ITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/Admin/AdminITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/AgentITSMConfigItem.t" />
@@ -156,30 +190,22 @@
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/AgentITSMConfigItemSearch.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/AgentITSMConfigItemZoom.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/AgentLinkObject.t" />
+        <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/DashboardITSMConfigItemGeneric.t" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
-        <File Permission="660" Location="scripts/test/ImportExportObjectITSMConfigItem.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionAdd.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionList.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionGet.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItem.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
-        <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/ListDuplicates.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/Delete.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.t" />
-        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.CustomerSearch.js" />
-        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Search.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Add.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.CustomerSearch.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Dashboard.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Edit.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.History.js" />
-        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Zoom.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Overview.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Search.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Zoom.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.DynamicFieldITSMConfigItemLensSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.UI.ConfigItemActionRow.js" />
-        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Dashboard.js" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Edit.css" />
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Zoom.css" />
         <File Permission="660" Location="var/packagesetup/ITSMConfigurationManagement.pm" />
-        <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/DashboardITSMConfigItemGeneric.t" />
     </Filelist>
     <DatabaseInstall Type="post">
         <TableCreate Name="configitem">
@@ -222,6 +248,7 @@
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER" />
             <Column Name="class_id" Required="true" Type="INTEGER" />
             <Column Name="configitem_definition" Required="true" Type="LONGBLOB" />
+            <Column Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
             <Column Name="version" Required="true" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
@@ -235,12 +262,15 @@
         <TableCreate Name="configitem_version">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
             <Column Name="configitem_id" Required="true" Type="BIGINT" />
-            <Column Name="name" Required="true" Size="250" Type="VARCHAR" />
+<!-- TODO: some columns had a size of 255 or 250 - change to 191? what has to be done during update? -->
+            <Column Name="name" Required="true" Size="191" Type="VARCHAR" />
             <Column Name="definition_id" Required="true" Type="INTEGER" />
             <Column Name="depl_state_id" Required="true" Type="INTEGER" />
             <Column Name="inci_state_id" Required="false" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
+            <Column Name="change_time" Required="true" Type="DATE" />
+            <Column Name="change_by" Required="true" Type="INTEGER" />
             <Index Name="configitem_version_configitem_id">
                 <IndexColumn Name="configitem_id" />
             </Index>
@@ -271,8 +301,8 @@
         </TableCreate>
         <TableCreate Name="configitem_history_type">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER" />
-            <Column Name="name" Required="true" Size="255" Type="VARCHAR" />
-            <Column Name="comments" Size="255" Type="VARCHAR" />
+            <Column Name="name" Required="true" Size="191" Type="VARCHAR" />
+            <Column Name="comments" Size="191" Type="VARCHAR" />
             <Column Name="valid_id" Required="true" Type="SMALLINT" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
@@ -293,7 +323,7 @@
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
             <Column Name="configitem_id" Required="true" Type="BIGINT" />
             <Column Name="type_id" Required="true" Type="INTEGER" />
-            <Column Name="content" Required="true" Size="255" Type="VARCHAR" />
+            <Column Name="content" Required="true" Size="191" Type="VARCHAR" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
             <ForeignKey ForeignTable="configitem">
@@ -306,6 +336,24 @@
                 <Reference Local="create_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
+        <TableCreate Name="configitem_counter">
+            <Column Name="class_id" Required="true" PrimaryKey="true" Type="INTEGER" />
+            <Column Name="counter_type" Required="true" Size="50" Type="VARCHAR" />
+            <Column Name="counter" Required="true" Size="50" Type="VARCHAR" />
+        </TableCreate>
+        <TableCreate Name="configitem_definition_sync">
+            <Column Name="class_id" Required="true" Type="INTEGER" />
+            <Column Name="field_id" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="general_catalog">
+                <Reference Local="class_id" Foreign="id" />
+            </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="field_id" Foreign="id" />
+            </ForeignKey>
+        </TableCreate>
+        <TableAlter Name="acl">
+            <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
+        </TableAlter>
         <Insert Table="general_catalog">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class</Data>
             <Data Key="name" Type="Quote" Translatable="1">Computer</Data>
@@ -1048,6 +1096,14 @@
             <Data Key="change_by">1</Data>
         </Insert>
         <Insert Table="configitem_history_type">
+            <Data Key="name" Type="Quote">VersionUpdate</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="configitem_history_type">
             <Data Key="name" Type="Quote">ValueUpdate</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
@@ -1107,8 +1163,8 @@
     <DatabaseUpgrade Type="post">
         <TableCreate Name="configitem_history_type" Version="1.3.71">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER" />
-            <Column Name="name" Required="true" Size="255" Type="VARCHAR" />
-            <Column Name="comments" Size="255" Type="VARCHAR" />
+            <Column Name="name" Required="true" Size="191" Type="VARCHAR" />
+            <Column Name="comments" Size="191" Type="VARCHAR" />
             <Column Name="valid_id" Required="true" Type="SMALLINT" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
@@ -1125,146 +1181,46 @@
                 <Reference Local="change_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <TableCreate Name="configitem_history" Version="1.3.71">
-            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
-            <Column Name="configitem_id" Required="true" Type="BIGINT" />
-            <Column Name="type_id" Required="true" Type="INTEGER" />
-            <Column Name="content" Required="true" Size="255" Type="VARCHAR" />
-            <Column Name="create_time" Required="true" Type="DATE" />
-            <Column Name="create_by" Required="true" Type="INTEGER" />
-            <ForeignKey ForeignTable="configitem">
-                <Reference Local="configitem_id" Foreign="id" />
+        <TableCreate Name="configitem_definition_sync" Version="11.0.0">
+            <Column Name="class_id" Required="true" Type="INTEGER" />
+            <Column Name="field_id" Required="true" Type="INTEGER" />
+            <ForeignKey ForeignTable="general_catalog">
+                <Reference Local="class_id" Foreign="id" />
             </ForeignKey>
-            <ForeignKey ForeignTable="configitem_history_type">
-                <Reference Local="type_id" Foreign="id" />
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <Insert Table="general_catalog" Version="1.1.90">
-            <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class</Data>
-            <Data Key="name" Type="Quote" Translatable="1">Location</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">ConfigItemCreate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">ConfigItemDelete</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">LinkAdd</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">LinkDelete</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">NameUpdate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">VersionCreate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">ValueUpdate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">DefinitionUpdate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">IncidentStateUpdate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">DeploymentStateUpdate</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="1.3.71">
-            <Data Key="name" Type="Quote">VersionDelete</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="3.1.92">
-            <Data Key="name" Type="Quote">AttachmentAdd</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <Insert Table="configitem_history_type" Version="3.1.92">
-            <Data Key="name" Type="Quote">AttachmentDelete</Data>
-            <Data Key="valid_id">1</Data>
-            <Data Key="create_time">current_timestamp</Data>
-            <Data Key="create_by">1</Data>
-            <Data Key="change_time">current_timestamp</Data>
-            <Data Key="change_by">1</Data>
-        </Insert>
-        <TableAlter Name="configitem_counter" Version="5.0.16">
-            <ForeignKeyDrop ForeignTable="general_catalog" >
-                <Reference Local="class_id" Foreign="id" />
-            </ForeignKeyDrop>
+        <TableAlter Name="configitem_definition" Version="11.0.0">
+            <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>
+        <TableAlter Name="configitem_version" Version="11.0.0">
+            <ColumnAdd Name="change_time" Required="true" Type="DATE" />
+            <ColumnAdd Name="change_by" Required="true" Type="INTEGER" />
+        </TableAlter>
+        <TableAlter Name="acl" Version="11.0.0">
+            <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
+        </TableAlter>
+        <Insert Table="configitem_history_type" Version="11.0.0">
+            <Data Key="name" Type="Quote">VersionUpdate</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
     </DatabaseUpgrade>
     <DatabaseUninstall Type="pre">
+        <TableDrop Name="configitem_definition_sync" />
         <TableDrop Name="configitem_counter" />
         <TableDrop Name="configitem_version" />
         <TableDrop Name="configitem_definition" />
         <TableDrop Name="configitem_history" />
         <TableDrop Name="configitem_history_type" />
         <TableDrop Name="configitem" />
+        <TableAlter Name="acl">
+            <ColumnDrop Name="object_type" />
+        </TableAlter>
     </DatabaseUninstall>
     <CodeInstall Type="post"><![CDATA[
 

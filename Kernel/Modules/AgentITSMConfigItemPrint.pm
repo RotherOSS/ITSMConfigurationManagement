@@ -19,8 +19,6 @@ package Kernel::Modules::AgentITSMConfigItemPrint;
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig)
-
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
@@ -429,7 +427,7 @@ sub _PDFOutputLinkedObjects {
     for my $LinkTypeLinkDirection ( sort { lc $a cmp lc $b } keys %{ $Param{LinkData} } ) {
 
         # investigate link type name
-        my @LinkData     = split q{::}, $LinkTypeLinkDirection;
+        my @LinkData     = split /::/, $LinkTypeLinkDirection;
         my $LinkTypeName = $TypeList{ $LinkData[0] }->{ $LinkData[1] . 'Name' };
         $LinkTypeName = $LayoutObject->{LanguageObject}->Translate($LinkTypeName);
 
