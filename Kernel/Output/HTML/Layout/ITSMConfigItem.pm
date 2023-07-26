@@ -18,6 +18,15 @@ package Kernel::Output::HTML::Layout::ITSMConfigItem;
 
 use strict;
 use warnings;
+use namespace::autoclean;
+
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
+use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -310,10 +319,7 @@ sub ITSMConfigItemListShow {
         $Param{View} = $Self->{ 'UserITSMConfigItemOverview' . $Env->{Action} };
     }
 
-    # set frontend
-    my $Frontend = $Param{Frontend} || 'Agent';
-
-    # set defaut view mode to 'small'
+    # set default view mode to 'small'
     my $View = $Param{View} || 'Small';
 
     # store latest view mode
@@ -323,48 +329,89 @@ sub ITSMConfigItemListShow {
         Value     => $View,
     );
 
-    # get needed objects
+    # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # update preferences if needed
+    my $Key = 'UserITSMConfigItemOverview' . $Env->{Action};
+    if ( !$ConfigObject->Get('DemoSystem') && ( $Self->{$Key} // '' ) ne $View ) {
+        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Key,
+            Value  => $View,
+        );
+    }
 
     # get backend from config
     my $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::Overview');
     if ( !$Backends ) {
-        return $LayoutObject->FatalError(
+        return $Self->FatalError(
             Message => 'Need config option ITSMConfigItem::Frontend::Overview',
         );
     }
-
-    # check for hash-ref
     if ( ref $Backends ne 'HASH' ) {
-        return $LayoutObject->FatalError(
-            Message => 'Config option ITSMConfigItem::Frontend::Overview needs to be a HASH ref!',
+        return $Self->FatalError(
+            Message => 'Config option ITSMConfigItem::Frontend::Overview needs to be HASH ref!',
         );
     }
 
-    # check for config key
+    # check if selected view is available
     if ( !$Backends->{$View} ) {
-        return $LayoutObject->FatalError(
-            Message => "No config option found for the view '$View'!",
+
+        # try to find fallback, take first configured view mode
+        KEY:
+        for my $Key ( sort keys %{$Backends} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "No Config option found for view mode $View, took $Key instead!",
+            );
+            $View = $Key;
+            last KEY;
+        }
+    }
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $LayoutObject->AddJSData(
+        Key   => 'View',
+        Value => $View,
+    );
+
+    # load overview backend module
+    if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Backends->{$View}->{Module} ) ) {
+        return $Env->{LayoutObject}->FatalError();
+    }
+    my $Object = $Backends->{$View}->{Module}->new( %{$Env} );
+    return if !$Object;
+
+    # retrieve filter values
+    if ( $Param{FilterContentOnly} ) {
+        return $Object->FilterContent(
+            %Param,
         );
     }
 
-    # nav bar
-    my $StartHit = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam(
-        Param => 'StartHit',
-    ) || 1;
+    # run action row backend module
+    $Param{ActionRow} = $Object->ActionRow(
+        %Param,
+        Config => $Backends->{$View},
+    );
+
+    # run overview backend module
+    $Param{SortOrderBar} = $Object->SortOrderBar(
+        %Param,
+        Config => $Backends->{$View},
+    );
+
+    # check start option, if higher then tickets available, set
+    # it to the last ticket page (Thanks to Stefan Schmidt!)
+    my $StartHit = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'StartHit' ) || 1;
 
     # get personal page shown count
     my $PageShownPreferencesKey = 'UserConfigItemOverview' . $View . 'PageShown';
     my $PageShown               = $Self->{$PageShownPreferencesKey} || 10;
     my $Group                   = 'ConfigItemOverview' . $View . 'PageShown';
-
-    # check start option, if higher then elements available, set
-    # it to the last overview page (Thanks to Stefan Schmidt!)
-    if ( $StartHit > $Param{Total} ) {
-        my $Pages = int( ( $Param{Total} / $PageShown ) + 0.99999 );
-        $StartHit = ( ( $Pages - 1 ) * $PageShown ) + 1;
-    }
 
     # get data selection
     my %Data;
@@ -373,18 +420,25 @@ sub ITSMConfigItemListShow {
         %Data = %{ $Config->{$Group}->{Data} };
     }
 
-    # set page limit and build page nav
+    # calculate max. shown per page
+    if ( $StartHit > $Param{Total} ) {
+        my $Pages = int( ( $Param{Total} / $PageShown ) + 0.99999 );
+        $StartHit = ( ( $Pages - 1 ) * $PageShown ) + 1;
+    }
+
+    # build nav bar
     my $Limit   = $Param{Limit} || 20_000;
-    my %PageNav = $LayoutObject->PageNavBar(
+    my %PageNav = $Self->PageNavBar(
         Limit     => $Limit,
         StartHit  => $StartHit,
         PageShown => $PageShown,
         AllHits   => $Param{Total} || 0,
-        Action    => 'Action=' . $Env->{Action},
+        Action    => 'Action=' . $Self->{Action},
         Link      => $Param{LinkPage},
+        IDPrefix  => $Self->{Action},
     );
 
-    # build shown ticket a page
+    # build shown ticket per page
     $Param{RequestedURL}    = $Param{RequestedURL} || "Action=$Self->{Action};$Param{LinkPage}";
     $Param{Group}           = $Group;
     $Param{PreferencesKey}  = $PageShownPreferencesKey;
@@ -397,19 +451,19 @@ sub ITSMConfigItemListShow {
         Class       => 'Modernize',
     );
 
-    # build navbar content
-    $LayoutObject->Block(
+    # nav bar at the beginning of a overview
+    $Param{View} = $View;
+    $Self->Block(
         Name => 'OverviewNavBar',
         Data => \%Param,
     );
 
     # back link
     if ( $Param{LinkBack} ) {
-        $LayoutObject->Block(
+        $Self->Block(
             Name => 'OverviewNavBarPageBack',
             Data => \%Param,
         );
-
         $LayoutObject->AddJSData(
             Key   => 'ITSMConfigItemSearch',
             Value => {
@@ -419,66 +473,59 @@ sub ITSMConfigItemListShow {
         );
     }
 
-    # get filters
+    # filter selection
     if ( $Param{Filters} ) {
-
-        # get given filters
         my @NavBarFilters;
         for my $Prio ( sort keys %{ $Param{Filters} } ) {
             push @NavBarFilters, $Param{Filters}->{$Prio};
         }
-
-        # build filter content
-        $LayoutObject->Block(
+        $Self->Block(
             Name => 'OverviewNavBarFilter',
             Data => {
                 %Param,
             },
         );
-
-        # loop over filters
         my $Count = 0;
         for my $Filter (@NavBarFilters) {
-
-            # increment filter count and build filter item
             $Count++;
-            $LayoutObject->Block(
+            if ( $Count == scalar @NavBarFilters ) {
+                $Filter->{CSS} = 'Last';
+            }
+            $Self->Block(
                 Name => 'OverviewNavBarFilterItem',
                 Data => {
                     %Param,
                     %{$Filter},
                 },
             );
-
-            # filter is selected
             if ( $Filter->{Filter} eq $Param{Filter} ) {
-                $LayoutObject->Block(
+                $Self->Block(
                     Name => 'OverviewNavBarFilterItemSelected',
                     Data => {
                         %Param,
                         %{$Filter},
                     },
                 );
-
             }
             else {
-                $LayoutObject->Block(
+                $Self->Block(
                     Name => 'OverviewNavBarFilterItemSelectedNot',
                     Data => {
                         %Param,
                         %{$Filter},
                     },
                 );
-
             }
         }
     }
 
-    # loop over configured backends
-    for my $Backend ( sort keys %{$Backends} ) {
-
-        # build navbar view mode
-        $LayoutObject->Block(
+    # view mode
+    for my $Backend (
+        sort { $Backends->{$a}->{ModulePriority} <=> $Backends->{$b}->{ModulePriority} }
+        keys %{$Backends}
+        )
+    {
+        $Self->Block(
             Name => 'OverviewNavBarViewMode',
             Data => {
                 %Param,
@@ -487,10 +534,8 @@ sub ITSMConfigItemListShow {
                 View   => $Backend,
             },
         );
-
-        # current view is configured in backend
         if ( $View eq $Backend ) {
-            $LayoutObject->Block(
+            $Self->Block(
                 Name => 'OverviewNavBarViewModeSelected',
                 Data => {
                     %Param,
@@ -501,7 +546,7 @@ sub ITSMConfigItemListShow {
             );
         }
         else {
-            $LayoutObject->Block(
+            $Self->Block(
                 Name => 'OverviewNavBarViewModeNotSelected',
                 Data => {
                     %Param,
@@ -513,9 +558,8 @@ sub ITSMConfigItemListShow {
         }
     }
 
-    # check if page nav is available
     if (%PageNav) {
-        $LayoutObject->Block(
+        $Self->Block(
             Name => 'OverviewNavBarPageNavBar',
             Data => \%PageNav,
         );
@@ -523,91 +567,99 @@ sub ITSMConfigItemListShow {
         # don't show context settings in AJAX case (e. g. in customer ticket history),
         #   because the submit with page reload will not work there
         if ( !$Param{AJAX} ) {
-            $LayoutObject->Block(
+            $Self->Block(
                 Name => 'ContextSettings',
                 Data => {
                     %PageNav,
                     %Param,
                 },
             );
-        }
-    }
 
-    # check if bulk feature is enabled
-    my $BulkFeature = 0;
-    if ( $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeature') ) {
-        my @Groups;
-        if ( $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') ) {
-            @Groups = @{ $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') };
-        }
-        if ( !@Groups ) {
-            $BulkFeature = 1;
-        }
-        else {
-            GROUP:
-            for my $Group (@Groups) {
-                next GROUP if !$Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $Group,
-                    Type      => 'rw',
+            # show column filter preferences
+            if ( $View eq 'Small' ) {
+
+                # set preferences keys
+                my $PrefKeyColumns = 'UserFilterColumnsEnabled' . '-' . $Env->{Action};
+
+                # create extra needed objects
+                my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+                # configure columns
+                my @ColumnsEnabled = @{ $Object->{ColumnsEnabled} };
+                my @ColumnsAvailable;
+
+                # remove duplicate columns
+                my %UniqueColumns;
+                my @ColumnsEnabledAux;
+
+                for my $Column (@ColumnsEnabled) {
+                    if ( !$UniqueColumns{$Column} ) {
+                        push @ColumnsEnabledAux, $Column;
+                    }
+                    $UniqueColumns{$Column} = 1;
+                }
+
+                # set filtered column list
+                @ColumnsEnabled = @ColumnsEnabledAux;
+
+                for my $ColumnName ( sort { $a cmp $b } @{ $Object->{ColumnsAvailable} } ) {
+                    if ( !grep { $_ eq $ColumnName } @ColumnsEnabled ) {
+                        push @ColumnsAvailable, $ColumnName;
+                    }
+                }
+
+                my %Columns;
+                for my $ColumnName ( sort @ColumnsAvailable ) {
+                    $Columns{Columns}->{$ColumnName} = ( grep { $ColumnName eq $_ } @ColumnsEnabled ) ? 1 : 0;
+                }
+
+                $Self->Block(
+                    Name => 'FilterColumnSettings',
+                    Data => {
+                        Columns          => $JSONObject->Encode( Data => \%Columns ),
+                        ColumnsEnabled   => $JSONObject->Encode( Data => \@ColumnsEnabled ),
+                        ColumnsAvailable => $JSONObject->Encode( Data => \@ColumnsAvailable ),
+                        NamePref         => $PrefKeyColumns,
+                        Desc             => Translatable('Shown Columns'),
+                        Name             => $Env->{Action},
+                        View             => $View,
+                        GroupName        => 'ConfigItemOverviewFilterSettings',
+                        %Param,
+                    },
                 );
-
-                $BulkFeature = 1;
-                last GROUP;
             }
+        }    # end show column filters preferences
+
+        # check if there was stored filters, and print a link to delete them
+        if ( IsHashRefWithData( $Object->{StoredFilters} ) ) {
+            $Self->Block(
+                Name => 'DocumentActionRowRemoveColumnFilters',
+                Data => {
+                    CSS => "ContextSettings RemoveFilters",
+                    %Param,
+                },
+            );
         }
     }
 
-    # show the bulk action button if feature is enabled
-    if ($BulkFeature) {
-        $LayoutObject->Block(
-            Name => 'BulkAction',
-            Data => {
-                %PageNav,
-                %Param,
-            },
+    # As of OTOBO 10.0.x some content was printed early.
+    # This has changed in OTOBO 10.1.1.
+
+    # create nav bar and run overview backend module
+    return join '',
+        $Self->Output(
+            TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
+            Data         => { %Param, },
+        ),
+        $Object->Run(
+            %Param,
+            Config    => $Backends->{$View},
+            Limit     => $Limit,
+            StartHit  => $StartHit,
+            PageShown => $PageShown,
+            AllHits   => $Param{Total}  || 0,
+            Output    => $Param{Output} || '',
         );
-    }
-
-    # build html content
-    my $OutputNavBar = $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
-        Data         => {%Param},
-    );
-
-    # create output
-    my $OutputRaw = $OutputNavBar;
-
-    # load module
-    if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Backends->{$View}->{Module} ) ) {
-        return $LayoutObject->FatalError();
-    }
-
-    # check for backend object
-    my $Object = $Backends->{$View}->{Module}->new( %{$Env} );
-    return if !$Object;
-
-    # run module
-    my $Output = $Object->Run(
-        %Param,
-        Limit     => $Limit,
-        StartHit  => $StartHit,
-        PageShown => $PageShown,
-        AllHits   => $Param{Total} || 0,
-        Frontend  => $Frontend,
-    );
-
-    # create output
-    $OutputRaw .= $Output;
-
-    # create overview nav bar
-    $LayoutObject->Block(
-        Name => 'OverviewNavBar',
-        Data => {%Param},
-    );
-
-    # return content if available
-    return $OutputRaw;
 }
 
 =head2 XMLData2Hash()

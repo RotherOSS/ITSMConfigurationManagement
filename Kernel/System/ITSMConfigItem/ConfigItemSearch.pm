@@ -833,7 +833,7 @@ sub ConfigItemSearch {
             # sort by dynamic field
             if ( $SortByArray[$Count] =~ /^DynamicField_(.*)/ ) {
                 my $DynamicFieldName = $1;
-                my $DynamicField     = $DynamicFieldObject->Get(
+                my $DynamicField     = $DynamicFieldObject->DynamicFieldGet(
                     Name => $1,
                 );
 
