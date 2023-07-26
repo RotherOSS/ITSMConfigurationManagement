@@ -18,17 +18,31 @@ package Kernel::Output::HTML::ITSMConfigItem::OverviewSmall;
 
 use strict;
 use warnings;
+use utf8;
+use namespace::autoclean;
 
+# core modules
+use List::Util qw(first);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
     'Kernel::System::GeneralCatalog',
-    'Kernel::System::Group',
-    'Kernel::System::HTMLUtils',
-    'Kernel::System::ITSMConfigItem',
+    'Kernel::Language',
     'Kernel::System::Log',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Group',
+    'Kernel::System::User',
+    'Kernel::System::JSON',
+    'Kernel::System::DynamicField',
+    'Kernel::System::ITSMConfigItem::ColumnFilter',
+    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
 );
 
@@ -36,46 +50,335 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
+    my $Self = \%Param;
     bless( $Self, $Type );
 
+    # get UserID param
+    $Self->{UserID} = $Param{UserID} || die "Got no UserID!";
+
+    # get config object
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # set pref for columns key
+    $Self->{PrefKeyColumns} = 'UserFilterColumnsEnabled' . '-' . $Self->{Action};
+
+    # load backend config
+    my $BackendConfigKey = 'ITSMConfigItem::Frontend::' . $Self->{Action};
+    $Self->{Config} = $ConfigObject->Get($BackendConfigKey);
+
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # set stored filters if present
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    if ( $Preferences{$StoredFiltersKey} ) {
+        my $StoredFilters = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
+            Data => $Preferences{$StoredFiltersKey},
+        );
+        $Self->{StoredFilters} = $StoredFilters;
+    }
+
+    # check for default settings
+    my %DefaultColumns = %{ $Self->{Config}->{DefaultColumns} || {} };
+
+    # check for class filter
+    my $FilterName = IsHashRefWithData( $Param{Filters}->{ $Param{Filter} } ) ? $Param{Filters}->{ $Param{Filter} }->{Name} : 'All';
+
+    # if class filter is set, display class specific fields
+    my %ClassColumnDefinition;
+    if ( $FilterName && $FilterName ne 'All' ) {
+
+        if ( $Self->{Config}{ClassColumnsAvailable} && IsArrayRefWithData( $Self->{Config}{ClassColumnsAvailable}{$FilterName} ) ) {
+            for my $AvailableColumn ( $Self->{Config}{ClassColumnsAvailable}{$FilterName}->@* ) {
+                $ClassColumnDefinition{$AvailableColumn} = 1;
+            }
+        }
+
+        if ( $Self->{Config}{ClassColumnsDefault} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDefault}{$FilterName} ) ) {
+            for my $DefaultColumn ( $Self->{Config}{ClassColumnsDefault}{$FilterName}->@* ) {
+                $ClassColumnDefinition{$DefaultColumn} = 2;
+            }
+        }
+    }
+
+    # merge settings from class config and default config
+    for my $Column ( sort _DefaultColumnSort ( keys %DefaultColumns, keys %ClassColumnDefinition ) ) {
+        if ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) && !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
+            push $Self->{ColumnsAvailable}->@*, $Column;
+        }
+
+        if ( ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) // 0 ) == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
+            push $Self->{ColumnsEnabled}->@*, $Column;
+        }
+    }
+
+    # if preference settings are available, overwrite enabled columns with preferences
+    if ( $Preferences{ $Self->{PrefKeyColumns} } ) {
+
+        my $ColumnsEnabled = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
+            Data => $Preferences{ $Self->{PrefKeyColumns} },
+        );
+
+        $Self->{ColumnsEnabled} = IsArrayRefWithData($ColumnsEnabled) ? $ColumnsEnabled : [];
+    }
+
+    # always set config item number
+    if ( !grep { $_ eq 'Number' } $Self->{ColumnsEnabled}->@* ) {
+        unshift $Self->{ColumnsEnabled}->@*, 'Number';
+    }
+    if ( !grep { $_ eq 'Number' } $Self->{ColumnsAvailable}->@* ) {
+        unshift $Self->{ColumnsAvailable}->@*, 'Number';
+    }
+
+    # get necessary dynamic field objects
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # collect dynamic fields and set available and valid filter and sortable columns
+    DYNAMICFIELDNAME:
+    for my $DynamicFieldName ( $Self->{ColumnsAvailable}->@* ) {
+
+        my $FieldName;
+        if ( $DynamicFieldName =~ m{ DynamicField_(?<fieldname>[A-Za-z0-9\-]+) }xms ) {
+            $FieldName = $+{fieldname};
+        }
+        else {
+            next DYNAMICFIELDNAME;
+        }
+
+        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            Name => $FieldName,
+        );
+
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        # store field config
+        if ( $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem' ) {
+            push $Self->{DynamicField}->@*, $DynamicFieldConfig;
+        }
+
+        # check filtrable and sortable behaviors
+        if ( grep {$DynamicFieldName} $Self->{ColumnsEnabled}->@* ) {
+
+            for my $Behavior (qw(Filtrable Sortable)) {
+                my $HasBehavior = $DynamicFieldBackendObject->HasBehavior(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Behavior           => "Is$Behavior",
+                );
+
+                if ($HasBehavior) {
+                    $Self->{"Available${Behavior}Columns"}{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
+                    if ( grep {$DynamicFieldName} $Self->{ColumnsEnabled}->@* ) {
+                        $Self->{"Valid${Behavior}Columns"}{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
+                    }
+                }
+            }
+        }
+    }
+
+    # hash with all valid sortable columns (taken from ITSMConfigItemSearch)
+    # SortBy  => 'Age',   # Created|Number|Changed|Name|DeplState|CurDeplState
+    # |InciState|CurInciState
+    $Self->{ValidSortableColumns} = {
+        defined $Self->{ValidSortableColumns}
+        ? $Self->{ValidSortableColumns}->%*
+        : (),
+        'Age'          => 1,
+        'Number'       => 1,
+        'Name'         => 1,
+        'Created'      => 1,
+        'LastChanged'  => 1,
+        'DeplState'    => 1,
+        'CurDeplState' => 1,
+        'InciState'    => 1,
+        'CurInciState' => 1,
+    };
+
+    $Self->{AvailableFilterableColumns} = {
+        defined $Self->{AvailableFilterableColumns}
+        ? $Self->{AvailableFilterableColumns}->%*
+        : (),
+        'Class'        => 1,
+        'DeplState'    => 1,
+        'CurDeplState' => 1,
+        'InciState'    => 1,
+        'CurInciState' => 1,
+    };
+
     return $Self;
+}
+
+sub ActionRow {
+    my ( $Self, %Param ) = @_;
+
+    # get needed objects
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # check if bulk feature is enabled
+    my $BulkFeature = 0;
+    if ( $Param{Bulk} && $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeature') ) {
+        my @Groups;
+        if ( $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') ) {
+            @Groups = @{ $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') };
+        }
+        if ( !@Groups ) {
+            $BulkFeature = 1;
+        }
+        else {
+            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+            GROUP:
+            for my $Group (@Groups) {
+                my $HasPermission = $GroupObject->PermissionCheck(
+                    UserID    => $Self->{UserID},
+                    GroupName => $Group,
+                    Type      => 'rw',
+                );
+                if ($HasPermission) {
+                    $BulkFeature = 1;
+                    last GROUP;
+                }
+            }
+        }
+    }
+
+    $LayoutObject->Block(
+        Name => 'DocumentActionRow',
+        Data => \%Param,
+    );
+
+    if ($BulkFeature) {
+        $LayoutObject->Block(
+            Name => 'DocumentActionRowBulk',
+            Data => {
+                %Param,
+                Name => Translatable('Bulk'),
+            },
+        );
+    }
+
+    # check if there was a column filter and no results, and print a link to back
+    if ( scalar @{ $Param{ConfigItemIDs} } == 0 && $Param{LastColumnFilter} ) {
+        $LayoutObject->Block(
+            Name => 'DocumentActionRowLastColumnFilter',
+            Data => {
+                %Param,
+            },
+        );
+    }
+
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    # add translations for the allocation lists for regular columns
+    my $Columns = $Self->{Config}->{DefaultColumns} || $ConfigObject->Get('DefaultOverviewColumns') || {};
+    if ( $Columns && IsHashRefWithData($Columns) ) {
+
+        COLUMN:
+        for my $Column ( sort keys %{$Columns} ) {
+
+            # dynamic fields will be translated in the next block
+            next COLUMN if $Column =~ m{ \A DynamicField_ }xms;
+
+            my $TranslatedWord = $Column;
+            if ( $Column eq 'DeplState' ) {
+                $TranslatedWord = Translatable('Deployment State');
+            }
+            elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+                $TranslatedWord = Translatable('Current Deployment State');
+            }
+            elsif ( $Column eq 'InciState' ) {
+                $TranslatedWord = Translatable('Incident State');
+            }
+            elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+                $TranslatedWord = Translatable('Current Incident State');
+            }
+            elsif ( $Column eq 'CurInciStateType' ) {
+                $TranslatedWord = Translatable('Current Incident State Type');
+            }
+            elsif ( $Column eq 'LastChanged' ) {
+                $TranslatedWord = Translatable('Last changed');
+            }
+            else {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
+            }
+
+            # send data to JS
+            $LayoutObject->AddJSData(
+                Key   => 'Column' . $Column,
+                Value => $LanguageObject->Translate($TranslatedWord),
+            );
+        }
+    }
+
+    # add translations for the allocation lists for dynamic field columns
+    my $ColumnsDynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        Valid      => 0,
+        ObjectType => ['ITSMConfigItem'],
+    );
+
+    if ( $ColumnsDynamicField && IsArrayRefWithData($ColumnsDynamicField) ) {
+
+        my $Counter = 0;
+
+        DYNAMICFIELD:
+        for my $DynamicField ( sort @{$ColumnsDynamicField} ) {
+
+            next DYNAMICFIELD if !$DynamicField;
+
+            $Counter++;
+
+            # send data to JS
+            $LayoutObject->AddJSData(
+                Key   => 'ColumnDynamicField_' . $DynamicField->{Name},
+                Value => $LanguageObject->Translate( $DynamicField->{Label} ),
+            );
+        }
+    }
+
+    my $Output = $LayoutObject->Output(
+        TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+        Data         => \%Param,
+    );
+
+    return $Output;
+}
+
+sub SortOrderBar {
+    my ( $Self, %Param ) = @_;
+
+    return '';
 }
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get log object
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    # If $Param{EnableColumnFilters} is not sent, we want to disable all filters
+    #   for the current screen. We localize the setting for this sub and change it
+    #   after that, if needed. The original value will be restored after this function.
+    local $Self->{AvailableFilterableColumns} = $Self->{AvailableFilterableColumns};
+    if ( !$Param{EnableColumnFilters} ) {
+        $Self->{AvailableFilterableColumns} = {};    # disable all column filters
+    }
 
-    # check needed stuff
-    for my $Needed (qw(PageShown StartHit)) {
-        if ( !$Param{$Needed} ) {
-            $LogObject->Log(
+    for my $Item (qw(ConfigItemIDs PageShown StartHit)) {
+        if ( !$Param{$Item} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $Needed!",
+                Message  => "Need $Item!",
             );
             return;
         }
     }
 
-    # need ConfigItemIDs
-    if ( !$Param{ConfigItemIDs} ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => 'Need the ConfigItemIDs!',
-        );
-        return;
-    }
-
-    # define incident signals, needed for services
+    # define incident signals
     my %InciSignals = (
         Translatable('operational') => 'greenled',
         Translatable('warning')     => 'yellowled',
         Translatable('incident')    => 'redled',
     );
 
-    # to store the color for the deployment states
+    # store deployment signals
     my %DeplSignals;
 
     # get general catalog object
@@ -93,12 +396,12 @@ sub Run {
     for my $ItemID ( sort keys %{$DeploymentStatesList} ) {
 
         # get deployment state preferences
-        my %Preferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+        my %GeneralCatalogPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
             ItemID => $ItemID,
         );
 
         # check if a color is defined in preferences
-        next ITEMID if !$Preferences{Color};
+        next ITEMID if !$GeneralCatalogPreferences{Color};
 
         # get deployment state
         my $DeplState = $DeploymentStatesList->{$ItemID};
@@ -107,11 +410,11 @@ sub Run {
         $DeplState =~ s{ [^a-zA-Z0-9] }{_}msxg;
 
         # store the original deployment state as key
-        # and the ss safe coverted deployment state as value
+        # and the ss safe converted deployment state as value
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
-        # covert to lower case
-        my $DeplStateColor = lc $Preferences{Color};
+        # convert to lower case
+        my $DeplStateColor = lc $GeneralCatalogPreferences{Color};
 
         # add to style classes string
         $StyleClasses .= "
@@ -126,16 +429,13 @@ sub Run {
         $StyleClasses = "<style>$StyleClasses</style>";
     }
 
-    # store either ConfigItem IDs Locally
-    my @ConfigItemIDs = @{ $Param{ConfigItemIDs} };
-
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
-    if ( $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeature') ) {
+    if ( $Param{Bulk} && $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeature') ) {
         my @Groups;
         if ( $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') ) {
             @Groups = @{ $ConfigObject->Get('ITSMConfigItem::Frontend::BulkFeatureGroup') };
@@ -144,320 +444,1330 @@ sub Run {
             $BulkFeature = 1;
         }
         else {
+            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
             GROUP:
             for my $Group (@Groups) {
-                next GROUP if !$Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
+                my $HasPermission = $GroupObject->PermissionCheck(
                     UserID    => $Self->{UserID},
                     GroupName => $Group,
                     Type      => 'rw',
                 );
-
-                $BulkFeature = 1;
-                last GROUP;
+                if ($HasPermission) {
+                    $BulkFeature = 1;
+                    last GROUP;
+                }
             }
         }
     }
 
-    # get config item pre menu modules
-    my @ActionItems;
-    if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::PreMenuModule') eq 'HASH' ) {
-        my %Menus = %{ $ConfigObject->Get('ITSMConfigItem::Frontend::PreMenuModule') };
+    my $Counter = 0;
+    my @ConfigItemBox;
 
-        MENU:
-        for my $MenuKey ( sort keys %Menus ) {
-
-            # load module
-            if ( $Kernel::OM->Get('Kernel::System::Main')->Require( $Menus{$MenuKey}->{Module} ) ) {
-                my $Object = $Menus{$MenuKey}->{Module}->new(
-                    %{$Self},
-                );
-
-                # check if the menu is available
-                next MENU if ref $Menus{$MenuKey} ne 'HASH';
-
-                # set classes
-                if ( $Menus{$MenuKey}->{Target} ) {
-
-                    if ( $Menus{$MenuKey}->{Target} eq 'PopUp' ) {
-                        $Menus{$MenuKey}->{MenuClass} = 'AsPopup';
-                        $Menus{$MenuKey}->{PopupType} = 'ITSMConfigItemAction';
-                    }
-                    else {
-                        $Menus{$MenuKey}->{MenuClass} = '';
-                        $Menus{$MenuKey}->{PopupType} = '';
-                    }
-                }
-
-                # grant access by default
-                my $Access = 1;
-
-                my $Action = $Menus{$MenuKey}->{Action};
-
-                # can not execute the module due to a ConfigItem is required, then just check the
-                # permissions as in the MenuModuleGeneric
-                my $GroupsRo = $ConfigObject->Get('Frontend::Module')->{$Action}->{GroupRo} || [];
-                my $GroupsRw = $ConfigObject->Get('Frontend::Module')->{$Action}->{Group}   || [];
-
-                # check permission
-                if ( $Action && ( @{$GroupsRo} || @{$GroupsRw} ) ) {
-
-                    # deny access by default, when there are groups to check
-                    $Access = 0;
-
-                    # check read only groups
-                    ROGROUP:
-                    for my $RoGroup ( @{$GroupsRo} ) {
-                        next ROGROUP if !$Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                            UserID    => $Self->{UserID},
-                            GroupName => $RoGroup,
-                            Type      => 'ro',
-                        );
-
-                        # set access
-                        $Access = 1;
-                        last ROGROUP;
-                    }
-
-                    # check read write groups
-                    RWGROUP:
-                    for my $RwGroup ( @{$GroupsRw} ) {
-                        next RWGROUP if !$Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                            UserID    => $Self->{UserID},
-                            GroupName => $RwGroup,
-                            Type      => 'rw',
-                        );
-
-                        # set access
-                        $Access = 1;
-                        last RWGROUP;
-                    }
-                }
-
-                # return if there is no access to the module
-                next MENU if !$Access;
-
-                # translate Name and Description
-                my $Description = $LayoutObject->{LanguageObject}->Translate( $Menus{$MenuKey}->{Description} );
-                my $Name        = $LayoutObject->{LanguageObject}->Translate( $Menus{$MenuKey}->{Description} );
-
-                # generarte a web safe link
-                my $Link = $LayoutObject->{Baselink} . $Menus{$MenuKey}->{Link};
-
-                # sanity check
-                if ( !defined $Menus{$MenuKey}->{MenuClass} ) {
-                    $Menus{$MenuKey}->{MenuClass} = '';
-                }
-
-                # generate HTML for the menu item
-                my $MenuHTML = << "END";
-<li>
-    <a href="$Link" class="$Menus{$MenuKey}->{MenuClass}" title="$Description">$Name</a>
-</li>
-END
-
-                $MenuHTML =~ s/\n+//g;
-                $MenuHTML =~ s/\s+/ /g;
-                $MenuHTML =~ s/<\!--.+?-->//g;
-
-                $Menus{$MenuKey}->{ID} = $Menus{$MenuKey}->{Name};
-                $Menus{$MenuKey}->{ID} =~ s/(\s|&|;)//ig;
-
-                push @ActionItems, {
-                    HTML        => $MenuHTML,
-                    ID          => $Menus{$MenuKey}->{ID},
-                    Link        => $Link,
-                    Target      => $Menus{$MenuKey}->{Target},
-                    PopupType   => $Menus{$MenuKey}->{PopupType},
-                    Description => $Description,
-                };
-            }
-        }
-    }
-
-    # check ShowColumns parameter
-    my @ShowColumns;
-    if ( $Param{ShowColumns} && ref $Param{ShowColumns} eq 'ARRAY' ) {
-        @ShowColumns = @{ $Param{ShowColumns} };
-    }
-
-    # get config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # build column header blocks
-    if (@ShowColumns) {
+    for my $ConfigItemID ( @{ $Param{ConfigItemIDs} } ) {
+        $Counter++;
+        if ( $Counter >= $Param{StartHit} && $Counter < ( $Param{PageShown} + $Param{StartHit} ) ) {
 
-        # show the bulk action button checkboxes if feature is enabled
-        if ($BulkFeature) {
-            push @ShowColumns, 'BulkAction';
-        }
-
-        for my $Column (@ShowColumns) {
-
-            # create needed veriables
-            my $CSS = 'OverviewHeader';
-            my $OrderBy;
-
-            # remove ID if necesary
-            if ( $Param{SortBy} ) {
-                $Param{SortBy} = ( $Param{SortBy} eq 'InciStateID' )
-                    ? 'CurInciState'
-                    : ( $Param{SortBy} eq 'DeplStateID' ) ? 'CurDeplState'
-                    : ( $Param{SortBy} eq 'ClassID' )     ? 'Class'
-                    : ( $Param{SortBy} eq 'ChangeTime' )  ? 'LastChanged'
-                    :                                       $Param{SortBy};
-            }
-
-            # set the correct Set CSS class and order by link
-            if ( $Param{SortBy} && ( $Param{SortBy} eq $Column ) ) {
-                if ( $Param{OrderBy} && ( $Param{OrderBy} eq 'Up' ) ) {
-                    $OrderBy = 'Down';
-                    $CSS .= ' SortDescendingLarge';
-                }
-                else {
-                    $OrderBy = 'Up';
-                    $CSS .= ' SortAscendingLarge';
-                }
-            }
-            else {
-                $OrderBy = 'Up';
-            }
-
-            $LayoutObject->Block(
-                Name => 'Record' . $Column . 'Header',
-                Data => {
-                    %Param,
-                    CSS     => $CSS,
-                    OrderBy => $OrderBy,
-                },
+            # Get config item data.
+            my $ConfigItemRef = $ConfigItemObject->ConfigItemGet(
+                ConfigItemID  => $ConfigItemID,
+                DynamicFields => 0,
             );
+            my %ConfigItem = $ConfigItemRef->%*;
+
+            # set deployment and incident signals
+            $ConfigItem{CurDeplSignal} = $DeplSignals{ $ConfigItem{CurDeplState} };
+            $ConfigItem{CurInciSignal} = $InciSignals{ $ConfigItem{CurInciStateType} };
+
+            # show config item create time in small view
+            $ConfigItem{Created}     = $ConfigItem{CreateTime};
+            $ConfigItem{LastChanged} = $ConfigItem{ChangeTime};
+
+            # get ACL restrictions
+            my %PossibleActions;
+            my $Counter = 0;
+
+            # get all registered Actions
+            if ( ref $ConfigObject->Get('ITSMConfigItme::Frontend::Module') eq 'HASH' ) {
+
+                my %Actions = %{ $ConfigObject->Get('ITSMConfigItem::Frontend::Module') };
+
+                # only use those Actions that stats with AgentITSMConfigItem
+                %PossibleActions = map { ++$Counter => $_ }
+                    grep { substr( $_, 0, length 'AgentITSMConfigItem' ) eq 'AgentITSMConfigItem' }
+                    sort keys %Actions;
+            }
+
+            my $ACL = $ConfigItemObject->ConfigItemAcl(
+                Data          => \%PossibleActions,
+                Action        => $Self->{Action},
+                ConfigItemID  => $ConfigItem{ConfigItemID},
+                ReturnType    => 'Action',
+                ReturnSubType => '-',
+                UserID        => $Self->{UserID},
+            );
+            my %AclAction = %PossibleActions;
+            if ($ACL) {
+                %AclAction = $ConfigItemObject->ConfigItemAclActionData();
+            }
+
+            # run config item pre menu modules
+            my @ActionItems;
+            if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::PreMenuModule') eq 'HASH' ) {
+                my %Menus = %{ $ConfigObject->Get('ITSMConfigItem::Frontend::PreMenuModule') };
+                MENU:
+                for my $Menu ( sort keys %Menus ) {
+
+                    # load module
+                    if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Menus{$Menu}->{Module} ) ) {
+                        return $LayoutObject->FatalError();
+                    }
+                    my $Object = $Menus{$Menu}->{Module}->new(
+                        %{$Self},
+                        ConfigItemID => $ConfigItem{ConfigItemID},
+                    );
+
+                    # run module
+                    my $Item = $Object->Run(
+                        %Param,
+                        ConfigItem => \%ConfigItem,
+                        ACL        => \%AclAction,
+                        Config     => $Menus{$Menu},
+                    );
+                    next MENU if !$Item;
+                    next MENU if ref $Item ne 'HASH';
+
+                    # add session id if needed
+                    if ( !$LayoutObject->{SessionIDCookie} && $Item->{Link} ) {
+                        $Item->{Link}
+                            .= ';'
+                            . $LayoutObject->{SessionName} . '='
+                            . $LayoutObject->{SessionID};
+                    }
+
+                    # create id
+                    $Item->{ID} = $Item->{Name};
+                    $Item->{ID} =~ s/(\s|&|;)//ig;
+
+                    my $Output;
+                    if ( $Item->{Block} ) {
+                        $LayoutObject->Block(
+                            Name => $Item->{Block},
+                            Data => $Item,
+                        );
+                        $Output = $LayoutObject->Output(
+                            TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+                            Data         => $Item,
+                        );
+                    }
+                    else {
+                        $Output = '<li id="'
+                            . $Item->{ID}
+                            . '"><a href="#" title="'
+                            . $LayoutObject->{LanguageObject}->Translate( $Item->{Description} )
+                            . '">'
+                            . $LayoutObject->{LanguageObject}->Translate( $Item->{Name} )
+                            . '</a></li>';
+                    }
+
+                    $Output =~ s/\n+//g;
+                    $Output =~ s/\s+/ /g;
+                    $Output =~ s/<\!--.+?-->//g;
+
+                    push @ActionItems, {
+                        HTML        => $Output,
+                        ID          => $Item->{ID},
+                        Link        => $LayoutObject->{Baselink} . $Item->{Link},
+                        Target      => $Item->{Target},
+                        PopupType   => $Item->{PopupType},
+                        Description => $Item->{Description},
+                    };
+                    $ConfigItem{ActionItems} = \@ActionItems;
+                }
+            }
+            push @ConfigItemBox, \%ConfigItem;
         }
     }
 
-    my $Output  = '';
-    my $Counter = 0;
+    # check if columnsenabled is a filled array referencd
+    if ( IsArrayRefWithData( $Self->{ColumnsEnabled} ) ) {
 
-    # show config items if there are some
-    if (@ConfigItemIDs) {
+        # check if column is really filterable
+        COLUMNNAME:
+        for my $ColumnName ( @{ $Self->{ColumnsEnabled} } ) {
+            next COLUMNNAME if !$Self->{AvailableFilterableColumns}->{$ColumnName};
+            $Self->{ValidFilterableColumns}->{$ColumnName} = 1;
+        }
+    }
 
-        # to store all data
-        my %Data;
+    my $ColumnValues = $Self->_GetColumnValues(
+        OriginalConfigItemIDs => $Param{OriginalConfigItemIDs},
+    );
 
-        CONFIGITEMID:
-        for my $ConfigItemID (@ConfigItemIDs) {
-            $Counter++;
-            if (
-                $Counter >= $Param{StartHit}
-                && $Counter < ( $Param{PageShown} + $Param{StartHit} )
-                )
-            {
+    # send data to JS
+    $LayoutObject->AddJSData(
+        Key   => 'LinkPage',
+        Value => $Param{LinkPage},
+    );
 
-                # check for access rights
-                my $HasAccess = $ConfigItemObject->Permission(
-                    Scope  => 'Item',
-                    ItemID => $ConfigItemID,
-                    UserID => $Self->{UserID},
-                    Type   => $Self->{Config}->{Permission},
-                );
+    $LayoutObject->Block(
+        Name => 'DocumentContent',
+        Data => \%Param,
+    );
 
-                next CONFIGITEMID if !$HasAccess;
+    # array to save the column names to do the query
+    my @Col = @{ $Self->{ColumnsEnabled} };
 
-                # get config item data
-                my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-                    ConfigItemID  => $ConfigItemID,
-                    DynamicFields => 1,
-                );
+    # define special config item columns
+    my %SpecialColumns = (
+        Number        => 1,
+        CurDeplSignal => 1,
+        CurInciSignal => 1,
+    );
 
-                next CONFIGITEMID if !$ConfigItem;
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-                # TODO: Show Dynamic Fields - Prio 3
-                #                # convert the XML data into a hash
-                #                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-                #                );
+    $Param{OrderBy} = $Param{OrderBy} || 'Up';
 
-                # store config item data,
-                %Data = %{$ConfigItem};
+    my $ConfigItemData = scalar @ConfigItemBox;
+    if ($ConfigItemData) {
 
-                # build record block
+        $LayoutObject->Block(
+            Name => 'OverviewTable',
+            Data => {
+                StyleClasses => $StyleClasses,
+            },
+        );
+        $LayoutObject->Block( Name => 'TableHeader' );
+
+        if ($BulkFeature) {
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewHeader',
+            );
+            $LayoutObject->Block(
+                Name => 'BulkNavBar',
+                Data => \%Param,
+            );
+        }
+
+        my $CSS = '';
+
+        # show special config item columns, if needed
+        COLUMN:
+        for my $Column (@Col) {
+
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewHeader',
+            );
+
+            $CSS = $Column;
+            my $Title   = $LayoutObject->{LanguageObject}->Translate($Column);
+            my $OrderBy = $Param{OrderBy};
+
+            if ( $Param{SortBy} eq 'Changed' ) {
+                $Param{SortBy} = 'LastChanged';
+            }
+
+            # output overall block so Number as well as other columns can be ordered
+            $LayoutObject->Block(
+                Name => 'OverviewNavBarPageConfigItemHeader',
+                Data => {},
+            );
+
+            if ( $SpecialColumns{$Column} ) {
+
+                if ( $Param{SortBy} && ( $Param{SortBy} eq $Column ) ) {
+                    my $TitleDesc;
+
+                    # Change order for sorting column.
+                    $OrderBy = $OrderBy eq 'Up' ? 'Down' : 'Up';
+
+                    if ( $OrderBy eq 'Down' ) {
+                        $CSS .= ' SortAscendingLarge';
+                        $TitleDesc = Translatable('sorted ascending');
+                    }
+                    else {
+                        $CSS .= ' SortDescendingLarge';
+                        $TitleDesc = Translatable('sorted descending');
+                    }
+
+                    $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                    $Title .= ', ' . $TitleDesc;
+                }
+
+                # translate the column name to write it in the current language
+                my $TranslatedWord;
+                if ( $Column eq 'DeplState' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Deployment State');
+                }
+                elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
+                }
+                elsif ( $Column eq 'InciState' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
+                }
+                elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State');
+                }
+                elsif ( $Column eq 'CurInciStateType' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State Type');
+                }
+                elsif ( $Column eq 'LastChanged' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Last changed');
+                }
+                else {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
+                }
+
+                my $FilterTitle     = $TranslatedWord;
+                my $FilterTitleDesc = Translatable('filter not active');
+                if (
+                    $Self->{StoredFilters} &&
+                    (
+                        $Self->{StoredFilters}->{$Column} ||
+                        $Self->{StoredFilters}->{ $Column . 'IDs' }
+                    )
+                    )
+                {
+                    $CSS .= ' FilterActive';
+                    $FilterTitleDesc = Translatable('filter active');
+                }
+                $FilterTitleDesc = $LayoutObject->{LanguageObject}->Translate($FilterTitleDesc);
+                $FilterTitle .= ', ' . $FilterTitleDesc;
+
                 $LayoutObject->Block(
-                    Name => 'Record',
+                    Name => "OverviewNavBarPage$Column",
                     Data => {
                         %Param,
-                        %Data,
+                        OrderBy              => $OrderBy,
+                        ColumnName           => $Column         || '',
+                        CSS                  => $CSS            || '',
+                        ColumnNameTranslated => $TranslatedWord || $Column,
+                        Title                => $Title,
                     },
                 );
 
-                # build column record blocks
-                if (@ShowColumns) {
+                # verify if column is filterable and sortable
+                if (
+                    $Self->{ValidFilterableColumns}->{$Column}
+                    && $Self->{ValidSortableColumns}->{$Column}
+                    )
+                {
+                    # variable to save the filter's html code
+                    my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                        ColumnName    => $Column,
+                        Label         => $Column,
+                        ColumnValues  => $ColumnValues->{$Column},
+                        SelectedValue => $Param{GetColumnFilter}->{$Column} || '',
+                    );
 
-                    COLUMN:
-                    for my $Column (@ShowColumns) {
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnFilterLink',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            ColumnFilterStrg     => $ColumnFilterHTML,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+
+                # verify if column is filterable
+                elsif ( $Self->{ValidFilterableColumns}->{$Column} ) {
+
+                    # variable to save the filter's HTML code
+                    my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                        ColumnName    => $Column,
+                        Label         => $Column,
+                        ColumnValues  => $ColumnValues->{$Column},
+                        SelectedValue => $Param{GetColumnFilter}->{$Column} || '',
+                    );
+
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnFilter',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            ColumnFilterStrg     => $ColumnFilterHTML,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+
+                # verify if column is sortable
+                elsif ( $Self->{ValidSortableColumns}->{$Column} ) {
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnLink',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                        },
+                    );
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnEmpty',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            Title                => $Title,
+                        },
+                    );
+                }
+                next COLUMN;
+            }
+            elsif ( $Column !~ m{\A DynamicField_}xms ) {
+
+                if ( $Param{SortBy} && ( $Param{SortBy} eq $Column ) ) {
+                    my $TitleDesc;
+
+                    # Change order for sorting column.
+                    $OrderBy = $OrderBy eq 'Up' ? 'Down' : 'Up';
+
+                    if ( $OrderBy eq 'Down' ) {
+                        $CSS .= ' SortAscendingLarge';
+                        $TitleDesc = Translatable('sorted ascending');
+                    }
+                    else {
+                        $CSS .= ' SortDescendingLarge';
+                        $TitleDesc = Translatable('sorted descending');
+                    }
+
+                    $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                    $Title .= ', ' . $TitleDesc;
+                }
+
+                # translate the column name to write it in the current language
+                my $TranslatedWord;
+                if ( $Column eq 'DeplState' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Deployment State');
+                }
+                elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
+                }
+                elsif ( $Column eq 'InciState' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
+                }
+                elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State');
+                }
+                elsif ( $Column eq 'CurInciStateType' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State Type');
+                }
+                elsif ( $Column eq 'LastChanged' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Last changed');
+                }
+                else {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
+                }
+
+                my $FilterTitle     = $TranslatedWord;
+                my $FilterTitleDesc = Translatable('filter not active');
+                if ( $Self->{StoredFilters} && $Self->{StoredFilters}->{ $Column . 'IDs' } ) {
+                    $CSS .= ' FilterActive';
+                    $FilterTitleDesc = Translatable('filter active');
+                }
+                $FilterTitleDesc = $LayoutObject->{LanguageObject}->Translate($FilterTitleDesc);
+                $FilterTitle .= ', ' . $FilterTitleDesc;
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageColumn',
+                    Data => {
+                        %Param,
+                        ColumnName           => $Column,
+                        CSS                  => $CSS,
+                        ColumnNameTranslated => $TranslatedWord || $Column,
+                    },
+                );
+
+                # verify if column is filterable and sortable
+                if (
+                    $Self->{ValidFilterableColumns}->{$Column}
+                    && $Self->{ValidSortableColumns}->{$Column}
+                    )
+                {
+
+                    # variable to save the filter's HTML code
+                    my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                        ColumnName    => $Column,
+                        Label         => $Column,
+                        ColumnValues  => $ColumnValues->{$Column},
+                        SelectedValue => $Param{GetColumnFilter}->{$Column} || '',
+                    );
+
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnFilterLink',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            ColumnFilterStrg     => $ColumnFilterHTML,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+
+                # verify if column is just filterable
+                elsif ( $Self->{ValidFilterableColumns}->{$Column} ) {
+
+                    # variable to save the filter's HTML code
+                    my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                        ColumnName    => $Column,
+                        Label         => $Column,
+                        ColumnValues  => $ColumnValues->{$Column},
+                        SelectedValue => $Param{GetColumnFilter}->{$Column} || '',
+                    );
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnFilter',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            ColumnFilterStrg     => $ColumnFilterHTML,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+
+                # verify if column is sortable
+                elsif ( $Self->{ValidSortableColumns}->{$Column} ) {
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnLink',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            OrderBy              => $OrderBy,
+                            Title                => $Title,
+                        },
+                    );
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageColumnEmpty',
+                        Data => {
+                            %Param,
+                            ColumnName           => $Column,
+                            CSS                  => $CSS,
+                            ColumnNameTranslated => $TranslatedWord || $Column,
+                            Title                => $Title,
+                        },
+                    );
+                }
+            }
+
+            # show the DFs
+            else {
+
+                my $DynamicFieldConfig;
+                my $DFColumn = $Column;
+                $DFColumn =~ s/DynamicField_//g;
+                DYNAMICFIELD:
+                for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+                    next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+                    next DYNAMICFIELD if $DFConfig->{Name} ne $DFColumn;
+
+                    $DynamicFieldConfig = $DFConfig;
+                    last DYNAMICFIELD;
+                }
+                next COLUMN if !IsHashRefWithData($DynamicFieldConfig);
+
+                my $Label = $DynamicFieldConfig->{Label};
+                $Title = $Label;
+                my $FilterTitle = $Label;
+
+                # get field sortable condition
+                my $IsSortable = $DynamicFieldBackendObject->HasBehavior(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Behavior           => 'IsSortable',
+                );
+
+                if ($IsSortable) {
+                    my $CSS = 'DynamicField_' . $DynamicFieldConfig->{Name};
+                    if (
+                        $Param{SortBy}
+                        && ( $Param{SortBy} eq ( 'DynamicField_' . $DynamicFieldConfig->{Name} ) )
+                        )
+                    {
+                        my $TitleDesc;
+
+                        # Change order for sorting column.
+                        $OrderBy = $OrderBy eq 'Up' ? 'Down' : 'Up';
+
+                        if ( $OrderBy eq 'Down' ) {
+                            $CSS .= ' SortAscendingLarge';
+                            $TitleDesc = Translatable('sorted ascending');
+                        }
+                        else {
+                            $CSS .= ' SortDescendingLarge';
+                            $TitleDesc = Translatable('sorted descending');
+                        }
+
+                        $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                        $Title .= ', ' . $TitleDesc;
+                    }
+
+                    my $FilterTitleDesc = Translatable('filter not active');
+                    if ( $Self->{StoredFilters} && $Self->{StoredFilters}->{$Column} ) {
+                        $CSS .= ' FilterActive';
+                        $FilterTitleDesc = Translatable('filter active');
+                    }
+                    $FilterTitleDesc = $LayoutObject->{LanguageObject}->Translate($FilterTitleDesc);
+                    $FilterTitle .= ', ' . $FilterTitleDesc;
+
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageDynamicField',
+                        Data => {
+                            %Param,
+                            CSS => $CSS,
+                        },
+                    );
+
+                    my $DynamicFieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
+
+                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+
+                        # variable to save the filter's HTML code
+                        my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                            ColumnName    => $DynamicFieldName,
+                            Label         => $Label,
+                            ColumnValues  => $ColumnValues->{$DynamicFieldName},
+                            SelectedValue => $Param{GetColumnFilter}->{$DynamicFieldName} || '',
+                        );
+
                         $LayoutObject->Block(
-                            Name => 'Record' . $Column,
+                            Name => 'OverviewNavBarPageDynamicFieldFiltrableSortable',
                             Data => {
                                 %Param,
-                                %Data,
-                                CurInciSignal => $InciSignals{ $Data{CurInciStateType} },
-                                CurDeplSignal => $DeplSignals{ $Data{CurDeplState} },
+                                OrderBy          => $OrderBy,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                ColumnFilterStrg => $ColumnFilterHTML,
+                                Title            => $Title,
+                                FilterTitle      => $FilterTitle,
+                            },
+                        );
+                    }
+
+                    else {
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicFieldSortable',
+                            Data => {
+                                %Param,
+                                OrderBy          => $OrderBy,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                Title            => $Title,
+                            },
+                        );
+                    }
+
+                    # example of dynamic fields order customization
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageDynamicField_' . $DynamicFieldConfig->{Name},
+                        Data => {
+                            %Param,
+                            CSS => $CSS,
+                        },
+                    );
+
+                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+
+                        # variable to save the filter's HTML code
+                        my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                            ColumnName    => $DynamicFieldName,
+                            Label         => $Label,
+                            ColumnValues  => $ColumnValues->{$DynamicFieldName},
+                            SelectedValue => $Param{GetColumnFilter}->{$DynamicFieldName} || '',
+                        );
+
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicField'
+                                . $DynamicFieldConfig->{Name}
+                                . '_FiltrableSortable',
+                            Data => {
+                                %Param,
+                                OrderBy          => $OrderBy,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                ColumnFilterStrg => $ColumnFilterHTML,
+                                Title            => $Title,
+                            },
+                        );
+                    }
+                    else {
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicField_'
+                                . $DynamicFieldConfig->{Name}
+                                . '_Sortable',
+                            Data => {
+                                %Param,
+                                OrderBy          => $OrderBy,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                Title            => $Title,
+                            },
+                        );
+                    }
+                }
+                else {
+
+                    my $DynamicFieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
+                    my $CSS              = $DynamicFieldName;
+
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageDynamicField',
+                        Data => {
+                            %Param,
+                            CSS => $CSS,
+                        },
+                    );
+
+                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+
+                        # variable to save the filter's HTML code
+                        my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                            ColumnName    => $DynamicFieldName,
+                            Label         => $Label,
+                            ColumnValues  => $ColumnValues->{$DynamicFieldName},
+                            SelectedValue => $Param{GetColumnFilter}->{$DynamicFieldName} || '',
+                        );
+
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicFieldFiltrableNotSortable',
+                            Data => {
+                                %Param,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                ColumnFilterStrg => $ColumnFilterHTML,
+                                Title            => $Title,
+                                FilterTitle      => $FilterTitle,
+                            },
+                        );
+                    }
+                    else {
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicFieldNotSortable',
+                            Data => {
+                                %Param,
+                                Label => $Label,
+                                Title => $Title,
+                            },
+                        );
+                    }
+
+                    # example of dynamic fields order customization
+                    $LayoutObject->Block(
+                        Name => 'OverviewNavBarPageDynamicField_' . $DynamicFieldConfig->{Name},
+                        Data => {
+                            %Param,
+                        },
+                    );
+
+                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+
+                        # variable to save the filter's HTML code
+                        my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                            ColumnName    => $DynamicFieldName,
+                            Label         => $Label,
+                            ColumnValues  => $ColumnValues->{$DynamicFieldName},
+                            SelectedValue => $Param{GetColumnFilter}->{$DynamicFieldName} || '',
+                        );
+
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicField_'
+                                . $DynamicFieldConfig->{Name}
+                                . '_FiltrableNotSortable',
+                            Data => {
+                                %Param,
+                                Label            => $Label,
+                                DynamicFieldName => $DynamicFieldConfig->{Name},
+                                ColumnFilterStrg => $ColumnFilterHTML,
+                                Title            => $Title,
+                            },
+                        );
+                    }
+                    else {
+                        $LayoutObject->Block(
+                            Name => 'OverviewNavBarPageDynamicField_'
+                                . $DynamicFieldConfig->{Name}
+                                . '_NotSortable',
+                            Data => {
+                                %Param,
+                                Label => $Label,
+                                Title => $Title,
                             },
                         );
                     }
                 }
 
-                # make a deep copy of the action items to avoid changing the definition
-                my $ClonedActionItems = Storable::dclone( \@ActionItems );
+            }
 
-                $ConfigItem->{VersionID} //= '';
+        }
 
-                # substitute TT variables
-                for my $ActionItem ( @{$ClonedActionItems} ) {
-                    $ActionItem->{HTML} =~ s{ \Q[% Data.ConfigItemID | html %]\E }{$ConfigItemID}xmsg;
-                    $ActionItem->{HTML} =~ s{ \Q[% Data.VersionID | html %]\E }{$ConfigItem->{VersionID}}xmsg;
-                    $ActionItem->{Link} =~ s{ \Q[% Data.ConfigItemID | html %]\E }{$ConfigItemID}xmsg;
-                    $ActionItem->{Link} =~ s{ \Q[% Data.VersionID | html %]\E }{$ConfigItem->{VersionID}}xmsg;
+        $LayoutObject->Block( Name => 'TableBody' );
+
+    }
+    else {
+        $LayoutObject->Block( Name => 'NoConfigItemFound' );
+    }
+
+    for my $ConfigItemRef (@ConfigItemBox) {
+
+        # get config item data
+        my %ConfigItem = %{$ConfigItemRef};
+
+        $LayoutObject->Block(
+            Name => 'Record',
+            Data => {%ConfigItem},
+        );
+
+        # check if bulk feature is enabled
+        if ($BulkFeature) {
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewRow',
+            );
+            $LayoutObject->Block(
+                Name => Translatable('Bulk'),
+                Data => {%ConfigItem},
+            );
+        }
+
+        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
+        # save column content
+        my $DataValue;
+
+        # show all needed columns
+        CONFIGITEMCOLUMN:
+        for my $ConfigItemColumn (@Col) {
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewRow',
+            );
+            if ( $ConfigItemColumn !~ m{\A DynamicField_}xms ) {
+                $LayoutObject->Block(
+                    Name => 'RecordConfigItemData',
+                    Data => {},
+                );
+
+                if ( $SpecialColumns{$ConfigItemColumn} ) {
+                    $LayoutObject->Block(
+                        Name => 'Record' . $ConfigItemColumn,
+                        Data => {%ConfigItem},
+                    );
+
+                    next CONFIGITEMCOLUMN;
                 }
 
-                #my $JSON = $LayoutObject->JSONEncode(
-                #    Data => $ClonedActionItems,
-                #);
+                if ( $ConfigItemColumn eq 'CreatedBy' ) {
 
-                #$LayoutObject->Block(
-                #    Name => 'DocumentReadyActionRowAdd',
-                #    Data => {
-                #        ConfigItemID => $ConfigItemID,
-                #        Data         => $JSON,
-                #    },
-                #);
+                    my %ConfigItemCreatedByInfo = $UserObject->GetUserData(
+                        UserID => $ConfigItem{CreateBy},
+                    );
 
-                $LayoutObject->AddJSData(
-                    Key   => 'ITSMConfigItemActionRow.' . $ConfigItemID,
-                    Value => $ClonedActionItems,
+                    $LayoutObject->Block(
+                        Name => 'RecordConfigItemCreatedBy',
+                        Data => \%ConfigItemCreatedByInfo,
+                    );
+                    next CONFIGITEMCOLUMN;
+                }
+
+                my $BlockType = '';
+                my $CSSClass  = '';
+                if (
+                    $ConfigItemColumn eq 'DeplState'
+                    || $ConfigItemColumn eq 'CurDeplState'
+                    || $ConfigItemColumn eq 'InciState'
+                    || $ConfigItemColumn eq 'CurInciState'
+                    )
+                {
+                    $BlockType = 'Translatable';
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                }
+                elsif ( $ConfigItemColumn eq 'Created' || $ConfigItemColumn eq 'Changed' ) {
+                    $BlockType = 'Time';
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                }
+                else {
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+
+                    # If value is in date format, change block type to 'Time' so it can be localized. See bug#14542.
+                    if (
+                        defined $DataValue
+                        && $DataValue =~ /^\d\d\d\d-(\d|\d\d)-(\d|\d\d)\s(\d|\d\d):(\d|\d\d):(\d|\d\d)$/
+                        )
+                    {
+                        $BlockType = 'Time';
+                    }
+                }
+
+                $LayoutObject->Block(
+                    Name => "RecordConfigItemColumn$BlockType",
+                    Data => {
+                        GenericValue => $DataValue || '-',
+                        Class        => $CSSClass  || '',
+                    },
                 );
             }
+
+            # dynamic fields
+            else {
+
+                # cycle trough the activated dynamic fields for this screen
+                my $DynamicFieldConfig;
+                my $DFColumn = $ConfigItemColumn;
+                $DFColumn =~ s/DynamicField_//g;
+                DYNAMICFIELD:
+                for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+                    next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+                    next DYNAMICFIELD if $DFConfig->{Name} ne $DFColumn;
+
+                    $DynamicFieldConfig = $DFConfig;
+                    last DYNAMICFIELD;
+                }
+                next CONFIGITEMCOLUMN if !IsHashRefWithData($DynamicFieldConfig);
+
+                # get field value
+                my $Value = $DynamicFieldBackendObject->ValueGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $ConfigItem{VersionID},
+                );
+
+                my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Value              => $Value,
+                    ValueMaxChars      => 20,
+                    LayoutObject       => $LayoutObject,
+                );
+
+                $LayoutObject->Block(
+                    Name => 'RecordDynamicField',
+                    Data => {
+                        Value => $ValueStrg->{Value},
+                        Title => $ValueStrg->{Title},
+                    },
+                );
+
+                if ( $ValueStrg->{Link} ) {
+                    $LayoutObject->Block(
+                        Name => 'RecordDynamicFieldLink',
+                        Data => {
+                            Value                       => $ValueStrg->{Value},
+                            Title                       => $ValueStrg->{Title},
+                            Link                        => $ValueStrg->{Link},
+                            $DynamicFieldConfig->{Name} => $ValueStrg->{Title},
+                        },
+                    );
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => 'RecordDynamicFieldPlain',
+                        Data => {
+                            Value => $ValueStrg->{Value},
+                            Title => $ValueStrg->{Title},
+                        },
+                    );
+                }
+
+                # example of dynamic fields order customization
+                $LayoutObject->Block(
+                    Name => 'RecordDynamicField_' . $DynamicFieldConfig->{Name},
+                    Data => {
+                        Value => $ValueStrg->{Value},
+                        Title => $ValueStrg->{Title},
+                    },
+                );
+
+                if ( $ValueStrg->{Link} ) {
+                    $LayoutObject->Block(
+                        Name => 'RecordDynamicField_' . $DynamicFieldConfig->{Name} . '_Link',
+                        Data => {
+                            Value                       => $ValueStrg->{Value},
+                            Title                       => $ValueStrg->{Title},
+                            Link                        => $ValueStrg->{Link},
+                            $DynamicFieldConfig->{Name} => $ValueStrg->{Title},
+                        },
+                    );
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => 'RecordDynamicField_' . $DynamicFieldConfig->{Name} . '_Plain',
+                        Data => {
+                            Value => $ValueStrg->{Value},
+                            Title => $ValueStrg->{Title},
+                        },
+                    );
+                }
+            }
+        }
+
+        # add action items as js
+        if ( $ConfigItem{ActionItems} ) {
+
+            # replace TT directives from string with values
+            for my $ActionItem ( @{ $ConfigItem{ActionItems} } ) {
+                $ActionItem->{Link} = $LayoutObject->Output(
+                    Template => $ActionItem->{Link},
+                    Data     => {
+                        ConfigItemID => $ConfigItem{ConfigItemID},
+                    },
+                );
+            }
+
+            # $ActionRowConfigItems{ $ConfigItem{ConfigItemID} } = $LayoutObject->JSONEncode( Data => $ConfigItem{ActionItems} );
+            $LayoutObject->AddJSData(
+                Key   => 'ITSMConfigItemActionRow.' . $ConfigItem{ConfigItemID},
+                Value => $ConfigItem{ActionItems},
+            );
         }
     }
 
-    # if there are no config items to show, a no data found message is displayed in the table
-    else {
+    # set column filter form, to correctly fill the column filters is necessary to pass each
+    #    overview some information in the AJAX call, for example the fixed Filters or NavBarFilters
+    #    and also other values like the Queue in AgentITSMConfigItemQueue, otherwise the filters will be
+    #    filled with default restrictions, resulting in more options than the ones that the
+    #    available config items should provide, see Bug#9902
+    if ( IsHashRefWithData( $Param{ColumnFilterForm} ) ) {
         $LayoutObject->Block(
-            Name => 'NoDataFoundMsg',
-            Data => {
-                TotalColumns => scalar @ShowColumns,
-            },
+            Name => 'DocumentColumnFilterForm',
+            Data => {},
         );
+
+        for my $Element ( sort keys %{ $Param{ColumnFilterForm} } ) {
+            $LayoutObject->Block(
+                Name => 'DocumentColumnFilterFormElement',
+                Data => {
+                    ElementName  => $Element,
+                    ElementValue => $Param{ColumnFilterForm}->{$Element},
+                },
+            );
+        }
     }
 
     # use template
-    $Output .= $LayoutObject->Output(
+    my $Output = $LayoutObject->Output(
         TemplateFile => 'AgentITSMConfigItemOverviewSmall',
         Data         => {
             %Param,
-            Type         => $Self->{ViewType},
-            ColumnCount  => scalar @ShowColumns,
-            StyleClasses => $StyleClasses,
+            Type => $Self->{ViewType},
         },
     );
 
     return $Output;
+}
+
+sub _GetColumnValues {
+    my ( $Self, %Param ) = @_;
+
+    return if !IsStringWithData( $Param{HeaderColumn} );
+
+    my $HeaderColumn = $Param{HeaderColumn};
+    my %ColumnFilterValues;
+    my $ConfigItemIDs;
+
+    if ( IsArrayRefWithData( $Param{OriginalConfigItemIDs} ) ) {
+        $ConfigItemIDs = $Param{OriginalConfigItemIDs};
+    }
+
+    if ( $HeaderColumn !~ m/^DynamicField_/ ) {
+        my $FunctionName = $HeaderColumn . 'FilterValuesGet';
+        $ColumnFilterValues{$HeaderColumn} = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::ColumnFilter')->$FunctionName(
+            ConfigItemIDs => $ConfigItemIDs,
+            HeaderColumn  => $HeaderColumn,
+            UserID        => $Self->{UserID},
+        );
+    }
+    else {
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            my $FieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
+            next DYNAMICFIELD if $FieldName ne $HeaderColumn;
+
+            # get dynamic field backend object
+            my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+            my $IsFiltrable               = $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsFiltrable',
+            );
+            next DYNAMICFIELD if !$IsFiltrable;
+            $Self->{ValidFilterableColumns}->{$HeaderColumn} = $IsFiltrable;
+            if ( IsArrayRefWithData($ConfigItemIDs) ) {
+
+                # get the historical values for the field
+                $ColumnFilterValues{$HeaderColumn} = $DynamicFieldBackendObject->ColumnFilterValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
+                    ITSMConfigItemIDs  => $ConfigItemIDs,
+                );
+            }
+            else {
+
+                # get PossibleValues
+                $ColumnFilterValues{$HeaderColumn} = $DynamicFieldBackendObject->PossibleValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                );
+            }
+            last DYNAMICFIELD;
+        }
+    }
+
+    return \%ColumnFilterValues;
+}
+
+sub _InitialColumnFilter {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{ColumnName};
+    return if !$Self->{ValidFilterableColumns}->{ $Param{ColumnName} };
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $Label = $Param{Label} || $Param{ColumnName};
+    $Label = $LayoutObject->{LanguageObject}->Translate($Label);
+
+    # set fixed values
+    my $Data = [
+        {
+            Key   => '',
+            Value => uc $Label,
+        },
+    ];
+
+    # define if column filter values should be translatable
+    my $TranslationOption = 0;
+
+    if (
+        $Param{ColumnName} eq 'DeplState'
+        || $Param{ColumnName} eq 'CurDeplState'
+        || $Param{ColumnName} eq 'InciState'
+        || $Param{ColumnName} eq 'CurInciState'
+        )
+    {
+        $TranslationOption = 1;
+    }
+
+    my $Class = 'ColumnFilter';
+    if ( $Param{Css} ) {
+        $Class .= ' ' . $Param{Css};
+    }
+
+    # build select HTML
+    my $ColumnFilterHTML = $LayoutObject->BuildSelection(
+        Name        => 'ColumnFilter' . $Param{ColumnName},
+        Data        => $Data,
+        Class       => $Class,
+        Translation => $TranslationOption,
+        SelectedID  => '',
+    );
+    return $ColumnFilterHTML;
+}
+
+sub FilterContent {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{HeaderColumn};
+
+    my $HeaderColumn = $Param{HeaderColumn};
+
+    # get column values for to build the filters later
+    my $ColumnValues = $Self->_GetColumnValues(
+        OriginalConfigItemIDs => $Param{OriginalConfigItemIDs},
+        HeaderColumn          => $HeaderColumn,
+    );
+
+    my $SelectedValue  = '';
+    my $SelectedColumn = $HeaderColumn;
+    if ( $HeaderColumn !~ m{ \A DynamicField_ }xms ) {
+        $SelectedColumn .= 'IDs';
+    }
+
+    my $LabelColumn = $HeaderColumn;
+    if ( $LabelColumn =~ m{ \A DynamicField_ }xms ) {
+
+        my $DynamicFieldConfig;
+        $LabelColumn =~ s{\A DynamicField_ }{}xms;
+
+        DYNAMICFIELD:
+        for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+            next DYNAMICFIELD if $DFConfig->{Name} ne $LabelColumn;
+
+            $DynamicFieldConfig = $DFConfig;
+            last DYNAMICFIELD;
+        }
+        if ( IsHashRefWithData($DynamicFieldConfig) ) {
+            $LabelColumn = $DynamicFieldConfig->{Label};
+        }
+    }
+
+    if ( $SelectedColumn && $Self->{StoredFilters}->{$SelectedColumn} ) {
+
+        if ( IsArrayRefWithData( $Self->{StoredFilters}->{$SelectedColumn} ) ) {
+            $SelectedValue = $Self->{StoredFilters}->{$SelectedColumn}->[0];
+        }
+        elsif ( IsHashRefWithData( $Self->{StoredFilters}->{$SelectedColumn} ) ) {
+            $SelectedValue = $Self->{StoredFilters}->{$SelectedColumn}->{Equals};
+        }
+    }
+
+    # variable to save the filter's HTML code
+    my $ColumnFilterJSON = $Self->_ColumnFilterJSON(
+        ColumnName    => $HeaderColumn,
+        Label         => $LabelColumn,
+        ColumnValues  => $ColumnValues->{$HeaderColumn},
+        SelectedValue => $SelectedValue,
+    );
+
+    return $ColumnFilterJSON;
+}
+
+# =head2 _ColumnFilterJSON()
+
+#     creates a JSON select filter for column header
+
+#     my $ColumnFilterJSON = $ITSMConfigItemOverviewSmallObject->_ColumnFilterJSON(
+#         ColumnName => 'Queue',
+#         Label      => 'Queue',
+#         ColumnValues => {
+#             1 => 'PostMaster',
+#             2 => 'Junk',
+#         },
+#         SelectedValue '1',
+#     );
+
+# =cut
+
+sub _ColumnFilterJSON {
+    my ( $Self, %Param ) = @_;
+
+    if (
+        !$Self->{AvailableFilterableColumns}->{ $Param{ColumnName} } &&
+        !$Self->{AvailableFilterableColumns}->{ $Param{ColumnName} . 'IDs' }
+        )
+    {
+        return;
+    }
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $Label = $Param{Label};
+    $Label =~ s{ \A DynamicField_ }{}gxms;
+    $Label = $LayoutObject->{LanguageObject}->Translate($Label);
+
+    # set fixed values
+    my $Data = [
+        {
+            Key   => 'DeleteFilter',
+            Value => uc $Label,
+        },
+        {
+            Key      => '-',
+            Value    => '-',
+            Disabled => 1,
+        },
+    ];
+
+    if ( $Param{ColumnValues} && ref $Param{ColumnValues} eq 'HASH' ) {
+
+        my %Values = %{ $Param{ColumnValues} };
+
+        # Set possible values.
+        for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
+            push @{$Data}, {
+                Key   => $ValueKey,
+                Value => $Values{$ValueKey},
+            };
+        }
+    }
+
+    # define if column filter values should be translatable
+    my $TranslationOption = 0;
+
+    if (
+        $Param{ColumnName} eq 'DeplState'
+        || $Param{ColumnName} eq 'CurDeplState'
+        || $Param{ColumnName} eq 'InciState'
+        || $Param{ColumnName} eq 'CurInciState'
+        )
+    {
+        $TranslationOption = 1;
+    }
+
+    # build select HTML
+    my $JSON = $LayoutObject->BuildSelectionJSON(
+        [
+            {
+                Name         => 'ColumnFilter' . $Param{ColumnName},
+                Data         => $Data,
+                Class        => 'ColumnFilter',
+                Sort         => 'AlphanumericKey',
+                TreeView     => 1,
+                SelectedID   => $Param{SelectedValue},
+                Translation  => $TranslationOption,
+                AutoComplete => 'off',
+            },
+        ],
+    );
+
+    return $JSON;
+}
+
+sub _DefaultColumnSort {
+
+    my %DefaultColumns = (
+        Number       => 100,
+        Name         => 110,
+        Changed      => 111,
+        Created      => 112,
+        DeplState    => 113,
+        CurDeplState => 114,
+        InciState    => 115,
+        CurInciState => 116,
+    );
+
+    # dynamic fields can not be on the DefaultColumns sorting hash
+    # when comparing 2 dynamic fields sorting must be alphabetical
+    if ( !$DefaultColumns{$a} && !$DefaultColumns{$b} ) {
+        return $a cmp $b;
+    }
+
+    # when a dynamic field is compared to a config item attribute it must be higher
+    elsif ( !$DefaultColumns{$a} ) {
+        return 1;
+    }
+
+    # when a config item attribute is compared to a dynamic field it must be lower
+    elsif ( !$DefaultColumns{$b} ) {
+        return -1;
+    }
+
+    # otherwise do a numerical comparison with the config item attributes
+    return $DefaultColumns{$a} <=> $DefaultColumns{$b};
 }
 
 1;
