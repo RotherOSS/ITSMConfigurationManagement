@@ -228,6 +228,8 @@ sub _SectionRender {
 
             my $DynamicField = $Param{Definition}{DynamicFieldRef}{ $Row->{DF} };
 
+            next ROW if !$DynamicField;
+
             my $DisplayValue = $DynamicFieldBackendObject->DisplayValueRender(
                 DynamicFieldConfig => $DynamicField,
                 Value              => $Param{ConfigItem}{ 'DynamicField_' . $Row->{DF} },
