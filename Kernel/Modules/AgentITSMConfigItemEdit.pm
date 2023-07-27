@@ -675,7 +675,7 @@ sub Run {
         # cycle through the activated Dynamic Fields for this screen
         DYNAMICFIELD:
         for my $Name ( keys %{ $DynFieldStates{Fields} } ) {
-            my $DynamicFieldConfig = $Self->{DynamicField}{$Name};
+            my $DynamicFieldConfig = $Definition->{DynamicFieldRef}{$Name};
 
             if ( $DynamicFieldConfig->{Config}{MultiValue} && ref $GetParam{DynamicField}{"DynamicField_$Name"} eq 'ARRAY' ) {
                 for my $i ( 0 .. $#{ $GetParam{DynamicField}{"DynamicField_$Name"} } ) {
