@@ -131,6 +131,7 @@
         <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/ColumnFilter.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemACL.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Definition.pm" />

@@ -991,15 +991,14 @@ sub _GetChecks {
     # do that always, even if $RequiredChecks{ConfigItem} is not that
     # (because too much stuff depends on it)
     if ( $Param{ConfigItemID} ) {
-        my %ConfigItem = $Self->ConfigItemGet(
+        my $ConfigItem = $Self->ConfigItemGet(
             %Param,
             DynamicFields => 1,
         );
-        $Checks{ConfigItem} = \%ConfigItem;
+        $Checks{ConfigItem} = $ConfigItem;
 
         # keep database config item data separated since the reference is affected below
-        my %ConfigItemDatabase = %ConfigItem;
-        $ChecksDatabase{ConfigItem} = \%ConfigItemDatabase;
+        $ChecksDatabase{ConfigItem} = \%{ $ConfigItem };
     }
 
     # check for dynamic fields
