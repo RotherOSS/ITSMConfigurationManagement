@@ -658,12 +658,23 @@
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate" Required="0" Valid="1">
-        <Description Translatable="1">Config item event module that upates config items to their current definition.</Description>
+        <Description Translatable="1">Config item event module that updates config items to their current definition.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DefinitionConfigItemUpdate</Item>
                 <Item Key="Event">DefinitionCreate</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###400-ReferenceSync" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module that updates the table configitem_reference.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::ReferenceSync</Item>
+                <Item Key="Event">^ConfigItemDynamicFieldUpdate_</Item>
                 <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
