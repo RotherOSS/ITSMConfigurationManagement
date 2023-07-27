@@ -989,16 +989,17 @@
                     <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
                     <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                 </DefaultItem>
-                <Item Key="CurInciSignal" SelectedID="1"></Item>
-                <Item Key="CurDeplSignal" SelectedID="1"></Item>
-                <Item Key="Number" SelectedID="1"></Item>
-                <Item Key="Name" SelectedID="1"></Item>
-                <Item Key="Class" SelectedID="0"></Item>
-                <Item Key="CurDeplState" SelectedID="1"></Item>
-                <Item Key="CurDeplStateType" SelectedID="0"></Item>
-                <Item Key="CurInciState" SelectedID="1"></Item>
+                <Item Key="CurDeplSignal" SelectedID="2"></Item>
+                <Item Key="CurInciSignal" SelectedID="2"></Item>
+                <Item Key="Class" SelectedID="2"></Item>
+                <Item Key="Number" SelectedID="2"></Item>
+                <Item Key="Name" SelectedID="2"></Item>
+                <Item Key="CurDeplState" SelectedID="2"></Item>
+                <Item Key="CurInciState" SelectedID="2"></Item>
+                <Item Key="LastChanged" SelectedID="2"></Item>
+                <Item Key="CurDeplStateType" SelectedID="1"></Item>
                 <Item Key="CurInciStateType" SelectedID="1"></Item>
-                <Item Key="LastChanged" SelectedID="1"></Item>
+                <Item Key="Created" SelectedID="1"></Item>
             </Hash>
         </Value>
     </Setting>

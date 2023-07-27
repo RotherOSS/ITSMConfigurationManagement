@@ -1740,14 +1740,14 @@ sub _ColumnFilterJSON {
 sub _DefaultColumnSort {
 
     my %DefaultColumns = (
-        Number       => 100,
-        Name         => 110,
-        Changed      => 111,
-        Created      => 112,
-        DeplState    => 113,
-        CurDeplState => 114,
-        InciState    => 115,
-        CurInciState => 116,
+        CurDeplSignal      => 110,
+        CurInciSignal      => 111,
+        Class              => 112,
+        Number             => 113,
+        Name               => 114,
+        CurDeplState       => 115,
+        CurInciState       => 116,
+        LastChanged        => 117,
     );
 
     # dynamic fields can not be on the DefaultColumns sorting hash
