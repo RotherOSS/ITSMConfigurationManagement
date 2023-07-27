@@ -29,6 +29,7 @@ use parent qw(
     Kernel::System::ITSMConfigItem::History
     Kernel::System::ITSMConfigItem::Number
     Kernel::System::ITSMConfigItem::Permission
+    Kernel::System::ITSMConfigItem::Reference
     Kernel::System::ITSMConfigItem::Version
     Kernel::System::ITSMConfigItem::XML
     Kernel::System::EventHandler
@@ -75,6 +76,7 @@ All config item functions.
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
@@ -84,8 +86,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     $Self->{CacheType} = 'ITSMConfigurationManagement';
     $Self->{CacheTTL}  = 60 * 60 * 24 * 20;
@@ -1288,6 +1289,8 @@ the appropriate id is returned.
     my $Number = $ConfigItemObject->ConfigItemLookup(
         ConfigItemID => 1234,
     );
+
+or
 
     my $ID = $ConfigItemObject->ConfigItemLookup(
         ConfigItemNumber => 1000001,
