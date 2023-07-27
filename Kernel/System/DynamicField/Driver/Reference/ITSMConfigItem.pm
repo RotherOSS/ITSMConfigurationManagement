@@ -195,4 +195,29 @@ sub SearchObjects {
     );
 }
 
+=head2 ValueForLens()
+
+return the current last version ids used in dynamic_field_value
+
+    my $Value = $PluginObject->ValueForLens(
+        Value => $Value,
+    );
+
+=cut
+
+sub ValueForLens {
+    my ( $Self, %Param ) = @_;
+
+    # MultiValue lenses are not supported
+    my $Value = ref $Param{Value} ? $Param{Value}[0] : $Param{Value};
+
+    return if !$Value;
+
+    my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+        ConfigItemID => $Value,
+    );
+
+    return $ConfigItem->{LastVersionID};
+}
+
 1;
