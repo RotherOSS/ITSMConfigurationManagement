@@ -87,7 +87,7 @@
                             <input type="hidden" class="ColumnsEnabledJSON" value="[% Data.ColumnsEnabled | html %]" />
                             <input type="hidden" class="ColumnsAvailableJSON" value="[% Data.ColumnsAvailable | html %]" />
                             <input type="hidden" name="Group" value="[% Data.GroupName | html %]"/>
-                            <input type="hidden" name="FilterAction" value="[% Data.Name | html %]"/>
+                            <input type="hidden" name="FilterAction" value="[% Data.FilterAction | html %]"/>
                             <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
                             <div class="Field DontPrint LayoutGrid AllocationListContainer">
                                 <div class="Size1of2">

@@ -60,7 +60,7 @@ sub new {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # set pref for columns key
-    $Self->{PrefKeyColumns} = 'UserFilterColumnsEnabled' . '-' . $Self->{Action};
+    $Self->{PrefKeyColumns} = 'UserFilterColumnsEnabled' . '-' . $Self->{Action} . '-' . $Self->{Filter};
 
     # load backend config
     my $BackendConfigKey = 'ITSMConfigItem::Frontend::' . $Self->{Action};
@@ -71,7 +71,7 @@ sub new {
     );
 
     # set stored filters if present
-    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Self->{Filter};
     if ( $Preferences{$StoredFiltersKey} ) {
         my $StoredFilters = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
             Data => $Preferences{$StoredFiltersKey},
@@ -83,7 +83,7 @@ sub new {
     my %DefaultColumns = %{ $Self->{Config}->{DefaultColumns} || {} };
 
     # check for class filter
-    my $FilterName = IsHashRefWithData( $Param{Filters}->{ $Param{Filter} } ) ? $Param{Filters}->{ $Param{Filter} }->{Name} : 'All';
+    my $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
 
     # if class filter is set, display class specific fields
     my %ClassColumnDefinition;

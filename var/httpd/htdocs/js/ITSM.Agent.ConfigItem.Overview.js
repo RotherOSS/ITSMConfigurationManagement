@@ -51,10 +51,11 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
                         Class: 'Primary',
                         Function: function () {
                             var $ListContainer = $('.AllocationListContainer').find('.AssignedFields'),
+                                Filter = $('li.Active > a').text(),
                                 FieldID;
                             if (isJQueryObject($ListContainer) && $ListContainer.length) {
                                 $.each($ListContainer.find('li'), function() {
-                                    FieldID = 'UserFilterColumnsEnabled-' + $(this).attr('data-fieldname');
+                                    FieldID = 'UserFilterColumnsEnabled-' + $(this).attr('data-fieldname') + '-' + Filter;
 
                                     // only add this field if its not already there. This could happen
                                     // if e.g. the save button is clicked multiple times

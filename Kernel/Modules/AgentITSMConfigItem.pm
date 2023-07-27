@@ -82,11 +82,14 @@ sub Run {
     # get user object
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
+    # get filter from web request
+    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
         UserID => $Self->{UserID},
     );
-    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Filter;
     my $JSONObject       = $Kernel::OM->Get('Kernel::System::JSON');
     my $StoredFilters    = $JSONObject->Decode(
         Data => $Preferences{$StoredFiltersKey},
@@ -229,9 +232,6 @@ sub Run {
 
     # my config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # get filter from web request
-    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
 
     # to store the default class
     my $ClassIDAuto = '';
@@ -440,7 +440,7 @@ sub Run {
         # store column filters
         my $StoredFilters = \%ColumnFilter;
 
-        my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+        my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Self->{Filter};
         $UserObject->SetPreferences(
             UserID => $Self->{UserID},
             Key    => $StoredFiltersKey,

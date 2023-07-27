@@ -579,7 +579,7 @@ sub ITSMConfigItemListShow {
             if ( $View eq 'Small' ) {
 
                 # set preferences keys
-                my $PrefKeyColumns = 'UserFilterColumnsEnabled' . '-' . $Env->{Action};
+                my $PrefKeyColumns = 'UserFilterColumnsEnabled' . '-' . $Env->{Action} . '-' . $Param{Filter};
 
                 # create extra needed objects
                 my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
@@ -622,6 +622,7 @@ sub ITSMConfigItemListShow {
                         NamePref         => $PrefKeyColumns,
                         Desc             => Translatable('Shown Columns'),
                         Name             => $Env->{Action},
+                        FilterAction     => $Env->{Action} . '-' . $Param{Filter},
                         View             => $View,
                         GroupName        => 'ConfigItemOverviewFilterSettings',
                         %Param,
