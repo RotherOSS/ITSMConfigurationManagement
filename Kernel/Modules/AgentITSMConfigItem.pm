@@ -105,7 +105,7 @@ sub Run {
     my %GetColumnFilter;
     COLUMNNAME:
     for my $ColumnName (
-        qw(DeplState CurDeplState InciState CurInciState)
+        qw(DeplState CurDeplState InciState CurInciState Class)
         )
     {
         # get column filter from web request

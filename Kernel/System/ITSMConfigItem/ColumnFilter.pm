@@ -57,6 +57,33 @@ sub new {
     return $Self;
 }
 
+=head2 ClassFilterValuesGet()
+
+get a list of all config item classes
+
+    my $Values = $ColumnFilterObject->ClassFilterValuesGet();
+
+    returns
+
+    $Values = {
+        22 => 'Computer',
+        23 => 'Hardware',
+        24 => 'Location',
+        25 => 'Network',
+        26 => 'Software',
+    };
+
+=cut
+
+sub ClassFilterValuesGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+        Valid => 1,
+    );
+}
+
 =head2 DeplStateFilterValuesGet()
 
 get a list of all deployment states
@@ -66,8 +93,16 @@ get a list of all deployment states
     returns
 
     $Values = {
-        1 => 'New',
-        4 => 'Open',
+        27 => "Expired",
+        28 => "Inactive",
+        29 => "Maintenance",
+        30 => "Pilot",
+        31 => "Planned",
+        32 => "Production",
+        33 => "Repair",
+        34 => "Retired",
+        35 => "Review",
+        36 => "Test/QA",
     };
 
 =cut
@@ -75,12 +110,39 @@ get a list of all deployment states
 sub DeplStateFilterValuesGet {
     my ( $Self, %Param ) = @_;
 
-    my $DeplStates = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    return $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
         Valid => 1,
     );
+}
 
-    return $DeplStates;
+=head2 CurDeplStateFilterValuesGet()
+
+get a list of all current deployment states - wraps for DeplStateFilterValuesGet()
+
+    my $Values = $ColumnFilterObject->CurDeplStateFilterValuesGet();
+
+    returns
+
+    $Values = {
+        27 => "Expired",
+        28 => "Inactive",
+        29 => "Maintenance",
+        30 => "Pilot",
+        31 => "Planned",
+        32 => "Production",
+        33 => "Repair",
+        34 => "Retired",
+        35 => "Review",
+        36 => "Test/QA",
+    };
+
+=cut
+
+sub CurDeplStateFilterValuesGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->DeplStateFilterValuesGet(%Param);
 }
 
 =head2 InciStateFilterValuesGet()
@@ -92,8 +154,9 @@ get a list of all incident states
     returns
 
     $Values = {
-        1 => 'New',
-        4 => 'Open',
+        1 => "Operational",
+        2 => "Warning",
+        3 => "Incident"
     };
 
 =cut
@@ -101,12 +164,32 @@ get a list of all incident states
 sub InciStateFilterValuesGet {
     my ( $Self, %Param ) = @_;
 
-    my $InciStates = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    return $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::Core::IncidentState',
         Valid => 1,
     );
+}
 
-    return $InciStates;
+=head2 CurInciStateFilterValuesGet()
+
+get a list of all current incident states - wraps InciStateFilterValuesGet()
+
+    my $Values = $ColumnFilterObject->CurInciStateFilterValuesGet();
+
+    returns
+
+    $Values = {
+        1 => "Operational",
+        2 => "Warning",
+        3 => "Incident"
+    };
+
+=cut
+
+sub CurInciStateFilterValuesGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->InciStateFilterValuesGet(%Param);
 }
 
 =head2 DynamicFieldFilterValuesGet()
@@ -206,89 +289,5 @@ sub DynamicFieldFilterValuesGet {
 
     return \%Data;
 }
-
-=begin Internal:
-
-=head2 _GeneralDataGet()
-
-get data list
-
-    my $Values = $ColumnFilterObject->_GeneralDataGet(
-            ModuleName   => 'Kernel::System::Object',
-            FunctionName => 'FunctionNameList',
-            UserID       => $Param{UserID},
-    );
-
-    returns
-
-    $Values = {
-        1 => 'ValueA',
-        2 => 'ValueB',
-        3 => 'ValueC'
-    };
-
-=cut
-
-sub _GeneralDataGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Needed (qw(ModuleName FunctionName UserID)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
-    }
-
-    my $FunctionName = $Param{FunctionName};
-
-    # set the backend file
-    my $BackendModule = $Param{ModuleName};
-
-    # check if backend field exists
-    if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($BackendModule) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Can't load backend module $BackendModule!",
-        );
-        return;
-    }
-
-    # create a backend object
-    my $BackendObject = $BackendModule->new( %{$Self} );
-
-    if ( !$BackendObject ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Couldn't create a backend object for $BackendModule!",
-        );
-
-        return;
-    }
-
-    if ( ref $BackendObject ne $BackendModule ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Backend object for $BackendModule was not created successfully!",
-        );
-
-        return;
-    }
-
-    # get data list
-    my %DataList = $BackendObject->$FunctionName(
-        Valid  => 1,
-        UserID => $Param{UserID},
-    );
-
-    return \%DataList;
-}
-
-=end Internal:
-
-=cut
 
 1;
