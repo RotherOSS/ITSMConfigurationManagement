@@ -66,17 +66,23 @@ To find config items in your system.
         Name => '%SomeText%',
         Name => ['%SomeTest1%', '%SomeTest2%'],
 
-        Classes      => ['Computer', 'Network']   # (optional)
-        ClassIDs     => [9, 8, 7, 6],             # (optional)
+        Classes         => ['Computer', 'Network']   # (optional)
+        ClassIDs        => [9, 8, 7, 6],             # (optional)
 
-        DeplStates   => ['Production']            # (optional)
-        DeplStateIDs => [1, 2, 3, 4],             # (optional)
+        DeplStates      => ['Production']            # (optional)
+        DeplStateIDs    => [1, 2, 3, 4],             # (optional)
 
-        InciStates   => ['Warning']               # (optional)
-        InciStateIDs => [1, 2, 3, 4],             # (optional)
+        CurDeplStates   => ['Production']            # (optional)
+        CurDeplStateIDs => [1, 2, 3, 4],             # (optional)
 
-        CreateBy     => [1, 2, 3],                # (optional)
-        ChangeBy     => [3, 2, 1],                # (optional)
+        InciStates      => ['Warning']               # (optional)
+        InciStateIDs    => [1, 2, 3, 4],             # (optional)
+
+        CurInciStates   => ['Warning']               # (optional)
+        CurInciStateIDs => [1, 2, 3, 4],             # (optional)
+
+        CreateBy        => [1, 2, 3],                # (optional)
+        ChangeBy        => [3, 2, 1],                # (optional)
 
         # DynamicFields
         #   At least one operator must be specified. Operators will be connected with AND,
@@ -174,7 +180,7 @@ sub ConfigItemSearch {
     KEY:
     for my $Key (
         qw(
-            ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs InciStateIDs CreateBy ChangeBy
+            ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs CurDeplStateIDs InciStateIDs CurInciStateIDs CreateBy ChangeBy
         )
         )
     {
@@ -198,7 +204,7 @@ sub ConfigItemSearch {
     ARGUMENT:
     for my $Key (
         qw(
-            ClassIDs DeplStateIDs InciStateIDs CreateBy ChangeBy
+            ClassIDs DeplStateIDs CurDeplStateIDs InciStateIDs CurInciStateIDs CreateBy ChangeBy
         )
         )
     {
@@ -380,6 +386,42 @@ sub ConfigItemSearch {
         $SQLExt .= ' AND ( ' . $SQLQueryInCondition . ' ) ';
     }
 
+    # lookup current deployment states
+    if ( $Param{CurDeplStates} ) {
+
+        # get class list
+        my %CurDeplStateLookup = reverse %{
+            $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::ConfigItem::DeploymentState',
+            ) // {}
+        };
+
+        for my $CurDeplState ( @{ $Param{CurDeplStates} } ) {
+
+            if ( !$CurDeplStateLookup{$CurDeplState} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "No ID for $CurDeplState found!",
+                );
+
+                return;
+            }
+
+            push @{ $Param{CurDeplStateIDs} }, $CurDeplStateLookup{$CurDeplState};
+        }
+    }
+
+    # current deployment state ids
+    if ( $Param{CurDeplStateIDs} ) {
+        my $SQLQueryInCondition = $Kernel::OM->Get('Kernel::System::DB')->QueryInCondition(
+            Key       => 'ci.cur_depl_state_id',
+            Values    => $Param{CurDeplStateIDs},
+            QuoteType => 'Integer',
+            BindMode  => 0,
+        );
+        $SQLExt .= ' AND ( ' . $SQLQueryInCondition . ' ) ';
+    }
+
     # lookup incident states
     if ( $Param{InciStates} ) {
 
@@ -410,6 +452,42 @@ sub ConfigItemSearch {
         my $SQLQueryInCondition = $Kernel::OM->Get('Kernel::System::DB')->QueryInCondition(
             Key       => 'v.inci_state_id',
             Values    => $Param{InciStateIDs},
+            QuoteType => 'Integer',
+            BindMode  => 0,
+        );
+        $SQLExt .= ' AND ( ' . $SQLQueryInCondition . ' ) ';
+    }
+
+    # lookup current incident states
+    if ( $Param{CurInciStates} ) {
+
+        # get class list
+        my %CurInciStateLookup = reverse %{
+            $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::Core::IncidentState',
+            ) // {}
+        };
+
+        for my $CurInciState ( @{ $Param{CurInciStates} } ) {
+
+            if ( !$CurInciStateLookup{$CurInciState} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "No ID for $CurInciState found!",
+                );
+
+                return;
+            }
+
+            push @{ $Param{CurInciStateIDs} }, $CurInciStateLookup{$CurInciState};
+        }
+    }
+
+    # incident state ids
+    if ( $Param{CurInciStateIDs} ) {
+        my $SQLQueryInCondition = $Kernel::OM->Get('Kernel::System::DB')->QueryInCondition(
+            Key       => 'ci.cur_inci_state_id',
+            Values    => $Param{CurInciStateIDs},
             QuoteType => 'Integer',
             BindMode  => 0,
         );
