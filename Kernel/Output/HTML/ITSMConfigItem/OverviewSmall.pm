@@ -280,7 +280,7 @@ sub ActionRow {
                 $TranslatedWord = Translatable('Current Deployment State');
             }
             elsif ( $Column eq 'CurDeplStateType' ) {
-                $TranslatedWord = Translatable('Current Deployment State Type');
+                $TranslatedWord = Translatable('Deployment State Type');
             }
             elsif ( $Column eq 'InciState' ) {
                 $TranslatedWord = Translatable('Incident State');
@@ -845,7 +845,7 @@ sub Run {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
                 }
                 elsif ( $Column eq 'CurDeplStateType' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State Type');
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Deployment State Type');
                 }
                 elsif ( $Column eq 'InciState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
