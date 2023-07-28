@@ -996,6 +996,8 @@
                 <Item Key="Name" SelectedID="2"></Item>
                 <Item Key="CurDeplState" SelectedID="2"></Item>
                 <Item Key="CurInciState" SelectedID="2"></Item>
+                <Item Key="DeplState" SelectedID="0"></Item>
+                <Item Key="InciState" SelectedID="0"></Item>
                 <Item Key="LastChanged" SelectedID="2"></Item>
                 <Item Key="CurDeplStateType" SelectedID="1"></Item>
                 <Item Key="CurInciStateType" SelectedID="1"></Item>
