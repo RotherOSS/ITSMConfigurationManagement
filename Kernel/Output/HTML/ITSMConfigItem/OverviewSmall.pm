@@ -140,8 +140,8 @@ sub new {
     for my $DynamicFieldName ( $Self->{ColumnsAvailable}->@* ) {
 
         my $FieldName;
-        if ( $DynamicFieldName =~ m{ DynamicField_(?<fieldname>[A-Za-z0-9\-]+) }xms ) {
-            $FieldName = $+{fieldname};
+        if ( $DynamicFieldName =~ m{ DynamicField_(?<FieldName>[A-Za-z0-9\-]+) }xms ) {
+            $FieldName = $+{FieldName};
         }
         else {
             next DYNAMICFIELDNAME;
@@ -159,20 +159,15 @@ sub new {
         }
 
         # check filtrable and sortable behaviors
-        if ( grep {$DynamicFieldName} $Self->{ColumnsEnabled}->@* ) {
+        for my $Behavior (qw(Filtrable Sortable)) {
 
-            for my $Behavior (qw(Filtrable Sortable)) {
-                my $HasBehavior = $DynamicFieldBackendObject->HasBehavior(
-                    DynamicFieldConfig => $DynamicFieldConfig,
-                    Behavior           => "Is$Behavior",
-                );
+            my $HasBehavior = $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => "Is$Behavior",
+            );
 
-                if ($HasBehavior) {
-                    $Self->{"Available${Behavior}Columns"}{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
-                    if ( grep {$DynamicFieldName} $Self->{ColumnsEnabled}->@* ) {
-                        $Self->{"Valid${Behavior}Columns"}{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
-                    }
-                }
+            if ($HasBehavior) {
+                $Self->{"Available${Behavior}Columns"}{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
             }
         }
     }
@@ -181,9 +176,6 @@ sub new {
     # SortBy  => 'Age',   # Created|Number|Changed|Name|DeplState|CurDeplState
     # |InciState|CurInciState
     $Self->{ValidSortableColumns} = {
-        defined $Self->{ValidSortableColumns}
-        ? $Self->{ValidSortableColumns}->%*
-        : (),
         'Age'          => 1,
         'Number'       => 1,
         'Name'         => 1,
@@ -195,9 +187,9 @@ sub new {
         'CurInciState' => 1,
     };
 
-    $Self->{AvailableFilterableColumns} = {
-        defined $Self->{AvailableFilterableColumns}
-        ? $Self->{AvailableFilterableColumns}->%*
+    $Self->{AvailableFiltrableColumns} = {
+        defined $Self->{AvailableFiltrableColumns}
+        ? $Self->{AvailableFiltrableColumns}->%*
         : (),
         'Class'        => 1,
         'DeplState'    => 1,
@@ -287,6 +279,9 @@ sub ActionRow {
             elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
                 $TranslatedWord = Translatable('Current Deployment State');
             }
+            elsif ( $Column eq 'CurDeplStateType' ) {
+                $TranslatedWord = Translatable('Current Deployment State Type');
+            }
             elsif ( $Column eq 'InciState' ) {
                 $TranslatedWord = Translatable('Incident State');
             }
@@ -356,9 +351,9 @@ sub Run {
     # If $Param{EnableColumnFilters} is not sent, we want to disable all filters
     #   for the current screen. We localize the setting for this sub and change it
     #   after that, if needed. The original value will be restored after this function.
-    local $Self->{AvailableFilterableColumns} = $Self->{AvailableFilterableColumns};
+    local $Self->{AvailableFiltrableColumns} = $Self->{AvailableFiltrableColumns};
     if ( !$Param{EnableColumnFilters} ) {
-        $Self->{AvailableFilterableColumns} = {};    # disable all column filters
+        $Self->{AvailableFiltrableColumns} = {};    # disable all column filters
     }
 
     for my $Item (qw(ConfigItemIDs PageShown StartHit)) {
@@ -480,7 +475,7 @@ sub Run {
             $ConfigItem{CurDeplSignal} = $DeplSignals{ $ConfigItem{CurDeplState} };
             $ConfigItem{CurInciSignal} = $InciSignals{ $ConfigItem{CurInciStateType} };
 
-            # show config item create time in small view
+            # fill column name attribute with corresponding item attribute
             $ConfigItem{Created}     = $ConfigItem{CreateTime};
             $ConfigItem{LastChanged} = $ConfigItem{ChangeTime};
 
@@ -489,7 +484,7 @@ sub Run {
             my $Counter = 0;
 
             # get all registered Actions
-            if ( ref $ConfigObject->Get('ITSMConfigItme::Frontend::Module') eq 'HASH' ) {
+            if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::Module') eq 'HASH' ) {
 
                 my %Actions = %{ $ConfigObject->Get('ITSMConfigItem::Frontend::Module') };
 
@@ -596,8 +591,8 @@ sub Run {
         # check if column is really filterable
         COLUMNNAME:
         for my $ColumnName ( @{ $Self->{ColumnsEnabled} } ) {
-            next COLUMNNAME if !$Self->{AvailableFilterableColumns}->{$ColumnName};
-            $Self->{ValidFilterableColumns}->{$ColumnName} = 1;
+            next COLUMNNAME if !$Self->{AvailableFiltrableColumns}->{$ColumnName};
+            $Self->{ValidFiltrableColumns}->{$ColumnName} = 1;
         }
     }
 
@@ -665,6 +660,7 @@ sub Run {
             my $Title   = $LayoutObject->{LanguageObject}->Translate($Column);
             my $OrderBy = $Param{OrderBy};
 
+            # Transform filter name to column name
             if ( $Param{SortBy} eq 'Changed' ) {
                 $Param{SortBy} = 'LastChanged';
             }
@@ -698,23 +694,11 @@ sub Run {
 
                 # translate the column name to write it in the current language
                 my $TranslatedWord;
-                if ( $Column eq 'DeplState' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Deployment State');
-                }
-                elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+                if ( $Column eq 'CurDeplSignal' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
                 }
-                elsif ( $Column eq 'InciState' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
-                }
-                elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+                elsif ( $Column eq 'CurInciSignal' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State');
-                }
-                elsif ( $Column eq 'CurInciStateType' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State Type');
-                }
-                elsif ( $Column eq 'LastChanged' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Last changed');
                 }
                 else {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
@@ -750,7 +734,7 @@ sub Run {
 
                 # verify if column is filterable and sortable
                 if (
-                    $Self->{ValidFilterableColumns}->{$Column}
+                    $Self->{ValidFiltrableColumns}->{$Column}
                     && $Self->{ValidSortableColumns}->{$Column}
                     )
                 {
@@ -778,7 +762,7 @@ sub Run {
                 }
 
                 # verify if column is filterable
-                elsif ( $Self->{ValidFilterableColumns}->{$Column} ) {
+                elsif ( $Self->{ValidFiltrableColumns}->{$Column} ) {
 
                     # variable to save the filter's HTML code
                     my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -860,6 +844,9 @@ sub Run {
                 elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
                 }
+                elsif ( $Column eq 'CurDeplStateType' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State Type');
+                }
                 elsif ( $Column eq 'InciState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
                 }
@@ -897,7 +884,7 @@ sub Run {
 
                 # verify if column is filterable and sortable
                 if (
-                    $Self->{ValidFilterableColumns}->{$Column}
+                    $Self->{ValidFiltrableColumns}->{$Column}
                     && $Self->{ValidSortableColumns}->{$Column}
                     )
                 {
@@ -926,7 +913,7 @@ sub Run {
                 }
 
                 # verify if column is just filterable
-                elsif ( $Self->{ValidFilterableColumns}->{$Column} ) {
+                elsif ( $Self->{ValidFiltrableColumns}->{$Column} ) {
 
                     # variable to save the filter's HTML code
                     my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1047,7 +1034,7 @@ sub Run {
 
                     my $DynamicFieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
 
-                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+                    if ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
 
                         # variable to save the filter's HTML code
                         my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1093,7 +1080,7 @@ sub Run {
                         },
                     );
 
-                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+                    if ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
 
                         # variable to save the filter's HTML code
                         my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1145,7 +1132,7 @@ sub Run {
                         },
                     );
 
-                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+                    if ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
 
                         # variable to save the filter's HTML code
                         my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1186,7 +1173,7 @@ sub Run {
                         },
                     );
 
-                    if ( $Self->{ValidFilterableColumns}->{$DynamicFieldName} ) {
+                    if ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
 
                         # variable to save the filter's HTML code
                         my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1301,6 +1288,7 @@ sub Run {
                     || $ConfigItemColumn eq 'CurDeplState'
                     || $ConfigItemColumn eq 'InciState'
                     || $ConfigItemColumn eq 'CurInciState'
+                    || $ConfigItemColumn eq 'Class'
                     )
                 {
                     $BlockType = 'Translatable';
@@ -1513,7 +1501,7 @@ sub _GetColumnValues {
                 Behavior           => 'IsFiltrable',
             );
             next DYNAMICFIELD if !$IsFiltrable;
-            $Self->{ValidFilterableColumns}->{$HeaderColumn} = $IsFiltrable;
+            $Self->{ValidFiltrableColumns}->{$HeaderColumn} = $IsFiltrable;
             if ( IsArrayRefWithData($ConfigItemIDs) ) {
 
                 # get the historical values for the field
@@ -1541,7 +1529,7 @@ sub _InitialColumnFilter {
     my ( $Self, %Param ) = @_;
 
     return if !$Param{ColumnName};
-    return if !$Self->{ValidFilterableColumns}->{ $Param{ColumnName} };
+    return if !$Self->{ValidFiltrableColumns}->{ $Param{ColumnName} };
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -1565,6 +1553,7 @@ sub _InitialColumnFilter {
         || $Param{ColumnName} eq 'CurDeplState'
         || $Param{ColumnName} eq 'InciState'
         || $Param{ColumnName} eq 'CurInciState'
+        || $Param{ColumnName} eq 'Class'
         )
     {
         $TranslationOption = 1;
@@ -1665,8 +1654,8 @@ sub _ColumnFilterJSON {
     my ( $Self, %Param ) = @_;
 
     if (
-        !$Self->{AvailableFilterableColumns}->{ $Param{ColumnName} } &&
-        !$Self->{AvailableFilterableColumns}->{ $Param{ColumnName} . 'IDs' }
+        !$Self->{AvailableFiltrableColumns}->{ $Param{ColumnName} } &&
+        !$Self->{AvailableFiltrableColumns}->{ $Param{ColumnName} . 'IDs' }
         )
     {
         return;
@@ -1713,6 +1702,7 @@ sub _ColumnFilterJSON {
         || $Param{ColumnName} eq 'CurDeplState'
         || $Param{ColumnName} eq 'InciState'
         || $Param{ColumnName} eq 'CurInciState'
+        || $Param{ColumnName} eq 'Class'
         )
     {
         $TranslationOption = 1;
@@ -1740,14 +1730,14 @@ sub _ColumnFilterJSON {
 sub _DefaultColumnSort {
 
     my %DefaultColumns = (
-        CurDeplSignal      => 110,
-        CurInciSignal      => 111,
-        Class              => 112,
-        Number             => 113,
-        Name               => 114,
-        CurDeplState       => 115,
-        CurInciState       => 116,
-        LastChanged        => 117,
+        CurDeplSignal => 110,
+        CurInciSignal => 111,
+        Class         => 112,
+        Number        => 113,
+        Name          => 114,
+        CurDeplState  => 115,
+        CurInciState  => 116,
+        LastChanged   => 117,
     );
 
     # dynamic fields can not be on the DefaultColumns sorting hash
