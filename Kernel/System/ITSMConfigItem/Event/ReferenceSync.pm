@@ -27,14 +27,15 @@ use utf8;
 
 # OTOBO modules
 
-our @ObjectDependencies = (
-    'Kernel::System::ITSMConfigItem',
-    'Kernel::System::Log',
+our @ObjectDependencies = qw(
+    Kernel::System::DynamicField
+    Kernel::System::ITSMConfigItem
+    Kernel::System::Log
 );
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::ReferenceSync - Event handler keeps a lookup table for References
+Kernel::System::ITSMConfigItem::Event::ReferenceSync - Event handler that maintains a lookup table for Reference dynamic fields
 
 =head1 PUBLIC INTERFACE
 
@@ -56,31 +57,35 @@ sub new {
     return bless {}, $Type;
 }
 
-# TODO: add complete Data hash to POD
-
 =head2 Run()
 
 This method handles the event.
 
-    $DoHistoryObject->Run(
-        Event => 'ConfigItemDynamicFieldUpdate_MyNiceReference',
-        Data  => {
-            Comment      => 'new value: 1',
-            ConfigItemID => 123,
+    $HandlerObject->Run(
+        Config      => {
+            Event => "^ConfigItemDynamicFieldUpdate_",
+            Module => "Kernel::System::ITSMConfigItem::Event::ReferenceSync",
+            Transaction => 1,
         },
-        UserID => 1,
+        Data        => {
+            ConfigItemID        => 10,
+            ConfigItemVersionID => 20,
+            FieldName           => "ReferenceToComputer",
+            OldValue            => undef,
+            ReadableOldValue    => "",
+            ReadableValue       => 7,
+            UserID              => 3,
+            Value               => 7,
+        },
+        Event       => "ConfigItemDynamicFieldUpdate_StoneCheckbox",
+        Transaction => 1,
+        UserID      => 3,
     );
 
 =cut
 
 sub Run {
     my ( $Self, %Param ) = @_;
-
-    # as DefinitionCreate does not belong to an item, we don't create
-    # a history entry
-    if ( $Param{Event} && $Param{Event} eq 'DefinitionCreate' ) {
-        return;
-    }
 
     # check needed stuff
     for my $Missing ( grep { !$Param{$_} } qw(Data Event UserID) ) {
@@ -96,13 +101,33 @@ sub Run {
     # Everything als will be graciously ignored.
     return 1 unless $Param{Event} =~ m/^ConfigItemDynamicFieldUpdate_/;
 
+    # This event module care only about Reference dynamic fields.
+    return 1 unless $Param{Data}->{FieldName};
+
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicField       = $DynamicFieldObject->DynamicFieldGet(
+        Name => $Param{Data}->{FieldName},
+    );
+
+    return 1 unless $DynamicField;
+    return 1 unless $DynamicField->{FieldType};
+    return 1 unless $DynamicField->{FieldType} eq 'Reference';
+
+    # This event module care only about references to other config items
+    return 1 unless $DynamicField->{Config};
+    return 1 unless $DynamicField->{Config}->{ReferencedObjectType};
+    return 1 unless $DynamicField->{Config}->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
+
+    # actually update configitem_reference
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # TODO: actually update configitem_reference
-    my $Success = 1;
-
-    return unless $Success;
-    return 1;
+    return $ConfigItemObject->SyncReferenceTable(
+        DynamicField              => $DynamicField,
+        SourceConfigItemID        => $Param{Data}->{ConfigItemID},          # currently not used
+        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},
+        OldValue                  => $Param{Data}->{OldValue},
+        Value                     => $Param{Data}->{Value},
+    );
 }
 
 1;

@@ -631,13 +631,14 @@ END_SQL
             $Self->EventHandler(
                 Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
                 Data  => {
-                    FieldName        => $DynamicField->{Name},
-                    Value            => $Version{ 'DynamicField_' . $DynamicField->{Name} },
-                    OldValue         => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
-                    ReadableValue    => $ReadableValue->{Value},
-                    ReadableOldValue => $ReadableOldValue->{Value},
-                    ConfigItemID     => $Version{ConfigItemID},
-                    UserID           => $Param{UserID},
+                    FieldName           => $DynamicField->{Name},
+                    Value               => $Version{ 'DynamicField_' . $DynamicField->{Name} },
+                    OldValue            => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
+                    ReadableValue       => $ReadableValue->{Value},
+                    ReadableOldValue    => $ReadableOldValue->{Value},
+                    ConfigItemID        => $Version{ConfigItemID},
+                    ConfigItemVersionID => $VersionID,
+                    UserID              => $Param{UserID},
                 },
                 UserID => $Param{UserID},
             );
@@ -783,13 +784,14 @@ END_SQL
             $Self->EventHandler(
                 Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
                 Data  => {
-                    FieldName        => $DynamicField->{Name},
-                    Value            => $Param{ 'DynamicField_' . $DynamicField->{Name} },
-                    OldValue         => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
-                    ReadableValue    => $ReadableValue->{Value},
-                    ReadableOldValue => $ReadableOldValue->{Value},
-                    ConfigItemID     => $Version->{ConfigItemID},
-                    UserID           => $Param{UserID},
+                    FieldName           => $DynamicField->{Name},
+                    Value               => $Param{ 'DynamicField_' . $DynamicField->{Name} },
+                    OldValue            => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
+                    ReadableValue       => $ReadableValue->{Value},
+                    ReadableOldValue    => $ReadableOldValue->{Value},
+                    ConfigItemID        => $Version->{ConfigItemID},
+                    ConfigItemVersionID => $Version->{VersionID},
+                    UserID              => $Param{UserID},
                 },
                 UserID => $Param{UserID},
             );

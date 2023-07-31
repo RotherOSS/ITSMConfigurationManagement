@@ -362,7 +362,7 @@
             <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="link_type_id" Required="true" Type="INTEGER" />
-            <Column Name="dynamic_field_value_id" Required="true" Type="INTEGER" />
+            <Column Name="dynamic_field_id" Required="true" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
             <ForeignKey ForeignTable="configitem_version">
@@ -377,8 +377,8 @@
             <ForeignKey ForeignTable="link_type">
                 <Reference Local="link_type_id" Foreign="id" />
             </ForeignKey>
-            <ForeignKey ForeignTable="dynamic_field_value">
-                <Reference Local="dynamic_field_value_id" Foreign="id" />
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="dynamic_field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
         <TableAlter Name="acl">
@@ -1227,7 +1227,7 @@
             <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="link_type_id" Required="true" Type="INTEGER" />
-            <Column Name="dynamic_field_value_id" Required="true" Type="INTEGER" />
+            <Column Name="dynamic_field_id" Required="true" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
             <ForeignKey ForeignTable="configitem_version">
@@ -1242,8 +1242,8 @@
             <ForeignKey ForeignTable="link_type">
                 <Reference Local="link_type_id" Foreign="id" />
             </ForeignKey>
-            <ForeignKey ForeignTable="dynamic_field_value">
-                <Reference Local="dynamic_field_value_id" Foreign="id" />
+            <ForeignKey ForeignTable="dynamic_field">
+                <Reference Local="dynamic_field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
         <TableAlter Name="configitem_definition" Version="11.0.0">

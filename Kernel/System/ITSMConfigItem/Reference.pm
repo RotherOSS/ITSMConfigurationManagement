@@ -46,6 +46,66 @@ Planned is also support for dumping the complete graph so that it can be used fo
 
 =head1 PUBLIC INTERFACE
 
+=head2 SyncReferenceTable()
+
+This method entails the logic for keeping the table B<configitem_reference> in sync
+with dynamic field updates.
+
+=cut
+
+sub SyncReferenceTable {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Missing ( grep { !$Param{$_} } qw(DynamicField SourceConfigItemVersionID Value) ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need $Missing!",
+        );
+
+        return;
+    }
+
+    my $ReferencedObjectType = $Param{DynamicField}->{Config}->{ReferencedObjectType};
+
+    if ( $ReferencedObjectType ne 'ITSMConfigItem' && $ReferencedObjectType ne 'ITSMConfigItemVersion' ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "The parameter ReferencedObjectType must be either ITSMConfigItem or ITSMConfigItemVersion!",
+        );
+
+        return;
+    }
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # Clean up first in all cases.
+    $DBObject->Do(
+        SQL => <<'END_SQL',
+DELETE FROM configitem_reference
+  WHERE source_configitem_version_id = ?
+    AND dynamic_field_id             = ?
+END_SQL
+        Bind => [ \$Param{SourceConfigItemVersionID}, \$Param{DynamicField}->{ID} ],
+    );
+
+    # INSERT the new value if there is one
+    if ( $Param{Value} ) {
+        my $TargetConfigItemID        = $ReferencedObjectType eq 'ITSMConfigItem'        ? $Param{Value} : undef;
+        my $TargetConfigItemVersionID = $ReferencedObjectType eq 'ITSMConfigItemVersion' ? $Param{Value} : undef;
+        $DBObject->Do(
+            SQL => <<'END_SQL',
+INSERT INTO configitem_reference (link_type_id, source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
+create_time, create_by )
+  VALUES (1, ?, ?, ?, ?, current_timestamp, 1 )
+END_SQL
+            Bind => [ \$Param{SourceConfigItemVersionID}, \$TargetConfigItemID, \$TargetConfigItemVersionID, \$Param{DynamicField}->{ID} ],
+        );
+    }
+
+    return 1;
+}
+
 =head2 RebuildReferenceTable()
 
 purge and repopulate the table B<configitem_reference> based on the Reference dynamic fields.
@@ -123,24 +183,27 @@ sub RebuildReferenceTable {
     # Get the relevant dynamic field values.
     # The methods in Kernel::System::DynamicFieldValue are specific to specific fields,
     # so use dedicated SQL here.
-    my @DynamicFieldIDs = map { $_->{ID} } @DynamicFields;
-    my $PlaceHolders =
-        join ', ',
-        map {'?'}
-        @DynamicFieldIDs;
-    my $Binds = [ map { \$_ } @DynamicFieldIDs ];    # the special case \(@Array) is too strange
-    my $Rows  = $DBObject->SelectAll(
-        SQL => << "END_SQL",
+    my $Rows;
+    {
+        my @DynamicFieldIDs = map { $_->{ID} } @DynamicFields;
+        my $PlaceHolders =
+            join ', ',
+            map {'?'}
+            @DynamicFieldIDs;
+        my $Binds = [ map { \$_ } @DynamicFieldIDs ];    # the special case \(@Array) is too strange
+        $Rows = $DBObject->SelectAll(
+            SQL => << "END_SQL",
 SELECT id, field_id, object_id, value_int
   FROM dynamic_field_value
   WHERE field_id IN ( $PlaceHolders )
   ORDER by id
 END_SQL
-        Bind => $Binds,
-    );
+            Bind => $Binds,
+        );
+    }
 
     # prepare the dynamic field values so that it can be used in a batch insert
-    my @DynamicFieldValueIDs       = map { $_->[0] } $Rows->@*;
+    my @DynamicFieldIDs            = map { $_->[1] } $Rows->@*;
     my @SourceConfigItemVersionIDs = map { $_->[2] } $Rows->@*;
     my @TargetConfigItemIDs        = map { $IsConfigItem{ $_->[1] }        ? $_->[3] : undef } $Rows->@*;
     my @TargetConfigItemVersionIDs = map { $IsConfigItemVersion{ $_->[1] } ? $_->[3] : undef } $Rows->@*;
@@ -149,7 +212,7 @@ END_SQL
     # TODO: This is just prove of concept
     my $DBHandle        = $DBObject->Connect;
     my $StatementHandle = $DBHandle->prepare( <<'END_SQL' );
-INSERT INTO configitem_reference(link_type_id, source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_value_id, create_time, create_by)
+INSERT INTO configitem_reference (link_type_id, source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id, create_time, create_by)
   VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), 1)
 END_SQL
     my $Tuples = $StatementHandle->execute_array(
@@ -158,7 +221,7 @@ END_SQL
         \@SourceConfigItemVersionIDs,
         \@TargetConfigItemIDs,
         \@TargetConfigItemVersionIDs,
-        \@DynamicFieldValueIDs,
+        \@DynamicFieldIDs,
     );
 
     if ( !defined $Tuples ) {
