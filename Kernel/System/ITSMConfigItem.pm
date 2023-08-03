@@ -45,20 +45,20 @@ use Kernel::System::VariableCheck qw(:all);
 
 our $Self;    # TODO: what is the package variable used for ???
 
-our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::DB',
-    'Kernel::System::DynamicField',
-    'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Cache',
-    'Kernel::System::GeneralCatalog',
-    'Kernel::System::LinkObject',
-    'Kernel::System::Log',
-    'Kernel::System::Main',
-    'Kernel::System::Service',
-    'Kernel::System::User',
-    'Kernel::System::VirtualFS',
-    'Kernel::System::XML',
+our @ObjectDependencies = qw(
+    Kernel::Config
+    Kernel::System::DB
+    Kernel::System::DynamicField
+    Kernel::System::DynamicField::Backend
+    Kernel::System::Cache
+    Kernel::System::GeneralCatalog
+    Kernel::System::LinkObject
+    Kernel::System::Log
+    Kernel::System::Main
+    Kernel::System::Service
+    Kernel::System::User
+    Kernel::System::VirtualFS
+    Kernel::System::XML
 );
 
 =head1 NAME
@@ -858,8 +858,8 @@ sub ConfigItemUpdate {
     my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
     my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{$Class} // [] };
 
-    my %Changed;
-    my $AddVersion = 0;
+    my %Changed;           # track changed values for the Event handler, e.g. for writing history
+    my $AddVersion = 0;    # flag for deciding whether a new version is created
 
     # name, deployment and incident state
     ATTR:
@@ -915,7 +915,6 @@ sub ConfigItemUpdate {
             LastVersion => $ConfigItem,
         );
     }
-
     else {
         $Self->VersionUpdate(
             %Param,
