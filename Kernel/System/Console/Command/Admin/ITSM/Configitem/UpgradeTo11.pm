@@ -97,16 +97,41 @@ sub Run {
         $Self->Print("<yellow>Starting CMDB upgrade!</yellow>\n");
     }
 
+    $Self->{GeneralCatalogObject} = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    $Self->{ConfigItemObject}     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    $Self->{ClassList} = $Self->{GeneralCatalogObject}->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+    );
+
+    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+        $Self->{DefinitionList}{ $ClassID } = $Self->{ConfigItemObject}->DefinitionList(
+            ClassID => $ClassID,
+        );
+    }
+
     my $Success;
     STEP:
     for my $i ( $StartAt .. $#Steps ) {
-        $Success = $Sub{ $Steps[ $i ] }->( $Self );
+        $Success = $Sub{ $Steps[ $i ] }->(
+            $Self,
+            CurrentStep => $i,
+        );
 
         last STEP if !$Success;
         last STEP if $Success ne 'Next';
     }
 
-    return $Self->ExitCodeOk();
+    if ( $Success ) {
+        $Self->Print("<green>Done!</green>\n");
+
+        return $Self->ExitCodeOk();
+    }
+    else {
+        $Self->Print("<green>An error occured!</green>\n");
+
+        return $Self->ExitCodeError();
+    }
 }
 
 sub _GetCurrentStep {
@@ -120,7 +145,29 @@ sub _PrepareAttributeMapping {
 
     $Self->Print("<yellow>Writing attribute maps.</yellow>\n");
 
-    return 'Next';
+    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+        my %Attributes;
+
+        for my $Definition ( $Self->{DefinitionList}{ $ClassID }->@* ) {
+            my @CurAttributes = $Self->_GetAttributesFromLegacyYAML(
+                Definition => $Definition,
+                Subs       => 1,
+            );
+
+            %Attributes = (
+                %Attributes,
+                map { $_->{Key} => 1 } @CurAttributes,
+            );
+        }
+
+        for my $Key ( keys %Attributes ) {
+            my $DFName = $Key =~ s/[^\w\d]//gr;
+
+            # write file
+        }
+    }
+
+    return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
 }
 
 sub _PrepareDefinitions {
@@ -128,7 +175,8 @@ sub _PrepareDefinitions {
 
     $Self->Print("<yellow>Writing class definitions.</yellow>\n");
 
-    return 'Next';
+
+    return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
 }
 
 sub _MigrateDefinitions {
@@ -151,9 +199,53 @@ sub _DeleteLegacyData {
     my ( $Self, %Param ) = @_;
 
     $Self->Print("<yellow>Optionally all legacy data can be deleted. This step is not necessary for the migrated CMDB to work and can be done at any later time.</yellow>\n");
-    $Self->Print("<red>Do you really want to permanently delete all legacy data from the system? (yes/no)</red>\n");
+    $Self->Print("\n<red>Do you really want to permanently delete all legacy data from the system? (yes/no)</red>\n");
 
     return 'Next';
+}
+
+sub _GetAttributesFromLegacyYAML {
+    my ( $Self, %Param ) = @_;
+
+    my @Attributes;
+    my $DefinitionRef = $Param{DefinitionRef} // $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $Param{Definition},
+    );
+
+    if ( ref $DefinitionRef ne 'ARRAY' ) {
+        $Self->Print("<red>Need a valid legacy definition!</red>\n");
+
+        die;
+    }
+
+    for my $Attribute ( $DefinitionRef->@* ) {
+        push @Attributes, $Attribute;
+
+        if ( $Attribute->{Subs} ) {
+            push @Attributes, $Self->_GetAttributesFromLegacyYAML( DefinitionRef => delete $Attribute->{Sub} );
+
+            $Attribute->{Key}  .= '<SubPrimaryAttribute>';
+            $Attribute->{Name} .= ' Name';
+
+            push @Attributes, $Attribute;
+        }
+    }
+
+    return @Attributes;
+}
+
+sub _ContinueOrNot {
+    my ( $Self, %Param ) = @_;
+
+    return 'Next' if $Self->{UseDefaults};
+
+    $Self->Print("<yellow>You can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n");
+    $Self->Print("\tbin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 --start-at ". $Param{CurrentStep} + 1 ."\n");
+    $Self->Print("\n<yellow>To exit the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n");
+
+    return 'Next' if <STDIN> =~ /^def(ault)?$/;
+
+    return 'Exit';
 }
 
 1;
