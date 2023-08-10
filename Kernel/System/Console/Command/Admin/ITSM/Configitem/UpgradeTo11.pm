@@ -19,9 +19,13 @@ package Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::Console::BaseCommand);
+
+# core modules
+use File::Path qw(mkpath);
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
 
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::ForeachToFor)
 
@@ -86,11 +90,19 @@ sub Run {
         'Delete Legacy Data'        => \&_DeleteLegacyData,
     );
 
-    $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || 'var/tmp/CMDBUpgradeTo11Schemata';
+    my $OTOBOHome = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || $OTOBOHome . 'var/tmp/CMDBUpgradeTo11Schemata';
     $Self->{UseDefaults} = $Self->GetOption('use-defaults');
     my $StartAt          = $Self->GetOption('start-at') // $Self->_GetCurrentStep();
 
     if ( $StartAt ) {
+        if ( !-d $Self->{WorkingDir} ) {
+            $Self->Print("<red>Need existing working directory '$Self->{WorkingDir}'.</red>\n");
+
+            die;
+        }
+
         $Self->Print("<yellow>Continue CMDB upgrade at: '$Steps[ $StartAt ]'!</yellow>\n");
     }
     else {
@@ -99,6 +111,7 @@ sub Run {
 
     $Self->{GeneralCatalogObject} = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     $Self->{ConfigItemObject}     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    $Self->{YAMLObject}           = $Kernel::OM->Get('Kernel::System::YAML');
 
     $Self->{ClassList} = $Self->{GeneralCatalogObject}->ItemList(
         Class => 'ITSM::ConfigItem::Class',
@@ -145,12 +158,24 @@ sub _PrepareAttributeMapping {
 
     $Self->Print("<yellow>Writing attribute maps.</yellow>\n");
 
+    if ( !-d $Self->{WorkingDir} ) {
+        mkpath( [$Self->{WorkingDir}], 0, 0770 );    ## no critic qw(ValuesAndExpressions::ProhibitLeadingZeros)
+    }
+
+    if ( !-d $Self->{WorkingDir} ) {
+        $Self->Print("<red>Could not create the working directory '$Self->{WorkingDir}'.</red>\n");
+
+        die;
+    }
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
         my %Attributes;
 
         for my $Definition ( $Self->{DefinitionList}{ $ClassID }->@* ) {
             my @CurAttributes = $Self->_GetAttributesFromLegacyYAML(
-                Definition => $Definition,
+                Definition => $Definition->{Definition},
                 Subs       => 1,
             );
 
@@ -160,11 +185,16 @@ sub _PrepareAttributeMapping {
             );
         }
 
-        for my $Key ( keys %Attributes ) {
-            my $DFName = $Key =~ s/[^\w\d]//gr;
+        my %AttributeMap = map { $_ => $_ =~ s/[^\w\d]//gr } keys %Attributes;
+        my $MapYAML      = $Self->{YAMLObject}->Dump(
+            Data => \%AttributeMap,
+        );
 
-            # write file
-        }
+        my $FileLocation = $MainObject->FileWrite(
+            Directory => $Self->{WorkingDir},
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{ $ClassID },
+            Content   => \$MapYAML,
+        );
     }
 
     return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
@@ -175,6 +205,37 @@ sub _PrepareDefinitions {
 
     $Self->Print("<yellow>Writing class definitions.</yellow>\n");
 
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    CLASS:
+    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+        my $MapRef = $MainObject->FileRead(
+            Directory => $Self->{WorkingDir},
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{ $ClassID },
+        );
+
+        my %AttributeMap = $Self->{YAMLObject}->Load(
+            Data => ${ $MapRef },
+        );
+
+        for my $Definition ( $Self->{DefinitionList}{ $ClassID }->@* ) {
+            my @Attributes = $Self->_GetAttributesFromLegacyYAML(
+                Definition => $Definition->{Definition},
+            );
+
+            my $DefinitionYAML = $Self->_GenerateDefinitionYAML(
+                Attributes   => \@Attributes,
+                AttributeMap => \%AttributeMap,
+                Class        => $Self->{ClassList}{ $ClassID },
+            );
+
+            my $FileLocation = $MainObject->FileWrite(
+                Directory => $Self->{WorkingDir},
+                Filename  => 'DefinitionMap_' . $Self->{ClassList}{ $ClassID } . '_' . $Definition->{DefinitionID},
+                Content   => \$DefinitionYAML,
+            );
+        }
+    }
 
     return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
 }
@@ -204,11 +265,56 @@ sub _DeleteLegacyData {
     return 'Next';
 }
 
+sub _GenerateDefinitionYAML {
+    my ( $Self, %Param ) = @_;
+
+    my $YAML = <<EOY;
+---
+Pages:
+  - Name: Content
+    Layout:
+      Columns: 1
+      ColumnWidth: 1fr
+    Content:
+      - Section: Attributes
+        ColumnStart: 1
+        RowStart: 1
+
+Sections:
+  Attributes:
+    Content:
+EOY
+
+    my %DynamicFields;
+    for my $Attribute ( $Param{Attributes}->@* ) {
+        $YAML .= "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
+
+        my %DFBasic = (
+            Name       => $Param{AttributeMap}{ $Attribute->{Key} },
+            Label      => $Attribute->{Name},
+            ObjectType => 'ITSMConfigItem',
+            CIClass    => $Param{Class},
+        );
+
+        # Continue reading out FieldType and Config
+        if ( $Attribute->{Sub} ) {
+        }
+        else {
+            
+        }
+    }
+    $YAML .= "\n";
+
+    
+
+    return $YAML;
+}
+
 sub _GetAttributesFromLegacyYAML {
     my ( $Self, %Param ) = @_;
 
     my @Attributes;
-    my $DefinitionRef = $Param{DefinitionRef} // $Kernel::OM->Get('Kernel::System::YAML')->Load(
+    my $DefinitionRef = $Param{DefinitionRef} // $Self->{YAMLObject}->Load(
         Data => $Param{Definition},
     );
 
