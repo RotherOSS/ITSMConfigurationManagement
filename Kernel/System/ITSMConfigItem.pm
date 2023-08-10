@@ -45,20 +45,20 @@ use Kernel::System::VariableCheck qw(:all);
 
 our $Self;    # TODO: what is the package variable used for ???
 
-our @ObjectDependencies = qw(
-    Kernel::Config
-    Kernel::System::DB
-    Kernel::System::DynamicField
-    Kernel::System::DynamicField::Backend
-    Kernel::System::Cache
-    Kernel::System::GeneralCatalog
-    Kernel::System::LinkObject
-    Kernel::System::Log
-    Kernel::System::Main
-    Kernel::System::Service
-    Kernel::System::User
-    Kernel::System::VirtualFS
-    Kernel::System::XML
+our @ObjectDependencies = (
+    'Kernel::Config',
+    'Kernel::System::DB',
+    'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Cache',
+    'Kernel::System::GeneralCatalog',
+    'Kernel::System::LinkObject',
+    'Kernel::System::Log',
+    'Kernel::System::Main',
+    'Kernel::System::Service',
+    'Kernel::System::User',
+    'Kernel::System::VirtualFS',
+    'Kernel::System::XML',
 );
 
 =head1 NAME

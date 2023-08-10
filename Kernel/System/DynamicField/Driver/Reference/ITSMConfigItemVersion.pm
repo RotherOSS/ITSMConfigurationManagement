@@ -30,10 +30,10 @@ use parent qw(Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem);
 
 # OTOBO modules
 
-our @ObjectDependencies = qw(
-    Kernel::Config
-    Kernel::System::Log
-    Kernel::System::ITSMConfigItem
+our @ObjectDependencies = (
+    'Kernel::Config',
+    'Kernel::System::Log',
+    'Kernel::System::ITSMConfigItem',
 );
 
 =head1 NAME

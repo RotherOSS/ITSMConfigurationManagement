@@ -27,10 +27,10 @@ use utf8;
 
 # OTOBO modules
 
-our @ObjectDependencies = qw(
-    Kernel::System::DynamicField
-    Kernel::System::ITSMConfigItem
-    Kernel::System::Log
+our @ObjectDependencies = (
+    'Kernel::System::DynamicField',
+    'Kernel::System::ITSMConfigItem',
+    'Kernel::System::Log',
 );
 
 =head1 NAME
