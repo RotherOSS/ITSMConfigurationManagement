@@ -14,17 +14,22 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+# core modules
 
-our $Self;
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::Delete');
 
-# get helper object
+# get helper object, database changes should be restored
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
@@ -32,9 +37,8 @@ $Kernel::OM->ObjectParamAdd(
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $ExitCode = $CommandObject->Execute();
-
-$Self->Is(
+my $ExitCode = $CommandObject->Execute;
+is(
     $ExitCode,
     1,
     "Admin::ITSM::Configitem::Delete exit code without options",
@@ -43,7 +47,7 @@ $Self->Is(
 # check command with option --all and argument --accept n ( cancel deleting all config item)
 $ExitCode = $CommandObject->Execute( '--all', 'n' );
 
-$Self->Is(
+is(
     $ExitCode,
     0,
     "Option '--all' n",
@@ -53,7 +57,7 @@ $Self->Is(
 my $RandomClass = 'TestClass' . $Helper->GetRandomID();
 $ExitCode = $CommandObject->Execute( '--class', $RandomClass );
 
-$Self->Is(
+is(
     $ExitCode,
     1,
     "Option 'class' (but class $RandomClass doesn't exist) ",
@@ -77,7 +81,7 @@ $GeneralCatalogObject->GeneralCatalogPreferencesSet(
     Value  => 5,
 );
 
-$Self->True(
+ok(
     $GeneralCatalogItemID,
     "Test general catalog item is created - $GeneralCatalogItemID ",
 );
@@ -132,7 +136,7 @@ for ( 1 .. 10 ) {
             ConfigItemID => $ConfigItemID,
         );
 
-        $Self->True(
+        ok(
             $VersionID,
             "Version $Count for config item $ConfigItemID is created - $ConfigItemName",
         );
@@ -157,7 +161,7 @@ for ( 1 .. 10 ) {
     # check command with all-older-than-days-versions options (delete all versions older than one day)
     $ExitCode = $CommandObject->Execute( '--all-older-than-days-versions', 1 );
 
-    $Self->Is(
+    is(
         $ExitCode,
         0,
         "Exit code: Options --all-older-than-days-versions 1",
@@ -169,7 +173,7 @@ for ( 1 .. 10 ) {
     );
 
     # result should only be 40 versions now
-    $Self->Is(
+    is(
         scalar @{$VersionList},
         40,
         "Number of remaining versions after running command with Options --all-older-than-days-versions 1",
@@ -178,7 +182,7 @@ for ( 1 .. 10 ) {
     # check command with all-but-keep-last-versions options (delete all versions but keep the last 30 versions)
     $ExitCode = $CommandObject->Execute( '--all-but-keep-last-versions', 30 );
 
-    $Self->Is(
+    is(
         $ExitCode,
         0,
         "Exit code: Options --all-but-keep-last-versions 30",
@@ -190,7 +194,7 @@ for ( 1 .. 10 ) {
     );
 
     # result should only be 40 versions now
-    $Self->Is(
+    is(
         scalar @{$VersionList},
         30,
         "Number of remaining versions after running command with Options --all-but-keep-last-versions 30",
@@ -199,7 +203,7 @@ for ( 1 .. 10 ) {
     # check command with all-old-versions options (delete all old versions except the last one)
     $ExitCode = $CommandObject->Execute('--all-old-versions');
 
-    $Self->Is(
+    is(
         $ExitCode,
         0,
         "Exit code: Options --all-old-versions",
@@ -211,7 +215,7 @@ for ( 1 .. 10 ) {
     );
 
     # result should only be 40 versions now
-    $Self->Is(
+    is(
         scalar @{$VersionList},
         1,
         "Number of remaining versions after running command with Options --all-old-versions",
@@ -221,7 +225,7 @@ for ( 1 .. 10 ) {
 # check command with class options ($RandomClass class) and deployment-state 'Planned'
 $ExitCode = $CommandObject->Execute( '--class', $RandomClass, '--deployment-state', 'Planned' );
 
-$Self->Is(
+is(
     $ExitCode,
     0,
     "Exit code: Options --class $RandomClass --deployment-state' Planned",
@@ -233,7 +237,7 @@ $ExitCode = $CommandObject->Execute(
     $ConfigItemNumbers[1]
 );
 
-$Self->Is(
+is(
     $ExitCode,
     0,
     "Exit code: Options --configitem-number",
@@ -244,7 +248,7 @@ $Self->Is(
 # with the next command other seven will be deleted
 $ExitCode = $CommandObject->Execute( '--class', $RandomClass );
 
-$Self->Is(
+is(
     $ExitCode,
     0,
     "Exit code: Option --class $RandomClass",
@@ -253,7 +257,7 @@ $Self->Is(
 # check command with configitem-number options and not allowed additional class option
 $ExitCode = $CommandObject->Execute( '--configitem-number', $ConfigItemNumbers[0], '--class', $RandomClass );
 
-$Self->Is(
+is(
     $ExitCode,
     1,
     "Exit code: Options --configitem-number --class",
@@ -262,7 +266,7 @@ $Self->Is(
 # check command with configitem-number options and not allowed additional deployment state option
 $ExitCode = $CommandObject->Execute( '--configitem-number', $ConfigItemNumbers[0], '--deployment-state', 'Planned' );
 
-$Self->Is(
+is(
     $ExitCode,
     1,
     "Exit code: Options --configitem-number --deployment-state",
@@ -274,12 +278,10 @@ $ExitCode = $CommandObject->Execute(
     2,       '--all-older-than-days-versions', '10'
 );
 
-$Self->Is(
+is(
     $ExitCode,
     1,
     "Exit code: Options --all --all-old-versions --all-but-keep-last-versions 2 --all-older-than-days-versions 10",
 );
 
-# cleanup is done by RestoreDatabase
-
-$Self->DoneTesting;
+done_testing;
