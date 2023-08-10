@@ -30,10 +30,10 @@ use parent qw(Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem);
 
 # OTOBO modules
 
-our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::Log',
-    'Kernel::System::ITSMConfigItem',
+our @ObjectDependencies = qw(
+    Kernel::Config
+    Kernel::System::Log
+    Kernel::System::ITSMConfigItem
 );
 
 =head1 NAME
@@ -45,8 +45,6 @@ Kernel::System::DynamicField::Driver::Reference::ITSMConfigItemVersion - backend
 ITSMConfigItemVersion backend for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
-
-
 
 =head2 ObjectDescriptionGet()
 
@@ -125,6 +123,19 @@ sub SearchObjects {
     }
 
     return @VersionIDs;
+}
+
+=head2 ValueForLens()
+
+this method returns the passed value unchanged. It is only implemented so that
+the implementation from the parent class C<Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem> is not used.
+
+=cut
+
+sub ValueForLens {
+    my ( $Self, %Param ) = @_;
+
+    return $Param{Value};
 }
 
 1;
