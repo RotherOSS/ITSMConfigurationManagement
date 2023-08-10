@@ -124,8 +124,8 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/UpgradeTo11.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/RebuildReferenceTable.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
@@ -169,7 +169,6 @@
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/Delete.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/ListDuplicates.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Maint/ITSM/Configitem/DefinitionPerl2YAML.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemCreate.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemDelete.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemGet.t" />
