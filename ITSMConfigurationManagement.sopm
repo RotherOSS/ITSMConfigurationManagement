@@ -342,11 +342,6 @@
                 <Reference Local="create_by" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <TableCreate Name="configitem_counter">
-            <Column Name="class_id" Required="true" PrimaryKey="true" Type="INTEGER" />
-            <Column Name="counter_type" Required="true" Size="50" Type="VARCHAR" />
-            <Column Name="counter" Required="true" Size="50" Type="VARCHAR" />
-        </TableCreate>
         <TableCreate Name="configitem_definition_sync">
             <Column Name="class_id" Required="true" Type="INTEGER" />
             <Column Name="field_id" Required="true" Type="INTEGER" />
@@ -362,7 +357,7 @@
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
-            <Column Name="link_type_id" Required="true" Type="INTEGER" />
+            <Column Name="link_type_id" Required="true" Type="SMALLINT" />
             <Column Name="dynamic_field_id" Required="true" Type="INTEGER" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
