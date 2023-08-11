@@ -209,19 +209,26 @@ END_SQL
     my @TargetConfigItemVersionIDs = map { $IsConfigItemVersion{ $_->[1] } ? $_->[3] : undef } $Rows->@*;
 
     # Multivalue INSERT
-    # TODO: This is just prove of concept
-    my $DBHandle        = $DBObject->Connect;
-    my $StatementHandle = $DBHandle->prepare( <<'END_SQL' );
-INSERT INTO configitem_reference (link_type_id, source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id, create_time, create_by)
+    my $Tuples = $DBObject->DoArray(
+        SQL => <<'END_SQL',
+INSERT INTO configitem_reference (
+    link_type_id,
+    source_configitem_version_id,
+    target_configitem_id,
+    target_configitem_version_id,
+    dynamic_field_id,
+    create_time,
+    create_by
+  )
   VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), 1)
 END_SQL
-    my $Tuples = $StatementHandle->execute_array(
-        { ArrayTupleStatus => \my @TupleStatus },
-        1,
-        \@SourceConfigItemVersionIDs,
-        \@TargetConfigItemIDs,
-        \@TargetConfigItemVersionIDs,
-        \@DynamicFieldIDs,
+        Bind => [
+            1,
+            \@SourceConfigItemVersionIDs,
+            \@TargetConfigItemIDs,
+            \@TargetConfigItemVersionIDs,
+            \@DynamicFieldIDs,
+        ],
     );
 
     if ( !defined $Tuples ) {
