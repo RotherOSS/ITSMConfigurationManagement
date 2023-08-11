@@ -29,10 +29,8 @@ use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
-our @ObjectDependencies = (
-    'Kernel::System::DB',
-    'Kernel::System::DynamicField',
-    'Kernel::System::ITSMConfigItem',
+our @ObjectDependencies = qw(
+    Kernel::System::ITSMConfigItem
 );
 
 sub Configure {
