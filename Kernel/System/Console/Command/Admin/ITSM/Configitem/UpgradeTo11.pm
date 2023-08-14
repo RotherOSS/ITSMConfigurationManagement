@@ -81,24 +81,32 @@ sub PreRun {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my @Steps = (
-        'Prepare Attribute Mapping',
+    # Declaration of processing steps.
+    # This allows picking up processing at a specific step. On the command line
+    # the steps are numbered, starting at 1.
+    my @StepDeclarations = (
+        {
+            Name    => 'Prepare Attribute Mapping',
+            Handler => \&_PrepareAttributeMapping,
+        },
 
-        #        'Prepare DynamicFields',  # necessary? what do we want to make configurable besides the name? (step 0)
-        'Prepare Definitions',
-        'Migrate Definitions',
-        'Migrate Attribute Data',
-        'Delete Legacy Data',
-    );
-
-    my %StepHandlers = (
-        'Prepare Attribute Mapping' => \&_PrepareAttributeMapping,
-
-        #        'Prepare DynamicFields'     => \&_PrepareDynamicFieldConfigs,
-        'Prepare Definitions'    => \&_PrepareDefinitions,
-        'Migrate Definitions'    => \&_MigrateDefinitions,
-        'Migrate Attribute Data' => \&_MigrateAttributeData,
-        'Delete Legacy Data'     => \&_DeleteLegacyData,
+        # 'Prepare DynamicFields',  # necessary? what do we want to make configurable besides the name? (step 0)
+        {
+            Name    => 'Prepare Definitions',
+            Handler => \&_PrepareDefinitions,
+        },
+        {
+            Name    => 'Migrate Definitions',
+            Handler => \&_MigrateDefinitions,
+        },
+        {
+            Name    => 'Migrate Attribute Data',
+            Handler => \&_MigrateAttributeData,
+        },
+        {
+            Name    => 'Delete Legacy Data',
+            Handler => \&_DeleteLegacyData,
+        },
     );
 
     my $TempDir = $Kernel::OM->Get('Kernel::Config')->Get('TempDir');
@@ -114,7 +122,7 @@ sub Run {
             die;
         }
 
-        $Self->Print("<yellow>Continue CMDB upgrade at: '$Steps[ $StartAt ]'!</yellow>\n");
+        $Self->Print("<yellow>Continue CMDB upgrade at: '$StepDeclarations[ $StartAt ]->{Name}'!</yellow>\n");
     }
     else {
         $Self->Print("<yellow>Starting CMDB upgrade!</yellow>\n");
@@ -137,8 +145,10 @@ sub Run {
 
     my $Success;
     STEP:
-    for my $CurrentStep ( $StartAt .. $#Steps ) {
-        $Success = $StepHandlers{ $Steps[$CurrentStep] }->(
+    for my $CurrentStep ( $StartAt .. $#StepDeclarations ) {
+        my $StepDeclaration = $StepDeclarations[$CurrentStep];
+        $Self->Print("<green>Start working on $StepDeclaration->{Name}</green>\n");
+        $Success = $StepDeclaration->{Handler}->(
             $Self,
             CurrentStep => $CurrentStep,
         );
@@ -150,12 +160,12 @@ sub Run {
     if ($Success) {
         $Self->Print("<green>Done!</green>\n");
 
-        return $Self->ExitCodeOk();
+        return $Self->ExitCodeOk;
     }
     else {
         $Self->Print("<green>An error occured!</green>\n");
 
-        return $Self->ExitCodeError();
+        return $Self->ExitCodeError;
     }
 }
 
@@ -298,6 +308,8 @@ sub _DeleteLegacyData {
 sub _GenerateDefinitionYAML {
     my ( $Self, %Param ) = @_;
 
+    # Explictily generate a YAML string in order to have better control
+    # of the layout.
     my $YAML = <<'END_YAML';
 ---
 Pages:
