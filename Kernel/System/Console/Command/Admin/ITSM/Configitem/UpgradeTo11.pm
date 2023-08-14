@@ -124,6 +124,7 @@ sub Run {
     $Self->{ConfigItemObject}     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     $Self->{YAMLObject}           = $Kernel::OM->Get('Kernel::System::YAML');
 
+    # list of configitem classes, either in OTOBO 10 or OTOBO 11 format
     $Self->{ClassList} = $Self->{GeneralCatalogObject}->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
@@ -224,16 +225,25 @@ sub _PrepareDefinitions {
 
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-    CLASS:
+    CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
+
+        # TODO: add extension .yml
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
             Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
         );
 
-        my %AttributeMap = $Self->{YAMLObject}->Load(
+        # Skip the class when there is no attribute mapping.
+        # This happens when the file was removed or when the class already was in OTOBO 12 format.
+        next CLASS_ID unless defined $MapRef;
+
+        my $AttributeMap = $Self->{YAMLObject}->Load(
             Data => ${$MapRef},
         );
+
+        # a sanity check
+        next CLASS_ID unless ref $AttributeMap eq 'HASH';
 
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
             my @Attributes = $Self->_GetAttributesFromLegacyYAML(
@@ -242,7 +252,7 @@ sub _PrepareDefinitions {
 
             my $DefinitionYAML = $Self->_GenerateDefinitionYAML(
                 Attributes   => \@Attributes,
-                AttributeMap => \%AttributeMap,
+                AttributeMap => $AttributeMap,
                 Class        => $Self->{ClassList}{$ClassID},
             );
 
