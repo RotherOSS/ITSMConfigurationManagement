@@ -36,7 +36,8 @@ All definition functions.
 
 =head2 DefinitionList()
 
-return a config item definition list as array-hash reference
+return a config item definition list as an reference to an array of hash references.
+All versions are reported.
 
     my $DefinitionListRef = $ConfigItemObject->DefinitionList(
         ClassID => 123,
@@ -76,6 +77,7 @@ returns
 # ... etc ...
 ',
           },
+          ... # more versions may follow
     ];
 
 =cut
