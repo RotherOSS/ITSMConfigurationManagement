@@ -370,11 +370,13 @@ sub _ContinueOrNot {
 
     return 'Next' if $Self->{UseDefaults};
 
-    $Self->Print("<yellow>You can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n");
-    $Self->Print("\tbin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 --start-at ". $Param{CurrentStep} + 1 ."\n");
-    $Self->Print("\n<yellow>To exit the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n");
+    $Self->Print(
+        "<yellow>You can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n"
+    );
+    $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
+    $Self->Print("\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n");
 
-    return 'Next' if <STDIN> =~ /^def(ault)?$/;
+    return 'Next' if <STDIN> =~ m/^def(ault)?$/;
 
     return 'Exit';
 }
