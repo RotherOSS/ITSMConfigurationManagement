@@ -16,8 +16,11 @@
 
 package Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
@@ -33,12 +36,18 @@ use Kernel::System::VariableCheck qw(:all);
 # This module must be discarded when one of the hard dependencies has been discarded.
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::GeneralCatalog',
+    'Kernel::System::ITSMConfigItem',
+    'Kernel::System::Main',
+    'Kernel::System::YAML',
 );
 
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated.');
+    $Self->Description(
+        'Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated.'
+    );
     $Self->AddOption(
         Name        => 'use-defaults',
         Description => "Make the script non interactive. Always use default suggestions and do not give the chance to customize the schemata.",
@@ -74,29 +83,31 @@ sub Run {
 
     my @Steps = (
         'Prepare Attribute Mapping',
-#        'Prepare DynamicFields',  # necessary? what do we want to make configurable besides the name? (step 0)
+
+        #        'Prepare DynamicFields',  # necessary? what do we want to make configurable besides the name? (step 0)
         'Prepare Definitions',
         'Migrate Definitions',
         'Migrate Attribute Data',
         'Delete Legacy Data',
     );
 
-    my %Sub = (
+    my %StepHandlers = (
         'Prepare Attribute Mapping' => \&_PrepareAttributeMapping,
-#        'Prepare DynamicFields'     => \&_PrepareDynamicFieldConfigs,
-        'Prepare Definitions'       => \&_PrepareDefinitions,
-        'Migrate Definitions'       => \&_MigrateDefinitions,
-        'Migrate Attribute Data'    => \&_MigrateAttributeData,
-        'Delete Legacy Data'        => \&_DeleteLegacyData,
+
+        #        'Prepare DynamicFields'     => \&_PrepareDynamicFieldConfigs,
+        'Prepare Definitions'    => \&_PrepareDefinitions,
+        'Migrate Definitions'    => \&_MigrateDefinitions,
+        'Migrate Attribute Data' => \&_MigrateAttributeData,
+        'Delete Legacy Data'     => \&_DeleteLegacyData,
     );
 
     my $OTOBOHome = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || $OTOBOHome . 'var/tmp/CMDBUpgradeTo11Schemata';
     $Self->{UseDefaults} = $Self->GetOption('use-defaults');
-    my $StartAt          = $Self->GetOption('start-at') // $Self->_GetCurrentStep();
+    my $StartAt = $Self->GetOption('start-at') // $Self->_GetCurrentStep();
 
-    if ( $StartAt ) {
+    if ($StartAt) {
         if ( !-d $Self->{WorkingDir} ) {
             $Self->Print("<red>Need existing working directory '$Self->{WorkingDir}'.</red>\n");
 
@@ -118,24 +129,24 @@ sub Run {
     );
 
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
-        $Self->{DefinitionList}{ $ClassID } = $Self->{ConfigItemObject}->DefinitionList(
+        $Self->{DefinitionList}{$ClassID} = $Self->{ConfigItemObject}->DefinitionList(
             ClassID => $ClassID,
         );
     }
 
     my $Success;
     STEP:
-    for my $i ( $StartAt .. $#Steps ) {
-        $Success = $Sub{ $Steps[ $i ] }->(
+    for my $CurrentStep ( $StartAt .. $#Steps ) {
+        $Success = $StepHandlers{ $Steps[$CurrentStep] }->(
             $Self,
-            CurrentStep => $i,
+            CurrentStep => $CurrentStep,
         );
 
-        last STEP if !$Success;
-        last STEP if $Success ne 'Next';
+        last STEP unless $Success;
+        last STEP unless $Success eq 'Next';
     }
 
-    if ( $Success ) {
+    if ($Success) {
         $Self->Print("<green>Done!</green>\n");
 
         return $Self->ExitCodeOk();
@@ -173,7 +184,7 @@ sub _PrepareAttributeMapping {
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
         my %Attributes;
 
-        for my $Definition ( $Self->{DefinitionList}{ $ClassID }->@* ) {
+        for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
             my @CurAttributes = $Self->_GetAttributesFromLegacyYAML(
                 Definition => $Definition->{Definition},
                 Subs       => 1,
@@ -190,9 +201,10 @@ sub _PrepareAttributeMapping {
             Data => \%AttributeMap,
         );
 
+        #TODO: add extension '.yml'
         my $FileLocation = $MainObject->FileWrite(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{ $ClassID },
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
             Content   => \$MapYAML,
         );
     }
@@ -211,14 +223,14 @@ sub _PrepareDefinitions {
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{ $ClassID },
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
         );
 
         my %AttributeMap = $Self->{YAMLObject}->Load(
-            Data => ${ $MapRef },
+            Data => ${$MapRef},
         );
 
-        for my $Definition ( $Self->{DefinitionList}{ $ClassID }->@* ) {
+        for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
             my @Attributes = $Self->_GetAttributesFromLegacyYAML(
                 Definition => $Definition->{Definition},
             );
@@ -226,12 +238,12 @@ sub _PrepareDefinitions {
             my $DefinitionYAML = $Self->_GenerateDefinitionYAML(
                 Attributes   => \@Attributes,
                 AttributeMap => \%AttributeMap,
-                Class        => $Self->{ClassList}{ $ClassID },
+                Class        => $Self->{ClassList}{$ClassID},
             );
 
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
-                Filename  => 'DefinitionMap_' . $Self->{ClassList}{ $ClassID } . '_' . $Definition->{DefinitionID},
+                Filename  => 'DefinitionMap_' . $Self->{ClassList}{$ClassID} . '_' . $Definition->{DefinitionID},
                 Content   => \$DefinitionYAML,
             );
         }
@@ -259,7 +271,9 @@ sub _MigrateAttributeData {
 sub _DeleteLegacyData {
     my ( $Self, %Param ) = @_;
 
-    $Self->Print("<yellow>Optionally all legacy data can be deleted. This step is not necessary for the migrated CMDB to work and can be done at any later time.</yellow>\n");
+    $Self->Print(
+        "<yellow>Optionally all legacy data can be deleted. This step is not necessary for the migrated CMDB to work and can be done at any later time.</yellow>\n"
+    );
     $Self->Print("\n<red>Do you really want to permanently delete all legacy data from the system? (yes/no)</red>\n");
 
     return 'Next';
@@ -268,7 +282,7 @@ sub _DeleteLegacyData {
 sub _GenerateDefinitionYAML {
     my ( $Self, %Param ) = @_;
 
-    my $YAML = <<EOY;
+    my $YAML = <<'END_YAML';
 ---
 Pages:
   - Name: Content
@@ -283,9 +297,9 @@ Pages:
 Sections:
   Attributes:
     Content:
-EOY
+END_YAML
 
-    my %DynamicFields;
+    #my %DynamicFields; # in progress
     for my $Attribute ( $Param{Attributes}->@* ) {
         $YAML .= "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
@@ -300,12 +314,10 @@ EOY
         if ( $Attribute->{Sub} ) {
         }
         else {
-            
+
         }
     }
     $YAML .= "\n";
-
-    
 
     return $YAML;
 }
@@ -313,7 +325,6 @@ EOY
 sub _GetAttributesFromLegacyYAML {
     my ( $Self, %Param ) = @_;
 
-    my @Attributes;
     my $DefinitionRef = $Param{DefinitionRef} // $Self->{YAMLObject}->Load(
         Data => $Param{Definition},
     );
@@ -324,6 +335,7 @@ sub _GetAttributesFromLegacyYAML {
         die;
     }
 
+    my @Attributes;
     for my $Attribute ( $DefinitionRef->@* ) {
         push @Attributes, $Attribute;
 
