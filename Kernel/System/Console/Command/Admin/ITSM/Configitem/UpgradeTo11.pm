@@ -167,8 +167,6 @@ sub _GetCurrentStep {
 sub _PrepareAttributeMapping {
     my ( $Self, %Param ) = @_;
 
-    $Self->Print("<yellow>Writing attribute maps.</yellow>\n");
-
     # TODO: create dir in a init subroutine
     if ( !-d $Self->{WorkingDir} ) {
         dir( $Self->{WorkingDir} )->mkpath( 0, oct('770') );    # 0 turns off verbosity
@@ -180,8 +178,11 @@ sub _PrepareAttributeMapping {
         die;
     }
 
+    $Self->Print("<yellow>Writing attribute maps into $Self->{WorkingDir}</yellow>\n");
+
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
         my %Attributes;
 
@@ -197,13 +198,16 @@ sub _PrepareAttributeMapping {
             );
         }
 
+        # do not write an attribute map for OTOBO 11 config items
+        next CLASS_ID unless %Attributes;
+
         my %AttributeMap = map { $_ => $_ =~ s/[^\w\d]//gr } keys %Attributes;
         my $MapYAML      = $Self->{YAMLObject}->Dump(
             Data => \%AttributeMap,
         );
 
         #TODO: add extension '.yml'
-        my $FileLocation = $MainObject->FileWrite(
+        $MainObject->FileWrite(
             Directory => $Self->{WorkingDir},
             Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
             Content   => \$MapYAML,
@@ -242,6 +246,7 @@ sub _PrepareDefinitions {
                 Class        => $Self->{ClassList}{$ClassID},
             );
 
+            #TODO: add extension '.yml'
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
                 Filename  => 'DefinitionMap_' . $Self->{ClassList}{$ClassID} . '_' . $Definition->{DefinitionID},
@@ -330,6 +335,13 @@ sub _GetAttributesFromLegacyYAML {
         Data => $Param{Definition},
     );
 
+    # Skip definitions that are already in the format for OTOBO 11
+    if ( ref $DefinitionRef eq 'HASH' ) {
+        return if $DefinitionRef->{Pages};
+        return if $DefinitionRef->{Sections};
+    }
+
+    # a sanity test whether this is possibly in the format for OTOBO 10
     if ( ref $DefinitionRef ne 'ARRAY' ) {
         $Self->Print("<red>Need a valid legacy definition!</red>\n");
 
