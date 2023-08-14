@@ -25,7 +25,7 @@ use utf8;
 use parent qw(Kernel::System::Console::BaseCommand);
 
 # core modules
-use File::Path qw(mkpath);
+use Path::Class qw(dir);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
@@ -169,8 +169,9 @@ sub _PrepareAttributeMapping {
 
     $Self->Print("<yellow>Writing attribute maps.</yellow>\n");
 
+    # TODO: create dir in a init subroutine
     if ( !-d $Self->{WorkingDir} ) {
-        mkpath( [$Self->{WorkingDir}], 0, 0770 );    ## no critic qw(ValuesAndExpressions::ProhibitLeadingZeros)
+        dir( $Self->{WorkingDir} )->mkpath( 0, oct('770') );    # 0 turns off verbosity
     }
 
     if ( !-d $Self->{WorkingDir} ) {
