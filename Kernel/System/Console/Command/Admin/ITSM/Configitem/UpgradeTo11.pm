@@ -101,9 +101,9 @@ sub Run {
         'Delete Legacy Data'     => \&_DeleteLegacyData,
     );
 
-    my $OTOBOHome = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+    my $TempDir = $Kernel::OM->Get('Kernel::Config')->Get('TempDir');
 
-    $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || $OTOBOHome . 'var/tmp/CMDBUpgradeTo11Schemata';
+    $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || "$TempDir/CMDBUpgradeTo11Schemata";
     $Self->{UseDefaults} = $Self->GetOption('use-defaults');
     my $StartAt = $Self->GetOption('start-at') // $Self->_GetCurrentStep();
 
