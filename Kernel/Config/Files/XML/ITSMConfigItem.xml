@@ -1135,7 +1135,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault" Required="0" Valid="1">
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault" Required="0" Valid="0">
         <Description Translatable="1">Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
         <Value>
