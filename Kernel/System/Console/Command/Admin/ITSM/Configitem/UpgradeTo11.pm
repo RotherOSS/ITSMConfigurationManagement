@@ -26,6 +26,9 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 # core modules
 use Path::Class qw(dir);
+use List::Util qw(uniq);
+
+# CPAN modules
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
@@ -41,6 +44,18 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::YAML',
 );
+
+=head1 NAME
+
+Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11 - support for upgrading the CMDB
+
+=head1 DESCRIPTION
+
+Module for the console command C<Admin::ITSM::Configitem::UpgradeTo11>.
+
+=head1 PUBLIC INTERFACE
+
+=cut
 
 sub Configure {
     my ( $Self, %Param ) = @_;
@@ -137,6 +152,7 @@ sub Run {
         Class => 'ITSM::ConfigItem::Class',
     );
 
+    # get complete history of the definitions for the configitem class
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
         $Self->{DefinitionList}{$ClassID} = $Self->{ConfigItemObject}->DefinitionList(
             ClassID => $ClassID,
@@ -169,11 +185,28 @@ sub Run {
     }
 }
 
+=head1 PRIVATE METHODS
+
+=head2  _GetCurrentStep()
+
+This method is not implemented yet.
+
+=cut
+
 sub _GetCurrentStep {
     my ( $Self, %Param ) = @_;
 
     return 0;
 }
+
+=head2 _PrepareAttributeMapping()
+
+Collect the attributes that are referenced in any version of any of the legacy config item classes.
+
+One mapping is dumped per config item class. This mapping maps the key of the legacy attribute
+to the name that should be used for the config item in OTOBO 11.
+
+=cut
 
 sub _PrepareAttributeMapping {
     my ( $Self, %Param ) = @_;
@@ -195,34 +228,35 @@ sub _PrepareAttributeMapping {
 
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
-        my %Attributes;
 
+        # Loop over all versions of definitions for that config item class
+        my @AttributeKeys;
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
-            my @CurAttributes = $Self->_GetAttributesFromLegacyYAML(
+            my @AttributesForVersion = $Self->_GetAttributesFromLegacyYAML(
                 Definition => $Definition->{Definition},
                 Subs       => 1,
             );
 
-            %Attributes = (
-                %Attributes,
-                map { $_->{Key} => 1 } @CurAttributes,
-            );
+            # not caring about duplicates here
+            push @AttributeKeys, map { $_->{Key} } @AttributesForVersion;
         }
 
         # do not write an attribute map for OTOBO 11 config items
-        next CLASS_ID unless %Attributes;
+        # TODO: maybe check for a mix of OTOBO 10 and OTOBO 11 formats
+        next CLASS_ID unless @AttributeKeys;
 
-        my %AttributeMap = map { $_ => $_ =~ s/[^\w\d]//gr } keys %Attributes;
+        my %AttributeMap = map { $_ => $_ =~ s/[^\w\d]//gr } uniq @AttributeKeys;
         my $MapYAML      = $Self->{YAMLObject}->Dump(
             Data => \%AttributeMap,
         );
 
-        #TODO: add extension '.yml'
         $MainObject->FileWrite(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
             Content   => \$MapYAML,
         );
+
+        return 'Next';
     }
 
     return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
