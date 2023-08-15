@@ -36,8 +36,7 @@ All definition functions.
 
 =head2 DefinitionList()
 
-return a config item definition list as an reference to an array of hash references.
-All versions are reported.
+return a config item definition list as array-hash reference
 
     my $DefinitionListRef = $ConfigItemObject->DefinitionList(
         ClassID => 123,
@@ -77,7 +76,6 @@ returns
 # ... etc ...
 ',
           },
-          ... # more versions may follow
     ];
 
 =cut
@@ -128,6 +126,8 @@ sub DefinitionList {
 
     return \@DefinitionList;
 }
+
+=head2 DefinitionGet()
 
 =head2 DefinitionGet()
 
@@ -690,6 +690,7 @@ sub DefinitionSync {
                 if ( !$DynamicFieldDefinition ) {
                     my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
                         Definition => $Definition->{Definition},
+                        ClassID    => $ClassID,
                     ) || '--- []';
 
                     $DynamicFieldDefinition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
@@ -828,7 +829,10 @@ sub _DefinitionDynamicFieldGet {
         elsif ( ref $ContentHash{$Key} ) {
             %DynamicFields = (
                 %DynamicFields,
-                $Self->_DefinitionDynamicFieldGet( DefinitionPerl => $ContentHash{$Key} ),
+                $Self->_DefinitionDynamicFieldGet(
+                    DefinitionPerl => $ContentHash{$Key},
+                    ClassID        => $Param{ClassID},
+                ),
             );
         }
     }
@@ -860,6 +864,28 @@ sub _DefinitionDynamicFieldGet {
             next DYNAMICFIELD if !$DynamicField;
             next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
 
+            # for set fields also the contained dynamic fields have to be versioned
+            if ( $DynamicField->{FieldType} eq 'Set' ) {
+                next DYNAMICFIELD if !IsArrayRefWithData($DynamicField->{Config}{Include});
+
+                INCLUDED:
+                for my $IncludedDF ( $DynamicField->{Config}{Include}->@* ) {
+                    next INCLUDED if !$IncludedDF->{DF};
+
+                    my $IncludedDFConfig = $DynamicFieldObject->DynamicFieldGet( Name => $IncludedDF->{DF} );
+
+                    $IncludedDF->{Definition} = {
+                        ID         => $IncludedDFConfig->{ID},
+                        Name       => $IncludedDFConfig->{Name},
+                        Label      => $IncludedDFConfig->{Label},
+                        Config     => $IncludedDFConfig->{Config},
+                        FieldType  => $IncludedDFConfig->{FieldType},
+                        ObjectType => $IncludedDFConfig->{ObjectType},
+                        CIClass    => $Class,
+                    }
+                }
+            }
+
             $ReturnDynamicFields{$Name} = {
                 ID         => $DynamicField->{ID},
                 Name       => $DynamicField->{Name},
@@ -875,8 +901,6 @@ sub _DefinitionDynamicFieldGet {
                     $ReturnDynamicFields{$Name}{$Attribute} = $DynamicFields{$Name}{$Attribute};
                 }
             }
-
-            # TODO: save versions of DynamicFieldSet-DFs (and use them!)
         }
 
         return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
