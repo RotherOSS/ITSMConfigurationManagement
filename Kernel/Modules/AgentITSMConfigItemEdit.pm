@@ -943,6 +943,10 @@ sub Run {
                     PossibleValuesFilter => \%DynamicFieldPossibleValues,
                     Errors               => \%DynamicFieldValidationResult,
                     Visibility           => \%DynamicFieldVisibility,
+                    Object               => {
+                        Class => $ConfigItem->{Class},
+                        $GetParam{DynamicField}->%*,
+                    },
                 );
             }
         }
