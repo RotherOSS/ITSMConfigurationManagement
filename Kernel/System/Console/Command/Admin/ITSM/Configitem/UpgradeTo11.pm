@@ -234,7 +234,7 @@ sub _PrepareAttributeMapping {
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
             my @AttributesForVersion = $Self->_GetAttributesFromLegacyYAML(
                 Definition => $Definition->{Definition},
-                Subs       => 1,
+                RecuSubs   => 1,
             );
 
             # not caring about duplicates here
@@ -272,10 +272,9 @@ sub _PrepareDefinitions {
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
 
-        # TODO: add extension .yml
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID},
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
         );
 
         # Skip the class when there is no attribute mapping.
@@ -300,7 +299,6 @@ sub _PrepareDefinitions {
                 Class        => $Self->{ClassList}{$ClassID},
             );
 
-            #TODO: add extension '.yml'
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
                 Filename  => 'DefinitionMap_' . $Self->{ClassList}{$ClassID} . '_' . $Definition->{DefinitionID},
@@ -361,9 +359,15 @@ Sections:
     Content:
 END_YAML
 
-    #my %DynamicFields; # in progress
+    my %DynamicFields;
+
+    ATTRIBUTE:
     for my $Attribute ( $Param{Attributes}->@* ) {
-        $YAML .= "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
+        my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
+
+        if ( $Attribute->{Input}{Required} ) {
+            $YAMLLine .= "        Mandatory: 1\n";
+        }
 
         my %DFBasic = (
             Name       => $Param{AttributeMap}{ $Attribute->{Key} },
@@ -372,14 +376,27 @@ END_YAML
             CIClass    => $Param{Class},
         );
 
-        # Continue reading out FieldType and Config
-        if ( $Attribute->{Sub} ) {
-        }
-        else {
+        my %DFSpecific = $Self->_DFConfigFromLegacy(
+            Attribute    => $Attribute,
+            AttributeMap => $Param{AttributeMap},
+            Class        => $Param{Class},
+        );
 
+        if ( !%DFSpecific ) {
+            $Self->Print("<red>Could not convert "$Attribute->{Name}" to DynamicField (Class: "$Param{Class}")!</red>\n");
+
+            next ATTRIBUTE;
         }
+
+        $YAML .= $YAMLLine;
+
+        $DynamicFields{ $Param{AttributeMap}{ $Attribute->{Key} } } = { %DFBasic, %DFSpecific };
     }
     $YAML .= "\n";
+
+    $YAML .= $Kernel::OM->Get('Kernel::System::YAML')->Dump(
+        Data => \%DynamicFields;
+    );
 
     return $YAML;
 }
@@ -408,7 +425,7 @@ sub _GetAttributesFromLegacyYAML {
     for my $Attribute ( $DefinitionRef->@* ) {
         push @Attributes, $Attribute;
 
-        if ( $Attribute->{Subs} ) {
+        if ( $Attribute->{Subs} && $Param{RecuSubs} ) {
             push @Attributes, $Self->_GetAttributesFromLegacyYAML( DefinitionRef => delete $Attribute->{Sub} );
 
             $Attribute->{Key}  .= '<SubPrimaryAttribute>';
@@ -419,6 +436,141 @@ sub _GetAttributesFromLegacyYAML {
     }
 
     return @Attributes;
+}
+
+sub _DFConfigFromLegacy {
+    my ( $Self, %Param ) = @_;
+
+    if ( !$Param{Attribute}{Input}{Type} ) {
+        $Self->Print("<red>Attribute without Input Type!</red>\n");
+
+        return;
+    }
+
+    my $Type = $Param{Attribute}{Input}{Type};
+    my %DF;
+
+    if ( any { $Param{Attribute}{$_} } qw/CountMin CountMax CountDefault/ ) {
+        $DF{Config}{MultiValue} = 1;
+    }
+
+    if ( $Param{Attribute}{Sub} ) {
+        if ( $Param{InSub} ) {
+            $Self->Print("<red>Subs of subs are not supported!</red>\n");
+
+            return;
+        }
+
+        my $Sub = delete $Param{Attribute}{Sub};
+
+        $Param{Attribute}{Key}  .= '<SubPrimaryAttribute>';
+        $Param{Attribute}{Name} .= ' Name';
+
+        my @Include;
+
+        ATTRIBUTE:
+        for my $Attribute ( $Param{Attribute}, $Sub->@* ) {
+            my %DFBasic = (
+                Name       => $Param{AttributeMap}{ $Attribute->{Key} },
+                Label      => $Attribute->{Name},
+                ObjectType => 'ITSMConfigItem',
+                CIClass    => $Param{Class},
+            );
+
+            my %DFSpecific = $Self->_DFConfigFromLegacy(
+                Attribute    => $Attribute,
+                AttributeMap => $Param{AttributeMap},
+                Class        => $Param{Class},
+            );
+
+            if ( !%DFSpecific ) {
+                $Self->Print("<red>Could not convert "$Attribute->{Name}" to DynamicField (Class: "$Param{Class}")!</red>\n");
+
+                next ATTRIBUTE;
+            }
+
+            push @Include, {
+                DF         => $Param{AttributeMap}{ $Attribute->{Key} },
+                Definition => { %DFBasic, %DFSpecific },
+            };
+        }
+
+        $DF{Config}{Include} = \@Include;
+    }
+    elsif ( $Type eq 'Text' || $Type eq 'TextArea' ) {
+        $DF{FieldType}         = $Type;
+        $DF{Config}{RegExList} = [];
+
+        if ( $Param{Attribute}{Input}{RegEx} ) {
+            $DF{Config}{RegExList} = [{
+                Value        => $Param{Attribute}{Input}{RegEx},
+                ErrorMessage => $Param{Attribute}{Input}{RegExErrorMessage} // 'Format invalid!',
+            }];
+        }
+
+        if ( $Param{Attribute}{Input}{ValueDefault} ) {
+            $DF{Config}{DefaultValue} = $Param{Attribute}{Input}{ValueDefault};
+        }
+    }
+    elsif ( $Type eq 'GeneralCatalog' ) {
+        $DF{FieldType} = $Type;
+
+        if ( !$Param{Attribute}{Input}{Class} ) {
+            $Self->Print("<red>GeneralCatalog attribute without class!</red>\n");
+
+            return;
+        }
+
+        $DF{Config}{Class} = $Param{Attribute}{Input}{Class};
+
+        if ( $Param{Attribute}{Input}{Translation} ) {
+            $DF{Config}{TranslatableValues} = 1;
+        }
+    }
+    elsif ( $Type eq 'CustomerCompany' ) {
+        $DF{FieldType} = $Type;
+    }
+    elsif ( $Type eq 'Customer' ) {
+        $DF{FieldType} = 'CustomerUser';
+    }
+    elsif ( $Type eq 'Date' || $Type eq 'DateTime') {
+        $DF{FieldType} = $Type;
+
+        $DF{Config}{YearsInFuture} = 5;
+        $DF{Config}{YearsInPast}   = 5;
+        $DF{Config}{YearsPeriod}   = 0;
+
+        if ( $Param{Attribute}{Input}{YearPeriodFuture} ) {
+            $DF{Config}{YearsPeriod}   = 1;
+            $DF{Config}{YearsInFuture} = $Param{Attribute}{Input}{YearPeriodFuture};
+        }
+        if ( $Param{Attribute}{Input}{YearPeriodPast} ) {
+            $DF{Config}{YearsPeriod}   = 1;
+            $DF{Config}{YearsInPast}   = $Param{Attribute}{Input}{YearPeriodPast};
+        }
+    }
+    elsif ( $Type eq 'Integer' ) {
+        $DF{FieldType} = 'Dropdown';
+
+        if ( !$Param{Attribute}{Input}{ValueMin} || !$Param{Attribute}{Input}{ValueMax} ) {
+            $Self->Print("<red>Need ValueMin and ValueMax for integer fields!</red>\n");
+
+            return;
+        }
+
+        $DF{Config}{PossibleValues} = { map { $_ => $_ } ( $Param{Attribute}{Input}{ValueMin} .. $Param{Attribute}{Input}{ValueMax} ) };
+
+        if ( $Param{Attribute}{Input}{ValueDefault} ) {
+            $DF{Config}{DefaultValue} = $Param{Attribute}{Input}{ValueDefault};
+        }
+    }
+    else {
+        $Self->Print("<red>Unknown input type "$Type"!</red>\n");
+
+        return;
+    }
+
+    return %DF;
 }
 
 sub _ContinueOrNot {
