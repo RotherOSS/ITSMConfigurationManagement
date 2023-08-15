@@ -278,7 +278,7 @@ sub _PrepareDefinitions {
         );
 
         # Skip the class when there is no attribute mapping.
-        # This happens when the file was removed or when the class already was in OTOBO 12 format.
+        # This happens when the file was removed or when the class already was in OTOBO 11 format.
         next CLASS_ID unless defined $MapRef;
 
         my $AttributeMap = $Self->{YAMLObject}->Load(
@@ -301,8 +301,14 @@ sub _PrepareDefinitions {
 
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
-                Filename  => 'DefinitionMap_' . $Self->{ClassList}{$ClassID} . '_' . $Definition->{DefinitionID},
-                Content   => \$DefinitionYAML,
+                Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Content   => \$DefinitionYAML->{ConfigItem},
+            );
+
+            $FileLocation = $MainObject->FileWrite(
+                Directory => $Self->{WorkingDir},
+                Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Content   => \$DefinitionYAML->{DynamicField},
             );
         }
     }
@@ -314,6 +320,132 @@ sub _MigrateDefinitions {
     my ( $Self, %Param ) = @_;
 
     $Self->Print("<yellow>Import definitions.</yellow>\n");
+
+    my $MainObject         = $Kernel::OM->Get('Kernel::System::Main');
+    my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+    my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+    # keep the legacy definition for now
+    if (
+        # TODO: make this viable for all DB types
+        $DBObject->Do(
+            SQL => 'ALTER TABLE configitem_definition ADD COLUMN configitem_definition_legacy longblob',
+        )
+    ) {
+        $DBObject->Do(
+            SQL => 'UPDATE configitem_definition SET configitem_definition_legacy = configitem_definition',
+        );
+    }
+    else {
+        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'continue' to continue.</yellow>\n");
+
+        return if <STDIN> !~ m/^con(tinue)?$/;
+    }
+
+    my %DynamicFields;
+    my %Definitions;
+
+    # collect data
+    CLASS_ID:
+    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+
+        DEFINITION:
+        for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
+            # skip definitions if files are not provided; TODO: only skip without error if this is for the whole class
+            next if !-e $Self->{WorkingDir} . '/' . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml';
+
+            my $ConfigItemYAML = $MainObject->FileRead(
+                Directory => $Self->{WorkingDir},
+                Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
+            );
+
+            my %ConfigItemDefinition = $YAMLObject->Load(
+                Data => $ConfigItemYAML,
+            );
+
+            # TODO: Add and use a DefinitionCheck of Kernel::System::ITSMConfigItem::Definition
+
+            if ( !%ConfigItemDefinition ) {
+                $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
+
+                return;
+            }
+
+            my $DynamicFieldYAML = $MainObject->FileRead(
+                Directory => $Self->{WorkingDir},
+                Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
+            );
+
+            my %DynamicFieldDefinition = $YAMLObject->Load(
+                Data => $DynamicFieldYAML,
+            );
+
+            if ( !%DynamicFieldDefinition ) {
+                $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
+
+                return;
+            }
+
+            $Definitions{$ClassID}{ $Definition->{DefinitionID} } = {
+                ConfigItemYAML => $ConfigItemYAML,
+                DynamicField   => \%DynamicFieldDefinition,
+            };
+
+            for my $Name ( keys %DynamicFieldDefinition ) {
+                $DynamicFields{ $Name } = $DynamicFieldDefinition{ $Name };
+            }
+        }
+    }
+
+    # get current field order
+    my $DynamicFieldList = $Self->DynamicFieldListGet(
+        Valid => 0,
+    );
+    my $Order = $DynamicFieldList->@*;
+    
+    # create dynamic fields
+    for my $Field ( keys %DynamicFields ) {
+        $DynamicFields{$Field}{ID} = $DynamicFieldObject->DynamicFieldAdd(
+            $DynamicFields{$Field}->%*,
+            FieldOrder  => ++$Order,
+            ObjectType  => 'ITSMConfigItem',
+            Reorder     => 0,
+            ValidID     => 1,
+            UserID      => 1,
+        );
+
+        if ( !$DynamicFields{$Field}{ID} ) {
+            # TODO: alternatively try to get the DF, and check whether its definition fits. Maybe still ask
+            $Self->Print("<red>Could not create dynamic field $Field! Fix its definitions and delete all other dynamic fields created by this process before retrying.</red>\n");
+
+            return;
+        }
+    }
+
+    # set new definitions
+    CLASS_ID:
+    for my $ClassID ( keys %Definitions ) {
+
+        DEFINITION:
+        for my $DefinitionID ( keys $Definitions{$ClassID}->%* ) {
+            # add the ID of the newly created dynamic fields to their definition specific configs
+            for my $DynamicField ( values $Definitions{$ClassID}{$DefinitionID}{DynamicField}->%* ) {
+                $DynamicField->{ID} = $DynamicFields{ $DynamicField->{Name} }{ID};
+            }
+
+            my $DynamicFieldYAML = $YAMLObject->Dump(
+                Data => $Definitions{$ClassID}{$DefinitionID}{DynamicField},
+            );
+
+            my $Success = $DBObject->Do(
+                SQL  => 'UPDATE configitem_definition SET configitem_definition = ?, dynamicfield_definition = ? WHERE id = ?',
+                Bind => [ \$Definitions{$ClassID}{$DefinitionID}{ConfigItemYAML}, \$DynamicFieldYAML, \$DefinitionID ],
+            );
+
+            # TODO: If an error occurs, ask, whether we should continue or not probably. Here it would start to get messy...
+        }
+    }
 
     return 'Next';
 }
@@ -342,7 +474,7 @@ sub _GenerateDefinitionYAML {
 
     # Explictily generate a YAML string in order to have better control
     # of the layout.
-    my $YAML = <<'END_YAML';
+    my $CIYAML = <<'END_YAML';
 ---
 Pages:
   - Name: Content
@@ -383,22 +515,24 @@ END_YAML
         );
 
         if ( !%DFSpecific ) {
-            $Self->Print("<red>Could not convert "$Attribute->{Name}" to DynamicField (Class: "$Param{Class}")!</red>\n");
+            $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}')!</red>\n");
 
             next ATTRIBUTE;
         }
 
-        $YAML .= $YAMLLine;
+        $CIYAML .= $YAMLLine;
 
         $DynamicFields{ $Param{AttributeMap}{ $Attribute->{Key} } } = { %DFBasic, %DFSpecific };
     }
-    $YAML .= "\n";
 
-    $YAML .= $Kernel::OM->Get('Kernel::System::YAML')->Dump(
-        Data => \%DynamicFields;
+    my $DFYAML = $Kernel::OM->Get('Kernel::System::YAML')->Dump(
+        Data => \%DynamicFields,
     );
 
-    return $YAML;
+    return {
+        ConfigItem   => $CIYAML,
+        DynamicField => $DFYAML,
+    };
 }
 
 sub _GetAttributesFromLegacyYAML {
@@ -484,7 +618,7 @@ sub _DFConfigFromLegacy {
             );
 
             if ( !%DFSpecific ) {
-                $Self->Print("<red>Could not convert "$Attribute->{Name}" to DynamicField (Class: "$Param{Class}")!</red>\n");
+                $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}')!</red>\n");
 
                 next ATTRIBUTE;
             }
@@ -565,7 +699,7 @@ sub _DFConfigFromLegacy {
         }
     }
     else {
-        $Self->Print("<red>Unknown input type "$Type"!</red>\n");
+        $Self->Print("<red>Unknown input type '$Type'!</red>\n");
 
         return;
     }
