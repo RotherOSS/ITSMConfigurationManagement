@@ -75,7 +75,6 @@ sub GetFieldTypeSettings {
                 SelectionData   => $ClassID2Name,
                 PossibleNone    => 0,                                                                                # the class is required
                 Multiple        => 1,
-                Mandatory       => 1,
             };
     }
 
