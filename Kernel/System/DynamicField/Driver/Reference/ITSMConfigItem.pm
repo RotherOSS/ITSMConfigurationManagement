@@ -30,6 +30,7 @@ use parent qw(Kernel::System::DynamicField::Driver::Reference::Base);
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -67,12 +68,13 @@ sub GetFieldTypeSettings {
 
         push @FieldTypeSettings,
             {
-                ConfigParamName => 'ClassID',
-                Label           => Translatable('Class of the config item'),
-                Explanation     => Translatable('Select the class of the config item'),
+                ConfigParamName => 'ClassIDs',
+                Label           => Translatable('Class restrictions for the config item'),
+                Explanation     => Translatable('Select one or more classes to restrict selectable config items'),
                 InputType       => 'Selection',
                 SelectionData   => $ClassID2Name,
-                PossibleNone    => 0,                                                     # the class is required
+                PossibleNone    => 0,                                                                                # the class is required
+                Multiple        => 1,
             };
     }
 
@@ -120,8 +122,8 @@ sub ObjectPermission {
 return a hash of object descriptions.
 
     my %Description = $PluginObject->ObjectDescriptionGet(
-        Key     => 123,
-        UserID  => 1,
+        ObjectID => 123,
+        UserID   => 1,
     );
 
 Return
@@ -179,8 +181,69 @@ sub SearchObjects {
     my %SearchParams;
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     {
-        if ( $DynamicFieldConfig->{Config}->{ClassID} ) {
-            $SearchParams{ClassIDs} = [ $DynamicFieldConfig->{Config}->{ClassID} ];
+        if ( defined $DynamicFieldConfig->{Config}->{ClassIDs} && IsArrayRefWithData( $DynamicFieldConfig->{Config}->{ClassIDs} ) ) {
+            $SearchParams{ClassIDs} = $DynamicFieldConfig->{Config}->{ClassIDs};
+        }
+    }
+
+    if ( $Param{Term} ) {
+
+        # substring search
+        $SearchParams{Name} = ["%$Param{Term}%"];
+    }
+
+    # incorporate referencefilterlist into search params
+    if ( $DynamicFieldConfig->{Config}{ReferenceFilterList} ) {
+        FILTERITEM:
+        for my $FilterItem ( $DynamicFieldConfig->{Config}{ReferenceFilterList}->@* ) {
+
+            # check filter config
+            next FILTERITEM unless $FilterItem->{ReferenceObjectAttribute};
+            next FILTERITEM unless ( $FilterItem->{EqualsObjectAttribute} || $FilterItem->{EqualsString} );
+
+            if ( $FilterItem->{EqualsObjectAttribute} ) {
+
+                # don't perform search if object attribute to search for is empty
+                return unless $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} };
+                return if ( ref $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} } eq 'ARRAY' && !$Param{Object}->{ $FilterItem->{EqualsObjectAttribute} }->@* );
+                return if ( ref $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} } eq 'HASH'  && !$Param{Object}->{ $FilterItem->{EqualsObjectAttribute} }->%* );
+
+                # config item attribute
+                if ( $FilterItem->{ReferenceObjectAttribute} =~ m{^Con}i ) {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} };
+                }
+
+                # dynamic field attribute
+                elsif ( $FilterItem->{ReferenceObjectAttribute} =~ m{^Dyn}i ) {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = {
+                        Equals => $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} },
+                    };
+                }
+
+                # array attribute
+                else {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = [ $Param{Object}->{ $FilterItem->{EqualsObjectAttribute} } ];
+                }
+            }
+            elsif ( $FilterItem->{EqualsString} ) {
+
+                # config item attribute
+                if ( $FilterItem->{ReferenceObjectAttribute} =~ m{^Con}i ) {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = $FilterItem->{EqualsString};
+                }
+
+                # dynamic field attribute
+                elsif ( $FilterItem->{ReferenceObjectAttribute} =~ m{^Dyn}i ) {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = {
+                        Equals => $FilterItem->{EqualsString},
+                    };
+                }
+
+                # array attribute
+                else {
+                    $SearchParams{ $FilterItem->{ReferenceObjectAttribute} } = [ $FilterItem->{EqualsString} ];
+                }
+            }
         }
     }
 
@@ -191,7 +254,6 @@ sub SearchObjects {
         Limit  => $Param{MaxResults},
         Result => 'ARRAY',
         %SearchParams,
-        Name => ["%$Param{Term}%"],    # substring search
     );
 }
 

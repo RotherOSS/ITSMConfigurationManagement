@@ -51,8 +51,8 @@ ITSMConfigItemVersion backend for the Reference dynamic field.
 return a hash of object descriptions.
 
     my %Description = $PluginObject->ObjectDescriptionGet(
-        Key     => 123,
-        UserID  => 1,
+        ObjectID => 123,
+        UserID   => 1,
     );
 
 Return
