@@ -423,6 +423,8 @@ sub _MigrateDefinitions {
         }
     }
 
+    my $AllSuccess = 1;
+
     # set new definitions
     CLASS_ID:
     for my $ClassID ( keys %Definitions ) {
@@ -444,9 +446,14 @@ sub _MigrateDefinitions {
             );
 
             # TODO: If an error occurs, ask, whether we should continue or not probably. Here it would start to get messy...
+            if ( !$Success ) {
+                $Self->Print("<red>Could not update DB entry of definition id '$DefinitionID'!</red>\n");
+                $AllSuccess = 0;
+            }
         }
     }
 
+    return if !$AllSuccess;
     return 'Next';
 }
 
@@ -454,6 +461,153 @@ sub _MigrateAttributeData {
     my ( $Self, %Param ) = @_;
 
     $Self->Print("<yellow>Copy attribute data.</yellow>\n");
+
+    my $MainObject                = $Kernel::OM->Get('Kernel::System::Main');
+    my $XMLObject                 = $Kernel::OM->Get('Kernel::System::XML');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    delete $Self->{ConfigItemObject}{Cache}{DefinitionGet};
+
+    CLASS_ID:
+    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+
+        my %Definition;
+        my $MapRef = $MainObject->FileRead(
+            Directory => $Self->{WorkingDir},
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+        );
+
+        # Skip the class when there is no attribute mapping.
+        # This happens when the file was removed or when the class already was in OTOBO 11 format.
+        next CLASS_ID unless defined $MapRef;
+
+        my $AttributeMap = $Self->{YAMLObject}->Load(
+            Data => ${$MapRef},
+        );
+
+        # a sanity check
+        next CLASS_ID unless ref $AttributeMap eq 'HASH';
+
+        # for sets
+        my $AttributeLookup = { reverse $AttributeMap->%* };
+
+        DEFINITION:
+        for my $DefinitionID ( map { $_->{DefinitionID} } $Self->{DefinitionList}{$ClassID}->@* ) {
+
+            $Definition{ $DefinitionID } = $Self->{ConfigItemObject}->DefinitionGet(
+                DefinitionID => $DefinitionID,
+            );
+        }
+
+        # get all versions of a class #TODO: Do we need batches for really large CMDBs?
+        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+            SQL   => "SELECT v.id, v.definition_id FROM version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
+            Bind  => [ \$ClassID ],
+        );
+
+        # fetch the result
+        my @VersionList;
+        while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+            push @VersionList, {
+                VersionID    => $Row[0],
+                DefinitionID => $Row[1],
+            };
+        }
+
+        my @Skipped;
+        my $Count = scalar @VersionList;
+        my $Frac  = int( $Count / 10 );
+        my $c     = 0;
+
+        $Self->Print("\tWorking on <yellow>$Self->{ClassList}{$ClassID}</yellow> ($Count Versions)");
+
+        VERSION:
+        for my $Version ( @VersionList ) {
+            if ( ++$c == $Frac ) {
+                $Self->Print(".");
+                $c = 0;
+            }
+
+            if ( !$Definition{ $Version->{DefinitionID} }{DynamicFieldRef} ) {
+                push @Skipped, $Version->{VersionID};
+                next DEFINITION;
+            }
+
+            # get version
+            my @XML = $Kernel::OM->Get('Kernel::System::XML')->XMLHashGet(
+                Type => "ITSM::ConfigItem::$ClassID",
+                Key  => $Version->{VersionID},
+            );
+
+            ATTRIBUTE:
+            for my $Attribute ( keys $XML[1]{Version}[1]->%* ) {
+                my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{ $Attribute } };
+
+                next ATTRIBUTE if !$DynamicField;
+
+                my $Value;
+                if ( $DynamicField->{FieldType} eq 'Set' ) {
+                    for my $Set ( @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ] ) {
+                        my @SetValue;
+
+                        for my $Included ( $DynamicField->{Config}{Include} ) {
+                            if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . ' <SubPrimaryAttribute>' ) {
+                                push @SetValue, $Set->{Content};
+                            }
+                            else {
+                                my $SubAttr = $Set->{ $AttributeLookup->{ $Included->{DF} } };
+                                my @Values = map { $_->{Content} } @{ $SubAttr }[ 1 .. $SubAttr->$#* ];
+
+                                INDEX:
+                                while ( @Values ) {
+                                    if ( !defined $Values[-1] || $Values[-1] eq '' ) {
+                                        pop @Values;
+                                    }
+                                    else {
+                                        last INDEX;
+                                    }
+                                }
+
+                                push @SetValue, $Included->{DF}{Config}{MultiValue} ? \@Values : $Values[0];
+                            }
+                        }
+
+                        push $Value->@*, \@SetValue;
+                    }
+                }
+                elsif ( $DynamicField->{Config}{MultiValue} ) {
+                    my @Values = map { $_->{Content} } @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ];
+
+                    INDEX:
+                    while ( @Values ) {
+                        if ( !defined $Values[-1] || $Values[-1] eq '' ) {
+                            pop @Values;
+                        }
+                        else {
+                            last INDEX;
+                        }
+                    }
+
+                    next ATTRIBUTE if !@Values;
+
+                    $Value = \@Values;
+                }
+                else {
+                    $Value = $XML[1]{Version}[1]{$Attribute}[1]{Content};
+
+                    next ATTRIBUTE if !defined $Value || $Value eq '';
+                }
+
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicField,
+                    ObjectID           => $Version->{VersionID},
+                    Value              => $Value,
+                    UserID             => 1,
+                    ConfigItemHandled  => 1,
+                );
+            }
+        }
+    }
 
     return 'Next';
 }
