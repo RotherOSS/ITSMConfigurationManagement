@@ -26,7 +26,7 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 # core modules
 use Path::Class qw(dir);
-use List::Util qw(uniq);
+use List::Util qw(any uniq);
 
 # CPAN modules
 
@@ -245,7 +245,7 @@ sub _PrepareAttributeMapping {
         # TODO: maybe check for a mix of OTOBO 10 and OTOBO 11 formats
         next CLASS_ID unless @AttributeKeys;
 
-        my %AttributeMap = map { $_ => $_ =~ s/[^\w\d]//gr } uniq @AttributeKeys;
+        my %AttributeMap = map { $_ => "$Self->{ClassList}{ $ClassID }-" . ( $_ =~ s/[^\w\d]//gr ) } uniq @AttributeKeys;
         my $MapYAML      = $Self->{YAMLObject}->Dump(
             Data => \%AttributeMap,
         );
@@ -255,8 +255,6 @@ sub _PrepareAttributeMapping {
             Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
             Content   => \$MapYAML,
         );
-
-        return 'Next';
     }
 
     return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
@@ -272,6 +270,9 @@ sub _PrepareDefinitions {
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
 
+        # Skip the class when there is no attribute mapping.
+        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
             Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
@@ -279,6 +280,7 @@ sub _PrepareDefinitions {
 
         # Skip the class when there is no attribute mapping.
         # This happens when the file was removed or when the class already was in OTOBO 11 format.
+        # TODO: here it is an error now, we don't even try if the file is removed
         next CLASS_ID unless defined $MapRef;
 
         my $AttributeMap = $Self->{YAMLObject}->Load(
@@ -338,7 +340,7 @@ sub _MigrateDefinitions {
         );
     }
     else {
-        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'continue' to continue.</yellow>\n");
+        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n");
 
         return if <STDIN> !~ m/^con(tinue)?$/;
     }
@@ -349,6 +351,9 @@ sub _MigrateDefinitions {
     # collect data
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
+
+        # Skip the class when there is no attribute mapping.
+        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         DEFINITION:
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
@@ -429,6 +434,9 @@ sub _MigrateDefinitions {
     CLASS_ID:
     for my $ClassID ( keys %Definitions ) {
 
+        # Skip the class when there is no attribute mapping.
+        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+
         DEFINITION:
         for my $DefinitionID ( keys $Definitions{$ClassID}->%* ) {
             # add the ID of the newly created dynamic fields to their definition specific configs
@@ -470,6 +478,9 @@ sub _MigrateAttributeData {
 
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
+
+        # Skip the class when there is no attribute mapping.
+        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         my %Definition;
         my $MapRef = $MainObject->FileRead(
@@ -551,11 +562,12 @@ sub _MigrateAttributeData {
                         my @SetValue;
 
                         for my $Included ( $DynamicField->{Config}{Include} ) {
-                            if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . ' <SubPrimaryAttribute>' ) {
+                            if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
                                 push @SetValue, $Set->{Content};
                             }
                             else {
-                                my $SubAttr = $Set->{ $AttributeLookup->{ $Included->{DF} } };
+                                my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
+                                my $SubAttr = $Set->{ $Name };
                                 my @Values = map { $_->{Content} } @{ $SubAttr }[ 1 .. $SubAttr->$#* ];
 
                                 INDEX:
@@ -649,6 +661,8 @@ END_YAML
 
     ATTRIBUTE:
     for my $Attribute ( $Param{Attributes}->@* ) {
+        next ATTRIBUTE if !$Param{AttributeMap}{ $Attribute->{Key} };
+
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
         if ( $Attribute->{Input}{Required} ) {
@@ -713,13 +727,12 @@ sub _GetAttributesFromLegacyYAML {
     for my $Attribute ( $DefinitionRef->@* ) {
         push @Attributes, $Attribute;
 
-        if ( $Attribute->{Subs} && $Param{RecuSubs} ) {
-            push @Attributes, $Self->_GetAttributesFromLegacyYAML( DefinitionRef => delete $Attribute->{Sub} );
+        if ( $Attribute->{Sub} && $Param{RecuSubs} ) {
+            my $PrimarySub = { Key => $Attribute->{Key}.'::<SubPrimaryAttribute>' };
 
-            $Attribute->{Key}  .= '<SubPrimaryAttribute>';
-            $Attribute->{Name} .= ' Name';
-
-            push @Attributes, $Attribute;
+            push @Attributes, $PrimarySub;
+            my @SubAttributes = $Self->_GetAttributesFromLegacyYAML( DefinitionRef => $Attribute->{Sub} );
+            push @Attributes, map { { Key => $Attribute->{Key} . '::' . $_->{Key} } } @SubAttributes;
         }
     }
 
@@ -749,15 +762,18 @@ sub _DFConfigFromLegacy {
             return;
         }
 
-        my $Sub = delete $Param{Attribute}{Sub};
+        my $Sub    = delete $Param{Attribute}{Sub};
+        my $Prefix = $Param{Attribute}{Key};
 
-        $Param{Attribute}{Key}  .= '<SubPrimaryAttribute>';
-        $Param{Attribute}{Name} .= ' Name';
+        $Param{Attribute}{Key}  = '<SubPrimaryAttribute>';
+        $Param{Attribute}{Name} = 'Name';
 
         my @Include;
 
         ATTRIBUTE:
         for my $Attribute ( $Param{Attribute}, $Sub->@* ) {
+            $Attribute->{Key} = $Prefix . '::' . $Attribute->{Key};
+
             my %DFBasic = (
                 Name       => $Param{AttributeMap}{ $Attribute->{Key} },
                 Label      => $Attribute->{Name},
@@ -867,10 +883,10 @@ sub _ContinueOrNot {
     return 'Next' if $Self->{UseDefaults};
 
     $Self->Print(
-        "<yellow>You can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n"
+        "<yellow>Done.\n\nYou can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n"
     );
-    $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
-    $Self->Print("\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n");
+    $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
+    $Self->Print("\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n\t");
 
     return 'Next' if <STDIN> =~ m/^def(ault)?$/;
 
