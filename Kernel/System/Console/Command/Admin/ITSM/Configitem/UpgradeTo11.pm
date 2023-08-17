@@ -612,7 +612,8 @@ sub _MigrateAttributeData {
 
             if ( !$Definition{ $Version->{DefinitionID} }{DynamicFieldRef} ) {
                 push @Skipped, $Version->{VersionID};
-                next DEFINITION;
+
+                next VERSION;
             }
 
             # get version
