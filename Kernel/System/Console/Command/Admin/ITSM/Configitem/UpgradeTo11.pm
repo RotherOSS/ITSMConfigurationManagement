@@ -496,6 +496,8 @@ sub _MigrateAttributeData {
     my $XMLObject                 = $Kernel::OM->Get('Kernel::System::XML');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
+    my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser/;
+
     delete $Self->{ConfigItemObject}{Cache}{DefinitionGet};
 
     CLASS_ID:
@@ -574,6 +576,8 @@ sub _MigrateAttributeData {
 
             ATTRIBUTE:
             for my $Attribute ( keys $XML[1]{Version}[1]->%* ) {
+                next ATTRIBUTE if !$AttributeMap->{ $Attribute };
+
                 my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{ $Attribute } };
 
                 next ATTRIBUTE if !$DynamicField;
@@ -585,7 +589,7 @@ sub _MigrateAttributeData {
 
                         for my $Included ( $DynamicField->{Config}{Include}->@* ) {
                             if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
-                                push @SetValue, $Set->{Content};
+                                push @SetValue, $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
                             }
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
@@ -602,7 +606,7 @@ sub _MigrateAttributeData {
                                     }
                                 }
 
-                                push @SetValue, $Included->{Definition}{Config}{MultiValue} ? \@Values : $Values[0];
+                                push @SetValue, $Included->{Definition}{Config}{MultiValue} || $BaseArrayFields{ $Included->{Definition}{FieldType} } ? \@Values : $Values[0];
                             }
                         }
 
@@ -627,7 +631,7 @@ sub _MigrateAttributeData {
                     $Value = \@Values;
                 }
                 else {
-                    $Value = $XML[1]{Version}[1]{$Attribute}[1]{Content};
+                    $Value = $BaseArrayFields{$DynamicField->{FieldType} } ? [ $XML[1]{Version}[1]{$Attribute}[1]{Content} ] : $XML[1]{Version}[1]{$Attribute}[1]{Content};
 
                     next ATTRIBUTE if !defined $Value || $Value eq '';
                 }
