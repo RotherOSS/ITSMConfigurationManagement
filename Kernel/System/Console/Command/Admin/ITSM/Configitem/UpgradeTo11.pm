@@ -83,6 +83,13 @@ sub Configure {
         HasValue    => 1,
         ValueRegex  => qr/./,
     );
+    $Self->AddOption(
+        Name        => 'no-namespace',
+        Description => "Provide a comma separated list of attributes which are to be generated without namespace.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/./,
+    );
 
     return;
 }
@@ -128,6 +135,7 @@ sub Run {
 
     $Self->{WorkingDir}  = $Self->GetOption('tmpdir') || "$TempDir/CMDBUpgradeTo11Schemata";
     $Self->{UseDefaults} = $Self->GetOption('use-defaults');
+    $Self->{NoNamespace} = $Self->GetOption('no-namespace');
     my $StartAt = $Self->GetOption('start-at') // $Self->_GetCurrentStep();
 
     if ($StartAt) {
@@ -226,6 +234,11 @@ sub _PrepareAttributeMapping {
 
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    my %NoNamespace;
+    if ( $Self->{NoNamespace} ) {
+        %NoNamespace = map { $_ => 1 } split( /\s*,\s*/, $Self->{NoNamespace} );
+    }
+
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
 
@@ -245,8 +258,30 @@ sub _PrepareAttributeMapping {
         # TODO: maybe check for a mix of OTOBO 10 and OTOBO 11 formats
         next CLASS_ID unless @AttributeKeys;
 
-        my %AttributeMap = map { $_ => "$Self->{ClassList}{ $ClassID }-" . ( $_ =~ s/[^\w\d]//gr ) } uniq @AttributeKeys;
-        my $MapYAML      = $Self->{YAMLObject}->Dump(
+        my $Namespace   = $Self->{ClassList}{ $ClassID } =~ s/[^\w\d]//gr;
+        my %Substitions = (
+            ä => 'ae',
+            ö => 'oe',
+            ü => 'ue',
+            ß => 'ss',
+            _ => '',
+        );
+
+        for my $Sub ( keys %Substitions ) {
+            $Namespace =~ s/$Sub/$Substitions{$Sub}/;
+        }
+
+        my %AttributeMap;
+        for my $Key ( uniq @AttributeKeys ) {
+            my $FieldName = $Key;
+            for my $Sub ( keys %Substitions ) {
+                $FieldName =~ s/$Sub/$Substitions{$Sub}/;
+            }
+
+            $AttributeMap{ $Key } = $NoNamespace{ $Key } ? $FieldName : $Namespace . '-' . $FieldName;
+        }
+
+        my $MapYAML = $Self->{YAMLObject}->Dump(
             Data => \%AttributeMap,
         );
 
