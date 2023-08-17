@@ -163,7 +163,7 @@ sub Run {
     STEP:
     for my $CurrentStep ( $StartAt .. $#StepDeclarations ) {
         my $StepDeclaration = $StepDeclarations[$CurrentStep];
-        $Self->Print("<green>Start working on $StepDeclaration->{Name}</green>\n");
+        $Self->Print("\n<green>---\nStart working on $StepDeclaration->{Name}</green>\n");
         $Success = $StepDeclaration->{Handler}->(
             $Self,
             CurrentStep => $CurrentStep,
@@ -179,7 +179,7 @@ sub Run {
         return $Self->ExitCodeOk;
     }
     else {
-        $Self->Print("<green>An error occured!</green>\n");
+        $Self->Print("<red>An error occured!</red>\n");
 
         return $Self->ExitCodeError;
     }
@@ -326,7 +326,7 @@ sub _MigrateDefinitions {
     my $MainObject         = $Kernel::OM->Get('Kernel::System::Main');
     my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
     my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::YAML');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
     # keep the legacy definition for now
     if (
@@ -340,7 +340,7 @@ sub _MigrateDefinitions {
         );
     }
     else {
-        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n");
+        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n\t");
 
         return if <STDIN> !~ m/^con(tinue)?$/;
     }
@@ -365,13 +365,13 @@ sub _MigrateDefinitions {
                 Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
             );
 
-            my %ConfigItemDefinition = $YAMLObject->Load(
-                Data => $ConfigItemYAML,
+            my $ConfigItemDefinition = $YAMLObject->Load(
+                Data => ${$ConfigItemYAML},
             );
 
             # TODO: Add and use a DefinitionCheck of Kernel::System::ITSMConfigItem::Definition
 
-            if ( !%ConfigItemDefinition ) {
+            if ( !$ConfigItemDefinition ) {
                 $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
 
                 return;
@@ -382,37 +382,53 @@ sub _MigrateDefinitions {
                 Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
             );
 
-            my %DynamicFieldDefinition = $YAMLObject->Load(
-                Data => $DynamicFieldYAML,
+            my $DynamicFieldDefinition = $YAMLObject->Load(
+                Data => ${$DynamicFieldYAML},
             );
 
-            if ( !%DynamicFieldDefinition ) {
+            if ( !$DynamicFieldDefinition ) {
                 $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
 
                 return;
             }
 
             $Definitions{$ClassID}{ $Definition->{DefinitionID} } = {
-                ConfigItemYAML => $ConfigItemYAML,
-                DynamicField   => \%DynamicFieldDefinition,
+                ConfigItemYAML => ${$ConfigItemYAML},
+                DynamicField   => $DynamicFieldDefinition,
             };
 
-            for my $Name ( keys %DynamicFieldDefinition ) {
-                $DynamicFields{ $Name } = $DynamicFieldDefinition{ $Name };
+            for my $Name ( keys $DynamicFieldDefinition->%* ) {
+                $DynamicFields{ $Name } = $DynamicFieldDefinition->{ $Name };
+
+                if ( $DynamicFieldDefinition->{ $Name }{FieldType} eq 'Set' ) {
+                    for my $Included ( $DynamicFieldDefinition->{ $Name }{Config}{Include}->@* ) {
+                        $DynamicFields{ $Included->{DF} } = $Included->{Definition};
+                    }
+                }
             }
         }
     }
 
     # get current field order
-    my $DynamicFieldList = $Self->DynamicFieldListGet(
+    my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
         Valid => 0,
     );
     my $Order = $DynamicFieldList->@*;
     
     # create dynamic fields
     for my $Field ( keys %DynamicFields ) {
+        my %SetConfig;
+        if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
+            my @Included = map { { DF => $_->{DF} } } $DynamicFields{$Field}{Config}{Include}->@*;
+            %SetConfig = (
+                $DynamicFields{$Field}{Config}->%*,
+                Include => \@Included,
+            );
+        }
+
         $DynamicFields{$Field}{ID} = $DynamicFieldObject->DynamicFieldAdd(
             $DynamicFields{$Field}->%*,
+            %SetConfig,
             FieldOrder  => ++$Order,
             ObjectType  => 'ITSMConfigItem',
             Reorder     => 0,
@@ -442,6 +458,12 @@ sub _MigrateDefinitions {
             # add the ID of the newly created dynamic fields to their definition specific configs
             for my $DynamicField ( values $Definitions{$ClassID}{$DefinitionID}{DynamicField}->%* ) {
                 $DynamicField->{ID} = $DynamicFields{ $DynamicField->{Name} }{ID};
+
+                if ( $DynamicField->{FieldType} eq 'Set' ) {
+                    for my $Included ( $DynamicField->{Config}{Include}->@* ) {
+                        $Included->{Definition}{ID} = $DynamicFields{ $Included->{DF} }{ID};
+                    }
+                }
             }
 
             my $DynamicFieldYAML = $YAMLObject->Dump(
@@ -512,7 +534,7 @@ sub _MigrateAttributeData {
 
         # get all versions of a class #TODO: Do we need batches for really large CMDBs?
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL   => "SELECT v.id, v.definition_id FROM version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
+            SQL   => "SELECT v.id, v.definition_id FROM configitem_version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
             Bind  => [ \$ClassID ],
         );
 
@@ -561,7 +583,7 @@ sub _MigrateAttributeData {
                     for my $Set ( @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ] ) {
                         my @SetValue;
 
-                        for my $Included ( $DynamicField->{Config}{Include} ) {
+                        for my $Included ( $DynamicField->{Config}{Include}->@* ) {
                             if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
                                 push @SetValue, $Set->{Content};
                             }
@@ -580,7 +602,7 @@ sub _MigrateAttributeData {
                                     }
                                 }
 
-                                push @SetValue, $Included->{DF}{Config}{MultiValue} ? \@Values : $Values[0];
+                                push @SetValue, $Included->{Definition}{Config}{MultiValue} ? \@Values : $Values[0];
                             }
                         }
 
@@ -751,28 +773,36 @@ sub _DFConfigFromLegacy {
     my $Type = $Param{Attribute}{Input}{Type};
     my %DF;
 
-    if ( any { $Param{Attribute}{$_} } qw/CountMin CountMax CountDefault/ ) {
+    if ( any { defined $Param{Attribute}{$_} } qw/CountMin CountMax CountDefault/ ) {
         $DF{Config}{MultiValue} = 1;
     }
 
     if ( $Param{Attribute}{Sub} ) {
+        $DF{FieldType} = 'Set';
+
         if ( $Param{InSub} ) {
             $Self->Print("<red>Subs of subs are not supported!</red>\n");
 
             return;
         }
 
-        my $Sub    = delete $Param{Attribute}{Sub};
-        my $Prefix = $Param{Attribute}{Key};
+        my $Sub     = delete $Param{Attribute}{Sub};
+        my $Primary = {
+            $Param{Attribute}->%*,
+            Key  => '<SubPrimaryAttribute>',
+            Name => 'Name',
+        };
 
-        $Param{Attribute}{Key}  = '<SubPrimaryAttribute>';
-        $Param{Attribute}{Name} = 'Name';
+        # primary attribute cannot be multivalue in XML schema
+        for my $Delete ( qw/CountMin CountMax CountDefault/ ) {
+            delete $Primary->{$Delete};
+        }
 
         my @Include;
 
         ATTRIBUTE:
-        for my $Attribute ( $Param{Attribute}, $Sub->@* ) {
-            $Attribute->{Key} = $Prefix . '::' . $Attribute->{Key};
+        for my $Attribute ( $Primary, $Sub->@* ) {
+            $Attribute->{Key} = $Param{Attribute}{Key} . '::' . $Attribute->{Key};
 
             my %DFBasic = (
                 Name       => $Param{AttributeMap}{ $Attribute->{Key} },
@@ -830,12 +860,18 @@ sub _DFConfigFromLegacy {
         if ( $Param{Attribute}{Input}{Translation} ) {
             $DF{Config}{TranslatableValues} = 1;
         }
+
+        $DF{Config}{PossibleNone} = 1;
     }
     elsif ( $Type eq 'CustomerCompany' ) {
         $DF{FieldType} = $Type;
+
+        $DF{Config}{PossibleNone} = 1;
     }
     elsif ( $Type eq 'Customer' ) {
         $DF{FieldType} = 'CustomerUser';
+
+        $DF{Config}{PossibleNone} = 1;
     }
     elsif ( $Type eq 'Date' || $Type eq 'DateTime') {
         $DF{FieldType} = $Type;
@@ -866,6 +902,9 @@ sub _DFConfigFromLegacy {
 
         if ( $Param{Attribute}{Input}{ValueDefault} ) {
             $DF{Config}{DefaultValue} = $Param{Attribute}{Input}{ValueDefault};
+        }
+        else {
+            $DF{Config}{PossibleNone} = 1;
         }
     }
     else {
