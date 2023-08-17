@@ -421,8 +421,10 @@ sub _MigrateDefinitions {
         if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
             my @Included = map { { DF => $_->{DF} } } $DynamicFields{$Field}{Config}{Include}->@*;
             %SetConfig = (
-                $DynamicFields{$Field}{Config}->%*,
-                Include => \@Included,
+                Config => {
+                    $DynamicFields{$Field}{Config}->%*,
+                    Include => \@Included,
+                },
             );
         }
 
