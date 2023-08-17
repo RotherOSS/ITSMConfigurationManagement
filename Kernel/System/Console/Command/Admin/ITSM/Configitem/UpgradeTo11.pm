@@ -262,13 +262,13 @@ sub _PrepareAttributeMapping {
         # TODO: maybe check for a mix of OTOBO 10 and OTOBO 11 formats
         next CLASS_ID unless @AttributeKeys;
 
-        my $Namespace   = $Self->{ClassList}{ $ClassID } =~ s/[^\w\d]//gr;
+        my $Namespace   = $Self->{ClassList}{$ClassID} =~ s/[^\w\d]//gr;
         my %Substitions = (
-            ä => 'ae',
-            ö => 'oe',
-            ü => 'ue',
-            ß => 'ss',
-            _ => '',
+            'ä' => 'ae',
+            'ö' => 'oe',
+            'ü' => 'ue',
+            'ß' => 'ss',
+            '_'  => '',
         );
 
         for my $Sub ( keys %Substitions ) {
@@ -282,7 +282,7 @@ sub _PrepareAttributeMapping {
                 $FieldName =~ s/$Sub/$Substitions{$Sub}/;
             }
 
-            $AttributeMap{ $Key } = $NoNamespace{ $Key } ? $FieldName : $Namespace . '-' . $FieldName;
+            $AttributeMap{$Key} = $NoNamespace{$Key} ? $FieldName : $Namespace . '-' . $FieldName;
         }
 
         my $MapYAML = $Self->{YAMLObject}->Dump(
