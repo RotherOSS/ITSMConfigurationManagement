@@ -270,16 +270,14 @@ return the current last version ids used in dynamic_field_value
 sub ValueForLens {
     my ( $Self, %Param ) = @_;
 
-    # MultiValue lenses are not supported
-    my $Value = ref $Param{Value} ? $Param{Value}[0] : $Param{Value};
-
-    return if !$Value;
+    return unless ref $Param{Value};
+    return unless $Param{Value}->@*;
 
     my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-        ConfigItemID => $Value,
+        ConfigItemID => $Param{Value}->[0],
     );
 
-    return $ConfigItem->{LastVersionID};
+    return [ $ConfigItem->{LastVersionID} ];
 }
 
 1;
