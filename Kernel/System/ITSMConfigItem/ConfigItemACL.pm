@@ -998,7 +998,7 @@ sub _GetChecks {
         $Checks{ConfigItem} = $ConfigItem;
 
         # keep database config item data separated since the reference is affected below
-        $ChecksDatabase{ConfigItem} = \%{ $ConfigItem };
+        $ChecksDatabase{ConfigItem} = \%{$ConfigItem};
     }
 
     # check for dynamic fields

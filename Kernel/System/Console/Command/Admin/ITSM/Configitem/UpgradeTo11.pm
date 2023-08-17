@@ -373,13 +373,16 @@ sub _MigrateDefinitions {
         $DBObject->Do(
             SQL => 'ALTER TABLE configitem_definition ADD COLUMN configitem_definition_legacy longblob',
         )
-    ) {
+        )
+    {
         $DBObject->Do(
             SQL => 'UPDATE configitem_definition SET configitem_definition_legacy = configitem_definition',
         );
     }
     else {
-        $Self->Print("<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n\t");
+        $Self->Print(
+            "<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n\t"
+        );
 
         return if <STDIN> !~ m/^con(tinue)?$/;
     }
@@ -396,8 +399,9 @@ sub _MigrateDefinitions {
 
         DEFINITION:
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
+
             # skip definitions if files are not provided; TODO: only skip without error if this is for the whole class
-            next if !-e $Self->{WorkingDir} . '/' . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml';
+            next DEFINITION unless -e $Self->{WorkingDir} . '/' . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml';
 
             my $ConfigItemYAML = $MainObject->FileRead(
                 Directory => $Self->{WorkingDir},
@@ -411,7 +415,7 @@ sub _MigrateDefinitions {
             # TODO: Add and use a DefinitionCheck of Kernel::System::ITSMConfigItem::Definition
 
             if ( !$ConfigItemDefinition ) {
-                $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
+                $Self->Print( "<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n" );
 
                 return;
             }
@@ -426,7 +430,7 @@ sub _MigrateDefinitions {
             );
 
             if ( !$DynamicFieldDefinition ) {
-                $Self->Print("<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n");
+                $Self->Print( "<red>Could not interpret" . $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . ".yml!</red>\n" );
 
                 return;
             }
@@ -437,10 +441,10 @@ sub _MigrateDefinitions {
             };
 
             for my $Name ( keys $DynamicFieldDefinition->%* ) {
-                $DynamicFields{ $Name } = $DynamicFieldDefinition->{ $Name };
+                $DynamicFields{$Name} = $DynamicFieldDefinition->{$Name};
 
-                if ( $DynamicFieldDefinition->{ $Name }{FieldType} eq 'Set' ) {
-                    for my $Included ( $DynamicFieldDefinition->{ $Name }{Config}{Include}->@* ) {
+                if ( $DynamicFieldDefinition->{$Name}{FieldType} eq 'Set' ) {
+                    for my $Included ( $DynamicFieldDefinition->{$Name}{Config}{Include}->@* ) {
                         $DynamicFields{ $Included->{DF} } = $Included->{Definition};
                     }
                 }
@@ -453,7 +457,7 @@ sub _MigrateDefinitions {
         Valid => 0,
     );
     my $Order = $DynamicFieldList->@*;
-    
+
     # create dynamic fields
     for my $Field ( keys %DynamicFields ) {
         my %SetConfig;
@@ -470,16 +474,19 @@ sub _MigrateDefinitions {
         $DynamicFields{$Field}{ID} = $DynamicFieldObject->DynamicFieldAdd(
             $DynamicFields{$Field}->%*,
             %SetConfig,
-            FieldOrder  => ++$Order,
-            ObjectType  => 'ITSMConfigItem',
-            Reorder     => 0,
-            ValidID     => 1,
-            UserID      => 1,
+            FieldOrder => ++$Order,
+            ObjectType => 'ITSMConfigItem',
+            Reorder    => 0,
+            ValidID    => 1,
+            UserID     => 1,
         );
 
         if ( !$DynamicFields{$Field}{ID} ) {
+
             # TODO: alternatively try to get the DF, and check whether its definition fits. Maybe still ask
-            $Self->Print("<red>Could not create dynamic field $Field! Fix its definitions and delete all other dynamic fields created by this process before retrying.</red>\n");
+            $Self->Print(
+                "<red>Could not create dynamic field $Field! Fix its definitions and delete all other dynamic fields created by this process before retrying.</red>\n"
+            );
 
             return;
         }
@@ -496,6 +503,7 @@ sub _MigrateDefinitions {
 
         DEFINITION:
         for my $DefinitionID ( keys $Definitions{$ClassID}->%* ) {
+
             # add the ID of the newly created dynamic fields to their definition specific configs
             for my $DynamicField ( values $Definitions{$ClassID}{$DefinitionID}{DynamicField}->%* ) {
                 $DynamicField->{ID} = $DynamicFields{ $DynamicField->{Name} }{ID};
@@ -567,18 +575,16 @@ sub _MigrateAttributeData {
         # for sets
         my $AttributeLookup = { reverse $AttributeMap->%* };
 
-        DEFINITION:
         for my $DefinitionID ( map { $_->{DefinitionID} } $Self->{DefinitionList}{$ClassID}->@* ) {
-
-            $Definition{ $DefinitionID } = $Self->{ConfigItemObject}->DefinitionGet(
+            $Definition{$DefinitionID} = $Self->{ConfigItemObject}->DefinitionGet(
                 DefinitionID => $DefinitionID,
             );
         }
 
         # get all versions of a class #TODO: Do we need batches for really large CMDBs?
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL   => "SELECT v.id, v.definition_id FROM configitem_version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
-            Bind  => [ \$ClassID ],
+            SQL  => "SELECT v.id, v.definition_id FROM configitem_version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
+            Bind => [ \$ClassID ],
         );
 
         # fetch the result
@@ -598,7 +604,7 @@ sub _MigrateAttributeData {
         $Self->Print("\tWorking on <yellow>$Self->{ClassList}{$ClassID}</yellow> ($Count Versions)");
 
         VERSION:
-        for my $Version ( @VersionList ) {
+        for my $Version (@VersionList) {
             if ( ++$c == $Frac ) {
                 $Self->Print(".");
                 $c = 0;
@@ -617,9 +623,9 @@ sub _MigrateAttributeData {
 
             ATTRIBUTE:
             for my $Attribute ( keys $XML[1]{Version}[1]->%* ) {
-                next ATTRIBUTE if !$AttributeMap->{ $Attribute };
+                next ATTRIBUTE if !$AttributeMap->{$Attribute};
 
-                my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{ $Attribute } };
+                my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{$Attribute} };
 
                 next ATTRIBUTE if !$DynamicField;
 
@@ -634,11 +640,11 @@ sub _MigrateAttributeData {
                             }
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
-                                my $SubAttr = $Set->{ $Name };
-                                my @Values = map { $_->{Content} } @{ $SubAttr }[ 1 .. $SubAttr->$#* ];
+                                my $SubAttr = $Set->{$Name};
+                                my @Values  = map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ];
 
                                 INDEX:
-                                while ( @Values ) {
+                                while (@Values) {
                                     if ( !defined $Values[-1] || $Values[-1] eq '' ) {
                                         pop @Values;
                                     }
@@ -658,7 +664,7 @@ sub _MigrateAttributeData {
                     my @Values = map { $_->{Content} } @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ];
 
                     INDEX:
-                    while ( @Values ) {
+                    while (@Values) {
                         if ( !defined $Values[-1] || $Values[-1] eq '' ) {
                             pop @Values;
                         }
@@ -672,7 +678,7 @@ sub _MigrateAttributeData {
                     $Value = \@Values;
                 }
                 else {
-                    $Value = $BaseArrayFields{$DynamicField->{FieldType} } ? [ $XML[1]{Version}[1]{$Attribute}[1]{Content} ] : $XML[1]{Version}[1]{$Attribute}[1]{Content};
+                    $Value = $BaseArrayFields{ $DynamicField->{FieldType} } ? [ $XML[1]{Version}[1]{$Attribute}[1]{Content} ] : $XML[1]{Version}[1]{$Attribute}[1]{Content};
 
                     next ATTRIBUTE if !defined $Value || $Value eq '';
                 }
@@ -795,7 +801,7 @@ sub _GetAttributesFromLegacyYAML {
         push @Attributes, $Attribute;
 
         if ( $Attribute->{Sub} && $Param{RecuSubs} ) {
-            my $PrimarySub = { Key => $Attribute->{Key}.'::<SubPrimaryAttribute>' };
+            my $PrimarySub = { Key => $Attribute->{Key} . '::<SubPrimaryAttribute>' };
 
             push @Attributes, $PrimarySub;
             my @SubAttributes = $Self->_GetAttributesFromLegacyYAML( DefinitionRef => $Attribute->{Sub} );
@@ -839,7 +845,7 @@ sub _DFConfigFromLegacy {
         };
 
         # primary attribute cannot be multivalue in XML schema
-        for my $Delete ( qw/CountMin CountMax CountDefault/ ) {
+        for my $Delete (qw/CountMin CountMax CountDefault/) {
             delete $Primary->{$Delete};
         }
 
@@ -877,14 +883,16 @@ sub _DFConfigFromLegacy {
         $DF{Config}{Include} = \@Include;
     }
     elsif ( $Type eq 'Text' || $Type eq 'TextArea' ) {
-        $DF{FieldType}         = $Type;
+        $DF{FieldType} = $Type;
         $DF{Config}{RegExList} = [];
 
         if ( $Param{Attribute}{Input}{RegEx} ) {
-            $DF{Config}{RegExList} = [{
-                Value        => $Param{Attribute}{Input}{RegEx},
-                ErrorMessage => $Param{Attribute}{Input}{RegExErrorMessage} // 'Format invalid!',
-            }];
+            $DF{Config}{RegExList} = [
+                {
+                    Value        => $Param{Attribute}{Input}{RegEx},
+                    ErrorMessage => $Param{Attribute}{Input}{RegExErrorMessage} // 'Format invalid!',
+                }
+            ];
         }
 
         if ( $Param{Attribute}{Input}{ValueDefault} ) {
@@ -918,7 +926,7 @@ sub _DFConfigFromLegacy {
 
         $DF{Config}{PossibleNone} = 1;
     }
-    elsif ( $Type eq 'Date' || $Type eq 'DateTime') {
+    elsif ( $Type eq 'Date' || $Type eq 'DateTime' ) {
         $DF{FieldType} = $Type;
 
         $DF{Config}{YearsInFuture} = 5;
@@ -930,8 +938,8 @@ sub _DFConfigFromLegacy {
             $DF{Config}{YearsInFuture} = $Param{Attribute}{Input}{YearPeriodFuture};
         }
         if ( $Param{Attribute}{Input}{YearPeriodPast} ) {
-            $DF{Config}{YearsPeriod}   = 1;
-            $DF{Config}{YearsInPast}   = $Param{Attribute}{Input}{YearPeriodPast};
+            $DF{Config}{YearsPeriod} = 1;
+            $DF{Config}{YearsInPast} = $Param{Attribute}{Input}{YearPeriodPast};
         }
     }
     elsif ( $Type eq 'Integer' ) {
@@ -970,7 +978,9 @@ sub _ContinueOrNot {
         "<yellow>Done.\n\nYou can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n"
     );
     $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
-    $Self->Print("\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n\t");
+    $Self->Print(
+        "\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n\t"
+    );
 
     return 'Next' if <STDIN> =~ m/^def(ault)?$/;
 

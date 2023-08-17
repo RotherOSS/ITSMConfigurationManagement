@@ -866,7 +866,7 @@ sub _DefinitionDynamicFieldGet {
 
             # for set fields also the contained dynamic fields have to be versioned
             if ( $DynamicField->{FieldType} eq 'Set' ) {
-                next DYNAMICFIELD if !IsArrayRefWithData($DynamicField->{Config}{Include});
+                next DYNAMICFIELD if !IsArrayRefWithData( $DynamicField->{Config}{Include} );
 
                 INCLUDED:
                 for my $IncludedDF ( $DynamicField->{Config}{Include}->@* ) {
@@ -882,7 +882,7 @@ sub _DefinitionDynamicFieldGet {
                         FieldType  => $IncludedDFConfig->{FieldType},
                         ObjectType => $IncludedDFConfig->{ObjectType},
                         CIClass    => $Class,
-                    }
+                    };
                 }
             }
 

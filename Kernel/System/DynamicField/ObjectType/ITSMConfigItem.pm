@@ -117,8 +117,8 @@ sub PreValueSet {
 
         # set old and new version to new one to make sure, that lenses can work with either
         $Self->{VersionUpgrade}{ $Param{Param}{ObjectID} } = $NewVersionID;
-        $Self->{VersionUpgrade}{ $NewVersionID }           = $NewVersionID;
-        $Param{Param}{ObjectID} = $NewVersionID;
+        $Self->{VersionUpgrade}{$NewVersionID}             = $NewVersionID;
+        $Param{Param}{ObjectID}                            = $NewVersionID;
     }
 
     return 1;
