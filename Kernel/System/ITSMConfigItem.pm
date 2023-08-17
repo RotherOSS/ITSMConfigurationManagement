@@ -386,13 +386,12 @@ END_SQL
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-        # get all dynamic fields for the object type Ticket
-        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
-            ObjectType => 'ITSMConfigItem'
+        my $Definition = $Self->DefinitionGet(
+            DefinitionID => $ConfigItem{DefinitionID},
         );
 
         DYNAMICFIELD:
-        for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
             # validate each dynamic field
             next DYNAMICFIELD unless $DynamicFieldConfig;
