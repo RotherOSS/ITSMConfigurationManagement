@@ -39,9 +39,13 @@ use Kernel::System::VariableCheck qw(:all);
 # This module must be discarded when one of the hard dependencies has been discarded.
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DB',
+    'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
+    'Kernel::System::XML',
     'Kernel::System::YAML',
 );
 
