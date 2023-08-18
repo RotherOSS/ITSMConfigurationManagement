@@ -277,7 +277,7 @@ sub _PrepareAttributeMapping {
 
         my %AttributeMap;
         for my $Key ( uniq @AttributeKeys ) {
-            my $FieldName = $Key;
+            my $FieldName = $Key =~ s/[^\w\d]//gr;
             for my $Sub ( keys %Substitions ) {
                 $FieldName =~ s/$Sub/$Substitions{$Sub}/;
             }
