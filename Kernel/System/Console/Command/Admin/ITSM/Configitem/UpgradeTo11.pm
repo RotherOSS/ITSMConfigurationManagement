@@ -389,6 +389,7 @@ sub _MigrateDefinitions {
 
     my %DynamicFields;
     my %Definitions;
+    my %Namespaces;
 
     # collect data
     CLASS_ID:
@@ -443,13 +444,59 @@ sub _MigrateDefinitions {
             for my $Name ( keys $DynamicFieldDefinition->%* ) {
                 $DynamicFields{$Name} = $DynamicFieldDefinition->{$Name};
 
+                if ( $Name =~ /^([^-]+)-/ ) {
+                    $Namespaces{$1} = 1;
+                }
+
                 if ( $DynamicFieldDefinition->{$Name}{FieldType} eq 'Set' ) {
                     for my $Included ( $DynamicFieldDefinition->{$Name}{Config}{Include}->@* ) {
+                        if ( $Included->{DF} =~ /^([^-]+)-/ ) {
+                            $Namespaces{$1} = 1;
+                        }
+
                         $DynamicFields{ $Included->{DF} } = $Included->{Definition};
                     }
                 }
             }
         }
+    }
+
+    # set namespace setting if empty
+    my $NamespacesSetting = $Kernel::OM->Get('Kernel::Config')->Get('DynamicField::Namespaces');
+    if ( %Namespaces && ( !$NamespacesSetting || !$NamespacesSetting->@* ) ) {
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+            LockAll => 1,
+            Force   => 1,
+            UserID  => 1,
+        );
+
+        $SysConfigObject->SettingUpdate(
+            Name              => 'DynamicField::Namespaces',
+            IsValid           => 1,
+            EffectiveValue    => [ keys %Namespaces ],
+            ExclusiveLockGUID => $ExclusiveLockGUID,
+            UserID            => 1,
+        );
+
+        my $Success = $SysConfigObject->SettingUnlock(
+            UnlockAll => 1,
+        );
+
+        # 'Rebuild' the configuration.
+        $SysConfigObject->ConfigurationDeploy(
+            Comments    => "CMDB Upgrade: Add dynamic field namespaces.",
+            AllSettings => 1,
+            UserID      => 1,
+        );
+    }
+    elsif ( %Namespaces ) {
+        $Self->Print( "\n<yellow>You already have dynamic field namespaces deployed, thus the new ones will not automatically be set. Please add them manually:</yellow>\n" );
+        for my $Namespace ( keys %Namespaces ) {
+            $Self->Print( "\t$Namespace\n" );
+        }
+        $Self->Print( "\n" );
     }
 
     # get current field order
@@ -544,8 +591,10 @@ sub _MigrateAttributeData {
     my $MainObject                = $Kernel::OM->Get('Kernel::System::Main');
     my $XMLObject                 = $Kernel::OM->Get('Kernel::System::XML');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
 
     my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser/;
+    my $DisabledHistory;
 
     delete $Self->{ConfigItemObject}{Cache}{DefinitionGet};
 
@@ -596,6 +645,35 @@ sub _MigrateAttributeData {
             };
         }
 
+        if ( !$DisabledHistory && $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::EventModulePost###100-History') ) {
+            # do not write a history
+            my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+                LockAll => 1,
+                Force   => 1,
+                UserID  => 1,
+            );
+
+            $SysConfigObject->SettingUpdate(
+                Name              => 'DynamicField::Namespaces',
+                IsValid           => 0,
+                ExclusiveLockGUID => $ExclusiveLockGUID,
+                UserID            => 1,
+            );
+
+            my $Success = $SysConfigObject->SettingUnlock(
+                UnlockAll => 1,
+            );
+
+            # 'Rebuild' the configuration.
+            $SysConfigObject->ConfigurationDeploy(
+                Comments    => "CMDB Upgrade: Temporarily disable CMDB history for the data transfer.",
+                AllSettings => 1,
+                UserID      => 1,
+            );
+
+            $DisabledHistory = 1;
+        }
+
         my @Skipped;
         my $Count = scalar @VersionList;
         my $Frac  = int( $Count / 10 );
@@ -638,6 +716,10 @@ sub _MigrateAttributeData {
                         for my $Included ( $DynamicField->{Config}{Include}->@* ) {
                             if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
                                 push @SetValue, $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
+
+                                if ( $Included->{Definition}{FieldType} eq 'Date' ) {
+                                    $SetValue[-1] .= ' 00:00:00';
+                                }
                             }
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
@@ -652,6 +734,10 @@ sub _MigrateAttributeData {
                                     else {
                                         last INDEX;
                                     }
+                                }
+
+                                if ( $Included->{Definition}{FieldType} eq 'Date' ) {
+                                    @Values = map { $_ . ' 00:00:00' } @Values;
                                 }
 
                                 push @SetValue, $Included->{Definition}{Config}{MultiValue} || $BaseArrayFields{ $Included->{Definition}{FieldType} } ? \@Values : $Values[0];
@@ -676,10 +762,18 @@ sub _MigrateAttributeData {
 
                     next ATTRIBUTE if !@Values;
 
+                    if ( $DynamicField->{FieldType} eq 'Date' ) {
+                        @Values = map { $_ . ' 00:00:00' } @Values;
+                    }
+
                     $Value = \@Values;
                 }
                 else {
                     $Value = $BaseArrayFields{ $DynamicField->{FieldType} } ? [ $XML[1]{Version}[1]{$Attribute}[1]{Content} ] : $XML[1]{Version}[1]{$Attribute}[1]{Content};
+
+                    if ( $DynamicField->{FieldType} eq 'Date' ) {
+                        $Value .= ' 00:00:00';
+                    }
 
                     next ATTRIBUTE if !defined $Value || $Value eq '';
                 }
@@ -693,6 +787,33 @@ sub _MigrateAttributeData {
                 );
             }
         }
+    }
+
+    if ( $DisabledHistory ) {
+        # do not write a history
+        my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+            LockAll => 1,
+            Force   => 1,
+            UserID  => 1,
+        );
+
+        $SysConfigObject->SettingUpdate(
+            Name              => 'DynamicField::Namespaces',
+            IsValid           => 1,
+            ExclusiveLockGUID => $ExclusiveLockGUID,
+            UserID            => 1,
+        );
+
+        my $Success = $SysConfigObject->SettingUnlock(
+            UnlockAll => 1,
+        );
+
+        # 'Rebuild' the configuration.
+        $SysConfigObject->ConfigurationDeploy(
+            Comments    => "CMDB Upgrade: Reenable CMDB history.",
+            AllSettings => 1,
+            UserID      => 1,
+        );
     }
 
     return 'Next';
