@@ -658,7 +658,9 @@ END_SQL
             };
         }
 
-        if ( !$DisabledHistory && $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::EventModulePost###100-History') ) {
+        # TODO: disable history before the look over the classes
+        if ( !$DisabledHistory && $Kernel::OM->Get('Kernel::Config')->Get($HistorySetting) ) {
+
             # do not write a history
             my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
                 LockAll => 1,
@@ -667,7 +669,7 @@ END_SQL
             );
 
             $SysConfigObject->SettingUpdate(
-                Name              => 'DynamicField::Namespaces',
+                Name              => $HistorySetting,
                 IsValid           => 0,
                 ExclusiveLockGUID => $ExclusiveLockGUID,
                 UserID            => 1,
@@ -678,6 +680,7 @@ END_SQL
             );
 
             # 'Rebuild' the configuration.
+            # TODO: why must this setting be deployed? It should suffice to change is temporarily
             $SysConfigObject->ConfigurationDeploy(
                 Comments    => "CMDB Upgrade: Temporarily disable CMDB history for the data transfer.",
                 AllSettings => 1,
@@ -823,8 +826,9 @@ END_SQL
         $Self->Print("\n");
     }
 
-    if ( $DisabledHistory ) {
-        # do not write a history
+    if ($DisabledHistory) {
+
+        # reactivate wrinting history
         my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
             LockAll => 1,
             Force   => 1,
@@ -832,7 +836,7 @@ END_SQL
         );
 
         $SysConfigObject->SettingUpdate(
-            Name              => 'DynamicField::Namespaces',
+            Name              => $HistorySetting,
             IsValid           => 1,
             ExclusiveLockGUID => $ExclusiveLockGUID,
             UserID            => 1,
