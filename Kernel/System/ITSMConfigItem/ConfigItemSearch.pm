@@ -56,8 +56,8 @@ To find config items in your system.
 
         # config item number (optional) as STRING or as ARRAYREF
         # The value will be treated as a SQL query expression.
-        ConfigItemNumber => '%123546%',
-        ConfigItemNumber => ['%123546%', '%123666%'],
+        Number => '%123546%',
+        Number => ['%123546%', '%123666%'],
 
         # config item name (optional) as STRING or as ARRAYREF
         # The value will be treated as a SQL query expression.
@@ -164,7 +164,6 @@ sub ConfigItemSearch {
 
     my %SortOptions = (
         ConfigItem       => 'ci.configitem_number',
-        ConfigItemNumber => 'ci.configitem_number',
         Number           => 'ci.configitem_number',
         Name             => 'v.name',
         DeplState        => 'gc_depl.name',
@@ -180,7 +179,7 @@ sub ConfigItemSearch {
     KEY:
     for my $Key (
         qw(
-            ConfigItemID ConfigItemNumber Name ClassIDs DeplStateIDs CurDeplStateIDs InciStateIDs CurInciStateIDs CreateBy ChangeBy
+            ConfigItemID ClassIDs DeplStateIDs CurDeplStateIDs InciStateIDs CurInciStateIDs CreateBy ChangeBy
         )
         )
     {
@@ -496,8 +495,8 @@ sub ConfigItemSearch {
 
     # other config item stuff
     my %FieldSQLMap = (
-        ConfigItemNumber => 'ci.configitem_number',
-        Name             => 'v.name',
+        Number => 'ci.configitem_number',
+        Name   => 'v.name',
     );
 
     ATTRIBUTE:

@@ -92,20 +92,18 @@ sub LinkListWithData {
             for my $ConfigItemID ( sort keys %{ $Param{LinkList}->{$LinkType}->{$Direction} } ) {
 
                 # get last version data
-                my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+                my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
                     ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 0,
-                    UserID       => $Param{UserID},
                 );
 
                 # remove id from hash if config item can not get
-                if ( !$VersionData || ref $VersionData ne 'HASH' || !%{$VersionData} ) {
+                if ( !$ConfigItem || ref $ConfigItem ne 'HASH' || !%{$ConfigItem} ) {
                     delete $Param{LinkList}->{$LinkType}->{$Direction}->{$ConfigItemID};
                     next CONFIGITEMID;
                 }
 
                 # add version data
-                $Param{LinkList}->{$LinkType}->{$Direction}->{$ConfigItemID} = $VersionData;
+                $Param{LinkList}->{$LinkType}->{$Direction}->{$ConfigItemID} = $ConfigItem;
             }
         }
     }
@@ -193,20 +191,18 @@ sub ObjectDescriptionGet {
     return %Description if $Param{Mode} && $Param{Mode} eq 'Temporary';
 
     # get last version data
-    my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+    my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
         ConfigItemID => $Param{Key},
-        XMLDataGet   => 0,
-        UserID       => $Param{UserID},
     );
 
-    return if !$VersionData;
-    return if ref $VersionData ne 'HASH';
-    return if !%{$VersionData};
+    return if !$ConfigItem;
+    return if ref $ConfigItem ne 'HASH';
+    return if !%{$ConfigItem};
 
     # create description
     %Description = (
-        Normal => "ConfigItem# $VersionData->{Number}",
-        Long   => "ConfigItem# $VersionData->{Number}: $VersionData->{Name}",
+        Normal => "ConfigItem# $ConfigItem->{Number}",
+        Long   => "ConfigItem# $ConfigItem->{Number}: $ConfigItem->{Name}",
     );
 
     return %Description;
@@ -254,7 +250,7 @@ sub ObjectSearch {
     my %Search;
     for my $Element (qw(Number Name)) {
         if ( $Param{SearchParams}->{$Element} ) {
-            $Search{$Element} = '*' . $Param{SearchParams}->{$Element} . '*';
+            $Search{$Element} = '%' . $Param{SearchParams}->{$Element} . '%';
         }
     }
 
@@ -282,35 +278,33 @@ sub ObjectSearch {
     return if !$Param{SubObject};
 
     # search the config items
-    my $ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+    my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %{ $Param{SearchParams} },
         %Search,
         ClassIDs              => [ $Param{SubObject} ],
-        PreviousVersionSearch => 0,
         UsingWildcards        => 1,
-        OrderBy               => ['Number'],
-        OrderByDirection      => ['Up'],
+        SortBy                => ['Number'],
+        OrderBy               => ['Up'],
         Limit                 => 50,
         UserID                => $Param{UserID},
+        Result                => 'ARRAY',
     );
 
     my %SearchList;
     CONFIGITEMID:
-    for my $ConfigItemID ( @{$ConfigItemIDs} ) {
+    for my $ConfigItemID ( @ConfigItemIDs ) {
 
         # get last version data
-        my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+        my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
-            XMLDataGet   => 0,
-            UserID       => $Param{UserID},
         );
 
-        next CONFIGITEMID if !$VersionData;
-        next CONFIGITEMID if ref $VersionData ne 'HASH';
-        next CONFIGITEMID if !%{$VersionData};
+        next CONFIGITEMID if !$ConfigItem;
+        next CONFIGITEMID if ref $ConfigItem ne 'HASH';
+        next CONFIGITEMID if !%{$ConfigItem};
 
         # add version data
-        $SearchList{NOTLINKED}->{Source}->{$ConfigItemID} = $VersionData;
+        $SearchList{NOTLINKED}->{Source}->{$ConfigItemID} = $ConfigItem;
     }
 
     return \%SearchList;

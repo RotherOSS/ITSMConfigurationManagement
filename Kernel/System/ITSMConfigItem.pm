@@ -249,6 +249,7 @@ A hashref with the following keys is returned:
     $ConfigItem->{CurInciStateID}
     $ConfigItem->{CurInciState}
     $ConfigItem->{CurInciStateType}
+    $ConfigItem->{DefinitionID}
     $ConfigItem->{CreateTime}
     $ConfigItem->{CreateBy}
     $ConfigItem->{ChangeTime}
