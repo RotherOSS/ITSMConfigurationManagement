@@ -593,6 +593,10 @@ sub _MigrateAttributeData {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
 
+    $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => 'UPDATE configitem_version SET change_time=create_time, change_by=create_by WHERE change_by IS NULL;',
+    );
+
     my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser/;
     my $DisabledHistory;
 
@@ -700,6 +704,14 @@ sub _MigrateAttributeData {
                 Type => "ITSM::ConfigItem::$ClassID",
                 Key  => $Version->{VersionID},
             );
+
+            # try archive
+            if ( !@XML ) {
+                @XML = $Kernel::OM->Get('Kernel::System::XML')->XMLHashGet(
+                    Type => "ITSM::ConfigItem::Archiv::$ClassID",
+                    Key  => $Version->{VersionID},
+                );
+            }
 
             ATTRIBUTE:
             for my $Attribute ( keys $XML[1]{Version}[1]->%* ) {
