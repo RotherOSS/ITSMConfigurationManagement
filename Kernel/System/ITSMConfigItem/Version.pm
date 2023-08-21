@@ -908,10 +908,11 @@ sub VersionDelete {
         # remember the unique config item ids
         $ConfigItemIDs{$ConfigItemID} = 1;
 
-        # delete the xml version data
-        $Self->_XMLVersionDelete(
-            VersionID => $VersionID,
-            UserID    => $Param{UserID},
+        # Delete dynamic field values for this version
+        $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ObjectValuesDelete(
+            ObjectType => 'ITSMConfigItem',
+            ObjectID   => $VersionID,
+            UserID     => $Param{UserID},
         );
 
         # delete version

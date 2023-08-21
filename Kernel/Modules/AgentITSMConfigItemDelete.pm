@@ -76,7 +76,6 @@ sub Run {
     # get config item data
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID => $ConfigItemID,
-        UserID       => $Self->{UserID},
     );
 
     # check if config item is found
@@ -114,12 +113,7 @@ sub Run {
         }
     }
 
-    # get latest version data
-    my $Version = $ConfigItemObject->VersionGet(
-        ConfigItemID => $ConfigItemID,
-    );
-
-    if ( !$Version->{VersionID} ) {
+    if ( !$ConfigItem->{VersionID} ) {
         return $LayoutObject->ErrorScreen(
             Message =>
                 $LayoutObject->{LanguageObject}->Translate( 'No version found for ConfigItemID %s!', $ConfigItemID ),
@@ -136,7 +130,6 @@ sub Run {
         Data         => {
             %Param,
             %{$ConfigItem},
-            %{$Version},
         },
     );
 
