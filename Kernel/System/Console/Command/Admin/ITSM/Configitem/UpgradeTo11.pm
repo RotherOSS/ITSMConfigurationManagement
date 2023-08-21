@@ -639,7 +639,13 @@ sub _MigrateAttributeData {
 
         # get all versions of a class #TODO: Do we need batches for really large CMDBs?
         $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-            SQL  => "SELECT v.id, v.definition_id FROM configitem_version v INNER JOIN configitem ci ON v.configitem_id = ci.id WHERE ci.class_id = ?",
+            SQL => <<'END_SQL',
+SELECT v.id, v.definition_id
+  FROM configitem_version v
+  INNER JOIN configitem ci ON v.configitem_id = ci.id
+  WHERE ci.class_id = ?
+  ORDER BY v.id
+END_SQL
             Bind => [ \$ClassID ],
         );
 
