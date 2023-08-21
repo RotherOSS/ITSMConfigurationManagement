@@ -45,6 +45,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
+    'Kernel::System::SysConfig',
     'Kernel::System::XML',
     'Kernel::System::YAML',
 );
@@ -165,7 +166,7 @@ sub Run {
     );
 
     # get complete history of the definitions for the configitem class
-    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+    for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
         $Self->{DefinitionList}{$ClassID} = $Self->{ConfigItemObject}->DefinitionList(
             ClassID => $ClassID,
         );
@@ -244,7 +245,7 @@ sub _PrepareAttributeMapping {
     }
 
     CLASS_ID:
-    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+    for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         # Loop over all versions of definitions for that config item class
         my @AttributeKeys;
@@ -271,14 +272,14 @@ sub _PrepareAttributeMapping {
             '_'  => '',
         );
 
-        for my $Sub ( keys %Substitions ) {
+        for my $Sub ( sort keys %Substitions ) {
             $Namespace =~ s/$Sub/$Substitions{$Sub}/;
         }
 
         my %AttributeMap;
         for my $Key ( uniq @AttributeKeys ) {
             my $FieldName = $Key =~ s/[^\w\d]//gr;
-            for my $Sub ( keys %Substitions ) {
+            for my $Sub ( sort keys %Substitions ) {
                 $FieldName =~ s/$Sub/$Substitions{$Sub}/;
             }
 
@@ -307,10 +308,10 @@ sub _PrepareDefinitions {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     CLASS_ID:
-    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+    for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
@@ -393,10 +394,10 @@ sub _MigrateDefinitions {
 
     # collect data
     CLASS_ID:
-    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+    for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         DEFINITION:
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
@@ -441,7 +442,7 @@ sub _MigrateDefinitions {
                 DynamicField   => $DynamicFieldDefinition,
             };
 
-            for my $Name ( keys $DynamicFieldDefinition->%* ) {
+            for my $Name ( sort keys $DynamicFieldDefinition->%* ) {
                 $DynamicFields{$Name} = $DynamicFieldDefinition->{$Name};
 
                 if ( $Name =~ /^([^-]+)-/ ) {
@@ -475,7 +476,7 @@ sub _MigrateDefinitions {
         $SysConfigObject->SettingUpdate(
             Name              => 'DynamicField::Namespaces',
             IsValid           => 1,
-            EffectiveValue    => [ keys %Namespaces ],
+            EffectiveValue    => [ sort keys %Namespaces ],
             ExclusiveLockGUID => $ExclusiveLockGUID,
             UserID            => 1,
         );
@@ -493,7 +494,7 @@ sub _MigrateDefinitions {
     }
     elsif ( %Namespaces ) {
         $Self->Print( "\n<yellow>You already have dynamic field namespaces deployed, thus the new ones will not automatically be set. Please add them manually:</yellow>\n" );
-        for my $Namespace ( keys %Namespaces ) {
+        for my $Namespace ( sort keys %Namespaces ) {
             $Self->Print( "\t$Namespace\n" );
         }
         $Self->Print( "\n" );
@@ -506,7 +507,7 @@ sub _MigrateDefinitions {
     my $Order = $DynamicFieldList->@*;
 
     # create dynamic fields
-    for my $Field ( keys %DynamicFields ) {
+    for my $Field ( sort keys %DynamicFields ) {
         my %SetConfig;
         if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
             my @Included = map { { DF => $_->{DF} } } $DynamicFields{$Field}{Config}{Include}->@*;
@@ -543,13 +544,13 @@ sub _MigrateDefinitions {
 
     # set new definitions
     CLASS_ID:
-    for my $ClassID ( keys %Definitions ) {
+    for my $ClassID ( sort { $a <=> $b } keys %Definitions ) {
 
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         DEFINITION:
-        for my $DefinitionID ( keys $Definitions{$ClassID}->%* ) {
+        for my $DefinitionID ( sort { $a <=> $b } keys $Definitions{$ClassID}->%* ) {
 
             # add the ID of the newly created dynamic fields to their definition specific configs
             for my $DynamicField ( values $Definitions{$ClassID}{$DefinitionID}{DynamicField}->%* ) {
@@ -579,7 +580,7 @@ sub _MigrateDefinitions {
         }
     }
 
-    return if !$AllSuccess;
+    return unless $AllSuccess;
     return 'Next';
 }
 
@@ -599,15 +600,16 @@ sub _MigrateAttributeData {
 
     my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser/;
     my $DisabledHistory;
+    my $HistorySetting = q{ITSMConfigItem::EventModulePost###100-History};
 
     delete $Self->{ConfigItemObject}{Cache}{DefinitionGet};
     local $| = 1;
 
     CLASS_ID:
-    for my $ClassID ( keys $Self->{ClassList}->%* ) {
+    for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID if !-e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
 
         my %Definition;
         my $MapRef = $MainObject->FileRead(
@@ -714,12 +716,12 @@ sub _MigrateAttributeData {
             }
 
             ATTRIBUTE:
-            for my $Attribute ( keys $XML[1]{Version}[1]->%* ) {
-                next ATTRIBUTE if !$AttributeMap->{$Attribute};
+            for my $Attribute ( sort keys $XML[1]{Version}[1]->%* ) {
+                next ATTRIBUTE unless $AttributeMap->{$Attribute};
 
                 my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{$Attribute} };
 
-                next ATTRIBUTE if !$DynamicField;
+                next ATTRIBUTE unless $DynamicField;
 
                 my $Value;
                 if ( $DynamicField->{FieldType} eq 'Set' ) {
