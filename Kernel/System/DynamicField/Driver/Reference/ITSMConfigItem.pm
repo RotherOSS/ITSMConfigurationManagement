@@ -139,7 +139,7 @@ sub ObjectDescriptionGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(ObjectID UserID)) {
+    for my $Argument (qw(ObjectID)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -156,6 +156,14 @@ sub ObjectDescriptionGet {
 
     return unless $ConfigItem;
 
+    my $Link;
+    if ( $Param{Link} && $Param{LayoutObject}{SessionSource} ) {
+        if ( $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
+            # TODO: only show the link if the user $Param{UserID} has permissions
+            $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
+        }
+    }
+
     # TODO: provide a dynamicfield->config option with two or three alternatives for the string
     # create description
     return (
@@ -163,7 +171,8 @@ sub ObjectDescriptionGet {
         Normal => $ConfigItem->{Name},
 
         # TODO: necessary?
-        Long => "$ConfigItem->{Class}: $ConfigItem->{Name}",
+        Long   => "$ConfigItem->{Class}: $ConfigItem->{Name}",
+        Link   => $Link,
     );
 }
 
