@@ -156,13 +156,14 @@ sub ObjectDescriptionGet {
 
     return unless $ConfigItem;
 
+    # TODO: provide a dynamicfield->config option with two or three alternatives for the string
     # create description
     return (
         # TODO: take attribute from DF-Config
-        Normal => $ConfigItem->{Number},
+        Normal => $ConfigItem->{Name},
 
         # TODO: necessary?
-        Long => "$ConfigItem->{Number}: $ConfigItem->{Name}",
+        Long => "$ConfigItem->{Class}: $ConfigItem->{Name}",
     );
 }
 
