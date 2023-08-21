@@ -263,7 +263,9 @@ sub _PrepareAttributeMapping {
         # TODO: maybe check for a mix of OTOBO 10 and OTOBO 11 formats
         next CLASS_ID unless @AttributeKeys;
 
-        my $Namespace   = $Self->{ClassList}{$ClassID} =~ s/[^\w\d]//gr;
+        my $Namespace = $Self->{ClassList}{$ClassID} =~ s/[^\w\d]//gr;
+
+        # TODO: what is special about Umlauts and ß
         my %Substitions = (
             'ä' => 'ae',
             'ö' => 'oe',
@@ -492,12 +494,14 @@ sub _MigrateDefinitions {
             UserID      => 1,
         );
     }
-    elsif ( %Namespaces ) {
-        $Self->Print( "\n<yellow>You already have dynamic field namespaces deployed, thus the new ones will not automatically be set. Please add them manually:</yellow>\n" );
+    elsif (%Namespaces) {
+        $Self->Print(
+            "\n<yellow>You already have dynamic field namespaces deployed, thus the new ones will not automatically be set. Please add them manually:</yellow>\n"
+        );
         for my $Namespace ( sort keys %Namespaces ) {
-            $Self->Print( "\t$Namespace\n" );
+            $Self->Print("\t$Namespace\n");
         }
-        $Self->Print( "\n" );
+        $Self->Print("\n");
     }
 
     # get current field order
