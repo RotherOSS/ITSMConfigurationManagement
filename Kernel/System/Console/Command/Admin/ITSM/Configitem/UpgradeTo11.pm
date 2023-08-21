@@ -175,7 +175,7 @@ sub Run {
     STEP:
     for my $CurrentStep ( $StartAt .. $#StepDeclarations ) {
         my $StepDeclaration = $StepDeclarations[$CurrentStep];
-        $Self->Print("\n<green>---\nStart working on $StepDeclaration->{Name}</green>\n");
+        $Self->Print("\n<green>~~ Step $CurrentStep ~~\nStart working on $StepDeclaration->{Name}</green>\n");
         $Success = $StepDeclaration->{Handler}->(
             $Self,
             CurrentStep => $CurrentStep,
@@ -229,12 +229,12 @@ sub _PrepareAttributeMapping {
     }
 
     if ( !-d $Self->{WorkingDir} ) {
-        $Self->Print("<red>Could not create the working directory '$Self->{WorkingDir}'.</red>\n");
+        $Self->Print("<red>Could not create the working directory '</red>$Self->{WorkingDir}<red>'.</red>\n");
 
         die;
     }
 
-    $Self->Print("<yellow>Writing attribute maps into $Self->{WorkingDir}</yellow>\n");
+    $Self->Print("<yellow>Writing attribute maps into</yellow> $Self->{WorkingDir}\n");
 
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
@@ -597,6 +597,7 @@ sub _MigrateAttributeData {
     my $DisabledHistory;
 
     delete $Self->{ConfigItemObject}{Cache}{DefinitionGet};
+    local $| = 1;
 
     CLASS_ID:
     for my $ClassID ( keys $Self->{ClassList}->%* ) {
@@ -720,6 +721,9 @@ sub _MigrateAttributeData {
                                 if ( $Included->{Definition}{FieldType} eq 'Date' ) {
                                     $SetValue[-1] .= ' 00:00:00';
                                 }
+                                elsif ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
+                                    $SetValue[-1] .= ':00';
+                                }
                             }
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
@@ -738,6 +742,9 @@ sub _MigrateAttributeData {
 
                                 if ( $Included->{Definition}{FieldType} eq 'Date' ) {
                                     @Values = map { $_ . ' 00:00:00' } @Values;
+                                }
+                                if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
+                                    @Values = map { $_ . ':00' } @Values;
                                 }
 
                                 push @SetValue, $Included->{Definition}{Config}{MultiValue} || $BaseArrayFields{ $Included->{Definition}{FieldType} } ? \@Values : $Values[0];
@@ -765,6 +772,9 @@ sub _MigrateAttributeData {
                     if ( $DynamicField->{FieldType} eq 'Date' ) {
                         @Values = map { $_ . ' 00:00:00' } @Values;
                     }
+                    if ( $DynamicField->{FieldType} eq 'DateTime' ) {
+                        @Values = map { $_ . ':00' } @Values;
+                    }
 
                     $Value = \@Values;
                 }
@@ -773,6 +783,9 @@ sub _MigrateAttributeData {
 
                     if ( $DynamicField->{FieldType} eq 'Date' ) {
                         $Value .= ' 00:00:00';
+                    }
+                    if ( $DynamicField->{FieldType} eq 'DateTime' ) {
+                        $Value .= ':00';
                     }
 
                     next ATTRIBUTE if !defined $Value || $Value eq '';
@@ -787,6 +800,7 @@ sub _MigrateAttributeData {
                 );
             }
         }
+        $Self->Print("\n");
     }
 
     if ( $DisabledHistory ) {
