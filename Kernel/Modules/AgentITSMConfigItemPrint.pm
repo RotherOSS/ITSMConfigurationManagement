@@ -77,7 +77,9 @@ sub Run {
 
     # get config item
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $ConfigItemID,
+        ConfigItemID  => $ConfigItemID,
+        VersionID     => $VersionID,
+        DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
         return $LayoutObject->ErrorScreen(
@@ -87,19 +89,8 @@ sub Run {
         );
     }
 
-    # get version
-    my $Version = $ConfigItemObject->VersionGet(
-        VersionID => $VersionID,
-    );
-    if ( !$Version->{VersionID} ) {
-        return $LayoutObject->ErrorScreen(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'VersionID %s not found in database!', $VersionID ),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
-
     # get last version
-    my $LastVersion = $ConfigItemObject->VersionGet(
+    my $LastVersion = $ConfigItemObject->ConfigItemGet(
         ConfigItemID => $ConfigItemID,
     );
     $ConfigItem->{CurrentName} = $LastVersion->{Name};
@@ -128,8 +119,8 @@ sub Run {
     }
 
     # get user data of version (create by)
-    $Version->{CreateByName} = $UserObject->UserName(
-        UserID => $Version->{CreateBy},
+    $ConfigItem->{CreateByName} = $UserObject->UserName(
+        UserID => $ConfigItem->{CreateBy},
     );
 
     # get linked objects
@@ -181,13 +172,13 @@ sub Run {
     $Page{MarginLeft}   = 40;
     $Page{HeaderRight}  = $LayoutObject->{LanguageObject}->Translate('ConfigItem') . '#'
         . $ConfigItem->{Number};
-    $Page{HeadlineLeft} = $Version->{Name};
+    $Page{HeadlineLeft} = $ConfigItem->{Name};
     $Page{PageText}     = $LayoutObject->{LanguageObject}->Translate('Page');
     $Page{PageCount}    = 1;
 
     # create new pdf document
     $PDFObject->DocumentNew(
-        Title  => $ConfigObject->Get('Product') . ':' . $Version->{Name},
+        Title  => $ConfigObject->Get('Product') . ':' . $ConfigItem->{Name},
         Encode => $LayoutObject->{UserCharset},
     );
 
@@ -256,7 +247,7 @@ sub Run {
     # output version infos
     $Self->_PDFOutputVersionInfos(
         Page          => \%Page,
-        Version       => $Version,
+        Version       => $ConfigItem,
         VersionNumber => $VersionNumber,
     );
 
@@ -680,25 +671,11 @@ sub _PDFOutputVersionInfos {
         },
     ];
 
-    # add xml data to table
-    if (
-        ref $Param{Version} eq 'HASH'
-        && $Param{Version}->{XMLDefinition}
-        && $Param{Version}->{XMLData}
-        && ref $Param{Version}->{XMLDefinition} eq 'ARRAY'
-        && ref $Param{Version}->{XMLData} eq 'ARRAY'
-        && $Param{Version}->{XMLData}->[1]
-        && ref $Param{Version}->{XMLData}->[1] eq 'HASH'
-        && $Param{Version}->{XMLData}->[1]->{Version}
-        && ref $Param{Version}->{XMLData}->[1]->{Version} eq 'ARRAY'
-        )
-    {
-        $Self->_PDFOutputXMLOutput(
-            XMLDefinition => $Param{Version}->{XMLDefinition},
-            XMLData       => $Param{Version}->{XMLData}->[1]->{Version}->[1],
-            TableData     => $Table,
-        );
-    }
+    # add dynamic field data to table
+    $Self->_PDFOutputDFOutput(
+        ConfigItem => $Param{Version},
+        TableData  => $Table,
+    );
 
     my %TableParam;
     my $Rows = @{$Table};
@@ -740,76 +717,74 @@ sub _PDFOutputVersionInfos {
     return 1;
 }
 
-sub _PDFOutputXMLOutput {
+sub _PDFOutputDFOutput {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    return if !$Param{TableData};
-    return if !$Param{XMLData};
-    return if !$Param{XMLDefinition};
-    return if ref $Param{TableData} ne 'ARRAY';
-    return if ref $Param{XMLData} ne 'HASH';
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+        DefinitionID => $Param{ConfigItem}{DefinitionID},
+    );
 
-    $Param{Level} ||= 0;
+    return if !$Definition->{DynamicFieldRef};
+    return if !$Definition->{DefinitionRef};
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
-
-            # stop loop, if no content was given
-            last COUNTER if !defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content};
-
-            # lookup value
-            my $Value = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLValueLookup(
-                Item  => $Item,
-                Value => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content},
-            );
-
-            # get layout object
-            my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-            # create output string
-            $Value = $LayoutObject->ITSMConfigItemOutputStringCreate(
-                Value => $Value,
-                Item  => $Item,
-                Print => 1,
-            );
-
-            # replace newlines with <br/> (fix for bug# 5928)
-            $Value =~ s{ \n }{<br/>}gxms;
-
-            # convert value to ascii
-            $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $Value );
-
-            # new row
-            my $NewRow = {
-                Key   => $LayoutObject->{LanguageObject}->Translate( $Item->{Name} ) . ':',
-                Value => $Value,
-            };
-
-            # output space, if level was given
-            if ( $Param{Level} ) {
-                for ( 1 .. $Param{Level} ) {
-                    $NewRow->{Key}   = '    ' . $NewRow->{Key};
-                    $NewRow->{Value} = '    ' . $NewRow->{Value};
+    my @DFOrdered;
+    my $GrepDF;
+    $GrepDF = sub {
+        ENTRY:
+        for my $Entry ( @_ ) {
+            if ( $Entry->{DF} ) {
+                push @DFOrdered, $Entry->{DF};
+            }
+            elsif ( $Entry->{Grid} && $Entry->{Grid}{Rows} ) {
+                for my $Row ( $Entry->{Grid}{Rows}->@* ) {
+                    $GrepDF->($Row->@*);
                 }
             }
-
-            # add row data
-            push @{ $Param{TableData} }, $NewRow;
-
-            next COUNTER if !$Item->{Sub};
-
-            # start recursion, if "Sub" was found
-            $Self->_PDFOutputXMLOutput(
-                XMLDefinition => $Item->{Sub},
-                XMLData       => $Param{XMLData}->{ $Item->{Key} }->[$Counter],
-                TableData     => $Param{TableData},
-                Level         => $Param{Level} + 1,
-            );
         }
+    };
+
+    for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+        SECTION:
+        for my $SectionConfig ( $Page->{Content}->@* ) {
+            my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+            next SECTION if !$Section->{Content};
+
+            $GrepDF->( $Section->{Content}->@* );
+        }
+    }
+
+    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    for my $DFName ( @DFOrdered ) {
+        next if !$Param{ConfigItem}{ 'DynamicField_' . $DFName };
+
+        my $DynamicField = $Definition->{DynamicFieldRef}{$DFName};
+
+        my $DisplayValue = $BackendObject->DisplayValueRender(
+            DynamicFieldConfig => $DynamicField,
+            Value              => $Param{ConfigItem}{ 'DynamicField_' . $DFName },
+            LayoutObject       => $LayoutObject,
+        );
+
+        my $Value = $DisplayValue->{Value};
+
+        # replace newlines with <br/> (fix for bug# 5928)
+        $Value =~ s{ \n }{<br/>}gxms;
+
+        # convert value to ascii
+        $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $Value );
+
+        # new row
+        my $NewRow = {
+            Key   => $LayoutObject->{LanguageObject}->Translate( $DynamicField->{Label} ) . ':',
+            Value => $Value,
+        };
+
+        # add row data
+        push @{ $Param{TableData} }, $NewRow;
     }
 
     return 1;
