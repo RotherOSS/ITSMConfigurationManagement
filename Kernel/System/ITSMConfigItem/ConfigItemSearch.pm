@@ -163,16 +163,16 @@ sub ConfigItemSearch {
     my $Limit   = $Param{Limit}   || 10000;
 
     my %SortOptions = (
-        ConfigItem       => 'ci.configitem_number',
-        Number           => 'ci.configitem_number',
-        Name             => 'v.name',
-        DeplState        => 'gc_depl.name',
-        InciState        => 'gc_inci.name',
-        CurDeplState     => 'gc_cdepl.name',
-        CurInciState     => 'gc_cinci.name',
-        Age              => 'ci.create_time',
-        Created          => 'ci.create_time',
-        Changed          => 'ci.change_time',
+        ConfigItem   => 'ci.configitem_number',
+        Number       => 'ci.configitem_number',
+        Name         => 'v.name',
+        DeplState    => 'gc_depl.name',
+        InciState    => 'gc_inci.name',
+        CurDeplState => 'gc_cdepl.name',
+        CurInciState => 'gc_cinci.name',
+        Age          => 'ci.create_time',
+        Created      => 'ci.create_time',
+        Changed      => 'ci.change_time',
     );
 
     # check types of given arguments
@@ -224,9 +224,8 @@ sub ConfigItemSearch {
     }
 
     # check sort/order by options
-    my @SortByArray       = ( ref $SortBy eq 'ARRAY' ? @{$SortBy} : ($SortBy) );
-    my %LookupSortByArray = map { $_ => 1 } @SortByArray;
-    my @OrderByArray      = ( ref $OrderBy eq 'ARRAY' ? @{$OrderBy} : ($OrderBy) );
+    my @SortByArray  = ref $SortBy eq 'ARRAY'  ? $SortBy->@*  : $SortBy;
+    my @OrderByArray = ref $OrderBy eq 'ARRAY' ? $OrderBy->@* : $OrderBy;
 
     for my $Count ( 0 .. $#SortByArray ) {
         if (
@@ -238,13 +237,17 @@ sub ConfigItemSearch {
                 Priority => 'error',
                 Message  => 'Need valid SortBy (' . $SortByArray[$Count] . ')!',
             );
+
             return;
         }
+
+        # TODO: fall back to a default of 'Up'
         if ( $OrderByArray[$Count] ne 'Down' && $OrderByArray[$Count] ne 'Up' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Need valid OrderBy (' . $OrderByArray[$Count] . ')!',
             );
+
             return;
         }
     }

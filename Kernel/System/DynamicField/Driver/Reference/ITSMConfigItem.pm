@@ -159,6 +159,7 @@ sub ObjectDescriptionGet {
     my $Link;
     if ( $Param{Link} && $Param{LayoutObject}{SessionSource} ) {
         if ( $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
+
             # TODO: only show the link if the user $Param{UserID} has permissions
             $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
         }
@@ -171,8 +172,8 @@ sub ObjectDescriptionGet {
         Normal => $ConfigItem->{Name},
 
         # TODO: necessary?
-        Long   => "$ConfigItem->{Class}: $ConfigItem->{Name}",
-        Link   => $Link,
+        Long => "$ConfigItem->{Class}: $ConfigItem->{Name}",
+        Link => $Link,
     );
 }
 
@@ -185,15 +186,13 @@ This is used in auto completion when searching for possible object IDs.
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
 
-    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+    my $DFDetails = $Param{DynamicFieldConfig}->{Config} // {};
+
+    my %SearchParams;
 
     # Support restriction by class
-    my %SearchParams;
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    {
-        if ( defined $DynamicFieldConfig->{Config}->{ClassIDs} && IsArrayRefWithData( $DynamicFieldConfig->{Config}->{ClassIDs} ) ) {
-            $SearchParams{ClassIDs} = $DynamicFieldConfig->{Config}->{ClassIDs};
-        }
+    if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) ) {
+        $SearchParams{ClassIDs} = $DFDetails->{ClassIDs};
     }
 
     if ( $Param{Term} ) {
@@ -203,9 +202,9 @@ sub SearchObjects {
     }
 
     # incorporate referencefilterlist into search params
-    if ( $DynamicFieldConfig->{Config}{ReferenceFilterList} ) {
+    if ( $DFDetails->{ReferenceFilterList} ) {
         FILTERITEM:
-        for my $FilterItem ( $DynamicFieldConfig->{Config}{ReferenceFilterList}->@* ) {
+        for my $FilterItem ( $DFDetails->{ReferenceFilterList}->@* ) {
 
             # check filter config
             next FILTERITEM unless $FilterItem->{ReferenceObjectAttribute};

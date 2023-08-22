@@ -281,18 +281,18 @@ sub ObjectSearch {
     my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %{ $Param{SearchParams} },
         %Search,
-        ClassIDs              => [ $Param{SubObject} ],
-        UsingWildcards        => 1,
-        SortBy                => ['Number'],
-        OrderBy               => ['Up'],
-        Limit                 => 50,
-        UserID                => $Param{UserID},
-        Result                => 'ARRAY',
+        ClassIDs       => [ $Param{SubObject} ],
+        UsingWildcards => 1,
+        SortBy         => ['Number'],
+        OrderBy        => ['Up'],
+        Limit          => 50,
+        UserID         => $Param{UserID},
+        Result         => 'ARRAY',
     );
 
     my %SearchList;
     CONFIGITEMID:
-    for my $ConfigItemID ( @ConfigItemIDs ) {
+    for my $ConfigItemID (@ConfigItemIDs) {
 
         # get last version data
         my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(

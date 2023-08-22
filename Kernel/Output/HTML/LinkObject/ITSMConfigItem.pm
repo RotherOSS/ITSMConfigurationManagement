@@ -334,7 +334,6 @@ sub TableCreateComplex {
                 };
             }
 
-
             # these columns will be added if no class based column config is defined
             my @AdditionalDefaultItemColumns = (
                 {
@@ -355,124 +354,125 @@ sub TableCreateComplex {
 
             # individual column config for this class exists
             # TODO: incorporate dynamic field data
-            if (0) {}
-#            if ( $ColumnByClass{$Class} ) {
-#
-#                # convert the XML data into a hash
-#                my $ExtendedVersionData = $Self->{LayoutObject}->XMLData2Hash(
-#                    XMLDefinition => $VersionXMLData->{XMLDefinition},
-#                    XMLData       => $VersionXMLData->{XMLData}->[1]->{Version}->[1],
-#                    Attributes    => $ColumnByClass{$Class},
-#                );
-#
-#                COLUMN:
-#                for my $Column ( @{ $ColumnByClass{$Class} } ) {
-#
-#                    # process some non-xml attributes
-#                    if ( $Version->{$Column} ) {
-#
-#                        # handle the CI name
-#                        if ( $Column eq 'Name' ) {
-#
-#                            # add the column
-#                            push @ItemColumns, {
-#                                Type      => 'Text',
-#                                Content   => $Version->{Name},
-#                                MaxLength => 50,
-#                            };
-#
-#                            # add the headline
-#                            push @ShowColumnsHeadlines, {
-#                                Content => 'Name',
-#                            };
-#                        }
-#
-#                        # special translation handling
-#                        elsif ( $Column eq 'CurDeplState' ) {
-#
-#                            # add the column
-#                            push @ItemColumns, {
-#                                Type      => 'Text',
-#                                Content   => $Version->{$Column},
-#                                Translate => 1,
-#                            };
-#
-#                            # add the headline
-#                            push @ShowColumnsHeadlines, {
-#                                Content => 'Deployment State',
-#                            };
-#                        }
-#
-#                        # special translation handling
-#                        elsif ( $Column eq 'CurInciState' ) {
-#
-#                            # add the column
-#                            push @ItemColumns, {
-#                                Type      => 'Text',
-#                                Content   => $Version->{$Column},
-#                                Translate => 1,
-#                            };
-#
-#                            # add the headline
-#                            push @ShowColumnsHeadlines, {
-#                                Content => 'Incident State',
-#                            };
-#                        }
-#
-#                        # special translation handling
-#                        elsif ( $Column eq 'Class' ) {
-#
-#                            # add the column
-#                            push @ItemColumns, {
-#                                Type      => 'Text',
-#                                Content   => $Version->{$Column},
-#                                Translate => 1,
-#                            };
-#
-#                            # add the headline
-#                            push @ShowColumnsHeadlines, {
-#                                Content => 'Class',
-#                            };
-#                        }
-#
-#                        # special date/time handling
-#                        elsif ( $Column eq 'CreateTime' ) {
-#
-#                            # add the column
-#                            push @ItemColumns, {
-#                                Type    => 'TimeLong',
-#                                Content => $Version->{CreateTime},
-#                            };
-#
-#                            # add the headline
-#                            push @ShowColumnsHeadlines, {
-#                                Content => 'Created',
-#                            };
-#                        }
-#
-#                        next COLUMN;
-#                    }
-#
-#                    # convert to ascii text in case the value contains html
-#                    my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
-#                        String => $ExtendedVersionData->{$Column}->{Value},
-#                    ) || '';
-#
-#                    # convert all whitespace and newlines to single spaces
-#                    $Value =~ s{ \s+ }{ }gxms;
-#
-#                    # add the column
-#                    push @ItemColumns, {
-#                        Type    => 'Text',
-#                        Content => $Value,
-#                    };
-#
-#                    # add the headline
-#                    push @ShowColumnsHeadlines, {
-#                        Content => $ExtendedVersionData->{$Column}->{Name} || '',
-#                    };
-#                }
-#            }
+            if (0) { }
+
+            #            if ( $ColumnByClass{$Class} ) {
+            #
+            #                # convert the XML data into a hash
+            #                my $ExtendedVersionData = $Self->{LayoutObject}->XMLData2Hash(
+            #                    XMLDefinition => $VersionXMLData->{XMLDefinition},
+            #                    XMLData       => $VersionXMLData->{XMLData}->[1]->{Version}->[1],
+            #                    Attributes    => $ColumnByClass{$Class},
+            #                );
+            #
+            #                COLUMN:
+            #                for my $Column ( @{ $ColumnByClass{$Class} } ) {
+            #
+            #                    # process some non-xml attributes
+            #                    if ( $Version->{$Column} ) {
+            #
+            #                        # handle the CI name
+            #                        if ( $Column eq 'Name' ) {
+            #
+            #                            # add the column
+            #                            push @ItemColumns, {
+            #                                Type      => 'Text',
+            #                                Content   => $Version->{Name},
+            #                                MaxLength => 50,
+            #                            };
+            #
+            #                            # add the headline
+            #                            push @ShowColumnsHeadlines, {
+            #                                Content => 'Name',
+            #                            };
+            #                        }
+            #
+            #                        # special translation handling
+            #                        elsif ( $Column eq 'CurDeplState' ) {
+            #
+            #                            # add the column
+            #                            push @ItemColumns, {
+            #                                Type      => 'Text',
+            #                                Content   => $Version->{$Column},
+            #                                Translate => 1,
+            #                            };
+            #
+            #                            # add the headline
+            #                            push @ShowColumnsHeadlines, {
+            #                                Content => 'Deployment State',
+            #                            };
+            #                        }
+            #
+            #                        # special translation handling
+            #                        elsif ( $Column eq 'CurInciState' ) {
+            #
+            #                            # add the column
+            #                            push @ItemColumns, {
+            #                                Type      => 'Text',
+            #                                Content   => $Version->{$Column},
+            #                                Translate => 1,
+            #                            };
+            #
+            #                            # add the headline
+            #                            push @ShowColumnsHeadlines, {
+            #                                Content => 'Incident State',
+            #                            };
+            #                        }
+            #
+            #                        # special translation handling
+            #                        elsif ( $Column eq 'Class' ) {
+            #
+            #                            # add the column
+            #                            push @ItemColumns, {
+            #                                Type      => 'Text',
+            #                                Content   => $Version->{$Column},
+            #                                Translate => 1,
+            #                            };
+            #
+            #                            # add the headline
+            #                            push @ShowColumnsHeadlines, {
+            #                                Content => 'Class',
+            #                            };
+            #                        }
+            #
+            #                        # special date/time handling
+            #                        elsif ( $Column eq 'CreateTime' ) {
+            #
+            #                            # add the column
+            #                            push @ItemColumns, {
+            #                                Type    => 'TimeLong',
+            #                                Content => $Version->{CreateTime},
+            #                            };
+            #
+            #                            # add the headline
+            #                            push @ShowColumnsHeadlines, {
+            #                                Content => 'Created',
+            #                            };
+            #                        }
+            #
+            #                        next COLUMN;
+            #                    }
+            #
+            #                    # convert to ascii text in case the value contains html
+            #                    my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+            #                        String => $ExtendedVersionData->{$Column}->{Value},
+            #                    ) || '';
+            #
+            #                    # convert all whitespace and newlines to single spaces
+            #                    $Value =~ s{ \s+ }{ }gxms;
+            #
+            #                    # add the column
+            #                    push @ItemColumns, {
+            #                        Type    => 'Text',
+            #                        Content => $Value,
+            #                    };
+            #
+            #                    # add the headline
+            #                    push @ShowColumnsHeadlines, {
+            #                        Content => $ExtendedVersionData->{$Column}->{Name} || '',
+            #                    };
+            #                }
+            #            }
 
             # individual column config for this class does not exist,
             # so the default columns will be used

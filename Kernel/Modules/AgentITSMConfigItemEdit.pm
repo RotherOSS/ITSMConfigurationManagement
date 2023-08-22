@@ -16,9 +16,17 @@
 
 package Kernel::Modules::AgentITSMConfigItemEdit;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
@@ -28,10 +36,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -157,7 +162,8 @@ sub Run {
         if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
             my $ConfigItemName;
 
-            if ( $DuplicateID ) {
+            if ($DuplicateID) {
+
                 # get Data from duplicate CI
                 for my $Param (qw(Name DeplStateID InciStateID)) {
                     $GetParam{$Param} = $ConfigItem->{$Param};
@@ -182,11 +188,12 @@ sub Run {
                     }
                 }
             }
+
             # TODO Prio3: set default data
             #else {
-                #for my $Param (qw(Name DeplStateID InciStateID)) {
-                #    $GetParam{$Param} = ;
-                #}
+            #for my $Param (qw(Name DeplStateID InciStateID)) {
+            #    $GetParam{$Param} = ;
+            #}
             #}
 
             # check for name module based on classname
@@ -246,7 +253,7 @@ sub Run {
 
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
 
             # extract the dynamic field value from the web request
             $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
