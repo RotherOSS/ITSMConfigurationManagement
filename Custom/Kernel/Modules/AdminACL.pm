@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - a077e914380d1a13d5aa31472ea687353b614622 - Kernel/Modules/AdminACL.pm
+# $origin: otobo - 12c4aa18e12b9a39b5fa215a94e7b8c7ca1d0a9d - Kernel/Modules/AdminACL.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -40,7 +40,6 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-
 
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
 # RotherOSS / ITSMConfigurationManagement
@@ -477,7 +476,7 @@ sub Run {
 
         # send JSON response
         return $LayoutObject->Attachment(
-            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            ContentType => 'application/json',
             Content     => $JSON,
             Type        => 'inline',
             NoCache     => 1,
@@ -898,7 +897,7 @@ sub _ShowEdit {
     $Param{PossibleActionsList} = \@PossibleActionsList;
 
     if ( defined $ACLData->{StopAfterMatch} && $ACLData->{StopAfterMatch} == 1 ) {
-        $Param{Checked} = 'checked="checked"';
+        $Param{Checked} = 'checked ';
     }
 
     my $Output = $LayoutObject->Header();

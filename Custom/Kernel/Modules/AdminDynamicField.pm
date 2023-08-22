@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 8fb09f1a854199ebe93c21ed7ae689b248ef264e - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 692356d2bbed790fbba25874c538d931fb21ad1b - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -337,9 +337,10 @@ sub _ShowOverview {
         my $DynamicFieldNamespaceStrg = $LayoutObject->BuildSelection(
             Data         => $Namespaces,
             Name         => 'DynamicFieldNamespace',
-            PossibleNone => 1,
-            Sort         => 'AlphanumericValue',
             SelectedID   => $NamespaceFilter,
+            PossibleNone => 1,
+            Translation  => 0,
+            Sort         => 'AlphanumericValue',
             Class        => 'Modernize W95pc',
         );
 
@@ -379,8 +380,13 @@ sub _ShowOverview {
         $ObjectTypeFilterArrayRef = $ObjectTypeFilter ? [$ObjectTypeFilter] : undef;
     }
 
-    # get dynamic fields list
-    my $DynamicFieldsList = $DynamicFieldObject->DynamicFieldList(
+    # get complete dynamic fields list
+    my $DynamicFieldsListAll = $DynamicFieldObject->DynamicFieldList(
+        Valid => 0,
+    );
+
+    # get filtered dynamic fields list
+    my $DynamicFieldsListFiltered = $DynamicFieldObject->DynamicFieldList(
         ObjectType => $ObjectTypeFilterArrayRef,
         Namespace  => $NamespaceFilter,
         Valid      => 0,
@@ -388,8 +394,9 @@ sub _ShowOverview {
 
     # print the list of dynamic fields
     $Self->_DynamicFieldsListShow(
-        DynamicFields => $DynamicFieldsList,
-        Total         => scalar @{$DynamicFieldsList},
+        DynamicFields => $DynamicFieldsListFiltered,
+        Total         => scalar @{$DynamicFieldsListFiltered},
+        MaxFieldOrder => scalar @{$DynamicFieldsListAll},
     );
 
     $Output .= $LayoutObject->Output(
@@ -542,7 +549,7 @@ sub _DynamicFieldsListShow {
     $LayoutObject->Block(
         Name => 'MaxFieldOrder',
         Data => {
-            MaxFieldOrder => scalar @{ $Param{DynamicFields} },
+            MaxFieldOrder => $Param{MaxFieldOrder},
         },
     );
 
