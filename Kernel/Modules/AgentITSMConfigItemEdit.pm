@@ -155,14 +155,41 @@ sub Run {
     # get initial values for the configitem
     if ( !$Self->{Subaction} ) {
         if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
+            my $ConfigItemName;
 
+            if ( $DuplicateID ) {
+                # get Data from duplicate CI
+                for my $Param (qw(Name DeplStateID InciStateID)) {
+                    $GetParam{$Param} = $ConfigItem->{$Param};
+                }
+
+                $ConfigItemName = $GetParam{Name} . ' (Copy)';
+
+                DYNAMICFIELD:
+                for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+                    next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                    $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} };
+
+                    # perform ACLs on values
+                    my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                        Behavior           => 'IsACLReducible'
+                    );
+
+                    if ($IsACLReducible) {
+                        $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
+                    }
+                }
+            }
             # TODO Prio3: set default data
-            #for my $Param (qw(Name DeplStateID InciStateID)) {
-            #    $GetParam{$Param} = ;
+            #else {
+                #for my $Param (qw(Name DeplStateID InciStateID)) {
+                #    $GetParam{$Param} = ;
+                #}
             #}
 
             # check for name module based on classname
-            my $ConfigItemName;
             my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
 
             if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
