@@ -88,8 +88,9 @@ sub ObjectDescriptionGet {
     my $Link;
     if ( $Param{Link} && $Param{LayoutObject}{SessionSource} ) {
         if ( $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
+
             # TODO: only show the link if the user $Param{UserID} has permissions
-            $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItem{ConfigItemID};VersionID=$Param{ObjectID}";
+            $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItem->{ConfigItemID};VersionID=$Param{ObjectID}";
         }
     }
 
@@ -100,8 +101,8 @@ sub ObjectDescriptionGet {
         Normal => $ConfigItem->{Name},
 
         # TODO: necessary?
-        Long   => "$ConfigItem->{Class}: $ConfigItem->{Name}",
-        Link   => $Link,
+        Long => "$ConfigItem->{Class}: $ConfigItem->{Name}",
+        Link => $Link,
     );
 }
 

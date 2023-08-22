@@ -731,13 +731,13 @@ sub _PDFOutputDFOutput {
     my $GrepDF;
     $GrepDF = sub {
         ENTRY:
-        for my $Entry ( @_ ) {
+        for my $Entry (@_) {
             if ( $Entry->{DF} ) {
                 push @DFOrdered, $Entry->{DF};
             }
             elsif ( $Entry->{Grid} && $Entry->{Grid}{Rows} ) {
                 for my $Row ( $Entry->{Grid}{Rows}->@* ) {
-                    $GrepDF->($Row->@*);
+                    $GrepDF->( $Row->@* );
                 }
             }
         }
@@ -758,8 +758,9 @@ sub _PDFOutputDFOutput {
     my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    for my $DFName ( @DFOrdered ) {
-        next if !$Param{ConfigItem}{ 'DynamicField_' . $DFName };
+    DFNAME:
+    for my $DFName (@DFOrdered) {
+        next DFName unless $Param{ConfigItem}{ 'DynamicField_' . $DFName };
 
         my $DynamicField = $Definition->{DynamicFieldRef}{$DFName};
 
