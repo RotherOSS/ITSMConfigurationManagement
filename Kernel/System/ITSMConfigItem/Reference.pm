@@ -57,7 +57,7 @@ sub SyncReferenceTable {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Missing ( grep { !$Param{$_} } qw(DynamicField SourceConfigItemVersionID Value) ) {
+    for my $Missing ( grep { !$Param{$_} } qw(DynamicFieldConfig SourceConfigItemVersionID Value) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Need $Missing!",
@@ -66,7 +66,10 @@ sub SyncReferenceTable {
         return;
     }
 
-    my $ReferencedObjectType = $Param{DynamicField}->{Config}->{ReferencedObjectType};
+    my $DynamicFieldConfig   = $Param{DynamicFieldConfig};
+    my $DynamicFieldID       = $DynamicFieldConfig->{ID};
+    my $DFDetails            = $DynamicFieldConfig->{Config};
+    my $ReferencedObjectType = $DFDetails->{ReferencedObjectType};
 
     if ( $ReferencedObjectType ne 'ITSMConfigItem' && $ReferencedObjectType ne 'ITSMConfigItemVersion' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -86,7 +89,7 @@ DELETE FROM configitem_reference
   WHERE source_configitem_version_id = ?
     AND dynamic_field_id             = ?
 END_SQL
-        Bind => [ \$Param{SourceConfigItemVersionID}, \$Param{DynamicField}->{ID} ],
+        Bind => [ \$Param{SourceConfigItemVersionID}, \$DynamicFieldID ],
     );
 
     # INSERT the new value if there is one
@@ -103,6 +106,7 @@ END_SQL
         );
     }
 
+    # assume success
     return 1;
 }
 

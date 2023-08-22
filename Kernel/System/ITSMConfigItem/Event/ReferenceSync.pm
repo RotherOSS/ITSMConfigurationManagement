@@ -105,24 +105,24 @@ sub Run {
     return 1 unless $Param{Data}->{FieldName};
 
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicField       = $DynamicFieldObject->DynamicFieldGet(
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
         Name => $Param{Data}->{FieldName},
     );
 
-    return 1 unless $DynamicField;
-    return 1 unless $DynamicField->{FieldType};
-    return 1 unless $DynamicField->{FieldType} eq 'Reference';
+    return 1 unless $DynamicFieldConfig;
+    return 1 unless $DynamicFieldConfig->{FieldType};
+    return 1 unless $DynamicFieldConfig->{FieldType} eq 'Reference';
 
     # This event module care only about references to other config items
-    return 1 unless $DynamicField->{Config};
-    return 1 unless $DynamicField->{Config}->{ReferencedObjectType};
-    return 1 unless $DynamicField->{Config}->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
+    return 1 unless $DynamicFieldConfig->{Config};
+    return 1 unless $DynamicFieldConfig->{Config}->{ReferencedObjectType};
+    return 1 unless $DynamicFieldConfig->{Config}->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
 
     # actually update configitem_reference
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     return $ConfigItemObject->SyncReferenceTable(
-        DynamicField              => $DynamicField,
+        DynamicFieldConfig        => $DynamicFieldConfig,
         SourceConfigItemID        => $Param{Data}->{ConfigItemID},          # currently not used
         SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},
         OldValue                  => $Param{Data}->{OldValue},
