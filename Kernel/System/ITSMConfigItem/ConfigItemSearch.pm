@@ -159,7 +159,7 @@ sub ConfigItemSearch {
     # default values
     my $Result  = $Param{Result}  || 'HASH';
     my $OrderBy = $Param{OrderBy} || 'Down';
-    my $SortBy  = $Param{SortBy}  || 'ConfigItemNumber';
+    my $SortBy  = $Param{SortBy}  || 'Number';
     my $Limit   = $Param{Limit}   || 10000;
 
     my %SortOptions = (
