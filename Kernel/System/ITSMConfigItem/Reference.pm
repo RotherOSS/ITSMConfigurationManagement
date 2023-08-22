@@ -92,19 +92,28 @@ END_SQL
         Bind => [ \$Param{SourceConfigItemVersionID}, \$DynamicFieldID ],
     );
 
-    # INSERT the new value if there is one
-    if ( $Param{Value} ) {
-        my $TargetConfigItemID        = $ReferencedObjectType eq 'ITSMConfigItem'        ? $Param{Value} : undef;
-        my $TargetConfigItemVersionID = $ReferencedObjectType eq 'ITSMConfigItemVersion' ? $Param{Value} : undef;
-        $DBObject->Do(
-            SQL => <<'END_SQL',
-INSERT INTO configitem_reference (link_type_id, source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
-create_time, create_by )
+    # Nothing to do when there is no new value
+    return 1 unless $Param{Value};
+
+    # INSERT the new value if there is one.
+    # The values for the Reference dynamic field are per design array references,
+    # even when there is only a single referenced item.
+    # Exactly one of $TargetConfigItemID and $TargetConfigItemVersionID is an arrayref
+    # and the other is undef. DoArray() handles this case well, but note that
+    # the the parameter Bind has different semantics in DoArrray() as compared to Do()
+    my $TargetConfigItemID        = $ReferencedObjectType eq 'ITSMConfigItem'        ? $Param{Value} : undef;
+    my $TargetConfigItemVersionID = $ReferencedObjectType eq 'ITSMConfigItemVersion' ? $Param{Value} : undef;
+    $DBObject->DoArray(
+        SQL => <<'END_SQL',
+INSERT INTO configitem_reference (
+    link_type_id,
+    source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
+    create_time, create_by
+  )
   VALUES (1, ?, ?, ?, ?, current_timestamp, 1 )
 END_SQL
-            Bind => [ \$Param{SourceConfigItemVersionID}, \$TargetConfigItemID, \$TargetConfigItemVersionID, \$Param{DynamicField}->{ID} ],
-        );
-    }
+        Bind => [ $Param{SourceConfigItemVersionID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ],
+    );
 
     # assume success
     return 1;
