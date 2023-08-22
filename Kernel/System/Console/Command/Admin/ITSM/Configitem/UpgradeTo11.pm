@@ -745,10 +745,7 @@ END_SQL
                             if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
                                 push @SetValue, $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
 
-                                if ( $Included->{Definition}{FieldType} eq 'Date' ) {
-                                    $SetValue[-1] .= ' 00:00:00';
-                                }
-                                elsif ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
+                                if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
                                     $SetValue[-1] .= ':00';
                                 }
                             }
@@ -767,9 +764,6 @@ END_SQL
                                     }
                                 }
 
-                                if ( $Included->{Definition}{FieldType} eq 'Date' ) {
-                                    @Values = map { $_ . ' 00:00:00' } @Values;
-                                }
                                 if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
                                     @Values = map { $_ . ':00' } @Values;
                                 }
@@ -796,9 +790,6 @@ END_SQL
 
                     next ATTRIBUTE if !@Values;
 
-                    if ( $DynamicField->{FieldType} eq 'Date' ) {
-                        @Values = map { $_ . ' 00:00:00' } @Values;
-                    }
                     if ( $DynamicField->{FieldType} eq 'DateTime' ) {
                         @Values = map { $_ . ':00' } @Values;
                     }
@@ -808,9 +799,6 @@ END_SQL
                 else {
                     $Value = $BaseArrayFields{ $DynamicField->{FieldType} } ? [ $XML[1]{Version}[1]{$Attribute}[1]{Content} ] : $XML[1]{Version}[1]{$Attribute}[1]{Content};
 
-                    if ( $DynamicField->{FieldType} eq 'Date' ) {
-                        $Value .= ' 00:00:00';
-                    }
                     if ( $DynamicField->{FieldType} eq 'DateTime' ) {
                         $Value .= ':00';
                     }
