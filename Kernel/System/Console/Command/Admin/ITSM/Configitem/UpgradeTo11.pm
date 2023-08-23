@@ -641,8 +641,9 @@ sub _MigrateAttributeData {
             );
         }
 
-        # get all versions of a class #TODO: Do we need batches for really large CMDBs?
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        # get all versions of a class in one go
+        # TODO: Do we need batches for really large CMDBs?
+        my $Rows = $Kernel::OM->Get('Kernel::System::DB')->SelectAll(
             SQL => <<'END_SQL',
 SELECT v.id, v.definition_id
   FROM configitem_version v
@@ -653,16 +654,7 @@ END_SQL
             Bind => [ \$ClassID ],
         );
 
-        # fetch the result
-        my @VersionList;
-        while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-            push @VersionList, {
-                VersionID    => $Row[0],
-                DefinitionID => $Row[1],
-            };
-        }
-
-        # TODO: disable history before the look over the classes
+        # TODO: disable history before the loop over the classes
         if ( !$DisabledHistory && $Kernel::OM->Get('Kernel::Config')->Get($HistorySetting) ) {
 
             # do not write a history
@@ -695,36 +687,38 @@ END_SQL
         }
 
         my @Skipped;
-        my $Count = scalar @VersionList;
+        my $Count = scalar $Rows->@*;
         my $Frac  = int( $Count / 10 );
         my $c     = 0;
 
         $Self->Print("\tWorking on <yellow>$Self->{ClassList}{$ClassID}</yellow> ($Count Versions)");
 
-        VERSION:
-        for my $Version (@VersionList) {
+        ROW:
+        for my $Row ( $Rows->@* ) {
+            my ( $VersionID, $DefinitionID ) = $Row->@*;
+
             if ( ++$c == $Frac ) {
                 $Self->Print(".");
                 $c = 0;
             }
 
-            if ( !$Definition{ $Version->{DefinitionID} }{DynamicFieldRef} ) {
-                push @Skipped, $Version->{VersionID};
+            if ( !$Definition{$DefinitionID}{DynamicFieldRef} ) {
+                push @Skipped, $VersionID;
 
-                next VERSION;
+                next ROW;
             }
 
             # get version
             my @XML = $Kernel::OM->Get('Kernel::System::XML')->XMLHashGet(
                 Type => "ITSM::ConfigItem::$ClassID",
-                Key  => $Version->{VersionID},
+                Key  => $VersionID,
             );
 
             # try archive
             if ( !@XML ) {
                 @XML = $Kernel::OM->Get('Kernel::System::XML')->XMLHashGet(
                     Type => "ITSM::ConfigItem::Archiv::$ClassID",
-                    Key  => $Version->{VersionID},
+                    Key  => $VersionID,
                 );
             }
 
@@ -732,7 +726,7 @@ END_SQL
             for my $Attribute ( sort keys $XML[1]{Version}[1]->%* ) {
                 next ATTRIBUTE unless $AttributeMap->{$Attribute};
 
-                my $DynamicField = $Definition{ $Version->{DefinitionID} }{DynamicFieldRef}{ $AttributeMap->{$Attribute} };
+                my $DynamicField = $Definition{$DefinitionID}{DynamicFieldRef}{ $AttributeMap->{$Attribute} };
 
                 next ATTRIBUTE unless $DynamicField;
 
@@ -808,7 +802,7 @@ END_SQL
 
                 $DynamicFieldBackendObject->ValueSet(
                     DynamicFieldConfig => $DynamicField,
-                    ObjectID           => $Version->{VersionID},
+                    ObjectID           => $VersionID,
                     Value              => $Value,
                     UserID             => 1,
                     ConfigItemHandled  => 1,
