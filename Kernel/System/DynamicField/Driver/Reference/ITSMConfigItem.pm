@@ -257,9 +257,7 @@ sub SearchObjects {
     }
 
     # return a list of config item IDs
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    return $ConfigItemObject->ConfigItemSearch(
+    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         Limit  => $Param{MaxResults},
         Result => 'ARRAY',
         %SearchParams,
@@ -268,10 +266,12 @@ sub SearchObjects {
 
 =head2 ValueForLens()
 
-return the current last version ids used in dynamic_field_value
+return the current last version ids used in dynamic_field_value.
+The passed in value is a list of config item IDs. These IDs are
+transformed into the respective last version IDs.
 
     my $Value = $PluginObject->ValueForLens(
-        Value => $Value,
+        Value => [17,17,19,20],
     );
 
 =cut
@@ -279,14 +279,23 @@ return the current last version ids used in dynamic_field_value
 sub ValueForLens {
     my ( $Self, %Param ) = @_;
 
-    return unless ref $Param{Value};
-    return unless $Param{Value}->@*;
+    return $Param{Value} unless ref $Param{Value} eq 'ARRAY';
 
-    my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-        ConfigItemID => $Param{Value}->[0],
-    );
+    my @LastVersionIDs;
+    CONFIG_ITEM_ID:
+    for my $ConfigItemID ( $Param{Value}->@* ) {
+        my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+        );
 
-    return [ $ConfigItem->{LastVersionID} ];
+        # only valid IDs
+        next CONFIG_ITEM_ID unless $ConfigItem;
+        next CONFIG_ITEM_ID unless $ConfigItem->{LastVersionID};
+
+        push @LastVersionIDs, $ConfigItem->{LastVersionID};
+    }
+
+    return \@LastVersionIDs;
 }
 
 1;
