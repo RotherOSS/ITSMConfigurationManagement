@@ -43,8 +43,6 @@ use Storable;
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
-our $Self;    # TODO: what is the package variable used for ???
-
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
@@ -272,15 +270,24 @@ sub ConfigItemGet {
         return;
     }
 
-    # ignore DynamicFields per default
-    $Param{DynamicFields} //= 0;
+    # ignore DynamicFields per default,
+    # make sure that the variable is either 0 or 1, as it is used for the cache key
+    my $DFData = $Param{DynamicFields} ? 1 : 0;
 
     # check if result is already cached, considering the DynamicFields parameter
     my $CacheKey = $Param{VersionID}
         ?
-        join '::', 'ConfigItemGet::VersionID', @Param{qw(VersionID DynamicFields)}
+        join(
+            '::', 'ConfigItemGet',
+            VersionID => $Param{VersionID},
+            DFData    => $DFData
+        )
         :
-        join '::', 'ConfigItemGet::ConfigItemID', @Param{qw(ConfigItemID DynamicFields)};
+        join(
+            '::', 'ConfigItemGet',
+            ConfigItemID => $Param{ConfigItemID},
+            DFData       => $DFData
+        );
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $Cache       = $CacheObject->Get(
@@ -381,7 +388,7 @@ END_SQL
     }
 
     # check if need to return DynamicFields
-    if ( $Param{DynamicFields} ) {
+    if ($DFData) {
 
         # get dynamic field objects
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -408,7 +415,6 @@ END_SQL
             # set the dynamic field name and value into the ticket hash
             $ConfigItem{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $Value;
         }
-
     }
 
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -779,11 +785,16 @@ sub ConfigItemDelete {
     );
 
     # delete the cache
-    my $CacheKey = 'ConfigItemGet::ConfigItemID::' . $Param{ConfigItemID};
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => $CacheKey,
-    );
+    for my $DFData ( 0, 1 ) {
+        $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+            Type => $Self->{CacheType},
+            Key  => join(
+                'ConfigItemGet',
+                ConfigItemID => $Param{ConfigItemID},
+                DFData       => $DFData
+            ),
+        );
+    }
 
     return $Success;
 }
@@ -986,6 +997,18 @@ sub ConfigItemUpdate {
                 Comment      => $Changed{$Key}{New} . '%%' . $Changed{$Key}{Old},
             },
             UserID => $Param{UserID},
+        );
+    }
+
+    # delete the cache
+    for my $DFData ( 0, 1 ) {
+        $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+            Type => $Self->{CacheType},
+            Key  => join(
+                'ConfigItemGet',
+                ConfigItemID => $Param{ConfigItemID},
+                DFData       => $DFData
+            ),
         );
     }
 
@@ -1681,18 +1704,23 @@ sub CurInciStateRecalc {
 
         # TODO: Instead of deleting, if present, update cache with new cur_inci
         # delete the cache
-        my $CacheKey = 'ConfigItemGet::ConfigItemID::' . $ConfigItemID;
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey,
-        );
+        for my $DFData ( 0, 1 ) {
+            $CacheObject->Delete(
+                Type => $Self->{CacheType},
+                Key  => join(
+                    'ConfigItemGet',
+                    ConfigItemID => $ConfigItemID,
+                    DFData       => $DFData
+                ),
+            );
+        }
 
         # delete affected caches for ConfigItemID
-        $CacheKey = 'VersionGet::ConfigItemID::' . $ConfigItemID . '::XMLData::';
+        # TODO: XMLData cache is no longer used
         for my $XMLData (qw(0 1)) {
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
-                Key  => $CacheKey . $XMLData,
+                Key  => 'VersionGet::ConfigItemID::' . $ConfigItemID . '::XMLData::' . $XMLData,
             );
         }
         $CacheObject->Delete(
@@ -1706,11 +1734,13 @@ sub CurInciStateRecalc {
             ConfigItemID => $ConfigItemID,
         );
         my $VersionID = $VersionList->[-1];
-        $CacheKey = 'VersionGet::VersionID::' . $VersionID . '::XMLData::';
+
+        # TODO: XMLData cache is no longer used
+        # TODO: VersionGet has been removed
         for my $XMLData (qw(0 1)) {
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
-                Key  => $CacheKey . $XMLData,
+                Key  => 'VersionGet::VersionID::' . $VersionID . '::XMLData::' . $XMLData,
             );
         }
         $CacheObject->Delete(

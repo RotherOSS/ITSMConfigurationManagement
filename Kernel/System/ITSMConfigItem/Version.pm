@@ -658,11 +658,16 @@ END_SQL
     #        );
     #    }
 
+    # Clear the cache for ConfigItemGet
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $DFData (qw(0 1)) {
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::ConfigItemID::' . $Version{ConfigItemID} . '::' . $DFData,
+            Key  => join(
+                '::', 'ConfigItemGet',
+                ConfigItemID => $Version{ConfigItemID},
+                DFData       => $DFData
+            ),
         );
     }
 
@@ -728,7 +733,7 @@ sub VersionUpdate {
             $Param{$Attribute} ||= $Version->{$Attribute};
         }
 
-        # insert new version
+        # update existing version
         my $Success = $DBObject->Do(
             SQL => <<'END_SQL',
 UPDATE configitem_version
@@ -748,6 +753,7 @@ END_SQL
         return unless $Success;
     }
 
+    # get latest definition for the class
     my $Definition = $Self->DefinitionGet(
         ClassID => $Version->{ClassID},
     );
@@ -798,21 +804,30 @@ END_SQL
         }
     }
 
+    # Clear the cache for ConfigItemGet
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $DFData (qw(0 1)) {
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::VersionID::' . $Version->{VersionID} . '::' . $DFData,
+            Key  => join(
+                '::', 'ConfigItemGet',
+                VersionID => $Version->{VersionID},
+                DFData    => $DFData
+            ),
         );
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'ConfigItemGet::ConfigItemID::' . $Version->{ConfigItemID} . '::' . $DFData,
+            Key  => join(
+                '::', 'ConfigItemGet',
+                ConfigItemID => $Version->{ConfigItemID},
+                DFData       => $DFData
+            ),
         );
     }
 
     $CacheObject->Delete(
         Type => $Self->{CacheType},
-        Key  => 'VersionNameGet::VersionID::' . $Version->{VersionID},
+        Key  => join( '::', 'VersionNameGet', VersionID => $Version->{VersionID} ),
     );
 
     if ($CurInciStateRecalc) {
@@ -934,16 +949,19 @@ sub VersionDelete {
             );
 
             # delete affected caches
-            my $CacheKey = 'ConfigItemGet::VersionID::' . $VersionID . '::DFData::';
             for my $DFData (qw(0 1)) {
                 $CacheObject->Delete(
                     Type => $Self->{CacheType},
-                    Key  => $CacheKey . $DFData,
+                    Key  => join(
+                        '::', 'ConfigItemGet',
+                        VersionID => $VersionID,
+                        DFData    => $DFData
+                    ),
                 );
             }
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
-                Key  => 'VersionNameGet::VersionID::' . $VersionID,
+                Key  => join( '::', 'VersionNameGet', VersionID => $VersionID ),
             );
 
             delete $Self->{Cache}->{VersionConfigItemIDGet}->{$VersionID};
@@ -953,16 +971,19 @@ sub VersionDelete {
     for my $ConfigItemID ( sort keys %ConfigItemIDs ) {
 
         # delete affected caches for ConfigItemID (most recent version might have been removed)
-        my $CacheKey = 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::DFData::';
         for my $DFData (qw(0 1)) {
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
-                Key  => $CacheKey . $DFData,
+                Key  => join(
+                    '::', 'ConfigItemGet',
+                    ConfigItemID => $ConfigItemID,
+                    DFData       => $DFData
+                ),
             );
         }
         $CacheObject->Delete(
             Type => $Self->{CacheType},
-            Key  => 'VersionNameGet::ConfigItemID::' . $ConfigItemID,
+            Key  => join( '::', 'VersionNameGet', ConfigItemID => $ConfigItemID ),
         );
     }
 

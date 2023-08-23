@@ -129,8 +129,6 @@ sub DefinitionList {
 
 =head2 DefinitionGet()
 
-=head2 DefinitionGet()
-
 return a config item definition as hash reference
 
 Return
@@ -148,7 +146,7 @@ Return
         DefinitionID => 123,
     );
 
-    or
+or
 
     my $DefinitionRef = $ConfigItemObject->DefinitionGet(
         ClassID => 123,
@@ -227,7 +225,7 @@ sub DefinitionGet {
         );
     }
 
-    return {} if !$Definition{DefinitionID};
+    return {} unless $Definition{DefinitionID};
 
     # prepare definition
     # TODO: Rework?
