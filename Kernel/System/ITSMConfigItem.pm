@@ -133,18 +133,12 @@ sub ConfigItemCount {
     my $DeplStateString = join q{, }, keys %{$StateList};
 
     # ask database
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+    my ($Count) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => "SELECT COUNT(id) FROM configitem WHERE class_id = ? AND "
             . "cur_depl_state_id IN ( $DeplStateString )",
         Bind  => [ \$Param{ClassID} ],
         Limit => 1,
     );
-
-    # fetch the result
-    my $Count = 0;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $Count = $Row[0];
-    }
 
     return $Count;
 }
@@ -309,10 +303,11 @@ sub ConfigItemGet {
     }
 
     # get specific ConfigItemVersion
+    my @Row;
     if ( $Param{VersionID} ) {
 
         # TODO: implement version string: v.version
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
@@ -332,7 +327,7 @@ END_SQL
     else {
 
         # TODO: implement version string: v.version
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
@@ -350,24 +345,22 @@ END_SQL
 
     # fetch the result
     my %ConfigItem;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $ConfigItem{ConfigItemID}   = $Row[0];
-        $ConfigItem{Number}         = $Row[1];
-        $ConfigItem{ClassID}        = $Row[2];
-        $ConfigItem{LastVersionID}  = $Row[3];
-        $ConfigItem{CurDeplStateID} = $Row[4];
-        $ConfigItem{CurInciStateID} = $Row[5];
-        $ConfigItem{VersionID}      = $Row[6];
-        $ConfigItem{Name}           = $Row[7];
-        $ConfigItem{Version}        = $Row[8];
-        $ConfigItem{DefinitionID}   = $Row[9];
-        $ConfigItem{DeplStateID}    = $Row[10];
-        $ConfigItem{InciStateID}    = $Row[11];
-        $ConfigItem{CreateTime}     = $Row[12];
-        $ConfigItem{CreateBy}       = $Row[13];
-        $ConfigItem{ChangeTime}     = $Row[14];
-        $ConfigItem{ChangeBy}       = $Row[15];
-    }
+    $ConfigItem{ConfigItemID}   = $Row[0];
+    $ConfigItem{Number}         = $Row[1];
+    $ConfigItem{ClassID}        = $Row[2];
+    $ConfigItem{LastVersionID}  = $Row[3];
+    $ConfigItem{CurDeplStateID} = $Row[4];
+    $ConfigItem{CurInciStateID} = $Row[5];
+    $ConfigItem{VersionID}      = $Row[6];
+    $ConfigItem{Name}           = $Row[7];
+    $ConfigItem{Version}        = $Row[8];
+    $ConfigItem{DefinitionID}   = $Row[9];
+    $ConfigItem{DeplStateID}    = $Row[10];
+    $ConfigItem{InciStateID}    = $Row[11];
+    $ConfigItem{CreateTime}     = $Row[12];
+    $ConfigItem{CreateBy}       = $Row[13];
+    $ConfigItem{ChangeTime}     = $Row[14];
+    $ConfigItem{ChangeBy}       = $Row[15];
 
     # check config item
     if ( !$ConfigItem{ConfigItemID} ) {

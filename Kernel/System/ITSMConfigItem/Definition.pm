@@ -331,19 +331,13 @@ sub DefinitionAdd {
     return if !$Success;
 
     # get id of new definition
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+    my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => 'SELECT id FROM configitem_definition WHERE '
             . 'class_id = ? AND version = ? '
             . 'ORDER BY version DESC',
         Bind  => [ \$Param{ClassID}, \$Version ],
         Limit => 1,
     );
-
-    # fetch the result
-    my $DefinitionID;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $DefinitionID = $Row[0];
-    }
 
     # dynamic fields are synced
     $Self->DefinitionSetSynced(

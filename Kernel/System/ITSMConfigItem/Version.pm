@@ -530,7 +530,7 @@ sub VersionAdd {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # insert new version
-    my $Success = $DBObject->Do(
+    my $InsertSuccess = $DBObject->Do(
         SQL => <<'END_SQL',
 INSERT INTO configitem_version (
     configitem_id, name, definition_id, depl_state_id, inci_state_id,
@@ -552,24 +552,20 @@ END_SQL
         ],
     );
 
-    return unless $Success;
+    return unless $InsertSuccess;
 
     # get id of new version
     # TODO: what about concurrent inserts ?
-    $DBObject->Prepare(
-        SQL => 'SELECT id, create_time FROM configitem_version WHERE '
-            . 'configitem_id = ? ORDER BY id DESC',
+    my ( $VersionID, $VersionCreateTime ) = $DBObject->SelectRowArray(
+        SQL => <<'END_SQL',
+SELECT id, create_time
+  FROM configitem_version
+  WHERE configitem_id = ?
+  ORDER BY id DESC
+END_SQL
         Bind  => [ \$Version{ConfigItemID} ],
         Limit => 1,
     );
-
-    # fetch the result
-    my $VersionID;
-    my $CreateTime;
-    while ( my ( $Id, $Time ) = $DBObject->FetchrowArray() ) {
-        $VersionID  = $Id;
-        $CreateTime = $Time;
-    }
 
     # check version id
     if ( !$VersionID ) {
@@ -582,12 +578,16 @@ END_SQL
     }
 
     # update last version of config item
-    $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL  => 'UPDATE configitem SET last_version_id = ?, change_time = ?, change_by = ? WHERE id = ?',
-        Bind => [ \$VersionID, \$CreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
+    my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => <<'END_SQL',
+UPDATE configitem
+  SET last_version_id = ?, change_time = ?, change_by = ?
+  WHERE id = ?
+END_SQL
+        Bind => [ \$VersionID, \$VersionCreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
     );
 
-    return unless $Success;
+    return unless $UpdateSuccess;
 
     # trigger VersionCreate event
     $Self->EventHandler(
@@ -698,7 +698,7 @@ update a version
 sub VersionUpdate {
     my ( $Self, %Param ) = @_;
 
-    my $Version = $Param{Version} ? $Param{Version} : $Self->ConfigItemGet(
+    my $Version = $Param{Version} || $Self->ConfigItemGet(
         VersionID     => $Param{VersionID},
         DynamicFields => 1,
     );
