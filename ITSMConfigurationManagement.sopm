@@ -1290,55 +1290,6 @@
 
     ]]></CodeReinstall>
     <!-- It is IMPORTANT that all CodeUpgrade parts with version numbers come BEFORE the regular CodeUpgrade block without any version number! -->
-    <CodeUpgrade Type="pre" Version="3.2.91"><![CDATA[
-
-        # uninstall Feature AddOn OTOBOCIColumns that has been integrated in OTOBO::ITSM 3.3 Beta 1
-        $Kernel::OM->Get('Kernel::System::Package')->_PackageUninstallMerged(
-            Name => 'OTOBOCIColumns',
-        );
-
-        # uninstall Feature AddOn OTOBOCIAttributeSyntaxCheck that has been integrated in OTOBO::ITSM 3.3 Beta 1
-        $Kernel::OM->Get('Kernel::System::Package')->_PackageUninstallMerged(
-            Name => 'OTOBOCIAttributeSyntaxCheck',
-        );
-
-    ]]></CodeUpgrade>
-    <CodeUpgrade Type="pre" Version="3.3.91"><![CDATA[
-
-        # uninstall Feature AddOn OTOBOGenericInterfaceITSMCIOperations that has been integrated in OTOBO::ITSM 4 Beta 1
-        $Kernel::OM->Get('Kernel::System::Package')->_PackageUninstallMerged(
-            Name => 'OTOBOGenericInterfaceITSMCIOperations',
-        );
-
-    ]]></CodeUpgrade>
-    <CodeUpgrade Type="post" Version="4.0.2"><![CDATA[
-
-        # create the package name
-        my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
-
-        # discard internally stored object, so that the next access to object creates them newly
-        $Kernel::OM->ObjectsDiscard(
-            Objects            => [$CodeModule],
-            ForcePackageReload => 1,
-        );
-
-        $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_4_0_2();
-
-    ]]></CodeUpgrade>
-    <CodeUpgrade Type="post" Version="4.0.91"><![CDATA[
-
-        # create the package name
-        my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
-
-        # discard internally stored object, so that the next access to object creates them newly
-        $Kernel::OM->ObjectsDiscard(
-            Objects            => [$CodeModule],
-            ForcePackageReload => 1,
-        );
-
-        $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_4_0_91();
-
-    ]]></CodeUpgrade>
     <CodeUpgrade Type="post" Version="10.0.3"><![CDATA[
 
         # create the package name

@@ -31,7 +31,6 @@ use Kernel::Output::Template::Provider;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::GenericInterface::Webservice',
-    'Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML',
     'Kernel::System::DB',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
@@ -40,7 +39,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Service',
     'Kernel::System::Stats',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 
@@ -185,57 +183,6 @@ sub CodeReinstall {
     return 1;
 }
 
-=head2 CodeUpgradeFromLowerThan_4_0_2()
-
-This function is only executed if the installed module version is smaller than 4.0.2.
-
-my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_2();
-
-=cut
-
-sub CodeUpgradeFromLowerThan_4_0_2 {    ## no critic qw(OTOBO::RequireCamelCase)
-    my ( $Self, %Param ) = @_;
-
-    # migrate the template Content in the SysConfig
-    $Self->_MigrateDTLInSysConfig();
-
-    return 1;
-}
-
-=head2 CodeUpgradeFromLowerThan_4_0_8()
-
-This function is only executed if the installed module version is smaller than 4.0.8.
-
-my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_8();
-
-=cut
-
-sub CodeUpgradeFromLowerThan_4_0_8 {    ## no critic qw(OTOBO::RequireCamelCase)
-    my ( $Self, %Param ) = @_;
-
-    # fix a typo in the general catalog
-    $Self->_FixTypo();
-
-    return 1;
-}
-
-=head2 CodeUpgradeFromLowerThan_4_0_91()
-
-This function is only executed if the installed module version is smaller than 4.0.91.
-
-my $Result = $CodeObject->CodeUpgradeFromLowerThan_4_0_91();
-
-=cut
-
-sub CodeUpgradeFromLowerThan_4_0_91 {    ## no critic qw(OTOBO::RequireCamelCase)
-    my ( $Self, %Param ) = @_;
-
-    # change configurations to match the new module location.
-    $Self->_MigrateConfigs();
-
-    return 1;
-}
-
 =head2 CodeUpgradeFromLowerThan_10_0_3()
 
 This function is only executed if the installed module version is smaller than 10.0.3.
@@ -287,10 +234,6 @@ sub CodeUpgrade {
         FilePrefix => $Self->{FilePrefix},
         UserID     => 1,
     );
-
-    # Convert any Perl definition to YAML
-    # This could be moved to a version specific
-    $Self->_ConvertPerlDefinitions2YAML();
 
     return 1;
 }
@@ -1348,195 +1291,6 @@ sub _DeleteServicePreferences {
     }
 
     return 1;
-}
-
-=head2 _MigrateDTLInSysConfig()
-
-Converts template settings in sysconfig to template toolkit.
-
-    my $Result = $CodeObject->_MigrateDTLInSysConfig();
-
-=cut
-
-sub _MigrateDTLInSysConfig {
-
-    # create needed objects
-    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-    my $ProviderObject  = Kernel::Output::Template::Provider->new();
-
-    my @NewSettings;
-
-    # handle hash settings
-    NAME:
-    for my $Name (
-        qw(
-            ITSMConfigItem::Frontend::MenuModule
-            ITSMConfigItem::Frontend::PreMenuModule
-        )
-        )
-    {
-
-        # get setting's content
-        my $Setting = $ConfigObject->Get($Name);
-        next NAME if !$Setting;
-
-        MENUMODULE:
-        for my $MenuModule ( sort keys %{$Setting} ) {
-
-            # Setting is a hash.
-            SETTINGITEM:
-            for my $SettingItem ( sort keys %{ $Setting->{$MenuModule} } ) {
-
-                my $SettingContent = $Setting->{$MenuModule}->{$SettingItem};
-
-                # Do nothing if there is no value for migrating.
-                next SETTINGITEM if !$SettingContent;
-
-                my $TTContent;
-                eval {
-                    $TTContent = $ProviderObject->MigrateDTLtoTT( Content => $SettingContent );
-                };
-                if ($@) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "$MenuModule->$SettingItem : $@!",
-                    );
-                }
-                else {
-                    $Setting->{$MenuModule}->{$SettingItem} = $TTContent;
-                }
-            }
-
-            # Build new setting.
-            push @NewSettings, {
-                Name           => $Name . '###' . $MenuModule,
-                EffectiveValue => $Setting->{$MenuModule},
-            };
-        }
-    }
-
-    return 1 if !@NewSettings;
-
-    # Write new setting.
-    $SysConfigObject->SettingsSet(
-        UserID   => 1,
-        Comments => 'ITSMConfigurationManagement - package setup function: _MigrateDTLInSysConfig',
-        Settings => \@NewSettings,
-    );
-
-    return 1;
-}
-
-=head2 _FixTypo()
-
-Fixes a typo in the general catalog
-
-    my $Result = $CodeObject->_FixTypo();
-
-=cut
-
-sub _FixTypo {
-    my ( $Self, %Param ) = @_;
-
-    # get the item data with the wrong name "Keybord"
-    my $ItemDataRef = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-        Class => 'ITSM::ConfigItem::Hardware::Type',
-        Name  => 'Keybord',
-    );
-
-    # check if general catalog entry exists
-    if ( $ItemDataRef && ref $ItemDataRef eq 'HASH' && %{$ItemDataRef} ) {
-
-        # update the item data with the correct name "Keyboard"
-        $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemUpdate(
-            %{$ItemDataRef},
-            Name   => 'Keyboard',
-            UserID => 1,
-        );
-    }
-
-    return 1;
-}
-
-=head2 _MigrateConfigs()
-
-change configurations to match the new module location.
-
-    my $Result = $CodeObject->_MigrateConfigs();
-
-=cut
-
-sub _MigrateConfigs {
-    my ( $Self, %Param ) = @_;
-
-    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-
-    my @NewSettings;
-
-    for my $Type (qw(MenuModule Overview)) {
-
-        # migrate ITSMConfiguration Preferences
-        # get setting content for ITSMConfiguration Preferences
-        my $Setting = $Kernel::OM->Get('Kernel::Config')->Get( 'ITSMConfigItem::Frontend::' . $Type );
-
-        CONFIGITEM:
-        for my $MenuModule ( sort keys %{$Setting} ) {
-            my $MenuModuleSettings = $Setting->{$MenuModule};
-
-            # update module location
-            my $Module = $MenuModuleSettings->{'Module'};
-            if ( $Module !~ m{Kernel::Output::HTML::ITSMConfigItem(\w+)} ) {
-                next CONFIGITEM;
-            }
-
-            $Module =~ s{Kernel::Output::HTML::ITSMConfigItem(\w+)}{Kernel::Output::HTML::ITSMConfigItem::$1}xmsg;
-            $MenuModuleSettings->{Module} = $Module;
-
-            # Build new setting.
-            push @NewSettings, {
-                Name           => 'ITSMConfigItem::Frontend::' . $Type . '###' . $MenuModule,
-                EffectiveValue => $MenuModuleSettings,
-            };
-        }
-    }
-
-    return 1 if !@NewSettings;
-
-    # Write new setting.
-    $SysConfigObject->SettingsSet(
-        UserID   => 1,
-        Comments => 'ITSMConfigurationManagement - package setup function: _MigrateConfigs',
-        Settings => \@NewSettings,
-    );
-
-    return 1;
-}
-
-=head2 _ConvertPerlDefinitions2YAML()
-
-Converts Perl definitions to YAML.
-
-    my $Result = $CodeObject->_ConvertPerlDefinitions2YAML();
-
-=cut
-
-sub _ConvertPerlDefinitions2YAML {
-
-    my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::ITSM::Configitem::DefinitionPerl2YAML');
-
-    my ( $Result, undef, $ExitCode ) = capture {
-        return $CommandObject->Execute();
-    };
-
-    return 1 unless $ExitCode;
-
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'error',
-        Message  => "$Result",
-    );
-
-    return;
 }
 
 =head2 _UpdateElasticsearchWebService()
