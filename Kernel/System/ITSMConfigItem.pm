@@ -1481,11 +1481,11 @@ sub UniqueNameCheck {
     $SearchCriteria{Name} = $Param{Name};
 
     # search for a config item matching the given name
-    my $ConfigItem = $Self->ConfigItemSearch(%SearchCriteria);
+    my @ConfigItems = $Self->ConfigItemSearch(%SearchCriteria);
 
     # remove the provided ConfigItemID from the results, otherwise the duplicate check would fail
     # because the ConfigItem itself is found as duplicate
-    my @Duplicates = map {$_} grep { $_ ne $Param{ConfigItemID} } @{$ConfigItem};
+    my @Duplicates = map {$_} grep { $_ ne $Param{ConfigItemID} } @ConfigItems;
 
     # if a config item was found, the given name is not unique
     # if no config item was found, the given name is unique
