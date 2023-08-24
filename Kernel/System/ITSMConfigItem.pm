@@ -576,6 +576,7 @@ sub ConfigItemAdd {
                 Priority => 'error',
                 Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
             );
+
             return;
         }
     }
@@ -592,17 +593,16 @@ sub ConfigItemAdd {
     return if !$Success;
 
     # find id of new item
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id FROM configitem WHERE '
-            . 'configitem_number = ? AND class_id = ? ORDER BY id DESC',
-        Bind  => [ \$Param{Number}, \$Param{ClassID} ],
-        Limit => 1,
+    ( $Param{ConfigItemID} ) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+        SQL => <<'END_SQL',
+SELECT id
+  FROM configitem
+  WHERE configitem_number = ?
+    AND class_id = ?
+  ORDER BY id DESC
+END_SQL
+        Bind => [ \$Param{Number}, \$Param{ClassID} ],
     );
-
-    # fetch the result
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        $Param{ConfigItemID} = $Row[0];
-    }
 
     # check for name module
     my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
@@ -617,6 +617,7 @@ sub ConfigItemAdd {
                 Priority => 'error',
                 Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
             );
+
             return;
         }
 
@@ -628,7 +629,6 @@ sub ConfigItemAdd {
             Name         => $Param{Name},
             ConfigItemID => $Param{ConfigItemID},
         );
-
     }
 
     # add the first version

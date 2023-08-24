@@ -473,7 +473,8 @@ sub VersionConfigItemIDGet {
 
 =head2 VersionAdd()
 
-add a new version
+adds a new version to either an existing config item.
+Or adds the initial version to an config item that is being created.
 
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID      => 123,
@@ -491,7 +492,7 @@ add a new version
 sub VersionAdd {
     my ( $Self, %Param ) = @_;
 
-    my $LastVersion = $Param{LastVersion} ? $Param{LastVersion} : $Self->ConfigItemGet(
+    my $LastVersion = $Param{LastVersion} || $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
         VersionID     => $Param{LastVersionID},
         DynamicFields => 1,
