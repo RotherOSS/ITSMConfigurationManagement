@@ -16,10 +16,18 @@
 
 package Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
 use List::Util qw(min);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -46,6 +54,7 @@ All functions to import and export ITSM config items.
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $BackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
 
@@ -55,10 +64,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 ObjectAttributesGet()
@@ -349,6 +355,7 @@ sub ExportDataGet {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -365,6 +372,7 @@ sub ExportDataGet {
             Priority => 'error',
             Message  => "No object data found for the template id $Param{TemplateID}",
         );
+
         return;
     }
 
@@ -373,7 +381,8 @@ sub ExportDataGet {
         Class => 'ITSM::ConfigItem::Class',
     );
 
-    return if !$ClassList || ref $ClassList ne 'HASH';
+    return unless $ClassList;
+    return unless ref $ClassList eq 'HASH';
 
     # check the class id
     if ( !$ObjectData->{ClassID} || !$ClassList->{ $ObjectData->{ClassID} } ) {
@@ -382,6 +391,7 @@ sub ExportDataGet {
             Priority => 'error',
             Message  => "No valid class id found for the template id $Param{TemplateID}",
         );
+
         return;
     }
 
@@ -398,6 +408,7 @@ sub ExportDataGet {
             Priority => 'error',
             Message  => "No valid mapping list found for the template id $Param{TemplateID}",
         );
+
         return;
     }
 
@@ -430,35 +441,34 @@ sub ExportDataGet {
         UserID     => $Param{UserID},
     );
 
-    return if !$SearchData || ref $SearchData ne 'HASH';
+    return unless $SearchData;
+    return unless ref $SearchData eq 'HASH';
 
-    # get deployment state list
+    # get deployment state list, for translating the numeric IDs into readable names
     my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
     );
-
-    # check deployment state list
     if ( !$DeplStateList || ref $DeplStateList ne 'HASH' ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't get the general catalog list ITSM::ConfigItem::DeploymentState!",
         );
+
         return;
     }
 
-    # get incident state list
+    # get incident state list, for translating the numeric IDs into readable names
     my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::Core::IncidentState',
     );
-
-    # check incident state list
     if ( !$InciStateList || ref $InciStateList ne 'HASH' ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't get the general catalog list ITSM::Core::IncidentState!",
         );
+
         return;
     }
 
@@ -508,32 +518,26 @@ sub ExportDataGet {
     }
 
     # search the config items
-    my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+    my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %SearchParams,
         ClassIDs              => [ $ObjectData->{ClassID} ],
         PreviousVersionSearch => 0,
         UserID                => $Param{UserID},
+        Result                => 'ARRAY',
     );
 
     my @ExportData;
     CONFIGITEMID:
-    for my $ConfigItemID ( @{$ConfigItemList} ) {
+    for my $ConfigItemID (@ConfigItemIDs) {
 
-        # get last version
-        my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+        # get latest version
+        my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
         );
 
-        next CONFIGITEMID if !$VersionData;
-        next CONFIGITEMID if ref $VersionData ne 'HASH';
+        next CONFIGITEMID unless $VersionData;
+        next CONFIGITEMID unless ref $VersionData eq 'HASH';
 
-        # translate xmldata to a 2d hash
-        my %XMLData2D;
-        $Self->_ExportXMLDataPrepare(
-            XMLDefinition => $DefinitionData->{DefinitionRef},
-            XMLData       => $VersionData->{XMLData}->[1]->{Version}->[1],
-            XMLData2D     => \%XMLData2D,
-        );
 
         # add data to the export data array
         my @Item;
@@ -546,18 +550,21 @@ sub ExportDataGet {
             # handle empty key
             if ( !$Key ) {
                 push @Item, '';
+
                 next MAPPINGOBJECT;
             }
 
             # handle config item number
             if ( $Key eq 'Number' ) {
                 push @Item, $VersionData->{Number};
+
                 next MAPPINGOBJECT;
             }
 
             # handle current config item name
             if ( $Key eq 'Name' ) {
                 push @Item, $VersionData->{Name};
+
                 next MAPPINGOBJECT;
             }
 
@@ -565,6 +572,7 @@ sub ExportDataGet {
             if ( $Key eq 'DeplState' ) {
                 $VersionData->{DeplStateID} ||= 'DUMMY';
                 push @Item, $DeplStateList->{ $VersionData->{DeplStateID} };
+
                 next MAPPINGOBJECT;
             }
 
@@ -572,11 +580,12 @@ sub ExportDataGet {
             if ( $Key eq 'InciState' ) {
                 $VersionData->{InciStateID} ||= 'DUMMY';
                 push @Item, $InciStateList->{ $VersionData->{InciStateID} };
+
                 next MAPPINGOBJECT;
             }
 
             # handle all XML data elements
-            push @Item, $XMLData2D{$Key};
+            push @Item, $VersionData->{$Key};
         }
 
         push @ExportData, \@Item;
@@ -1438,66 +1447,6 @@ sub _ExportXMLSearchDataPrepare {
             SearchData    => $Param{SearchData},
             Prefix        => $Key,
         );
-    }
-
-    return 1;
-}
-
-=head2 _ExportXMLDataPrepare()
-
-recursion function to prepare the export XML data
-
-    $ObjectBackend->_ExportXMLDataPrepare(
-        XMLDefinition => $ArrayRef,
-        XMLData       => $HashRef,
-        XMLData2D     => $HashRef,
-    );
-
-=cut
-
-sub _ExportXMLDataPrepare {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{XMLData};
-    return if !$Param{XMLData2D};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{XMLData} ne 'HASH';
-    return if ref $Param{XMLData2D} ne 'HASH';
-
-    if ( $Param{Prefix} ) {
-        $Param{Prefix} .= '::';
-    }
-    $Param{Prefix} ||= '';
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-        COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
-
-            # stop loop, if no content was given
-            last COUNTER if !defined $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content};
-
-            # create key
-            my $Key = $Param{Prefix} . $Item->{Key} . '::' . $Counter;
-
-            # prepare value
-            $Param{XMLData2D}->{$Key} = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLExportValuePrepare(
-                Item  => $Item,
-                Value => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content},
-            );
-
-            next COUNTER if !$Item->{Sub};
-
-            # start recursion, if "Sub" was found
-            $Self->_ExportXMLDataPrepare(
-                XMLDefinition => $Item->{Sub},
-                XMLData       => $Param{XMLData}->{ $Item->{Key} }->[$Counter],
-                XMLData2D     => $Param{XMLData2D},
-                Prefix        => $Key,
-            );
-        }
     }
 
     return 1;
