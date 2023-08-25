@@ -657,7 +657,12 @@ sub ExportDataGet {
             # This gets whatever ConfigItemGet() puts into the object. E.g. for GeneralCatalog dynamic fields
             # we get the item ID into the general catalog. This is fine for Import/Export, but not really human readable.
             # Note that things like the incident state are looked up.
-            my $Value = $ConfigItem->{"DynamicField_$Key"};
+
+            # The Key encodes some extra information.
+            # Note that the indexes start at 1 in the key names
+            # TODO: support for Set
+            my ( $DFName, $IndexValue ) = split /::/, $Key;
+            my $Value = $ConfigItem->{"DynamicField_$DFName"};
 
             if ( !defined $Value ) {
                 push @Item, '';
@@ -666,9 +671,12 @@ sub ExportDataGet {
             }
 
             if ( ref $Value eq 'ARRAY' ) {
-
-                my $IndexValue = $MappingObject->{IndexValue} // 0;
-                push @Item, $Value->[$IndexValue] // '';
+                if ( $IndexValue >= 1 ) {
+                    push @Item, $Value->[ $IndexValue - 1 ] // '';
+                }
+                else {
+                    push @Item, '';
+                }
 
                 next MAPPINGOBJECT;
             }
