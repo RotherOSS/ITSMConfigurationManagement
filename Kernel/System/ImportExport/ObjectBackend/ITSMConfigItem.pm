@@ -23,13 +23,12 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(min);
 
 # CPAN modules
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::VariableCheck qw(IsStringWithData IsArrayRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -92,7 +91,7 @@ sub ObjectAttributesGet {
     # get class list
     my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::Class',
-    ) || {};
+    );
 
     my $Attributes = [
         {
@@ -134,12 +133,78 @@ sub ObjectAttributesGet {
 
 =head2 MappingObjectAttributesGet()
 
-get the mapping attributes of an object as array/hash reference
+gets the mapping attributes of an object as reference to an array of hash references.
 
     my $Attributes = $ObjectBackend->MappingObjectAttributesGet(
         TemplateID => 123,
         UserID     => 1,
     );
+
+Returns:
+
+    my $Attributes = [
+        {
+          Input => {
+                     Data => [
+                       { Key => "Number", Value => "Number" },
+                       { Key => "Name", Value => "Name" },
+                       { Key => "DeplState", Value => "Deployment State" },
+                       { Key => "InciState", Value => "Incident State" },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::1",
+                         Value => "NamespaceBoden-Bodenfarbe::1",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::2",
+                         Value => "NamespaceBoden-Bodenfarbe::2",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::3",
+                         Value => "NamespaceBoden-Bodenfarbe::3",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::4",
+                         Value => "NamespaceBoden-Bodenfarbe::4",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::5",
+                         Value => "NamespaceBoden-Bodenfarbe::5",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::6",
+                         Value => "NamespaceBoden-Bodenfarbe::6",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::7",
+                         Value => "NamespaceBoden-Bodenfarbe::7",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::8",
+                         Value => "NamespaceBoden-Bodenfarbe::8",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::9",
+                         Value => "NamespaceBoden-Bodenfarbe::9",
+                       },
+                       {
+                         Key => "NamespaceBoden-Bodenfarbe::10",
+                         Value => "NamespaceBoden-Bodenfarbe::10",
+                       },
+                     ],
+                     PossibleNone => 1,
+                     Required => 1,
+                     Translation => 0,
+                     Type => "Selection",
+                   },
+          Key   => "Key",
+          Name  => "Key",
+        },
+        {
+          Input => { Type => "Checkbox" },
+          Key   => "Identifier",
+          Name  => "Identifier",
+        },
+    ];
 
 =cut
 
@@ -157,27 +222,30 @@ sub MappingObjectAttributesGet {
         }
     }
 
+    my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+
     # get object data
-    my $ObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->ObjectDataGet(
+    my $ObjectData = $ImportExportObject->ObjectDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
 
-    return [] if !$ObjectData;
-    return [] if ref $ObjectData ne 'HASH';
-    return [] if !$ObjectData->{ClassID};
+    return [] unless $ObjectData;
+    return [] unless ref $ObjectData eq 'HASH';
+    return [] unless $ObjectData->{ClassID};
 
-    # get definition
-    my $XMLDefinition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+    # get definition for the config item class
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
         ClassID => $ObjectData->{ClassID},
     );
 
-    return [] if !$XMLDefinition;
-    return [] if ref $XMLDefinition ne 'HASH';
-    return [] if !$XMLDefinition->{DefinitionRef};
-    return [] if ref $XMLDefinition->{DefinitionRef} ne 'ARRAY';
+    # no error handling
+    return unless $Definition;
+    return unless ref $Definition eq 'HASH';
+    return unless $Definition->{DynamicFieldRef};
+    return unless ref $Definition->{DynamicFieldRef} eq 'HASH';
 
-    my $ElementList = [
+    my @Elements = (
         {
             Key   => 'Number',
             Value => Translatable('Number'),
@@ -194,22 +262,22 @@ sub MappingObjectAttributesGet {
             Key   => 'InciState',
             Value => Translatable('Incident State'),
         },
-    ];
-
-    # add xml elements
-    $Self->_MappingObjectAttributesGet(
-        XMLDefinition => $XMLDefinition->{DefinitionRef},
-        ElementList   => $ElementList,
-        CountMaxLimit => $ObjectData->{CountMax} || 10,
     );
 
-    my $Attributes = [
+    # add elements
+    push @Elements, $Self->_MappingObjectAttributesGet(
+        DynamicFieldRef => $Definition->{DynamicFieldRef},    # page layout is ignored here
+        ElementList     => \@Elements,                        # TODO: return the elements
+        CountMaxLimit   => $ObjectData->{CountMax} || 10,
+    );
+
+    return [
         {
             Key   => 'Key',
             Name  => Translatable('Key'),
             Input => {
                 Type         => 'Selection',
-                Data         => $ElementList,
+                Data         => \@Elements,
                 Required     => 1,
                 Translation  => 0,
                 PossibleNone => 1,
@@ -223,8 +291,6 @@ sub MappingObjectAttributesGet {
             },
         },
     ];
-
-    return $Attributes;
 }
 
 =head2 SearchAttributesGet()
@@ -252,35 +318,35 @@ sub SearchAttributesGet {
         }
     }
 
+    my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+
     # get object data
-    my $ObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->ObjectDataGet(
+    my $ObjectData = $ImportExportObject->ObjectDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
 
-    return [] if !$ObjectData;
-    return [] if ref $ObjectData ne 'HASH';
-    return [] if !$ObjectData->{ClassID};
+    return [] unless $ObjectData;
+    return [] unless ref $ObjectData eq 'HASH';
+    return [] unless $ObjectData->{ClassID};
 
     # get definition
-    my $XMLDefinition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
         ClassID => $ObjectData->{ClassID},
     );
 
-    return [] if !$XMLDefinition;
-    return [] if ref $XMLDefinition ne 'HASH';
-    return [] if !$XMLDefinition->{DefinitionRef};
-    return [] if ref $XMLDefinition->{DefinitionRef} ne 'ARRAY';
+    return [] unless $Definition;
+    return [] unless ref $Definition eq 'HASH';
+    return [] unless $Definition->{DefinitionRef};
+    return [] unless ref $Definition->{DefinitionRef} eq 'ARRAY';
 
-    # get deployment state list
+    # get deployment and incident state lists, ignoring errors
     my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
-    ) || {};
-
-    # get incident state list
+    ) // {};
     my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::Core::IncidentState',
-    ) || {};
+    ) // {};
 
     my $AttributeList = [
         {
@@ -327,7 +393,7 @@ sub SearchAttributesGet {
 
     # add xml attributes
     $Self->_SearchAttributesGet(
-        XMLDefinition => $XMLDefinition->{DefinitionRef},
+        XMLDefinition => $Definition->{DefinitionRef},
         AttributeList => $AttributeList,
     );
 
@@ -360,8 +426,10 @@ sub ExportDataGet {
         }
     }
 
+    my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+
     # get object data
-    my $ObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->ObjectDataGet(
+    my $ObjectData = $ImportExportObject->ObjectDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
@@ -395,14 +463,14 @@ sub ExportDataGet {
         return;
     }
 
-    # get the mapping list
-    my $MappingList = $Kernel::OM->Get('Kernel::System::ImportExport')->MappingList(
+    # get the IDs for the mapping in this template
+    my $MappingIDs = $ImportExportObject->MappingList(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
 
     # check the mapping list
-    if ( !$MappingList || ref $MappingList ne 'ARRAY' || !@{$MappingList} ) {
+    if ( !$MappingIDs || ref $MappingIDs ne 'ARRAY' || !$MappingIDs->@* ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -414,10 +482,10 @@ sub ExportDataGet {
 
     # create the mapping object list
     my @MappingObjectList;
-    for my $MappingID ( @{$MappingList} ) {
+    for my $MappingID ( $MappingIDs->@* ) {
 
         # get mapping object data
-        my $MappingObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->MappingObjectDataGet(
+        my $MappingObjectData = $ImportExportObject->MappingObjectDataGet(
             MappingID => $MappingID,
             UserID    => $Param{UserID},
         );
@@ -429,6 +497,7 @@ sub ExportDataGet {
                 Priority => 'error',
                 Message  => "No valid mapping list found for the template id $Param{TemplateID}",
             );
+
             return;
         }
 
@@ -436,7 +505,7 @@ sub ExportDataGet {
     }
 
     # get search data
-    my $SearchData = $Kernel::OM->Get('Kernel::System::ImportExport')->SearchDataGet(
+    my $SearchData = $ImportExportObject->SearchDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
@@ -530,14 +599,14 @@ sub ExportDataGet {
     CONFIGITEMID:
     for my $ConfigItemID (@ConfigItemIDs) {
 
-        # get latest version
-        my $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-            ConfigItemID => $ConfigItemID,
+        # get the latest version of the config item, including the dynamic fields
+        my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 1,
         );
 
-        next CONFIGITEMID unless $VersionData;
-        next CONFIGITEMID unless ref $VersionData eq 'HASH';
-
+        next CONFIGITEMID unless $ConfigItem;
+        next CONFIGITEMID unless ref $ConfigItem eq 'HASH';
 
         # add data to the export data array
         my @Item;
@@ -556,30 +625,30 @@ sub ExportDataGet {
 
             # handle config item number
             if ( $Key eq 'Number' ) {
-                push @Item, $VersionData->{Number};
+                push @Item, $ConfigItem->{Number};
 
                 next MAPPINGOBJECT;
             }
 
             # handle current config item name
             if ( $Key eq 'Name' ) {
-                push @Item, $VersionData->{Name};
+                push @Item, $ConfigItem->{Name};
 
                 next MAPPINGOBJECT;
             }
 
             # handle deployment state
             if ( $Key eq 'DeplState' ) {
-                $VersionData->{DeplStateID} ||= 'DUMMY';
-                push @Item, $DeplStateList->{ $VersionData->{DeplStateID} };
+                $ConfigItem->{DeplStateID} ||= 'DUMMY';
+                push @Item, $DeplStateList->{ $ConfigItem->{DeplStateID} };
 
                 next MAPPINGOBJECT;
             }
 
             # handle incident state
             if ( $Key eq 'InciState' ) {
-                $VersionData->{InciStateID} ||= 'DUMMY';
-                push @Item, $InciStateList->{ $VersionData->{InciStateID} };
+                $ConfigItem->{InciStateID} ||= 'DUMMY';
+                push @Item, $InciStateList->{ $ConfigItem->{InciStateID} };
 
                 next MAPPINGOBJECT;
             }
@@ -664,8 +733,10 @@ sub ImportDataSave {
         return;
     }
 
+    my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+
     # get object data
-    my $ObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->ObjectDataGet(
+    my $ObjectData = $ImportExportObject->ObjectDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
@@ -688,8 +759,6 @@ sub ImportDataSave {
     my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
-
-    # check class list
     if ( !$ClassList || ref $ClassList ne 'HASH' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -713,13 +782,13 @@ sub ImportDataSave {
     }
 
     # get the mapping list
-    my $MappingList = $Kernel::OM->Get('Kernel::System::ImportExport')->MappingList(
+    my $MappingIDs = $ImportExportObject->MappingList(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
 
     # check the mapping list
-    if ( !$MappingList || ref $MappingList ne 'ARRAY' || !@{$MappingList} ) {
+    if ( !$MappingIDs || ref $MappingIDs ne 'ARRAY' || !@{$MappingIDs} ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -732,10 +801,10 @@ sub ImportDataSave {
 
     # create the mapping object list
     my @MappingObjectList;
-    for my $MappingID ( @{$MappingList} ) {
+    for my $MappingID ( $MappingIDs->@* ) {
 
         # get mapping object data
-        my $MappingObjectData = $Kernel::OM->Get('Kernel::System::ImportExport')->MappingObjectDataGet(
+        my $MappingObjectData = $ImportExportObject->MappingObjectDataGet(
             MappingID => $MappingID,
             UserID    => $Param{UserID},
         );
@@ -798,8 +867,6 @@ sub ImportDataSave {
     my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
     );
-
-    # check deployment state list
     if ( !$DeplStateList || ref $DeplStateList ne 'HASH' ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1224,15 +1291,14 @@ sub ImportDataSave {
 
 =head2 _MappingObjectAttributesGet()
 
-recursion function for MappingObjectAttributesGet().
-Definitions for object attributes are passed in C<XMLDefinition>.
+recursive function for MappingObjectAttributesGet().
+Definitions for object attributes are passed in C<Definition>.
 The new object attributes are appended to C<ElementList>.
 C<CountMaxLimit> limits the max length of importable arrays.
 
-    $ObjectBackend->_MappingObjectAttributesGet(
-        XMLDefinition => $ArrayRef,
-        ElementList   => $ArrayRef,
-        CountMaxLimit => 10,
+    push @Elements, $ObjectBackend->_MappingObjectAttributesGet(
+        DynamicFieldRef => $HashRef,
+        CountMaxLimit   => 10,
     );
 
 =cut
@@ -1240,68 +1306,62 @@ C<CountMaxLimit> limits the max length of importable arrays.
 sub _MappingObjectAttributesGet {
     my ( $Self, %Param ) = @_;
 
-    return if !$Param{CountMaxLimit};
-    return if !$Param{XMLDefinition};
-    return if !$Param{ElementList};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{ElementList} ne 'ARRAY';
+    return unless $Param{CountMaxLimit};
+    return unless ref $Param{CountMaxLimit} eq '';
+    return unless $Param{DynamicFieldRef};
+    return unless ref $Param{DynamicFieldRef} eq 'HASH';
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
+    my @Elements;
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
+
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
+        my $DFDetails          = $DynamicFieldConfig->{Config};
 
         # limit the length of importable arrays, even if more elements can be set via the GUI
-        my $CountMax = min( $Item->{CountMax}, $Param{CountMaxLimit} );
+        my $CountMax = ( $DFDetails->{Multiselect} || $DFDetails->{MultiValue} ) ? $Param{CountMaxLimit} : 1;
 
         COUNT:
         for my $Count ( 1 .. $CountMax ) {
 
-            # create key string
-            my $Key = $Item->{Key} . '::' . $Count;
+            # create key string, including a potential prefix and a potential count
+            my $Key = join '::',
+                ( $Param{KeyPrefix} || () ),
+                $DFName,
+                ( $CountMax == 1 ? () : $Count );
 
-            # add prefix to key
-            if ( $Param{KeyPrefix} ) {
-                $Key = $Param{KeyPrefix} . '::' . $Key;
-            }
-
-            # create value string
-            my $Value = $Item->{Key};
-
-            # add count if required
-            if ( $CountMax > 1 || $Item->{Sub} ) {
-                $Value .= '::' . $Count;
-            }
-
-            # add prefix to key
-            if ( $Param{ValuePrefix} ) {
-                $Value = $Param{ValuePrefix} . '::' . $Value;
-            }
+            # create key string, including a potential prefix and a potential count
+            my $Value = join '::',
+                ( $Param{ValuePrefix} || () ),
+                $DFName,
+                ( $CountMax == 1 ? () : $Count );
 
             # add row
-            my %Row = (
-                Key   => $Key,
-                Value => $Value,
-            );
-            push @{ $Param{ElementList} }, \%Row;
+            push @Elements,
+                {
+                    Key   => $Key,
+                    Value => $Value,
+                };
 
-            next COUNT if !$Item->{Sub};
+            # TODO: support for Set
+            #next COUNT unless $Item->{Sub};
+            next COUNT if 1;
 
             # start recursion
-            $Self->_MappingObjectAttributesGet(
-                XMLDefinition => $Item->{Sub},
-                ElementList   => $Param{ElementList},
-                KeyPrefix     => $Key,
-                ValuePrefix   => $Value,
-                CountMaxLimit => $Param{CountMaxLimit} || '10',
+            push @Elements, $Self->_MappingObjectAttributesGet(
+                DynamicFieldRef => $DFDetails->{Sub},               # Sub is now handled in Set
+                KeyPrefix       => $Key,
+                ValuePrefix     => $Value,
+                CountMaxLimit   => $Param{CountMaxLimit} || '10',
             );
         }
     }
 
-    return 1;
+    return @Elements;
 }
 
 =head2 _SearchAttributesGet()
 
-recursion function for MappingObjectAttributesGet()
+recursive function for SearchAttributesGet()
 
     $ObjectBackend->_SearchAttributesGet(
         XMLDefinition => $ArrayRef,
@@ -1314,10 +1374,10 @@ sub _SearchAttributesGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{AttributeList};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{AttributeList} ne 'ARRAY';
+    return unless $Param{XMLDefinition};
+    return unless $Param{AttributeList};
+    return unless ref $Param{XMLDefinition} eq 'ARRAY';
+    return unless ref $Param{AttributeList} eq 'ARRAY';
 
     ITEM:
     for my $Item ( @{ $Param{XMLDefinition} } ) {
