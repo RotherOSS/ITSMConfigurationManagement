@@ -653,8 +653,32 @@ sub ExportDataGet {
                 next MAPPINGOBJECT;
             }
 
-            # handle all XML data elements
-            push @Item, $VersionData->{$Key};
+            # All other attributes indicate dynamic fields.
+            # This gets whatever ConfigItemGet() puts into the object. E.g. for GeneralCatalog dynamic fields
+            # we get the item ID into the general catalog. This is fine for Import/Export, but not really human readable.
+            # Note that things like the incident state are looked up.
+            my $Value = $ConfigItem->{"DynamicField_$Key"};
+
+            if ( !defined $Value ) {
+                push @Item, '';
+
+                next MAPPINGOBJECT;
+            }
+
+            if ( ref $Value eq 'ARRAY' ) {
+
+                my $IndexValue = $MappingObject->{IndexValue} // 0;
+                push @Item, $Value->[$IndexValue] // '';
+
+                next MAPPINGOBJECT;
+            }
+
+            # else
+            {
+                push @Item, $Value;
+
+                next MAPPINGOBJECT;
+            }
         }
 
         push @ExportData, \@Item;
