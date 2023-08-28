@@ -568,15 +568,15 @@ sub ConfigItemSearch {
             return;
         }
 
-        my $SearchParam = delete $Param{ "DynamicField_" . $DynamicField->{Name} };
+        my $SearchParam = delete $Param{"DynamicField_$DynamicField->{Name}"};
 
-        next DYNAMICFIELD if ( !$SearchParam );
-        next DYNAMICFIELD if ( ref $SearchParam ne 'HASH' );
+        next DYNAMICFIELD unless $SearchParam;
+        next DYNAMICFIELD unless ref $SearchParam eq 'HASH';
 
         my $NeedJoin;
         my $QueryForEmptyValues = 0;
 
-        for my $Operator ( sort keys %{$SearchParam} ) {
+        for my $Operator ( sort keys $SearchParam->%* ) {
 
             my @SearchParams = ( ref $SearchParam->{$Operator} eq 'ARRAY' )
                 ? @{ $SearchParam->{$Operator} }
@@ -1020,6 +1020,7 @@ sub ConfigItemSearch {
         SQL   => $SQLSelect . $SQLFrom . $SQLExt,
         Limit => $Limit
     );
+
     while ( my @Row = $DBObject->FetchrowArray() ) {
         $Count = $Row[0];
         $ConfigItems{ $Row[0] } = $Row[1];

@@ -337,18 +337,23 @@ sub SearchAttributesGet {
 
     return [] unless $Definition;
     return [] unless ref $Definition eq 'HASH';
-    return [] unless $Definition->{DefinitionRef};
-    return [] unless ref $Definition->{DefinitionRef} eq 'ARRAY';
+    return [] unless $Definition->{DynamicFieldRef};
+    return [] unless ref $Definition->{DynamicFieldRef} eq 'HASH';
 
     # get deployment and incident state lists, ignoring errors
     my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
-    ) // {};
+    );
+
+    return [] unless defined $DeplStateList;
+
     my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class => 'ITSM::Core::IncidentState',
-    ) // {};
+    );
 
-    my $AttributeList = [
+    return [] unless defined $InciStateList;
+
+    my @Attributes = (
         {
             Key   => 'Number',
             Name  => Translatable('Number'),
@@ -389,15 +394,14 @@ sub SearchAttributesGet {
                 Multiple    => 1,
             },
         },
-    ];
-
-    # add xml attributes
-    $Self->_SearchAttributesGet(
-        XMLDefinition => $Definition->{DefinitionRef},
-        AttributeList => $AttributeList,
     );
 
-    return $AttributeList;
+    # add dynamic field attributes
+    push @Attributes, $Self->_DFSearchAttributesGet(
+        DynamicFieldRef => $Definition->{DynamicFieldRef},
+    );
+
+    return \@Attributes;
 }
 
 =head2 ExportDataGet()
@@ -444,23 +448,23 @@ sub ExportDataGet {
         return;
     }
 
-    # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-
-    return unless $ClassList;
-    return unless ref $ClassList eq 'HASH';
-
-    # check the class id
-    if ( !$ObjectData->{ClassID} || !$ClassList->{ $ObjectData->{ClassID} } ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "No valid class id found for the template id $Param{TemplateID}",
+    # check the class id from the template
+    {
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
         );
 
-        return;
+        return unless defined $ClassList;
+
+        if ( !$ObjectData->{ClassID} || !$ClassList->{ $ObjectData->{ClassID} } ) {
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "No valid class id found for the template id $Param{TemplateID}",
+            );
+
+            return;
+        }
     }
 
     # get the IDs for the mapping in this template
@@ -542,7 +546,7 @@ sub ExportDataGet {
     }
 
     # get current definition of this class
-    my $DefinitionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
         ClassID => $ObjectData->{ClassID},
         UserID  => $Param{UserID},
     );
@@ -574,17 +578,11 @@ sub ExportDataGet {
     }
 
     # add all XML data to the search params
-    my @SearchParamsWhat;
-    $Self->_ExportXMLSearchDataPrepare(
-        XMLDefinition => $DefinitionData->{DefinitionRef},
-        What          => \@SearchParamsWhat,
-        SearchData    => $SearchData,
+    my %DFSearchParams = $Self->_DFSearchDataPrepare(
+        DynamicFieldRef => $Definition->{DynamicFieldRef},
+        SearchData      => $SearchData,
     );
-
-    # add XML search params to the search hash
-    if (@SearchParamsWhat) {
-        $SearchParams{What} = \@SearchParamsWhat;
-    }
+    @SearchParams{ keys %DFSearchParams } = values %DFSearchParams;
 
     # search the config items
     my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
@@ -934,13 +932,13 @@ sub ImportDataSave {
     my %InciStateListReverse = reverse %{$InciStateList};
 
     # get current definition of this class
-    my $DefinitionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
         ClassID => $ObjectData->{ClassID},
         UserID  => $Param{UserID},
     );
 
     # check definition data
-    if ( !$DefinitionData || ref $DefinitionData ne 'HASH' ) {
+    if ( !$Definition || ref $Definition ne 'HASH' ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1012,7 +1010,7 @@ sub ImportDataSave {
         # add all XML data to the search params
         my @SearchParamsWhat;
         $Self->_ImportXMLSearchDataPrepare(
-            XMLDefinition => $DefinitionData->{DefinitionRef},
+            XMLDefinition => $Definition->{DefinitionRef},
             What          => \@SearchParamsWhat,
             Identifier    => \%Identifier,
         );
@@ -1068,7 +1066,7 @@ sub ImportDataSave {
     my %MappingObjectKeyData = map { $_->{Key} => 1 } @MappingObjectList;
 
     # Check if current definition of this class has required attribute which does not exist in mapping list.
-    for my $DefinitionRef ( @{ $DefinitionData->{DefinitionRef} } ) {
+    for my $DefinitionRef ( @{ $Definition->{DefinitionRef} } ) {
         my $Key = $DefinitionRef->{Key};
 
         if (
@@ -1182,7 +1180,7 @@ sub ImportDataSave {
 
     # Edit XMLDataPrev, so that the values in XMLData2D take precedence.
     my $MergeOk = $Self->_ImportXMLDataMerge(
-        XMLDefinition                => $DefinitionData->{DefinitionRef},
+        XMLDefinition                => $Definition->{DefinitionRef},
         XMLDataPrev                  => $VersionData->{XMLData}->[1]->{Version}->[1],
         XMLData2D                    => \%XMLData2D,
         EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
@@ -1280,7 +1278,7 @@ sub ImportDataSave {
     my $VersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
         ConfigItemID => $ConfigItemID,
         Name         => $VersionData->{Name},
-        DefinitionID => $DefinitionData->{DefinitionID},
+        DefinitionID => $Definition->{DefinitionID},
         DeplStateID  => $VersionData->{DeplStateID},
         InciStateID  => $VersionData->{InciStateID},
         XMLData      => $VersionData->{XMLData},
@@ -1391,157 +1389,140 @@ sub _MappingObjectAttributesGet {
     return @Elements;
 }
 
-=head2 _SearchAttributesGet()
+=head2 _DFSearchAttributesGet()
 
 recursive function for SearchAttributesGet()
 
-    $ObjectBackend->_SearchAttributesGet(
+    $ObjectBackend->_DFSearchAttributesGet(
         XMLDefinition => $ArrayRef,
         AttributeList => $ArrayRef,
     );
 
 =cut
 
-sub _SearchAttributesGet {
+sub _DFSearchAttributesGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return unless $Param{XMLDefinition};
-    return unless $Param{AttributeList};
-    return unless ref $Param{XMLDefinition} eq 'ARRAY';
-    return unless ref $Param{AttributeList} eq 'ARRAY';
+    return unless $Param{DynamicFieldRef};
+    return unless ref $Param{DynamicFieldRef} eq 'HASH';
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
+    my @Attributes;
+    DF_NAME:
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
-        # set prefix
-        my $Key  = $Item->{Key};
-        my $Name = $Item->{Name};
+        # create key string, including a potential prefix
+        my $Key = join '::',
+            ( $Param{KeyPrefix} || () ),
+            $DynamicFieldConfig->{Name};
 
-        if ( $Param{KeyPrefix} ) {
-            $Key = $Param{KeyPrefix} . '::' . $Key;
-        }
-
-        if ( $Param{NamePrefix} ) {
-            $Name = $Param{NamePrefix} . '::' . $Name;
-        }
+        # create name string, including a potential prefix
+        my $Name = join '::',
+            ( $Param{NamePrefix} || () ),
+            $DynamicFieldConfig->{Label};
 
         # add attribute, if marked as searchable
-        if ( $Item->{Searchable} ) {
 
-            if ( $Item->{Input}->{Type} eq 'Text' || $Item->{Input}->{Type} eq 'TextArea' ) {
+        # TODO: determine whether DF is searchable: $DynamicFieldConfig->{Searchable}
+        # TODO: use search field from dynamic field driver
+        if (1) {
 
-                my %Row = (
-                    Key   => $Key,
-                    Name  => $Name,
-                    Input => {
-                        Type        => 'Text',
-                        Translation => $Item->{Input}->{Input}->{Translation},
-                        Size        => $Item->{Input}->{Input}->{Size} || 60,
-                        MaxLength   => $Item->{Input}->{Input}->{MaxLength},
-                    },
-                );
-
-                push @{ $Param{AttributeList} }, \%Row;
+            if ( $DynamicFieldConfig->{Input}->{Type} eq 'Text' || $DynamicFieldConfig->{Input}->{Type} eq 'TextArea' ) {
+                push @Attributes,
+                    {
+                        Key   => $Key,
+                        Name  => $Name,
+                        Input => {
+                            Type        => 'Text',
+                            Translation => $DynamicFieldConfig->{Input}->{Input}->{Translation},
+                            Size        => $DynamicFieldConfig->{Input}->{Input}->{Size} || 60,
+                            MaxLength   => $DynamicFieldConfig->{Input}->{Input}->{MaxLength},
+                        },
+                    };
             }
-            elsif ( $Item->{Input}->{Type} eq 'GeneralCatalog' ) {
+            elsif ( $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog' ) {
 
                 # get general catalog list
                 my $GeneralCatalogList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-                    Class => $Item->{Input}->{Class},
-                ) || {};
-
-                my %Row = (
-                    Key   => $Key,
-                    Name  => $Name,
-                    Input => {
-                        Type        => 'Selection',
-                        Data        => $GeneralCatalogList,
-                        Translation => $Item->{Input}->{Input}->{Translation},
-                        Size        => 5,
-                        Multiple    => 1,
-                    },
+                    Class => $DynamicFieldConfig->{Config}->{Class},
                 );
 
-                push @{ $Param{AttributeList} }, \%Row;
+                push @Attributes,
+                    {
+                        Key   => $Key,
+                        Name  => $Name,
+                        Input => {
+                            Type        => 'Selection',
+                            Data        => $GeneralCatalogList,
+                            Translation => 0,                     # TODO: determine whether items should be translated $DynamicFieldConfig->{Input}->{Input}->{Translation},
+                            Size        => 5,
+                            Multiple    => 1,
+                        },
+                    };
             }
         }
 
-        next ITEM if !$Item->{Sub};
+        # TODO: handle Sets
+        next DF_NAME unless $DynamicFieldConfig->{Sub};
 
         # start recursion, if "Sub" was found
-        $Self->_SearchAttributesGet(
-            XMLDefinition => $Item->{Sub},
-            AttributeList => $Param{AttributeList},
-            KeyPrefix     => $Key,
-            NamePrefix    => $Name,
+        push @Attributes, $Self->_DFSearchAttributesGet(
+            DynamicFieldRef => $DynamicFieldConfig->{Sub},
+            KeyPrefix       => $Key,
+            NamePrefix      => $Name,
         );
     }
 
-    return 1;
+    return @Attributes;
 }
 
-=head2 _ExportXMLSearchDataPrepare()
+=head2 _DFSearchDataPrepare()
 
 recursion function to prepare the export XML search params
 
-    $ObjectBackend->_ExportXMLSearchDataPrepare(
-        XMLDefinition => $ArrayRef,
-        What          => $ArrayRef,
-        SearchData    => $HashRef,
+    my %DFSearchParams = $ObjectBackend->_DFSearchDataPrepare(
+        DynamicFieldRef => $DynamicFieldRef,
+        SearchData      => $HashRef,
     );
 
 =cut
 
-sub _ExportXMLSearchDataPrepare {
+sub _DFSearchDataPrepare {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{What};
-    return if !$Param{SearchData};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{What} ne 'ARRAY';
-    return if ref $Param{SearchData} ne 'HASH';
+    return unless $Param{DynamicFieldRef};
+    return unless ref $Param{DynamicFieldRef} eq 'HASH';
+    return unless $Param{SearchData};
+    return unless ref $Param{SearchData} eq 'HASH';
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
+    my %DFSearchParams;
+    DF_NAME:
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
+
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
         # create key
-        my $Key = $Param{Prefix} ? $Param{Prefix} . '::' . $Item->{Key} : $Item->{Key};
+        my $Key = $Param{Prefix} ? $Param{Prefix} . '::' . $DynamicFieldConfig->{Name} : $DynamicFieldConfig->{Name};
 
-        # prepare value
-        my $Values = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLExportSearchValuePrepare(
-            Item  => $Item,
-            Value => $Param{SearchData}->{$Key},
-        );
+        next DF_NAME unless $Param{SearchData}->{$Key};    # '#####' separated
 
-        if ($Values) {
+        $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{SearchData}->{$Key} ] };
 
-            # create search key
-            my $SearchKey = $Key;
-            $SearchKey =~ s{ :: }{\'\}[%]\{\'}xmsg;
-
-            # create search hash
-            my $SearchHash = {
-                '[1]{\'Version\'}[1]{\'' . $SearchKey . '\'}[%]{\'Content\'}' => $Values,
-            };
-
-            push @{ $Param{What} }, $SearchHash;
-        }
-
-        next ITEM if !$Item->{Sub};
+        # TODO: support Sets
+        next DF_NAME if !$DynamicFieldConfig->{Sub};
 
         # start recursion, if "Sub" was found
-        $Self->_ExportXMLSearchDataPrepare(
-            XMLDefinition => $Item->{Sub},
+        $Self->_DFSearchDataPrepare(
+            XMLDefinition => $DynamicFieldConfig->{Sub},
             What          => $Param{What},
             SearchData    => $Param{SearchData},
             Prefix        => $Key,
         );
     }
 
-    return 1;
+    return %DFSearchParams;
 }
 
 =head2 _ImportXMLSearchDataPrepare()
