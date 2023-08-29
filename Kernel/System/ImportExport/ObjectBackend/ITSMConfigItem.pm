@@ -1026,28 +1026,23 @@ sub ImportDataSave {
         }
 
         # add all XML data to the search params
-        my @SearchParamsWhat;
-        $Self->_ImportXMLSearchDataPrepare(
-            XMLDefinition => $Definition->{DefinitionRef},
-            What          => \@SearchParamsWhat,
-            Identifier    => \%Identifier,
+        my %DFImportSearchParams = $Self->_DFImportSearchDataPrepare(
+            DynamicFieldRef => $Definition->{DynamicFieldRef},
+            Identifier      => \%Identifier,
         );
-
-        # add XML search params to the search hash
-        if (@SearchParamsWhat) {
-            $SearchParams{What} = \@SearchParamsWhat;
-        }
+        @SearchParams{ keys %DFImportSearchParams } = values %DFImportSearchParams;
 
         # search existing config item with the same identifiers
-        my $ConfigItemList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+        ( $ConfigItemID, my @OtherConfigItemIDs ) = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
             %SearchParams,
             ClassIDs              => [ $ObjectData->{ClassID} ],
             PreviousVersionSearch => 0,
             UsingWildcards        => 0,
             UserID                => $Param{UserID},
+            Result                => 'ARRAY',
         );
 
-        if ( scalar @{$ConfigItemList} > 1 ) {
+        if (@OtherConfigItemIDs) {
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -1055,10 +1050,9 @@ sub ImportDataSave {
                     "Can't import entity $Param{Counter}: "
                     . "Identifier fields NOT unique!",
             );
+
             return;
         }
-
-        $ConfigItemID = $ConfigItemList->[0];
     }
 
     # get version data of the config item
@@ -1066,48 +1060,37 @@ sub ImportDataSave {
     if ($ConfigItemID) {
 
         # get latest version
-        $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
-            ConfigItemID => $ConfigItemID,
+        $VersionData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 1,
         );
-
-        # remove empty xml data
-        if (
-            !$VersionData->{XMLData}
-            || ref $VersionData->{XMLData} ne 'ARRAY'
-            || !@{ $VersionData->{XMLData} }
-            )
-        {
-            delete $VersionData->{XMLData};
-        }
     }
 
     my %MappingObjectKeyData = map { $_->{Key} => 1 } @MappingObjectList;
 
     # Check if current definition of this class has required attribute which does not exist in mapping list.
-    for my $DefinitionRef ( @{ $Definition->{DefinitionRef} } ) {
-        my $Key = $DefinitionRef->{Key};
+    DF_NAME:
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
-        if (
-            $DefinitionRef->{Input}->{Required}
-            && !$MappingObjectKeyData{$Key}
-            && (
-                !defined $DefinitionRef->{CountMin}
-                || ( defined $DefinitionRef->{CountMin} && $DefinitionRef->{CountMin} > 0 )
-            )
-            )
-        {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  =>
-                    "Can't import entity $Param{Counter}: "
-                    . "Attribute '$Key' is required, but does not exist in mapping list!",
-            );
-            return;
-        }
+        next DF_NAME unless $DynamicFieldConfig->{Required};    # TODO: is this correct ???
+
+        my $Key = $DynamicFieldConfig->{Name};
+
+        next DF_NAME if $MappingObjectKeyData{$Key};
+
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  =>
+                "Can't import entity $Param{Counter}: "
+                . "Attribute '$Key' is required, but does not exist in mapping list!",
+        );
+
+        return;
     }
 
     # set up fields in VersionData and in the XML attributes
-    my %XMLData2D;
+    my %NewVersionData;
     $RowIndex = 0;
     for my $MappingObjectData (@MappingObjectList) {
 
@@ -1192,29 +1175,25 @@ sub ImportDataSave {
         else {
 
             # handle xml data
-            $XMLData2D{$Key} = $Value;
+            $NewVersionData{$Key} = $Value;
         }
     }
 
-    # set up empty container, in case there is no previous data
-    $VersionData->{XMLData}->[1]->{Version}->[1] ||= {};
-
-    # Edit XMLDataPrev, so that the values in XMLData2D take precedence.
-    my $MergeOk = $Self->_ImportXMLDataMerge(
-        XMLDefinition                => $Definition->{DefinitionRef},
-        XMLDataPrev                  => $VersionData->{XMLData}->[1]->{Version}->[1],
-        XMLData2D                    => \%XMLData2D,
+    # Edit $VersionData, so that the values in NewVersionData take precedence.
+    my $MergeOk = $Self->_DFImportDataMerge(
+        DynamicFieldRef              => $Definition->{DynamicFieldRef},
+        VersionData                  => $VersionData,
+        NewVersionData               => \%NewVersionData,
         EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
     );
 
-    # bail out, when the was a problem in _ImportXMLDataMerge()
+    # bail out, when the was a problem in _DFImportDataMerge()
     if ( !$MergeOk ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "Could not prepare the input!",
+            Message  => "Can't import entity $Param{Counter}: Could not prepare the input!",
         );
+
         return;
     }
 
@@ -1261,7 +1240,6 @@ sub ImportDataSave {
         }
     }
 
-    my $LatestVersionID = 0;
     if ($ConfigItemID) {
 
         # the specified config item already exists
@@ -1269,16 +1247,53 @@ sub ImportDataSave {
         my $VersionList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionList(
             ConfigItemID => $ConfigItemID,
         ) || [];
-        if ( scalar @{$VersionList} ) {
-            $LatestVersionID = $VersionList->[-1];
+        my $LatestVersionID = $VersionList->[-1] // 0;
+
+        # add new version
+        my $VersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
+            ConfigItemID => $ConfigItemID,
+            Name         => $VersionData->{Name},
+            DefinitionID => $Definition->{DefinitionID},
+            DeplStateID  => $VersionData->{DeplStateID},
+            InciStateID  => $VersionData->{InciStateID},
+            UserID       => $Param{UserID},
+        );
+
+        if ( !$VersionID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  =>
+                    "Can't import entity $Param{Counter}: "
+                    . "Error when adding the new config item version.",
+            );
+
+            return;
         }
+
+        # The import was successful as we got a version id
+
+        # When VersionAdd() returns the previous latest version ID, we know that
+        # no new version has been added.
+        # The import of this config item has been skipped.
+        if ( $LatestVersionID && $VersionID == $LatestVersionID ) {
+            $RetCode = Translatable('Skipped');
+        }
+
+        return $ConfigItemID, $RetCode;
     }
     else {
 
         # no config item was found, so add new config item
-        $ConfigItemID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemAdd(
-            ClassID => $ObjectData->{ClassID},
-            UserID  => $Param{UserID},
+        my $ConfigItemID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemAdd(
+            ClassID      => $ObjectData->{ClassID},
+            Name         => $VersionData->{Name},
+            DefinitionID => $Definition->{DefinitionID},
+            DeplStateID  => $VersionData->{DeplStateID},
+            InciStateID  => $VersionData->{InciStateID},
+            UserID       => $Param{UserID},
+            UserID       => $Param{UserID},
+
+            # TODO: dynamic fields
         );
 
         # check the new config item id
@@ -1293,49 +1308,9 @@ sub ImportDataSave {
 
             return;
         }
-    }
-
-    # add new version
-    my $VersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
-        ConfigItemID => $ConfigItemID,
-        Name         => $VersionData->{Name},
-        DefinitionID => $Definition->{DefinitionID},
-        DeplStateID  => $VersionData->{DeplStateID},
-        InciStateID  => $VersionData->{InciStateID},
-        XMLData      => $VersionData->{XMLData},
-        UserID       => $Param{UserID},
-    );
-
-    # the import was successful, when we get a version id
-    if ($VersionID) {
-
-        # When VersionAdd() returns the previous latest version ID, we know that
-        # no new version has been added.
-        # The import of this config item has been skipped.
-        if ( $LatestVersionID && $VersionID == $LatestVersionID ) {
-            $RetCode = Translatable('Skipped');
-        }
 
         return $ConfigItemID, $RetCode;
     }
-
-    if ( $RetCode eq 'Created' ) {
-
-        # delete the new config item
-        $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemDelete(
-            ConfigItemID => $ConfigItemID,
-            UserID       => $Param{UserID},
-        );
-    }
-
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'error',
-        Message  =>
-            "Can't import entity $Param{Counter}: "
-            . "Error when adding the new config item version.",
-    );
-
-    return;
 }
 
 =head1 INTERNAL INTERFACE
@@ -1533,111 +1508,79 @@ sub _DFSearchDataPrepare {
         next DF_NAME if !$DynamicFieldConfig->{Sub};
 
         # start recursion, if "Sub" was found
-        $Self->_DFSearchDataPrepare(
+        my %SetSearchParams = $Self->_DFSearchDataPrepare(
             XMLDefinition => $DynamicFieldConfig->{Sub},
             What          => $Param{What},
             SearchData    => $Param{SearchData},
             Prefix        => $Key,
         );
+        @DFSearchParams{ keys %SetSearchParams } = values %SetSearchParams;
     }
 
     return %DFSearchParams;
 }
 
-=head2 _ImportXMLSearchDataPrepare()
+=head2 _DFImportSearchDataPrepare()
 
 recursion function to prepare the import XML search params
 
-    $ObjectBackend->_ImportXMLSearchDataPrepare(
+    $ObjectBackend->_DFImportSearchDataPrepare(
         XMLDefinition => $ArrayRef,
         What          => $ArrayRef,
         Identifier    => $HashRef,
     );
+    my %DFImportSearchParams = $ObjectBackend->_DFImportSearchDataPrepare(
+        DynamicFieldRef => $Definition->{DynamicFieldRef},
+        Identifier      => \%Identifier,
+    );
 
 =cut
 
-sub _ImportXMLSearchDataPrepare {
+sub _DFImportSearchDataPrepare {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{What};
-    return if !$Param{Identifier};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{What} ne 'ARRAY';
-    return if ref $Param{Identifier} ne 'HASH';
+    return unless $Param{DynamicFieldRef};
+    return unless ref $Param{DynamicFieldRef} eq 'HASH';
+    return unless $Param{Identifier};
+    return unless ref $Param{Identifier} eq 'HASH';
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
+    my %DFSearchParams;
+    DF_NAME:
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
 
-        # create key
-        my $Key = $Param{Prefix} ? $Param{Prefix} . '::\d+::' . $Item->{Key} : $Item->{Key};
-        $Key .= '::\d+';
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
-        my $IdentifierKey;
-        IDENTIFIERKEY:
-        for my $IdentKey ( sort keys %{ $Param{Identifier} } ) {
+        # create key, TODO: what about identifies in n-th element ?
+        my $Key = $Param{Prefix} ? $Param{Prefix} . '::' . $DynamicFieldConfig->{Name} : $DynamicFieldConfig->{Name};
 
-            next IDENTIFIERKEY if $IdentKey !~ m{ \A $Key \z }xms;
+        next DF_NAME unless $Param{Identifier}->{$Key};
 
-            $IdentifierKey = $IdentKey;
-        }
+        $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{SearchData}->{$Key} ] };
 
-        if ($IdentifierKey) {
-
-            # prepare value
-            my $Value = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLImportSearchValuePrepare(
-                Item  => $Item,
-                Value => $Param{Identifier}->{$IdentifierKey},
-            );
-
-            if ($Value) {
-
-                # prepare key
-                my $Counter = 0;
-                while ( $IdentifierKey =~ m{ :: }xms ) {
-
-                    if ( $Counter % 2 ) {
-                        $IdentifierKey =~ s{ :: }{]\{'}xms;
-                    }
-                    else {
-                        $IdentifierKey =~ s{ :: }{'\}[}xms;
-                    }
-
-                    $Counter++;
-                }
-
-                # create search hash
-                my $SearchHash = {
-                    '[1]{\'Version\'}[1]{\'' . $IdentifierKey . ']{\'Content\'}' => $Value,
-                };
-
-                push @{ $Param{What} }, $SearchHash;
-            }
-        }
-
-        next ITEM if !$Item->{Sub};
+        # TODO: handle Sets
+        next DF_NAME if !$DynamicFieldConfig->{Sub};
 
         # start recursion, if "Sub" was found
-        $Self->_ImportXMLSearchDataPrepare(
-            XMLDefinition => $Item->{Sub},
-            What          => $Param{What},
-            Identifier    => $Param{Identifier},
-            Prefix        => $Key,
+        my %SetSearchParams = $Self->_DFImportSearchDataPrepare(
+            DynamicFieldRef => $DynamicFieldConfig->{Sub},
+            Identifier      => $Param{Identifier},
+            Prefix          => $Key,
         );
+        @DFSearchParams{ keys %SetSearchParams } = values %SetSearchParams;
     }
 
-    return 1;
+    return %DFSearchParams;
 }
 
-=head2 _ImportXMLDataMerge()
+=head2 _DFImportDataMerge()
 
 recursive function to inplace edit the import XML data.
 
-    my $MergeOk = $ObjectBackend->_ImportXMLDataMerge(
-        XMLDefinition => $ArrayRef,
-        XMLDataPrev   => $HashRef,
-        XMLData2D     => $HashRef,
+    my $MergeOk = $ObjectBackend->_DFImportDataMerge(
+        DynamicFieldRef => $DynamicFieldRef,
+        VersionData     => $VersionData,
+        NewVersionData  => $HashRef,
     );
 
 The return value indicates whether the merge was successful.
@@ -1645,69 +1588,56 @@ A merge fails when for example a general catalog item name can't be mapped to an
 
 =cut
 
-sub _ImportXMLDataMerge {
+sub _DFImportDataMerge {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{XMLData2D};
-    return if !$Param{XMLDataPrev};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';    # the attributes of the config item class
-    return if ref $Param{XMLData2D} ne 'HASH';         # hash with values that should be imported
-    return if ref $Param{XMLDataPrev} ne 'HASH';       # hash with current values of the config item
 
-    my $XMLData = $Param{XMLDataPrev};
+    return unless $Param{DynamicFieldRef};
+    return unless ref $Param{DynamicFieldRef} eq 'HASH';    # the attributes of the config item class
+    return unless $Param{NewVersionData};
+    return unless ref $Param{NewVersionData} eq 'HASH';     # hash with values that should be imported
+    return unless $Param{VersionData};
+    return unless ref $Param{VersionData} eq 'HASH';        # hash with current values of the config item
+
+    my $VersionData = $Param{VersionData};
 
     # default value for prefix
     $Param{Prefix} ||= '';
 
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
+    DF_NAME:
+    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
         COUNTER:
-        for my $Counter ( 1 .. $Item->{CountMax} ) {
+        for my $Counter ( 1 .. 1 ) {
 
             # create inputkey
-            my $Key = $Param{Prefix} . $Item->{Key} . '::' . $Counter;
+            my $Key = $Param{Prefix} . $DynamicFieldConfig->{Name} . '::' . $Counter;
 
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                $XMLData->{ $Item->{Key} }->[$Counter]
-                    ||= {};    # empty container, in case there is no previous data
-                my $MergeOk = $Self->_ImportXMLDataMerge(
-                    XMLDefinition                => $Item->{Sub},
-                    XMLData2D                    => $Param{XMLData2D},
-                    XMLDataPrev                  => $XMLData->{ $Item->{Key} }->[$Counter],
-                    Prefix                       => $Key . '::',
-                    EmptyFieldsLeaveTheOldValues => $Param{EmptyFieldsLeaveTheOldValues},
-                );
-
-                return if !$MergeOk;
-            }
+            # TODO: support for Set
 
             # When the data point is not part of the input definition,
             # then do not overwrite the previous setting.
             # False values are OK.
-            next COUNTER if !exists $Param{XMLData2D}->{$Key};
+            next COUNTER unless exists $Param{NewVersionData}->{$Key};
 
             if ( $Param{EmptyFieldsLeaveTheOldValues} ) {
 
                 # do not override old value with an empty field is imported
-                next COUNTER if !defined $Param{XMLData2D}->{$Key};
-                next COUNTER if $Param{XMLData2D}->{$Key} eq '';
+                next COUNTER unless defined $Param{NewVersionData}->{$Key};
+                next COUNTER if $Param{NewVersionData}->{$Key} eq '';
             }
 
             # prepare value
-            my $Value = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLImportValuePrepare(
-                Item  => $Item,
-                Value => $Param{XMLData2D}->{$Key},
-            );
+            my $Value = $Param{NewVersionData}->{$Key};
 
             # let merge fail, when a value cannot be prepared
-            return if !defined $Value;
+            #return unless defined $Value;
 
             # save the prepared value
-            $XMLData->{ $Item->{Key} }->[$Counter]->{Content} = $Value;
+            # TODO: collect the dynamic fields
+            #$VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"} = $Value;
         }
     }
 
