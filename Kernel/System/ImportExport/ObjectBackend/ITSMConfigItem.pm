@@ -23,6 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(max);
 
 # CPAN modules
 
@@ -94,7 +95,7 @@ sub ObjectAttributesGet {
         Class => 'ITSM::ConfigItem::Class',
     );
 
-    my $Attributes = [
+    return [
         {
             Key   => 'ClassID',
             Name  => Translatable('Class'),
@@ -128,8 +129,6 @@ sub ObjectAttributesGet {
             },
         },
     ];
-
-    return $Attributes;
 }
 
 =head2 MappingObjectAttributesGet()
@@ -770,13 +769,11 @@ sub ImportDataSave {
 
     my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
 
-    # get object data
+    # get object data, that is the config of this template
     my $ObjectData = $ImportExportObject->ObjectDataGet(
         TemplateID => $Param{TemplateID},
         UserID     => $Param{UserID},
     );
-
-    # check object data
     if ( !$ObjectData || ref $ObjectData ne 'HASH' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -791,11 +788,12 @@ sub ImportDataSave {
     # just for convenience
     my $EmptyFieldsLeaveTheOldValues = $ObjectData->{EmptyFieldsLeaveTheOldValues};
 
-    # check the class id
+    # check the class id of the template config
     {
         my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
             Class => 'ITSM::ConfigItem::Class',
         );
+
         if ( !$ClassList || ref $ClassList ne 'HASH' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -827,7 +825,7 @@ sub ImportDataSave {
     );
 
     # check the mapping list
-    if ( !$MappingIDs || ref $MappingIDs ne 'ARRAY' || !@{$MappingIDs} ) {
+    if ( !$MappingIDs || ref $MappingIDs ne 'ARRAY' || !$MappingIDs->@* ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -869,82 +867,88 @@ sub ImportDataSave {
     # check and remember the Identifiers
     # the Identifiers identify the config item that should be updated
     my %Identifier;
-    my $RowIndex = 0;
-    MAPPINGOBJECTDATA:
-    for my $MappingObjectData (@MappingObjectList) {
+    {
+        my $RowIndex = 0;
+        MAPPINGOBJECTDATA:
+        for my $MappingObjectData (@MappingObjectList) {
 
-        next MAPPINGOBJECTDATA unless $MappingObjectData->{Identifier};
+            next MAPPINGOBJECTDATA unless $MappingObjectData->{Identifier};
 
-        # check if identifier already exists
-        if ( $Identifier{ $MappingObjectData->{Key} } ) {
+            # check if identifier already exists
+            if ( $Identifier{ $MappingObjectData->{Key} } ) {
+
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "'$MappingObjectData->{Key}' has been used multiple times as an identifier",
+                );
+
+                return;
+            }
+
+            # set identifier value
+            $Identifier{ $MappingObjectData->{Key} } = $Param{ImportDataRow}->[$RowIndex];
+
+            next MAPPINGOBJECTDATA if $MappingObjectData->{Key} && $Param{ImportDataRow}->[$RowIndex];
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  =>
                     "Can't import entity $Param{Counter}: "
-                    . "'$MappingObjectData->{Key}' has been used multiple times as an identifier",
+                    . "Identifier field is empty",
+            );
+
+            return;
+        }
+        continue {
+            $RowIndex++;
+        }
+    }
+
+    # get lookup table for getting the ID for deployment state names
+    my %DeplStateListReverse;
+    {
+        my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::DeploymentState',
+        );
+        if ( !$DeplStateList || ref $DeplStateList ne 'HASH' ) {
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  =>
+                    "Can't import entity $Param{Counter}: "
+                    . "Can't get the general catalog list ITSM::ConfigItem::DeploymentState!",
             );
 
             return;
         }
 
-        # set identifier value
-        $Identifier{ $MappingObjectData->{Key} } = $Param{ImportDataRow}->[$RowIndex];
+        # get the reverse mapping, that is from name to ID
+        %DeplStateListReverse = reverse $DeplStateList->%*;
+    }
 
-        next MAPPINGOBJECTDATA if $MappingObjectData->{Key} && $Param{ImportDataRow}->[$RowIndex];
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "Identifier field is empty",
+    # get lookup table for getting the ID for incident state names
+    my %InciStateListReverse;
+    {
+        my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::Core::IncidentState',
         );
+        if ( !$InciStateList || ref $InciStateList ne 'HASH' ) {
 
-        return;
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  =>
+                    "Can't import entity $Param{Counter}: "
+                    . "Can't get the general catalog list ITSM::Core::IncidentState",
+            );
+
+            return;
+        }
+
+        # get the reverse mapping, that is from name to ID
+        %InciStateListReverse = reverse $InciStateList->%*;
     }
-    continue {
-        $RowIndex++;
-    }
-
-    # get deployment state list
-    my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::DeploymentState',
-    );
-    if ( !$DeplStateList || ref $DeplStateList ne 'HASH' ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "Can't get the general catalog list ITSM::ConfigItem::DeploymentState!",
-        );
-
-        return;
-    }
-
-    # reverse the deployment state list
-    my %DeplStateListReverse = reverse $DeplStateList->%*;
-
-    # get incident state list
-    my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::Core::IncidentState',
-    );
-
-    # check incident state list
-    if ( !$InciStateList || ref $InciStateList ne 'HASH' ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "Can't get the general catalog list ITSM::Core::IncidentState",
-        );
-
-        return;
-    }
-
-    # reverse the incident state list
-    my %InciStateListReverse = reverse $InciStateList->%*;
 
     # get current definition of this class
     my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
@@ -1025,7 +1029,7 @@ sub ImportDataSave {
             delete $Identifier{InciState};
         }
 
-        # add all XML data to the search params
+        # the remaining items in %Identifier are all for dynamic fields
         my %DFImportSearchParams = $Self->_DFImportSearchDataPrepare(
             DynamicFieldRef => $Definition->{DynamicFieldRef},
             Identifier      => \%Identifier,
@@ -1091,12 +1095,12 @@ sub ImportDataSave {
 
     # set up fields in VersionData and in the XML attributes
     my %NewVersionData;
-    $RowIndex = 0;
+    my $RowIndex = 0;
     for my $MappingObjectData (@MappingObjectList) {
 
         # just for convenience
         my $Key   = $MappingObjectData->{Key};
-        my $Value = $Param{ImportDataRow}->[ $RowIndex++ ];
+        my $Value = $Param{ImportDataRow}->[$RowIndex];
 
         if ( $Key eq 'Number' ) {
 
@@ -1178,6 +1182,9 @@ sub ImportDataSave {
             $NewVersionData{$Key} = $Value;
         }
     }
+    continue {
+        $RowIndex++;
+    }
 
     # Edit $VersionData, so that the values in NewVersionData take precedence.
     my $MergeOk = $Self->_DFImportDataMerge(
@@ -1196,8 +1203,6 @@ sub ImportDataSave {
 
         return;
     }
-
-    my $RetCode = $ConfigItemID ? Translatable('Changed') : Translatable('Created');
 
     # check if the feature to check for a unique name is enabled
     if (
@@ -1233,12 +1238,16 @@ sub ImportDataSave {
             );
 
             # set the return code to also include the duplicate name
-            $RetCode = "DuplicateName '$VersionData->{Name}'";
-
             # return undef for the config item id so it will be counted as 'Failed'
-            return undef, $RetCode;    ## no critic qw(Subroutines::ProhibitExplicitReturnUndef)
+            return undef, "DuplicateName '$VersionData->{Name}'";    ## no critic qw(Subroutines::ProhibitExplicitReturnUndef)
         }
     }
+
+    # extract the data that concerns dynamic fields
+    my %DFVersionData =
+        map  { $_ => $VersionData->{$_} }
+        grep {m/^DynamicField/}
+        keys $VersionData->%*;
 
     if ($ConfigItemID) {
 
@@ -1257,6 +1266,7 @@ sub ImportDataSave {
             DeplStateID  => $VersionData->{DeplStateID},
             InciStateID  => $VersionData->{InciStateID},
             UserID       => $Param{UserID},
+            %DFVersionData,
         );
 
         if ( !$VersionID ) {
@@ -1275,6 +1285,7 @@ sub ImportDataSave {
         # When VersionAdd() returns the previous latest version ID, we know that
         # no new version has been added.
         # The import of this config item has been skipped.
+        my $RetCode = Translatable('Changed');
         if ( $LatestVersionID && $VersionID == $LatestVersionID ) {
             $RetCode = Translatable('Skipped');
         }
@@ -1292,8 +1303,7 @@ sub ImportDataSave {
             InciStateID  => $VersionData->{InciStateID},
             UserID       => $Param{UserID},
             UserID       => $Param{UserID},
-
-            # TODO: dynamic fields
+            %DFVersionData,
         );
 
         # check the new config item id
@@ -1309,7 +1319,7 @@ sub ImportDataSave {
             return;
         }
 
-        return $ConfigItemID, $RetCode;
+        return $ConfigItemID, Translatable('Created');
     }
 }
 
@@ -1522,16 +1532,12 @@ sub _DFSearchDataPrepare {
 
 =head2 _DFImportSearchDataPrepare()
 
-recursion function to prepare the import XML search params
+recursive function to prepare the import dynamic field search params
 
-    $ObjectBackend->_DFImportSearchDataPrepare(
-        XMLDefinition => $ArrayRef,
-        What          => $ArrayRef,
-        Identifier    => $HashRef,
-    );
     my %DFImportSearchParams = $ObjectBackend->_DFImportSearchDataPrepare(
         DynamicFieldRef => $Definition->{DynamicFieldRef},
         Identifier      => \%Identifier,
+        Prefix          => $Key,    # passed only in the recursion case
     );
 
 =cut
@@ -1550,16 +1556,20 @@ sub _DFImportSearchDataPrepare {
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
 
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
+        my $DFName             = $DynamicFieldConfig->{Name};
 
-        # create key, TODO: what about identifies in n-th element ?
-        my $Key = $Param{Prefix} ? $Param{Prefix} . '::' . $DynamicFieldConfig->{Name} : $DynamicFieldConfig->{Name};
+        # create key
+        my $Key = join '::',
+            ( $Param{Prefix} || () ),
+            $DFName;
 
         next DF_NAME unless $Param{Identifier}->{$Key};
 
+        # TODO: this is broken for multivalue dynamic fields
         $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{SearchData}->{$Key} ] };
 
         # TODO: handle Sets
-        next DF_NAME if !$DynamicFieldConfig->{Sub};
+        next DF_NAME unless $DynamicFieldConfig->{Sub};
 
         # start recursion, if "Sub" was found
         my %SetSearchParams = $Self->_DFImportSearchDataPrepare(
@@ -1600,44 +1610,58 @@ sub _DFImportDataMerge {
     return unless $Param{VersionData};
     return unless ref $Param{VersionData} eq 'HASH';        # hash with current values of the config item
 
+    # For now handle only simple items with multiple values.
+    # Array parameters are marked like "$DFName::$Index"
     my $VersionData = $Param{VersionData};
+    my %NormalizedNew;
+    NAME_AND_INDEX:
+    for my $NameAndIndex ( sort keys $Param{NewVersionData}->%* ) {
+        my ( $Name, $OneBasedIndex ) = split /::/, $NameAndIndex;
+
+        # for single value DF no index is appended
+        $OneBasedIndex //= 1;
+
+        $NormalizedNew{$Name} //= [];
+        $NormalizedNew{$Name}->[ $OneBasedIndex - 1 ] = $Param{NewVersionData}->{$NameAndIndex};
+    }
 
     # default value for prefix
-    $Param{Prefix} ||= '';
+    my $Prefix = $Param{Prefix} || '';
 
     DF_NAME:
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
-        COUNTER:
-        for my $Counter ( 1 .. 1 ) {
+        # TODO: support for Set
+        # create inputkey
+        my $Key = join '::',
+            ( $Prefix || () ),
+            $DFName;
 
-            # create inputkey
-            my $Key = $Param{Prefix} . $DynamicFieldConfig->{Name} . '::' . $Counter;
+        # When the data point is not part of the input definition,
+        # then do not overwrite the previous setting.
+        # False values are OK.
+        next DF_NAME unless exists $NormalizedNew{$Key};
 
-            # TODO: support for Set
+        # prepare value
+        my $Value = $NormalizedNew{$Key};
 
-            # When the data point is not part of the input definition,
-            # then do not overwrite the previous setting.
-            # False values are OK.
-            next COUNTER unless exists $Param{NewVersionData}->{$Key};
+        # let merge fail, when a value cannot be prepared
+        next DF_NAME unless defined $Value;
+        next DF_NAME unless ref $Value eq 'ARRAY';
+        next DF_NAME unless $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"};
+        next DF_NAME unless ref $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"} eq 'ARRAY';
 
-            if ( $Param{EmptyFieldsLeaveTheOldValues} ) {
+        # save the prepared value
+        # Note: this could be done with List::Util::zip, but that function is only available in newer version of List::Util
+        my $MaxIndex = max( $Value->$#*, $NormalizedNew{$Key}->$#* );
+        INDEX:
+        for my $Index ( 0 .. $MaxIndex ) {
 
-                # do not override old value with an empty field is imported
-                next COUNTER unless defined $Param{NewVersionData}->{$Key};
-                next COUNTER if $Param{NewVersionData}->{$Key} eq '';
-            }
+            # TODO: support for $Param{EmptyFieldsLeaveTheOldValues}
+            next INDEX unless defined $Value->[$Index];
 
-            # prepare value
-            my $Value = $Param{NewVersionData}->{$Key};
-
-            # let merge fail, when a value cannot be prepared
-            #return unless defined $Value;
-
-            # save the prepared value
-            # TODO: collect the dynamic fields
-            #$VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"} = $Value;
+            $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"}->[$Index] = $Value->[$Index];
         }
     }
 
