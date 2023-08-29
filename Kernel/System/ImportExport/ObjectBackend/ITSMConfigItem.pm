@@ -85,6 +85,7 @@ sub ObjectAttributesGet {
             Priority => 'error',
             Message  => 'Need UserID!',
         );
+
         return;
     }
 
@@ -218,6 +219,7 @@ sub MappingObjectAttributesGet {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -314,6 +316,7 @@ sub SearchAttributesGet {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -748,6 +751,7 @@ sub ImportDataSave {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -760,6 +764,7 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "ImportDataRow must be an array reference",
         );
+
         return;
     }
 
@@ -779,36 +784,40 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "No object data found for the template id '$Param{TemplateID}'",
         );
+
         return;
     }
 
     # just for convenience
     my $EmptyFieldsLeaveTheOldValues = $ObjectData->{EmptyFieldsLeaveTheOldValues};
 
-    # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-    if ( !$ClassList || ref $ClassList ne 'HASH' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "Can't get the general catalog list ITSM::ConfigItem::Class",
-        );
-        return;
-    }
-
     # check the class id
-    if ( !$ObjectData->{ClassID} || !$ClassList->{ $ObjectData->{ClassID} } ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "No class found for the template id '$Param{TemplateID}'",
+    {
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
         );
-        return;
+        if ( !$ClassList || ref $ClassList ne 'HASH' ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  =>
+                    "Can't import entity $Param{Counter}: "
+                    . "Can't get the general catalog list ITSM::ConfigItem::Class",
+            );
+
+            return;
+        }
+
+        if ( !$ObjectData->{ClassID} || !$ClassList->{ $ObjectData->{ClassID} } ) {
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  =>
+                    "Can't import entity $Param{Counter}: "
+                    . "No class found for the template id '$Param{TemplateID}'",
+            );
+
+            return;
+        }
     }
 
     # get the mapping list
@@ -826,10 +835,12 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "No valid mapping list found for the template id '$Param{TemplateID}'",
         );
+
         return;
     }
 
     # create the mapping object list
+    # TODO: why is this called for every row of the import file ?
     my @MappingObjectList;
     for my $MappingID ( $MappingIDs->@* ) {
 
@@ -848,6 +859,7 @@ sub ImportDataSave {
                     "Can't import entity $Param{Counter}: "
                     . "No mapping object data found for the mapping id '$MappingID'",
             );
+
             return;
         }
 
@@ -861,7 +873,7 @@ sub ImportDataSave {
     MAPPINGOBJECTDATA:
     for my $MappingObjectData (@MappingObjectList) {
 
-        next MAPPINGOBJECTDATA if !$MappingObjectData->{Identifier};
+        next MAPPINGOBJECTDATA unless $MappingObjectData->{Identifier};
 
         # check if identifier already exists
         if ( $Identifier{ $MappingObjectData->{Key} } ) {
@@ -872,6 +884,7 @@ sub ImportDataSave {
                     "Can't import entity $Param{Counter}: "
                     . "'$MappingObjectData->{Key}' has been used multiple times as an identifier",
             );
+
             return;
         }
 
@@ -905,11 +918,12 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "Can't get the general catalog list ITSM::ConfigItem::DeploymentState!",
         );
+
         return;
     }
 
     # reverse the deployment state list
-    my %DeplStateListReverse = reverse %{$DeplStateList};
+    my %DeplStateListReverse = reverse $DeplStateList->%*;
 
     # get incident state list
     my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
@@ -925,11 +939,12 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "Can't get the general catalog list ITSM::Core::IncidentState",
         );
+
         return;
     }
 
     # reverse the incident state list
-    my %InciStateListReverse = reverse %{$InciStateList};
+    my %InciStateListReverse = reverse $InciStateList->%*;
 
     # get current definition of this class
     my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
@@ -946,10 +961,11 @@ sub ImportDataSave {
                 "Can't import entity $Param{Counter}: "
                 . "Can't get the definition of class id $ObjectData->{ClassID}",
         );
+
         return;
     }
 
-    # try to get config item ids, when there are identifiers
+    # try to get the config item id when there is at least one identifier
     my $ConfigItemID;
     if (%Identifier) {
 
@@ -979,6 +995,7 @@ sub ImportDataSave {
                         "Can't import entity $Param{Counter}: "
                         . "The deployment state '$Identifier{DeplState}' is invalid",
                 );
+
                 return;
             }
 
@@ -1000,6 +1017,7 @@ sub ImportDataSave {
                         "Can't import entity $Param{Counter}: "
                         . "The incident state '$Identifier{InciState}' is invalid",
                 );
+
                 return;
             }
 
@@ -1116,6 +1134,7 @@ sub ImportDataSave {
                             "Can't import entity $Param{Counter}: "
                             . "The name '$Value' is invalid!",
                     );
+
                     return;
                 }
 
@@ -1139,6 +1158,7 @@ sub ImportDataSave {
                             "Can't import entity $Param{Counter}: "
                             . "The deployment state '$Value' is invalid!",
                     );
+
                     return;
                 }
 
@@ -1162,6 +1182,7 @@ sub ImportDataSave {
                             "Can't import entity $Param{Counter}: "
                             . "The incident state '$Value' is invalid!",
                     );
+
                     return;
                 }
 
@@ -1205,7 +1226,6 @@ sub ImportDataSave {
         && $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck')
         )
     {
-
         if ( $Kernel::OM->Get('Kernel::Config')->{Debug} > 0 ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
@@ -1270,6 +1290,7 @@ sub ImportDataSave {
                     "Can't import entity $Param{Counter}: "
                     . "Error when adding the new config item.",
             );
+
             return;
         }
     }
@@ -1343,7 +1364,6 @@ sub _MappingObjectAttributesGet {
 
     my @Elements;
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
-
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
         my $DFDetails          = $DynamicFieldConfig->{Config};
 
@@ -1500,7 +1520,6 @@ sub _DFSearchDataPrepare {
     my %DFSearchParams;
     DF_NAME:
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
-
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
         # create key

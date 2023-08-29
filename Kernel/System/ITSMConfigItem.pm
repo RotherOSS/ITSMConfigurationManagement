@@ -867,9 +867,11 @@ sub ConfigItemUpdate {
     my $AddVersion = 0;    # flag for deciding whether a new version is created
 
     # name, deployment and incident state
+    # TODO: check for unique config item name, like it is done in ConfigItemAdd()
     ATTR:
     for my $Attribute (qw/Name DeplStateID InciStateID/) {
-        next ATTR if !defined $Param{$Attribute} || $Param{$Attribute} eq $ConfigItem->{$Attribute};
+        next ATTR unless defined $Param{$Attribute};
+        next ATTR if $Param{$Attribute} eq $ConfigItem->{$Attribute};
 
         $Changed{$Attribute} = {
             Old => $ConfigItem->{$Attribute},
