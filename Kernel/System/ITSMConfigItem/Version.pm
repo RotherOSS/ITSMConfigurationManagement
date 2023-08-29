@@ -284,7 +284,8 @@ END_SQL
 
 =head2 VersionList()
 
-return a config item version list as array reference
+return the list of config item version IDs of the specified config item as an array reference.
+The IDs are sorted in ascending order.
 
     my $VersionListRef = $ConfigItemObject->VersionList(
         ConfigItemID => 123,
@@ -301,20 +302,20 @@ sub VersionList {
             Priority => 'error',
             Message  => 'Need ConfigItemID!',
         );
+
         return;
     }
 
     # get version list
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL  => 'SELECT id FROM configitem_version WHERE configitem_id = ? ORDER BY id',
+    my @VersionList = $Kernel::OM->Get('Kernel::System::DB')->SelectColArray(
+        SQL => <<'END_SQL',
+SELECT id
+  FROM configitem_version
+  WHERE configitem_id = ?
+  ORDER BY id
+END_SQL
         Bind => [ \$Param{ConfigItemID} ],
     );
-
-    # fetch the result
-    my @VersionList;
-    while ( my ($Id) = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
-        push @VersionList, $Id;
-    }
 
     return \@VersionList;
 }
