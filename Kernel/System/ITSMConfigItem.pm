@@ -590,9 +590,10 @@ sub ConfigItemAdd {
         Bind => [ \$Param{Number}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{ClassID}, \$Param{UserID}, \$Param{UserID} ],
     );
 
-    return if !$Success;
+    return unless $Success;
 
     # find id of new item
+    # TODO: what about concurrent INSERTs ???
     ( $Param{ConfigItemID} ) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id
@@ -1468,6 +1469,7 @@ sub UniqueNameCheck {
             Priority => 'error',
             Message  => "The configuration of UniqueCIName::UniquenessCheckScope is invalid!",
         );
+
         return;
     }
 
@@ -1477,6 +1479,7 @@ sub UniqueNameCheck {
             Message  => "UniqueCIName::UniquenessCheckScope is $Scope, but must be either "
                 . "'global' or 'class'!",
         );
+
         return;
     }
 
@@ -1497,11 +1500,14 @@ sub UniqueNameCheck {
     $SearchCriteria{Name} = $Param{Name};
 
     # search for a config item matching the given name
-    my @ConfigItems = $Self->ConfigItemSearch(%SearchCriteria);
+    my @ConfigItemIDs = $Self->ConfigItemSearch(
+        %SearchCriteria,
+        Result => 'ARRAY'
+    );
 
     # remove the provided ConfigItemID from the results, otherwise the duplicate check would fail
     # because the ConfigItem itself is found as duplicate
-    my @Duplicates = map {$_} grep { $_ ne $Param{ConfigItemID} } @ConfigItems;
+    my @Duplicates = grep { $_ ne $Param{ConfigItemID} } @ConfigItemIDs;
 
     # if a config item was found, the given name is not unique
     # if no config item was found, the given name is unique

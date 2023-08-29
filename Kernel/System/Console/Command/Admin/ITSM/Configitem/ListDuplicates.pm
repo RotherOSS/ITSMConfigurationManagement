@@ -16,12 +16,20 @@
 
 package Kernel::System::Console::Command::Admin::ITSM::Configitem::ListDuplicates;
 
+use v5.24;
 use strict;
 use warnings;
-
-use Kernel::System::VariableCheck qw(IsArrayRefWithData);
+use namespace::autoclean;
+use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand);
+
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(IsArrayRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -71,7 +79,7 @@ sub PreRun {
         );
 
         # invert the hash to have the classes' names as keys
-        my %ClassName2ID = reverse %{$ClassList};
+        my %ClassName2ID = reverse $ClassList->%*;
 
         # check, whether this class exists
         if ( $ClassName2ID{$Class} ) {
@@ -95,6 +103,7 @@ sub Run {
 
     if ( !$Self->GetOption('all-states') ) {
 
+        # Limit the checked config items by deployment state
         my $StateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
             Class       => 'ITSM::ConfigItem::DeploymentState',
             Preferences => {
@@ -102,17 +111,17 @@ sub Run {
             },
         );
 
-        my $DeploymentStateIDs = [ keys %{$StateList} ];
-
-        $Self->{SearchCriteria}->{DeplStateIDs} = [ keys %{$StateList} ];
-
+        $Self->{SearchCriteria}->{DeplStateIDs} = [ keys $StateList->%* ];
     }
 
     # get ITSMConfigitem object
     my $ITSMConfigitemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # get all config items ids
-    my @ConfigItemIDs = @{ $ITSMConfigitemObject->ConfigItemSearch( %{ $Self->{SearchCriteria} } ) };
+    my @ConfigItemIDs = $ITSMConfigitemObject->ConfigItemSearch(
+        $Self->{SearchCriteria}->%*,
+        Result => 'ARRAY',
+    );
 
     # get number of config items
     my $CICount = scalar @ConfigItemIDs;
@@ -145,32 +154,26 @@ sub Run {
         my $DuplicatesFound = 0;
 
         # check config items
-        CONFIGITEMID:
+        CONFIG_ITEM_ID:
         for my $ConfigItemID (@ConfigItemIDs) {
 
-            # get the attributes of this config item
-            my $ConfigItem = $ITSMConfigitemObject->ConfigItemGet(
-                ConfigItemID => $ConfigItemID,
-            );
-
-            next CONFIGITEMID if !$ConfigItem->{LastVersionID};
-
             # get the latest version of this config item
-            my $Version = $ITSMConfigitemObject->VersionGet(
-                VersionID  => $ConfigItem->{LastVersionID},
-                XMLDataGet => 1,
+            my $Version = $ITSMConfigitemObject->ConfigItemGet(
+                ConfigItemID  => $ConfigItemID,
+                DynamicFields => 1,
             );
 
-            next CONFIGITEMID if !$Version;
+            next CONFIG_ITEM_ID unless $Version;
 
             if ( !$Version->{Name} ) {
                 $Self->Print("<red>Skipping ConfigItem $ConfigItemID as it doesn't have a name.\n</red>\n");
-                next CONFIGITEMID;
+
+                next CONFIG_ITEM_ID;
             }
 
             my $Duplicates = $ITSMConfigitemObject->UniqueNameCheck(
                 ConfigItemID => $ConfigItemID,
-                ClassID      => $ConfigItem->{ClassID},
+                ClassID      => $Version->{ClassID},
                 Name         => $Version->{Name}
             );
 
@@ -178,21 +181,9 @@ sub Run {
 
                 $DuplicatesFound = 1;
 
-                my @DuplicateData;
-
-                for my $DuplicateID ( @{$Duplicates} ) {
-
-                    # get the # of the duplicate
-                    my $DuplicateConfigItem = $ITSMConfigitemObject->ConfigItemGet(
-                        ConfigItemID => $DuplicateID,
-                    );
-
-                    my $DuplicateVersion = $ITSMConfigitemObject->VersionGet(
-                        VersionID => $DuplicateConfigItem->{LastVersionID},
-                    );
-
-                    push @DuplicateData, $DuplicateVersion;
-                }
+                my @DuplicateData =
+                    map { $ITSMConfigitemObject->ConfigItemGet( ConfigItemID => $_ ) }
+                    $Duplicates->@*;
 
                 $Self->Print(
                     "<yellow>ConfigItem $Version->{Number} (Name: $Version->{Name}, ConfigItemID: "
@@ -201,10 +192,8 @@ sub Run {
 
                 # list all the details of the duplicates
                 for my $DuplicateVersion (@DuplicateData) {
-                    print "\n";
                     $Self->Print(
-                        "<green>\t * $DuplicateVersion->{Number} (ConfigItemID: "
-                            . "$DuplicateVersion->{ConfigItemID})</green>\n"
+                        "\n<green>\t * $DuplicateVersion->{Number} (ConfigItemID: $DuplicateVersion->{ConfigItemID})</green>\n"
                     );
                 }
 
@@ -224,8 +213,8 @@ sub Run {
     }
 
     $Self->Print("<green>Done.</green>\n");
-    return $Self->ExitCodeOk();
 
+    return $Self->ExitCodeOk();
 }
 
 1;
