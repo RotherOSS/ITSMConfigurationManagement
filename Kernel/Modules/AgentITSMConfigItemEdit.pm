@@ -228,7 +228,7 @@ sub Run {
 
             DYNAMICFIELD:
             for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
-                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
 
                 $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} };
 
@@ -281,8 +281,8 @@ sub Run {
     my %DynamicFieldACLParameters;
     DYNAMICFIELD:
     for my $DynamicField ( sort keys %DynamicFieldValues ) {
-        next DYNAMICFIELD if !$DynamicField;
-        next DYNAMICFIELD if !$DynamicFieldValues{$DynamicField};
+        next DYNAMICFIELD unless $DynamicField;
+        next DYNAMICFIELD unless $DynamicFieldValues{$DynamicField};
 
         $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicField } = $DynamicFieldValues{$DynamicField};
     }
@@ -965,7 +965,7 @@ sub Run {
             for my $SectionConfig ( $Page->{Content}->@* ) {
                 my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
 
-                next SECTION if !$Section;
+                next SECTION unless $Section;
 
                 $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
                     Content              => $Section->{Content},
@@ -1007,23 +1007,22 @@ sub Run {
         $LayoutObject->Block( Name => 'EndSmall' );
 
         # output header
-        $Output .= $LayoutObject->Header(
-            Title => Translatable('Edit'),
-            Type  => 'Small',
-        );
-
-        # start template output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AgentITSMConfigItemEdit',
-            Data         => {
-                %Param,
-                %{$ConfigItem},
-                DynamicFieldHTML => $DynamicFieldHTML,
-                DuplicateID      => $DuplicateID,
-                FormID           => $Self->{FormID},
-            },
-        );
-        $Output .= $LayoutObject->Footer( Type => 'Small' );
+        return join '',
+            $LayoutObject->Header(
+                Title => Translatable('Edit'),
+                Type  => 'Small',
+            ),
+            $LayoutObject->Output(
+                TemplateFile => 'AgentITSMConfigItemEdit',
+                Data         => {
+                    %Param,
+                    %{$ConfigItem},
+                    DynamicFieldHTML => $DynamicFieldHTML,
+                    DuplicateID      => $DuplicateID,
+                    FormID           => $Self->{FormID},
+                },
+            ),
+            $LayoutObject->Footer( Type => 'Small' );
     }
     else {
 
@@ -1070,26 +1069,23 @@ sub Run {
         $LayoutObject->Block( Name => 'EndNormal' );
 
         # output header
-        $Output .= $LayoutObject->Header(
-            Title => Translatable('Edit'),
-        );
-        $Output .= $LayoutObject->NavigationBar();
-
-        # start template output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AgentITSMConfigItemEdit',
-            Data         => {
-                %Param,
-                %{$ConfigItem},
-                DynamicFieldHTML => $DynamicFieldHTML,
-                DuplicateID      => $DuplicateID,
-                FormID           => $Self->{FormID},
-            },
-        );
-        $Output .= $LayoutObject->Footer();
+        return join '',
+            $LayoutObject->Header(
+                Title => Translatable('Edit'),
+            ),
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AgentITSMConfigItemEdit',
+                Data         => {
+                    %Param,
+                    %{$ConfigItem},
+                    DynamicFieldHTML => $DynamicFieldHTML,
+                    DuplicateID      => $DuplicateID,
+                    FormID           => $Self->{FormID},
+                },
+            ),
+            $LayoutObject->Footer;
     }
-
-    return $Output;
 }
 
 1;
