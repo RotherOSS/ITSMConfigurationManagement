@@ -122,6 +122,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassImport.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/UpgradeTo11.pm" />
