@@ -166,64 +166,59 @@ sub DefinitionGet {
         return;
     }
 
+    my @Row;
     if ( $Param{DefinitionID} ) {
 
         # check if result is already cached
         return $Self->{Cache}->{DefinitionGet}->{ $Param{DefinitionID} }
             if $Self->{Cache}->{DefinitionGet}->{ $Param{DefinitionID} };
 
-        # ask database
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        # ask database for the specified definition version
+        @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition WHERE id = ?',
-            Bind  => [ \$Param{DefinitionID} ],
-            Limit => 1,
+            Bind => [ \$Param{DefinitionID} ],
         );
     }
     else {
 
-        # ask database
-        $Kernel::OM->Get('Kernel::System::DB')->Prepare(
+        # ask database for the newest version for the class
+        @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => 'SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by '
                 . 'FROM configitem_definition '
                 . 'WHERE class_id = ? ORDER BY version DESC',
-            Bind  => [ \$Param{ClassID} ],
-            Limit => 1,
+            Bind => [ \$Param{ClassID} ],
         );
     }
 
     # fetch the result
     my %Definition;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+    $Definition{DefinitionID} = $Row[0];
+    $Definition{ClassID}      = $Row[1];
+    $Definition{Definition}   = $Row[2] || "--- []";
+    my $DynamicFields = $Row[3] || "--- {}";
+    $Definition{Version}    = $Row[4];
+    $Definition{CreateTime} = $Row[5];
+    $Definition{CreateBy}   = $Row[6];
 
-        $Definition{DefinitionID} = $Row[0];
-        $Definition{ClassID}      = $Row[1];
-        $Definition{Definition}   = $Row[2] || "--- []";
-        my $DynamicFields = $Row[3] || "--- {}";
-        $Definition{Version}    = $Row[4];
-        $Definition{CreateTime} = $Row[5];
-        $Definition{CreateBy}   = $Row[6];
-
-        # Check if definition code is not a YAML string.
-        if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "DefinitionID: $Definition{DefinitionID}"
-                    . " ClassID: $Definition{ClassID}"
-                    . " found in legacy Perl code format, can not continue",
-            );
-
-            $Definition{Definition} = "--- []";
-        }
-
-        $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
-            Data => $Definition{Definition},
+    # Check if definition code is not a YAML string.
+    if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => "DefinitionID: $Definition{DefinitionID}"
+                . " ClassID: $Definition{ClassID}"
+                . " found in legacy Perl code format, can not continue",
         );
-        $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
-            Data => $DynamicFields,
-        );
+
+        $Definition{Definition} = "--- []";
     }
+
+    $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $Definition{Definition},
+    );
+    $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $DynamicFields,
+    );
 
     return {} unless $Definition{DefinitionID};
 
