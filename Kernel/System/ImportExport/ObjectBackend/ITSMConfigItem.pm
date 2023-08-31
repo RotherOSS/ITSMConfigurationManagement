@@ -1649,8 +1649,17 @@ sub _DFImportDataMerge {
         # let merge fail, when a value cannot be prepared
         next DF_NAME unless defined $Value;
         next DF_NAME unless ref $Value eq 'ARRAY';
-        next DF_NAME unless $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"};
-        next DF_NAME unless ref $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"} eq 'ARRAY';
+        next DF_NAME unless exists $VersionData->{"DynamicField_$DFName"};
+
+        # There are still single valued dynamic fields
+        if ( ref $VersionData->{"DynamicField_$DFName"} eq '' ) {
+            $VersionData->{"DynamicField_$DFName"} = $Value->[0];
+
+            next DF_NAME;
+        }
+
+        # simple scalar and arrayref are the only valid options
+        next DF_NAME unless ref $VersionData->{"DynamicField_$DFName"} eq 'ARRAY';
 
         # save the prepared value
         # Note: this could be done with List::Util::zip, but that function is only available in newer version of List::Util
@@ -1661,7 +1670,7 @@ sub _DFImportDataMerge {
             # TODO: support for $Param{EmptyFieldsLeaveTheOldValues}
             next INDEX unless defined $Value->[$Index];
 
-            $VersionData->{"DynamicField_$DynamicFieldConfig->{Name}"}->[$Index] = $Value->[$Index];
+            $VersionData->{"DynamicField_$DFName"}->[$Index] = $Value->[$Index];
         }
     }
 
