@@ -46,7 +46,7 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get configitem id and class id
-    my $ConfigItem;
+    my $ConfigItem  = {};
     my $DuplicateID = $ParamObject->GetParam( Param => 'DuplicateID' ) || 0;
     $ConfigItem->{ConfigItemID} = $ParamObject->GetParam( Param => 'ConfigItemID' ) || 0;
     $ConfigItem->{ClassID}      = $ParamObject->GetParam( Param => 'ClassID' )      || 0;
@@ -139,7 +139,7 @@ sub Run {
         );
     }
 
-    # get definition
+    # Edit the config item with the newest config item definition of the relevant class
     my $Definition = $ConfigItemObject->DefinitionGet(
         ClassID => $ConfigItem->{ClassID},
     );
@@ -173,7 +173,7 @@ sub Run {
 
                 DYNAMICFIELD:
                 for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
-                    next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                    next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
 
                     $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $ConfigItem->{ 'DynamicField_' . $DynamicFieldConfig->{Name} };
 
@@ -208,6 +208,7 @@ sub Run {
                         Priority => 'error',
                         Message  => "Can't load name module for class $ConfigItem->{Class}!",
                     );
+
                     return;
                 }
 
@@ -472,7 +473,7 @@ sub Run {
 
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
 
             my $PossibleValuesFilter;
 
@@ -620,6 +621,8 @@ sub Run {
                 $ConfigItem->{ConfigItemID} = $ConfigItemObject->ConfigItemAdd(
                     $ConfigItem->%*,
                     UserID => $Self->{UserID},
+
+                    # DefinitionID => $Definition->{DefinitionID}, # TODO: this is not used yet
                 );
 
                 # check error
@@ -630,7 +633,8 @@ sub Run {
             else {
                 $ConfigItemObject->ConfigItemUpdate(
                     $ConfigItem->%*,
-                    UserID => $Self->{UserID},
+                    DefinitionID => $Definition->{DefinitionID},
+                    UserID       => $Self->{UserID},
                 );
             }
 
@@ -665,6 +669,7 @@ sub Run {
                 {
                     $URL = $Self->{LastScreenView};
                 }
+
                 return $LayoutObject->PopupClose(
                     URL => $URL,
                 );

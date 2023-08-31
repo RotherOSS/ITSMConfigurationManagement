@@ -516,6 +516,8 @@ sub VersionAdd {
         }
     }
 
+    # new versions are always added with the newest definition
+    # TODO: support that the DefinitionId is passed as parameter
     my $Definition = $Self->DefinitionGet(
         ClassID => $Version{ClassID},
     );
@@ -558,6 +560,7 @@ END_SQL
 
     # get id of new version
     # TODO: what about concurrent inserts ?
+    # TODO: use last_insert_id
     my ( $VersionID, $VersionCreateTime ) = $DBObject->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id, create_time
@@ -686,13 +689,14 @@ END_SQL
 update a version
 
     my $VersionID = $ConfigItemObject->VersionUpdate(
-        VersionID         => 123,
-        Version           => {...}          # either VersionID or Version is mandatory
-        UserID            => 1,
-        Name              => 'The Name',    # optional
-        DeplStateID       => 8,             # optional
-        InciStateID       => 4,             # optional
-        DynamicField_Name => $Value,        # optional
+        VersionID              => 123,
+        Version                => {...}          # either VersionID or Version is mandatory
+        UserID                 => 1,
+        DefinitionID           => 123,           # optional, ID of the definition which was used for creating the input
+        Name                   => 'The Name',    # optional
+        DeplStateID            => 8,             # optional
+        InciStateID            => 4,             # optional
+        DynamicField_<$DFName> => $Value,        # optional, one parameter for each dynamic field which should be updated
     );
 
 =cut
