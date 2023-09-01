@@ -112,4 +112,103 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="GenericInterface::Invoker::ConfigItemFetch::Classes" Required="0" Valid="0">
+        <Description Translatable="1">For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.</Description>
+        <Navigation>GenericInterface::Invoker</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem><Array></Array></DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the ConfigItemFetch invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemFetch</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminGenericInterfaceInvokerConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTOBO.</Item>
+                    <Item Key="Title" Translatable="1">GenericInterface Invoker GUI</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-01" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Triggers ConfigItemFetch invoker automatically.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">TriggerConfigItemFetch01</Item>
+                <Item Key="Schedule">*/20 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::WebService::TriggerConfigItemFetch</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                        <Item>WebServiceName</Item>
+                        <Item>Invoker</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-02" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Triggers ConfigItemFetch invoker automatically.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">TriggerConfigItemFetch02</Item>
+                <Item Key="Schedule">*/20 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::WebService::TriggerConfigItemFetch</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                        <Item>WebServiceName</Item>
+                        <Item>Invoker</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-03" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Triggers ConfigItemFetch invoker automatically.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">TriggerConfigItemFetch03</Item>
+                <Item Key="Schedule">*/20 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::WebService::TriggerConfigItemFetch</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                        <Item>WebServiceName</Item>
+                        <Item>Invoker</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
