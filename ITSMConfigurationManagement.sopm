@@ -26,6 +26,7 @@
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemTicketLink.xml" />
         <File Permission="660" Location="Kernel/GenericInterface/Event/ObjectType/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/GenericInterface/Invoker/ConfigItem/ConfigItemFetch.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Invoker/Elasticsearch/ConfigItemManagement.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/Common.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemCreate.pm" />
@@ -82,6 +83,7 @@
         <File Permission="660" Location="Kernel/Language/vi_VN_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Language/zh_CN_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Language/zh_TW_ITSMConfigurationManagement.pm" />
+        <File Permission="660" Location="Kernel/Modules/AdminGenericInterfaceInvokerConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
@@ -109,6 +111,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLEdit.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLNew.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentDashboardITSMConfigItemGeneric.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
@@ -128,6 +131,7 @@
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/UpgradeTo11.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/RebuildReferenceTable.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Maint/WebService/TriggerConfigItemFetch.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
