@@ -580,15 +580,29 @@ sub GetFieldStates {
 
             # multiselect or multivalue fields
             if ( ref $DFParam->{"DynamicField_$DFName"} ) {
-                SELECTED:
-                for my $Selected ( $DFParam->{"DynamicField_$DFName"}->@* ) {
 
-                    # if a selected value is not possible anymore
-                    if ( !defined $PossibleValues->{$Selected} ) {
-                        $NewValues{"DynamicField_$DFName"} = grep { defined $PossibleValues->{$Selected} }
-                            @{ $DFParam->{"DynamicField_$DynamicFieldConfig->{Name}"} };
+                # Check whether there are any values that are no longer possible.
+                if ( $DFDetails->{MultiValue} ) {
 
-                        last SELECTED;
+                    # undefined values are fine for MultiValue fields
+                    my $FoundNoLongerPossible = any { defined $_ && !$PossibleValues->{$_} } $DFParam->{"DynamicField_$DFName"}->@*;
+                    if ($FoundNoLongerPossible) {
+                        $NewValues{"DynamicField_$DFName"} //= [];
+                        $NewValues{"DynamicField_$DFName"}->@* =
+                            map { ( defined $_ && !$PossibleValues->{$_} ) ? undef : $_ }
+                            $DFParam->{"DynamicField_$DFName"}->@*;
+                    }
+                }
+                else {
+
+                    # undefined values are not fine for Multiselect fields
+                    my $FoundNoLongerPossible = any { !defined $_ || !$PossibleValues->{$_} } $DFParam->{"DynamicField_$DFName"}->@*;
+                    if ($FoundNoLongerPossible) {
+                        $NewValues{"DynamicField_$DFName"} //= [];
+                        $NewValues{"DynamicField_$DFName"}->@* =
+                            grep { $PossibleValues->{$_} }
+                            grep { defined $_ }
+                            $DFParam->{"DynamicField_$DFName"}->@*;
                     }
                 }
             }
