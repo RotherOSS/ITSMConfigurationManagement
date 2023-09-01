@@ -1601,16 +1601,16 @@ sub _DFImportSearchDataPrepare {
 
 =head2 _DFImportDataMerge()
 
-recursive function to inplace edit the import XML data.
+function to inplace edit the import data.
 
     my $MergeOk = $ObjectBackend->_DFImportDataMerge(
         DynamicFieldRef => $DynamicFieldRef,
-        VersionData     => $VersionData,
+        VersionData     => $VersionData,  # will be changed
         NewVersionData  => $HashRef,
     );
 
 The return value indicates whether the merge was successful.
-A merge fails when for example a general catalog item name can't be mapped to an id.
+A merge fails when for example a general catalog item name can't be mapped to an ID.
 
 =cut
 
@@ -1641,23 +1641,21 @@ sub _DFImportDataMerge {
         $NormalizedNew{$Name}->[ $OneBasedIndex - 1 ] = $Param{NewVersionData}->{$NameAndIndex};
     }
 
-    # default value for prefix
-    my $Prefix = $Param{Prefix} || '';
+    # JSON support might be needed for Set dynamic fields
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
 
     DF_NAME:
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
-        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
-        # TODO: support for Set
         # create inputkey
-        my $Key = join '::',
-            ( $Prefix || () ),
-            $DFName;
+        my $Key = $DFName;
 
         # When the data point is not part of the input definition,
         # then do not overwrite the previous setting.
         # False values are OK.
         next DF_NAME unless exists $NormalizedNew{$Key};
+
+        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
         # prepare value
         my $Value = $NormalizedNew{$Key};
@@ -1665,7 +1663,20 @@ sub _DFImportDataMerge {
         # let merge fail, when a value cannot be prepared
         next DF_NAME unless defined $Value;
         next DF_NAME unless ref $Value eq 'ARRAY';
+
+        # TODO: is this sensible ???
         next DF_NAME unless exists $VersionData->{"DynamicField_$DFName"};
+
+        # Set is a special case
+        if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+            next DF_NAME unless $Value->[0];    # invalid JSON value never overwrites
+
+            $VersionData->{"DynamicField_$DFName"} = $JSONObject->Decode(
+                Data => $Value->[0],
+            );
+
+            next DF_NAME;
+        }
 
         # There are still single valued dynamic fields
         if ( ref $VersionData->{"DynamicField_$DFName"} eq '' ) {
