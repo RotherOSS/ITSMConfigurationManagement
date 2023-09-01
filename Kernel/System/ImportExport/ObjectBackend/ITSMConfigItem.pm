@@ -1328,8 +1328,8 @@ sub ImportDataSave {
 =head2 _MappingObjectAttributesGet()
 
 recursive function for MappingObjectAttributesGet().
-Definitions for object attributes are passed in C<Definition>.
-The new object attributes are appended to C<ElementList>.
+Definitions for object attributes are passed in C<DynamicFieldRef>.
+The new object attributes are returned.
 C<CountMaxLimit> limits the max length of importable arrays.
 
     push @Elements, $ObjectBackend->_MappingObjectAttributesGet(
@@ -1352,8 +1352,14 @@ sub _MappingObjectAttributesGet {
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
         my $DFDetails          = $DynamicFieldConfig->{Config};
 
-        # limit the length of importable arrays, even if more elements can be set via the GUI
-        my $CountMax = ( $DFDetails->{Multiselect} || $DFDetails->{MultiValue} ) ? $Param{CountMaxLimit} : 1;
+        # Sets can only exported as a whole, even if they are MultiValue sets.
+        # Limit the length of importable arrays, even if more elements can be set via the GUI.
+        my $IsMulti = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
+        my $CountMax =
+            $DynamicFieldConfig->{FieldType} eq 'Set'
+            ? 1
+            : $IsMulti ? $Param{CountMaxLimit}
+            :            1;
 
         COUNT:
         for my $Count ( 1 .. $CountMax ) {
