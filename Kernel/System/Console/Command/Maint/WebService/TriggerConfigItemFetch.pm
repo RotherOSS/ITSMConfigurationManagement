@@ -73,7 +73,7 @@ sub PreRun {
     $Self->{ConfigItemFetchTaskData} = {
         WebserviceID => $Webservice->{ID},
         Invoker      => $Invoker,
-        Data         => {},
+        Data         => { Dummy => 1 },
     };
 
     return;
@@ -88,22 +88,25 @@ sub Run {
         "<yellow>Triggering $Invoker for immediate (asynchronous) execution.</yellow>\n"
     );
 
-    my $TaskID = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->TaskAdd(
-        Type                     => 'GenericInterface',
-        Name                     => 'ConfigItemFetch_' . $Invoker,
-        MaximumParallelInstances => 1,
-        Data                     => $Self->{ConfigItemFetchTaskData},
-    );
+    my $Result = $Kernel::OM->Get('Kernel::GenericInterface::Requester')->Run( $Self->{ConfigItemFetchTaskData}->%* );
 
-    if ( !IsInteger($TaskID) ) {
-        $Self->PrintError('Could not trigger invoker');
-        return $Self->ExitCodeError();
-    }
-
-    if ( $TaskID == -1 ) {
-        $Self->Print("<yellow>Another $Invoker controller is already running. Please try again!</yellow>\n");
-        return $Self->ExitCodeError();
-    }
+# TODO: Think about just adding a task
+#    my $TaskID = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->TaskAdd(
+#        Type                     => 'GenericInterface',
+#        Name                     => 'ConfigItemFetch_' . $Invoker,
+#        MaximumParallelInstances => 1,
+#        Data                     => $Self->{ConfigItemFetchTaskData},
+#    );
+#
+#    if ( !IsInteger($TaskID) ) {
+#        $Self->PrintError('Could not trigger invoker');
+#        return $Self->ExitCodeError();
+#    }
+#
+#    if ( $TaskID == -1 ) {
+#        $Self->Print("<yellow>Another $Invoker controller is already running. Please try again!</yellow>\n");
+#        return $Self->ExitCodeError();
+#    }
 
     $Self->Print("<green>Done.</green>\n");
     return $Self->ExitCodeOk();

@@ -147,6 +147,11 @@ sub HandleResponse {
         );
     }
 
+    # remove toplevel ConfigItems if not given as direct array
+    if ( IsHashRefWithData( $Param{Data} ) && $Param{Data}{ConfigItems} ) {
+        $Param{Data} = $Param{Data}{ConfigItems};
+    }
+
     # transform to array reference
     if ( IsHashRefWithData( $Param{Data} ) ) {
         $Param{Data} = [ $Param{Data} ];
@@ -333,7 +338,7 @@ sub HandleResponse {
                 UserID       => 1,
             );
 
-            if ( !$ConfigItemID ) {
+            if ( !$Success ) {
 
                 return $Self->Error(
                     ErrorMessage => "Error while updating ConfigItemID $ConfigItemID!",
@@ -344,7 +349,9 @@ sub HandleResponse {
             $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                UserID  => 1,
+                DeplStateID => $RequiredAttributes{DeploymentStateID},
+                InciStateID => $RequiredAttributes{IncidentStateID},
+                UserID      => 1,
             );
 
             if ( !$ConfigItemID ) {

@@ -154,6 +154,24 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterface.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterfaceInvoker.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-01" Required="0" Valid="0" ConfigLevel="100">
         <Description Translatable="1">Triggers ConfigItemFetch invoker automatically.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
