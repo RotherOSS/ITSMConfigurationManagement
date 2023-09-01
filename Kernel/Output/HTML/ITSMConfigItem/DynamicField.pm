@@ -54,10 +54,7 @@ create a DynamicFieldOutput object. Do not use it directly, instead use:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 PageRender()

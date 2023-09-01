@@ -36,6 +36,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::ImportExport',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
 );
 
@@ -268,7 +269,6 @@ sub MappingObjectAttributesGet {
     # add elements
     push @Elements, $Self->_MappingObjectAttributesGet(
         DynamicFieldRef => $Definition->{DynamicFieldRef},    # page layout is ignored here
-        ElementList     => \@Elements,                        # TODO: return the elements
         CountMaxLimit   => $ObjectData->{CountMax} || 10,
     );
 
@@ -408,9 +408,9 @@ sub SearchAttributesGet {
 
 =head2 ExportDataGet()
 
-get export data as C<2D-array-hash> reference
+get export data as a reference to an array for array references, that is a C<2D-table>
 
-    my $ExportData = $ObjectBackend->ExportDataGet(
+    my $Rows = $ObjectBackend->ExportDataGet(
         TemplateID => 123,
         UserID     => 1,
     );
@@ -595,6 +595,9 @@ sub ExportDataGet {
         Result                => 'ARRAY',
     );
 
+    # JSON support might be needed for Set dynamic fields
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
     my @ExportData;
     CONFIGITEMID:
     for my $ConfigItemID (@ConfigItemIDs) {
@@ -660,8 +663,8 @@ sub ExportDataGet {
 
             # The Key encodes some extra information.
             # Note that the indexes start at 1 in the key names
-            # TODO: support for Set
             my ( $DFName, $IndexValue ) = split /::/, $Key;
+            $IndexValue //= -1;
             my $Value = $ConfigItem->{"DynamicField_$DFName"};
 
             if ( !defined $Value ) {
@@ -675,18 +678,25 @@ sub ExportDataGet {
                     push @Item, $Value->[ $IndexValue - 1 ] // '';
                 }
                 else {
-                    push @Item, '';
+
+                    # When in doubt then JSONify the value. A known case is the dynamic field type 'Set' where
+                    # the value is a nested data structure.
+                    push @Item, $JSONObject->Encode( Data => $Value );
                 }
 
                 next MAPPINGOBJECT;
             }
 
-            # else
-            {
-                push @Item, $Value;
+            if ( ref $Value ) {
 
-                next MAPPINGOBJECT;
+                # When in doubt then JSONify the value. Not sure whether this ever occurs.
+                push @Item, $JSONObject->Encode( Data => $Value );
             }
+            else {
+                push @Item, $Value;
+            }
+
+            next MAPPINGOBJECT;
         }
 
         push @ExportData, \@Item;
