@@ -19,6 +19,13 @@ package Kernel::Modules::AdminITSMConfigItem;
 use strict;
 use warnings;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -313,12 +320,81 @@ sub Run {
         return $LayoutObject->ErrorScreen() if ref $DefinitionRef ne 'HASH';
 
         # add to database
-        my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+        my $Result = $ConfigItemObject->DefinitionAdd(
             %Definition,
             UserID => $Self->{UserID},
         );
 
-        return $LayoutObject->ErrorScreen() if !$DefinitionID;
+        # display change screen with error if check failed
+        if ( IsHashRefWithData($Result) && $Result->{Error} ) {
+
+            my %Error = (
+                Error        => $Result->{Error},
+                ErrorClasses => 'ServerError Error',
+            );
+
+            # get class list
+            my $ClassList = $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::ConfigItem::Class',
+            );
+
+            # generate ClassOptionStrg
+            my $ClassOptionStrg = $LayoutObject->BuildSelection(
+                Data         => $ClassList,
+                Name         => 'ClassID',
+                PossibleNone => 1,
+                Translation  => 0,
+                SelectedID   => $Definition{ClassID},
+                Class        => 'Modernize',
+            );
+
+            # output overview
+            $LayoutObject->Block(
+                Name => 'Overview',
+                Data => {
+                    ClassOptionStrg => $ClassOptionStrg,
+                    ClassSelected   => {
+                        ID   => $Definition{ClassID},
+                        Name => $ClassList->{ $Definition{ClassID} },
+                    },
+                    Edit => 1,
+                },
+            );
+
+            # output overview result
+            $LayoutObject->Block(
+                Name => 'DefinitionChange',
+                Data => {
+                    %Definition,
+                    %Error,
+                    ClassID => $Definition{ClassID},
+                    Class   => $ClassList->{ $Definition{ClassID} },
+                    Rows    =>
+                        $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
+                        || 30,
+                },
+            );
+
+            # ActionOverview
+            $LayoutObject->Block(
+                Name => 'ActionOverview',
+            );
+
+            # output header
+            my $Output = $LayoutObject->Header();
+            $Output .= $LayoutObject->NavigationBar();
+
+            # generate output
+            $Output .= $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => {
+                    %Param,
+                },
+            );
+            $Output .= $LayoutObject->Footer();
+
+            return $Output;
+        }
 
         my $ContinueAfterSave = $ParamObject->GetParam( Param => 'ContinueAfterSave' );
         if ($ContinueAfterSave) {
