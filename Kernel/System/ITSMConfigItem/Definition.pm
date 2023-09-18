@@ -377,10 +377,12 @@ sub DefinitionCheck {
     }
 
     my $YAMLObject  = $Kernel::OM->Get('Kernel::System::YAML');
-    my $ErrorString = '';
-
-    # TODO are warnings wanted? (currently implemented: section defined but not used in pages)
-    my $WarningString = '';
+    my $ReturnError = sub {
+        return {
+            Success => 0,
+            Error   => $_[0],
+        };
+    };
 
     my $DefinitionRef = $YAMLObject->Load(
         Data => $Param{Definition},
@@ -388,221 +390,129 @@ sub DefinitionCheck {
 
     # YAML invalid
     if ( !IsHashRefWithData($DefinitionRef) ) {
-        $ErrorString = Translatable('Base structure is not valid. Please provide an array with data in YAML format.');
+        return $ReturnError->( Translatable('Base structure is not valid. Please provide an array with data in YAML format.') );
     }
-    else {
 
-        # check first level data format
-        my %ExpectedFormat = (
-            Pages    => 'Array',
-            Sections => 'Hash',
-        );
-        FIRST_LEVEL_CHECK:
-        for my $Key (qw(Pages Sections)) {
-            my $FunctionName = \&{"Is$ExpectedFormat{$Key}RefWithData"};
+    # check first level data format
+    my %ExpectedFormat = (
+        Pages    => 'Array',
+        Sections => 'Hash',
+    );
+    for my $Key (qw(Pages Sections)) {
+        my $FunctionName = \&{"Is$ExpectedFormat{$Key}RefWithData"};
 
-            # either pages or sections data invalid
-            if ( !$DefinitionRef->{$Key} ) {
-                $ErrorString = Translatable("$Key is missing. Please provide data for $Key in the definition.");
-                last FIRST_LEVEL_CHECK;
-            }
-            elsif ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
-                $ErrorString = Translatable("Data for $Key is not a $ExpectedFormat{$Key}. Please correct the syntax.");
-                last FIRST_LEVEL_CHECK;
-            }
-            elsif ( !( $FunctionName->( $DefinitionRef->{$Key} ) ) ) {
-                $ErrorString = Translatable("Data for $Key is empty. Please provide data for $Key in the definition.");
-                last FIRST_LEVEL_CHECK;
+        # either pages or sections data invalid
+        if ( !$DefinitionRef->{$Key} ) {
+            return $ReturnError->( Translatable("$Key is missing. Please provide data for $Key in the definition.") );
+        }
+        elsif ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
+            return $ReturnError->( Translatable("Data for $Key is not a $ExpectedFormat{$Key}. Please correct the syntax.") );
+        }
+        elsif ( !( $FunctionName->( $DefinitionRef->{$Key} ) ) ) {
+            return $ReturnError->( Translatable("Data for $Key is empty. Please provide data for $Key in the definition.") );
+        }
+    }
+
+    # check second level data format
+    my %SectionNames;
+
+    # check structure for defined pages
+    for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
+        my $Page = $DefinitionRef->{Pages}->[$PageIndex];
+        for my $Needed (qw(Name Content)) {
+            if ( !$Page->{$Needed} ) {
+                return $ReturnError->( Translatable("Key '$Needed' is missing in the definition of page $PageIndex.") );
             }
         }
 
-        if ($ErrorString) {
-            return {
-                Success => 0,
-                Error   => $ErrorString,
-            };
+        # check structure for defined page content data
+        if ( ref $Page->{Content} ne 'ARRAY' ) {
+            return $ReturnError->( Translatable("Key Content for page $PageIndex is not an Array.") );
         }
+        elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
+            return $ReturnError->( Translatable("Key Content for page $PageIndex is empty.") );
+        }
+        else {
 
-        # check second level data format
-        my %SectionNames;
+            # check structure for defined page content sections
+            for my $SectionIndex ( 0 .. $#{ $Page->{Content} } ) {
+                my $Section = $Page->{Content}->[$SectionIndex];
 
-        # check structure for defined pages
-        SECOND_LEVEL_CHECK:
-        for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
-            my $Page = $DefinitionRef->{Pages}->[$PageIndex];
-            for my $Needed (qw(Name Content)) {
-                if ( !$Page->{$Needed} ) {
-                    $ErrorString = Translatable("Key '$Needed' is missing in the definition of page $PageIndex.");
-                    last SECOND_LEVEL_CHECK;
+                if ( !$Section ) {
+                    return $ReturnError->( Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.") );
                 }
-            }
+                elsif ( ref $Section ne 'HASH' ) {
+                    return $ReturnError->( Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.") );
+                }
+                elsif ( !$Section->%* ) {
+                    return $ReturnError->( Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.") );
+                }
 
-            # check structure for defined page content data
-            if ( ref $Page->{Content} ne 'ARRAY' ) {
-                $ErrorString = "Key Content for page $PageIndex is not an Array.";
-            }
-            elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
-                $ErrorString = "Key Content for page $PageIndex is empty.";
-            }
-            else {
+                if ( !$Section->{Section} ) {
+                    return $ReturnError->( Translatable("A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.") );
+                }
+                else {
 
-                # check structure for defined page content sections
-                for my $SectionIndex ( 0 .. $#{ $Page->{Content} } ) {
-                    my $Section = $Page->{Content}->[$SectionIndex];
-
-                    if ( !$Section ) {
-                        $ErrorString = Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.");
-                        last SECOND_LEVEL_CHECK;
-                    }
-                    elsif ( ref $Section ne 'HASH' ) {
-                        $ErrorString = Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.");
-                        last SECOND_LEVEL_CHECK;
-                    }
-                    elsif ( !$Section->%* ) {
-                        $ErrorString = Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.");
-                        last SECOND_LEVEL_CHECK;
-                    }
-
-                    if ( !$Section->{Section} ) {
-                        $ErrorString = "A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.";
-                        last SECOND_LEVEL_CHECK;
-                    }
-                    else {
-
-                        # store section name for checking data integrity later on
-                        $SectionNames{ $Section->{Section} } = 1;
-                    }
+                    # store section name for checking data integrity later on
+                    $SectionNames{ $Section->{Section} } = 1;
                 }
             }
         }
+    }
 
-        if ($ErrorString) {
-            return {
-                Success => 0,
-                Error   => $ErrorString,
-            };
+    my %DefinedDynamicFields;
+
+    # sections data in pages content are valid, go on checking
+    for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
+
+        # remove defined sections to later identify undefined ones
+        delete $SectionNames{$SectionName};
+
+        my $Section = $DefinitionRef->{Sections}{$SectionName};
+
+        if ( !$Section || !IsHashRefWithData($Section) ) {
+            return $ReturnError->( Translatable("Either the content of section $SectionName is entirely missing or not a hash.") );
         }
 
-        my %DefinedDynamicFields;
-
-        # sections data in pages content are valid, go on checking
-        DEFINED_SECTIONS_CHECK:
-        for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
-            if ( !$SectionNames{$SectionName} ) {
-                $WarningString = "Section $SectionName is defined, but not used in Pages.";
-            }
-
-            # remove defined sections to later identify undefined ones
-            delete $SectionNames{$SectionName};
-
-            my $Section = $DefinitionRef->{Sections}{$SectionName};
-
-            if ( !$Section || !IsHashRefWithData($Section) ) {
-                $ErrorString = "Either the content of section $SectionName is entirely missing or not a hash.";
-                last DEFINED_SECTIONS_CHECK;
-            }
-
-            if ( !$Section->{Content} ) {
-                $ErrorString = "Key 'Content' is missing in section $SectionName.";
-                last DEFINED_SECTIONS_CHECK;
-            }
-            elsif ( !IsArrayRefWithData( $Section->{Content} ) ) {
-                $ErrorString = "Data for 'Content' in section $SectionName is not an array.";
-                last DEFINED_SECTIONS_CHECK;
-            }
-
-            for my $ContentItem ( $Section->{Content}->@* ) {
-                if ( !$ContentItem->{DF} ) {
-                    $ErrorString = "Section $SectionName has content which doesn't provide a dynamic field name with 'DF' as key.";
-                    last DEFINED_SECTIONS_CHECK;
-                }
-                $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
-            }
+        if ( !$Section->{Content} ) {
+            return $ReturnError->( Translatable("Key 'Content' is missing in section $SectionName.") );
+        }
+        elsif ( !IsArrayRefWithData( $Section->{Content} ) ) {
+            return $ReturnError->( Translatable("Data for 'Content' in section $SectionName is not an array.") );
         }
 
-        if ($ErrorString) {
-            return {
-                Success => 0,
-                Error   => $ErrorString,
-            };
-        }
-
-        # check if pages hold sections that are not defined
-        if (%SectionNames) {
-            $ErrorString = "The following section names are used in pages, but not defined in sections: " . join( ', ', keys %SectionNames );
-        }
-
-        if ($ErrorString) {
-            return {
-                Success => 0,
-                Error   => $ErrorString,
-            };
-        }
-
-        # check if all used dynamic fields are valid
-        my $DFID2NameListRef = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
-            Valid      => 1,
-            ObjectType => ['ITSMConfigItem'],
-            ResultType => 'HASH',
-        );
-
-        my %DFName2IDList = reverse $DFID2NameListRef->%*;
-
-        # TODO abort afer each df mistake or collect them and return them as a list? (perhaps useful approach for the whole thing?)
-        DF_CHECK:
-        for my $DefinedFieldName ( keys %DefinedDynamicFields ) {
-
-            # check with dynamic field list
-            if ( !$DFName2IDList{$DefinedFieldName} ) {
-                $ErrorString
-                    = "Dynamic field $DefinedFieldName is used in section $DefinedDynamicFields{$DefinedFieldName}, but does not exist in the system. Perhaps you forgot to create it or misspelled its name?";
-                last DF_CHECK;
+        for my $ContentItem ( $Section->{Content}->@* ) {
+            if ( !$ContentItem->{DF} ) {
+                return $ReturnError->( Translatable("Section $SectionName has content which doesn't provide a dynamic field name with 'DF' as key.") );
             }
+            $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
         }
     }
 
-    if ($ErrorString) {
-        return {
-            Success => 0,
-            Error   => $ErrorString,
-        };
+    if ( %SectionNames ) {
+        return $ReturnError->( Translatable("The following sections are used in pages, but not defined: " . join(', ', keys %SectionNames)) );
     }
 
-=for never
+    # check if all used dynamic fields are valid
+    my $DFID2NameListRef = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
+        Valid      => 1,
+        ObjectType => ['ITSMConfigItem'],
+        ResultType => 'HASH',
+    );
 
-    # check each definition attribute
-    for my $Attribute ( @{$Definition} ) {
+    my %DFName2IDList = reverse $DFID2NameListRef->%*;
 
-        # each definition attribute must be a hash reference with data
-        if ( !$Attribute || ref $Attribute ne 'HASH' || !%{$Attribute} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Invalid Definition! At least one definition attribute is not a hash reference.',
+    for my $DefinedFieldName ( keys %DefinedDynamicFields ) {
+
+        # check with dynamic field list
+        if ( !$DFName2IDList{$DefinedFieldName} ) {
+            return $ReturnError->(
+                Translatable(
+                    "Dynamic field $DefinedFieldName is used in section $DefinedDynamicFields{$DefinedFieldName}, but does not exist in the system. Perhaps you forgot to create it or misspelled its name?"
+                )
             );
-            return;
-        }
-
-        # check if the key contains no spaces
-        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ \s }xms ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain whitespace!",
-            );
-            return;
-        }
-
-        # check if the key contains non-ascii characters
-        if ( $Attribute->{Key} && $Attribute->{Key} =~ m{ ([^\x{00}-\x{7f}]) }xms ) {
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Invalid Definition! Key '$Attribute->{Key}' must not contain non ASCII characters '$1'!",
-            );
-            return;
         }
     }
-
-=cut
 
     return {
         Success => 1,
