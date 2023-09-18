@@ -276,11 +276,11 @@ sub DefinitionAdd {
     }
 
     # check definition
-    my $Check = $Self->DefinitionCheck(
+    my $CheckResult = $Self->DefinitionCheck(
         Definition => $Param{Definition},
     );
 
-    return if !$Check;
+    return $CheckResult if !$CheckResult->{Success};
 
     # get last definition
     my $LastDefinition = $Self->DefinitionGet(
@@ -376,47 +376,199 @@ sub DefinitionCheck {
         return;
     }
 
-    # if check sub elements is enabled, we must not YAML load it
-    # because this has been done in an earlier recursion step already
-    my $Definition;
-    if ( $Param{CheckSubElement} ) {
-        $Definition = $Param{Definition};
+    my $YAMLObject  = $Kernel::OM->Get('Kernel::System::YAML');
+    my $ErrorString = '';
+
+    # TODO are warnings wanted? (currently implemented: section defined but not used in pages)
+    my $WarningString = '';
+
+    my $DefinitionRef = $YAMLObject->Load(
+        Data => $Param{Definition},
+    );
+
+    # YAML invalid
+    if ( !IsHashRefWithData($DefinitionRef) ) {
+        $ErrorString = Translatable('Base structure is not valid. Please provide an array with data in YAML format.');
     }
     else {
-        if ( substr( $Param{Definition}, 0, 3 ) ne '---' ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Definition must be a YAML string",
-            );
-            return;
+
+        # check first level data format
+        my %ExpectedFormat = (
+            Pages    => 'Array',
+            Sections => 'Hash',
+        );
+        FIRST_LEVEL_CHECK:
+        for my $Key (qw(Pages Sections)) {
+            my $FunctionName = \&{"Is$ExpectedFormat{$Key}RefWithData"};
+
+            # either pages or sections data invalid
+            if ( !$DefinitionRef->{$Key} ) {
+                $ErrorString = Translatable("$Key is missing. Please provide data for $Key in the definition.");
+                last FIRST_LEVEL_CHECK;
+            }
+            elsif ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
+                $ErrorString = Translatable("Data for $Key is not a $ExpectedFormat{$Key}. Please correct the syntax.");
+                last FIRST_LEVEL_CHECK;
+            }
+            elsif ( !( $FunctionName->( $DefinitionRef->{$Key} ) ) ) {
+                $ErrorString = Translatable("Data for $Key is empty. Please provide data for $Key in the definition.");
+                last FIRST_LEVEL_CHECK;
+            }
         }
 
-        $Definition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
-            Data => $Param{Definition},
+        if ($ErrorString) {
+            return {
+                Success => 0,
+                Error   => $ErrorString,
+            };
+        }
+
+        # check second level data format
+        my %SectionNames;
+
+        # check structure for defined pages
+        SECOND_LEVEL_CHECK:
+        for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
+            my $Page = $DefinitionRef->{Pages}->[$PageIndex];
+            for my $Needed (qw(Name Content)) {
+                if ( !$Page->{$Needed} ) {
+                    $ErrorString = Translatable("Key '$Needed' is missing in the definition of page $PageIndex.");
+                    last SECOND_LEVEL_CHECK;
+                }
+            }
+
+            # check structure for defined page content data
+            if ( ref $Page->{Content} ne 'ARRAY' ) {
+                $ErrorString = "Key Content for page $PageIndex is not an Array.";
+            }
+            elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
+                $ErrorString = "Key Content for page $PageIndex is empty.";
+            }
+            else {
+
+                # check structure for defined page content sections
+                for my $SectionIndex ( 0 .. $#{ $Page->{Content} } ) {
+                    my $Section = $Page->{Content}->[$SectionIndex];
+
+                    if ( !$Section ) {
+                        $ErrorString = Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.");
+                        last SECOND_LEVEL_CHECK;
+                    }
+                    elsif ( ref $Section ne 'HASH' ) {
+                        $ErrorString = Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.");
+                        last SECOND_LEVEL_CHECK;
+                    }
+                    elsif ( !$Section->%* ) {
+                        $ErrorString = Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.");
+                        last SECOND_LEVEL_CHECK;
+                    }
+
+                    if ( !$Section->{Section} ) {
+                        $ErrorString = "A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.";
+                        last SECOND_LEVEL_CHECK;
+                    }
+                    else {
+
+                        # store section name for checking data integrity later on
+                        $SectionNames{ $Section->{Section} } = 1;
+                    }
+                }
+            }
+        }
+
+        if ($ErrorString) {
+            return {
+                Success => 0,
+                Error   => $ErrorString,
+            };
+        }
+
+        my %DefinedDynamicFields;
+
+        # sections data in pages content are valid, go on checking
+        DEFINED_SECTIONS_CHECK:
+        for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
+            if ( !$SectionNames{$SectionName} ) {
+                $WarningString = "Section $SectionName is defined, but not used in Pages.";
+            }
+
+            # remove defined sections to later identify undefined ones
+            delete $SectionNames{$SectionName};
+
+            my $Section = $DefinitionRef->{Sections}{$SectionName};
+
+            if ( !$Section || !IsHashRefWithData($Section) ) {
+                $ErrorString = "Either the content of section $SectionName is entirely missing or not a hash.";
+                last DEFINED_SECTIONS_CHECK;
+            }
+
+            if ( !$Section->{Content} ) {
+                $ErrorString = "Key 'Content' is missing in section $SectionName.";
+                last DEFINED_SECTIONS_CHECK;
+            }
+            elsif ( !IsArrayRefWithData( $Section->{Content} ) ) {
+                $ErrorString = "Data for 'Content' in section $SectionName is not an array.";
+                last DEFINED_SECTIONS_CHECK;
+            }
+
+            for my $ContentItem ( $Section->{Content}->@* ) {
+                if ( !$ContentItem->{DF} ) {
+                    $ErrorString = "Section $SectionName has content which doesn't provide a dynamic field name with 'DF' as key.";
+                    last DEFINED_SECTIONS_CHECK;
+                }
+                $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
+            }
+        }
+
+        if ($ErrorString) {
+            return {
+                Success => 0,
+                Error   => $ErrorString,
+            };
+        }
+
+        # check if pages hold sections that are not defined
+        if (%SectionNames) {
+            $ErrorString = "The following section names are used in pages, but not defined in sections: " . join( ', ', keys %SectionNames );
+        }
+
+        if ($ErrorString) {
+            return {
+                Success => 0,
+                Error   => $ErrorString,
+            };
+        }
+
+        # check if all used dynamic fields are valid
+        my $DFID2NameListRef = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
+            Valid      => 1,
+            ObjectType => ['ITSMConfigItem'],
+            ResultType => 'HASH',
         );
+
+        my %DFName2IDList = reverse $DFID2NameListRef->%*;
+
+        # TODO abort afer each df mistake or collect them and return them as a list? (perhaps useful approach for the whole thing?)
+        DF_CHECK:
+        for my $DefinedFieldName ( keys %DefinedDynamicFields ) {
+
+            # check with dynamic field list
+            if ( !$DFName2IDList{$DefinedFieldName} ) {
+                $ErrorString
+                    = "Dynamic field $DefinedFieldName is used in section $DefinedDynamicFields{$DefinedFieldName}, but does not exist in the system. Perhaps you forgot to create it or misspelled its name?";
+                last DF_CHECK;
+            }
+        }
     }
 
-    # check if definition exists at all
-    if ( !$Definition ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Invalid Definition! You have an syntax error in the definition.',
-        );
-        return;
+    if ($ErrorString) {
+        return {
+            Success => 0,
+            Error   => $ErrorString,
+        };
     }
-
-    # TODO: add real check, check valid keys etc.
 
 =for never
-
-    # definition must be an array
-    if ( ref $Definition ne 'ARRAY' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Invalid Definition! Definition is not an array reference.',
-        );
-        return;
-    }
 
     # check each definition attribute
     for my $Attribute ( @{$Definition} ) {
@@ -448,35 +600,13 @@ sub DefinitionCheck {
             );
             return;
         }
-
-        # recursion check for Sub-Elements
-        for my $Key ( sort keys %{$Attribute} ) {
-
-            my $Value = $Attribute->{$Key};
-
-            if ( $Key eq 'Sub' && ref $Value eq 'ARRAY' ) {
-
-                # check the sub array
-                my $Check = $Self->DefinitionCheck(
-                    Definition      => $Value,
-                    CheckSubElement => 1,
-                );
-
-                if ( !$Check ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  =>
-                            "Invalid Sub-Definition of element with the key '$Attribute->{Key}'.",
-                    );
-                    return;
-                }
-            }
-        }
     }
 
 =cut
 
-    return 1;
+    return {
+        Success => 1,
+    };
 }
 
 =head2 DefinitionNeedSync()
