@@ -183,7 +183,7 @@
                     <fieldset class="TableLike">
 
 [% IF Data.Error %]
-                        <div class="WidgetSimple WidgetMessage Top Error" style="margin-left: 5px !important; margin-right: 5px !important; text-align: center;">
+                        <div class="WidgetSimple WidgetMessage Top Error">
                             <div class="Content">[% Data.Error | html %]</div>
                         </div>
                         <div class="Clear"></div>
