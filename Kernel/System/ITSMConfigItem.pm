@@ -883,6 +883,11 @@ sub ConfigItemUpdate {
         }
     }
 
+    # get latest definition for the class
+    my $Definition = $Self->DefinitionGet(
+        ClassID => $ConfigItem->{ClassID},
+    );
+
     # TODO: Think about DefinitionID changes
 
     # check for changed dynamic fields to trigger versions and filter history entries
@@ -893,6 +898,8 @@ sub ConfigItemUpdate {
         # dynamic fields
         DYNAMICFIELD:
         for my $Name (@DynamicFieldNames) {
+            next DYNAMICFIELD unless $Definition->{DynamicFieldRef}{$Name};
+
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $Name,
             );
