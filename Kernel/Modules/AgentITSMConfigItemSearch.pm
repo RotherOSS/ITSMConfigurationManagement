@@ -625,9 +625,8 @@ sub Run {
                 next CONFIGITEMID if !$HasAccess;
 
                 # get version
-                my $LastVersion = $ConfigItemObject->VersionGet(
+                my $LastVersion = $ConfigItemObject->ConfigItemGet(
                     ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 0,
                 );
 
                 # csv quote
@@ -729,9 +728,8 @@ sub Run {
                 next CONFIGITEMID if !$HasAccess;
 
                 # get version
-                my $LastVersion = $ConfigItemObject->VersionGet(
+                my $LastVersion = $ConfigItemObject->ConfigItemGet(
                     ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 0,
                 );
 
                 # set pdf rows

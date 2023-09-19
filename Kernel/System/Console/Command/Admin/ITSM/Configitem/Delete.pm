@@ -162,7 +162,7 @@ sub Run {
     if ($All) {
 
         # get all config items ids
-        my @ConfigItemIDs = @{ $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch() };
+        my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch( Result => 'ARRAY' );
 
         # get number of config items
         my $CICount = scalar @ConfigItemIDs;
