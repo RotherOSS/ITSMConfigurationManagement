@@ -212,7 +212,7 @@ sub Run {
     # handle added or removed links
     if ( $Param{Event} eq 'LinkAdd' || $Param{Event} eq 'LinkDelete' ) {
         my $ConfigItemID = $Param{Data}->{ConfigItemID};
-        my $Version      = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+        my $Version      = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
         );
 
@@ -271,7 +271,7 @@ sub Run {
 
                 CONFIGITEMID:
                 for my $ConfigItemID (@LinkedCIs) {
-                    my $Version = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionGet(
+                    my $Version = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
                         ConfigItemID => $ConfigItemID,
                     );
 
