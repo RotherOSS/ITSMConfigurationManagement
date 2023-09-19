@@ -61,7 +61,7 @@
         <Value>
             <Hash>
                 <Item Key="ConfigItem" Translatable="1">ConfigItem</Item>
-                <Item Key="Action" Translatable="1">Action</Item>
+                <Item Key="Frontend" Translatable="1">Frontend</Item>
             </Hash>
         </Value>
     </Setting>
