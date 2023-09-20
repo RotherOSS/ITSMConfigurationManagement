@@ -19,6 +19,8 @@ package Kernel::System::ITSMConfigItem::Definition;
 use strict;
 use warnings;
 
+use List::Util qw(any);
+
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -460,7 +462,9 @@ sub DefinitionCheck {
         }
     }
 
+    my @Grids;
     my %DefinedDynamicFields;
+    my @NeededContentEntry = qw/DF Grid Header/;
 
     # sections data in pages content are valid, go on checking
     for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
@@ -478,14 +482,32 @@ sub DefinitionCheck {
             return $ReturnError->( Translatable("Key 'Content' is missing in section $SectionName.") );
         }
         elsif ( !IsArrayRefWithData( $Section->{Content} ) ) {
-            return $ReturnError->( Translatable("Data for 'Content' in section $SectionName is not an array.") );
+            return $ReturnError->( sprintf Translatable("Data for 'Content' in section %s is not an array."), $SectionName );
         }
 
+        my @Grids;
         for my $ContentItem ( $Section->{Content}->@* ) {
-            if ( !$ContentItem->{DF} ) {
-                return $ReturnError->( Translatable("Section $SectionName has content which doesn't provide a dynamic field name with 'DF' as key.") );
+            if ( !any { $ContentItem->{$_} } @NeededContentEntry ) {
+                return $ReturnError->( Translatable("Section $SectionName has content which doesn't provide one of the following entries <@NeededContentEntry>.") );
             }
-            $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
+            if ( $ContentItem->{DF} ) {
+                $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
+            }
+            elsif ( $ContentItem->{Grid} ) {
+                push @Grids, $ContentItem->{Grid};
+            }
+        }
+
+        for my $GridItem ( @Grids ) {
+            # TODO some more basic checks
+            for my $Row ( $GridItem->{Rows}->@* ) {
+                for my $Cell ( $Row->@* ) {
+                    if ( !$Cell->{DF} ) {
+                        return $ReturnError->( sprintf Translatable("Data for 'Content' of %s contains a grid without DF in a cell."), $SectionName );
+                    }
+                    $DefinedDynamicFields{ $Cell->{DF} } = $SectionName;
+                }
+            }
         }
     }
 
