@@ -654,11 +654,11 @@ END_SQL
 
     for my $Name ( @UpdatedDynamicFields ) {
         # prepare readable values for the history
-        my $ReadableValue => $DynamicFieldBackendObject->ReadableValueRender(
+        my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
             Value              => $Version{ 'DynamicField_' . $Name },
         );
-        my $ReadableOldValue => $DynamicFieldBackendObject->ReadableValueRender(
+        my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
             Value              => $LastVersion->{ 'DynamicField_' . $Name },
         );
@@ -818,11 +818,11 @@ END_SQL
 
     for my $Name ( @UpdatedDynamicFields ) {
         # prepare readable values for the history
-        my $ReadableValue => $DynamicFieldBackendObject->ReadableValueRender(
+        my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
             Value              => $Param{ 'DynamicField_' . $Name },
         );
-        my $ReadableOldValue => $DynamicFieldBackendObject->ReadableValueRender(
+        my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
             Value              => $Version->{ 'DynamicField_' . $Name },
         );
