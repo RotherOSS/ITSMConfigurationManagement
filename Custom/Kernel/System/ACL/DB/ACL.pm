@@ -1309,8 +1309,10 @@ sub ACLImport {
     }
 
     # update preselection cache
-    my $FieldRestrictionsObject = $Kernel::OM->Get('Kernel::System::Ticket::FieldRestrictions');
-    $FieldRestrictionsObject->SetACLPreselectionCache();
+    for my $ACLType ( qw(Ticket ITSMConfigItem) ) {
+        $Kernel::OM->Get('Kernel::System::' . $ACLType . '::FieldRestrictions')->SetACLPreselectionCache();
+    }
+
 
     return {
         Success     => 1,
