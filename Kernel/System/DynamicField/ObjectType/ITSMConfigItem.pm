@@ -146,7 +146,6 @@ sub PostValueSet {
     return 1 if $Param{ConfigItemHandled};
 
     # all needed params are checked by the backend before
-
     my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $CacheObject               = $Kernel::OM->Get('Kernel::System::Cache');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -156,11 +155,11 @@ sub PostValueSet {
     # delete cache
     $CacheObject->Delete(
         Type => $ConfigItemObject->{CacheType},
-        Key  => 'ConfigItemGet::VersionID::' . $Param{ObjectID} . '::1',
+        Key  => 'ConfigItemGet::VersionID::' . $Param{ObjectID} . '::DFData::1',
     );
     $CacheObject->Delete(
         Type => $ConfigItemObject->{CacheType},
-        Key  => 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::1',
+        Key  => 'ConfigItemGet::ConfigItemID::' . $ConfigItemID . '::DFData::1',
     );
 
     # prepare readable values for the history,

@@ -1525,6 +1525,7 @@ sub UniqueNameCheck {
     return \@Duplicates;
 }
 
+# TODO: Check
 =head2 CurInciStateRecalc()
 
 recalculates the current incident state of this config item and all linked config items
@@ -1711,26 +1712,20 @@ sub CurInciStateRecalc {
         );
 
         # TODO: Instead of deleting, if present, update cache with new cur_inci
+        # TODO: Also the VersionID-caches have to be considered, they also contain CurInciState
         # delete the cache
         for my $DFData ( 0, 1 ) {
             $CacheObject->Delete(
                 Type => $Self->{CacheType},
                 Key  => join(
-                    'ConfigItemGet',
+                    '::', 'ConfigItemGet',
                     ConfigItemID => $ConfigItemID,
                     DFData       => $DFData
                 ),
             );
         }
 
-        # delete affected caches for ConfigItemID
-        # TODO: XMLData cache is no longer used
-        for my $XMLData (qw(0 1)) {
-            $CacheObject->Delete(
-                Type => $Self->{CacheType},
-                Key  => 'VersionGet::ConfigItemID::' . $ConfigItemID . '::XMLData::' . $XMLData,
-            );
-        }
+        # TODO: not necessary, is it?
         $CacheObject->Delete(
             Type => $Self->{CacheType},
             Key  => 'VersionNameGet::ConfigItemID::' . $ConfigItemID,
@@ -1743,14 +1738,6 @@ sub CurInciStateRecalc {
         );
         my $VersionID = $VersionList->[-1];
 
-        # TODO: XMLData cache is no longer used
-        # TODO: VersionGet has been removed
-        for my $XMLData (qw(0 1)) {
-            $CacheObject->Delete(
-                Type => $Self->{CacheType},
-                Key  => 'VersionGet::VersionID::' . $VersionID . '::XMLData::' . $XMLData,
-            );
-        }
         $CacheObject->Delete(
             Type => $Self->{CacheType},
             Key  => 'VersionNameGet::VersionID::' . $VersionID,

@@ -173,11 +173,9 @@ sub _HistoryAdd {
     my ( $Self, %Param ) = @_;
 
     # add history entry
-    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->HistoryAdd(
+    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->HistoryAdd(
         %Param,
     );
-
-    return 1;
 }
 
 1;

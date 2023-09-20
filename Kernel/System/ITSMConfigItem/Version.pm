@@ -606,6 +606,7 @@ END_SQL
     );
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my @UpdatedDynamicFields;
 
     DYNAMICFIELD:
     for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
@@ -621,32 +622,7 @@ END_SQL
 
         # only throw events for fields changed from the last version - checked by ConfigItemUpdate()
         if ( $Success && exists $Param{ 'DynamicField_' . $DynamicField->{Name} } ) {
-
-            # prepare readable values for the history
-            my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
-                DynamicFieldConfig => $DynamicField,
-                Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
-            );
-            my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
-                DynamicFieldConfig => $DynamicField,
-                Value              => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
-            );
-
-            # trigger dynamic field update event
-            $Self->EventHandler(
-                Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
-                Data  => {
-                    FieldName           => $DynamicField->{Name},
-                    Value               => $Version{ 'DynamicField_' . $DynamicField->{Name} },
-                    OldValue            => $LastVersion->{ 'DynamicField_' . $DynamicField->{Name} },
-                    ReadableValue       => $ReadableValue->{Value},
-                    ReadableOldValue    => $ReadableOldValue->{Value},
-                    ConfigItemID        => $Version{ConfigItemID},
-                    ConfigItemVersionID => $VersionID,
-                    UserID              => $Param{UserID},
-                },
-                UserID => $Param{UserID},
-            );
+            push @UpdatedDynamicFields, $DynamicField->{Name};
         }
     }
 
@@ -673,6 +649,34 @@ END_SQL
                 ConfigItemID => $Version{ConfigItemID},
                 DFData       => $DFData
             ),
+        );
+    }
+
+    for my $Name ( @UpdatedDynamicFields ) {
+        # prepare readable values for the history
+        my $ReadableValue => $DynamicFieldBackendObject->ReadableValueRender(
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
+            Value              => $Version{ 'DynamicField_' . $Name },
+        );
+        my $ReadableOldValue => $DynamicFieldBackendObject->ReadableValueRender(
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
+            Value              => $LastVersion->{ 'DynamicField_' . $Name },
+        );
+
+        # trigger dynamic field update event
+        $Self->EventHandler(
+            Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
+            Data  => {
+                FieldName           => $Name,
+                Value               => $Version{ 'DynamicField_' . $Name },
+                OldValue            => $LastVersion->{ 'DynamicField_' . $Name },
+                ReadableValue       => $ReadableValue->{Value},
+                ReadableOldValue    => $ReadableOldValue->{Value},
+                ConfigItemID        => $Version{ConfigItemID},
+                ConfigItemVersionID => $VersionID,
+                UserID              => $Param{UserID},
+            },
+            UserID => $Param{UserID},
         );
     }
 
@@ -765,6 +769,7 @@ END_SQL
     );
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my @UpdatedDynamicFields;
 
     DYNAMICFIELD:
     for my $Attribute ( keys %Param ) {
@@ -781,32 +786,7 @@ END_SQL
         );
 
         if ($Success) {
-
-            # prepare readable values for the history
-            my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
-                DynamicFieldConfig => $DynamicField,
-                Value              => $Param{ 'DynamicField_' . $DynamicField->{Name} },
-            );
-            my $ReadableOldValue = $DynamicFieldBackendObject->ReadableValueRender(
-                DynamicFieldConfig => $DynamicField,
-                Value              => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
-            );
-
-            # trigger dynamic field update event
-            $Self->EventHandler(
-                Event => 'ConfigItemDynamicFieldUpdate_' . $DynamicField->{Name},
-                Data  => {
-                    FieldName           => $DynamicField->{Name},
-                    Value               => $Param{ 'DynamicField_' . $DynamicField->{Name} },
-                    OldValue            => $Version->{ 'DynamicField_' . $DynamicField->{Name} },
-                    ReadableValue       => $ReadableValue->{Value},
-                    ReadableOldValue    => $ReadableOldValue->{Value},
-                    ConfigItemID        => $Version->{ConfigItemID},
-                    ConfigItemVersionID => $Version->{VersionID},
-                    UserID              => $Param{UserID},
-                },
-                UserID => $Param{UserID},
-            );
+            push @UpdatedDynamicFields, $DynamicField->{Name};
         }
     }
 
@@ -835,6 +815,34 @@ END_SQL
         Type => $Self->{CacheType},
         Key  => join( '::', 'VersionNameGet', VersionID => $Version->{VersionID} ),
     );
+
+    for my $Name ( @UpdatedDynamicFields ) {
+        # prepare readable values for the history
+        my $ReadableValue => $DynamicFieldBackendObject->ReadableValueRender(
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
+            Value              => $Param{ 'DynamicField_' . $Name },
+        );
+        my $ReadableOldValue => $DynamicFieldBackendObject->ReadableValueRender(
+            DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
+            Value              => $Version->{ 'DynamicField_' . $Name },
+        );
+
+        # trigger dynamic field update event
+        $Self->EventHandler(
+            Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
+            Data  => {
+                FieldName           => $Name,
+                Value               => $Param{ 'DynamicField_' . $Name },
+                OldValue            => $Version->{ 'DynamicField_' . $Name },
+                ReadableValue       => $ReadableValue->{Value},
+                ReadableOldValue    => $ReadableOldValue->{Value},
+                ConfigItemID        => $Version->{ConfigItemID},
+                ConfigItemVersionID => $Version->{VersionID},
+                UserID              => $Param{UserID},
+            },
+            UserID => $Param{UserID},
+        );
+    }
 
     if ($CurInciStateRecalc) {
 
