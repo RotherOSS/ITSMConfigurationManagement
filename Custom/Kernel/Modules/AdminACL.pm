@@ -401,7 +401,7 @@ sub Run {
             # remove preselection cache TODO: rebuild the cache properly (a simple $FieldRestrictionsObject->SetACLPreselectionCache(); uses the old ACLs)
             my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
             $CacheObject->Delete(
-                Type => 'TicketACL',      # only [a-zA-Z0-9_] chars usable
+                Type => $Param{ObjectType} . 'ACL',      # only [a-zA-Z0-9_] chars usable
                 Key  => 'Preselection',
             );
 
