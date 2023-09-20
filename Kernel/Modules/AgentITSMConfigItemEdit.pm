@@ -336,12 +336,12 @@ sub Run {
 
     my $Autoselect = $ConfigObject->Get('ConfigItemACL::Autoselect') || undef;
     my $ACLPreselection;
-    if ( $ConfigObject->Get('TicketACL::ACLPreselection') ) {
+    if ( $ConfigObject->Get('ConfigItemACL::ACLPreselection') ) {
 
         # get cached preselection rules
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
         $ACLPreselection = $CacheObject->Get(
-            Type => 'TicketACL',
+            Type => 'ConfigItemACL',
             Key  => 'Preselection',
         );
         if ( !$ACLPreselection ) {
