@@ -36,6 +36,79 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => 
 
 my $RandomID = $Helper->GetRandomID();
 
+my @ConfigItemPerlDefinitions;
+
+# define the first test definition (basic definition without DynamicFields)
+$ConfigItemPerlDefinitions[0] = " [
+{
+        Pages  => [
+            {
+                Name => 'Content',
+                Layout => {
+                    Columns => 2,
+                    ColumnWidth => '1fr 1fr'
+                },
+                Content => [
+                    {
+                        Section => 'Section1',
+                        ColumnStart => 1,
+                        RowStart => 1
+                    },
+                    {
+                        Section => 'Section2',
+                        ColumnStart => 2,
+                        RowStart => 1
+                    }
+                ],
+            }
+        ]
+}
+]";
+
+# define the second test definition (definition with DynamicFields)
+$ConfigItemPerlDefinitions[1] = " [
+{
+        Pages  => [
+            {
+                Name => 'Content',
+                Layout => {
+                    Columns => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section => 'Section1',
+                        ColumnStart => 1,
+                        RowStart => 1
+                    }
+                ],
+            }
+        ],
+        Sections => {
+            Section1 => {
+                Content => [
+                    {
+                        DF => 'Test1'
+                    },
+                    {
+                        DF => 'Test2'
+                    }
+                ]
+            }
+        },
+}
+]";
+
+my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+my @ConfigItemDefinitions;
+for my $PerlDefinition (@ConfigItemPerlDefinitions) {
+    my $YAMLDefinition = $YAMLObject->Dump(
+        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
+    );
+    push @ConfigItemDefinitions, $YAMLDefinition;
+}
+
 my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     Class   => 'ITSM::ConfigItem::Class',
     Name    => $RandomID,
@@ -48,39 +121,24 @@ $Self->True(
 );
 
 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-my $DefinitionID1    = $ConfigItemObject->DefinitionAdd(
-    ClassID    => $ClassID,
-    UserID     => $UserID,
-    CreateBy   => $UserID,
-    Definition => << 'EOF',
----
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-EOF
+
+my $DefinitionID1 = $ConfigItemObject->DefinitionAdd(
+    ClassID      => $ClassID,
+    UserID       => $UserID,
+    CreateBy     => $UserID,
+    Definition  => $ConfigItemDefinitions[0]
 );
+
 $Self->True(
     $DefinitionID1,
     "DefinitionAdd()",
 );
+
 my $DefinitionID2 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
     UserID     => $UserID,
     CreateBy   => $UserID,
-    Definition => << 'EOF',
----
-- Key: Vendor
-  Name: Vendor
-  Searchable: 0
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-EOF
+    Definition => $ConfigItemDefinitions[1]
 );
 
 $Self->True(
@@ -102,31 +160,43 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => [
             {
-                CreateBy   => $UserID,
+                CreateBy     => $UserID,
                 Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    - ColumnStart: 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
                 Version      => 1,
-                DefinitionID => $DefinitionID1,
+                DefinitionID => $DefinitionID1,                
             },
             {
                 CreateBy   => $UserID,
                 Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 0
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    Layout:
+      ColumnWidth: 1fr
+      Columns: 1
+    Name: Content
+  Sections:
+    Section1:
+      Content:
+      - DF: Test1
+      - DF: Test2
 EOF
                 Version      => 2,
                 DefinitionID => $DefinitionID2,

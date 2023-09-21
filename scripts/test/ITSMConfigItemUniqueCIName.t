@@ -93,11 +93,44 @@ if ( !$SecondClassID ) {
 push @ConfigItemClassIDs, $SecondClassID;
 push @ConfigItemClasses,  $SecondClassName;
 
+my @ConfigItemPerlDefinitions;
+
+$ConfigItemPerlDefinitions[0] = " [
+{
+        Pages  => [
+            {
+                Name => 'Content',
+                Layout => {
+                    Columns => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section => 'Section1',
+                        ColumnStart => 1,
+                        RowStart => 1
+                    }
+                ],
+            }
+        ]
+}
+]";
+
+my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+my @ConfigItemDefinitions;
+for my $PerlDefinition (@ConfigItemPerlDefinitions) {
+    my $YAMLDefinition = $YAMLObject->Dump(
+        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
+    );
+    push @ConfigItemDefinitions, $YAMLDefinition;
+}
+
 # add an empty definition to the class. the definition doesn't need any elements, as we're only
 # testing the name which isn't part of the definition, but of the config item itself
 my $FirstDefinitionID = $ConfigItemObject->DefinitionAdd(
     ClassID    => $FirstClassID,
-    Definition => "--- []",
+    Definition => $ConfigItemDefinitions[0],
     UserID     => 1,
 );
 
@@ -114,7 +147,7 @@ push @ConfigItemDefinitionIDs, $FirstDefinitionID;
 
 my $SecondDefinitionID = $ConfigItemObject->DefinitionAdd(
     ClassID    => $SecondClassID,
-    Definition => "--- []",
+    Definition => $ConfigItemDefinitions[0],
     UserID     => 1,
 );
 
@@ -129,12 +162,27 @@ if ( !$SecondDefinitionID ) {
 
 push @ConfigItemDefinitionIDs, $SecondDefinitionID;
 
+# get deployment state list
+my $DeplStateList = $GeneralCatalogObject->ItemList(
+    Class => 'ITSM::ConfigItem::DeploymentState',
+);
+my %DeplStateListReverse = reverse %{$DeplStateList};
+
+# get incident state list
+my $InciStateList = $GeneralCatalogObject->ItemList(
+    Class => 'ITSM::Core::IncidentState',
+);
+my %InciStateListReverse = reverse %{$InciStateList};
+
 my @ConfigItemIDs;
 
 # add a configitem to each class
 my $FirstConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID => $FirstClassID,
-    UserID  => 1,
+    ClassID      => $FirstClassID,
+    Name         => $NamePrefix . 'First#001',
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},                
+    UserID       => 1,
 );
 
 if ( !$FirstConfigItemID ) {
@@ -147,8 +195,11 @@ if ( !$FirstConfigItemID ) {
 push @ConfigItemIDs, $FirstConfigItemID;
 
 my $SecondConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID => $SecondClassID,
-    UserID  => 1,
+    ClassID      => $SecondClassID,
+    Name         => $NamePrefix . 'Second#001',
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},                
+    UserID       => 1,
 );
 
 if ( !$SecondConfigItemID ) {
@@ -162,8 +213,11 @@ push @ConfigItemIDs, $SecondConfigItemID;
 
 # create a 3rd configitem in the 2nd class
 my $ThirdConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID => $SecondClassID,
-    UserID  => 1,
+    ClassID      => $SecondClassID,
+    Name         => $NamePrefix . 'Second#002',
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},                
+    UserID       => 1,
 );
 
 if ( !$ThirdConfigItemID ) {
@@ -175,20 +229,8 @@ if ( !$ThirdConfigItemID ) {
 
 push @ConfigItemIDs, $ThirdConfigItemID;
 
-# get deployment state list
-my $DeplStateList = $GeneralCatalogObject->ItemList(
-    Class => 'ITSM::ConfigItem::DeploymentState',
-);
-my %DeplStateListReverse = reverse %{$DeplStateList};
-
-# get incident state list
-my $InciStateList = $GeneralCatalogObject->ItemList(
-    Class => 'ITSM::Core::IncidentState',
-);
-my %InciStateListReverse = reverse %{$InciStateList};
-
 # set a name for each configitem
-my $FirstInitialVersionID = $ConfigItemObject->VersionAdd(
+my $FirstInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     Name         => $NamePrefix . 'First#001',
     DefinitionID => $FirstDefinitionID,
@@ -204,7 +246,7 @@ if ( !$FirstInitialVersionID ) {
     );
 }
 
-my $SecondInitialVersionID = $ConfigItemObject->VersionAdd(
+my $SecondInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     Name         => $NamePrefix . 'Second#001',
     DefinitionID => $SecondDefinitionID,
@@ -220,7 +262,7 @@ if ( !$SecondInitialVersionID ) {
     );
 }
 
-my $ThirdInitialVersionID = $ConfigItemObject->VersionAdd(
+my $ThirdInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $ThirdConfigItemID,
     Name         => $NamePrefix . 'Second#002',
     DefinitionID => $SecondDefinitionID,
@@ -261,8 +303,9 @@ $ConfigObject->Set(
 my $RenameSuccess;
 
 # try to give the 1st configitem the same name as the 2nd one
-$RenameSuccess = $ConfigItemObject->VersionAdd(
+$RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
+    ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
     DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
@@ -276,8 +319,9 @@ $Self->False(
 );
 
 # try to give the 2nd configitem the same name as the 3rd one
-$RenameSuccess = $ConfigItemObject->VersionAdd(
+$RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
+    ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
     DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
@@ -297,8 +341,9 @@ $ConfigObject->Set(
 );
 
 # try to rename First#001 again to Second#001 which should work now, due to the different class
-$RenameSuccess = $ConfigItemObject->VersionAdd(
+$RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
+    ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
     DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
@@ -312,8 +357,9 @@ $Self->True(
 );
 
 # trying now to create a duplicate name within a class
-$RenameSuccess = $ConfigItemObject->VersionAdd(
+$RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
+    ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
     DefinitionID => $SecondDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},

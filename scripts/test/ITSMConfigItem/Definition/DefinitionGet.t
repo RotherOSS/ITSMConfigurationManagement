@@ -55,30 +55,46 @@ my %DefinitionTemplate = (
     Version    => 1,
     Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    - ColumnStart: 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
     DefinitionRef => [
         {
-            Key        => 'Vendor',
-            Name       => 'Vendor',
-            Searchable => 1,
-            Input      => {
-                Type      => 'Text',
-                Size      => 50,
-                MaxLength => 50,
-            },
-            CountMin     => 1,
-            CountMax     => 1,
-            CountDefault => 1,
-        },
+            Pages  => [
+                {
+                    Name => 'Content',
+                    Layout => {
+                        Columns => '2',
+                        ColumnWidth => '1fr 1fr'
+                    },
+                    Content => [
+                        {
+                            Section => 'Section1',
+                            ColumnStart => '1',
+                            RowStart => '1'
+                        },
+                        {
+                            Section => 'Section2',
+                            ColumnStart => '2',
+                            RowStart => '1'
+                        }
+                    ],
+                }
+            ]
+        }
     ],
 );
+
 my $DefinitionID = $ConfigItemObject->DefinitionAdd(
     %DefinitionTemplate,
     UserID => $UserID,
@@ -103,6 +119,7 @@ my @Tests = (
         ExpectedResults => {
             %DefinitionTemplate,
             DefinitionID => $DefinitionID,
+            DynamicFieldRef => {},
         },
     },
     {
@@ -114,6 +131,7 @@ my @Tests = (
         ExpectedResults => {
             %DefinitionTemplate,
             DefinitionID => $DefinitionID,
+            DynamicFieldRef => {},
         },
     },
 );
