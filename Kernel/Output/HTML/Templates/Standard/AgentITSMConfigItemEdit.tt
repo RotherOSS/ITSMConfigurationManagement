@@ -41,7 +41,7 @@
 [% RenderBlockStart("RowName") %]
                         <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]: </label>
                         <div class="Field">
-                            <input type="text" name="Name" id="Name" class="W50pc Validate_Required [% Data.RowNameInvalid | html %]" maxlength="250" value="[% Data.Name | html %]" title="[% Translate("The name of this config item") | html %]"/>
+                            <input type="text" name="Name" id="Name" class="W50pc Validate_Required [% Data.RowNameInvalid | html %]" maxlength="250" value="[% Data.Name | html %]" title="[% Translate("The name of this config item") | html %]"[% IF Data.Readonly %] readonly[% END %]/>
                             <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
 [% RenderBlockStart("RowNameErrorDefault") %]
                             <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>

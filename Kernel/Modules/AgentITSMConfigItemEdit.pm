@@ -195,30 +195,6 @@ sub Run {
             #    $GetParam{$Param} = ;
             #}
             #}
-
-            # check for name module based on classname
-            my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-
-            if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
-                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
-
-                # check if name module exists
-                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "Can't load name module for class $ConfigItem->{Class}!",
-                    );
-
-                    return;
-                }
-
-                # create a backend object
-                my $NameModuleObject = $NameModule->new( %{$Self} );
-
-                # get name from name module backend
-                $ConfigItemName = $NameModuleObject->GetFreeName();
-            }
-            $GetParam{Name} = $ConfigItemName;
         }
 
         else {
@@ -355,7 +331,25 @@ sub Run {
     my %DynamicFieldValidationResult;
     my %DynamicFieldPossibleValues;
     my %DynamicFieldVisibility;
+    my $NameModuleObject;
     if ( $Self->{Subaction} eq 'Save' ) {
+        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+        if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load name module for class $ConfigItem->{Class}!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            $NameModuleObject = $Kernel::OM->Get( $NameModule );
+        }
 
         # get the uploaded attachment
         my %UploadStuff = $ParamObject->GetUploadAll(
@@ -375,10 +369,19 @@ sub Run {
         my $AllRequired = 1;
 
         # get general form data
-        for my $Param (qw(Name DeplStateID InciStateID)) {
+        for my $Param (qw(DeplStateID InciStateID)) {
             $ConfigItem->{$Param} = $GetParam{$Param};
 
             if ( !$ConfigItem->{$Param} ) {
+                $AllRequired = 0;
+            }
+        }
+
+        # get name only if it is not filled by a module
+        if ( !$NameModuleObject ) {
+            $ConfigItem->{Name} = $GetParam{Name};
+
+            if ( !$ConfigItem->{Name} ) {
                 $AllRequired = 0;
             }
         }
@@ -786,6 +789,24 @@ sub Run {
         );
     }
     else {
+        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+        if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load name module for class $ConfigItem->{Class}!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            $NameModuleObject = $Kernel::OM->Get( $NameModule );
+        }
+
         my $LoopProtection = 100;
 
         # get values and visibility of dynamic fields
@@ -814,51 +835,30 @@ sub Run {
         %DynamicFieldPossibleValues = map { 'DynamicField_' . $_ => $DynFieldStates{Fields}{$_}{PossibleValues} } keys $DynFieldStates{Fields}->%*;
     }
 
-    # output name invalid block
-    my $RowNameInvalid = '';
-    if ( !$ConfigItem->{Name} && $Self->{Subaction} eq 'Save' ) {
-        $RowNameInvalid = 'ServerError';
-    }
-
-    # check for name duplicates
-    if ( IsArrayRefWithData($NameDuplicates) ) {
-        $RowNameInvalid = 'ServerError';
-    }
-
-    # check for not matched name regex
-    if ($CINameRegexErrorMessage) {
-        $RowNameInvalid = 'ServerError';
-    }
+    my $NameEditable   = $NameModuleObject ? 0 : 1;
+    my $RowNameInvalid = $ConfigItem->{Name}
+        # if a name exists mark regex and duplicate errors
+        ? $CINameRegexErrorMessage || IsArrayRefWithData($NameDuplicates)
+            ? 'ServerError' : undef
+        # if it does not exist mark it, if it should
+        : $Self->{Subaction} eq 'Save' && $NameEditable
+            ? 'ServerError' : undef;
 
     # output name block
-    $LayoutObject->Block(
-        Name => 'RowName',
-        Data => {
-            %GetParam,
-            RowNameInvalid => $RowNameInvalid,
-        },
-    );
-
-    if (
-        IsStringWithData($RowNameInvalid)
-        && !IsArrayRefWithData($NameDuplicates)
-        && !$CINameRegexErrorMessage
-        )
-    {
-
-        if ( $ConfigObject->{Debug} > 0 ) {
-            $LogObject->Log(
-                Priority => 'debug',
-                Message  => "Rendering default error block",
-            );
-        }
-
+    if ( $ConfigItem->{Name} || $NameEditable ) {
+        # output name block
         $LayoutObject->Block(
-            Name => 'RowNameErrorDefault',
+            Name => 'RowName',
+            Data => {
+                %GetParam,
+                RowNameInvalid => $RowNameInvalid,
+                Readonly       => !$NameEditable,
+            },
         );
     }
-    elsif ( IsArrayRefWithData($NameDuplicates) ) {
 
+    # show specific errors
+    if ( IsArrayRefWithData($NameDuplicates) ) {
         # build array with CI-Numbers
         my @NameDuplicatesByCINumber;
         for my $ConfigItemID ( @{$NameDuplicates} ) {
@@ -888,14 +888,24 @@ sub Run {
             },
         );
     }
-
     elsif ($CINameRegexErrorMessage) {
-
         $LayoutObject->Block(
             Name => 'RowNameErrorRegEx',
             Data => {
                 RegExErrorMessage => $CINameRegexErrorMessage,
             },
+        );
+    }
+    elsif ( $RowNameInvalid ) {
+        if ( $ConfigObject->{Debug} > 0 ) {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message  => "Rendering default error block",
+            );
+        }
+
+        $LayoutObject->Block(
+            Name => 'RowNameErrorDefault',
         );
     }
 

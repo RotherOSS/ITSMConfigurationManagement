@@ -462,12 +462,13 @@ sub ConfigItemAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(ClassID UserID DeplStateID InciStateID Name)) {
+    for my $Argument (qw(ClassID UserID DeplStateID InciStateID)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -543,6 +544,7 @@ sub ConfigItemAdd {
                 Priority => 'error',
                 Message  => 'Config item number already exists!',
             );
+
             return;
         }
     }
@@ -555,7 +557,38 @@ sub ConfigItemAdd {
         );
     }
 
-    # TODO: Also do this in CIUpdate
+    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+    my $NameModuleObject;
+    if ( $NameModuleConfig && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
+            );
+
+            return;
+        }
+
+        # create a backend object
+        $NameModuleObject = $Kernel::OM->Get( $NameModule );
+
+        # override possible incoming name
+        $Param{Name} = $NameModuleObject->ConfigItemNameCreate( %Param );
+    }
+
+    # check needed stuff II
+    if ( !$Param{Name} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Name!",
+        );
+
+        return;
+    }
+
     # check, whether the feature to check for a unique name is enabled
     if ( $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck') ) {
 
@@ -590,11 +623,17 @@ sub ConfigItemAdd {
         Bind => [ \$Param{Number}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{ClassID}, \$Param{UserID}, \$Param{UserID} ],
     );
 
-    return unless $Success;
+    if ( !$Success ) {
+        if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
+            $NameModuleObject->ConfigItemNameDelete($Param{Name});
+        }
+
+        return;
+    }
 
     # find id of new item
     # TODO: what about concurrent INSERTs ???
-    ( $Param{ConfigItemID} ) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+    my ( $ConfigItemID ) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id
   FROM configitem
@@ -605,52 +644,46 @@ END_SQL
         Bind => [ \$Param{Number}, \$Param{ClassID} ],
     );
 
-    # check for name module
-    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-
-    if ( IsHashRefWithData($NameModuleConfig) && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-
-        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
-
-        # check if name module exists
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
-            );
-
-            return;
-        }
-
-        # create a backend object
-        my $NameModuleObject = $NameModule->new( %{$Self} );
-
-        # set name used by configitem
-        $NameModuleObject->Set(
-            Name         => $Param{Name},
-            ConfigItemID => $Param{ConfigItemID},
-        );
-    }
-
     # add the first version
-    $Self->VersionAdd(
+    my $VersionID = $Self->VersionAdd(
         %Param,
-        LastVersion => {
+        ConfigItemID => $ConfigItemID,
+        LastVersion  => {
             ConfigItemID => $Param{ConfigItemID},
-        }
+        },
     );
+
+    if ( !$VersionID ) {
+        if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
+            $NameModuleObject->ConfigItemNameDelete($Param{Name});
+        }
+
+        # delete config item if no version could be created
+        $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL  => 'DELETE FROM configitem WHERE id = ?',
+            Bind => [ \$ConfigItemID ],
+        );
+
+        # write an error log message containing all the duplicate IDs
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Could not create version!",
+        );
+
+        return;
+    }
 
     # trigger ConfigItemCreate
     $Self->EventHandler(
         Event => 'ConfigItemCreate',
         Data  => {
-            ConfigItemID => $Param{ConfigItemID},
-            Comment      => $Param{ConfigItemID} . '%%' . $Param{Number},
+            ConfigItemID => $ConfigItemID,
+            Comment      => $ConfigItemID . '%%' . $Param{Number},
         },
         UserID => $Param{UserID},
     );
 
-    return $Param{ConfigItemID};
+    return $ConfigItemID;
 }
 
 =head2 ConfigItemDelete()
@@ -674,6 +707,7 @@ sub ConfigItemDelete {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -722,38 +756,25 @@ sub ConfigItemDelete {
         }
     }
 
-    # check for name module
     my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
+    if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItemData->{Class} } ) {
+        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{ $ConfigItemData->{Class} }";
 
-    if ( IsHashRefWithData($NameModuleConfig) ) {
-
-        # get class list
-        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        );
-
-        my $ConfigItemClass = $ClassList->{ $ConfigItemData->{ClassID} };
-
-        if ( $NameModuleConfig->{$ConfigItemClass} ) {
-
-            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItemClass}";
-
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load name module for class $ConfigItemClass!",
-                );
-
-                return;
-            }
-
+        # check if name module exists
+        if ( $Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
             # create a backend object
-            my $NameModuleObject = $NameModule->new( %{$Self} );
+            my $NameModuleObject = $Kernel::OM->Get( $NameModule );
 
-            # set name free
-            $NameModuleObject->Set(
-                Name => $ConfigItemData->{Name},
+            if ( $NameModuleObject->can('ConfigItemNameDelete') ) {
+                $NameModuleObject->ConfigItemNameDelete(
+                    Name => $ConfigItemData->{Name},
+                );
+            }
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ConfigItemData->{Class}!",
             );
         }
     }
@@ -770,6 +791,12 @@ sub ConfigItemDelete {
             Class        => $ConfigItemData->{Class},
         },
         UserID => $Param{UserID},
+    );
+
+    # delete versions
+    $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL  => 'DELETE FROM configitem_version WHERE configitem_id = ?',
+        Bind => [ \$Param{ConfigItemID} ],
     );
 
     # delete config item
@@ -860,6 +887,11 @@ sub ConfigItemUpdate {
         return;
     }
 
+    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
+    if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+        delete $Param{Name};
+    }
+
     my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
     my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{$Class} // [] };
 
@@ -942,50 +974,6 @@ sub ConfigItemUpdate {
         );
     }
 
-    if ( $Param{Name} ne $ConfigItem->{Name} ) {
-
-        # check for name module
-        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-
-        if ( IsHashRefWithData($NameModuleConfig) ) {
-
-            # get class list
-            my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-                Class => 'ITSM::ConfigItem::Class',
-            );
-
-            if ( $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-
-                my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
-
-                # check if name module exists
-                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "Can't load name module for class $ClassList->{$Param{ClassID}}!",
-                    );
-
-                    return;
-                }
-
-                # create a backend object
-                my $NameModuleObject = $NameModule->new( %{$Self} );
-
-                # set new name used
-                $NameModuleObject->Set(
-                    Name         => $Param{Name},
-                    ConfigItemID => $Param{ConfigItemID},
-                );
-
-                # set old name free
-                $NameModuleObject->Set(
-                    Name => $ConfigItem->{Name},
-                );
-            }
-        }
-
-    }
-
     my %Events = (
         Name        => 'NameUpdate',
         DeplStateID => 'DeploymentStateUpdate',
@@ -1000,18 +988,6 @@ sub ConfigItemUpdate {
                 Comment      => $Changed{$Key}{New} . '%%' . $Changed{$Key}{Old},
             },
             UserID => $Param{UserID},
-        );
-    }
-
-    # delete the cache
-    for my $DFData ( 0, 1 ) {
-        $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-            Type => $Self->{CacheType},
-            Key  => join(
-                'ConfigItemGet',
-                ConfigItemID => $Param{ConfigItemID},
-                DFData       => $DFData
-            ),
         );
     }
 
