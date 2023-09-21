@@ -18,7 +18,15 @@ package Kernel::Output::HTML::Dashboard::ITSMConfigItemGeneric;
 
 use strict;
 use warnings;
+use utf8;
+use namespace::autoclean;
 
+# core modules
+use List::Util qw(first);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -27,70 +35,365 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # Allocate new hash for object.
-    my $Self = {%Param};
+    # allocate new hash for object
+    my $Self = \%Param;
     bless( $Self, $Type );
 
-    # Get needed parameters.
+    # get needed parameters
     for my $Needed (qw(Config Name UserID)) {
         die "Got no $Needed!" if ( !$Self->{$Needed} );
     }
 
-    # Get param object.
+    # get param object
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    # Get current filter.
-    my $Name           = $ParamObject->GetParam( Param => 'Name' ) || '';
-    my $PreferencesKey = 'DashboardITSMConfigItemGeneric' . $Self->{Name};
-    if ( $Self->{Name} eq $Name ) {
-        $Self->{Filter} = $ParamObject->GetParam( Param => 'Filter' ) || '';
+    my $RemoveFilters = $ParamObject->GetParam( Param => 'RemoveFilters' ) || $Param{RemoveFilters} || 0;
+
+    # get sorting params
+    for my $Item (qw(SortBy OrderBy)) {
+        $Self->{$Item} = $ParamObject->GetParam( Param => $Item ) || $Param{$Item};
     }
 
-    # Get config object.
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    # Get add filters param.
+    $Self->{AddFilters} = $ParamObject->GetParam( Param => 'AddFilters' ) || $Param{AddFilters} || 0;
+    $Self->{TabAction}  = $ParamObject->GetParam( Param => 'TabAction' )  || $Param{TabAction}  || 0;
 
-    # Remember filter.
+    # Get previous sorting column.
+    $Self->{SortingColumn} = $ParamObject->GetParam( Param => 'SortingColumn' ) || $Param{SortingColumn};
+
+    # set filter settings
+    for my $Item (qw(ColumnFilter GetColumnFilter GetColumnFilterSelect)) {
+        $Self->{$Item} = $Param{$Item};
+    }
+
+    # save column filters
+    $Self->{PrefKeyColumnFilters}         = 'UserDashboardITSMConfigItemGenericColumnFilters' . $Self->{Name};
+    $Self->{PrefKeyColumnFiltersRealKeys} = 'UserDashboardITSMConfigItemGenericColumnFiltersRealKeys' . $Self->{Name};
+
+    # get needed objects
+    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+    if ($RemoveFilters) {
+        $UserObject->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Self->{PrefKeyColumnFilters},
+            Value  => '',
+        );
+        $UserObject->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Self->{PrefKeyColumnFiltersRealKeys},
+            Value  => '',
+        );
+    }
+
+    # just in case new filter values arrive
+    elsif (
+        IsHashRefWithData( $Self->{GetColumnFilter} )
+        && IsHashRefWithData( $Self->{GetColumnFilterSelect} )
+        && IsHashRefWithData( $Self->{ColumnFilter} )
+        )
+    {
+
+        if ( !$ConfigObject->Get('DemoSystem') ) {
+
+            # check if the user has filter preferences for this widget
+            my %Preferences = $UserObject->GetPreferences(
+                UserID => $Self->{UserID},
+            );
+            my $ColumnPrefValues;
+            if ( $Preferences{ $Self->{PrefKeyColumnFilters} } ) {
+                $ColumnPrefValues = $JSONObject->Decode(
+                    Data => $Preferences{ $Self->{PrefKeyColumnFilters} },
+                );
+            }
+
+            PREFVALUES:
+            for my $Column ( sort keys %{ $Self->{GetColumnFilterSelect} } ) {
+                if ( $Self->{GetColumnFilterSelect}->{$Column} eq 'DeleteFilter' ) {
+                    delete $ColumnPrefValues->{$Column};
+                    next PREFVALUES;
+                }
+                $ColumnPrefValues->{$Column} = $Self->{GetColumnFilterSelect}->{$Column};
+            }
+
+            $UserObject->SetPreferences(
+                UserID => $Self->{UserID},
+                Key    => $Self->{PrefKeyColumnFilters},
+                Value  => $JSONObject->Encode( Data => $ColumnPrefValues ),
+            );
+
+            # save real key's name
+            my $ColumnPrefRealKeysValues;
+            if ( $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} } ) {
+                $ColumnPrefRealKeysValues = $JSONObject->Decode(
+                    Data => $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} },
+                );
+            }
+            REALKEYVALUES:
+            for my $Column ( sort keys %{ $Self->{ColumnFilter} } ) {
+                next REALKEYVALUES if !$Column;
+
+                my $DeleteFilter = 0;
+                if ( IsArrayRefWithData( $Self->{ColumnFilter}->{$Column} ) ) {
+                    if ( grep { $_ eq 'DeleteFilter' } @{ $Self->{ColumnFilter}->{$Column} } ) {
+                        $DeleteFilter = 1;
+                    }
+                }
+                elsif ( IsHashRefWithData( $Self->{ColumnFilter}->{$Column} ) ) {
+
+                    if (
+                        grep { $Self->{ColumnFilter}->{$Column}->{$_} eq 'DeleteFilter' }
+                        keys %{ $Self->{ColumnFilter}->{$Column} }
+                        )
+                    {
+                        $DeleteFilter = 1;
+                    }
+                }
+
+                if ($DeleteFilter) {
+                    delete $ColumnPrefRealKeysValues->{$Column};
+                    delete $Self->{ColumnFilter}->{$Column};
+                    next REALKEYVALUES;
+                }
+                $ColumnPrefRealKeysValues->{$Column} = $Self->{ColumnFilter}->{$Column};
+            }
+            $UserObject->SetPreferences(
+                UserID => $Self->{UserID},
+                Key    => $Self->{PrefKeyColumnFiltersRealKeys},
+                Value  => $JSONObject->Encode( Data => $ColumnPrefRealKeysValues ),
+            );
+
+        }
+    }
+
+    # check if the user has filter preferences for this widget
+    my %Preferences = $UserObject->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # get column names from Preferences
+    my $PreferencesColumnFilters;
+    if ( $Preferences{ $Self->{PrefKeyColumnFilters} } ) {
+        $PreferencesColumnFilters = $JSONObject->Decode(
+            Data => $Preferences{ $Self->{PrefKeyColumnFilters} },
+        );
+    }
+
+    if ($PreferencesColumnFilters) {
+        $Self->{GetColumnFilterSelect} = $PreferencesColumnFilters;
+        my @ColumnFilters = keys %{$PreferencesColumnFilters};
+        for my $Field (@ColumnFilters) {
+            $Self->{GetColumnFilter}->{ $Field . $Self->{Name} } = $PreferencesColumnFilters->{$Field};
+        }
+    }
+
+    # get column real names from Preferences
+    my $PreferencesColumnFiltersRealKeys;
+    if ( $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} } ) {
+        $PreferencesColumnFiltersRealKeys = $JSONObject->Decode(
+            Data => $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} },
+        );
+    }
+
+    if ($PreferencesColumnFiltersRealKeys) {
+        my @ColumnFiltersReal = keys %{$PreferencesColumnFiltersRealKeys};
+        for my $Field (@ColumnFiltersReal) {
+            $Self->{ColumnFilter}->{$Field} = $PreferencesColumnFiltersRealKeys->{$Field};
+        }
+    }
+
+    # get current filter
+    my $Name                     = $ParamObject->GetParam( Param => 'Name' ) || '';
+    my $PreferencesKey           = 'UserDashboardITSMConfigItemGenericFilter' . $Self->{Name};
+    my $AdditionalPreferencesKey = 'UserDashboardITSMConfigItemGenericAdditionalFilter' . $Self->{Name};
+    if ( $Self->{Name} eq $Name ) {
+        $Self->{Filter}           = $ParamObject->GetParam( Param => 'Filter' )           || '';
+        $Self->{AdditionalFilter} = $ParamObject->GetParam( Param => 'AdditionalFilter' ) || '';
+    }
+
+    # Remember the selected filter in the session.
     if ( $Self->{Filter} ) {
 
-        # Update session.
+        # update session
         $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
             SessionID => $Self->{SessionID},
             Key       => $PreferencesKey,
             Value     => $Self->{Filter},
         );
 
-        # Update preferences.
+        # update preferences
         if ( !$ConfigObject->Get('DemoSystem') ) {
-            $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+            $UserObject->SetPreferences(
                 UserID => $Self->{UserID},
                 Key    => $PreferencesKey,
                 Value  => $Self->{Filter},
             );
         }
     }
-
-    # Set default filter if not set yet.
-    if ( !$Self->{Filter} ) {
+    else {
         $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'All';
     }
 
-    # Setup the prefrences keys.
-    $Self->{PrefKeyShown}   = 'DashboardITSMConfigItemGeneric' . $Self->{Name} . '-Shown';
-    $Self->{PrefKeyRefresh} = 'DashboardITSMConfigItemGeneric' . $Self->{Name} . '-Refresh';
+    # The additional filter are at the moment only relevant for the customer user information center.
+    if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
-    $Self->{PageShown} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
-        || $Self->{Config}->{Limit} || 10;
+        # Remember the selected filter in the session.
+        if ( $Self->{AdditionalFilter} ) {
 
-    $Self->{PageRefresh} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyRefresh} }
-        || 1;
+            # update session
+            $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+                SessionID => $Self->{SessionID},
+                Key       => $AdditionalPreferencesKey,
+                Value     => $Self->{AdditionalFilter},
+            );
 
+            # update preferences
+            if ( !$ConfigObject->Get('DemoSystem') ) {
+                $UserObject->SetPreferences(
+                    UserID => $Self->{UserID},
+                    Key    => $AdditionalPreferencesKey,
+                    Value  => $Self->{AdditionalFilter},
+                );
+            }
+        }
+        else {
+            $Self->{AdditionalFilter} = $Self->{$AdditionalPreferencesKey} || $Self->{Config}->{AdditionalFilter} || 'AssignedToCustomerUser';
+        }
+    }
+
+    $Self->{PrefKeyShown}   = 'UserDashboardPref' . $Self->{Name} . '-Shown';
+    $Self->{PrefKeyColumns} = 'UserDashboardPref' . $Self->{Name} . '-Columns';
+    $Self->{PageShown}      = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
+        || $Self->{Config}->{Limit};
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
+
+    # hash with all valid sortable columns (taken from ITSMConfigItemSearch)
+    # SortBy  => 'Age',   # Created|Number|Changed|Name|DeplState|CurDeplState
+    # |InciState|CurInciState
+    $Self->{ValidSortableColumns} = {
+        'Age'            => 1,
+        'Number'         => 1,
+        'Name'           => 1,
+        'Created'        => 1,
+        'LastChanged'    => 1,
+        'DeplState'      => 1,
+        'CurDeplState'   => 1,
+        'InciState'      => 1,
+        'CurInciState'   => 1,
+        'CustomerID'     => 1,
+        'CustomerUserID' => 1,
+    };
+
+    # define filterable columns
+    $Self->{ValidFiltrableColumns} = {
+        'Class'          => 1,
+        'DeplState'      => 1,
+        'CurDeplState'   => 1,
+        'InciState'      => 1,
+        'CurInciState'   => 1,
+        'CustomerID'     => 1,
+        'CustomerUserID' => 1,
+    };
+
+    # remove CustomerID if Customer Information Center
+    if ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
+        delete $Self->{ColumnFilter}->{CustomerID};
+        delete $Self->{GetColumnFilter}->{CustomerID};
+        delete $Self->{GetColumnFilterSelect}->{CustomerID};
+        delete $Self->{ValidFiltrableColumns}->{CustomerID};
+        delete $Self->{ValidSortableColumns}->{CustomerID};
+    }
+    elsif (
+        $Self->{Action} eq 'AgentCustomerUserInformationCenter'
+        && $Self->{AdditionalFilter} eq 'AssignedToCustomerUser'
+        )
+    {
+
+        for my $DeleteColumnFilter (qw(CustomerUserLogin CustomerUserLoginRaw)) {
+            delete $Self->{ColumnFilter}->{$DeleteColumnFilter};
+            delete $Self->{GetColumnFilter}->{$DeleteColumnFilter};
+        }
+        delete $Self->{GetColumnFilter}->{CustomerUserID};
+        delete $Self->{GetColumnFilterSelect}->{CustomerUserID};
+        delete $Self->{ValidFiltrableColumns}->{CustomerUserID};
+    }
 
     return $Self;
 }
 
 sub Preferences {
     my ( $Self, %Param ) = @_;
+
+    # configure columns
+    my @ColumnsEnabled;
+    my @ColumnsAvailable;
+    my @ColumnsAvailableNotEnabled;
+
+    # check for default settings
+    if (
+        $Self->{Config}->{DefaultColumns}
+        && IsHashRefWithData( $Self->{Config}->{DefaultColumns} )
+        )
+    {
+        @ColumnsAvailable = grep { $Self->{Config}->{DefaultColumns}->{$_} }
+            keys %{ $Self->{Config}->{DefaultColumns} };
+        @ColumnsEnabled = grep { $Self->{Config}->{DefaultColumns}->{$_} eq '2' }
+            sort { $Self->_DefaultColumnSort() } keys %{ $Self->{Config}->{DefaultColumns} };
+    }
+
+    # check if the user has filter preferences for this widget
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # get JSON object
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    # if preference settings are available, take them
+    if ( $Preferences{ $Self->{PrefKeyColumns} } ) {
+
+        my $ColumnsEnabled = $JSONObject->Decode(
+            Data => $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyColumns} },
+        );
+
+        @ColumnsEnabled = grep { $ColumnsEnabled->{Columns}->{$_} == 1 }
+            keys %{ $ColumnsEnabled->{Columns} };
+
+        if ( $ColumnsEnabled->{Order} && @{ $ColumnsEnabled->{Order} } ) {
+            @ColumnsEnabled = @{ $ColumnsEnabled->{Order} };
+        }
+
+        # remove duplicate columns
+        my %UniqueColumns;
+        my @ColumnsEnabledAux;
+
+        for my $Column (@ColumnsEnabled) {
+            if ( !$UniqueColumns{$Column} ) {
+                push @ColumnsEnabledAux, $Column;
+            }
+            $UniqueColumns{$Column} = 1;
+        }
+
+        # set filtered column list
+        @ColumnsEnabled = @ColumnsEnabledAux;
+    }
+
+    my %Columns;
+    for my $ColumnName ( sort { $a cmp $b } @ColumnsAvailable ) {
+        $Columns{Columns}->{$ColumnName} = ( grep { $ColumnName eq $_ } @ColumnsEnabled ) ? 1 : 0;
+        if ( !grep { $_ eq $ColumnName } @ColumnsEnabled ) {
+            push @ColumnsAvailableNotEnabled, $ColumnName;
+        }
+    }
+
+    # remove CustomerID if Customer Information Center
+    if ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
+        delete $Columns{Columns}->{CustomerID};
+        @ColumnsEnabled             = grep { $_ ne 'CustomerID' } @ColumnsEnabled;
+        @ColumnsAvailableNotEnabled = grep { $_ ne 'CustomerID' } @ColumnsAvailableNotEnabled;
+    }
 
     my @Params = (
         {
@@ -103,10 +406,19 @@ sub Preferences {
                 15 => '15',
                 20 => '20',
                 25 => '25',
-                30 => '30',
+                50 => '50',
             },
             SelectedID  => $Self->{PageShown},
             Translation => 0,
+        },
+        {
+            Desc             => Translatable('Shown Columns'),
+            Name             => $Self->{PrefKeyColumns},
+            Block            => 'AllocationList',
+            Columns          => $JSONObject->Encode( Data => \%Columns ),
+            ColumnsEnabled   => $JSONObject->Encode( Data => \@ColumnsEnabled ),
+            ColumnsAvailable => $JSONObject->Encode( Data => \@ColumnsAvailableNotEnabled ),
+            Translation      => 1,
         },
     );
 
@@ -116,434 +428,413 @@ sub Preferences {
 sub Config {
     my ( $Self, %Param ) = @_;
 
+    # check if frontend module of link is used
+    if ( $Self->{Config}->{Link} && $Self->{Config}->{Link} =~ /Action=(.+?)([&;].+?|)$/ ) {
+        my $Action = $1;
+        if ( !$Kernel::OM->Get('Kernel::Config')->Get('Frontend::Module')->{$Action} ) {
+            $Self->{Config}->{Link} = '';
+        }
+    }
+
     return (
         %{ $Self->{Config} },
 
-        # Remember, do not allow to use page cache
-        # (it's not working because of internal filter)
-        CacheKey => undef,
+        # Don't cache this globally as it contains JS that is not inside of the HTML.
         CacheTTL => undef,
+        CacheKey => undef,
     );
+}
+
+sub FilterContent {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{FilterColumn};
+
+    my $ConfigItemIDs;
+    my $HeaderColumn = $Param{FilterColumn};
+    my @OriginalViewableConfigItems;
+
+    if (
+        # TODO check
+        $Kernel::OM->Get('Kernel::Config')->Get('OnlyValuesOnConfigItem')
+        || $HeaderColumn eq 'CustomerID'
+        || $HeaderColumn eq 'CustomerUserID'
+        )
+    {
+        my %SearchParams            = $Self->_SearchParamsGet(%Param);
+        my %ConfigItemSearch        = %{ $SearchParams{ConfigItemSearch} };
+        my %ConfigItemSearchSummary = %{ $SearchParams{ConfigItemSearchSummary} };
+
+        # Add the additional filter to the config item search param.
+        if ( $Self->{AdditionalFilter} ) {
+            %ConfigItemSearch = (
+                %ConfigItemSearch,
+                %{ $ConfigItemSearchSummary{ $Self->{AdditionalFilter} } },
+            );
+        }
+    }
+
+    if ( $HeaderColumn =~ m/^DynamicField_/ && !defined $Self->{DynamicField} ) {
+
+        # get the dynamic fields for this screen
+        $Self->{DynamicField} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+            Valid      => 0,
+            ObjectType => ['ITSMConfigItem'],
+        );
+    }
+
+    # get column values for to build the filters later
+    my $ColumnValues = $Self->_GetColumnValues(
+        OriginalConfigItemIDs => \@OriginalViewableConfigItems,
+        HeaderColumn          => $HeaderColumn,
+    );
+
+    # make sure that even a value of 0 is passed as a Selected value, e.g. Unchecked value of a
+    # check-box dynamic field.
+    my $SelectedValue = defined $Self->{GetColumnFilter}->{ $HeaderColumn . $Self->{Name} }
+        ? $Self->{GetColumnFilter}->{ $HeaderColumn . $Self->{Name} }
+        : '';
+
+    my $LabelColumn = $HeaderColumn;
+    if ( $LabelColumn =~ m{ \A DynamicField_ }xms ) {
+
+        my $DynamicFieldConfig;
+        $LabelColumn =~ s{\A DynamicField_ }{}xms;
+
+        DYNAMICFIELD:
+        for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+            next DYNAMICFIELD if $DFConfig->{Name} ne $LabelColumn;
+
+            $DynamicFieldConfig = $DFConfig;
+            last DYNAMICFIELD;
+        }
+        if ( IsHashRefWithData($DynamicFieldConfig) ) {
+            $LabelColumn = $DynamicFieldConfig->{Label};
+        }
+    }
+
+    # variable to save the filter's HTML code
+    my $ColumnFilterJSON = $Self->_ColumnFilterJSON(
+        ColumnName    => $HeaderColumn,
+        Label         => $LabelColumn,
+        ColumnValues  => $ColumnValues->{$HeaderColumn},
+        SelectedValue => $SelectedValue,
+        DashboardName => $Self->{Name},
+    );
+
+    return $ColumnFilterJSON;
+
 }
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # Get param object.
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my %SearchParams            = $Self->_SearchParamsGet(%Param);
+    my @Columns                 = @{ $SearchParams{Columns} };
+    my %ConfigItemSearch        = %{ $SearchParams{ConfigItemSearch} };
+    my %ConfigItemSearchSummary = %{ $SearchParams{ConfigItemSearchSummary} };
 
-    # Get layout object.
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # Get sorting parameters.
-    $Param{SortBy} = $ParamObject->GetParam( Param => 'SortBy' ) || 'Number';
-
-    # Get ordering parameters.
-    $Param{OrderBy} = $ParamObject->GetParam( Param => 'OrderBy' ) || 'Up';
-
-    # Set Sort and Order by as Arrays.
-    my @SortByArray  = ( $Param{SortBy} );
-    my @OrderByArray = ( $Param{OrderBy} );
-
-    # Get general catalog object.
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-
-    # Get class list.
-    my $ClassList = $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-
-    # To store the color for the deployment states.
-    my %DeplSignals;
-
-    # Get list of deployment states.
-    my $DeploymentStatesList = $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::DeploymentState',
-    );
-
-    # Set deployment style colors.
-    my $StyleClasses = '';
-
-    # To store depl state ids.
-    my $DeplStateIDs;
-
-    ITEMID:
-    for my $ItemID ( sort keys %{$DeploymentStatesList} ) {
-
-        # Get deployment state preferences.
-        my %Preferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
-            ItemID => $ItemID,
+    # Add the additional filter to the config item search param.
+    if ( $Self->{AdditionalFilter} ) {
+        %ConfigItemSearch = (
+            %ConfigItemSearch,
+            %{ $ConfigItemSearchSummary{ $Self->{AdditionalFilter} } },
         );
-
-        # Check if a color is defined in preferences.
-        next ITEMID if !$Preferences{Color};
-
-        # Get deployment state.
-        my $DeplState = $DeploymentStatesList->{$ItemID};
-
-        # Remove any non ascii word characters.
-        $DeplState =~ s{ [^a-zA-Z0-9] }{_}msxg;
-
-        # Store the original deployment state as key
-        # and the ss safe coverted deployment state as value.
-        $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
-
-        # Convert to lower case.
-        my $DeplStateColor = lc $Preferences{Color};
-
-        # Add to style classes string.
-        $StyleClasses .= "
-            .Flag span.$DeplState {
-                background-color: #$DeplStateColor;
-            }
-        ";
-
-        # Set depl state ids.
-        push @{$DeplStateIDs}, $ItemID;
     }
 
-    # Wrap into style tags.
-    if ($StyleClasses) {
-        $StyleClasses = "<style>$StyleClasses</style>";
+    my $CacheKey     = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
+    my $CacheColumns = join(
+        ',',
+        map { $_ . '=>' . $Self->{GetColumnFilterSelect}->{$_} } sort keys %{ $Self->{GetColumnFilterSelect} }
+    );
+    $CacheKey .= '-' . $CacheColumns if $CacheColumns;
+
+    # If SortBy parameter is not defined, set to value from %ConfigItemSearch, otherwise set to default value 'Age'.
+    if ( !defined $Self->{SortBy} ) {
+        if ( defined $ConfigItemSearch{SortBy} && $Self->{ValidSortableColumns}->{ $ConfigItemSearch{SortBy} } ) {
+            $Self->{SortBy} = $ConfigItemSearch{SortBy};
+        }
+        else {
+            $Self->{SortBy} = 'Age';
+        }
     }
 
-    # To store the default class.
-    my $ClassIDAuto = '';
+    $CacheKey .= '-' . $Self->{SortBy} if defined $Self->{SortBy};
 
-    # To store the NavBar filters.
-    my %Filters;
+    # Set OrderBy parameter to the search.
+    my $IsCacheForUse = 0;
+    if ( $Self->{OrderBy} ) {
+        if (
+            $Self->{AddFilters}
+            || $Self->{TabAction}
+            || !defined $Self->{SortingColumn}
+            || $Self->{SortingColumn} ne $Self->{SortBy}
+            )
+        {
+            $ConfigItemSearch{OrderBy} = $Self->{OrderBy};
+            $IsCacheForUse = 1;
+        }
+        else {
+            $ConfigItemSearch{OrderBy} = $Self->{OrderBy} eq 'Up' ? 'Down' : 'Up';
+        }
+    }
 
-    # Define position of the filter in the frontend.
-    my $PrioCounter = 1000;
+    # Set order for blocks.
+    $ConfigItemSearch{OrderBy} = $ConfigItemSearch{OrderBy} || 'Down';
 
-    # To store all the clases that the user has access, used in search for filter 'All'.
-    my $AccessClassList;
+    # Set previous sorting column parameter for all columns.
+    $Param{SortingColumn} = $Self->{SortBy};
 
-    # Get config item object.
+    $CacheKey .= '-' . $ConfigItemSearch{OrderBy} if defined $ConfigItemSearch{OrderBy};
+
+    # CustomerInformationCenter shows data per CustomerID
+    if ( $Param{CustomerID} ) {
+        $CacheKey .= '-' . $Param{CustomerID};
+    }
+
+    # CustomerUserInformationCenter shows data per CustomerUserID
+    if ( $Param{CustomerUserID} ) {
+        $CacheKey .= '-' . $Param{CustomerUserID};
+    }
+
+    # Add the additional filter always to the cache key, if a additional filter exists.
+    if ( $Self->{AdditionalFilter} ) {
+        $CacheKey .= '-' . $Self->{AdditionalFilter};
+    }
+
+    # get cache object
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    # check cache
+    my $ConfigItemIDs = $CacheObject->Get(
+        Type => 'Dashboard',
+        Key  => $CacheKey . '-' . $Self->{Filter} . '-List',
+    );
+
+    # find and show config item list
+    my $CacheUsed = 1;
+
+    # get ticket object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # Define incident signals, needed for services.
-    my %InciSignals = (
-        Translatable('operational') => 'greenled',
-        Translatable('warning')     => 'yellowled',
-        Translatable('incident')    => 'redled',
-    );
+    if ( !$ConfigItemIDs ) {
 
-    CLASSID:
-    for my $ClassID ( sort { ${$ClassList}{$a} cmp ${$ClassList}{$b} } keys %{$ClassList} ) {
-
-        # Check permission.
-        my $HasAccess = $ConfigItemObject->Permission(
-            Scope   => 'Class',
-            ClassID => $ClassID,
-            UserID  => $Self->{UserID},
-            Type    => $Self->{Config}->{Permission},
-        );
-
-        next CLASSID if !$HasAccess;
-
-        # Insert this class to be passed as search parameter for filter 'All'.
-        push @{$AccessClassList}, $ClassID;
-
-        # Increase the PrioCounter.
-        $PrioCounter++;
-
-        # Add filter with params for the search method.
-        $Filters{$ClassID} = {
-            Name   => $ClassList->{$ClassID},
-            Prio   => $PrioCounter,
-            Search => {
-                ClassIDs         => [$ClassID],
-                DeplStateIDs     => $DeplStateIDs,
-                OrderBy          => \@SortByArray,
-                OrderByDirection => \@OrderByArray,
-                Limit            => $Self->{SearchLimit},
-            },
-        };
-
-        # Remember the first class id to show this in the overview
-        # if no class id was given.
-        if ( !$ClassIDAuto ) {
-            $ClassIDAuto = $ClassID;
-        }
-    }
-
-    # If only one filter exists.
-    if ( scalar keys %Filters == 1 ) {
-
-        # Get the name of the only filter.
-        my ($FilterKey) = keys %Filters;
-
-        # Activate this filter.
-        $Self->{Filter} = $Filters{$FilterKey}->{Name};
-    }
-    else {
-
-        # Add default filter, which shows all items.
-        $Filters{All} = {
-            Name   => 'All',
-            Prio   => 1000,
-            Search => {
-                ClassIDs         => $AccessClassList,
-                DeplStateIDs     => $DeplStateIDs,
-                OrderBy          => \@SortByArray,
-                OrderByDirection => \@OrderByArray,
-                Limit            => $Self->{SearchLimit},
-            },
-        };
-
-        # If no filter was selected activate the filter for the default class.
-        if ( !$Self->{Filter} ) {
-            $Self->{Filter} = $ClassIDAuto;
-        }
-    }
-
-    # Get given filters.
-    my @NavBarFilters;
-    for my $Prio ( sort keys %Filters ) {
-        push @NavBarFilters, $Filters{$Prio};
-    }
-
-    # Sort according to prio.
-    @NavBarFilters = sort { $a->{Prio} <=> $b->{Prio} } @NavBarFilters;
-
-    # Find out which columns should be shown.
-    my @ShowColumns;
-    my @XMLShowColumns;
-    if ( $Self->{Config}->{DefaultColumns} ) {
-
-        # Get all possible columns from config.
-        my %PossibleColumn = %{ $Self->{Config}->{DefaultColumns} };
-
-        # Show column "Class" if filter 'All' is selected.
-        if ( $Self->{Filter} eq 'All' ) {
-            $PossibleColumn{Class} = '1';
+        # quote all CustomerIDs
+        if ( $ConfigItemSearch{CustomerID} ) {
+            $ConfigItemSearch{CustomerID} = $Kernel::OM->Get('Kernel::System::DB')->QueryStringEscape(
+                QueryString => $ConfigItemSearch{CustomerID},
+            );
         }
 
-        # Get the column names that should be shown.
-        COLUMNNAME:
-        for my $Name ( sort keys %PossibleColumn ) {
-            next COLUMNNAME if !$PossibleColumn{$Name};
-            push @ShowColumns, $Name;
-        }
-    }
-
-    # Get frontend config.
-    my ($Module) = $Self->{Action} =~ m{^Agent(.*)}xms;
-    my $ShowColumnsByClassConfig = $Kernel::OM->Get('Kernel::Config')->Get( 'Frontend::Agent::' . $Module . '::ITSMConfigItem' );
-
-    my $ShowColumnsByClass = $ShowColumnsByClassConfig->{ShowColumnsByClass} // '';
-
-    # Get the configured columns and reorganize them by class name.
-    if (
-        IsArrayRefWithData($ShowColumnsByClass)
-        && $Self->{Filter}
-        && $Self->{Filter} ne 'All'
-        )
-    {
-
-        my %ColumnByClass;
-        NAME:
-        for my $Name ( @{$ShowColumnsByClass} ) {
-            my ( $Class, $Column ) = split /::/, $Name, 2;
-
-            next NAME if !$Column;
-
-            push @{ $ColumnByClass{$Class} }, $Column;
-        }
-
-        # Check if there is a specific column config for the selected class.
-        if ( $ColumnByClass{ $Self->{Filter} } ) {
-            @ShowColumns = @{ $ColumnByClass{ $Self->{Filter} } };
-        }
-    }
-
-    if (@ShowColumns) {
-
-        for my $Column (@ShowColumns) {
-
-            # Create needed veriables.
-            my $CSS = 'OverviewHeader';
-            my $OrderBy;
-
-            # Remove ID if necesary.
-            if ( $Param{SortBy} ) {
-                $Param{SortBy} = ( $Param{SortBy} eq 'InciStateID' )
-                    ? 'CurInciState'
-                    : ( $Param{SortBy} eq 'DeplStateID' ) ? 'CurDeplState'
-                    : ( $Param{SortBy} eq 'ClassID' )     ? 'Class'
-                    : ( $Param{SortBy} eq 'ChangeTime' )  ? 'LastChanged'
-                    :                                       $Param{SortBy};
-            }
-
-            # Set the correct Set CSS class and order by link.
-            if ( $Param{SortBy} && ( $Param{SortBy} eq $Column ) ) {
-                if ( $Param{OrderBy} && ( $Param{OrderBy} eq 'Up' ) ) {
-                    $OrderBy = 'Down';
-                    $CSS .= ' SortDescendingLarge';
-                }
-                else {
-                    $OrderBy = 'Up';
-                    $CSS .= ' SortAscendingLarge';
-                }
+        # add sort by parameter to the search
+        if ( !defined $ConfigItemSearch{SortBy} || !$Self->{ValidSortableColumns}->{ $ConfigItemSearch{SortBy} } ) {
+            if ( $Self->{SortBy} && $Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+                $ConfigItemSearch{SortBy} = $Self->{SortBy};
             }
             else {
-                $OrderBy = 'Up';
+                $ConfigItemSearch{SortBy} = 'Age';
+            }
+        }
+
+        $CacheUsed = $IsCacheForUse ? 1 : 0;
+
+        my @ConfigItemIDsArray;
+
+        # TODO understand
+        if ( !$Self->{Config}->{IsProcessWidget} || IsArrayRefWithData( $Self->{ProcessList} ) ) {
+
+            # Copy original column filter.
+            my %ColumnFilter = %{ $Self->{ColumnFilter} || {} };
+
+            # Change filter name accordingly.
+            my $Filter;
+
+            # Filter is used and is not in user prefered values, show no results.
+            # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
+            if (
+                $Filter
+                && IsArrayRefWithData( $ConfigItemSearchSummary{ $Self->{Filter} }->{$Filter} )
+                && IsArrayRefWithData( $ColumnFilter{$Filter} )
+                && !grep { $ColumnFilter{$Filter}->[0] == $_ } @{ $ConfigItemSearchSummary{ $Self->{Filter} }->{$Filter} }
+                )
+            {
+                @ConfigItemIDsArray = ();
             }
 
-            # Set column.
-            $Param{Column} = $Column;
-
-            # Create header block.
-            $LayoutObject->Block(
-                Name => 'Record' . $Column . 'Header',
-                Data => {
-                    %Param,
-                    CSS     => $CSS,
-                    OrderBy => $OrderBy,
-                },
-            );
-        }
-    }
-
-    # Get assigned config items (to customer or customer user).
-    my $AssignedCIs = $Self->_AssignedCIsGet(
-        Filter => $Self->{Filter},
-    );
-    my @AssignedConfigItemIDs = @{ $AssignedCIs->{ConfigItemIDs} };
-
-    # Get all assigned config items for count.
-    my $CountCIs = $Self->_AssignedCIsGet(
-        Filter => 'All',
-        Count  => 1,
-    );
-
-    # Create search with sorting parameters.
-    my $AssignedConfigItemIDs;
-    if ( IsArrayRefWithData( \@AssignedConfigItemIDs ) ) {
-        $AssignedConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
-            ConfigItemIDs    => \@AssignedConfigItemIDs,
-            OrderBy          => \@SortByArray,
-            OrderByDirection => \@OrderByArray,
-        );
-    }
-
-    # Clear old array and push new data.
-    if ( IsArrayRefWithData($AssignedConfigItemIDs) ) {
-
-        @AssignedConfigItemIDs = ();
-        push @AssignedConfigItemIDs, @{$AssignedConfigItemIDs};
-    }
-
-    if (@ShowColumns) {
-
-        # Get the XML column headers only if the filter is not set to 'all'
-        # and if there are CIs to show.
-        if ( $Self->{Filter} && $Self->{Filter} ne 'All' && @AssignedConfigItemIDs ) {
-
-            # Get the version data of the first config item, including all the XML data
-            # to get the column header names.
-            my $ConfigItem = $ConfigItemObject->VersionGet(
-                ConfigItemID => $AssignedConfigItemIDs[0],
-                XMLDataGet   => 1,
-            );
-
-            # Convert the XML data into a hash.
-            my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-                XMLDefinition => $ConfigItem->{XMLDefinition},
-                XMLData       => $ConfigItem->{XMLData}->[1]->{Version}->[1],
-                Attributes    => \@ShowColumns,
-            );
-
-            # Get the xml columns (they contain ::).
-            @XMLShowColumns = grep {/::/} @ShowColumns;
-
-            COLUMN:
-            for my $Column (@XMLShowColumns) {
-
-                # Check if column exists in CI-Data.
-                next COLUMN if !$ExtendedVersionData->{$Column}->{Name};
-
-                # Show the xml attribute header.
-                $LayoutObject->Block(
-                    Name => 'RecordXMLAttributeHeader',
-                    Data => {
-                        %Param,
-                        XMLAttributeHeader => $ExtendedVersionData->{$Column}->{Name},
-                    },
+            # Execute search.
+            else {
+                @ConfigItemIDsArray = $ConfigItemObject->ConfigItemSearch(
+                    Result => 'ARRAY',
+                    %ConfigItemSearch,
+                    %{ $ConfigItemSearchSummary{ $Self->{Filter} } },
+                    %ColumnFilter,
+                    Limit => $Self->{PageShown} + $Self->{StartHit} - 1,
                 );
             }
         }
+        $ConfigItemIDs = \@ConfigItemIDsArray;
     }
 
-    # Build filter content.
+    # check cache
+    my $Summary = $CacheObject->Get(
+        Type => 'Dashboard',
+        Key  => $CacheKey . '-Summary',
+    );
+
+    # If no cache or new list result, do count lookup.
+    if ( !$Summary || !$CacheUsed ) {
+
+        # TODO possibly adjust
+        # Define the summary types for which no count is needed, because we have no output.
+        my %LookupNoCountSummaryType = (
+            AssignedToCustomerUser    => 1,
+            AccessibleForCustomerUser => 1,
+        );
+
+        TYPE:
+        for my $Type ( sort keys %ConfigItemSearchSummary ) {
+            next TYPE if $LookupNoCountSummaryType{$Type};
+            next TYPE if !$ConfigItemSearchSummary{$Type};
+
+            # Copy original column filter.
+            my %ColumnFilter = %{ $Self->{ColumnFilter} || {} };
+
+            # Loop through all column filter elements.
+            for my $Element ( sort keys %ColumnFilter ) {
+
+                # Verify if current column filter element is already present in the config item search
+                #   summary, to delete it from the column filter hash.
+                if ( $Self->{AdditionalFilter} && $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->{$Element} ) {
+                    delete $ColumnFilter{$Element};
+                }
+            }
+
+            $Summary->{$Type} = 0;
+
+            if ( !$Self->{Config}->{IsProcessWidget} || IsArrayRefWithData( $Self->{ProcessList} ) ) {
+
+                # Change filter name accordingly.
+                my $Filter;
+
+                # Filter is used and is not in user prefered values, show no results.
+                # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
+                if (
+                    $Filter
+                    && IsArrayRefWithData( $ConfigItemSearchSummary{$Type}->{$Filter} )
+                    && IsArrayRefWithData( $ColumnFilter{$Filter} )
+                    && !grep { $ColumnFilter{$Filter}->[0] == $_ } @{ $ConfigItemSearchSummary{$Type}->{$Filter} }
+                    )
+                {
+                    $Summary->{$Type} = 0;
+                }
+
+                # Execute search.
+                else {
+                    $Summary->{$Type} = $ConfigItemObject->ConfigItemSearch(
+                        Result => 'COUNT',
+                        %ConfigItemSearch,
+                        %{ $ConfigItemSearchSummary{$Type} },
+                        %ColumnFilter,
+                    ) || 0;
+                }
+            }
+        }
+    }
+
+    # set cache
+    if ( !$CacheUsed && $Self->{Config}->{CacheTTLLocal} ) {
+        $CacheObject->Set(
+            Type  => 'Dashboard',
+            Key   => $CacheKey . '-Summary',
+            Value => $Summary,
+            TTL   => $Self->{Config}->{CacheTTLLocal} * 60,
+        );
+        $CacheObject->Set(
+            Type  => 'Dashboard',
+            Key   => $CacheKey . '-' . $Self->{Filter} . '-List',
+            Value => $ConfigItemIDs,
+            TTL   => $Self->{Config}->{CacheTTLLocal} * 60,
+        );
+    }
+
+    # Set the css class for the selected filter and additional filter.
+    $Summary->{ $Self->{Filter} . '::Selected' } = 'Selected';
+    if ( $Self->{AdditionalFilter} ) {
+        $Summary->{ $Self->{AdditionalFilter} . '::Selected' } = 'Selected';
+    }
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # get filter ticket counts
     $LayoutObject->Block(
-        Name => 'OverviewNavBarFilter',
+        Name => 'ContentLargeConfigItemGenericFilter',
         Data => {
-            %Filters,
+            %Param,
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+            %{$Summary},
         },
     );
 
-    # Set summary for page nav.
-    my %Summary;
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # Loop over filters.
-    my $Count = 0;
-    FILTER:
-    for my $Filter (@NavBarFilters) {
+    # TODO discuss: should it be possible to filter by classes?
+    # show only AssignedToCustomerUser if we have the filter
+    # if ( $ConfigItemSearchSummary{AssignedToCustomerUser} ) {
+    #     $LayoutObject->Block(
+    #         Name => 'ContentLargeConfigItemGenericFilterAssignedToCustomerUser',
+    #         Data => {
+    #             %Param,
+    #             %{ $Self->{Config} },
+    #             Name => $Self->{Name},
+    #             %{$Summary},
+    #         },
+    #     );
+    # }
 
-        # Get count by assigned config item ids.
-        $Filter->{Count} = $CountCIs->{ $Filter->{Name} } // '0';
+    # # show only locked if we have the filter
+    # if ( $ConfigItemSearchSummary{AccessibleForCustomerUser} ) {
+    #     $LayoutObject->Block(
+    #         Name => 'ContentLargeConfigItemGenericFilterAccessibleForCustomerUser',
+    #         Data => {
+    #             %Param,
+    #             %{ $Self->{Config} },
+    #             Name => $Self->{Name},
+    #             %{$Summary},
+    #         },
+    #     );
+    # }
 
-        $Count++;
-        if ( $Count == scalar @NavBarFilters ) {
-            $Filter->{CSS} = 'Last';
-        }
-        $LayoutObject->Block(
-            Name => 'OverviewNavBarFilterItem',
-            Data => {
-                %Param,
-                %{$Filter},
-            },
-        );
-        if ( $Filter->{Name} eq $Self->{Filter} ) {
-            $LayoutObject->Block(
-                Name => 'OverviewNavBarFilterItemSelected',
-                Data => {
-                    %Param,
-                    %{$Filter},
-                },
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'OverviewNavBarFilterItemSelectedNot',
-                Data => {
-                    %Param,
-                    %{$Filter},
-                },
-            );
-        }
+    # add page nav bar
+    my $Total = $Summary->{ $Self->{Filter} } || 0;
 
-        # Add filter to new hash.
-        $Summary{ $Filter->{Name} } = \%{$Filter};
+    my %GetColumnFilter = $Self->{GetColumnFilter} ? %{ $Self->{GetColumnFilter} } : ();
+
+    my $ColumnFilterLink = '';
+    COLUMNNAME:
+    for my $ColumnName ( sort keys %GetColumnFilter ) {
+        next COLUMNNAME if !$ColumnName;
+        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
+        $ColumnFilterLink
+            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
     }
-
-    # Add page nav bar.
-    my $Total = $Summary{ $Self->{Filter} }->{Count} || 0;
 
     my $LinkPage =
         'Subaction=Element;Name=' . $Self->{Name}
         . ';Filter=' . $Self->{Filter}
-        . ';SortBy=' .  ( $Param{SortBy}  || '' )
-        . ';OrderBy=' . ( $Param{OrderBy} || '' )
+        . ';AdditionalFilter=' . ( $Self->{AdditionalFilter}  || '' )
+        . ';SortBy=' .           ( $Self->{SortBy}            || '' )
+        . ';OrderBy=' .          ( $ConfigItemSearch{OrderBy} || '' )
+        . $ColumnFilterLink
         . ';';
 
     if ( $Param{CustomerID} ) {
-        $LinkPage .= 'CustomerID=' . $LayoutObject->LinkEncode( $Param{CustomerID} ) . ';';
+        $LinkPage .= "CustomerID=$Param{CustomerID};";
     }
     if ( $Param{CustomerUserID} ) {
-        $LinkPage .= 'CustomerUserID=' . $LayoutObject->LinkEncode( $Param{CustomerUserID} ) . ';';
+        $LinkPage .= "CustomerUserID=$Param{CustomerUserID};";
     }
 
     my %PageNav = $LayoutObject->PageNavBar(
@@ -556,9 +847,8 @@ sub Run {
         IDPrefix    => 'Dashboard' . $Self->{Name},
         AJAX        => $Param{AJAX},
     );
-
     $LayoutObject->Block(
-        Name => 'ContentLargeITSMConfigItemGenericFilterNavBar',
+        Name => 'ContentLargeConfigItemGenericFilterNavBar',
         Data => {
             %{ $Self->{Config} },
             Name => $Self->{Name},
@@ -566,127 +856,779 @@ sub Run {
         },
     );
 
-    # Show config items if there are some.
-    my $Counter = 0;
-    if (@AssignedConfigItemIDs) {
+    # show table header
+    $LayoutObject->Block(
+        Name => 'ContentLargeConfigItemGenericHeader',
+        Data => {},
+    );
 
-        # To store all data.
-        my %Data;
+    # remove (-) from name for JS config
+    my $WidgetName = $Self->{Name};
+    $WidgetName =~ s{-}{}g;
 
-        CONFIGITEMID:
-        for my $ConfigItemID (@AssignedConfigItemIDs) {
-            $Counter++;
-            if (
-                $Counter >= $Self->{StartHit}
-                && $Counter < ( $Self->{PageShown} + $Self->{StartHit} )
-                )
-            {
+    # show non-labeled table headers
+    my $CSS = '';
 
-                # Get config item data.
-                my $ConfigItem = $ConfigItemObject->VersionGet(
-                    ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 1,
-                );
+    # Send data to JS for init container.
+    $LayoutObject->AddJSData(
+        Key   => 'InitContainerDashboard' . $Self->{Name},
+        Value => {
+            SortBy  => $Self->{SortBy} || 'Age',
+            OrderBy => $ConfigItemSearch{OrderBy},
+        },
+    );
 
-                next CONFIGITEMID if !$ConfigItem;
+    # send data to JS
+    $LayoutObject->AddJSData(
+        Key   => 'HeaderColumn' . $WidgetName,
+        Value => \@Columns
+    );
 
-                # Convert the XML data into a hash.
-                my $ExtendedVersionData = $LayoutObject->XMLData2Hash(
-                    XMLDefinition => $ConfigItem->{XMLDefinition},
-                    XMLData       => $ConfigItem->{XMLData}->[1]->{Version}->[1],
-                    Attributes    => \@ShowColumns,
-                );
+    # show all needed headers
+    HEADERCOLUMN:
+    for my $HeaderColumn (@Columns) {
 
-                # Store config item data.
-                %Data = %{$ConfigItem};
+        # skip CustomerID if Customer Information Center
+        if ( $Self->{Action} eq 'AgentCustomerInformationCenter' && $HeaderColumn eq 'CustomerID' ) {
+            next HEADERCOLUMN;
+        }
 
-                # Build record block.
-                $LayoutObject->Block(
-                    Name => 'Record',
-                    Data => {
-                        %Param,
-                        %Data,
+        if ( $HeaderColumn !~ m{\A DynamicField_}xms ) {
+
+            $CSS = '';
+            my $Title = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
+
+            # Set title description.
+            if ( $Self->{SortBy} && $Self->{SortBy} eq $HeaderColumn ) {
+                my $TitleDesc = '';
+                if ( $ConfigItemSearch{OrderBy} eq 'Down' ) {
+                    $CSS .= ' SortDescendingLarge';
+                    $TitleDesc = Translatable('sorted descending');
+                }
+                else {
+                    $CSS .= ' SortAscendingLarge';
+                    $TitleDesc = Translatable('sorted ascending');
+                }
+
+                $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                $Title .= ', ' . $TitleDesc;
+            }
+
+            # translate the column name to write it in the current language
+            my $TranslatedWord;
+            if ( $HeaderColumn eq 'DeplState' ) {
+                $TranslatedWord = Translatable('Deployment State');
+            }
+            elsif ( $HeaderColumn eq 'CurDeplState' || $HeaderColumn eq 'CurDeplSignal' ) {
+                $TranslatedWord = Translatable('Current Deployment State');
+            }
+            elsif ( $HeaderColumn eq 'CurDeplStateType' ) {
+                $TranslatedWord = Translatable('Deployment State Type');
+            }
+            elsif ( $HeaderColumn eq 'InciState' ) {
+                $TranslatedWord = Translatable('Incident State');
+            }
+            elsif ( $HeaderColumn eq 'CurInciState' || $HeaderColumn eq 'CurInciSignal' ) {
+                $TranslatedWord = Translatable('Current Incident State');
+            }
+            elsif ( $HeaderColumn eq 'CurInciStateType' ) {
+                $TranslatedWord = Translatable('Current Incident State Type');
+            }
+            elsif ( $HeaderColumn eq 'LastChanged' ) {
+                $TranslatedWord = Translatable('Last changed');
+            }
+            elsif ( $HeaderColumn eq 'CustomerCompanyName' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer Name');
+            }
+            elsif ( $HeaderColumn eq 'CustomerID' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer ID');
+            }
+            elsif ( $HeaderColumn eq 'CustomerName' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User Name');
+            }
+            elsif ( $HeaderColumn eq 'CustomerUserID' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
+            }
+            else {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
+            }
+
+            # add surrounding container
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewHeader',
+            );
+            $LayoutObject->Block(
+                Name => 'ContentLargeConfigItemGenericHeaderConfigItemHeader',
+                Data => {},
+            );
+
+            if ( $HeaderColumn eq 'ConfigItemNumber' ) {
+
+                # send data to JS
+                $LayoutObject->AddJSData(
+                    Key   => 'ConfigItemNumberColumn' . $WidgetName,
+                    Value => {
+                        Name          => $Self->{Name},
+                        OrderBy       => $ConfigItemSearch{OrderBy},
+                        SortingColumn => $Param{SortingColumn},
                     },
                 );
 
-                # Build column record blocks.
-                if (@ShowColumns) {
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderConfigItemNumberColumn',
+                    Data => {
+                        %Param,
+                        CSS   => $CSS || '',
+                        Name  => $Self->{Name},
+                        Title => $Title,
+                    },
+                );
+                next HEADERCOLUMN;
+            }
 
-                    COLUMN:
-                    for my $Column (@ShowColumns) {
-                        $LayoutObject->Block(
-                            Name => 'Record' . $Column,
-                            Data => {
-                                %Param,
-                                %Data,
-                                CurInciSignal => $InciSignals{ $Data{CurInciStateType} },
-                                CurDeplSignal => $DeplSignals{ $Data{CurDeplState} },
-                            },
-                        );
+            my $FilterTitle     = $TranslatedWord;
+            my $FilterTitleDesc = Translatable('filter not active');
+            if ( $Self->{GetColumnFilterSelect} && $Self->{GetColumnFilterSelect}->{$HeaderColumn} ) {
+                $CSS .= ' FilterActive';
+                $FilterTitleDesc = Translatable('filter active');
+            }
+            $FilterTitleDesc = $LayoutObject->{LanguageObject}->Translate($FilterTitleDesc);
+            $FilterTitle .= ', ' . $FilterTitleDesc;
 
-                        # Show links if available.
-                        $LayoutObject->Block(
-                            Name => 'Record' . $Column . 'LinkStart',
-                            Data => {
-                                %Param,
-                                %Data,
-                            },
-                        );
-                        $LayoutObject->Block(
-                            Name => 'Record' . $Column . 'LinkEnd',
-                            Data => {
-                                %Param,
-                                %Data,
-                            },
-                        );
-                    }
+            $LayoutObject->Block(
+                Name => 'ContentLargeConfigItemGenericHeaderColumn',
+                Data => {
+                    HeaderColumnName     => $HeaderColumn   || '',
+                    HeaderNameTranslated => $TranslatedWord || $HeaderColumn,
+                    CSS                  => $CSS            || '',
+                },
+            );
 
-                    COLUMN:
-                    for my $Column (@XMLShowColumns) {
+            # verify if column is filterable and sortable
+            if (
+                $Self->{ValidSortableColumns}->{$HeaderColumn}
+                && $Self->{ValidFiltrableColumns}->{$HeaderColumn}
+                )
+            {
 
-                        # Check if column exists in CI-Data.
-                        next COLUMN if !$ExtendedVersionData->{$Column}->{Name};
-
-                        # Convert to ascii text in case the value contains html.
-                        my $Value = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $ExtendedVersionData->{$Column}->{Value} // '' )
-                            // '';
-
-                        # Convert all whitespace and newlines to single spaces.
-                        $Value =~ s{ \s+ }{ }gxms;
-
-                        # Show the xml attribute data.
-                        $LayoutObject->Block(
-                            Name => 'RecordXMLAttribute',
-                            Data => {
-                                %Param,
-                                XMLAttributeData => $Value,
-                            },
-                        );
-                    }
+                my $Css;
+                if (
+                    $HeaderColumn eq 'CustomerID'
+                    )
+                {
+                    $Css = 'Hidden';
                 }
+
+                # variable to save the filter's HTML code
+                my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                    ColumnName => $HeaderColumn,
+                    Css        => $Css,
+                );
+
+                # send data to JS
+                $LayoutObject->AddJSData(
+                    Key   => 'ColumnFilterSort' . $HeaderColumn . $WidgetName,
+                    Value => {
+                        HeaderColumnName => $HeaderColumn,
+                        Name             => $Self->{Name},
+                        SortBy           => $Self->{SortBy} || 'Age',
+                        OrderBy          => $ConfigItemSearch{OrderBy},
+                        SortingColumn    => $Param{SortingColumn},
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLink',
+                    Data => {
+                        %Param,
+                        HeaderColumnName     => $HeaderColumn,
+                        CSS                  => $CSS,
+                        HeaderNameTranslated => $TranslatedWord || $HeaderColumn,
+                        ColumnFilterStrg     => $ColumnFilterHTML,
+                        OrderBy              => $ConfigItemSearch{OrderBy},
+                        SortBy               => $Self->{SortBy} || 'Age',
+                        Name                 => $Self->{Name},
+                        Title                => $Title,
+                        FilterTitle          => $FilterTitle,
+                    },
+                );
+
+                if ( $HeaderColumn eq 'CustomerID' ) {
+
+                    # send data to JS
+                    $LayoutObject->AddJSData(
+                        Key   => 'CustomerIDAutocomplete',
+                        Value => {
+                            QueryDelay          => 100,
+                            MaxResultsDisplayed => 20,
+                            MinQueryLength      => 2,
+                        },
+                    );
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLinkCustomerIDSearch',
+                        Data => {},
+                    );
+                }
+            }
+
+            # verify if column is just filterable
+            elsif ( $Self->{ValidFiltrableColumns}->{$HeaderColumn} ) {
+
+                my $Css;
+                if ( $HeaderColumn eq 'CustomerUserID' ) {
+                    $Css = 'Hidden';
+                }
+
+                # variable to save the filter's HTML code
+                my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                    ColumnName => $HeaderColumn,
+                    Css        => $Css,
+                );
+
+                # send data to JS
+                $LayoutObject->AddJSData(
+                    Key   => 'ColumnFilter' . $HeaderColumn . $WidgetName,
+                    Value => {
+                        HeaderColumnName => $HeaderColumn,
+                        Name             => $Self->{Name},
+                        SortBy           => $Self->{SortBy} || 'Age',
+                        OrderBy          => $ConfigItemSearch{OrderBy},
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnFilter',
+                    Data => {
+                        %Param,
+                        HeaderColumnName     => $HeaderColumn,
+                        CSS                  => $CSS,
+                        HeaderNameTranslated => $TranslatedWord || $HeaderColumn,
+                        ColumnFilterStrg     => $ColumnFilterHTML,
+                        Name                 => $Self->{Name},
+                        Title                => $Title,
+                        FilterTitle          => $FilterTitle,
+                    },
+                );
+
+                if ( $HeaderColumn eq 'CustomerUserID' ) {
+
+                    # send data to JS
+                    $LayoutObject->AddJSData(
+                        Key   => 'CustomerUserAutocomplete',
+                        Value => {
+                            QueryDelay          => 100,
+                            MaxResultsDisplayed => 20,
+                            MinQueryLength      => 2,
+                        },
+                    );
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLinkCustomerUserSearch',
+                        Data => {},
+                    );
+                }
+            }
+
+            # verify if column is just sortable
+            elsif ( $Self->{ValidSortableColumns}->{$HeaderColumn} ) {
+
+                # send data to JS
+                $LayoutObject->AddJSData(
+                    Key   => 'ColumnSortable' . $HeaderColumn . $WidgetName,
+                    Value => {
+                        HeaderColumnName => $HeaderColumn,
+                        Name             => $Self->{Name},
+                        SortBy           => $Self->{SortBy} || $HeaderColumn,
+                        OrderBy          => $ConfigItemSearch{OrderBy},
+                        SortingColumn    => $Param{SortingColumn},
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnLink',
+                    Data => {
+                        %Param,
+                        HeaderColumnName     => $HeaderColumn,
+                        CSS                  => $CSS,
+                        HeaderNameTranslated => $TranslatedWord || $HeaderColumn,
+                        OrderBy              => $ConfigItemSearch{OrderBy},
+                        SortBy               => $Self->{SortBy} || $HeaderColumn,
+                        Name                 => $Self->{Name},
+                        Title                => $Title,
+                    },
+                );
+            }
+            else {
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnEmpty',
+                    Data => {
+                        %Param,
+                        HeaderNameTranslated => $TranslatedWord || $HeaderColumn,
+                        HeaderColumnName     => $HeaderColumn,
+                        CSS                  => $CSS,
+                        Title                => $Title,
+                    },
+                );
+            }
+        }
+
+        # Dynamic fields
+        else {
+            my $DynamicFieldConfig;
+            my $DFColumn = $HeaderColumn;
+            $DFColumn =~ s/DynamicField_//g;
+            DYNAMICFIELD:
+            for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+                next DYNAMICFIELD if $DFConfig->{Name} ne $DFColumn;
+
+                $DynamicFieldConfig = $DFConfig;
+                last DYNAMICFIELD;
+            }
+            next HEADERCOLUMN if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $Label = $DynamicFieldConfig->{Label};
+
+            my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate($Label);
+
+            my $DynamicFieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
+
+            my $CSS             = '';
+            my $FilterTitle     = $Label;
+            my $FilterTitleDesc = Translatable('filter not active');
+            if ( $Self->{GetColumnFilterSelect} && defined $Self->{GetColumnFilterSelect}->{$DynamicFieldName} ) {
+                $CSS .= 'FilterActive ';
+                $FilterTitleDesc = Translatable('filter active');
+            }
+            $FilterTitleDesc = $LayoutObject->{LanguageObject}->Translate($FilterTitleDesc);
+            $FilterTitle .= ', ' . $FilterTitleDesc;
+
+            # get field sortable condition
+            my $IsSortable = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsSortable',
+            );
+
+            # set title
+            my $Title = $Label;
+
+            # add surrounding container
+            $LayoutObject->Block(
+                Name => 'GeneralOverviewHeader',
+            );
+            $LayoutObject->Block(
+                Name => 'ContentLargeConfigItemGenericHeaderConfigItemHeader',
+                Data => {},
+            );
+
+            if ($IsSortable) {
+                my $TitleDesc = '';
+                if (
+                    $Self->{SortBy}
+                    && ( $Self->{SortBy} eq ( 'DynamicField_' . $DynamicFieldConfig->{Name} ) )
+                    )
+                {
+                    if ( $ConfigItemSearch{OrderBy} eq 'Down' ) {
+                        $CSS .= ' SortDescendingLarge';
+                        $TitleDesc = Translatable('sorted descending');
+                    }
+                    else {
+                        $CSS .= ' SortAscendingLarge';
+                        $TitleDesc = Translatable('sorted ascending');
+                    }
+
+                    $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                    $Title .= ', ' . $TitleDesc;
+                }
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumn',
+                    Data => {
+                        HeaderColumnName => $DynamicFieldName || '',
+                        CSS              => $CSS              || '',
+                    },
+                );
+
+                # check if the dynamic field is sortable and filterable (sortable check was made before)
+                if ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
+
+                    # variable to save the filter's HTML code
+                    my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                        ColumnName => $DynamicFieldName,
+                        Label      => $Label,
+                    );
+
+                    # send data to JS
+                    $LayoutObject->AddJSData(
+                        Key   => 'ColumnFilterSort' . $DynamicFieldName . $WidgetName,
+                        Value => {
+                            HeaderColumnName => $DynamicFieldName,
+                            Name             => $Self->{Name},
+                            SortBy           => $Self->{SortBy} || 'Age',
+                            OrderBy          => $ConfigItemSearch{OrderBy},
+                            SortingColumn    => $Param{SortingColumn},
+                        },
+                    );
+
+                    # output sortable and filterable dynamic field
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLink',
+                        Data => {
+                            %Param,
+                            HeaderColumnName     => $DynamicFieldName,
+                            CSS                  => $CSS,
+                            HeaderNameTranslated => $TranslatedLabel || $DynamicFieldName,
+                            ColumnFilterStrg     => $ColumnFilterHTML,
+                            OrderBy              => $ConfigItemSearch{OrderBy},
+                            SortBy               => $Self->{SortBy} || 'Age',
+                            Name                 => $Self->{Name},
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+
+                # otherwise the dynamic field is only sortable (sortable check was made before)
+                else {
+
+                    # send data to JS
+                    $LayoutObject->AddJSData(
+                        Key   => 'ColumnSortable' . $DynamicFieldName . $WidgetName,
+                        Value => {
+                            HeaderColumnName => $DynamicFieldName,
+                            Name             => $Self->{Name},
+                            SortBy           => $Self->{SortBy} || $DynamicFieldName,
+                            OrderBy          => $ConfigItemSearch{OrderBy},
+                            SortingColumn    => $Param{SortingColumn},
+                        },
+                    );
+
+                    # output sortable dynamic field
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericHeaderColumnLink',
+                        Data => {
+                            %Param,
+                            HeaderColumnName     => $DynamicFieldName,
+                            CSS                  => $CSS,
+                            HeaderNameTranslated => $TranslatedLabel || $DynamicFieldName,
+                            OrderBy              => $ConfigItemSearch{OrderBy},
+                            SortBy               => $Self->{SortBy} || $DynamicFieldName,
+                            Name                 => $Self->{Name},
+                            Title                => $Title,
+                            FilterTitle          => $FilterTitle,
+                        },
+                    );
+                }
+            }
+
+            # if the dynamic field was not sortable (check was made and fail before)
+            # it might be filterable
+            elsif ( $Self->{ValidFiltrableColumns}->{$DynamicFieldName} ) {
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumn',
+                    Data => {
+                        HeaderColumnName => $DynamicFieldName || '',
+                        CSS              => $CSS              || '',
+                        Title            => $Title,
+                    },
+                );
+
+                # variable to save the filter's HTML code
+                my $ColumnFilterHTML = $Self->_InitialColumnFilter(
+                    ColumnName => $DynamicFieldName,
+                    Label      => $Label,
+                );
+
+                # send data to JS
+                $LayoutObject->AddJSData(
+                    Key   => 'ColumnFilter' . $DynamicFieldName . $WidgetName,
+                    Value => {
+                        HeaderColumnName => $DynamicFieldName,
+                        Name             => $Self->{Name},
+                        SortBy           => $Self->{SortBy} || 'Age',
+                        OrderBy          => $ConfigItemSearch{OrderBy},
+                    },
+                );
+
+                # output filterable (not sortable) dynamic field
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnFilter',
+                    Data => {
+                        %Param,
+                        HeaderColumnName     => $DynamicFieldName,
+                        CSS                  => $CSS,
+                        HeaderNameTranslated => $TranslatedLabel || $DynamicFieldName,
+                        ColumnFilterStrg     => $ColumnFilterHTML,
+                        Name                 => $Self->{Name},
+                        Title                => $Title,
+                        FilterTitle          => $FilterTitle,
+                    },
+                );
+            }
+
+            # otherwise the field is not filterable and not sortable
+            else {
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumn',
+                    Data => {
+                        HeaderColumnName => $DynamicFieldName || '',
+                        CSS              => $CSS              || '',
+                    },
+                );
+
+                # output plain dynamic field header (not filterable, not sortable)
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericHeaderColumnEmpty',
+                    Data => {
+                        %Param,
+                        HeaderNameTranslated => $TranslatedLabel || $DynamicFieldName,
+                        HeaderColumnName     => $DynamicFieldName,
+                        CSS                  => $CSS,
+                        Title                => $Title,
+                    },
+                );
             }
         }
     }
 
-    # If there are no config items to show, a no data found message is displayed in the table.
-    else {
+    # show tickets
+    my $Count = 0;
+    CONFIGITEMID:
+    for my $ConfigItemID ( @{$ConfigItemIDs} ) {
+        $Count++;
+        next CONFIGITEMID if $Count < $Self->{StartHit};
+        my $ConfigItemRef = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 0,
+        );
+        my %ConfigItem = $ConfigItemRef->%*;
+
+        next CONFIGITEMID if !%ConfigItem;
+
+        # set a default title if config item has no title
+        if ( !$ConfigItem{Title} ) {
+            $ConfigItem{Title} = $LayoutObject->{LanguageObject}->Translate(
+                'This ticket has no title or subject'
+            );
+        }
+
+        # show config item
         $LayoutObject->Block(
-            Name => 'NoDataFoundMsg',
-            Data => {
-                TotalColumns => scalar @ShowColumns,
+            Name => 'ContentLargeConfigItemGenericRow',
+            Data => \%ConfigItem,
+        );
+
+        # save column content
+        my $DataValue;
+
+        # get needed objects
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
+
+        # show all needed columns
+        COLUMN:
+        for my $ConfigItemColumn (@Columns) {
+
+            # skip CustomerID if Customer Information Center
+            if ( $Self->{Action} eq 'AgentCustomerInformationCenter' && $ConfigItemColumn eq 'CustomerID' ) {
+                next COLUMN;
+            }
+
+            if ( $ConfigItemColumn !~ m{\A DynamicField_}xms ) {
+
+                $LayoutObject->Block(
+                    Name => 'GeneralOverviewRow',
+                );
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericConfigItemColumn',
+                    Data => {},
+                );
+
+                my $BlockType = '';
+                my $CSSClass  = '';
+
+                if ( $ConfigItemColumn eq 'ConfigItemNumber' ) {
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericConfigItemNumber',
+                        Data => {
+                            %ConfigItem,
+                            Title => $ConfigItem{Title},
+                        },
+                    );
+                    next COLUMN;
+                }
+                elsif ( $ConfigItemColumn eq 'Age' ) {
+                    $DataValue = $LayoutObject->CustomerAge(
+                        Age   => $ConfigItem{Age},
+                        Space => ' ',
+                    );
+                }
+                elsif (
+                    $ConfigItemColumn eq 'State'
+                    )
+                {
+                    $BlockType = 'Translatable';
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                }
+                elsif ( $ConfigItemColumn eq 'Created' || $ConfigItemColumn eq 'Changed' ) {
+                    $BlockType = 'Time';
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                }
+                elsif ( $ConfigItemColumn eq 'CustomerName' ) {
+
+                    # get customer name
+                    my $CustomerName;
+                    if ( $ConfigItem{CustomerUserID} ) {
+                        $CustomerName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+                            UserLogin => $ConfigItem{CustomerUserID},
+                        );
+                    }
+                    $DataValue = $CustomerName;
+                }
+                elsif ( $ConfigItemColumn eq 'CustomerCompanyName' ) {
+                    my %CustomerCompanyData;
+                    if ( $ConfigItem{CustomerID} ) {
+                        %CustomerCompanyData = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyGet(
+                            CustomerID => $ConfigItem{CustomerID},
+                        );
+                    }
+                    $DataValue = $CustomerCompanyData{CustomerCompanyName};
+                }
+                else {
+                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                }
+
+                if ( $ConfigItemColumn eq 'Title' ) {
+                    $LayoutObject->Block(
+                        Name => "ContentLargeConfigItemTitle",
+                        Data => {
+                            Title      => "$DataValue " || '',
+                            WholeTitle => "Dumb title",
+                            Class      => $CSSClass || '',
+                        },
+                    );
+
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => "ContentLargeConfigItemGenericColumn$BlockType",
+                        Data => {
+                            GenericValue => $DataValue || '-',
+                            Class        => $CSSClass  || '',
+                        },
+                    );
+                }
+
+            }
+
+            # dynamic fields
+            else {
+
+                # cycle trough the activated dynamic fields for this screen
+                my $DynamicFieldConfig;
+                my $DFColumn = $ConfigItemColumn;
+                $DFColumn =~ s/DynamicField_//g;
+                DYNAMICFIELD:
+                for my $DFConfig ( @{ $Self->{DynamicField} } ) {
+                    next DYNAMICFIELD if !IsHashRefWithData($DFConfig);
+                    next DYNAMICFIELD if $DFConfig->{Name} ne $DFColumn;
+
+                    $DynamicFieldConfig = $DFConfig;
+                    last DYNAMICFIELD;
+                }
+                next CONFIGITEMCOLUMN if !IsHashRefWithData($DynamicFieldConfig);
+
+                # get field value
+                my $Value = $DynamicFieldBackendObject->ValueGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $ConfigItem{VersionID},
+                );
+
+                my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Value              => $Value,
+                    ValueMaxChars      => 20,
+                    LayoutObject       => $LayoutObject,
+                );
+
+                $LayoutObject->Block(
+                    Name => 'ContentLargeConfigItemGenericDynamicField',
+                    Data => {
+                        Value => $ValueStrg->{Value},
+                        Title => $ValueStrg->{Title},
+                    },
+                );
+
+                if ( $ValueStrg->{Link} ) {
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericDynamicFieldLink',
+                        Data => {
+                            Value                       => $ValueStrg->{Value},
+                            Title                       => $ValueStrg->{Title},
+                            Link                        => $ValueStrg->{Link},
+                            $DynamicFieldConfig->{Name} => $ValueStrg->{Title},
+                        },
+                    );
+                }
+                else {
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericDynamicFieldPlain',
+                        Data => {
+                            Value => $ValueStrg->{Value},
+                            Title => $ValueStrg->{Title},
+                        },
+                    );
+                }
+            }
+
+        }
+
+    }
+
+    # show "none" if no config item is available
+    if ( !$ConfigItemIDs || !@{$ConfigItemIDs} ) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeConfigItemGenericNone',
+            Data => {},
+        );
+    }
+
+    # check for refresh time
+    my $Refresh = '';
+    if ( $Self->{UserRefreshTime} ) {
+        $Refresh = 60 * $Self->{UserRefreshTime};
+
+        # send data to JS
+        $LayoutObject->AddJSData(
+            Key   => 'WidgetRefresh' . $WidgetName,
+            Value => {
+                Name           => $Self->{Name},
+                NameHTML       => $WidgetName,
+                RefreshTime    => $Refresh,
+                CustomerID     => $Param{CustomerID},
+                CustomerUserID => $Param{CustomerUserID},
             },
         );
     }
 
-    my $NameHTML = $Self->{Name};
-    $NameHTML =~ s{-}{_}xmsg;
+    # check for active filters and add a 'remove filters' button to the widget header
+    my $FilterActive = 0;
+    if ( $Self->{GetColumnFilterSelect} && IsHashRefWithData( $Self->{GetColumnFilterSelect} ) ) {
+        $FilterActive = 1;
+    }
 
-    # Send data to JS.
+    # send data to JS
     $LayoutObject->AddJSData(
-        Key   => 'ITSMConfigItemGeneric',
+        Key   => 'WidgetContainer' . $WidgetName,
         Value => {
-            Name     => $Self->{Name},
-            NameHTML => $NameHTML,
+            Name           => $Self->{Name},
+            CustomerID     => $Param{CustomerID},
+            CustomerUserID => $Param{CustomerUserID},
+            FilterActive   => $FilterActive,
+            SortBy         => $Self->{SortBy} || 'Age',
+            OrderBy        => $ConfigItemSearch{OrderBy},
+            SortingColumn  => $Param{SortingColumn},
         },
     );
 
@@ -694,8 +1636,12 @@ sub Run {
         TemplateFile => 'AgentDashboardITSMConfigItemGeneric',
         Data         => {
             %{ $Self->{Config} },
-            Name         => $Self->{Name},
-            StyleClasses => $StyleClasses,
+            Name => $Self->{Name},
+            %{$Summary},
+            FilterValue      => $Self->{Filter},
+            AdditionalFilter => $Self->{AdditionalFilter},
+            CustomerID       => $Self->{CustomerID},
+            CustomerUserID   => $Self->{CustomerUserID},
         },
         AJAX => $Param{AJAX},
     );
@@ -703,195 +1649,464 @@ sub Run {
     return $Content;
 }
 
-sub _AssignedCIsGet {
+sub _InitialColumnFilter {
     my ( $Self, %Param ) = @_;
 
-    # Define cache key.
-    my $CacheKey;
-    if ( $Self->{CustomerID} ) {
-        $CacheKey = 'AssignedCIs-' . $Param{Filter} . '-' . $Self->{CustomerID};
+    return if !$Param{ColumnName};
+    return if !$Self->{ValidFiltrableColumns}->{ $Param{ColumnName} };
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $Label = $Param{Label} || $Param{ColumnName};
+    $Label = $LayoutObject->{LanguageObject}->Translate($Label);
+
+    # set fixed values
+    my $Data = [
+        {
+            Key   => '',
+            Value => uc $Label,
+        },
+    ];
+
+    # define if column filter values should be translatable
+    my $TranslationOption = 0;
+
+    if (
+        $Param{ColumnName} eq 'DeplState'
+        || $Param{ColumnName} eq 'CurDeplState'
+        || $Param{ColumnName} eq 'InciState'
+        || $Param{ColumnName} eq 'CurInciState'
+        || $Param{ColumnName} eq 'Class'
+        )
+    {
+        $TranslationOption = 1;
     }
-    elsif ( $Self->{CustomerUserID} ) {
-        $CacheKey = 'AssignedCIs-' . $Param{Filter} . '-' . $Self->{CustomerUserID};
+
+    my $Class = 'ColumnFilter';
+    if ( $Param{Css} ) {
+        $Class .= ' ' . $Param{Css};
+    }
+
+    # build select HTML
+    my $ColumnFilterHTML = $LayoutObject->BuildSelection(
+        Name        => 'ColumnFilter' . $Param{ColumnName} . $Self->{Name},
+        Data        => $Data,
+        Class       => $Class,
+        Translation => $TranslationOption,
+        SelectedID  => '',
+    );
+    return $ColumnFilterHTML;
+}
+
+sub _GetColumnValues {
+    my ( $Self, %Param ) = @_;
+
+    return if !IsStringWithData( $Param{HeaderColumn} );
+
+    my $HeaderColumn = $Param{HeaderColumn};
+    my %ColumnFilterValues;
+    my $ConfigItemIDs;
+
+    if ( IsArrayRefWithData( $Param{OriginalConfigItemIDs} ) ) {
+        $ConfigItemIDs = $Param{OriginalConfigItemIDs};
+    }
+
+    if ( $HeaderColumn !~ m/^DynamicField_/ ) {
+        my $FunctionName = $HeaderColumn . 'FilterValuesGet';
+        if ( $HeaderColumn eq 'CustomerID' ) {
+            $FunctionName = 'CustomerFilterValuesGet';
+        }
+
+        $ColumnFilterValues{$HeaderColumn} = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::ColumnFilter')->$FunctionName(
+            ConfigItemIDs => $ConfigItemIDs,
+            HeaderColumn  => $HeaderColumn,
+            UserID        => $Self->{UserID},
+        );
     }
     else {
-        $CacheKey = 'AssignedCIs-' . $Param{Filter} . '-' . $Self->{UserID};
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $FieldName = 'DynamicField_' . $DynamicFieldConfig->{Name};
+
+            next DYNAMICFIELD if $FieldName ne $HeaderColumn;
+
+            # get dynamic field backend object
+            my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+            my $IsFiltrable = $BackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsFiltrable',
+            );
+
+            next DYNAMICFIELD if !$IsFiltrable;
+
+            $Self->{ValidFiltrableColumns}->{$HeaderColumn} = $IsFiltrable;
+            if ( IsArrayRefWithData($ConfigItemIDs) ) {
+
+                # get the historical values for the field
+                $ColumnFilterValues{$HeaderColumn} = $BackendObject->ColumnFilterValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
+                    ConfigItemIDs      => $ConfigItemIDs,
+                );
+            }
+            else {
+
+                # get PossibleValues
+                $ColumnFilterValues{$HeaderColumn} = $BackendObject->PossibleValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                );
+            }
+            last DYNAMICFIELD;
+        }
     }
 
-    my $Content = $Kernel::OM->Get('Kernel::System::Cache')->Get(
-        Type => 'DashboardITSMConfigItemGeneric',
-        Key  => $CacheKey,
-    );
-    return $Content if defined $Content && $Param{Count};
+    return \%ColumnFilterValues;
+}
 
-    # Get the defined param.
+# =head2 _ColumnFilterJSON()
+
+#     creates a JSON select filter for column header
+
+#     my $ColumnFilterJSON = $ITSMConfigItemOverviewSmallObject->_ColumnFilterJSON(
+#         ColumnName => 'Queue',
+#         Label      => 'Queue',
+#         ColumnValues => {
+#             1 => 'PostMaster',
+#             2 => 'Junk',
+#         },
+#         SelectedValue '1',
+#     );
+
+# =cut
+
+sub _ColumnFilterJSON {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{ColumnName};
+    return if !$Self->{ValidFiltrableColumns}->{ $Param{ColumnName} };
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $Label = $Param{Label};
+    $Label =~ s{ \A DynamicField_ }{}gxms;
+    $Label = $LayoutObject->{LanguageObject}->Translate($Label);
+
+    # set fixed values
+    my $Data = [
+        {
+            Key   => 'DeleteFilter',
+            Value => uc $Label,
+        },
+        {
+            Key      => '-',
+            Value    => '-',
+            Disabled => 1,
+        },
+    ];
+
+    if ( $Param{ColumnValues} && ref $Param{ColumnValues} eq 'HASH' ) {
+
+        my %Values = %{ $Param{ColumnValues} };
+
+        # Set possible values.
+        for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
+            push @{$Data}, {
+                Key   => $ValueKey,
+                Value => $Values{$ValueKey},
+            };
+        }
+    }
+
+    # define if column filter values should be translatable
+    my $TranslationOption = 0;
+
+    if (
+        $Param{ColumnName} eq 'DeplState'
+        || $Param{ColumnName} eq 'CurDeplState'
+        || $Param{ColumnName} eq 'InciState'
+        || $Param{ColumnName} eq 'CurInciState'
+        || $Param{ColumnName} eq 'Class'
+        )
+    {
+        $TranslationOption = 1;
+    }
+
+    # build select HTML
+    my $JSON = $LayoutObject->BuildSelectionJSON(
+        [
+            {
+                Name         => 'ColumnFilter' . $Param{ColumnName} . $Param{DashboardName},
+                Data         => $Data,
+                Class        => 'ColumnFilter',
+                Sort         => 'AlphanumericKey',
+                TreeView     => 1,
+                SelectedID   => $Param{SelectedValue},
+                Translation  => $TranslationOption,
+                AutoComplete => 'off',
+            },
+        ],
+    );
+
+    return $JSON;
+}
+
+sub _SearchParamsGet {
+    my ( $Self, %Param ) = @_;
+
+    # get all search base attributes
+    my %ConfigItemSearch;
+    my %DynamicFieldsParameters;
     my @Params = split /;/, $Self->{Config}->{Attributes};
 
-    # Define result.
-    my @ConfigItemIDs;
-    my %Result;
+    # read user preferences and config to get columns that
+    # should be shown in the dashboard widget (the preferences
+    # have precedence)
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
 
-    # Get key for CI search.
-    my $ConfigItemKey = $Self->{Config}->{ConfigItemKey} // '';
+    # get column names from Preferences
+    my $PreferencesColumn = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
+        Data => $Preferences{ $Self->{PrefKeyColumns} },
+    );
 
-    return if !$ConfigItemKey;
+    # check for default settings
+    my @Columns;
+    if ( $Self->{Config}->{DefaultColumns} && IsHashRefWithData( $Self->{Config}->{DefaultColumns} ) ) {
+        @Columns = grep { $Self->{Config}->{DefaultColumns}->{$_} eq '2' }
+            sort { $Self->_DefaultColumnSort() } keys %{ $Self->{Config}->{DefaultColumns} };
+    }
+    if ($PreferencesColumn) {
+        if ( $PreferencesColumn->{Columns} && %{ $PreferencesColumn->{Columns} } ) {
+            @Columns = grep {
+                defined $PreferencesColumn->{Columns}->{$_}
+                    && $PreferencesColumn->{Columns}->{$_} eq '1'
+            } sort { $Self->_DefaultColumnSort() } keys %{ $Self->{Config}->{DefaultColumns} };
+        }
+        if ( $PreferencesColumn->{Order} && @{ $PreferencesColumn->{Order} } ) {
+            @Columns = @{ $PreferencesColumn->{Order} };
+        }
 
-    # Get config item object.
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        # remove duplicate columns
+        my %UniqueColumns;
+        my @ColumnsEnabledAux;
+
+        for my $Column (@Columns) {
+            if ( !$UniqueColumns{$Column} ) {
+                push @ColumnsEnabledAux, $Column;
+            }
+            $UniqueColumns{$Column} = 1;
+        }
+
+        # set filtered column list
+        @Columns = @ColumnsEnabledAux;
+    }
+
+    # always set ConfigItemNumber
+    if ( !grep { $_ eq 'ConfigItemNumber' } @Columns ) {
+        unshift @Columns, 'ConfigItemNumber';
+    }
+
+    {
+
+        # loop through all the dynamic fields to get the ones that should be shown
+        DYNAMICFIELDNAME:
+        for my $DynamicFieldName (@Columns) {
+
+            next DYNAMICFIELDNAME if $DynamicFieldName !~ m{ DynamicField_ }xms;
+
+            # remove dynamic field prefix
+            my $FieldName = $DynamicFieldName;
+            $FieldName =~ s/DynamicField_//gi;
+            $Self->{DynamicFieldFilter}->{$FieldName} = 1;
+        }
+    }
+
+    # get the dynamic fields for this screen
+    $Self->{DynamicField} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => ['ITSMConfigItem'],
+        FieldFilter => $Self->{DynamicFieldFilter} || {},
+    );
+
+    # get dynamic field backend object
+    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # get filterable Dynamic fields
+    # cycle trough the activated Dynamic Fields for this screen
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $IsFiltrable = $BackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsFiltrable',
+        );
+
+        # if the dynamic field is filterable add it to the ValidFiltrableColumns hash
+        if ($IsFiltrable) {
+            $Self->{ValidFiltrableColumns}->{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
+        }
+    }
+
+    # get sortable Dynamic fields
+    # cycle trough the activated Dynamic Fields for this screen
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $IsSortable = $BackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsSortable',
+        );
+
+        # if the dynamic field is sortable add it to the ValidSortableColumns hash
+        if ($IsSortable) {
+            $Self->{ValidSortableColumns}->{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
+        }
+    }
 
     STRING:
     for my $String (@Params) {
         next STRING if !$String;
         my ( $Key, $Value ) = split /=/, $String;
 
-        if ( $Key eq 'CustomerCompany' ) {
+        if ( $Key eq 'CustomerID' ) {
+            $Key = "CustomerIDRaw";
+        }
 
-            CLASS:
-            for my $Class ( sort keys %{$ConfigItemKey} ) {
-
-                # Skip other classes if filter is set.
-                next CLASS if $Param{Filter} && ( $Param{Filter} ne $Class && $Param{Filter} ne 'All' );
-
-                my $ClassID = $Self->_ClassIDByNameGet(
-                    Value => $Class,
-                );
-
-                # Skip if we have no class id.
-                next CLASS if !$ClassID;
-
-                my @SearchKey = (
-                    {
-                        "[1]{'Version'}[1]{'$ConfigItemKey->{$Class}'}[%]{'Content'}" => $Self->{CustomerID},
-                    }
-                );
-
-                # Perform config item search (extended).
-                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
-                    ClassIDs => [$ClassID],
-                    What     => \@SearchKey,
-                );
-
-                next CLASS if !IsArrayRefWithData($ConfigItemIDs);
-
-                push @ConfigItemIDs, @{$ConfigItemIDs};
-
-                # Count config items per class.
-                if ( $Param{Count} ) {
-                    $Result{$Class} = scalar @{$ConfigItemIDs};
-                }
+        # push ARRAYREF attributes directly in an ARRAYREF
+        if (
+            $Key
+            =~ /^(StateType|StateTypeIDs|States|StateIDs|ArchiveFlags|CreatedUserIDs|CreatedStates|CreatedStateIDs)$/
+            )
+        {
+            if ( $Value =~ m{,}smx ) {
+                push @{ $ConfigItemSearch{$Key} }, split( /,/, $Value );
+            }
+            else {
+                push @{ $ConfigItemSearch{$Key} }, $Value;
             }
         }
-        elsif ( $Key eq 'Customer' ) {
 
-            CLASS:
-            for my $Class ( sort keys %{$ConfigItemKey} ) {
+        # check if parameter is a dynamic field and capture dynamic field name (with DynamicField_)
+        # in $1 and the Operator in $2
+        # possible Dynamic Fields options include:
+        #   DynamicField_NameX_Equals=123;
+        #   DynamicField_NameX_Like=value*;
+        #   DynamicField_NameX_GreaterThan=2001-01-01 01:01:01;
+        #   DynamicField_NameX_GreaterThanEquals=2001-01-01 01:01:01;
+        #   DynamicField_NameX_SmallerThan=2002-02-02 02:02:02;
+        #   DynamicField_NameX_SmallerThanEquals=2002-02-02 02:02:02;
+        elsif ( $Key =~ m{\A (DynamicField_.+?) _ (.+?) \z}sxm ) {
+            push @{ $DynamicFieldsParameters{$1}->{$2} }, $Value;
+        }
 
-                # Skip other classes if filter is set.
-                next CLASS if $Param{Filter} && ( $Param{Filter} ne $Class && $Param{Filter} ne 'All' );
+        elsif ( !defined $ConfigItemSearch{$Key} ) {
 
-                my $ClassID = $Self->_ClassIDByNameGet(
-                    Value => $Class,
-                );
-
-                # Skip if we have no class id.
-                next CLASS if !$ClassID;
-
-                my @SearchKey = (
-                    {
-                        "[1]{'Version'}[1]{'$ConfigItemKey->{$Class}'}[%]{'Content'}" => $Self->{CustomerUserID},
-                    }
-                );
-
-                # Perform config item search (extended).
-                my $ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
-                    ClassIDs => [$ClassID],
-                    What     => \@SearchKey,
-                );
-
-                next CLASS if !IsArrayRefWithData($ConfigItemIDs);
-
-                push @ConfigItemIDs, @{$ConfigItemIDs};
-
-                # Count config items per class.
-                if ( $Param{Count} ) {
-                    $Result{$Class} = scalar @{$ConfigItemIDs};
-                }
+            # change sort by, if needed
+            if (
+                $Key eq 'SortBy'
+                && $Self->{SortBy}
+                && $Self->{ValidSortableColumns}->{ $Self->{SortBy} }
+                )
+            {
+                $Value = $Self->{SortBy};
             }
+            elsif ( $Key eq 'SortBy' && !$Self->{ValidSortableColumns}->{$Value} ) {
+                $Value = 'Age';
+            }
+            $ConfigItemSearch{$Key} = $Value;
+        }
+        elsif ( !ref $ConfigItemSearch{$Key} ) {
+            my $ValueTmp = $ConfigItemSearch{$Key};
+            $ConfigItemSearch{$Key} = [$ValueTmp];
+            push @{ $ConfigItemSearch{$Key} }, $Value;
         }
         else {
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Need CustomerCompany or Customer as attribute.',
-            );
-            return;
+            push @{ $ConfigItemSearch{$Key} }, $Value;
         }
     }
+    %ConfigItemSearch = (
+        %ConfigItemSearch,
+        %DynamicFieldsParameters,
 
-    # Remove duplicated config item ids.
-    my %TempConfigItemIDs = map { $_ => 1 } @ConfigItemIDs;
-    @ConfigItemIDs = sort keys %TempConfigItemIDs;
+        # TODO check if permission is needed
+        Permission => $Self->{Config}->{Permission} || 'ro',
+        UserID     => $Self->{UserID},
+    );
 
-    $Result{ConfigItemIDs} = \@ConfigItemIDs;
-
-    # Add count for all items.
-    if ( $Param{Count} ) {
-        $Result{All} = scalar @ConfigItemIDs;
+    # CustomerInformationCenter shows data per CustomerID
+    if ( $Param{CustomerID} ) {
+        $ConfigItemSearch{CustomerIDRaw} = $Param{CustomerID};
     }
 
-    if ( $Self->{Config}->{CacheTTLLocal} && $Param{Count} ) {
-        $Kernel::OM->Get('Kernel::System::Cache')->Set(
-            Type  => 'DashboardITSMConfigItemGeneric',
-            Key   => $CacheKey,
-            Value => \%Result,
-            TTL   => 2 * 60,
+    my %ConfigItemSearchSummary = (
+        All => {
+            OwnerIDs => $ConfigItemSearch{OwnerIDs} // undef,
+            LockIDs  => $ConfigItemSearch{LockIDs}  // undef,
+        },
+    );
+
+    if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
+
+        # Add filters for assigend and accessible config items for the customer user information center as a
+        #   additional filter together with the other filters. One of them must be always active.
+        %ConfigItemSearchSummary = (
+            AssignedToCustomerUser => {
+                CustomerUserLoginRaw => $Param{CustomerUserID} // undef,
+            },
+            AccessibleForCustomerUser => {
+                CustomerUserID => $Param{CustomerUserID} // undef,
+            },
+            %ConfigItemSearchSummary,
         );
     }
 
-    return \%Result;
+    return (
+        Columns                 => \@Columns,
+        ConfigItemSearch        => \%ConfigItemSearch,
+        ConfigItemSearchSummary => \%ConfigItemSearchSummary,
+    );
 }
 
-sub _ClassIDByNameGet {
-    my ( $Self, %Param ) = @_;
+sub _DefaultColumnSort {
 
-    # Check needed stuff.
-    if ( !$Param{Value} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Need class name!",
-        );
-        return;
+    my %DefaultColumns = (
+        CurDeplSignal => 110,
+        CurInciSignal => 111,
+        Class         => 112,
+        Number        => 113,
+        Name          => 114,
+        CurDeplState  => 115,
+        CurInciState  => 116,
+        LastChanged   => 117,
+    );
+
+    # dynamic fields can not be on the DefaultColumns sorting hash
+    # when comparing 2 dynamic fields sorting must be alphabetical
+    if ( !$DefaultColumns{$a} && !$DefaultColumns{$b} ) {
+        return $a cmp $b;
     }
 
-    # Get general catalog object.
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    # when a dynamic field is compared to a config item attribute it must be higher
+    elsif ( !$DefaultColumns{$a} ) {
+        return 1;
+    }
 
-    # Get class list.
-    my $ClassList = $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
+    # when a config item attribute is compared to a dynamic field it must be lower
+    elsif ( !$DefaultColumns{$b} ) {
+        return -1;
+    }
 
-    # Reverse class list.
-    my %ClassName2ID = reverse %{$ClassList};
-
-    # Get class id.
-    my $ClassID = $ClassName2ID{ $Param{Value} };
-
-    return if !$ClassID;
-
-    #Initiate permission check.
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    my $HasAccess = $ConfigItemObject->Permission(
-        Scope   => 'Class',
-        ClassID => $ClassID,
-        UserID  => $Self->{UserID},
-        Type    => $Self->{Config}->{Permission},
-    );
-    return if !$HasAccess;
-
-    # Return class id.
-    return $ClassID;
+    # otherwise do a numerical comparison with the config item attributes
+    return $DefaultColumns{$a} <=> $DefaultColumns{$b};
 }
 
 1;

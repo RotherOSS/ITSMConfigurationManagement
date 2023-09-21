@@ -1298,6 +1298,7 @@
                 <Item Key="Title" Translatable="1">Assigned CIs</Item>
                 <Item Key="Description" Translatable="1">CIs assigned to customer company</Item>
                 <Item Key="Attributes">CustomerCompany</Item>
+                <Item Key="Filter" Translatable="1">All</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
                 <Item Key="Block">ContentLarge</Item>
@@ -1317,7 +1318,8 @@
                     <Hash>
                         <DefaultItem ValueType="Select">
                             <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
-                            <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                            <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                            <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                         </DefaultItem>
                         <Item Key="CurInciSignal" SelectedID="1"></Item>
                         <Item Key="CurDeplSignal" SelectedID="1"></Item>
@@ -1371,6 +1373,7 @@
                 <Item Key="Title" Translatable="1">Assigned CIs</Item>
                 <Item Key="Description" Translatable="1">CIs assigned to customer user</Item>
                 <Item Key="Attributes">Customer</Item>
+                <Item Key="Filter" Translatable="1">All</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
                 <Item Key="Block">ContentLarge</Item>
@@ -1390,7 +1393,8 @@
                     <Hash>
                         <DefaultItem ValueType="Select">
                             <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
-                            <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                            <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                            <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                         </DefaultItem>
                         <Item Key="CurInciSignal" SelectedID="1"></Item>
                         <Item Key="CurDeplSignal" SelectedID="1"></Item>
