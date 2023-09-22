@@ -1556,6 +1556,16 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="DefaultColumnsScreens###ITSMConfigurationManagement" Required="1" Valid="1">
+        <Description Translatable="1">This configuration defines all possible screens to enable or disable default columns.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser">DashboardWidget CUIC-ITSMConfigItemCustomerUser</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany">DashboardWidget CIC-ITSMConfigItemCustomerCompany</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="DynamicFields::Driver###Reference###ReferencedObjectTypes###003-ITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Referenced object types that are available when ITSMConfigurationManagement is activated.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
