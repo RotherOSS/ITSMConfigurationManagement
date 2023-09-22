@@ -176,6 +176,8 @@ sub HandleResponse {
 
     my %GeneralCatalogItemLookup;
     my %DefinitionLookup;
+    my %NameModuleObjects;
+    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
     CI:
     for my $RemoteCIData ( @{ $Param{Data} } ) {
 
@@ -189,7 +191,7 @@ sub HandleResponse {
             next CI;
         }
 
-        my @RequiredAttributes = qw(Class Name DeploymentState IncidentState);
+        my @RequiredAttributes = qw(Class DeploymentState IncidentState);
         my %RequiredAttributes;
         for my $Needed ( sort @RequiredAttributes ) {
 
@@ -305,7 +307,7 @@ sub HandleResponse {
             }
         }
 
-        # if neither Number or ID are provided directly, perform a the search
+        # if neither Number nor ID are provided directly, perform a the search
         if ( $ConfigItemNumber ) {
             $ConfigItemID = $ConfigItemObject->ConfigItemLookup(
                 ConfigItemNumber => $RemoteCIData->{Number},
@@ -328,6 +330,46 @@ sub HandleResponse {
             }
         }
 
+        if ( $NameModuleConfig && $NameModuleConfig->{ $RemoteCIData->{Class} } ) {
+            if ( !$NameModuleObjects{ $RemoteCIData->{Class} } ) {
+                # check if name module exists
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $NameModuleObjects{ $RemoteCIData->{Class} } ) ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Can't load name module for class $RemoteCIData->{Class}!",
+                    );
+
+                    next CI;
+                }
+
+                # create a backend object
+                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( $NameModuleObjects{ $RemoteCIData->{Class} } );
+            }
+
+            if ( $ConfigItemID ) {
+                delete $RemoteCIData->{Name};
+            }
+            else {
+                $RemoteCIData->{Name} = $NameModuleObjects{ $RemoteCIData->{Class} }->ConfigItemNameCreate(
+                    $RemoteCIData->%*,
+                    %RequiredAttributes,
+                    DeplStateID => $RequiredAttributes{DeploymentStateID},
+                    InciStateID => $RequiredAttributes{IncidentStateID},
+                    UserID      => 1,
+                );
+            }
+        }
+        elsif ( !$ConfigItemID && !$RemoteCIData->{Name} ) {
+            my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => "Missing 'Name' parameter for creating a CI. Skipping item. $NoticeInfo",
+            );
+
+            next CI;
+        }
+
         if ( $ConfigItemID ) {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
@@ -339,7 +381,6 @@ sub HandleResponse {
             );
 
             if ( !$Success ) {
-
                 return $Self->Error(
                     ErrorMessage => "Error while updating ConfigItemID $ConfigItemID!",
                 );
@@ -355,7 +396,6 @@ sub HandleResponse {
             );
 
             if ( !$ConfigItemID ) {
-
                 return $Self->Error(
                     ErrorMessage =>
                         "Error while creating CI with Number '$RequiredAttributes{Name}', Class '$RequiredAttributes{Class}' (ClassID: '$RequiredAttributes{ClassID}').",
