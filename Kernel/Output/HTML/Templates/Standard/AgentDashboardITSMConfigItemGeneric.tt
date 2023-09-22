@@ -160,11 +160,13 @@
                     <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID %]" title="[% Data.Title | html %]" class="AsBlock MasterActionLink">[% Data.ConfigItemNumber | html %]</a>
                 </td>
 [% RenderBlockEnd("ContentLargeConfigItemGenericConfigItemNumber") %]
-[% RenderBlockStart("ContentLargeConfigItemGenericEscalationTime") %]
-                <td>
-                    <div title="[% Translate("Service Time") | html %]: [% Data.EscalationTimeWorkingTime | html %] - [% Data.EscalationDestinationDate | Localize("TimeShort") %]" class="[% Data.EscalationClass | html %]">[% Data.EscalationTimeHuman | html %]<br/>[% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]</div>
-                </td>
-[% RenderBlockEnd("ContentLargeConfigItemGenericEscalationTime") %]
+[% RenderBlockStart("ContentLargeConfigItemSignal") %]
+                    <td>
+                        <div title="[% Data.State | html %]" class="Flag Small">
+                            <span class="[% Data.Signal | html %]">"[% Translate(Data.State) | html %]"</span>
+                        </div>
+                    </td>
+[% RenderBlockEnd("ContentLargeConfigItemSignal") %]
 [% RenderBlockStart("ContentLargeConfigItemGenericColumn") %]
                 <td>
                     <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(40) | html %]</div>

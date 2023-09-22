@@ -543,6 +543,64 @@ sub Run {
         );
     }
 
+    # define incident signals
+    my %InciSignals = (
+        Translatable('operational') => 'greenled',
+        Translatable('warning')     => 'yellowled',
+        Translatable('incident')    => 'redled',
+    );
+
+    # store deployment signals
+    my %DeplSignals;
+
+    # get general catalog object
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+    # get list of deployment states
+    my $DeploymentStatesList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::DeploymentState',
+    );
+
+    # set deployment style colors
+    my $StyleClasses = '';
+
+    ITEMID:
+    for my $ItemID ( sort keys %{$DeploymentStatesList} ) {
+
+        # get deployment state preferences
+        my %GeneralCatalogPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+            ItemID => $ItemID,
+        );
+
+        # check if a color is defined in preferences
+        next ITEMID if !$GeneralCatalogPreferences{Color};
+
+        # get deployment state
+        my $DeplState = $DeploymentStatesList->{$ItemID};
+
+        # remove any non ascii word characters
+        $DeplState =~ s{ [^a-zA-Z0-9] }{_}msxg;
+
+        # store the original deployment state as key
+        # and the ss safe converted deployment state as value
+        $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
+
+        # convert to lower case
+        my $DeplStateColor = lc $GeneralCatalogPreferences{Color};
+
+        # add to style classes string
+        $StyleClasses .= "
+            .Flag span.$DeplState {
+                background-color: #$DeplStateColor;
+            }
+        ";
+    }
+
+    # wrap into style tags
+    if ($StyleClasses) {
+        $StyleClasses = "<style>$StyleClasses</style>";
+    }
+
     my $CacheKey     = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
     my $CacheColumns = join(
         ',',
@@ -1404,6 +1462,10 @@ sub Run {
         );
         my %ConfigItem = $ConfigItemRef->%*;
 
+        # set deployment and incident signals
+        $ConfigItem{CurDeplSignal} = $DeplSignals{ $ConfigItem{CurDeplState} };
+        $ConfigItem{CurInciSignal} = $InciSignals{ $ConfigItem{CurInciStateType} };
+
         next CONFIGITEMID if !%ConfigItem;
 
         # set a default title if config item has no title
@@ -1465,11 +1527,16 @@ sub Run {
                     );
                 }
                 elsif (
-                    $ConfigItemColumn eq 'State'
+                    $ConfigItemColumn eq 'CurDeplSignal'
                     )
                 {
-                    $BlockType = 'Translatable';
-                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                    $BlockType = 'CurDepl';
+                }
+                elsif (
+                    $ConfigItemColumn eq 'CurInciSignal'
+                    )
+                {
+                    $BlockType = 'CurInci';
                 }
                 elsif ( $ConfigItemColumn eq 'Created' || $ConfigItemColumn eq 'Changed' ) {
                     $BlockType = 'Time';
@@ -1505,6 +1572,16 @@ sub Run {
                         Data => {
                             Title      => "$DataValue " || '',
                             WholeTitle => "Dumb title",
+                            Class      => $CSSClass || '',
+                        },
+                    );
+                }
+                elsif ( $ConfigItemColumn eq 'CurDeplSignal' || $ConfigItemColumn eq 'CurInciSignal' ) {
+                    $LayoutObject->Block(
+                        Name => "ContentLargeConfigItemSignal",
+                        Data => {
+                            State      => $ConfigItem{$BlockType . 'State'},
+                            Signal     => $ConfigItem{$BlockType . 'Signal'},
                             Class      => $CSSClass || '',
                         },
                     );
