@@ -1580,9 +1580,9 @@ sub Run {
                     $LayoutObject->Block(
                         Name => "ContentLargeConfigItemSignal",
                         Data => {
-                            State      => $ConfigItem{$BlockType . 'State'},
-                            Signal     => $ConfigItem{$BlockType . 'Signal'},
-                            Class      => $CSSClass || '',
+                            State  => $ConfigItem{ $BlockType . 'State' },
+                            Signal => $ConfigItem{ $BlockType . 'Signal' },
+                            Class  => $CSSClass || '',
                         },
                     );
 
