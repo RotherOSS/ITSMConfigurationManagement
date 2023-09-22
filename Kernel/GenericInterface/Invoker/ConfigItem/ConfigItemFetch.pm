@@ -333,7 +333,7 @@ sub HandleResponse {
         if ( $NameModuleConfig && $NameModuleConfig->{ $RemoteCIData->{Class} } ) {
             if ( !$NameModuleObjects{ $RemoteCIData->{Class} } ) {
                 # check if name module exists
-                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $NameModuleObjects{ $RemoteCIData->{Class} } ) ) {
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleObjects{ $RemoteCIData->{Class} } ) ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
                         Message  => "Can't load name module for class $RemoteCIData->{Class}!",
@@ -343,7 +343,7 @@ sub HandleResponse {
                 }
 
                 # create a backend object
-                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( $NameModuleObjects{ $RemoteCIData->{Class} } );
+                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleObjects{ $RemoteCIData->{Class} } );
             }
 
             if ( $ConfigItemID ) {
@@ -359,7 +359,8 @@ sub HandleResponse {
                 );
             }
         }
-        elsif ( !$ConfigItemID && !$RemoteCIData->{Name} ) {
+
+        if ( !$ConfigItemID && !$RemoteCIData->{Name} ) {
             my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(

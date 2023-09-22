@@ -335,7 +335,7 @@ sub Run {
     if ( $Self->{Subaction} eq 'Save' ) {
         my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
         if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+            my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
 
             # check if name module exists
             if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
@@ -791,7 +791,7 @@ sub Run {
     else {
         my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
         if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{$ConfigItem->{Class}}";
+            my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
 
             # check if name module exists
             if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {

@@ -560,7 +560,7 @@ sub ConfigItemAdd {
     my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
     my $NameModuleObject;
     if ( $NameModuleConfig && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
+        my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
 
         # check if name module exists
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
@@ -758,7 +758,7 @@ sub ConfigItemDelete {
 
     my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
     if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItemData->{Class} } ) {
-        my $NameModule = "Kernel::System::ITSMConfigItem::NameModules::$NameModuleConfig->{ $ConfigItemData->{Class} }";
+        my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $ConfigItemData->{Class} }";
 
         # check if name module exists
         if ( $Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
