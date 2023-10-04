@@ -44,6 +44,14 @@ sub new {
         die "Got no $Needed!" if ( !$Self->{$Needed} );
     }
 
+    # get general catalog object
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+    # get class list
+    my $ClassList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+    );
+
     # get param object
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
@@ -69,6 +77,8 @@ sub new {
     # save column filters
     $Self->{PrefKeyColumnFilters}         = 'UserDashboardITSMConfigItemGenericColumnFilters' . $Self->{Name};
     $Self->{PrefKeyColumnFiltersRealKeys} = 'UserDashboardITSMConfigItemGenericColumnFiltersRealKeys' . $Self->{Name};
+
+
 
     # get needed objects
     my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
@@ -233,7 +243,7 @@ sub new {
         }
     }
     else {
-        $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'All';
+        $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'AssignedToCustomerUser';
     }
 
     # The additional filter are at the moment only relevant for the customer user information center.
@@ -297,27 +307,31 @@ sub new {
         'CustomerUserID' => 1,
     };
 
-    # remove CustomerID if Customer Information Center
-    if ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
-        delete $Self->{ColumnFilter}->{CustomerID};
-        delete $Self->{GetColumnFilter}->{CustomerID};
-        delete $Self->{GetColumnFilterSelect}->{CustomerID};
-        delete $Self->{ValidFiltrableColumns}->{CustomerID};
-        delete $Self->{ValidSortableColumns}->{CustomerID};
-    }
-    elsif (
-        $Self->{Action} eq 'AgentCustomerUserInformationCenter'
-        && $Self->{AdditionalFilter} eq 'AssignedToCustomerUser'
-        )
-    {
+    # set config item key filter
+    my %ConfigItemKeys;
+    my %RemoveKeys;
 
-        for my $DeleteColumnFilter (qw(CustomerUserLogin CustomerUserLoginRaw)) {
-            delete $Self->{ColumnFilter}->{$DeleteColumnFilter};
-            delete $Self->{GetColumnFilter}->{$DeleteColumnFilter};
+    if ( IsHashRefWithData($Self->{Config}{ConfigItemKey}) ) {
+        for my $Class ( keys $Self->{Config}{ConfigItemKey}->%* ) {
+            push $ConfigItemKeys{ $Self->{Config}{ConfigItemKey}{$Class} }->@*, $Class;
+            $RemoveKeys{$Self->{Config}{ConfigItemKey}{$Class}} = 1;
         }
-        delete $Self->{GetColumnFilter}->{CustomerUserID};
-        delete $Self->{GetColumnFilterSelect}->{CustomerUserID};
-        delete $Self->{ValidFiltrableColumns}->{CustomerUserID};
+    }
+    $Self->{ConfigItemKeys} = \%ConfigItemKeys;
+
+    if ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
+        my $CustomerUserWidgetConfig = $ConfigObject->Get('AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser');
+        for my $ConfigItemKey ( keys $CustomerUserWidgetConfig->{Config}{ConfigItemKey}->%* ) {
+            $RemoveKeys{$ConfigItemKey} = 1;
+        }
+    }
+
+    # remove CustomerID if Customer Information Center
+    for my $RemoveKey ( keys %RemoveKeys ) {
+        delete $Self->{ColumnFilter}{$RemoveKey};
+        delete $Self->{GetColumnFilter}{$RemoveKey};
+        delete $Self->{GetColumnFilterSelect}{$RemoveKey};
+        delete $Self->{ValidFiltrableColumns}{$RemoveKey};
     }
 
     return $Self;
@@ -535,14 +549,6 @@ sub Run {
     my %ConfigItemSearch        = %{ $SearchParams{ConfigItemSearch} };
     my %ConfigItemSearchSummary = %{ $SearchParams{ConfigItemSearchSummary} };
 
-    # Add the additional filter to the config item search param.
-    if ( $Self->{AdditionalFilter} ) {
-        %ConfigItemSearch = (
-            %ConfigItemSearch,
-            %{ $ConfigItemSearchSummary{ $Self->{AdditionalFilter} } },
-        );
-    }
-
     # define incident signals
     my %InciSignals = (
         Translatable('operational') => 'greenled',
@@ -705,30 +711,19 @@ sub Run {
             # Copy original column filter.
             my %ColumnFilter = %{ $Self->{ColumnFilter} || {} };
 
-            # Change filter name accordingly.
-            my $Filter;
-
-            # Filter is used and is not in user prefered values, show no results.
-            # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
-            if (
-                $Filter
-                && IsArrayRefWithData( $ConfigItemSearchSummary{ $Self->{Filter} }->{$Filter} )
-                && IsArrayRefWithData( $ColumnFilter{$Filter} )
-                && !grep { $ColumnFilter{$Filter}->[0] == $_ } @{ $ConfigItemSearchSummary{ $Self->{Filter} }->{$Filter} }
-                )
-            {
-                @ConfigItemIDsArray = ();
-            }
-
             # Execute search.
-            else {
-                @ConfigItemIDsArray = $ConfigItemObject->ConfigItemSearch(
-                    Result => 'ARRAY',
-                    %ConfigItemSearch,
-                    %{ $ConfigItemSearchSummary{ $Self->{Filter} } },
-                    %ColumnFilter,
-                    Limit => $Self->{PageShown} + $Self->{StartHit} - 1,
-                );
+            if ( $Self->{AdditionalFilter} && IsArrayRefWithData( $ConfigItemSearchSummary{ $Self->{AdditionalFilter} } ) ) {
+
+                for my $KeyConfig ( $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->@* ) {
+                    push @ConfigItemIDsArray, $ConfigItemObject->ConfigItemSearch(
+                        Result => 'ARRAY',
+                        %ConfigItemSearch,
+                        $KeyConfig->%*,
+                        %{ $ConfigItemSearchSummary{ $Self->{Filter} } },
+                        %ColumnFilter,
+                        Limit => $Self->{PageShown} + $Self->{StartHit} - 1,
+                    );
+                }
             }
         }
         $ConfigItemIDs = \@ConfigItemIDsArray;
@@ -747,7 +742,7 @@ sub Run {
         # Define the summary types for which no count is needed, because we have no output.
         my %LookupNoCountSummaryType = (
             AssignedToCustomerUser    => 1,
-            AccessibleForCustomerUser => 1,
+            # AccessibleForCustomerUser => 1,
         );
 
         TYPE:
@@ -763,7 +758,7 @@ sub Run {
 
                 # Verify if current column filter element is already present in the config item search
                 #   summary, to delete it from the column filter hash.
-                if ( $Self->{AdditionalFilter} && $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->{$Element} ) {
+                if ( $Self->{AdditionalFilter} && grep { $_->{$Element} } $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->@* ) {
                     delete $ColumnFilter{$Element};
                 }
             }
@@ -1019,30 +1014,6 @@ sub Run {
                 Name => 'ContentLargeConfigItemGenericHeaderConfigItemHeader',
                 Data => {},
             );
-
-            if ( $HeaderColumn eq 'ConfigItemNumber' ) {
-
-                # send data to JS
-                $LayoutObject->AddJSData(
-                    Key   => 'ConfigItemNumberColumn' . $WidgetName,
-                    Value => {
-                        Name          => $Self->{Name},
-                        OrderBy       => $ConfigItemSearch{OrderBy},
-                        SortingColumn => $Param{SortingColumn},
-                    },
-                );
-
-                $LayoutObject->Block(
-                    Name => 'ContentLargeConfigItemGenericHeaderConfigItemNumberColumn',
-                    Data => {
-                        %Param,
-                        CSS   => $CSS || '',
-                        Name  => $Self->{Name},
-                        Title => $Title,
-                    },
-                );
-                next HEADERCOLUMN;
-            }
 
             my $FilterTitle     = $TranslatedWord;
             my $FilterTitleDesc = Translatable('filter not active');
@@ -1510,17 +1481,7 @@ sub Run {
                 my $BlockType = '';
                 my $CSSClass  = '';
 
-                if ( $ConfigItemColumn eq 'ConfigItemNumber' ) {
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeConfigItemGenericConfigItemNumber',
-                        Data => {
-                            %ConfigItem,
-                            Title => $ConfigItem{Title},
-                        },
-                    );
-                    next COLUMN;
-                }
-                elsif ( $ConfigItemColumn eq 'Age' ) {
+                if ( $ConfigItemColumn eq 'Age' ) {
                     $DataValue = $LayoutObject->CustomerAge(
                         Age   => $ConfigItem{Age},
                         Space => ' ',
@@ -1985,11 +1946,6 @@ sub _SearchParamsGet {
         @Columns = @ColumnsEnabledAux;
     }
 
-    # always set ConfigItemNumber
-    if ( !grep { $_ eq 'ConfigItemNumber' } @Columns ) {
-        unshift @Columns, 'ConfigItemNumber';
-    }
-
     {
 
         # loop through all the dynamic fields to get the ones that should be shown
@@ -2125,23 +2081,28 @@ sub _SearchParamsGet {
     }
 
     my %ConfigItemSearchSummary = (
-        All => {
-            OwnerIDs => $ConfigItemSearch{OwnerIDs} // undef,
-            LockIDs  => $ConfigItemSearch{LockIDs}  // undef,
-        },
+        All => {},
     );
 
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
         # Add filters for assigend and accessible config items for the customer user information center as a
         #   additional filter together with the other filters. One of them must be always active.
+        my @ConfigItemKeyConfigs;
+        for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
+            push @ConfigItemKeyConfigs, {
+                Classes => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                "DynamicField_$ConfigItemKeyDF" => {
+                    Equals => $Param{CustomerUserID} // undef,
+                },
+            };
+        }
         %ConfigItemSearchSummary = (
-            AssignedToCustomerUser => {
-                CustomerUserLoginRaw => $Param{CustomerUserID} // undef,
-            },
-            AccessibleForCustomerUser => {
-                CustomerUserID => $Param{CustomerUserID} // undef,
-            },
+            AssignedToCustomerUser => \@ConfigItemKeyConfigs,
+            # TODO ask if this is wanted
+            # AccessibleForCustomerUser => {
+            #     CustomerUserID => $Param{CustomerUserID} // undef,
+            # },
             %ConfigItemSearchSummary,
         );
     }
