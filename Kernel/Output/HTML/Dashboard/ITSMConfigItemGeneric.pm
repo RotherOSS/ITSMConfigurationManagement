@@ -243,34 +243,30 @@ sub new {
         }
     }
     else {
-        $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'AssignedToCustomerUser';
+        $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'AssignedToEntity';
     }
 
-    # The additional filter are at the moment only relevant for the customer user information center.
-    if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
+    # Remember the selected filter in the session.
+    if ( $Self->{AdditionalFilter} ) {
 
-        # Remember the selected filter in the session.
-        if ( $Self->{AdditionalFilter} ) {
+        # update session
+        $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+            SessionID => $Self->{SessionID},
+            Key       => $AdditionalPreferencesKey,
+            Value     => $Self->{AdditionalFilter},
+        );
 
-            # update session
-            $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
-                SessionID => $Self->{SessionID},
-                Key       => $AdditionalPreferencesKey,
-                Value     => $Self->{AdditionalFilter},
+        # update preferences
+        if ( !$ConfigObject->Get('DemoSystem') ) {
+            $UserObject->SetPreferences(
+                UserID => $Self->{UserID},
+                Key    => $AdditionalPreferencesKey,
+                Value  => $Self->{AdditionalFilter},
             );
-
-            # update preferences
-            if ( !$ConfigObject->Get('DemoSystem') ) {
-                $UserObject->SetPreferences(
-                    UserID => $Self->{UserID},
-                    Key    => $AdditionalPreferencesKey,
-                    Value  => $Self->{AdditionalFilter},
-                );
-            }
         }
-        else {
-            $Self->{AdditionalFilter} = $Self->{$AdditionalPreferencesKey} || $Self->{Config}->{AdditionalFilter} || 'AssignedToCustomerUser';
-        }
+    }
+    else {
+        $Self->{AdditionalFilter} = $Self->{$AdditionalPreferencesKey} || $Self->{Config}->{AdditionalFilter} || 'AssignedToEntity';
     }
 
     $Self->{PrefKeyShown}   = 'UserDashboardPref' . $Self->{Name} . '-Shown';
@@ -292,8 +288,6 @@ sub new {
         'CurDeplState'   => 1,
         'InciState'      => 1,
         'CurInciState'   => 1,
-        'CustomerID'     => 1,
-        'CustomerUserID' => 1,
     };
 
     # define filterable columns
@@ -303,8 +297,6 @@ sub new {
         'CurDeplState'   => 1,
         'InciState'      => 1,
         'CurInciState'   => 1,
-        'CustomerID'     => 1,
-        'CustomerUserID' => 1,
     };
 
     # set config item key filter
@@ -402,13 +394,6 @@ sub Preferences {
         }
     }
 
-    # remove CustomerID if Customer Information Center
-    if ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
-        delete $Columns{Columns}->{CustomerID};
-        @ColumnsEnabled             = grep { $_ ne 'CustomerID' } @ColumnsEnabled;
-        @ColumnsAvailableNotEnabled = grep { $_ ne 'CustomerID' } @ColumnsAvailableNotEnabled;
-    }
-
     my @Params = (
         {
             Desc  => Translatable('Shown config items'),
@@ -471,8 +456,6 @@ sub FilterContent {
     if (
         # TODO check
         $Kernel::OM->Get('Kernel::Config')->Get('OnlyValuesOnConfigItem')
-        || $HeaderColumn eq 'CustomerID'
-        || $HeaderColumn eq 'CustomerUserID'
         )
     {
         my %SearchParams            = $Self->_SearchParamsGet(%Param);
@@ -684,13 +667,6 @@ sub Run {
 
     if ( !$ConfigItemIDs ) {
 
-        # quote all CustomerIDs
-        if ( $ConfigItemSearch{CustomerID} ) {
-            $ConfigItemSearch{CustomerID} = $Kernel::OM->Get('Kernel::System::DB')->QueryStringEscape(
-                QueryString => $ConfigItemSearch{CustomerID},
-            );
-        }
-
         # add sort by parameter to the search
         if ( !defined $ConfigItemSearch{SortBy} || !$Self->{ValidSortableColumns}->{ $ConfigItemSearch{SortBy} } ) {
             if ( $Self->{SortBy} && $Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
@@ -738,11 +714,9 @@ sub Run {
     # If no cache or new list result, do count lookup.
     if ( !$Summary || !$CacheUsed ) {
 
-        # TODO possibly adjust
         # Define the summary types for which no count is needed, because we have no output.
         my %LookupNoCountSummaryType = (
-            AssignedToCustomerUser    => 1,
-            # AccessibleForCustomerUser => 1,
+            AssignedToEntity    => 1,
         );
 
         TYPE:
@@ -819,45 +793,7 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # get filter ticket counts
-    $LayoutObject->Block(
-        Name => 'ContentLargeConfigItemGenericFilter',
-        Data => {
-            %Param,
-            %{ $Self->{Config} },
-            Name => $Self->{Name},
-            %{$Summary},
-        },
-    );
-
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # TODO discuss: should it be possible to filter by classes?
-    # show only AssignedToCustomerUser if we have the filter
-    # if ( $ConfigItemSearchSummary{AssignedToCustomerUser} ) {
-    #     $LayoutObject->Block(
-    #         Name => 'ContentLargeConfigItemGenericFilterAssignedToCustomerUser',
-    #         Data => {
-    #             %Param,
-    #             %{ $Self->{Config} },
-    #             Name => $Self->{Name},
-    #             %{$Summary},
-    #         },
-    #     );
-    # }
-
-    # # show only locked if we have the filter
-    # if ( $ConfigItemSearchSummary{AccessibleForCustomerUser} ) {
-    #     $LayoutObject->Block(
-    #         Name => 'ContentLargeConfigItemGenericFilterAccessibleForCustomerUser',
-    #         Data => {
-    #             %Param,
-    #             %{ $Self->{Config} },
-    #             Name => $Self->{Name},
-    #             %{$Summary},
-    #         },
-    #     );
-    # }
 
     # add page nav bar
     my $Total = $Summary->{ $Self->{Filter} } || 0;
@@ -873,41 +809,6 @@ sub Run {
             .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
             . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
     }
-
-    my $LinkPage =
-        'Subaction=Element;Name=' . $Self->{Name}
-        . ';Filter=' . $Self->{Filter}
-        . ';AdditionalFilter=' . ( $Self->{AdditionalFilter}  || '' )
-        . ';SortBy=' .           ( $Self->{SortBy}            || '' )
-        . ';OrderBy=' .          ( $ConfigItemSearch{OrderBy} || '' )
-        . $ColumnFilterLink
-        . ';';
-
-    if ( $Param{CustomerID} ) {
-        $LinkPage .= "CustomerID=$Param{CustomerID};";
-    }
-    if ( $Param{CustomerUserID} ) {
-        $LinkPage .= "CustomerUserID=$Param{CustomerUserID};";
-    }
-
-    my %PageNav = $LayoutObject->PageNavBar(
-        StartHit    => $Self->{StartHit},
-        PageShown   => $Self->{PageShown},
-        AllHits     => $Total || 1,
-        Action      => 'Action=' . $LayoutObject->{Action},
-        Link        => $LinkPage,
-        AJAXReplace => 'Dashboard' . $Self->{Name},
-        IDPrefix    => 'Dashboard' . $Self->{Name},
-        AJAX        => $Param{AJAX},
-    );
-    $LayoutObject->Block(
-        Name => 'ContentLargeConfigItemGenericFilterNavBar',
-        Data => {
-            %{ $Self->{Config} },
-            Name => $Self->{Name},
-            %PageNav,
-        },
-    );
 
     # show table header
     $LayoutObject->Block(
@@ -940,11 +841,6 @@ sub Run {
     # show all needed headers
     HEADERCOLUMN:
     for my $HeaderColumn (@Columns) {
-
-        # skip CustomerID if Customer Information Center
-        if ( $Self->{Action} eq 'AgentCustomerInformationCenter' && $HeaderColumn eq 'CustomerID' ) {
-            next HEADERCOLUMN;
-        }
 
         if ( $HeaderColumn !~ m{\A DynamicField_}xms ) {
 
@@ -990,18 +886,6 @@ sub Run {
             elsif ( $HeaderColumn eq 'LastChanged' ) {
                 $TranslatedWord = Translatable('Last changed');
             }
-            elsif ( $HeaderColumn eq 'CustomerCompanyName' ) {
-                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer Name');
-            }
-            elsif ( $HeaderColumn eq 'CustomerID' ) {
-                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer ID');
-            }
-            elsif ( $HeaderColumn eq 'CustomerName' ) {
-                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User Name');
-            }
-            elsif ( $HeaderColumn eq 'CustomerUserID' ) {
-                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
-            }
             else {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
             }
@@ -1041,12 +925,6 @@ sub Run {
             {
 
                 my $Css;
-                if (
-                    $HeaderColumn eq 'CustomerID'
-                    )
-                {
-                    $Css = 'Hidden';
-                }
 
                 # variable to save the filter's HTML code
                 my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1081,32 +959,12 @@ sub Run {
                         FilterTitle          => $FilterTitle,
                     },
                 );
-
-                if ( $HeaderColumn eq 'CustomerID' ) {
-
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerIDAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLinkCustomerIDSearch',
-                        Data => {},
-                    );
-                }
             }
 
             # verify if column is just filterable
             elsif ( $Self->{ValidFiltrableColumns}->{$HeaderColumn} ) {
 
                 my $Css;
-                if ( $HeaderColumn eq 'CustomerUserID' ) {
-                    $Css = 'Hidden';
-                }
 
                 # variable to save the filter's HTML code
                 my $ColumnFilterHTML = $Self->_InitialColumnFilter(
@@ -1138,23 +996,6 @@ sub Run {
                         FilterTitle          => $FilterTitle,
                     },
                 );
-
-                if ( $HeaderColumn eq 'CustomerUserID' ) {
-
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerUserAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeConfigItemGenericHeaderColumnFilterLinkCustomerUserSearch',
-                        Data => {},
-                    );
-                }
             }
 
             # verify if column is just sortable
@@ -1463,11 +1304,6 @@ sub Run {
         COLUMN:
         for my $ConfigItemColumn (@Columns) {
 
-            # skip CustomerID if Customer Information Center
-            if ( $Self->{Action} eq 'AgentCustomerInformationCenter' && $ConfigItemColumn eq 'CustomerID' ) {
-                next COLUMN;
-            }
-
             if ( $ConfigItemColumn !~ m{\A DynamicField_}xms ) {
 
                 $LayoutObject->Block(
@@ -1502,26 +1338,6 @@ sub Run {
                 elsif ( $ConfigItemColumn eq 'Created' || $ConfigItemColumn eq 'Changed' ) {
                     $BlockType = 'Time';
                     $DataValue = $ConfigItem{$ConfigItemColumn};
-                }
-                elsif ( $ConfigItemColumn eq 'CustomerName' ) {
-
-                    # get customer name
-                    my $CustomerName;
-                    if ( $ConfigItem{CustomerUserID} ) {
-                        $CustomerName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-                            UserLogin => $ConfigItem{CustomerUserID},
-                        );
-                    }
-                    $DataValue = $CustomerName;
-                }
-                elsif ( $ConfigItemColumn eq 'CustomerCompanyName' ) {
-                    my %CustomerCompanyData;
-                    if ( $ConfigItem{CustomerID} ) {
-                        %CustomerCompanyData = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyGet(
-                            CustomerID => $ConfigItem{CustomerID},
-                        );
-                    }
-                    $DataValue = $CustomerCompanyData{CustomerCompanyName};
                 }
                 else {
                     $DataValue = $ConfigItem{$ConfigItemColumn};
@@ -1752,9 +1568,6 @@ sub _GetColumnValues {
 
     if ( $HeaderColumn !~ m/^DynamicField_/ ) {
         my $FunctionName = $HeaderColumn . 'FilterValuesGet';
-        if ( $HeaderColumn eq 'CustomerID' ) {
-            $FunctionName = 'CustomerFilterValuesGet';
-        }
 
         $ColumnFilterValues{$HeaderColumn} = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::ColumnFilter')->$FunctionName(
             ConfigItemIDs => $ConfigItemIDs,
@@ -2010,10 +1823,6 @@ sub _SearchParamsGet {
         next STRING if !$String;
         my ( $Key, $Value ) = split /=/, $String;
 
-        if ( $Key eq 'CustomerID' ) {
-            $Key = "CustomerIDRaw";
-        }
-
         # push ARRAYREF attributes directly in an ARRAYREF
         if (
             $Key
@@ -2075,14 +1884,7 @@ sub _SearchParamsGet {
         UserID     => $Self->{UserID},
     );
 
-    # CustomerInformationCenter shows data per CustomerID
-    if ( $Param{CustomerID} ) {
-        $ConfigItemSearch{CustomerIDRaw} = $Param{CustomerID};
-    }
-
-    my %ConfigItemSearchSummary = (
-        All => {},
-    );
+    my %ConfigItemSearchSummary;
 
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
@@ -2098,11 +1900,25 @@ sub _SearchParamsGet {
             };
         }
         %ConfigItemSearchSummary = (
-            AssignedToCustomerUser => \@ConfigItemKeyConfigs,
-            # TODO ask if this is wanted
-            # AccessibleForCustomerUser => {
-            #     CustomerUserID => $Param{CustomerUserID} // undef,
-            # },
+            AssignedToEntity => \@ConfigItemKeyConfigs,
+            %ConfigItemSearchSummary,
+        );
+    }
+    elsif ( $Self->{Action} eq 'AgentCustomerInformationCenter' ) {
+
+        # Add filters for assigend and accessible config items for the customer user information center as a
+        #   additional filter together with the other filters. One of them must be always active.
+        my @ConfigItemKeyConfigs;
+        for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
+            push @ConfigItemKeyConfigs, {
+                Classes => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                "DynamicField_$ConfigItemKeyDF" => {
+                    Equals => $Param{CustomerID} // undef,
+                },
+            };
+        }
+        %ConfigItemSearchSummary = (
+            AssignedToEntity => \@ConfigItemKeyConfigs,
             %ConfigItemSearchSummary,
         );
     }

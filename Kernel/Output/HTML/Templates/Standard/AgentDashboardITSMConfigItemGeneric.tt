@@ -15,18 +15,6 @@
 # --
 
 [% RenderBlockStart("ContentLargeConfigItemGenericFilter") %]
-<div class="DashboardActions">
-
-    <ul class="Tab Actions">
-[% RenderBlockStart("ContentLargeConfigItemGenericFilterAssignedToCustomerUser") %]
-        <li class="AdditionalFilter [% Data.item("AssignedToCustomerUser::Selected") | html %]"><a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AssignedToCustomerUser" data-filter="AssignedToCustomerUser">[% Translate("Assigned to customer user") | html %]</a></li>
-[% RenderBlockEnd("ContentLargeConfigItemGenericFilterAssignedToCustomerUser") %]
-[% RenderBlockStart("ContentLargeConfigItemGenericFilterAccessibleForCustomerUser") %]
-        <li class="AdditionalFilter [% Data.item("AccessibleForCustomerUser::Selected") | html %]"><a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AccessibleForCustomerUser" data-filter="AccessibleForCustomerUser">[% Translate("Accessible for customer user") | html %]</a></li>
-[% RenderBlockEnd("ContentLargeConfigItemGenericFilterAccessibleForCustomerUser") %]
-        <li class="[% Data.item("All::Selected") | html %] Last"><a href="#" id="Dashboard[% Data.Name | html %]All" data-filter="All">[% Translate("All config items") | html %] ([% Data.All | html %])</a></li>
-    </ul>
-</div>
 
 [% RenderBlockStart("ContentLargeConfigItemGenericFilterNavBar") %]
 <span class="Pagination">
