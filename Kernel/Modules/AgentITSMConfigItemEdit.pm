@@ -982,7 +982,7 @@ sub Run {
 
                 next SECTION unless $Section;
 
-                $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::System::DynamicField::Mask')->EditSectionRender(
+                $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
                     Content              => $Section->{Content},
                     DynamicFields        => $Definition->{DynamicFieldRef},
                     UpdatableFields      => \@UpdatableFields,
