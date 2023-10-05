@@ -387,7 +387,10 @@ sub Run {
 
         COLUMNNAME:
         for my $ColumnName (
-            qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID)
+# Rother OSS / ITSMConfigurationManagement
+#             qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID)
+            qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID Class)
+# EO ITSMConfigurationManagement
             )
         {
             my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName . $Name )

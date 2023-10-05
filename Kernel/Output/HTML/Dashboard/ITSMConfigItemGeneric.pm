@@ -51,6 +51,7 @@ sub new {
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
+    my %RevertedClassList = reverse $ClassList->%*;
 
     # get param object
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -77,8 +78,6 @@ sub new {
     # save column filters
     $Self->{PrefKeyColumnFilters}         = 'UserDashboardITSMConfigItemGenericColumnFilters' . $Self->{Name};
     $Self->{PrefKeyColumnFiltersRealKeys} = 'UserDashboardITSMConfigItemGenericColumnFiltersRealKeys' . $Self->{Name};
-
-
 
     # get needed objects
     my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
@@ -305,7 +304,7 @@ sub new {
 
     if ( IsHashRefWithData($Self->{Config}{ConfigItemKey}) ) {
         for my $Class ( keys $Self->{Config}{ConfigItemKey}->%* ) {
-            push $ConfigItemKeys{ $Self->{Config}{ConfigItemKey}{$Class} }->@*, $Class;
+            push $ConfigItemKeys{ $Self->{Config}{ConfigItemKey}{$Class} }->@*, $RevertedClassList{$Class};
             $RemoveKeys{$Self->{Config}{ConfigItemKey}{$Class}} = 1;
         }
     }
@@ -691,6 +690,18 @@ sub Run {
             if ( $Self->{AdditionalFilter} && IsArrayRefWithData( $ConfigItemSearchSummary{ $Self->{AdditionalFilter} } ) ) {
 
                 for my $KeyConfig ( $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->@* ) {
+
+                    # if classes are filtered, adjust search config accordingly
+                    if ( $ColumnFilter{ClassIDs} ) {
+                        my @FilteredClassIDs;
+                        for my $ClassID ( $KeyConfig->{ClassIDs}->@* ) {
+                            if ( grep { $_ == $ClassID } $ColumnFilter{ClassIDs}->@* ) {
+                                push @FilteredClassIDs, $ClassID;
+                            }
+                        }
+                        $KeyConfig->{ClassIDs} = \@FilteredClassIDs;
+                    }
+
                     push @ConfigItemIDsArray, $ConfigItemObject->ConfigItemSearch(
                         Result => 'ARRAY',
                         %ConfigItemSearch,
@@ -1893,7 +1904,7 @@ sub _SearchParamsGet {
         my @ConfigItemKeyConfigs;
         for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
             push @ConfigItemKeyConfigs, {
-                Classes => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                ClassIDs => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
                 "DynamicField_$ConfigItemKeyDF" => {
                     Equals => $Param{CustomerUserID} // undef,
                 },
@@ -1911,7 +1922,7 @@ sub _SearchParamsGet {
         my @ConfigItemKeyConfigs;
         for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
             push @ConfigItemKeyConfigs, {
-                Classes => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                ClassIDs => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
                 "DynamicField_$ConfigItemKeyDF" => {
                     Equals => $Param{CustomerID} // undef,
                 },
