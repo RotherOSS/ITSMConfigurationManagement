@@ -157,7 +157,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###CustomerITSMConfigItem" Required="0" Valid="1">
+    <Setting Name="CustomerFrontend::Module###CustomerITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the customer interface.</Description>
         <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
