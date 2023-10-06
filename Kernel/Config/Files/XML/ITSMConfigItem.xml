@@ -157,6 +157,106 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Frontend::Module###CustomerITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                            <Item>itsm-configitem</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">ITSM config item overview.</Item>
+                    <Item Key="NavBarName">Config Item</Item>
+                    <Item Key="Title" Translatable="1">Config Item</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::CustomerITSMConfigItem###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AllocationList.css</Item>
+                        <Item>ITSM.Agent.Default.css</Item>
+                        <Item>ITSM.Agent.ConfigItem.Overview.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
+                        <Item>ITSM.Agent.ConfigItem.Overview.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###CustomerITSMConfigItem###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>itsm-configitem</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Configuration Management Database.</Item>
+                        <Item Key="Name">CMDB</Item>
+                        <Item Key="Link">Action=CustomerITSMConfigItem</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Config Item</Item>
+                        <Item Key="Type">Menu</Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">3200</Item>
+                    </Hash>
+                </Item>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>itsm-configitem</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Overview.</Item>
+                        <Item Key="Name">Overview</Item>
+                        <Item Key="Link">Action=CustomerITSMConfigItem</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Config Item</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">100</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::Module###AgentITSMConfigItemZoom" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
@@ -1054,6 +1154,32 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns" Required="0" Valid="1">
+        <Description Translatable="1">Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                </DefaultItem>
+                <Item Key="CurDeplSignal" SelectedID="2"></Item>
+                <Item Key="CurInciSignal" SelectedID="2"></Item>
+                <Item Key="Class" SelectedID="2"></Item>
+                <Item Key="Number" SelectedID="2"></Item>
+                <Item Key="Name" SelectedID="2"></Item>
+                <Item Key="CurDeplState" SelectedID="2"></Item>
+                <Item Key="CurInciState" SelectedID="2"></Item>
+                <Item Key="DeplState" SelectedID="0"></Item>
+                <Item Key="InciState" SelectedID="0"></Item>
+                <Item Key="LastChanged" SelectedID="2"></Item>
+                <Item Key="CurDeplStateType" SelectedID="1"></Item>
+                <Item Key="CurInciStateType" SelectedID="1"></Item>
+                <Item Key="Created" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Hook" Required="1" Valid="1">
         <Description Translatable="1">The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
@@ -1154,6 +1280,59 @@
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault" Required="0" Valid="0">
         <Description Translatable="1">Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit" Required="1" Valid="1">
+        <Description Translatable="1">Defines the search limit for the CustomerITSMConfigItem screen.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">10000</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItem###ShowColumns" Required="1" Valid="1">
+        <Description Translatable="1">Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                </DefaultItem>
+                <Item Key="CurInciSignal" SelectedID="1"></Item>
+                <Item Key="CurDeplSignal" SelectedID="1"></Item>
+                <Item Key="Number" SelectedID="1"></Item>
+                <Item Key="Name" SelectedID="1"></Item>
+                <Item Key="Class" SelectedID="0"></Item>
+                <Item Key="CurDeplState" SelectedID="1"></Item>
+                <Item Key="CurDeplStateType" SelectedID="0"></Item>
+                <Item Key="CurInciState" SelectedID="1"></Item>
+                <Item Key="CurInciStateType" SelectedID="1"></Item>
+                <Item Key="LastChanged" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable" Required="0" Valid="0">
+        <Description Translatable="1">Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsDefault" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
                 <DefaultItem>

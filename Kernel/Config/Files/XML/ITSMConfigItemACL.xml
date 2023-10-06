@@ -81,6 +81,7 @@
             <Array>
                 <Item>AgentITSMConfigItemEdit</Item>
                 <Item>AgentITSMConfigItem</Item>
+                <Item>CustomerITSMConfigItem</Item>
             </Array>
         </Value>
     </Setting>
