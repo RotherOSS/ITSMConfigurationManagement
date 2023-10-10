@@ -1,0 +1,68 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+<div class="oooITSMConfigItemList">
+[% RenderBlockStart("ITSMConfigItem") %]
+    <a href="[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;ConfigItemNumber=[% Data.Number | uri %]" class="oooITSMConfigItemListItem">
+        <div class="oooITSMConfigItemItemDesc">
+            <h3 class="oooTIDTitle">[% Data.Name | html %]</h3>
+            <p class="oooTIDNumber ooo12g">[% Config('ITSMConfigItem::Hook') %][% Config('ITSMConfigItem::HookDivider') %][% Data.Number | html %]</p>
+        </div>
+        <div class="oooITSMConfigItemItemCat">
+            <div class="oooRow1"></div>
+            <div class="oooRow2"></div>
+[% RenderBlockStart("Categories") %]
+            [% IF Data.Config.Translate %]
+                <p class="oooCategory ooo10" style="background-color:[% Data.Color | html %]">[% IF Data.Config.Prefix %][% Data.Config.Prefix | html %][% END %][% Data.Text | Interpolate | Translate | html %]</p>
+            [% ELSE %]
+                <p class="oooCategory ooo10" style="background-color:[% Data.Color | html %]">[% IF Data.Config.Prefix %][% Data.Config.Prefix | html %][% END %][% Data.Text | Interpolate | html %]</p>
+            [% END %]
+[% RenderBlockEnd("Categories") %]
+        </div>
+        <div class="oooITSMConfigItemItemAvatar">
+            [% IF Data.Avatar %]
+                <img src="[% Data.Avatar %]" />
+            [% ELSE %]
+                <span class="Initials">[% Data.UserInitials | html %]</span>
+            [% END %]
+        </div>
+        <p class="oooITSMConfigItemItemOwner ooo10g">[% Data.CustomerName | html %]</p>
+        <p class="oooITSMConfigItemItemAge ooo10g">[% Data.CustomerAge | html %]</p>
+        <h3 class="oooITSMConfigItemItemInfo"><i class="ooofo ooofo-more_v ooog"></i></h3>
+    </a>
+[% RenderBlockEnd("ITSMConfigItem") %]
+# no ITSMConfigItems present:
+# customer has no config items at all
+[% RenderBlockStart("EmptyDefault") %]
+# TODO where to redirect?
+    <a href="[% Env("Baselink") %]Action=CustomerITSMConfigItemMessage" class="oooITSMConfigItemListMessage">
+        <h3>[% Translate("Welcome!") | html %]</h3>
+        <p>[% Translate("You have no config items yet. Please click here, to create a new one.") | html %]</p>
+    </a>
+[% RenderBlockEnd("EmptyDefault") %]
+[% RenderBlockStart("EmptyCustom") %]
+    <a href="[% Env("Baselink") %]Action=CustomerITSMConfigItemMessage" class="oooITSMConfigItemListMessage">
+        <h3>[% Translate(Data.Title) | html %]</h3>
+        <p>[% Translate(Data.Text) | html %]</p>
+    </a>
+[% RenderBlockEnd("EmptyCustom") %]
+# customer has no config items with the current filters
+[% RenderBlockStart("EmptyFilter") %]
+    <a href="[% Env("Baselink") %]Action=CustomerITSMConfigItem;Subaction=MyITSMConfigItems;Filter=All;SortBy=;OrderBy=;" class="oooITSMConfigItemListMessage">
+        <h3>[% Translate("Nothing to show.") | html %]</h3>
+        <p>[% Translate("Click here for an unfiltered list of all your config items.") | html %]</p>
+    </a>
+[% RenderBlockEnd("EmptyFilter") %]
+</div>
