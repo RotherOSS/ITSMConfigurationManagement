@@ -59,7 +59,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         min-height: calc( 100vh - 265px );
     }
 
-    #oooConfigItemListHeader {
+    #oooITSMConfigItemListHeader {
         margin-left: 16px;
         margin-right: 16px;
         margin-top: 16px;
@@ -71,7 +71,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         grid-row-gap: 8px;
     }
 
-    #oooConfigItemListHeader > div {
+    #oooITSMConfigItemListHeader > div {
         grid-row-start: 2;
         grid-row-end: 3;
         grid-column-start: 3;
@@ -94,7 +94,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         align-items: center;
     }
 
-    #oooConfigItemListHeader {
+    #oooITSMConfigItemListHeader {
         margin-left: 32px;
         margin-right: 32px;
         margin-top: 24px;
@@ -104,7 +104,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         grid-column-gap: 40px;
     }
 
-    #oooConfigItemListHeader > div {
+    #oooITSMConfigItemListHeader > div {
         grid-column-start: 5;
         grid-column-end: 6;
     }
@@ -130,24 +130,24 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     vertical-align: middle;
 }
 
-#oooConfigItemListHeader > .oool {
+#oooITSMConfigItemListHeader > .oool {
     text-align: left;
 }
 
-#oooConfigItemListHeader > .ooor {
+#oooITSMConfigItemListHeader > .ooor {
     text-align: right;
 }
 
-#oooConfigItemListHeader > div > p {
+#oooITSMConfigItemListHeader > div > p {
     display: inline-block;
     padding-right: 4px;
 }
 
-#oooConfigItemListHeader > div > a {
+#oooITSMConfigItemListHeader > div > a {
     padding-left: 4px;
 }
 
-#oooConfigItemListHeader .Selected {
+#oooITSMConfigItemListHeader .Selected {
     color: #00023c;
     color: var(--colTextDark);
     font-weight: 600;

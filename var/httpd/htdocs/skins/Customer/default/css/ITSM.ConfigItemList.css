@@ -15,7 +15,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @media only screen and (max-width: 767px) {
 
-    .oooConfigItemListItem {
+    .oooITSMConfigItemListItem {
         width: calc( 100% - 48px );
         height: 110px;
         margin-top: 8px;
@@ -37,7 +37,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         align-items: center;
     }
 
-    .oooConfigItemItemDesc {
+    .oooITSMConfigItemItemDesc {
         grid-row-start: 1;
         grid-row-end: 2;
         grid-column-start: 1;
@@ -45,14 +45,14 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         overflow: hidden;
     }
 
-    .oooConfigItemItemCat {
+    .oooITSMConfigItemItemCat {
         grid-row-start: 1;
         grid-row-end: 2;
         grid-column-start: 3;
         grid-column-end: 4;
     }
 
-    .oooConfigItemItemCat > div {
+    .oooITSMConfigItemItemCat > div {
         display: inline-block;
 
         width: auto;
@@ -62,7 +62,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
     .oooRow1 > .oooCategory,
     .oooRow2 > .oooCategory,
-    .oooConfigItemItemCat > .oooCategory {
+    .oooITSMConfigItemItemCat > .oooCategory {
         width: 0px;
         height: 10px;
         margin-right: 4px;
@@ -72,18 +72,18 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         overflow: hidden;
     }
 
-    .oooConfigItemItemAvatar,
-    .oooConfigItemItemOwner,
-    .oooConfigItemItemAge {
+    .oooITSMConfigItemItemAvatar,
+    .oooITSMConfigItemItemOwner,
+    .oooITSMConfigItemItemAge {
         grid-row-start: 2;
         grid-row-end: 3;
     }
 
-    .oooConfigItemItemInfo {
+    .oooITSMConfigItemItemInfo {
         display: none;
     }
 
-    .oooConfigItemItemAvatar {
+    .oooITSMConfigItemItemAvatar {
         height: 32px;
     }
 
@@ -91,7 +91,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @media only screen and (min-width: 768px) {
 
-    .oooConfigItemListItem {
+    .oooITSMConfigItemListItem {
         width: calc( 100% - 80px );
         height: 86px;
         margin-top: 16px;
@@ -111,12 +111,12 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         align-items: center;
     }
 
-    .oooConfigItemItemCat {
+    .oooITSMConfigItemItemCat {
         position: relative;
         width: 100%;
     }
 
-    .oooConfigItemItemCat > div {
+    .oooITSMConfigItemItemCat > div {
         height: 18px;
         white-space: nowrap;
     }
@@ -125,20 +125,20 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         margin-top: 8px;
     }
 
-    .oooConfigItemItemAvatar {
+    .oooITSMConfigItemItemAvatar {
         height: 40px;
     }
 
 }
 
-.oooConfigItemList h3,
-.oooConfigItemList p {
+.oooITSMConfigItemList h3,
+.oooITSMConfigItemList p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.oooConfigItemListMessage {
+.oooITSMConfigItemListMessage {
     display: block;
     width: calc( 100% - 80px );
     height: auto;
@@ -154,33 +154,33 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     background-color: #ffffff;
 }
 
-.oooConfigItemListMessage > h3 {
+.oooITSMConfigItemListMessage > h3 {
     padding-bottom: 8px;
 }
 
-.oooConfigItemListItem:first-child {
+.oooITSMConfigItemListItem:first-child {
     margin-top: 8px;
 }
 
-.oooConfigItemItemInfo,
-.oooConfigItemItemAge {
+.oooITSMConfigItemItemInfo,
+.oooITSMConfigItemItemAge {
     text-align: right;
 }
 
-.oooConfigItemItemInfo > i {
+.oooITSMConfigItemItemInfo > i {
     display: inline-block;
     vertical-align: middle;
     padding-bottom: 3px;
 }
 
-.oooConfigItemItemCat > p.oooCategory {
+.oooITSMConfigItemItemCat > p.oooCategory {
     height: 0px;
     min-height: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
-.oooConfigItemItemAvatar > img {
+.oooITSMConfigItemItemAvatar > img {
     width: 100%;
     object-fit: contain;
     border-radius: 20px;
@@ -189,45 +189,45 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 /* IE */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 
-    .oooConfigItemListItem {
+    .oooITSMConfigItemListItem {
         display: -ms-grid;
         /* title number / categories / avatar / name / age / options */
         -ms-grid-columns: 1fr 0.77fr 40px 0.36fr 84px 29px;
         -ms-grid-rows: 100%;
     }
 
-    .oooConfigItemItemDesc {
+    .oooITSMConfigItemItemDesc {
         -ms-grid-column: 1;
         -ms-grid-row-align: center;
     }
 
-    .oooConfigItemItemCat {
+    .oooITSMConfigItemItemCat {
         -ms-grid-column: 2;
         -ms-grid-row-align: center;
     }
 
-    .oooConfigItemItemAvatar {
+    .oooITSMConfigItemItemAvatar {
         -ms-grid-column: 3;
         -ms-grid-row-align: center;
     }
 
-    .oooConfigItemItemOwner {
+    .oooITSMConfigItemItemOwner {
         -ms-grid-column: 4;
         -ms-grid-row-align: center;
     }
 
-    .oooConfigItemItemAge {
+    .oooITSMConfigItemItemAge {
         -ms-grid-column: 5;
         -ms-grid-row-align: center;
     }
 
-    .oooConfigItemItemInfo {
+    .oooITSMConfigItemItemInfo {
         -ms-grid-column: 6;
         -ms-grid-row-align: center;
     }
 
     @supports (display: grid) {
-        .oooConfigItemListItem {
+        .oooITSMConfigItemListItem {
             display: grid;
         }
     }
