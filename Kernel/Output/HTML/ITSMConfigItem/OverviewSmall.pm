@@ -332,7 +332,7 @@ sub ActionRow {
     }
 
     my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
-    if ( $Param{CustomerInterface} ) {
+    if ( $Param{Action} =~ /^Customer/ ) {
         $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
     }
 
