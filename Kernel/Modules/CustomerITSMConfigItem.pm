@@ -15,14 +15,15 @@
 # --
 
 package Kernel::Modules::CustomerITSMConfigItem;
+## nofilter(TidyAll::Plugin::OTOBO::Perl::DBObject)
 
 use strict;
 use warnings;
 
+our $ObjectManagerDisabled = 1;
+
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
-
-our $ObjectManagerDisabled = 1;
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -31,18 +32,41 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    # set debug
-    $Self->{Debug} = 0;
-
     return $Self;
 }
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get needed objects
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    if ( !$Self->{Subaction} ) {
+        return $LayoutObject->Redirect(
+            OP => 'Action=CustomerITSMConfigItem;Subaction=MyITSMConfigItems',
+        );
+    }
+
+    # check needed CustomerID
+    if ( !$Self->{UserCustomerID} ) {
+        my $Output = $LayoutObject->CustomerHeader(
+            Title => Translatable('Error'),
+        );
+        $Output .= $LayoutObject->CustomerError(
+            Message => Translatable('Need CustomerID!'),
+        );
+        $Output .= $LayoutObject->CustomerFooter();
+
+        return $Output;
+    }
+
+    # store last queue screen
+    $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+        SessionID => $Self->{SessionID},
+        Key       => 'LastScreenOverview',
+        Value     => $Self->{RequestedURL},
+    );
 
     my $Config = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
 
@@ -62,115 +86,79 @@ sub Run {
     my $OrderBy = $ParamObject->GetParam( Param => 'OrderBy' )
         || $DefaultOrderBy;
 
-    # get session object
-    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
-
-    # store last queue screen
-    $SessionObject->UpdateSessionID(
-        SessionID => $Self->{SessionID},
-        Key       => 'LastScreenOverview',
-        Value     => $Self->{RequestedURL},
+    # filter definition
+    my %Filters = (
+        MyITSMConfigItems => {
+            All => {
+                Name   => 'All',
+                Prio   => 1000,
+                Search => {
+                    OrderBy => $OrderBy,
+                    SortBy  => $SortBy,
+                },
+            },
+        },
     );
 
-    # store last screen
-    $SessionObject->UpdateSessionID(
-        SessionID => $Self->{SessionID},
-        Key       => 'LastScreenView',
-        Value     => $Self->{RequestedURL},
+    my $UserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+    my @CustomerIDs;
+
+    my %AccessibleCustomers = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupContextCustomers(
+        CustomerUserID => $Self->{UserID},
     );
 
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    @CustomerIDs = sort keys %AccessibleCustomers;
 
-    # get filter from web request
-    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+    if ( $Self->{Subaction} eq 'Search' ) {
 
-    # get filters stored in the user preferences
-    my %Preferences = $UserObject->GetPreferences(
-        UserID => $Self->{UserID},
-    );
-    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Filter;
-    my $JSONObject       = $Kernel::OM->Get('Kernel::System::JSON');
-    my $StoredFilters    = $JSONObject->Decode(
-        Data => $Preferences{$StoredFiltersKey},
-    );
+        # check whether company tickets are shown
+        my %Selection = @CustomerIDs
+            ?
+            ( CustomerIDRaw => \@CustomerIDs )
+            :
+            ( CustomerUserLoginRaw => $Self->{UserID} );
 
-    # delete stored filters if needed
-    if ( $ParamObject->GetParam( Param => 'DeleteFilters' ) ) {
-        $StoredFilters = {};
-    }
+        $Filters{Search} = {
+            All => {
+                Name   => 'All',
+                Prio   => 1000,
+                Search => {
+                    %Selection,
+                    OrderBy => $OrderBy,
+                    SortBy  => $SortBy,
 
-    # get the column filters from the web request or user preferences
-    my %ColumnFilter;
-    my %GetColumnFilter;
-    COLUMNNAME:
-    for my $ColumnName (
-        qw(DeplState CurDeplState InciState CurInciState Class)
-        )
-    {
-        # get column filter from web request
-        my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName )
-            || '';
-
-        # if filter is not present in the web request, try with the user preferences
-        if ( $FilterValue eq '' ) {
-            $FilterValue = $StoredFilters->{ $ColumnName . 'IDs' }->[0] || '';
-        }
-        next COLUMNNAME if $FilterValue eq '';
-        next COLUMNNAME if $FilterValue eq 'DeleteFilter';
-
-        push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, $FilterValue;
-        $GetColumnFilter{$ColumnName} = $FilterValue;
-    }
-
-    # get all dynamic fields
-    $Self->{DynamicField} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
-        Valid      => 1,
-        ObjectType => ['ITSMConfigItem'],
-    );
-
-    DYNAMICFIELD:
-    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-        next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
-
-        # get filter from web request
-        my $FilterValue = $ParamObject->GetParam(
-            Param => 'ColumnFilterDynamicField_' . $DynamicFieldConfig->{Name}
-        );
-
-        # if no filter from web request, try from user preferences
-        if ( !defined $FilterValue || $FilterValue eq '' ) {
-            $FilterValue = $StoredFilters->{ 'DynamicField_' . $DynamicFieldConfig->{Name} }->{Equals};
-        }
-
-        next DYNAMICFIELD if !defined $FilterValue;
-        next DYNAMICFIELD if $FilterValue eq '';
-        next DYNAMICFIELD if $FilterValue eq 'DeleteFilter';
-
-        $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
-            Equals => $FilterValue,
+                    # TODO check which params are needed
+                    # Fulltext            => $Fulltext,
+                    # FullTextIndex       => 1,
+                    # ContentSearchPrefix => '*',
+                    # ContentSearchSuffix => '*',
+                },
+            },
         };
-        $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $FilterValue;
     }
 
-    # build NavigationBar & to get the output faster!
-    my $Refresh = '';
-    if ( $Self->{UserRefreshTime} ) {
-        $Refresh = 60 * $Self->{UserRefreshTime};
+    my $FilterCurrent = $ParamObject->GetParam( Param => 'Filter' );
+    if ( !$FilterCurrent ) {
+
+        # TODO adapt
+        $FilterCurrent = ( $Self->{Subaction} && $Self->{Subaction} eq 'Search' ) ? 'All' : 'All';
     }
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    my $Output;
-    if ( $Self->{Subaction} ne 'AJAXFilterUpdate' ) {
-        $Output = $LayoutObject->Header(
-            Refresh => $Refresh,
+    # check if filter is valid
+    if ( !$Filters{ $Self->{Subaction} }->{$FilterCurrent} ) {
+        my $Output = $LayoutObject->CustomerHeader(
+            Title => Translatable('Error'),
         );
-        $Output .= $LayoutObject->NavigationBar();
+        $Output .= $LayoutObject->CustomerError(
+            Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $FilterCurrent ),
+        );
+        $Output .= $LayoutObject->CustomerFooter();
+
+        return $Output;
     }
 
+    # TODO check if this stuff is needed
     # get general catalog object
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
@@ -212,336 +200,368 @@ sub Run {
     # get permissions
     my $Permission = 'rw';
 
-    # sort on default by using both (Priority, Age) else use only one sort argument
-    my %Sort;
-
-    # get if search result should be pre-sorted by priority
-    my $PreSortByPriority = $Config->{'PreSort::ByPriority'};
-    if ( !$PreSortByPriority ) {
-        %Sort = (
-            SortBy  => $SortBy,
-            OrderBy => $OrderBy,
-        );
-    }
-    else {
-        %Sort = (
-            SortBy  => [ 'Priority', $SortBy ],
-            OrderBy => [ 'Down',     $OrderBy ],
-        );
-    }
-
-    # my config item object
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # to store the default class
-    my $ClassIDAuto = '';
-
-    # define position of the filter in the frontend
-    my $PrioCounter = 1000;
-
-    # to store the total number of config items in all classes that the user has access
-    my $TotalCount;
-
-    # to store all the clases that the user has access, used in search for filter 'All'
-    my $AccessClassList;
-
-    # to store the NavBar filters
-    my %Filters;
-
-    CLASSID:
-    for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
-
-        # show menu link only if user has access rights
-        my $HasAccess = $ConfigItemObject->Permission(
-            Scope   => 'Class',
-            ClassID => $ClassID,
-            UserID  => $Self->{UserID},
-            Type    => $Config->{Permission},
-        );
-
-        next CLASSID if !$HasAccess;
-
-        # insert this class to be passed as search parameter for filter 'All'
-        push @{$AccessClassList}, $ClassID;
-
-        # count all records of this class
-        my $ClassCount = $ConfigItemObject->ConfigItemCount(
-            ClassID => $ClassID,
-        );
-
-        # add the config items number in this class to the total
-        $TotalCount += $ClassCount;
-
-        # increase the PrioCounter
-        $PrioCounter++;
-
-        # add filter with params for the search method
-        $Filters{$ClassID} = {
-            Name   => $ClassList->{$ClassID},
-            Prio   => $PrioCounter,
-            Count  => $ClassCount,
-            Search => {
-                ClassIDs     => [$ClassID],
-                DeplStateIDs => $DeplStateIDs,
-                %Sort,
-                Limit      => $Self->{SearchLimit},
-                Permission => $Permission,
-                UserID     => $Self->{UserID},
-            },
-        };
-
-        # remember the first class id to show this in the overview
-        # if no class id was given
-        if ( !$ClassIDAuto ) {
-            $ClassIDAuto = $ClassID;
-        }
-    }
-
-    # if only one filter exists
-    if ( scalar keys %Filters == 1 ) {
-
-        # get the name of the only filter
-        my ($FilterName) = keys %Filters;
-
-        # activate this filter
-        $Filter = $FilterName;
-    }
-    else {
-
-        # add default filter, which shows all items
-        $Filters{All} = {
-            Name   => 'All',
-            Prio   => 1000,
-            Count  => $TotalCount,
-            Search => {
-                ClassIDs     => $AccessClassList,
-                DeplStateIDs => $DeplStateIDs,
-                %Sort,
-                Limit      => $Self->{SearchLimit},
-                Permission => $Permission,
-                UserID     => $Self->{UserID},
-            },
-        };
-
-        # if no filter was selected activate the filter for the default class
-        if ( !$Filter ) {
-            $Filter = $ClassIDAuto;
-        }
-    }
-
-    # check if filter is valid
-    if ( !$Filters{$Filter} ) {
-        $LayoutObject->FatalError(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
-        );
-    }
-
-    my $View = $ParamObject->GetParam( Param => 'View' ) || '';
-
-    # lookup latest used view mode
-    if ( !$View && $Self->{ 'UserConfigItemOverview' . $Self->{Action} } ) {
-        $View = $Self->{ 'UserConfigItemOverview' . $Self->{Action} };
-    }
-
-    # otherwise use Preview as default as in LayoutConfigItem
-    $View ||= 'Small';
-
-    # Check if selected view is available.
-    my $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::Overview');
-    if ( !$Backends->{$View} ) {
-
-        # Try to find fallback, take first configured view mode.
-        KEY:
-        for my $Key ( sort keys %{$Backends} ) {
-            $View = $Key;
-            last KEY;
-        }
-    }
-
-    # get personal page shown count
-    my $PageShownPreferencesKey = 'UserConfigItemOverview' . $View . 'PageShown';
-    my $PageShown               = $Self->{$PageShownPreferencesKey} || 10;
-
-    # do shown config item lookup
-    my $Limit = 1_000;
-
-    my $ElementChanged = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
-    my $HeaderColumn   = $ElementChanged;
-    $HeaderColumn =~ s{\A ColumnFilter }{}msxg;
-
-    # get data (viewable config items...)
-    # search all config items
-    my @ViewableConfigItems;
-    my @OriginalViewableConfigItems;
-
-    if (@ViewableDeplStateIDs) {
-
-        # get config item values
-        if (
-            !IsStringWithData($HeaderColumn)
-            || (
-                IsStringWithData($HeaderColumn)
-                && (
-                    $ConfigObject->Get('OnlyValuesOnConfigItem')
-                )
-            )
-            )
-        {
-            @OriginalViewableConfigItems = $ConfigItemObject->ConfigItemSearch(
-                %{ $Filters{$Filter}->{Search} },
-                Limit  => $Limit,
-                Result => 'ARRAY',
-            );
-
-            my $Start = $ParamObject->GetParam( Param => 'StartHit' ) || 1;
-
-            @ViewableConfigItems = $ConfigItemObject->ConfigItemSearch(
-                %{ $Filters{$Filter}->{Search} },
-                %ColumnFilter,
-                Limit  => $Start + $PageShown - 1,
-                Result => 'ARRAY',
-            );
-        }
-
-    }
-
-    # TODO Maybe there is a more elegant way to do this?
-    $Self->{Filter}  = $Filter;
-    $Self->{Filters} = \%Filters;
-
-    if ( $Self->{Subaction} eq 'AJAXFilterUpdate' ) {
-
-        my $FilterContent = $LayoutObject->ITSMConfigItemListShow(
-            FilterContentOnly     => 1,
-            HeaderColumn          => $HeaderColumn,
-            ElementChanged        => $ElementChanged,
-            OriginalConfigItemIDs => \@OriginalViewableConfigItems,
-            Action                => 'CustomerITSMConfigItem',
-            Env                   => $Self,
-            View                  => $View,
-            EnableColumnFilters   => 1,
-        );
-
-        if ( !$FilterContent ) {
-            $LayoutObject->FatalError(
-                Message => $LayoutObject->{LanguageObject}->Translate( 'Can\'t get filter content data of %s!', $HeaderColumn ),
-            );
-        }
-
-        return $LayoutObject->Attachment(
-            ContentType => 'application/json',
-            Content     => $FilterContent,
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
-    else {
-
-        # store column filters
-        my $StoredFilters = \%ColumnFilter;
-
-        my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Self->{Filter};
-        $UserObject->SetPreferences(
-            UserID => $Self->{UserID},
-            Key    => $StoredFiltersKey,
-            Value  => $JSONObject->Encode( Data => $StoredFilters ),
-        );
-    }
-
-    my $CountTotal = 0;
     my %NavBarFilter;
-    for my $FilterColumn ( sort keys %Filters ) {
-        my $Count = 0;
-        if (@ViewableDeplStateIDs) {
-            $Count = $ConfigItemObject->ConfigItemSearch(
-                %{ $Filters{$FilterColumn}->{Search} },
-                %ColumnFilter,
-                Result => 'COUNT',
-            ) || 0;
-        }
+    my $Counter                 = 0;
+    my $AllITSMConfigItems      = 0;
+    my $AllITSMConfigItemsTotal = 0;
+    my $ITSMConfigItemObject    = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-        if ( $FilterColumn eq $Filter ) {
-            $CountTotal = $Count;
-        }
+    for my $Filter ( sort keys %{ $Filters{ $Self->{Subaction} } } ) {
+        $Counter++;
 
-        $NavBarFilter{ $Filters{$FilterColumn}->{Prio} } = {
+        my $Count = $ITSMConfigItemObject->ConfigItemSearch(
+            %{ $Filters{ $Self->{Subaction} }->{$Filter}->{Search} },
+            Result => 'COUNT',
+        ) || 0;
+
+        my $ClassA = '';
+        if ( $Filter eq $FilterCurrent ) {
+            $ClassA             = 'Selected';
+            $AllITSMConfigItems = $Count;
+        }
+        if ( $Filter eq 'All' ) {
+            $AllITSMConfigItemsTotal = $Count;
+        }
+        $NavBarFilter{ $Filters{ $Self->{Subaction} }->{$Filter}->{Prio} } = {
+            %{ $Filters{ $Self->{Subaction} }->{$Filter} },
             Count  => $Count,
-            Filter => $FilterColumn,
-            %{ $Filters{$FilterColumn} },
+            Filter => $Filter,
+            ClassA => $ClassA,
         };
     }
 
-    my $ColumnFilterLink = '';
-    COLUMNNAME:
-    for my $ColumnName ( sort keys %GetColumnFilter ) {
-        next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
-        next COLUMNNAME if $GetColumnFilter{$ColumnName} eq '';
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+    my $StartHit  = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
+    my $PageShown = $Self->{UserShowITSMConfigItems} || 1;
+    my $ITSMConfigItemListHTML;
+    my %PageNav;
+
+    if ( !$AllITSMConfigItemsTotal ) {
+
+        # TODO check sysconfig key
+        my $CustomTexts = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemOverviewCustomEmptyText');
+
+        # show message if there are no tickets
+        my $ITSMConfigItemListObject = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::CustomerList');
+        $ITSMConfigItemListHTML = $ITSMConfigItemListObject->Run(
+            ITSMConfigItemIDs => [],
+            NoAllTotal        => $Self->{Subaction} eq 'Search' ? 0            : 1,
+            CustomTexts       => ( ref $CustomTexts eq 'HASH' ) ? $CustomTexts : 0,
+        );
+
+    }
+    else {
+
+        if ( $AllITSMConfigItems > $PageShown ) {
+
+            # create pagination
+            my $Link = 'SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
+                . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
+                . ';Filter=' . $LayoutObject->Ascii2Html( Text => $FilterCurrent )
+                . ';Subaction=' . $LayoutObject->Ascii2Html( Text => $Self->{Subaction} )
+                . ';';
+
+            # # remember fulltext query
+            # if ( defined $Fulltext ) {
+            #     $Link .= 'Fulltext=' . $LayoutObject->Ascii2Html( Text => $Fulltext ) . ';';
+            # }
+
+            # Add CustomerIDs parameter if needed.
+            if ( IsArrayRefWithData( \@CustomerIDs ) ) {
+                for my $CustomerID (@CustomerIDs) {
+                    $Link .= "CustomerIDs=$CustomerID;";
+                }
+            }
+
+            %PageNav = $LayoutObject->PageNavBar(
+                Limit     => 10000,
+                StartHit  => $StartHit,
+                PageShown => $PageShown,
+                AllHits   => $AllITSMConfigItems,
+                Action    => 'Action=CustomerITSMConfigItem',
+                Link      => $Link,
+                IDPrefix  => 'CustomerITSMConfigItem',
+            );
+        }
+
+        my $Sort               = '';
+        my $ITSMConfigItemSort = '';
+        my $TitleSort          = '';
+        my $AgeSort            = '';
+
+        # this sets the opposite to the $OrderBy
+        if ( $OrderBy eq 'Down' ) {
+            $Sort = 'SortAscending';
+        }
+        if ( $OrderBy eq 'Up' ) {
+            $Sort = 'SortDescending';
+        }
+
+        if ( $SortBy eq 'ITSMConfigItem' ) {
+            $ITSMConfigItemSort = $Sort;
+        }
+        elsif ( $SortBy eq 'Title' ) {
+            $TitleSort = $Sort;
+        }
+        elsif ( $SortBy eq 'Age' ) {
+            $AgeSort = $Sort;
+        }
+
+        # TODO maybe use owner stuff later for configured customeruser or customercompany
+        # my $Owner = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemOverview')->{Owner};
+
+        # if ($Owner) {
+        #     $LayoutObject->Block(
+        #         Name => 'OverviewNavBarPageOwner',
+        #         Data => {
+        #             OrderBy   => $OrderBy,
+        #             OwnerSort => $OwnerSort,
+        #             Filter    => $FilterCurrent,
+        #         },
+        #     );
+        # }
+
+        # show header filter
+        for my $Key ( sort keys %NavBarFilter ) {
+            $LayoutObject->Block(
+                Name => 'FilterHeader',
+                Data => {
+                    %Param,
+                    %{ $NavBarFilter{$Key} },
+                    Fulltext => $ParamObject->GetParam( Param => 'Fulltext' ),
+                },
+            );
+        }
+
+        # get the dynamic fields for this screen
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        # TODO check sysconfig name
+        # get dynamic field config for frontend module
+        my $DynamicFieldFilter = $ConfigObject->Get("ITSMConfigItem::Frontend::CustomerITSMConfigItem")->{DynamicField};
+        my $DynamicField       = $DynamicFieldObject->DynamicFieldListGet(
+            Valid       => 1,
+            ObjectType  => ['ITSMConfigItem'],
+            FieldFilter => $DynamicFieldFilter || {},
+        );
+
+        # reduce the dynamic fields to only the ones that are desinged for customer interface
+        my @CustomerDynamicFields;
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{$DynamicField} ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            # TODO check which new fields maybe need customerinterface capability
+            my $IsCustomerInterfaceCapable = $BackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsCustomerInterfaceCapable',
+            );
+            next DYNAMICFIELD if !$IsCustomerInterfaceCapable;
+
+            push @CustomerDynamicFields, $DynamicFieldConfig;
+        }
+        $DynamicField = \@CustomerDynamicFields;
+
+        # Dynamic fields
+        # cycle trough the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{$DynamicField} ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $Label = $DynamicFieldConfig->{Label};
+
+            # get field sortable condition
+            my $IsSortable = $BackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsSortable',
+            );
+
+            if ($IsSortable) {
+                my $CSS = '';
+                if (
+                    $SortBy
+                    && ( $SortBy eq ( 'DynamicField_' . $DynamicFieldConfig->{Name} ) )
+                    )
+                {
+                    if ( $OrderBy && ( $OrderBy eq 'Up' ) ) {
+                        $CSS .= ' SortDescending';
+                    }
+                    else {
+                        $CSS .= ' SortAscending';
+                    }
+                }
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField',
+                    Data => {
+                        %Param,
+                        CSS => $CSS,
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicFieldSortable',
+                    Data => {
+                        %Param,
+                        OrderBy          => $OrderBy,
+                        Label            => $Label,
+                        DynamicFieldName => $DynamicFieldConfig->{Name},
+                        Filter           => $FilterCurrent,
+                    },
+                );
+
+                # example of dynamic fields order customization
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField_' . $DynamicFieldConfig->{Name},
+                    Data => {
+                        %Param,
+                        CSS => $CSS,
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField_'
+                        . $DynamicFieldConfig->{Name}
+                        . '_Sortable',
+                    Data => {
+                        %Param,
+                        OrderBy          => $OrderBy,
+                        Label            => $Label,
+                        DynamicFieldName => $DynamicFieldConfig->{Name},
+                        Filter           => $FilterCurrent,
+                    },
+                );
+            }
+            else {
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField',
+                    Data => {
+                        %Param,
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicFieldNotSortable',
+                    Data => {
+                        %Param,
+                        Label => $Label,
+                    },
+                );
+
+                # example of dynamic fields order customization
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField_' . $DynamicFieldConfig->{Name},
+                    Data => {
+                        %Param,
+                    },
+                );
+
+                $LayoutObject->Block(
+                    Name => 'OverviewNavBarPageDynamicField_'
+                        . $DynamicFieldConfig->{Name}
+                        . '_NotSortable',
+                    Data => {
+                        %Param,
+                        Label => $Label,
+                    },
+                );
+            }
+        }
+
+        my @ViewableITSMConfigItems = $ITSMConfigItemObject->ConfigItemSearch(
+            %{ $Filters{ $Self->{Subaction} }->{$FilterCurrent}->{Search} },
+            Result => 'ARRAY',
+        );
+
+        my $ITSMConfigItemListObject = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::CustomerList');
+        $ITSMConfigItemListHTML = $ITSMConfigItemListObject->Run(
+            StartHit      => $StartHit,
+            PageShown     => $PageShown,
+            ConfigItemIDs => \@ViewableITSMConfigItems,
+        );
+
     }
 
-    my $LinkPage = 'Filter='
-        . $LayoutObject->Ascii2Html( Text => $Filter )
-        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
-        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
-        . $ColumnFilterLink
-        . ';';
-
-    my $LinkSort = 'View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';Filter='
-        . $LayoutObject->Ascii2Html( Text => $Filter )
-        . $ColumnFilterLink
-        . ';';
-
-    my $LinkFilter = 'SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
-        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
-        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';';
-
-    my $LastColumnFilter = $ParamObject->GetParam( Param => 'LastColumnFilter' ) || '';
-
-    if ( !$LastColumnFilter && $ColumnFilterLink ) {
-
-        # is planned to have a link to go back here
-        $LastColumnFilter = 1;
+    # create & return output
+    my $Title = $Self->{Subaction};
+    if ( $Title eq 'MyITSMConfigItems' ) {
+        $Title = Translatable('My ITSMConfigItems');
     }
-
-    # show config items
-    $Output .= $LayoutObject->ITSMConfigItemListShow(
-        Filter                => $Filter,
-        Filters               => \%NavBarFilter,
-        ConfigItemIDs         => \@ViewableConfigItems,
-        OriginalConfigItemIDs => \@OriginalViewableConfigItems,
-        GetColumnFilter       => \%GetColumnFilter,
-        LastColumnFilter      => $LastColumnFilter,
-        Action                => 'CustomerITSMConfigItem',
-        Total                 => $CountTotal,
-        RequestedURL          => $Self->{RequestedURL},
-        View                  => $View,
-        Bulk                  => 1,
-        TitleName             => $LayoutObject->{LanguageObject}->Translate('Overview: ITSM ConfigItem'),
-        TitleValue            => $Self->{Filters}{$Filter}->{Name},
-        Env                   => $Self,
-        LinkPage              => $LinkPage,
-        LinkSort              => $LinkSort,
-        LinkFilter            => $LinkFilter,
-        OrderBy               => $OrderBy,
-        SortBy                => $SortBy,
-        EnableColumnFilters   => 1,
-        ColumnFilterForm      => {
-            Filter => $Filter || '',
-        },
-
-        # do not print the result earlier, but return complete content
-        Output => 1,
+    my $Refresh = '';
+    if ( $Self->{UserRefreshTime} ) {
+        $Refresh = 60 * $Self->{UserRefreshTime};
+    }
+    my $Output = $LayoutObject->CustomerHeader(
+        Title   => $Title,
+        Refresh => $Refresh,
     );
 
+    # TODO likely needed later for elasticsearch implementation
+    # AddJSData for ES
+    my $ESActive = $ConfigObject->Get('Elasticsearch::Active');
+
+    $LayoutObject->AddJSData(
+        Key   => 'ESActive',
+        Value => $ESActive,
+    );
+
+    # TODO check what this does
+    my $NewITSMConfigItemAccessKey = $ConfigObject->Get('CustomerFrontend::Navigation')->{'CustomerITSMConfigItemMessage'}{'002-ITSMConfigItem'}[0]{'AccessKey'}
+        || '';
+
+    $Output .= $LayoutObject->Output(
+        TemplateFile => 'CustomerITSMConfigItem',
+        Data         => {
+            %Param,
+            %PageNav,
+            AccessKey              => $NewITSMConfigItemAccessKey,
+            ITSMConfigItemListHTML => $ITSMConfigItemListHTML,
+            Fulltext               => $ParamObject->GetParam( Param => 'Fulltext' ),
+        },
+    );
+
+    # build NavigationBar
+    $Output .= $LayoutObject->CustomerNavigationBar();
+
     # get page footer
-    $Output .= $LayoutObject->Footer() if $Self->{Subaction} ne 'AJAXFilterUpdate';
+    $Output .= $LayoutObject->CustomerFooter();
+
     return $Output;
+
+    # # show config items
+    # $Output .= $LayoutObject->ITSMConfigItemListShow(
+    #     Filter                => $Filter,
+    #     Filters               => \%NavBarFilter,
+    #     ConfigItemIDs         => \@ViewableConfigItems,
+    #     OriginalConfigItemIDs => \@OriginalViewableConfigItems,
+    #     GetColumnFilter       => \%GetColumnFilter,
+    #     LastColumnFilter      => $LastColumnFilter,
+    #     Action                => 'CustomerITSMConfigItem',
+    #     Total                 => $CountTotal,
+    #     RequestedURL          => $Self->{RequestedURL},
+    #     View                  => $View,
+    #     Bulk                  => 1,
+    #     TitleName             => $LayoutObject->{LanguageObject}->Translate('Overview: ITSM ConfigItem'),
+    #     TitleValue            => $Self->{Filters}{$Filter}->{Name},
+    #     Env                   => $Self,
+    #     LinkPage              => $LinkPage,
+    #     LinkSort              => $LinkSort,
+    #     LinkFilter            => $LinkFilter,
+    #     OrderBy               => $OrderBy,
+    #     SortBy                => $SortBy,
+    #     EnableColumnFilters   => 1,
+    #     ColumnFilterForm      => {
+    #         Filter => $Filter || '',
+    #     },
+
+    #     # do not print the result earlier, but return complete content
+    #     Output => 1,
+    # );
+
+    # # get page footer
+    # $Output .= $LayoutObject->Footer() if $Self->{Subaction} ne 'AJAXFilterUpdate';
+    # return $Output;
 }
 
 1;
