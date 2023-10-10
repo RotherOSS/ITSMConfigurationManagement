@@ -14,22 +14,6 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 <div class="oooConfigItemList">
-# [% RenderBlockStart("DocumentActionRow") %]
-# <ul class="Actions">
-# [% RenderBlockStart("DocumentActionRowBulk") %]
-#     <li id="BulkAction" class="AlwaysPresent Inactive [% Data.CSS | html %]"><a href="#">[% Translate(Data.Name) | html %]</a></li>
-# [% RenderBlockEnd("DocumentActionRowBulk") %]
-#
-# [% RenderBlockStart("DocumentActionRowLastColumnFilter") %]
-#     <li class=""><a href="[% Env("Baselink") %]Action=[% Env("Action") %];DeleteFilters=DeleteFilters">[% Translate("Reset overview") | html %]</a></li>
-# [% RenderBlockEnd("DocumentActionRowLastColumnFilter") %]
-#
-# [% RenderBlockStart("DocumentActionRowItem") %]
-#     <li class="[% Data.CSS | html %]"><a href="#">[% Translate(Data.Name) | html %]</a></li>
-# [% RenderBlockEnd("DocumentActionRowItem") %]
-# </ul>
-# [% RenderBlockEnd("DocumentActionRow") %]
-
 [% RenderBlockStart("DocumentContent") %]
 <div id="OverviewBody" class="Overview ConfigItemList">
 [% RenderBlockStart("NoConfigItemFound") %]
@@ -37,132 +21,123 @@
         [% Translate("No config item data found.") | html %]
     </div>
 [% RenderBlockEnd("NoConfigItemFound") %]
-    <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="matrix">
-        <input type="hidden" name="Action" value="AgentITSMConfigItemBulk"/>
-        <input type="hidden" name="ConfigItemID" value=""/>
-        <input type="hidden" name="LastColumnFilter" id="LastColumnFilter" value="[% Data.LastColumnFilter | html %]"/>
 [% RenderBlockStart("OverviewTable") %]
-        <table class="TableSmall NoCellspacing">
-            [% Data.StyleClasses %]
+    <table class="TableSmall NoCellspacing">
+        [% Data.StyleClasses %]
 [% RenderBlockStart("TableHeader") %]
-            <thead>
-                <tr>
+        <thead>
+            <tr>
 
 [% RenderBlockStart("GeneralOverviewHeader") %]
 
-[% RenderBlockStart("BulkNavBar") %]
-                    <th class="Checkbox">
-                        <input type="checkbox" class="Checkbox" title="[% Translate("Select all") | html %]" id="SelectAllConfigItems" autocomplete="off" />
-                    </th>
-[% RenderBlockEnd("BulkNavBar") %]
 [% RenderBlockStart("OverviewNavBarPageFlag") %]
-                    <th class="OverviewHeader [% Data.CSS | html %]" title="[% Translate(Data.Title) | html %]">
+                <th class="OverviewHeader [% Data.CSS | html %]" title="[% Translate(Data.Title) | html %]">
 [% RenderBlockStart("OverviewNavBarPageFlagLink") %]
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") | uri %];[% Data.LinkSort %];SortBy=[% Data.Name | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">
-                            <em class="PrintOnly">[% Translate(Data.Title) | html %]</em>
-                        </a>
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") | uri %];[% Data.LinkSort %];SortBy=[% Data.Name | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">
+                        <em class="PrintOnly">[% Translate(Data.Title) | html %]</em>
+                    </a>
 [% RenderBlockEnd("OverviewNavBarPageFlagLink") %]
 [% RenderBlockStart("OverviewNavBarPageFlagEmpty") %]
-                        <span title="[% Translate(Data.Name) | html %]">
-                            <em class="PrintOnly">[% Translate(Data.Name) | html %]</em>
-                        </span>
+                    <span title="[% Translate(Data.Name) | html %]">
+                        <em class="PrintOnly">[% Translate(Data.Name) | html %]</em>
+                    </span>
 [% RenderBlockEnd("OverviewNavBarPageFlagEmpty") %]
-                    </th>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageFlag") %]
 
 [% RenderBlockStart("OverviewNavBarPageConfigItemHeader") %]
 [% RenderBlockStart("OverviewNavBarPageCurDeplSignal") %]
-                    <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
-                        <span>[% Data.ColumnNameTranslated | html %]</span>
-                    </th>
+                <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
+                    <span>[% Data.ColumnNameTranslated | html %]</span>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageCurDeplSignal") %]
 [% RenderBlockStart("OverviewNavBarPageCurInciSignal") %]
-                    <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
-                        <span>[% Data.ColumnNameTranslated | html %]</span>
-                    </th>
+                <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
+                    <span>[% Data.ColumnNameTranslated | html %]</span>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageCurInciSignal") %]
 [% RenderBlockStart("OverviewNavBarPageNumber") %]
-                    <th class="OverviewHeader [% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=Number;OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
-                    </th>
+                <th class="OverviewHeader [% Data.CSS | html %]">
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=Number;OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageNumber") %]
 [% RenderBlockStart("OverviewNavBarPageColumn") %]
-                    <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
+                <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
 
 [% RenderBlockStart("OverviewNavBarPageColumnFilter") %]
-                        <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
-                            <i class="ooofo ooofo-filter"></i>
-                        </a>
-                        <div class="ColumnSettingsContainer DontPrint">
-                            <div class="ColumnSettingsBox">
-                                [% Data.ColumnFilterStrg %]
-                            </div>
+                    <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
+                        <i class="ooofo ooofo-filter"></i>
+                    </a>
+                    <div class="ColumnSettingsContainer DontPrint">
+                        <div class="ColumnSettingsBox">
+                            [% Data.ColumnFilterStrg %]
                         </div>
-                        <span class="Gray" title="[% Data.Title | html %]">[% Data.ColumnNameTranslated | html %]</span>
+                    </div>
+                    <span class="Gray" title="[% Data.Title | html %]">[% Data.ColumnNameTranslated | html %]</span>
 [% RenderBlockEnd("OverviewNavBarPageColumnFilter") %]
 
 [% RenderBlockStart("OverviewNavBarPageColumnFilterLink") %]
-                        <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
-                            <i class="ooofo ooofo-filter"></i>
-                        </a>
-                        <div class="ColumnSettingsContainer DontPrint">
-                            <div class="ColumnSettingsBox">
-                                [% Data.ColumnFilterStrg %]
+                    <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
+                        <i class="ooofo ooofo-filter"></i>
+                    </a>
+                    <div class="ColumnSettingsContainer DontPrint">
+                        <div class="ColumnSettingsBox">
+                            [% Data.ColumnFilterStrg %]
 
 [% RenderBlockStart("ContentLargeConfigItemGenericHeaderColumnFilterLinkUserSearch") %]
-                                <input type="text" class="UserAutoComplete" autocomplete="off" />
+                            <input type="text" class="UserAutoComplete" autocomplete="off" />
 [% RenderBlockEnd("ContentLargeConfigItemGenericHeaderColumnFilterLinkUserSearch") %]
-                            </div>
                         </div>
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=[% Data.ColumnName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
+                    </div>
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=[% Data.ColumnName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
 [% RenderBlockEnd("OverviewNavBarPageColumnFilterLink") %]
 
 [% RenderBlockStart("OverviewNavBarPageColumnLink") %]
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=[% Data.ColumnName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=[% Data.ColumnName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
 [% RenderBlockEnd("OverviewNavBarPageColumnLink") %]
 
 [% RenderBlockStart("OverviewNavBarPageColumnEmpty") %]
-                        <span class="Gray" title="[% Data.Title | html %]">[% Data.ColumnNameTranslated | html %]</span>
+                    <span class="Gray" title="[% Data.Title | html %]">[% Data.ColumnNameTranslated | html %]</span>
 [% RenderBlockEnd("OverviewNavBarPageColumnEmpty") %]
 
-                    </th>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageColumn") %]
 [% RenderBlockEnd("OverviewNavBarPageConfigItemHeader") %]
 
 [% RenderBlockStart("OverviewNavBarPageDynamicField") %]
-                    <th class="OverviewHeader [% Data.HeaderColumnName | html %] DynamicField Last [% Data.CSS | html %]">
+                <th class="OverviewHeader [% Data.HeaderColumnName | html %] DynamicField Last [% Data.CSS | html %]">
 [% RenderBlockStart("OverviewNavBarPageDynamicFieldSortable") %]
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Translate(Data.Label) | html %]</a>
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Translate(Data.Label) | html %]</a>
 [% RenderBlockEnd("OverviewNavBarPageDynamicFieldSortable") %]
 [% RenderBlockStart("OverviewNavBarPageDynamicFieldNotSortable") %]
-                        <span class="Gray" title="[% Data.Title | html %]">[% Translate(Data.Label) | html %]</span>
+                    <span class="Gray" title="[% Data.Title | html %]">[% Translate(Data.Label) | html %]</span>
 [% RenderBlockEnd("OverviewNavBarPageDynamicFieldNotSortable") %]
 
 [% RenderBlockStart("OverviewNavBarPageDynamicFieldFiltrableSortable") %]
-                        <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
-                            <i class="ooofo ooofo-filter"></i>
-                        </a>
-                        <div class="ColumnSettingsContainer DontPrint">
-                            <div class="ColumnSettingsBox">
-                                [% Data.ColumnFilterStrg %]
-                            </div>
+                    <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
+                        <i class="ooofo ooofo-filter"></i>
+                    </a>
+                    <div class="ColumnSettingsContainer DontPrint">
+                        <div class="ColumnSettingsBox">
+                            [% Data.ColumnFilterStrg %]
                         </div>
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Translate(Data.Label) | html %]</a>
+                    </div>
+                    <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Translate(Data.Label) | html %]</a>
 [% RenderBlockEnd("OverviewNavBarPageDynamicFieldFiltrableSortable") %]
 
 [% RenderBlockStart("OverviewNavBarPageDynamicFieldFiltrableNotSortable") %]
-                        <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
-                            <i class="ooofo ooofo-filter"></i>
-                        </a>
-                        <div class="ColumnSettingsContainer DontPrint">
-                            <div class="ColumnSettingsBox">
-                                [% Data.ColumnFilterStrg %]
-                            </div>
+                    <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
+                        <i class="ooofo ooofo-filter"></i>
+                    </a>
+                    <div class="ColumnSettingsContainer DontPrint">
+                        <div class="ColumnSettingsBox">
+                            [% Data.ColumnFilterStrg %]
                         </div>
-                        <span class="Gray" title="[% Data.Title | html %]">[% Data.Label | html %]</span>
+                    </div>
+                    <span class="Gray" title="[% Data.Title | html %]">[% Data.Label | html %]</span>
 [% RenderBlockEnd("OverviewNavBarPageDynamicFieldFiltrableNotSortable") %]
 
-                    </th>
+                </th>
 [% RenderBlockEnd("OverviewNavBarPageDynamicField") %]
 
 [% RenderBlockEnd("GeneralOverviewHeader") %]
@@ -235,88 +210,83 @@
 #[% RenderBlockEnd("OverviewNavBarPageDynamicField_Field2") %]
 #                    </th>
 
-                </tr>
-            </thead>
+            </tr>
+        </thead>
 [% RenderBlockEnd("TableHeader") %]
 [% RenderBlockStart("TableBody") %]
-            <tbody>
+        <tbody>
 [% RenderBlockStart("Record") %]
-                <tr id="ConfigItemID_[% Data.ConfigItemID | html %]" class="MasterAction">
+            <tr id="ConfigItemID_[% Data.ConfigItemID | html %]" class="MasterAction">
 
 [% RenderBlockStart("GeneralOverviewRow") %]
 
-[% RenderBlockStart("Bulk") %]
-                    <td class="Checkbox NonTextContent">
-                        <input class="Checkbox" type="checkbox" name="ConfigItemID" title="[% Translate("Select this config item") | html %]" value="[% Data.ConfigItemID | html %]"  autocomplete="off" />
-                    </td>
-[% RenderBlockEnd("Bulk") %]
 [% RenderBlockStart("ContentLargeConfigItemGenericRowMeta") %]
-                    <td class="[% Data.ClassTable | html %]" title="[% Translate(Data.Title) | html %]">
+                <td class="[% Data.ClassTable | html %]" title="[% Translate(Data.Title) | html %]">
 [% RenderBlockStart("ContentLargeConfigItemGenericRowMetaImage") %]
-                        <div class="[% Data.Class | html %] Small" title="[% Translate(Data.Title) | html %]">
-                            <span class="[% Data.ClassSpan | html %]">
-                                <i class="ooofo ooofo-star"></i>
-                                <i class="ooofo ooofo-star"></i>
-                                <em>[% Translate(Data.Title) | html %]</em>
-                            </span>
-                        </div>
+                    <div class="[% Data.Class | html %] Small" title="[% Translate(Data.Title) | html %]">
+                        <span class="[% Data.ClassSpan | html %]">
+                            <i class="ooofo ooofo-star"></i>
+                            <i class="ooofo ooofo-star"></i>
+                            <em>[% Translate(Data.Title) | html %]</em>
+                        </span>
+                    </div>
 [% RenderBlockEnd("ContentLargeConfigItemGenericRowMetaImage") %]
-                    </td>
+                </td>
 [% RenderBlockEnd("ContentLargeConfigItemGenericRowMeta") %]
 
 [% RenderBlockStart("RecordConfigItemData") %]
 [% RenderBlockStart("RecordCurDeplSignal") %]
-                    <td title="[% Translate(Data.CurDeplState) | html %]">
-                        <div class="Flag Small">
-                            <span class="[% Data.CurDeplSignal | html %]">"[% Translate(Data.CurDeplState) | html %]"</span>
-                        </div>
-                    </td>
+                <td title="[% Translate(Data.CurDeplState) | html %]">
+                    <div class="Flag Small">
+                        <span class="[% Data.CurDeplSignal | html %]">"[% Translate(Data.CurDeplState) | html %]"</span>
+                    </div>
+                </td>
 [% RenderBlockEnd("RecordCurDeplSignal") %]
 [% RenderBlockStart("RecordCurInciSignal") %]
-                    <td title="[% Translate(Data.CurInciState) | html %]">
-                        <div class="Flag Small">
-                            <span class="[% Data.CurInciSignal | html %]">"[% Translate(Data.CurInciState) | html %]"</span>
-                        </div>
-                    </td>
+                <td title="[% Translate(Data.CurInciState) | html %]">
+                    <div class="Flag Small">
+                        <span class="[% Data.CurInciSignal | html %]">"[% Translate(Data.CurInciState) | html %]"</span>
+                    </div>
+                </td>
 [% RenderBlockEnd("RecordCurInciSignal") %]
 [% RenderBlockStart("RecordNumber") %]
-                    <td>
-                        <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>
-                    </td>
+                <td>
+                    <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>
+                </td>
 [% RenderBlockEnd("RecordNumber") %]
 [% RenderBlockStart("RecordConfigItemCreatedBy") %]
-                    <td>
-                        <div title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">[% Data.UserFullname | truncate(50) | html %]</div>
-                    </td>
+                <td>
+                    <div title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">[% Data.UserFullname | truncate(50) | html %]</div>
+                </td>
 [% RenderBlockEnd("RecordConfigItemCreatedBy") %]
 [% RenderBlockStart("RecordConfigItemColumn") %]
-                    <td>
-                        <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(100) | html %]</div>
-                    </td>
+                <td>
+                    <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(100) | html %]</div>
+                </td>
 [% RenderBlockEnd("RecordConfigItemColumn") %]
 [% RenderBlockStart("RecordConfigItemColumnTranslatable") %]
-                    <td>
-                        <div title="[% Translate(Data.GenericValue) | html %]">[% Translate(Data.GenericValue) | html %]</div>
-                    </td>
+                <td>
+                    <div title="[% Translate(Data.GenericValue) | html %]">[% Translate(Data.GenericValue) | html %]</div>
+                </td>
 [% RenderBlockEnd("RecordConfigItemColumnTranslatable") %]
 [% RenderBlockStart("RecordConfigItemColumnTime") %]
-                    <td>
-                        <div title="[% Data.GenericValue | Localize("TimeShort") | html %]">[% Data.GenericValue | Localize("TimeShort") | html %]</div>
-                    </td>
+                <td>
+                    <div title="[% Data.GenericValue | Localize("TimeShort") | html %]">[% Data.GenericValue | Localize("TimeShort") | html %]</div>
+                </td>
 [% RenderBlockEnd("RecordConfigItemColumnTime") %]
 [% RenderBlockEnd("RecordConfigItemData") %]
 
 [% RenderBlockStart("RecordDynamicField") %]
-                    <td>
-                        <div title="[% Data.Title | html %]">
+                <td>
+                    <div title="[% Data.Title | html %]">
 [% RenderBlockStart("RecordDynamicFieldLink") %]
-                            <a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a>
+                        <a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a>
 [% RenderBlockEnd("RecordDynamicFieldLink") %]
 [% RenderBlockStart("RecordDynamicFieldPlain") %]
-                            [% Data.Value %]
+                        [% Data.Value %]
 [% RenderBlockEnd("RecordDynamicFieldPlain") %]
-                        </div>
-                    </td>
+                    </div>
+                </td>
 [% RenderBlockEnd("RecordDynamicField") %]
 
 [% RenderBlockEnd("GeneralOverviewRow") %]
@@ -349,14 +319,13 @@
 #                    </td>
 #[% RenderBlockEnd("RecordDynamicField_Field2") %]
 
-                </tr>
+            </tr>
 
 [% RenderBlockEnd("Record") %]
-            </tbody>
+        </tbody>
 [% RenderBlockEnd("TableBody") %]
-        </table>
+    </table>
 [% RenderBlockEnd("OverviewTable") %]
-    </form>
 </div>
 [% RenderBlockEnd("DocumentContent") %]
 
