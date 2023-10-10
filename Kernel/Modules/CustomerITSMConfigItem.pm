@@ -235,68 +235,113 @@ sub Run {
     # my config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # to store the default class
-    my $ClassIDAuto = '';
-
     # define position of the filter in the frontend
     my $PrioCounter = 1000;
 
     # to store the total number of config items in all classes that the user has access
     my $TotalCount;
 
-    # to store all the clases that the user has access, used in search for filter 'All'
-    my $AccessClassList;
-
     # to store the NavBar filters
     my %Filters;
 
-    CLASSID:
-    for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
+    my $ClassIDAuto = '1';
 
-        # # show menu link only if user has access rights
-        # my $HasAccess = $ConfigItemObject->Permission(
-        #     Scope   => 'Class',
-        #     ClassID => $ClassID,
-        #     UserID  => $Self->{UserID},
-        #     Type    => $Config->{Permission},
-        # );
-        #
-        # next CLASSID if !$HasAccess;
+    # CLASSID:
+    # for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
 
-        # insert this class to be passed as search parameter for filter 'All'
-        push @{$AccessClassList}, $ClassID;
+    #     # # show menu link only if user has access rights
+    #     # my $HasAccess = $ConfigItemObject->Permission(
+    #     #     Scope   => 'Class',
+    #     #     ClassID => $ClassID,
+    #     #     UserID  => $Self->{UserID},
+    #     #     Type    => $Config->{Permission},
+    #     # );
+    #     #
+    #     # next CLASSID if !$HasAccess;
 
-        # count all records of this class
-        my $ClassCount = $ConfigItemObject->ConfigItemCount(
-            ClassID => $ClassID,
-        );
+    #     # insert this class to be passed as search parameter for filter 'All'
+    #     push @{$AccessClassList}, $ClassID;
 
-        # add the config items number in this class to the total
-        $TotalCount += $ClassCount;
+    #     # count all records of this class
+    #     my $ClassCount = $ConfigItemObject->ConfigItemCount(
+    #         ClassID => $ClassID,
+    #     );
 
-        # increase the PrioCounter
-        $PrioCounter++;
+    #     # add the config items number in this class to the total
+    #     $TotalCount += $ClassCount;
 
-        # add filter with params for the search method
-        $Filters{$ClassID} = {
-            Name   => $ClassList->{$ClassID},
-            Prio   => $PrioCounter,
-            Count  => $ClassCount,
-            Search => {
-                ClassIDs     => [$ClassID],
-                DeplStateIDs => $DeplStateIDs,
-                %Sort,
-                Limit => $Self->{SearchLimit},
+    #     # increase the PrioCounter
+    #     $PrioCounter++;
 
-                # Permission => $Permission,
-                # UserID     => $Self->{UserID},
-            },
-        };
+    #     # add filter with params for the search method
+    #     $Filters{$ClassID} = {
+    #         Name   => $ClassList->{$ClassID},
+    #         Prio   => $PrioCounter,
+    #         Count  => $ClassCount,
+    #         Search => {
+    #             ClassIDs     => [$ClassID],
+    #             DeplStateIDs => $DeplStateIDs,
+    #             %Sort,
+    #             Limit => $Self->{SearchLimit},
 
-        # remember the first class id to show this in the overview
-        # if no class id was given
-        if ( !$ClassIDAuto ) {
-            $ClassIDAuto = $ClassID;
+    #             # Permission => $Permission,
+    #             # UserID     => $Self->{UserID},
+    #         },
+    #     };
+
+    #     # remember the first class id to show this in the overview
+    #     # if no class id was given
+    #     if ( !$ClassIDAuto ) {
+    #         $ClassIDAuto = $ClassID;
+    #     }
+    # }
+
+    # fetch filters from config
+    my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+
+    if ( IsHashRefWithData($PermissionConditionsConfig) ) {
+        PERMCONF:
+        for my $ConfigCounter ( 1 .. 5 ) {
+            my $ConfigIdentifier = sprintf("%02d", $ConfigCounter);
+            my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
+            next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
+
+            my %FilterSearch = (
+                    Classes => $PermissionConditionConfig->{Classes},
+                    DeploymentStates => $PermissionConditionConfig->{DeploymentStates},
+                    "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
+                        Equals => $Self->{CustomerID},
+                    },
+                    "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
+                        Equals => $Self->{UserID},
+                    },
+                    %Sort,
+                    Limit => $Self->{SearchLimit} // '1000',
+            );
+
+            my $Count = $ConfigItemObject->ConfigItemSearch(
+                %FilterSearch,
+                Result => 'COUNT',
+            );
+
+            $Filters{$PermissionConditionConfig->{Name}} = {
+                Name => $PermissionConditionConfig->{Name},
+                Prio => $PrioCounter,
+                Count => $Count,
+                Search => {
+                    Classes => $PermissionConditionConfig->{Classes},
+                    DeploymentStates => $PermissionConditionConfig->{DeploymentStates},
+                    "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
+                        Equals => $Self->{CustomerID},
+                    },
+                    "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
+                        Equals => $Self->{UserID},
+                    },
+                    %Sort,
+                    Limit => $Self->{SearchLimit} // '1000',
+                },
+            };
+            $PrioCounter++;
         }
     }
 
@@ -317,7 +362,7 @@ sub Run {
             Prio   => 1000,
             Count  => $TotalCount,
             Search => {
-                ClassIDs     => $AccessClassList,
+                # ClassIDs     => $AccessClassList,
                 DeplStateIDs => $DeplStateIDs,
                 %Sort,
                 Limit => $Self->{SearchLimit},
@@ -522,11 +567,10 @@ sub Run {
         OriginalConfigItemIDs => \@OriginalViewableConfigItems,
         GetColumnFilter       => \%GetColumnFilter,
         LastColumnFilter      => $LastColumnFilter,
-        Action                => 'AgentITSMConfigItem',
+        Action                => 'CustomerITSMConfigItem',
         Total                 => $CountTotal,
         RequestedURL          => $Self->{RequestedURL},
         View                  => $View,
-        Bulk                  => 1,
         TitleName             => $LayoutObject->{LanguageObject}->Translate('Overview: ITSM ConfigItem'),
         TitleValue            => $Self->{Filters}{$Filter}->{Name},
         Env                   => $Self,
