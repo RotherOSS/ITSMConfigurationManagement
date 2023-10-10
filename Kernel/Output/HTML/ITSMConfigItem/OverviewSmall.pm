@@ -331,8 +331,13 @@ sub ActionRow {
         }
     }
 
+    my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
+    if ( $Param{CustomerInterface} ) {
+        $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
+    }
+
     my $Output = $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+        TemplateFile => $TemplateFile,
         Data         => \%Param,
     );
 
