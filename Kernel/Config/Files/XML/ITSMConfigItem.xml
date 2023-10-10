@@ -184,18 +184,29 @@
         <Navigation>Frontend::Customer::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
-                <Item Key="CSS">
-                    <Array>
-                        <Item>Core.AllocationList.css</Item>
-                        <Item>ITSM.Agent.Default.css</Item>
-                        <Item>ITSM.Agent.ConfigItem.Overview.css</Item>
-                    </Array>
-                </Item>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.DynamicFieldReferenceSearch.js</Item>
+                        <Item>ITSM.Customer.ConfigItemList.js</Item>
+                        <Item>Core.Customer.Search.js</Item>
+                        <!--
                         <Item>Core.UI.AllocationList.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                         <Item>ITSM.Agent.ConfigItem.Overview.js</Item>
+                        -->
+                    </Array>
+                </Item>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.TicketList.css</Item>
+                        <Item>ITSM.ConfigItemList.css</Item>
+                        <Item>Core.TicketOverview.css</Item>
+                        <Item>ITSM.ConfigItemOverview.css</Item>
+                        <!---
+                        <Item>Core.AllocationList.css</Item>
+                        <Item>ITSM.Agent.Default.css</Item>
+                        <Item>ITSM.Agent.ConfigItem.Overview.css</Item>
+                        -->
                     </Array>
                 </Item>
             </Hash>
