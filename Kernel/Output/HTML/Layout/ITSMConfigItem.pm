@@ -645,15 +645,17 @@ sub ITSMConfigItemListShow {
         }
     }
 
-    # As of OTOBO 10.0.x some content was printed early.
-    # This has changed in OTOBO 10.1.1.
-
     # create nav bar and run overview backend module
-    return join '',
-        $Self->Output(
+    my $NavBarHTML = '';
+    if ( $Env->{Action} =~ /Agent/ ) {
+        $NavBarHTML = $Self->Output(
             TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
             Data         => { %Param, },
-        ),
+        );
+    }
+
+    return join '',
+        $NavBarHTML,
         $Object->Run(
             %Param,
             Config    => $Backends->{$View},

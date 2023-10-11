@@ -385,6 +385,17 @@ sub Run {
         );
     }
 
+    # show header filter
+    for my $Key ( sort keys %Filters ) {
+        $LayoutObject->Block(
+            Name => 'FilterHeader',
+            Data => {
+                %Param,
+                %{ $Filters{$Key} },
+            },
+        );
+    }
+
     my $View = $ParamObject->GetParam( Param => 'View' ) || '';
 
     # lookup latest used view mode
