@@ -202,6 +202,7 @@
                         <Item>ITSM.ConfigItemList.css</Item>
                         <Item>Core.TicketOverview.css</Item>
                         <Item>ITSM.ConfigItemOverview.css</Item>
+                        <Item>ITSM.Table.css</Item>
                         <!---
                         <Item>Core.AllocationList.css</Item>
                         <Item>ITSM.Agent.Default.css</Item>
