@@ -499,17 +499,20 @@ sub Run {
                     sort keys %Actions;
             }
 
-            my $ACL = $ConfigItemObject->ConfigItemAcl(
-                Data          => \%PossibleActions,
-                Action        => $Self->{Action},
-                ConfigItemID  => $ConfigItem{ConfigItemID},
-                ReturnType    => 'Action',
-                ReturnSubType => '-',
-                UserID        => $Self->{UserID},
-            );
+            my $ACL;
             my %AclAction = %PossibleActions;
-            if ($ACL) {
-                %AclAction = $ConfigItemObject->ConfigItemAclActionData();
+            if ( !$Param{CustomerInterface} ) {
+                $ACL = $ConfigItemObject->ConfigItemAcl(
+                    Data          => \%PossibleActions,
+                    Action        => $Self->{Action},
+                    ConfigItemID  => $ConfigItem{ConfigItemID},
+                    ReturnType    => 'Action',
+                    ReturnSubType => '-',
+                    UserID        => $Self->{UserID},
+                );
+                if ($ACL) {
+                    %AclAction = $ConfigItemObject->ConfigItemAclActionData();
+                }
             }
 
             # run config item pre menu modules

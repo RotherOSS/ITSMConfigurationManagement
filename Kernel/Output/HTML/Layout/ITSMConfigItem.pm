@@ -334,7 +334,7 @@ sub ITSMConfigItemListShow {
 
     # update preferences if needed
     my $Key = 'UserITSMConfigItemOverview' . $Env->{Action};
-    if ( $Env->{Action} =~ /^Agent/ ) {
+    if ( !$Param{CustomerInterface} ) {
         if ( !$ConfigObject->Get('DemoSystem') && ( $Self->{$Key} // '' ) ne $View ) {
             $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
                 UserID => $Self->{UserID},
@@ -647,7 +647,7 @@ sub ITSMConfigItemListShow {
 
     # create nav bar and run overview backend module
     my $NavBarHTML = '';
-    if ( $Env->{Action} =~ /Agent/ ) {
+    if ( !$Param{CustomerInterface} ) {
         $NavBarHTML = $Self->Output(
             TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
             Data         => { %Param, },

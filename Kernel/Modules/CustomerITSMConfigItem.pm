@@ -480,6 +480,7 @@ sub Run {
             Env                   => $Self,
             View                  => $View,
             EnableColumnFilters   => 1,
+            CustomerInterface     => 1,
         );
 
         if ( !$FilterContent ) {
@@ -594,6 +595,7 @@ sub Run {
         ColumnFilterForm      => {
             Filter => $Filter || '',
         },
+        CustomerInterface     => 1,
 
         # do not print the result earlier, but return complete content
         Output => 1,
