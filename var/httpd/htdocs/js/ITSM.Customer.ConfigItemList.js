@@ -92,7 +92,7 @@ ITSM.Customer.TicketList = (function (TargetNS) {
         });
     };
 
-    ITSM.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
+    Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 
     return TargetNS;
 }(ITSM.Customer.TicketList || {}));
