@@ -334,12 +334,14 @@ sub ITSMConfigItemListShow {
 
     # update preferences if needed
     my $Key = 'UserITSMConfigItemOverview' . $Env->{Action};
-    if ( !$ConfigObject->Get('DemoSystem') && ( $Self->{$Key} // '' ) ne $View ) {
-        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
-            UserID => $Self->{UserID},
-            Key    => $Key,
-            Value  => $View,
-        );
+    if ( $Env->{Action} =~ /^Agent/ ) {
+        if ( !$ConfigObject->Get('DemoSystem') && ( $Self->{$Key} // '' ) ne $View ) {
+            $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+                UserID => $Self->{UserID},
+                Key    => $Key,
+                Value  => $View,
+            );
+        }
     }
 
     # get backend from config
