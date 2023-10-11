@@ -212,7 +212,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Navigation###CustomerITSMConfigItem###003-ITSMConfigItem" Required="0" Valid="1">
+    <Setting Name="CustomerFrontend::Navigation###CustomerITSMConfigItem###003-ITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Main menu item registration.</Description>
         <Navigation>Frontend::Customer::ModuleRegistration::MainMenu</Navigation>
         <Value>
@@ -229,40 +229,17 @@
                         </Item>
                         <Item Key="GroupRo">
                             <Array>
-                                <Item>itsm-configitem</Item>
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Configuration Management Database.</Item>
                         <Item Key="Name">CMDB</Item>
                         <Item Key="Link">Action=CustomerITSMConfigItem</Item>
                         <Item Key="LinkOption"></Item>
-                        <Item Key="NavBar">Config Item</Item>
+                        <Item Key="NavBar">Ticket</Item>
                         <Item Key="Type">Menu</Item>
-                        <Item Key="Block">ItemArea</Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">3200</Item>
-                    </Hash>
-                </Item>
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                                <Item>itsm-configitem</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Overview.</Item>
-                        <Item Key="Name">Overview</Item>
-                        <Item Key="Link">Action=CustomerITSMConfigItem</Item>
-                        <Item Key="LinkOption"></Item>
-                        <Item Key="NavBar">Config Item</Item>
-                        <Item Key="Type"></Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">100</Item>
+                        <Item Key="Prio">310</Item>
                     </Hash>
                 </Item>
             </Array>
