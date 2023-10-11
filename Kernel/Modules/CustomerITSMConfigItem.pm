@@ -170,7 +170,6 @@ sub Run {
         $Output = $LayoutObject->CustomerHeader(
             Refresh => $Refresh,
         );
-        $Output .= $LayoutObject->CustomerNavigationBar();
     }
 
     # get general catalog object
@@ -387,11 +386,13 @@ sub Run {
 
     # show header filter
     for my $Key ( sort keys %Filters ) {
+
         $LayoutObject->Block(
             Name => 'FilterHeader',
             Data => {
                 %Param,
                 %{ $Filters{$Key} },
+                ClassA => $Key eq $Filter ? 'Selected' : '',
             },
         );
     }
@@ -608,8 +609,12 @@ sub Run {
         },
     );
 
+    # build NavigationBar
+    $Output .= $LayoutObject->CustomerNavigationBar();
+
     # get page footer
-    $Output .= $LayoutObject->CustomerFooter() if $Self->{Subaction} ne 'AJAXFilterUpdate';
+    $Output .= $LayoutObject->CustomerFooter();
+
     return $Output;
 }
 

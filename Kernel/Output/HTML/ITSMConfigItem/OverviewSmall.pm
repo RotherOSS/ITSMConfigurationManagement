@@ -331,8 +331,9 @@ sub ActionRow {
         }
     }
 
+    # determine template dependent on interface
     my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
-    if ( $Param{Action} =~ /^Customer/ ) {
+    if ( $Param{CustomerInterface} ) {
         $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
     }
 
@@ -352,6 +353,12 @@ sub SortOrderBar {
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    # determine template dependent on interface
+    my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
+    if ( $Param{CustomerInterface} ) {
+        $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
+    }
 
     # If $Param{EnableColumnFilters} is not sent, we want to disable all filters
     #   for the current screen. We localize the setting for this sub and change it
@@ -560,7 +567,7 @@ sub Run {
                             Data => $Item,
                         );
                         $Output = $LayoutObject->Output(
-                            TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+                            TemplateFile => $TemplateFile,
                             Data         => $Item,
                         );
                     }
@@ -1464,7 +1471,7 @@ sub Run {
 
     # use template
     my $Output = $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+        TemplateFile => $TemplateFile,
         Data         => {
             %Param,
             Type => $Self->{ViewType},
