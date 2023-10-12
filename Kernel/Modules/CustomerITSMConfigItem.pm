@@ -91,8 +91,6 @@ sub Run {
     # get filter from web request
     my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
 
-    my $StoredFilters;
-
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
         UserID => $Self->{UserID},

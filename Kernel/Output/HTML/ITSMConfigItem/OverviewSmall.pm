@@ -66,9 +66,17 @@ sub new {
     my $BackendConfigKey = 'ITSMConfigItem::Frontend::' . $Self->{Action};
     $Self->{Config} = $ConfigObject->Get($BackendConfigKey);
 
-    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-        UserID => $Self->{UserID},
-    );
+    my %Preferences;
+    if ( $Self->{Action} =~ /^Customer/ ) {
+        %Preferences = $Kernel::OM->Get('Kernel::System::CustomerUser')->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+    }
+    else {
+        %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+    }
 
     # set stored filters if present
     my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Self->{Filter};
