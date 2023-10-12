@@ -548,6 +548,11 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
+    background-color: #EEEEEE;
+    border: 1px solid #BBBBBB;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
     box-shadow: 1px 1px 3px #CCCCCC, -1px -1px 3px #CCCCCC;
     display: none;
     padding: 4px;
@@ -575,6 +580,7 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
     margin-bottom: 8px;
     position: relative;
     padding: 4px;
+    border: 1px solid #ccc;
 }
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue span,
@@ -587,6 +593,8 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a {
+    background: #AAAAAA;
+    border-radius: 14px;
     color: #FFFFFF;
     display: block;
     font-size: 10px;
@@ -610,6 +618,11 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 .DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden {
     display: none;
+}
+
+.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a:hover {
+    background: #888;
 }
 
 .DataTable thead th.OverviewHeader .ColumnSettingsBox input[type="text"] ,
