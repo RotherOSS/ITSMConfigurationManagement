@@ -198,10 +198,8 @@
                 </Item>
                 <Item Key="CSS">
                     <Array>
-                        <Item>Core.TicketList.css</Item>
-                        <Item>ITSM.ConfigItemList.css</Item>
-                        <Item>Core.TicketOverview.css</Item>
-                        <Item>ITSM.ConfigItemOverview.css</Item>
+                        <Item>ITSM.Customer.ConfigItemList.css</Item>
+                        <Item>ITSM.Customer.ConfigItemOverview.css</Item>
                         <Item>ITSM.Table.css</Item>
                         <!---
                         <Item>Core.AllocationList.css</Item>
