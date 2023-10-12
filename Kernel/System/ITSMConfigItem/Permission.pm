@@ -208,15 +208,18 @@ sub CustomerPermission {
         }
 
         if ( $ConditionSet->{CustomerUserDynamicField} ) {
-            next CONDITION if $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ne $Param{UserID};
+            next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
+            next CONDITION if none { $_ eq $Param{UserID} } $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} }->@*;
         }
 
         if ( $ConditionSet->{CustomerCompanyDynamicField} ) {
+            next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} };
+
             my %AccessibleCustomers = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupContextCustomers(
                 CustomerUserID => $Param{UserID},
             );
 
-            next CONDITION if !$AccessibleCustomers{ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } };
+            next CONDITION if none { $AccessibleCustomers{$_} } $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} }->@*;
         }
 
         # grant access
