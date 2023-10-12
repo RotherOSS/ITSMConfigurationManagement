@@ -93,15 +93,15 @@ sub Run {
 
     my $StoredFilters;
 
-    # # get filters stored in the user preferences
-    # my %Preferences = $UserObject->GetPreferences(
-    #     UserID => $Self->{UserID},
-    # );
-    # my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Filter;
-    # my $JSONObject       = $Kernel::OM->Get('Kernel::System::JSON');
-    # my $StoredFilters    = $JSONObject->Decode(
-    #     Data => $Preferences{$StoredFiltersKey},
-    # );
+    # get filters stored in the user preferences
+    my %Preferences = $UserObject->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Filter;
+    my $JSONObject       = $Kernel::OM->Get('Kernel::System::JSON');
+    my $StoredFilters    = $JSONObject->Decode(
+        Data => $Preferences{$StoredFiltersKey},
+    );
 
     # delete stored filters if needed
     if ( $ParamObject->GetParam( Param => 'DeleteFilters' ) ) {
@@ -536,11 +536,11 @@ sub Run {
 
         my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action} . '-' . $Self->{Filter};
 
-        # $UserObject->SetPreferences(
-        #     UserID => $Self->{UserID},
-        #     Key    => $StoredFiltersKey,
-        #     Value  => $JSONObject->Encode( Data => $StoredFilters ),
-        # );
+        $UserObject->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $StoredFiltersKey,
+            Value  => $JSONObject->Encode( Data => $StoredFilters ),
+        );
     }
 
     my $CountTotal = 0;

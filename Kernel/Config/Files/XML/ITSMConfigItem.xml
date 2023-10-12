@@ -187,6 +187,7 @@
                     <Array>
                         <Item>Core.Agent.DynamicFieldReferenceSearch.js</Item>
                         <Item>ITSM.Customer.ConfigItemList.js</Item>
+                        <Item>ITSM.Customer.ConfigItem.Overview.js</Item>
                         <Item>Core.Customer.Search.js</Item>
                         <!--
                         <Item>Core.UI.AllocationList.js</Item>
