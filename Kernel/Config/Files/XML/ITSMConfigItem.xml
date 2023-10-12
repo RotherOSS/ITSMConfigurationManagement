@@ -157,7 +157,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::Module###CustomerITSMConfigItem" Required="0" Valid="1">
+    <Setting Name="CustomerFrontend::Module###CustomerITSMConfigItem" Required="0" Valid="0">
         <Description Translatable="1">Frontend module registration for the customer interface.</Description>
         <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
@@ -169,7 +169,6 @@
                     </Item>
                     <Item Key="GroupRo">
                         <Array>
-                            <Item>itsm-configitem</Item>
                         </Array>
                     </Item>
                     <Item Key="Description" Translatable="1">ITSM config item overview.</Item>
@@ -242,20 +241,6 @@
                     </Hash>
                 </Item>
             </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Customer::ConfigItem::PermissionConditions###01" Required="0" Valid="0">
-        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
-        <Navigation>Core::ITSMConfigItem</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Name"></Item>
-                <Item Key="Groups"><Array></Array></Item>
-                <Item Key="Classes"><Array></Array></Item>
-                <Item Key="DeploymentStates"><Array></Array></Item>
-                <Item Key="CustomerUserDynamicField"></Item>
-                <Item Key="CustomerCompanyDynamicField"></Item>
-            </Hash>
         </Value>
     </Setting>
     <Setting Name="Frontend::Module###AgentITSMConfigItemZoom" Required="0" Valid="1">
