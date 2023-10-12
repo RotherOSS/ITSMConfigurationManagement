@@ -15,7 +15,6 @@
 # --
 <div class="oooConfigItemList">
 [% RenderBlockStart("DocumentContent") %]
-    <div id="OverviewBody" class="Overview ConfigItemList">
 [% RenderBlockStart("NoConfigItemFound") %]
         <div id="EmptyMessageSmall">
             [% Translate("No config item data found.") | html %]
@@ -28,6 +27,7 @@
             <thead>
                 <tr>
 [% RenderBlockStart("GeneralOverviewHeader") %]
+
 [% RenderBlockStart("OverviewNavBarPageFlag") %]
                     <th class="OverviewHeader [% Data.CSS | html %]" title="[% Translate(Data.Title) | html %]">
 [% RenderBlockStart("OverviewNavBarPageFlagLink") %]
@@ -138,64 +138,50 @@
 
 [% RenderBlockStart("GeneralOverviewRow") %]
 
-[% RenderBlockStart("ContentLargeConfigItemGenericRowMeta") %]
-                    <td class="[% Data.ClassTable | html %]" title="[% Translate(Data.Title) | html %]">
-[% RenderBlockStart("ContentLargeConfigItemGenericRowMetaImage") %]
-                        <div class="[% Data.Class | html %] Small" title="[% Translate(Data.Title) | html %]">
-                            <span class="[% Data.ClassSpan | html %]">
-                                <i class="ooofo ooofo-star"></i>
-                                <i class="ooofo ooofo-star"></i>
-                                <em>[% Translate(Data.Title) | html %]</em>
-                            </span>
-                        </div>
-[% RenderBlockEnd("ContentLargeConfigItemGenericRowMetaImage") %]
-                    </td>
-[% RenderBlockEnd("ContentLargeConfigItemGenericRowMeta") %]
-
 [% RenderBlockStart("RecordConfigItemData") %]
 [% RenderBlockStart("RecordCurDeplSignal") %]
-                    <td title="[% Translate(Data.CurDeplState) | html %]">
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]title="[% Translate(Data.CurDeplState) | html %]">
                         <div class="Flag Small">
                             <span class="[% Data.CurDeplSignal | html %]">"[% Translate(Data.CurDeplState) | html %]"</span>
                         </div>
                     </td>
 [% RenderBlockEnd("RecordCurDeplSignal") %]
 [% RenderBlockStart("RecordCurInciSignal") %]
-                    <td title="[% Translate(Data.CurInciState) | html %]">
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %] title="[% Translate(Data.CurInciState) | html %]">
                         <div class="Flag Small">
                             <span class="[% Data.CurInciSignal | html %]">"[% Translate(Data.CurInciState) | html %]"</span>
                         </div>
                     </td>
 [% RenderBlockEnd("RecordCurInciSignal") %]
 [% RenderBlockStart("RecordNumber") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>
                     </td>
 [% RenderBlockEnd("RecordNumber") %]
 [% RenderBlockStart("RecordConfigItemCreatedBy") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <div title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">[% Data.UserFullname | truncate(50) | html %]</div>
                     </td>
 [% RenderBlockEnd("RecordConfigItemCreatedBy") %]
 [% RenderBlockStart("RecordConfigItemColumn") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(100) | html %]</div>
-                    </td>
+                    </td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
 [% RenderBlockEnd("RecordConfigItemColumn") %]
 [% RenderBlockStart("RecordConfigItemColumnTranslatable") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <div title="[% Translate(Data.GenericValue) | html %]">[% Translate(Data.GenericValue) | html %]</div>
                     </td>
 [% RenderBlockEnd("RecordConfigItemColumnTranslatable") %]
 [% RenderBlockStart("RecordConfigItemColumnTime") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <div title="[% Data.GenericValue | Localize("TimeShort") | html %]">[% Data.GenericValue | Localize("TimeShort") | html %]</div>
                     </td>
 [% RenderBlockEnd("RecordConfigItemColumnTime") %]
 [% RenderBlockEnd("RecordConfigItemData") %]
 
 [% RenderBlockStart("RecordDynamicField") %]
-                    <td>
+                    <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
                         <div title="[% Data.Title | html %]">
 [% RenderBlockStart("RecordDynamicFieldLink") %]
                             <a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a>
@@ -214,7 +200,6 @@
 [% RenderBlockEnd("TableBody") %]
         </table>
 [% RenderBlockEnd("OverviewTable") %]
-    </div>
 [% RenderBlockEnd("DocumentContent") %]
 </div>
 

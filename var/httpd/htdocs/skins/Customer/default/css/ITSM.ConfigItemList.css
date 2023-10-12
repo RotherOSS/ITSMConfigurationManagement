@@ -15,7 +15,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @media only screen and (max-width: 767px) {
 
-    .oooITSMConfigItemListItem {
+    .oooConfigItemList {
         width: calc( 100% - 48px );
         height: 110px;
         margin-top: 8px;
@@ -35,6 +35,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         grid-template-rows: 44px 32px;
         grid-row-gap: 16px;
         align-items: center;
+        overflow-x: scroll;
+        overflow-y: visible;
     }
 
     .oooITSMConfigItemItemDesc {
@@ -91,7 +93,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @media only screen and (min-width: 768px) {
 
-    .oooITSMConfigItemListItem {
+    .oooConfigItemList {
         width: calc( 100% - 80px );
         height: 86px;
         margin-top: 16px;
@@ -109,6 +111,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         grid-column-gap: 16px;
         grid-template-rows: 100%;
         align-items: center;
+        overflow-x: scroll;
+        overflow-y: visible;
     }
 
     .oooITSMConfigItemItemCat {
@@ -131,8 +135,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 }
 
-.oooITSMConfigItemList h3,
-.oooITSMConfigItemList p {
+.oooConfigItemList h3,
+.oooConfigItemList p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -189,7 +193,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 /* IE */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 
-    .oooITSMConfigItemListItem {
+    .oooConfigItemList {
         display: -ms-grid;
         /* title number / categories / avatar / name / age / options */
         -ms-grid-columns: 1fr 0.77fr 40px 0.36fr 84px 29px;
@@ -227,7 +231,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     }
 
     @supports (display: grid) {
-        .oooITSMConfigItemListItem {
+        .oooConfigItemList {
             display: grid;
         }
     }

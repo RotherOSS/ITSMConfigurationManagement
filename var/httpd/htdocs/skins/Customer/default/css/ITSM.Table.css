@@ -38,27 +38,13 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     z-index: 10;
 }
 
-.DataTable tbody td:last-child,
-.TableSmall tbody td:last-child {
-    border-right: none;
-}
-
-.DataTable tbody tr:hover td,
-.TableSmall tbody tr:hover td,
-.DataTable tbody tr:active td.Clickable,
-.TableSmall tbody tr:active td.Clickable,
-.DataTable tr:nth-child(even):hover td.Highlight {
-/*    background: #f5af36;*/
-    background: #fef899;
+.TableSmall {
+    background-color: white;
 }
 
 /**
  * @subsection  Generic table elements
  */
-tbody tr.UnreadArticles td {
-    font-weight: bold !important;
-}
-
 .DataTable td,
 .TableSmall td {
     line-height: 15px;
@@ -80,9 +66,7 @@ table tr.MasterAction {
 .DataTable {
     width: 100%;
     background-color: white;
-    border: 1px solid #f7f7f9;
     clear: both;
-    border-collapse: separate;
 }
 
 .DataTable.FixedLayout {
@@ -93,46 +77,20 @@ table tr.MasterAction {
     width: auto;
 }
 
-.DataTable thead {
-    background: #eeeeee;
-}
-
 .DataTable thead th {
     padding: 4px 10px 3px;
     color: #00023c;
     font-size: 11px;
     text-transform: uppercase;
-    background: #f7f7f9;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px dotted #CCC;
     vertical-align: bottom;
     white-space: nowrap;
-}
-
-.DataTable thead th.UnreadArticles {
-    padding: 4px 0px 3px 0px;
-    text-align: center;
-}
-
-.RTL .DataTable thead th {
-    border-left: 1px solid #CCC;
-    border-right:none;
 }
 
 .DataTable thead th label {
     color: #4B4B4B !important;
 }
 
-.DataTable thead th:last-child {
-    border-right: none;
-}
-
-.RTL .DataTable thead th:last-child {
-    border-left: none;
-}
-
 .DataTable thead th a {
-    background-image: none;
     color: #444;
     font-size: 11px;
     height: 12px;
@@ -144,7 +102,6 @@ table tr.MasterAction {
 .DataTable thead .SortDescending a {
     color: #2A2A2A;
     padding-right: 15px;
-    background: #ccc;
 }
 
 .DataTable thead .SortDescending > a:after,
@@ -171,7 +128,6 @@ table tr.MasterAction {
 
 .DataTable tbody td {
     padding: 0 10px;
-    border-right: 1px dotted #CCC;
 }
 
 .DataTable.FixedLayout tbody td a.AsBlock {
@@ -180,53 +136,8 @@ table tr.MasterAction {
     overflow: hidden;
 }
 
-.DataTable tbody td.UnreadArticles {
-    padding: 0px;
-}
-
-.RTL .DataTable tbody td {
-    border-left: 1px dotted #CCC;
-    border-right: none;
-}
-
-.DataTable tbody tr:hover td {
-    border-right-color: #fff;
-}
-
-.DataTable tbody td:last-child {
-    border-right: none;
-}
-
-.RTL .DataTable tbody td:last-child {
-    border-left: none;
-}
-
 .DataTable tr td {
     line-height: 20px;
-}
-
-.DataTable tr:first td {
-    border-top: 1px solid #EEE;
-}
-
-.DataTable tr td.Highlight {
-    background-color: #EEE;
-}
-
-.DataTable tr:nth-child(even) td {
-    background-color: #F5F5F5;
-}
-
-.DataTable tr:nth-child(even) td.Highlight {
-    background-color: #E5E5E5;
-}
-
-.DataTable tr td.Highlight {
-    border-right: 1px solid #CCC;
-}
-
-.DataTable tr td.Highlight:last-child {
-    border-right: none;
 }
 
 .DataTable tr:hover td a {
@@ -251,7 +162,6 @@ table tr.MasterAction {
 .DataTable .Row td.QueueOverviewTotals {
     text-transform: uppercase;
     color: #7f809d;
-    border-top: 1px dotted #CCCCCC;
 }
 
 /**
@@ -274,13 +184,6 @@ table tr.MasterAction {
     padding-left: 15px;
 }
 
-.Sortable.DataTable .SortAscending,
-.Sortable.DataTable .SortDescending {
-    border-top-color: #bfbfce;
-    border-right-color: #AAA;
-    border-bottom-color: #999;
-}
-
 /**
  * @subsection  Overview Small View Table
  */
@@ -288,17 +191,15 @@ table tr.MasterAction {
     width: 100%;
     font-size: 12px;
     color: #00023c;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background: #FFF;
-}
-
-.TableSmall thead {
-    border-bottom: none;
 }
 
 .TableSmall .Checkbox {
     margin-left: 7px;
+}
+
+.StaticColumn {
+    position: sticky;
+    left: 0;
 }
 
 th.Checkbox,
@@ -314,11 +215,6 @@ td.Flags {
     width: 29px;
 }
 
-th.UnreadArticles,
-td.UnreadArticles {
-    width: 30px;
-}
-
 th.Direction,
 td.Direction {
     width: 30px;
@@ -332,14 +228,7 @@ td.Attachment {
 }
 
 .TableSmall thead th {
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     vertical-align: bottom;
-    background: #EEEEEE;
-}
-
-.TableSmall thead th:last-child {
-    border-right: 0px;
 }
 
 .TableSmall thead th a {
@@ -373,22 +262,6 @@ td.Attachment {
     color: #00023c;
 }
 
-.TableSmall thead .UnreadArticles a {
-    padding: 0 0 0 5px;
-}
-
-.RTL .TableSmall thead .UnreadArticles a {
-    padding: 0 5px 0 0;
-}
-
-.TableSmall thead span.UnreadArticles a i {
-    font-size: 12px;
-}
-
-.TableSmall thead span.UnreadArticles i:first-child {
-    font-size: 16px !important;
-}
-
 thead .SortAscending a,
 thead .headerSortUp a,
 thead .SortDescending a,
@@ -407,19 +280,11 @@ thead .headerSortDown a {
 .TableSmall thead a span.Flag {
     height: 9px;
     width: 16px;
-    background-color: #999;
     margin-top: 6px;
 }
 
 .TableSmall td {
     padding: 0 10px;
-    background-color: #f7f7f9;
-    border-right: 1px dotted #CCC;
-}
-
-.RTL .TableSmall td {
-    border-right:none;
-    border-left: 1px dotted #CCC;
 }
 
 .TableSmall td.NonTextContent {
@@ -430,30 +295,6 @@ thead .headerSortDown a {
 .TableSmall tbody tr.Active td,
 .DataTable tbody tr.Active td {
     color: #00023c;
-}
-
-.DataTable tbody tr.Active td {
-    background-color: #e5e5e5;
-}
-
-.TableSmall tbody tr td:last-child {
-    border-right: 1px solid transparent;
-}
-
-.RTL .TableSmall tbody tr td:last-child {
-    border-left: none;
-}
-
-.TableSmall tbody tr.Active td:last-child {
-    border-right: 1px solid #000;
-}
-
-.RTL .TableSmall tbody tr td:first-child {
-    border-left: 1px dotted #CCC;
-}
-
-.TableSmall tbody tr.Active td:first-child {
-    border-left: 1px solid #000;
 }
 
 .TableSmall td a {
@@ -472,10 +313,6 @@ thead .headerSortDown a {
 .TableSmall tr:hover td a.DynamicFieldLink,
 .TableSmall tr.Active td a.DynamicFieldLink {
     color: #FFFFFF;
-}
-
-.TableSmall tr:nth-child(even) td {
-    background-color: white;
 }
 
 .TableSmall td:first-child {
@@ -551,59 +388,6 @@ thead .headerSortDown a {
 }
 
 /**
- * @subsection  Ticket List Tables
- */
-
-.TicketList {
-    overflow: auto;
-}
-
-.TicketList table {
-    border-collapse: separate;
-    position: relative;
-    overflow: hidden;
-}
-
-.TicketList td {
-    line-height: 18px;
-}
-
-.TicketList td.From div,
-.TicketList td.Subject div,
-.TicketList td.Created a {
-    height: 20px;
-    overflow: hidden;
-    display: block;
-}
-
-.TicketList .No {
-    width: 30px;
-    text-align: center;
-}
-
-.TicketList .Attachments {
-    width: 20px;
-}
-
-#ArticleTable thead {
-    background: #f0f0f0;
-    background: -moz-linear-gradient(top,  #f0f0f0 0%, #eaeaea 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#eaeaea));
-    background: -webkit-linear-gradient(top,  #f0f0f0 0%,#eaeaea 100%);
-    background: -o-linear-gradient(top,  #f0f0f0 0%,#eaeaea 100%);
-    background: -ms-linear-gradient(top,  #f0f0f0 0%,#eaeaea 100%);
-    background: linear-gradient(to bottom,  #f0f0f0 0%,#eaeaea 100%);
-}
-
-#OverviewBody.Overview.TicketList {
-    overflow-x: auto;
-}
-
-#OverviewBody.Overview.TicketList table.TableSmall.NoCellspacing {
-    overflow: visible;
-}
-
-/**
  * @subsection  Handle for resizing tables
  */
 .Handle {
@@ -650,7 +434,6 @@ thead .headerSortDown a {
 .ColumnFilter + .AJAXLoader {
     float: right;
     margin: 3px 0px 0px 2px;
-    background-color: #eee;
     position: relative;
     z-index: 99;
     text-align: center;
@@ -741,9 +524,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger:hover,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active {
 
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
     opacity: 1.0;
     box-shadow: 1px 1px 1px #a9a9a9 inset, -1px -1px 1px #a9a9a9 inset;
 }
@@ -768,11 +548,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
-    background-color: #EEEEEE;
-    border: 1px solid #BBBBBB;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
     box-shadow: 1px 1px 3px #CCCCCC, -1px -1px 3px #CCCCCC;
     display: none;
     padding: 4px;
@@ -800,7 +575,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
     margin-bottom: 8px;
     position: relative;
     padding: 4px;
-    border: 1px solid #ccc;
 }
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue span,
@@ -813,8 +587,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a {
-    background: #AAAAAA;
-    border-radius: 14px;
     color: #FFFFFF;
     display: block;
     font-size: 10px;
@@ -838,11 +610,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 .DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden {
     display: none;
-}
-
-.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a:hover {
-    background: #888;
 }
 
 .DataTable thead th.OverviewHeader .ColumnSettingsBox input[type="text"] ,

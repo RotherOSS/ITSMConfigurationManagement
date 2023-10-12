@@ -664,14 +664,17 @@ sub Run {
         my $CSS = '';
 
         # show special config item columns, if needed
+        my $Counter = 0;
         COLUMN:
         for my $Column (@Col) {
+            my $StaticColumn = !$Counter;
+            $Counter++;
 
             $LayoutObject->Block(
                 Name => 'GeneralOverviewHeader',
             );
 
-            $CSS = $Column;
+            $CSS = $Column . ( $StaticColumn ? ' StaticColumn' : '' );
             my $Title   = $LayoutObject->{LanguageObject}->Translate($Column);
             my $OrderBy = $Param{OrderBy};
 
@@ -1262,12 +1265,16 @@ sub Run {
         # save column content
         my $DataValue;
 
+        my $Counter = 0;
         # show all needed columns
         CONFIGITEMCOLUMN:
         for my $ConfigItemColumn (@Col) {
             $LayoutObject->Block(
                 Name => 'GeneralOverviewRow',
             );
+            my $StaticColumn = !$Counter;
+            $Counter++;
+
             if ( $ConfigItemColumn !~ m{\A DynamicField_}xms ) {
                 $LayoutObject->Block(
                     Name => 'RecordConfigItemData',
@@ -1277,7 +1284,10 @@ sub Run {
                 if ( $SpecialColumns{$ConfigItemColumn} ) {
                     $LayoutObject->Block(
                         Name => 'Record' . $ConfigItemColumn,
-                        Data => {%ConfigItem},
+                        Data => {
+                            %ConfigItem,
+                            StaticColumn => $StaticColumn,
+                        },
                     );
 
                     next CONFIGITEMCOLUMN;
@@ -1291,13 +1301,16 @@ sub Run {
 
                     $LayoutObject->Block(
                         Name => 'RecordConfigItemCreatedBy',
-                        Data => \%ConfigItemCreatedByInfo,
+                        Data => {
+                            %ConfigItemCreatedByInfo,
+                            StaticColumn => $StaticColumn,
+                        },
                     );
                     next CONFIGITEMCOLUMN;
                 }
 
                 my $BlockType = '';
-                my $CSSClass  = '';
+                my $CSSClass  = $StaticColumn ? 'StaticColumn' : '';
                 if (
                     $ConfigItemColumn eq 'DeplState'
                     || $ConfigItemColumn eq 'CurDeplState'
