@@ -63,8 +63,9 @@ Returns the HTML for a page of AgentITSMConfigItemZoom
 
     my $DynamicFieldHTML = $DynamicFieldOutputObject(
         ConfigItem => $ConfigItem,
-        Definition  => $Definition,
-        Page       => 'Name',       # optional, default is to render the first page
+        Definition => $Definition,
+        PageRef    => $Page,        # either PageRef or Page is required
+        Page       => 'Name',
     );
 
 =cut
@@ -84,16 +85,17 @@ sub PageRender {
         }
     }
 
-    my $Page = $Param{Page}
-        ? ( grep { $_->{Name} eq $Param{Page} } $Param{Definition}{DefinitionRef}{Pages}->@* )[0]
-        : $Param{Definition}{DefinitionRef}{Pages}[0];
+    my $Page = defined $Param{PageRef} ? $Param{PageRef} :
+        ( grep { $_->{Name} eq $Param{Page} } $Param{Definition}{DefinitionRef}{Pages}->@* )[0];
 
     if ( !IsHashRefWithData($Page) || !IsArrayRefWithData( $Page->{Content} ) ) {
-        $Param{Page} //= 1;
+        my $ErrorMessage = defined $Param{PageRef} ? 'PageRef not valid.'
+            : $Param{Page} ? "Page $Param{Page} not valid for DefinitionID $Param{Definition}{DefinitionID} of class $Param{Definition}{Class}."
+            : 'Need Page or PageRef!';
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Page $Param{Page} not valid for DefinitionID $Param{Definition}{DefinitionID} of class $Param{Definition}{Class}.",
+            Message  => $ErrorMessage,
         );
 
         return;

@@ -246,6 +246,7 @@ A hashref with the following keys is returned:
     $ConfigItem->{CreateBy}
     $ConfigItem->{ChangeTime}
     $ConfigItem->{ChangeBy}
+    # TODO include Version keys
 
 Caching can't be turned off.
 

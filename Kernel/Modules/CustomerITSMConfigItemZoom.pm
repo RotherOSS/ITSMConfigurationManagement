@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::Modules::AgentITSMConfigItemZoom;
+package Kernel::Modules::CustomerITSMConfigItemZoom;
 
 use v5.24;
 use strict;
@@ -53,9 +53,8 @@ sub Run {
 
     # check needed stuff
     if ( !$ConfigItemID ) {
-        return $LayoutObject->ErrorScreen(
+        return $LayoutObject->CustomerErrorScreen(
             Message => Translatable('No ConfigItemID is given!'),
-            Comment => Translatable('Please contact the administrator.'),
         );
     }
 
@@ -64,20 +63,13 @@ sub Run {
     my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
     # check for access rights
-    my $HasAccess = $ConfigItemObject->Permission(
-        Scope  => 'Item',
-        ItemID => $ConfigItemID,
-        UserID => $Self->{UserID},
-        Type   => $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{Permission},
+    my $HasAccess = $ConfigItemObject->CustomerPermission(
+        ConfigItemID => $ConfigItemID,
+        UserID       => $Self->{UserID},
     );
 
     if ( !$HasAccess ) {
-
-        # error page
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Can\'t show item, no access rights for ConfigItem are given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
+        return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
     }
 
     # set show versions
@@ -93,10 +85,9 @@ sub Run {
         DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
-        return $LayoutObject->ErrorScreen(
-            Message =>
-                $LayoutObject->{LanguageObject}->Translate('ConfigItem not found!'),
-            Comment => Translatable('Please contact the administrator.'),
+        # additional sanety check - CustomerPermission should handle this case usually
+        return $LayoutObject->CustomerErrorScreen(
+            Message => $LayoutObject->{LanguageObject}->Translate('ConfigItem not found!'),
         );
     }
 
@@ -112,46 +103,39 @@ sub Run {
     # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
     $VersionID ||= $ConfigItem->{VersionID};
 
-    # run config item menu modules
-    if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::MenuModule') eq 'HASH' ) {
-        my %Menus   = %{ $ConfigObject->Get('ITSMConfigItem::Frontend::MenuModule') };
-        my $Counter = 0;
-        for my $Menu ( sort keys %Menus ) {
+    my $Config = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom') // {};
 
-            # load module
-            if ( $Kernel::OM->Get('Kernel::System::Main')->Require( $Menus{$Menu}->{Module} ) ) {
+    if ( $Config->{GeneralInfo} ) {
+        if ( $Config->{GeneralInfo}{Number} ) {
+            $LayoutObject->Block(
+                Name => 'FullSub',
+                Data => {
+                    Number => $ConfigItem->{Number},
+                    Class  => $Config->{GeneralInfo}{Class} ? $ConfigItem->{Class} : 'ConfigItem'
+                },
+            );
+        }
+        elsif ( $Config->{GeneralInfo}{Class} ) {
+            $LayoutObject->Block(
+                Name => 'ClassSub',
+                Data => {
+                    Class  => $ConfigItem->{Class},
+                },
+            );
+        }
 
-                my $Object = $Menus{$Menu}->{Module}->new(
-                    %{$Self},
-                    ConfigItemID => $Self->{ConfigItemID},
-                );
+        INFO:
+        for my $Info ( qw/DeploymentState IncidentState CreatedTime LastChangedTime/ ) {
+            next INFO if !$Config->{GeneralInfo}{ $Info };
 
-                # set classes
-                if ( $Menus{$Menu}->{Target} ) {
-
-                    if ( $Menus{$Menu}->{Target} eq 'PopUp' ) {
-                        $Menus{$Menu}->{MenuClass} = 'AsPopup';
-                    }
-                    elsif ( $Menus{$Menu}->{Target} eq 'Back' ) {
-                        $Menus{$Menu}->{MenuClass} = 'HistoryBack';
-                    }
-
-                }
-
-                # run module
-                $Counter = $Object->Run(
-                    %Param,
-                    ConfigItem => $ConfigItem,
-                    Counter    => $Counter,
-                    Config     => $Menus{$Menu},
-                    MenuID     => $Menu,
-                );
-            }
-            else {
-                return $LayoutObject->FatalError();
-            }
+            $LayoutObject->Block(
+                Name => $Info,
+                Data => $ConfigItem,
+            );
         }
     }
+
+    # TODO: Include customer menu? 
 
     # build version tree
     $LayoutObject->Block( Name => 'Tree' );
@@ -264,8 +248,7 @@ sub Run {
     }
 
     # output header
-    my $Output = $LayoutObject->Header( Value => $ConfigItem->{Number} );
-    $Output .= $LayoutObject->NavigationBar();
+    my $Output = $LayoutObject->CustomerHeader( Value => $ConfigItem->{Number} );
 
     # if a version already exists (TODO: When does it not?)
     if ( $ConfigItem->{Name} ) {
@@ -330,9 +313,10 @@ sub Run {
 
             if ( $Page->{Groups} ) {
                 if ( !%GroupLookup ) {
-                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
                         UserID => $Self->{UserID},
                         Type   => 'ro',
+                        Result => 'HASH',
                     );
                 }
 
@@ -480,7 +464,7 @@ sub Run {
     return join '',
         $Output,
         $LayoutObject->Output(
-            TemplateFile => 'AgentITSMConfigItemZoom',
+            TemplateFile => 'CustomerITSMConfigItemZoom',
             Data         => {
                 $ConfigItem->%*,
                 CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
@@ -488,7 +472,8 @@ sub Run {
                 StyleClasses  => $StyleClasses,
             },
         ),
-        $LayoutObject->Footer;
+        $LayoutObject->CustomerNavigationBar(),
+        $LayoutObject->CustomerFooter;
 }
 
 1;

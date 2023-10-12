@@ -19,6 +19,8 @@ package Kernel::System::ITSMConfigItem::Permission;
 use strict;
 use warnings;
 
+use List::Util qw(any none);
+
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME
@@ -139,6 +141,97 @@ sub Permission {
         );
     }
 
+    return;
+}
+
+
+=head2 CustomerPermission()
+
+returns whether the user has permissions or not
+
+    my $Access = $ConfigItemObject->CustomerPermission(
+        ConfigItemID => 123,
+        UserID       => 123,
+        LogNo        => 1,    # optional, do not log, default: 0
+    );
+
+=cut
+
+sub CustomerPermission {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(ConfigItemID UserID)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return;
+        }
+    }
+
+    my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
+    my %GroupLookup;
+
+    my %Conditions = %{ $Kernel::OM->Get('Kernel::Config')->Get('Customer::ConfigItem::PermissionConditions') // {} };
+    my $ConfigItem = $Self->ConfigItemGet(
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => any { $_->{CustomerUserDynamicField} || $_->{CustomerCompanyDynamicField} } values %Conditions,
+    );
+
+    CONDITION:
+    for my $ConditionSet ( values %Conditions ) {
+        if ( $ConditionSet->{Groups} && $ConditionSet->{Groups}->@* ) {
+            if ( !%GroupLookup ) {
+                %GroupLookup = reverse $CustomerGroupObject->GroupMemberList(
+                    UserID => $Param{UserID},
+                    Type   => 'ro',
+                    Result => 'HASH',
+                );
+            }
+
+            next CONDITION if none { $GroupLookup{$_} } $ConditionSet->{Groups}->@*;
+        }
+
+        if ( $ConditionSet->{Classes} ) {
+            my @Classes = ref $ConditionSet->{Classes} ? $ConditionSet->{Classes}->@* : ( $ConditionSet->{Classes} );
+
+
+            next CONDITION if @Classes && !grep { $_ eq $ConfigItem->{Class} } @Classes;
+        }
+ 
+        if ( $ConditionSet->{DeploymentStates} ) {
+            my @DeplStates = ref $ConditionSet->{DeploymentStates} ? $ConditionSet->{DeploymentStates}->@* : ( $ConditionSet->{DeploymentStates} );
+
+            next CONDITION if @DeplStates && !grep { $_ eq $ConfigItem->{DeplState} } @DeplStates;
+        }
+
+        if ( $ConditionSet->{CustomerUserDynamicField} ) {
+            next CONDITION if $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ne $Param{UserID};
+        }
+
+        if ( $ConditionSet->{CustomerCompanyDynamicField} ) {
+            my %AccessibleCustomers = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupContextCustomers(
+                CustomerUserID => $Param{UserID},
+            );
+
+            next CONDITION if !$AccessibleCustomers{ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } };
+        }
+
+        # grant access
+        return 1;
+    }
+
+    if ( !$Param{LogNo} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => "Permission denied (CustomerUserID: $Param{UserID} "
+                . "on ConfigItem: " . $Param{ConfigItemID} . ")!",
+        );
+    }
+
+    # don't grant access
     return;
 }
 

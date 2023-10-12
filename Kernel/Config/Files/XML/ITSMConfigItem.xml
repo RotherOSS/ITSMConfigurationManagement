@@ -211,6 +211,44 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="CustomerFrontend::Module###CustomerITSMConfigItemZoom" Required="0" Valid="0">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Config item zoom.</Item>
+                    <Item Key="Title" Translatable="1">Zoom</Item>
+                    <Item Key="NavBarName">Config Item</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::CustomerITSMConfigItemZoom###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>ITSM.Customer.ConfigItem.Zoom.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::Module###AgentITSMConfigItemEdit" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
@@ -1266,6 +1304,24 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo" Required="0" Valid="1">
+        <Description Translatable="1">Which general information is shown in the header.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItemZoom</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Hidden</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Shown</Item>
+                </DefaultItem>
+                <Item Key="Class" SelectedID="1"></Item>
+                <Item Key="Number" SelectedID="1"></Item>
+                <Item Key="DeploymentState" SelectedID="1"></Item>
+                <Item Key="IncidentState" SelectedID="1"></Item>
+                <Item Key="CreatedTime" SelectedID="1"></Item>
+                <Item Key="ChangedTime" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
 
     <Setting Name="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.</Description>
@@ -1506,6 +1562,76 @@
                 <Item Key="Module">Kernel::System::DynamicField::Event::ITSMConfigItemDefinitionSync</Item>
                 <Item Key="Event">DynamicFieldUpdate</Item>
                 <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::ConfigItem::PermissionConditions###01" Required="0" Valid="0">
+        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name"></Item>
+                <Item Key="Groups"><Array></Array></Item>
+                <Item Key="Classes"><Array></Array></Item>
+                <Item Key="DeploymentStates"><Array></Array></Item>
+                <Item Key="CustomerUserDynamicField"></Item>
+                <Item Key="CustomerCompanyDynamicField"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::ConfigItem::PermissionConditions###02" Required="0" Valid="0">
+        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name"></Item>
+                <Item Key="Groups"><Array></Array></Item>
+                <Item Key="Classes"><Array></Array></Item>
+                <Item Key="DeploymentStates"><Array></Array></Item>
+                <Item Key="CustomerUserDynamicField"></Item>
+                <Item Key="CustomerCompanyDynamicField"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::ConfigItem::PermissionConditions###03" Required="0" Valid="0">
+        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name"></Item>
+                <Item Key="Groups"><Array></Array></Item>
+                <Item Key="Classes"><Array></Array></Item>
+                <Item Key="DeploymentStates"><Array></Array></Item>
+                <Item Key="CustomerUserDynamicField"></Item>
+                <Item Key="CustomerCompanyDynamicField"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::ConfigItem::PermissionConditions###04" Required="0" Valid="0">
+        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name"></Item>
+                <Item Key="Groups"><Array></Array></Item>
+                <Item Key="Classes"><Array></Array></Item>
+                <Item Key="DeploymentStates"><Array></Array></Item>
+                <Item Key="CustomerUserDynamicField"></Item>
+                <Item Key="CustomerCompanyDynamicField"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::ConfigItem::PermissionConditions###05" Required="0" Valid="0">
+        <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name"></Item>
+                <Item Key="Groups"><Array></Array></Item>
+                <Item Key="Classes"><Array></Array></Item>
+                <Item Key="DeploymentStates"><Array></Array></Item>
+                <Item Key="CustomerUserDynamicField"></Item>
+                <Item Key="CustomerCompanyDynamicField"></Item>
             </Hash>
         </Value>
     </Setting>
