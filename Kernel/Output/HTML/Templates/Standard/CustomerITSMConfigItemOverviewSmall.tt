@@ -155,7 +155,7 @@
 [% RenderBlockEnd("RecordCurInciSignal") %]
 [% RenderBlockStart("RecordNumber") %]
                     <td [% IF Data.StaticColumn %]class="StaticColumn" [% END %]>
-                        <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>
+                        <a href="[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>
                     </td>
 [% RenderBlockEnd("RecordNumber") %]
 [% RenderBlockStart("RecordConfigItemCreatedBy") %]

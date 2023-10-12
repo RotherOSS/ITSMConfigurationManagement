@@ -509,7 +509,7 @@ sub Run {
             HeaderColumn          => $HeaderColumn,
             ElementChanged        => $ElementChanged,
             OriginalConfigItemIDs => \@OriginalViewableConfigItems,
-            Action                => 'AgentITSMConfigItem',
+            Action                => 'CustomerITSMConfigItem',
             Env                   => $Self,
             View                  => $View,
             EnableColumnFilters   => 1,
