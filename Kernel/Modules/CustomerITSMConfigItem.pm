@@ -19,6 +19,12 @@ package Kernel::Modules::CustomerITSMConfigItem;
 use strict;
 use warnings;
 
+# core modules
+use List::Util qw(any);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
@@ -295,8 +301,11 @@ sub Run {
     #     }
     # }
 
+
+
     # fetch filters from config
     my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+    my %GroupLookup;
 
     if ( IsHashRefWithData($PermissionConditionsConfig) ) {
         PERMCONF:
@@ -304,6 +313,29 @@ sub Run {
             my $ConfigIdentifier = sprintf("%02d", $ConfigCounter);
             my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
+
+            # check for group permission
+            if ( $PermissionConditionConfig->{Groups} ) {
+
+                # prepare group lookup if necessary
+                if ( !%GroupLookup ) {
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
+                        UserID     => $Self->{UserID},
+                        Type       => 'ro',
+                        Result     => 'HASH',
+                    );
+                }
+
+                my $AccessOk = 0;
+                GROUP:
+                for my $GroupName ( $PermissionConditionConfig->{Groups}->@* ) {
+                    next GROUP if !$GroupLookup{ $GroupName };
+
+                    $AccessOk = 1;
+                }
+
+                next PERMCONF unless $AccessOk;
+            }
 
             my %FilterSearch = (
                     Classes => $PermissionConditionConfig->{Classes},
