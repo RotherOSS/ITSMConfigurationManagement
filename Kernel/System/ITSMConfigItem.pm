@@ -251,6 +251,7 @@ A hashref with the following keys is returned:
     $ConfigItem->{VersionID}
     $ConfigItem->{Name}
     $ConfigItem->{Version}
+    $ConfigItem->{Description}
     $ConfigItem->{DefinitionID}
     $ConfigItem->{DeplStateID}
     $ConfigItem->{DeplState}
