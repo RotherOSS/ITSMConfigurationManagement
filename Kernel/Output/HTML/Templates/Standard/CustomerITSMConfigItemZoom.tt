@@ -52,6 +52,12 @@
         <div class="ContentColumn">
             <div id="ActionRow">
                 <div id="PageSelection">
+[% RenderBlockStart("PageName") %]
+                    <p>[% Translate(Data.PageName) | html %]</p>
+[% RenderBlockEnd("PageName") %]
+[% RenderBlockStart("PageLink") %]
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">[% Translate(Data.PageName) | html %]</a>
+[% RenderBlockEnd("PageLink") %]
                 </div>
 [% RenderBlockStart("Attachments") %]
                 <div id="Attachments">

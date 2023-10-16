@@ -307,9 +307,8 @@ sub Run {
         my $PageRequested = $ParamObject->GetParam( Param => 'Page' );
         PAGE:
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
-            if ( $Page->{Interfaces} ) {
-                next PAGE unless grep { $_ eq 'Agent' } $Page->{Interfaces}->@*;
-            }
+            next PAGE unless $Page->{Interfaces};
+            next PAGE unless grep { $_ eq 'Customer' } $Page->{Interfaces}->@*;
 
             if ( $Page->{Groups} ) {
                 if ( !%GroupLookup ) {
@@ -336,15 +335,36 @@ sub Run {
             if ( $PageRequested && $Page->{Name} eq $PageRequested ) {
                 $PageShown = $Page;
             }
-
-            # TODO: Render page switch button
         }
 
-        $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
-            ConfigItem => $ConfigItem,
-            Definition => $Definition,
-            PageRef    => $PageShown // $Pages[0],
-        );
+        if ( scalar @Pages == 1 ) {
+            $LayoutObject->Block(
+                Name => 'PageName',
+                Data => {
+                    PageName => $Pages[0]{Name},
+                },
+            );
+        }
+        else {
+            for my $Page ( @Pages ) {
+                $LayoutObject->Block(
+                    Name => 'PageLink',
+                    Data => {
+                        PageName     => $Page->{Name},
+                        ConfigItemID => $ConfigItem->{ConfigItemID},
+                        VersionID    => $Param{VersionID},
+                    },
+                );
+            }
+        }
+
+        if ( @Pages ) {
+            $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
+                ConfigItem => $ConfigItem,
+                Definition => $Definition,
+                PageRef    => $PageShown // $Pages[0],
+            );
+        }
     }
 
     # get create & change user data

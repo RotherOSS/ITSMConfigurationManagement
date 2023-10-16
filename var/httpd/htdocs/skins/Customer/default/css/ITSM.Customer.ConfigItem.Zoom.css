@@ -67,6 +67,21 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     background-color: var(--colBGLight);
 }
 
+#ActionRow {
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gird-row-gap: 24px;
+}
+
+#PageSelection > p {
+    display: inline-block;
+}
+
+#PageSelection > a {
+    display: inline-block;
+    margin-right: 16px;
+}
+
 .oooContentGrid {
     display: grid;
     margin-top: 24px;
