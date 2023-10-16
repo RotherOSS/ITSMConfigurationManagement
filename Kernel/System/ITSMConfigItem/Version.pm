@@ -72,7 +72,7 @@ sub VersionZoomList {
     # get version zoom list
     $Kernel::OM->Get('Kernel::System::DB')->Prepare(
         SQL => <<'END_SQL',
-SELECT id, name, depl_state_id, inci_state_id, create_time, create_by, change_time, change_by
+SELECT id, name, depl_state_id, inci_state_id, description, create_time, create_by, change_time, change_by
   FROM configitem_version
   WHERE configitem_id = ?
   ORDER BY id
@@ -90,6 +90,7 @@ END_SQL
                 Name          => $Row[1],
                 DeplStateID   => $Row[2],
                 InciStateID   => $Row[3],
+                Description => $Row[4],
                 CreateTime    => $Row[4],
                 CreateBy      => $Row[5],
                 ChangeTime    => $Row[6],
@@ -168,6 +169,7 @@ Returns:
                 DefinitionID => 5,
                 DeplStateID  => 3,
                 InciStateID  => 2,
+                Description  => 'ABCD',
                 CreateTime   => '2016-03-22 17:58:00',
                 CreateBy     => 1,
             },
@@ -180,6 +182,7 @@ Returns:
                 DefinitionID => 5,
                 DeplStateID  => 3,
                 InciStateID  => 2,
+                Description  => 'ABCD',
                 CreateTime   => '2016-03-22 17:58:00',
                 CreateBy     => 1,
             },
@@ -196,6 +199,7 @@ Returns:
                 DefinitionID => 5,
                 DeplStateID  => 3,
                 InciStateID  => 2,
+                Description  => 'ABCD',
                 CreateTime   => '2016-03-22 17:58:00',
                 CreateBy     => 1,
             },
@@ -208,6 +212,7 @@ Returns:
                 DefinitionID => 5,
                 DeplStateID  => 3,
                 InciStateID  => 2,
+                Description  => 'ABCD',
                 CreateTime   => '2016-03-22 17:58:00',
                 CreateBy     => 1,
             },
@@ -237,7 +242,7 @@ sub VersionListAll {
 
     # build sql
     my $SQL = <<'END_SQL';
-SELECT id, configitem_id, name, definition_id, depl_state_id, inci_state_id,
+SELECT id, configitem_id, name, definition_id, depl_state_id, inci_state_id, description,
     create_time, create_by, change_time, change_by
   FROM configitem_version
 END_SQL
@@ -270,14 +275,15 @@ END_SQL
         $Results{ $Row[1] }->{ $Row[0] } = {
             VersionID    => $Row[0],
             ConfigItemID => $Row[1],
-            Name         => $Row[2] || '',
-            DefinitionID => $Row[3] || '',
-            DeplStateID  => $Row[4] || '',
-            InciStateID  => $Row[5] || '',
-            CreateTime   => $Row[6] || '',
-            CreateBy     => $Row[7] || '',
-            ChangeTime   => $Row[8] || '',
-            ChangeBy     => $Row[9] || '',
+            Name         => $Row[2]  || '',
+            DefinitionID => $Row[3]  || '',
+            DeplStateID  => $Row[4]  || '',
+            InciStateID  => $Row[5]  || '',
+            Description  => $Row[6]  || '',
+            CreateTime   => $Row[7]  || '',
+            CreateBy     => $Row[8]  || '',
+            ChangeTime   => $Row[9]  || '',
+            ChangeBy     => $Row[10] || '',
         };
     }
 
@@ -487,6 +493,7 @@ Or adds the initial version to an config item that is being created.
         Name              => 'The Name',    # optional
         DeplStateID       => 8,             # optional
         InciStateID       => 4,             # optional
+        Description       => 'ABCD',        # optional
         DynamicField_Name => $Value,        # optional
     );
 
@@ -539,11 +546,11 @@ sub VersionAdd {
     my $InsertSuccess = $DBObject->Do(
         SQL => <<'END_SQL',
 INSERT INTO configitem_version (
-    configitem_id, name, definition_id, depl_state_id, inci_state_id,
+    configitem_id, name, definition_id, depl_state_id, inci_state_id, description,
     create_time, create_by, change_time, change_by
 )
 VALUES (
-    ?, ?, ?, ?, ?,
+    ?, ?, ?, ?, ?, ?,
    current_timestamp, ?, current_timestamp, ?
 )
 END_SQL
@@ -553,6 +560,7 @@ END_SQL
             \$Definition->{DefinitionID},
             \$Version{DeplStateID},
             \$Version{InciStateID},
+            \$Version{Description},
             \$Param{UserID},
             \$Param{UserID},
         ],
@@ -720,6 +728,7 @@ update a version
         Name                   => 'The Name',    # optional
         DeplStateID            => 8,             # optional
         InciStateID            => 4,             # optional
+        Description            => 'ABCD',        # optional
         DynamicField_<$DFName> => $Value,        # optional, one parameter for each dynamic field which should be updated
     );
 
@@ -769,7 +778,7 @@ sub VersionUpdate {
         my $UpdateSuccess = $DBObject->Do(
             SQL => <<'END_SQL',
 UPDATE configitem_version
-  SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, change_time = current_timestamp, change_by = ?
+  SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, description = ?, change_time = current_timestamp, change_by = ?
   WHERE id = ?
 END_SQL
             Bind => [
@@ -777,6 +786,7 @@ END_SQL
                 \$Param{DefinitionID},
                 \$Param{DeplStateID},
                 \$Param{InciStateID},
+                \$Param{Description},
                 \$Param{UserID},
                 \$Version->{VersionID},
             ],

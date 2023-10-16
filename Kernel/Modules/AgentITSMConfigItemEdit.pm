@@ -166,7 +166,7 @@ sub Run {
             if ($DuplicateID) {
 
                 # get Data from duplicate CI
-                for my $Param (qw(Name DeplStateID InciStateID)) {
+                for my $Param (qw(Name DeplStateID InciStateID Description)) {
                     $GetParam{$Param} = $ConfigItem->{$Param};
                 }
 
@@ -192,7 +192,7 @@ sub Run {
 
             # TODO Prio3: set default data
             #else {
-            #for my $Param (qw(Name DeplStateID InciStateID)) {
+            #for my $Param (qw(Name DeplStateID InciStateID Description)) {
             #    $GetParam{$Param} = ;
             #}
             #}
@@ -200,7 +200,7 @@ sub Run {
 
         else {
             # get general form data
-            for my $Param (qw(Name DeplStateID InciStateID)) {
+            for my $Param (qw(Name DeplStateID InciStateID Description)) {
                 $GetParam{$Param} = $ConfigItem->{$Param};
             }
 
@@ -225,7 +225,7 @@ sub Run {
 
     else {
         # get general form data
-        for my $Param (qw(Name DeplStateID InciStateID)) {
+        for my $Param (qw(Name DeplStateID InciStateID Description)) {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
         }
 
@@ -252,7 +252,7 @@ sub Run {
         }
     }
 
-    my @UpdatableFields = qw(DeplStateID InciStateID);
+    my @UpdatableFields = qw(DeplStateID InciStateID Description);
     push @UpdatableFields, keys %ACLReducibleDynamicFields;
 
     # convert dynamic field values into a structure for ACLs
@@ -368,7 +368,7 @@ sub Run {
         my $AllRequired = 1;
 
         # get general form data
-        for my $Param (qw(DeplStateID InciStateID)) {
+        for my $Param (qw(DeplStateID InciStateID Description)) {
             $ConfigItem->{$Param} = $GetParam{$Param};
 
             if ( !$ConfigItem->{$Param} ) {
@@ -1033,6 +1033,13 @@ sub Run {
         },
     );
 
+    $LayoutObject->Block(
+        Name => 'RowDescription',
+        Data => {
+            Description => $ConfigItem->{Description} // '',
+        },
+    );
+
     # render dynamic fields
     my $DynamicFieldHTML;
     my %GroupLookup;
@@ -1071,6 +1078,7 @@ sub Run {
                 my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
 
                 next SECTION unless $Section;
+                next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
                 next SECTION if $Section->{Type} && $Section->{Type} ne 'DynamicFields';
 
                 # weed out multiple occurances of dynamic fields - see comment above

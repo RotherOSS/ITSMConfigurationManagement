@@ -308,6 +308,7 @@
             <Column Name="definition_id" Required="true" Type="INTEGER" />
             <Column Name="depl_state_id" Required="true" Type="INTEGER" />
             <Column Name="inci_state_id" Required="false" Type="INTEGER" />
+            <Column Name="description" Required="false" Size="1800000" Type="VARCHAR" />
             <Column Name="create_time" Required="true" Type="DATE" />
             <Column Name="create_by" Required="true" Type="INTEGER" />
             <Column Name="change_time" Required="true" Type="DATE" />
@@ -1265,6 +1266,7 @@
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
         </TableAlter>
         <TableAlter Name="configitem_version" Version="11.0.0">
+            <ColumnAdd Name="description" Required="false" Size="1800000" Type="VARCHAR" />
             <ColumnAdd Name="change_time" Required="true" Type="DATE" />
             <ColumnAdd Name="change_by" Required="true" Type="INTEGER" />
         </TableAlter>

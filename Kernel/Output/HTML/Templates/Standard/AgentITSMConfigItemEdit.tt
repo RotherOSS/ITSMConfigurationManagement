@@ -73,6 +73,13 @@
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowInciState") %]
+[% RenderBlockStart("RowDescription") %]
+                        <label for="Description">[% Translate("Description") | html %]:</label>
+                        <div id="RichTextField" class="RichTextField">
+                            <textarea id="Description" class="RichText [% Data.RichTextInvalid | html %]" name="Description" title="[% Translate("Description") | html %]" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") | html %]">[% Data.Description | html %]</textarea>
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("RowDescription") %]
 [% Data.DynamicFieldHTML %]
                     </fieldset>
 

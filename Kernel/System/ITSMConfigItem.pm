@@ -247,6 +247,7 @@ A hashref with the following keys is returned:
     $ConfigItem->{VersionID}
     $ConfigItem->{Name}
     $ConfigItem->{Version}
+    $ConfigItem->{Description}
     $ConfigItem->{DefinitionID}
     $ConfigItem->{DeplStateID}
     $ConfigItem->{DeplState}
@@ -325,7 +326,7 @@ sub ConfigItemGet {
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
-    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,
+    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
     v.create_time, v.create_by, v.change_time, v.change_by
   FROM configitem_version v
   INNER JOIN configitem ci
@@ -345,7 +346,7 @@ END_SQL
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
-    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id,
+    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
     ci.create_time, ci.create_by, ci.change_time, ci.change_by
   FROM configitem ci
   LEFT JOIN configitem_version v
@@ -371,10 +372,11 @@ END_SQL
     $ConfigItem{DefinitionID}   = $Row[9];
     $ConfigItem{DeplStateID}    = $Row[10];
     $ConfigItem{InciStateID}    = $Row[11];
-    $ConfigItem{CreateTime}     = $Row[12];
-    $ConfigItem{CreateBy}       = $Row[13];
-    $ConfigItem{ChangeTime}     = $Row[14];
-    $ConfigItem{ChangeBy}       = $Row[15];
+    $ConfigItem{Description}    = $Row[12];
+    $ConfigItem{CreateTime}     = $Row[13];
+    $ConfigItem{CreateBy}       = $Row[14];
+    $ConfigItem{ChangeTime}     = $Row[15];
+    $ConfigItem{ChangeBy}       = $Row[16];
 
     # check config item
     if ( !$ConfigItem{ConfigItemID} ) {
@@ -469,6 +471,7 @@ add a new config item. This implies that an initial version is created as well.
         Name           => 'Name',   # optional when a name module is configured for the class
         DeplStateID    => 3,
         InciStateID    => 2,
+        Description    => 'ABCD',
         UserID         => 1,
         Number         => '111',    # optional, a number will generated when no number is passed
         DynamicField_X => $Value,   # optional
@@ -856,6 +859,7 @@ update a config item. A new version will be created only when a version trigger 
         Name           => 'Name',   # optional
         DeplStateID    => 3,        # optional
         InciStateID    => 2,        # optional
+        Description    => 'ABCD',   # optional
         DynamicField_X => $Value,   # optional
     );
 

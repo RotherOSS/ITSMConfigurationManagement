@@ -883,12 +883,16 @@ sub DefinitionCheck {
     my @NeededContentEntry = qw/DF Grid Header/;
 
     # sections data in pages content are valid, go on checking
+    SECTION:
     for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
 
         # remove defined sections to later identify undefined ones
         delete $SectionIsMissing{$SectionName};
 
         my $Section = $DefinitionRef->{Sections}{$SectionName};
+
+        # skip description sections
+        next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
 
         if ( !$Section || !IsHashRefWithData($Section) ) {
             return $ReturnError->(
