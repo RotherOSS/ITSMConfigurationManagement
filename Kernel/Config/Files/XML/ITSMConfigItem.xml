@@ -1870,6 +1870,24 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigitem::Frontend::ITSMConfigItem::AttachmentModule###1-Download" Required="1" Valid="1">
+        <Description Translatable="1">Shows a link to download config item attachments in the zoom view of the config item in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigitemZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ITSMConfigItem::Attachment::Download</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigitem::Frontend::ITSMConfigItem::AttachmentModule###2-HTML-Viewer" Required="1" Valid="1">
+        <Description Translatable="1">Shows a link to access config item attachments via a html online viewer in the zoom view of the config item in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigitemZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ITSMConfigItem::Attachment::HTMLViewer</Item>
+            </Hash>
+        </Value>
+    </Setting>
 
     <Setting Name="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.</Description>

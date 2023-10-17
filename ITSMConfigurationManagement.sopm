@@ -88,6 +88,7 @@
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
+        <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAttachment.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemBulk.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemDelete.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemEdit.pm" />
@@ -100,6 +101,8 @@
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemZoom.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/Attachment/Download.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/Attachment/HTMLViewer.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/DynamicField.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomer.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomerCompany.pm" />
