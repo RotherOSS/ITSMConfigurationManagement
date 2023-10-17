@@ -31,6 +31,23 @@
             <div style="[% Data.GridColumn | html %]">[% Data.Value %]</div>
 [% ELSIF Data.Type == 'FullRow' %]
             <div style="grid-column: 1 / 3">[% Data.Value %]</div>
+[% ELSIF Data.Type == 'Iframe' %]
+# execute IFrame JS asynchronously. Otherwise it could happen before our API was loaded
+# the following JS code must be within the template, otherwise it could happen, that also this code itself is not loaded yet
+            <script>
+            function CheckIFrameHeight(IFrameID) {
+                if (typeof Core === 'object' && typeof Core.Agent === 'object' && typeof ITSM.Agent.ConfigItem.Zoom === 'object') {
+                    ITSM.Agent.ConfigItem.Zoom.IframeAutoHeight($('#' + IFrameID));
+                }
+                else {
+                    window.setTimeout(function () {
+                        CheckIFrameHeight(IFrameID);
+                    }, 500);
+                }
+            }
+            </script>
+# TODO think about how to solve quotation problem
+            <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" width="100%" frameborder="0" id="Iframe[% Data.ConfigItemID | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('Iframe[% Data.ConfigItemID | html %]'); }, 500);" srcdoc='[% Data.Value %]'></iframe>
 [% END %]
 [% RenderBlockEnd("FieldDisplayCell") %]
         </div>

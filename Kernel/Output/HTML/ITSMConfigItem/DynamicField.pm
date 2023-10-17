@@ -396,10 +396,9 @@ sub _SectionRender {
         $Param{LayoutObject}->Block(
             Name => 'FieldDisplayCell',
             Data => {
-                Link  => undef,
-                Title => $Param{ConfigItem}->{Description},
-                Value => $Param{ConfigItem}->{Description},
-                Type  => 'Value',
+                ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+                Value        => $Param{ConfigItem}->{Description},
+                Type         => 'Iframe',
             },
         );
 
