@@ -239,6 +239,7 @@
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey"></Item>
                         <Item Key="Prio">310</Item>
+                        <Item Key="svgIcon">var/httpd/htdocs/skins/Customer/default/img/devices_black_24dp.svg</Item>
                     </Hash>
                 </Item>
             </Array>
