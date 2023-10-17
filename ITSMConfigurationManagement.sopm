@@ -132,6 +132,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemTreeView.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ConfigItemTreeView/ConfigItemTreeViewGraph.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ConfigItemAttachments.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemSearch.tt" />
