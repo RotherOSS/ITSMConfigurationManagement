@@ -313,7 +313,7 @@ sub Run {
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
             # check for group permission
-            if ( $PermissionConditionConfig->{Groups} ) {
+            if ( IsHashRefWithData($PermissionConditionConfig->{Groups}) ) {
 
                 # prepare group lookup if necessary
                 if ( !%GroupLookup ) {
