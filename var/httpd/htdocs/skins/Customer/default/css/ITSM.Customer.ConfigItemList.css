@@ -41,9 +41,9 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     .oooConfigItemList {
         width: calc( 100% - 80px );
         margin-top: 16px;
-        padding-left: 40px;
-        padding-right: 40px;
-        padding-bottom: 16px;
+        padding-left: 56px;
+        padding-right: 56px;
+        padding-bottom: 24px;
 
         border-radius: 15px;
         box-shadow: 0 1px 4px 0 rgba(4, 0, 71, 0.16);
@@ -52,8 +52,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     }
 
     .oooConfigItemListScrollContainer {
-        padding-top: 16px;
-        padding-bottom: 8px;
+        padding-top: 32px;
+        padding-bottom: 16px;
         overflow: scroll;
     }
 }
