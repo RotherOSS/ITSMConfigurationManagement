@@ -14,6 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 <div class="oooConfigItemList">
+    <div class="oooConfigItemListScrollContainer">
 [% RenderBlockStart("DocumentContent") %]
 [% RenderBlockStart("NoConfigItemFound") %]
         <div id="EmptyMessageSmall">
@@ -201,6 +202,7 @@
         </table>
 [% RenderBlockEnd("OverviewTable") %]
 [% RenderBlockEnd("DocumentContent") %]
+    </div>
 </div>
 
 [% RenderBlockStart("DocumentColumnFilterForm") %]
