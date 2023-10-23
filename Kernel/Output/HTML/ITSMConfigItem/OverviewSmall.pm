@@ -87,37 +87,88 @@ sub new {
         $Self->{StoredFilters} = $StoredFilters;
     }
 
-    # check for default settings
-    my %DefaultColumns = %{ $Self->{Config}->{DefaultColumns} || {} };
-
-    # check for class filter
+    # check for filter
     my $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
 
-    # if class filter is set, display class specific fields
-    my %ClassColumnDefinition;
-    if ( $FilterName && $FilterName ne 'All' ) {
+    if ( $Self->{Action} =~ /^Customer/ ) {
 
-        if ( $Self->{Config}{ClassColumnsAvailable} && IsArrayRefWithData( $Self->{Config}{ClassColumnsAvailable}{$FilterName} ) ) {
-            for my $AvailableColumn ( $Self->{Config}{ClassColumnsAvailable}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$AvailableColumn} = 1;
-            }
-        }
+        # get permission condition for filter
+        my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+        my %GroupLookup;
 
-        if ( $Self->{Config}{ClassColumnsDefault} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDefault}{$FilterName} ) ) {
-            for my $DefaultColumn ( $Self->{Config}{ClassColumnsDefault}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$DefaultColumn} = 2;
+        if ( IsHashRefWithData($PermissionConditionsConfig) ) {
+            PERMCONF:
+            for my $ConfigCounter ( 1 .. 5 ) {
+                my $ConfigIdentifier = sprintf("%02d", $ConfigCounter);
+                my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
+                next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
+
+                # check for group permission
+                if ( IsHashRefWithData($PermissionConditionConfig->{Groups}) ) {
+
+                    # prepare group lookup if necessary
+                    if ( !%GroupLookup ) {
+                        %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
+                            UserID     => $Self->{UserID},
+                            Type       => 'ro',
+                            Result     => 'HASH',
+                        );
+                    }
+
+                    my $AccessOk = 0;
+                    GROUP:
+                    for my $GroupName ( $PermissionConditionConfig->{Groups}->@* ) {
+                        next GROUP if !$GroupLookup{ $GroupName };
+
+                        $AccessOk = 1;
+                    }
+
+                    next PERMCONF unless $AccessOk;
+                }
+
+                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} ) {
+                    my $ColumnsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{$ConfigIdentifier};
+                    $Self->{ColumnsAvailable} = $ColumnsConfig // [];
+                }
             }
+
+            if ( !$Self->{ColumnsAvailable}->@* ) {
+                $Self->{ColumnsAvailable} = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{Default};
+            }
+            $Self->{ColumnsEnabled} = $Self->{ColumnsAvailable};
         }
     }
+    else {
 
-    # merge settings from class config and default config
-    for my $Column ( sort _DefaultColumnSort ( keys %DefaultColumns, keys %ClassColumnDefinition ) ) {
-        if ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) && !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
-            push $Self->{ColumnsAvailable}->@*, $Column;
+        # check for default settings
+        my %DefaultColumns = %{ $Self->{Config}->{DefaultColumns} || {} };
+
+        # if class filter is set, display class specific fields
+        my %ClassColumnDefinition;
+        if ( $FilterName && $FilterName ne 'All' ) {
+
+            if ( $Self->{Config}{ClassColumnsAvailable} && IsArrayRefWithData( $Self->{Config}{ClassColumnsAvailable}{$FilterName} ) ) {
+                for my $AvailableColumn ( $Self->{Config}{ClassColumnsAvailable}{$FilterName}->@* ) {
+                    $ClassColumnDefinition{$AvailableColumn} = 1;
+                }
+            }
+
+            if ( $Self->{Config}{ClassColumnsDefault} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDefault}{$FilterName} ) ) {
+                for my $DefaultColumn ( $Self->{Config}{ClassColumnsDefault}{$FilterName}->@* ) {
+                    $ClassColumnDefinition{$DefaultColumn} = 2;
+                }
+            }
         }
 
-        if ( ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) // 0 ) == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
-            push $Self->{ColumnsEnabled}->@*, $Column;
+        # merge settings from class config and default config
+        for my $Column ( sort _DefaultColumnSort ( keys %DefaultColumns, keys %ClassColumnDefinition ) ) {
+            if ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) && !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
+                push $Self->{ColumnsAvailable}->@*, $Column;
+            }
+
+            if ( ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) // 0 ) == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
+                push $Self->{ColumnsEnabled}->@*, $Column;
+            }
         }
     }
 
