@@ -219,6 +219,7 @@
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Zoom.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.DynamicFieldITSMConfigItemLensSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Customer.ConfigItemList.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Customer.ConfigItem.Zoom.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.UI.ConfigItemActionRow.js" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Edit.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Overview.css" />

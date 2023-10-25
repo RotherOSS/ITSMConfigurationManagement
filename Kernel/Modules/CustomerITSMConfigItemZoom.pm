@@ -135,16 +135,6 @@ sub Run {
         }
     }
 
-    # TODO: Include customer menu? 
-
-    # build version tree
-    $LayoutObject->Block( Name => 'Tree' );
-    my $Counter = 1;
-    if ( $VersionID && !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
-        $Counter     = @{$VersionList};
-        $VersionList = [ $VersionList->[-1] ];
-    }
-
     # set incident signal
     my %InciSignals = (
         Translatable('operational') => 'greenled',
@@ -201,50 +191,6 @@ sub Run {
     # wrap into style tags
     if ($StyleClasses) {
         $StyleClasses = "<style>$StyleClasses</style>";
-    }
-
-    # output version tree header
-    if ( $Param{ShowVersions} ) {
-        $LayoutObject->Block(
-            Name => 'Collapse',
-            Data => {
-                ConfigItemID => $ConfigItemID,
-            },
-        );
-    }
-    else {
-        $LayoutObject->Block(
-            Name => 'Expand',
-            Data => {
-                ConfigItemID => $ConfigItemID,
-            },
-        );
-    }
-
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
-    # output version tree
-    for my $VersionHash ( @{$VersionList} ) {
-
-        $Param{CreateByUserFullName} = $UserObject->UserName(
-            UserID => $VersionHash->{CreateBy},
-        );
-
-        $LayoutObject->Block(
-            Name => 'TreeItem',
-            Data => {
-                %Param,
-                %{$ConfigItem},
-                %{$VersionHash},
-                Count      => $Counter,
-                InciSignal => $InciSignals{ $VersionHash->{InciStateType} },
-                DeplSignal => $DeplSignals{ $VersionHash->{DeplState} },
-                Active     => $VersionHash->{VersionID} eq $VersionID ? 'Active' : '',
-            },
-        );
-
-        $Counter++;
     }
 
     # output header
@@ -337,6 +283,8 @@ sub Run {
             }
         }
 
+        $PageShown //= @Pages ? $Pages[0] : undef;
+
         if ( scalar @Pages == 1 ) {
             $LayoutObject->Block(
                 Name => 'PageName',
@@ -353,6 +301,7 @@ sub Run {
                         PageName     => $Page->{Name},
                         ConfigItemID => $ConfigItem->{ConfigItemID},
                         VersionID    => $Param{VersionID},
+                        Selected     => $Page->{Name} eq $PageShown->{Name},
                     },
                 );
             }
@@ -362,27 +311,42 @@ sub Run {
             $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
                 ConfigItem => $ConfigItem,
                 Definition => $Definition,
-                PageRef    => $PageShown // $Pages[0],
+                PageRef    => $PageShown,
             );
         }
-    }
 
-    # get create & change user data
-    for my $Key (qw(Create Change)) {
-        $ConfigItem->{ $Key . 'ByUserFullName' } = $UserObject->UserName(
-            UserID => $ConfigItem->{ $Key . 'By' },
+        my $BaseLink = $LayoutObject->Output(
+            Template => '[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;'
+                . "ConfigItemID=$ConfigItem->{ConfigItemID};Page=[% Data.Name | uri %];",
+            Data     => {
+                Name => $PageShown ? $PageShown->{Name} : '',
+            },
+        );
+
+        my @VersionSelectionData = map {
+            {
+                Key   => $BaseLink . "VersionID=$_->{VersionID}",
+                Value => "$DeplSignals{ $ConfigItem->{DeplState} } $_->{Name} "
+                    . ( $_->{VersionNumber} || $_->{VersionID} )
+                    . " ($_->{CreateTime})",
+            },
+        } $VersionList->@*;
+
+        my $VersionSelection = $LayoutObject->BuildSelection(
+            Data           => \@VersionSelectionData,
+            Name           => 'VersionSelection',
+            Class          => 'Modernize',
+            SelectedID     => $Param{VersionID} ? $BaseLink . "VersionID=$Param{VersionID}" : undef,
+            PossibleNone   => 1,
+            DisabledBranch => $VersionID,
+        );
+        $LayoutObject->Block(
+            Name => 'Versions',
+            Data => {
+                VersionSelection => $VersionSelection,
+            }
         );
     }
-
-    # output meta block
-    $LayoutObject->Block(
-        Name => 'Meta',
-        Data => {
-            %{$ConfigItem},
-            CurInciSignal => $InciSignals{ $ConfigItem->{CurInciStateType} },
-            CurDeplSignal => $DeplSignals{ $ConfigItem->{CurDeplState} },
-        },
-    );
 
     # get linked objects
     my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(

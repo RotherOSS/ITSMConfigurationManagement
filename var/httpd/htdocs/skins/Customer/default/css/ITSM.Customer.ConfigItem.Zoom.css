@@ -69,8 +69,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #ActionRow {
     display: grid;
-    grid-template-rows: 1fr auto auto;
-    gird-row-gap: 24px;
+    grid-template-columns: 1fr auto auto;
+    margin-top: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 #PageSelection > p {
@@ -82,9 +84,78 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     margin-right: 16px;
 }
 
+#PageSelection button.PageSelectionButton {
+    width: auto;
+    max-width: 240px;
+    padding: 0px 16px;
+    height: 32px;
+}
+
+#PageSelection button.PageSelectionButton.Selected {
+    background-color: #000099;
+    background-color: var(--colHoverDark);
+}
+
+#VersionSelectionContainer {
+    width: 220px;
+    white-space: nowrap;
+}
+
+#VersionSelection {
+    width: 220px;
+}
+
+#VersionSelectionContainer > .Field {
+    display: inline-block;
+    height: 32px;
+    margin-top: -1px;
+}
+
+#VersionSelectionContainer > label {
+    left: calc( -100% + 32px );
+    font-size: 14px;
+}
+
+#VersionSelectionContainer > .Field:hover ~ label,
+#VersionSelectionContainer > .Field.oooSelected ~ label,
+#VersionSelectionContainer > label.oooFocus {
+    font-size: 10px;
+    top: -17px;
+}
+
+#VersionSelectionContainer input {
+    border: solid 1px #7f809d;
+    border: solid 1px var(--colTextLight);
+    background: #fff;
+}
+
+#VersionSelectionContainer .InputField_Selection {
+    top: 1px;
+    padding: 0;
+    background-color: #fff;
+}
+
+div.InputField_TreeContainer {
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+}
+
+.jstree-anchor {
+    margin: 8px 0px 8px 24px !important;
+    font-size: 12px !important;
+}
+
+.jstree-node > .jstree-wholerow {
+    height: 32px !important;
+}
+
+.oooClose {
+    display: none !important;
+}
+
 .oooContentGrid {
     display: grid;
-    margin-top: 24px;
+    margin-top: 16px;
     grid-row-gap: 16px;
     grid-column-gap: 16px;
 }

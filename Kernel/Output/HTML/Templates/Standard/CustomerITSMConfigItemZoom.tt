@@ -56,7 +56,9 @@
                     <p>[% Translate(Data.PageName) | html %]</p>
 [% RenderBlockEnd("PageName") %]
 [% RenderBlockStart("PageLink") %]
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">[% Translate(Data.PageName) | html %]</a>
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">
+                        <button class="oooS PageSelectionButton[% IF Data.Selected %] Selected[% END %]">[% Translate(Data.PageName) | html %]</button>
+                    </a>
 [% RenderBlockEnd("PageLink") %]
                 </div>
 [% RenderBlockStart("Attachments") %]
@@ -73,13 +75,15 @@
                 </div>
 [% RenderBlockEnd("Attachments") %]
 [% RenderBlockStart("Versions") %]
-                <div id="VersionSelection">
+                <div id="VersionSelectionContainer">
+                    <div class="Field">
+                        [% Data.VersionSelection %]
+                    </div>
+                    <label for="VersionSelection">[% Translate("Version") %]</label>
                 </div>
 [% RenderBlockEnd("Versions") %]
             </div>
-            <div id="ITSMItems">
 [% Data.DynamicFieldHTML %]
-            </div>
 [% RenderBlockStart("LinkTableComplex") %]
             <div class="Content">
                 [% Data.LinkTableStrg %]
