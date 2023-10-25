@@ -1485,6 +1485,20 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsEnabled" Required="0" Valid="1">
+        <Description Translatable="1">Customers can see historic CI versions.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItemZoom</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsSelectable" Required="0" Valid="1">
+        <Description Translatable="1">Customers have the possibility to manually switch between historic CI versions.</Description>
+        <Navigation>Frontend::Customer::View::ITSMConfigItemZoom</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo" Required="0" Valid="1">
         <Description Translatable="1">Which general information is shown in the header.</Description>
         <Navigation>Frontend::Customer::View::ITSMConfigItemZoom</Navigation>

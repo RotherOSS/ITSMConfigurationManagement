@@ -72,10 +72,10 @@ sub Run {
         return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
     }
 
-    # set show versions
-    $Param{ShowVersions} = 0;
-    if ( $ParamObject->GetParam( Param => 'ShowVersions' ) ) {
-        $Param{ShowVersions} = 1;
+    my $Config = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom') // {};
+
+    if ( !$Config->{VersionsEnabled} ) {
+        $VersionID = undef;
     }
 
     # get content
@@ -89,15 +89,6 @@ sub Run {
         return $LayoutObject->CustomerErrorScreen(
             Message => $LayoutObject->{LanguageObject}->Translate('ConfigItem not found!'),
         );
-    }
-
-    # get version list
-    my $VersionList = $ConfigItemObject->VersionZoomList(
-        ConfigItemID => $ConfigItemID,
-    );
-
-    if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
-        $Param{ShowVersions} = 1;
     }
 
     # set incident signal
@@ -160,8 +151,6 @@ sub Run {
 
     # output header
     my $Output = $LayoutObject->CustomerHeader( Value => $ConfigItem->{Number} );
-
-    my $Config = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom') // {};
 
     if ( $Config->{GeneralInfo} ) {
         if ( $Config->{GeneralInfo}{Number} ) {
@@ -270,36 +259,45 @@ sub Run {
             );
         }
 
-        my $BaseLink = $LayoutObject->Output(
-            Template => '[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;'
-                . "ConfigItemID=$ConfigItem->{ConfigItemID};Page=[% Data.Name | uri %];",
-            Data     => {
-                Name => $PageShown ? $PageShown->{Name} : '',
-            },
-        );
+        # prepare version list
+        if ( $Config->{VersionsEnabled} && $Config->{VersionsSelectable} ) {
 
-        my @VersionSelectionData = map {
-            {
-                Key   => $BaseLink . "VersionID=$_->{VersionID}",
-                Value => "$_->{Name} "
-                    . ( $_->{VersionNumber} || $_->{VersionID} )
-                    . " ($_->{CreateTime})",
-            },
-        } $VersionList->@*;
+            # get version list
+            my $VersionList = $ConfigItemObject->VersionZoomList(
+                ConfigItemID => $ConfigItemID,
+            );
 
-        my $VersionSelection = $LayoutObject->BuildSelection(
-            Data           => \@VersionSelectionData,
-            Name           => 'VersionSelection',
-            Class          => 'Modernize',
-            SelectedID     => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
-            PossibleNone   => 1,
-        );
-        $LayoutObject->Block(
-            Name => 'Versions',
-            Data => {
-                VersionSelection => $VersionSelection,
-            }
-        );
+            my $BaseLink = $LayoutObject->Output(
+                Template => '[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;'
+                    . "ConfigItemID=$ConfigItem->{ConfigItemID};Page=[% Data.Name | uri %];",
+                Data     => {
+                    Name => $PageShown ? $PageShown->{Name} : '',
+                },
+            );
+
+            my @VersionSelectionData = map {
+                {
+                    Key   => $BaseLink . "VersionID=$_->{VersionID}",
+                    Value => "$_->{Name} "
+                        . ( $_->{VersionNumber} || $_->{VersionID} )
+                        . " ($_->{CreateTime})",
+                },
+            } $VersionList->@*;
+
+            my $VersionSelection = $LayoutObject->BuildSelection(
+                Data           => \@VersionSelectionData,
+                Name           => 'VersionSelection',
+                Class          => 'Modernize',
+                SelectedID     => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
+                PossibleNone   => 1,
+            );
+            $LayoutObject->Block(
+                Name => 'Versions',
+                Data => {
+                    VersionSelection => $VersionSelection,
+                }
+            );
+        }
     }
 
     # get linked objects
