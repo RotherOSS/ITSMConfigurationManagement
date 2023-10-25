@@ -559,7 +559,7 @@ sub ConfigItemSearch {
             Name => $1,
         );
 
-        if ( !$DynamicField ) {
+        if ( !$DynamicField->%* ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'Error',
                 Message  => qq[No such dynamic field "$1" (or it is inactive)],
