@@ -94,6 +94,7 @@ sub new {
 
         # get permission condition for filter
         my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+        my $PermissionConditionsColumns = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns');
         my %GroupLookup;
 
         if ( IsHashRefWithData($PermissionConditionsConfig) ) {
@@ -126,14 +127,13 @@ sub new {
                     next PERMCONF unless $AccessOk;
                 }
 
-                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} ) {
-                    my $ColumnsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{$ConfigIdentifier};
-                    $Self->{ColumnsAvailable} = $ColumnsConfig // [];
+                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} && IsHashRefWithData( $PermissionConditionsColumns ) ) {
+                    $Self->{ColumnsAvailable} = $PermissionConditionsColumns->{$ConfigIdentifier} // [];
                 }
             }
 
-            if ( !$Self->{ColumnsAvailable}->@* ) {
-                $Self->{ColumnsAvailable} = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{Default};
+            if ( !$Self->{ColumnsAvailable}->@* && IsHashRefWithData( $PermissionConditionsColumns ) ) {
+                $Self->{ColumnsAvailable} = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{Default} // [];
             }
             $Self->{ColumnsEnabled} = $Self->{ColumnsAvailable};
         }
