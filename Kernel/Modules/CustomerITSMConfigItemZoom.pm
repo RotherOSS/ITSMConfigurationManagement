@@ -386,18 +386,6 @@ sub Run {
         );
     }
 
-    # store last screen
-    $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
-        SessionID => $Self->{SessionID},
-        Key       => 'LastScreenView',
-        Value     => $Self->{RequestedURL},
-    );
-
-    $LayoutObject->AddJSData(
-        Key   => 'UserConfigItemZoomTableHeight',
-        Value => $Self->{UserConfigItemZoomTableHeight},
-    );
-
     # start template output
     return join '',
         $Output,

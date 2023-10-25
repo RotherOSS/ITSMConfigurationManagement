@@ -129,9 +129,32 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     background-color: var(--colHoverDark);
 }
 
+#AttachmentContainer {
+    padding-left: 24px;
+    padding-top: 7px;
+}
+
+#Attachments > i {
+    position: relative;
+    top: 1px;
+    padding-right: 2px;
+}
+
+#AttachmentBox {
+    position: absolute;
+    z-index: 200;
+    background: #fff;
+    border-radius: 20px;
+    padding: 16px 24px;
+    box-shadow: 0 1px 4px 0 rgba(4, 0, 71, 0.16);
+    box-shadow: 0 1px 4px 0 var(--colShadowDark);
+    margin-top: 2px;
+}
+
 #VersionSelectionContainer {
     width: 220px;
     white-space: nowrap;
+    padding-left: 24px;
 }
 
 #VersionSelection {
@@ -147,6 +170,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 #VersionSelectionContainer > label {
     left: calc( -100% + 32px );
     font-size: 14px;
+    top: 1px;
 }
 
 #VersionSelectionContainer > .Field:hover ~ label,

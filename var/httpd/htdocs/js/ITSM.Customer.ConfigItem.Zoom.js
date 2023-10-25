@@ -44,6 +44,13 @@ ITSM.Customer.ConfigItem.Zoom = (function (TargetNS) {
             }
         });
 
+        $('#Attachments').on('click', function () {
+            $('#AttachmentBox').css(
+                'right', $(window).width() - $('#Attachments').offset().left - $('#Attachments').width() - 24
+            );
+            $('#AttachmentBox').toggle();
+        });
+
         // scroll events
         $(window).scroll( function() {
             // change Header on scroll
