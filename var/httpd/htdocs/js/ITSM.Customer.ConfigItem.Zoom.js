@@ -43,6 +43,25 @@ ITSM.Customer.ConfigItem.Zoom = (function (TargetNS) {
                 window.location = Redirect;
             }
         });
+
+        // scroll events
+        $(window).scroll( function() {
+            // change Header on scroll
+            if ( $(window).width() > 767 ) {
+                if ( $(window).scrollTop() > 90 && $("#oooHeader").height() > 56 ) {
+                    $("#oooHeader").height( '48px' );
+                    $("#oooHeader").css( 'padding-top', '8px' );
+                    $("#oooHeader").css( 'padding-bottom', '8px' );
+                    $("#CIInfoBar").fadeOut(200);
+                }
+                else if ( $(window).scrollTop() < 8 ) {
+                    $("#oooHeader").height( '101px' );
+                    $("#oooHeader").css( 'padding-top', '22px' );
+                    $("#oooHeader").css( 'padding-bottom', '22px' );
+                    $("#CIInfoBar").fadeIn(200);
+                }
+            }
+        });
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

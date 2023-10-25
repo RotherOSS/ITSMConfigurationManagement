@@ -103,38 +103,6 @@ sub Run {
     # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
     $VersionID ||= $ConfigItem->{VersionID};
 
-    my $Config = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom') // {};
-
-    if ( $Config->{GeneralInfo} ) {
-        if ( $Config->{GeneralInfo}{Number} ) {
-            $LayoutObject->Block(
-                Name => 'FullSub',
-                Data => {
-                    Number => $ConfigItem->{Number},
-                    Class  => $Config->{GeneralInfo}{Class} ? $ConfigItem->{Class} : 'ConfigItem'
-                },
-            );
-        }
-        elsif ( $Config->{GeneralInfo}{Class} ) {
-            $LayoutObject->Block(
-                Name => 'ClassSub',
-                Data => {
-                    Class  => $ConfigItem->{Class},
-                },
-            );
-        }
-
-        INFO:
-        for my $Info ( qw/DeploymentState IncidentState CreatedTime LastChangedTime/ ) {
-            next INFO if !$Config->{GeneralInfo}{ $Info };
-
-            $LayoutObject->Block(
-                Name => $Info,
-                Data => $ConfigItem,
-            );
-        }
-    }
-
     # set incident signal
     my %InciSignals = (
         Translatable('operational') => 'greenled',
@@ -175,14 +143,14 @@ sub Run {
 
         # store the original deployment state as key
         # and the ss safe coverted deployment state as value
-        $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
+        $DeplSignals{ $DeploymentStatesList->{$ItemID} } = 'Color' . $DeplState;
 
         # covert to lower case
-        my $DeplStateColor = lc $Preferences{Color};
+        my $DeplStateColor = lc( $Preferences{Color} ) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
-            .Flag span.$DeplState {
+            .Color$DeplState {
                 background-color: #$DeplStateColor;
             }
         ";
@@ -196,53 +164,43 @@ sub Run {
     # output header
     my $Output = $LayoutObject->CustomerHeader( Value => $ConfigItem->{Number} );
 
+    my $Config = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom') // {};
+
+    if ( $Config->{GeneralInfo} ) {
+        if ( $Config->{GeneralInfo}{Number} ) {
+            $LayoutObject->Block(
+                Name => 'FullSub',
+                Data => {
+                    Number => $ConfigItem->{Number},
+                    Class  => $Config->{GeneralInfo}{Class} ? $ConfigItem->{Class} : 'ConfigItem'
+                },
+            );
+        }
+        elsif ( $Config->{GeneralInfo}{Class} ) {
+            $LayoutObject->Block(
+                Name => 'ClassSub',
+                Data => {
+                    Class  => $ConfigItem->{Class},
+                },
+            );
+        }
+
+        $ConfigItem->{DeplStateColorClass} = $DeplSignals{ $ConfigItem->{CurDeplState} };
+        $ConfigItem->{InciStateColorClass} = $InciSignals{ $ConfigItem->{CurInciStateType} };
+
+        INFO:
+        for my $Info ( qw/DeploymentState IncidentState CreatedTime LastChangedTime/ ) {
+            next INFO if !$Config->{GeneralInfo}{ $Info };
+
+            $LayoutObject->Block(
+                Name => $Info,
+                Data => $ConfigItem,
+            );
+        }
+    }
+
     # if a version already exists (TODO: When does it not?)
     if ( $ConfigItem->{Name} ) {
-
-        # transform ascii to html
-        $ConfigItem->{Name} = $LayoutObject->Ascii2Html(
-            Text           => $ConfigItem->{Name},
-            HTMLResultMode => 1,
-            LinkFeature    => 1,
-        );
-
-        # output name
-        $LayoutObject->Block(
-            Name => 'Data',
-            Data => {
-                Name        => Translatable('Name'),
-                Description => Translatable('The name of this config item'),
-                Value       => $ConfigItem->{Name},
-                Identation  => 10,
-            },
-        );
-
-        # output deployment state
-        $LayoutObject->Block(
-            Name => 'Data',
-            Data => {
-                Name        => Translatable('Deployment State'),
-                Description => Translatable('The deployment state of this config item'),
-                Value       => $LayoutObject->{LanguageObject}->Translate(
-                    $ConfigItem->{DeplState},
-                ),
-                Identation => 10,
-            },
-        );
-
-        # output incident state
-        $LayoutObject->Block(
-            Name => 'Data',
-            Data => {
-                Name        => Translatable('Incident State'),
-                Description => Translatable('The incident state of this config item'),
-                Value       => $LayoutObject->{LanguageObject}->Translate(
-                    $ConfigItem->{InciState},
-                ),
-                Identation => 10,
-            },
-        );
-
         my $Definition = $ConfigItemObject->DefinitionGet(
             DefinitionID => $ConfigItem->{DefinitionID},
         );

@@ -35,31 +35,64 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     
     #oooHeader {
         padding-top: 22px;
-        height: 145px;
+        padding-bottom: 22px;
+        height: 101px;
         position: sticky;
         top: 0;
         border-bottom: 1.2px solid #e5e5eb;
+        z-index: 1200;
+
+-webkit-transition: height 0.1s ease, padding-top 0.1s ease, padding-bottom 0.1s ease;
+   -moz-transition: height 0.1s ease, padding-top 0.1s ease, padding-bottom 0.1s ease;
+     -o-transition: height 0.1s ease, padding-top 0.1s ease, padding-bottom 0.1s ease;
+        transition: height 0.1s ease, padding-top 0.1s ease, padding-bottom 0.1s ease;
     }
 
 }
 
 #oooHeader {
     background-color: #ffffff;
+    display: grid;
+    grid-template-rows: minmax(48px, 1fr) auto;
+    align-items: center;
 }
 
 #CIInfoBar {
-    margin-top: 24px;
+    height: 22px;
+    margin: 26px 0 5px 0;
 }
 
 #CIInfoBar p,
 #CIInfoBar div,
 #CIInfoBar label {
     display: inline-block;
+    font-size: 12px;
 }
 
-#CIInfoBar > p,
-#CIInfoBar > div {
+#CIInfoBar label {
+    padding: 2px 0;
+}
+
+#CIInfoBar p {
     margin-right: 16px;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+
+.greenled {
+    background-color: #c4cdfa;
+    background-color: var(--colNotifyOK);
+}
+
+.yellowled {
+    background-color: #fffccc;
+    background-color: var(--colNotifyWarn);
+}
+
+.redled {
+    background-color: #f9bcb2;
+    background-color: var(--colNotifyErr);
 }
 
 #oooCustomerNotifications {

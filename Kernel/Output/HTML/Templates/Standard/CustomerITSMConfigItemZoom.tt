@@ -27,12 +27,12 @@
         </div>
         <div id='CIInfoBar'>
 [% RenderBlockStart("DeploymentState") %]
-            <p class="StateSignal [% Data.CurDeplSignal | html %]" title="[% Translate(Data.CurDeplState) | html %]">
+            <p class="StateSignal [% Data.DeplStateColorClass | html %]" title="[% Translate(Data.CurDeplState) | html %]">
                 [% Translate(Data.CurDeplState) | html %]
             </p>
 [% RenderBlockEnd("DeploymentState") %]
 [% RenderBlockStart("IncidentState") %]
-            <p class="StateSignal [% Data.CurInciSignal | html %]" title="[% Translate(Data.CurInciState) | html %]">
+            <p class="StateSignal [% Data.InciStateColorClass | html %]" title="[% Translate(Data.CurInciState) | html %]">
                 [% Translate(Data.CurInciState) | html %]
             </p>
 [% RenderBlockEnd("IncidentState") %]
