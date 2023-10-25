@@ -214,10 +214,6 @@ thead .headerSortDown a {
     color: #FFFFFF;
 }
 
-.TableSmall td:first-child {
-    padding-top: 1px;
-}
-
 .TableSmall tbody .Flags {
     line-height: 11px;
     padding-top: 2px;
