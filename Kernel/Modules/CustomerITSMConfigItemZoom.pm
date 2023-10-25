@@ -100,9 +100,6 @@ sub Run {
         $Param{ShowVersions} = 1;
     }
 
-    # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
-    $VersionID ||= $ConfigItem->{VersionID};
-
     # set incident signal
     my %InciSignals = (
         Translatable('operational') => 'greenled',
@@ -258,7 +255,7 @@ sub Run {
                     Data => {
                         PageName     => $Page->{Name},
                         ConfigItemID => $ConfigItem->{ConfigItemID},
-                        VersionID    => $Param{VersionID},
+                        VersionID    => $VersionID,
                         Selected     => $Page->{Name} eq $PageShown->{Name},
                     },
                 );
@@ -284,7 +281,7 @@ sub Run {
         my @VersionSelectionData = map {
             {
                 Key   => $BaseLink . "VersionID=$_->{VersionID}",
-                Value => "$DeplSignals{ $ConfigItem->{DeplState} } $_->{Name} "
+                Value => "'" . ( $DeplSignals{ $ConfigItem->{DeplState} } // '' ) . "'$_->{Name} "
                     . ( $_->{VersionNumber} || $_->{VersionID} )
                     . " ($_->{CreateTime})",
             },
@@ -294,9 +291,8 @@ sub Run {
             Data           => \@VersionSelectionData,
             Name           => 'VersionSelection',
             Class          => 'Modernize',
-            SelectedID     => $Param{VersionID} ? $BaseLink . "VersionID=$Param{VersionID}" : undef,
+            SelectedID     => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
             PossibleNone   => 1,
-            DisabledBranch => $VersionID,
         );
         $LayoutObject->Block(
             Name => 'Versions',
