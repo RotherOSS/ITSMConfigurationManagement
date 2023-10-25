@@ -281,7 +281,7 @@ sub Run {
         my @VersionSelectionData = map {
             {
                 Key   => $BaseLink . "VersionID=$_->{VersionID}",
-                Value => "'" . ( $DeplSignals{ $ConfigItem->{DeplState} } // '' ) . "'$_->{Name} "
+                Value => "$_->{Name} "
                     . ( $_->{VersionNumber} || $_->{VersionID} )
                     . " ($_->{CreateTime})",
             },

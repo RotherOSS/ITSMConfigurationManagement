@@ -44,11 +44,6 @@ ITSM.Customer.ConfigItem.Zoom = (function (TargetNS) {
             }
         });
 
-        var ColorClassRegEx = /^'([^']*)'(.+)/;
-        $('#VersionSelection > option').each( function () {
-            $(this).html( $(this).html().replace( ColorClassRegEx, "<div class='StateLight $1'></div>$2" ) );
-        });
-
         // scroll events
         $(window).scroll( function() {
             // change Header on scroll
