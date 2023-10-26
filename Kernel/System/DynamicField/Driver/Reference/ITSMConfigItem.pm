@@ -286,7 +286,11 @@ transformed into the respective last version IDs.
 sub ValueForLens {
     my ( $Self, %Param ) = @_;
 
-    return $Param{Value} unless ref $Param{Value} eq 'ARRAY';
+    return if !$Param{Value};
+
+    if ( ref $Param{Value} ne 'ARRAY' ) {
+        $Param{Value} = [ $Param{Value} ];
+    }
 
     my @LastVersionIDs;
     CONFIG_ITEM_ID:
