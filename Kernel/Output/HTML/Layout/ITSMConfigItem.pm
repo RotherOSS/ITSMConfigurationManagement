@@ -311,6 +311,9 @@ in F<Kernel/Output/HTML/LayoutTicket.pm>.
 sub ITSMConfigItemListShow {
     my ( $Self, %Param ) = @_;
 
+    # set frontend per default to agent
+    $Param{Frontend} //= 'Agent';
+
     # take object ref to local, remove it from %Param (prevent memory leak)
     my $Env = delete $Param{Env};
 
@@ -334,7 +337,7 @@ sub ITSMConfigItemListShow {
 
     # update preferences if needed
     my $Key = 'UserITSMConfigItemOverview' . $Env->{Action};
-    if ( !$Param{Frontend} eq 'Customer' ) {
+    if ( $Param{Frontend} ne 'Customer' ) {
         if ( !$ConfigObject->Get('DemoSystem') && ( $Self->{$Key} // '' ) ne $View ) {
             $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
                 UserID => $Self->{UserID},
@@ -647,7 +650,7 @@ sub ITSMConfigItemListShow {
 
     # create nav bar and run overview backend module
     my $NavBarHTML = '';
-    if ( !$Param{Frontend} eq 'Customer' ) {
+    if ( $Param{Frontend} ne 'Customer' ) {
         $NavBarHTML = $Self->Output(
             TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
             Data         => { %Param, },

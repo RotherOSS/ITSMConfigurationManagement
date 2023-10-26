@@ -263,6 +263,9 @@ sub new {
 sub ActionRow {
     my ( $Self, %Param ) = @_;
 
+    # set frontend per default to agent
+    $Param{Frontend} //= 'Agent';
+
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -412,6 +415,9 @@ sub SortOrderBar {
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    # set frontend per default to agent
+    $Param{Frontend} //= 'Agent';
 
     # determine template dependent on interface
     my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
