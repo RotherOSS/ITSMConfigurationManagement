@@ -89,7 +89,7 @@ sub Run {
     my $UserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
     # get filter from web request
-    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || '';
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -176,43 +176,7 @@ sub Run {
         );
     }
 
-    # get general catalog object
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
-    # get class list
-    my $ClassList = $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-
-    # get possible deployment state list for config items to be shown
-    my $StateList = $GeneralCatalogObject->ItemList(
-        Class       => 'ITSM::ConfigItem::DeploymentState',
-        Preferences => {
-            Functionality => [ 'preproductive', 'productive' ],
-        },
-    );
-
-    # set the deployment state IDs parameter for the search
-    my $DeplStateIDs;
-    for my $DeplStateKey ( sort keys %{$StateList} ) {
-        push @{$DeplStateIDs}, $DeplStateKey;
-    }
-
-    # viewable deployment states
-    my @ViewableDeplStateIDs = keys %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::DeploymentState',
-            Valid => 1,
-        )
-    };
-
-    # viewable incident states
-    my @ViewableInciStateIDs = keys %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::Core::IncidentState',
-            Valid => 1,
-        )
-    };
 
     # get permissions
     my $Permission = 'rw';
@@ -249,57 +213,22 @@ sub Run {
 
     my $ClassIDAuto = '1';
 
-    # CLASSID:
-    # for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
+    # get general catalog object
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
-    #     # # show menu link only if user has access rights
-    #     # my $HasAccess = $ConfigItemObject->Permission(
-    #     #     Scope   => 'Class',
-    #     #     ClassID => $ClassID,
-    #     #     UserID  => $Self->{UserID},
-    #     #     Type    => $Config->{Permission},
-    #     # );
-    #     #
-    #     # next CLASSID if !$HasAccess;
+    # get class list
+    my $ClassList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+        Valid => 1,
+    );
 
-    #     # insert this class to be passed as search parameter for filter 'All'
-    #     push @{$AccessClassList}, $ClassID;
+    my $DeplStateList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::DeploymentState',
+        Valid => 1,
+    );
 
-    #     # count all records of this class
-    #     my $ClassCount = $ConfigItemObject->ConfigItemCount(
-    #         ClassID => $ClassID,
-    #     );
-
-    #     # add the config items number in this class to the total
-    #     $TotalCount += $ClassCount;
-
-    #     # increase the PrioCounter
-    #     $PrioCounter++;
-
-    #     # add filter with params for the search method
-    #     $Filters{$ClassID} = {
-    #         Name   => $ClassList->{$ClassID},
-    #         Prio   => $PrioCounter,
-    #         Count  => $ClassCount,
-    #         Search => {
-    #             ClassIDs     => [$ClassID],
-    #             DeplStateIDs => $DeplStateIDs,
-    #             %Sort,
-    #             Limit => $Self->{SearchLimit},
-
-    #             # Permission => $Permission,
-    #             # UserID     => $Self->{UserID},
-    #         },
-    #     };
-
-    #     # remember the first class id to show this in the overview
-    #     # if no class id was given
-    #     if ( !$ClassIDAuto ) {
-    #         $ClassIDAuto = $ClassID;
-    #     }
-    # }
-
-
+    my @ViewableDeplStateIDs;
+    my @ViewableClassIDs;
 
     # fetch filters from config
     my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
@@ -313,7 +242,7 @@ sub Run {
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
             # check for group permission
-            if ( IsHashRefWithData($PermissionConditionConfig->{Groups}) ) {
+            if ( IsArrayRefWithData($PermissionConditionConfig->{Groups}) ) {
 
                 # prepare group lookup if necessary
                 if ( !%GroupLookup ) {
@@ -336,39 +265,62 @@ sub Run {
             }
 
             my %FilterSearch = (
-                    Classes => $PermissionConditionConfig->{Classes},
-                    DeploymentStates => $PermissionConditionConfig->{DeploymentStates},
-                    "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
-                        Equals => $Self->{CustomerID},
-                    },
-                    "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
-                        Equals => $Self->{UserID},
-                    },
-                    %Sort,
-                    Limit => $Self->{SearchLimit} // '1000',
+                Classes => $PermissionConditionConfig->{Classes},
+                DeplStates => $PermissionConditionConfig->{DeploymentStates},
+                "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
+                    Equals => $Self->{CustomerID},
+                },
+                "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
+                    Equals => $Self->{UserID},
+                },
+                %Sort,
+                Limit => $Self->{SearchLimit} // '1000',
             );
 
-            my $Count = $ConfigItemObject->ConfigItemSearch(
-                %FilterSearch,
-                Result => 'COUNT',
-            );
+            # apply filter restrictions to search for
+            if ( $GetColumnFilter{Class} ) {
+                if ( $PermissionConditionConfig->{Classes}->@* ) {
+                    if ( any { $ClassList->{$GetColumnFilter{Class}} eq $_ } $PermissionConditionConfig->{Classes}->@* ) {
+                        @ViewableClassIDs = ( $GetColumnFilter{Class} );
+                        $FilterSearch{Classes} = [ $ClassList->{$GetColumnFilter{Class}} ];
+                    }
+                }
+                else {
+                    @ViewableClassIDs = ( $GetColumnFilter{Class} );
+                }
+            }
+            else {
+                @ViewableClassIDs = sort keys $ClassList->%*;
+            }
+            if ( $GetColumnFilter{DeplState} ) {
+                if ( $PermissionConditionConfig->{DeploymentStates}->@* ) {
+                    if ( any { $DeplStateList->{$GetColumnFilter{DeplState}} eq $_ } $PermissionConditionConfig->{DeploymentStates}->@* ) {
+                        @ViewableDeplStateIDs = ( $GetColumnFilter{DeplState} );
+                        $FilterSearch{DeplStates} = [ $DeplStateList->{$GetColumnFilter{DeplState}} ];
+                    }
+                }
+                else {
+                    @ViewableDeplStateIDs = ( $GetColumnFilter{DeplState} );
+                }
+            }
+            else {
+                @ViewableDeplStateIDs = sort keys $DeplStateList->%*;
+            }
+
+            my $Count = 0;
+            if ( @ViewableClassIDs && @ViewableDeplStateIDs ) {
+                $Count = $ConfigItemObject->ConfigItemSearch(
+                    %FilterSearch,
+                    %GetColumnFilter,
+                    Result => 'COUNT',
+                );
+            }
 
             $Filters{$PermissionConditionConfig->{Name}} = {
                 Name => $PermissionConditionConfig->{Name},
                 Prio => $PrioCounter,
                 Count => $Count,
-                Search => {
-                    Classes => $PermissionConditionConfig->{Classes},
-                    DeploymentStates => $PermissionConditionConfig->{DeploymentStates},
-                    "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
-                        Equals => $Self->{CustomerID},
-                    },
-                    "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
-                        Equals => $Self->{UserID},
-                    },
-                    %Sort,
-                    Limit => $Self->{SearchLimit} // '1000',
-                },
+                Search => \%FilterSearch,
             };
             $PrioCounter++;
         }
@@ -383,32 +335,9 @@ sub Run {
         # activate this filter
         $Filter = $FilterName;
     }
-    else {
-
-        # add default filter, which shows all items
-        $Filters{All} = {
-            Name   => 'All',
-            Prio   => 1000,
-            Count  => $TotalCount,
-            Search => {
-                # ClassIDs     => $AccessClassList,
-                DeplStateIDs => $DeplStateIDs,
-                %Sort,
-                Limit => $Self->{SearchLimit},
-
-                # Permission => $Permission,
-                # UserID     => $Self->{UserID},
-            },
-        };
-
-        # if no filter was selected activate the filter for the default class
-        if ( !$Filter ) {
-            $Filter = $ClassIDAuto;
-        }
-    }
 
     # check if filter is valid
-    if ( !$Filters{$Filter} ) {
+    if ( $Filter && !$Filters{$Filter} ) {
         $LayoutObject->FatalError(
             Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
         );
@@ -422,8 +351,16 @@ sub Run {
             Data => {
                 %Param,
                 %{ $Filters{$Key} },
+                Filter => $Key,
                 ClassA => $Key eq $Filter ? 'Selected' : '',
             },
+        );
+    }
+
+    # show filter delete if needed
+    if ( %GetColumnFilter ) {
+        $LayoutObject->Block(
+            Name => 'FilterDelete',
         );
     }
 
@@ -465,7 +402,7 @@ sub Run {
     my @ViewableConfigItems;
     my @OriginalViewableConfigItems;
 
-    if (@ViewableDeplStateIDs) {
+    if (@ViewableDeplStateIDs && @ViewableClassIDs) {
 
         # get config item values
         if (
@@ -511,7 +448,9 @@ sub Run {
             Env                   => $Self,
             View                  => $View,
             EnableColumnFilters   => 1,
-            CustomerInterface     => 1,
+            Frontend              => 'Customer',
+            Filter                => $Filter,
+            Filters               => \%Filters,
         );
 
         if ( !$FilterContent ) {
@@ -626,7 +565,7 @@ sub Run {
         ColumnFilterForm      => {
             Filter => $Filter || '',
         },
-        CustomerInterface     => 1,
+        Frontend              => 'Customer',
 
         # do not print the result earlier, but return complete content
         Output => 1,

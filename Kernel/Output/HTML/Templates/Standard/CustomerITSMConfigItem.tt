@@ -47,6 +47,14 @@
                 [% Data.SiteNavBar %]
             </div>
 [% END %]
+[% RenderBlockStart("FilterDelete") %]
+            <div class="">
+                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];DeleteFilters=DeleteFilters">
+                    [% Translate("Reset overview") | html %]
+                    <i class="ooofo ooofo-delete_outl"></i>
+                </a>
+            </div>
+[% RenderBlockEnd("FilterDelete") %]
 #            <p class="ooo12g oool">[% Data.ITSMConfigItemCount | html %] [% Translate("ConfigItems") | html %]</p>
 #            <p class="ooo12g oool">[% Translate("Sort") | html %]</p>
 #            <p class="ooo12g ooor">[% Translate("Filter") | html %]</p>

@@ -1675,6 +1675,24 @@ sub FilterContent {
         HeaderColumn          => $HeaderColumn,
     );
 
+    # apply restrictions for customer permission conditions
+    if ( $Param{Frontend} eq 'Customer' ) {
+        if ( $HeaderColumn eq 'Class' && $Param{Filters}->{$Param{Filter}}{Search}{Classes}->@* ) {
+            for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
+                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{$Param{Filter}}{Search}{Classes}->@* ) {
+                    delete $ColumnValues->{$HeaderColumn}{$FilterValue};
+                }
+            }
+        }
+        if ( $HeaderColumn eq 'DeplState' && $Param{Filters}->{$Param{Filter}}{Search}{DeplStates}->@* ) {
+            for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
+                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{$Param{Filter}}{Search}{DeplStates}->@* ) {
+                    delete $ColumnValues->{$HeaderColumn}{$FilterValue};
+                }
+            }
+        }
+    }
+
     my $SelectedValue  = '';
     my $SelectedColumn = $HeaderColumn;
     if ( $HeaderColumn !~ m{ \A DynamicField_ }xms ) {
