@@ -176,8 +176,6 @@ sub Run {
         );
     }
 
-
-
     # get permissions
     my $Permission = 'rw';
 
@@ -204,9 +202,6 @@ sub Run {
 
     # define position of the filter in the frontend
     my $PrioCounter = 1000;
-
-    # to store the total number of config items in all classes that the user has access
-    my $TotalCount;
 
     # to store the NavBar filters
     my %Filters;
@@ -237,26 +232,26 @@ sub Run {
     if ( IsHashRefWithData($PermissionConditionsConfig) ) {
         PERMCONF:
         for my $ConfigCounter ( 1 .. 5 ) {
-            my $ConfigIdentifier = sprintf("%02d", $ConfigCounter);
+            my $ConfigIdentifier          = sprintf( "%02d", $ConfigCounter );
             my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
             # check for group permission
-            if ( IsArrayRefWithData($PermissionConditionConfig->{Groups}) ) {
+            if ( IsArrayRefWithData( $PermissionConditionConfig->{Groups} ) ) {
 
                 # prepare group lookup if necessary
                 if ( !%GroupLookup ) {
                     %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
-                        UserID     => $Self->{UserID},
-                        Type       => 'ro',
-                        Result     => 'HASH',
+                        UserID => $Self->{UserID},
+                        Type   => 'ro',
+                        Result => 'HASH',
                     );
                 }
 
                 my $AccessOk = 0;
                 GROUP:
                 for my $GroupName ( $PermissionConditionConfig->{Groups}->@* ) {
-                    next GROUP if !$GroupLookup{ $GroupName };
+                    next GROUP if !$GroupLookup{$GroupName};
 
                     $AccessOk = 1;
                 }
@@ -268,8 +263,8 @@ sub Run {
             $Filter ||= $PermissionConditionConfig->{Name};
 
             my %FilterSearch = (
-                Classes => $PermissionConditionConfig->{Classes},
-                DeplStates => $PermissionConditionConfig->{DeploymentStates},
+                Classes                                                                  => $PermissionConditionConfig->{Classes},
+                DeplStates                                                               => $PermissionConditionConfig->{DeploymentStates},
                 "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
                     Equals => $Self->{CustomerID},
                 },
@@ -283,14 +278,14 @@ sub Run {
             # apply filter restrictions to search for
             if ( $GetColumnFilter{Class} ) {
                 if ( $PermissionConditionConfig->{Classes}->@* ) {
-                    if ( any { $ClassList->{$GetColumnFilter{Class}} eq $_ } $PermissionConditionConfig->{Classes}->@* ) {
+                    if ( any { $ClassList->{ $GetColumnFilter{Class} } eq $_ } $PermissionConditionConfig->{Classes}->@* ) {
                         @ViewableClassIDs = ( $GetColumnFilter{Class} );
-                        $FilterSearch{Classes} = [ $ClassList->{$GetColumnFilter{Class}} ];
+                        $FilterSearch{Classes} = [ $ClassList->{ $GetColumnFilter{Class} } ];
                     }
                 }
                 else {
                     @ViewableClassIDs = ( $GetColumnFilter{Class} );
-                    $FilterSearch{Classes} = [ $ClassList->{$GetColumnFilter{Class}} ];
+                    $FilterSearch{Classes} = [ $ClassList->{ $GetColumnFilter{Class} } ];
                 }
             }
             else {
@@ -298,14 +293,14 @@ sub Run {
             }
             if ( $GetColumnFilter{DeplState} ) {
                 if ( $PermissionConditionConfig->{DeploymentStates}->@* ) {
-                    if ( any { $DeplStateList->{$GetColumnFilter{DeplState}} eq $_ } $PermissionConditionConfig->{DeploymentStates}->@* ) {
+                    if ( any { $DeplStateList->{ $GetColumnFilter{DeplState} } eq $_ } $PermissionConditionConfig->{DeploymentStates}->@* ) {
                         @ViewableDeplStateIDs = ( $GetColumnFilter{DeplState} );
-                        $FilterSearch{DeplStates} = [ $DeplStateList->{$GetColumnFilter{DeplState}} ];
+                        $FilterSearch{DeplStates} = [ $DeplStateList->{ $GetColumnFilter{DeplState} } ];
                     }
                 }
                 else {
                     @ViewableDeplStateIDs = ( $GetColumnFilter{DeplState} );
-                    $FilterSearch{DeplStates} = [ $DeplStateList->{$GetColumnFilter{DeplState}} ];
+                    $FilterSearch{DeplStates} = [ $DeplStateList->{ $GetColumnFilter{DeplState} } ];
                 }
             }
             else {
@@ -320,10 +315,10 @@ sub Run {
                 );
             }
 
-            $Filters{$PermissionConditionConfig->{Name}} = {
-                Name => $PermissionConditionConfig->{Name},
-                Prio => $PrioCounter,
-                Count => $Count,
+            $Filters{ $PermissionConditionConfig->{Name} } = {
+                Name   => $PermissionConditionConfig->{Name},
+                Prio   => $PrioCounter,
+                Count  => $Count,
                 Search => \%FilterSearch,
             };
             $PrioCounter++;
@@ -362,7 +357,7 @@ sub Run {
     }
 
     # show filter delete if needed
-    if ( %GetColumnFilter ) {
+    if (%GetColumnFilter) {
         $LayoutObject->Block(
             Name => 'FilterDelete',
         );
@@ -406,7 +401,7 @@ sub Run {
     my @ViewableConfigItems;
     my @OriginalViewableConfigItems;
 
-    if (@ViewableDeplStateIDs && @ViewableClassIDs) {
+    if ( @ViewableDeplStateIDs && @ViewableClassIDs ) {
 
         # get config item values
         if (
@@ -569,7 +564,7 @@ sub Run {
         ColumnFilterForm      => {
             Filter => $Filter || '',
         },
-        Frontend              => 'Customer',
+        Frontend => 'Customer',
 
         # do not print the result earlier, but return complete content
         Output => 1,

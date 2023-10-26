@@ -243,4 +243,3 @@ div.InputField_TreeContainer {
     display: grid;
     grid-template-columns: calc( 50% - 24px ) 1fr;
 }
-

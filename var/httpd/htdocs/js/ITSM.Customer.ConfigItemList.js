@@ -20,18 +20,18 @@ var ITSM = ITSM || {};
 ITSM.Customer = ITSM.Customer || {};
 
 /**
- * @namespace ITSM.Customer.TicketList
+ * @namespace ITSM.Customer.ConfigItemList
  * @memberof ITSM.Customer
  * @author Rother OSS GmbH
  * @description
  *      Navigation Bar
  */
-ITSM.Customer.TicketList = (function (TargetNS) {
+ITSM.Customer.ConfigItemList = (function (TargetNS) {
 
     /**
      * @private
      * @name NavBarShrink
-     * @memberof ITSM.Customer.TicketList
+     * @memberof ITSM.Customer.ConfigItemList
      * @function
      * @description
      *      This function returns the NavBar to its default.
@@ -51,10 +51,10 @@ ITSM.Customer.TicketList = (function (TargetNS) {
 
     /**
      * @name Init
-     * @memberof ITSM.Customer.TicketList
+     * @memberof ITSM.Customer.ConfigItemList
      * @function
      * @description
-     *      This function initializes TicketList javascript functions.
+     *      This function initializes ConfigItemList javascript functions.
      */
     TargetNS.Init = function() {
         // move all elements to the rows
@@ -95,4 +95,4 @@ ITSM.Customer.TicketList = (function (TargetNS) {
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 
     return TargetNS;
-}(ITSM.Customer.TicketList || {}));
+}(ITSM.Customer.ConfigItemList || {}));

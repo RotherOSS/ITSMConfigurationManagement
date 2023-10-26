@@ -32,6 +32,8 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::CustomerGroup',
+    'Kernel::System::CustomerUser',
     'Kernel::System::GeneralCatalog',
     'Kernel::Language',
     'Kernel::System::Log',
@@ -93,33 +95,33 @@ sub new {
     if ( $Self->{Action} =~ /^Customer/ ) {
 
         # get permission condition for filter
-        my $PermissionConditionsConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+        my $PermissionConditionsConfig  = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
         my $PermissionConditionsColumns = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns');
         my %GroupLookup;
 
         if ( IsHashRefWithData($PermissionConditionsConfig) ) {
             PERMCONF:
             for my $ConfigCounter ( 1 .. 5 ) {
-                my $ConfigIdentifier = sprintf("%02d", $ConfigCounter);
+                my $ConfigIdentifier          = sprintf( "%02d", $ConfigCounter );
                 my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
                 next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
                 # check for group permission
-                if ( IsHashRefWithData($PermissionConditionConfig->{Groups}) ) {
+                if ( IsHashRefWithData( $PermissionConditionConfig->{Groups} ) ) {
 
                     # prepare group lookup if necessary
                     if ( !%GroupLookup ) {
                         %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
-                            UserID     => $Self->{UserID},
-                            Type       => 'ro',
-                            Result     => 'HASH',
+                            UserID => $Self->{UserID},
+                            Type   => 'ro',
+                            Result => 'HASH',
                         );
                     }
 
                     my $AccessOk = 0;
                     GROUP:
                     for my $GroupName ( $PermissionConditionConfig->{Groups}->@* ) {
-                        next GROUP if !$GroupLookup{ $GroupName };
+                        next GROUP if !$GroupLookup{$GroupName};
 
                         $AccessOk = 1;
                     }
@@ -127,12 +129,12 @@ sub new {
                     next PERMCONF unless $AccessOk;
                 }
 
-                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} && IsHashRefWithData( $PermissionConditionsColumns ) ) {
+                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} && IsHashRefWithData($PermissionConditionsColumns) ) {
                     $Self->{ColumnsAvailable} = $PermissionConditionsColumns->{$ConfigIdentifier} // [];
                 }
             }
 
-            if ( !$Self->{ColumnsAvailable}->@* && IsHashRefWithData( $PermissionConditionsColumns ) ) {
+            if ( !$Self->{ColumnsAvailable}->@* && IsHashRefWithData($PermissionConditionsColumns) ) {
                 $Self->{ColumnsAvailable} = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{Default} // [];
             }
             $Self->{ColumnsEnabled} = $Self->{ColumnsAvailable};
@@ -486,7 +488,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # convert to lower case
-        my $DeplStateColor = lc $GeneralCatalogPreferences{Color} =~ s/[^0-9a-f]//msgr;;
+        my $DeplStateColor = lc $GeneralCatalogPreferences{Color} =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
@@ -1331,6 +1333,7 @@ sub Run {
         my $DataValue;
 
         my $Counter = 0;
+
         # show all needed columns
         CONFIGITEMCOLUMN:
         for my $ConfigItemColumn (@Col) {
@@ -1683,16 +1686,16 @@ sub FilterContent {
 
     # apply restrictions for customer permission conditions
     if ( $Param{Frontend} eq 'Customer' ) {
-        if ( $HeaderColumn eq 'Class' && $Param{Filters}->{$Param{Filter}}{Search}{Classes}->@* ) {
+        if ( $HeaderColumn eq 'Class' && $Param{Filters}->{ $Param{Filter} }{Search}{Classes}->@* ) {
             for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
-                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{$Param{Filter}}{Search}{Classes}->@* ) {
+                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{ $Param{Filter} }{Search}{Classes}->@* ) {
                     delete $ColumnValues->{$HeaderColumn}{$FilterValue};
                 }
             }
         }
-        if ( $HeaderColumn eq 'DeplState' && $Param{Filters}->{$Param{Filter}}{Search}{DeplStates}->@* ) {
+        if ( $HeaderColumn eq 'DeplState' && $Param{Filters}->{ $Param{Filter} }{Search}{DeplStates}->@* ) {
             for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
-                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{$Param{Filter}}{Search}{DeplStates}->@* ) {
+                if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{ $Param{Filter} }{Search}{DeplStates}->@* ) {
                     delete $ColumnValues->{$HeaderColumn}{$FilterValue};
                 }
             }
