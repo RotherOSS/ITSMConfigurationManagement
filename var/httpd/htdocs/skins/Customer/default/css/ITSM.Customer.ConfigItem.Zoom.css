@@ -129,22 +129,6 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     background-color: var(--colHoverDark);
 }
 
-.DynamicFieldRichTextContent.Hidden {
-    display: block;
-    grid-column: 1 / 3;
-}
-
-.DynamicFieldRichTextLink {
-    display: none;
-}
-
-.OverlayDynamicFieldRichTextiFrame {
-    height: auto;
-    max-height: 500px;
-    width: calc(100% - 64px);
-    padding: 0 32px;
-}
-
 #AttachmentContainer {
     padding-left: 24px;
     padding-top: 7px;
@@ -259,3 +243,19 @@ div.InputField_TreeContainer {
     display: grid;
     grid-template-columns: calc( 50% - 24px ) 1fr;
 }
+
+.DynamicFieldRichTextLink {
+    display: none;
+}
+
+.DynamicFieldRichTextContent.Hidden {
+    display: block;
+}
+
+.OverlayDynamicFieldRichTextiFrame {
+    height: auto;
+    max-height: 500px;
+    width: calc(100% - 64px);
+    padding: 0 32px;
+}
+

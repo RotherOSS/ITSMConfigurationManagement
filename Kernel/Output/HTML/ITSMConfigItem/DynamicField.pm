@@ -244,12 +244,12 @@ sub _SectionRender {
                 },
             );
 
-            if ( $DynamicField->{FieldType} eq 'Set' ) {
+            if ( $DynamicField->{FieldType} eq 'Set' || $DynamicField->{FieldType} eq 'RichText' ) {
                 $Param{LayoutObject}->Block(
                     Name => 'FieldDisplayCell',
                     Data => {
                         $DisplayValue->%*,
-                        Type => 'Set',
+                        Type => 'FullRow',
                     },
                 );
             }
