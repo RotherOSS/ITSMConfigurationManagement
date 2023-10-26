@@ -974,6 +974,12 @@ sub Run {
 
         # TODO: look what this was/is about
         #        $Self->{CustomerSearchItemIDs} = [];
+
+        # TODO: It would be nice to switch between pages for the edit mask, too. Keeping the fields in sync
+        #       while editing needs a bit more preparation though
+        # Thus for now make sure to show dynamic fields only once, even if present on multiple pages/sections
+        my $FieldsSeen = {};
+
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
 
             SECTION:
@@ -981,6 +987,13 @@ sub Run {
                 my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
 
                 next SECTION unless $Section;
+                next SECTION if $Section->{Type} && $Section->{Type} ne 'DynamicFields';
+
+                # weed out multiple occurances of dynamic fields - see comment above
+                $Section->{Content} = $Self->_DiscardFieldsSeen(
+                    Content => $Section->{Content},
+                    Seen    => $FieldsSeen,
+                );
 
                 $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
                     Content              => $Section->{Content},
@@ -1101,6 +1114,69 @@ sub Run {
             ),
             $LayoutObject->Footer;
     }
+}
+
+sub _DiscardFieldsSeen {
+    my ( $Self, %Param ) = @_;
+
+    my $Content;
+    my $Ref = ref $Param{Content};
+
+    if ( $Ref eq 'ARRAY' ) {
+        my @CleanedArray;
+
+        ELEMENT:
+        for my $Element ( $Param{Content}->@* ) {
+            my $RefElement = ref $Element;
+
+            if ( $RefElement eq 'ARRAY' ) {
+                push @CleanedArray, $Self->_DiscardFieldsSeen(
+                    Content => $Element,
+                    Seen    => $Param{Seen},
+                );
+
+                next ELEMENT;
+            }
+
+            elsif ( $RefElement eq 'HASH' ) {
+                if ( !$Element->{DF} ) {
+                    push @CleanedArray, $Self->_DiscardFieldsSeen(
+                        Content => $Element,
+                        Seen    => $Param{Seen},
+                    );
+
+                    next ELEMENT;
+                }
+
+                if ( $Param{Seen}{ $Element->{DF} }++ ) {
+                    next ELEMENT;
+                }
+            }
+
+            push @CleanedArray, $Element;
+        }
+
+        $Content = \@CleanedArray;
+    }
+
+    elsif ( $Ref eq 'HASH' ) {
+        my %CleanedHash;
+
+        for my $Key ( keys $Param{Content}->%* ) {
+            $CleanedHash{ $Key } = $Self->_DiscardFieldsSeen(
+                Content => $Param{Content}{ $Key },
+                Seen    => $Param{Seen},
+            );
+        }
+
+        $Content = \%CleanedHash;
+    }
+
+    else {
+        $Content = $Param{Content};
+    }
+
+    return $Content;
 }
 
 1;
