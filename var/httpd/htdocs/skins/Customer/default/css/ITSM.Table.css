@@ -334,8 +334,9 @@ select.ColumnFilter {
 
 .TableSmall thead .SortDescendingLarge > a:after {
     content: "\25BC";
-    position: absolute;
-    left: -6px;
+    display: inline-block;
+    width: 0;
+    margin-left: 4px;
     text-shadow: 1px 1px 0px #fff;
     z-index: 1;
 }
@@ -356,8 +357,9 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .TableSmall thead .SortAscendingLarge > a:after {
     content: "\25B2";
-    position: absolute;
-    left: -6px;
+    display: inline-block;
+    width: 0;
+    margin-left: 4px;
     text-shadow: 1px 1px 0px #fff;
     z-index: 1;
 }
@@ -384,7 +386,7 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger i {
     color: #777777;
-    margin-left: 4px;
+    margin-left: 3px;
     vertical-align: middle;
 }
 
@@ -395,9 +397,10 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 .TableSmall thead th.OverviewHeader.FilterActive .ColumnSettingsTrigger,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger:hover,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active {
-
     opacity: 1.0;
-    box-shadow: 1px 1px 1px #a9a9a9 inset, -1px -1px 1px #a9a9a9 inset;
+    box-shadow: 0 1px 4px 0 rgba(4, 0, 71, 0.16);
+    box-shadow: 0 1px 4px 0 var(--colShadowDark);
+    border-radius: 5px;
 }
 
 .TableSmall thead th.OverviewHeader.FilterActive .ColumnSettingsTrigger i,
@@ -415,14 +418,13 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 }
 
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
-    background-color: #EEEEEE;
+    background-color: #fff;
     border: 1px solid #BBBBBB;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    box-shadow: 1px 1px 3px #CCCCCC, -1px -1px 3px #CCCCCC;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(4, 0, 71, 0.16);
+    box-shadow: 0 1px 4px 0 var(--colShadowDark);
     display: none;
-    padding: 4px;
+    padding: 4px 8px;
     position: absolute;
     right: 0px;
     top: 2px;
@@ -491,11 +493,6 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 
 .TableSmall thead th.OverviewHeader {
     padding: 0px 20px 0px 1px;
-}
-
-.TableSmall thead th.OverviewHeader.SortDescendingLarge,
-.TableSmall thead th.OverviewHeader.SortAscendingLarge {
-    padding-left: 8px;
 }
 
 .TableSmall .ColumnFilter {
