@@ -287,6 +287,7 @@ sub Run {
                 }
                 else {
                     @ViewableClassIDs = ( $GetColumnFilter{Class} );
+                    $FilterSearch{Classes} = [ $ClassList->{$GetColumnFilter{Class}} ];
                 }
             }
             else {
@@ -301,6 +302,7 @@ sub Run {
                 }
                 else {
                     @ViewableDeplStateIDs = ( $GetColumnFilter{DeplState} );
+                    $FilterSearch{DeplStates} = [ $DeplStateList->{$GetColumnFilter{DeplState}} ];
                 }
             }
             else {
@@ -311,7 +313,6 @@ sub Run {
             if ( @ViewableClassIDs && @ViewableDeplStateIDs ) {
                 $Count = $ConfigItemObject->ConfigItemSearch(
                     %FilterSearch,
-                    %GetColumnFilter,
                     Result => 'COUNT',
                 );
             }
@@ -334,6 +335,11 @@ sub Run {
 
         # activate this filter
         $Filter = $FilterName;
+    }
+
+    # if no filter is set but filters are present, use the one with the smallest priority
+    elsif ( !$Filter && %Filters ) {
+        ( $Filter ) = sort { $Filters{$a}->{Prio} <=> $Filters{$b}->{Prio} } keys %Filters;
     }
 
     # check if filter is valid
