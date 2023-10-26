@@ -382,6 +382,20 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItemEdit</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItemEdit</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::Module###AgentITSMConfigItemPrint" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
