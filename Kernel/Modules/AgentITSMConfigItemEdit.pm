@@ -348,7 +348,7 @@ sub Run {
             }
 
             # create a backend object
-            $NameModuleObject = $Kernel::OM->Get( $NameModule );
+            $NameModuleObject = $Kernel::OM->Get($NameModule);
         }
 
         # get the uploaded attachment
@@ -804,7 +804,7 @@ sub Run {
             }
 
             # create a backend object
-            $NameModuleObject = $Kernel::OM->Get( $NameModule );
+            $NameModuleObject = $Kernel::OM->Get($NameModule);
         }
 
         my $LoopProtection = 100;
@@ -837,15 +837,18 @@ sub Run {
 
     my $NameEditable   = $NameModuleObject ? 0 : 1;
     my $RowNameInvalid = $ConfigItem->{Name}
+
         # if a name exists mark regex and duplicate errors
         ? $CINameRegexErrorMessage || IsArrayRefWithData($NameDuplicates)
             ? 'ServerError' : undef
+
         # if it does not exist mark it, if it should
         : $Self->{Subaction} eq 'Save' && $NameEditable
             ? 'ServerError' : undef;
 
     # output name block
     if ( $ConfigItem->{Name} || $NameEditable ) {
+
         # output name block
         $LayoutObject->Block(
             Name => 'RowName',
@@ -859,6 +862,7 @@ sub Run {
 
     # show specific errors
     if ( IsArrayRefWithData($NameDuplicates) ) {
+
         # build array with CI-Numbers
         my @NameDuplicatesByCINumber;
         for my $ConfigItemID ( @{$NameDuplicates} ) {
@@ -896,7 +900,7 @@ sub Run {
             },
         );
     }
-    elsif ( $RowNameInvalid ) {
+    elsif ($RowNameInvalid) {
         if ( $ConfigObject->{Debug} > 0 ) {
             $LogObject->Log(
                 Priority => 'debug',
@@ -1020,6 +1024,20 @@ sub Run {
             FormID => $Self->{FormID},
         )
     ];
+
+    # TODO maybe restrict this to only if df richtext are to be displayed
+    # add rich text editor
+    if ( $LayoutObject->{BrowserRichText} ) {
+
+        # use height/width defined for this screen
+        $Param{RichTextHeight} = $Self->{Config}{RichTextHeight} || 0;
+        $Param{RichTextWidth}  = $Self->{Config}{RichTextWidth}  || 0;
+
+        # set up rich text editor
+        $LayoutObject->SetRichTextParameters(
+            Data => \%Param,
+        );
+    }
 
     my $Output = '';
     if ( ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) || $DuplicateID ) {
@@ -1163,8 +1181,8 @@ sub _DiscardFieldsSeen {
         my %CleanedHash;
 
         for my $Key ( keys $Param{Content}->%* ) {
-            $CleanedHash{ $Key } = $Self->_DiscardFieldsSeen(
-                Content => $Param{Content}{ $Key },
+            $CleanedHash{$Key} = $Self->_DiscardFieldsSeen(
+                Content => $Param{Content}{$Key},
                 Seen    => $Param{Seen},
             );
         }
