@@ -366,7 +366,8 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
 .TableSmall thead th.OverviewHeader span.Gray {
     height: 16px;
     line-height: 16px;
-    padding-left: 5px;
+    padding-left: 0px;
+    margin-left: 0px;
 }
 
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger {
