@@ -264,6 +264,9 @@ sub Run {
                 next PERMCONF unless $AccessOk;
             }
 
+            # set as selected filter if not present
+            $Filter ||= $PermissionConditionConfig->{Name};
+
             my %FilterSearch = (
                 Classes => $PermissionConditionConfig->{Classes},
                 DeplStates => $PermissionConditionConfig->{DeploymentStates},
@@ -335,11 +338,6 @@ sub Run {
 
         # activate this filter
         $Filter = $FilterName;
-    }
-
-    # if no filter is set but filters are present, use the one with the smallest priority
-    elsif ( !$Filter && %Filters ) {
-        ( $Filter ) = sort { $Filters{$a}->{Prio} <=> $Filters{$b}->{Prio} } keys %Filters;
     }
 
     # check if filter is valid
