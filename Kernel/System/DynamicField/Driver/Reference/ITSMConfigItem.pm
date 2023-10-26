@@ -181,6 +181,13 @@ sub ObjectDescriptionGet {
 
 This is used in auto completion when searching for possible object IDs.
 
+    my @ObjectIDs = $PluginObject->SearchObjects(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        Term               => $Term,
+        MaxResults         => $MaxResults,
+        UserID             => 1,
+    );
+
 =cut
 
 sub SearchObjects {

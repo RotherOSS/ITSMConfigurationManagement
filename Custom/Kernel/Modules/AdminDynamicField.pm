@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 692356d2bbed790fbba25874c538d931fb21ad1b - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - b6b99279c16208dbf8a9bbdef70b88bf8b66b872 - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -144,8 +144,8 @@ sub _ShowOverview {
     my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $FieldTypeConfig    = $ConfigObject->Get('DynamicFields::Driver');
-    my $ObjectTypeFilter   = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ObjectType' ) || '';
-    my $NamespaceFilter    = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'Namespace' )  || '';
+    my $ObjectTypeFilter   = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ObjectTypeFilter' ) || '';
+    my $NamespaceFilter    = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'NamespaceFilter' )  || '';
 
     my $Output = join '',
         $LayoutObject->Header,
@@ -397,17 +397,40 @@ sub _ShowOverview {
         Valid      => 0,
     );
 
+    my $FilterStrg = '';
+    if ( IsStringWithData($ObjectTypeFilter) ) {
+        $FilterStrg .= ";ObjectTypeFilter=" . $LayoutObject->Output(
+            Template => '[% Data.Filter | uri %]',
+            Data     => {
+                Filter => $ObjectTypeFilter,
+            },
+        );
+    }
+
+    if ( IsArrayRefWithData($Namespaces) ) {
+        if ( IsStringWithData($NamespaceFilter) ) {
+            $FilterStrg .= ";NamespaceFilter=" . $LayoutObject->Output(
+                Template => '[% Data.Filter | uri %]',
+                Data     => {
+                    Filter => $NamespaceFilter,
+                },
+            );
+        }
+    }
+
     # print the list of dynamic fields
     $Self->_DynamicFieldsListShow(
         DynamicFields => $DynamicFieldsListFiltered,
         Total         => scalar @{$DynamicFieldsListFiltered},
         MaxFieldOrder => scalar @{$DynamicFieldsListAll},
+        FilterStrg    => $FilterStrg,
     );
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminDynamicField',
         Data         => {
             %Param,
+            FilterStrg => $FilterStrg,
         },
     );
 
@@ -523,6 +546,7 @@ sub _DynamicFieldsListShow {
                         ConfigDialog   => $ConfigDialog,
                         FieldTypeName  => $FieldTypeName,
                         ObjectTypeName => $ObjectTypeName,
+                        FilterStrg     => $Param{FilterStrg},
                     },
                 );
 
