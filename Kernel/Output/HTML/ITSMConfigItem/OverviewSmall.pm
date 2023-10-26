@@ -392,7 +392,7 @@ sub ActionRow {
 
     # determine template dependent on interface
     my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
-    if ( $Param{CustomerInterface} ) {
+    if ( $Param{Frontend} eq 'Customer' ) {
         $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
     }
 
@@ -415,7 +415,7 @@ sub Run {
 
     # determine template dependent on interface
     my $TemplateFile = 'AgentITSMConfigItemOverviewSmall';
-    if ( $Param{CustomerInterface} ) {
+    if ( $Param{Frontend} eq 'Customer' ) {
         $TemplateFile = 'CustomerITSMConfigItemOverviewSmall';
     }
 
@@ -567,7 +567,7 @@ sub Run {
 
             my $ACL;
             my %AclAction = %PossibleActions;
-            if ( !$Param{CustomerInterface} ) {
+            if ( $Param{Frontend} ne 'Customer' ) {
                 $ACL = $ConfigItemObject->ConfigItemAcl(
                     Data          => \%PossibleActions,
                     Action        => $Self->{Action},
