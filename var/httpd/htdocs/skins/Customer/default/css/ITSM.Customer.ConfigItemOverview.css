@@ -153,6 +153,16 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     font-weight: 600;
 }
 
+#oooITSMConfigItemFilterDelete > a {
+    float: right;
+}
+
+#oooITSMConfigItemFilterDelete > a > i.ooofo {
+    position: relative;
+    top: 2px;
+    margin-left: 4px;
+}
+
 #oooCustomerNotifications {
     background-color: #f7f7f9;
     background-color: var(--colBGLight);
