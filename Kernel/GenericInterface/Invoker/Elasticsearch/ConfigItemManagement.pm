@@ -16,10 +16,17 @@
 
 package Kernel::GenericInterface::Invoker::Elasticsearch::ConfigItemManagement;
 
+use v5.24;
 use strict;
 use warnings;
-use Kernel::System::VariableCheck qw(:all);
+
+# core modules
 use MIME::Base64 qw(encode_base64);
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -40,8 +47,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     # check needed params and store them in $Self
     for my $Needed (qw/DebuggerObject WebserviceID/) {
@@ -104,6 +110,7 @@ sub PrepareRequest {
     }
 
     # handle all events which are neither update nor creation first
+
     # delete the ticket
     if ( $Param{Data}{Event} eq 'ConfigItemDelete' ) {
         my %Content = (
@@ -113,6 +120,7 @@ sub PrepareRequest {
                 }
             }
         );
+
         return {
             Success => 1,
             Data    => {
@@ -123,7 +131,8 @@ sub PrepareRequest {
         };
     }
 
-    # attachment management - put a temporary attachment (don't call from outside)
+    # put a single temporary attachment into a queue
+    # more than one attachement could be put per call, but this would make error handling harder
     if ( $Param{Data}{Event} eq 'PutTMPAttachment' ) {
 
         # get file format to be ingested
@@ -165,7 +174,7 @@ sub PrepareRequest {
             Success => 1,
             Data    => {
                 docapi      => '_doc',
-                path        => 'Attachments',
+                path        => 'Attachments',    # actually the pipeline
                 id          => '',
                 Attachments => [ \%Data ],
             },
@@ -173,10 +182,11 @@ sub PrepareRequest {
     }
 
     # handle the regular updating and creation
+
     # get needed objects
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # exclusions
+    # handle exclusions
     my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
     my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
     $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
@@ -211,6 +221,7 @@ sub PrepareRequest {
                         }
                     }
                 );
+
                 return {
                     Success => 1,
                     Data    => {
@@ -379,23 +390,36 @@ sub PrepareRequest {
     }
 
     # gather all fields which have to be stored
-    my $Store  = $ConfigObject->Get('Elasticsearch::ConfigItemStoreFields');
-    my $Search = $ConfigObject->Get('Elasticsearch::ConfigItemSearchFields');
+    my $Store              = $ConfigObject->Get('Elasticsearch::ConfigItemStoreFields');
+    my $Search             = $ConfigObject->Get('Elasticsearch::ConfigItemSearchFields');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my %DataToStore;
     for my $Field ( @{ $Store->{Basic} }, @{ $Search->{Basic} } ) {
-        $DataToStore{Basic}{$Field} = 1;
+        $DataToStore{$Field} = 1;
     }
-    for my $Field ( @{ $Store->{XML} }, @{ $Search->{XML} } ) {
-        $DataToStore{XML}{$Field} = 1;
+
+    DYNAMICFIELD:
+    for my $DynamicFieldName ( @{ $Store->{DynamicField} }, @{ $Search->{DynamicField} } ) {
+        my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+            Name => $DynamicFieldName,
+        );
+
+        next DYNAMICFIELD unless $DynamicField;
+
+        if ( $DynamicField->{ObjectType} eq 'ITSMConfigItem' ) {
+            $DataToStore{"DynamicField_$DynamicFieldName"} = 1;
+        }
     }
 
     # prepare request
     my %Content;
     if ( $Param{Data}{Event} eq 'ConfigItemCreate' ) {
+
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $Param{Data}{ConfigItemID},
+            ConfigItemID  => $Param{Data}{ConfigItemID},
+            DynamicFields => 0,
         );
-        %Content = ( map { $_ => $ConfigItem->{$_} } keys %{ $DataToStore{Basic} } );
+        %Content = ( map { $_ => $ConfigItem->{$_} } keys %DataToStore );
         $Content{Attachments} = [];
 
         return {
@@ -408,25 +432,17 @@ sub PrepareRequest {
         };
     }
     else {
-        my $Version = $ConfigItemObject->VersionGet(
-            ConfigItemID => $Param{Data}{ConfigItemID},
+        my $Version = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $Param{Data}{ConfigItemID},
+            DynamicFields => 1,
         );
-        my $FlattenedXML = {};
-        if ( $DataToStore{XML} ) {
-            $FlattenedXML = $Self->_XMLData2Hash(
-                XMLDefinition => $Version->{XMLDefinition},
-                XMLData       => $Version->{XMLData}->[1]->{Version}->[1],
-                Attributes    => [ keys %{ $DataToStore{XML} } ],
-            );
-        }
 
-        # only submit potenitally changed values
+        # only submit potentially changed values
         delete $DataToStore{Created};
-        delete $DataToStore{TicketNumber};
+        delete $DataToStore{Number};
 
         %Content = (
-            ( map { $_ => $Version->{$_} } keys %{ $DataToStore{Basic} } ),
-            ( map { $_ => $FlattenedXML->{$_}{Value} } keys %{ $DataToStore{XML} } ),
+            ( map { $_ => $Version->{$_} } keys %DataToStore ),
         );
     }
 
@@ -474,17 +490,19 @@ sub HandleResponse {
         };
     }
 
+    # Per default there is no rescheduling of Elasticsearch::ConfigItemManagement requests,
+    # but ErrorHandling::RequestRetry could have been configured manually, e.g. via the admin interface.
     if ( $Param{Data}->{ResponseContent} && $Param{Data}->{ResponseContent} =~ m{ReSchedule=1} ) {
 
         # ResponseContent has URI like params, convert them into a hash
         my %QueryParams = split /[&=]/, $Param{Data}->{ResponseContent};
 
-        # unscape URI strings in query parameters
+        # unescape URI strings in query parameters
         for my $Param ( sort keys %QueryParams ) {
             $QueryParams{$Param} = URI::Escape::uri_unescape( $QueryParams{$Param} );
         }
 
-        # fix ExecutrionTime param
+        # fix ExecutionTime param
         if ( $QueryParams{ExecutionTime} ) {
             $QueryParams{ExecutionTime} =~ s{(\d+)\+(\d+)}{$1 $2};
         }
@@ -500,102 +518,6 @@ sub HandleResponse {
         Success => 1,
         Data    => $Param{Data},
     };
-}
-
-=head2 _XMLData2Hash()
-
-returns a hash reference with the requested attributes data for a config item
-
-Return
-
-    $Data = {
-        'HardDisk::2' => {
-            Value => 'HD2',
-            Name  => 'Hard Disk',
-         },
-        'CPU::1' => {
-            Value => '',
-            Name  => 'CPU',
-        },
-        'HardDisk::2::Capacity::1' => {
-            Value => '780 GB',
-            Name  => 'Capacity',
-        },
-    };
-
-    my $Data = $Self->_XMLData2Hash(
-        XMLDefinition => $Version->{XMLDefinition},
-        XMLData       => $Version->{XMLData}->[1]->{Version}->[1],
-        Attributes    => ['CPU::1', 'HardDrive::2::Capacity::1', ...],
-        Data          => \%DataHashRef,                                 # optional
-        Prefix        => 'HardDisk::1',                                 # optional
-    );
-
-=cut
-
-sub _XMLData2Hash {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLData};
-    return if !$Param{XMLDefinition};
-    return if !$Param{Attributes};
-    return if ref $Param{XMLData} ne 'HASH';
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{Attributes} ne 'ARRAY';
-
-    # to store the return data
-    my $Data = $Param{Data} || {};
-
-    # create a lookup structure
-    my %RelevantAttributes = map { $_ => 1 } @{ $Param{Attributes} };
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        my $CountMax = $Item->{CountMax} || 1;
-
-        COUNTER:
-        for my $Counter ( 1 .. $CountMax ) {
-
-            # add prefix
-            my $Prefix = $Item->{Key} . '::' . $Counter;
-            if ( $Param{Prefix} ) {
-                $Prefix = $Param{Prefix} . '::' . $Prefix;
-            }
-
-            # skip not needed elements and sub elements
-            next COUNTER if !grep { $_ =~ m{\A$Prefix} } @{ $Param{Attributes} };
-
-            # lookup value
-            my $Value = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->XMLValueLookup(
-                Item  => $Item,
-                Value => $Param{XMLData}->{ $Item->{Key} }->[$Counter]->{Content} // '',
-            );
-
-            if ( $RelevantAttributes{$Prefix} ) {
-
-                # store the item in hash
-                $Data->{$Prefix} = {
-                    Name  => $Item->{Name},
-                    Value => $Value // '',
-                };
-            }
-
-            # start recursion, if "Sub" was found
-            if ( $Item->{Sub} ) {
-                $Data = $Self->_XMLData2Hash(
-                    XMLDefinition => $Item->{Sub},
-                    XMLData       => $Param{XMLData}->{ $Item->{Key} }->[$Counter],
-                    Prefix        => $Prefix,
-                    Data          => $Data,
-                    Attributes    => $Param{Attributes},
-                );
-            }
-        }
-    }
-
-    return $Data;
 }
 
 1;
