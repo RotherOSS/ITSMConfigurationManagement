@@ -382,7 +382,7 @@ END_SQL
     }
 
     # check if need to return DynamicFields
-    if ($DFData) {
+    if ( $DFData && $ConfigItem{DefinitionID} ) {
 
         # get dynamic field objects
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -574,10 +574,10 @@ sub ConfigItemAdd {
         }
 
         # create a backend object
-        $NameModuleObject = $Kernel::OM->Get( $NameModule );
+        $NameModuleObject = $Kernel::OM->Get($NameModule);
 
         # override possible incoming name
-        $Param{Name} = $NameModuleObject->ConfigItemNameCreate( %Param );
+        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
     }
 
     # check needed stuff II
@@ -626,7 +626,7 @@ sub ConfigItemAdd {
 
     if ( !$Success ) {
         if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
-            $NameModuleObject->ConfigItemNameDelete($Param{Name});
+            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
         }
 
         return;
@@ -634,7 +634,7 @@ sub ConfigItemAdd {
 
     # find id of new item
     # TODO: what about concurrent INSERTs ???
-    my ( $ConfigItemID ) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+    my ($ConfigItemID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id
   FROM configitem
@@ -643,6 +643,16 @@ SELECT id
   ORDER BY id DESC
 END_SQL
         Bind => [ \$Param{Number}, \$Param{ClassID} ],
+    );
+
+    # trigger ConfigItemCreate
+    $Self->EventHandler(
+        Event => 'ConfigItemCreate',
+        Data  => {
+            ConfigItemID => $ConfigItemID,
+            Comment      => $ConfigItemID . '%%' . $Param{Number},
+        },
+        UserID => $Param{UserID},
     );
 
     # add the first version
@@ -656,7 +666,7 @@ END_SQL
 
     if ( !$VersionID ) {
         if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
-            $NameModuleObject->ConfigItemNameDelete($Param{Name});
+            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
         }
 
         # delete config item if no version could be created
@@ -673,16 +683,6 @@ END_SQL
 
         return;
     }
-
-    # trigger ConfigItemCreate
-    $Self->EventHandler(
-        Event => 'ConfigItemCreate',
-        Data  => {
-            ConfigItemID => $ConfigItemID,
-            Comment      => $ConfigItemID . '%%' . $Param{Number},
-        },
-        UserID => $Param{UserID},
-    );
 
     return $ConfigItemID;
 }
@@ -763,8 +763,9 @@ sub ConfigItemDelete {
 
         # check if name module exists
         if ( $Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+
             # create a backend object
-            my $NameModuleObject = $Kernel::OM->Get( $NameModule );
+            my $NameModuleObject = $Kernel::OM->Get($NameModule);
 
             if ( $NameModuleObject->can('ConfigItemNameDelete') ) {
                 $NameModuleObject->ConfigItemNameDelete(
@@ -1503,6 +1504,7 @@ sub UniqueNameCheck {
 }
 
 # TODO: Check
+
 =head2 CurInciStateRecalc()
 
 recalculates the current incident state of this config item and all linked config items
