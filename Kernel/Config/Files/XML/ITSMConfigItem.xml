@@ -1646,7 +1646,7 @@
                         <Item>Number</Item>
                     </Array>
                 </Item>
-                <Item Key="XML">
+                <Item Key="DynamicField">
                     <Array>
                     </Array>
                 </Item>
@@ -1664,7 +1664,7 @@
                         <Item>Number</Item>
                     </Array>
                 </Item>
-                <Item Key="XML">
+                <Item Key="DynamicField">
                     <Array>
                     </Array>
                 </Item>
