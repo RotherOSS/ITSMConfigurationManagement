@@ -313,6 +313,7 @@ sub _Mask {
 
         # generate DeplStateStrg
         $Param{DeplStateStrg} = $LayoutObject->BuildSelection(
+            Class        => 'Modernize',
             Data         => $DeplStateList,
             Name         => 'DeplStateID',
             PossibleNone => 1,
@@ -338,6 +339,7 @@ sub _Mask {
 
         # generate InciStateStrg
         $Param{InciStateStrg} = $LayoutObject->BuildSelection(
+            Class        => 'Modernize',
             Data         => $InciStateList,
             Name         => 'InciStateID',
             PossibleNone => 1,
@@ -434,6 +436,7 @@ sub _Mask {
 
     # generate LinkTypeStrg
     $Param{LinkTypeStrg} = $LayoutObject->BuildSelection(
+        Class        => 'Modernize',
         Data         => \@SelectableTypesList,
         Name         => 'LinkType',
         PossibleNone => 0,
@@ -441,6 +444,7 @@ sub _Mask {
         Sort         => 'AlphanumericValue',
     );
     $Param{LinkTogetherLinkTypeStrg} = $LayoutObject->BuildSelection(
+        Class        => 'Modernize',
         Data         => \@LinkTogetherTypeList,
         Name         => 'LinkTogetherLinkType',
         PossibleNone => 0,
@@ -449,6 +453,7 @@ sub _Mask {
     );
 
     $Param{LinkTogetherYesNoOption} = $LayoutObject->BuildSelection(
+        Class      => 'Modernize',
         Data       => $ConfigObject->Get('YesNoOptions'),
         Name       => 'LinkTogether',
         SelectedID => $Param{LinkTogether} || 0,
