@@ -103,22 +103,26 @@ sub Run {
         }
     }
 
-    # process config item
-    my @ConfigItemIDSelected;
-    my $ActionFlag = 0;
-    my $Counter    = 1;
+    # preprocess config item
+    my @SelectedConfigItems;
+    my %ConfigItemClasses;
 
     # get link object
     my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
+    # loop over config items to predetermine access and dynamic field handling
     CONFIGITEM_ID:
     for my $ConfigItemID (@ConfigItemIDs) {
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $ConfigItemID,
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 1,
         );
+
+        next CONFIGITEM_ID unless IsHashRefWithData($ConfigItem);
 
         my $Config = $ConfigObject->Get("ITSMConfigItem::Frontend::AgentITSMConfigItemEdit");
 
+        # TODO change this, use config item permission check instead
         # check permissions
         my $Access = $ConfigItemObject->Permission(
             Scope  => 'Item',
@@ -139,8 +143,69 @@ sub Run {
             next CONFIGITEM_ID;
         }
 
-        # remember selected config item ids
-        push @ConfigItemIDSelected, $ConfigItemID;
+        # remember selected config item classes and ids
+        push @SelectedConfigItems, $ConfigItem;
+        $ConfigItemClasses{ $ConfigItem->{Class} } = $ConfigItem->{ClassID};
+    }
+
+    # check if dynamic fields should be displayed and which ones
+    my $DynamicFieldList;
+    my %DynamicFieldValues;
+    my %ACLReducibleDynamicFields;
+
+    # dynamic fields are only displayed if all config items are from the same class
+    if ( scalar keys %ConfigItemClasses == 1 ) {
+        my $Class      = ( keys %ConfigItemClasses )[0];
+        my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+            ClassID => $ConfigItemClasses{$Class},
+        );
+
+        # TODO ask about this - maybe not necessary
+        if ( !$Definition->{DefinitionID} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "No definition was defined for class $Class!",
+            );
+        }
+        else {
+            $Self->{Definition} = $Definition;
+            $Self->{Class}      = $Class;
+            $DynamicFieldList   = $Definition->{DynamicFieldRef} ? [ values $Definition->{DynamicFieldRef}->%* ] : [];
+        }
+    }
+
+    # get dynamic field backend object
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # fetch dynamic field values
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+        next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+
+        # extract the dynamic field value from the web request
+        $DynamicFieldValues{"DynamicField_$DynamicFieldConfig->{Name}"} = $DynamicFieldBackendObject->EditFieldValueGet(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            ParamObject        => $ParamObject,
+            LayoutObject       => $LayoutObject,
+        );
+
+        # perform ACLs on values
+        my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsACLReducible'
+        );
+
+        if ($IsACLReducible) {
+            $ACLReducibleDynamicFields{ $DynamicFieldConfig->{Name} } = 1;
+        }
+    }
+
+    # process config items
+    my $ActionFlag = 0;
+    my $Counter    = 1;
+
+    CONFIGITEM_ID:
+    for my $ConfigItem (@SelectedConfigItems) {
 
         # do some actions on CIs
         if ( ( $Self->{Subaction} eq 'Do' ) && ( !%Error ) ) {
@@ -148,35 +213,13 @@ sub Run {
             # challenge token check for write action
             $LayoutObject->ChallengeTokenCheck();
 
-            # bulk action version add
-            if ( $GetParam{DeplStateID} || $GetParam{InciStateID} ) {
-
-                # get current version of the config item
-                my $CurrentVersion = $ConfigItemObject->VersionGet(
-                    ConfigItemID => $ConfigItemID,
-                    XMLDataGet   => 1,
-                );
-
-                my $NewDeplStateID = $CurrentVersion->{DeplStateID};
-                my $NewInciStateID = $CurrentVersion->{InciStateID};
-
-                if ( IsNumber( $GetParam{DeplStateID} ) ) {
-                    $NewDeplStateID = $GetParam{DeplStateID};
-                }
-                if ( IsNumber( $GetParam{InciStateID} ) ) {
-                    $NewInciStateID = $GetParam{InciStateID};
-                }
-
-                my $VersionID = $ConfigItemObject->VersionAdd(
-                    ConfigItemID => $ConfigItemID,
-                    Name         => $CurrentVersion->{Name},
-                    DefinitionID => $CurrentVersion->{DefinitionID},
-                    DeplStateID  => $NewDeplStateID,
-                    InciStateID  => $NewInciStateID,
-                    XMLData      => $CurrentVersion->{XMLData},
-                    UserID       => $Self->{UserID},
-                );
-            }
+            # bulk action configitem update
+            $ConfigItemObject->ConfigItemUpdate(
+                $ConfigItem->%*,
+                %GetParam,
+                %DynamicFieldValues,
+                UserID => $Self->{UserID},
+            );
 
             # bulk action links
             # link all config items to another config item
@@ -190,15 +233,15 @@ sub Run {
 
                 if ( $Type[0] && $Type[1] && ( $Type[1] eq 'Source' || $Type[1] eq 'Target' ) ) {
 
-                    my $SourceKey = $ConfigItemID;
+                    my $SourceKey = $ConfigItem->{ConfigItemID};
                     my $TargetKey = $MainConfigItemID;
 
                     if ( $Type[1] eq 'Target' ) {
                         $SourceKey = $MainConfigItemID;
-                        $TargetKey = $ConfigItemID;
+                        $TargetKey = $ConfigItem->{ConfigItemID};
                     }
 
-                    for my $ConfigItemIDPartner (@ConfigItemIDs) {
+                    for my $ConfigItemIDPartner ( map { $_->{ConfigItemID} } @SelectedConfigItems ) {
                         if ( $MainConfigItemID ne $ConfigItemIDPartner ) {
                             $LinkObject->LinkAdd(
                                 SourceObject => 'ITSMConfigItem',
@@ -221,17 +264,17 @@ sub Run {
                 my @Type = split /::/, $GetParam{LinkTogetherLinkType};
 
                 if ( $Type[0] && $Type[1] && ( $Type[1] eq 'Source' || $Type[1] eq 'Target' ) ) {
-                    for my $ConfigItemIDPartner (@ConfigItemIDs) {
+                    for my $ConfigItemIDPartner ( map { $_->{ConfigItemID} } @SelectedConfigItems ) {
 
-                        my $SourceKey = $ConfigItemID;
+                        my $SourceKey = $ConfigItem->{ConfigItemID};
                         my $TargetKey = $ConfigItemIDPartner;
 
                         if ( $Type[1] eq 'Target' ) {
                             $SourceKey = $ConfigItemIDPartner;
-                            $TargetKey = $ConfigItemID;
+                            $TargetKey = $ConfigItem->{ConfigItemID};
                         }
 
-                        if ( $ConfigItemID ne $ConfigItemIDPartner ) {
+                        if ( $ConfigItem->{ConfigItemID} ne $ConfigItemIDPartner ) {
                             $LinkObject->LinkAdd(
                                 SourceObject => 'ITSMConfigItem',
                                 SourceKey    => $SourceKey,
@@ -260,7 +303,8 @@ sub Run {
     $Output .= $Self->_Mask(
         %Param,
         %GetParam,
-        ConfigItemIDs => \@ConfigItemIDSelected,
+        DynamicField  => \%DynamicFieldValues,
+        ConfigItemIDs => [ map { $_->{ConfigItemID} } @SelectedConfigItems ],
         Errors        => \%Error,
     );
     $Output .= $LayoutObject->Footer(
@@ -459,11 +503,120 @@ sub _Mask {
         SelectedID => $Param{LinkTogether} || 0,
     );
 
+    # render dynamic fields
+    if ( IsHashRefWithData( $Self->{Definition} ) && IsHashRefWithData( $Self->{Definition}{DefinitionRef} ) && $Self->{Definition}{DefinitionRef}{Sections} ) {
+
+        # TODO: It would be nice to switch between pages for the edit mask, too. Keeping the fields in sync
+        #       while editing needs a bit more preparation though
+        # Thus for now make sure to show dynamic fields only once, even if present on multiple pages/sections
+        my $FieldsSeen = {};
+
+        for my $Page ( $Self->{Definition}{DefinitionRef}{Pages}->@* ) {
+
+            SECTION:
+            for my $SectionConfig ( $Page->{Content}->@* ) {
+                my $Section = $Self->{Definition}{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+                next SECTION unless $Section;
+                next SECTION if $Section->{Type} && $Section->{Type} ne 'DynamicFields';
+
+                # weed out multiple occurances of dynamic fields - see comment above
+                $Section->{Content} = $Self->_DiscardFieldsSeen(
+                    Content => $Section->{Content},
+                    Seen    => $FieldsSeen,
+                );
+
+                $Param{DynamicFieldHTML} .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
+                    Content       => $Section->{Content},
+                    DynamicFields => $Self->{Definition}{DynamicFieldRef},
+
+                    # TODO ask if this should be used
+                    # UpdatableFields      => \@UpdatableFields,
+                    LayoutObject       => $LayoutObject,
+                    ParamObject        => $Kernel::OM->Get('Kernel::System::Web::Request'),
+                    DynamicFieldValues => $Param{DynamicField},
+
+                    # TODO ask if this should be used
+                    # PossibleValuesFilter => \%DynamicFieldPossibleValues,
+                    # Errors               => \%DynamicFieldValidationResult,
+                    # Visibility           => \%DynamicFieldVisibility,
+                    Object => {
+                        Class => $Self->{Class},
+                        $Param{DynamicField}->%*,
+                    },
+                );
+            }
+        }
+    }
+
     # get output back
     return $LayoutObject->Output(
         TemplateFile => 'AgentITSMConfigItemBulk',
-        Data         => \%Param
+        Data         => \%Param,
     );
+}
+
+sub _DiscardFieldsSeen {
+    my ( $Self, %Param ) = @_;
+
+    my $Content;
+    my $Ref = ref $Param{Content};
+
+    if ( $Ref eq 'ARRAY' ) {
+        my @CleanedArray;
+
+        ELEMENT:
+        for my $Element ( $Param{Content}->@* ) {
+            my $RefElement = ref $Element;
+
+            if ( $RefElement eq 'ARRAY' ) {
+                push @CleanedArray, $Self->_DiscardFieldsSeen(
+                    Content => $Element,
+                    Seen    => $Param{Seen},
+                );
+
+                next ELEMENT;
+            }
+
+            elsif ( $RefElement eq 'HASH' ) {
+                if ( !$Element->{DF} ) {
+                    push @CleanedArray, $Self->_DiscardFieldsSeen(
+                        Content => $Element,
+                        Seen    => $Param{Seen},
+                    );
+
+                    next ELEMENT;
+                }
+
+                if ( $Param{Seen}{ $Element->{DF} }++ ) {
+                    next ELEMENT;
+                }
+            }
+
+            push @CleanedArray, $Element;
+        }
+
+        $Content = \@CleanedArray;
+    }
+
+    elsif ( $Ref eq 'HASH' ) {
+        my %CleanedHash;
+
+        for my $Key ( keys $Param{Content}->%* ) {
+            $CleanedHash{$Key} = $Self->_DiscardFieldsSeen(
+                Content => $Param{Content}{$Key},
+                Seen    => $Param{Seen},
+            );
+        }
+
+        $Content = \%CleanedHash;
+    }
+
+    else {
+        $Content = $Param{Content};
+    }
+
+    return $Content;
 }
 
 1;

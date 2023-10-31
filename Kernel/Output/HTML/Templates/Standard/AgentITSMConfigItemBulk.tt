@@ -66,6 +66,7 @@
                         <p class="FieldExplanation">[% Translate("The number of another Configuration Item to link with.") | html %]</p>
                     </div>
                     <div class="Clear"></div>
+[% Data.DynamicFieldHTML %]
                 </fieldset>
             </div>
         </div>
