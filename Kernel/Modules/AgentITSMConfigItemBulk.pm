@@ -159,11 +159,10 @@ sub Run {
             ClassID => $ConfigItemClasses{$Class},
         );
 
-        # TODO ask about this - maybe not necessary
         if ( !$Definition->{DefinitionID} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "No definition was defined for class $Class!",
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $Class ),
+                Comment => Translatable('Please contact the administrator.'),
             );
         }
         else {
@@ -180,7 +179,7 @@ sub Run {
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
-        next DYNAMICFIELD unless $Self->{Config}->{$DynamicFieldConfig->{Name}};
+        next DYNAMICFIELD unless $Self->{Config}->{ $DynamicFieldConfig->{Name} };
 
         # extract the dynamic field value from the web request
         $DynamicFieldValues{"DynamicField_$DynamicFieldConfig->{Name}"} = $DynamicFieldBackendObject->EditFieldValueGet(
@@ -531,14 +530,12 @@ sub _Mask {
                 next SECTION unless $Section->{Content}->@*;
 
                 $Param{DynamicFieldHTML} .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
-                    Content       => $Section->{Content},
-                    DynamicFields => $Self->{Definition}{DynamicFieldRef},
-
-                    # TODO ask if this should be used
-                    # UpdatableFields      => \@UpdatableFields,
+                    Content            => $Section->{Content},
+                    DynamicFields      => $Self->{Definition}{DynamicFieldRef},
                     LayoutObject       => $LayoutObject,
                     ParamObject        => $Kernel::OM->Get('Kernel::System::Web::Request'),
                     DynamicFieldValues => $Param{DynamicField},
+                    AJAXUpdatable      => 0,
 
                     # TODO ask if this should be used
                     # PossibleValuesFilter => \%DynamicFieldPossibleValues,
