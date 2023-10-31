@@ -180,6 +180,7 @@ sub Run {
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
         next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD unless $Self->{Config}->{$DynamicFieldConfig->{Name}};
 
         # extract the dynamic field value from the web request
         $DynamicFieldValues{"DynamicField_$DynamicFieldConfig->{Name}"} = $DynamicFieldBackendObject->EditFieldValueGet(
@@ -525,6 +526,8 @@ sub _Mask {
                     ConfiguredDFs => $Self->{Config}->{DynamicField},
                     Seen          => $FieldsSeen,
                 );
+
+                next SECTION unless $Section->{Content}->@*;
 
                 $Param{DynamicFieldHTML} .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
                     Content       => $Section->{Content},
