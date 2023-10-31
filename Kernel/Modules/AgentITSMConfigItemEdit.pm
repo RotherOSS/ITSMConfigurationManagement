@@ -999,6 +999,9 @@ sub Run {
                     Seen    => $FieldsSeen,
                 );
 
+                # do not proceed if content is empty
+                next SECTION unless $Section->{Content}->@*;
+
                 $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
                     Content              => $Section->{Content},
                     DynamicFields        => $Definition->{DynamicFieldRef},

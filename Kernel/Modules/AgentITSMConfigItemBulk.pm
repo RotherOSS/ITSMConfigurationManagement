@@ -527,6 +527,7 @@ sub _Mask {
                     Seen          => $FieldsSeen,
                 );
 
+                # do not proceed if content is empty
                 next SECTION unless $Section->{Content}->@*;
 
                 $Param{DynamicFieldHTML} .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
