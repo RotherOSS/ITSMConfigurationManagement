@@ -1748,7 +1748,6 @@
         <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
         <Value>
             <Hash>
-                <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DynamicField">AgentITSMConfigItemBulk</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###DynamicField">AgentITSMConfigItemEdit</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField">AgentITSMConfigItemPrint</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField">AgentITSMConfigItemZoom</Item>
