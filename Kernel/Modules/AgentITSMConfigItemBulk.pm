@@ -30,6 +30,8 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+
     return $Self;
 }
 
@@ -120,15 +122,12 @@ sub Run {
 
         next CONFIGITEM_ID unless IsHashRefWithData($ConfigItem);
 
-        my $Config = $ConfigObject->Get("ITSMConfigItem::Frontend::AgentITSMConfigItemEdit");
-
-        # TODO change this, use config item permission check instead
         # check permissions
         my $Access = $ConfigItemObject->Permission(
             Scope  => 'Item',
             ItemID => $ConfigItemID,
             UserID => $Self->{UserID},
-            Type   => $Config->{Permission},
+            Type   => $Self->{Config}->{Permission},
         );
 
         if ( !$Access ) {
@@ -319,6 +318,9 @@ sub _Mask {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    # get config object
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # prepare errors!
     if ( $Param{Errors} ) {
         for my $KeyError ( sort keys %{ $Param{Errors} } ) {
@@ -345,9 +347,6 @@ sub _Mask {
 
     # get needed objects
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
-
-    $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
 
     # deployment state
     if ( $Self->{Config}->{DeplState} ) {
@@ -522,8 +521,9 @@ sub _Mask {
 
                 # weed out multiple occurances of dynamic fields - see comment above
                 $Section->{Content} = $Self->_DiscardFieldsSeen(
-                    Content => $Section->{Content},
-                    Seen    => $FieldsSeen,
+                    Content       => $Section->{Content},
+                    ConfiguredDFs => $Self->{Config}->{DynamicField},
+                    Seen          => $FieldsSeen,
                 );
 
                 $Param{DynamicFieldHTML} .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
@@ -588,7 +588,7 @@ sub _DiscardFieldsSeen {
                     next ELEMENT;
                 }
 
-                if ( $Param{Seen}{ $Element->{DF} }++ ) {
+                if ( !$Param{ConfiguredDFs}{ $Element->{DF} } || $Param{Seen}{ $Element->{DF} }++ ) {
                     next ELEMENT;
                 }
             }
