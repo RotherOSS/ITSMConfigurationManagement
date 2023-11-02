@@ -569,18 +569,19 @@ sub Run {
             }
         }
 
-        my $SearchResultList = [];
+        my @SearchResultList;
 
         # start search if called from a search dialog or from a results page
         if ( $SearchDialog || $Self->{TakeLastSearch} ) {
 
             # start search
-            $SearchResultList = $ConfigItemObject->ConfigItemSearch(
+            @SearchResultList = $ConfigItemObject->ConfigItemSearch(
                 %GetParam,
-                OrderBy          => [ $Self->{SortBy} ],
-                OrderByDirection => [ $Self->{OrderBy} ],
-                Limit            => $Self->{SearchLimit},
-                ClassIDs         => [$ClassID],
+                OrderBy  => [ $Self->{OrderBy} ],
+                SortBy   => [ $Self->{SortBy} ],
+                Limit    => $Self->{SearchLimit},
+                ClassIDs => [$ClassID],
+                Result   => 'ARRAY',
             );
         }
 
@@ -612,7 +613,7 @@ sub Run {
             );
 
             CONFIGITEMID:
-            for my $ConfigItemID ( @{$SearchResultList} ) {
+            for my $ConfigItemID (@SearchResultList) {
 
                 # check for access rights
                 my $HasAccess = $ConfigItemObject->Permission(
@@ -715,7 +716,7 @@ sub Run {
             my $PDFObject = $Kernel::OM->Get('Kernel::System::PDF');
 
             CONFIGITEMID:
-            for my $ConfigItemID ( @{$SearchResultList} ) {
+            for my $ConfigItemID (@SearchResultList) {
 
                 # check for access rights
                 my $HasAccess = $ConfigItemObject->Permission(
@@ -889,8 +890,9 @@ sub Run {
             my $Output = $LayoutObject->Header();
             $Output .= $LayoutObject->NavigationBar();
 
-            $Self->{Filter} = $ParamObject->GetParam( Param => 'Filter' ) || '';
-            $Self->{View}   = $ParamObject->GetParam( Param => 'View' )   || '';
+            # use classname as filter
+            $Self->{Filter} = $ClassList->{$ClassID}                    || 'All';
+            $Self->{View}   = $ParamObject->GetParam( Param => 'View' ) || '';
 
             # show config items
             my $LinkPage = 'Filter='
@@ -919,46 +921,6 @@ sub Run {
                 . $LayoutObject->Ascii2Html( Text => $ClassID )
                 . ';TakeLastSearch=1;';
 
-            # find out which columns should be shown
-            my @ShowColumns;
-            if ( $Self->{Config}->{ShowColumns} ) {
-
-                # get all possible columns from config
-                my %PossibleColumn = %{ $Self->{Config}->{ShowColumns} };
-
-                # get the column names that should be shown
-                COLUMNNAME:
-                for my $Name ( sort keys %PossibleColumn ) {
-                    next COLUMNNAME if !$PossibleColumn{$Name};
-                    push @ShowColumns, $Name;
-                }
-            }
-
-            # get the configured columns and reorganize them by class name
-            if (
-                IsArrayRefWithData( $Self->{Config}->{ShowColumnsByClass} )
-                && $ClassID
-                )
-            {
-
-                my %ColumnByClass;
-
-                NAME:
-                for my $Name ( @{ $Self->{Config}->{ShowColumnsByClass} } ) {
-                    my ( $Class, $Column ) = split /::/, $Name, 2;
-
-                    next NAME if !$Column;
-
-                    push @{ $ColumnByClass{$Class} }, $Column;
-                }
-
-                # check if there is a specific column config for the selected class
-                my $SelectedClass = $ClassList->{$ClassID};
-                if ( $ColumnByClass{$SelectedClass} ) {
-                    @ShowColumns = @{ $ColumnByClass{$SelectedClass} };
-                }
-            }
-
             my $ClassName = $ClassList->{$ClassID};
             my $Title     = $LayoutObject->{LanguageObject}->Translate('Config Item Search Results')
                 . ' '
@@ -967,10 +929,10 @@ sub Run {
                 . $LayoutObject->{LanguageObject}->Translate($ClassName);
 
             $Output .= $LayoutObject->ITSMConfigItemListShow(
-                ConfigItemIDs => $SearchResultList,
-                Total         => scalar @{$SearchResultList},
+                ConfigItemIDs => \@SearchResultList,
+                Total         => scalar @SearchResultList,
                 View          => $Self->{View},
-                Filter        => $ClassID,
+                Filter        => $ClassName,
                 Env           => $Self,
                 LinkPage      => $LinkPage,
                 LinkSort      => $LinkSort,
@@ -978,11 +940,11 @@ sub Run {
                 LinkBack      => $LinkBack,
                 Profile       => $Self->{Profile},
                 TitleName     => $Title,
-                ShowColumns   => \@ShowColumns,
                 SortBy        => $LayoutObject->Ascii2Html( Text => $Self->{SortBy} ),
                 OrderBy       => $LayoutObject->Ascii2Html( Text => $Self->{OrderBy} ),
                 ClassID       => $ClassID,
                 RequestURL    => $Self->{RequestedURL},
+                Bulk          => 1,
             );
 
             $LayoutObject->AddJSData(
