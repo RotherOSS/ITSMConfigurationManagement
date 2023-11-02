@@ -203,12 +203,12 @@ sub Run {
         }
 
         # get current definition
-        my $XMLDefinition = $ConfigItemObject->DefinitionGet(
+        my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
         );
 
         # abort, if no definition is defined
-        if ( !$XMLDefinition->{DefinitionID} ) {
+        if ( !$Definition->{DefinitionID} ) {
             return $LayoutObject->ErrorScreen(
                 Message =>
                     $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ClassID ),
@@ -216,7 +216,7 @@ sub Run {
             );
         }
 
-        my @XMLAttributes = (
+        my @Attributes = (
             {
                 Key   => 'Number',
                 Value => Translatable('Number'),
@@ -235,24 +235,10 @@ sub Run {
             },
         );
 
-        my %GetParam = $SearchProfileObject->SearchProfileGet(
-            Base      => 'ConfigItemSearch' . $ClassID,
-            Name      => $Self->{Profile},
-            UserLogin => $Self->{UserLogin},
-        );
-
-        # get attributes to include in attributes string
-        if ( $XMLDefinition->{Definition} ) {
-            $Self->_XMLSearchAttributesGet(
-                XMLDefinition => $XMLDefinition->{DefinitionRef},
-                XMLAttributes => \@XMLAttributes,
-            );
-        }
-
         # build attributes string for attributes list
         $Param{AttributesStrg} = $LayoutObject->BuildSelection(
             PossibleNone => 1,
-            Data         => \@XMLAttributes,
+            Data         => \@Attributes,
             Name         => 'Attribute',
             Multiple     => 0,
             Class        => 'Modernize',
@@ -261,7 +247,7 @@ sub Run {
         # build attributes string for recovery on add or subtract search fields
         $Param{AttributesOrigStrg} = $LayoutObject->BuildSelection(
             PossibleNone => 1,
-            Data         => \@XMLAttributes,
+            Data         => \@Attributes,
             Name         => 'AttributeOrig',
             Multiple     => 0,
             Class        => 'Modernize',
@@ -350,15 +336,6 @@ sub Run {
                 Name                      => $GetParam{Name}   || '',
             },
         );
-
-        # output xml search form
-        if ( $XMLDefinition->{Definition} ) {
-            $Self->_XMLSearchFormOutput(
-                XMLDefinition => $XMLDefinition->{DefinitionRef},
-                XMLAttributes => \@XMLAttributes,
-                GetParam      => \%GetParam,
-            );
-        }
 
         my @ProfileAttributes;
 
@@ -459,12 +436,12 @@ sub Run {
         }
 
         # get current definition
-        my $XMLDefinition = $ConfigItemObject->DefinitionGet(
+        my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
         );
 
         # abort, if no definition is defined
-        if ( !$XMLDefinition->{DefinitionID} ) {
+        if ( !$Definition->{DefinitionID} ) {
             return $LayoutObject->ErrorScreen(
                 Message =>
                     $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ClassID ),
@@ -508,20 +485,6 @@ sub Run {
             $GetParam{$FormArray} = \@Array;
         }
 
-        # get xml search form
-        my $XMLFormData = [];
-        my $XMLGetParam = [];
-        $Self->_XMLSearchFormGet(
-            XMLDefinition => $XMLDefinition->{DefinitionRef},
-            XMLFormData   => $XMLFormData,
-            XMLGetParam   => $XMLGetParam,
-            %GetParam,
-        );
-
-        if ( @{$XMLFormData} ) {
-            $GetParam{What} = $XMLFormData;
-        }
-
         # save search profile (under last-search or real profile name)
         $Self->{SaveProfile} = 1;
 
@@ -546,25 +509,6 @@ sub Run {
                         Value     => $GetParam{$Key},
                         UserLogin => $Self->{UserLogin},
                     );
-                }
-            }
-
-            # insert new profile params also from XMLform
-            if ( @{$XMLGetParam} ) {
-                for my $Parameter ( @{$XMLGetParam} ) {
-                    for my $Key ( sort keys %{$Parameter} ) {
-                        if ( $Parameter->{$Key} ) {
-
-                            $SearchProfileObject->SearchProfileAdd(
-                                Base      => 'ConfigItemSearch' . $ClassID,
-                                Name      => $Self->{Profile},
-                                Key       => $Key,
-                                Value     => $Parameter->{$Key},
-                                UserLogin => $Self->{UserLogin},
-                            );
-
-                        }
-                    }
                 }
             }
         }
@@ -991,328 +935,6 @@ sub Run {
 
         return $Output;
     }
-}
-
-sub _XMLSearchFormOutput {
-    my ( $Self, %Param ) = @_;
-
-    my %GetParam = %{ $Param{GetParam} };
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{XMLAttributes} ne 'ARRAY';
-
-    $Param{Level} ||= 0;
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        # set prefix
-        my $InputKey = $Item->{Key};
-        my $Name     = $Item->{Name};
-        if ( $Param{Prefix} ) {
-            $InputKey = $Param{Prefix} . '::' . $InputKey;
-            $Name     = $Param{PrefixName} . '::' . $Name;
-        }
-
-        # output attribute, if marked as searchable
-        if ( $Item->{Searchable} ) {
-            my $Value;
-
-            # date type fields must to get all date parameters
-            if ( $Item->{Input}->{Type} eq 'Date' ) {
-                $Value =
-                    {
-                        $InputKey                      => $GetParam{$InputKey},
-                        $InputKey . '::TimeStart::Day' => $GetParam{ $InputKey . '::TimeStart::Day' },
-                        $InputKey
-                        . '::TimeStart::Month'          => $GetParam{ $InputKey . '::TimeStart::Month' },
-                        $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
-                        $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
-                        $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
-                        $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
-                    } || '';
-            }
-
-            # date-time type fields must get all date and time parameters
-            elsif ( $Item->{Input}->{Type} eq 'DateTime' ) {
-                $Value =
-                    {
-                        $InputKey => $GetParam{$InputKey},
-                        $InputKey
-                        . '::TimeStart::Minute'         => $GetParam{ $InputKey . '::TimeStart::Minute' },
-                        $InputKey . '::TimeStart::Hour' => $GetParam{ $InputKey . '::TimeStart::Hour' },
-                        $InputKey . '::TimeStart::Day'  => $GetParam{ $InputKey . '::TimeStart::Day' },
-                        $InputKey
-                        . '::TimeStart::Month'          => $GetParam{ $InputKey . '::TimeStart::Month' },
-                        $InputKey . '::TimeStart::Year' => $GetParam{ $InputKey . '::TimeStart::Year' },
-                        $InputKey
-                        . '::TimeStop::Minute'          => $GetParam{ $InputKey . '::TimeStop::Minute' },
-                        $InputKey . '::TimeStop::Hour'  => $GetParam{ $InputKey . '::TimeStop::Hour' },
-                        $InputKey . '::TimeStop::Day'   => $GetParam{ $InputKey . '::TimeStop::Day' },
-                        $InputKey . '::TimeStop::Month' => $GetParam{ $InputKey . '::TimeStop::Month' },
-                        $InputKey . '::TimeStop::Year'  => $GetParam{ $InputKey . '::TimeStop::Year' },
-                    } || '';
-            }
-
-            # other kinds of fields can get its value directly
-            else {
-                $Value = $GetParam{$InputKey} || '';
-            }
-
-            # get layout object
-            my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-            # create search input element
-            my $InputString = $LayoutObject->ITSMConfigItemSearchInputCreate(
-                Key   => $InputKey,
-                Item  => $Item,
-                Value => $Value,
-            );
-
-            # output attribute row
-            $LayoutObject->Block(
-                Name => 'AttributeRow',
-                Data => {
-                    Key         => $InputKey,
-                    Name        => $Name,
-                    Description => $Item->{Description} || $Item->{Name},
-                    InputString => $InputString,
-                },
-            );
-
-            push @{ $Param{XMLAttributes} }, {
-                Key   => $InputKey,
-                Value => $Name,
-            };
-        }
-
-        next ITEM if !$Item->{Sub};
-
-        # start recursion, if "Sub" was found
-        $Self->_XMLSearchFormOutput(
-            XMLDefinition => $Item->{Sub},
-            XMLAttributes => $Param{XMLAttributes},
-            Level         => $Param{Level} + 1,
-            Prefix        => $InputKey,
-            PrefixName    => $Name,
-            GetParam      => \%GetParam,
-        );
-    }
-
-    return 1;
-}
-
-sub _XMLSearchFormGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if !$Param{XMLFormData};
-    return if !$Param{XMLGetParam};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{XMLFormData} ne 'ARRAY';
-    return if ref $Param{XMLGetParam} ne 'ARRAY';
-
-    $Param{Level} ||= 0;
-
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        # create inputkey
-        my $InputKey = $Item->{Key};
-        if ( $Param{Prefix} ) {
-            $InputKey = $Param{Prefix} . '::' . $InputKey;
-        }
-
-        # Date type fields must to get all date parameters.
-        if ( $Item->{Input}->{Type} eq 'Date' && $Param{$InputKey} ) {
-            $Param{$InputKey} =
-                {
-                    $InputKey                      => $Param{$InputKey},
-                    $InputKey . '::TimeStart::Day' => $Param{ $InputKey . '::TimeStart::Day' },
-                    $InputKey
-                    . '::TimeStart::Month'          => $Param{ $InputKey . '::TimeStart::Month' },
-                    $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
-                    $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
-                    $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
-                    $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
-                } || '';
-        }
-
-        # Date-time type fields must get all date and time parameters.
-        elsif ( $Item->{Input}->{Type} eq 'DateTime' && $Param{$InputKey} ) {
-            $Param{$InputKey} =
-                {
-                    $InputKey => $Param{$InputKey},
-                    $InputKey
-                    . '::TimeStart::Minute'         => $Param{ $InputKey . '::TimeStart::Minute' },
-                    $InputKey . '::TimeStart::Hour' => $Param{ $InputKey . '::TimeStart::Hour' },
-                    $InputKey . '::TimeStart::Day'  => $Param{ $InputKey . '::TimeStart::Day' },
-                    $InputKey
-                    . '::TimeStart::Month'          => $Param{ $InputKey . '::TimeStart::Month' },
-                    $InputKey . '::TimeStart::Year' => $Param{ $InputKey . '::TimeStart::Year' },
-                    $InputKey
-                    . '::TimeStop::Minute'          => $Param{ $InputKey . '::TimeStop::Minute' },
-                    $InputKey . '::TimeStop::Hour'  => $Param{ $InputKey . '::TimeStop::Hour' },
-                    $InputKey . '::TimeStop::Day'   => $Param{ $InputKey . '::TimeStop::Day' },
-                    $InputKey . '::TimeStop::Month' => $Param{ $InputKey . '::TimeStop::Month' },
-                    $InputKey . '::TimeStop::Year'  => $Param{ $InputKey . '::TimeStop::Year' },
-                } || '';
-        }
-
-        # get search form data
-        my $Values = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->ITSMConfigItemSearchFormDataGet(
-            Key   => $InputKey,
-            Item  => $Item,
-            Value => $Param{$InputKey},
-        );
-
-        # create search key
-        my $SearchKey = $InputKey;
-        $SearchKey =~ s{ :: }{\'\}[%]\{\'}xmsg;
-        $SearchKey = "[1]{'Version'}[1]{'$SearchKey'}[%]{'Content'}";
-
-        # ITSMConfigItemSearchFormDataGet() can return string, arrayref or hashref
-        if ( ref $Values eq 'ARRAY' ) {
-
-            # filter empty elements
-            my @SearchValues = grep {$_} @{$Values};
-
-            if (@SearchValues) {
-                push @{ $Param{XMLFormData} }, {
-                    $SearchKey => \@SearchValues,
-                };
-
-                push @{ $Param{XMLGetParam} }, {
-                    $InputKey => \@SearchValues,
-                };
-            }
-
-        }
-        elsif ($Values) {
-
-            # e.g. for Date between searches
-            push @{ $Param{XMLFormData} }, {
-                $SearchKey => $Values,
-            };
-
-            if ( ref $Values eq 'HASH' ) {
-                if ( $Item->{Input}->{Type} eq 'Date' ) {
-                    if ( $Values->{'-between'} ) {
-
-                        # get time elemet values
-                        my ( $StartDate, $StopDate ) = @{ $Values->{'-between'} };
-                        my ( $StartYear, $StartMonth, $StartDay ) = split( /-/, $StartDate );
-                        my ( $StopYear,  $StopMonth,  $StopDay )  = split( /-/, $StopDate );
-
-                        # store time elment values
-                        push @{ $Param{XMLGetParam} }, {
-                            $InputKey                        => 1,
-                            $InputKey . '::TimeStart::Day'   => $StartDay,
-                            $InputKey . '::TimeStart::Month' => $StartMonth,
-                            $InputKey . '::TimeStart::Year'  => $StartYear,
-                            $InputKey . '::TimeStop::Day'    => $StopDay,
-                            $InputKey . '::TimeStop::Month'  => $StopMonth,
-                            $InputKey . '::TimeStop::Year'   => $StopYear,
-                        };
-                    }
-                }
-                elsif ( $Item->{Input}->{Type} eq 'DateTime' ) {
-                    if ( $Values->{'-between'} ) {
-
-                        # get time elemet values
-                        my ( $StartDateTime, $StopDateTime )          = @{ $Values->{'-between'} };
-                        my ( $StartDate, $StartTime )                 = split( /\s/, $StartDateTime );
-                        my ( $StartYear, $StartMonth, $StartDay )     = split( /-/, $StartDate );
-                        my ( $StartHour, $StartMinute, $StartSecond ) = split( /\:/, $StartTime );
-
-                        my ( $StopDate, $StopTime ) = split( /\s/, $StopDateTime );
-                        my ( $StopYear, $StopMonth,  $StopDay )    = split( /-/,  $StopDate );
-                        my ( $StopHour, $StopMinute, $StopSecond ) = split( /\:/, $StopTime );
-
-                        # store time elment values
-                        push @{ $Param{XMLGetParam} }, {
-                            $InputKey                         => 1,
-                            $InputKey . '::TimeStart::Minute' => $StartMinute,
-                            $InputKey . '::TimeStart::Hour'   => $StartHour,
-                            $InputKey . '::TimeStart::Day'    => $StartDay,
-                            $InputKey . '::TimeStart::Month'  => $StartMonth,
-                            $InputKey . '::TimeStart::Year'   => $StartYear,
-                            $InputKey . '::TimeStop::Minute'  => $StopMinute,
-                            $InputKey . '::TimeStop::Hour'    => $StopHour,
-                            $InputKey . '::TimeStop::Day'     => $StopDay,
-                            $InputKey . '::TimeStop::Month'   => $StopMonth,
-                            $InputKey . '::TimeStop::Year'    => $StopYear,
-                        };
-                    }
-                }
-            }
-            else {
-                push @{ $Param{XMLGetParam} }, {
-                    $InputKey => $Values,
-                };
-            }
-
-        }
-
-        next ITEM if !$Item->{Sub};
-
-        # start recursion, if "Sub" was found
-        $Self->_XMLSearchFormGet(
-            %Param,
-            XMLDefinition => $Item->{Sub},
-            XMLFormData   => $Param{XMLFormData},
-            XMLGetParam   => $Param{XMLGetParam},
-            Level         => $Param{Level} + 1,
-            Prefix        => $InputKey,
-        );
-    }
-
-    return 1;
-}
-
-sub _XMLSearchAttributesGet {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return if !$Param{XMLDefinition};
-    return if ref $Param{XMLDefinition} ne 'ARRAY';
-    return if ref $Param{XMLAttributes} ne 'ARRAY';
-
-    $Param{Level} ||= 0;
-    ITEM:
-    for my $Item ( @{ $Param{XMLDefinition} } ) {
-
-        # set prefix
-        my $InputKey = $Item->{Key};
-        my $Name     = $Item->{Name};
-        if ( $Param{Prefix} ) {
-            $InputKey = $Param{Prefix} . '::' . $InputKey;
-            $Name     = $Param{PrefixName} . '::' . $Name;
-        }
-
-        # store attribute, if marked as searchable
-        if ( $Item->{Searchable} ) {
-            push @{ $Param{XMLAttributes} }, {
-                Key   => $InputKey,
-                Value => $Name,
-            };
-        }
-
-        next ITEM if !$Item->{Sub};
-
-        # start recursion, if "Sub" was found
-        $Self->_XMLSearchAttributesGet(
-            XMLDefinition => $Item->{Sub},
-            XMLAttributes => $Param{XMLAttributes},
-            Level         => $Param{Level} + 1,
-            Prefix        => $InputKey,
-            PrefixName    => $Name,
-        );
-    }
-
-    return 1;
 }
 
 1;
