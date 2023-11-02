@@ -278,34 +278,34 @@ sub new {
     # SortBy  => 'Age',   # Created|Number|Changed|Name|DeplState|CurDeplState
     # |InciState|CurInciState
     $Self->{ValidSortableColumns} = {
-        'Age'            => 1,
-        'Number'         => 1,
-        'Name'           => 1,
-        'Created'        => 1,
-        'LastChanged'    => 1,
-        'DeplState'      => 1,
-        'CurDeplState'   => 1,
-        'InciState'      => 1,
-        'CurInciState'   => 1,
+        'Age'          => 1,
+        'Number'       => 1,
+        'Name'         => 1,
+        'Created'      => 1,
+        'LastChanged'  => 1,
+        'DeplState'    => 1,
+        'CurDeplState' => 1,
+        'InciState'    => 1,
+        'CurInciState' => 1,
     };
 
     # define filterable columns
     $Self->{ValidFiltrableColumns} = {
-        'Class'          => 1,
-        'DeplState'      => 1,
-        'CurDeplState'   => 1,
-        'InciState'      => 1,
-        'CurInciState'   => 1,
+        'Class'        => 1,
+        'DeplState'    => 1,
+        'CurDeplState' => 1,
+        'InciState'    => 1,
+        'CurInciState' => 1,
     };
 
     # set config item key filter
     my %ConfigItemKeys;
     my %RemoveKeys;
 
-    if ( IsHashRefWithData($Self->{Config}{ConfigItemKey}) ) {
+    if ( IsHashRefWithData( $Self->{Config}{ConfigItemKey} ) ) {
         for my $Class ( keys $Self->{Config}{ConfigItemKey}->%* ) {
             push $ConfigItemKeys{ $Self->{Config}{ConfigItemKey}{$Class} }->@*, $RevertedClassList{$Class};
-            $RemoveKeys{$Self->{Config}{ConfigItemKey}{$Class}} = 1;
+            $RemoveKeys{ $Self->{Config}{ConfigItemKey}{$Class} } = 1;
         }
     }
     $Self->{ConfigItemKeys} = \%ConfigItemKeys;
@@ -574,7 +574,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # convert to lower case
-        my $DeplStateColor = lc $GeneralCatalogPreferences{Color};
+        my $DeplStateColor = lc $GeneralCatalogPreferences{Color} =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
@@ -727,7 +727,7 @@ sub Run {
 
         # Define the summary types for which no count is needed, because we have no output.
         my %LookupNoCountSummaryType = (
-            AssignedToEntity    => 1,
+            AssignedToEntity => 1,
         );
 
         TYPE:
@@ -1904,7 +1904,7 @@ sub _SearchParamsGet {
         my @ConfigItemKeyConfigs;
         for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
             push @ConfigItemKeyConfigs, {
-                ClassIDs => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                ClassIDs                        => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
                 "DynamicField_$ConfigItemKeyDF" => {
                     Equals => $Param{CustomerUserID} // undef,
                 },
@@ -1922,7 +1922,7 @@ sub _SearchParamsGet {
         my @ConfigItemKeyConfigs;
         for my $ConfigItemKeyDF ( keys $Self->{ConfigItemKeys}->%* ) {
             push @ConfigItemKeyConfigs, {
-                ClassIDs => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
+                ClassIDs                        => $Self->{ConfigItemKeys}{$ConfigItemKeyDF},
                 "DynamicField_$ConfigItemKeyDF" => {
                     Equals => $Param{CustomerID} // undef,
                 },

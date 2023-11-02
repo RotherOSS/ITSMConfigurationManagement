@@ -204,7 +204,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # covert to lower case
-        my $DeplStateColor = lc $Preferences{Color};
+        my $DeplStateColor = lc( $Preferences{Color} ) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
@@ -338,8 +338,8 @@ sub Run {
 
                 my $AccessOk = 0;
                 GROUP:
-                for my $GroupName ( $Page->{Groups}-@* ) {
-                    next GROUP if !$GroupLookup{ $GroupName };
+                for my $GroupName ( $Page->{Groups} - @* ) {
+                    next GROUP if !$GroupLookup{$GroupName};
 
                     $AccessOk = 1;
                 }
