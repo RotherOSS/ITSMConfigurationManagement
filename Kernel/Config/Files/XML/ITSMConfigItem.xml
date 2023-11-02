@@ -538,6 +538,9 @@
             <Hash>
                 <Item Key="CSS">
                     <Array>
+                        <Item>Core.AllocationList.css</Item>
+                        <Item>ITSM.Agent.Default.css</Item>
+                        <Item>ITSM.Agent.ConfigItem.Overview.css</Item>
                         <Item>ITSM.Agent.Detail.css</Item>
                         <Item>ITSM.Table.css</Item>
                         <Item>ITSM.Print.css</Item>
@@ -545,9 +548,9 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/jquery-tablesorter-2.28.14/jquery.tablesorter.js</Item>
                         <Item>Core.UI.Table.Sort.js</Item>
-                        <Item>ITSM.Agent.Zoom.js</Item>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
                         <Item>ITSM.Agent.ConfigItem.Overview.js</Item>
                         <Item>ITSM.Agent.ConfigItem.Search.js</Item>
                     </Array>
@@ -1197,55 +1200,6 @@
             <Item ValueType="String" ValueRegex="^\d+$">10000</Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ShowColumns" Required="1" Valid="1">
-        <Description Translatable="1">Defines the shown columns in the config item search. This option has no effect on the position of the column.</Description>
-        <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
-        <Value>
-            <Hash>
-                <DefaultItem ValueType="Select">
-                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
-                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
-                </DefaultItem>
-                <Item Key="CurInciSignal" SelectedID="1"></Item>
-                <Item Key="CurDeplSignal" SelectedID="1"></Item>
-                <Item Key="Number" SelectedID="1"></Item>
-                <Item Key="Name" SelectedID="1"></Item>
-                <Item Key="Class" SelectedID="0"></Item>
-                <Item Key="CurDeplState" SelectedID="1"></Item>
-                <Item Key="CurDeplStateType" SelectedID="0"></Item>
-                <Item Key="CurInciState" SelectedID="1">1</Item>
-                <Item Key="CurInciStateType" SelectedID="0"></Item>
-                <Item Key="LastChanged" SelectedID="1"></Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ShowColumnsByClass" Required="0" Valid="0">
-        <Description Translatable="1">Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ShowColumns.</Description>
-        <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
-        <Value>
-            <Array>
-                <Item>Computer::Name</Item>
-                <Item>Computer::Number</Item>
-                <Item>Computer::CurInciSignal</Item>
-                <Item>Computer::CurDeplSignal</Item>
-                <Item>Computer::CurDeplState</Item>
-                <Item>Computer::HardDisk::1</Item>
-                <Item>Computer::HardDisk::1::Capacity::1</Item>
-                <Item>Computer::HardDisk::2</Item>
-                <Item>Computer::HardDisk::2::Capacity::1</Item>
-                <Item>Computer::HardDisk::3</Item>
-                <Item>Computer::HardDisk::3::Capacity::1</Item>
-                <Item>Computer::WarrantyExpirationDate::1</Item>
-                <Item>Computer::CreateTime</Item>
-                <Item>Location::CurInciSignal</Item>
-                <Item>Location::Number</Item>
-                <Item>Location::Type::1</Item>
-                <Item>Location::Name</Item>
-                <Item>Location::Address::1</Item>
-                <Item>Location::LastChanged</Item>
-            </Array>
-        </Value>
-    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData" Required="1" Valid="1">
         <Description Translatable="1">Data used to export the search result in CSV format.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
@@ -1283,6 +1237,30 @@
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault" Required="0" Valid="0">
         <Description Translatable="1">Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ClassColumnsAvailable" Required="0" Valid="0">
+        <Description Translatable="1">Defines the available columns of CIs in the config item search result view depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ClassColumnsDefault" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default displayed columns of CIs in the config item search result view depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
         <Value>
             <Hash>
                 <DefaultItem>
