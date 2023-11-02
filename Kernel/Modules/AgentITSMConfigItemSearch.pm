@@ -202,6 +202,12 @@ sub Run {
             );
         }
 
+        my %GetParam = $SearchProfileObject->SearchProfileGet(
+            Base      => 'ConfigItemSearch' . $ClassID,
+            Name      => $Self->{Profile},
+            UserLogin => $Self->{UserLogin},
+        );
+
         # get current definition
         my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
@@ -234,6 +240,152 @@ sub Run {
                 Value => Translatable('Incident State'),
             },
         );
+
+        # get dynamic field backend object
+        my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        # dynamic fields
+        my $DynamicFieldSeparator = 1;
+
+        # create dynamic fields search options for attribute select
+        # cycle trough the activated Dynamic Fields for this definition
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD if $DynamicFieldConfig->{Name} eq '';
+
+            # create a separator for dynamic fields attributes
+            if ($DynamicFieldSeparator) {
+                push @Attributes, (
+                    {
+                        Key      => '',
+                        Value    => '-',
+                        Disabled => 1,
+                    },
+                );
+                $DynamicFieldSeparator = 0;
+            }
+
+            # get search field preferences
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            # translate the dynamic field label
+            my $TranslatedDynamicFieldLabel = $LayoutObject->{LanguageObject}->Translate(
+                $DynamicFieldConfig->{Label},
+            );
+
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                # translate the suffix
+                my $TranslatedSuffix = $LayoutObject->{LanguageObject}->Translate(
+                    $Preference->{LabelSuffix},
+                ) || '';
+
+                if ($TranslatedSuffix) {
+                    $TranslatedSuffix = ' (' . $TranslatedSuffix . ')';
+                }
+
+                push @Attributes, (
+                    {
+                        Key => 'Search_DynamicField_'
+                            . $DynamicFieldConfig->{Name}
+                            . $Preference->{Type},
+                        Value => $TranslatedDynamicFieldLabel . $TranslatedSuffix,
+                    },
+                );
+            }
+        }
+
+        # create HTML strings for all dynamic fields
+        my %DynamicFieldHTML;
+
+        # cycle trough the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $PossibleValuesFilter;
+
+            my $IsACLReducible = $BackendObject->HasBehavior(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Behavior           => 'IsACLReducible',
+            );
+
+            if ($IsACLReducible) {
+
+                # get PossibleValues
+                my $PossibleValues = $BackendObject->PossibleValuesGet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                );
+
+                # check if field has PossibleValues property in its configuration
+                if ( IsHashRefWithData($PossibleValues) ) {
+
+                    # get historical values from database
+                    my $HistoricalValues = $BackendObject->HistoricalValuesGet(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                    );
+
+                    my $Data = $PossibleValues;
+
+                    # add historic values to current values (if they don't exist anymore)
+                    if ( IsHashRefWithData($HistoricalValues) ) {
+                        for my $Key ( sort keys %{$HistoricalValues} ) {
+                            if ( !$Data->{$Key} ) {
+                                $Data->{$Key} = $HistoricalValues->{$Key};
+                            }
+                        }
+                    }
+
+                    # convert possible values key => value to key => key for ACLs using a Hash slice
+                    my %AclData = %{$Data};
+                    @AclData{ keys %AclData } = keys %AclData;
+
+                    # set possible values filter from ACLs
+                    my $ACL = $ConfigItemObject->ConfigItemAcl(
+                        Action        => $Self->{Action},
+                        ReturnType    => 'ITSMConfigItem',
+                        ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                        Data          => \%AclData,
+                        UserID        => $Self->{UserID},
+                    );
+                    if ($ACL) {
+                        my %Filter = $ConfigItemObject->ConfigItemAclData();
+
+                        # convert Filer key => key back to key => value using map
+                        %{$PossibleValuesFilter} = map { $_ => $Data->{$_} } keys %Filter;
+                    }
+                }
+            }
+
+            # get search field preferences
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                # get field HTML
+                $DynamicFieldHTML{ $DynamicFieldConfig->{Name} . $Preference->{Type} } = $BackendObject->SearchFieldRender(
+                    DynamicFieldConfig   => $DynamicFieldConfig,
+                    Profile              => \%GetParam,
+                    PossibleValuesFilter => $PossibleValuesFilter,
+                    DefaultValue         =>
+                        $Self->{Config}{Defaults}{DynamicField}{ $DynamicFieldConfig->{Name} },
+                    LayoutObject => $LayoutObject,
+                    Type         => $Preference->{Type},
+                );
+            }
+        }
 
         # build attributes string for attributes list
         $Param{AttributesStrg} = $LayoutObject->BuildSelection(
@@ -336,6 +488,41 @@ sub Run {
                 Name                      => $GetParam{Name}   || '',
             },
         );
+
+        # output Dynamic fields blocks
+        # cycle trough the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            # get search field preferences
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                # skip fields that HTML could not be retrieved
+                next PREFERENCE if !IsHashRefWithData(
+                    $DynamicFieldHTML{ $DynamicFieldConfig->{Name} . $Preference->{Type} }
+                );
+
+                $LayoutObject->Block(
+                    Name => 'DynamicField',
+                    Data => {
+                        Label =>
+                            $DynamicFieldHTML{ $DynamicFieldConfig->{Name} . $Preference->{Type} }
+                            ->{Label},
+                        Field =>
+                            $DynamicFieldHTML{ $DynamicFieldConfig->{Name} . $Preference->{Type} }
+                            ->{Field},
+                    },
+                );
+            }
+        }
 
         my @ProfileAttributes;
 

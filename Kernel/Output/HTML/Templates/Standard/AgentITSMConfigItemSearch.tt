@@ -141,6 +141,15 @@
         [% Data.CurInciStateOptionStrg %]
         <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
     </div>
+    
+[% RenderBlockStart("DynamicField") %]
+    <div class="Clear"></div>
+    [% Data.Label %]
+    <div class="Field">
+        [% Data.Field %]
+        <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+    </div>
+[% RenderBlockEnd("DynamicField") %]
 
 [% RenderBlockStart("AttributeRow") %]
     <div class="Clear"></div>
