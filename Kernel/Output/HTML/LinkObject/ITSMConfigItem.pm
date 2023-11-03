@@ -693,7 +693,7 @@ sub ContentStringCreate {
         $DeplState =~ s{ [^a-zA-Z0-9] }{_}msxg;
 
         # get the color of the deplyment state if defined
-        my $DeplStateColor = $Self->{DeplStateColors}->{$DeplState} || '';
+        my $DeplStateColor = ( $Self->{DeplStateColors}->{$DeplState} || '' ) =~ s/[^0-9a-f]//msgr;
 
         my $Template = '<div class="Flag Small" title="[% Translate(Data.CurDeplState) | html %]"> ';
 
