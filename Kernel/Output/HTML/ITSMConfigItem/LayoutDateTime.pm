@@ -19,11 +19,14 @@ package Kernel::Output::HTML::ITSMConfigItem::LayoutDateTime;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
+
 our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Web::Request',
     'Kernel::System::DateTime',
+    'Kernel::System::User',
 );
 
 =head1 NAME
@@ -118,8 +121,28 @@ sub FormDataGet {
     my $Hour   = $ParamObject->GetParam( Param => $Param{Key} . '::Hour' )   || 0;
     my $Minute = $ParamObject->GetParam( Param => $Param{Key} . '::Minute' ) || 0;
 
-    if ( $Day && $Month && $Year ) {
-        $FormData{Value} = sprintf '%02d-%02d-%02d %02d:%02d', $Year, $Month, $Day, $Hour, $Minute;
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+            UserID => $Param{UserID},
+    );
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            Year     => $Year,
+            Month    => $Month,
+            Day      => $Day,
+            Hour     => $Hour,                                                                             # midnight
+            Minute   => $Minute,
+            TimeZone => $Preferences{UserTimeZone} || $Kernel::OM->Create('Kernel::System::DateTime')->UserDefaultTimeZoneGet(),
+        },
+    );
+
+    # Convert start time to local system time zone.
+    $DateTimeObject->ToOTOBOTimeZone();
+    my $DateTimeSettings = $DateTimeObject->Get();
+
+    if ( IsHashRefWithData($DateTimeSettings) ) {
+        $FormData{Value} = sprintf '%02d-%02d-%02d %02d:%02d', $DateTimeSettings->{Year}, $DateTimeSettings->{Month}, $DateTimeSettings->{Day}, $DateTimeSettings->{Hour}, $DateTimeSettings->{Minute};
     }
 
     # set invalid param
