@@ -25,6 +25,8 @@
             <label title="[% Translate(Data.Label) | html %]" style="[% Data.GridColumm | html %]">[% Translate(Data.Label) | html %]</label>
 [% ELSIF Data.Type == 'Value' %]
             <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]">[% Data.Value %]</p>
+[% ELSIF Data.Type == 'ValueLink' %]
+            <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></p>
 [% ELSIF Data.Type == 'FullRow' %]
             <div style="grid-column: 1 / 3">[% Data.Value %]</div>
 [% END %]

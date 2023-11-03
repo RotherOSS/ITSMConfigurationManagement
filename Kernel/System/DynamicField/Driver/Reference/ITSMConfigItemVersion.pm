@@ -52,7 +52,6 @@ return a hash of object descriptions.
 
     my %Description = $PluginObject->ObjectDescriptionGet(
         ObjectID => 123,
-        UserID   => 1,
     );
 
 Return
@@ -68,7 +67,7 @@ sub ObjectDescriptionGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(ObjectID UserID)) {
+    for my $Argument (qw(ObjectID)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',

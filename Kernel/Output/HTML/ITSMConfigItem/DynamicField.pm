@@ -89,9 +89,10 @@ sub PageRender {
         ( grep { $_->{Name} eq $Param{Page} } $Param{Definition}{DefinitionRef}{Pages}->@* )[0];
 
     if ( !IsHashRefWithData($Page) || !IsArrayRefWithData( $Page->{Content} ) ) {
-        my $ErrorMessage = defined $Param{PageRef} ? 'PageRef not valid.'
+        my $ErrorMessage = defined $Param{PageRef}
+            ? 'PageRef not valid.'
             : $Param{Page} ? "Page $Param{Page} not valid for DefinitionID $Param{Definition}{DefinitionID} of class $Param{Definition}{Class}."
-            : 'Need Page or PageRef!';
+            :                'Need Page or PageRef!';
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -250,6 +251,15 @@ sub _SectionRender {
                     Data => {
                         $DisplayValue->%*,
                         Type => 'FullRow',
+                    },
+                );
+            }
+            elsif ( $DisplayValue->{Link} ) {
+                $Param{LayoutObject}->Block(
+                    Name => 'FieldDisplayCell',
+                    Data => {
+                        $DisplayValue->%*,
+                        Type => 'ValueLink',
                     },
                 );
             }
