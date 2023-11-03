@@ -38,14 +38,17 @@ sub Run {
     my ( $Self, %Param ) = @_;
     my $Output;
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    # get neccessary objects
+    my $BackendObject        = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject          = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $SearchProfileObject  = $Kernel::OM->Get('Kernel::System::SearchProfile');
 
     # get config of frontend module
     $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
-
-    # get param object
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get config data
     $Self->{StartHit}    = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
@@ -60,16 +63,10 @@ sub Run {
     $Self->{SaveProfile}    = $ParamObject->GetParam( Param => 'SaveProfile' ) || '';
     $Self->{TakeLastSearch} = $ParamObject->GetParam( Param => 'TakeLastSearch' );
 
-    # get general catalog object
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-
     # get class list
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
-
-    # get config item object
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # check for access rights on the classes
     for my $ClassID ( sort keys %{$ClassList} ) {
@@ -86,9 +83,6 @@ sub Run {
     # get class id
     my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
     # check if class id is valid
     if ( $ClassID && !$ClassList->{$ClassID} ) {
         return $LayoutObject->ErrorScreen(
@@ -99,13 +93,6 @@ sub Run {
 
     # get single params
     my %GetParam;
-
-    # get search profile object
-    my $SearchProfileObject = $Kernel::OM->Get('Kernel::System::SearchProfile');
-
-    # get dynamic field backend object
-    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
     my $Definition;
 
     if ($ClassID) {
@@ -167,6 +154,8 @@ sub Run {
             DYNAMICFIELD:
             for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+                next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
                 # get search field preferences
                 my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
@@ -292,12 +281,8 @@ sub Run {
             );
         }
 
-        my %GetParam = $SearchProfileObject->SearchProfileGet(
-            Base      => 'ConfigItemSearch' . $ClassID,
-            Name      => $Self->{Profile},
-            UserLogin => $Self->{UserLogin},
-        );
-
+        # TODO maybe nicer to have this also in a sysconfig setting
+        # initializing with common attributes
         my @Attributes = (
             {
                 Key   => 'Number',
@@ -568,6 +553,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
@@ -812,6 +798,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
@@ -887,6 +874,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
