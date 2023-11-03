@@ -103,13 +103,97 @@ sub Run {
     # get search profile object
     my $SearchProfileObject = $Kernel::OM->Get('Kernel::System::SearchProfile');
 
-    # load profiles string params
-    if ( ( $ClassID && $Self->{Profile} ) && $Self->{TakeLastSearch} ) {
-        %GetParam = $SearchProfileObject->SearchProfileGet(
-            Base      => 'ConfigItemSearch' . $ClassID,
-            Name      => $Self->{Profile},
-            UserLogin => $Self->{UserLogin},
+    # get dynamic field backend object
+    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    my $Definition;
+
+    if ($ClassID) {
+
+        # get current definition
+        $Definition = $ConfigItemObject->DefinitionGet(
+            ClassID => $ClassID,
         );
+
+        # abort, if no definition is defined
+        if ( !$Definition->{DefinitionID} ) {
+            return $LayoutObject->ErrorScreen(
+                Message =>
+                    $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ClassID ),
+                Comment => Translatable('Please contact the administrator.'),
+            );
+        }
+
+        # load profiles string params
+        if ( $Self->{Profile} || $Self->{TakeLastSearch} ) {
+            %GetParam = $SearchProfileObject->SearchProfileGet(
+                Base      => 'ConfigItemSearch' . $ClassID,
+                Name      => $Self->{Profile},
+                UserLogin => $Self->{UserLogin},
+            );
+
+            # convert attributes
+            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
+                $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
+            }
+        }
+
+        # get search string params (get submitted params)
+        else {
+            for my $Key (qw(Number Name PreviousVersionSearch ResultForm ShownAttributes)) {
+
+                # get search string params (get submitted params)
+                $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+                # remove white space on the start and end
+                if ( $GetParam{$Key} ) {
+                    $GetParam{$Key} =~ s/\s+$//g;
+                    $GetParam{$Key} =~ s/^\s+//g;
+                }
+            }
+
+            # get array params
+            for my $Key (qw(DeplStateIDs InciStateIDs)) {
+
+                # get search array params (get submitted params)
+                my @Array = $ParamObject->GetArray( Param => $Key );
+                if (@Array) {
+                    $GetParam{$Key} = \@Array;
+                }
+            }
+
+            # get Dynamic fields from param object
+            # cycle trough the activated Dynamic Fields for this screen
+            DYNAMICFIELD:
+            for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                # get search field preferences
+                my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                );
+
+                next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+                PREFERENCE:
+                for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                    # extract the dynamic field value from the web request
+                    my $DynamicFieldValue = $BackendObject->SearchFieldValueGet(
+                        DynamicFieldConfig     => $DynamicFieldConfig,
+                        ParamObject            => $ParamObject,
+                        ReturnProfileStructure => 1,
+                        LayoutObject           => $LayoutObject,
+                        Type                   => $Preference->{Type},
+                    );
+
+                    # set the complete value structure in GetParam to store it later in the search profile
+                    if ( IsHashRefWithData($DynamicFieldValue) ) {
+                        %GetParam = ( %GetParam, %{$DynamicFieldValue} );
+                    }
+                }
+            }
+        }
     }
 
     # ------------------------------------------------------------ #
@@ -138,6 +222,12 @@ sub Run {
     # init search dialog (select class)
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'AJAX' ) {
+
+        # convert attributes
+        if ( IsArrayRefWithData( $GetParam{ShownAttributes} ) ) {
+            my @ShowAttributes = grep {defined} @{ $GetParam{ShownAttributes} };
+            $GetParam{ShownAttributes} = join ';', @ShowAttributes;
+        }
 
         # generate dropdown for selecting the class
         # automatically show search mask after selecting a class via AJAX
@@ -208,20 +298,6 @@ sub Run {
             UserLogin => $Self->{UserLogin},
         );
 
-        # get current definition
-        my $Definition = $ConfigItemObject->DefinitionGet(
-            ClassID => $ClassID,
-        );
-
-        # abort, if no definition is defined
-        if ( !$Definition->{DefinitionID} ) {
-            return $LayoutObject->ErrorScreen(
-                Message =>
-                    $LayoutObject->{LanguageObject}->Translate( 'No definition was defined for class %s!', $ClassID ),
-                Comment => Translatable('Please contact the administrator.'),
-            );
-        }
-
         my @Attributes = (
             {
                 Key   => 'Number',
@@ -241,9 +317,6 @@ sub Run {
             },
         );
 
-        # get dynamic field backend object
-        my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
         # dynamic fields
         my $DynamicFieldSeparator = 1;
 
@@ -253,7 +326,7 @@ sub Run {
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
-            next DYNAMICFIELD if $DynamicFieldConfig->{Name} eq '';
+            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # create a separator for dynamic fields attributes
             if ($DynamicFieldSeparator) {
@@ -309,6 +382,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             my $PossibleValuesFilter;
 
@@ -494,6 +568,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
             my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
@@ -523,6 +598,102 @@ sub Run {
                 );
             }
         }
+
+        # attributes for search
+        my @SearchAttributes;
+
+        my %GetParamBackup = %GetParam;
+
+        # show attributes
+        my @ShownAttributes;
+        if ( $GetParamBackup{ShownAttributes} ) {
+            @ShownAttributes = split /;/, $GetParamBackup{ShownAttributes};
+        }
+        my %AlreadyShown;
+
+        if ( $Self->{Profile} ) {
+            ITEM:
+            for my $Item (@Attributes) {
+                my $Key = $Item->{Key};
+                next ITEM if !$Key;
+
+                # check if shown
+                if (@ShownAttributes) {
+                    my $Show = 0;
+                    SHOWN_ATTRIBUTE:
+                    for my $ShownAttribute (@ShownAttributes) {
+                        if ( 'Label' . $Key eq $ShownAttribute ) {
+                            $Show = 1;
+                            last SHOWN_ATTRIBUTE;
+                        }
+                    }
+                    next ITEM if !$Show;
+                }
+                else {
+                    # Skip undefined
+                    next ITEM if !defined $GetParamBackup{$Key};
+
+                    # Skip empty strings
+                    next ITEM if $GetParamBackup{$Key} eq '';
+
+                    # Skip empty arrays
+                    if ( ref $GetParamBackup{$Key} eq 'ARRAY' && !@{ $GetParamBackup{$Key} } ) {
+                        next ITEM;
+                    }
+                }
+
+                # show attribute
+                next ITEM if $AlreadyShown{$Key};
+                $AlreadyShown{$Key} = 1;
+
+                push @SearchAttributes, $Key;
+            }
+        }
+
+        # No profile, show default screen
+        else {
+
+            # Merge regular show/hide settings and the settings for the dynamic fields
+            my %Defaults = %{ $Self->{Config}{Defaults} || {} };
+            for my $DynamicFields ( sort keys %{ $Self->{Config}{DynamicField} || {} } ) {
+                if ( $Self->{Config}{DynamicField}->{$DynamicFields} == 2 ) {
+                    $Defaults{"Search_DynamicField_$DynamicFields"} = 1;
+                }
+            }
+
+            my @OrderedDefaults;
+            if (%Defaults) {
+
+                # ordering attributes on the same order like in Attributes
+                for my $Item (@Attributes) {
+                    my $KeyAtr = $Item->{Key};
+                    for my $Key ( sort keys %Defaults ) {
+                        if ( $Key eq $KeyAtr ) {
+                            push @OrderedDefaults, $Key;
+                        }
+                    }
+                }
+
+                KEY:
+                for my $Key (@OrderedDefaults) {
+                    next KEY if $Key eq 'DynamicField';    # Ignore entry for DF config
+                    next KEY if $AlreadyShown{$Key};
+                    $AlreadyShown{$Key} = 1;
+
+                    push @SearchAttributes, $Key;
+                }
+            }
+
+            # If no attribute is shown, show fulltext search.
+            if ( !keys %AlreadyShown ) {
+                push @SearchAttributes, 'Fulltext';
+            }
+        }
+
+        $LayoutObject->AddJSData(
+            Key   => 'SearchAttributes',
+            Value => \@SearchAttributes,
+        );
 
         my @ProfileAttributes;
 
@@ -636,40 +807,37 @@ sub Run {
             );
         }
 
-        # get scalar search attributes (special handling for Number and Name)
-        FORMVALUE:
-        for my $FormValue (qw(Number Name)) {
+        # get Dynamic fields from param object
+        # cycle trough the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
-            my $Value = $ParamObject->GetParam( Param => $FormValue );
+            # get search field preferences
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
 
-            # must be defined and not be an empty string
-            # BUT the number 0 is an allowed value
-            next FORMVALUE if !defined $Value;
-            next FORMVALUE if $Value eq '';
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
 
-            $GetParam{$FormValue} = $Value;
-        }
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
 
-        # get ther scalar search attributes
-        FORMVALUE:
-        for my $FormValue (qw(PreviousVersionSearch ResultForm)) {
+                # extract the dynamic field value from the web request
+                my $DynamicFieldValue = $BackendObject->SearchFieldValueGet(
+                    DynamicFieldConfig     => $DynamicFieldConfig,
+                    ParamObject            => $ParamObject,
+                    ReturnProfileStructure => 1,
+                    LayoutObject           => $LayoutObject,
+                    Type                   => $Preference->{Type},
+                );
 
-            my $Value = $ParamObject->GetParam( Param => $FormValue );
-
-            next FORMVALUE if !$Value;
-
-            $GetParam{$FormValue} = $Value;
-        }
-
-        # get array search attributes
-        FORMARRAY:
-        for my $FormArray (qw(DeplStateIDs InciStateIDs)) {
-
-            my @Array = $ParamObject->GetArray( Param => $FormArray );
-
-            next FORMARRAY if !@Array;
-
-            $GetParam{$FormArray} = \@Array;
+                # set the complete value structure in GetParam to store it later in the search profile
+                if ( IsHashRefWithData($DynamicFieldValue) ) {
+                    %GetParam = ( %GetParam, %{$DynamicFieldValue} );
+                }
+            }
         }
 
         # save search profile (under last-search or real profile name)
@@ -678,6 +846,11 @@ sub Run {
         # remember last search values only if search is called from a search dialog
         # not from results page
         if ( $Self->{SaveProfile} && $Self->{Profile} && $SearchDialog ) {
+
+            # convert attributes
+            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
+                $GetParam{ShownAttributes} = [ split /;/, $GetParam{ShownAttributes} ];
+            }
 
             # remove old profile stuff
             $SearchProfileObject->SearchProfileDelete(
@@ -700,6 +873,61 @@ sub Run {
             }
         }
 
+        my %AttributeLookup;
+
+        # create attribute lookup table
+        for my $Attribute ( @{ $GetParam{ShownAttributes} || [] } ) {
+            $AttributeLookup{$Attribute} = 1;
+        }
+
+        # dynamic fields search parameters for ticket search
+        my %DynamicFieldSearchParameters;
+
+        # cycle trough the activated Dynamic Fields for this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
+
+            # get search field preferences
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                if (
+                    !$AttributeLookup{
+                        'LabelSearch_DynamicField_'
+                            . $DynamicFieldConfig->{Name}
+                            . $Preference->{Type}
+                    }
+                    )
+                {
+                    next PREFERENCE;
+                }
+
+                # extract the dynamic field value from the profile
+                my $SearchParameter = $BackendObject->SearchFieldParameterBuild(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Profile            => \%GetParam,
+                    LayoutObject       => $LayoutObject,
+                    Type               => $Preference->{Type},
+                );
+
+                # set search parameter
+                if ( defined $SearchParameter ) {
+                    $DynamicFieldSearchParameters{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $SearchParameter->{Parameter};
+                }
+            }
+        }
+
+        # attributes for search
+        my @SearchAttributes;
+
         my @SearchResultList;
 
         # start search if called from a search dialog or from a results page
@@ -708,18 +936,13 @@ sub Run {
             # start search
             @SearchResultList = $ConfigItemObject->ConfigItemSearch(
                 %GetParam,
+                %DynamicFieldSearchParameters,
                 OrderBy  => [ $Self->{OrderBy} ],
                 SortBy   => [ $Self->{SortBy} ],
                 Limit    => $Self->{SearchLimit},
                 ClassIDs => [$ClassID],
                 Result   => 'ARRAY',
             );
-        }
-
-        # get param only if called from a search dialog, otherwise it must be already in %GetParam
-        # from a loaded profile
-        if ($SearchDialog) {
-            $GetParam{ResultForm} = $ParamObject->GetParam( Param => 'ResultForm' );
         }
 
         # CSV output
