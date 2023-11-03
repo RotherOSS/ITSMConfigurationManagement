@@ -192,7 +192,6 @@
                         <!--
                         <Item>Core.UI.AllocationList.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
-                        <Item>ITSM.Agent.ConfigItem.Overview.js</Item>
                         -->
                     </Array>
                 </Item>
@@ -204,7 +203,6 @@
                         <!---
                         <Item>Core.AllocationList.css</Item>
                         <Item>ITSM.Agent.Default.css</Item>
-                        <Item>ITSM.Agent.ConfigItem.Overview.css</Item>
                         -->
                     </Array>
                 </Item>
