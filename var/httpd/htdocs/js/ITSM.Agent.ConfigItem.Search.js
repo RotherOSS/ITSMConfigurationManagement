@@ -304,12 +304,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
 
         // load profile
         $('#SearchProfile').bind('change', function () {
-            var SearchProfile = $('#SearchProfile').val(),
-                SearchProfileClassID = $('#SearchClassID').val(),
-                SearchProfileAction = $('#SearchAction').val();
-
-            TargetNS.OpenSearchDialog(SearchProfileAction, SearchProfile, SearchProfileClassID);
-            return false;
+            ITSM.Agent.ConfigItem.Search.LoadProfile( $(this).val() );
         });
 
         // show add profile block or not
@@ -421,9 +416,41 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
     TargetNS.LoadProfile = function (Profile) {
         var BaseLink = Core.Config.Get('Baselink'),
             Action = 'Action=AgentITSMConfigItemSearch;',
-            SubAction = 'Subaction=AJAXUpdate;',
+            SubAction = 'Subaction=LoadProfile;',
             ClassID = 'ClassID=' + $('#SearchClassID').val() + ';',
             SearchProfile = 'Profile=' + Profile,
+            URL =  BaseLink + Action + SubAction + ClassID + SearchProfile;
+
+        $('#DivClassID').addClass('ui-autocomplete-loading');
+        Core.AJAX.ContentUpdate($('#AJAXUpdate'), URL, function() {
+            var ITSMSearchProfileAttributes = Core.Config.Get('ITSMSearchProfileAttributes') || [];
+            $.each(ITSMSearchProfileAttributes, function(Idx, Attribute) {
+                ITSM.Agent.ConfigItem.Search.SearchAttributeAdd(Core.App.EscapeSelector(Attribute));
+                ITSM.Agent.ConfigItem.Search.AdditionalAttributeSelectionRebuild();
+            });
+
+            TargetNS.SetSearchDialog( '$Env{"Action"}' );
+            $('#ITSMSearchProfile').removeClass('Hidden');
+            $('#ITSMSearchFields').removeClass('Hidden');
+            $('.Dialog:visible #SearchFormSubmit').appendTo($('.Dialog:visible > .Content > .ContentFooter'));
+            $('#SearchFormSubmit').removeClass('Hidden');
+            $('#DivClassID').removeClass('ui-autocomplete-loading');
+            Core.UI.InputFields.Activate($('#SearchForm'));
+        });
+    };
+
+    /**
+     * @function
+     * @param {ClassID} The class id that is set to the search dialog
+     * @return nothing
+     *      This function refresh the search dialog with the selected class
+     */
+
+    TargetNS.LoadClass = function (Profile) {
+        var BaseLink = Core.Config.Get('Baselink'),
+            Action = 'Action=AgentITSMConfigItemSearch;',
+            SubAction = 'Subaction=AJAXUpdate;',
+            ClassID = 'ClassID=' + $('#SearchClassID').val() + ';',
             URL =  BaseLink + Action + SubAction + ClassID + SearchProfile;
 
         $('#DivClassID').addClass('ui-autocomplete-loading');

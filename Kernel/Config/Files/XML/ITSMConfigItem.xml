@@ -1204,13 +1204,25 @@
         <Value>
             <Array>
                 <Item Translatable="1">Class</Item>
-                <Item Translatable="1">Incident State</Item>
+                <Item Translatable="1">InciState</Item>
                 <Item Translatable="1">Name</Item>
-                <Item Translatable="1">ConfigItemNumber</Item>
-                <Item Translatable="1">Deployment State</Item>
+                <Item Translatable="1">Number</Item>
+                <Item Translatable="1">DeplState</Item>
                 <Item Translatable="1">Version</Item>
-                <Item Translatable="1">Create Time</Item>
+                <Item Translatable="1">CreateTime</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="ITSM::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic Fields used to export the search result in CSV format.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                </DefaultItem>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit" Required="1" Valid="1">

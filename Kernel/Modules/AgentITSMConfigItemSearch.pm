@@ -112,7 +112,7 @@ sub Run {
         }
 
         # load profiles string params
-        if ( $Self->{Profile} || $Self->{TakeLastSearch} ) {
+        if ( ( $Self->{Subaction} eq 'LoadProfile' && $Self->{Profile} ) || $Self->{TakeLastSearch} ) {
             %GetParam = $SearchProfileObject->SearchProfileGet(
                 Base      => 'ConfigItemSearch' . $ClassID,
                 Name      => $Self->{Profile},
@@ -124,9 +124,9 @@ sub Run {
                 $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
             }
         }
-
-        # get search string params (get submitted params)
         else {
+
+            # get search string params (get submitted params)
             for my $Key (qw(Number Name PreviousVersionSearch ResultForm ShownAttributes)) {
 
                 # get search string params (get submitted params)
@@ -212,6 +212,38 @@ sub Run {
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'AJAX' ) {
 
+        my $EmptySearch = $ParamObject->GetParam( Param => 'EmptySearch' );
+        if ( !$Self->{Profile} ) {
+            $EmptySearch = 1;
+        }
+        my %GetParam = $SearchProfileObject->SearchProfileGet(
+            Base      => 'ConfigItemSearch' . $ClassID,
+            Name      => $Self->{Profile},
+            UserLogin => $Self->{UserLogin},
+        );
+
+        # if no profile is used, set default params of default attributes
+        if ( !$Self->{Profile} ) {
+            if ( $Self->{Config}{Defaults} ) {
+                KEY:
+                for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
+                    next KEY if !$Self->{Config}{Defaults}->{$Key};
+                    next KEY if $Key eq 'DynamicField';
+
+                    if ( $Key =~ /^(ConfigItem)(Create|Change)/ ) {
+                        my @Items = split /;/, $Self->{Config}{Defaults}->{$Key};
+                        for my $Item (@Items) {
+                            my ( $Key, $Value ) = split /=/, $Item;
+                            $GetParam{$Key} = $Value;
+                        }
+                    }
+                    else {
+                        $GetParam{$Key} = $Self->{Config}{Defaults}->{$Key};
+                    }
+                }
+            }
+        }
+
         # convert attributes
         if ( IsArrayRefWithData( $GetParam{ShownAttributes} ) ) {
             my @ShowAttributes = grep {defined} @{ $GetParam{ShownAttributes} };
@@ -236,6 +268,7 @@ sub Run {
                 ClassOptionStrg => $ClassOptionStrg,
                 Profile         => $Self->{Profile},
                 ClassID         => $ClassID,
+                EmptySearch     => $EmptySearch,
             },
         );
 
@@ -255,7 +288,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # set search fields for selected class
     # ------------------------------------------------------------ #
-    elsif ( $Self->{Subaction} eq 'AJAXUpdate' ) {
+    elsif ( $Self->{Subaction} eq 'AJAXUpdate' || $Self->{Subaction} eq 'LoadProfile' ) {
 
         # ClassID is required for the search mask and for actual searching
         if ( !$ClassID ) {
@@ -933,6 +966,13 @@ sub Run {
             );
         }
 
+        # get the confconfig item dynamic fields for CSV display
+        my $CSVDynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+            Valid       => 1,
+            ObjectType  => ['ITSMConfigItem'],
+            FieldFilter => $Self->{Config}{SearchCSVDynamicField} || {},
+        );
+
         # CSV output
         if (
             $GetParam{ResultForm} eq 'CSV'
@@ -940,19 +980,22 @@ sub Run {
             $GetParam{ResultForm} eq 'Excel'
             )
         {
-            my @CSVData;
-            my @CSVHead;
+            # create head (actual head and head for data fill)
+            my @TmpCSVHead = @{ $Self->{Config}{SearchCSVData} };
+            my @CSVHead    = @{ $Self->{Config}{SearchCSVData} };
 
-            # mapping between header name and data field
-            my %Header2Data = (
-                'Class'            => 'Class',
-                'Incident State'   => 'InciState',
-                'Name'             => 'Name',
-                'ConfigItemNumber' => 'Number',
-                'Deployment State' => 'DeplState',
-                'Version'          => 'VersionID',
-                'Create Time'      => 'CreateTime',
-            );
+            # include the selected dynamic fields in CVS results
+            DYNAMICFIELD:
+            for my $DynamicFieldConfig ( @{$CSVDynamicField} ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+                next DYNAMICFIELD if $DynamicFieldConfig->{Name} eq '';
+
+                push @TmpCSVHead, 'DynamicField_' . $DynamicFieldConfig->{Name};
+                push @CSVHead,    $DynamicFieldConfig->{Label};
+            }
+
+            my @CSVData;
 
             CONFIGITEMID:
             for my $ConfigItemID (@SearchResultList) {
@@ -979,8 +1022,40 @@ sub Run {
 
                 # store data
                 my @Data;
-                for my $Header (@CSVHead) {
-                    push @Data, $LastVersion->{ $Header2Data{$Header} };
+                for my $Header (@TmpCSVHead) {
+
+                    # check if header is a dynamic field and get the value from dynamic field
+                    # backend
+                    if ( $Header =~ m{\A DynamicField_ ( [a-zA-Z\d]+ ) \z}xms ) {
+
+                        # loop over the dynamic fields configured for CSV output
+                        DYNAMICFIELD:
+                        for my $DynamicFieldConfig ( @{$CSVDynamicField} ) {
+                            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+                            # skip all fields that does not match with current field name ($1)
+                            # with out the 'DynamicField_' prefix
+                            next DYNAMICFIELD if $DynamicFieldConfig->{Name} ne $1;
+
+                            # get the value as for print (to correctly display)
+                            my $ValueStrg = $BackendObject->DisplayValueRender(
+                                DynamicFieldConfig => $DynamicFieldConfig,
+                                Value              => $LastVersion->{$Header},
+                                HTMLOutput         => 0,
+                                LayoutObject       => $LayoutObject,
+                            );
+                            push @Data, $ValueStrg->{Value};
+
+                            # terminate the DYNAMICFIELD loop
+                            last DYNAMICFIELD;
+                        }
+                    }
+
+                    # otherwise retrieve data from article
+                    else {
+                        push @Data, $LastVersion->{$Header};
+                    }
                 }
                 push @CSVData, \@Data;
             }
@@ -1326,6 +1401,7 @@ sub Run {
         # output template
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AgentITSMConfigItemSearch',
+            Data         => \%Param,
         );
 
         # output footer
