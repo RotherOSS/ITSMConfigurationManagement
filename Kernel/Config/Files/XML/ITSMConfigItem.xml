@@ -1213,7 +1213,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="ITSM::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField" Required="0" Valid="1">
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic Fields used to export the search result in CSV format.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemSearch</Navigation>
         <Value>
