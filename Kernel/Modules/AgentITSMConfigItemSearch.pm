@@ -216,11 +216,6 @@ sub Run {
         if ( !$Self->{Profile} ) {
             $EmptySearch = 1;
         }
-        my %GetParam = $SearchProfileObject->SearchProfileGet(
-            Base      => 'ConfigItemSearch' . $ClassID,
-            Name      => $Self->{Profile},
-            UserLogin => $Self->{UserLogin},
-        );
 
         # if no profile is used, set default params of default attributes
         if ( !$Self->{Profile} ) {
@@ -1012,7 +1007,8 @@ sub Run {
 
                 # get version
                 my $LastVersion = $ConfigItemObject->ConfigItemGet(
-                    ConfigItemID => $ConfigItemID,
+                    ConfigItemID  => $ConfigItemID,
+                    DynamicFields => 1,
                 );
 
                 # csv quote
@@ -1026,7 +1022,7 @@ sub Run {
 
                     # check if header is a dynamic field and get the value from dynamic field
                     # backend
-                    if ( $Header =~ m{\A DynamicField_ ( [a-zA-Z\d]+ ) \z}xms ) {
+                    if ( $Header =~ m{\A DynamicField_ ( [a-zA-Z\d\-]+ ) \z}xms ) {
 
                         # loop over the dynamic fields configured for CSV output
                         DYNAMICFIELD:
