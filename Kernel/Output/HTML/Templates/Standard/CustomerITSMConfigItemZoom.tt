@@ -79,7 +79,7 @@
                     <div class="Field">
                         [% Data.VersionSelection %]
                     </div>
-                    <label for="VersionSelection">[% Translate("Version") %]</label>
+                    <label for="VersionSelection">[% Translate("Version") | html %]</label>
                 </div>
 [% RenderBlockEnd("Versions") %]
             </div>

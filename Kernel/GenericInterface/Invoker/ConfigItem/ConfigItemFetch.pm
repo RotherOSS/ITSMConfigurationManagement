@@ -175,7 +175,6 @@ sub HandleResponse {
     );
 
     my %GeneralCatalogItemLookup;
-    my %DefinitionLookup;
     my %NameModuleObjects;
     my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
     CI:
