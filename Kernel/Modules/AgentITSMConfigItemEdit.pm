@@ -838,13 +838,11 @@ sub Run {
     my $NameEditable   = $NameModuleObject ? 0 : 1;
     my $RowNameInvalid = $ConfigItem->{Name}
 
-        # if a name exists mark regex and duplicate errors
-        ? $CINameRegexErrorMessage || IsArrayRefWithData($NameDuplicates)
-            ? 'ServerError' : undef
+        # If a name exists then mark regex and duplicate errors.
+        ? ( ( $CINameRegexErrorMessage || IsArrayRefWithData($NameDuplicates) ) ? 'ServerError' : undef )
 
-        # if it does not exist mark it, if it should
-        : $Self->{Subaction} eq 'Save' && $NameEditable
-            ? 'ServerError' : undef;
+        # If the name does not exist but should exist then mark it.
+        : ( ( $Self->{Subaction} eq 'Save' && $NameEditable ) ? 'ServerError' : undef );
 
     # output name block
     if ( $ConfigItem->{Name} || $NameEditable ) {
