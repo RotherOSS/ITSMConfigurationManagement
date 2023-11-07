@@ -16,29 +16,39 @@
 
 package Kernel::System::ITSMConfigItem::Definition;
 
+=head1 NAME
+
+Kernel::System::ITSMConfigItem::Definition - sub module of Kernel::System::ITSMConfigItem
+
+=head1 DESCRIPTION
+
+All functions related to the definition of config item classes and roles.
+
+=head1 PUBLIC INTERFACE
+
+=cut
+
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
 use List::Util qw(any);
 
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
-=head1 NAME
-
-Kernel::System::ITSMConfigItem::Definition - sub module of Kernel::System::ITSMConfigItem
-
-=head1 PUBLIC INTERFACE
-
-=head1 DESCRIPTION
-
-All definition functions.
-
 =head2 DefinitionList()
 
-return a config item definition list as array-hash reference
+return a config item definition list for a class as an array-hash reference. The list
+is sorted by version.
 
     my $DefinitionListRef = $ConfigItemObject->DefinitionList(
         ClassID => 123,
@@ -91,6 +101,7 @@ sub DefinitionList {
             Priority => 'error',
             Message  => 'Need ClassID!',
         );
+
         return;
     }
 
@@ -165,6 +176,7 @@ sub DefinitionGet {
             Priority => 'error',
             Message  => 'Need DefinitionID or ClassID!',
         );
+
         return;
     }
 
@@ -282,7 +294,7 @@ sub DefinitionAdd {
         Definition => $Param{Definition},
     );
 
-    return $CheckResult if !$CheckResult->{Success};
+    return $CheckResult unless $CheckResult->{Success};
 
     # get last definition
     my $LastDefinition = $Self->DefinitionGet(
@@ -325,7 +337,7 @@ sub DefinitionAdd {
         Bind => [ \$Param{ClassID}, \$Param{Definition}, \$DynamicFieldDefinition, \$Version, \$Param{UserID} ],
     );
 
-    return if !$Success;
+    return unless $Success;
 
     # get id of new definition
     my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
@@ -386,7 +398,8 @@ sub DefinitionCheck {
         };
     };
 
-    my $DefinitionRef = $YAMLObject->Load(
+    # simple YAML parsing, without using YAML tags
+    my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
         Data => $Param{Definition},
     );
 
@@ -630,7 +643,7 @@ sub DefinitionSetOutOfSync {
         }
     }
 
-    return 1 if !%New;
+    return 1 unless %New;
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -703,7 +716,7 @@ sub DefinitionSync {
 
     my %OutOfSync = $Self->DefinitionNeedSync();
 
-    return 1 if !%OutOfSync;
+    return 1 unless %OutOfSync;
 
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
@@ -773,7 +786,7 @@ sub DefinitionSync {
                 ClassID => $Param{ClassID},
             );
 
-            next CLASS if !$NeedsSync;
+            next CLASS unless $NeedsSync;
         }
 
         $Self->DefinitionAdd(
@@ -791,7 +804,7 @@ sub DefinitionSync {
 
 =head2 _DefinitionPrepare()
 
-Prepare the syntax of a new definition
+Prepare the syntax of a new definition.
 
     my $True = $ConfigItemObject->_DefinitionPrepare(
         DefinitionRef => $ArrayRef,
@@ -814,9 +827,7 @@ sub _DefinitionPrepare {
     for my $Item ( @{ $Param{DefinitionRef} } ) {
 
         # set CountMin
-        if ( !defined $Item->{CountMin} ) {
-            $Item->{CountMin} = 1;
-        }
+        $Item->{CountMin} //= 1;
 
         # set CountMax
         $Item->{CountMax} ||= 1;
@@ -827,9 +838,7 @@ sub _DefinitionPrepare {
         }
 
         # set CountDefault
-        if ( !defined $Item->{CountDefault} ) {
-            $Item->{CountDefault} = 1;
-        }
+        $Item->{CountDefault} //= 1;
         if ( $Item->{CountDefault} < $Item->{CountMin} ) {
             $Item->{CountDefault} = $Item->{CountMin};
         }
@@ -911,16 +920,16 @@ sub _DefinitionDynamicFieldGet {
         for my $Name ( keys %DynamicFields ) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
 
-            next DYNAMICFIELD if !$DynamicField;
-            next DYNAMICFIELD if !$DynamicField->{ValidID} eq '1';
+            next DYNAMICFIELD unless $DynamicField;
+            next DYNAMICFIELD unless $DynamicField->{ValidID} eq '1';
 
             # for set fields also the contained dynamic fields have to be versioned
             if ( $DynamicField->{FieldType} eq 'Set' ) {
-                next DYNAMICFIELD if !IsArrayRefWithData( $DynamicField->{Config}{Include} );
+                next DYNAMICFIELD unless IsArrayRefWithData( $DynamicField->{Config}{Include} );
 
                 INCLUDED:
                 for my $IncludedDF ( $DynamicField->{Config}{Include}->@* ) {
-                    next INCLUDED if !$IncludedDF->{DF};
+                    next INCLUDED unless $IncludedDF->{DF};
 
                     my $IncludedDFConfig = $DynamicFieldObject->DynamicFieldGet( Name => $IncludedDF->{DF} );
 

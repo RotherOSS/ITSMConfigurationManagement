@@ -21,6 +21,7 @@ use strict;
 use warnings;
 
 # core modules
+use List::Util qw(first);
 
 # CPAN modules
 
@@ -85,9 +86,8 @@ sub PageRender {
         }
     }
 
-    my $Page = defined $Param{PageRef} ? $Param{PageRef} :
-        ( grep { $_->{Name} eq $Param{Page} } $Param{Definition}{DefinitionRef}{Pages}->@* )[0];
-
+    my $DefinitionRef = $Param{Definition}{DefinitionRef};
+    my $Page          = $Param{PageRef} // first { $_->{Name} eq $Param{Page} } $DefinitionRef->{Pages}->@*;
     if ( !IsHashRefWithData($Page) || !IsArrayRefWithData( $Page->{Content} ) ) {
         my $ErrorMessage = defined $Param{PageRef}
             ? 'PageRef not valid.'
@@ -122,17 +122,19 @@ sub PageRender {
         );
     }
 
-    # TODO: Include "Include"-sections
-    my %Sections = $Param{Definition}{DefinitionRef}{Sections} ? $Param{Definition}{DefinitionRef}{Sections}->%* : ();
-
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     {
+        my $Sections = $DefinitionRef->{Sections} // {};
         my %KeyToCss = qw/Row row Column column/;
 
         CONTENTBLOCK:
         for my $ContentBlock ( $Page->{Content}->@* ) {
-            next CONTENTBLOCK if !$Sections{ $ContentBlock->{Section} };
+
+            # The role is included in the section name
+            my $Section = $Sections->{ $ContentBlock->{Section} };
+
+            next CONTENTBLOCK unless $Section;
 
             my $GridArea;
             for my $Key (qw/Row Column/) {
@@ -154,7 +156,7 @@ sub PageRender {
             $Self->_SectionRender(
                 %Param,
                 LayoutObject => $LayoutObject,
-                Section      => $Sections{ $ContentBlock->{Section} },
+                Section      => $Section,
             );
         }
     }

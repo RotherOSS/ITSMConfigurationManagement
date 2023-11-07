@@ -16,8 +16,11 @@
 
 package Kernel::Modules::AdminITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
 # core modules
 
@@ -32,10 +35,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -45,13 +45,14 @@ sub Run {
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # get class list
+    # get class list and check it
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
-    return $LayoutObject->ErrorScreen() if !$ClassList;
-    return $LayoutObject->ErrorScreen() if ref $ClassList ne 'HASH';
-    return $LayoutObject->ErrorScreen() if !%{$ClassList};
+
+    return $LayoutObject->ErrorScreen unless $ClassList;
+    return $LayoutObject->ErrorScreen unless ref $ClassList eq 'HASH';
+    return $LayoutObject->ErrorScreen unless $ClassList->%*;
 
     # get needed objects
     my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -59,14 +60,14 @@ sub Run {
     my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
 
     # ------------------------------------------------------------ #
-    # definition list
+    # list of the versions of the definition of a config item class
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'DefinitionList' ) {
 
         # get class id
         my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
 
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) if !$ClassID;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
         # generate ClassOptionStrg
         my $ClassOptionStrg = $LayoutObject->BuildSelection(
@@ -103,7 +104,7 @@ sub Run {
             ClassID => $ClassID,
         );
 
-        for my $Definition ( reverse @{$DefinitionList} ) {
+        for my $Definition ( reverse $DefinitionList->@* ) {
 
             # get user data
             my $FullName = $UserObject->UserName(
@@ -141,14 +142,14 @@ sub Run {
     }
 
     # ------------------------------------------------------------ #
-    # definition view
+    # class definition view
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'DefinitionView' ) {
 
         # get definition id
         my $DefinitionID = $ParamObject->GetParam( Param => 'DefinitionID' );
 
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) if !$DefinitionID;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $DefinitionID;
 
         # get definition
         my $Definition = $ConfigItemObject->DefinitionGet(
@@ -169,7 +170,7 @@ sub Run {
             Class        => 'Modernize',
         );
 
-        # output overview
+        # output overview result
         $LayoutObject->Block(
             Name => 'Overview',
             Data => {
@@ -194,7 +195,7 @@ sub Run {
         $LayoutObject->Block(
             Name => 'DefinitionView',
             Data => {
-                %{$Definition},
+                $Definition->%*,
                 CreateByUser => $UserName,
             },
         );
@@ -219,21 +220,21 @@ sub Run {
     }
 
     # ------------------------------------------------------------ #
-    # definition change
+    # class definition change
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'DefinitionChange' ) {
 
         # get class id
         my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
 
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) if !$ClassID;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
         # get class list
         my $ClassList = $GeneralCatalogObject->ItemList(
             Class => 'ITSM::ConfigItem::Class',
         );
 
-        # get definition
+        # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
         );
@@ -317,7 +318,8 @@ sub Run {
         my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Definition{Definition},
         );
-        return $LayoutObject->ErrorScreen() if ref $DefinitionRef ne 'HASH';
+
+        return $LayoutObject->ErrorScreen unless ref $DefinitionRef eq 'HASH';
 
         # add to database
         my $Result = $ConfigItemObject->DefinitionAdd(
