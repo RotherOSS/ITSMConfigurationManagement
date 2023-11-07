@@ -69,34 +69,17 @@ sub Run {
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
-        # generate ClassOptionStrg
-        my $ClassOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $ClassList,
-            Name         => 'ClassID',
-            PossibleNone => 1,
-            Translation  => 0,
-            SelectedID   => $ClassID,
-            Class        => 'Modernize',
-        );
-
-        # output overview
-        $LayoutObject->Block(
-            Name => 'Overview',
-            Data => {
-                ClassOptionStrg => $ClassOptionStrg,
-                ClassSelected   => {
-                    ID   => $ClassID,
-                    Name => $ClassList->{$ClassID},
-                },
-            },
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original         => \%Param,
+            ClassList        => $ClassList,
+            RoleList         => $RoleList,
+            ShowOverviewLink => 1,
         );
 
         # output overview result
         $LayoutObject->Block(
             Name => 'DefinitionList',
-            Data => {
-                Name => $ClassList->{$ClassID},
-            },
         );
 
         # get definition list
@@ -115,36 +98,29 @@ sub Run {
             $LayoutObject->Block(
                 Name => 'DefinitionListRow',
                 Data => {
-                    %{$Definition},
+                    $Definition->%*,
                     Class        => $ClassList->{$ClassID},
                     CreateByUser => $FullName,
                 },
             );
         }
 
-        # ActionOverview
-        $LayoutObject->Block(
-            Name => 'ActionOverview',
-        );
-
-        # output header
-        my $Output = $LayoutObject->Header();
-        $Output .= $LayoutObject->NavigationBar();
-
         # generate output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AdminITSMConfigItem',
-            Data         => \%Param,
-        );
-        $Output .= $LayoutObject->Footer();
-
-        return $Output;
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
     }
+
 
     # ------------------------------------------------------------ #
     # class definition view
     # ------------------------------------------------------------ #
-    elsif ( $Self->{Subaction} eq 'DefinitionView' ) {
+    if ( $Self->{Subaction} eq 'DefinitionView' ) {
 
         # get definition id
         my $DefinitionID = $ParamObject->GetParam( Param => 'DefinitionID' );
@@ -156,37 +132,26 @@ sub Run {
             DefinitionID => $DefinitionID,
         );
 
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original      => \%Param,
+            ClassList     => $ClassList,
+            RoleList      => $RoleList,
+            ClassSelected => {
+                ID   => $Definition->{ClassID},
+                Name => $Definition->{Class},
+            },
+            ClassVersionSelected => {
+                ID      => $DefinitionID,
+                Version => $Definition->{Version},
+            },
+            ShowOverviewLink => 1,
+        );
+
         $Definition->{DefinitionString} = $LayoutObject->Ascii2Html(
             Text => $Definition->{Definition},
         );
 
-        # generate ClassOptionStrg
-        my $ClassOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $ClassList,
-            Name         => 'ClassID',
-            PossibleNone => 1,
-            Translation  => 0,
-            SelectedID   => $Definition->{ClassID},
-            Class        => 'Modernize',
-        );
-
-        # output overview result
-        $LayoutObject->Block(
-            Name => 'Overview',
-            Data => {
-                ClassOptionStrg => $ClassOptionStrg,
-                ClassSelected   => {
-                    ID   => $Definition->{ClassID},
-                    Name => $Definition->{Class},
-                },
-                VersionSelected => {
-                    ID      => $DefinitionID,
-                    Version => $Definition->{Version},
-                },
-            },
-        );
-
-        # get user data
         my $UserName = $UserObject->UserName(
             UserID => $Definition->{CreateBy},
         );
@@ -200,66 +165,43 @@ sub Run {
             },
         );
 
-        # ActionOverview
-        $LayoutObject->Block(
-            Name => 'ActionOverview',
-        );
-
-        # output header
-        my $Output = $LayoutObject->Header();
-        $Output .= $LayoutObject->NavigationBar();
-
         # generate output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AdminITSMConfigItem',
-            Data         => \%Param,
-        );
-        $Output .= $LayoutObject->Footer();
-
-        return $Output;
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
     }
 
     # ------------------------------------------------------------ #
     # class definition change
     # ------------------------------------------------------------ #
-    elsif ( $Self->{Subaction} eq 'DefinitionChange' ) {
+    if ( $Self->{Subaction} eq 'DefinitionChange' ) {
 
         # get class id
         my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
-        # get class list
-        my $ClassList = $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        );
-
         # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
         );
 
-        # generate ClassOptionStrg
-        my $ClassOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $ClassList,
-            Name         => 'ClassID',
-            PossibleNone => 1,
-            Translation  => 0,
-            SelectedID   => $ClassID,
-            Class        => 'Modernize',
-        );
-
-        # output overview
-        $LayoutObject->Block(
-            Name => 'Overview',
-            Data => {
-                ClassOptionStrg => $ClassOptionStrg,
-                ClassSelected   => {
-                    ID   => $Definition->{ClassID},
-                    Name => $Definition->{Class},
-                },
-                Edit => 1,
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original      => \%Param,
+            ClassList     => $ClassList,
+            RoleList      => $RoleList,
+            ClassSelected => {
+                ID   => $Definition->{ClassID},
+                Name => $Definition->{Class},
             },
+            Edit             => 1,
+            ShowOverviewLink => 1,
         );
 
         # output overview result
@@ -275,29 +217,22 @@ sub Run {
             },
         );
 
-        # ActionOverview
-        $LayoutObject->Block(
-            Name => 'ActionOverview',
-        );
-
-        # output header
-        my $Output = $LayoutObject->Header();
-        $Output .= $LayoutObject->NavigationBar();
-
         # generate output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AdminITSMConfigItem',
-            Data         => \%Param,
-        );
-        $Output .= $LayoutObject->Footer();
-
-        return $Output;
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
     }
 
+
     # ------------------------------------------------------------ #
-    # definition save
+    # class definition save
     # ------------------------------------------------------------ #
-    elsif ( $Self->{Subaction} eq 'DefinitionSave' ) {
+    if ( $Self->{Subaction} eq 'DefinitionSave' ) {
         my %Definition;
 
         # get params
@@ -335,32 +270,17 @@ sub Run {
                 ErrorClasses => 'ServerError Error',
             );
 
-            # get class list
-            my $ClassList = $GeneralCatalogObject->ItemList(
-                Class => 'ITSM::ConfigItem::Class',
-            );
-
-            # generate ClassOptionStrg
-            my $ClassOptionStrg = $LayoutObject->BuildSelection(
-                Data         => $ClassList,
-                Name         => 'ClassID',
-                PossibleNone => 1,
-                Translation  => 0,
-                SelectedID   => $Definition{ClassID},
-                Class        => 'Modernize',
-            );
-
-            # output overview
-            $LayoutObject->Block(
-                Name => 'Overview',
-                Data => {
-                    ClassOptionStrg => $ClassOptionStrg,
-                    ClassSelected   => {
-                        ID   => $Definition{ClassID},
-                        Name => $ClassList->{ $Definition{ClassID} },
-                    },
-                    Edit => 1,
+            # show sidebar, activate the 'Overview' block
+            $Self->_ShowSidebar(
+                Original      => \%Param,
+                ClassList     => $ClassList,
+                RoleList      => $RoleList,
+                ClassSelected => {
+                    ID   => $Definition{ClassID},
+                    Name => $ClassList->{ $Definition{ClassID} },
                 },
+                Edit             => 1,
+                ShowOverviewLink => 1,
             );
 
             # output overview result
@@ -377,25 +297,18 @@ sub Run {
                 },
             );
 
-            # ActionOverview
-            $LayoutObject->Block(
-                Name => 'ActionOverview',
-            );
-
             # output header
-            my $Output = $LayoutObject->Header();
-            $Output .= $LayoutObject->NavigationBar();
-
             # generate output
-            $Output .= $LayoutObject->Output(
-                TemplateFile => 'AdminITSMConfigItem',
-                Data         => {
-                    %Param,
-                },
-            );
-            $Output .= $LayoutObject->Footer();
-
-            return $Output;
+            return join '',
+                $LayoutObject->Header,
+                $LayoutObject->NavigationBar,
+                $LayoutObject->Output(
+                    TemplateFile => 'AdminITSMConfigItem',
+                    Data         => {
+                        %Param,
+                    },
+                ),
+                $LayoutObject->Footer;
         }
 
         my $ContinueAfterSave = $ParamObject->GetParam( Param => 'ContinueAfterSave' );
@@ -409,33 +322,24 @@ sub Run {
     }
 
     # ------------------------------------------------------------ #
-    # config item class overview
+    # config item class overview is the default
     # ------------------------------------------------------------ #
-    else {
+    if (1) {
 
-        # generate ClassOptionStrg
-        my $ClassOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $ClassList,
-            Name         => 'ClassID',
-            PossibleNone => 1,
-            Translation  => 0,
-            Class        => 'Modernize',
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original         => \%Param,
+            ClassList        => $ClassList,
+            RoleList         => $RoleList,
+            ShowOverviewLink => 0,
         );
 
-        # output overview
-        $LayoutObject->Block(
-            Name => 'Overview',
-            Data => {
-                ClassOptionStrg => $ClassOptionStrg,
-            },
-        );
-
-        # output overview result
+        # output overview result, for roles and definitions
         $LayoutObject->Block(
             Name => 'OverviewList',
         );
 
-        for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys %{$ClassList} ) {
+        for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
 
             $LayoutObject->Block(
                 Name => 'OverviewListRow',
@@ -446,19 +350,71 @@ sub Run {
             );
         }
 
-        # output header
-        my $Output = $LayoutObject->Header();
-        $Output .= $LayoutObject->NavigationBar();
-
         # generate output
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AdminITSMConfigItem',
-            Data         => \%Param,
-        );
-        $Output .= $LayoutObject->Footer();
-
-        return $Output;
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => $Param{Original},
+            ),
+            $LayoutObject->Footer;
     }
+}
+
+sub _ShowSidebar {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    # generate RoleOptionStrg and ClassOptionStrg which are needed for the sidebox
+    my $RoleID         = $Param{RoleSelected} ? $Param{RoleSelected}->{ID} : $ParamObject->GetParam( Param => 'RoleID' );
+    my $RoleOptionStrg = $LayoutObject->BuildSelection(
+        Data         => $Param{RoleList},
+        Name         => 'RoleID',
+        SelectedID   => $RoleID,
+        PossibleNone => 1,
+        Translation  => 0,
+        Class        => 'Modernize',
+    );
+    my $ClassID         = $Param{ClassSelected} ? $Param{ClassSelected}->{ID} : $ParamObject->GetParam( Param => 'ClassID' );
+    my $ClassOptionStrg = $LayoutObject->BuildSelection(
+        Data         => $Param{ClassList},
+        Name         => 'ClassID',
+        SelectedID   => $ClassID,
+        PossibleNone => 1,
+        Translation  => 0,
+        Class        => 'Modernize',
+    );
+
+    # this will be passed to the Overview block
+    my %BlockData = (
+        RoleOptionStrg  => $RoleOptionStrg,
+        ClassOptionStrg => $ClassOptionStrg,
+    );
+
+    # there might be additional data for the Overview block
+    KEY:
+    for my $Key (qw(ClassSelected ClassVersionSelected RoleSelected RoleVersionSelected Edit)) {
+        next KEY unless defined $Param{$Key};
+
+        $BlockData{$Key} = $Param{$Key};
+    }
+
+    # the Overview block is the complete page
+    $LayoutObject->Block(
+        Name => 'Overview',
+        Data => \%BlockData,
+    );
+
+    if ( $Param{ShowOverviewLink} ) {
+        $LayoutObject->Block(
+            Name => 'ActionOverview',
+        );
+    }
+
+    return 1;
 }
 
 1;
