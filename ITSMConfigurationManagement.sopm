@@ -172,6 +172,7 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/TextArea.pm" />
         <File Permission="660" Location="Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/LinkObject/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/ProcessManagement/TransitionAction/ConfigItemAdd.pm" />
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
