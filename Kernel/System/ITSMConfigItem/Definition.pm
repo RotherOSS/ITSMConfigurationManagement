@@ -106,20 +106,26 @@ sub DefinitionList {
     }
 
     # ask database
-    $Kernel::OM->Get('Kernel::System::DB')->Prepare(
-        SQL => 'SELECT id, configitem_definition, version, create_time, create_by '
-            . 'FROM configitem_definition WHERE class_id = ? ORDER BY version',
+    my $Rows = $Kernel::OM->Get('Kernel::System::DB')->SelectAll(
+        SQL => <<'END_SQL',
+SELECT id, configitem_definition, version, create_time, create_by
+  FROM configitem_definition
+  WHERE class_id = ?
+  ORDER BY version
+END_SQL
         Bind => [ \$Param{ClassID} ],
     );
 
+    return unless defined $Rows;
+
     my @DefinitionList;
-    while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
+    for my $Row ( $Rows->@* ) {
         my %Definition;
-        $Definition{DefinitionID} = $Row[0];
-        $Definition{Definition}   = $Row[1] || "--- []";
-        $Definition{Version}      = $Row[2];
-        $Definition{CreateTime}   = $Row[3];
-        $Definition{CreateBy}     = $Row[4];
+        $Definition{DefinitionID} = $Row->[0];
+        $Definition{Definition}   = $Row->[1] || "--- []";
+        $Definition{Version}      = $Row->[2];
+        $Definition{CreateTime}   = $Row->[3];
+        $Definition{CreateBy}     = $Row->[4];
 
         # Check if definition code is not a YAML string.
         if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
