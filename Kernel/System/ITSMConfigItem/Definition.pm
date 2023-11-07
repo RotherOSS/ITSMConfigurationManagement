@@ -435,7 +435,7 @@ sub DefinitionCheck {
     }
 
     # check second level data format
-    my %SectionNames;
+    my %SectionIsMissing;
 
     # check structure for defined pages
     for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
@@ -475,13 +475,12 @@ sub DefinitionCheck {
                 else {
 
                     # store section name for checking data integrity later on
-                    $SectionNames{ $Section->{Section} } = 1;
+                    $SectionIsMissing{ $Section->{Section} } = 1;
                 }
             }
         }
     }
 
-    my @Grids;
     my %DefinedDynamicFields;
     my @NeededContentEntry = qw/DF Grid Header/;
 
@@ -489,7 +488,7 @@ sub DefinitionCheck {
     for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
 
         # remove defined sections to later identify undefined ones
-        delete $SectionNames{$SectionName};
+        delete $SectionIsMissing{$SectionName};
 
         my $Section = $DefinitionRef->{Sections}{$SectionName};
 
@@ -531,8 +530,8 @@ sub DefinitionCheck {
         }
     }
 
-    if (%SectionNames) {
-        return $ReturnError->( Translatable( "The following sections are used in pages, but not defined: " . join( ', ', keys %SectionNames ) ) );
+    if (%SectionIsMissing) {
+        return $ReturnError->( Translatable( "The following sections are used in pages, but not defined: " . join( ', ', keys %SectionIsMissing ) ) );
     }
 
     # check if all used dynamic fields are valid
