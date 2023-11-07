@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -198,7 +198,7 @@ sub HandleResponse {
             if ( !IsStringWithData( $RemoteCIData->{$Needed} ) ) {
 
                 my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';
-                $NoticeInfo   .= $RemoteCIData->{Name}   ? "Name: $RemoteCIData->{Name};" : '';
+                $NoticeInfo .= $RemoteCIData->{Name} ? "Name: $RemoteCIData->{Name};" : '';
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'notice',
@@ -261,8 +261,8 @@ sub HandleResponse {
         ATTRIBUTE:
         for my $Attribute ( $Identifier->@* ) {
             if ( $Attribute =~ /^Dyn/ ) {
-                $SearchParam{ $Attribute } = { 
-                    Equals => $RemoteCIData->{ $Attribute },
+                $SearchParam{$Attribute} = {
+                    Equals => $RemoteCIData->{$Attribute},
                 };
             }
             elsif ( $Attribute eq 'Classes' ) {
@@ -308,13 +308,13 @@ sub HandleResponse {
         }
 
         # if neither Number nor ID are provided directly, perform a the search
-        if ( $ConfigItemNumber ) {
+        if ($ConfigItemNumber) {
             $ConfigItemID = $ConfigItemObject->ConfigItemLookup(
                 ConfigItemNumber => $RemoteCIData->{Number},
             );
         }
         elsif ( !$ConfigItemID ) {
-            my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch( %SearchParam );
+            my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParam);
 
             $ConfigItemID = $ConfigItemIDs[0];
 
@@ -332,6 +332,7 @@ sub HandleResponse {
 
         if ( $NameModuleConfig && $NameModuleConfig->{ $RemoteCIData->{Class} } ) {
             if ( !$NameModuleObjects{ $RemoteCIData->{Class} } ) {
+
                 # check if name module exists
                 if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleObjects{ $RemoteCIData->{Class} } ) ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -346,7 +347,7 @@ sub HandleResponse {
                 $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleObjects{ $RemoteCIData->{Class} } );
             }
 
-            if ( $ConfigItemID ) {
+            if ($ConfigItemID) {
                 delete $RemoteCIData->{Name};
             }
             else {
@@ -371,7 +372,7 @@ sub HandleResponse {
             next CI;
         }
 
-        if ( $ConfigItemID ) {
+        if ($ConfigItemID) {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
                 %RequiredAttributes,

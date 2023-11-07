@@ -45,7 +45,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11 - support for upgrading the CMDB
+Kernel::System::Console::Command::Admin::ITSM::Configitem::ClassImport - support for upgrading the CMDB
 
 =head1 DESCRIPTION
 
@@ -91,9 +91,11 @@ sub Run {
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # list of configitem classes
-    my %ClassLookup = reverse %{ $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    ) // {} };
+    my %ClassLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        ) // {}
+    };
 
     my $Error = sub {
         $Self->Print("<red>$_[0]</red>\n");
@@ -109,15 +111,15 @@ sub Run {
         Data => ${$DefinitionYAML},
     );
 
-    return $Error->('Definition is no valid YAML hash.') if !IsHashRefWithData( $DefinitionRaw );
+    return $Error->('Definition is no valid YAML hash.') if !IsHashRefWithData($DefinitionRaw);
 
     my $ClassName = delete $DefinitionRaw->{ClassName};
 
     return $Error->('Need attribute "ClassName" to determine the name of the new class.') if !$ClassName;
-    return $Error->('Class '. $ClassName .' already exists.') if $ClassLookup{ $ClassName };
+    return $Error->( 'Class ' . $ClassName . ' already exists.' )                         if $ClassLookup{$ClassName};
 
-    for my $Key ( qw/Pages Sections DynamicFields/ ) {
-        return $Error->('Need '. $Key .' in Definition.') if !$DefinitionRaw->{$Key};
+    for my $Key (qw/Pages Sections DynamicFields/) {
+        return $Error->( 'Need ' . $Key . ' in Definition.' ) if !$DefinitionRaw->{$Key};
     }
 
     my $DynamicFields = delete $DefinitionRaw->{DynamicFields};
@@ -128,17 +130,20 @@ sub Run {
 
     return $Error->('Error recreating the definition yaml.') if !$FinalDefinition;
 
-    my %DynamicFieldLookup = reverse %{ $DynamicFieldObject->DynamicFieldList(
-        Valid      => 0,
-        ResultType => 'HASH',
-    ) || {} };
+    my %DynamicFieldLookup = reverse %{
+        $DynamicFieldObject->DynamicFieldList(
+            Valid      => 0,
+            ResultType => 'HASH',
+            )
+            || {}
+    };
 
     my %SetDFs;
     for my $Field ( keys $DynamicFields->%* ) {
         if ( $DynamicFields->{$Field}{FieldType} eq 'Set' ) {
             my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields->{$Field}{Config}{Include}->@*;
 
-            return $Error->('Erroneous configuration of Set '. $Field .'.') if !%SetFields;
+            return $Error->( 'Erroneous configuration of Set ' . $Field . '.' ) if !%SetFields;
 
             %SetDFs = (
                 %SetDFs,
@@ -150,7 +155,7 @@ sub Run {
     my %AllFields = ( $DynamicFields->%*, %SetDFs );
     my %Namespaces;
     for my $Field ( keys %AllFields ) {
-        if ( $DynamicFieldLookup{ $Field } ) {
+        if ( $DynamicFieldLookup{$Field} ) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $Field,
             );
@@ -176,7 +181,7 @@ sub Run {
     $Self->Print("<yellow>Please confirm the creation of the new config item class</yellow> $ClassName <yellow>using the following dynamic fields</yellow>\n");
 
     for my $Field ( sort keys $DynamicFields->%* ) {
-        my $Status = $DynamicFieldLookup{ $Field } ? " <green>(use existing)</green>\n" : " <yellow>(create)</yellow>";
+        my $Status = $DynamicFieldLookup{$Field} ? " <green>(use existing)</green>\n" : " <yellow>(create)</yellow>";
         $Self->Print( $Field . $Status . "\n" );
     }
 
@@ -191,14 +196,14 @@ sub Run {
         UserID  => 1,
     );
 
-    return $Error->('Could not add class '. $ClassName .'.') if !$ClassID;
+    return $Error->( 'Could not add class ' . $ClassName . '.' ) if !$ClassID;
 
-    my $Order = scalar ( keys %DynamicFieldLookup );
+    my $Order = scalar( keys %DynamicFieldLookup );
 
     # create dynamic fields
     FIELD:
     for my $Field ( keys %SetDFs, keys $DynamicFields->%* ) {
-        next FIELD if $DynamicFieldLookup{ $Field };
+        next FIELD if $DynamicFieldLookup{$Field};
 
         my %SetConfig;
         if ( $AllFields{$Field}{FieldType} eq 'Set' ) {
@@ -221,7 +226,7 @@ sub Run {
             UserID     => 1,
         );
 
-        return $Error->('Could not add dynamic field '. $Field .'.') if !$AllFields{$Field}{ID};
+        return $Error->( 'Could not add dynamic field ' . $Field . '.' ) if !$AllFields{$Field}{ID};
     }
 
     my $DefinitionID = $ConfigItemObject->DefinitionAdd(

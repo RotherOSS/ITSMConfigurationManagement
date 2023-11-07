@@ -144,7 +144,6 @@ sub Permission {
     return;
 }
 
-
 =head2 CustomerPermission()
 
 returns whether the user has permissions or not
@@ -197,10 +196,9 @@ sub CustomerPermission {
         if ( $ConditionSet->{Classes} ) {
             my @Classes = ref $ConditionSet->{Classes} ? $ConditionSet->{Classes}->@* : ( $ConditionSet->{Classes} );
 
-
             next CONDITION if @Classes && !grep { $_ eq $ConfigItem->{Class} } @Classes;
         }
- 
+
         if ( $ConditionSet->{DeploymentStates} ) {
             my @DeplStates = ref $ConditionSet->{DeploymentStates} ? $ConditionSet->{DeploymentStates}->@* : ( $ConditionSet->{DeploymentStates} );
 

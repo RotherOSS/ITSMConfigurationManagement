@@ -652,7 +652,8 @@ END_SQL
         );
     }
 
-    for my $Name ( @UpdatedDynamicFields ) {
+    for my $Name (@UpdatedDynamicFields) {
+
         # prepare readable values for the history
         my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},
@@ -816,7 +817,8 @@ END_SQL
         Key  => join( '::', 'VersionNameGet', VersionID => $Version->{VersionID} ),
     );
 
-    for my $Name ( @UpdatedDynamicFields ) {
+    for my $Name (@UpdatedDynamicFields) {
+
         # prepare readable values for the history
         my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $Definition->{DynamicFieldRef}{$Name},

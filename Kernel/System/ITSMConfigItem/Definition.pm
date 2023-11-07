@@ -498,7 +498,8 @@ sub DefinitionCheck {
             }
         }
 
-        for my $GridItem ( @Grids ) {
+        for my $GridItem (@Grids) {
+
             # TODO some more basic checks
             for my $Row ( $GridItem->{Rows}->@* ) {
                 for my $Cell ( $Row->@* ) {
@@ -511,8 +512,8 @@ sub DefinitionCheck {
         }
     }
 
-    if ( %SectionNames ) {
-        return $ReturnError->( Translatable("The following sections are used in pages, but not defined: " . join(', ', keys %SectionNames)) );
+    if (%SectionNames) {
+        return $ReturnError->( Translatable( "The following sections are used in pages, but not defined: " . join( ', ', keys %SectionNames ) ) );
     }
 
     # check if all used dynamic fields are valid

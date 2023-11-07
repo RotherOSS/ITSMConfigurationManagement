@@ -39,7 +39,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::ConfigItemCreate - A module to create a config item
+Kernel::System::ProcessManagement::TransitionAction::ConfigItemAdd - A module to create a config item
 
 =head1 DESCRIPTION
 
@@ -260,7 +260,7 @@ sub Run {
     for my $ConfigParam ( keys $Param{Config}->%* ) {
         next CONFIGPARAM unless $ConfigParam =~ m{\A DynamicField_ ( [a-zA-Z0-9\-]+ ) \z}msx;
 
-        my $DynamicFieldName = $1;
+        my $DynamicFieldName   = $1;
         my $DynamicFieldConfig = $Definition->{DynamicFieldRef}{$DynamicFieldName};
 
         next CONFIGPARAM unless IsHashRefWithData($DynamicFieldConfig);
@@ -329,14 +329,14 @@ sub Run {
             return;
         }
 
-        my $SourceObjectID = $ConfigItemID;
+        my $SourceObjectID   = $ConfigItemID;
         my $SourceObjectType = 'ITSMConfigItem';
-        my $TargetObjectID = $Param{Ticket}->{TicketID};
+        my $TargetObjectID   = $Param{Ticket}->{TicketID};
         my $TargetObjectType = 'Ticket';
         if ( $SelectedDirection eq 'Target' ) {
-            $SourceObjectID = $Param{Ticket}->{TicketID};
+            $SourceObjectID   = $Param{Ticket}->{TicketID};
             $SourceObjectType = 'Ticket';
-            $TargetObjectID = $ConfigItemID;
+            $TargetObjectID   = $ConfigItemID;
             $TargetObjectType = 'ITSMConfigItem';
         }
 

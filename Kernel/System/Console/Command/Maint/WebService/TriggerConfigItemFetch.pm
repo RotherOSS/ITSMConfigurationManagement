@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,6 +24,7 @@ use parent qw(Kernel::System::Console::BaseCommand);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::GenericInterface::Requester',
     'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::GenericInterface::Webservice',
 );
@@ -90,23 +91,23 @@ sub Run {
 
     my $Result = $Kernel::OM->Get('Kernel::GenericInterface::Requester')->Run( $Self->{ConfigItemFetchTaskData}->%* );
 
-# TODO: Think about just adding a task
-#    my $TaskID = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->TaskAdd(
-#        Type                     => 'GenericInterface',
-#        Name                     => 'ConfigItemFetch_' . $Invoker,
-#        MaximumParallelInstances => 1,
-#        Data                     => $Self->{ConfigItemFetchTaskData},
-#    );
-#
-#    if ( !IsInteger($TaskID) ) {
-#        $Self->PrintError('Could not trigger invoker');
-#        return $Self->ExitCodeError();
-#    }
-#
-#    if ( $TaskID == -1 ) {
-#        $Self->Print("<yellow>Another $Invoker controller is already running. Please try again!</yellow>\n");
-#        return $Self->ExitCodeError();
-#    }
+    # TODO: Think about just adding a task
+    #    my $TaskID = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->TaskAdd(
+    #        Type                     => 'GenericInterface',
+    #        Name                     => 'ConfigItemFetch_' . $Invoker,
+    #        MaximumParallelInstances => 1,
+    #        Data                     => $Self->{ConfigItemFetchTaskData},
+    #    );
+    #
+    #    if ( !IsInteger($TaskID) ) {
+    #        $Self->PrintError('Could not trigger invoker');
+    #        return $Self->ExitCodeError();
+    #    }
+    #
+    #    if ( $TaskID == -1 ) {
+    #        $Self->Print("<yellow>Another $Invoker controller is already running. Please try again!</yellow>\n");
+    #        return $Self->ExitCodeError();
+    #    }
 
     $Self->Print("<green>Done.</green>\n");
     return $Self->ExitCodeOk();

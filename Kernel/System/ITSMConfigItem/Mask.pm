@@ -60,7 +60,6 @@ sub new {
     return $Self;
 }
 
-
 =head2 DefinitionSet()
 
 Set the definition for a config item mask
@@ -77,8 +76,8 @@ Set the definition for a config item mask
 sub DefinitionSet {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed ( qw/UserID Mask/ ) {
-        if ( !$Param{ $Needed } ) {
+    for my $Needed (qw/UserID Mask/) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
@@ -88,6 +87,7 @@ sub DefinitionSet {
     }
 
     if ( $Param{DefinitionString} ) {
+
         # Validate YAML code by converting it to Perl.
         my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Param{DefinitionString},
@@ -149,8 +149,8 @@ Get the definition for a config item mask
 sub DefinitionGet {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed ( qw/Mask/ ) {
-        if ( !$Param{ $Needed } ) {
+    for my $Needed (qw/Mask/) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
@@ -169,7 +169,7 @@ sub DefinitionGet {
         Limit => 1,
     );
 
-    my ( $DefinitionString ) = $DBObject->FetchrowArray();
+    my ($DefinitionString) = $DBObject->FetchrowArray();
 
     return if !$DefinitionString;
 
@@ -193,8 +193,8 @@ Delete the definition for a config item mask
 sub DefinitionDelete {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed ( qw/Mask/ ) {
-        if ( !$Param{ $Needed } ) {
+    for my $Needed (qw/Mask/) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
@@ -204,8 +204,8 @@ sub DefinitionDelete {
     }
 
     return $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL   => 'DELETE FROM frontend_mask_definition WHERE mask = ?',
-        Bind  => [ \$Param{Mask} ],
+        SQL  => 'DELETE FROM frontend_mask_definition WHERE mask = ?',
+        Bind => [ \$Param{Mask} ],
     );
 }
 
@@ -223,7 +223,7 @@ sub ConfiguredMasksList {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     $DBObject->Prepare(
-        SQL   => 'SELECT mask FROM frontend_mask_definition',
+        SQL => 'SELECT mask FROM frontend_mask_definition',
     );
 
     my @Masks;
@@ -252,8 +252,8 @@ Render input fields according to mask definition
 sub RenderInput {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed ( qw/GetParam LayoutObject MaskDefinition/ ) {
-        if ( !$Param{ $Needed } ) {
+    for my $Needed (qw/GetParam LayoutObject MaskDefinition/) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
@@ -278,20 +278,20 @@ sub RenderInput {
     for my $AreaDefinition ( @{ $Param{MaskDefinition} } ) {
         my %Area = ( Rows => [] );
         if ( IsHashRefWithData( $AreaDefinition->{Grid} ) ) {
-            %Area            = $AreaDefinition->{Grid}->%*;
+            %Area = $AreaDefinition->{Grid}->%*;
         }
         elsif ( IsArrayRefWithData( $AreaDefinition->{List} ) ) {
-            $Area{Rows}      = [ map { [ $_ ] } $AreaDefinition->{List}->@* ];
-            $Area{Columns}   = 1;
+            $Area{Rows}    = [ map { [$_] } $AreaDefinition->{List}->@* ];
+            $Area{Columns} = 1;
         }
 
         for my $Row ( @{ $Area{Rows} } ) {
 
             my $RowClassString = '';
-            my $RowReadOnly = ( first { $_->{ReadOnly} } $Row->@* ) ? 1 : 0;
+            my $RowReadOnly    = ( first { $_->{ReadOnly} } $Row->@* ) ? 1 : 0;
 
             # hide complete row if no field is visible
-            if ( $Param{Visibility} && !grep { $Param{Visibility}{"DynamicField_$_->{Name}"} } @{ $Row } ) {
+            if ( $Param{Visibility} && !grep { $Param{Visibility}{"DynamicField_$_->{Name}"} } @{$Row} ) {
                 $RowClassString .= ' oooACLHidden';
             }
 
@@ -303,16 +303,16 @@ sub RenderInput {
             # Parts are checked against a regex
             my $ColumnSizeString = '';
             if ( $Area{ColumnSize} ) {
-                my @ColumnSizes = split(' ', $Area{ColumnSize});
+                my @ColumnSizes = split( ' ', $Area{ColumnSize} );
                 my $ColumnIndex = 0;
                 COLUMNSIZE:
-                for my $ColumnSize ( @ColumnSizes ) {
+                for my $ColumnSize (@ColumnSizes) {
                     next COLUMNSIZE if $ColumnSize !~ /^((\d(\.\d)?fr\s?)|(\d+px\s?)|auto\s?)+$/;
                     last COLUMNSIZE if $ColumnIndex == ( $Area{Columns} || 1 );
                     $ColumnSizeString .= $ColumnSize . ' ';
                     $ColumnIndex++;
                 }
-                while ( scalar split(' ', $ColumnSizeString) < $Area{Columns} ) {
+                while ( scalar split( ' ', $ColumnSizeString ) < $Area{Columns} ) {
                     $ColumnSizeString .= ' 1fr';
                 }
             }
@@ -345,13 +345,13 @@ sub RenderInput {
             for ( my $RowIndex = 0; $RowIndex <= $MaxValueCount; $RowIndex++ ) {
                 my $GridElementStart = 1;
                 ELEMENT:
-                for my $Element ( sort { ( $a->{Start} || 1 ) <=> ( $b->{Start} || 1 ) } @{ $Row } ) {
+                for my $Element ( sort { ( $a->{Start} || 1 ) <=> ( $b->{Start} || 1 ) } @{$Row} ) {
                     next ELEMENT if !IsHashRefWithData( $DynamicFieldConfigsHash{ $Element->{Name} } );
                     next ELEMENT if !IsHashRefWithData( $GetParam{DynamicFieldHTML}->{ $Element->{Name} } );
 
-                    my $DynamicFieldConfig = $DynamicFieldConfigsHash{ $Element->{Name} };
-                    my $DynamicFieldHTMLData   = $GetParam{DynamicFieldHTML}->{ $Element->{Name} };
-                    my $DynamicFieldHTML = $DynamicFieldHTMLData->{HTML}{$RowIndex};
+                    my $DynamicFieldConfig   = $DynamicFieldConfigsHash{ $Element->{Name} };
+                    my $DynamicFieldHTMLData = $GetParam{DynamicFieldHTML}->{ $Element->{Name} };
+                    my $DynamicFieldHTML     = $DynamicFieldHTMLData->{HTML}{$RowIndex};
                     if ( !$DynamicFieldHTML && !$RowIndex ) {
                         $DynamicFieldHTML = $DynamicFieldHTMLData->{Field};
                     }
@@ -371,32 +371,37 @@ sub RenderInput {
 
                     # column placement
                     my $ColumnStyle = 'grid-column: ';
-                    $GridElementStart = ($Element->{Start} && $Element->{Start} > $GridElementStart ) ? $Element->{Start} : $GridElementStart;
+                    $GridElementStart = ( $Element->{Start} && $Element->{Start} > $GridElementStart ) ? $Element->{Start} : $GridElementStart;
+
                     # saving element start for correct placing of rows with mixed fields (multivalue and non-multivalue)
                     $Element->{Start} = $GridElementStart;
-                    $ColumnStyle   .= $GridElementStart . ' / ';
+                    $ColumnStyle .= $GridElementStart . ' / ';
                     $GridElementStart++;
-                    $ColumnStyle   .= $Element->{Span}  ? 'span ' . $Element->{Span} : 'span 1';
+                    $ColumnStyle .= $Element->{Span} ? 'span ' . $Element->{Span} : 'span 1';
 
                     # special treatment for separate dynamic fields
                     my $ColBlockName = $Param{SeparateDynamicFields} && $Param{SeparateDynamicFields}->{ $Element->{Name} }
                         ? 'DynamicField_' . $Element->{Name} : 'DynamicField';
 
-                    if ( $DynamicFieldConfig->{Config}{MultiValue} && $RowIndex == 0) {
+                    if ( $DynamicFieldConfig->{Config}{MultiValue} && $RowIndex == 0 ) {
                         my $TemplateConfig = {
                             $DynamicFieldConfig->%*,
                             Name => $DynamicFieldConfig->{Name} . ( $Param{IDSuffix} ? $Param{IDSuffix} : '' ) . '_Template',
                         };
                         my $FieldTemplateHTML = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->EditFieldRender(
                             DynamicFieldConfig => $TemplateConfig,
-                            LayoutObject => $Param{LayoutObject},
-                            ParamObject => $Kernel::OM->Get('Kernel::System::Web::Request'),
-                            AJAXUpdate => 1,
-                            UpdatableFields => $Param{AJAXUpdatableFields},
-                            CustomerInterface => $Param{CustomerInterface} || 0,
-                            ReadOnly => $Element->{ReadOnly} || 0,
+                            LayoutObject       => $Param{LayoutObject},
+                            ParamObject        => $Kernel::OM->Get('Kernel::System::Web::Request'),
+                            AJAXUpdate         => 1,
+                            UpdatableFields    => $Param{AJAXUpdatableFields},
+                            CustomerInterface  => $Param{CustomerInterface} || 0,
+                            ReadOnly           => $Element->{ReadOnly}      || 0,
                         );
-                        push @TemplateDataList, { Field => ( $FieldTemplateHTML->{HTML}{'0'} || $FieldTemplateHTML->{Field} ), ColumnStyle => $ColumnStyle };
+                        push @TemplateDataList,
+                            {
+                                Field       => ( $FieldTemplateHTML->{HTML}{'0'} || $FieldTemplateHTML->{Field} ),
+                                ColumnStyle => $ColumnStyle
+                            };
                     }
 
                     $ColumnClassString .= $DynamicFieldConfig->{Config}{MultiValue} ? ' MultiValue_' . $RowIndex : '';
@@ -410,7 +415,7 @@ sub RenderInput {
                         ColumnClasses => $ColumnClassString,
                         Index         => $RowIndex,
                     };
-                    
+
                     if ( $RowIndex == 0 ) {
                         $CellBlockData->{Label} = $DynamicFieldHTMLData->{Label};
                     }
@@ -421,8 +426,9 @@ sub RenderInput {
                     );
                 }
             }
+
             # Add templates for dynamicfields at end of row
-            for my $TemplateData ( @TemplateDataList ) {
+            for my $TemplateData (@TemplateDataList) {
                 $Param{LayoutObject}->Block(
                     Name => 'DynamicFieldMultiValueTemplate',
                     Data => $TemplateData,

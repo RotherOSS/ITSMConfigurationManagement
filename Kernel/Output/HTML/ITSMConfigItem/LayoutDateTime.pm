@@ -122,7 +122,7 @@ sub FormDataGet {
     my $Minute = $ParamObject->GetParam( Param => $Param{Key} . '::Minute' ) || 0;
 
     my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-            UserID => $Param{UserID},
+        UserID => $Param{UserID},
     );
 
     my $DateTimeObject = $Kernel::OM->Create(
@@ -131,7 +131,7 @@ sub FormDataGet {
             Year     => $Year,
             Month    => $Month,
             Day      => $Day,
-            Hour     => $Hour,                                                                             # midnight
+            Hour     => $Hour,                                                                                                     # midnight
             Minute   => $Minute,
             TimeZone => $Preferences{UserTimeZone} || $Kernel::OM->Create('Kernel::System::DateTime')->UserDefaultTimeZoneGet(),
         },
@@ -142,7 +142,8 @@ sub FormDataGet {
     my $DateTimeSettings = $DateTimeObject->Get();
 
     if ( IsHashRefWithData($DateTimeSettings) ) {
-        $FormData{Value} = sprintf '%02d-%02d-%02d %02d:%02d', $DateTimeSettings->{Year}, $DateTimeSettings->{Month}, $DateTimeSettings->{Day}, $DateTimeSettings->{Hour}, $DateTimeSettings->{Minute};
+        $FormData{Value} = sprintf '%02d-%02d-%02d %02d:%02d', $DateTimeSettings->{Year}, $DateTimeSettings->{Month}, $DateTimeSettings->{Day},
+            $DateTimeSettings->{Hour}, $DateTimeSettings->{Minute};
     }
 
     # set invalid param
