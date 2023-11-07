@@ -29,14 +29,28 @@
     [% IF (Data.ClassSelected) %]
         [% BreadcrumbPath.push({
             Name => Data.ClassSelected.Name,
-            Link => 'AdminITSMConfigItem;Subaction=DefinitionList;ClassID=' _ Data.ClassSelected.ID
+            Link => 'AdminITSMConfigItem;Subaction=ClassDefinitionList;ClassID=' _ Data.ClassSelected.ID
         }) %]
     [% END %]
 
-    [% IF (Data.VersionSelected) %]
+    [% IF (Data.RoleSelected) %]
         [% BreadcrumbPath.push({
-            Name => 'Version ' _ Data.VersionSelected.Version,
-            Link => 'AdminITSMConfigItem;Subaction=DefinitionView;DefinitionID=' _ Data.VersionSelected.ID
+            Name => Data.RoleSelected.Name,
+            Link => 'AdminITSMConfigItem;Subaction=RoleDefinitionList;RoleID=' _ Data.RoleSelected.ID
+        }) %]
+    [% END %]
+
+    [% IF (Data.ClassVersionSelected) %]
+        [% BreadcrumbPath.push({
+            Name => 'Version ' _ Data.ClassVersionSelected.Version,
+            Link => 'AdminITSMConfigItem;Subaction=ClassDefinitionView;DefinitionID=' _ Data.ClassVersionSelected.ID
+        }) %]
+    [% END %]
+
+    [% IF (Data.RoleVersionSelected) %]
+        [% BreadcrumbPath.push({
+            Name => 'Version ' _ Data.RoleVersionSelected.Version,
+            Link => 'AdminITSMConfigItem;Subaction=RoleDefinitionView;DefinitionID=' _ Data.RoleVersionSelected.ID
         }) %]
     [% END %]
 
@@ -58,7 +72,7 @@
                     <li>
                         <form action="[% Env("CGIHandle") %]" method="get">
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                            <input type="hidden" name="Subaction" value="DefinitionChange"/>
+                            <input type="hidden" name="Subaction" value="ClassDefinitionChange"/>
 
                             <div>[% Data.ClassOptionStrg %]</div>
                             <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Add") | html %]">
@@ -66,9 +80,21 @@
                             </button>
                         </form>
                     </li>
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="get">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="RoleDefinitionChange"/>
+
+                            <div>[% Data.RoleOptionStrg %]</div>
+                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Add") | html %]">
+                                <span>[% Translate("Change role definition") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center">
+                            <span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
                 </ul>
@@ -90,18 +116,34 @@
                         </tr>
                     </thead>
                     <tbody>
-[% RenderBlockStart("OverviewListRow") %]
+[% RenderBlockStart("OverviewDefinitionListRow") %]
                         <tr>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DefinitionList;ClassID=[% Data.ClassID | uri %]">[% Data.Name | html %]</a>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClassDefinitionList;ClassID=[% Data.ClassID | uri %]">[% Data.Name | html %]</a>
                             </td>
                         </tr>
-[% RenderBlockEnd("OverviewListRow") %]
+[% RenderBlockEnd("OverviewDefinitionListRow") %]
+                    </tbody>
+                </table>
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Config Item Role") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("OverviewRoleListRow") %]
+                        <tr>
+                            <td>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=RoleDefinitionList;RoleID=[% Data.RoleID | uri %]">[% Data.Name | html %]</a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewRoleListRow") %]
                     </tbody>
                 </table>
             </div>
 [% RenderBlockEnd("OverviewList") %]
-[% RenderBlockStart("DefinitionList") %]
+[% RenderBlockStart("ClassDefinitionList") %]
             <div class="Header">
                 <h2>[% Translate("List") | html %]</h2>
             </div>
@@ -116,21 +158,50 @@
                         </tr>
                     </thead>
                     <tbody>
-[% RenderBlockStart("DefinitionListRow") %]
+[% RenderBlockStart("ClassDefinitionListRow") %]
                         <tr>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DefinitionView;DefinitionID=[% Data.DefinitionID | uri %]">[% Data.Class | html %]</a>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClassDefinitionView;DefinitionID=[% Data.DefinitionID | uri %]">[% Data.Class | html %]</a>
                             </td>
                             <td>[% Data.Version | html %]</td>
                             <td>[% Data.CreateByUser | html %]</td>
                             <td>[% Data.CreateTime | Localize("TimeLong") %]</td>
                         </tr>
-[% RenderBlockEnd("DefinitionListRow") %]
+[% RenderBlockEnd("ClassDefinitionListRow") %]
                     </tbody>
                 </table>
             </div>
-[% RenderBlockEnd("DefinitionList") %]
-[% RenderBlockStart("DefinitionView") %]
+[% RenderBlockEnd("ClassDefinitionList") %]
+[% RenderBlockStart("RoleDefinitionList") %]
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th class="W50pc">[% Translate("Config Item Role") | html %]</th>
+                            <th>[% Translate("Version") | html %]</th>
+                            <th>[% Translate("Created by") | html %]</th>
+                            <th>[% Translate("Created") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("RoleDefinitionListRow") %]
+                        <tr>
+                            <td>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=RoleDefinitionView;DefinitionID=[% Data.DefinitionID | uri %]">[% Data.Role | html %]</a>
+                            </td>
+                            <td>[% Data.Version | html %]</td>
+                            <td>[% Data.CreateByUser | html %]</td>
+                            <td>[% Data.CreateTime | Localize("TimeLong") %]</td>
+                        </tr>
+[% RenderBlockEnd("RoleDefinitionListRow") %]
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("RoleDefinitionList") %]
+[% RenderBlockStart("ClassDefinitionView") %]
             <div class="Header">
                 <h2>[% Translate("View") | html %]: </h2>
             </div>
@@ -169,15 +240,55 @@
 
                 </fieldset>
             </div>
-[% RenderBlockEnd("DefinitionView") %]
-[% RenderBlockStart("DefinitionChange") %]
+[% RenderBlockEnd("ClassDefinitionView") %]
+[% RenderBlockStart("RoleDefinitionView") %]
+            <div class="Header">
+                <h2>[% Translate("View") | html %]: </h2>
+            </div>
+            <div class="Content">
+                <fieldset class="TableLike">
+
+                    <label>[% Translate("Config Item Role") | html %]: </label>
+                    <div class="Field">
+                        [% Data.Class | html %]
+                    </div>
+                    <div class="Clear"></div>
+
+                    <label>[% Translate("Version") | html %]: </label>
+                    <div class="Field">
+                        [% Data.Version | html %]
+                    </div>
+                    <div class="Clear"></div>
+
+                    <label>[% Translate("Created by") | html %]: </label>
+                    <div class="Field">
+                        [% Data.CreateByUser | html %]
+                    </div>
+                    <div class="Clear"></div>
+
+                    <label>[% Translate("Created") | html %]: </label>
+                    <div class="Field">
+                        [% Data.CreateTime | Localize("TimeLong") %]
+                    </div>
+                    <div class="Clear"></div>
+
+                    <label>[% Translate("Definition") | html %]: </label>
+                    <div class="Field">
+                        <pre>[% Data.DefinitionString %]</pre>
+                    </div>
+                    <div class="Clear"></div>
+
+                </fieldset>
+            </div>
+[% RenderBlockEnd("RoleDefinitionView") %]
+[% RenderBlockStart("ClassDefinitionChange") %]
             <div class="Header">
                 <h2>[% Translate("Change") | html %]: </h2>
             </div>
             <div class="Content">
                 <form action="[% Env("CGIHandle") %]" method="post">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="DefinitionSave"/>
+                    <input type="hidden" name="Subaction" value="ClassDefinitionSave"/>
                     <input type="hidden" name="ClassID" value="[% Data.ClassID | html %]"/>
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     <fieldset class="TableLike">
@@ -217,7 +328,49 @@
                     </fieldset>
                 </form>
             </div>
-[% RenderBlockEnd("DefinitionChange") %]
+[% RenderBlockEnd("ClassDefinitionChange") %]
+[% RenderBlockStart("RoleDefinitionChange") %]
+            <div class="Header">
+                <h2>[% Translate("Change") | html %]: </h2>
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="RoleDefinitionSave"/>
+                    <input type="hidden" name="RoleID" value="[% Data.RoleID | html %]"/>
+                    <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+                    <fieldset class="TableLike">
+
+
+                        <label>[% Translate("Config Item Role") | html %]: </label>
+                        <div class="Field">
+                            [% Data.Role | html %]
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label for="Definition">[% Translate("Definition") | html %]: </label>
+                        <div class="Field">
+                            <textarea name="Definition" id="Definition" rows="[% Data.Rows | html %]" cols="80" wrap="off">[% Data.Definition | html %]</textarea>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <div class="Field SpacingTop">
+                            <button name="SubmitAndContinue" class="CallForAction Primary" id="SubmitAndContinue" type="button" value="Submit">
+                                <span>[% Translate("Save") | html %]</span>
+                            </button>
+                            [% Translate("or") | html %]
+                            <button name="Submit" class="CallForAction Primary" id="Submit" type="submit" value="Submit">
+                                <span>[% Translate("Save and finish") | html %]</span>
+                            </button>
+                            [% Translate("or") | html %]
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                        </div>
+                        <div class="Clear"></div>
+
+                    </fieldset>
+                </form>
+            </div>
+[% RenderBlockEnd("RoleDefinitionChange") %]
         </div>
     </div>
     <div class="Clear"></div>

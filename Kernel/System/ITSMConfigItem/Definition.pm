@@ -146,6 +146,23 @@ END_SQL
     return \@DefinitionList;
 }
 
+=head2 RoleDefinitionList()
+
+return a config item definition list for a role as an array-hash reference. The list
+is sorted by version. This the same as C<DefinitionList>, but the parameter C<RoleID> is
+used instead of C<ClassID>.
+
+=cut
+
+sub RoleDefinitionList {
+    my ( $Self, %Param ) = @_;
+
+    # rename the parameter
+    $Param{ClassID} = delete $Param{RoleID};
+
+    return $Self->DefinitionList(%Param);
+}
+
 =head2 DefinitionGet()
 
 return a config item definition as hash reference
@@ -242,6 +259,11 @@ sub DefinitionGet {
 
     return {} unless $Definition{DefinitionID};
 
+    # merge the roles into the DefinitionRef, the passed in reference is modified in place
+    $Self->_ProcessRoles(
+        DefinitionRef => $Definition{DefinitionRef},
+    );
+
     # prepare definition
     # TODO: Rework?
     #if ( $Definition{DefinitionRef} && ref $Definition{DefinitionRef} eq 'ARRAY' ) {
@@ -263,6 +285,131 @@ sub DefinitionGet {
 
     # cache the result
     $Self->{Cache}->{DefinitionGet}->{ $Definition{DefinitionID} } = \%Definition;
+
+    return \%Definition;
+}
+
+=head2 RoleDefinitionGet()
+
+return a config item definition as hash reference
+
+Return
+
+    $Definition->{DefinitionID}
+    $Definition->{ClassID}
+    $Definition->{Class}
+    $Definition->{Definition}
+    $Definition->{DefinitionRef}
+    $Definition->{DynamicFieldRef}
+    $Definition->{Version}
+    $Definition->{CreateTime}
+    $Definition->{CreateBy}
+
+Get a specific version when the technical ID is known:
+
+    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        DefinitionID => 12,
+    );
+
+Or get the latest version:
+
+    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        RoleID => 123,
+    );
+
+Or get a specific version when the version is known.
+
+    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        RoleID  => 123,
+        Version => 2,
+    );
+
+=cut
+
+sub RoleDefinitionGet {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    if ( !$Param{DefinitionID} && !$Param{RoleID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need DefinitionID or RoleID!',
+        );
+        return;
+    }
+
+    # create SQL
+    my ( @Where, @Binds );
+    if ( $Param{DefinitionID} ) {
+
+        # check if result is already cached
+        return $Self->{Cache}->{RoleDefinitionGet}->{ $Param{DefinitionID} }
+            if $Self->{Cache}->{RoleDefinitionGet}->{ $Param{DefinitionID} };
+
+        push @Where, 'id = ?';
+        push @Binds, \$Param{DefinitionID};
+    }
+    else {
+        # ask database for the newest version for the class
+        push @Where, 'class_id = ?';
+        push @Binds, \$Param{RoleID};
+
+        # or request a specific version
+        if ( $Param{Version} ) {
+            push @Where, 'version = ?';
+            push @Binds, \$Param{Version};
+        }
+    }
+
+    my $SQL = sprintf <<'END_SQL', join( ' AND ', @Where );
+SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by
+  FROM configitem_definition
+  WHERE %s
+  ORDER BY version DESC
+END_SQL
+
+    my @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+        SQL  => $SQL,
+        Bind => \@Binds,
+    );
+
+    # fetch the result
+    my %Definition;
+    $Definition{DefinitionID} = $Row[0];
+    $Definition{RoleID}       = $Row[1];
+    $Definition{Definition}   = $Row[2] || "--- []";
+    $Definition{Version}      = $Row[4];
+    $Definition{CreateTime}   = $Row[5];
+    $Definition{CreateBy}     = $Row[6];
+
+    # Check if definition code is not a YAML string.
+    if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => "DefinitionID: $Definition{DefinitionID}"
+                . " RoleID: $Definition{RoleID}"
+                . " found in legacy Perl code format, can not continue",
+        );
+
+        $Definition{Definition} = "--- []";
+    }
+
+    $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        Data => $Definition{Definition},
+    );
+
+    return {} unless $Definition{DefinitionID};
+
+    # get class list
+    my $RoleList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::Role',
+    );
+
+    # add class
+    $Definition{Role} = $RoleList->{ $Definition{RoleID} };
+
+    # cache the result
+    $Self->{Cache}->{RoleDefinitionGet}->{ $Definition{DefinitionID} } = \%Definition;
 
     return \%Definition;
 }
@@ -373,6 +520,86 @@ sub DefinitionAdd {
     return $DefinitionID;
 }
 
+=head2 RoleDefinitionAdd()
+
+add a new role
+
+    my $DefinitionID = $ConfigItemObject->RoleDefinitionAdd(
+        RoleID     => 123,
+        Definition => 'the definition code',
+        UserID     => 1,
+        Force      => 1,    # optional, for internal use, force add even if definition is unchanged
+                            # (used if dynamic fields changed)
+    );
+
+=cut
+
+sub RoleDefinitionAdd {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(RoleID Definition UserID)) {
+        if ( !$Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+            return;
+        }
+    }
+
+    # check definition, not done for Roles
+
+    # get last definition
+    my $LastDefinition = $Self->DefinitionGet(
+        ClassID => $Param{RoleID},
+    );
+
+    # check whether the definition itself or the containing dynamic fields changed
+    my $DefinitionChanged = !$LastDefinition->{DefinitionID} || $LastDefinition->{Definition} ne $Param{Definition};
+
+    # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
+    $DefinitionChanged ||= $Param{Force};
+
+    # stop add, if definition was not changed
+    if ( !$DefinitionChanged ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Can't add new definition! The definition was not changed.",
+        );
+
+        return;
+    }
+
+    # set version
+    my $Version = 1;
+    if ( $LastDefinition->{Version} ) {
+        $Version = $LastDefinition->{Version};
+        $Version++;
+    }
+
+    # insert new definition
+    my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => 'INSERT INTO configitem_definition '
+            . '(class_id, configitem_definition, version, create_time, create_by) VALUES '
+            . '(?, ?, ?, current_timestamp, ?)',
+        Bind => [ \( $Param{RoleID}, $Param{Definition}, $Version, $Param{UserID} ) ],
+    );
+
+    return unless $Success;
+
+    # get id of new definition
+    my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+        SQL => 'SELECT id FROM configitem_definition WHERE '
+            . 'class_id = ? AND version = ? '
+            . 'ORDER BY version DESC',
+        Bind  => [ \( $Param{RoleID}, $Version ) ],
+        Limit => 1,
+    );
+
+    return $DefinitionID;
+}
+
 =head2 DefinitionCheck()
 
 check the syntax of a new definition
@@ -396,7 +623,9 @@ sub DefinitionCheck {
         return;
     }
 
-    my $YAMLObject  = $Kernel::OM->Get('Kernel::System::YAML');
+    # This method is used for roles and classes
+    my $Type = $Param{Type} // 'Class';
+
     my $ReturnError = sub {
         return {
             Success => 0,
@@ -414,22 +643,33 @@ sub DefinitionCheck {
         return $ReturnError->( Translatable('Base structure is not valid. Please provide an array with data in YAML format.') );
     }
 
+    # merge the roles into the DefinitionRef, the passed in reference is modified in place
+    $Self->_ProcessRoles(
+        DefinitionRef => $DefinitionRef,
+    );
+
     # check first level data format
     my %ExpectedFormat = (
-        Pages    => 'Array',
         Sections => 'Hash',
     );
-    for my $Key (qw(Pages Sections)) {
-        my $FunctionName = \&{"Is$ExpectedFormat{$Key}RefWithData"};
+    if ( $Type eq 'Class' ) {
+        $ExpectedFormat{Pages} = 'Array';
+    }
+
+    for my $Key ( sort keys %ExpectedFormat ) {
 
         # either pages or sections data invalid
         if ( !$DefinitionRef->{$Key} ) {
             return $ReturnError->( Translatable("$Key is missing. Please provide data for $Key in the definition.") );
         }
-        elsif ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
+
+        # TODO: this is not translateable
+        if ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
             return $ReturnError->( Translatable("Data for $Key is not a $ExpectedFormat{$Key}. Please correct the syntax.") );
         }
-        elsif ( !( $FunctionName->( $DefinitionRef->{$Key} ) ) ) {
+
+        my $ValidateFunctionRef = \&{"Kernel::System::VariableCheck::Is$ExpectedFormat{$Key}RefWithData"};
+        if ( !$ValidateFunctionRef->( $DefinitionRef->{$Key} ) ) {
             return $ReturnError->( Translatable("Data for $Key is empty. Please provide data for $Key in the definition.") );
         }
     }
@@ -438,44 +678,46 @@ sub DefinitionCheck {
     my %SectionIsMissing;
 
     # check structure for defined pages
-    for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
-        my $Page = $DefinitionRef->{Pages}->[$PageIndex];
-        for my $Needed (qw(Name Content)) {
-            if ( !$Page->{$Needed} ) {
-                return $ReturnError->( Translatable("Key '$Needed' is missing in the definition of page $PageIndex.") );
+    if ( $ExpectedFormat{Pages} ) {
+        for my $PageIndex ( 0 .. $#{ $DefinitionRef->{Pages} } ) {
+            my $Page = $DefinitionRef->{Pages}->[$PageIndex];
+            for my $Needed (qw(Name Content)) {
+                if ( !$Page->{$Needed} ) {
+                    return $ReturnError->( Translatable("Key '$Needed' is missing in the definition of page $PageIndex.") );
+                }
             }
-        }
 
-        # check structure for defined page content data
-        if ( ref $Page->{Content} ne 'ARRAY' ) {
-            return $ReturnError->( Translatable("Key Content for page $PageIndex is not an Array.") );
-        }
-        elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
-            return $ReturnError->( Translatable("Key Content for page $PageIndex is empty.") );
-        }
-        else {
+            # check structure for defined page content data
+            if ( ref $Page->{Content} ne 'ARRAY' ) {
+                return $ReturnError->( Translatable("Key Content for page $PageIndex is not an Array.") );
+            }
+            elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
+                return $ReturnError->( Translatable("Key Content for page $PageIndex is empty.") );
+            }
+            else {
 
-            # check structure for defined page content sections
-            for my $SectionIndex ( 0 .. $#{ $Page->{Content} } ) {
-                my $Section = $Page->{Content}->[$SectionIndex];
+                # check structure for defined page content sections
+                for my $SectionIndex ( 0 .. $#{ $Page->{Content} } ) {
+                    my $Section = $Page->{Content}->[$SectionIndex];
 
-                if ( !$Section ) {
-                    return $ReturnError->( Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.") );
-                }
-                elsif ( ref $Section ne 'HASH' ) {
-                    return $ReturnError->( Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.") );
-                }
-                elsif ( !$Section->%* ) {
-                    return $ReturnError->( Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.") );
-                }
+                    if ( !$Section ) {
+                        return $ReturnError->( Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.") );
+                    }
+                    elsif ( ref $Section ne 'HASH' ) {
+                        return $ReturnError->( Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.") );
+                    }
+                    elsif ( !$Section->%* ) {
+                        return $ReturnError->( Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.") );
+                    }
 
-                if ( !$Section->{Section} ) {
-                    return $ReturnError->( Translatable("A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.") );
-                }
-                else {
+                    if ( !$Section->{Section} ) {
+                        return $ReturnError->( Translatable("A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.") );
+                    }
+                    else {
 
-                    # store section name for checking data integrity later on
-                    $SectionIsMissing{ $Section->{Section} } = 1;
+                        # store section name for checking data integrity later on
+                        $SectionIsMissing{ $Section->{Section} } = 1;
+                    }
                 }
             }
         }
@@ -558,6 +800,23 @@ sub DefinitionCheck {
     return {
         Success => 1,
     };
+}
+
+=head2 RoleDefinitionCheck()
+
+check the syntax of a new role definition
+
+    my $True = $ConfigItemObject->RoleDefinitionCheck(
+        Definition      => 'the definition code',
+        CheckSubElement => 1,                 # (optional, default 0, to check sub elements recursively)
+    );
+
+=cut
+
+sub RoleDefinitionCheck {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->DefinitionCheck( %Param, Type => 'Role' );
 }
 
 =head2 DefinitionNeedSync()
@@ -806,6 +1065,87 @@ sub DefinitionSync {
 }
 
 =begin Internal:
+
+=head2 _ProcessRoles
+
+For convenience the YAML for a config item class may contain a subtree called Roles. Usually these Roles
+load other YAML documents which contain a Section hash. These section a merged into the toplevel Section hash.
+The keys of the merged in sections are the Role key joined with the loaded section name. The join marker is C<::>.
+
+=cut
+
+sub _ProcessRoles {
+    my ( $Self, %Param ) = @_;
+
+    # check definition
+    if ( !$Param{DefinitionRef} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need DefinitionRef!',
+        );
+
+        return;
+    }
+
+    # avoid undefs
+    my $DefinitionRef = $Param{DefinitionRef};
+    $DefinitionRef->{Sections} //= {};
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # get role list for mapping name to ID
+    my %RoleName2ID;
+    {
+        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $RoleList             = $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Role',
+        );
+        %RoleName2ID = reverse $RoleList->%*;
+    }
+
+    # overwrite without mercy
+    my $Roles = $DefinitionRef->{Roles} // {};
+    ROLE_KEY:
+    for my $RoleKey ( keys $Roles->%* ) {
+        my $RoleSource = $Roles->{$RoleKey};
+
+        # Version is required
+        next ROLE_KEY unless $RoleSource->{Version};
+
+        # The name of the role is per default the key in the Roles hash,
+        # but can be overridden by an explicit attribute 'Name'.
+        # This allows to use a more convenient name in the class defintion.
+        my $RoleName = $RoleSource->{Name} // $RoleKey;
+
+        # the fetching is done via the ID
+        my $RoleID = $RoleName2ID{$RoleName};
+
+        next ROLE_KEY unless $RoleID;
+
+        # This already parses the YAML
+        my $RoleDefinition = $ConfigItemObject->RoleDefinitionGet(
+            RoleID  => $RoleID,
+            Version => $RoleSource->{Version},
+        );
+
+        next ROLE_KEY unless $RoleDefinition;
+        next ROLE_KEY unless ref $RoleDefinition eq 'HASH';
+        next ROLE_KEY unless $RoleDefinition->{Definition};
+        next ROLE_KEY unless $RoleDefinition->{DefinitionRef};
+        next ROLE_KEY unless $RoleDefinition->{DefinitionRef}->{Sections};
+        next ROLE_KEY unless ref $RoleDefinition->{DefinitionRef}->{Sections} eq 'HASH';
+
+        # Add the sections from the Role to the Sections of the class.
+        # Note that the convenient name from the class definition is used here
+        my $RoleSections = $RoleDefinition->{DefinitionRef}->{Sections};
+        for my $RoleSectionKey ( keys $RoleSections->%* ) {
+            my $SectionName = join '::', $RoleKey, $RoleSectionKey;
+            $DefinitionRef->{Sections}->{$SectionName} = $RoleSections->{$RoleSectionKey};
+        }
+    }
+
+    return;
+}
 
 =head2 _DefinitionPrepare()
 

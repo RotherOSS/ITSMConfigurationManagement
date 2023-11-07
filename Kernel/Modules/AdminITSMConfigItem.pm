@@ -54,6 +54,14 @@ sub Run {
     return $LayoutObject->ErrorScreen unless ref $ClassList eq 'HASH';
     return $LayoutObject->ErrorScreen unless $ClassList->%*;
 
+    # get role list and check it, the role list may be empty
+    my $RoleList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Role',
+    );
+
+    return $LayoutObject->ErrorScreen unless $RoleList;
+    return $LayoutObject->ErrorScreen unless ref $RoleList eq 'HASH';
+
     # get needed objects
     my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
@@ -62,7 +70,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # list of the versions of the definition of a config item class
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'DefinitionList' ) {
+    if ( $Self->{Subaction} eq 'ClassDefinitionList' ) {
 
         # get class id
         my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
@@ -79,7 +87,7 @@ sub Run {
 
         # output overview result
         $LayoutObject->Block(
-            Name => 'DefinitionList',
+            Name => 'ClassDefinitionList',
         );
 
         # get definition list
@@ -96,7 +104,7 @@ sub Run {
 
             # output definition
             $LayoutObject->Block(
-                Name => 'DefinitionListRow',
+                Name => 'ClassDefinitionListRow',
                 Data => {
                     $Definition->%*,
                     Class        => $ClassList->{$ClassID},
@@ -116,11 +124,67 @@ sub Run {
             $LayoutObject->Footer;
     }
 
+    # ------------------------------------------------------------ #
+    # list of the versions of the definition of a config item role
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'RoleDefinitionList' ) {
+
+        # get role id
+        my $RoleID = $ParamObject->GetParam( Param => 'RoleID' );
+
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $RoleID;
+
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original         => \%Param,
+            ClassList        => $ClassList,
+            RoleList         => $RoleList,
+            ShowOverviewLink => 1,
+        );
+
+        # output overview result
+        $LayoutObject->Block(
+            Name => 'RoleDefinitionList',
+        );
+
+        # get list of definitions for that role, keeping the call to DefinitionList()
+        my $DefinitionList = $ConfigItemObject->RoleDefinitionList(
+            RoleID => $RoleID,
+        );
+
+        for my $Definition ( reverse $DefinitionList->@* ) {
+
+            # get user data
+            my $FullName = $UserObject->UserName(
+                UserID => $Definition->{CreateBy},
+            );
+
+            # output definition
+            $LayoutObject->Block(
+                Name => 'RoleDefinitionListRow',
+                Data => {
+                    $Definition->%*,
+                    Role         => $RoleList->{$RoleID},
+                    CreateByUser => $FullName,
+                },
+            );
+        }
+
+        # generate output
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
+    }
 
     # ------------------------------------------------------------ #
     # class definition view
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'DefinitionView' ) {
+    if ( $Self->{Subaction} eq 'ClassDefinitionView' ) {
 
         # get definition id
         my $DefinitionID = $ParamObject->GetParam( Param => 'DefinitionID' );
@@ -158,7 +222,66 @@ sub Run {
 
         # output overview result
         $LayoutObject->Block(
-            Name => 'DefinitionView',
+            Name => 'ClassDefinitionView',
+            Data => {
+                $Definition->%*,
+                CreateByUser => $UserName,
+            },
+        );
+
+        # generate output
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
+    }
+
+    # ------------------------------------------------------------ #
+    # role definition view
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'RoleDefinitionView' ) {
+
+        # get definition id
+        my $DefinitionID = $ParamObject->GetParam( Param => 'DefinitionID' );
+
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $DefinitionID;
+
+        # get definition
+        my $Definition = $ConfigItemObject->RoleDefinitionGet(
+            DefinitionID => $DefinitionID,
+        );
+
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original     => \%Param,
+            ClassList    => $ClassList,
+            RoleList     => $RoleList,
+            RoleSelected => {
+                ID   => $Definition->{RoleID},
+                Name => $Definition->{Role},
+            },
+            RoleVersionSelected => {
+                ID      => $DefinitionID,
+                Version => $Definition->{Version},
+            },
+            ShowOverviewLink => 1,
+        );
+
+        $Definition->{DefinitionString} = $LayoutObject->Ascii2Html(
+            Text => $Definition->{Definition},
+        );
+
+        my $UserName = $UserObject->UserName(
+            UserID => $Definition->{CreateBy},
+        );
+
+        # output overview result
+        $LayoutObject->Block(
+            Name => 'RoleDefinitionView',
             Data => {
                 $Definition->%*,
                 CreateByUser => $UserName,
@@ -179,7 +302,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # class definition change
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'DefinitionChange' ) {
+    if ( $Self->{Subaction} eq 'ClassDefinitionChange' ) {
 
         # get class id
         my $ClassID = $ParamObject->GetParam( Param => 'ClassID' );
@@ -206,7 +329,7 @@ sub Run {
 
         # output overview result
         $LayoutObject->Block(
-            Name => 'DefinitionChange',
+            Name => 'ClassDefinitionChange',
             Data => {
                 %{$Definition},
                 ClassID => $ClassID,
@@ -228,11 +351,62 @@ sub Run {
             $LayoutObject->Footer;
     }
 
+    # ------------------------------------------------------------ #
+    # role definition change
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'RoleDefinitionChange' ) {
+
+        # get class id
+        my $RoleID = $ParamObject->GetParam( Param => 'RoleID' );
+
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $RoleID;
+
+        # get class definition
+        my $Definition = $ConfigItemObject->DefinitionGet(
+            ClassID => $RoleID,
+        );
+
+        # show sidebar, activate the 'Overview' block
+        $Self->_ShowSidebar(
+            Original     => \%Param,
+            ClassList    => $ClassList,
+            RoleList     => $RoleList,
+            RoleSelected => {
+                ID   => $Definition->{ClassID},
+                Name => $Definition->{Class},
+            },
+            Edit             => 1,
+            ShowOverviewLink => 1,
+        );
+
+        # output overview result
+        $LayoutObject->Block(
+            Name => 'RoleDefinitionChange',
+            Data => {
+                %{$Definition},
+                RoleID => $RoleID,
+                Role   => $RoleList->{$RoleID},
+                Rows   =>
+                    $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
+                    || 30,
+            },
+        );
+
+        # generate output
+        return join '',
+            $LayoutObject->Header,
+            $LayoutObject->NavigationBar,
+            $LayoutObject->Output(
+                TemplateFile => 'AdminITSMConfigItem',
+                Data         => \%Param,
+            ),
+            $LayoutObject->Footer;
+    }
 
     # ------------------------------------------------------------ #
     # class definition save
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'DefinitionSave' ) {
+    if ( $Self->{Subaction} eq 'ClassDefinitionSave' ) {
         my %Definition;
 
         # get params
@@ -285,7 +459,7 @@ sub Run {
 
             # output overview result
             $LayoutObject->Block(
-                Name => 'DefinitionChange',
+                Name => 'ClassDefinitionChange',
                 Data => {
                     %Definition,
                     %Error,
@@ -314,7 +488,99 @@ sub Run {
         my $ContinueAfterSave = $ParamObject->GetParam( Param => 'ContinueAfterSave' );
         if ($ContinueAfterSave) {
             return $LayoutObject->Redirect(
-                OP => "Action=$Self->{Action};Subaction=DefinitionChange;ClassID=$Definition{ClassID}",
+                OP => "Action=$Self->{Action};Subaction=ClassDefinitionChange;ClassID=$Definition{ClassID}",
+            );
+        }
+
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # role definition save
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'RoleDefinitionSave' ) {
+        my %Definition;
+
+        # get params
+        for my $FormParam (qw(RoleID Definition)) {
+            $Definition{$FormParam} = $ParamObject->GetParam( Param => $FormParam ) || '';
+        }
+        for my $FormParam (qw(RoleID Definition)) {
+            if ( !$Definition{$FormParam} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Need $FormParam!"
+                );
+
+                return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+            }
+        }
+
+        # Validate YAML code by converting it to Perl.
+        my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $Definition{Definition},
+        );
+
+        return $LayoutObject->ErrorScreen unless ref $DefinitionRef eq 'HASH';
+
+        # add to database
+        my $Result = $ConfigItemObject->RoleDefinitionAdd(
+            %Definition,
+            UserID => $Self->{UserID},
+        );
+
+        # display change screen with error if check failed
+        if ( IsHashRefWithData($Result) && $Result->{Error} ) {
+
+            my %Error = (
+                Error        => $Result->{Error},
+                ErrorClasses => 'ServerError Error',
+            );
+
+            # show sidebar, activate the 'Overview' block
+            $Self->_ShowSidebar(
+                Original     => \%Param,
+                ClassList    => $ClassList,
+                RoleList     => $RoleList,
+                RoleSelected => {
+                    ID   => $Definition{ClassID},
+                    Name => $RoleList->{ $Definition{ClassID} },
+                },
+                Edit             => 1,
+                ShowOverviewLink => 1,
+            );
+
+            # output overview result
+            $LayoutObject->Block(
+                Name => 'RoleDefinitionChange',
+                Data => {
+                    %Definition,
+                    %Error,
+                    RoleID => $Definition{ClassID},
+                    Role   => $ClassList->{ $Definition{ClassID} },
+                    Rows   =>
+                        $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
+                        || 30,
+                },
+            );
+
+            # generate output
+            return join '',
+                $LayoutObject->Header,
+                $LayoutObject->NavigationBar,
+                $LayoutObject->Output(
+                    TemplateFile => 'AdminITSMConfigItem',
+                    Data         => {
+                        %Param,
+                    },
+                ),
+                $LayoutObject->Footer;
+        }
+
+        my $ContinueAfterSave = $ParamObject->GetParam( Param => 'ContinueAfterSave' );
+        if ($ContinueAfterSave) {
+            return $LayoutObject->Redirect(
+                OP => "Action=$Self->{Action};Subaction=RoleDefinitionChange;RoleID=$Definition{RoleID}",
             );
         }
 
@@ -342,10 +608,21 @@ sub Run {
         for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
 
             $LayoutObject->Block(
-                Name => 'OverviewListRow',
+                Name => 'OverviewDefinitionListRow',
                 Data => {
                     ClassID => $ClassID,
                     Name    => $ClassList->{$ClassID},
+                },
+            );
+        }
+
+        for my $RoleID ( sort { $RoleList->{$a} cmp $RoleList->{$b} } keys $RoleList->%* ) {
+
+            $LayoutObject->Block(
+                Name => 'OverviewRoleListRow',
+                Data => {
+                    RoleID => $RoleID,
+                    Name   => $RoleList->{$RoleID},
                 },
             );
         }
