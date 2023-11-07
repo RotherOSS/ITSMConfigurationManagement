@@ -50,6 +50,10 @@ sub Run {
     # get config of frontend module
     $Self->{Config} = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
 
+    # use column configs from AgentITSMConfigItem
+    $Self->{Config}{ClassColumnsAvailable} = $ConfigObject->Get('ITSMConfigItem::Frontend::AgentITSMConfigItem')->{ClassColumnsAvailable};
+    $Self->{Config}{ClassColumnsDefault}   = $ConfigObject->Get('ITSMConfigItem::Frontend::AgentITSMConfigItem')->{ClassColumnsDefault};
+
     # get config data
     $Self->{StartHit}    = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
     $Self->{SearchLimit} = $Self->{Config}->{SearchLimit} || 10000;
@@ -96,6 +100,17 @@ sub Run {
     my $Definition;
 
     if ($ClassID) {
+
+        # set filter params for showing correct columns
+        $Self->{Filter} = $ClassList->{$ClassID};
+        $Self->{Filters}->%* = map {
+            $_ => {
+                Name   => $_,
+                Prio   => 0,
+                Count  => 0,
+                Search => {},
+            }
+        } values $ClassList->%*;
 
         # get current definition
         $Definition = $ConfigItemObject->DefinitionGet(
@@ -855,17 +870,17 @@ sub Run {
             }
         }
 
+        # convert attributes
+        if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
+            $GetParam{ShownAttributes} = [ split /;/, $GetParam{ShownAttributes} ];
+        }
+
         # save search profile (under last-search or real profile name)
         $Self->{SaveProfile} = 1;
 
         # remember last search values only if search is called from a search dialog
         # not from results page
         if ( $Self->{SaveProfile} && $Self->{Profile} && $SearchDialog ) {
-
-            # convert attributes
-            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
-                $GetParam{ShownAttributes} = [ split /;/, $GetParam{ShownAttributes} ];
-            }
 
             # remove old profile stuff
             $SearchProfileObject->SearchProfileDelete(

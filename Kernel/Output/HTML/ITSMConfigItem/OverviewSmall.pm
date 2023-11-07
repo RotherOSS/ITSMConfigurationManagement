@@ -90,17 +90,7 @@ sub new {
     }
 
     # check for filter
-    my $FilterName;
-
-    # if we have filters, fetch name of selected filter
-    if ( IsHashRefWithData( $Self->{Filters} ) ) {
-        $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
-    }
-
-    # AgentITSMConfigItemSearch does not use filters, instead use passed filter param directly
-    else {
-        $FilterName = $Self->{Filter} || 'All';
-    }
+    my $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
 
     if ( $Self->{Action} =~ /^Customer/ ) {
 
