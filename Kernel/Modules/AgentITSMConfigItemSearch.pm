@@ -105,10 +105,7 @@ sub Run {
         $Self->{Filter} = $ClassList->{$ClassID};
         $Self->{Filters}->%* = map {
             $_ => {
-                Name   => $_,
-                Prio   => 0,
-                Count  => 0,
-                Search => {},
+                Name => $_,
             }
         } values $ClassList->%*;
 
