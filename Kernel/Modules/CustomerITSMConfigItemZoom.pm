@@ -86,6 +86,7 @@ sub Run {
         DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
+
         # additional sanety check - CustomerPermission should handle this case usually
         return $LayoutObject->CustomerErrorScreen(
             Message => $LayoutObject->{LanguageObject}->Translate('ConfigItem not found!'),
@@ -274,11 +275,13 @@ sub Run {
 
             my @VersionSelectionData = map {
                 {
-                    Key   => $BaseLink . "VersionID=$_->{VersionID}",
-                    Value => "$_->{Name} "
-                        . ( $_->{VersionNumber} || $_->{VersionID} )
-                        . " ($_->{CreateTime})",
-                },
+                    Key   => ( $BaseLink . "VersionID=$_->{VersionID}" ),
+                    Value => (
+                        "$_->{Name} "
+                            . ( $_->{VersionNumber} || $_->{VersionID} )
+                            . " ($_->{CreateTime})"
+                    ),
+                }
             } $VersionList->@*;
 
             my $VersionSelection = $LayoutObject->BuildSelection(
