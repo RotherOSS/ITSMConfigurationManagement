@@ -604,12 +604,31 @@ sub RoleDefinitionAdd {
 
 =head2 DefinitionCheck()
 
-check the syntax of a new definition
+checks the syntax of a new definition. Both class and role definitions can be checked
+with this method.
 
-    my $True = $ConfigItemObject->DefinitionCheck(
+    my $Result = $ConfigItemObject->DefinitionCheck(
         Definition      => 'the definition code',
-        CheckSubElement => 1,                 # (optional, default 0, to check sub elements recursively)
+        CheckSubElement => 1,                 # optional, default is 0, to check sub elements recursively)
+        Type            => 'Class',           # optional, default is 'Class', possible values are 'Class' and 'Role'
     );
+
+Returns in the case of a valid definition:
+
+    my $Result = {
+        Success => 1,
+    };
+
+Indicates the first found problem in the case of an invalid definition:
+
+    my $Result = {
+        Success => 0,
+        Error   => '
+        Error   => q{%s is missing. Please provide data for %s in the definition.},
+        ErrorArgs => [ 'Sections', 'Sections' ],
+    };
+
+Note that the error message is split up in constant and variable parts. This allows translation in the user interface.
 
 =cut
 
@@ -622,12 +641,14 @@ sub DefinitionCheck {
             Priority => 'error',
             Message  => 'Need Definition!',
         );
+
         return;
     }
 
     # This method is used for roles and classes
     my $Type = $Param{Type} // 'Class';
 
+    # just for convenience
     my $ReturnError = sub {
         return {
             Success   => 0,
@@ -648,19 +669,19 @@ sub DefinitionCheck {
         );
     }
 
-    # merge the roles into the DefinitionRef, the passed in reference is modified in place
+    # Merge the roles into the DefinitionRef. The passed in reference is modified in place.
+    # This might creates the 'Sections' attribute when it doesn't already exist.
     $Self->_ProcessRoles(
         DefinitionRef => $DefinitionRef,
     );
 
-    # check first level data format
+    # check the data structures of the top level attributes
     my %ExpectedFormat = (
         Sections => 'Hash',
     );
     if ( $Type eq 'Class' ) {
         $ExpectedFormat{Pages} = 'Array';
     }
-
     for my $Key ( sort keys %ExpectedFormat ) {
 
         # either pages or sections data invalid
@@ -862,7 +883,7 @@ sub DefinitionCheck {
 
 =head2 RoleDefinitionCheck()
 
-check the syntax of a new role definition
+checks the syntax and the sanity of a new role definition:
 
     my $True = $ConfigItemObject->RoleDefinitionCheck(
         Definition      => 'the definition code',
@@ -1172,7 +1193,7 @@ sub _ProcessRoles {
 
         # The name of the role is per default the key in the Roles hash,
         # but can be overridden by an explicit attribute 'Name'.
-        # This allows to use a more convenient name in the class defintion.
+        # This allows to use a more convenient name in the class definition.
         my $RoleName = $RoleSource->{Name} // $RoleKey;
 
         # the fetching is done via the ID
