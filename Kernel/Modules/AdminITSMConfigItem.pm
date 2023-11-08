@@ -328,15 +328,14 @@ sub Run {
         );
 
         # output overview result
+        my $EditorRows = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows} || 30;
         $LayoutObject->Block(
             Name => 'ClassDefinitionChange',
             Data => {
                 %{$Definition},
                 ClassID => $ClassID,
                 Class   => $ClassList->{$ClassID},
-                Rows    =>
-                    $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
-                    || 30,
+                Rows    => $EditorRows,
             },
         );
 
@@ -380,15 +379,14 @@ sub Run {
         );
 
         # output overview result
+        my $EditorRows = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows} || 30;
         $LayoutObject->Block(
             Name => 'RoleDefinitionChange',
             Data => {
                 %{$Definition},
                 RoleID => $RoleID,
                 Role   => $RoleList->{$RoleID},
-                Rows   =>
-                    $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
-                    || 30,
+                Rows   => $EditorRows,
             },
         );
 
@@ -407,9 +405,9 @@ sub Run {
     # class definition save
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ClassDefinitionSave' ) {
-        my %Definition;
 
-        # get params
+        # get and check params
+        my %Definition;
         for my $FormParam (qw(ClassID Definition)) {
             $Definition{$FormParam} = $ParamObject->GetParam( Param => $FormParam ) || '';
         }
@@ -419,6 +417,7 @@ sub Run {
                     Priority => 'error',
                     Message  => "Need $FormParam!"
                 );
+
                 return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
             }
         }
@@ -468,7 +467,6 @@ sub Run {
                 },
             );
 
-            # output header
             # generate output
             return join '',
                 $LayoutObject->Header,
@@ -496,9 +494,9 @@ sub Run {
     # role definition save
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'RoleDefinitionSave' ) {
-        my %Definition;
 
-        # get params
+        # get and check params
+        my %Definition;
         for my $FormParam (qw(RoleID Definition)) {
             $Definition{$FormParam} = $ParamObject->GetParam( Param => $FormParam ) || '';
         }
@@ -529,35 +527,32 @@ sub Run {
         # display change screen with error if check failed
         if ( IsHashRefWithData($Result) && $Result->{Error} ) {
 
-            my %Error = (
-                Error        => $Result->{Error},
-                ErrorClasses => 'ServerError Error',
-            );
-
             # show sidebar, activate the 'Overview' block
             $Self->_ShowSidebar(
                 Original     => \%Param,
                 ClassList    => $ClassList,
                 RoleList     => $RoleList,
                 RoleSelected => {
-                    ID   => $Definition{ClassID},
-                    Name => $RoleList->{ $Definition{ClassID} },
+                    ID   => $Definition{RoleID},
+                    Name => $RoleList->{ $Definition{RoleID} },
                 },
                 Edit             => 1,
                 ShowOverviewLink => 1,
             );
 
             # output overview result
+            my $EditorRows = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows} || 30;
             $LayoutObject->Block(
                 Name => 'RoleDefinitionChange',
                 Data => {
                     %Definition,
-                    %Error,
-                    RoleID => $Definition{ClassID},
-                    Role   => $ClassList->{ $Definition{ClassID} },
-                    Rows   =>
-                        $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
-                        || 30,
+                    Error        => $Result->{Error},
+                    ErrorArg1    => $Result->{ErrorArgs}->[0],
+                    ErrorArg2    => $Result->{ErrorArgs}->[1],
+                    ErrorClasses => 'ServerError Error',
+                    RoleID       => $Definition{RoleID},
+                    Role         => $RoleList->{ $Definition{RoleID} },
+                    Rows         => $EditorRows,
                 },
             );
 

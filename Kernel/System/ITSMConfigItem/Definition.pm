@@ -477,12 +477,8 @@ sub DefinitionAdd {
         %Param,
     ) || '--- []';
 
-    # set version
-    my $Version = 1;
-    if ( $LastDefinition->{Version} ) {
-        $Version = $LastDefinition->{Version};
-        $Version++;
-    }
+    # increment version
+    my $Version = ( $LastDefinition->{Version} || 0 ) + 1;
 
     # insert new definition
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -524,7 +520,7 @@ sub DefinitionAdd {
 
 =head2 RoleDefinitionAdd()
 
-add a new role
+add a new role definition
 
     my $DefinitionID = $ConfigItemObject->RoleDefinitionAdd(
         RoleID     => 123,
@@ -539,6 +535,8 @@ add a new role
 sub RoleDefinitionAdd {
     my ( $Self, %Param ) = @_;
 
+    # TODO: reunify with DefinitionAdd()
+
     # check needed stuff
     for my $Argument (qw(RoleID Definition UserID)) {
         if ( !$Param{$Argument} ) {
@@ -550,7 +548,14 @@ sub RoleDefinitionAdd {
         }
     }
 
-    # check definition, not done for Roles
+    # check sanity of the role definition
+    {
+        my $CheckResult = $Self->RoleDefinitionCheck(
+            Definition => $Param{Definition},
+        );
+
+        return $CheckResult unless $CheckResult->{Success};
+    }
 
     # get last definition
     my $LastDefinition = $Self->DefinitionGet(
@@ -573,12 +578,8 @@ sub RoleDefinitionAdd {
         return;
     }
 
-    # set version
-    my $Version = 1;
-    if ( $LastDefinition->{Version} ) {
-        $Version = $LastDefinition->{Version};
-        $Version++;
-    }
+    # increment version
+    my $Version = ( $LastDefinition->{Version} || 0 ) + 1;
 
     # insert new definition
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -671,9 +672,11 @@ sub DefinitionCheck {
 
     # Merge the roles into the DefinitionRef. The passed in reference is modified in place.
     # This might creates the 'Sections' attribute when it doesn't already exist.
-    $Self->_ProcessRoles(
-        DefinitionRef => $DefinitionRef,
-    );
+    if ( $Type eq 'Class' ) {
+        $Self->_ProcessRoles(
+            DefinitionRef => $DefinitionRef,
+        );
+    }
 
     # check the data structures of the top level attributes
     my %ExpectedFormat = (
@@ -1181,8 +1184,15 @@ sub _ProcessRoles {
         return;
     }
 
-    # avoid undefs
+    # roles are optional
     my $DefinitionRef = $Param{DefinitionRef};
+    my $Roles         = $DefinitionRef->{Roles};
+
+    return unless $Roles;
+    return unless ref $Roles eq 'HASH';    # silently ignore
+    return unless $Roles->%*;              # nothing to do
+
+    # if a class has roles, then Sections is not required
     $DefinitionRef->{Sections} //= {};
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
@@ -1198,7 +1208,6 @@ sub _ProcessRoles {
     }
 
     # overwrite without mercy
-    my $Roles = $DefinitionRef->{Roles} // {};
     ROLE_KEY:
     for my $RoleKey ( keys $Roles->%* ) {
         my $RoleSource = $Roles->{$RoleKey};

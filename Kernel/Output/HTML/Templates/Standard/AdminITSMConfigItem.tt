@@ -341,6 +341,13 @@
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     <fieldset class="TableLike">
 
+[% IF Data.Error %]
+                        <div class="WidgetSimple WidgetMessage Top Error">
+                            <div class="Content">[% Translate(Data.Error, Data.ErrorArg1, Data.ErrorArg2) | html %]</div>
+                        </div>
+                        <div class="Clear"></div>
+[% END %]
+
 
                         <label>[% Translate("Config Item Role") | html %]: </label>
                         <div class="Field">
@@ -350,7 +357,7 @@
 
                         <label for="Definition">[% Translate("Definition") | html %]: </label>
                         <div class="Field">
-                            <textarea name="Definition" id="Definition" rows="[% Data.Rows | html %]" cols="80" wrap="off">[% Data.Definition | html %]</textarea>
+                            <textarea name="Definition" id="Definition" [% IF Data.Error %]class="[% Data.ErrorClasses %]"[% END %] rows="[% Data.Rows | html %]" cols="80" wrap="off">[% Data.Definition | html %]</textarea>
                         </div>
                         <div class="Clear"></div>
 
