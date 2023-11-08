@@ -172,7 +172,7 @@ sub _AddAction {
     my ( $Self, %Param ) = @_;
 
     my @ExtraParams;
-    for my $Section ( qw/General Request Response/ ) {
+    for my $Section (qw/General Request Response/) {
         if ( $Self->{Settings} && $Self->{Settings}{$Section} ) {
             push @ExtraParams, $Self->{Settings}{$Section}->@*;
         }
@@ -233,14 +233,14 @@ sub _AddAction {
         Type        => $GetParam->{InvokerType},
     };
 
-    for my $ParamConfig ( @ExtraParams ) {
+    for my $ParamConfig (@ExtraParams) {
         if ( exists $ParamConfig->{ErrorFunction} ) {
             my $Error = $ParamConfig->{ErrorFunction}->(
                 %Param,
                 GetParam => $GetParam,
             );
 
-            if ( $Error ) {
+            if ($Error) {
                 $Errors{ $ParamConfig->{Name} . 'ServerError' } = $Error;
             }
         }
@@ -344,7 +344,7 @@ sub _ChangeAction {
     my ( $Self, %Param ) = @_;
 
     my @ExtraParams;
-    for my $Section ( qw/General Request Response/ ) {
+    for my $Section (qw/General Request Response/) {
         if ( $Self->{Settings} && $Self->{Settings}{$Section} ) {
             push @ExtraParams, $Self->{Settings}{$Section}->@*;
         }
@@ -422,14 +422,14 @@ sub _ChangeAction {
 
     $InvokerConfig->{Description} = $GetParam->{Description};
 
-    for my $ParamConfig ( @ExtraParams ) {
+    for my $ParamConfig (@ExtraParams) {
         if ( exists $ParamConfig->{ErrorFunction} ) {
             my $Error = $ParamConfig->{ErrorFunction}->(
                 %Param,
                 GetParam => $GetParam,
             );
 
-            if ( $Error ) {
+            if ($Error) {
                 $Errors{ $ParamConfig->{Name} . 'ServerError' } = $Error;
             }
         }
@@ -821,7 +821,7 @@ sub _ShowScreen {
     }
 
     SECTION:
-    for my $Section ( qw/General Request Response/ ) {
+    for my $Section (qw/General Request Response/) {
         next SECTION if !$Self->{Settings};
         next SECTION if !$Self->{Settings}{$Section};
 
@@ -834,7 +834,7 @@ sub _ShowScreen {
             my $SettingHTML;
             if ( $Setting->{Type} eq 'Array' ) {
                 $SettingHTML = $LayoutObject->BuildSelection(
-                    Class      => 'Modernize',
+                    Class => 'Modernize',
                     $Setting->%*,
                     SelectedID => $Param{InvokerConfig}->{ $Setting->{Name} } // $Setting->{SelectedID},
                 );
@@ -1065,7 +1065,7 @@ sub _ExtraSettings {
 
     if ( $ClassRestrictions && $ClassRestrictions->{ $Param{Webservice} } ) {
         my %ClassLookup = reverse $ClassList->%*;
-        @Classes        = map { $ClassLookup{$_} } $ClassRestrictions->{ $Param{Webservice} }->@*;
+        @Classes = map { $ClassLookup{$_} } $ClassRestrictions->{ $Param{Webservice} }->@*;
     }
     else {
         @Classes = keys $ClassList->%*;
@@ -1084,6 +1084,8 @@ sub _ExtraSettings {
             }
         } @Classes,
     ];
+
+    return;
 }
 
 sub _PossibleValuesGet {
