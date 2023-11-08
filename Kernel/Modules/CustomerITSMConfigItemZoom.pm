@@ -23,6 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(any);
 
 # CPAN modules
 
@@ -200,7 +201,10 @@ sub Run {
             next PAGE unless $Page->{Interfaces};
             next PAGE unless grep { $_ eq 'Customer' } $Page->{Interfaces}->@*;
 
+            # restriction by Groups is optional
             if ( $Page->{Groups} ) {
+
+                # fetch the groups where the user has read access
                 if ( !%GroupLookup ) {
                     %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
                         UserID => $Self->{UserID},
@@ -209,15 +213,8 @@ sub Run {
                     );
                 }
 
-                my $AccessOk = 0;
-                GROUP:
-                for my $GroupName ( $Page->{Groups}-@* ) {
-                    next GROUP if !$GroupLookup{ $GroupName };
-
-                    $AccessOk = 1;
-                }
-
-                next PAGE unless $AccessOk;
+                # grant access to the page only when the user is in one of the specified groups
+                next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
             }
 
             push @Pages, $Page;
