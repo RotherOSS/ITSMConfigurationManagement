@@ -442,12 +442,14 @@ sub DefinitionAdd {
         }
     }
 
-    # check definition
-    my $CheckResult = $Self->DefinitionCheck(
-        Definition => $Param{Definition},
-    );
+    # check sanity of the definition
+    {
+        my $CheckResult = $Self->DefinitionCheck(
+            Definition => $Param{Definition},
+        );
 
-    return $CheckResult unless $CheckResult->{Success};
+        return $CheckResult unless $CheckResult->{Success};
+    }
 
     # get last definition
     my $LastDefinition = $Self->DefinitionGet(
@@ -628,8 +630,9 @@ sub DefinitionCheck {
 
     my $ReturnError = sub {
         return {
-            Success => 0,
-            Error   => $_[0],
+            Success   => 0,
+            Error     => $_[0],
+            ErrorArgs => [ ( $_[1] // '' ), ( $_[2] // '' ) ],    # only two args are supported
         };
     };
 
@@ -640,7 +643,9 @@ sub DefinitionCheck {
 
     # YAML invalid
     if ( !IsHashRefWithData($DefinitionRef) ) {
-        return $ReturnError->( Translatable('Base structure is not valid. Please provide an array with data in YAML format.') );
+        return $ReturnError->(
+            Translatable('Base structure is not valid. Please provide an array with data in YAML format.')
+        );
     }
 
     # merge the roles into the DefinitionRef, the passed in reference is modified in place
@@ -660,17 +665,29 @@ sub DefinitionCheck {
 
         # either pages or sections data invalid
         if ( !$DefinitionRef->{$Key} ) {
-            return $ReturnError->( Translatable("$Key is missing. Please provide data for $Key in the definition.") );
+            return $ReturnError->(
+                Translatable(q{%s is missing. Please provide data for %s in the definition.}),
+                $Key,
+                $Key,
+            );
         }
 
         # TODO: this is not translateable
         if ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
-            return $ReturnError->( Translatable("Data for $Key is not a $ExpectedFormat{$Key}. Please correct the syntax.") );
+            return $ReturnError->(
+                Translatable(q{Data for %s is not a %s. Please correct the syntax.}),
+                $Key,
+                $ExpectedFormat{$Key}
+            );
         }
 
         my $ValidateFunctionRef = \&{"Kernel::System::VariableCheck::Is$ExpectedFormat{$Key}RefWithData"};
         if ( !$ValidateFunctionRef->( $DefinitionRef->{$Key} ) ) {
-            return $ReturnError->( Translatable("Data for $Key is empty. Please provide data for $Key in the definition.") );
+            return $ReturnError->(
+                Translatable(q{Data for %s is empty. Please provide data for %s in the definition.}),
+                $Key,
+                $Key,
+            );
         }
     }
 
@@ -683,16 +700,26 @@ sub DefinitionCheck {
             my $Page = $DefinitionRef->{Pages}->[$PageIndex];
             for my $Needed (qw(Name Content)) {
                 if ( !$Page->{$Needed} ) {
-                    return $ReturnError->( Translatable("Key '$Needed' is missing in the definition of page $PageIndex.") );
+                    return $ReturnError->(
+                        Translatable(q{Key '%s' is missing in the definition of page %s.}),
+                        $Needed,
+                        $PageIndex,
+                    );
                 }
             }
 
             # check structure for defined page content data
             if ( ref $Page->{Content} ne 'ARRAY' ) {
-                return $ReturnError->( Translatable("Key Content for page $PageIndex is not an Array.") );
+                return $ReturnError->(
+                    Translatable(q{Key Content for page %s is not an Array.}),
+                    $PageIndex,
+                );
             }
             elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
-                return $ReturnError->( Translatable("Key Content for page $PageIndex is empty.") );
+                return $ReturnError->(
+                    Translatable(q{Key Content for page %s is empty.}),
+                    $PageIndex,
+                );
             }
             else {
 
@@ -701,17 +728,29 @@ sub DefinitionCheck {
                     my $Section = $Page->{Content}->[$SectionIndex];
 
                     if ( !$Section ) {
-                        return $ReturnError->( Translatable("A section in page $PageIndex is invalid. Please provide data for the section or remove it.") );
+                        return $ReturnError->(
+                            Translatable(q{A section in page %s is invalid. Please provide data for the section or remove it.}),
+                            $PageIndex,
+                        );
                     }
                     elsif ( ref $Section ne 'HASH' ) {
-                        return $ReturnError->( Translatable("Data for a section in page $PageIndex is not a Hash. Please correct the syntax.") );
+                        return $ReturnError->(
+                            Translatable(q{Data for a section in page %s is not a Hash. Please correct the syntax.}),
+                            $PageIndex,
+                        );
                     }
                     elsif ( !$Section->%* ) {
-                        return $ReturnError->( Translatable("Data for a section in page $PageIndex is empty. Please provide data for the section.") );
+                        return $ReturnError->(
+                            Translatable(q{Data for a section in page %s is empty. Please provide data for the section.}),
+                            $PageIndex,
+                        );
                     }
 
                     if ( !$Section->{Section} ) {
-                        return $ReturnError->( Translatable("A section in page $PageIndex is missing the key 'Section', which has to be filled with the section name.") );
+                        return $ReturnError->(
+                            Translatable(q{A section in page %s is missing the key 'Section', which has to be filled with the section name.}),
+                            $PageIndex,
+                        );
                     }
                     else {
 
@@ -735,20 +774,33 @@ sub DefinitionCheck {
         my $Section = $DefinitionRef->{Sections}{$SectionName};
 
         if ( !$Section || !IsHashRefWithData($Section) ) {
-            return $ReturnError->( Translatable("Either the content of section $SectionName is entirely missing or not a hash.") );
+            return $ReturnError->(
+                Translatable(q{Either the content of section %s is entirely missing or not a hash.}),
+                $SectionName,
+            );
         }
 
         if ( !$Section->{Content} ) {
-            return $ReturnError->( Translatable("Key 'Content' is missing in section $SectionName.") );
+            return $ReturnError->(
+                Translatable(q{Key 'Content' is missing in section %s.}),
+                $SectionName,
+            );
         }
         elsif ( !IsArrayRefWithData( $Section->{Content} ) ) {
-            return $ReturnError->( sprintf Translatable("Data for 'Content' in section %s is not an array."), $SectionName );
+            return $ReturnError->(
+                Translatable(q{Data for 'Content' in section %s is not an array.}),
+                $SectionName
+            );
         }
 
         my @Grids;
         for my $ContentItem ( $Section->{Content}->@* ) {
             if ( !any { $ContentItem->{$_} } @NeededContentEntry ) {
-                return $ReturnError->( Translatable("Section $SectionName has content which doesn't provide one of the following entries <@NeededContentEntry>.") );
+                return $ReturnError->(
+                    Translatable(q{Section %s has content which doesn't provide one of the following entries <%s>.}),
+                    $SectionName,
+                    "@NeededContentEntry",
+                );
             }
             if ( $ContentItem->{DF} ) {
                 $DefinedDynamicFields{ $ContentItem->{DF} } = $SectionName;
@@ -764,7 +816,10 @@ sub DefinitionCheck {
             for my $Row ( $GridItem->{Rows}->@* ) {
                 for my $Cell ( $Row->@* ) {
                     if ( !$Cell->{DF} ) {
-                        return $ReturnError->( sprintf Translatable("Data for 'Content' of %s contains a grid without DF in a cell."), $SectionName );
+                        return $ReturnError->(
+                            Translatable(q{Data for 'Content' of %s contains a grid without DF in a cell.}),
+                            $SectionName
+                        );
                     }
                     $DefinedDynamicFields{ $Cell->{DF} } = $SectionName;
                 }
@@ -773,7 +828,10 @@ sub DefinitionCheck {
     }
 
     if (%SectionIsMissing) {
-        return $ReturnError->( Translatable( "The following sections are used in pages, but not defined: " . join( ', ', keys %SectionIsMissing ) ) );
+        return $ReturnError->(
+            Translatable(q{The following sections are used in pages, but are not defined: %s}),
+            join( ', ', sort keys %SectionIsMissing )
+        );
     }
 
     # check if all used dynamic fields are valid
@@ -790,9 +848,9 @@ sub DefinitionCheck {
         # check with dynamic field list
         if ( !$DFName2IDList{$DefinedFieldName} ) {
             return $ReturnError->(
-                Translatable(
-                    "Dynamic field $DefinedFieldName is used in section $DefinedDynamicFields{$DefinedFieldName}, but does not exist in the system. Perhaps you forgot to create it or misspelled its name?"
-                )
+                Translatable(q{Dynamic field %s is used in section %s, but does not exist in the system. Perhaps you forgot to create it or misspelled its name?}),
+                $DefinedFieldName,
+                $DefinedDynamicFields{$DefinedFieldName},
             );
         }
     }

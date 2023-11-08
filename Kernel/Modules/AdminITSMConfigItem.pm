@@ -439,11 +439,6 @@ sub Run {
         # display change screen with error if check failed
         if ( IsHashRefWithData($Result) && $Result->{Error} ) {
 
-            my %Error = (
-                Error        => $Result->{Error},
-                ErrorClasses => 'ServerError Error',
-            );
-
             # show sidebar, activate the 'Overview' block
             $Self->_ShowSidebar(
                 Original      => \%Param,
@@ -458,16 +453,18 @@ sub Run {
             );
 
             # output overview result
+            my $EditorRows = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows} || 30;
             $LayoutObject->Block(
                 Name => 'ClassDefinitionChange',
                 Data => {
                     %Definition,
-                    %Error,
-                    ClassID => $Definition{ClassID},
-                    Class   => $ClassList->{ $Definition{ClassID} },
-                    Rows    =>
-                        $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{EditorRows}
-                        || 30,
+                    Error        => $Result->{Error},
+                    ErrorArg1    => $Result->{ErrorArgs}->[0],
+                    ErrorArg2    => $Result->{ErrorArgs}->[1],
+                    ErrorClasses => 'ServerError Error',
+                    ClassID      => $Definition{ClassID},
+                    Class        => $ClassList->{ $Definition{ClassID} },
+                    Rows         => $EditorRows,
                 },
             );
 

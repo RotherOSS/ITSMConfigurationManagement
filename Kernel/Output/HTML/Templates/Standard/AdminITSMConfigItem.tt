@@ -295,7 +295,7 @@
 
 [% IF Data.Error %]
                         <div class="WidgetSimple WidgetMessage Top Error">
-                            <div class="Content">[% Data.Error | html %]</div>
+                            <div class="Content">[% Translate(Data.Error, Data.ErrorArg1, Data.ErrorArg2) | html %]</div>
                         </div>
                         <div class="Clear"></div>
 [% END %]
