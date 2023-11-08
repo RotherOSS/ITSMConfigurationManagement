@@ -732,13 +732,15 @@ sub DefinitionCheck {
             # check structure for defined page content data
             if ( ref $Page->{Content} ne 'ARRAY' ) {
                 return $ReturnError->(
-                    Translatable(q{Key Content for page %s is not an Array.}),
+                    Translatable(q{Key %s for page %s is not an Array.}),
+                    'Content',
                     $PageIndex,
                 );
             }
             elsif ( !IsArrayRefWithData( $Page->{Content} ) ) {
                 return $ReturnError->(
-                    Translatable(q{Key Content for page %s is empty.}),
+                    Translatable(q{Key %s for page %s is empty.}),
+                    'Content',
                     $PageIndex,
                 );
             }
@@ -779,6 +781,19 @@ sub DefinitionCheck {
                         $SectionIsMissing{ $Section->{Section} } = 1;
                     }
                 }
+            }
+
+            # check for the optional array references
+            KEY:
+            for my $Key (qw(Interfaces Groups)) {
+                next KEY unless $Page->{$Key};               # is optional
+                next KEY if ref $Page->{$Key} eq 'ARRAY';    # must be arrayref when it exists
+
+                return $ReturnError->(
+                    Translatable(q{Key %s for page %s is not an Array.}),
+                    $Key,
+                    $PageIndex,
+                );
             }
         }
     }
