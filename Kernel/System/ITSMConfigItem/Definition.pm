@@ -673,9 +673,11 @@ sub DefinitionCheck {
     # Merge the roles into the DefinitionRef. The passed in reference is modified in place.
     # This might creates the 'Sections' attribute when it doesn't already exist.
     if ( $Type eq 'Class' ) {
-        $Self->_ProcessRoles(
+        my $Result = $Self->_ProcessRoles(
             DefinitionRef => $DefinitionRef,
         );
+
+        return $Result unless $Result->{Success};
     }
 
     # check the data structures of the top level attributes
@@ -1188,12 +1190,26 @@ sub _ProcessRoles {
     my $DefinitionRef = $Param{DefinitionRef};
     my $Roles         = $DefinitionRef->{Roles};
 
-    return unless $Roles;
-    return unless ref $Roles eq 'HASH';    # silently ignore
-    return unless $Roles->%*;              # nothing to do
+    return { Success => 1 } unless $Roles;
 
-    # if a class has roles, then Sections is not required
-    $DefinitionRef->{Sections} //= {};
+    # just for convenience
+    my $ReturnError = sub {
+        return {
+            Success   => 0,
+            Error     => $_[0],
+            ErrorArgs => [ ( $_[1] // '' ), ( $_[2] // '' ) ],    # only two args are supported
+        };
+    };
+
+    if ( ref $Roles ne 'HASH' ) {
+        return $ReturnError->(
+            Translatable(q{Key %s is not a Hash.}),
+            'Roles',
+        );
+    }
+
+    # nothing to do
+    return { Success => 1 } unless $Roles->%*;
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
@@ -1212,18 +1228,29 @@ sub _ProcessRoles {
     for my $RoleKey ( keys $Roles->%* ) {
         my $RoleSource = $Roles->{$RoleKey};
 
-        # Version is required
-        next ROLE_KEY unless $RoleSource->{Version};
-
         # The name of the role is per default the key in the Roles hash,
         # but can be overridden by an explicit attribute 'Name'.
         # This allows to use a more convenient name in the class definition.
         my $RoleName = $RoleSource->{Name} // $RoleKey;
 
+        # Version is required
+        if ( !$RoleSource->{Version} ) {
+            return $ReturnError->(
+                Translatable(q{Key %s is missing for the role %s}),
+                'Version',
+                $RoleName,
+            );
+        }
+
         # the fetching is done via the ID
         my $RoleID = $RoleName2ID{$RoleName};
 
-        next ROLE_KEY unless $RoleID;
+        if ( !$RoleID ) {
+            return $ReturnError->(
+                Translatable(q{The role %s was not found.}),
+                $RoleName,
+            );
+        }
 
         # This already parses the YAML
         my $RoleDefinition = $ConfigItemObject->RoleDefinitionGet(
@@ -1231,23 +1258,53 @@ sub _ProcessRoles {
             Version => $RoleSource->{Version},
         );
 
-        next ROLE_KEY unless $RoleDefinition;
-        next ROLE_KEY unless ref $RoleDefinition eq 'HASH';
-        next ROLE_KEY unless $RoleDefinition->{Definition};
-        next ROLE_KEY unless $RoleDefinition->{DefinitionRef};
-        next ROLE_KEY unless $RoleDefinition->{DefinitionRef}->{Sections};
-        next ROLE_KEY unless ref $RoleDefinition->{DefinitionRef}->{Sections} eq 'HASH';
+        if ( !$RoleDefinition ) {
+            return $ReturnError->(
+                Translatable(q{The role %s with version %s was not found.}),
+                $RoleName,
+                $RoleSource->{Version},
+            );
+        }
+
+        if ( ref $RoleDefinition ne 'HASH' ) {
+            return $ReturnError->(
+                Translatable(q{The role %s with version %s is not a hash.}),
+                $RoleName,
+                $RoleSource->{Version},
+            );
+        }
+
+        if (
+            !$RoleDefinition->{Definition}
+            ||
+            !$RoleDefinition->{DefinitionRef}
+            ||
+            !$RoleDefinition->{DefinitionRef}->{Sections}
+            ||
+            ref $RoleDefinition->{DefinitionRef}->{Sections} ne 'HASH'
+            )
+        {
+            return $ReturnError->(
+                Translatable(q{The role %s with version %s is not valid.}),
+                $RoleName,
+                $RoleSource->{Version},
+            );
+        }
 
         # Add the sections from the Role to the Sections of the class.
         # Note that the convenient name from the class definition is used here
         my $RoleSections = $RoleDefinition->{DefinitionRef}->{Sections};
         for my $RoleSectionKey ( keys $RoleSections->%* ) {
+
+            # if a class has valid roles, then Sections is not required
+            $DefinitionRef->{Sections} //= {};
+
             my $SectionName = join '::', $RoleKey, $RoleSectionKey;
             $DefinitionRef->{Sections}->{$SectionName} = $RoleSections->{$RoleSectionKey};
         }
     }
 
-    return;
+    return { Success => 1 };
 }
 
 =head2 _DefinitionPrepare()
