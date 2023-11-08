@@ -168,7 +168,7 @@ sub Run {
             $LayoutObject->Block(
                 Name => 'ClassSub',
                 Data => {
-                    Class  => $ConfigItem->{Class},
+                    Class => $ConfigItem->{Class},
                 },
             );
         }
@@ -177,8 +177,8 @@ sub Run {
         $ConfigItem->{InciStateColorClass} = $InciSignals{ $ConfigItem->{CurInciStateType} };
 
         INFO:
-        for my $Info ( qw/DeploymentState IncidentState CreatedTime LastChangedTime/ ) {
-            next INFO if !$Config->{GeneralInfo}{ $Info };
+        for my $Info (qw/DeploymentState IncidentState CreatedTime LastChangedTime/) {
+            next INFO if !$Config->{GeneralInfo}{$Info};
 
             $LayoutObject->Block(
                 Name => $Info,
@@ -236,7 +236,7 @@ sub Run {
             );
         }
         else {
-            for my $Page ( @Pages ) {
+            for my $Page (@Pages) {
                 $LayoutObject->Block(
                     Name => 'PageLink',
                     Data => {
@@ -249,7 +249,7 @@ sub Run {
             }
         }
 
-        if ( @Pages ) {
+        if (@Pages) {
             $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
                 ConfigItem => $ConfigItem,
                 Definition => $Definition,
@@ -268,7 +268,7 @@ sub Run {
             my $BaseLink = $LayoutObject->Output(
                 Template => '[% Env("Baselink") %]Action=CustomerITSMConfigItemZoom;'
                     . "ConfigItemID=$ConfigItem->{ConfigItemID};Page=[% Data.Name | uri %];",
-                Data     => {
+                Data => {
                     Name => $PageShown ? $PageShown->{Name} : '',
                 },
             );
@@ -285,11 +285,11 @@ sub Run {
             } $VersionList->@*;
 
             my $VersionSelection = $LayoutObject->BuildSelection(
-                Data           => \@VersionSelectionData,
-                Name           => 'VersionSelection',
-                Class          => 'Modernize',
-                SelectedID     => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
-                PossibleNone   => 1,
+                Data         => \@VersionSelectionData,
+                Name         => 'VersionSelection',
+                Class        => 'Modernize',
+                SelectedID   => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
+                PossibleNone => 1,
             );
             $LayoutObject->Block(
                 Name => 'Versions',
