@@ -396,7 +396,7 @@ sub Run {
                 StyleClasses  => $StyleClasses,
             },
         ),
-        $LayoutObject->CustomerNavigationBar(),
+        $LayoutObject->CustomerNavigationBar,
         $LayoutObject->CustomerFooter;
 }
 

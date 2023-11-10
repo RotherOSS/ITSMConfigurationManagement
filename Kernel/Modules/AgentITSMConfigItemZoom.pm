@@ -23,6 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(any);
 
 # CPAN modules
 
@@ -324,8 +325,10 @@ sub Run {
         my $PageRequested = $ParamObject->GetParam( Param => 'Page' );
         PAGE:
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+            # Interfaces is optional, effectively default to [ 'Agent' ]
             if ( $Page->{Interfaces} ) {
-                next PAGE unless grep { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+                next PAGE unless any { $_ eq 'Agent' } $Page->{Interfaces}->@*;
             }
 
             if ( $Page->{Groups} ) {
@@ -336,15 +339,8 @@ sub Run {
                     );
                 }
 
-                my $AccessOk = 0;
-                GROUP:
-                for my $GroupName ( $Page->{Groups} - @* ) {
-                    next GROUP if !$GroupLookup{$GroupName};
-
-                    $AccessOk = 1;
-                }
-
-                next PAGE unless $AccessOk;
+                # grant access to the page only when the user is in one of the specified groups
+                next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
             }
 
             push @Pages, $Page;
