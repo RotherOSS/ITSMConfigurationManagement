@@ -374,6 +374,7 @@
         </TableCreate>
         <TableCreate Name="configitem_link">
             <Column Name="id"                           Required="true"  Type="BIGINT" PrimaryKey="true" AutoIncrement="true" />
+            <Column Name="source_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
@@ -1230,6 +1231,7 @@
         </TableCreate>
         <TableCreate Name="configitem_link">
             <Column Name="id"                           Required="true"  Type="BIGINT" PrimaryKey="true" AutoIncrement="true" />
+            <Column Name="source_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
