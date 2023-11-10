@@ -379,7 +379,7 @@
             <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="link_type_id"                 Required="true"  Type="SMALLINT" />
-            <Column Name="dynamic_field_id"             Required="true"  Type="INTEGER" />
+            <Column Name="dynamic_field_id"             Required="false" Type="INTEGER" />
             <Column Name="create_time"                  Required="true"  Type="DATE" />
             <Column Name="create_by"                    Required="true"  Type="INTEGER" />
             <ForeignKey ForeignTable="configitem">         <Reference Local="source_configitem_id"         Foreign="id" /> </ForeignKey>
@@ -1236,7 +1236,7 @@
             <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
             <Column Name="link_type_id"                 Required="true"  Type="SMALLINT" />
-            <Column Name="dynamic_field_id"             Required="true"  Type="INTEGER" />
+            <Column Name="dynamic_field_id"             Required="false" Type="INTEGER" />
             <Column Name="create_time"                  Required="true"  Type="DATE" />
             <Column Name="create_by"                    Required="true"  Type="INTEGER" />
             <ForeignKey ForeignTable="configitem">         <Reference Local="source_configitem_id"         Foreign="id" /> </ForeignKey>
