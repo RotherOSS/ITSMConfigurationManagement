@@ -29,7 +29,7 @@ use parent qw(
     Kernel::System::ITSMConfigItem::History
     Kernel::System::ITSMConfigItem::Number
     Kernel::System::ITSMConfigItem::Permission
-    Kernel::System::ITSMConfigItem::Reference
+    Kernel::System::ITSMConfigItem::Link
     Kernel::System::ITSMConfigItem::Version
     Kernel::System::ITSMConfigItem::XML
     Kernel::System::EventHandler

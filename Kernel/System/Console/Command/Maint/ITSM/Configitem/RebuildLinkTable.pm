@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Maint::ITSM::Configitem::RebuildReferenceTable;
+package Kernel::System::Console::Command::Maint::ITSM::Configitem::RebuildLinkTable;
 
 use v5.24;
 use strict;
@@ -37,7 +37,7 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description(<<'END_TXT');
-Rebuild the table configitem_reference from the Reference dynamic fields. Only the fields linking config items are
+Rebuild the table configitem_link from the Reference dynamic fields. Only the fields linking config items are
 considered here.
 END_TXT
 
@@ -47,10 +47,10 @@ END_TXT
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    $Self->Print("<yellow>Rebuilding the table configitem_reference...</yellow>\n\n");
+    $Self->Print("<yellow>Rebuilding the table configitem_link...</yellow>\n\n");
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $Result           = $ConfigItemObject->RebuildReferenceTable;
+    my $Result           = $ConfigItemObject->RebuildLinkTable;
 
     $Self->Print("<$Result->{Color}>$Result->{Message}</$Result->{Color}>\n\n");
 

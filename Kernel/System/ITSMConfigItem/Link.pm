@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::Reference;
+package Kernel::System::ITSMConfigItem::Link;
 
 use v5.24;
 use strict;
@@ -32,11 +32,11 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Reference - sub module of Kernel::System::ITSMConfigItem
+Kernel::System::ITSMConfigItem::Link - sub module of Kernel::System::ITSMConfigItem
 
 =head1 DESCRIPTION
 
-This modules supports the maintenance of the content of the table B<configitem_reference>. This table
+This modules supports the maintenance of the content of the table B<configitem_link>. This table
 is a shadow of the information that is contained in Reference dynamic fields that connect objects
 of type C<ITSMConfigItem> and C<ITSMConfigItemVersion>.
 
@@ -46,14 +46,14 @@ Planned is also support for dumping the complete graph so that it can be used fo
 
 =head1 PUBLIC INTERFACE
 
-=head2 SyncReferenceTable()
+=head2 SyncLinkTable()
 
-This method entails the logic for keeping the table B<configitem_reference> in sync
+This method entails the logic for keeping the table B<configitem_link> in sync
 with dynamic field updates.
 
 =cut
 
-sub SyncReferenceTable {
+sub SyncLinkTable {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
@@ -85,7 +85,7 @@ sub SyncReferenceTable {
     # Clean up first in all cases.
     $DBObject->Do(
         SQL => <<'END_SQL',
-DELETE FROM configitem_reference
+DELETE FROM configitem_link
   WHERE source_configitem_version_id = ?
     AND dynamic_field_id             = ?
 END_SQL
@@ -105,7 +105,7 @@ END_SQL
     my $TargetConfigItemVersionID = $ReferencedObjectType eq 'ITSMConfigItemVersion' ? $Param{Value} : undef;
     $DBObject->DoArray(
         SQL => <<'END_SQL',
-INSERT INTO configitem_reference (
+INSERT INTO configitem_link (
     link_type_id,
     source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
     create_time, create_by
@@ -119,11 +119,11 @@ END_SQL
     return 1;
 }
 
-=head2 RebuildReferenceTable()
+=head2 RebuildLinkTable()
 
-purge and repopulate the table B<configitem_reference> based on the Reference dynamic fields.
+purge and repopulate the table B<configitem_link> based on the Reference dynamic fields.
 
-    my $Result = $ConfigItemObject->RebuildReferenceTable;
+    my $Result = $ConfigItemObject->RebuildLinkTable;
 
 The result is a hashref like:
 
@@ -135,7 +135,7 @@ The result is a hashref like:
 
 =cut
 
-sub RebuildReferenceTable {
+sub RebuildLinkTable {
     my ($Self) = @_;
 
     # no parameters are supported
@@ -144,12 +144,12 @@ sub RebuildReferenceTable {
 
     # purge the table
     my $SuccessPurge = $DBObject->Do(
-        SQL => 'DELETE FROM configitem_reference'
+        SQL => 'DELETE FROM configitem_link'
     );
     if ( !$SuccessPurge ) {
         return {
             Success => 0,
-            Message => Translatable('Could not purge the table configitem_reference.'),
+            Message => Translatable('Could not purge the table configitem_link.'),
             Color   => 'red',
         };
     }
@@ -224,7 +224,7 @@ END_SQL
     # Multivalue INSERT
     my $Tuples = $DBObject->DoArray(
         SQL => <<'END_SQL',
-INSERT INTO configitem_reference (
+INSERT INTO configitem_link (
     link_type_id,
     source_configitem_version_id,
     target_configitem_id,
@@ -247,14 +247,14 @@ END_SQL
     if ( !defined $Tuples ) {
         return {
             Success => 0,
-            Message => Translatable('Could not insert into the table configitem_reference'),
+            Message => Translatable('Could not insert into the table configitem_link'),
             Color   => 'red',
         };
     }
     elsif ( $Tuples == 0 ) {
         return {
             Success => 1,
-            Message => Translatable('Inserted 0 rows into the table configitem_reference'),
+            Message => Translatable('Inserted 0 rows into the table configitem_link'),
             Color   => 'yellow',
         };
     }
