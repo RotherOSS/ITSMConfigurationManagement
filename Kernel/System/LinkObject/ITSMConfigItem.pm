@@ -16,8 +16,16 @@
 
 package Kernel::System::LinkObject::ITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -44,10 +52,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {}, $Type;
 }
 
 =head2 LinkListWithData()
@@ -71,6 +76,7 @@ sub LinkListWithData {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -81,6 +87,7 @@ sub LinkListWithData {
             Priority => 'error',
             Message  => 'LinkList must be a hash reference!',
         );
+
         return;
     }
 
@@ -133,6 +140,7 @@ sub ObjectPermission {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -178,6 +186,7 @@ sub ObjectDescriptionGet {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
@@ -240,6 +249,7 @@ sub ObjectSearch {
             Priority => 'error',
             Message  => 'Need UserID!',
         );
+
         return;
     }
 
@@ -323,7 +333,7 @@ link add pre event module
         UserID       => 1,
     );
 
-    or
+or
 
     $True = $LinkObject->LinkAddPre(
         Key          => 123,
@@ -358,7 +368,7 @@ sub LinkAddPre {
 
 =head2 LinkAddPost()
 
-link add pre event module
+link add post event module
 
     $True = $LinkObject->LinkAddPost(
         Key          => 123,
@@ -369,7 +379,7 @@ link add pre event module
         UserID       => 1,
     );
 
-    or
+or
 
     $True = $LinkObject->LinkAddPost(
         Key          => 123,
@@ -392,10 +402,13 @@ sub LinkAddPost {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
 
+    # do not update configitem_link table for temporary links
+    # do not recalculate the current in incident state for temporary links
     # do not trigger event for temporary links
     return 1 if $Param{State} eq 'Temporary';
 
@@ -435,7 +448,7 @@ link delete pre event module
         UserID       => 1,
     );
 
-    or
+or
 
     $True = $LinkObject->LinkDeletePre(
         Key          => 123,
@@ -481,7 +494,7 @@ link delete post event module
         UserID       => 1,
     );
 
-    or
+or
 
     $True = $LinkObject->LinkDeletePost(
         Key          => 123,
@@ -504,10 +517,13 @@ sub LinkDeletePost {
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
+
             return;
         }
     }
 
+    # do not update configitem_link table for temporary links
+    # do not recalculate the current in incident state for temporary links
     # do not trigger event for temporary links
     return 1 if $Param{State} eq 'Temporary';
 

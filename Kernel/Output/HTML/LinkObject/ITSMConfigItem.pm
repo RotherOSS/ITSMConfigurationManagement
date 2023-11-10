@@ -16,9 +16,16 @@
 
 package Kernel::Output::HTML::LinkObject::ITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Output::HTML::Layout;
 
 our @ObjectDependencies = (
@@ -53,8 +60,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     # check needed objects
     for my $Needed (qw(UserLanguage UserID)) {

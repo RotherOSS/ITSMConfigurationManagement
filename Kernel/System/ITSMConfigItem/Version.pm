@@ -735,7 +735,9 @@ sub VersionUpdate {
         return;
     }
 
-    my $CurInciStateRecalc = $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ? 1 : 0;
+    # The incident state is calculated for the current incident state. Therfore it only
+    # needs to be recalculation when the incident state of the last version has changed.
+    my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
     if ( any { defined $Param{$_} } qw/Name DeplStateID InciStateID DefinitionID/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');

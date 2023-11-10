@@ -16,8 +16,10 @@
 
 package Kernel::System::Console::Command::Admin::ITSM::IncidentState::Recalculate;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
@@ -75,6 +77,7 @@ sub Run {
 
         if ( !$Success ) {
             $Self->Print("<red>... could not recalculate incident state for config item id '$ConfigItemID'!</red>\n");
+
             next CONFIGITEM;
         }
 
@@ -115,8 +118,8 @@ sub Run {
     }
 
     $Self->Print("<green>Ready.</green>\n");
-    return $Self->ExitCodeOk();
 
+    return $Self->ExitCodeOk();
 }
 
 1;

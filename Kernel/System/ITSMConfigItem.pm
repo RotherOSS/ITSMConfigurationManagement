@@ -718,8 +718,10 @@ sub ConfigItemDelete {
         ConfigItemID => $Param{ConfigItemID},
     );
 
-    # delete all links to this config item first, before deleting the versions
-    return if !$Kernel::OM->Get('Kernel::System::LinkObject')->LinkDeleteAll(
+    # Delete all links to this config item first, before deleting the versions.
+    # LinkDeleteAll() calls LinkDelete() internally, this means that
+    # the event handler are honored.
+    return unless $Kernel::OM->Get('Kernel::System::LinkObject')->LinkDeleteAll(
         Object => 'ITSMConfigItem',
         Key    => $Param{ConfigItemID},
         UserID => $Param{UserID},
