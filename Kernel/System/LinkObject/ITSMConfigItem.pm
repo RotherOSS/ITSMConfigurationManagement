@@ -347,23 +347,7 @@ or
 =cut
 
 sub LinkAddPre {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Argument (qw(Key Type State UserID)) {
-        if ( !$Param{$Argument} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Argument!",
-            );
-            return;
-        }
-    }
-
-    # do not trigger event for temporary links
-    return 1 if $Param{State} eq 'Temporary';
-
-    return 1;
+    return 1;    # nothing to do
 }
 
 =head2 LinkAddPost()
@@ -462,23 +446,7 @@ or
 =cut
 
 sub LinkDeletePre {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Argument (qw(Key Type State UserID)) {
-        if ( !$Param{$Argument} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Argument!",
-            );
-            return;
-        }
-    }
-
-    # do not trigger event for temporary links
-    return 1 if $Param{State} eq 'Temporary';
-
-    return 1;
+    return 1;    # nothing to do
 }
 
 =head2 LinkDeletePost()
