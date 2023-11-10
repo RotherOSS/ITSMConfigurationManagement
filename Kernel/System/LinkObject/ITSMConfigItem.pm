@@ -20,6 +20,7 @@ use v5.24;
 use strict;
 use warnings;
 use namespace::autoclean;
+use utf8;
 
 # core modules
 
@@ -43,6 +44,7 @@ Kernel::System::LinkObject::ITSMConfigItem - LinkObject module for ITSMConfigIte
 create an object. Do not use it directly, instead use:
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $LinkObjectITSMConfigItemObject = $Kernel::OM->Get('Kernel::System::LinkObject::ITSMConfigItem');
 
@@ -163,15 +165,16 @@ sub ObjectPermission {
 
 return a hash of object descriptions
 
-Return
-    %Description = (
-        Normal => "ConfigItem# 1234455",
-        Long   => "ConfigItem# 1234455: The Config Item Title",
-    );
-
     %Description = $LinkObject->ObjectDescriptionGet(
         Key     => 123,
         UserID  => 1,
+    );
+
+Returns:
+
+    %Description = (
+        Normal => "ConfigItem# 1234455",
+        Long   => "ConfigItem# 1234455: The Config Item Title",
     );
 
 =cut
@@ -221,7 +224,14 @@ sub ObjectDescriptionGet {
 
 return a hash list of the search results
 
-Return
+    $SearchList = $LinkObjectBackend->ObjectSearch(
+        SubObject    => '25',        # (optional)
+        SearchParams => $HashRef,    # (optional)
+        UserID       => 1,
+    );
+
+Returns:
+
     $SearchList = {
         C<NOTLINKED> => {
             Source => {
@@ -231,12 +241,6 @@ Return
             },
         },
     };
-
-    $SearchList = $LinkObjectBackend->ObjectSearch(
-        SubObject    => '25',        # (optional)
-        SearchParams => $HashRef,    # (optional)
-        UserID       => 1,
-    );
 
 =cut
 
@@ -391,26 +395,38 @@ sub LinkAddPost {
         }
     }
 
-    # do not update configitem_link table for temporary links
-    # do not recalculate the current in incident state for temporary links
+    # do not note update configitem_link table for temporary links
+    # do not note recalculate the current in incident state for temporary links
     # do not trigger event for temporary links
     return 1 if $Param{State} eq 'Temporary';
 
-    # get information about linked object
-    my $ID     = $Param{TargetKey}    || $Param{SourceKey};
-    my $Object = $Param{TargetObject} || $Param{SourceObject};
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # recalculate the current incident state of this CI
-    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->CurInciStateRecalc(
+    # sync the new link to the configitem_link table.
+    # This is only needed for one direction.
+    if ( $Param{TargetKey} && ( $Param{TargetObject} // '' ) eq 'ITSMConfigItem' ) {
+        $ConfigItemObject->AddConfigItemLink(
+            Type               => $Param{Type},
+            SourceConfigItemID => $Param{Key},
+            TargetConfigItemID => $Param{TargetKey},
+        );
+    }
+
+    # Recalculate the current incident state of this CI.
+    # This is possible as configitem_link is already updated.
+    $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID => $Param{Key},
     );
 
-    # trigger LinkAdd event
-    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->EventHandler(
+    # trigger LinkAdd event, the comment is a kind of hidden channel
+    my $Comment = join '%%',
+        ( $Param{TargetKey}    || $Param{SourceKey} ),
+        ( $Param{TargetObject} || $Param{SourceObject} );
+    $ConfigItemObject->EventHandler(
         Event => 'LinkAdd',
         Data  => {
             ConfigItemID => $Param{Key},
-            Comment      => $ID . '%%' . $Object,
+            Comment      => $Comment,
             Type         => $Param{Type},
         },
         UserID => $Param{UserID},
@@ -490,26 +506,38 @@ sub LinkDeletePost {
         }
     }
 
-    # do not update configitem_link table for temporary links
-    # do not recalculate the current in incident state for temporary links
+    # do not note update configitem_link table for temporary links
+    # do not note recalculate the current in incident state for temporary links
     # do not trigger event for temporary links
     return 1 if $Param{State} eq 'Temporary';
 
-    # get information about linked object
-    my $ID     = $Param{TargetKey}    || $Param{SourceKey};
-    my $Object = $Param{TargetObject} || $Param{SourceObject};
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # recalculate the current incident state of this CI
-    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->CurInciStateRecalc(
+    # sync the deletee link to the configitem_link table.
+    # This is only needed for one direction.
+    if ( $Param{TargetKey} && ( $Param{TargetObject} // '' ) eq 'ITSMConfigItem' ) {
+        $ConfigItemObject->DeleteConfigItemLink(
+            Type               => $Param{Type},
+            SourceConfigItemID => $Param{Key},
+            TargetConfigItemID => $Param{TargetKey},
+        );
+    }
+
+    # Recalculate the current incident state of this CI.
+    # This is possible as configitem_link is already updated.
+    $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID => $Param{Key},
     );
 
-    # trigger LinkDelete event
-    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->EventHandler(
+    # trigger LinkDelete event, the comment is a kind of hidden channel
+    my $Comment = join '::',
+        ( $Param{TargetKey}    || $Param{SourceKey} ),
+        ( $Param{TargetObject} || $Param{SourceObject} );
+    $ConfigItemObject->EventHandler(
         Event => 'LinkDelete',
         Data  => {
             ConfigItemID => $Param{Key},
-            Comment      => $ID . '%%' . $Object,
+            Comment      => $Comment,
         },
         UserID => $Param{UserID},
     );

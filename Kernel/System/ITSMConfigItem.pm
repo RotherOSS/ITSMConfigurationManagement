@@ -1505,11 +1505,13 @@ sub UniqueNameCheck {
     return \@Duplicates;
 }
 
-# TODO: Check
-
 =head2 CurInciStateRecalc()
 
-recalculates the current incident state of this config item and all linked config items
+recalculates the current incident state of this config item and of all linked config items.
+
+The current incident state depends on the incident states that this config depends on.
+A change of the incident state might have repercussions on the current incident state
+of the config item that depend on this config item.
 
     my $Success = $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID               => 123,

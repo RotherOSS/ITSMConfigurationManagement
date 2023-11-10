@@ -46,6 +46,101 @@ Planned is also support for dumping the complete graph so that it can be used fo
 
 =head1 PUBLIC INTERFACE
 
+=head2 AddConfigItemLink()
+
+This method is specifically for adding a link between two config items. Linking specific versions is not supported.
+
+    $ConfigItemObject->AddConfigItemLink(
+        Type           => 'DependsOn',
+        SourceConfigID => 127,
+        TargetConfigID => 128,
+    );
+
+=cut
+
+sub AddConfigItemLink {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(Type SourceConfigItemID TargetConfigItemID)) {
+        if ( !$Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+
+            return;
+        }
+    }
+
+    # lookup type id
+    my $TypeID = $Kernel::OM->Get('Kernel::System::LinkObject')->TypeLookup(
+        Name   => $Param{Type},
+        UserID => 1,
+    );
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    $DBObject->Do(
+        SQL => <<'END_SQL',
+INSERT INTO configitem_link (
+    link_type_id, source_configitem_id, target_configitem_id, create_time, create_by
+  )
+  VALUES (?, ?, ?, current_timestamp, 1 )
+END_SQL
+        Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
+    );
+
+    return 1;
+}
+
+=head2 DeleteConfigItemLink()
+
+This method is specifically for deleting a link between two config items. Linking specific versions is not supported.
+
+    $ConfigItemObject->DeleteConfigItemLink(
+        Type           => 'DependsOn',
+        SourceConfigID => 127,
+        TargetConfigID => 128,
+    );
+
+=cut
+
+sub DeleteConfigItemLink {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(Type SourceConfigItemID TargetConfigItemID)) {
+        if ( !$Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+
+            return;
+        }
+    }
+
+    # lookup type id
+    my $TypeID = $Kernel::OM->Get('Kernel::System::LinkObject')->TypeLookup(
+        Name   => $Param{Type},
+        UserID => 1,
+    );
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    $DBObject->Do(
+        SQL => <<'END_SQL',
+DELETE FROM configitem_link
+  WHERE link_type_id = ?
+    AND source_configitem_id = ?
+    AND target_configitem_i = ?
+    AND dynamic_field_id IS NULL
+  )
+  VALUES (?, ?, ?)
+END_SQL
+        Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
+    );
+
+    return 1;
+}
+
 =head2 SyncLinkTable()
 
 This method entails the logic for keeping the table B<configitem_link> in sync
@@ -95,6 +190,8 @@ END_SQL
     # Nothing to do when there is no new value
     return 1 unless $Param{Value};
 
+    # TODO: handle the case where the config item should be linked
+
     # INSERT the new value if there is one.
     # The values for the Reference dynamic field are per design array references,
     # even when there is only a single referenced item.
@@ -112,7 +209,7 @@ INSERT INTO configitem_link (
   )
   VALUES (1, ?, ?, ?, ?, current_timestamp, 1 )
 END_SQL
-        Bind => [ $Param{SourceConfigItemVersionID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ],
+        Bind => [ \( $Param{SourceConfigItemVersionID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ) ],
     );
 
     # assume success
