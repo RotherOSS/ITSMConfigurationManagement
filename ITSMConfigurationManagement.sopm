@@ -373,29 +373,20 @@
             </ForeignKey>
         </TableCreate>
         <TableCreate Name="configitem_link">
-            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
+            <Column Name="id"                           Required="true"  Type="BIGINT" PrimaryKey="true" AutoIncrement="true" />
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
-            <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
-            <Column Name="link_type_id" Required="true" Type="SMALLINT" />
-            <Column Name="dynamic_field_id" Required="true" Type="INTEGER" />
-            <Column Name="create_time" Required="true" Type="DATE" />
-            <Column Name="create_by" Required="true" Type="INTEGER" />
-            <ForeignKey ForeignTable="configitem_version">
-                <Reference Local="source_configitem_version_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="configitem">
-                <Reference Local="target_configitem_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="configitem_version">
-                <Reference Local="target_configitem_version_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="link_type">
-                <Reference Local="link_type_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="dynamic_field">
-                <Reference Local="dynamic_field_id" Foreign="id" />
-            </ForeignKey>
+            <Column Name="link_type_id"                 Required="true"  Type="SMALLINT" />
+            <Column Name="dynamic_field_id"             Required="true"  Type="INTEGER" />
+            <Column Name="create_time"                  Required="true"  Type="DATE" />
+            <Column Name="create_by"                    Required="true"  Type="INTEGER" />
+            <ForeignKey ForeignTable="configitem">         <Reference Local="source_configitem_id"         Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version"> <Reference Local="source_configitem_version_id" Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem">         <Reference Local="target_configitem_id"         Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version"> <Reference Local="target_configitem_version_id" Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="link_type">          <Reference Local="link_type_id"                 Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field">      <Reference Local="dynamic_field_id"             Foreign="id" /> </ForeignKey>
         </TableCreate>
         <TableAlter Name="acl">
             <ColumnAdd Name="object_type" Required="true" Default="Ticket" Type="VARCHAR" Size="100" />
@@ -1237,30 +1228,21 @@
                 <Reference Local="field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <TableCreate Name="configitem_link" Version="11.0.0">
-            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT" />
+        <TableCreate Name="configitem_link">
+            <Column Name="id"                           Required="true"  Type="BIGINT" PrimaryKey="true" AutoIncrement="true" />
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
-            <Column Name="target_configitem_id" Required="false" Type="BIGINT" />
+            <Column Name="target_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="target_configitem_version_id" Required="false" Type="BIGINT" />
-            <Column Name="link_type_id" Required="true" Type="INTEGER" />
-            <Column Name="dynamic_field_id" Required="true" Type="INTEGER" />
-            <Column Name="create_time" Required="true" Type="DATE" />
-            <Column Name="create_by" Required="true" Type="INTEGER" />
-            <ForeignKey ForeignTable="configitem_version">
-                <Reference Local="source_configitem_version_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="configitem">
-                <Reference Local="target_configitem_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="configitem_version">
-                <Reference Local="target_configitem_version_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="link_type">
-                <Reference Local="link_type_id" Foreign="id" />
-            </ForeignKey>
-            <ForeignKey ForeignTable="dynamic_field">
-                <Reference Local="dynamic_field_id" Foreign="id" />
-            </ForeignKey>
+            <Column Name="link_type_id"                 Required="true"  Type="SMALLINT" />
+            <Column Name="dynamic_field_id"             Required="true"  Type="INTEGER" />
+            <Column Name="create_time"                  Required="true"  Type="DATE" />
+            <Column Name="create_by"                    Required="true"  Type="INTEGER" />
+            <ForeignKey ForeignTable="configitem">         <Reference Local="source_configitem_id"         Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version"> <Reference Local="source_configitem_version_id" Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem">         <Reference Local="target_configitem_id"         Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="configitem_version"> <Reference Local="target_configitem_version_id" Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="link_type">          <Reference Local="link_type_id"                 Foreign="id" /> </ForeignKey>
+            <ForeignKey ForeignTable="dynamic_field">      <Reference Local="dynamic_field_id"             Foreign="id" /> </ForeignKey>
         </TableCreate>
         <TableAlter Name="configitem_definition" Version="11.0.0">
             <ColumnAdd Name="dynamicfield_definition" Required="false" Type="LONGBLOB" />
