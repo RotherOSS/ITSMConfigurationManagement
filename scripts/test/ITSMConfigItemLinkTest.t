@@ -68,6 +68,16 @@ $CheckExpectedResults = sub {
                     ConfigItemID => $ObjectNameSuffix2ID{$Object}->{$NameSuffix},
                 );
 
+                ############################################################
+                # COMMENTS AYTE
+                ############################################################
+
+                # Check $ConfigItem->{CurInciState}  were is updated ????
+
+                ############################################################
+                # END CUSTOMIZING AYTE
+                ############################################################
+
                 # check the result
                 $Self->Is(
                     $ConfigItem->{CurInciState},
@@ -136,9 +146,97 @@ my $InciStateList = $GeneralCatalogObject->ItemList(
 );
 my %InciStateListReverse = reverse %{$InciStateList};
 
-# get definition for 'Hardware' class
+my @ConfigItemPerlDefinitions;
+
+# define the first test definition (basic definition without DynamicFields)
+$ConfigItemPerlDefinitions[0] = " [
+{
+        Pages  => [
+            {
+                Name => 'Content',
+                Layout => {
+                    Columns => 2,
+                    ColumnWidth => '1fr 1fr'
+                },
+                Content => [
+                    {
+                        Section => 'Section1',
+                        ColumnStart => 1,
+                        RowStart => 1
+                    },
+                    {
+                        Section => 'Section2',
+                        ColumnStart => 2,
+                        RowStart => 1
+                    }
+                ],
+            }
+        ]
+}
+]";
+
+my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+my @ConfigItemDefinitions;
+for my $PerlDefinition (@ConfigItemPerlDefinitions) {
+    my $YAMLDefinition = $YAMLObject->Dump(
+        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
+    );
+    push @ConfigItemDefinitions, $YAMLDefinition;
+}
+
+# add the test classes
+my @ConfigItemClassIDs;
+my @ConfigItemClasses;
+my @ConfigItemDefinitionIDs;
+
+for my $Definition (@ConfigItemDefinitions) {
+
+    # generate a random name
+    my $ClassName = 'UnitTest' . $Helper->GetRandomID();
+
+    # add an unittest config item class
+    my $ClassID = $GeneralCatalogObject->ItemAdd(
+        Class   => 'ITSM::ConfigItem::Class',
+        Name    => $ClassName,
+        ValidID => 1,
+        UserID  => 1,
+    );
+
+    # check class id
+    if ( !$ClassID ) {
+
+        $Self->True(
+            0,
+            "Can't add new config item class.",
+        );
+    }
+
+    push @ConfigItemClassIDs, $ClassID;
+    push @ConfigItemClasses,  $ClassName;
+
+    # add a definition to the class
+    my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+        ClassID    => $ClassID,
+        Definition => $Definition,
+        UserID     => 1,
+    );
+
+    # check definition id
+    if ( !$DefinitionID ) {
+
+        $Self->True(
+            0,
+            "Can't add new config item definition.",
+        );
+    }
+
+    push @ConfigItemDefinitionIDs, $DefinitionID;
+}
+
+# get definition for 'Test' class
 my $DefinitionRef = $ConfigItemObject->DefinitionGet(
-    ClassID => $ClassListReverse{Hardware},
+    ClassID => $ConfigItemClassIDs[0],
 );
 
 my %ObjectNameSuffix2ID;
@@ -148,8 +246,11 @@ for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
 
     # add a configitem
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        ClassID => $ClassListReverse{Hardware},
-        UserID  => 1,
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        ClassID      => $ConfigItemClassIDs[0], 
+        DeplStateID  => $DeplStateListReverse{Production},
+        InciStateID  => $InciStateListReverse{Operational},        
+        UserID       => 1,
     );
 
     $Self->True(
@@ -163,28 +264,12 @@ for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
     push @ConfigItemIDs, $ConfigItemID;
 
     # set a name for each configitem
-    my $VersionID = $ConfigItemObject->VersionAdd(
+    my $VersionID = $ConfigItemObject->ConfigItemUpdate(
         ConfigItemID => $ConfigItemID,
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{Operational},
-        XMLData      => [
-            undef,
-            {
-                Version => [
-                    undef,
-                    {
-                        Vendor => [
-                            undef,
-                            {
-                                Content => 'TestVendor',
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
         UserID => 1,
     );
 
@@ -371,10 +456,9 @@ for my $LinkType ( sort keys %Links ) {
     my $IncidentState = 'Incident';
 
     # change incident state
-    my $VersionID = $ConfigItemObject->VersionAdd(
+    my $VersionID = $ConfigItemObject->ConfigItemUpdate(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -393,6 +477,11 @@ for my $LinkType ( sort keys %Links ) {
                 '3' => 'Warning',
                 '4' => 'Warning',
                 '5' => 'Warning',
+                '1' => 'Operational',
+                '2' => 'Operational',
+                '3' => 'Operational',
+                '4' => 'Operational',
+                '5' => 'Operational',
                 '6' => 'Incident',
                 '7' => 'Operational',
                 'A' => 'Operational',
@@ -405,6 +494,7 @@ for my $LinkType ( sort keys %Links ) {
             },
             Service => {
                 '1' => 'Warning',
+                '1' => 'Operational',
                 '2' => 'Operational',
             },
         },
@@ -425,8 +515,8 @@ for my $LinkType ( sort keys %Links ) {
     # change incident state
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -477,8 +567,8 @@ for my $LinkType ( sort keys %Links ) {
     # change incident state
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -529,8 +619,8 @@ for my $LinkType ( sort keys %Links ) {
     # change incident state
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -581,8 +671,8 @@ for my $LinkType ( sort keys %Links ) {
     # change incident state
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -633,8 +723,8 @@ for my $LinkType ( sort keys %Links ) {
     # change incident state
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix},
-        Name         => $ConfigItemName . '_Hardware_' . $NameSuffix,
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
@@ -731,23 +821,6 @@ $Self->True(
     "TicketID $TicketID is created",
 );
 
-my $XMLData = [
-    undef,
-    {
-        Version => [
-            undef,
-            {
-                Vendor => [
-                    undef,
-                    {
-                        Content => 'TestVendor',
-                    },
-                ],
-            },
-        ],
-    },
-];
-
 my @Tests = (
     {
         Name              => "CI-01-$RandomID",
@@ -785,8 +858,11 @@ for my $Test (@Tests) {
 
     # Create CI.
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        ClassID => $ClassListReverse{Hardware},
-        UserID  => 1,
+        Name         => $Test->{Name},
+        ClassID      => $ConfigItemClassIDs[0],
+        DeplStateID  => $Test->{DeplStateID},
+        InciStateID  => $Test->{InciStateID},        
+        UserID       => 1,
     );
     $Self->True(
         $ConfigItemID,
@@ -796,13 +872,12 @@ for my $Test (@Tests) {
     push @CIIDs, $ConfigItemID;
 
     # Add a version.
-    my $VersionID = $ConfigItemObject->VersionAdd(
+    my $VersionID = $ConfigItemObject->ConfigItemUpdate(
         ConfigItemID => $ConfigItemID,
         Name         => $Test->{Name},
-        DefinitionID => $DefinitionRef->{DefinitionID},
+        DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $Test->{DeplStateID},
         InciStateID  => $Test->{InciStateID},
-        XMLData      => $XMLData,
         UserID       => 1,
     );
     $Self->True(

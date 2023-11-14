@@ -42,6 +42,7 @@ my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     ValidID => 1,
     UserID  => $UserID,
 );
+
 $Self->True(
     $ClassID,
     "Class added to GeneralCatalog",
@@ -58,13 +59,18 @@ my @Tests = (
         Config => {
             Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    - ColumnStart: 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
             UserID => $UserID,
         },
@@ -84,13 +90,18 @@ EOF
             ClassID    => $ClassID,
             Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    - ColumnStart: 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
         },
         Success => 0,
@@ -101,16 +112,29 @@ EOF
             ClassID    => $ClassID,
             Definition => << 'EOF',
 [
-    {
-        Key        => 'Vendor',
-        Name       => 'Vendor',
-        Searchable => 1,
-        Input      => {
-            Type      => 'Text',
-            Size      => 50,
-            MaxLength => 50
-        },
-    },
+{
+        Pages  => [
+            {
+                Name => 'Content',
+                Layout => {
+                    Columns => 2,
+                    ColumnWidth => '1fr 1fr'
+                },
+                Content => [
+                    {
+                        Section => 'Section1',
+                        ColumnStart => 1,
+                        RowStart => 1
+                    },
+                    {
+                        Section => 'Section2',
+                        ColumnStart => 2,
+                        RowStart => 1
+                    }
+                ],
+            }
+        ]
+}
 ];
 EOF
             UserID => $UserID,
@@ -123,15 +147,18 @@ EOF
             ClassID    => $ClassID,
             Definition => << 'EOF',
 ---
-Test
- Invalid
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    ColumnStart: 1
+      RowStart 1
+      Section: Section1
+    ColumnStart 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
             UserID => $UserID,
         },
@@ -143,13 +170,18 @@ EOF
             ClassID    => $ClassID,
             Definition => << 'EOF',
 ---
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
+- Pages:
+  - Content:
+    - ColumnStart: 1
+      RowStart: 1
+      Section: Section1
+    - ColumnStart: 2
+      RowStart: 1
+      Section: Section2
+    Layout:
+      ColumnWidth: 1fr 1fr
+      Columns: 2
+    Name: Content
 EOF
             UserID => $UserID,
         },

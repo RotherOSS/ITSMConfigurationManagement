@@ -49,12 +49,13 @@ sub Run {
     my @ValidClassIDs = sort keys %{$ClassList};
 
     # get all config items ids form all valid classes
-    my $ConfigItemsIDsRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+    my %ConfigItemsIDsRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         ClassIDs => \@ValidClassIDs,
+        Result   => 'HASH'
     );
 
     # get number of config items
-    my $CICount = scalar @{$ConfigItemsIDsRef};
+    my $CICount = keys %ConfigItemsIDsRef;
 
     $Self->Print("<yellow>Recalculating incident state for $CICount config items.</yellow>\n");
 
@@ -64,7 +65,7 @@ sub Run {
 
     my $Count = 0;
     CONFIGITEM:
-    for my $ConfigItemID ( @{$ConfigItemsIDsRef} ) {
+    for my $ConfigItemID ( keys %ConfigItemsIDsRef ) {
 
         my $Success = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->CurInciStateRecalc(
             ConfigItemID               => $ConfigItemID,
