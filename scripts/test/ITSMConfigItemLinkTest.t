@@ -145,50 +145,40 @@ my $InciStateList = $GeneralCatalogObject->ItemList(
 );
 my %InciStateListReverse = reverse %{$InciStateList};
 
-my @ConfigItemPerlDefinitions;
-
+# Definitions are added as YAML strings
 # define the first test definition (basic definition without DynamicFields)
-$ConfigItemPerlDefinitions[0] = " [
-{
-        Pages  => [
-            {
-                Name => 'Content',
-                Layout => {
-                    Columns => 2,
-                    ColumnWidth => '1fr 1fr'
-                },
-                Content => [
-                    {
-                        Section => 'Section1',
-                        ColumnStart => 1,
-                        RowStart => 1
-                    },
-                    {
-                        Section => 'Section2',
-                        ColumnStart => 2,
-                        RowStart => 1
-                    }
-                ],
-            }
-        ]
-}
-]";
+my @ConfigItemDefinitions = ( <<'END_YAML');
+---
+Pages:
+  - Name: Page1
+    Interfaces: []
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section1
+        ColumnStart: 1
+        RowStart: 1
+  - Name: Page2
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section2
+        ColumnStart: 1
+        RowStart: 2
 
-my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+Sections:
+  Section1:
+    Content:
+       - Header: "This is section 1"
+  Section2:
+    Content:
+       - Header: "This is section 2"
+END_YAML
 
-my @ConfigItemDefinitions;
-for my $PerlDefinition (@ConfigItemPerlDefinitions) {
-    my $YAMLDefinition = $YAMLObject->Dump(
-        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-    );
-    push @ConfigItemDefinitions, $YAMLDefinition;
-}
-
-# add the test classes
-my @ConfigItemClassIDs;
-my @ConfigItemClasses;
-my @ConfigItemDefinitionIDs;
-
+# add the test classes, actually only one test class
+my ( @ConfigItemClassIDs, @ConfigItemClasses, @ConfigItemDefinitionIDs );
 for my $Definition (@ConfigItemDefinitions) {
 
     # generate a random name
