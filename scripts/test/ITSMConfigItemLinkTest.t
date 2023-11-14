@@ -14,14 +14,18 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
-
 use utf8;
 
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+# core modules
 
-our $Self;
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 # get needed objects
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
@@ -44,13 +48,7 @@ my $RandomID = $Helper->GetRandomID();
 my $ConfigItemName = 'UnitTestConfigItemTest' . $RandomID;
 my $ServiceName    = 'UnitTestServiceTest' . $RandomID;
 
-my @ConfigItemIDs;
-my @ServiceIDs;
-
-my $CheckExpectedResults;
-$CheckExpectedResults = sub {
-
-    # get parameters
+sub CheckExpectedResults {
     my (%Param) = @_;
 
     my %ExpectedIncidentStates = %{ $Param{ExpectedIncidentStates} };
@@ -79,7 +77,7 @@ $CheckExpectedResults = sub {
                 ############################################################
 
                 # check the result
-                $Self->Is(
+                is(
                     $ConfigItem->{CurInciState},
                     $ExpectedIncidentStates{$Object}->{$NameSuffix},
                     "Check incident state of config item $NameSuffix.",
@@ -98,7 +96,7 @@ $CheckExpectedResults = sub {
                 );
 
                 # check the result
-                $Self->Is(
+                is(
                     $ServiceData{CurInciState},
                     $ExpectedIncidentStates{$Object}->{$NameSuffix},
                     "Check incident state of service $NameSuffix.",
@@ -112,21 +110,22 @@ $CheckExpectedResults = sub {
 
     # Trigger recalculation of incident states for each config item.
     my $ExitCode = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::IncidentState::Recalculate')->Execute();
-    $Self->Is(
+    is(
         $ExitCode,
         0,
-        "Admin::ITSM::IncidentState::Recalculate exit code",
+        "Admin::ITSM::IncidentState::Recalculate exit code"
     );
 
     # Check results again after recalculation (call myself recursively).
-    $CheckExpectedResults->(
+    # There is no change in the expected result.
+    CheckExpectedResults(
         %Param,
         Recalculate => 1,
     );
 
-    # Done for first run (before recalculation).
+    # Done, two runs were executed
     return 1;
-};
+}
 
 # get class list
 my $ClassList = $GeneralCatalogObject->ItemList(
@@ -193,7 +192,8 @@ my @ConfigItemDefinitionIDs;
 for my $Definition (@ConfigItemDefinitions) {
 
     # generate a random name
-    my $ClassName = 'UnitTest' . $Helper->GetRandomID();
+    my $ClassName = 'UnitTest' . $Helper->GetRandomID;
+    push @ConfigItemClasses, $ClassName;
 
     # add an unittest config item class
     my $ClassID = $GeneralCatalogObject->ItemAdd(
@@ -202,18 +202,8 @@ for my $Definition (@ConfigItemDefinitions) {
         ValidID => 1,
         UserID  => 1,
     );
-
-    # check class id
-    if ( !$ClassID ) {
-
-        $Self->True(
-            0,
-            "Can't add new config item class.",
-        );
-    }
-
+    ok( $ClassID, "Added class $ClassName to the general catalog" );
     push @ConfigItemClassIDs, $ClassID;
-    push @ConfigItemClasses,  $ClassName;
 
     # add a definition to the class
     my $DefinitionID = $ConfigItemObject->DefinitionAdd(
@@ -221,16 +211,7 @@ for my $Definition (@ConfigItemDefinitions) {
         Definition => $Definition,
         UserID     => 1,
     );
-
-    # check definition id
-    if ( !$DefinitionID ) {
-
-        $Self->True(
-            0,
-            "Can't add new config item definition.",
-        );
-    }
-
+    is( ref $DefinitionID, '', "Added a definition, no error was returned" );
     push @ConfigItemDefinitionIDs, $DefinitionID;
 }
 
@@ -238,25 +219,23 @@ for my $Definition (@ConfigItemDefinitions) {
 my $DefinitionRef = $ConfigItemObject->DefinitionGet(
     ClassID => $ConfigItemClassIDs[0],
 );
+ref_ok( $DefinitionRef, 'HASH', 'added definition could be retrieved' );
 
 my %ObjectNameSuffix2ID;
 
-# create config items
+# create config items, all the config items are operational initially
+my @ConfigItemIDs;
 for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
 
     # add a configitem
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
-        ClassID      => $ConfigItemClassIDs[0], 
-        DeplStateID  => $DeplStateListReverse{Production},
-        InciStateID  => $InciStateListReverse{Operational},        
-        UserID       => 1,
+        Name        => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        ClassID     => $ConfigItemClassIDs[0],
+        DeplStateID => $DeplStateListReverse{Production},
+        InciStateID => $InciStateListReverse{Operational},
+        UserID      => 1,
     );
-
-    $Self->True(
-        $ConfigItemID,
-        "Added configitem id $ConfigItemID.",
-    );
+    ok( $ConfigItemID, "Added configitem id $ConfigItemID." );
 
     # remember the config item id
     $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix} = $ConfigItemID;
@@ -270,16 +249,13 @@ for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
         DefinitionID => $ConfigItemDefinitionIDs[0],
         DeplStateID  => $DeplStateListReverse{Production},
         InciStateID  => $InciStateListReverse{Operational},
-        UserID => 1,
+        UserID       => 1,
     );
-
-    $Self->True(
-        $VersionID,
-        "Added a version for the configitem id $ConfigItemID",
-    );
+    ok( $VersionID, "Added a version for the configitem id $ConfigItemID" );
 }
 
 # create services
+my @ServiceIDs;
 for my $NameSuffix ( 1 .. 2 ) {
 
     my $ServiceID = $ServiceObject->ServiceAdd(
@@ -289,11 +265,7 @@ for my $NameSuffix ( 1 .. 2 ) {
         TypeID      => 1,
         Criticality => '3 normal',
     );
-
-    $Self->True(
-        $ServiceID,
-        "Added service id $ServiceID.",
-    );
+    ok( $ServiceID, "Added service id $ServiceID." );
 
     # remember the service id
     $ObjectNameSuffix2ID{Service}->{$NameSuffix} = $ServiceID;
@@ -418,8 +390,7 @@ my %Links = (
 for my $LinkType ( sort keys %Links ) {
     for my $TargetObject ( sort keys %{ $Links{$LinkType} } ) {
         for my $TargetKey ( sort keys %{ $Links{$LinkType}->{$TargetObject} } ) {
-            for my $SourceObject ( sort keys %{ $Links{$LinkType}->{$TargetObject}->{$TargetKey} } )
-            {
+            for my $SourceObject ( sort keys %{ $Links{$LinkType}->{$TargetObject}->{$TargetKey} } ) {
                 for my $SourceKey (
                     @{ $Links{$LinkType}->{$TargetObject}->{$TargetKey}->{$SourceObject} }
                     )
@@ -436,9 +407,9 @@ for my $LinkType ( sort keys %Links ) {
                         UserID       => 1,
                     );
 
-                    $Self->True(
+                    ok(
                         $Success,
-                        "LinkAdd() - $SourceObject:$SourceKey linked with $TargetObject:$TargetKey with LinkType '$LinkType'.",
+                        "LinkAdd() - $SourceObject:$SourceKey linked with $TargetObject:$TargetKey with LinkType '$LinkType'."
                     );
                 }
             }
@@ -449,9 +420,7 @@ for my $LinkType ( sort keys %Links ) {
 # ------------------------------------------------------------ #
 # set CI6 to "Incident" and check the results
 # ------------------------------------------------------------ #
-
-{
-
+subtest 'CI6 set to Incident' => sub {
     my $NameSuffix    = 6;
     my $IncidentState = 'Incident';
 
@@ -463,13 +432,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Warning',
@@ -482,7 +447,7 @@ for my $LinkType ( sort keys %Links ) {
                 '3' => 'Operational',
                 '4' => 'Operational',
                 '5' => 'Operational',
-                '6' => 'Incident',
+                '6' => 'Incident',      # because it was explicitly set
                 '7' => 'Operational',
                 'A' => 'Operational',
                 'B' => 'Operational',
@@ -500,15 +465,12 @@ for my $LinkType ( sort keys %Links ) {
         },
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
-
-}
+};
 
 # ------------------------------------------------------------ #
 # set CI6 back to "Operational" and check the results
 # ------------------------------------------------------------ #
-
-{
-
+subtest 'CI6 set to back to Operational' => sub {
     my $NameSuffix    = 6;
     my $IncidentState = 'Operational';
 
@@ -521,13 +483,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Operational',
@@ -553,14 +511,12 @@ for my $LinkType ( sort keys %Links ) {
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
 
-}
+};
 
 # ------------------------------------------------------------ #
 # set CI1 to "Incident" and check the results
 # ------------------------------------------------------------ #
-
-{
-
+subtest 'CI1 set to Incident' => sub {
     my $NameSuffix    = 1;
     my $IncidentState = 'Incident';
 
@@ -573,13 +529,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Incident',
@@ -604,15 +556,12 @@ for my $LinkType ( sort keys %Links ) {
         },
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
-
-}
+};
 
 # ------------------------------------------------------------------------ #
 # set CI5 to "Incident" and check the results (CI1 is still in "Incident")
 # ------------------------------------------------------------------------ #
-
-{
-
+subtest 'CI6 set to Incident' => sub {
     my $NameSuffix    = 5;
     my $IncidentState = 'Incident';
 
@@ -625,13 +574,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Incident',
@@ -657,14 +602,12 @@ for my $LinkType ( sort keys %Links ) {
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
 
-}
+};
 
 # -------------------------------------------------------------------------- #
 # set CI1 to "Operational" and check the results (CI5 is still in "Incident")
 # -------------------------------------------------------------------------- #
-
-{
-
+subtest 'CI1 set to Operational' => sub {
     my $NameSuffix    = 1;
     my $IncidentState = 'Operational';
 
@@ -677,13 +620,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Warning',
@@ -708,15 +647,12 @@ for my $LinkType ( sort keys %Links ) {
         },
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
-
-}
+};
 
 # -------------------------------------------------------------------------- #
 # set CI5 to "Operational" and check the results
 # -------------------------------------------------------------------------- #
-
-{
-
+subtest 'CI5 set to Operational' => sub {
     my $NameSuffix    = 5;
     my $IncidentState = 'Operational';
 
@@ -729,13 +665,9 @@ for my $LinkType ( sort keys %Links ) {
         InciStateID  => $InciStateListReverse{$IncidentState},
         UserID       => 1,
     );
+    ok( $VersionID, "Set config item id $NameSuffix to state '$IncidentState'." );
 
-    $Self->True(
-        $VersionID,
-        "Set config item id $NameSuffix to state '$IncidentState'.",
-    );
-
-    $CheckExpectedResults->(
+    CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
                 '1' => 'Operational',
@@ -760,8 +692,7 @@ for my $LinkType ( sort keys %Links ) {
         },
         ObjectNameSuffix2ID => \%ObjectNameSuffix2ID,
     );
-
-}
+};
 
 # reset the enabled setting for IncidentLinkTypeDirection to its original value
 $ConfigObject->Set(
@@ -816,10 +747,7 @@ my $TicketID = $TicketObject->TicketCreate(
     OwnerID      => 1,
     UserID       => 1,
 );
-$Self->True(
-    $TicketID,
-    "TicketID $TicketID is created",
-);
+ok( $TicketID, "TicketID $TicketID is created" );
 
 my @Tests = (
     {
@@ -858,16 +786,13 @@ for my $Test (@Tests) {
 
     # Create CI.
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Name         => $Test->{Name},
-        ClassID      => $ConfigItemClassIDs[0],
-        DeplStateID  => $Test->{DeplStateID},
-        InciStateID  => $Test->{InciStateID},        
-        UserID       => 1,
+        Name        => $Test->{Name},
+        ClassID     => $ConfigItemClassIDs[0],
+        DeplStateID => $Test->{DeplStateID},
+        InciStateID => $Test->{InciStateID},
+        UserID      => 1,
     );
-    $Self->True(
-        $ConfigItemID,
-        "ConfigItemID $ConfigItemID is created",
-    );
+    ok( $ConfigItemID, "ConfigItemID $ConfigItemID is created" );
 
     push @CIIDs, $ConfigItemID;
 
@@ -880,10 +805,7 @@ for my $Test (@Tests) {
         InciStateID  => $Test->{InciStateID},
         UserID       => 1,
     );
-    $Self->True(
-        $VersionID,
-        "VersionID $VersionID is created",
-    );
+    ok( $VersionID, "VersionID $VersionID is created" );
 
     # Add a link.
     my $Success = $LinkObject->LinkAdd(
@@ -895,17 +817,14 @@ for my $Test (@Tests) {
         State        => 'Valid',
         UserID       => 1,
     );
-    $Self->True(
-        $Success,
-        "TicketID $TicketID linked with ConfigItemID $ConfigItemID with LinkType '$Test->{LinkType}'",
-    );
+    ok( $Success, "TicketID $TicketID linked with ConfigItemID $ConfigItemID with LinkType '$Test->{LinkType}'" );
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID => $ConfigItemID,
     );
 
     # Check CI's incident state.
-    $Self->Is(
+    is(
         $ConfigItem->{CurInciState},
         $Test->{ExpectedInciState},
         "$Test->{Name} - CurInciState: $Test->{ExpectedInciState}",
@@ -918,22 +837,17 @@ my $Success = $TicketObject->TicketTypeSet(
     TicketID => $TicketID,
     UserID   => 1,
 );
-$Self->True(
-    $Success,
-    "Type for TicketID $TicketID is changed to 'Unclassified'",
-);
+ok( $Success, "Type for TicketID $TicketID is changed to 'Unclassified'" );
 
 for my $CIID (@CIIDs) {
     my $CI = $ConfigItemObject->ConfigItemGet(
         ConfigItemID => $CIID,
     );
-    $Self->Is(
+    is(
         $CI->{CurInciState},
         'Operational',
         "CIID $CIID is in 'Operational' state after ticket type update",
     );
 }
 
-# cleanup is done by RestoreDatabase
-
-$Self->DoneTesting;
+done_testing;
