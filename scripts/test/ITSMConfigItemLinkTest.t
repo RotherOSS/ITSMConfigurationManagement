@@ -427,16 +427,11 @@ subtest 'CI6 set to Incident' => sub {
     CheckExpectedResults(
         ExpectedIncidentStates => {
             ITSMConfigItem => {
-                '1' => 'Warning',
-                '2' => 'Warning',
-                '3' => 'Warning',
-                '4' => 'Warning',
-                '5' => 'Warning',
-                '1' => 'Operational',
-                '2' => 'Operational',
-                '3' => 'Operational',
-                '4' => 'Operational',
-                '5' => 'Operational',
+                '1' => 'Warning',       # because 1 depends on 3
+                '2' => 'Warning',       # because 2 depends on 3
+                '3' => 'Warning',       # because 3 depends on 4
+                '4' => 'Warning',       # because 4 depends on 5
+                '5' => 'Warning',       # because 5 depends on 6
                 '6' => 'Incident',      # because it was explicitly set
                 '7' => 'Operational',
                 'A' => 'Operational',
@@ -448,8 +443,7 @@ subtest 'CI6 set to Incident' => sub {
                 'G' => 'Operational',
             },
             Service => {
-                '1' => 'Warning',
-                '1' => 'Operational',
+                '1' => 'Warning',       # because of connection with CI 1
                 '2' => 'Operational',
             },
         },
