@@ -43,10 +43,10 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define needed variable
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $Helper->GetRandomID;
 
-my $ConfigItemName = 'UnitTestConfigItemTest' . $RandomID;
-my $ServiceName    = 'UnitTestServiceTest' . $RandomID;
+my $ConfigItemName = "UnitTestConfigItem_$RandomID";
+my $ServiceName    = "UnitTestService_$RandomID";
 
 sub CheckExpectedResults {
     my (%Param) = @_;
@@ -213,13 +213,12 @@ ref_ok( $DefinitionRef, 'HASH', 'added definition could be retrieved' );
 
 my %ObjectNameSuffix2ID;
 
-# create config items, all the config items are operational initially
-my @ConfigItemIDs;
+# create some test config items, all the config items are operational initially
 for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
 
     # add a configitem
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Name        => $ConfigItemName . '_TestItem_' . $NameSuffix,
+        Name        => join( '_', $ConfigItemName, 'TestItem', $NameSuffix ),
         ClassID     => $ConfigItemClassIDs[0],
         DeplStateID => $DeplStateListReverse{Production},
         InciStateID => $InciStateListReverse{Operational},
@@ -407,10 +406,8 @@ for my $LinkType ( sort keys %Links ) {
     }
 }
 
-# ------------------------------------------------------------ #
 # set CI6 to "Incident" and check the results
-# ------------------------------------------------------------ #
-subtest 'CI6 set to Incident' => sub {
+subtest 'CI6 set to Incident with ConfigItemUpdate()' => sub {
     my $NameSuffix    = 6;
     my $IncidentState = 'Incident';
 
@@ -451,10 +448,8 @@ subtest 'CI6 set to Incident' => sub {
     );
 };
 
-# ------------------------------------------------------------ #
 # set CI6 back to "Operational" and check the results
-# ------------------------------------------------------------ #
-subtest 'CI6 set to back to Operational' => sub {
+subtest 'CI6 set to back to Operational with VersionAdd()' => sub {
     my $NameSuffix    = 6;
     my $IncidentState = 'Operational';
 
@@ -497,10 +492,8 @@ subtest 'CI6 set to back to Operational' => sub {
 
 };
 
-# ------------------------------------------------------------ #
 # set CI1 to "Incident" and check the results
-# ------------------------------------------------------------ #
-subtest 'CI1 set to Incident' => sub {
+subtest 'CI1 set to Incident with VersionAdd()' => sub {
     my $NameSuffix    = 1;
     my $IncidentState = 'Incident';
 
@@ -542,10 +535,8 @@ subtest 'CI1 set to Incident' => sub {
     );
 };
 
-# ------------------------------------------------------------------------ #
 # set CI5 to "Incident" and check the results (CI1 is still in "Incident")
-# ------------------------------------------------------------------------ #
-subtest 'CI6 set to Incident' => sub {
+subtest 'CI6 set to Incident with VersionAdd()' => sub {
     my $NameSuffix    = 5;
     my $IncidentState = 'Incident';
 
@@ -588,10 +579,8 @@ subtest 'CI6 set to Incident' => sub {
 
 };
 
-# -------------------------------------------------------------------------- #
 # set CI1 to "Operational" and check the results (CI5 is still in "Incident")
-# -------------------------------------------------------------------------- #
-subtest 'CI1 set to Operational' => sub {
+subtest 'CI1 set to Operational with VersionAdd' => sub {
     my $NameSuffix    = 1;
     my $IncidentState = 'Operational';
 
@@ -633,10 +622,8 @@ subtest 'CI1 set to Operational' => sub {
     );
 };
 
-# -------------------------------------------------------------------------- #
 # set CI5 to "Operational" and check the results
-# -------------------------------------------------------------------------- #
-subtest 'CI5 set to Operational' => sub {
+subtest 'CI5 set to Operational with VersionAdd' => sub {
     my $NameSuffix    = 5;
     my $IncidentState = 'Operational';
 
