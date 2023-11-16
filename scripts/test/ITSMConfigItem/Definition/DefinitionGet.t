@@ -70,23 +70,23 @@ my %DefinitionTemplate = (
 EOF
     DefinitionRef => [
         {
-            Pages  => [
+            Pages => [
                 {
-                    Name => 'Content',
+                    Name   => 'Content',
                     Layout => {
-                        Columns => '2',
+                        Columns     => '2',
                         ColumnWidth => '1fr 1fr'
                     },
                     Content => [
                         {
-                            Section => 'Section1',
+                            Section     => 'Section1',
                             ColumnStart => '1',
-                            RowStart => '1'
+                            RowStart    => '1'
                         },
                         {
-                            Section => 'Section2',
+                            Section     => 'Section2',
                             ColumnStart => '2',
-                            RowStart => '1'
+                            RowStart    => '1'
                         }
                     ],
                 }
@@ -118,7 +118,7 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
-            DefinitionID => $DefinitionID,
+            DefinitionID    => $DefinitionID,
             DynamicFieldRef => {},
         },
     },
@@ -130,7 +130,7 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
-            DefinitionID => $DefinitionID,
+            DefinitionID    => $DefinitionID,
             DynamicFieldRef => {},
         },
     },
