@@ -582,16 +582,32 @@ END_SQL
         return;
     }
 
-    # update last version of config item
+    # Update last version, cur_inci_state_id, cur_depl_state_id of the config item.
+    # cur_inci_state_id is needed by CurInciStateRecalc().
     my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => <<'END_SQL',
 UPDATE configitem
-  SET last_version_id = ?, change_time = ?, change_by = ?
+  SET
+    last_version_id   = ?,
+    cur_inci_state_id = ?,
+    cur_depl_state_id = ?,
+    change_time       = ?,
+    change_by         = ?
   WHERE id = ?
 END_SQL
-        Bind => [ \$VersionID, \$VersionCreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
+        Bind => [
+            \(
+                $VersionID,
+                $Version{InciStateID},
+                $Version{DeplStateID},
+                $VersionCreateTime,
+                $Param{UserID},
+                $Version{ConfigItemID}
+            )
+        ],
     );
 
+    # TODO: roll back the 'INSERT INTO configitem_version'
     return unless $UpdateSuccess;
 
     # trigger VersionCreate event
@@ -747,7 +763,7 @@ sub VersionUpdate {
         }
 
         # update existing version
-        my $Success = $DBObject->Do(
+        my $UpdateSuccess = $DBObject->Do(
             SQL => <<'END_SQL',
 UPDATE configitem_version
   SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, change_time = current_timestamp, change_by = ?
@@ -763,7 +779,36 @@ END_SQL
             ],
         );
 
-        return unless $Success;
+        return unless $UpdateSuccess;
+
+        # The config item is only affected when the last version was modified
+        if ( $Version->{VersionID} eq $Version->{LastVersionID} ) {
+
+            # Update version, cur_inci_state_id, cur_depl_state_id of the config item.
+            # cur_inci_state_id is needed by CurInciStateRecalc().
+            my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => <<'END_SQL',
+UPDATE configitem
+  SET
+    cur_inci_state_id = ?,
+    cur_depl_state_id = ?,
+    change_time       = current_timestamp,
+    change_by         = ?
+  WHERE id = ?
+END_SQL
+                Bind => [
+                    \(
+                        $Param{InciStateID},
+                        $Param{DeplStateID},
+                        $Param{UserID},
+                        $Version->{ConfigItemID}
+                    )
+                ],
+            );
+
+            # TODO: roll back the 'UPDATE INTO configitem_version'
+            return unless $UpdateSuccess;
+        }
     }
 
     # get latest definition for the class
