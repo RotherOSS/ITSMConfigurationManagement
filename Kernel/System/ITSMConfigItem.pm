@@ -1894,21 +1894,14 @@ sub _FindWarnConfigItems {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{ConfigItemID};
+    return unless $Param{ConfigItemID};
 
-    my $IncidentCount = 0;
-    for my $ConfigItemID ( sort keys %{ $Param{ScannedConfigItemIDs} } ) {
-        if (
-            $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
-            && $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} eq 'incident'
-            )
-        {
-            $IncidentCount++;
-        }
-    }
-
-    # ignore already scanned ids (infinite loop protection)
-    # it is ok that a config item is investigated as many times as there are configured link types * number of incident config iteems
+    # Infinite loop protection.
+    # Ignore already scanned ids.
+    # It is ok that a config item is investigated as many times as there are configured link types * number of incident config iteems
+    my $IncidentCount = true
+    { ( $Param{ScannedConfigItemIDs}->{$_}->{Type} || '' ) eq 'incident' }
+    keys $Param{ScannedConfigItemIDs}->%*;
     if (
         $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}
         &&
