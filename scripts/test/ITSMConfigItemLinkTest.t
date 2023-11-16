@@ -228,19 +228,6 @@ for my $NameSuffix ( 1 .. 7, qw(A B C D E F G) ) {
 
     # remember the config item id
     $ObjectNameSuffix2ID{ITSMConfigItem}->{$NameSuffix} = $ConfigItemID;
-
-    push @ConfigItemIDs, $ConfigItemID;
-
-    # set a name for each configitem
-    my $VersionID = $ConfigItemObject->ConfigItemUpdate(
-        ConfigItemID => $ConfigItemID,
-        Name         => $ConfigItemName . '_TestItem_' . $NameSuffix,
-        DefinitionID => $ConfigItemDefinitionIDs[0],
-        DeplStateID  => $DeplStateListReverse{Production},
-        InciStateID  => $InciStateListReverse{Operational},
-        UserID       => 1,
-    );
-    ok( $VersionID, "Added a version for the configitem id $ConfigItemID" );
 }
 
 # create services
