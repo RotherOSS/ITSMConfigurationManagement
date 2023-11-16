@@ -867,13 +867,9 @@ sub ConfigItemUpdate {
     }
 
     # gather dynamic field keys
-    my @DynamicFieldNames;
-    KEY:
-    for my $Key ( keys %Param ) {
-        next KEY unless $Key =~ m/^DynamicField_(.+)/;
-
-        push @DynamicFieldNames, $1;
-    }
+    my @DynamicFieldNames = grep
+        {m/^DynamicField_(.+)/}
+        sort keys %Param;
 
     # get current config item, including info from the last version
     my $ConfigItem = $Self->ConfigItemGet(
