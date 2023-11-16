@@ -659,6 +659,8 @@ $ConfigObject->Set(
 );
 
 # Check CI's incident state update after 'LinkAdd' action (see bug#14382).
+diag "Tests for SetIncidentStateOnLink";
+
 # Set some configs for link status.
 $ConfigObject->Set(
     Valid => 1,
@@ -688,9 +690,18 @@ $ConfigObject->Set(
     Value => ['Incident'],
 );
 
-$RandomID = $Helper->GetRandomID();
+$RandomID = $Helper->GetRandomID;
 
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+# The ticket type 'Incident' is used for testing.
+# The type needs to be created when it does not exist.
+my $IncidentTypeID = $Kernel::OM->Get('Kernel::System::Type')->TypeAdd(
+    Name    => 'Incident',
+    ValidID => 1,
+    UserID  => 1,
+);
+ok( ( !defined $IncidentTypeID || $IncidentTypeID ), "ticket type Incident created, or it already existed" );
 
 # Create test ticket.
 my $TicketID = $TicketObject->TicketCreate(
