@@ -753,51 +753,54 @@ my @CIIDs;
 
 for my $Test (@Tests) {
 
-    # Create CI.
-    my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Name        => $Test->{Name},
-        ClassID     => $ConfigItemClassIDs[0],
-        DeplStateID => $Test->{DeplStateID},
-        InciStateID => $Test->{InciStateID},
-        UserID      => 1,
-    );
-    ok( $ConfigItemID, "ConfigItemID $ConfigItemID is created" );
+    subtest $Test->{Name} => sub {
 
-    push @CIIDs, $ConfigItemID;
+        # Create CI.
+        my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
+            Name        => $Test->{Name},
+            ClassID     => $ConfigItemClassIDs[0],
+            DeplStateID => $Test->{DeplStateID},
+            InciStateID => $Test->{InciStateID},
+            UserID      => 1,
+        );
+        ok( $ConfigItemID, "ConfigItemID $ConfigItemID is created" );
 
-    # Add a version.
-    my $VersionID = $ConfigItemObject->ConfigItemUpdate(
-        ConfigItemID => $ConfigItemID,
-        Name         => $Test->{Name},
-        DefinitionID => $ConfigItemDefinitionIDs[0],
-        DeplStateID  => $Test->{DeplStateID},
-        InciStateID  => $Test->{InciStateID},
-        UserID       => 1,
-    );
-    ok( $VersionID, "VersionID $VersionID is created" );
+        push @CIIDs, $ConfigItemID;
 
-    # Add a link.
-    my $Success = $LinkObject->LinkAdd(
-        SourceObject => 'Ticket',
-        SourceKey    => $TicketID,
-        TargetObject => 'ITSMConfigItem',
-        TargetKey    => $ConfigItemID,
-        Type         => $Test->{LinkType},
-        State        => 'Valid',
-        UserID       => 1,
-    );
-    ok( $Success, "TicketID $TicketID linked with ConfigItemID $ConfigItemID with LinkType '$Test->{LinkType}'" );
+        # Add a version.
+        my $VersionID = $ConfigItemObject->ConfigItemUpdate(
+            ConfigItemID => $ConfigItemID,
+            Name         => $Test->{Name},
+            DefinitionID => $ConfigItemDefinitionIDs[0],
+            DeplStateID  => $Test->{DeplStateID},
+            InciStateID  => $Test->{InciStateID},
+            UserID       => 1,
+        );
+        ok( $VersionID, "VersionID $VersionID is created" );
 
-    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $ConfigItemID,
-    );
+        # Add a link.
+        my $Success = $LinkObject->LinkAdd(
+            SourceObject => 'Ticket',
+            SourceKey    => $TicketID,
+            TargetObject => 'ITSMConfigItem',
+            TargetKey    => $ConfigItemID,
+            Type         => $Test->{LinkType},
+            State        => 'Valid',
+            UserID       => 1,
+        );
+        ok( $Success, "TicketID $TicketID linked with ConfigItemID $ConfigItemID with LinkType '$Test->{LinkType}'" );
 
-    # Check CI's incident state.
-    is(
-        $ConfigItem->{CurInciState},
-        $Test->{ExpectedInciState},
-        "$Test->{Name} - CurInciState: $Test->{ExpectedInciState}",
-    );
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+        );
+
+        # Check CI's incident state.
+        is(
+            $ConfigItem->{CurInciState},
+            $Test->{ExpectedInciState},
+            "$Test->{Name} - CurInciState: $Test->{ExpectedInciState}",
+        );
+    };
 }
 
 # Set ticket type to something different than 'Incident' to verify CI's incident state update.
