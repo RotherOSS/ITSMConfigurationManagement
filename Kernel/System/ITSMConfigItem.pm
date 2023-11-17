@@ -23,20 +23,21 @@ use namespace::autoclean;
 use utf8;
 
 use parent qw(
-    Kernel::System::ITSMConfigItem::ConfigItemSearch
+    Kernel::System::EventHandler
     Kernel::System::ITSMConfigItem::ConfigItemACL
+    Kernel::System::ITSMConfigItem::ConfigItemSearch
     Kernel::System::ITSMConfigItem::Definition
     Kernel::System::ITSMConfigItem::History
+    Kernel::System::ITSMConfigItem::Link
     Kernel::System::ITSMConfigItem::Number
     Kernel::System::ITSMConfigItem::Permission
-    Kernel::System::ITSMConfigItem::Reference
     Kernel::System::ITSMConfigItem::Version
     Kernel::System::ITSMConfigItem::XML
-    Kernel::System::EventHandler
 );
 
 # core modules
 use Storable;
+use List::AllUtils qw(first true);
 
 # CPAN modules
 
@@ -61,11 +62,12 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem - config item lib
+Kernel::System::ITSMConfigItem - library for ITSM config items.
 
 =head1 DESCRIPTION
 
-All config item functions.
+All config item functions. Note that additional parent modules are loaded
+which effectively add more methods.
 
 =head1 PUBLIC INTERFACE
 
@@ -99,7 +101,7 @@ sub new {
 
 =head2 ConfigItemCount()
 
-count all records of a config item class
+count all productive config items of a config item class
 
     my $Count = $ConfigItemObject->ConfigItemCount(
         ClassID => 123,
@@ -116,10 +118,11 @@ sub ConfigItemCount {
             Priority => 'error',
             Message  => 'Need ClassID!',
         );
+
         return;
     }
 
-    # get state list
+    # get list of productive deployment states
     my $StateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
         Class       => 'ITSM::ConfigItem::DeploymentState',
         Preferences => {
@@ -445,7 +448,7 @@ END_SQL
 
 =head2 ConfigItemAdd()
 
-add a new config item
+add a new config item. This implies that an initial version is created as well.
 
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         ClassID        => 123,
@@ -453,9 +456,11 @@ add a new config item
         DeplStateID    => 3,
         InciStateID    => 2,
         UserID         => 1,
-        Number         => '111',    # (optional)
+        Number         => '111',    # optional, a number will generated when no number is passed
         DynamicField_X => $Value,   # optional
     );
+
+No config item will be created when an already existing Number is passed.
 
 =cut
 
@@ -481,8 +486,8 @@ sub ConfigItemAdd {
         Class => 'ITSM::ConfigItem::Class',
     );
 
-    return if !$ClassList;
-    return if ref $ClassList ne 'HASH';
+    return unless $ClassList;
+    return unless ref $ClassList eq 'HASH';
 
     # check the class id
     if ( !$ClassList->{ $Param{ClassID} } ) {
@@ -499,8 +504,8 @@ sub ConfigItemAdd {
         Class => 'ITSM::ConfigItem::DeploymentState',
     );
 
-    return if !$DeplStateList;
-    return if ref $DeplStateList ne 'HASH';
+    return unless $DeplStateList;
+    return unless ref $DeplStateList eq 'HASH';
 
     # check the deployment state id
     if ( !$DeplStateList->{ $Param{DeplStateID} } ) {
@@ -517,8 +522,8 @@ sub ConfigItemAdd {
         Class => 'ITSM::Core::IncidentState',
     );
 
-    return if !$InciStateList;
-    return if ref $InciStateList ne 'HASH';
+    return unless $InciStateList;
+    return unless ref $InciStateList eq 'HASH';
 
     # check the incident state id
     if ( !$InciStateList->{ $Param{InciStateID} } ) {
@@ -646,6 +651,7 @@ END_SQL
     );
 
     # trigger ConfigItemCreate
+    # TODO: is it sane when events are triggered before the config item is complete ?
     $Self->EventHandler(
         Event => 'ConfigItemCreate',
         Data  => {
@@ -718,8 +724,11 @@ sub ConfigItemDelete {
         ConfigItemID => $Param{ConfigItemID},
     );
 
-    # delete all links to this config item first, before deleting the versions
-    return if !$Kernel::OM->Get('Kernel::System::LinkObject')->LinkDeleteAll(
+    # Delete all links to this config item before deleting the versions.
+    # LinkDeleteAll() calls LinkDelete() internally. This means that
+    # the event handlers are honored. This means that the table configitem_link
+    # is also purged.
+    return unless $Kernel::OM->Get('Kernel::System::LinkObject')->LinkDeleteAll(
         Object => 'ITSMConfigItem',
         Key    => $Param{ConfigItemID},
         UserID => $Param{UserID},
@@ -824,7 +833,7 @@ sub ConfigItemDelete {
 
 =head2 ConfigItemUpdate()
 
-update a config item
+update a config item. A new version will be created only when a version trigger applies.
 
     my $Success = $ConfigItemObject->ConfigItemUpdate(
         ConfigItemID   => 27,
@@ -858,18 +867,12 @@ sub ConfigItemUpdate {
         }
     }
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     # gather dynamic field keys
-    my @DynamicFieldNames;
-    KEY:
-    for my $Key ( keys %Param ) {
-        next KEY unless $Key =~ m/^DynamicField_(.+)/;
+    my @DynamicFieldNames = grep
+        {m/^DynamicField_(.+)/}
+        sort keys %Param;
 
-        push @DynamicFieldNames, $1;
-    }
-
-    # get current
+    # get current config item, including info from the last version
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
         DynamicFields => ( @DynamicFieldNames ? 1 : 0 ),
@@ -889,13 +892,17 @@ sub ConfigItemUpdate {
         return;
     }
 
+    # ignore the passed in name when a name module is active
+    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
     my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
     if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
         delete $Param{Name};
     }
 
     my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
-    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{$Class} // [] };
+    my %VersionTrigger = map
+        { $_ => 1 }
+        ( $TriggerConfig->{$Class} // [] )->@*;
 
     my %Changed;           # track changed values for the Event handler, e.g. for writing history
     my $AddVersion = 0;    # flag for deciding whether a new version is created
@@ -1304,7 +1311,7 @@ or
 sub ConfigItemLookup {
     my ( $Self, %Param ) = @_;
 
-    my ($Key) = grep { $Param{$_} } qw(ConfigItemID ConfigItemNumber);
+    my ($Key) = first { $Param{$_} } qw(ConfigItemID ConfigItemNumber);
 
     # check for needed stuff
     if ( !$Key ) {
@@ -1312,6 +1319,7 @@ sub ConfigItemLookup {
             Priority => 'error',
             Message  => 'Need ConfigItemID or ConfigItemNumber!',
         );
+
         return;
     }
 
@@ -1320,14 +1328,14 @@ sub ConfigItemLookup {
         if $Self->{Cache}->{ConfigItemLookup}->{$Key}->{ $Param{$Key} };
 
     # set the appropriate SQL statement
-    my $SQL = 'SELECT configitem_number FROM configitem WHERE id = ?';
-
-    if ( $Key eq 'ConfigItemNumber' ) {
-        $SQL = 'SELECT id FROM configitem WHERE configitem_number = ?';
-    }
+    my $SQL = $Key eq 'ConfigItemNumber'
+        ?
+        'SELECT id                FROM configitem WHERE configitem_number = ?'
+        :
+        'SELECT configitem_number FROM configitem WHERE id = ?';
 
     # fetch the requested value
-    return if !$Kernel::OM->Get('Kernel::System::DB')->Prepare(
+    return unless $Kernel::OM->Get('Kernel::System::DB')->Prepare(
         SQL   => $SQL,
         Bind  => [ \$Param{$Key} ],
         Limit => 1,
@@ -1356,17 +1364,19 @@ This method requires 3 parameters: ConfigItemID, Name and Class
 
 All parameters are mandatory.
 
-my $DuplicateNames = $ConfigItemObject->UniqueNameCheck(
-    ConfigItemID => '73'
-    Name         => 'PC#005',
-    ClassID      => '32',
-);
+    my $DuplicateNames = $ConfigItemObject->UniqueNameCheck(
+        ConfigItemID => '73'
+        Name         => 'PC#005',
+        ClassID      => '32',
+    );
 
 The given name is not unique
-my $NameDuplicates = [ 5, 35, 48, ];    # IDs of ConfigItems with the same name
+
+    my $NameDuplicates = [ 5, 35, 48, ];    # IDs of ConfigItems with the same name
 
 The given name is unique
-my $NameDuplicates = [];
+
+    my $NameDuplicates = [];
 
 =cut
 
@@ -1503,11 +1513,13 @@ sub UniqueNameCheck {
     return \@Duplicates;
 }
 
-# TODO: Check
-
 =head2 CurInciStateRecalc()
 
-recalculates the current incident state of this config item and all linked config items
+recalculates the current incident state of this config item and of all linked config items.
+
+The current incident state depends on the incident states that this config depends on.
+A change of the incident state might have repercussions on the current incident state
+of the config items that depend on this config item.
 
     my $Success = $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID               => 123,
@@ -1526,6 +1538,7 @@ sub CurInciStateRecalc {
             Priority => 'error',
             Message  => 'Need ConfigItemID!',
         );
+
         return;
     }
 
@@ -1546,7 +1559,7 @@ sub CurInciStateRecalc {
     $Param{ScannedConfigItemIDs} //= {};
     my $KnownScannedConfigItemIDs = Storable::dclone( $Param{ScannedConfigItemIDs} );
 
-    # find all config items with an incident state
+    # Find all connected config items with an incident state.
     $Self->_FindInciConfigItems(
         ConfigItemID              => $Param{ConfigItemID},
         IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
@@ -1555,7 +1568,7 @@ sub CurInciStateRecalc {
 
     # calculate the new CI incident state for each configured linktype
     LINKTYPE:
-    for my $LinkType ( sort keys %{$IncidentLinkTypeDirection} ) {
+    for my $LinkType ( sort keys $IncidentLinkTypeDirection->%* ) {
 
         # get the direction
         my $LinkDirection = $IncidentLinkTypeDirection->{$LinkType};
@@ -1567,21 +1580,22 @@ sub CurInciStateRecalc {
             # Skip config items known from previous execution(s).
             if (
                 IsStringWithData( $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} )
-                && $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} eq
-                $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
+                &&
+                $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} eq $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
                 )
             {
                 next CONFIGITEMID;
             }
 
             # investigate only config items with an incident state
-            next CONFIGITEMID if $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} ne 'incident';
+            next CONFIGITEMID unless $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} eq 'incident';
 
+            # annotate linked config items with a warning
             $Self->_FindWarnConfigItems(
                 ConfigItemID         => $ConfigItemID,
                 LinkType             => $LinkType,
                 Direction            => $LinkDirection,
-                NumberOfLinkTypes    => scalar keys %{$IncidentLinkTypeDirection},
+                NumberOfLinkTypes    => scalar keys $IncidentLinkTypeDirection->%*,
                 ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
             );
         }
@@ -1592,8 +1606,8 @@ sub CurInciStateRecalc {
             # Skip config items known from previous execution(s).
             if (
                 IsStringWithData( $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} )
-                && $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} eq
-                $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
+                &&
+                $KnownScannedConfigItemIDs->{$ConfigItemID}->{Type} eq $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
                 )
             {
                 next CONFIGITEMID;
@@ -1602,7 +1616,8 @@ sub CurInciStateRecalc {
             # extract incident state type
             my $InciStateType = $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type};
 
-            # find all linked services of this CI
+            # Find all linked services of this config item.
+            # These kind of links are not available from the table configitem_link
             my %LinkedServiceIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
                 Object1   => 'ITSMConfigItem',
                 Key1      => $ConfigItemID,
@@ -1749,6 +1764,7 @@ sub CurInciStateRecalc {
             # check if service must be set to 'warning'
             if ( $ConfigItemData->{CurInciStateType} eq 'warning' ) {
                 $CurInciStateTypeFromCIs = 'warning';
+
                 next CONFIGITEMID;
             }
 
@@ -1775,13 +1791,21 @@ sub CurInciStateRecalc {
 
 =head2 _FindInciConfigItems()
 
-find all config items with an incident state
+find connected config items with an incident state.
 
     $ConfigItemObject->_FindInciConfigItems(
         ConfigItemID              => $ConfigItemID,
         IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
-        ScannedConfigItemIDs     => \%ScannedConfigItemIDs,
+        ScannedConfigItemIDs      => \%ScannedConfigItemIDs,
     );
+
+The scanned config items will be entered in the ScannedConfigItemIDs hashref. Each config item will be scanned only once.
+The attribute C<Type> will be either 'operational' or 'incident'.
+
+The search for config items with incidents recurses into the graph of linked config items. The directly
+linked items will always be checked. Recursion stops once an incident has been found.
+
+This method only collects data, no current incident states will be altered.
 
 =cut
 
@@ -1789,42 +1813,39 @@ sub _FindInciConfigItems {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{ConfigItemID};
+    return unless $Param{ConfigItemID};
 
     # ignore already scanned ids (infinite loop protection)
     return if $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} };
 
+    # set a default so the ConfigITem won't be scanned again
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{Type} = 'operational';
 
     # add own config item id to list of linked config items
-    my %ConfigItemIDs = (
-        $Param{ConfigItemID} => 1,
-    );
+    my @ConfigItemIDs = $Param{ConfigItemID};
 
+    # find the directly linked config items
     LINKTYPE:
     for my $LinkType ( sort keys %{ $Param{IncidentLinkTypeDirection} } ) {
 
-        # find all linked config items (childs)
-        my %LinkedConfigItemIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
-            Object1 => 'ITSMConfigItem',
-            Key1    => $Param{ConfigItemID},
-            Object2 => 'ITSMConfigItem',
-            State   => 'Valid',
-            Type    => $LinkType,
+        # find all linking config items (childs)
+        my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+            Key    => $Param{ConfigItemID},
+            Type   => $LinkType,
+            UserID => 1,
 
             # Direction must ALWAYS be 'Both' here as we need to include
             # all linked CIs that could influence this one!
             Direction => 'Both',
-
-            UserID => 1,
         );
 
         # remember the config item ids
-        %ConfigItemIDs = ( %ConfigItemIDs, %LinkedConfigItemIDs );
+        push @ConfigItemIDs, $LinkingConfigItemIDs->@*;
     }
 
+    # Loop over the requested config item and the directly linked config items
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %ConfigItemIDs ) {
+    for my $ConfigItemID ( sort @ConfigItemIDs ) {
 
         # get config item data
         my $ConfigItem = $Self->ConfigItemGet(
@@ -1832,13 +1853,14 @@ sub _FindInciConfigItems {
             Cache        => 0,
         );
 
-        # set incident state
+        # When an incident was found, mark the config item and stop recursing
         if ( $ConfigItem->{CurInciStateType} eq 'incident' ) {
             $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} = 'incident';
+
             next CONFIGITEMID;
         }
 
-        # start recursion
+        # no incident was encountered, continue with recursion
         $Self->_FindInciConfigItems(
             ConfigItemID              => $ConfigItemID,
             IncidentLinkTypeDirection => $Param{IncidentLinkTypeDirection},
@@ -1846,18 +1868,19 @@ sub _FindInciConfigItems {
         );
     }
 
-    return 1;
+    return;
 }
 
 =head2 _FindWarnConfigItems()
 
-find all config items with a warning
+This method is called for config item that are in a incident or warning state.
+Find connected config items and annotate them with a warning in ScannedConfigItemIDs. Propagate the warning.
 
     $ConfigItemObject->_FindWarnConfigItems(
         ConfigItemID         => $ConfigItemID,
         LinkType             => $LinkType,
         Direction            => $LinkDirection,
-        NumberOfLinkTypes    => 2,
+        NumberOfLinkTypes    => 2,                     # just for infinite loop protection
         ScannedConfigItemIDs => $ScannedConfigItemIDs,
     );
 
@@ -1867,25 +1890,18 @@ sub _FindWarnConfigItems {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{ConfigItemID};
+    return unless $Param{ConfigItemID};
 
-    my $IncidentCount = 0;
-    for my $ConfigItemID ( sort keys %{ $Param{ScannedConfigItemIDs} } ) {
-        if (
-            $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
-            && $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} eq 'incident'
-            )
-        {
-            $IncidentCount++;
-        }
-    }
-
-    # ignore already scanned ids (infinite loop protection)
-    # it is ok that a config item is investigated as many times as there are configured link types * number of incident config iteems
+    # Infinite loop protection.
+    # Ignore already scanned ids.
+    # It is ok that a config item is investigated as many times as there are configured link types * number of incident config iteems
+    my $IncidentCount = true
+    { ( $Param{ScannedConfigItemIDs}->{$_}->{Type} || '' ) eq 'incident' }
+    keys $Param{ScannedConfigItemIDs}->%*;
     if (
         $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}
-        && $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}
-        >= ( $Param{NumberOfLinkTypes} * $IncidentCount )
+        &&
+        $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn} >= ( $Param{NumberOfLinkTypes} * $IncidentCount )
         )
     {
         return;
@@ -1894,19 +1910,16 @@ sub _FindWarnConfigItems {
     # increase the visit counter
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}++;
 
-    # find all linked config items
-    my %LinkedConfigItemIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
-        Object1   => 'ITSMConfigItem',
-        Key1      => $Param{ConfigItemID},
-        Object2   => 'ITSMConfigItem',
-        State     => 'Valid',
+    # find directy linking config items, honor the dependency direction
+    my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+        Key       => $Param{ConfigItemID},
         Type      => $Param{LinkType},
         Direction => $Param{Direction},
         UserID    => 1,
     );
 
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %LinkedConfigItemIDs ) {
+    for my $ConfigItemID ( sort $LinkingConfigItemIDs->@* ) {
 
         # start recursion
         $Self->_FindWarnConfigItems(
@@ -1917,9 +1930,7 @@ sub _FindWarnConfigItems {
             ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
         );
 
-        next CONFIGITEMID
-            if $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type}
-            && $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} eq 'incident';
+        next CONFIGITEMID if ( $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} || '' ) eq 'incident';
 
         # set warning state
         $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} = 'warning';

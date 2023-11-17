@@ -123,10 +123,10 @@ $Self->True(
 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
 my $DefinitionID1 = $ConfigItemObject->DefinitionAdd(
-    ClassID      => $ClassID,
-    UserID       => $UserID,
-    CreateBy     => $UserID,
-    Definition  => $ConfigItemDefinitions[0]
+    ClassID    => $ClassID,
+    UserID     => $UserID,
+    CreateBy   => $UserID,
+    Definition => $ConfigItemDefinitions[0]
 );
 
 $Self->True(
@@ -160,7 +160,7 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => [
             {
-                CreateBy     => $UserID,
+                CreateBy   => $UserID,
                 Definition => << 'EOF',
 ---
 - Pages:
@@ -177,7 +177,7 @@ my @Tests = (
     Name: Content
 EOF
                 Version      => 1,
-                DefinitionID => $DefinitionID1,                
+                DefinitionID => $DefinitionID1,
             },
             {
                 CreateBy   => $UserID,

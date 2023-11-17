@@ -81,66 +81,66 @@ my @UserIDs;
 }
 
 my $TestIDSuffix = 'UnitTest' . $RandomID;
-my $Order = 10000;
+my $Order        = 10000;
 
 my %DynamicFieldDefinitions = (
     Test1 => {
-            'DefaultValue' => '',
-            'RegExList' => [],
-            'MultiValue' => '0',
-            'Link' => '',
-            'Tooltip' => '',
-            'LinkPreview' => '',
-            'Type' => 'Text'
+        'DefaultValue' => '',
+        'RegExList'    => [],
+        'MultiValue'   => '0',
+        'Link'         => '',
+        'Tooltip'      => '',
+        'LinkPreview'  => '',
+        'Type'         => 'Text'
     },
     Test2 => {
-            'Link' => '',
-            'Tooltip' => '',
-            'PossibleNone' => '1',
-            'MultiValue' => '1',
-            'DefaultValue' => '',
-            'TranslatableValues' => '0',
-            'PossibleValues' => {
-                'VALUE 1' => 'VALUE 1',
-                'VALUE 2' => 'VALUE 2'
-            },
-            'TreeView' => '1',
-            'LinkPreview' => '',
-            'Type' => 'Dropdown'
+        'Link'               => '',
+        'Tooltip'            => '',
+        'PossibleNone'       => '1',
+        'MultiValue'         => '1',
+        'DefaultValue'       => '',
+        'TranslatableValues' => '0',
+        'PossibleValues'     => {
+            'VALUE 1' => 'VALUE 1',
+            'VALUE 2' => 'VALUE 2'
+        },
+        'TreeView'    => '1',
+        'LinkPreview' => '',
+        'Type'        => 'Dropdown'
     },
     Test3 => {
-            'YearsInFuture' => '5',
-            'DateRestriction' => '',
-            'YearsPeriod' => '0',
-            'LinkPreview' => '',
-            'YearsInPast' => '5',
-            'MultiValue' => '0',
-            'DefaultValue' => 0,
-            'Link' => '',
-            'Tooltip' => '',
-            'Type' => 'Date'
+        'YearsInFuture'   => '5',
+        'DateRestriction' => '',
+        'YearsPeriod'     => '0',
+        'LinkPreview'     => '',
+        'YearsInPast'     => '5',
+        'MultiValue'      => '0',
+        'DefaultValue'    => 0,
+        'Link'            => '',
+        'Tooltip'         => '',
+        'Type'            => 'Date'
     },
     Test4 => {
-            'Cols' => '',
-            'Rows' => '',
-            'DefaultValue' => '',
-            'RegExList' => [],
-            'MultiValue' => '0',
-            'Tooltip' => '',
-            'Type' => 'TextArea'
+        'Cols'         => '',
+        'Rows'         => '',
+        'DefaultValue' => '',
+        'RegExList'    => [],
+        'MultiValue'   => '0',
+        'Tooltip'      => '',
+        'Type'         => 'TextArea'
     },
     Test5 => {
-            'YearsInFuture' => '5',
-            'DateRestriction' => '',
-            'YearsPeriod' => '0',
-            'LinkPreview' => '',
-            'YearsInPast' => '5',
-            'MultiValue' => '0',
-            'DefaultValue' => 0,
-            'Link' => '',
-            'Tooltip' => '',
-            'Type' => 'DateTime'
-    },    
+        'YearsInFuture'   => '5',
+        'DateRestriction' => '',
+        'YearsPeriod'     => '0',
+        'LinkPreview'     => '',
+        'YearsInPast'     => '5',
+        'MultiValue'      => '0',
+        'DefaultValue'    => 0,
+        'Link'            => '',
+        'Tooltip'         => '',
+        'Type'            => 'DateTime'
+    },
 );
 
 # add dynamic fields for testing
@@ -149,19 +149,19 @@ for my $Name (qw(Test1 Test2 Test3 Test4 Test5)) {
     # add a new item
     my $ItemID = $DynamicFieldObject->DynamicFieldAdd(
         InternalField => 0,
-        Name        => $Name . $TestIDSuffix,
-        Label       => $Name . $TestIDSuffix,
-        FieldOrder  => $Order,          
-        FieldType   => $DynamicFieldDefinitions{$Name}->{Type},          
-        ObjectType  => 'ITSMConfigItem',
-        Config      => $DynamicFieldDefinitions{$Name},
-        Reorder     => 1,               
-        ValidID     => 1,
-        UserID      => 1,
+        Name          => $Name . $TestIDSuffix,
+        Label         => $Name . $TestIDSuffix,
+        FieldOrder    => $Order,
+        FieldType     => $DynamicFieldDefinitions{$Name}->{Type},
+        ObjectType    => 'ITSMConfigItem',
+        Config        => $DynamicFieldDefinitions{$Name},
+        Reorder       => 1,
+        ValidID       => 1,
+        UserID        => 1,
     );
-    
+
     $Order++;
-    
+
     # check item id
     if ( !$ItemID ) {
 
@@ -393,7 +393,7 @@ $ConfigItemPerlDefinitions[5] = " [
                     },
                     {
                         DF => 'Test4$TestIDSuffix'
-                    }                    
+                    }
                 ]
             },
         },
@@ -544,21 +544,21 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                ClassID => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 1",
-                UserID  => 1,
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 1",
+                UserID      => 1,
             },
         },
         ReferenceData => {
             ConfigItemGet => {
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => 1,
-                ChangeBy         => 1,
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => 1,
+                ChangeBy     => 1,
             },
         },
     },
@@ -567,23 +567,23 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number  => $ConfigItemNumbers[0],
-                ClassID => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 2",                
-                UserID  => $UserIDs[1],
+                Number      => $ConfigItemNumbers[0],
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 2",
+                UserID      => $UserIDs[1],
             },
         },
         ReferenceData => {
             ConfigItemGet => {
-                Number           => $ConfigItemNumbers[0],
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => $UserIDs[1],
-                ChangeBy         => $UserIDs[1],
+                Number       => $ConfigItemNumbers[0],
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => $UserIDs[1],
+                ChangeBy     => $UserIDs[1],
             },
         },
     },
@@ -592,12 +592,12 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[0],
-                ClassID      => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 3",           
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[0],
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 3",
+                UserID      => 1,
             },
         },
     },
@@ -606,54 +606,54 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[35],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 35",         
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[35],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 35",
+                UserID      => 1,
             },
         },
         ReferenceData => {
             ConfigItemGet => {
-                Number           => $ConfigItemNumbers[35],
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => 1,
-                ChangeBy         => 1,
+                Number       => $ConfigItemNumbers[35],
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => 1,
+                ChangeBy     => 1,
             },
         },
-    },    
+    },
 
     # VersionAdd doesn't contains all data (check required attributes) (Missing UserID)
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[1],
-                ClassID      => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 4",                
-                UserID       => $UserIDs[1],
+                Number      => $ConfigItemNumbers[1],
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 4",
+                UserID      => $UserIDs[1],
             },
             VersionAdd => [
                 {
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
                 },
             ],
         },
         ReferenceData => {
             ConfigItemGet => {
-                Number           => $ConfigItemNumbers[1],
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => $UserIDs[1],
-                ChangeBy         => $UserIDs[1],
+                Number       => $ConfigItemNumbers[1],
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => $UserIDs[1],
+                ChangeBy     => $UserIDs[1],
             },
         },
     },
@@ -662,31 +662,31 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[2],
-                ClassID      => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5",                
-                UserID       => $UserIDs[2],
+                Number      => $ConfigItemNumbers[2],
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5",
+                UserID      => $UserIDs[2],
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5", 
-                    DeplStateID  => undef,
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => $UserIDs[2],
+                    Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5",
+                    DeplStateID => undef,
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => $UserIDs[2],
                 },
             ],
         },
         ReferenceData => {
             ConfigItemGet => {
-                Number           => $ConfigItemNumbers[2],
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => $UserIDs[2],
-                ChangeBy         => $UserIDs[2],
+                Number       => $ConfigItemNumbers[2],
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => $UserIDs[2],
+                ChangeBy     => $UserIDs[2],
             },
         },
     },
@@ -695,57 +695,57 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[3],
-                ClassID      => $ConfigItemClassIDs[0],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 6",                
-                UserID       => $UserIDs[2],
+                Number      => $ConfigItemNumbers[3],
+                ClassID     => $ConfigItemClassIDs[0],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 6",
+                UserID      => $UserIDs[2],
             },
             VersionAdd => [
                 {
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => undef,
-                    UserID       => $UserIDs[2],
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => undef,
+                    UserID      => $UserIDs[2],
                 },
             ],
         },
         ReferenceData => {
             ConfigItemGet => {
-                Number           => $ConfigItemNumbers[3],
-                ClassID          => $ConfigItemClassIDs[0],
-                Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplState     => 'Production',
-                CurInciState     => 'Operational',
-                CreateBy         => $UserIDs[2],
-                ChangeBy         => $UserIDs[2],
+                Number       => $ConfigItemNumbers[3],
+                ClassID      => $ConfigItemClassIDs[0],
+                Class        => $ClassList->{ $ConfigItemClassIDs[0] },
+                CurDeplState => 'Production',
+                CurInciState => 'Operational',
+                CreateBy     => $UserIDs[2],
+                ChangeBy     => $UserIDs[2],
             },
         },
-    },    
+    },
 
     # all required values are given (general check with two versions)
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[9],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 7",         
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[9],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 7",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 9 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 9 Version 1",
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 9 Version 2",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => $UserIDs[1],
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 9 Version 2",
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => $UserIDs[1],
                 },
             ],
         },
@@ -812,25 +812,25 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[10],
-                DeplStateID  => $DeplStateListReverse{Maintenance},
-                InciStateID  => $InciStateListReverse{Incident},                   
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 8",         
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[10],
+                DeplStateID => $DeplStateListReverse{Maintenance},
+                InciStateID => $InciStateListReverse{Incident},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 8",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 10 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Planned},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 10 Version 1",
+                    DeplStateID => $DeplStateListReverse{Planned},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 10 Version 2",
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 10 Version 2",
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => 1,
                 },
             ],
         },
@@ -897,19 +897,19 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[50],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Incident},                   
-                ClassID      => $ConfigItemClassIDs[2],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 50",  
-                UserID       => $UserIDs[2],
+                Number      => $ConfigItemNumbers[50],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Incident},
+                ClassID     => $ConfigItemClassIDs[2],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 50",
+                UserID      => $UserIDs[2],
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 50 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => $UserIDs[2],
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 50 Version 1",
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => $UserIDs[2],
                 },
             ],
         },
@@ -956,25 +956,25 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[51],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[2],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 51",  
-                UserID       => 1,                
+                Number      => $ConfigItemNumbers[51],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[2],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 51",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 51 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 51 Version 1",
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 51 Version 2",
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => $UserIDs[1],
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 51 Version 2",
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => $UserIDs[1],
                 },
             ],
         },
@@ -1041,19 +1041,19 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[53],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[5],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[5] } - 53",  
-                UserID       => 1,   
+                Number      => $ConfigItemNumbers[53],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[5],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[5] } - 53",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[5] ConfigItem 53 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[5] ConfigItem 53 Version 1",
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    UserID                            => 1,
                     "DynamicField_Test1$TestIDSuffix" => 'Test value for text field Test1',
                     "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',
                 },
@@ -1075,50 +1075,50 @@ my $ConfigItemTests = [
             },
             VersionGet => [
                 {
-                    Number           => $ConfigItemNumbers[53],
-                    ClassID          => $ConfigItemClassIDs[5],
-                    Class            => $ClassList->{ $ConfigItemClassIDs[5] },
-                    Name             => "UnitTest - Class $ConfigItemClassIDs[5] ConfigItem 53 Version 1",
-                    DefinitionID     => $ConfigItemDefinitionIDs[5],
-                    DeplStateID      => $DeplStateListReverse{Production},
-                    DeplState        => 'Production',
-                    DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
-                    CurDeplStateType => 'productive',
-                    InciStateID      => $InciStateListReverse{Incident},
-                    InciState        => 'Incident',
-                    InciStateType    => 'incident',
-                    CurInciStateID   => $InciStateListReverse{Incident},
-                    CurInciState     => 'Incident',
-                    CurInciStateType => 'incident',
-                    CreateBy         => 1,
+                    Number                            => $ConfigItemNumbers[53],
+                    ClassID                           => $ConfigItemClassIDs[5],
+                    Class                             => $ClassList->{ $ConfigItemClassIDs[5] },
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[5] ConfigItem 53 Version 1",
+                    DefinitionID                      => $ConfigItemDefinitionIDs[5],
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    DeplState                         => 'Production',
+                    DeplStateType                     => 'productive',
+                    CurDeplStateID                    => $DeplStateListReverse{Production},
+                    CurDeplState                      => 'Production',
+                    CurDeplStateType                  => 'productive',
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    InciState                         => 'Incident',
+                    InciStateType                     => 'incident',
+                    CurInciStateID                    => $InciStateListReverse{Incident},
+                    CurInciState                      => 'Incident',
+                    CurInciStateType                  => 'incident',
+                    CreateBy                          => 1,
                     "DynamicField_Test1$TestIDSuffix" => 'Test value for text field Test1',
-                    "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',                    
+                    "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',
                 },
             ],
         },
-    },    
+    },
 
     # add config item only for later search tests, including DynamicFieldData
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[52],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[2],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 52",  
-                UserID       => $UserIDs[2],   
+                Number      => $ConfigItemNumbers[52],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[2],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 52",
+                UserID      => $UserIDs[2],
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 52 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => $UserIDs[2],
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 52 Version 1",
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    UserID                            => $UserIDs[2],
                     "DynamicField_Test1$TestIDSuffix" => 'Test value for text field Test1',
-                    "DynamicField_Test2$TestIDSuffix" => ['VALUE1', 'VALUE2'],
+                    "DynamicField_Test2$TestIDSuffix" => [ 'VALUE1', 'VALUE2' ],
                     "DynamicField_Test3$TestIDSuffix" => '2023-09-01 00:00:00',
                     "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',
                 },
@@ -1140,50 +1140,50 @@ my $ConfigItemTests = [
             },
             VersionGet => [
                 {
-                    Number           => $ConfigItemNumbers[52],
-                    ClassID          => $ConfigItemClassIDs[2],
-                    Class            => $ClassList->{ $ConfigItemClassIDs[2] },
-                    Name             => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 52 Version 1",
-                    DefinitionID     => $ConfigItemDefinitionIDs[2],
-                    DeplStateID      => $DeplStateListReverse{Production},
-                    DeplState        => 'Production',
-                    DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
-                    CurDeplStateType => 'productive',
-                    InciStateID      => $InciStateListReverse{Incident},
-                    InciState        => 'Incident',
-                    InciStateType    => 'incident',
-                    CurInciStateID   => $InciStateListReverse{Incident},
-                    CurInciState     => 'Incident',
-                    CurInciStateType => 'incident',
-                    CreateBy => $UserIDs[2],
+                    Number                            => $ConfigItemNumbers[52],
+                    ClassID                           => $ConfigItemClassIDs[2],
+                    Class                             => $ClassList->{ $ConfigItemClassIDs[2] },
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 52 Version 1",
+                    DefinitionID                      => $ConfigItemDefinitionIDs[2],
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    DeplState                         => 'Production',
+                    DeplStateType                     => 'productive',
+                    CurDeplStateID                    => $DeplStateListReverse{Production},
+                    CurDeplState                      => 'Production',
+                    CurDeplStateType                  => 'productive',
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    InciState                         => 'Incident',
+                    InciStateType                     => 'incident',
+                    CurInciStateID                    => $InciStateListReverse{Incident},
+                    CurInciState                      => 'Incident',
+                    CurInciStateType                  => 'incident',
+                    CreateBy                          => $UserIDs[2],
                     "DynamicField_Test1$TestIDSuffix" => 'Test value for text field Test1',
-                    "DynamicField_Test2$TestIDSuffix" => ['VALUE1', 'VALUE2'],
+                    "DynamicField_Test2$TestIDSuffix" => [ 'VALUE1', 'VALUE2' ],
                     "DynamicField_Test3$TestIDSuffix" => '2023-09-01 00:00:00',
-                    "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',                    
+                    "DynamicField_Test4$TestIDSuffix" => 'Test value for text area field Test4',
                 },
             ],
         },
     },
 
-# add config item only for later search tests, including DynamicFieldData
+    # add config item only for later search tests, including DynamicFieldData
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[80],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[4],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[4] } - 80",  
-                UserID       => $UserIDs[2],
+                Number      => $ConfigItemNumbers[80],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[4],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[4] } - 80",
+                UserID      => $UserIDs[2],
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[4] ConfigItem 80 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => $UserIDs[2],
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[4] ConfigItem 80 Version 1",
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    UserID                            => $UserIDs[2],
                     "DynamicField_Test5$TestIDSuffix" => '2023-01-01 12:00:00'
                 },
             ],
@@ -1204,47 +1204,47 @@ my $ConfigItemTests = [
             },
             VersionGet => [
                 {
-                    Number           => $ConfigItemNumbers[80],
-                    ClassID          => $ConfigItemClassIDs[4],
-                    Class            => $ClassList->{ $ConfigItemClassIDs[4] },
-                    Name             => "UnitTest - Class $ConfigItemClassIDs[4] ConfigItem 80 Version 1",
-                    DefinitionID     => $ConfigItemDefinitionIDs[4],
-                    DeplStateID      => $DeplStateListReverse{Production},
-                    DeplState        => 'Production',
-                    DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
-                    CurDeplStateType => 'productive',
-                    InciStateID      => $InciStateListReverse{Incident},
-                    InciState        => 'Incident',
-                    InciStateType    => 'incident',
-                    CurInciStateID   => $InciStateListReverse{Incident},
-                    CurInciState     => 'Incident',
-                    CurInciStateType => 'incident',
-                    CreateBy => $UserIDs[2],
+                    Number                            => $ConfigItemNumbers[80],
+                    ClassID                           => $ConfigItemClassIDs[4],
+                    Class                             => $ClassList->{ $ConfigItemClassIDs[4] },
+                    Name                              => "UnitTest - Class $ConfigItemClassIDs[4] ConfigItem 80 Version 1",
+                    DefinitionID                      => $ConfigItemDefinitionIDs[4],
+                    DeplStateID                       => $DeplStateListReverse{Production},
+                    DeplState                         => 'Production',
+                    DeplStateType                     => 'productive',
+                    CurDeplStateID                    => $DeplStateListReverse{Production},
+                    CurDeplState                      => 'Production',
+                    CurDeplStateType                  => 'productive',
+                    InciStateID                       => $InciStateListReverse{Incident},
+                    InciState                         => 'Incident',
+                    InciStateType                     => 'incident',
+                    CurInciStateID                    => $InciStateListReverse{Incident},
+                    CurInciState                      => 'Incident',
+                    CurInciStateType                  => 'incident',
+                    CreateBy                          => $UserIDs[2],
                     "DynamicField_Test5$TestIDSuffix" => '2023-01-01 12:00:00'
                 },
             ],
         },
-    },    
+    },
 
     #add config item only for later search tests
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[60],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                   
-                ClassID      => $ConfigItemClassIDs[3],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[3] } - 60",  
-                UserID       => $UserIDs[1],
+                Number      => $ConfigItemNumbers[60],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[3],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[3] } - 60",
+                UserID      => $UserIDs[1],
             },
             VersionAdd => [
                 {
-                    Name         => "UnitTest - Class $ConfigItemClassIDs[3] ConfigItem 60 Version 1",
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => $UserIDs[1],
+                    Name        => "UnitTest - Class $ConfigItemClassIDs[3] ConfigItem 60 Version 1",
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => $UserIDs[1],
                 },
             ],
         },
@@ -1292,25 +1292,25 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[70],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                 
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 70",
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[70],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 70",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => 'UnitTest - HistoryTest',
-                    DeplStateID  => $DeplStateListReverse{Planned},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => 'UnitTest - HistoryTest',
+                    DeplStateID => $DeplStateListReverse{Planned},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
                 {
-                    Name         => 'UnitTest - HistoryTest Version 2',
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name        => 'UnitTest - HistoryTest Version 2',
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => 1,
                 },
             ],
         },
@@ -1371,51 +1371,51 @@ my $ConfigItemTests = [
                 },
             ],
             HistoryGet => [
-			{
-                HistoryType => 'VersionCreate',
-                HistoryTypeID => 6,
-                CreateBy => 1,
-            },
-            {
-                HistoryType => 'ConfigItemCreate',
-                HistoryTypeID => 1,
-                CreateBy => 1,
-            },
-            {
-                HistoryType => 'VersionCreate',
-                HistoryTypeID => 6,
-                CreateBy => 1,
-            },
-            {
-                HistoryType => 'NameUpdate',
-                HistoryTypeID => 5,
-                CreateBy => 1,
-            },
-            {
-                HistoryType => 'DeploymentStateUpdate',
-                HistoryTypeID => 11,
-                CreateBy => 1
-            },
-            {
-                HistoryType => 'VersionCreate',
-                HistoryTypeID => 6,
-                CreateBy => 1,
-            },
-            {
-                HistoryType => 'IncidentStateUpdate',              
-                HistoryTypeID => 10,
-                CreateBy => 1,
-            },            
-            {
-                HistoryType => 'NameUpdate',
-                HistoryTypeID => 5,
-                CreateBy => 1,
-            },             
-            {
-                HistoryType => 'DeploymentStateUpdate',
-                HistoryTypeID => 11,
-                CreateBy => 1
-            },                                                    
+                {
+                    HistoryType   => 'VersionCreate',
+                    HistoryTypeID => 6,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'ConfigItemCreate',
+                    HistoryTypeID => 1,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'VersionCreate',
+                    HistoryTypeID => 6,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'NameUpdate',
+                    HistoryTypeID => 5,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'DeploymentStateUpdate',
+                    HistoryTypeID => 11,
+                    CreateBy      => 1
+                },
+                {
+                    HistoryType   => 'VersionCreate',
+                    HistoryTypeID => 6,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'IncidentStateUpdate',
+                    HistoryTypeID => 10,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'NameUpdate',
+                    HistoryTypeID => 5,
+                    CreateBy      => 1,
+                },
+                {
+                    HistoryType   => 'DeploymentStateUpdate',
+                    HistoryTypeID => 11,
+                    CreateBy      => 1
+                },
             ],
         },
     },
@@ -1425,37 +1425,37 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[71],
-                DeplStateID  => $DeplStateListReverse{Maintenance},
-                InciStateID  => $InciStateListReverse{Incident},                 
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bugfix4196",
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[71],
+                DeplStateID => $DeplStateListReverse{Maintenance},
+                InciStateID => $InciStateListReverse{Incident},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bugfix4196",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => 'UnitTest - Bugfix4196',
-                    DeplStateID  => $DeplStateListReverse{Planned},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4196',
+                    DeplStateID => $DeplStateListReverse{Planned},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
                 {
-                    Name         => 'UnitTest - Bugfix4196 V2',
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4196 V2',
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => 1,
                 },
                 {
-                    Name         => 'UnitTest - Bugfix4196 V2',
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4196 V2',
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => 1,
                 },
                 {
-                    Name         => 'UnitTest - Bugfix4196 V2',
-                    DeplStateID  => $DeplStateListReverse{Maintenance},
-                    InciStateID  => $InciStateListReverse{Incident},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4196 V2',
+                    DeplStateID => $DeplStateListReverse{Maintenance},
+                    InciStateID => $InciStateListReverse{Incident},
+                    UserID      => 1,
                 },
             ],
         },
@@ -1553,7 +1553,7 @@ my $ConfigItemTests = [
                     CurInciState     => 'Incident',
                     CurInciStateType => 'incident',
                     CreateBy         => 1,
-                },                 
+                },
             ],
         },
     },
@@ -1562,19 +1562,19 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[72],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},              
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-A",            
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[72],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-A",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => 'UnitTest - Bugfix4377 - CI-A',
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4377 - CI-A',
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
             ],
         },
@@ -1621,19 +1621,19 @@ my $ConfigItemTests = [
     {
         SourceData => {
             ConfigItemAdd => {
-                Number       => $ConfigItemNumbers[73],
-                DeplStateID  => $DeplStateListReverse{Production},
-                InciStateID  => $InciStateListReverse{Operational},                
-                ClassID      => $ConfigItemClassIDs[0],
-                Name         => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-B",
-                UserID       => 1,
+                Number      => $ConfigItemNumbers[73],
+                DeplStateID => $DeplStateListReverse{Production},
+                InciStateID => $InciStateListReverse{Operational},
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-B",
+                UserID      => 1,
             },
             VersionAdd => [
                 {
-                    Name         => 'UnitTest - Bugfix4377 - CI-B',
-                    DeplStateID  => $DeplStateListReverse{Production},
-                    InciStateID  => $InciStateListReverse{Operational},
-                    UserID       => 1,
+                    Name        => 'UnitTest - Bugfix4377 - CI-B',
+                    DeplStateID => $DeplStateListReverse{Production},
+                    InciStateID => $InciStateListReverse{Operational},
+                    UserID      => 1,
                 },
             ],
         },
@@ -1764,7 +1764,7 @@ for my $Test ( @{$ConfigItemTests} ) {
 
             my $VersionID = $ConfigItemData->{LastVersionID};
 
-            if ($VersionID ne $LastVersionID) {
+            if ( $VersionID ne $LastVersionID ) {
                 push @VersionIDs, $VersionID if !$VersionIDsSeen{$VersionID}++;
             }
         }
@@ -1850,7 +1850,7 @@ for my $Test ( @{$ConfigItemTests} ) {
 
         # get this version
         my $VersionData = $ConfigItemObject->ConfigItemGet(
-            VersionID  => $VersionID,
+            VersionID     => $VersionID,
             DynamicFields => 1
         );
 
@@ -1946,7 +1946,7 @@ continue {
     $TestCount++;
 }
 
-# Following section is pending for check after normalize de 
+# Following section is pending for check after normalize de
 # Incident recalculation funcion
 
 # ------------------------------------------------------------ #
@@ -2177,7 +2177,6 @@ continue {
 #     $TestCount++;
 # }
 
-
 # ------------------------------------------------------------ #
 # define general config item search tests
 # ------------------------------------------------------------ #
@@ -2186,11 +2185,11 @@ my @SearchTests = (
 
     # search ALL config items in the two test classes
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2202,10 +2201,10 @@ my @SearchTests = (
 
     # test the number param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             Number => $ConfigItemNumbers[50],
-            Result  => 'ARRAY',
+            Result => 'ARRAY',
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2214,10 +2213,10 @@ my @SearchTests = (
 
     # test the number param with wildcards
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             Number => '%' . $ConfigItemNumbers[50] . '%',
-            Result  => 'ARRAY', 
+            Result => 'ARRAY',
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2226,22 +2225,22 @@ my @SearchTests = (
 
     # test the number param with wildcards but with invalid ConfigItem number
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             Number => '%dummyname%',
-            Result  => 'ARRAY',    
+            Result => 'ARRAY',
         },
         ReferenceData => [],
     },
 
     # test the deployment state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             DeplStateIDs => [ $DeplStateListReverse{Production} ],
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result       => 'ARRAY',
+            OrderBy      => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2252,11 +2251,11 @@ my @SearchTests = (
 
     #test the deployment state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             DeplStateIDs => [ $DeplStateListReverse{Maintenance} ],
-            Result  => 'ARRAY',
+            Result       => 'ARRAY',
         },
         ReferenceData => [
             $ConfigItemNumbers[51],
@@ -2265,7 +2264,7 @@ my @SearchTests = (
 
     #test the deployment state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             DeplStateIDs => [
@@ -2273,7 +2272,7 @@ my @SearchTests = (
                 $DeplStateListReverse{Maintenance},
             ],
             Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            OrderBy => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2285,11 +2284,11 @@ my @SearchTests = (
 
     #test the incident state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             InciStateIDs => [ $InciStateListReverse{Operational} ],
-            Result  => 'ARRAY',    
+            Result       => 'ARRAY',
         },
         ReferenceData => [
             $ConfigItemNumbers[60],
@@ -2298,12 +2297,12 @@ my @SearchTests = (
 
     #test the incident state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             InciStateIDs => [ $InciStateListReverse{Incident} ],
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result       => 'ARRAY',
+            OrderBy      => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2314,7 +2313,7 @@ my @SearchTests = (
 
     #test the incident state param in combination of the class id
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs     => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             InciStateIDs => [
@@ -2322,7 +2321,7 @@ my @SearchTests = (
                 $InciStateListReverse{Operational},
             ],
             Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            OrderBy => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2334,12 +2333,12 @@ my @SearchTests = (
 
     # test the limit param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             Limit    => 100,
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2351,12 +2350,12 @@ my @SearchTests = (
 
     # test the limit param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             Limit    => 3,
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2367,12 +2366,12 @@ my @SearchTests = (
 
     # test the limit param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             Limit    => 2,
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2382,12 +2381,12 @@ my @SearchTests = (
 
     # test the limit param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             Limit    => 1,
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'        
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2396,12 +2395,12 @@ my @SearchTests = (
 
     # test the limit param
     {
-        Function   => [ 'ConfigItemSearch' ],
+        Function   => ['ConfigItemSearch'],
         SearchData => {
             ClassIDs => [ $ConfigItemClassIDs[2], $ConfigItemClassIDs[3] ],
             Limit    => 0,
-            Result  => 'ARRAY',
-            OrderBy  => 'Up'            
+            Result   => 'ARRAY',
+            OrderBy  => 'Up'
         },
         ReferenceData => [
             $ConfigItemNumbers[50],
@@ -2770,9 +2769,9 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test1$TestIDSuffix" => { Equals => 'Test value for text field Test1' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[53],
@@ -2784,9 +2783,9 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test1$TestIDSuffix" => { Like => 'Test value for*' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[53],
@@ -2798,20 +2797,20 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test1$TestIDSuffix" => { Like => 'Unknown data*' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [],
-    },      
+    },
 
     # test ConfigItemSearch() with TextArea type DynamicField
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test4$TestIDSuffix" => { Equals => 'Test value for text area field Test4' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[53],
@@ -2823,9 +2822,9 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test4$TestIDSuffix" => { Like => 'Test value for text area*' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[53],
@@ -2837,20 +2836,20 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test4$TestIDSuffix" => { Like => 'Unknown data*' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [],
-    },     
+    },
 
     # test ConfigItemSearch() with Date type DynamicField
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test3$TestIDSuffix" => { Equals => '2023-09-01 00:00:00' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[52],
@@ -2861,20 +2860,20 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test3$TestIDSuffix" => { Equals => '2023-09-12 00:00:00' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [],
-    },    
+    },
 
     # test ConfigItemSearch() with DateTime type DynamicField
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test5$TestIDSuffix" => { Equals => '2023-01-01 12:00:00' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[80],
@@ -2885,9 +2884,9 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
+            ClassIDs                          => \@ConfigItemClassIDs,
             "DynamicField_Test5$TestIDSuffix" => { Equals => '2023-09-01 12:00:00' },
-            Result  => 'ARRAY'
+            Result                            => 'ARRAY'
         },
         ReferenceData => [],
     },
@@ -2896,12 +2895,12 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
-            "DynamicField_Test5$TestIDSuffix" => { 
-                GreaterThanEquals       => '2023-01-01 00:00:00',
-                SmallerThanEquals       => '2023-01-02 00:00:00',
+            ClassIDs                          => \@ConfigItemClassIDs,
+            "DynamicField_Test5$TestIDSuffix" => {
+                GreaterThanEquals => '2023-01-01 00:00:00',
+                SmallerThanEquals => '2023-01-02 00:00:00',
             },
-            Result  => 'ARRAY'
+            Result => 'ARRAY'
         },
         ReferenceData => [
             $ConfigItemNumbers[80],
@@ -2912,15 +2911,15 @@ my @SearchTests = (
     {
         Function   => ['ConfigItemSearch'],
         SearchData => {
-            ClassIDs => \@ConfigItemClassIDs,
-            "DynamicField_Test5$TestIDSuffix" => { 
-                GreaterThanEquals       => '2022-01-01 00:00:00',
-                SmallerThanEquals       => '2022-01-02 00:00:00',
+            ClassIDs                          => \@ConfigItemClassIDs,
+            "DynamicField_Test5$TestIDSuffix" => {
+                GreaterThanEquals => '2022-01-01 00:00:00',
+                SmallerThanEquals => '2022-01-02 00:00:00',
             },
-            Result  => 'ARRAY'
+            Result => 'ARRAY'
         },
         ReferenceData => [],
-    }, 
+    },
 
 );
 
@@ -2955,10 +2954,13 @@ for my $Test (@SearchTests) {
         my $ConfigItemList;
 
         if ( $Function eq 'ConfigItemSearch' ) {
-            $ConfigItemList = [$ConfigItemObject->$Function(
-                %{ $Test->{SearchData} },
-            )];
-        } else {
+            $ConfigItemList = [
+                $ConfigItemObject->$Function(
+                    %{ $Test->{SearchData} },
+                )
+            ];
+        }
+        else {
             $ConfigItemList = $ConfigItemObject->$Function(
                 %{ $Test->{SearchData} },
             );
@@ -3087,9 +3089,10 @@ continue {
         );
 
         push @TestConfigItemDefinitions, $YAMLDefinition;
-    }    
+    }
 
     for my $Definition (@TestConfigItemDefinitions) {
+
         # add a definition to the class
         my $DefinitionID = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,

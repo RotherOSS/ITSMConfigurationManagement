@@ -582,16 +582,32 @@ END_SQL
         return;
     }
 
-    # update last version of config item
+    # Update last version, cur_inci_state_id, cur_depl_state_id of the config item.
+    # cur_inci_state_id is needed by CurInciStateRecalc().
     my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => <<'END_SQL',
 UPDATE configitem
-  SET last_version_id = ?, change_time = ?, change_by = ?
+  SET
+    last_version_id   = ?,
+    cur_inci_state_id = ?,
+    cur_depl_state_id = ?,
+    change_time       = ?,
+    change_by         = ?
   WHERE id = ?
 END_SQL
-        Bind => [ \$VersionID, \$VersionCreateTime, \$Param{UserID}, \$Version{ConfigItemID} ],
+        Bind => [
+            \(
+                $VersionID,
+                $Version{InciStateID},
+                $Version{DeplStateID},
+                $VersionCreateTime,
+                $Param{UserID},
+                $Version{ConfigItemID}
+            )
+        ],
     );
 
+    # TODO: roll back the 'INSERT INTO configitem_version'
     return unless $UpdateSuccess;
 
     # trigger VersionCreate event
@@ -664,7 +680,8 @@ END_SQL
             Value              => $LastVersion->{ 'DynamicField_' . $Name },
         );
 
-        # trigger dynamic field update event
+        # Trigger dynamic field update event.
+        # This might update the table configitem_link.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {
@@ -735,7 +752,9 @@ sub VersionUpdate {
         return;
     }
 
-    my $CurInciStateRecalc = $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ? 1 : 0;
+    # The incident state is calculated for the current incident state. Therfore it only
+    # needs to be recalculation when the incident state of the last version has changed.
+    my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
     if ( any { defined $Param{$_} } qw/Name DeplStateID InciStateID DefinitionID/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -745,7 +764,7 @@ sub VersionUpdate {
         }
 
         # update existing version
-        my $Success = $DBObject->Do(
+        my $UpdateSuccess = $DBObject->Do(
             SQL => <<'END_SQL',
 UPDATE configitem_version
   SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, change_time = current_timestamp, change_by = ?
@@ -761,7 +780,36 @@ END_SQL
             ],
         );
 
-        return unless $Success;
+        return unless $UpdateSuccess;
+
+        # The config item is only affected when the last version was modified
+        if ( $Version->{VersionID} eq $Version->{LastVersionID} ) {
+
+            # Update version, cur_inci_state_id, cur_depl_state_id of the config item.
+            # cur_inci_state_id is needed by CurInciStateRecalc().
+            my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => <<'END_SQL',
+UPDATE configitem
+  SET
+    cur_inci_state_id = ?,
+    cur_depl_state_id = ?,
+    change_time       = current_timestamp,
+    change_by         = ?
+  WHERE id = ?
+END_SQL
+                Bind => [
+                    \(
+                        $Param{InciStateID},
+                        $Param{DeplStateID},
+                        $Param{UserID},
+                        $Version->{ConfigItemID}
+                    )
+                ],
+            );
+
+            # TODO: roll back the 'UPDATE INTO configitem_version'
+            return unless $UpdateSuccess;
+        }
     }
 
     # get latest definition for the class
@@ -830,6 +878,7 @@ END_SQL
         );
 
         # trigger dynamic field update event
+        # This might update the table configitem_link.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {

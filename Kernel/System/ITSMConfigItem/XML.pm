@@ -27,7 +27,7 @@ Kernel::System::ITSMConfigItem::XML - sub module of Kernel::System::ITSMConfigIt
 
 =head1 DESCRIPTION
 
-All xml functions.
+All methods related to the database table xml_storage.
 
 =head1 PUBLIC INTERFACE
 

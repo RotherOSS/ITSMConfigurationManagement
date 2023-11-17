@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::Event::ReferenceSync;
+package Kernel::System::ITSMConfigItem::Event::LinkSync;
 
 use v5.24;
 use strict;
@@ -35,7 +35,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::ReferenceSync - Event handler that maintains a lookup table for Reference dynamic fields
+Kernel::System::ITSMConfigItem::Event::LinkSync - Event handler that maintains a lookup table for links from Reference dynamic fields
 
 =head1 PUBLIC INTERFACE
 
@@ -46,7 +46,7 @@ create an object
     use Kernel::System::ObjectManager;
 
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $HandlerObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Event::ReferenceSync');
+    my $HandlerObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Event::LinkSync');
 
 =cut
 
@@ -64,7 +64,7 @@ This method handles the event.
     $HandlerObject->Run(
         Config      => {
             Event => "^ConfigItemDynamicFieldUpdate_",
-            Module => "Kernel::System::ITSMConfigItem::Event::ReferenceSync",
+            Module => "Kernel::System::ITSMConfigItem::Event::LinkSync",
             Transaction => 1,
         },
         Data        => {
@@ -118,10 +118,10 @@ sub Run {
     return 1 unless $DynamicFieldConfig->{Config}->{ReferencedObjectType};
     return 1 unless $DynamicFieldConfig->{Config}->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
 
-    # actually update configitem_reference
+    # actually update configitem_link
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    return $ConfigItemObject->SyncReferenceTable(
+    return $ConfigItemObject->SyncLinkTable(
         DynamicFieldConfig        => $DynamicFieldConfig,
         SourceConfigItemID        => $Param{Data}->{ConfigItemID},          # currently not used
         SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},
