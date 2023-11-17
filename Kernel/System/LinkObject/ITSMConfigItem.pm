@@ -413,7 +413,7 @@ sub LinkAddPost {
     }
 
     # Recalculate the current incident state of this CI.
-    # This is possible as configitem_link is already updated.
+    # This is possible as the table configitem_link is already updated.
     $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID => $Param{Key},
     );
@@ -524,7 +524,7 @@ sub LinkDeletePost {
     }
 
     # Recalculate the current incident state of this CI.
-    # This is possible as configitem_link is already updated.
+    # This is possible as the table configitem_link is already updated.
     $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID => $Param{Key},
     );

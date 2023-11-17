@@ -680,7 +680,8 @@ END_SQL
             Value              => $LastVersion->{ 'DynamicField_' . $Name },
         );
 
-        # trigger dynamic field update event
+        # Trigger dynamic field update event.
+        # This might update the table configitem_link.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {
@@ -877,6 +878,7 @@ END_SQL
         );
 
         # trigger dynamic field update event
+        # This might update the table configitem_link.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {

@@ -724,9 +724,10 @@ sub ConfigItemDelete {
         ConfigItemID => $Param{ConfigItemID},
     );
 
-    # Delete all links to this config item first, before deleting the versions.
-    # LinkDeleteAll() calls LinkDelete() internally, this means that
-    # the event handler are honored.
+    # Delete all links to this config item before deleting the versions.
+    # LinkDeleteAll() calls LinkDelete() internally. This means that
+    # the event handlers are honored. This means that the table configitem_link
+    # is also purged.
     return unless $Kernel::OM->Get('Kernel::System::LinkObject')->LinkDeleteAll(
         Object => 'ITSMConfigItem',
         Key    => $Param{ConfigItemID},
@@ -1587,7 +1588,7 @@ sub CurInciStateRecalc {
             }
 
             # investigate only config items with an incident state
-            next CONFIGITEMID if $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} ne 'incident';
+            next CONFIGITEMID unless $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type} eq 'incident';
 
             # annotate linked config items with a warning
             $Self->_FindWarnConfigItems(
@@ -1615,7 +1616,8 @@ sub CurInciStateRecalc {
             # extract incident state type
             my $InciStateType = $Param{ScannedConfigItemIDs}->{$ConfigItemID}->{Type};
 
-            # find all linked services of this CI
+            # Find all linked services of this config item.
+            # These kind of links are not available from the table configitem_link
             my %LinkedServiceIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
                 Object1   => 'ITSMConfigItem',
                 Key1      => $ConfigItemID,
@@ -1864,7 +1866,7 @@ sub _FindInciConfigItems {
             next CONFIGITEMID;
         }
 
-        # no inciden was encountered, continue with recursion
+        # no incident was encountered, continue with recursion
         $Self->_FindInciConfigItems(
             ConfigItemID              => $ConfigItemID,
             IncidentLinkTypeDirection => $Param{IncidentLinkTypeDirection},

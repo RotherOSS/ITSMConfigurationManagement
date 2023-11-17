@@ -295,8 +295,8 @@ $ConfigObject->Set(
 #  Explanation:
 #               1 .. 7 and A .. G are ITSMConfigItems
 #
-#               DependsOn Links are shown as ----->
-#               Includes  Links are shown as *****>
+#               DependsOn Links are shown as ----->      for some reason the source is where the '>' is
+#               Includes  Links are shown as *****>      for some reason the source is where the '>' is
 #
 # ################################################################################################################
 
@@ -364,13 +364,10 @@ my %Links = (
 
 # link the config items and services as shown in the diagram
 for my $LinkType ( sort keys %Links ) {
-    for my $TargetObject ( sort keys %{ $Links{$LinkType} } ) {
-        for my $TargetKey ( sort keys %{ $Links{$LinkType}->{$TargetObject} } ) {
-            for my $SourceObject ( sort keys %{ $Links{$LinkType}->{$TargetObject}->{$TargetKey} } ) {
-                for my $SourceKey (
-                    @{ $Links{$LinkType}->{$TargetObject}->{$TargetKey}->{$SourceObject} }
-                    )
-                {
+    for my $TargetObject ( sort keys $Links{$LinkType}->%* ) {
+        for my $TargetKey ( sort keys $Links{$LinkType}->{$TargetObject}->%* ) {
+            for my $SourceObject ( sort keys $Links{$LinkType}->{$TargetObject}->{$TargetKey}->%* ) {
+                for my $SourceKey ( $Links{$LinkType}->{$TargetObject}->{$TargetKey}->{$SourceObject}->@* ) {
 
                     # add the links
                     my $Success = $LinkObject->LinkAdd(
@@ -382,11 +379,7 @@ for my $LinkType ( sort keys %Links ) {
                         State        => 'Valid',
                         UserID       => 1,
                     );
-
-                    ok(
-                        $Success,
-                        "LinkAdd() - $SourceObject:$SourceKey linked with $TargetObject:$TargetKey with LinkType '$LinkType'."
-                    );
+                    ok( $Success, "LinkAdd() - $SourceObject:$SourceKey linked with $TargetObject:$TargetKey with LinkType '$LinkType'." );
                 }
             }
         }
