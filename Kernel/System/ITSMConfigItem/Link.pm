@@ -141,6 +141,103 @@ END_SQL
     return 1;
 }
 
+=head2 LinkingConfigItemIDs()
+
+get the linked config items.
+
+    my $ConfigItemIDs = $ConfigItemObject->LinkingConfigItemIDs(
+        Key       => 321,
+        Type      => 'ParentChild',
+        Direction => 'Source',
+        UserID    => 1,
+    );
+
+The semantics of the parameter C<Direction> can be confusing. The above call can be verbalized as:
+"Give me all config items that are marked as 'Source' that have a 'ParentChild' relationship
+with the the config item 321.
+
+Returns an empty array ref when no relationships were found:
+
+    $ConfigItemIDs = [];
+
+Returs a list when relationships have been found.
+
+    $ConfigItemIDs = [1, 22, 333, 4444];
+
+=cut
+
+sub LinkingConfigItemIDs {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(Key Type Direction UserID)) {
+        if ( !$Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+
+            return;
+        }
+    }
+
+    # the link type is used in the SELECT
+    my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+    my $TypeID     = $LinkObject->TypeLookup(
+        Name   => $Param{Type},
+        UserID => $Param{UserID},
+    );
+
+    # get complete list for both directions (or only one if restricted)
+    my $Direction = $Param{Direction};
+    my ( $SQL, @Binds );
+    if ( $Direction eq 'Source' ) {
+        $SQL = <<'END_SQL';
+SELECT DISTINCT source_configitem_id
+  FROM configitem_link
+  WHERE target_configitem_id = ?
+    AND link_type_id = ?
+END_SQL
+        push @Binds, \$Param{Key}, \$TypeID;
+    }
+    elsif ( $Direction eq 'Target' ) {
+        $SQL = <<'END_SQL';
+SELECT DISTINCT target_configitem_id
+  FROM configitem_link
+  WHERE source_configitem_id = ?
+    AND link_type_id = ?
+END_SQL
+    }
+    else {
+        # Both directions
+        # TODO: test with PostgreSQL and Oracle
+        $SQL = <<'END_SQL';
+(
+  SELECT DISTINCT source_configitem_id
+    FROM configitem_link
+    WHERE target_configitem_id = ?
+      AND link_type_id = ?
+)
+UNION
+(
+  SELECT DISTINCT target_configitem_id
+    FROM configitem_link
+    WHERE source_configitem_id = ?
+      AND link_type_id = ?
+)
+END_SQL
+        push @Binds, \$Param{Key}, \$TypeID, \$Param{Key}, \$TypeID;
+    }
+
+    my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+    my @ConfigItemIDs = $DBObject->SelectColArray(
+        SQL  => $SQL,
+        Bind => \@Binds,
+    );
+
+    return \@ConfigItemIDs;
+}
+
 =head2 SyncLinkTable()
 
 This method entails the logic for keeping the table B<configitem_link> in sync

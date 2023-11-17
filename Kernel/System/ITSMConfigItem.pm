@@ -1822,36 +1822,30 @@ sub _FindInciConfigItems {
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{Type} = 'operational';
 
     # add own config item id to list of linked config items
-    my %ConfigItemIDs = (
-        $Param{ConfigItemID} => 1,
-    );
+    my @ConfigItemIDs = $Param{ConfigItemID};
 
     # find the directly linked config items
     LINKTYPE:
     for my $LinkType ( sort keys %{ $Param{IncidentLinkTypeDirection} } ) {
 
-        # find all linked config items (childs)
-        my %LinkedConfigItemIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
-            Object1 => 'ITSMConfigItem',
-            Key1    => $Param{ConfigItemID},
-            Object2 => 'ITSMConfigItem',
-            State   => 'Valid',
-            Type    => $LinkType,
+        # find all linking config items (childs)
+        my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+            Key    => $Param{ConfigItemID},
+            Type   => $LinkType,
+            UserID => 1,
 
             # Direction must ALWAYS be 'Both' here as we need to include
             # all linked CIs that could influence this one!
             Direction => 'Both',
-
-            UserID => 1,
         );
 
         # remember the config item ids
-        %ConfigItemIDs = ( %ConfigItemIDs, %LinkedConfigItemIDs );
+        push @ConfigItemIDs, $LinkingConfigItemIDs->@*;
     }
 
     # Loop over the requested config item and the directly linked config items
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %ConfigItemIDs ) {
+    for my $ConfigItemID ( sort @ConfigItemIDs ) {
 
         # get config item data
         my $ConfigItem = $Self->ConfigItemGet(
@@ -1916,19 +1910,16 @@ sub _FindWarnConfigItems {
     # increase the visit counter
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}++;
 
-    # find directy linked config items, honor the dependency direction
-    my %LinkedConfigItemIDs = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyList(
-        Object1   => 'ITSMConfigItem',
-        Key1      => $Param{ConfigItemID},
-        Object2   => 'ITSMConfigItem',
-        State     => 'Valid',
+    # find directy linking config items, honor the dependency direction
+    my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+        Key       => $Param{ConfigItemID},
         Type      => $Param{LinkType},
         Direction => $Param{Direction},
         UserID    => 1,
     );
 
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %LinkedConfigItemIDs ) {
+    for my $ConfigItemID ( sort $LinkingConfigItemIDs->@* ) {
 
         # start recursion
         $Self->_FindWarnConfigItems(
