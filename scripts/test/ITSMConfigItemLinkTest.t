@@ -293,10 +293,16 @@ $ConfigObject->Set(
 #
 #
 #  Explanation:
-#               1 .. 7 and A .. G are ITSMConfigItems
+#               1 .. 7 and A .. G are ITSMConfigItems. The arrow indicates how incidents and warnings
+#               are propagated in the graph.
 #
-#               DependsOn Links are shown as ----->      for some reason the source is where the '>' is
-#               Includes  Links are shown as *****>      for some reason the source is where the '>' is
+#               DependsOn relationships are shown as ----->
+#               Includes  relationships are shown as *****>
+#
+#               The config item 5 (Source) has a DependsOn relationship with config item 6 (Target).
+#               When 6 has an incident then the warning flag must be raised on 5. Therefore the direction
+#               of propagation for DependsOn must be from Target to Source. In the code this is indicated
+#               by "Direction => 'Source'.
 #
 # ################################################################################################################
 
@@ -307,8 +313,8 @@ my %Links = (
             '7' => {
                 ITSMConfigItem => ['5'],
             },
-            '6' => {
-                ITSMConfigItem => ['5'],
+            '6' => {    # 6 is the target for DependsOn
+                ITSMConfigItem => ['5'],    # 5 is the source of DependsOn
             },
             '5' => {
                 ITSMConfigItem => ['4'],

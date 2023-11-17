@@ -1828,8 +1828,8 @@ sub _FindInciConfigItems {
     LINKTYPE:
     for my $LinkType ( sort keys %{ $Param{IncidentLinkTypeDirection} } ) {
 
-        # find all linking config items (childs)
-        my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+        # find linked config items in both directions
+        my $LinkedConfigItemIDs = $Self->LinkedConfigItemIDs(
             Key    => $Param{ConfigItemID},
             Type   => $LinkType,
             UserID => 1,
@@ -1840,7 +1840,7 @@ sub _FindInciConfigItems {
         );
 
         # remember the config item ids
-        push @ConfigItemIDs, $LinkingConfigItemIDs->@*;
+        push @ConfigItemIDs, $LinkedConfigItemIDs->@*;
     }
 
     # Loop over the requested config item and the directly linked config items
@@ -1910,8 +1910,8 @@ sub _FindWarnConfigItems {
     # increase the visit counter
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}++;
 
-    # find directy linking config items, honor the dependency direction
-    my $LinkingConfigItemIDs = $Self->LinkingConfigItemIDs(
+    # find config items to which the incident or warning must be propagated
+    my $LinkedConfigItemIDs = $Self->LinkedConfigItemIDs(
         Key       => $Param{ConfigItemID},
         Type      => $Param{LinkType},
         Direction => $Param{Direction},
@@ -1919,7 +1919,7 @@ sub _FindWarnConfigItems {
     );
 
     CONFIGITEMID:
-    for my $ConfigItemID ( sort $LinkingConfigItemIDs->@* ) {
+    for my $ConfigItemID ( sort $LinkedConfigItemIDs->@* ) {
 
         # start recursion
         $Self->_FindWarnConfigItems(

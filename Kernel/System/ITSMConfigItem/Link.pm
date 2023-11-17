@@ -48,7 +48,7 @@ Planned is also support for dumping the complete graph so that it can be used fo
 
 =head2 AddConfigItemLink()
 
-This method is specifically for adding a link between two config items. Linking specific versions is not supported.
+This method is specifically for adding a link between two config items. The linking of specific versions is not supported.
 
     $ConfigItemObject->AddConfigItemLink(
         Type           => 'DependsOn',
@@ -94,7 +94,7 @@ END_SQL
 
 =head2 DeleteConfigItemLink()
 
-This method is specifically for deleting a link between two config items. Linking specific versions is not supported.
+This method is specifically for deleting a link between two config items. The unlinking of specific versions is not supported.
 
     $ConfigItemObject->DeleteConfigItemLink(
         Type           => 'DependsOn',
@@ -141,11 +141,11 @@ END_SQL
     return 1;
 }
 
-=head2 LinkingConfigItemIDs()
+=head2 LinkedConfigItemIDs()
 
 get the linked config items.
 
-    my $ConfigItemIDs = $ConfigItemObject->LinkingConfigItemIDs(
+    my $ConfigItemIDs = $ConfigItemObject->LinkedConfigItemIDs(
         Key       => 321,
         Type      => 'ParentChild',
         Direction => 'Source',
@@ -166,7 +166,7 @@ Returs a list when relationships have been found.
 
 =cut
 
-sub LinkingConfigItemIDs {
+sub LinkedConfigItemIDs {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
