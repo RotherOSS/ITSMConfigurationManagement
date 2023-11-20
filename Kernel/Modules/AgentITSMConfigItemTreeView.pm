@@ -91,11 +91,6 @@ sub Run {
         Cache        => 1,
     );
 
-    my $VersionRef = $ConfigItemObject->VersionGet(
-        VersionID  => $ConfigItem->{LastVersionID},
-        XMLDataGet => 1,
-    );
-
     if ( $Self->{Subaction} eq 'LoadTreeView' ) {
         my $GraphData = $LayoutObject->GenerateHierarchyGraph(
             Depth        => $Depth,

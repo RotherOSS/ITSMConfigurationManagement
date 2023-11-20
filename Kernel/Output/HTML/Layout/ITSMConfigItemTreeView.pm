@@ -62,35 +62,33 @@ sub GenerateHierarchyGraph {
     $Self->{MaxDepth} = 1;
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $Param{ConfigItemID},
-        Cache        => 1,
-    );
-
-    my $VersionRef = $ConfigItemObject->VersionGet(
-        VersionID  => $ConfigItem->{LastVersionID},
-        XMLDataGet => 1,
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => 1,
+        Cache         => 1,
     );
 
     my @Attributes = $Self->GetDefaultAttributes();
 
     my $SourceCI = {
         ID   => $ConfigItem->{ConfigItemID},
-        Name => "$VersionRef->{Name}",
-        Link => ""
+        Name => $ConfigItem->{Name},
+        Link => '',
     };
 
-    my $Data = $LayoutObject->XMLData2Hash(
-        XMLDefinition => $VersionRef->{XMLDefinition},
-        XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
-        Attributes    => \@Attributes,
-    );
+    # TODO: handle dynamic fields
+    #my $Data = $LayoutObject->XMLData2Hash(
+    #    XMLDefinition => $VersionRef->{XMLDefinition},
+    #    XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
+    #    Attributes    => \@Attributes,
+    #);
 
-    # Fill attributes for Source CI
-    $SourceCI->{Contents} = $Self->FillColumnAttributes(
-        Attributes  => \@Attributes,
-        ColumnsData => \%{$Data},
-        VersionRef  => \$VersionRef
-    );
+    ## Fill attributes for Source CI
+    #$SourceCI->{Contents} = $Self->FillColumnAttributes(
+    #    Attributes  => \@Attributes,
+    #    ColumnsData => \%{$Data},
+    #    VersionRef  => \$VersionRef
+    #);
+    $SourceCI->{Contents} = 'TODO';
 
     # get linked objects
     my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
@@ -367,18 +365,21 @@ sub GetLinkOutputData {
                 # extract config item data
                 my $Version = $DirectionList->{$ConfigItemID};
 
-                my $VersionRef = $ConfigItemObject->VersionGet(
-                    VersionID  => $Version->{VersionID},
-                    XMLDataGet => 1,
+                my $VersionRef = $ConfigItemObject->ConfigItemGet(
+                    VersionID     => $Version->{VersionID},
+                    DynamicFields => 1,
                 );
 
                 my @Attributes = $Self->GetDefaultAttributes();
 
-                my $Data = $LayoutObject->XMLData2Hash(
-                    XMLDefinition => $VersionRef->{XMLDefinition},
-                    XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
-                    Attributes    => \@Attributes,
-                );
+                my $Data = {};
+
+                # TODO: handle dynamic fields
+                #my $Data = $LayoutObject->XMLData2Hash(
+                #    XMLDefinition => $VersionRef->{XMLDefinition},
+                #    XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
+                #    Attributes    => \@Attributes,
+                #);
 
                 if ( $Param{Direction} eq 'Source' ) {
                     my $ConfiguredTypes = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
