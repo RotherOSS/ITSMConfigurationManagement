@@ -15,8 +15,12 @@
 # --
 
 package Kernel::Output::HTML::ITSMConfigItem::MenuGeneric;
+
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
 use parent('Kernel::Output::HTML::Base');
 
@@ -37,6 +41,7 @@ sub Run {
             Priority => 'error',
             Message  => 'Need ConfigItem!',
         );
+
         return;
     }
 

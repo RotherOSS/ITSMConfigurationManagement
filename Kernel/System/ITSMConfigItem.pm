@@ -439,7 +439,7 @@ END_SQL
     # Add the state types.
     STATE:
     for my $State (qw/DeplState CurDeplState InciState CurInciState/) {
-        next STATE if !$ConfigItem{ $State . 'ID' };
+        next STATE unless $ConfigItem{ $State . 'ID' };
 
         my $Item = $GeneralCatalogObject->ItemGet(
             ItemID => $ConfigItem{ $State . 'ID' },

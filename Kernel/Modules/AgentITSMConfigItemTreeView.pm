@@ -16,9 +16,17 @@
 
 package Kernel::Modules::AgentITSMConfigItemTreeView;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -28,10 +36,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -58,11 +63,11 @@ sub Run {
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # get config of frontend module
-    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+    my $FrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
 
     # check permissions
     my $Access = $ConfigItemObject->Permission(
-        Type   => $Self->{Config}->{Permission},
+        Type   => $FrontendConfig->{Permission},
         Scope  => 'Item',
         Action => $Self->{Action},
         ItemID => $ConfigItemID,
@@ -73,14 +78,14 @@ sub Run {
     if ( !$Access ) {
         return $LayoutObject->NoPermission(
             Message =>
-                $LayoutObject->{LanguageObject}->Translate( 'You need %s permissions!', $Self->{Config}->{Permission} ),
+                $LayoutObject->{LanguageObject}->Translate( 'You need %s permissions!', $FrontendConfig->{Permission} ),
             WithHeader => 'yes',
         );
     }
 
     my $Depth = $ParamObject->GetParam( Param => 'Depth' ) || $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth") || 1;
 
-    #Gather data from Caller CI
+    # gather data from Caller CI, get the latest version
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID => $ConfigItemID,
         Cache        => 1,
@@ -106,29 +111,24 @@ sub Run {
         );
     }
 
-    my $Output = $LayoutObject->Header(
-        Type      => 'Small',
-        BodyClass => 'Popup',
-    );
-
-    # output content
-    $Output .= $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemTreeView',
-        Data         => {
-            %Param,
-            ConfigItemID     => $ConfigItemID,
-            ConfigItemName   => $VersionRef->{Name},
-            ConfigItemNumber => $ConfigItem->{Number},
-            Depth            => $Depth,
-            DefaultDepth     => $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth") || 1,
-            SessionID        => $Self->{SessionID},
-            ShowLinkLabels   => $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::ShowLinkLabels") || 'Yes',
-        },
-    );
-
-    $Output .= $LayoutObject->Footer( Type => 'Small' );
-
-    return $Output;
+    return join '',
+        $LayoutObject->Header(
+            Type      => 'Small',
+            BodyClass => 'Popup',
+        ),
+        $LayoutObject->Output(
+            TemplateFile => 'AgentITSMConfigItemTreeView',
+            Data         => {
+                %Param,
+                ConfigItemID     => $ConfigItemID,
+                ConfigItemName   => $ConfigItem->{Name},
+                ConfigItemNumber => $ConfigItem->{Number},
+                Depth            => $Depth,
+                SessionID        => $Self->{SessionID},
+                ShowLinkLabels   => $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::ShowLinkLabels") || 'Yes',
+            },
+        ),
+        $LayoutObject->Footer( Type => 'Small' );
 }
 
 1;

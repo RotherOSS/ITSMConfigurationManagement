@@ -16,9 +16,17 @@
 
 package Kernel::Output::HTML::Layout::ITSMConfigItemTreeView;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -331,7 +339,7 @@ sub FillColumnAttributes {
     return $Contents;
 }
 
-#Get links for related CI
+# Get links for related CI
 sub GetLinkOutputData {
     my ( $Self, %Param ) = @_;
 
@@ -413,6 +421,7 @@ sub _MapAttributes {
             Priority => 'error',
             Message  => 'Need Label!'
         );
+
         return;
     }
 
@@ -426,7 +435,6 @@ sub _MapAttributes {
     );
 
     return $MapTranslations{ $Param{Label} } || $Param{Label};
-
 }
 
 1;
