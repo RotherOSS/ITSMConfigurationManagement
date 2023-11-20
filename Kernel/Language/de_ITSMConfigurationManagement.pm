@@ -187,6 +187,19 @@ sub Data {
     $Self->{Translation}->{'Expiration Date'} = 'Ablaufdatum';
     $Self->{Translation}->{'Media'} = 'Medium';
 
+    # Configitem Tree View, Kernel/Modules/:AgentITSMConfigItemTreeView.pm
+    $Self->{Translation}->{'TreeView for ConfigItem'} = 'Baumansicht für Configurations Items';
+    $Self->{Translation}->{'Tree View'} = 'Baumansicht';
+    $Self->{Translation}->{'Depth Level'} = 'Tiefe';
+    $Self->{Translation}->{'Zoom In/Out'} = 'Vergrössern/Verkleinern';
+    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = 'Maximale Verschachtelungstiefe for ConfitItem erreicht!';
+    $Self->{Translation}->{'DependsOn'} =  'Hängt ab von';
+    $Self->{Translation}->{'PartOf'} = 'Ist Teil von';
+    $Self->{Translation}->{'RelevantTo'} = 'Relevant für';
+    $Self->{Translation}->{'RequiredFor'} = 'Benötigt für';
+    $Self->{Translation}->{'AlternativeTo'} = 'Alternative für';
+    $Self->{Translation}->{'ConnectedTo'} = 'Verbunden mit';
+
     # Database XML Definition: ITSMConfigurationManagement.sopm
     $Self->{Translation}->{'Computer'} = 'Computer';
     $Self->{Translation}->{'Hardware'} = 'Hardware';

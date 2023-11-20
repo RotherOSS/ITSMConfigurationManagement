@@ -1,0 +1,49 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar">
+    <div class="Header">
+        <h1>
+            [% Translate("TreeView for ConfigItem") | html %]: [% Data.ConfigItemNumber | html %] — [% Data.ConfigItemName | html %]
+        </h1>
+        <p>
+            <a href="#" id="TreeViewCloseLink">[% Translate("Close this dialog") | html %]</a>
+        </p>
+    </div>
+
+    <div class="ContentColumn SpacingTop">
+        <div class="WidgetSimple" id="WidgetContainer">
+        <form name="TreeView" id="TreeView">
+            <input type="hidden" name="ConfigItemID" id="ConfigItemID" value="[% Data.ConfigItemID | html %]">
+            <input type="hidden" name="OTOBOAgentInterface" id="OTOBOAgentInterface" value="[% Data.SessionID | html %]">
+            <input type="hidden" name="ShowLinkLabels" id="ShowLinkLabels" value="[% Data.ShowLinkLabels | html %]">
+            <input type="hidden" name="LastZoom" id="LastZoom" value="100">
+        </form>
+            <div class="ControlRow ContainerBar">
+                <div class="RowTitle"><i class="fa fa-sitemap"></i> [% Translate("Tree View") | html %]</div>
+                <div class="OptContainer Center">
+                    <label id="DepthLabel">[% Translate("Depth Level") | html %]: </label>  <input type="number" name="Depth" id="Depth" min="1" max="10" value="[% Data.Depth | html %]" class="OptDepth">
+                    <label id="ZoomInOutLabel">[% Translate("Zoom In/Out") | html %]: </label> <input type="number" name="Zoom" id="Zoom" min="20" max="200" step="10" value="100">
+                </div>
+            </div>
+                <div id="AJAXLoaderDepth" class="AJAXLoader Hidden"></div>
+                <div id="TreeViewMessages" class="TreeViewMessages Center Hidden">
+                    <span class="Center TreeViewMessage">[% Translate("Max links level reached for ConfigItem!") | html  %]</span>
+                </div>
+                <div class="ContainerCanvas" id="Canvas"></div>
+        </div>
+    </div>
+</div>

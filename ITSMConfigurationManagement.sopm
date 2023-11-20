@@ -94,6 +94,7 @@
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemHistory.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemPrint.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemSearch.pm" />
+        <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemTreeView.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemZoom.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemZoom.pm" />
@@ -111,6 +112,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/MenuGeneric.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItemTreeView.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLEdit.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminConfigItemACLNew.tt" />
@@ -125,10 +127,12 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemOverviewNavBar.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemSearch.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemTreeView.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemZoom.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ConfigItemTreeView/ConfigItemTreeViewGraph.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassImport.pm" />
@@ -211,6 +215,7 @@
         <File Permission="660" Location="scripts/test/Selenium/Customer/ITSMConfigurationManagement/CustomerITSMConfigItem.t" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.TreeView.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Add.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.CustomerSearch.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Dashboard.js" />
@@ -227,6 +232,7 @@
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Edit.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Overview.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.Zoom.css" />
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/ITSM.Agent.ConfigItem.TreeView.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItem.Zoom.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItemList.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItemOverview.css" />

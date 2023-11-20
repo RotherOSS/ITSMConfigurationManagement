@@ -1,0 +1,94 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+
+<div id="SectionContainer">
+[% RenderBlockStart("TopElementsStart") %]
+    <div>
+[% RenderBlockStart("TopElements") %]
+            <div class="Box" id="[% Data.ID | html %]">
+                <div class="ConfigItemInfo">
+                    <div class="ConfigItemTitle">
+                        <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
+                    </div>
+                    <div class="AdditionalInfo">
+                        [% Data.Contents %]
+                    </div>
+                </div>
+            </div>
+[% RenderBlockEnd("TopElements") %]
+    </div>
+[% RenderBlockEnd("TopElementsStart") %]
+
+    <div>
+[% RenderBlockStart("ChildSourceElementsLevelStart") %]
+            <div class="ChildContainer">
+[% RenderBlockStart("ChildElements") %]
+                    <div class="Box" id="[% Data.ID | html %]">
+                        <div class="ConfigItemInfo">
+                            <div class="ConfigItemTitle">
+                                <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
+                            </div>
+                            <div class="AdditionalInfo">
+                                [% Data.Contents %]
+                            </div>
+                        </div>
+                    </div>
+[% RenderBlockEnd("ChildElements") %]
+            </div>
+[% RenderBlockEnd("ChildSourceElementsLevelStart") %]
+    </div>
+
+    <div class="ChildContainer">
+[% RenderBlockStart("TopTargetElements") %]
+            <div class="Box" id="[% Data.ID | html %]">
+                <div class="ConfigItemInfo">
+                    <div class="ConfigItemTitle">
+                        <p>[% Data.Name | html %]</p>
+                    </div>
+                    <div class="AdditionalInfo">
+                        [% Data.Contents %]
+                    </div>
+                </div>
+            </div>
+[% RenderBlockEnd("TopTargetElements") %]
+    </div>
+
+    <div class="ChildContainer">
+[% RenderBlockStart("ChildTargetElementsLevel") %]
+                <div class="ChildContainer" id="TargetLevel[%Data.Level | html%]">
+[% RenderBlockStart("ChildTargetElements") %]
+                    <div class="Box" id="[% Data.ID | html %]">
+                        <div class="ConfigItemInfo">
+                            <div class="ConfigItemTitle">
+                                <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
+                            </div>
+                            <div class="AdditionalInfo">
+                                [% Data.Contents %]
+                            </div>
+                        </div>
+                    </div>
+[% RenderBlockEnd("ChildTargetElements") %]
+                </div>
+[% RenderBlockEnd("ChildTargetElementsLevel") %]
+
+    </div>
+
+</div>
+<input type="hidden" name="MaxDepth" id="MaxDepth" value="[% Data.MaxDepth | html %]">
+<input type="hidden" name="LinkData" id="LinkData" value="[% Data.LinkData | html %]">
+<input type="hidden" name="LinkDataTarget" id="LinkDataTarget" value="[% Data.LinkDataTarget | html %]">
+
+ <div class="SpacerTree"></div>

@@ -1,0 +1,214 @@
+/* OTOBO is a web-based ticketing system for service organisations.
+
+Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     CMDB TreeView
+ */
+
+@media screen,projection,tv,handheld {
+
+.ContainerCanvas {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	z-index: 0;
+}
+
+.SpacerTree {
+	height: 20px;	
+}
+
+.Box {
+	display: inline-block;
+	color: black;
+	width: 80%;
+	min-width: 200px;
+	max-width: max-content;
+	height: max-content;
+	min-height: 70px;
+	text-decoration: none;
+	text-align: center;
+	-webkit-transition: all ease-in-out .2s;
+	-moz-transition: all ease-in-out .2s;
+	transition: all ease-in-out .2s;
+	background: #ffffff;
+	overflow: hidden;
+	position: relative;
+	margin: 10px;
+	border-radius: 8px;
+	box-shadow: 2px 4px 4px 0 rgba(4, 0, 71, 0.16);
+	border: none;
+	z-index: 1000;
+}
+
+.ConfigItemInfo {
+	display: table;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.AdditionalInfo {
+	display: inline-block;
+	padding: 6px;
+	font-size: 11px;
+}
+
+.ConfigItemTitle {
+	display: table-row;
+	vertical-align: middle;
+	color: #ffffff;
+	background-color: #000099;
+	height: max-content;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.ConfigItemTitle p {
+	margin-top: 3px;
+	margin-bottom: 3px;
+    padding-left: 8px;
+    padding-right: 8px;	
+}
+
+.TargetSection {
+	position: relative;
+}
+
+h4 {
+	margin-block-start: 1em;
+}
+
+._jsPlumb_connector {
+	z-index: 1;
+}
+
+._jsPlumb_overlay {
+	z-index: 1;
+	font-size: 10px;
+	background-color: #ffffff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ChildContainer {
+	margin-top: 35px;
+	display: block;
+}
+
+.RowTitle {
+	position: relative;
+	top: 9px;
+	left: 10px;
+	font-size: 14px;
+}
+
+.OptContainer {
+	position: relative; 
+	z-index: 1000;
+	top: -7px;
+	height: 15px;
+	margin: 0 auto;
+}
+
+.OptDepth {
+	margin-right: 3px;
+	font-size: 13px;
+	border-radius: 6px;
+	border: 1px solid;
+	outline: none;
+	text-align: center;
+	border-color: #dcdbdb;
+	box-shadow: 0px 0px 2px rgba(66,66,66,.86);
+}
+
+.ContainerBar {
+	height: 33px;
+	position: relative;
+	z-index: 1000;
+}
+
+.TreeViewMessages {
+	position: relative;
+	margin: 0 auto;
+	padding: 8px;
+	width: 100%;
+	background-color: #E95F53;
+	color: #fff;
+}
+
+#WidgetContainer {
+	position: relative;
+	z-index: 1000;	
+}
+
+#SectionContainer {
+	position: relative;
+	height: 100%;
+	display: block;
+	overflow: hidden;
+	z-index: 0;
+}
+
+#AJAXLoaderDepth {
+	position: relative;
+	margin: 0 auto;
+	display: block;
+	top: 10px;
+	border: none;
+}
+
+#ZoomInOutLabel {
+	position: relative;
+	left: 15px;
+	font-size: 14px;
+}
+
+#DepthLabel {
+	font-size: 14px;
+}
+
+#Zoom {
+	position: relative;
+	left: 15px;
+	font-size: 13px;
+	border-radius: 6px;
+	border: 1px solid;
+	outline: none;
+	text-align: center;
+	border-color: #dcdbdb;
+	box-shadow: 0px 0px 2px rgba(66,66,66,.86);
+}
+
+.ZoomLink {
+	color: #ffffff;
+	cursor: pointer;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ZoomLink:hover, .ZoomLink:visited {
+	color: #ffffff;
+}
+
+input[type='number']::-webkit-inner-spin-button, 
+input[type='number']::-webkit-outer-spin-button { 
+    opacity: 1;
+}
+
+} /* end @media */
