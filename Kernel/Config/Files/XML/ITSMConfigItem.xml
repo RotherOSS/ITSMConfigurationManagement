@@ -438,6 +438,47 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="Frontend::Module###AgentITSMConfigItemTreeView" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>itsm-configitem</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">ConfigItem Tree View</Item>
+                    <Item Key="Title">Tree View</Item>
+                    <Item Key="NavBarName">ITSM ConfigItem</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentITSMConfigItemTreeView###003-ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>ITSM.Agent.ConfigItem.TreeView.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.TreeView.js</Item>
+                        <Item>thirdparty/jsplumb-1.6.4/jsplumb.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::Module###AgentITSMConfigItemAdd" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
@@ -657,6 +698,20 @@
                 <Item Key="Description" Translatable="1">Link</Item>
                 <Item Key="Action">AgentLinkObject</Item>
                 <Item Key="Link">Action=AgentLinkObject;SourceObject=ITSMConfigItem;SourceKey=[% Data.ConfigItemID | html %]</Item>
+                <Item Key="Target">PopUp</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::MenuModule###550-TreeView" Required="0" Valid="1">
+        <Description Translatable="1">Shows a link in the menu to display the configuration item links as a Tree View.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ITSMConfigItem::MenuGeneric</Item>
+                <Item Key="Name" Translatable="1">Tree View</Item>
+                <Item Key="Description" Translatable="1">ConfigItem Tree View</Item>
+                <Item Key="Action">AgentITSMConfigItemTreeView</Item>
+                <Item Key="Link">Action=AgentITSMConfigItemTreeView;ConfigItemID=[% Data.ConfigItemID | html %]</Item>
                 <Item Key="Target">PopUp</Item>
             </Hash>
         </Value>
@@ -924,6 +979,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItem -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -954,6 +1011,7 @@
         </Value>
     </Setting>
 
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemAdd -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the add ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -961,6 +1019,8 @@
             <Item ValueType="String" ValueRegex="">rw</Item>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemHistory -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the history ITSM configuration item screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -991,6 +1051,7 @@
         </Value>
     </Setting>
 
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemDelete -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required privileges to delete config items.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemDelete</Navigation>
@@ -1021,6 +1082,7 @@
         </Value>
     </Setting>
 
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemSearch -->
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ITSM configuration item search screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
@@ -1035,6 +1097,16 @@
             <Item ValueType="String" ValueRegex="^\d+$">30</Item>
         </Value>
     </Setting>
+
+    <!-- ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView -->
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission" Required="1" Valid="1">
+        <Description Translatable="1">Required permissions to use the ITSM configuration item tree view screen in the agent interface.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::Permission</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">ro</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="GeneralCatalogPreferences###Permissions" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the example permission groups of the general catalog attributes.</Description>
         <Navigation>Core::GeneralCatalog</Navigation>
@@ -1903,4 +1975,24 @@
             </Array>
         </Value>
     </Setting>
+
+    <!-- TreeView related settings -->
+    <Setting Name="CMDBTreeView::DefaultDepth" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default relations depth to be shown.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CMDBTreeView::ShowLinkLabels" Required="1" Valid="1">
+        <Description Translatable="1">Defines if the link type labels must be shown in the node connections.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Yes">
+                <Item ValueType="Option" Value="Yes" Translatable="1">Yes</Item>
+                <Item ValueType="Option" Value="No" Translatable="1">No</Item>
+            </Item>
+        </Value>
+    </Setting>
+
 </otobo_config>
