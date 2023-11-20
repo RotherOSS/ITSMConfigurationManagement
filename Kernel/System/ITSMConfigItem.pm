@@ -244,14 +244,24 @@ A hashref with the following keys is returned:
     $ConfigItem->{CurInciStateID}
     $ConfigItem->{CurInciState}
     $ConfigItem->{CurInciStateType}
+    $ConfigItem->{VersionID}
+    $ConfigItem->{Name}
+    $ConfigItem->{Version}
     $ConfigItem->{DefinitionID}
+    $ConfigItem->{DeplStateID}
+    $ConfigItem->{DeplState}
+    $ConfigItem->{DeplStateType}
+    $ConfigItem->{InciStateID}
+    $ConfigItem->{InciState}
+    $ConfigItem->{InciStateType}
     $ConfigItem->{CreateTime}
     $ConfigItem->{CreateBy}
     $ConfigItem->{ChangeTime}
     $ConfigItem->{ChangeBy}
-    # TODO include Version keys
 
 Caching can't be turned off.
+
+When the parameter C<DynamicFields> is passed then additionally the dynamic fields are returned as well.
 
 =cut
 
@@ -416,13 +426,17 @@ END_SQL
 
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
-    # get class list
-    my $ClassList = $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
+    # add the Class, based on the ClassID
+    {
+        my $ClassList = $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
 
-    $ConfigItem{Class} = $ClassList->{ $ConfigItem{ClassID} };
+        $ConfigItem{Class} = $ClassList->{ $ConfigItem{ClassID} };
+    }
 
+    # Add more readable names for the various states.
+    # Add the state types.
     STATE:
     for my $State (qw/DeplState CurDeplState InciState CurInciState/) {
         next STATE if !$ConfigItem{ $State . 'ID' };
