@@ -28,7 +28,6 @@ use utf8;
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -42,14 +41,11 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get needed ConfigItemID
-    my $ConfigItemID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ConfigItemID' );
+    # get needed parameters
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
 
-    # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # get param object
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # check needed stuff
     if ( !$ConfigItemID ) {
@@ -85,14 +81,10 @@ sub Run {
 
     my $Depth = $ParamObject->GetParam( Param => 'Depth' ) || $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth") || 1;
 
-    # gather data from Caller CI, get the latest version
-    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $ConfigItemID,
-        Cache        => 1,
-    );
-
     if ( $Self->{Subaction} eq 'LoadTreeView' ) {
-        my $GraphData = $LayoutObject->GenerateHierarchyGraph(
+
+        # the HTML contains the information for drawing the graph
+        my $CanvasHTML = $LayoutObject->GenerateHierarchyGraph(
             Depth        => $Depth,
             ConfigItemID => $ConfigItemID,
             SessionID    => $Self->{SessionID}
@@ -100,12 +92,19 @@ sub Run {
 
         return $LayoutObject->Attachment(
             ContentType => 'text/html',
-            Content     => $GraphData,
+            Content     => $CanvasHTML,
             Type        => 'inline',
             NoCache     => 1,
         );
     }
 
+    # get name and number for the latest version of the config item
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        ConfigItemID => $ConfigItemID,
+        Cache        => 1,
+    );
+
+    # The information for drawing the graph will be fetch with 'LoadTreeView'
     return join '',
         $LayoutObject->Header(
             Type      => 'Small',
