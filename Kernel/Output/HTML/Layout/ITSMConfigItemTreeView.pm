@@ -70,22 +70,13 @@ sub GenerateHierarchyGraph {
         ID   => $ConfigItem->{ConfigItemID},
         Name => $ConfigItem->{Name},
         Link => '',
-    };
+    );
 
-    # TODO: handle dynamic fields
-    #my $Data = $LayoutObject->XMLData2Hash(
-    #    XMLDefinition => $VersionRef->{XMLDefinition},
-    #    XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
-    #    Attributes    => \@Attributes,
-    #);
-
-    ## Fill attributes for Source CI
-    #$SourceCI->{Contents} = $Self->FillColumnAttributes(
-    #    Attributes  => \@Attributes,
-    #    ColumnsData => \%{$Data},
-    #    VersionRef  => \$VersionRef
-    #);
-    $SourceCI->{Contents} = 'TODO';
+    # Fill attributes for Source CI
+    $SourceCI{Contents} = $Self->FillColumnAttributes(
+        Attributes => [ $Self->CITreeDefaultAttributes ],
+        VersionRef => $ConfigItem,
+    );
 
     # get linked objects
     my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
