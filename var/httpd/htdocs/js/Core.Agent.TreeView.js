@@ -119,13 +119,16 @@ Core.Agent.TreeView = (function (TargetNS) {
     * @function
     * @description
     *      Update TreeView with desired depth level for the selected ConfigItem.
+    *      The tree nodes are put into the HTML element 'Canvas'.
+    *      Also included in the Canvas are the hidden input fields LinkData and LinkDataTarget
+    *      which list the relationship between the nodes.
     */
 
     function UpdateTree() {
         jsPlumb.reset();
         $('#Canvas').empty();
 
-        let Data = {
+        let RequestParams = {
             Action: 'AgentITSMConfigItemTreeView',
             Subaction: 'LoadTreeView',
             ConfigItemID: encodeURIComponent($("#ConfigItemID").val()),
@@ -135,44 +138,47 @@ Core.Agent.TreeView = (function (TargetNS) {
         $("#Depth").prop('disabled', true);
         $("#AJAXLoaderDepth").css("display", "block");
 
-        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-            $("#Canvas").html(Response);
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('CGIHandle'),
+            RequestParams,
+            function (Response) {
+                $("#Canvas").html(Response);
 
-            Instance = jsPlumb.getInstance({
-                PaintStyle: {
-                    lineWidth: 0.1,
-                    strokeStyle: "#000",
-                    outlineColor: "#000",
-                    outlineWidth: 0.1
-                },
-                Connector: ["Straight"],
-                anchor: ['Perimeter', {shape: 'Circle'}],
-                Endpoint: ['Dot', {radius: 3}],
-                endpointStyle: {fill: 'rgb(80, 81, 81)'},
-                container: 'Canvas'
-            });
+                Instance = jsPlumb.getInstance({
+                    PaintStyle: {
+                        lineWidth: 0.1,
+                        strokeStyle: "#000",
+                        outlineColor: "#000",
+                        outlineWidth: 0.1
+                    },
+                    Connector: ["Straight"],
+                    anchor: ['Perimeter', {shape: 'Circle'}],
+                    Endpoint: ['Dot', {radius: 3}],
+                    endpointStyle: {fill: 'rgb(80, 81, 81)'},
+                    container: 'Canvas'
+                });
 
-            Instance.setContainer('Canvas');
+                drawConnections( Instance, $("#LinkData").val(), 'Source' );
+                drawConnections( Instance, $("#LinkDataTarget").val(), 'Target' );
 
-            drawConnections( Instance, $("#LinkData").val(), 'Source' );
-            drawConnections( Instance, $("#LinkDataTarget").val(), 'Target' );
+                $("#AJAXLoaderDepth").css("display", "none");
+                $("#Depth").prop('disabled', false);
 
-            $("#AJAXLoaderDepth").css("display", "none");
-            $("#Depth").prop('disabled', false);
-
-            if ( parseInt($("#Depth").val()) > parseInt($("#MaxDepth").val()) ) {
-                $("#Depth").val($("#MaxDepth").val());
-                $("#TreeViewMessages").removeClass("Hidden");
-                setTimeout(() => {
+                if ( parseInt($("#Depth").val()) > parseInt($("#MaxDepth").val()) ) {
+                    $("#Depth").val($("#MaxDepth").val());
+                    $("#TreeViewMessages").removeClass("Hidden");
+                    setTimeout(() => {
+                        $("#TreeViewMessages").addClass("Hidden");
+                        Instance.repaintEverything();
+                    }, 3000);
+                }
+                else {
                     $("#TreeViewMessages").addClass("Hidden");
-                    Instance.repaintEverything();
-                }, 3000);
-            } else {
-                $("#TreeViewMessages").addClass("Hidden");
-            }
-            Instance.repaintEverything();
-
-        }, 'html');
+                }
+                Instance.repaintEverything();
+            },
+            'html'
+        );
 
         return;
     }
