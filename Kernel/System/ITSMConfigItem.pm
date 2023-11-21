@@ -1839,22 +1839,18 @@ sub _FindInciConfigItems {
     my @ConfigItemIDs = $Param{ConfigItemID};
 
     # find the directly linked config items
-    LINKTYPE:
-    for my $LinkType ( sort keys %{ $Param{IncidentLinkTypeDirection} } ) {
-
-        # find linked config items in both directions
-        my $LinkedConfigItemIDs = $Self->LinkedConfigItemIDs(
-            Key    => $Param{ConfigItemID},
-            Type   => $LinkType,
-            UserID => 1,
-
-            # Direction must ALWAYS be 'Both' here as we need to include
-            # all linked CIs that could influence this one!
-            Direction => 'Both',
+    {
+        # Direction must ALWAYS be 'Both' here as we need to include
+        # all linked CIs that could influence this one!
+        my $LinkedConfigItems = $Self->LinkedConfigItems(
+            ConfigItemID => $Param{ConfigItemID},
+            Types        => [ keys $Param{IncidentLinkTypeDirection}->%* ],
+            Direction    => 'Both',
+            UserID       => 1,
         );
 
         # remember the config item ids
-        push @ConfigItemIDs, $LinkedConfigItemIDs->@*;
+        push @ConfigItemIDs, map { $_->{ConfigItemID} } $LinkedConfigItems->@*;
     }
 
     # Loop over the requested config item and the directly linked config items
@@ -1925,15 +1921,16 @@ sub _FindWarnConfigItems {
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}++;
 
     # find config items to which the incident or warning must be propagated
-    my $LinkedConfigItemIDs = $Self->LinkedConfigItemIDs(
-        Key       => $Param{ConfigItemID},
-        Type      => $Param{LinkType},
-        Direction => $Param{Direction},
-        UserID    => 1,
+    my $LinkedConfigItems = $Self->LinkedConfigItems(
+        ConfigItemID => $Param{ConfigItemID},
+        Types        => [ $Param{LinkType} ],
+        Direction    => $Param{Direction},
+        UserID       => 1,
     );
+    my @LinkedConfigItemIDs = map { $_->{ConfigItemID} } $LinkedConfigItems->@*;
 
     CONFIGITEMID:
-    for my $ConfigItemID ( sort $LinkedConfigItemIDs->@* ) {
+    for my $ConfigItemID ( sort @LinkedConfigItemIDs ) {
 
         # start recursion
         $Self->_FindWarnConfigItems(

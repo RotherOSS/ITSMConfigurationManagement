@@ -28,7 +28,6 @@ use utf8;
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -44,11 +43,11 @@ All ConfigItemTreeView-related HTML functions
 
 =head2 GenerateHierarchyGraph()
 
-create HTML for the graph of config items
+creates HTML containing the information needed for drawing the graph.
 
-    my $HTML = $LayoutObject->GenerateHierarchyGraph(
-        Depth          => 2, #Depth Leve
-        ConfigItemID   => 1  #Source Config Item ID
+    my $CanvasHTML = $LayoutObject->GenerateHierarchyGraph(
+        Depth          => 2, # depth level
+        ConfigItemID   => 1  # source config item ID
     );
 
 =cut
@@ -58,12 +57,12 @@ sub GenerateHierarchyGraph {
 
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    $Self->{MaxDepth} = 1;
+    $Self->{CITreeMaxDepth} = 1;
 
+    # dynamic field are not needed
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID  => $Param{ConfigItemID},
-        DynamicFields => 1,
-        Cache         => 1,
+        ConfigItemID => $Param{ConfigItemID},
+        Cache        => 1,
     );
 
     my %SourceCI = (
@@ -73,34 +72,31 @@ sub GenerateHierarchyGraph {
     );
 
     # Fill attributes for Source CI
-    $SourceCI{Contents} = $Self->FillColumnAttributes(
+    $SourceCI{Contents} = $Self->_FillColumnAttributes(
         Attributes => [ $Self->CITreeDefaultAttributes ],
-        VersionRef => $ConfigItem,
+        ConfigItem => $ConfigItem,
     );
 
     # get linked objects
-    my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
-        Object => 'ITSMConfigItem',
-        Key    => $ConfigItem->{ConfigItemID},
-        State  => 'Valid',
-        UserID => 1,
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+        ConfigItemID => $ConfigItem->{ConfigItemID},
+        Direction    => 'Both',
+        UserID       => 1,
     );
 
-    my $LinkList = $LinkListWithData->{'ITSMConfigItem'};
-
-    # Build First Level
+    # build first level
     my %Tree = $Self->GetLinkOutputData(
-        LinkList  => $LinkList,
-        Direction => 'Target',
-        Depth     => 1,
-        Parent    => $ConfigItem->{ConfigItemID}
+        LinkedConfigItems => $LinkedConfigItems,
+        Direction         => 'Target',
+        Depth             => 1,
+        Parent            => $ConfigItem->{ConfigItemID}
     );
 
     my %LinkOutputDataSources = $Self->GetLinkOutputData(
-        LinkList  => $LinkList,
-        Direction => 'Source',
-        Depth     => 1,
-        Parent    => $ConfigItem->{ConfigItemID}
+        LinkedConfigItems => $LinkedConfigItems,
+        Direction         => 'Source',
+        Depth             => 1,
+        Parent            => $ConfigItem->{ConfigItemID}
     );
 
     # Build Levels Up (Sources)
@@ -207,14 +203,14 @@ sub GenerateHierarchyGraph {
     return $LayoutObject->Output(
         TemplateFile => 'ConfigItemTreeView/ConfigItemTreeViewGraph',
         Data         => {
-            MaxDepth       => $Self->{MaxDepth},
+            MaxDepth       => $Self->{CITreeMaxDepth},
             LinkData       => $LinkData,
             LinkDataTarget => $LinkDataTarget,
         }
     );
 }
 
-# TODO: the below subs should be internal
+# TODO: the below subs should declared as internal
 
 =head2 CITreeDefaultAttributes()
 
@@ -237,34 +233,35 @@ sub GetCISubTreeData {
     my $Init      = $Param{Init};
     my $Direction = $Param{Direction};
 
-    my $ActualLevel = 1;
+    my $ActualLevel      = 1;
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    #Build SubTree
+    # build SubTree
     LOOPDEPTH:
     for my $GoDeep ( $Init .. $Depth ) {
 
-        if ( !exists( $Tree{$GoDeep} ) ) {
-            next LOOPDEPTH if !keys %{ $Tree{ $GoDeep - 1 } };
+        next LOOPDEPTH if exists $Tree{$GoDeep};
+        next LOOPDEPTH unless keys $Tree{ $GoDeep - 1 }->%*;
 
+        {
             my %CIsRelated = %{ $Tree{ $GoDeep - 1 } };
             my %SubTree;
 
             for my $Key ( sort { $a <=> $b } keys %CIsRelated ) {
 
-                my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
-                    Object => 'ITSMConfigItem',
-                    Key    => $Key,
-                    State  => 'Valid',
-                    UserID => 1,
+                # get linked objects
+                my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+                    ConfigItemID => $Key,
+                    Direction    => 'Both',
+                    UserID       => 1,
                 );
 
-                my $LinkList       = $LinkListWithData->{'ITSMConfigItem'};
                 my %LinkOutputData = $Self->GetLinkOutputData(
-                    LinkList  => $LinkList,
-                    Depth     => $GoDeep,
-                    Parent    => $Key,
-                    Direction => $Direction,
-                    SourceCI  => $Param{Key}
+                    LinkedConfigItems => $LinkedConfigItems,
+                    Depth             => $GoDeep,
+                    Parent            => $Key,
+                    Direction         => $Direction,
+                    SourceCI          => $Param{Key}
                 );
 
                 if ( keys %LinkOutputData ) {
@@ -280,20 +277,21 @@ sub GetCISubTreeData {
         }
     }
 
-    if ( $ActualLevel > $Self->{MaxDepth} && $ActualLevel != 0 ) {
-        $Self->{MaxDepth} = $ActualLevel;
+    if ( $ActualLevel > $Self->{CITreeMaxDepth} && $ActualLevel != 0 ) {
+        $Self->{CITreeMaxDepth} = $ActualLevel;
     }
 
     return %Tree;
 }
 
-# Return contents of the nodes
-sub FillColumnAttributes {
+# return contents of the nodes
+sub _FillColumnAttributes {
     my ( $Self, %Param ) = @_;
 
+    my @Attributes = $Param{Attributes}->@*;
+    my $ConfigItem = $Param{ConfigItem};
+
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my @Attributes   = @{ $Param{Attributes} };
-    my $VersionRef   = $Param{VersionRef};
 
     # fill data with Version attributes
     my @Lines;
@@ -307,7 +305,7 @@ sub FillColumnAttributes {
         }
 
         my $Label = $LayoutObject->{LanguageObject}->Translate( $Self->_MapAttributes( Label => $ColumnLabel ) );
-        my $Text  = $VersionRef->{$Column} // '';
+        my $Text  = $ConfigItem->{$Column} // '';
         push @Lines, "$Label: " . $LayoutObject->{LanguageObject}->Translate($Text);
     }
 
@@ -318,61 +316,46 @@ sub FillColumnAttributes {
 sub GetLinkOutputData {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my %OutputData;
     my $Depth = $Param{Depth};
 
-    for my $LinkType ( sort keys %{ $Param{LinkList} } ) {
+    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $ConfiguredTypes  = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
+    my %OutputData;
 
-        # extract link type List
-        my $LinkTypeList = $Param{LinkList}->{$LinkType};
+    for my $LinkedConfigItem (
+        grep { $_->{Direction} eq $Param{Direction} } $Param{LinkedConfigItems}->@*
+        )
+    {
+        my $ConfigItemID = $LinkedConfigItem->{ConfigItemID};
 
-        LINKOUTPUT:
-        for my $Direction ( sort keys %{$LinkTypeList} ) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 1,
+        );
 
-            next LINKOUTPUT if $Direction ne $Param{Direction};
+        # Find label for the link
+        my $LinkType = $LinkedConfigItem->{LinkType};
+        my $Link     = $LinkedConfigItem->{Direction} eq 'Source'
+            ?
+            $ConfiguredTypes->{$LinkType}->{TargetName}
+            :
+            $ConfiguredTypes->{$LinkType}->{SourceName};
+        $Link ||= $LinkType;
 
-            # extract direction list
-            my $DirectionList = $Param{LinkList}->{$LinkType}->{$Direction};
+        # define item data
+        my %Item = (
+            ID       => $ConfigItem->{ConfigItemID},
+            Name     => $ConfigItem->{Name},
+            Contents => $Self->_FillColumnAttributes(
+                Attributes => [ $Self->CITreeDefaultAttributes ],
+                ConfigItem => $ConfigItem,
+            ),
+            Link     => $LayoutObject->{LanguageObject}->Translate($Link),
+            LinkedTo => $Param{Parent} || ''
+        );
 
-            my @ItemList;
-            for my $ConfigItemID ( sort { $a <=> $b } keys %{$DirectionList} ) {
-
-                # extract config item data
-                my $Version = $DirectionList->{$ConfigItemID};
-
-                my $VersionRef = $ConfigItemObject->ConfigItemGet(
-                    VersionID     => $Version->{VersionID},
-                    DynamicFields => 1,
-                );
-
-                if ( $Param{Direction} eq 'Source' ) {
-                    my $ConfiguredTypes = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
-                    my $SourceName      = $ConfiguredTypes->{$LinkType}->{SourceName} || '';
-                    my $TargetName      = $ConfiguredTypes->{$LinkType}->{TargetName} || '';
-
-                    if ( $SourceName ne $TargetName ) {
-                        $LinkType = $TargetName;
-                    }
-                }
-
-                # define item data
-                my %Item = (
-                    ID       => $Version->{ConfigItemID},
-                    Name     => $Version->{Name},
-                    Contents => $Self->FillColumnAttributes(
-                        Attributes => [ $Self->CITreeDefaultAttributes ],
-                        VersionRef => $VersionRef
-                    ),
-                    Link     => $LayoutObject->{LanguageObject}->Translate($LinkType),
-                    LinkedTo => $Param{Parent} || ''
-                );
-
-                $OutputData{$Depth}->{ $Version->{ConfigItemID} } = \%Item;
-                push @ItemList, \%Item;
-            }
-        }
+        $OutputData{$Depth}->{ $ConfigItem->{ConfigItemID} } = \%Item;
     }
 
     return %OutputData;

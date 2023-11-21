@@ -141,15 +141,15 @@ END_SQL
     return 1;
 }
 
-=head2 LinkedConfigItemIDs()
+=head2 LinkedConfigItems()
 
 get the linked config items.
 
-    my $ConfigItemIDs = $ConfigItemObject->LinkedConfigItemIDs(
-        Key       => 321,
-        Type      => 'ParentChild',
-        Direction => 'Source',
-        UserID    => 1,
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+        ConfigItemID => 321,
+        Types        => [ 'ParentChild', 'IsInspiredBy' ], # optional
+        Direction    => 'Source', # one of Source, Target, Both
+        UserID       => 1,
     );
 
 The semantics of the parameter C<Direction> can be confusing. The above call can be verbalized as:
@@ -158,19 +158,33 @@ with the the config item 321.
 
 Returns an empty array ref when no relationships were found:
 
-    $ConfigItemIDs = [];
+    $LinkedConfigItems = [];
 
 Returs a list when relationships have been found.
 
-    $ConfigItemIDs = [1, 22, 333, 4444];
+    $LinkedConfigItems = [
+        {
+            ConfigItemID => 1,
+            Direction    => 'Source',
+            LinkTypeID   => 2,
+            LinkType     => 'ParentChild',
+        },
+        {
+            ConfigItemID => 22,
+            Direction    => 'Source',
+            LinkTypeID   => 2,
+            LinkType     => 'ParentChild',
+        },
+        ...
+    ];
 
 =cut
 
-sub LinkedConfigItemIDs {
+sub LinkedConfigItems {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(Key Type Direction UserID)) {
+    for my $Argument (qw(ConfigItemID Direction UserID)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -181,61 +195,89 @@ sub LinkedConfigItemIDs {
         }
     }
 
-    # the link type is used in the SELECT
     my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
-    my $TypeID     = $LinkObject->TypeLookup(
-        Name   => $Param{Type},
-        UserID => $Param{UserID},
-    );
+
+    # the link type is optional
+    my @TypeConditions;    # 0 or 1 conditions
+    my @TypeBinds;         # 0, 1, or many binds
+    if ( $Param{Types} && ref $Param{Types} eq 'ARRAY' ) {
+
+        # empty list of types gives no result
+        return [] unless $Param{Types}->@*;
+
+        my $Placeholders = join ', ', map {'?'} $Param{Types}->@*;
+        push @TypeConditions, "link_type_id IN ($Placeholders)";
+
+        my @TypeIDs = map
+            {
+                $LinkObject->TypeLookup(
+                    Name   => $_,
+                    UserID => $Param{UserID}
+                )
+            }
+            $Param{Types}->@*;
+        push @TypeBinds, @TypeIDs;
+    }
 
     # get complete list for both directions (or only one if restricted)
     my $Direction = $Param{Direction};
     my ( $SQL, @Binds );
     if ( $Direction eq 'Source' ) {
-        $SQL = <<'END_SQL';
-SELECT DISTINCT source_configitem_id
+        $SQL = <<"END_SQL";
+SELECT DISTINCT source_configitem_id, link_type_id, 'Source'
   FROM configitem_link
-  WHERE target_configitem_id = ?
-    AND link_type_id = ?
+  WHERE @{[ join ' AND ', 'target_configitem_id = ?', @TypeConditions ]}
 END_SQL
-        push @Binds, \$Param{Key}, \$TypeID;
+        push @Binds, $Param{ConfigItemID}, @TypeBinds;
     }
     elsif ( $Direction eq 'Target' ) {
-        $SQL = <<'END_SQL';
-SELECT DISTINCT target_configitem_id
+        $SQL = <<"END_SQL";
+SELECT DISTINCT target_configitem_id, link_type_id, 'Target'
   FROM configitem_link
-  WHERE source_configitem_id = ?
-    AND link_type_id = ?
+  WHERE @{[ join ' AND ', 'source_configitem_id = ?', @TypeConditions ]}
 END_SQL
+        push @Binds, $Param{ConfigItemID}, @TypeBinds;
     }
     else {
         # Both directions
         # TODO: test with PostgreSQL and Oracle
-        $SQL = <<'END_SQL';
+        $SQL = <<"END_SQL";
 (
-  SELECT DISTINCT source_configitem_id
+  SELECT DISTINCT source_configitem_id, link_type_id, 'Source'
     FROM configitem_link
-    WHERE target_configitem_id = ?
-      AND link_type_id = ?
+    WHERE @{[ join ' AND ', 'target_configitem_id = ?', @TypeConditions ]}
 )
 UNION
 (
-  SELECT DISTINCT target_configitem_id
+  SELECT DISTINCT target_configitem_id, link_type_id, 'Target'
     FROM configitem_link
-    WHERE source_configitem_id = ?
-      AND link_type_id = ?
+    WHERE @{[ join ' AND ', 'source_configitem_id = ?', @TypeConditions ]}
 )
 END_SQL
-        push @Binds, \$Param{Key}, \$TypeID, \$Param{Key}, \$TypeID;
+        push @Binds, $Param{ConfigItemID}, @TypeBinds, $Param{ConfigItemID}, @TypeBinds;
     }
 
-    my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
-    my @ConfigItemIDs = $DBObject->SelectColArray(
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $Rows     = $DBObject->SelectAll(
         SQL  => $SQL,
-        Bind => \@Binds,
+        Bind => [ \(@Binds) ],
     );
 
-    return \@ConfigItemIDs;
+    my @Result = map
+        {
+            {
+                ConfigItemID => $_->[0],
+                LinkTypeID   => $_->[1],
+                LinkType     => $LinkObject->TypeLookup(
+                    TypeID => $_->[1],
+                    UserID => $Param{UserID},
+                ),
+                Direction => $_->[2],
+            }
+        }
+        $Rows->@*;
+
+    return \@Result;
 }
 
 =head2 SyncLinkTable()
