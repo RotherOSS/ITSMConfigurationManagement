@@ -44,9 +44,9 @@ All ConfigItemTreeView-related HTML functions
 
 =head2 GenerateHierarchyGraph()
 
-create a simple output table
+create HTML for the graph of config items
 
-    my $GraphData = $LayoutObject->GenerateHierarchyGraph(
+    my $HTML = $LayoutObject->GenerateHierarchyGraph(
         Depth          => 2, #Depth Leve
         ConfigItemID   => 1  #Source Config Item ID
     );
@@ -58,7 +58,6 @@ sub GenerateHierarchyGraph {
 
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my %Tree;
     $Self->{MaxDepth} = 1;
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
@@ -67,9 +66,7 @@ sub GenerateHierarchyGraph {
         Cache         => 1,
     );
 
-    my @Attributes = $Self->GetDefaultAttributes();
-
-    my $SourceCI = {
+    my %SourceCI = (
         ID   => $ConfigItem->{ConfigItemID},
         Name => $ConfigItem->{Name},
         Link => '',
@@ -100,15 +97,13 @@ sub GenerateHierarchyGraph {
 
     my $LinkList = $LinkListWithData->{'ITSMConfigItem'};
 
-    my %LinkOutputData = $Self->GetLinkOutputData(
+    # Build First Level
+    my %Tree = $Self->GetLinkOutputData(
         LinkList  => $LinkList,
         Direction => 'Target',
         Depth     => 1,
         Parent    => $ConfigItem->{ConfigItemID}
     );
-
-    #Build First Level
-    %Tree = ( %Tree, %LinkOutputData );
 
     my %LinkOutputDataSources = $Self->GetLinkOutputData(
         LinkList  => $LinkList,
@@ -117,7 +112,7 @@ sub GenerateHierarchyGraph {
         Parent    => $ConfigItem->{ConfigItemID}
     );
 
-    #Build Levels Up (Sources)
+    # Build Levels Up (Sources)
     my %TreeSources = $Self->GetCISubTreeData(
         Tree      => \%LinkOutputDataSources,
         Init      => 1,
@@ -126,7 +121,7 @@ sub GenerateHierarchyGraph {
         Direction => 'Source'
     );
 
-    #Build Levels Down (Targets)
+    # Build Levels Down (Targets)
     %Tree = $Self->GetCISubTreeData(
         Tree      => \%Tree,
         Init      => 2,
@@ -176,10 +171,10 @@ sub GenerateHierarchyGraph {
     $LayoutObject->Block(
         Name => 'TopTargetElements',
         Data => {
-            Name         => $SourceCI->{Name},
-            Contents     => $SourceCI->{Contents},
-            ConfigItemID => $SourceCI->{ID},
-            ID           => $SourceCI->{ID}
+            Name         => $SourceCI{Name},
+            Contents     => $SourceCI{Contents},
+            ConfigItemID => $SourceCI{ID},
+            ID           => $SourceCI{ID}
         }
     );
 
@@ -221,24 +216,28 @@ sub GenerateHierarchyGraph {
     return $LayoutObject->Output(
         TemplateFile => 'ConfigItemTreeView/ConfigItemTreeViewGraph',
         Data         => {
-            MaxDepth           => $Self->{MaxDepth},
-            LinkData           => $LinkData,
-            LinkDataTarget     => $LinkDataTarget,
-            OTOBOAgentInteface => $Self->{SessionID}
+            MaxDepth       => $Self->{MaxDepth},
+            LinkData       => $LinkData,
+            LinkDataTarget => $LinkDataTarget,
         }
     );
 }
 
-#Get attributes to show
-sub GetDefaultAttributes {
-    my ( $Self, %Param ) = @_;
+# TODO: the below subs should be internal
 
-    my @Attributes = qw/Class CurInciState CurDeplState/;
+=head2 CITreeDefaultAttributes()
 
-    return @Attributes;
+Get a list of attributes that are shown in the nodes.
+
+    my @Attributes = $LayoutObject->CITreeDefaultAttributes();
+
+=cut
+
+sub CITreeDefaultAttributes {
+    return qw/Class CurInciState CurDeplState/;
 }
 
-#Build Children structure
+# build Children structure
 sub GetCISubTreeData {
     my ( $Self, %Param ) = @_;
 
@@ -297,44 +296,31 @@ sub GetCISubTreeData {
     return %Tree;
 }
 
-# Return contents strings
+# Return contents of the nodes
 sub FillColumnAttributes {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my @Attributes   = @{ $Param{Attributes} };
+    my $VersionRef   = $Param{VersionRef};
 
-    my $Contents;
-    my @Attributes  = @{ $Param{Attributes} };
-    my %ColumnsData = %{ $Param{ColumnsData} };
-    my $VersionRef  = ${ $Param{VersionRef} };
-    my $Count       = 0;
-
-    #Fill data with Version attributes
+    # fill data with Version attributes
+    my @Lines;
     for my $Column ( sort @Attributes ) {
 
         my $ColumnLabel = $Column;
-
         if ( index( $Column, '::' ) > 0 ) {
-            my @Vals = split( /::/, $Column );
-            $ColumnLabel = '';
-            pop(@Vals);
-            $ColumnLabel = join( " ", @Vals );
+            my @Vals = split /::/, $Column;
+            pop @Vals;
+            $ColumnLabel = join ' ', @Vals;
         }
 
         my $Label = $LayoutObject->{LanguageObject}->Translate( $Self->_MapAttributes( Label => $ColumnLabel ) );
-        my $Text  = '';
-        $Count++;
-
-        $Text = $VersionRef->{$Column} || $ColumnsData{$Column}->{Value};
-
-        $Contents .= "$Label: " . $LayoutObject->{LanguageObject}->Translate($Text);
-
-        if ( $Count < int(@Attributes) ) {
-            $Contents .= "<br>";
-        }
+        my $Text  = $VersionRef->{$Column} // '';
+        push @Lines, "$Label: " . $LayoutObject->{LanguageObject}->Translate($Text);
     }
 
-    return $Contents;
+    return join '<br>', @Lines;
 }
 
 # Get links for related CI
@@ -370,17 +356,6 @@ sub GetLinkOutputData {
                     DynamicFields => 1,
                 );
 
-                my @Attributes = $Self->GetDefaultAttributes();
-
-                my $Data = {};
-
-                # TODO: handle dynamic fields
-                #my $Data = $LayoutObject->XMLData2Hash(
-                #    XMLDefinition => $VersionRef->{XMLDefinition},
-                #    XMLData       => $VersionRef->{XMLData}->[1]->{Version}->[1],
-                #    Attributes    => \@Attributes,
-                #);
-
                 if ( $Param{Direction} eq 'Source' ) {
                     my $ConfiguredTypes = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
                     my $SourceName      = $ConfiguredTypes->{$LinkType}->{SourceName} || '';
@@ -396,9 +371,8 @@ sub GetLinkOutputData {
                     ID       => $Version->{ConfigItemID},
                     Name     => $Version->{Name},
                     Contents => $Self->FillColumnAttributes(
-                        Attributes  => \@Attributes,
-                        ColumnsData => \%{$Data},
-                        VersionRef  => \$VersionRef
+                        Attributes => [ $Self->CITreeDefaultAttributes ],
+                        VersionRef => $VersionRef
                     ),
                     Link     => $LayoutObject->{LanguageObject}->Translate($LinkType),
                     LinkedTo => $Param{Parent} || ''
@@ -413,7 +387,7 @@ sub GetLinkOutputData {
     return %OutputData;
 }
 
-#Change labels for translatable values
+# change labels for translatable values
 sub _MapAttributes {
     my ( $Self, %Param ) = @_;
 
@@ -426,7 +400,7 @@ sub _MapAttributes {
         return;
     }
 
-    my %MapTranslations = (
+    state %MapTranslations = (
         InciState        => 'Incident State',
         DeplState        => 'Deployment State',
         CurDeplState     => 'Current Deployment State',
@@ -435,7 +409,7 @@ sub _MapAttributes {
         CurInciStateType => 'Current Incident State Type'
     );
 
-    return $MapTranslations{ $Param{Label} } || $Param{Label};
+    return $MapTranslations{ $Param{Label} } // $Param{Label};
 }
 
 1;
