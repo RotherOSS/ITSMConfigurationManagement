@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::DynamicField::Driver::Reference::ITSMConfigItemVersion;
+package Kernel::System::DynamicField::Driver::ITSMConfigItemVersionReference;
 
 use v5.24;
 use strict;
@@ -22,7 +22,7 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
-use parent qw(Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem);
+use parent qw(Kernel::System::DynamicField::Driver::ITSMConfigItemReference);
 
 # core modules
 
@@ -38,7 +38,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Reference::ITSMConfigItemVersion - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::ITSMConfigItemVersionReference - backend for the Reference dynamic field
 
 =head1 DESCRIPTION
 
@@ -46,12 +46,52 @@ ITSMConfigItemVersion backend for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
 
+=head2 new()
+
+it is usually not necessary to explicitly create instances of dynamic field drivers.
+Instances of the drivers are created in the constructor of the
+dynamic field backend object C<Kernel::System::DynamicField::Backend>.
+
+=cut
+
+# TODO most likely not necessary since parent class has new method, test this
+sub new {
+    my ($Type) = @_;
+
+    # allocate new hash for object
+    my $Self = bless {}, $Type;
+
+    # Reference dynamic fields are stored in the database table attribute dynamic_field_value.value_int.
+    $Self->{ValueType}      = 'Integer';
+    $Self->{ValueKey}       = 'ValueInt';
+    $Self->{TableAttribute} = 'value_int';
+
+    # Used for declaring CSS classes
+    $Self->{FieldCSSClass} = 'DynamicFieldReference';
+
+    # set field behaviors
+    $Self->{Behaviors} = {
+        'IsACLReducible'               => 0,
+        'IsNotificationEventCondition' => 0,
+        'IsSortable'                   => 1,
+        'IsFiltrable'                  => 0,
+        'IsStatsCondition'             => 0,
+        'IsCustomerInterfaceCapable'   => 1,
+        'IsHiddenInTicketInformation'  => 0,
+    };
+
+    $Self->{ReferencedObjectType} = 'ITSMConfigItem';
+
+    return $Self;
+}
+
 =head2 ObjectDescriptionGet()
 
 return a hash of object descriptions.
 
-    my %Description = $PluginObject->ObjectDescriptionGet(
+    my %Description = $BackendObject->ObjectDescriptionGet(
         ObjectID => 123,
+        UserID   => 1,
     );
 
 Return
@@ -109,7 +149,7 @@ sub ObjectDescriptionGet {
 
 This is used in auto completion when searching for possible object IDs.
 
-    my @ObjectIDs = $PluginObject->SearchObjects(
+    my @ObjectIDs = $BackendObject->SearchObjects(
         DynamicFieldConfig => $DynamicFieldConfig,
         Term               => $Term,
         MaxResults         => $MaxResults,
@@ -120,6 +160,8 @@ This is used in auto completion when searching for possible object IDs.
 
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
+
+    $Param{Term} //= '';
 
     # get a list of config item IDs
     # TODO: this only searches the latest versions
@@ -144,7 +186,7 @@ sub SearchObjects {
 =head2 ValueForLens()
 
 this method returns the passed value unchanged. It is only implemented so that
-the implementation from the parent class C<Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem> is not used.
+the implementation from the parent class C<Kernel::System::DynamicField::Driver::ITSMConfigItemReference> is not used.
 
 =cut
 

@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem;
+package Kernel::System::DynamicField::Driver::ITSMConfigItemReference;
 
 use v5.24;
 use strict;
@@ -22,7 +22,7 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
-use parent qw(Kernel::System::DynamicField::Driver::Reference::Base);
+use parent qw(Kernel::System::DynamicField::Driver::BaseReference);
 
 # core modules
 
@@ -41,13 +41,86 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Reference::ITSMConfigItem - plugin module for the Reference dynamic field
+Kernel::System::DynamicField::Driver::ITSMConfigItemReference - backend for the Reference dynamic field
 
 =head1 DESCRIPTION
 
-ITSMConfigItem plugin for the Reference dynamic field.
+ITSMConfigItem backend for the Reference dynamic field.
 
 =head1 PUBLIC INTERFACE
+
+=head2 new()
+
+it is usually not necessary to explicitly create instances of dynamic field drivers.
+Instances of the drivers are created in the constructor of the
+dynamic field backend object C<Kernel::System::DynamicField::Backend>.
+
+=cut
+
+sub new {
+    my ($Type) = @_;
+
+    # allocate new hash for object
+    my $Self = bless {}, $Type;
+
+    # Reference dynamic fields are stored in the database table attribute dynamic_field_value.value_int.
+    $Self->{ValueType}      = 'Integer';
+    $Self->{ValueKey}       = 'ValueInt';
+    $Self->{TableAttribute} = 'value_int';
+
+    # Used for declaring CSS classes
+    $Self->{FieldCSSClass} = 'DynamicFieldReference';
+
+    # set field behaviors
+    $Self->{Behaviors} = {
+        'IsACLReducible'               => 0,
+        'IsNotificationEventCondition' => 0,
+        'IsSortable'                   => 1,
+        'IsFiltrable'                  => 0,
+        'IsStatsCondition'             => 0,
+        'IsCustomerInterfaceCapable'   => 1,
+        'IsHiddenInTicketInformation'  => 0,
+    };
+
+    $Self->{ReferencedObjectType} = 'ITSMConfigItem';
+
+    return $Self;
+}
+
+=head2 ValueGet()
+
+This method contains special support for the case of Lenses. A Lens operates directly on dynamic field of an specific object.
+The specific object is usually identified by the value of the Reference dynamic field. But there is at least one special case.
+When the reference is to an C<ITSMConfigItem> then the relevant ID is the ID of the last version. This case is handled
+when the parameter C<ForLens> is passed.
+
+=cut
+
+sub ValueGet {
+    my ( $Self, %Param ) = @_;
+
+    # get the value from the parent class
+    my $Value = $Self->SUPER::ValueGet(%Param);
+
+    # special handling only for Lens
+    return $Value unless $Param{ForLens};
+
+    # for usage in lenses we might have to interpret the values to be usable for their ValueGet()
+    return $Self->ValueForLens( Value => $Value );
+}
+
+sub EditFieldValueGet {
+    my ( $Self, %Param ) = @_;
+
+    # get the value from the parent class
+    my $Value = $Self->SUPER::EditFieldValueGet(%Param);
+
+    # for this field the normal return an the ReturnValueStructure are the same
+    return $Value unless $Param{ForLens};
+
+    # for usage in lenses we might have to interpret the values to be usable for their ValueGet()
+    return $Self->ValueForLens( Value => $Value );
+}
 
 =head2 GetFieldTypeSettings()
 
@@ -58,7 +131,9 @@ Get field type settings that are specific to the referenced object type ITSMConf
 sub GetFieldTypeSettings {
     my ( $Self, %Param ) = @_;
 
-    my @FieldTypeSettings;
+    my @FieldTypeSettings = $Self->SUPER::GetFieldTypeSettings(
+        %Param,
+    );
 
     # add the selection for the config item class
     {
@@ -85,7 +160,7 @@ sub GetFieldTypeSettings {
 
 checks read permission for a given object and UserID.
 
-    $Permission = $PluginObject->ObjectPermission(
+    $Permission = $BackendObject->ObjectPermission(
         Key     => 123,
         UserID  => 1,
     );
@@ -94,8 +169,6 @@ checks read permission for a given object and UserID.
 
 sub ObjectPermission {
     my ( $Self, %Param ) = @_;
-
-    # TODO: Check how (and if at all) permissions should be checked
 
     # check needed stuff
     for my $Argument (qw(Key UserID)) {
@@ -121,7 +194,7 @@ sub ObjectPermission {
 
 return a hash of object descriptions.
 
-    my %Description = $PluginObject->ObjectDescriptionGet(
+    my %Description = $BackendObject->ObjectDescriptionGet(
         ObjectID => 123,
         UserID   => 1,
     );
@@ -181,7 +254,7 @@ sub ObjectDescriptionGet {
 
 This is used in auto completion when searching for possible object IDs.
 
-    my @ObjectIDs = $PluginObject->SearchObjects(
+    my @ObjectIDs = $BackendObject->SearchObjects(
         DynamicFieldConfig => $DynamicFieldConfig,
         Term               => $Term,
         MaxResults         => $MaxResults,
@@ -192,6 +265,8 @@ This is used in auto completion when searching for possible object IDs.
 
 sub SearchObjects {
     my ( $Self, %Param ) = @_;
+
+    $Param{Term} //= '';
 
     my $DFDetails = $Param{DynamicFieldConfig}->{Config} // {};
 
@@ -277,7 +352,7 @@ return the current last version ids used in dynamic_field_value.
 The passed in value is a list of config item IDs. These IDs are
 transformed into the respective last version IDs.
 
-    my $Value = $PluginObject->ValueForLens(
+    my $Value = $BackendObject->ValueForLens(
         Value => [17,17,19,20],
     );
 

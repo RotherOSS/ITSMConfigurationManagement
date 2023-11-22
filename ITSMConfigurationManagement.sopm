@@ -143,8 +143,8 @@
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/RebuildLinkTable.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/WebService/TriggerConfigItemFetch.pm" />
-        <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItem.pm" />
-        <File Permission="660" Location="Kernel/System/DynamicField/Driver/Reference/ITSMConfigItemVersion.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/ITSMConfigItemReference.pm" />
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/ITSMConfigItemVersionReference.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Event/ITSMConfigItemDefinitionSync.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/ObjectType/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem.pm" />
