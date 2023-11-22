@@ -1792,16 +1792,35 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DynamicFields::Driver###Reference###ReferencedObjectTypes###003-ITSMConfigItem" Required="0" Valid="1">
-        <Description Translatable="1">Referenced object types that are available when ITSMConfigurationManagement is activated.</Description>
+
+    <!-- dynamic field ITSMConfigItem Reference -->
+    <Setting Name="DynamicFields::Driver###ITSMConfigItemReference" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
-            <Array>
-                <Item>ITSMConfigItem</Item>
-                <Item>ITSMConfigItemVersion</Item>
-            </Array>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">ITSMConfigItem Reference</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItemReference</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
+            </Hash>
         </Value>
     </Setting>
+    <!-- End dynamic field ITSMConfigItem Reference -->
+
+    <!-- dynamic field ITSMConfigItemVersion Reference -->
+    <Setting Name="DynamicFields::Driver###ITSMConfigItemVersionReference" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField backend registration.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">ITSMConfigItemVersion Reference</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItemVersionReference</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- End dynamic field ITSMConfigItemVersion Reference -->
+
     <Setting Name="ITSMConfigItem::NameModule" Required="0" Valid="1">
         <Description Translatable="1">This configuration defines modules to suggest and check names for config items per config item class.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
