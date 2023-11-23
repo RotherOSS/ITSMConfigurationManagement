@@ -55,52 +55,80 @@ my %DefinitionTemplate = (
     Class      => $RandomID,
     CreateBy   => $UserID,
     Version    => 1,
-    Definition => << 'EOF',
+    Definition => << 'END_YAML',
 ---
-- Pages:
-  - Content:
-    - ColumnStart: 1
-      RowStart: 1
-      Section: Section1
-    - ColumnStart: 2
-      RowStart: 1
-      Section: Section2
+Pages:
+  - Name: Page1
+    Interfaces: []
     Layout:
-      ColumnWidth: 1fr 1fr
-      Columns: 2
-    Name: Content
-EOF
-    DefinitionRef => [
-        {
-            Pages => [
-                {
-                    Name   => 'Content',
-                    Layout => {
-                        Columns     => '2',
-                        ColumnWidth => '1fr 1fr'
-                    },
-                    Content => [
-                        {
-                            Section     => 'Section1',
-                            ColumnStart => '1',
-                            RowStart    => '1'
-                        },
-                        {
-                            Section     => 'Section2',
-                            ColumnStart => '2',
-                            RowStart    => '1'
-                        }
-                    ],
-                }
-            ]
-        }
-    ],
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section1
+        ColumnStart: 1
+        RowStart: 1
+  - Name: Page2
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section2
+        ColumnStart: 1
+        RowStart: 2
+
+Sections:
+  Section1:
+    Content:
+       - Header: "This is section 1"
+  Section2:
+    Content:
+       - Header: "This is section 2"
+END_YAML
 );
+
+my $DefinitionRef = {
+    Pages => [
+        {
+            Content => [
+                {
+                    ColumnStart => 1,
+                    RowStart    => 1,
+                    Section     => "Section1"
+                }
+            ],
+            Interfaces => [],
+            Layout     => {
+                Columns     => 3,
+                ColumnWidth => "1fr"
+            },
+            Name => "Page1",
+        },
+        {
+            Content => [
+                {
+                    ColumnStart => 1,
+                    RowStart    => 2,
+                    Section     => "Section2"
+                }
+            ],
+            Layout => {
+                Columns     => 3,
+                ColumnWidth => "1fr"
+            },
+            Name => "Page2",
+        },
+    ],
+    Sections => {
+        Section1 => { Content => [ { Header => "This is section 1" } ] },
+        Section2 => { Content => [ { Header => "This is section 2" } ] },
+    },
+};
 
 my $Result = $ConfigItemObject->DefinitionAdd(
     %DefinitionTemplate,
     UserID => $UserID,
 );
+ok( $Result->{Success}, "DefinitionAdd() was successful" );
 my $DefinitionID = $Result->{DefinitionID};
 ok( $DefinitionID, "DefinitionAdd()" );
 
@@ -118,6 +146,7 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
+            DefinitionRef   => $DefinitionRef,
             DefinitionID    => $DefinitionID,
             DynamicFieldRef => {},
         },
@@ -130,6 +159,7 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
+            DefinitionRef   => $DefinitionRef,
             DefinitionID    => $DefinitionID,
             DynamicFieldRef => {},
         },
@@ -139,13 +169,12 @@ my @Tests = (
 TEST:
 for my $Test (@Tests) {
 
-    my $Definition = $ConfigItemObject->DefinitionGet( %{ $Test->{Config} } );
+    my $Definition = $ConfigItemObject->DefinitionGet(
+        $Test->{Config}->%*
+    );
 
     if ( !$Test->{Success} ) {
-        ok(
-            !$Definition,
-            "$Test->{Name} DefinitionGet() - failure expected",
-        );
+        ok( !$Definition, "$Test->{Name} DefinitionGet() - failure expected" );
 
         next TEST;
     }

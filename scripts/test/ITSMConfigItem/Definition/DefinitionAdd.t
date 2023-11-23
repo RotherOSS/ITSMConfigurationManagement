@@ -39,7 +39,7 @@ my $TestUserLogin = $Helper->TestUserCreate(
 );
 my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => $TestUserLogin );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $Helper->GetRandomID;
 
 my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     Class   => 'ITSM::ConfigItem::Class',
@@ -166,23 +166,37 @@ EOF
         Success => 0,
     },
     {
-        Name   => 'Correct ASCII',
+        Name   => 'Correct YAML',
         Config => {
             ClassID    => $ClassID,
             Definition => << 'EOF',
 ---
-- Pages:
-  - Content:
-    - ColumnStart: 1
-      RowStart: 1
-      Section: Section1
-    - ColumnStart: 2
-      RowStart: 1
-      Section: Section2
+Pages:
+  - Name: Page1
+    Interfaces: []
     Layout:
-      ColumnWidth: 1fr 1fr
-      Columns: 2
-    Name: Content
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section1
+        ColumnStart: 1
+        RowStart: 1
+  - Name: Page2
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: Section2
+        ColumnStart: 1
+        RowStart: 2
+
+Sections:
+  Section1:
+    Content:
+       - Header: "This is section 1"
+  Section2:
+    Content:
+       - Header: "This is section 2"
 EOF
             UserID => $UserID,
         },

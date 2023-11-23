@@ -41,78 +41,40 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => 
 
 my $RandomID = $Helper->GetRandomID();
 
-my @ConfigItemPerlDefinitions;
+my @ConfigItemYAMLDefinitions = <<'END_YAML';
+---
+Pages:
+  - Name: CI_1_Page1
+    Interfaces: []
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: CI_1_Section1
+        ColumnStart: 1
+        RowStart: 1
+  - Name: CI_1_Page2
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: CI_1_Section2
+        ColumnStart: 1
+        RowStart: 2
 
-# define the first test definition (basic definition without DynamicFields)
-$ConfigItemPerlDefinitions[0] = " [
-{
-        Pages  => [
-            {
-                Name => 'Content',
-                Layout => {
-                    Columns => 2,
-                    ColumnWidth => '1fr 1fr'
-                },
-                Content => [
-                    {
-                        Section => 'Section1',
-                        ColumnStart => 1,
-                        RowStart => 1
-                    },
-                    {
-                        Section => 'Section2',
-                        ColumnStart => 2,
-                        RowStart => 1
-                    }
-                ],
-            }
-        ]
-}
-]";
+Sections:
+  CI_1_Section1:
+    Content:
+       - Header: "This is section 1"
+  CI_1_Section2:
+    Content:
+       - Header: "This is section 2"
+END_YAML
 
-# define the second test definition (definition with DynamicFields)
-$ConfigItemPerlDefinitions[1] = " [
-{
-        Pages  => [
-            {
-                Name => 'Content',
-                Layout => {
-                    Columns => 1,
-                    ColumnWidth => '1fr'
-                },
-                Content => [
-                    {
-                        Section => 'Section1',
-                        ColumnStart => 1,
-                        RowStart => 1
-                    }
-                ],
-            }
-        ],
-        Sections => {
-            Section1 => {
-                Content => [
-                    {
-                        DF => 'Test1'
-                    },
-                    {
-                        DF => 'Test2'
-                    }
-                ]
-            }
-        },
-}
-]";
+# second item is a variant of the first item
+push @ConfigItemYAMLDefinitions, ( $ConfigItemYAMLDefinitions[0] =~ s/CI_1_/CI_2_/rg );
 
 my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
-
-my @ConfigItemDefinitions;
-for my $PerlDefinition (@ConfigItemPerlDefinitions) {
-    my $YAMLDefinition = $YAMLObject->Dump(
-        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-    );
-    push @ConfigItemDefinitions, $YAMLDefinition;
-}
 
 my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     Class   => 'ITSM::ConfigItem::Class',
@@ -128,19 +90,21 @@ my $Result1 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
     UserID     => $UserID,
     CreateBy   => $UserID,
-    Definition => $ConfigItemDefinitions[0]
+    Definition => $ConfigItemYAMLDefinitions[0]
 );
+ok( $Result1->{Success}, "DefinitionAdd() 1 successful" );
 my $DefinitionID1 = $Result1->{DefinitionID};
-ok( $DefinitionID1, "DefinitionAdd() 1" );
+ok( $DefinitionID1, "DefinitionAdd() 1 got definition ID " );
 
 my $Result2 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
     UserID     => $UserID,
     CreateBy   => $UserID,
-    Definition => $ConfigItemDefinitions[1]
+    Definition => $ConfigItemYAMLDefinitions[1]
 );
+ok( $Result1->{Success}, "DefinitionAdd() 2 successful" );
 my $DefinitionID2 = $Result2->{DefinitionID};
-ok( $DefinitionID2, "DefinitionAdd() 2" );
+ok( $DefinitionID1, "DefinitionAdd() 2 got definition ID " );
 
 my @Tests = (
     {
@@ -156,44 +120,14 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => [
             {
-                CreateBy   => $UserID,
-                Definition => << 'EOF',
----
-- Pages:
-  - Content:
-    - ColumnStart: 1
-      RowStart: 1
-      Section: Section1
-    - ColumnStart: 2
-      RowStart: 1
-      Section: Section2
-    Layout:
-      ColumnWidth: 1fr 1fr
-      Columns: 2
-    Name: Content
-EOF
+                CreateBy     => $UserID,
+                Definition   => $ConfigItemYAMLDefinitions[0],
                 Version      => 1,
                 DefinitionID => $DefinitionID1,
             },
             {
-                CreateBy   => $UserID,
-                Definition => << 'EOF',
----
-- Pages:
-  - Content:
-    - ColumnStart: 1
-      RowStart: 1
-      Section: Section1
-    Layout:
-      ColumnWidth: 1fr
-      Columns: 1
-    Name: Content
-  Sections:
-    Section1:
-      Content:
-      - DF: Test1
-      - DF: Test2
-EOF
+                CreateBy     => $UserID,
+                Definition   => $ConfigItemYAMLDefinitions[1],
                 Version      => 2,
                 DefinitionID => $DefinitionID2,
             },
@@ -204,17 +138,21 @@ EOF
 TEST:
 for my $Test (@Tests) {
 
-    my $DefinitionList = $ConfigItemObject->DefinitionList( %{ $Test->{Config} } );
+    # DefinitionRef is not included in the list
+    my $DefinitionList = $ConfigItemObject->DefinitionList(
+        $Test->{Config}->%*
+    );
 
     if ( !$Test->{Success} ) {
         ok(
             !$DefinitionList,
             "$Test->{Name} DefinitionList() - failure expected",
         );
+
         next TEST;
     }
 
-    for my $Definition ( @{$DefinitionList} ) {
+    for my $Definition ( $DefinitionList->@* ) {
         delete $Definition->{CreateTime};
     }
 
