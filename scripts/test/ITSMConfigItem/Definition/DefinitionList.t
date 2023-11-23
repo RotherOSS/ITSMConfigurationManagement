@@ -14,13 +14,18 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+# core modules
 
-our $Self;
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
@@ -115,36 +120,27 @@ my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     ValidID => 1,
     UserID  => $UserID,
 );
-$Self->True(
-    $ClassID,
-    "Class added to GeneralCatalog",
-);
+ok( $ClassID, "Class added to GeneralCatalog" );
 
 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-my $DefinitionID1 = $ConfigItemObject->DefinitionAdd(
+my $Result1 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
     UserID     => $UserID,
     CreateBy   => $UserID,
     Definition => $ConfigItemDefinitions[0]
 );
+my $DefinitionID1 = $Result1->{DefinitionID};
+ok( $DefinitionID1, "DefinitionAdd() 1" );
 
-$Self->True(
-    $DefinitionID1,
-    "DefinitionAdd()",
-);
-
-my $DefinitionID2 = $ConfigItemObject->DefinitionAdd(
+my $Result2 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
     UserID     => $UserID,
     CreateBy   => $UserID,
     Definition => $ConfigItemDefinitions[1]
 );
-
-$Self->True(
-    $DefinitionID2,
-    "DefinitionAdd()",
-);
+my $DefinitionID2 = $Result2->{DefinitionID};
+ok( $DefinitionID2, "DefinitionAdd() 2" );
 
 my @Tests = (
     {
@@ -211,9 +207,9 @@ for my $Test (@Tests) {
     my $DefinitionList = $ConfigItemObject->DefinitionList( %{ $Test->{Config} } );
 
     if ( !$Test->{Success} ) {
-        $Self->False(
-            $DefinitionList,
-            "$Test->{Name} DefinitionList() - With false",
+        ok(
+            !$DefinitionList,
+            "$Test->{Name} DefinitionList() - failure expected",
         );
         next TEST;
     }
@@ -222,11 +218,11 @@ for my $Test (@Tests) {
         delete $Definition->{CreateTime};
     }
 
-    $Self->IsDeeply(
+    is(
         $DefinitionList,
         $Test->{ExpectedResults},
         "$Test->{Name} DefinitionList() - Definition"
     );
 }
 
-$Self->DoneTesting;
+done_testing;

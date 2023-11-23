@@ -14,13 +14,18 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+# core modules
 
-our $Self;
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
@@ -42,10 +47,7 @@ my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     ValidID => 1,
     UserID  => $UserID,
 );
-$Self->True(
-    $ClassID,
-    "Class added to GeneralCatalog",
-);
+ok( $ClassID, "Class added to GeneralCatalog" );
 
 my $ConfigItemObject   = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my %DefinitionTemplate = (
@@ -95,14 +97,12 @@ EOF
     ],
 );
 
-my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+my $Result = $ConfigItemObject->DefinitionAdd(
     %DefinitionTemplate,
     UserID => $UserID,
 );
-$Self->True(
-    $DefinitionID,
-    "DefinitionAdd()",
-);
+my $DefinitionID = $Result->{DefinitionID};
+ok( $DefinitionID, "DefinitionAdd()" );
 
 my @Tests = (
     {
@@ -142,20 +142,21 @@ for my $Test (@Tests) {
     my $Definition = $ConfigItemObject->DefinitionGet( %{ $Test->{Config} } );
 
     if ( !$Test->{Success} ) {
-        $Self->False(
-            $Definition,
-            "$Test->{Name} DefinitionGet() - With false",
+        ok(
+            !$Definition,
+            "$Test->{Name} DefinitionGet() - failure expected",
         );
+
         next TEST;
     }
 
     delete $Definition->{CreateTime};
 
-    $Self->IsDeeply(
+    is(
         $Definition,
         $Test->{ExpectedResults},
         "$Test->{Name} DefinitionGet() - Definition"
     );
 }
 
-$Self->DoneTesting;
+done_testing;

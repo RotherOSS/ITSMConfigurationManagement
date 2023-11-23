@@ -111,7 +111,7 @@ sub Run {
         Data => ${$DefinitionYAML},
     );
 
-    return $Error->('Definition is no valid YAML hash.') if !IsHashRefWithData($DefinitionRaw);
+    return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($DefinitionRaw);
 
     my $ClassName = delete $DefinitionRaw->{ClassName};
 
@@ -128,7 +128,7 @@ sub Run {
         Data => $DefinitionRaw,
     );
 
-    return $Error->('Error recreating the definition yaml.') if !$FinalDefinition;
+    return $Error->('Error recreating the definition yaml.') unless $FinalDefinition;
 
     my %DynamicFieldLookup = reverse %{
         $DynamicFieldObject->DynamicFieldList(
@@ -229,13 +229,13 @@ sub Run {
         return $Error->( 'Could not add dynamic field ' . $Field . '.' ) if !$AllFields{$Field}{ID};
     }
 
-    my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+    my $Return = $ConfigItemObject->DefinitionAdd(
         ClassID    => $ClassID,
         Definition => $FinalDefinition,
         UserID     => 1,
     );
 
-    return $Error->('Could not store definition.') if !$DefinitionID;
+    return $Error->('Could not store definition.') unless $Return->{Success};
 
     $Self->Print("<green>Done</green>\n");
 

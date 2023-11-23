@@ -14,10 +14,17 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
@@ -163,22 +170,15 @@ EOF
             );
 
             # Add a definition to the class.
-            my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+            my $Result = $ConfigItemObject->DefinitionAdd(
                 ClassID    => $ClassID,
                 Definition => $Definition->{Definition},
                 UserID     => 1,
             );
+            ok( $Result->{Success},      'DefinitionAdd() successful' );
+            ok( $Result->{DefinitionID}, 'got DefinitionID' );
 
-            # Check definition id.
-            if ( !$DefinitionID ) {
-
-                $Self->True(
-                    0,
-                    "Can't add new config item definition.",
-                );
-            }
-
-            push @ConfigItemDefinitionIDs, $DefinitionID;
+            push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
 
             # Add data to test array.
             $Definition->{ClassID} = $ClassID;
@@ -346,4 +346,4 @@ EOF
     }
 );
 
-$Self->DoneTesting;
+done_testing;

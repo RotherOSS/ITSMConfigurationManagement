@@ -436,7 +436,7 @@ sub Run {
         );
 
         # display change screen with error if check failed
-        if ( IsHashRefWithData($Result) && $Result->{Error} ) {
+        if ( IsHashRefWithData($Result) && !$Result->{Success} ) {
 
             # show sidebar, activate the 'Overview' block
             $Self->_ShowSidebar(

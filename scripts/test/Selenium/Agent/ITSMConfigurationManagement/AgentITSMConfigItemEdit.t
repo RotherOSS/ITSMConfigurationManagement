@@ -14,10 +14,17 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
@@ -278,15 +285,14 @@ $Selenium->RunTest(
 EOF
 
         # Add test definition to test CI class.
-        my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+        my $Result = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
             Definition => $Definition,
             UserID     => 1,
         );
-        $Self->True(
-            $DefinitionID,
-            "DefinitionID $DefinitionID is created",
-        );
+        ok( $Result->{Success}, "DefinitionAdd successful" );
+        my $DefinitionID = $Result->{DefinitionID};
+        ok( $DefinitionID, "DefinitionID $DefinitionID is created" );
 
         # Navigate to AgentITSMConfigItemAdd screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemEdit;ClassID=$ClassID");
@@ -334,4 +340,4 @@ EOF
     }
 );
 
-$Self->DoneTesting;
+done_testing;

@@ -196,13 +196,14 @@ for my $Definition (@ConfigItemDefinitions) {
     push @ConfigItemClassIDs, $ClassID;
 
     # add a definition to the class
-    my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+    my $Result = $ConfigItemObject->DefinitionAdd(
         ClassID    => $ClassID,
         Definition => $Definition,
         UserID     => 1,
     );
-    is( ref $DefinitionID, '', "Added a definition, no error was returned" );
-    push @ConfigItemDefinitionIDs, $DefinitionID;
+    ok( $Result->{Success},      "Added a definition, success was reported" );
+    ok( $Result->{DefinitionID}, "Added a definition, got a definition ID" );
+    push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
 }
 
 # get definition for 'Test' class

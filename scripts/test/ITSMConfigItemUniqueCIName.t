@@ -14,10 +14,17 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 
 our $Self;
@@ -128,38 +135,24 @@ for my $PerlDefinition (@ConfigItemPerlDefinitions) {
 
 # add an empty definition to the class. the definition doesn't need any elements, as we're only
 # testing the name which isn't part of the definition, but of the config item itself
-my $FirstDefinitionID = $ConfigItemObject->DefinitionAdd(
+my $FirstResult = $ConfigItemObject->DefinitionAdd(
     ClassID    => $FirstClassID,
     Definition => $ConfigItemDefinitions[0],
     UserID     => 1,
 );
+ok( $FirstResult->{DefinitionID}, 'first config item definition added' );
 
-# check definition id
-if ( !$FirstDefinitionID ) {
+my $FirstDefinitionID = $FirstResult->{DefinitionID};
+push @ConfigItemDefinitionIDs, $FirstResult->{DefinitionID};
 
-    $Self->True(
-        0,
-        "Can't add first config item definition.",
-    );
-}
-
-push @ConfigItemDefinitionIDs, $FirstDefinitionID;
-
-my $SecondDefinitionID = $ConfigItemObject->DefinitionAdd(
+my $SecondResult = $ConfigItemObject->DefinitionAdd(
     ClassID    => $SecondClassID,
     Definition => $ConfigItemDefinitions[0],
     UserID     => 1,
 );
+ok( $SecondResult->{DefinitionID}, 'second config item definition added' );
 
-# check definition id
-if ( !$SecondDefinitionID ) {
-
-    $Self->True(
-        0,
-        "Can't add second config item definition.",
-    );
-}
-
+my $SecondDefinitionID = $SecondResult->{DefinitionID};
 push @ConfigItemDefinitionIDs, $SecondDefinitionID;
 
 # get deployment state list
@@ -384,6 +377,4 @@ $ConfigObject->Set(
     Value => $OrigScope,
 );
 
-# cleanup is done by RestoreDatabase
-
-$Self->DoneTesting;
+done_testing;

@@ -416,15 +416,32 @@ END_SQL
 
 =head2 DefinitionAdd()
 
-add a new definition
+adds a new definition.
 
-    my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+    my $Result = $ConfigItemObject->DefinitionAdd(
         ClassID    => 123,
         Definition => 'the definition code',
         UserID     => 1,
         Force      => 1,    # optional, for internal use, force add even if definition is unchanged
                             # (used if dynamic fields changed)
     );
+
+Returns in the case of success:
+
+    $Result = {
+        Success      => 1,
+        DefinitionID => 123,
+    };
+
+Returns an error message in the case of failure:
+
+    $Result = {
+        Success   => 0,
+        Error     => "Need %s!",
+        ErrorArgs => [ 'Definition' ],
+    };
+
+Only two arguments of the error message are supported.
 
 =cut
 
@@ -434,11 +451,17 @@ sub DefinitionAdd {
     # check needed stuff
     for my $Argument (qw(ClassID Definition UserID)) {
         if ( !$Param{$Argument} ) {
+            my $Message = "Need %s!";
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $Argument!",
+                Message  => sprintf( $Message, $Argument ),
             );
-            return;
+
+            return {
+                Success   => 0,
+                Error     => $Message,
+                ErrorArgs => [$Argument],
+            };
         }
     }
 
@@ -457,19 +480,26 @@ sub DefinitionAdd {
     );
 
     # check whether the definition itself or the containing dynamic fields changed
-    my $DefinitionChanged = !$LastDefinition->{DefinitionID} || $LastDefinition->{Definition} ne $Param{Definition};
+    my $DefinitionChanged =
+        ( !$LastDefinition->{DefinitionID} )
+        ||
+        ( $LastDefinition->{Definition} ne $Param{Definition} );
 
     # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
     $DefinitionChanged ||= $Param{Force};
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
+        my $Message = "Can't add new definition! The definition was not changed.";
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Can't add new definition! The definition was not changed.",
+            Message  => $Message,
         );
 
-        return;
+        return {
+            Success => 0,
+            Error   => $Message,
+        };
     }
 
     # add dynamic field info
@@ -488,7 +518,10 @@ sub DefinitionAdd {
         Bind => [ \$Param{ClassID}, \$Param{Definition}, \$DynamicFieldDefinition, \$Version, \$Param{UserID} ],
     );
 
-    return unless $Success;
+    return {
+        Success => 0,
+        Error   => 'Insert into the table configitem_definition was not successful',
+    } unless $Success;
 
     # get id of new definition
     my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
@@ -515,20 +548,40 @@ sub DefinitionAdd {
         UserID => $Param{UserID},
     );
 
-    return $DefinitionID;
+    return {
+        Success      => 1,
+        DefinitionID => $DefinitionID,
+    };
 }
 
 =head2 RoleDefinitionAdd()
 
 add a new role definition
 
-    my $DefinitionID = $ConfigItemObject->RoleDefinitionAdd(
+    my $Result = $ConfigItemObject->RoleDefinitionAdd(
         RoleID     => 123,
         Definition => 'the definition code',
         UserID     => 1,
         Force      => 1,    # optional, for internal use, force add even if definition is unchanged
                             # (used if dynamic fields changed)
     );
+
+Returns in the case of success:
+
+    $Result = {
+        Success      => 1,
+        DefinitionID => 123, # even though it is a role
+    };
+
+Returns an error message in the case of failure:
+
+    $Result = {
+        Success   => 0,
+        Error     => "Need %s!",
+        ErrorArgs => [ 'Definition' ],
+    };
+
+Only two arguments of the error message are supported.
 
 =cut
 
@@ -540,11 +593,17 @@ sub RoleDefinitionAdd {
     # check needed stuff
     for my $Argument (qw(RoleID Definition UserID)) {
         if ( !$Param{$Argument} ) {
+            my $Message = "Need %s!";
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $Argument!",
+                Message  => sprintf( $Message, $Argument ),
             );
-            return;
+
+            return {
+                Success   => 0,
+                Error     => $Message,
+                ErrorArgs => [$Argument],
+            };
         }
     }
 
@@ -557,25 +616,32 @@ sub RoleDefinitionAdd {
         return $CheckResult unless $CheckResult->{Success};
     }
 
-    # get last definition
+    # get last definition, even though this is role
     my $LastDefinition = $Self->DefinitionGet(
         ClassID => $Param{RoleID},
     );
 
     # check whether the definition itself or the containing dynamic fields changed
-    my $DefinitionChanged = !$LastDefinition->{DefinitionID} || $LastDefinition->{Definition} ne $Param{Definition};
+    my $DefinitionChanged =
+        ( !$LastDefinition->{DefinitionID} )
+        ||
+        ( $LastDefinition->{Definition} ne $Param{Definition} );
 
     # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
     $DefinitionChanged ||= $Param{Force};
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
+        my $Message = "Can't add new definition! The definition was not changed.";
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Can't add new definition! The definition was not changed.",
+            Message  => $Message,
         );
 
-        return;
+        return {
+            Success => 0,
+            Error   => $Message,
+        };
     }
 
     # increment version
@@ -589,7 +655,10 @@ sub RoleDefinitionAdd {
         Bind => [ \( $Param{RoleID}, $Param{Definition}, $Version, $Param{UserID} ) ],
     );
 
-    return unless $Success;
+    return {
+        Success => 0,
+        Error   => 'Insert into the table configitem_definition was not successful',
+    } unless $Success;
 
     # get id of new definition
     my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
@@ -600,7 +669,10 @@ sub RoleDefinitionAdd {
         Limit => 1,
     );
 
-    return $DefinitionID;
+    return {
+        Success      => 1,
+        DefinitionID => $DefinitionID,
+    };
 }
 
 =head2 DefinitionCheck()

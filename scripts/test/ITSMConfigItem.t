@@ -14,11 +14,17 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
-
 use utf8;
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 
 our $Self;
@@ -440,22 +446,15 @@ for my $Definition (@ConfigItemDefinitions) {
     push @ConfigItemClasses,  $ClassName;
 
     # add a definition to the class
-    my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+    my $Result = $ConfigItemObject->DefinitionAdd(
         ClassID    => $ClassID,
         Definition => $Definition,
         UserID     => 1,
     );
+    ok( $Result->{Success},      'added new config item definition' );
+    ok( $Result->{DefinitionID}, 'got a definition ID' );
 
-    # check definition id
-    if ( !$DefinitionID ) {
-
-        $Self->True(
-            0,
-            "Can't add new config item definition.",
-        );
-    }
-
-    push @ConfigItemDefinitionIDs, $DefinitionID;
+    push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
 }
 
 # test DefinitionList for those simple cases
@@ -3094,19 +3093,15 @@ continue {
     for my $Definition (@TestConfigItemDefinitions) {
 
         # add a definition to the class
-        my $DefinitionID = $ConfigItemObject->DefinitionAdd(
+        my $Result = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
             Definition => $Definition,
             UserID     => 1,
         );
 
         # check definition id, must be false, because all definitions have errors
-        $Self->False(
-            $DefinitionID,
-            "Can't add new config item definition.",
-        );
+        ok( !$Result->{Success}, "As expected, could not add new config item definition." );
     }
-
 }
 
 # ------------------------------------------------------------ #
@@ -3268,6 +3263,4 @@ for my $ConfigItemID (@ConfigItemIDs) {
     $DeleteTestCount++;
 }
 
-# cleanup is done by RestoreDatabase
-
-$Self->DoneTesting;
+done_testing;
