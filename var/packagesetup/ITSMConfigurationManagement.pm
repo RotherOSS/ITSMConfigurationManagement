@@ -28,6 +28,7 @@ use utf8;
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -250,6 +251,11 @@ run the code uninstall part
 
 sub CodeUninstall {
     my ( $Self, %Param ) = @_;
+
+    # delete all dynamic fields:
+    # of object type config item
+    # of field type ITSMConfigItemReference and ITSMConfigItemVersionReference
+    $Self->_DynamicFieldsDelete();
 
     # delete all links with configuration items
     $Self->_LinkDelete();
@@ -1429,6 +1435,75 @@ sub _UpdateElasticsearchWebService {
     }
     return 1;
 
+}
+
+=head2 _DynamicFieldsDelete()
+
+Deletes the dynamic fields which are related to this package, either because they are of object type ITSMConfigItem or because they are of field type ITSMConfigItemReference or ITSMConfigItemVersionReference.
+
+    my $Result = $CodeObject->_DynamicFieldsDelete();
+
+=cut
+
+sub _DynamicFieldsDelete {
+    my ( $Self, %Param ) = @_;
+
+    # get necessary objects
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+
+    # get all dynamic fields because we can't filter for field type in dynamic field list functions
+    my $DynamicFields = $DynamicFieldObject->DynamicFieldListGet(
+        Valid => 0,
+    );
+
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( $DynamicFields->@* ) {
+        next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD unless (
+            $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem'
+            || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemReference'
+            || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersionReference'
+        );
+
+        if ( $DynamicFieldConfig->{InternalField} ) {
+            $LogObject->Log(
+                'Priority' => 'error',
+                'Message'  => "Could not delete internal DynamicField $DynamicFieldConfig->{Name}!",
+            );
+            next DYNAMICFIELD;
+        }
+
+        my $ValuesDeleteSuccess = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->AllValuesDelete(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            UserID             => 1,
+        );
+
+        if ( !$ValuesDeleteSuccess ) {
+            $LogObject->Log(
+                'Priority' => 'error',
+                'Message'  => "Could not delete values for DynamicField $DynamicFieldConfig->{Name}!",
+            );
+            next DYNAMICFIELD;
+        }
+
+        my $Success = $DynamicFieldObject->DynamicFieldDelete(
+            ID     => $DynamicFieldConfig->{ID},
+            UserID => 1,
+        );
+
+        if ( !$Success ) {
+            $LogObject->Log(
+                'Priority' => 'error',
+                'Message'  => "Could not delete DynamicField $DynamicFieldConfig->{Name}!",
+            );
+            next DYNAMICFIELD;
+        }
+    }
+
+    return 1;
 }
 
 1;
