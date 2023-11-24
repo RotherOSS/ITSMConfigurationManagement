@@ -552,6 +552,7 @@ sub DefinitionAdd {
     return {
         Success      => 1,
         DefinitionID => $DefinitionID,
+        Version      => $Version,
     };
 }
 
@@ -572,6 +573,7 @@ Returns in the case of success:
     $Result = {
         Success      => 1,
         DefinitionID => 123, # even though it is a role
+        Version      => 4,
     };
 
 Returns an error message in the case of failure:
@@ -673,6 +675,7 @@ sub RoleDefinitionAdd {
     return {
         Success      => 1,
         DefinitionID => $DefinitionID,
+        Version      => $Version,
     };
 }
 
