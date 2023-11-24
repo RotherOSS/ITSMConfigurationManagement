@@ -196,6 +196,7 @@
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionAdd.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionGet.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionList.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/Role.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
         <File Permission="660" Location="scripts/test/ImportExportObjectITSMConfigItem.t" />

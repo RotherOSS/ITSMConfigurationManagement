@@ -22,7 +22,6 @@ use utf8;
 
 # CPAN modules
 use Test2::V0;
-use Data::Dx;
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
@@ -41,28 +40,32 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => 
 
 my $RandomID = $Helper->GetRandomID;
 
+my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $ConfigItemObject   = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
 # add dynamic fields for testing
-for my $Name (qw(DF1 DF2 DF3)) {
+my $FieldOrder = 1;
+my %DynamicFieldShortName2ID;
+for my $ShortName (qw(DF1 DF2 DF3)) {
 
     # add a new item
-    my $DFName = join '_', $Name, $RandomID;
-    my $ItemID = $DynamicFieldObject->DynamicFieldAdd(
+    my $DFName         = join '-', $ShortName, $RandomID;
+    my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
         InternalField => 0,
         Name          => $DFName,
-        Label         => $DFName,
-        FieldOrder    => $Order++,
-        FieldType     => $Text,
+        Label         => "$DFName ☔",
+        FieldOrder    => $FieldOrder++,
+        FieldType     => 'Text',
         ObjectType    => 'ITSMConfigItem',
         Config        => {
-            DefaultValue => "default value for $DFName",
+            DefaultValue => "default value for $DFName ☔",
         },
-        Reorder       => 1,
-        ValidID       => 1,
-        UserID        => 1,
+        Reorder => 1,
+        ValidID => 1,
+        UserID  => 1,
     );
-    ok($ItemID, "created dynamic field $DFName");
+    ok( $DynamicFieldID, "created dynamic field $DFName" );
+    $DynamicFieldShortName2ID{$ShortName} = $DynamicFieldID;
 }
 
 # add Role
@@ -82,28 +85,28 @@ Sections:
   NoDynamicField:
     Content:
        - Header: "No dynamic field"
-  OneynamicField:
+  OneDynamicField:
     Content:
        - Header: "No dynamic field"
-       - DF: DF1_$RandomID
-  TwpDynamicFields:
+       - DF: DF1-$RandomID
+  TwoDynamicFields:
     Content:
        - Header: "No dynamic field"
-       - DF: DF1_$RandomID
-       - DF: DF2_$RandomID
+       - DF: DF1-$RandomID
+       - DF: DF2-$RandomID
   ThreeDynamicFields:
     Content:
        - Header: "No dynamic field"
-       - DF: DF1_$RandomID
-       - DF: DF2_$RandomID
-       - DF: DF3_$RandomID
+       - DF: DF1-$RandomID
+       - DF: DF2-$RandomID
+       - DF: DF3-$RandomID
 END_YAML
     my $Result = $ConfigItemObject->RoleDefinitionAdd(
-        RoleID => $RoleID,
+        RoleID     => $RoleID,
         Definition => $YAMLDefinition,
-        UserID => $Self->{UserID},
+        UserID     => $UserID,
     );
-    ok( $Result->{Success}, "Role_$RandomID successfully added",
+    ok( $Result->{Success}, "Role_$RandomID successfully added" );
 }
 
 # TODO: refer to Role in Definition
@@ -130,7 +133,7 @@ Pages:
       Columns: 3
       ColumnWidth: 1fr
     Content:
-      - Section: Section1
+      - Section: EmptySection1
         ColumnStart: 1
         RowStart: 1
   - Name: Page2
@@ -138,7 +141,21 @@ Pages:
       Columns: 3
       ColumnWidth: 1fr
     Content:
-      - Section: Section2
+      - Section: EmptySection2
+        ColumnStart: 1
+        RowStart: 2
+  - Name: Page3
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: TestRole::NoDynamicField
+        ColumnStart: 1
+        RowStart: 2
+      - Section: TestRole::OneDynamicField
+        ColumnStart: 1
+        RowStart: 2
+      - Section: TestRole::ThreeDynamicFields
         ColumnStart: 1
         RowStart: 2
 
@@ -156,15 +173,23 @@ Roles:
 END_YAML
 );
 
-my $DefinitionRef = {
+my $Result = $ConfigItemObject->DefinitionAdd(
+    %DefinitionTemplate,
+    UserID => $UserID,
+);
+ok( $Result->{Success}, "DefinitionAdd() was successful" );
+my $DefinitionID = $Result->{DefinitionID};
+ok( $DefinitionID, "DefinitionAdd() returned a definition ID" );
+
+my $ExpectedDefinitionRef = {
     Pages => [
         {
             Content => [
                 {
                     ColumnStart => 1,
                     RowStart    => 1,
-                    Section     => "Section1"
-                }
+                    Section     => "EmptySection1"
+                },
             ],
             Interfaces => [],
             Layout     => {
@@ -178,8 +203,8 @@ my $DefinitionRef = {
                 {
                     ColumnStart => 1,
                     RowStart    => 2,
-                    Section     => "Section2"
-                }
+                    Section     => "EmptySection2"
+                },
             ],
             Layout => {
                 Columns     => 3,
@@ -187,20 +212,99 @@ my $DefinitionRef = {
             },
             Name => "Page2",
         },
+        {
+            Content => [
+                {
+                    ColumnStart => 1,
+                    RowStart    => 2,
+                    Section     => "TestRole::NoDynamicField"
+                },
+                {
+                    ColumnStart => 1,
+                    RowStart    => 2,
+                    Section     => "TestRole::OneDynamicField"
+                },
+                {
+                    ColumnStart => 1,
+                    RowStart    => 2,
+                    Section     => "TestRole::ThreeDynamicFields",
+                },
+            ],
+            Layout => {
+                Columns     => 3,
+                ColumnWidth => "1fr"
+            },
+            Name => "Page3",
+        },
     ],
+    Roles => {
+        TestRole => {
+            Name    => "Role_$RandomID",
+            Version => 1
+        },
+    },
     Sections => {
-        Section1 => { Content => [ { Header => "This is section 1" } ] },
-        Section2 => { Content => [ { Header => "This is section 2" } ] },
+        "EmptySection1"             => { Content => [ { Header => "This is the empty section 1" } ] },
+        "EmptySection2"             => { Content => [ { Header => "This is the empty section 2" } ] },
+        "TestRole::NoDynamicField"  => { Content => [ { Header => "No dynamic field" } ] },
+        "TestRole::OneDynamicField" => {
+            Content => [
+                { Header => "No dynamic field" },
+                { DF     => "DF1-$RandomID" },
+            ],
+        },
+        "TestRole::ThreeDynamicFields" => {
+            Content => [
+                { Header => "No dynamic field" },
+                { DF     => "DF1-$RandomID" },
+                { DF     => "DF2-$RandomID" },
+                { DF     => "DF3-$RandomID" },
+            ],
+        },
+        "TestRole::TwoDynamicFields" => {
+            Content => [
+                { Header => "No dynamic field" },
+                { DF     => "DF1-$RandomID" },
+                { DF     => "DF2-$RandomID" },
+            ],
+        },
     },
 };
-
-my $Result = $ConfigItemObject->DefinitionAdd(
-    %DefinitionTemplate,
-    UserID => $UserID,
-);
-ok( $Result->{Success}, "DefinitionAdd() was successful" );
-my $DefinitionID = $Result->{DefinitionID};
-ok( $DefinitionID, "DefinitionAdd()" );
+my $ExpectedDynamicFieldRef = {
+    "DF1-$RandomID" => {
+        CIClass => "Class_$RandomID",
+        Config  => {
+            DefaultValue => "default value for DF1-$RandomID \x{2614}",
+        },
+        FieldType  => "Text",
+        ID         => $DynamicFieldShortName2ID{DF1},
+        Label      => "DF1-$RandomID \x{2614}",
+        Name       => "DF1-$RandomID",
+        ObjectType => "ITSMConfigItem",
+    },
+    "DF2-$RandomID" => {
+        CIClass => "Class_$RandomID",
+        Config  => {
+            DefaultValue => "default value for DF2-$RandomID \x{2614}",
+        },
+        FieldType  => "Text",
+        ID         => $DynamicFieldShortName2ID{DF2},
+        Label      => "DF2-$RandomID \x{2614}",
+        Name       => "DF2-$RandomID",
+        ObjectType => "ITSMConfigItem",
+    },
+    "DF3-$RandomID" => {
+        CIClass => "Class_$RandomID",
+        Config  => {
+            DefaultValue => "default value for DF3-$RandomID \x{2614}",
+        },
+        FieldType  => "Text",
+        ID         => $DynamicFieldShortName2ID{DF3},
+        Label      => "DF3-$RandomID \x{2614}",
+        Name       => "DF3-$RandomID",
+        ObjectType => "ITSMConfigItem",
+    },
+};
 
 my @Tests = (
     {
@@ -211,9 +315,9 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
-            DefinitionRef   => $DefinitionRef,
             DefinitionID    => $DefinitionID,
-            DynamicFieldRef => {},
+            DefinitionRef   => $ExpectedDefinitionRef,
+            DynamicFieldRef => $ExpectedDynamicFieldRef,
         },
     },
     {
@@ -224,9 +328,9 @@ my @Tests = (
         Success         => 1,
         ExpectedResults => {
             %DefinitionTemplate,
-            DefinitionRef   => $DefinitionRef,
             DefinitionID    => $DefinitionID,
-            DynamicFieldRef => {},
+            DefinitionRef   => $ExpectedDefinitionRef,
+            DynamicFieldRef => $ExpectedDynamicFieldRef,
         },
     },
 );
@@ -246,7 +350,6 @@ for my $Test (@Tests) {
 
     delete $Definition->{CreateTime};
 
-    Dx $Definition;
     is(
         $Definition,
         $Test->{ExpectedResults},
