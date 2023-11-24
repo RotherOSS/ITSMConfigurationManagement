@@ -1799,7 +1799,7 @@
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">ITSMConfigItem Reference</Item>
+                <Item Key="DisplayName" Translatable="1">ITSMConfigItem</Item>
                 <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItemReference</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
             </Hash>
@@ -1813,7 +1813,7 @@
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">ITSMConfigItemVersion Reference</Item>
+                <Item Key="DisplayName" Translatable="1">ITSMConfigItem Version</Item>
                 <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItemVersionReference</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
             </Hash>
