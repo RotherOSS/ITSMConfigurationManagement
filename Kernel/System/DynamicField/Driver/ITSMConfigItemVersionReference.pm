@@ -54,7 +54,6 @@ dynamic field backend object C<Kernel::System::DynamicField::Backend>.
 
 =cut
 
-# TODO most likely not necessary since parent class has new method, test this
 sub new {
     my ($Type) = @_;
 
@@ -80,7 +79,7 @@ sub new {
         'IsHiddenInTicketInformation'  => 0,
     };
 
-    $Self->{ReferencedObjectType} = 'ITSMConfigItem';
+    $Self->{ReferencedObjectType} = 'ITSMConfigItemVersion';
 
     return $Self;
 }
