@@ -1446,12 +1446,23 @@ sub _DefinitionPrepare {
 sub _DefinitionDynamicFieldGet {
     my ( $Self, %Param ) = @_;
 
-    $Param{DefinitionPerl} //= $Kernel::OM->Get('Kernel::System::YAML')->Load(
-        Data => $Param{Definition},
-    );
+    my $IsInitialCall = defined $Param{Definition};    # the YAML definition
 
-    my %ContentHash  = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'HASH'  ? $Param{DefinitionPerl}->%* : ();
-    my @ContentArray = ref $Param{DefinitionPerl} && ref $Param{DefinitionPerl} eq 'ARRAY' ? $Param{DefinitionPerl}->@* : ();
+    # In the initial call the Definition is passed as YAML,
+    # in the recursive calls, DefinitionPerl is passed
+    if ($IsInitialCall) {
+        $Param{DefinitionPerl} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $Param{Definition},
+        );
+
+        # merge the roles into the DefinitionRef, the passed in reference is modified in place
+        $Self->_ProcessRoles(
+            DefinitionRef => $Param{DefinitionPerl},
+        );
+    }
+
+    my %ContentHash  = ref $Param{DefinitionPerl} eq 'HASH'  ? $Param{DefinitionPerl}->%* : ();
+    my @ContentArray = ref $Param{DefinitionPerl} eq 'ARRAY' ? $Param{DefinitionPerl}->@* : ();
 
     if ( !%ContentHash && !@ContentArray ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1489,7 +1500,12 @@ sub _DefinitionDynamicFieldGet {
         }
     }
 
-    if ( $Param{Definition} ) {
+    # the recursive calls only collect the dynamice fields
+    return %DynamicFields unless $IsInitialCall;
+
+    # some more work to do in the initial call
+    my %ReturnDynamicFields;
+    {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Store config item class to check for version triggers in dynamic field object handler
@@ -1497,8 +1513,6 @@ sub _DefinitionDynamicFieldGet {
             Class => 'ITSM::ConfigItem::Class',
         );
         my $Class = $ClassList->{ $Param{ClassID} };
-
-        my %ReturnDynamicFields;
 
         DYNAMICFIELD:
         for my $Name ( keys %DynamicFields ) {
@@ -1546,13 +1560,12 @@ sub _DefinitionDynamicFieldGet {
                 }
             }
         }
-
-        return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
-            Data => \%ReturnDynamicFields,
-        );
     }
 
-    return %DynamicFields;
+    # the initial call returns YAML
+    return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
+        Data => \%ReturnDynamicFields,
+    );
 }
 
 =end Internal:
