@@ -103,42 +103,42 @@ sub GenerateHierarchyGraph {
     # The needed data has been collected.
     # The following just passes the two trees to the web page.
 
+    # for the sources start with the deepest level
     my $LinkDataSource = '';
-    for my $TopElement ( sort { $b <=> $a } keys %TreeSources ) {
-        my %Elements = %{ $TreeSources{$TopElement} };
-        my $Block    = $TopElement eq '1' ? 'ChildSourceElementsLevelStart' : 'TopElementsStart';
+    for my $Level ( sort { $b <=> $a } keys %TreeSources ) {
+        my %Elements = $TreeSources{$Level}->%*;
 
         $LayoutObject->Block(
-            Name => $Block,
-            Data => {}
+            Name  => 'ChildSourceElementsLevel',
+            Level => $Level
         );
 
         for my $CITop ( sort { $a <=> $b } keys %Elements ) {
             my %Element = %{ $Elements{$CITop} };
-            my $Block   = $TopElement eq '1' ? 'ChildElements' : 'TopElements';
 
             $LayoutObject->Block(
-                Name => $Block,
+                Name => 'ChildSourceElements',
                 Data => {
                     Name         => $Element{Name},
                     Contents     => $Element{Contents},
-                    ConfigItemID => "$Element{ID}",
-                    ID           => "$Element{ID}-$TopElement",
+                    ConfigItemID => $Element{ID},
+                    ID           => "$Element{ID}-$Level",
                     SessionID    => $Param{SessionID}
                 }
             );
 
-            my $NextLevel = $TopElement - 1;
+            my $NextLevel = $Level - 1;
 
             if ($NextLevel) {
-                $LinkDataSource .= "$Element{LinkedTo}-$NextLevel,$Element{ID}-$TopElement,$Element{Link};";
+                $LinkDataSource .= "$Element{LinkedTo}-$NextLevel,$Element{ID}-$Level,$Element{Link};";
             }
             else {
-                $LinkDataSource .= "$Element{LinkedTo},$Element{ID}-$TopElement,$Element{Link};";
+                $LinkDataSource .= "$Element{LinkedTo},$Element{ID}-$Level,$Element{Link};";
             }
         }
     }
 
+    # Level 0
     # Give information about the root node to the web page.
     # Dynamic field info is not needed.
     {
@@ -152,7 +152,7 @@ sub GenerateHierarchyGraph {
         );
 
         $LayoutObject->Block(
-            Name => 'TopTargetElements',
+            Name => 'OriginElement',
             Data => {
                 Name         => $ConfigItem->{Name},
                 Contents     => $Contents,
@@ -162,14 +162,15 @@ sub GenerateHierarchyGraph {
         );
     }
 
+    # for the targest start with the lowest level
     my $LinkDataTarget = '';
-    for my $TopElement ( sort { $a <=> $b } keys %TreeTargets ) {
-        my %Elements = %{ $TreeTargets{$TopElement} };
+    for my $Level ( sort { $a <=> $b } keys %TreeTargets ) {
+        my %Elements = %{ $TreeTargets{$Level} };
 
         $LayoutObject->Block(
             Name => 'ChildTargetElementsLevel',
             Data => {
-                Level => $TopElement
+                Level => $Level
             }
         );
 
@@ -182,18 +183,18 @@ sub GenerateHierarchyGraph {
                     Name         => $Element{Name},
                     Contents     => $Element{Contents},
                     ConfigItemID => "$Element{ID}",
-                    ID           => "$Element{ID}-$TopElement",
+                    ID           => "$Element{ID}-$Level",
                     SessionID    => $Param{SessionID}
                 }
             );
 
-            my $PreviousLevel = $TopElement - 1;
+            my $PreviousLevel = $Level - 1;
 
-            if ( $TopElement ne '1' ) {
-                $LinkDataTarget .= "$Element{ID}-$TopElement,$Element{LinkedTo}-$PreviousLevel,$Element{Link};";
+            if ( $Level ne '1' ) {
+                $LinkDataTarget .= "$Element{ID}-$Level,$Element{LinkedTo}-$PreviousLevel,$Element{Link};";
             }
             else {
-                $LinkDataTarget .= "$Element{ID}-$TopElement,$Element{LinkedTo},$Element{Link};";
+                $LinkDataTarget .= "$Element{ID}-$Level,$Element{LinkedTo},$Element{Link};";
             }
         }
     }

@@ -15,27 +15,11 @@
 # --
 
 <div id="SectionContainer">
-[% RenderBlockStart("TopElementsStart") %]
-    <div>
-[% RenderBlockStart("TopElements") %]
-            <div class="Box" id="[% Data.ID | html %]">
-                <div class="ConfigItemInfo">
-                    <div class="ConfigItemTitle">
-                        <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
-                    </div>
-                    <div class="AdditionalInfo">
-                        [% Data.Contents %]
-                    </div>
-                </div>
-            </div>
-[% RenderBlockEnd("TopElements") %]
-    </div>
-[% RenderBlockEnd("TopElementsStart") %]
 
-    <div>
-[% RenderBlockStart("ChildSourceElementsLevelStart") %]
-            <div class="ChildContainer">
-[% RenderBlockStart("ChildElements") %]
+    <div class="ChildContainer">
+[% RenderBlockStart("ChildSourceElementsLevel") %]
+            <div class="ChildContainer" id="SourceLevel[%Data.Level | html%]">
+[% RenderBlockStart("ChildSourceElements") %]
                     <div class="Box" id="[% Data.ID | html %]">
                         <div class="ConfigItemInfo">
                             <div class="ConfigItemTitle">
@@ -46,13 +30,13 @@
                             </div>
                         </div>
                     </div>
-[% RenderBlockEnd("ChildElements") %]
+[% RenderBlockEnd("ChildSourceElements") %]
             </div>
-[% RenderBlockEnd("ChildSourceElementsLevelStart") %]
+[% RenderBlockEnd("ChildSourceElementsLevel") %]
     </div>
 
-    <div class="ChildContainer">
-[% RenderBlockStart("TopTargetElements") %]
+    <div class="ChildContainer" id="Origin">
+[% RenderBlockStart("OriginElement") %]
             <div class="Box" id="[% Data.ID | html %]">
                 <div class="ConfigItemInfo">
                     <div class="ConfigItemTitle">
@@ -63,7 +47,7 @@
                     </div>
                 </div>
             </div>
-[% RenderBlockEnd("TopTargetElements") %]
+[% RenderBlockEnd("OriginElement") %]
     </div>
 
     <div class="ChildContainer">
