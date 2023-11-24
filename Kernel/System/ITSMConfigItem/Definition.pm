@@ -167,17 +167,6 @@ sub RoleDefinitionList {
 
 return a config item definition as hash reference
 
-Return
-    $Definition->{DefinitionID}
-    $Definition->{ClassID}
-    $Definition->{Class}
-    $Definition->{Definition}
-    $Definition->{DefinitionRef}
-    $Definition->{DynamicFieldRef}
-    $Definition->{Version}
-    $Definition->{CreateTime}
-    $Definition->{CreateBy}
-
     my $DefinitionRef = $ConfigItemObject->DefinitionGet(
         DefinitionID => 123,
     );
@@ -187,6 +176,18 @@ or
     my $DefinitionRef = $ConfigItemObject->DefinitionGet(
         ClassID => 123,
     );
+
+Returns:
+
+    $Definition->{DefinitionID}
+    $Definition->{ClassID}
+    $Definition->{Class}
+    $Definition->{Definition}
+    $Definition->{DefinitionRef}
+    $Definition->{DynamicFieldRef}
+    $Definition->{Version}
+    $Definition->{CreateTime}
+    $Definition->{CreateBy}
 
 =cut
 
@@ -238,6 +239,8 @@ sub DefinitionGet {
     $Definition{CreateTime} = $Row[5];
     $Definition{CreateBy}   = $Row[6];
 
+    return {} unless $Definition{DefinitionID};
+
     # Check if definition code is not a YAML string.
     if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -256,8 +259,6 @@ sub DefinitionGet {
     $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
         Data => $DynamicFields,
     );
-
-    return {} unless $Definition{DefinitionID};
 
     # merge the roles into the DefinitionRef, the passed in reference is modified in place
     $Self->_ProcessRoles(
@@ -362,7 +363,7 @@ sub RoleDefinitionGet {
     }
 
     my $SQL = sprintf <<'END_SQL', join( ' AND ', @Where );
-SELECT id, class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by
+SELECT id, class_id, configitem_definition, version, create_time, create_by
   FROM configitem_definition
   WHERE %s
   ORDER BY version DESC
@@ -378,9 +379,11 @@ END_SQL
     $Definition{DefinitionID} = $Row[0];
     $Definition{RoleID}       = $Row[1];
     $Definition{Definition}   = $Row[2] || "--- []";
-    $Definition{Version}      = $Row[4];
-    $Definition{CreateTime}   = $Row[5];
-    $Definition{CreateBy}     = $Row[6];
+    $Definition{Version}      = $Row[3];
+    $Definition{CreateTime}   = $Row[4];
+    $Definition{CreateBy}     = $Row[5];
+
+    return {} unless $Definition{DefinitionID};
 
     # Check if definition code is not a YAML string.
     if ( substr( $Definition{Definition}, 0, 3 ) ne '---' ) {
@@ -397,8 +400,6 @@ END_SQL
     $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
         Data => $Definition{Definition},
     );
-
-    return {} unless $Definition{DefinitionID};
 
     # get class list
     my $RoleList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
@@ -502,7 +503,7 @@ sub DefinitionAdd {
         };
     }
 
-    # add dynamic field info
+    # add dynamic field info, roles are already considered in _DefinitionDynamicFieldGet
     my $DynamicFieldDefinition = $Self->_DefinitionDynamicFieldGet(
         %Param,
     ) || '--- []';
@@ -1243,6 +1244,8 @@ For convenience the YAML for a config item class may contain a subtree called Ro
 load other YAML documents which contain a Section hash. These section a merged into the toplevel Section hash.
 The keys of the merged in sections are the Role key joined with the loaded section name. The join marker is C<::>.
 
+The passed in hash reference is modified in place.
+
 =cut
 
 sub _ProcessRoles {
@@ -1456,6 +1459,7 @@ sub _DefinitionDynamicFieldGet {
         return;
     }
 
+    # recurively collect the dynamic fields
     my %DynamicFields;
 
     for my $Key ( keys %ContentHash ) {
@@ -1497,6 +1501,7 @@ sub _DefinitionDynamicFieldGet {
         for my $Name ( keys %DynamicFields ) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet( Name => $Name );
 
+            # only return valid dynamic fields
             next DYNAMICFIELD unless $DynamicField;
             next DYNAMICFIELD unless $DynamicField->{ValidID} eq '1';
 
@@ -1526,7 +1531,7 @@ sub _DefinitionDynamicFieldGet {
                 ID         => $DynamicField->{ID},
                 Name       => $DynamicField->{Name},
                 Label      => $DynamicField->{Label},
-                Config     => $DynamicField->{Config},
+                Config     => $DynamicField->{Config},       # may contain included DF
                 FieldType  => $DynamicField->{FieldType},
                 ObjectType => $DynamicField->{ObjectType},
                 CIClass    => $Class,

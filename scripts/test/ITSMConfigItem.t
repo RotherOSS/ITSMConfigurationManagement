@@ -153,11 +153,12 @@ my %DynamicFieldDefinitions = (
 for my $Name (qw(Test1 Test2 Test3 Test4 Test5)) {
 
     # add a new item
+    my $DFName = $Name . $TestIDSuffix;
     my $ItemID = $DynamicFieldObject->DynamicFieldAdd(
         InternalField => 0,
-        Name          => $Name . $TestIDSuffix,
-        Label         => $Name . $TestIDSuffix,
-        FieldOrder    => $Order,
+        Name          => $DFName,
+        Label         => $DFName,
+        FieldOrder    => $Order++,
         FieldType     => $DynamicFieldDefinitions{$Name}->{Type},
         ObjectType    => 'ITSMConfigItem',
         Config        => $DynamicFieldDefinitions{$Name},
@@ -165,17 +166,7 @@ for my $Name (qw(Test1 Test2 Test3 Test4 Test5)) {
         ValidID       => 1,
         UserID        => 1,
     );
-
-    $Order++;
-
-    # check item id
-    if ( !$ItemID ) {
-
-        $Self->True(
-            0,
-            "Can't add new dynamic field.",
-        );
-    }
+    ok( $ItemID, "created dynamic field $DFName" );
 }
 
 my @ConfigItemPerlDefinitions;
