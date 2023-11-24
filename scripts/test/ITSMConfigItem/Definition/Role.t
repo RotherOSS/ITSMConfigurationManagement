@@ -46,7 +46,7 @@ my $ConfigItemObject   = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 # add dynamic fields for testing
 my $FieldOrder = 1;
 my %DynamicFieldShortName2ID;
-for my $ShortName (qw(DF1 DF2 DF3)) {
+for my $ShortName (qw(DF1 DF2 DF3 DF4)) {
 
     # add a new item
     my $DFName         = join '-', $ShortName, $RandomID;
@@ -100,6 +100,10 @@ Sections:
        - DF: DF1-$RandomID
        - DF: DF2-$RandomID
        - DF: DF3-$RandomID
+  OnlyDF4:
+    Content:
+       - Header: "only the dynamic field DF4, not referenced in any page"
+       - DF: DF4-$RandomID
 END_YAML
     my $Result = $ConfigItemObject->RoleDefinitionAdd(
         RoleID     => $RoleID,
@@ -253,6 +257,12 @@ my $ExpectedDefinitionRef = {
                 { DF     => "DF1-$RandomID" },
             ],
         },
+        "TestRole::OnlyDF4" => {
+            Content => [
+                { Header => "only the dynamic field DF4, not referenced in any page" },
+                { DF     => "DF4-$RandomID" },
+            ],
+        },
         "TestRole::ThreeDynamicFields" => {
             Content => [
                 { Header => "No dynamic field" },
@@ -302,6 +312,17 @@ my $ExpectedDynamicFieldRef = {
         ID         => $DynamicFieldShortName2ID{DF3},
         Label      => "DF3-$RandomID \x{2614}",
         Name       => "DF3-$RandomID",
+        ObjectType => "ITSMConfigItem",
+    },
+    "DF4-$RandomID" => {
+        CIClass => "Class_$RandomID",
+        Config  => {
+            DefaultValue => "default value for DF4-$RandomID \x{2614}",
+        },
+        FieldType  => "Text",
+        ID         => $DynamicFieldShortName2ID{DF4},
+        Label      => "DF4-$RandomID \x{2614}",
+        Name       => "DF4-$RandomID",
         ObjectType => "ITSMConfigItem",
     },
 };
