@@ -120,7 +120,7 @@ Core.Agent.TreeView = (function (TargetNS) {
     * @description
     *      Update TreeView with desired depth level for the selected ConfigItem.
     *      The tree nodes are put into the HTML element 'Canvas'.
-    *      Also included in the Canvas are the hidden input fields LinkData and LinkDataTarget
+    *      Also included in the Canvas are the hidden input fields LinkDataSource and LinkDataTarget
     *      which list the relationship between the nodes.
     */
 
@@ -158,7 +158,7 @@ Core.Agent.TreeView = (function (TargetNS) {
                     container: 'Canvas'
                 });
 
-                drawConnections( Instance, $("#LinkData").val(), 'Source' );
+                drawConnections( Instance, $("#LinkDataSource").val(), 'Source' );
                 drawConnections( Instance, $("#LinkDataTarget").val(), 'Target' );
 
                 $("#AJAXLoaderDepth").css("display", "none");
@@ -190,7 +190,7 @@ Core.Agent.TreeView = (function (TargetNS) {
      * @author Rother OSS GmbH
      * @function
      * @param {instance}  JsPlumb Instance
-     * @param {link_data} link List
+     * @param {link_data} link list, separated by semicolon
      * @param {option} Specify Target/Source
      * @description
      *      Write links (arrows) between elements in the graphic.

@@ -87,8 +87,8 @@
     </div>
 
 </div>
-<input type="hidden" name="MaxDepth" id="MaxDepth" value="[% Data.MaxDepth | html %]">
-<input type="hidden" name="LinkData" id="LinkData" value="[% Data.LinkData | html %]">
+<input type="hidden" name="MaxDepth"       id="MaxDepth"       value="[% Data.MaxDepth | html %]">
+<input type="hidden" name="LinkDataSource" id="LinkDataSource" value="[% Data.LinkDataSource | html %]">
 <input type="hidden" name="LinkDataTarget" id="LinkDataTarget" value="[% Data.LinkDataTarget | html %]">
 
  <div class="SpacerTree"></div>

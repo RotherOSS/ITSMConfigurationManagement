@@ -55,48 +55,31 @@ creates HTML containing the information needed for drawing the graph.
 sub GenerateHierarchyGraph {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigItemID = $Param{ConfigItemID};
+
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     $Self->{CITreeMaxDepth} = 1;
 
-    # dynamic field are not needed
-    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $Param{ConfigItemID},
-        Cache        => 1,
-    );
-
-    my %SourceCI = (
-        ID   => $ConfigItem->{ConfigItemID},
-        Name => $ConfigItem->{Name},
-        Link => '',
-    );
-
-    # Fill attributes for Source CI
-    $SourceCI{Contents} = $Self->_FillColumnAttributes(
-        Attributes => [ $Self->CITreeDefaultAttributes ],
-        ConfigItem => $ConfigItem,
-    );
-
     # get linked objects
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
-        ConfigItemID => $ConfigItem->{ConfigItemID},
+        ConfigItemID => $ConfigItemID,
         Direction    => 'Both',
         UserID       => 1,
     );
 
-    # build first level
-    my %Tree = $Self->GetLinkOutputData(
+    # build first level, Target and Source
+    my %LinkOutputDataTargets = $Self->GetLinkOutputData(
         LinkedConfigItems => $LinkedConfigItems,
         Direction         => 'Target',
         Depth             => 1,
-        Parent            => $ConfigItem->{ConfigItemID}
+        Parent            => $ConfigItemID
     );
-
     my %LinkOutputDataSources = $Self->GetLinkOutputData(
         LinkedConfigItems => $LinkedConfigItems,
         Direction         => 'Source',
         Depth             => 1,
-        Parent            => $ConfigItem->{ConfigItemID}
+        Parent            => $ConfigItemID
     );
 
     # Build Levels Up (Sources)
@@ -104,22 +87,23 @@ sub GenerateHierarchyGraph {
         Tree      => \%LinkOutputDataSources,
         Init      => 1,
         Depth     => $Param{Depth},
-        Key       => $ConfigItem->{ConfigItemID},
+        Key       => $ConfigItemID,
         Direction => 'Source'
     );
 
     # Build Levels Down (Targets)
-    %Tree = $Self->GetCISubTreeData(
-        Tree      => \%Tree,
+    my %TreeTargets = $Self->GetCISubTreeData(
+        Tree      => \%LinkOutputDataTargets,
         Init      => 2,
         Depth     => $Param{Depth},
-        Key       => $ConfigItem->{ConfigItemID},
+        Key       => $ConfigItemID,
         Direction => 'Target'
     );
 
-    my $LinkData       = '';
-    my $LinkDataTarget = '';
+    # The needed data has been collected.
+    # The following just passes the two trees to the web page.
 
+    my $LinkDataSource = '';
     for my $TopElement ( sort { $b <=> $a } keys %TreeSources ) {
         my %Elements = %{ $TreeSources{$TopElement} };
         my $Block    = $TopElement eq '1' ? 'ChildSourceElementsLevelStart' : 'TopElementsStart';
@@ -147,26 +131,40 @@ sub GenerateHierarchyGraph {
             my $NextLevel = $TopElement - 1;
 
             if ($NextLevel) {
-                $LinkData .= "$Element{LinkedTo}-$NextLevel,$Element{ID}-$TopElement,$Element{Link};";
+                $LinkDataSource .= "$Element{LinkedTo}-$NextLevel,$Element{ID}-$TopElement,$Element{Link};";
             }
             else {
-                $LinkData .= "$Element{LinkedTo},$Element{ID}-$TopElement,$Element{Link};";
+                $LinkDataSource .= "$Element{LinkedTo},$Element{ID}-$TopElement,$Element{Link};";
             }
         }
     }
 
-    $LayoutObject->Block(
-        Name => 'TopTargetElements',
-        Data => {
-            Name         => $SourceCI{Name},
-            Contents     => $SourceCI{Contents},
-            ConfigItemID => $SourceCI{ID},
-            ID           => $SourceCI{ID}
-        }
-    );
+    # Give information about the root node to the web page.
+    # Dynamic field info is not needed.
+    {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+            Cache        => 1,
+        );
+        my $Contents = $Self->_FillColumnAttributes(
+            Attributes => [ $Self->CITreeDefaultAttributes ],
+            ConfigItem => $ConfigItem,
+        );
 
-    for my $TopElement ( sort { $a <=> $b } keys %Tree ) {
-        my %Elements = %{ $Tree{$TopElement} };
+        $LayoutObject->Block(
+            Name => 'TopTargetElements',
+            Data => {
+                Name         => $ConfigItem->{Name},
+                Contents     => $Contents,
+                ConfigItemID => $ConfigItemID,
+                ID           => $ConfigItemID,
+            }
+        );
+    }
+
+    my $LinkDataTarget = '';
+    for my $TopElement ( sort { $a <=> $b } keys %TreeTargets ) {
+        my %Elements = %{ $TreeTargets{$TopElement} };
 
         $LayoutObject->Block(
             Name => 'ChildTargetElementsLevel',
@@ -204,7 +202,7 @@ sub GenerateHierarchyGraph {
         TemplateFile => 'ConfigItemTreeView/ConfigItemTreeViewGraph',
         Data         => {
             MaxDepth       => $Self->{CITreeMaxDepth},
-            LinkData       => $LinkData,
+            LinkDataSource => $LinkDataSource,
             LinkDataTarget => $LinkDataTarget,
         }
     );
