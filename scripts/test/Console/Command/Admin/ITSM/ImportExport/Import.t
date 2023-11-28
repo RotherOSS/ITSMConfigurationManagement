@@ -41,7 +41,7 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # test command without --template-number option
-my $ExitCode = $CommandObject->Execute();
+my $ExitCode = $CommandObject->Execute;
 
 is(
     $ExitCode,
@@ -152,13 +152,18 @@ is(
     "Option - --template-number option and Source argument",
 );
 
-# get config item IDs
-my $ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearchExtended(
-    Name => 'TestConfigItem*'
+# get number of config item IDs
+my $NumConfigItemsImported = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+    Name   => 'TestConfigItem*',
+    Result => 'COUNT',
 );
-my $NumConfigItemImported = scalar @{$ConfigItemIDs};
 
 # check if the config items are imported
-ok( $NumConfigItemImported, "There are $NumConfigItemImported imported config items" );
+# 10 items should be exported, as that is the number of items in the sample file
+is(
+    $NumConfigItemsImported,
+    10,
+    "There are ten imported config items"
+);
 
 done_testing;
