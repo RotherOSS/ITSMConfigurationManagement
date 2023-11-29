@@ -466,7 +466,7 @@ add a new config item. This implies that an initial version is created as well.
 
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         ClassID        => 123,
-        Name           => 'Name',
+        Name           => 'Name',   # optional when a name module is configured for the class
         DeplStateID    => 3,
         InciStateID    => 2,
         UserID         => 1,
