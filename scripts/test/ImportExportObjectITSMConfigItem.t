@@ -25,24 +25,16 @@ use utf8;
 use Test2::V0;
 
 # OTOBO modules
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
-our $Self;
-
-# run this test only if the ImportExport package is installed
+# Sanity check whether ImportExport is available.
+# This should succeed since ImportExport has been integrated into OTOBO core
 {
     # get ImportExport module directory
     my $ImportExportModule = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/Kernel/System/ImportExport.pm';
 
     # Return early if ImportExport package is not installed.
-    if ( !-e $ImportExportModule ) {
-        $Self->False(
-            0,
-            'ImportExport package not installed'
-        );
-
-        return 1;
-    }
+    ok( -e $ImportExportModule, 'ImportExport.pm existis' );
 }
 
 # get needed objects
@@ -94,7 +86,7 @@ for ( 1 .. 30 ) {
 my $ObjectList1 = $ImportExportObject->ObjectList();
 
 # check object list
-$Self->True(
+ok(
     $ObjectList1 && ref $ObjectList1 eq 'HASH' && $ObjectList1->{ITSMConfigItem},
     "ObjectList() - ITSMConfigItem exists",
 );
@@ -112,7 +104,7 @@ $Self->True(
     );
 
     # check object attribute reference
-    $Self->True(
+    ok(
         $ObjectAttributesGet1 && ref $ObjectAttributesGet1 eq 'ARRAY',
         "ObjectAttributesGet() - check array reference",
     );
@@ -158,7 +150,7 @@ $Self->True(
         }
     ];
 
-    $Self->IsDeeply(
+    is(
         $ObjectAttributesGet1,
         $ObjectAttributesGet1Reference,
         "ObjectAttributesGet() - attributes of the row are identical",
@@ -176,8 +168,8 @@ my $ObjectAttributesGet2 = $ImportExportObject->ObjectAttributesGet(
 );
 
 # check false return
-$Self->False(
-    $ObjectAttributesGet2,
+ok(
+    !$ObjectAttributesGet2,
     "ObjectAttributesGet() - check false return",
 );
 
@@ -192,7 +184,7 @@ my $MappingObjectAttributesGet1 = $ImportExportObject->MappingObjectAttributesGe
 );
 
 # check mapping object attribute reference
-$Self->True(
+ok(
     $MappingObjectAttributesGet1 && ref $MappingObjectAttributesGet1 eq 'ARRAY',
     "MappingObjectAttributesGet() - check array reference",
 );
@@ -208,8 +200,8 @@ my $MappingObjectAttributesGet2 = $ImportExportObject->MappingObjectAttributesGe
 );
 
 # check false return
-$Self->False(
-    $MappingObjectAttributesGet2,
+ok(
+    !$MappingObjectAttributesGet2,
     "MappingObjectAttributesGet() - check false return",
 );
 
@@ -229,15 +221,7 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
         ValidID => 1,
         UserID  => 1,
     );
-
-    # check item id
-    if ( !$ItemID ) {
-
-        $Self->True(
-            0,
-            "Can't add new general catalog item.",
-        );
-    }
+    ok( $ItemID, "$Name added to the general catalog" );
 }
 
 # define the first test definition (all provided data types)
@@ -448,10 +432,7 @@ for my $Definition (@ConfigItemDefinitions) {
     # check class id
     if ( !$ClassID ) {
 
-        $Self->True(
-            0,
-            "Can't add new config item class.",
-        );
+        fail("add new config item class.");
     }
 
     push @ConfigItemClassIDs, $ClassID;
@@ -1037,15 +1018,7 @@ for my $ConfigItem (@ConfigItems) {
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         %{ $ConfigItem->{ConfigItem} },
     );
-
-    # check config item id
-    if ( !$ConfigItemID ) {
-
-        $Self->True(
-            0,
-            "Can't add new config item.",
-        );
-    }
+    ok( $ConfigItemID, 'config item added' );
 
     push @ConfigItemIDs, $ConfigItemID;
 
@@ -1057,15 +1030,7 @@ for my $ConfigItem (@ConfigItems) {
             %{$Version},
             ConfigItemID => $ConfigItemID,
         );
-
-        # check version id
-        if ( !$VersionID ) {
-
-            $Self->True(
-                0,
-                "Can't add new version.",
-            );
-        }
+        ok( $VersionID, 'config item version added' );
     }
 }
 
@@ -2087,10 +2052,7 @@ for my $Test (@ExportDataTests) {
     # check SourceExportData attribute
     if ( !$Test->{SourceExportData} || ref $Test->{SourceExportData} ne 'HASH' ) {
 
-        $Self->True(
-            0,
-            "ExportTest $ExportTestCount: No SourceExportData found for this test."
-        );
+        fail("ExportTest $ExportTestCount: SourceExportData found for this test.");
 
         next TEST;
     }
@@ -2167,8 +2129,8 @@ for my $Test (@ExportDataTests) {
 
     if ( !$Test->{ReferenceExportData} ) {
 
-        $Self->False(
-            $ExportData,
+        ok(
+            !$ExportData,
             "ExportTest $ExportTestCount: ExportDataGet() - return false",
         );
 
@@ -2178,16 +2140,13 @@ for my $Test (@ExportDataTests) {
     if ( ref $ExportData ne 'ARRAY' ) {
 
         # check array reference
-        $Self->True(
-            0,
-            "ExportTest $ExportTestCount: ExportDataGet() - return value is an array reference",
-        );
+        fail("ExportTest $ExportTestCount: ExportDataGet() - return value is an array reference");
 
         next TEST;
     }
 
     # check number of rows
-    $Self->Is(
+    is(
         scalar @{$ExportData},
         scalar @{ $Test->{ReferenceExportData} },
         "ExportTest $ExportTestCount: ExportDataGet() - correct number of rows",
@@ -2204,16 +2163,13 @@ for my $Test (@ExportDataTests) {
         if ( ref $ExportRow ne 'ARRAY' || ref $ReferenceRow ne 'ARRAY' ) {
 
             # check array reference
-            $Self->True(
-                0,
-                "ExportTest $ExportTestCount: ExportDataGet() - export row and reference row matched",
-            );
+            fail("ExportTest $ExportTestCount: ExportDataGet() - export row and reference row matched");
 
             next TEST;
         }
 
         # check number of columns
-        $Self->Is(
+        is(
             scalar @{$ExportRow},
             scalar @{$ReferenceRow},
             "ExportTest $ExportTestCount: ExportDataGet() - correct number of columns",
@@ -2231,7 +2187,7 @@ for my $Test (@ExportDataTests) {
             }
 
             # check cell data
-            $Self->Is(
+            is(
                 $Cell,
                 $ReferenceRow->[$CounterColumn],
                 "ExportTest $ExportTestCount: ExportDataGet() ",
@@ -3940,10 +3896,7 @@ for my $Test (@ImportDataTests) {
     # check SourceImportData attribute
     if ( !$Test->{SourceImportData} || ref $Test->{SourceImportData} ne 'HASH' ) {
 
-        $Self->True(
-            0,
-            "ImportTest $ImportTestCount: No SourceImportData found for this test."
-        );
+        fail("ImportTest $ImportTestCount: SourceImportData found for this test.");
 
         next TEST;
     }
@@ -4005,23 +3958,23 @@ for my $Test (@ImportDataTests) {
 
     if ( !$Test->{ReferenceImportData} ) {
 
-        $Self->False(
-            $ConfigItemID,
+        ok(
+            !$ConfigItemID,
             "ImportTest $ImportTestCount: ImportDataSave() - return no ConfigItemID"
         );
-        $Self->False(
-            $RetCode,
+        ok(
+            !$RetCode,
             "ImportTest $ImportTestCount: ImportDataSave() - return no RetCode"
         );
 
         next TEST;
     }
 
-    $Self->True(
+    ok(
         $ConfigItemID,
         "ImportTest $ImportTestCount: ImportDataSave() - return ConfigItemID"
     );
-    $Self->True(
+    ok(
         $RetCode,
         "ImportTest $ImportTestCount: ImportDataSave() - return RetCode"
     );
@@ -4032,7 +3985,7 @@ for my $Test (@ImportDataTests) {
     ) // [];
 
     # check number of versions
-    $Self->Is(
+    is(
         scalar @{$VersionList},
         $Test->{ReferenceImportData}->{VersionNumber} || 0,
         "ImportTest $ImportTestCount: ImportDataSave() - correct number of versions",
@@ -4073,7 +4026,7 @@ for my $Test (@ImportDataTests) {
         }
 
         # check element
-        $Self->Is(
+        is(
             $VersionData->{$Element},
             $Test->{ReferenceImportData}->{LastVersion}->{$Element},
             "ImportTest $ImportTestCount: ImportDataSave() $Element is identical",
@@ -4083,7 +4036,7 @@ for my $Test (@ImportDataTests) {
     }
 
     # check number of XML elements
-    $Self->Is(
+    is(
         scalar keys %XMLHash,
         scalar keys %{ $Test->{ReferenceImportData}->{LastVersion} },
         "ImportTest $ImportTestCount: ImportDataSave() - correct number of XML elements",
@@ -4121,7 +4074,7 @@ for my $Test (@ImportDataTests) {
         }
 
         # check XML element
-        $Self->Is(
+        is(
             $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' },
             $Test->{ReferenceImportData}->{LastVersion}->{$Key},
             "ImportTest $ImportTestCount: ImportDataSave() $Key is identical",
