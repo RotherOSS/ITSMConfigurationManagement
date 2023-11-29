@@ -26,13 +26,13 @@ use parent qw(Kernel::System::Console::BaseCommand);
 # core modules
 
 # CPAN modules
-use GraphViz2;
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(IsArrayRefWithData);
 
 our @ObjectDependencies = qw(
     Kernel::System::DB
+    Kernel::System::Main
 );
 
 sub Configure {
@@ -51,6 +51,14 @@ sub PreRun {
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    # Check whether the optional module GraphViz2 is installed
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    if ( !$MainObject->Require('GraphViz2') ) {
+        $Self->PrintError("The optional Perl module 'GraphViz2' is not installed");
+
+        return $Self->ExitCodeError;
+    }
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
     my $Rows     = $DBObject->SelectAll(
