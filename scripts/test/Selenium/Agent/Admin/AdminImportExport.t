@@ -28,74 +28,123 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 use Kernel::System::UnitTest::Selenium;
 
-my $Selenium = Kernel::System::UnitTest::Selenium->new();
+# some setup before starting the Selenium test
+
+# needed objects
+my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+# The helper mustn't run in a transaction, because otherwise
+# the webserver would not see the changes in the database.
+my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+# Create test user and login.
+my $TestUserLogin = $Helper->TestUserCreate(
+    Groups => [ 'admin', 'itsm-configitem' ],
+) || die "Did not get test user";
+ok( $TestUserLogin, 'test user created' );
+my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => $TestUserLogin );
+ok( $TestUserID, 'got ID for test user' );
+
+my $RandomID = $Helper->GetRandomID;
+
+# The definition itself is irrelevant, it just has to be valid
+my $ConfigItemYAMLDefinition = <<'END_YAML';
+---
+Pages:
+  - Name: CI_1_Page1
+    Interfaces: []
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: CI_1_Section1
+        ColumnStart: 1
+        RowStart: 1
+  - Name: CI_1_Page2
+    Layout:
+      Columns: 3
+      ColumnWidth: 1fr
+    Content:
+      - Section: CI_1_Section2
+        ColumnStart: 1
+        RowStart: 2
+
+Sections:
+  CI_1_Section1:
+    Content:
+       - Header: "This is section 1"
+  CI_1_Section2:
+    Content:
+       - Header: "This is section 2"
+END_YAML
+
+my $TestClassID = $GeneralCatalogObject->ItemAdd(
+    Class   => 'ITSM::ConfigItem::Class',
+    Name    => "Class_$RandomID",
+    ValidID => 1,
+    UserID  => $TestUserID,
+);
+ok( $TestClassID, "Class added to GeneralCatalog" );
+
+# give permission
+{
+    my $GroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+        Group  => 'itsm-configitem',
+        UserID => 1,
+    );
+    ok( $GroupID, 'got ID for group itsm-configitem' );
+
+    # Set permission.
+    my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $TestClassID,
+        Key    => 'Permission',
+        Value  => $GroupID,
+    );
+    ok( $Success, 'setting permission was successful' );
+}
+
+# The config item class needs a valid definition
+my $DefinitinAddResult = $ConfigItemObject->DefinitionAdd(
+    ClassID    => $TestClassID,
+    UserID     => $TestUserID,
+    CreateBy   => $TestUserID,
+    Definition => $ConfigItemYAMLDefinition,
+);
+ok( $DefinitinAddResult->{Success}, "DefinitionAdd() successful" );
+my $DefinitionID = $DefinitinAddResult->{DefinitionID};
+ok( $DefinitionID, "DefinitionAdd() got definition ID" );
+
+# Get 'Production' deployment state ID.
+my $DeplStateDataRef = $GeneralCatalogObject->ItemGet(
+    Class => 'ITSM::ConfigItem::DeploymentState',
+    Name  => 'Production',
+);
+my $ProductionDeplStateID = $DeplStateDataRef->{ItemID};
+
+my $Selenium = Kernel::System::UnitTest::Selenium->new;
 
 $Selenium->RunTest(
     sub {
-
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-
-        # Get 'Location' catalog class IDs.
-        my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
-            Class => 'ITSM::ConfigItem::Class',
-            Name  => 'Location',
-        );
-        my $LocationConfigItemID = $ConfigItemDataRef->{ItemID};
-
-        # Get 'Production' deployment state ID.
-        my $DeplStateDataRef = $GeneralCatalogObject->ItemGet(
-            Class => 'ITSM::ConfigItem::DeploymentState',
-            Name  => 'Production',
-        );
-        my $ProductionDeplStateID = $DeplStateDataRef->{ItemID};
-
-        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
-
         # Create ConfigItem number.
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
             Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
-            ClassID => $LocationConfigItemID,
+            ClassID => $TestClassID,
         );
-
-        ok(
-            $ConfigItemNumber,
-            "ConfigItem number is created - $ConfigItemNumber",
-        );
+        ok( $ConfigItemNumber, "ConfigItem number is created - $ConfigItemNumber" );
 
         # Add 'Location' test ConfigItem.
-        my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-            Number  => $ConfigItemNumber,
-            ClassID => $LocationConfigItemID,
-            UserID  => 1,
+        my $ConfigItemName = "Selenium" . $Helper->GetRandomID;
+        my $ConfigItemID   = $ConfigItemObject->ConfigItemAdd(
+            Name        => $ConfigItemName,
+            Number      => $ConfigItemNumber,
+            DeplStateID => $ProductionDeplStateID,
+            InciStateID => 1,
+            ClassID     => $TestClassID,
+            UserID      => $TestUserID,
         );
-
-        ok(
-            $ConfigItemID,
-            "ConfigItem 'Location' is created - ID $ConfigItemID",
-        );
-
-        # Add a new version.
-        my $VersionName = "Selenium" . $Helper->GetRandomID();
-        my $VersionID   = $ConfigItemObject->VersionAdd(
-            Name         => $VersionName,
-            DefinitionID => 1,
-            DeplStateID  => $ProductionDeplStateID,
-            InciStateID  => 1,
-            UserID       => 1,
-            ConfigItemID => $ConfigItemID,
-        );
-
-        ok(
-            $VersionID,
-            "Test version of the ConfigItem is created - ID $VersionID",
-        );
-
-        # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
-            Groups => [ 'admin', 'itsm-configitem' ],
-        ) || die "Did not get test user";
+        ok( $ConfigItemID, "ConfigItem 'Location' is created - ID $ConfigItemID" );
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -108,21 +157,23 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminImportExport");
 
         # Check screen.
-        $Selenium->find_element( "table",             'css' );
-        $Selenium->find_element( "table thead tr th", 'css' );
-        $Selenium->find_element( "table tbody tr td", 'css' );
+        $Selenium->find_element_by_css_ok("table");
+        $Selenium->find_element_by_css_ok("table thead tr th");
+        $Selenium->find_element_by_css_ok("table tbody tr td");
 
         # Click on 'Add template'.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminImportExport;Subaction=TemplateEdit' )]")->VerifiedClick();
 
         # Check and input step 1 of 5 screen.
+        diag('Step 1');
         for my $StepOneID (
             qw(Name Object Format ValidID Comment)
             )
         {
             my $Element = $Selenium->find_element( "#$StepOneID", 'css' );
-            $Element->is_enabled();
-            $Element->is_displayed();
+            ok( $Element, "$StepOneID found in step 1" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
         my $ImportExportName = "ImportExport" . $Helper->GetRandomID();
         $Selenium->find_element( "#Name", 'css' )->send_keys($ImportExportName);
@@ -134,43 +185,48 @@ $Selenium->RunTest(
         $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
 
         # Check and input step 2 of 5 screen.
+        diag('Step 2');
         for my $StepTwoID (
             qw(ClassID CountMax EmptyFieldsLeaveTheOldValues)
             )
         {
             my $Element = $Selenium->find_element( "#$StepTwoID", 'css' );
-            $Element->is_enabled();
-            $Element->is_displayed();
+            ok( $Element, "$StepTwoID found in step 2" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
         $Selenium->execute_script(
-            "\$('#ClassID').val('$LocationConfigItemID').trigger('redraw.InputField').trigger('change');"
+            "\$('#ClassID').val('$TestClassID').trigger('redraw.InputField').trigger('change');"
         );
         $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
 
         # Check and input step 3 of 5 screen.
+        diag('Step 3: format definition');
         for my $StepThreeID (
             qw(ColumnSeparator Charset IncludeColumnHeaders)
             )
         {
             my $Element = $Selenium->find_element( "#$StepThreeID", 'css' );
-            $Element->is_enabled();
-            $Element->is_displayed();
+            ok( $Element, "$StepThreeID found in step 3" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
         $Selenium->execute_script(
             "\$('#ColumnSeparator').val('Comma').trigger('redraw.InputField').trigger('change');"
         );
-        $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
 
         # Check and input step 4 of 5 screen.
+        $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
         $Selenium->find_element( "#MappingAddButton", 'css' )->VerifiedClick();
+        diag('Step 4');
         for my $StepFourID (
             qw(Key Identifier)
             )
         {
             my $Element = $Selenium->find_element(".//*[\@id='Object::0::$StepFourID']");
-
-            $Element->is_enabled();
-            $Element->is_displayed();
+            ok( $Element, "$StepFourID found in step 4" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
 
         for my $StepFourClass (
@@ -178,12 +234,13 @@ $Selenium->RunTest(
             )
         {
             my $Element = $Selenium->find_element( ".$StepFourClass", 'css' );
-            $Element->is_enabled();
-            $Element->is_displayed();
+            ok( $Element, "$StepFourClass class found in step 4" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
-        $Selenium->find_element( "table",             'css' );
-        $Selenium->find_element( "table thead tr th", 'css' );
-        $Selenium->find_element( "table tbody tr td", 'css' );
+        $Selenium->find_element_by_css_ok("table");
+        $Selenium->find_element_by_css_ok("table thead tr th");
+        $Selenium->find_element_by_css_ok("table tbody tr td");
 
         # Select 'Number' mapping element.
         $Selenium->find_element(".//*[\@id='Object::0::Key']/option[2]")->click();
@@ -202,93 +259,94 @@ $Selenium->RunTest(
         $Selenium->find_element( "#SubmitNextButton", 'css' )->VerifiedClick();
 
         # Check step 5 of 5 screen.
-        for my $StepFourID (
-            qw(RestrictExport Number Name DeplStateIDs InciStateIDs Type Phone1 Phone2
-            Fax E-Mail Address Note)
+        diag('Step 5, restrict what is exported');
+        for my $StepFiveID (
+            qw(RestrictExport Number Name DeplStateIDs InciStateIDs)
             )
         {
-            my $Element = $Selenium->find_element( "#$StepFourID", 'css' );
-            $Element->is_enabled();
-            $Element->is_displayed();
+            my $Element = $Selenium->find_element( "#$StepFiveID", 'css' );
+            ok( $Element, "$StepFiveID found in step 5" );
+            $Element->is_enabled_ok;
+            $Element->is_displayed_ok;
         }
 
         # Search ConfigItem by number and deployment state.
         $Selenium->find_element( "#RestrictExport", 'css' )->click();
         $Selenium->find_element( "#Number",         'css' )->send_keys($ConfigItemNumber);
-        $Selenium->find_element( "#Name",           'css' )->send_keys($VersionName);
+        $Selenium->find_element( "#Name",           'css' )->send_keys($ConfigItemName);
         $Selenium->execute_script(
             "\$('#DeplStateIDs').val('$ProductionDeplStateID').trigger('redraw.InputField').trigger('change');"
         );
         $Selenium->execute_script("\$('#InciStateIDs').val('1').trigger('redraw.InputField').trigger('change');");
         $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
 
-        # Get needed objects.
-        my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
-        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
-
         # Get TemplateID of created test template.
-        $DBObject->Prepare(
-            SQL   => 'SELECT id FROM imexport_template WHERE name = ?',
-            Bind  => [ \$ImportExportName ],
-            Limit => 1,
+        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+        my ($TemplateID) = $DBObject->SelectRowArray(
+            SQL  => 'SELECT id FROM imexport_template WHERE name = ?',
+            Bind => [ \$ImportExportName ],
         );
-
-        # Fetch the result.
-        my $TemplateID;
-        while ( my @Row = $DBObject->FetchrowArray() ) {
-            $TemplateID = $Row[0];
-        }
+        ok( $TemplateID, 'got the template ID' );
 
         # Navigate to test created ConfigItem and verify it.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemID");
         $Selenium->content_contains(
-            $VersionName,
-            "Test ConfigItem name $VersionName - found",
+            $ConfigItemName,
+            "Test ConfigItem name $ConfigItemName - found",
         );
 
-        # Export created test template.
-        my $ExportResultRef = $ImportExportObject->Export(
+        # Export using the created test template.
+        my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+        my $ExportResultRef    = $ImportExportObject->Export(
             TemplateID => $TemplateID,
-            UserID     => 1,
+            UserID     => $TestUserID,
         );
 
-        # Delete created test ConfigItem, so it can be imported back.
-        $ConfigItemObject->ConfigItemDelete(
-            ConfigItemID => $ConfigItemID,
-            UserID       => 1,
+        # sanity check of the export
+        is(
+            $ExportResultRef,
+            {
+                DestinationContent => [
+                    qq{"$ConfigItemNumber","$ConfigItemName","Production","Operational"},
+                ],
+                Failed  => 0,
+                Success => 1,
+            },
+            'export result'
         );
 
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $ConfigItemID,
-            Cache        => 0,
-        );
+        # Delete created test ConfigItem and verify the deletion
+        {
+            $ConfigItemObject->ConfigItemDelete(
+                ConfigItemID => $ConfigItemID,
+                UserID       => $TestUserID,
+            );
 
-        # Check if ConfigItem is deleted.
-        ok( !$ConfigItem, "ConfigItem is deleted - ID $ConfigItemID" );
+            my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                ConfigItemID => $ConfigItemID,
+                Cache        => 0,
+            );
 
-        # Refresh screen and verify that test ConfigItem does not exist anymore.
-        $Selenium->VerifiedRefresh();
-        $Selenium->content_contains(
-            "Can\'t show item, no access rights for ConfigItem are given!",
-            "Test ConfigItem name $VersionName is not found",
-        );
+            # Check if ConfigItem is deleted.
+            ok( !$ConfigItem, "ConfigItem is deleted - ID $ConfigItemID" );
 
-        my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+            # Refresh screen and verify that test ConfigItem does not exist anymore.
+            $Selenium->VerifiedRefresh();
+            $Selenium->content_contains(
+                "Can\'t show item, no access rights for ConfigItem are given!",
+                "Test ConfigItem name $ConfigItemName is not found",
+            );
+        }
 
-        # Create test Exported file to a system.
-        my $ExportFileName = "ITSMExport" . $Helper->GetRandomID() . ".csv";
-        my $ExportLocation = $ConfigObject->Get('Home') . "/var/tmp/" . $ExportFileName;
-        my $Success        = $MainObject->FileWrite(
-            Location   => $ExportLocation,
-            Content    => \$ExportResultRef->{DestinationContent}->[0],
-            Mode       => 'utf8',
-            Type       => 'Attachment',
-            Permission => '664',
-        );
-        ok(
-            $Success,
-            "Export file $ExportFileName '$ExportLocation' is created",
-        );
+        # Before importing verify that the config items do not already exists
+        for my $Count ( 1 .. 2 ) {
+            my $ImportedConfigItemName = 'Seleniumtest_AdminImportExport_' . $Count;
+            my $Count                  = $ConfigItemObject->ConfigItemSearch(
+                Name   => $ImportedConfigItemName,
+                Result => 'COUNT',
+            );
+            is( $Count, 0, "$ImportedConfigItemName does not exist before import" );
+        }
 
         # Navigate to AdminImportExport screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminImportExport");
@@ -297,25 +355,48 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ImportInformation;TemplateID=$TemplateID' )]")->VerifiedClick();
 
         # Select Exported file and start importing.
-        $Selenium->find_element("//input[contains(\@name, \'SourceFile' )]")->send_keys($ExportLocation);
-
+        # The directory /opt/otobo/scripts/test/sample has been copied from OTOBO core into the Selenium image.
+        # The content is:
+        #   "10495000101","Seleniumtest_AdminImportExport_1","Production","Operational"
+        #   "10495000102","Seleniumtest_AdminImportExport_2","Production","Operational"
+        my $ImportLocation = '/opt/otobo/scripts/test/sample/ImportExport/TemplateImport.csv';
+        $Selenium->find_element("//input[contains(\@name, \'SourceFile' )]")->send_keys($ImportLocation);
         $Selenium->find_element("//button[\@value='Start Import'][\@type='submit']")->VerifiedClick();
 
         # Check for expected outcome.
         $Selenium->content_contains(
-            '(Created: 1)',
+            '(Created: 2)',
             "Import test ConfigItem - success",
         );
 
         # Navigate to imported test created ConfigItem and verify it.
-        my $ImportedConfigItemID = $ConfigItemID + 1;
-        $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ImportedConfigItemID"
-        );
-        $Selenium->content_contains(
-            $VersionName,
-            "Test ConfigItem name $VersionName is found",
-        );
+        for my $Count ( 1 .. 2 ) {
+            my $ImportedConfigItemName = 'Seleniumtest_AdminImportExport_' . $Count;
+
+            subtest "checking import of $ImportedConfigItemName" => sub {
+                my $ExpectedImportedConfigItemID = $ConfigItemID + $Count;
+                my ( $FoundImportedConfigItemID, @OtherIDs ) = $ConfigItemObject->ConfigItemSearch(
+                    Name   => $ImportedConfigItemName,
+                    Result => 'ARRAY',
+                );
+                is( $ExpectedImportedConfigItemID, $FoundImportedConfigItemID, "$FoundImportedConfigItemID has been imported" );
+                is( \@OtherIDs,                    [],                         "only one item found" );
+                $Selenium->VerifiedGet(
+                    "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$FoundImportedConfigItemID"
+                );
+                $Selenium->content_contains(
+                    $ImportedConfigItemName,
+                    "Test ConfigItem name $ImportedConfigItemName is found",
+                );
+
+                # clean up, delete the test imported ConfigItem.
+                my $DeleteSuccess = $ConfigItemObject->ConfigItemDelete(
+                    ConfigItemID => $FoundImportedConfigItemID,
+                    UserID       => $TestUserID,
+                );
+                ok( $DeleteSuccess, "ConfigItem $ImportedConfigItemName is deleted - ID $FoundImportedConfigItemID" );
+            }
+        }
 
         # Navigate to AdminImportExport screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminImportExport");
@@ -341,28 +422,9 @@ $Selenium->RunTest(
             ),
             "Test template is deleted",
         );
-
-        # Delete test imported ConfigItem.
-        $Success = $ConfigItemObject->ConfigItemDelete(
-            ConfigItemID => $ImportedConfigItemID,
-            UserID       => 1,
-        );
-        ok(
-            $Success,
-            "ConfigItem is deleted - ID $ImportedConfigItemID",
-        );
-
-        # delete test Exported file from system.
-        $Success = $MainObject->FileDelete(
-            Location => $ExportLocation,
-            Type     => 'Attachment',
-        );
-        ok(
-            $Success,
-            "Export file $ExportFileName is deleted",
-        );
-
     }
 );
+
+# TODO: clean up of the database
 
 done_testing;

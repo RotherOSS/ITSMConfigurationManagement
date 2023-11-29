@@ -39,7 +39,7 @@ my $TestUserLogin = $Helper->TestUserCreate(
 );
 my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup( UserLogin => $TestUserLogin );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $Helper->GetRandomID;
 
 my @ConfigItemYAMLDefinitions = <<'END_YAML';
 ---
@@ -74,8 +74,6 @@ END_YAML
 # second item is a variant of the first item
 push @ConfigItemYAMLDefinitions, ( $ConfigItemYAMLDefinitions[0] =~ s/CI_1_/CI_2_/rg );
 
-my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
-
 my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
     Class   => 'ITSM::ConfigItem::Class',
     Name    => $RandomID,
@@ -94,7 +92,7 @@ my $Result1 = $ConfigItemObject->DefinitionAdd(
 );
 ok( $Result1->{Success}, "DefinitionAdd() 1 successful" );
 my $DefinitionID1 = $Result1->{DefinitionID};
-ok( $DefinitionID1, "DefinitionAdd() 1 got definition ID " );
+ok( $DefinitionID1, "DefinitionAdd() 1 got definition ID" );
 
 my $Result2 = $ConfigItemObject->DefinitionAdd(
     ClassID    => $ClassID,
