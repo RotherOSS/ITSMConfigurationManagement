@@ -1464,6 +1464,7 @@ sub _DefinitionDynamicFieldGet {
     my %ContentHash  = ref $Param{DefinitionPerl} eq 'HASH'  ? $Param{DefinitionPerl}->%* : ();
     my @ContentArray = ref $Param{DefinitionPerl} eq 'ARRAY' ? $Param{DefinitionPerl}->@* : ();
 
+    # log, even when empty arrays or hashes are allowed
     if ( !%ContentHash && !@ContentArray ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1476,19 +1477,30 @@ sub _DefinitionDynamicFieldGet {
     # recurively collect the dynamic fields
     my %DynamicFields;
 
+    # TODO: specify the path where DF fields are expected, maybe with JSON::Path
+    KEY:
     for my $Key ( keys %ContentHash ) {
         if ( $Key eq 'DF' ) {
             $DynamicFields{ $ContentHash{$Key} } = \%ContentHash;
+
+            next KEY;
         }
-        elsif ( ref $ContentHash{$Key} ) {
-            %DynamicFields = (
-                %DynamicFields,
-                $Self->_DefinitionDynamicFieldGet(
-                    DefinitionPerl => $ContentHash{$Key},
-                    ClassID        => $Param{ClassID},
-                ),
-            );
-        }
+
+        # do not descend into Interfaces and Groups,
+        # as these may be empty and would be logged as errors
+        next KEY if $Key eq 'Interfaces';
+        next KEY if $Key eq 'Groups';
+
+        next KEY unless ref $ContentHash{$Key};
+
+        # descend
+        %DynamicFields = (
+            %DynamicFields,
+            $Self->_DefinitionDynamicFieldGet(
+                DefinitionPerl => $ContentHash{$Key},
+                ClassID        => $Param{ClassID},
+            ),
+        );
     }
 
     for my $Entry (@ContentArray) {
