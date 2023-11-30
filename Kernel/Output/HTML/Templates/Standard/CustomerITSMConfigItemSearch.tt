@@ -1,0 +1,94 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+
+<div id='oooContent'>
+    <div id='oooHeader'>
+        <h1>[% Translate("ConfigItem Search") | html %]</h1>
+    </div>
+    <div id='oooMainBox'>
+        <div id="oooITSMConfigItemListHeader">
+        </div>
+[% RenderBlockStart("SearchForm") %]
+        <div class="oooITSMConfigItemSearch">
+            <div class="oooITSMConfigItemSearchForm">
+                <form action="[% Env("CGIHandle") %]" method="post" id="SearchForm">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="SearchAction"/>
+                    <input type="hidden" name="SearchDialog" value='1'>
+                    <input type="hidden" name="EmptySearch" value="[% Data.EmptySearch | html %]" id="EmptySearch"/>
+                    <fieldset>
+[% RenderBlockStart("PermissionCondition") %]
+                        <div class="Clear"></div>
+                        <div class="Row">
+                            [% Data.PermissionConditionStrg %]
+                            <label for="PermissionCondition">[% Translate("Category") | html %]:</label>
+                        </div>
+[% RenderBlockEnd("PermissionCondition") %]
+[% RenderBlockStart("Class") %]
+                        <div class="Clear"></div>
+                        <div class="Row">
+                            [% Data.ClassStrg %]
+                            <label for="ClassIDs">[% Translate("Class") | html %]:</label>
+                        </div>
+[% RenderBlockEnd("Class") %]
+[% RenderBlockStart("Number") %]
+                    <div class="Clear"></div>
+                    <div class="Row">
+                        <input type="text" name="Number" value="[% Data.Number | html %]" class="W50pc" />
+                        <label for="Number">[% Translate("Number") | html %]:</label>
+                    </div>
+[% RenderBlockEnd("Number") %]
+[% RenderBlockStart("Name") %]
+                    <div class="Clear"></div>
+                    <div class="Row">
+                        <input type="text" name="Name" value="[% Data.Name | html %]" class="W50pc" />
+                        <label for="Name">[% Translate("Name") | html %]:</label>
+                    </div>
+[% RenderBlockEnd("Name") %]
+[% RenderBlockStart("DeplState") %]
+                        <div class="Clear"></div>
+                        <div class="Row">
+                            [% Data.CurDeplStateOptionStrg %]
+                            <label for="DeplStateIDs">[% Translate("Deployment State") | html %]:</label>
+                        </div>
+[% RenderBlockEnd("DeplState") %]
+[% RenderBlockStart("InciState") %]
+                    <div class="Clear"></div>
+                    <div class="Row">
+                        [% Data.CurInciStateOptionStrg %]
+                        <label for="InciStateIDs">[% Translate("Incident State") | html %]:</label>
+                    </div>
+[% RenderBlockEnd("InciState") %]
+[% RenderBlockStart("DynamicField") %]
+                    <div class="Clear"></div>
+                    <div class="Row">
+                        [% Data.Field %]
+                        [% Data.Label %]
+                    </div>
+[% RenderBlockEnd("DynamicField") %]
+                    </fieldset>
+                    <div class="Row">
+                        <button id="SearchAction" type="submit" class="CallForAction" value="[% Translate("Search") | html %]"><span>[% Translate("Search") | html %]</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+[% RenderBlockEnd("SearchForm") %]
+[% RenderBlockStart("SearchResult") %]
+        [% Data.ITSMConfigItemListHTML %]
+[% RenderBlockEnd("SearchResult") %]
+    </div>
+</div>

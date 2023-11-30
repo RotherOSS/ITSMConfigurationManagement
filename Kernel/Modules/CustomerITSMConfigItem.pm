@@ -315,7 +315,7 @@ sub Run {
                 );
             }
 
-            $Filters{ $PermissionConditionConfig->{Name} } = {
+            $Filters{ $ConfigCounter } = {
                 Name   => $PermissionConditionConfig->{Name},
                 Prio   => $PrioCounter,
                 Count  => $Count,

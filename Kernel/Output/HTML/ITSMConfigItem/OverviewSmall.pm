@@ -129,7 +129,7 @@ sub new {
                     next PERMCONF unless $AccessOk;
                 }
 
-                if ( $Self->{Filter} eq $PermissionConditionConfig->{Name} && IsHashRefWithData($PermissionConditionsColumns) ) {
+                if ( $FilterName eq $PermissionConditionConfig->{Name} && IsHashRefWithData($PermissionConditionsColumns) ) {
                     $Self->{ColumnsAvailable} = $PermissionConditionsColumns->{$ConfigIdentifier} // [];
                 }
             }
@@ -706,6 +706,7 @@ sub Run {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     $Param{OrderBy} = $Param{OrderBy} || 'Up';
+    $Param{SortBy}  = $Param{SortBy} || 'Number';
 
     my $ConfigItemData = scalar @ConfigItemBox;
     if ($ConfigItemData) {

@@ -17,6 +17,9 @@
 <div id='oooContent'>
     <div id='oooHeader'>
         <h1>[% Translate("Your ConfigItems") | html %]</h1>
+        <div id="oooSearchBox">
+            <button id="ITSMConfigItemSearch" class="oooL" title="Search" type="Submit" value="Search">Search</button>
+        </div>
     </div>
     <div id='oooMainBox'>
         <div id='oooITSMConfigItemListHeader'>
