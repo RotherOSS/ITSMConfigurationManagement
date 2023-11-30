@@ -116,7 +116,16 @@ sub ConfigItemAcl {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Needed (qw(UserID ReturnSubType ReturnType Data)) {
+    if ( !$Param{UserID} && !$Param{CustomerUserID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need UserID or CustomerUserID!',
+        );
+        return;
+    }
+
+    # check needed stuff
+    for my $Needed (qw(ReturnSubType ReturnType Data)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
