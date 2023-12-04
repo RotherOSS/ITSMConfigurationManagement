@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::DynamicField::Driver::ITSMConfigItemReference;
+package Kernel::System::DynamicField::Driver::ITSMConfigItem;
 
 use v5.24;
 use strict;
@@ -41,7 +41,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::ITSMConfigItemReference - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::ITSMConfigItem - backend for the Reference dynamic field
 
 =head1 DESCRIPTION
 
