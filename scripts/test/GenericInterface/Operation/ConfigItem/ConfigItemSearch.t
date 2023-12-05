@@ -14,21 +14,28 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 
-our $Self;
+# CPAN modules
+use Test2::V0;
 
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemSearch;
 use Kernel::System::VariableCheck qw(:all);
 
+our $Self;
+
 # set UserID to root
-$Self->{UserID} = 1;
+my $UserID = 1;
 
 # helper object
 # skip SSL certiciate verification
@@ -1319,4 +1326,4 @@ for my $ConfigItemID ( sort @AddedConfigItemIDs ) {
     );
 }
 
-$Self->DoneTesting;
+done_testing;

@@ -14,21 +14,26 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 
-our $Self;
+# CPAN modules
+use Test2::V0;
 
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet;
 use Kernel::System::VariableCheck qw(:all);
 
+our $Self;
+
 # set UserID to root
-$Self->{UserID} = 1;
+my $UserID = 1;
 
 # helper object
 # skip SSL certiciate verification
@@ -398,7 +403,7 @@ for my $ConfigItem (@ConfigItems) {
     # create new config item
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         ClassID => $ReverseClassList{ $ConfigItem->{Class} },
-        UserID  => $Self->{UserID},
+        UserID  => $UserID,
     );
 
     # sanity checks
@@ -432,7 +437,7 @@ for my $ConfigItem (@ConfigItems) {
         DeplStateID  => $ReverseDeplStateList{ $ConfigItem->{DeplState} },
         InciStateID  => $ReverseInciStateList{ $ConfigItem->{InciState} },
         XMLData      => $XMLData,
-        UserID       => $Self->{UserID},
+        UserID       => $UserID,
     );
 
     # sanity checks
@@ -818,7 +823,7 @@ for my $Test (@Tests) {
 # clean up webservice
 my $WebserviceDelete = $WebserviceObject->WebserviceDelete(
     ID     => $WebserviceID,
-    UserID => $Self->{UserID},
+    UserID => $UserID,
 );
 $Self->True(
     $WebserviceDelete,
@@ -830,7 +835,7 @@ for my $ConfigItemID ( sort keys %AddedConfigItems ) {
     # delete the ConfigItems
     my $SuccessDelete = $ConfigItemObject->ConfigItemDelete(
         ConfigItemID => $ConfigItemID,
-        UserID       => $Self->{UserID},
+        UserID       => $UserID,
     );
 
     # sanity check
@@ -840,4 +845,4 @@ for my $ConfigItemID ( sort keys %AddedConfigItems ) {
     );
 }
 
-$Self->DoneTesting;
+done_testing;

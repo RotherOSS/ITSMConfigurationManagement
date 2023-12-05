@@ -14,23 +14,25 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
+use MIME::Base64 qw(encode_base64);
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
-
-our $Self;
-
-use MIME::Base64;
-
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpdate;
 use Kernel::System::VariableCheck qw(:all);
 
-# set UserID to root
-$Self->{UserID} = 1;
+our $Self;
 
 # helper object
 # skip SSL certiciate verification
@@ -1422,4 +1424,4 @@ $Self->True(
     "Deleted Webservice $WebserviceID",
 );
 
-$Self->DoneTesting;
+done_testing;

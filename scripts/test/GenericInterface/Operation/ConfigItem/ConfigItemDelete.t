@@ -14,22 +14,29 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
+use v5.24;
 use strict;
 use warnings;
 use utf8;
 
+# core modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 
-our $Self;
+# CPAN modules
+use Test2::V0;
 
+# OTOBO modules
+use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemDelete;
 use Kernel::System::VariableCheck qw(:all);
 
+our $Self;
+
 # set UserID to root
-$Self->{UserID} = 1;
+my $UserID = 1;
 
 # helper object
 # skip SSL certiciate verification
@@ -87,24 +94,8 @@ $Self->True(
     "Added Webservice",
 );
 
-# get remote host with some precautions for certain unit test systems
-my $Host;
-my $FQDN = $ConfigObject->Get('FQDN');
-
-# try to resolve fqdn host
-if ( $FQDN ne 'yourhost.example.com' && gethostbyname($FQDN) ) {
-    $Host = $FQDN;
-}
-
-# try to resolve localhost instead
-if ( !$Host && gethostbyname('localhost') ) {
-    $Host = 'localhost';
-}
-
-# use hardcoded localhost ip address
-if ( !$Host ) {
-    $Host = '127.0.0.1';
-}
+# Get remote host with some precautions for certain unit test systems.
+my $Host = $Helper->GetTestHTTPHostname;
 
 # prepare webservice config
 my $RemoteSystem =
@@ -117,8 +108,6 @@ my $RemoteSystem =
     . $WebserviceID;
 
 my $WebserviceConfig = {
-
-    #    Name => '',
     Description =>
         'Test for ConfigItem Connector using SOAP transport backend.',
     Debugger => {
@@ -463,7 +452,7 @@ for my $ConfigItem (@ConfigItems) {
     # create new config item
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         ClassID => $ReverseClassList{ $ConfigItem->{Class} },
-        UserID  => $Self->{UserID},
+        UserID  => $UserID,
     );
 
     # sanity checks
@@ -497,7 +486,7 @@ for my $ConfigItem (@ConfigItems) {
         DeplStateID  => $ReverseDeplStateList{ $ConfigItem->{DeplState} },
         InciStateID  => $ReverseInciStateList{ $ConfigItem->{InciState} },
         XMLData      => $XMLData,
-        UserID       => $Self->{UserID},
+        UserID       => $UserID,
     );
 
     # sanity checks
@@ -798,11 +787,11 @@ for my $Test (@Tests) {
 # clean up webservice
 my $WebserviceDelete = $WebserviceObject->WebserviceDelete(
     ID     => $WebserviceID,
-    UserID => $Self->{UserID},
+    UserID => $UserID,
 );
 $Self->True(
     $WebserviceDelete,
     "Deleted Webservice $WebserviceID",
 );
 
-$Self->DoneTesting;
+done_testing;
