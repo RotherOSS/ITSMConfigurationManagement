@@ -31,7 +31,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # check command without any options
 my $ExitCode = $CommandObject->Execute();
@@ -43,7 +43,7 @@ $Self->Is(
 );
 
 # check command with --class options (invalid class)
-my $RandomClass = 'NonExistingClass' . $HelperObject->GetRandomID();
+my $RandomClass = 'NonExistingClass' . $Helper->GetRandomID();
 $ExitCode = $CommandObject->Execute( '--class', $RandomClass );
 
 $Self->Is(
@@ -88,7 +88,7 @@ my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
 );
 push @ConfigItemID, $ConfigItemID;
 
-my $ConfigItemName = 'TestConfigItem' . $HelperObject->GetRandomID();
+my $ConfigItemName = 'TestConfigItem' . $Helper->GetRandomID();
 my $VersionID      = $ConfigItemObject->VersionAdd(
     Name         => $ConfigItemName,
     DefinitionID => 1,
@@ -147,7 +147,7 @@ $Self->Is(
 );
 
 # check command with --scope options (invalid scope)
-my $RandomScope = 'scope' . $HelperObject->GetRandomID();
+my $RandomScope = 'scope' . $Helper->GetRandomID();
 $ExitCode = $CommandObject->Execute( '--scope', $RandomScope );
 
 $Self->Is(

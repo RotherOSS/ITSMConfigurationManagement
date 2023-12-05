@@ -39,9 +39,9 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $HelperObject->GetRandomID();
+my $RandomID = $Helper->GetRandomID();
 
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -55,7 +55,7 @@ $Self->Is(
 # create ConfigItem object
 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
 
 # create webservice object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -208,7 +208,7 @@ $Self->Is(
 );
 
 # create a new user for current test
-my $UserLogin = $HelperObject->TestUserCreate(
+my $UserLogin = $Helper->TestUserCreate(
     Groups => [ 'admin', 'users', 'itsm-configitem' ],
 );
 my $Password = $UserLogin;
