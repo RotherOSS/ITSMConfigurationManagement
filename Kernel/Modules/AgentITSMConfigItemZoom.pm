@@ -272,7 +272,7 @@ sub Run {
     if ( $ConfigItem->{Name} ) {
 
         # transform ascii to html
-        $ConfigItem->{Name} = $LayoutObject->Ascii2Html(
+        my $ConfigItemName = $LayoutObject->Ascii2Html(
             Text           => $ConfigItem->{Name},
             HTMLResultMode => 1,
             LinkFeature    => 1,
@@ -284,7 +284,7 @@ sub Run {
             Data => {
                 Name        => Translatable('Name'),
                 Description => Translatable('The name of this config item'),
-                Value       => $ConfigItem->{Name},
+                Value       => $ConfigItemName,
                 Identation  => 10,
             },
         );
