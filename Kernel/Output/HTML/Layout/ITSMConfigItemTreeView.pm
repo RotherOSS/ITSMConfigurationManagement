@@ -373,16 +373,16 @@ sub _MapAttributes {
         return;
     }
 
-    state %MapTranslations = (
+    state $MapTranslations = {
         InciState        => 'Incident State',
         DeplState        => 'Deployment State',
         CurDeplState     => 'Current Deployment State',
         CurInciState     => 'Current Incident State',
         Number           => 'Version Number',
         CurInciStateType => 'Current Incident State Type'
-    );
+    };
 
-    return $MapTranslations{ $Param{Label} } // $Param{Label};
+    return $MapTranslations->{ $Param{Label} } // $Param{Label};
 }
 
 1;
