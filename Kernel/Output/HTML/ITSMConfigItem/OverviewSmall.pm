@@ -488,7 +488,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # convert to lower case
-        my $DeplStateColor = lc $GeneralCatalogPreferences{Color} =~ s/[^0-9a-f]//msgr;
+        my $DeplStateColor = (lc $GeneralCatalogPreferences{Color}) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
