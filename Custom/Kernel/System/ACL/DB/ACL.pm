@@ -111,6 +111,9 @@ Returns:
 sub ACLAdd {
     my ( $Self, %Param ) = @_;
 
+    # set default for object type
+    $Param{ObjectType} //= 'Ticket';
+
     # check needed stuff
     for my $Key (qw(Name ValidID UserID)) {
         if ( !$Param{$Key} ) {
