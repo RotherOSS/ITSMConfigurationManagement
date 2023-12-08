@@ -26,12 +26,10 @@ use MIME::Base64 qw(encode_base64);
 use Test2::V0;
 
 # OTOBO modules
-use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 use Kernel::System::VariableCheck qw(:all);
-
-our $Self;
 
 # Skip SSL certificate verification.
 $Kernel::OM->ObjectParamAdd(
@@ -46,7 +44,7 @@ my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my $RandomID = $Helper->GetRandomID();
 
 # Check if SSL Certificate verification is disabled.
-$Self->Is(
+is(
     $ENV{PERL_LWP_SSL_VERIFY_HOSTNAME},
     0,
     'Disabled SSL certiticates verification in environment',
@@ -56,7 +54,7 @@ my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
 
 # Create webservice object.
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
-$Self->Is(
+is(
     'Kernel::System::GenericInterface::Webservice',
     ref $WebserviceObject,
     "Create webservice object",
@@ -80,10 +78,7 @@ my $WebserviceID = $WebserviceObject->WebserviceAdd(
     ValidID => 1,
     UserID  => 1,
 );
-$Self->True(
-    $WebserviceID,
-    "Added Webservice",
-);
+ok( $WebserviceID, "added web service" );
 
 # Get remote host with some precautions for certain unit test systems.
 my $Host = $Helper->GetTestHTTPHostname;
@@ -151,10 +146,7 @@ my $WebserviceUpdate = $WebserviceObject->WebserviceUpdate(
     ValidID => 1,
     UserID  => 1,
 );
-$Self->True(
-    $WebserviceUpdate,
-    "Updated Webservice $WebserviceID - $WebserviceName",
-);
+ok( $WebserviceUpdate, "updated web service $WebserviceID - $WebserviceName" );
 
 # Debugger object.
 my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
@@ -165,18 +157,18 @@ my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     WebserviceID      => $WebserviceID,
     CommunicationType => 'Provider',
 );
-$Self->Is(
-    ref $DebuggerObject,
-    'Kernel::GenericInterface::Debugger',
+isa_ok(
+    $DebuggerObject,
+    ['Kernel::GenericInterface::Debugger'],
     'DebuggerObject instanciated correctly',
 );
 
 # Get SessionID.
 # Create requester object.
 my $RequesterSessionObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
-$Self->Is(
-    'Kernel::GenericInterface::Requester',
-    ref $RequesterSessionObject,
+isa_ok(
+    $RequesterSessionObject,
+    ['Kernel::GenericInterface::Requester'],
     "SessionID - Create requester object",
 );
 
@@ -195,8 +187,10 @@ my $RequesterSessionResult = $RequesterSessionObject->Run(
         Password  => $Password,
     },
 );
+ref_ok( $RequesterSessionResult, 'HASH', 'got result from SessionID' );
 
 my $NewSessionID = $RequesterSessionResult->{Data}->{SessionID};
+like( $NewSessionID, qr/\A[[:alnum:]]{32}\z/, 'sane session ID' );
 
 # Actual tests.
 my @Tests = (
@@ -220,7 +214,7 @@ my @Tests = (
         SuccessRequest => 1,
         SuccessCreate  => 0,
         RequestData    => {
-            ConfigItem => 1,
+            ConfigItem => 1,    # should be a hashref
         },
         ExpectedData => {
             Data => {
@@ -233,6 +227,7 @@ my @Tests = (
         Operation => 'ConfigItemCreate',
     },
     {
+        Todo           => 'mandatory checks are not implemented yet',
         Name           => 'Missing CIXMLData',
         SuccessRequest => 1,
         SuccessCreate  => 0,
@@ -248,7 +243,7 @@ my @Tests = (
             Data => {
                 Error => {
                     ErrorCode    => 'ConfigItemCreate.MissingParameter',
-                    ErrorMessage => 'ConfigItemCreate: ConfigItem->CIXMLData->NIC->IPoverDHCP parameter is missing!',
+                    ErrorMessage => 'ConfigItemCreate: ConfigItem->DynamicField->NIC->IPoverDHCP parameter is missing!',
                 }
             },
         },
@@ -1051,293 +1046,284 @@ my @Tests = (
 
 # Start testing.
 for my $Test (@Tests) {
+    subtest $Test->{Name} => sub {
 
-    # Create local object.
-    my $LocalObject = "Kernel::GenericInterface::Operation::ConfigItem::$Test->{Operation}"->new(
-        DebuggerObject => $DebuggerObject,
-        WebserviceID   => $WebserviceID,
-    );
+        my $Todo = defined $Test->{Todo} ? todo( $Test->{Todo} ) : undef;
 
-    $Self->Is(
-        "Kernel::GenericInterface::Operation::ConfigItem::$Test->{Operation}",
-        ref $LocalObject,
-        "$Test->{Name} - Create local object",
-    );
-
-    # Make a deep copy to avoid changing the definition.
-    my $ClonedRequestData = Storable::dclone( $Test->{RequestData} );
-
-    # Start requester with our webservice.
-    my $LocalResult = $LocalObject->Run(
-        WebserviceID => $WebserviceID,
-        Invoker      => $Test->{Operation},
-        Data         => {
-            UserLogin => $UserLogin,
-            Password  => $Password,
-            %{ $Test->{RequestData} },
-        },
-    );
-
-    # Restore cloned data.
-    $Test->{RequestData} = $ClonedRequestData;
-
-    # Check result.
-    $Self->Is(
-        'HASH',
-        ref $LocalResult,
-        "$Test->{Name} - Local result structure is valid",
-    );
-
-    # Create requester object.
-    my $RequesterObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
-    $Self->Is(
-        'Kernel::GenericInterface::Requester',
-        ref $RequesterObject,
-        "$Test->{Name} - Create requester object",
-    );
-
-    # Start requester with our webservice.
-    my $RequesterResult = $RequesterObject->Run(
-        WebserviceID => $WebserviceID,
-        Invoker      => $Test->{Operation},
-        Data         => {
-            SessionID => $NewSessionID,
-            %{ $Test->{RequestData} },
-        },
-    );
-
-    # Check result.
-    $Self->Is(
-        'HASH',
-        ref $RequesterResult,
-        "$Test->{Name} - Requester result structure is valid",
-    );
-
-    $Self->Is(
-        $RequesterResult->{Success},
-        $Test->{SuccessRequest},
-        "$Test->{Name} - Requester successful result",
-    );
-
-    # Tests supposed to succeed.
-    if ( $Test->{SuccessCreate} ) {
-
-        # Local results.
-        $Self->True(
-            $LocalResult->{Data}->{ConfigItemID},
-            "$Test->{Name} - Local result ConfigItemID with True.",
+        # Create local object.
+        my $LocalObject = "Kernel::GenericInterface::Operation::ConfigItem::$Test->{Operation}"->new(
+            DebuggerObject => $DebuggerObject,
+            WebserviceID   => $WebserviceID,
         );
-        $Self->True(
-            $LocalResult->{Data}->{Number},
-            "$Test->{Name} - Local result Number with True.",
-        );
-        $Self->Is(
-            $LocalResult->{Data}->{Error},
-            undef,
-            "$Test->{Name} - Local result Error is undefined.",
+        isa_ok(
+            $LocalObject,
+            ["Kernel::GenericInterface::Operation::ConfigItem::$Test->{Operation}"],
+            "Create local object",
         );
 
-        # Requester results.
-        $Self->True(
-            $RequesterResult->{Data}->{ConfigItemID},
-            "$Test->{Name} - Requester result ConfigItemID with True.",
-        );
-        $Self->True(
-            $RequesterResult->{Data}->{Number},
-            "$Test->{Name} - Requester result Number with True.",
-        );
-        $Self->Is(
-            $RequesterResult->{Data}->{Error},
-            undef,
-            "$Test->{Name} - Requester result Error is undefined.",
-        );
+        # Make a deep copy to avoid changing the definition.
+        my $ClonedRequestData = Storable::dclone( $Test->{RequestData} );
 
-        # Get the ConfigItem entry (from local result).
-        my $LocalVersionData = $ConfigItemObject->VersionGet(
-            ConfigItemID => $LocalResult->{Data}->{ConfigItemID},
-            UserID       => 1,
+        # Start requester with our webservice locally
+        my $LocalResult = $LocalObject->Run(
+            WebserviceID => $WebserviceID,
+            Invoker      => $Test->{Operation},
+            Data         => {
+                UserLogin => $UserLogin,
+                Password  => $Password,
+                %{ $Test->{RequestData} },
+            },
         );
 
-        $Self->True(
-            IsHashRefWithData($LocalVersionData),
-            "$Test->{Name} - created local version strcture with True.",
+        # Restore cloned data.
+        $Test->{RequestData} = $ClonedRequestData;
+
+        # Check result.
+        ref_ok(
+            $LocalResult,
+            'HASH',
+            "Local result structure is valid",
         );
 
-        # Get the config item entry (from requester result).
-        my $RequesterVersionData = $ConfigItemObject->VersionGet(
-            ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
-            UserID       => 1,
+        # Create requester object.
+        my $RequesterObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
+        isa_ok(
+            $RequesterObject,
+            ['Kernel::GenericInterface::Requester'],
+            "Create requester object",
         );
 
-        $Self->True(
-            IsHashRefWithData($RequesterVersionData),
-            "$Test->{Name} - created requester config item strcture with True.",
+        # Start requester with our webservice.
+        my $RequesterResult = $RequesterObject->Run(
+            WebserviceID => $WebserviceID,
+            Invoker      => $Test->{Operation},
+            Data         => {
+                SessionID => $NewSessionID,
+                %{ $Test->{RequestData} },
+            },
         );
 
-        # Check config item attributes as defined in the test.
-        for my $Attribute (qw(Number Class Name InciState DeplState DeplStateType)) {
-            if ( $Test->{RequestData}->{ConfigItem}->{$Attribute} ) {
-                $Self->Is(
-                    $LocalVersionData->{$Attribute},
-                    $Test->{RequestData}->{ConfigItem}->{$Attribute},
-                    "$Test->{Name} - local ConfigItem->$Attribute" . " match test definition.",
-                );
-            }
-        }
+        # Check result.
+        ref_ok(
+            $RequesterResult,
+            'HASH',
+            "Requester result structure is valid",
+        );
 
-        if ( $Test->{RequestData}->{ConfigItem}->{CIXMLData} ) {
+        is(
+            $RequesterResult->{Success},
+            $Test->{SuccessRequest},
+            "Requester successful result",
+        );
 
-            # Transform XML data to a comparable format.
-            my $Definition = $LocalVersionData->{XMLDefinition};
+        # Tests supposed to succeed.
+        if ( $Test->{SuccessCreate} ) {
 
-            # Make a deep copy to avoid changing the result.
-            my $ClonedXMLData = Storable::dclone( $LocalVersionData->{XMLData} );
-
-            my $FormatedXMLData = $LocalObject->InvertFormatXMLData(
-                XMLData => $ClonedXMLData->[1]->{Version},
+            # Local results.
+            ok( $LocalResult->{Data}->{ConfigItemID}, "Local result got ConfigItemID" );
+            ok( $LocalResult->{Data}->{Number},       "Local result Number with True." );
+            is(
+                $LocalResult->{Data}->{Error},
+                undef,
+                "Local result Error is undefined.",
             );
 
-            my $ReplacedXMLData = $LocalObject->InvertReplaceXMLData(
-                XMLData    => $FormatedXMLData,
-                Definition => $Definition,
+            # Requester results.
+            ok( $RequesterResult->{Data}->{ConfigItemID}, "Requester result ConfigItemID with True." );
+            ok( $RequesterResult->{Data}->{Number},       "Requester result Number with True." );
+            is(
+                $RequesterResult->{Data}->{Error},
+                undef,
+                "Requester result Error is undefined.",
             );
 
-            # Compare XML data.
-            $Self->IsDeeply(
-                $ReplacedXMLData,
-                $Test->{RequestData}->{ConfigItem}->{CIXMLData},
-                "$Test->{Name} - local ConfigItem->CIXMLData match test definition.",
-            );
-        }
-
-        if ( $Test->{RequestData}->{ConfigItem}->{Attachment} ) {
-
-            # Check attachments.
-            my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
-                ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
-            );
-
-            my @Attachments;
-            ATTACHMENT:
-            for my $FileName (@AttachmentList) {
-                next ATTACHMENT if !$FileName;
-
-                my $Attachment = $ConfigItemObject->ConfigItemAttachmentGet(
-                    ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
-                    Filename     => $FileName,
-                );
-
-                # Next if not attachment.
-                next ATTACHMENT if !IsHashRefWithData($Attachment);
-
-                # Convert content to base64.
-                $Attachment->{Content} = encode_base64( $Attachment->{Content}, '' );
-
-                # Delete not needed attibutes.
-                for my $Attribute (qw(Preferences Filesize Type)) {
-                    delete $Attachment->{$Attribute};
-                }
-                push @Attachments, $Attachment;
-            }
-
-            my @RequestedAttachments;
-            if ( ref $Test->{RequestData}->{Attachment} eq 'HASH' ) {
-                push @RequestedAttachments, $Test->{RequestData}->{ConfigItem}->{Attachment};
-            }
-            else {
-                @RequestedAttachments = @{ $Test->{RequestData}->{ConfigItem}->{Attachment} };
-            }
-
-            $Self->IsDeeply(
-                \@Attachments,
-                \@RequestedAttachments,
-                "$Test->{Name} - local ConfigItem->Attachment match test definition.",
-            );
-        }
-
-        # Remove attributes that might be different from local and requester responses.
-        for my $Attribute (
-            qw(ConfigItemID Number CreateTime VersionID LastVersionID)
-            )
-        {
-            delete $LocalVersionData->{$Attribute};
-            delete $RequesterVersionData->{$Attribute};
-        }
-
-        $Self->IsDeeply(
-            $LocalVersionData,
-            $RequesterVersionData,
-            "$Test->{Name} - Local config item result matched with remote result.",
-        );
-
-        # Delete the config items.
-        for my $ConfigItemID (
-            $LocalResult->{Data}->{ConfigItemID},
-            $RequesterResult->{Data}->{ConfigItemID}
-            )
-        {
-
-            my $ConfigItemDelete = $ConfigItemObject->ConfigItemDelete(
-                ConfigItemID => $ConfigItemID,
+            # Get the ConfigItem entry (from local result).
+            my $LocalVersionData = $ConfigItemObject->VersionGet(
+                ConfigItemID => $LocalResult->{Data}->{ConfigItemID},
                 UserID       => 1,
             );
 
+            ok(
+                IsHashRefWithData($LocalVersionData),
+                "created local version strcture with True.",
+            );
+
+            # Get the config item entry (from requester result).
+            my $RequesterVersionData = $ConfigItemObject->VersionGet(
+                ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
+                UserID       => 1,
+            );
+
+            ok(
+                IsHashRefWithData($RequesterVersionData),
+                "created requester config item strcture with True.",
+            );
+
+            # Check config item attributes as defined in the test.
+            for my $Attribute (qw(Number Class Name InciState DeplState DeplStateType)) {
+                if ( $Test->{RequestData}->{ConfigItem}->{$Attribute} ) {
+                    is(
+                        $LocalVersionData->{$Attribute},
+                        $Test->{RequestData}->{ConfigItem}->{$Attribute},
+                        "local ConfigItem->$Attribute" . " match test definition.",
+                    );
+                }
+            }
+
+            if ( $Test->{RequestData}->{ConfigItem}->{CIXMLData} ) {
+
+                # Transform XML data to a comparable format.
+                my $Definition = $LocalVersionData->{XMLDefinition};
+
+                # Make a deep copy to avoid changing the result.
+                my $ClonedXMLData = Storable::dclone( $LocalVersionData->{XMLData} );
+
+                my $FormatedXMLData = $LocalObject->InvertFormatXMLData(
+                    XMLData => $ClonedXMLData->[1]->{Version},
+                );
+
+                my $ReplacedXMLData = $LocalObject->InvertReplaceXMLData(
+                    XMLData    => $FormatedXMLData,
+                    Definition => $Definition,
+                );
+
+                # Compare XML data.
+                is(
+                    $ReplacedXMLData,
+                    $Test->{RequestData}->{ConfigItem}->{CIXMLData},
+                    "local ConfigItem->CIXMLData match test definition.",
+                );
+            }
+
+            if ( $Test->{RequestData}->{ConfigItem}->{Attachment} ) {
+
+                # Check attachments.
+                my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
+                    ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
+                );
+
+                my @Attachments;
+                ATTACHMENT:
+                for my $FileName (@AttachmentList) {
+                    next ATTACHMENT if !$FileName;
+
+                    my $Attachment = $ConfigItemObject->ConfigItemAttachmentGet(
+                        ConfigItemID => $RequesterResult->{Data}->{ConfigItemID},
+                        Filename     => $FileName,
+                    );
+
+                    # Next if not attachment.
+                    next ATTACHMENT if !IsHashRefWithData($Attachment);
+
+                    # Convert content to base64.
+                    $Attachment->{Content} = encode_base64( $Attachment->{Content}, '' );
+
+                    # Delete not needed attibutes.
+                    for my $Attribute (qw(Preferences Filesize Type)) {
+                        delete $Attachment->{$Attribute};
+                    }
+                    push @Attachments, $Attachment;
+                }
+
+                my @RequestedAttachments;
+                if ( ref $Test->{RequestData}->{Attachment} eq 'HASH' ) {
+                    push @RequestedAttachments, $Test->{RequestData}->{ConfigItem}->{Attachment};
+                }
+                else {
+                    @RequestedAttachments = @{ $Test->{RequestData}->{ConfigItem}->{Attachment} };
+                }
+
+                is(
+                    \@Attachments,
+                    \@RequestedAttachments,
+                    "local ConfigItem->Attachment match test definition.",
+                );
+            }
+
+            # Remove attributes that might be different from local and requester responses.
+            for my $Attribute (
+                qw(ConfigItemID Number CreateTime VersionID LastVersionID)
+                )
+            {
+                delete $LocalVersionData->{$Attribute};
+                delete $RequesterVersionData->{$Attribute};
+            }
+
+            is(
+                $LocalVersionData,
+                $RequesterVersionData,
+                "Local config item result matched with remote result.",
+            );
+
+            # Delete the config items.
+            for my $ConfigItemID (
+                $LocalResult->{Data}->{ConfigItemID},
+                $RequesterResult->{Data}->{ConfigItemID}
+                )
+            {
+
+                my $ConfigItemDelete = $ConfigItemObject->ConfigItemDelete(
+                    ConfigItemID => $ConfigItemID,
+                    UserID       => 1,
+                );
+
+                # Sanity check.
+                ok(
+                    $ConfigItemDelete,
+                    "ConfigItemDelete() successful for ConfigItem ID $ConfigItemID",
+                );
+            }
+        }
+
+        # Tests supposed to fail.
+        else {
+            ok(
+                !$LocalResult->{ConfigItemID},
+                "Local result ConfigItemID with false.",
+            );
+            ok(
+                !$LocalResult->{Number},
+                "Local result Number with false.",
+            );
+            is(
+                $LocalResult->{Data}->{Error}->{ErrorCode},
+                $Test->{ExpectedData}->{Data}->{Error}->{ErrorCode},
+                "Local result ErrorCode matched with expected local call result.",
+            );
+            is(
+                $LocalResult->{Data}->{Error}->{ErrorMessage},
+                $Test->{ExpectedData}->{Data}->{Error}->{ErrorMessage},
+                "Local result ErrorMessage matched with expected local call result.",
+            );
+            is(
+                $LocalResult->{ErrorMessage},
+                $LocalResult->{Data}->{Error}->{ErrorCode}
+                    . ': '
+                    . $LocalResult->{Data}->{Error}->{ErrorMessage},
+                "Local result ErrorMessage (outside Data hash) matched with concatenation"
+                    . " of ErrorCode and ErrorMessage within Data hash.",
+            );
+
+            # Remove ErrorMessage parameter from direct call.
+            # Result to be consistent with SOAP call result.
+            if ( $LocalResult->{ErrorMessage} ) {
+                delete $LocalResult->{ErrorMessage};
+            }
+
             # Sanity check.
-            $Self->True(
-                $ConfigItemDelete,
-                "ConfigItemDelete() successful for ConfigItem ID $ConfigItemID",
+            ok(
+                !$LocalResult->{ErrorMessage},
+                "Local result ErroMessage (outsise Data hash) got removed to compare"
+                    . " local and remote tests.",
+            );
+
+            is(
+                $LocalResult,
+                $RequesterResult,
+                "Local result matched with remote result.",
             );
         }
-    }
-
-    # Tests supposed to fail.
-    else {
-        $Self->False(
-            $LocalResult->{ConfigItemID},
-            "$Test->{Name} - Local result ConfigItemID with false.",
-        );
-        $Self->False(
-            $LocalResult->{Number},
-            "$Test->{Name} - Local result Number with false.",
-        );
-        $Self->Is(
-            $LocalResult->{Data}->{Error}->{ErrorCode},
-            $Test->{ExpectedData}->{Data}->{Error}->{ErrorCode},
-            "$Test->{Name} - Local result ErrorCode matched with expected local call result.",
-        );
-        $Self->Is(
-            $LocalResult->{Data}->{Error}->{ErrorMessage},
-            $Test->{ExpectedData}->{Data}->{Error}->{ErrorMessage},
-            "$Test->{Name} - Local result ErrorMessage matched with expected local call result.",
-        );
-        $Self->Is(
-            $LocalResult->{ErrorMessage},
-            $LocalResult->{Data}->{Error}->{ErrorCode}
-                . ': '
-                . $LocalResult->{Data}->{Error}->{ErrorMessage},
-            "$Test->{Name} - Local result ErrorMessage (outside Data hash) matched with concatenation"
-                . " of ErrorCode and ErrorMessage within Data hash.",
-        );
-
-        # Remove ErrorMessage parameter from direct call.
-        # Result to be consistent with SOAP call result.
-        if ( $LocalResult->{ErrorMessage} ) {
-            delete $LocalResult->{ErrorMessage};
-        }
-
-        # Sanity check.
-        $Self->False(
-            $LocalResult->{ErrorMessage},
-            "$Test->{Name} - Local result ErroMessage (outsise Data hash) got removed to compare"
-                . " local and remote tests.",
-        );
-
-        $Self->IsDeeply(
-            $LocalResult,
-            $RequesterResult,
-            "$Test->{Name} - Local result matched with remote result.",
-        );
-    }
+    };
 }
 
 # Clean up webservice.
@@ -1345,9 +1331,6 @@ my $WebserviceDelete = $WebserviceObject->WebserviceDelete(
     ID     => $WebserviceID,
     UserID => 1,
 );
-$Self->True(
-    $WebserviceDelete,
-    "Deleted Webservice $WebserviceID",
-);
+ok( $WebserviceDelete, "Deleted Webservice $WebserviceID" );
 
 done_testing;
