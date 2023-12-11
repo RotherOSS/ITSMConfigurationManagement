@@ -227,7 +227,7 @@ sub Run {
             return $Self->ReturnError(
                 ErrorCode    => "$Self->{OperationName}.MissingParameter",
                 ErrorMessage =>
-                    "$Self->{OperationName}: $Needed parameter is missing or not valid!",
+                    "$Self->{OperationName}: $Needed parameter is missing or invalid!",
             );
         }
     }
@@ -238,7 +238,7 @@ sub Run {
             return $Self->ReturnError(
                 ErrorCode    => "$Self->{OperationName}.MissingParameter",
                 ErrorMessage =>
-                    "$Self->{OperationName}: $Needed parameter is missing or not valid!",
+                    "$Self->{OperationName}: $Needed parameter is missing or invalid!",
             );
         }
     }
@@ -445,7 +445,7 @@ sub Run {
 removed trailing and leading white spaces in the XMLData.
 
     my $XMLDataClean = $OperationObject->_CleanXMLData(
-        Definition => $DefinitionArrayRef,          # Config Item Definition ot just part of it
+        Definition => $DefinitionArrayRef,          # Config Item Definition or just part of it
         XMLData    => $XMLDataHashRef,
     );
 

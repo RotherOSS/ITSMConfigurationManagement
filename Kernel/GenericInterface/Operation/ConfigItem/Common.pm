@@ -16,11 +16,21 @@
 
 package Kernel::GenericInterface::Operation::ConfigItem::Common;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+use parent qw(Kernel::GenericInterface::Operation::Common);
+
+# core modules
 use MIME::Base64();
+use Encode;
 
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -31,15 +41,15 @@ Kernel::GenericInterface::Operation::ConfigItem::Common - Base class for all CI 
 
 =head1 PUBLIC INTERFACE
 
-=cut
-
 =head2 Init()
 
-initialize the operation by checking the web-service configuration
+initialize the operation by checking the web service configuration and gather of the dynamic fields
 
     my $Return = $CommonObject->Init(
         WebserviceID => 1,
     );
+
+returns:
 
     $Return = {
         Success => 1,                       # or 0 in case of failure,
@@ -59,7 +69,7 @@ sub Init {
         };
     }
 
-    # get webservice configuration
+    # get web service configuration
     my $Webservice = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceGet(
         ID => $Param{WebserviceID},
     );
@@ -86,8 +96,9 @@ checks if the given Class is valid.
         Class => 'some class',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -95,7 +106,7 @@ sub ValidateClass {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{Class};
+    return unless $Param{Class};
 
     # check for Class sent
     my $ItemDataRef = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
@@ -104,8 +115,9 @@ sub ValidateClass {
     );
 
     # return false if item data is empty
-    return if !IsHashRefWithData($ItemDataRef);
+    return unless IsHashRefWithData($ItemDataRef);
 
+    # looks fine
     return 1;
 }
 
@@ -117,8 +129,9 @@ checks if the given DeplState is valid.
         DelpState => 'some DeplState',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -126,7 +139,7 @@ sub ValidateDeplState {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{DeplState};
+    return unless $Param{DeplState};
 
     # check for Class sent
     my $ItemDataRef = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
@@ -135,8 +148,9 @@ sub ValidateDeplState {
     );
 
     # return false if item data is empty
-    return if !IsHashRefWithData($ItemDataRef);
+    return unless IsHashRefWithData($ItemDataRef);
 
+    # looks fine
     return 1;
 }
 
@@ -148,8 +162,9 @@ checks if the given InciState is valid.
         InciState => 'some InciState',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -157,7 +172,7 @@ sub ValidateInciState {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{InciState};
+    return unless $Param{InciState};
 
     # check for Class sent
     my $ItemDataRef = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
@@ -166,8 +181,9 @@ sub ValidateInciState {
     );
 
     # return false if item data is empty
-    return if !IsHashRefWithData($ItemDataRef);
+    return unless IsHashRefWithData($ItemDataRef);
 
+    # looks fine
     return 1;
 }
 
@@ -180,8 +196,9 @@ checks if the given value is valid.
         MaxLength => 123,
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -209,14 +226,15 @@ checks if the given value is valid.
         Value => '12/12/1977',
     );
 
-    or
+or
 
     my $Sucess = $CommonObject->ValidateInputDate(
         Value => '1977-12-12',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -243,8 +261,9 @@ sub ValidateInputDate {
         },
     );
 
-    return if !$DateTimeObject;
+    return unless $DateTimeObject;
 
+    # looks fine
     return 1;
 }
 
@@ -262,8 +281,9 @@ checks if the given value is valid.
         Value => '1977-12-12 12:00:00',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -306,8 +326,9 @@ checks if the given value is valid.
         Value => 123,
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -333,8 +354,9 @@ checks if the given value is valid.
         Class => 'Some general catalog class'
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -364,8 +386,9 @@ checks if the given value is valid.
         Value => 'some customer login',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -402,8 +425,9 @@ checks if the given value is valid.
         Value => 'some customer company name',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -431,8 +455,9 @@ checks if the given MimeType is valid.
         MimeTypeID => 'some MimeType',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -455,8 +480,9 @@ checks if the given Charset is valid.
         Charset => 'some charset',
     );
 
-    returns
-    $Success = 1            # or 0
+returns
+
+    $Success = 1            # or undef
 
 =cut
 
@@ -464,12 +490,11 @@ sub ValidateCharset {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    return if !$Param{Charset};
+    return unless $Param{Charset};
 
-    my $CharsetList = $Self->_CharsetList();
+    my $CharsetList = $Self->_CharsetList;
 
-    return if !$CharsetList->{ $Param{Charset} };
-
+    return unless $CharsetList->{ $Param{Charset} };
     return 1;
 }
 
@@ -487,7 +512,8 @@ replaces the user value with a system valid value.
         Value => '1977-12-12',
     );
 
-    returns
+returns
+
     $NewValue = '1977-12-12',
 
 =cut
@@ -532,7 +558,8 @@ replaces the user value with a system valid value.
         Value => '1977-12-12 12:00:00',
     );
 
-    returns
+returns
+
     $NewValue = '1977-12-12 12:00:00';
 
 =cut
@@ -575,7 +602,8 @@ replaces the user value with a system valid value.
         Class => 'Some general catalog class'
     );
 
-    returns
+returns
+
     $NewValue = 123
 
 =cut
@@ -604,7 +632,8 @@ replaces the system value with a user value.
         Value => '12-12-1977 00:00:00',
     );
 
-    returns
+returns
+
     $NewValue = '1977-12-12',
 
 =cut
@@ -628,7 +657,8 @@ replaces the system value with a user value.
         Class => 'Some general catalog class'
     );
 
-    returns
+returns
+
     $NewValue = 'some value'
 
 =cut
@@ -659,10 +689,13 @@ creates a new attachment for the given ConfigItem.
         UserID       => 123,
     );
 
-    returns
+returns
+
     $Result = {
         Success => 1,                        # if everything is ok
     }
+
+or
 
     $Result = {
         Success      => 0,
@@ -707,7 +740,7 @@ checks if the given XMLData value are valid.
         Parent     => 'some parent',
     );
 
-    returns:
+returns:
 
     $XMLDataCheck = {
         Success => 1,                               # if everything is OK
@@ -885,12 +918,12 @@ sub CheckXMLData {
 replace the XMLData to one that uses internal values.
 
     my $NewXMLData = $CommonObject->ReplaceXMLData(
-        Definition => $DefinitionArrayRef,          # Config Item Definition ot just part of it
+        Definition => $DefinitionArrayRef,          # Config Item Definition or just part of it
         XMLData    => $XMLDataHashRef,
         Parent     => 'some parent',
     );
 
-    returns:
+returns:
 
     $NewXMLData = $XMLDataHashRef,                  # with replaced values
 
@@ -1025,7 +1058,7 @@ Create a XMLData suitable for VersionAdd.
         Child      => 1,                    # or 0, optional
     );
 
-    returns:
+returns:
 
     $NewXMLData = $XMLDataHashRef,                  # suitable for version add
 
@@ -1128,7 +1161,7 @@ Creates a readable XMLData.
         XMLData    => $XMLDataHashRef,
     );
 
-    returns:
+returns:
 
     $NewXMLData = $XMLDataHashRef,                  # suitable for version add
 
@@ -1227,7 +1260,7 @@ replace the XMLData to one that uses user values.
         Parent     => 'some parent',
     );
 
-    returns:
+returns:
 
     $NewXMLData = $XMLDataHashRef,                  # with replaced values
 
@@ -1375,8 +1408,9 @@ returns a list of all available charsets.
         UserID => 123,
     );
 
-    returns
-    $Success = {
+returns
+
+    $CharsetList = {
         #...
         iso-8859-1  => 1,
         iso-8859-15 => 1,
@@ -1388,18 +1422,11 @@ returns a list of all available charsets.
 =cut
 
 sub _CharsetList {
-    my ( $Self, %Param ) = @_;
+    my ($Self) = @_;
 
-    # get charset array
-    use Encode;
-    my @CharsetList = Encode->encodings(":all");
-
-    my %CharsetHash;
-
-    # create a charset lookup table
-    for my $Charset (@CharsetList) {
-        $CharsetHash{$Charset} = 1;
-    }
+    my %CharsetHash = map
+        { $_ => 1 }
+        Encode->encodings(':all');
 
     return \%CharsetHash;
 }
@@ -1420,11 +1447,13 @@ checks if the given value is valid.
                                                  #   for root key items
     );
 
-    returns:
+returns:
 
     $ValueCheck = {
         Success => 1,                            # if everything is OK
     }
+
+or
 
     $ValueCheck = {
         ErrorCode    => 'Function.Error',        # if error
@@ -1558,7 +1587,7 @@ replace user values with system ready values.
                                                  #   for root key items
     );
 
-    returns:
+returns:
 
     $NewValue = $ANewValue
 
@@ -1610,7 +1639,7 @@ replace internal values with user values.
                                                  #   for root key items
     );
 
-    returns:
+returns:
 
     $NewValue = $ANewValue
 

@@ -514,7 +514,7 @@ sub ConfigItemAdd {
     }
 
     # get deployment state list
-    my $DeplStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    my $DeplStateList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::DeploymentState',
     );
 
@@ -532,7 +532,7 @@ sub ConfigItemAdd {
     }
 
     # get incident state list
-    my $InciStateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+    my $InciStateList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::Core::IncidentState',
     );
 

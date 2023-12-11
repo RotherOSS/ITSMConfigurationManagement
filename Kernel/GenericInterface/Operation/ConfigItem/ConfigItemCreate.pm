@@ -37,15 +37,14 @@ Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate - GenericInter
 =head2 new()
 
 usually, you want to create an instance of this
-by using Kernel::GenericInterface::Operation->new();
+by using C<Kernel::GenericInterface::Operation->new();>.
 
 =cut
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     # check needed objects
     for my $Needed (qw( DebuggerObject WebserviceID )) {
@@ -145,7 +144,7 @@ perform ConfigItemCreate Operation. This will return the created config item num
                     },
                     # ...
                 ],
-                #or
+                # or, because HTTP::SOAP might reduce single element lists
                 #Attachment => {
                 #    Content     => 'content'
                 #    ContentType => 'some content type'
@@ -178,7 +177,6 @@ sub Run {
     );
 
     if ( !$Result->{Success} ) {
-
         $Self->ReturnError(
             ErrorCode    => 'Webservice.InvalidConfiguration',
             ErrorMessage => $Result->{ErrorMessage},
@@ -193,8 +191,7 @@ sub Run {
     {
         return $Self->ReturnError(
             ErrorCode    => "$Self->{OperationName}.MissingParameter",
-            ErrorMessage =>
-                "$Self->{OperationName}: UserLogin or SessionID is required!",
+            ErrorMessage => "$Self->{OperationName}: UserLogin or SessionID is required!",
         );
     }
 
@@ -210,7 +207,9 @@ sub Run {
     }
 
     # authenticate user
-    my ( $UserID, $UserType ) = $Self->Auth(%Param);
+    my ( $UserID, $UserType ) = $Self->Auth(
+        %Param,
+    );
 
     if ( !$UserID ) {
         return $Self->ReturnError(
@@ -224,13 +223,10 @@ sub Run {
         if ( !IsHashRefWithData( $Param{Data}->{$Needed} ) ) {
             return $Self->ReturnError(
                 ErrorCode    => "$Self->{OperationName}.MissingParameter",
-                ErrorMessage =>
-                    "$Self->{OperationName}: $Needed parameter is missing or not valid!",
+                ErrorMessage => "$Self->{OperationName}: $Needed parameter is missing or invalid!",
             );
         }
     }
-
-    # isolate config item parameter
     my $ConfigItem = $Param{Data}->{ConfigItem};
 
     # remove leading and trailing spaces
@@ -419,11 +415,13 @@ checks if the given config item parameters are valid.
         ConfigItem => $ConfigItem,                  # all config item parameters
     );
 
-    returns:
+returns:
 
     $ConfigItemCheck = {
         Success => 1,                               # if everything is OK
     }
+
+or
 
     $ConfigItemCheck = {
         ErrorCode    => 'Function.Error',           # if error
@@ -576,23 +574,26 @@ sub _CheckAttachment {
 
 =head2 _ConfigItemCreate()
 
-creates a configuration item with attachments if specified.
+creates a configuration item with dynamic fields and attachments if specified.
 
     my $Response = $OperationObject->_ConfigItemCreate(
         ConfigItem     => $ConfigItem,             # all configuration item parameters
         AttachmentList => $Attachment,             # a list of all attachments
+        DynamicFieldParams => $DynamicFieldParams,
         UserID         => 123,
     );
 
-    returns:
+returns:
 
     $Response = {
-        Success => 1,                               # if everething is OK
+        Success => 1,                               # if everything was OK
         Data => {
             ConfigItemID => 123,
             ConfigItemNumber => 'CN123',
         }
     }
+
+or
 
     $Response = {
         Success      => 0,                         # if unexpected error
