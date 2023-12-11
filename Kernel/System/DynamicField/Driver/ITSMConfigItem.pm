@@ -80,6 +80,7 @@ sub new {
         'IsStatsCondition'             => 0,
         'IsCustomerInterfaceCapable'   => 1,
         'IsHiddenInTicketInformation'  => 0,
+        'IsReferenceField'             => 1,
     };
 
     $Self->{ReferencedObjectType} = 'ITSMConfigItem';
@@ -152,6 +153,12 @@ sub GetFieldTypeSettings {
                 Multiple        => 1,
             };
     }
+
+    # Support reference filters
+    push @FieldTypeSettings,
+        {
+            ConfigParamName => 'ReferenceFilterList',
+        };
 
     return @FieldTypeSettings;
 }
