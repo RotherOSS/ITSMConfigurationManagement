@@ -16,15 +16,20 @@
 
 package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
+use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
 
-use parent qw(
-    Kernel::GenericInterface::Operation::Common
-    Kernel::GenericInterface::Operation::ConfigItem::Common
-);
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 

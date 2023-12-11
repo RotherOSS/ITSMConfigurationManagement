@@ -16,16 +16,21 @@
 
 package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemDelete;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
+
+# core modules
 use MIME::Base64;
-use Kernel::System::VariableCheck qw(:all);
 
-use parent qw(
-    Kernel::GenericInterface::Operation::Common
-    Kernel::GenericInterface::Operation::ConfigItem::Common
-);
+# CPAN modules
+
+# OTOBO modules
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 

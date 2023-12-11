@@ -16,15 +16,20 @@
 
 package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpdate;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
+
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-
-use parent qw(
-    Kernel::GenericInterface::Operation::Common
-    Kernel::GenericInterface::Operation::ConfigItem::Common
-);
 
 our $ObjectManagerDisabled = 1;
 
