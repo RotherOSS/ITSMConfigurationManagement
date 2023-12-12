@@ -23,6 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(any);
 
 # CPAN modules
 
@@ -972,6 +973,7 @@ sub Run {
 
     # render dynamic fields
     my $DynamicFieldHTML;
+    my %GroupLookup;
     if ( IsHashRefWithData( $Definition->{DefinitionRef} ) && $Definition->{DefinitionRef}{Sections} ) {
 
         # TODO: look what this was/is about
@@ -982,7 +984,25 @@ sub Run {
         # Thus for now make sure to show dynamic fields only once, even if present on multiple pages/sections
         my $FieldsSeen = {};
 
+        PAGE:
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+            # Interfaces is optional, effectively default to [ 'Agent' ]
+            if ( $Page->{Interfaces} ) {
+                next PAGE unless any { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+            }
+
+            if ( $Page->{Groups} ) {
+                if ( !%GroupLookup ) {
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
+                        UserID => $Self->{UserID},
+                        Type   => 'ro',
+                    );
+                }
+
+                # grant access to the page only when the user is in one of the specified groups
+                next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
+            }
 
             SECTION:
             for my $SectionConfig ( $Page->{Content}->@* ) {
