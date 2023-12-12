@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::DynamicField::Driver::ITSMConfigItemVersion;
+package Kernel::System::DynamicField::Driver::ConfigItemVersion;
 
 use v5.24;
 use strict;
@@ -22,7 +22,7 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
-use parent qw(Kernel::System::DynamicField::Driver::ITSMConfigItem);
+use parent qw(Kernel::System::DynamicField::Driver::ConfigItem);
 
 # core modules
 
@@ -38,7 +38,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::ITSMConfigItemVersion - backend for the Reference dynamic field
+Kernel::System::DynamicField::Driver::ConfigItemVersion - backend for the Reference dynamic field
 
 =head1 DESCRIPTION
 

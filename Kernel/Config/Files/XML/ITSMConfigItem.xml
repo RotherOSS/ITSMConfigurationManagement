@@ -2075,13 +2075,13 @@
     </Setting>
 
     <!-- dynamic field ITSMConfigItem Reference -->
-    <Setting Name="DynamicFields::Driver###ITSMConfigItem" Required="0" Valid="1">
+    <Setting Name="DynamicFields::Driver###ConfigItem" Required="0" Valid="1">
         <Description Translatable="1">DynamicField backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">ITSMConfigItem</Item>
-                <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItem</Item>
+                <Item Key="DisplayName" Translatable="1">ConfigItem</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::ConfigItem</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
             </Hash>
         </Value>
@@ -2089,13 +2089,13 @@
     <!-- End dynamic field ITSMConfigItem Reference -->
 
     <!-- dynamic field ITSMConfigItemVersion Reference -->
-    <Setting Name="DynamicFields::Driver###ITSMConfigItemVersion" Required="0" Valid="1">
+    <Setting Name="DynamicFields::Driver###ConfigItemVersion" Required="0" Valid="1">
         <Description Translatable="1">DynamicField backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">ITSMConfigItem Version</Item>
-                <Item Key="Module">Kernel::System::DynamicField::Driver::ITSMConfigItemVersion</Item>
+                <Item Key="DisplayName" Translatable="1">ConfigItem Version</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::ConfigItemVersion</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldReference</Item>
             </Hash>
         </Value>
