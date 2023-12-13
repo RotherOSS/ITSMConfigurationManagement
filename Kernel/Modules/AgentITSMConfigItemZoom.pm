@@ -352,11 +352,14 @@ sub Run {
             # TODO: Render page switch button
         }
 
-        $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
-            ConfigItem => $ConfigItem,
-            Definition => $Definition,
-            PageRef    => $PageShown // $Pages[0],
-        );
+        if (@Pages) {
+            $ConfigItem->{DynamicFieldHTML} = $Kernel::OM->Get('Kernel::Output::HTML::ITSMConfigItem::DynamicField')->PageRender(
+                ConfigItem => $ConfigItem,
+                Definition => $Definition,
+                PageRef    => $PageShown // $Pages[0],
+            );
+        }
+
     }
 
     # get create & change user data
