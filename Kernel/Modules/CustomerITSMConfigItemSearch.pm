@@ -51,7 +51,7 @@ sub Run {
     my $JSONObject           = $Kernel::OM->Get('Kernel::System::JSON');
     my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject          = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+    my $SessionObject        = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject           = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
     my $Config = $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}");
@@ -118,7 +118,7 @@ sub Run {
     }
 
     # group permission check
-    if ( IsArrayRefWithData($PermissionConditionConfig->{Groups}) ) {
+    if ( IsArrayRefWithData( $PermissionConditionConfig->{Groups} ) ) {
         my $AccessOk = 0;
 
         # fetch groups of customer user
@@ -195,7 +195,6 @@ sub Run {
         # otherwise use Preview as default as in LayoutConfigItem
         $View ||= 'Small';
 
-
         my $LinkPage = 'Filter='
             . $LayoutObject->Ascii2Html( Text => $Filter )
             . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
@@ -219,9 +218,9 @@ sub Run {
 
             # fetch multi value params
             my @Array = $ParamObject->GetArray( Param => $SearchParamArray );
-            if (grep {$_} @Array) {
+            if ( grep {$_} @Array ) {
                 $GetParam{$SearchParamArray} = \@Array;
-                $LinkSort .= join('', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array);
+                $LinkSort .= join( '', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array );
             }
         }
 
@@ -336,7 +335,7 @@ sub Run {
 
             $SearchConfig{DeplStates} = \@SearchDeplStates;
         }
-        elsif ( IsArrayRefWithData($PermissionConditionConfig->{DeploymentStates}) ) {
+        elsif ( IsArrayRefWithData( $PermissionConditionConfig->{DeploymentStates} ) ) {
             $SearchConfig{DeplStates} = $PermissionConditionConfig->{DeploymentStates};
         }
 
@@ -351,14 +350,14 @@ sub Run {
 
         # restrict search by permission condition customer company and customer user
         # NOTE this overwrites previously set search params for the configured dynamic fields
-        $SearchConfig{ "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" } = {
+        $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}"} = {
             Equals => $Self->{CustomerID},
         };
-        $SearchConfig{ "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" } = {
+        $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}"} = {
             Equals => $Self->{UserID},
         };
 
-        my %Filters  = (
+        my %Filters = (
             $Filter => {
                 Name   => $PermissionConditionConfig->{Name},
                 Prio   => 1000,
@@ -456,9 +455,9 @@ sub Run {
         my %RevertedClassList = reverse $ClassList->%*;
         $SearchableParams{Class} = { map { $RevertedClassList{$_} => $_ } $PermissionConditionConfig->{Classes}->@* };
 
-        if ( IsArrayRefWithData($PermissionConditionConfig->{DeploymentStates} ) ) {
+        if ( IsArrayRefWithData( $PermissionConditionConfig->{DeploymentStates} ) ) {
             my %RevertedDeplStateList = reverse $DeplStateList->%*;
-            $SearchableParams{DeplState} = { map { $RevertedDeplStateList{$_} => $_ } $PermissionConditionConfig->@* };
+            $SearchableParams{DeplState} = { map { $RevertedDeplStateList{$_} => $_ } $PermissionConditionConfig->{DeploymentStates}->@* };
         }
         else {
             $SearchableParams{DeplState} = $DeplStateList;
@@ -505,11 +504,11 @@ sub Run {
         # generate dropdown for selecting the permission condition
         my %PermissionConditionData = map { int($_) => $PermissionConditionConfigs->{$_}->{Name} } keys $PermissionConditionConfigs->%*;
         my $PermissionConditionStrg = $LayoutObject->BuildSelection(
-            Data          => \%PermissionConditionData,
-            Name          => 'PermissionCondition',
-            SelectedID    => $Filter || '',
-            Translation   => 1,
-            Class         => 'Modernize',
+            Data        => \%PermissionConditionData,
+            Name        => 'PermissionCondition',
+            SelectedID  => $Filter || '',
+            Translation => 1,
+            Class       => 'Modernize',
         );
 
         $LayoutObject->Block(
