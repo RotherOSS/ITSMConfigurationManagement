@@ -22,11 +22,9 @@ use warnings;
 # core modules
 
 # CPAN modules
-use Capture::Tiny qw(capture);
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::Output::Template::Provider;
 
 our @ObjectDependencies = (
     'Kernel::Config',
