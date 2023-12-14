@@ -452,12 +452,24 @@ sub Run {
         );
 
         # set searchable params
-        my %RevertedClassList = reverse $ClassList->%*;
-        $SearchableParams{Class} = { map { $RevertedClassList{$_} ? ( $RevertedClassList{$_} => $_ ) : () } $PermissionConditionConfig->{Classes}->@* };
+        my %ClassLookup = reverse $ClassList->%*;
+        $SearchableParams{Class} = {
+            map {
+                $ClassLookup{$_}
+                    ? ( $ClassLookup{$_} => $_ )
+                    : ()
+            } $PermissionConditionConfig->{Classes}->@*
+        };
 
         if ( IsArrayRefWithData( $PermissionConditionConfig->{DeploymentStates} ) ) {
-            my %RevertedDeplStateList = reverse $DeplStateList->%*;
-            $SearchableParams{DeplState} = { map { $RevertedDeplStateList{$_} ? ( $RevertedDeplStateList{$_} => $_ ) : () } $PermissionConditionConfig->{DeploymentStates}->@* };
+            my %DeplStateLookup = reverse $DeplStateList->%*;
+            $SearchableParams{DeplState} = {
+                map {
+                    $DeplStateLookup{$_}
+                        ? ( $DeplStateLookup{$_} => $_ )
+                        : ()
+                } $PermissionConditionConfig->{DeploymentStates}->@*
+            };
         }
         else {
             $SearchableParams{DeplState} = $DeplStateList;
