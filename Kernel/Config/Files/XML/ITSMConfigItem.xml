@@ -1304,7 +1304,7 @@
     <!-- ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch -->
     <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ITSM configuration item search screen in the customer interface.</Description>
-        <Navigation>Frontend::Customer::ITSMConfigItem::Permission</Navigation>
+        <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
@@ -1329,12 +1329,10 @@
         <Value>
             <Item ValueType="Select" SelectedID="Age">
                 <Item ValueType="Option" Value="Age" Translatable="1">Age</Item>
-                <!-- TODO verify attribute names -->
                 <Item ValueType="Option" Value="Number" Translatable="1">Number</Item>
                 <Item ValueType="Option" Value="Name" Translatable="1">Name</Item>
                 <Item ValueType="Option" Value="DeplState" Translatable="1">Deployment State</Item>
                 <Item ValueType="Option" Value="InciState" Translatable="1">Incident State</Item>
-                <!-- TODO test dynamic fields -->
             </Item>
         </Value>
     </Setting>
