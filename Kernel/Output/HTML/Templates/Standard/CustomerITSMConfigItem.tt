@@ -17,9 +17,11 @@
 <div id='oooContent'>
     <div id='oooHeader'>
         <h1>[% Translate("Your ConfigItems") | html %]</h1>
+[% RenderBlockStart("SearchBox") %]
         <div id="oooSearchBox">
-            <button id="ITSMConfigItemSearch" class="oooL" title="Search" type="Submit" value="Search">Search</button>
+            <button id="ITSMConfigItemSearch" class="oooL" title="Search" type="Submit" value="Search">[% Translate("Search") | html %]</button>
         </div>
+[% RenderBlockEnd("SearchBox") %]
     </div>
     <div id='oooMainBox'>
         <div id='oooITSMConfigItemListHeader'>

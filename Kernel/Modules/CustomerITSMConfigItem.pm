@@ -570,6 +570,12 @@ sub Run {
         Output => 1,
     );
 
+    if (defined $ConfigObject->Get("CustomerFrontend::Module")->{"CustomerITSMConfigItemSearch"}) {
+        $LayoutObject->Block(
+            Name => 'SearchBox',
+        );
+    }
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'CustomerITSMConfigItem',
         Data         => {
