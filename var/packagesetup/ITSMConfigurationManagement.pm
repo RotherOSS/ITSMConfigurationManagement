@@ -16,8 +16,11 @@
 
 package var::packagesetup::ITSMConfigurationManagement;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
 # core modules
 
@@ -56,6 +59,7 @@ Functions for installing the ITSMConfigurationManagement package.
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $CodeObject = $Kernel::OM->Get('var::packagesetup::ITSMConfigurationManagement');
 
@@ -1057,13 +1061,15 @@ EOF
     );
     my %ReverseClassList = reverse %{$ClassList};
 
+    # Directly insert new definition in OTOBO 10.1 style.
+    my ( @ClassIDBinds, @DefinitionBinds );
     CLASSNAME:
     for my $ClassName ( sort { lc $a cmp lc $b } keys %Definition ) {
 
         # check if class exists
         my $ClassID = $ReverseClassList{$ClassName};
 
-        next CLASSNAME if !$ClassID;
+        next CLASSNAME unless $ClassID;
 
         # check if definition already exists
         my $DefinitionList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionList(
@@ -1074,15 +1080,35 @@ EOF
         next CLASSNAME if !defined $DefinitionList;
         next CLASSNAME if $DefinitionList && ref $DefinitionList eq 'ARRAY' && @{$DefinitionList};
 
-        # Directly insert new definition in OTOBO 10.1 style.
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        push @ClassIDBinds,    $ClassID;
+        push @DefinitionBinds, $Definition{$ClassName};
+    }
+
+    if ( @ClassIDBinds && @DefinitionBinds ) {
+
+        my $Success = $Kernel::OM->Get('Kernel::System::DB')->DoArray(
             SQL => <<'END_SQL',
 INSERT INTO configitem_definition
     (class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by)
-  VALUES (?, ?, '', 1, current_timestamp, 1)
+  VALUES (?, ?, '', ?, current_timestamp, ?)
 END_SQL
-            Bind => [ \( $ClassID, $Definition{$ClassName} ) ],
+            Bind => [
+                \@ClassIDBinds,
+                \@DefinitionBinds,
+                1,    # version
+                1,    # createby
+            ],
         );
+
+        # give up upon failure
+        if ( !$Success ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Insert of OTOBO 10.1 style class definitions failed",
+            );
+
+            return 1;
+        }
     }
 
     # Upgrade to OTOBO 11 style, this also creates the dynamic fields
