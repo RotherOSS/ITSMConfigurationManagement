@@ -760,7 +760,7 @@ sub _PDFOutputDFOutput {
 
     DFNAME:
     for my $DFName (@DFOrdered) {
-        next DFName unless $Param{ConfigItem}{ 'DynamicField_' . $DFName };
+        next DFNAME unless $Param{ConfigItem}{ 'DynamicField_' . $DFName };
 
         my $DynamicField = $Definition->{DynamicFieldRef}{$DFName};
 
