@@ -38,6 +38,7 @@ our @ObjectDependencies = (
     'Kernel::System::Service',
     'Kernel::System::Stats',
     'Kernel::System::Valid',
+    'Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11',
 );
 
 =head1 NAME
@@ -1069,14 +1070,28 @@ EOF
             ClassID => $ClassID,
         );
 
+        # don't mess with the config item definition when it already exists
         next CLASSNAME if !defined $DefinitionList;
         next CLASSNAME if $DefinitionList && ref $DefinitionList eq 'ARRAY' && @{$DefinitionList};
 
-        # add the new definition
-        $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionAdd(
-            ClassID    => $ClassID,
-            Definition => $Definition{$ClassName},
-            UserID     => 1,
+        # Directly insert new definition in OTOBO 10.1 style.
+        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL => <<'END_SQL',
+INSERT INTO configitem_definition
+    (class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by)
+  VALUES (?, ?, '', 1, current_timestamp, 1)
+END_SQL
+            Bind => [ \( $ClassID, $Definition{$ClassName} ) ],
+        );
+    }
+
+    # Upgrade to OTOBO 11 style, this also creates the dynamic fields
+    my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
+    my $ExitCode      = $CommandObject->Execute('--use-defaults');
+    if ($ExitCode) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "The command Admin::ITSM::Configitem::UpgradeTo11 failed",
         );
     }
 
