@@ -64,8 +64,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {};
-    bless( $Self, $Type );
+    my $Self = bless {}, $Type;
 
     # Force a reload of ZZZAuto.pm and ZZZAAuto.pm to get the fresh configuration values.
     for my $Module ( sort keys %INC ) {
@@ -85,7 +84,7 @@ sub new {
     );
 
     # define file prefix for stats
-    $Self->{FilePrefix} = 'ITSMStats';
+    $Self->{StatsFilePrefix} = 'ITSMStats';
 
     return $Self;
 }
@@ -130,7 +129,7 @@ sub CodeInstall {
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
-        FilePrefix => $Self->{FilePrefix},
+        FilePrefix => $Self->{StatsFilePrefix},
         UserID     => 1,
     );
 
@@ -174,7 +173,7 @@ sub CodeReinstall {
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
-        FilePrefix => $Self->{FilePrefix},
+        FilePrefix => $Self->{StatsFilePrefix},
         UserID     => 1,
     );
 
@@ -229,7 +228,7 @@ sub CodeUpgrade {
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
-        FilePrefix => $Self->{FilePrefix},
+        FilePrefix => $Self->{StatsFilePrefix},
         UserID     => 1,
     );
 
