@@ -1309,6 +1309,20 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState" Required="0" Valid="1">
+        <Description Translatable="1">Includes deployment states in the config item search of the customer interface.</Description>
+        <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###IncidentState" Required="0" Valid="1">
+        <Description Translatable="1">Includes incident states in the config item search of the customer interface.</Description>
+        <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCondition" Required="1" Valid="1">
         <Description Translatable="1">Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>

@@ -214,7 +214,17 @@ sub Run {
             $LinkSort .= ";$SearchParam=" . $LayoutObject->Ascii2Html( Text => $GetParam{$SearchParam} );
         }
 
-        for my $SearchParamArray (qw(Classes DeplStateIDs InciStateIDs)) {
+        my @ArraySearchParams = qw(Classes);
+
+        if ( $Config->{DeploymentState} ) {
+            push @ArraySearchParams, 'DeplStateIDs';
+        }
+
+        if ( $Config->{IncidentState} ) {
+            push @ArraySearchParams, 'InciStateIDs';
+        }
+
+        for my $SearchParamArray ( @ArraySearchParams ) {
 
             # fetch multi value params
             my @Array = $ParamObject->GetArray( Param => $SearchParamArray );
@@ -665,41 +675,47 @@ sub Run {
             },
         );
 
-        # generate dropdown for selecting the wanted deployment states
-        my $CurDeplStateOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $SearchableParams{DeplState},
-            Name         => 'DeplStateIDs',
-            SelectedID   => $Defaults{DeploymentStateIDs},
-            Size         => 5,
-            PossibleNone => 1,
-            Multiple     => 1,
-            Class        => 'Modernize',
-        );
+        if ( $Config->{DeploymentState} ) {
 
-        $LayoutObject->Block(
-            Name => 'DeplState',
-            Data => {
-                CurDeplStateOptionStrg => $CurDeplStateOptionStrg,
-            },
-        );
+            # generate dropdown for selecting the wanted deployment states
+            my $CurDeplStateOptionStrg = $LayoutObject->BuildSelection(
+                Data         => $SearchableParams{DeplState},
+                Name         => 'DeplStateIDs',
+                SelectedID   => $Defaults{DeploymentStateIDs},
+                Size         => 5,
+                PossibleNone => 1,
+                Multiple     => 1,
+                Class        => 'Modernize',
+            );
 
-        # generate dropdown for selecting the wanted incident states
-        my $CurInciStateOptionStrg = $LayoutObject->BuildSelection(
-            Data         => $SearchableParams{InciState},
-            Name         => 'InciStateIDs',
-            SelectedID   => $Defaults{IncidentStateIDs},
-            Size         => 5,
-            PossibleNone => 1,
-            Multiple     => 1,
-            Class        => 'Modernize',
-        );
+            $LayoutObject->Block(
+                Name => 'DeplState',
+                Data => {
+                    CurDeplStateOptionStrg => $CurDeplStateOptionStrg,
+                },
+            );
+        }
 
-        $LayoutObject->Block(
-            Name => 'InciState',
-            Data => {
-                CurInciStateOptionStrg => $CurInciStateOptionStrg,
-            },
-        );
+        if ( $Config->{IncidentState} ) {
+
+            # generate dropdown for selecting the wanted incident states
+            my $CurInciStateOptionStrg = $LayoutObject->BuildSelection(
+                Data         => $SearchableParams{InciState},
+                Name         => 'InciStateIDs',
+                SelectedID   => $Defaults{IncidentStateIDs},
+                Size         => 5,
+                PossibleNone => 1,
+                Multiple     => 1,
+                Class        => 'Modernize',
+            );
+
+            $LayoutObject->Block(
+                Name => 'InciState',
+                Data => {
+                    CurInciStateOptionStrg => $CurInciStateOptionStrg,
+                },
+            );
+        }
     }
     else {
         my $Output = $LayoutObject->CustomerHeader(
