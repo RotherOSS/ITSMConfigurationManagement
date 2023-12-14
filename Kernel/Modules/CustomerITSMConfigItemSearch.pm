@@ -348,6 +348,27 @@ sub Run {
         $SearchConfig{Number} = $GetParam{Number} ? $GetParam{Number} : undef;
         $SearchConfig{Name}   = $GetParam{Name}   ? $GetParam{Name}   : undef;
 
+        # collect dynamic field search params
+        if ( IsHashRefWithData($PermissionConditionConfig->{DynamicFieldValues}) ) {
+            my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+            my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+            DYNAMICFIELD:
+            for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
+                next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};
+
+                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $FieldName,
+                );
+
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+                $SearchConfig{"DynamicField_$FieldName"} = {
+                    Equals => $PermissionConditionConfig->{DynamicFieldValues}{$FieldName},
+                };
+            }
+        }
+
         # restrict search by permission condition customer company and customer user
         # NOTE this overwrites previously set search params for the configured dynamic fields
         $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}"} = {

@@ -2132,6 +2132,11 @@
                 <Item Key="DeploymentStates"><Array></Array></Item>
                 <Item Key="CustomerUserDynamicField"></Item>
                 <Item Key="CustomerCompanyDynamicField"></Item>
+                <Item Key="DynamicFieldValues">
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -2146,6 +2151,11 @@
                 <Item Key="DeploymentStates"><Array></Array></Item>
                 <Item Key="CustomerUserDynamicField"></Item>
                 <Item Key="CustomerCompanyDynamicField"></Item>
+                <Item Key="DynamicFieldValues">
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -2160,6 +2170,11 @@
                 <Item Key="DeploymentStates"><Array></Array></Item>
                 <Item Key="CustomerUserDynamicField"></Item>
                 <Item Key="CustomerCompanyDynamicField"></Item>
+                <Item Key="DynamicFieldValues">
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -2174,6 +2189,11 @@
                 <Item Key="DeploymentStates"><Array></Array></Item>
                 <Item Key="CustomerUserDynamicField"></Item>
                 <Item Key="CustomerCompanyDynamicField"></Item>
+                <Item Key="DynamicFieldValues">
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -2188,6 +2208,11 @@
                 <Item Key="DeploymentStates"><Array></Array></Item>
                 <Item Key="CustomerUserDynamicField"></Item>
                 <Item Key="CustomerCompanyDynamicField"></Item>
+                <Item Key="DynamicFieldValues">
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>

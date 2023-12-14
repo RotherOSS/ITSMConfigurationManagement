@@ -205,6 +205,13 @@ sub CustomerPermission {
             next CONDITION if @DeplStates && !grep { $_ eq $ConfigItem->{DeplState} } @DeplStates;
         }
 
+        if ( $ConditionSet->{DynamicFieldValues} ) {
+            for my $FieldName ( keys $ConditionSet->{DynamicFieldValues}->%* ) {
+                my $FieldValue = $ConditionSet->{DynamicFieldValues}{$FieldName};
+                next CONDITION if $FieldValue && !$ConfigItem->{"DynamicField_$FieldName"} eq $FieldValue;
+            }
+        }
+
         if ( $ConditionSet->{CustomerUserDynamicField} ) {
             next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
             next CONDITION if none { $_ eq $Param{UserID} } $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} }->@*;

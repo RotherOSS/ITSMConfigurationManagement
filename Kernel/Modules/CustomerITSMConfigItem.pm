@@ -262,9 +262,32 @@ sub Run {
             # set as selected filter if not present
             $Filter ||= $PermissionConditionConfig->{Name};
 
+            # collect dynamic field search params
+            my %DFSearchParams;
+            if ( IsHashRefWithData($PermissionConditionConfig->{DynamicFieldValues}) ) {
+                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+                DYNAMICFIELD:
+                for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
+                    next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};
+
+                    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                        Name => $FieldName,
+                    );
+
+                    next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                    next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+                    $DFSearchParams{"DynamicField_$FieldName"} = {
+                        Equals => $PermissionConditionConfig->{DynamicFieldValues}{$FieldName},
+                    };
+                }
+            }
+
             my %FilterSearch = (
                 Classes                                                                  => $PermissionConditionConfig->{Classes},
                 DeplStates                                                               => $PermissionConditionConfig->{DeploymentStates},
+                %DFSearchParams,
                 "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
                     Equals => $Self->{CustomerID},
                 },
