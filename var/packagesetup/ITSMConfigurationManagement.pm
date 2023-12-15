@@ -34,6 +34,9 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::DB',
+    'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::DynamicFieldValue',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
@@ -1449,10 +1452,10 @@ sub _DynamicFieldsDelete {
     my ( $Self, %Param ) = @_;
 
     # get necessary objects
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
-    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $DynamicFieldValueObject   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+    my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
 
     # get all dynamic fields because we can't filter for field type in dynamic field list functions
     my $DynamicFields = $DynamicFieldObject->DynamicFieldListGet(
@@ -1462,11 +1465,12 @@ sub _DynamicFieldsDelete {
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( $DynamicFields->@* ) {
         next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
-        next DYNAMICFIELD unless (
-            $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem'
-            || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemReference'
-            || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersionReference'
-        );
+        next DYNAMICFIELD
+            unless (
+                $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem'
+                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemReference'
+                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersionReference'
+            );
 
         if ( $DynamicFieldConfig->{InternalField} ) {
             $LogObject->Log(
