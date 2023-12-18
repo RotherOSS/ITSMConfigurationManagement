@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - a077e914380d1a13d5aa31472ea687353b614622 - Kernel/System/ACL/DB/ACL.pm
+# $origin: otobo - ee090b0bee5cd9cb57be81a8250fefd228543305 - Kernel/System/ACL/DB/ACL.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -110,9 +110,11 @@ Returns:
 
 sub ACLAdd {
     my ( $Self, %Param ) = @_;
+# Rother OSS / ITSMConfigurationManagement
 
     # set default for object type
     $Param{ObjectType} //= 'Ticket';
+# EO ITSMConfigurationManagement
 
     # check needed stuff
     for my $Key (qw(Name ValidID UserID)) {
@@ -145,7 +147,6 @@ sub ACLAdd {
         }
 
         $ConfigMatch = $YAMLObject->Dump( Data => $Param{ConfigMatch} );
-        utf8::upgrade($ConfigMatch);
     }
 
     if ( $Param{ConfigChange} ) {
@@ -159,7 +160,6 @@ sub ACLAdd {
         }
 
         $ConfigChange = $YAMLObject->Dump( Data => $Param{ConfigChange} );
-        utf8::upgrade($ConfigChange);
     }
 
     # get database object
@@ -528,12 +528,10 @@ sub ACLUpdate {
 
     if ( $Param{ConfigMatch} && IsHashRefWithData( $Param{ConfigMatch} ) ) {
         $ConfigMatch = $YAMLObject->Dump( Data => $Param{ConfigMatch} );
-        utf8::upgrade($ConfigMatch);
     }
 
     if ( $Param{ConfigChange} && IsHashRefWithData( $Param{ConfigChange} ) ) {
         $ConfigChange = $YAMLObject->Dump( Data => $Param{ConfigChange} );
-        utf8::upgrade($ConfigChange);
     }
 
     # get database object
@@ -708,7 +706,8 @@ sub ACLList {
 # EO ITSMConfigurationManagement
     if ( $ValidIDsStrg ne 'ALL' ) {
 
-        my $ValidIDsStrgDB = join ',', map { $DBObject->Quote( $_, 'Integer' ) } @{ $Param{ValidIDs} };
+        my $ValidIDsStrgDB = join ',', map { $DBObject->Quote( $_, 'Integer' ) }
+            @{ $Param{ValidIDs} };
 
         $SQL .= "WHERE valid_id IN ($ValidIDsStrgDB)";
 # RotherOSS / ITSMConfigurationManagement
@@ -1312,9 +1311,13 @@ sub ACLImport {
     }
 
     # update preselection cache
+# Rother OSS / ITSMConfigurationManagement
+#     my $FieldRestrictionsObject = $Kernel::OM->Get('Kernel::System::Ticket::FieldRestrictions');
+#     $FieldRestrictionsObject->SetACLPreselectionCache();
     for my $ACLType ( qw(Ticket ITSMConfigItem) ) {
         $Kernel::OM->Get('Kernel::System::' . $ACLType . '::FieldRestrictions')->SetACLPreselectionCache();
     }
+# EO ITSMConfigurationManagement
 
 
     return {
@@ -1422,7 +1425,10 @@ sub _ACLItemOutput {
     my $Name = $Param{Key};
     $Name =~ s{\\}{\\\\}xmsg;
     $Name =~ s{\'}{\\'}xmsg;
+# Rother OSS / ITSMConfigurationManagement
+#     my $Key = '$Self->{TicketAcl}->{\'' . $Name . '\'}';
     my $Key = '$Self->{' . $Param{ObjectType} . 'Acl}->{\'' . $Name . '\'}';
+# EO ITSMConfigurationManagement
 
     $Output =~ s{\$VAR1}{$Key}mxs;
 

@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - b6b99279c16208dbf8a9bbdef70b88bf8b66b872 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 89bc6f734b53af1107de2be0cfc5b0b971bf8964 - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -25,6 +25,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(any);
 
 # CPAN modules
 
@@ -234,6 +235,10 @@ sub _ShowOverview {
         my @ReferenceDynamicFields;
         FIELDTYPE:
         for my $FieldTypeName ( sort { $FieldDialogs{$a} cmp $FieldDialogs{$b} } keys %FieldTypes ) {
+
+            if ( IsArrayRefWithData( $FieldTypeConfig->{$FieldTypeName}{ObjectTypes} ) ) {
+                next FIELDTYPE unless any { $ObjectType eq $_ } $FieldTypeConfig->{$FieldTypeName}{ObjectTypes}->@*;
+            }
 
             # group reference field types to show in tree view
             my $Value = $FieldTypes{$FieldTypeName};
