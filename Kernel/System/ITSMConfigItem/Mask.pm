@@ -362,11 +362,6 @@ sub RenderInput {
                     # hide fields
                     if ( $Param{Visibility} && !$Param{Visibility}{"DynamicField_$Element->{Name}"} ) {
                         $ColumnClassString .= ' oooACLHidden';
-
-                        # ACL hidden fields cannot be mandatory
-                        if ( $Param{Config}->{DynamicField}->{ $Element->{Name} } == 2 ) {
-                            $DynamicFieldHTML =~ s/(class=.+?Validate_Required)/$1_IfVisible/g;
-                        }
                     }
 
                     # column placement
