@@ -1084,8 +1084,8 @@ sub ImportDataSave {
 
     # Check if current definition of this class has required attribute which does not exist in mapping list.
     DF_NAME:
-    for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
-        my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
+    for my $DFName ( sort keys $Definition->{DynamicFieldRef}->%* ) {
+        my $DynamicFieldConfig = $Definition->{DynamicFieldRef}->{$DFName};
 
         next DF_NAME unless $DynamicFieldConfig->{Required};    # TODO: is this correct ???
 
