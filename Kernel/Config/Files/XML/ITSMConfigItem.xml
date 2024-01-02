@@ -1768,6 +1768,35 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Frontend::Module###AgentITSMConfigItemAttachment" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>itsm-configitem</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">To download attachments.</Item>
+                    <Item Key="Title"></Item>
+                    <Item Key="NavBarName">Config Item</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission" Required="1" Valid="1">
+        <Description Translatable="1">Required permissions to use the ITSM configuration item attachment action in the agent interface.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItemAttachment::Permission</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">ro</Item>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::PreMenuModule###100-Zoom" Required="0" Valid="1">
         <Description Translatable="1">Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::MenuModulePre</Navigation>
