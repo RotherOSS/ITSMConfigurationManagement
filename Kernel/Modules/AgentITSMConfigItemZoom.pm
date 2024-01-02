@@ -417,20 +417,29 @@ sub Run {
         ConfigItemID => $ConfigItemID,
     );
 
-    if (@Attachments) {
+    my @NonInlineAttachments;
 
-        $LayoutObject->Block(
-            Name => 'Attachments',
-        );
-
-        ATTACHMENT:
-        for my $Attachment (@Attachments) {
+    ATTACHMENT:
+    for my $Attachment ( @Attachments ) {
 
             # get the metadata of the current attachment
             my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
                 ConfigItemID => $ConfigItemID,
                 Filename     => $Attachment,
             );
+            next ATTACHMENT if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
+
+            push @NonInlineAttachments, $AttachmentData;
+    }
+
+    if (@NonInlineAttachments) {
+
+        $LayoutObject->Block(
+            Name => 'Attachments',
+        );
+
+        ATTACHMENT:
+        for my $AttachmentData (@NonInlineAttachments) {
 
             $LayoutObject->Block(
                 Name => 'AttachmentRow',

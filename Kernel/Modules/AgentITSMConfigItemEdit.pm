@@ -295,6 +295,8 @@ sub Run {
                 UserID       => $Self->{UserID},
             );
 
+            next FILENAME if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
+
             # add attachment to the upload cache
             $UploadCacheObject->FormIDAddFile(
                 FormID      => $Self->{FormID},
@@ -552,6 +554,26 @@ sub Run {
             my %NewAttachment;
             for my $Attachment (@Attachments) {
 
+                my $ContentID = $Attachment->{ContentID};
+                if (
+                    $ContentID
+                    && ( $Attachment->{ContentType} =~ /image/i )
+                    && ( $Attachment->{Disposition} eq 'inline' )
+                    )
+                {
+                    my $ContentIDHTMLQuote = $LayoutObject->Ascii2Html(
+                        Text => $ContentID,
+                    );
+
+                    # workaround for link encode of rich text editor, see bug#5053
+                    my $ContentIDLinkEncode = $LayoutObject->LinkEncode($ContentID);
+                    $GetParam{Description} =~ s/(ContentID=)$ContentIDLinkEncode/$1$ContentID/g;
+
+                    # ignore attachment if not linked in body
+                    next ATTACHMENT
+                        if $GetParam{Description} !~ /(\Q$ContentIDHTMLQuote\E|\Q$ContentID\E)/i;
+                }
+
                 # the key is the filename + filesize + content type
                 my $Key = $Attachment->{Filename}
                     . $Attachment->{Filesize}
@@ -560,6 +582,11 @@ sub Run {
                 # store all of the new attachment data
                 $NewAttachment{$Key} = $Attachment;
             }
+
+            # verify html document
+            $ConfigItem->{Description} = $LayoutObject->RichTextDocumentComplete(
+                String => $GetParam{Description},
+            );
 
             # for existing ConfigItems compare with the current data
             if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
