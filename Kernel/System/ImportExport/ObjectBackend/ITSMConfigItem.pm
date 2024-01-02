@@ -1449,7 +1449,7 @@ sub _DFSearchAttributesGet {
         # TODO: use search field from dynamic field driver
         if (1) {
 
-            if ( $DynamicFieldConfig->{Input}->{Type} eq 'Text' || $DynamicFieldConfig->{Input}->{Type} eq 'TextArea' ) {
+            if ( $DynamicFieldConfig->{FieldType} eq 'Text' || $DynamicFieldConfig->{FieldType} eq 'TextArea' ) {
                 push @Attributes,
                     {
                         Key   => $Key,
