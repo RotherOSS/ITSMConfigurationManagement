@@ -1186,6 +1186,30 @@ sub ImportDataSave {
                 $VersionData->{InciStateID} = $InciStateID;
             }
         }
+        elsif ( $Definition->{DynamicFieldRef}{$Key} ) {
+
+            my $DynamicFieldConfig = $Definition->{DynamicFieldRef}{$Key};
+
+            # Set is a special case
+            if (
+                $DynamicFieldConfig->{FieldType} eq 'Set'
+                || $DynamicFieldConfig->{FieldType} eq 'Agent'
+                || $DynamicFieldConfig->{FieldType} eq 'CustomerCompany'
+                || $DynamicFieldConfig->{FieldType} eq 'CustomerUser'
+                || $DynamicFieldConfig->{FieldType} eq 'Ticket'
+                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItem'
+                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersion'
+            ) {
+                if ( $Value ) {
+                    $NewVersionData{"DynamicField_$Key"} = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
+                        Data => $Value,
+                    );
+                }
+            }
+            else {
+                $NewVersionData{"DynamicField_$Key"} = $Value;
+            }
+        }
         else {
 
             # handle xml data
