@@ -378,6 +378,61 @@ sub _SectionRender {
     }
     elsif ( $Param{Section}{Type} && $Param{Section}{Type} eq 'Description' ) {
 
+        # fetch config item attachment list for handling inline attachments
+        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
+            ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+        );
+
+        # fetch attachment data and store in hash for RichTextDocumentServe
+        my %Attachments;
+        for my $Filename ( @AttachmentList ) {
+            $Attachments{$Filename} = $ConfigItemObject->ConfigItemAttachmentGet(
+                ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+                Filename     => $Filename,
+            );
+            $Attachments{$Filename}{ContentID} = $Attachments{$Filename}{Preferences}{ContentID};
+        }
+
+        # needed to provide necessary params for RichTextDocumentServe
+        my %Data = (
+            Content            => $Param{ConfigItem}{Description},
+            ContentType        => 'text/html; charset="utf-8"',
+            Disposition        => 'inline',
+        );
+
+        # TODO make dependent upon interface
+        # generate base url
+        my $URL = 'Action=AgentITSMConfigItemAttachment;Subaction=HTMLView'
+            . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};Filename=";
+
+        # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
+        # # Do not load external images if 'BlockLoadingRemoteContent' is enabled.
+        # my $LoadExternalImages;
+        # # TODO ask if dedicated sysconfig for ITSMConfigItem is needed
+        # if ( $ConfigObject->Get('Ticket::Frontend::BlockLoadingRemoteContent') ) {
+        #     $LoadExternalImages = 0;
+        # }
+        # else {
+        #     $LoadExternalImages = $ParamObject->GetParam(
+        #         Param => 'LoadExternalImages'
+        #     ) || 0;
+
+        #     # Safety check only on customer article.
+        #     if ( !$LoadExternalImages && $Article{SenderType} ne 'customer' ) {
+        #         $LoadExternalImages = 1;
+        #     }
+        # }
+
+        # reformat rich text document to have correct charset and links to
+        # inline documents
+        %Data = $Param{LayoutObject}->RichTextDocumentServe(
+            Data               => \%Data,
+            URL                => $URL,
+            Attachments        => \%Attachments,
+            LoadExternalImages => $Param{LoadExternalImages},
+        );
+
         # render description richtext editor
         $Param{LayoutObject}->Block(
             Name => 'FieldDisplayRow',
@@ -397,7 +452,7 @@ sub _SectionRender {
             Name => 'FieldDisplayCell',
             Data => {
                 ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-                Value        => $Param{ConfigItem}->{Description},
+                Value        => $Data{Content},
                 Type         => 'Iframe',
             },
         );
