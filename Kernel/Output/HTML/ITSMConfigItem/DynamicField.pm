@@ -401,9 +401,8 @@ sub _SectionRender {
             Disposition        => 'inline',
         );
 
-        # TODO make dependent upon interface
         # generate base url
-        my $URL = 'Action=AgentITSMConfigItemAttachment;Subaction=HTMLView'
+        my $URL = 'Action=' . ( $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=HTMLView'
             . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};Filename=";
 
         # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
