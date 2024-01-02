@@ -552,6 +552,7 @@ sub Run {
 
             # build a lookup lookup hash of the new attachments
             my %NewAttachment;
+            ATTACHMENT:
             for my $Attachment (@Attachments) {
 
                 my $ContentID = $Attachment->{ContentID};
