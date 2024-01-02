@@ -27,6 +27,7 @@ use v5.24;
 # CPAN modules
 
 # OTOBO modules
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -40,6 +41,9 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    # get config of frontend module
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+
     # get needed objects
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -47,12 +51,12 @@ sub Run {
 
     # get IDs
     my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
-    my $FileID       = $ParamObject->GetParam( Param => 'FileID' );
+    my $Filename       = $ParamObject->GetParam( Param => 'Filename' );
 
     # check params
-    if ( !$FileID || !$ConfigItemID ) {
+    if ( !$Filename || !$ConfigItemID ) {
         $LogObject->Log(
-            Message  => 'FileID and ConfigItemID are needed!',
+            Message  => 'Filename and ConfigItemID are needed!',
             Priority => 'error',
         );
 
@@ -62,7 +66,7 @@ sub Run {
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberLookup(
-        ITSMConfigItemID => $ConfigItemID,
+        ConfigItemID => $ConfigItemID,
     );
 
     # check permissions
@@ -71,14 +75,14 @@ sub Run {
         DynamicFields => 0,
     );
 
-    # TODO check function name
     # check permissions
-    my $Access = $ConfigItemObject->Permission(
-        Type         => 'ro',
-        ConfigItemID => $ConfigItemID,
-        UserID       => $Self->{UserID},
+    my $HasAccess = $ConfigItemObject->Permission(
+        Scope  => 'Item',
+        ItemID => $ConfigItem->{ConfigItemID},
+        UserID => $Self->{UserID},
+        Type   => $Self->{Config}->{Permission},
     );
-    if ( !$Access ) {
+    if ( !$HasAccess ) {
         return $LayoutObject->NoPermission( WithHeader => 'yes' );
     }
 
@@ -91,14 +95,14 @@ sub Run {
     my $ContentMayBeFilehandle = $ViewerActive ? 0 : 1;
 
     # get an attachment
-    my %Data = $ConfigItemObject->ConfigItemAttachmentGet(
+    my $Data = $ConfigItemObject->ConfigItemAttachmentGet(
         ConfigItemID           => $ConfigItemID,
-        FileID                 => $FileID,
+        Filename               => $Filename,
         ContentMayBeFilehandle => $ContentMayBeFilehandle,
     );
-    if ( !%Data ) {
+    if ( !IsHashRefWithData($Data) ) {
         $LogObject->Log(
-            Message  => "No such attachment ($FileID).",
+            Message  => "No such attachment ($Filename).",
             Priority => 'error',
         );
 
@@ -111,7 +115,7 @@ sub Run {
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         if ( $ConfigObject->Get('MIME-Viewer') ) {
             for ( sort keys $ConfigObject->Get('MIME-Viewer')->%* ) {
-                if ( $Data{ContentType} =~ m/^$_/i ) {
+                if ( $Data->{ContentType} =~ m/^$_/i ) {
                     $Viewer = $ConfigObject->Get('MIME-Viewer')->{$_};
                     $Viewer =~ s/\<OTOBO_CONFIG_(.+?)\>/$ConfigObject->{$1}/g;
                 }
@@ -126,7 +130,7 @@ sub Run {
         # The file will be cleaned up at the end of the current request.
         my $FileTempObject = $Kernel::OM->Get('Kernel::System::FileTemp');
         my ( $FHContent, $FilenameContent ) = $FileTempObject->TempFile();
-        print $FHContent $Data{Content};
+        print $FHContent $Data->{Content};
         close $FHContent;
 
         # generate HTML
@@ -145,7 +149,7 @@ sub Run {
 
         # return the generated HTML
         return $LayoutObject->Attachment(
-            %Data,
+            $Data->%*,
             ContentType => 'text/html',
             Content     => $GeneratedHTML,
             Type        => 'inline',
@@ -155,7 +159,7 @@ sub Run {
 
     # download it AttachmentDownloadType is configured
     return $LayoutObject->Attachment(
-        %Data,
+        $Data->%*,
         Sandbox => 1,
     );
 }
