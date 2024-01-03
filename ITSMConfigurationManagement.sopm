@@ -97,12 +97,11 @@
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemTreeView.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemZoom.pm" />
+        <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemAttachment.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemZoom.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm" />
-        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/Attachment/Download.pm" />
-        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/Attachment/HTMLViewer.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/DynamicField.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomer.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomerCompany.pm" />
@@ -132,7 +131,6 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemTreeView.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemZoom.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ConfigItemTreeView/ConfigItemTreeViewGraph.tt" />
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ConfigItemAttachments.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/CustomerITSMConfigItemSearch.tt" />
