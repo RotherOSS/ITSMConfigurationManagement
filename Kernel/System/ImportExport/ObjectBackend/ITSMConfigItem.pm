@@ -29,7 +29,7 @@ use List::Util qw(max);
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsStringWithData IsArrayRefWithData);
+use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData IsArrayRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -1082,10 +1082,28 @@ sub ImportDataSave {
 
     my %MappingObjectKeyData = map { $_->{Key} => 1 } @MappingObjectList;
 
+    # build list of dynamic fields to include fields of definition and of included set fields
+    my %DynamicFieldList;
+
     # Check if current definition of this class has required attribute which does not exist in mapping list.
     DF_NAME:
     for my $DFName ( sort keys $Definition->{DynamicFieldRef}->%* ) {
         my $DynamicFieldConfig = $Definition->{DynamicFieldRef}->{$DFName};
+
+        # set field names to differentiate dynamic fields from standard attributes
+        $DynamicFieldList{$DFName} = $DynamicFieldConfig;
+        if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+            for my $IncludedDF ( $DynamicFieldConfig->{Config}{Include}->@* ) {
+                $DynamicFieldList{$IncludedDF->{DF}} = $IncludedDF->{Definition};
+
+                # assuming that df sets are not nested deeper than two stages
+                if ( $IncludedDF->{Definition}{FieldType} eq 'Set' ) {
+                    for my $NestedIncludedDF ( $IncludedDF->{Definition}{Config}{Include}->@* ) {
+                        $DynamicFieldList{$NestedIncludedDF->{DF}} = $NestedIncludedDF->{Definition};
+                    }
+                }
+            }
+        }
 
         next DF_NAME unless $DynamicFieldConfig->{Required};    # TODO: is this correct ???
 
@@ -1186,30 +1204,6 @@ sub ImportDataSave {
                 $VersionData->{InciStateID} = $InciStateID;
             }
         }
-        elsif ( $Definition->{DynamicFieldRef}{$Key} ) {
-
-            my $DynamicFieldConfig = $Definition->{DynamicFieldRef}{$Key};
-
-            # Set is a special case
-            if (
-                $DynamicFieldConfig->{FieldType} eq 'Set'
-                || $DynamicFieldConfig->{FieldType} eq 'Agent'
-                || $DynamicFieldConfig->{FieldType} eq 'CustomerCompany'
-                || $DynamicFieldConfig->{FieldType} eq 'CustomerUser'
-                || $DynamicFieldConfig->{FieldType} eq 'Ticket'
-                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItem'
-                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersion'
-            ) {
-                if ( $Value ) {
-                    $NewVersionData{"DynamicField_$Key"} = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
-                        Data => $Value,
-                    );
-                }
-            }
-            else {
-                $NewVersionData{"DynamicField_$Key"} = $Value;
-            }
-        }
         else {
 
             # handle xml data
@@ -1220,16 +1214,17 @@ sub ImportDataSave {
         $RowIndex++;
     }
 
+    # TODO review comment
     # Edit $VersionData, so that the values in NewVersionData take precedence.
-    my $MergeOk = $Self->_DFImportDataMerge(
-        DynamicFieldRef              => $Definition->{DynamicFieldRef},
+    my $MergedData = $Self->_DFImportDataMerge(
+        DynamicFieldRef              => \%DynamicFieldList,
         VersionData                  => $VersionData,
         NewVersionData               => \%NewVersionData,
         EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
     );
 
-    # bail out, when the was a problem in _DFImportDataMerge()
-    if ( !$MergeOk ) {
+    # bail out, when there was a problem in _DFImportDataMerge()
+    if ( !IsHashRefWithData($MergedData) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't import entity $Param{Counter}: Could not prepare the input!",
@@ -1237,6 +1232,7 @@ sub ImportDataSave {
 
         return;
     }
+    %NewVersionData = $MergedData->%*;
 
     # check if the feature to check for a unique name is enabled
     if (
@@ -1658,6 +1654,11 @@ sub _DFImportDataMerge {
     for my $NameAndIndex ( sort keys $Param{NewVersionData}->%* ) {
         my ( $Name, $OneBasedIndex ) = split /::/, $NameAndIndex;
 
+        # prefix dynamic fields
+        if ( $Param{DynamicFieldRef}{$Name} ) {
+            $Name = "DynamicField_$Name";
+        }
+
         # for single value DF no index is appended
         $OneBasedIndex //= 1;
 
@@ -1691,10 +1692,15 @@ sub _DFImportDataMerge {
         # TODO: is this sensible ???
         next DF_NAME unless exists $NormalizedNew{"DynamicField_$DFName"};
 
-        # Set is a special case
-        if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
-            next DF_NAME unless $Value->[0];    # invalid JSON value never overwrites
+        # determine whether value needs to be decoded and if in-depth
+        if (
 
+            # reference fields
+            defined $DynamicFieldConfig->{Config}{EditFieldMode}
+
+            # general catalog fields
+            || $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog'
+        ) {
             $NormalizedNew{"DynamicField_$DFName"} = $JSONObject->Decode(
                 Data => $Value->[0],
             );
@@ -1702,8 +1708,50 @@ sub _DFImportDataMerge {
             next DF_NAME;
         }
 
+        # Set is a special case
+        if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+            next DF_NAME unless $Value->[0];    # invalid JSON value never overwrites
+
+            my @Values;
+            my $DecodedValue = $JSONObject->Decode(
+                Data => $Value->[0],
+            );
+
+            # handle set values according to the fields they are for
+            for my $ValueItem ( $DecodedValue->@* ) {
+                my @NestedValues;
+                for my $Index ( 0 .. $#{ $DynamicFieldConfig->{Config}{Include} } ) {
+                    my $IncludeDFConfig = $DynamicFieldConfig->{Config}{Include}[$Index]{Definition};
+                    my $LocalValueItem  = $ValueItem->[$Index];
+                    if (
+
+                        # reference fields
+                        $IncludeDFConfig->{EditFieldMode}
+
+                        # general catalog fields
+                        || $IncludeDFConfig->{FieldType} eq 'GeneralCatalog'
+                    ) {
+                        $LocalValueItem = $JSONObject->Decode(
+                            Data => $LocalValueItem,
+                        );
+                    }
+
+                    # TODO handle nested sets
+                    elsif ( $IncludeDFConfig->{FieldType} eq 'Set' ) {
+
+                    }
+                    push @NestedValues, $LocalValueItem;
+                }
+                push @Values, \@NestedValues;
+            }
+            $NormalizedNew{"DynamicField_$Key"} = \@Values;
+
+            next DF_NAME;
+        }
+
+        # TODO verify if first condition is necessary
         # There are still single valued dynamic fields
-        if ( ref $NormalizedNew{"DynamicField_$DFName"} eq '' ) {
+        if ( ref $NormalizedNew{"DynamicField_$DFName"} eq '' || !$DynamicFieldConfig->{Config}{MultiValue} ) {
             $NormalizedNew{"DynamicField_$DFName"} = $Value->[0];
 
             next DF_NAME;
@@ -1725,7 +1773,7 @@ sub _DFImportDataMerge {
         }
     }
 
-    return 1;
+    return \%NormalizedNew;
 }
 
 1;
