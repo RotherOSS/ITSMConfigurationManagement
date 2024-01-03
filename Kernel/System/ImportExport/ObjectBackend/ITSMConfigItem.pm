@@ -1724,22 +1724,9 @@ sub _DFImportDataMerge {
                 for my $Index ( 0 .. $#{ $DynamicFieldConfig->{Config}{Include} } ) {
                     my $IncludeDFConfig = $DynamicFieldConfig->{Config}{Include}[$Index]{Definition};
                     my $LocalValueItem  = $ValueItem->[$Index];
-                    if (
-
-                        # reference fields
-                        $IncludeDFConfig->{EditFieldMode}
-
-                        # general catalog fields
-                        || $IncludeDFConfig->{FieldType} eq 'GeneralCatalog'
-                        )
-                    {
-                        $LocalValueItem = $JSONObject->Decode(
-                            Data => $LocalValueItem,
-                        );
-                    }
 
                     # TODO handle nested sets
-                    elsif ( $IncludeDFConfig->{FieldType} eq 'Set' ) {
+                    if ( $IncludeDFConfig->{FieldType} eq 'Set' ) {
 
                     }
                     push @NestedValues, $LocalValueItem;
