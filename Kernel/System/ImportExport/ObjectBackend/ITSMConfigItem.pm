@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -1094,12 +1094,12 @@ sub ImportDataSave {
         $DynamicFieldList{$DFName} = $DynamicFieldConfig;
         if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
             for my $IncludedDF ( $DynamicFieldConfig->{Config}{Include}->@* ) {
-                $DynamicFieldList{$IncludedDF->{DF}} = $IncludedDF->{Definition};
+                $DynamicFieldList{ $IncludedDF->{DF} } = $IncludedDF->{Definition};
 
                 # assuming that df sets are not nested deeper than two stages
                 if ( $IncludedDF->{Definition}{FieldType} eq 'Set' ) {
                     for my $NestedIncludedDF ( $IncludedDF->{Definition}{Config}{Include}->@* ) {
-                        $DynamicFieldList{$NestedIncludedDF->{DF}} = $NestedIncludedDF->{Definition};
+                        $DynamicFieldList{ $NestedIncludedDF->{DF} } = $NestedIncludedDF->{Definition};
                     }
                 }
             }
@@ -1700,7 +1700,8 @@ sub _DFImportDataMerge {
 
             # general catalog fields
             || $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog'
-        ) {
+            )
+        {
             $NormalizedNew{"DynamicField_$DFName"} = $JSONObject->Decode(
                 Data => $Value->[0],
             );
@@ -1730,7 +1731,8 @@ sub _DFImportDataMerge {
 
                         # general catalog fields
                         || $IncludeDFConfig->{FieldType} eq 'GeneralCatalog'
-                    ) {
+                        )
+                    {
                         $LocalValueItem = $JSONObject->Decode(
                             Data => $LocalValueItem,
                         );
