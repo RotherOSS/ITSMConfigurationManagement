@@ -1728,7 +1728,14 @@ sub _DFImportDataMerge {
 
         # general catalog stores its values always as arrays, so they need to be decoded even in single value case
         # NOTE: multivalue case is handled in the loop below
-        elsif ( ( $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog' || $IsReferenceField ) && !$DynamicFieldConfig->{Config}{MultiValue} ) {
+        elsif ( $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog' && !$DynamicFieldConfig->{Config}{MultiValue} ) {
+            $NormalizedNew{"DynamicField_$Key"} = $JSONObject->Decode(
+                Data => $Value->[0],
+            );
+
+            next DF_NAME;
+        }
+        elsif ( $IsReferenceField && !$DynamicFieldConfig->{Config}{MultiValue} ) {
             $NormalizedNew{"DynamicField_$Key"} = $JSONObject->Decode(
                 Data => $Value->[0],
             );
