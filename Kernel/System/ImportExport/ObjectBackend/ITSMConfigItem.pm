@@ -1692,23 +1692,6 @@ sub _DFImportDataMerge {
         # TODO: is this sensible ???
         next DF_NAME unless exists $NormalizedNew{"DynamicField_$DFName"};
 
-        # determine whether value needs to be decoded and if in-depth
-        if (
-
-            # reference fields
-            defined $DynamicFieldConfig->{Config}{EditFieldMode}
-
-            # general catalog fields
-            || $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog'
-            )
-        {
-            $NormalizedNew{"DynamicField_$DFName"} = $JSONObject->Decode(
-                Data => $Value->[0],
-            );
-
-            next DF_NAME;
-        }
-
         # Set is a special case
         if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
             next DF_NAME unless $Value->[0];    # invalid JSON value never overwrites
@@ -1734,6 +1717,16 @@ sub _DFImportDataMerge {
                 push @Values, \@NestedValues;
             }
             $NormalizedNew{"DynamicField_$Key"} = \@Values;
+
+            next DF_NAME;
+        }
+
+        # general catalog stores its values always as arrays, so they need to be decoded even in single value case
+        # NOTE: multivalue case is handled in the loop below
+        elsif ( $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog' && !$DynamicFieldConfig->{Config}{MultiValue} ) {
+            $NormalizedNew{"DynamicField_$Key"} = $JSONObject->Decode(
+                Data => $Value->[0],
+            );
 
             next DF_NAME;
         }
