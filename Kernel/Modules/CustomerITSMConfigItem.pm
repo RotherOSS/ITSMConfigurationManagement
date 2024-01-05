@@ -411,6 +411,7 @@ sub Run {
     # get personal page shown count
     my $PageShownPreferencesKey = 'UserConfigItemOverview' . $View . 'PageShown';
     my $PageShown               = $Self->{$PageShownPreferencesKey} || 10;
+    my %PageNav;
 
     # do shown config item lookup
     my $Limit = 1_000;
@@ -423,6 +424,45 @@ sub Run {
     # search all config items
     my @ViewableConfigItems;
     my @OriginalViewableConfigItems;
+
+    # build links
+    my $ColumnFilterLink = '';
+    COLUMNNAME:
+    for my $ColumnName ( sort keys %GetColumnFilter ) {
+        next COLUMNNAME if !$ColumnName;
+        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
+        next COLUMNNAME if $GetColumnFilter{$ColumnName} eq '';
+        $ColumnFilterLink
+            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+    }
+
+    my $LinkPage = 'Filter='
+        . $LayoutObject->Ascii2Html( Text => $Filter )
+        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
+        . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
+        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
+        . $ColumnFilterLink
+        . ';';
+
+    my $LinkSort = 'View=' . $LayoutObject->Ascii2Html( Text => $View )
+        . ';Filter='
+        . $LayoutObject->Ascii2Html( Text => $Filter )
+        . $ColumnFilterLink
+        . ';';
+
+    my $LinkFilter = 'SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
+        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
+        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
+        . ';';
+
+    my $LastColumnFilter = $ParamObject->GetParam( Param => 'LastColumnFilter' ) || '';
+
+    if ( !$LastColumnFilter && $ColumnFilterLink ) {
+
+        # is planned to have a link to go back here
+        $LastColumnFilter = 1;
+    }
 
     if ( @ViewableDeplStateIDs && @ViewableClassIDs ) {
 
@@ -443,12 +483,22 @@ sub Run {
                 Result => 'ARRAY',
             );
 
-            my $Start = $ParamObject->GetParam( Param => 'StartHit' ) || 1;
+            my $StartHit = $ParamObject->GetParam( Param => 'StartHit' ) || 1;
+
+            %PageNav = $LayoutObject->PageNavBar(
+                Limit     => 10000,
+                StartHit  => $StartHit,
+                PageShown => $PageShown,
+                AllHits   => scalar @OriginalViewableConfigItems,
+                Action    => 'Action=CustomerITSMConfigItem',
+                Link      => $LinkPage,
+                IDPrefix  => 'CustomerITSMConfigItem',
+            );
 
             @ViewableConfigItems = $ConfigItemObject->ConfigItemSearch(
                 %{ $Filters{$Filter}->{Search} },
                 %ColumnFilter,
-                Limit  => $Start + $PageShown - 1,
+                Limit  => $StartHit + $PageShown - 1,
                 Result => 'ARRAY',
             );
         }
@@ -525,44 +575,6 @@ sub Run {
         };
     }
 
-    my $ColumnFilterLink = '';
-    COLUMNNAME:
-    for my $ColumnName ( sort keys %GetColumnFilter ) {
-        next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
-        next COLUMNNAME if $GetColumnFilter{$ColumnName} eq '';
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
-    }
-
-    my $LinkPage = 'Filter='
-        . $LayoutObject->Ascii2Html( Text => $Filter )
-        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
-        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
-        . $ColumnFilterLink
-        . ';';
-
-    my $LinkSort = 'View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';Filter='
-        . $LayoutObject->Ascii2Html( Text => $Filter )
-        . $ColumnFilterLink
-        . ';';
-
-    my $LinkFilter = 'SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
-        . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
-        . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';';
-
-    my $LastColumnFilter = $ParamObject->GetParam( Param => 'LastColumnFilter' ) || '';
-
-    if ( !$LastColumnFilter && $ColumnFilterLink ) {
-
-        # is planned to have a link to go back here
-        $LastColumnFilter = 1;
-    }
-
     # show config items
     my $ConfigItemListHTML = $LayoutObject->ITSMConfigItemListShow(
         Filter                => $Filter,
@@ -603,6 +615,7 @@ sub Run {
         TemplateFile => 'CustomerITSMConfigItem',
         Data         => {
             ITSMConfigItemListHTML => $ConfigItemListHTML,
+            %PageNav,
         },
     );
 
