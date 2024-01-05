@@ -20,6 +20,12 @@
     </div>
     <div id='oooMainBox'>
         <div id="oooITSMConfigItemListHeader">
+[% IF Data.SiteNavBar %]
+            <div class="ooo12g ooor">
+                <p>[% Translate("Page") | html %]</p>
+                [% Data.SiteNavBar %]
+            </div>
+[% END %]
         </div>
 [% RenderBlockStart("SearchForm") %]
         <div class="oooITSMConfigItemSearch">

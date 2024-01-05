@@ -149,6 +149,7 @@ sub Run {
         }
     }
 
+    my %PageNav;
     if ( $Self->{Subaction} eq 'SearchAction' ) {
 
         my $SortBy = $ParamObject->GetParam( Param => 'SortBy' )
@@ -197,8 +198,10 @@ sub Run {
 
         my $LinkPage = 'Filter='
             . $LayoutObject->Ascii2Html( Text => $Filter )
+            . ';Subaction=' . $LayoutObject->Ascii2Html( Text => $Self->{Subaction} )
             . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
-            . ';';
+            . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
+            . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy );
 
         my $LinkSort = 'Filter='
             . $LayoutObject->Ascii2Html( Text => $Filter )
@@ -211,6 +214,7 @@ sub Run {
 
             # fetch single value params
             $GetParam{$SearchParam} = $ParamObject->GetParam( Param => $SearchParam );
+            $LinkPage .= ";$SearchParam=" . $LayoutObject->Ascii2Html( Text => $GetParam{$SearchParam} );
             $LinkSort .= ";$SearchParam=" . $LayoutObject->Ascii2Html( Text => $GetParam{$SearchParam} );
         }
 
@@ -230,6 +234,7 @@ sub Run {
             my @Array = $ParamObject->GetArray( Param => $SearchParamArray );
             if ( grep {$_} @Array ) {
                 $GetParam{$SearchParamArray} = \@Array;
+                $LinkPage .= join( '', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array );
                 $LinkSort .= join( '', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array );
             }
         }
@@ -276,10 +281,22 @@ sub Run {
 
                 # set search parameter
                 if ( defined $SearchParameter ) {
+
+                    # append search params to links
+                    if ( IsArrayRefWithData($SearchParameter->{Parameter}{Equals}) ) {
+                        $LinkPage .= join( '', map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@* );
+                        $LinkSort .= join( '', map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@* );
+                    }
+                    else {
+                        $LinkPage .= ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $SearchParameter->{Parameter}{Equals} );
+                        $LinkSort .= ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $SearchParameter->{Parameter}{Equals} );
+                    }
                     $DynamicFieldSearchParameters{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $SearchParameter->{Parameter};
                 }
             }
         }
+        $LinkPage .= ';';
+        $LinkSort .= ';';
 
         %SearchConfig = (
             %SearchConfig,
@@ -436,12 +453,22 @@ sub Run {
 
         my $Total = scalar @OriginalViewableConfigItems;
 
-        my $Start = $ParamObject->GetParam( Param => 'StartHit' ) || 1;
+        my $StartHit = $ParamObject->GetParam( Param => 'StartHit' ) || 1;
 
         my @ViewableConfigItems = $ConfigItemObject->ConfigItemSearch(
             %SearchConfig,
-            Limit  => $Start + $PageShown - 1,
+            Limit  => $StartHit + $PageShown - 1,
             Result => 'ARRAY',
+        );
+
+        %PageNav = $LayoutObject->PageNavBar(
+            Limit     => 10000,
+            StartHit  => $StartHit,
+            PageShown => $PageShown,
+            AllHits   => scalar @OriginalViewableConfigItems,
+            Action    => 'Action=CustomerITSMConfigItemSearch',
+            Link      => $LinkPage,
+            IDPrefix  => 'CustomerITSMConfigItemSearch',
         );
 
         # TODO Maybe there is a more elegant way to do this?
@@ -731,6 +758,9 @@ sub Run {
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'CustomerITSMConfigItemSearch',
+        Data => {
+            %PageNav,
+        },
     );
 
     # build NavigationBar
