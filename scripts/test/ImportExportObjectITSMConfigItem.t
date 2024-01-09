@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -32,9 +32,7 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 {
     # get ImportExport module directory
     my $ImportExportModule = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/Kernel/System/ImportExport.pm';
-
-    # Return early if ImportExport package is not installed.
-    ok( -e $ImportExportModule, 'ImportExport.pm existis' );
+    ok( -f $ImportExportModule, 'ImportExport.pm exists' );
 }
 
 # get needed objects
@@ -42,6 +40,7 @@ my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my $ImportExportObject   = $Kernel::OM->Get('Kernel::System::ImportExport');
 my $ObjectBackendObject  = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
+my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $XMLObject            = $Kernel::OM->Get('Kernel::System::XML');
 
 # get helper object
@@ -53,51 +52,37 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define needed variable
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $Helper->GetRandomID;
 
 # ------------------------------------------------------------ #
 # make preparations
 # ------------------------------------------------------------ #
 
-# add some test templates for later checks
+# add some ITSMConfigItem test templates for later checks
 my @TemplateIDs;
-my $Counter = 0;
-for ( 1 .. 30 ) {
-
-    # add a test template for later checks
+for my $i ( 0 .. 29 ) {
     my $TemplateID = $ImportExportObject->TemplateAdd(
         Object  => 'ITSMConfigItem',
-        Format  => 'UnitTest' . $Counter . $RandomID,
-        Name    => 'UnitTest' . $Counter . $RandomID,
+        Format  => 'UnitTest' . $i . $RandomID,
+        Name    => 'UnitTest' . $i . $RandomID,
         ValidID => 1,
         UserID  => 1,
     );
 
     push @TemplateIDs, $TemplateID;
-
-    $Counter++;
 }
 
-# ------------------------------------------------------------ #
 # ObjectList test 1 (check CSV item)
-# ------------------------------------------------------------ #
-
-# get object list
-my $ObjectList1 = $ImportExportObject->ObjectList();
-
-# check object list
-ok(
-    $ObjectList1 && ref $ObjectList1 eq 'HASH' && $ObjectList1->{ITSMConfigItem},
-    "ObjectList() - ITSMConfigItem exists",
-);
-
-# ------------------------------------------------------------ #
-# ObjectAttributesGet test 1 (check attribute hash)
-# ------------------------------------------------------------ #
-
 {
+    my $ObjectList = $ImportExportObject->ObjectList;
+    ok(
+        $ObjectList && ref $ObjectList eq 'HASH' && $ObjectList->{ITSMConfigItem},
+        "ObjectList() - ITSMConfigItem exists",
+    );
+}
 
-    # get object attributes
+# ObjectAttributesGet test 1 (check attribute hash)
+{
     my $ObjectAttributesGet1 = $ImportExportObject->ObjectAttributesGet(
         TemplateID => $TemplateIDs[0],
         UserID     => 1,
@@ -157,53 +142,46 @@ ok(
     );
 }
 
-# ------------------------------------------------------------ #
 # ObjectAttributesGet test 2 (check with non existing template)
-# ------------------------------------------------------------ #
+{
+    my $ObjectAttributesGet2 = $ImportExportObject->ObjectAttributesGet(
+        TemplateID => $TemplateIDs[-1] + 1,
+        UserID     => 1,
+    );
+    is(
+        $ObjectAttributesGet2,
+        undef,
+        "ObjectAttributesGet() - expected to fail",
+    );
+}
 
-# get object attributes
-my $ObjectAttributesGet2 = $ImportExportObject->ObjectAttributesGet(
-    TemplateID => $TemplateIDs[-1] + 1,
-    UserID     => 1,
-);
-
-# check false return
-ok(
-    !$ObjectAttributesGet2,
-    "ObjectAttributesGet() - check false return",
-);
-
-# ------------------------------------------------------------ #
 # MappingObjectAttributesGet test 1 (check attribute hash)
-# ------------------------------------------------------------ #
+{
+    my $MappingObjectAttributesGet1 = $ImportExportObject->MappingObjectAttributesGet(
+        TemplateID => $TemplateIDs[0],
+        UserID     => 1,
+    );
 
-# get mapping object attributes
-my $MappingObjectAttributesGet1 = $ImportExportObject->MappingObjectAttributesGet(
-    TemplateID => $TemplateIDs[0],
-    UserID     => 1,
-);
+    # check mapping object attribute reference
+    ok(
+        $MappingObjectAttributesGet1 && ref $MappingObjectAttributesGet1 eq 'ARRAY',
+        "MappingObjectAttributesGet() - check array reference",
+    );
+}
 
-# check mapping object attribute reference
-ok(
-    $MappingObjectAttributesGet1 && ref $MappingObjectAttributesGet1 eq 'ARRAY',
-    "MappingObjectAttributesGet() - check array reference",
-);
-
-# ------------------------------------------------------------ #
 # MappingObjectAttributesGet test 2 (check with non existing template)
-# ------------------------------------------------------------ #
+{
+    my $MappingObjectAttributesGet2 = $ImportExportObject->MappingObjectAttributesGet(
+        TemplateID => $TemplateIDs[-1] + 1,
+        UserID     => 1,
+    );
 
-# get mapping object attributes
-my $MappingObjectAttributesGet2 = $ImportExportObject->MappingObjectAttributesGet(
-    TemplateID => $TemplateIDs[-1] + 1,
-    UserID     => 1,
-);
-
-# check false return
-ok(
-    !$MappingObjectAttributesGet2,
-    "MappingObjectAttributesGet() - check false return",
-);
+    is(
+        $MappingObjectAttributesGet2,
+        undef,
+        "MappingObjectAttributesGet() - expected to fail",
+    );
+}
 
 # ------------------------------------------------------------ #
 # make preparations to test ExportDataGet() and ImportDataSave()
@@ -224,8 +202,75 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
     ok( $ItemID, "$Name added to the general catalog" );
 }
 
-# define the first test definition (all provided data types)
-my @ConfigItemPerlDefinitions;
+# Add dynamic fields for testing. These dynamic fields will be referenced
+# by name in dynamic field definitions.
+my $TestIDSuffix = "UnitTest$RandomID";
+{
+    my $Order = 20000;
+
+    # not the no underscores are allowed in dynamic field names
+    my %DynamicFieldDefinitions = (
+        'DFCustomerUserA' => {
+            FieldType => 'CustomerUser',
+            Config    => {
+                MultiValue => 0,
+                Tooltip    => 'Tooltip for DFCustomerUserA',
+            },
+        },
+    );
+
+    for my $Name ( sort keys %DynamicFieldDefinitions ) {
+        my $DFName         = $Name . $TestIDSuffix;
+        my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
+            Name       => $DFName,
+            Label      => $DFName,
+            FieldOrder => $Order++,
+            FieldType  => $DynamicFieldDefinitions{$Name}->{FieldType},
+            ObjectType => 'ITSMConfigItem',
+            Config     => $DynamicFieldDefinitions{$Name}->{Config},
+            ValidID    => 1,
+            UserID     => 1,
+        );
+        ok( $DynamicFieldID, "created dynamic field $DFName" );
+    }
+}
+
+# Add config item definitions
+my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
+{
+    my @ConfigItemPerlDefinitions;
+
+    # config item with only a CustomerUser field
+    push @ConfigItemPerlDefinitions, {
+        Pages => [
+            {
+                Name   => 'Content',
+                Layout => {
+                    Columns     => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section     => 'Section1',
+                        ColumnStart => 1,
+                        RowStart    => 1
+                    }
+                ],
+            }
+        ],
+        Sections => {
+            Section1 => {
+                Content => [
+                    {
+                        DF => 'DFCustomerUserA' . $TestIDSuffix,
+                    },
+                ]
+            }
+        },
+    };
+
+=for never
+
 $ConfigItemPerlDefinitions[0] = " [
     {
         Key        => 'Customer1',
@@ -403,77 +448,97 @@ $ConfigItemPerlDefinitions[2] = " [
     },
 ] ";
 
-my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+=cut
 
-my @ConfigItemDefinitions;
-for my $PerlDefinition (@ConfigItemPerlDefinitions) {
-    my $YAMLDefinition = $YAMLObject->Dump(
-        Data => eval $PerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
-    );
-    push @ConfigItemDefinitions, $YAMLDefinition;
-}
+    my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
-# add the test classes
-my @ConfigItemClassIDs;
-my @ConfigItemDefinitionIDs;
-for my $Definition (@ConfigItemDefinitions) {
-
-    # generate a random name
-    my $ClassName = 'UnitTest' . $Helper->GetRandomID();
-
-    # add an unittest config item class
-    my $ClassID = $GeneralCatalogObject->ItemAdd(
-        Class   => 'ITSM::ConfigItem::Class',
-        Name    => $ClassName,
-        ValidID => 1,
-        UserID  => 1,
-    );
-
-    # check class id
-    if ( !$ClassID ) {
-
-        fail("add new config item class.");
+    my @ConfigItemDefinitions;
+    for my $PerlDefinition (@ConfigItemPerlDefinitions) {
+        my $YAMLDefinition = $YAMLObject->Dump(
+            Data => $PerlDefinition,
+        );
+        push @ConfigItemDefinitions, $YAMLDefinition;
     }
 
-    push @ConfigItemClassIDs, $ClassID;
+    # add the test config item classes
+    my $i = 0;
+    for my $Definition (@ConfigItemDefinitions) {
 
-    # add a definition to the class
-    my $Result = $ConfigItemObject->DefinitionAdd(
-        ClassID    => $ClassID,
-        Definition => $Definition,
-        UserID     => 1,
-    );
-    ok( $Result->{Success},      'DefinitionAdd() successful' );
-    ok( $Result->{DefinitionID}, 'got DefinitionID' );
-    push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
+        # generate a random name
+        my $ClassName = join '_', 'UnitTest', ++$i, $TestIDSuffix;
+
+        # add an unittest config item class
+        my $ClassID = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class',
+            Name    => $ClassName,
+            ValidID => 1,
+            UserID  => 1,
+        );
+        ok( $ClassID, "added general catalog item for config item class $ClassName" );
+
+        push @ConfigItemClassIDs, $ClassID;
+
+        # add a definition to the class
+        my $Result = $ConfigItemObject->DefinitionAdd(
+            ClassID    => $ClassID,
+            Definition => $Definition,
+            UserID     => 1,
+        );
+        ok( $Result->{Success},      'DefinitionAdd() successful' );
+        ok( $Result->{DefinitionID}, 'got DefinitionID' );
+        push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
+    }
 }
 
 # create some random numbers
-my @ConfigItemNumbers;
-for ( 1 .. 10 ) {
-    push @ConfigItemNumbers, $Helper->GetRandomNumber();
-}
+my @ConfigItemNumbers = map
+    { $Helper->GetRandomNumber }
+    ( 1 .. 10 );
 
 # get deployment state list
 my $DeplStateList = $GeneralCatalogObject->ItemList(
     Class => 'ITSM::ConfigItem::DeploymentState',
 );
+ref_ok( $DeplStateList, 'HASH', 'deployment state list is a hashref' );
 my %DeplStateListReverse = reverse %{$DeplStateList};
 
 # get incident state list
 my $InciStateList = $GeneralCatalogObject->ItemList(
     Class => 'ITSM::Core::IncidentState',
 );
+ref_ok( $DeplStateList, 'HASH', 'incident state list is a hashref' );
 my %InciStateListReverse = reverse %{$InciStateList};
 
 # get general catalog test list
 my $GeneralCatalogList = $GeneralCatalogObject->ItemList(
     Class => $GeneralCatalogClass,
 );
+ref_ok( $GeneralCatalogList, 'HASH', 'general catalog list is a hashref' );
 my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 
 # define the test config items
-my @ConfigItems = (
+my @ConfigItemSetups;
+
+push @ConfigItemSetups,
+    {
+        Description   => 'config item with only a CustomerUser dynamic field',
+        ConfigItemAdd => {
+            Name                                        => 'UnitTest - ConfigItem 1 Version 1',
+            Number                                      => $ConfigItemNumbers[0],
+            ClassID                                     => $ConfigItemClassIDs[0],
+            DefinitionID                                => $ConfigItemDefinitionIDs[0],
+            DeplStateID                                 => $DeplStateListReverse{Production},
+            InciStateID                                 => $InciStateListReverse{Operational},
+            UserID                                      => 1,
+            "DynamicField_DFCustomerUserA$TestIDSuffix" => 'dummy customer A',
+        },
+    };
+
+=for never
+
+ 10.1 test cases
+
+ (
 
     # config item for all provided data types
     {
@@ -1008,40 +1073,38 @@ my @ConfigItems = (
             },
         ],
     },
-);
+
+=cut
 
 # add the test config items
 my @ConfigItemIDs;
-for my $ConfigItem (@ConfigItems) {
+for my $Setup (@ConfigItemSetups) {
 
     # add a config item
+    diag $Setup->{Description};
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        %{ $ConfigItem->{ConfigItem} },
+        $Setup->{ConfigItemAdd}->%*,
     );
     ok( $ConfigItemID, 'config item added' );
 
     push @ConfigItemIDs, $ConfigItemID;
 
     # add the versions
-    for my $Version ( @{ $ConfigItem->{Versions} } ) {
+    for my $ConfigItemUpdate ( ( $Setup->{ConfigItemUpdate} // [] )->@* ) {
 
-        # add a version
-        my $VersionID = $ConfigItemObject->VersionAdd(
-            %{$Version},
+        # add updates
+        my $VersionID = $ConfigItemObject->ConfigItemUpdate(
+            $ConfigItemUpdate->%*,
             ConfigItemID => $ConfigItemID,
         );
         ok( $VersionID, 'config item version added' );
     }
 }
 
-# ------------------------------------------------------------ #
-# define general ExportDataGet tests
-# ------------------------------------------------------------ #
-
+# declare ExportData tests
 my @ExportDataTests = (
-
-    # ImportDataGet doesn't contains all data (check required attributes)
     {
+        Name             => q{ImportDataGet doesn't contains all data (check required attributes)},
         SourceExportData => {
             ExportDataGet => {
                 UserID => 1,
@@ -1049,8 +1112,8 @@ my @ExportDataTests = (
         },
     },
 
-    # ImportDataGet doesn't contains all data (check required attributes)
     {
+        Name             => q{ImportDataGet doesn't contains all data (check required attributes)},
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[1],
@@ -1058,8 +1121,8 @@ my @ExportDataTests = (
         },
     },
 
-    # no existing template id is given (check return false)
     {
+        Name             => q{no existing template id is given (check return false)},
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[-1] + 1,
@@ -1068,8 +1131,8 @@ my @ExportDataTests = (
         },
     },
 
-    # no class id is given (check return false)
     {
+        Name             => q{no class id is given (check return false)},
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[2],
@@ -1078,8 +1141,8 @@ my @ExportDataTests = (
         },
     },
 
-    # invalid class id is given (check return false)
     {
+        Name             => q{invalid class id is given (check return false)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[-1] + 1,
@@ -1091,8 +1154,8 @@ my @ExportDataTests = (
         },
     },
 
-    # mapping list is empty (check return false)
     {
+        Name             => q{mapping list is empty (check return false)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1104,8 +1167,8 @@ my @ExportDataTests = (
         },
     },
 
-    # all required values are given (number search check)
     {
+        Name             => q{all required values are given (number search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1128,8 +1191,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (name search check)
     {
+        Name             => q{all required values are given (name search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1152,8 +1215,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (case insensitive name search check)
     {
+        Name             => q{all required values are given (case insensitive name search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1176,8 +1239,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (name and number search check)
     {
+        Name             => q{all required values are given (name and number search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1201,8 +1264,13 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (deployment state search check)
+);
+
+=for never
+
+10.1 tests
     {
+        Name             => q{all required values are given (deployment state search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1226,8 +1294,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (incident state search check)
     {
+        Name             => q{all required values are given (incident state search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1251,8 +1319,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (combined search check)
     {
+        Name             => q{all required values are given (combined search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1278,8 +1346,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (XML data search check)
     {
+        Name             => q{all required values are given (XML data search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1308,8 +1376,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (combined all search check)
     {
+        Name             => q{all required values are given (combined all search check)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1342,8 +1410,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (check the returned array)
     {
+        Name             => q{all required values are given (check the returned array)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1412,8 +1480,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (double element checks)
     {
+        Name             => q{all required values are given (double element checks)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1530,8 +1598,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (sub element checks)
     {
+        Name             => q{all required values are given (sub element checks)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1632,8 +1700,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (sub element checks with undef values)
     {
+        Name             => q{all required values are given (sub element checks with undef values)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1766,8 +1834,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (sub element checks with undef values and empty strings)
     {
+        Name             => q{all required values are given (sub element checks with undef values and empty strings)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1900,8 +1968,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (special character checks)
     {
+        Name             => q{all required values are given (special character checks)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1970,8 +2038,8 @@ my @ExportDataTests = (
         ],
     },
 
-    # all required values are given (UTF-8 checks)
     {
+        Name             => q{all required values are given (UTF-8 checks)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -2039,168 +2107,141 @@ my @ExportDataTests = (
             ],
         ],
     },
-);
 
-# ------------------------------------------------------------ #
+=cut
+
 # run general ExportDataGet tests
-# ------------------------------------------------------------ #
-
-my $ExportTestCount = 1;
-TEST:
 for my $Test (@ExportDataTests) {
 
-    # check SourceExportData attribute
-    if ( !$Test->{SourceExportData} || ref $Test->{SourceExportData} ne 'HASH' ) {
+    subtest "ExportData: $Test->{Name}" => sub {
 
-        fail("ExportTest $ExportTestCount: SourceExportData found for this test.");
+        # check SourceExportData attribute
+        if ( !$Test->{SourceExportData} || ref $Test->{SourceExportData} ne 'HASH' ) {
 
-        next TEST;
-    }
+            fail("SourceExportData not found for this test.");
 
-    # set the object data
-    if (
-        $Test->{SourceExportData}->{ObjectData}
-        && ref $Test->{SourceExportData}->{ObjectData} eq 'HASH'
-        && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
-        )
-    {
+            return;
+        }
 
-        # save object data
-        $ImportExportObject->ObjectDataSave(
-            TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
-            ObjectData => $Test->{SourceExportData}->{ObjectData},
-            UserID     => 1,
-        );
-    }
+        # set the object data
+        if (
+            $Test->{SourceExportData}->{ObjectData}
+            && ref $Test->{SourceExportData}->{ObjectData} eq 'HASH'
+            && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
+            )
+        {
 
-    # set the mapping object data
-    if (
-        $Test->{SourceExportData}->{MappingObjectData}
-        && ref $Test->{SourceExportData}->{MappingObjectData} eq 'ARRAY'
-        && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
-        )
-    {
+            # save object data
+            $ImportExportObject->ObjectDataSave(
+                TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
+                ObjectData => $Test->{SourceExportData}->{ObjectData},
+                UserID     => 1,
+            );
+        }
 
-        # delete all existing mapping data
-        $ImportExportObject->MappingDelete(
-            TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
-            UserID     => 1,
-        );
+        # set the mapping object data
+        if (
+            $Test->{SourceExportData}->{MappingObjectData}
+            && ref $Test->{SourceExportData}->{MappingObjectData} eq 'ARRAY'
+            && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
+            )
+        {
 
-        # add the mapping object rows
-        MAPPINGOBJECTDATA:
-        for my $MappingObjectData ( @{ $Test->{SourceExportData}->{MappingObjectData} } ) {
-
-            # add a new mapping row
-            my $MappingID = $ImportExportObject->MappingAdd(
+            # delete all existing mapping data
+            $ImportExportObject->MappingDelete(
                 TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
                 UserID     => 1,
             );
 
-            # add the mapping object data
-            $ImportExportObject->MappingObjectDataSave(
-                MappingID         => $MappingID,
-                MappingObjectData => $MappingObjectData,
-                UserID            => 1,
+            # add the mapping object rows
+            MAPPINGOBJECTDATA:
+            for my $MappingObjectData ( @{ $Test->{SourceExportData}->{MappingObjectData} } ) {
+
+                # add a new mapping row
+                my $MappingID = $ImportExportObject->MappingAdd(
+                    TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
+                    UserID     => 1,
+                );
+
+                # add the mapping object data
+                $ImportExportObject->MappingObjectDataSave(
+                    MappingID         => $MappingID,
+                    MappingObjectData => $MappingObjectData,
+                    UserID            => 1,
+                );
+            }
+        }
+
+        # add the search data
+        if (
+            $Test->{SourceExportData}->{SearchData}
+            && ref $Test->{SourceExportData}->{SearchData} eq 'HASH'
+            && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
+            )
+        {
+
+            # save search data
+            $ImportExportObject->SearchDataSave(
+                TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
+                SearchData => $Test->{SourceExportData}->{SearchData},
+                UserID     => 1,
             );
         }
-    }
 
-    # add the search data
-    if (
-        $Test->{SourceExportData}->{SearchData}
-        && ref $Test->{SourceExportData}->{SearchData} eq 'HASH'
-        && $Test->{SourceExportData}->{ExportDataGet}->{TemplateID}
-        )
-    {
-
-        # save search data
-        $ImportExportObject->SearchDataSave(
-            TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
-            SearchData => $Test->{SourceExportData}->{SearchData},
-            UserID     => 1,
-        );
-    }
-
-    # get export data
-    my $ExportData = $ObjectBackendObject->ExportDataGet(
-        %{ $Test->{SourceExportData}->{ExportDataGet} },
-    );
-
-    if ( !$Test->{ReferenceExportData} ) {
-
-        ok(
-            !$ExportData,
-            "ExportTest $ExportTestCount: ExportDataGet() - return false",
+        # get export data
+        my $ExportData = $ObjectBackendObject->ExportDataGet(
+            %{ $Test->{SourceExportData}->{ExportDataGet} },
         );
 
-        next TEST;
-    }
+        if ( !$Test->{ReferenceExportData} ) {
+            ok( !$ExportData, "ExportDataGet() returned not data as was expected" );
 
-    if ( ref $ExportData ne 'ARRAY' ) {
+            return;
+        }
 
-        # check array reference
-        fail("ExportTest $ExportTestCount: ExportDataGet() - return value is an array reference");
-
-        next TEST;
-    }
-
-    # check number of rows
-    is(
-        scalar @{$ExportData},
-        scalar @{ $Test->{ReferenceExportData} },
-        "ExportTest $ExportTestCount: ExportDataGet() - correct number of rows",
-    );
-
-    # check content of export data
-    my $CounterRow = 0;
-    ROW:
-    for my $ExportRow ( @{$ExportData} ) {
-
-        # extract reference row
-        my $ReferenceRow = $Test->{ReferenceExportData}->[$CounterRow];
-
-        if ( ref $ExportRow ne 'ARRAY' || ref $ReferenceRow ne 'ARRAY' ) {
+        if ( ref $ExportData ne 'ARRAY' ) {
 
             # check array reference
-            fail("ExportTest $ExportTestCount: ExportDataGet() - export row and reference row matched");
+            fail("ExportDataGet() - return value is not an array reference");
 
-            next TEST;
+            return;
         }
 
-        # check number of columns
+        # check number of rows
         is(
-            scalar @{$ExportRow},
-            scalar @{$ReferenceRow},
-            "ExportTest $ExportTestCount: ExportDataGet() - correct number of columns",
+            scalar @{$ExportData},
+            scalar @{ $Test->{ReferenceExportData} },
+            "ExportDataGet() - correct number of rows",
         );
 
-        my $CounterColumn = 0;
-        for my $Cell ( @{$ExportRow} ) {
+        # check content of export data
+        my $CounterRow = 0;
+        ROW:
+        for my $ExportRow ( @{$ExportData} ) {
+            ref_ok( $ExportRow, 'ARRAY', 'exported row is not an arrayref' );
 
-            # set content if values are undef
-            if ( !defined $Cell ) {
-                $Cell = 'UNDEF-unittest';
-            }
-            if ( !defined $ReferenceRow->[$CounterColumn] ) {
-                $ReferenceRow->[$CounterColumn] = 'UNDEF-unittest';
-            }
+            # extract reference row
+            my $ReferenceRow = $Test->{ReferenceExportData}->[$CounterRow];
+            ref_ok( $ReferenceRow, 'ARRAY', 'expected row is not an arrayref' );
 
-            # check cell data
+            # check number of columns
             is(
-                $Cell,
-                $ReferenceRow->[$CounterColumn],
-                "ExportTest $ExportTestCount: ExportDataGet() ",
+                scalar @{$ExportRow},
+                scalar @{$ReferenceRow},
+                "ExportDataGet() - correct number of columns",
             );
 
-            $CounterColumn++;
+            # check values
+            is(
+                $ExportRow,
+                $ReferenceRow,
+                "ExportDataGet() - values in exported row",
+            );
         }
-
-        $CounterRow++;
-    }
-}
-continue {
-    $ExportTestCount++;
+        continue {
+            $CounterRow++;
+        }
+    };
 }
 
 # ------------------------------------------------------------ #
@@ -2209,8 +2250,8 @@ continue {
 
 my @ImportDataTests = (
 
-    # ImportDataSave doesn't contains all data (check required attributes)
     {
+        Name             => q{ImportDataSave doesn't contains all data (check required attributes)},
         SourceImportData => {
             ImportDataSave => {
                 ImportDataRow => [],
@@ -2219,8 +2260,8 @@ my @ImportDataTests = (
         },
     },
 
-    # ImportDataSave doesn't contains all data (check required attributes)
     {
+        Name             => q{ImportDataSave doesn't contains all data (check required attributes)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID => $TemplateIDs[20],
@@ -2229,8 +2270,8 @@ my @ImportDataTests = (
         },
     },
 
-    # ImportDataSave doesn't contains all data (check required attributes)
     {
+        Name             => q{ImportDataSave doesn't contains all data (check required attributes)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
@@ -2239,8 +2280,8 @@ my @ImportDataTests = (
         },
     },
 
-    # import data row must be an array reference (check return false)
     {
+        Name             => q{import data row must be an array reference (check return false)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
@@ -2250,8 +2291,8 @@ my @ImportDataTests = (
         },
     },
 
-    # import data row must be an array reference (check return false)
     {
+        Name             => q{import data row must be an array reference (check return false)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
@@ -2261,8 +2302,8 @@ my @ImportDataTests = (
         },
     },
 
-    # no existing template id is given (check return false)
     {
+        Name             => q{no existing template id is given (check return false)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[-1] + 1,
@@ -2272,8 +2313,8 @@ my @ImportDataTests = (
         },
     },
 
-    # no class id is given (check return false)
     {
+        Name             => q{no class id is given (check return false)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[21],
@@ -2283,8 +2324,12 @@ my @ImportDataTests = (
         },
     },
 
-    # invalid class id is given (check return false)
+);
+
+=for never
+
     {
+        Name             => q{invalid class id is given (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[-1] + 1,
@@ -2297,8 +2342,8 @@ my @ImportDataTests = (
         },
     },
 
-    # mapping list is empty (check return false)
     {
+        Name             => q{mapping list is empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2311,8 +2356,8 @@ my @ImportDataTests = (
         },
     },
 
-    # more than one identifier with the same name (check return false)
     {
+        Name             => q{more than one identifier with the same name (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2335,8 +2380,8 @@ my @ImportDataTests = (
         },
     },
 
-    # identifier is empty (check return false)
     {
+        Name             => q{identifier is empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2355,8 +2400,8 @@ my @ImportDataTests = (
         },
     },
 
-    # identifier is undef (check return false)
     {
+        Name             => q{identifier is undef (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2375,8 +2420,8 @@ my @ImportDataTests = (
         },
     },
 
-    # both identifiers are empty (check return false)
     {
+        Name             => q{both identifiers are empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2399,8 +2444,8 @@ my @ImportDataTests = (
         },
     },
 
-    # both identifiers are undef (check return false)
     {
+        Name             => q{both identifiers are undef (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2423,8 +2468,8 @@ my @ImportDataTests = (
         },
     },
 
-    # one identifiers is empty, one is undef (check return false)
     {
+        Name             => q{one identifiers is empty, one is undef (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2447,8 +2492,8 @@ my @ImportDataTests = (
         },
     },
 
-    # one of the identifiers is empty (check return false)
     {
+        Name             => q{one of the identifiers is empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2471,8 +2516,8 @@ my @ImportDataTests = (
         },
     },
 
-    # one of the identifiers is undef (check return false)
     {
+        Name             => q{one of the identifiers is undef (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2495,8 +2540,8 @@ my @ImportDataTests = (
         },
     },
 
-    # one of the identifiers is empty (check return false)
     {
+        Name             => q{one of the identifiers is empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2519,8 +2564,8 @@ my @ImportDataTests = (
         },
     },
 
-    # one of the identifiers is empty (check return false)
     {
+        Name             => q{one of the identifiers is empty (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2545,8 +2590,8 @@ my @ImportDataTests = (
 
     # TODO Add some identifier tests
 
-    # empty name is given (check return false)
     {
+        Name             => q{empty name is given (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2570,8 +2615,8 @@ my @ImportDataTests = (
         },
     },
 
-    # invalid deployment state is given (check return false)
     {
+        Name             => q{invalid deployment state is given (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2595,8 +2640,8 @@ my @ImportDataTests = (
         },
     },
 
-    # invalid incident state is given (check return false)
     {
+        Name             => q{invalid incident state is given (check return false)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2620,8 +2665,8 @@ my @ImportDataTests = (
         },
     },
 
-    # all required values are given (a NEW config item must be created)
     {
+        Name             => q{all required values are given (a NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2692,8 +2737,8 @@ my @ImportDataTests = (
         },
     },
 
-    # all required values are given (a second NEW config item must be created)
     {
+        Name             => q{all required values are given (a second NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2764,8 +2809,8 @@ my @ImportDataTests = (
         },
     },
 
-    # all required values are given (a new version must be added to first test config item)
     {
+        Name             => q{all required values are given (a new version must be added to first test config item)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2841,8 +2886,8 @@ my @ImportDataTests = (
         },
     },
 
-    # all required values are given (a new version must be added to first test config item again)
     {
+        Name             => q{all required values are given (a new version must be added to first test config item again)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -2918,8 +2963,8 @@ my @ImportDataTests = (
         },
     },
 
-    # all required values are given (a new version must be added to third test config item)
     {
+        Name             => q{all required values are given (a new version must be added to third test config item)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -3051,6 +3096,7 @@ my @ImportDataTests = (
     # In 'UnitTest - ConfigItem 3 Version 2' 16 Attributes were imported,
     # so there will be 8 lingering attributes.
     {
+        Name             => '8 lingering attributes',
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -3150,6 +3196,7 @@ my @ImportDataTests = (
     # In 'UnitTest - ConfigItem 3 Version 2' 16 Attributes were imported,
     # so there will be 8 lingering attributes.
     {
+        Name             => '8 lingering attributes, again',
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -3245,8 +3292,8 @@ my @ImportDataTests = (
         },
     },
 
-    # a simple import for testing the overriding behavior of empty values
     {
+        Name             => q{a simple import for testing the overriding behavior of empty values},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3296,6 +3343,7 @@ my @ImportDataTests = (
     # import an empty value for Text1, with EmptyFieldsLeaveTheOldValues turned on
     # no new version should be created
     {
+        Name             => 'import an empty value for Text1',
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3343,9 +3391,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import undef for Text1, with EmptyFieldsLeaveTheOldValues turned on
     # no new version should be created
     {
+        Name             => q{import undef for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3393,9 +3441,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an empty value for Text1, with EmptyFieldsLeaveTheOldValues turned off
     # a new version should be created
     {
+        Name             => q{import an empty value for Text1, with EmptyFieldsLeaveTheOldValues turned off},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3443,9 +3491,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import a single space value for Text1, with EmptyFieldsLeaveTheOldValues turned on
     # a new version should be created
     {
+        Name             => q{import a single space value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3493,9 +3541,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import the string '0' value for Text1, with EmptyFieldsLeaveTheOldValues turned on
     # a new version should be created
     {
+        Name             => q{import the string '0' value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3543,9 +3591,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an empty value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on
     # no new version should be created
     {
+        Name             => q{import an empty value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3593,9 +3641,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on
     # the import should fail
     {
+        Name             => q{import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3633,9 +3681,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned off
     # the import should fail
     {
+        Name             => q{import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned off},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3673,9 +3721,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an empty value for DeplState, with EmptyFieldsLeaveTheOldValues turned on
     # no new version should be created
     {
+        Name             => q{import an empty value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3723,9 +3771,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an invalid value for DeplState, with EmptyFieldsLeaveTheOldValues turned on
     # an error should be generated
     {
+        Name             => q{import an invalid value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3763,9 +3811,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an empty value for InciState, with EmptyFieldsLeaveTheOldValues turned on
     # no new version should be created
     {
+        Name             => q{import an empty value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3813,9 +3861,9 @@ my @ImportDataTests = (
         },
     },
 
-    # import an invalid value for InciState, with EmptyFieldsLeaveTheOldValues turned on
     # an error should be generated
     {
+        Name             => q{import an invalid value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[0],
@@ -3853,8 +3901,8 @@ my @ImportDataTests = (
         },
     },
 
-    # Import without required attribute 'Type', an error should be generated (see bug#14098).
     {
+        Name             => q{Import without required attribute 'Type', an error should be generated (see bug#14098).},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs[2],
@@ -3883,203 +3931,191 @@ my @ImportDataTests = (
             },
         },
     },
-);
 
-# ------------------------------------------------------------ #
-# run general ExportDataGet tests
-# ------------------------------------------------------------ #
+=cut
 
-my $ImportTestCount = 1;
-TEST:
+# run general ImportDataTests tests
+my $ImportTestCount = 0;
 for my $Test (@ImportDataTests) {
 
-    # check SourceImportData attribute
-    if ( !$Test->{SourceImportData} || ref $Test->{SourceImportData} ne 'HASH' ) {
+    subtest "ImportData: $Test->{Name}" => sub {
 
-        fail("ImportTest $ImportTestCount: SourceImportData found for this test.");
+        # check SourceImportData attribute
+        if ( !$Test->{SourceImportData} || ref $Test->{SourceImportData} ne 'HASH' ) {
 
-        next TEST;
-    }
+            fail("SourceImportData not found for this test.");
 
-    # set the object data
-    if (
-        $Test->{SourceImportData}->{ObjectData}
-        && ref $Test->{SourceImportData}->{ObjectData} eq 'HASH'
-        && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
-        )
-    {
+            return;
+        }
 
-        # save object data
-        $ImportExportObject->ObjectDataSave(
-            TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
-            ObjectData => $Test->{SourceImportData}->{ObjectData},
-            UserID     => 1,
-        );
-    }
+        # set the object data
+        if (
+            $Test->{SourceImportData}->{ObjectData}
+            && ref $Test->{SourceImportData}->{ObjectData} eq 'HASH'
+            && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
+            )
+        {
 
-    # set the mapping object data
-    if (
-        $Test->{SourceImportData}->{MappingObjectData}
-        && ref $Test->{SourceImportData}->{MappingObjectData} eq 'ARRAY'
-        && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
-        )
-    {
+            # save object data
+            $ImportExportObject->ObjectDataSave(
+                TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
+                ObjectData => $Test->{SourceImportData}->{ObjectData},
+                UserID     => 1,
+            );
+        }
 
-        # delete all existing mapping data
-        $ImportExportObject->MappingDelete(
-            TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
-            UserID     => 1,
-        );
+        # set the mapping object data
+        if (
+            $Test->{SourceImportData}->{MappingObjectData}
+            && ref $Test->{SourceImportData}->{MappingObjectData} eq 'ARRAY'
+            && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
+            )
+        {
 
-        # add the mapping object rows
-        MAPPINGOBJECTDATA:
-        for my $MappingObjectData ( @{ $Test->{SourceImportData}->{MappingObjectData} } ) {
-
-            # add a new mapping row
-            my $MappingID = $ImportExportObject->MappingAdd(
+            # delete all existing mapping data
+            $ImportExportObject->MappingDelete(
                 TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
                 UserID     => 1,
             );
 
-            # add the mapping object data
-            $ImportExportObject->MappingObjectDataSave(
-                MappingID         => $MappingID,
-                MappingObjectData => $MappingObjectData,
-                UserID            => 1,
+            # add the mapping object rows
+            MAPPINGOBJECTDATA:
+            for my $MappingObjectData ( @{ $Test->{SourceImportData}->{MappingObjectData} } ) {
+
+                # add a new mapping row
+                my $MappingID = $ImportExportObject->MappingAdd(
+                    TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
+                    UserID     => 1,
+                );
+
+                # add the mapping object data
+                $ImportExportObject->MappingObjectDataSave(
+                    MappingID         => $MappingID,
+                    MappingObjectData => $MappingObjectData,
+                    UserID            => 1,
+                );
+            }
+        }
+
+        # import data save
+        my ( $ConfigItemID, $RetCode ) = $ObjectBackendObject->ImportDataSave(
+            %{ $Test->{SourceImportData}->{ImportDataSave} },
+            Counter => $ImportTestCount,
+        );
+
+        if ( !$Test->{ReferenceImportData} ) {
+
+            ok( !$ConfigItemID, "ImportDataSave() - return no ConfigItemID" );
+            ok( !$RetCode,      "ImportDataSave() - return no RetCode" );
+
+            return;
+        }
+
+        ok( $ConfigItemID, "ImportDataSave() - return ConfigItemID" );
+        ok( $RetCode,      "ImportDataSave() - return RetCode" );
+
+        # get the version list
+        my $VersionList = $ConfigItemObject->VersionList(
+            ConfigItemID => $ConfigItemID,
+        ) // [];
+
+        # check number of versions
+        is(
+            scalar @{$VersionList},
+            $Test->{ReferenceImportData}->{VersionNumber} || 0,
+            "ImportDataSave() - correct number of versions",
+        );
+
+        # get the last version
+        my $VersionData = $ConfigItemObject->VersionGet(
+            ConfigItemID => $ConfigItemID,
+            XMLDataGet   => 1,
+        );
+
+        # translate xmldata in a 2d hash
+        my %XMLHash = $XMLObject->XMLHash2D(
+            XMLHash => $VersionData->{XMLData},
+        );
+
+        # clean the xml hash
+        KEY:
+        for my $Key ( sort keys %XMLHash ) {
+
+            next KEY if $Key =~ m{ \{'Content'\} \z }xms;
+
+            delete $XMLHash{$Key};
+        }
+
+        # check general elements
+        ELEMENT:
+        for my $Element (qw(Number Name DeplState InciState)) {
+
+            next ELEMENT if !exists $Test->{ReferenceImportData}->{LastVersion}->{$Element};
+
+            # set content if values are undef
+            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
+                $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
+            }
+            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
+                $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
+            }
+
+            # check element
+            is(
+                $VersionData->{$Element},
+                $Test->{ReferenceImportData}->{LastVersion}->{$Element},
+                "ImportDataSave() $Element is identical",
+            );
+
+            delete $Test->{ReferenceImportData}->{LastVersion}->{$Element};
+        }
+
+        # check number of XML elements
+        is(
+            scalar keys %XMLHash,
+            scalar keys %{ $Test->{ReferenceImportData}->{LastVersion} },
+            "ImportDataSave() - correct number of XML elements",
+        );
+
+        # check XML elements
+        ELEMENT:
+        for my $Key ( sort keys %{ $Test->{ReferenceImportData}->{LastVersion} } ) {
+
+            # duplicate key
+            my $XMLKey = $Key;
+
+            # prepare key
+            my $Counter = 0;
+            while ( $XMLKey =~ m{ :: }xms ) {
+
+                if ( $Counter % 2 ) {
+                    $XMLKey =~ s{ :: }{]\{'}xms;
+                }
+                else {
+                    $XMLKey =~ s{ :: }{'\}[}xms;
+                }
+
+                $Counter++;
+            }
+
+            next ELEMENT if !exists $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' };
+
+            # set content if values are undef
+            if ( !defined $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } ) {
+                $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } = 'UNDEF-unittest';
+            }
+            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Key} ) {
+                $Test->{ReferenceImportData}->{LastVersion}->{$Key} = 'UNDEF-unittest';
+            }
+
+            # check XML element
+            is(
+                $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' },
+                $Test->{ReferenceImportData}->{LastVersion}->{$Key},
+                "ImportDataSave() $Key is identical",
             );
         }
-    }
-
-    # import data save
-    my ( $ConfigItemID, $RetCode ) = $ObjectBackendObject->ImportDataSave(
-        %{ $Test->{SourceImportData}->{ImportDataSave} },
-        Counter => $ImportTestCount,
-    );
-
-    if ( !$Test->{ReferenceImportData} ) {
-
-        ok(
-            !$ConfigItemID,
-            "ImportTest $ImportTestCount: ImportDataSave() - return no ConfigItemID"
-        );
-        ok(
-            !$RetCode,
-            "ImportTest $ImportTestCount: ImportDataSave() - return no RetCode"
-        );
-
-        next TEST;
-    }
-
-    ok(
-        $ConfigItemID,
-        "ImportTest $ImportTestCount: ImportDataSave() - return ConfigItemID"
-    );
-    ok(
-        $RetCode,
-        "ImportTest $ImportTestCount: ImportDataSave() - return RetCode"
-    );
-
-    # get the version list
-    my $VersionList = $ConfigItemObject->VersionList(
-        ConfigItemID => $ConfigItemID,
-    ) // [];
-
-    # check number of versions
-    is(
-        scalar @{$VersionList},
-        $Test->{ReferenceImportData}->{VersionNumber} || 0,
-        "ImportTest $ImportTestCount: ImportDataSave() - correct number of versions",
-    );
-
-    # get the last version
-    my $VersionData = $ConfigItemObject->VersionGet(
-        ConfigItemID => $ConfigItemID,
-        XMLDataGet   => 1,
-    );
-
-    # translate xmldata in a 2d hash
-    my %XMLHash = $XMLObject->XMLHash2D(
-        XMLHash => $VersionData->{XMLData},
-    );
-
-    # clean the xml hash
-    KEY:
-    for my $Key ( sort keys %XMLHash ) {
-
-        next KEY if $Key =~ m{ \{'Content'\} \z }xms;
-
-        delete $XMLHash{$Key};
-    }
-
-    # check general elements
-    ELEMENT:
-    for my $Element (qw(Number Name DeplState InciState)) {
-
-        next ELEMENT if !exists $Test->{ReferenceImportData}->{LastVersion}->{$Element};
-
-        # set content if values are undef
-        if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
-            $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
-        }
-        if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
-            $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
-        }
-
-        # check element
-        is(
-            $VersionData->{$Element},
-            $Test->{ReferenceImportData}->{LastVersion}->{$Element},
-            "ImportTest $ImportTestCount: ImportDataSave() $Element is identical",
-        );
-
-        delete $Test->{ReferenceImportData}->{LastVersion}->{$Element};
-    }
-
-    # check number of XML elements
-    is(
-        scalar keys %XMLHash,
-        scalar keys %{ $Test->{ReferenceImportData}->{LastVersion} },
-        "ImportTest $ImportTestCount: ImportDataSave() - correct number of XML elements",
-    );
-
-    # check XML elements
-    ELEMENT:
-    for my $Key ( sort keys %{ $Test->{ReferenceImportData}->{LastVersion} } ) {
-
-        # duplicate key
-        my $XMLKey = $Key;
-
-        # prepare key
-        my $Counter = 0;
-        while ( $XMLKey =~ m{ :: }xms ) {
-
-            if ( $Counter % 2 ) {
-                $XMLKey =~ s{ :: }{]\{'}xms;
-            }
-            else {
-                $XMLKey =~ s{ :: }{'\}[}xms;
-            }
-
-            $Counter++;
-        }
-
-        next ELEMENT if !exists $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' };
-
-        # set content if values are undef
-        if ( !defined $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } ) {
-            $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } = 'UNDEF-unittest';
-        }
-        if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Key} ) {
-            $Test->{ReferenceImportData}->{LastVersion}->{$Key} = 'UNDEF-unittest';
-        }
-
-        # check XML element
-        is(
-            $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' },
-            $Test->{ReferenceImportData}->{LastVersion}->{$Key},
-            "ImportTest $ImportTestCount: ImportDataSave() $Key is identical",
-        );
-    }
+    };
 }
 continue {
     $ImportTestCount++;
