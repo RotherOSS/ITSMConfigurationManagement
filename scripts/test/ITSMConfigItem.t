@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -35,7 +35,6 @@ my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
-my $LinkObject           = $Kernel::OM->Get('Kernel::System::LinkObject');
 my $UserObject           = $Kernel::OM->Get('Kernel::System::User');
 
 # get helper object
@@ -47,7 +46,7 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define needed variable
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $Helper->GetRandomID;
 
 # ------------------------------------------------------------ #
 # make preparations
@@ -97,7 +96,7 @@ my %DynamicFieldDefinitions = (
         'Link'         => '',
         'Tooltip'      => '',
         'LinkPreview'  => '',
-        'Type'         => 'Text'
+        'FieldType'    => 'Text'
     },
     Test2 => {
         'Link'               => '',
@@ -112,7 +111,7 @@ my %DynamicFieldDefinitions = (
         },
         'TreeView'    => '1',
         'LinkPreview' => '',
-        'Type'        => 'Dropdown'
+        'FieldType'   => 'Dropdown'
     },
     Test3 => {
         'YearsInFuture'   => '5',
@@ -124,7 +123,7 @@ my %DynamicFieldDefinitions = (
         'DefaultValue'    => 0,
         'Link'            => '',
         'Tooltip'         => '',
-        'Type'            => 'Date'
+        'FieldType'       => 'Date'
     },
     Test4 => {
         'Cols'         => '',
@@ -133,7 +132,7 @@ my %DynamicFieldDefinitions = (
         'RegExList'    => [],
         'MultiValue'   => '0',
         'Tooltip'      => '',
-        'Type'         => 'TextArea'
+        'FieldType'    => 'TextArea'
     },
     Test5 => {
         'YearsInFuture'   => '5',
@@ -145,21 +144,20 @@ my %DynamicFieldDefinitions = (
         'DefaultValue'    => 0,
         'Link'            => '',
         'Tooltip'         => '',
-        'Type'            => 'DateTime'
+        'FieldType'       => 'DateTime'
     },
 );
 
-# add dynamic fields for testing
-for my $Name (qw(Test1 Test2 Test3 Test4 Test5)) {
-
-    # add a new item
+# Add dynamic fields for testing. These dynamic fields will be referenced
+# by name in dynamic field definitions.
+for my $Name ( sort keys %DynamicFieldDefinitions ) {
     my $DFName = $Name . $TestIDSuffix;
     my $ItemID = $DynamicFieldObject->DynamicFieldAdd(
         InternalField => 0,
         Name          => $DFName,
         Label         => $DFName,
         FieldOrder    => $Order++,
-        FieldType     => $DynamicFieldDefinitions{$Name}->{Type},
+        FieldType     => $DynamicFieldDefinitions{$Name}->{FieldType},
         ObjectType    => 'ITSMConfigItem',
         Config        => $DynamicFieldDefinitions{$Name},
         Reorder       => 1,
