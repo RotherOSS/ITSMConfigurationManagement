@@ -36,12 +36,12 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 }
 
 # get needed objects
-my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-my $ImportExportObject   = $Kernel::OM->Get('Kernel::System::ImportExport');
-my $ObjectBackendObject  = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
-my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
-my $XMLObject            = $Kernel::OM->Get('Kernel::System::XML');
+my $GeneralCatalogObject   = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+my $ConfigItemObject       = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+my $ImportExportObject     = $Kernel::OM->Get('Kernel::System::ImportExport');
+my $ObjectBackendObject    = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
+my $DynamicFieldObject     = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $CSVFormatBackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::CSV');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -210,11 +210,18 @@ my $TestIDSuffix = "UnitTest$RandomID";
 
     # not the no underscores are allowed in dynamic field names
     my %DynamicFieldDefinitions = (
-        'DFCustomerUserA' => {
+        'CustomerCIO' => {
             FieldType => 'CustomerUser',
             Config    => {
                 MultiValue => 0,
-                Tooltip    => 'Tooltip for DFCustomerUserA',
+                Tooltip    => 'Tooltip for customer chief information officer',
+            },
+        },
+        'CustomerSalesTeam' => {
+            FieldType => 'CustomerUser',
+            Config    => {
+                MultiValue => 0,                                   # TODO: activate
+                Tooltip    => 'Tooltip for customer sales team',
             },
         },
     );
@@ -262,7 +269,10 @@ my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
             Section1 => {
                 Content => [
                     {
-                        DF => 'DFCustomerUserA' . $TestIDSuffix,
+                        DF => 'CustomerCIO' . $TestIDSuffix,
+                    },
+                    {
+                        DF => 'CustomerSalesTeam' . $TestIDSuffix,
                     },
                 ]
             }
@@ -490,8 +500,11 @@ $ConfigItemPerlDefinitions[2] = " [
     }
 }
 
-# create some random numbers
-my @ConfigItemNumbers = map
+# Create some random numbers. The numbers must be sorted because
+# ExportDataGet() sorts per default by the config item number in descending order.
+my @ConfigItemNumbers =
+    sort
+    map
     { $Helper->GetRandomNumber }
     ( 1 .. 10 );
 
@@ -519,18 +532,34 @@ my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 # define the test config items
 my @ConfigItemSetups;
 
+my $ConfigItemCnt = 0;
 push @ConfigItemSetups,
     {
-        Description   => 'config item with only a CustomerUser dynamic field',
+        Description   => 'config item with two CustomerUser dynamic fields',
         ConfigItemAdd => {
-            Name                                        => 'UnitTest - ConfigItem 1 Version 1',
-            Number                                      => $ConfigItemNumbers[0],
-            ClassID                                     => $ConfigItemClassIDs[0],
-            DefinitionID                                => $ConfigItemDefinitionIDs[0],
-            DeplStateID                                 => $DeplStateListReverse{Production},
-            InciStateID                                 => $InciStateListReverse{Operational},
-            UserID                                      => 1,
-            "DynamicField_DFCustomerUserA$TestIDSuffix" => 'dummy customer A',
+            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                        => $ConfigItemNumbers[0],
+            ClassID                                       => $ConfigItemClassIDs[0],
+            DefinitionID                                  => $ConfigItemDefinitionIDs[0],
+            DeplStateID                                   => $DeplStateListReverse{Production},
+            InciStateID                                   => $InciStateListReverse{Operational},
+            UserID                                        => 1,
+            "DynamicField_CustomerCIO$TestIDSuffix"       => 'chief information officer "🗄"',                          # with double quotes for testing CSV
+            "DynamicField_CustomerSalesTeam$TestIDSuffix" => 'palm tree sales "🌴"',                                    # with double quotes for testing CSV
+        },
+    },
+    {
+        Description   => 'config item with two CustomerUser dynamic fields',
+        ConfigItemAdd => {
+            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                        => $ConfigItemNumbers[1],
+            ClassID                                       => $ConfigItemClassIDs[0],
+            DefinitionID                                  => $ConfigItemDefinitionIDs[0],
+            DeplStateID                                   => $DeplStateListReverse{Production},
+            InciStateID                                   => $InciStateListReverse{Operational},
+            UserID                                        => 1,
+            "DynamicField_CustomerCIO$TestIDSuffix"       => 'chief information officer "🗄"',                          # with double quotes for testing CSV
+            "DynamicField_CustomerSalesTeam$TestIDSuffix" => 'onion sales "🧅"',                                        # with double quotes for testing CSV
         },
     };
 
@@ -1261,6 +1290,55 @@ my @ExportDataTests = (
         },
         ReferenceExportData => [
             [ $ConfigItemNumbers[0] ],
+        ],
+    },
+
+    {
+        Name             => q{Export Name, Number, and CustomerCIO as CSV},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[0],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'Number',
+                },
+                {
+                    Key => "CustomerCIO${TestIDSuffix}::1",
+                },
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}::1",
+                },
+            ],
+            SearchData => {
+
+                # must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[5],
+                UserID     => 1,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                FormatData => {
+                    ColumnSeparator => 'Semicolon',
+                    Charset         => 'UTF-8',
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [ 'UnitTest - ConfigItem 2 Version 1', $ConfigItemNumbers[1], 'chief information officer "🗄"', 'onion sales "🧅"' ],
+            [ 'UnitTest - ConfigItem 1 Version 1', $ConfigItemNumbers[0], 'chief information officer "🗄"', 'palm tree sales "🌴"' ],
+        ],
+        ReferenceExportContent => [
+            qq{"UnitTest - ConfigItem 2 Version 1";"$ConfigItemNumbers[1]";"chief information officer ""🗄""";"onion sales ""🧅"""},
+            qq{"UnitTest - ConfigItem 1 Version 1";"$ConfigItemNumbers[0]";"chief information officer ""🗄""";"palm tree sales ""🌴"""},
         ],
     },
 
@@ -2217,7 +2295,7 @@ for my $Test (@ExportDataTests) {
         # check content of export data
         my $CounterRow = 0;
         ROW:
-        for my $ExportRow ( @{$ExportData} ) {
+        for my $ExportRow ( $ExportData->@* ) {
             ref_ok( $ExportRow, 'ARRAY', 'exported row is not an arrayref' );
 
             # extract reference row
@@ -2240,6 +2318,44 @@ for my $Test (@ExportDataTests) {
         }
         continue {
             $CounterRow++;
+        }
+
+        # optionally test the CSV formatted export
+        if ( $Test->{SourceExportData}->{ExportDataSave} ) {
+            if ( !$Test->{ReferenceExportContent} ) {
+                fail("ReferenceExportContent is set up");
+
+                return;
+            }
+            if ( ref $Test->{ReferenceExportContent} ne 'ARRAY' ) {
+                fail("ReferenceExportContent is an arrayref");
+
+                return;
+            }
+
+            my $TemplateID = $Test->{SourceExportData}->{ExportDataSave}->{TemplateID};
+
+            # specify the format
+            $ImportExportObject->FormatDataSave(
+                TemplateID => $TemplateID,
+                FormatData => $Test->{SourceExportData}->{ExportDataSave}->{FormatData},
+                UserID     => 1,
+            );
+
+            # get export data row
+            my @Content;
+            for my $Row ( $ExportData->@* ) {
+                push @Content, $CSVFormatBackendObject->ExportDataSave(
+                    TemplateID    => $TemplateID,
+                    ExportDataRow => $Row,
+                    UserID        => 1,
+                );
+            }
+            is(
+                \@Content,
+                $Test->{ReferenceExportContent},
+                'ExportDataSave() produced expected lines'
+            );
         }
     };
 }
@@ -4033,9 +4149,8 @@ for my $Test (@ImportDataTests) {
         );
 
         # translate xmldata in a 2d hash
-        my %XMLHash = $XMLObject->XMLHash2D(
-            XMLHash => $VersionData->{XMLData},
-        );
+        # TODO: check the data
+        my %XMLHash;
 
         # clean the xml hash
         KEY:
