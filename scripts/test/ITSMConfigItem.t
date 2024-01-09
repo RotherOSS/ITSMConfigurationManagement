@@ -615,7 +615,7 @@ my $ConfigItemTests = [
         },
     },
 
-    # VersionAdd doesn't contains all data (check required attributes) (Missing UserID)
+    # ConfigItemUpdate doesn't contains all data (check required attributes) (Missing UserID)
     {
         SourceData => {
             ConfigItemAdd => {
@@ -626,7 +626,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 4",
                 UserID      => $UserIDs[1],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     DeplStateID => $DeplStateListReverse{Production},
                     InciStateID => $InciStateListReverse{Operational},
@@ -657,7 +657,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5",
                 UserID      => $UserIDs[2],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 5",
                     DeplStateID => undef,
@@ -690,7 +690,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 6",
                 UserID      => $UserIDs[2],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     DeplStateID => $DeplStateListReverse{Production},
                     InciStateID => undef,
@@ -722,7 +722,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 7",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 9 Version 1",
                     DeplStateID => $DeplStateListReverse{Production},
@@ -807,7 +807,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 8",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - Class $ConfigItemClassIDs[0] ConfigItem 10 Version 1",
                     DeplStateID => $DeplStateListReverse{Planned},
@@ -892,7 +892,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 50",
                 UserID      => $UserIDs[2],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 50 Version 1",
                     DeplStateID => $DeplStateListReverse{Production},
@@ -951,7 +951,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 51",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 51 Version 1",
                     DeplStateID => $DeplStateListReverse{Production},
@@ -1036,7 +1036,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[5] } - 53",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name                              => "UnitTest - Class $ConfigItemClassIDs[5] ConfigItem 53 Version 1",
                     DeplStateID                       => $DeplStateListReverse{Production},
@@ -1099,7 +1099,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[2] } - 52",
                 UserID      => $UserIDs[2],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name                              => "UnitTest - Class $ConfigItemClassIDs[2] ConfigItem 52 Version 1",
                     DeplStateID                       => $DeplStateListReverse{Production},
@@ -1166,7 +1166,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[4] } - 80",
                 UserID      => $UserIDs[2],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name                              => "UnitTest - Class $ConfigItemClassIDs[4] ConfigItem 80 Version 1",
                     DeplStateID                       => $DeplStateListReverse{Production},
@@ -1227,7 +1227,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[3] } - 60",
                 UserID      => $UserIDs[1],
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => "UnitTest - Class $ConfigItemClassIDs[3] ConfigItem 60 Version 1",
                     DeplStateID => $DeplStateListReverse{Production},
@@ -1287,7 +1287,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - 70",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => 'UnitTest - HistoryTest',
                     DeplStateID => $DeplStateListReverse{Planned},
@@ -1420,7 +1420,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bugfix4196",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => 'UnitTest - Bugfix4196',
                     DeplStateID => $DeplStateListReverse{Planned},
@@ -1557,7 +1557,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-A",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => 'UnitTest - Bugfix4377 - CI-A',
                     DeplStateID => $DeplStateListReverse{Production},
@@ -1616,7 +1616,7 @@ my $ConfigItemTests = [
                 Name        => "UnitTest - $ClassList->{ $ConfigItemClassIDs[0] } - Bug 4377 - CI-B",
                 UserID      => 1,
             },
-            VersionAdd => [
+            ConfigItemUpdate => [
                 {
                     Name        => 'UnitTest - Bugfix4377 - CI-B',
                     DeplStateID => $DeplStateListReverse{Production},
@@ -1725,9 +1725,9 @@ for my $Test ( @{$ConfigItemTests} ) {
     # add all defined versions
     my @VersionIDs;
     my %VersionIDsSeen;
-    if ( $SourceData->{VersionAdd} ) {
+    if ( $SourceData->{ConfigItemUpdate} ) {
 
-        for my $Version ( @{ $SourceData->{VersionAdd} } ) {
+        for my $Version ( $SourceData->{ConfigItemUpdate}->@* ) {
 
             if ($ConfigItemID) {
                 $Version->{ConfigItemID} = $ConfigItemID;
@@ -1809,7 +1809,7 @@ for my $Test ( @{$ConfigItemTests} ) {
         $Self->Is(
             scalar @VersionIDs,
             scalar @{ $Test->{ReferenceData}->{VersionGet} },
-            "Test $TestCount: VersionAdd() - correct number of versions",
+            "Test $TestCount: ConfigItemUpdate() - correct number of versions",
         );
 
         next TEST if !$ConfigItemID;
@@ -1822,8 +1822,8 @@ for my $Test ( @{$ConfigItemTests} ) {
         );
     }
 
-    next TEST if !$Test->{ReferenceData};
-    next TEST if !$Test->{ReferenceData}->{VersionGet};
+    next TEST unless $Test->{ReferenceData};
+    next TEST unless $Test->{ReferenceData}->{VersionGet};
 
     my $Counter           = 0;
     my $LastVersionIDMust = 'UNDEF-unittest';
