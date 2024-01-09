@@ -33,6 +33,7 @@ use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData IsArrayR
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::ImportExport',
