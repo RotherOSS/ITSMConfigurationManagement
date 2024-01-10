@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -16,11 +16,17 @@
 
 package Kernel::Modules::AgentITSMConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -28,8 +34,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
+    my $Self = bless {%Param}, $Type;
 
     # set debug
     $Self->{Debug} = 0;
@@ -292,9 +297,7 @@ sub Run {
 
         # remember the first class id to show this in the overview
         # if no class id was given
-        if ( !$ClassIDAuto ) {
-            $ClassIDAuto = $ClassID;
-        }
+        $ClassIDAuto ||= $ClassID;
     }
 
     # if only one filter exists
@@ -324,9 +327,7 @@ sub Run {
         };
 
         # if no filter was selected activate the filter for the default class
-        if ( !$Filter ) {
-            $Filter = $ClassIDAuto;
-        }
+        $Filter ||= $ClassIDAuto;
     }
 
     # check if filter is valid
@@ -541,6 +542,7 @@ sub Run {
 
     # get page footer
     $Output .= $LayoutObject->Footer() if $Self->{Subaction} ne 'AJAXFilterUpdate';
+
     return $Output;
 }
 
