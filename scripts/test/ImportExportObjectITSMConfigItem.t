@@ -1371,19 +1371,30 @@ my @ExportDataTests = (
                 {
                     Key => 'Number',
                 },
+
+                # CustomerCID is a singlevalue field.
+                # But pass an index nevertheless as we want a scalar value.
                 {
                     Key => "CustomerCIO${TestIDSuffix}::1",
                 },
+
+                # CustomerSalesTeam is a multivalue field.
+                # Two cases are covered here:
+                # - get the value at a specific index, that is the first and the second element
+                # - get the complete list
                 {
                     Key => "CustomerSalesTeam${TestIDSuffix}::1",
                 },
                 {
                     Key => "CustomerSalesTeam${TestIDSuffix}::2",
                 },
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}",
+                },
             ],
             SearchData => {
 
-                # must be specified, as otherwise the previously set up SearchData prevails
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
@@ -1406,19 +1417,41 @@ my @ExportDataTests = (
                 $ConfigItemNumbers[1],
                 qq{chief information officer "🗄"$RandomID},
                 qq{onion sales "🧅"$RandomID},
-                qq{apple sales "🍎"$RandomID}
+                qq{apple sales "🍎"$RandomID},
+
+                # TODO: do not JSONify in ExportDataGet()
+                qq{["onion sales \\"🧅\\"$RandomID","apple sales \\"🍎\\"$RandomID"]},
             ],
             [
                 'UnitTest - ConfigItem 1 Version 1',
                 $ConfigItemNumbers[0],
                 qq{chief information officer "🗄"$RandomID},
                 qq{palm tree sales "🌴"$RandomID},
-                qq{tanabate tree sales "🎋"$RandomID}
+                qq{tanabate tree sales "🎋"$RandomID},
+
+                # TODO: do not JSONify in ExportDataGet()
+                qq{["palm tree sales \\"🌴\\"$RandomID","tanabate tree sales \\"🎋\\"$RandomID"]},
             ],
         ],
         ReferenceExportContent => [
-            qq{"UnitTest - ConfigItem 2 Version 1";"$ConfigItemNumbers[1]";"chief information officer ""🗄""$RandomID";"onion sales ""🧅""$RandomID";"apple sales ""🍎""$RandomID"},
-            qq{"UnitTest - ConfigItem 1 Version 1";"$ConfigItemNumbers[0]";"chief information officer ""🗄""$RandomID";"palm tree sales ""🌴""$RandomID";"tanabate tree sales ""🎋""$RandomID"},
+            join(
+                ';',
+                qq{"UnitTest - ConfigItem 2 Version 1"},
+                qq{"$ConfigItemNumbers[1]"},
+                qq{"chief information officer ""🗄""$RandomID"},    # not JSON because single value
+                qq{"onion sales ""🧅""$RandomID"},                  # not JSON because explicit index
+                qq{"apple sales ""🍎""$RandomID"},                  # not JSON because explicit index
+                qq{"[""onion sales \\""🧅\\""$RandomID"",""apple sales \\""🍎\\""$RandomID""]"}
+            ),
+            join(
+                ';',
+                qq{"UnitTest - ConfigItem 1 Version 1"},
+                qq{"$ConfigItemNumbers[0]"},
+                qq{"chief information officer ""🗄""$RandomID"},
+                qq{"palm tree sales ""🌴""$RandomID"},
+                qq{"tanabate tree sales ""🎋""$RandomID"},
+                qq{"[""palm tree sales \\""🌴\\""$RandomID"",""tanabate tree sales \\""🎋\\""$RandomID""]"}
+            ),
         ],
     },
 
@@ -2376,25 +2409,23 @@ for my $Test (@ExportDataTests) {
         my $CounterRow = 0;
         ROW:
         for my $ExportRow ( $ExportData->@* ) {
-            ref_ok( $ExportRow, 'ARRAY', 'exported row is not an arrayref' );
+            subtest "ExportDataGet(): row $CounterRow in exported data" => sub {
+                ref_ok( $ExportRow, 'ARRAY', 'exported row is an arrayref' );
 
-            # extract reference row
-            my $ReferenceRow = $Test->{ReferenceExportData}->[$CounterRow];
-            ref_ok( $ReferenceRow, 'ARRAY', 'expected row is not an arrayref' );
+                # extract reference row
+                my $ReferenceRow = $Test->{ReferenceExportData}->[$CounterRow];
+                ref_ok( $ReferenceRow, 'ARRAY', 'expected row is an arrayref' );
 
-            # check number of columns
-            is(
-                scalar @{$ExportRow},
-                scalar @{$ReferenceRow},
-                "ExportDataGet() - correct number of columns",
-            );
+                # check number of columns
+                is(
+                    scalar @{$ExportRow},
+                    scalar @{$ReferenceRow},
+                    "correct number of columns",
+                );
 
-            # check values
-            is(
-                $ExportRow,
-                $ReferenceRow,
-                "ExportDataGet() - values in exported row",
-            );
+                # check values
+                is( $ExportRow, $ReferenceRow, 'values in exported row' );
+            };
         }
         continue {
             $CounterRow++;

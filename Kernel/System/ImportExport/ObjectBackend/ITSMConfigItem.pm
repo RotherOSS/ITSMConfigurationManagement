@@ -28,7 +28,7 @@ use List::Util qw(max);
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData IsArrayRefWithData);
 
 our @ObjectDependencies = (
@@ -580,7 +580,7 @@ sub ExportDataGet {
         delete $SearchData->{InciStateIDs};
     }
 
-    # add all XML data to the search params
+    # add all dynamic field data to the search params
     my %DFSearchParams = $Self->_DFSearchDataPrepare(
         DynamicFieldRef => $Definition->{DynamicFieldRef},
         SearchData      => $SearchData,
@@ -599,7 +599,7 @@ sub ExportDataGet {
     # JSON support might be needed for Set dynamic fields
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
 
-    my @ExportData;
+    my @Rows;
     CONFIGITEMID:
     for my $ConfigItemID (@ConfigItemIDs) {
 
@@ -613,7 +613,7 @@ sub ExportDataGet {
         next CONFIGITEMID unless ref $ConfigItem eq 'HASH';
 
         # add data to the export data array
-        my @Item;
+        my @RowItems;
         MAPPINGOBJECT:
         for my $MappingObject (@MappingObjectList) {
 
@@ -622,21 +622,21 @@ sub ExportDataGet {
 
             # handle empty key
             if ( !$Key ) {
-                push @Item, '';
+                push @RowItems, '';
 
                 next MAPPINGOBJECT;
             }
 
             # handle config item number
             if ( $Key eq 'Number' ) {
-                push @Item, $ConfigItem->{Number};
+                push @RowItems, $ConfigItem->{Number};
 
                 next MAPPINGOBJECT;
             }
 
             # handle current config item name
             if ( $Key eq 'Name' ) {
-                push @Item, $ConfigItem->{Name};
+                push @RowItems, $ConfigItem->{Name};
 
                 next MAPPINGOBJECT;
             }
@@ -644,7 +644,7 @@ sub ExportDataGet {
             # handle deployment state
             if ( $Key eq 'DeplState' ) {
                 $ConfigItem->{DeplStateID} ||= 'DUMMY';
-                push @Item, $DeplStateList->{ $ConfigItem->{DeplStateID} };
+                push @RowItems, $DeplStateList->{ $ConfigItem->{DeplStateID} };
 
                 next MAPPINGOBJECT;
             }
@@ -652,7 +652,7 @@ sub ExportDataGet {
             # handle incident state
             if ( $Key eq 'InciState' ) {
                 $ConfigItem->{InciStateID} ||= 'DUMMY';
-                push @Item, $InciStateList->{ $ConfigItem->{InciStateID} };
+                push @RowItems, $InciStateList->{ $ConfigItem->{InciStateID} };
 
                 next MAPPINGOBJECT;
             }
@@ -664,46 +664,57 @@ sub ExportDataGet {
 
             # The Key encodes some extra information.
             # Note that the indexes start at 1 in the key names
-            my ( $DFName, $IndexValue ) = split /::/, $Key;
-            $IndexValue //= -1;
+            my ( $DFName, $Index ) = split /::/, $Key;
+
+            $Index //= -99;    # something less than 1
             my $Value = $ConfigItem->{"DynamicField_$DFName"};
 
             if ( !defined $Value ) {
-                push @Item, '';
+                push @RowItems, '';
 
                 next MAPPINGOBJECT;
             }
 
-            if ( ref $Value eq 'ARRAY' ) {
-                if ( $IndexValue >= 1 ) {
-                    push @Item, $Value->[ $IndexValue - 1 ] // '';
+            # The formating depends on the config of the dynamic field, which is not really nice.
+            my $IsMultiValue = $Definition->{DynamicFieldRef}->{$DFName}->{Config}->{MultiValue} ? 1 : 0;
+
+            # handle special cases
+            my $ActualValue = eval {
+
+                # a specific index was requested
+                if ( $IsMultiValue && $Index >= 1 ) {
+
+                    return $Value->[ $Index - 1 ] // '';
                 }
-                else {
 
-                    # When in doubt then JSONify the value. A known case is the dynamic field type 'Set' where
-                    # the value is a nested data structure.
-                    push @Item, $JSONObject->Encode( Data => $Value );
+                # get first element for single value fields
+                if ( !$IsMultiValue && ref $Value eq 'ARRAY' ) {
+
+                    return $Value->[0] // '';
                 }
 
-                next MAPPINGOBJECT;
-            }
+                # the default
+                return $Value;
+            };
 
-            if ( ref $Value ) {
+            if ( ref $ActualValue ) {
 
-                # When in doubt then JSONify the value. Not sure whether this ever occurs.
-                push @Item, $JSONObject->Encode( Data => $Value );
+                # TODO: JSONify in the formatter
+                # References are JSONified. This happens whn
+                # - a multivalue field gives an array reference
+                # - a multivalue Set field gives an array reference with array references inside
+                # - a singlevalue Set field gives an array reference
+                push @RowItems, $JSONObject->Encode( Data => $ActualValue );
             }
             else {
-                push @Item, $Value;
+                push @RowItems, $ActualValue;
             }
-
-            next MAPPINGOBJECT;
         }
 
-        push @ExportData, \@Item;
+        push @Rows, \@RowItems;
     }
 
-    return \@ExportData;
+    return \@Rows;
 }
 
 =head2 ImportDataSave()
