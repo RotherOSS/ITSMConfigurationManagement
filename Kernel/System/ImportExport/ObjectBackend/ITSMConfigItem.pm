@@ -1394,14 +1394,29 @@ sub _MappingObjectAttributesGet {
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
         my $DFDetails          = $DynamicFieldConfig->{Config};
 
-        # Sets can only exported as a whole, even if they are MultiValue sets.
+        # the version without prefix is always possible
+        {
+            # create key string, including a potential prefix and a potential count
+            my $Key = join '::',
+                ( $Param{KeyPrefix} || () ),
+                $DFName;
+
+            # create key string, including a potential prefix and a potential count
+            my $Value = join '::',
+                ( $Param{ValuePrefix} || () ),
+                $DFName;
+
+            # add row
+            push @Elements,
+                {
+                    Key   => $Key,
+                    Value => $Value,
+                };
+        }
+
         # Limit the length of importable arrays, even if more elements can be set via the GUI.
-        my $IsMulti = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
-        my $CountMax =
-            $DynamicFieldConfig->{FieldType} eq 'Set'
-            ? 1
-            : $IsMulti ? $Param{CountMaxLimit}
-            :            1;
+        my $IsMulti  = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
+        my $CountMax = $IsMulti ? ( $Param{CountMaxLimit} // 10 ) : 0;
 
         COUNT:
         for my $Count ( 1 .. $CountMax ) {
@@ -1410,13 +1425,13 @@ sub _MappingObjectAttributesGet {
             my $Key = join '::',
                 ( $Param{KeyPrefix} || () ),
                 $DFName,
-                ( $CountMax == 1 ? () : $Count );
+                $Count;
 
             # create key string, including a potential prefix and a potential count
             my $Value = join '::',
                 ( $Param{ValuePrefix} || () ),
                 $DFName,
-                ( $CountMax == 1 ? () : $Count );
+                $Count;
 
             # add row
             push @Elements,
@@ -1424,18 +1439,6 @@ sub _MappingObjectAttributesGet {
                     Key   => $Key,
                     Value => $Value,
                 };
-
-            # TODO: support for Set
-            #next COUNT unless $Item->{Sub};
-            next COUNT if 1;
-
-            # start recursion
-            push @Elements, $Self->_MappingObjectAttributesGet(
-                DynamicFieldRef => $DFDetails->{Sub},               # Sub is now handled in Set
-                KeyPrefix       => $Key,
-                ValuePrefix     => $Value,
-                CountMaxLimit   => $Param{CountMaxLimit} || '10',
-            );
         }
     }
 
