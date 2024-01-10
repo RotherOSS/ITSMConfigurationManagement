@@ -36,12 +36,14 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 }
 
 # get needed objects
-my $GeneralCatalogObject   = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-my $ConfigItemObject       = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-my $ImportExportObject     = $Kernel::OM->Get('Kernel::System::ImportExport');
-my $ObjectBackendObject    = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
+my $CustomerUserObject     = $Kernel::OM->Get('Kernel::System::CustomerUser');
 my $DynamicFieldObject     = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $GeneralCatalogObject   = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+my $ImportExportObject     = $Kernel::OM->Get('Kernel::System::ImportExport');
 my $CSVFormatBackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::CSV');
+my $ObjectBackendObject    = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
+my $ConfigItemObject       = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
