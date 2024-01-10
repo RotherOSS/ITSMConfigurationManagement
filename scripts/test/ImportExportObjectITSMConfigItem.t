@@ -183,28 +183,78 @@ for my $i ( 0 .. 29 ) {
     );
 }
 
-# ------------------------------------------------------------ #
 # make preparations to test ExportDataGet() and ImportDataSave()
-# ------------------------------------------------------------ #
-
 my $GeneralCatalogClass = 'UnitTest' . $RandomID;
+diag "GeneralCatalogClass: '$GeneralCatalogClass'";
 
 # add a general catalog test list
+my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+    Group  => 'itsm-configitem',
+    UserID => 1,
+);
+ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
+
+# create customer users which will be referenced in CustomerUser dynamic fields
+# with double quotes for testing CSV
+# with high order letters
+# with random id, useful during development when RestoreDatabase is deactivated
+my %CustomerUsers = (
+
+    # for CustomerCIO
+    CIO => 'chief information officer "🗄"' . $RandomID,
+
+    # fruit sales for CustomerSalesTeam
+    apple => 'apple sales "🍎"' . $RandomID,
+    onion => 'onion sales "🧅"' . $RandomID,
+
+    # tress sales for CustomerSalesTeam
+    tanabate => 'tanabate tree sales "🎋"' . $RandomID,
+    palm     => 'palm tree sales "🌴"' . $RandomID,
+);
+$ConfigObject->Set(
+    Key   => 'CheckEmailAddresses',
+    Value => 0,
+);
+for my $Key ( sort keys %CustomerUsers ) {
+    my $Login           = $CustomerUsers{$Key};
+    my $CustomerUserAdd = $CustomerUserObject->CustomerUserAdd(
+        Source         => 'CustomerUser',
+        UserFirstname  => "$Key first name $RandomID",
+        UserLastname   => "$Key last name $RandomID",
+        UserCustomerID => 'TestCustomerCompany1' . $RandomID,
+        UserLogin      => $Login,
+        UserEmail      => $Key . $RandomID . '@example.com',
+        ValidID        => 1,
+        UserID         => 1,
+    );
+    is( $CustomerUserAdd, $Login, "customer user '$Login' added" );
+}
+
+# Add generic catalog items for testing the GeneralCatalog dynamic field class
 for my $Name (qw(Test1 Test2 Test3 Test4)) {
 
     # add a new item
     my $ItemID = $GeneralCatalogObject->ItemAdd(
         Class   => $GeneralCatalogClass,
         Name    => $Name,
+        Comment => "added by " . __FILE__,
         ValidID => 1,
         UserID  => 1,
     );
     ok( $ItemID, "$Name added to the general catalog" );
+
+    # Set permission.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ItemID,
+        Key    => 'Permission',
+        Value  => $ConfigItemGroupID,
+    );
 }
 
 # Add dynamic fields for testing. These dynamic fields will be referenced
 # by name in dynamic field definitions.
 my $TestIDSuffix = "UnitTest$RandomID";
+diag "TestIDSuffix: '$TestIDSuffix'";
 {
     my $Order = 20000;
 
@@ -220,7 +270,7 @@ my $TestIDSuffix = "UnitTest$RandomID";
         'CustomerSalesTeam' => {
             FieldType => 'CustomerUser',
             Config    => {
-                MultiValue => 0,                                   # TODO: activate
+                MultiValue => 1,
                 Tooltip    => 'Tooltip for customer sales team',
             },
         },
@@ -486,6 +536,13 @@ $ConfigItemPerlDefinitions[2] = " [
         );
         ok( $ClassID, "added general catalog item for config item class $ClassName" );
 
+        # Set permission.
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $ClassID,
+            Key    => 'Permission',
+            Value  => $ConfigItemGroupID,
+        );
+
         push @ConfigItemClassIDs, $ClassID;
 
         # add a definition to the class
@@ -544,8 +601,11 @@ push @ConfigItemSetups,
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => 1,
-            "DynamicField_CustomerCIO$TestIDSuffix"       => 'chief information officer "🗄"',                          # with double quotes for testing CSV
-            "DynamicField_CustomerSalesTeam$TestIDSuffix" => 'palm tree sales "🌴"',                                    # with double quotes for testing CSV
+            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
+            "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
+                $CustomerUsers{palm},
+                $CustomerUsers{tanabate},
+            ],
         },
     },
     {
@@ -558,8 +618,11 @@ push @ConfigItemSetups,
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => 1,
-            "DynamicField_CustomerCIO$TestIDSuffix"       => 'chief information officer "🗄"',                          # with double quotes for testing CSV
-            "DynamicField_CustomerSalesTeam$TestIDSuffix" => 'onion sales "🧅"',                                        # with double quotes for testing CSV
+            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
+            "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
+                $CustomerUsers{onion},
+                $CustomerUsers{apple},
+            ],
         },
     };
 
@@ -1312,6 +1375,9 @@ my @ExportDataTests = (
                 {
                     Key => "CustomerSalesTeam${TestIDSuffix}::1",
                 },
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}::2",
+                },
             ],
             SearchData => {
 
@@ -1333,12 +1399,24 @@ my @ExportDataTests = (
         # The expected rows need to be sorted by config item number in descending order.
         # There is no way to specify the sort order in ExportDataGet().
         ReferenceExportData => [
-            [ 'UnitTest - ConfigItem 2 Version 1', $ConfigItemNumbers[1], 'chief information officer "🗄"', 'onion sales "🧅"' ],
-            [ 'UnitTest - ConfigItem 1 Version 1', $ConfigItemNumbers[0], 'chief information officer "🗄"', 'palm tree sales "🌴"' ],
+            [
+                'UnitTest - ConfigItem 2 Version 1',
+                $ConfigItemNumbers[1],
+                qq{chief information officer "🗄"$RandomID},
+                qq{onion sales "🧅"$RandomID},
+                qq{apple sales "🍎"$RandomID}
+            ],
+            [
+                'UnitTest - ConfigItem 1 Version 1',
+                $ConfigItemNumbers[0],
+                qq{chief information officer "🗄"$RandomID},
+                qq{palm tree sales "🌴"$RandomID},
+                qq{tanabate tree sales "🎋"$RandomID}
+            ],
         ],
         ReferenceExportContent => [
-            qq{"UnitTest - ConfigItem 2 Version 1";"$ConfigItemNumbers[1]";"chief information officer ""🗄""";"onion sales ""🧅"""},
-            qq{"UnitTest - ConfigItem 1 Version 1";"$ConfigItemNumbers[0]";"chief information officer ""🗄""";"palm tree sales ""🌴"""},
+            qq{"UnitTest - ConfigItem 2 Version 1";"$ConfigItemNumbers[1]";"chief information officer ""🗄""$RandomID";"onion sales ""🧅""$RandomID";"apple sales ""🍎""$RandomID"},
+            qq{"UnitTest - ConfigItem 1 Version 1";"$ConfigItemNumbers[0]";"chief information officer ""🗄""$RandomID";"palm tree sales ""🌴""$RandomID";"tanabate tree sales ""🎋""$RandomID"},
         ],
     },
 
