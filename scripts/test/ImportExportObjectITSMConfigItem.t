@@ -43,6 +43,7 @@ my $ImportExportObject     = $Kernel::OM->Get('Kernel::System::ImportExport');
 my $CSVFormatBackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::CSV');
 my $ObjectBackendObject    = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
 my $ConfigItemObject       = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
 my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
 
 # get helper object
@@ -185,16 +186,18 @@ for my $i ( 0 .. 29 ) {
     );
 }
 
-# make preparations to test ExportDataGet() and ImportDataSave()
-my $GeneralCatalogClass = 'UnitTest' . $RandomID;
-diag "GeneralCatalogClass: '$GeneralCatalogClass'";
-
 # add a general catalog test list
 my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
     Group  => 'itsm-configitem',
     UserID => 1,
 );
 ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
+
+# don't care about valid emails
+$ConfigObject->Set(
+    Key   => 'CheckEmailAddresses',
+    Value => 0,
+);
 
 # create customer users which will be referenced in CustomerUser dynamic fields
 # with double quotes for testing CSV
@@ -213,10 +216,6 @@ my %CustomerUsers = (
     tanabate => 'tanabate tree sales "🎋"' . $RandomID,
     palm     => 'palm tree sales "🌴"' . $RandomID,
 );
-$ConfigObject->Set(
-    Key   => 'CheckEmailAddresses',
-    Value => 0,
-);
 for my $Key ( sort keys %CustomerUsers ) {
     my $Login           = $CustomerUsers{$Key};
     my $CustomerUserAdd = $CustomerUserObject->CustomerUserAdd(
@@ -232,7 +231,38 @@ for my $Key ( sort keys %CustomerUsers ) {
     is( $CustomerUserAdd, $Login, "customer user '$Login' added" );
 }
 
-# Add generic catalog items for testing the GeneralCatalog dynamic field class
+# create agents that will be referenced in Agend dynamic fields
+my %Agent2UserID;
+{
+    my %LastName = (
+
+        # for ZZZSetOfAgents
+        DeskAgent     => 'INFORMATION DESK PERSON 💁',
+        LotusAgent    => 'PERSON IN LOTUS POSITION 🧘',
+        ClimbingAgent => 'PERSON CLIMBING 🧗',
+        FrowningAgent => 'PERSON FROWNING 🙍',
+    );
+
+    for my $Key ( sort keys %LastName ) {
+        my $UserID = $UserObject->UserAdd(
+            UserFirstname => $Key,
+            UserLastname  => $LastName{$Key},
+            UserLogin     => $Key . $RandomID,
+            UserPw        => 'some-pass',
+            UserEmail     => $Key . $RandomID . 'email@example.com',
+            ValidID       => 1,
+            ChangeUserID  => 1,
+        );
+        ok( $UserID, "user $Key added" );
+        $Agent2UserID{$Key} = $UserID;
+    }
+}
+
+# Add generic catalog items for testing the GeneralCatalog dynamic field class.
+# TODO: there is no GeneralCatalog dynamic field class yet
+my $GeneralCatalogClass = 'UnitTest' . $RandomID;
+diag "GeneralCatalogClass: '$GeneralCatalogClass'";
+
 for my $Name (qw(Test1 Test2 Test3 Test4)) {
 
     # add a new item
@@ -262,18 +292,51 @@ diag "TestIDSuffix: '$TestIDSuffix'";
 
     # not the no underscores are allowed in dynamic field names
     my %DynamicFieldDefinitions = (
-        'CustomerCIO' => {
+        CustomerCIO => {
             FieldType => 'CustomerUser',
             Config    => {
                 MultiValue => 0,
                 Tooltip    => 'Tooltip for customer chief information officer',
             },
         },
-        'CustomerSalesTeam' => {
+        CustomerSalesTeam => {
             FieldType => 'CustomerUser',
             Config    => {
                 MultiValue => 1,
                 Tooltip    => 'Tooltip for customer sales team',
+            },
+        },
+
+        # Agent1 and Agent2 will be included in the Set AgentSet
+        Agent1 => {
+            FieldType => 'Agent',
+            Config    => {
+                PossibleNone => 1,
+                Multiselect  => 0,
+                MultiValue   => 0,
+                GroupFilter  => [],
+                Tooltip      => 'Tooltip for Agent1',
+            },
+        },
+        Agent2 => {
+            FieldType => 'Agent',
+            Config    => {
+                PossibleNone => 1,
+                Multiselect  => 0,
+                MultiValue   => 0,
+                GroupFilter  => [],
+                Tooltip      => 'Tooltip for Agent2',
+            },
+        },
+        ZZZSetOfAgents => {
+            FieldType => 'Set',
+            Config    => {
+                MultiValue => 1,
+                Include    => [
+                    { DF => 'Agent1' . $TestIDSuffix },
+                    { DF => 'Agent2' . $TestIDSuffix },
+                ],
+                Tooltip => 'Tooltip for ZZZSetOfAgents',
             },
         },
     );
@@ -299,7 +362,7 @@ my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
 {
     my @ConfigItemPerlDefinitions;
 
-    # config item with only a CustomerUser field
+    # config item with two CustomerUser fields
     push @ConfigItemPerlDefinitions, {
         Pages => [
             {
@@ -325,6 +388,38 @@ my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
                     },
                     {
                         DF => 'CustomerSalesTeam' . $TestIDSuffix,
+                    },
+                ]
+            }
+        },
+    };
+
+    # config item with a Set dynamic field
+    push @ConfigItemPerlDefinitions, {
+        Pages => [
+            {
+                Name   => 'Content',
+                Layout => {
+                    Columns     => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section     => 'Section1',
+                        ColumnStart => 1,
+                        RowStart    => 1
+                    }
+                ],
+            }
+        ],
+        Sections => {
+            Section1 => {
+                Content => [
+                    {
+                        DF => 'CustomerCIO' . $TestIDSuffix,
+                    },
+                    {
+                        DF => 'ZZZSetOfAgents' . $TestIDSuffix,
                     },
                 ]
             }
@@ -592,12 +687,14 @@ my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 my @ConfigItemSetups;
 
 my $ConfigItemCnt = 0;
+
+# two config items with CustomerCI0 and CustomerSalesTeam
 push @ConfigItemSetups,
     {
         Description   => 'config item with two CustomerUser dynamic fields',
         ConfigItemAdd => {
+            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            Number                                        => $ConfigItemNumbers[0],
             ClassID                                       => $ConfigItemClassIDs[0],
             DefinitionID                                  => $ConfigItemDefinitionIDs[0],
             DeplStateID                                   => $DeplStateListReverse{Production},
@@ -613,8 +710,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item with two CustomerUser dynamic fields',
         ConfigItemAdd => {
+            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            Number                                        => $ConfigItemNumbers[1],
             ClassID                                       => $ConfigItemClassIDs[0],
             DefinitionID                                  => $ConfigItemDefinitionIDs[0],
             DeplStateID                                   => $DeplStateListReverse{Production},
@@ -624,6 +721,44 @@ push @ConfigItemSetups,
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                 $CustomerUsers{onion},
                 $CustomerUsers{apple},
+            ],
+        },
+    };
+
+# two config items with CustomerCI0 and ZZZSetOfAgents
+push @ConfigItemSetups,
+    {
+        Description   => 'config item with CustomerCIO and ZZZSetOfAgents',
+        ConfigItemAdd => {
+            Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                    => $ConfigItemClassIDs[1],
+            DefinitionID                               => $ConfigItemDefinitionIDs[1],
+            DeplStateID                                => $DeplStateListReverse{Production},
+            InciStateID                                => $InciStateListReverse{Operational},
+            UserID                                     => 1,
+            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
+            "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
+                [ $Agent2UserID{LotusAgent},    $Agent2UserID{DeskAgent} ],
+                [ $Agent2UserID{ClimbingAgent}, $Agent2UserID{DeskAgent} ],
+                [ $Agent2UserID{FrowningAgent}, $Agent2UserID{DeskAgent} ],
+            ],
+        },
+    },
+    {
+        Description   => 'config item with CustomerCIO and ZZZSetOfAgents',
+        ConfigItemAdd => {
+            Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                    => $ConfigItemClassIDs[1],
+            DefinitionID                               => $ConfigItemDefinitionIDs[1],
+            DeplStateID                                => $DeplStateListReverse{Production},
+            InciStateID                                => $InciStateListReverse{Operational},
+            UserID                                     => 1,
+            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
+            "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
+                [ $Agent2UserID{DeskAgent},     $Agent2UserID{LotusAgent} ],
+                [ $Agent2UserID{ClimbingAgent}, $Agent2UserID{FrowningAgent} ],
             ],
         },
     };
@@ -1359,7 +1494,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{Export Name, Number, and CustomerCIO as CSV},
+        Name             => q{Export Name, Number, CustomerCIO and CustomerSalesTeam as CSV},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1372,8 +1507,7 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
 
-                # CustomerCID is a singlevalue field.
-                # But pass an index nevertheless as we want a scalar value.
+                # TODO: CustomerCID is a singlevalue field. Thus no index is passed.
                 {
                     Key => "CustomerCIO${TestIDSuffix}::1",
                 },
@@ -1433,7 +1567,7 @@ my @ExportDataTests = (
                 qq{["palm tree sales \\"🌴\\"$RandomID","tanabate tree sales \\"🎋\\"$RandomID"]},
             ],
         ],
-        ReferenceExportContent => [
+        ReferenceExportContentCSV => [
             join(
                 ';',
                 qq{"UnitTest - ConfigItem 2 Version 1"},
@@ -1455,6 +1589,83 @@ my @ExportDataTests = (
         ],
     },
 
+    {
+        Name             => q{Export Number, CustomerCIO and ZZZSetOfAgents as CSV},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[1],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Number',
+                },
+
+                # TODO: CustomerCID is a singlevalue field. Thus no index is passed.
+                {
+                    Key => "CustomerCIO${TestIDSuffix}::1",
+                },
+
+                # ZZZSetOfAgents is a multivalue field.
+                # Two cases are covered here:
+                # - get the value at a specific index, that is second element
+                # - get the complete list
+                {
+                    Key => "ZZZSetOfAgents${TestIDSuffix}::2",
+                },
+                {
+                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[5],
+                UserID     => 1,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                FormatData => {
+                    ColumnSeparator => 'Semicolon',
+                    Charset         => 'UTF-8',
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                $ConfigItemNumbers[3],
+                qq{chief information officer "🗄"$RandomID},
+                qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]},
+                qq{[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]},
+            ],
+            [
+                $ConfigItemNumbers[2],
+                qq{chief information officer "🗄"$RandomID},
+                qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]},
+                qq{[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]},
+            ],
+        ],
+        ReferenceExportContentCSV => [
+            join(
+                ';',
+                qq{"$ConfigItemNumbers[3]"},
+                qq{"chief information officer ""🗄""$RandomID"},    # not JSON because single value
+                qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]"},
+                qq{"[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]"},
+            ),
+            join(
+                ';',
+                qq{"$ConfigItemNumbers[2]"},
+                qq{"chief information officer ""🗄""$RandomID"},
+                qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]"},
+                qq{"[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]"},
+            ),
+        ],
+    },
 );
 
 =for never
@@ -2379,7 +2590,7 @@ for my $Test (@ExportDataTests) {
             );
         }
 
-        # get export data
+        # get export data as an arrayref
         my $ExportData = $ObjectBackendObject->ExportDataGet(
             %{ $Test->{SourceExportData}->{ExportDataGet} },
         );
@@ -2405,7 +2616,7 @@ for my $Test (@ExportDataTests) {
             "ExportDataGet() - correct number of rows",
         );
 
-        # check content of export data
+        # check the individual rows of export data
         my $CounterRow = 0;
         ROW:
         for my $ExportRow ( $ExportData->@* ) {
@@ -2433,13 +2644,13 @@ for my $Test (@ExportDataTests) {
 
         # optionally test the CSV formatted export
         if ( $Test->{SourceExportData}->{ExportDataSave} ) {
-            if ( !$Test->{ReferenceExportContent} ) {
-                fail("ReferenceExportContent is set up");
+            if ( !$Test->{ReferenceExportContentCSV} ) {
+                fail("ReferenceExportContentCSV is set up");
 
                 return;
             }
-            if ( ref $Test->{ReferenceExportContent} ne 'ARRAY' ) {
-                fail("ReferenceExportContent is an arrayref");
+            if ( ref $Test->{ReferenceExportContentCSV} ne 'ARRAY' ) {
+                fail("ReferenceExportContentCSV is an arrayref");
 
                 return;
             }
@@ -2464,8 +2675,8 @@ for my $Test (@ExportDataTests) {
             }
             is(
                 \@Content,
-                $Test->{ReferenceExportContent},
-                'ExportDataSave() produced expected lines'
+                $Test->{ReferenceExportContentCSV},
+                'ExportDataSave() produced expected CSV lines'
             );
         }
     };
