@@ -1507,9 +1507,9 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
 
-                # TODO: CustomerCID is a singlevalue field. Thus no index is passed.
+                # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}::1",
+                    Key => "CustomerCIO${TestIDSuffix}",
                 },
 
                 # CustomerSalesTeam is a multivalue field.
@@ -1600,9 +1600,9 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
 
-                # TODO: CustomerCID is a singlevalue field. Thus no index is passed.
+                # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}::1",
+                    Key => "CustomerCIO${TestIDSuffix}",
                 },
 
                 # ZZZSetOfAgents is a multivalue field.
