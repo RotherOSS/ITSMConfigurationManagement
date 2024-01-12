@@ -36,15 +36,18 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 }
 
 # get needed objects
-my $CustomerUserObject     = $Kernel::OM->Get('Kernel::System::CustomerUser');
-my $DynamicFieldObject     = $Kernel::OM->Get('Kernel::System::DynamicField');
-my $GeneralCatalogObject   = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-my $ImportExportObject     = $Kernel::OM->Get('Kernel::System::ImportExport');
-my $CSVFormatBackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::CSV');
-my $ObjectBackendObject    = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
-my $ConfigItemObject       = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
-my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+my $CustomerUserObject   = $Kernel::OM->Get('Kernel::System::CustomerUser');
+my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+my $ImportExportObject   = $Kernel::OM->Get('Kernel::System::ImportExport');
+my %FormatBackendObject  = (
+    CSV  => $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::CSV'),
+    JSON => $Kernel::OM->Get('Kernel::System::ImportExport::FormatBackend::JSON'),
+);
+my $ObjectBackendObject = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
+my $ConfigItemObject    = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+my $UserObject          = $Kernel::OM->Get('Kernel::System::User');
+my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -62,17 +65,25 @@ my $RandomID = $Helper->GetRandomID;
 # ------------------------------------------------------------ #
 
 # add some ITSMConfigItem test templates for later checks
+# mostly with dummy formats, but use 5 and 6 for CSV and JSON tests.
 my @TemplateIDs;
-for my $i ( 0 .. 29 ) {
-    my $TemplateID = $ImportExportObject->TemplateAdd(
-        Object  => 'ITSMConfigItem',
-        Format  => 'UnitTest' . $i . $RandomID,
-        Name    => 'UnitTest' . $i . $RandomID,
-        ValidID => 1,
-        UserID  => 1,
+{
+    my %Format = (
+        5 => 'CSV',
+        6 => 'JSON',
     );
 
-    push @TemplateIDs, $TemplateID;
+    for my $i ( 0 .. 29 ) {
+        my $TemplateID = $ImportExportObject->TemplateAdd(
+            Object  => 'ITSMConfigItem',
+            Format  => ( $Format{$i} || 'UnitTest' . $i . $RandomID ),
+            Name    => 'UnitTest' . $i . $RandomID,
+            ValidID => 1,
+            UserID  => 1,
+        );
+
+        push @TemplateIDs, $TemplateID;
+    }
 }
 
 # ObjectList test 1 (check CSV item)
@@ -259,7 +270,7 @@ my %Agent2UserID;
 }
 
 # Add generic catalog items for testing the GeneralCatalog dynamic field class.
-# TODO: there is no GeneralCatalog dynamic field class yet
+# TODO: actually test GeneralCatalog dynamic fields
 my $GeneralCatalogClass = 'UnitTest' . $RandomID;
 diag "GeneralCatalogClass: '$GeneralCatalogClass'";
 
@@ -1493,8 +1504,10 @@ my @ExportDataTests = (
         ],
     },
 
+    # CSV exports
+
     {
-        Name             => q{Export Name, Number, CustomerCIO and CustomerSalesTeam as CSV},
+        Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as CSV},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1536,6 +1549,7 @@ my @ExportDataTests = (
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                Format     => 'CSV',
                 FormatData => {
                     ColumnSeparator => 'Semicolon',
                     Charset         => 'UTF-8',
@@ -1552,8 +1566,6 @@ my @ExportDataTests = (
                 qq{chief information officer "🗄"$RandomID},
                 qq{onion sales "🧅"$RandomID},
                 qq{apple sales "🍎"$RandomID},
-
-                # TODO: do not JSONify in ExportDataGet()
                 qq{["onion sales \\"🧅\\"$RandomID","apple sales \\"🍎\\"$RandomID"]},
             ],
             [
@@ -1562,12 +1574,10 @@ my @ExportDataTests = (
                 qq{chief information officer "🗄"$RandomID},
                 qq{palm tree sales "🌴"$RandomID},
                 qq{tanabate tree sales "🎋"$RandomID},
-
-                # TODO: do not JSONify in ExportDataGet()
                 qq{["palm tree sales \\"🌴\\"$RandomID","tanabate tree sales \\"🎋\\"$RandomID"]},
             ],
         ],
-        ReferenceExportContentCSV => [
+        ReferenceExportContent => [
             join(
                 ';',
                 qq{"UnitTest - ConfigItem 2 Version 1"},
@@ -1590,7 +1600,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{Export Number, CustomerCIO and ZZZSetOfAgents as CSV},
+        Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as CSV},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1626,6 +1636,7 @@ my @ExportDataTests = (
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                Format     => 'CSV',
                 FormatData => {
                     ColumnSeparator => 'Semicolon',
                     Charset         => 'UTF-8',
@@ -1649,7 +1660,7 @@ my @ExportDataTests = (
                 qq{[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]},
             ],
         ],
-        ReferenceExportContentCSV => [
+        ReferenceExportContent => [
             join(
                 ';',
                 qq{"$ConfigItemNumbers[3]"},
@@ -1664,6 +1675,162 @@ my @ExportDataTests = (
                 qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]"},
                 qq{"[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]"},
             ),
+        ],
+    },
+
+    # JSON exports
+
+    {
+        Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as JSON},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[0],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'Number',
+                },
+
+                # CustomerCIO is a singlevalue field. Thus no index is passed.
+                {
+                    Key => "CustomerCIO${TestIDSuffix}",
+                },
+
+                # CustomerSalesTeam is a multivalue field.
+                # Two cases are covered here:
+                # - get the value at a specific index, that is the first and the second element
+                # - get the complete list
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}::1",
+                },
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}::2",
+                },
+                {
+                    Key => "CustomerSalesTeam${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[6],    # with JSON format
+                UserID     => 1,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
+                Format     => 'JSON',
+                FormatData => {
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                'UnitTest - ConfigItem 2 Version 1',
+                $ConfigItemNumbers[1],
+                qq{chief information officer "🗄"$RandomID},
+                qq{onion sales "🧅"$RandomID},
+                qq{apple sales "🍎"$RandomID},
+                [
+                    qq{onion sales "🧅"$RandomID},
+                    qq{apple sales "🍎"$RandomID}
+                ],
+            ],
+            [
+                'UnitTest - ConfigItem 1 Version 1',
+                $ConfigItemNumbers[0],
+                qq{chief information officer "🗄"$RandomID},
+                qq{palm tree sales "🌴"$RandomID},
+                qq{tanabate tree sales "🎋"$RandomID},
+                [
+                    qq{palm tree sales "🌴"$RandomID},
+                    qq{tanabate tree sales "🎋"$RandomID},
+                ],
+            ],
+        ],
+        ReferenceExportContent => [
+            qq{["UnitTest - ConfigItem 2 Version 1","$ConfigItemNumbers[1]","chief information officer \\"\x{1F5C4}\\"$RandomID","onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID",["onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID"]]},
+            qq{["UnitTest - ConfigItem 1 Version 1","$ConfigItemNumbers[0]","chief information officer \\"\x{1F5C4}\\"$RandomID","palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID",["palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID"]]},
+
+        ],
+    },
+
+    {
+        Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as JSON},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[1],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Number',
+                },
+
+                # CustomerCIO is a singlevalue field. Thus no index is passed.
+                {
+                    Key => "CustomerCIO${TestIDSuffix}",
+                },
+
+                # ZZZSetOfAgents is a multivalue field.
+                # Two cases are covered here:
+                # - get the value at a specific index, that is second element
+                # - get the complete list
+                {
+                    Key => "ZZZSetOfAgents${TestIDSuffix}::2",
+                },
+                {
+                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[6],
+                UserID     => 1,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
+                Format     => 'JSON',
+                FormatData => {
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                $ConfigItemNumbers[3],
+                qq{chief information officer "🗄"$RandomID},
+                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                [
+                    [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                ],
+            ],
+            [
+                $ConfigItemNumbers[2],
+                qq{chief information officer "🗄"$RandomID},
+                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                [
+                    [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{FrowningAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                ],
+            ],
+        ],
+        ReferenceExportContent => [
+            qq{["$ConfigItemNumbers[3]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]],[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]]},
+            qq{["$ConfigItemNumbers[2]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]]},
         ],
     },
 );
@@ -2644,13 +2811,13 @@ for my $Test (@ExportDataTests) {
 
         # optionally test the CSV formatted export
         if ( $Test->{SourceExportData}->{ExportDataSave} ) {
-            if ( !$Test->{ReferenceExportContentCSV} ) {
-                fail("ReferenceExportContentCSV is set up");
+            if ( !$Test->{ReferenceExportContent} ) {
+                fail("ReferenceExportContent is set up");
 
                 return;
             }
-            if ( ref $Test->{ReferenceExportContentCSV} ne 'ARRAY' ) {
-                fail("ReferenceExportContentCSV is an arrayref");
+            if ( ref $Test->{ReferenceExportContent} ne 'ARRAY' ) {
+                fail("ReferenceExportContent is an arrayref");
 
                 return;
             }
@@ -2664,10 +2831,13 @@ for my $Test (@ExportDataTests) {
                 UserID     => 1,
             );
 
-            # get export data row
+            # get export data rows
+            my $Format = $Test->{SourceExportData}->{ExportDataSave}->{Format};
+            diag "Format of content is: $Format";
+            my $FormatBackend = $FormatBackendObject{$Format};
             my @Content;
             for my $Row ( $ExportData->@* ) {
-                push @Content, $CSVFormatBackendObject->ExportDataSave(
+                push @Content, $FormatBackend->ExportDataSave(
                     TemplateID    => $TemplateID,
                     ExportDataRow => $Row,
                     UserID        => 1,
@@ -2675,8 +2845,8 @@ for my $Test (@ExportDataTests) {
             }
             is(
                 \@Content,
-                $Test->{ReferenceExportContentCSV},
-                'ExportDataSave() produced expected CSV lines'
+                $Test->{ReferenceExportContent},
+                'ExportDataSave() produced expected content'
             );
         }
     };

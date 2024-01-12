@@ -599,6 +599,11 @@ sub ExportDataGet {
     # JSON support might be needed for Set dynamic fields
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
 
+    my $FormatterCanHandleReferences = $ImportExportObject->FormatterCanHandleReferences(
+        TemplateID => $Param{TemplateID},
+        UserID     => $Param{UserID},
+    );
+
     my @Rows;
     CONFIGITEMID:
     for my $ConfigItemID (@ConfigItemIDs) {
@@ -697,18 +702,20 @@ sub ExportDataGet {
                 return $Value;
             };
 
-            if ( ref $ActualValue ) {
+            # This is relevant for e.g. the CSV backend which can't transparently serialize data structures.
+            # References are JSONified. This happens when:
+            # - a multivalue field gives an array reference
+            # - a multivalue Set field gives an array reference with array references inside
+            # - a singlevalue Set field gives an array reference
+            if ( !$FormatterCanHandleReferences && ref $ActualValue ) {
 
-                # TODO: JSONify in the formatter
-                # References are JSONified. This happens whn
-                # - a multivalue field gives an array reference
-                # - a multivalue Set field gives an array reference with array references inside
-                # - a singlevalue Set field gives an array reference
                 push @RowItems, $JSONObject->Encode( Data => $ActualValue );
+
+                next MAPPINGOBJECT;
             }
-            else {
-                push @RowItems, $ActualValue;
-            }
+
+            # the regular case
+            push @RowItems, $ActualValue;
         }
 
         push @Rows, \@RowItems;
