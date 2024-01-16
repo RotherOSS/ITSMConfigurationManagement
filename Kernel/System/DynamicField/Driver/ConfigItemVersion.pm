@@ -90,8 +90,9 @@ sub new {
 return a hash of object descriptions.
 
     my %Description = $BackendObject->ObjectDescriptionGet(
-        ObjectID => 123,
-        UserID   => 1,
+        DynamicFieldConfig => $DynamicFieldConfig,
+        ObjectID           => 123,
+        UserID             => 1,
     );
 
 Return
@@ -124,6 +125,33 @@ sub ObjectDescriptionGet {
 
     return unless $ConfigItem;
 
+    my %Descriptions;
+    if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}{Config}{DisplayType} ) {
+
+        # prepare string as configured
+        my $DisplayType = $Param{DynamicFieldConfig}{Config}{DisplayType};
+        if ( $DisplayType eq 'ConfigItemNumber' ) {
+            $Descriptions{Normal} = "$ConfigItem->{ConfigItemNumber}";
+            $Descriptions{Long}   = "$ConfigItem->{ConfigItemNumber}";
+        }
+        elsif ( $DisplayType eq 'ConfigItemName' ) {
+            $Descriptions{Normal} = "$ConfigItem->{Name}";
+            $Descriptions{Long}   = "$ConfigItem->{Name}";
+        }
+        elsif ( $DisplayType eq 'ClassConfigItemNumber' ) {
+            $Descriptions{Normal} = "$ConfigItem->{Class}: $ConfigItem->{Number}";
+            $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Number}";
+        }
+        elsif ( $DisplayType eq 'ClassConfigItemName' ) {
+            $Descriptions{Normal} = "$ConfigItem->{Class}: $ConfigItem->{Name}";
+            $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Name}";
+        }
+    }
+    else {
+        $Descriptions{Normal} = "$ConfigItem->{Name}";
+        $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Name}";
+    }
+
     my $Link;
     if ( $Param{Link} && $Param{LayoutObject}{SessionSource} ) {
         if ( $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
@@ -133,14 +161,9 @@ sub ObjectDescriptionGet {
         }
     }
 
-    # TODO: provide a dynamicfield->config option with two or three alternatives for the string
     # create description
     return (
-        # TODO: take attribute from DF-Config
-        Normal => $ConfigItem->{Name},
-
-        # TODO: necessary?
-        Long => "$ConfigItem->{Class}: $ConfigItem->{Name}",
+        %Descriptions,
         Link => $Link,
     );
 }
