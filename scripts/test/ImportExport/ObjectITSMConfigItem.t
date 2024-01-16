@@ -1725,6 +1725,7 @@ my @ExportDataTests = (
                 TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
                 Format     => 'JSON',
                 FormatData => {
+                    Pretty => 0,
                 },
             },
         },
@@ -1801,6 +1802,7 @@ my @ExportDataTests = (
                 TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
                 Format     => 'JSON',
                 FormatData => {
+                    Pretty => 0,
                 },
             },
         },
