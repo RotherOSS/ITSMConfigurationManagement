@@ -1681,7 +1681,7 @@ my @ExportDataTests = (
     # JSON exports
 
     {
-        Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as JSON},
+        Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as ugly concatenated JSON},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -1764,7 +1764,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as JSON},
+        Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as ugly concatenated JSON},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[1],
@@ -1834,6 +1834,119 @@ my @ExportDataTests = (
             qq{["$ConfigItemNumbers[3]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]],[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]]},
             qq{["$ConfigItemNumbers[2]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]]},
         ],
+    },
+
+    {
+        Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as pretty concatenated JSON},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[1],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Number',
+                },
+                {
+                    Key => "CustomerCIO${TestIDSuffix}",
+                },
+                {
+                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[6],
+                UserID     => 1,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
+                Format     => 'JSON',
+                FormatData => {
+
+                    # Pretty is the default
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                $ConfigItemNumbers[3],
+                qq{chief information officer "🗄"$RandomID},
+                [
+                    [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                ],
+            ],
+            [
+                $ConfigItemNumbers[2],
+                qq{chief information officer "🗄"$RandomID},
+                [
+                    [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{FrowningAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                ],
+            ],
+        ],
+        ReferenceExportContent => [ <<"ITEM_1", <<"ITEM_2" ],
+[
+   "$ConfigItemNumbers[3]",
+   "chief information officer \\"\x{1F5C4}\\"$RandomID",
+   [
+      [
+         [
+            $Agent2UserID{DeskAgent}
+         ],
+         [
+            $Agent2UserID{LotusAgent}
+         ]
+      ],
+      [
+         [
+            $Agent2UserID{ClimbingAgent}
+         ],
+         [
+            $Agent2UserID{FrowningAgent}
+         ]
+      ]
+   ]
+]
+ITEM_1
+[
+   "$ConfigItemNumbers[2]",
+   "chief information officer \\"\x{1F5C4}\\"$RandomID",
+   [
+      [
+         [
+            $Agent2UserID{LotusAgent}
+         ],
+         [
+            $Agent2UserID{DeskAgent}
+         ]
+      ],
+      [
+         [
+            $Agent2UserID{ClimbingAgent}
+         ],
+         [
+            $Agent2UserID{DeskAgent}
+         ]
+      ],
+      [
+         [
+            $Agent2UserID{FrowningAgent}
+         ],
+         [
+            $Agent2UserID{DeskAgent}
+         ]
+      ]
+   ]
+]
+ITEM_2
     },
 );
 
