@@ -3047,10 +3047,6 @@ my @ImportDataTests = (
         },
     },
 
-);
-
-=for never
-
     {
         Name             => q{invalid class id is given (check return false)},
         SourceImportData => {
@@ -3387,6 +3383,10 @@ my @ImportDataTests = (
             },
         },
     },
+
+);
+
+=for never
 
     {
         Name             => q{all required values are given (a NEW config item must be created)},
