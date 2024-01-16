@@ -1066,11 +1066,13 @@ sub _DFConfigFromLegacy {
         $DF{FieldType} = $Type;
 
         $DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'Dropdown';
     }
     elsif ( $Type eq 'Customer' ) {
         $DF{FieldType} = 'CustomerUser';
 
         $DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'Date' || $Type eq 'DateTime' ) {
         $DF{FieldType} = $Type;
