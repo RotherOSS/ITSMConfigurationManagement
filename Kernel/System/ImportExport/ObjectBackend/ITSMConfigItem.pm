@@ -1234,16 +1234,16 @@ sub ImportDataSave {
     }
 
     # Edit $VersionData, so that the values in NewVersionData take precedence.
-    # When a config item has no dynamic fields, then $MergedData may reference an empty hash
-    my $MergedData = $Self->_DFImportDataMerge(
+    # When a config item has no dynamic fields, then $MergedDFData may reference an empty hash
+    my $MergedDFData = $Self->_DFImportDataMerge(
         DynamicFieldRef              => \%DynamicFieldList,
-        VersionData                  => $VersionData,
+        OldVersionData               => $VersionData,
         NewVersionData               => \%NewVersionData,
         EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
     );
 
     # bail out, when there was a problem in _DFImportDataMerge()
-    if ( ref $MergedData ne 'HASH' ) {
+    if ( ref $MergedDFData ne 'HASH' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't import entity $Param{Counter}: Could not prepare the input!",
@@ -1251,7 +1251,7 @@ sub ImportDataSave {
 
         return;
     }
-    %NewVersionData = $MergedData->%*;
+    %NewVersionData = $MergedDFData->%*;
 
     # check if the feature to check for a unique name is enabled
     if (
@@ -1300,6 +1300,7 @@ sub ImportDataSave {
 
     if ($ConfigItemID) {
 
+        # TODO: ConfigItemUpdate
         # the specified config item already exists
         # get id of the latest version, for checking later whether a version was created
         my $VersionList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionList(
@@ -1315,7 +1316,7 @@ sub ImportDataSave {
             DeplStateID  => $VersionData->{DeplStateID},
             InciStateID  => $VersionData->{InciStateID},
             UserID       => $Param{UserID},
-            %DFVersionData,
+            $MergedDFData->%*,
         );
 
         if ( !$VersionID ) {
@@ -1643,16 +1644,14 @@ sub _DFImportSearchDataPrepare {
 
 =head2 _DFImportDataMerge()
 
-function to inplace edit the import data.
+merges existing data with the new data.
+Unpacks JSON when necessary.
 
-    my $MergeOk = $ObjectBackend->_DFImportDataMerge(
+    my $MergedDFData = $ObjectBackend->_DFImportDataMerge(
         DynamicFieldRef => $DynamicFieldRef,
         VersionData     => $VersionData,  # will be changed
         NewVersionData  => $HashRef,
     );
-
-The return value indicates whether the merge was successful.
-A merge fails when for example a general catalog item name can't be mapped to an ID.
 
 =cut
 
@@ -1660,33 +1659,39 @@ sub _DFImportDataMerge {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-
     return unless $Param{DynamicFieldRef};
     return unless ref $Param{DynamicFieldRef} eq 'HASH';    # the attributes of the config item class
     return unless $Param{NewVersionData};
     return unless ref $Param{NewVersionData} eq 'HASH';     # hash with values that should be imported
-    return unless $Param{VersionData};
-    return unless ref $Param{VersionData} eq 'HASH';        # hash with current values of the config item
+    return unless $Param{OldVersionData};
+    return unless ref $Param{OldVersionData} eq 'HASH';     # hash with current values of the config item
 
-    # For now handle only simple items with multiple values.
     # Array parameters are marked like "$DFName::$Index"
-    my $VersionData = $Param{VersionData};
-    my %NormalizedNew;
+    my $OldVersionData = $Param{OldVersionData};
+    my $NewVersionData = $Param{NewVersionData};
+    my %MergedDFData;
     NAME_AND_INDEX:
     for my $NameAndIndex ( sort keys $Param{NewVersionData}->%* ) {
+        next NAME_AND_INDEX unless $NameAndIndex =~ m/^DynamicField_/;
+
         my ( $Name, $OneBasedIndex ) = split /::/, $NameAndIndex;
 
-        # prefix dynamic fields
-        if ( $Param{DynamicFieldRef}{$Name} ) {
-            $Name = "DynamicField_$Name";
+        # The most simple case
+        if ( !$OneBasedIndex ) {
+            $MergedDFData{$Name} = $NewVersionData->{$Name} // $OldVersionData->{$Name};
+
+            next NAME_AND_INDEX;
         }
 
-        # for single value DF no index is appended
-        $OneBasedIndex //= 1;
+        $MergedDFData{$Name} //= [];
+        $MergedDFData{$Name}->[ $OneBasedIndex - 1 ] = $NewVersionData->{$NameAndIndex};
 
-        $NormalizedNew{$Name} //= [];
-        $NormalizedNew{$Name}->[ $OneBasedIndex - 1 ] = $Param{NewVersionData}->{$NameAndIndex};
+        next NAME_AND_INDEX;
     }
+
+=for never
+
+    This code is still in work
 
     # JSON support might be needed for Set dynamic fields
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
@@ -1700,19 +1705,19 @@ sub _DFImportDataMerge {
         # When the data point is not part of the input definition,
         # then do not overwrite the previous setting.
         # False values are OK.
-        next DF_NAME unless exists $NormalizedNew{"DynamicField_$Key"};
+        next DF_NAME unless exists $MergedDFData{"DynamicField_$Key"};
 
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
 
         # prepare value
-        my $Value = $NormalizedNew{"DynamicField_$Key"};
+        my $Value = $MergedDFData{"DynamicField_$Key"};
 
         # let merge fail, when a value cannot be prepared
         next DF_NAME unless defined $Value;
         next DF_NAME unless ref $Value eq 'ARRAY';
 
         # TODO: is this sensible ???
-        next DF_NAME unless exists $NormalizedNew{"DynamicField_$DFName"};
+        next DF_NAME unless exists $MergedDFData{"DynamicField_$DFName"};
 
         my $IsReferenceField = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->HasBehavior(
             DynamicFieldConfig => $DynamicFieldConfig,
@@ -1743,7 +1748,7 @@ sub _DFImportDataMerge {
                 }
                 push @Values, \@NestedValues;
             }
-            $NormalizedNew{"DynamicField_$Key"} = \@Values;
+            $MergedDFData{"DynamicField_$Key"} = \@Values;
 
             next DF_NAME;
         }
@@ -1751,14 +1756,14 @@ sub _DFImportDataMerge {
         # general catalog stores its values always as arrays, so they need to be decoded even in single value case
         # NOTE: multivalue case is handled in the loop below
         elsif ( $DynamicFieldConfig->{FieldType} eq 'GeneralCatalog' && !$DynamicFieldConfig->{Config}{MultiValue} ) {
-            $NormalizedNew{"DynamicField_$Key"} = $JSONObject->Decode(
+            $MergedDFData{"DynamicField_$Key"} = $JSONObject->Decode(
                 Data => $Value->[0],
             );
 
             next DF_NAME;
         }
         elsif ( $IsReferenceField && !$DynamicFieldConfig->{Config}{MultiValue} ) {
-            $NormalizedNew{"DynamicField_$Key"} = $JSONObject->Decode(
+            $MergedDFData{"DynamicField_$Key"} = $JSONObject->Decode(
                 Data => $Value->[0],
             );
 
@@ -1767,29 +1772,31 @@ sub _DFImportDataMerge {
 
         # TODO verify if first condition is necessary
         # There are still single valued dynamic fields
-        if ( ref $NormalizedNew{"DynamicField_$DFName"} eq '' || !$DynamicFieldConfig->{Config}{MultiValue} ) {
-            $NormalizedNew{"DynamicField_$DFName"} = $Value->[0];
+        if ( ref $MergedDFData{"DynamicField_$DFName"} eq '' || !$DynamicFieldConfig->{Config}{MultiValue} ) {
+            $MergedDFData{"DynamicField_$DFName"} = $Value->[0];
 
             next DF_NAME;
         }
 
         # simple scalar and arrayref are the only valid options
-        next DF_NAME unless ref $NormalizedNew{"DynamicField_$DFName"} eq 'ARRAY';
+        next DF_NAME unless ref $MergedDFData{"DynamicField_$DFName"} eq 'ARRAY';
 
         # save the prepared value
         # Note: this could be done with List::Util::zip, but that function is only available in newer version of List::Util
-        my $MaxIndex = max( $Value->$#*, $NormalizedNew{$Key}->$#* );
+        my $MaxIndex = max( $Value->$#*, $MergedDFData{$Key}->$#* );
         INDEX:
         for my $Index ( 0 .. $MaxIndex ) {
 
             # TODO: support for $Param{EmptyFieldsLeaveTheOldValues}
             next INDEX unless defined $Value->[$Index];
 
-            $NormalizedNew{"DynamicField_$DFName"}->[$Index] = $Value->[$Index];
+            $MergedDFData{"DynamicField_$DFName"}->[$Index] = $Value->[$Index];
         }
     }
 
-    return \%NormalizedNew;
+=cut
+
+    return \%MergedDFData;
 }
 
 1;

@@ -223,7 +223,8 @@ $ConfigObject->Set(
 my %CustomerUsers = (
 
     # for CustomerCIO
-    CIO => 'chief information officer "🗄"' . $RandomID,
+    CIO      => 'chief information officer "🗄"' . $RandomID,
+    next_CIO => 'next chief information officer "💁"' . $RandomID,
 
     # fruit sales for CustomerSalesTeam
     apple => 'apple sales "🍎"' . $RandomID,
@@ -1368,7 +1369,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{no existing template id is given (check return false)},
+        Name             => q{no existing template id is given (should fail)},
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[-1] + 1,
@@ -1378,7 +1379,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{no class id is given (check return false)},
+        Name             => q{no class id is given (should fail)},
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[2],
@@ -1388,7 +1389,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{invalid class id is given (check return false)},
+        Name             => q{invalid class id is given (should fail)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[-1] + 1,
@@ -1401,7 +1402,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{mapping list is empty (check return false)},
+        Name             => q{mapping list is empty (should fail)},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3010,7 +3011,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{import data row must be an array reference (check return false)},
+        Name             => q{import data row must be an array reference (should fail)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
@@ -3021,7 +3022,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{import data row must be an array reference (check return false)},
+        Name             => q{import data row must be an array reference (should fail)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
@@ -3032,7 +3033,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{no existing template id is given (check return false)},
+        Name             => q{no existing template id is given (should fail)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[-1] + 1,
@@ -3043,7 +3044,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{no class id is given (check return false)},
+        Name             => q{no class id is given (should fail)},
         SourceImportData => {
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[21],
@@ -3054,7 +3055,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{invalid class id is given (check return false)},
+        Name             => q{invalid class id is given (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[-1] + 1,
@@ -3068,7 +3069,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{mapping list is empty (check return false)},
+        Name             => q{mapping list is empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3082,7 +3083,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{more than one identifier with the same name (check return false)},
+        Name             => q{more than one identifier with the same name (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3106,7 +3107,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{identifier is empty (check return false)},
+        Name             => q{identifier is empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3126,7 +3127,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{identifier is undef (check return false)},
+        Name             => q{identifier is undef (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3146,7 +3147,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{both identifiers are empty (check return false)},
+        Name             => q{both identifiers are empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3170,7 +3171,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{both identifiers are undef (check return false)},
+        Name             => q{both identifiers are undef (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3194,7 +3195,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{one identifiers is empty, one is undef (check return false)},
+        Name             => q{one identifiers is empty, one is undef (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3218,7 +3219,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{one of the identifiers is empty (check return false)},
+        Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3242,7 +3243,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{one of the identifiers is undef (check return false)},
+        Name             => q{one of the identifiers is undef (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3266,7 +3267,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{one of the identifiers is empty (check return false)},
+        Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3290,7 +3291,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{one of the identifiers is empty (check return false)},
+        Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3316,7 +3317,7 @@ my @ImportDataTests = (
     # TODO Add some identifier tests
 
     {
-        Name             => q{empty name is given (check return false)},
+        Name             => q{empty name is given (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3341,7 +3342,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{invalid deployment state is given (check return false)},
+        Name             => q{invalid deployment state is given (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3366,7 +3367,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => q{invalid incident state is given (check return false)},
+        Name             => q{invalid incident state is given (should fail)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3391,7 +3392,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => qq{without dynamic fields, import should succeed},
+        Name             => qq{no dynamic fields (should succeed)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs[0],
@@ -3424,6 +3425,58 @@ my @ImportDataTests = (
                 DeplState                                     => 'Production',
                 InciState                                     => 'Operational',
                 "DynamicField_CustomerCIO$TestIDSuffix"       => undef,
+                "DynamicField_CustomerSalesTeam$TestIDSuffix" => undef,
+            },
+        },
+    },
+
+    {
+        Name             => qq{only CustomerCIO (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[0],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => "DynamicField_CustomerCIO$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest 3',
+                    'Production',
+                    'Operational',
+
+                    # CustomerCIO is a single value Reference field, therefore a Entity field.
+                    # Single value Entity fields can be created with a list with a single element.
+                    # Note that the case where only the item is passed is supported as well.
+                    [ $CustomerUsers{next_CIO} ],
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name      => 'UnitTest - Importtest 3',
+                DeplState => 'Production',
+                InciState => 'Operational',
+
+                # CustomerCIO is a single value Reference field, therefore a Entity field.
+                # Single value Entity fields return a list with one element.
+                "DynamicField_CustomerCIO$TestIDSuffix" => [
+                    $CustomerUsers{next_CIO},
+                ],
                 "DynamicField_CustomerSalesTeam$TestIDSuffix" => undef,
             },
         },
