@@ -1233,8 +1233,8 @@ sub ImportDataSave {
         $RowIndex++;
     }
 
-    # TODO review comment
     # Edit $VersionData, so that the values in NewVersionData take precedence.
+    # When a config item has no dynamic fields, then $MergedData may reference an empty hash
     my $MergedData = $Self->_DFImportDataMerge(
         DynamicFieldRef              => \%DynamicFieldList,
         VersionData                  => $VersionData,
@@ -1243,7 +1243,7 @@ sub ImportDataSave {
     );
 
     # bail out, when there was a problem in _DFImportDataMerge()
-    if ( !IsHashRefWithData($MergedData) ) {
+    if ( ref $MergedData ne 'HASH' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can't import entity $Param{Counter}: Could not prepare the input!",
