@@ -23,6 +23,7 @@ use utf8;
 
 # CPAN modules
 use Test2::V0;
+use List::AllUtils qw(true);
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
@@ -66,7 +67,7 @@ my $RandomID = $Helper->GetRandomID;
 
 # create test user
 my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
-    Groups => ['users', 'itsm-configitem'],
+    Groups => [ 'users', 'itsm-configitem' ],
 );
 
 # add some ITSMConfigItem test templates for later checks
@@ -3384,7 +3385,46 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[24],
                 ImportDataRow => [ 'UnitTest - Importtest 2', 'Production', 'Dummy' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
+            },
+        },
+    },
+
+    {
+        Name             => qq{without dynamic fields, import should succeed},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs[0],
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest 3',
+                    'Production',
+                    'Operational',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                          => 'UnitTest - Importtest 3',
+                DeplState                                     => 'Production',
+                InciState                                     => 'Operational',
+                "DynamicField_CustomerCIO$TestIDSuffix"       => undef,
+                "DynamicField_CustomerSalesTeam$TestIDSuffix" => undef,
             },
         },
     },
@@ -4752,92 +4792,42 @@ for my $Test (@ImportDataTests) {
             "ImportDataSave() - correct number of versions",
         );
 
-        # get the last version
-        my $VersionData = $ConfigItemObject->VersionGet(
-            ConfigItemID => $ConfigItemID,
-            XMLDataGet   => 1,
+        # get the latest version
+        my $VersionData = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $ConfigItemID,
+            DynamicFields => 1,
         );
-
-        # translate xmldata in a 2d hash
-        # TODO: check the data
-        my %XMLHash;
-
-        # clean the xml hash
-        KEY:
-        for my $Key ( sort keys %XMLHash ) {
-
-            next KEY if $Key =~ m{ \{'Content'\} \z }xms;
-
-            delete $XMLHash{$Key};
-        }
 
         # check general elements
         ELEMENT:
         for my $Element (qw(Number Name DeplState InciState)) {
 
-            next ELEMENT if !exists $Test->{ReferenceImportData}->{LastVersion}->{$Element};
+            next ELEMENT unless exists $Test->{ReferenceImportData}->{LastVersion}->{$Element};
 
-            # set content if values are undef
-            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
-                $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
-            }
-            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Element} ) {
-                $Test->{ReferenceImportData}->{LastVersion}->{$Element} = 'UNDEF-unittest';
-            }
-
-            # check element
             is(
                 $VersionData->{$Element},
                 $Test->{ReferenceImportData}->{LastVersion}->{$Element},
                 "ImportDataSave() $Element is identical",
             );
-
-            delete $Test->{ReferenceImportData}->{LastVersion}->{$Element};
         }
 
-        # check number of XML elements
+        # check number of dynamic field elements
         is(
-            scalar keys %XMLHash,
-            scalar keys %{ $Test->{ReferenceImportData}->{LastVersion} },
-            "ImportDataSave() - correct number of XML elements",
+            ( true {m/^DynamicField_/} keys $Test->{ReferenceImportData}->{LastVersion}->%* ),
+            ( true {m/^DynamicField_/} keys $VersionData->%* ),
+            "ImportDataSave() - correct number of dynamic field elements",
         );
 
-        # check XML elements
-        ELEMENT:
-        for my $Key ( sort keys %{ $Test->{ReferenceImportData}->{LastVersion} } ) {
+        # check dynamic field elements
+        DF_KEY:
+        for my $DFKey ( sort keys $Test->{ReferenceImportData}->{LastVersion}->%* ) {
+            next DF_KEY unless $DFKey =~ m/^DynamicField_/;
 
-            # duplicate key
-            my $XMLKey = $Key;
-
-            # prepare key
-            my $Counter = 0;
-            while ( $XMLKey =~ m{ :: }xms ) {
-
-                if ( $Counter % 2 ) {
-                    $XMLKey =~ s{ :: }{]\{'}xms;
-                }
-                else {
-                    $XMLKey =~ s{ :: }{'\}[}xms;
-                }
-
-                $Counter++;
-            }
-
-            next ELEMENT if !exists $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' };
-
-            # set content if values are undef
-            if ( !defined $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } ) {
-                $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' } = 'UNDEF-unittest';
-            }
-            if ( !defined $Test->{ReferenceImportData}->{LastVersion}->{$Key} ) {
-                $Test->{ReferenceImportData}->{LastVersion}->{$Key} = 'UNDEF-unittest';
-            }
-
-            # check XML element
+            ok( exists $VersionData->{$DFKey}, "$DFKey retrieved from new config item" );
             is(
-                $XMLHash{ '[1]{\'Version\'}[1]{\'' . $XMLKey . ']{\'Content\'}' },
-                $Test->{ReferenceImportData}->{LastVersion}->{$Key},
-                "ImportDataSave() $Key is identical",
+                $VersionData->{$DFKey},
+                $Test->{ReferenceImportData}->{LastVersion}->{$DFKey},
+                "$DFKey has expected value"
             );
         }
     };
