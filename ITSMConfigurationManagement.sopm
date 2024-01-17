@@ -205,7 +205,7 @@
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/Role.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
-        <File Permission="660" Location="scripts/test/ImportExport/ObjectITSMConfigItem.t" />
+        <File Permission="660" Location="scripts/test/ImportExport/ObjectBackend/ITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Layout/ITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/Admin/AdminITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/Selenium/Agent/Admin/AdminImportExport.t" />
