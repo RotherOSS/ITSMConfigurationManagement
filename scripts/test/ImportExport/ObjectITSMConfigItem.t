@@ -57,12 +57,17 @@ $Kernel::OM->ObjectParamAdd(
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-# define needed variable
-my $RandomID = $Helper->GetRandomID;
-
 # ------------------------------------------------------------ #
 # make preparations
 # ------------------------------------------------------------ #
+
+# define needed variable
+my $RandomID = $Helper->GetRandomID;
+
+# create test user
+my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+    Groups => ['users', 'itsm-configitem'],
+);
 
 # add some ITSMConfigItem test templates for later checks
 # mostly with dummy formats, but use 5 and 6 for CSV and JSON tests.
@@ -79,7 +84,7 @@ my @TemplateIDs;
             Format  => ( $Format{$i} || 'UnitTest' . $i . $RandomID ),
             Name    => 'UnitTest' . $i . $RandomID,
             ValidID => 1,
-            UserID  => 1,
+            UserID  => $TestUserID,
         );
 
         push @TemplateIDs, $TemplateID;
@@ -99,7 +104,7 @@ my @TemplateIDs;
 {
     my $ObjectAttributesGet1 = $ImportExportObject->ObjectAttributesGet(
         TemplateID => $TemplateIDs[0],
-        UserID     => 1,
+        UserID     => $TestUserID,
     );
 
     # check object attribute reference
@@ -160,7 +165,7 @@ my @TemplateIDs;
 {
     my $ObjectAttributesGet2 = $ImportExportObject->ObjectAttributesGet(
         TemplateID => $TemplateIDs[-1] + 1,
-        UserID     => 1,
+        UserID     => $TestUserID,
     );
     is(
         $ObjectAttributesGet2,
@@ -173,7 +178,7 @@ my @TemplateIDs;
 {
     my $MappingObjectAttributesGet1 = $ImportExportObject->MappingObjectAttributesGet(
         TemplateID => $TemplateIDs[0],
-        UserID     => 1,
+        UserID     => $TestUserID,
     );
 
     # check mapping object attribute reference
@@ -187,7 +192,7 @@ my @TemplateIDs;
 {
     my $MappingObjectAttributesGet2 = $ImportExportObject->MappingObjectAttributesGet(
         TemplateID => $TemplateIDs[-1] + 1,
-        UserID     => 1,
+        UserID     => $TestUserID,
     );
 
     is(
@@ -200,7 +205,7 @@ my @TemplateIDs;
 # add a general catalog test list
 my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
     Group  => 'itsm-configitem',
-    UserID => 1,
+    UserID => $TestUserID,
 );
 ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
 
@@ -237,7 +242,7 @@ for my $Key ( sort keys %CustomerUsers ) {
         UserLogin      => $Login,
         UserEmail      => $Key . $RandomID . '@example.com',
         ValidID        => 1,
-        UserID         => 1,
+        UserID         => $TestUserID,
     );
     is( $CustomerUserAdd, $Login, "customer user '$Login' added" );
 }
@@ -282,7 +287,7 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
         Name    => $Name,
         Comment => "added by " . __FILE__,
         ValidID => 1,
-        UserID  => 1,
+        UserID  => $TestUserID,
     );
     ok( $ItemID, "$Name added to the general catalog" );
 
@@ -362,7 +367,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
             ObjectType => 'ITSMConfigItem',
             Config     => $DynamicFieldDefinitions{$Name}->{Config},
             ValidID    => 1,
-            UserID     => 1,
+            UserID     => $TestUserID,
         );
         ok( $DynamicFieldID, "created dynamic field $DFName" );
     }
@@ -640,7 +645,7 @@ $ConfigItemPerlDefinitions[2] = " [
             Class   => 'ITSM::ConfigItem::Class',
             Name    => $ClassName,
             ValidID => 1,
-            UserID  => 1,
+            UserID  => $TestUserID,
         );
         ok( $ClassID, "added general catalog item for config item class $ClassName" );
 
@@ -657,7 +662,7 @@ $ConfigItemPerlDefinitions[2] = " [
         my $Result = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
             Definition => $Definition,
-            UserID     => 1,
+            UserID     => $TestUserID,
         );
         ok( $Result->{Success},      'DefinitionAdd() successful' );
         ok( $Result->{DefinitionID}, 'got DefinitionID' );
@@ -710,7 +715,7 @@ push @ConfigItemSetups,
             DefinitionID                                  => $ConfigItemDefinitionIDs[0],
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
-            UserID                                        => 1,
+            UserID                                        => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                 $CustomerUsers{palm},
@@ -727,7 +732,7 @@ push @ConfigItemSetups,
             DefinitionID                                  => $ConfigItemDefinitionIDs[0],
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
-            UserID                                        => 1,
+            UserID                                        => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                 $CustomerUsers{onion},
@@ -747,7 +752,7 @@ push @ConfigItemSetups,
             DefinitionID                               => $ConfigItemDefinitionIDs[1],
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
-            UserID                                     => 1,
+            UserID                                     => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
                 [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
@@ -765,7 +770,7 @@ push @ConfigItemSetups,
             DefinitionID                               => $ConfigItemDefinitionIDs[1],
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
-            UserID                                     => 1,
+            UserID                                     => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
                 [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
@@ -785,7 +790,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[0],
             ClassID => $ConfigItemClassIDs[0],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -845,7 +850,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -856,7 +861,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[1],
             ClassID => $ConfigItemClassIDs[0],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -916,7 +921,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
             {
                 Name         => 'UnitTest - ConfigItem 2 Version 2',
@@ -975,7 +980,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -985,7 +990,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[2],
             ClassID => $ConfigItemClassIDs[1],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -1081,7 +1086,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -1091,7 +1096,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[3],
             ClassID => $ConfigItemClassIDs[1],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -1157,7 +1162,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -1167,7 +1172,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[4],
             ClassID => $ConfigItemClassIDs[1],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -1233,7 +1238,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -1243,7 +1248,7 @@ push @ConfigItemSetups,
         ConfigItem => {
             Number  => $ConfigItemNumbers[5],
             ClassID => $ConfigItemClassIDs[1],
-            UserID  => 1,
+            UserID  => $TestUserID,
         },
         Versions => [
             {
@@ -1309,7 +1314,7 @@ push @ConfigItemSetups,
                         ],
                     },
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         ],
     },
@@ -1347,7 +1352,7 @@ my @ExportDataTests = (
         Name             => q{ImportDataGet doesn't contains all data (check required attributes)},
         SourceExportData => {
             ExportDataGet => {
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -1366,7 +1371,7 @@ my @ExportDataTests = (
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[-1] + 1,
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
     },
@@ -1376,7 +1381,7 @@ my @ExportDataTests = (
         SourceExportData => {
             ExportDataGet => {
                 TemplateID => $TemplateIDs[2],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
     },
@@ -1389,7 +1394,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[2],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
     },
@@ -1402,7 +1407,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[3],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
     },
@@ -1423,7 +1428,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -1447,7 +1452,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -1471,7 +1476,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -1496,7 +1501,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -1545,7 +1550,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
@@ -1632,7 +1637,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
@@ -1719,7 +1724,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[6],    # with JSON format
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
@@ -1796,7 +1801,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[6],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
@@ -1859,7 +1864,7 @@ my @ExportDataTests = (
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[6],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
             ExportDataSave => {
                 TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
@@ -1969,7 +1974,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -1994,7 +1999,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2022,7 +2027,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2052,7 +2057,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2086,7 +2091,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[5],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2143,7 +2148,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[6],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2249,7 +2254,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[6],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2355,7 +2360,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[7],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2481,7 +2486,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[7],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2615,7 +2620,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[7],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2701,7 +2706,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[8],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2771,7 +2776,7 @@ ITEM_2
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[9],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
         ReferenceExportData => [
@@ -2819,7 +2824,7 @@ for my $Test (@ExportDataTests) {
             $ImportExportObject->ObjectDataSave(
                 TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
                 ObjectData => $Test->{SourceExportData}->{ObjectData},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
         }
 
@@ -2834,7 +2839,7 @@ for my $Test (@ExportDataTests) {
             # delete all existing mapping data
             $ImportExportObject->MappingDelete(
                 TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
 
             # add the mapping object rows
@@ -2844,14 +2849,14 @@ for my $Test (@ExportDataTests) {
                 # add a new mapping row
                 my $MappingID = $ImportExportObject->MappingAdd(
                     TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
-                    UserID     => 1,
+                    UserID     => $TestUserID,
                 );
 
                 # add the mapping object data
                 $ImportExportObject->MappingObjectDataSave(
                     MappingID         => $MappingID,
                     MappingObjectData => $MappingObjectData,
-                    UserID            => 1,
+                    UserID            => $TestUserID,
                 );
             }
         }
@@ -2868,7 +2873,7 @@ for my $Test (@ExportDataTests) {
             $ImportExportObject->SearchDataSave(
                 TemplateID => $Test->{SourceExportData}->{ExportDataGet}->{TemplateID},
                 SearchData => $Test->{SourceExportData}->{SearchData},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
         }
 
@@ -2943,7 +2948,7 @@ for my $Test (@ExportDataTests) {
             $ImportExportObject->FormatDataSave(
                 TemplateID => $TemplateID,
                 FormatData => $Test->{SourceExportData}->{ExportDataSave}->{FormatData},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
 
             # get export data rows
@@ -2955,7 +2960,7 @@ for my $Test (@ExportDataTests) {
                 push @Content, $FormatBackend->ExportDataSave(
                     TemplateID    => $TemplateID,
                     ExportDataRow => $Row,
-                    UserID        => 1,
+                    UserID        => $TestUserID,
                 );
             }
             is(
@@ -2978,7 +2983,7 @@ my @ImportDataTests = (
         SourceImportData => {
             ImportDataSave => {
                 ImportDataRow => [],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -2988,7 +2993,7 @@ my @ImportDataTests = (
         SourceImportData => {
             ImportDataSave => {
                 TemplateID => $TemplateIDs[20],
-                UserID     => 1,
+                UserID     => $TestUserID,
             },
         },
     },
@@ -3009,7 +3014,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
                 ImportDataRow => '',
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3020,7 +3025,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[20],
                 ImportDataRow => {},
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3031,7 +3036,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[-1] + 1,
                 ImportDataRow => ['Dummy'],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3042,7 +3047,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[21],
                 ImportDataRow => ['Dummy'],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3056,7 +3061,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[22],
                 ImportDataRow => ['Dummy'],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3070,7 +3075,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => ['Dummy'],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3094,7 +3099,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '123', '321' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3114,7 +3119,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [''],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3134,7 +3139,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [undef],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3158,7 +3163,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '', '' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3182,7 +3187,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ undef, undef ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3206,7 +3211,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '', undef ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3230,7 +3235,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '123', '' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3254,7 +3259,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '123', undef ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3278,7 +3283,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ '', '123' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3302,7 +3307,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
                 ImportDataRow => [ undef, '123' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3329,7 +3334,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[24],
                 ImportDataRow => [ '', 'Production', 'Operational' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3354,7 +3359,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[24],
                 ImportDataRow => [ 'UnitTest - Importtest 1', 'Dummy', 'Operational' ],
-                UserID        => 1,
+                UserID        => $TestUserID,
             },
         },
     },
@@ -3440,7 +3445,7 @@ my @ImportDataTests = (
                     'Test3 Text3 Test3',
                     "Test3\nTextArray3\nTest3",
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3512,7 +3517,7 @@ my @ImportDataTests = (
                     'Test4 Text4 Test4',
                     "Test4\nTextArray4\nTest4",
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3589,7 +3594,7 @@ my @ImportDataTests = (
                     'Test Text UPDATE1 Test',
                     "Test\nText Array UPDATE1\nTest",
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3666,7 +3671,7 @@ my @ImportDataTests = (
                     'Test Text UPDATE2 Test',
                     "Test\nText Array UPDATE2\nTest",
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3779,7 +3784,7 @@ my @ImportDataTests = (
                     'Main2 (1) Main2Sub2 (1)',
                     'Main2 (1) Main2Sub2 (2)',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3879,7 +3884,7 @@ my @ImportDataTests = (
                     'Test Test',
                     "Test\nTest\tTest",
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -3979,7 +3984,7 @@ my @ImportDataTests = (
                     'њ ё',
                     'Ѭ Ѧ',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4048,7 +4053,7 @@ my @ImportDataTests = (
                     'Importtest 5 for behavior of empty values',
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4099,7 +4104,7 @@ my @ImportDataTests = (
                     '',
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4149,7 +4154,7 @@ my @ImportDataTests = (
                     undef,
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4199,7 +4204,7 @@ my @ImportDataTests = (
                     '',
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4249,7 +4254,7 @@ my @ImportDataTests = (
                     ' ',
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4299,7 +4304,7 @@ my @ImportDataTests = (
                     '0',
                     'Test1',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4349,7 +4354,7 @@ my @ImportDataTests = (
                     '',
                     '',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4399,7 +4404,7 @@ my @ImportDataTests = (
                     '',
                     'non-existent general catalog entry',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -4439,7 +4444,7 @@ my @ImportDataTests = (
                     '',
                     'non-existent general catalog entry',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -4479,7 +4484,7 @@ my @ImportDataTests = (
                     '',
                     '',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4529,7 +4534,7 @@ my @ImportDataTests = (
                     '',
                     '',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -4569,7 +4574,7 @@ my @ImportDataTests = (
                     '',
                     '',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
         ReferenceImportData => {
@@ -4619,7 +4624,7 @@ my @ImportDataTests = (
                     '',
                     '',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -4646,11 +4651,11 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[25],
                 ImportDataRow => [
-                    'UnitTest - Importtest 5',
+                    "UnitTest - Importtest 1 $RandomID",
                     'Production',
                     'Operational',
                 ],
-                UserID => 1,
+                UserID => $TestUserID,
             },
         },
     },
@@ -4678,12 +4683,10 @@ for my $Test (@ImportDataTests) {
             && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
             )
         {
-
-            # save object data
             $ImportExportObject->ObjectDataSave(
                 TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
                 ObjectData => $Test->{SourceImportData}->{ObjectData},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
         }
 
@@ -4698,7 +4701,7 @@ for my $Test (@ImportDataTests) {
             # delete all existing mapping data
             $ImportExportObject->MappingDelete(
                 TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
-                UserID     => 1,
+                UserID     => $TestUserID,
             );
 
             # add the mapping object rows
@@ -4708,14 +4711,14 @@ for my $Test (@ImportDataTests) {
                 # add a new mapping row
                 my $MappingID = $ImportExportObject->MappingAdd(
                     TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
-                    UserID     => 1,
+                    UserID     => $TestUserID,
                 );
 
                 # add the mapping object data
                 $ImportExportObject->MappingObjectDataSave(
                     MappingID         => $MappingID,
                     MappingObjectData => $MappingObjectData,
-                    UserID            => 1,
+                    UserID            => $TestUserID,
                 );
             }
         }
@@ -4734,8 +4737,8 @@ for my $Test (@ImportDataTests) {
             return;
         }
 
-        ok( $ConfigItemID, "ImportDataSave() - return ConfigItemID" );
-        ok( $RetCode,      "ImportDataSave() - return RetCode" );
+        ok( $ConfigItemID, "ImportDataSave() - return ConfigItemID: $ConfigItemID" );
+        ok( $RetCode,      "ImportDataSave() - return RetCode: $RetCode" );
 
         # get the version list
         my $VersionList = $ConfigItemObject->VersionList(
@@ -4744,7 +4747,7 @@ for my $Test (@ImportDataTests) {
 
         # check number of versions
         is(
-            scalar @{$VersionList},
+            scalar $VersionList->@*,
             $Test->{ReferenceImportData}->{VersionNumber} || 0,
             "ImportDataSave() - correct number of versions",
         );
