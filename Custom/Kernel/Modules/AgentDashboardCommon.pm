@@ -2,9 +2,9 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 9e01c10b0116e27463c175a28ab19e1aaf29a838 - Kernel/Modules/AgentDashboardCommon.pm
+# $origin: otobo - a91d81cefdca00286973c582ab7b27e93cf6d795 - Kernel/Modules/AgentDashboardCommon.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -22,7 +22,7 @@ package Kernel::Modules::AgentDashboardCommon;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -398,7 +398,7 @@ sub Run {
             next COLUMNNAME if $FilterValue eq '';
 
             if ( $ColumnName eq 'CustomerID' ) {
-                push @{ $ColumnFilter{$ColumnName} }, $FilterValue;
+                push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
                 push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
             }
             elsif ( $ColumnName eq 'CustomerUserID' ) {
