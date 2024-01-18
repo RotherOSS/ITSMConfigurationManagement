@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -1799,6 +1799,71 @@ sub CurInciStateRecalc {
     }
 
     return 1;
+}
+
+=head2 ObjectAttributesGet()
+
+returns the attributes a config item can have on the system.
+
+    my %Attributes = $TicketObject->ObjectAttributesGet(
+        DynamicFields => (0|1),         # (optional) if dynamic field names are included, default 0
+        Version       => (0|1),         # (optional) if version information is included, default 1
+    );
+
+=cut
+
+sub ObjectAttributesGet {
+    my ( $Self, %Param ) = @_;
+
+    $Param{Version} = $Param{Version} ? 1 : 0;
+
+    my %ConfigItemAttributes = (
+        ConfigItemID     => 1,
+        Number           => 1,
+        ClassID          => 1,
+        Class            => 1,
+        LastVersionID    => 1,
+        CurDeplStateID   => 1,
+        CurDeplState     => 1,
+        CurDeplStateType => 1,
+        CurInciStateID   => 1,
+        CurInciState     => 1,
+        CurInciStateType => 1,
+    );
+
+    # if requested, set version attributes
+    if ( $Param{Version} ) {
+        %ConfigItemAttributes = (
+            %ConfigItemAttributes,
+            VersionID     => 1,
+            Name          => 1,
+            DeplStateID   => 1,
+            DeplState     => 1,
+            DeplStateType => 1,
+            InciStateID   => 1,
+            InciState     => 1,
+            InciStateType => 1,
+            CreateTime    => 1,
+            CreateBy      => 1,
+            ChangeTime    => 1,
+            ChangeBy      => 1,
+        );
+    }
+
+    # check if dynamic fields need to be added
+    if ( $Param{DynamicFields} ) {
+        my $DynamicFields = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
+            Valid      => 1,
+            ObjectType => 'ITSMConfigItem',
+            ResultType => 'HASH',
+        );
+
+        for my $FieldName ( values $DynamicFields->%* ) {
+            $ConfigItemAttributes{"DynamicField_$FieldName"} = 1;
+        }
+    }
+
+    return %ConfigItemAttributes;
 }
 
 =head1 INTERNAL INTERFACE
