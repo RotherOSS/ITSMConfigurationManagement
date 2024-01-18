@@ -98,7 +98,7 @@ returns the id of the created ACL if success or undef otherwise
         ValidID        => 1,                    # mandatory
         UserID         => 123,                  # mandatory
 # RotherOSS / ITSMConfigurationManagement
-        ObjectType     => 'Ticket',             # optional (currently Ticket or ConfigItem)
+        ObjectType     => 'Ticket',             # optional (currently Ticket or ConfigItem, defaults to Ticket)
 # EO ITSMConfigurationManagement
     );
 
@@ -330,6 +330,11 @@ Returns:
 
 sub ACLGet {
     my ( $Self, %Param ) = @_;
+# Rother OSS / ITSMConfigurationManagement
+
+    # set default for object type
+    $Param{ObjectType} //= 'Ticket';
+# EO ITSMConfigurationManagement
 
     # check needed stuff
     if ( !$Param{ID} && !$Param{Name} ) {
@@ -1402,6 +1407,11 @@ returns:
 
 sub _ACLItemOutput {
     my ( $Self, %Param ) = @_;
+# Rother OSS / ITSMConfigurationManagement
+
+    # set default for object type
+    $Param{ObjectType} //= 'Ticket';
+# EO ITSMConfigurationManagement
 
     # those params are expected to only contain one line
     for my $Key (qw( CreateBy ChangeBy Comment )) {
