@@ -1815,7 +1815,7 @@ returns the attributes a config item can have on the system.
 sub ObjectAttributesGet {
     my ( $Self, %Param ) = @_;
 
-    $Param{Version} = $Param{Version} ? 1 : 0;
+    $Param{Version} //= 1;
 
     my %ConfigItemAttributes = (
         ConfigItemID     => 1,
