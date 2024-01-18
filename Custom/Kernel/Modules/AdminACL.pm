@@ -401,7 +401,10 @@ sub Run {
             # remove preselection cache TODO: rebuild the cache properly (a simple $FieldRestrictionsObject->SetACLPreselectionCache(); uses the old ACLs)
             my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
             $CacheObject->Delete(
+# Rother OSS / ITSMConfigurationManagement
+#                 Type => 'TicketACL',      # only [a-zA-Z0-9_] chars usable
                 Type => $Param{ObjectType} . 'ACL',      # only [a-zA-Z0-9_] chars usable
+# EO ITSMConfigurationManagement
                 Key  => 'Preselection',
             );
 

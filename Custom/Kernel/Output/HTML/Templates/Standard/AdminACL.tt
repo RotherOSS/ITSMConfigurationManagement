@@ -139,11 +139,17 @@
                     <tbody>
 [% RenderBlockStart("ACLRow") %]
                         <tr [% IF Data.ValidID != "valid"%]class="Invalid"[% END %]>
+# Rother OSS / ITSMConfigurationManagement
+#                             <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLEdit;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
                             <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLEdit;ID=[% Data.ID | uri %];ObjectType=[% Data.ObjectType | uri %]">[% Data.Name | html %]</a></td>
+# EO ITSMConfigurationManagement
                             <td>[% Data.Comment | html %]</td>
                             <td>[% Translate(Data.ValidID) | html %]</td>
                             <td class="Center"><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
+# Rother OSS / ITSMConfigurationManagement
+#                             <td class="Center"><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                             <td class="Center"><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLCopy;ID=[% Data.ID | uri %];ObjectType=[% Data.ObjectType | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
+# EO ITSMConfigurationManagement
                         </tr>
 [% RenderBlockEnd("ACLRow") %]
 [% RenderBlockStart("ACLNoDataRow") %]
