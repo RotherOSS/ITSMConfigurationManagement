@@ -520,6 +520,10 @@ sub Run {
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
                 ParamObject          => $ParamObject,
+                GetParam             => {
+                    ConfigItemID => $ConfigItem->{ConfigItemID},
+                    %GetParam,
+                }
             );
 
             if ( !IsHashRefWithData($ValidationResult) ) {
