@@ -23,7 +23,7 @@ use utf8;
 
 # CPAN modules
 use Test2::V0;
-use List::AllUtils qw(true);
+use List::AllUtils qw(true min max);
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
@@ -53,7 +53,7 @@ my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
 # get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
-        RestoreDatabase => 0,
+        RestoreDatabase => 1,
     },
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
@@ -226,6 +226,8 @@ my %CustomerUsers = (
     CIO      => 'chief information officer "🗄"' . $RandomID,
     next_CIO => 'next chief information officer "💁"' . $RandomID,
 
+    # for Customer
+
     # fruit sales for CustomerSalesTeam
     apple => 'apple sales "🍎"' . $RandomID,
     onion => 'onion sales "🧅"' . $RandomID,
@@ -254,11 +256,17 @@ my %Agent2UserID;
 {
     my %LastName = (
 
-        # for ZZZSetOfAgents
+        # for the multi value ZZZSetOfAgents
         DeskAgent     => 'INFORMATION DESK PERSON 💁',
         LotusAgent    => 'PERSON IN LOTUS POSITION 🧘',
         ClimbingAgent => 'PERSON CLIMBING 🧗',
         FrowningAgent => 'PERSON FROWNING 🙍',
+
+        # for the single value ZZZSetOfSupporter
+        FirstLevelSupporterEurope  => 'First Level Supporter Europe',
+        FirstLevelSupporterAfrica  => 'First Level Supporter Africa',
+        SecondLevelSupporterEurope => 'Second Level Supporter Europe',
+        SecondLevelSupporterAfrica => 'Second Level Supporter Africa',
     );
 
     for my $Key ( sort keys %LastName ) {
@@ -325,7 +333,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
             },
         },
 
-        # Agent1 and Agent2 will be included in the Set AgentSet
+        # Agent1 and Agent2 will be included in the multi value Set ZZZSetOfAgents
         Agent1 => {
             FieldType => 'Agent',
             Config    => {
@@ -357,6 +365,39 @@ diag "TestIDSuffix: '$TestIDSuffix'";
                 Tooltip => 'Tooltip for ZZZSetOfAgents',
             },
         },
+
+        # LevelFirst and LevelSecond will be included in the single value Set ZZZSetOfSupporter
+        LevelFirst => {
+            FieldType => 'Agent',
+            Config    => {
+                PossibleNone => 1,
+                Multiselect  => 0,
+                MultiValue   => 0,
+                GroupFilter  => [],
+                Tooltip      => 'Tooltip for first level support',
+            },
+        },
+        LevelSecond => {
+            FieldType => 'Agent',
+            Config    => {
+                PossibleNone => 1,
+                Multiselect  => 0,
+                MultiValue   => 0,
+                GroupFilter  => [],
+                Tooltip      => 'Tooltip for second level support',
+            },
+        },
+        ZZZSetOfSupporter => {
+            FieldType => 'Set',
+            Config    => {
+                MultiValue => 0,
+                Include    => [
+                    { DF => "LevelFirst$TestIDSuffix" },
+                    { DF => "LevelSecond$TestIDSuffix" },
+                ],
+                Tooltip => 'Tooltip for ZZZSetOfSupporter',
+            },
+        },
     );
 
     for my $Name ( sort keys %DynamicFieldDefinitions ) {
@@ -376,15 +417,15 @@ diag "TestIDSuffix: '$TestIDSuffix'";
 }
 
 # Add config item definitions
-my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
+my ( %ConfigItemClassIDs, %ConfigItemDefinitionIDs );
 {
     my @ConfigItemPerlDefinitions;
 
-    # config item with two CustomerUser fields
+    # definition with two CustomerUser fields
     push @ConfigItemPerlDefinitions, {
         Pages => [
             {
-                Name   => 'Content',
+                Name   => 'TwoCustomerUser',    # will be reused in class name
                 Layout => {
                     Columns     => 1,
                     ColumnWidth => '1fr'
@@ -412,11 +453,11 @@ my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
         },
     };
 
-    # config item with a Set dynamic field
+    # definition with a multi value Set dynamic field
     push @ConfigItemPerlDefinitions, {
         Pages => [
             {
-                Name   => 'Content',
+                Name   => 'CustomerUserAndMultiValueSet',    # will be reused in class name
                 Layout => {
                     Columns     => 1,
                     ColumnWidth => '1fr'
@@ -438,6 +479,35 @@ my ( @ConfigItemClassIDs, @ConfigItemDefinitionIDs );
                     },
                     {
                         DF => 'ZZZSetOfAgents' . $TestIDSuffix,
+                    },
+                ]
+            }
+        },
+    };
+
+    # definition with a single value Set dynamic field
+    push @ConfigItemPerlDefinitions, {
+        Pages => [
+            {
+                Name   => 'SingleValueSet',    # will be reused in class name
+                Layout => {
+                    Columns     => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section     => 'Section1',
+                        ColumnStart => 1,
+                        RowStart    => 1
+                    }
+                ],
+            }
+        ],
+        Sections => {
+            Section1 => {
+                Content => [
+                    {
+                        DF => 'ZZZSetOfSupporter' . $TestIDSuffix,
                     },
                 ]
             }
@@ -627,20 +697,13 @@ $ConfigItemPerlDefinitions[2] = " [
 
     my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
-    my @ConfigItemDefinitions;
-    for my $PerlDefinition (@ConfigItemPerlDefinitions) {
-        my $YAMLDefinition = $YAMLObject->Dump(
-            Data => $PerlDefinition,
-        );
-        push @ConfigItemDefinitions, $YAMLDefinition;
-    }
-
     # add the test config item classes
     my $i = 0;
-    for my $Definition (@ConfigItemDefinitions) {
+    for my $PerlDefinition (@ConfigItemPerlDefinitions) {
 
-        # generate a random name
-        my $ClassName = join '_', 'UnitTest', ++$i, $TestIDSuffix;
+        # generate an informative random name
+        my $ShortName = $PerlDefinition->{Pages}->[0]->{Name};
+        my $ClassName = join '_', 'UnitTest', $ShortName, ++$i, $RandomID;
 
         # add an unittest config item class
         my $ClassID = $GeneralCatalogObject->ItemAdd(
@@ -650,6 +713,7 @@ $ConfigItemPerlDefinitions[2] = " [
             UserID  => $TestUserID,
         );
         ok( $ClassID, "added general catalog item for config item class $ClassName" );
+        $ConfigItemClassIDs{$ShortName} = $ClassID;
 
         # Set permission.
         $GeneralCatalogObject->GeneralCatalogPreferencesSet(
@@ -658,19 +722,25 @@ $ConfigItemPerlDefinitions[2] = " [
             Value  => $ConfigItemGroupID,
         );
 
-        push @ConfigItemClassIDs, $ClassID;
-
         # add a definition to the class
+        my $YAMLDefinition = $YAMLObject->Dump(
+            Data => $PerlDefinition,
+        );
+        ok( $YAMLDefinition, 'got some YAML' );
         my $Result = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
-            Definition => $Definition,
+            Definition => $YAMLDefinition,
             UserID     => $TestUserID,
         );
         ok( $Result->{Success},      'DefinitionAdd() successful' );
         ok( $Result->{DefinitionID}, 'got DefinitionID' );
-        push @ConfigItemDefinitionIDs, $Result->{DefinitionID};
+        $ConfigItemDefinitionIDs{$ShortName} = $Result->{DefinitionID};
     }
 }
+
+# for tests we need valid and invalid class IDs
+my $ValidConfigItemClassID   = min( values %ConfigItemClassIDs );
+my $InvaldiConfigItemClassID = max( values %ConfigItemClassIDs ) + 1;
 
 # Create some random numbers. The numbers must be sorted because
 # ExportDataGet() sorts per default by the config item number in descending order.
@@ -703,18 +773,17 @@ my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 
 # define the test config items
 my @ConfigItemSetups;
-
 my $ConfigItemCnt = 0;
 
-# two config items with CustomerCI0 and CustomerSalesTeam
+# two config items for TwoCustomerUser
 push @ConfigItemSetups,
     {
-        Description   => 'config item with two CustomerUser dynamic fields',
+        Description   => 'config item 1 for TwoCustomerUser',
         ConfigItemAdd => {
             Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs[0],
-            DefinitionID                                  => $ConfigItemDefinitionIDs[0],
+            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUser},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUser},
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
@@ -726,12 +795,12 @@ push @ConfigItemSetups,
         },
     },
     {
-        Description   => 'config item with two CustomerUser dynamic fields',
+        Description   => 'config item 2 for TwoCustomerUser',
         ConfigItemAdd => {
             Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs[0],
-            DefinitionID                                  => $ConfigItemDefinitionIDs[0],
+            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUser},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUser},
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
@@ -743,15 +812,15 @@ push @ConfigItemSetups,
         },
     };
 
-# two config items with CustomerCI0 and ZZZSetOfAgents
+# two config items with CustomerUserAndMultiValueSet
 push @ConfigItemSetups,
     {
-        Description   => 'config item with CustomerCIO and ZZZSetOfAgents',
+        Description   => 'config item 1 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
             Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                    => $ConfigItemClassIDs[1],
-            DefinitionID                               => $ConfigItemDefinitionIDs[1],
+            ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
+            DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
             UserID                                     => $TestUserID,
@@ -764,12 +833,12 @@ push @ConfigItemSetups,
         },
     },
     {
-        Description   => 'config item with CustomerCIO and ZZZSetOfAgents',
+        Description   => 'config item 2 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
             Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                    => $ConfigItemClassIDs[1],
-            DefinitionID                               => $ConfigItemDefinitionIDs[1],
+            ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
+            DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
             UserID                                     => $TestUserID,
@@ -777,6 +846,39 @@ push @ConfigItemSetups,
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
                 [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
                 [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+            ],
+        },
+    };
+
+# two config items with SingleValueSet
+push @ConfigItemSetups,
+    {
+        Description   => 'config item 1 for SingleValueSet: Africa',
+        ConfigItemAdd => {
+            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                       => $ConfigItemClassIDs{SingleValueSet},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{SingleValueSet},
+            DeplStateID                                   => $DeplStateListReverse{Production},
+            InciStateID                                   => $InciStateListReverse{Operational},
+            UserID                                        => $TestUserID,
+            "DynamicField_ZZZSetOfSupporter$TestIDSuffix" => [
+                [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+            ],
+        },
+    },
+    {
+        Description   => 'config item 2 for SingleValueSet: Europe',
+        ConfigItemAdd => {
+            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                       => $ConfigItemClassIDs{SingleValueSet},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{SingleValueSet},
+            DeplStateID                                   => $DeplStateListReverse{Production},
+            InciStateID                                   => $InciStateListReverse{Operational},
+            UserID                                        => $TestUserID,
+            "DynamicField_ZZZSetOfSupporter$TestIDSuffix" => [
+                [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ],
             ],
         },
     };
@@ -797,7 +899,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 1 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs[0],
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -868,7 +970,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 1 Version 1',    # duplicate name for tests
-                DefinitionID => $ConfigItemDefinitionIDs[0],
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -927,7 +1029,7 @@ push @ConfigItemSetups,
             },
             {
                 Name         => 'UnitTest - ConfigItem 2 Version 2',
-                DefinitionID => $ConfigItemDefinitionIDs[0],
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -997,7 +1099,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 3 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs[1],
+                DefinitionID => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1103,7 +1205,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 4 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs[1],
+                DefinitionID => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1179,7 +1281,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 5 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs[1],
+                DefinitionID => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1255,7 +1357,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 6 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs[1],
+                DefinitionID => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1328,7 +1430,7 @@ my @ConfigItemIDs;
 for my $Setup (@ConfigItemSetups) {
 
     # add a config item
-    diag $Setup->{Description};
+    diag "add config item: $Setup->{Description}";
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         $Setup->{ConfigItemAdd}->%*,
     );
@@ -1392,7 +1494,7 @@ my @ExportDataTests = (
         Name             => q{invalid class id is given (should fail)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[-1] + 1,
+                ClassID => $InvaldiConfigItemClassID,
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[2],
@@ -1405,7 +1507,7 @@ my @ExportDataTests = (
         Name             => q{mapping list is empty (should fail)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             ExportDataGet => {
                 TemplateID => $TemplateIDs[3],
@@ -1418,7 +1520,7 @@ my @ExportDataTests = (
         Name             => q{all required values are given (number search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -1442,7 +1544,7 @@ my @ExportDataTests = (
         Name             => q{all required values are given (name search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -1466,7 +1568,7 @@ my @ExportDataTests = (
         Name             => q{all required values are given (case insensitive name search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -1490,7 +1592,7 @@ my @ExportDataTests = (
         Name             => q{all required values are given (name and number search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -1517,7 +1619,7 @@ my @ExportDataTests = (
         Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as CSV},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -1610,7 +1712,7 @@ my @ExportDataTests = (
         Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as CSV},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -1685,13 +1787,71 @@ my @ExportDataTests = (
         ],
     },
 
+    {
+        Name             => q{ZZZSetOfSupporter as CSV},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{SingleValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Number',
+                },
+                {
+                    Key => "ZZZSetOfSupporter${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[5],
+                UserID     => $TestUserID,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                Format     => 'CSV',
+                FormatData => {
+                    ColumnSeparator => 'Semicolon',
+                    Charset         => 'UTF-8',
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                $ConfigItemNumbers[5],
+                qq{[[[$Agent2UserID{FirstLevelSupporterEurope}],[$Agent2UserID{SecondLevelSupporterEurope}]]]},
+            ],
+            [
+                $ConfigItemNumbers[4],
+                qq{[[[$Agent2UserID{FirstLevelSupporterAfrica}],[$Agent2UserID{SecondLevelSupporterAfrica}]]]},
+            ],
+        ],
+        ReferenceExportContent => [
+            join(
+                ';',
+                qq{"$ConfigItemNumbers[5]"},
+                qq{"[[[$Agent2UserID{FirstLevelSupporterEurope}],[$Agent2UserID{SecondLevelSupporterEurope}]]]"},
+            ),
+            join(
+                ';',
+                qq{"$ConfigItemNumbers[4]"},
+                qq{"[[[$Agent2UserID{FirstLevelSupporterAfrica}],[$Agent2UserID{SecondLevelSupporterAfrica}]]]"},
+            ),
+        ],
+    },
+
     # JSON exports
 
     {
         Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as ugly concatenated JSON},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -1774,7 +1934,7 @@ my @ExportDataTests = (
         Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as ugly concatenated JSON},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -1847,7 +2007,7 @@ my @ExportDataTests = (
         Name             => q{Export Number, CustomerCIO, and ZZZSetOfAgents as pretty concatenated JSON},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -1955,6 +2115,83 @@ ITEM_1
 ]
 ITEM_2
     },
+
+    {
+        Name             => q{ZZZSetOfSupporter as pretty JSON},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{SingleValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Number',
+                },
+                {
+                    Key => "ZZZSetOfSupporter${TestIDSuffix}",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[6],    # with JSON format
+                UserID     => $TestUserID,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[6],    # usually same as for ExportDataGet
+                Format     => 'JSON',
+                FormatData => {
+
+                    # redundant setting as Pretty is the default
+                    Pretty => 1,
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                $ConfigItemNumbers[5],
+                [ [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ] ],
+            ],
+            [
+                $ConfigItemNumbers[4],
+                [ [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ] ],
+            ],
+        ],
+        ReferenceExportContent => [ <<"ITEM_3", <<"ITEM_4" ],
+[
+   "$ConfigItemNumbers[5]",
+   [
+      [
+         [
+            $Agent2UserID{FirstLevelSupporterEurope}
+         ],
+         [
+            $Agent2UserID{SecondLevelSupporterEurope}
+         ]
+      ]
+   ]
+]
+ITEM_3
+[
+   "$ConfigItemNumbers[4]",
+   [
+      [
+         [
+            $Agent2UserID{FirstLevelSupporterAfrica}
+         ],
+         [
+            $Agent2UserID{SecondLevelSupporterAfrica}
+         ]
+      ]
+   ]
+]
+ITEM_4
+    },
+
 );
 
 =for never
@@ -1964,7 +2201,7 @@ ITEM_2
         Name             => q{all required values are given (deployment state search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -1989,7 +2226,7 @@ ITEM_2
         Name             => q{all required values are given (incident state search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2014,7 +2251,7 @@ ITEM_2
         Name             => q{all required values are given (combined search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2041,7 +2278,7 @@ ITEM_2
         Name             => q{all required values are given (XML data search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2071,7 +2308,7 @@ ITEM_2
         Name             => q{all required values are given (combined all search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2105,7 +2342,7 @@ ITEM_2
         Name             => q{all required values are given (check the returned array)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2175,7 +2412,7 @@ ITEM_2
         Name             => q{all required values are given (double element checks)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -2293,7 +2530,7 @@ ITEM_2
         Name             => q{all required values are given (sub element checks)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -2395,7 +2632,7 @@ ITEM_2
         Name             => q{all required values are given (sub element checks with undef values)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -2529,7 +2766,7 @@ ITEM_2
         Name             => q{all required values are given (sub element checks with undef values and empty strings)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -2663,7 +2900,7 @@ ITEM_2
         Name             => q{all required values are given (special character checks)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -2733,7 +2970,7 @@ ITEM_2
         Name             => q{all required values are given (UTF-8 checks)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -2931,7 +3168,7 @@ for my $Test (@ExportDataTests) {
             $CounterRow++;
         }
 
-        # optionally test the CSV formatted export
+        # optionally test the formatted export
         if ( $Test->{SourceExportData}->{ExportDataSave} ) {
             if ( !$Test->{ReferenceExportContent} ) {
                 fail("ReferenceExportContent is set up");
@@ -3058,7 +3295,7 @@ my @ImportDataTests = (
         Name             => q{invalid class id is given (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[-1] + 1,
+                ClassID => $InvaldiConfigItemClassID,
             },
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[22],
@@ -3072,7 +3309,7 @@ my @ImportDataTests = (
         Name             => q{mapping list is empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[23],
@@ -3086,7 +3323,7 @@ my @ImportDataTests = (
         Name             => q{more than one identifier with the same name (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3110,7 +3347,7 @@ my @ImportDataTests = (
         Name             => q{identifier is empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3130,7 +3367,7 @@ my @ImportDataTests = (
         Name             => q{identifier is undef (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3150,7 +3387,7 @@ my @ImportDataTests = (
         Name             => q{both identifiers are empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3174,7 +3411,7 @@ my @ImportDataTests = (
         Name             => q{both identifiers are undef (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3198,7 +3435,7 @@ my @ImportDataTests = (
         Name             => q{one identifiers is empty, one is undef (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3222,7 +3459,7 @@ my @ImportDataTests = (
         Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3246,7 +3483,7 @@ my @ImportDataTests = (
         Name             => q{one of the identifiers is undef (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3270,7 +3507,7 @@ my @ImportDataTests = (
         Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3294,7 +3531,7 @@ my @ImportDataTests = (
         Name             => q{one of the identifiers is empty (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3320,7 +3557,7 @@ my @ImportDataTests = (
         Name             => q{empty name is given (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3345,7 +3582,7 @@ my @ImportDataTests = (
         Name             => q{invalid deployment state is given (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3370,7 +3607,7 @@ my @ImportDataTests = (
         Name             => q{invalid incident state is given (should fail)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3395,7 +3632,7 @@ my @ImportDataTests = (
         Name             => qq{no dynamic fields (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ValidConfigItemClassID,
             },
             MappingObjectData => [
                 {
@@ -3434,7 +3671,7 @@ my @ImportDataTests = (
         Name             => qq{only CustomerCIO (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3490,7 +3727,7 @@ my @ImportDataTests = (
         Name             => q{all required values are given (a NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3562,7 +3799,7 @@ my @ImportDataTests = (
         Name             => q{all required values are given (a second NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3634,7 +3871,7 @@ my @ImportDataTests = (
         Name             => q{all required values are given (a new version must be added to first test config item)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3711,7 +3948,7 @@ my @ImportDataTests = (
         Name             => q{all required values are given (a new version must be added to first test config item again)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3788,7 +4025,7 @@ my @ImportDataTests = (
         Name             => q{all required values are given (a new version must be added to third test config item)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -3920,7 +4157,7 @@ my @ImportDataTests = (
         Name             => '8 lingering attributes',
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -4020,7 +4257,7 @@ my @ImportDataTests = (
         Name             => '8 lingering attributes, again',
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[1],
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             },
             MappingObjectData => [
                 {
@@ -4117,7 +4354,7 @@ my @ImportDataTests = (
         Name             => q{a simple import for testing the overriding behavior of empty values},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs[0],
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
             },
             MappingObjectData => [
                 {
@@ -4167,7 +4404,7 @@ my @ImportDataTests = (
         Name             => 'import an empty value for Text1',
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4217,7 +4454,7 @@ my @ImportDataTests = (
         Name             => q{import undef for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4267,7 +4504,7 @@ my @ImportDataTests = (
         Name             => q{import an empty value for Text1, with EmptyFieldsLeaveTheOldValues turned off},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4317,7 +4554,7 @@ my @ImportDataTests = (
         Name             => q{import a single space value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4367,7 +4604,7 @@ my @ImportDataTests = (
         Name             => q{import the string '0' value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4417,7 +4654,7 @@ my @ImportDataTests = (
         Name             => q{import an empty value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4467,7 +4704,7 @@ my @ImportDataTests = (
         Name             => q{import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4507,7 +4744,7 @@ my @ImportDataTests = (
         Name             => q{import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned off},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ValidConfigItemClassID,
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4547,7 +4784,7 @@ my @ImportDataTests = (
         Name             => q{import an empty value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4597,7 +4834,7 @@ my @ImportDataTests = (
         Name             => q{import an invalid value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4637,7 +4874,7 @@ my @ImportDataTests = (
         Name             => q{import an empty value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4687,7 +4924,7 @@ my @ImportDataTests = (
         Name             => q{import an invalid value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[0],
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4726,7 +4963,7 @@ my @ImportDataTests = (
         Name             => q{Import without required attribute 'Type', an error should be generated (see bug#14098).},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs[2],
+                ClassID                      => $ConfigItemClassIDs{SingleValueSet},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [

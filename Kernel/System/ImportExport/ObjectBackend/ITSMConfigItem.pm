@@ -681,7 +681,8 @@ sub ExportDataGet {
             }
 
             # The formating depends on the config of the dynamic field, which is not really nice.
-            my $IsMultiValue = $Definition->{DynamicFieldRef}->{$DFName}->{Config}->{MultiValue} ? 1 : 0;
+            my $IsMultiValue = $Definition->{DynamicFieldRef}->{$DFName}->{Config}->{MultiValue} ? 2 : 0;
+            my $IsSet        = ( $Definition->{DynamicFieldRef}->{$DFName}->{FieldType} // '' ) eq 'Set';
 
             # handle special cases
             my $ActualValue = eval {
@@ -690,6 +691,12 @@ sub ExportDataGet {
                 if ( $IsMultiValue && $Index >= 1 ) {
 
                     return $Value->[ $Index - 1 ] // '';
+                }
+
+                # For Set single and multivalue fields behave the same way.
+                # No need to shave off a level.
+                if ($IsSet) {
+                    return $Value;
                 }
 
                 # get first element for single value fields
