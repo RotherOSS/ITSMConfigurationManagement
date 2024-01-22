@@ -216,10 +216,14 @@ $ConfigObject->Set(
     Value => 0,
 );
 
-# create customer users which will be referenced in CustomerUser dynamic fields
+# Create customer users which will be referenced in CustomerUser dynamic fields:
 # with double quotes for testing CSV
 # with high order letters
 # with random id, useful during development when RestoreDatabase is deactivated
+# 
+# The customer is a company that sells fruits, vegetables, and trees. The produce
+# is sold by mongers which are members of a sales team. The company has
+# chief financial officers of various genders.
 my %CustomerUsers = (
 
     # for CustomerCIO
@@ -227,15 +231,15 @@ my %CustomerUsers = (
     female_CIO  => 'female chief information officer "💁"' . $RandomID,
     diverse_CIO => 'diverse chief information officer "⊕"' . $RandomID,
 
-    # for Customer
+    # for CustomerSalesTeam, the members of a sales team are mongers
 
-    # fruit sales for CustomerSalesTeam
-    apple => 'apple sales "🍎"' . $RandomID,
-    onion => 'onion sales "🧅"' . $RandomID,
+    # fruit and vegetable mongers for CustomerSalesTeam
+    apple_monger => 'apple monger "🍎"' . $RandomID,
+    onion_monger => 'onion monger "🧅"' . $RandomID,
 
-    # tress sales for CustomerSalesTeam
-    tanabate => 'tanabate tree sales "🎋"' . $RandomID,
-    palm     => 'palm tree sales "🌴"' . $RandomID,
+    # tree mongers for CustomerSalesTeam
+    tanabate_monger => 'tanabate tree monger "🎋"' . $RandomID,
+    palm_monger     => 'palm tree monger "🌴"' . $RandomID,
 );
 for my $Key ( sort keys %CustomerUsers ) {
     my $Login           = $CustomerUsers{$Key};
@@ -790,8 +794,8 @@ push @ConfigItemSetups,
             UserID                                        => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{male_CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
-                $CustomerUsers{palm},
-                $CustomerUsers{tanabate},
+                $CustomerUsers{palm_monger},
+                $CustomerUsers{tanabate_monger},
             ],
         },
     },
@@ -807,8 +811,8 @@ push @ConfigItemSetups,
             UserID                                        => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{male_CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
-                $CustomerUsers{onion},
-                $CustomerUsers{apple},
+                $CustomerUsers{onion_monger},
+                $CustomerUsers{apple_monger},
             ],
         },
     };
@@ -1674,17 +1678,17 @@ my @ExportDataTests = (
                 'UnitTest - ConfigItem 2 Version 1',
                 $ConfigItemNumbers[1],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{onion sales "🧅"$RandomID},
-                qq{apple sales "🍎"$RandomID},
-                qq{["onion sales \\"🧅\\"$RandomID","apple sales \\"🍎\\"$RandomID"]},
+                qq{onion monger "🧅"$RandomID},
+                qq{apple monger "🍎"$RandomID},
+                qq{["onion monger \\"🧅\\"$RandomID","apple monger \\"🍎\\"$RandomID"]},
             ],
             [
                 'UnitTest - ConfigItem 1 Version 1',
                 $ConfigItemNumbers[0],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{palm tree sales "🌴"$RandomID},
-                qq{tanabate tree sales "🎋"$RandomID},
-                qq{["palm tree sales \\"🌴\\"$RandomID","tanabate tree sales \\"🎋\\"$RandomID"]},
+                qq{palm tree monger "🌴"$RandomID},
+                qq{tanabate tree monger "🎋"$RandomID},
+                qq{["palm tree monger \\"🌴\\"$RandomID","tanabate tree monger \\"🎋\\"$RandomID"]},
             ],
         ],
         ReferenceExportContent => [
@@ -1693,18 +1697,18 @@ my @ExportDataTests = (
                 qq{"UnitTest - ConfigItem 2 Version 1"},
                 qq{"$ConfigItemNumbers[1]"},
                 qq{"male chief information officer ""🗄""$RandomID"},    # not JSON because single value
-                qq{"onion sales ""🧅""$RandomID"},                       # not JSON because explicit index
-                qq{"apple sales ""🍎""$RandomID"},                       # not JSON because explicit index
-                qq{"[""onion sales \\""🧅\\""$RandomID"",""apple sales \\""🍎\\""$RandomID""]"}
+                qq{"onion monger ""🧅""$RandomID"},                      # not JSON because explicit index
+                qq{"apple monger ""🍎""$RandomID"},                      # not JSON because explicit index
+                qq{"[""onion monger \\""🧅\\""$RandomID"",""apple monger \\""🍎\\""$RandomID""]"}
             ),
             join(
                 ';',
                 qq{"UnitTest - ConfigItem 1 Version 1"},
                 qq{"$ConfigItemNumbers[0]"},
                 qq{"male chief information officer ""🗄""$RandomID"},
-                qq{"palm tree sales ""🌴""$RandomID"},
-                qq{"tanabate tree sales ""🎋""$RandomID"},
-                qq{"[""palm tree sales \\""🌴\\""$RandomID"",""tanabate tree sales \\""🎋\\""$RandomID""]"}
+                qq{"palm tree monger ""🌴""$RandomID"},
+                qq{"tanabate tree monger ""🎋""$RandomID"},
+                qq{"[""palm tree monger \\""🌴\\""$RandomID"",""tanabate tree monger \\""🎋\\""$RandomID""]"}
             ),
         ],
     },
@@ -1905,28 +1909,28 @@ my @ExportDataTests = (
                 'UnitTest - ConfigItem 2 Version 1',
                 $ConfigItemNumbers[1],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{onion sales "🧅"$RandomID},
-                qq{apple sales "🍎"$RandomID},
+                qq{onion monger "🧅"$RandomID},
+                qq{apple monger "🍎"$RandomID},
                 [
-                    qq{onion sales "🧅"$RandomID},
-                    qq{apple sales "🍎"$RandomID}
+                    qq{onion monger "🧅"$RandomID},
+                    qq{apple monger "🍎"$RandomID}
                 ],
             ],
             [
                 'UnitTest - ConfigItem 1 Version 1',
                 $ConfigItemNumbers[0],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{palm tree sales "🌴"$RandomID},
-                qq{tanabate tree sales "🎋"$RandomID},
+                qq{palm tree monger "🌴"$RandomID},
+                qq{tanabate tree monger "🎋"$RandomID},
                 [
-                    qq{palm tree sales "🌴"$RandomID},
-                    qq{tanabate tree sales "🎋"$RandomID},
+                    qq{palm tree monger "🌴"$RandomID},
+                    qq{tanabate tree monger "🎋"$RandomID},
                 ],
             ],
         ],
         ReferenceExportContent => [
-            qq{["UnitTest - ConfigItem 2 Version 1","$ConfigItemNumbers[1]","male chief information officer \\"\x{1F5C4}\\"$RandomID","onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID",["onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID"]]},
-            qq{["UnitTest - ConfigItem 1 Version 1","$ConfigItemNumbers[0]","male chief information officer \\"\x{1F5C4}\\"$RandomID","palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID",["palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID"]]},
+            qq{["UnitTest - ConfigItem 2 Version 1","$ConfigItemNumbers[1]","male chief information officer \\"\x{1F5C4}\\"$RandomID","onion monger \\"\x{1F9C5}\\"$RandomID","apple monger \\"\x{1F34E}\\"$RandomID",["onion monger \\"\x{1F9C5}\\"$RandomID","apple monger \\"\x{1F34E}\\"$RandomID"]]},
+            qq{["UnitTest - ConfigItem 1 Version 1","$ConfigItemNumbers[0]","male chief information officer \\"\x{1F5C4}\\"$RandomID","palm tree monger \\"\x{1F334}\\"$RandomID","tanabate tree monger \\"\x{1F38B}\\"$RandomID",["palm tree monger \\"\x{1F334}\\"$RandomID","tanabate tree monger \\"\x{1F38B}\\"$RandomID"]]},
 
         ],
     },
@@ -3629,6 +3633,7 @@ my @ImportDataTests = (
         },
     },
 
+    # test without any dynamic fields
     {
         Name             => qq{no dynamic fields (should succeed)},
         SourceImportData => {
@@ -3668,6 +3673,8 @@ my @ImportDataTests = (
         },
     },
 
+    # tests with a single value entity field: CustomerCIO
+
     {
         Name             => qq{only CustomerCIO as simple string (should succeed)},
         SourceImportData => {
@@ -3691,7 +3698,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[25],
                 ImportDataRow => [
-                    'UnitTest - Importtest 3',
+                    'UnitTest - Importtest CustomerCIO',
                     'Production',
                     'Operational',
 
@@ -3705,7 +3712,7 @@ my @ImportDataTests = (
         ReferenceImportData => {
             VersionNumber => 1,
             LastVersion   => {
-                Name      => 'UnitTest - Importtest 3',
+                Name      => 'UnitTest - Importtest CustomerCIO',
                 DeplState => 'Production',
                 InciState => 'Operational',
 
@@ -3720,7 +3727,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => qq{only CustomerCIO as ref to single value array (should succeed)},
+        Name             => qq{only CustomerCIO as reference to single value array (should succeed)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs{TwoCustomerUser},
@@ -3742,7 +3749,7 @@ my @ImportDataTests = (
             ImportDataSave => {
                 TemplateID    => $TemplateIDs[25],
                 ImportDataRow => [
-                    'UnitTest - Importtest 3',
+                    'UnitTest - Importtest CustomerCIO',
                     'Production',
                     'Operational',
 
@@ -3758,7 +3765,7 @@ my @ImportDataTests = (
         ReferenceImportData => {
             VersionNumber => 1,
             LastVersion   => {
-                Name      => 'UnitTest - Importtest 3',
+                Name      => 'UnitTest - Importtest CustomerCIO',
                 DeplState => 'Production',
                 InciState => 'Operational',
 
@@ -3771,6 +3778,60 @@ my @ImportDataTests = (
             },
         },
     },
+
+    # tests with a multi value entity field, CustomerSalesTeam
+
+    {
+        Name             => qq{CustomerSalesTeam as reference to multi value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => "DynamicField_CustomerSalesTeam$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest CustomerSalesTeam for trees and apples',
+                    'Production',
+                    'Operational',
+
+                    # for example from JSON expprt
+                    [
+                        @CustomerUsers{qw(tanabate_monger palm_monger apple_monger)},
+                    ],
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name      => 'UnitTest - Importtest CustomerSalesTeam for trees and apples',
+                DeplState => 'Production',
+                InciState => 'Operational',
+
+                # CustomerCIO is a single value Reference field, therefore a Entity field.
+                # Single value Entity fields return a list with one element.
+                "DynamicField_CustomerCIO$TestIDSuffix"       => undef,
+                "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
+                    @CustomerUsers{qw(tanabate_monger palm_monger apple_monger)},
+                ],
+            },
+        },
+    }
 
 );
 
