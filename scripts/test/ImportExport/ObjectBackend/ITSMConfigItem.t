@@ -23,7 +23,7 @@ use utf8;
 
 # CPAN modules
 use Test2::V0;
-use List::AllUtils qw(true min max);
+use List::AllUtils qw(max min true);
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
@@ -223,8 +223,9 @@ $ConfigObject->Set(
 my %CustomerUsers = (
 
     # for CustomerCIO
-    CIO      => 'chief information officer "🗄"' . $RandomID,
-    next_CIO => 'next chief information officer "💁"' . $RandomID,
+    male_CIO    => 'male chief information officer "🗄"' . $RandomID,
+    female_CIO  => 'female chief information officer "💁"' . $RandomID,
+    diverse_CIO => 'diverse chief information officer "⊕"' . $RandomID,
 
     # for Customer
 
@@ -787,7 +788,7 @@ push @ConfigItemSetups,
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
-            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
+            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{male_CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                 $CustomerUsers{palm},
                 $CustomerUsers{tanabate},
@@ -804,7 +805,7 @@ push @ConfigItemSetups,
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
-            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{CIO},
+            "DynamicField_CustomerCIO$TestIDSuffix"       => $CustomerUsers{male_CIO},
             "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                 $CustomerUsers{onion},
                 $CustomerUsers{apple},
@@ -824,7 +825,7 @@ push @ConfigItemSetups,
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
             UserID                                     => $TestUserID,
-            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
+            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{male_CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
                 [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
                 [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
@@ -842,7 +843,7 @@ push @ConfigItemSetups,
             DeplStateID                                => $DeplStateListReverse{Production},
             InciStateID                                => $InciStateListReverse{Operational},
             UserID                                     => $TestUserID,
-            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{CIO},
+            "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{male_CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
                 [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
                 [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
@@ -1672,7 +1673,7 @@ my @ExportDataTests = (
             [
                 'UnitTest - ConfigItem 2 Version 1',
                 $ConfigItemNumbers[1],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{onion sales "🧅"$RandomID},
                 qq{apple sales "🍎"$RandomID},
                 qq{["onion sales \\"🧅\\"$RandomID","apple sales \\"🍎\\"$RandomID"]},
@@ -1680,7 +1681,7 @@ my @ExportDataTests = (
             [
                 'UnitTest - ConfigItem 1 Version 1',
                 $ConfigItemNumbers[0],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{palm tree sales "🌴"$RandomID},
                 qq{tanabate tree sales "🎋"$RandomID},
                 qq{["palm tree sales \\"🌴\\"$RandomID","tanabate tree sales \\"🎋\\"$RandomID"]},
@@ -1691,16 +1692,16 @@ my @ExportDataTests = (
                 ';',
                 qq{"UnitTest - ConfigItem 2 Version 1"},
                 qq{"$ConfigItemNumbers[1]"},
-                qq{"chief information officer ""🗄""$RandomID"},    # not JSON because single value
-                qq{"onion sales ""🧅""$RandomID"},                  # not JSON because explicit index
-                qq{"apple sales ""🍎""$RandomID"},                  # not JSON because explicit index
+                qq{"male chief information officer ""🗄""$RandomID"},    # not JSON because single value
+                qq{"onion sales ""🧅""$RandomID"},                       # not JSON because explicit index
+                qq{"apple sales ""🍎""$RandomID"},                       # not JSON because explicit index
                 qq{"[""onion sales \\""🧅\\""$RandomID"",""apple sales \\""🍎\\""$RandomID""]"}
             ),
             join(
                 ';',
                 qq{"UnitTest - ConfigItem 1 Version 1"},
                 qq{"$ConfigItemNumbers[0]"},
-                qq{"chief information officer ""🗄""$RandomID"},
+                qq{"male chief information officer ""🗄""$RandomID"},
                 qq{"palm tree sales ""🌴""$RandomID"},
                 qq{"tanabate tree sales ""🎋""$RandomID"},
                 qq{"[""palm tree sales \\""🌴\\""$RandomID"",""tanabate tree sales \\""🎋\\""$RandomID""]"}
@@ -1758,13 +1759,13 @@ my @ExportDataTests = (
         ReferenceExportData => [
             [
                 $ConfigItemNumbers[3],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]},
                 qq{[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]},
             ],
             [
                 $ConfigItemNumbers[2],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]},
                 qq{[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]},
             ],
@@ -1773,14 +1774,14 @@ my @ExportDataTests = (
             join(
                 ';',
                 qq{"$ConfigItemNumbers[3]"},
-                qq{"chief information officer ""🗄""$RandomID"},    # not JSON because single value
+                qq{"male chief information officer ""🗄""$RandomID"},    # not JSON because single value
                 qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]"},
                 qq{"[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]"},
             ),
             join(
                 ';',
                 qq{"$ConfigItemNumbers[2]"},
-                qq{"chief information officer ""🗄""$RandomID"},
+                qq{"male chief information officer ""🗄""$RandomID"},
                 qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]"},
                 qq{"[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]"},
             ),
@@ -1903,7 +1904,7 @@ my @ExportDataTests = (
             [
                 'UnitTest - ConfigItem 2 Version 1',
                 $ConfigItemNumbers[1],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{onion sales "🧅"$RandomID},
                 qq{apple sales "🍎"$RandomID},
                 [
@@ -1914,7 +1915,7 @@ my @ExportDataTests = (
             [
                 'UnitTest - ConfigItem 1 Version 1',
                 $ConfigItemNumbers[0],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 qq{palm tree sales "🌴"$RandomID},
                 qq{tanabate tree sales "🎋"$RandomID},
                 [
@@ -1924,8 +1925,8 @@ my @ExportDataTests = (
             ],
         ],
         ReferenceExportContent => [
-            qq{["UnitTest - ConfigItem 2 Version 1","$ConfigItemNumbers[1]","chief information officer \\"\x{1F5C4}\\"$RandomID","onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID",["onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID"]]},
-            qq{["UnitTest - ConfigItem 1 Version 1","$ConfigItemNumbers[0]","chief information officer \\"\x{1F5C4}\\"$RandomID","palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID",["palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID"]]},
+            qq{["UnitTest - ConfigItem 2 Version 1","$ConfigItemNumbers[1]","male chief information officer \\"\x{1F5C4}\\"$RandomID","onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID",["onion sales \\"\x{1F9C5}\\"$RandomID","apple sales \\"\x{1F34E}\\"$RandomID"]]},
+            qq{["UnitTest - ConfigItem 1 Version 1","$ConfigItemNumbers[0]","male chief information officer \\"\x{1F5C4}\\"$RandomID","palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID",["palm tree sales \\"\x{1F334}\\"$RandomID","tanabate tree sales \\"\x{1F38B}\\"$RandomID"]]},
 
         ],
     },
@@ -1979,7 +1980,7 @@ my @ExportDataTests = (
         ReferenceExportData => [
             [
                 $ConfigItemNumbers[3],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
                 [
                     [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
@@ -1988,7 +1989,7 @@ my @ExportDataTests = (
             ],
             [
                 $ConfigItemNumbers[2],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
                 [
                     [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
@@ -1998,8 +1999,8 @@ my @ExportDataTests = (
             ],
         ],
         ReferenceExportContent => [
-            qq{["$ConfigItemNumbers[3]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]],[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]]},
-            qq{["$ConfigItemNumbers[2]","chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]]},
+            qq{["$ConfigItemNumbers[3]","male chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]],[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]]},
+            qq{["$ConfigItemNumbers[2]","male chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]]},
         ],
     },
 
@@ -2043,7 +2044,7 @@ my @ExportDataTests = (
         ReferenceExportData => [
             [
                 $ConfigItemNumbers[3],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 [
                     [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
                     [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
@@ -2051,7 +2052,7 @@ my @ExportDataTests = (
             ],
             [
                 $ConfigItemNumbers[2],
-                qq{chief information officer "🗄"$RandomID},
+                qq{male chief information officer "🗄"$RandomID},
                 [
                     [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
                     [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
@@ -2062,7 +2063,7 @@ my @ExportDataTests = (
         ReferenceExportContent => [ <<"ITEM_1", <<"ITEM_2" ],
 [
    "$ConfigItemNumbers[3]",
-   "chief information officer \\"\x{1F5C4}\\"$RandomID",
+   "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
       [
          [
@@ -2085,7 +2086,7 @@ my @ExportDataTests = (
 ITEM_1
 [
    "$ConfigItemNumbers[2]",
-   "chief information officer \\"\x{1F5C4}\\"$RandomID",
+   "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
       [
          [
@@ -3668,7 +3669,58 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => qq{only CustomerCIO (should succeed)},
+        Name             => qq{only CustomerCIO as simple string (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => "DynamicField_CustomerCIO$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest 3',
+                    'Production',
+                    'Operational',
+
+                    # CustomerCIO is a single value Entitiy field. Both CSV and JSON export this case as
+                    # a simple string.
+                    "$CustomerUsers{diverse_CIO}",
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name      => 'UnitTest - Importtest 3',
+                DeplState => 'Production',
+                InciState => 'Operational',
+
+                # CustomerCIO is a single value Reference field, therefore a Entity field.
+                # Single value Entity fields return a list with one element.
+                "DynamicField_CustomerCIO$TestIDSuffix" => [
+                    $CustomerUsers{diverse_CIO},
+                ],
+                "DynamicField_CustomerSalesTeam$TestIDSuffix" => undef,
+            },
+        },
+    },
+
+    {
+        Name             => qq{only CustomerCIO as ref to single value array (should succeed)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs{TwoCustomerUser},
@@ -3696,8 +3748,9 @@ my @ImportDataTests = (
 
                     # CustomerCIO is a single value Reference field, therefore a Entity field.
                     # Single value Entity fields can be created with a list with a single element.
-                    # Note that the case where only the item is passed is supported as well.
-                    [ $CustomerUsers{next_CIO} ],
+                    # Note that this case does not arise from the regular export, as the regular export
+                    # exports CustomerCIO as a simple string.
+                    [ $CustomerUsers{female_CIO} ],
                 ],
                 UserID => $TestUserID,
             },
@@ -3712,7 +3765,7 @@ my @ImportDataTests = (
                 # CustomerCIO is a single value Reference field, therefore a Entity field.
                 # Single value Entity fields return a list with one element.
                 "DynamicField_CustomerCIO$TestIDSuffix" => [
-                    $CustomerUsers{next_CIO},
+                    $CustomerUsers{female_CIO},
                 ],
                 "DynamicField_CustomerSalesTeam$TestIDSuffix" => undef,
             },
