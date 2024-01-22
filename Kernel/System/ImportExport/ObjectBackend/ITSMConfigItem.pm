@@ -795,9 +795,7 @@ sub ImportDataSave {
     if ( ref $Param{ImportDataRow} ne 'ARRAY' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  =>
-                "Can't import entity $Param{Counter}: "
-                . "ImportDataRow must be an array reference",
+            Message  => "Can't import entity $Param{Counter}: ImportDataRow must be an array reference",
         );
 
         return;
@@ -1118,6 +1116,8 @@ sub ImportDataSave {
 
         # set field names to differentiate dynamic fields from standard attributes
         $DynamicFieldList{$DFName} = $DynamicFieldConfig;
+
+        # TODO: is the special case for Set needed ?
         if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
             for my $IncludedDF ( $DynamicFieldConfig->{Config}{Include}->@* ) {
                 $DynamicFieldList{ $IncludedDF->{DF} } = $IncludedDF->{Definition};
@@ -1131,7 +1131,8 @@ sub ImportDataSave {
             }
         }
 
-        next DF_NAME unless $DynamicFieldConfig->{Required};    # TODO: is this correct ???
+        # check only required attributes
+        next DF_NAME unless $DynamicFieldConfig->{Required};
 
         my $Key = $DynamicFieldConfig->{Name};
 
@@ -1148,8 +1149,10 @@ sub ImportDataSave {
     }
 
     # set up fields in VersionData and in the XML attributes
-    my %NewVersionData;
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+    my %DFHash;    # map field name, including the prefix 'DynamicField_', to the value
     my $RowIndex = 0;
+    MAPPING_OBJECT_DATA:
     for my $MappingObjectData (@MappingObjectList) {
 
         # just for convenience
@@ -1158,94 +1161,136 @@ sub ImportDataSave {
 
         if ( $Key eq 'Number' ) {
 
-            # do nothing
-            # Import does not override the config item number
+            # Do nothing. The Import may not override the config item number.
+            next MAPPING_OBJECT_DATA;
         }
-        elsif ( $Key eq 'Name' ) {
+
+        if ( $Key eq 'Name' ) {
 
             if ( $EmptyFieldsLeaveTheOldValues && ( !defined $Value || $Value eq '' ) ) {
 
                 # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA;
             }
-            else {
-                if ( !$Value ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  =>
-                            "Can't import entity $Param{Counter}: "
-                            . "The name '$Value' is invalid!",
-                    );
 
-                    return;
-                }
+            if ( !$Value ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "The name '$Value' is invalid!",
+                );
 
-                $VersionData->{$Key} = $Value;
+                return;
             }
+
+            $VersionData->{$Key} = $Value;
+
+            next MAPPING_OBJECT_DATA;
         }
-        elsif ( $Key eq 'DeplState' ) {
+
+        if ( $Key eq 'DeplState' ) {
 
             if ( $EmptyFieldsLeaveTheOldValues && ( !defined $Value || $Value eq '' ) ) {
 
                 # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA;
             }
-            else {
 
-                # extract deployment state id
-                my $DeplStateID = $DeplStateListReverse{$Value} || '';
-                if ( !$DeplStateID ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  =>
-                            "Can't import entity $Param{Counter}: "
-                            . "The deployment state '$Value' is invalid!",
-                    );
+            # extract deployment state id
+            my $DeplStateID = $DeplStateListReverse{$Value} || '';
+            if ( !$DeplStateID ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "The deployment state '$Value' is invalid!",
+                );
 
-                    return;
-                }
-
-                $VersionData->{DeplStateID} = $DeplStateID;
+                return;
             }
+
+            $VersionData->{DeplStateID} = $DeplStateID;
+
+            next MAPPING_OBJECT_DATA;
         }
-        elsif ( $Key eq 'InciState' ) {
+
+        if ( $Key eq 'InciState' ) {
 
             if ( $EmptyFieldsLeaveTheOldValues && ( !defined $Value || $Value eq '' ) ) {
 
                 # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA;
             }
-            else {
 
-                # extract the deployment state id
-                my $InciStateID = $InciStateListReverse{$Value} || '';
-                if ( !$InciStateID ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  =>
-                            "Can't import entity $Param{Counter}: "
-                            . "The incident state '$Value' is invalid!",
-                    );
+            # extract the deployment state id
+            my $InciStateID = $InciStateListReverse{$Value} || '';
+            if ( !$InciStateID ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "The incident state '$Value' is invalid!",
+                );
 
-                    return;
-                }
-
-                $VersionData->{InciStateID} = $InciStateID;
+                return;
             }
-        }
-        else {
 
-            # handle xml data
-            $NewVersionData{$Key} = $Value;
+            $VersionData->{InciStateID} = $InciStateID;
+
+            next MAPPING_OBJECT_DATA;
         }
+
+        if ( $Key =~ m/^DynamicField_(?<DFName>.+)/ ) {
+
+            my $DFName = $+{DFName};
+
+            # TODO: handle the index case
+            my $DynamicFieldConfig = $DynamicFieldList{$DFName};
+
+            # skip import when the dynamic field is not found
+            next MAPPING_OBJECT_DATA unless $DynamicFieldConfig;
+
+            # references are never unpacked
+            if ( ref $Value ) {
+                $DFHash{$Key} = $Value;
+
+                next MAPPING_OBJECT_DATA;
+            }
+
+            # Multivalue fields are exported as JSON strings in the case of CSV exports.
+            my $IsMultiValue = $DynamicFieldConfig->{Config}->{MultiValue};
+
+            # The value is encoded as JSON
+            if ($IsMultiValue) {
+                my $DecodedValue = $JSONObject->Decode(
+                    Data => $Value,
+                );
+
+                $DFHash{$Key} = $DecodedValue;
+
+                next MAPPING_OBJECT_DATA;
+            }
+
+            # keep the value as is
+            $DFHash{$Key} = $Value;
+
+            next MAPPING_OBJECT_DATA;
+        }
+
+        # skip this mapping when it could not be handled
+        next MAPPING_OBJECT_DATA;
     }
     continue {
         $RowIndex++;
     }
 
-    # Edit $VersionData, so that the values in NewVersionData take precedence.
+    # Edit $VersionData, so that the values in %DFHash take precedence.
     # When a config item has no dynamic fields, then $MergedDFData may reference an empty hash
     my $MergedDFData = $Self->_DFImportDataMerge(
         DynamicFieldRef              => \%DynamicFieldList,
         OldVersionData               => $VersionData,
-        NewVersionData               => \%NewVersionData,
+        NewVersionData               => \%DFHash,
         EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
     );
 
@@ -1258,7 +1303,8 @@ sub ImportDataSave {
 
         return;
     }
-    %NewVersionData = $MergedDFData->%*;
+
+    my %NewVersionData = $MergedDFData->%*;
 
     # check if the feature to check for a unique name is enabled
     if (

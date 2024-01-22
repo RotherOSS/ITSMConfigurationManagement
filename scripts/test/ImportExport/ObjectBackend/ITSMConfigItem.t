@@ -220,7 +220,7 @@ $ConfigObject->Set(
 # with double quotes for testing CSV
 # with high order letters
 # with random id, useful during development when RestoreDatabase is deactivated
-# 
+#
 # The customer is a company that sells fruits, vegetables, and trees. The produce
 # is sold by mongers which are members of a sales team. The company has
 # chief financial officers of various genders.
@@ -234,8 +234,9 @@ my %CustomerUsers = (
     # for CustomerSalesTeam, the members of a sales team are mongers
 
     # fruit and vegetable mongers for CustomerSalesTeam
-    apple_monger => 'apple monger "🍎"' . $RandomID,
-    onion_monger => 'onion monger "🧅"' . $RandomID,
+    apple_monger  => 'apple monger "🍎"' . $RandomID,
+    onion_monger  => 'onion monger "🧅"' . $RandomID,
+    garlic_monger => 'garlic monger "🧄"' . $RandomID,
 
     # tree mongers for CustomerSalesTeam
     tanabate_monger => 'tanabate tree monger "🎋"' . $RandomID,
@@ -3808,7 +3809,7 @@ my @ImportDataTests = (
                     'Production',
                     'Operational',
 
-                    # for example from JSON expprt
+                    # for example from JSON export
                     [
                         @CustomerUsers{qw(tanabate_monger palm_monger apple_monger)},
                     ],
@@ -3819,19 +3820,64 @@ my @ImportDataTests = (
         ReferenceImportData => {
             VersionNumber => 1,
             LastVersion   => {
-                Name      => 'UnitTest - Importtest CustomerSalesTeam for trees and apples',
-                DeplState => 'Production',
-                InciState => 'Operational',
-
-                # CustomerCIO is a single value Reference field, therefore a Entity field.
-                # Single value Entity fields return a list with one element.
+                Name                                          => 'UnitTest - Importtest CustomerSalesTeam for trees and apples',
+                DeplState                                     => 'Production',
+                InciState                                     => 'Operational',
                 "DynamicField_CustomerCIO$TestIDSuffix"       => undef,
                 "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
                     @CustomerUsers{qw(tanabate_monger palm_monger apple_monger)},
                 ],
             },
         },
-    }
+    },
+
+    {
+        Name             => qq{CustomerSalesTeam as CSV with multi value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+            },
+            MappingObjectData => [
+                {
+                    Key => "DynamicField_CustomerSalesTeam$TestIDSuffix",
+                },
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[5],    # CSV
+                ImportDataRow => [
+
+                    # for example from CSV export, the exact layout does not matter
+                    # make sure that q{"} is quoted in the JSON string
+                    qq{[ "@{[$CustomerUsers{onion_monger} =~ s/"/\\"/gr ]}"         ,             "@{[$CustomerUsers{garlic_monger} =~ s/"/\\"/gr ]}" ]},
+                    'UnitTest - Importtest CustomerSalesTeam for root vegetables',
+                    'Production',
+                    'Operational',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                          => 'UnitTest - Importtest CustomerSalesTeam for root vegetables',
+                DeplState                                     => 'Production',
+                InciState                                     => 'Operational',
+                "DynamicField_CustomerCIO$TestIDSuffix"       => undef,
+                "DynamicField_CustomerSalesTeam$TestIDSuffix" => [
+                    @CustomerUsers{qw(onion_monger garlic_monger)},
+                ],
+            },
+        },
+    },
 
 );
 
