@@ -882,7 +882,7 @@ sub ConfigItemUpdate {
     }
 
     # gather dynamic field keys
-    my @DynamicFieldNames = grep
+    my @DynamicFieldNames = map
         {m/^DynamicField_(.+)/}
         sort keys %Param;
 
