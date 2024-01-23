@@ -3981,6 +3981,118 @@ END_JSON
             },
         },
     },
+
+    # tests with a multi value Set field, ZZZSetOfAgents
+
+    {
+        Name             => qq{ZZZSetOfAgents as reference to multi value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => "DynamicField_ZZZSetOfAgents$TestIDSuffix",
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest CustomerUserAndMultiValueSet',
+
+                    # from JSON export
+                    [
+                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{ClimbingAgent} ] ],
+                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                    ],
+
+                    'Production',
+                    'Operational',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                       => 'UnitTest - Importtest CustomerUserAndMultiValueSet',
+                DeplState                                  => 'Production',
+                InciState                                  => 'Operational',
+                "DynamicField_CustomerCIO$TestIDSuffix"    => undef,                                                  # not in the mapping list
+                "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
+                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{ClimbingAgent} ] ],
+                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{ZZZSetOfAgents as JSON string with multi value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => "DynamicField_ZZZSetOfAgents$TestIDSuffix",
+                },
+                {
+                    Key => 'DeplState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'Operational',
+                    'UnitTest - Importtest CustomerUserAndMultiValueSet',
+
+                    # similar to CSV export
+                    <<"END_JSON",
+                    [
+                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] ],
+                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] ],
+                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{FrowningAgent} =~ s/"/\\"/gr ]}" ] ]
+                    ]
+END_JSON
+                    'Production',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                       => 'UnitTest - Importtest CustomerUserAndMultiValueSet',
+                DeplState                                  => 'Production',
+                InciState                                  => 'Operational',
+                "DynamicField_CustomerCIO$TestIDSuffix"    => undef,                                                  # not in the mapping list
+                "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{LotusAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                ],
+            },
+        },
+    },
+
 );
 
 =for never
