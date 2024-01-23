@@ -324,6 +324,8 @@ diag "TestIDSuffix: '$TestIDSuffix'";
 
     # not the no underscores are allowed in dynamic field names
     my %DynamicFieldDefinitions = (
+
+        # Dynamic fields that are not part of a set.
         CustomerCIO => {
             FieldType => 'CustomerUser',
             Config    => {
@@ -336,6 +338,20 @@ diag "TestIDSuffix: '$TestIDSuffix'";
             Config    => {
                 MultiValue => 1,
                 Tooltip    => 'Tooltip for customer sales team',
+            },
+        },
+        FirstMonday => {
+            FieldType => 'Date',
+            Config    => {
+                MultiValue => 0,
+                Tooltip    => 'first monday of a year',
+            },
+        },
+        FirstWeekend => {
+            FieldType => 'Date',
+            Config    => {
+                MultiValue => 1,
+                Tooltip    => 'first weekend of a year, two values',
             },
         },
 
@@ -407,7 +423,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
     );
 
     for my $Name ( sort keys %DynamicFieldDefinitions ) {
-        my $DFName         = $Name . $TestIDSuffix;
+        my $DFName         = $Name . $TestIDSuffix;                  # add suffix to have unique names
         my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
             Name       => $DFName,
             Label      => $DFName,
@@ -427,11 +443,11 @@ my ( %ConfigItemClassIDs, %ConfigItemDefinitionIDs );
 {
     my @ConfigItemPerlDefinitions;
 
-    # definition with two CustomerUser fields
+    # config item definition with two CustomerUser fields
     push @ConfigItemPerlDefinitions, {
         Pages => [
             {
-                Name   => 'TwoCustomerUser',    # will be reused in class name
+                Name   => 'TwoCustomerUsers',    # will be reused in class name
                 Layout => {
                     Columns     => 1,
                     ColumnWidth => '1fr'
@@ -453,6 +469,38 @@ my ( %ConfigItemClassIDs, %ConfigItemDefinitionIDs );
                     },
                     {
                         DF => 'CustomerSalesTeam' . $TestIDSuffix,
+                    },
+                ]
+            }
+        },
+    };
+
+    # config item definition with two Date fields
+    push @ConfigItemPerlDefinitions, {
+        Pages => [
+            {
+                Name   => 'TwoDates',    # will be reused in class name
+                Layout => {
+                    Columns     => 1,
+                    ColumnWidth => '1fr'
+                },
+                Content => [
+                    {
+                        Section     => 'TwoDatesSection',
+                        ColumnStart => 1,
+                        RowStart    => 1
+                    }
+                ],
+            }
+        ],
+        Sections => {
+            TwoDatesSection => {
+                Content => [
+                    {
+                        DF => 'FirstMonday' . $TestIDSuffix,
+                    },
+                    {
+                        DF => 'FirstWeekend' . $TestIDSuffix,
                     },
                 ]
             }
@@ -781,15 +829,15 @@ my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 my @ConfigItemSetups;
 my $ConfigItemCnt = 0;
 
-# two config items for TwoCustomerUser
+# two config items for TwoCustomerUsers
 push @ConfigItemSetups,
     {
-        Description   => 'config item 1 for TwoCustomerUser',
+        Description   => 'config item 1 for TwoCustomerUsers',
         ConfigItemAdd => {
             Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUser},
-            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUser},
+            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUsers},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUsers},
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
@@ -801,12 +849,12 @@ push @ConfigItemSetups,
         },
     },
     {
-        Description   => 'config item 2 for TwoCustomerUser',
+        Description   => 'config item 2 for TwoCustomerUsers',
         ConfigItemAdd => {
             Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
             Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUser},
-            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUser},
+            ClassID                                       => $ConfigItemClassIDs{TwoCustomerUsers},
+            DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUsers},
             DeplStateID                                   => $DeplStateListReverse{Production},
             InciStateID                                   => $InciStateListReverse{Operational},
             UserID                                        => $TestUserID,
@@ -889,6 +937,43 @@ push @ConfigItemSetups,
         },
     };
 
+# two config items for TwoDates
+push @ConfigItemSetups,
+    {
+        Description   => 'config item 1 for TwoDates',
+        ConfigItemAdd => {
+            Number                                   => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                     => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                  => $ConfigItemClassIDs{TwoDates},
+            DefinitionID                             => $ConfigItemDefinitionIDs{TwoDates},
+            DeplStateID                              => $DeplStateListReverse{Production},
+            InciStateID                              => $InciStateListReverse{Operational},
+            UserID                                   => $TestUserID,
+            "DynamicField_FirstMonday$TestIDSuffix"  => '2024-01-01',
+            "DynamicField_FirstWeekend$TestIDSuffix" => [
+                '2024-01-06',
+                '2024-01-07',
+            ],
+        },
+    },
+    {
+        Description   => 'config item 2 for TwoDates',
+        ConfigItemAdd => {
+            Number                                   => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                     => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                  => $ConfigItemClassIDs{TwoDates},
+            DefinitionID                             => $ConfigItemDefinitionIDs{TwoDates},
+            DeplStateID                              => $DeplStateListReverse{Production},
+            InciStateID                              => $InciStateListReverse{Operational},
+            UserID                                   => $TestUserID,
+            "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06',
+            "DynamicField_FirstWeekend$TestIDSuffix" => [
+                '2025-01-04',
+                '2025-01-05',
+            ],
+        },
+    };
+
 =for never
 
  10.1 test cases
@@ -905,7 +990,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 1 Version 1',
-                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUsers},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -976,7 +1061,7 @@ push @ConfigItemSetups,
         Versions => [
             {
                 Name         => 'UnitTest - ConfigItem 1 Version 1',    # duplicate name for tests
-                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUsers},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1035,7 +1120,7 @@ push @ConfigItemSetups,
             },
             {
                 Name         => 'UnitTest - ConfigItem 2 Version 2',
-                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUser},
+                DefinitionID => $ConfigItemDefinitionIDs{TwoCustomerUsers},
                 DeplStateID  => $DeplStateListReverse{Production},
                 InciStateID  => $InciStateListReverse{Operational},
                 XMLData      => [
@@ -1625,7 +1710,7 @@ my @ExportDataTests = (
         Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as CSV},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -1710,6 +1795,99 @@ my @ExportDataTests = (
                 qq{"palm tree monger ""🌴""$RandomID"},
                 qq{"tanabate tree monger ""🎋""$RandomID"},
                 qq{"[""palm tree monger \\""🌴\\""$RandomID"",""tanabate tree monger \\""🎋\\""$RandomID""]"}
+            ),
+        ],
+    },
+
+    {
+        Name             => q{Export Name, Number, FirstMonday, and FirstWeekend as CSV},
+        SourceExportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoDates},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'Number',
+                },
+
+                # CustomerCIO is a singlevalue field. Thus no index is passed.
+                {
+                    Key => "FirstMonday${TestIDSuffix}",
+                },
+
+                # FirstWeekend is a multivalue field.
+                # Two cases are covered here:
+                # - get the value at a specific index, that is the first and the second element
+                # - get the complete list
+                {
+                    Key => "FirstWeekend${TestIDSuffix}",
+                },
+                {
+                    Key => "FirstWeekend${TestIDSuffix}::1",
+                },
+                {
+                    Key => "FirstWeekend${TestIDSuffix}::2",
+                },
+            ],
+            SearchData => {
+
+                # Empty hash must be specified, as otherwise the previously set up SearchData prevails
+            },
+            ExportDataGet => {
+                TemplateID => $TemplateIDs[5],
+                UserID     => $TestUserID,
+            },
+            ExportDataSave => {
+                TemplateID => $TemplateIDs[5],    # usually same as for ExportDataGet
+                Format     => 'CSV',
+                FormatData => {
+                    ColumnSeparator => 'Comma',
+                    Charset         => 'UTF-8',
+                },
+            },
+        },
+
+        # The expected rows need to be sorted by config item number in descending order.
+        # There is no way to specify the sort order in ExportDataGet().
+        ReferenceExportData => [
+            [
+                'UnitTest - ConfigItem 8 Version 1',
+                $ConfigItemNumbers[7],
+                qq{2025-01-06 00:00:00},                              # monday
+                qq{["2025-01-04 00:00:00","2025-01-05 00:00:00"]},    # saturday and sunday
+                qq{2025-01-04 00:00:00},
+                qq{2025-01-05 00:00:00},
+            ],
+            [
+                'UnitTest - ConfigItem 7 Version 1',
+                $ConfigItemNumbers[6],
+                qq{2024-01-01 00:00:00},                              # monday
+                qq{["2024-01-06 00:00:00","2024-01-07 00:00:00"]},    # saturday and sunday
+                qq{2024-01-06 00:00:00},
+                qq{2024-01-07 00:00:00},
+            ],
+        ],
+        ReferenceExportContent => [
+            join(
+                ',',
+                qq{"UnitTest - ConfigItem 8 Version 1"},
+                qq{"$ConfigItemNumbers[7]"},
+                qq{"2025-01-06 00:00:00"},                                  # monday
+                qq{"[""2025-01-04 00:00:00"",""2025-01-05 00:00:00""]"},    # saturday and sunday
+                qq{"2025-01-04 00:00:00"},
+                qq{"2025-01-05 00:00:00"},
+            ),
+            join(
+                ',',
+                qq{"UnitTest - ConfigItem 7 Version 1"},
+                qq{"$ConfigItemNumbers[6]"},
+                qq{"2024-01-01 00:00:00"},                                  # monday
+                qq{"[""2024-01-06 00:00:00"",""2024-01-07 00:00:00""]"},    # saturday and sunday
+                qq{"2024-01-06 00:00:00"},
+                qq{"2024-01-07 00:00:00"},
             ),
         ],
     },
@@ -1857,7 +2035,7 @@ my @ExportDataTests = (
         Name             => q{Export Name, Number, CustomerCIO, and CustomerSalesTeam as ugly concatenated JSON},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2207,7 +2385,7 @@ ITEM_4
         Name             => q{all required values are given (deployment state search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2232,7 +2410,7 @@ ITEM_4
         Name             => q{all required values are given (incident state search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2257,7 +2435,7 @@ ITEM_4
         Name             => q{all required values are given (combined search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2284,7 +2462,7 @@ ITEM_4
         Name             => q{all required values are given (XML data search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2314,7 +2492,7 @@ ITEM_4
         Name             => q{all required values are given (combined all search check)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2348,7 +2526,7 @@ ITEM_4
         Name             => q{all required values are given (check the returned array)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -2418,7 +2596,7 @@ ITEM_4
         Name             => q{all required values are given (double element checks)},
         SourceExportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -3680,7 +3858,7 @@ my @ImportDataTests = (
         Name             => qq{only CustomerCIO as simple string (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -3731,7 +3909,7 @@ my @ImportDataTests = (
         Name             => qq{only CustomerCIO as reference to single value array (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -3780,13 +3958,109 @@ my @ImportDataTests = (
         },
     },
 
+    # tests with a two date fields: FirstMonday and FirstWeekend
+
+    {
+        Name             => qq{FirstMonday and FirstWeekend as data structure (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoDates},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => "DynamicField_FirstMonday$TestIDSuffix",
+                },
+                {
+                    Key => "DynamicField_FirstWeekend$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest FirstMonday and FirstWeekend',
+                    'Production',
+                    'Operational',
+                    '2026-01-05 00:00:00',
+                    [ '2026-01-03', '2026-01-04' ],
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                     => 'UnitTest - Importtest FirstMonday and FirstWeekend',
+                DeplState                                => 'Production',
+                InciState                                => 'Operational',
+                "DynamicField_FirstMonday$TestIDSuffix"  => '2026-01-05 00:00:00',
+                "DynamicField_FirstWeekend$TestIDSuffix" => [ '2026-01-03 00:00:00', '2026-01-04 00:00:00' ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{FirstMonday and FirstWeekend as JSON string (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{TwoDates},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => 'InciState',
+                },
+                {
+                    Key => "DynamicField_FirstMonday$TestIDSuffix",
+                },
+                {
+                    Key => "DynamicField_FirstWeekend$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest FirstMonday and FirstWeekend',
+                    'Production',
+                    'Operational',
+                    '2027-01-04 00:00:00',
+                    qq{["2027-01-02", "2027-01-03" ]},
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                     => 'UnitTest - Importtest FirstMonday and FirstWeekend',
+                DeplState                                => 'Production',
+                InciState                                => 'Operational',
+                "DynamicField_FirstMonday$TestIDSuffix"  => '2027-01-04 00:00:00',
+                "DynamicField_FirstWeekend$TestIDSuffix" => [ '2027-01-02 00:00:00', '2027-01-03 00:00:00' ],
+            },
+        },
+    },
+
     # tests with a multi value entity field, CustomerSalesTeam
 
     {
         Name             => qq{CustomerSalesTeam as reference to multi value array (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -3835,7 +4109,7 @@ my @ImportDataTests = (
         Name             => qq{CustomerSalesTeam as CSV with multi value array (should succeed)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4101,7 +4375,7 @@ END_JSON
         Name             => q{all required values are given (a NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4173,7 +4447,7 @@ END_JSON
         Name             => q{all required values are given (a second NEW config item must be created)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4245,7 +4519,7 @@ END_JSON
         Name             => q{all required values are given (a new version must be added to first test config item)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4322,7 +4596,7 @@ END_JSON
         Name             => q{all required values are given (a new version must be added to first test config item again)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4399,7 +4673,7 @@ END_JSON
         Name             => q{all required values are given (a new version must be added to third test config item)},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4728,7 +5002,7 @@ END_JSON
         Name             => q{a simple import for testing the overriding behavior of empty values},
         SourceImportData => {
             ObjectData => {
-                ClassID => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
             },
             MappingObjectData => [
                 {
@@ -4778,7 +5052,7 @@ END_JSON
         Name             => 'import an empty value for Text1',
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4828,7 +5102,7 @@ END_JSON
         Name             => q{import undef for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -4878,7 +5152,7 @@ END_JSON
         Name             => q{import an empty value for Text1, with EmptyFieldsLeaveTheOldValues turned off},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4928,7 +5202,7 @@ END_JSON
         Name             => q{import a single space value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -4978,7 +5252,7 @@ END_JSON
         Name             => q{import the string '0' value for Text1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => '',
             },
             MappingObjectData => [
@@ -5028,7 +5302,7 @@ END_JSON
         Name             => q{import an empty value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -5078,7 +5352,7 @@ END_JSON
         Name             => q{import an invalid value for GeneralCatalog1, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -5158,7 +5432,7 @@ END_JSON
         Name             => q{import an empty value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -5208,7 +5482,7 @@ END_JSON
         Name             => q{import an invalid value for DeplState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -5248,7 +5522,7 @@ END_JSON
         Name             => q{import an empty value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
@@ -5298,7 +5572,7 @@ END_JSON
         Name             => q{import an invalid value for InciState, with EmptyFieldsLeaveTheOldValues turned on},
         SourceImportData => {
             ObjectData => {
-                ClassID                      => $ConfigItemClassIDs{TwoCustomerUser},
+                ClassID                      => $ConfigItemClassIDs{TwoCustomerUsers},
                 EmptyFieldsLeaveTheOldValues => 'on',
             },
             MappingObjectData => [
