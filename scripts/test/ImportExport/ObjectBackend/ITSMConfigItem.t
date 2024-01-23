@@ -262,17 +262,17 @@ my %Agent2UserID;
 {
     my %LastName = (
 
-        # for the multi value ZZZSetOfAgents
+        # for the multi value dynamic field ZZZSetOfAgents
         DeskAgent     => 'INFORMATION DESK PERSON 💁',
         LotusAgent    => 'PERSON IN LOTUS POSITION 🧘',
         ClimbingAgent => 'PERSON CLIMBING 🧗',
         FrowningAgent => 'PERSON FROWNING 🙍',
 
-        # for the single value ZZZSetOfSupporter
-        FirstLevelSupporterEurope  => 'First Level Supporter Europe',
+        # for the single value dynamic field ZZZSetContinentalSupport
         FirstLevelSupporterAfrica  => 'First Level Supporter Africa',
-        SecondLevelSupporterEurope => 'Second Level Supporter Europe',
         SecondLevelSupporterAfrica => 'Second Level Supporter Africa',
+        FirstLevelSupporterEurope  => 'First Level Supporter Europe',
+        SecondLevelSupporterEurope => 'Second Level Supporter Europe',
     );
 
     for my $Key ( sort keys %LastName ) {
@@ -372,7 +372,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
             },
         },
 
-        # LevelFirst and LevelSecond will be included in the single value Set ZZZSetOfSupporter
+        # LevelFirst and LevelSecond will be included in the single value Set ZZZSetContinentalSupport
         LevelFirst => {
             FieldType => 'Agent',
             Config    => {
@@ -393,7 +393,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
                 Tooltip      => 'Tooltip for second level support',
             },
         },
-        ZZZSetOfSupporter => {
+        ZZZSetContinentalSupport => {
             FieldType => 'Set',
             Config    => {
                 MultiValue => 0,
@@ -401,7 +401,7 @@ diag "TestIDSuffix: '$TestIDSuffix'";
                     { DF => "LevelFirst$TestIDSuffix" },
                     { DF => "LevelSecond$TestIDSuffix" },
                 ],
-                Tooltip => 'Tooltip for ZZZSetOfSupporter',
+                Tooltip => 'Tooltip for ZZZSetContinentalSupport',
             },
         },
     );
@@ -513,7 +513,7 @@ my ( %ConfigItemClassIDs, %ConfigItemDefinitionIDs );
             Section1 => {
                 Content => [
                     {
-                        DF => 'ZZZSetOfSupporter' . $TestIDSuffix,
+                        DF => 'ZZZSetContinentalSupport' . $TestIDSuffix,
                     },
                 ]
             }
@@ -861,14 +861,14 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 1 for SingleValueSet: Africa',
         ConfigItemAdd => {
-            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs{SingleValueSet},
-            DefinitionID                                  => $ConfigItemDefinitionIDs{SingleValueSet},
-            DeplStateID                                   => $DeplStateListReverse{Production},
-            InciStateID                                   => $InciStateListReverse{Operational},
-            UserID                                        => $TestUserID,
-            "DynamicField_ZZZSetOfSupporter$TestIDSuffix" => [
+            Number                                               => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                                 => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                              => $ConfigItemClassIDs{SingleValueSet},
+            DefinitionID                                         => $ConfigItemDefinitionIDs{SingleValueSet},
+            DeplStateID                                          => $DeplStateListReverse{Production},
+            InciStateID                                          => $InciStateListReverse{Operational},
+            UserID                                               => $TestUserID,
+            "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
                 [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
             ],
         },
@@ -876,14 +876,14 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 2 for SingleValueSet: Europe',
         ConfigItemAdd => {
-            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
-            ClassID                                       => $ConfigItemClassIDs{SingleValueSet},
-            DefinitionID                                  => $ConfigItemDefinitionIDs{SingleValueSet},
-            DeplStateID                                   => $DeplStateListReverse{Production},
-            InciStateID                                   => $InciStateListReverse{Operational},
-            UserID                                        => $TestUserID,
-            "DynamicField_ZZZSetOfSupporter$TestIDSuffix" => [
+            Number                                               => $ConfigItemNumbers[$ConfigItemCnt],
+            Name                                                 => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            ClassID                                              => $ConfigItemClassIDs{SingleValueSet},
+            DefinitionID                                         => $ConfigItemDefinitionIDs{SingleValueSet},
+            DeplStateID                                          => $DeplStateListReverse{Production},
+            InciStateID                                          => $InciStateListReverse{Operational},
+            UserID                                               => $TestUserID,
+            "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
                 [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ],
             ],
         },
@@ -1794,7 +1794,7 @@ my @ExportDataTests = (
     },
 
     {
-        Name             => q{ZZZSetOfSupporter as CSV},
+        Name             => q{ZZZSetContinentalSupport as CSV},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs{SingleValueSet},
@@ -1804,7 +1804,7 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
                 {
-                    Key => "ZZZSetOfSupporter${TestIDSuffix}",
+                    Key => "ZZZSetContinentalSupport${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2123,7 +2123,7 @@ ITEM_2
     },
 
     {
-        Name             => q{ZZZSetOfSupporter as pretty JSON},
+        Name             => q{ZZZSetContinentalSupport as pretty JSON},
         SourceExportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs{SingleValueSet},
@@ -2133,7 +2133,7 @@ ITEM_2
                     Key => 'Number',
                 },
                 {
-                    Key => "ZZZSetOfSupporter${TestIDSuffix}",
+                    Key => "ZZZSetContinentalSupport${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -3879,6 +3879,108 @@ my @ImportDataTests = (
         },
     },
 
+    # tests with a single value Set field, ZZZSetContinentalSupport
+
+    {
+        Name             => qq{ZZZSetContinentalSupport as reference to single value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{SingleValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => "DynamicField_ZZZSetContinentalSupport$TestIDSuffix",
+                },
+                {
+                    Key => 'InciState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest Support for Africa',
+                    'Production',
+
+                    # from JSON export
+                    [
+                        [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+                    ],
+
+                    'Operational',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                                 => 'UnitTest - Importtest Support for Africa',
+                DeplState                                            => 'Production',
+                InciState                                            => 'Operational',
+                "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
+                    [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+                ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{ZZZSetContinentalSupport as JSON string with a single value array (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID => $ConfigItemClassIDs{SingleValueSet},
+            },
+            MappingObjectData => [
+                {
+                    Key => 'Name',
+                },
+                {
+                    Key => 'DeplState',
+                },
+                {
+                    Key => "DynamicField_ZZZSetContinentalSupport$TestIDSuffix",
+                },
+                {
+                    Key => 'InciState',
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    'UnitTest - Importtest Support for Europe',
+                    'Production',
+
+                    # JSON string like from CSV export. The exact layout does not matter.
+                    # Make sure that q{"} is quoted in the JSON string.
+                    <<"END_JSON",
+[
+    [ [ "@{[$Agent2UserID{FirstLevelSupporterEurope} =~ s/"/\\"/gr ]}" ]       ,[ "@{[$Agent2UserID{SecondLevelSupporterEurope} =~ s/"/\\"/gr ]}" ] ]
+]
+END_JSON
+
+                    'Operational',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionNumber => 1,
+            LastVersion   => {
+                Name                                                 => 'UnitTest - Importtest Support for Europe',
+                DeplState                                            => 'Production',
+                InciState                                            => 'Operational',
+                "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
+                    [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ],
+                ],
+            },
+        },
+    },
 );
 
 =for never

@@ -1260,9 +1260,10 @@ sub ImportDataSave {
 
             # Multivalue fields are exported as JSON strings in the case of CSV exports.
             my $IsMultiValue = $DynamicFieldConfig->{Config}->{MultiValue};
+            my $IsSet        = ( $DynamicFieldConfig->{FieldType} // '' ) eq 'Set';
 
-            # The value is encoded as JSON
-            if ($IsMultiValue) {
+            # The value is encoded as JSON for multivalue and sets
+            if ( $IsMultiValue || $IsSet ) {
                 my $DecodedValue = $JSONObject->Decode(
                     Data => $Value,
                 );
