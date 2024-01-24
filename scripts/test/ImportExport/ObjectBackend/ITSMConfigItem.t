@@ -872,7 +872,7 @@ push @ConfigItemSetups,
         Description   => 'config item 1 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
             Number                                     => $ConfigItemNumbers[ $ConfigItemCnt++ ],
-            Name                                       => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
+            Name                                       => "UnitTest - ZZZSetOfAgents A $RandomID",
             ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
@@ -890,7 +890,7 @@ push @ConfigItemSetups,
         Description   => 'config item 2 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
             Number                                     => $ConfigItemNumbers[ $ConfigItemCnt++ ],
-            Name                                       => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
+            Name                                       => "UnitTest - ZZZSetOfAgents B $RandomID",
             ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
@@ -4496,6 +4496,74 @@ END_JSON
                     [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{LotusAgent} ] ],
                     [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
                     [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{ZZZSetOfAgents with indexed access (should succeed)},
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            MappingObjectData => [
+                {
+                    Key        => 'Name',
+                    Identifier => 1,
+                },
+                {
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}::2",
+                },
+                {
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}::20",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    "UnitTest - ZZZSetOfAgents B $RandomID",
+                    <<"END_JSON_FOR_INDEX_2",
+                        [ [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] ]
+END_JSON_FOR_INDEX_2
+                    <<"END_JSON_FOR_INDEX_20",
+                        [ [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] ]
+END_JSON_FOR_INDEX_20
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 2,
+            LastVersion  => {
+                Name                                    => "UnitTest - ZZZSetOfAgents B $RandomID",
+                DeplState                               => 'Production',
+                InciState                               => 'Operational',
+                "DynamicField_CustomerCIO$TestIDSuffix" => [
+                    $CustomerUsers{male_CIO},
+                ],
+                "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
+                    [ [ $Agent2UserID{DeskAgent} ],  [ $Agent2UserID{LotusAgent} ] ],
+                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{LotusAgent} ] ],    # changed
+                    [ undef,                         undef ],                            # index 3 to 19 skipped
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ undef,                         undef ],
+                    [ [ $Agent2UserID{DeskAgent} ],  [ $Agent2UserID{DeskAgent} ] ],     # added
                 ],
             },
         },
