@@ -834,8 +834,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 1 for TwoCustomerUsers',
         ConfigItemAdd => {
-            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                        => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                          => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                       => $ConfigItemClassIDs{TwoCustomerUsers},
             DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUsers},
             DeplStateID                                   => $DeplStateListReverse{Production},
@@ -851,8 +851,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 2 for TwoCustomerUsers',
         ConfigItemAdd => {
-            Number                                        => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                          => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                        => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                          => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                       => $ConfigItemClassIDs{TwoCustomerUsers},
             DefinitionID                                  => $ConfigItemDefinitionIDs{TwoCustomerUsers},
             DeplStateID                                   => $DeplStateListReverse{Production},
@@ -871,8 +871,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 1 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
-            Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                     => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                       => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
@@ -889,8 +889,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 2 for CustomerUserAndMultiValueSet',
         ConfigItemAdd => {
-            Number                                     => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                       => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                     => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                       => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                    => $ConfigItemClassIDs{CustomerUserAndMultiValueSet},
             DefinitionID                               => $ConfigItemDefinitionIDs{CustomerUserAndMultiValueSet},
             DeplStateID                                => $DeplStateListReverse{Production},
@@ -909,8 +909,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 1 for SingleValueSet: Africa',
         ConfigItemAdd => {
-            Number                                               => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                                 => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                               => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                                 => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                              => $ConfigItemClassIDs{SingleValueSet},
             DefinitionID                                         => $ConfigItemDefinitionIDs{SingleValueSet},
             DeplStateID                                          => $DeplStateListReverse{Production},
@@ -924,8 +924,8 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 2 for SingleValueSet: Europe',
         ConfigItemAdd => {
-            Number                                               => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                                 => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                               => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                                 => "UnitTest - ConfigItem $ConfigItemCnt Version 1",
             ClassID                                              => $ConfigItemClassIDs{SingleValueSet},
             DefinitionID                                         => $ConfigItemDefinitionIDs{SingleValueSet},
             DeplStateID                                          => $DeplStateListReverse{Production},
@@ -937,13 +937,13 @@ push @ConfigItemSetups,
         },
     };
 
-# two config items for TwoDates
+# config items for TwoDates
 push @ConfigItemSetups,
     {
         Description   => 'config item 1 for TwoDates',
         ConfigItemAdd => {
-            Number                                   => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                     => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                   => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                     => "UnitTest - TwoDates 2024 $RandomID",
             ClassID                                  => $ConfigItemClassIDs{TwoDates},
             DefinitionID                             => $ConfigItemDefinitionIDs{TwoDates},
             DeplStateID                              => $DeplStateListReverse{Production},
@@ -959,14 +959,14 @@ push @ConfigItemSetups,
     {
         Description   => 'config item 2 for TwoDates',
         ConfigItemAdd => {
-            Number                                   => $ConfigItemNumbers[$ConfigItemCnt],
-            Name                                     => "UnitTest - ConfigItem @{[ ++$ConfigItemCnt ]} Version 1",
+            Number                                   => $ConfigItemNumbers[ $ConfigItemCnt++ ],
+            Name                                     => "UnitTest - TwoDates 2025 $RandomID",     # will be overwritten later
             ClassID                                  => $ConfigItemClassIDs{TwoDates},
             DefinitionID                             => $ConfigItemDefinitionIDs{TwoDates},
             DeplStateID                              => $DeplStateListReverse{Production},
             InciStateID                              => $InciStateListReverse{Operational},
             UserID                                   => $TestUserID,
-            "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06',
+            "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-07',                             # actually tuesday, will be fixed later
             "DynamicField_FirstWeekend$TestIDSuffix" => [
                 '2025-01-04',
                 '2025-01-05',
@@ -1854,15 +1854,15 @@ my @ExportDataTests = (
         # There is no way to specify the sort order in ExportDataGet().
         ReferenceExportData => [
             [
-                'UnitTest - ConfigItem 8 Version 1',
+                "UnitTest - TwoDates 2025 $RandomID",
                 $ConfigItemNumbers[7],
-                qq{2025-01-06 00:00:00},                              # monday
+                qq{2025-01-07 00:00:00},                              # should be monday, is tuesday
                 qq{["2025-01-04 00:00:00","2025-01-05 00:00:00"]},    # saturday and sunday
                 qq{2025-01-04 00:00:00},
                 qq{2025-01-05 00:00:00},
             ],
             [
-                'UnitTest - ConfigItem 7 Version 1',
+                "UnitTest - TwoDates 2024 $RandomID",
                 $ConfigItemNumbers[6],
                 qq{2024-01-01 00:00:00},                              # monday
                 qq{["2024-01-06 00:00:00","2024-01-07 00:00:00"]},    # saturday and sunday
@@ -1873,16 +1873,16 @@ my @ExportDataTests = (
         ReferenceExportContent => [
             join(
                 ',',
-                qq{"UnitTest - ConfigItem 8 Version 1"},
+                qq{"UnitTest - TwoDates 2025 $RandomID"},
                 qq{"$ConfigItemNumbers[7]"},
-                qq{"2025-01-06 00:00:00"},                                  # monday
+                qq{"2025-01-07 00:00:00"},                                  # should be monday, is tuesday
                 qq{"[""2025-01-04 00:00:00"",""2025-01-05 00:00:00""]"},    # saturday and sunday
                 qq{"2025-01-04 00:00:00"},
                 qq{"2025-01-05 00:00:00"},
             ),
             join(
                 ',',
-                qq{"UnitTest - ConfigItem 7 Version 1"},
+                qq{"UnitTest - TwoDates 2024 $RandomID"},
                 qq{"$ConfigItemNumbers[6]"},
                 qq{"2024-01-01 00:00:00"},                                  # monday
                 qq{"[""2024-01-06 00:00:00"",""2024-01-07 00:00:00""]"},    # saturday and sunday
@@ -4050,6 +4050,46 @@ my @ImportDataTests = (
                 InciState                                => 'Operational',
                 "DynamicField_FirstMonday$TestIDSuffix"  => '2027-01-04 00:00:00',
                 "DynamicField_FirstWeekend$TestIDSuffix" => [ '2027-01-02 00:00:00', '2027-01-03 00:00:00' ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{Overwrite an existing entry},
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $ConfigItemClassIDs{TwoDates},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            MappingObjectData => [
+                {
+                    Key        => 'Name',
+                    Identifier => 1,
+                },
+                {
+                    Key => "DynamicField_FirstMonday$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    "UnitTest - TwoDates 2025 $RandomID",    # was created by setup of config items
+                    '2025-01-06 00:00:00',                   # fixing tuesday to monday
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 2,
+            LastVersion  => {
+                Name                                     => qq{UnitTest - TwoDates 2025 $RandomID},
+                DeplState                                => 'Production',
+                InciState                                => 'Operational',
+                "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06 00:00:00',                    # fixed: tuesday => monday
+                "DynamicField_FirstWeekend$TestIDSuffix" => [
+                    '2025-01-04 00:00:00',
+                    '2025-01-05 00:00:00',
+                ],
             },
         },
     },
