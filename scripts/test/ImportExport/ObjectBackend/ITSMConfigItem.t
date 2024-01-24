@@ -3841,8 +3841,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                          => 'UnitTest - Importtest 3',
                 DeplState                                     => 'Production',
                 InciState                                     => 'Operational',
@@ -3889,8 +3889,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name      => 'UnitTest - Importtest CustomerCIO',
                 DeplState => 'Production',
                 InciState => 'Operational',
@@ -3942,8 +3942,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name      => 'UnitTest - Importtest CustomerCIO',
                 DeplState => 'Production',
                 InciState => 'Operational',
@@ -3996,8 +3996,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                     => 'UnitTest - Importtest FirstMonday and FirstWeekend',
                 DeplState                                => 'Production',
                 InciState                                => 'Operational',
@@ -4043,8 +4043,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                     => 'UnitTest - Importtest FirstMonday and FirstWeekend',
                 DeplState                                => 'Production',
                 InciState                                => 'Operational',
@@ -4092,8 +4092,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                          => 'UnitTest - Importtest CustomerSalesTeam for trees and apples',
                 DeplState                                     => 'Production',
                 InciState                                     => 'Operational',
@@ -4140,8 +4140,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                          => 'UnitTest - Importtest CustomerSalesTeam for root vegetables',
                 DeplState                                     => 'Production',
                 InciState                                     => 'Operational',
@@ -4192,8 +4192,8 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                                 => 'UnitTest - Importtest Support for Africa',
                 DeplState                                            => 'Production',
                 InciState                                            => 'Operational',
@@ -4244,8 +4244,8 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                                 => 'UnitTest - Importtest Support for Europe',
                 DeplState                                            => 'Production',
                 InciState                                            => 'Operational',
@@ -4297,8 +4297,8 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                       => 'UnitTest - Importtest CustomerUserAndMultiValueSet',
                 DeplState                                  => 'Production',
                 InciState                                  => 'Operational',
@@ -4352,8 +4352,8 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
-            LastVersion   => {
+            VersionCount => 1,
+            LastVersion  => {
                 Name                                       => 'UnitTest - Importtest CustomerUserAndMultiValueSet',
                 DeplState                                  => 'Production',
                 InciState                                  => 'Operational',
@@ -4427,7 +4427,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
+            VersionCount => 1,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 3',
                 DeplState            => 'Production',
@@ -4499,7 +4499,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
+            VersionCount => 1,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 4',
                 DeplState            => 'Production',
@@ -4576,7 +4576,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 2,
+            VersionCount => 2,
             LastVersion   => {
                 Name                 => 'UnitTest - ConfigItem 1 Version 2',
                 DeplState            => 'Pilot',
@@ -4653,7 +4653,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 3,
+            VersionCount => 3,
             LastVersion   => {
                 Name                 => 'UnitTest - ConfigItem 1 Version 3',
                 DeplState            => 'Repair',
@@ -4766,7 +4766,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 2,
+            VersionCount => 2,
             LastVersion   => {
                 Name                                          => 'UnitTest - ConfigItem 3 Version 2',
                 DeplState                                     => 'Production',
@@ -4866,7 +4866,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 3,
+            VersionCount => 3,
             LastVersion   => {
                 Name                                          => 'UnitTest - ConfigItem 3 Version 3',
                 DeplState                                     => 'Production',
@@ -4966,7 +4966,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 4,
+            VersionCount => 4,
             LastVersion   => {
                 Name                                          => 'UnitTest - ConfigItem 3 Version 4',
                 DeplState                                     => 'Production',
@@ -5035,7 +5035,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
+            VersionCount => 1,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5086,7 +5086,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
+            VersionCount => 1,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5136,7 +5136,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 1,
+            VersionCount => 1,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5186,7 +5186,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 2,
+            VersionCount => 2,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5236,7 +5236,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 3,
+            VersionCount => 3,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5286,7 +5286,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 4,
+            VersionCount => 4,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5336,7 +5336,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 4,
+            VersionCount => 4,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5466,7 +5466,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 4,
+            VersionCount => 4,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5556,7 +5556,7 @@ END_JSON
             },
         },
         ReferenceImportData => {
-            VersionNumber => 4,
+            VersionCount => 4,
             LastVersion   => {
                 Name                 => 'UnitTest - Importtest 5',
                 DeplState            => 'Production',
@@ -5718,17 +5718,18 @@ for my $Test (@ImportDataTests) {
         ok( $ConfigItemID, "ImportDataSave() - return ConfigItemID: $ConfigItemID" );
         ok( $RetCode,      "ImportDataSave() - return RetCode: $RetCode" );
 
-        # get the version list
-        my $VersionList = $ConfigItemObject->VersionList(
-            ConfigItemID => $ConfigItemID,
-        ) // [];
+        # check the number of versions
+        {
+            my $VersionList = $ConfigItemObject->VersionList(
+                ConfigItemID => $ConfigItemID,
+            ) // [];
 
-        # check number of versions
-        is(
-            scalar $VersionList->@*,
-            $Test->{ReferenceImportData}->{VersionNumber} || 0,
-            "ImportDataSave() - correct number of versions",
-        );
+            is(
+                scalar $VersionList->@*,
+                $Test->{ReferenceImportData}->{VersionCount} || 0,
+                "ImportDataSave() - correct number of versions",
+            );
+        }
 
         # get the latest version
         my $VersionData = $ConfigItemObject->ConfigItemGet(
