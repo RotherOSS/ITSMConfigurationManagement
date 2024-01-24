@@ -23,7 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(max);
+use List::AllUtils qw(pairwise);
 
 # CPAN modules
 
@@ -671,7 +671,11 @@ sub ExportDataGet {
             # Note that the indexes start at 1 in the key names
             my ( $DFName, $Index ) = split /::/, $Key;
 
-            $Index //= -99;    # something less than 1
+            # ignore unexpected indexes, but still cut the '::'
+            if ( defined $Index && $Index !~ m/^[1-9][0-9]*$/ ) {
+                undef $Index;
+            }
+
             my $Value = $ConfigItem->{"DynamicField_$DFName"};
 
             if ( !defined $Value ) {
@@ -688,22 +692,16 @@ sub ExportDataGet {
             my $ActualValue = eval {
 
                 # a specific index was requested
-                if ( $IsMultiValue && $Index >= 1 ) {
-
-                    return $Value->[ $Index - 1 ] // '';
+                if ( $IsMultiValue && $Index ) {
+                    return $Value->[ $Index - 1 ] // '';    # as if an empty string were not valid
                 }
 
                 # For Set single and multivalue fields behave the same way.
                 # No need to shave off a level.
-                if ($IsSet) {
-                    return $Value;
-                }
+                return $Value if $IsSet;
 
                 # get first element for single value fields
-                if ( !$IsMultiValue && ref $Value eq 'ARRAY' ) {
-
-                    return $Value->[0] // '';
-                }
+                return $Value->[0] // '' if ( !$IsMultiValue && ref $Value eq 'ARRAY' );
 
                 # the default
                 return $Value;
@@ -1241,11 +1239,18 @@ sub ImportDataSave {
             next MAPPING_OBJECT_DATA;
         }
 
-        if ( $Key =~ m/^DynamicField_(?<DFName>.+)/ ) {
+        if ( $Key =~ m/^DynamicField_(?<DFNameWithIndex>.+)/ ) {
 
-            my $DFName = $+{DFName};
+            # The key might encompass an index, indicated by '::'.
+            # Note that the  indexes are 1-based.
+            my ( $DFName, $Index ) = split /::/, $+{DFNameWithIndex};
 
-            # TODO: handle the index case
+            # ignore unexpected indexes, but still cut the '::'
+            if ( defined $Index && $Index !~ m/^[1-9][0-9]*$/ ) {
+                undef $Index;
+            }
+            my $DFKey = "DynamicField_$DFName";
+
             my $DynamicFieldConfig = $DynamicFieldList{$DFName};
 
             # skip import when the dynamic field is not found
@@ -1253,7 +1258,7 @@ sub ImportDataSave {
 
             # references are never unpacked
             if ( ref $Value ) {
-                $DFHash{$Key} = $Value;
+                $DFHash{$DFKey} = $Value;
 
                 next MAPPING_OBJECT_DATA;
             }
@@ -1262,19 +1267,32 @@ sub ImportDataSave {
             my $IsMultiValue = $DynamicFieldConfig->{Config}->{MultiValue};
             my $IsSet        = ( $DynamicFieldConfig->{FieldType} // '' ) eq 'Set';
 
-            # The value is encoded as JSON for multivalue and sets
-            if ( $IsMultiValue || $IsSet ) {
-                my $DecodedValue = $JSONObject->Decode(
-                    Data => $Value,
-                );
-
-                $DFHash{$Key} = $DecodedValue;
+            # For indexed access only Sets are JSON encoded
+            if ( $IsMultiValue && $Index ) {
+                $DFHash{$DFKey} //= [];
+                if ($IsSet) {
+                    $DFHash{$DFKey}->[ $Index - 1 ] = $JSONObject->Decode(
+                        Data => $Value,
+                    );
+                }
+                else {
+                    $DFHash{$DFKey}->[ $Index - 1 ] = $Value;
+                }
 
                 next MAPPING_OBJECT_DATA;
             }
 
-            # keep the value as is
-            $DFHash{$Key} = $Value;
+            # The value is encoded as JSON for multivalue and sets
+            if ( $IsMultiValue || $IsSet ) {
+                $DFHash{$DFKey} = $JSONObject->Decode(
+                    Data => $Value,
+                );
+
+                next MAPPING_OBJECT_DATA;
+            }
+
+            # keep the value as is, for single value, non-set
+            $DFHash{$DFKey} = $Value;
 
             next MAPPING_OBJECT_DATA;
         }
@@ -1720,32 +1738,41 @@ sub _DFImportDataMerge {
     return unless $Param{OldVersionData};
     return unless ref $Param{OldVersionData} eq 'HASH';     # hash with current values of the config item
 
-    # Array parameters are marked like "$DFName::$Index"
-    my $OldVersionData = $Param{OldVersionData};
-    my $NewVersionData = $Param{NewVersionData};
-    my %MergedDFData;
-    NAME_AND_INDEX:
-    for my $NameAndIndex ( sort keys $Param{NewVersionData}->%* ) {
-        next NAME_AND_INDEX unless $NameAndIndex =~ m/^DynamicField_/;
+    my $Old = $Param{OldVersionData};
+    my $New = $Param{NewVersionData};
+    my %MergedDFData;                                       # will be returned
+    DF_KEY:
+    for my $DFKey ( sort keys $New->%* ) {
 
-        my ( $Name, $OneBasedIndex ) = split /::/, $NameAndIndex;
+        # a sanity check
+        next DF_KEY unless $DFKey =~ m/^DynamicField_/;
 
         # The most simple case
-        if ( !$OneBasedIndex ) {
-            $MergedDFData{$Name} = $NewVersionData->{$Name} // $OldVersionData->{$Name};
+        if ( !ref $New->{$DFKey} ) {
+            $MergedDFData{$DFKey} = $New->{$DFKey} // $Old->{$DFKey};
 
-            next NAME_AND_INDEX;
+            next DF_KEY;
         }
 
-        $MergedDFData{$Name} //= [];
-        $MergedDFData{$Name}->[ $OneBasedIndex - 1 ] = $NewVersionData->{$NameAndIndex};
+        # only hashes are used
+        next DF_KEY unless ref $New->{$DFKey} eq 'ARRAY';
 
-        next NAME_AND_INDEX;
+        # merging based on definedness
+        # merging only on the top level
+        # TODO: decide whether that allows deletion of values
+        $Old->{$DFKey} = [] unless ref $Old->{$DFKey} eq 'ARRAY';
+        my @Merged = pairwise { $a // $b } $New->{$DFKey}->@*, $Old->{$DFKey}->@*;
+        $MergedDFData{$DFKey} = \@Merged;
+
+        next DF_KEY;
     }
+
+    # TODO: check whether any field types need any special treatement
 
 =for never
 
-    This code is still in work
+    This code is still in work.
+
 
     # JSON support might be needed for Set dynamic fields
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');

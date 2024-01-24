@@ -3855,7 +3855,7 @@ my @ImportDataTests = (
     # tests with a single value entity field: CustomerCIO
 
     {
-        Name             => qq{only CustomerCIO as simple string (should succeed)},
+        Name             => qq{import CustomerCIO as simple string (should succeed)},
         SourceImportData => {
             ObjectData => {
                 ClassID => $ConfigItemClassIDs{TwoCustomerUsers},
@@ -3883,7 +3883,7 @@ my @ImportDataTests = (
 
                     # CustomerCIO is a single value Entitiy field. Both CSV and JSON export this case as
                     # a simple string.
-                    "$CustomerUsers{diverse_CIO}",
+                    $CustomerUsers{diverse_CIO},
                 ],
                 UserID => $TestUserID,
             },
@@ -4055,7 +4055,7 @@ my @ImportDataTests = (
     },
 
     {
-        Name             => qq{Overwrite an existing entry},
+        Name             => qq{Fixing the first monday in 2025, was set to tuesday},
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $ConfigItemClassIDs{TwoDates},
@@ -4089,6 +4089,100 @@ my @ImportDataTests = (
                 "DynamicField_FirstWeekend$TestIDSuffix" => [
                     '2025-01-04 00:00:00',
                     '2025-01-05 00:00:00',
+                ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{Extending first weekend 2025 to monday},
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $ConfigItemClassIDs{TwoDates},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            MappingObjectData => [
+                {
+                    Key        => 'Name',
+                    Identifier => 1,
+                },
+                {
+                    Key => "DynamicField_FirstWeekend$TestIDSuffix",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    "UnitTest - TwoDates 2025 $RandomID",    # was created by setup of config items
+                    qq{["2025-01-04","2025-01-05",    "2025-01-06" ]},
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 3,
+            LastVersion  => {
+                Name                                     => qq{UnitTest - TwoDates 2025 $RandomID},
+                DeplState                                => 'Production',
+                InciState                                => 'Operational',
+                "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06 00:00:00',                    # fixed: tuesday => monday
+                "DynamicField_FirstWeekend$TestIDSuffix" => [
+                    '2025-01-04 00:00:00',
+                    '2025-01-05 00:00:00',
+                    '2025-01-06 00:00:00',
+                ],
+            },
+        },
+    },
+
+    {
+        Name             => qq{Extending first weekend 2025 to friday, skipping wednesday and tuesday},
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $ConfigItemClassIDs{TwoDates},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            MappingObjectData => [
+                {
+                    Key        => 'Name',
+                    Identifier => 1,
+                },
+                {
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}::7",
+                },
+                {
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}::6",
+                },
+                {
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}::1",
+                },
+            ],
+            ImportDataSave => {
+                TemplateID    => $TemplateIDs[25],
+                ImportDataRow => [
+                    "UnitTest - TwoDates 2025 $RandomID",    # was created by setup of config items
+                    '2025-01-10 00:00:00',                   # extending to friday, skipping tuesday, wednesday, and thursday
+                    '2025-01-09 00:00:00',                   # adding thursday
+                    '2025-02-04 00:00:00',                   # wrong month for saturday
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 4,
+            LastVersion  => {
+                Name                                     => qq{UnitTest - TwoDates 2025 $RandomID},
+                DeplState                                => 'Production',
+                InciState                                => 'Operational',
+                "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06 00:00:00',                    # fixed: tuesday => monday
+                "DynamicField_FirstWeekend$TestIDSuffix" => [
+                    '2025-02-04 00:00:00',                                                            # wrong month
+                    '2025-01-05 00:00:00',
+                    '2025-01-06 00:00:00',
+                    undef,                                                                            # tuesday skipped
+                    undef,                                                                            # wednesday skipped
+                    '2025-01-09 00:00:00',
+                    '2025-01-10 00:00:00',                                                            # friday
                 ],
             },
         },
