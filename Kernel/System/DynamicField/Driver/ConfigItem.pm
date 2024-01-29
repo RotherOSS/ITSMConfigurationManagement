@@ -158,6 +158,21 @@ sub GetFieldTypeSettings {
             };
     }
 
+    # Support configurable search key
+    push @FieldTypeSettings,
+        {
+            ConfigParamName => 'SearchAttribute',
+            Label           => Translatable('Attribute which will be searched on autocomplete'),
+            Explanation     => Translatable('Select the attribute which config items will be searched by'),
+            InputType       => 'Selection',
+            SelectionData   => {
+                'Number' => 'Number',
+                'Name'   => 'Name',
+            },
+            PossibleNone => 1,
+            Multiple     => 0,
+        };
+
     # Support various display options
     push @FieldTypeSettings,
         {
@@ -327,15 +342,14 @@ sub SearchObjects {
 
     my %SearchParams;
 
+    # include configured search param if present
+    my $SearchAttribute = $DFDetails->{SearchAttribute} // 'Name';
+
+    $SearchParams{$SearchAttribute} = "%$Param{Term}%";
+
     # Support restriction by class
     if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) ) {
         $SearchParams{ClassIDs} = $DFDetails->{ClassIDs};
-    }
-
-    if ( $Param{Term} ) {
-
-        # substring search
-        $SearchParams{Name} = ["%$Param{Term}%"];
     }
 
     # incorporate referencefilterlist into search params
