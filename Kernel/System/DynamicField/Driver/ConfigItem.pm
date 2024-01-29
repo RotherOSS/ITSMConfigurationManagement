@@ -345,7 +345,7 @@ sub SearchObjects {
     # include configured search param if present
     my $SearchAttribute = $DFDetails->{SearchAttribute} // 'Name';
 
-    $SearchParams{$SearchAttribute} = "%$Param{Term}%";
+    $SearchParams{$SearchAttribute} = "*$Param{Term}*";
 
     # Support restriction by class
     if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) ) {
