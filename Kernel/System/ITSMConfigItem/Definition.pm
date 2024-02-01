@@ -1222,7 +1222,7 @@ sub DefinitionSync {
 
         if ( !$NeedsSync ) {
             $Self->DefinitionSetSynced(
-                ClassID => $Param{ClassID},
+                ClassID => $ClassID,
             );
 
             next CLASS unless $NeedsSync;
