@@ -174,7 +174,8 @@ This is used in auto completion when searching for possible object IDs.
 
     my @ObjectIDs = $BackendObject->SearchObjects(
         DynamicFieldConfig => $DynamicFieldConfig,
-        Term               => $Term,
+        ObjectID           => $ObjectID,                # (optional) if given, takes precedence over Term
+        Term               => $Term,                    # (optional) defaults to wildcard search with empty string
         MaxResults         => $MaxResults,
         UserID             => 1,
         Object             => {
