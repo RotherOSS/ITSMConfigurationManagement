@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - a91d81cefdca00286973c582ab7b27e93cf6d795 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 8a3e8b2b8c2516afbc9b7a974128dee144725676 - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -32,7 +32,6 @@ use List::Util qw(any);
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
-use Kernel::System::CheckItem;
 
 our $ObjectManagerDisabled = 1;
 
@@ -552,6 +551,16 @@ sub _DynamicFieldsListShow {
                 if ( !$DynamicFieldData->{InternalField} ) {
                     $LayoutObject->Block(
                         Name => 'DeleteLink',
+                        Data => {
+                            %{$DynamicFieldData},
+                            Valid          => $Valid,
+                            ConfigDialog   => $ConfigDialog,
+                            FieldTypeName  => $FieldTypeName,
+                            ObjectTypeName => $ObjectTypeName,
+                        },
+                    );
+                    $LayoutObject->Block(
+                        Name => 'CloneLink',
                         Data => {
                             %{$DynamicFieldData},
                             Valid          => $Valid,

@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 55126f4ab25373dded7533aeb0d7cd7743e7e7a9 - Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+# $origin: otobo - 57d823f26671a8d3e2d918e9c380ea26d040f4b3 - Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -63,7 +63,7 @@
                     <strong>[% Translate("Change settings") | html %]</strong>: [% Translate("Set up what you want to change if the criteria match. Keep in mind that 'Possible' is a white list, 'PossibleNot' a black list.") | html %]
                 </p>
                 <p class="FieldExplanation">
-                    [% Translate("Check the official %sdocumentation%s.") | html | ReplacePlaceholders('<a href="https://doc.otobo.org/manual/admin/10.1/en/content/processes-automation/access-control-lists.html" target="_blank">', '</a>')  %]
+                    [% Translate("Check the official %sdocumentation%s.") | html | ReplacePlaceholders('<a href="https://doc.otobo.org/manual/admin/11.0/en/content/processes-automation/access-control-lists.html" target="_blank">', '</a>')  %]
                 </p>
             </div>
         </div>
@@ -81,7 +81,9 @@
                 <div class="Content">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="ACLEditAction"/>
+# Rother OSS / ITSMConfigurationManagement
                     <input type="hidden" name="ObjectType" value="[% Data.ObjectType | html %]"/>
+# EO ITSMConfigurationManagement
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
                     <input type="hidden" name="ConfigMatch" value="[% Data.ConfigMatch | html %]"/>
