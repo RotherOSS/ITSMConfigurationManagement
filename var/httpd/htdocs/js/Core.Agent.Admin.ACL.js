@@ -99,9 +99,10 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                    Label: Core.Language.Translate('Delete'),
                    Function: function () {
                        var Data = {
-                               Action: 'AdminACL',
-                               Subaction: 'ACLDelete',
-                               ID: ACLID
+                                Action: 'AdminACL',
+                                Subaction: 'ACLDelete',
+                                ObjectType: $('[name=ObjectType]').val(),
+                                ID: ACLID
                            };
 
                        // Change the dialog to an ajax loader
@@ -118,7 +119,8 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                            }
 
                            Core.App.InternalRedirect({
-                               Action: Data.Action
+                               Action: Data.Action,
+                               ObjectType: Data.ObjectType
                            });
                        }, 'json');
                    }

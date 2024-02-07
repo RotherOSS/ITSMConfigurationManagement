@@ -453,7 +453,8 @@ sub Run {
             );
 
             my %DeleteResult = (
-                Success => $Success,
+                Success    => $Success,
+                ObjectType => $Param{ObjectType},
             );
 
             if ( !$Success ) {
