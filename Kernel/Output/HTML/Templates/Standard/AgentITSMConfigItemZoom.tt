@@ -134,6 +134,12 @@
                     <div class="ControlRow">
                         <div class="ITSMItemView Icons">
 [% RenderBlockStart("Expand") %]
+                            <div id="VersionSelectionContainer">
+                                <div class="Field">
+                                    [% Data.VersionSelection %]
+                                </div>
+                                <label for="VersionSelection">[% Translate("Version") | html %]</label>
+                            </div>
                             <a class="OneITSMItem Active" href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];ShowVersions=0" title="[% Translate("Show one version") | html %]">
                                 <i class="fa fa-minus"></i>
                                 <span>[% Translate("Show one version") | html %]</span>
@@ -208,7 +214,7 @@
 [% RenderBlockEnd("Tree") %]
             </div>
             <div id="ITSMItems">
-[% Data.DynamicFieldHTML %]
+                [% Data.DynamicFieldHTML %]
             </div>
 [% RenderBlockStart("LinkTableComplex") %]
             <div class="Content">

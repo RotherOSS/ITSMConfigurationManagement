@@ -29,6 +29,7 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -106,9 +107,19 @@ sub Run {
         ConfigItemID => $ConfigItemID,
     );
 
-    if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
-        $Param{ShowVersions} = 1;
+    # C0124
+    if ( !IsArrayRefWithData($VersionList) ) {
+        return $LayoutObject->ErrorScreen(
+            Message =>
+                $LayoutObject->{LanguageObject}->Translate('No versions found!'),
+            Comment => Translatable('Please contact the administrator.'),
+        );
     }
+
+    # C0124
+    #if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
+        #    $Param{ShowVersions} = 1;
+    #}
 
     # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
     $VersionID ||= $ConfigItem->{VersionID};
@@ -156,10 +167,21 @@ sub Run {
 
     # build version tree
     $LayoutObject->Block( Name => 'Tree' );
-    my $Counter = 1;
-    if ( $VersionID && !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
-        $Counter     = @{$VersionList};
-        $VersionList = [ $VersionList->[-1] ];
+    my $VersionNumber = $ParamObject->GetParam( Param => 'VersionID' ) // 1;
+    my $Version;
+
+    #DEBUG
+    #use Data::Dumper;
+    #print STDERR "VersionList: " . Dumper($VersionList) . "\n";
+
+    # C0124
+    #if ( $VersionID && !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
+        #    $Counter     = @{$VersionList};
+        #    $VersionList = [ $VersionList->[-1] ];
+    #}
+    if ( $VersionID && !$Param{ShowVersions} ) {
+        $Version       = List::Util::first { $_->{VersionID} eq $VersionID } @{$VersionList};
+        $VersionNumber = ( List::Util::first { $VersionList->[$_] eq $Version } 0 .. $#{$VersionList} ) + 1;
     }
 
     # set incident signal
@@ -220,12 +242,41 @@ sub Run {
         $StyleClasses = "<style>$StyleClasses</style>";
     }
 
+    # build version selection
+    my $BaseLink = $LayoutObject->Output(
+        Template => '[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;'
+            . "ConfigItemID=$ConfigItem->{ConfigItemID};"
+    );
+
+    my @VersionSelectionData = map {
+        {
+            Key   => ( $BaseLink . "VersionID=$_->{VersionID}" ),
+            Value => (
+                "$_->{Name} "
+                    . ( $_->{VersionNumber} || $_->{VersionID} )
+                    . " ($_->{CreateTime})"
+            ),
+        }
+    } $VersionList->@*;
+
+    my $VersionSelection = $LayoutObject->BuildSelection(
+        Data         => \@VersionSelectionData,
+        Name         => 'VersionSelection',
+        Class        => 'Modernize',
+        SelectedID   => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
+        PossibleNone => 1,
+    );
+
+    #C0124
+    use Data::Dumper;
+    print STDERR "VersionSelection: " . Dumper($VersionSelection) . "\n";
+
     # output version tree header
     if ( $Param{ShowVersions} ) {
         $LayoutObject->Block(
             Name => 'Collapse',
             Data => {
-                ConfigItemID => $ConfigItemID,
+                ConfigItemID     => $ConfigItemID,
             },
         );
     }
@@ -234,6 +285,7 @@ sub Run {
             Name => 'Expand',
             Data => {
                 ConfigItemID => $ConfigItemID,
+                VersionSelection => $VersionSelection,
             },
         );
     }
@@ -241,8 +293,36 @@ sub Run {
     # get user object
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
+    # C0124
+    my $Counter = 1;
+
     # output version tree
-    for my $VersionHash ( @{$VersionList} ) {
+    if ( $Param{ShowVersions} ) {
+
+        for my $VersionHash ( @{$VersionList} ) {
+
+            $Param{CreateByUserFullName} = $UserObject->UserName(
+                UserID => $VersionHash->{CreateBy},
+            );
+
+            $LayoutObject->Block(
+                Name => 'TreeItem',
+                Data => {
+                    %Param,
+                    %{$ConfigItem},
+                    %{$VersionHash},
+                    Count      => $Counter,
+                    InciSignal => $InciSignals{ $VersionHash->{InciStateType} },
+                    DeplSignal => $DeplSignals{ $VersionHash->{DeplState} },
+                    Active     => $VersionHash->{VersionID} eq $VersionID ? 'Active' : '',
+                },
+            );
+
+            $Counter++;
+        }
+    } else {
+
+        my $VersionHash = $Version;
 
         $Param{CreateByUserFullName} = $UserObject->UserName(
             UserID => $VersionHash->{CreateBy},
@@ -254,15 +334,14 @@ sub Run {
                 %Param,
                 %{$ConfigItem},
                 %{$VersionHash},
-                Count      => $Counter,
+                Count      => $VersionNumber,
                 InciSignal => $InciSignals{ $VersionHash->{InciStateType} },
                 DeplSignal => $DeplSignals{ $VersionHash->{DeplState} },
                 Active     => $VersionHash->{VersionID} eq $VersionID ? 'Active' : '',
             },
         );
-
-        $Counter++;
     }
+    
 
     # output header
     my $Output = $LayoutObject->Header( Value => $ConfigItem->{Number} );

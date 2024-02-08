@@ -37,6 +37,13 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
     *      This function initializes config item zoom section.
     */
     TargetNS.Init = function () {
+        $('#VersionSelection').on('change', function () {
+            var Redirect = $(this).val();
+            if ( Redirect ) {
+                window.location = Redirect;
+            }
+        });
+
         var ITSMShowConfirmDialog = Core.Config.Get('ITSMShowConfirmDialog');
 
         ITSM.Agent.Zoom.Init(Core.Config.Get('UserConfigItemZoomTableHeight'));
