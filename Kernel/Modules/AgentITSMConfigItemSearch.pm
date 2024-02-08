@@ -716,11 +716,6 @@ sub Run {
             }
         }
 
-        $LayoutObject->AddJSData(
-            Key   => 'SearchAttributes',
-            Value => \@SearchAttributes,
-        );
-
         my @ProfileAttributes;
 
         # show attributes
@@ -730,6 +725,7 @@ sub Run {
             next KEY if !$Key;
             next KEY if !defined $GetParam{$Key};
             next KEY if $GetParam{$Key} eq '';
+            next KEY if ref $GetParam{$Key} eq 'ARRAY' && !$GetParam{$Key}->@*;
 
             $AttributeIsUsed = 1;
 
@@ -738,7 +734,12 @@ sub Run {
 
         # if no attribute is shown, show configitem number
         if ( !$Self->{Profile} ) {
-            push @ProfileAttributes, 'Number';
+            if ( @SearchAttributes ) {
+                push @ProfileAttributes, @SearchAttributes;
+            }
+            else {
+                push @ProfileAttributes, 'Number';
+            }
         }
 
         $LayoutObject->AddJSData(
