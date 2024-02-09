@@ -28,7 +28,7 @@ use List::Util qw(any);
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -82,12 +82,6 @@ sub Run {
         );
     }
 
-    # set show versions
-    $Param{ShowVersions} = 0;
-    if ( $ParamObject->GetParam( Param => 'ShowVersions' ) ) {
-        $Param{ShowVersions} = 1;
-    }
-
     # get content
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => $ConfigItemID,
@@ -107,7 +101,6 @@ sub Run {
         ConfigItemID => $ConfigItemID,
     );
 
-    # C0124
     if ( !IsArrayRefWithData($VersionList) ) {
         return $LayoutObject->ErrorScreen(
             Message =>
@@ -115,11 +108,6 @@ sub Run {
             Comment => Translatable('Please contact the administrator.'),
         );
     }
-
-    # C0124
-    #if ( $VersionID && $VersionID ne $VersionList->[-1]->{VersionID} ) {
-        #    $Param{ShowVersions} = 1;
-    #}
 
     # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
     $VersionID ||= $ConfigItem->{VersionID};
@@ -163,25 +151,6 @@ sub Run {
                 return $LayoutObject->FatalError();
             }
         }
-    }
-
-    # build version tree
-    $LayoutObject->Block( Name => 'Tree' );
-    my $VersionNumber = $ParamObject->GetParam( Param => 'VersionID' ) // 1;
-    my $Version;
-
-    #DEBUG
-    #use Data::Dumper;
-    #print STDERR "VersionList: " . Dumper($VersionList) . "\n";
-
-    # C0124
-    #if ( $VersionID && !$Param{ShowVersions} && $VersionID eq $VersionList->[-1]->{VersionID} ) {
-        #    $Counter     = @{$VersionList};
-        #    $VersionList = [ $VersionList->[-1] ];
-    #}
-    if ( $VersionID && !$Param{ShowVersions} ) {
-        $Version       = List::Util::first { $_->{VersionID} eq $VersionID } @{$VersionList};
-        $VersionNumber = ( List::Util::first { $VersionList->[$_] eq $Version } 0 .. $#{$VersionList} ) + 1;
     }
 
     # set incident signal
@@ -252,9 +221,7 @@ sub Run {
         {
             Key   => ( $BaseLink . "VersionID=$_->{VersionID}" ),
             Value => (
-                "$_->{Name} "
-                    . ( $_->{VersionNumber} || $_->{VersionID} )
-                    . " ($_->{CreateTime})"
+                "Version " . ( $_->{VersionNumber} || $_->{VersionID} )
             ),
         }
     } $VersionList->@*;
@@ -267,81 +234,12 @@ sub Run {
         PossibleNone => 1,
     );
 
-    #C0124
-    use Data::Dumper;
-    print STDERR "VersionSelection: " . Dumper($VersionSelection) . "\n";
-
-    # output version tree header
-    if ( $Param{ShowVersions} ) {
-        $LayoutObject->Block(
-            Name => 'Collapse',
-            Data => {
-                ConfigItemID     => $ConfigItemID,
-            },
-        );
-    }
-    else {
-        $LayoutObject->Block(
-            Name => 'Expand',
-            Data => {
-                ConfigItemID => $ConfigItemID,
-                VersionSelection => $VersionSelection,
-            },
-        );
-    }
-
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
-    # C0124
-    my $Counter = 1;
-
-    # output version tree
-    if ( $Param{ShowVersions} ) {
-
-        for my $VersionHash ( @{$VersionList} ) {
-
-            $Param{CreateByUserFullName} = $UserObject->UserName(
-                UserID => $VersionHash->{CreateBy},
-            );
-
-            $LayoutObject->Block(
-                Name => 'TreeItem',
-                Data => {
-                    %Param,
-                    %{$ConfigItem},
-                    %{$VersionHash},
-                    Count      => $Counter,
-                    InciSignal => $InciSignals{ $VersionHash->{InciStateType} },
-                    DeplSignal => $DeplSignals{ $VersionHash->{DeplState} },
-                    Active     => $VersionHash->{VersionID} eq $VersionID ? 'Active' : '',
-                },
-            );
-
-            $Counter++;
-        }
-    } else {
-
-        my $VersionHash = $Version;
-
-        $Param{CreateByUserFullName} = $UserObject->UserName(
-            UserID => $VersionHash->{CreateBy},
-        );
-
-        $LayoutObject->Block(
-            Name => 'TreeItem',
-            Data => {
-                %Param,
-                %{$ConfigItem},
-                %{$VersionHash},
-                Count      => $VersionNumber,
-                InciSignal => $InciSignals{ $VersionHash->{InciStateType} },
-                DeplSignal => $DeplSignals{ $VersionHash->{DeplState} },
-                Active     => $VersionHash->{VersionID} eq $VersionID ? 'Active' : '',
-            },
-        );
-    }
-    
+    $LayoutObject->Block(
+        Name => 'SelectionRow',
+        Data => {
+            VersionSelection => $VersionSelection,
+        },
+    );
 
     # output header
     my $Output = $LayoutObject->Header( Value => $ConfigItem->{Number} );
@@ -440,6 +338,9 @@ sub Run {
         }
 
     }
+
+    # get user object
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # get create & change user data
     for my $Key (qw(Create Change)) {

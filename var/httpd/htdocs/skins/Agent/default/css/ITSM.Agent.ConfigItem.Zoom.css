@@ -20,6 +20,23 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @media screen,projection,tv,handheld {
 
+    #SelectionRow {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    #VersionSelectionContainer {
+        float: right;
+        display: inline;
+    }
+
+    
+    
     .oooContentGrid {
         display: grid;
         margin-top: 24px;

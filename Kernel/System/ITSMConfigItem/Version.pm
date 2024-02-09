@@ -82,17 +82,19 @@ END_SQL
 
     # fetch the result
     my @VersionList;
+    my $VersionNumber = 1;
     while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
         push @VersionList,
             {
-                VersionID   => $Row[0],
-                Name        => $Row[1],
-                DeplStateID => $Row[2],
-                InciStateID => $Row[3],
-                CreateTime  => $Row[4],
-                CreateBy    => $Row[5],
-                ChangeTime  => $Row[6],
-                ChangeBy    => $Row[7],
+                VersionID     => $Row[0],
+                Name          => $Row[1],
+                DeplStateID   => $Row[2],
+                InciStateID   => $Row[3],
+                CreateTime    => $Row[4],
+                CreateBy      => $Row[5],
+                ChangeTime    => $Row[6],
+                ChangeBy      => $Row[7],
+                VersionNumber => $VersionNumber++,
             };
 
     }
