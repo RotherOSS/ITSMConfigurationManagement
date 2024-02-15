@@ -326,7 +326,32 @@ sub Run {
                 $PageShown = $Page;
             }
 
-            # TODO: Render page switch button
+        }
+
+        $PageShown //= @Pages ? $Pages[0] : undef;
+
+        if ( scalar @Pages == 1 ) {
+
+            $LayoutObject->Block(
+                Name => 'PageName',
+                Data => {
+                    PageName => $Pages[0]{Name},
+                },
+            );
+        }
+        else {
+            for my $Page (@Pages) {
+
+                $LayoutObject->Block(
+                    Name => 'PageLink',
+                    Data => {
+                        PageName     => $Page->{Name},
+                        ConfigItemID => $ConfigItem->{ConfigItemID},
+                        VersionID    => $VersionID,
+                        Selected     => $Page->{Name} eq $PageShown->{Name},
+                    },
+                );
+            }
         }
 
         if (@Pages) {

@@ -22,7 +22,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
     #SelectionRow {
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-between;
@@ -35,8 +35,39 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         display: inline;
     }
 
+    #PageSelection {
+        float: left;
+        display: inline flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: left;
+        width: 80%;
+    }
+
+    #PageSelection > a {
+        margin-right: 8px;
+    }
+
+    #PageSelection > p {
+        min-height: 12px;
+        padding: 3px 7px 6px;
+        line-height: 14px;
+        vertical-align: middle;
+        font-size: 11px;
+        position: relative;
+    }
+
+    #PageSelection button.PageSelectionButton {
+        width: auto;
+        max-width: 240px;
+        height: 22px;
+    }
     
-    
+    #PageSelection button.PageSelectionButton.Selected {
+        background-color: #0000fc;
+    }
+
     .oooContentGrid {
         display: grid;
         margin-top: 24px;

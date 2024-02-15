@@ -130,6 +130,16 @@
             </div>
 [% RenderBlockStart("SelectionRow") %]
             <div id="SelectionRow">
+                <div id="PageSelection">
+[% RenderBlockStart("PageName") %]
+                    <p>[% Translate(Data.PageName) | html %]</p>
+[% RenderBlockEnd("PageName") %]
+[% RenderBlockStart("PageLink") %]
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">
+                        <button class="oooS PageSelectionButton CallForAction[% IF Data.Disabled %] Disabled[% ELSIF Data.Selected %] Selected[% END %]">[% Translate(Data.PageName) | html %]</button>
+                    </a>
+[% RenderBlockEnd("PageLink") %]
+                </div>
                 <div class="Field" id="VersionSelectionContainer">
                     [% Data.VersionSelection %]
                 </div>
