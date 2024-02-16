@@ -155,6 +155,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     width: 220px;
     white-space: nowrap;
     padding-left: 24px;
+    box-sizing: border-box;
 }
 
 #VersionSelection {
@@ -165,10 +166,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     display: inline-block;
     height: 32px;
     margin-top: -1px;
+    width: 100%;
 }
 
 #VersionSelectionContainer > label {
-    left: calc( -100% + 32px );
+    left: calc( -100% + 16px );
     font-size: 14px;
     top: 1px;
 }
@@ -192,14 +194,27 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     background-color: #fff;
 }
 
+div.InputField_ListContainer {
+    right: 4px;
+    max-width: max-content;
+    margin-top: -20px;
+}
+
 div.InputField_TreeContainer {
     margin-top: 16px !important;
     margin-bottom: 16px !important;
+    max-width: max-content !important;
+    max-height: max-content !important;
 }
 
 .jstree-anchor {
     margin: 8px 0px 8px 24px !important;
+    padding-right: 24px;
     font-size: 12px !important;
+}
+
+.jstree-node {
+    min-height: 32px;
 }
 
 .jstree-node > .jstree-wholerow {
