@@ -132,7 +132,7 @@
             <div id="SelectionRow">
                 <div id="PageSelection">
 [% RenderBlockStart("PageName") %]
-                    <p>[% Translate(Data.PageName) | html %]</p>
+                    <h2>[% Translate(Data.PageName) | html %]</h2>
 [% RenderBlockEnd("PageName") %]
 [% RenderBlockStart("PageLink") %]
                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">

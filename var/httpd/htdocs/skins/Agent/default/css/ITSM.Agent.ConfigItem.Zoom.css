@@ -49,13 +49,12 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         margin-right: 8px;
     }
 
-    #PageSelection > p {
-        min-height: 12px;
-        padding: 3px 7px 6px;
-        line-height: 14px;
-        vertical-align: middle;
-        font-size: 11px;
-        position: relative;
+    #PageSelection > h2 {
+        margin-bottom: 0px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #00023c;
+        padding-left: 7px;
     }
 
     #PageSelection button.PageSelectionButton {
