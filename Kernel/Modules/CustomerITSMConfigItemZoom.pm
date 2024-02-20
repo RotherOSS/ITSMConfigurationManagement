@@ -287,10 +287,11 @@ sub Run {
             my $VersionSelection = $LayoutObject->BuildSelection(
                 Data         => \@VersionSelectionData,
                 Name         => 'VersionSelection',
-                Class        => 'Modernize',
+                Class        => 'Modernize AlignDropdownRight',
                 SelectedID   => $VersionID ? $BaseLink . "VersionID=$VersionID" : undef,
                 PossibleNone => 1,
             );
+
             $LayoutObject->Block(
                 Name => 'Versions',
                 Data => {
