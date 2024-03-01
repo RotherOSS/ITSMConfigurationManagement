@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - a91d81cefdca00286973c582ab7b27e93cf6d795 - Kernel/Modules/AdminACL.pm
+# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Modules/AdminACL.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -33,6 +33,15 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    # set pref for columns key
+    $Self->{PrefKeyIncludeInvalid} = 'IncludeInvalid' . '-' . $Self->{Action};
+
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    $Self->{IncludeInvalid} = $Preferences{ $Self->{PrefKeyIncludeInvalid} };
+
     return $Self;
 }
 
@@ -42,6 +51,17 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
+    $Param{IncludeInvalid} = $ParamObject->GetParam( Param => 'IncludeInvalid' );
+
+    if ( defined $Param{IncludeInvalid} ) {
+        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Self->{PrefKeyIncludeInvalid},
+            Value  => $Param{IncludeInvalid},
+        );
+
+        $Self->{IncludeInvalid} = $Param{IncludeInvalid};
+    }
 # RotherOSS / ITSMConfigurationManagement
     $Param{ObjectType} = $ParamObject->GetParam( Param => 'ObjectType' ) || 'Ticket';
 # EO ITSMConfigurationManagement
@@ -453,8 +473,11 @@ sub Run {
             );
 
             my %DeleteResult = (
+# Rother OSS / ITSMConfigurationManagement
+#                 Success => $Success,
                 Success    => $Success,
                 ObjectType => $Param{ObjectType},
+# EO ITSMConfigurationManagement
             );
 
             if ( !$Success ) {
@@ -651,6 +674,14 @@ sub _ShowOverview {
         }
     }
 
+    # restrict valid state if needed
+    my %ValidList   = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
+    my %ValidLookup = reverse %ValidList;
+    my @ValidIDs    = ( $ValidLookup{'valid'}, $ValidLookup{'invalid-temporarily'} );
+    if ( $Self->{IncludeInvalid} ) {
+        push @ValidIDs, $ValidLookup{'invalid'};
+    }
+
 # RotherOSS / ITSMConfigurationManagement
     $Param{ObjectTypeSelectionStrg} = $LayoutObject->BuildSelection(
         Name          => 'ObjectType',
@@ -666,14 +697,15 @@ sub _ShowOverview {
 # EO ITSMConfigurationManagement
 
     # get ACL list
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLList = $ACLObject->ACLList( UserID => $Self->{UserID} );
     my $ACLList = $ACLObject->ACLList(
+# RotherOSS / ITSMConfigurationManagement
+#         UserID   => $Self->{UserID},
+#         ValidIDs => \@ValidIDs,
         UserID      => $Self->{UserID},
+        ValidIDs    => \@ValidIDs,
         ObjectTypes => [$Param{ObjectType}],
-    );
 # EO ITSMConfigurationManagement
-
+    );
 
     if ( IsHashRefWithData($ACLList) ) {
 
@@ -709,6 +741,8 @@ sub _ShowOverview {
         );
     }
 
+    $Param{IncludeInvalidChecked} = $Self->{IncludeInvalid} ? 'checked' : '';
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminACL',
         Data         => \%Param,
@@ -738,12 +772,13 @@ sub _ShowEdit {
     }
 
     # get valid list
-    my %ValidList = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
+    my %ValidList   = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
+    my %ValidLookup = reverse %ValidList;
 
     $Param{ValidOption} = $LayoutObject->BuildSelection(
         Data       => \%ValidList,
         Name       => 'ValidID',
-        SelectedID => $ACLData->{ValidID} || $ValidList{valid},
+        SelectedID => $ACLData->{ValidID} || $ValidLookup{'invalid-temporarily'},
         Class      => 'Modernize Validate_Required ' . ( $Param{Errors}->{'ValidIDInvalid'} || '' ),
     );
 

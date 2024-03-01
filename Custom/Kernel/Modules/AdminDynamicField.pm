@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 8a3e8b2b8c2516afbc9b7a974128dee144725676 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -38,7 +38,20 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    return bless {%Param}, $Type;
+    # allocate new hash for object
+    my $Self = {%Param};
+    bless( $Self, $Type );
+
+    # set pref for columns key
+    $Self->{PrefKeyIncludeInvalid} = 'IncludeInvalid' . '-' . $Self->{Action};
+
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    $Self->{IncludeInvalid} = $Preferences{ $Self->{PrefKeyIncludeInvalid} };
+
+    return $Self;
 }
 
 sub Run {
@@ -146,6 +159,19 @@ sub _ShowOverview {
     my $FieldTypeConfig    = $ConfigObject->Get('DynamicFields::Driver');
     my $ObjectTypeFilter   = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ObjectTypeFilter' ) || '';
     my $NamespaceFilter    = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'NamespaceFilter' )  || '';
+
+    $Param{IncludeInvalid} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'IncludeInvalid' );
+
+    if ( defined $Param{IncludeInvalid} ) {
+        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Self->{PrefKeyIncludeInvalid},
+            Value  => $Param{IncludeInvalid},
+        );
+
+        $Self->{IncludeInvalid} = $Param{IncludeInvalid};
+    }
+    $Param{IncludeInvalidChecked} = $Self->{IncludeInvalid} ? 'checked' : '';
 
     my $Output = join '',
         $LayoutObject->Header,
@@ -391,7 +417,7 @@ sub _ShowOverview {
     my $DynamicFieldsListFiltered = $DynamicFieldObject->DynamicFieldList(
         ObjectType => $ObjectTypeFilterArrayRef,
         Namespace  => $NamespaceFilter,
-        Valid      => 0,
+        Valid      => $Self->{IncludeInvalid} ? 0 : 1,
     );
 
     my $FilterStrg = '';

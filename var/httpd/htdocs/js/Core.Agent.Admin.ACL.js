@@ -4,7 +4,7 @@
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 // Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 // --
-// $origin: otobo - 55126f4ab25373dded7533aeb0d7cd7743e7e7a9 - var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
+// $origin: otobo - 9748aa0dc202dbebf63272b975b01f0330543016 - var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
 // --
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
@@ -59,6 +59,12 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
         if (Core.Config.Get('Subaction') === 'ACLEdit') {
             TargetNS.InitACLEdit();
         }
+
+        // init checkbox to include invalid elements
+        $('input#IncludeInvalid').off('change').on('change', function () {
+            var URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';IncludeInvalid=' + ( $(this).is(':checked') ? 1 : 0 );
+            window.location.href = URL;
+        });
 // RotherOSS / ITSMConfigurationManagement
 
         $('#ObjectType').on('change', function() {
@@ -99,10 +105,12 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                    Label: Core.Language.Translate('Delete'),
                    Function: function () {
                        var Data = {
-                                Action: 'AdminACL',
-                                Subaction: 'ACLDelete',
+                               Action: 'AdminACL',
+                               Subaction: 'ACLDelete',
+                               ID: ACLID
+// Rother OSS / ITSMConfigurationManagement
                                 ObjectType: $('[name=ObjectType]').val(),
-                                ID: ACLID
+// EO ITSMConfigurationManagement
                            };
 
                        // Change the dialog to an ajax loader
@@ -119,8 +127,11 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                            }
 
                            Core.App.InternalRedirect({
+// Rother OSS / ITSMConfigurationManagement
+//                                Action: Data.Action
                                Action: Data.Action,
                                ObjectType: Data.ObjectType
+// EO ITSMConfigurationManagement
                            });
                        }, 'json');
                    }

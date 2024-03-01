@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 57d823f26671a8d3e2d918e9c380ea26d040f4b3 - Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+# $origin: otobo - 819ae6f24ca61ebf1eaf082ec7784bda8b8e3845 - Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software

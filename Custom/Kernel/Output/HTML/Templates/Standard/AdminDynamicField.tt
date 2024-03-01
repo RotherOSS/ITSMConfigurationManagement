@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 8a3e8b2b8c2516afbc9b7a974128dee144725676 - Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+# $origin: otobo - 790f35261fc2d774499facde73214dd22bb72226 - Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -33,6 +33,15 @@
 
     <div class="SidebarColumn">
 
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Filter by valid state") | html %]</h2>
+            </div>
+            <div class="Content">
+                <input type="checkbox" id="IncludeInvalid" name="IncludeInvalid" value="1" title="[% Translate("Include invalid dynamic fields") | html %]" [% Data.IncludeInvalidChecked | html %]/>
+                <label for="IncludeInvalid">[% Translate("Include invalid dynamic fields") | html %]</label>
+            </div>
+        </div>
         <div class="WidgetSimple">
             <div class="Header">
                 <h2><label for="FilterDynamicFields">[% Translate("Filter for Dynamic Fields") | html %]</label></h2>

@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 739b3be62b71991d6571cc1f091e6d96f6bff498 - Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -29,6 +29,15 @@
     [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
     <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Filter by valid state") | html %]</h2>
+            </div>
+            <div class="Content">
+                <input type="checkbox" id="IncludeInvalid" name="IncludeInvalid" value="1" title="[% Translate("Include invalid ACLs") | html %]" [% Data.IncludeInvalidChecked | html %]/>
+                <label for="IncludeInvalid">[% Translate("Include invalid ACLs") | html %]</label>
+            </div>
+        </div>
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
