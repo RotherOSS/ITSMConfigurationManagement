@@ -85,6 +85,8 @@ sub new {
         'IsCustomerInterfaceCapable'   => 1,
         'IsHiddenInTicketInformation'  => 0,
         'IsReferenceField'             => 1,
+        'IsSetCapable'                 => 1,
+        'SetsDynamicContent'           => 1,
     };
 
     $Self->{ReferencedObjectType} = 'ITSMConfigItem';
@@ -435,8 +437,10 @@ sub SearchObjects {
 
     # return a list of config item IDs
     return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
-        Limit  => $Param{MaxResults},
-        Result => 'ARRAY',
+        Limit   => $Param{MaxResults},
+        Result  => 'ARRAY',
+        SortBy  => 'Number',
+        OrderBy => 'Down',
         %SearchParams,
     );
 }
