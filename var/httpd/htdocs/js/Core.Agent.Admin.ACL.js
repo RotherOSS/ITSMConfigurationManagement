@@ -107,7 +107,7 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                        var Data = {
                                Action: 'AdminACL',
                                Subaction: 'ACLDelete',
-                               ID: ACLID
+                               ID: ACLID,
 // Rother OSS / ITSMConfigurationManagement
                                 ObjectType: $('[name=ObjectType]').val(),
 // EO ITSMConfigurationManagement
