@@ -170,8 +170,22 @@ sub PageRender {
 sub _SectionRender {
     my ( $Self, %Param ) = @_;
 
+    if ( $Param{Section}{Type} ) {
+        if ( $Param{Section}{Type} eq 'ConfigItemLinks' ) {
+            return $Self->_RenderCILinks(%Param);
+        }
+        elsif ( $Param{Section}{Type} ne 'DynamicFields' ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Invalid section type '$Param{Section}{Type}'!",
+            );
+
+            return;
+        }
+    }
+
     # Get HTML from additional modules
-    if ( $Param{Section}{Module} ) {
+    elsif ( $Param{Section}{Module} ) {
 
         # TODO: handle non dynamic field stuff
         # my $Object = $MainObject->Require( $ConfigObject->Get('ModuleMap')->{ $Param{Section}{Module} } ) ...;
@@ -341,6 +355,84 @@ sub _SectionRender {
             }
 
             $DynamicFieldList = 0;
+        }
+    }
+
+    return 1;
+}
+
+sub _RenderCILinks {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+        # TODO: What about versions
+        ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+        # TODO: We probably need both
+        Direction    => 'Source',
+        UserID       => 1,
+    );
+
+    return if !$LinkedConfigItems;
+
+    my %LinkedClasses;
+
+    for my $Link ( $LinkedConfigItems->@* ) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $Link->{ConfigItemID},
+        );
+
+        # TODO: Think about sorting
+        push @{ $LinkedClasses{ $ConfigItem->{Class} } }, {
+            Name         => $ConfigItem->{Name},
+            ConfigItemID => $Link->{ConfigItemID},
+        };
+    }
+
+    # TODO: Access rights; classes for agents; for customers?
+    # TODO: Configuration options for the tile; class restrictions, directions, ?
+
+    if ( $Param{Section}{Header} ) {
+        $Param{LayoutObject}->Block(
+            Name => 'HeaderRow',
+            Data => {
+                Header => $Param{Section}{Header},
+            }
+        );
+    }
+
+    my $Action = $Param{LayoutObject}{UserType} && $Param{LayoutObject}{UserType} eq 'Customer'
+        ? 'CustomerITSMConfigItemZoom'
+        : 'AgentITSMConfigItemZoom';
+
+    for my $Class ( sort keys %LinkedClasses ) {
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayRow',
+            Data => {
+                Widths => '1fr 1fr',
+            }
+        ); 
+
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayCell',
+            Data => {
+                Label => $Class,
+                Type  => 'Label',
+            },
+        );
+
+        for my $CI ( $LinkedClasses{$Class}->@* ) {
+            $Param{LayoutObject}->Block(
+                Name => 'FieldDisplayCell',
+                Data => {
+                    Title      => $CI->{Name},
+                    Value      => $CI->{Name},
+                    Link       => $Param{LayoutObject}{Baselink} . "Action=$Action;ConfigItemID=$CI->{ConfigItemID}",
+                    Type       => 'ValueLink',
+                    GridColumn => 'grid-column-start:2',
+                },
+            );
         }
     }
 

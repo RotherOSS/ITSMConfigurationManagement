@@ -897,7 +897,15 @@ sub DefinitionCheck {
             );
         }
 
-        if ( !$Section->{Content} ) {
+        if ( $Section->{Type} && $Section->{Type} ne 'DynamicFields' ) {
+            if ( !any { $Section->{Type} eq $_ } qw/ConfigItemLinks/ ) {
+                return $ReturnError->(
+                    Translatable(q{Invalid type in section %s.}),
+                    $SectionName,
+                );
+            };
+        }
+        elsif ( !$Section->{Content} ) {
             return $ReturnError->(
                 Translatable(q{Key 'Content' is missing in section %s.}),
                 $SectionName,

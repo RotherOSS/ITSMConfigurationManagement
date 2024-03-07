@@ -320,10 +320,10 @@ sub SyncLinkTable {
     $DBObject->Do(
         SQL => <<'END_SQL',
 DELETE FROM configitem_link
-  WHERE source_configitem_version_id = ?
-    AND dynamic_field_id             = ?
+  WHERE source_configitem_id = ?
+    AND dynamic_field_id     = ?
 END_SQL
-        Bind => [ \$Param{SourceConfigItemVersionID}, \$DynamicFieldID ],
+        Bind => [ \$Param{SourceConfigItemID}, \$DynamicFieldID ],
     );
 
     # Nothing to do when there is no new value
@@ -343,12 +343,12 @@ END_SQL
         SQL => <<'END_SQL',
 INSERT INTO configitem_link (
     link_type_id,
-    source_configitem_version_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
+    source_configitem_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
     create_time, create_by
   )
   VALUES (1, ?, ?, ?, ?, current_timestamp, 1 )
 END_SQL
-        Bind => [ \( $Param{SourceConfigItemVersionID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ) ],
+        Bind => [ $Param{SourceConfigItemID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ],
     );
 
     # assume success
@@ -398,14 +398,7 @@ sub RebuildLinkTable {
         ObjectType => 'ITSMConfigItem'
     );
     my @DynamicFields =
-        grep {
-            $_->{Config}->{ReferencedObjectType} eq 'ITSMConfigItem'
-            ||
-            $_->{Config}->{ReferencedObjectType} eq 'ITSMConfigItemVersion'
-        }
-        grep { $_->{Config}->{ReferencedObjectType} }
-        grep { $_->{Config} }
-        grep { $_->{FieldType} eq 'Reference' }
+        grep { $_->{FieldType} =~ /^ConfigItem/ }
         $CompleteDynamicFieldList->@*;
 
     if ( !@DynamicFields ) {
@@ -421,12 +414,12 @@ sub RebuildLinkTable {
     my %IsConfigItem = map
         { $_->{ID} => 1 }
         grep
-        { $_->{Config}->{ReferencedObjectType} eq 'ITSMConfigItem' }
+        { $_->{FieldType} eq 'ConfigItem' }
         @DynamicFields;
     my %IsConfigItemVersion = map
         { $_->{ID} => 1 }
         grep
-        { $_->{Config}->{ReferencedObjectType} eq 'ITSMConfigItemVersion' }
+        { $_->{FieldType} eq 'ConfigItemVersion' }
         @DynamicFields;
 
     # Get the relevant dynamic field values.
@@ -442,10 +435,11 @@ sub RebuildLinkTable {
         my $Binds = [ map { \$_ } @DynamicFieldIDs ];    # the special case \(@Array) is too strange
         $Rows = $DBObject->SelectAll(
             SQL => << "END_SQL",
-SELECT id, field_id, object_id, value_int
-  FROM dynamic_field_value
-  WHERE field_id IN ( $PlaceHolders )
-  ORDER by id
+SELECT dfv.id, dfv.field_id, v.configitem_id, dfv.value_int
+  FROM dynamic_field_value dfv
+  INNER JOIN configitem_version v ON dfv.object_id = v.id
+  WHERE dfv.field_id IN ( $PlaceHolders )
+  ORDER by dfv.id
 END_SQL
             Bind => $Binds,
         );
@@ -453,7 +447,7 @@ END_SQL
 
     # prepare the dynamic field values so that it can be used in a batch insert
     my @DynamicFieldIDs            = map { $_->[1] } $Rows->@*;
-    my @SourceConfigItemVersionIDs = map { $_->[2] } $Rows->@*;
+    my @SourceConfigItemIDs        = map { $_->[2] } $Rows->@*;
     my @TargetConfigItemIDs        = map { $IsConfigItem{ $_->[1] }        ? $_->[3] : undef } $Rows->@*;
     my @TargetConfigItemVersionIDs = map { $IsConfigItemVersion{ $_->[1] } ? $_->[3] : undef } $Rows->@*;
 
@@ -462,7 +456,7 @@ END_SQL
         SQL => <<'END_SQL',
 INSERT INTO configitem_link (
     link_type_id,
-    source_configitem_version_id,
+    source_configitem_id,
     target_configitem_id,
     target_configitem_version_id,
     dynamic_field_id,
@@ -473,7 +467,7 @@ INSERT INTO configitem_link (
 END_SQL
         Bind => [
             1,
-            \@SourceConfigItemVersionIDs,
+            \@SourceConfigItemIDs,
             \@TargetConfigItemIDs,
             \@TargetConfigItemVersionIDs,
             \@DynamicFieldIDs,

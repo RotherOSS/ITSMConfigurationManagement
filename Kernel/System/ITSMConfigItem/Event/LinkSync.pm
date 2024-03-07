@@ -111,7 +111,7 @@ sub Run {
 
     return 1 unless $DynamicFieldConfig;
     return 1 unless $DynamicFieldConfig->{FieldType};
-    return 1 unless $DynamicFieldConfig->{FieldType} eq 'Reference';
+    return 1 unless $DynamicFieldConfig->{FieldType} =~ /^ConfigItem/;
 
     # This event module care only about references to other config items
     return 1 unless $DynamicFieldConfig->{Config};
@@ -123,8 +123,8 @@ sub Run {
 
     return $ConfigItemObject->SyncLinkTable(
         DynamicFieldConfig        => $DynamicFieldConfig,
-        SourceConfigItemID        => $Param{Data}->{ConfigItemID},          # currently not used
-        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},
+        SourceConfigItemID        => $Param{Data}->{ConfigItemID},
+        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},   # currently not used
         OldValue                  => $Param{Data}->{OldValue},
         Value                     => $Param{Data}->{Value},
     );
