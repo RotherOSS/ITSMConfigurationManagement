@@ -32,6 +32,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::ITSMConfigItem',
 );
 
 =head1 NAME
@@ -367,11 +368,13 @@ sub _RenderCILinks {
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+
         # TODO: What about versions
         ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+
         # TODO: We probably need both
-        Direction    => 'Source',
-        UserID       => 1,
+        Direction => 'Source',
+        UserID    => 1,
     );
 
     return if !$LinkedConfigItems;
@@ -412,7 +415,7 @@ sub _RenderCILinks {
             Data => {
                 Widths => '1fr 1fr',
             }
-        ); 
+        );
 
         $Param{LayoutObject}->Block(
             Name => 'FieldDisplayCell',

@@ -27,7 +27,7 @@ use List::Util qw(first);
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -488,7 +488,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # convert to lower case
-        my $DeplStateColor = (lc $GeneralCatalogPreferences{Color}) =~ s/[^0-9a-f]//msgr;
+        my $DeplStateColor = ( lc $GeneralCatalogPreferences{Color} ) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "
@@ -706,7 +706,7 @@ sub Run {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     $Param{OrderBy} = $Param{OrderBy} || 'Up';
-    $Param{SortBy}  = $Param{SortBy} || 'Number';
+    $Param{SortBy}  = $Param{SortBy}  || 'Number';
 
     my $ConfigItemData = scalar @ConfigItemBox;
     if ($ConfigItemData) {

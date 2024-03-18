@@ -26,7 +26,7 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -264,9 +264,9 @@ sub Run {
 
             # collect dynamic field search params
             my %DFSearchParams;
-            if ( IsHashRefWithData($PermissionConditionConfig->{DynamicFieldValues}) ) {
+            if ( IsHashRefWithData( $PermissionConditionConfig->{DynamicFieldValues} ) ) {
                 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-                my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+                my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
                 DYNAMICFIELD:
                 for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
                     next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};
@@ -285,8 +285,8 @@ sub Run {
             }
 
             my %FilterSearch = (
-                Classes                                                                  => $PermissionConditionConfig->{Classes},
-                DeplStates                                                               => $PermissionConditionConfig->{DeploymentStates},
+                Classes    => $PermissionConditionConfig->{Classes},
+                DeplStates => $PermissionConditionConfig->{DeploymentStates},
                 %DFSearchParams,
                 "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
                     Equals => $Self->{CustomerID},
@@ -605,7 +605,7 @@ sub Run {
         Output => 1,
     );
 
-    if (defined $ConfigObject->Get("CustomerFrontend::Module")->{"CustomerITSMConfigItemSearch"}) {
+    if ( defined $ConfigObject->Get("CustomerFrontend::Module")->{"CustomerITSMConfigItemSearch"} ) {
         $LayoutObject->Block(
             Name => 'SearchBox',
         );

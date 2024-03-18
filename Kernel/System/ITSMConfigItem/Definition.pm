@@ -40,7 +40,7 @@ use List::Util qw(any);
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -903,7 +903,7 @@ sub DefinitionCheck {
                     Translatable(q{Invalid type in section %s.}),
                     $SectionName,
                 );
-            };
+            }
         }
         elsif ( !$Section->{Content} ) {
             return $ReturnError->(

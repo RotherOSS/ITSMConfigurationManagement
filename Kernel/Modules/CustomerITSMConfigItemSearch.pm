@@ -26,7 +26,7 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -228,7 +228,7 @@ sub Run {
             push @ArraySearchParams, 'InciStateIDs';
         }
 
-        for my $SearchParamArray ( @ArraySearchParams ) {
+        for my $SearchParamArray (@ArraySearchParams) {
 
             # fetch multi value params
             my @Array = $ParamObject->GetArray( Param => $SearchParamArray );
@@ -283,9 +283,15 @@ sub Run {
                 if ( defined $SearchParameter ) {
 
                     # append search params to links
-                    if ( IsArrayRefWithData($SearchParameter->{Parameter}{Equals}) ) {
-                        $LinkPage .= join( '', map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@* );
-                        $LinkSort .= join( '', map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@* );
+                    if ( IsArrayRefWithData( $SearchParameter->{Parameter}{Equals} ) ) {
+                        $LinkPage .= join(
+                            '',
+                            map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@*
+                        );
+                        $LinkSort .= join(
+                            '',
+                            map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@*
+                        );
                     }
                     else {
                         $LinkPage .= ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $SearchParameter->{Parameter}{Equals} );
@@ -376,9 +382,9 @@ sub Run {
         $SearchConfig{Name}   = $GetParam{Name}   ? $GetParam{Name}   : undef;
 
         # collect dynamic field search params
-        if ( IsHashRefWithData($PermissionConditionConfig->{DynamicFieldValues}) ) {
+        if ( IsHashRefWithData( $PermissionConditionConfig->{DynamicFieldValues} ) ) {
             my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-            my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+            my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
             DYNAMICFIELD:
             for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
                 next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};
@@ -758,7 +764,7 @@ sub Run {
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'CustomerITSMConfigItemSearch',
-        Data => {
+        Data         => {
             %PageNav,
         },
     );

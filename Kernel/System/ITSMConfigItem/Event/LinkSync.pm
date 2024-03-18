@@ -124,7 +124,7 @@ sub Run {
     return $ConfigItemObject->SyncLinkTable(
         DynamicFieldConfig        => $DynamicFieldConfig,
         SourceConfigItemID        => $Param{Data}->{ConfigItemID},
-        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},   # currently not used
+        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},    # currently not used
         OldValue                  => $Param{Data}->{OldValue},
         Value                     => $Param{Data}->{Value},
     );

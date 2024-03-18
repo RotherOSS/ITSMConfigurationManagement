@@ -19,7 +19,7 @@ package Kernel::Modules::AgentITSMConfigItemSearch;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -734,7 +734,7 @@ sub Run {
 
         # if no attribute is shown, show configitem number
         if ( !$Self->{Profile} ) {
-            if ( @SearchAttributes ) {
+            if (@SearchAttributes) {
                 push @ProfileAttributes, @SearchAttributes;
             }
             else {
