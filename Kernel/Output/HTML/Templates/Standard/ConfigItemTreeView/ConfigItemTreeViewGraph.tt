@@ -48,7 +48,6 @@
                 </div>
             </div>
 [% RenderBlockEnd("OriginElement") %]
-=======
     </div>
 
     <div class="ChildContainer">

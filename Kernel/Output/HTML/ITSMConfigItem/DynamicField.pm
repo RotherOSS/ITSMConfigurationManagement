@@ -459,7 +459,6 @@ sub _SectionRender {
         return 1;
     }
     elsif ( $Param{Section}{Type} && $Param{Section}{Type} eq 'Module' ) {
->>>>>>> 43d1365 (Added description to configitem version.)
 
         # TODO: handle non dynamic field stuff
         # my $Object = $MainObject->Require( $ConfigObject->Get('ModuleMap')->{ $Param{Section}{Module} } ) ...;
