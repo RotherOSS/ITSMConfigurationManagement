@@ -293,11 +293,11 @@ sub HistoryAdd {
     delete $Self->{Cache}->{CIVersions}->{ $Param{ConfigItemID} };
 
     # shorten the comment if it is bigger than max length
-    if ( length( $Param{Comment} ) > 255 ) {
+    if ( length( $Param{Comment} ) > 191 ) {
 
         my ( $Field, $Old, $New ) = split /%%/, $Param{Comment}, 3;
 
-        my $Length = int( ( 255 - length($Field) - 4 ) / 2 );
+        my $Length = int( ( 191 - length($Field) - 4 ) / 2 );
 
         if ( length($Old) > $Length ) {
             my $Index = int( $Length / 2 );

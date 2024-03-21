@@ -363,7 +363,7 @@ sub SearchAttributesGet {
             Input => {
                 Type      => 'Text',
                 Size      => 80,
-                MaxLength => 255,
+                MaxLength => 191,
             },
         },
         {
@@ -372,7 +372,7 @@ sub SearchAttributesGet {
             Input => {
                 Type      => 'Text',
                 Size      => 80,
-                MaxLength => 255,
+                MaxLength => 191,
             },
         },
         {
