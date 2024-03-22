@@ -1818,35 +1818,25 @@ sub ObjectAttributesGet {
     $Param{Version} //= 1;
 
     my %ConfigItemAttributes = (
-        ConfigItemID     => 1,
-        Number           => 1,
-        ClassID          => 1,
-        Class            => 1,
-        LastVersionID    => 1,
-        CurDeplStateID   => 1,
-        CurDeplState     => 1,
-        CurDeplStateType => 1,
-        CurInciStateID   => 1,
-        CurInciState     => 1,
-        CurInciStateType => 1,
+        ConfigItemID   => 1,
+        Number         => 1,
+        ClassID        => 1,
+        Classes        => 1,
+        CurDeplStateID => 1,
+        CurDeplStates  => 1,
+        CurInciStateID => 1,
+        CurInciStates  => 1,
     );
 
     # if requested, set version attributes
     if ( $Param{Version} ) {
         %ConfigItemAttributes = (
             %ConfigItemAttributes,
-            VersionID     => 1,
-            Name          => 1,
-            DeplStateID   => 1,
-            DeplState     => 1,
-            DeplStateType => 1,
-            InciStateID   => 1,
-            InciState     => 1,
-            InciStateType => 1,
-            CreateTime    => 1,
-            CreateBy      => 1,
-            ChangeTime    => 1,
-            ChangeBy      => 1,
+            Name        => 1,
+            DeplStateID => 1,
+            DeplStates  => 1,
+            InciStateID => 1,
+            InciStates  => 1,
         );
     }
 
