@@ -31,6 +31,7 @@ use Kernel::System::VariableCheck qw(IsHashRefWithData IsArrayRefWithData);
 our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::ITSMConfigItem',
 );
@@ -174,6 +175,9 @@ sub _SectionRender {
     if ( $Param{Section}{Type} ) {
         if ( $Param{Section}{Type} eq 'ConfigItemLinks' ) {
             return $Self->_RenderCILinks(%Param);
+        }
+        elsif ( $Param{Section}{Type} eq 'ReferencedSection' ) {
+            return $Self->_RenderReferencedSection(%Param);
         }
         elsif ( $Param{Section}{Type} ne 'DynamicFields' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -449,6 +453,48 @@ sub _RenderCILinks {
     }
 
     return 1;
+}
+
+sub _RenderReferencedSection {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # fetch config of referenced field
+    my $ReferencedFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+        Name => $Param{Section}{ReferenceField},
+    );
+    return unless IsHashRefWithData($ReferencedFieldConfig);
+
+    # fetch config item depending on field type
+    my %ConfigItemGetParams = (
+        DynamicFields => 1,
+    );
+    if ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
+        $ConfigItemGetParams{ConfigItemID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+    }
+    elsif ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
+        $ConfigItemGetParams{VersionID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+    }
+
+    # get referenced config item
+    my $ReferencedConfigItem = $ConfigItemObject->ConfigItemGet(
+        %ConfigItemGetParams,
+    );
+    return unless IsHashRefWithData($ReferencedConfigItem);
+
+    # get definition of referenced config item and pass it on to _SectionRender
+    my $ReferencedCIDefinition = $ConfigItemObject->DefinitionGet(
+        DefinitionID => $ReferencedConfigItem->{DefinitionID},
+    );
+    return unless $ReferencedCIDefinition->{DefinitionID};
+
+    return $Self->_SectionRender(
+        ConfigItem   => $ReferencedConfigItem,
+        Definition   => $ReferencedCIDefinition,
+        Section      => $ReferencedCIDefinition->{DefinitionRef}{Sections}{ $Param{Section}{SectionName} },
+        LayoutObject => $Param{LayoutObject},
+    );
 }
 
 1;
