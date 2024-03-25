@@ -90,11 +90,11 @@ END_SQL
                 Name          => $Row[1],
                 DeplStateID   => $Row[2],
                 InciStateID   => $Row[3],
-                Description => $Row[4],
-                CreateTime    => $Row[4],
-                CreateBy      => $Row[5],
-                ChangeTime    => $Row[6],
-                ChangeBy      => $Row[7],
+                Description   => $Row[4],
+                CreateTime    => $Row[5],
+                CreateBy      => $Row[6],
+                ChangeTime    => $Row[7],
+                ChangeBy      => $Row[8],
                 VersionNumber => $VersionNumber++,
             };
 
