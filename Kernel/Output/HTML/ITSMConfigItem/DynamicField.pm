@@ -213,6 +213,34 @@ sub _SectionRender {
         elsif ( $Param{Section}{Type} eq 'ReferencedSection' ) {
             return $Self->_RenderReferencedSection(%Param);
         }
+        elsif ( $Param{Section}{Type} eq 'Description' ) {
+
+            # render description richtext editor
+            $Param{LayoutObject}->Block(
+                Name => 'FieldDisplayRow',
+                Data => {
+                    Widths => '1fr',
+                },
+            );
+
+            $Param{LayoutObject}->Block(
+                Name => 'FieldDisplayCell',
+                Data => {
+                    Label => 'Description',
+                    Type  => 'Label',
+                },
+            );
+
+            $Param{LayoutObject}->Block(
+                Name => 'FieldDisplayCell',
+                Data => {
+                    ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+                    Type         => 'Iframe',
+                },
+            );
+
+            return 1;
+        }
         elsif ( $Param{Section}{Type} ne 'DynamicFields' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',

@@ -1061,10 +1061,121 @@ sub Run {
         },
     );
 
+    # generate base url
+    my $URL = "Action=PictureUpload;FormID=$Self->{FormID};ContentID=";
+
+    # replace links to inline images in html content
+    my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
+        ConfigItemID => $ConfigItem->{ConfigItemID},
+    );
+
+    # fetch attachment data and store in hash for RichTextDocumentServe
+    my %Attachments;
+    FILENAME:
+    for my $Filename ( @AttachmentList ) {
+        my $FileData = $ConfigItemObject->ConfigItemAttachmentGet(
+            ConfigItemID => $ConfigItem->{ConfigItemID},
+            Filename     => $Filename,
+        );
+
+        # if ( $FileData->{Disposition} eq 'inline' ) {
+
+            $Attachments{$FileData->{Preferences}{ContentID}} = $FileData;
+            $Attachments{$FileData->{Preferences}{ContentID}}->{ContentID} = $Attachments{$FileData->{Preferences}{ContentID}}{Preferences}{ContentID};
+
+            # add uploaded file to upload cache
+            $UploadCacheObject->FormIDAddFile(
+                FormID      => $Self->{FormID},
+                Filename    => $FileData->{Filename},
+                Content     => $FileData->{Content},
+                ContentID   => $FileData->{Preferences}{ContentID},
+                ContentType => $FileData->{ContentType} . '; name="' . $FileData->{Filename} . '"',
+                Disposition => $FileData->{Disposition},
+            );
+        # }
+    }
+
+    # needed to provide necessary params for RichTextDocumentServe
+    my $FieldContent = $ConfigItem->{Description};
+    my %Data = (
+        Content            => $FieldContent,
+        ContentType        => 'text/html; charset="utf-8"',
+        Disposition        => 'inline',
+    );
+
+    # reformat rich text document to have correct charset and links to
+    # inline documents
+    %Data = $LayoutObject->RichTextDocumentServe(
+        Data               => \%Data,
+        URL                => $URL,
+        Attachments        => \%Attachments,
+        # LoadExternalImages => $Param{LoadExternalImages},
+    );
+
+    $FieldContent = $Data{Content};
+
+    # remove active html content (scripts, applets, etc...)
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my %SafeContent = $HTMLUtilsObject->Safety(
+        String       => $FieldContent,
+        NoApplet     => 1,
+        NoObject     => 1,
+        NoEmbed      => 1,
+        NoIntSrcLoad => 0,
+        NoExtSrcLoad => 0,
+        NoJavaScript => 1,
+    );
+
+    # take the safe content if neccessary
+    if ( $SafeContent{Replace} ) {
+        $FieldContent = $SafeContent{String};
+    }
+
+    # detect all plain text links and put them into an HTML <a> tag
+    $FieldContent = $HTMLUtilsObject->LinkQuote(
+        String => $FieldContent,
+    );
+
+    # set target="_blank" attribute to all HTML <a> tags
+    # the LinkQuote function needs to be called again
+    $FieldContent = $HTMLUtilsObject->LinkQuote(
+        String    => $FieldContent,
+        TargetAdd => 1,
+    );
+
+    # add needed HTML headers
+    $FieldContent = $HTMLUtilsObject->DocumentComplete(
+        String  => $FieldContent,
+        Charset => 'utf-8',
+    );
+
+    # escape single quotes
+    $FieldContent =~ s/'/&#39;/g;
+
+    # get new content id
+    my %ContentIDs;
+
+    my @AttachmentMeta = $UploadCacheObject->FormIDGetAllFilesMeta(
+        FormID => $Self->{FormID}
+    );
+
+    for my $Attachment (@AttachmentMeta) {
+        $ContentIDs{ $Attachment->{Filename} } = $Attachment->{ContentID};
+    }
+
+    # reformat rich text document to have correct charset and links to
+    # inline documents
+    %Data = $LayoutObject->RichTextDocumentServe(
+        Data               => \%Data,
+        URL                => $URL,
+        Attachments        => \%Attachments,
+        ContentIDs         => \%ContentIDs,
+    );
+
     $LayoutObject->Block(
         Name => 'RowDescription',
         Data => {
-            Description => $ConfigItem->{Description} // '',
+            Description => $FieldContent // '',
         },
     );
 
