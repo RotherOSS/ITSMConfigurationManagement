@@ -280,6 +280,15 @@ sub _SectionRender {
                     },
                 );
             }
+            elsif ( $DynamicField->{FieldType} eq 'Attachment' ) {
+                $Param{LayoutObject}->Block(
+                    Name => 'FieldDisplayCell',
+                    Data => {
+                        $DisplayValue->%*,
+                        Type => 'ValueRaw',
+                    },
+                );
+            }
             else {
                 $Param{LayoutObject}->Block(
                     Name => 'FieldDisplayCell',
