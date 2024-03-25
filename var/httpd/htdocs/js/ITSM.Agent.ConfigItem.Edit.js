@@ -43,14 +43,6 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
                 return false;
             }
         });
-
-        // Register return key. But not in textareas.
-        $('#ClassItem').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
-            if ((Event.charCode || Event.keyCode) === 13 && ($(Event.target).prop('tagName') !== 'TEXTAREA')) {
-                $('#SubmitButton').click();
-                return false;
-            }
-        });
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
