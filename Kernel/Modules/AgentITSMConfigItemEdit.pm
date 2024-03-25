@@ -1072,43 +1072,41 @@ sub Run {
     # fetch attachment data and store in hash for RichTextDocumentServe
     my %Attachments;
     FILENAME:
-    for my $Filename ( @AttachmentList ) {
+    for my $Filename (@AttachmentList) {
         my $FileData = $ConfigItemObject->ConfigItemAttachmentGet(
             ConfigItemID => $ConfigItem->{ConfigItemID},
             Filename     => $Filename,
         );
 
-        # if ( $FileData->{Disposition} eq 'inline' ) {
+        $Attachments{ $FileData->{Preferences}{ContentID} } = $FileData;
+        $Attachments{ $FileData->{Preferences}{ContentID} }->{ContentID} = $Attachments{ $FileData->{Preferences}{ContentID} }{Preferences}{ContentID};
 
-            $Attachments{$FileData->{Preferences}{ContentID}} = $FileData;
-            $Attachments{$FileData->{Preferences}{ContentID}}->{ContentID} = $Attachments{$FileData->{Preferences}{ContentID}}{Preferences}{ContentID};
-
-            # add uploaded file to upload cache
-            $UploadCacheObject->FormIDAddFile(
-                FormID      => $Self->{FormID},
-                Filename    => $FileData->{Filename},
-                Content     => $FileData->{Content},
-                ContentID   => $FileData->{Preferences}{ContentID},
-                ContentType => $FileData->{ContentType} . '; name="' . $FileData->{Filename} . '"',
-                Disposition => $FileData->{Disposition},
-            );
-        # }
+        # add uploaded file to upload cache
+        $UploadCacheObject->FormIDAddFile(
+            FormID      => $Self->{FormID},
+            Filename    => $FileData->{Filename},
+            Content     => $FileData->{Content},
+            ContentID   => $FileData->{Preferences}{ContentID},
+            ContentType => $FileData->{ContentType} . '; name="' . $FileData->{Filename} . '"',
+            Disposition => $FileData->{Disposition},
+        );
     }
 
     # needed to provide necessary params for RichTextDocumentServe
     my $FieldContent = $ConfigItem->{Description};
-    my %Data = (
-        Content            => $FieldContent,
-        ContentType        => 'text/html; charset="utf-8"',
-        Disposition        => 'inline',
+    my %Data         = (
+        Content     => $FieldContent,
+        ContentType => 'text/html; charset="utf-8"',
+        Disposition => 'inline',
     );
 
     # reformat rich text document to have correct charset and links to
     # inline documents
     %Data = $LayoutObject->RichTextDocumentServe(
-        Data               => \%Data,
-        URL                => $URL,
-        Attachments        => \%Attachments,
+        Data        => \%Data,
+        URL         => $URL,
+        Attachments => \%Attachments,
+
         # LoadExternalImages => $Param{LoadExternalImages},
     );
 
@@ -1116,7 +1114,7 @@ sub Run {
 
     # remove active html content (scripts, applets, etc...)
     my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
-    my %SafeContent = $HTMLUtilsObject->Safety(
+    my %SafeContent     = $HTMLUtilsObject->Safety(
         String       => $FieldContent,
         NoApplet     => 1,
         NoObject     => 1,
@@ -1166,10 +1164,10 @@ sub Run {
     # reformat rich text document to have correct charset and links to
     # inline documents
     %Data = $LayoutObject->RichTextDocumentServe(
-        Data               => \%Data,
-        URL                => $URL,
-        Attachments        => \%Attachments,
-        ContentIDs         => \%ContentIDs,
+        Data        => \%Data,
+        URL         => $URL,
+        Attachments => \%Attachments,
+        ContentIDs  => \%ContentIDs,
     );
 
     $LayoutObject->Block(

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -26,7 +26,7 @@ use v5.24;
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -46,8 +46,8 @@ sub Run {
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     # get IDs
-    my $ConfigItemID  = $ParamObject->GetParam( Param => 'ConfigItemID' );
-    my $Filename    = $ParamObject->GetParam( Param => 'Filename' );
+    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    my $Filename     = $ParamObject->GetParam( Param => 'Filename' );
 
     # check params
     if ( !$Filename || !$ConfigItemID ) {
@@ -81,8 +81,8 @@ sub Run {
 
     # get an attachment
     my $Data = $ConfigItemObject->ConfigItemAttachmentGet(
-        ConfigItemID           => $ConfigItemID,
-        Filename               => $Filename,
+        ConfigItemID => $ConfigItemID,
+        Filename     => $Filename,
     );
     if ( !IsHashRefWithData($Data) ) {
         my $Output = $LayoutObject->CustomerHeader(

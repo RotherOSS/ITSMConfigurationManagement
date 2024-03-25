@@ -114,7 +114,7 @@ sub Run {
 
         # fetch attachment data and store in hash for RichTextDocumentServe
         my %Attachments;
-        for my $Filename ( @AttachmentList ) {
+        for my $Filename (@AttachmentList) {
             $Attachments{$Filename} = $ConfigItemObject->ConfigItemAttachmentGet(
                 ConfigItemID => $ConfigItem->{ConfigItemID},
                 Filename     => $Filename,
@@ -124,9 +124,9 @@ sub Run {
 
         # needed to provide necessary params for RichTextDocumentServe
         my %Data = (
-            Content            => $FieldContent,
-            ContentType        => 'text/html; charset="utf-8"',
-            Disposition        => 'inline',
+            Content     => $FieldContent,
+            ContentType => 'text/html; charset="utf-8"',
+            Disposition => 'inline',
         );
 
         # generate base url
@@ -154,9 +154,10 @@ sub Run {
         # reformat rich text document to have correct charset and links to
         # inline documents
         %Data = $LayoutObject->RichTextDocumentServe(
-            Data               => \%Data,
-            URL                => $URL,
-            Attachments        => \%Attachments,
+            Data        => \%Data,
+            URL         => $URL,
+            Attachments => \%Attachments,
+
             # LoadExternalImages => $Param{LoadExternalImages},
         );
 
@@ -212,7 +213,7 @@ sub Run {
     # ---------------------------------------------------------- #
     if ( $Self->{Subaction} eq 'DownloadAttachment' ) {
 
-        my $Filename       = $ParamObject->GetParam( Param => 'Filename' );
+        my $Filename = $ParamObject->GetParam( Param => 'Filename' );
 
         # check param
         if ( !$Filename ) {
@@ -226,8 +227,8 @@ sub Run {
 
         # get an attachment
         my $Data = $ConfigItemObject->ConfigItemAttachmentGet(
-            ConfigItemID           => $ConfigItemID,
-            Filename               => $Filename,
+            ConfigItemID => $ConfigItemID,
+            Filename     => $Filename,
         );
         if ( !IsHashRefWithData($Data) ) {
             $LogObject->Log(
@@ -238,8 +239,8 @@ sub Run {
             return $LayoutObject->ErrorScreen();
         }
 
-        if (IsHashRefWithData($Data)) {
-            return $LayoutObject->Attachment($Data->%*);
+        if ( IsHashRefWithData($Data) ) {
+            return $LayoutObject->Attachment( $Data->%* );
         }
         else {
             $Kernel::OM->Get('Kernel::System::Log')->Log(

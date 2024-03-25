@@ -420,16 +420,16 @@ sub Run {
     my @NonInlineAttachments;
 
     ATTACHMENT:
-    for my $Attachment ( @Attachments ) {
+    for my $Attachment (@Attachments) {
 
-            # get the metadata of the current attachment
-            my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
-                ConfigItemID => $ConfigItemID,
-                Filename     => $Attachment,
-            );
-            next ATTACHMENT if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
+        # get the metadata of the current attachment
+        my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
+            ConfigItemID => $ConfigItemID,
+            Filename     => $Attachment,
+        );
+        next ATTACHMENT if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
 
-            push @NonInlineAttachments, $AttachmentData;
+        push @NonInlineAttachments, $AttachmentData;
     }
 
     if (@NonInlineAttachments) {

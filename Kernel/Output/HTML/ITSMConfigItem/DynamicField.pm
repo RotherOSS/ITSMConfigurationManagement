@@ -408,13 +408,13 @@ sub _SectionRender {
 
         # fetch config item attachment list for handling inline attachments
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-        my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
+        my @AttachmentList   = $ConfigItemObject->ConfigItemAttachmentList(
             ConfigItemID => $Param{ConfigItem}{ConfigItemID},
         );
 
         # fetch attachment data and store in hash for RichTextDocumentServe
         my %Attachments;
-        for my $Filename ( @AttachmentList ) {
+        for my $Filename (@AttachmentList) {
             $Attachments{$Filename} = $ConfigItemObject->ConfigItemAttachmentGet(
                 ConfigItemID => $Param{ConfigItem}{ConfigItemID},
                 Filename     => $Filename,
@@ -424,9 +424,9 @@ sub _SectionRender {
 
         # needed to provide necessary params for RichTextDocumentServe
         my %Data = (
-            Content            => $Param{ConfigItem}{Description},
-            ContentType        => 'text/html; charset="utf-8"',
-            Disposition        => 'inline',
+            Content     => $Param{ConfigItem}{Description},
+            ContentType => 'text/html; charset="utf-8"',
+            Disposition => 'inline',
         );
 
         # generate base url
