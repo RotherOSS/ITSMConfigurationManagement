@@ -138,6 +138,40 @@ sub PageRender {
 
             next CONTENTBLOCK unless $Section;
 
+            # check for referenced dynamic field value before rendering ReferencedSection
+            if ( $Section->{Type} eq 'ReferencedSection' ) {
+
+                my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+                # fetch config of referenced field
+                my $ReferencedFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+                    Name => $Section->{ReferenceField},
+                );
+                next CONTENTBLOCK unless IsHashRefWithData($ReferencedFieldConfig);
+
+                # fetch config item depending on field type
+                my %ConfigItemGetParams = (
+                    DynamicFields => 1,
+                );
+
+                if ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
+                    $ConfigItemGetParams{ConfigItemID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+                }
+                elsif ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
+                    $ConfigItemGetParams{VersionID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+                }
+
+                next CONTENTBLOCK unless ( $ConfigItemGetParams{ConfigItemID} || $ConfigItemGetParams{VersionID} );
+
+                # get referenced config item
+                my $ReferencedConfigItem = $ConfigItemObject->ConfigItemGet(
+                    %ConfigItemGetParams,
+                );
+                next CONTENTBLOCK unless IsHashRefWithData($ReferencedConfigItem);
+
+                $Param{ReferencedConfigItem} = $ReferencedConfigItem;
+            }
+
             my $GridArea;
             for my $Key (qw/Row Column/) {
                 if ( $ContentBlock->{ $Key . 'Start' } ) {
@@ -458,39 +492,17 @@ sub _RenderCILinks {
 sub _RenderReferencedSection {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # fetch config of referenced field
-    my $ReferencedFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-        Name => $Param{Section}{ReferenceField},
-    );
-    return unless IsHashRefWithData($ReferencedFieldConfig);
-
-    # fetch config item depending on field type
-    my %ConfigItemGetParams = (
-        DynamicFields => 1,
-    );
-    if ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
-        $ConfigItemGetParams{ConfigItemID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
-    }
-    elsif ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
-        $ConfigItemGetParams{VersionID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
-    }
-
-    # get referenced config item
-    my $ReferencedConfigItem = $ConfigItemObject->ConfigItemGet(
-        %ConfigItemGetParams,
-    );
-    return unless IsHashRefWithData($ReferencedConfigItem);
+    return unless IsHashRefWithData( $Param{ReferencedConfigItem} );
 
     # get definition of referenced config item and pass it on to _SectionRender
-    my $ReferencedCIDefinition = $ConfigItemObject->DefinitionGet(
-        DefinitionID => $ReferencedConfigItem->{DefinitionID},
+    my $ReferencedCIDefinition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+        DefinitionID => $Param{ReferencedConfigItem}{DefinitionID},
     );
+
     return unless $ReferencedCIDefinition->{DefinitionID};
 
     return $Self->_SectionRender(
-        ConfigItem   => $ReferencedConfigItem,
+        ConfigItem   => $Param{ReferencedConfigItem},
         Definition   => $ReferencedCIDefinition,
         Section      => $ReferencedCIDefinition->{DefinitionRef}{Sections}{ $Param{Section}{SectionName} },
         LayoutObject => $Param{LayoutObject},
