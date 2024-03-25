@@ -139,7 +139,7 @@ sub PageRender {
             next CONTENTBLOCK unless $Section;
 
             # check for referenced dynamic field value before rendering ReferencedSection
-            if ( $Section->{Type} eq 'ReferencedSection' ) {
+            if ( $Section->{Type} && $Section->{Type} eq 'ReferencedSection' ) {
 
                 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
