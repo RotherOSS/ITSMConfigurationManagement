@@ -235,6 +235,7 @@ sub _SectionRender {
                 Name => 'FieldDisplayCell',
                 Data => {
                     ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+                    VersionID    => $Param{ConfigItem}{VersionID},
                     Type         => 'Iframe',
                 },
             );
@@ -431,7 +432,7 @@ sub _SectionRender {
 
         # generate base url
         my $URL = 'Action=' . ( $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=HTMLView'
-            . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};Filename=";
+            . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};VersionID=$Param{ConfigItem}{VersionID};Filename=";
 
         # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
         # # Do not load external images if 'BlockLoadingRemoteContent' is enabled.

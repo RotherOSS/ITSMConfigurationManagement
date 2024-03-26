@@ -295,8 +295,6 @@ sub Run {
                 UserID       => $Self->{UserID},
             );
 
-            next FILENAME if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
-
             # add attachment to the upload cache
             $UploadCacheObject->FormIDAddFile(
                 FormID      => $Self->{FormID},
@@ -592,7 +590,7 @@ sub Run {
             # for existing ConfigItems compare with the current data
             if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
 
-                # get all attachments meta data
+                # get config item attachments meta data
                 my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
                     ConfigItemID => $ConfigItem->{ConfigItemID},
                 );
@@ -627,6 +625,50 @@ sub Run {
                             ConfigItemID => $ConfigItem->{ConfigItemID},
                             Filename     => $Filename,
                             UserID       => $Self->{UserID},
+                        );
+
+                        # check error
+                        if ( !$DeleteSuccessful ) {
+                            return $LayoutObject->FatalError();
+                        }
+                    }
+                }
+
+                # get version attachments meta data
+                my @ExistingVersionAttachments = $ConfigItemObject->VersionAttachmentList(
+                    VersionID => $ConfigItem->{VersionID},
+                );
+
+                # check the existing attachments
+                FILENAME:
+                for my $Filename (@ExistingVersionAttachments) {
+
+                    # get the existing attachment data
+                    my $AttachmentData = $ConfigItemObject->VersionAttachmentGet(
+                        VersionID => $ConfigItem->{VersionID},
+                        Filename  => $Filename,
+                        UserID    => $Self->{UserID},
+                    );
+
+                    # the key is the filename + filesize + content type
+                    # (no content id, as existing attachments don't have it)
+                    my $Key = $AttachmentData->{Filename}
+                        . $AttachmentData->{Filesize}
+                        . $AttachmentData->{ContentType};
+
+                    # attachment is already existing, we can delete it from the new attachment hash
+                    if ( $NewAttachment{$Key} ) {
+                        delete $NewAttachment{$Key};
+                    }
+
+                    # existing attachment is no longer in new attachments hash
+                    else {
+
+                        # delete the existing attachment
+                        my $DeleteSuccessful = $ConfigItemObject->VersionAttachmentDelete(
+                            VersionID => $ConfigItem->{VersionID},
+                            Filename  => $Filename,
+                            UserID    => $Self->{UserID},
                         );
 
                         # check error
@@ -672,20 +714,40 @@ sub Run {
                 );
             }
 
+            # update config item data to secure version id being present
+            $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                ConfigItemID  => $ConfigItem->{ConfigItemID},
+                DynamicFields => 0,
+            );
+
             # write the new attachments
             ATTACHMENT:
             for my $Attachment ( values %NewAttachment ) {
 
                 # add attachment
-                my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
-                    %{$Attachment},
-                    ConfigItemID => $ConfigItem->{ConfigItemID},
-                    UserID       => $Self->{UserID},
-                );
+                if ( $Attachment->{Disposition} eq 'inline' ) {
+                    my $Success = $ConfigItemObject->VersionAttachmentAdd(
+                        %{$Attachment},
+                        VersionID => $ConfigItem->{VersionID},
+                        UserID    => $Self->{UserID},
+                    );
 
-                # check error
-                if ( !$Success ) {
-                    return $LayoutObject->FatalError();
+                    # check error
+                    if ( !$Success ) {
+                        return $LayoutObject->FatalError();
+                    }
+                }
+                else {
+                    my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
+                        %{$Attachment},
+                        ConfigItemID => $ConfigItem->{ConfigItemID},
+                        UserID       => $Self->{UserID},
+                    );
+
+                    # check error
+                    if ( !$Success ) {
+                        return $LayoutObject->FatalError();
+                    }
                 }
             }
 
@@ -1065,21 +1127,24 @@ sub Run {
     my $URL = "Action=PictureUpload;FormID=$Self->{FormID};ContentID=";
 
     # replace links to inline images in html content
-    my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
-        ConfigItemID => $ConfigItem->{ConfigItemID},
-    );
+    my @InlineAttachmentList;
+    if ( $ConfigItem->{ConfigItemID} ne 'NEW' ) {
+        @InlineAttachmentList = $ConfigItemObject->VersionAttachmentList(
+            VersionID => $ConfigItem->{VersionID},
+        );
+    }
 
     # fetch attachment data and store in hash for RichTextDocumentServe
-    my %Attachments;
+    my %InlineAttachments;
     FILENAME:
-    for my $Filename (@AttachmentList) {
-        my $FileData = $ConfigItemObject->ConfigItemAttachmentGet(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
-            Filename     => $Filename,
+    for my $Filename (@InlineAttachmentList) {
+        my $FileData = $ConfigItemObject->VersionAttachmentGet(
+            VersionID => $ConfigItem->{VersionID},
+            Filename  => $Filename,
         );
 
-        $Attachments{ $FileData->{Preferences}{ContentID} } = $FileData;
-        $Attachments{ $FileData->{Preferences}{ContentID} }->{ContentID} = $Attachments{ $FileData->{Preferences}{ContentID} }{Preferences}{ContentID};
+        $InlineAttachments{ $FileData->{Preferences}{ContentID} } = $FileData;
+        $InlineAttachments{ $FileData->{Preferences}{ContentID} }->{ContentID} = $FileData->{Preferences}{ContentID};
 
         # add uploaded file to upload cache
         $UploadCacheObject->FormIDAddFile(
@@ -1088,14 +1153,17 @@ sub Run {
             Content     => $FileData->{Content},
             ContentID   => $FileData->{Preferences}{ContentID},
             ContentType => $FileData->{ContentType} . '; name="' . $FileData->{Filename} . '"',
-            Disposition => $FileData->{Disposition},
+
+            # currently, only inline images for description are stored at the configitem version
+            #   so we can rely upon dealing with inline images here
+            Disposition => 'inline',
         );
     }
 
     # needed to provide necessary params for RichTextDocumentServe
     my $FieldContent = $ConfigItem->{Description};
     my %Data         = (
-        Content     => $FieldContent,
+        Content     => $FieldContent // '',
         ContentType => 'text/html; charset="utf-8"',
         Disposition => 'inline',
     );
@@ -1105,7 +1173,7 @@ sub Run {
     %Data = $LayoutObject->RichTextDocumentServe(
         Data        => \%Data,
         URL         => $URL,
-        Attachments => \%Attachments,
+        Attachments => \%InlineAttachments,
 
         # LoadExternalImages => $Param{LoadExternalImages},
     );
@@ -1149,26 +1217,6 @@ sub Run {
 
     # escape single quotes
     $FieldContent =~ s/'/&#39;/g;
-
-    # get new content id
-    my %ContentIDs;
-
-    my @AttachmentMeta = $UploadCacheObject->FormIDGetAllFilesMeta(
-        FormID => $Self->{FormID}
-    );
-
-    for my $Attachment (@AttachmentMeta) {
-        $ContentIDs{ $Attachment->{Filename} } = $Attachment->{ContentID};
-    }
-
-    # reformat rich text document to have correct charset and links to
-    # inline documents
-    %Data = $LayoutObject->RichTextDocumentServe(
-        Data        => \%Data,
-        URL         => $URL,
-        Attachments => \%Attachments,
-        ContentIDs  => \%ContentIDs,
-    );
 
     $LayoutObject->Block(
         Name => 'RowDescription',
@@ -1247,11 +1295,10 @@ sub Run {
     }
 
     # get all attachments meta data
-    $Param{AttachmentList} = [
-        $UploadCacheObject->FormIDGetAllFilesMeta(
-            FormID => $Self->{FormID},
-        )
-    ];
+    my @AllAttachmentsList = $UploadCacheObject->FormIDGetAllFilesMeta(
+        FormID => $Self->{FormID},
+    );
+    $Param{AttachmentList} = [ grep { $_->{Disposition} ne 'inline' } @AllAttachmentsList ];
 
     # TODO maybe restrict this to only if df richtext are to be displayed
     # add rich text editor

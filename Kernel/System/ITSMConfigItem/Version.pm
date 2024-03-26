@@ -1000,6 +1000,32 @@ sub VersionDelete {
         # remember the unique config item ids
         $ConfigItemIDs{$ConfigItemID} = 1;
 
+        # get a list of all attachments
+        my @ExistingAttachments = $Self->VersionAttachmentList(
+            VersionID => $VersionID,
+        );
+
+        # delete all attachments of this config item version
+        FILENAME:
+        for my $Filename (@ExistingAttachments) {
+
+            # delete the attachment
+            my $DeletionSuccess = $Self->VersionAttachmentDelete(
+                VersionID => $VersionID,
+                Filename  => $Filename,
+                UserID    => $Param{UserID},
+            );
+
+            if ( !$DeletionSuccess ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Unknown problem when deleting attachment $Filename of ConfigItem Version "
+                        . "$VersionID. Please check the VirtualFS backend for stale "
+                        . "files!",
+                );
+            }
+        }
+
         # Delete dynamic field values for this version
         $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ObjectValuesDelete(
             ObjectType => 'ITSMConfigItem',
@@ -1321,6 +1347,265 @@ sub VersionSearch {
     }
 
     return \@ConfigItemList;
+}
+
+=head2 VersionAttachmentAdd()
+
+adds an attachment to a config item
+
+    my $Success = $ConfigItemObject->VersionAttachmentAdd(
+        VersionID    => 1,
+        Filename        => 'filename',
+        Content         => 'content',
+        ContentType     => 'text/plain',
+        UserID          => 1,
+    );
+
+=cut
+
+sub VersionAttachmentAdd {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(VersionID Filename Content ContentType UserID)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+
+            return;
+        }
+    }
+
+    # write to virtual fs
+    my $Success = $Kernel::OM->Get('Kernel::System::VirtualFS')->Write(
+        Filename    => "ConfigItemVersion/$Param{VersionID}/$Param{Filename}",
+        Mode        => 'binary',
+        Content     => \$Param{Content},
+        Preferences => {
+            ContentID   => $Param{ContentID},
+            ContentType => $Param{ContentType},
+            VersionID   => $Param{VersionID},
+            UserID      => $Param{UserID},
+        },
+    );
+
+    # check for error
+    if ( !$Success ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Cannot add attachment for config item version $Param{VersionID}",
+        );
+
+        return;
+    }
+
+    return 1;
+}
+
+=head2 VersionAttachmentDelete()
+
+Delete the given file from the virtual filesystem.
+
+    my $Success = $ConfigItemObject->VersionAttachmentDelete(
+        VersionID => 123,               # used in event handling, e.g. for logging the history
+        Filename     => 'Projectplan.pdf', # identifies the attachment (together with the VersionID)
+        UserID       => 1,
+    );
+
+=cut
+
+sub VersionAttachmentDelete {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(VersionID Filename UserID)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+
+            return;
+        }
+    }
+
+    # add prefix
+    my $Filename = 'ConfigItemVersion/' . $Param{VersionID} . '/' . $Param{Filename};
+
+    # delete file
+    my $Success = $Kernel::OM->Get('Kernel::System::VirtualFS')->Delete(
+        Filename => $Filename,
+    );
+
+    # check for error
+    if ( !$Success ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Cannot delete attachment $Filename!",
+        );
+
+        return;
+    }
+
+    return $Success;
+}
+
+=head2 VersionAttachmentGet()
+
+This method returns information about one specific attachment.
+
+    my $Attachment = $ConfigItemObject->VersionAttachmentGet(
+        VersionID => 4,
+        Filename     => 'test.txt',
+    );
+
+returns
+
+    {
+        Preferences => {
+            AllPreferences => 'test',
+        },
+        Filename    => 'test.txt',
+        Content     => 'content',
+        ContentType => 'text/plain',
+        Filesize    => 12348409,
+        Type        => 'attachment',
+    }
+
+=cut
+
+sub VersionAttachmentGet {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(VersionID Filename)) {
+        if ( !$Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+            return;
+        }
+    }
+
+    # add prefix
+    my $Filename = 'ConfigItemVersion/' . $Param{VersionID} . '/' . $Param{Filename};
+
+    # find all attachments of this config item
+    my @Attachments = $Kernel::OM->Get('Kernel::System::VirtualFS')->Find(
+        Filename    => $Filename,
+        Preferences => {
+            VersionID => $Param{VersionID},
+        },
+    );
+
+    # return error if file does not exist
+    if ( !@Attachments ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Message  => "No such attachment ($Filename)!",
+            Priority => 'error',
+        );
+        return;
+    }
+
+    # get data for attachment
+    my %AttachmentData = $Kernel::OM->Get('Kernel::System::VirtualFS')->Read(
+        Filename => $Filename,
+        Mode     => 'binary',
+    );
+
+    my $AttachmentInfo = {
+        %AttachmentData,
+        Filename    => $Param{Filename},
+        Content     => ${ $AttachmentData{Content} },
+        ContentType => $AttachmentData{Preferences}->{ContentType},
+        Type        => 'attachment',
+        Filesize    => $AttachmentData{Preferences}->{FilesizeRaw},
+    };
+
+    return $AttachmentInfo;
+}
+
+=head2 VersionAttachmentList()
+
+Returns an array with all attachments of the given config item.
+
+    my @Attachments = $ConfigItemObject->VersionAttachmentList(
+        VersionID => 123,
+    );
+
+returns
+
+    @Attachments = (
+        'filename.txt',
+        'other_file.pdf',
+    );
+
+=cut
+
+sub VersionAttachmentList {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    if ( !$Param{VersionID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need VersionID!',
+        );
+
+        return;
+    }
+
+    # find all attachments of this config item
+    my @Attachments = $Kernel::OM->Get('Kernel::System::VirtualFS')->Find(
+        Preferences => {
+            VersionID => $Param{VersionID},
+        },
+    );
+
+    for my $Filename (@Attachments) {
+
+        # remove extra information from filename
+        $Filename =~ s{ \A ConfigItemVersion / \d+ / }{}xms;
+    }
+
+    return @Attachments;
+}
+
+=head2 VersionAttachmentExists()
+
+Checks if a file with a given filename exists.
+
+    my $Exists = $ConfigItemObject->VersionAttachmentExists(
+        Filename  => 'test.txt',
+        VersionID => 123,
+        UserID    => 1,
+    );
+
+=cut
+
+sub VersionAttachmentExists {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(Filename VersionID UserID)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+
+            return;
+        }
+    }
+
+    return if !$Kernel::OM->Get('Kernel::System::VirtualFS')->Find(
+        Filename => 'ConfigItemVersion/' . $Param{VersionID} . '/' . $Param{Filename},
+    );
+
+    return 1;
 }
 
 1;

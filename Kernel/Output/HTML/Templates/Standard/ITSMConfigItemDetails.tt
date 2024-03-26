@@ -50,7 +50,7 @@
 # Use the HTML5 sandbox attribute to prevent plugins and scripts from being executed in the browser.
 # Append session info to URL because IE will not send cookies.
 # Set 'allow-popups' to allow IE10+ to open links. ref: http://www.w3.org/html/wg/wiki/ChangeProposals/sandbox_allow_popups
-                <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" width="100%" frameborder="0" id="Iframe[% Data.ConfigItemID | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('Iframe[% Data.ConfigItemID | html %]'); }, 500);" src="[% Env("Baselink") %]Action=AgentITSMConfigItemAttachment;Subaction=HTMLView;ConfigItemID=[% Data.ConfigItemID | html %];[% Env("SessionName") | html %]=[% Env("SessionID") | html %]"></iframe>
+                <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" width="100%" frameborder="0" id="Iframe[% Data.ConfigItemID | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('Iframe[% Data.ConfigItemID | html %]'); }, 500);" src="[% Env("Baselink") %]Action=AgentITSMConfigItemAttachment;Subaction=HTMLView;ConfigItemID=[% Data.ConfigItemID | html %];VersionID=[% Data.VersionID | html %];[% Env("SessionName") | html %]=[% Env("SessionID") | html %]"></iframe>
             </div>
 [% END %]
 [% RenderBlockEnd("FieldDisplayCell") %]

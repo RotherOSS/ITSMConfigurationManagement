@@ -56,13 +56,14 @@ sub Run {
         );
     }
 
-    # get ID
+    # get IDs
     my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    my $VersionID    = $ParamObject->GetParam( Param => 'VersionID' );
 
     # check param
-    if ( !$ConfigItemID ) {
+    if ( !$ConfigItemID || !$VersionID ) {
         $LogObject->Log(
-            Message  => 'ConfigItemID is needed!',
+            Message  => 'ConfigItemID and VersionID are needed!',
             Priority => 'error',
         );
 
@@ -73,9 +74,18 @@ sub Run {
 
     # check permissions
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID  => $ConfigItemID,
+        VersionID     => $VersionID,
         DynamicFields => 0,
     );
+
+    if ( $ConfigItem->{ConfigItemID} != $ConfigItemID ) {
+        $LogObject->Log(
+            Message  => 'VersionID does not belong to ConfigItemID!',
+            Priority => 'error',
+        );
+
+        return $LayoutObject->ErrorScreen();
+    }
 
     # check permissions
     my $HasAccess = $ConfigItemObject->Permission(
@@ -108,16 +118,16 @@ sub Run {
         # }
 
         # fetch config item attachment list for handling inline attachments
-        my @AttachmentList = $ConfigItemObject->ConfigItemAttachmentList(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
+        my @AttachmentList = $ConfigItemObject->VersionAttachmentList(
+            VersionID => $ConfigItem->{VersionID},
         );
 
         # fetch attachment data and store in hash for RichTextDocumentServe
         my %Attachments;
         for my $Filename (@AttachmentList) {
-            $Attachments{$Filename} = $ConfigItemObject->ConfigItemAttachmentGet(
-                ConfigItemID => $ConfigItem->{ConfigItemID},
-                Filename     => $Filename,
+            $Attachments{$Filename} = $ConfigItemObject->VersionAttachmentGet(
+                VersionID => $ConfigItem->{VersionID},
+                Filename  => $Filename,
             );
             $Attachments{$Filename}{ContentID} = $Attachments{$Filename}{Preferences}{ContentID};
         }
@@ -131,7 +141,7 @@ sub Run {
 
         # generate base url
         my $URL = 'Action=' . ( $LayoutObject->{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=DownloadAttachment'
-            . ";ConfigItemID=$ConfigItem->{ConfigItemID};Filename=";
+            . ";ConfigItemID=$ConfigItem->{ConfigItemID};VersionID=$ConfigItem->{VersionID};Filename=";
 
         # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
         # # Do not load external images if 'BlockLoadingRemoteContent' is enabled.
@@ -226,9 +236,9 @@ sub Run {
         }
 
         # get an attachment
-        my $Data = $ConfigItemObject->ConfigItemAttachmentGet(
-            ConfigItemID => $ConfigItemID,
-            Filename     => $Filename,
+        my $Data = $ConfigItemObject->VersionAttachmentGet(
+            VersionID => $VersionID,
+            Filename  => $Filename,
         );
         if ( !IsHashRefWithData($Data) ) {
             $LogObject->Log(
