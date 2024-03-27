@@ -282,31 +282,13 @@ sub _SectionRender {
         my $URL = 'Action=' . ( $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=HTMLView'
             . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};VersionID=$Param{ConfigItem}{VersionID};Filename=";
 
-        # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
-        # # Do not load external images if 'BlockLoadingRemoteContent' is enabled.
-        # my $LoadExternalImages;
-        # # TODO ask if dedicated sysconfig for ITSMConfigItem is needed
-        # if ( $ConfigObject->Get('Ticket::Frontend::BlockLoadingRemoteContent') ) {
-        #     $LoadExternalImages = 0;
-        # }
-        # else {
-        #     $LoadExternalImages = $ParamObject->GetParam(
-        #         Param => 'LoadExternalImages'
-        #     ) || 0;
-
-        #     # Safety check only on customer article.
-        #     if ( !$LoadExternalImages && $Article{SenderType} ne 'customer' ) {
-        #         $LoadExternalImages = 1;
-        #     }
-        # }
-
         # reformat rich text document to have correct charset and links to
         # inline documents
         %Data = $Param{LayoutObject}->RichTextDocumentServe(
             Data               => \%Data,
             URL                => $URL,
             Attachments        => \%Attachments,
-            LoadExternalImages => $Param{LoadExternalImages},
+            LoadExternalImages => 1,
         );
 
         # render description richtext editor

@@ -1185,11 +1185,10 @@ sub Run {
     # reformat rich text document to have correct charset and links to
     # inline documents
     %Data = $LayoutObject->RichTextDocumentServe(
-        Data        => \%Data,
-        URL         => $URL,
-        Attachments => \%InlineAttachments,
-
-        # LoadExternalImages => $Param{LoadExternalImages},
+        Data               => \%Data,
+        URL                => $URL,
+        Attachments        => \%InlineAttachments,
+        LoadExternalImages => 1,
     );
 
     $FieldContent = $Data{Content};
