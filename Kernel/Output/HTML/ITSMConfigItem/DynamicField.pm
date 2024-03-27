@@ -236,6 +236,7 @@ sub _SectionRender {
                 Data => {
                     ConfigItemID => $Param{ConfigItem}{ConfigItemID},
                     VersionID    => $Param{ConfigItem}{VersionID},
+                    Frontend     => $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer',
                     Type         => 'Iframe',
                 },
             );

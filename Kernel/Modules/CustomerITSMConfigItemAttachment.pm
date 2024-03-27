@@ -1,7 +1,7 @@
 # --
 # OTOBO is a web-based ticketing system for service organisations.
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2019 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
@@ -25,8 +25,8 @@ use v5.24;
 # CPAN modules
 
 # OTOBO modules
-use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -40,72 +40,226 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    # get config of frontend module
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+
     # get needed objects
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
+    # Permission check.
+    if ( !$Self->{AccessRo} ) {
+        return $LayoutObject->NoPermission(
+            Message    => Translatable('You need ro permission!'),
+            WithHeader => 'yes',
+        );
+    }
+
     # get IDs
     my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
-    my $Filename     = $ParamObject->GetParam( Param => 'Filename' );
+    my $VersionID    = $ParamObject->GetParam( Param => 'VersionID' );
 
-    # check params
-    if ( !$Filename || !$ConfigItemID ) {
-        my $Output = $LayoutObject->CustomerHeader(
-            Title => Translatable('Error'),
-        );
-        $Output .= $LayoutObject->CustomerError(
-            Message => Translatable('Filename and ConfigItemID are needed!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
+    # check param
+    if ( !$ConfigItemID || !$VersionID ) {
         $LogObject->Log(
-            Message  => 'Filename and ConfigItemID are needed!',
+            Message  => 'ConfigItemID and VersionID are needed!',
             Priority => 'error',
         );
-        $Output .= $LayoutObject->CustomerFooter();
 
-        return $Output;
+        return $LayoutObject->ErrorScreen();
     }
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # check for access rights
-    my $HasAccess = $ConfigItemObject->CustomerPermission(
-        ConfigItemID => $ConfigItemID,
-        UserID       => $Self->{UserID},
+    # fetch config item
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        VersionID     => $VersionID,
+        DynamicFields => 0,
     );
 
+    if ( $ConfigItem->{ConfigItemID} != $ConfigItemID ) {
+        $LogObject->Log(
+            Message  => 'VersionID does not belong to ConfigItemID!',
+            Priority => 'error',
+        );
+
+        return $LayoutObject->ErrorScreen();
+    }
+
+    # check permissions
+    my $HasAccess = $ConfigItemObject->CustomerPermission(
+        ConfigItemID => $ConfigItem->{ConfigItemID},
+        UserID       => $Self->{UserID},
+    );
     if ( !$HasAccess ) {
         return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
     }
 
-    # get an attachment
-    my $Data = $ConfigItemObject->ConfigItemAttachmentGet(
-        ConfigItemID => $ConfigItemID,
-        Filename     => $Filename,
-    );
-    if ( !IsHashRefWithData($Data) ) {
-        my $Output = $LayoutObject->CustomerHeader(
-            Title => Translatable('Error'),
-        );
-        $Output .= $LayoutObject->CustomerError(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'No such attachment (%s)!', $Filename ),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-        $LogObject->Log(
-            Message  => "No such attachment ($Filename)! May be an attack!!!",
-            Priority => 'error',
-        );
-        $Output .= $LayoutObject->CustomerFooter();
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
-        return $Output;
+    # ---------------------------------------------------------- #
+    # HTMLView Sub-action
+    # ---------------------------------------------------------- #
+    if ( $Self->{Subaction} eq 'HTMLView' ) {
+
+        # Get the Field content.
+        my $FieldContent = $ConfigItem->{Description};
+
+        # # Build base URL for in-line images.
+        # my $SessionID = '';
+        # if ( $Self->{SessionID} && !$Self->{SessionIDCookie} ) {
+        #     $SessionID = ';' . $Self->{SessionName} . '=' . $Self->{SessionID};
+        #     $FieldContent =~ s{
+        #         (Action=AgentITSMConfigItemAttachment;Subaction=DownloadAttachment;ConfigItemID=\d+;Filename=\w+)
+        #     }{$1$SessionID}gmsx;
+        # }
+
+        # fetch config item attachment list for handling inline attachments
+        my @AttachmentList = $ConfigItemObject->VersionAttachmentList(
+            VersionID => $ConfigItem->{VersionID},
+        );
+
+        # fetch attachment data and store in hash for RichTextDocumentServe
+        my %Attachments;
+        for my $Filename (@AttachmentList) {
+            $Attachments{$Filename} = $ConfigItemObject->VersionAttachmentGet(
+                VersionID => $ConfigItem->{VersionID},
+                Filename  => $Filename,
+            );
+            $Attachments{$Filename}{ContentID} = $Attachments{$Filename}{Preferences}{ContentID};
+        }
+
+        # needed to provide necessary params for RichTextDocumentServe
+        my %Data = (
+            Content     => $FieldContent,
+            ContentType => 'text/html; charset="utf-8"',
+            Disposition => 'inline',
+        );
+
+        # generate base url
+        my $URL = 'Action=' . ( $LayoutObject->{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=DownloadAttachment'
+            . ";ConfigItemID=$ConfigItem->{ConfigItemID};VersionID=$ConfigItem->{VersionID};Filename=";
+
+        # # TODO ask if this is necessary and if, shift it to AgentITSMConfigItemZoom and pass as Param
+        # # Do not load external images if 'BlockLoadingRemoteContent' is enabled.
+        # my $LoadExternalImages;
+        # # TODO ask if dedicated sysconfig for ITSMConfigItem is needed
+        # if ( $ConfigObject->Get('Ticket::Frontend::BlockLoadingRemoteContent') ) {
+        #     $LoadExternalImages = 0;
+        # }
+        # else {
+        #     $LoadExternalImages = $ParamObject->GetParam(
+        #         Param => 'LoadExternalImages'
+        #     ) || 0;
+
+        #     # Safety check only on customer article.
+        #     if ( !$LoadExternalImages && $Article{SenderType} ne 'customer' ) {
+        #         $LoadExternalImages = 1;
+        #     }
+        # }
+
+        # reformat rich text document to have correct charset and links to
+        # inline documents
+        %Data = $LayoutObject->RichTextDocumentServe(
+            Data        => \%Data,
+            URL         => $URL,
+            Attachments => \%Attachments,
+
+            # LoadExternalImages => $Param{LoadExternalImages},
+        );
+
+        $FieldContent = $Data{Content};
+
+        # remove active html content (scripts, applets, etc...)
+        my %SafeContent = $HTMLUtilsObject->Safety(
+            String       => $FieldContent,
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoIntSrcLoad => 0,
+            NoExtSrcLoad => 0,
+            NoJavaScript => 1,
+        );
+
+        # take the safe content if neccessary
+        if ( $SafeContent{Replace} ) {
+            $FieldContent = $SafeContent{String};
+        }
+
+        # detect all plain text links and put them into an HTML <a> tag
+        $FieldContent = $HTMLUtilsObject->LinkQuote(
+            String => $FieldContent,
+        );
+
+        # set target="_blank" attribute to all HTML <a> tags
+        # the LinkQuote function needs to be called again
+        $FieldContent = $HTMLUtilsObject->LinkQuote(
+            String    => $FieldContent,
+            TargetAdd => 1,
+        );
+
+        # add needed HTML headers
+        $FieldContent = $HTMLUtilsObject->DocumentComplete(
+            String  => $FieldContent,
+            Charset => 'utf-8',
+        );
+
+        # escape single quotes
+        $FieldContent =~ s/'/&#39;/g;
+
+        # Return complete HTML as an attachment.
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => $FieldContent,
+            Type        => 'inline',
+        );
     }
 
-    # download it AttachmentDownloadType is configured
-    return $LayoutObject->Attachment(
-        $Data->%*,
-        Sandbox => 1,
-    );
+    # ---------------------------------------------------------- #
+    # DownloadAttachment Sub-action
+    # ---------------------------------------------------------- #
+    if ( $Self->{Subaction} eq 'DownloadAttachment' ) {
+
+        my $Filename = $ParamObject->GetParam( Param => 'Filename' );
+
+        # check param
+        if ( !$Filename ) {
+            $LogObject->Log(
+                Message  => 'Filename is needed!',
+                Priority => 'error',
+            );
+
+            return $LayoutObject->ErrorScreen();
+        }
+
+        # get an attachment
+        my $Data = $ConfigItemObject->VersionAttachmentGet(
+            VersionID => $VersionID,
+            Filename  => $Filename,
+        );
+        if ( !IsHashRefWithData($Data) ) {
+            $LogObject->Log(
+                Message  => "No such attachment ($Filename).",
+                Priority => 'error',
+            );
+
+            return $LayoutObject->ErrorScreen();
+        }
+
+        if ( IsHashRefWithData($Data) ) {
+            return $LayoutObject->Attachment( $Data->%* );
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Message  => "No such attachment ($Filename)! May be an attack!!!",
+                Priority => 'error',
+            );
+            return $LayoutObject->ErrorScreen();
+        }
+    }
+
+    # TODO return wrong / no subaction
 }
 
 1;
