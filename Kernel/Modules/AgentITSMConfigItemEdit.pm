@@ -714,7 +714,7 @@ sub Run {
                 );
             }
 
-            # update config item data to secure version id being present
+            # fetch updated config item data to secure version id being present
             my $NewConfigItemData = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID  => $ConfigItem->{ConfigItemID},
                 DynamicFields => 0,
@@ -1312,6 +1312,8 @@ sub Run {
     my @AllAttachmentsList = $UploadCacheObject->FormIDGetAllFilesMeta(
         FormID => $Self->{FormID},
     );
+
+    # exclude inline attachments as they are handled separately
     $Param{AttachmentList} = [ grep { $_->{Disposition} ne 'inline' } @AllAttachmentsList ];
 
     # TODO maybe restrict this to only if df richtext are to be displayed
