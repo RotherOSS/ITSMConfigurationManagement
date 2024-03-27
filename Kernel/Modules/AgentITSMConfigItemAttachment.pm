@@ -72,7 +72,7 @@ sub Run {
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # check permissions
+    # fetch config item
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         VersionID     => $VersionID,
         DynamicFields => 0,
