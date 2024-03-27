@@ -427,8 +427,6 @@ sub Run {
             ConfigItemID => $ConfigItemID,
             Filename     => $Attachment,
         );
-        next ATTACHMENT if $AttachmentData->{Preferences}{ContentID} =~ /inline/;
-
         push @NonInlineAttachments, $AttachmentData;
     }
 

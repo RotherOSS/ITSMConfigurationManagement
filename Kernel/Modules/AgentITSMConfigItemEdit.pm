@@ -715,7 +715,7 @@ sub Run {
             }
 
             # update config item data to secure version id being present
-            $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            my $NewConfigItemData = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID  => $ConfigItem->{ConfigItemID},
                 DynamicFields => 0,
             );
@@ -728,13 +728,27 @@ sub Run {
                 if ( $Attachment->{Disposition} eq 'inline' ) {
                     my $Success = $ConfigItemObject->VersionAttachmentAdd(
                         %{$Attachment},
-                        VersionID => $ConfigItem->{VersionID},
+                        VersionID => $NewConfigItemData->{VersionID},
                         UserID    => $Self->{UserID},
                     );
 
                     # check error
                     if ( !$Success ) {
                         return $LayoutObject->FatalError();
+                    }
+
+                    # also write attachments to last version if it differs because we deleted them previously
+                    if ( $ConfigItem->{VersionID} && $ConfigItem->{VersionID} != $NewConfigItemData->{VersionID} ) {
+                        my $Success = $ConfigItemObject->VersionAttachmentAdd(
+                            %{$Attachment},
+                            VersionID => $ConfigItem->{VersionID},
+                            UserID    => $Self->{UserID},
+                        );
+
+                        # check error
+                        if ( !$Success ) {
+                            return $LayoutObject->FatalError();
+                        }
                     }
                 }
                 else {
