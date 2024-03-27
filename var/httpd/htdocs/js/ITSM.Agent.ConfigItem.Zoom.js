@@ -89,26 +89,28 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
      * @function
      * @param {jQueryObject} $Iframe - The iframe which should be auto-heighted
      * @description
-     *      Set iframe height automatically based on real content height and default config setting.
+     *      Set iframe height automatically based on real content height and hardcoded max height.
      */
     TargetNS.IframeAutoHeight = function ($Iframe) {
 
         var NewHeight,
             IframeBodyHeight,
-            // TODO ask about how this should be handled
-            ArticleHeightMax = Core.Config.Get('Ticket::Frontend::HTMLArticleHeightMax');
+
+            // max height
+            DescriptionHeightMax = 1000;
 
         if (isJQueryObject($Iframe)) {
             IframeBodyHeight = $Iframe.contents().find('body').height();
             NewHeight = $Iframe.contents().height();
             if (!NewHeight || isNaN(NewHeight)) {
-                // TODO ask about how this should be handled
-                NewHeight = Core.Config.Get('Ticket::Frontend::HTMLArticleHeightDefault');
+
+                // default height
+                NewHeight = 100;
             }
             else {
-                if (IframeBodyHeight > ArticleHeightMax
-                    || NewHeight > ArticleHeightMax) {
-                    NewHeight = ArticleHeightMax;
+                if (IframeBodyHeight > DescriptionHeightMax
+                    || NewHeight > DescriptionHeightMax) {
+                    NewHeight = DescriptionHeightMax;
                 }
                 else if (IframeBodyHeight > NewHeight) {
                     NewHeight = IframeBodyHeight;
