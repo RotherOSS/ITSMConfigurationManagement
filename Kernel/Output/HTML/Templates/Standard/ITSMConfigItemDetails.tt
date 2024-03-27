@@ -12,6 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
+## nofilter(TidyAll::Plugin::OTOBO::TT::ScriptUsage)
 <div class="oooContentGrid" style="grid-template-columns:[% Data.Widths | html %]">
 [% RenderBlockStart("ContentCell") %]
     <div class="oooContentCell" style="[% Data.GridArea | html %]">
@@ -35,18 +36,18 @@
             <div>
 # execute IFrame JS asynchronously. Otherwise it could happen before our API was loaded
 # the following JS code must be within the template, otherwise it could happen, that also this code itself is not loaded yet
-                <script>
-                function CheckIFrameHeight(IFrameID) {
-                    if (typeof Core === 'object' && typeof Core.Agent === 'object' && typeof ITSM.[% Data.Frontend | html %].ConfigItem.Zoom === 'object') {
-                        ITSM.[% Data.Frontend | html %].ConfigItem.Zoom.IframeAutoHeight($('#' + IFrameID));
-                    }
-                    else {
-                        window.setTimeout(function () {
-                            CheckIFrameHeight(IFrameID);
-                        }, 500);
-                    }
-                }
-                </script>
+<script>
+function CheckIFrameHeight(IFrameID) {
+    if (typeof Core === 'object' && typeof Core.Agent === 'object' && typeof ITSM.[% Data.Frontend | html %].ConfigItem.Zoom === 'object') {
+        ITSM.[% Data.Frontend | html %].ConfigItem.Zoom.IframeAutoHeight($('#' + IFrameID));
+    }
+    else {
+        window.setTimeout(function () {
+            CheckIFrameHeight(IFrameID);
+        }, 500);
+    }
+}
+</script>
 # Use the HTML5 sandbox attribute to prevent plugins and scripts from being executed in the browser.
 # Append session info to URL because IE will not send cookies.
 # Set 'allow-popups' to allow IE10+ to open links. ref: http://www.w3.org/html/wg/wiki/ChangeProposals/sandbox_allow_popups
