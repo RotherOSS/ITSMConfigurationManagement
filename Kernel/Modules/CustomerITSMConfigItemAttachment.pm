@@ -259,7 +259,10 @@ sub Run {
         }
     }
 
-    # TODO return wrong / no subaction
+    # No (known) subaction
+    return $LayoutObject->ErrorScreen(
+        Message => Translatable('Invalid Subaction.'),
+    );
 }
 
 1;
