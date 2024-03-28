@@ -146,65 +146,65 @@ Returns:
 
     my $Attributes = [
         {
-          Input => {
-                     Data => [
-                       { Key => "Number", Value => "Number" },
-                       { Key => "Name", Value => "Name" },
-                       { Key => "DeplState", Value => "Deployment State" },
-                       { Key => "InciState", Value => "Incident State" },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::1",
-                         Value => "NamespaceBoden-Bodenfarbe::1",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::2",
-                         Value => "NamespaceBoden-Bodenfarbe::2",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::3",
-                         Value => "NamespaceBoden-Bodenfarbe::3",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::4",
-                         Value => "NamespaceBoden-Bodenfarbe::4",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::5",
-                         Value => "NamespaceBoden-Bodenfarbe::5",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::6",
-                         Value => "NamespaceBoden-Bodenfarbe::6",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::7",
-                         Value => "NamespaceBoden-Bodenfarbe::7",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::8",
-                         Value => "NamespaceBoden-Bodenfarbe::8",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::9",
-                         Value => "NamespaceBoden-Bodenfarbe::9",
-                       },
-                       {
-                         Key => "NamespaceBoden-Bodenfarbe::10",
-                         Value => "NamespaceBoden-Bodenfarbe::10",
-                       },
-                     ],
-                     PossibleNone => 1,
-                     Required => 1,
-                     Translation => 0,
-                     Type => "Selection",
-                   },
-          Key   => "Key",
-          Name  => "Key",
+            Input => {
+                Data => [
+                    { Key => "Number", Value => "Number" },
+                    { Key => "Name", Value => "Name" },
+                    { Key => "DeplState", Value => "Deployment State" },
+                    { Key => "InciState", Value => "Incident State" },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::1",
+                        Value => "NamespaceBoden-Bodenfarbe::1",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::2",
+                        Value => "NamespaceBoden-Bodenfarbe::2",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::3",
+                        Value => "NamespaceBoden-Bodenfarbe::3",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::4",
+                        Value => "NamespaceBoden-Bodenfarbe::4",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::5",
+                        Value => "NamespaceBoden-Bodenfarbe::5",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::6",
+                        Value => "NamespaceBoden-Bodenfarbe::6",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::7",
+                        Value => "NamespaceBoden-Bodenfarbe::7",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::8",
+                        Value => "NamespaceBoden-Bodenfarbe::8",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::9",
+                        Value => "NamespaceBoden-Bodenfarbe::9",
+                    },
+                    {
+                        Key => "NamespaceBoden-Bodenfarbe::10",
+                        Value => "NamespaceBoden-Bodenfarbe::10",
+                    },
+                ],
+                PossibleNone => 1,
+                Required => 1,
+                Translation => 0,
+                Type => "Selection",
+            },
+            Key   => "Key",
+            Name  => "Key",
         },
         {
-          Input => { Type => "Checkbox" },
-          Key   => "Identifier",
-          Name  => "Identifier",
+            Input => { Type => "Checkbox" },
+            Key   => "Identifier",
+            Name  => "Identifier",
         },
     ];
 
@@ -283,6 +283,7 @@ sub MappingObjectAttributesGet {
                 Required     => 1,
                 Translation  => 0,
                 PossibleNone => 1,
+                Class        => 'Modernize',
             },
         },
         {
