@@ -2173,6 +2173,14 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::VersionStringModule" Required="0" Valid="1">
+        <Description Translatable="1">This configuration defines modules to suggest and check version strings for config items per config item class.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::VersionStringModule</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="DynamicField::EventModulePost###200-DynamicFieldSync" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
