@@ -246,7 +246,7 @@ A hashref with the following keys is returned:
     $ConfigItem->{CurInciStateType}
     $ConfigItem->{VersionID}
     $ConfigItem->{Name}
-    $ConfigItem->{Version}
+    $ConfigItem->{VersionString}
     $ConfigItem->{Description}
     $ConfigItem->{DefinitionID}
     $ConfigItem->{DeplStateID}
@@ -326,7 +326,7 @@ sub ConfigItemGet {
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
-    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
+    v.id, v.name, v.version_string, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
     v.create_time, v.create_by, v.change_time, v.change_by
   FROM configitem_version v
   INNER JOIN configitem ci
@@ -346,7 +346,7 @@ END_SQL
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
     ci.cur_depl_state_id, ci.cur_inci_state_id,
-    v.id, v.name, 1, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
+    v.id, v.name, v.version_string, v.definition_id, v.depl_state_id, v.inci_state_id, v.description,
     ci.create_time, ci.create_by, ci.change_time, ci.change_by
   FROM configitem ci
   LEFT JOIN configitem_version v
@@ -368,7 +368,7 @@ END_SQL
     $ConfigItem{CurInciStateID} = $Row[5];
     $ConfigItem{VersionID}      = $Row[6];
     $ConfigItem{Name}           = $Row[7];
-    $ConfigItem{Version}        = $Row[8];
+    $ConfigItem{VersionString}  = $Row[8];
     $ConfigItem{DefinitionID}   = $Row[9];
     $ConfigItem{DeplStateID}    = $Row[10];
     $ConfigItem{InciStateID}    = $Row[11];
@@ -468,7 +468,8 @@ add a new config item. This implies that an initial version is created as well.
 
     my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
         ClassID        => 123,
-        Name           => 'Name',   # optional when a name module is configured for the class
+        Name           => 'Name',    # optional when a name module is configured for the class
+        VersionString  => 'Version', # optional when a version number module is configured for the class
         DeplStateID    => 3,
         InciStateID    => 2,
         Description    => 'ABCD',
