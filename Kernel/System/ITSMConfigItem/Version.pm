@@ -72,7 +72,7 @@ sub VersionZoomList {
     # get version zoom list
     $Kernel::OM->Get('Kernel::System::DB')->Prepare(
         SQL => <<'END_SQL',
-SELECT id, name, depl_state_id, inci_state_id, description, create_time, create_by, change_time, change_by
+SELECT id, name, version_string, depl_state_id, inci_state_id, description, create_time, create_by, change_time, change_by
   FROM configitem_version
   WHERE configitem_id = ?
   ORDER BY id
@@ -82,20 +82,19 @@ END_SQL
 
     # fetch the result
     my @VersionList;
-    my $VersionNumber = 1;
     while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
         push @VersionList,
             {
                 VersionID     => $Row[0],
                 Name          => $Row[1],
-                DeplStateID   => $Row[2],
-                InciStateID   => $Row[3],
-                Description   => $Row[4],
-                CreateTime    => $Row[5],
-                CreateBy      => $Row[6],
-                ChangeTime    => $Row[7],
-                ChangeBy      => $Row[8],
-                VersionNumber => $VersionNumber++,
+                VersionString => $Row[2],
+                DeplStateID   => $Row[3],
+                InciStateID   => $Row[4],
+                Description   => $Row[5],
+                CreateTime    => $Row[6],
+                CreateBy      => $Row[7],
+                ChangeTime    => $Row[8],
+                ChangeBy      => $Row[9],
             };
 
     }
@@ -163,28 +162,30 @@ Returns:
 
             # VersionID
             100 => {
-                VersionID    => 100,
-                ConfigItemID => 1,
-                Name         => 'ConfigItem1',
-                DefinitionID => 5,
-                DeplStateID  => 3,
-                InciStateID  => 2,
-                Description  => 'ABCD',
-                CreateTime   => '2016-03-22 17:58:00',
-                CreateBy     => 1,
+                VersionID     => 100,
+                ConfigItemID  => 1,
+                Name          => 'ConfigItem1',
+                VersionString => 'Version1',
+                DefinitionID  => 5,
+                DeplStateID   => 3,
+                InciStateID   => 2,
+                Description   => 'ABCD',
+                CreateTime    => '2016-03-22 17:58:00',
+                CreateBy      => 1,
             },
 
             # VersionID
             101 => {
-                VersionID    => 101,
-                ConfigItemID => 1,
-                Name         => 'ConfigItem2',
-                DefinitionID => 5,
-                DeplStateID  => 3,
-                InciStateID  => 2,
-                Description  => 'ABCD',
-                CreateTime   => '2016-03-22 17:58:00',
-                CreateBy     => 1,
+                VersionID     => 101,
+                ConfigItemID  => 1,
+                Name          => 'ConfigItem2',
+                VersionString => 'Version2',
+                DefinitionID  => 5,
+                DeplStateID   => 3,
+                InciStateID   => 2,
+                Description   => 'ABCD',
+                CreateTime    => '2016-03-22 17:58:00',
+                CreateBy      => 1,
             },
         },
 
@@ -193,28 +194,30 @@ Returns:
 
             # VersionID
             150 => {
-                VersionID    => 150,
-                ConfigItemID => 2,
-                Name         => 'ConfigItem1',
-                DefinitionID => 5,
-                DeplStateID  => 3,
-                InciStateID  => 2,
-                Description  => 'ABCD',
-                CreateTime   => '2016-03-22 17:58:00',
-                CreateBy     => 1,
+                VersionID     => 150,
+                ConfigItemID  => 2,
+                Name          => 'ConfigItem1',
+                VersionString => 'Version1',
+                DefinitionID  => 5,
+                DeplStateID   => 3,
+                InciStateID   => 2,
+                Description   => 'ABCD',
+                CreateTime    => '2016-03-22 17:58:00',
+                CreateBy      => 1,
             },
 
             # VersionID
             151 => {
-                VersionID    => 151,
-                ConfigItemID => 2,
-                Name         => 'ConfigItem1',
-                DefinitionID => 5,
-                DeplStateID  => 3,
-                InciStateID  => 2,
-                Description  => 'ABCD',
-                CreateTime   => '2016-03-22 17:58:00',
-                CreateBy     => 1,
+                VersionID     => 151,
+                ConfigItemID  => 2,
+                Name          => 'ConfigItem1',
+                VersionString => 'Version1',
+                DefinitionID  => 5,
+                DeplStateID   => 3,
+                InciStateID   => 2,
+                Description   => 'ABCD',
+                CreateTime    => '2016-03-22 17:58:00',
+                CreateBy      => 1,
             },
         },
     };
@@ -242,7 +245,7 @@ sub VersionListAll {
 
     # build sql
     my $SQL = <<'END_SQL';
-SELECT id, configitem_id, name, definition_id, depl_state_id, inci_state_id, description,
+SELECT id, configitem_id, name, version_string, definition_id, depl_state_id, inci_state_id, description,
     create_time, create_by, change_time, change_by
   FROM configitem_version
 END_SQL
@@ -273,17 +276,18 @@ END_SQL
     my %Results;
     while ( my @Row = $Kernel::OM->Get('Kernel::System::DB')->FetchrowArray() ) {
         $Results{ $Row[1] }->{ $Row[0] } = {
-            VersionID    => $Row[0],
-            ConfigItemID => $Row[1],
-            Name         => $Row[2]  || '',
-            DefinitionID => $Row[3]  || '',
-            DeplStateID  => $Row[4]  || '',
-            InciStateID  => $Row[5]  || '',
-            Description  => $Row[6]  || '',
-            CreateTime   => $Row[7]  || '',
-            CreateBy     => $Row[8]  || '',
-            ChangeTime   => $Row[9]  || '',
-            ChangeBy     => $Row[10] || '',
+            VersionID     => $Row[0],
+            ConfigItemID  => $Row[1],
+            Name          => $Row[2]  || '',
+            VersionString => $Row[3]  || '',
+            DefinitionID  => $Row[4]  || '',
+            DeplStateID   => $Row[5]  || '',
+            InciStateID   => $Row[6]  || '',
+            Description   => $Row[7]  || '',
+            CreateTime    => $Row[8]  || '',
+            CreateBy      => $Row[9]  || '',
+            ChangeTime    => $Row[10] || '',
+            ChangeBy      => $Row[11] || '',
         };
     }
 
@@ -491,6 +495,7 @@ Or adds the initial version to an config item that is being created.
         LastVersion       => {...}          # either ConfigItemID or LastVersion(ID) is mandatory
         UserID            => 1,
         Name              => 'The Name',    # optional
+        VersionString     => 'The Version', # optional
         DeplStateID       => 8,             # optional
         InciStateID       => 4,             # optional
         Description       => 'ABCD',        # optional
@@ -546,17 +551,18 @@ sub VersionAdd {
     my $InsertSuccess = $DBObject->Do(
         SQL => <<'END_SQL',
 INSERT INTO configitem_version (
-    configitem_id, name, definition_id, depl_state_id, inci_state_id, description,
+    configitem_id, name, version_string, definition_id, depl_state_id, inci_state_id, description,
     create_time, create_by, change_time, change_by
 )
 VALUES (
-    ?, ?, ?, ?, ?, ?,
+    ?, ?, ?, ?, ?, ?, ?,
    current_timestamp, ?, current_timestamp, ?
 )
 END_SQL
         Bind => [
             \$Version{ConfigItemID},
             \$Version{Name},
+            \$Version{VersionString},
             \$Definition->{DefinitionID},
             \$Version{DeplStateID},
             \$Version{InciStateID},
@@ -726,6 +732,7 @@ update a version
         UserID                 => 1,
         DefinitionID           => 123,           # optional, ID of the definition which was used for creating the input
         Name                   => 'The Name',    # optional
+        VersionString          => 'The Version', # optional
         DeplStateID            => 8,             # optional
         InciStateID            => 4,             # optional
         Description            => 'ABCD',        # optional
@@ -767,10 +774,10 @@ sub VersionUpdate {
     # needs to be recalculation when the incident state of the last version has changed.
     my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
-    if ( any { defined $Param{$_} } qw/Name DeplStateID InciStateID DefinitionID/ ) {
+    if ( any { defined $Param{$_} } qw/Name VersionString DeplStateID InciStateID DefinitionID Description/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-        for my $Attribute (qw/Name DeplStateID InciStateID DefinitionID/) {
+        for my $Attribute (qw/Name VersionString DeplStateID InciStateID DefinitionID Description/) {
             $Param{$Attribute} ||= $Version->{$Attribute};
         }
 
@@ -778,11 +785,12 @@ sub VersionUpdate {
         my $UpdateSuccess = $DBObject->Do(
             SQL => <<'END_SQL',
 UPDATE configitem_version
-  SET name = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, description = ?, change_time = current_timestamp, change_by = ?
+  SET name = ?, version_string = ?, definition_id = ?, depl_state_id = ?, inci_state_id = ?, description = ?, change_time = current_timestamp, change_by = ?
   WHERE id = ?
 END_SQL
             Bind => [
                 \$Param{Name},
+                \$Param{VersionString},
                 \$Param{DefinitionID},
                 \$Param{DeplStateID},
                 \$Param{InciStateID},
