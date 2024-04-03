@@ -66,9 +66,6 @@
 [% RenderBlockStart("RowVersionStringErrorDuplicates") %]
                             <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate("Version Number is already in use by the ConfigItems with the following Number(s): %s", Data.Duplicates) | html %]</p></div>
 [% RenderBlockEnd("RowVersionStringErrorDuplicates") %]
-[% RenderBlockStart("RowVersionStringErrorRegEx") %]
-                            <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate(Data.RegExErrorMessage) | html %]</p></div>
-[% RenderBlockEnd("RowVersionStringErrorRegEx") %]
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowVersionString") %]

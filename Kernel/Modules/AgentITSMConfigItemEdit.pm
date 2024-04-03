@@ -29,7 +29,7 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language              qw(Translatable);
+use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -331,7 +331,10 @@ sub Run {
     my %DynamicFieldPossibleValues;
     my %DynamicFieldVisibility;
     my $NameModuleObject;
+    my $VersionStringModuleObject;
+
     if ( $Self->{Subaction} eq 'Save' ) {
+
         my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
         if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
             my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
@@ -348,6 +351,24 @@ sub Run {
 
             # create a backend object
             $NameModuleObject = $Kernel::OM->Get($NameModule);
+        }
+
+        my $VersionStringModuleConfig = $ConfigObject->Get('ITSMConfigItem::VersionStringModule');
+        if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ConfigItem->{Class} } ) {
+            my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{$ConfigItem->{Class}}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load version string module for class $ConfigItem->{Class}!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
         }
 
         # get the uploaded attachment
@@ -381,6 +402,15 @@ sub Run {
             $ConfigItem->{Name} = $GetParam{Name};
 
             if ( !$ConfigItem->{Name} ) {
+                $AllRequired = 0;
+            }
+        }
+
+        # get version string only if it is not filled by a module
+        if ( !$VersionStringModuleObject ) {
+            $ConfigItem->{VersionString} = $GetParam{VersionString};
+
+            if ( !$ConfigItem->{VersionString} ) {
                 $AllRequired = 0;
             }
         }
@@ -958,6 +988,7 @@ sub Run {
         );
     }
     else {
+
         my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
         if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
             my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
@@ -974,6 +1005,24 @@ sub Run {
 
             # create a backend object
             $NameModuleObject = $Kernel::OM->Get($NameModule);
+        }
+
+        my $VersionStringModuleConfig = $ConfigObject->Get('ITSMConfigItem::VersionStringModule');
+        if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ConfigItem->{Class} } ) {
+            my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{$ConfigItem->{Class}}";
+
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Can't load version string module for class $ConfigItem->{Class}!",
+                );
+
+                return;
+            }
+
+            # create a backend object
+            $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
         }
 
         my $LoopProtection = 100;
@@ -1080,18 +1129,72 @@ sub Run {
         );
     }
 
-    # output versionstring block
-    my $VersionStringEditable = 1;
-    my $RowVersionStringInvalid = 0;
+    my $VersionStringEditable   = $VersionStringModuleObject ? 0 : 1;
+    my $VersionStringDuplicates = [];
+    my $RowVersionStringInvalid = $ConfigItem->{VersionString}
+
+        # If a version string exists then mark duplicate errors.
+        ? ( IsArrayRefWithData($VersionStringDuplicates) ? 'ServerError' : undef )
+
+        # If the version string does not exist but should exist then mark it.
+        : ( ( $Self->{Subaction} eq 'Save' && $VersionStringEditable ) ? 'ServerError' : undef );
+
+    # output version string block
     if ( $ConfigItem->{VersionString} || $VersionStringEditable ) {
 
+        # output version string block
         $LayoutObject->Block(
             Name => 'RowVersionString',
             Data => {
                 %GetParam,
                 RowVersionStringInvalid => $RowVersionStringInvalid,
-                Readonly       => !$VersionStringEditable,
+                Readonly                => !$VersionStringEditable,
             },
+        );
+    }
+
+    # show specific errors
+    if ( IsArrayRefWithData($VersionStringDuplicates) ) {
+
+        # build array with CI-Numbers
+        my @VersionStringDuplicatesByCINumber;
+        for my $ConfigItemID ( @{$VersionStringDuplicates} ) {
+
+            # lookup the CI number
+            my $CINumber = $ConfigItemObject->ConfigItemLookup(
+                ConfigItemID => $ConfigItemID,
+            );
+
+            push @VersionStringDuplicatesByCINumber, $CINumber;
+        }
+
+        my $DuplicateString = join ', ', @VersionStringDuplicatesByCINumber;
+
+        if ( $ConfigObject->{Debug} > 0 ) {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message  =>
+                    "Rendering block for duplicates (CI-Numbers: $DuplicateString) error message",
+            );
+        }
+
+        $LayoutObject->Block(
+            Name => 'RowVersionStringErrorDuplicates',
+            Data => {
+                Duplicates => $DuplicateString,
+            },
+        );
+    }
+    elsif ($RowVersionStringInvalid) {
+        if ( $ConfigObject->{Debug} > 0 ) {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message  => "Rendering default error block",
+            );
+        }
+
+        $LayoutObject->Block(
+            Name => 'RowVersionStringErrorDefault',
         );
     }
 
