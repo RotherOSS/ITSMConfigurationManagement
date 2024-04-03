@@ -530,6 +530,36 @@ sub VersionAdd {
         }
     }
 
+    # get class list
+    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+    );
+
+    return unless $ClassList;
+    return unless ref $ClassList eq 'HASH';
+
+    my $VersionStringModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionStringModule');
+    my $VersionStringModuleObject;
+    if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+        my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
+
+        # check if version string module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load version string module for class $ClassList->{ $Param{ClassID} }!",
+            );
+
+            return;
+        }
+
+        # create a backend object
+        $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
+
+        # override possible incoming name
+        $Version{VersionString} = $VersionStringModuleObject->VersionStringGet(%Param);
+    }
+
     # new versions are always added with the newest definition
     # TODO: support that the DefinitionId is passed as parameter
     my $Definition = $Self->DefinitionGet(
