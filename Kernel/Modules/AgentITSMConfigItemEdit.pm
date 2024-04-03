@@ -166,7 +166,7 @@ sub Run {
             if ($DuplicateID) {
 
                 # get Data from duplicate CI
-                for my $Param (qw(Name DeplStateID InciStateID Description)) {
+                for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
                     $GetParam{$Param} = $ConfigItem->{$Param};
                 }
 
@@ -192,7 +192,7 @@ sub Run {
 
             # TODO Prio3: set default data
             #else {
-            #for my $Param (qw(Name DeplStateID InciStateID Description)) {
+            #for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
             #    $GetParam{$Param} = ;
             #}
             #}
@@ -200,7 +200,7 @@ sub Run {
 
         else {
             # get general form data
-            for my $Param (qw(Name DeplStateID InciStateID Description)) {
+            for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
                 $GetParam{$Param} = $ConfigItem->{$Param};
             }
 
@@ -225,7 +225,7 @@ sub Run {
 
     else {
         # get general form data
-        for my $Param (qw(Name DeplStateID InciStateID Description)) {
+        for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
         }
 
@@ -449,6 +449,8 @@ sub Run {
                 $CINameRegexErrorMessage = $CINameRegexConfig->{ $ClassName . '::' . 'CINameRegexErrorMessage' } || '';
             }
         }
+
+        $ConfigItem->{VersionString} = $GetParam{VersionString};
 
         # transform dynamic field data into DFName => DFName pair
         my %DynamicFieldAcl = map { $_->{Name} => $_->{Name} } $DynamicFieldList->@*;
@@ -1075,6 +1077,21 @@ sub Run {
 
         $LayoutObject->Block(
             Name => 'RowNameErrorDefault',
+        );
+    }
+
+    # output versionstring block
+    my $VersionStringEditable = 1;
+    my $RowVersionStringInvalid = 0;
+    if ( $ConfigItem->{VersionString} || $VersionStringEditable ) {
+
+        $LayoutObject->Block(
+            Name => 'RowVersionString',
+            Data => {
+                %GetParam,
+                RowVersionStringInvalid => $RowVersionStringInvalid,
+                Readonly       => !$VersionStringEditable,
+            },
         );
     }
 

@@ -55,6 +55,23 @@
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowName") %]
+[% RenderBlockStart("RowVersionString") %]
+                        <label class="Mandatory" for="VersionString"><span class="Marker">*</span> [% Translate("Version Number") | html %]: </label>
+                        <div class="Field">
+                            <input type="text" name="VersionString" id="VersionString" class="W50pc Validate_Required [% Data.RowVersionStringInvalid | html %]" maxlength="250" value="[% Data.VersionString | html %]" title="[% Translate("The version number of this config item") | html %]"[% IF Data.Readonly %] readonly[% END %]/>
+                            <div id="VersionStringError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+[% RenderBlockStart("RowVersionStringErrorDefault") %]
+                            <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+[% RenderBlockEnd("RowVersionStringErrorDefault") %]
+[% RenderBlockStart("RowVersionStringErrorDuplicates") %]
+                            <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate("Version Number is already in use by the ConfigItems with the following Number(s): %s", Data.Duplicates) | html %]</p></div>
+[% RenderBlockEnd("RowVersionStringErrorDuplicates") %]
+[% RenderBlockStart("RowVersionStringErrorRegEx") %]
+                            <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate(Data.RegExErrorMessage) | html %]</p></div>
+[% RenderBlockEnd("RowVersionStringErrorRegEx") %]
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("RowVersionString") %]
 [% RenderBlockStart("RowDeplState") %]
                         <label class="Mandatory" for="DeplStateID"><span class="Marker">*</span> [% Translate("Deployment State") | html %]: </label>
                         <div class="Field">
