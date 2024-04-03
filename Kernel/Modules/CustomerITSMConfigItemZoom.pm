@@ -278,7 +278,7 @@ sub Run {
                     Key   => ( $BaseLink . "VersionID=$_->{VersionID}" ),
                     Value => (
                         "$_->{Name} "
-                            . ( $_->{VersionNumber} || $_->{VersionID} )
+                            . ( $_->{VersionString} || $_->{VersionID} )
                             . " ($_->{CreateTime})"
                     ),
                 }

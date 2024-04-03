@@ -221,7 +221,7 @@ sub Run {
         {
             Key   => ( $BaseLink . "VersionID=$_->{VersionID}" ),
             Value => (
-                "Version " . ( $_->{VersionNumber} || $_->{VersionID} )
+                "Version " . ( $_->{VersionString} || $_->{VersionID} )
             ),
         }
     } $VersionList->@*;
