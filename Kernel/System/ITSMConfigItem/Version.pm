@@ -232,7 +232,7 @@ sub VersionListAll {
     # extract those and use it for the query
     if ( IsArrayRefWithData( $Param{ConfigItemIDs} ) ) {
         my @ConfigItemIDs = grep { $_ =~ m/^\d+$/ } @{ $Param{ConfigItemIDs} };
-        push @Conditions, 'configitem_id IN (' . join ', ', @ConfigItemIDs . ')';
+        push @Conditions, 'configitem_id IN (' . ( join ', ', @ConfigItemIDs ) . ')';
     }
 
     if ( $Param{OlderDate} && $Param{OlderDate} =~ m/^\d{4}\-\d{2}\-\d{2}\ \d{2}\:\d{2}:\d{2}$/ ) {
