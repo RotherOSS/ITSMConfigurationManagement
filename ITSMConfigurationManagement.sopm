@@ -169,6 +169,7 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission/ClassGroupCheck.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Permission/ItemClassGroupCheck.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Version.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/VersionString/DefaultModule.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Customer.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/CustomerCompany.pm" />
