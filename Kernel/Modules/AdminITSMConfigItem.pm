@@ -309,6 +309,14 @@ sub Run {
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
+        # Add code mirror language mode.
+        if ( $LayoutObject->{BrowserRichText} ) {
+            $LayoutObject->AddJSData(
+                Key   => 'EditorLanguageMode',
+                Value => 'text/x-yaml',
+            );
+        }
+
         # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
@@ -359,6 +367,14 @@ sub Run {
         my $RoleID = $ParamObject->GetParam( Param => 'RoleID' );
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $RoleID;
+
+        # Add code mirror language mode.
+        if ( $LayoutObject->{BrowserRichText} ) {
+            $LayoutObject->AddJSData(
+                Key   => 'EditorLanguageMode',
+                Value => 'text/x-yaml',
+            );
+        }
 
         # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
