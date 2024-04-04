@@ -1140,7 +1140,7 @@ sub Run {
         : ( ( $Self->{Subaction} eq 'Save' && $VersionStringEditable ) ? 'ServerError' : undef );
 
     # output version string block
-    if ( $ConfigItem->{VersionString} || $VersionStringEditable ) {
+    if ($VersionStringEditable) {
 
         # output version string block
         $LayoutObject->Block(
@@ -1148,7 +1148,6 @@ sub Run {
             Data => {
                 %GetParam,
                 RowVersionStringInvalid => $RowVersionStringInvalid,
-                Readonly                => !$VersionStringEditable,
             },
         );
     }
