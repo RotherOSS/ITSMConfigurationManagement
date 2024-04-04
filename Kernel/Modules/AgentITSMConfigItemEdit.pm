@@ -1211,7 +1211,7 @@ sub Run {
         Data         => $DeplStateList,
         Name         => 'DeplStateID',
         PossibleNone => 1,
-        Class        => 'Validate_Required Modernize' . $RowDeplStateInvalid,
+        Class        => 'FormUpdate Validate_Required Modernize' . $RowDeplStateInvalid,
         SelectedID   => $GetParam{DeplStateID},
     );
 
@@ -1242,7 +1242,7 @@ sub Run {
         Data         => $InciStateList,
         Name         => 'InciStateID',
         PossibleNone => 1,
-        Class        => 'Validate_Required Modernize' . $RowInciStateInvalid,
+        Class        => 'FormUpdate Validate_Required Modernize' . $RowInciStateInvalid,
         SelectedID   => $GetParam{InciStateID},
     );
 
