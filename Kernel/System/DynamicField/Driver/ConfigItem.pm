@@ -41,6 +41,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Log',
     'Kernel::System::GeneralCatalog',
+    'Kernel::System::LinkObject',
     'Kernel::System::ITSMConfigItem',
 );
 
@@ -132,7 +133,7 @@ sub EditFieldValueGet {
 
 =head2 GetFieldTypeSettings()
 
-Get field type settings that are specific to the referenced object type ITSMConfigItem.
+Get field type settings that are specific to the referenced object type C<ITSMConfigItem>.
 
 =cut
 
@@ -160,6 +161,71 @@ sub GetFieldTypeSettings {
                 Multiple        => 1,
             };
     }
+
+    # Support the same link types as with the generic LinkObject feature
+    {
+        my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+
+        # create the selectable type list
+        my %SelectionData;
+
+        # get possible types list
+        my %PossibleTypesList = $LinkObject->PossibleTypesList(
+            Object1 => 'ITSMConfigItem',
+            Object2 => $Self->{ReferencedObjectType},
+        );
+
+        POSSIBLETYPE:
+        for my $PossibleType ( sort { lc $a cmp lc $b } keys %PossibleTypesList ) {
+
+            # look up type id,
+            # insert the name into the table link_type if it does not exist yet
+            my $TypeID = $LinkObject->TypeLookup(
+                Name   => $PossibleType,
+                UserID => 1,               # TODO: get the actual id of the current user
+            );
+
+            # get type
+            my %Type = $LinkObject->TypeGet(
+                TypeID => $TypeID,
+                UserID => $Self->{UserID},
+            );
+
+            # create the source name
+            $SelectionData{"${PossibleType}::Source"} = $Type{SourceName};
+
+            next POSSIBLETYPE unless $Type{Pointed};
+
+            # create the target name
+            $SelectionData{"${PossibleType}::Target"} = $Type{TargetName};
+        }
+
+        # TODO: saner grouping, and saner ordering
+        push @FieldTypeSettings,
+            {
+                ConfigParamName => 'LinkType',
+                Label           => Translatable('Link type'),
+                Explanation     => Translatable('Select the link type.'),
+                InputType       => 'Selection',
+                SelectionData   => \%SelectionData,
+                PossibleNone    => 0,
+            };
+    }
+
+    # Support configurable search key
+    push @FieldTypeSettings,
+        {
+            ConfigParamName => 'AppliesToAllVersions',
+            Label           => Translatable('The reference applies to all versions'),
+            Explanation     => Translatable('The most recent reference will be used for showing the link tree and for the impact analysis.'),
+            InputType       => 'Selection',
+            SelectionData   => {
+                'Yes' => 'Yes',
+                'No'  => 'No',
+            },
+            PossibleNone => 1,
+            Multiple     => 0,
+        };
 
     # Support configurable search key
     push @FieldTypeSettings,
