@@ -480,8 +480,6 @@ sub Run {
             }
         }
 
-        $ConfigItem->{VersionString} = $GetParam{VersionString};
-
         # transform dynamic field data into DFName => DFName pair
         my %DynamicFieldAcl = map { $_->{Name} => $_->{Name} } $DynamicFieldList->@*;
 
