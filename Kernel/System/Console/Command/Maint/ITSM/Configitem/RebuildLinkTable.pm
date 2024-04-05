@@ -21,13 +21,13 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
+use parent qw(Kernel::System::Console::BaseCommand);
+
 # core modules
 
 # CPAN modules
 
 # OTOBO modules
-
-use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = qw(
     Kernel::System::ITSMConfigItem
@@ -37,8 +37,8 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description(<<'END_TXT');
-Rebuild the table configitem_link from the Reference dynamic fields. Only the fields linking config items are
-considered here.
+Rebuild the database table configitem_link from the dynamic fields of the type Reference. Only the fields linking config items are
+considered in this process.
 END_TXT
 
     return;
