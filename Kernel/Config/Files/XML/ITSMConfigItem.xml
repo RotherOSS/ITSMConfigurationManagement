@@ -2226,6 +2226,15 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::VersionStringModule::TemplateToolkit" Required="0" Valid="0">
+        <Description>Defines the Template::Toolkit expression to evaluate in the Template::Toolkit version string module.</Description>
+        <Navigation>Frontend::Agent::ITSMConfigItem::VersionStringModule</Navigation>
+        <Value>
+            <Hash>
+                <Item ValueType="Textarea" Key="VersionStringExpression"></Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="DynamicField::EventModulePost###200-DynamicFieldSync" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
