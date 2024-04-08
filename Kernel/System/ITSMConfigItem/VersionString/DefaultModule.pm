@@ -54,17 +54,17 @@ sub new {
 sub VersionStringGet {
     my ( $Self, %Param ) = @_;
 
-    # expected params: ConfigItemID
+    # expected params: Version
     my $VersionListRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionListAll(
-        ConfigItemIDs => [ $Param{ConfigItemID} ],
+        ConfigItemIDs => [ $Param{Version}{ConfigItemID} ],
     );
 
     return 1 unless IsHashRefWithData($VersionListRef);
 
-    my $InitialVersionString = ( scalar keys $VersionListRef->{ $Param{ConfigItemID} }->%* ) + 1;
+    my $InitialVersionString = ( scalar keys $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) + 1;
     my $VersionString;
     while ( !defined $VersionString ) {
-        if ( grep { $_->{VersionString} eq $InitialVersionString } values $VersionListRef->{ $Param{ConfigItemID} }->%* ) {
+        if ( grep { $_->{VersionString} eq $InitialVersionString } values $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) {
             $InitialVersionString++;
         }
         else {
