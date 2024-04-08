@@ -4,11 +4,17 @@
 .settings
 .includepath
 .DS_Store
+# files that might be generated during development
+*.out
+*.err
+
+# Editor swap files
+*.swn
 *.swp
 *.swo
 *~
 
-# OTRS
+# OTOBO
 doc/manual/en
 Kernel/Config/Files/ZZZ*.pm
 Kernel/Config/GenericAgent.pm
@@ -65,7 +71,7 @@ Kernel/Language/*_Support.pm
 Kernel/System/Support
 var/httpd/htdocs/skins/Agent/default/css/Support.Default.css
 
-# OTRSCodePolicy
+# CodePolicy
 .tidyall.d
 Perl/Critic
 TidyAll
