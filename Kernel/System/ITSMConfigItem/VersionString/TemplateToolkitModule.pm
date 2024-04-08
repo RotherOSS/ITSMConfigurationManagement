@@ -59,22 +59,24 @@ sub VersionStringGet {
 
     return unless IsHashRefWithData($ModuleConfig);
 
-    # expected params: ConfigItemID
-    my $VersionListRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionListAll(
-        ConfigItemIDs => [ $Param{ConfigItemID} ],
-    );
-
+    # evaluate expression defined in sysconfig
     my $VersionString = $Kernel::OM->Create('Kernel::Output::HTML::Layout')->Output(
         Template => $ModuleConfig->{VersionStringExpression},
         Data     => $Param{Version},
     );
 
+    return unless $VersionString;
+
     # remove newlines and carriage returns to enable matching with edit field value
     $VersionString =~ s/(\n|\r)//g;
 
-    if ( grep { $_->{VersionString} eq $VersionString } values $VersionListRef->{ $Param{ConfigItemID} }->%* ) {
+    # if previous versions exist, check if string is taken
+    # fetch versions
+    my $VersionListRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionListAll(
+        ConfigItemIDs => [ $Param{Version}{ConfigItemID} ],
+    );
 
-        # TODO ask about error behavior
+    if ( grep { $_->{VersionString} eq $VersionString } values $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) {
         return;
     }
 
