@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::VersionString::DefaultModule;
+package Kernel::System::ITSMConfigItem::VersionString::TemplateToolkit;
 
 use strict;
 use warnings;
@@ -27,12 +27,13 @@ use warnings;
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::ITSMConfigItem',
 );
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::VersionString::DefaultModule - Using a counter for the version string
+Kernel::System::ITSMConfigItem::VersionString::TemplateToolkit - Evaluating a Template::Toolkit expression for the version string
 
 =head1 PUBLIC INTERFACE
 
@@ -40,7 +41,7 @@ Kernel::System::ITSMConfigItem::VersionString::DefaultModule - Using a counter f
 
 create an object. Do not use it directly, instead use:
 
-my $DefaultModuleObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::VersionString::DefaultModule');
+my $VersionStringModuleObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::VersionString::TemplateToolkit');
 
 =cut
 
@@ -54,22 +55,29 @@ sub new {
 sub VersionStringGet {
     my ( $Self, %Param ) = @_;
 
-    # expected params: Version
+    my $ModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionStringModule::TemplateToolkit');
+
+    return unless IsHashRefWithData($ModuleConfig);
+
+    # evaluate expression defined in sysconfig
+    my $VersionString = $Kernel::OM->Create('Kernel::Output::HTML::Layout')->Output(
+        Template => $ModuleConfig->{VersionStringExpression},
+        Data     => $Param{Version},
+    );
+
+    return unless $VersionString;
+
+    # remove newlines and carriage returns to enable matching with edit field value
+    $VersionString =~ s/(\n|\r)//g;
+
+    # if previous versions exist, check if string is taken
+    # fetch versions
     my $VersionListRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionListAll(
         ConfigItemIDs => [ $Param{Version}{ConfigItemID} ],
     );
 
-    return 1 unless IsHashRefWithData($VersionListRef);
-
-    my $InitialVersionString = ( scalar keys $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) + 1;
-    my $VersionString;
-    while ( !defined $VersionString ) {
-        if ( grep { $_->{VersionString} eq $InitialVersionString } values $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) {
-            $InitialVersionString++;
-        }
-        else {
-            $VersionString = $InitialVersionString;
-        }
+    if ( grep { $_->{VersionString} eq $VersionString } values $VersionListRef->{ $Param{Version}{ConfigItemID} }->%* ) {
+        return;
     }
 
     return $VersionString;
