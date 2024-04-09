@@ -1813,6 +1813,7 @@ returns the attributes a config item can have on the system.
     my %Attributes = $TicketObject->ObjectAttributesGet(
         DynamicFields => (0|1),         # (optional) if dynamic field names are included, default 0
         Version       => (0|1),         # (optional) if version information is included, default 1
+        EditMask      => (0|1),         # (optional) if edit mask attributes are returned instead of backend attributes, default 0
     );
 
 =cut
@@ -1822,27 +1823,40 @@ sub ObjectAttributesGet {
 
     $Param{Version} //= 1;
 
-    my %ConfigItemAttributes = (
-        ConfigItemID   => 1,
-        Number         => 1,
-        ClassID        => 1,
-        Classes        => 1,
-        CurDeplStateID => 1,
-        CurDeplStates  => 1,
-        CurInciStateID => 1,
-        CurInciStates  => 1,
-    );
+    my %ConfigItemAttributes;
 
-    # if requested, set version attributes
-    if ( $Param{Version} ) {
+    if ( $Param{EditMask} ) {
         %ConfigItemAttributes = (
-            %ConfigItemAttributes,
-            Name        => 1,
-            DeplStateID => 1,
-            DeplStates  => 1,
-            InciStateID => 1,
-            InciStates  => 1,
+            DeplStateID   => 1,
+            InciStateID   => 1,
+            Name          => 1,
+            VersionString => 1,
         );
+    }
+    else {
+        %ConfigItemAttributes = (
+            ConfigItemID   => 1,
+            Number         => 1,
+            ClassID        => 1,
+            Classes        => 1,
+            CurDeplStateID => 1,
+            CurDeplStates  => 1,
+            CurInciStateID => 1,
+            CurInciStates  => 1,
+        );
+
+        # if requested, set version attributes
+        if ( $Param{Version} ) {
+            %ConfigItemAttributes = (
+                %ConfigItemAttributes,
+                Name          => 1,
+                VersionString => 1,
+                DeplStateID   => 1,
+                DeplStates    => 1,
+                InciStateID   => 1,
+                InciStates    => 1,
+            );
+        }
     }
 
     # check if dynamic fields need to be added

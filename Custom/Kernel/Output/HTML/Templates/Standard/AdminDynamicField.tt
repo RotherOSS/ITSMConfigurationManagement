@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 4583e0f8d78ae54212e534328be890ae90f53fc9 - Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+# $origin: otobo - 8c1fe4e783e2248a328b62f047d394921917f322 - Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -194,7 +194,7 @@
                             <th>[% Translate("Type") | html %]</th>
                             <th>[% Translate("Object") | html %]</th>
                             <th>[% Translate("Validity") | html %]</th>
-                            <th>[% Translate("Clone") | html %]</th>
+                            <th>[% Translate("Copy") | html %]</th>
                             <th>[% Translate("Delete") | html %]</th>
                         </tr>
                     </thead>
@@ -228,7 +228,7 @@
                             </td>
                             <td class="Center">
 [% RenderBlockStart("CloneLink") %]
-                                <a class="DynamicFieldClone" href="[% Env("Baselink") %]Action=[% Data.ConfigDialog %];Subaction=Add;ID=[% Data.ID | uri %][% Data.FilterStrg %];FieldType=[% Data.FieldTypeName | uri %];ObjectType=[% Data.ObjectTypeName | uri %]" title="[% Translate("Clone from this field") | html %]">
+                                <a class="DynamicFieldClone" href="[% Env("Baselink") %]Action=[% Data.ConfigDialog %];Subaction=Add;ID=[% Data.ID | uri %][% Data.FilterStrg %];FieldType=[% Data.FieldTypeName | uri %];ObjectType=[% Data.ObjectTypeName | uri %]" title="[% Translate("Copy this field") | html %]">
                                     <i class="fa fa-copy"></i>
                                 </a>
 [% RenderBlockEnd("CloneLink") %]

@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - a91d81cefdca00286973c582ab7b27e93cf6d795 - Kernel/Modules/AgentDashboardCommon.pm
+# $origin: otobo - ea7af25118721e16d361e6e00403764eaa379dab - Kernel/Modules/AgentDashboardCommon.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -17,11 +17,19 @@
 # --
 
 package Kernel::Modules::AgentDashboardCommon;
+
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::DBObject)
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -31,10 +39,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -138,10 +143,10 @@ sub Run {
                     Code => 'Core.Agent.CustomerInformationCenterSearch.OpenSearchDialog();'
                 );
 
-                my $Output = $LayoutObject->Header();
-                $Output .= $LayoutObject->NavigationBar();
-                $Output .= $LayoutObject->Footer();
-                return $Output;
+                return join '',
+                    $LayoutObject->Header,
+                    $LayoutObject->NavigationBar,
+                    $LayoutObject->Footer;
             }
         }
     }
@@ -158,10 +163,10 @@ sub Run {
                     Code => 'Core.Agent.CustomerUserInformationCenterSearch.OpenSearchDialog();'
                 );
 
-                my $Output = $LayoutObject->Header();
-                $Output .= $LayoutObject->NavigationBar();
-                $Output .= $LayoutObject->Footer();
-                return $Output;
+                return join '',
+                    $LayoutObject->Header,
+                    $LayoutObject->NavigationBar,
+                    $LayoutObject->Footer;
             }
         }
     }
@@ -856,14 +861,14 @@ sub Run {
         }
     }
 
-    my $Output = $LayoutObject->Header();
-    $Output .= $LayoutObject->NavigationBar();
-    $Output .= $LayoutObject->Output(
-        TemplateFile => $Self->{Action},
-        Data         => \%Param
-    );
-    $Output .= $LayoutObject->Footer();
-    return $Output;
+    return join '',
+        $LayoutObject->Header,
+        $LayoutObject->NavigationBar,
+        $LayoutObject->Output(
+            TemplateFile => $Self->{Action},
+            Data         => \%Param
+        ),
+        $LayoutObject->Footer;
 }
 
 sub _Element {

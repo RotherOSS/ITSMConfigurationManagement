@@ -565,8 +565,10 @@ sub VersionAdd {
         # create a backend object
         $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
 
-        # override possible incoming name
-        $Version{VersionString} = $VersionStringModuleObject->VersionStringGet(%Param);
+        # override possible incoming version string
+        $Version{VersionString} = $VersionStringModuleObject->VersionStringGet(
+            Version => \%Version,
+        );
     }
 
     # new versions are always added with the newest definition
