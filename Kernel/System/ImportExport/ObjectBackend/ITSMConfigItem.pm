@@ -1425,7 +1425,6 @@ sub ImportDataSave {
             DeplStateID  => $VersionData->{DeplStateID},
             InciStateID  => $VersionData->{InciStateID},
             UserID       => $Param{UserID},
-            UserID       => $Param{UserID},
             %DFVersionData,
         );
 
