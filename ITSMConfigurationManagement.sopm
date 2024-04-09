@@ -22,6 +22,7 @@
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
+        <File Permission="660" Location="Custom/Kernel/System/DynamicField/Driver/Lens.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
