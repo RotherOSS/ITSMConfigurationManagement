@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::Output::HTML::ITSMConfigItem::OverviewSmall;
+package Kernel::Output::HTML::ITSMConfigItem::CustomerOverviewSmall;
 
 use strict;
 use warnings;
@@ -32,6 +32,8 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::CustomerGroup',
+    'Kernel::System::CustomerUser',
     'Kernel::System::GeneralCatalog',
     'Kernel::Language',
     'Kernel::System::Log',
@@ -66,7 +68,7 @@ sub new {
     my $BackendConfigKey = 'ITSMConfigItem::Frontend::' . $Self->{Action};
     $Self->{Config} = $ConfigObject->Get($BackendConfigKey);
 
-    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+    my %Preferences = $Kernel::OM->Get('Kernel::System::CustomerUser')->GetPreferences(
         UserID => $Self->{UserID},
     );
 
@@ -82,35 +84,50 @@ sub new {
     # check for filter
     my $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
 
-    # check for default settings
-    my %DefaultColumns = %{ $Self->{Config}->{DefaultColumns} || {} };
+    # get permission condition for filter
+    my $PermissionConditionsConfig  = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+    my $PermissionConditionsColumns = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns');
+    my %GroupLookup;
 
-    # if class filter is set, display class specific fields
-    my %ClassColumnDefinition;
-    if ( $FilterName && $FilterName ne 'All' ) {
+    if ( IsHashRefWithData($PermissionConditionsConfig) ) {
+        PERMCONF:
+        for my $ConfigCounter ( 1 .. 5 ) {
+            my $ConfigIdentifier          = sprintf( "%02d", $ConfigCounter );
+            my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
+            next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
-        if ( $Self->{Config}{ClassColumnsAvailable} && IsArrayRefWithData( $Self->{Config}{ClassColumnsAvailable}{$FilterName} ) ) {
-            for my $AvailableColumn ( $Self->{Config}{ClassColumnsAvailable}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$AvailableColumn} = 1;
+            # check for group permission
+            if ( IsHashRefWithData( $PermissionConditionConfig->{Groups} ) ) {
+
+                # prepare group lookup if necessary
+                if ( !%GroupLookup ) {
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberList(
+                        UserID => $Self->{UserID},
+                        Type   => 'ro',
+                        Result => 'HASH',
+                    );
+                }
+
+                my $AccessOk = 0;
+                GROUP:
+                for my $GroupName ( $PermissionConditionConfig->{Groups}->@* ) {
+                    next GROUP if !$GroupLookup{$GroupName};
+
+                    $AccessOk = 1;
+                }
+
+                next PERMCONF unless $AccessOk;
+            }
+
+            if ( $FilterName eq $PermissionConditionConfig->{Name} && IsHashRefWithData($PermissionConditionsColumns) ) {
+                $Self->{ColumnsAvailable} = $PermissionConditionsColumns->{$ConfigIdentifier} // [];
             }
         }
 
-        if ( $Self->{Config}{ClassColumnsDefault} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDefault}{$FilterName} ) ) {
-            for my $DefaultColumn ( $Self->{Config}{ClassColumnsDefault}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$DefaultColumn} = 2;
-            }
+        if ( !$Self->{ColumnsAvailable}->@* && IsHashRefWithData($PermissionConditionsColumns) ) {
+            $Self->{ColumnsAvailable} = $ConfigObject->Get('Customer::ConfigItem::PermissionConditionColumns')->{Default} // [];
         }
-    }
-
-    # merge settings from class config and default config
-    for my $Column ( sort _DefaultColumnSort ( keys %DefaultColumns, keys %ClassColumnDefinition ) ) {
-        if ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) && !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
-            push $Self->{ColumnsAvailable}->@*, $Column;
-        }
-
-        if ( ( ( $ClassColumnDefinition{$Column} || $DefaultColumns{$Column} ) // 0 ) == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
-            push $Self->{ColumnsEnabled}->@*, $Column;
-        }
+        $Self->{ColumnsEnabled} = $Self->{ColumnsAvailable};
     }
 
     # if preference settings are available, overwrite enabled columns with preferences
@@ -203,9 +220,6 @@ sub new {
 
 sub ActionRow {
     my ( $Self, %Param ) = @_;
-
-    # set frontend per default to agent
-    $Param{Frontend} //= 'Agent';
 
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -335,7 +349,7 @@ sub ActionRow {
     }
 
     my $Output = $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+        TemplateFile => 'CustomerITSMConfigItemOverviewSmall',
         Data         => \%Param,
     );
 
@@ -497,20 +511,7 @@ sub Run {
                     sort keys %Actions;
             }
 
-            my $ACL;
             my %AclAction = %PossibleActions;
-
-            $ACL = $ConfigItemObject->ConfigItemAcl(
-                Data          => \%PossibleActions,
-                Action        => $Self->{Action},
-                ConfigItemID  => $ConfigItem{ConfigItemID},
-                ReturnType    => 'Action',
-                ReturnSubType => '-',
-                UserID        => $Self->{UserID},
-            );
-            if ($ACL) {
-                %AclAction = $ConfigItemObject->ConfigItemAclActionData();
-            }
 
             # run config item pre menu modules
             my @ActionItems;
@@ -557,7 +558,7 @@ sub Run {
                             Data => $Item,
                         );
                         $Output = $LayoutObject->Output(
-                            TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+                            TemplateFile => 'CustomerITSMConfigItemOverviewSmall',
                             Data         => $Item,
                         );
                     }
@@ -610,10 +611,6 @@ sub Run {
         Key   => 'LinkPage',
         Value => $Param{LinkPage},
     );
-
-    if ( $Param{TagFilters} ) {
-        $Param{OverviewStyle} = " style='display: grid; grid-template-columns: 1fr 7fr;'";
-    }
 
     $LayoutObject->Block(
         Name => 'DocumentContent',
@@ -1543,7 +1540,7 @@ sub Run {
 
     # use template
     my $Output = $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemOverviewSmall',
+        TemplateFile => 'CustomerITSMConfigItemOverviewSmall',
         Data         => {
             %Param,
             Type => $Self->{ViewType},
@@ -1674,6 +1671,22 @@ sub FilterContent {
         OriginalConfigItemIDs => $Param{OriginalConfigItemIDs},
         HeaderColumn          => $HeaderColumn,
     );
+
+    # apply restrictions for customer permission conditions
+    if ( $HeaderColumn eq 'Class' && $Param{Filters}->{ $Param{Filter} }{Search}{Classes}->@* ) {
+        for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
+            if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{ $Param{Filter} }{Search}{Classes}->@* ) {
+                delete $ColumnValues->{$HeaderColumn}{$FilterValue};
+            }
+        }
+    }
+    if ( $HeaderColumn eq 'DeplState' && $Param{Filters}->{ $Param{Filter} }{Search}{DeplStates}->@* ) {
+        for my $FilterValue ( keys $ColumnValues->{$HeaderColumn}->%* ) {
+            if ( !grep { $ColumnValues->{$HeaderColumn}{$FilterValue} eq $_ } $Param{Filters}->{ $Param{Filter} }{Search}{DeplStates}->@* ) {
+                delete $ColumnValues->{$HeaderColumn}{$FilterValue};
+            }
+        }
+    }
 
     my $SelectedValue  = '';
     my $SelectedColumn = $HeaderColumn;

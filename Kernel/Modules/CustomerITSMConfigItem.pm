@@ -397,7 +397,7 @@ sub Run {
     $View ||= 'Small';
 
     # Check if selected view is available.
-    my $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::Overview');
+    my $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerOverview');
     if ( !$Backends->{$View} ) {
 
         # Try to find fallback, take first configured view mode.

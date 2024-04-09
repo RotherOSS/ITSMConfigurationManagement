@@ -28,12 +28,12 @@
 [% RenderBlockStart("OverviewNavBarFilterItem") %]
 [% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
                     <li class="Active [% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
                     </li>
 [% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
 [% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
                     <li class="[% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
                     </li>
 [% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
 [% RenderBlockStart("OverviewNavBarFilterItemSplit") %]
@@ -56,7 +56,7 @@
 
 [% RenderBlockStart("DocumentActionRowRemoveColumnFilters") %]
                     <li class="[% Data.CSS | html %]">
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter %];View=[% Data.View %];[% Data.LinkFilter %];DeleteFilters=DeleteFilters" title="[% Translate("Remove active filters for this screen.") | html %]">
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter %];Tag=[% Data.TagFilter | uri %];View=[% Data.View %];[% Data.LinkFilter %];DeleteFilters=DeleteFilters" title="[% Translate("Remove active filters for this screen.") | html %]">
                             <i class="fa fa-trash-o"></i>
                         </a>
                     </li>
@@ -124,14 +124,14 @@
 [% RenderBlockStart("OverviewNavBarViewMode") %]
 [% RenderBlockStart("OverviewNavBarViewModeSelected") %]
                         <li class="Active">
-                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                 [% Translate(Data.NameShort) | html %]
                             </a>
                         </li>
 [% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
 [% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
                         <li>
-                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                 [% Translate(Data.NameShort) | html %]
                             </a>
                         </li>

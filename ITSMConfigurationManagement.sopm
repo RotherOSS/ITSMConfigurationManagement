@@ -113,6 +113,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutText.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutTextArea.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/MenuGeneric.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/CustomerOverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItemTreeView.pm" />

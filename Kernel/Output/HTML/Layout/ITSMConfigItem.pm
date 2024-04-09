@@ -348,7 +348,8 @@ sub ITSMConfigItemListShow {
     }
 
     # get backend from config
-    my $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::Overview');
+    my $Backends
+        = $Param{Frontend} eq 'Agent' ? $ConfigObject->Get('ITSMConfigItem::Frontend::Overview') : $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerOverview');
     if ( !$Backends ) {
         return $Self->FatalError(
             Message => 'Need config option ITSMConfigItem::Frontend::Overview',
@@ -479,10 +480,10 @@ sub ITSMConfigItemListShow {
     }
 
     # filter selection
-    if ( $Param{Filters} ) {
+    if ( $Param{TagFilters} ) {
         my @NavBarFilters;
-        for my $Prio ( sort keys %{ $Param{Filters} } ) {
-            push @NavBarFilters, $Param{Filters}->{$Prio};
+        for my $Prio ( sort keys %{ $Param{TagFilters} } ) {
+            push @NavBarFilters, $Param{TagFilters}->{$Prio};
         }
         $Self->Block(
             Name => 'OverviewNavBarFilter',
@@ -491,24 +492,24 @@ sub ITSMConfigItemListShow {
             },
         );
         my $Count = 0;
-        for my $Filter (@NavBarFilters) {
+        for my $TagFilter (@NavBarFilters) {
             $Count++;
             if ( $Count == scalar @NavBarFilters ) {
-                $Filter->{CSS} = 'Last';
+                $TagFilter->{CSS} = 'Last';
             }
             $Self->Block(
                 Name => 'OverviewNavBarFilterItem',
                 Data => {
                     %Param,
-                    %{$Filter},
+                    %{$TagFilter},
                 },
             );
-            if ( $Filter->{Filter} eq $Param{Filter} ) {
+            if ( $TagFilter->{TagFilter} eq $Param{TagFilter} ) {
                 $Self->Block(
                     Name => 'OverviewNavBarFilterItemSelected',
                     Data => {
                         %Param,
-                        %{$Filter},
+                        %{$TagFilter},
                     },
                 );
             }
@@ -517,7 +518,7 @@ sub ITSMConfigItemListShow {
                     Name => 'OverviewNavBarFilterItemSelectedNot',
                     Data => {
                         %Param,
-                        %{$Filter},
+                        %{$TagFilter},
                     },
                 );
             }
@@ -661,12 +662,13 @@ sub ITSMConfigItemListShow {
         $NavBarHTML,
         $Object->Run(
             %Param,
-            Config    => $Backends->{$View},
-            Limit     => $Limit,
-            StartHit  => $StartHit,
-            PageShown => $PageShown,
-            AllHits   => $Param{Total}  || 0,
-            Output    => $Param{Output} || '',
+            TagClasses => $Env->{TagClasses},
+            Config     => $Backends->{$View},
+            Limit      => $Limit,
+            StartHit   => $StartHit,
+            PageShown  => $PageShown,
+            AllHits    => $Param{Total}  || 0,
+            Output     => $Param{Output} || '',
         );
 }
 

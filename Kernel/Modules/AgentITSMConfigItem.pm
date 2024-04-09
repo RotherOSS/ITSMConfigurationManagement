@@ -22,11 +22,12 @@ use warnings;
 use namespace::autoclean;
 
 # core modules
+use List::Util qw(none);
 
 # CPAN modules
 
 # OTOBO modules
-use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData IsStringWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -88,7 +89,8 @@ sub Run {
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # get filter from web request
-    my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+    my $Filter    = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+    my $TagFilter = $ParamObject->GetParam( Param => 'Tag' )    || '';
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -183,6 +185,7 @@ sub Run {
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
+    my %ClassLookup = reverse $ClassList->%*;
 
     # get possible deployment state list for config items to be shown
     my $StateList = $GeneralCatalogObject->ItemList(
@@ -238,11 +241,9 @@ sub Run {
     # my config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # to store the default class
-    my $ClassIDAuto = '';
-
     # define position of the filter in the frontend
-    my $PrioCounter = 1000;
+    my $PrioCounter    = 1000;
+    my $TagPrioCounter = 1000;
 
     # to store the total number of config items in all classes that the user has access
     my $TotalCount;
@@ -252,6 +253,11 @@ sub Run {
 
     # to store the NavBar filters
     my %Filters;
+    my %TagFilters;
+    my $TagConfig = $ConfigObject->Get('ITSMConfigItem::Frontend::Tags');
+
+    # build lookup hash tag to classes
+    my %Tag2Class;
 
     CLASSID:
     for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
@@ -265,6 +271,28 @@ sub Run {
         );
 
         next CLASSID if !$HasAccess;
+
+        # build tag-relevant structures
+        if ( IsArrayRefWithData( $TagConfig->{ $ClassList->{$ClassID} } ) ) {
+
+            for my $Tag ( sort $TagConfig->{ $ClassList->{$ClassID} }->@* ) {
+
+                $Tag2Class{$Tag} //= [];
+                push $Tag2Class{$Tag}->@*, $ClassList->{$ClassID};
+
+                if ( !$TagFilters{$Tag} ) {
+                    $TagPrioCounter++;
+                    $TagFilters{$Tag} = {
+                        Name => $Tag,
+                        Prio => $TagPrioCounter,
+                    };
+                }
+            }
+
+            if ( $TagFilter && $TagFilter ne 'All' ) {
+                next CLASSID unless grep { $_ eq $TagFilter } $TagConfig->{ $ClassList->{$ClassID} }->@*;
+            }
+        }
 
         # insert this class to be passed as search parameter for filter 'All'
         push @{$AccessClassList}, $ClassID;
@@ -294,10 +322,6 @@ sub Run {
                 UserID     => $Self->{UserID},
             },
         };
-
-        # remember the first class id to show this in the overview
-        # if no class id was given
-        $ClassIDAuto ||= $ClassID;
     }
 
     # if only one filter exists
@@ -326,8 +350,8 @@ sub Run {
             },
         };
 
-        # if no filter was selected activate the filter for the default class
-        $Filter ||= $ClassIDAuto;
+        # if no filter was selected activate the filter all
+        $Filter ||= 'All';
     }
 
     # check if filter is valid
@@ -407,8 +431,10 @@ sub Run {
     }
 
     # TODO Maybe there is a more elegant way to do this?
-    $Self->{Filter}  = $Filter;
-    $Self->{Filters} = \%Filters;
+    $Self->{Filter}     = $Filter;
+    $Self->{Filters}    = \%Filters;
+    $Self->{TagFilters} = \%TagFilters;
+    $Self->{TagFilter}  = $TagFilter;
 
     if ( $Self->{Subaction} eq 'AJAXFilterUpdate' ) {
 
@@ -451,6 +477,7 @@ sub Run {
 
     my $CountTotal = 0;
     my %NavBarFilter;
+    my %ClassFilter;
     for my $FilterColumn ( sort keys %Filters ) {
         my $Count = 0;
         if (@ViewableDeplStateIDs) {
@@ -465,10 +492,17 @@ sub Run {
             $CountTotal = $Count;
         }
 
-        $NavBarFilter{ $Filters{$FilterColumn}->{Prio} } = {
+        $ClassFilter{ $Filters{$FilterColumn}->{Prio} } = {
             Count  => $Count,
             Filter => $FilterColumn,
             %{ $Filters{$FilterColumn} },
+        };
+    }
+    for my $FilterColumn ( sort keys %TagFilters ) {
+
+        $NavBarFilter{ $TagFilters{$FilterColumn}->{Prio} } = {
+            TagFilter => $FilterColumn,
+            %{ $TagFilters{$FilterColumn} },
         };
     }
 
@@ -513,7 +547,9 @@ sub Run {
     # show config items
     $Output .= $LayoutObject->ITSMConfigItemListShow(
         Filter                => $Filter,
-        Filters               => \%NavBarFilter,
+        TagFilter             => $TagFilter,
+        Filters               => \%ClassFilter,
+        TagFilters            => \%NavBarFilter,
         ConfigItemIDs         => \@ViewableConfigItems,
         OriginalConfigItemIDs => \@OriginalViewableConfigItems,
         GetColumnFilter       => \%GetColumnFilter,

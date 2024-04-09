@@ -30,12 +30,48 @@
 [% RenderBlockEnd("DocumentActionRow") %]
 
 [% RenderBlockStart("DocumentContent") %]
-<div id="OverviewBody" class="Overview ConfigItemList">
+<div id="OverviewBody" class="Overview ConfigItemList"[% Data.OverviewStyle | html %]>
 [% RenderBlockStart("NoConfigItemFound") %]
     <div id="EmptyMessageSmall">
         [% Translate("No config item data found.") | html %]
     </div>
 [% RenderBlockEnd("NoConfigItemFound") %]
+
+[% RenderBlockStart("Filters") %]
+    <div id="OverviewControl SideBarFilter">
+        <div>
+            <div>
+[% RenderBlockStart("SideBarFilter") %]
+                <ul>
+[% RenderBlockStart("SideBarFilterItem") %]
+[% RenderBlockStart("SideBarFilterItemSelected") %]
+                    <li class="Active [% Data.CSS | html %]">
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("SideBarFilterItemSelected") %]
+[% RenderBlockStart("SideBarFilterItemSelectedNot") %]
+                    <li class="[% Data.CSS | html %]">
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("SideBarFilterItemSelectedNot") %]
+[% RenderBlockStart("SideBarFilterItemSplit") %]
+                    -
+[% RenderBlockEnd("SideBarFilterItemSplit") %]
+[% RenderBlockEnd("SideBarFilterItem") %]
+                </ul>
+[% RenderBlockEnd("SideBarFilter") %]
+[% RenderBlockStart("SideBarPageBack") %]
+                <ul>
+                    <li>
+                        <a name="OverviewControl" id="ITSMConfigItemSearch" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkBack %]">[% Translate("Change search options") | html %] [% Data.ProfileName | html %]</a>
+                    </li>
+                </ul>
+[% RenderBlockEnd("SideBarPageBack") %]
+            </div>
+        </div>
+    </div>
+[% RenderBlockEnd("Filters") %]
+
     <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="matrix">
         <input type="hidden" name="Action" value="AgentITSMConfigItemBulk"/>
         <input type="hidden" name="ConfigItemID" value=""/>
