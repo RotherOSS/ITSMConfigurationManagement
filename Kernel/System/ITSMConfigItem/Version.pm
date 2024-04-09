@@ -507,6 +507,15 @@ Or adds the initial version to an config item that is being created.
 sub VersionAdd {
     my ( $Self, %Param ) = @_;
 
+    if ( !$Param{UserID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need UserID!",
+        );
+
+        return;
+    }
+
     my $LastVersion = $Param{LastVersion} || $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
         VersionID     => $Param{LastVersionID},
@@ -519,7 +528,7 @@ sub VersionAdd {
     );
 
     # check needed stuff
-    for my $Attribute (qw(ConfigItemID Name DeplStateID InciStateID UserID)) {
+    for my $Attribute (qw(ConfigItemID Name DeplStateID InciStateID)) {
         if ( !$Version{$Attribute} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',

@@ -95,15 +95,18 @@ sub PreValueSet {
         return 1;
     }
 
+    return 1 if !$Param{Param}{DynamicFieldConfig}{CIClass};
+
     # check whether the changed field triggers a new configitem version and if so, add a new one
     my $TriggerConfig  = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionTrigger') // {};
-    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Param{Param}{DynamicFieldConfig}{Config}{Class} } // [] };
+    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Param{Param}{DynamicFieldConfig}{CIClass} } // [] };
 
     if ( $VersionTrigger{ 'DynamicField_' . $Param{Param}{DynamicFieldConfig}{Name} } ) {
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
         my $NewVersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
             LastVersionID => $Param{Param}{ObjectID},
+            UserID        => $Param{Param}{UserID},
         );
 
         if ( !$NewVersionID ) {
