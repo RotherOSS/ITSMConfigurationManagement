@@ -1122,7 +1122,7 @@ END_SQL
 
     # Upgrade to OTOBO 11 style, this also creates the dynamic fields
     my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
-    my $ExitCode      = $CommandObject->Execute('--use-defaults');
+    my $ExitCode      = $CommandObject->Execute('--use-defaults', '--quiet');
     if ($ExitCode) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
