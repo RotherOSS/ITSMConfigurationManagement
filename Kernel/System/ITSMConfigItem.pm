@@ -693,6 +693,12 @@ END_SQL
             $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
         }
 
+        # delete history entries
+        $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL  => 'DELETE FROM configitem_history WHERE configitem_id = ?',
+            Bind => [ \$ConfigItemID ],
+        );
+
         # delete config item if no version could be created
         $Kernel::OM->Get('Kernel::System::DB')->Do(
             SQL  => 'DELETE FROM configitem WHERE id = ?',
