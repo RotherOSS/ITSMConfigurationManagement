@@ -962,9 +962,9 @@ sub ConfigItemUpdate {
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         # dynamic fields
-        DYNAMICFIELD:
+        NAME:
         for my $Name (@DynamicFieldNames) {
-            next DYNAMICFIELD unless $Definition->{DynamicFieldRef}{$Name};
+            next NAME unless $Definition->{DynamicFieldRef}{$Name};
 
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $Name,
@@ -978,9 +978,10 @@ sub ConfigItemUpdate {
                 )
                 )
             {
+                # pass unchanged dynamic fields to neither VersionAdd() nor VersionUpdate()
                 delete $Param{"DynamicField_$Name"};
 
-                next DYNAMICFIELD;
+                next NAME;
             }
 
             if ( $VersionTrigger{"DynamicField_$Name"} ) {
