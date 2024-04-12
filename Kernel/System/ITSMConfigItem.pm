@@ -1001,12 +1001,6 @@ sub ConfigItemUpdate {
             %Param,
             Version => $ConfigItem,
         );
-
-        # update config item change time
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
-            SQL  => 'UPDATE configitem SET change_time = current_timestamp, change_by = ?',
-            Bind => [ \$Param{UserID} ],
-        );
     }
 
     my %Events = (
