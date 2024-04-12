@@ -21,6 +21,7 @@ use utf8;
 
 # core modules
 use MIME::Base64 qw(encode_base64);
+use Storable     qw(dclone);
 
 # CPAN modules
 use Test2::V0;
@@ -1155,7 +1156,7 @@ for my $Test (@Tests) {
     );
 
     # make a deep copy to avoid changing the definition
-    my $ClonedRequestData = Storable::dclone( $Test->{RequestData} );
+    my $ClonedRequestData = dclone( $Test->{RequestData} );
 
     # start requester with our webservice
     my $LocalResult = $LocalObject->Run(
@@ -1279,7 +1280,7 @@ for my $Test (@Tests) {
         my $Definition = $LocalVersionData->{XMLDefinition};
 
         # make a deep copy to avoid changing the result
-        my $ClonedXMLData = Storable::dclone( $LocalVersionData->{XMLData} );
+        my $ClonedXMLData = dclone( $LocalVersionData->{XMLData} );
 
         my $FormatedXMLData = $LocalObject->InvertFormatXMLData(
             XMLData => $ClonedXMLData->[1]->{Version},

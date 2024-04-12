@@ -36,7 +36,7 @@ use parent qw(
 );
 
 # core modules
-use Storable;
+use Storable       qw(dclone);
 use List::AllUtils qw(first true);
 
 # CPAN modules
@@ -83,7 +83,7 @@ create an object
 =cut
 
 sub new {
-    my ( $Type, %Param ) = @_;
+    my ($Type) = @_;
 
     # allocate new hash for object
     my $Self = bless {}, $Type;
@@ -314,7 +314,7 @@ sub ConfigItemGet {
             return;
         }
 
-        return Storable::dclone($Cache) if $Cache;
+        return dclone($Cache) if $Cache;
     }
 
     # get specific ConfigItemVersion
@@ -456,7 +456,7 @@ END_SQL
         Type  => $Self->{CacheType},
         TTL   => $Self->{CacheTTL},
         Key   => $CacheKey,
-        Value => Storable::dclone( \%ConfigItem ),
+        Value => dclone( \%ConfigItem ),
     );
 
     return \%ConfigItem;
@@ -1575,7 +1575,7 @@ sub CurInciStateRecalc {
     # calculated from all incident link types
     # Incorporate data from previous run(s) and remember known data.
     $Param{NewConfigItemIncidentState} //= {};
-    my $KnownNewConfigItemIncidentState = Storable::dclone( $Param{NewConfigItemIncidentState} );
+    my $KnownNewConfigItemIncidentState = dclone( $Param{NewConfigItemIncidentState} );
 
     # to store the relation between services and linked CIs
     my %ServiceCIRelation;
@@ -1583,7 +1583,7 @@ sub CurInciStateRecalc {
     # remember the scanned config items
     # Incorporate data from previous run(s) and remember known data.
     $Param{ScannedConfigItemIDs} //= {};
-    my $KnownScannedConfigItemIDs = Storable::dclone( $Param{ScannedConfigItemIDs} );
+    my $KnownScannedConfigItemIDs = dclone( $Param{ScannedConfigItemIDs} );
 
     # Find all connected config items with an incident state.
     $Self->_FindInciConfigItems(
