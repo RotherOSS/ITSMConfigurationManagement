@@ -1090,6 +1090,7 @@
                 </Item>
                 <!-- TODO rename DataSelected properly to DataSelectedID, as it is passed as SelectedID subsequently -->
                 <Item Key="DataSelected">Incremental</Item>
+                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
                 <Item Key="PrefKey">VersionStringModule</Item>
                 <Item Key="Block">VersionStringModule</Item>
             </Hash>
