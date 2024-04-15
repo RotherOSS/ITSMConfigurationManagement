@@ -902,7 +902,7 @@ sub DefinitionCheck {
         }
 
         if ( $Section->{Type} && $Section->{Type} ne 'DynamicFields' ) {
-            if ( !any { $Section->{Type} eq $_ } qw/ConfigItemLinks ReferencedSection/ ) {
+            if ( !any { $Section->{Type} eq $_ } qw/ConfigItemLinks Description ReferencedSection/ ) {
                 return $ReturnError->(
                     Translatable(q{Invalid type in section %s.}),
                     $SectionName,
