@@ -684,7 +684,7 @@ END_SQL
         %Param,
         ConfigItemID => $ConfigItemID,
         LastVersion  => {
-            ConfigItemID => $Param{ConfigItemID},
+            ConfigItemID => 'NEW',
         },
     );
 
@@ -991,16 +991,18 @@ sub ConfigItemUpdate {
     }
 
     if ($AddVersion) {
-        $Self->VersionAdd(
+        my $Success = $Self->VersionAdd(
             %Param,
             LastVersion => $ConfigItem,
         );
+        return unless $Success;
     }
     else {
-        $Self->VersionUpdate(
+        my $Success = $Self->VersionUpdate(
             %Param,
             Version => $ConfigItem,
         );
+        return unless $Success;
     }
 
     my %Events = (
