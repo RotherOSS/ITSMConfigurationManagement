@@ -448,7 +448,7 @@ END_SQL
         );
 
         $ConfigItem{$State} = $Item->{Name};
-        $ConfigItem{ $State . 'Type' } = $Item->{Functionality};
+        $ConfigItem{ $State . 'Type' } = $Item->{Functionality}[0] // '';
     }
 
     # cache the result
@@ -555,6 +555,10 @@ sub ConfigItemAdd {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
+    my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+        ItemID => $Param{ClassID},
+    );
+
     # create config item number
     if ( $Param{Number} ) {
 
@@ -574,17 +578,17 @@ sub ConfigItemAdd {
     }
     else {
 
+        my $NumberModule = $ClassPreferences{NumberModule} ? $ClassPreferences{NumberModule}[0] : 'AutoIncrement';
+
         # create config item number
         $Param{Number} = $Self->ConfigItemNumberCreate(
-            Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => "Kernel::System::ITSMConfigItem::Number::$NumberModule",
             ClassID => $Param{ClassID},
         );
     }
 
-    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-    my $NameModuleObject;
-    if ( $NameModuleConfig && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-        my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
 
         # check if name module exists
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
@@ -596,11 +600,7 @@ sub ConfigItemAdd {
             return;
         }
 
-        # create a backend object
-        $NameModuleObject = $Kernel::OM->Get($NameModule);
-
-        # override possible incoming name
-        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
+        delete $Param{Name};
     }
     else {
 
@@ -649,14 +649,6 @@ sub ConfigItemAdd {
         Bind => [ \$Param{Number}, \$Param{DeplStateID}, \$Param{InciStateID}, \$Param{ClassID}, \$Param{UserID}, \$Param{UserID} ],
     );
 
-    if ( !$Success ) {
-        if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
-            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
-        }
-
-        return;
-    }
-
     # find id of new item
     # TODO: what about concurrent INSERTs ???
     my ($ConfigItemID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
@@ -691,9 +683,6 @@ END_SQL
     );
 
     if ( !$VersionID ) {
-        if ( $NameModuleObject && $NameModuleObject->can('ConfigItemNameDelete') ) {
-            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
-        }
 
         # delete history entries
         $Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -792,12 +781,14 @@ sub ConfigItemDelete {
         }
     }
 
-    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
-    if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItemData->{Class} } ) {
-        my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $ConfigItemData->{Class} }";
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $ConfigItemData->{ClassID},
+    );
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
 
         # check if name module exists
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+        if ( $Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
 
             # create a backend object
             my $NameModuleObject = $Kernel::OM->Get($NameModule);
@@ -813,6 +804,33 @@ sub ConfigItemDelete {
                 Priority => 'error',
                 Message  => "Can't load name module for class $ConfigItemData->{Class}!",
             );
+        }
+    }
+    else {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
         }
     }
 
@@ -866,6 +884,7 @@ update a config item. A new version will be created only when a version trigger 
         Number         => '111',    # ID or Number is required
         UserID         => 1,
         Name           => 'Name',   # optional
+        DefinitionID   => 123,      # optional
         DeplStateID    => 3,        # optional
         InciStateID    => 2,        # optional
         Description    => 'ABCD',   # optional
@@ -920,9 +939,22 @@ sub ConfigItemUpdate {
     }
 
     # ignore the passed in name when a name module is active
-    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
-    my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-    if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $ConfigItem->{ClassID},
+    );
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
+            );
+
+            return;
+        }
+
         delete $Param{Name};
     }
     else {
@@ -953,10 +985,9 @@ sub ConfigItemUpdate {
         }
     }
 
-    my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};
     my %VersionTrigger = map
         { $_ => 1 }
-        ( $TriggerConfig->{$Class} // [] )->@*;
+        ( $ClassPreferences{VersionTrigger} // [] )->@*;
 
     my %Changed;           # track changed values for the Event handler, e.g. for writing history
     my $AddVersion = 0;    # flag for deciding whether a new version is created

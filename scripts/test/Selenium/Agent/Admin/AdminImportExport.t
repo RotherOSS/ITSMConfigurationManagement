@@ -129,7 +129,7 @@ $Selenium->RunTest(
     sub {
         # Create ConfigItem number.
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-            Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
             ClassID => $TestClassID,
         );
         ok( $ConfigItemNumber, "ConfigItem number is created - $ConfigItemNumber" );

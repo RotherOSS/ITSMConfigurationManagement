@@ -74,45 +74,34 @@ my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
 # create ConfigItem number
 my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-    Type    => $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NumberGenerator'),
+    Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
     ClassID => $HardwareConfigItemID,
 );
+
+my $ConfigItemName = 'TestConfigItem' . $Helper->GetRandomID();
 
 my @ConfigItemID;
 
 # add the new ConfigItem
 my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    Number  => $ConfigItemNumber,
-    ClassID => $HardwareConfigItemID,
-    UserID  => 1,
+    Number      => $ConfigItemNumber,
+    Name        => $ConfigItemName,
+    ClassID     => $HardwareConfigItemID,
+    DeplStateID => $ProductionDeplStateID,
+    InciStateID => 1,
+    UserID      => 1,
 );
 push @ConfigItemID, $ConfigItemID;
-
-my $ConfigItemName = 'TestConfigItem' . $Helper->GetRandomID();
-my $VersionID      = $ConfigItemObject->VersionAdd(
-    Name         => $ConfigItemName,
-    DefinitionID => 1,
-    DeplStateID  => $ProductionDeplStateID,
-    InciStateID  => 1,
-    UserID       => 1,
-    ConfigItemID => $ConfigItemID,
-);
 
 # add the new duplicate ConfigItem
 $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID => $HardwareConfigItemID,
-    UserID  => 1,
+    Name        => $ConfigItemName,
+    ClassID     => $HardwareConfigItemID,
+    DeplStateID => $ProductionDeplStateID,
+    InciStateID => 1,
+    UserID      => 1,
 );
 push @ConfigItemID, $ConfigItemID;
-
-$VersionID = $ConfigItemObject->VersionAdd(
-    Name         => $ConfigItemName,
-    DefinitionID => 1,
-    DeplStateID  => $ProductionDeplStateID,
-    InciStateID  => 1,
-    UserID       => 1,
-    ConfigItemID => $ConfigItemID,
-);
 
 # add the new duplicate ConfigItem in Software catalog class
 # get 'Software' catalog class IDs
@@ -123,19 +112,13 @@ $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
 my $SoftwareConfigItemID = $ConfigItemDataRef->{ItemID};
 
 $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID => $SoftwareConfigItemID,
-    UserID  => 1,
+    Name        => $ConfigItemName,
+    ClassID     => $SoftwareConfigItemID,
+    DeplStateID => $ProductionDeplStateID,
+    InciStateID => 1,
+    UserID      => 1,
 );
 push @ConfigItemID, $ConfigItemID;
-
-$VersionID = $ConfigItemObject->VersionAdd(
-    Name         => $ConfigItemName,
-    DefinitionID => 1,
-    DeplStateID  => $ProductionDeplStateID,
-    InciStateID  => 1,
-    UserID       => 1,
-    ConfigItemID => $ConfigItemID,
-);
 
 # check command with --class Hardware options
 $ExitCode = $CommandObject->Execute( '--class', "Hardware" );

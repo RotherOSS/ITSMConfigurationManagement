@@ -168,6 +168,9 @@ sub HandleResponse {
     # get config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
+    # get general catalog object
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
     my %CIClassMapping = (
         IncidentState   => 'ITSM::Core::IncidentState',
         DeploymentState => 'ITSM::ConfigItem::DeploymentState',
@@ -176,7 +179,6 @@ sub HandleResponse {
 
     my %GeneralCatalogItemLookup;
     my %NameModuleObjects;
-    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
     CI:
     for my $RemoteCIData ( @{ $Param{Data} } ) {
 
@@ -219,7 +221,7 @@ sub HandleResponse {
                 $GeneralCatalogItem = $GeneralCatalogItemLookup{ $CIClassMapping{$CurrentCI} }->{ $RequiredAttributes{$CurrentCI} };
             }
             else {
-                $GeneralCatalogItem = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
+                $GeneralCatalogItem = $GeneralCatalogObject->ItemGet(
                     Class => $CIClassMapping{$CurrentCI},
                     Name  => $RequiredAttributes{$CurrentCI},
                 );
@@ -329,11 +331,16 @@ sub HandleResponse {
             }
         }
 
-        if ( $NameModuleConfig && $NameModuleConfig->{ $RemoteCIData->{Class} } ) {
+        my $ClassPreferences = $GeneralCatalogObject->ItemGet(
+            Class => 'ITSM::ConfigItem::Class',
+            Name  => $$RemoteCIData->{Class},
+        );
+        my $NameModule = $ClassPreferences->{NameModule} ? $ClassPreferences->{NameModule}[0] : '';
+        if ($NameModule) {
             if ( !$NameModuleObjects{ $RemoteCIData->{Class} } ) {
 
                 # check if name module exists
-                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleConfig->{ $RemoteCIData->{Class} } ) ) {
+                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ITSMConfigItem::Name::' . $NameModule ) ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
                         Message  => "Can't load name module for class $RemoteCIData->{Class}!",
@@ -343,7 +350,7 @@ sub HandleResponse {
                 }
 
                 # create a backend object
-                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( 'Kernel::System::ITSMConfigItem::Name::' . $NameModuleConfig->{ $RemoteCIData->{Class} } );
+                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( 'Kernel::System::ITSMConfigItem::Name::' . $NameModule );
             }
 
             if ($ConfigItemID) {

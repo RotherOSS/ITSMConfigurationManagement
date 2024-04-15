@@ -49,7 +49,7 @@ $Selenium->RunTest(
 
         # Create ConfigItem number.
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-            Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
             ClassID => $HardwareConfigItemID,
         );
         $Self->True(

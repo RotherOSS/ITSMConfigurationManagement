@@ -107,7 +107,7 @@ END_SQL
         );
 
         $Version->{DeplState}     = $DeplState->{Name};
-        $Version->{DeplStateType} = $DeplState->{Functionality};
+        $Version->{DeplStateType} = $DeplState->{Functionality}[0] // '';
 
         # get incident state functionality
         my $InciState = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
@@ -115,7 +115,7 @@ END_SQL
         );
 
         $Version->{InciState}     = $InciState->{Name};
-        $Version->{InciStateType} = $InciState->{Functionality};
+        $Version->{InciStateType} = $InciState->{Functionality}[0] // '';
 
         # add config item data
         $Version->{ClassID}          = $ConfigItem->{ClassID};
@@ -547,13 +547,16 @@ sub VersionAdd {
     return unless $ClassList;
     return unless ref $ClassList eq 'HASH';
 
-    my $NameModule;
-    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
-    if ( $NameModuleConfig && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-        $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $Param{ClassID},
+    );
+
+    my $NameModuleObject;
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
 
         # check if name module exists
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Can't load name module for class $Param{Class}!",
@@ -561,9 +564,12 @@ sub VersionAdd {
 
             return;
         }
-    }
 
-    if ($NameModule) {
+        # create a backend object
+        $NameModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::Name::$NameModule");
+
+        # override possible incoming name
+        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
 
         # check, whether the feature to check for a unique name is enabled
         if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
@@ -591,13 +597,12 @@ sub VersionAdd {
         }
     }
 
-    my $VersionStringModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionStringModule');
     my $VersionStringModuleObject;
-    if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
-        my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{ $ClassList->{ $Param{ClassID} } }";
+    my $VersionStringModule = $ClassPreferences{VersionStringModule} ? $ClassPreferences{VersionStringModule}[0] : '';
+    if ($VersionStringModule) {
 
         # check if version string module exists
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Can't load version string module for class $ClassList->{ $Param{ClassID} }!",
@@ -607,7 +612,7 @@ sub VersionAdd {
         }
 
         # create a backend object
-        $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
+        $VersionStringModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule");
 
         # override possible incoming version string
         $Version{VersionString} = $VersionStringModuleObject->VersionStringGet(
@@ -859,13 +864,16 @@ sub VersionUpdate {
     # needs to be recalculation when the incident state of the last version has changed.
     my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
-    my $NameModule;
-    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
-    if ( $NameModuleConfig && $NameModuleConfig->{ $Version->{Class} } ) {
-        $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $Version->{Class} }";
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $Param{ClassID},
+    );
+
+    my $NameModuleObject;
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
 
         # check if name module exists
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Can't load name module for class $Param{Class}!",
@@ -873,9 +881,15 @@ sub VersionUpdate {
 
             return;
         }
-    }
 
-    if ($NameModule) {
+        # create a backend object
+        $NameModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::Name::$NameModule");
+
+        if ( $NameModuleObject->can('ConfigItemNameDelete') ) {
+            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
+        }
+
+        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
 
         # check, whether the feature to check for a unique name is enabled
         if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
@@ -901,6 +915,29 @@ sub VersionUpdate {
                 return;
             }
         }
+    }
+
+    my $VersionStringModuleObject;
+    my $VersionStringModule = $ClassPreferences{VersionStringModule} ? $ClassPreferences{VersionStringModule}[0] : '';
+    if ($VersionStringModule) {
+
+        # check if version string module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule") ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load version string module for class $Param{Class}!",
+            );
+
+            return;
+        }
+
+        # create a backend object
+        $VersionStringModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule");
+
+        # override possible incoming version string
+        $Param{VersionString} = $VersionStringModuleObject->VersionStringGet(
+            Version => \%Param,
+        );
     }
 
     if ( any { defined $Param{$_} } qw/Name VersionString DeplStateID InciStateID DefinitionID Description/ ) {

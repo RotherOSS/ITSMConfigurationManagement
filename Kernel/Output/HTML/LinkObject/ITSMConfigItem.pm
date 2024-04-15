@@ -210,7 +210,9 @@ sub TableCreateComplex {
         );
 
         # check if a color is defined in preferences
-        next ITEMID if !$Preferences{Color};
+        next ITEMID unless $Preferences{Color};
+        my ($Color) = $Preferences{Color}->@*;
+        next ITEMID unless $Color;
 
         # add color style definition
         my $DeplState = $DeploymentStatesList->{$ItemID};
@@ -219,7 +221,7 @@ sub TableCreateComplex {
         $DeplState =~ s{ [^a-zA-Z0-9] }{_}msxg;
 
         # covert to lower case
-        $Self->{DeplStateColors}->{$DeplState} = lc $Preferences{Color};
+        $Self->{DeplStateColors}->{$DeplState} = lc $Color;
     }
 
     # Get the columns config.

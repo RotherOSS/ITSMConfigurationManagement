@@ -78,7 +78,7 @@ subtest 'create sample config items' => sub {
 
         # create ConfigItem number
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-            Type    => $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
             ClassID => $HardwareConfigItemID,
         );
         diag("ConfigItemNumber: '$ConfigItemNumber'");

@@ -399,7 +399,9 @@ sub Run {
         );
 
         # check if a color is defined in preferences
-        next ITEMID if !$GeneralCatalogPreferences{Color};
+        next ITEMID unless $GeneralCatalogPreferences{Color};
+        my ($Color) = $GeneralCatalogPreferences{Color}->@*;
+        next ITEMID unless $Color;
 
         # get deployment state
         my $DeplState = $DeploymentStatesList->{$ItemID};
@@ -412,7 +414,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = $DeplState;
 
         # convert to lower case
-        my $DeplStateColor = ( lc $GeneralCatalogPreferences{Color} ) =~ s/[^0-9a-f]//msgr;
+        my $DeplStateColor = ( lc $Color ) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "

@@ -330,46 +330,38 @@ sub Run {
     my %DynamicFieldValidationResult;
     my %DynamicFieldPossibleValues;
     my %DynamicFieldVisibility;
-    my $NameModuleObject;
-    my $VersionStringModuleObject;
+
+    my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+        ItemID => $ConfigItem->{ClassID},
+    );
+
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ConfigItem->{Class}!",
+            );
+            $NameModule = undef;
+        }
+    }
+
+    my $VersionStringModule = $ClassPreferences{VersionStringModule} ? $ClassPreferences{VersionStringModule}[0] : '';
+    if ($VersionStringModule) {
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule") ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load version string module for class $ConfigItem->{Class}!",
+            );
+            $VersionStringModule = undef;
+        }
+    }
 
     if ( $Self->{Subaction} eq 'Save' ) {
-
-        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-        if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
-
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load name module for class $ConfigItem->{Class}!",
-                );
-
-                return;
-            }
-
-            # create a backend object
-            $NameModuleObject = $Kernel::OM->Get($NameModule);
-        }
-
-        my $VersionStringModuleConfig = $ConfigObject->Get('ITSMConfigItem::VersionStringModule');
-        if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{$ConfigItem->{Class}}";
-
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load version string module for class $ConfigItem->{Class}!",
-                );
-
-                return;
-            }
-
-            # create a backend object
-            $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
-        }
 
         # get the uploaded attachment
         my %UploadStuff = $ParamObject->GetUploadAll(
@@ -398,7 +390,7 @@ sub Run {
         }
 
         # get name only if it is not filled by a module
-        if ( !$NameModuleObject ) {
+        if ( !$NameModule ) {
             $ConfigItem->{Name} = $GetParam{Name};
 
             if ( !$ConfigItem->{Name} ) {
@@ -407,7 +399,7 @@ sub Run {
         }
 
         # get version string only if it is not filled by a module
-        if ( !$VersionStringModuleObject ) {
+        if ( !$VersionStringModule ) {
             $ConfigItem->{VersionString} = $GetParam{VersionString};
 
             if ( !$ConfigItem->{VersionString} ) {
@@ -987,42 +979,6 @@ sub Run {
     }
     else {
 
-        my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
-        if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ConfigItem->{Class}}";
-
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load name module for class $ConfigItem->{Class}!",
-                );
-
-                return;
-            }
-
-            # create a backend object
-            $NameModuleObject = $Kernel::OM->Get($NameModule);
-        }
-
-        my $VersionStringModuleConfig = $ConfigObject->Get('ITSMConfigItem::VersionStringModule');
-        if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ConfigItem->{Class} } ) {
-            my $VersionStringModule = "Kernel::System::ITSMConfigItem::VersionString::$VersionStringModuleConfig->{$ConfigItem->{Class}}";
-
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($VersionStringModule) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Can't load version string module for class $ConfigItem->{Class}!",
-                );
-
-                return;
-            }
-
-            # create a backend object
-            $VersionStringModuleObject = $Kernel::OM->Get($VersionStringModule);
-        }
-
         my $LoopProtection = 100;
 
         # get values and visibility of dynamic fields
@@ -1051,7 +1007,7 @@ sub Run {
         %DynamicFieldPossibleValues = map { 'DynamicField_' . $_ => $DynFieldStates{Fields}{$_}{PossibleValues} } keys $DynFieldStates{Fields}->%*;
     }
 
-    my $NameEditable   = $NameModuleObject ? 0 : 1;
+    my $NameEditable   = $NameModule ? 0 : 1;
     my $RowNameInvalid = $ConfigItem->{Name}
 
         # If a name exists then mark regex and duplicate errors.
@@ -1127,7 +1083,7 @@ sub Run {
         );
     }
 
-    my $VersionStringEditable   = $VersionStringModuleObject ? 0 : 1;
+    my $VersionStringEditable   = $VersionStringModule ? 0 : 1;
     my $VersionStringDuplicates = [];
     my $RowVersionStringInvalid = $ConfigItem->{VersionString}
 

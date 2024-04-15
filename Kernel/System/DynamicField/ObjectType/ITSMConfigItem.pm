@@ -31,6 +31,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
     'Kernel::System::Web::Request',
@@ -98,8 +99,11 @@ sub PreValueSet {
     return 1 if !$Param{Param}{DynamicFieldConfig}{CIClass};
 
     # check whether the changed field triggers a new configitem version and if so, add a new one
-    my $TriggerConfig  = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionTrigger') // {};
-    my %VersionTrigger = map { $_ => 1 } @{ $TriggerConfig->{ $Param{Param}{DynamicFieldConfig}{CIClass} } // [] };
+    my $ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
+        Class => 'ITSM::ConfigItem::Class',
+        Name  => $Param{Param}{DynamicFieldConfig}{CIClass},
+    );
+    my %VersionTrigger = map { $_ => 1 } @{ $ClassPreferences->{VersionTrigger} // [] };
 
     if ( $VersionTrigger{ 'DynamicField_' . $Param{Param}{DynamicFieldConfig}{Name} } ) {
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');

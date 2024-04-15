@@ -71,11 +71,6 @@ sub Run {
     # show the list of CI classes sorted by name
     for my $ItemID ( sort { ${$ClassList}{$a} cmp ${$ClassList}{$b} } keys %{$ClassList} ) {
 
-        # get item data
-        my $ItemData = $GeneralCatalogObject->ItemGet(
-            ItemID => $ItemID,
-        );
-
         # output overview item list
         $LayoutObject->Block(
             Name => 'OverviewItemList',

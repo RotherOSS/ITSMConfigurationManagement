@@ -123,7 +123,9 @@ sub Run {
         );
 
         # check if a color is defined in preferences
-        next ITEMID if !$Preferences{Color};
+        next ITEMID unless $Preferences{Color};
+        my ($Color) = $Preferences{Color}->@*;
+        next ITEMID unless $Color;
 
         # get deployment state
         my $DeplState = $DeploymentStatesList->{$ItemID};
@@ -136,7 +138,7 @@ sub Run {
         $DeplSignals{ $DeploymentStatesList->{$ItemID} } = 'Color' . $DeplState;
 
         # covert to lower case
-        my $DeplStateColor = lc( $Preferences{Color} ) =~ s/[^0-9a-f]//msgr;
+        my $DeplStateColor = lc($Color) =~ s/[^0-9a-f]//msgr;
 
         # add to style classes string
         $StyleClasses .= "

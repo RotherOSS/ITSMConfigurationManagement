@@ -254,7 +254,7 @@ sub Run {
     # to store the NavBar filters
     my %Filters;
     my %TagFilters;
-    my $TagConfig = $ConfigObject->Get('ITSMConfigItem::Frontend::Tags');
+    my $AllTags = $ConfigObject->Get('ITSMConfigItem::ClassTags');
 
     # build lookup hash tag to classes
     my %Tag2Class;
@@ -272,25 +272,38 @@ sub Run {
 
         next CLASSID if !$HasAccess;
 
-        # build tag-relevant structures
-        if ( IsArrayRefWithData( $TagConfig->{ $ClassList->{$ClassID} } ) ) {
+        # check if tags are configured at all
+        if ( IsArrayRefWithData($AllTags) ) {
 
-            for my $Tag ( sort $TagConfig->{ $ClassList->{$ClassID} }->@* ) {
+            # fetch class preferences to retrieve tags for class
+            my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+                ItemID => $ClassID,
+            );
 
-                $Tag2Class{$Tag} //= [];
-                push $Tag2Class{$Tag}->@*, $ClassList->{$ClassID};
+            # build tag-relevant structures
+            if ( IsArrayRefWithData( $ClassPreferences{Tags} ) ) {
 
-                if ( !$TagFilters{$Tag} ) {
-                    $TagPrioCounter++;
-                    $TagFilters{$Tag} = {
-                        Name => $Tag,
-                        Prio => $TagPrioCounter,
-                    };
+                TAG:
+                for my $Tag ( sort $ClassPreferences{Tags}->@* ) {
+
+                    # check if tag is valid
+                    next TAG unless grep { $_ eq $Tag } $AllTags->@*;
+
+                    $Tag2Class{$Tag} //= [];
+                    push $Tag2Class{$Tag}->@*, $ClassList->{$ClassID};
+
+                    if ( !$TagFilters{$Tag} ) {
+                        $TagPrioCounter++;
+                        $TagFilters{$Tag} = {
+                            Name => $Tag,
+                            Prio => $TagPrioCounter,
+                        };
+                    }
                 }
-            }
 
-            if ( $TagFilter && $TagFilter ne 'All' ) {
-                next CLASSID unless grep { $_ eq $TagFilter } $TagConfig->{ $ClassList->{$ClassID} }->@*;
+                if ( $TagFilter && $TagFilter ne 'All' ) {
+                    next CLASSID unless grep { $_ eq $TagFilter } $ClassPreferences{Tags}->@*;
+                }
             }
         }
 

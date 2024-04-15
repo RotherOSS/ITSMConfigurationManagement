@@ -82,6 +82,10 @@ sub Run {
         ItemID => $Param{ClassID},
     );
 
+    return unless $ClassItem->{Permission};
+    my ($ClassItemPermission) = $ClassItem->{Permission}->@*;
+    return unless $ClassItemPermission;
+
     # get user groups
     my @GroupIDs = $Kernel::OM->Get('Kernel::System::Group')->GroupMemberList(
         UserID => $Param{UserID},
@@ -92,7 +96,7 @@ sub Run {
 
     # looking for group id, return access if user is in group
     for my $GroupID (@GroupIDs) {
-        return 1 if $ClassItem->{Permission} && $GroupID eq $ClassItem->{Permission};
+        return 1 if $ClassItemPermission && $GroupID eq $ClassItemPermission;
     }
 
     # return no access

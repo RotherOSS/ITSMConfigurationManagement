@@ -55,7 +55,7 @@ $Selenium->RunTest(
         my @ConfigItemNumbers;
         for my $ConfigNumberCreate ( 1 .. 2 ) {
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-                Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+                Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
                 ClassID => $ConfigItemClassIDs[0],
             );
             $Self->True(
@@ -254,7 +254,7 @@ $Selenium->RunTest(
         @ConfigItemNumbers = ();
         for my $ConfigNumberCreate ( 1 .. 35 ) {
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
-                Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+                Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
                 ClassID => $ConfigItemClassIDs[0],
             );
             $Self->True(
@@ -503,7 +503,7 @@ $Selenium->RunTest(
 
         # Check if correct config items are shown after sub attributes are searched. See bug#12998.
         my $ConfigItemNumber2 = $ConfigItemObject->ConfigItemNumberCreate(
-            Type    => $ConfigObject->Get('ITSMConfigItem::NumberGenerator'),
+            Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
             ClassID => $ConfigItemClassIDs[0],
         );
         $Self->True(

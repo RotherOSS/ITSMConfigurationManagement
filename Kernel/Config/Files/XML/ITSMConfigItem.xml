@@ -851,13 +851,6 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::NumberGenerator" Required="1" Valid="1">
-        <Description Translatable="1">Selects the configuration item number generator module. "AutoIncrement" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is "SystemID.ConfigItemClassID.Counter", e.g. 1205000004, 1205000005.</Description>
-        <Navigation>Core::ITSMConfigItem</Navigation>
-        <Value>
-            <Item ValueType="PerlModule" ValueFilter="Kernel/System/ITSMConfigItem/Number/*.pm">Kernel::System::ITSMConfigItem::Number::AutoIncrement</Item>
-        </Value>
-    </Setting>
     <Setting Name="ITSMConfigItem::CINameRegex" Required="0" Valid="0">
         <Description Translatable="1">Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
@@ -867,17 +860,6 @@
                 <Item Key="Computer::CINameRegexErrorMessage">A computer name must start with ABC!</Item>
                 <Item Key="Hardware::CINameRegex">.*\d\d$</Item>
                 <Item Key="Hardware::CINameRegexErrorMessage">A hardware name must end with two digits!</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="ITSMConfigItem::VersionTrigger" Required="0" Valid="1">
-        <!-- TODO: Do we need to write a new version on definition changes? Was not the case in 10.1
-        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState, Name, as well as Definition, if changes to the class definition should trigger a new version to be created. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>-->
-        <Description Translatable="1">Define which attribute changes will trigger the creation of a new version per class. For every class as key, valid values are the standard attributes: DeploymentState, IncidentState and Name. Additionally all dynamic fields can be triggers, the values here are then "DynamicField_Name".</Description>
-        <Navigation>Core::ITSMConfigItem</Navigation>
-        <Value>
-            <Hash>
-                <DefaultItem><Array></Array></DefaultItem>
             </Hash>
         </Value>
     </Setting>
@@ -1023,6 +1005,7 @@
                 <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
                 <Item Key="Class">ITSM::ConfigItem::DeploymentState</Item>
                 <Item Key="Label" Translatable="1">Deployment State Type</Item>
+                <Item Key="Priority">20</Item>
                 <Item Key="Desc" Translatable="1"></Item>
                 <Item Key="Data">
                     <Hash>
@@ -1044,10 +1027,116 @@
                 <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
                 <Item Key="Class">ITSM::ConfigItem::DeploymentState</Item>
                 <Item Key="Label" Translatable="1">Deployment State Color</Item>
+                <Item Key="Priority">25</Item>
                 <Item Key="Desc" Translatable="1"></Item>
                 <Item Key="Data"></Item>
                 <Item Key="PrefKey">Color</Item>
                 <Item Key="Block">ColorPicker</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GeneralCatalogPreferences###NameModule" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the name module for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Name Module</Item>
+                <Item Key="Priority">30</Item>
+                <Item Key="Desc" Translatable="1">Choose a module to enforce a naming scheme.</Item>
+                <Item Key="Data">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <Item Key="PrefKey">NameModule</Item>
+                <Item Key="Block">NameModule</Item>
+                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GeneralCatalogPreferences###NumberModule" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the number module for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Number Module</Item>
+                <Item Key="Priority">40</Item>
+                <Item Key="Desc" Translatable="1">Choose a module to enforce a number scheme.</Item>
+                <Item Key="Data">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <Item Key="PrefKey">NumberModule</Item>
+                <Item Key="Block">NumberModule</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GeneralCatalogPreferences###VersionStringModule" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the version string module for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Version String Module</Item>
+                <Item Key="Priority">50</Item>
+                <Item Key="Desc" Translatable="1">Choose a module to enforce a version string scheme.</Item>
+                <Item Key="Data">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <!-- TODO rename DataSelected properly to DataSelectedID, as it is passed as SelectedID subsequently -->
+                <Item Key="DataSelected">Incremental</Item>
+                <Item Key="PrefKey">VersionStringModule</Item>
+                <Item Key="Block">VersionStringModule</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GeneralCatalogPreferences###VersionTrigger" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the version trigger for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Version Trigger</Item>
+                <Item Key="Priority">60</Item>
+                <Item Key="Desc" Translatable="1">Choose attributes to trigger the creation of a new version.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="Name" Translatable="1">Name</Item>
+                        <Item Key="DeplStateID" Translatable="1">DeploymentState</Item>
+                        <Item Key="InciStateID" Translatable="1">IncidentState</Item>
+                    </Hash>
+                </Item>
+                <Item Key="PrefKey">VersionTrigger</Item>
+                <Item Key="Block">ConfigItemVersionTrigger</Item>
+                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Multiple" ValueType="Checkbox">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GeneralCatalogPreferences###Tags" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the tags for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Tags</Item>
+                <Item Key="Priority">70</Item>
+                <Item Key="Desc" Translatable="1">Choose tags to assign to this config item class.</Item>
+                <Item Key="Data">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <Item Key="PrefKey">Tags</Item>
+                <Item Key="Block">ConfigItemClassTags</Item>
+                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Multiple" ValueType="Checkbox">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1458,9 +1547,11 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
                 <Item Key="Label" Translatable="1">Permission Group</Item>
+                <Item Key="Priority">10</Item>
                 <Item Key="Block">Permission</Item>
                 <Item Key="Class">ITSM::ConfigItem::Class</Item>
                 <Item Key="PrefKey">Permission</Item>
+                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1658,16 +1749,14 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::Tags" Required="0" Valid="0">
-        <Description Translatable="1">Defines tags per class for config items.</Description>
+    <Setting Name="ITSMConfigItem::ClassTags" Required="0" Valid="0">
+        <Description Translatable="1">Defines possible tags for config item classes.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
         <Value>
-            <Hash>
-                <DefaultItem>
-                    <Array>
-                    </Array>
-                </DefaultItem>
-            </Hash>
+            <Array>
+                <Item>Hardware</Item>
+                <Item>Location</Item>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField" Required="0" Valid="1">
@@ -2234,28 +2323,12 @@
     </Setting>
     <!-- End dynamic field ITSMConfigItemVersion Reference -->
 
-    <Setting Name="ITSMConfigItem::NameModule" Required="0" Valid="1">
-        <Description Translatable="1">This configuration defines modules to suggest and check names for config items per config item class.</Description>
-        <Navigation>Frontend::Agent::ITSMConfigItem::NameModule</Navigation>
-        <Value>
-            <Hash>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="ITSMConfigItem::VersionStringModule" Required="0" Valid="1">
-        <Description Translatable="1">This configuration defines modules to suggest and check version strings for config items per config item class.</Description>
-        <Navigation>Frontend::Agent::ITSMConfigItem::VersionStringModule</Navigation>
-        <Value>
-            <Hash>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="ITSMConfigItem::VersionStringModule::TemplateToolkit" Required="0" Valid="0">
-        <Description>Defines the Template::Toolkit expression to evaluate in the Template::Toolkit version string module.</Description>
+        <Description>Defines the Template::Toolkit expression to evaluate in the Template::Toolkit version string module per class.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::VersionStringModule</Navigation>
         <Value>
             <Hash>
-                <Item ValueType="Textarea" Key="VersionStringExpression"></Item>
+                <DefaultItem ValueType="Textarea"></DefaultItem>
             </Hash>
         </Value>
     </Setting>

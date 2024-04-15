@@ -311,7 +311,7 @@ sub _SetPreferences {
         $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
             ItemID => $Item->{ItemID},
             Key    => 'Functionality',
-            Value  => $Map{$Name},
+            Value  => [$Map{$Name}],
         );
     }
 
@@ -344,11 +344,13 @@ sub _SetDefaultPermission {
             ItemID => $ClassID,
         );
 
-        if ( !$Class->{Permission} ) {
+        my $ClassPermission = $Class->{Permission} ? $Class->{Permission}[0] : '';
+
+        if ( !$ClassPermission ) {
             $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
                 ItemID => $Class->{ItemID},
                 Key    => 'Permission',
-                Value  => $GroupID,
+                Value  => [$GroupID],
             );
         }
     }
@@ -1118,16 +1120,6 @@ END_SQL
 
             return 1;
         }
-    }
-
-    # Upgrade to OTOBO 11 style, this also creates the dynamic fields
-    my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
-    my $ExitCode      = $CommandObject->Execute('--use-defaults', '--quiet');
-    if ($ExitCode) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "The command Admin::ITSM::Configitem::UpgradeTo11 failed",
-        );
     }
 
     return 1;

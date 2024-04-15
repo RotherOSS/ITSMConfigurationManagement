@@ -78,6 +78,13 @@ if ( !$FirstClassID ) {
     );
 }
 
+# set version string module
+$Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
+    ItemID => $FirstClassID,
+    Key    => 'VersionStringModule',
+    Value  => ['Incremental'],
+);
+
 push @ConfigItemClassIDs, $FirstClassID;
 push @ConfigItemClasses,  $FirstClassName;
 
@@ -86,6 +93,13 @@ my $SecondClassID = $GeneralCatalogObject->ItemAdd(
     Name    => $SecondClassName,
     ValidID => 1,
     UserID  => 1,
+);
+
+# set version string module
+$Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
+    ItemID => $SecondClassID,
+    Key    => 'VersionStringModule',
+    Value  => ['Incremental'],
 );
 
 # check second class id
@@ -102,7 +116,7 @@ push @ConfigItemClasses,  $SecondClassName;
 
 my @ConfigItemPerlDefinitions;
 
-$ConfigItemPerlDefinitions[0] = " [
+$ConfigItemPerlDefinitions[0] = "
 {
         Pages  => [
             {
@@ -119,9 +133,13 @@ $ConfigItemPerlDefinitions[0] = " [
                     }
                 ],
             }
-        ]
-}
-]";
+        ],
+        Sections => {
+            Section1 => {
+                Type => 'Description',
+            },
+        },
+}";
 
 my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
@@ -173,6 +191,7 @@ my @ConfigItemIDs;
 my $FirstConfigItemID = $ConfigItemObject->ConfigItemAdd(
     ClassID     => $FirstClassID,
     Name        => $NamePrefix . 'First#001',
+    DefinitionID => $FirstDefinitionID,
     DeplStateID => $DeplStateListReverse{Production},
     InciStateID => $InciStateListReverse{Operational},
     UserID      => 1,
@@ -190,6 +209,7 @@ push @ConfigItemIDs, $FirstConfigItemID;
 my $SecondConfigItemID = $ConfigItemObject->ConfigItemAdd(
     ClassID     => $SecondClassID,
     Name        => $NamePrefix . 'Second#001',
+    DefinitionID => $SecondDefinitionID,
     DeplStateID => $DeplStateListReverse{Production},
     InciStateID => $InciStateListReverse{Operational},
     UserID      => 1,
@@ -208,6 +228,7 @@ push @ConfigItemIDs, $SecondConfigItemID;
 my $ThirdConfigItemID = $ConfigItemObject->ConfigItemAdd(
     ClassID     => $SecondClassID,
     Name        => $NamePrefix . 'Second#002',
+    DefinitionID => $SecondDefinitionID,
     DeplStateID => $DeplStateListReverse{Production},
     InciStateID => $InciStateListReverse{Operational},
     UserID      => 1,
@@ -226,7 +247,6 @@ push @ConfigItemIDs, $ThirdConfigItemID;
 my $FirstInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     Name         => $NamePrefix . 'First#001',
-    DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -242,7 +262,6 @@ if ( !$FirstInitialVersionID ) {
 my $SecondInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     Name         => $NamePrefix . 'Second#001',
-    DefinitionID => $SecondDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -258,7 +277,6 @@ if ( !$SecondInitialVersionID ) {
 my $ThirdInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $ThirdConfigItemID,
     Name         => $NamePrefix . 'Second#002',
-    DefinitionID => $SecondDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -300,7 +318,6 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
-    DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -316,7 +333,6 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
-    DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -338,7 +354,6 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
-    DefinitionID => $FirstDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -354,7 +369,6 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
-    DefinitionID => $SecondDefinitionID,
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,

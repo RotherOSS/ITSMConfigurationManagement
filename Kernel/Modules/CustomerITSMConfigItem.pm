@@ -20,7 +20,7 @@ use strict;
 use warnings;
 
 # core modules
-use List::Util qw(any);
+use List::Util qw(any none);
 
 # CPAN modules
 
@@ -359,7 +359,7 @@ sub Run {
     }
 
     # check if filter is valid
-    if ( $Filter && !$Filters{$Filter} ) {
+    if ( $Filter && none { $Filter eq $_->{Name} } values %Filters ) {
         $LayoutObject->FatalError(
             Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
         );
