@@ -602,6 +602,33 @@ sub ConfigItemAdd {
         # override possible incoming name
         $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
     }
+    else {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
+        }
+    }
 
     # check needed stuff II
     if ( !$Param{Name} ) {
@@ -611,31 +638,6 @@ sub ConfigItemAdd {
         );
 
         return;
-    }
-
-    # check, whether the feature to check for a unique name is enabled
-    if ( $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck') ) {
-
-        my $NameDuplicates = $Self->UniqueNameCheck(
-            ConfigItemID => $Param{ConfigItemID},
-            ClassID      => $Param{ClassID},
-            Name         => $Param{Name},
-        );
-
-        # stop processing if the name is not unique
-        if ( IsArrayRefWithData($NameDuplicates) ) {
-
-            # build a string of all duplicate IDs
-            my $Duplicates = join ', ', @{$NameDuplicates};
-
-            # write an error log message containing all the duplicate IDs
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
-            );
-
-            return;
-        }
     }
 
     # insert new config item
@@ -922,6 +924,33 @@ sub ConfigItemUpdate {
     my $NameModuleConfig = $ConfigObject->Get('ITSMConfigItem::NameModule');
     if ( $NameModuleConfig && $NameModuleConfig->{ $ConfigItem->{Class} } ) {
         delete $Param{Name};
+    }
+    else {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
+        }
     }
 
     my $TriggerConfig  = $ConfigObject->Get('ITSMConfigItem::VersionTrigger') // {};

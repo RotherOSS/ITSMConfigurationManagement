@@ -547,6 +547,50 @@ sub VersionAdd {
     return unless $ClassList;
     return unless ref $ClassList eq 'HASH';
 
+    my $NameModule;
+    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
+    if ( $NameModuleConfig && $NameModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
+        $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{$ClassList->{$Param{ClassID}}}";
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $Param{Class}!",
+            );
+
+            return;
+        }
+    }
+
+    if ($NameModule) {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
+        }
+    }
+
     my $VersionStringModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionStringModule');
     my $VersionStringModuleObject;
     if ( $VersionStringModuleConfig && $VersionStringModuleConfig->{ $ClassList->{ $Param{ClassID} } } ) {
@@ -814,6 +858,50 @@ sub VersionUpdate {
     # The incident state is calculated for the current incident state. Therfore it only
     # needs to be recalculation when the incident state of the last version has changed.
     my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
+
+    my $NameModule;
+    my $NameModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::NameModule');
+    if ( $NameModuleConfig && $NameModuleConfig->{ $Version->{Class} } ) {
+        $NameModule = "Kernel::System::ITSMConfigItem::Name::$NameModuleConfig->{ $Version->{Class} }";
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $Param{Class}!",
+            );
+
+            return;
+        }
+    }
+
+    if ($NameModule) {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
+        }
+    }
 
     if ( any { defined $Param{$_} } qw/Name VersionString DeplStateID InciStateID DefinitionID Description/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
