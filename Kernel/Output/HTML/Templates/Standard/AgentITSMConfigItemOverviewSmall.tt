@@ -29,6 +29,7 @@
 </ul>
 [% RenderBlockEnd("DocumentActionRow") %]
 
+<div id="OverviewContainer">
 [% RenderBlockStart("DocumentContent") %]
 <div id="OverviewBody" class="Overview ConfigItemList">
 
@@ -41,12 +42,12 @@
 [% RenderBlockStart("SideBarFilterItem") %]
 [% RenderBlockStart("SideBarFilterItemSelected") %]
                     <li class="Active [% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
                     </li>
 [% RenderBlockEnd("SideBarFilterItemSelected") %]
 [% RenderBlockStart("SideBarFilterItemSelectedNot") %]
                     <li class="[% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
+                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
                     </li>
 [% RenderBlockEnd("SideBarFilterItemSelectedNot") %]
 [% RenderBlockStart("SideBarFilterItemSplit") %]
@@ -395,6 +396,7 @@
     </form>
 </div>
 [% RenderBlockEnd("DocumentContent") %]
+</div>
 
 [% RenderBlockStart("DocumentColumnFilterForm") %]
 <form title="[% Translate("Column Filters Form") | html %]" action="[% Env("CGIHandle") | html %]" method="post" name="ColumnFilterAttributes" id="ColumnFilterAttributes">
