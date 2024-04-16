@@ -30,15 +30,10 @@
 [% RenderBlockEnd("DocumentActionRow") %]
 
 [% RenderBlockStart("DocumentContent") %]
-<div id="OverviewBody" class="Overview ConfigItemList"[% Data.OverviewStyle | html %]>
-[% RenderBlockStart("NoConfigItemFound") %]
-    <div id="EmptyMessageSmall">
-        [% Translate("No config item data found.") | html %]
-    </div>
-[% RenderBlockEnd("NoConfigItemFound") %]
+<div id="OverviewBody" class="Overview ConfigItemList">
 
 [% RenderBlockStart("Filters") %]
-    <div id="OverviewControl SideBarFilter">
+    <div id="OverviewControl" class="SideBarFilter">
         <div>
             <div>
 [% RenderBlockStart("SideBarFilter") %]
@@ -71,6 +66,12 @@
         </div>
     </div>
 [% RenderBlockEnd("Filters") %]
+
+[% RenderBlockStart("NoConfigItemFound") %]
+    <div id="EmptyMessageSmall">
+        [% Translate("No config item data found.") | html %]
+    </div>
+[% RenderBlockEnd("NoConfigItemFound") %]
 
     <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="matrix">
         <input type="hidden" name="Action" value="AgentITSMConfigItemBulk"/>
