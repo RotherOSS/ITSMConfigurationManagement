@@ -613,9 +613,6 @@ sub Run {
         Value => $Param{LinkPage},
     );
 
-    if ( $Param{TagFilters} ) {
-        $Param{OverviewStyle} = " style='display: grid; grid-template-columns: 1fr 7fr;'";
-    }
 
     $LayoutObject->Block(
         Name => 'DocumentContent',
