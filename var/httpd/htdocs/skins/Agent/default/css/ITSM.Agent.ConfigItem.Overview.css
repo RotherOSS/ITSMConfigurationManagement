@@ -56,10 +56,65 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #OverviewBody.Overview.ConfigItemList {
     overflow-x: auto;
+    margin: 0;
+    border: 0;
+}
+
+#OverviewBody.Overview.ConfigItemList table {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
 }
 
 #OverviewBody.Overview.ConfigItemList table.TableSmall.NoCellspacing {
     overflow: visible;
+}
+
+#OverviewContainer {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    margin: 10px 16px 8px 8px;
+}
+
+#OverviewContainer > #OverviewControl {
+    padding: 4px;
+}
+
+#OverviewContainer > #OverviewControl > ul > li {
+    border-radius: 15px;
+}
+
+#OverviewContainer > #OverviewControl > ul > li.Active {
+    background-color : #e5e5eb;
+    /* background-color: var(--colBGMedium); */
+
+}
+
+#OverviewContainer > #OverviewControl > ul > li > a {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+
+#OverviewContainer > #OverviewControl > ul > li > a > i.ooofo {
+    float: right;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px;
+    color: #7f809d;
+    /* color: var(--colTextLight); */
+}
+
+#OverviewContainer > #OverviewControl > ul > li > a > h3 {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    color: #7f809d;
+    /* color: var(--colTextLight); */
+}
+
+#OverviewContainer > #OverviewControl > ul > li.Active > a > h3 {
+    color: #00023c;
+    /* color: var(--colTextDark); */
 }
 
 /*  All devices with a smaller resolution than the current OTOBO minimum solution */
