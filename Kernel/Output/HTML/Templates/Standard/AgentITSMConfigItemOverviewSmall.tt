@@ -31,43 +31,39 @@
 
 <div id="OverviewContainer">
 [% RenderBlockStart("DocumentContent") %]
-    <div id="OverviewBody" class="Overview ConfigItemList">
 
 [% RenderBlockStart("Filters") %]
-        <div id="OverviewControl" class="SideBarFilter">
-            <div>
-                <div>
+    <div id="OverviewControl" class="SideBarFilter">
 [% RenderBlockStart("SideBarFilter") %]
-                    <ul>
+        <ul>
 [% RenderBlockStart("SideBarFilterItem") %]
 [% RenderBlockStart("SideBarFilterItemSelected") %]
-                        <li class="Active [% Data.CSS | html %]">
-                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
-                        </li>
+            <li class="Active [% Data.CSS | html %]">
+                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
+            </li>
 [% RenderBlockEnd("SideBarFilterItemSelected") %]
 [% RenderBlockStart("SideBarFilterItemSelectedNot") %]
-                        <li class="[% Data.CSS | html %]">
-                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
-                        </li>
+            <li class="[% Data.CSS | html %]">
+                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
+            </li>
 [% RenderBlockEnd("SideBarFilterItemSelectedNot") %]
 [% RenderBlockStart("SideBarFilterItemSplit") %]
-                        -
+            -
 [% RenderBlockEnd("SideBarFilterItemSplit") %]
 [% RenderBlockEnd("SideBarFilterItem") %]
-                    </ul>
+        </ul>
 [% RenderBlockEnd("SideBarFilter") %]
 [% RenderBlockStart("SideBarPageBack") %]
-                    <ul>
-                        <li>
-                            <a name="OverviewControl" id="ITSMConfigItemSearch" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkBack %]">[% Translate("Change search options") | html %] [% Data.ProfileName | html %]</a>
-                        </li>
-                    </ul>
+        <ul>
+            <li>
+                <a name="OverviewControl" id="ITSMConfigItemSearch" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkBack %]">[% Translate("Change search options") | html %] [% Data.ProfileName | html %]</a>
+            </li>
+        </ul>
 [% RenderBlockEnd("SideBarPageBack") %]
-                </div>
-            </div>
-        </div>
+    </div>
 [% RenderBlockEnd("Filters") %]
 
+    <div id="OverviewBody" class="Overview ConfigItemList">
 [% RenderBlockStart("NoConfigItemFound") %]
         <div id="EmptyMessageSmall">
             [% Translate("No config item data found.") | html %]
