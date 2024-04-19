@@ -32,7 +32,8 @@ Kernel::System::ITSMConfigItem::Permission::ItemClassGroupCheck - check if a use
 
 =head1 DESCRIPTION
 
-All config item functions.
+This is a permission module to check the group responsible for a configuration item.
+The check is based on the class of the config item.
 
 =head1 PUBLIC INTERFACE
 
@@ -41,6 +42,7 @@ All config item functions.
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $CheckObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Permission::ItemClassGroupCheck');
 
@@ -87,7 +89,7 @@ sub Run {
         ConfigItemID => $Param{ItemID},
     );
 
-    # get Class data
+    # get data for the relevant config item class
     my $ClassItem = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
         ItemID => $ConfigItem->{ClassID},
     );
@@ -104,12 +106,12 @@ sub Run {
         Cached => 1,
     );
 
-    # looking for group id, return access if user is in group
+    # looking for group id, grant access if user is in group
     for my $GroupID (@GroupIDs) {
         return 1 if $ClassItemPermission && $GroupID eq $ClassItemPermission;
     }
 
-    # return no access
+    # refuse access per default
     return;
 }
 

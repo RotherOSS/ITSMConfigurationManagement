@@ -28,6 +28,9 @@ our @ObjectDependencies = (
 =head1 NAME
 
 Kernel::System::ITSMConfigItem::Permission::ClassGroupCheck - check if a user belongs to a group
+=head1 DESCRIPTION
+
+This is a permission module to check the group responsible for a class.
 
 =head1 PUBLIC INTERFACE
 
@@ -36,6 +39,7 @@ Kernel::System::ITSMConfigItem::Permission::ClassGroupCheck - check if a user be
 create an object
 
     use Kernel::System::ObjectManager;
+
     local $Kernel::OM = Kernel::System::ObjectManager->new();
     my $CheckObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Permission::ClassGroupCheck');
 
@@ -77,7 +81,7 @@ sub Run {
         }
     }
 
-    # get Class data
+    # get data for the relevant config item class
     my $ClassItem = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
         ItemID => $Param{ClassID},
     );
@@ -94,12 +98,12 @@ sub Run {
         Cached => 1,
     );
 
-    # looking for group id, return access if user is in group
+    # looking for group id, grant access if user is in group
     for my $GroupID (@GroupIDs) {
         return 1 if $ClassItemPermission && $GroupID eq $ClassItemPermission;
     }
 
-    # return no access
+    # refuse access per default
     return;
 }
 

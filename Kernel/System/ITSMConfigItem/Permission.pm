@@ -86,7 +86,14 @@ sub Permission {
         return;
     }
 
-    # run all ITSMConfigItem Permission modules
+    # Run all ITSMConfigItem Permission modules.
+    #
+    # The idea is the the permission modules are ordered and can be divided into two phases.
+    # In the first phase 'Required' is on and 'Granted' is off. This assures that all required
+    # preconditions are met. In the second phase 'Required' is off and 'Granted' is on. It suffices
+    # when only on second phase module grants access.
+    #
+    # Other combinations are possible but might bring surprising results.
     if (
         ref $Kernel::OM->Get('Kernel::Config')->Get( 'ITSMConfigItem::Permission::' . $Param{Scope} ) eq 'HASH'
         )
@@ -114,7 +121,7 @@ sub Permission {
                 return 1;
             }
 
-            # return because access is false but it's required
+            # refuse access because access is false but it is required
             if ( !$AccessOk && $Modules{$Module}->{Required} ) {
                 if ( !$Param{LogNo} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -126,7 +133,7 @@ sub Permission {
                     );
                 }
 
-                # access not ok
+                # refuse access
                 return;
             }
         }
