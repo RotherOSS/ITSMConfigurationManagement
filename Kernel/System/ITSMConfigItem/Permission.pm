@@ -76,13 +76,15 @@ sub Permission {
     # on the Scope
     if (
         ( $Param{Scope} eq 'Class' && !$Param{ClassID} )
-        || ( $Param{Scope} eq 'Item' && !$Param{ItemID} )
+        ||
+        ( $Param{Scope} eq 'Item' && !$Param{ItemID} )
         )
     {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Need ClassID if Scope is 'Class' or ItemID if Scope is 'Item'!",
         );
+
         return;
     }
 
@@ -105,11 +107,10 @@ sub Permission {
         for my $Module ( sort keys %Modules ) {
 
             # load module
-            next MODULE
-                if !$Kernel::OM->Get('Kernel::System::Main')->Require( $Modules{$Module}->{Module} );
+            next MODULE unless $Kernel::OM->Get('Kernel::System::Main')->Require( $Modules{$Module}->{Module} );
 
             # create object
-            my $ModuleObject = $Modules{$Module}->{Module}->new();
+            my $ModuleObject = $Modules{$Module}->{Module}->new;
 
             # execute Run()
             my $AccessOk = $ModuleObject->Run(%Param);
@@ -121,7 +122,7 @@ sub Permission {
                 return 1;
             }
 
-            # refuse access because access is false but it is required
+            # refuse access  because access is false but it's required
             if ( !$AccessOk && $Modules{$Module}->{Required} ) {
                 if ( !$Param{LogNo} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
