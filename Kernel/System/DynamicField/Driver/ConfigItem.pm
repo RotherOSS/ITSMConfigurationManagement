@@ -27,6 +27,7 @@ use utf8;
 use parent qw(Kernel::System::DynamicField::Driver::BaseReference);
 
 # core modules
+use List::Util qw(any);
 
 # CPAN modules
 
