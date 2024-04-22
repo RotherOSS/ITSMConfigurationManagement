@@ -45,6 +45,9 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Web::FormCache',
     'Kernel::System::Web::Request',
+# Rother OSS / ITSMConfigurationManagement
+    'Kernel::System::ITSMConfigItem',
+# EO ITSMConfigurationManagement
 );
 
 =head1 NAME
