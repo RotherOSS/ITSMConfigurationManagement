@@ -1026,7 +1026,7 @@ sub _FormatSearchXMLData {
                     }
 
                     # assamble the final value from the parts
-                    for my $NewKey ( %{$NewXMLDataPart} ) {
+                    for my $NewKey ( keys $NewXMLDataPart->%* ) {
                         for my $Item ( @{ $NewXMLDataPart->{$NewKey} } ) {
                             push @{ $NewXMLData->{$NewKey} }, $Item;
                         }
