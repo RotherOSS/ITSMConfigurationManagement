@@ -88,9 +88,9 @@ sub AddConfigItemLink {
     $DBObject->Do(
         SQL => <<'END_SQL',
 INSERT INTO configitem_link (
-    link_type_id, source_configitem_id, target_configitem_id, create_time, create_by
+    link_type_id, source_configitem_id, target_configitem_id, dynamic_field_id, create_time, create_by
   )
-  VALUES (?, ?, ?, current_timestamp, 1 )
+  VALUES (?, ?, ?, NULL, current_timestamp, 1 )
 END_SQL
         Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
     );
