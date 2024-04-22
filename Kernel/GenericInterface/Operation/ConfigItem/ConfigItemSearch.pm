@@ -229,7 +229,7 @@ sub Run {
     }
 
     # authenticate user
-    my ( $UserID, $UserType ) = $Self->Auth(%Param);
+    my ($UserID) = $Self->Auth(%Param);
 
     if ( !$UserID ) {
         return $Self->ReturnError(

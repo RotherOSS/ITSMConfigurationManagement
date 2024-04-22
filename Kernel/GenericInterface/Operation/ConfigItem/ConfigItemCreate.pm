@@ -212,7 +212,7 @@ sub Run {
     }
 
     # authenticate user
-    my ( $UserID, $UserType ) = $Self->Auth(
+    my ($UserID) = $Self->Auth(
         %Param,
     );
 
