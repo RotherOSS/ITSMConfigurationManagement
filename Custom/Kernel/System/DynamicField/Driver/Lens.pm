@@ -168,8 +168,8 @@ sub ValueSet {
                 LensDynamicFieldConfig => $LensDFConfig,
                 ReferencedObjectID     => $ReferencedObjectID,
             );
-# EO ITSMConfigurationManagement
 
+# EO ITSMConfigurationManagement
             $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->ValueSet(
                 %Param,
                 Value              => $Param{Value}[$SetIndex],
@@ -197,8 +197,8 @@ sub ValueSet {
         LensDynamicFieldConfig => $LensDFConfig,
         ReferencedObjectID     => $ReferencedObjectID,
     );
-# EO ITSMConfigurationManagement
 
+# EO ITSMConfigurationManagement
     return $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->ValueSet(
         %Param,
         ConfigItemHandled  => 0,
@@ -874,11 +874,11 @@ sub _GetAttributeDFConfig {
         my $DynamicFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
             ID => $Param{LensDynamicFieldConfig}{Config}{AttributeDF},
         );
-
         $Self->{AttributeDFCache}{ $Param{LensDynamicFieldConfig}{ID} } = $DynamicFieldConfig // {};
     }
 
 # Rother OSS / ITSMConfigurationManagement
+    #return $Self->{AttributeDFCache}{ $Param{LensDynamicFieldConfig}{ID} };
     if ( $Param{ReferencedObjectID} && $Self->{ReferenceDFCache}{ $Param{LensDynamicFieldConfig}{ID} } ) {
         my $ReferenceDFConfig = $Self->{ReferenceDFCache}{ $Param{LensDynamicFieldConfig}{ID} };
 
@@ -901,9 +901,9 @@ sub _GetAttributeDFConfig {
             }
         }
     }
-# EO ITSMConfigurationManagement
 
     return { $Self->{AttributeDFCache}{ $Param{LensDynamicFieldConfig}{ID} }->%* };
+# EO ITSMConfigurationManagement
 }
 
 =head2 _GetReferencedObjectID()
