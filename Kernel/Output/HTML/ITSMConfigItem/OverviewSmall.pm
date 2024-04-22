@@ -613,7 +613,6 @@ sub Run {
         Value => $Param{LinkPage},
     );
 
-
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => \%Param,
