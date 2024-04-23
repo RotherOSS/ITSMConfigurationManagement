@@ -448,7 +448,6 @@ sub FilterContent {
 
     return if !$Param{FilterColumn};
 
-    my $ConfigItemIDs;
     my $HeaderColumn = $Param{FilterColumn};
     my @OriginalViewableConfigItems;
 
@@ -805,8 +804,6 @@ sub Run {
     }
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # add page nav bar
     my $Total = $Summary->{ $Self->{Filter} } || 0;
@@ -1311,7 +1308,6 @@ sub Run {
 
         # get needed objects
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-        my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
 
         # show all needed columns
         COLUMN:

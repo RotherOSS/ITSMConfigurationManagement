@@ -483,7 +483,7 @@ sub _MigrateDefinitions {
             UserID            => 1,
         );
 
-        my $Success = $SysConfigObject->SettingUnlock(
+        $SysConfigObject->SettingUnlock(
             UnlockAll => 1,
         );
 
@@ -594,7 +594,6 @@ sub _MigrateAttributeData {
     $Self->Print("<yellow>Copy attribute data.</yellow>\n");
 
     my $MainObject                = $Kernel::OM->Get('Kernel::System::Main');
-    my $XMLObject                 = $Kernel::OM->Get('Kernel::System::XML');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
 
@@ -671,7 +670,7 @@ END_SQL
                 UserID            => 1,
             );
 
-            my $Success = $SysConfigObject->SettingUnlock(
+            $SysConfigObject->SettingUnlock(
                 UnlockAll => 1,
             );
 
@@ -828,7 +827,7 @@ END_SQL
             UserID            => 1,
         );
 
-        my $Success = $SysConfigObject->SettingUnlock(
+        $SysConfigObject->SettingUnlock(
             UnlockAll => 1,
         );
 

@@ -185,7 +185,6 @@ sub Run {
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
-    my %ClassLookup = reverse $ClassList->%*;
 
     # get possible deployment state list for config items to be shown
     my $StateList = $GeneralCatalogObject->ItemList(

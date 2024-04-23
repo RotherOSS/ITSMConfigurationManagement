@@ -266,7 +266,6 @@ sub Run {
             my %DFSearchParams;
             if ( IsHashRefWithData( $PermissionConditionConfig->{DynamicFieldValues} ) ) {
                 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-                my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
                 DYNAMICFIELD:
                 for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
                     next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};

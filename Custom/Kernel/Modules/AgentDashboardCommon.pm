@@ -904,12 +904,11 @@ sub _Element {
         return if !$PermissionOK;
     }
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     # load backends
     my $Module = $Configs->{$Name}->{Module};
-    return if !$Kernel::OM->Get('Kernel::System::Main')->Require($Module);
+
+    return unless $Kernel::OM->Get('Kernel::System::Main')->Require($Module);
+
     my $Object = $Module->new(
         %{$Self},
         Config                => $Configs->{$Name},
@@ -945,6 +944,7 @@ sub _Element {
             CustomerID     => $Self->{CustomerID}     || '',
             CustomerUserID => $Self->{CustomerUserID} || '',
         );
+
         return $FilterContent;
     }
 

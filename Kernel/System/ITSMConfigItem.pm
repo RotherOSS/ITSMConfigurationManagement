@@ -400,7 +400,6 @@ END_SQL
     if ( $DFData && $ConfigItem{DefinitionID} ) {
 
         # get dynamic field objects
-        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         my $Definition = $Self->DefinitionGet(
@@ -641,7 +640,7 @@ sub ConfigItemAdd {
     }
 
     # insert new config item
-    my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+    $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'INSERT INTO configitem ('
             . 'configitem_number, cur_depl_state_id, cur_inci_state_id'
             . ', class_id, create_time, create_by, change_time, change_by'

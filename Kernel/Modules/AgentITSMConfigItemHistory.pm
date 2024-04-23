@@ -110,7 +110,6 @@ sub Run {
         ClassID => $ConfigItem->{ClassID},
     );
 
-    my $Table   = '';
     my $Counter = 1;
     my $Version = 0;
     for my $DataTmp (@NewLines) {

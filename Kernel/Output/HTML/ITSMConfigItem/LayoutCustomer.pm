@@ -284,8 +284,6 @@ sub SearchInputCreate {
         }
     }
 
-    my $Key = $Param{Key};
-
     # hash with values for the input field
     my %FormData;
 

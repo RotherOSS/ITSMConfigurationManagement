@@ -108,7 +108,7 @@ sub PreValueSet {
     if ( $VersionTrigger{ 'DynamicField_' . $Param{Param}{DynamicFieldConfig}{Name} } ) {
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-        my $NewVersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
+        my $NewVersionID = $ConfigItemObject->VersionAdd(
             LastVersionID => $Param{Param}{ObjectID},
             UserID        => $Param{Param}{UserID},
         );

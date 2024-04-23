@@ -1402,7 +1402,6 @@ sub Run {
         );
     }
 
-    my $Output = '';
     if ( ( $ConfigItem->{ConfigItemID} && $ConfigItem->{ConfigItemID} ne 'NEW' ) || $DuplicateID ) {
 
         # output block

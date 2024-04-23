@@ -482,7 +482,7 @@ sub _PDFOutputLinkedObjects {
 
     # output table
     PAGE:
-    for my $Count ( $Page{PageCount} .. $Page{MaxPages} ) {
+    for ( $Page{PageCount} .. $Page{MaxPages} ) {
 
         # output table (or a fragment of it)
         %TableParam = $PDFObject->Table(%TableParam);
@@ -576,7 +576,7 @@ sub _PDFOutputAttachments {
 
     # output table
     PAGE:
-    for my $Count ( $Page{PageCount} .. $Page{MaxPages} ) {
+    for ( $Page{PageCount} .. $Page{MaxPages} ) {
 
         # output table (or a fragment of it)
         %TableParam = $PDFObject->Table(%TableParam);
@@ -699,7 +699,7 @@ sub _PDFOutputVersionInfos {
 
     # output table
     PAGE:
-    for my $Count ( $Param{Page}->{PageCount} .. $Param{Page}->{MaxPages} ) {
+    for ( $Param{Page}->{PageCount} .. $Param{Page}->{MaxPages} ) {
 
         # output table (or a fragment of it)
         %TableParam = $PDFObject->Table(%TableParam);

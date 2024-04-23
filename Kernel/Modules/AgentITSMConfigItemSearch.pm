@@ -954,9 +954,6 @@ sub Run {
             }
         }
 
-        # attributes for search
-        my @SearchAttributes;
-
         my @SearchResultList;
 
         # start search if called from a search dialog or from a results page
