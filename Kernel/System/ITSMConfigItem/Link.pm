@@ -36,9 +36,12 @@ Kernel::System::ITSMConfigItem::Link - sub module of Kernel::System::ITSMConfigI
 
 =head1 DESCRIPTION
 
-This modules supports the maintenance of the content of the table B<configitem_link>. This table
+This module supports the maintenance of the content of the table B<configitem_link>. This table
 is a shadow of the information that is contained in Reference dynamic fields that connect objects
 of type C<ITSMConfigItem> and C<ITSMConfigItemVersion>.
+
+The information from the LinkObject feature is also represented in B<configitem_link>. These
+case is marked by B<configitem_link.dynamic_field_id> having the value B<NULL>.
 
 There is support for immediate update of the table and for a complete rebuild of the table.
 
@@ -48,9 +51,12 @@ Planned is also support for dumping the complete graph so that it can be used fo
 
 =head2 AddConfigItemLink()
 
-This method is specifically for adding a link between two config items. The linking of specific versions is not supported.
+This method is specifically for adding a link between two config items. It is needed
+for supporting the LinkObject functionality.
 
-    $ConfigItemObject->AddConfigItemLink(
+The linking of specific versions is not supported.
+
+    my $Success = $ConfigItemObject->AddConfigItemLink(
         Type           => 'DependsOn',
         SourceConfigID => 127,
         TargetConfigID => 128,
@@ -94,9 +100,12 @@ END_SQL
 
 =head2 DeleteConfigItemLink()
 
-This method is specifically for deleting a link between two config items. The unlinking of specific versions is not supported.
+This method is specifically for deleting a link between two config items. It is needed
+for supporting the LinkObject functionality.
 
-    $ConfigItemObject->DeleteConfigItemLink(
+The unlinking of specific versions is not supported.
+
+    my $Success = $ConfigItemObject->DeleteConfigItemLink(
         Type           => 'DependsOn',
         SourceConfigID => 127,
         TargetConfigID => 128,
@@ -357,7 +366,8 @@ END_SQL
 
 =head2 RebuildLinkTable()
 
-purge and repopulate the table B<configitem_link> based on the Reference dynamic fields.
+purge and repopulate the table B<configitem_link> based on the Reference dynamic fields
+and on the LinkObject data.
 
     my $Result = $ConfigItemObject->RebuildLinkTable;
 
@@ -378,48 +388,45 @@ sub RebuildLinkTable {
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    # purge the table
+    # purge the table, give up in case of error
     my $SuccessPurge = $DBObject->Do(
         SQL => 'DELETE FROM configitem_link'
     );
-    if ( !$SuccessPurge ) {
-        return {
-            Success => 0,
-            Message => Translatable('Could not purge the table configitem_link.'),
-            Color   => 'red',
-        };
-    }
+
+    return {
+        Success => 0,
+        Message => Translatable('Could not purge the table configitem_link.'),
+        Color   => 'red',
+    } unless $SuccessPurge;
 
     # Get the relevant dynamic fields.
     # Only Reference dynamic fiels that connect an ITSMConfigItem
-    # to an ITSMConfigItem or an ITSMConfigItemVersion are relevant.
-    my $DynamicFieldObject       = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $CompleteDynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
-        ObjectType => 'ITSMConfigItem'
-    );
-    my @DynamicFields =
-        grep { $_->{FieldType} =~ /^ConfigItem/ }
-        $CompleteDynamicFieldList->@*;
-
-    if ( !@DynamicFields ) {
-
-        # nothing to do when there are no dynamic fields
-        return {
-            Success => 1,
-            Message => Translatable('No relevant dynamic fields were found'),
-            Color   => 'yellow',
-        };
+    # to another ITSMConfigItem or an ITSMConfigItemVersion are relevant.
+    my @DynamicFields;
+    {
+        my $DynamicFieldObject       = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $CompleteDynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'ITSMConfigItem'
+        );
+        @DynamicFields =
+            grep { $_->{FieldType} =~ m/^ConfigItem/ }
+            $CompleteDynamicFieldList->@*;
     }
 
-    my %IsConfigItem = map
-        { $_->{ID} => 1 }
-        grep
-        { $_->{FieldType} eq 'ConfigItem' }
+    # nothing to do when there are no dynamic fields
+    return {
+        Success => 1,
+        Message => Translatable('No relevant dynamic fields were found'),
+        Color   => 'yellow',
+    } unless @DynamicFields;
+
+    my %IsConfigItem =
+        map  { $_->{ID} => 1 }
+        grep { $_->{FieldType} eq 'ConfigItem' }
         @DynamicFields;
-    my %IsConfigItemVersion = map
-        { $_->{ID} => 1 }
-        grep
-        { $_->{FieldType} eq 'ConfigItemVersion' }
+    my %IsConfigItemVersion =
+        map  { $_->{ID} => 1 }
+        grep { $_->{FieldType} eq 'ConfigItemVersion' }
         @DynamicFields;
 
     # Get the relevant dynamic field values.
@@ -446,13 +453,15 @@ END_SQL
     }
 
     # prepare the dynamic field values so that it can be used in a batch insert
-    my @DynamicFieldIDs            = map { $_->[1] } $Rows->@*;
+    my @DynamicFieldIDs = map { $_->[1] } $Rows->@*;
+
+    # TODO: determine the link types
     my @SourceConfigItemIDs        = map { $_->[2] } $Rows->@*;
     my @TargetConfigItemIDs        = map { $IsConfigItem{ $_->[1] }        ? $_->[3] : undef } $Rows->@*;
     my @TargetConfigItemVersionIDs = map { $IsConfigItemVersion{ $_->[1] } ? $_->[3] : undef } $Rows->@*;
 
     # Multivalue INSERT
-    my $Tuples = $DBObject->DoArray(
+    my $NumReferenceRows = $DBObject->DoArray(
         SQL => <<'END_SQL',
 INSERT INTO configitem_link (
     link_type_id,
@@ -474,22 +483,25 @@ END_SQL
         ],
     );
 
-    if ( !defined $Tuples ) {
-        return {
-            Success => 0,
-            Message => Translatable('Could not insert into the table configitem_link'),
-            Color   => 'red',
-        };
-    }
-    elsif ( $Tuples == 0 ) {
-        return {
-            Success => 1,
-            Message => Translatable('Inserted 0 rows into the table configitem_link'),
-            Color   => 'yellow',
-        };
-    }
+    return {
+        Success => 0,
+        Message => Translatable('Could not insert into the table configitem_link'),
+        Color   => 'red',
+    } unless defined $NumReferenceRows;
 
-    # no problems
+    # TODO: add rows from LinkObject
+    my $NumLinkObjectRows = 0;
+
+    my $NumRows = $NumReferenceRows + $NumLinkObjectRows;
+
+    # warn when there are no links
+    return {
+        Success => 1,
+        Message => Translatable('Inserted 0 rows into the table configitem_link'),
+        Color   => 'yellow',
+    } if $NumRows == 0;
+
+    # there is at least one link, looks good
     return {
         Success => 1,
         Message => Translatable('Done'),
