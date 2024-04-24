@@ -86,9 +86,8 @@ sub Run {
 
     my $File = $Self->GetOption('file');
 
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $YAMLObject       = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $Error = sub {
         $Self->Print("<red>$_[0]</red>\n");
@@ -110,54 +109,11 @@ sub Run {
 
     return $Error->('Definition is no valid YAML hash.') unless IsArrayRefWithData($DefinitionRaw);
 
-    # list of configitem classes
-    my %ClassLookup = reverse %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        ) // {}
-    };
+    my $Success = $ConfigItemObject->ClassImport(
+        DefinitionList => $DefinitionRaw,
+    );
 
-    # create all imported classes first because dynamic fields might depend on them
-    for my $ClassDefinition ( $DefinitionRaw->@* ) {
-
-        return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($ClassDefinition);
-
-        my $ClassName = $ClassDefinition->{ClassName};
-
-        return $Error->('No valid class name present.') unless $ClassName;
-
-        $Self->Print("<yellow>Creating class $ClassName...</yellow>\n");
-
-        # handle class creation
-        return $Error->("Class $ClassName already exists.") if $ClassLookup{$ClassName};
-
-        my $ClassID = $GeneralCatalogObject->ItemAdd(
-            Class   => 'ITSM::ConfigItem::Class',
-            Name    => $ClassName,
-            ValidID => 1,
-            UserID  => 1,
-        );
-
-        return $Error->("Could not add class $ClassName.") unless $ClassID;
-
-        $Self->Print("<green>Done</green>\n");
-    }
-
-    for my $ClassDefinition ( $DefinitionRaw->@* ) {
-
-        return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($ClassDefinition);
-
-        $Self->Print("<yellow>Importing definition for class $ClassDefinition->{ClassName}...\n</yellow>");
-
-        my $Success = $ConfigItemObject->ClassImport(
-            DefinitionRaw => $ClassDefinition,
-            ClassHandled  => 1,
-        );
-
-        return $Error->("Could not import class $ClassDefinition->{ClassName}.") unless $Success;
-
-        $Self->Print("<green>Done</green>\n");
-    }
+    return $Error->("Could not import definitions from file.") unless $Success;
 
     $Self->Print("<green>Done with all</green>\n");
 

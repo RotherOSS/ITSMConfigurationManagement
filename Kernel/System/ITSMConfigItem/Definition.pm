@@ -1277,36 +1277,36 @@ sub ClassImport {
         ) // {}
     };
 
-    my $DefinitionRaw = $Param{DefinitionRaw};
+    # expect array ref of definitions
+    my $DefinitionList = $Param{DefinitionList};
 
-    if ( !IsHashRefWithData($DefinitionRaw) ) {
+    if ( !IsArrayRefWithData($DefinitionList) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Definition is no valid YAML hash.',
+            Message  => 'Param DefinitionList is empty or not an array reference.',
         );
         return;
     }
 
-    my $ClassName = delete $DefinitionRaw->{ClassName};
+    # 1. create all classes
+    my %DynamicFields;
+    my %Definitions;
+    for my $ClassDefinition ( $Param{DefinitionList}->@* ) {
 
-    if ( !$ClassName ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Need attribute "ClassName" to determine the name of the new class.',
-        );
-        return;
-    }
+        # check definition for validity
+        for my $Key (qw/ClassName Pages Sections DynamicFields/) {
+            if ( !$ClassDefinition->{$Key} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Need $Key in Definition.",
+                );
+                return;
+            }
+        }
 
-    # handle class creation
-    my $ClassID;
-    if ( $Param{ClassHandled} ) {
-        my $ClassData = $GeneralCatalogObject->ItemGet(
-            Class => 'ITSM::ConfigItem::Class',
-            Name  => $ClassName,
-        );
-        $ClassID = $ClassData->{ItemID};
-    }
-    else {
+        my $ClassName = delete $ClassDefinition->{ClassName};
+
+        # handle class creation
         if ( $ClassLookup{$ClassName} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -1315,7 +1315,7 @@ sub ClassImport {
             return;
         }
 
-        $ClassID = $GeneralCatalogObject->ItemAdd(
+        my $ClassID = $GeneralCatalogObject->ItemAdd(
             Class   => 'ITSM::ConfigItem::Class',
             Name    => $ClassName,
             ValidID => 1,
@@ -1329,30 +1329,26 @@ sub ClassImport {
             );
             return;
         }
-    }
 
-    for my $Key (qw/Pages Sections DynamicFields/) {
-        if ( !$DefinitionRaw->{$Key} ) {
+        # collect dynamic fields
+        my $ClassDynamicFields = delete $ClassDefinition->{DynamicFields};
+        %DynamicFields = (
+            %DynamicFields,
+            $ClassDynamicFields->%*,
+        );
+
+        # collect definition
+        $Definitions{$ClassID} = $YAMLObject->Dump(
+            Data => $ClassDefinition,
+        );
+
+        if ( !$Definitions{$ClassID} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $Key in Definition.",
+                Message  => 'Error recreating the definition in yaml.',
             );
             return;
         }
-    }
-
-    my $DynamicFields = delete $DefinitionRaw->{DynamicFields};
-
-    my $FinalDefinition = $YAMLObject->Dump(
-        Data => $DefinitionRaw,
-    );
-
-    if ( !$FinalDefinition ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Error recreating the definition in yaml.',
-        );
-        return;
     }
 
     my %DynamicFieldLookup = reverse %{
@@ -1363,10 +1359,11 @@ sub ClassImport {
             || {}
     };
 
+    # add inner fields of set DFs to hash
     my %SetDFs;
-    for my $Field ( keys $DynamicFields->%* ) {
-        if ( $DynamicFields->{$Field}{FieldType} eq 'Set' ) {
-            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields->{$Field}{Config}{Include}->@*;
+    for my $Field ( keys %DynamicFields ) {
+        if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
+            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields{$Field}{Config}{Include}->@*;
 
             if ( !%SetFields ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1382,7 +1379,7 @@ sub ClassImport {
         }
     }
 
-    my %AllFields = ( $DynamicFields->%*, %SetDFs );
+    my %AllFields = ( %DynamicFields, %SetDFs );
     my %Namespaces;
     for my $Field ( keys %AllFields ) {
         if ( $DynamicFieldLookup{$Field} ) {
@@ -1452,7 +1449,7 @@ sub ClassImport {
                 DefaultID => $Setting{DefaultID},
             );
 
-            # Update setting with modified 'IsValid' param.
+            # Update setting with modified data
             my %Result = $SysConfigObject->SettingUpdate(
                 Name              => 'DynamicField::Namespaces',
                 IsValid           => 1,
@@ -1502,7 +1499,7 @@ sub ClassImport {
         ( $AllFields{$b}{Name} eq $AllFields{$a}{Config}{AttributeDF} ) <=> ( $AllFields{$a}{Name} eq $AllFields{$b}{Config}{AttributeDF} )
     } @LensFieldNames;
 
-    # create dynamic fields
+    # 2. create dynamic fields
     FIELD:
     for my $FieldName ( @NormalFieldNames, @LensFieldNamesSorted, @SetFieldNames ) {
         next FIELD if $DynamicFieldLookup{$FieldName};
@@ -1544,18 +1541,21 @@ sub ClassImport {
         }
     }
 
-    my $Return = $ConfigItemObject->DefinitionAdd(
-        ClassID    => $ClassID,
-        Definition => $FinalDefinition,
-        UserID     => 1,
-    );
-
-    if ( !$Return->{Success} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Could not store definition.',
+    # 3. add definitions
+    for my $ClassID ( keys %Definitions ) {
+        my $Return = $ConfigItemObject->DefinitionAdd(
+            ClassID    => $ClassID,
+            Definition => $Definitions{$ClassID},
+            UserID     => 1,
         );
-        return;
+
+        if ( !$Return->{Success} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Could not store definition.',
+            );
+            return;
+        }
     }
 
     return 1;
