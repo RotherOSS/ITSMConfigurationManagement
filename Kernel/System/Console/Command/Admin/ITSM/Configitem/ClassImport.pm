@@ -40,6 +40,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
+    'Kernel::System::SysConfig',
     'Kernel::System::YAML',
 );
 
@@ -85,17 +86,9 @@ sub Run {
 
     my $File = $Self->GetOption('file');
 
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-    my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # list of configitem classes
-    my %ClassLookup = reverse %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        ) // {}
-    };
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $Error = sub {
         $Self->Print("<red>$_[0]</red>\n");
@@ -111,133 +104,62 @@ sub Run {
         Data => ${$DefinitionYAML},
     );
 
-    return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($DefinitionRaw);
-
-    my $ClassName = delete $DefinitionRaw->{ClassName};
-
-    return $Error->('Need attribute "ClassName" to determine the name of the new class.') if !$ClassName;
-    return $Error->( 'Class ' . $ClassName . ' already exists.' )                         if $ClassLookup{$ClassName};
-
-    for my $Key (qw/Pages Sections DynamicFields/) {
-        return $Error->( 'Need ' . $Key . ' in Definition.' ) if !$DefinitionRaw->{$Key};
+    if ( ref $DefinitionRaw eq 'HASH' ) {
+        $DefinitionRaw = [$DefinitionRaw];
     }
 
-    my $DynamicFields = delete $DefinitionRaw->{DynamicFields};
+    return $Error->('Definition is no valid YAML hash.') unless IsArrayRefWithData($DefinitionRaw);
 
-    my $FinalDefinition = $YAMLObject->Dump(
-        Data => $DefinitionRaw,
-    );
-
-    return $Error->('Error recreating the definition yaml.') unless $FinalDefinition;
-
-    my %DynamicFieldLookup = reverse %{
-        $DynamicFieldObject->DynamicFieldList(
-            Valid      => 0,
-            ResultType => 'HASH',
-            )
-            || {}
+    # list of configitem classes
+    my %ClassLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        ) // {}
     };
 
-    my %SetDFs;
-    for my $Field ( keys $DynamicFields->%* ) {
-        if ( $DynamicFields->{$Field}{FieldType} eq 'Set' ) {
-            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields->{$Field}{Config}{Include}->@*;
+    # create all imported classes first because dynamic fields might depend on them
+    for my $ClassDefinition ( $DefinitionRaw->@* ) {
 
-            return $Error->( 'Erroneous configuration of Set ' . $Field . '.' ) if !%SetFields;
+        return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($ClassDefinition);
 
-            %SetDFs = (
-                %SetDFs,
-                %SetFields,
-            );
-        }
-    }
+        my $ClassName = $ClassDefinition->{ClassName};
 
-    my %AllFields = ( $DynamicFields->%*, %SetDFs );
-    my %Namespaces;
-    for my $Field ( keys %AllFields ) {
-        if ( $DynamicFieldLookup{$Field} ) {
-            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
-                Name => $Field,
-            );
+        return $Error->('No valid class name present.') unless $ClassName;
 
-            if ( $DynamicField->{FieldType} ne $AllFields{$Field}{FieldType} || $DynamicField->{ObjectType} ne 'ITSMConfigItem' ) {
-                return $Error->("DynamicField $Field exists but does not have the required Object- and/or FieldType.");
-            }
+        $Self->Print("<yellow>Creating class $ClassName...</yellow>\n");
 
-            if ( $DynamicField->{MultiValue} xor $AllFields{$Field}{MultiValue} ) {
-                return $Error->("DynamicField $Field exists but does not match the multivalue setting.");
-            }
-        }
+        # handle class creation
+        return $Error->("Class $ClassName already exists.") if $ClassLookup{$ClassName};
 
-        if ( $Field !~ m{ \A [a-zA-Z\d\-]+ \z }xms ) {
-            return $Error->("Invalid DynamicField name '$Field'.");
-        }
-
-        if ( $Field =~ /^([^-]+)-/ ) {
-            $Namespaces{$1} = 1;
-        }
-    }
-
-    $Self->Print("<yellow>Please confirm the creation of the new config item class</yellow> $ClassName <yellow>using the following dynamic fields</yellow>\n");
-
-    for my $Field ( sort keys $DynamicFields->%* ) {
-        my $Status = $DynamicFieldLookup{$Field} ? " <green>(use existing)</green>\n" : " <yellow>(create)</yellow>";
-        $Self->Print( $Field . $Status . "\n" );
-    }
-
-    $Self->Print("\n<yellow>Please confirm by typing 'y'es</yellow>\n\t");
-
-    return $Self->ExitCodeOk() if <STDIN> !~ /^ye?s?$/i;
-
-    my $ClassID = $GeneralCatalogObject->ItemAdd(
-        Class   => 'ITSM::ConfigItem::Class',
-        Name    => $ClassName,
-        ValidID => 1,
-        UserID  => 1,
-    );
-
-    return $Error->( 'Could not add class ' . $ClassName . '.' ) if !$ClassID;
-
-    my $Order = scalar( keys %DynamicFieldLookup );
-
-    # create dynamic fields
-    FIELD:
-    for my $Field ( keys %SetDFs, keys $DynamicFields->%* ) {
-        next FIELD if $DynamicFieldLookup{$Field};
-
-        my %SetConfig;
-        if ( $AllFields{$Field}{FieldType} eq 'Set' ) {
-            my @Included = map { { DF => $_->{DF} } } $AllFields{$Field}{Config}{Include}->@*;
-            %SetConfig = (
-                Config => {
-                    $AllFields{$Field}{Config}->%*,
-                    Include => \@Included,
-                },
-            );
-        }
-
-        $AllFields{$Field}{ID} = $DynamicFieldObject->DynamicFieldAdd(
-            $AllFields{$Field}->%*,
-            %SetConfig,
-            FieldOrder => ++$Order,
-            ObjectType => 'ITSMConfigItem',
-            Reorder    => 0,
-            ValidID    => 1,
-            UserID     => 1,
+        my $ClassID = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class',
+            Name    => $ClassName,
+            ValidID => 1,
+            UserID  => 1,
         );
 
-        return $Error->( 'Could not add dynamic field ' . $Field . '.' ) if !$AllFields{$Field}{ID};
+        return $Error->("Could not add class $ClassName.") unless $ClassID;
+
+        $Self->Print("<green>Done</green>\n");
     }
 
-    my $Return = $ConfigItemObject->DefinitionAdd(
-        ClassID    => $ClassID,
-        Definition => $FinalDefinition,
-        UserID     => 1,
-    );
+    for my $ClassDefinition ( $DefinitionRaw->@* ) {
 
-    return $Error->('Could not store definition.') unless $Return->{Success};
+        return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($ClassDefinition);
 
-    $Self->Print("<green>Done</green>\n");
+        $Self->Print("<yellow>Importing definition for class $ClassDefinition->{ClassName}...\n</yellow>");
+
+        my $Success = $ConfigItemObject->ClassImport(
+            DefinitionRaw => $ClassDefinition,
+            ClassHandled  => 1,
+        );
+
+        return $Error->("Could not import class $ClassDefinition->{ClassName}.") unless $Success;
+
+        $Self->Print("<green>Done</green>\n");
+    }
+
+    $Self->Print("<green>Done with all</green>\n");
 
     return $Self->ExitCodeOk();
 }

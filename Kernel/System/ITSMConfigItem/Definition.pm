@@ -35,7 +35,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(any);
+use List::Util qw(any none);
 
 # CPAN modules
 
@@ -1251,6 +1251,316 @@ sub DefinitionSync {
     return 1;
 }
 
+=head2 ClassImport()
+
+Import config item class including dynamic fields and namespaces, based on class definition
+
+    my $Success = $ConfigItemObject->ClassImport(
+        DefinitionRaw => $DefinitionRaw,
+        ClassHandled  => (0|1)      # (optional, default 0) if class has already been created, affects check for class already existing
+    );
+
+=cut
+
+sub ClassImport {
+    my ( $Self, %Param ) = @_;
+
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # list of configitem classes
+    my %ClassLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        ) // {}
+    };
+
+    my $DefinitionRaw = $Param{DefinitionRaw};
+
+    if ( !IsHashRefWithData($DefinitionRaw) ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Definition is no valid YAML hash.',
+        );
+        return;
+    }
+
+    my $ClassName = delete $DefinitionRaw->{ClassName};
+
+    if ( !$ClassName ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need attribute "ClassName" to determine the name of the new class.',
+        );
+        return;
+    }
+
+    # handle class creation
+    my $ClassID;
+    if ( $Param{ClassHandled} ) {
+        my $ClassData = $GeneralCatalogObject->ItemGet(
+            Class => 'ITSM::ConfigItem::Class',
+            Name  => $ClassName,
+        );
+        $ClassID = $ClassData->{ItemID};
+    }
+    else {
+        if ( $ClassLookup{$ClassName} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Class $ClassName already exists.",
+            );
+            return;
+        }
+
+        $ClassID = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class',
+            Name    => $ClassName,
+            ValidID => 1,
+            UserID  => 1,
+        );
+
+        if ( !$ClassID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not add class $ClassName.",
+            );
+            return;
+        }
+    }
+
+    for my $Key (qw/Pages Sections DynamicFields/) {
+        if ( !$DefinitionRaw->{$Key} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Key in Definition.",
+            );
+            return;
+        }
+    }
+
+    my $DynamicFields = delete $DefinitionRaw->{DynamicFields};
+
+    my $FinalDefinition = $YAMLObject->Dump(
+        Data => $DefinitionRaw,
+    );
+
+    if ( !$FinalDefinition ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Error recreating the definition in yaml.',
+        );
+        return;
+    }
+
+    my %DynamicFieldLookup = reverse %{
+        $DynamicFieldObject->DynamicFieldList(
+            Valid      => 0,
+            ResultType => 'HASH',
+            )
+            || {}
+    };
+
+    my %SetDFs;
+    for my $Field ( keys $DynamicFields->%* ) {
+        if ( $DynamicFields->{$Field}{FieldType} eq 'Set' ) {
+            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields->{$Field}{Config}{Include}->@*;
+
+            if ( !%SetFields ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Erroneous configuration of Set $Field.",
+                );
+            }
+
+            %SetDFs = (
+                %SetDFs,
+                %SetFields,
+            );
+        }
+    }
+
+    my %AllFields = ( $DynamicFields->%*, %SetDFs );
+    my %Namespaces;
+    for my $Field ( keys %AllFields ) {
+        if ( $DynamicFieldLookup{$Field} ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Field,
+            );
+
+            if ( $DynamicField->{FieldType} ne $AllFields{$Field}{FieldType} || $DynamicField->{ObjectType} ne 'ITSMConfigItem' ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "DynamicField $Field exists but does not have the required Object- and/or FieldType.",
+                );
+                return;
+            }
+
+            if ( $DynamicField->{MultiValue} xor $AllFields{$Field}{MultiValue} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "DynamicField $Field exists but does not match the multivalue setting.",
+                );
+                return;
+            }
+        }
+
+        if ( $Field !~ m{ \A [a-zA-Z\d\-]+ \z }xms ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Invalid DynamicField name '$Field'.",
+            );
+            return;
+        }
+
+        if ( $Field =~ /^([^-]+)-/ ) {
+            $Namespaces{$1} = 1;
+        }
+    }
+
+    if (%Namespaces) {
+
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        # Get current setting value.
+        my %Setting = $SysConfigObject->SettingGet(
+            Name => 'DynamicField::Namespaces',
+        );
+
+        my $ExistingNamespaces = $Setting{EffectiveValue};
+        my %AllNamespaces      = (
+            ( map { $_ => 1 } $ExistingNamespaces->@* ),
+            %Namespaces,
+        );
+
+        # check if namespaces need to be changed
+        my $UpdateNamespaces = 0;
+        NEWNAMESPACE:
+        for my $NewNamespace ( keys %AllNamespaces ) {
+            if ( none { $NewNamespace eq $_ } $ExistingNamespaces->@* ) {
+                $UpdateNamespaces = 1;
+                last NEWNAMESPACE;
+            }
+        }
+        if ($UpdateNamespaces) {
+
+            my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+                UserID    => 1,
+                Force     => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+
+            # Update setting with modified 'IsValid' param.
+            my %Result = $SysConfigObject->SettingUpdate(
+                Name              => 'DynamicField::Namespaces',
+                IsValid           => 1,
+                EffectiveValue    => [ keys %AllNamespaces ],
+                ExclusiveLockGUID => $ExclusiveLockGUID,
+                UserID            => 1,
+            );
+            if ( !$Result{Success} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => 'Could not update setting DynamicField::Namespaces.',
+                );
+                return;
+            }
+
+            my $Success = $SysConfigObject->SettingUnlock(
+                UserID    => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+
+            my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
+                Comments      => "ClassImport updating DynamicField::Namespaces",
+                UserID        => 1,
+                Force         => 1,
+                DirtySettings => ['DynamicField::Namespaces'],
+            );
+
+            if ( !$DeploymentResult{Success} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => 'Deployment failed!',
+                );
+                return;
+            }
+        }
+    }
+
+    my $Order = scalar( keys %DynamicFieldLookup );
+
+    # split dynamic fields in three separate groups
+    my @NormalFieldNames = grep { $AllFields{$_}{FieldType} ne 'Lens' && $AllFields{$_}{FieldType} ne 'Set' } keys %AllFields;
+    my @LensFieldNames   = grep { $AllFields{$_}{FieldType} eq 'Lens' } keys %AllFields;
+    my @SetFieldNames    = grep { $AllFields{$_}{FieldType} eq 'Set' } keys %AllFields;
+
+    # sort lens fields in case a lens has another lens as attribute dynamic field
+    my @LensFieldNamesSorted = sort {
+        ( $AllFields{$b}{Name} eq $AllFields{$a}{Config}{AttributeDF} ) <=> ( $AllFields{$a}{Name} eq $AllFields{$b}{Config}{AttributeDF} )
+    } @LensFieldNames;
+
+    # create dynamic fields
+    FIELD:
+    for my $FieldName ( @NormalFieldNames, @LensFieldNamesSorted, @SetFieldNames ) {
+        next FIELD if $DynamicFieldLookup{$FieldName};
+
+        my $FieldConfig = $AllFields{$FieldName};
+
+        my %SetConfig;
+        if ( $FieldConfig->{FieldType} eq 'Set' ) {
+            my @Included = map { { DF => $_->{DF} } } $FieldConfig->{Config}{Include}->@*;
+            %SetConfig = (
+                Config => {
+                    $FieldConfig->{Config}->%*,
+                    Include => \@Included,
+                },
+            );
+        }
+
+        # if needed, perform neccessary transformations
+        $FieldConfig = $Self->_DynamicFieldConfigTransform(
+            DynamicFieldConfig => $FieldConfig,
+            Action             => 'Import',
+        );
+
+        my $FieldID = $DynamicFieldObject->DynamicFieldAdd(
+            $FieldConfig->%*,
+            %SetConfig,
+            FieldOrder => ++$Order,
+            ObjectType => 'ITSMConfigItem',
+            Reorder    => 0,
+            ValidID    => 1,
+            UserID     => 1,
+        );
+
+        if ( !$FieldID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not add dynamic field $FieldConfig->{Name}.",
+            );
+        }
+    }
+
+    my $Return = $ConfigItemObject->DefinitionAdd(
+        ClassID    => $ClassID,
+        Definition => $FinalDefinition,
+        UserID     => 1,
+    );
+
+    if ( !$Return->{Success} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Could not store definition.',
+        );
+        return;
+    }
+
+    return 1;
+}
+
 =begin Internal:
 
 =head2 _ProcessRoles
@@ -1590,6 +1900,117 @@ sub _DefinitionDynamicFieldGet {
     return $Kernel::OM->Get('Kernel::System::YAML')->Dump(
         Data => \%ReturnDynamicFields,
     );
+}
+
+sub _DynamicFieldConfigTransform {
+    my ( $Self, %Param ) = @_;
+
+    for my $Needed (qw(Action DynamicFieldConfig)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return;
+        }
+    }
+
+    # TODO fails because of missing ID in Class Import DFConfigs
+    # my $IsReferenceField = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->HasBehavior(
+    #     DynamicFieldConfig => $Param{DynamicFieldConfig},
+    #     Behavior           => 'IsReferenceField',
+    # );
+
+    if ( grep { $Param{DynamicFieldConfig}{FieldType} eq $_ } qw(Agent ConfigItem ConfigItemVersion CustomerCompany CustomerUser FAQ Ticket) ) {
+
+        # fetch driver object
+        my $DriverObject = $Kernel::OM->Get("Kernel::System::DynamicField::Driver::$Param{DynamicFieldConfig}{FieldType}");
+
+        # skip field if driver is not present
+        next DYNAMICFIELD unless $DriverObject;
+
+        # fetch settings for iteration
+        my @FieldTypeSettings = $DriverObject->GetFieldTypeSettings();
+
+        # skip settings which are not directly related to objects
+        my %SkipSettings = (
+            DisplayType          => 1,
+            EditFieldMode        => 1,
+            MultiValue           => 1,
+            PossibleNone         => 1,
+            ReferenceFilterList  => 1,
+            ReferencedObjectType => 1,
+            SearchAttribute      => 1,
+        );
+
+        # needed transformation: Name -> ID
+        if ( $Param{Action} eq 'Import' ) {
+
+            SETTING:
+            for my $Setting (@FieldTypeSettings) {
+
+                next SETTING if $SkipSettings{ $Setting->{ConfigParamName} };
+                next SETTING unless $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} };
+
+                my @TransformedValues;
+                my @CurrentValues     = $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} }->@*;
+                my %SettingDataLookup = reverse $Setting->{SelectionData}->%*;
+                for my $Value (@CurrentValues) {
+                    if ( $SettingDataLookup{$Value} ) {
+                        push @TransformedValues, $SettingDataLookup{$Value};
+                    }
+                }
+                $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} } = \@TransformedValues;
+            }
+        }
+
+        # needed transformation: ID -> Name
+        elsif ( $Param{Action} eq 'Export' ) {
+
+            SETTING:
+            for my $Setting (@FieldTypeSettings) {
+
+                next SETTING if $SkipSettings{ $Setting->{ConfigParamName} };
+                next SETTING unless $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} };
+
+                my @TransformedValues;
+                my @CurrentValues = $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} }->@*;
+                for my $Value (@CurrentValues) {
+                    if ( $Setting->{SelectionData}{$Value} ) {
+                        push @TransformedValues, $Setting->{SelectionData}{$Value};
+                    }
+                }
+                $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} } = \@TransformedValues;
+            }
+        }
+    }
+    elsif ( $Param{DynamicFieldConfig}{FieldType} eq 'Lens' ) {
+
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+        if ( $Param{Action} eq 'Import' ) {
+            my $AttributeDF = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Param{DynamicFieldConfig}{Config}{AttributeDF},
+            );
+            $Param{DynamicFieldConfig}{Config}{AttributeDF} = $AttributeDF->{ID};
+            my $ReferenceDF = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Param{DynamicFieldConfig}{Config}{ReferenceDF},
+            );
+            $Param{DynamicFieldConfig}{Config}{ReferenceDF} = $ReferenceDF->{ID};
+        }
+        elsif ( $Param{Action} eq 'Export' ) {
+            my $AttributeDF = $DynamicFieldObject->DynamicFieldGet(
+                ID => $Param{DynamicFieldConfig}{Config}{AttributeDF},
+            );
+            $Param{DynamicFieldConfig}{Config}{AttributeDF} = $AttributeDF->{Name};
+            my $ReferenceDF = $DynamicFieldObject->DynamicFieldGet(
+                ID => $Param{DynamicFieldConfig}{Config}{ReferenceDF},
+            );
+            $Param{DynamicFieldConfig}{Config}{ReferenceDF} = $ReferenceDF->{Name};
+        }
+    }
+
+    return $Param{DynamicFieldConfig};
 }
 
 =end Internal:
