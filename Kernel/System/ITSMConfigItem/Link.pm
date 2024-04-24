@@ -139,10 +139,8 @@ sub DeleteConfigItemLink {
 DELETE FROM configitem_link
   WHERE link_type_id = ?
     AND source_configitem_id = ?
-    AND target_configitem_i = ?
+    AND target_configitem_id = ?
     AND dynamic_field_id IS NULL
-  )
-  VALUES (?, ?, ?)
 END_SQL
         Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
     );
