@@ -129,7 +129,7 @@ sub DeleteConfigItemLink {
     }
 
     # lookup type id
-    my $TypeID = $Kernel::OM->Get('Kernel::System::LinkObject')->TypeLookup(
+    my $LinkTypeID = $Kernel::OM->Get('Kernel::System::LinkObject')->TypeLookup(
         Name   => $Param{Type},
         UserID => 1,
     );
@@ -142,7 +142,7 @@ DELETE FROM configitem_link
     AND target_configitem_id = ?
     AND dynamic_field_id IS NULL
 END_SQL
-        Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
+        Bind => [ \( $LinkTypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
     );
 
     return 1;
@@ -412,6 +412,7 @@ sub RebuildLinkTable {
     }
 
     # nothing to do when there are no dynamic fields
+    # TODO: cover the case where only LinkObject is used
     return {
         Success => 1,
         Message => Translatable('No relevant dynamic fields were found'),
@@ -487,8 +488,80 @@ END_SQL
         Color   => 'red',
     } unless defined $NumReferenceRows;
 
-    # TODO: add rows from LinkObject
+    # add rows from LinkObject, that is from the link_relation table
     my $NumLinkObjectRows = 0;
+    {
+        my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+
+        # get a list of possible link types between config items from the SysConfig
+        my %PossibleTypesList = $LinkObject->PossibleTypesList(
+            Object1 => 'ITSMConfigItem',
+            Object2 => 'ITSMConfigItem',
+        );
+
+        # for the database SELECT we need the numeric IDs
+        my @LinkTypeIDs =
+            map { $LinkObject->TypeLookup( Name => $_, UserID => 1 ) }
+            keys %PossibleTypesList;
+
+        my %TypeQueryCondition = $DBObject->QueryInCondition(
+            Key      => 'type_id',
+            Values   => \@LinkTypeIDs,
+            BindMode => 1,
+        );
+
+        # limit to links between config items
+        # An ID is created when ObjectLookup() is called the for first time with that name
+        my $CIObjectID = $LinkObject->ObjectLookup(
+            Name => 'ITSMConfigItem',
+        );
+
+        # temporary links are not considered
+        my $TemporaryStateID = $LinkObject->StateLookup(
+            Name => 'Temporary',
+        );
+
+        my $SQL = <<"END_SQL";
+SELECT source_key, target_key, type_id
+  FROM link_relation
+  WHERE state_id <> ?
+    AND source_object_id = ?
+    AND target_object_id = ?
+    AND $TypeQueryCondition{SQL}
+END_SQL
+        my @Binds = (
+            \$TemporaryStateID,
+            \$CIObjectID,
+            \$CIObjectID,
+            $TypeQueryCondition{Values}->@*
+        );
+
+        return unless $DBObject->Prepare(
+            SQL  => $SQL,
+            Bind => \@Binds,
+        );
+
+        while ( my ( $SourceConfigItemID, $TargetConfigItemID, $LinkTypeID ) = $DBObject->FetchrowArray ) {
+            my $Success = $DBObject->Do(
+                SQL => <<'END_SQL',
+INSERT INTO configitem_link (
+    source_configitem_id, target_configitem_id, link_type_id, create_time, create_by
+  )
+  VALUES (?, ?, ?, current_timestamp, 1 )
+END_SQL
+                Bind => [ \( $SourceConfigItemID, $TargetConfigItemID, $LinkTypeID ) ],
+            );
+
+            return {
+                Success => 0,
+                Message => Translatable('Could not insert into the table configitem_link'),
+                Color   => 'red',
+            } unless defined $Success;
+
+            # keep track of the number of inserted links
+            $NumLinkObjectRows++;
+        }
+    }
 
     my $NumRows = $NumReferenceRows + $NumLinkObjectRows;
 
