@@ -190,6 +190,8 @@ Returs a list when relationships have been found.
 sub LinkedConfigItems {
     my ( $Self, %Param ) = @_;
 
+    # TODO: support linked versions
+
     # check needed stuff
     for my $Argument (qw(ConfigItemID Direction UserID)) {
         if ( !$Param{$Argument} ) {
@@ -298,7 +300,7 @@ sub SyncLinkTable {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Missing ( grep { !$Param{$_} } qw(DynamicFieldConfig SourceConfigItemVersionID Value) ) {
+    for my $Missing ( grep { !$Param{$_} } qw(DynamicFieldConfig ConfigItemID ConfigItemLastVersionID ConfigItemVersionID Value) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Need $Missing!",

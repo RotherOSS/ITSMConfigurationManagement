@@ -666,7 +666,6 @@ END_SQL
 
     # get id of new version
     # TODO: what about concurrent inserts ?
-    # TODO: use last_insert_id
     my ( $VersionID, $VersionCreateTime ) = $DBObject->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id, create_time
@@ -788,17 +787,19 @@ END_SQL
 
         # Trigger dynamic field update event.
         # This might update the table configitem_link.
+        # Also pass in the last version in order to allow for special handling when the last version is changed.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {
-                FieldName           => $Name,
-                Value               => $Version{ 'DynamicField_' . $Name },
-                OldValue            => $LastVersion->{ 'DynamicField_' . $Name },
-                ReadableValue       => $ReadableValue->{Value},
-                ReadableOldValue    => $ReadableOldValue->{Value},
-                ConfigItemID        => $Version{ConfigItemID},
-                ConfigItemVersionID => $VersionID,
-                UserID              => $Param{UserID},
+                FieldName               => $Name,
+                Value                   => $Version{ 'DynamicField_' . $Name },
+                OldValue                => $LastVersion->{ 'DynamicField_' . $Name },
+                ReadableValue           => $ReadableValue->{Value},
+                ReadableOldValue        => $ReadableOldValue->{Value},
+                ConfigItemID            => $Version{ConfigItemID},
+                ConfigItemVersionID     => $VersionID,
+                ConfigItemLastVersionID => $VersionID,
+                UserID                  => $Param{UserID},
             },
             UserID => $Param{UserID},
         );
@@ -1063,19 +1064,21 @@ END_SQL
             Value              => $Version->{ 'DynamicField_' . $Name },
         );
 
-        # trigger dynamic field update event
+        # Trigger the dynamic field update event.
         # This might update the table configitem_link.
+        # Also pass in the last version in order to allow for special handling when the last version is changed.
         $Self->EventHandler(
             Event => 'ConfigItemDynamicFieldUpdate_' . $Name,
             Data  => {
-                FieldName           => $Name,
-                Value               => $Param{ 'DynamicField_' . $Name },
-                OldValue            => $Version->{ 'DynamicField_' . $Name },
-                ReadableValue       => $ReadableValue->{Value},
-                ReadableOldValue    => $ReadableOldValue->{Value},
-                ConfigItemID        => $Version->{ConfigItemID},
-                ConfigItemVersionID => $Version->{VersionID},
-                UserID              => $Param{UserID},
+                FieldName               => $Name,
+                Value                   => $Param{ 'DynamicField_' . $Name },
+                OldValue                => $Version->{ 'DynamicField_' . $Name },
+                ReadableValue           => $ReadableValue->{Value},
+                ReadableOldValue        => $ReadableOldValue->{Value},
+                ConfigItemID            => $Version->{ConfigItemID},
+                ConfigItemVersionID     => $Version->{VersionID},
+                ConfigItemLastVersionID => $Version->{LastVersionID},
+                UserID                  => $Param{UserID},
             },
             UserID => $Param{UserID},
         );

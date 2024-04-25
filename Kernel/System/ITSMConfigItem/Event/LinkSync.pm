@@ -68,14 +68,15 @@ This method handles the event.
             Transaction => 1,
         },
         Data        => {
-            ConfigItemID        => 10,
-            ConfigItemVersionID => 20,
-            FieldName           => "ReferenceToComputer",
-            OldValue            => undef,
-            ReadableOldValue    => "",
-            ReadableValue       => 7,
-            UserID              => 3,
-            Value               => 7,
+            ConfigItemID            => 10,
+            ConfigItemVersionID     => 20,
+            ConfigItemLastVersionID => 21,
+            FieldName               => "ReferenceToComputer",
+            OldValue                => undef,
+            ReadableOldValue        => "",
+            ReadableValue           => 7,
+            UserID                  => 3,
+            Value                   => 7,
         },
         Event       => "ConfigItemDynamicFieldUpdate_StoneCheckbox",
         Transaction => 1,
@@ -119,14 +120,13 @@ sub Run {
     return 1 unless $DynamicFieldConfig->{Config}->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
 
     # actually update configitem_link
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    return $ConfigItemObject->SyncLinkTable(
-        DynamicFieldConfig        => $DynamicFieldConfig,
-        SourceConfigItemID        => $Param{Data}->{ConfigItemID},
-        SourceConfigItemVersionID => $Param{Data}->{ConfigItemVersionID},    # currently not used
-        OldValue                  => $Param{Data}->{OldValue},
-        Value                     => $Param{Data}->{Value},
+    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->SyncLinkTable(
+        DynamicFieldConfig      => $DynamicFieldConfig,
+        ConfigItemID            => $Param{Data}->{ConfigItemID},
+        ConfigItemLastVersionID => $Param{Data}->{ConfigItemLastVersionID},
+        ConfigItemVersionID     => $Param{Data}->{ConfigItemVersionID},
+        OldValue                => $Param{Data}->{OldValue},
+        Value                   => $Param{Data}->{Value},
     );
 }
 
