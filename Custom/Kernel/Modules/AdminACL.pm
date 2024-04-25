@@ -97,7 +97,6 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
         my %UploadStuff = $ParamObject->GetUploadAll(
             Param  => 'FileUpload',
             Source => 'string',
@@ -783,10 +782,12 @@ sub _ShowEdit {
     );
 
 # RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel1Match = $ConfigObject->Get('ACLKeysLevel1Match') || {};
-    my $ConfigPrefix       = $Param{ObjectType} eq 'ConfigItem' ? 'ITSMConfigItem' : '';
-    my $ACLKeysLevel1Match = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Match') || {};
+#    # for compatability with ITSMConfigurationManagement
+#    $Param{ObjectType} = 'Ticket';
 # EO ITSMConfigurationManagement
+    my $ConfigPrefix = $Param{ObjectType} eq 'ConfigItem' ? 'ITSMConfigItem' : '';
+
+    my $ACLKeysLevel1Match = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Match') || {};
     $Param{ACLKeysLevel1Match} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel1Match,
         Name         => 'ItemAdd',
@@ -797,10 +798,7 @@ sub _ShowEdit {
         Translation  => 0,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel1Change = $ConfigObject->Get('ACLKeysLevel1Change') || {};
     my $ACLKeysLevel1Change = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Change') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel1Change} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel1Change,
         Name         => 'ItemAdd',
@@ -811,10 +809,7 @@ sub _ShowEdit {
         Translation  => 0,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel2Possible = $ConfigObject->Get('ACLKeysLevel2::Possible') || {};
     my $ACLKeysLevel2Possible = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::Possible') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel2Possible} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2Possible,
         Name         => 'ItemAdd',
@@ -824,10 +819,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel2PossibleAdd = $ConfigObject->Get('ACLKeysLevel2::PossibleAdd') || {};
     my $ACLKeysLevel2PossibleAdd = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PossibleAdd') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel2PossibleAdd} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PossibleAdd,
         Name         => 'ItemAdd',
@@ -837,10 +829,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel2PossibleNot = $ConfigObject->Get('ACLKeysLevel2::PossibleNot') || {};
     my $ACLKeysLevel2PossibleNot = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PossibleNot') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel2PossibleNot} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PossibleNot,
         Name         => 'ItemAdd',
@@ -850,10 +839,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel2Properties = $ConfigObject->Get('ACLKeysLevel2::Properties') || {};
     my $ACLKeysLevel2Properties = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::Properties') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel2Properties} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2Properties,
         Name         => 'ItemAdd',
@@ -863,10 +849,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-# RotherOSS / ITSMConfigurationManagement
-#     my $ACLKeysLevel2PropertiesDatabase = $ConfigObject->Get('ACLKeysLevel2::PropertiesDatabase') || {};
     my $ACLKeysLevel2PropertiesDatabase = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PropertiesDatabase') || {};
-# EO ITSMConfigurationManagement
     $Param{ACLKeysLevel2PropertiesDatabase} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PropertiesDatabase,
         Name         => 'ItemAdd',
@@ -896,10 +879,7 @@ sub _ShowEdit {
 
     # get list of all possible dynamic fields
     my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
-# RotherOSS / ITSMConfigurationManagement
-#         ObjectType => 'Ticket',
         ObjectType => $Param{ObjectType},
-# EO ITSMConfigurationManagement
         ResultType => 'HASH',
     );
     my %DynamicFieldNames = reverse %{$DynamicFieldList};
@@ -967,6 +947,10 @@ sub _ShowEdit {
         Value => \@ACLEditPossibleActionsList,
     );
 
+# RotherOSS / ITSMConfigurationManagement
+#    # for compatability with ITSMConfigurationManagement
+#    delete $Param{ObjectType};
+# EO ITSMConfigurationManagement
     $Output .= $LayoutObject->Output(
         TemplateFile => "AdminACL$Param{Action}",
         Data         => {
