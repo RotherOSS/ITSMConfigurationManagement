@@ -805,21 +805,6 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # add page nav bar
-    my $Total = $Summary->{ $Self->{Filter} } || 0;
-
-    my %GetColumnFilter = $Self->{GetColumnFilter} ? %{ $Self->{GetColumnFilter} } : ();
-
-    my $ColumnFilterLink = '';
-    COLUMNNAME:
-    for my $ColumnName ( sort keys %GetColumnFilter ) {
-        next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
-    }
-
     # show table header
     $LayoutObject->Block(
         Name => 'ContentLargeConfigItemGenericHeader',
