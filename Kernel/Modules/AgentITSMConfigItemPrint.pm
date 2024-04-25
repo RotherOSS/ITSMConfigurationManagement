@@ -251,21 +251,22 @@ sub Run {
         VersionNumber => $VersionNumber,
     );
 
-    # create file name
-    my $Filename = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-        Filename => $ConfigItem->{Number},
-        Type     => 'Attachment',
-    );
-
     # Get current system datetime object.
     my $CurrentSystemDTObj = $Kernel::OM->Create('Kernel::System::DateTime');
 
+    # create file name
+    my $Filename = sprintf(
+        'configitem_%s_%s.pdf',
+        $ConfigItem->{Number},
+        $CurrentSystemDTObj->Format( Format => '%F_%H-%M' ),
+    );
+    my $CleanedFilename = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+        Filename => $Filename,
+        Type     => 'Attachment',
+    );
+
     return $LayoutObject->Attachment(
-        Filename => sprintf(
-            'configitem_%s_%s.pdf',
-            $Filename,
-            $CurrentSystemDTObj->Format( Format => '%F_%H-%M' ),
-        ),
+        Filename    => $CleanedFilename,
         ContentType => 'application/pdf',
         Content     => $PDFObject->DocumentOutput(),
         Type        => 'inline',
