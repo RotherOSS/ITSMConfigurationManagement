@@ -324,41 +324,114 @@ sub SyncLinkTable {
         return;
     }
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    # a fallback in case the LinkType is not configured
+    my $LinkTypeWithDirection = $DFDetails->{LinkType} || 'Normal::Target';
 
-    # Clean up first in all cases.
-    $DBObject->Do(
-        SQL => <<'END_SQL',
-DELETE FROM configitem_link
-  WHERE source_configitem_id = ?
-    AND dynamic_field_id     = ?
-END_SQL
-        Bind => [ \$Param{SourceConfigItemID}, \$DynamicFieldID ],
+    my ( $LinkTypeName, $Direction ) = $LinkTypeWithDirection =~ m/^ (.*) :: (Source|Target) $/x;
+
+    if ( !( $LinkTypeName && $Direction ) ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Invalid link type '$LinkTypeWithDirection'. Must be something like 'DependsOn::Target'.",
+        );
+
+        return;
+    }
+
+    my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+
+    my $LinkTypeID = $LinkObject->TypeLookup(
+        Name   => $LinkTypeName,
+        UserID => 1,
     );
 
-    # Nothing to do when there is no new value
-    return 1 unless $Param{Value};
+    if ( !$LinkTypeID ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Invalid link type '$LinkTypeWithDirection'. The link type '$LinkTypeName' is not valid'.",
+        );
 
-    # TODO: handle the case where the config item should be linked
+        return;
+    }
 
-    # INSERT the new value if there is one.
-    # The values for the Reference dynamic field are per design array references,
-    # even when there is only a single referenced item.
-    # Exactly one of $TargetConfigItemID and $TargetConfigItemVersionID is an arrayref
-    # and the other is undef. DoArray() handles this case well, but note that
-    # the the parameter Bind has different semantics in DoArrray() as compared to Do()
-    my $TargetConfigItemID        = $ReferencedObjectType eq 'ITSMConfigItem'        ? $Param{Value} : undef;
-    my $TargetConfigItemVersionID = $ReferencedObjectType eq 'ITSMConfigItemVersion' ? $Param{Value} : undef;
+    # sometimes only the setting of the most recent version is relevant
+    # The default is AppliesToAllVersions
+    my $AllVersions = 0;
+    $DFDetails->{AppliesToAllVersions} //= '';
+    if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
+        return 1 unless $Param{ConfigItemVersionID} == $Param{ConfigItemLastVersionID};
+
+        $AllVersions = 1;
+    }
+
+    # DoArray() is used below. The bind variables for DoArray() can be simple scalars or array references.
+    # A simple scalar is used for all inserted rows.
+    #
+    # Note that semantics of the bind variables differ between Do() and DoArray().
+    #
+    # Note that $Param{Value} is per design an array reference,
+    # even when there is only a single referenced config item.
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # The meaning if direction is a bit confusing.
+    #
+    # $Direction eq 'Target':
+    #   The config item with the dynamic field is the source,
+    #   and the referenced config item is the target.
+    #
+    # $Direction eq 'Source':
+    #   The referenced config item is the source,
+    #   and the config item that has the dynamic field is the target.
+
+    # The attribute of the table configitem_link that holds the IDs of the linked items
+    # depends on the type of the dynamic field and on the direction.
+    # Possible columns are:
+    #   target_configitem_id
+    #   target_configitem_version_id,
+    #   source_configitem_id,
+    #   source_configitem_version_id
+    my $FieldType = $DynamicFieldConfig->{FieldType};    # either ConfigItem or ConfigItemVersion
+    my $ValueCol  = join '_',
+        ( $Direction eq 'Target'     ? 'target'     : 'source' ),
+        ( $FieldType eq 'ConfigItem' ? 'configitem' : 'configitem_version' ),
+        'id';
+
+    # The parameter which is used to identify the config item, or config item version,
+    # which holds the dynamic field depends on wheter the link should be the same
+    # for all versions of the config item.
+    my $ItemOrVersion = $AllVersions ? $Param{ConfigItemID} : $Param{ConfigItemVersionID};
+
+    # The columm for $ItemOrVersion depends on the direction and
+    # on wheter the link should be the same for all versions of the config item.
+    # The possible values are the same as for $ValueCol.
+    my $ItemOrVersionCol = join '_',
+        ( $Direction eq 'Target' ? 'source'     : 'target' ),
+        ( $AllVersions           ? 'configitem' : 'configitem_version' ),
+        'id';
+
+    # Clear out the old value array.
+    $DBObject->Do(
+        SQL => <<"END_SQL",
+DELETE FROM configitem_link
+  WHERE dynamic_field_id     = ?
+    AND $ItemOrVersionCol = ?
+END_SQL
+        Bind => [ \( $DynamicFieldID, $ItemOrVersion ) ],
+    );
+
+    # INSERT the new value array.
     $DBObject->DoArray(
-        SQL => <<'END_SQL',
+        SQL => <<"END_SQL",
 INSERT INTO configitem_link (
-    link_type_id,
-    source_configitem_id, target_configitem_id, target_configitem_version_id, dynamic_field_id,
+    dynamic_field_id, link_type_id, $ItemOrVersionCol, $ValueCol,
     create_time, create_by
   )
-  VALUES (1, ?, ?, ?, ?, current_timestamp, 1 )
+  VALUES (
+    ?, ?, ?, ?,
+    current_timestamp, 1
+  )
 END_SQL
-        Bind => [ $Param{SourceConfigItemID}, $TargetConfigItemID, $TargetConfigItemVersionID, $DynamicFieldID ],
+        Bind => [ $DynamicFieldID, $LinkTypeID, $ItemOrVersion, $Param{Value} ],
     );
 
     # assume success
