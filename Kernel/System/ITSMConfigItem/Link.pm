@@ -573,13 +573,13 @@ END_SQL
         );
 
         # for the database SELECT we need the numeric IDs
-        my @LinkTypeIDs =
+        my @PossibleLinkTypeIDs =
             map { $LinkObject->TypeLookup( Name => $_, UserID => 1 ) }
             keys %PossibleTypesList;
 
         my %TypeQueryCondition = $DBObject->QueryInCondition(
             Key      => 'type_id',
-            Values   => \@LinkTypeIDs,
+            Values   => \@PossibleLinkTypeIDs,
             BindMode => 1,
         );
 
@@ -595,7 +595,7 @@ END_SQL
         );
 
         my $SQL = <<"END_SQL";
-SELECT source_key, target_key, type_id
+SELECT type_id, source_key, target_key
   FROM link_relation
   WHERE state_id <> ?
     AND source_object_id = ?
@@ -614,26 +614,31 @@ END_SQL
             Bind => \@Binds,
         );
 
-        while ( my ( $SourceConfigItemID, $TargetConfigItemID, $LinkTypeID ) = $DBObject->FetchrowArray ) {
-            my $Success = $DBObject->Do(
-                SQL => <<'END_SQL',
-INSERT INTO configitem_link (
-    source_configitem_id, target_configitem_id, link_type_id, create_time, create_by
-  )
-  VALUES (?, ?, ?, current_timestamp, 1 )
-END_SQL
-                Bind => [ \( $SourceConfigItemID, $TargetConfigItemID, $LinkTypeID ) ],
-            );
-
-            return {
-                Success => 0,
-                Message => Translatable('Could not insert into the table configitem_link'),
-                Color   => 'red',
-            } unless defined $Success;
-
-            # keep track of the number of inserted links
-            $NumLinkObjectRows++;
+        my ( @LinkTypeIDs, @SourceConfigItemIDs, @TargetConfigItemIDs );
+        while ( my ( $LinkTypeID, $SourceConfigItemID, $TargetConfigItemID ) = $DBObject->FetchrowArray ) {
+            push @LinkTypeIDs,         $LinkTypeID;
+            push @SourceConfigItemIDs, $SourceConfigItemID;
+            push @TargetConfigItemIDs, $TargetConfigItemID;
         }
+
+        # Multivalue INSERT
+        $NumLinkObjectRows = $DBObject->DoArray(
+            SQL => <<'END_SQL',
+INSERT INTO configitem_link (
+    link_type_id, source_configitem_id, target_configitem_id,
+    create_time, create_by
+  )
+  VALUES (
+    ?, ?, ?,
+    CURRENT_TIMESTAMP(), 1
+  )
+END_SQL
+            Bind => [
+                \@LinkTypeIDs,
+                \@SourceConfigItemIDs,
+                \@TargetConfigItemIDs,
+            ],
+        );
     }
 
     my $NumRows = $NumReferenceRows + $NumLinkObjectRows;
