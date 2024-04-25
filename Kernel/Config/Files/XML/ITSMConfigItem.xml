@@ -952,6 +952,17 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###4000-ScriptDynamicFields" Required="0" Valid="1">
+        <Description Translatable="1">Evaluate all script fields.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::EvaluateScriptFields</Item>
+                <Item Key="Event"></Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::HistoryOrder" Required="1" Valid="1">
         <Description Translatable="1">Shows the config item history (reverse ordered) in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemHistory</Navigation>
