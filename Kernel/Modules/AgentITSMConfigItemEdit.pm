@@ -829,7 +829,7 @@ sub Run {
             ChangedElements           => \%ChangedElements,                # optional to reduce ACL evaluation
             Action                    => $Self->{Action},
             UserID                    => $Self->{UserID},
-            ConfigItemID              => $Self->{ConfigItemID},
+            ConfigItemID              => $ConfigItem->{ConfigItemID},
             FormID                    => $Self->{FormID},
             GetParam                  => {%GetParam},
             Autoselect                => $Autoselect,
@@ -988,7 +988,7 @@ sub Run {
             DynamicFieldBackendObject => $DynamicFieldBackendObject,
             Action                    => $Self->{Action},
             UserID                    => $Self->{UserID},
-            ConfigItemID              => $Self->{ConfigItemID},
+            ConfigItemID              => $ConfigItem->{ConfigItemID},
             FormID                    => $Self->{FormID},
             GetParam                  => {%GetParam},
             Autoselect                => $Autoselect,
