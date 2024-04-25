@@ -41,7 +41,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::ObjectType::ITSMConfigItem - ITSMConfigItem as an object type
+Kernel::System::DynamicField::ObjectType::ITSMConfigItem - support for ITSMConfigItem as an object type
 
 =head1 DESCRIPTION
 
@@ -52,7 +52,7 @@ Attach dynamic fields to an ITSMConfigItem.
 =head2 new()
 
 Usually, you want to create an instance of this
-by using Kernel::System::DynamicField::ObjectType::ITSMChange->new();
+by using Kernel::System::DynamicField::ObjectType::ITSMConfigItem->new();
 
 =cut
 
@@ -65,11 +65,13 @@ sub new {
 
 =head2 PreValueSet()
 
-Perform specific functions before the Value set for this object type.
+Perform specific functions before the value is set for a dynamic field for this object type.
 
-    my $Success = $DynamicFieldITSMChangeHandlerObject->PreValueSet(
+    my $Success = $DynamicFieldITSMConfigItemHandlerObject->PreValueSet(
         Param              => \%Param,
     );
+
+This handler can be skipped by passing the attribute C<ConfigItemHandled> in C<Param>.
 
 =cut
 
@@ -133,16 +135,18 @@ sub PreValueSet {
 
 =head2 PostValueSet()
 
-Perform specific functions after the Value set for this object type.
+Perform specific functions after the value has been set for a dynamic field for this object type.
 
-    my $Success = $DynamicFieldITSMChangeHandlerObject->PostValueSet(
+    my $Success = $DynamicFieldITSMConfigItemHandlerObject->PostValueSet(
         DynamicFieldConfig => $DynamicFieldConfig,      # complete config of the DynamicField
         ObjectID           => $ObjectID,                # ID of the current object that the field
-                                                        # must be linked to, e. g. ITSMChangeID
+                                                        # must be linked to, e. g. ITSMConfigItemID
         Value              => $Value,                   # Value to store, depends on backend type
         UserID             => 123,
         ConfigItemHandled  => 1,                        # optional, skips this if handled elsewhere
     );
+
+This handler can be skipped by passing the attribute C<ConfigItemHandled> in C<Param>.
 
 =cut
 
@@ -202,7 +206,7 @@ sub PostValueSet {
 
 retrieves the data of the current object.
 
-    my %ObjectData = $DynamicFieldITSMChangeHandlerObject->ObjectDataGet(
+    my %ObjectData = $DynamicFieldITSMConfigItemHandlerObject->ObjectDataGet(
         DynamicFieldConfig => $DynamicFieldConfig,      # complete config of the DynamicField
         UserID             => 123,
     );
@@ -212,10 +216,10 @@ returns:
     %ObjectData = (
         ObjectID => 123,
         Data     => {
-            ChangeNumber => '20101027000001',
-            Title        => 'some title',
-            ChangeID     => 123,
-            # ...
+            ConfigItemID     => 123,
+            Number           => '20101027000001',
+            ClassID          => 17,
+            ...
         }
     );
 
@@ -255,6 +259,7 @@ sub ObjectDataGet {
         }
     }
 
+    # TODO: why does this method depend on the param object?
     my $ConfigItemID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam(
         Param => 'ConfigItemID',
     );
