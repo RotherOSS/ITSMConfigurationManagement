@@ -150,7 +150,7 @@ END_SQL
 
 =head2 LinkedConfigItems()
 
-get the linked config items.
+get the config items that are directly linked to a specific config item.
 
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => 321,
@@ -397,9 +397,9 @@ sub RebuildLinkTable {
         Color   => 'red',
     } unless $SuccessPurge;
 
-    # Get the relevant dynamic fields.
-    # Only Reference dynamic fiels that connect an ITSMConfigItem
-    # to another ITSMConfigItem or an ITSMConfigItemVersion are relevant.
+    # Get the relevant dynamic fields. Relevant are only
+    # Reference dynamic fields that connect an ITSMConfigItem
+    # to another ITSMConfigItem or an ITSMConfigItemVersion.
     my @DynamicFields;
     {
         my $DynamicFieldObject       = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -419,13 +419,19 @@ sub RebuildLinkTable {
         Color   => 'yellow',
     } unless @DynamicFields;
 
-    my %IsConfigItem =
+    # Needed for deciding which attribute of configitem_link is used.
+    my %LinksToCI =
         map  { $_->{ID} => 1 }
         grep { $_->{FieldType} eq 'ConfigItem' }
         @DynamicFields;
-    my %IsConfigItemVersion =
+    my %LinksToCIVersion =
         map  { $_->{ID} => 1 }
         grep { $_->{FieldType} eq 'ConfigItemVersion' }
+        @DynamicFields;
+
+    # Easy acceed to the dynamic field config.
+    my %DFLookupByID =
+        map { $_->{ID} => $_ }
         @DynamicFields;
 
     # Get the relevant dynamic field values.
@@ -433,31 +439,96 @@ sub RebuildLinkTable {
     # so use dedicated SQL here.
     my $Rows;
     {
-        my @DynamicFieldIDs = map { $_->{ID} } @DynamicFields;
-        my $PlaceHolders =
-            join ', ',
-            map {'?'}
-            @DynamicFieldIDs;
-        my $Binds = [ map { \$_ } @DynamicFieldIDs ];    # the special case \(@Array) is too strange
+        my %QueryCondition = $DBObject->QueryInCondition(
+            Key      => 'dfv.field_id',
+            Values   => [ sort { $a <=> $b } keys %DFLookupByID ],
+            BindMode => 1,
+        );
         $Rows = $DBObject->SelectAll(
             SQL => << "END_SQL",
-SELECT dfv.id, dfv.field_id, v.configitem_id, dfv.value_int
+SELECT dfv.field_id, v.configitem_id, v.id, dfv.value_int, v_max.max_version_id
   FROM dynamic_field_value dfv
-  INNER JOIN configitem_version v ON dfv.object_id = v.id
-  WHERE dfv.field_id IN ( $PlaceHolders )
+  INNER JOIN configitem_version v
+    ON dfv.object_id = v.id
+  INNER JOIN (
+    SELECT configitem_id, MAX(id) AS max_version_id
+      FROM configitem_version
+      GROUP BY configitem_id
+  ) AS v_max
+    ON v_max.configitem_id = v.configitem_id
+  WHERE $QueryCondition{SQL}
   ORDER by dfv.id
 END_SQL
-            Bind => $Binds,
+            Bind => $QueryCondition{Values},
         );
     }
 
     # prepare the dynamic field values so that it can be used in a batch insert
-    my @DynamicFieldIDs = map { $_->[1] } $Rows->@*;
 
-    # TODO: determine the link types
-    my @SourceConfigItemIDs        = map { $_->[2] } $Rows->@*;
-    my @TargetConfigItemIDs        = map { $IsConfigItem{ $_->[1] }        ? $_->[3] : undef } $Rows->@*;
-    my @TargetConfigItemVersionIDs = map { $IsConfigItemVersion{ $_->[1] } ? $_->[3] : undef } $Rows->@*;
+    # for the link types we neet to do some work
+    my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+    my (
+        @LinkTypeIDs,
+        @SourceConfigItemIDs,
+        @SourceConfigItemVersionIDs,
+        @TargetConfigItemIDs,
+        @TargetConfigItemVersionIDs,
+        @FieldIDs,
+    );
+    ROW:
+    for my $Row ( $Rows->@* ) {
+        my ( $FieldID, $ConfigItemID, $ConfigItemVersionID, $Value, $MaxConfigItemVersionID ) = $Row->@*;
+
+        next ROW unless $DFLookupByID{$FieldID};
+
+        my $DFDetails = $DFLookupByID{$FieldID}->{Config};
+
+        next ROW unless $DFDetails;
+
+        # a fallback in case the LinkType is not configured
+        my $LinkTypeWithDirection = $DFDetails->{LinkType} || 'Normal::Target';
+
+        my ( $LinkTypeName, $Direction ) = $LinkTypeWithDirection =~ m/^ (.*) :: (Source|Target) $/x;
+
+        next ROW unless $LinkTypeName;
+        next ROW unless $Direction;
+
+        my $LinkTypeID = $LinkObject->TypeLookup(
+            Name   => $LinkTypeName,
+            UserID => 1,
+        );
+
+        next ROW unless $LinkTypeID;
+
+        # sometimes only the setting of the most recent version is relevant
+        # The default is AppliesToAllVersions
+        my $AllVersions = 0;
+        $DFDetails->{AppliesToAllVersions} //= '';
+        if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
+            next ROW unless $ConfigItemVersionID == $MaxConfigItemVersionID;
+
+            $AllVersions = 1;
+        }
+
+        # some values are independent of the direction
+        push @LinkTypeIDs, $LinkTypeID;
+        push @FieldIDs,    $FieldID;
+
+        if ( $Direction eq 'Target' ) {
+            push @SourceConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
+            push @SourceConfigItemVersionIDs, $AllVersions                ? undef         : $ConfigItemVersionID;
+            push @TargetConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
+            push @TargetConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
+        }
+        else {
+
+            # as above, but backwards
+            push @TargetConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
+            push @TargetConfigItemVersionIDs, $AllVersions                ? undef         : $ConfigItemVersionID;
+            push @SourceConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
+            push @SourceConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
+        }
+    }
 
     # Multivalue INSERT
     my $NumReferenceRows = $DBObject->DoArray(
@@ -465,20 +536,22 @@ END_SQL
 INSERT INTO configitem_link (
     link_type_id,
     source_configitem_id,
+    source_configitem_version_id,
     target_configitem_id,
     target_configitem_version_id,
     dynamic_field_id,
     create_time,
     create_by
   )
-  VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), 1)
+  VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), 1)
 END_SQL
         Bind => [
-            1,
+            \@LinkTypeIDs,
             \@SourceConfigItemIDs,
+            \@SourceConfigItemVersionIDs,
             \@TargetConfigItemIDs,
             \@TargetConfigItemVersionIDs,
-            \@DynamicFieldIDs,
+            \@FieldIDs,
         ],
     );
 
