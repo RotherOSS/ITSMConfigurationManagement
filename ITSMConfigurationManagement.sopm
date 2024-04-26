@@ -161,6 +161,7 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DefinitionConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/LinkSync.pm" />
+        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/EvaluateScriptFields.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/FieldRestrictions.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/History.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Link.pm" />
