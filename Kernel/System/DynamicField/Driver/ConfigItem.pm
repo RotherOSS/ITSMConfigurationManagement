@@ -162,17 +162,21 @@ sub GetFieldTypeSettings {
             };
     }
 
-    # Support the same link types as with the generic LinkObject feature
+    # Support the same link types as with the generic LinkObject feature.
+    # No distinction is made between the object types ITSMConfigItem ITSMConfigItemVersion.
     {
         my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
-        # create the selectable type list
+        # Create the selectable type list from the possible types from the SysConfig.
+        # TODO: saner layout
         my %SelectionData;
 
-        # get possible types list
+        # get possible types list,
+        # actually the order of Object1 and Object2 is not relevant
+        my $Object2           = $Self->{ReferencedObjectType} =~ s/^ITSMConfigItemVersion$/ITSMConfigItem/r;
         my %PossibleTypesList = $LinkObject->PossibleTypesList(
-            Object1 => 'ITSMConfigItem',
-            Object2 => $Self->{ReferencedObjectType},
+            Object1 => 'ITSMConfigItem',    # the entity that holds the Reference dynamic field is a config item
+            Object2 => $Object2,            # the referenced object
         );
 
         POSSIBLETYPE:
@@ -490,7 +494,7 @@ sub SearchObjects {
                     else {
 
                         # match standard ticket attribute names with edit mask attribute names
-                        my @ParamNames = $Param{ParamObject}->GetParamNames();
+                        my @ParamNames = $Param{ParamObject}->GetParamNames;
 
                         # check if attribute name itself is in params
                         # NOTE trying attribute itself is crucially important in case of QueueID
