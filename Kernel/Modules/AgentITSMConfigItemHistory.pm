@@ -27,10 +27,7 @@ sub new {
     my ( $Type, %Param ) = @_;
 
     # allocate new hash for object
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -40,38 +37,31 @@ sub Run {
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    $Self->{ConfigItemID} = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    # get and check config item ID
+    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
 
-    # check needed stuff
-    if ( !$Self->{ConfigItemID} ) {
-
-        # error page
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Can\'t show history, no ConfigItemID is given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
+    return $LayoutObject->ErrorScreen(
+        Message => Translatable('Can\'t show history, no ConfigItemID is given!'),
+        Comment => Translatable('Please contact the administrator.'),
+    ) unless $ConfigItemID;
 
     # get neeeded objects
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
     # check for access rights
     my $HasAccess = $ConfigItemObject->Permission(
         Scope  => 'Item',
-        ItemID => $Self->{ConfigItemID},
+        ItemID => $ConfigItemID,
         UserID => $Self->{UserID},
         Type   => $ConfigObject->Get("ITSMConfigItem::Frontend::$Self->{Action}")->{Permission},
     );
 
-    if ( !$HasAccess ) {
-
-        # error page
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Can\'t show history, no access rights given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
+    return $LayoutObject->ErrorScreen(
+        Message => Translatable('Can\'t show history, no access rights given!'),
+        Comment => Translatable('Please contact the administrator.'),
+    ) unless $HasAccess;
 
     # Define translatable history strings.
     my %HistoryStrings = (
@@ -90,13 +80,13 @@ sub Run {
 
     # get all information about the config item
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID => $Self->{ConfigItemID},
+        ConfigItemID => $ConfigItemID,
     );
     my $ConfigItemName = $ConfigItem->{Number};
 
     # get all entries in the history for this config item
     my $Lines = $ConfigItemObject->HistoryGet(
-        ConfigItemID => $Self->{ConfigItemID},
+        ConfigItemID => $ConfigItemID,
     );
 
     # get shown user info
@@ -105,22 +95,12 @@ sub Run {
         @NewLines = reverse @{$Lines};
     }
 
-    # get definition for CI's class
-    my $Definition = $ConfigItemObject->DefinitionGet(
-        ClassID => $ConfigItem->{ClassID},
-    );
-
-    my $Counter = 1;
     my $Version = 0;
     for my $DataTmp (@NewLines) {
-        $Counter++;
         my %Data = (
             %{$DataTmp},
             VersionID => $Version,
         );
-
-        # get general catalog object
-        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
         # trim the comment to only show version number
         if ( $Data{HistoryType} eq 'VersionCreate' ) {
@@ -135,30 +115,24 @@ sub Run {
                 Class => 'ITSM::ConfigItem::DeploymentState',
             );
 
-            # show names
-            my @Parts = split /%%/, $Data{Comment};
-            for my $Part (@Parts) {
-                $Part = $DeplStateList->{$Part} || '';
-            }
-
-            # assemble parts
-            $Data{Comment} = join '%%', @Parts;
+            # show names, first split the reassemble
+            $Data{Comment} =
+                join '%%',
+                map { $DeplStateList->{$_} || '' }
+                split m/%%/, $Data{Comment};
         }
         elsif ( $Data{HistoryType} eq 'IncidentStateUpdate' ) {
 
             # get deployment state list
-            my $DeplStateList = $GeneralCatalogObject->ItemList(
+            my $InciStateList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::Core::IncidentState',
             );
 
-            # show names
-            my @Parts = split /%%/, $Data{Comment};
-            for my $Part (@Parts) {
-                $Part = $DeplStateList->{$Part} || '';
-            }
-
-            # assemble parts
-            $Data{Comment} = join '%%', @Parts;
+            # show names, first split the reassemble
+            $Data{Comment} =
+                join '%%',
+                map { $InciStateList->{$_} || '' }
+                split m/%%/, $Data{Comment};
         }
 
         # replace text
@@ -182,21 +156,20 @@ sub Run {
     }
 
     # build page
-    my $Output = $LayoutObject->Header(
-        Value => $ConfigItemName,
-        Type  => 'Small'
-    );
-    $Output .= $LayoutObject->Output(
-        TemplateFile => 'AgentITSMConfigItemHistory',
-        Data         => {
-            Name         => $ConfigItemName,
-            ConfigItemID => $Self->{ConfigItemID},
-            VersionID    => $ParamObject->GetParam( Param => 'VersionID' ),
-        },
-    );
-    $Output .= $LayoutObject->Footer( Type => 'Small' );
-
-    return $Output;
+    return join '',
+        $LayoutObject->Header(
+            Value => $ConfigItemName,
+            Type  => 'Small'
+        ),
+        $LayoutObject->Output(
+            TemplateFile => 'AgentITSMConfigItemHistory',
+            Data         => {
+                Name         => $ConfigItemName,
+                ConfigItemID => $ConfigItemID,
+                VersionID    => $ParamObject->GetParam( Param => 'VersionID' ),
+            },
+        ),
+        $LayoutObject->Footer( Type => 'Small' );
 }
 
 1;
