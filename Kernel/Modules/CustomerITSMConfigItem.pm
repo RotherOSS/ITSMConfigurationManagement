@@ -358,7 +358,7 @@ sub Run {
     }
 
     # check if filter is valid
-    if ( $Filter && none { $Filter eq $_->{Name} } values %Filters ) {
+    if ( $Filter && none { $Filter eq $_ } keys %Filters ) {
         $LayoutObject->FatalError(
             Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
         );
