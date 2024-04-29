@@ -582,7 +582,7 @@ sub SearchObjects {
     }
 
     # Support restriction by class
-    if ( $DFDetails->{ClassIDs} ) {
+    if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) ) {
         if ( $SearchParams{ClassIDs} ) {
             my @ClassIDs;
             for my $ClassID ( $SearchParams{ClassIDs}->@* ) {
