@@ -176,9 +176,6 @@ sub Run {
         );
     }
 
-    # get permissions
-    my $Permission = 'rw';
-
     # sort on default by using both (Priority, Age) else use only one sort argument
     my %Sort;
 
@@ -205,8 +202,6 @@ sub Run {
 
     # to store the NavBar filters
     my %Filters;
-
-    my $ClassIDAuto = '1';
 
     # get general catalog object
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -358,7 +353,7 @@ sub Run {
     }
 
     # check if filter is valid
-    if ( $Filter && none { $Filter eq $_->{Name} } values %Filters ) {
+    if ( $Filter && !exists $Filters{$Filter} ) {
         $LayoutObject->FatalError(
             Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
         );
