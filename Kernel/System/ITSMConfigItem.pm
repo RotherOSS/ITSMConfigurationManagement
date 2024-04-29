@@ -229,7 +229,7 @@ A specific version is returned when the Version ID is passed.
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
-When both C<ConfigItemID> and C<VersionID> are passed, then an consistency check is performed.
+When both C<ConfigItemID> and C<VersionID> are passed, then a consistency check is performed.
 
 A hashref with the following keys is returned:
 
@@ -262,7 +262,7 @@ A hashref with the following keys is returned:
 
 Caching can't be turned off.
 
-When the parameter C<DynamicFields> is passed then additionally the dynamic fields are returned as well.
+When the parameter C<DynamicFields> is passed then the dynamic fields are returned additionally.
 
 =cut
 
@@ -318,6 +318,7 @@ sub ConfigItemGet {
     }
 
     # get specific ConfigItemVersion
+    # The parameter VersionID takes precedence over ConfigItemID
     my @Row;
     if ( $Param{VersionID} ) {
 

@@ -129,10 +129,11 @@ Core.Agent.TreeView = (function (TargetNS) {
         $('#Canvas').empty();
 
         let RequestParams = {
-            Action: 'AgentITSMConfigItemTreeView',
-            Subaction: 'LoadTreeView',
+            Action:       'AgentITSMConfigItemTreeView',
+            Subaction:    'LoadTreeView',
             ConfigItemID: encodeURIComponent($("#ConfigItemID").val()),
-            Depth: encodeURIComponent($("#Depth").val())
+            VersionID:    encodeURIComponent($("#VersionID").val()),
+            Depth:        encodeURIComponent($("#Depth").val())
         };
 
         $("#Depth").prop('disabled', true);
@@ -193,12 +194,16 @@ Core.Agent.TreeView = (function (TargetNS) {
      * @param {link_data} link list, separated by semicolon
      * @param {option} Specify Target/Source
      * @description
-     *      Write links (arrows) between elements in the graphic.
+     *      Write arcs (arrows) between elements in the graphic.
      */
 
     function drawConnections(instance, link_data, option) {
-        var Connections = link_data.split(";");
-        var Direction = option;
+
+        // nothing to do when the input is empte
+        if (link_data === "") return;
+
+        var Connections    = link_data.split(";");
+        var Direction      = option;
         var ShowLinkLabels = $("#ShowLinkLabels").val();
 
         Connections.forEach(element => {
@@ -229,9 +234,8 @@ Core.Agent.TreeView = (function (TargetNS) {
                 });
             }
 
-            if ( parseInt(Link[1]) > 0 ) {
-                instance.connect(Params);
-            }
+            // assuming valid input
+            instance.connect(Params);
         });
 
         return;

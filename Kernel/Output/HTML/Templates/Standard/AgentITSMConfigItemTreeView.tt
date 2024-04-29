@@ -29,6 +29,7 @@
 
             <form name="TreeView" id="TreeView">
                 <input type="hidden" name="ConfigItemID"        id="ConfigItemID"        value="[% Data.ConfigItemID | html %]">
+                <input type="hidden" name="VersionID"           id="VersionID"           value="[% Data.VersionID | html %]">
                 <input type="hidden" name="OTOBOAgentInterface" id="OTOBOAgentInterface" value="[% Data.SessionID | html %]">
                 <input type="hidden" name="ShowLinkLabels"      id="ShowLinkLabels"      value="[% Data.ShowLinkLabels | html %]">
                 <input type="hidden" name="LastZoom"            id="LastZoom"            value="100">

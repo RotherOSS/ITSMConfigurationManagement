@@ -805,7 +805,7 @@
                 <Item Key="Name" Translatable="1">Tree View</Item>
                 <Item Key="Description" Translatable="1">ConfigItem Tree View</Item>
                 <Item Key="Action">AgentITSMConfigItemTreeView</Item>
-                <Item Key="Link">Action=AgentITSMConfigItemTreeView;ConfigItemID=[% Data.ConfigItemID | html %]</Item>
+                <Item Key="Link">Action=AgentITSMConfigItemTreeView;VersionID=[% Data.VersionID | html %]</Item>
                 <Item Key="Target">PopUp</Item>
             </Hash>
         </Value>

@@ -41,21 +41,25 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get needed parameters
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # check needed stuff
-    if ( !$ConfigItemID ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('No ConfigItemID is given!'),
-            Comment => Translatable('Please contact the administrator.'),
-        );
+    # get needed parameters,
+    # only the VersionID is needed as the VersionID determines the ConfigItemID
+    my %GetParam;
+    for my $Needed (qw(VersionID)) {
+        $GetParam{$Needed} //= $ParamObject->GetParam( Param => $Needed );
+        if ( !$GetParam{$Needed} ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate( 'Need %s', $Needed ),
+                Comment => Translatable('Please contact the administrator.'),
+            );
+        }
     }
 
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $VersionID    = $GetParam{VersionID};
+    my $ConfigItemID = $ConfigItemObject->VersionConfigItemIDGet( VersionID => $VersionID );
 
     # check permissions
     my $FrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
@@ -85,6 +89,7 @@ sub Run {
         my $CanvasHTML = $LayoutObject->GenerateHierarchyGraph(
             Depth        => $Depth,
             ConfigItemID => $ConfigItemID,
+            VersionID    => $VersionID,
             SessionID    => $Self->{SessionID}
         );
 
@@ -115,6 +120,7 @@ sub Run {
             Data         => {
                 %Param,
                 ConfigItemID     => $ConfigItemID,
+                VersionID        => $VersionID,
                 ConfigItemName   => $ConfigItem->{Name},
                 ConfigItemNumber => $ConfigItem->{Number},
                 Depth            => $Depth,

@@ -48,6 +48,7 @@ creates HTML containing the information needed for drawing the graph.
     my $CanvasHTML = $LayoutObject->GenerateHierarchyGraph(
         Depth          => 2, # depth level
         ConfigItemID   => 1  # source config item ID
+        VersionID      => 1  # source config item version ID
     );
 
 =cut
@@ -55,7 +56,7 @@ creates HTML containing the information needed for drawing the graph.
 sub GenerateHierarchyGraph {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigItemID = $Param{ConfigItemID};
+    my ( $ConfigItemID, $VersionID ) = @Param{qw(ConfigItemID VersionID)};
 
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
@@ -66,30 +67,35 @@ sub GenerateHierarchyGraph {
     # Irrespective of direction.
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => $ConfigItemID,
+        VersionID    => $VersionID,
         Direction    => 'Both',
         UserID       => 1,
     );
 
-    # build first level, Target and Source
-    my %LinkOutputDataTargets = $Self->GetLinkOutputData(
-        LinkedConfigItems => $LinkedConfigItems,
-        Direction         => 'Target',
-        Depth             => 1,
-        Parent            => $ConfigItemID
-    );
-    my %LinkOutputDataSources = $Self->GetLinkOutputData(
-        LinkedConfigItems => $LinkedConfigItems,
-        Direction         => 'Source',
-        Depth             => 1,
-        Parent            => $ConfigItemID
-    );
+    # Build first level in both directions, Target and Source.
+    # The keys in the hashes are the level from 1 to max.
+    # The values are arrayrefs with the edges.
+    my ( %LinkOutputDataTargets, %LinkOutputDataSources );
+    {
+        my $OriginID = $Self->_GenerateID(%Param);    # common to both directions
+
+        $LinkOutputDataSources{1} = $Self->GetLinkOutputData(
+            LinkedConfigItems => $LinkedConfigItems,
+            Direction         => 'Source',
+            LinkedTo          => $OriginID,
+        );
+        $LinkOutputDataTargets{1} = $Self->GetLinkOutputData(
+            LinkedConfigItems => $LinkedConfigItems,
+            Direction         => 'Target',
+            LinkedTo          => $OriginID,
+        );
+    }
 
     # Build Levels Up (Sources)
     $Self->GetCISubTreeData(
         LinkOutputData => \%LinkOutputDataSources,    # will be modified
         Init           => 1,
         Depth          => $Param{Depth},
-        Key            => $ConfigItemID,
         Direction      => 'Source'
     );
 
@@ -98,7 +104,6 @@ sub GenerateHierarchyGraph {
         LinkOutputData => \%LinkOutputDataTargets,    # will be modified
         Init           => 2,
         Depth          => $Param{Depth},
-        Key            => $ConfigItemID,
         Direction      => 'Target'
     );
 
@@ -106,7 +111,7 @@ sub GenerateHierarchyGraph {
     # The following just passes the two trees to the web page.
 
     # for the sources start with the deepest level
-    my $LinkDataSource = '';
+    my @LinkDataSource;    # will be used in JavaScript for draing the arcs
     for my $Level ( sort { $b <=> $a } keys %LinkOutputDataSources ) {
         my $Elements = $LinkOutputDataSources{$Level};
 
@@ -117,24 +122,22 @@ sub GenerateHierarchyGraph {
 
         for my $Element ( $Elements->@* ) {
 
+            my $ID = "$Element->{ID}_S$Level";    # only link to the next or previous level, the separator _S indicates Source
             $LayoutObject->Block(
                 Name => 'ChildSourceElements',
                 Data => {
                     Name         => $Element->{Name},
                     Contents     => $Element->{Contents},
-                    ConfigItemID => $Element->{ID},
-                    ID           => "$Element->{ID}_S_$Level",    # separator _S_ indicates Source
+                    ConfigItemID => $Element->{ConfigItemID},
+                    ID           => $ID,
                     SessionID    => $Param{SessionID}
                 }
             );
 
+            # need to consider the special case when linking to the origin
             my $NextLevel = $Level - 1;
-
-            $LinkDataSource .= $NextLevel
-                ?
-                "$Element->{LinkedTo}_S_$NextLevel,$Element->{ID}_S_$Level,$Element->{Link};"
-                :
-                "$Element->{LinkedTo},$Element->{ID}_S_$Level,$Element->{Link};";
+            my $LinkedTo  = $NextLevel ? "$Element->{LinkedTo}_S$NextLevel" : $Element->{LinkedTo};
+            push @LinkDataSource, join ',', $LinkedTo, $ID, $Element->{Link};
         }
     }
 
@@ -144,6 +147,7 @@ sub GenerateHierarchyGraph {
     {
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
+            VersionID    => $VersionID,
             Cache        => 1,
         );
         my $Contents = $Self->_FillColumnAttributes(
@@ -157,13 +161,16 @@ sub GenerateHierarchyGraph {
                 Name         => $ConfigItem->{Name},
                 Contents     => $Contents,
                 ConfigItemID => $ConfigItemID,
-                ID           => $ConfigItemID,
+                ID           => $Self->_GenerateID(
+                    ConfigItemID => $ConfigItemID,
+                    VersionID    => $VersionID,
+                ),
             }
         );
     }
 
-    # for the targest start with the lowest level
-    my $LinkDataTarget = '';
+    # for the targets start with the lowest level
+    my @LinkDataTarget;    # will be used in JavaScript for draing the arcs
     for my $Level ( sort { $a <=> $b } keys %LinkOutputDataTargets ) {
         my $Elements = $LinkOutputDataTargets{$Level};
 
@@ -175,25 +182,22 @@ sub GenerateHierarchyGraph {
         );
 
         for my $Element ( $Elements->@* ) {
-
+            my $ID = "$Element->{ID}_T$Level";    # only link to the next or previous level, the separator _T indicates Target
             $LayoutObject->Block(
                 Name => 'ChildTargetElements',
                 Data => {
                     Name         => $Element->{Name},
                     Contents     => $Element->{Contents},
-                    ConfigItemID => $Element->{ID},
-                    ID           => "$Element->{ID}_T_$Level",    # separator indicates Target
+                    ConfigItemID => $Element->{ConfigItemID},
+                    ID           => $ID,
                     SessionID    => $Param{SessionID}
                 }
             );
 
+            # need to consider the special case when linking to the origin
             my $PreviousLevel = $Level - 1;
-
-            $LinkDataTarget .= ( $Level ne '1' )
-                ?
-                "$Element->{ID}_T_$Level,$Element->{LinkedTo}_T_$PreviousLevel,$Element->{Link};"
-                :
-                "$Element->{ID}_T_$Level,$Element->{LinkedTo},$Element->{Link};";
+            my $LinkedTo      = $PreviousLevel ? "$Element->{LinkedTo}_T$PreviousLevel" : $Element->{LinkedTo};
+            push @LinkDataTarget, join ',', $ID, $LinkedTo, $Element->{Link};
         }
     }
 
@@ -201,13 +205,11 @@ sub GenerateHierarchyGraph {
         TemplateFile => 'ConfigItemTreeView/ConfigItemTreeViewGraph',
         Data         => {
             MaxDepth       => $Self->{CITreeMaxDepth},
-            LinkDataSource => $LinkDataSource,
-            LinkDataTarget => $LinkDataTarget,
+            LinkDataSource => join( ';', @LinkDataSource ),
+            LinkDataTarget => join( ';', @LinkDataTarget ),
         }
     );
 }
-
-# TODO: the below subs should declared as internal
 
 =head2 CITreeDefaultAttributes()
 
@@ -240,25 +242,24 @@ sub GetCISubTreeData {
         next LOOPDEPTH unless $LinkOutputData->{ $GoDeep - 1 };
         next LOOPDEPTH unless $LinkOutputData->{ $GoDeep - 1 }->@*;
 
+        # get linked objects for the next level
         my @ItemsPerLevel;
         for my $Element ( $LinkOutputData->{ $GoDeep - 1 }->@* ) {
-            my $ConfigItemID = $Element->{ID};
 
-            # get linked objects
             my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
-                ConfigItemID => $ConfigItemID,
+                ConfigItemID => $Element->{ConfigItemID},
+                VersionID    => $Element->{VersionID},
                 Direction    => 'Both',
                 UserID       => 1,
             );
 
-            my %DataForItem = $Self->GetLinkOutputData(
+            my $DataForItem = $Self->GetLinkOutputData(
                 LinkedConfigItems => $LinkedConfigItems,
-                Depth             => $GoDeep,
-                Parent            => $ConfigItemID,
+                LinkedTo          => $Element->{ID},
                 Direction         => $Direction,
             );
 
-            push @ItemsPerLevel, ( $DataForItem{$GoDeep} // [] )->@*;
+            push @ItemsPerLevel, ( $DataForItem // [] )->@*;
         }
 
         if (@ItemsPerLevel) {
@@ -302,50 +303,65 @@ sub _FillColumnAttributes {
     return join '<br>', @Lines;
 }
 
+# generate an ID that is used for drawing the arcs
+sub _GenerateID {
+    my ( $Self, %Param ) = @_;
+
+    return join '',
+        ( defined $Param{ConfigItemID} ? "C$Param{ConfigItemID}" : '' ),
+        ( defined $Param{VersionID}    ? "V$Param{VersionID}"    : '' );
+}
+
 # Get links for related CI.
 # This returned output data is not a tree, but an arrayref of items per level.
 sub GetLinkOutputData {
     my ( $Self, %Param ) = @_;
 
-    my $Depth = $Param{Depth};
-
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $ConfiguredTypes  = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
-    my %OutputData;
 
+    my @OutputData;
     for my $LinkedConfigItem ( grep { $_->{Direction} eq $Param{Direction} } $Param{LinkedConfigItems}->@* ) {
-        my $ConfigItemID = $LinkedConfigItem->{ConfigItemID};
+
+        # basic information about the linked config item
+        # There are only two cases:
+        #   - ConfigItemID is given
+        #   - VersionID is given
+        my %IncomingIDs = map { $_ => $LinkedConfigItem->{$_} } qw(ConfigItemID VersionID);
 
         # ConfigItemGet() allows for both cases
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $ConfigItemID,
+            %IncomingIDs,
             DynamicFields => 1,
         );
 
+        # This will be used for finding the next level of links:
+        #   - ConfigItemID was given => latest VersionID will be added
+        #   - VersionID was given    => ConfigItemID for that version will be added
+        my %OutgoingIDs = map { $_ => $ConfigItem->{$_} } qw(ConfigItemID VersionID);
+
         # Find label for the link. In TreeView the label of the arc
-        # should be in accordance to the direction of the arc. The arc
+        # should be in accordance to the direction of the arc. The are
         # is always directed from Source to Target. Therefore the SourceName is the arc label.
         my $LinkType = $LinkedConfigItem->{LinkType};
         my $ArcLabel = $ConfiguredTypes->{$LinkType}->{SourceName} || $LinkType;
 
         # define item data
-        my %Item = (
-            ID       => $ConfigItem->{ConfigItemID},
+        push @OutputData, {
+            %OutgoingIDs,
+            ID       => $Self->_GenerateID(%OutgoingIDs),    # used for linking in the graph
             Name     => $ConfigItem->{Name},
             Contents => $Self->_FillColumnAttributes(
                 Attributes => [ $Self->CITreeDefaultAttributes ],
                 ConfigItem => $ConfigItem,
             ),
             Link     => $LayoutObject->{LanguageObject}->Translate($ArcLabel),
-            LinkedTo => $Param{Parent} || ''
-        );
-
-        $OutputData{$Depth} //= [];
-        push $OutputData{$Depth}->@*, \%Item;
+            LinkedTo => $Param{LinkedTo} || ''
+        };
     }
 
-    return %OutputData;
+    return \@OutputData;
 }
 
 # change labels for translatable values

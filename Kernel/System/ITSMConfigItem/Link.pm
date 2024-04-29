@@ -153,10 +153,32 @@ END_SQL
 get the config items that are directly linked to a specific config item. No details
 of the linked config items are returned.
 
+    # only linked from a config item
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => 321,
         Types        => [ 'ParentChild', 'IsInspiredBy' ], # optional
         Direction    => 'Source', # one of Source, Target, Both
+        UserID       => 1,
+    );
+
+or
+
+    # only linked from a config item version
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+        VersionID  => 489,
+        Types      => [ 'ParentChild', 'IsInspiredBy' ], # optional
+        Direction  => 'Source', # one of Source, Target, Both
+        UserID     => 1,
+    );
+
+Passing both config item ID and config item version ID is fine too.
+
+    # link via item of version
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+        ConfigItemID => 321,
+        VersionID    => 489,
+        Types        => [ 'ParentChild', 'IsInspiredBy' ], # optional
+        Direction    => 'Both # one of Source, Target, Both
         UserID       => 1,
     );
 
@@ -168,20 +190,22 @@ Returns an empty array ref when no relationships were found:
 
     $LinkedConfigItems = [];
 
-Returs a list when relationships have been found.
+Returns a list when relationships have been found. Either ConfigItemID or VersionID is set.
 
     $LinkedConfigItems = [
         {
-            ConfigItemID => 1,
+            ConfigItemID => 17,
+            VersionID    => undef,
             Direction    => 'Source',
             LinkTypeID   => 2,
             LinkType     => 'ParentChild',
         },
         {
-            ConfigItemID => 22,
+            ConfigItemID => undef,
+            VersionID    => 22,
             Direction    => 'Source',
             LinkTypeID   => 2,
-            LinkType     => 'ParentChild',
+            LinkType     => 'IsInspiredBy',
         },
         ...
     ];
@@ -191,10 +215,8 @@ Returs a list when relationships have been found.
 sub LinkedConfigItems {
     my ( $Self, %Param ) = @_;
 
-    # TODO: support linked versions
-
     # check needed stuff
-    for my $Argument (qw(ConfigItemID Direction UserID)) {
+    for my $Argument (qw(Direction UserID)) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -204,71 +226,93 @@ sub LinkedConfigItems {
             return;
         }
     }
+    if ( !( $Param{ConfigItemID} || $Param{VersionID} ) ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need either ConfigItemID or VersionID !",
+        );
+
+        return;
+    }
+
+    # Passing both ConfigItemID and VersionID is fine
 
     my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
-    # the link type is optional
-    my @TypeConditions;    # 0 or 1 conditions
-    my @TypeBinds;         # 0, 1, or many binds
-    if ( $Param{Types} && ref $Param{Types} eq 'ARRAY' ) {
-
-        # empty list of types gives no result
-        return [] unless $Param{Types}->@*;
-
-        my $Placeholders = join ', ', map {'?'} $Param{Types}->@*;
-        push @TypeConditions, "link_type_id IN ($Placeholders)";
-
-        my @TypeIDs = map
-            {
-                $LinkObject->TypeLookup(
-                    Name   => $_,
-                    UserID => $Param{UserID}
-                )
-            }
-            $Param{Types}->@*;
-        push @TypeBinds, @TypeIDs;
-    }
-
     # get complete list for both directions (or only one if restricted)
-    my $Direction = $Param{Direction};
     my ( $SQL, @Binds );
-    if ( $Direction eq 'Source' ) {
-        $SQL = <<"END_SQL";
-SELECT DISTINCT source_configitem_id, link_type_id, 'Source'
+    {
+        # the link type is optional
+        my @TypeConditions;    # 0 or 1 conditions
+        my @TypeBinds;         # 0, 1, or many binds
+        if ( $Param{Types} && ref $Param{Types} eq 'ARRAY' ) {
+
+            # empty list of types gives no result
+            return [] unless $Param{Types}->@*;
+
+            my $Placeholders = join ', ', map {'?'} $Param{Types}->@*;
+            push @TypeConditions, "link_type_id IN ($Placeholders)";
+
+            push @TypeBinds, map
+                {
+                    $LinkObject->TypeLookup(
+                        Name   => $_,
+                        UserID => $Param{UserID}
+                    )
+                }
+                $Param{Types}->@*;
+        }
+
+        # these  arrays have either 1 or 2 elements
+        my ( @SourceConditions, @TargetConditions, @IDBinds );
+        if ( $Param{ConfigItemID} ) {
+            push @SourceConditions, 'target_configitem_id = ?';
+            push @TargetConditions, 'source_configitem_id = ?';
+            push @IDBinds,          $Param{ConfigItemID};
+        }
+        if ( $Param{VersionID} ) {
+            push @SourceConditions, 'target_configitem_version_id = ?';
+            push @TargetConditions, 'source_configitem_version_id = ?';
+            push @IDBinds,          $Param{VersionID};
+        }
+
+        if ( $Param{Direction} eq 'Source' ) {
+            $SQL = <<"END_SQL";
+SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source'
   FROM configitem_link
-  WHERE @{[ join ' AND ', 'target_configitem_id = ?', @TypeConditions ]}
+  WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions ), @TypeConditions ]}
 END_SQL
-        push @Binds, $Param{ConfigItemID}, @TypeBinds;
-    }
-    elsif ( $Direction eq 'Target' ) {
-        $SQL = <<"END_SQL";
-SELECT DISTINCT target_configitem_id, link_type_id, 'Target'
+            @Binds = ( @IDBinds, @TypeBinds );
+        }
+        elsif ( $Param{Direction} eq 'Target' ) {
+            $SQL = <<"END_SQL";
+SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target'
   FROM configitem_link
-  WHERE @{[ join ' AND ', 'source_configitem_id = ?', @TypeConditions ]}
+  WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions ), @TypeConditions ]}
 END_SQL
-        push @Binds, $Param{ConfigItemID}, @TypeBinds;
-    }
-    else {
-        # Both directions
-        # TODO: test with PostgreSQL and Oracle
-        $SQL = <<"END_SQL";
+            @Binds = ( @IDBinds, @TypeBinds );
+        }
+        else {
+            # Both directions
+            # TODO: test with PostgreSQL and Oracle
+            $SQL = <<"END_SQL";
 (
-  SELECT DISTINCT source_configitem_id, link_type_id, 'Source'
+  SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source'
     FROM configitem_link
-    WHERE @{[ join ' AND ', 'target_configitem_id = ?', @TypeConditions ]}
+    WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions), @TypeConditions ]}
 )
 UNION
 (
-  SELECT DISTINCT target_configitem_id, link_type_id, 'Target'
+  SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target'
     FROM configitem_link
-    WHERE @{[ join ' AND ', 'source_configitem_id = ?', @TypeConditions ]}
+    WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions), @TypeConditions ]}
 )
 END_SQL
-        push @Binds, $Param{ConfigItemID}, @TypeBinds, $Param{ConfigItemID}, @TypeBinds;
+            @Binds = ( @IDBinds, @TypeBinds, @IDBinds, @TypeBinds );
+        }
     }
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-    my $Rows     = $DBObject->SelectAll(
+    my $Rows = $Kernel::OM->Get('Kernel::System::DB')->SelectAll(
         SQL  => $SQL,
         Bind => [ \(@Binds) ],
     );
@@ -277,12 +321,13 @@ END_SQL
         {
             {
                 ConfigItemID => $_->[0],
-                LinkTypeID   => $_->[1],
+                VersionID    => $_->[1],
+                LinkTypeID   => $_->[2],
                 LinkType     => $LinkObject->TypeLookup(
-                    TypeID => $_->[1],
+                    TypeID => $_->[2],
                     UserID => $Param{UserID},
                 ),
-                Direction => $_->[2],
+                Direction => $_->[3],
             }
         }
         $Rows->@*;
@@ -553,7 +598,7 @@ END_SQL
     );
     ROW:
     for my $Row ( $Rows->@* ) {
-        my ( $FieldID, $ConfigItemID, $ConfigItemVersionID, $Value, $MaxConfigItemVersionID ) = $Row->@*;
+        my ( $FieldID, $ConfigItemID, $VersionID, $Value, $MaxVersionID ) = $Row->@*;
 
         next ROW unless $DFLookupByID{$FieldID};
 
@@ -581,7 +626,7 @@ END_SQL
         my $AllVersions = 0;
         $DFDetails->{AppliesToAllVersions} //= '';
         if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
-            next ROW unless $ConfigItemVersionID == $MaxConfigItemVersionID;
+            next ROW unless $VersionID == $MaxVersionID;
 
             $AllVersions = 1;
         }
@@ -592,7 +637,7 @@ END_SQL
 
         if ( $Direction eq 'Target' ) {
             push @SourceConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
-            push @SourceConfigItemVersionIDs, $AllVersions                ? undef         : $ConfigItemVersionID;
+            push @SourceConfigItemVersionIDs, $AllVersions                ? undef         : $VersionID;
             push @TargetConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
             push @TargetConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
         }
@@ -600,7 +645,7 @@ END_SQL
 
             # as above, but backwards
             push @TargetConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
-            push @TargetConfigItemVersionIDs, $AllVersions                ? undef         : $ConfigItemVersionID;
+            push @TargetConfigItemVersionIDs, $AllVersions                ? undef         : $VersionID;
             push @SourceConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
             push @SourceConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
         }
