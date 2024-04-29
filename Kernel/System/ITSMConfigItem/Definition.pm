@@ -1110,7 +1110,7 @@ sub DefinitionSetOutOfSync {
         }
     }
 
-    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
         Type => 'ConfigItemDefinition',
         Key  => 'OutOfSyncClasses',
     );
@@ -1257,7 +1257,7 @@ Import config item class including dynamic fields and namespaces, based on class
 
     my $Success = $ConfigItemObject->ClassImport(
         DefinitionRaw => $DefinitionRaw,
-        ClassHandled  => (0|1)      # (optional, default 0) if class has already been created, affects check for class already existing
+        ClassExists   => "(ERROR|IGNORE|UPDATE)"   # (optional) how to handle import of already existing classes, default ERROR
     );
 
 =cut
@@ -1265,21 +1265,14 @@ Import config item class including dynamic fields and namespaces, based on class
 sub ClassImport {
     my ( $Self, %Param ) = @_;
 
+    # get needed objects
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # list of configitem classes
-    my %ClassLookup = reverse %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class',
-        ) // {}
-    };
 
     # expect array ref of definitions
     my $DefinitionList = $Param{DefinitionList};
-
     if ( !IsArrayRefWithData($DefinitionList) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1288,14 +1281,29 @@ sub ClassImport {
         return;
     }
 
-    # 1. create all classes
-    my %DynamicFields;
+    # initialize needed variables
     my %Definitions;
-    for my $ClassDefinition ( $Param{DefinitionList}->@* ) {
+    my %DynamicFields;
+    my %Namespaces;
+    my %SetDFs;
+    my %ClassLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        ) // {}
+    };
+    my %DynamicFieldLookup = reverse %{
+        $DynamicFieldObject->DynamicFieldList(
+            Valid      => 0,
+            ResultType => 'HASH',
+        ) || {}
+    };
+
+    # 0. perform sanity checks
+    for my $DefinitionItem ( $DefinitionList->@* ) {
 
         # check definition for validity
-        for my $Key (qw/ClassName Pages Sections DynamicFields/) {
-            if ( !$ClassDefinition->{$Key} ) {
+        for my $Key (qw/Sections DynamicFields/) {
+            if ( !$DefinitionItem->{$Key} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "Need $Key in Definition.",
@@ -1303,64 +1311,52 @@ sub ClassImport {
                 return;
             }
         }
-
-        my $ClassName = delete $ClassDefinition->{ClassName};
-
-        # handle class creation
-        if ( $ClassLookup{$ClassName} ) {
+        if ( !( $DefinitionItem->{ClassName} || $DefinitionItem->{RoleName} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Class $ClassName already exists.",
+                Message  => "Need ClassName or RoleName in Definition.",
+            );
+            return;
+        }
+        if ( $DefinitionItem->{ClassName} && !$DefinitionItem->{Pages} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need Pages in Class Definition.",
             );
             return;
         }
 
-        my $ClassID = $GeneralCatalogObject->ItemAdd(
-            Class   => 'ITSM::ConfigItem::Class',
-            Name    => $ClassName,
-            ValidID => 1,
-            UserID  => 1,
-        );
-
-        if ( !$ClassID ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not add class $ClassName.",
-            );
-            return;
+        # check for class duplicate
+        if ( $DefinitionItem->{ClassName} ) {
+            if ( $ClassLookup{ $DefinitionItem->{ClassName} } ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Class $DefinitionItem->{ClassName} already exists.",
+                );
+                return;
+            }
         }
-
-        # collect dynamic fields
-        my $ClassDynamicFields = delete $ClassDefinition->{DynamicFields};
-        %DynamicFields = (
-            %DynamicFields,
-            $ClassDynamicFields->%*,
-        );
 
         # collect definition
-        $Definitions{$ClassID} = $YAMLObject->Dump(
-            Data => $ClassDefinition,
+        $Definitions{ $DefinitionItem->{ClassName} } = $YAMLObject->Dump(
+            Data => $DefinitionItem,
         );
-
-        if ( !$Definitions{$ClassID} ) {
+        if ( !$Definitions{ $DefinitionItem->{ClassName} } ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Error recreating the definition in yaml.',
             );
             return;
         }
+
+        # collect dynamic fields
+        %DynamicFields = (
+            %DynamicFields,
+            $DefinitionItem->{DynamicFields}->%*,
+        );
     }
 
-    my %DynamicFieldLookup = reverse %{
-        $DynamicFieldObject->DynamicFieldList(
-            Valid      => 0,
-            ResultType => 'HASH',
-            )
-            || {}
-    };
-
     # add inner fields of set DFs to hash
-    my %SetDFs;
     for my $Field ( keys %DynamicFields ) {
         if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
             my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields{$Field}{Config}{Include}->@*;
@@ -1379,8 +1375,8 @@ sub ClassImport {
         }
     }
 
+    # check dynamic fields
     my %AllFields = ( %DynamicFields, %SetDFs );
-    my %Namespaces;
     for my $Field ( keys %AllFields ) {
         if ( $DynamicFieldLookup{$Field} ) {
             my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
@@ -1417,6 +1413,37 @@ sub ClassImport {
         }
     }
 
+    # 1. create all classes
+    CLASSDEFINITION:
+    for my $ClassDefinition ( grep { $_->{ClassName} } $DefinitionList->@* ) {
+
+        # actually create class
+        my $ClassName = delete $ClassDefinition->{ClassName};
+        my $ClassID   = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class',
+            Name    => $ClassName,
+            ValidID => 1,
+            UserID  => 1,
+        );
+        if ( !$ClassID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not add class $ClassName.",
+            );
+            return;
+        }
+
+        # clean up definition data
+        delete $ClassDefinition->{DynamicFields};
+    }
+
+    # 2. create all roles
+    ROLENAME:
+    for my $RoleDefinition ( grep { $_->{RoleName} } $DefinitionList->@* ) {
+
+    }
+
+    # namespace handling
     if (%Namespaces) {
 
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
@@ -1469,6 +1496,13 @@ sub ClassImport {
                 UserID    => 1,
                 DefaultID => $Setting{DefaultID},
             );
+            if ( !$Success ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => 'Could not unlock setting DynamicField::Namespaces.',
+                );
+                return;
+            }
 
             my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
                 Comments      => "ClassImport updating DynamicField::Namespaces",
@@ -1487,8 +1521,6 @@ sub ClassImport {
         }
     }
 
-    my $Order = scalar( keys %DynamicFieldLookup );
-
     # split dynamic fields in three separate groups
     my @NormalFieldNames = grep { $AllFields{$_}{FieldType} ne 'Lens' && $AllFields{$_}{FieldType} ne 'Set' } keys %AllFields;
     my @LensFieldNames   = grep { $AllFields{$_}{FieldType} eq 'Lens' } keys %AllFields;
@@ -1500,6 +1532,7 @@ sub ClassImport {
     } @LensFieldNames;
 
     # 2. create dynamic fields
+    my $Order = scalar( keys %DynamicFieldLookup );
     FIELD:
     for my $FieldName ( @NormalFieldNames, @LensFieldNamesSorted, @SetFieldNames ) {
         next FIELD if $DynamicFieldLookup{$FieldName};
@@ -1542,10 +1575,11 @@ sub ClassImport {
     }
 
     # 3. add definitions
-    for my $ClassID ( keys %Definitions ) {
-        my $Return = $ConfigItemObject->DefinitionAdd(
+    for my $ClassName ( keys %Definitions ) {
+        my $ClassID = $ClassLookup{$ClassName};
+        my $Return  = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
-            Definition => $Definitions{$ClassID},
+            Definition => $Definitions{$ClassName},
             UserID     => 1,
         );
 
