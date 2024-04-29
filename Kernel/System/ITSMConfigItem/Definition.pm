@@ -1265,6 +1265,8 @@ Import config item class including dynamic fields and namespaces, based on class
 sub ClassImport {
     my ( $Self, %Param ) = @_;
 
+    $Param{ClassExists} ||= 'ERROR';
+
     # get needed objects
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -1328,7 +1330,7 @@ sub ClassImport {
 
         # check for class duplicate
         if ( $DefinitionItem->{ClassName} ) {
-            if ( $ClassLookup{ $DefinitionItem->{ClassName} } ) {
+            if ( $ClassLookup{ $DefinitionItem->{ClassName} } && $Param{ClassExists} eq 'ERROR' ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "Class $DefinitionItem->{ClassName} already exists.",
@@ -1417,14 +1419,32 @@ sub ClassImport {
     CLASSDEFINITION:
     for my $ClassDefinition ( grep { $_->{ClassName} } $DefinitionList->@* ) {
 
-        # actually create class
         my $ClassName = delete $ClassDefinition->{ClassName};
-        my $ClassID   = $GeneralCatalogObject->ItemAdd(
-            Class   => 'ITSM::ConfigItem::Class',
-            Name    => $ClassName,
-            ValidID => 1,
-            UserID  => 1,
-        );
+
+        # handle duplications according param ClassExists
+        my $ClassID;
+        if ( $ClassLookup{$ClassName} ) {
+            if ( $Param{ClassExists} eq 'UPDATE' ) {
+                $ClassID = $GeneralCatalogObject->ItemUpdate(
+                    ItemID  => $ClassLookup{$ClassName},
+                    Name    => $ClassName,
+                    ValidID => 1,
+                    UserID  => 1,
+                );
+            }
+            else {
+                next CLASSDEFINITION;
+            }
+        }
+        else {
+            $ClassID = $GeneralCatalogObject->ItemAdd(
+                Class   => 'ITSM::ConfigItem::Class',
+                Name    => $ClassName,
+                ValidID => 1,
+                UserID  => 1,
+            );
+        }
+
         if ( !$ClassID ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
