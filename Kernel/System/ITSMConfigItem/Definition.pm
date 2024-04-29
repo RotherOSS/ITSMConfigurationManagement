@@ -1343,36 +1343,12 @@ sub ClassImport {
                 );
                 return;
             }
-
-            # collect definition
-            $ClassDefinitions{ $DefinitionItem->{ClassName} } = $YAMLObject->Dump(
-                Data => $DefinitionItem,
-            );
-            if ( !$ClassDefinitions{ $DefinitionItem->{ClassName} } ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => 'Error recreating the definition in yaml.',
-                );
-                return;
-            }
         }
         if ( $DefinitionItem->{RoleName} ) {
             if ( $RoleLookup{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "Role $DefinitionItem->{RoleName} already exists.",
-                );
-                return;
-            }
-
-            # collect definition
-            $RoleDefinitions{ $DefinitionItem->{RoleName} } = $YAMLObject->Dump(
-                Data => $DefinitionItem,
-            );
-            if ( !$RoleDefinitions{ $DefinitionItem->{RoleName} } ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => 'Error recreating the definition in yaml.',
                 );
                 return;
             }
@@ -1452,12 +1428,20 @@ sub ClassImport {
         my $ClassID;
         if ( $ClassLookup{$ClassName} ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
-                $ClassID = $GeneralCatalogObject->ItemUpdate(
+                my $Success = $GeneralCatalogObject->ItemUpdate(
                     ItemID  => $ClassLookup{$ClassName},
                     Name    => $ClassName,
                     ValidID => 1,
                     UserID  => 1,
                 );
+                if ( !$Success ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Could not update class $ClassName.",
+                    );
+                    return;
+                }
+                $ClassID = $ClassLookup{$ClassName};
             }
             else {
                 next CLASSDEFINITION;
@@ -1482,6 +1466,18 @@ sub ClassImport {
 
         # clean up definition data
         delete $ClassDefinition->{DynamicFields};
+
+        # collect definition
+        $ClassDefinitions{$ClassID} = $YAMLObject->Dump(
+            Data => $ClassDefinition,
+        );
+        if ( !$ClassDefinitions{$ClassID} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Error recreating the definition in yaml.',
+            );
+            return;
+        }
     }
 
     # 2. create all roles
@@ -1494,12 +1490,20 @@ sub ClassImport {
         my $RoleID;
         if ( $RoleLookup{$RoleName} ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
-                $RoleID = $GeneralCatalogObject->ItemUpdate(
+                my $Success = $GeneralCatalogObject->ItemUpdate(
                     ItemID  => $RoleLookup{$RoleName},
                     Name    => $RoleName,
                     ValidID => 1,
                     UserID  => 1,
                 );
+                if ( !$Success ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Could not update role $RoleName.",
+                    );
+                    return;
+                }
+                $RoleID = $RoleLookup{$RoleName};
             }
             else {
                 next ROLEDEFINITION;
@@ -1524,6 +1528,18 @@ sub ClassImport {
 
         # clean up definition data
         delete $RoleDefinition->{DynamicFields};
+
+        # collect definition
+        $RoleDefinitions{$RoleID} = $YAMLObject->Dump(
+            Data => $RoleDefinition,
+        );
+        if ( !$RoleDefinitions{$RoleID} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Error recreating the definition in yaml.',
+            );
+            return;
+        }
     }
 
     # namespace handling
@@ -1658,12 +1674,12 @@ sub ClassImport {
     }
 
     # 4. add definitions
-    for my $ClassName ( keys %ClassDefinitions ) {
-        my $ClassID = $ClassLookup{$ClassName};
-        my $Return  = $ConfigItemObject->DefinitionAdd(
+    for my $ClassID ( keys %ClassDefinitions ) {
+        my $Return = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
-            Definition => $ClassDefinitions{$ClassName},
+            Definition => $ClassDefinitions{$ClassID},
             UserID     => 1,
+            Force      => 1,
         );
 
         if ( !$Return->{Success} ) {
@@ -1674,12 +1690,12 @@ sub ClassImport {
             return;
         }
     }
-    for my $RoleName ( keys %RoleDefinitions ) {
-        my $RoleID = $RoleLookup{$RoleName};
+    for my $RoleID ( keys %RoleDefinitions ) {
         my $Return = $ConfigItemObject->RoleDefinitionAdd(
             RoleID     => $RoleID,
-            Definition => $RoleDefinitions{$RoleName},
+            Definition => $RoleDefinitions{$RoleID},
             UserID     => 1,
+            Force      => 1,
         );
 
         if ( !$Return->{Success} ) {
