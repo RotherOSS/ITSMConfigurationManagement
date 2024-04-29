@@ -26,12 +26,14 @@
 
     <div class="ContentColumn SpacingTop">
         <div class="WidgetSimple" id="WidgetContainer">
-        <form name="TreeView" id="TreeView">
-            <input type="hidden" name="ConfigItemID" id="ConfigItemID" value="[% Data.ConfigItemID | html %]">
-            <input type="hidden" name="OTOBOAgentInterface" id="OTOBOAgentInterface" value="[% Data.SessionID | html %]">
-            <input type="hidden" name="ShowLinkLabels" id="ShowLinkLabels" value="[% Data.ShowLinkLabels | html %]">
-            <input type="hidden" name="LastZoom" id="LastZoom" value="100">
-        </form>
+
+            <form name="TreeView" id="TreeView">
+                <input type="hidden" name="ConfigItemID"        id="ConfigItemID"        value="[% Data.ConfigItemID | html %]">
+                <input type="hidden" name="OTOBOAgentInterface" id="OTOBOAgentInterface" value="[% Data.SessionID | html %]">
+                <input type="hidden" name="ShowLinkLabels"      id="ShowLinkLabels"      value="[% Data.ShowLinkLabels | html %]">
+                <input type="hidden" name="LastZoom"            id="LastZoom"            value="100">
+            </form>
+
             <div class="ControlRow ContainerBar">
                 <div class="RowTitle"><i class="fa fa-sitemap"></i> [% Translate("Tree View") | html %]</div>
                 <div class="OptContainer Center">
@@ -39,11 +41,11 @@
                     <label id="ZoomInOutLabel">[% Translate("Zoom In/Out") | html %]: </label> <input type="number" name="Zoom" id="Zoom" min="20" max="200" step="10" value="100">
                 </div>
             </div>
-                <div id="AJAXLoaderDepth" class="AJAXLoader Hidden"></div>
-                <div id="TreeViewMessages" class="TreeViewMessages Center Hidden">
-                    <span class="Center TreeViewMessage">[% Translate("Max links level reached for ConfigItem!") | html  %]</span>
-                </div>
-                <div class="ContainerCanvas" id="Canvas"></div>
+            <div id="AJAXLoaderDepth" class="AJAXLoader Hidden"></div>
+            <div id="TreeViewMessages" class="TreeViewMessages Center Hidden">
+                <span class="Center TreeViewMessage">[% Translate("Max links level reached for ConfigItem!") | html  %]</span>
+            </div>
+            <div class="ContainerCanvas" id="Canvas"></div>
         </div>
     </div>
 </div>
