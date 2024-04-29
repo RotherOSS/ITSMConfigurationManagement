@@ -1284,7 +1284,8 @@ sub ClassImport {
     }
 
     # initialize needed variables
-    my %Definitions;
+    my %ClassDefinitions;
+    my %RoleDefinitions;
     my %DynamicFields;
     my %Namespaces;
     my %SetDFs;
@@ -1298,6 +1299,11 @@ sub ClassImport {
             Valid      => 0,
             ResultType => 'HASH',
         ) || {}
+    };
+    my %RoleLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Role',
+        ) // {}
     };
 
     # 0. perform sanity checks
@@ -1328,7 +1334,7 @@ sub ClassImport {
             return;
         }
 
-        # check for class duplicate
+        # check for duplicate
         if ( $DefinitionItem->{ClassName} ) {
             if ( $ClassLookup{ $DefinitionItem->{ClassName} } && $Param{ClassExists} eq 'ERROR' ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1337,18 +1343,39 @@ sub ClassImport {
                 );
                 return;
             }
-        }
 
-        # collect definition
-        $Definitions{ $DefinitionItem->{ClassName} } = $YAMLObject->Dump(
-            Data => $DefinitionItem,
-        );
-        if ( !$Definitions{ $DefinitionItem->{ClassName} } ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Error recreating the definition in yaml.',
+            # collect definition
+            $ClassDefinitions{ $DefinitionItem->{ClassName} } = $YAMLObject->Dump(
+                Data => $DefinitionItem,
             );
-            return;
+            if ( !$ClassDefinitions{ $DefinitionItem->{ClassName} } ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => 'Error recreating the definition in yaml.',
+                );
+                return;
+            }
+        }
+        if ( $DefinitionItem->{RoleName} ) {
+            if ( $RoleLookup{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Role $DefinitionItem->{RoleName} already exists.",
+                );
+                return;
+            }
+
+            # collect definition
+            $RoleDefinitions{ $DefinitionItem->{RoleName} } = $YAMLObject->Dump(
+                Data => $DefinitionItem,
+            );
+            if ( !$RoleDefinitions{ $DefinitionItem->{RoleName} } ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => 'Error recreating the definition in yaml.',
+                );
+                return;
+            }
         }
 
         # collect dynamic fields
@@ -1458,9 +1485,45 @@ sub ClassImport {
     }
 
     # 2. create all roles
-    ROLENAME:
+    ROLEDEFINITION:
     for my $RoleDefinition ( grep { $_->{RoleName} } $DefinitionList->@* ) {
 
+        my $RoleName = delete $RoleDefinition->{RoleName};
+
+        # handle duplications according param ClassExists
+        my $RoleID;
+        if ( $RoleLookup{$RoleName} ) {
+            if ( $Param{ClassExists} eq 'UPDATE' ) {
+                $RoleID = $GeneralCatalogObject->ItemUpdate(
+                    ItemID  => $RoleLookup{$RoleName},
+                    Name    => $RoleName,
+                    ValidID => 1,
+                    UserID  => 1,
+                );
+            }
+            else {
+                next ROLEDEFINITION;
+            }
+        }
+        else {
+            $RoleID = $GeneralCatalogObject->ItemAdd(
+                Class   => 'ITSM::ConfigItem::Role',
+                Name    => $RoleName,
+                ValidID => 1,
+                UserID  => 1,
+            );
+        }
+
+        if ( !$RoleID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Could not add role $RoleName.",
+            );
+            return;
+        }
+
+        # clean up definition data
+        delete $RoleDefinition->{DynamicFields};
     }
 
     # namespace handling
@@ -1551,7 +1614,7 @@ sub ClassImport {
         ( $AllFields{$b}{Name} eq $AllFields{$a}{Config}{AttributeDF} ) <=> ( $AllFields{$a}{Name} eq $AllFields{$b}{Config}{AttributeDF} )
     } @LensFieldNames;
 
-    # 2. create dynamic fields
+    # 3. create dynamic fields
     my $Order = scalar( keys %DynamicFieldLookup );
     FIELD:
     for my $FieldName ( @NormalFieldNames, @LensFieldNamesSorted, @SetFieldNames ) {
@@ -1594,12 +1657,28 @@ sub ClassImport {
         }
     }
 
-    # 3. add definitions
-    for my $ClassName ( keys %Definitions ) {
+    # 4. add definitions
+    for my $ClassName ( keys %ClassDefinitions ) {
         my $ClassID = $ClassLookup{$ClassName};
         my $Return  = $ConfigItemObject->DefinitionAdd(
             ClassID    => $ClassID,
-            Definition => $Definitions{$ClassName},
+            Definition => $ClassDefinitions{$ClassName},
+            UserID     => 1,
+        );
+
+        if ( !$Return->{Success} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Could not store definition.',
+            );
+            return;
+        }
+    }
+    for my $RoleName ( keys %RoleDefinitions ) {
+        my $RoleID = $RoleLookup{$RoleName};
+        my $Return = $ConfigItemObject->RoleDefinitionAdd(
+            RoleID     => $RoleID,
+            Definition => $RoleDefinitions{$RoleName},
             UserID     => 1,
         );
 
