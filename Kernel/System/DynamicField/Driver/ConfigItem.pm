@@ -246,6 +246,29 @@ sub GetFieldTypeSettings {
             Multiple     => 0,
         };
 
+    my $DynamicFieldsList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
+        ObjectType => ['ITSMConfigItem'],
+        Valid      => 1,
+        ResultType => 'HASH',
+    );
+    my %DFSelectionData = map { ( "DynamicField_$_" => "DynamicField_$_" ) } values $DynamicFieldsList->%*;
+
+    # Support configurable import search attribute
+    push @FieldTypeSettings,
+        {
+            ConfigParamName => 'ImportSearchAttribute',
+            Label           => Translatable('External-source key'),
+            Explanation     => Translatable('When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute.'),
+            InputType       => 'Selection',
+            SelectionData   => {
+                'Name'   => 'Name',
+                'Number' => 'Number',
+                %DFSelectionData,
+            },
+            PossibleNone => 1,
+            Multiple     => 0,
+        };
+
     # Support various display options
     push @FieldTypeSettings,
         {
@@ -419,6 +442,13 @@ sub SearchObjects {
     if ( $Param{ObjectID} ) {
         $SearchParams{ConfigItemID} = $Param{ObjectID};
     }
+    elsif ( $Param{ExternalSource} ) {
+
+        # include configured search param if present
+        my $SearchAttribute = $DFDetails->{ImportSearchAttribute} || 'Name';
+
+        $SearchParams{$SearchAttribute} = "$Param{Term}";
+    }
     else {
 
         # include configured search param if present
@@ -458,7 +488,7 @@ sub SearchObjects {
     );
 
     # incorporate referencefilterlist into search params
-    if ( IsArrayRefWithData( $DFDetails->{ReferenceFilterList} ) ) {
+    if ( IsArrayRefWithData( $DFDetails->{ReferenceFilterList} ) && !$Param{ExternalSource} ) {
         FILTERITEM:
         for my $FilterItem ( $DFDetails->{ReferenceFilterList}->@* ) {
 
@@ -582,7 +612,7 @@ sub SearchObjects {
     }
 
     # Support restriction by class
-    if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) ) {
+    if ( IsArrayRefWithData( $DFDetails->{ClassIDs} ) && !$Param{ExternalSource} ) {
         if ( $SearchParams{ClassIDs} ) {
             my @ClassIDs;
             for my $ClassID ( $SearchParams{ClassIDs}->@* ) {
