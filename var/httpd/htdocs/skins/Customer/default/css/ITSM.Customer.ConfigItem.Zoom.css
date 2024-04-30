@@ -126,7 +126,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 #PageSelection button.PageSelectionButton.Selected {
     background-color: #000099;
-    background-color: var(--colHoverDark);
+    background-color: var(--colMainHover);
 }
 
 #AttachmentContainer {
