@@ -330,14 +330,11 @@ sub GetLinkOutputData {
             DynamicFields => 1,
         );
 
-        # Find label for the link
+        # Find label for the link. In TreeView the label of the arc
+        # should be in accordance to the direction of the arc. The arc
+        # is always directed from Source to Target. Therefore the SourceName is the arc label.
         my $LinkType = $LinkedConfigItem->{LinkType};
-        my $Link     = $LinkedConfigItem->{Direction} eq 'Source'
-            ?
-            $ConfiguredTypes->{$LinkType}->{TargetName}
-            :
-            $ConfiguredTypes->{$LinkType}->{SourceName};
-        $Link ||= $LinkType;
+        my $ArcLabel = $ConfiguredTypes->{$LinkType}->{SourceName} || $LinkType;
 
         # define item data
         my %Item = (
@@ -347,7 +344,7 @@ sub GetLinkOutputData {
                 Attributes => [ $Self->CITreeDefaultAttributes ],
                 ConfigItem => $ConfigItem,
             ),
-            Link     => $LayoutObject->{LanguageObject}->Translate($Link),
+            Link     => $LayoutObject->{LanguageObject}->Translate($ArcLabel),
             LinkedTo => $Param{Parent} || ''
         );
 
