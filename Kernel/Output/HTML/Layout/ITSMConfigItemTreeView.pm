@@ -59,9 +59,10 @@ sub GenerateHierarchyGraph {
 
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
     $Self->{CITreeMaxDepth} = 1;
 
-    # get linked objects
+    # get linked objects irrespective of direction
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => $ConfigItemID,
         Direction    => 'Both',
@@ -106,35 +107,34 @@ sub GenerateHierarchyGraph {
     # for the sources start with the deepest level
     my $LinkDataSource = '';
     for my $Level ( sort { $b <=> $a } keys %TreeSources ) {
-        my %Elements = $TreeSources{$Level}->%*;
+        my $Elements = $TreeSources{$Level};
 
         $LayoutObject->Block(
             Name  => 'ChildSourceElementsLevel',
             Level => $Level
         );
 
-        for my $CITop ( sort { $a <=> $b } keys %Elements ) {
-            my %Element = %{ $Elements{$CITop} };
+        for my $CITop ( sort { $a <=> $b } keys $Elements->%* ) {
+            my $Element = $Elements->{$CITop};
 
             $LayoutObject->Block(
                 Name => 'ChildSourceElements',
                 Data => {
-                    Name         => $Element{Name},
-                    Contents     => $Element{Contents},
-                    ConfigItemID => $Element{ID},
-                    ID           => "$Element{ID}-$Level",
+                    Name         => $Element->{Name},
+                    Contents     => $Element->{Contents},
+                    ConfigItemID => $Element->{ID},
+                    ID           => "$Element->{ID}-$Level",
                     SessionID    => $Param{SessionID}
                 }
             );
 
             my $NextLevel = $Level - 1;
 
-            if ($NextLevel) {
-                $LinkDataSource .= "$Element{LinkedTo}-$NextLevel,$Element{ID}-$Level,$Element{Link};";
-            }
-            else {
-                $LinkDataSource .= "$Element{LinkedTo},$Element{ID}-$Level,$Element{Link};";
-            }
+            $LinkDataSource .= $NextLevel
+                ?
+                "$Element->{LinkedTo}-$NextLevel,$Element->{ID}-$Level,$Element->{Link};"
+                :
+                "$Element->{LinkedTo},$Element->{ID}-$Level,$Element->{Link};";
         }
     }
 
@@ -165,7 +165,7 @@ sub GenerateHierarchyGraph {
     # for the targest start with the lowest level
     my $LinkDataTarget = '';
     for my $Level ( sort { $a <=> $b } keys %TreeTargets ) {
-        my %Elements = %{ $TreeTargets{$Level} };
+        my $Elements = $TreeTargets{$Level};
 
         $LayoutObject->Block(
             Name => 'ChildTargetElementsLevel',
@@ -174,28 +174,27 @@ sub GenerateHierarchyGraph {
             }
         );
 
-        for my $CITop ( sort { $a <=> $b } keys %Elements ) {
-            my %Element = %{ $Elements{$CITop} };
+        for my $CITop ( sort { $a <=> $b } keys $Elements->%* ) {
+            my $Element = $Elements->{$CITop};
 
             $LayoutObject->Block(
                 Name => 'ChildTargetElements',
                 Data => {
-                    Name         => $Element{Name},
-                    Contents     => $Element{Contents},
-                    ConfigItemID => "$Element{ID}",
-                    ID           => "$Element{ID}-$Level",
+                    Name         => $Element->{Name},
+                    Contents     => $Element->{Contents},
+                    ConfigItemID => $Element->{ID},
+                    ID           => "$Element->{ID}-$Level",
                     SessionID    => $Param{SessionID}
                 }
             );
 
             my $PreviousLevel = $Level - 1;
 
-            if ( $Level ne '1' ) {
-                $LinkDataTarget .= "$Element{ID}-$Level,$Element{LinkedTo}-$PreviousLevel,$Element{Link};";
-            }
-            else {
-                $LinkDataTarget .= "$Element{ID}-$Level,$Element{LinkedTo},$Element{Link};";
-            }
+            $LinkDataTarget .= ( $Level ne '1' )
+                ?
+                "$Element->{ID}-$Level,$Element->{LinkedTo}-$PreviousLevel,$Element->{Link};"
+                :
+                "$Element->{ID}-$Level,$Element->{LinkedTo},$Element->{Link};";
         }
     }
 
@@ -322,12 +321,10 @@ sub GetLinkOutputData {
     my $ConfiguredTypes  = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
     my %OutputData;
 
-    for my $LinkedConfigItem (
-        grep { $_->{Direction} eq $Param{Direction} } $Param{LinkedConfigItems}->@*
-        )
-    {
+    for my $LinkedConfigItem ( grep { $_->{Direction} eq $Param{Direction} } $Param{LinkedConfigItems}->@* ) {
         my $ConfigItemID = $LinkedConfigItem->{ConfigItemID};
 
+        # ConfigItemGet() allows for both cases
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID  => $ConfigItemID,
             DynamicFields => 1,

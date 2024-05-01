@@ -55,14 +55,11 @@ sub Run {
         );
     }
 
-    # get config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # get config of frontend module
-    my $FrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
-
     # check permissions
-    my $Access = $ConfigItemObject->Permission(
+    my $FrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get("ITSMConfigItem::Frontend::$Self->{Action}");
+    my $Access         = $ConfigItemObject->Permission(
         Type   => $FrontendConfig->{Permission},
         Scope  => 'Item',
         Action => $Self->{Action},
@@ -71,13 +68,10 @@ sub Run {
     );
 
     # error screen
-    if ( !$Access ) {
-        return $LayoutObject->NoPermission(
-            Message =>
-                $LayoutObject->{LanguageObject}->Translate( 'You need %s permissions!', $FrontendConfig->{Permission} ),
-            WithHeader => 'yes',
-        );
-    }
+    return $LayoutObject->NoPermission(
+        Message    => $LayoutObject->{LanguageObject}->Translate( 'You need %s permissions!', $FrontendConfig->{Permission} ),
+        WithHeader => 'yes',
+    ) unless $Access;
 
     my $Depth = $ParamObject->GetParam( Param => 'Depth' ) || $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth") || 1;
 
@@ -104,7 +98,9 @@ sub Run {
         Cache        => 1,
     );
 
-    # The information for drawing the graph will be fetch with 'LoadTreeView'
+    # The actual tree will be written later into the div with the ID 'Canvas'.
+    # The information for drawing the graph will be fetched with 'LoadTreeView'.
+    # See var/httpd/htdocs/js/Core.Agent.TreeView.js for the function UpdateTree().
     return join '',
         $LayoutObject->Header(
             Type      => 'Small',
