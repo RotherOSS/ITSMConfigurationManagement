@@ -195,24 +195,22 @@ sub GetFieldTypeSettings {
                 UserID => $Self->{UserID},
             );
 
-            # create the source name
-            $SelectionData{"${PossibleType}::Source"} = $Type{SourceName};
-
-            next POSSIBLETYPE unless $Type{Pointed};
-
-            # create the target name
-            $SelectionData{"${PossibleType}::Target"} = $Type{TargetName};
+            # Choose what type of linking should be done with this dynamic field.
+            # There are always two directions. Both are grouped together as the selection is in TreeView mode.
+            $SelectionData{"${PossibleType}::Source"} = "${PossibleType}::Forward) The referencing item is '$Type{TargetName}' to the referenced item.";
+            $SelectionData{"${PossibleType}::Target"} = "${PossibleType}::Reverse) The referencing item is '$Type{SourceName}' to the referenced item.";
         }
 
         # TODO: saner grouping, and saner ordering
         push @FieldTypeSettings,
             {
+                InputType       => 'Selection',
                 ConfigParamName => 'LinkType',
                 Label           => Translatable('Link type'),
                 Explanation     => Translatable('Select the link type.'),
-                InputType       => 'Selection',
                 SelectionData   => \%SelectionData,
                 PossibleNone    => 0,
+                TreeView        => 1,
             };
     }
 
