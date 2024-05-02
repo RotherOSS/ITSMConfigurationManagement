@@ -313,6 +313,13 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
         Key    => 'Permission',
         Value  => $ConfigItemGroupID,
     );
+
+    # Set version string module.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ItemID,
+        Key    => 'VersionStringModule',
+        Value  => 'Incremental',
+    );
 }
 
 # Add dynamic fields for testing. These dynamic fields will be referenced
@@ -774,6 +781,13 @@ $ConfigItemPerlDefinitions[2] = " [
             ItemID => $ClassID,
             Key    => 'Permission',
             Value  => $ConfigItemGroupID,
+        );
+
+        # Set version string module.
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $ClassID,
+            Key    => 'VersionStringModule',
+            Value  => 'Incremental',
         );
 
         # add a definition to the class
