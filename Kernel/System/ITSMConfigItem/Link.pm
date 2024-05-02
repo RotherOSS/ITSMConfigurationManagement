@@ -150,7 +150,8 @@ END_SQL
 
 =head2 LinkedConfigItems()
 
-get the config items that are directly linked to a specific config item.
+get the config items that are directly linked to a specific config item. No details
+of the linked config items are returned.
 
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => 321,

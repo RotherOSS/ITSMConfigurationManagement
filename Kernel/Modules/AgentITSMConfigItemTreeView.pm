@@ -73,7 +73,11 @@ sub Run {
         WithHeader => 'yes',
     ) unless $Access;
 
-    my $Depth = $ParamObject->GetParam( Param => 'Depth' ) || $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth") || 1;
+    my $Depth = $ParamObject->GetParam( Param => 'Depth' )
+        ||
+        $Kernel::OM->Get('Kernel::Config')->Get("CMDBTreeView::DefaultDepth")
+        ||
+        1;
 
     if ( $Self->{Subaction} eq 'LoadTreeView' ) {
 

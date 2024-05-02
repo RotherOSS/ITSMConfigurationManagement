@@ -62,7 +62,8 @@ sub GenerateHierarchyGraph {
 
     $Self->{CITreeMaxDepth} = 1;
 
-    # get linked objects irrespective of direction
+    # Get first level of linked config objects from the table 'configitem_link'.
+    # Irrespective of direction.
     my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         ConfigItemID => $ConfigItemID,
         Direction    => 'Both',
@@ -84,21 +85,21 @@ sub GenerateHierarchyGraph {
     );
 
     # Build Levels Up (Sources)
-    my %TreeSources = $Self->GetCISubTreeData(
-        Tree      => \%LinkOutputDataSources,
-        Init      => 1,
-        Depth     => $Param{Depth},
-        Key       => $ConfigItemID,
-        Direction => 'Source'
+    $Self->GetCISubTreeData(
+        LinkOutputData => \%LinkOutputDataSources,    # will be modified
+        Init           => 1,
+        Depth          => $Param{Depth},
+        Key            => $ConfigItemID,
+        Direction      => 'Source'
     );
 
     # Build Levels Down (Targets)
-    my %TreeTargets = $Self->GetCISubTreeData(
-        Tree      => \%LinkOutputDataTargets,
-        Init      => 2,
-        Depth     => $Param{Depth},
-        Key       => $ConfigItemID,
-        Direction => 'Target'
+    $Self->GetCISubTreeData(
+        LinkOutputData => \%LinkOutputDataTargets,    # will be modified
+        Init           => 2,
+        Depth          => $Param{Depth},
+        Key            => $ConfigItemID,
+        Direction      => 'Target'
     );
 
     # The needed data has been collected.
@@ -106,16 +107,15 @@ sub GenerateHierarchyGraph {
 
     # for the sources start with the deepest level
     my $LinkDataSource = '';
-    for my $Level ( sort { $b <=> $a } keys %TreeSources ) {
-        my $Elements = $TreeSources{$Level};
+    for my $Level ( sort { $b <=> $a } keys %LinkOutputDataSources ) {
+        my $Elements = $LinkOutputDataSources{$Level};
 
         $LayoutObject->Block(
             Name  => 'ChildSourceElementsLevel',
             Level => $Level
         );
 
-        for my $CITop ( sort { $a <=> $b } keys $Elements->%* ) {
-            my $Element = $Elements->{$CITop};
+        for my $Element ( $Elements->@* ) {
 
             $LayoutObject->Block(
                 Name => 'ChildSourceElements',
@@ -164,8 +164,8 @@ sub GenerateHierarchyGraph {
 
     # for the targest start with the lowest level
     my $LinkDataTarget = '';
-    for my $Level ( sort { $a <=> $b } keys %TreeTargets ) {
-        my $Elements = $TreeTargets{$Level};
+    for my $Level ( sort { $a <=> $b } keys %LinkOutputDataTargets ) {
+        my $Elements = $LinkOutputDataTargets{$Level};
 
         $LayoutObject->Block(
             Name => 'ChildTargetElementsLevel',
@@ -174,8 +174,7 @@ sub GenerateHierarchyGraph {
             }
         );
 
-        for my $CITop ( sort { $a <=> $b } keys $Elements->%* ) {
-            my $Element = $Elements->{$CITop};
+        for my $Element ( $Elements->@* ) {
 
             $LayoutObject->Block(
                 Name => 'ChildTargetElements',
@@ -226,52 +225,45 @@ sub CITreeDefaultAttributes {
 sub GetCISubTreeData {
     my ( $Self, %Param ) = @_;
 
-    my %Tree      = %{ $Param{Tree} };
-    my $Depth     = $Param{Depth};
-    my $Init      = $Param{Init};
-    my $Direction = $Param{Direction};
+    my $LinkOutputData = $Param{LinkOutputData};    # will be modified
+    my $Depth          = $Param{Depth};
+    my $Init           = $Param{Init};
+    my $Direction      = $Param{Direction};
 
     my $ActualLevel      = 1;
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # build SubTree
+    # build the items for the new levels
     LOOPDEPTH:
     for my $GoDeep ( $Init .. $Depth ) {
+        next LOOPDEPTH if exists $LinkOutputData->{$GoDeep};
+        next LOOPDEPTH unless $LinkOutputData->{ $GoDeep - 1 };
+        next LOOPDEPTH unless $LinkOutputData->{ $GoDeep - 1 }->@*;
 
-        next LOOPDEPTH if exists $Tree{$GoDeep};
-        next LOOPDEPTH unless keys $Tree{ $GoDeep - 1 }->%*;
+        my @ItemsPerLevel;
+        for my $Element ( $LinkOutputData->{ $GoDeep - 1 }->@* ) {
+            my $ConfigItemID = $Element->{ID};
 
-        {
-            my %CIsRelated = %{ $Tree{ $GoDeep - 1 } };
-            my %SubTree;
+            # get linked objects
+            my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+                ConfigItemID => $ConfigItemID,
+                Direction    => 'Both',
+                UserID       => 1,
+            );
 
-            for my $Key ( sort { $a <=> $b } keys %CIsRelated ) {
+            my %DataForItem = $Self->GetLinkOutputData(
+                LinkedConfigItems => $LinkedConfigItems,
+                Depth             => $GoDeep,
+                Parent            => $ConfigItemID,
+                Direction         => $Direction,
+            );
 
-                # get linked objects
-                my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
-                    ConfigItemID => $Key,
-                    Direction    => 'Both',
-                    UserID       => 1,
-                );
+            push @ItemsPerLevel, ( $DataForItem{$GoDeep} // [] )->@*;
+        }
 
-                my %LinkOutputData = $Self->GetLinkOutputData(
-                    LinkedConfigItems => $LinkedConfigItems,
-                    Depth             => $GoDeep,
-                    Parent            => $Key,
-                    Direction         => $Direction,
-                    SourceCI          => $Param{Key}
-                );
-
-                if ( keys %LinkOutputData ) {
-                    my %HashData = %{ $LinkOutputData{$GoDeep} };
-                    %SubTree = ( %SubTree, %HashData );
-                }
-            }
-
-            if ( keys %SubTree ) {
-                $ActualLevel++;
-                $Tree{$GoDeep} = \%SubTree;
-            }
+        if (@ItemsPerLevel) {
+            $ActualLevel++;
+            $LinkOutputData->{$GoDeep} = \@ItemsPerLevel;
         }
     }
 
@@ -279,7 +271,7 @@ sub GetCISubTreeData {
         $Self->{CITreeMaxDepth} = $ActualLevel;
     }
 
-    return %Tree;
+    return;
 }
 
 # return contents of the nodes
@@ -310,7 +302,8 @@ sub _FillColumnAttributes {
     return join '<br>', @Lines;
 }
 
-# Get links for related CI
+# Get links for related CI.
+# This returned output data is not a tree, but an arrayref of items per level.
 sub GetLinkOutputData {
     my ( $Self, %Param ) = @_;
 
@@ -348,7 +341,8 @@ sub GetLinkOutputData {
             LinkedTo => $Param{Parent} || ''
         );
 
-        $OutputData{$Depth}->{ $ConfigItem->{ConfigItemID} } = \%Item;
+        $OutputData{$Depth} //= [];
+        push $OutputData{$Depth}->@*, \%Item;
     }
 
     return %OutputData;
