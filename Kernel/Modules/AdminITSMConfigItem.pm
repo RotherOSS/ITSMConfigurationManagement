@@ -27,7 +27,7 @@ use utf8;
 # CPAN modules
 
 # OTOBO modules
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -159,6 +159,8 @@ sub Run {
             );
         }
 
+        $Content = ${ $Content || \'' };
+
         $Content = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Content,
         );
@@ -172,8 +174,6 @@ sub Run {
                 Message => $LayoutObject->{LanguageObject}->Translate('Definition is no valid YAML hash.'),
             );
         }
-
-        $Content = ${ $Content || \'' };
 
         my $OverwriteExistingEntities = $ParamObject->GetParam( Param => 'OverwriteExistingEntities' );
 
