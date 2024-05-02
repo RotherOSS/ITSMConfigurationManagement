@@ -29,7 +29,10 @@ use utf8;
 # OTOBO modules
 
 our @ObjectDependencies = (
+    'Kernel::System::Cache',
     'Kernel::System::DB',
+    'Kernel::System::GeneralCatalog',
+    'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
 );
 
@@ -99,13 +102,87 @@ sub Run {
         }
     }
 
-    # TODO: Consider using ConfigItemUpdate() for history entries in CIs, and also allowing Definition updates trigger VersionAdd instead of updating them
-    #           make this configurable though, as it will be more computationally expensive
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $DBObject         = $Kernel::OM->Get('Kernel::System::DB');
 
-    return $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL  => 'UPDATE configitem_version v INNER JOIN configitem ci ON v.id = ci.last_version_id SET v.definition_id = ? WHERE ci.class_id = ?',
-        Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
+    # only consider productive and preproductive CIs
+    my $StateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class       => 'ITSM::ConfigItem::DeploymentState',
+        Preferences => {
+            Functionality => [ 'preproductive', 'productive' ],
+        },
     );
+
+    my $DeplStateString = join q{, }, keys %{$StateList};
+
+    # only consider productive and preproductive CIs
+    my %AffectedCIs = $DBObject->SelectMapping(
+        SQL => 'SELECT ci.id, ci.last_version_id FROM configitem ci'
+            . " WHERE ci.class_id = ? AND ci.cur_depl_state_id IN ( $DeplStateString )",
+        Bind => [ \$Param{Data}{ClassID} ],
+    );
+
+    return if !%AffectedCIs;
+
+    # add history entries
+    for my $ID ( keys %AffectedCIs ) {
+        $ConfigItemObject->HistoryAdd(
+            ConfigItemID => $ID,
+            HistoryType  => 'DefinitionUpdate',
+            UserID       => $Param{UserID},
+            Comment      => "$Param{Data}{DefinitionID}",
+        );
+    }
+
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $Param{Data}{ClassID},
+    );
+
+    # if definition updates should trigger the creation of a new version, call VersionAdd
+    if ( grep { $_ eq 'DefinitionUpdate' } @{ $ClassPreferences{VersionTrigger} // [] } ) {
+        for my $ID ( keys %AffectedCIs ) {
+            $ConfigItemObject->VersionAdd(
+                ConfigItemID => $ID,
+                UserID       => $Param{UserID},
+            );
+        }
+    }
+
+    # if we do not need to add a new version, update all affected versions and clear the cache
+    else {
+        $DBObject->Do(
+            SQL => 'UPDATE configitem_version v INNER JOIN configitem ci ON v.id = ci.last_version_id'
+                . ' SET v.definition_id = ?'
+                . " WHERE ci.class_id = ? AND ci.cur_depl_state_id IN ( $DeplStateString )",
+            Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
+        );
+
+        # clear the cache
+        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+        for my $ID ( keys %AffectedCIs ) {
+            for my $DFData ( 0, 1 ) {
+                $CacheObject->Delete(
+                    Type => $ConfigItemObject->{CacheType},
+                    Key  => join(
+                        '::', 'ConfigItemGet',
+                        ConfigItemID => $ID,
+                        DFData       => $DFData,
+                    ),
+                );
+                $CacheObject->Delete(
+                    Type => $ConfigItemObject->{CacheType},
+                    Key  => join(
+                        '::', 'ConfigItemGet',
+                        VersionID => $AffectedCIs{$ID},
+                        DFData    => $DFData,
+                    ),
+                );
+            }
+        }
+    }
+
+    return 1;
 }
 
 1;

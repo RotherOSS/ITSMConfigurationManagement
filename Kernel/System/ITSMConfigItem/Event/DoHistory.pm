@@ -75,12 +75,6 @@ This method handles the event.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # as DefinitionCreate does not belong to an item, we don't create
-    # a history entry
-    if ( $Param{Event} && $Param{Event} eq 'DefinitionCreate' ) {
-        return;
-    }
-
     # check needed stuff
     for my $Needed (qw(Data Event UserID)) {
         if ( !$Param{$Needed} ) {
@@ -118,7 +112,7 @@ sub Run {
         DefinitionUpdate      => \&_HistoryAdd,
         VersionCreate         => \&_HistoryAdd,
         VersionUpdate         => \&_HistoryAdd,
-        DefinitionCreate      => \&_HistoryAdd,
+        DefinitionCreate      => \&_Return,
         VersionDelete         => \&_HistoryAdd,
         AttachmentAddPost     => \&_HistoryAdd,
         AttachmentDeletePost  => \&_HistoryAdd,
@@ -145,6 +139,14 @@ sub Run {
 }
 
 =head1 INTERNAL INTERFACE
+
+=head2 _Return()
+
+do nothing
+
+=cut
+
+sub _Return { return 1 }
 
 =head2 _ConfigItemDelete()
 
