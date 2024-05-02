@@ -21,6 +21,7 @@ use utf8;
 
 # core modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
+use Storable;
 
 # CPAN modules
 use Test2::V0;
@@ -35,7 +36,8 @@ use Kernel::System::VariableCheck qw(:all);
 our $Self;
 
 # set UserID to root
-my $UserID = 1;
+# TODO: why is $Self->{UserID} used as well?
+my $TestUserID = 1;
 
 # helper object
 # skip SSL certiciate verification
@@ -86,7 +88,7 @@ my $WebserviceID = $WebserviceObject->WebserviceAdd(
         },
     },
     ValidID => 1,
-    UserID  => 1,
+    UserID  => $TestUserID,
 );
 $Self->True(
     $WebserviceID,
@@ -181,7 +183,7 @@ my $WebserviceUpdate = $WebserviceObject->WebserviceUpdate(
     Name    => $WebserviceName,
     Config  => $WebserviceConfig,
     ValidID => 1,
-    UserID  => 1,
+    UserID  => $TestUserID,
 );
 $Self->True(
     $WebserviceUpdate,
@@ -418,7 +420,7 @@ for my $ConfigItem (@ConfigItems) {
         Data         => {
             UserLogin  => $UserLogin,
             Password   => $Password,
-            ConfigItem => $ConfigItem,
+            ConfigItem => $ClonedConfigItem,
         },
     );
 
