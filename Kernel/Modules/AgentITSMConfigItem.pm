@@ -304,6 +304,9 @@ sub Run {
                     next CLASSID unless grep { $_ eq $TagFilter } $ClassPreferences{Tags}->@*;
                 }
             }
+            else {
+                next CLASSID;
+            }
         }
 
         # insert this class to be passed as search parameter for filter 'All'
