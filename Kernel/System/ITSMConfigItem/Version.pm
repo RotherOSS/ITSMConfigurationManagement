@@ -548,7 +548,7 @@ sub VersionAdd {
     return unless ref $ClassList eq 'HASH';
 
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
-        ItemID => $Param{ClassID},
+        ItemID => $Version{ClassID},
     );
 
     my $NameModuleObject;
@@ -559,7 +559,7 @@ sub VersionAdd {
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Can't load name module for class $Param{Class}!",
+                Message  => "Can't load name module for class $Version{Class}!",
             );
 
             return;
@@ -569,15 +569,15 @@ sub VersionAdd {
         $NameModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::Name::$NameModule");
 
         # override possible incoming name
-        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
+        $Version{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
 
         # check, whether the feature to check for a unique name is enabled
         if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
 
             my $NameDuplicates = $Self->UniqueNameCheck(
                 ConfigItemID => 'NEW',
-                ClassID      => $Param{ClassID},
-                Name         => $Param{Name},
+                ClassID      => $Version{ClassID},
+                Name         => $Version{Name},
             );
 
             # stop processing if the name is not unique
@@ -589,7 +589,7 @@ sub VersionAdd {
                 # write an error log message containing all the duplicate IDs
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                    Message  => "The name $Version{Name} is already in use (ConfigItemIDs: $Duplicates)!",
                 );
 
                 return;
@@ -866,7 +866,7 @@ sub VersionUpdate {
     my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
-        ItemID => $Param{ClassID},
+        ItemID => $Version->{ClassID},
     );
 
     my $NameModuleObject;
@@ -877,7 +877,7 @@ sub VersionUpdate {
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::Name::$NameModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Can't load name module for class $Param{Class}!",
+                Message  => "Can't load name module for class $Version->{Class}!",
             );
 
             return;
@@ -886,18 +886,23 @@ sub VersionUpdate {
         # create a backend object
         $NameModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::Name::$NameModule");
 
+        # TODO: Improve behaviour of modules which allow name reusage and do not always delete and recreate names
+        # In case we have a name module which creates names incrementally, we currently have to delete first and recreate then
         if ( $NameModuleObject->can('ConfigItemNameDelete') ) {
-            $NameModuleObject->ConfigItemNameDelete( $Param{Name} );
+            $NameModuleObject->ConfigItemNameDelete( $Version->{Name} );
         }
 
-        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(%Param);
+        $Param{Name} = $NameModuleObject->ConfigItemNameCreate(
+            $Version->%*,
+            %Param,
+        );
 
         # check, whether the feature to check for a unique name is enabled
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') && $Param{Name} ne $Version->{Name} ) {
 
             my $NameDuplicates = $Self->UniqueNameCheck(
-                ConfigItemID => 'NEW',
-                ClassID      => $Param{ClassID},
+                ConfigItemID => $Version->{ConfigItemID},
+                ClassID      => $Version->{ClassID},
                 Name         => $Param{Name},
             );
 
@@ -926,7 +931,7 @@ sub VersionUpdate {
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule") ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Can't load version string module for class $Param{Class}!",
+                Message  => "Can't load version string module for class $Version->{Class}!",
             );
 
             return;
@@ -936,8 +941,11 @@ sub VersionUpdate {
         $VersionStringModuleObject = $Kernel::OM->Get("Kernel::System::ITSMConfigItem::VersionString::$VersionStringModule");
 
         # override possible incoming version string
-        $Param{VersionString} = $VersionStringModuleObject->VersionStringGet(
-            Version => \%Param,
+        $Version->{VersionString} = $VersionStringModuleObject->VersionStringGet(
+            Version => {
+                $Version->%*,
+                %Param,
+            },
         );
     }
 
