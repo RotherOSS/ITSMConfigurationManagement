@@ -29,6 +29,8 @@ use utf8;
 # OTOBO modules
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
+use Data::Dumper;
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -66,6 +68,151 @@ sub Run {
     my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
+    my $DatabaseObject   = $Kernel::OM->Get('Kernel::System::DB');
+
+
+    my @ExampleClasses = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
+        Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/classes/examples',
+        Filter    => '*.yml',
+    );
+
+    # load the Ready2Import selection list with example classes (for Ready2Import feature)
+    my %ExampleClassData;
+
+    for my $ExampleClassFilename (@ExampleClasses) {
+        my $Key = $ExampleClassFilename;
+        $Key =~ s{^.*/([^/]+)$}{$1}smx;
+        my $Value = $Key;
+        $Value =~ s{^(.+).yml}{$1}smx;
+        $Value =~ s{_}{ }smxg;
+        $ExampleClassData{$Key} = $Value;
+    }
+
+    $Param{ExampleClassList} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
+        Name         => 'ExampleClass',
+        Data         => \%ExampleClassData,
+        PossibleNone => 1,
+        Translation  => 0,
+        Class        => 'Modernize Validate_Required',
+    );
+
+    # ------------------------------------------------------------ #
+    # config item class import
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'ClassImport' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $Content;
+
+        my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+        my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+        my $ExampleClass = $ParamObject->GetParam( Param => 'ExampleClass' );
+        my $FileWithoutExtension;
+
+        my $ExampleClassFilename = $ParamObject->GetParam( Param => 'ExampleClass' );
+        $ExampleClassFilename =~ s{/+|\.{2,}}{}smx;    # remove slashes and ..
+
+        if ( !$ExampleClassFilename ) {
+            return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
+                Message => Translatable('Need ExampleClasses!'),
+            );
+        }
+
+        # extract file name without extension
+        ($FileWithoutExtension) = $ExampleClassFilename =~ m{(.*?)\.yml$}smx;
+
+        # run _pre.pm if available
+        if ( -e "$Home/var/classes/examples/" . $FileWithoutExtension . "_pre.pm" ) {
+
+            my $BackendName = 'var::classes::examples::' . $FileWithoutExtension . '_pre';
+
+            my $Loaded = $MainObject->Require(
+                $BackendName,
+            );
+
+            if ($Loaded) {
+                my $BackendPre = $Kernel::OM->Get(
+                    $BackendName,
+                );
+
+                my %Status = $BackendPre->Run();
+                if ( !$Status{Success} ) {
+
+                    # show the error screen
+                    return $LayoutObject->ErrorScreen(
+                        Message => $Status{Error},
+                    );
+                }
+            }
+        }
+
+        $Content = $MainObject->FileRead(
+            Location => "$Home/var/classes/examples/$ExampleClassFilename",
+            Mode     => 'utf8',
+        );
+
+        if ( !$Content ) {
+            return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
+                Message =>
+                    $LayoutObject->{LanguageObject}->Translate( 'Could not read %s!', $ExampleClassFilename ),
+            );
+        }
+
+        $Content = ${ $Content || \'' };
+
+        my $OverwriteExistingEntities = $ParamObject->GetParam( Param => 'OverwriteExistingEntities' );
+
+        # import the class YAML file
+        my %ClassImport = $Self->_ClassImport(
+            Content                   => $Content,
+            OverwriteExistingEntities => $OverwriteExistingEntities,
+        );
+
+        if ( !$ClassImport{Success} ) {
+
+            # show the error screen
+            return $LayoutObject->ErrorScreen(
+                Message => $ClassImport{Message},
+                Comment => $ClassImport{Comment} || '',
+            );
+        }
+        else {
+            # Run _post.pm if available.
+            if (
+                $ExampleClass
+                && -e "$Home/var/classes/examples/" . $FileWithoutExtension . "_post.pm"
+                )
+            {
+                my $BackendName = 'var::classes::examples::' . $FileWithoutExtension . '_post';
+
+                my $Loaded = $MainObject->Require(
+                    $BackendName,
+                );
+
+                if ($Loaded) {
+
+                    my $BackendPost = $Kernel::OM->Get(
+                        $BackendName,
+                    );
+
+                    my %Status = $BackendPost->Run();
+                    if ( !$Status{Success} ) {
+
+                        # show the error screen
+                        return $LayoutObject->ErrorScreen(
+                            Message => $Status{Error},
+                        );
+                    }
+                }
+            }
+
+            return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+        }
+    }
 
     # ------------------------------------------------------------ #
     # list of the versions of the definition of a config item class
@@ -309,14 +456,6 @@ sub Run {
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $ClassID;
 
-        # Add code mirror language mode.
-        if ( $LayoutObject->{BrowserRichText} ) {
-            $LayoutObject->AddJSData(
-                Key   => 'EditorLanguageMode',
-                Value => 'text/x-yaml',
-            );
-        }
-
         # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
@@ -367,14 +506,6 @@ sub Run {
         my $RoleID = $ParamObject->GetParam( Param => 'RoleID' );
 
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" ) unless $RoleID;
-
-        # Add code mirror language mode.
-        if ( $LayoutObject->{BrowserRichText} ) {
-            $LayoutObject->AddJSData(
-                Key   => 'EditorLanguageMode',
-                Value => 'text/x-yaml',
-            );
-        }
 
         # get class definition
         my $Definition = $ConfigItemObject->DefinitionGet(
@@ -596,6 +727,29 @@ sub Run {
     }
 
     # ------------------------------------------------------------ #
+    # class export
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'ClassExport' ) {
+
+        my $YAMLContent;
+        for my $ExportedClassID ($ParamObject->GetArray( Param => 'ExportClassID' )) {
+            my $DefinitionRef = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
+            my $ClassDefinition = $DefinitionRef->{Definition};
+            $ClassDefinition =~ s/\-\-\-/---\nClassName: $DefinitionRef->{Class}/g;
+            $YAMLContent .= $ClassDefinition;
+        }
+        my $HTML = $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $YAMLContent,
+            Type        => 'attachment',
+            Filename    => "ExportClass.yml",
+            NoCache     => 1,
+        );
+
+        return $HTML;
+    }
+
+    # ------------------------------------------------------------ #
     # config item class overview is the default
     # ------------------------------------------------------------ #
     if (1) {
@@ -653,7 +807,7 @@ sub _ShowSidebar {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    # generate RoleOptionStrg and ClassOptionStrg which are needed for the sidebox
+    # generate RoleOptionStrg, ClassOptionStrg and ClassOptionMultStrg which are needed for the sidebox
     my $RoleID         = $Param{RoleSelected} ? $Param{RoleSelected}->{ID} : $ParamObject->GetParam( Param => 'RoleID' );
     my $RoleOptionStrg = $LayoutObject->BuildSelection(
         Data         => $Param{RoleList},
@@ -673,10 +827,23 @@ sub _ShowSidebar {
         Class        => 'Modernize',
     );
 
+    #The same than above but the selection box admits multi-selection (useful for classes export)
+    my $ClassIDMult         = $Param{ClassSelected} ? $Param{ClassSelected}->{ID} : $ParamObject->GetParam( Param => 'ClassID' );
+    my $ClassOptionMultStrg = $LayoutObject->BuildSelection(
+        Data         => $Param{ClassList},
+        Name         => 'ExportClassID',
+        SelectedID   => $ClassIDMult,
+        Translation  => 0,
+        Class        => 'Modernize Validate_Required',
+        Multiple     => 1,
+    );
+
     # this will be passed to the Overview block
     my %BlockData = (
         RoleOptionStrg  => $RoleOptionStrg,
         ClassOptionStrg => $ClassOptionStrg,
+        ClassOptionMultStrg => $ClassOptionMultStrg,
+        ExampleClassList => $Param{Original}->{ExampleClassList},
     );
 
     # there might be additional data for the Overview block
@@ -700,6 +867,164 @@ sub _ShowSidebar {
     }
 
     return 1;
+}
+
+sub _ClassImport {
+    my ( $Self, %Param ) = @_;
+
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # list of configitem classes
+    my %ClassLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        ) // {}
+    };
+
+    my $Error = sub {
+        return(
+            Success => 0,
+            Message => $_[0] || "",
+            Comment => $_[1] || "",
+        );
+    };
+
+    my $DefinitionYAML = $Param{Content};
+
+    my $DefinitionRaw = $YAMLObject->Load(
+        Data => $DefinitionYAML,
+    );
+
+    return $Error->('Definition is no valid YAML hash.') unless IsHashRefWithData($DefinitionRaw);
+
+    my $ClassName = delete $DefinitionRaw->{ClassName};
+
+    return $Error->('Need attribute "ClassName" to determine the name of the new class.') if !$ClassName;
+    return $Error->( 'Class ' . $ClassName . ' already exists.' )                         if $ClassLookup{$ClassName};
+
+    for my $Key (qw/Pages Sections DynamicFields/) {
+        return $Error->( 'Need ' . $Key . ' in Definition.' ) if !$DefinitionRaw->{$Key};
+    }
+
+    my $DynamicFields = delete $DefinitionRaw->{DynamicFields};
+
+    my $FinalDefinition = $YAMLObject->Dump(
+        Data => $DefinitionRaw,
+    );
+
+    return $Error->('Error recreating the definition yaml.') unless $FinalDefinition;
+
+    my %DynamicFieldLookup = reverse %{
+        $DynamicFieldObject->DynamicFieldList(
+            Valid      => 0,
+            ResultType => 'HASH',
+            )
+            || {}
+    };
+
+    my %SetDFs;
+    for my $Field ( keys $DynamicFields->%* ) {
+        if ( $DynamicFields->{$Field}{FieldType} eq 'Set' ) {
+            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields->{$Field}{Config}{Include}->@*;
+
+            return $Error->( 'Erroneous configuration of Set ' . $Field . '.' ) if !%SetFields;
+
+            %SetDFs = (
+                %SetDFs,
+                %SetFields,
+            );
+        }
+    }
+
+    my %AllFields = ( $DynamicFields->%*, %SetDFs );
+    my %Namespaces;
+    for my $Field ( keys %AllFields ) {
+        if ( $DynamicFieldLookup{$Field} ) {
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Field,
+            );
+
+            if ( $DynamicField->{FieldType} ne $AllFields{$Field}{FieldType} || $DynamicField->{ObjectType} ne 'ITSMConfigItem' ) {
+                return $Error->("DynamicField $Field exists but does not have the required Object- and/or FieldType.");
+            }
+
+            if ( $DynamicField->{MultiValue} xor $AllFields{$Field}{MultiValue} ) {
+                return $Error->("DynamicField $Field exists but does not match the multivalue setting.");
+            }
+        }
+
+        if ( $Field !~ m{ \A [a-zA-Z\d\-]+ \z }xms ) {
+            return $Error->("Invalid DynamicField name '$Field'.");
+        }
+
+        if ( $Field =~ /^([^-]+)-/ ) {
+            $Namespaces{$1} = 1;
+        }
+    }
+
+#    $Self->Print("<yellow>Please confirm the creation of the new config item class</yellow> $ClassName <yellow>using the following dynamic fields</yellow>\n");
+#
+#    for my $Field ( sort keys $DynamicFields->%* ) {
+#        my $Status = $DynamicFieldLookup{$Field} ? " <green>(use existing)</green>\n" : " <yellow>(create)</yellow>";
+#        $Self->Print( $Field . $Status . "\n" );
+#    }
+#
+#    $Self->Print("\n<yellow>Please confirm by typing 'y'es</yellow>\n\t");
+#
+#    return $Self->ExitCodeOk() if <STDIN> !~ /^ye?s?$/i;
+
+    my $ClassID = $GeneralCatalogObject->ItemAdd(
+        Class   => 'ITSM::ConfigItem::Class',
+        Name    => $ClassName,
+        ValidID => 1,
+        UserID  => $Self->{UserID},
+    );
+
+    return $Error->( 'Could not add class ' . $ClassName . '.' ) if !$ClassID;
+
+    my $Order = scalar( keys %DynamicFieldLookup );
+
+    # create dynamic fields
+    FIELD:
+    for my $Field ( keys %SetDFs, keys $DynamicFields->%* ) {
+        next FIELD if $DynamicFieldLookup{$Field};
+
+        my %SetConfig;
+        if ( $AllFields{$Field}{FieldType} eq 'Set' ) {
+            my @Included = map { { DF => $_->{DF} } } $AllFields{$Field}{Config}{Include}->@*;
+            %SetConfig = (
+                Config => {
+                    $AllFields{$Field}{Config}->%*,
+                    Include => \@Included,
+                },
+            );
+        }
+
+        $AllFields{$Field}{ID} = $DynamicFieldObject->DynamicFieldAdd(
+            $AllFields{$Field}->%*,
+            %SetConfig,
+            FieldOrder => ++$Order,
+            ObjectType => 'ITSMConfigItem',
+            Reorder    => 0,
+            ValidID    => 1,
+            UserID     => $Self->{UserID},
+        );
+
+        return $Error->( 'Could not add dynamic field ' . $Field . '.' ) if !$AllFields{$Field}{ID};
+    }
+
+    my $Return = $ConfigItemObject->DefinitionAdd(
+        ClassID    => $ClassID,
+        Definition => $FinalDefinition,
+        UserID     => $Self->{UserID},
+    );
+
+    return $Error->('Could not store definition.') unless $Return->{Success};
+
+    return ( Success => 1 );
 }
 
 1;

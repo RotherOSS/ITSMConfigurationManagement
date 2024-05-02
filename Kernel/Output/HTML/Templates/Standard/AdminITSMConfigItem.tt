@@ -91,6 +91,39 @@
                             </button>
                         </form>
                     </li>
+
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="get">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="ClassExport"/>
+
+                            <div>[% Data.ClassOptionMultStrg %]</div>
+                            <div id="ClassIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="ClassIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+
+                            <button class="Primary CallForAction Fullsize Center" type="submit" id="Export" value="Export">
+                                <span><i class="fa fa-download"></i>
+                                    Export Classes
+                                </span>
+                            </button>
+
+                            <!--button class="Primary CallForAction" type="submit" id="Export" value="Export">
+                                <span>Export</span>
+                            </button-->
+
+                            <!--a href="/otobo/index.pl?Action=AdminDynamicFieldImportExport;Subaction=Export" id="DynamicFieldExport" class="CallForAction Fullsize Center">
+                                <span><i class="fa fa-download"></i>
+                                    Export Classes
+                                </span>
+                            </a-->                            
+                            <!--button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Add") | html %]">
+                                <span>[% Translate("Export classes") | html %]</span>
+                            </button-->
+
+                        </form>
+                    </li>
+
+
 [% RenderBlockStart("ActionOverview") %]
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center">
@@ -100,6 +133,37 @@
                 </ul>
             </div>
         </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Ready2Import Classes") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Here you can import Ready2Import classes showcasing our most usual config items. Please note that some additional configuration may be required.") | html %]
+                </p>
+                <ul class="ActionList SpacingTop">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="ClassImport"/>
+                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                            [% Data.ExampleClassList %]
+                            <div id="ExampleClassError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="ExampleClassServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <fieldset class="SpacingTop" hidden>
+                                <input type="checkbox" id="OverwriteExistingEntitiesExample" name="OverwriteExistingEntities" value="1" checked hidden>
+                                <label for="OverwriteExistingEntitiesExample" hidden>[% Translate("Overwrite existing entities") | html %]</label>
+                            </fieldset>
+                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt class") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import Ready2Adopt class") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <div class="ContentColumn">
@@ -308,23 +372,7 @@
 
                         <label for="Definition">[% Translate("Definition") | html %]: </label>
                         <div class="Field">
-                            <div class="CodeMirrorContainer">
-                                <div id="CMToolbarContainer" class="CMToolbarContainer Hidden">
-                                    <div id="CMToolbarIcons" class="CMToolbarIcons">
-                                        <div title="[% Translate("Auto Indent Code") | html %]" class="CMIndent" onclick="Core.UI.CodeMirrorEditor.IndentCode();"></div>
-                                        <div title="[% Translate("Comment/Uncomment Code") | html %]" class="CMComment" onclick="Core.UI.CodeMirrorEditor.ToogleComment();"></div>
-                                        <div title="[% Translate("Search") | html %]" class="CMSearch" onclick="Core.UI.CodeMirrorEditor.Search();"></div>
-                                        <div title="[% Translate("Search & Replace") | html %]" class="CMSearchReplace" onclick="Core.UI.CodeMirrorEditor.SearchReplace();"></div>
-                                        <div title="[% Translate("Select All") | html %]" class="CMSelectAll" onclick="Core.UI.CodeMirrorEditor.SelectAll();"></div>
-                                        <div title="[% Translate("Full Screen") | html %]" class="CMMaximize" onclick="Core.UI.CodeMirrorEditor.ToogleFullScreen('Maximize');"></div>
-                                    </div>
-                                </div>
-
-                                <textarea name="Definition" id="Definition" class=" CodeMirrorEditor [% IF Data.Error %][% Data.ErrorClasses %][% END %]" rows="[% Data.Rows | html %]" cols="80" wrap="off">[% Data.Definition | html %]</textarea>
-                            </div>
-                            <p class="FieldExplanation">
-                                [% Translate("The editing field allows you to use different functions like automatic formatting, window resize as well as tag- and bracket-completion.") | html %]
-                            </p>
+                            <textarea name="Definition" id="Definition" [% IF Data.Error %]class="[% Data.ErrorClasses %]"[% END %] rows="[% Data.Rows | html %]" cols="80" wrap="off">[% Data.Definition | html %]</textarea>
                         </div>
                         <div class="Clear"></div>
 
