@@ -123,7 +123,7 @@ sub GenerateHierarchyGraph {
                     Name         => $Element->{Name},
                     Contents     => $Element->{Contents},
                     ConfigItemID => $Element->{ID},
-                    ID           => "$Element->{ID}-$Level",
+                    ID           => "$Element->{ID}_S_$Level",    # separator _S_ indicates Source
                     SessionID    => $Param{SessionID}
                 }
             );
@@ -132,9 +132,9 @@ sub GenerateHierarchyGraph {
 
             $LinkDataSource .= $NextLevel
                 ?
-                "$Element->{LinkedTo}-$NextLevel,$Element->{ID}-$Level,$Element->{Link};"
+                "$Element->{LinkedTo}_S_$NextLevel,$Element->{ID}_S_$Level,$Element->{Link};"
                 :
-                "$Element->{LinkedTo},$Element->{ID}-$Level,$Element->{Link};";
+                "$Element->{LinkedTo},$Element->{ID}_S_$Level,$Element->{Link};";
         }
     }
 
@@ -182,7 +182,7 @@ sub GenerateHierarchyGraph {
                     Name         => $Element->{Name},
                     Contents     => $Element->{Contents},
                     ConfigItemID => $Element->{ID},
-                    ID           => "$Element->{ID}-$Level",
+                    ID           => "$Element->{ID}_T_$Level",    # separator indicates Target
                     SessionID    => $Param{SessionID}
                 }
             );
@@ -191,9 +191,9 @@ sub GenerateHierarchyGraph {
 
             $LinkDataTarget .= ( $Level ne '1' )
                 ?
-                "$Element->{ID}-$Level,$Element->{LinkedTo}-$PreviousLevel,$Element->{Link};"
+                "$Element->{ID}_T_$Level,$Element->{LinkedTo}_T_$PreviousLevel,$Element->{Link};"
                 :
-                "$Element->{ID}-$Level,$Element->{LinkedTo},$Element->{Link};";
+                "$Element->{ID}_T_$Level,$Element->{LinkedTo},$Element->{Link};";
         }
     }
 
