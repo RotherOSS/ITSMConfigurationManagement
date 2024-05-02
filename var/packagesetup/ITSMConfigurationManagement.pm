@@ -36,7 +36,6 @@ our @ObjectDependencies = (
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
@@ -311,7 +310,7 @@ sub _SetPreferences {
         $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
             ItemID => $Item->{ItemID},
             Key    => 'Functionality',
-            Value  => [$Map{$Name}],
+            Value  => [ $Map{$Name} ],
         );
     }
 
@@ -515,6 +514,7 @@ sub _AddConfigItemDefinitions {
 
     # This is needed to extract translatable words from the config item definitions.
     {
+        ## no critic qw(Variables::ProhibitUnusedVarsStricter)
         my @Translations = (
             Translatable('Vendor'),
             Translatable('Model'),
@@ -1446,7 +1446,6 @@ sub _DynamicFieldsDelete {
     # get necessary objects
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-    my $DynamicFieldValueObject   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
     my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
 
     # get all dynamic fields because we can't filter for field type in dynamic field list functions
@@ -1472,7 +1471,7 @@ sub _DynamicFieldsDelete {
             next DYNAMICFIELD;
         }
 
-        my $ValuesDeleteSuccess = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->AllValuesDelete(
+        my $ValuesDeleteSuccess = $DynamicFieldBackendObject->AllValuesDelete(
             DynamicFieldConfig => $DynamicFieldConfig,
             UserID             => 1,
         );

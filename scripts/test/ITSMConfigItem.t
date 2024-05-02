@@ -480,7 +480,6 @@ for ( 1 .. 100 ) {
 my $ClassList = $GeneralCatalogObject->ItemList(
     Class => 'ITSM::ConfigItem::Class',
 );
-my %ClassListReverse = reverse %{$ClassList};
 
 # get deployment state list
 my $DeplStateList = $GeneralCatalogObject->ItemList(
