@@ -1256,8 +1256,8 @@ sub DefinitionSync {
 Import config item class including dynamic fields and namespaces, based on class definition
 
     my $Success = $ConfigItemObject->ClassImport(
-        DefinitionRaw => $DefinitionRaw,
-        ClassExists   => "(ERROR|IGNORE|UPDATE)"   # (optional) how to handle import of already existing classes, default ERROR
+        Content     => $Content,
+        ClassExists => "(ERROR|IGNORE|UPDATE)"   # (optional) how to handle import of already existing classes, default ERROR
     );
 
 =cut
@@ -1274,7 +1274,7 @@ sub ClassImport {
     my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
     # expect array ref of definitions
-    my $DefinitionList = $Param{DefinitionList};
+    my $DefinitionList = $Param{Content};
     if ( !IsArrayRefWithData($DefinitionList) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',

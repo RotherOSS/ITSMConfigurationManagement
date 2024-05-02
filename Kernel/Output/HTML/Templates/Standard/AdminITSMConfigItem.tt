@@ -115,7 +115,7 @@
                                 <span><i class="fa fa-download"></i>
                                     Export Classes
                                 </span>
-                            </a-->                            
+                            </a-->
                             <!--button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Add") | html %]">
                                 <span>[% Translate("Export classes") | html %]</span>
                             </button-->
@@ -151,9 +151,9 @@
                             [% Data.ExampleClassList %]
                             <div id="ExampleClassError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="ExampleClassServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <fieldset class="SpacingTop" hidden>
-                                <input type="checkbox" id="OverwriteExistingEntitiesExample" name="OverwriteExistingEntities" value="1" checked hidden>
-                                <label for="OverwriteExistingEntitiesExample" hidden>[% Translate("Overwrite existing entities") | html %]</label>
+                            <fieldset class="SpacingTop">
+                                <input type="checkbox" id="OverwriteExistingEntitiesExample" name="OverwriteExistingEntities" value="1" checked>
+                                <label for="OverwriteExistingEntitiesExample">[% Translate("Overwrite existing entities") | html %]</label>
                             </fieldset>
                             <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt class") | html %]">
                                 <span><i class="fa fa-upload"></i>[% Translate("Import Ready2Adopt class") | html %]</span>
