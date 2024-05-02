@@ -29,9 +29,8 @@
 </ul>
 [% RenderBlockEnd("DocumentActionRow") %]
 
-<div id="OverviewContainer">
 [% RenderBlockStart("DocumentContent") %]
-
+<div id="OverviewContainer">
 [% RenderBlockStart("Filters") %]
     <div id="OverviewControl" class="SideBarFilter">
 [% RenderBlockStart("SideBarFilter") %]
@@ -39,12 +38,12 @@
 [% RenderBlockStart("SideBarFilterItem") %]
 [% RenderBlockStart("SideBarFilterItemSelected") %]
             <li class="Active [% Data.CSS | html %]">
-                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
+                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]</a>
             </li>
 [% RenderBlockEnd("SideBarFilterItemSelected") %]
 [% RenderBlockStart("SideBarFilterItemSelectedNot") %]
             <li class="[% Data.CSS | html %]">
-                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]"><i class="ooofo ooofo-arrow_r"></i><h3>[% Translate(Data.Name) | html %]</h3></a>
+                <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %];Tag=[% Data.TagFilter | uri %]">[% Translate(Data.Name) | html %]</a>
             </li>
 [% RenderBlockEnd("SideBarFilterItemSelectedNot") %]
 [% RenderBlockStart("SideBarFilterItemSplit") %]
@@ -391,8 +390,8 @@
 [% RenderBlockEnd("OverviewTable") %]
         </form>
     </div>
-[% RenderBlockEnd("DocumentContent") %]
 </div>
+[% RenderBlockEnd("DocumentContent") %]
 
 [% RenderBlockStart("DocumentColumnFilterForm") %]
 <form title="[% Translate("Column Filters Form") | html %]" action="[% Env("CGIHandle") | html %]" method="post" name="ColumnFilterAttributes" id="ColumnFilterAttributes">

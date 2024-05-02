@@ -76,45 +76,34 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 }
 
 #OverviewContainer > #OverviewControl {
-    padding: 4px;
+    padding-right: 16px;
+    border-right: 1px solid var(--colBGMedium);
+    margin-right: 16px;
 }
 
 #OverviewContainer > #OverviewControl > ul > li {
     border-radius: 15px;
-}
-
-#OverviewContainer > #OverviewControl > ul > li.Active {
-    background-color : #e5e5eb;
-    /* background-color: var(--colBGMedium); */
-
-}
-
-#OverviewContainer > #OverviewControl > ul > li > a {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.4px;
-}
-
-#OverviewContainer > #OverviewControl > ul > li > a > i.ooofo {
-    float: right;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-right: 4px;
-    color: #7f809d;
-    /* color: var(--colTextLight); */
-}
-
-#OverviewContainer > #OverviewControl > ul > li > a > h3 {
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 8px;
-    color: #7f809d;
-    /* color: var(--colTextLight); */
 }
 
-#OverviewContainer > #OverviewControl > ul > li.Active > a > h3 {
-    color: #00023c;
-    /* color: var(--colTextDark); */
+#OverviewContainer > #OverviewControl > ul > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: var(--colTextLight);
+}
+
+#OverviewContainer > #OverviewControl > ul > li.Active {
+    background-color: var(--colBGMedium);
+}
+
+#OverviewContainer > #OverviewControl > ul > li.Active > a {
+    color: var(--colTextDark);
 }
 
 /*  All devices with a smaller resolution than the current OTOBO minimum solution */
