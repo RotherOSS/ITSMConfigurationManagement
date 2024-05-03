@@ -1113,6 +1113,24 @@
             <Data Key="change_time">current_timestamp</Data>
             <Data Key="change_by">1</Data>
         </Insert>
+        <Insert Table="general_catalog">
+            <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::ClassTags</Data>
+            <Data Key="name" Type="Quote" Translatable="1">Hardware</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="general_catalog">
+            <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::ClassTags</Data>
+            <Data Key="name" Type="Quote" Translatable="1">Location</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
         <Insert Table="configitem_history_type">
             <Data Key="name" Type="Quote">ConfigItemCreate</Data>
             <Data Key="valid_id">1</Data>
@@ -1297,6 +1315,24 @@
         <Insert Table="general_catalog" Version="11.0.19">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Role</Data>
             <Data Key="name" Type="Quote" Translatable="1">Role1</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="general_catalog" Version="11.0.19">
+            <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::ClassTags</Data>
+            <Data Key="name" Type="Quote" Translatable="1">Hardware</Data>
+            <Data Key="valid_id">1</Data>
+            <Data Key="create_time">current_timestamp</Data>
+            <Data Key="create_by">1</Data>
+            <Data Key="change_time">current_timestamp</Data>
+            <Data Key="change_by">1</Data>
+        </Insert>
+        <Insert Table="general_catalog" Version="11.0.19">
+            <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::ClassTags</Data>
+            <Data Key="name" Type="Quote" Translatable="1">Location</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
             <Data Key="create_by">1</Data>
