@@ -253,7 +253,12 @@ sub Run {
     # to store the NavBar filters
     my %Filters;
     my %TagFilters;
-    my $AllTags = $ConfigObject->Get('ITSMConfigItem::ClassTags');
+    my @AllTags = values %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::ClassTags',
+            Valid => 1,
+        )
+    };
 
     # build lookup hash tag to classes
     my %Tag2Class;
@@ -272,7 +277,7 @@ sub Run {
         next CLASSID if !$HasAccess;
 
         # check if tags are configured at all
-        if ( IsArrayRefWithData($AllTags) ) {
+        if (@AllTags) {
 
             # fetch class preferences to retrieve tags for class
             my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
@@ -286,7 +291,7 @@ sub Run {
                 for my $Tag ( sort $ClassPreferences{Tags}->@* ) {
 
                     # check if tag is valid
-                    next TAG unless grep { $_ eq $Tag } $AllTags->@*;
+                    next TAG unless grep { $_ eq $Tag } @AllTags;
 
                     $Tag2Class{$Tag} //= [];
                     push $Tag2Class{$Tag}->@*, $ClassList->{$ClassID};
