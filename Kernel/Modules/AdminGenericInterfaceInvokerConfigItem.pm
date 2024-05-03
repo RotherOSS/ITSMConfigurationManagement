@@ -16,9 +16,16 @@
 
 package Kernel::Modules::AdminGenericInterfaceInvokerConfigItem;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
 
@@ -27,10 +34,7 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    my $Self = {%Param};
-    bless( $Self, $Type );
-
-    return $Self;
+    return bless {%Param}, $Type;
 }
 
 sub Run {
@@ -41,7 +45,7 @@ sub Run {
     my $WebserviceID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'WebserviceID' );
     if ( !IsStringWithData($WebserviceID) ) {
         return $LayoutObject->ErrorScreen(
-            Message => Translatable('Need WebserviceID!'),
+            Message => Translatable( 'Need %s', 'WebserviceID' ),
         );
     }
 
