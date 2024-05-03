@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Modules/AdminACL.pm
+# $origin: otobo - 75b777cb07c9abc96dfdb45084c079a3ae9df98a - Kernel/Modules/AdminACL.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -787,7 +787,7 @@ sub _ShowEdit {
 # EO ITSMConfigurationManagement
     my $ConfigPrefix = $Param{ObjectType} eq 'ConfigItem' ? 'ITSMConfigItem' : '';
 
-    my $ACLKeysLevel1Match = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Match') || {};
+    my $ACLKeysLevel1Match = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel1Match' ) || {};
     $Param{ACLKeysLevel1Match} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel1Match,
         Name         => 'ItemAdd',
@@ -798,7 +798,7 @@ sub _ShowEdit {
         Translation  => 0,
     );
 
-    my $ACLKeysLevel1Change = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel1Change') || {};
+    my $ACLKeysLevel1Change = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel1Change' ) || {};
     $Param{ACLKeysLevel1Change} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel1Change,
         Name         => 'ItemAdd',
@@ -809,7 +809,7 @@ sub _ShowEdit {
         Translation  => 0,
     );
 
-    my $ACLKeysLevel2Possible = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::Possible') || {};
+    my $ACLKeysLevel2Possible = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel2::Possible' ) || {};
     $Param{ACLKeysLevel2Possible} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2Possible,
         Name         => 'ItemAdd',
@@ -819,7 +819,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-    my $ACLKeysLevel2PossibleAdd = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PossibleAdd') || {};
+    my $ACLKeysLevel2PossibleAdd = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel2::PossibleAdd' ) || {};
     $Param{ACLKeysLevel2PossibleAdd} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PossibleAdd,
         Name         => 'ItemAdd',
@@ -829,7 +829,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-    my $ACLKeysLevel2PossibleNot = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PossibleNot') || {};
+    my $ACLKeysLevel2PossibleNot = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel2::PossibleNot' ) || {};
     $Param{ACLKeysLevel2PossibleNot} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PossibleNot,
         Name         => 'ItemAdd',
@@ -839,7 +839,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-    my $ACLKeysLevel2Properties = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::Properties') || {};
+    my $ACLKeysLevel2Properties = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel2::Properties' ) || {};
     $Param{ACLKeysLevel2Properties} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2Properties,
         Name         => 'ItemAdd',
@@ -849,7 +849,7 @@ sub _ShowEdit {
         PossibleNone => 1,
     );
 
-    my $ACLKeysLevel2PropertiesDatabase = $ConfigObject->Get($ConfigPrefix . 'ACLKeysLevel2::PropertiesDatabase') || {};
+    my $ACLKeysLevel2PropertiesDatabase = $ConfigObject->Get( $ConfigPrefix . 'ACLKeysLevel2::PropertiesDatabase' ) || {};
     $Param{ACLKeysLevel2PropertiesDatabase} = $LayoutObject->BuildSelection(
         Data         => $ACLKeysLevel2PropertiesDatabase,
         Name         => 'ItemAdd',
