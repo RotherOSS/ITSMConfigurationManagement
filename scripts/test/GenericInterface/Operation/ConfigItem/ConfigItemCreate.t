@@ -1048,7 +1048,7 @@ my @Tests = (
 for my $Test (@Tests) {
     subtest $Test->{Name} => sub {
 
-        my $Todo = defined $Test->{Todo} ? todo( $Test->{Todo} ) : undef;
+        my $Todo = defined $Test->{Todo} ? todo( $Test->{Todo} ) : undef;    ## no critic qw(Variables::ProhibitUnusedVarsStricter)
 
         # Create local object.
         my $LocalObject = "Kernel::GenericInterface::Operation::ConfigItem::$Test->{Operation}"->new(

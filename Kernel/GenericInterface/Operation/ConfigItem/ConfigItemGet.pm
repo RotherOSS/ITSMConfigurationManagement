@@ -214,19 +214,13 @@ sub Run {
             );
         }
 
-        # get the ConfigItem entry
+        # get the latest version of ConfigItem entry
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
             UserID       => $UserID,
         );
 
-        # get latest version
-        my $Version = $ConfigItemObject->VersionGet(
-            ConfigItemID => $ConfigItemID,
-            UserID       => $UserID,
-        );
-
-        if ( !IsHashRefWithData($Version) ) {
+        if ( !IsHashRefWithData($ConfigItem) ) {
 
             $ErrorMessage = 'Could not get ConfigItem data'
                 . ' in Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet::Run()';
@@ -238,17 +232,17 @@ sub Run {
         }
 
         # remove unneeded items
-        delete $Version->{ClassID};
-        delete $Version->{CurDeplStateID};
-        delete $Version->{CurInciStateID};
-        delete $Version->{DeplStateID};
-        delete $Version->{InciStateID};
-        delete $Version->{XMLDefinitionID};
+        delete $ConfigItem->{ClassID};
+        delete $ConfigItem->{CurDeplStateID};
+        delete $ConfigItem->{CurInciStateID};
+        delete $ConfigItem->{DeplStateID};
+        delete $ConfigItem->{InciStateID};
+        delete $ConfigItem->{XMLDefinitionID};
 
-        my $Definition = delete $Version->{XMLDefinition};
+        my $Definition = delete $ConfigItem->{XMLDefinition};
 
         my $FormatedXMLData = $Self->InvertFormatXMLData(
-            XMLData => $Version->{XMLData}->[1]->{Version},
+            XMLData => $ConfigItem->{XMLData}->[1]->{ConfigItem},
         );
 
         my $ReplacedXMLData = $Self->InvertReplaceXMLData(
@@ -256,13 +250,13 @@ sub Run {
             Definition => $Definition,
         );
 
-        $Version->{XMLData} = $ReplacedXMLData;
+        $ConfigItem->{XMLData} = $ReplacedXMLData;
 
         # rename XMLData since SOAP transport complains about XML prefix on names
-        $Version->{CIXMLData} = delete $Version->{XMLData};
+        $ConfigItem->{CIXMLData} = delete $ConfigItem->{XMLData};
 
         # set ConfigItem entry data
-        my $ConfigItemBundle = $Version;
+        my $ConfigItemBundle = $ConfigItem;
 
         if ($Attachments) {
 
@@ -309,7 +303,6 @@ sub Run {
             ErrorCode    => '$Self->{OperationName}.NoConfigItemData',
             ErrorMessage => "$Self->{OperationName}: $ErrorMessage",
         );
-
     }
 
     # set ConfigItem data into return structure

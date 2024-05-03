@@ -66,7 +66,7 @@ my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $RandomID = $Helper->GetRandomID;
 
 # create test user
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+my ( undef, $TestUserID ) = $Helper->TestUserCreate(
     Groups => [ 'users', 'itsm-configitem' ],
 );
 
@@ -837,7 +837,8 @@ my $GeneralCatalogList = $GeneralCatalogObject->ItemList(
     Class => $GeneralCatalogClass,
 );
 ref_ok( $GeneralCatalogList, 'HASH', 'general catalog list is a hashref' );
-my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
+# TODO: reactivate test cases
+#my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 
 # define the test config items
 my @ConfigItemSetups;

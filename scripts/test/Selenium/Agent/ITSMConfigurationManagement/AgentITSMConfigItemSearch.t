@@ -53,7 +53,7 @@ $Selenium->RunTest(
 
         # Create ConfigItem numbers.
         my @ConfigItemNumbers;
-        for my $ConfigNumberCreate ( 1 .. 2 ) {
+        for ( 1 .. 2 ) {
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
                 Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
                 ClassID => $ConfigItemClassIDs[0],
@@ -252,7 +252,7 @@ $Selenium->RunTest(
 
         # Create ConfigItem numbers and add the new ConfigItems.
         @ConfigItemNumbers = ();
-        for my $ConfigNumberCreate ( 1 .. 35 ) {
+        for ( 1 .. 35 ) {
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
                 Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
                 ClassID => $ConfigItemClassIDs[0],

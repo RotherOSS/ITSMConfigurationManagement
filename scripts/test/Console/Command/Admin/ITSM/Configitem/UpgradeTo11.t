@@ -28,7 +28,8 @@ use Test2::V0;
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
-my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
+# TODO: test the command
+#my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
 
 # get helper object, database changes should be restored
 $Kernel::OM->ObjectParamAdd(
@@ -36,7 +37,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');    ## no critic qw(Variables::ProhibitUnusedVarsStricter)
 
 #my $ExitCode = $CommandObject->Execute;
 #is(

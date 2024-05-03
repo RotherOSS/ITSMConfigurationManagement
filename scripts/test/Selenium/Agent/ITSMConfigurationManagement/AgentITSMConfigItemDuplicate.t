@@ -18,6 +18,7 @@ use strict;
 use warnings;
 use utf8;
 
+use Test2::V0;
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
@@ -182,15 +183,12 @@ $Selenium->RunTest(
         );
 
         # Delete created test ConfigItems.
-        for my $DeleteConfigItem ( 1 .. 2 ) {
+        for ( 1 .. 2 ) {
             my $Success = $ConfigItemObject->ConfigItemDelete(
                 ConfigItemID => $ConfigItemID,
                 UserID       => 1,
             );
-            $Self->True(
-                $Success,
-                "ConfigItem is deleted - ID $ConfigItemID",
-            );
+            ok( $Success, "ConfigItem is deleted - ID $ConfigItemID" );
             $ConfigItemID++;
         }
     }

@@ -52,7 +52,7 @@ $Selenium->RunTest(
 
         # Create three test ConfigItems for 'Computer' ConfigItem class.
         my @ConfigItems;
-        for my $ITSMConfigItem ( 1 .. 3 ) {
+        for ( 1 .. 3 ) {
 
             # Create ConfigItem number.
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(

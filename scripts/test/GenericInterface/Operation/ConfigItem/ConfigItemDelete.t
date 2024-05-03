@@ -479,6 +479,7 @@ for my $ConfigItem (@ConfigItems) {
         XMLData => $ReplacedXMLData,
     );
 
+    # TODO: switch to ConfigItemUpdate() ???
     my $VersionID = $ConfigItemObject->VersionAdd(
         ConfigItemID => $ConfigItemID,
         Name         => $ConfigItem->{Name},
@@ -490,10 +491,7 @@ for my $ConfigItem (@ConfigItems) {
     );
 
     # sanity checks
-    $Self->True(
-        $ConfigItemID,
-        "Added ConfigItem $ConfigItemID",
-    );
+    ok( $VersionID, "Added version $VersionID" );
 
     my $VersionInfo = $ConfigItemObject->VersionGet(
         ConfigItemID => $ConfigItemID,
