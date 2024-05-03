@@ -66,7 +66,6 @@ sub Run {
     my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
-    my $DatabaseObject   = $Kernel::OM->Get('Kernel::System::DB');
 
     my @ExampleClasses = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
         Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/classes/examples',
