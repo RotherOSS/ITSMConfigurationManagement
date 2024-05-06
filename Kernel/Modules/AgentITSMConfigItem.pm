@@ -22,7 +22,7 @@ use warnings;
 use namespace::autoclean;
 
 # core modules
-use List::Util qw(none);
+use List::Util qw(any none);
 
 # CPAN modules
 
@@ -89,8 +89,8 @@ sub Run {
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # get filter from web request
-    my $Filter    = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
-    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' )    || '';
+    my $Filter         = $ParamObject->GetParam( Param => 'Filter' )   || 'All';
+    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' ) || 'Default';
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -241,7 +241,7 @@ sub Run {
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # define position of the filter in the frontend
-    my $PrioCounter    = 1000;
+    my $PrioCounter         = 1000;
     my $CategoryPrioCounter = 1000;
 
     # to store the total number of config items in all classes that the user has access
@@ -260,6 +260,17 @@ sub Run {
         )
     };
 
+    # sort categories with default first, if present
+    my @SortedCategories;
+    for my $Category ( sort @AllCategories ) {
+        if ( $Category eq 'Default' ) {
+            unshift @SortedCategories, $Category;
+        }
+        else {
+            push @SortedCategories, $Category;
+        }
+    }
+
     # build lookup hash categories to classes
     my %Category2Class;
 
@@ -277,7 +288,7 @@ sub Run {
         next CLASSID if !$HasAccess;
 
         # check if categories are configured at all
-        if (@AllCategories) {
+        if (@SortedCategories) {
 
             # fetch class preferences to retrieve categories for class
             my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
@@ -291,7 +302,7 @@ sub Run {
                 for my $Category ( sort $ClassPreferences{Categories}->@* ) {
 
                     # check if category is valid
-                    next CATEGORY unless grep { $_ eq $Category } @AllCategories;
+                    next CATEGORY unless grep { $_ eq $Category } @SortedCategories;
 
                     $Category2Class{$Category} //= [];
                     push $Category2Class{$Category}->@*, $ClassList->{$ClassID};
@@ -312,6 +323,9 @@ sub Run {
             else {
                 next CLASSID;
             }
+        }
+        else {
+            next CLASSID;
         }
 
         # insert this class to be passed as search parameter for filter 'All'
@@ -451,8 +465,8 @@ sub Run {
     }
 
     # TODO Maybe there is a more elegant way to do this?
-    $Self->{Filter}     = $Filter;
-    $Self->{Filters}    = \%Filters;
+    $Self->{Filter}          = $Filter;
+    $Self->{Filters}         = \%Filters;
     $Self->{CategoryFilters} = \%CategoryFilters;
     $Self->{CategoryFilter}  = $CategoryFilter;
 
@@ -567,9 +581,9 @@ sub Run {
     # show config items
     $Output .= $LayoutObject->ITSMConfigItemListShow(
         Filter                => $Filter,
-        CategoryFilter             => $CategoryFilter,
+        CategoryFilter        => $CategoryFilter,
         Filters               => \%ClassFilter,
-        CategoryFilters            => \%NavBarFilter,
+        CategoryFilters       => \%NavBarFilter,
         ConfigItemIDs         => \@ViewableConfigItems,
         OriginalConfigItemIDs => \@OriginalViewableConfigItems,
         GetColumnFilter       => \%GetColumnFilter,
