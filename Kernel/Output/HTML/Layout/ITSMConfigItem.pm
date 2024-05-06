@@ -663,12 +663,12 @@ sub ITSMConfigItemListShow {
         $Object->Run(
             %Param,
             CategoryClasses => $Env->{CategoryClasses},
-            Config     => $Backends->{$View},
-            Limit      => $Limit,
-            StartHit   => $StartHit,
-            PageShown  => $PageShown,
-            AllHits    => $Param{Total}  || 0,
-            Output     => $Param{Output} || '',
+            Config          => $Backends->{$View},
+            Limit           => $Limit,
+            StartHit        => $StartHit,
+            PageShown       => $PageShown,
+            AllHits         => $Param{Total}  || 0,
+            Output          => $Param{Output} || '',
         );
 }
 

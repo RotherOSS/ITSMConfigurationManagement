@@ -582,6 +582,22 @@ sub _MigrateDefinitions {
                 $AllSuccess = 0;
             }
         }
+
+        # update class preferences
+        my %PreferencesDefaults = (
+            Permissions         => ['itsm-configitem'],
+            NumberModule        => ['AutoIncrement'],
+            VersionStringModule => ['Incremental'],
+            VersionTrigger      => [ 'Name', 'DeplStateID', 'InciStateID' ],
+            Categories          => ['Default'],
+        );
+        for my $Preference ( keys %PreferencesDefaults ) {
+            my $Success = $Self->{GeneralCatalogObject}->GeneralCatalogPreferencesSet(
+                ItemID => $ClassID,
+                Key    => $Preference,
+                Value  => $PreferencesDefaults{$Preference},
+            );
+        }
     }
 
     return unless $AllSuccess;
