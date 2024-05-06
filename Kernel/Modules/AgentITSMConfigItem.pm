@@ -90,7 +90,7 @@ sub Run {
 
     # get filter from web request
     my $Filter    = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
-    my $TagFilter = $ParamObject->GetParam( Param => 'Tag' )    || '';
+    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' )    || '';
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -242,7 +242,7 @@ sub Run {
 
     # define position of the filter in the frontend
     my $PrioCounter    = 1000;
-    my $TagPrioCounter = 1000;
+    my $CategoryPrioCounter = 1000;
 
     # to store the total number of config items in all classes that the user has access
     my $TotalCount;
@@ -252,16 +252,16 @@ sub Run {
 
     # to store the NavBar filters
     my %Filters;
-    my %TagFilters;
-    my @AllTags = values %{
+    my %CategoryFilters;
+    my @AllCategories = values %{
         $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::ClassTags',
+            Class => 'ITSM::ConfigItem::Class::Category',
             Valid => 1,
         )
     };
 
-    # build lookup hash tag to classes
-    my %Tag2Class;
+    # build lookup hash categories to classes
+    my %Category2Class;
 
     CLASSID:
     for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
@@ -276,37 +276,37 @@ sub Run {
 
         next CLASSID if !$HasAccess;
 
-        # check if tags are configured at all
-        if (@AllTags) {
+        # check if categories are configured at all
+        if (@AllCategories) {
 
-            # fetch class preferences to retrieve tags for class
+            # fetch class preferences to retrieve categories for class
             my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
                 ItemID => $ClassID,
             );
 
-            # build tag-relevant structures
-            if ( IsArrayRefWithData( $ClassPreferences{Tags} ) ) {
+            # build category-relevant structures
+            if ( IsArrayRefWithData( $ClassPreferences{Categories} ) ) {
 
-                TAG:
-                for my $Tag ( sort $ClassPreferences{Tags}->@* ) {
+                CATEGORY:
+                for my $Category ( sort $ClassPreferences{Categories}->@* ) {
 
-                    # check if tag is valid
-                    next TAG unless grep { $_ eq $Tag } @AllTags;
+                    # check if category is valid
+                    next CATEGORY unless grep { $_ eq $Category } @AllCategories;
 
-                    $Tag2Class{$Tag} //= [];
-                    push $Tag2Class{$Tag}->@*, $ClassList->{$ClassID};
+                    $Category2Class{$Category} //= [];
+                    push $Category2Class{$Category}->@*, $ClassList->{$ClassID};
 
-                    if ( !$TagFilters{$Tag} ) {
-                        $TagPrioCounter++;
-                        $TagFilters{$Tag} = {
-                            Name => $Tag,
-                            Prio => $TagPrioCounter,
+                    if ( !$CategoryFilters{$Category} ) {
+                        $CategoryPrioCounter++;
+                        $CategoryFilters{$Category} = {
+                            Name => $Category,
+                            Prio => $CategoryPrioCounter,
                         };
                     }
                 }
 
-                if ( $TagFilter && $TagFilter ne 'All' ) {
-                    next CLASSID unless grep { $_ eq $TagFilter } $ClassPreferences{Tags}->@*;
+                if ( $CategoryFilter && $CategoryFilter ne 'All' ) {
+                    next CLASSID unless grep { $_ eq $CategoryFilter } $ClassPreferences{Categories}->@*;
                 }
             }
             else {
@@ -453,8 +453,8 @@ sub Run {
     # TODO Maybe there is a more elegant way to do this?
     $Self->{Filter}     = $Filter;
     $Self->{Filters}    = \%Filters;
-    $Self->{TagFilters} = \%TagFilters;
-    $Self->{TagFilter}  = $TagFilter;
+    $Self->{CategoryFilters} = \%CategoryFilters;
+    $Self->{CategoryFilter}  = $CategoryFilter;
 
     if ( $Self->{Subaction} eq 'AJAXFilterUpdate' ) {
 
@@ -518,11 +518,11 @@ sub Run {
             %{ $Filters{$FilterColumn} },
         };
     }
-    for my $FilterColumn ( sort keys %TagFilters ) {
+    for my $FilterColumn ( sort keys %CategoryFilters ) {
 
-        $NavBarFilter{ $TagFilters{$FilterColumn}->{Prio} } = {
-            TagFilter => $FilterColumn,
-            %{ $TagFilters{$FilterColumn} },
+        $NavBarFilter{ $CategoryFilters{$FilterColumn}->{Prio} } = {
+            CategoryFilter => $FilterColumn,
+            %{ $CategoryFilters{$FilterColumn} },
         };
     }
 
@@ -567,9 +567,9 @@ sub Run {
     # show config items
     $Output .= $LayoutObject->ITSMConfigItemListShow(
         Filter                => $Filter,
-        TagFilter             => $TagFilter,
+        CategoryFilter             => $CategoryFilter,
         Filters               => \%ClassFilter,
-        TagFilters            => \%NavBarFilter,
+        CategoryFilters            => \%NavBarFilter,
         ConfigItemIDs         => \@ViewableConfigItems,
         OriginalConfigItemIDs => \@OriginalViewableConfigItems,
         GetColumnFilter       => \%GetColumnFilter,

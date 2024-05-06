@@ -480,10 +480,10 @@ sub ITSMConfigItemListShow {
     }
 
     # filter selection
-    if ( $Param{TagFilters} ) {
+    if ( $Param{CategoryFilters} ) {
         my @NavBarFilters;
-        for my $Prio ( sort keys %{ $Param{TagFilters} } ) {
-            push @NavBarFilters, $Param{TagFilters}->{$Prio};
+        for my $Prio ( sort keys %{ $Param{CategoryFilters} } ) {
+            push @NavBarFilters, $Param{CategoryFilters}->{$Prio};
         }
         $Self->Block(
             Name => 'OverviewNavBarFilter',
@@ -492,24 +492,24 @@ sub ITSMConfigItemListShow {
             },
         );
         my $Count = 0;
-        for my $TagFilter (@NavBarFilters) {
+        for my $CategoryFilter (@NavBarFilters) {
             $Count++;
             if ( $Count == scalar @NavBarFilters ) {
-                $TagFilter->{CSS} = 'Last';
+                $CategoryFilter->{CSS} = 'Last';
             }
             $Self->Block(
                 Name => 'OverviewNavBarFilterItem',
                 Data => {
                     %Param,
-                    %{$TagFilter},
+                    %{$CategoryFilter},
                 },
             );
-            if ( $TagFilter->{TagFilter} eq $Param{TagFilter} ) {
+            if ( $CategoryFilter->{CategoryFilter} eq $Param{CategoryFilter} ) {
                 $Self->Block(
                     Name => 'OverviewNavBarFilterItemSelected',
                     Data => {
                         %Param,
-                        %{$TagFilter},
+                        %{$CategoryFilter},
                     },
                 );
             }
@@ -518,7 +518,7 @@ sub ITSMConfigItemListShow {
                     Name => 'OverviewNavBarFilterItemSelectedNot',
                     Data => {
                         %Param,
-                        %{$TagFilter},
+                        %{$CategoryFilter},
                     },
                 );
             }
@@ -662,7 +662,7 @@ sub ITSMConfigItemListShow {
         $NavBarHTML,
         $Object->Run(
             %Param,
-            TagClasses => $Env->{TagClasses},
+            CategoryClasses => $Env->{CategoryClasses},
             Config     => $Backends->{$View},
             Limit      => $Limit,
             StartHit   => $StartHit,
