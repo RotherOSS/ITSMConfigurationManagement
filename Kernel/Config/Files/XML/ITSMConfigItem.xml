@@ -1091,7 +1091,7 @@
                 </Item>
                 <Item Key="PrefKey">NameModule</Item>
                 <Item Key="Block">NameModule</Item>
-                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">0</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1111,6 +1111,7 @@
                 </Item>
                 <Item Key="PrefKey">NumberModule</Item>
                 <Item Key="Block">NumberModule</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1130,7 +1131,7 @@
                 </Item>
                 <!-- TODO rename DataSelected properly to DataSelectedID, as it is passed as SelectedID subsequently -->
                 <Item Key="DataSelected">Incremental</Item>
-                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">0</Item>
                 <Item Key="PrefKey">VersionStringModule</Item>
                 <Item Key="Block">VersionStringModule</Item>
             </Hash>
@@ -1156,7 +1157,7 @@
                 </Item>
                 <Item Key="PrefKey">VersionTrigger</Item>
                 <Item Key="Block">ConfigItemVersionTrigger</Item>
-                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">0</Item>
                 <Item Key="Multiple" ValueType="Checkbox">1</Item>
             </Hash>
         </Value>
@@ -1178,6 +1179,7 @@
                 <Item Key="PrefKey">Categories</Item>
                 <Item Key="Block">ConfigItemClassCategories</Item>
                 <Item Key="Multiple" ValueType="Checkbox">1</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">1</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1594,7 +1596,7 @@
                 <Item Key="Block">Permission</Item>
                 <Item Key="Class">ITSM::ConfigItem::Class</Item>
                 <Item Key="PrefKey">Permission</Item>
-                <Item Key="PossibleNone" ValueType="Checkbox">1</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">0</Item>
             </Hash>
         </Value>
     </Setting>
