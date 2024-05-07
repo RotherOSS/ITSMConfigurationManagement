@@ -1986,8 +1986,11 @@ sub _FindInciConfigItems {
             UserID       => 1,
         );
 
-        # remember the config item ids
-        push @ConfigItemIDs, map { $_->{ConfigItemID} } $LinkedConfigItems->@*;
+        # remember only the linked config item ids, ignore the config item versions
+        push @ConfigItemIDs,
+            grep {defined}
+            map  { $_->{ConfigItemID} }
+            $LinkedConfigItems->@*;
     }
 
     # Loop over the requested config item and the directly linked config items
