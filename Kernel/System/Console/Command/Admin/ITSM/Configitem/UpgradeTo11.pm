@@ -588,7 +588,6 @@ sub _MigrateDefinitions {
             Permissions         => ['itsm-configitem'],
             NumberModule        => ['AutoIncrement'],
             VersionStringModule => ['Incremental'],
-            VersionTrigger      => [ 'Name', 'DeplStateID', 'InciStateID' ],
             Categories          => ['Default'],
         );
         for my $Preference ( keys %PreferencesDefaults ) {
