@@ -395,15 +395,18 @@ sub LinkAddPost {
         }
     }
 
-    # do not note update configitem_link table for temporary links
-    # do not note recalculate the current in incident state for temporary links
-    # do not trigger event for temporary links
+    # do not update configitem_link table for temporary links
+    # do not recalculate the current incident state for temporary links
+    # do not emit the LinkAdd event for temporary links
     return 1 if $Param{State} eq 'Temporary';
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # sync the new link to the configitem_link table.
-    # This is only needed for one direction.
+    # Sync the new link to the configitem_link table.
+    # This is only needed for links between config items.
+    # When a link is added then LinkAddPost() is called twice. But only
+    # one of the calls has to be considered here, as only one entry in 'configitem_link'
+    # is needed.
     if ( $Param{TargetKey} && ( $Param{TargetObject} // '' ) eq 'ITSMConfigItem' ) {
         $ConfigItemObject->AddConfigItemLink(
             Type               => $Param{Type},
@@ -413,7 +416,7 @@ sub LinkAddPost {
     }
 
     # Recalculate the current incident state of this CI.
-    # This is possible as the table configitem_link is already updated.
+    # This is possible as the table configitem_link already has been updated.
     $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID => $Param{Key},
     );
