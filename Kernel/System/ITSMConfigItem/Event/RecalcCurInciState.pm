@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::Event::LinkSync;
+package Kernel::System::ITSMConfigItem::Event::RecalcCurInciState;
 
 use v5.24;
 use strict;
@@ -35,7 +35,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::LinkSync - Event handler that maintains a lookup table for links from Reference dynamic fields
+Kernel::System::ITSMConfigItem::Event::RecalcCurInciState - Event handler that recalculates incident states from Reference dynamic fields
 
 =head1 PUBLIC INTERFACE
 
@@ -46,7 +46,7 @@ create an object
     use Kernel::System::ObjectManager;
 
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $HandlerObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Event::LinkSync');
+    my $HandlerObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem::Event::RecalcCurInciState');
 
 =cut
 
@@ -64,7 +64,7 @@ This method handles the event.
     $HandlerObject->Run(
         Config      => {
             Event => "^ConfigItemDynamicFieldUpdate_",
-            Module => "Kernel::System::ITSMConfigItem::Event::LinkSync",
+            Module => "Kernel::System::ITSMConfigItem::Event::RecalcCurInciState",
             Transaction => 1,
         },
         Data        => {
@@ -112,24 +112,57 @@ sub Run {
 
     return 1 unless $DynamicFieldConfig;
     return 1 unless $DynamicFieldConfig->{FieldType};
-    return 1 unless $DynamicFieldConfig->{FieldType} =~ /^ConfigItem/;
+    return 1 unless $DynamicFieldConfig->{FieldType} eq 'ConfigItem';
 
     my $DFDetails = $DynamicFieldConfig->{Config};
 
-    # This event module care only about references to other config items or config item versions
+    # This event module care only about references to other config items
     return 1 unless $DFDetails;
     return 1 unless $DFDetails->{ReferencedObjectType};
-    return 1 unless $DFDetails->{ReferencedObjectType} =~ m/^ITSMConfigItem/;
+    return 1 unless $DFDetails->{ReferencedObjectType} eq 'ITSMConfigItem';
 
-    # actually update configitem_link
-    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->SyncLinkTable(
-        DynamicFieldConfig      => $DynamicFieldConfig,
-        ConfigItemID            => $Param{Data}->{ConfigItemID},
-        ConfigItemLastVersionID => $Param{Data}->{ConfigItemLastVersionID},
-        ConfigItemVersionID     => $Param{Data}->{ConfigItemVersionID},
-        OldValue                => $Param{Data}->{OldValue},
-        Value                   => $Param{Data}->{Value},
+    # find the relevant config items and call CurInciStateRecalc()
+
+    # sometimes only the setting of the most recent version is relevant
+    # The default is AppliesToAllVersions
+    my $AllVersions = 0;
+    $DFDetails->{AppliesToAllVersions} //= '';
+    if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
+        return 1 unless $Param{ConfigItemVersionID} == $Param{ConfigItemLastVersionID};
+
+        $AllVersions = 1;
+    }
+
+    # The incident state is recalculated only when both sides are config items, not config item versions
+    return 1 unless $AllVersions;
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    my %NewConfigItemIncidentState;
+    my %ScannedConfigItemIDs;
+
+    # recalculate the current incident state of the CI that contains the Reference dynamic field
+    $ConfigItemObject->CurInciStateRecalc(
+        ConfigItemID               => $Param{Data}->{ConfigItemID},
+        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
+        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
     );
+
+    # recalculate incident state of previously linked CI
+    $ConfigItemObject->CurInciStateRecalc(
+        ConfigItemID               => $Param{Data}->{OldValue},
+        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
+        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
+    );
+
+    # recalculate incident state of newly linked CI
+    $ConfigItemObject->CurInciStateRecalc(
+        ConfigItemID               => $Param{Data}->{Value},
+        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
+        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
+    );
+
+    return 1;
 }
 
 1;

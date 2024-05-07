@@ -966,6 +966,17 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###500-RecalcCurInciState" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module updates the current incident state.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::RecalcCurInciState</Item>
+                <Item Key="Event">^ConfigItemDynamicFieldUpdate_</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::EventModulePost###4000-ScriptDynamicFields" Required="0" Valid="1">
         <Description Translatable="1">Evaluate all script fields.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
