@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otobo_config version="2.0" init="Config">
+
+    <!-- registration of agent and customer frontend modules -->
     <Setting Name="Frontend::Module###AdminITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -725,6 +727,8 @@
             </Array>
         </Value>
     </Setting>
+
+    <!-- menu modules -->
     <Setting Name="ITSMConfigItem::Frontend::MenuModule###000-Back" Required="0" Valid="1">
         <Description Translatable="1">Shows a link in the menu to go back in the configuration item zoom view of the agent interface.</Description>
         <Navigation>Frontend::Agent::ITSMConfigItem::MenuModule</Navigation>
@@ -842,15 +846,8 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem" Required="0" Valid="1">
-        <Description Translatable="1">Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.</Description>
-        <Navigation>Frontend::Agent::LinkObject</Navigation>
-        <Value>
-            <Array>
-                <Item>AgentITSMConfigItemZoom</Item>
-            </Array>
-        </Value>
-    </Setting>
+
+    <!-- settings for specific config item classes -->
     <Setting Name="ITSMConfigItem::CINameRegex" Required="0" Valid="0">
         <Description Translatable="1">Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
@@ -861,6 +858,17 @@
                 <Item Key="Hardware::CINameRegex">.*\d\d$</Item>
                 <Item Key="Hardware::CINameRegexErrorMessage">A hardware name must end with two digits!</Item>
             </Hash>
+        </Value>
+    </Setting>
+
+    <!-- settings for the LinkObject feature -->
+    <Setting Name="LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.</Description>
+        <Navigation>Frontend::Agent::LinkObject</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentITSMConfigItemZoom</Item>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="LinkObject::DefaultSubObject###ITSMConfigItem" Required="1" Valid="1">
@@ -900,6 +908,8 @@
             </Array>
         </Value>
     </Setting>
+
+    <!-- stats settings -->
     <Setting Name="Stats::DynamicObjectRegistration###ITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Module to generate ITSM config item statistics.</Description>
         <Navigation>Core::Stats</Navigation>
@@ -909,6 +919,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- Import/Export settings -->
     <Setting Name="ImportExport::ObjectBackendRegistration###ITSMConfigItem" Required="0" Valid="1">
         <Description Translatable="1">Object backend module registration for the import/export module.</Description>
         <Navigation>Core::ImportExport::ObjectBackend::ModuleRegistration</Navigation>
@@ -919,6 +931,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- event settings -->
     <Setting Name="ITSMConfigItem::EventModulePost###100-History" Required="0" Valid="1">
         <Description Translatable="1">Config item event module that enables logging to history in the agent interface.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
@@ -963,6 +977,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- more frontend module settings and registrations -->
     <Setting Name="ITSMConfigItem::Frontend::HistoryOrder" Required="1" Valid="1">
         <Description Translatable="1">Shows the config item history (reverse ordered) in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItemHistory</Navigation>
@@ -1030,6 +1046,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- GeneralCatalog settings -->
     <Setting Name="GeneralCatalogPreferences###DeploymentStatesColors" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the deployment states color in the preferences view of the agent interface.</Description>
         <Navigation>Core::GeneralCatalog</Navigation>
@@ -1153,6 +1171,8 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- permission settings -->
     <Setting Name="ITSMConfigItem::Permission::Class###010-ClassGroupCheck" Required="0" Valid="1">
         <Description Translatable="1">Module to check the group responsible for a class.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
