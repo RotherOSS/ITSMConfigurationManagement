@@ -369,7 +369,7 @@ sub Data {
         'Parameter für die zugriffsberechtigte Gruppe der General-Katalog-Attribute.';
     $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
         'Parameter für die Seiten, in denen Configuration Items angezeigt werden.';
-    $Self->{Translation}->{'Permission Group'} = 'Berechtigungsgruppe \*';
+    $Self->{Translation}->{'Permission Group'} = 'Berechtigungsgruppe';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
         'Erforderliche Berechtigungen, um die Ansicht zur Konfiguration von Configuration Items im Agenten-Interface nutzen zu können.';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the agent interface.'} =
