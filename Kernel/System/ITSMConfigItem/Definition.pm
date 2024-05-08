@@ -1499,12 +1499,14 @@ sub ClassImport {
 
         # set class preferences
         PREFERENCEKEY:
-        for my $PreferenceKey (qw(NameModule NumberModule VersionStringModule Permissions Categories VersionTrigger)) {
+        for my $PreferenceKey (qw(NameModule NumberModule VersionStringModule Permission Categories VersionTrigger)) {
 
-            # transition: preference Permissions is named PermissionGroup in definition syntax
+            # transition: preference Permission is named PermissionGroup in definition syntax
             my $PreferenceValue;
-            if ( $PreferenceKey eq 'Permissions' ) {
-                $PreferenceValue = $ClassData{PermissionGroup};
+            if ( $PreferenceKey eq 'Permission' ) {
+                $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+                    Group => $ClassData{PermissionGroup},
+                );
             }
             else {
                 $PreferenceValue = $ClassData{$PreferenceKey};

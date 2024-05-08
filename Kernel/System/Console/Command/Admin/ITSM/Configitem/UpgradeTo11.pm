@@ -43,6 +43,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
+    'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
     'Kernel::System::SysConfig',
@@ -583,9 +584,13 @@ sub _MigrateDefinitions {
             }
         }
 
+        my $PermissionGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+            Group => 'itsm-configitem',
+        );
+
         # update class preferences
         my %PreferencesDefaults = (
-            Permissions         => ['itsm-configitem'],
+            Permission          => [$PermissionGroupID],
             NumberModule        => ['AutoIncrement'],
             VersionStringModule => ['Incremental'],
             Categories          => ['Default'],
@@ -596,6 +601,10 @@ sub _MigrateDefinitions {
                 Key    => $Preference,
                 Value  => $PreferencesDefaults{$Preference},
             );
+
+            if ( !$Success ) {
+                $Self->Print("<red>Could not set preference '$Preference' for class '$ClassID'!</red>\n");
+            }
         }
     }
 
