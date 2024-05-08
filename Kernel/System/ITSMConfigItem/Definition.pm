@@ -1337,7 +1337,7 @@ sub ClassImport {
             return;
         }
 
-        # check for duplicate
+        # set class data and check for duplicate
         if ( $DefinitionItem->{Class} ) {
             %ClassData = $DefinitionItem->{Class}->%*;
             if ( $ClassLookup{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
@@ -1359,13 +1359,39 @@ sub ClassImport {
         }
 
         # collect class tags
-        @ClassCategories = uniq ( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
+        @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
 
         # collect dynamic fields
         %DynamicFields = (
             %DynamicFields,
             $DefinitionItem->{DynamicFields}->%*,
         );
+    }
+
+    # fetch existing categories to check for duplicates
+    my $ExistingCategories = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Class::Category',
+        Valid => 0,
+    ) // {};
+
+    # handle creation of config item class categories
+    CATEGORY:
+    for my $Category (@ClassCategories) {
+
+        next CATEGORY if any { $_ eq $Category } values $ExistingCategories->%*;
+
+        my $Success = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class::Category',
+            Name    => $Category,
+            ValidID => 1,
+            UserID  => 1,
+        );
+        if ( !$Success ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => "Couldn't add config item class category $Category.",
+            );
+        }
     }
 
     # add inner fields of set DFs to hash
@@ -1433,10 +1459,10 @@ sub ClassImport {
 
         # handle duplications according param ClassExists
         my $ClassID;
-        if ( $ClassLookup{$ClassData{Name}} ) {
+        if ( $ClassLookup{ $ClassData{Name} } ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
                 my $Success = $GeneralCatalogObject->ItemUpdate(
-                    ItemID  => $ClassLookup{$ClassData{Name}},
+                    ItemID  => $ClassLookup{ $ClassData{Name} },
                     Name    => $ClassData{Name},
                     ValidID => 1,
                     UserID  => 1,
@@ -1448,7 +1474,7 @@ sub ClassImport {
                     );
                     return;
                 }
-                $ClassID = $ClassLookup{$ClassData{Name}};
+                $ClassID = $ClassLookup{ $ClassData{Name} };
             }
             else {
                 next CLASSDEFINITION;
@@ -1469,6 +1495,40 @@ sub ClassImport {
                 Message  => "Could not add class $ClassData{Name}.",
             );
             return;
+        }
+
+        # set class preferences
+        PREFERENCEKEY:
+        for my $PreferenceKey (qw(NameModule NumberModule VersionStringModule Permissions Categories VersionTrigger)) {
+
+            # transition: preference Permissions is named PermissionGroup in definition syntax
+            my $PreferenceValue;
+            if ( $PreferenceKey eq 'Permissions' ) {
+                $PreferenceValue = $ClassData{PermissionGroup};
+            }
+            else {
+                $PreferenceValue = $ClassData{$PreferenceKey};
+            }
+
+            next PREFERENCEKEY unless $PreferenceValue;
+
+            if ( !ref $PreferenceValue ) {
+                $PreferenceValue = [$PreferenceValue];
+            }
+
+            next PREFERENCEKEY unless IsArrayRefWithData($PreferenceValue);
+
+            my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+                ItemID => $ClassID,
+                Key    => $PreferenceKey,
+                Value  => $PreferenceValue,
+            );
+            if ( !$Success ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'notice',
+                    Message  => "Couldn't update preference $PreferenceKey for config item class $ClassID.",
+                );
+            }
         }
 
         # clean up definition data
