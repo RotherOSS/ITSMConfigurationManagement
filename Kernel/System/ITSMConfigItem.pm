@@ -215,50 +215,80 @@ sub ConfigItemResultList {
 
 =head2 ConfigItemGet()
 
-return a config item as hash reference. The latest version is retrieved when the config item ID is passed.
+return a config item as a hash reference. The latest version is retrieved when C<ConfigItemID> is passed as parameter.
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => 123,
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
-A specific version is returned when the Version ID is passed.
+A specific version is returned when the C<VersionID> is passed.
 
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         VersionID     => 243,
         DynamicFields => 1,    # (optional) default 0 (0|1)
     );
 
-When both C<ConfigItemID> and C<VersionID> are passed, then a consistency check is performed.
+When both C<ConfigItemID> and C<VersionID> are passed, then a consistency check is performed
+and the data for the specific version is returned.
 
 A hashref with the following keys is returned:
 
-    $ConfigItem->{ConfigItemID}
-    $ConfigItem->{Number}
-    $ConfigItem->{ClassID}
-    $ConfigItem->{Class}
-    $ConfigItem->{LastVersionID}
-    $ConfigItem->{CurDeplStateID}
-    $ConfigItem->{CurDeplState}
-    $ConfigItem->{CurDeplStateType}
-    $ConfigItem->{CurInciStateID}
-    $ConfigItem->{CurInciState}
-    $ConfigItem->{CurInciStateType}
-    $ConfigItem->{VersionID}
-    $ConfigItem->{Name}
-    $ConfigItem->{VersionString}
-    $ConfigItem->{Description}
-    $ConfigItem->{DefinitionID}
-    $ConfigItem->{DeplStateID}
-    $ConfigItem->{DeplState}
-    $ConfigItem->{DeplStateType}
-    $ConfigItem->{InciStateID}
-    $ConfigItem->{InciState}
-    $ConfigItem->{InciStateType}
-    $ConfigItem->{CreateTime}
-    $ConfigItem->{CreateBy}
-    $ConfigItem->{ChangeTime}
-    $ConfigItem->{ChangeBy}
+=over 4
+
+=item ConfigItemID
+
+=item Number
+
+=item ClassID
+
+=item Class
+
+=item LastVersionID
+
+=item CurDeplStateID
+
+=item CurDeplState
+
+=item CurDeplStateType
+
+=item CurInciStateID
+
+=item CurInciState
+
+=item CurInciStateType
+
+=item VersionID
+
+=item Name
+
+=item VersionString
+
+=item Description
+
+=item DefinitionID
+
+=item DeplStateID
+
+=item DeplState
+
+=item DeplStateType
+
+=item InciStateID
+
+=item InciState
+
+=item InciStateType
+
+=item CreateTime
+
+=item CreateBy
+
+=item ChangeTime
+
+=item ChangeBy
+
+=back
 
 Caching can't be turned off.
 
@@ -322,7 +352,6 @@ sub ConfigItemGet {
     my @Row;
     if ( $Param{VersionID} ) {
 
-        # TODO: implement version string: v.version
         @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
@@ -342,7 +371,6 @@ END_SQL
     # get latest ConfigItemVersion
     else {
 
-        # TODO: implement version string: v.version
         @Row = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
             SQL => <<'END_SQL',
 SELECT ci.id, ci.configitem_number, ci.class_id, ci.last_version_id,
