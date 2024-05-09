@@ -220,7 +220,7 @@ Get a list of attributes that are shown in the nodes.
 =cut
 
 sub CITreeDefaultAttributes {
-    return qw/Class CurInciState CurDeplState/;
+    return qw/Class CurDeplState CurInciState CurInciStateType/;
 }
 
 # build Children structure
@@ -284,7 +284,7 @@ sub _FillColumnAttributes {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # fill data with Version attributes
+    # fill data with config item attributes
     my @Lines;
     for my $Column ( sort @Attributes ) {
 
@@ -296,11 +296,26 @@ sub _FillColumnAttributes {
         }
 
         my $Label = $LayoutObject->{LanguageObject}->Translate( $Self->_MapAttributes( Label => $ColumnLabel ) );
-        my $Text  = $ConfigItem->{$Column} // '';
-        push @Lines, "$Label: " . $LayoutObject->{LanguageObject}->Translate($Text);
+        my $Text  = $LayoutObject->{LanguageObject}->Translate( $ConfigItem->{$Column} // '' );
+
+        # special handling for the current incident state. Show the green, yellow, red flags.
+        if ( $Column eq 'CurInciStateType' ) {
+
+            # define incident signals
+            my %InciSignals = (
+                Translatable('operational') => 'greenled',
+                Translatable('warning')     => 'yellowled',
+                Translatable('incident')    => 'redled',
+            );
+            my $CurInciSignal = $InciSignals{ $ConfigItem->{CurInciStateType} };
+            push @Lines, qq{<span class="Flag Small"> <span class="$CurInciSignal">"$Text"</span></span>};
+        }
+        else {
+            push @Lines, "$Label: $Text";
+        }
     }
 
-    return join '<br>', @Lines;
+    return join "<br>\n", @Lines;
 }
 
 # generate an ID that is used for drawing the arcs
@@ -382,8 +397,8 @@ sub _MapAttributes {
         DeplState        => 'Deployment State',
         CurDeplState     => 'Current Deployment State',
         CurInciState     => 'Current Incident State',
+        CurInciStateType => '',
         Number           => 'Version Number',
-        CurInciStateType => 'Current Incident State Type'
     };
 
     return $MapTranslations->{ $Param{Label} } // $Param{Label};
