@@ -1710,6 +1710,44 @@ sub ClassImport {
     return 1;
 }
 
+=head2 ClassExport()
+
+Export config item classes, including dynamic fields and namespaces, into a YAML string
+
+    my $YAMLString = $ConfigItemObject->ClassExport(
+        ClassIDList => [ClassID1, ClassID2, ClassID3, ...],
+    );
+
+In case of a failure C<undef> is returned.
+
+=cut
+
+sub ClassExport {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $YAMLObject       = $Kernel::OM->Get('Kernel::System::YAML');
+
+    my $AllExportedClassesRef;
+
+    for my $ExportedClassID ( @{$Param{ClassIDList}} ) {
+
+        my $ClassRef = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
+        my $ExportedClassRef = { 
+            ClassName => $ClassRef->{Class},
+            DynamicFields => $ClassRef->{DynamicFieldRef},
+        };
+
+        for my $ClassDefinitionKey (sort keys %{$ClassRef->{DefinitionRef}}) {
+            $ExportedClassRef->{$ClassDefinitionKey} = $ClassRef->{DefinitionRef}->{$ClassDefinitionKey};
+        }
+
+        push @{$AllExportedClassesRef}, $ExportedClassRef;
+    }
+
+    return $YAMLObject->Dump( Data => $AllExportedClassesRef );
+}
+
 =begin Internal:
 
 =head2 _ProcessRoles

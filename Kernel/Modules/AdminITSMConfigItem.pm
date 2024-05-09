@@ -757,13 +757,19 @@ sub Run {
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ClassExport' ) {
 
-        my $YAMLContent;
-        for my $ExportedClassID ( $ParamObject->GetArray( Param => 'ExportClassID' ) ) {
-            my $DefinitionRef   = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
-            my $ClassDefinition = $DefinitionRef->{Definition};
-            $ClassDefinition =~ s/\-\-\-/---\nClassName: $DefinitionRef->{Class}/g;
-            $YAMLContent .= $ClassDefinition;
+        my @ClassIDList = $ParamObject->GetArray( Param => 'ExportClassID' );
+
+        # export the classes to a YAML string
+        my $YAMLContent = $ConfigItemObject->ClassExport( ClassIDList => \@ClassIDList );
+
+        if ( !$YAMLContent ) {
+            # show the error screen
+            return $LayoutObject->ErrorScreen(
+                Message => 'Class export failed.',
+                Comment => 'Please contact the administrator.',
+            );
         }
+
         my $HTML = $LayoutObject->Attachment(
             ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
             Content     => $YAMLContent,
