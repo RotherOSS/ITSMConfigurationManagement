@@ -190,22 +190,25 @@ Returns an empty array ref when no relationships were found:
 
     $LinkedConfigItems = [];
 
-Returns a list when relationships have been found. Either ConfigItemID or VersionID is set.
+Returns a list when relationships have been found. Either C<ConfigItemID> or C<VersionID> is set.
+C<DynamicFieldID> is not defined when LinkObject is used.
 
     $LinkedConfigItems = [
         {
-            ConfigItemID => 17,
-            VersionID    => undef,
-            Direction    => 'Source',
-            LinkTypeID   => 2,
-            LinkType     => 'ParentChild',
+            ConfigItemID   => 17,
+            VersionID      => undef,
+            Direction      => 'Source',
+            LinkTypeID     => 2,
+            LinkType       => 'ParentChild',
+            DynamicFieldID => 127,
         },
         {
-            ConfigItemID => undef,
-            VersionID    => 22,
-            Direction    => 'Source',
-            LinkTypeID   => 2,
-            LinkType     => 'IsInspiredBy',
+            ConfigItemID   => undef,
+            VersionID      => 22,
+            Direction      => 'Source',
+            LinkTypeID     => 2,
+            LinkType       => 'IsInspiredBy',
+            DynamicFieldID => undef,
         },
         ...
     ];
@@ -278,7 +281,7 @@ sub LinkedConfigItems {
 
         if ( $Param{Direction} eq 'Source' ) {
             $SQL = <<"END_SQL";
-SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source'
+SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source', dynamic_field_id
   FROM configitem_link
   WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions ), @TypeConditions ]}
 END_SQL
@@ -286,7 +289,7 @@ END_SQL
         }
         elsif ( $Param{Direction} eq 'Target' ) {
             $SQL = <<"END_SQL";
-SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target'
+SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target', dynamic_field_id
   FROM configitem_link
   WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions ), @TypeConditions ]}
 END_SQL
@@ -297,13 +300,13 @@ END_SQL
             # TODO: test with PostgreSQL and Oracle
             $SQL = <<"END_SQL";
 (
-  SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source'
+  SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source', dynamic_field_id
     FROM configitem_link
     WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions), @TypeConditions ]}
 )
 UNION
 (
-  SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target'
+  SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target', dynamic_field_id
     FROM configitem_link
     WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions), @TypeConditions ]}
 )
@@ -327,7 +330,8 @@ END_SQL
                     TypeID => $_->[2],
                     UserID => $Param{UserID},
                 ),
-                Direction => $_->[3],
+                Direction      => $_->[3],
+                DynamicFieldID => $_->[4],
             }
         }
         $Rows->@*;
