@@ -23,7 +23,9 @@
                     <div class="Box" id="[% Data.ID | html %]">
                         <div class="ConfigItemInfo">
                             <div class="ConfigItemTitle">
-                                <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
+                                <p>
+                                    <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a>
+                                </p>
                             </div>
                             <div class="AdditionalInfo">
                                 [% Data.Contents %]
@@ -40,7 +42,9 @@
             <div class="Box" id="[% Data.ID | html %]">
                 <div class="ConfigItemInfo">
                     <div class="ConfigItemTitle">
-                        <p>[% Data.Name | html %]</p>
+                        <p>
+                            [% Data.Name | html %]
+                        </p>
                     </div>
                     <div class="AdditionalInfo">
                         [% Data.Contents %]
@@ -57,7 +61,9 @@
                     <div class="Box" id="[% Data.ID | html %]">
                         <div class="ConfigItemInfo">
                             <div class="ConfigItemTitle">
-                                <p><a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a></p>
+                                <p>
+                                    <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %];OTOBOAgentInterface=[% Data.SessionID | uri %]" target="_blank" class="ZoomLink">[% Data.Name | html %]</a>
+                                </p>
                             </div>
                             <div class="AdditionalInfo">
                                 [% Data.Contents %]

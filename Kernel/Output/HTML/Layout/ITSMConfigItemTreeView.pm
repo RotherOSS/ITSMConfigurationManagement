@@ -111,7 +111,7 @@ sub GenerateHierarchyGraph {
     # The following just passes the two trees to the web page.
 
     # for the sources start with the deepest level
-    my @LinkDataSource;    # will be used in JavaScript for draing the arcs
+    my @LinkDataSource;    # will be used in JavaScript for drawing the arcs
     for my $Level ( sort { $b <=> $a } keys %LinkOutputDataSources ) {
         my $Elements = $LinkOutputDataSources{$Level};
 
@@ -121,7 +121,6 @@ sub GenerateHierarchyGraph {
         );
 
         for my $Element ( $Elements->@* ) {
-
             my $ID = "$Element->{ID}_S$Level";    # only link to the next or previous level, the separator _S indicates Source
             $LayoutObject->Block(
                 Name => 'ChildSourceElements',
@@ -150,8 +149,8 @@ sub GenerateHierarchyGraph {
             VersionID    => $VersionID,
             Cache        => 1,
         );
-        my $Contents = $Self->_FillColumnAttributes(
-            Attributes => [ $Self->CITreeDefaultAttributes ],
+        my $Contents = $Self->_GetContents(
+            Attributes => [ 'VersionString', $Self->CITreeDefaultAttributes ],    # the root has always a version
             ConfigItem => $ConfigItem,
         );
 
@@ -170,7 +169,7 @@ sub GenerateHierarchyGraph {
     }
 
     # for the targets start with the lowest level
-    my @LinkDataTarget;    # will be used in JavaScript for draing the arcs
+    my @LinkDataTarget;    # will be used in JavaScript for drawing the arcs
     for my $Level ( sort { $a <=> $b } keys %LinkOutputDataTargets ) {
         my $Elements = $LinkOutputDataTargets{$Level};
 
@@ -276,7 +275,7 @@ sub GetCISubTreeData {
 }
 
 # return contents of the nodes
-sub _FillColumnAttributes {
+sub _GetContents {
     my ( $Self, %Param ) = @_;
 
     my @Attributes = $Param{Attributes}->@*;
@@ -362,13 +361,21 @@ sub GetLinkOutputData {
         my $LinkType = $LinkedConfigItem->{LinkType};
         my $ArcLabel = $ConfiguredTypes->{$LinkType}->{SourceName} || $LinkType;
 
+        # Was the link to this item version specific ?
+        # The VersionString is only shown in the TreeView when an explicit version is linked.
+        my $LinkedAsVersion = $IncomingIDs{VersionID} ? 1 : 0;
+
         # define item data
         push @OutputData, {
             %OutgoingIDs,
-            ID       => $Self->_GenerateID(%OutgoingIDs),    # used for linking in the graph
-            Name     => $ConfigItem->{Name},
-            Contents => $Self->_FillColumnAttributes(
-                Attributes => [ $Self->CITreeDefaultAttributes ],
+            ID              => $Self->_GenerateID(%OutgoingIDs),    # used for linking in the graph
+            Name            => $ConfigItem->{Name},
+            LinkedAsVersion => $LinkedAsVersion,
+            Contents        => $Self->_GetContents(
+                Attributes => [
+                    ( $LinkedAsVersion ? 'VersionString' : () ),
+                    $Self->CITreeDefaultAttributes,
+                ],
                 ConfigItem => $ConfigItem,
             ),
             Link     => $LayoutObject->{LanguageObject}->Translate($ArcLabel),
@@ -398,7 +405,8 @@ sub _MapAttributes {
         CurDeplState     => 'Current Deployment State',
         CurInciState     => 'Current Incident State',
         CurInciStateType => '',
-        Number           => 'Version Number',
+        Number           => 'Config Item Number',
+        VersionString    => 'Version String',
     };
 
     return $MapTranslations->{ $Param{Label} } // $Param{Label};
