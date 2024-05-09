@@ -285,7 +285,7 @@ sub _GetContents {
 
     # fill data with config item attributes
     my @Lines;
-    for my $Column ( sort @Attributes ) {
+    for my $Column (@Attributes) {
 
         my $ColumnLabel = $Column;
         if ( index( $Column, '::' ) > 0 ) {
