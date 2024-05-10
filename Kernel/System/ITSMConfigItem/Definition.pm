@@ -35,7 +35,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(any none);
+use List::Util qw(any none uniq);
 
 # CPAN modules
 
@@ -1286,6 +1286,7 @@ sub ClassImport {
     # initialize needed variables
     my %ClassDefinitions;
     my %RoleDefinitions;
+    my @ClassCategories;
     my %DynamicFields;
     my %Namespaces;
     my %SetDFs;
@@ -1309,6 +1310,8 @@ sub ClassImport {
     # 0. perform sanity checks
     for my $DefinitionItem ( $DefinitionList->@* ) {
 
+        my %ClassData;
+
         # check definition for validity
         for my $Key (qw/Sections DynamicFields/) {
             if ( !$DefinitionItem->{$Key} ) {
@@ -1319,14 +1322,14 @@ sub ClassImport {
                 return;
             }
         }
-        if ( !( $DefinitionItem->{ClassName} || $DefinitionItem->{RoleName} ) ) {
+        if ( !( $DefinitionItem->{Class} || $DefinitionItem->{RoleName} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need ClassName or RoleName in Definition.",
+                Message  => "Need Class or RoleName in Definition.",
             );
             return;
         }
-        if ( $DefinitionItem->{ClassName} && !$DefinitionItem->{Pages} ) {
+        if ( $DefinitionItem->{Class} && !$DefinitionItem->{Pages} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need Pages in Class Definition.",
@@ -1334,12 +1337,13 @@ sub ClassImport {
             return;
         }
 
-        # check for duplicate
-        if ( $DefinitionItem->{ClassName} ) {
-            if ( $ClassLookup{ $DefinitionItem->{ClassName} } && $Param{ClassExists} eq 'ERROR' ) {
+        # set class data and check for duplicate
+        if ( $DefinitionItem->{Class} ) {
+            %ClassData = $DefinitionItem->{Class}->%*;
+            if ( $ClassLookup{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message  => "Class $DefinitionItem->{ClassName} already exists.",
+                    Message  => "Class $ClassData{Name} already exists.",
                 );
                 return;
             }
@@ -1354,11 +1358,40 @@ sub ClassImport {
             }
         }
 
+        # collect class tags
+        @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
+
         # collect dynamic fields
         %DynamicFields = (
             %DynamicFields,
             $DefinitionItem->{DynamicFields}->%*,
         );
+    }
+
+    # fetch existing categories to check for duplicates
+    my $ExistingCategories = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Class::Category',
+        Valid => 0,
+    ) // {};
+
+    # handle creation of config item class categories
+    CATEGORY:
+    for my $Category (@ClassCategories) {
+
+        next CATEGORY if any { $_ eq $Category } values $ExistingCategories->%*;
+
+        my $Success = $GeneralCatalogObject->ItemAdd(
+            Class   => 'ITSM::ConfigItem::Class::Category',
+            Name    => $Category,
+            ValidID => 1,
+            UserID  => 1,
+        );
+        if ( !$Success ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => "Couldn't add config item class category $Category.",
+            );
+        }
     }
 
     # add inner fields of set DFs to hash
@@ -1420,28 +1453,28 @@ sub ClassImport {
 
     # 1. create all classes
     CLASSDEFINITION:
-    for my $ClassDefinition ( grep { $_->{ClassName} } $DefinitionList->@* ) {
+    for my $ClassDefinition ( grep { $_->{Class} } $DefinitionList->@* ) {
 
-        my $ClassName = delete $ClassDefinition->{ClassName};
+        my %ClassData = %{ delete $ClassDefinition->{Class} };
 
         # handle duplications according param ClassExists
         my $ClassID;
-        if ( $ClassLookup{$ClassName} ) {
+        if ( $ClassLookup{ $ClassData{Name} } ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
                 my $Success = $GeneralCatalogObject->ItemUpdate(
-                    ItemID  => $ClassLookup{$ClassName},
-                    Name    => $ClassName,
+                    ItemID  => $ClassLookup{ $ClassData{Name} },
+                    Name    => $ClassData{Name},
                     ValidID => 1,
                     UserID  => 1,
                 );
                 if ( !$Success ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message  => "Could not update class $ClassName.",
+                        Message  => "Could not update class $ClassData{Name}.",
                     );
                     return;
                 }
-                $ClassID = $ClassLookup{$ClassName};
+                $ClassID = $ClassLookup{ $ClassData{Name} };
             }
             else {
                 next CLASSDEFINITION;
@@ -1450,7 +1483,7 @@ sub ClassImport {
         else {
             $ClassID = $GeneralCatalogObject->ItemAdd(
                 Class   => 'ITSM::ConfigItem::Class',
-                Name    => $ClassName,
+                Name    => $ClassData{Name},
                 ValidID => 1,
                 UserID  => 1,
             );
@@ -1459,9 +1492,45 @@ sub ClassImport {
         if ( !$ClassID ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Could not add class $ClassName.",
+                Message  => "Could not add class $ClassData{Name}.",
             );
             return;
+        }
+
+        # set class preferences
+        PREFERENCEKEY:
+        for my $PreferenceKey (qw(NameModule NumberModule VersionStringModule Permission Categories VersionTrigger)) {
+
+            # transition: preference Permission is named PermissionGroup in definition syntax
+            my $PreferenceValue;
+            if ( $PreferenceKey eq 'Permission' ) {
+                $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+                    Group => $ClassData{PermissionGroup},
+                );
+            }
+            else {
+                $PreferenceValue = $ClassData{$PreferenceKey};
+            }
+
+            next PREFERENCEKEY unless $PreferenceValue;
+
+            if ( !ref $PreferenceValue ) {
+                $PreferenceValue = [$PreferenceValue];
+            }
+
+            next PREFERENCEKEY unless IsArrayRefWithData($PreferenceValue);
+
+            my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+                ItemID => $ClassID,
+                Key    => $PreferenceKey,
+                Value  => $PreferenceValue,
+            );
+            if ( !$Success ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'notice',
+                    Message  => "Couldn't update preference $PreferenceKey for config item class $ClassID.",
+                );
+            }
         }
 
         # clean up definition data
