@@ -1734,7 +1734,7 @@ sub ClassExport {
 
         # check if item is role or class
         my $ItemData = $GeneralCatalogObject->ItemGet(
-            ID => $ExportItemID,
+            ItemID => $ExportItemID,
         );
         if ( !IsHashRefWithData($ItemData) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
