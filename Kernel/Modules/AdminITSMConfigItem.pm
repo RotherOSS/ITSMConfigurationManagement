@@ -93,6 +93,56 @@ sub Run {
     );
 
     # ------------------------------------------------------------ #
+    # config item class import: list classes of file
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'FileClassList' ) {
+
+        my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+        my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+        my $ExampleFile = $ParamObject->GetParam( Param => 'ExampleFile' );
+
+        my $Content = $MainObject->FileRead(
+            Location => "$Home/var/itsm/configitemclasses/$ExampleFile",
+            Mode     => 'utf8',
+        );
+
+        if ( !$Content ) {
+            return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
+                Message =>
+                    $LayoutObject->{LanguageObject}->Translate( 'Could not read %s!', $ExampleFile ),
+            );
+        }
+
+        $Content = ${ $Content || \'' };
+
+        $Content = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $Content,
+        );
+
+        if ( ref $Content eq 'HASH' ) {
+            $Content = [$Content];
+        }
+
+        my %ImportItems;
+        for my $Item ( $Content->@* ) {
+            if ( $Item->{Class} ) {
+                $ImportItems{Classes} //= [];
+                push $ImportItems{Classes}->@*, $Item->{Class}{Name};
+            }
+            elsif ( $Item->{RoleName} ) {
+                $ImportItems{Roles} //= [];
+                push $ImportItems{Roles}->@*, $Item->{RoleName};
+            }
+        }
+
+        return $LayoutObject->JSONReply(
+            Data => \%ImportItems,
+        );
+    }
+
+    # ------------------------------------------------------------ #
     # config item class import
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ClassImport' ) {

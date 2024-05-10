@@ -155,9 +155,11 @@
                                 <input type="checkbox" id="UpdateExistingEntitiesExample" name="UpdateExistingEntities" value="1" checked>
                                 <label for="UpdateExistingEntitiesExample">[% Translate("Update existing entities") | html %]</label>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt class bundles") | html %]">
-                                <span><i class="fa fa-upload"></i>[% Translate("Import Ready2Adopt class bundles") | html %]</span>
-                            </button>
+                            <a href='#' id='Import' class='CallForAction Fullsize Center'>
+                                <span><i class='fa fa-upload'></i>
+                                    [% Translate('Import Ready2Adopt class bundles') | html %]
+                                </span>
+                            </a>
                         </form>
                     </li>
                 </ul>

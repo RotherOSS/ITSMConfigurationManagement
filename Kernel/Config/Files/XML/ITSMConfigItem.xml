@@ -99,6 +99,7 @@
                         <Item>thirdparty/codemirror-5.65.16/addon/search/jump-to-line.js</Item>
                         <Item>thirdparty/codemirror-5.65.16/addon/display/fullscreen.js</Item>
                         <Item>Core.UI.CodeMirrorEditor.js</Item>
+                        <Item>ITSM.Admin.ITSMConfigItem.js</Item>
                     </Array>
                 </Item>
             </Hash>
