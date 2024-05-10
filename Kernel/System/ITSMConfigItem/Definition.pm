@@ -2176,77 +2176,69 @@ sub _DynamicFieldConfigTransform {
         }
     }
 
-    # TODO fails because of missing ID in Class Import DFConfigs
-    # my $IsReferenceField = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->HasBehavior(
-    #     DynamicFieldConfig => $Param{DynamicFieldConfig},
-    #     Behavior           => 'IsReferenceField',
-    # );
+    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
 
     if ( grep { $Param{DynamicFieldConfig}{FieldType} eq $_ } qw(Agent ConfigItem ConfigItemVersion CustomerCompany CustomerUser FAQ Ticket) ) {
-
-        # fetch driver object
-        my $DriverObject = $Kernel::OM->Get("Kernel::System::DynamicField::Driver::$Param{DynamicFieldConfig}{FieldType}");
-
-        # skip field if driver is not present
-        next DYNAMICFIELD unless $DriverObject;
-
-        # fetch settings for iteration
-        my @FieldTypeSettings = $DriverObject->GetFieldTypeSettings();
-
-        # TODO use a setting attribute instead of hardcoded names - perhaps $Setting->{Multiple}?
-        # skip settings which are not directly related to objects
-        my %SkipSettings = (
-            DisplayType           => 1,
-            EditFieldMode         => 1,
-            MultiSelect           => 1,
-            MultiValue            => 1,
-            PossibleNone          => 1,
-            ReferenceFilterList   => 1,
-            ReferencedObjectType  => 1,
-            SearchAttribute       => 1,
-            ImportSearchAttribute => 1,
-            LinkType              => 1,
-            Tooltip               => 1,
-        );
 
         # needed transformation: Name -> ID
         if ( $Param{Action} eq 'Import' ) {
 
-            SETTING:
-            for my $Setting (@FieldTypeSettings) {
-
-                next SETTING if $SkipSettings{ $Setting->{ConfigParamName} };
-                next SETTING unless $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} };
-
-                my @TransformedValues;
-                my @CurrentValues     = $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} }->@*;
-                my %SettingDataLookup = reverse $Setting->{SelectionData}->%*;
-                for my $Value (@CurrentValues) {
-                    if ( $SettingDataLookup{$Value} ) {
-                        push @TransformedValues, $SettingDataLookup{$Value};
-                    }
+            if ( $DynamicFieldConfig->{Config}{Queue} ) {
+                my @QueueIDs;
+                for my $QueueName ( $DynamicFieldConfig->{Config}{Queue}->@* ) {
+                    push @QueueIDs, $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup( Queue => $QueueName );
                 }
-                $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} } = \@TransformedValues;
+                $DynamicFieldConfig->{Config}{Queue} = \@QueueIDs;
+            }
+            if ( $DynamicFieldConfig->{Config}{TicketType} ) {
+                my @TypeIDs;
+                for my $TypeName ( $DynamicFieldConfig->{Config}{TicketType}->@* ) {
+                    push @TypeIDs, $Kernel::OM->Get('Kernel::System::Type')->TypeLookup( TypeID => $TypeName );
+                }
+                $DynamicFieldConfig->{Config}{TicketType} = \@TypeIDs;
+            }
+            if ( $DynamicFieldConfig->{Config}{ClassIDs} ) {
+                my %ClassLookup = reverse %{
+                    $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                        Class => 'ITSM::ConfigItem::Class',
+                    )
+                };
+                my @ClassIDs;
+                for my $ClassName ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
+                    push @ClassIDs, $ClassLookup{$ClassName};
+                }
+                $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassIDs;
             }
         }
 
         # needed transformation: ID -> Name
         elsif ( $Param{Action} eq 'Export' ) {
 
-            SETTING:
-            for my $Setting (@FieldTypeSettings) {
-
-                next SETTING if $SkipSettings{ $Setting->{ConfigParamName} };
-                next SETTING unless $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} };
-
-                my @TransformedValues;
-                my @CurrentValues = $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} }->@*;
-                for my $Value (@CurrentValues) {
-                    if ( $Setting->{SelectionData}{$Value} ) {
-                        push @TransformedValues, $Setting->{SelectionData}{$Value};
-                    }
+            if ( $DynamicFieldConfig->{Config}{Queue} ) {
+                my @QueueNames;
+                for my $QueueID ( $DynamicFieldConfig->{Config}{Queue}->@* ) {
+                    push @QueueNames, $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup( QueueID => $QueueID );
                 }
-                $Param{DynamicFieldConfig}{Config}{ $Setting->{ConfigParamName} } = \@TransformedValues;
+                $DynamicFieldConfig->{Config}{Queue} = \@QueueNames;
+            }
+            if ( $DynamicFieldConfig->{Config}{TicketType} ) {
+                my @TypeNames;
+                for my $TypeID ( $DynamicFieldConfig->{Config}{TicketType}->@* ) {
+                    push @TypeNames, $Kernel::OM->Get('Kernel::System::Type')->TypeLookup( TypeID => $TypeID );
+                }
+                $DynamicFieldConfig->{Config}{TicketType} = \@TypeNames;
+            }
+            if ( $DynamicFieldConfig->{Config}{ClassIDs} ) {
+                my %ClassLookup = %{
+                    $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                        Class => 'ITSM::ConfigItem::Class',
+                    )
+                };
+                my @ClassNames;
+                for my $ClassID ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
+                    push @ClassNames, $ClassLookup{$ClassID};
+                }
+                $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassNames;
             }
         }
     }
