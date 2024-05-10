@@ -103,10 +103,15 @@ sub Run {
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # list of configitem classes
+    # lists of existing classes and roles
     my %ClassLookup = reverse %{
         $GeneralCatalogObject->ItemList(
             Class => 'ITSM::ConfigItem::Class',
+        ) // {}
+    };
+    my %RoleLookup = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Role',
         ) // {}
     };
 
@@ -118,10 +123,19 @@ sub Run {
     my @ClassIDList;
     for my $ClassName ( @{$ClassNameList} ) {
 
-        return $Error->( 'Class ' . $ClassName . ' does not exist.' ) if !$ClassLookup{$ClassName};
+        if ( $ClassLookup{$ClassName} ) {
+            push @ClassIDList, $ClassLookup{$ClassName};
 
-        push @ClassIDList, $ClassLookup{$ClassName};
-        $Self->Print("<green>Exporting existing configitem</green> $ClassName <green>class</green>\n");
+            $Self->Print("<green>Exporting existing configitem</green> $ClassName <green>class</green>\n");
+        }
+        elsif ( $RoleLookup{$ClassName} ) {
+            push @ClassIDList, $RoleLookup{$ClassName};
+
+            $Self->Print("<green>Exporting existing configitem</green> $ClassName <green>role</green>\n");
+        }
+        else {
+            return $Error->( 'Class or Role ' . $ClassName . ' does not exist.' );
+        }
     }
 
     if ( -e $FileName && !$ForceOverwrite ) {
@@ -131,7 +145,7 @@ sub Run {
         return $Self->ExitCodeOk() if <STDIN> !~ /^ye?s?$/i;
     }
 
-    my $YAMLContent = $ConfigItemObject->ClassExport( ClassIDList => \@ClassIDList );
+    my $YAMLContent = $ConfigItemObject->ClassExport( ItemIDList => \@ClassIDList );
 
     my $Success = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
         Location => $FileName,
