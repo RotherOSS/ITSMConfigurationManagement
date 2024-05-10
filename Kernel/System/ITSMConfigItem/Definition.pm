@@ -1715,7 +1715,7 @@ sub ClassImport {
 Export config item classes, including dynamic fields and namespaces, into a YAML string
 
     my $YAMLString = $ConfigItemObject->ClassExport(
-        ClassIDList => [ClassID1, ClassID2, ClassID3, ...],
+        ItemIDList => [ClassID1, ClassID2, ClassID3, ...],      # list of class or / and role IDs to export
     );
 
 In case of a failure C<undef> is returned.
@@ -1725,27 +1725,83 @@ In case of a failure C<undef> is returned.
 sub ClassExport {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $AllExportedClassesRef;
 
-    for my $ExportedClassID ( @{ $Param{ClassIDList} } ) {
+    for my $ExportItemID ( @{ $Param{ItemIDList} } ) {
 
-        # fetch class preferences
-        my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
-            ItemID => $ExportedClassID,
+        # check if item is role or class
+        my $ItemData = $GeneralCatalogObject->ItemGet(
+            ID => $ExportItemID,
         );
+        if ( !IsHashRefWithData($ItemData) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "ID $ExportItemID is invalid!",
+            );
+        }
+        if ( $ItemData->{Class} ne 'ITSM::ConfigItem::Class' && $ItemData->{Class} ne 'ITSM::ConfigItem::Role' ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Item with ID $ExportItemID is neither a config item class nor a config item role!",
+            );
+        }
 
-        # fetch class definition
-        my $DefinitionRef = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
+        my %ExportItem;
+        my $DefinitionRef;
+        if ( $ItemData->{Class} eq 'ITSM::ConfigItem::Class' ) {
 
-        my $ExportedClassRef = {
-            Class => {
-                Name => $DefinitionRef->{Class},
-            },
-        };
+            # fetch class definition
+            $DefinitionRef = $Self->DefinitionGet( ClassID => $ExportItemID );
+            $ExportItem{Class}{Name} = $DefinitionRef->{Class};
+
+            # fetch class preferences
+            my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+                ItemID => $ExportItemID,
+            );
+            if ( !%ClassPreferences ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'notice',
+                    Message  => "Could not get preference data for class $DefinitionRef->{Class}!",
+                );
+            }
+
+            PREFERENCESKEY:
+            for my $PreferenceKey ( keys %ClassPreferences ) {
+
+                next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey};
+                next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey}[0];
+
+                # transition of Permission to PermissionGroup
+                if ( $PreferenceKey eq 'Permission' ) {
+
+                    # translate group id into group name
+                    my $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+                        GroupID => $ClassPreferences{$PreferenceKey}[0],
+                    );
+
+                    $ExportItem{Class}{PermissionGroup} = $PreferenceValue;
+                }
+
+                # single-value attributes
+                elsif ( grep { $_ eq $PreferenceKey } qw(NameModule NumberModule VersionStringModule) ) {
+                    $ExportItem{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey}[0];
+                }
+
+                # multi-value attributes
+                elsif ( grep { $_ eq $PreferenceKey } qw(Categories VersionTrigger) ) {
+                    $ExportItem{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey};
+                }
+            }
+        }
+        elsif ( $ItemData->{Class} eq 'ITSM::ConfigItem::Role' ) {
+
+            # fetch role definition
+            $DefinitionRef = $Self->RoleDefinitionGet( RoleID => $ExportItemID );
+            $ExportItem{RoleName} = $DefinitionRef->{Role};
+        }
 
         # perform dynamic field transformation
         for my $DynamicFieldName ( keys $DefinitionRef->{DynamicFieldRef}->%* ) {
@@ -1753,42 +1809,14 @@ sub ClassExport {
                 DynamicFieldConfig => $DefinitionRef->{DynamicFieldRef}{$DynamicFieldName},
                 Action             => 'Export',
             );
-            $ExportedClassRef->{DynamicFields}{$DynamicFieldName} = $TransformedDFConfig;
-        }
-
-        PREFERENCESKEY:
-        for my $PreferenceKey ( keys %ClassPreferences ) {
-
-            next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey};
-            next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey}[0];
-
-            # transition of Permission to PermissionGroup
-            if ( $PreferenceKey eq 'Permission' ) {
-
-                # translate group id into group name
-                my $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
-                    GroupID => $ClassPreferences{$PreferenceKey}[0],
-                );
-
-                $ExportedClassRef->{Class}{PermissionGroup} = $PreferenceValue;
-            }
-
-            # single-value attributes
-            elsif ( grep { $_ eq $PreferenceKey } qw(NameModule NumberModule VersionStringModule) ) {
-                $ExportedClassRef->{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey}[0];
-            }
-
-            # multi-value attributes
-            elsif ( grep { $_ eq $PreferenceKey } qw(Categories VersionTrigger) ) {
-                $ExportedClassRef->{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey};
-            }
+            $ExportItem{DynamicFields}{$DynamicFieldName} = $TransformedDFConfig;
         }
 
         for my $DefinitionKey ( sort keys %{ $DefinitionRef->{DefinitionRef} } ) {
-            $ExportedClassRef->{$DefinitionKey} = $DefinitionRef->{DefinitionRef}->{$DefinitionKey};
+            $ExportItem{$DefinitionKey} = $DefinitionRef->{DefinitionRef}->{$DefinitionKey};
         }
 
-        push @{$AllExportedClassesRef}, $ExportedClassRef;
+        push @{$AllExportedClassesRef}, \%ExportItem;
     }
 
     return $YAMLObject->Dump( Data => $AllExportedClassesRef );
