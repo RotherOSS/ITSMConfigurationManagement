@@ -122,9 +122,9 @@ sub Run {
         ($FileWithoutExtension) = $ExampleClassFilename =~ m{(.*?)\.yml$}smx;
 
         # run _pre.pm if available
-        if ( -e "$Home/var/classes/examples/" . $FileWithoutExtension . "_pre.pm" ) {
+        if ( -e "$Home/var/itsm/configitemclasses/" . $FileWithoutExtension . "_pre.pm" ) {
 
-            my $BackendName = 'var::classes::examples::' . $FileWithoutExtension . '_pre';
+            my $BackendName = 'var::itsm::configitemclasses::' . $FileWithoutExtension . '_pre';
 
             my $Loaded = $MainObject->Require(
                 $BackendName,
@@ -147,7 +147,7 @@ sub Run {
         }
 
         $Content = $MainObject->FileRead(
-            Location => "$Home/var/classes/examples/$ExampleClassFilename",
+            Location => "$Home/var/itsm/configitemclasses/$ExampleClassFilename",
             Mode     => 'utf8',
         );
 
@@ -194,10 +194,10 @@ sub Run {
             # Run _post.pm if available.
             if (
                 $ExampleClass
-                && -e "$Home/var/classes/examples/" . $FileWithoutExtension . "_post.pm"
+                && -e "$Home/var/itsm/configitemclasses/" . $FileWithoutExtension . "_post.pm"
                 )
             {
-                my $BackendName = 'var::classes::examples::' . $FileWithoutExtension . '_post';
+                my $BackendName = 'var::itsm::configitemclasses::' . $FileWithoutExtension . '_post';
 
                 my $Loaded = $MainObject->Require(
                     $BackendName,
