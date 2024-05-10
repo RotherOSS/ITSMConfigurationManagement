@@ -757,10 +757,10 @@ sub Run {
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ClassExport' ) {
 
-        my @ClassIDList = $ParamObject->GetArray( Param => 'ExportClassID' );
+        my @ClassIDList = $ParamObject->GetArray( Param => 'ExportID' );
 
         # export the classes to a YAML string
-        my $YAMLContent = $ConfigItemObject->ClassExport( ClassIDList => \@ClassIDList );
+        my $YAMLContent = $ConfigItemObject->ClassExport( ItemIDList => \@ClassIDList );
 
         if ( !$YAMLContent ) {
 
@@ -860,12 +860,14 @@ sub _ShowSidebar {
         Class        => 'Modernize',
     );
 
-    #The same than above but the selection box admits multi-selection (useful for classes export)
-    my $ClassIDMult         = $Param{ClassSelected} ? $Param{ClassSelected}->{ID} : $ParamObject->GetParam( Param => 'ClassID' );
+    my @ExportIDs           = $ParamObject->GetArray( Param => 'ExportID' );
     my $ClassOptionMultStrg = $LayoutObject->BuildSelection(
-        Data        => $Param{ClassList},
-        Name        => 'ExportClassID',
-        SelectedID  => $ClassIDMult,
+        Data => {
+            $Param{ClassList}->%*,
+            $Param{RoleList}->%*,
+        },
+        Name        => 'ExportID',
+        SelectedID  => \@ExportIDs,
         Translation => 0,
         Class       => 'Modernize Validate_Required',
         Multiple    => 1,
