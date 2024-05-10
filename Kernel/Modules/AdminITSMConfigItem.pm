@@ -68,7 +68,7 @@ sub Run {
     my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
 
     my @ExampleClasses = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-        Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/classes/examples',
+        Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/itsm/configitemclasses',
         Filter    => '*.yml',
     );
 
@@ -763,6 +763,7 @@ sub Run {
         my $YAMLContent = $ConfigItemObject->ClassExport( ClassIDList => \@ClassIDList );
 
         if ( !$YAMLContent ) {
+
             # show the error screen
             return $LayoutObject->ErrorScreen(
                 Message => 'Class export failed.',
