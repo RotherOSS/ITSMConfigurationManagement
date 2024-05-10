@@ -1725,21 +1725,67 @@ In case of a failure C<undef> is returned.
 sub ClassExport {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $YAMLObject       = $Kernel::OM->Get('Kernel::System::YAML');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $AllExportedClassesRef;
 
-    for my $ExportedClassID ( @{$Param{ClassIDList}} ) {
+    for my $ExportedClassID ( @{ $Param{ClassIDList} } ) {
 
-        my $ClassRef = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
-        my $ExportedClassRef = { 
-            ClassName => $ClassRef->{Class},
-            DynamicFields => $ClassRef->{DynamicFieldRef},
+        # fetch class preferences
+        my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+            ItemID => $ExportedClassID,
+        );
+
+        # fetch class definition
+        my $DefinitionRef = $ConfigItemObject->DefinitionGet( ClassID => $ExportedClassID );
+
+        my $ExportedClassRef = {
+            Class => {
+                Name => $DefinitionRef->{Class},
+            },
         };
 
-        for my $ClassDefinitionKey (sort keys %{$ClassRef->{DefinitionRef}}) {
-            $ExportedClassRef->{$ClassDefinitionKey} = $ClassRef->{DefinitionRef}->{$ClassDefinitionKey};
+        # perform dynamic field transformation
+        for my $DynamicFieldName ( keys $DefinitionRef->{DynamicFieldRef}->%* ) {
+            my $TransformedDFConfig = $Self->_DynamicFieldConfigTransform(
+                DynamicFieldConfig => $DefinitionRef->{DynamicFieldRef}{$DynamicFieldName},
+                Action             => 'Export',
+            );
+            $ExportedClassRef->{DynamicFields}{$DynamicFieldName} = $TransformedDFConfig;
+        }
+
+        PREFERENCESKEY:
+        for my $PreferenceKey ( keys %ClassPreferences ) {
+
+            next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey};
+            next PREFERENCESKEY unless $ClassPreferences{$PreferenceKey}[0];
+
+            # transition of Permission to PermissionGroup
+            if ( $PreferenceKey eq 'Permission' ) {
+
+                # translate group id into group name
+                my $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+                    GroupID => $ClassPreferences{$PreferenceKey}[0],
+                );
+
+                $ExportedClassRef->{Class}{PermissionGroup} = $PreferenceValue;
+            }
+
+            # single-value attributes
+            elsif ( grep { $_ eq $PreferenceKey } qw(NameModule NumberModule VersionStringModule) ) {
+                $ExportedClassRef->{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey}[0];
+            }
+
+            # multi-value attributes
+            elsif ( grep { $_ eq $PreferenceKey } qw(Categories VersionTrigger) ) {
+                $ExportedClassRef->{Class}{$PreferenceKey} = $ClassPreferences{$PreferenceKey};
+            }
+        }
+
+        for my $DefinitionKey ( sort keys %{ $DefinitionRef->{DefinitionRef} } ) {
+            $ExportedClassRef->{$DefinitionKey} = $DefinitionRef->{DefinitionRef}->{$DefinitionKey};
         }
 
         push @{$AllExportedClassesRef}, $ExportedClassRef;
@@ -2119,15 +2165,20 @@ sub _DynamicFieldConfigTransform {
         # fetch settings for iteration
         my @FieldTypeSettings = $DriverObject->GetFieldTypeSettings();
 
+        # TODO use a setting attribute instead of hardcoded names - perhaps $Setting->{Multiple}?
         # skip settings which are not directly related to objects
         my %SkipSettings = (
-            DisplayType          => 1,
-            EditFieldMode        => 1,
-            MultiValue           => 1,
-            PossibleNone         => 1,
-            ReferenceFilterList  => 1,
-            ReferencedObjectType => 1,
-            SearchAttribute      => 1,
+            DisplayType           => 1,
+            EditFieldMode         => 1,
+            MultiSelect           => 1,
+            MultiValue            => 1,
+            PossibleNone          => 1,
+            ReferenceFilterList   => 1,
+            ReferencedObjectType  => 1,
+            SearchAttribute       => 1,
+            ImportSearchAttribute => 1,
+            LinkType              => 1,
+            Tooltip               => 1,
         );
 
         # needed transformation: Name -> ID
