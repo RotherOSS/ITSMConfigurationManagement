@@ -174,12 +174,12 @@ sub Run {
             );
         }
 
-        my $OverwriteExistingEntities = $ParamObject->GetParam( Param => 'OverwriteExistingEntities' );
+        my $UpdateExistingEntities = $ParamObject->GetParam( Param => 'UpdateExistingEntities' );
 
         # import the class YAML file
         my $Success = $ConfigItemObject->ClassImport(
             Content     => $Content,
-            ClassExists => $OverwriteExistingEntities ? 'UPDATE' : 'ERROR',
+            ClassExists => $UpdateExistingEntities ? 'UPDATE' : 'ERROR',
         );
 
         if ( !$Success ) {
