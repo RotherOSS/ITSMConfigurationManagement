@@ -70,10 +70,11 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'file',
-        Description => "The output YAML file containing the exported class definition and its dynamic field configuration. Defaults to a local file with the name of the first class in the list.",
-        Required    => 0,
-        HasValue    => 1,
-        ValueRegex  => qr/./,
+        Description =>
+            "The output YAML file containing the exported class definition and its dynamic field configuration. Defaults to a local file with the name of the first class in the list.",
+        Required   => 0,
+        HasValue   => 1,
+        ValueRegex => qr/./,
     );
     $Self->AddOption(
         Name        => 'force',
@@ -95,8 +96,8 @@ sub PreRun {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ClassNameList = $Self->GetOption('class');
-    my $FileName = $Self->GetOption('file') || "$ClassNameList->[0].yml"; # by default file has the name of the first class
+    my $ClassNameList  = $Self->GetOption('class');
+    my $FileName       = $Self->GetOption('file') || "$ClassNameList->[0].yml";    # by default file has the name of the first class
     my $ForceOverwrite = $Self->GetOption('force');
 
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -123,17 +124,21 @@ sub Run {
         $Self->Print("<green>Exporting existing configitem</green> $ClassName <green>class</green>\n");
     }
 
-    if ( -e $FileName && !$ForceOverwrite) {
+    if ( -e $FileName && !$ForceOverwrite ) {
         $Self->Print("<yellow>File '$FileName' already exists. Overwrite it?</yellow>\n");
         $Self->Print("\n<yellow>Please confirm by typing 'y'es</yellow>\n\t");
 
         return $Self->ExitCodeOk() if <STDIN> !~ /^ye?s?$/i;
     }
 
-    open(my $FileHandler, ">:utf8", $FileName) or return $Error->( 'Could not write to file ' . $FileName . '\'' );
     my $YAMLContent = $ConfigItemObject->ClassExport( ClassIDList => \@ClassIDList );
-    print $FileHandler $YAMLContent;
-    close $FileHandler;
+
+    my $Success = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
+        Location => $FileName,
+        Content  => \$YAMLContent,
+    );
+    return $Error->("Could not write file.") unless $Success;
+
     $Self->Print("<green>Done with all</green>\n");
 
     return $Self->ExitCodeOk();
