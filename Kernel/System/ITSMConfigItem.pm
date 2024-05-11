@@ -1651,6 +1651,14 @@ sub CurInciStateRecalc {
 
         return;
     }
+    if ( ref $Param{ConfigItemID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'The parameter ConfigItemID must be a plain scalar!',
+        );
+
+        return;
+    }
 
     # get incident link types and directions from config
     my $IncidentLinkTypeDirection = $Kernel::OM->Get('Kernel::Config')->Get('ITSM::Core::IncidentLinkTypeDirection');

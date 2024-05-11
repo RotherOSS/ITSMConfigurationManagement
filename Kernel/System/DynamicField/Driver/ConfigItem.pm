@@ -133,18 +133,22 @@ sub EditFieldValueGet {
 
 =head2 GetFieldTypeSettings()
 
-Get field type settings that are specific to the referenced object type C<ITSMConfigItem>.
+Get the field type settings for the referenced object type C<ITSMConfigItem>.
+The generic settings for all referenced object types are included as well.
 
 =cut
 
 sub GetFieldTypeSettings {
     my ( $Self, %Param ) = @_;
 
+    my $ReferencingObjectType = $Param{ObjectType};
+
+    # First fetch the generic settings.
     my @FieldTypeSettings = $Self->SUPER::GetFieldTypeSettings(
         %Param,
     );
 
-    # add the selection for the config item class
+    # Add the selection of the config item class.
     {
         my $ClassID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
             Class => 'ITSM::ConfigItem::Class',
@@ -162,21 +166,23 @@ sub GetFieldTypeSettings {
             };
     }
 
-    # Support the same link types as with the generic LinkObject feature.
-    # No distinction is made between the object types ITSMConfigItem ITSMConfigItemVersion.
+    # Select the link type.
+    # The same link types as with the generic LinkObject feature are available.
+    # The direction can be selected in a separate dropdown.
+    # No distinction is made between the object types ITSMConfigItem  and ITSMConfigItemVersion.
     {
         my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
         # Create the selectable type list from the possible types from the SysConfig.
-        # TODO: saner layout
-        my %SelectionData;
+        my @SelectionData;
 
         # get possible types list,
         # actually the order of Object1 and Object2 is not relevant
+        my $Object1           = $ReferencingObjectType        =~ s/^ITSMConfigItemVersion$/ITSMConfigItem/r;
         my $Object2           = $Self->{ReferencedObjectType} =~ s/^ITSMConfigItemVersion$/ITSMConfigItem/r;
         my %PossibleTypesList = $LinkObject->PossibleTypesList(
-            Object1 => 'ITSMConfigItem',    # the entity that holds the Reference dynamic field is a config item
-            Object2 => $Object2,            # the referenced object
+            Object1 => $Object1,    # the entity that holds the Reference dynamic field can be a config item or a ticket
+            Object2 => $Object2,    # the referenced object
         );
 
         POSSIBLETYPE:
@@ -195,10 +201,11 @@ sub GetFieldTypeSettings {
                 UserID => $Self->{UserID},
             );
 
-            # Choose what type of linking should be done with this dynamic field.
-            # There are always two directions. Both are grouped together as the selection is in TreeView mode.
-            $SelectionData{"${PossibleType}::Source"} = "${PossibleType}::Forward) The referencing item is '$Type{TargetName}' to the referenced item.";
-            $SelectionData{"${PossibleType}::Target"} = "${PossibleType}::Reverse) The referencing item is '$Type{SourceName}' to the referenced item.";
+            push @SelectionData,
+                {
+                    Key   => $PossibleType,
+                    Value => "$Type{SourceName} -> $Type{TargetName}",
+                };
         }
 
         # TODO: saner grouping, and saner ordering
@@ -208,26 +215,63 @@ sub GetFieldTypeSettings {
                 ConfigParamName => 'LinkType',
                 Label           => Translatable('Link type'),
                 Explanation     => Translatable('Select the link type.'),
-                SelectionData   => \%SelectionData,
-                PossibleNone    => 0,
-                TreeView        => 1,
+                SelectionData   => \@SelectionData,
+                PossibleNone    => 1,
             };
     }
 
-    # Support configurable search key
-    push @FieldTypeSettings,
-        {
-            ConfigParamName => 'AppliesToAllVersions',
-            Label           => Translatable('The reference applies to all versions'),
-            Explanation     => Translatable('The most recent reference will be used for showing the link tree and for the impact analysis.'),
-            InputType       => 'Selection',
-            SelectionData   => {
-                'Yes' => 'Yes',
-                'No'  => 'No',
+    # Select the link direction
+    {
+        my @SelectionData = (
+            {
+                Key   => 'ReferencingIsSource',
+                Value => Translatable('Forwards: Referencing (Source) -> Referenced (Target)'),
             },
-            PossibleNone => 1,
-            Multiple     => 0,
-        };
+            {
+                Key   => 'ReferencingIsTarget',
+                Value => Translatable('Backwards: Referenced (Source) -> Referencing (Target)'),
+            },
+        );
+
+        push @FieldTypeSettings,
+            {
+                ConfigParamName => 'LinkDirection',
+                Label           => Translatable('Link Direction'),
+                Explanation     =>
+                Translatable('The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'),
+                InputType     => 'Selection',
+                SelectionData => \@SelectionData,
+                DefaultKey    => 'ReferencingIsSource',
+                PossibleNone  => 0,
+            };
+    }
+
+    # Select the link referencing type
+    if ( $ReferencingObjectType =~ m/^ITSMConfigItem/ ) {
+        my @SelectionData = (
+            {
+                Key   => 'Dynamic',
+                Value => Translatable('Dynamic (ConfigItem)'),
+            },
+            {
+                Key   => 'Static',
+                Value => Translatable('Static (Version)'),
+            },
+        );
+
+        push @FieldTypeSettings,
+            {
+                ConfigParamName => 'LinkReferencingType',
+                Label           => Translatable('Link Referencing Type'),
+                Explanation     => Translatable(
+                'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'
+                ),
+                InputType     => 'Selection',
+                SelectionData => \@SelectionData,
+                DefaultKey    => 'Dynamic',
+                PossibleNone  => 0,
+            };
+    }
 
     # Support configurable search key
     push @FieldTypeSettings,

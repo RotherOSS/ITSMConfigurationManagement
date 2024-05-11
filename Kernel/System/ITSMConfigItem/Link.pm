@@ -373,15 +373,18 @@ sub SyncLinkTable {
         return;
     }
 
-    # a fallback in case the LinkType is not configured
-    my $LinkTypeWithDirection = $DFDetails->{LinkType} || 'Normal::Target';
+    # Linking is not necessarily set up. That is fine.
+    return 1 unless $DFDetails->{LinkType};
 
-    my ( $LinkTypeName, $Direction ) = $LinkTypeWithDirection =~ m/^ (.*) :: (Source|Target) $/x;
+    # When linking is set up we need the complete information for how
+    # the linking should be done.
+    NEEDED:
+    for my $Needed (qw(LinkDirection LinkReferencingType)) {
+        next NEEDED if $DFDetails->{$Needed};
 
-    if ( !( $LinkTypeName && $Direction ) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Invalid link type '$LinkTypeWithDirection'. Must be something like 'DependsOn::Target'.",
+            Message  => qq{Invalid dynamic field configuration. The setting $Needed is missing,},
         );
 
         return;
@@ -389,7 +392,8 @@ sub SyncLinkTable {
 
     my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
-    my $LinkTypeID = $LinkObject->TypeLookup(
+    my $LinkTypeName = $DFDetails->{LinkType};
+    my $LinkTypeID   = $LinkObject->TypeLookup(
         Name   => $LinkTypeName,
         UserID => 1,
     );
@@ -397,20 +401,19 @@ sub SyncLinkTable {
     if ( !$LinkTypeID ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Invalid link type '$LinkTypeWithDirection'. The link type '$LinkTypeName' is not valid'.",
+            Message  => "The link type '$LinkTypeName' is not valid'.",
         );
 
         return;
     }
 
     # sometimes only the setting of the most recent version is relevant
-    # The default is AppliesToAllVersions
-    my $AllVersions = 0;
-    $DFDetails->{AppliesToAllVersions} //= '';
-    if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
+    # The default is Dynamic.
+    my $LinkIsDynamic = 0;
+    if ( $DFDetails->{LinkReferencingType} eq 'Dynamic' ) {
         return 1 unless $Param{ConfigItemVersionID} == $Param{ConfigItemLastVersionID};
 
-        $AllVersions = 1;
+        $LinkIsDynamic = 1;
     }
 
     # DoArray() is used below. The bind variables for DoArray() can be simple scalars or array references.
@@ -422,15 +425,17 @@ sub SyncLinkTable {
     # even when there is only a single referenced config item.
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    # The meaning if direction is a bit confusing.
+    # The meaning if direction is still a bit confusing. But it was
+    # worse in the past.
     #
-    # $Direction eq 'Target':
+    # $LinkDirection eq 'ReferencingIsSource':
     #   The config item with the dynamic field is the source,
     #   and the referenced config item is the target.
     #
-    # $Direction eq 'Source':
+    # $LinkDirection eq 'ReferencingIsTarget':
     #   The referenced config item is the source,
     #   and the config item that has the dynamic field is the target.
+    my $LinkDirection = $DFDetails->{LinkDirection};
 
     # The attribute of the table configitem_link that holds the IDs of the linked items
     # depends on the type of the dynamic field and on the direction.
@@ -441,21 +446,21 @@ sub SyncLinkTable {
     #   source_configitem_version_id
     my $FieldType = $DynamicFieldConfig->{FieldType};    # either ConfigItem or ConfigItemVersion
     my $ValueCol  = join '_',
-        ( $Direction eq 'Target'     ? 'target'     : 'source' ),
-        ( $FieldType eq 'ConfigItem' ? 'configitem' : 'configitem_version' ),
+        ( $LinkDirection eq 'ReferencingIsSource' ? 'target'     : 'source' ),
+        ( $FieldType eq 'ConfigItem'              ? 'configitem' : 'configitem_version' ),
         'id';
 
     # The parameter which is used to identify the config item, or config item version,
     # which holds the dynamic field depends on wheter the link should be the same
     # for all versions of the config item.
-    my $ItemOrVersion = $AllVersions ? $Param{ConfigItemID} : $Param{ConfigItemVersionID};
+    my $ItemOrVersion = $LinkIsDynamic ? $Param{ConfigItemID} : $Param{ConfigItemVersionID};
 
     # The columm for $ItemOrVersion depends on the direction and
     # on wheter the link should be the same for all versions of the config item.
     # The possible values are the same as for $ValueCol.
     my $ItemOrVersionCol = join '_',
-        ( $Direction eq 'Target' ? 'source'     : 'target' ),
-        ( $AllVersions           ? 'configitem' : 'configitem_version' ),
+        ( $LinkDirection eq 'ReferencingIsSource' ? 'source'     : 'target' ),
+        ( $LinkIsDynamic                          ? 'configitem' : 'configitem_version' ),
         'id';
 
     # Clear out the old value array.
@@ -525,6 +530,8 @@ sub RebuildLinkTable {
     # Get the relevant dynamic fields. Relevant are only
     # Reference dynamic fields that connect an ITSMConfigItem
     # to another ITSMConfigItem or an ITSMConfigItemVersion.
+    # Another condition is that the attribute 'LinkType' is configured for that
+    # dynamic field.
     my @DynamicFields;
     {
         my $DynamicFieldObject       = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -532,6 +539,8 @@ sub RebuildLinkTable {
             ObjectType => 'ITSMConfigItem'
         );
         @DynamicFields =
+            grep { $_->{Config}->{LinkType} }
+            grep { ref $_->{Config} eq 'HASH' }
             grep { $_->{FieldType} =~ m/^ConfigItem/ }
             $CompleteDynamicFieldList->@*;
     }
@@ -610,46 +619,59 @@ END_SQL
 
         next ROW unless $DFDetails;
 
-        # a fallback in case the LinkType is not configured
-        my $LinkTypeWithDirection = $DFDetails->{LinkType} || 'Normal::Target';
+        NEEDED:
+        for my $Needed (qw(LinkType LinkDirection)) {
+            next NEEDED if $DFDetails->{$Needed};
 
-        my ( $LinkTypeName, $Direction ) = $LinkTypeWithDirection =~ m/^ (.*) :: (Source|Target) $/x;
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => qq{Invalid dynamic field configuration. The setting $Needed is missing,},
+            );
 
-        next ROW unless $LinkTypeName;
-        next ROW unless $Direction;
+            next ROW;
+        }
 
-        my $LinkTypeID = $LinkObject->TypeLookup(
+        my $LinkTypeName = $DFDetails->{LinkType};
+        my $LinkTypeID   = $LinkObject->TypeLookup(
             Name   => $LinkTypeName,
             UserID => 1,
         );
 
-        next ROW unless $LinkTypeID;
+        if ( !$LinkTypeID ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "The link type '$LinkTypeName' is not valid'.",
+            );
+
+            next ROW;
+        }
 
         # sometimes only the setting of the most recent version is relevant
-        # The default is AppliesToAllVersions
-        my $AllVersions = 0;
-        $DFDetails->{AppliesToAllVersions} //= '';
-        if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
+        # The default is Dynamic.
+        my $LinkIsDynamic = 0;
+        $DFDetails->{LinkReferencingType} //= 'Dynamic';
+        if ( $DFDetails->{LinkReferencingType} eq '' || $DFDetails->{LinkReferencingType} eq 'Dynamic' ) {
             next ROW unless $VersionID == $MaxVersionID;
 
-            $AllVersions = 1;
+            $LinkIsDynamic = 1;
         }
 
         # some values are independent of the direction
         push @LinkTypeIDs, $LinkTypeID;
         push @FieldIDs,    $FieldID;
 
-        if ( $Direction eq 'Target' ) {
-            push @SourceConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
-            push @SourceConfigItemVersionIDs, $AllVersions                ? undef         : $VersionID;
+        my $LinkDirection = $DFDetails->{LinkDirection};
+        if ( $LinkDirection eq 'ReferencingIsSource' ) {
+            push @SourceConfigItemIDs,        $LinkIsDynamic              ? $ConfigItemID : undef;
+            push @SourceConfigItemVersionIDs, $LinkIsDynamic              ? undef         : $VersionID;
             push @TargetConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
             push @TargetConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
         }
         else {
 
             # as above, but backwards
-            push @TargetConfigItemIDs,        $AllVersions                ? $ConfigItemID : undef;
-            push @TargetConfigItemVersionIDs, $AllVersions                ? undef         : $VersionID;
+            push @TargetConfigItemIDs,        $LinkIsDynamic              ? $ConfigItemID : undef;
+            push @TargetConfigItemVersionIDs, $LinkIsDynamic              ? undef         : $VersionID;
             push @SourceConfigItemIDs,        $LinksToCI{$FieldID}        ? $Value        : undef;
             push @SourceConfigItemVersionIDs, $LinksToCIVersion{$FieldID} ? $Value        : undef;
         }

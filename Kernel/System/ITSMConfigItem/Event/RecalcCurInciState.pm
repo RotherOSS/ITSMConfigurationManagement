@@ -110,6 +110,7 @@ sub Run {
         Name => $Param{Data}->{FieldName},
     );
 
+    # only references to config items are relevant
     return 1 unless $DynamicFieldConfig;
     return 1 unless $DynamicFieldConfig->{FieldType};
     return 1 unless $DynamicFieldConfig->{FieldType} eq 'ConfigItem';
@@ -117,50 +118,50 @@ sub Run {
     my $DFDetails = $DynamicFieldConfig->{Config};
 
     # This event module care only about references to other config items
+    # that are marked as links.
     return 1 unless $DFDetails;
-    return 1 unless $DFDetails->{ReferencedObjectType};
-    return 1 unless $DFDetails->{ReferencedObjectType} eq 'ITSMConfigItem';
+    return 1 unless $DFDetails->{LinkType};
 
     # find the relevant config items and call CurInciStateRecalc()
 
     # sometimes only the setting of the most recent version is relevant
-    # The default is AppliesToAllVersions
-    my $AllVersions = 0;
-    $DFDetails->{AppliesToAllVersions} //= '';
-    if ( $DFDetails->{AppliesToAllVersions} eq '' || $DFDetails->{AppliesToAllVersions} eq 'Yes' ) {
-        return 1 unless $Param{ConfigItemVersionID} == $Param{ConfigItemLastVersionID};
+    # The default is Dynamic linking
+    my $LinkIsDynamic = 0;
+    $DFDetails->{LinkReferencingType} //= 'Dynamic';
+    if ( $DFDetails->{LinkReferencingType} eq '' || $DFDetails->{LinkReferencingType} eq 'Dynamic' ) {
+        return 1 unless $Param{Data}->{ConfigItemVersionID} == $Param{Data}->{ConfigItemLastVersionID};
 
-        $AllVersions = 1;
+        $LinkIsDynamic = 1;
     }
 
     # The incident state is recalculated only when both sides are config items, not config item versions
-    return 1 unless $AllVersions;
+    return 1 unless $LinkIsDynamic;
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
+    my @ConfigItemIDs;
+
+    # recalculate the current incident state of the CI that contains the Reference dynamic field
+    push @ConfigItemIDs, $Param{Data}->{ConfigItemID};
+
+    # recalculate incident state of previously linked CIs
+    # TODO: filter out unchanged IDs
+    push @ConfigItemIDs, $Param{Data}->{OldValue}->@*;
+
+    # recalculate incident state of newly linked CIs
+    push @ConfigItemIDs, $Param{Data}->{Value}->@*;
+
+    # these will be changed in calls to CurInciStateRecalc()
     my %NewConfigItemIncidentState;
     my %ScannedConfigItemIDs;
 
-    # recalculate the current incident state of the CI that contains the Reference dynamic field
-    $ConfigItemObject->CurInciStateRecalc(
-        ConfigItemID               => $Param{Data}->{ConfigItemID},
-        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
-        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
-    );
-
-    # recalculate incident state of previously linked CI
-    $ConfigItemObject->CurInciStateRecalc(
-        ConfigItemID               => $Param{Data}->{OldValue},
-        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
-        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
-    );
-
-    # recalculate incident state of newly linked CI
-    $ConfigItemObject->CurInciStateRecalc(
-        ConfigItemID               => $Param{Data}->{Value},
-        NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
-        ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
-    );
+    for my $ConfigItemID (@ConfigItemIDs) {
+        $ConfigItemObject->CurInciStateRecalc(
+            ConfigItemID               => $ConfigItemID,
+            NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
+            ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
+        );
+    }
 
     return 1;
 }
