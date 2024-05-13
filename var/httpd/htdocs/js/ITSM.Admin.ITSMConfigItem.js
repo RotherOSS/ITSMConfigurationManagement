@@ -29,6 +29,13 @@ ITSM.Admin = ITSM.Admin || {};
 ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
 
     $('#Import').on('click', function() {
+
+        // validate dropdown
+        var ClassValidation = Core.Form.Validate.ValidateElement($('#ExampleClass'));
+        if ( ClassValidation == false ) {
+            return false;
+        }
+
         var ImportItem = $('#ExampleClass').val();
 
         Core.AJAX.FunctionCall(
