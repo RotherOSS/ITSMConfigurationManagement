@@ -31,12 +31,11 @@ use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
+    'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
@@ -44,7 +43,6 @@ our @ObjectDependencies = (
     'Kernel::System::Service',
     'Kernel::System::Stats',
     'Kernel::System::Valid',
-    'Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11',
 );
 
 =head1 NAME
@@ -114,9 +112,6 @@ sub CodeInstall {
         Description => 'Group for ITSM ConfigItem mask access in the agent interface.',
     );
 
-    # install configuration item definitions
-    $Self->_AddConfigItemDefinitions();
-
     # fill up empty last_version_id rows in C<configitem> table
     $Self->_FillupEmptyLastVersionID();
 
@@ -126,11 +121,8 @@ sub CodeInstall {
     # fill up empty C<cur_depl_state_id> or C<cur_inci_state_id> rows in C<configitem> table
     $Self->_FillupEmptyIncidentAndDeploymentStateID();
 
-    # set preferences for some configuration items
-    $Self->_SetPreferences();
-
-    # set default permission group
-    $Self->_SetDefaultPermission();
+    # set preferences for deployment states
+    $Self->_SetDeploymentStatePreferences();
 
     # add the ConfigItem management invoker to the Elasticsearch webservice
     $Self->_UpdateElasticsearchWebService( Action => 'Add' );
@@ -161,9 +153,6 @@ sub CodeReinstall {
         Description => 'Group for ITSM ConfigItem mask access in the agent interface.',
     );
 
-    # install configuration item definitions
-    $Self->_AddConfigItemDefinitions();
-
     # fill up empty last_version_id rows in C<configitem> table
     $Self->_FillupEmptyLastVersionID();
 
@@ -173,11 +162,8 @@ sub CodeReinstall {
     # fill up empty cur_depl_state_id or cur_inci_state_id rows in C<configitem> table
     $Self->_FillupEmptyIncidentAndDeploymentStateID();
 
-    # set preferences for some configuration items
-    $Self->_SetPreferences();
-
-    # set default permission group
-    $Self->_SetDefaultPermission();
+    # set preferences for some deployment states
+    $Self->_SetDeploymentStatePreferences();
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
@@ -216,9 +202,6 @@ run the code upgrade part
 sub CodeUpgrade {
     my ( $Self, %Param ) = @_;
 
-    # install configuration item definitions
-    $Self->_AddConfigItemDefinitions();
-
     # fill up empty last_version_id rows in C<configitem> table
     $Self->_FillupEmptyLastVersionID();
 
@@ -228,11 +211,8 @@ sub CodeUpgrade {
     # fill up empty cur_depl_state_id or cur_inci_state_id rows in C<configitem> table
     $Self->_FillupEmptyIncidentAndDeploymentStateID();
 
-    # set preferences for some configuration items
-    $Self->_SetPreferences();
-
-    # set default permission group
-    $Self->_SetDefaultPermission();
+    # set preferences for some deployment states
+    $Self->_SetDeploymentStatePreferences();
 
     # install stats
     $Kernel::OM->Get('Kernel::System::Stats')->StatsInstall(
@@ -276,13 +256,13 @@ sub CodeUninstall {
     return 1;
 }
 
-=head2 _SetPreferences()
+=head2 _SetDeploymentStatePreferences()
 
-    my $Result = $CodeObject->_SetPreferences()
+    my $Result = $CodeObject->_SetDeploymentStatePreferences()
 
 =cut
 
-sub _SetPreferences {
+sub _SetDeploymentStatePreferences {
     my ( $Self, %Param ) = @_;
 
     my %Map = (
@@ -312,46 +292,6 @@ sub _SetPreferences {
             Key    => 'Functionality',
             Value  => [ $Map{$Name} ],
         );
-    }
-
-    return 1;
-}
-
-=head2 _SetDefaultPermission()
-
-set the default group that has access rights
-
-=cut
-
-sub _SetDefaultPermission {
-    my ( $Self, %Param ) = @_;
-
-    # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-
-    # check if group already exists
-    my $GroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
-        Group  => 'itsm-configitem',
-        UserID => 1,
-    );
-
-    # check if a permission group is already set. If not, set default permission group
-    for my $ClassID ( sort keys %{$ClassList} ) {
-        my $Class = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-            ItemID => $ClassID,
-        );
-
-        my $ClassPermission = $Class->{Permission} ? $Class->{Permission}[0] : '';
-
-        if ( !$ClassPermission ) {
-            $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
-                ItemID => $Class->{ItemID},
-                Key    => 'Permission',
-                Value  => [$GroupID],
-            );
-        }
     }
 
     return 1;
@@ -501,629 +441,7 @@ sub _GroupDeactivate {
     return 1;
 }
 
-=head2 _AddConfigItemDefinitions()
-
-installs configuration item definitions
-
-    my $Result = $CodeObject->_AddConfigItemDefinitions();
-
-=cut
-
-sub _AddConfigItemDefinitions {
-    my ( $Self, %Param ) = @_;
-
-    # This is needed to extract translatable words from the config item definitions.
-    {
-        ## no critic qw(Variables::ProhibitUnusedVarsStricter)
-        my @Translations = (
-            Translatable('Vendor'),
-            Translatable('Model'),
-            Translatable('Description'),
-            Translatable('Type'),
-            Translatable('Customer Company'),
-            Translatable('Owner'),
-            Translatable('Serial Number'),
-            Translatable('Operating System'),
-            Translatable('CPU'),
-            Translatable('Ram'),
-            Translatable('Hard Disk'),
-            Translatable('Capacity'),
-            Translatable('FQDN'),
-            Translatable('Network Adapter'),
-            Translatable('IP over DHCP'),
-            Translatable('IP Address'),
-            Translatable('Graphic Adapter'),
-            Translatable('Other Equipment'),
-            Translatable('Warranty Expiration Date'),
-            Translatable('Install Date'),
-            Translatable('Note'),
-            Translatable('Phone 1'),
-            Translatable('Phone 2'),
-            Translatable('Fax'),
-            Translatable('E-Mail'),
-            Translatable('Address'),
-            Translatable('Network Address'),
-            Translatable('Subnet Mask'),
-            Translatable('Gateway'),
-            Translatable('Version'),
-            Translatable('Licence Type'),
-            Translatable('Licence Key'),
-            Translatable('Quantity'),
-            Translatable('Expiration Date'),
-            Translatable('Media'),
-        );
-    }
-
-    # Config item definitions.
-    my %Definition = (
-        Computer => << "EOF",
----
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-    # Example for CI attribute syntax check for text and textarea fields
-    #RegEx: ^ABC.*
-    #RegExErrorMessage: Value must start with ABC!
-
-- Key: Model
-  Name: Model
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: Description
-  Name: Description
-  Searchable: 1
-  Input:
-    Type: TextArea
-
-- Key: Type
-  Name: Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Computer::Type
-    Translation: 1
-
-- Key: CustomerID
-  Name: Customer Company
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-
-- Key: Owner
-  Name: Owner
-  Searchable: 1
-  Input:
-    Type: Customer
-
-- Key: SerialNumber
-  Name: Serial Number
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: OperatingSystem
-  Name: Operating System
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: CPU
-  Name: CPU
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-  CountMax: 16
-
-- Key: Ram
-  Name: Ram
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-  CountMax: 10
-
-- Key: HardDisk
-  Name: Hard Disk
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-  CountMax: 10
-  Sub:
-  - Key: Capacity
-    Name: Capacity
-    Input:
-      Type: Text
-      Size: 20
-      MaxLength: 10
-
-- Key: FQDN
-  Name: FQDN
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: NIC
-  Name: Network Adapter
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-    Required: 1
-  CountMin: 0
-  CountMax: 10
-  CountDefault: 1
-  Sub:
-  - Key: IPoverDHCP
-    Name: IP over DHCP
-    Input:
-      Type: GeneralCatalog
-      Class: ITSM::ConfigItem::YesNo
-      Translation: 1
-      Required: 1
-  - Key: IPAddress
-    Name: IP Address
-    Searchable: 1
-    Input:
-      Type: Text
-      Size: 40
-      MaxLength: 40
-      Required: 1
-    CountMin: 0
-    CountMax: 20
-    CountDefault: 0
-
-- Key: GraphicAdapter
-  Name: Graphic Adapter
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: OtherEquipment
-  Name: Other Equipment
-  Input:
-    Type: TextArea
-    Required: 1
-  CountMin: 0
-  CountDefault: 0
-
-- Key: WarrantyExpirationDate
-  Name: Warranty Expiration Date
-  Searchable: 1
-  Input:
-    Type: Date
-    YearPeriodPast: 20
-    YearPeriodFuture: 10
-
-- Key: InstallDate
-  Name: Install Date
-  Searchable: 1
-  Input:
-    Type: Date
-    Required: 1
-    YearPeriodPast: 20
-    YearPeriodFuture: 10
-  CountMin: 0
-  CountDefault: 0
-
-- Key: Note
-  Name: Note
-  Searchable: 1
-  Input:
-    Type: TextArea
-    Required: 1
-  CountMin: 0
-  CountDefault: 0
-EOF
-        Hardware => << "EOF",
----
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: Model
-  Name: Model
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: Description
-  Name: Description
-  Searchable: 1
-  Input:
-    Type: TextArea
-
-- Key: Type
-  Name: Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Hardware::Type
-    Translation: 1
-
-- Key: CustomerID
-  Name: Customer Company
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-
-- Key: Owner
-  Name: Owner
-  Searchable: 1
-  Input:
-    Type: Customer
-
-- Key: SerialNumber
-  Name: Serial Number
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: WarrantyExpirationDate
-  Name: Warranty Expiration Date
-  Searchable: 1
-  Input:
-    Type: Date
-    YearPeriodPast: 20
-    YearPeriodFuture: 10
-
-- Key: InstallDate
-  Name: Install Date
-  Searchable: 1
-  Input:
-    Type: Date
-    Required: 1
-    YearPeriodPast: 20
-    YearPeriodFuture: 10
-  CountMin: 0
-  CountMax: 1
-  CountDefault: 0
-
-- Key: Note
-  Name: Note
-  Searchable: 1
-  Input:
-    Type: TextArea
-    Required: 1
-  CountMin: 0
-  CountMax: 1
-  CountDefault: 0
-EOF
-        Location => << "EOF",
----
-- Key: Type
-  Name: Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Location::Type
-    Translation: 1
-
-- Key: CustomerID
-  Name: Customer Company
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-
-- Key: Owner
-  Name: Owner
-  Searchable: 1
-  Input:
-    Type: Customer
-
-- Key: Phone1
-  Name: Phone 1
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: Phone2
-  Name: Phone 2
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: Fax
-  Name: Fax
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: E-Mail
-  Name: E-Mail
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 100
-
-- Key: Address
-  Name: Address
-  Searchable: 1
-  Input:
-    Type: TextArea
-
-- Key: Note
-  Name: Note
-  Searchable: 1
-  Input:
-    Type: TextArea
-    Required: 1
-  CountMin: 0
-  CountDefault: 0
-EOF
-        Network => << "EOF",
----
-- Key: Description
-  Name: Description
-  Searchable: 1
-  Input:
-    Type: TextArea
-
-- Key: Type
-  Name: Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Network::Type
-    Translation: 1
-
-- Key: CustomerID
-  Name: Customer Company
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-
-- Key: Owner
-  Name: Owner
-  Searchable: 1
-  Input:
-    Type: Customer
-
-- Key: NetworkAddress
-  Name: Network Address
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 30
-    MaxLength: 20
-    Required: 1
-  CountMin: 0
-  CountMax: 100
-  CountDefault: 1
-  Sub:
-  - Key: SubnetMask
-    Name: Subnet Mask
-    Input:
-      Type: Text
-      Size: 30
-      MaxLength: 20
-      ValueDefault: 255.255.255.0
-      Required: 1
-    CountMin: 0
-    CountMax: 1
-    CountDefault: 0
-  - Key: Gateway
-    Name: Gateway
-    Input:
-      Type: Text
-      Size: 30
-      MaxLength: 20
-      Required: 1
-    CountMin: 0
-    CountMax: 10
-    CountDefault: 0
-
-- Key: Note
-  Name: Note
-  Searchable: 1
-  Input:
-    Required: 1
-    Type: TextArea
-  CountMin: 0
-  CountMax: 1
-  CountDefault: 0
-EOF
-        Software => << "EOF",
----
-- Key: Vendor
-  Name: Vendor
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: Version
-  Name: Version
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: Description
-  Name: Description
-  Searchable: 1
-  Input:
-    Type: TextArea
-
-- Key: Type
-  Name: Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Software::Type
-    Translation: 1
-
-- Key: CustomerID
-  Name: Customer Company
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-
-- Key: Owner
-  Name: Owner
-  Searchable: 1
-  Input:
-    Type: Customer
-
-- Key: SerialNumber
-  Name: Serial Number
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-
-- Key: LicenceType
-  Name: Licence Type
-  Searchable: 1
-  Input:
-    Type: GeneralCatalog
-    Class: ITSM::ConfigItem::Software::LicenceType
-    Translation: 1
-
-- Key: LicenceKey
-  Name: Licence Key
-  Searchable: 1
-  Input:
-    Type: Text
-    Size: 50
-    MaxLength: 50
-    Required: 1
-  CountMin: 0
-  CountMax: 100
-  CountDefault: 0
-  Sub:
-  - Key: Quantity
-    Name: Quantity
-    Input:
-      Type: Integer
-      ValueMin: 1
-      ValueMax: 1000
-      ValueDefault: 1
-      Required: 1
-    CountMin: 0
-    CountMax: 1
-    CountDefault: 0
-  - Key: ExpirationDate
-    Name: Expiration Date
-    Input:
-      Type: Date
-      Required: 1
-      YearPeriodPast: 20
-      YearPeriodFuture: 10
-    CountMin: 0
-    CountMax: 1
-    CountDefault: 0
-
-- Key: Media
-  Name: Media
-  Input:
-    Type: Text
-    Size: 40
-    MaxLength: 20
-
-- Key: Note
-  Name: Note
-  Searchable: 1
-  Input:
-    Type: TextArea
-    Required: 1
-  CountMin: 0
-  CountMax: 1
-  CountDefault: 0
-EOF
-    );
-
-    # get list of installed configuration item classes
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
-    my %ReverseClassList = reverse %{$ClassList};
-
-    # Directly insert new definition in OTOBO 10.1 style.
-    my ( @ClassIDBinds, @DefinitionBinds );
-    CLASSNAME:
-    for my $ClassName ( sort { lc $a cmp lc $b } keys %Definition ) {
-
-        # check if class exists
-        my $ClassID = $ReverseClassList{$ClassName};
-
-        next CLASSNAME unless $ClassID;
-
-        # check if definition already exists
-        my $DefinitionList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionList(
-            ClassID => $ClassID,
-        );
-
-        # don't mess with the config item definition when it already exists
-        next CLASSNAME if !defined $DefinitionList;
-        next CLASSNAME if $DefinitionList && ref $DefinitionList eq 'ARRAY' && @{$DefinitionList};
-
-        push @ClassIDBinds,    $ClassID;
-        push @DefinitionBinds, $Definition{$ClassName};
-    }
-
-    if ( @ClassIDBinds && @DefinitionBinds ) {
-
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->DoArray(
-            SQL => <<'END_SQL',
-INSERT INTO configitem_definition
-    (class_id, configitem_definition, dynamicfield_definition, version, create_time, create_by)
-  VALUES (?, ?, '', ?, current_timestamp, ?)
-END_SQL
-            Bind => [
-                \@ClassIDBinds,
-                \@DefinitionBinds,
-                1,    # version
-                1,    # createby
-            ],
-        );
-
-        # give up upon failure
-        if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Insert of OTOBO 10.1 style class definitions failed",
-            );
-
-            return 1;
-        }
-    }
-
-    return 1;
-}
+# TODO keep or delete?
 
 =head2 _LinkDelete()
 
