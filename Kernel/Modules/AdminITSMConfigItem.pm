@@ -125,7 +125,9 @@ sub Run {
             $Content = [$Content];
         }
 
-        my %ImportItems;
+        my %ImportItems = (
+            Success => 1,
+        );
         for my $Item ( $Content->@* ) {
             if ( $Item->{Class} ) {
                 $ImportItems{Classes} //= [];
@@ -270,7 +272,11 @@ sub Run {
                 }
             }
 
-            return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+            return $LayoutObject->JSONReply(
+                Data => {
+                    Success => 1,
+                },
+            );
         }
     }
 

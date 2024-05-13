@@ -46,6 +46,7 @@ ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
                     'Classes': ItemList.Classes,
                     'Roles': ItemList.Roles,
                 });
+                var UpdateExistingEntities = $('#UpdateExistingEntities').prop('checked') ? '1' : '0';
 
                 Core.UI.Dialog.ShowDialog({
                     Title: Core.Language.Translate("Overview and Confirmation"),
@@ -64,7 +65,7 @@ ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
                             Function: function() {
                                 Core.AJAX.FunctionCall(
                                     Core.Config.Get('CGIHandle'),
-                                    'Action=' + 'AdminITSMConfigItem' + ';Subaction=ClassImport;ExampleClass=' + ImportItem,
+                                    'Action=' + 'AdminITSMConfigItem' + ';Subaction=ClassImport;ExampleClass=' + ImportItem + ';UpdateExistingEntities=' + UpdateExistingEntities,
                                     function (Response) {
 
                                         if (!Response || !Response.Success) {

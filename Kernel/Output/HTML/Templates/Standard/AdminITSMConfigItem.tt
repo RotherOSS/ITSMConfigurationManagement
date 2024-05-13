@@ -152,8 +152,8 @@
                             <div id="ExampleClassError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="ExampleClassServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <fieldset class="SpacingTop">
-                                <input type="checkbox" id="UpdateExistingEntitiesExample" name="UpdateExistingEntities" value="1" checked>
-                                <label for="UpdateExistingEntitiesExample">[% Translate("Update existing entities") | html %]</label>
+                                <input type="checkbox" id="UpdateExistingEntities" name="UpdateExistingEntities" value="1" checked>
+                                <label for="UpdateExistingEntities">[% Translate("Update existing entities") | html %]</label>
                             </fieldset>
                             <a href='#' id='Import' class='CallForAction Fullsize Center'>
                                 <span><i class='fa fa-upload'></i>
