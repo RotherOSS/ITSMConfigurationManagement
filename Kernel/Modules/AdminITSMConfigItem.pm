@@ -52,7 +52,6 @@ sub Run {
 
     return $LayoutObject->ErrorScreen unless $ClassList;
     return $LayoutObject->ErrorScreen unless ref $ClassList eq 'HASH';
-    return $LayoutObject->ErrorScreen unless $ClassList->%*;
 
     # get role list and check it, the role list may be empty
     my $RoleList = $GeneralCatalogObject->ItemList(
@@ -229,17 +228,16 @@ sub Run {
         my $UpdateExistingEntities = $ParamObject->GetParam( Param => 'UpdateExistingEntities' );
 
         # import the class YAML file
-        my $Success = $ConfigItemObject->ClassImport(
+        my $Result = $ConfigItemObject->ClassImport(
             Content     => $Content,
             ClassExists => $UpdateExistingEntities ? 'UPDATE' : 'ERROR',
         );
 
-        if ( !$Success ) {
+        if ( !$Result->{Success} ) {
 
-            # show the error screen
-            return $LayoutObject->ErrorScreen(
-                Message => 'Class import failed.',
-                Comment => 'Please contact the administrator.',
+            # return error
+            return $LayoutObject->JSONReply(
+                Data => $Result,
             );
         }
         else {

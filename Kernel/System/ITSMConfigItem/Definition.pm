@@ -1255,9 +1255,16 @@ sub DefinitionSync {
 
 Import config item class including dynamic fields and namespaces, based on class definition
 
-    my $Success = $ConfigItemObject->ClassImport(
+    my $Result = $ConfigItemObject->ClassImport(
         Content     => $Content,
         ClassExists => "(ERROR|IGNORE|UPDATE)"   # (optional) how to handle import of already existing classes, default ERROR
+    );
+
+Returns:
+
+    my $Result = (
+        Success      => (1|0),              # State
+        ErrorMessage => 'Some Message',     # error message in case of failure
     );
 
 =cut
@@ -1276,11 +1283,11 @@ sub ClassImport {
     # expect array ref of definitions
     my $DefinitionList = $Param{Content};
     if ( !IsArrayRefWithData($DefinitionList) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Param DefinitionList is empty or not an array reference.',
-        );
-        return;
+
+        return {
+            Success      => 0,
+            ErrorMessage => 'Param DefinitionList is empty or not an array reference.',
+        };
     }
 
     # initialize needed variables
@@ -1315,46 +1322,41 @@ sub ClassImport {
         # check definition for validity
         for my $Key (qw/Sections DynamicFields/) {
             if ( !$DefinitionItem->{$Key} ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Need $Key in Definition.",
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => "Need $Key in Definition.",
+                };
             }
         }
         if ( !( $DefinitionItem->{Class} || $DefinitionItem->{RoleName} ) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need Class or RoleName in Definition.",
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => "Need Class or RoleName in Definition.",
+            };
         }
         if ( $DefinitionItem->{Class} && !$DefinitionItem->{Pages} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need Pages in Class Definition.",
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => "Need Pages in Class Definition.",
+            };
         }
 
         # set class data and check for duplicate
         if ( $DefinitionItem->{Class} ) {
             %ClassData = $DefinitionItem->{Class}->%*;
             if ( $ClassLookup{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Class $ClassData{Name} already exists.",
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => "Class $ClassData{Name} already exists.",
+                };
             }
         }
         if ( $DefinitionItem->{RoleName} ) {
             if ( $RoleLookup{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Role $DefinitionItem->{RoleName} already exists.",
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => "Role $DefinitionItem->{RoleName} already exists.",
+                };
             }
         }
 
@@ -1422,28 +1424,25 @@ sub ClassImport {
             );
 
             if ( $DynamicField->{FieldType} ne $AllFields{$Field}{FieldType} || $DynamicField->{ObjectType} ne 'ITSMConfigItem' ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "DynamicField $Field exists but does not have the required Object- and/or FieldType.",
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => "DynamicField $Field exists but does not have the required Object- and/or FieldType.",
+                };
             }
 
             if ( $DynamicField->{MultiValue} xor $AllFields{$Field}{MultiValue} ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "DynamicField $Field exists but does not match the multivalue setting.",
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => "DynamicField $Field exists but does not match the multivalue setting.",
+                };
             }
         }
 
         if ( $Field !~ m{ \A [a-zA-Z\d\-]+ \z }xms ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Invalid DynamicField name '$Field'.",
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => "Invalid DynamicField name '$Field'.",
+            };
         }
 
         if ( $Field =~ /^([^-]+)-/ ) {
@@ -1468,11 +1467,10 @@ sub ClassImport {
                     UserID  => 1,
                 );
                 if ( !$Success ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "Could not update class $ClassData{Name}.",
-                    );
-                    return;
+                    return {
+                        Success      => 0,
+                        ErrorMessage => "Could not update class $ClassData{Name}.",
+                    };
                 }
                 $ClassID = $ClassLookup{ $ClassData{Name} };
             }
@@ -1490,11 +1488,10 @@ sub ClassImport {
         }
 
         if ( !$ClassID ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not add class $ClassData{Name}.",
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => "Could not add class $ClassData{Name}.",
+            };
         }
 
         # set class preferences
@@ -1544,11 +1541,10 @@ sub ClassImport {
             Data => $ClassDefinition,
         );
         if ( !$ClassDefinitions{$ClassID} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Error recreating the definition in yaml.',
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => 'Error recreating the definition in yaml.',
+            };
         }
     }
 
@@ -1591,11 +1587,10 @@ sub ClassImport {
         }
 
         if ( !$RoleID ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not add role $RoleName.",
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => "Could not add role $RoleName.",
+            };
         }
 
         # clean up definition data
@@ -1606,11 +1601,10 @@ sub ClassImport {
             Data => $RoleDefinition,
         );
         if ( !$RoleDefinitions{$RoleID} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Error recreating the definition in yaml.',
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => 'Error recreating the definition in yaml.',
+            };
         }
     }
 
@@ -1656,11 +1650,10 @@ sub ClassImport {
                 UserID            => 1,
             );
             if ( !$Result{Success} ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => 'Could not update setting DynamicField::Namespaces.',
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Could not update setting DynamicField::Namespaces.',
+                };
             }
 
             my $Success = $SysConfigObject->SettingUnlock(
@@ -1668,11 +1661,10 @@ sub ClassImport {
                 DefaultID => $Setting{DefaultID},
             );
             if ( !$Success ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => 'Could not unlock setting DynamicField::Namespaces.',
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Could not unlock setting DynamicField::Namespaces.',
+                };
             }
 
             my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
@@ -1683,11 +1675,10 @@ sub ClassImport {
             );
 
             if ( !$DeploymentResult{Success} ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => 'Deployment failed!',
-                );
-                return;
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Deployment failed!',
+                };
             }
         }
     }
@@ -1755,11 +1746,10 @@ sub ClassImport {
         );
 
         if ( !$Return->{Success} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Could not store definition.',
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => 'Could not store definition.',
+            };
         }
     }
     for my $RoleID ( keys %RoleDefinitions ) {
@@ -1771,15 +1761,14 @@ sub ClassImport {
         );
 
         if ( !$Return->{Success} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Could not store definition.',
-            );
-            return;
+            return {
+                Success      => 0,
+                ErrorMessage => 'Could not store definition.',
+            };
         }
     }
 
-    return 1;
+    return { Success => 1 };
 }
 
 =head2 ClassExport()
