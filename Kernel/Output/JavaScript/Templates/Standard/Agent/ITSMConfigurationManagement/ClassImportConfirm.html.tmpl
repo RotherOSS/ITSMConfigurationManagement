@@ -1,4 +1,4 @@
-<h3>{{ "The following classes will be imported" | Translate }}:</h3>
+<p>{{ "The following classes will be imported" | Translate }}:</p>
 <div class="Clear"></div>
 <fieldset class="TableLike FixedSmall Narrow">
 
@@ -12,7 +12,7 @@
 
 {% if Roles %}
 
-<h3>{{ "The following roles will be imported" | Translate }}:</h3>
+<p>{{ "The following roles will be imported" | Translate }}:</p>
 <div class="Clear"></div>
 <fieldset class="TableLike FixedSmall Narrow">
 
@@ -26,6 +26,6 @@
 
 {% endif %}
 
-<p style="display: block; max-width: 450px;">{{ "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal." | Translate }}</p>
+<p class="Error" style="max-width: 450px;">{{ "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal." | Translate }}</p>
 <div class="Clear"></div>
-<p style="text-align: center;">{{ "Do you want to proceed?" | Translate}}</p>
+<p style="margin-top: 16px;">{{ "Do you want to proceed?" | Translate}}</p>
