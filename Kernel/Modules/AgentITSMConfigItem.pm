@@ -22,7 +22,6 @@ use warnings;
 use namespace::autoclean;
 
 # core modules
-use List::Util qw(any none);
 
 # CPAN modules
 

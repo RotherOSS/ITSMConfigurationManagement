@@ -22,7 +22,6 @@ use utf8;
 use namespace::autoclean;
 
 # core modules
-use List::Util qw(first);
 
 # CPAN modules
 
