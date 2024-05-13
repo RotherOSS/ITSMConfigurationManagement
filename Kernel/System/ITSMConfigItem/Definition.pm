@@ -1504,6 +1504,9 @@ sub ClassImport {
             # transition: preference Permission is named PermissionGroup in definition syntax
             my $PreferenceValue;
             if ( $PreferenceKey eq 'Permission' ) {
+
+                next PREFERENCEKEY unless $ClassData{PermissionGroup};
+
                 $PreferenceValue = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
                     Group => $ClassData{PermissionGroup},
                 );
