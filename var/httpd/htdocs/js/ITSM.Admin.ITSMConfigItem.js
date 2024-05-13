@@ -42,29 +42,10 @@ ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
 
                 var ItemList = Response;
 
-                var HTMLString = '<h3>' + Core.Language.Translate("The following classes will be imported") + ':</h3>' +
-                    '<div class="Clear"></div>' +
-                    '<fieldset class="TableLike FixedSmall Narrow">';
-
-                ItemList.Classes.forEach(function(Class) {
-                    HTMLString += '<p class="Value">' + Class + '</p>';
+                var HTMLString = Core.Template.Render('Agent/ITSMConfigurationManagement/ClassImportConfirm', {
+                    'Classes': ItemList.Classes,
+                    'Roles': ItemList.Roles,
                 });
-                HTMLString += '</fieldset>';
-
-                if ( ItemList.Roles ) {
-                    HTMLString += '<h3>' + Core.Language.Translate("The following roles will be imported") + ':</h3>' +
-                        '<div class="Clear"></div>' +
-            '<fieldset class="TableLike FixedSmall Narrow">';
-
-                    ItemList.Roles.forEach(function(Role) {
-                        HTMLString += '<p class="Value">' + Role + '</p>';
-                    });
-                    HTMLString += '</fieldset>';
-                }
-
-                HTMLString += '<p style="display: block; max-width: 450px;">' + Core.Language.Translate("Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.") + '</p>' +
-        '<div class="Clear"></div>' +
-        '<p style="text-align: center;">' + Core.Language.Translate("Do you want to proceed?") + '</p>';
 
                 Core.UI.Dialog.ShowDialog({
                     Title: Core.Language.Translate("Overview and Confirmation"),
