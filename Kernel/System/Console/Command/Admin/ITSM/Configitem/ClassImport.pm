@@ -109,11 +109,11 @@ sub Run {
 
     return $Error->('Definition is no valid YAML hash.') unless IsArrayRefWithData($DefinitionRaw);
 
-    my $Success = $ConfigItemObject->ClassImport(
+    my $Result = $ConfigItemObject->ClassImport(
         Content => $DefinitionRaw,
     );
 
-    return $Error->("Could not import definitions from file.") unless $Success;
+    return $Error->( $Result->{ErrorMessage} || "Could not import definitions from file." ) unless $Result->{Success};
 
     $Self->Print("<green>Done with all</green>\n");
 
