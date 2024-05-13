@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - 06967b79ac73ef058fd76d2d0dddeb58f38b7816 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 3185f02de546185a2805008b16468354c9985bc9 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -839,9 +839,9 @@ sub GetFieldState {
 
 Methods that are used only internally.
 
-=head2 _GetReferencedObjectID()
+=head2 _GetReferenceDFConfig()
 
-The ID of the referenced object.
+A dynamic field configuration that can be used as a delegate.
 
 =cut
 
