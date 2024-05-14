@@ -449,7 +449,7 @@ sub _SectionRender {
                 Name => 'FieldDisplayRow',
                 Data => {
                     Widths => join( ' ', @Widths[ 0 .. $Columns - 1 ] ),
-                    ,
+
                 }
             );
 

@@ -920,7 +920,7 @@ sub _ShowSidebar {
     for my $ClassID ( keys %{ $Param{ClassList} } ) {
         my $HasContent = %{ $ClassDefinition->DefinitionGet( ClassID => $ClassID ) };
         if ($HasContent) {
-            $ClassListForMultSel{$ClassID} = $Param{ClassList}->{$ClassID}             
+            $ClassListForMultSel{$ClassID} = $Param{ClassList}->{$ClassID};
         }
     }
 
