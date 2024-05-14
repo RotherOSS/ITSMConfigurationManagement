@@ -259,6 +259,10 @@ div.InputField_TreeContainer {
     grid-template-columns: calc( 50% - 24px ) 1fr;
 }
 
+.SetDisplayValue div.Clear {
+    display: none;
+}
+
 .DynamicFieldRichTextLink {
     display: none;
 }

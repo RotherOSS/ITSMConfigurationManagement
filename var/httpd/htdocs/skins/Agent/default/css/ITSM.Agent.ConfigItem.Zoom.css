@@ -100,6 +100,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         grid-template-columns: calc( 50% - 24px ) 1fr;
     }
 
+    .SetDisplayValue div.Clear {
+        display: none;
+    }
+
     .DynamicFieldRichTextLink {
         display: none;
     }
