@@ -919,7 +919,9 @@ sub _ShowSidebar {
     my %ClassListForMultSel;
     for my $ClassID ( keys %{ $Param{ClassList} } ) {
         my $HasContent = %{ $ClassDefinition->DefinitionGet( ClassID => $ClassID ) };
-        $ClassListForMultSel{$ClassID} = $Param{ClassList}->{$ClassID} if $HasContent;
+        if ($HasContent) {
+            $ClassListForMultSel{$ClassID} = $Param{ClassList}->{$ClassID}             
+        }
     }
 
     my $ClassOptionMultStrg = $LayoutObject->BuildSelection(
