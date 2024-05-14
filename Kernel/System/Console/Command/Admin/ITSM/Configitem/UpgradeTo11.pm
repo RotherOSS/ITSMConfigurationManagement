@@ -771,19 +771,15 @@ END_SQL
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
                                 my $SubAttr = $Set->{$Name};
                                 my %Values  = map {
-                                    ( $Included->{DF} => ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} )
+                                    (
+                                        $Included->{DF} => ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} )
                                         ? [ $_->{Content} ]
-                                        : $_->{Content} )
+                                        : $_->{Content}
+                                    )
                                 } @{$SubAttr}[ 1 .. $SubAttr->$#* ];
 
                                 if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
-                                    if ( $Included->{Definition}{Config}{MultiValue} ) {
-                                        my @NewValues = map { $_ . ':00' } $Values{ $Included->{DF} }->@*;
-                                        $Values{ $Included->{DF} } = \@NewValues;
-                                    }
-                                    else {
-                                        %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
-                                    }
+                                    %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
                                 }
 
                                 %SetValue = (
@@ -876,7 +872,97 @@ sub _DeleteLegacyData {
     $Self->Print(
         "<yellow>Optionally all legacy data can be deleted. This step is not necessary for the migrated CMDB to work and can be done at any later time.</yellow>\n"
     );
-    $Self->Print("\n<red>Do you really want to permanently delete all legacy data from the system? (yes/no)</red>\n");
+    $Self->Print("\n<red>Do you really want to permanently delete all legacy data from the system? (yes|no)</red>\n");
+
+    if ( <STDIN> =~ m/^yes$/i ) {    ## no critic qw(InputOutput::ProhibitExplicitStdin);
+
+        # get neccessary objects
+        my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        # 1. delete files from temporary directory
+        $Self->Print("<yellow>Deleting previously created temporary files from disk...</green>\n");
+        my @FilesInDirectory = $MainObject->DirectoryRead(
+            Directory => $Self->{WorkingDir},
+            Filter    => '*',
+        );
+        for my $File (@FilesInDirectory) {
+            my $Success = $MainObject->FileDelete(
+                Location => $File,
+            );
+        }
+        $Self->Print("<green>Done deleting temporary files.</green>\n");
+
+        # 2. delete configitem_definition_legacy database column
+        $Self->Print("<yellow>Deleting database column configitem_definition_legacy from table configitem_definition...</yellow>\n");
+        $Kernel::OM->Get('Kernel::System::DB')->Do(
+            SQL => 'ALTER TABLE configitem_definition DROP COLUMN configitem_definition_legacy',
+        );
+        $Self->Print("<green>Done deleting the database column.</green>\n");
+
+        # 3. clean up xml storage
+        # get all versions and corresponding class ids in one go
+        # TODO: Do we need batches for really large CMDBs?
+        $Self->Print("<yellow>Deleting configitem data from xml storage...</yellow>\n");
+        my $Rows = $Kernel::OM->Get('Kernel::System::DB')->SelectAll(
+            SQL => <<'END_SQL',
+SELECT v.id, ci.class_id
+  FROM configitem_version v
+  INNER JOIN configitem ci ON v.configitem_id = ci.id
+  ORDER BY v.id
+END_SQL
+        );
+
+        # TODO: disable history before the loop over the classes
+        my $DisabledHistory;
+        my $HistorySetting = q{ITSMConfigItem::EventModulePost###100-History};
+        if ( !$DisabledHistory && $Kernel::OM->Get('Kernel::Config')->Get($HistorySetting) ) {
+
+            # do not write a history
+            my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+                LockAll => 1,
+                Force   => 1,
+                UserID  => 1,
+            );
+
+            $SysConfigObject->SettingUpdate(
+                Name              => $HistorySetting,
+                IsValid           => 0,
+                ExclusiveLockGUID => $ExclusiveLockGUID,
+                UserID            => 1,
+            );
+
+            $SysConfigObject->SettingUnlock(
+                UnlockAll => 1,
+            );
+
+            # 'Rebuild' the configuration.
+            # TODO: why must this setting be deployed? It should suffice to change is temporarily
+            $SysConfigObject->ConfigurationDeploy(
+                Comments    => "CMDB Upgrade: Temporarily disable CMDB history for the data transfer.",
+                AllSettings => 1,
+                UserID      => 1,
+            );
+
+            $DisabledHistory = 1;
+        }
+
+        ROW:
+        for my $Row ( $Rows->@* ) {
+            my ( $VersionID, $ClassID ) = $Row->@*;
+
+            $Kernel::OM->Get('Kernel::System::XML')->XMLHashDelete(
+                Type => "ITSM::ConfigItem::$ClassID",
+                Key  => $VersionID,
+            );
+        }
+        $Self->Print("<green>Done deleting config item data from xml storage.</green>\n");
+    }
+    else {
+        $Self->Print(
+            "<green>Continuing without deleting legacy data.</green>\n"
+        );
+    }
 
     return 'Next';
 }
@@ -998,7 +1084,9 @@ sub _DFConfigFromLegacy {
     my %DF;
 
     if ( any { defined $Param{Attribute}{$_} } qw/CountMin CountMax CountDefault/ ) {
-        $DF{Config}{MultiValue} = 1;
+        unless ( !$Param{Attribute}{CountMax} || ( $Param{Attribute}{CountMax} && $Param{Attribute}{CountMax} <= 1 ) ) {    ## no critic qw(ControlStructures::ProhibitUnlessBlocks)
+            $DF{Config}{MultiValue} = 1;
+        }
     }
 
     if ( $Param{Attribute}{Sub} ) {
