@@ -756,40 +756,44 @@ END_SQL
                 my $Value;
                 if ( $DynamicField->{FieldType} eq 'Set' ) {
                     for my $Set ( @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ] ) {
-                        my @SetValue;
+                        my %SetValue;
 
                         for my $Included ( $DynamicField->{Config}{Include}->@* ) {
                             if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
-                                push @SetValue, $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
 
                                 if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
-                                    $SetValue[-1] .= ':00';
+                                    $Set->{Content} .= ':00';
                                 }
+
+                                $SetValue{ $Included->{DF} } = $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
                             }
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
                                 my $SubAttr = $Set->{$Name};
-                                my @Values  = map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ];
-
-                                INDEX:
-                                while (@Values) {
-                                    if ( !defined $Values[-1] || $Values[-1] eq '' ) {
-                                        pop @Values;
-                                    }
-                                    else {
-                                        last INDEX;
-                                    }
-                                }
+                                my %Values  = map {
+                                    ( $Included->{DF} => ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} )
+                                        ? [ $_->{Content} ]
+                                        : $_->{Content} )
+                                } @{$SubAttr}[ 1 .. $SubAttr->$#* ];
 
                                 if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
-                                    @Values = map { $_ . ':00' } @Values;
+                                    if ( $Included->{Definition}{Config}{MultiValue} ) {
+                                        my @NewValues = map { $_ . ':00' } $Values{ $Included->{DF} }->@*;
+                                        $Values{ $Included->{DF} } = \@NewValues;
+                                    }
+                                    else {
+                                        %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
+                                    }
                                 }
 
-                                push @SetValue, $Included->{Definition}{Config}{MultiValue} || $BaseArrayFields{ $Included->{Definition}{FieldType} } ? \@Values : $Values[0];
+                                %SetValue = (
+                                    %SetValue,
+                                    %Values,
+                                );
                             }
                         }
 
-                        push $Value->@*, \@SetValue;
+                        push $Value->@*, \%SetValue;
                     }
                 }
                 elsif ( $DynamicField->{Config}{MultiValue} ) {
