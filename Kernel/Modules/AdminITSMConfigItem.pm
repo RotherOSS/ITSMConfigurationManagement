@@ -891,8 +891,9 @@ sub Run {
 sub _ShowSidebar {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ClassDefinition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # generate RoleOptionStrg, ClassOptionStrg and ClassOptionMultStrg which are needed for the sidebox
     my $RoleID         = $Param{RoleSelected} ? $Param{RoleSelected}->{ID} : $ParamObject->GetParam( Param => 'RoleID' );
@@ -914,10 +915,16 @@ sub _ShowSidebar {
         Class        => 'Modernize',
     );
 
-    my @ExportIDs           = $ParamObject->GetArray( Param => 'ExportID' );
+    my @ExportIDs = $ParamObject->GetArray( Param => 'ExportID' );
+    my %ClassListForMultSel;
+    for my $ClassID ( keys %{ $Param{ClassList} } ) {
+        my $HasContent = %{ $ClassDefinition->DefinitionGet( ClassID => $ClassID ) };
+        $ClassListForMultSel{$ClassID} = $Param{ClassList}->{$ClassID} if $HasContent;
+    }
+
     my $ClassOptionMultStrg = $LayoutObject->BuildSelection(
         Data => {
-            $Param{ClassList}->%*,
+            %ClassListForMultSel,
             $Param{RoleList}->%*,
         },
         Name        => 'ExportID',

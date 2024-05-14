@@ -93,32 +93,19 @@
                     </li>
 
                     <li>
-                        <form action="[% Env("CGIHandle") %]" method="get">
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                             <input type="hidden" name="Subaction" value="ClassExport"/>
 
                             <div>[% Data.ClassOptionMultStrg %]</div>
-                            <div id="ClassIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="ClassIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="ExportIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="ExportIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 
                             <button class="Primary CallForAction Fullsize Center" type="submit" id="Export" value="Export">
                                 <span><i class="fa fa-download"></i>
                                     Export Classes
                                 </span>
                             </button>
-
-                            <!--button class="Primary CallForAction" type="submit" id="Export" value="Export">
-                                <span>Export</span>
-                            </button-->
-
-                            <!--a href="/otobo/index.pl?Action=AdminDynamicFieldImportExport;Subaction=Export" id="DynamicFieldExport" class="CallForAction Fullsize Center">
-                                <span><i class="fa fa-download"></i>
-                                    Export Classes
-                                </span>
-                            </a-->
-                            <!--button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Add") | html %]">
-                                <span>[% Translate("Export classes") | html %]</span>
-                            </button-->
 
                         </form>
                     </li>
