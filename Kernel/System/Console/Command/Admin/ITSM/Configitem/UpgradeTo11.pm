@@ -770,13 +770,16 @@ END_SQL
                             else {
                                 my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
                                 my $SubAttr = $Set->{$Name};
-                                my %Values  = map {
-                                    (
-                                        $Included->{DF} => ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} )
-                                        ? [ $_->{Content} ]
-                                        : $_->{Content}
-                                    )
-                                } @{$SubAttr}[ 1 .. $SubAttr->$#* ];
+                                my $SubAttrValue;
+                                if ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} ) {
+                                    $SubAttrValue = [ map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ] ];
+                                }
+                                else {
+                                    $SubAttrValue = $SubAttr->[1]{Content};
+                                }
+                                my %Values = (
+                                    $Included->{DF} => $SubAttrValue,
+                                );
 
                                 if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
                                     %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
@@ -881,7 +884,7 @@ sub _DeleteLegacyData {
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # 1. delete files from temporary directory
-        $Self->Print("<yellow>Deleting previously created temporary files from disk...</green>\n");
+        $Self->Print("<yellow>Deleting previously created temporary files from disk...</yellow>\n");
         my @FilesInDirectory = $MainObject->DirectoryRead(
             Directory => $Self->{WorkingDir},
             Filter    => '*',
