@@ -1304,12 +1304,15 @@ sub Run {
     # escape single quotes
     $FieldContent =~ s/'/&#39;/g;
 
-    $LayoutObject->Block(
-        Name => 'RowDescription',
-        Data => {
-            Description => $FieldContent // '',
-        },
-    );
+    # check if description should be rendered
+    if ( any { $_->{Type} && $_->{Type} eq 'Description' } values $Definition->{DefinitionRef}{Sections}->%* ) {
+        $LayoutObject->Block(
+            Name => 'RowDescription',
+            Data => {
+                Description => $FieldContent // '',
+            },
+        );
+    }
 
     # render dynamic fields
     my $DynamicFieldHTML;
