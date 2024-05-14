@@ -1625,11 +1625,16 @@ sub UniqueNameCheck {
 
 =head2 CurInciStateRecalc()
 
-recalculates the current incident state of this config item and of all linked config items.
+recalculates the current incident state of this config item and of all config items
+that are linked to it. Only links between config items are considered here. Links to
+or from config item versions are ignored.
 
 The current incident state depends on the incident states that this config depends on.
 A change of the incident state might have repercussions on the current incident state
 of the config items that depend on this config item.
+
+The parameters C<NewConfigItemIncidentState> and C<ScannedConfigItemIDs> carry state between
+invocations of this method. They provide caching and prevent infinite loops.
 
     my $Success = $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID               => 123,
