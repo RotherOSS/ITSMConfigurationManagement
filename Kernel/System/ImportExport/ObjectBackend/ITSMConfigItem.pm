@@ -670,14 +670,18 @@ sub ExportDataGet {
 
             # The Key encodes some extra information.
             # Note that the indexes start at 1 in the key names
-            my ( $DFName, $Index ) = split /::/, $Key;
+            my ( $DFFullName, $Index ) = split /::/, $Key;
+            my $DFName;
+            if ( $DFFullName =~ /^DynamicField_(.*)/ ) {
+                $DFName = $1;
+            }
 
             # ignore unexpected indexes, but still cut the '::'
             if ( defined $Index && $Index !~ m/^[1-9][0-9]*$/ ) {
                 undef $Index;
             }
 
-            my $Value = $ConfigItem->{"DynamicField_$DFName"};
+            my $Value = $ConfigItem->{$DFFullName};
 
             if ( !defined $Value ) {
                 push @RowItems, '';
@@ -1135,7 +1139,7 @@ sub ImportDataSave {
 
         my $Key = $DynamicFieldConfig->{Name};
 
-        next DF_NAME if $MappingObjectKeyData{$Key};
+        next DF_NAME if $MappingObjectKeyData{"DynamicField_$Key"};
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1489,8 +1493,8 @@ sub _MappingObjectAttributesGet {
             # add row
             push @Elements,
                 {
-                    Key   => $Key,
-                    Value => $Value,
+                    Key   => "DynamicField_$Key",
+                    Value => "DynamicField_$Value",
                 };
         }
 
@@ -1516,8 +1520,8 @@ sub _MappingObjectAttributesGet {
             # add row
             push @Elements,
                 {
-                    Key   => $Key,
-                    Value => $Value,
+                    Key   => "DynamicField_$Key",
+                    Value => "DynamicField_$Value",
                 };
         }
     }
