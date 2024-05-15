@@ -389,6 +389,8 @@ sub Run {
             }
         }
 
+        $GetParam{Description} //= '';
+
         # get name only if it is not filled by a module
         if ( !$NameModule ) {
             $ConfigItem->{Name} = $GetParam{Name};

@@ -146,7 +146,7 @@ sub Run {
 
     # recalculate incident state of previously linked CIs
     # TODO: filter out unchanged IDs
-    push @ConfigItemIDs, $Param{Data}->{OldValue}->@*;
+    push @ConfigItemIDs, ( $Param{Data}->{OldValue} // [] )->@*;
 
     # recalculate incident state of newly linked CIs
     push @ConfigItemIDs, $Param{Data}->{Value}->@*;
