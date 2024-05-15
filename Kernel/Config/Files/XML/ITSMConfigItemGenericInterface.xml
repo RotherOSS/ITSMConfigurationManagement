@@ -69,6 +69,41 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
+    <Setting Name="GenericInterface::Operation::ConfigItemSearch###SearchLimit" Required="1" Valid="1">
+        <Description Translatable="1">Maximum number of config items to be displayed in the result of this operation.</Description>
+        <Navigation>GenericInterface::Operation::ConfigItemSearch</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,8}$">500</Item>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::ConfigItemSearch###SortBy::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default config item attribute for config item sorting of the config item search result of this operation.</Description>
+        <Navigation>GenericInterface::Operation::ConfigItemSearch</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Age">
+                <Item ValueType="Option" Value="ConfigItem" Translatable="1">ConfigItem</Item>
+                <Item ValueType="Option" Value="Number" Translatable="1">Number</Item>
+                <Item ValueType="Option" Value="Name" Translatable="1">Name</Item>
+                <Item ValueType="Option" Value="DeplState" Translatable="1">Deployment State</Item>
+                <Item ValueType="Option" Value="InciState" Translatable="1">Incident State</Item>
+                <Item ValueType="Option" Value="CurDeplState" Translatable="1">Current Deployment State</Item>
+                <Item ValueType="Option" Value="CurInciState" Translatable="1">Current Incident State</Item>
+                <Item ValueType="Option" Value="Age" Translatable="1">Age</Item>
+                <Item ValueType="Option" Value="Created" Translatable="1">Created</Item>
+                <Item ValueType="Option" Value="Changed" Translatable="1">Changed</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::ConfigItemSearch###Order::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.</Description>
+        <Navigation>GenericInterface::Operation::ConfigItemSearch</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Down">
+                <Item ValueType="Option" Value="Down" Translatable="1">Down</Item>
+                <Item ValueType="Option" Value="Up" Translatable="1">Up</Item>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemCreate###Permission" Required="1" Valid="1">
         <Description Translatable="1">Defines Required permissions to create ITSM configuration items using the Generic Interface.</Description>
         <Navigation>GenericInterface::Operation::ConfigItemCreate</Navigation>
