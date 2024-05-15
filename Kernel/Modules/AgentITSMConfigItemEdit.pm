@@ -1304,16 +1304,6 @@ sub Run {
     # escape single quotes
     $FieldContent =~ s/'/&#39;/g;
 
-    # check if description should be rendered
-    if ( any { $_->{Type} && $_->{Type} eq 'Description' } values $Definition->{DefinitionRef}{Sections}->%* ) {
-        $LayoutObject->Block(
-            Name => 'RowDescription',
-            Data => {
-                Description => $FieldContent // '',
-            },
-        );
-    }
-
     # render dynamic fields
     my $DynamicFieldHTML;
     my %GroupLookup;
@@ -1352,8 +1342,22 @@ sub Run {
                 my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
 
                 next SECTION unless $Section;
-                next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
-                next SECTION if $Section->{Type} && $Section->{Type} ne 'DynamicFields';
+                if ( $Section->{Type} ) {
+                    if ( $Section->{Type} eq 'Description' ) {
+
+                        # render description
+                        $LayoutObject->Block(
+                            Name => 'RowDescription',
+                            Data => {
+                                Description => $FieldContent // '',
+                            },
+                        );
+                        next SECTION;
+                    }
+                    elsif ( $Section->{Type} ne 'DynamicFields' ) {
+                        next SECTION;
+                    }
+                }
 
                 # weed out multiple occurances of dynamic fields - see comment above
                 $Section->{Content} = $Self->_DiscardFieldsSeen(
