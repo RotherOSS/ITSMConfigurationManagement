@@ -889,10 +889,13 @@ sub _DeleteLegacyData {
             Directory => $Self->{WorkingDir},
             Filter    => '*',
         );
-        for my $File (@FilesInDirectory) {
+        for my $File ( sort @FilesInDirectory ) {
             my $Success = $MainObject->FileDelete(
                 Location => $File,
             );
+            if ( !$Success ) {
+                $Self->Print("<red>Could not delete file $File!</red>");
+            }
         }
         $Self->Print("<green>Done deleting temporary files.</green>\n");
 

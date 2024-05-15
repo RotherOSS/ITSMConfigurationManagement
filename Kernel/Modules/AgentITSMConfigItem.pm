@@ -207,14 +207,6 @@ sub Run {
         )
     };
 
-    # viewable incident states
-    my @ViewableInciStateIDs = keys %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::Core::IncidentState',
-            Valid => 1,
-        )
-    };
-
     # get permissions
     my $Permission = 'rw';
 
