@@ -189,12 +189,12 @@ my @ConfigItemIDs;
 
 # add a configitem to each class
 my $FirstConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID     => $FirstClassID,
-    Name        => $NamePrefix . 'First#001',
+    ClassID      => $FirstClassID,
+    Name         => $NamePrefix . 'First#001',
     DefinitionID => $FirstDefinitionID,
-    DeplStateID => $DeplStateListReverse{Production},
-    InciStateID => $InciStateListReverse{Operational},
-    UserID      => 1,
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},
+    UserID       => 1,
 );
 
 if ( !$FirstConfigItemID ) {
@@ -207,12 +207,12 @@ if ( !$FirstConfigItemID ) {
 push @ConfigItemIDs, $FirstConfigItemID;
 
 my $SecondConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID     => $SecondClassID,
-    Name        => $NamePrefix . 'Second#001',
+    ClassID      => $SecondClassID,
+    Name         => $NamePrefix . 'Second#001',
     DefinitionID => $SecondDefinitionID,
-    DeplStateID => $DeplStateListReverse{Production},
-    InciStateID => $InciStateListReverse{Operational},
-    UserID      => 1,
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},
+    UserID       => 1,
 );
 
 if ( !$SecondConfigItemID ) {
@@ -226,12 +226,12 @@ push @ConfigItemIDs, $SecondConfigItemID;
 
 # create a 3rd configitem in the 2nd class
 my $ThirdConfigItemID = $ConfigItemObject->ConfigItemAdd(
-    ClassID     => $SecondClassID,
-    Name        => $NamePrefix . 'Second#002',
+    ClassID      => $SecondClassID,
+    Name         => $NamePrefix . 'Second#002',
     DefinitionID => $SecondDefinitionID,
-    DeplStateID => $DeplStateListReverse{Production},
-    InciStateID => $InciStateListReverse{Operational},
-    UserID      => 1,
+    DeplStateID  => $DeplStateListReverse{Production},
+    InciStateID  => $InciStateListReverse{Operational},
+    UserID       => 1,
 );
 
 if ( !$ThirdConfigItemID ) {
