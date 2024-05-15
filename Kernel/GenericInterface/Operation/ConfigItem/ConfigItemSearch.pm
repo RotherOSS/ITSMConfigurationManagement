@@ -193,7 +193,7 @@ sub Run {
     }
 
     # authenticate user
-    my ( $UserID, $UserType ) = $Self->Auth(
+    my ($UserID) = $Self->Auth(
         %Param,
     );
 
@@ -220,15 +220,15 @@ sub Run {
     my %DynamicFieldSearchParameters = $Self->_GetDynamicFields( %{ $Param{Data} } );
 
     # perform configitem search
-    $UserType = ( $UserType eq 'Customer' ) ? 'CustomerUserID' : 'UserID';
     my @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
         %GetParam,
         %DynamicFieldSearchParameters,
-        Result    => 'ARRAY',
-        SortBy    => $Self->{SortBy},
-        OrderBy   => $Self->{OrderBy},
-        Limit     => $Self->{SearchLimit},
-        $UserType => $UserID,
+        Result     => 'ARRAY',
+        SortBy     => $Self->{SortBy},
+        OrderBy    => $Self->{OrderBy},
+        Limit      => $Self->{SearchLimit},
+        Permission => $Self->{Config}->{Permission},
+        UserID     => $UserID,
     );
     if (@ConfigItemIDs) {
         return {
