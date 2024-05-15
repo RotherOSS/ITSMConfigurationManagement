@@ -138,40 +138,6 @@ sub PageRender {
 
             next CONTENTBLOCK unless $Section;
 
-            # check for referenced dynamic field value before rendering ReferencedSection
-            if ( $Section->{Type} && $Section->{Type} eq 'ReferencedSection' ) {
-
-                my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-                # fetch config of referenced field
-                my $ReferencedFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-                    Name => $Section->{ReferenceField},
-                );
-                next CONTENTBLOCK unless IsHashRefWithData($ReferencedFieldConfig);
-
-                # fetch config item depending on field type
-                my %ConfigItemGetParams = (
-                    DynamicFields => 1,
-                );
-
-                if ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
-                    $ConfigItemGetParams{ConfigItemID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
-                }
-                elsif ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
-                    $ConfigItemGetParams{VersionID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
-                }
-
-                next CONTENTBLOCK unless ( $ConfigItemGetParams{ConfigItemID} || $ConfigItemGetParams{VersionID} );
-
-                # get referenced config item
-                my $ReferencedConfigItem = $ConfigItemObject->ConfigItemGet(
-                    %ConfigItemGetParams,
-                );
-                next CONTENTBLOCK unless IsHashRefWithData($ReferencedConfigItem);
-
-                $Param{ReferencedConfigItem} = $ReferencedConfigItem;
-            }
-
             my $GridArea;
             for my $Key (qw/Row Column/) {
                 if ( $ContentBlock->{ $Key . 'Start' } ) {
@@ -214,34 +180,7 @@ sub _SectionRender {
             return $Self->_RenderReferencedSection(%Param);
         }
         elsif ( $Param{Section}{Type} eq 'Description' ) {
-
-            # render description richtext editor
-            $Param{LayoutObject}->Block(
-                Name => 'FieldDisplayRow',
-                Data => {
-                    Widths => '1fr',
-                },
-            );
-
-            $Param{LayoutObject}->Block(
-                Name => 'FieldDisplayCell',
-                Data => {
-                    Label => 'Description',
-                    Type  => 'Label',
-                },
-            );
-
-            $Param{LayoutObject}->Block(
-                Name => 'FieldDisplayCell',
-                Data => {
-                    ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-                    VersionID    => $Param{ConfigItem}{VersionID},
-                    Frontend     => $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer',
-                    Type         => 'Iframe',
-                },
-            );
-
-            return 1;
+            return $Self->_RenderDescriptionSection(%Param);
         }
         elsif ( $Param{Section}{Type} ne 'DynamicFields' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -251,71 +190,6 @@ sub _SectionRender {
 
             return;
         }
-    }
-
-    elsif ( $Param{Section}{Type} && $Param{Section}{Type} eq 'Description' ) {
-
-        # fetch config item attachment list for handling inline attachments
-        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-        my @AttachmentList   = $ConfigItemObject->ConfigItemAttachmentList(
-            ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-        );
-
-        # fetch attachment data and store in hash for RichTextDocumentServe
-        my %Attachments;
-        for my $Filename (@AttachmentList) {
-            $Attachments{$Filename} = $ConfigItemObject->ConfigItemAttachmentGet(
-                ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-                Filename     => $Filename,
-            );
-            $Attachments{$Filename}{ContentID} = $Attachments{$Filename}{Preferences}{ContentID};
-        }
-
-        # needed to provide necessary params for RichTextDocumentServe
-        my %Data = (
-            Content     => $Param{ConfigItem}{Description},
-            ContentType => 'text/html; charset="utf-8"',
-            Disposition => 'inline',
-        );
-
-        # generate base url
-        my $URL = 'Action=' . ( $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer' ) . 'ITSMConfigItemAttachment;Subaction=HTMLView'
-            . ";ConfigItemID=$Param{ConfigItem}{ConfigItemID};VersionID=$Param{ConfigItem}{VersionID};Filename=";
-
-        # reformat rich text document to have correct charset and links to
-        # inline documents
-        %Data = $Param{LayoutObject}->RichTextDocumentServe(
-            Data               => \%Data,
-            URL                => $URL,
-            Attachments        => \%Attachments,
-            LoadExternalImages => 1,
-        );
-
-        # render description richtext editor
-        $Param{LayoutObject}->Block(
-            Name => 'FieldDisplayRow',
-            Data => {
-                Widths => '1fr',
-            },
-        );
-
-        $Param{LayoutObject}->Block(
-            Name => 'FieldDisplayCell',
-            Data => {
-                Label => 'Description',
-                Type  => 'Label',
-            },
-        );
-        $Param{LayoutObject}->Block(
-            Name => 'FieldDisplayCell',
-            Data => {
-                ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-                Value        => $Data{Content},
-                Type         => 'Iframe',
-            },
-        );
-
-        return 1;
     }
 
     # Get HTML from additional modules
@@ -584,23 +458,97 @@ sub _RenderCILinks {
     return 1;
 }
 
+sub _RenderDescriptionSection {
+    my ( $Self, %Param ) = @_;
+
+    return unless IsHashRefWithData( $Param{ConfigItem} );
+    return unless IsHashRefWithData( $Param{LayoutObject} );
+
+    # render description richtext editor
+    $Param{LayoutObject}->Block(
+        Name => 'FieldDisplayRow',
+        Data => {
+            Widths => '1fr',
+        },
+    );
+
+    $Param{LayoutObject}->Block(
+        Name => 'FieldDisplayCell',
+        Data => {
+            Label => 'Description',
+            Type  => 'Label',
+        },
+    );
+
+    $Param{LayoutObject}->Block(
+        Name => 'FieldDisplayCell',
+        Data => {
+            ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+            VersionID    => $Param{ConfigItem}{VersionID},
+            Frontend     => $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer',
+            Type         => 'Iframe',
+        },
+    );
+
+    return 1;
+}
+
 sub _RenderReferencedSection {
     my ( $Self, %Param ) = @_;
 
-    return unless IsHashRefWithData( $Param{ReferencedConfigItem} );
+    return unless $Param{LayoutObject};
+
+    my $ReferencedConfigItem = $Self->_ReferencedConfigItemGet(
+        Section    => $Param{Section},
+        ConfigItem => $Param{ConfigItem},
+    );
+    return unless IsHashRefWithData($ReferencedConfigItem);
 
     # get definition of referenced config item and pass it on to _SectionRender
     my $ReferencedCIDefinition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
-        DefinitionID => $Param{ReferencedConfigItem}{DefinitionID},
+        DefinitionID => $ReferencedConfigItem->{DefinitionID},
     );
 
     return unless $ReferencedCIDefinition->{DefinitionID};
 
     return $Self->_SectionRender(
-        ConfigItem   => $Param{ReferencedConfigItem},
+        ConfigItem   => $ReferencedConfigItem,
         Definition   => $ReferencedCIDefinition,
         Section      => $ReferencedCIDefinition->{DefinitionRef}{Sections}{ $Param{Section}{SectionName} },
         LayoutObject => $Param{LayoutObject},
+    );
+}
+
+sub _ReferencedConfigItemGet {
+    my ( $Self, %Param ) = @_;
+
+    # check needed params
+    return unless IsHashRefWithData( $Param{ConfigItem} );
+    return unless IsHashRefWithData( $Param{Section} );
+
+    # fetch config of referenced field
+    my $ReferencedFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+        Name => $Param{Section}{ReferenceField},
+    );
+
+    return unless IsHashRefWithData($ReferencedFieldConfig);
+
+    # fetch config item depending on field type
+    my %ConfigItemGetParams = (
+        DynamicFields => 1,
+    );
+    if ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItem' ) {
+        $ConfigItemGetParams{ConfigItemID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+    }
+    elsif ( $ReferencedFieldConfig->{FieldType} eq 'ConfigItemVersion' ) {
+        $ConfigItemGetParams{VersionID} = $Param{ConfigItem}{"DynamicField_$ReferencedFieldConfig->{Name}"}[0];
+    }
+
+    return unless ( $ConfigItemGetParams{ConfigItemID} || $ConfigItemGetParams{VersionID} );
+
+    # return referenced config item
+    return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+        %ConfigItemGetParams,
     );
 }
 
