@@ -124,7 +124,7 @@ sub Run {
 
     if ( !$UserID ) {
         return $Self->ReturnError(
-            ErrorCode    => '$Self->{OperationName}.AuthFail',
+            ErrorCode    => "$Self->{OperationName}.AuthFail",
             ErrorMessage => "$Self->{OperationName}: Authorization failing!",
         );
     }
@@ -190,7 +190,7 @@ sub Run {
                 . ' in Kernel::GenericInterface::Operation::ConfigItem::ConfigItemDelete::Run()';
 
             return $Self->ReturnError(
-                ErrorCode    => '$Self->{OperationName}.DeleteError',
+                ErrorCode    => "$Self->{OperationName}.DeleteError",
                 ErrorMessage => "$Self->{OperationName}: $ErrorMessage",
             );
         }
