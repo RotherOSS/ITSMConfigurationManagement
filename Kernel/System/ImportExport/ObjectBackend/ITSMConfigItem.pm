@@ -719,7 +719,10 @@ sub ExportDataGet {
             # - a singlevalue Set field gives an array reference
             if ( !$FormatterCanHandleReferences && ref $ActualValue ) {
 
-                push @RowItems, $JSONObject->Encode( Data => $ActualValue );
+                push @RowItems, $JSONObject->Encode(
+                    Data     => $ActualValue,
+                    SortKeys => 1,
+                );
 
                 next MAPPINGOBJECT;
             }
