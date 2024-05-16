@@ -67,6 +67,7 @@ sub Run {
 
     my %OutOfSyncDefinitions;
 
+    # Loop over all classes and check whether they include the changed dynamic field
     for my $ClassID ( keys $ClassList->%* ) {
         my $DefinitionRef = $ConfigItemObject->DefinitionGet(
             ClassID => $ClassID,
