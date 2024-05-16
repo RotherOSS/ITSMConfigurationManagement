@@ -2160,8 +2160,11 @@ sub _DefinitionDynamicFieldGet {
 
         # do not descend into Interfaces and Groups,
         # as these may be empty and would be logged as errors
+        # TODO: are Interfaces and Groups still used ?
         next KEY if $Key eq 'Interfaces';
         next KEY if $Key eq 'Groups';
+        next KEY if $Key eq 'Pages';
+        next KEY if $Key eq 'Roles';
 
         next KEY unless ref $ContentHash{$Key};
 
