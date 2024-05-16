@@ -165,7 +165,7 @@ sub RoleDefinitionList {
 
 =head2 DefinitionGet()
 
-return a config item definition as hash reference
+returns a config item definition as hash reference
 
     my $DefinitionRef = $ConfigItemObject->DefinitionGet(
         DefinitionID => 123,
@@ -181,7 +181,7 @@ Returns:
 
     $Definition->{DefinitionID}
     $Definition->{ClassID}
-    $Definition->{Class}
+    $Definition->{Class}               # Name of the class
     $Definition->{Definition}
     $Definition->{DefinitionRef}
     $Definition->{DynamicFieldRef}
@@ -233,8 +233,8 @@ sub DefinitionGet {
     my %Definition;
     $Definition{DefinitionID} = $Row[0];
     $Definition{ClassID}      = $Row[1];
-    $Definition{Definition}   = $Row[2] || "--- []";
-    my $DynamicFields = $Row[3] || "--- {}";
+    $Definition{Definition}   = $Row[2] || '--- []';    # a YAML string
+    my $DynamicFields = $Row[3] || '--- {}';            # a YAML string
     $Definition{Version}    = $Row[4];
     $Definition{CreateTime} = $Row[5];
     $Definition{CreateBy}   = $Row[6];
@@ -293,38 +293,39 @@ sub DefinitionGet {
 
 =head2 RoleDefinitionGet()
 
-return a config item definition as hash reference
+return a config item role definition as hash reference. The role definitions are stored in the
+table I<configitem_definition>, just like the config item definitions.
 
-Return
+Get a specific version when the technical ID is known:
+
+    my $RoleDefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        DefinitionID => 12,
+    );
+
+Or get the latest version:
+
+    my $RoleDefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        RoleID => 123, # analogous to ClassID in DefinitionGet()
+    );
+
+Or get a specific version when the version is known.
+
+    my $RoleDefinitionRef = $ConfigItemObject->RoleDefinitionGet(
+        RoleID  => 123,
+        Version => 2,
+    );
+
+Returns:
 
     $Definition->{DefinitionID}
-    $Definition->{ClassID}
-    $Definition->{Class}
+    $Definition->{RoleID}                 # analogous to ClassID in DefinitionGet()
+    $Definition->{Role}                   # name of the role, analogous to Class in DefinitionGet()
     $Definition->{Definition}
     $Definition->{DefinitionRef}
     $Definition->{DynamicFieldRef}
     $Definition->{Version}
     $Definition->{CreateTime}
     $Definition->{CreateBy}
-
-Get a specific version when the technical ID is known:
-
-    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
-        DefinitionID => 12,
-    );
-
-Or get the latest version:
-
-    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
-        RoleID => 123,
-    );
-
-Or get a specific version when the version is known.
-
-    my $DefinitionRef = $ConfigItemObject->RoleDefinitionGet(
-        RoleID  => 123,
-        Version => 2,
-    );
 
 =cut
 
@@ -419,14 +420,15 @@ END_SQL
 
 =head2 DefinitionAdd()
 
-adds a new definition.
+adds a new config item class definition. This can be the initial version of a class definition or a
+change of an existing class definition.
 
     my $Result = $ConfigItemObject->DefinitionAdd(
         ClassID    => 123,
         Definition => 'the definition code',
         UserID     => 1,
         Force      => 1,    # optional, for internal use, force add even if definition is unchanged
-                            # (used if dynamic fields changed)
+                            # (used if dynamic fields changed, or a dynamic role changed)
     );
 
 Returns in the case of success:
@@ -510,7 +512,7 @@ sub DefinitionAdd {
         %Param,
     ) || '--- []';
 
-    # increment version
+    # increment version, start with version 1 for completely new class definitions
     my $Version = ( $LastDefinition->{Version} || 0 ) + 1;
 
     # insert new definition
@@ -560,14 +562,14 @@ sub DefinitionAdd {
 
 =head2 RoleDefinitionAdd()
 
-add a new role definition
+adds a new role definition. This can be the initial version of a role or a
+change of an existing role.
 
     my $Result = $ConfigItemObject->RoleDefinitionAdd(
         RoleID     => 123,
         Definition => 'the definition code',
         UserID     => 1,
-        Force      => 1,    # optional, for internal use, force add even if definition is unchanged
-                            # (used if dynamic fields changed)
+        Force      => 1,    # optional, for use during import for config item classes
     );
 
 Returns in the case of success:
@@ -592,8 +594,6 @@ Only two arguments of the error message are supported.
 
 sub RoleDefinitionAdd {
     my ( $Self, %Param ) = @_;
-
-    # TODO: reunify with DefinitionAdd()
 
     # check needed stuff
     for my $Argument (qw(RoleID Definition UserID)) {
@@ -628,12 +628,11 @@ sub RoleDefinitionAdd {
 
     # check whether the definition itself or the containing dynamic fields changed
     my $DefinitionChanged =
+        $Param{Force}
+        ||
         ( !$LastDefinition->{DefinitionID} )
         ||
         ( $LastDefinition->{Definition} ne $Param{Definition} );
-
-    # TODO: $Param{Force} || $Self->_CheckDynamicFieldChange(); can be taken out of _DefinitionSync() with a little adaption
-    $DefinitionChanged ||= $Param{Force};
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
@@ -649,10 +648,10 @@ sub RoleDefinitionAdd {
         };
     }
 
-    # increment version
+    # increment version, starting with 1 for the initial version
     my $Version = ( $LastDefinition->{Version} || 0 ) + 1;
 
-    # insert new definition
+    # insert new definition without dynamicfield_definition
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'INSERT INTO configitem_definition '
             . '(class_id, configitem_definition, version, create_time, create_by) VALUES '
@@ -666,7 +665,7 @@ sub RoleDefinitionAdd {
     } unless $Success;
 
     # get id of new definition
-    my ($DefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
+    my ($NewRoleDefinitionID) = $Kernel::OM->Get('Kernel::System::DB')->SelectRowArray(
         SQL => 'SELECT id FROM configitem_definition WHERE '
             . 'class_id = ? AND version = ? '
             . 'ORDER BY version DESC',
@@ -674,9 +673,16 @@ sub RoleDefinitionAdd {
         Limit => 1,
     );
 
+    # There is now an initial or subsequent version of a role definition. This new definition
+    # might have added or removed dynamic fields. This means that the config item classed that
+    # include the role dynamically must be updated too.
+    $Self->_DefinitionCreateAfterRoleCreate(
+        RoleID => $Param{RoleID},
+    );
+
     return {
         Success      => 1,
-        DefinitionID => $DefinitionID,
+        DefinitionID => $NewRoleDefinitionID,
         Version      => $Version,
     };
 }
@@ -701,9 +707,8 @@ Returns in the case of a valid definition:
 Indicates the first found problem in the case of an invalid definition:
 
     my $Result = {
-        Success => 0,
-        Error   => '
-        Error   => q{%s is missing. Please provide data for %s in the definition.},
+        Success   => 0,
+        Error     => q{%s is missing. Please provide data for %s in the definition.},
         ErrorArgs => [ 'Sections', 'Sections' ],
     };
 
@@ -993,9 +998,11 @@ sub DefinitionCheck {
 
 =head2 RoleDefinitionCheck()
 
-checks the syntax and the sanity of a new role definition:
+checks the syntax and the sanity of a new role definition.
 
-    my $True = $ConfigItemObject->RoleDefinitionCheck(
+This method currently only falls back to the method C<DefinitionCheck()>.
+
+    my $Success = $ConfigItemObject->RoleDefinitionCheck(
         Definition      => 'the definition code',
         CheckSubElement => 1,                 # (optional, default 0, to check sub elements recursively)
     );
@@ -1015,6 +1022,7 @@ return a hash of class ids with current definitions with dynamic fields not sync
     my %DefinitionsOutOfSync = $ConfigItemObject->DefinitionNeedSync();
 
 Return
+
     %DefinitionsOutOfSync = (
         ClassID1 => [ DynamicFieldID1, DynamicFieldID2 ],
         ClassID2 => [ DynamicFieldID1, DynamicFieldID3 ],
@@ -1954,14 +1962,15 @@ sub _ProcessRoles {
         # This allows to use a more convenient name in the class definition.
         my $RoleName = $RoleSource->{Name} // $RoleKey;
 
-        # Version is required
-        if ( !$RoleSource->{Version} ) {
-            return $ReturnError->(
-                Translatable(q{Key %s is missing for the role %s}),
-                'Version',
-                $RoleName,
-            );
-        }
+        # The attribute Version is not required in the YAML.
+        # When no Version is passed then the latest version of the role is used.
+        #if ( !$RoleSource->{Version} ) {
+        #    return $ReturnError->(
+        #        Translatable(q{Key %s is missing for the role %s}),
+        #        'Version',
+        #        $RoleName,
+        #    );
+        #}
 
         # the fetching is done via the ID
         my $RoleID = $RoleName2ID{$RoleName};
@@ -2041,6 +2050,7 @@ Prepare the syntax of a new definition.
 sub _DefinitionPrepare {
     my ( $Self, %Param ) = @_;
 
+    # TODO: the method is unused. Either remove it or actually use it.
     # check definition
     if ( !$Param{DefinitionRef} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2086,13 +2096,32 @@ sub _DefinitionPrepare {
     return 1;
 }
 
+=head2 _DefinitionDynamicFieldGet()
+
+Create a YAML string containing the definition of the dynamic fields relevant for this config item.
+The defintion can be passed in either as a YAML string or as a Perl data structure.
+
+    my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
+        Definition => $Definition->{Definition},
+        ClassID    => $ClassID,
+    );
+
+or
+
+    my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
+        Definition => $Definition->{DefinitionRef},
+        ClassID    => $ClassID,
+    );
+
+=cut
+
 sub _DefinitionDynamicFieldGet {
     my ( $Self, %Param ) = @_;
 
     my $IsInitialCall = defined $Param{Definition};    # the YAML definition
 
-    # In the initial call the Definition is passed as YAML,
-    # in the recursive calls, DefinitionPerl is passed
+    # In the initial call the Definition is passed as YAML.
+    # In the subsequent recursive calls DefinitionPerl is passed as a Perl data structure.
     if ($IsInitialCall) {
         $Param{DefinitionPerl} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $Param{Definition},
@@ -2164,10 +2193,10 @@ sub _DefinitionDynamicFieldGet {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Store config item class to check for version triggers in dynamic field object handler
-        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        my $ClassID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
             Class => 'ITSM::ConfigItem::Class',
         );
-        my $Class = $ClassList->{ $Param{ClassID} };
+        my $Class = $ClassID2Name->{ $Param{ClassID} };
 
         DYNAMICFIELD:
         for my $Name ( keys %DynamicFields ) {
@@ -2222,6 +2251,19 @@ sub _DefinitionDynamicFieldGet {
         Data => \%ReturnDynamicFields,
     );
 }
+
+=head2 _DynamicFieldConfigTransform()
+
+Transformations of the dynamic field config needed for Import/Export.
+Note that the passed in dynamic field config is modified in place.
+
+    # if needed, perform neccessary transformations
+    $FieldConfig = $Self->_DynamicFieldConfigTransform(
+        DynamicFieldConfig => $FieldConfig,
+        Action             => 'Import',
+    );
+
+=cut
 
 sub _DynamicFieldConfigTransform {
     my ( $Self, %Param ) = @_;
@@ -2327,6 +2369,91 @@ sub _DynamicFieldConfigTransform {
     }
 
     return $Param{DynamicFieldConfig};
+}
+
+=head2 _DefinitionCreateAfterRoleCreate()
+
+Config item class definition may include dynamic roles. This means
+that the use roles without specifying a version of the role. This
+means the class definitions may have to be update when a role is
+changed.
+
+    # if needed, perform neccessary transformations
+    my $Success = $Self->_DefinitionCreateAfterRoleCreate(
+        DynamicFieldConfig => $FieldConfig,
+        Action             => 'Import',
+    );
+
+=cut
+
+sub _DefinitionCreateAfterRoleCreate {
+    my ( $Self, %Param ) = @_;
+
+    # get the name of the roled the name of the role to the role definition
+    my $RoleName;
+    {
+        my $RoleID      = $Param{RoleID};
+        my $RoleID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Role',
+        );
+        $RoleName = $RoleID2Name->{$RoleID};
+    }
+
+    # Loop over all classes and check whether they include the changed dynamic field
+    my $ClassID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::ConfigItem::Class',
+    );
+    my @ClassIsAffected;
+    CLASS_ID:
+    for my $ClassID ( sort { $a cmp $b } keys $ClassID2Name->%* ) {
+
+        # DefinitionGet() does resolve the role declaration,
+        # but the attribute 'Roles' is still included
+        my $Definition = $Self->DefinitionGet(
+            ClassID => $ClassID,
+        );
+
+        next CLASS_ID unless $Definition;
+        next CLASS_ID unless $Definition->{DefinitionRef};
+
+        my $Roles = $Definition->{DefinitionRef}->{Roles} // {};
+
+        ROLE_KEY:
+        for my $RoleKey ( keys $Roles->%* ) {
+            my $RoleSource = $Roles->{$RoleKey};
+
+            next ROLE_KEY unless ref $RoleSource eq 'HASH';    # an empty hashref is OK
+
+            # only dynamic roles, that is roles without version, are relevant here
+            next ROLE_KEY if $RoleSource->{Version};
+
+            # The name of the role is per default the key in the Roles hash,
+            # but can be overridden by an explicit attribute 'Name'.
+            # This allows to use a more convenient name in the class definition.
+            my $DeclaredRoleName = $RoleSource->{Name} // $RoleKey;
+
+            next ROLE_KEY unless $DeclaredRoleName eq $RoleName;
+
+            push @ClassIsAffected, $ClassID;
+
+            last ROLE_KEY;
+        }
+    }
+
+    # force new versions for the affected classes
+    for my $ClassID (@ClassIsAffected) {
+        my $OldDefinitionRef = $Self->DefinitionGet(
+            ClassID => $ClassID,
+        );
+        $Self->DefinitionAdd(
+            ClassID    => $ClassID,
+            Definition => $OldDefinitionRef->{Definition},
+            UserID     => 1,
+            Force      => 1,
+        );
+    }
+
+    return 1;
 }
 
 =end Internal:
