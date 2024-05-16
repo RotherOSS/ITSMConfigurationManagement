@@ -1138,6 +1138,22 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="GeneralCatalogPreferences###VersionStringExpression" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface.</Description>
+        <Navigation>Core::GeneralCatalog</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
+                <Item Key="Class">ITSM::ConfigItem::Class</Item>
+                <Item Key="Label" Translatable="1">Version String Expression</Item>
+                <Item Key="Priority">60</Item>
+                <Item Key="Desc" Translatable="1">Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit.</Item>
+                <Item Key="Mandatory" ValueType="Checkbox">0</Item>
+                <Item Key="PrefKey">VersionStringExpression</Item>
+                <Item Key="Block">Text</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="GeneralCatalogPreferences###VersionTrigger" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the version trigger for config item classes in the preferences view of the agent interface.</Description>
         <Navigation>Core::GeneralCatalog</Navigation>
@@ -1146,7 +1162,7 @@
                 <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
                 <Item Key="Class">ITSM::ConfigItem::Class</Item>
                 <Item Key="Label" Translatable="1">Version Trigger</Item>
-                <Item Key="Priority">60</Item>
+                <Item Key="Priority">70</Item>
                 <Item Key="Desc" Translatable="1">Choose attributes to trigger the creation of a new version.</Item>
                 <Item Key="Data">
                     <Hash>
@@ -1171,7 +1187,7 @@
                 <Item Key="Module">Kernel::Output::HTML::GeneralCatalogPreferences::Generic</Item>
                 <Item Key="Class">ITSM::ConfigItem::Class</Item>
                 <Item Key="Label" Translatable="1">Categories</Item>
-                <Item Key="Priority">70</Item>
+                <Item Key="Priority">80</Item>
                 <Item Key="Desc" Translatable="1">Choose categories to assign to this config item class.</Item>
                 <Item Key="Data">
                     <Hash>
@@ -2359,15 +2375,6 @@
     </Setting>
     <!-- End dynamic field ITSMConfigItemVersion Reference -->
 
-    <Setting Name="ITSMConfigItem::VersionStringModule::TemplateToolkit" Required="0" Valid="0">
-        <Description>Defines the Template::Toolkit expression to evaluate in the Template::Toolkit version string module per class.</Description>
-        <Navigation>Frontend::Agent::ITSMConfigItem::VersionStringModule</Navigation>
-        <Value>
-            <Hash>
-                <DefaultItem ValueType="Textarea"></DefaultItem>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="DynamicField::EventModulePost###200-DynamicFieldSync" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>

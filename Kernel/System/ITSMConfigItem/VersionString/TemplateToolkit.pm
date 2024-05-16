@@ -28,6 +28,7 @@ use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
 );
 
@@ -55,13 +56,18 @@ sub new {
 sub VersionStringGet {
     my ( $Self, %Param ) = @_;
 
-    my $ModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('ITSMConfigItem::VersionStringModule::TemplateToolkit');
+    return unless IsHashRefWithData( $Param{Version} );
+    return unless $Param{Version}{ClassID};
 
-    return unless IsHashRefWithData($ModuleConfig);
+    # fetch expression from general catalog class preferences
+    my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
+        ItemID => $Param{Version}{ClassID},
+    );
+    return unless $ClassPreferences{VersionStringExpression};
 
     # evaluate expression defined in sysconfig
     my $VersionString = $Kernel::OM->Create('Kernel::Output::HTML::Layout')->Output(
-        Template => $ModuleConfig->{VersionStringExpression},
+        Template => $ClassPreferences{VersionStringExpression},
         Data     => $Param{Version},
     );
 
