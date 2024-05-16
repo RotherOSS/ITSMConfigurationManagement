@@ -58,6 +58,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     overflow-x: auto;
     margin: 0;
     border: 0;
+    grid-area: 1 / 2 / 2 / 3;
 }
 
 #OverviewBody.Overview.ConfigItemList table {
