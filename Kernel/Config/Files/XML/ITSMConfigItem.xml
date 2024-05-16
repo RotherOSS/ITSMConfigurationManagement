@@ -1150,7 +1150,7 @@
                 <Item Key="Desc" Translatable="1">Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit.</Item>
                 <Item Key="Mandatory" ValueType="Checkbox">0</Item>
                 <Item Key="PrefKey">VersionStringExpression</Item>
-                <Item Key="Block">Text</Item>
+                <Item Key="Block">Input</Item>
             </Hash>
         </Value>
     </Setting>
