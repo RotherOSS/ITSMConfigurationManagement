@@ -276,13 +276,14 @@ sub DefinitionGet {
     #    $Definition{DefinitionRef} = '';
     #}
 
-    # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
+    # add the name of the config item class to the role definition
+    {
+        my $ID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
 
-    # add class
-    $Definition{Class} = $ClassList->{ $Definition{ClassID} };
+        $Definition{Class} = $ID2Name->{ $Definition{ClassID} };
+    }
 
     # cache the result
     $Self->{Cache}->{DefinitionGet}->{ $Definition{DefinitionID} } = \%Definition;
@@ -401,13 +402,14 @@ END_SQL
         Data => $Definition{Definition},
     );
 
-    # get class list
-    my $RoleList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Role',
-    );
+    # add the name of the role to the role definition
+    {
+        my $ID2Name = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Role',
+        );
 
-    # add class
-    $Definition{Role} = $RoleList->{ $Definition{RoleID} };
+        $Definition{Role} = $ID2Name->{ $Definition{RoleID} };
+    }
 
     # cache the result
     $Self->{Cache}->{RoleDefinitionGet}->{ $Definition{DefinitionID} } = \%Definition;
@@ -2261,10 +2263,9 @@ sub _DynamicFieldConfigTransform {
                         Class => 'ITSM::ConfigItem::Class',
                     )
                 };
-                my @ClassIDs;
-                for my $ClassName ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
-                    push @ClassIDs, $ClassName2ID{$ClassName};
-                }
+                my @ClassIDs = map
+                    { $ClassName2ID{$_} }
+                    $DynamicFieldConfig->{Config}->{ClassIDs}->@*;
                 $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassIDs;
             }
         }
@@ -2287,15 +2288,14 @@ sub _DynamicFieldConfigTransform {
                 $DynamicFieldConfig->{Config}{TicketType} = \@TypeNames;
             }
             if ( $DynamicFieldConfig->{Config}{ClassIDs} ) {
-                my %ClassName2ID = %{
+                my %ClassID2Name = %{
                     $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
                         Class => 'ITSM::ConfigItem::Class',
                     )
                 };
-                my @ClassNames;
-                for my $ClassID ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
-                    push @ClassNames, $ClassName2ID{$ClassID};
-                }
+                my @ClassNames = map
+                    { $ClassID2Name{$_} }
+                    $DynamicFieldConfig->{Config}->{ClassIDs}->@*;
                 $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassNames;
             }
         }
