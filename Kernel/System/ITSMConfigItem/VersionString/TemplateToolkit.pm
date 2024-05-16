@@ -24,7 +24,7 @@ use warnings;
 # CPAN modules
 
 # OTOBO modules
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -63,11 +63,11 @@ sub VersionStringGet {
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
         ItemID => $Param{Version}{ClassID},
     );
-    return unless $ClassPreferences{VersionStringExpression};
+    return unless IsArrayRefWithData( $ClassPreferences{VersionStringExpression} );
 
     # evaluate expression defined in sysconfig
     my $VersionString = $Kernel::OM->Create('Kernel::Output::HTML::Layout')->Output(
-        Template => $ClassPreferences{VersionStringExpression},
+        Template => $ClassPreferences{VersionStringExpression}[0],
         Data     => $Param{Version},
     );
 
