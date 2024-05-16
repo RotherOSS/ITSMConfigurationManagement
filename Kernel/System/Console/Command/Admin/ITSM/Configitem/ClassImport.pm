@@ -50,7 +50,7 @@ Kernel::System::Console::Command::Admin::ITSM::Configitem::ClassImport - support
 
 =head1 DESCRIPTION
 
-Module for the console command C<Admin::ITSM::Configitem::UpgradeTo11>.
+Module for the console command C<Admin::ITSM::Configitem::ClassImport>.
 
 =head1 PUBLIC INTERFACE
 

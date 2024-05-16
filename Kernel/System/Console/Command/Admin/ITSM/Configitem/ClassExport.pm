@@ -48,7 +48,7 @@ Kernel::System::Console::Command::Admin::ITSM::Configitem::ClassExport - support
 
 =head1 DESCRIPTION
 
-Module for the console command C<Admin::ITSM::Configitem::UpgradeTo11>.
+Module for the console command C<Admin::ITSM::Configitem::ClassExport>.
 
 =head1 PUBLIC INTERFACE
 
