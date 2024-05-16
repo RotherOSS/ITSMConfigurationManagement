@@ -1296,7 +1296,7 @@ sub ClassImport {
     my %DynamicFields;
     my %Namespaces;
     my %SetDFs;
-    my %ClassLookup = reverse %{
+    my %ClassName2ID = reverse %{
         $GeneralCatalogObject->ItemList(
             Class => 'ITSM::ConfigItem::Class',
         ) // {}
@@ -1307,7 +1307,7 @@ sub ClassImport {
             ResultType => 'HASH',
         ) || {}
     };
-    my %RoleLookup = reverse %{
+    my %RoleName2ID = reverse %{
         $GeneralCatalogObject->ItemList(
             Class => 'ITSM::ConfigItem::Role',
         ) // {}
@@ -1343,7 +1343,7 @@ sub ClassImport {
         # set class data and check for duplicate
         if ( $DefinitionItem->{Class} ) {
             %ClassData = $DefinitionItem->{Class}->%*;
-            if ( $ClassLookup{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
+            if ( $ClassName2ID{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
                 return {
                     Success      => 0,
                     ErrorMessage => "Class $ClassData{Name} already exists.",
@@ -1351,7 +1351,7 @@ sub ClassImport {
             }
         }
         if ( $DefinitionItem->{RoleName} ) {
-            if ( $RoleLookup{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
+            if ( $RoleName2ID{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
                 return {
                     Success      => 0,
                     ErrorMessage => "Role $DefinitionItem->{RoleName} already exists.",
@@ -1457,10 +1457,10 @@ sub ClassImport {
 
         # handle duplications according param ClassExists
         my $ClassID;
-        if ( $ClassLookup{ $ClassData{Name} } ) {
+        if ( $ClassName2ID{ $ClassData{Name} } ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
                 my $Success = $GeneralCatalogObject->ItemUpdate(
-                    ItemID  => $ClassLookup{ $ClassData{Name} },
+                    ItemID  => $ClassName2ID{ $ClassData{Name} },
                     Name    => $ClassData{Name},
                     ValidID => 1,
                     UserID  => 1,
@@ -1471,7 +1471,7 @@ sub ClassImport {
                         ErrorMessage => "Could not update class $ClassData{Name}.",
                     };
                 }
-                $ClassID = $ClassLookup{ $ClassData{Name} };
+                $ClassID = $ClassName2ID{ $ClassData{Name} };
             }
             else {
                 next CLASSDEFINITION;
@@ -1555,10 +1555,10 @@ sub ClassImport {
 
         # handle duplications according param ClassExists
         my $RoleID;
-        if ( $RoleLookup{$RoleName} ) {
+        if ( $RoleName2ID{$RoleName} ) {
             if ( $Param{ClassExists} eq 'UPDATE' ) {
                 my $Success = $GeneralCatalogObject->ItemUpdate(
-                    ItemID  => $RoleLookup{$RoleName},
+                    ItemID  => $RoleName2ID{$RoleName},
                     Name    => $RoleName,
                     ValidID => 1,
                     UserID  => 1,
@@ -1570,7 +1570,7 @@ sub ClassImport {
                     );
                     return;
                 }
-                $RoleID = $RoleLookup{$RoleName};
+                $RoleID = $RoleName2ID{$RoleName};
             }
             else {
                 next ROLEDEFINITION;
@@ -2256,14 +2256,14 @@ sub _DynamicFieldConfigTransform {
                 $DynamicFieldConfig->{Config}{TicketType} = \@TypeIDs;
             }
             if ( $DynamicFieldConfig->{Config}{ClassIDs} ) {
-                my %ClassLookup = reverse %{
+                my %ClassName2ID = reverse %{
                     $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
                         Class => 'ITSM::ConfigItem::Class',
                     )
                 };
                 my @ClassIDs;
                 for my $ClassName ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
-                    push @ClassIDs, $ClassLookup{$ClassName};
+                    push @ClassIDs, $ClassName2ID{$ClassName};
                 }
                 $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassIDs;
             }
@@ -2287,14 +2287,14 @@ sub _DynamicFieldConfigTransform {
                 $DynamicFieldConfig->{Config}{TicketType} = \@TypeNames;
             }
             if ( $DynamicFieldConfig->{Config}{ClassIDs} ) {
-                my %ClassLookup = %{
+                my %ClassName2ID = %{
                     $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
                         Class => 'ITSM::ConfigItem::Class',
                     )
                 };
                 my @ClassNames;
                 for my $ClassID ( $DynamicFieldConfig->{Config}{ClassIDs}->@* ) {
-                    push @ClassNames, $ClassLookup{$ClassID};
+                    push @ClassNames, $ClassName2ID{$ClassID};
                 }
                 $DynamicFieldConfig->{Config}{ClassIDs} = \@ClassNames;
             }
