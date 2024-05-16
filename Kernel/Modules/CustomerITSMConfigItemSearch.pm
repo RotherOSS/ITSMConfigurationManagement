@@ -100,8 +100,20 @@ sub Run {
     my $Filter = $ParamObject->GetParam( Param => 'PermissionCondition' ) || $ParamObject->GetParam( Param => 'Filter' ) || '';
 
     # fetch filters from config
-    my $PermissionConditionConfig = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions')->{ sprintf( "%02d", $Filter ) };
+    my $PermissionConditionConfigs = $ConfigObject->Get('Customer::ConfigItem::PermissionConditions');
+    if ( !IsHashRefWithData($PermissionConditionConfigs) ) {
+        my $Output = $LayoutObject->CustomerHeader(
+            Title => Translatable('Error'),
+        );
+        $Output .= $LayoutObject->CustomerError(
+            Message => Translatable('No permission'),
+        );
+        $Output .= $LayoutObject->CustomerFooter();
 
+        return $Output;
+    }
+
+    my $PermissionConditionConfig = $PermissionConditionConfigs->{ sprintf( "%02d", $Filter ) };
     if ( !IsHashRefWithData($PermissionConditionConfig) ) {
 
         my $Output = $LayoutObject->CustomerHeader(
