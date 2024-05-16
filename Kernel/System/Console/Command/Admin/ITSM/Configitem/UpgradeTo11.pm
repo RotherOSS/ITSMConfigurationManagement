@@ -620,6 +620,7 @@ sub _MigrateAttributeData {
     my $MainObject                = $Kernel::OM->Get('Kernel::System::Main');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
+    my $DBObject                  = $Kernel::OM->Get('Kernel::System::DB');
 
     $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'UPDATE configitem_version SET change_time=create_time, change_by=create_by WHERE change_by IS NULL;',
@@ -668,7 +669,7 @@ sub _MigrateAttributeData {
         # TODO: Do we need batches for really large CMDBs?
         my $Rows = $Kernel::OM->Get('Kernel::System::DB')->SelectAll(
             SQL => <<'END_SQL',
-SELECT v.id, v.definition_id
+SELECT v.id, v.definition_id, v.configitem_id
   FROM configitem_version v
   INNER JOIN configitem ci ON v.configitem_id = ci.id
   WHERE ci.class_id = ?
@@ -710,15 +711,35 @@ END_SQL
         }
 
         my @Skipped;
-        my $Count = scalar $Rows->@*;
-        my $Frac  = int( $Count / 10 );
-        my $c     = 0;
+        my %CIVersionStringCounter;
+        my $Count   = scalar $Rows->@*;
+        my $Frac    = int( $Count / 10 );
+        my $c       = 0;
 
         $Self->Print("\tWorking on <yellow>$Self->{ClassList}{$ClassID}</yellow> ($Count Versions)");
 
         ROW:
         for my $Row ( $Rows->@* ) {
-            my ( $VersionID, $DefinitionID ) = $Row->@*;
+            my ( $VersionID, $DefinitionID, $ConfigItemID ) = $Row->@*;
+
+            # set configitem version string
+            $CIVersionStringCounter{$ConfigItemID} //= 1;
+            my $UpdateSuccess = $DBObject->Do(
+                SQL => <<'END_SQL',
+UPDATE configitem_version
+  SET version_string = ?, change_time = current_timestamp, change_by = ?
+  WHERE id = ?
+END_SQL
+                Bind => [
+                    \$CIVersionStringCounter{$ConfigItemID},
+                    \1,
+                    \$VersionID,
+                ],
+            );
+            if ( !$UpdateSuccess ) {
+                $Self->Print("<red>Could not set VersionString for ConfigItem $ConfigItemID, Version $VersionID!</red>\n");
+            }
+            $CIVersionStringCounter{$ConfigItemID}++;
 
             if ( ++$c == $Frac ) {
                 $Self->Print(".");
