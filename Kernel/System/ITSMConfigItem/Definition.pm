@@ -2140,7 +2140,7 @@ sub _DefinitionDynamicFieldGet {
     if ( !%ContentHash && !@ContentArray ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need Definition or DefinitionPerl as hash or array!",
+            Message  => 'Need Definition or DefinitionPerl as hash or array!',
         );
 
         return;
@@ -2442,12 +2442,10 @@ sub _DefinitionCreateAfterRoleCreate {
 
     # force new versions for the affected classes
     for my $ClassID (@ClassIsAffected) {
-        my $OldDefinitionRef = $Self->DefinitionGet(
-            ClassID => $ClassID,
-        );
+        my $OldDefinition = $Self->DefinitionGet( ClassID => $ClassID );
         $Self->DefinitionAdd(
             ClassID    => $ClassID,
-            Definition => $OldDefinitionRef->{Definition},
+            Definition => $OldDefinition->{Definition},
             UserID     => 1,
             Force      => 1,
         );
