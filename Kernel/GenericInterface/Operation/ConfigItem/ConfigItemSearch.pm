@@ -170,11 +170,6 @@ perform ConfigItemSearch Operation. This will return a ConfigItem ID list.
             ConfigItemID => [ 1, 2, 3, 4 ],
         },
     };
-    # TODO Update
-            Error => {                              # should not return errors
-                    ErrorCode    => 'ConfigItemSearch.ErrorCode'
-                    ErrorMessage => 'Error Description'
-            },
 
 =cut
 
