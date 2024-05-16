@@ -1275,7 +1275,6 @@ sub ClassImport {
     $Param{ClassExists} ||= 'ERROR';
 
     # get needed objects
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
@@ -1738,7 +1737,7 @@ sub ClassImport {
 
     # 4. add definitions
     for my $ClassID ( keys %ClassDefinitions ) {
-        my $Return = $ConfigItemObject->DefinitionAdd(
+        my $Return = $Self->DefinitionAdd(
             ClassID    => $ClassID,
             Definition => $ClassDefinitions{$ClassID},
             UserID     => 1,
@@ -1753,7 +1752,7 @@ sub ClassImport {
         }
     }
     for my $RoleID ( keys %RoleDefinitions ) {
-        my $Return = $ConfigItemObject->RoleDefinitionAdd(
+        my $Return = $Self->RoleDefinitionAdd(
             RoleID     => $RoleID,
             Definition => $RoleDefinitions{$RoleID},
             UserID     => 1,
@@ -1933,8 +1932,6 @@ sub _ProcessRoles {
     # nothing to do
     return { Success => 1 } unless $Roles->%*;
 
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
     # get role list for mapping name to ID
     my %RoleName2ID;
     {
@@ -1975,7 +1972,7 @@ sub _ProcessRoles {
         }
 
         # This already parses the YAML
-        my $RoleDefinition = $ConfigItemObject->RoleDefinitionGet(
+        my $RoleDefinition = $Self->RoleDefinitionGet(
             RoleID  => $RoleID,
             Version => $RoleSource->{Version},
         );
