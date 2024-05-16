@@ -1956,14 +1956,15 @@ sub _ProcessRoles {
         # This allows to use a more convenient name in the class definition.
         my $RoleName = $RoleSource->{Name} // $RoleKey;
 
-        # Version is required
-        if ( !$RoleSource->{Version} ) {
-            return $ReturnError->(
-                Translatable(q{Key %s is missing for the role %s}),
-                'Version',
-                $RoleName,
-            );
-        }
+        # The attribute Version is not required in the YAML.
+        # When no Version is passed then the latest version of the role is used.
+        #if ( !$RoleSource->{Version} ) {
+        #    return $ReturnError->(
+        #        Translatable(q{Key %s is missing for the role %s}),
+        #        'Version',
+        #        $RoleName,
+        #    );
+        #}
 
         # the fetching is done via the ID
         my $RoleID = $RoleName2ID{$RoleName};
