@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -187,7 +187,7 @@ sub Data {
     $Self->{Translation}->{'Expiration Date'} = 'Дата на истекување';
     $Self->{Translation}->{'Media'} = 'Медиа';
 
-    # Database XML Definition: ITSMConfigurationManagement.sopm
+    # Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
     $Self->{Translation}->{'Computer'} = '';
     $Self->{Translation}->{'Hardware'} = '';
     $Self->{Translation}->{'Network'} = '';
@@ -203,7 +203,6 @@ sub Data {
     $Self->{Translation}->{'Laptop'} = 'Лаптоп';
     $Self->{Translation}->{'Desktop'} = 'Работна површина';
     $Self->{Translation}->{'PDA'} = 'PDA';
-    $Self->{Translation}->{'Server'} = 'Сервер';
     $Self->{Translation}->{'Other'} = 'Друго';
     $Self->{Translation}->{'Monitor'} = 'Монитор';
     $Self->{Translation}->{'Printer'} = 'Печатач';
@@ -274,6 +273,10 @@ sub Data {
     $Self->{Translation}->{'Config item print.'} = '';
     $Self->{Translation}->{'Config item zoom.'} = '';
     $Self->{Translation}->{'ConfigItemNumber'} = '';
+    $Self->{Translation}->{'ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        '';
+    $Self->{Translation}->{'ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        '';
     $Self->{Translation}->{'Configuration Item Limit'} = 'Конфигурациски Член Лимит';
     $Self->{Translation}->{'Configuration Item limit per page.'} = '';
     $Self->{Translation}->{'Configuration Management Database.'} = '';
@@ -338,6 +341,10 @@ sub Data {
         'Овозможува/оневозможува функционалности за проверка на КонфигЧленови за уникатни имиња. Пред да ја овозможите оваа опција треба да го проверите вашиот систем дали веќе постојат конфиг членови со исто име. Вие можете да го направите со скрипата  bin/otobo.ITSMConfigItemListDuplicates.pl.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         '';
+    $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
+        '';
+    $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
+        '';
     $Self->{Translation}->{'ITSM config item overview.'} = '';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Модул за проверка на одговорност на група за класа.';
     $Self->{Translation}->{'Module to check the group responsible for a configuration item.'} =
@@ -345,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Module to generate ITSM config item statistics.'} = 'Модул за генерирање ITSM конфиг член статистика.';
     $Self->{Translation}->{'Object backend module registration for the import/export module.'} =
         'Објект позадински модул регирстациа за увоз/извоз модулот.';
+    $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
+        '';
     $Self->{Translation}->{'Overview.'} = '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
         '';
@@ -356,6 +365,8 @@ sub Data {
         'Параметри за пример дозволите за групи од генерални каталог атрибути.';
     $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
         'Параметри за страниви(во кои конфигурациските членови се прикажани).';
+    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = '';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
         'Барани премисии за употреба на ITSM  конфигурациски член екран во агент интерфејсот.';
