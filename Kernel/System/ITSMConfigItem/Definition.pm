@@ -1329,7 +1329,7 @@ sub ClassImport {
         my %ClassData;
 
         # check definition for validity
-        for my $Key (qw/Sections DynamicFields/) {
+        for my $Key (qw/Sections/) {
             if ( !$DefinitionItem->{$Key} ) {
                 return {
                     Success      => 0,
@@ -1372,11 +1372,13 @@ sub ClassImport {
         # collect class tags
         @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
 
-        # collect dynamic fields
-        %DynamicFields = (
-            %DynamicFields,
-            $DefinitionItem->{DynamicFields}->%*,
-        );
+        # collect dynamic fields (if they exist)
+        if ($DefinitionItem->{DynamicFields}) {
+            %DynamicFields = (
+                %DynamicFields,
+                $DefinitionItem->{DynamicFields}->%*,
+            );
+        }
     }
 
     # fetch existing categories to check for duplicates
