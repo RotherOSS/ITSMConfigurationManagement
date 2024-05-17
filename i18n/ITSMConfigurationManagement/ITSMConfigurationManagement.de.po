@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-17 08:13+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
+"Last-Translator: Grit Rother <mr@otobo.de>\n"
 "Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/de/>\n"
 "Language: de\n"
@@ -991,7 +991,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Parameter für die zugriffsberechtigte Gruppe der General-Katalog-Attribute."
+msgstr ""
+"Parameter für die zugriffsberechtigten Beispielgruppen der General Catalog-"
+"Attribute."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
