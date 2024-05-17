@@ -625,7 +625,7 @@ END_SQL
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => qq{Invalid dynamic field configuration. The setting $Needed is missing,},
+                Message  => qq{Invalid dynamic field configuration. The setting $Needed is missing for field $DFLookupByID{$FieldID}->{Name},},
             );
 
             next ROW;
