@@ -511,12 +511,56 @@ sub _RenderReferencedSection {
 
     return unless $ReferencedCIDefinition->{DefinitionID};
 
-    return $Self->_SectionRender(
+    if ( $Param{Section}{FieldListPre} && IsArrayRefWithData($Param{Section}{FieldListPre}) ) {
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayRow',
+            Data => {
+                Widths => '1fr 1fr',
+            }
+        );
+
+        for my $DFEntry ( $Param{Section}{FieldListPre}->@* ) {
+            $Self->_RenderDF(
+                Row                       => $DFEntry,
+                ConfigItem                => $Param{ConfigItem},
+                Definition                => $Param{Definition},
+                LayoutObject              => $Param{LayoutObject},
+                DynamicFieldBackendObject => $DynamicFieldBackendObject,
+            );
+        }
+    }
+
+    $Self->_SectionRender(
         ConfigItem   => $ReferencedConfigItem,
         Definition   => $ReferencedCIDefinition,
         Section      => $ReferencedCIDefinition->{DefinitionRef}{Sections}{ $Param{Section}{SectionName} },
         LayoutObject => $Param{LayoutObject},
     );
+
+    if ( $Param{Section}{FieldListPost} && IsArrayRefWithData($Param{Section}{FieldListPost}) ) {
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayRow',
+            Data => {
+                Widths => '1fr 1fr',
+            }
+        );
+
+        for my $DFEntry ( $Param{Section}{FieldListPost}->@* ) {
+            $Self->_RenderDF(
+                Row                       => $DFEntry,
+                ConfigItem                => $Param{ConfigItem},
+                Definition                => $Param{Definition},
+                LayoutObject              => $Param{LayoutObject},
+                DynamicFieldBackendObject => $DynamicFieldBackendObject,
+            );
+        }
+    }
+
+    return 1;
 }
 
 sub _ReferencedConfigItemGet {
@@ -550,6 +594,71 @@ sub _ReferencedConfigItemGet {
     return $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
         %ConfigItemGetParams,
     );
+}
+
+sub _RenderDF {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{Row}{DF};
+    return if !defined $Param{ConfigItem}{ 'DynamicField_' . $Param{Row}{DF} };
+
+    my $DynamicField = $Param{Definition}{DynamicFieldRef}{ $Param{Row}{DF} };
+
+    return if !$DynamicField;
+
+    my $DisplayValue = $Param{DynamicFieldBackendObject}->DisplayValueRender(
+        DynamicFieldConfig => $DynamicField,
+        Value              => $Param{ConfigItem}{ 'DynamicField_' . $Param{Row}{DF} },
+        LayoutObject       => $Param{LayoutObject},
+        HTMLOutput         => 1,
+    );
+
+    $Param{LayoutObject}->Block(
+        Name => 'FieldDisplayCell',
+        Data => {
+            Label => $Param{Row}{Label} || $DynamicField->{Label},
+            Type  => 'Label',
+        },
+    );
+
+    if ( $DynamicField->{FieldType} eq 'Set' || $DynamicField->{FieldType} eq 'RichText' ) {
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayCell',
+            Data => {
+                $DisplayValue->%*,
+                Type => 'FullRow',
+            },
+        );
+    }
+    elsif ( $DisplayValue->{Link} ) {
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayCell',
+            Data => {
+                $DisplayValue->%*,
+                Type => 'ValueLink',
+            },
+        );
+    }
+    elsif ( $DynamicField->{FieldType} eq 'Attachment' ) {
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayCell',
+            Data => {
+                $DisplayValue->%*,
+                Type => 'ValueRaw',
+            },
+        );
+    }
+    else {
+        $Param{LayoutObject}->Block(
+            Name => 'FieldDisplayCell',
+            Data => {
+                $DisplayValue->%*,
+                Type => 'Value',
+            },
+        );
+    }
+
+    return 1;
 }
 
 1;
