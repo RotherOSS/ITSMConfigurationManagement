@@ -712,9 +712,9 @@ END_SQL
 
         my @Skipped;
         my %CIVersionStringCounter;
-        my $Count   = scalar $Rows->@*;
-        my $Frac    = int( $Count / 10 );
-        my $c       = 0;
+        my $Count = scalar $Rows->@*;
+        my $Frac  = int( $Count / 10 );
+        my $c     = 0;
 
         $Self->Print("\tWorking on <yellow>$Self->{ClassList}{$ClassID}</yellow> ($Count Versions)");
 

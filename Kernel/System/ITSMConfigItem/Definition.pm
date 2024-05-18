@@ -1373,7 +1373,7 @@ sub ClassImport {
         @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
 
         # collect dynamic fields (if they exist)
-        if ($DefinitionItem->{DynamicFields}) {
+        if ( $DefinitionItem->{DynamicFields} ) {
             %DynamicFields = (
                 %DynamicFields,
                 $DefinitionItem->{DynamicFields}->%*,

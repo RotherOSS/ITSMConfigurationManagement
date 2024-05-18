@@ -511,7 +511,7 @@ sub _RenderReferencedSection {
 
     return unless $ReferencedCIDefinition->{DefinitionID};
 
-    if ( $Param{Section}{FieldListPre} && IsArrayRefWithData($Param{Section}{FieldListPre}) ) {
+    if ( $Param{Section}{FieldListPre} && IsArrayRefWithData( $Param{Section}{FieldListPre} ) ) {
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         $Param{LayoutObject}->Block(
@@ -539,7 +539,7 @@ sub _RenderReferencedSection {
         LayoutObject => $Param{LayoutObject},
     );
 
-    if ( $Param{Section}{FieldListPost} && IsArrayRefWithData($Param{Section}{FieldListPost}) ) {
+    if ( $Param{Section}{FieldListPost} && IsArrayRefWithData( $Param{Section}{FieldListPost} ) ) {
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         $Param{LayoutObject}->Block(

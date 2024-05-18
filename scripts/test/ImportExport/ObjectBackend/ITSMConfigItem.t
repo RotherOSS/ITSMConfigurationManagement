@@ -837,6 +837,7 @@ my $GeneralCatalogList = $GeneralCatalogObject->ItemList(
     Class => $GeneralCatalogClass,
 );
 ref_ok( $GeneralCatalogList, 'HASH', 'general catalog list is a hashref' );
+
 # TODO: reactivate test cases
 #my %GeneralCatalogListReverse = reverse %{$GeneralCatalogList};
 
