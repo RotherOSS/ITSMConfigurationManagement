@@ -462,19 +462,18 @@ sub _RenderCILinks {
 sub _RenderDescriptionSection {
     my ( $Self, %Param ) = @_;
 
+    $Param{LayoutObject}->Block(
+        Name => 'HeaderRow',
+        Data => {
+            Header => 'Description',
+        },
+    );
+
     # render description richtext editor
     $Param{LayoutObject}->Block(
         Name => 'FieldDisplayRow',
         Data => {
             Widths => '1fr',
-        },
-    );
-
-    $Param{LayoutObject}->Block(
-        Name => 'FieldDisplayCell',
-        Data => {
-            Label => 'Description',
-            Type  => 'Label',
         },
     );
 
