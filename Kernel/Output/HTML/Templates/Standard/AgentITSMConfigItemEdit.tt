@@ -87,6 +87,9 @@
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowInciState") %]
+
+[% Data.DynamicFieldHTML %]
+
 [% RenderBlockStart("RowDescription") %]
                         <label for="Description">[% Translate("Description") | html %]:</label>
                         <div id="RichTextField" class="RichTextField">
@@ -94,7 +97,6 @@
                         </div>
                         <div class="Clear"></div>
 [% RenderBlockEnd("RowDescription") %]
-[% Data.DynamicFieldHTML %]
                     </fieldset>
 
                     <fieldset class="TableLike">

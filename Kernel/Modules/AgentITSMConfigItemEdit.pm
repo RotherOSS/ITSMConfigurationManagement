@@ -1318,6 +1318,7 @@ sub Run {
         #       while editing needs a bit more preparation though
         # Thus for now make sure to show dynamic fields only once, even if present on multiple pages/sections
         my $FieldsSeen = {};
+        my $ShowDescription;
 
         PAGE:
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
@@ -1346,14 +1347,8 @@ sub Run {
                 next SECTION unless $Section;
                 if ( $Section->{Type} ) {
                     if ( $Section->{Type} eq 'Description' ) {
+                        $ShowDescription = 1;
 
-                        # render description
-                        $LayoutObject->Block(
-                            Name => 'RowDescription',
-                            Data => {
-                                Description => $FieldContent // '',
-                            },
-                        );
                         next SECTION;
                     }
                     elsif ( $Section->{Type} ne 'DynamicFields' ) {
@@ -1386,6 +1381,15 @@ sub Run {
                     },
                 );
             }
+        }
+
+        if ( $ShowDescription ) {
+            $LayoutObject->Block(
+                Name => 'RowDescription',
+                Data => {
+                    Description => $FieldContent // '',
+                },
+            );
         }
     }
 
