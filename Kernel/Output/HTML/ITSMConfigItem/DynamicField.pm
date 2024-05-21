@@ -462,9 +462,6 @@ sub _RenderCILinks {
 sub _RenderDescriptionSection {
     my ( $Self, %Param ) = @_;
 
-    return unless IsHashRefWithData( $Param{ConfigItem} );
-    return unless IsHashRefWithData( $Param{LayoutObject} );
-
     # render description richtext editor
     $Param{LayoutObject}->Block(
         Name => 'FieldDisplayRow',
