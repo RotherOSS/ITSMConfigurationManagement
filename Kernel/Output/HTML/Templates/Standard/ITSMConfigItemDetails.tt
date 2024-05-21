@@ -27,7 +27,7 @@
 [% ELSIF Data.Type == 'Value' %]
             <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]">[% Data.Value %]</p>
 [% ELSIF Data.Type == 'ValueLink' %]
-            <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></p>
+            <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] class="DynamicFieldLink">[% Data.Value %]</a></p>
 [% ELSIF Data.Type == 'ValueRaw' %]
             <div style="[% Data.GridColumn | html %]">[% Data.Value %]</div>
 [% ELSIF Data.Type == 'FullRow' %]
