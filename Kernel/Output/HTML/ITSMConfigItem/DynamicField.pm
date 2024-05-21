@@ -383,14 +383,15 @@ sub _RenderCILinks {
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+    my $Direction = $Param{Section}{LinkedAs} || 'Source';
+    my $Types     = IsArrayRefWithData( $Param{Section}{LinkTypes} ) ? $Param{Section}{LinkTypes} : undef;
 
+    my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
         # TODO: What about versions
         ConfigItemID => $Param{ConfigItem}{ConfigItemID},
-
-        # TODO: We probably need both
-        Direction => 'Source',
-        UserID    => 1,
+        Direction    => $Direction,
+        Types        => $Types,
+        UserID       => 1,
     );
 
     return if !$LinkedConfigItems;
@@ -410,7 +411,7 @@ sub _RenderCILinks {
     }
 
     # TODO: Access rights; classes for agents; for customers?
-    # TODO: Configuration options for the tile; class restrictions, directions, ?
+    # TODO: Configuration options for the tile; class restrictions, df restrictions, ?
 
     if ( $Param{Section}{Header} ) {
         $Param{LayoutObject}->Block(
