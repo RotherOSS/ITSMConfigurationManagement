@@ -115,7 +115,10 @@ sub ValueGet {
     return $Value unless $Param{ForLens};
 
     # for usage in lenses we might have to interpret the values to be usable for their ValueGet()
-    return $Self->ValueForLens( Value => $Value );
+    return $Self->ValueForLens(
+        %Param,
+        Value => $Value
+    );
 }
 
 sub EditFieldValueGet {
@@ -704,17 +707,46 @@ sub ValueForLens {
     }
 
     my @LastVersionIDs;
-    CONFIG_ITEM_ID:
-    for my $ConfigItemID ( $Param{Value}->@* ) {
-        my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-            ConfigItemID => $ConfigItemID,
-        );
 
-        # only valid IDs
-        next CONFIG_ITEM_ID unless $ConfigItem;
-        next CONFIG_ITEM_ID unless $ConfigItem->{LastVersionID};
+    unless ( $Param{Set} ) {
+        CONFIG_ITEM_ID:
+        for my $ConfigItemID ( $Param{Value}->@* ) {
+            my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+                ConfigItemID => $ConfigItemID,
+            );
 
-        push @LastVersionIDs, $ConfigItem->{LastVersionID};
+            # only valid IDs
+            next CONFIG_ITEM_ID unless $ConfigItem;
+            next CONFIG_ITEM_ID unless $ConfigItem->{LastVersionID};
+
+            push @LastVersionIDs, $ConfigItem->{LastVersionID};
+        }
+
+        return \@LastVersionIDs;
+    }
+
+    # for sets we need to translate for every set value
+    for my $SetValue ( $Param{Value}->@* ) {
+        if ( ref $SetValue ne 'ARRAY' ) {
+            $SetValue = [ $SetValue ];
+        }
+
+        my @SetVersionIDs;
+
+        CONFIG_ITEM_ID:
+        for my $ConfigItemID ( $SetValue->@* ) {
+            my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+                ConfigItemID => $ConfigItemID,
+            );
+
+            # only valid IDs
+            next CONFIG_ITEM_ID unless $ConfigItem;
+            next CONFIG_ITEM_ID unless $ConfigItem->{LastVersionID};
+
+            push @SetVersionIDs, $ConfigItem->{LastVersionID};
+        }
+
+        push @LastVersionIDs, \@SetVersionIDs;
     }
 
     return \@LastVersionIDs;
