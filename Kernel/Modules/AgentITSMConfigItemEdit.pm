@@ -1250,7 +1250,7 @@ sub Run {
             Filename    => $FileData->{Filename},
             Content     => $FileData->{Content},
             ContentID   => $FileData->{Preferences}{ContentID},
-            ContentType => $FileData->{ContentType} . '; name="' . $FileData->{Filename} . '"',
+            ContentType => $FileData->{ContentType},
 
             # currently, only inline images for description are stored at the configitem version
             #   so we can rely upon dealing with inline images here
