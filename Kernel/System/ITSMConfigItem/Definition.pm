@@ -122,7 +122,7 @@ END_SQL
     for my $Row ( $Rows->@* ) {
         my %Definition;
         $Definition{DefinitionID} = $Row->[0];
-        $Definition{Definition}   = $Row->[1] || "--- []";
+        $Definition{Definition}   = $Row->[1] || "--- {}";
         $Definition{Version}      = $Row->[2];
         $Definition{CreateTime}   = $Row->[3];
         $Definition{CreateBy}     = $Row->[4];
@@ -137,7 +137,7 @@ END_SQL
                     . " found in legacy Perl code format, can not continue",
             );
 
-            $Definition{Definition} = "--- []";
+            $Definition{Definition} = "--- {}";
         }
 
         push @DefinitionList, \%Definition;
@@ -233,7 +233,7 @@ sub DefinitionGet {
     my %Definition;
     $Definition{DefinitionID} = $Row[0];
     $Definition{ClassID}      = $Row[1];
-    $Definition{Definition}   = $Row[2] || '--- []';    # a YAML string
+    $Definition{Definition}   = $Row[2] || '--- {}';    # a YAML string
     my $DynamicFields = $Row[3] || '--- {}';            # a YAML string
     $Definition{Version}    = $Row[4];
     $Definition{CreateTime} = $Row[5];
@@ -250,7 +250,7 @@ sub DefinitionGet {
                 . " found in legacy Perl code format, can not continue",
         );
 
-        $Definition{Definition} = "--- []";
+        $Definition{Definition} = "--- {}";
     }
 
     $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
@@ -380,7 +380,7 @@ END_SQL
     my %Definition;
     $Definition{DefinitionID} = $Row[0];
     $Definition{RoleID}       = $Row[1];
-    $Definition{Definition}   = $Row[2] || "--- []";
+    $Definition{Definition}   = $Row[2] || "--- {}";
     $Definition{Version}      = $Row[3];
     $Definition{CreateTime}   = $Row[4];
     $Definition{CreateBy}     = $Row[5];
@@ -396,7 +396,7 @@ END_SQL
                 . " found in legacy Perl code format, can not continue",
         );
 
-        $Definition{Definition} = "--- []";
+        $Definition{Definition} = "--- {}";
     }
 
     $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
@@ -510,7 +510,7 @@ sub DefinitionAdd {
     # add dynamic field info, roles are already considered in _DefinitionDynamicFieldGet
     my $DynamicFieldDefinition = $Self->_DefinitionDynamicFieldGet(
         %Param,
-    ) || '--- []';
+    ) || '--- {}';
 
     # increment version, start with version 1 for completely new class definitions
     my $Version = ( $LastDefinition->{Version} || 0 ) + 1;
@@ -750,6 +750,15 @@ sub DefinitionCheck {
     if ( !IsHashRefWithData($DefinitionRef) ) {
         return $ReturnError->(
             Translatable('Base structure is not valid. Please provide an array with data in YAML format.')
+        );
+    }
+
+    # Check if definition starts with '---'
+    # This is a last check for legacy legacy Definitions (pre OTRS6) which where not YAML
+    # We can remove this together with the corresponding code in DefinitionGet() etc. with the next major release after 11.0
+    if ( substr( $Param{Definition}, 0, 3 ) ne '---' ) {
+        return $ReturnError->(
+            Translatable('Starting the YAML string with \'---\' is required.')
         );
     }
 
@@ -1215,7 +1224,7 @@ sub DefinitionSync {
                     my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
                         Definition => $Definition->{Definition},
                         ClassID    => $ClassID,
-                    ) || '--- []';
+                    ) || '--- {}';
 
                     $DynamicFieldDefinition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
                         Data => $DynamicFieldDefinitionYAML,
