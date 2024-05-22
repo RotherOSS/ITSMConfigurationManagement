@@ -70,6 +70,14 @@ sub Configure {
         ValueRegex  => qr/./,
     );
 
+    $Self->AddOption(
+        Name        => 'update',
+        Description => "If the class already exists, update it.",
+        Required    => 0,
+        HasValue    => 0,
+        ValueRegex  => qr/./,
+    );
+
     return;
 }
 
@@ -109,8 +117,10 @@ sub Run {
 
     return $Error->('Definition is no valid YAML hash.') unless IsArrayRefWithData($DefinitionRaw);
 
+    my $ClassExists = $Self->GetOption('update') ? 'UPDATE' : 'ERROR';
     my $Result = $ConfigItemObject->ClassImport(
         Content => $DefinitionRaw,
+        ClassExists => $ClassExists,
     );
 
     return $Error->( $Result->{ErrorMessage} || "Could not import definitions from file." ) unless $Result->{Success};

@@ -1336,6 +1336,19 @@ sub ClassImport {
     for my $DefinitionItem ( $DefinitionList->@* ) {
 
         my %ClassData;
+        
+        my $Definition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+            Data => $DefinitionItem->{Definition},
+        );
+        if ( !$Definition ) {
+            return {
+                Success      => 0,
+                ErrorMessage => "Item '$DefinitionItem->{Class}->{Name}' has not a valid YAML definition field.",
+            };
+        }
+        for my $DefinitionKey ( keys %{$Definition} ) {
+            $DefinitionItem->{$DefinitionKey} = $Definition->{$DefinitionKey};
+        }
 
         # check definition for validity
         for my $Key (qw/Sections/) {
@@ -1382,7 +1395,7 @@ sub ClassImport {
         @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
 
         # collect dynamic fields (if they exist)
-        if ( $DefinitionItem->{DynamicFields} ) {
+        if ($DefinitionItem->{DynamicFields}) {
             %DynamicFields = (
                 %DynamicFields,
                 $DefinitionItem->{DynamicFields}->%*,
@@ -1553,19 +1566,8 @@ sub ClassImport {
             }
         }
 
-        # clean up definition data
-        delete $ClassDefinition->{DynamicFields};
-
         # collect definition
-        $ClassDefinitions{$ClassID} = $YAMLObject->Dump(
-            Data => $ClassDefinition,
-        );
-        if ( !$ClassDefinitions{$ClassID} ) {
-            return {
-                Success      => 0,
-                ErrorMessage => 'Error recreating the definition in yaml.',
-            };
-        }
+        $ClassDefinitions{$ClassID} = $ClassDefinition->{Definition};
     }
 
     # 2. create all roles
@@ -1613,19 +1615,8 @@ sub ClassImport {
             };
         }
 
-        # clean up definition data
-        delete $RoleDefinition->{DynamicFields};
-
         # collect definition
-        $RoleDefinitions{$RoleID} = $YAMLObject->Dump(
-            Data => $RoleDefinition,
-        );
-        if ( !$RoleDefinitions{$RoleID} ) {
-            return {
-                Success      => 0,
-                ErrorMessage => 'Error recreating the definition in yaml.',
-            };
-        }
+        $RoleDefinitions{$RoleID} = $RoleDefinition->{Definition};
     }
 
     # namespace handling
@@ -1893,14 +1884,17 @@ sub ClassExport {
             $ExportItem{DynamicFields}{$DynamicFieldName} = $TransformedDFConfig;
         }
 
-        for my $DefinitionKey ( sort keys %{ $DefinitionRef->{DefinitionRef} } ) {
-            $ExportItem{$DefinitionKey} = $DefinitionRef->{DefinitionRef}->{$DefinitionKey};
-        }
+        # export the sub-yaml definition field as a string field
+        $ExportItem{Definition} = $DefinitionRef->{Definition};
 
         push @{$AllExportedClassesRef}, \%ExportItem;
     }
 
-    return $YAMLObject->Dump( Data => $AllExportedClassesRef );
+    my $AllExportedClassesStr = $YAMLObject->Dump(
+        Data => $AllExportedClassesRef
+    );
+
+    return $AllExportedClassesStr;
 }
 
 =begin Internal:
