@@ -1319,6 +1319,8 @@ sub Run {
         # Thus for now make sure to show dynamic fields only once, even if present on multiple pages/sections
         my $FieldsSeen = {};
         my $ShowDescription;
+        my @PageHTML;
+        my $SectionHeaderTemplate = '<div class="Row Row_SectionHeader"><h3>[% Translate(Data.Name) | html %]</h3></div>';
 
         PAGE:
         for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
@@ -1339,6 +1341,8 @@ sub Run {
                 # grant access to the page only when the user is in one of the specified groups
                 next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
             }
+
+            my $PageDynamicFieldHTML;
 
             SECTION:
             for my $SectionConfig ( $Page->{Content}->@* ) {
@@ -1365,7 +1369,7 @@ sub Run {
                 # do not proceed if content is empty
                 next SECTION unless $Section->{Content}->@*;
 
-                $DynamicFieldHTML .= $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
+                my $HTML = $Kernel::OM->Get('Kernel::Output::HTML::DynamicField::Mask')->EditSectionRender(
                     Content              => $Section->{Content},
                     DynamicFields        => $Definition->{DynamicFieldRef},
                     UpdatableFields      => \@UpdatableFields,
@@ -1380,7 +1384,54 @@ sub Run {
                         $GetParam{DynamicField}->%*,
                     },
                 );
+
+                next SECTION unless $HTML =~ /\w/;
+
+                my ( $SectionHeader ) = grep { $_->{Header} } $Section->{Content}->@*;
+                if ( $SectionHeader ) {
+                    $PageDynamicFieldHTML .= $LayoutObject->Output(
+                        Template => $SectionHeaderTemplate,
+                        Data     => {
+                            Name => $SectionHeader->{Header},
+                        },
+                    );
+                }
+
+                $PageDynamicFieldHTML .= $HTML;
             }
+
+            next PAGE unless $PageDynamicFieldHTML;
+
+            push @PageHTML, {
+                HTML => $PageDynamicFieldHTML,
+                Name => $Page->{Name},
+            };
+        }
+
+        if ( scalar @PageHTML > 1 ) {
+            my $HeaderTemplate = '<div class="Row Row_PageHeader"><h2>[% Translate(Data.Name) | html %]</h2><hr/></div>';
+
+            for my $Page ( @PageHTML ) {
+                $DynamicFieldHTML .= $LayoutObject->Output(
+                    Template => $HeaderTemplate,
+                    Data     => {
+                        Name => $Page->{Name},
+                    },
+                );
+                $DynamicFieldHTML .= $Page->{HTML},
+            }
+
+            if ( $ShowDescription ) {
+                $DynamicFieldHTML .= $LayoutObject->Output(
+                    Template => $HeaderTemplate,
+                    Data     => {
+                        Name => 'Description',
+                    },
+                );
+            }
+        }
+        elsif ( @PageHTML ) {
+            $DynamicFieldHTML .= $PageHTML[0]{HTML},
         }
 
         if ( $ShowDescription ) {
