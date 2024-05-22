@@ -153,13 +153,23 @@ sub Run {
         );
     }
 
+    # get form id
+    my $FormCacheObject = $Kernel::OM->Get('Kernel::System::Web::FormCache');
+
+    $Self->{FormID} = $FormCacheObject->PrepareFormID(
+        ParamObject  => $ParamObject,
+        LayoutObject => $LayoutObject,
+    );
+
     my %GetParam;
     my %DynamicFieldValues;
     my %ACLReducibleDynamicFields;
-    my $DynamicFieldList = $Definition->{DynamicFieldRef} ? [ values $Definition->{DynamicFieldRef}->%* ] : [];
+    my $DynamicFieldList;
 
     # get initial values for the configitem
     if ( !$Self->{Subaction} ) {
+        $DynamicFieldList = $Definition->{DynamicFieldRef} ? [ values $Definition->{DynamicFieldRef}->%* ] : [];
+
         if ( $ConfigItem->{ConfigItemID} eq 'NEW' ) {
             my $ConfigItemName;
 
@@ -224,6 +234,11 @@ sub Run {
     }
 
     else {
+        $DynamicFieldList = $FormCacheObject->GetFormData(
+            FormID => $Self->{FormID},
+            Key    => 'ActiveDynamicFields',
+        ) // [];
+
         # get general form data
         for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
@@ -268,12 +283,6 @@ sub Run {
 
     # get upload cache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-
-    # get form id
-    $Self->{FormID} = $Kernel::OM->Get('Kernel::System::Web::FormCache')->PrepareFormID(
-        ParamObject  => $Kernel::OM->Get('Kernel::System::Web::Request'),
-        LayoutObject => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
-    );
 
     # when there's no ClassID it means, an existing config item is edited as the ClassID is only
     # provided as GET param when creating a new config item
@@ -707,7 +716,7 @@ sub Run {
             # TODO: Visibility
             # prepare dynamic field values
             DYNAMICFIELD:
-            for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
+            for my $DynamicField ( $DynamicFieldList->@* ) {
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
 
                 $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldValues{ $DynamicField->{Name} };
@@ -790,7 +799,7 @@ sub Run {
             }
 
             # remove all form data
-            $Kernel::OM->Get('Kernel::System::Web::FormCache')->FormIDRemove( FormID => $Self->{FormID} );
+            $FormCacheObject->FormIDRemove( FormID => $Self->{FormID} );
 
             # redirect to zoom mask
             my $ScreenType = $ParamObject->GetParam( Param => 'ScreenType' ) || 0;
@@ -1407,6 +1416,15 @@ sub Run {
                 Name => $Page->{Name},
             };
         }
+
+        my @ActiveDynamicFields = ( values $FieldsSeen->%* );
+
+        # store the active dynamic fields, to only validate those
+        $FormCacheObject->SetFormData(
+            LayoutObject => $LayoutObject,
+            Key          => 'ActiveDynamicFields',
+            Value        => \@ActiveDynamicFields,
+        );
 
         if ( scalar @PageHTML > 1 ) {
             my $HeaderTemplate = '<div class="Row Row_PageHeader"><h2>[% Translate(Data.Name) | html %]</h2><hr/></div>';
