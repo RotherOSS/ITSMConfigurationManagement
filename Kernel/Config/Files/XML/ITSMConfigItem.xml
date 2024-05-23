@@ -2578,7 +2578,7 @@
         <Description Translatable="1">Defines the default relations depth to be shown.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+$">1</Item>
+            <Item ValueType="String" ValueRegex="^\d+$">3</Item>
         </Value>
     </Setting>
     <Setting Name="CMDBTreeView::ShowLinkLabels" Required="1" Valid="1">
