@@ -89,7 +89,7 @@ sub Run {
 
     # get filter from web request
     my $Filter         = $ParamObject->GetParam( Param => 'Filter' )   || 'All';
-    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' ) || 'Default';
+    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' ) || $Config->{DefaultCategory};
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -235,35 +235,9 @@ sub Run {
     my $PrioCounter         = 1000;
     my $CategoryPrioCounter = 1000;
 
-    # to store the total number of config items in all classes that the user has access
-    my $TotalCount;
-
-    # to store all the clases that the user has access, used in search for filter 'All'
-    my $AccessClassList;
-
     # to store the NavBar filters
     my %Filters;
-    my %CategoryFilters;
-    my @AllCategories = values %{
-        $GeneralCatalogObject->ItemList(
-            Class => 'ITSM::ConfigItem::Class::Category',
-            Valid => 1,
-        )
-    };
-
-    # sort categories with default first, if present
-    my @SortedCategories;
-    for my $Category ( sort @AllCategories ) {
-        if ( $Category eq 'Default' ) {
-            unshift @SortedCategories, $Category;
-        }
-        else {
-            push @SortedCategories, $Category;
-        }
-    }
-
-    # build lookup hash categories to classes
-    my %Category2Class;
+    my %Category2ClassID;
 
     CLASSID:
     for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
@@ -278,95 +252,82 @@ sub Run {
 
         next CLASSID if !$HasAccess;
 
-        # check if categories are configured at all
-        if (@SortedCategories) {
-
-            # fetch class preferences to retrieve categories for class
-            my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
-                ItemID => $ClassID,
-            );
-
-            # build category-relevant structures
-            if ( IsArrayRefWithData( $ClassPreferences{Categories} ) ) {
-
-                CATEGORY:
-                for my $Category ( sort $ClassPreferences{Categories}->@* ) {
-
-                    # check if category is valid
-                    next CATEGORY unless grep { $_ eq $Category } @SortedCategories;
-
-                    $Category2Class{$Category} //= [];
-                    push $Category2Class{$Category}->@*, $ClassList->{$ClassID};
-
-                    if ( !$CategoryFilters{$Category} ) {
-                        $CategoryPrioCounter++;
-                        $CategoryFilters{$Category} = {
-                            Name => $Category,
-                            Prio => $CategoryPrioCounter,
-                        };
-                    }
-                }
-
-                if ( $CategoryFilter && $CategoryFilter ne 'All' ) {
-                    next CLASSID unless grep { $_ eq $CategoryFilter } $ClassPreferences{Categories}->@*;
-                }
-            }
-            else {
-                next CLASSID;
-            }
-        }
-        else {
-            next CLASSID;
-        }
-
-        # insert this class to be passed as search parameter for filter 'All'
-        push @{$AccessClassList}, $ClassID;
-
-        # count all records of this class
-        my $ClassCount = $ConfigItemObject->ConfigItemCount(
-            ClassID => $ClassID,
+        # fetch class preferences to retrieve categories for class
+        my %ClassPreferences = $GeneralCatalogObject->GeneralCatalogPreferencesGet(
+            ItemID => $ClassID,
         );
 
-        # add the config items number in this class to the total
-        $TotalCount += $ClassCount;
+        next CLASSID if !IsArrayRefWithData( $ClassPreferences{Categories} );
 
-        # increase the PrioCounter
-        $PrioCounter++;
-
-        # add filter with params for the search method
-        $Filters{$ClassID} = {
-            Name   => $ClassList->{$ClassID},
-            Prio   => $PrioCounter,
-            Count  => $ClassCount,
-            Search => {
-                ClassIDs     => [$ClassID],
-                DeplStateIDs => $DeplStateIDs,
-                %Sort,
-                Limit      => $Self->{SearchLimit},
-                Permission => $Permission,
-                UserID     => $Self->{UserID},
-            },
-        };
+        for my $Category ( $ClassPreferences{Categories}->@* ) {
+            push @{ $Category2ClassID{$Category} }, $ClassID;
+        }
     }
 
-    # if only one filter exists
+    # order the category filters and - if not yet set - select the categpry shown
+    my %CategoryFilters;
+    {
+        my @SortedCategories = sort keys %Category2ClassID;
+
+        if ( !$CategoryFilter || !$Category2ClassID{ $CategoryFilter } ) {
+            $CategoryFilter = $CategoryFilters{Default} ? 'Default' : $SortedCategories[0];
+        }
+
+        my $Prio = 2;
+        %CategoryFilters = map {
+            $_ => {
+                Name => $_,
+                Prio => $Prio++,
+            },
+        } @SortedCategories;
+
+        if ( $CategoryFilters{Default} ) {
+            $CategoryFilters{Default}{Prio} = 1;
+        }
+    }
+
+    # get the class filters for the selected category
+    my $CountTotal = 0;
+    my @AllCurrentClasses;
+    if ( $CategoryFilter ) {
+
+        my $Prio = 2;
+        for my $ClassID ( $Category2ClassID{$CategoryFilter}->@* ) {
+            my $CountClass = $ConfigItemObject->ConfigItemCount(
+                ClassID => $ClassID,
+            );
+            $CountTotal += $CountClass;
+            
+            push @AllCurrentClasses, $ClassID;
+
+            # add filter with params for the search method
+            $Filters{$ClassID} = {
+                Name   => $ClassList->{$ClassID},
+                Prio   => $Prio++,
+                Count  => $CountClass,
+                Search => {
+                    ClassIDs     => [$ClassID],
+                    DeplStateIDs => $DeplStateIDs,
+                    %Sort,
+                    Limit      => $Self->{SearchLimit},
+                    Permission => $Permission,
+                    UserID     => $Self->{UserID},
+                },
+            };
+        }
+    }
+
+    # add "all" filter if there is not only one current filter, set the filter if not provided
     if ( scalar keys %Filters == 1 ) {
-
-        # get the name of the only filter
-        my ($FilterName) = keys %Filters;
-
-        # activate this filter
-        $Filter = $FilterName;
+        ( $Filter ) = keys %Filters;
     }
     else {
-
-        # add default filter, which shows all items
         $Filters{All} = {
             Name   => 'All',
-            Prio   => 1000,
-            Count  => $TotalCount,
+            Prio   => 1,
+            Count  => $CountTotal,
             Search => {
-                ClassIDs     => $AccessClassList,
+                ClassIDs     => \@AllCurrentClasses,
                 DeplStateIDs => $DeplStateIDs,
                 %Sort,
                 Limit      => $Self->{SearchLimit},
@@ -375,15 +336,9 @@ sub Run {
             },
         };
 
-        # if no filter was selected activate the filter all
-        $Filter ||= 'All';
-    }
-
-    # check if filter is valid
-    if ( !$Filters{$Filter} ) {
-        $LayoutObject->FatalError(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'Invalid Filter: %s!', $Filter ),
-        );
+        if ( !$Filter || !$Filters{$Filter} ) {
+            $Filter = 'All';
+        }
     }
 
     my $View = $ParamObject->GetParam( Param => 'View' ) || '';
@@ -424,7 +379,7 @@ sub Run {
     my @ViewableConfigItems;
     my @OriginalViewableConfigItems;
 
-    if (@ViewableDeplStateIDs) {
+    if ( @ViewableDeplStateIDs && @AllCurrentClasses ) {
 
         # get config item values
         if (
@@ -500,36 +455,19 @@ sub Run {
         );
     }
 
-    my $CountTotal = 0;
-    my %NavBarFilter;
-    my %ClassFilter;
-    for my $FilterColumn ( sort keys %Filters ) {
-        my $Count = 0;
-        if (@ViewableDeplStateIDs) {
-            $Count = $ConfigItemObject->ConfigItemSearch(
-                %{ $Filters{$FilterColumn}->{Search} },
-                %ColumnFilter,
-                Result => 'COUNT',
-            ) || 0;
-        }
+    my %NavBarFilter = map {
+        $CategoryFilters{$_}{Prio} => {
+            CategoryFilter => $_,
+            $CategoryFilters{$_}->%*,
+        },
+    } keys %CategoryFilters;
 
-        if ( $FilterColumn eq $Filter ) {
-            $CountTotal = $Count;
-        }
-
-        $ClassFilter{ $Filters{$FilterColumn}->{Prio} } = {
-            Count  => $Count,
-            Filter => $FilterColumn,
-            %{ $Filters{$FilterColumn} },
-        };
-    }
-    for my $FilterColumn ( sort keys %CategoryFilters ) {
-
-        $NavBarFilter{ $CategoryFilters{$FilterColumn}->{Prio} } = {
-            CategoryFilter => $FilterColumn,
-            %{ $CategoryFilters{$FilterColumn} },
-        };
-    }
+    my %ClassFilter = map {
+        $Filters{$_}{Prio} => {
+            Filter => $_,
+            $Filters{$_}->%*,
+        },
+    } keys %Filters;
 
     my $ColumnFilterLink = '';
     COLUMNNAME:

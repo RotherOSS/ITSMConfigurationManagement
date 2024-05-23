@@ -1787,6 +1787,13 @@
             <Item ValueType="String" ValueRegex="^\d+$">10000</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory" Required="0" Valid="0">
+        <Description Translatable="1">The default category which is shown, if none is selected.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Item>Default</Item>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable" Required="0" Valid="0">
         <Description Translatable="1">Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
