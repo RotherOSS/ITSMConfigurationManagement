@@ -94,7 +94,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     }
 
     .SetDisplayValue {
-        margin-top: 2px;
+        margin-top: 10px;
         margin-left: 24px;
         display: grid;
         grid-template-columns: calc( 50% - 24px ) 1fr;
