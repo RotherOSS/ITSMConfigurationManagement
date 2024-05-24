@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Swahili <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sw/>\n"
+"Language: sw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -332,15 +335,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "Uendeshaji"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "Onyo"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "Tukio"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -958,7 +961,7 @@ msgstr "Usajili wa moduli ya mazingira ya nyuma ya kipengee kwa moduli ya Kuingi
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "Mapitio"
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
@@ -1086,7 +1089,7 @@ msgstr "Kitambulishi cha kipengele cha usanidi, mfano.ConfigItem#, MyConfigItem#
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "Tabaka"
 
 #. SysConfig
 msgid "global"
@@ -1170,7 +1173,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Aina ya kipengele"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1186,7 +1189,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Unataka kuendelea?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1206,7 +1209,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Hakuna ruhusa"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1595,6 +1598,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Fanya kitecndo cha usanidishwaji kwa kila tukio (kama Kichochezi) kwa kila "
+"huduma ya wavuti iliyosanidiwa."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1651,6 +1656,8 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Moduli ya mazingira ya nyuma ya kichochezi cha OTOBO itaitwa kuandaa data "
+"kutumwa katika mfumo wa mbali, na kushughulikia data zake za majibu."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1663,10 +1670,14 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Data kutoka kwa kichochezi cha OTOBO zitashughulikiwa na kuunganishwa huku, "
+"kubadilisha kuwa data ambayo mfumo wa mbali inaitarajia."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Data za majibu zitashughulikiwa na kuunganishwa kwa ramani, kuibadilisha "
+"kuwa data ambayo kichochezi cha OTOBO kinaitarajia."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1678,7 +1689,7 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Ongeza tukio"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
@@ -1698,7 +1709,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Chagua zote"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -3154,7 +3165,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
@@ -3203,4 +3214,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
