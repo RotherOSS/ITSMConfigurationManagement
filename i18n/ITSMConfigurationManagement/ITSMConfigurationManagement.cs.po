@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Czech <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/cs/>\n"
 "Language: cs\n"
@@ -79,11 +79,11 @@ msgstr "Hromadná akce ITSM ConfigItem"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
-msgstr ""
+msgstr "Stav Nasazení"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "Stav Incidentu"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
@@ -1065,7 +1065,7 @@ msgstr "Parametry stránek (na kterých se zobrazují konfigurační položky)."
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Skupina oprávnění"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1319,7 +1319,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Chcete pokračovat?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -2016,7 +2016,7 @@ msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Řadit"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
@@ -2028,7 +2028,7 @@ msgstr "Zahrnout neplatné seznamy ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Zkontrolovat oficiální %sdokumentaci%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -2087,6 +2087,8 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Z důvodu neznámé chyby ACL nemohly být naimportovány, pro více informací "
+"prosím zkontrolujte logy OTOBO"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3577,7 +3579,7 @@ msgstr "Notebook"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
