@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Thai <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/th/>\n"
+"Language: th_TH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -332,15 +335,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "การดำเนินงาน"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "คำเตือน"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "เหตุการณ์"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -956,7 +959,7 @@ msgstr "การลงทะเบียนโมดูล Object backend ส�
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "ภาพรวม"
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
@@ -1084,7 +1087,7 @@ msgstr "ตัวบ่งชี้สำหรับ  Configuration Item เช
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "คลาส"
 
 #. SysConfig
 msgid "global"
@@ -1168,7 +1171,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "ประเภทของออบเจค"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1184,7 +1187,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "คุณต้องการดำเนินการต่อไปหรือไม่?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1204,7 +1207,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "ไม่ได้รับอนุญาต"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1649,6 +1652,8 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"โมดูลผู้ร้องขอเบื้องหลังของOTOBOนี้จะถูกเรียกเพื่อเตรียมข้อมูลที่จะส่งไปยังระ"
+"บบระยะไกลและเพื่อประมวลผลข้อมูลการตอบสนอง"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1661,10 +1666,14 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"ข้อมูลจากผู้ร้องขอของOTOBO  จะถูกดำเนินการจากแผนที่นี้เพื่อเปลี่ยนมันไปเป็นปร"
+"ะเภทของข้อมูลที่คาดว่าเป็นระบบจากระยะไกล"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"ข้อมูลการตอบสนองจะถูกประมวลผลโดยแผนที่นี้เพื่อเปลี่ยนมันไปเป็นข้อมูลผู้ร้"
+"องขอตามการคาดการของ OTOBO"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1676,11 +1685,13 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "เพิ่มกิจกรรม"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"ตัวกระตุ้นกิจกรรมที่ไม่ตรงกันจะถูกจัดการโดย OTOBO Scheduler Daemon "
+"ในเบื้องหลัง (แนะนำ)"
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1696,7 +1707,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "เลือกทั้งหมด"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -1773,6 +1784,8 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACLsไม่สามารถนำเข้าเนื่องจากข้อผิดพลาดที่ไม่ทราบโปรดตรวจสอบการล็อก OTOBO "
+"สำหรับข้อมูลเพิ่มเติม"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3152,7 +3165,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
@@ -3201,4 +3214,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
