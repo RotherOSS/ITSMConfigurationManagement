@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Turkish <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/tr/>\n"
 "Language: tr\n"
@@ -1089,7 +1089,7 @@ msgstr "Sayfalar için parametreler (yapılandırma öğelerinin gösterildiği)
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "İzin grubu"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
