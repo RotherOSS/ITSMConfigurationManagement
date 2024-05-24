@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Spanish (Colombia) <http://weblate.otobo.org/projects/"
 "opm-packages/itsm-configurationmanagement/es_CO/>\n"
 "Language: es_CO\n"
@@ -85,7 +85,7 @@ msgstr "Estado de despliegue"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "Estado del Incidente"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
@@ -1101,7 +1101,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Grupo de permisos"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1380,7 +1380,7 @@ msgstr "No se han encontrado versiones."
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "No tiene permisos!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -2097,7 +2097,7 @@ msgstr "Incluir ACL no válidas"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Consulte la documentación Oficial."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -2113,11 +2113,13 @@ msgstr "Filtrar campo por espacio de nombres"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nuevos Campos Dinámicos"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"¿Le gustaría beneficiarse de tipos de campos dinámicos adicionales? Tiene "
+"acceso completo a los siguientes tipos de campos:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -2323,7 +2325,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Pantallas de los Campos Dinámicos"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
