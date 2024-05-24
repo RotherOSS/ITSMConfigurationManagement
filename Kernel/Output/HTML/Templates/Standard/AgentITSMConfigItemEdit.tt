@@ -58,7 +58,7 @@
 [% RenderBlockStart("RowVersionString") %]
                         <label class="Mandatory" for="VersionString"><span class="Marker">*</span> [% Translate("Version Number") | html %]: </label>
                         <div class="Field">
-                            <input type="text" name="VersionString" id="VersionString" class="W50pc Validate_Required [% Data.RowVersionStringInvalid | html %]" maxlength="250" value="[% Data.VersionString | html %]" title="[% Translate("The version number of this config item") | html %]" />
+                            <input type="text" name="VersionString" id="VersionString" class="W50pc Validate_Required [% Data.RowVersionStringInvalid | html %]" maxlength="250" value="[% Data.VersionString | html %]" title="[% Translate("Version number of this config item") | html %]" />
                             <div id="VersionStringError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
 [% RenderBlockStart("RowVersionStringErrorDefault") %]
                             <div id="VersionStringServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
