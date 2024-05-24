@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <http://weblate.otobo.org/projects/"
 "opm-packages/itsm-configurationmanagement/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -1188,7 +1188,7 @@ msgstr "请注意，也会创建相应的动态字段和 GeneralCatalog 类，�
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "您要继续进行吗？"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1208,7 +1208,7 @@ msgstr "未找到任何版本！"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "没有权限"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1535,7 +1535,7 @@ msgstr "动态字段事件模块，用于在包含的动态字段发生变化时
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
+msgstr "在服务人员界面的附加ITSM字段窗口中显示的动态字段。"
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1650,7 +1650,7 @@ msgstr "代理界面首选项视图中配置项类的版本触发器参数。"
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
+msgstr "为每个配置的WEB服务的每个事件执行配置好的操作（以调用程序角色）。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1709,7 +1709,8 @@ msgstr "一般调用者数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
+msgstr "这个OTOBO调用程序后端模块被调用后，负责准备需要发送给远程系统的数据，并处理它"
+"的响应数据。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1717,15 +1718,15 @@ msgstr "外发请求数据的设置"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "映射"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
+msgstr "这个映射将对OTOBO调用程序输出的数据进行处理，将它转换为远程系统所期待的数据。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
+msgstr "这个映射将对响应数据进行处理，将它转换为OTOBO调用程序所期待的数据。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1737,11 +1738,11 @@ msgstr "活动数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "添加事件"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
+msgstr "异步的事件触发器将由后端的OTOBO调度程序守护进程处理（推荐）。"
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1765,11 +1766,11 @@ msgstr "全屏"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "排序"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
@@ -1781,7 +1782,7 @@ msgstr "包含无效 ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "查看 %s 的官方文档 %s。"
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1801,7 +1802,7 @@ msgstr "新动态字段"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
+msgstr "想从其他动态字段类型中受益吗？你可以完全访问以下字段类型："
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1833,11 +1834,11 @@ msgstr "基本结构无效。请提供包含 YAML 格式数据的数组。"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
+msgstr "由于未知错误不能导入ACL，请检查OTOBO日志以获得更多信息"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (副本) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -1905,7 +1906,7 @@ msgstr "定义私有插件仓库"
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "定义处理HTML模板的过滤器。"
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
@@ -1980,11 +1981,11 @@ msgstr "不记录这些用户的 git ssh 连接授权结果。适用于自动化
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "动态字段屏幕"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "动态字段窗口DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
@@ -2016,7 +2017,7 @@ msgstr "公共界面中 PublicPackageVerification 对象的前台模块注册。
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "为管理员界面的前端模块登记。"
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -2024,7 +2025,7 @@ msgstr "GIT 作者注册。"
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
+msgstr "为指定的块生成HTML注释挂钩，以便过滤器的使用。"
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2065,7 +2066,7 @@ msgstr "在添加 OPMS 仓库时，将在 git 项目创建过程中设置的组�
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "在界面管理动态字段。"
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
@@ -2216,15 +2217,15 @@ msgstr "主题文件夹的路径，其中包含 sphinx 主题。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
+msgstr "此配置定义了所有可能的界面，以启用或禁用默认列。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
+msgstr "此配置定义了所有可能的界面，以启用或禁用动态字段。"
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
+msgstr "这个配置定义了是否只显示有效的动态字段，还是显示所有的（包括无效的）。"
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
@@ -2716,7 +2717,7 @@ msgstr "ETSI 机架"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
@@ -3268,7 +3269,7 @@ msgstr "笔记本"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
