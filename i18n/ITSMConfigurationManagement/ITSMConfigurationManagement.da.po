@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:13+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Danish <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/da/>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -16,15 +19,15 @@ msgstr "Config Item styring"
 
 #. Template: AdminITSMConfigItem
 msgid "Change class definition"
-msgstr ""
+msgstr "Skift klassedefinition"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "Konfig-elementklasse"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
-msgstr ""
+msgstr "Definition"
 
 #. Template: AdminITSMConfigItem
 msgid "Change"
@@ -44,7 +47,7 @@ msgstr "Klasse"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Deployment State Type"
-msgstr ""
+msgstr "Type af udrulningstilstand"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Incident State"
@@ -52,7 +55,7 @@ msgstr "Nuværende Incident tilstand"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Current Incident State Type"
-msgstr ""
+msgstr "Nuværende hændelsestilstand Type"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
@@ -64,15 +67,15 @@ msgstr "Config Item"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Filter for Classes"
-msgstr ""
+msgstr "ConfigItemID %s findes ikke i databasen!"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
-msgstr ""
+msgstr "Vælg en klasse fra listen for at oprette et nyt Config Item."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
-msgstr ""
+msgstr "ITSM ConfigItem Bulk Action"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
@@ -84,19 +87,19 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
-msgstr ""
+msgstr "Link til en anden"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Invalid Configuration Item number!"
-msgstr ""
+msgstr "Ugyldigt nummer på konfigurationselementet!"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "The number of another Configuration Item to link with."
-msgstr ""
+msgstr "Nummeret på et andet konfigurationselement, der skal linkes til."
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Vil du virkelig slette dette konfigurationselement?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -104,11 +107,11 @@ msgstr "Navnet på denne Config Item"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
+msgstr "Navnet er allerede i brug af ConfigItems med følgende nummer(e): %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
-msgstr ""
+msgstr "Historik for konfigurationselement: %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
@@ -124,19 +127,19 @@ msgstr "Zoom-visning"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Context Settings"
-msgstr ""
+msgstr "Kontekstindstillinger"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
-msgstr ""
+msgstr "Konfigurer elementer pr. side"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "A generic ITSM Configuration Item table"
-msgstr ""
+msgstr "En generisk ITSM-konfigurationselementtabel"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "Kør søgning"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
@@ -144,11 +147,11 @@ msgstr "Søg også i tidligere versioner?"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
-msgstr ""
+msgstr "Konfigurationselement"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Information"
-msgstr ""
+msgstr "Information om konfigurationselementer"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Deployment State"
@@ -160,187 +163,190 @@ msgstr "Sidst ændret af"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show one version"
-msgstr ""
+msgstr "Vis én version"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show all versions"
-msgstr ""
+msgstr "Vis alle versioner"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Incident State"
-msgstr ""
+msgstr "Version Hændelsesstatus"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Deployment State"
-msgstr ""
+msgstr "Status for versionsudrulning"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number"
-msgstr ""
+msgstr "Versionsnummer"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Version Details"
-msgstr ""
+msgstr "Detaljer om version af konfigurationselement"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Property"
-msgstr ""
+msgstr "Ejendom"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "No access to Class is given!"
-msgstr ""
+msgstr "Der gives ingen adgang til Class!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem Bulk Action"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No ConfigItemID is given!"
-msgstr ""
+msgstr "Der er ikke angivet noget ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You need at least one selected Configuration Item!"
-msgstr ""
+msgstr "Du skal bruge mindst ét valgt konfigurationselement!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
-msgstr ""
+msgstr "Du har ikke skriveadgang til dette konfigurationselement: %s."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
-msgstr ""
+msgstr "Konfig-elementet \"%s\" blev ikke fundet i databasen!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Was not able to delete the configitem ID %s!"
 msgstr ""
+"Definerer antallet af rækker for CI-definitionseditoren i "
+"administrationsgrænsefladen."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "No version found for ConfigItemID %s!"
-msgstr ""
+msgstr "Ingen version fundet for ConfigItemID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No ConfigItemID, DuplicateID or ClassID is given!"
-msgstr ""
+msgstr "Der er ikke angivet noget ConfigItemID, DuplicateID eller ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
-msgstr ""
+msgstr "Der gives ingen adgang!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No definition was defined for class %s!"
-msgstr ""
+msgstr "Der blev ikke defineret nogen definition for klassen %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
-msgstr ""
+msgstr "Kan ikke vise historik, da der ikke er angivet noget ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
+msgstr "Kan ikke vise historik, ingen adgangsrettigheder givet!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
-msgstr ""
+msgstr "Nyt ConfigItem (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New version (ID=%s)"
-msgstr ""
+msgstr "Ny version (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Implementeringsstatus opdateret (ny=%s, gammel=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Incident state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Hændelsesstatus opdateret (ny=%s, gammel=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem (ID=%s) deleted"
-msgstr ""
+msgstr "ConfigItem (ID=%s) slettet"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) added"
-msgstr ""
+msgstr "Link til %s (type=%s) tilføjet"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) deleted"
-msgstr ""
+msgstr "Link til %s (type=%s) slettet"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem definition updated (ID=%s)"
-msgstr ""
+msgstr "ConfigItem-definition opdateret (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Name updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Navn opdateret (nyt=%s, gammelt=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Attribute %s updated from \"%s\" to \"%s\""
-msgstr ""
+msgstr "Attribut %s opdateret fra \"%s\" til \"%s\""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Version %s deleted"
-msgstr ""
+msgstr "Version %s slettet"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
-msgstr ""
+msgstr "Der er ikke angivet noget ConfigItemID eller VersionID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
+msgstr "Kan ikke vise konfigurationselement, ingen adgangsrettigheder givet!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr ""
+msgstr "ConfigItemID %s findes ikke i databasen!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
-msgstr ""
+msgstr "VersionID %s findes ikke i databasen!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
-msgstr ""
+msgstr "KonfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
-msgstr ""
+msgstr "udskrevet af %s på %s"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
-msgstr ""
+msgstr "Ugyldigt klasse-ID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No ClassID is given!"
-msgstr ""
+msgstr "Der er ikke angivet noget ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No access rights for this class given!"
-msgstr ""
+msgstr "Der er ikke givet adgangsrettigheder til denne klasse!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No Result!"
-msgstr ""
+msgstr "Intet resultat!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Config Item Search Results"
-msgstr ""
+msgstr "Søgeresultater for konfigurationselementer"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr ""
+"Kan ikke vise element, ingen adgangsrettigheder til ConfigItem er givet!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "operationel"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "advarsel"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "hændelse"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -352,7 +358,7 @@ msgstr "Incident tilstand for denne Config Item"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
-msgstr ""
+msgstr "Viste konfigurationselementer"
 
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
@@ -364,11 +370,11 @@ msgstr "Maximum antal af et element"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Empty fields indicate that the current values are kept"
-msgstr ""
+msgstr "Tomme felter angiver, at de aktuelle værdier bevares"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Skipped"
-msgstr ""
+msgstr "Sprang over"
 
 #. ITSM class bundles
 msgid "Model"
@@ -376,7 +382,7 @@ msgstr "Model"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Kundevirksomhed"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -436,7 +442,7 @@ msgstr "Telefon 2"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "E-Mail"
-msgstr ""
+msgstr "Modul til at kontrollere den gruppe, der er ansvarlig for en klasse."
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Address"
@@ -472,19 +478,19 @@ msgstr "Medie"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #. ITSM class bundles
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #. ITSM class bundles
 msgid "Network"
-msgstr ""
+msgstr "Netværk"
 
 #. ITSM class bundles
 msgid "Software"
-msgstr ""
+msgstr "Software"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -616,7 +622,7 @@ msgstr "Etage"
 
 #. ITSM class bundles
 msgid "Room"
-msgstr ""
+msgstr "Værelse"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Rack"
@@ -740,179 +746,260 @@ msgstr "Ok"
 
 #. SysConfig
 msgid "Assigned CIs"
-msgstr ""
+msgstr "Tildelte CI'er"
 
 #. SysConfig
 msgid "CIs assigned to customer company"
-msgstr ""
+msgstr "CI'er tildelt kundevirksomhed"
 
 #. SysConfig
 msgid "CIs assigned to customer user"
-msgstr ""
+msgstr "CI'er tildelt kundebruger"
 
 #. SysConfig
 msgid "CMDB Settings"
-msgstr ""
+msgstr "CMDB-indstillinger"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr ""
+"Tjek kun for et unikt navn inden for den samme ConfigItem-klasse ('class') "
+"eller globalt ('global'), hvilket betyder, at alle eksisterende ConfigItems "
+"tages i betragtning, når der ledes efter dubletter."
 
 #. SysConfig
 msgid "Config Items"
-msgstr ""
+msgstr "Konfigurationselementer"
 
 #. SysConfig
 msgid "Config item add."
-msgstr ""
+msgstr "Tilføj konfig-element."
 
 #. SysConfig
 msgid "Config item edit."
-msgstr ""
+msgstr "Rediger konfigurationselement."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
 msgstr ""
+"Config item-hændelsesmodul, der muliggør logning til historik i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Config item history."
-msgstr ""
+msgstr "Konfigurer elementets historik."
 
 #. SysConfig
 msgid "Config item print."
-msgstr ""
+msgstr "Print af konfigurationselementer."
 
 #. SysConfig
 msgid "Config item zoom."
-msgstr ""
+msgstr "Konfigurer elementzoom."
 
 #. SysConfig
 msgid "ConfigItemNumber"
-msgstr ""
+msgstr "KonfigElementNummer"
 
 #. SysConfig
 msgid "Configuration Item Limit"
-msgstr ""
+msgstr "Grænse for konfigurationselement"
 
 #. SysConfig
 msgid "Configuration Item limit per page."
-msgstr ""
+msgstr "Konfiguration Elementgrænse pr. side."
 
 #. SysConfig
 msgid "Configuration Management Database."
-msgstr ""
+msgstr "Database for konfigurationsstyring."
 
 #. SysConfig
 msgid "Configuration item bulk module."
-msgstr ""
+msgstr "Konfigurationselementets bulk-modul."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Konfigurationselement søg backend-router for agentgrænsefladen."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
-msgstr ""
+msgstr "Opret og administrer definitionerne for Configuration Items."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"Definer handlinger, hvor en indstillingsknap er tilgængelig i de linkede "
+"objekters widget (LinkObject::ViewMode = \"complex\"). Bemærk, at disse "
+"handlinger skal have registreret følgende JS- og CSS-filer: "
+"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
+"Core.Agent.TableFilters.js og Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
 msgstr ""
+"Definerer nødvendige tilladelser til at oprette ITSM-konfigurationselementer "
+"ved hjælp af den generiske grænseflade."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
 msgstr ""
+"Definerer nødvendige tilladelser til at slette ITSM-konfigurationselementer "
+"ved hjælp af den generiske grænseflade."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
 msgstr ""
+"Definerer nødvendige tilladelser til at hente ITSM-konfigurationselementer "
+"ved hjælp af den generiske grænseflade."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
 msgstr ""
+"Definerer nødvendige tilladelser til at søge i ITSM-konfigurationselementer "
+"ved hjælp af den generiske grænseflade."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
 msgstr ""
+"Definerer nødvendige tilladelser til at opdatere ITSM-"
+"konfigurationselementer ved hjælp af den generiske grænseflade."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
 msgstr ""
+"Definerer et oversigtsmodul til at vise den lille visning af en liste over "
+"konfigurationselementer."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
 msgstr ""
+"Definerer regulære udtryk individuelt for hver ConfigItem-klasse for at "
+"kontrollere ConfigItem-navnet og for at vise tilsvarende fejlmeddelelser."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "Definerer standardunderobjektet i klassen 'ITSMConfigItem'."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
 msgstr ""
+"Definerer antallet af rækker for CI-definitionseditoren i "
+"administrationsgrænsefladen."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
 msgstr ""
+"Definerer rækkefølgen af hændelsestilstande fra høj (f.eks. cricital) til "
+"lav (f.eks. funktionel)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
 msgstr ""
+"Definerer de relevante implementeringstilstande, hvor tilknyttede tickets "
+"kan påvirke status for et CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "Definerer søgegrænsen for skærmbilledet AgentITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Definerer søgegrænsen for skærmbilledet AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
 msgstr ""
+"Definerer de viste kolonner i oversigten over konfigurationselementer. Denne "
+"indstilling har ingen effekt på kolonnens placering. Bemærk: Klassekolonnen "
+"er altid tilgængelig, hvis filteret 'Alle' er valgt."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
 msgstr ""
+"Definerer de viste kolonner i søgningen efter konfigurationselementer. Denne "
+"indstilling har ingen effekt på kolonnens placering."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"Definerer de viste kolonner med CI'er i oversigten over "
+"konfigurationselementer afhængigt af CI-klassen. Hver post skal indledes med "
+"klassens navn og dobbelt kolon (f.eks. Computer::). Der er nogle få CI-"
+"attributter, som er fælles for alle CI'er (eksempel for klassen Computer: "
+"Computer::Name, Computer::CurDeplState, Computer::CreateTime). For at vise "
+"individuelle CI-attributter som defineret i CI-definitionen skal følgende "
+"skema bruges (eksempel for klassen Computer): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Hvis der ikke er nogen post for en CI-"
+"klasse, vises standardkolonnerne som defineret i indstillingen "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"Definerer de viste kolonner af CI'er i konfigurationselement-søgningen "
+"afhængigt af CI-klassen. Hver post skal indledes med klassens navn og "
+"dobbelt kolon (f.eks. Computer::). Der er nogle få CI-attributter, som er "
+"fælles for alle CI'er (eksempel for klassen Computer: Computer::Name, "
+"Computer::CurDeplState, Computer::CreateTime). For at vise individuelle CI-"
+"attributter som defineret i CI-definitionen skal følgende skema bruges ("
+"eksempel for klassen Computer): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Hvis der ikke er nogen post for en CI-"
+"klasse, vises standardkolonnerne som defineret i indstillingen "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"Definerer de viste kolonner af CI'er i konfigurationselementets widget "
+"afhængigt af CI-klassen. Hver post skal indledes med klassens navn og "
+"dobbelt kolon (f.eks. Computer::). Der er nogle få CI-attributter, som er "
+"fælles for alle CI'er (eksempel for klassen Computer: Computer::Name, "
+"Computer::CurDeplState, Computer::CreateTime). For at vise individuelle CI-"
+"attributter som defineret i CI-definitionen skal følgende skema bruges ("
+"eksempel for klassen Computer): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Hvis der ikke er nogen post for en CI-"
+"klasse, vises standardkolonnerne som defineret i indstillingen "
+"AgentCustomerInformationCenter::Backend###0060-CIC-"
+"ITSMConfigItemCustomerCompany (nøgle DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
+msgstr "ConfigItem (ID=%s) slettet"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
 msgstr ""
+"Definerer de viste kolonner af CI'er i den komplekse visning af "
+"linktabellen, afhængigt af CI-klassen. Hver post skal indledes med klassens "
+"navn og dobbelt kolon (f.eks. Computer::). Der er nogle få CI-attributter, "
+"som er fælles for alle CI'er (eksempel for klassen Computer: Computer::Name, "
+"Computer::CurDeplState, Computer::CreateTime). For at vise individuelle CI-"
+"attributter som defineret i CI-definitionen skal følgende skema bruges ("
+"eksempel for klassen Computer): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Hvis der ikke er nogen post for en CI-"
+"klasse, vises standardkolonnerne."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
 msgstr ""
+"Definerer, hvilken type link (navngivet fra ticket-perspektivet) der kan "
+"påvirke status for et linket CI."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "Definerer, hvilken type ticket der kan påvirke status for et linket CI."
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "Slet konfigurationselement"
 
 #. SysConfig
 msgid "Deployment State Color"
-msgstr ""
+msgstr "Farve på implementeringsstatus"
 
 #. SysConfig
 msgid "Duplicate"
@@ -921,62 +1008,84 @@ msgstr "Dupliker"
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
 msgstr ""
+"Aktiverer funktionen til massehandling af konfigurationselementer, så "
+"agentens frontend kan arbejde på mere end ét konfigurationselement ad gangen."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
 msgstr ""
+"Definerer de relevante implementeringstilstande, hvor tilknyttede tickets "
+"kan påvirke status for et CI."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
 msgstr ""
+"Aktiverer/deaktiverer funktionaliteten til at tjekke ConfigItems for unikke "
+"navne. Før du aktiverer denne mulighed, bør du tjekke dit system for "
+"allerede eksisterende konfigurationselementer med duplikatnavne. Det kan du "
+"gøre med scriptet bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
 msgstr ""
+"Hændelsesmodul til at sætte configitem-status på ticket-configitem-link."
 
 #. SysConfig
 msgid "ITSM config item overview."
-msgstr ""
+msgstr "Oversigt over ITSM-konfigurationselementer."
 
 #. SysConfig
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "Modul til at kontrollere den gruppe, der er ansvarlig for en klasse."
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
 msgstr ""
+"Modul til at kontrollere den gruppe, der er ansvarlig for et "
+"konfigurationselement."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "Modul til at generere statistik over ITSM-konfigurationselementer."
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "advarsel"
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "Overblik."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"Parametre til dashboard-backend for kundevirksomhedens "
+"konfigurationselementoversigt over agentgrænsefladen. \"Limit\" er antallet "
+"af poster, der vises som standard. \"Group\" bruges til at begrænse adgangen "
+"til plugin'et (f.eks. Group: admin;group1;group2;). \"Default\" bestemmer, "
+"om plugin'et er aktiveret som standard, eller om brugeren skal aktivere det "
+"manuelt. \"CacheTTLLocal\" er cache-tiden i minutter for plugin'et."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
 msgstr ""
+"Parametre for udrulningstilstandenes farve i præferencevisningen i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
 msgstr ""
+"Parametre for udrulningstilstande i præferencevisningen i agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
 msgstr ""
+"Parametre for eksemplerne på tilladelsesgrupper for de generelle "
+"katalogattributter."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "Parametre for siderne (hvor konfigurationselementerne vises)."
 
 #. SysConfig
 msgid "Permission Group"
@@ -985,694 +1094,926 @@ msgstr ""
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge ITSM-konfigurationselementskærmen i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet til søgning efter ITSM-"
+"konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge zoomskærmen for ITSM-"
+"konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet Tilføj ITSM-"
+"konfigurationselement i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet Rediger ITSM-"
+"konfigurationselement i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet med historik for ITSM-"
+"konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet Udskriv ITSM-"
+"konfigurationselement i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "Nødvendige rettigheder for at slette konfigurationselementer."
 
 #. SysConfig
 msgid "Search config items."
-msgstr ""
+msgstr "Søg i konfigurationselementer."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
 msgstr ""
+"Vælger konfigurationselementets nummergeneratormodul. \"AutoIncrement\" øger "
+"konfigurationselementets nummer, SystemID, ConfigItemClassID og tælleren "
+"bruges. Formatet er \"SystemID.ConfigItemClassID.Counter\", f.eks. "
+"1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
 msgstr ""
+"Indstil automatisk hændelsesstatus for en CI, når en ticket er linket til en "
+"CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
 msgstr ""
+"Indstiller implementeringstilstanden i konfigurationselementets bulkskærm i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
 msgstr ""
+"Indstiller hændelsestilstanden i konfigurationselementets bulkskærm i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen, der gør det muligt at forbinde et "
+"konfigurationselement med et andet objekt i zoomvisningen af "
+"konfigurationselementet i agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Viser et link i menuen for at få adgang til historikken for et "
+"konfigurationselement i oversigten over konfigurationselementer i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen for at få adgang til historikken for et "
+"konfigurationselement i agentgrænsefladens zoomvisning."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen til at slette et konfigurationselement i "
+"zoomvisningen af agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Viser et link i menuen til at duplikere et konfigurationselement i "
+"oversigten over konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen til at duplikere et konfigurationselement i "
+"zoomvisningen af agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen til redigering af et konfigurationselement i "
+"agentgrænsefladens zoomvisning."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen til at gå tilbage i zoomvisningen af "
+"konfigurationselementet i agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Viser et link i menuen til at udskrive et konfigurationselement i "
+"agentgrænsefladens zoomvisning."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Viser et link i menuen til at zoome ind på et konfigurationselement i "
+"oversigten over konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
 msgstr ""
+"Viser konfigurationselementets historik (i omvendt rækkefølge) i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
 msgstr ""
+"Identifikatoren for et konfigurationselement, f.eks. ConfigItem#, "
+"MyConfigItem#. Standard er ConfigItem#."
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "klasse"
 
 #. SysConfig
 msgid "global"
-msgstr ""
+msgstr "globalt"
 
 #. SysConfig
 msgid "postproductive"
-msgstr ""
+msgstr "postproduktiv"
 
 #. SysConfig
 msgid "preproductive"
-msgstr ""
+msgstr "Detaljer om version af konfigurationselement"
 
 #. SysConfig
 msgid "productive"
-msgstr ""
+msgstr "produktiv"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Ændring af rolledefinition"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "Ready2Import-klassebundter"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"Her kan du importere Ready2Import-klassebundter, der viser vores mest "
+"almindelige konfigurationselementer. Bemærk, at der kan være behov for "
+"yderligere konfiguration."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "Opdater eksisterende enheder"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "Importer Ready2Adopt-klassebundter"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Konfig-elementets rolle"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "Versionsnummeret for dette konfigurationselement"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Versionsnummeret er allerede i brug af ConfigItems med følgende nummer(e): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "Ingen data om konfigurationselementet fundet."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "Vælg dette konfigurationselement"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "TreeView til ConfigItem"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "Dybdeniveau"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "Zoom ind/ud"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "Maks. linkniveau nået for ConfigItem!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "Dine ConfigItems"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "ConfigItem-søgning"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Objekttype"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "Følgende klasser vil blive importeret"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "Følgende roller vil blive importeret"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"Bemærk, at der også oprettes tilsvarende dynamiske felter og GeneralCatalog-"
+"klasser, og at der ikke sker nogen automatisk fjernelse."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Vil du fortsætte?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "Brug for eksempelklasser!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "Definitionen er ikke en gyldig YAML-hash."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "ConfigItem ikke fundet!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "Ingen versioner fundet!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Ingen tilladelse"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "Filteret er ugyldigt!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "Søgeparametre ugyldige!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "Klassebegrænsninger for konfigurationselementet"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
 msgstr ""
+"Vælg en eller flere klasser for at begrænse valgbare konfigurationselementer"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "Link-type"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "Vælg linktype."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "Fremadrettet: Referencing (Source) -> Referenced (Target)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "Baglæns: Referenced (Source) -> Referencing (Target)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "Link retning"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 msgstr ""
+"Det refererende objekt er det, der indeholder dette dynamiske felt, og det "
+"refererede objekt er det, der er valgt som værdi for det dynamiske felt."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "Dynamisk (ConfigItem)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "Statisk (version)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "Type af linkhenvisning"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 msgstr ""
+"Om dette link gælder for ConfigItem eller den statiske version af det "
+"refererende objekt. Beregning af aktuel hændelsestilstand udføres kun på "
+"dynamiske links."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
+msgstr "Vælg den attribut, som konfigurationselementer skal søges efter"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "Det er nødvendigt at starte YAML-strengen med '---'."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "Kunne ikke rense tabellen configitem_link."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "Der blev ikke fundet nogen relevante dynamiske felter"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "Kunne ikke indsætte i tabellen configitem_link"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "Indsat 0 rækker i tabellen configitem_link"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
+msgstr "Fejl ved synkronisering af definitionerne. Tjek venligst loggen."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 msgstr ""
+"Du har ITSMConfigItem-definitioner, som ikke er synkroniserede. Implementer "
+"venligst dine ITSMConfigItem dynamiske feltændringer."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "Oversigt og bekræftelse"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "Der opstod en fejl under klasseimporten."
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - Skjult"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - vist på billedet"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Tillader udvidede søgebetingelser ved søgning efter konfigurationselementer "
+"i agentgrænsefladen. Med denne funktion kan du f.eks. søge efter navnet på "
+"et konfigurationselement med betingelser som \"(*key1*&&*key2*)\" eller \""
+"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Tillader udvidede søgebetingelser i søgning efter konfigurationselementer i "
+"kundegrænsefladen. Med denne funktion kan du f.eks. søge i navnet på et "
+"konfigurationselement med betingelser som \"(*key1*&&*key2*)\" eller \""
+"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "Vælg et modul til at håndhæve et navneskema."
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "Vælg et modul til at håndhæve et nummerskema."
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "Vælg et modul til at håndhæve en versionsstrengordning."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
+msgstr "Vælg de attributter, der skal udløse oprettelsen af en ny version."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
 msgstr ""
+"Vælg kategorier, der skal tildeles denne klasse af konfigurationselementer."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
+msgstr "Kolonne-konfigurationselementfiltre til ConfigItem Overview."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Kolonner, der kan filtreres i oversigten over konfigurationselementer i "
+"agentgrænsefladen. Bemærk: Kun Config Item-attributter og dynamiske felter "
+"(DynamicField_NameX) er tilladt."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Kolonner, der kan filtreres i oversigten over konfigurationselementer i "
+"kundegrænsefladen. Bemærk: Kun Config Item-attributter og dynamiske felter "
+"(DynamicField_NameX) er tilladt."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr ""
+"Config item event-modul, der opdaterer config items til deres aktuelle "
+"definition."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
+msgstr "Config item event-modul, der opdaterer tabellen configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
+msgstr "Config item event-modulet opdaterer den aktuelle hændelsesstatus."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "ConfigItem-trævisning"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "ConfigItem Version"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"ConfigItems i følgende klasser vil ikke blive gemt på Elasticsearch-"
+"serveren. For at anvende dette på eksisterende CI'er skal CI-migreringen "
+"køres via konsollen, efter at denne indstilling er ændret."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"ConfigItems med følgende implementeringstilstande vil ikke blive gemt på "
+"Elasticsearch-serveren. For at anvende dette på eksisterende CI'er skal CI-"
+"migreringen køres via konsollen, efter at denne indstilling er ændret."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "Kunder kan se historiske CI-versioner."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
 msgstr ""
+"Kunderne har mulighed for manuelt at skifte mellem historiske CI-versioner."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Standarddata, der skal bruges på attributten for skærmbilledet til søgning "
+"efter konfigurationselementer. Eksempel: "
+"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
+"=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Standarddata, der skal bruges på attributten for skærmbilledet til søgning "
+"efter konfigurationselementer. Eksempel: \"ITSMConfigItemCreateTimeStartYear="
+"2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4"
+";ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;I"
+"TSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr ""
+"Definer et Template::Toolkit-skema til versionsstrenge. Bruges kun, hvis "
+"Version String Module er sat til TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 msgstr ""
+"Definer et sæt betingelser, under hvilke en kunde har lov til at se et "
+"konfigurationselement. Betingelserne kan eventuelt begrænses til bestemte "
+"kundegrupper. Navn er den eneste obligatoriske attribut. Hvis der ikke er "
+"angivet andre muligheder, vil alle konfigurationselementer være synlige "
+"under den pågældende kategori."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "Definerer, om linktypeetiketterne skal vises i nodeforbindelserne."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Definerer de tilgængelige kolonner med CI'er i oversigten over "
+"konfigurationselementer afhængigt af CI-klassen. Hver post skal bestå af et "
+"klassenavn og et array af tilgængelige felter for den tilsvarende klasse. "
+"Dynamiske feltindgange skal overholde skemaet DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Definerer standardkonfigurationselementattributten for sortering af "
+"konfigurationselementer i søgeresultatet for konfigurationselementer i "
+"agentgrænsefladen."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 msgstr ""
+"Definerer standardkonfigurationselementattributten for sortering af "
+"konfigurationselementer i søgeresultatet for konfigurationselementer i "
+"kundegrænsefladen."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Definerer standardkonfigurationselementattributten for sortering af "
+"konfigurationselementet i søgeresultatet for denne handling."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definerer standardrækkefølgen for konfigurationselementer i søgeresultatet "
+"for konfigurationselementer i agentgrænsefladen. Op: ældste øverst. Ned: "
+"nyeste øverst."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definerer standardrækkefølgen for konfigurationselementer i søgeresultatet "
+"for konfigurationselementer i kundegrænsefladen. Op: ældste øverst. Ned: "
+"nyeste øverst."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definerer standardrækkefølgen for konfigurationselementer i søgeresultatet "
+"for denne handling. Op: ældste øverst. Ned: nyeste øverst."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Definerer de kolonner, der som standard vises for CI'er i oversigten over "
+"konfigurationselementer, afhængigt af CI-klassen. Hver post skal bestå af et "
+"klassenavn og et array af tilgængelige felter for den tilsvarende klasse. "
+"Dynamiske feltindgange skal overholde skemaet DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "Definerer den standardrelationsdybde, der skal vises."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Definerer den viste standardattribut for søgning efter "
+"konfigurationselementer på skærmen til søgning efter konfigurationselementer."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Definerer den standard viste søgeattribut for konfigurationselementer på "
+"skærmen til søgning efter konfigurationselementer. Eksempel: \"Key\" skal "
+"have navnet på det dynamiske felt, i dette tilfælde 'X', \"Content\" skal "
+"have værdien af det dynamiske felt afhængigt af den dynamiske felttype, Text:"
+" 'a text', Dropdown: '1', Date/Time: "
+"'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' og eller "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Definerer søgegrænsen for CustomerITSMConfigItem-skærmen."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Definerer søgegrænsen for skærmbilledet CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definerer, hvilke elementer der er tilgængelige for 'Handling' på tredje "
+"niveau i ITSM Config Item ACL-strukturen."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definerer, hvilke elementer der er tilgængelige på første niveau i ITSM "
+"Config Item ACL-strukturen."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definerer, hvilke elementer der er tilgængelige på andet niveau i ITSM "
+"Config Item ACL-strukturen."
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "Opdatering af definition"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "DeplState"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 msgstr ""
+"Hændelsesmodul for dynamiske felter, der markerer "
+"konfigurationselementdefinitioner som usynkroniserede, hvis de indeholder "
+"dynamiske felter, der ændres."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Dynamiske felter, der vises i den ekstra ITSM-feltskærm i agentgrænsefladen."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
 msgstr ""
+"Dynamiske felter, der vises i oversigtsskærmen for konfigurationselementer i "
+"kundegrænsefladen."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
 msgstr ""
+"Dynamiske felter, der vises i skærmbilledet til søgning efter "
+"konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 msgstr ""
+"Aktiverer/deaktiverer funktionen til at kontrollere ITSM-"
+"konfigurationselementer for unikke navne. Før du aktiverer denne mulighed, "
+"bør du tjekke dit system for allerede eksisterende konfigurationselementer "
+"med duplikatnavne. Det kan du gøre med konsolkommandoen "
+"Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 msgstr ""
+"Felter i konfigurationselementets indeks, der bruges til fuldtekstsøgning. "
+"Felter gemmes også, men er ikke obligatoriske for den overordnede "
+"funktionalitet. Inkludering af vedhæftede filer kan deaktiveres ved at sætte "
+"posten til 0 eller slette den."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 msgstr ""
+"Felter gemt i konfigurationselementets indeks, som bruges til andre ting end "
+"fuldtekstsøgning. For at få fuld funktionalitet er alle felter obligatoriske."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"For hver webtjeneste (nøgle) kan der defineres et array af klasser (værdi), "
+"som importen er begrænset til. For alle valgte klasser eller alle "
+"eksisterende klasser skal de identificerende attributter vælges i invoker-"
+"konfigurationen."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr ""
+"Registrering af GenericInterface-modul til ConfigItemFetch-invokatorlaget."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "InciState"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "Hændelsesstatus"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
 msgstr ""
+"Inkluderer implementeringstilstande i søgningen efter "
+"konfigurationselementer i kundegrænsefladen."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
 msgstr ""
+"Inkluderer hændelsestilstande i konfigurationselement-søgningen i "
+"kundegrænsefladen."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Maksimalt antal konfigurationselementer, der skal vises i resultatet af "
+"denne handling."
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "Navn Modul"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "Nummermodul"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Antal konfigurationselementer, der skal vises på hver side af et "
+"søgeresultat i agentgrænsefladen."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Antal konfigurationselementer, der skal vises på hver side af et "
+"søgeresultat i kundegrænsefladen."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 msgstr ""
+"Objekter, der skal søges efter, hvor mange poster og hvilke attributter, der "
+"skal vises. ConfigItem-attributter skal eksplicit gemmes via Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre for kategorierne for konfigurationselementklasser i "
+"præferencevisningen i agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"Parametre for kolonnefiltrene i oversigten over små konfigurationselementer. "
+"Bemærk: Hvis 'Aktiv' sættes til 0, forhindrer det kun agenter i at redigere "
+"indstillingerne for denne gruppe i deres personlige præferencer, men det "
+"giver stadig administratorer mulighed for at redigere indstillingerne på en "
+"anden brugers vegne. Brug 'PreferenceGroup' til at styre, i hvilket område "
+"disse indstillinger skal vises i brugergrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre til navnemodulet for konfigurationselementklasser i "
+"præferencevisningen af agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre for nummermodulet for konfigurationselementklasser i "
+"præferencevisningen i agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre for versionsstrengmodulet for konfigurationselementklasser i "
+"præferencevisningen i agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre for version string template toolkit module for config item classes "
+"i præferencevisningen i agentgrænsefladen."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametre for versionsudløseren for konfigurationselementklasser i "
+"agentgrænsefladens præferencevisning."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Udfører den konfigurerede handling for hver begivenhed (som en Invoker) for "
+"hver konfigureret webtjeneste."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge ITSM-konfigurationselementets "
+"vedhæftningshandling i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet til søgning efter ITSM-"
+"konfigurationselementer i kundegrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet med trævisning af ITSM-"
+"konfigurationselementer i agentgrænsefladen."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Nødvendige tilladelser til at bruge skærmbilledet med ITSM-"
+"konfigurationselementer i bulk i agentgrænsefladen."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr ""
+"Viser et link i menuen for at vise links til konfigurationselementer som en "
+"trævisning."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "Standardkategorien, som vises, hvis ingen er valgt."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "Udløser automatisk ConfigItemFetch invoker."
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "Version String-udtryk"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "Version String Module"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "Version udløser"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"Om udførelsen af ConfigItemACL kan undgås ved at tjekke cachelagrede "
+"feltafhængigheder. Dette kan forbedre indlæsningstiden for formularer, men "
+"skal deaktiveres, hvis ACLModules skal bruges til ITSMConfigItem- og Form-"
+"ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "Hvilke generelle oplysninger vises i overskriften."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Generelle påkaldsdata"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Dette OTOBO-invoker-backendmodul kaldes for at forberede de data, der skal "
+"sendes til fjernsystemet, og for at behandle dets svardata."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Indstillinger for udgående forespørgselsdata"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Kortlægning"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Dataene fra den, der påkalder OTOBO, vil blive behandlet af denne mapping "
+"for at omdanne dem til den type data, som fjernsystemet forventer."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Svardataene vil blive behandlet af denne mapping for at omdanne dem til den "
+"type data, som den, der påkalder OTOBO, forventer."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Indstillinger for indgående svardata"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Begivenhedsdata"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
@@ -1681,42 +2022,44 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Asynkrone hændelsesudløsere håndteres af OTOBO Scheduler Daemon i baggrunden "
+"(anbefales)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "Automatisk indrykning af kode"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "Kode for kommentar/ikke-kommentar"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "Søg og erstat"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Vælg alle"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "Fuld skærm"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "KonfigElementer"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Sortere"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "Filtrer efter gyldig tilstand"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "Inkluder ugyldige ACL'er"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
@@ -1724,179 +2067,222 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "Inkluder ugyldige dynamiske felter"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "Filtrer felt efter objekttype"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "Filtrer felt efter navneområde"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nye dynamiske felter"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Vil du gerne have gavn af flere dynamiske felttyper? Du har fuld adgang til "
+"følgende felttyper:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "Kopier dette felt"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "Attribut, der vil blive søgt på ved autofuldførelse"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "Nøgle til ekstern kilde"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 msgstr ""
+"Når den indstilles via en ekstern kilde (f.eks. webservice eller import/"
+"eksport), vil værdien blive fortolket som denne attribut."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "Attribut, som vises for værdier"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "Vælg typen af display"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
 msgstr ""
+"Basisstrukturen er ikke gyldig. Angiv venligst et array med data i YAML-"
+"format."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL'er kunne ikke importeres på grund af en ukendt fejl, tjek venligst OTOBO-"
+"loggen for mere information."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (kopi) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"En procentuel værdi af det minimale oversættelsesfremskridt pr. sprog, som "
+"kan bruges til dokumentationer."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "Få adgang til repos via http eller https."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "Automatisk indlæsning af Znuny4OTRSRepo-udvidelser."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
 msgstr ""
+"Registrering af backend-modul til modulet til kontrol af "
+"konfigurationskonflikter."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
+msgstr "Registrering af backend-modul til modulet til kontrol af filkonflikter."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
+msgstr "Registrering af backend-modul for funktionen redefine check module."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "Registrering af backend-modul for manual set-modulet."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "Bloker kroge, der skal oprettes til fjernelse af BS-annoncer."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
+msgstr "Bloker kroge, der skal oprettes til pakkehåndteringens outputfilter."
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "Grenvisningens commit-grænse"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "KodePolitik"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
-msgstr ""
+msgstr "Begrænsning pr. side for grenvisningsskærmen"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "Opret analysefil"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "Opretter en analysefil fra denne billet og sender den til Znuny."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "Opretter en analysefil fra denne billet."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "Definer private addon-repos."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Definerer det filter, der behandler HTML-skabelonerne."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "Definerer testmodulet til kontrol af kodepolitikken."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "Definition af GIT clone/push URL Prefix."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Definition af et dynamisk felt: Group => Gruppe med adgang til de dynamiske "
+"felter; AlwaysVisible => Felt kan fjernes (0|1); InformationAreaName => Navn "
+"på widgets; InformationAreaSize => Størrelse og placering af widgets "
+"(Large|Small); Name => Navn på det dynamiske felt, som skal bruges; Priority "
+"=> Rækkefølge af de dynamiske felter; State => Felternes tilstand (0 = "
+"deaktiveret, 1 = aktiv, 2 = obligatorisk), FilterRelease => Regex, som "
+"arkivnavnet skal matche for at blive vist, FilterPackage => Regex, som "
+"arkivnavnet skal matche for at blive vist. Felternes tilstand (0 = "
+"deaktiveret, 1 = aktiv, 2 = obligatorisk), FilterRelease => Regex, som "
+"repository-navnet skal matche for at blive vist, FilterPackage => Regex, som "
+"pakkenavnet skal matche for at blive vist, FilterBranch => Regex, som "
+"grennavnet skal matche for at blive vist, FilterRelease => Regex, som "
+"repelase-versionsstrengen skal matche for at blive vist."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Definition af et dynamisk felt: Group => Gruppe med adgang til de dynamiske "
+"felter; AlwaysVisible => Felt kan fjernes (0|1); InformationAreaName => Navn "
+"på widgets; InformationAreaSize => Størrelse og placering af widgets "
+"(Large|Small); Name => Navn på det dynamiske felt, som skal bruges; Priority "
+"=> Rækkefølge af de dynamiske felter; State => Felternes tilstand (0 = "
+"deaktiveret, 1 = aktiv, 2 = obligatorisk); FilterRepository => Regex, som "
+"repository-navnet skal matche for at blive vist. Felternes tilstand (0 = "
+"deaktiveret, 1 = aktiv, 2 = obligatorisk), FilterRepository => Regex, som "
+"repository-navnet skal matche for at blive vist, FilterPackage => Regex, som "
+"pakkenavnet skal matche for at blive vist, FilterBranch => Regex, som "
+"grennavnet skal matche for at blive vist, FilterRelease => Regex, som "
+"repelase-versionstrengen skal matche for at blive vist."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 msgstr ""
+"Definition af eksterne MD5-summer (nøgle => MD5, værdi => leverandør, "
+"pakkenavn, version, dato)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
 msgstr ""
+"Definition af mappinger mellem offentlige arkivanmodninger og interne OPMS-"
+"arkiver."
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "Definition af pakketilstande."
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "Definition af omdøbte OPMS-pakker."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "Directory, som bruges af Git til at cache repositories."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "Katalog, som bruges af Git til at gemme midlertidige data."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "Katalog, som bruges af Git til at gemme arbejdskopier."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "Slå online repositories fra."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 msgstr ""
+"Log ikke git ssh-forbindelsesgodkendelsesresultater for disse brugere. "
+"Nyttigt til automatiserede ting."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -1904,1251 +2290,1337 @@ msgstr ""
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
 msgstr ""
+"Eksporter alle tilgængelige offentlige nøgler til filen authorized_keys."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "Eksporter alle relevante udgivelser til en ftp-server."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
+msgstr "Frontend-modulregistrering for OPMS-objektet i agentgrænsefladen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Frontend-modulregistrering for PublicOPMSRepository-objektet i den "
+"offentlige grænseflade."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Frontend-modulregistrering for PublicOPMSRepositoryLookup-objektet i den "
+"offentlige grænseflade."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Frontend-modulregistrering for PublicOPMSTestBuild-objektet i den offentlige "
+"grænseflade."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
 msgstr ""
+"Frontend-modulregistrering for PublicPackageVerification-objektet i den "
+"offentlige grænseflade."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Frontend-modulregistrering til admin-grænsefladen."
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "GIT Forfatterregistrering."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"Genererer HTML-kommentarhooks til de angivne blokke, så filtre kan bruge dem."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "Generer dokumentationer en gang om natten."
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Git-styring"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "Git-arkiv"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
 msgstr ""
+"Gruppe, hvis medlemmer har administratorrettigheder til at slette i OPMS."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
+msgstr "Gruppe, hvis medlemmer har administratorrettigheder til depotet i OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
 msgstr ""
+"Gruppe, hvis medlemmer vil se oplysninger om CI-testresultater på OPMS-"
+"skærme."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 msgstr ""
+"Grupper, som en godkendt bruger (med brugerlogin og adgangskode) skal være "
+"medlem af for at bygge testpakker via den offentlige grænseflade."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
 msgstr ""
+"Grupper, som indstilles under oprettelsen af git-projekter, når der tilføjes "
+"OPMS-repositorier."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "Håndter dynamiske felter i skærme."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 msgstr ""
+"Administrer din(e) offentlige SSH-nøgle(r) til Git-adgang her. Sørg for at "
+"gemme denne indstilling, når du tilføjer en ny nøgle."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "Modul til at generere statistik over de tilføjede kodelinjer."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "Modul til at generere statistik over væksten i koden."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
+msgstr "Modul til at generere statistik over antallet af git-kommits."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
+msgstr "Modul til at generere statistik over de fjernede kodelinjer."
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
 msgstr ""
+"Kun brugere, der har rw-rettigheder i en af disse grupper, kan få adgang til "
+"git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "Mulighed for at indstille en pakkekompatibilitet manuelt."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "Parametre for siderne i BranchView-skærmen."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Præ-definition af det dynamiske felt 'GITProjectName': Group => Gruppe med "
+"adgang til de dynamiske felter; AlwaysVisible => Felt kan fjernes (0|1); "
+"InformationAreaName => Navn på widgets; InformationAreaSize => Størrelse og "
+"placering af widgets (Large|Small); Name => Navn på det dynamiske felt, som "
+"skal bruges; Priority => Rækkefølge af de dynamiske felter; State => "
+"Felternes tilstand (0 = deaktiveret, 1 = aktiv, 2 = obligatorisk). Felternes "
+"tilstand (0 = deaktiveret, 1 = aktiv, 2 = obligatorisk), FilterRepository => "
+"Regex, som repository-navnet skal matche for at blive vist, FilterPackage => "
+"Regex, som pakkenavnet skal matche for at blive vist, FilterBranch => Regex, "
+"som grennavnet skal matche for at blive vist, FilterRelease => Regex, som "
+"repelase-versionstrengen skal matche for at blive vist."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Præ-definition af det dynamiske felt 'GITRepositoryName': Group => Gruppe "
+"med adgang til de dynamiske felter; AlwaysVisible => Felt kan fjernes (0|1); "
+"InformationAreaName => Navn på widgets; InformationAreaSize => Størrelse og "
+"placering af widgets (Large|Small); Name => Navn på det dynamiske felt, der "
+"skal bruges; Priority => Rækkefølge af de dynamiske felter; State => "
+"Felternes tilstand (0 = deaktiveret, 1 = aktiv, 2 = obligatorisk). Felternes "
+"tilstand (0 = deaktiveret, 1 = aktiv, 2 = obligatorisk), FilterRepository => "
+"Regex, som repository-navnet skal matche for at blive vist, FilterPackage => "
+"Regex, som pakkenavnet skal matche for at blive vist, FilterBranch => Regex, "
+"som grennavnet skal matche for at blive vist, FilterRelease => Regex, som "
+"repelase-versionstrengen skal matche for at blive vist."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Prædefinition af det dynamiske felt 'PackageDeprecated': Group => Gruppe med "
+"adgang til de dynamiske felter; AlwaysVisible => Feltet kan fjernes (0|1); "
+"InformationAreaName => Navn på widgets; InformationAreaSize => Størrelse og "
+"placering af widgets (Large|Small); Name => Navn på det dynamiske felt, som "
+"skal bruges; Priority => Rækkefølge af de dynamiske felter; State => "
+"Felternes tilstand (0 = deaktiveret, 1 = aktiv, 2 = obligatorisk), "
+"FilterRepository => Regex, som repository-navnet skal matche for at blive "
+"vist, FilterPackage => Regex, som pakkenavnet skal matche for at blive vist, "
+"FilterBranch => Regex, som grennavnet skal matche for at blive vist, "
+"FilterRelease => Regex, som repelase-versionstrengen skal matche for at "
+"blive vist."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "Modtagere, der vil blive informeret via e-mail i tilfælde af fejl."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "SSH-nøgler til Git-adgang"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "Send analysefil"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
-msgstr ""
+msgstr "Indstiller den git-klon-adresse, der skal bruges i repository-lister."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "Indstiller hjemmebiblioteket for git-repositorier."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
 msgstr ""
+"Indstiller stien til BugzillaAddComment-postmodtagelsesscriptets placering."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Indstiller stien til OTRSCodePolicy-scriptets placering. Det anbefales at "
+"have en separat klon af OTRSCodePolicy-modulet, som opdateres via cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Indstiller stien til OTRSCodePolicy-scriptets placering før modtagelse. Det "
+"anbefales at have en separat klon af OTRSCodePolicy-modulet, som opdateres "
+"via cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "Vis de seneste commits i git-repositories."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
 msgstr ""
+"Viser et link i menuen til at oprette en enhedstest fra den aktuelle billet."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "Synkroniser OPMS-tabeller med en fjerndatabase."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "Minimumsversionen af sphinx-biblioteket."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "Navnet på det sfinx-tema, der skal bruges."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "Stien til OTRS CSS-filen (relativt under den statiske sti)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "Stien til OTRS-logoet (relativt under den statiske sti)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "Stien til den statiske mappe, der indeholder billeder og css-filer."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "Stien til temamappen, der indeholder sfinx-temaerne."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"Denne konfiguration definerer alle mulige skærmbilleder til at aktivere "
+"eller deaktivere standardkolonner."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
 msgstr ""
+"Denne konfiguration definerer alle mulige skærmbilleder til at aktivere "
+"eller deaktivere dynamiske felter."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"Denne konfiguration definerer, om kun valids eller alle (invalids) dynamiske "
+"felter skal vises."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"Denne konfiguration definerer, om OTRS-pakkeverifikationen skal være aktiv "
+"eller deaktiveret. Hvis den er deaktiveret, vises alle pakker som "
+"verificerede. Det anbefales stadig kun at bruge verificerede pakker."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"Denne konfiguration definerer URL'en til OTRS CloudService Proxy-tjenesten. "
+"Præfikset http eller https vil blive tilføjet, afhængigt af valget SysConfig "
+"'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
 msgstr ""
+"Denne konfiguration registrerer et Output-postfilter for at udvide "
+"pakkeverificeringen."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"Denne konfiguration registrerer et OutputFilter-modul, der fjerner OTRS "
+"Business Solution TM-reklamer."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
+"Denne konfiguration registrerer et outputfilter til at skjule valg af "
+"onlinelager i pakkehåndteringen."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
 msgstr ""
+"Ryd op i ubehandlede udgivelser, der ikke har bestået test pomules-tjek i "
+"lang tid."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 msgstr ""
+"Brugere, der har rw-rettigheder i en af disse grupper, har tilladelse til at "
+"udføre force-pushes 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 msgstr ""
+"Brugere, der har rw-rettigheder i en af disse grupper, har tilladelse til at "
+"administrere projekter. Derudover har medlemmerne administrationstilladelser "
+"til git-administrationen."
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 GB"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U: 44,45 cm (17,5 tommer)"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 GB"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 GB"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U: 53,34 cm (21 tommer)"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U: 66,68 cm (26,25 tommer)"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 GB"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U: 80,01 cm (31,5 tommer)"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "19-tommer rack"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U: 4,45 cm (1,75 tommer)"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U: 88,9 cm (35 tommer)"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "21 tommer stativ"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U: 38,5 tommer (97,79 cm)"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "23 tommer stativ"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23,6 tommer (600 mm)"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 GB"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U: 106,68 cm (42 tommer)"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 GB"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U: 47,25 tommer (120,02 cm)"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K (2048 x 1080)"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U: 8,89 cm (3,5 tommer)"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U: 133,35 cm (52,5 tommer)"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31,5 tommer (800 mm)"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 GB"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U: 146,68 cm (57,75 tommer)"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35,4 tommer (900 mm)"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U: 160,02 cm (63 tommer)"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39,4 tommer (1000 mm)"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U: 173,35 cm (68,25 tommer)"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U: 13,34 cm (5,25 tommer)"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U: 73,5 tommer (186,69 cm)"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43,3 tommer (1100 mm):"
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U: 200,02 cm (78,75 tommer)"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47,2 tommer (1200 mm)"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 GB"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U: 84 tommer (213,36 cm)"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K Ultra HD (3840 x 2160):"
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U: 17,78 cm (7 tommer)"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 GB"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U: 22,23 cm (8,75 tommer)"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 GB"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U: 26,67 cm (10,5 tommer)"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U: 31,12 cm (12,25 tommer)"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 GB"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K Ultra HD (7680 x 4320)"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U: 35,56 cm (14 tommer)"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 GB"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U: 40,01 cm (15,75 tommer)"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Regnskab"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "Tildeling af adresser"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Administrator"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "Type apparat"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "Backlinks"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "Batterikapacitet (Ah)"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "Batteritype"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Bus-grænseflade"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "CPU-klasse"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "Kapacitet (GB)"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "Kapacitet pr. grafikkort"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "Kortnummer"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "Korttype"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "Klient-certifikater"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "Klientsoftware"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "Kundekategori"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "Urfrekvens"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "Urets hastighed"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "Kodesigneringscertifikater"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "Kontakt distributør"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "Kontrakt"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "Kontrakttype"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "Kontraktperiode fra"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "Kontraktperiode indtil"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "Omkostningsenhed"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "Antal licenser"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "Oprettelsesdato"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "Brugerdefineret stativ"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP Reserveret"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "Dato for faktura"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "Dato for bestilling"
 
 #. ITSM class bundles
 msgid "Date of Warrenty"
-msgstr ""
+msgstr "Dato for garantistillelse"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "Dato for udgivelse"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "Dokumentsigneringscertifikater"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "ETSI-stativ"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "E-mail-certifikater (S/MIME-certifikater)"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Slut IP-adresse"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "Slut med støtte"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "Udløbsdato"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "FireWire (IEEE 1394)"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "Firmware"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "Svinghjul til energilagring"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "Formfaktor"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "Fuld HD (1920 x 1080)"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "Generel information"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "Grafikkort"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "Grafikkort"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "HD (1280 x 720)"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "Hardware-model"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "Hardware-vægt"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "IP-protokol"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "Inventarnummer"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "Inversteringsomkostninger"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "Fakturanummer"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "LCD-skærm (flydende krystalskærm)"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "LED-skærm (lysemitterende diode)"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC (lavt antal ben)"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "Breddegrad"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "Lag 1: Fysisk lag"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "Lag 2: Datalink-lag"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "Lag 3: Netværkslag"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "Lag 3: Netværkslag (supernet)"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "Lag 4: Transportlag"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "Lag 5: Sessionslag"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "Lag 6: Præsentationslag"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "Lag 7: Applikationslag"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Licensnøgle"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Licenstype"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "Licensperiode fra"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "Licensperiode indtil"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "Lithium-jernfosfat (LiFePO4)-batteri"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "Litium-ion-batteri (Li-ion)"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "Beliggende i"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "Længdegrad"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA (mikrokanal-arkitektur)"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "Producent"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "Maksimal belastningskapacitet (W)"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "Hukommelse"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "Hukommelsestype"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "Microsoft SQL Server"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "Mini-Rack"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "Mobilnummer"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "Modelbeskrivelse"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "Skærmens opløsning"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "Skærmstørrelse"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "Netværksinfo"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "Information om netværk"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "Netværkslag"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "Nikkel-cadmium-batteri (NiCd)"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "Nikkel-metalhydrid-batteri (NiMH)"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "Antal CPU'er"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "Antal RAM-moduler"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "Antal grafikkort"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "OLED-skærm (organisk lysemitterende diode)"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "Driftsomkostninger"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "Oracle-database"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "Bestillingsnummer"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Udgange"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "PCI Express (PCIe)"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "PIN-KODE"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "PIN 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "Telefontype"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "Fysiske kerner"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "Strømforsyning"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "Købt på"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "Quad HD (2560 x 1440)"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "Stativets dybde"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "Rack-enheder (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "Henvisning til kunde"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "SIM-kort"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "SSL/TLS-certifikater"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "Forseglet blysyrebatteri (SLA)"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Serienummer"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "Server-software"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "Service-tag"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "Stikkontakttype"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "Start IP-adresse"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "Opbevaring"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "Opbevaringspartition"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "Datterselskab"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "Sammenfatning"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "Tråde"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Tordenbolt"
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "Grafikkortets samlede RAM (GB)"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "RAM i alt (GB)"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "Berøringsfølsom skærm"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "Tårn"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB (universel seriel bus)"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "VESA Local Bus (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "VGA"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "VirtualLink"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA (1366 x 768)"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "Analog telefon"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "Kortlæser"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "Konferencetelefon"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "Konsulentaftale"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "Håndtering af containere"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "Trådløs telefon (DECT-telefon)"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "DNS-server"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "Ansættelseskontrakt"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "Ekstern harddisk"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "Firewall"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "Franchiseaftale"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "Headset"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "Identitets- og adgangsstyring (IAM)"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "Fastnettelefon"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "Lejeaftale"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "Licensaftale"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "Låneaftale"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "Mobil/indlejret"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "Aftale om hemmeligholdelse (NDA)"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "Notesbog"
 
 #. ITSM class bundles
 msgid "OTOBO"
@@ -3156,49 +3628,48 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "Partnerskabsaftale"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "Telefon / VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "Salgskontrakt"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "Satellittelefon"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Serviceaftale"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "Højttalere"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "Tynd klient"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "USB-hub"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "VR-headset"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "VoIP-telefon"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
-
+msgstr "Webcam"
