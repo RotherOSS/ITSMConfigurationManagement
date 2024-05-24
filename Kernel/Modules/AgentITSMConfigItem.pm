@@ -270,7 +270,7 @@ sub Run {
         my @SortedCategories = sort keys %Category2ClassID;
 
         if ( !$CategoryFilter || !$Category2ClassID{ $CategoryFilter } ) {
-            $CategoryFilter = $CategoryFilters{Default} ? 'Default' : $SortedCategories[0];
+            $CategoryFilter = $Category2ClassID{Default} ? 'Default' : $SortedCategories[0];
         }
 
         my $Prio = 2;
