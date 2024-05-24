@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:13+0000\n"
+"PO-Revision-Date: 2024-05-24 18:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language-Team: English (Canada) <http://weblate.otobo.org/projects/"
 "opm-packages/itsm-configurationmanagement/en_CA/>\n"
@@ -997,7 +997,7 @@ msgstr "Defines which type of ticket can affect the status of a linked CI."
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "Starting the YAML string with '---' is required."
 
 #. SysConfig
 msgid "Deployment State Color"
