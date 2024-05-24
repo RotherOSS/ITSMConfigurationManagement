@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2024-05-24 06:07+0000\n"
+"POT-Creation-Date: 2024-05-24 06:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@otobo.org>\n"
@@ -1071,290 +1071,6 @@ msgid "Users who have rw permissions in one of these groups are permitted to man
 msgstr ""
 
 #. ITSM class bundles
-msgid "1"
-msgstr ""
-
-#. ITSM class bundles
-msgid "1 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "1024 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "11 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "12 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "128 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "16 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "19-inch Rack"
-msgstr ""
-
-#. ITSM class bundles
-msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "2"
-msgstr ""
-
-#. ITSM class bundles
-msgid "2 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "21-inch Rack"
-msgstr ""
-
-#. ITSM class bundles
-msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "23-inch Rack"
-msgstr ""
-
-#. ITSM class bundles
-msgid "23.6 inches (600 mm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "24 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "256 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "27\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "2K (2048 x 1080)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "3"
-msgstr ""
-
-#. ITSM class bundles
-msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "31.5 inches (800 mm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "32 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "32\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "34\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "35\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "35.4 inches (900 mm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "39.4 inches (1000 mm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "4"
-msgstr ""
-
-#. ITSM class bundles
-msgid "4 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "40\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "43\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "43.3 inches (1100 mm):"
-msgstr ""
-
-#. ITSM class bundles
-msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "47.2 inches (1200 mm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "48 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "49\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
-
-#. ITSM class bundles
-msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "5"
-msgstr ""
-
-#. ITSM class bundles
-msgid "512 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "55\""
-msgstr ""
-
-#. ITSM class bundles
-msgid "5K (5120 x 2880)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "6"
-msgstr ""
-
-#. ITSM class bundles
-msgid "64 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "7"
-msgstr ""
-
-#. ITSM class bundles
-msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "8"
-msgstr ""
-
-#. ITSM class bundles
-msgid "8 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "9"
-msgstr ""
-
-#. ITSM class bundles
-msgid "96 GB"
-msgstr ""
-
-#. ITSM class bundles
-msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "AGP"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Accounting"
 msgstr ""
 
@@ -1364,6 +1080,10 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Administrator"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Analog Phone"
 msgstr ""
 
 #. ITSM class bundles
@@ -1415,11 +1135,11 @@ msgid "Card Number"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Card Type"
+msgid "Card Reader"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Chroma DB"
+msgid "Card Type"
 msgstr ""
 
 #. ITSM class bundles
@@ -1447,11 +1167,23 @@ msgid "Code Signing Certificates"
 msgstr ""
 
 #. ITSM class bundles
+msgid "Conference Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Consulting Agreement"
+msgstr ""
+
+#. ITSM class bundles
 msgid "Contact"
 msgstr ""
 
 #. ITSM class bundles
 msgid "Contact Distributor"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Container Management"
 msgstr ""
 
 #. ITSM class bundles
@@ -1471,6 +1203,10 @@ msgid "Contract period until"
 msgstr ""
 
 #. ITSM class bundles
+msgid "Cordless Phone (DECT Phone)"
+msgstr ""
+
+#. ITSM class bundles
 msgid "Cost unit"
 msgstr ""
 
@@ -1483,10 +1219,6 @@ msgid "Creation Date"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Custom Rack"
-msgstr ""
-
-#. ITSM class bundles
 msgid "DHCP"
 msgstr ""
 
@@ -1495,7 +1227,7 @@ msgid "DHCP Reserved"
 msgstr ""
 
 #. ITSM class bundles
-msgid "DVI"
+msgid "DNS-Server"
 msgstr ""
 
 #. ITSM class bundles
@@ -1515,7 +1247,7 @@ msgid "Date of release"
 msgstr ""
 
 #. ITSM class bundles
-msgid "DisplayPort"
+msgid "Desktop"
 msgstr ""
 
 #. ITSM class bundles
@@ -1523,19 +1255,11 @@ msgid "Document Signing Certificates"
 msgstr ""
 
 #. ITSM class bundles
-msgid "EISA"
-msgstr ""
-
-#. ITSM class bundles
-msgid "ETSI Rack"
-msgstr ""
-
-#. ITSM class bundles
-msgid "Elasticsearch"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Employment Contract"
 msgstr ""
 
 #. ITSM class bundles
@@ -1551,7 +1275,11 @@ msgid "Expiry Date"
 msgstr ""
 
 #. ITSM class bundles
-msgid "FireWire (IEEE 1394)"
+msgid "External Hard Drive"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Firewall"
 msgstr ""
 
 #. ITSM class bundles
@@ -1559,15 +1287,11 @@ msgid "Firmware"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Flywheel Energy Storage"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Form Factor"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Full HD (1920 x 1080)"
+msgid "Franchise Agreement"
 msgstr ""
 
 #. ITSM class bundles
@@ -1583,14 +1307,6 @@ msgid "Graphics card"
 msgstr ""
 
 #. ITSM class bundles
-msgid "HD (1280 x 720)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "HDMI"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Hardware"
 msgstr ""
 
@@ -1603,7 +1319,7 @@ msgid "Hardware Weight"
 msgstr ""
 
 #. ITSM class bundles
-msgid "IBM Db2"
+msgid "Headset"
 msgstr ""
 
 #. ITSM class bundles
@@ -1611,15 +1327,7 @@ msgid "IP Protocol"
 msgstr ""
 
 #. ITSM class bundles
-msgid "IPv4"
-msgstr ""
-
-#. ITSM class bundles
-msgid "IPv6"
-msgstr ""
-
-#. ITSM class bundles
-msgid "ISA"
+msgid "Identity and Access Management (IAM)"
 msgstr ""
 
 #. ITSM class bundles
@@ -1635,15 +1343,15 @@ msgid "Invoice Number"
 msgstr ""
 
 #. ITSM class bundles
-msgid "LCD Monitor (Liquid Crystal Display)"
+msgid "Keyboard"
 msgstr ""
 
 #. ITSM class bundles
-msgid "LED Monitor (Light Emitting Diode)"
+msgid "Landline Phone"
 msgstr ""
 
 #. ITSM class bundles
-msgid "LPC (Low Pin Count)"
+msgid "Laptop"
 msgstr ""
 
 #. ITSM class bundles
@@ -1683,6 +1391,14 @@ msgid "Layer 7: Application Layer"
 msgstr ""
 
 #. ITSM class bundles
+msgid "Lease Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "License Agreement"
+msgstr ""
+
+#. ITSM class bundles
 msgid "License Key"
 msgstr ""
 
@@ -1699,11 +1415,7 @@ msgid "License period until"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
-
-#. ITSM class bundles
-msgid "Lithium-Ion (Li-ion) Battery"
+msgid "Loan Agreement"
 msgstr ""
 
 #. ITSM class bundles
@@ -1715,15 +1427,7 @@ msgid "Longitude"
 msgstr ""
 
 #. ITSM class bundles
-msgid "MCA (Micro Channel Architecture)"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
-
-#. ITSM class bundles
-msgid "MariaDB"
 msgstr ""
 
 #. ITSM class bundles
@@ -1739,15 +1443,11 @@ msgid "Memory Type"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Microsoft SQL Server"
-msgstr ""
-
-#. ITSM class bundles
-msgid "Mini-Rack"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Mobile Number"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Mobile/Embedded"
 msgstr ""
 
 #. ITSM class bundles
@@ -1759,10 +1459,6 @@ msgid "Model Description"
 msgstr ""
 
 #. ITSM class bundles
-msgid "MongoDB"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Monitor Resolution"
 msgstr ""
 
@@ -1771,7 +1467,7 @@ msgid "Monitor Size"
 msgstr ""
 
 #. ITSM class bundles
-msgid "MySQL"
+msgid "Mouse"
 msgstr ""
 
 #. ITSM class bundles
@@ -1791,15 +1487,11 @@ msgid "Network Layer"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Nickel-Cadmium (NiCd) Battery"
+msgid "Non-Disclosure Agreement (NDA)"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
-
-#. ITSM class bundles
-msgid "NuBus"
+msgid "Notebook"
 msgstr ""
 
 #. ITSM class bundles
@@ -1815,15 +1507,11 @@ msgid "Number of graphics cards"
 msgstr ""
 
 #. ITSM class bundles
-msgid "OLED Monitor (Organic Light Emitting Diode)"
+msgid "OTOBO"
 msgstr ""
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
-
-#. ITSM class bundles
-msgid "Oracle Database"
 msgstr ""
 
 #. ITSM class bundles
@@ -1836,18 +1524,6 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
-
-#. ITSM class bundles
-msgid "PCI"
-msgstr ""
-
-#. ITSM class bundles
-msgid "PCI Express (PCIe)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "PCI-X"
 msgstr ""
 
 #. ITSM class bundles
@@ -1867,6 +1543,14 @@ msgid "PUK 2"
 msgstr ""
 
 #. ITSM class bundles
+msgid "Partnership Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Phone / VOIP"
+msgstr ""
+
+#. ITSM class bundles
 msgid "Phone Number"
 msgstr ""
 
@@ -1879,10 +1563,6 @@ msgid "Physical Cores"
 msgstr ""
 
 #. ITSM class bundles
-msgid "PostgreSQL"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Power Delivery"
 msgstr ""
 
@@ -1891,19 +1571,11 @@ msgid "Purchased at"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Quad HD (2560 x 1440)"
-msgstr ""
-
-#. ITSM class bundles
 msgid "Rack Depth"
 msgstr ""
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "Redis"
 msgstr ""
 
 #. ITSM class bundles
@@ -1919,15 +1591,15 @@ msgid "SIM Card"
 msgstr ""
 
 #. ITSM class bundles
-msgid "SQLite"
-msgstr ""
-
-#. ITSM class bundles
 msgid "SSL/TLS Certificates"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Sealed Lead-Acid (SLA) Battery"
+msgid "Sales Contract"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Satellite Phone"
 msgstr ""
 
 #. ITSM class bundles
@@ -1943,6 +1615,10 @@ msgid "Server Software"
 msgstr ""
 
 #. ITSM class bundles
+msgid "Service Agreement"
+msgstr ""
+
+#. ITSM class bundles
 msgid "Service Tag"
 msgstr ""
 
@@ -1952,6 +1628,10 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Software"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Speakers"
 msgstr ""
 
 #. ITSM class bundles
@@ -1975,11 +1655,11 @@ msgid "Summary"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Threads"
+msgid "Thin Client"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Thunderbolt"
+msgid "Threads"
 msgstr ""
 
 #. ITSM class bundles
@@ -1991,42 +1671,22 @@ msgid "Total RAM (GB)"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Touchscreen Monitor"
+msgid "USB Hub"
 msgstr ""
 
 #. ITSM class bundles
-msgid "Tower"
+msgid "VPN"
 msgstr ""
 
 #. ITSM class bundles
-msgid "USB (Universal Serial Bus)"
+msgid "VR Headset"
 msgstr ""
 
 #. ITSM class bundles
-msgid "USB-C"
+msgid "VoIP Phone"
 msgstr ""
 
 #. ITSM class bundles
-msgid "UWQHD (3440 x 1440)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "VESA Local Bus (VLB)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "VGA"
-msgstr ""
-
-#. ITSM class bundles
-msgid "VirtualLink"
-msgstr ""
-
-#. ITSM class bundles
-msgid "WUXGA (1920 x 1200)"
-msgstr ""
-
-#. ITSM class bundles
-msgid "WXGA (1366 x 768)"
+msgid "Webcam"
 msgstr ""
 

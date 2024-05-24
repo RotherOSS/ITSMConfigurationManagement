@@ -520,11 +520,11 @@ msgstr "Przegląd"
 msgid "Test/QA"
 msgstr "Test/QA"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. ITSM class bundles
 msgid "Laptop"
 msgstr "Laptop"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. ITSM class bundles
 msgid "Desktop"
 msgstr "Desktop"
 
@@ -568,11 +568,11 @@ msgstr "Urządzenie zabezpieczające"
 msgid "Backup Device"
 msgstr "Urządzenie do tworzenia kopii zapasowej"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. ITSM class bundles
 msgid "Mouse"
 msgstr "Myszka"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. ITSM class bundles
 msgid "Keyboard"
 msgstr "Klawiatura"
 
@@ -3070,5 +3070,137 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Analog Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Card Reader"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Conference Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Consulting Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Container Management"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Cordless Phone (DECT Phone)"
+msgstr ""
+
+#. ITSM class bundles
+msgid "DNS-Server"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Employment Contract"
+msgstr ""
+
+#. ITSM class bundles
+msgid "External Hard Drive"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Firewall"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Franchise Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Headset"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Identity and Access Management (IAM)"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Landline Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Lease Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "License Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Loan Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Mobile/Embedded"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Non-Disclosure Agreement (NDA)"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Notebook"
+msgstr ""
+
+#. ITSM class bundles
+msgid "OTOBO"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Partnership Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Phone / VOIP"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Sales Contract"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Satellite Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Service Agreement"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Speakers"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Thin Client"
+msgstr ""
+
+#. ITSM class bundles
+msgid "USB Hub"
+msgstr ""
+
+#. ITSM class bundles
+msgid "VPN"
+msgstr ""
+
+#. ITSM class bundles
+msgid "VR Headset"
+msgstr ""
+
+#. ITSM class bundles
+msgid "VoIP Phone"
+msgstr ""
+
+#. ITSM class bundles
+msgid "Webcam"
 msgstr ""
 
