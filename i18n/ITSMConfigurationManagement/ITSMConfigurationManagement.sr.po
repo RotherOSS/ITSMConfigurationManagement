@@ -2,13 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:11+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Serbian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sr/>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -40,7 +44,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Class"
-msgstr ""
+msgstr "класа"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Deployment State Type"
@@ -56,7 +60,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
-msgstr ""
+msgstr "Задњи пут промењено"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -112,11 +116,11 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
-msgstr ""
+msgstr "Садржај историјата"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "Време креирања"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -136,7 +140,7 @@ msgstr "Генеричка табела ITSM конфигурационе ста
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "Покрени претрагу"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
@@ -156,7 +160,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
-msgstr ""
+msgstr "Променио"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show one version"
@@ -336,7 +340,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "Упозорење"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
@@ -356,7 +360,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
-msgstr ""
+msgstr "између"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
@@ -736,7 +740,7 @@ msgstr "Неограничено"
 
 #. JS File: ITSM.Agent.ConfigItem.Zoom
 msgid "Ok"
-msgstr ""
+msgstr "У реду"
 
 #. SysConfig
 msgid "Assigned CIs"
@@ -1168,7 +1172,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Тип објекта"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1184,7 +1188,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Да ли желите да наставите?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1204,7 +1208,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Нема дозволе"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1489,6 +1493,7 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Динамичка поља приказана у екрану додатних ITSM поља у интерфејсу оператера."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1593,6 +1598,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Извршава подешену акцију за сваки догађај (као позивалац) за сваки "
+"конфигурисан веб сервис."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1649,6 +1656,8 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Овај модул позиваоца биће позван да припреми податке за слање на удаљени "
+"систем и да обради податке његовог одговора."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1661,10 +1670,14 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Подаци из OTOBO позиваоца биће обрађени овим мапирањем, да би их "
+"трансформисали у типове података које удаљени систем очекује."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Подаци одговора из OTOBO позиваоца биће обрађени овим мапирањем, да би их "
+"трансформисали у типове података које удаљени систем очекује.."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1676,11 +1689,13 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Додај догађај"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Асинхроним окидачима догађаја управља планер OTOBO системског сервиса у "
+"позадини (препоручено)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1696,7 +1711,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Изабери све"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -1720,7 +1735,7 @@ msgstr ""
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Прочитајте званичну %sдокументацију%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1773,10 +1788,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL листе не могу да се увезу због непознате грешке, молимо да проверите "
+"OTOBO логове за више информација"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (копија) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -3152,7 +3169,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
@@ -3201,4 +3218,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
