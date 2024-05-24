@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Traditional) <http://weblate.otobo.org/projects/"
 "opm-packages/itsm-configurationmanagement/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -79,11 +79,11 @@ msgstr "ITSM 配置项目批量操作"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
-msgstr ""
+msgstr "部署狀態"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "故障狀態"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
@@ -1262,7 +1262,7 @@ msgstr "未找到任何版本！"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "沒有權限"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1763,7 +1763,8 @@ msgstr "一般调用者数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
+msgstr "這個OTOBO調用程序後端模塊被調用後，負責準備需要發送給遠程系統的數據，並處理它"
+"的響應數據。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1775,11 +1776,11 @@ msgstr "制图"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
+msgstr "這個映射將對OTOBO調用程序輸出的數據進行處理，將它轉換為遠程系統所期待的數據。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
+msgstr "這個映射將對響應數據進行處理，將它轉換為OTOBO調用程序所期待的數據。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1791,7 +1792,7 @@ msgstr "活动数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "添事件"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
@@ -1835,7 +1836,7 @@ msgstr "包含无效 ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "檢查官方%s文件%s。"
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
