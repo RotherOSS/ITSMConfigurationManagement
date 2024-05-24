@@ -442,7 +442,7 @@ sub _RenderCILinks {
             },
         );
 
-        for my $CI ( $LinkedClasses{$Class}->@* ) {
+        for my $CI ( sort { $a->{Name} cmp $b->{Name} } $LinkedClasses{$Class}->@* ) {
             $Param{LayoutObject}->Block(
                 Name => 'FieldDisplayCell',
                 Data => {
