@@ -1723,8 +1723,6 @@
                     <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
                     <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                 </DefaultItem>
-                <Item Key="CurDeplSignal" SelectedID="2"></Item>
-                <Item Key="CurInciSignal" SelectedID="2"></Item>
                 <Item Key="Class" SelectedID="2"></Item>
                 <Item Key="Number" SelectedID="2"></Item>
                 <Item Key="Name" SelectedID="2"></Item>
@@ -2166,8 +2164,6 @@
                             <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
                             <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                         </DefaultItem>
-                        <Item Key="CurInciSignal" SelectedID="2"></Item>
-                        <Item Key="CurDeplSignal" SelectedID="2"></Item>
                         <Item Key="Number" SelectedID="2"></Item>
                         <Item Key="Name" SelectedID="2"></Item>
                         <Item Key="Class" SelectedID="2"></Item>
@@ -2209,8 +2205,6 @@
                             <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
                             <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
                         </DefaultItem>
-                        <Item Key="CurInciSignal" SelectedID="2"></Item>
-                        <Item Key="CurDeplSignal" SelectedID="2"></Item>
                         <Item Key="Number" SelectedID="2"></Item>
                         <Item Key="Name" SelectedID="2"></Item>
                         <Item Key="Class" SelectedID="2"></Item>

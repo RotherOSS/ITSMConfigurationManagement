@@ -103,16 +103,6 @@
 [% RenderBlockEnd("OverviewNavBarPageFlag") %]
 
 [% RenderBlockStart("OverviewNavBarPageConfigItemHeader") %]
-[% RenderBlockStart("OverviewNavBarPageCurDeplSignal") %]
-                        <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
-                            <span>[% Data.ColumnNameTranslated | html %]</span>
-                        </th>
-[% RenderBlockEnd("OverviewNavBarPageCurDeplSignal") %]
-[% RenderBlockStart("OverviewNavBarPageCurInciSignal") %]
-                        <th class="OverviewHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]">
-                            <span>[% Data.ColumnNameTranslated | html %]</span>
-                        </th>
-[% RenderBlockEnd("OverviewNavBarPageCurInciSignal") %]
 [% RenderBlockStart("OverviewNavBarPageNumber") %]
                         <th class="OverviewHeader [% Data.CSS | html %]">
                             <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkSort %];SortBy=Number;OrderBy=[% Data.OrderBy | uri %]" title="[% Translate(Data.Title) | html %]">[% Data.ColumnNameTranslated | html %]</a>
@@ -297,20 +287,20 @@
 [% RenderBlockEnd("ContentLargeConfigItemGenericRowMeta") %]
 
 [% RenderBlockStart("RecordConfigItemData") %]
-[% RenderBlockStart("RecordCurDeplSignal") %]
+[% RenderBlockStart("RecordCurDeplState") %]
                         <td title="[% Translate(Data.CurDeplState) | html %]">
                             <div class="Flag Small">
-                                <span class="[% Data.CurDeplSignal | html %]">"[% Translate(Data.CurDeplState) | html %]"</span>
-                            </div>
+                                <span class="[% Data.CurDeplSignal | html %]"></span>
+                            </div><p class="FlaggedName">[% Translate(Data.CurDeplState) | html %]</p>
                         </td>
-[% RenderBlockEnd("RecordCurDeplSignal") %]
-[% RenderBlockStart("RecordCurInciSignal") %]
+[% RenderBlockEnd("RecordCurDeplState") %]
+[% RenderBlockStart("RecordCurInciState") %]
                         <td title="[% Translate(Data.CurInciState) | html %]">
                             <div class="Flag Small">
-                                <span class="[% Data.CurInciSignal | html %]">"[% Translate(Data.CurInciState) | html %]"</span>
-                            </div>
+                                <span class="[% Data.CurInciSignal | html %]"></span>
+                            </div><p class="FlaggedName">[% Translate(Data.CurInciState) | html %]</p>
                         </td>
-[% RenderBlockEnd("RecordCurInciSignal") %]
+[% RenderBlockEnd("RecordCurInciState") %]
 [% RenderBlockStart("RecordNumber") %]
                         <td>
                             <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID | uri %]" title="[% Data.Title | html %]" class="MasterActionLink">[% Data.Number | html %]</a>

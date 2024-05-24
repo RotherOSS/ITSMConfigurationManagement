@@ -278,7 +278,7 @@ sub ActionRow {
             if ( $Column eq 'DeplState' ) {
                 $TranslatedWord = Translatable('Deployment State');
             }
-            elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+            elsif ( $Column eq 'CurDeplState' ) {
                 $TranslatedWord = Translatable('Current Deployment State');
             }
             elsif ( $Column eq 'CurDeplStateType' ) {
@@ -287,7 +287,7 @@ sub ActionRow {
             elsif ( $Column eq 'InciState' ) {
                 $TranslatedWord = Translatable('Incident State');
             }
-            elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+            elsif ( $Column eq 'CurInciState' ) {
                 $TranslatedWord = Translatable('Current Incident State');
             }
             elsif ( $Column eq 'CurInciStateType' ) {
@@ -622,9 +622,7 @@ sub Run {
 
     # define special config item columns
     my %SpecialColumns = (
-        Number        => 1,
-        CurDeplSignal => 1,
-        CurInciSignal => 1,
+        Number       => 1,
     );
 
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -703,16 +701,7 @@ sub Run {
                 }
 
                 # translate the column name to write it in the current language
-                my $TranslatedWord;
-                if ( $Column eq 'CurDeplSignal' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
-                }
-                elsif ( $Column eq 'CurInciSignal' ) {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State');
-                }
-                else {
-                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
-                }
+                my $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
 
                 my $FilterTitle     = $TranslatedWord;
                 my $FilterTitleDesc = Translatable('filter not active');
@@ -851,7 +840,7 @@ sub Run {
                 if ( $Column eq 'DeplState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Deployment State');
                 }
-                elsif ( $Column eq 'CurDeplState' || $Column eq 'CurDeplSignal' ) {
+                elsif ( $Column eq 'CurDeplState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Deployment State');
                 }
                 elsif ( $Column eq 'CurDeplStateType' ) {
@@ -860,7 +849,7 @@ sub Run {
                 elsif ( $Column eq 'InciState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Incident State');
                 }
-                elsif ( $Column eq 'CurInciState' || $Column eq 'CurInciSignal' ) {
+                elsif ( $Column eq 'CurInciState' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Current Incident State');
                 }
                 elsif ( $Column eq 'CurInciStateType' ) {
@@ -1293,6 +1282,12 @@ sub Run {
             }
         }
     }
+
+    my %SpecialColumns = (
+        Number       => 1,
+        CurDeplState => 1,
+        CurInciState => 1,
+    );
 
     for my $ConfigItemRef (@ConfigItemBox) {
 
@@ -1814,14 +1809,12 @@ sub _ColumnFilterJSON {
 sub _DefaultColumnSort {
 
     my %DefaultColumns = (
-        CurDeplSignal => 110,
-        CurInciSignal => 111,
-        Class         => 112,
-        Number        => 113,
-        Name          => 114,
-        CurDeplState  => 115,
-        CurInciState  => 116,
-        LastChanged   => 117,
+        CurDeplState => 110,
+        CurInciState => 111,
+        Class        => 112,
+        Number       => 113,
+        Name         => 114,
+        LastChanged  => 115,
     );
 
     # dynamic fields can not be on the DefaultColumns sorting hash
