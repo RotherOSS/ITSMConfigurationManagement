@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/bg/>\n"
 "Language: bg\n"
@@ -1850,6 +1850,9 @@ msgstr "Общи данни за извикващия"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Този модул за обратна връзка на OTOBO заявки ще бъде извикан, за да подготви "
+"данните, които да бъдат изпратени до отдалечената система, и да обработва "
+"данните за отговори."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1862,10 +1865,14 @@ msgstr "Картографиране"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Данните от заявката на OTOBO ще бъдат обработени от това картографиране, за "
+"да се превърнат в вид данни, които отдалечената система очаква."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Данните за отговорите ще бъдат обработени от това картографиране, за да "
+"бъдат преработени в типа данни, които заявката на OTOBO очаква."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1877,11 +1884,13 @@ msgstr "Данни за събитията"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Добавяне на събитие"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Асинхронните събития се обработват от OTOBO Scheduler Daemon на заден план "
+"(препоръчително)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1921,7 +1930,7 @@ msgstr "Включване на невалидни ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Проверете официалната %sдокументация%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
