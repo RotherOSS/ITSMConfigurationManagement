@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Italian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/it/>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -808,7 +811,7 @@ msgstr "Modulo di massa elemento di configurazione."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Voce di configurazione ricerca router backend dell'interfaccia agente."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
@@ -817,6 +820,11 @@ msgstr "Crea e gestisci le definizioni per gli elementi di configurazione."
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"Definire le azioni in cui è disponibile un pulsante di impostazione nel "
+"widget degli oggetti collegati (LinkObject::ViewMode = \"complex\"). Si noti "
+"che queste azioni devono aver registrato i seguenti file JS e CSS: "
+"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
+"Core.Agent.TableFilters.js e Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -1104,83 +1112,90 @@ msgstr "produttiva"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Modifica della definizione del ruolo"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "Pacchetti di classi Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"Qui è possibile importare i pacchetti di classi Ready2Import, che presentano "
+"gli elementi di configurazione più comuni. Si noti che potrebbero essere "
+"necessarie alcune configurazioni aggiuntive."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "Aggiornare le entità esistenti"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "Importare i bundle della classe Ready2Adopt"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Config Voce Ruolo"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "Il numero di versione di questo elemento di configurazione"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Il numero di versione è già utilizzato dai ConfigItem con il seguente numero:"
+" %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "Nessun dato di configurazione trovato."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "Selezionare questa voce di configurazione"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "Visualizzazione ad albero per ConfigItem"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "Livello di profondità"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "Zoom avanti/indietro"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "Livello massimo di collegamenti raggiunto per ConfigItem!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "I vostri elementi di configurazione"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "Ricerca di ConfigItem"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Tipo di oggetto"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "Verranno importate le seguenti classi"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "Verranno importati i seguenti ruoli"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"Si noti che verranno creati anche i campi dinamici e le classi "
+"GeneralCatalog corrispondenti e non è prevista la rimozione automatica."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1188,19 +1203,19 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "Servono classi di esempio!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "La definizione non è un hash YAML valido."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "ConfigItem non trovato!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "Nessuna versione trovata!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
@@ -1208,283 +1223,410 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "Filtro non valido!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "Parametri di ricerca non validi!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "Restrizioni di classe per l'elemento di configurazione"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
 msgstr ""
+"Selezionare una o più classi per limitare gli elementi di configurazione "
+"selezionabili"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "Tipo di collegamento"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "Selezionare il tipo di collegamento."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "In avanti: Referenziato (Sorgente) -> Referenziato (Destinazione)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "All'indietro: Referenziato (Sorgente) -> Referenziato (Destinazione)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "Direzione del collegamento"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 msgstr ""
+"L'oggetto di riferimento è quello che contiene questo campo dinamico, mentre "
+"l'oggetto di riferimento è quello selezionato come valore del campo dinamico."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "Dinamico (ConfigItem)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "Statica (versione)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "Tipo di riferimento del collegamento"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 msgstr ""
+"Se questo collegamento si applica al ConfigItem o alla versione statica "
+"dell'oggetto di riferimento. Il calcolo dello Stato corrente dell'incidente "
+"viene eseguito solo sui collegamenti dinamici."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
 msgstr ""
+"Selezionare l'attributo in base al quale gli elementi della configurazione "
+"verranno ricercati"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "È necessario iniziare la stringa YAML con '---'."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "Impossibile eliminare la tabella configitem_link."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "Non sono stati trovati campi dinamici rilevanti"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "Impossibile inserire nella tabella configitem_link"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "Inserite 0 righe nella tabella configitem_link"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
 msgstr ""
+"Errore nella sincronizzazione delle definizioni. Controllare il registro."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 msgstr ""
+"Le definizioni di ITSMConfigItem non sono sincronizzate. Distribuire le "
+"modifiche ai campi dinamici di ITSMConfigItem."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "Panoramica e conferma"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "Si è verificato un errore durante l'importazione della classe."
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - Nascosto"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - Mostrato"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Consente condizioni di ricerca estese nella ricerca degli elementi di "
+"configurazione dell'interfaccia dell'agente. Con questa funzione è possibile "
+"cercare, ad esempio, il nome dell'elemento di configurazione con condizioni "
+"del tipo \"(*key1*&&*key2*)\" o \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Consente condizioni di ricerca estese nella ricerca degli elementi di "
+"configurazione dell'interfaccia cliente. Con questa funzione è possibile "
+"cercare, ad esempio, il nome dell'elemento di configurazione con condizioni "
+"del tipo \"(*key1*&&*key2*)\" o \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "Scegliere un modulo per applicare uno schema di denominazione."
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "Scegliere un modulo per applicare uno schema numerico."
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "Scegliere un modulo per applicare uno schema di stringhe di versione."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
 msgstr ""
+"Scegliere gli attributi per attivare la creazione di una nuova versione."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
 msgstr ""
+"Scegliere le categorie da assegnare a questa classe di elementi di "
+"configurazione."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
 msgstr ""
+"Filtri per gli elementi di configurazione della colonna per la panoramica di "
+"ConfigItem."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Colonne che possono essere filtrate nella panoramica degli elementi di "
+"configurazione dell'interfaccia agente. Nota: Sono ammessi solo gli "
+"attributi degli elementi di configurazione e i campi dinamici "
+"(DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Colonne che possono essere filtrate nella panoramica degli elementi di "
+"configurazione dell'interfaccia cliente. Nota: Sono ammessi solo gli "
+"attributi degli elementi di configurazione e i campi dinamici "
+"(DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr ""
+"Modulo evento per gli elementi di configurazione che aggiorna gli elementi "
+"di configurazione alla loro definizione corrente."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
 msgstr ""
+"Modulo evento per gli elementi di configurazione che aggiorna la tabella "
+"configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
 msgstr ""
+"Il modulo eventi dell'elemento di configurazione aggiorna lo stato attuale "
+"dell'incidente."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "Vista ad albero ConfigItem"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "ConfigItem Versione"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"I ConfigItem delle seguenti classi non saranno memorizzati sul server "
+"Elasticsearch. Per applicare questo ai CI esistenti, è necessario eseguire "
+"la migrazione del CI tramite la console, dopo aver modificato questa opzione."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"I ConfigItem con i seguenti stati di distribuzione non saranno memorizzati "
+"sul server Elasticsearch. Per applicare questo ai CI esistenti, è necessario "
+"eseguire la migrazione del CI tramite la console, dopo aver modificato "
+"questa opzione."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "I clienti possono vedere le versioni storiche dei CI."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
 msgstr ""
+"I clienti hanno la possibilità di passare manualmente tra le versioni "
+"storiche di CI."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Dati predefiniti da usare nell'attributo per la schermata di ricerca degli "
+"elementi di configurazione. Esempio: \"ITSMConfigItemCreateTimePointFormat=an"
+"no;ITSMConfigItemCreateTimePointStart=ultimo;ITSMConfigItemCreateTimePoint=2;"
+"\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Dati predefiniti da usare nell'attributo per la schermata di ricerca degli "
+"elementi di configurazione. Esempio: \"ITSMConfigItemCreateTimeStartYear=2010"
+";ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITS"
+"MConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMC"
+"onfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr ""
+"Definisce uno schema Template::Toolkit per le stringhe di versione. "
+"Utilizzato solo se il modulo Stringa di versione è impostato su "
+"TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 msgstr ""
+"Definire un insieme di condizioni in base alle quali un cliente può vedere "
+"un elemento della configurazione. Le condizioni possono essere "
+"facoltativamente limitate a determinati gruppi di clienti. Il nome è l'unico "
+"attributo obbligatorio. Se non vengono fornite altre opzioni, tutti gli "
+"elementi di configurazione saranno visibili sotto quella categoria."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr ""
+"Definisce se le etichette del tipo di collegamento devono essere mostrate "
+"nelle connessioni dei nodi."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Definisce le colonne disponibili dei CI nella panoramica degli elementi di "
+"configurazione, a seconda della classe del CI. Ogni voce deve essere "
+"composta da un nome di classe e da un array di campi disponibili per la "
+"classe corrispondente. Le voci dei campi dinamici devono rispettare lo "
+"schema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Definisce l'attributo predefinito dell'elemento di configurazione per "
+"l'ordinamento degli elementi di configurazione del risultato della ricerca "
+"degli elementi di configurazione dell'interfaccia agente."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 msgstr ""
+"Definisce l'attributo predefinito dell'elemento di configurazione per "
+"l'ordinamento dell'elemento di configurazione nel risultato della ricerca "
+"dell'elemento di configurazione dell'interfaccia cliente."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Definisce l'attributo predefinito dell'elemento di configurazione per "
+"l'ordinamento dell'elemento di configurazione del risultato della ricerca "
+"dell'elemento di configurazione di questa operazione."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definisce l'ordine predefinito degli elementi di configurazione nel "
+"risultato della ricerca degli elementi di configurazione dell'interfaccia "
+"agente. Su: il più vecchio in cima. Giù: l'ultimo in cima."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definisce l'ordine predefinito degli elementi di configurazione nel "
+"risultato della ricerca degli elementi di configurazione dell'interfaccia "
+"cliente. Su: il più vecchio in cima. Giù: il più recente in cima."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Definisce l'ordine predefinito degli elementi di configurazione nel "
+"risultato della ricerca degli elementi di configurazione di questa "
+"operazione. Su: il più vecchio in cima. Giù: l'ultimo in cima."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Definisce le colonne predefinite dei CI nella panoramica degli elementi di "
+"configurazione, a seconda della classe del CI. Ogni voce deve essere "
+"composta da un nome di classe e da un array di campi disponibili per la "
+"classe corrispondente. Le voci dei campi dinamici devono rispettare lo "
+"schema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "Definisce la profondità predefinita delle relazioni da mostrare."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Definisce l'attributo predefinito di ricerca degli elementi di "
+"configurazione per la schermata di ricerca degli elementi di configurazione."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Definisce l'attributo di ricerca predefinito dell'elemento di configurazione "
+"per la schermata di ricerca dell'elemento di configurazione. Esempio: \"Key\""
+" deve avere il nome del campo dinamico, in questo caso 'X', \"Content\" deve "
+"avere il valore del campo dinamico, a seconda del tipo di campo dinamico, "
+"Text: 'un testo', Dropdown: '1', Date/Time: "
+"'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' e o "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Definisce il limite di ricerca per la schermata CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr ""
+"Definisce il limite di ricerca per la schermata CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definisce quali voci sono disponibili per l'\"Azione\" nel terzo livello "
+"della struttura ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definisce quali voci sono disponibili nel primo livello della struttura ITSM "
+"Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Definisce quali voci sono disponibili nel secondo livello della struttura "
+"ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "Aggiornamento della definizione"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "Stato di deplorazione"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "Stato di distribuzione"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 msgstr ""
+"Modulo evento per campi dinamici che contrassegna le definizioni degli "
+"elementi della configurazione come non sincronizzate, se i campi dinamici "
+"che le contengono cambiano."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
@@ -1493,158 +1635,229 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
 msgstr ""
+"Campi dinamici visualizzati nella schermata di panoramica degli elementi di "
+"configurazione dell'interfaccia cliente."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
 msgstr ""
+"Campi dinamici visualizzati nella schermata di ricerca degli elementi di "
+"configurazione dell'interfaccia agente."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 msgstr ""
+"Abilita/disabilita la funzionalità di controllo delle voci di configurazione "
+"ITSM per i nomi univoci. Prima di abilitare questa opzione, è necessario "
+"controllare il sistema per verificare che non vi siano elementi di "
+"configurazione già esistenti con nomi duplicati. È possibile farlo con il "
+"comando della console Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 msgstr ""
+"Campi dell'indice degli elementi di configurazione, utilizzati per la "
+"ricerca full-text. I campi sono anche memorizzati, ma non sono obbligatori "
+"per la funzionalità complessiva. L'inclusione degli allegati può essere "
+"disattivata impostando la voce su 0 o cancellandola."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 msgstr ""
+"Campi memorizzati nell'indice degli elementi di configurazione, utilizzati "
+"per altri scopi oltre alla ricerca full-text. Per la funzionalità completa, "
+"tutti i campi sono obbligatori."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"Per ogni webservice (chiave) è possibile definire un array di classi (valore)"
+" su cui limitare l'importazione. Per tutte le classi scelte, o per tutte le "
+"classi esistenti, gli attributi identificativi dovranno essere scelti nella "
+"configurazione dell'invocatore."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr ""
+"Registrazione del modulo GenericInterface per il livello di invocazione "
+"ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "Stato Inci"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "Stato dell'incidente"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
 msgstr ""
+"Include gli stati di distribuzione nella ricerca degli elementi di "
+"configurazione dell'interfaccia cliente."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
 msgstr ""
+"Include gli stati degli incidenti nella ricerca degli elementi di "
+"configurazione dell'interfaccia cliente."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Numero massimo di voci di configurazione da visualizzare nel risultato di "
+"questa operazione."
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "Modulo Nome"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "Numero Modulo"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Numero di voci di configurazione da visualizzare in ogni pagina di un "
+"risultato di ricerca nell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Numero di voci di configurazione da visualizzare in ogni pagina di un "
+"risultato di ricerca nell'interfaccia cliente."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 msgstr ""
+"Oggetti da cercare, quante voci e quali attributi mostrare. Gli attributi di "
+"ConfigItem devono essere memorizzati esplicitamente tramite Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per le categorie delle classi di elementi della configurazione "
+"nella vista preferenze dell'interfaccia agente."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"Parametri per i filtri delle colonne della panoramica degli elementi di "
+"configurazione piccoli. Nota bene: impostando 'Attivo' su 0, si impedirà "
+"agli agenti di modificare le impostazioni di questo gruppo nelle loro "
+"preferenze personali, ma si permetterà agli amministratori di modificare le "
+"impostazioni di un altro utente. Usare 'Gruppo di preferenze' per "
+"controllare in quale area queste impostazioni devono essere visualizzate "
+"nell'interfaccia utente."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per il modulo dei nomi delle classi di elementi di configurazione "
+"nella vista preferenze dell'interfaccia agente."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per il modulo numerico delle classi di elementi di configurazione "
+"nella vista preferenze dell'interfaccia agente."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per il modulo stringa di versione per le classi di elementi di "
+"configurazione nella vista preferenze dell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per il modulo del toolkit di modelli di stringhe di versione per "
+"le classi di elementi di configurazione nella vista preferenze "
+"dell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametri per l'attivazione della versione per le classi di elementi di "
+"configurazione nella vista preferenze dell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Esegue l'azione configurata per ogni evento (come Invoker) per ogni "
+"Webservice configurato."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Autorizzazioni necessarie per utilizzare l'azione di collegamento "
+"dell'elemento di configurazione ITSM nell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Autorizzazioni necessarie per utilizzare la schermata di ricerca degli "
+"elementi di configurazione ITSM nell'interfaccia cliente."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Autorizzazioni necessarie per utilizzare la schermata di visualizzazione ad "
+"albero degli elementi di configurazione ITSM nell'interfaccia agente."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Autorizzazioni necessarie per utilizzare la schermata degli elementi di "
+"configurazione ITSM di massa nell'interfaccia dell'agente."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr ""
+"Mostra un collegamento nel menu per visualizzare i collegamenti alle voci di "
+"configurazione come una struttura ad albero."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
 msgstr ""
+"La categoria predefinita che viene mostrata se non è selezionata nessuna."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "Attiva automaticamente l'invocatore di ConfigItemFetch."
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "Versione Espressione stringa"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "Versione Modulo Stringa"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "Versione Trigger"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"Se l'esecuzione di ConfigItemACL può essere evitata controllando le "
+"dipendenze dei campi nella cache. Questo può migliorare i tempi di "
+"caricamento dei moduli, ma deve essere disabilitato se si vogliono usare i "
+"moduli ACLM per i tipi ITSMConfigItem e Form-Return."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "Le informazioni generali sono riportate nell'intestazione."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Dati generali dell'invocatore"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
@@ -1652,11 +1865,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Impostazioni per i dati di richiesta in uscita"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Mappatura"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
@@ -1668,11 +1881,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Impostazioni per i dati di risposta in entrata"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Dati dell'evento"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
@@ -1684,39 +1897,39 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "Codice di indentazione automatica"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "Codice commento/non commento"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "Ricerca e sostituzione"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Seleziona tutti"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "Schermo intero"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "Elementi di configurazione"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Ordinamento"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "Filtrare per stato valido"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "Includere ACL non valide"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
@@ -1724,51 +1937,57 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "Includere campi dinamici non validi"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "Filtrare il campo per tipo di oggetto"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "Filtrare il campo per spazio dei nomi"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nuovi campi dinamici"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Desiderate beneficiare di ulteriori tipi di campi dinamici? Avete pieno "
+"accesso ai seguenti tipi di campo:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "Copiare questo campo"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "Attributo che verrà cercato nel completamento automatico"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "Chiave di origine esterna"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 msgstr ""
+"Se impostato tramite una fonte esterna (ad esempio, un servizio web o un'"
+"importazione/esportazione), il valore sarà interpretato come questo "
+"attributo."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "Attributo che viene visualizzato per i valori"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "Selezionare il tipo di display"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
 msgstr ""
+"La struttura di base non è valida. Fornire un array di dati in formato YAML."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
@@ -1781,1374 +2000,1519 @@ msgstr ""
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"Valore percentuale del progresso minimo di traduzione per lingua, da "
+"utilizzare per le documentazioni."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "Accedere ai repo tramite http o https."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "Caricamento automatico delle estensioni Znuny4OTRSRepo."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
 msgstr ""
+"Registrazione del modulo di backend per il modulo di controllo dei conflitti "
+"di configurazione."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
 msgstr ""
+"Registrazione del modulo di backend per il modulo di controllo dei conflitti "
+"di file."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
 msgstr ""
+"Registrazione del modulo di backend per la funzione redefine check module."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "Registrazione del modulo di backend per il modulo set di manuali."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "Ganci di blocco da creare per la rimozione degli annunci BS."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
 msgstr ""
+"Ganci di blocco da creare per il filtro di uscita del gestore di pacchetti."
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "Limite di commit di Branch View"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "CodicePolitica"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
 msgstr ""
+"Limite di impegno per pagina per la schermata di visualizzazione della "
+"diramazione"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "Creare un file di analisi"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "Crea un file di analisi da questo ticket e lo invia a Znuny."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "Crea un file di analisi da questo ticket."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "Definire i repo privati dei componenti aggiuntivi."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Definisce il filtro che elabora i modelli HTML."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "Definisce il modulo di test per la verifica della politica del codice."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "Definizione del prefisso URL GIT clone/push."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Definizione di un campo dinamico: Group => Gruppo con accesso ai campi "
+"dinamici; AlwaysVisible => Campo che può essere rimosso (0|1); "
+"InformationAreaName => Nome dei widget; InformationAreaSize => Dimensione e "
+"posizione dei widget (Large|Small); Name => Nome del campo dinamico che deve "
+"essere usato; Priority => Ordine dei campi dinamici; State => Stato dei "
+"campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio), FilterRelease => "
+"Regex a cui il nome del repository deve corrispondere per essere "
+"visualizzato, FilterPackage => Stato dei campi (0 = disabilitato, 2 = "
+"obbligatorio). Stato dei campi (0 = disabilitato, 1 = attivo, 2 = "
+"obbligatorio), FilterRelease => Regex a cui deve corrispondere il nome del "
+"repository per essere visualizzato, FilterPackage => Regex a cui deve "
+"corrispondere il nome del pacchetto per essere visualizzato, FilterBranch => "
+"Regex a cui deve corrispondere il nome del ramo per essere visualizzato, "
+"FilterRelease => Regex a cui deve corrispondere la stringa della versione di "
+"repelase per essere visualizzato."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Definizione di un campo dinamico: Group => Gruppo con accesso ai campi "
+"dinamici; AlwaysVisible => Campo che può essere rimosso (0|1); "
+"InformationAreaName => Nome dei widget; InformationAreaSize => Dimensione e "
+"posizione dei widget (Large|Small); Name => Nome del campo dinamico da "
+"utilizzare; Priority => Ordine dei campi dinamici; State => Stato dei campi ("
+"0 = disabilitato, 1 = attivo, 2 = obbligatorio), FilterReposory => Regex a "
+"cui il nome del repository deve corrispondere per essere visualizzato, "
+"FilterPacket => Stato dei campi (0 = disabilitato, 1 = attivo, 2 = "
+"obbligatorio). Stato dei campi (0 = disabilitato, 1 = attivo, 2 = "
+"obbligatorio), FilterRepository => Regex a cui deve corrispondere il nome "
+"del repository per essere visualizzato, FilterPackage => Regex a cui deve "
+"corrispondere il nome del pacchetto per essere visualizzato, FilterBranch => "
+"Regex a cui deve corrispondere il nome del ramo per essere visualizzato, "
+"FilterRelease => Regex a cui deve corrispondere la stringa della versione di "
+"repelase per essere visualizzato."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 msgstr ""
+"Definizione di somme MD5 esterne (key => MD5, Value => Vendor, PackageName, "
+"Version, Date)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
 msgstr ""
+"Definizione delle mappature tra le richieste di repository pubblici e i "
+"repository OPMS interni."
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "Definizione degli stati del pacchetto."
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "Definizione dei pacchetti OPMS rinominati."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "che viene usata da Git per memorizzare nella cache i repository."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "Directory, utilizzata da Git per memorizzare i dati temporanei."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "che viene usata da Git per memorizzare le copie di lavoro."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "Disattivare i repository online."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 msgstr ""
+"Non registrare i risultati dell'autorizzazione alla connessione git ssh per "
+"questi utenti. Utile per le operazioni automatizzate."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Schermate dei campi dinamici"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "Schermata del campo dinamico"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
 msgstr ""
+"Esportare tutte le chiavi pubbliche disponibili nel file authorized_keys."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "Esportare tutte le release rilevanti sul server ftp."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
 msgstr ""
+"Registrazione del modulo frontend per l'oggetto OPMS nell'interfaccia agente."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Registrazione del modulo frontend per l'oggetto PublicOPMSRepository "
+"nell'interfaccia pubblica."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Registrazione del modulo di frontend per l'oggetto "
+"PublicOPMSRepositoryLookup nell'interfaccia pubblica."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Registrazione del modulo frontend per l'oggetto PublicOPMSTestBuild "
+"nell'interfaccia pubblica."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
 msgstr ""
+"Registrazione del modulo di frontend per l'oggetto PublicPackageVerification "
+"nell'interfaccia pubblica."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
 msgstr ""
+"Registrazione del modulo di frontend per l'interfaccia di amministrazione."
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "Registrazione dell'autore GIT."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"Genera i ganci di commento HTML per i blocchi specificati, in modo che i "
+"filtri possano utilizzarli."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "Generare documenti una volta per notte."
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Gestione Git"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "Repository Git"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
 msgstr ""
+"Gruppo, i cui membri hanno i permessi di amministrazione di cancellazione in "
+"OPMS."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
 msgstr ""
+"Gruppo, i cui membri hanno i permessi di amministrazione del repository in "
+"OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
 msgstr ""
+"Gruppo, i cui membri vedranno le informazioni sui risultati del test CI "
+"nelle schermate di OPMS."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 msgstr ""
+"Gruppi di cui deve far parte un utente autenticato (tramite login e password)"
+" per creare pacchetti di test tramite l'interfaccia pubblica."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
 msgstr ""
+"Gruppi che saranno impostati durante i processi di creazione del progetto "
+"git durante l'aggiunta dei repository OPMS."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "Gestire i campi dinamici nelle schermate."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 msgstr ""
+"Gestite qui le vostre chiavi SSH pubbliche per l'accesso a Git. Assicuratevi "
+"di salvare questa preferenza quando aggiungete una nuova chiave."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "Modulo per generare statistiche sulle linee di codice aggiunte."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "Modulo per generare statistiche sulla crescita del codice."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
+msgstr "Modulo per generare statistiche sul numero di commit di git."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
+msgstr "Modulo per generare statistiche sulle linee di codice rimosse."
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
 msgstr ""
+"Solo gli utenti che hanno i permessi rw in uno di questi gruppi possono "
+"accedere a git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "Opzione per impostare manualmente la compatibilità di un pacchetto."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "Parametri per le pagine della schermata BranchView."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Pre-definizione del campo dinamico 'GITProjectName': Group => Gruppo con "
+"accesso ai campi dinamici; AlwaysVisible => Campo che può essere rimosso "
+"(0|1); InformationAreaName => Nome dei widget; InformationAreaSize => "
+"Dimensione e posizione dei widget (Large|Small); Name => Nome del campo "
+"dinamico che deve essere usato; Priority => Ordine dei campi dinamici; State "
+"=> Stato dei campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio). Stato "
+"dei campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio), FilterRepository "
+"=> Regex a cui deve corrispondere il nome del repository per essere "
+"visualizzato, FilterPackage => Regex a cui deve corrispondere il nome del "
+"pacchetto per essere visualizzato, FilterBranch => Regex a cui deve "
+"corrispondere il nome del ramo per essere visualizzato, FilterRelease => "
+"Regex a cui deve corrispondere la stringa della versione di repelase per "
+"essere visualizzato."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Pre-definizione del campo dinamico 'GITRepositoryName': Group => Gruppo con "
+"accesso ai campi dinamici; AlwaysVisible => Campo che può essere rimosso "
+"(0|1); InformationAreaName => Nome dei widget; InformationAreaSize => "
+"Dimensione e posizione dei widget (Large|Small); Name => Nome del campo "
+"dinamico che deve essere usato; Priority => Ordine dei campi dinamici; State "
+"=> Stato dei campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio). Stato "
+"dei campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio), FilterRepository "
+"=> Regex a cui deve corrispondere il nome del repository per essere "
+"visualizzato, FilterPackage => Regex a cui deve corrispondere il nome del "
+"pacchetto per essere visualizzato, FilterBranch => Regex a cui deve "
+"corrispondere il nome del ramo per essere visualizzato, FilterRelease => "
+"Regex a cui deve corrispondere la stringa della versione di repelase per "
+"essere visualizzato."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Pre-definizione del campo dinamico 'PackageDeprecated': Group => Gruppo con "
+"accesso ai campi dinamici; AlwaysVisible => Campo che può essere rimosso "
+"(0|1); InformationAreaName => Nome dei widget; InformationAreaSize => "
+"Dimensione e posizione dei widget (Large|Small); Name => Nome del campo "
+"dinamico che deve essere usato; Priority => Ordine dei campi dinamici; State "
+"=> Stato dei campi (0 = disabilitato, 1 = attivo, 2 = obbligatorio), "
+"FilterRepository => Regex che il repository deve utilizzare. Stato dei campi "
+"(0 = disabilitato, 1 = attivo, 2 = obbligatorio), FilterRepository => Regex "
+"a cui deve corrispondere il nome del repository per essere visualizzato, "
+"FilterPackage => Regex a cui deve corrispondere il nome del pacchetto per "
+"essere visualizzato, FilterBranch => Regex a cui deve corrispondere il nome "
+"del ramo per essere visualizzato, FilterRelease => Regex a cui deve "
+"corrispondere la stringa della versione di repelase per essere visualizzato."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "Destinatari che saranno informati via e-mail in caso di errori."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "Chiavi SSH per l'accesso a Git"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "Inviare il file di analisi"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
 msgstr ""
+"Imposta l'indirizzo del clone git da usare negli elenchi dei repository."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "Imposta la directory home per i repository git."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
+msgstr "Imposta il percorso dello script BugzillaAddComment post receive."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Imposta il percorso dello script OTRSCodePolicy. Si consiglia di avere un "
+"clone separato del modulo OTRSCodePolicy, aggiornato tramite cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Imposta il percorso dello script di prericezione di OTRSCodePolicy. Si "
+"consiglia di avere un clone separato del modulo OTRSCodePolicy, aggiornato "
+"tramite cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "Mostra gli ultimi commit nei repository git."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
 msgstr ""
+"Mostra un link nel menu per creare un test unitario dal ticket corrente."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "Sincronizzare le tabelle di OPMS con un database remoto."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "La versione minima della libreria sphinx."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "Il nome del tema sfinge da utilizzare."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "Il percorso del file CSS di OTRS (relativo sotto il percorso statico)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "Il percorso del logo OTRS (relativo al di sotto del percorso statico)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "Il percorso della cartella statica, contenente immagini e file css."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "Il percorso della cartella dei temi, contenente i temi di sphinx."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"Questa configurazione definisce tutte le schermate possibili per attivare o "
+"disattivare le colonne predefinite."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
 msgstr ""
+"Questa configurazione definisce tutte le schermate possibili per attivare o "
+"disattivare i campi dinamici."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"Questa configurazione definisce se devono essere mostrati solo i campi "
+"dinamici validi o tutti (invalidi)."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"Questa configurazione definisce se la verifica dei pacchetti OTRS deve "
+"essere attiva o disattivata. Se è disattivata, tutti i pacchetti vengono "
+"mostrati come verificati. Si raccomanda comunque di utilizzare solo "
+"pacchetti verificati."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"Questa configurazione definisce l'URL del servizio OTRS CloudService Proxy. "
+"Il prefisso http o https verrà aggiunto, a seconda della selezione del "
+"SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
 msgstr ""
+"Questa configurazione registra un post-filtro Output per estendere la "
+"verifica dei pacchetti."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"Questa configurazione registra un modulo OutputFilter che rimuove gli "
+"annunci di OTRS Business Solution TM."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
+"Questa configurazione registra un filtro di uscita per nascondere la "
+"selezione del repository online nel gestore dei pacchetti."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
 msgstr ""
+"Riordina i rilasci non elaborati che non hanno superato i controlli dei "
+"moduli di test per molto tempo."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 msgstr ""
+"Gli utenti che hanno i permessi rw in uno di questi gruppi possono eseguire "
+"il force push 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 msgstr ""
+"Gli utenti che hanno i permessi rw in uno di questi gruppi sono autorizzati "
+"a gestire i progetti. Inoltre, i membri hanno permessi di amministrazione "
+"per la gestione di git."
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 GB"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U: 17,5 pollici (44,45 cm)"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 GB"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 GB"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U: 21 pollici (53,34 cm)"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U: 26,25 pollici (66,68 cm)"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 GB"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U: 31,5 pollici (80,01 cm)"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "Rack da 19 pollici"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U: 1,75 pollici (4,45 cm)"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U: 35 pollici (88,9 cm)"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "Cremagliera da 21 pollici"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U: 38,5 pollici (97,79 cm)"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "Cremagliera da 23 pollici"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23,6 pollici (600 mm)"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 GB"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U: 42 pollici (106,68 cm)"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 GB"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U: 47,25 pollici (120,02 cm)"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K (2048 x 1080)"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U: 3,5 pollici (8,89 cm)"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U: 52,5 pollici (133,35 cm)"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31,5 pollici (800 mm)"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 GB"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U: 57,75 pollici (146,68 cm)"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35,4 pollici (900 mm)"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U: 63 pollici (160,02 cm)"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39,4 pollici (1000 mm)"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U: 68,25 pollici (173,35 cm)"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U: 5,25 pollici (13,34 cm)"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U: 73,5 pollici (186,69 cm)"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43,3 pollici (1100 mm):"
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U: 78,75 pollici (200,02 cm)"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47,2 pollici (1200 mm)"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 GB"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U: 84 pollici (213,36 cm)"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K Ultra HD (3840 x 2160):"
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U: 7 pollici (17,78 cm)"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 GB"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U: 8,75 pollici (22,23 cm)"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 GB"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U: 10,5 pollici (26,67 cm)"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U: 12,25 pollici (31,12 cm)"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 GB"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K Ultra HD (7680 x 4320)"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U: 14 pollici (35,56 cm)"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 GB"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U: 15,75 pollici (40,01 cm)"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilità"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "Assegnazione degli indirizzi"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Amministratore"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "Tipo di apparecchio"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "Backlink"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "Capacità della batteria (Ah)"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "Tipo di batteria"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Interfaccia bus"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "Classe CPU"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "Capacità (GB)"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "Capacità per scheda grafica"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "Numero di carta"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "Tipo di carta"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "Certificati cliente"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "Software client"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "Categoria di clienti"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "Frequenza dell'orologio"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "Velocità dell'orologio"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "Certificati di firma del codice"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "Contatto con il distributore"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "Contratto"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "Tipo di contratto"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "Durata del contratto da"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "Durata del contratto fino a"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "Unità di costo"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "Numero di licenze"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "Data di creazione"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "Cremagliera personalizzata"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP Riservato"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "Data della fattura"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "Data dell'ordine"
 
 #. ITSM class bundles
 msgid "Date of Warrenty"
-msgstr ""
+msgstr "Data della garanzia"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "Data di rilascio"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "Certificati di firma dei documenti"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "Rack ETSI"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "Certificati e-mail (certificati S/MIME)"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Indirizzo IP finale"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "Fine del supporto"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "Data di scadenza"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "FireWire (IEEE 1394)"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "Firmware"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "Accumulo di energia a volano"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "Fattore di forma"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "Full HD (1920 x 1080)"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "Informazioni generali"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "Schede grafiche"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "Scheda grafica"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "HD (1280 x 720)"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "Modello hardware"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "Peso dell'hardware"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "Protocollo IP"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "Numero di inventario"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "Costi di investimento"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "Numero di fattura"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "Monitor LCD (display a cristalli liquidi)"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "Monitor LED (diodo a emissione luminosa)"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC (basso numero di pin)"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudine"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "Livello 1: livello fisico"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "Livello 2: Livello di collegamento dati"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "Livello 3: livello di rete"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "Livello 3: Livello di rete (Supernet)"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "Livello 4: livello di trasporto"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "Livello 5: livello di sessione"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "Livello 6: Livello di presentazione"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "Livello 7: Livello applicazione"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Chiave di licenza"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Tipo di licenza"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "Periodo di licenza da"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "Periodo di licenza fino a"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "Batteria al litio ferro fosfato (LiFePO4)"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "Batteria agli ioni di litio (Li-ion)"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "Situato in"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA (Architettura a microcanali)"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "Produttore"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "Capacità di carico massima (W)"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "Memoria"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "Tipo di memoria"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "Microsoft SQL Server"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "Mini-Rack"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "Numero di cellulare"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "Descrizione del modello"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "Risoluzione del monitor"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "Dimensioni del monitor"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "Informazioni sulla rete"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "Informazioni sulla rete"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "Livello di rete"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "Batteria al nichel-cadmio (NiCd)"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "Batteria al nichel-metallo idruro (NiMH)"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "Numero di CPU"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "Numero di moduli RAM"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "Numero di schede grafiche"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "Monitor OLED (diodo organico a emissione di luce)"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "Costi operativi"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "Database Oracle"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "Numero d'ordine"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Uscite"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "PCI Express (PCIe)"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "PIN"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "PIN 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "Numero di telefono"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "Tipo di telefono"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "Nuclei fisici"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "Erogazione di energia"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "Acquistato presso"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "Quad HD (2560 x 1440)"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "Profondità del rack"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "Unità rack (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "Riferimento al cliente"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "Scheda SIM"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "Certificati SSL/TLS"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "Batteria al piombo sigillata (SLA)"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Numero di serie"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "Software per server"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "Etichetta di servizio"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "Tipo di presa"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "Indirizzo IP di partenza"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "Immagazzinamento"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "Partizione di archiviazione"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "Filiale"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "Sintesi"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "Fili"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Folgore"
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "RAM totale della scheda grafica (GB)"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "RAM totale (GB)"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "Monitor touchscreen"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "Torre"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB (Bus seriale universale)"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "Bus locale VESA (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "VGA"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "VirtualLink"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA (1366 x 768)"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "Telefono analogico"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "Lettore di schede"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "Telefono di conferenza"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "Contratto di consulenza"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "Gestione dei contenitori"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "Telefono cordless (telefono DECT)"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "Server DNS"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "Contratto di lavoro"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "Disco rigido esterno"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "Firewall"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "Contratto di franchising"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "Cuffia"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "Gestione dell'identità e dell'accesso (IAM)"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "Telefono fisso"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "Contratto di locazione"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "Contratto di licenza"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "Contratto di prestito"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "Mobile/Embedded"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "Accordo di non divulgazione (NDA)"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "Taccuino"
 
 #. ITSM class bundles
 msgid "OTOBO"
@@ -3156,49 +3520,48 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "Accordo di partenariato"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "Telefono / VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "Contratto di vendita"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "Telefono satellitare"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Contratto di servizio"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "Altoparlanti"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "Thin Client"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "Hub USB"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "Cuffie VR"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "Telefono VoIP"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
-
+msgstr "Webcam"
