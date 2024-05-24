@@ -2,13 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Hebrew <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/he/>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -136,7 +140,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "הרץ חיפוש"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
@@ -336,7 +340,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "אזהרה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
@@ -956,7 +960,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "מבט-על"
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
@@ -1168,7 +1172,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "סוג האובייקט"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1204,7 +1208,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "אין הרשאה!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1696,7 +1700,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "בחר הכל"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -3201,4 +3205,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
