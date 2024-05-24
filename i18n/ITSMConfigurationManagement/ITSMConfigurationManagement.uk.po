@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Ukrainian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/uk/>\n"
 "Language: uk\n"
@@ -1084,7 +1084,7 @@ msgstr "Параметри для сторінок (на яких відобра
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Група дозволів"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1363,7 +1363,7 @@ msgstr "Версій не знайдено!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Немає прав доступу"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1978,6 +1978,8 @@ msgstr "Загальні дані інкасатора"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Цей внутрішній модуль OTOBO активатора буде викликаний щоб підготувати дані "
+"для відправки до віддаленої системи та обробляти дані її відповіді."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1990,10 +1992,14 @@ msgstr "Картографування"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Дані з активатора OTOBO будуть оброблені цим відображенням, щоб перетворити "
+"їх до того вигляду даних, який очікує віддалена система."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Дані відповіді будуть оброблені цим відображенням так, щоб перетворити їх до "
+"того виду, що очікує активатор OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -2005,11 +2011,13 @@ msgstr "Дані про подію"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Додати подію"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Асинхронні тригери подій будуть оброблятись Службою Планувальника OTOBO у "
+"фоновому режимі (рекомендовано)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2049,7 +2057,7 @@ msgstr "Включення недійсних списків ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Перевірте офіційну %sdocumentation%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -2108,6 +2116,8 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Списки АСL не можуть бути імпортовані через невідому помилку, будь ласка, "
+"перевірте журнал OTOBO для отримання додаткової інформації."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
