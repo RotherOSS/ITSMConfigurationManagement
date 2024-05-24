@@ -47,8 +47,8 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get params
-    my $ConfigItemID = $ParamObject->GetParam( Param => 'ConfigItemID' );
-    my $VersionID    = $ParamObject->GetParam( Param => 'VersionID' );
+    my $ConfigItemID      = $ParamObject->GetParam( Param => 'ConfigItemID' );
+    my $GetParamVersionID = $ParamObject->GetParam( Param => 'VersionID' );
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -85,7 +85,7 @@ sub Run {
     # get content
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => $ConfigItemID,
-        VersionID     => $VersionID,
+        VersionID     => $GetParamVersionID,
         DynamicFields => 1,
     );
     if ( !$ConfigItem->{ConfigItemID} ) {
@@ -110,7 +110,7 @@ sub Run {
     }
 
     # TODO: Compare with legacy code to check whether this is a good place. Line 256 throws an error if not set, else
-    $VersionID ||= $ConfigItem->{VersionID};
+    my $VersionID = $ConfigItem->{VersionID};
 
     # run config item menu modules
     if ( ref $ConfigObject->Get('ITSMConfigItem::Frontend::MenuModule') eq 'HASH' ) {
@@ -349,7 +349,7 @@ sub Run {
                     Data => {
                         PageName     => $Page->{Name},
                         ConfigItemID => $ConfigItem->{ConfigItemID},
-                        VersionID    => $VersionID,
+                        VersionID    => $GetParamVersionID,
                         Selected     => $Page->{Name} eq $PageShown->{Name},
                     },
                 );

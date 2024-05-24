@@ -65,6 +65,24 @@ sub Run {
         Class => 'ITSM::ConfigItem::Class',
     );
 
+    my $DynamicField;
+
+    # if the _old_ dynamic field was part of a set, any change to it will affect the existing set
+    # and thus the CI
+    if ( $Param{Data}{OldData}{Config}{PartOfSet} ) {
+        $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+            ID => $Param{Data}{OldData}{Config}{PartOfSet},
+        );
+    }
+
+    # for the standard case, the field is directly integrated, we take the _new_ data
+    # -> in case of a name change we do not set classes out of sync, as we will not
+    # automatically update definition strings
+    # a new field name has to be updated manually in the definition
+    else {
+        $DynamicField = $Param{Data}{NewData};
+    }
+
     my %OutOfSyncDefinitions;
 
     # Loop over all classes and check whether they include the changed dynamic field
@@ -74,8 +92,8 @@ sub Run {
         );
 
         # use OldData to account for name changes
-        if ( $DefinitionRef->{DynamicFieldRef}{ $Param{Data}{OldData}{Name} } ) {
-            push @{ $OutOfSyncDefinitions{$ClassID} }, $Param{Data}{NewData}{ID};
+        if ( $DefinitionRef->{DynamicFieldRef}{ $DynamicField->{Name} } ) {
+            push @{ $OutOfSyncDefinitions{$ClassID} }, $DynamicField->{ID};
         }
     }
 

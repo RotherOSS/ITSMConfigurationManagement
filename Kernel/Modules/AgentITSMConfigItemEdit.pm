@@ -234,10 +234,15 @@ sub Run {
     }
 
     else {
-        $DynamicFieldList = $FormCacheObject->GetFormData(
-            FormID => $Self->{FormID},
-            Key    => 'ActiveDynamicFields',
+        my $ActiveFields = $FormCacheObject->GetFormData(
+            FormID       => $Self->{FormID},
+            LayoutObject => $LayoutObject,
+            Key          => 'ActiveDynamicFields',
         ) // [];
+
+        for my $FieldName ( $ActiveFields->@* ) {
+            push @{ $DynamicFieldList }, $Definition->{DynamicFieldRef}{$FieldName};
+        }
 
         # get general form data
         for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
@@ -1417,7 +1422,7 @@ sub Run {
             };
         }
 
-        my @ActiveDynamicFields = ( values $FieldsSeen->%* );
+        my @ActiveDynamicFields = ( keys $FieldsSeen->%* );
 
         # store the active dynamic fields, to only validate those
         $FormCacheObject->SetFormData(
