@@ -767,6 +767,7 @@ sub DefinitionCheck {
     if ( $Type eq 'Class' ) {
         my $Result = $Self->_ProcessRoles(
             DefinitionRef => $DefinitionRef,
+            ImportRoles   => $Param{ImportRoles},
         );
 
         return $Result unless $Result->{Success};
@@ -900,15 +901,12 @@ sub DefinitionCheck {
 
     # sections data in pages content are valid, go on checking
     SECTION:
-    for my $SectionName ( keys $DefinitionRef->{Sections}->%* ) {
+    for my $SectionName ( keys %{ $DefinitionRef->{Sections} // {} } ) {
 
         # remove defined sections to later identify undefined ones
         delete $SectionIsMissing{$SectionName};
 
         my $Section = $DefinitionRef->{Sections}{$SectionName};
-
-        # skip description sections
-        next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
 
         if ( !$Section || !IsHashRefWithData($Section) ) {
             return $ReturnError->(
@@ -916,6 +914,9 @@ sub DefinitionCheck {
                 $SectionName,
             );
         }
+
+        # skip description sections
+        next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
 
         if ( $Section->{Type} && $Section->{Type} ne 'DynamicFields' ) {
             if ( !any { $Section->{Type} eq $_ } qw/ConfigItemLinks Description ReferencedSection/ ) {
@@ -968,6 +969,21 @@ sub DefinitionCheck {
                     }
                     $DefinedDynamicFields{ $Cell->{DF} } = $SectionName;
                 }
+            }
+        }
+    }
+
+    # sections of roles which are only about to be imported are not defined yet
+    my %ImportRoles = map { $_ => 1 } @{ $Param{ImportRoles} // [] };
+
+    for my $SectionName ( keys %SectionIsMissing ) {
+        if ( %ImportRoles && $SectionName =~ /::/ ) {
+            ROLE:
+            for my $Role ( keys %{ $DefinitionRef->{Roles} // {} } ) {
+                next ROLE if !$ImportRoles{ $Role };
+
+                # this section will be imported and checked with the specific role
+                delete $SectionIsMissing{$SectionName} if $SectionName =~ /$DefinitionRef->{Roles}{$Role}{Name}::/;
             }
         }
     }
@@ -1332,7 +1348,39 @@ sub ClassImport {
         ) // {}
     };
 
-    # 0. perform sanity checks
+    # 0. perform sanity checks I - get roles and classes
+    my %ImportRoles;
+    my %ImportClasses;
+    for my $DefinitionItem ( $DefinitionList->@* ) {
+        if ( $DefinitionItem->{Class} && $DefinitionItem->{Class}{Name} ) {
+            $ImportClasses{ $DefinitionItem->{Class}{Name} } = $DefinitionItem;
+
+            if ( $ClassName2ID{ $DefinitionItem->{Class}{Name} } && $Param{ClassExists} eq 'ERROR' ) {
+                return {
+                    Success      => 0,
+                    ErrorMessage => "Class $DefinitionItem->{Class}{Name} already exists.",
+                };
+            }
+        }
+        elsif ( $DefinitionItem->{RoleName} ) {
+            $ImportRoles{ $DefinitionItem->{RoleName} } = $DefinitionItem;
+
+            if ( $RoleName2ID{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
+                return {
+                    Success      => 0,
+                    ErrorMessage => "Role $DefinitionItem->{RoleName} already exists.",
+                };
+            }
+        }
+        else {
+            return {
+                Success      => 0,
+                ErrorMessage => "Need Class or RoleName in Definition.",
+            };
+        }
+    }
+
+    # perform sanity checks II - more class and role specifics; collect category and df data
     for my $DefinitionItem ( $DefinitionList->@* ) {
 
         my %ClassData;
@@ -1341,55 +1389,25 @@ sub ClassImport {
             Data => $DefinitionItem->{Definition},
         );
         if ( !$Definition ) {
+            my $Name = $DefinitionItem->{RoleName} || $DefinitionItem->{Class}{Name};
+
             return {
                 Success      => 0,
-                ErrorMessage => "Item '$DefinitionItem->{Class}->{Name}' has not a valid YAML definition field.",
+                ErrorMessage => "Item '$Name' has not a valid YAML definition field.",
             };
         }
         for my $DefinitionKey ( keys %{$Definition} ) {
             $DefinitionItem->{$DefinitionKey} = $Definition->{$DefinitionKey};
         }
 
-        # check definition for validity
-        for my $Key (qw/Sections/) {
-            if ( !$DefinitionItem->{$Key} ) {
-                return {
-                    Success      => 0,
-                    ErrorMessage => "Need $Key in Definition.",
-                };
-            }
-        }
-        if ( !( $DefinitionItem->{Class} || $DefinitionItem->{RoleName} ) ) {
-            return {
-                Success      => 0,
-                ErrorMessage => "Need Class or RoleName in Definition.",
-            };
-        }
-        if ( $DefinitionItem->{Class} && !$DefinitionItem->{Pages} ) {
-            return {
-                Success      => 0,
-                ErrorMessage => "Need Pages in Class Definition.",
-            };
-        }
+        my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
 
-        # set class data and check for duplicate
-        if ( $DefinitionItem->{Class} ) {
-            %ClassData = $DefinitionItem->{Class}->%*;
-            if ( $ClassName2ID{ $ClassData{Name} } && $Param{ClassExists} eq 'ERROR' ) {
-                return {
-                    Success      => 0,
-                    ErrorMessage => "Class $ClassData{Name} already exists.",
-                };
-            }
-        }
-        if ( $DefinitionItem->{RoleName} ) {
-            if ( $RoleName2ID{ $DefinitionItem->{RoleName} } && $Param{ClassExists} eq 'ERROR' ) {
-                return {
-                    Success      => 0,
-                    ErrorMessage => "Role $DefinitionItem->{RoleName} already exists.",
-                };
-            }
-        }
+        # check definition for validity
+        my $CheckResult = $Self->DefinitionCheck(
+            Definition  => $Definition,
+            Type        => $Type,
+            ImportRoles => [ keys %ImportRoles ],
+        );
 
         # collect class tags
         @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
@@ -1748,10 +1766,10 @@ sub ClassImport {
     }
 
     # 4. add definitions
-    for my $ClassID ( keys %ClassDefinitions ) {
-        my $Return = $Self->DefinitionAdd(
-            ClassID    => $ClassID,
-            Definition => $ClassDefinitions{$ClassID},
+    for my $RoleID ( keys %RoleDefinitions ) {
+        my $Return = $Self->RoleDefinitionAdd(
+            RoleID     => $RoleID,
+            Definition => $RoleDefinitions{$RoleID},
             UserID     => 1,
             Force      => 1,
         );
@@ -1763,10 +1781,10 @@ sub ClassImport {
             };
         }
     }
-    for my $RoleID ( keys %RoleDefinitions ) {
-        my $Return = $Self->RoleDefinitionAdd(
-            RoleID     => $RoleID,
-            Definition => $RoleDefinitions{$RoleID},
+    for my $ClassID ( keys %ClassDefinitions ) {
+        my $Return = $Self->DefinitionAdd(
+            ClassID    => $ClassID,
+            Definition => $ClassDefinitions{$ClassID},
             UserID     => 1,
             Force      => 1,
         );
@@ -1957,6 +1975,8 @@ sub _ProcessRoles {
         %RoleName2ID = reverse $RoleList->%*;
     }
 
+    my %ImportRoles = map { $_ => 1 } @{ $Param{ImportRoles} // [] };
+
     # overwrite without mercy
     ROLE_KEY:
     for my $RoleKey ( keys $Roles->%* ) {
@@ -1980,12 +2000,15 @@ sub _ProcessRoles {
         # the fetching is done via the ID
         my $RoleID = $RoleName2ID{$RoleName};
 
-        if ( !$RoleID ) {
+        if ( !$RoleID && !$ImportRoles{$RoleName} ) {
             return $ReturnError->(
                 Translatable(q{The role %s was not found.}),
                 $RoleName,
             );
         }
+
+        # do not check any further, if the role is only about to be imported
+        return { Success => 1 } unless $RoleID;
 
         # This already parses the YAML
         my $RoleDefinition = $Self->RoleDefinitionGet(
