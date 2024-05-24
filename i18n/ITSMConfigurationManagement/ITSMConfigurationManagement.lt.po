@@ -2,121 +2,128 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/lt/>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
+"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
-msgstr ""
+msgstr "Konfigūracijos elementų valdymas"
 
 #. Template: AdminITSMConfigItem
 msgid "Change class definition"
-msgstr ""
+msgstr "Keisti klasės apibrėžtį"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "Konfigūracijos elemento klasė"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
-msgstr ""
+msgstr "Apibrėžimas"
 
 #. Template: AdminITSMConfigItem
 msgid "Change"
-msgstr ""
+msgstr "Keisti"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Incident State"
-msgstr ""
+msgstr "Incidento būklė"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Deployment State"
-msgstr ""
+msgstr "Diegimo būsena"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Class"
-msgstr ""
+msgstr "Klasė"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Deployment State Type"
-msgstr ""
+msgstr "Diegimo būsenos tipas"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Incident State"
-msgstr ""
+msgstr "Dabartinė incidento būsena"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Current Incident State Type"
-msgstr ""
+msgstr "Dabartinis incidento būsenos tipas"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
-msgstr ""
+msgstr "Paskutinį kartą pakeista"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
-msgstr ""
+msgstr "Konfigūracijos elementas"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Filter for Classes"
-msgstr ""
+msgstr "Klasių filtras"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
 msgstr ""
+"Norėdami sukurti naują konfigūracijos elementą, sąraše pasirinkite klasę."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
-msgstr ""
+msgstr "ITSM ConfigItem Bulk Action"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
-msgstr ""
+msgstr "Diegimo būsena"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "Incidento būsena"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
-msgstr ""
+msgstr "Nuoroda į kitą"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Invalid Configuration Item number!"
-msgstr ""
+msgstr "Neteisingas konfigūracijos elemento numeris!"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "The number of another Configuration Item to link with."
-msgstr ""
+msgstr "Kito konfigūracijos elemento, su kuriuo norite susieti, numeris."
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti šį konfigūracijos elementą?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
-msgstr ""
+msgstr "Šio konfigūracijos elemento pavadinimas"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Pavadinimas jau naudojamas ConfigItems su šiuo (-iais) numeriu (-iais): %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
-msgstr ""
+msgstr "Konfigūracijos elemento istorija: %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
-msgstr ""
+msgstr "Istorijos turinys"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "Createtime"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -124,235 +131,237 @@ msgstr "Pritraukti apžvalgą"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Context Settings"
-msgstr ""
+msgstr "Konteksto nustatymai"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
-msgstr ""
+msgstr "Konfigūracijos elementai viename puslapyje"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "A generic ITSM Configuration Item table"
-msgstr ""
+msgstr "Bendra ITSM konfigūracijos elementų lentelė"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "Vykdyti paiešką"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
-msgstr ""
+msgstr "Taip pat ieškoti ankstesnėse versijose?"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
-msgstr ""
+msgstr "Konfigūracijos elementas"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Information"
-msgstr ""
+msgstr "Konfigūracijos elemento informacija"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Deployment State"
-msgstr ""
+msgstr "Dabartinė diegimo būsena"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
-msgstr ""
+msgstr "Paskutinį kartą pakeitė"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show one version"
-msgstr ""
+msgstr "Rodyti vieną versiją"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show all versions"
-msgstr ""
+msgstr "Rodyti visas versijas"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Incident State"
-msgstr ""
+msgstr "Versija Incidento būsena"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Deployment State"
-msgstr ""
+msgstr "Versijos diegimo būsena"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number"
-msgstr ""
+msgstr "Versijos numeris"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Version Details"
-msgstr ""
+msgstr "Konfigūracijos elemento versijos informacija"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Property"
-msgstr ""
+msgstr "Turtas"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "No access to Class is given!"
-msgstr ""
+msgstr "Prieiga prie klasės nesuteikiama!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
-msgstr ""
+msgstr "Apžvalga: ITSM ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No ConfigItemID is given!"
-msgstr ""
+msgstr "Nenurodytas joks ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You need at least one selected Configuration Item!"
-msgstr ""
+msgstr "Reikia bent vieno pasirinkto konfigūracijos elemento!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
-msgstr ""
+msgstr "Jūs neturite prieigos prie šio konfigūracijos elemento rašyti: %s."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
-msgstr ""
+msgstr "Konfigūracijos elementas \"%s\" nerastas duomenų bazėje!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Was not able to delete the configitem ID %s!"
-msgstr ""
+msgstr "Nepavyko ištrinti konfigūracijos elemento ID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "No version found for ConfigItemID %s!"
-msgstr ""
+msgstr "ConfigItemID %s versija nerasta!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No ConfigItemID, DuplicateID or ClassID is given!"
-msgstr ""
+msgstr "Nenurodytas ConfigItemID, DuplicateID arba ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
-msgstr ""
+msgstr "Prieiga nesuteikiama!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No definition was defined for class %s!"
-msgstr ""
+msgstr "Klasei %s neapibrėžtas joks apibrėžimas!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
-msgstr ""
+msgstr "Negalima rodyti istorijos, nepateiktas ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
+msgstr "Negalima rodyti istorijos, nes nesuteiktos prieigos teisės!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
-msgstr ""
+msgstr "Naujas konfigūracijos elementas (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New version (ID=%s)"
-msgstr ""
+msgstr "Nauja versija (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Atnaujinta diegimo būsena (new=%s, old=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Incident state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Atnaujinta incidento būsena (new=%s, old=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem (ID=%s) deleted"
-msgstr ""
+msgstr "Konfigūracijos elementas (ID=%s) ištrintas"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) added"
-msgstr ""
+msgstr "Pridėta nuoroda į %s (type=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) deleted"
-msgstr ""
+msgstr "Nuoroda į %s (type=%s) pašalinta"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem definition updated (ID=%s)"
-msgstr ""
+msgstr "Atnaujinta ConfigItem apibrėžtis (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Name updated (new=%s, old=%s)"
-msgstr ""
+msgstr "Pavadinimas atnaujintas (new=%s, old=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Attribute %s updated from \"%s\" to \"%s\""
-msgstr ""
+msgstr "Atributas %s atnaujintas iš \"%s\" į \"%s\""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Version %s deleted"
-msgstr ""
+msgstr "Versija %s ištrinta"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
-msgstr ""
+msgstr "Nenurodytas ConfigItemID arba VersionID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
 msgstr ""
+"Negalima parodyti konfigūracijos elemento, nes nesuteiktos prieigos teisės!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr ""
+msgstr "Duomenų bazėje nerasta ConfigItemID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
-msgstr ""
+msgstr "Duomenų bazėje nerastas VersionID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
-msgstr ""
+msgstr "ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
-msgstr ""
+msgstr "%s spausdina %s adresu %s"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
-msgstr ""
+msgstr "Neteisingas ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No ClassID is given!"
-msgstr ""
+msgstr "Nenurodytas joks ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No access rights for this class given!"
-msgstr ""
+msgstr "Šiai klasei prieigos teisės nesuteiktos!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No Result!"
-msgstr ""
+msgstr "Jokio rezultato!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Config Item Search Results"
-msgstr ""
+msgstr "Konfigūracijos elemento paieškos rezultatai"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr ""
+"Negalima parodyti elemento, nes nesuteiktos prieigos teisės prie ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "veiklos"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "įspėjimas"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "incidentas"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
-msgstr ""
+msgstr "Šio konfigūracijos elemento diegimo būsena"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The incident state of this config item"
-msgstr ""
+msgstr "Šio konfigūracijos elemento incidento būsena"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
-msgstr ""
+msgstr "Rodomi konfigūracijos elementai"
 
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
@@ -360,251 +369,251 @@ msgstr "Tarp"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
-msgstr ""
+msgstr "Didžiausias vieno elemento skaičius"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Empty fields indicate that the current values are kept"
-msgstr ""
+msgstr "Tušti laukai rodo, kad dabartinės reikšmės paliekamos."
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Skipped"
-msgstr ""
+msgstr "Praleistas"
 
 #. ITSM class bundles
 msgid "Model"
-msgstr ""
+msgstr "Modelis"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Kliento įmonė"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
-msgstr ""
+msgstr "Serijos numeris"
 
 #. ITSM class bundles
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Ram"
-msgstr ""
+msgstr "Ram"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Hard Disk"
-msgstr ""
+msgstr "Kietasis diskas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Capacity"
-msgstr ""
+msgstr "Talpa"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Adapter"
-msgstr ""
+msgstr "Tinklo adapteris"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "IP over DHCP"
-msgstr ""
+msgstr "IP per DHCP"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "IP Address"
-msgstr ""
+msgstr "IP adresas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Graphic Adapter"
-msgstr ""
+msgstr "Grafinis adapteris"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Other Equipment"
-msgstr ""
+msgstr "Kita įranga"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Warranty Expiration Date"
-msgstr ""
+msgstr "Garantijos galiojimo data"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Install Date"
-msgstr ""
+msgstr "Įdiegimo data"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 1"
-msgstr ""
+msgstr "Telefonas 1"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 2"
-msgstr ""
+msgstr "Telefonas 2"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "E-Mail"
-msgstr ""
+msgstr "El. paštas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Address"
-msgstr ""
+msgstr "Tinklo adresas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Subnet Mask"
-msgstr ""
+msgstr "Tinklo potinklio kaukė"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Gateway"
-msgstr ""
+msgstr "Vartai"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Licence Type"
-msgstr ""
+msgstr "Licencijos tipas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Licence Key"
-msgstr ""
+msgstr "Licencijos raktas"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Quantity"
-msgstr ""
+msgstr "Kiekis"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Expiration Date"
-msgstr ""
+msgstr "Galiojimo data"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Media"
-msgstr ""
+msgstr "Žiniasklaida"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Computer"
-msgstr ""
+msgstr "Kompiuteris"
 
 #. ITSM class bundles
 msgid "Hardware"
-msgstr ""
+msgstr "Techninė įranga"
 
 #. ITSM class bundles
 msgid "Network"
-msgstr ""
+msgstr "Tinklas"
 
 #. ITSM class bundles
 msgid "Software"
-msgstr ""
+msgstr "Programinė įranga"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
-msgstr ""
+msgstr "Pasibaigęs"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
-msgstr ""
+msgstr "Techninė priežiūra"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
-msgstr ""
+msgstr "Bandomasis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
-msgstr ""
+msgstr "Planuojama"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
-msgstr ""
+msgstr "Remontas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
-msgstr ""
+msgstr "Išėjęs į pensiją"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
-msgstr ""
+msgstr "Peržiūrėkite"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
-msgstr ""
+msgstr "Testavimas / kokybės užtikrinimas"
 
 #. ITSM class bundles
 msgid "Laptop"
-msgstr ""
+msgstr "Nešiojamasis kompiuteris"
 
 #. ITSM class bundles
 msgid "Desktop"
-msgstr ""
+msgstr "Stalinis kompiuteris"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "PDA"
-msgstr ""
+msgstr "PDA"
 
 #. ITSM class bundles
 msgid "Server"
-msgstr ""
+msgstr "Serveris"
 
 #. ITSM class bundles
 msgid "Other"
-msgstr ""
+msgstr "Kita"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Monitor"
-msgstr ""
+msgstr "Monitorius"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Printer"
-msgstr ""
+msgstr "Spausdintuvas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Switch"
-msgstr ""
+msgstr "Perjungti"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Router"
-msgstr ""
+msgstr "Maršrutizatorius"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "WLAN Access Point"
-msgstr ""
+msgstr "WLAN prieigos taškas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Security Device"
-msgstr ""
+msgstr "Apsaugos įrenginys"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Backup Device"
-msgstr ""
+msgstr "Atsarginės kopijos įrenginys"
 
 #. ITSM class bundles
 msgid "Mouse"
-msgstr ""
+msgstr "Pelė"
 
 #. ITSM class bundles
 msgid "Keyboard"
-msgstr ""
+msgstr "Klaviatūra"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Camera"
-msgstr ""
+msgstr "Fotoaparatas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Beamer"
-msgstr ""
+msgstr "Beamer"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Modem"
-msgstr ""
+msgstr "Modemas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "PCMCIA Card"
-msgstr ""
+msgstr "PCMCIA kortelė"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "USB Device"
-msgstr ""
+msgstr "USB įrenginys"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Docking Station"
-msgstr ""
+msgstr "Prisijungimo stotis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Scanner"
-msgstr ""
+msgstr "Skeneris"
 
 #. ITSM class bundles
 msgid "Building"
-msgstr ""
+msgstr "Pastatas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Office"
@@ -612,371 +621,478 @@ msgstr "Biuras"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Floor"
-msgstr ""
+msgstr "Grindys"
 
 #. ITSM class bundles
 msgid "Room"
-msgstr ""
+msgstr "Kambarys"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Rack"
-msgstr ""
+msgstr "Stovas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Workplace"
-msgstr ""
+msgstr "Darbo vieta"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Outlet"
-msgstr ""
+msgstr "Išėjimas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "IT Facility"
-msgstr ""
+msgstr "IT priemonė"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "LAN"
-msgstr ""
+msgstr "LAN"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "WLAN"
-msgstr ""
+msgstr "WLAN"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Telco"
-msgstr ""
+msgstr "Telco"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "GSM"
-msgstr ""
+msgstr "GSM"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client Application"
-msgstr ""
+msgstr "Kliento paraiška"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Middleware"
-msgstr ""
+msgstr "Tarpinė programinė įranga"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Server Application"
-msgstr ""
+msgstr "Serverio taikymas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client OS"
-msgstr ""
+msgstr "Kliento OS"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Server OS"
-msgstr ""
+msgstr "Serverio operacinė sistema"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Admin Tool"
-msgstr ""
+msgstr "Administratoriaus įrankis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "User Tool"
-msgstr ""
+msgstr "Naudotojo įrankis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Embedded"
-msgstr ""
+msgstr "Įterptasis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Single Licence"
-msgstr ""
+msgstr "Viena licencija"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per User"
-msgstr ""
+msgstr "Vienam naudotojui"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Processor"
-msgstr ""
+msgstr "Vienam procesoriui"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Server"
-msgstr ""
+msgstr "Vienam serveriui"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Node"
-msgstr ""
+msgstr "Vienam mazgui"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Volume Licence"
-msgstr ""
+msgstr "Tūrio licencija"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Enterprise Licence"
-msgstr ""
+msgstr "Įmonės licencija"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Developer Licence"
-msgstr ""
+msgstr "Kūrėjo licencija"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Demo"
-msgstr ""
+msgstr "Demo"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Time Restricted"
-msgstr ""
+msgstr "Apribotas laikas"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Freeware"
-msgstr ""
+msgstr "Nemokama programinė įranga"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Open Source"
-msgstr ""
+msgstr "Atviras šaltinis"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Unlimited"
-msgstr ""
+msgstr "Neribotas"
 
 #. JS File: ITSM.Agent.ConfigItem.Zoom
 msgid "Ok"
-msgstr ""
+msgstr "Gerai"
 
 #. SysConfig
 msgid "Assigned CIs"
-msgstr ""
+msgstr "Priskirti KI"
 
 #. SysConfig
 msgid "CIs assigned to customer company"
-msgstr ""
+msgstr "Kliento įmonei priskirti KI"
 
 #. SysConfig
 msgid "CIs assigned to customer user"
-msgstr ""
+msgstr "Kliento naudotojui priskirti CI"
 
 #. SysConfig
 msgid "CMDB Settings"
-msgstr ""
+msgstr "CMDB nustatymai"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr ""
+"Unikalaus pavadinimo tikrinama tik toje pačioje ConfigItem klasėje (\"class\""
+") arba pasauliniu mastu (\"global\"), todėl ieškant pasikartojimų "
+"atsižvelgiama į kiekvieną esamą ConfigItem."
 
 #. SysConfig
 msgid "Config Items"
-msgstr ""
+msgstr "Konfigūracijos elementai"
 
 #. SysConfig
 msgid "Config item add."
-msgstr ""
+msgstr "Konfigūracijos elemento pridėjimas."
 
 #. SysConfig
 msgid "Config item edit."
-msgstr ""
+msgstr "Konfigūracijos elemento redagavimas."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
 msgstr ""
+"Konfigūruokite elemento įvykių modulį, kuris leidžia registruoti istoriją "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Config item history."
-msgstr ""
+msgstr "Konfigūracijos elementų istorija."
 
 #. SysConfig
 msgid "Config item print."
-msgstr ""
+msgstr "Konfigūracijos elemento spausdinimas."
 
 #. SysConfig
 msgid "Config item zoom."
-msgstr ""
+msgstr "Konfigūruoti elemento priartinimą."
 
 #. SysConfig
 msgid "ConfigItemNumber"
-msgstr ""
+msgstr "ConfigItemNumber"
 
 #. SysConfig
 msgid "Configuration Item Limit"
-msgstr ""
+msgstr "Konfigūracijos elemento riba"
 
 #. SysConfig
 msgid "Configuration Item limit per page."
-msgstr ""
+msgstr "Konfigūracijos elementų limitas viename puslapyje."
 
 #. SysConfig
 msgid "Configuration Management Database."
-msgstr ""
+msgstr "Konfigūracijos valdymo duomenų bazė."
 
 #. SysConfig
 msgid "Configuration item bulk module."
-msgstr ""
+msgstr "Konfigūracijos elemento masinis modulis."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
 msgstr ""
+"Konfigūracijos elemento paieška agento sąsajos galiniame maršrutizatoriuje."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
-msgstr ""
+msgstr "Sukurkite ir tvarkykite konfigūracijos elementų apibrėžtis."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"Apibrėžti veiksmus, kai susietų objektų valdiklyje (LinkObject::ViewMode = "
+"\"complex\") yra nustatymų mygtukas. Atkreipkite dėmesį, kad šiuose "
+"veiksmuose turi būti užregistruoti šie JS ir CSS failai: "
+"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
+"Core.Agent.TableFilters.js ir Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
 msgstr ""
+"Apibrėžiami reikalingi leidimai kurti ITSM konfigūracijos elementus "
+"naudojant bendrąją sąsają."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
 msgstr ""
+"Apibrėžiami reikalingi leidimai ištrinti ITSM konfigūracijos elementus "
+"naudojant bendrąją sąsają."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
 msgstr ""
+"Apibrėžiami reikalingi leidimai gauti ITSM konfigūracijos elementus "
+"naudojant bendrąją sąsają."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
 msgstr ""
+"Apibrėžiami reikalingi leidimai ieškoti ITSM konfigūracijos elementų "
+"naudojant bendrąją sąsają."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
 msgstr ""
+"Apibrėžiami reikalingi leidimai atnaujinti ITSM konfigūracijos elementus "
+"naudojant bendrąją sąsają."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
 msgstr ""
+"Apibrėžia apžvalgos modulį, skirtą mažajam konfigūracijos elementų sąrašo "
+"vaizdui rodyti."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
 msgstr ""
+"Apibrėžia reguliarias išraiškas atskirai kiekvienai \"ConfigItem\" klasei, "
+"kad būtų galima patikrinti \"ConfigItem\" pavadinimą ir rodyti atitinkamus "
+"klaidų pranešimus."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "Apibrėžia numatytąjį klasės \"ITSMConfigItem\" subobjektą."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
 msgstr ""
+"Nustato CI apibrėžimo redaktoriaus eilučių skaičių administratoriaus "
+"sąsajoje."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
 msgstr ""
+"Nustato įvykio būsenų eiliškumą nuo aukštų (pvz., kritiškų) iki žemų (pvz., "
+"funkcinių)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
 msgstr ""
+"Apibrėžiamos atitinkamos diegimo būsenos, kuriose susieti bilietai gali "
+"turėti įtakos CI būsenai."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "Nustato AgentITSMConfigItem ekrano paieškos ribą."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Nustato AgentITSMConfigItemSearch ekrano paieškos ribą."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
 msgstr ""
+"Nustato rodomus stulpelius konfigūracijos elementų apžvalgoje. Ši parinktis "
+"neturi įtakos stulpelio padėčiai. Pastaba: klasės stulpelis visada rodomas, "
+"jei pasirinktas filtras \"All\" (visi)."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
 msgstr ""
+"Nustato konfigūracijos elementų paieškos metu rodomus stulpelius. Ši "
+"parinktis neturi įtakos stulpelio padėčiai."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"Nustato konfigūracijos elementų apžvalgoje rodomus KI stulpelius, "
+"priklausomai nuo KI klasės. Kiekvieno įrašo priešdėlis turi būti klasės "
+"pavadinimas ir dvigubi dvitaškiai (t. y. Computer::). Yra keletas CI "
+"atributų, kurie yra bendri visiems CI (klasės Computer (Kompiuteris) "
+"pavyzdys: Computer::Name, Computer::CurDeplState, Computer::CreateTime). "
+"Norint parodyti atskirus CI atributus, apibrėžtus CI apibrėžtyje, reikia "
+"naudoti tokią schemą (klasės Computer pavyzdys): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Jei nėra CI klasės įrašo, rodomi "
+"numatytieji stulpeliai, kaip apibrėžta nustatyme "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem####ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"Nustato rodomus KI stulpelius konfigūracijos elementų paieškoje, "
+"priklausomai nuo KI klasės. Kiekvieno įrašo priešdėlis turi būti klasės "
+"pavadinimas ir dvigubi dvitaškiai (t. y. Computer::). Yra keletas CI "
+"atributų, kurie yra bendri visiems CI (klasės Computer (Kompiuteris) "
+"pavyzdys: Computer::Name, Computer::CurDeplState, Computer::CreateTime). "
+"Norint parodyti atskirus CI atributus, apibrėžtus CI apibrėžtyje, reikia "
+"naudoti tokią schemą (klasės Computer pavyzdys): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Jei nėra CI klasės įrašo, rodomi "
+"numatytieji stulpeliai, kaip apibrėžta nustatyme "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem####ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"Nustato konfigūracijos elemento valdiklyje rodomus KI stulpelius, "
+"priklausomai nuo KI klasės. Kiekvieno įrašo priešdėlis turi būti klasės "
+"pavadinimas ir dvigubi dvitaškiai (t. y. Computer::). Yra keletas CI "
+"atributų, kurie yra bendri visiems CI (klasės Computer (Kompiuteris) "
+"pavyzdys: Computer::Name, Computer::CurDeplState, Computer::CreateTime). "
+"Norint parodyti atskirus CI atributus, apibrėžtus CI apibrėžtyje, reikia "
+"naudoti tokią schemą (klasės Computer pavyzdys): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Jei nėra CI klasės įrašo, rodomi "
+"numatytieji stulpeliai, kaip apibrėžta nustatyme "
+"AgentCustomerInformationCenter::Backend####0060-CIC-"
+"ITSMConfigItemCustomerCompany (raktas DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
 msgstr ""
+"Nustato nuorodų lentelės sudėtingame rodinyje rodomus visų klasių KI "
+"stulpelius. Jei įrašo nėra, rodomi numatytieji stulpeliai."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
 msgstr ""
+"Nustato nuorodų lentelės sudėtingame rodinyje rodomus KI stulpelius, "
+"priklausomai nuo KI klasės. Prieš kiekvieną įrašą turi būti įrašytas klasės "
+"pavadinimas ir dvigubi dvitaškiai (t. y. Computer::). Yra keletas CI "
+"atributų, kurie bendri visiems CI (pavyzdys klasės Computer (Kompiuteris): "
+"Computer::Name, Computer::CurDeplState, Computer::CreateTime). Norint "
+"parodyti atskirus CI atributus, apibrėžtus CI apibrėžtyje, reikia naudoti "
+"tokią schemą (klasės Computer pavyzdys): Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1. Jei nėra CI klasės įrašo, rodomi "
+"numatytuosius nustatymus atitinkantys stulpeliai."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
 msgstr ""
+"Apibrėžia, kokio tipo nuoroda (įvardyta iš bilieto perspektyvos) gali turėti "
+"įtakos susietos CI būklei."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "Nustato, kokio tipo bilietas gali turėti įtakos susietos CI būklei."
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "Ištrinti konfigūracijos elementą"
 
 #. SysConfig
 msgid "Deployment State Color"
-msgstr ""
+msgstr "Diegimo būsenos spalva"
 
 #. SysConfig
 msgid "Duplicate"
-msgstr ""
+msgstr "Dublikatas"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
 msgstr ""
+"Įjungiama konfigūracijos elemento masinio veiksmo funkcija, kad agento "
+"priekinėje dalyje vienu metu būtų galima dirbti su daugiau nei vienu "
+"konfigūracijos elementu."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
 msgstr ""
+"Įjungiama konfigūracijos elemento masinio veiksmo funkcija tik išvardytoms "
+"grupėms."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
 msgstr ""
+"Įjungiama / išjungiama funkcija, skirta patikrinti, ar \"ConfigItems\" turi "
+"unikalius pavadinimus. Prieš įjungdami šią parinktį, turėtumėte patikrinti, "
+"ar jūsų sistemoje nėra jau esamų konfigūracijos elementų su "
+"pasikartojančiais pavadinimais. Tai galite padaryti naudodami scenarijų bin/"
+"otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
 msgstr ""
+"Įvykių modulis, skirtas nustatyti \"ticket-configitem-link\" konfigūracijos "
+"elemento būseną."
 
 #. SysConfig
 msgid "ITSM config item overview."
-msgstr ""
+msgstr "ITSM konfigūracijos elementų apžvalga."
 
 #. SysConfig
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "Modulis, skirtas už klasę atsakingai grupei patikrinti."
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
 msgstr ""
+"Modulis, skirtas patikrinti grupę, atsakingą už konfigūracijos elementą."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "ITSM konfigūracijos elementų statistikos generavimo modulis."
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "Objekto galinio modulio registracija importo/eksporto modulyje."
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "Apžvalga."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"Kliento įmonės konfigūracijos elemento peržiūros agento sąsajos prietaisų "
+"skydelio backend parametrai . \"Limit\" (riba) - pagal numatytuosius "
+"nustatymus rodomų įrašų skaičius. \"Group\" (grupė) naudojama norint "
+"apriboti prieigą prie įskiepio (pvz., Group: admin;group1;group2;). \"Default"
+"\" (pagal numatytuosius nustatymus) nustato, ar įskiepis įjungtas pagal "
+"numatytuosius nustatymus, ar naudotojas turi jį įjungti rankiniu būdu. "
+"\"CacheTTLLocal\" (spartinančioji atmintinė) - įskiepio spartinančiosios "
+"atmintinės laikas minutėmis."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
 msgstr ""
+"Įdiegimo būsenų parametrai nuspalvinti agento sąsajos nuostatų rodinyje."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
+msgstr "diegimo būsenų parametrai agento sąsajos nuostatų rodinyje."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr ""
+msgstr "Bendrųjų katalogo atributų leidimų grupių pavyzdžių parametrai."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "Puslapių (kuriuose rodomi konfigūracijos elementai) parametrai."
 
 #. SysConfig
 msgid "Permission Group"
@@ -985,738 +1101,971 @@ msgstr ""
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elemento ekraną agento "
+"sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elementų paieškos langą "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elemento priartinimo ekraną "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elemento pridėjimo langą "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elemento redagavimo ekraną "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai, kad būtų galima naudoti agento sąsajos istorijos ITSM "
+"konfigūracijos elemento ekraną."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai, kad būtų galima naudoti agento sąsajos ITSM "
+"konfigūracijos elemento spausdinimo ekraną."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "Reikalingos privilegijos norint ištrinti konfigūracijos elementus."
 
 #. SysConfig
 msgid "Search config items."
-msgstr ""
+msgstr "Ieškoti konfigūracijos elementų."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
 msgstr ""
+"Pasirenkamas konfigūracijos elemento numerio generatoriaus modulis. "
+"\"AutoIncrement\" didina konfigūracijos elemento numerį, naudojami SystemID, "
+"ConfigItemClassID ir skaitiklis. Formatas yra \"SystemID.ConfigItemClassID."
+"Counter\" (Sistemos ID.ConfigItemClassID.Skaitiklis), pvz. 1205000004, "
+"1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
 msgstr ""
+"Automatiškai nustatykite KI incidento būseną, kai bilietas susiejamas su KI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
 msgstr ""
+"Nustato diegimo būseną agento sąsajos konfigūracijos elemento didmeniniame "
+"ekrane."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
 msgstr ""
+"Nustato incidento būseną agento sąsajos konfigūracijos elemento didmeninės "
+"konfigūracijos ekrane."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
 msgstr ""
+"Meniu rodoma nuoroda, leidžianti susieti konfigūracijos elementą su kitu "
+"objektu agento sąsajos konfigūracijos elemento priartinimo rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Rodo meniu nuorodą, skirtą pasiekti konfigūracijos elemento istoriją agento "
+"sąsajos konfigūracijos elementų apžvalgoje."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Meniu rodoma nuoroda, kuria galima pasiekti konfigūracijos elemento istoriją "
+"agento sąsajos priartinimo rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
 msgstr ""
+"Rodoma meniu nuoroda, skirta ištrinti konfigūracijos elementą jo "
+"priartintame agento sąsajos rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Rodoma meniu nuoroda, skirta dubliuoti konfigūracijos elementą agento "
+"sąsajos konfigūracijos elementų apžvalgoje."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Meniu rodoma nuoroda, skirta konfigūracijos elementui dubliuoti agento "
+"sąsajos priartinimo rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Rodoma meniu nuoroda, skirta redaguoti konfigūracijos elementą agento "
+"sąsajos priartintame rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
 msgstr ""
+"Meniu rodoma nuoroda, kuria galima grįžti į agento sąsajos konfigūracijos "
+"elemento priartinimo rodinį."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Rodoma meniu nuoroda, skirta spausdinti konfigūracijos elementą agento "
+"sąsajos priartintame rodinyje."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"Rodoma meniu nuoroda, skirta priartinti konfigūracijos elementą agento "
+"sąsajos konfigūracijos elementų apžvalgoje."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
 msgstr ""
+"Rodo konfigūracijos elementų istoriją (atvirkštine tvarka) agento sąsajoje."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
 msgstr ""
+"Konfigūracijos elemento identifikatorius, pvz., ConfigItem#, MyConfigItem#. "
+"Numatytoji reikšmė yra ConfigItem#."
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "klasė"
 
 #. SysConfig
 msgid "global"
-msgstr ""
+msgstr "pasaulinis"
 
 #. SysConfig
 msgid "postproductive"
-msgstr ""
+msgstr "postprodukcinis"
 
 #. SysConfig
 msgid "preproductive"
-msgstr ""
+msgstr "priešprodukcinis"
 
 #. SysConfig
 msgid "productive"
-msgstr ""
+msgstr "produktyvus"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Keisti vaidmens apibrėžtį"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "\"Ready2Import\" klasių paketai"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"Čia galite importuoti \"Ready2Import\" klasių paketus, kuriuose "
+"demonstruojami įprastiniai konfigūracijos elementai. Atkreipkite dėmesį, kad "
+"gali prireikti tam tikros papildomos konfigūracijos."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "Atnaujinti esamus subjektus"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "Importuoti \"Ready2Adopt\" klasės paketus"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Konfigūracijos elemento vaidmuo"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "Šio konfigūracijos elemento versijos numeris"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Versijos numeris jau naudojamas \"ConfigItems\" su šiuo (-iais) numeriu "
+"(-iais): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "Konfigūracijos elemento duomenų nerasta."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "Pasirinkite šį konfigūracijos elementą"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "\"ConfigItem\" medžio rodinys"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "Gylio lygis"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "Padidinti / sumažinti mastelį"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "Pasiektas maksimalus ConfigItem nuorodų lygis!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "Jūsų ConfigItems"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "ConfigItem Paieška"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Objekto tipas"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "Importuojamos šios klasės"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "Bus importuojami šie vaidmenys"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"Atkreipkite dėmesį, kad taip pat bus sukurti atitinkami dinaminiai laukai ir "
+"\"GeneralCatalog\" klasės, o automatinio pašalinimo nebus."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Ar norite tęsti?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "Reikia pavyzdžių klasių!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "Apibrėžtis nėra galiojantis YAML hash."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "ConfigItem nerastas!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "Versijų nerasta!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Leidimo nėra"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "Filtras negalioja!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "Paieškos parametrai negalioja!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "Konfigūracijos elemento klasės apribojimai"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
 msgstr ""
+"Pasirinkite vieną ar daugiau klasių, kad apribotumėte pasirenkamus "
+"konfigūracijos elementus"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "Nuorodos tipas"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "Pasirinkite nuorodos tipą."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "Įžaidėjai: (Šaltinis) -> Nuoroda (Tikslas)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "Atgal: (Šaltinis) -> Nuoroda (Tikslas)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "Nuorodos kryptis"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 msgstr ""
+"Nuorodos objektas yra tas, kuriame yra šis dinaminis laukas, o nuorodos "
+"objektas yra tas, kuris pasirinktas kaip dinaminio lauko reikšmė."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "Dinaminis (ConfigItem)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "Statinis (versija)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "Nuorodos tipas"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 msgstr ""
+"Ar ši sąsaja taikoma ConfigItem, ar statinei nuorodą pateikiančio objekto "
+"versijai. Dabartinės incidento būsenos skaičiavimas atliekamas tik "
+"dinaminėms nuorodoms."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
+msgstr "Pasirinkite atributą, pagal kurį bus ieškoma konfigūracijos elementų"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "YAML eilutę reikia pradėti nuo '---'."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "Nepavyko išvalyti lentelės configitem_link."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "Nerastas nė vienas svarbus dinaminis laukas"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "Nepavyko įterpti į lentelę configitem_link"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "Į lentelę configitem_link įterpta 0 eilučių"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
+msgstr "Klaida sinchronizuojant apibrėžtis. Patikrinkite žurnalą."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 msgstr ""
+"Turite ITSMConfigItem apibrėžtis, kurios nėra sinchronizuotos. Įdiekite savo "
+"ITSMConfigItem dinaminių laukų pakeitimus."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "Apžvalga ir patvirtinimas"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "Importuojant klasę įvyko klaida."
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - Paslėpta"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - parodyta"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Leidžia taikyti išplėstines paieškos sąlygas agento sąsajos konfigūracijos "
+"elementų paieškai. Naudodami šią funkciją galite ieškoti, pvz., "
+"konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip \""
+"(*key1*&&*key2*)\" arba \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Leidžia taikyti išplėstines paieškos sąlygas klientų sąsajos konfigūracijos "
+"elementų paieškoje. Naudodami šią funkciją galite ieškoti, pvz., "
+"konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip \""
+"(*key1*&&*key2*)\" arba \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "Pasirinkite modulį, kuris užtikrins pavadinimų schemą."
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "Pasirinkite modulį, kuris užtikrins numerių schemą."
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "Pasirinkite modulį, kuris užtikrins versijų eilučių schemą."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
+msgstr "Pasirinkite atributus, kad būtų sukurta nauja versija."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
 msgstr ""
+"Pasirinkite kategorijas, kurias norite priskirti šiai konfigūracijos "
+"elementų klasei."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
+msgstr "Stulpelio konfigūracijos elementų filtrai ConfigItem Overview."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elementų "
+"apžvalgoje. Pastaba: Leidžiami tik konfigūracijos elemento atributai ir "
+"dinaminiai laukai (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Stulpeliai, kuriuos galima filtruoti kliento sąsajos konfigūracijos elementų "
+"apžvalgoje. Pastaba: leidžiama naudoti tik konfigūracijos elemento atributus "
+"ir dinaminius laukus (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr ""
+"Konfigūracijos elementų įvykių modulis, kuris atnaujina konfigūracijos "
+"elementų dabartinę apibrėžtį."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
 msgstr ""
+"Konfigūracijos elemento įvykių modulis, kuris atnaujina lentelę "
+"configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
 msgstr ""
+"Konfigūracijos elemento įvykio modulis atnaujina esamą incidento būseną."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "Konfigūracijos elementų medžio vaizdas"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "ConfigItem Versija"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"Šių klasių ConfigItems nebus saugomi \"Elasticsearch\" serveryje. Norint tai "
+"pritaikyti esamiems CI, CI migraciją reikia paleisti per konsolę, pakeitus "
+"šią parinktį."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"\"Elasticsearch\" serveryje nebus saugomi \"ConfigItems\" su šiomis diegimo "
+"būsenomis. Norint tai pritaikyti esamiems CI, CI perkėlimą reikia paleisti "
+"per konsolę, pakeitus šią parinktį."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "Klientai gali matyti istorines CI versijas."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
+msgstr "Klientai turi galimybę rankiniu būdu perjungti istorines CI versijas."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Numatytieji duomenys, kuriuos reikia naudoti konfigūracijos elemento "
+"paieškos ekrano atributui. Pavyzdys: \"ITSMConfigItemCreateTimePointFormat=ye"
+"ar;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\""
+"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Numatytieji duomenys, kuriuos reikia naudoti konfigūracijos elemento "
+"paieškos ekrano atributui. Pavyzdys: \"ITSMConfigItemCreateTimeStartYear=2010"
+";ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITS"
+"MConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMC"
+"onfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr ""
+"Apibrėžkite \"Template::Toolkit\" schemą, skirtą versijų eilutėms. Naudojama "
+"tik tada, jei versijų eilučių modulis nustatytas į TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 msgstr ""
+"Apibrėžkite sąlygų, kuriomis klientui leidžiama matyti konfigūracijos "
+"elementą, rinkinį. Sąlygas galima apriboti tam tikroms klientų grupėms. "
+"Pavadinimas yra vienintelis privalomas atributas. Jei kitų parinkčių "
+"nenurodyta, visi konfigūracijos elementai bus matomi toje kategorijoje."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "Nustato, ar mazgų jungtyse turi būti rodomos nuorodos tipo etiketės."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Nustato galimus KI stulpelius konfigūracijos elementų apžvalgoje, "
+"priklausomai nuo KI klasės. Kiekvieną įrašą turi sudaryti klasės pavadinimas "
+"ir atitinkamos klasės galimų laukų masyvas. Dinaminių laukų įrašai turi "
+"atitikti schemą DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Nustato numatytojo konfigūracijos elemento atributą konfigūracijos elementų "
+"rūšiavimui agento sąsajos konfigūracijos elementų paieškos rezultatuose."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 msgstr ""
+"Nustato numatytąjį konfigūracijos elemento atributą konfigūracijos elementų "
+"rūšiavimui klientų sąsajos konfigūracijos elementų paieškos rezultatuose."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Nustato numatytojo konfigūracijos elemento atributą, skirtą šios operacijos "
+"konfigūracijos elementų paieškos rezultatui rūšiuoti."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Nustato numatytąją konfigūracijos elementų tvarką agento sąsajos "
+"konfigūracijos elementų paieškos rezultatuose. Aukštyn: seniausias viršuje. "
+"Žemyn: naujausias viršuje."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Nustato numatytoji konfigūracijos elementų tvarka kliento sąsajos "
+"konfigūracijos elementų paieškos rezultatuose. Aukštyn: seniausias viršuje. "
+"Žemyn: naujausias viršuje."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Nustato numatytoji konfigūracijos elementų tvarka šios operacijos "
+"konfigūracijos elementų paieškos rezultate. Į viršų: seniausia viršuje. "
+"Žemyn: naujausias viršuje."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Nustato pagal nutylėjimą rodomus KI stulpelius konfigūracijos elementų "
+"apžvalgoje, priklausomai nuo KI klasės. Kiekvieną įrašą turi sudaryti klasės "
+"pavadinimas ir atitinkamos klasės galimų laukų masyvas. Dinaminių laukų "
+"įrašai turi atitikti schemą DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "Apibrėžiamas numatytasis rodomų santykių gylis."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Nustato pagal nutylėjimą rodomą konfigūracijos elementų paieškos atributą "
+"konfigūracijos elementų paieškos ekrane."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Nustato pagal nutylėjimą rodomą konfigūracijos elementų paieškos atributą "
+"konfigūracijos elementų paieškos ekrane. Pavyzdys: \"Key\" (raktas) turi "
+"turėti dinaminio lauko pavadinimą, šiuo atveju \"X\", \"Content\" (turinys) "
+"turi turėti dinaminio lauko reikšmę, priklausančią nuo dinaminio lauko tipo, "
+"\"Text\" (tekstas): \"a text\" (tekstas), \"Dropdown\" (išskleidžiama): \"1\""
+" (išskleidžiama), \"Date/Time\" (data ir laikas): "
+"Paieška_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' ir arba "
+"'Search_DynamicField_XTimePointFormat=savaitė; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Nustato CustomerITSMConfigItem ekrano paieškos ribą."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Nustato CustomerITSMConfigItemSearch ekrano paieškos ribą."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Apibrėžia, kuriuos elementus galima naudoti \"Action\" trečiajame ITSM "
+"Config Item ACL struktūros lygyje."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Nustato, kurie elementai yra prieinami pirmojo lygio ITSM Config Item ACL "
+"struktūroje."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Nustato, kurie elementai yra prieinami antrajame ITSM Config Item ACL "
+"struktūros lygyje."
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "Apibrėžimo atnaujinimas"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "DeplState"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "Diegimo būsena"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 msgstr ""
+"Dinaminių laukų įvykių modulis, kuris žymi konfigūracijos elementų "
+"apibrėžtis kaip nesinchronizuotas, jei pasikeičia dinaminiai laukai."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
+msgstr "Dinaminiai laukai, rodomi agento sąsajos papildomo ITSM lauko ekrane."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
 msgstr ""
+"Dinaminiai laukai, rodomi kliento sąsajos konfigūracijos elemento apžvalgos "
+"ekrane."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
 msgstr ""
+"Dinaminiai laukai, rodomi agento sąsajos konfigūracijos elementų paieškos "
+"ekrane."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 msgstr ""
+"Įjungiama / išjungiama funkcija, skirta patikrinti ITSM konfigūracijos "
+"elementų unikalius pavadinimus. Prieš įjungdami šią parinktį, turėtumėte "
+"patikrinti, ar jūsų sistemoje nėra jau esamų konfigūracijos elementų su "
+"pasikartojančiais pavadinimais. Tai galite padaryti naudodami konsolės "
+"komandą Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 msgstr ""
+"Konfigūracijos elemento indekso laukai, naudojami viso teksto paieškai. "
+"Laukai taip pat saugomi, tačiau nėra privalomi bendrai funkcijai. Priedų "
+"įtraukimą galima išjungti nustatant įrašo reikšmę 0 arba jį ištrinant."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 msgstr ""
+"Konfigūracijos elemento indekse saugomi laukai, kurie naudojami ne tik viso "
+"teksto paieškai, bet ir kitiems dalykams. Kad funkcijos būtų pilnai "
+"išnaudotos, visi laukai yra privalomi."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"Kiekvienai žiniatinklio paslaugai (raktas) galima apibrėžti klasių masyvą "
+"(reikšmė), kurio importas yra ribojamas. Visoms pasirinktoms klasėms arba "
+"visoms esamoms klasėms identifikuojantys atributai turės būti pasirinkti "
+"invokerio konfigūracijoje."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr ""
+"\"GenericInterface\" modulio registracija \"ConfigItemFetch\" iškvietėjo "
+"sluoksniui."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "InciState"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
 msgstr ""
+"Įtraukti diegimo būsenas į konfigūracijos elementų paiešką kliento sąsajoje."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
 msgstr ""
+"Įtraukti incidento būsenas į konfigūracijos elementų paiešką klientų "
+"sąsajoje."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Didžiausias konfigūracijos elementų, kurie bus rodomi šios operacijos "
+"rezultate, skaičius."
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "Pavadinimo modulis"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "Numerio modulis"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Konfigūracijos elementų, rodomų kiekviename paieškos rezultatų puslapyje "
+"agento sąsajoje, skaičius."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Konfigūracijos elementų, kurie bus rodomi kiekviename paieškos rezultatų "
+"puslapyje kliento sąsajoje, skaičius."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 msgstr ""
+"Objektų, kurių reikia ieškoti, kiek įrašų ir kokius atributus rodyti. "
+"ConfigItem atributai turi būti aiškiai saugomi per \"Elasticsearch\"."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Parametrai, skirti konfigūracijos elementų klasių kategorijoms agento "
+"sąsajos nuostatų rodinyje."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"Mažosios konfigūracijos elementų apžvalgos stulpelių filtrų parametrai. "
+"Atkreipkite dėmesį: nustačius \"Active\" vertę 0, agentai negalės redaguoti "
+"tik šios grupės nustatymų savo asmeninėse parinktyse, tačiau "
+"administratoriams vis tiek bus leidžiama redaguoti kito naudotojo "
+"nustatymus. Naudokite \"PreferenceGroup\", norėdami valdyti, kurioje srityje "
+"šie nustatymai turėtų būti rodomi naudotojo sąsajoje."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių "
+"vardų modulio parametrai."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių "
+"numerio modulio parametrai."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių "
+"versijos eilutės modulio parametrai."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių "
+"konfigūracijos eilutės šablono įrankių rinkinio modulio parametrai."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių "
+"versijos trigerio parametrai."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Atlieka sukonfigūruotą veiksmą kiekvienam įvykiui (kaip Invoker) kiekvienai "
+"sukonfigūruotai žiniatinklio paslaugai."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elemento prijungimo veiksmą "
+"agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elementų paieškos ekraną "
+"kliento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai naudoti ITSM konfigūracijos elementų medžio peržiūros "
+"ekraną agento sąsajoje."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Reikalingi leidimai, kad būtų galima naudoti agento sąsajos ITSM "
+"konfigūracijos elemento ekraną."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr ""
+"Rodo meniu nuorodą, kad konfigūracijos elementų nuorodos būtų rodomos medžio "
+"rodinyje."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "Numatytoji kategorija, kuri rodoma, jei nepasirinkta nė viena."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "Automatiškai paleidžia ConfigItemFetch invokatorių."
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "Versija Styginių eilutė Išraiška"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "Versijos eilutės modulis"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "Versija Triggeris"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"Ar galima išvengti \"ConfigItemACL\" vykdymo tikrinant talpykloje esančių "
+"laukų priklausomybes. Tai gali pagerinti formuliarų įkėlimo laiką, tačiau "
+"turi būti išjungta, jei ACLModules turi būti naudojami ITSMConfigItem- ir "
+"Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "Kokia bendra informacija pateikiama antraštėje."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Bendrieji šaukinio duomenys"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Šis OTOBO iškvietimų modulis bus iškviestas, kad paruoštų duomenis, kurie "
+"bus siunčiami į nuotolinę sistemą, ir apdorotų jos atsakymo duomenis."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Išeinančių užklausų duomenų nustatymai"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Žemėlapių sudarymas"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Duomenys iš OTOBO iškvietėjo bus apdorojami naudojant šį atvaizdavimą, kad "
+"jie taptų tokiais duomenimis, kokių tikisi nuotolinė sistema."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Atsakymo duomenys bus apdorojami šiuo atvaizdavimu, kad būtų transformuoti į "
+"tokius duomenis, kokių tikisi OTOBO iškvietėjas."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Įeinančių atsakymo duomenų nustatymai"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Įvykio duomenys"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Pridėti įvykį"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Asinchroninius įvykių paleidiklius fone tvarko OTOBO planuotuvo demonas "
+"(rekomenduojama)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "Automatinis indentifikavimo kodas"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "Komentaro/nekomentaro kodas"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "Paieška ir pakeitimas"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Pasirinkite visus"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "Per visą ekraną"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Rūšiuoti"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "Filtravimas pagal galiojančią būseną"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "Įtraukti negaliojančias ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
@@ -1724,1481 +2073,1604 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "Įtraukti negaliojančius dinaminius laukus"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "Filtruoti lauką pagal objekto tipą"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "Filtruoti lauką pagal vardų erdvę"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nauji dinaminiai laukai"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Ar norėtumėte pasinaudoti papildomais dinaminių laukų tipais? Turite visišką "
+"prieigą prie šių laukų tipų:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "Kopijuoti šį lauką"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "Atributas, kurio bus ieškoma automatinio užbaigimo metu"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "Išorinio šaltinio raktas"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 msgstr ""
+"Kai reikšmė nustatoma iš išorinio šaltinio (pvz., žiniatinklio paslauga arba "
+"importas / eksportas), ji bus interpretuojama kaip šis atributas."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "Atributas, kuris rodomas reikšmėms"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "Pasirinkite ekrano tipą"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
 msgstr ""
+"Bazinė struktūra negalioja. Pateikite masyvą su duomenimis YAML formatu."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL nepavyko importuoti dėl nežinomos klaidos, daugiau informacijos rasite "
+"OTOBO žurnaluose"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (kopija) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"Minimalios vertimo pažangos procentinė vertė kiekvienai kalbai, kad būtų "
+"galima naudoti dokumentuose."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "Prieiga prie saugyklų per http arba https."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "Automatinis Znuny4OTRSRepo plėtinių įkėlimas."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
 msgstr ""
+"Konfigūracijos konfliktų tikrinimo modulio galinio modulio registracija."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
+msgstr "Failų konfliktų tikrinimo modulio backend modulio registracija."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
+msgstr "Backend modulio registracija funkcijai \"redefine check module\"."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "Backend modulio registracija rankinio rinkinio moduliui."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "Sukurti blokavimo kabliukus, kad būtų galima pašalinti BS skelbimus."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
 msgstr ""
+"Bloko kabliukai, kuriuos reikia sukurti paketų tvarkytuvo išvesties filtrui."
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "Šakos peržiūros įsipareigojimų limitas"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "CodePolicy"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
-msgstr ""
+msgstr "Vieno puslapio įsipareigojimų limitas filialo peržiūros ekrane"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "Sukurti analizės failą"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "Sukuria analizės failą iš šio bilieto ir išsiunčia Znuny."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "Sukuria šio bilieto analizės failą."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "Apibrėžkite privačias priedų saugyklas."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Apibrėžia filtrą, kuris apdoroja HTML šablonus."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "Apibrėžia testavimo modulį, skirtą kodo politikai tikrinti."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "GIT klonavimo / išstūmimo URL priešdėlio apibrėžtis."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Dinaminio lauko apibrėžtis: Group => Grupė, turinti prieigą prie dinaminių "
+"laukų; AlwaysVisible => Laukas gali būti pašalintas (0|1); "
+"InformationAreaName => Valdiklių pavadinimas; InformationAreaSize => "
+"Valdiklių dydis ir padėtis (Large|Small); Name => Dinaminio lauko, kuris "
+"turėtų būti naudojamas, pavadinimas; Priority => Dinaminių laukų eiliškumas; "
+"State => Laukų būsena (0 = išjungtas, 1 = aktyvus, 2 = privalomas), "
+"FilterRelease => Regex, kurį turi atitikti saugyklos pavadinimas, kad būtų "
+"rodomas, FilterPackage => Regex, kurį turi atitikti paketo pavadinimas, kad "
+"būtų rodomas, FilterBranch => Regex, kurį turi atitikti šakos pavadinimas, "
+"kad būtų rodomas, FilterRelease => Regex, kurį turi atitikti repelentinės "
+"versijos eilutė, kad būtų rodomas."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Dinaminio lauko apibrėžtis: Group => Grupė, turinti prieigą prie dinaminių "
+"laukų; AlwaysVisible => Laukas gali būti pašalintas (0|1); "
+"InformationAreaName => Valdiklių pavadinimas; InformationAreaSize => "
+"Valdiklių dydis ir padėtis (Large|Small); Name => Dinaminio lauko, kuris "
+"turėtų būti naudojamas, pavadinimas; Priority => Dinaminių laukų eiliškumas; "
+"State => Laukų būsena (0 = išjungtas, 1 = aktyvus, 2 = privalomas), "
+"FilterRepository => Regex, kurį turi atitikti saugyklos pavadinimas, kad "
+"būtų rodomas, FilterPackage => Regex, kurį turi atitikti paketo pavadinimas, "
+"kad būtų rodomas, FilterBranch => Regex, kurį turi atitikti šakos "
+"pavadinimas, kad būtų rodomas, FilterRelease => Regex, kurį turi atitikti "
+"pakartotinės versijos eilutė, kad būtų rodomas."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 msgstr ""
+"Išorinių MD5 sumų apibrėžimas (raktas => MD5, reikšmė => Pardavėjas, paketo "
+"pavadinimas, versija, data)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
 msgstr ""
+"Viešųjų saugyklų užklausų ir vidinių OPMS saugyklų atitikmenų apibrėžimas."
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "Paketo būsenų apibrėžimas."
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "Pakeistų pavadinimų OPMS paketų apibrėžimas."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "Katalogas, kurį \"Git\" naudoja saugykloms talpinti į talpyklą."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "Katalogas, kurį \"Git\" naudoja laikiniems duomenims saugoti."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "Katalogas, kurį \"Git\" naudoja darbinėms kopijoms saugoti."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "Išjunkite internetines saugyklas."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 msgstr ""
+"Neregistruokite šių naudotojų git ssh ryšio autorizavimo rezultatų. Naudinga "
+"automatizuotiems dalykams."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Dinaminių laukų ekranai"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
-msgstr ""
+msgstr "Eksportuokite visus turimus viešuosius raktus į authorized_keys failą."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "Eksportuokite visus atitinkamus leidinius į ftp serverį."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
+msgstr "\"Frontend\" modulio registracija OPMS objektui agento sąsajoje."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Frontend modulio registracija \"PublicOPMSRepository\" objekto viešojoje "
+"sąsajoje."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Frontend modulio registracija objekto PublicOPMSRepositoryLookup viešojoje "
+"sąsajoje."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Frontend modulio registracija objekto PublicOPMSTestBuild viešojoje sąsajoje."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
 msgstr ""
+"Frontend modulio registracija \"PublicPackageVerification\" objektui "
+"viešojoje sąsajoje."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Frontend modulio registracija administratoriaus sąsajoje."
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "GIT autoriaus registracija."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"Sukurti nurodytų blokų HTML komentarų kabliukus, kad juos galėtų naudoti "
+"filtrai."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "Dokumentus generuoti kartą per naktį."
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "\"Git\" valdymas"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "\"Git\" saugykla"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr ""
+msgstr "Grupė, kurios nariai turi \"OPMS\" administratoriaus teises ištrinti."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
+msgstr "Grupė, kurios nariai turi saugyklos administratoriaus teises OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
 msgstr ""
+"Grupė, kurios nariai OPMS ekranuose matys informaciją apie CI tyrimų "
+"rezultatus."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 msgstr ""
+"Grupės, kurių nariu turi būti autentifikuotas naudotojas (pagal naudotojo "
+"prisijungimo vardą ir slaptažodį), kad galėtų kurti bandomuosius paketus per "
+"viešąją sąsają."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
 msgstr ""
+"Grupės, kurios bus nustatomos git projekto kūrimo proceso metu pridedant "
+"OPMS saugyklas."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "Tvarkykite dinaminį lauką ekranuose."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 msgstr ""
+"Čia tvarkykite savo viešąjį (-uosius) SSH raktą (-us) \"Git\" prieigai. "
+"Pridėdami naują raktą, būtinai išsaugokite šią nuostatą."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "Modulis, skirtas pridėtų kodo eilučių statistikai generuoti."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "Modulis, skirtas kodų augimo statistikai generuoti."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
 msgstr ""
+"Modulis, skirtas generuoti statistinius duomenis apie git įrašų skaičių."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
 msgstr ""
+"Modulis, skirtas pašalinti pašalintų kodo eilučių statistikai generuoti."
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
 msgstr ""
+"Prie \"git\" gali prisijungti tik vartotojai, turintys rw teises vienoje iš "
+"šių grupių."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "Galimybė rankiniu būdu nustatyti paketo suderinamumą."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "\"BranchView\" ekrano puslapių parametrai."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Dinaminio lauko \"GITProjectName\" išankstinis apibrėžimas: Group => Grupė, "
+"turinti prieigą prie dinaminių laukų; AlwaysVisible => Laukas gali būti "
+"pašalintas (0|1); InformationAreaName => Valdiklių pavadinimas; "
+"InformationAreaSize => Valdiklių dydis ir padėtis (Large|Small); Name => "
+"Dinaminio lauko, kuris turėtų būti naudojamas, pavadinimas; Priority => "
+"Dinaminių laukų eiliškumas; State => Būklė => Laukų būsena (0 = išjungtas, 1 "
+"= aktyvus, 2 = privalomas), FilterRepository => Regex, kurį turi atitikti "
+"saugyklos pavadinimas, kad būtų rodomas, FilterPackage => Regex, kurį turi "
+"atitikti paketo pavadinimas, kad būtų rodomas, FilterBranch => Regex, kurį "
+"turi atitikti šakos pavadinimas, kad būtų rodomas, FilterRelease => Regex, "
+"kurį turi atitikti pakartotinės versijos eilutė, kad būtų rodomas."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Dinaminio lauko \"GITRepositoryName\" išankstinis apibrėžimas: Group => "
+"Grupė, turinti prieigą prie dinaminių laukų; AlwaysVisible => Laukas gali "
+"būti pašalintas (0|1); InformationAreaName => Valdiklių pavadinimas; "
+"InformationAreaSize => Valdiklių dydis ir padėtis (Large|Small); Name => "
+"Dinaminio lauko, kuris turėtų būti naudojamas, pavadinimas; Priority => "
+"Dinaminių laukų eiliškumas; State => Laukų būsena (0 = išjungtas, 1 = "
+"aktyvus, 2 = privalomas), FilterRepository => Regex, kurį turi atitikti "
+"saugyklos pavadinimas, kad būtų rodomas, FilterPackage => Regex, kurį turi "
+"atitikti paketo pavadinimas, kad būtų rodomas, FilterBranch => Regex, kurį "
+"turi atitikti šakos pavadinimas, kad būtų rodomas, FilterRelease => Regex, "
+"kurį turi atitikti pakartotinės versijos eilutė, kad būtų rodomas."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"Dinaminio lauko \"PackageDeprecated\" išankstinis apibrėžimas: Group => "
+"Grupė, turinti prieigą prie dinaminių laukų; AlwaysVisible => Laukas gali "
+"būti pašalintas (0|1); InformationAreaName => Valdiklių pavadinimas; "
+"InformationAreaSize => Valdiklių dydis ir padėtis (Large|Small); Name => "
+"Dinaminio lauko, kuris turėtų būti naudojamas, pavadinimas; Priority => "
+"Dinaminių laukų eiliškumas; State => Laukų būsena (0 = išjungtas, 1 = "
+"aktyvus, 2 = privalomas), FilterRepository => Regex, kurį turi atitikti "
+"saugyklos pavadinimas, kad būtų rodomas, FilterPackage => Regex, kurį turi "
+"atitikti paketo pavadinimas, kad būtų rodomas, FilterBranch => Regex, kurį "
+"turi atitikti šakos pavadinimas, kad būtų rodomas, FilterRelease => Regex, "
+"kurį turi atitikti pakartotinės versijos eilutė, kad būtų rodomas."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "Gavėjai, kurie bus informuoti el. paštu, jei bus padaryta klaidų."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "SSH raktai \"Git\" prieigai"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "Siųsti analizės failą"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
-msgstr ""
+msgstr "Nustato \"git\" klono adresą, kuris bus naudojamas saugyklos sąrašuose."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "Nustato \"git\" saugyklų namų katalogą."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
+msgstr "Nustato BugzillaAddComment posto gavimo scenarijaus vietos kelią."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Nustato OTRSCodePolicy scenarijaus vietos kelią. Rekomenduojama turėti "
+"atskirą OTRSCodePolicy modulio kloną, kuris būtų atnaujinamas per cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Nustato OTRSCodePolicy išankstinio gavimo scenarijaus vietos kelią. "
+"Rekomenduojama turėti atskirą OTRSCodePolicy modulio kloną, kuris būtų "
+"atnaujinamas per cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "Rodyti naujausius git saugyklų pakeitimus."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
 msgstr ""
+"Meniu rodoma nuoroda, kad būtų galima sukurti vieneto testą iš dabartinio "
+"bilieto."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "Sinchronizuoti OPMS lenteles su nutolusia duomenų baze."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "Minimali \"sphinx\" bibliotekos versija."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "Naudotinos sfinkso temos pavadinimas."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "Kelias į OTRS CSS failą (santykinis žemiau statinio kelio)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "Kelias į OTRS logotipą (santykinis žemiau statinio kelio)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "Kelias į statinį aplanką, kuriame yra paveikslėlių ir css failų."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "Kelias į temų aplanką, kuriame yra \"Sphinx\" temos."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"Šioje konfigūracijoje apibrėžiami visi galimi ekranai, kuriuose galima "
+"įjungti arba išjungti numatytuosius stulpelius."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
 msgstr ""
+"Šioje konfigūracijoje apibrėžiami visi galimi ekranai, kuriuose galima "
+"įjungti arba išjungti dinaminius laukus."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"Šioje konfigūracijoje nustatoma, ar turi būti rodomi tik validai, ar visi "
+"(invalidai) dinaminiai laukai."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"Ši konfigūracija nustato, ar OTRS paketo tikrinimas turi būti aktyvus, ar "
+"išjungtas. Jei išjungta, visi paketai rodomi kaip patikrinti. Vis tiek "
+"rekomenduojama naudoti tik patikrintus paketus."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"Šioje konfigūracijoje apibrėžiamas \"OTRS CloudService Proxy\" paslaugos "
+"URL. Bus pridėtas http arba https priešdėlis, priklausomai nuo pasirinkimo "
+"SysConfig \"Znuny4OTRSRepoType\"."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
 msgstr ""
+"Šioje konfigūracijoje registruojamas Išvesties post-filtrai, kad būtų "
+"išplėsta paketo patikra."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"Šioje konfigūracijoje registruojamas modulis \"OutputFilter\", kuris "
+"pašalina OTRS Business Solution TM reklamas."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
+"Šioje konfigūracijoje registruojamas išvesties filtras, kad paketų "
+"tvarkyklėje būtų paslėptas internetinės saugyklos pasirinkimas."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
 msgstr ""
+"Sutvarkykite neapdorotą leidinį, kuris ilgą laiką nepraėjo testavimo pomulių "
+"patikrinimų."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 msgstr ""
+"Vartotojams, turintiems rw teises vienoje iš šių grupių, leidžiama atlikti "
+"priverstinį stūmimą 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 msgstr ""
+"Vartotojams, turintiems rw teises vienoje iš šių grupių, leidžiama tvarkyti "
+"projektus. Be to, grupės nariai turi administravimo teises į git valdymą."
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 GB"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U: 17,5 colio (44,45 cm)"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 GB"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 GB"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U: 21 colis (53,34 cm)"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U: 26,25 colio (66,68 cm)"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 GB"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U: 31,5 colio (80,01 cm)"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "19 colių stovas"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U: 1,75 colio (4,45 cm)"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U: 35 coliai (88,9 cm)"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "21 colio stovas"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U: 38,5 colio (97,79 cm)"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "23 colių stovas"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23,6 colio (600 mm)"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 GB"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U: 42 coliai (106,68 cm)"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 GB"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U: 47,25 colio (120,02 cm)"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K (2048 x 1080)"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U: 3,5 colio (8,89 cm)"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U: 52,5 colio (133,35 cm)"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31,5 colio (800 mm)"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 GB"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U: 57,75 colio (146,68 cm)"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35,4 colio (900 mm)"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U: 63 coliai (160,02 cm)"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39,4 colio (1000 mm)"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U: 68,25 colio (173,35 cm)"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U: 5,25 colio (13,34 cm)"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U: 73,5 colio (186,69 cm)"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43,3 colio (1100 mm):"
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U: 78,75 colio (200,02 cm)"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47,2 colio (1200 mm)"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 GB"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U: 84 coliai (213,36 cm)"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K Ultra HD (3840 x 2160):"
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U: 7 coliai (17,78 cm)"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 GB"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U: 8,75 colio (22,23 cm)"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 GB"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U: 10,5 colio (26,67 cm)"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U: 12,25 colio (31,12 cm)"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 GB"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K Ultra HD (7680 x 4320)"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U: 14 colių (35,56 cm)"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 GB"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U: 15,75 colio (40,01 cm)"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Apskaita"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "Adresų priskyrimas"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Administratorius"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "Prietaiso tipas"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "Atgalinės nuorodos"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "Akumuliatoriaus talpa (Ah)"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "Akumuliatoriaus tipas"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Magistralės sąsaja"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "CPU klasė"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "Talpa (GB)"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "Vienos vaizdo plokštės talpa"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "Kortelės numeris"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "Kortelės tipas"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "\"Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "Klientų sertifikatai"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "Kliento programinė įranga"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "Kliento kategorija"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "Laikrodžio rodyklė"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "Laikrodžių greitis"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "Kodo pasirašymo sertifikatai"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "Susisiekite su"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "Susisiekite su platintoju"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "Sutartis"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "Sutarties tipas"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "Sutarties laikotarpis nuo"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "Sutarties laikotarpis iki"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "Išlaidų vienetas"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "Licencijų skaičius"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "Sukūrimo data"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "Pasirinktinis stovas"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP rezervuota"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "Sąskaitos faktūros data"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "Užsakymo data"
 
 #. ITSM class bundles
 msgid "Date of Warrenty"
-msgstr ""
+msgstr "Garantijos išdavimo data"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "Išleidimo data"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "Dokumentų pasirašymo sertifikatai"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "ETSI stelažas"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "\"Elasticsearch\""
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "El. pašto sertifikatai (S/MIME sertifikatai)"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Galinis IP adresas"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "Paramos pabaiga"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "Galiojimo data"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "\"FireWire\" (IEEE 1394)"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "Programinė įranga"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "Energijos kaupimas smagračiu"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "Formos faktorius"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "\"Full HD\" (1920 x 1080)"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "Bendra informacija"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "Vaizdo plokštės"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "Vaizdo plokštė"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "HD (1280 x 720)"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "Techninės įrangos modelis"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "Techninės įrangos svoris"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "IP protokolas"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "Inventorinis numeris"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "Inverstravimo išlaidos"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "Sąskaitos faktūros numeris"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "LCD monitorius (skystųjų kristalų ekranas)"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "LED monitorius (šviesos diodas)"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC (mažas kaiščių skaičius)"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "Platuma"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "1 sluoksnis: fizinis sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "2 sluoksnis: duomenų ryšio sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "3 sluoksnis: tinklo sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "3 sluoksnis: tinklo sluoksnis (supernetas)"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "4 sluoksnis: transporto sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "5 sluoksnis: sesijos sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "6 sluoksnis: pateikimo sluoksnis"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "7 sluoksnis: taikomųjų programų sluoksnis"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Licencijos raktas"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Licencijos tipas"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "Licencijos laikotarpis nuo"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "Licencijos laikotarpis iki"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "Ličio geležies fosfato (LiFePO4) akumuliatorius"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "Ličio jonų (ličio jonų) akumuliatorius"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "Įsikūręs"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "Ilguma"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA (mikrokanalų architektūra)"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "Gamintojas"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "Didžiausia apkrovos galia (W)"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "Atmintis"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "Atminties tipas"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "\"Microsoft SQL Server"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "Mini stelažas"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "Mobiliojo telefono numeris"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "Modelis Aprašymas"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "Monitoriaus skiriamoji geba"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "Monitoriaus dydis"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "\"MySQL\""
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "Tinklo informacija"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "Tinklo informacija"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "Tinklo lygmuo"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "Nikelio-kadmio (NiCd) akumuliatorius"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "Nikelio-metalo hidrido (NiMH) akumuliatorius"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "Procesorių skaičius"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "Operatyviosios atminties modulių skaičius"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "Vaizdo plokščių skaičius"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "OLED monitorius (organinis šviesos diodas)"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "Veiklos sąnaudos"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "\"Oracle\" duomenų bazė"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "Užsakymo numeris"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Išėjimai"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "\"PCI Express\" (PCIe)"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "PIN KODAS"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "PIN 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefono numeris"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "Telefono tipas"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "Fiziniai branduoliai"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "\"PostgreSQL\""
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "Maitinimo tiekimas"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "Įsigyta"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "\"Quad HD\" (2560 x 1440)"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "Stovo gylis"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "Stovo vienetai (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "Nuoroda į klientą"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "SIM kortelė"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "SSL/TLS sertifikatai"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "Sandarus švino rūgštinis (SLA) akumuliatorius"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Serijos numeris"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "Serverio programinė įranga"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "Paslaugos žyma"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "Lizdo tipas"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "Pradinis IP adresas"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "Saugykla"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "Saugyklos skirsnis"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "Dukterinė įmonė"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "Santrauka"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "Siūlai"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "\"Thunderbolt\""
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "Iš viso grafinės plokštės operatyviosios atminties (GB)"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "Iš viso RAM (GB)"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "Jutiklinio ekrano monitorius"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "Bokštas"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB (universalioji nuoseklioji magistralė)"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "VESA vietinė magistralė (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "VGA"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "VirtualLink"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA (1366 x 768)"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "Analoginis telefonas"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "Kortelių skaitytuvas"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "Konferencinis telefonas"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "Konsultavimo sutartis"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "Konteinerių valdymas"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "Belaidis telefonas (DECT telefonas)"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "DNS serveris"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "Darbo sutartis"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "Išorinis kietasis diskas"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "Ugniasienė"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "Franšizės sutartis"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "Ausinės"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "Tapatybės ir prieigos valdymas (IAM)"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "Stacionarusis telefonas"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "Nuomos sutartis"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "Licencijos sutartis"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "Paskolos sutartis"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "Mobilusis / įterptasis"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "Susitarimas dėl informacijos neatskleidimo (NDA)"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "Nešiojamasis kompiuteris"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "Partnerystės susitarimas"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "Telefonas / VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "Pardavimo sutartis"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "Palydovinis telefonas"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Paslaugų sutartis"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "Garsiakalbiai"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "Plonasis klientas"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "USB šakotuvas"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "VR ausinės"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "VoIP telefonas"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
-
+msgstr "Interneto kamera"
