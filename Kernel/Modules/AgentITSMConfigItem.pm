@@ -489,8 +489,8 @@ sub Run {
         . ';';
 
     my $LinkSort = 'View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';Filter='
-        . $LayoutObject->Ascii2Html( Text => $Filter )
+        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilter )
+        . ';Filter=' . $LayoutObject->Ascii2Html( Text => $Filter )
         . $ColumnFilterLink
         . ';';
 

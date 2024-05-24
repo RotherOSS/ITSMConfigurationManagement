@@ -1283,7 +1283,7 @@ sub Run {
         }
     }
 
-    my %SpecialColumns = (
+    %SpecialColumns = (
         Number       => 1,
         CurDeplState => 1,
         CurInciState => 1,
