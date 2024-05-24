@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Russian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ru/>\n"
 "Language: ru\n"
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Желаете продолжить?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1214,7 +1214,7 @@ msgstr "Версии не найдены!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Нет разрешения"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1613,6 +1613,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Динамические поля, показанные на дополнительном экране поля ITSM интерфейса "
+"агента."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1768,6 +1770,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Выполняет заданное действие для каждого события (как Invoker) для каждого "
+"настроенного Webservice."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1834,43 +1838,51 @@ msgstr "Какая общая информация отображается в �
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Общие данные инвокера"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Этот модуль OTOBO invoker будет вызываться для подготовки данных, "
+"отправляемых в удаленную систему и для обработки ответных данных."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Настройки для данных исходящего запроса"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Отображение"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Данные полученные из OTOBO Invoker будут обработаны, для преобразования их в "
+"данные которые ожидает удаленная сторона."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Запрашиваемые данные будут обработаны, преобразованы в формат поддерживаемый "
+"OTOBO"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Настройки для входящих ответных данных"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Данные о событиях"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Добавить событие"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Асинхронные триггеры событий будут обрабатываться Планировщиком OTOBO в "
+"фоновом режиме (рекомендуется)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1910,7 +1922,7 @@ msgstr "Включение недействительных ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Проверьте в официальной %документации%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1926,11 +1938,13 @@ msgstr "Фильтр полей по пространству имен"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Новые динамические поля"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Хотите воспользоваться дополнительными типами динамических полей? У вас есть "
+"полный доступ к следующим типам полей:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1967,10 +1981,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL не могут быть импортированы из-за неизвестной ошибки, проверьте, "
+"пожалуйста, логи OTOBO для получения более детальной информации"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (копия) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -2124,7 +2140,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Экраны динамичных полей"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
@@ -3468,7 +3484,7 @@ msgstr "Блокнот"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
