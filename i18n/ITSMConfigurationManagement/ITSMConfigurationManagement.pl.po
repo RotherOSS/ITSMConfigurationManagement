@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Polish <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/pl/>\n"
 "Language: pl\n"
@@ -1361,7 +1361,7 @@ msgstr "Nie znaleziono żadnych wersji!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Brak uprawnień"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1909,6 +1909,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Wykonuje zaplanowane akcje dla każdego wydażenia (jako Wzywający) dla każdej "
+"skonfigurowanej usługi sieciowej."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1979,6 +1981,8 @@ msgstr "Ogólne dane wywołującego"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Ten moduł zaplecza invokera OTOBO będzie wywołany by przygotować dane do "
+"wysyłki do systemu zdalnego oraz by przetworzyć odpowiedź z tego systemu."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1991,10 +1995,14 @@ msgstr "Mapowanie"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Dane z invokera OTOBO będą przetworzone przez to mapowanie na dane "
+"oczekiwane przez system zdalny."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Dane z odpowiedzi będą przetworzone przez to mapowanie na dane oczekiwane "
+"przez invoker OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -2006,11 +2014,13 @@ msgstr "Dane zdarzenia"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Dodaj wydarzenie"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Wyzwalacze (triggery) zdarzeń asynchronicznych obsługiwane przez harmonogram "
+"OTOBO pracujący w tle (zalecane)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2038,7 +2048,7 @@ msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Sortuj"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
@@ -2050,7 +2060,7 @@ msgstr "Dołączanie nieprawidłowych list ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Sprawdź oficjalną %sdokumentację%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -2066,7 +2076,7 @@ msgstr "Filtrowanie pola według przestrzeni nazw"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nowe Pola Dynamiczne"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
@@ -2109,10 +2119,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL nie została zaimportowania z powodu nieznanego błędu, więcej informacji "
+"znajdziesz w logach OTOBO"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (kopia) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -2271,7 +2283,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Ekrany Pól Dynamicznych"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
@@ -3061,7 +3073,7 @@ msgstr "Stojak ETSI"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
@@ -3613,7 +3625,7 @@ msgstr "Notatnik"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
