@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Last-Translator: Hauke Böttcher <hb@rother-oss.com>\n"
 "Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/de/>\n"
 "Language: de\n"
@@ -1107,7 +1107,7 @@ msgstr "Produktiv"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Rollendefinition ändern"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
@@ -1130,27 +1130,29 @@ msgstr "Ready2Adopt-Klassenbündel importieren"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Config Item-Rolle"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "Die Versionsnummer dieses Config Items"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Die Versionsnummer wird bereits von den ConfigItems mit den folgenden "
+"Nummern verwendet: %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "Keine Config Item-Daten gefunden."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "Config Item auswählen"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "TreeView für Config Item"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
@@ -1166,31 +1168,33 @@ msgstr "Maximale Verknüpfungsebene für ConfigItem erreicht!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "Ihre Config Items"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "Config Item-Suche"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Objekt-Typ"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "Die folgenden Klassen werde importiert"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "Die folgenden Rollen werden importiert"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"Beachten Sie, dass auch entsprechende dynamische Felder und GeneralCatalog-"
+"Klassen erstellt werden und es keine automatische Löschung gibt."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Möchten Sie fortfahren?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1198,27 +1202,27 @@ msgstr "Benötige ExampleClasses!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "Definition ist kein gültiges YAML-Hash."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "Config Item nicht gefunden!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "Keine Versionen gefunden!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Keine Berechtigung"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "Filter ungültig!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "Suchparameter ungültig!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
@@ -1227,14 +1231,16 @@ msgstr "Klasseneinschränkungen für das Konfigurationsobjekt"
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
 msgstr ""
+"Wählen Sie eine oder mehrere Klassen aus, um die auswählbaren Config Items "
+"einzuschränken"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "Link-Typ"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "Link-Typ auswählen."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
