@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hungarian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/hu/>\n"
 "Language: hu\n"
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Szeretné folytatni?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1214,7 +1214,7 @@ msgstr "Nem találtunk verziót!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Nincs jogosultság"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1611,6 +1611,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Az ügyintézői felület további ITSM mező képernyőjén megjelenített dinamikus "
+"mezők."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1767,6 +1769,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Végrehajtja a beállított műveletet minden eseménynél (mint egy meghívó) "
+"minden egyes beállított webszolgáltatáshoz."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1837,6 +1841,8 @@ msgstr "Általános hívó adatok"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Ez az OTOBO meghívó háttérprogram modul lesz meghívva a távoli rendszerre "
+"küldendő adatok előkészítéséhez, és a válasz adatainak feldolgozásához."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1844,15 +1850,19 @@ msgstr "A kimenő kérési adatok beállításai"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Leképezés"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Ez a leképezés fogja feldolgozni az OTOBO meghívójából származó adatokat "
+"olyan formára alakítva át azokat, ahogy a távoli rendszer várja."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Ez a leképezés fogja a válasz adatait feldolgozni olyan formára alakítva át "
+"azokat, ahogy az OTOBO meghívója várja."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1864,11 +1874,13 @@ msgstr "Eseményadatok"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Esemény hozzáadása"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Az aszinkron eseményaktiválókat az OTOBO ütemeződémon kezeli a háttérben "
+"(javasolt)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1908,7 +1920,7 @@ msgstr "Érvénytelen ACL-ek felvétele"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Nézze meg a hivatalos %sdokumentációt%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1967,10 +1979,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Az ACL-eket nem sikerült importálni egy ismeretlen hiba miatt, további "
+"információkért nézze meg az OTOBO naplókat"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (másolat) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -2170,7 +2184,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az adminisztrátori felülethez."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -3475,7 +3489,7 @@ msgstr "Notebook"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
