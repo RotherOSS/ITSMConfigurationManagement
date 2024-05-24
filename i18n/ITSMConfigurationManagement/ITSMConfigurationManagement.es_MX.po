@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Spanish (Mexico) <http://weblate.otobo.org/projects/"
 "opm-packages/itsm-configurationmanagement/es_MX/>\n"
 "Language: es_MX\n"
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "¿Quieres continuar?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1214,7 +1214,7 @@ msgstr "No se han encontrado versiones."
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Sin permiso"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1621,6 +1621,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Campos dinámicos mostrados en la pantalla de campos adicionales ITSM de la "
+"interfaz del agente."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1778,6 +1780,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Realiza la acción configurada para cada evento (como Invoker) para cada "
+"Webservice configurado."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1843,15 +1847,17 @@ msgstr "Qué información general se muestra en la cabecera."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Datos generales del invocador"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Este módulo OTOBO invoker backend será llamado para preparar los datos que "
+"se enviarán al sistema remoto, y para procesar sus datos de respuesta."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Configuración para datos de solicitudes salientes"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
@@ -1860,10 +1866,14 @@ msgstr "Cartografía"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Los datos del invocador de OTOBO serán procesador por este mapeo, para "
+"transformarlos al tipo de datos que el sistema remoto espera."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Los datos de la respuesta serán procesados por este mapeo, para "
+"transformarlos al tipo de datos que el invocador de OTOBO espera."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1875,11 +1885,13 @@ msgstr "Datos del evento"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Agregar Evento"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Los disparadores de evento asíncronos son manejados por el Demonio "
+"Planificador de OTOBO en segundo plano (recomendado)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1903,11 +1915,11 @@ msgstr "Pantalla completa"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "Elementos de configuración"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Ordenar"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
@@ -1919,7 +1931,7 @@ msgstr "Incluir ACL no válidas"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Verifique la documentación oficial %sdocumentation%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1935,11 +1947,13 @@ msgstr "Filtrar campo por espacio de nombres"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Nuevos campos dinámicos"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"¿Desea beneficiarse de otros tipos de campos dinámicos? Tiene acceso "
+"completo a los siguientes tipos de campo:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1977,10 +1991,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Las ACLs no pudieron ser importadas debido a un error desconocido, por favor "
+"revise los registros de OTOBO para más información"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (copia) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -2056,7 +2072,7 @@ msgstr "Definir repos privados de addons."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Define el filtro que procesa las plantillas HTML."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
@@ -2143,11 +2159,11 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Pantallas de campos dinámicos"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
@@ -2189,7 +2205,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Registro del módulo frontend para la interfaz de administración."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -2198,6 +2214,8 @@ msgstr "Registro de autor GIT."
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"Genera los comentarios HTML de los bloques especificados para que los "
+"filtros puedan utilizarlos."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2248,7 +2266,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "Gestionar el campo dinámico en las pantallas."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
@@ -2427,14 +2445,20 @@ msgstr "La ruta a la carpeta de temas, que contiene los temas de sphinx."
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"Esta configuración define todas las pantallas posibles para activar o "
+"desactivar las columnas por defecto."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
 msgstr ""
+"Esta configuración define todas las pantallas posibles para activar o "
+"desactivar los campos dinámicos."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"Esta configuración define si sólo deben mostrarse los campos dinámicos "
+"válidos o todos (inválidos)."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
@@ -2941,7 +2965,7 @@ msgstr "Rack ETSI"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
@@ -3495,7 +3519,7 @@ msgstr "Cuaderno"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
