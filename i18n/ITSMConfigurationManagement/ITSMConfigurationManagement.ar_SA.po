@@ -2,15 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2022-09-14 07:54+0000\n"
-"Last-Translator: khh <khh@rother-oss.com>\n"
-"Language-Team: Arabic (Saudi Arabia) <https://translate.otobo.org/projects/otobo10/itsmconfigurationmanagement/ar_SA/>\n"
+"PO-Revision-Date: 2024-05-24 08:13+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Arabic (Saudi Arabia) <http://weblate.otobo.org/projects/"
+"opm-packages/itsm-configurationmanagement/ar_SA/>\n"
 "Language: ar_SA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.4.2\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -58,7 +60,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
-msgstr ""
+msgstr "آخر تعديل"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -118,7 +120,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "إنشاء الوقت"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -138,7 +140,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "بدء البحث"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
@@ -338,7 +340,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "تحذير"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
@@ -370,7 +372,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Skipped"
-msgstr ""
+msgstr "تخطي."
 
 #. ITSM class bundles
 msgid "Model"
@@ -734,7 +736,7 @@ msgstr ""
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Unlimited"
-msgstr ""
+msgstr "غير محدود"
 
 #. JS File: ITSM.Agent.ConfigItem.Zoom
 msgid "Ok"
@@ -819,6 +821,10 @@ msgstr ""
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"تعريف العمليات التي يجب أن يتوفر بها زر الإعدادات في ودجة كائن الرابط "
+"(LinkObject::ViewMode = \"complex\"). الرجاء ملاحظة أنه يجب تسجيل ملفات JS و "
+"CSS التالية لهذه الإجراءات: Core.CustomList.css، Core.UI.AllocationList.js، "
+"Core.UI.Table.Sort.js، Core.Agent.TableFilter.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -958,7 +964,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "نظرة عامة"
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
@@ -982,7 +988,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "مجموعة الإذن"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1170,7 +1176,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "نوع الكائن"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1206,7 +1212,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "لا توجد صلاحيات"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1646,43 +1652,51 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "بيانات المستدعي العامة"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"سيتم استدعاء وحدة الواجهة الخلفية OTOBO Invoker لإعداد البيانات لإرسالها إلى "
+"النظام البعيد، ومعالجة بيانات الاستجابة الخاصة به."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "إعدادات بيانات الطلبات الصادرة"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "تَخْطِيطٌ"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"تتم معالجة بيانات استدعاء OTOBO بواسطة هذا التعيين لإعادة تشكيلها عندما "
+"يحتاج النظام البعيد إلى البيانات."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"تتم معالجة بيانات الاستجابة للنظام البعيد بواسطة هذا التعيين لإعادة تشكيله "
+"كما هو مطلوب من قبل مستحضر OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "إعدادات بيانات الاستجابة الواردة"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "بيانات الحدث"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "إضافة حدث"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"تتم معالجة مشغلات الأحداث غير المتزامنة بواسطة OTOBO Scheduler Daemon في "
+"الخلفية (موصى به)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1698,7 +1712,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "تحديد الكل"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -1706,11 +1720,11 @@ msgstr ""
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "عناصر التكوين"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "فَرَزَ"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
@@ -1722,7 +1736,7 @@ msgstr ""
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "تحقق من الوثائق الرسمية sdocumentation%s%."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1738,11 +1752,13 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "حقول ديناميكية جديدة"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"هل ترغب في الاستفادة من المجالات الديناميكية الأخرى؟ لديك حق الوصول الكامل "
+"إلى أنواع الحقول التالية:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1775,10 +1791,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"تعذر استيراد قوائم التحكم في الوصول (ACLs) بسبب خطأ غير معروف، يرجى مراجعة "
+"سجلات OTOBO لمزيد من المعلومات"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "٪s (نسخة) ٪s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -1846,7 +1864,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "تعريف عامل التصفية الذي يعالج قوالب HTML."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
@@ -1902,11 +1920,11 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "أسطح الحقول الديناميكية"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
@@ -1938,7 +1956,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "تسجيل وحدة الواجهة الأمامية في منطقة الوكيل."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -1946,7 +1964,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
+msgstr "إنشاء تعليقات HTML للكتل المحددة بحيث يمكن لعوامل التصفية إستخدامها."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -1986,7 +2004,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "إدارة الحقول الديناميكية في الواجهات."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
@@ -2602,7 +2620,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "البحث المرن"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
@@ -3154,7 +3172,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
@@ -3203,4 +3221,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
