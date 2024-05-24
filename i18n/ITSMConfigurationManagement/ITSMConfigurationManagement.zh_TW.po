@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Chinese (Traditional) <http://weblate.otobo.org/projects/"
+"opm-packages/itsm-configurationmanagement/zh_Hant/>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -20,7 +23,7 @@ msgstr "修改類定義"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "配置项类别"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
@@ -72,7 +75,7 @@ msgstr "先從列表中選擇類別，然後建立新的配置項。"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
-msgstr ""
+msgstr "ITSM 配置项目批量操作"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
@@ -84,19 +87,19 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
-msgstr ""
+msgstr "另一个链接"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Invalid Configuration Item number!"
-msgstr ""
+msgstr "配置项目编号无效！"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "The number of another Configuration Item to link with."
-msgstr ""
+msgstr "要链接的另一个配置项的编号。"
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "您真的想删除这个配置项吗？"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -104,11 +107,11 @@ msgstr "為這個配置項命名"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
+msgstr "名称已被配置项使用，编号如下：%s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
-msgstr ""
+msgstr "配置项历史： %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
@@ -132,7 +135,7 @@ msgstr "每頁配置項個數"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "A generic ITSM Configuration Item table"
-msgstr ""
+msgstr "通用 ITSM 配置项目表"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -188,115 +191,115 @@ msgstr "屬性"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "No access to Class is given!"
-msgstr ""
+msgstr "不允许进入班级！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
-msgstr ""
+msgstr "概述：ITSM 配置项目"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No ConfigItemID is given!"
-msgstr ""
+msgstr "未给出 ConfigItemID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You need at least one selected Configuration Item!"
-msgstr ""
+msgstr "您需要至少一个选定的配置项！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
-msgstr ""
+msgstr "您没有写入此配置项的权限：%s."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
-msgstr ""
+msgstr "数据库中未发现配置项 \"%s\"！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Was not able to delete the configitem ID %s!"
-msgstr ""
+msgstr "无法删除配置项 ID %s！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "No version found for ConfigItemID %s!"
-msgstr ""
+msgstr "添加配置项目。"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No ConfigItemID, DuplicateID or ClassID is given!"
-msgstr ""
+msgstr "未给出 ConfigItemID、DuplicateID 或 ClassID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
-msgstr ""
+msgstr "未提供访问权限！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No definition was defined for class %s!"
-msgstr ""
+msgstr "未定义 %s 类的定义！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
-msgstr ""
+msgstr "无法显示历史记录，因为没有给出 ConfigItemID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
+msgstr "无法显示历史记录，没有访问权限！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
-msgstr ""
+msgstr "新配置项（ID=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New version (ID=%s)"
-msgstr ""
+msgstr "新版本（ID=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "部署状态已更新（新=%s，旧=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Incident state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "事件状态已更新（新=%s，旧=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem (ID=%s) deleted"
-msgstr ""
+msgstr "配置项目（ID=%s）已删除"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) added"
-msgstr ""
+msgstr "已添加 %s (type=%s) 链接"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) deleted"
-msgstr ""
+msgstr "指向 %s (type=%s) 的链接已删除"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem definition updated (ID=%s)"
-msgstr ""
+msgstr "配置项定义已更新（ID=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Name updated (new=%s, old=%s)"
-msgstr ""
+msgstr "名称已更新（新=%s，旧=%s）"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Attribute %s updated from \"%s\" to \"%s\""
-msgstr ""
+msgstr "属性 %s 从\"%s \"更新为\"%s\""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Version %s deleted"
-msgstr ""
+msgstr "版本 %s 已删除"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
-msgstr ""
+msgstr "未给出 ConfigItemID 或 VersionID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
+msgstr "无法显示配置项，未赋予访问权限！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr ""
+msgstr "数据库中找不到配置项目编号 %s！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
-msgstr ""
+msgstr "数据库中未发现版本号 %s！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
@@ -304,19 +307,19 @@ msgstr "配置項"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
-msgstr ""
+msgstr "由 %s 在 %s 打印"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
-msgstr ""
+msgstr "无效 ClassID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No ClassID is given!"
-msgstr ""
+msgstr "未给出 ClassID！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No access rights for this class given!"
-msgstr ""
+msgstr "该类没有访问权限！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No Result!"
@@ -328,19 +331,19 @@ msgstr "配置項目搜尋結果"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
+msgstr "无法显示项目，没有给定 ConfigItem 的访问权限！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "业务"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "警告"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "事件"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
@@ -352,11 +355,11 @@ msgstr "配置項故障狀態"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
-msgstr ""
+msgstr "显示的配置项"
 
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
-msgstr ""
+msgstr "之间"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
@@ -376,7 +379,7 @@ msgstr "型號"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "客户公司"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -436,7 +439,7 @@ msgstr "電話2"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "E-Mail"
-msgstr ""
+msgstr "电子邮件"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Address"
@@ -472,19 +475,19 @@ msgstr "介質"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Computer"
-msgstr ""
+msgstr "计算机"
 
 #. ITSM class bundles
 msgid "Hardware"
-msgstr ""
+msgstr "硬件"
 
 #. ITSM class bundles
 msgid "Network"
-msgstr ""
+msgstr "网络"
 
 #. ITSM class bundles
 msgid "Software"
-msgstr ""
+msgstr "软件"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -648,7 +651,7 @@ msgstr "電話公司"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "GSM"
-msgstr ""
+msgstr "GSM"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client Application"
@@ -740,23 +743,26 @@ msgstr "Ok"
 
 #. SysConfig
 msgid "Assigned CIs"
-msgstr ""
+msgstr "分配的 CI"
 
 #. SysConfig
 msgid "CIs assigned to customer company"
-msgstr ""
+msgstr "分配给客户公司的 CI"
 
 #. SysConfig
 msgid "CIs assigned to customer user"
-msgstr ""
+msgstr "分配给客户用户的 CI"
 
 #. SysConfig
 msgid "CMDB Settings"
-msgstr ""
+msgstr "CMDB 设置"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr ""
+"仅在同一 ConfigItem 类（\"class\"）或全局（\"global\""
+"）内检查唯一名称，这意味着在查找重复时，每个现有的 ConfigItem "
+"都会被考虑在内。"
 
 #. SysConfig
 msgid "Config Items"
@@ -764,51 +770,51 @@ msgstr "配置項"
 
 #. SysConfig
 msgid "Config item add."
-msgstr ""
+msgstr "添加配置项目。"
 
 #. SysConfig
 msgid "Config item edit."
-msgstr ""
+msgstr "配置项目编辑。"
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
+msgstr "配置项事件模块，可将日志记录到代理界面的历史记录中。"
 
 #. SysConfig
 msgid "Config item history."
-msgstr ""
+msgstr "配置项目历史。"
 
 #. SysConfig
 msgid "Config item print."
-msgstr ""
+msgstr "配置项目打印。"
 
 #. SysConfig
 msgid "Config item zoom."
-msgstr ""
+msgstr "配置项目缩放。"
 
 #. SysConfig
 msgid "ConfigItemNumber"
-msgstr ""
+msgstr "配置项目编号"
 
 #. SysConfig
 msgid "Configuration Item Limit"
-msgstr ""
+msgstr "配置项目限制"
 
 #. SysConfig
 msgid "Configuration Item limit per page."
-msgstr ""
+msgstr "每页配置项目限制。"
 
 #. SysConfig
 msgid "Configuration Management Database."
-msgstr ""
+msgstr "配置管理数据库。"
 
 #. SysConfig
 msgid "Configuration item bulk module."
-msgstr ""
+msgstr "配置项批量模块。"
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "配置项搜索代理接口的后端路由器。"
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
@@ -817,102 +823,143 @@ msgstr "創建和管理配置項定義"
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"定义可在链接对象 widget 中使用设置按钮的操作（LinkObject::ViewMode = "
+"\"complex\"）。请注意，这些操作必须已注册以下 JS 和 CSS 文件：Core."
+"AllocationList.css、Core.UI.AllocationList.js、Core.UI.Table.Sort.js、"
+"Core.Agent.TableFilters.js 和 Core.Agent.LinkObject.js。"
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "定义使用通用接口创建 ITSM 配置项所需的权限。"
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "定义使用通用接口删除 ITSM 配置项所需的权限。"
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "定义使用通用接口获取 ITSM 配置项所需的权限。"
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "定义使用通用接口搜索 ITSM 配置项所需的权限。"
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "定义使用通用接口更新 ITSM 配置项所需的权限。"
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
+msgstr "定义一个概览模块，用于显示配置项目列表的小视图。"
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "为每个 ConfigItem 类单独定义正则表达式，以检查 ConfigItem "
+"名称并显示相应的错误信息。"
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "定义 \"ITSMConfigItem \"类的默认子对象。"
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
+msgstr "定义管理界面中 CI 定义编辑器的行数。"
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
+msgstr "定义事件状态从高到低（如环状）的顺序。"
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
+msgstr "定义相关部署状态，其中链接的票单可影响 CI 的状态。"
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "定义 AgentITSMConfigItem 屏幕的搜索限制。"
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "定义 AgentITSMConfigItemSearch 屏幕的搜索限制。"
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
+msgstr "定义配置项概览中显示的列。该选项对列的位置没有影响。注意：如果选择了过滤器 "
+"\"全部\"，则类列始终可用。"
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
+msgstr "定义配置项搜索中显示的列。该选项对列的位置没有影响。"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"根据 CI 类别定义配置项概览中显示的 CI "
+"列。每个条目都必须以类名和双冒号为前缀（如 Computer::）。所有 CI "
+"都有一些通用的 CI 属性（以计算机类为例：Computer::Name、Computer::CurDeplStat"
+"e、Computer::CreateTime）。要显示 CI 定义中定义的单个 CI "
+"属性，必须使用以下方案（以计算机类为例）：Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1.如果没有 CI 类条目，则显示默认列，"
+"默认列在设置 ITSMConfigItem::Frontend::AgentITSMConfigItem##ShowColumns "
+"中定义。"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"根据 CI 类别定义配置项搜索中显示的 CI "
+"列。每个条目都必须以类名和双冒号为前缀（如 Computer::）。有一些 CI "
+"属性对所有 CI 都是通用的（以计算机类为例：Computer::Name、Computer::CurDeplSt"
+"ate、Computer::CreateTime）。要显示 CI 定义中定义的单个 CI "
+"属性，必须使用以下方案（以计算机类为例）：Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1.如果没有 CI 类条目，则显示默认列，"
+"默认列在设置 ITSMConfigItem::Frontend::AgentITSMConfigItem##ShowColumns "
+"中定义。"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"根据 CI 类别定义配置项 widget 中显示的 CI "
+"列。每个条目必须以类名和双冒号为前缀（如 Computer::）。有一些 CI 属性对所有 "
+"CI 都是通用的（以计算机类为例：Computer::Name、Computer::CurDeplState、Comput"
+"er::CreateTime）。要显示 CI 定义中定义的单个 CI "
+"属性，必须使用以下方案（以计算机类为例）：Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1.如果没有 CI 类的条目，则显示 "
+"AgentCustomerInformationCenter::Backend##0060-CIC-"
+"ITSMConfigItemCustomerCompany 设置（键 DefaultColumns）中定义的默认列。"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
+msgstr "定义链接表复合视图中所有 CI 类的 CI 显示列。如果没有条目，则显示默认列。"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
 msgstr ""
+"根据 CI 类别，定义链接表复合视图中显示的 CI "
+"列。每个条目都必须以类名和双冒号为前缀（如 Computer::）。所有 CI "
+"都有一些共同的 CI 属性（以 \"计算机 \"类为例"
+"：Computer::Name、Computer::CurDeplState、Computer::CreateTime）。要显示 CI "
+"定义中定义的单个 CI "
+"属性，必须使用以下方案（以计算机类为例）：Computer::HardDisk::1, "
+"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
+"Computer::HardDisk::2::Capacity::1.如果没有 CI 类条目，则显示默认列。"
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
+msgstr "定义哪种类型的链接（从票据角度命名）会影响链接 CI 的状态。"
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "定义哪种类型的票单会影响链接 CI 的状态。"
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "删除配置项"
 
 #. SysConfig
 msgid "Deployment State Color"
-msgstr ""
+msgstr "部署状态颜色"
 
 #. SysConfig
 msgid "Duplicate"
@@ -920,39 +967,41 @@ msgstr "複製"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
+msgstr "启用配置项批量操作功能，使代理前台能同时处理多个配置项。"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "仅对列出的组启用配置项批量操作功能。"
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
 msgstr ""
+"启用/禁用检查配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在"
+"名称重复的配置项。您可以使用脚本 bin/otobo.ITSMConfigItemListDuplicates.pl。"
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
+msgstr "在 ticket-configitem-link 上设置 configitem-status 的事件模块。"
 
 #. SysConfig
 msgid "ITSM config item overview."
-msgstr ""
+msgstr "ITSM 配置项目概览。"
 
 #. SysConfig
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "检查负责班级的小组的模块。"
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "模块，用于检查负责配置项的组。"
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "生成 ITSM 配置项统计数据的模块。"
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "为导入/导出模块注册对象后端模块。"
 
 #. SysConfig
 msgid "Overview."
@@ -961,246 +1010,255 @@ msgstr "概況"
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"\"限制 \"是默认显示的条目数量。\"组 \"用于限制插件的访问权限"
+"（例如，组：admin;group1;group2;）。\"默认 "
+"\"决定插件是默认启用还是用户需要手动启用。\"CacheTTLLocal \"是插件的缓存时间"
+"，以分钟为单位。"
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中部署状态颜色的参数。"
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中部署状态的参数。"
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr ""
+msgstr "通用目录属性权限组示例的参数。"
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "页面（显示配置项的页面）参数。"
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "权限组"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用 ITSM 配置项目搜索屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用 ITSM 配置项目缩放屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "使用代理界面中的添加 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "使用代理界面中的编辑 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用历史 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用打印 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "删除配置项所需的权限。"
 
 #. SysConfig
 msgid "Search config items."
-msgstr ""
+msgstr "搜索配置项。"
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
 msgstr ""
+"选择配置项编号生成器模块。\"AutoIncrement（自动递增）\"可递增配置项编号，"
+"使用 SystemID、ConfigItemClassID 和计数器。格式为 \"SystemID."
+"ConfigItemClassID.Counter\"，例如 1205000004、1205000005。"
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
+msgstr "当票单链接到 CI 时，自动设置 CI 的事件状态。"
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
+msgstr "在代理界面的配置项批量屏幕中设置部署状态。"
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
+msgstr "在代理界面的配置项目批量界面中设置事件状态。"
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "显示菜单中的链接，允许在代理界面的配置项缩放视图中将一个配置项与另一个对象相"
+"链接。"
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
+msgstr "在代理界面的配置项目概览中显示一个菜单链接，用于访问配置项目的历史记录。"
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "显示菜单中的链接，以便在代理界面的缩放视图中访问配置项的历史记录。"
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
+msgstr "在代理界面缩放视图的菜单中显示删除配置项的链接。"
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
+msgstr "在代理界面的配置项目概览中显示菜单链接，以复制配置项目。"
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "在菜单中显示一个链接，用于在代理界面的缩放视图中复制一个配置项。"
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "在代理界面的缩放视图中显示编辑配置项的菜单链接。"
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
+msgstr "在菜单中显示一个链接，用于返回代理界面的配置项缩放视图。"
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "在代理界面的缩放视图中显示菜单链接，以打印配置项。"
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
+msgstr "在菜单中显示一个链接，用于放大代理界面配置项概览中的配置项。"
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "显示代理界面中的配置项目历史记录（逆序）。"
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
+msgstr "配置项的标识符，如 ConfigItem#、MyConfigItem#。默认为 ConfigItem#。"
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "类"
 
 #. SysConfig
 msgid "global"
-msgstr ""
+msgstr "全球"
 
 #. SysConfig
 msgid "postproductive"
-msgstr ""
+msgstr "后生产"
 
 #. SysConfig
 msgid "preproductive"
-msgstr ""
+msgstr "生殖前"
 
 #. SysConfig
 msgid "productive"
-msgstr ""
+msgstr "生产性"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "更改角色定义"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "Ready2Import 类包"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
+msgstr "在这里，您可以导入 Ready2Import "
+"类捆绑包，其中展示了我们最常用的配置项。请注意，可能需要一些额外的配置。"
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "更新现有实体"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "导入 Ready2Adopt 类捆绑包"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "配置项作用"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "该配置项的版本号"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
+msgstr "版本号已被配置项使用，其编号如下：%s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "未找到配置项数据。"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "选择该配置项"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "配置项树形视图"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "深度等级"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "放大/缩小"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "ConfigItem 已达到最大链接级别！"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "您的配置项"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "配置项搜索"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "对象类型"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "将导入以下类别"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "将导入以下角色"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
+msgstr "请注意，也会创建相应的动态字段和 GeneralCatalog 类，而且不会自动删除。"
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "你想继续吗？"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "需要示例类！"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "定义没有有效的 YAML 哈希值。"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "未找到配置项！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "未找到任何版本！"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
@@ -1208,443 +1266,500 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "过滤器无效！"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "搜索参数无效！"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "配置项的类别限制"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
+msgstr "选择一个或多个类别来限制可选择的配置项"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "链接类型"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "选择链接类型。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "转发：引用（源） -> 引用（目标）"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "向后引用（源） -> 引用（目标）"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "链接方向"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
+msgstr "引用对象是包含该动态字段的对象，被引用对象是被选为动态字段值的对象。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "动态（ConfigItem）"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "静态（版本）"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "链接引用类型"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
+msgstr "此链接适用于引用对象的配置项还是静态版本。当前事件状态计算仅在动态链接上执行"
+"。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
+msgstr "选择搜索配置项的属性"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "必须以\"---\"开始 YAML 字符串。"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "无法清除表 configitem_link。"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "未找到相关动态字段"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "无法插入表 configitem_link"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "向表 configitem_link 插入了 0 条记录"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
+msgstr "同步定义时出错。请查看日志。"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
+msgstr "您的 ITSMConfigItem 定义未同步。请部署您的 ITSMConfigItem 动态字段更改。"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "概述和确认"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "类导入时发生错误。"
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - 隐藏"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - 显示"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"允许在代理界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\""
+"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"允许在客户界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\""
+"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "选择一个模块来执行命名方案。"
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "选择一个模块来执行数字方案。"
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "选择一个模块来执行版本字符串方案。"
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
+msgstr "选择触发创建新版本的属性。"
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
+msgstr "选择要分配给此配置项类别的类别。"
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
+msgstr "配置项概览的列配置项过滤器。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "可在代理界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 "
+"(DynamicField_NameX)。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "可在客户界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 "
+"(DynamicField_NameX)。"
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
+msgstr "配置项事件模块，用于将配置项更新为当前定义。"
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
+msgstr "更新表 configitem_ĺink 的配置项事件模块。"
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
+msgstr "配置项目事件模块更新当前事件状态。"
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "配置项树形视图"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "配置项目版本"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
+msgstr "以下类别的配置项将不会存储在 Elasticsearch 服务器上。要将此应用于现有的 CI，"
+"必须在更改此选项后通过控制台运行 CI 迁移。"
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"具有以下部署状态的配置项将不会存储在 Elasticsearch 服务器上。"
+"要将此应用于现有的 CI，必须在更改此选项后通过控制台运行 CI 迁移。"
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "客户可以查看历史 CI 版本。"
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
+msgstr "客户可以手动切换历史 CI 版本。"
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"在配置项搜索屏幕的属性上使用的默认数据。例如："
+"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
+"=Last;ITSMConfigItemCreateTimePoint=2;\"。"
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"在配置项搜索屏幕的属性上使用的默认数据。例如："
+"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
+"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
+"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
+msgstr "为版本字符串定义一个 Template::Toolkit 方案。仅在版本字符串模块设置为 "
+"TemplateToolkit 时使用。"
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
+msgstr "定义一组允许客户查看配置项的条件。可选择将条件限制为某些客户组。名称是唯一的"
+"强制属性。如果没有给出其他选项，则该类别下的所有配置项都将可见。"
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "定义是否必须在节点连接中显示链接类型标签。"
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"根据 CI 类别定义配置项概览中 CI "
+"的可用列。每个条目必须包含一个类名和相应类的可用字段数组。"
+"动态字段条目必须遵守 DynamicField_FieldName 方案。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
+msgstr "定义代理界面配置项搜索结果中配置项排序的默认配置项属性。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
+msgstr "定义客户界面配置项搜索结果中配置项排序的默认配置项属性。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
+msgstr "定义此操作的配置项搜索结果的配置项排序默认配置项属性。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "定义代理界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
+"在上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "定义客户界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
+"在上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "定义此操作的配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
+"在上。"
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"根据 CI 类定义配置项概览中默认显示的 CI "
+"列。每个条目必须包含一个类名和相应类的可用字段数组。动态字段条目必须遵守 "
+"DynamicField_FieldName 方案。"
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "定义默认显示的关系深度。"
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
+msgstr "定义配置项目搜索界面默认显示的配置项目搜索属性。"
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"定义配置项搜索屏幕默认显示的配置项搜索属性。Example: \"Key\" must have the "
+"name of the Dynamic Field in this case 'X', \"Content\" must have the value "
+"of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', "
+"Dropdown: '1', Date/Time:Search_DynamicField_XTimeSlotStartYear=1974；Search_"
+"DynamicField_XTimeSlotStartMonth=01；Search_DynamicField_XTimeSlotStartDay=26"
+"；Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotSta"
+"rtMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStop"
+"Month=01；Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59；'和或 "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';。"
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "定义客户ITSMConfigItem 屏幕的搜索限制。"
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "定义客户ITSMConfigItemSearch 屏幕的搜索限制。"
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
+msgstr "定义哪些项目可用于 ITSM Config 项目 ACL 结构第三层中的 \"操作\"。"
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
+msgstr "定义 ITSM Config 项目 ACL 结构第一层中的可用项目。"
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
+msgstr "定义 ITSM Config 项目 ACL 结构第二层中的可用项目。"
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "定义更新"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "DeplState"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "部署状态"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
+msgstr "动态字段事件模块，用于在包含的动态字段发生变化时将配置项定义标记为不同步。"
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
+msgstr "在代理界面的附加 ITSM 字段屏幕中显示的动态字段。"
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
+msgstr "客户界面配置项目概览屏幕中显示的动态字段。"
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
+msgstr "在代理界面的配置项搜索屏幕中显示的动态字段。"
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 msgstr ""
+"启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是"
+"否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::Configitem::"
+"ListDuplicates 进行检查。"
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
+msgstr "配置项索引字段，用于全文搜索。字段也会被存储，但对于整体功能来说并非必须。"
+"可通过将条目设置为 0 或删除来禁用附件的包含。"
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
+msgstr "存储在配置项索引中的字段，除用于全文检索外，还可用于其他用途。为了实现完整的"
+"功能，所有字段都是必填字段。"
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"可以为每个 webservice（键）定义一个类（值）数组，在此基础上限制导入。对于所有"
+"选定的类或所有现有的类，必须在调用者配置中选择识别属性。"
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
+msgstr "用于 ConfigItemFetch 调用层的 GenericInterface 模块注册。"
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM 配置项目"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "状态"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "事件状态"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
+msgstr "在客户界面的配置项搜索中包含部署状态。"
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
+msgstr "在客户界面的配置项目搜索中包含事件状态。"
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
+msgstr "在此操作结果中显示的配置项的最大数量。"
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "名称模块"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "编号模块"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
+msgstr "在代理界面搜索结果的每一页中显示的配置项数量。"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
+msgstr "客户界面搜索结果每页显示的配置项数量。"
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
+msgstr "要搜索的对象、条目数量以及要显示的属性。配置项属性必须通过 Elasticsearch "
+"明确存储。"
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中配置项类别的参数。"
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"小配置项目概览的列过滤器参数。请注意：将 \"Active（活动）\"设置为 0 只会阻止"
+"代理在其个人偏好设置中编辑该组的设置，但仍允许管理员编辑其他用户的设置。使用 "
+"\"PreferenceGroup（偏好组）\"可控制这些设置应显示在用户界面的哪个区域。"
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中配置项类名称模块的参数。"
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中配置项类别的编号模块参数。"
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中配置项类的版本字符串模块参数。"
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "用于代理界面首选项视图中配置项类的版本字符串模板工具包模块参数。"
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "代理界面首选项视图中配置项类的版本触发器参数。"
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
+msgstr "为每个配置的 Webservice 的每个事件（作为调用者）执行配置的操作。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用 ITSM 配置项目附件操作所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
+msgstr "在客户界面使用 ITSM 配置项目搜索屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用 ITSM 配置项目树视图屏幕所需的权限。"
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "在代理界面中使用批量 ITSM 配置项目屏幕所需的权限。"
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
+msgstr "在菜单中显示一个链接，以树形视图显示配置项链接。"
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "如果未选择任何类别，则显示默认类别。"
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "自动触发 ConfigItemFetch 调用器。"
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "版本字符串表达式"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "版本字符串模块"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "版本触发器"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"是否可以通过检查缓存字段依赖关系来避免执行 "
+"ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-"
+"ReturnType 中使用 ACL 模块，则必须禁用。"
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "标题中显示了哪些一般信息。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "一般调用者数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
@@ -1652,11 +1767,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "外发请求数据的设置"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "制图"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
@@ -1668,11 +1783,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "接收响应数据的设置"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "活动数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
@@ -1680,43 +1795,43 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
+msgstr "异步事件触发由 OTOBO 调度程序守护进程在后台处理（推荐）。"
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "自动缩进代码"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "评论/不评论代码"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "搜索和替换"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "全部选择"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "全屏"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "配置项目"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "分类"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "按有效状态筛选"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "包含无效 ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
@@ -1724,1481 +1839,1535 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "包含无效的动态字段"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "按对象类型筛选字段"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "按命名空间过滤字段"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "新动态字段"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
+msgstr "您想从其他动态字段类型中获益吗？您完全可以使用以下字段类型："
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "复制此字段"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "将在自动完成时搜索的属性"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "外部资源键"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
+msgstr "通过外部来源（如网络服务或导入/导出）设置时，该值将被解释为该属性。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "显示值的属性"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "选择显示类型"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
+msgstr "基本结构无效。请提供包含 YAML 格式数据的数组。"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
+msgstr "由于未知错误，无法导入 ACL，请检查 OTOBO 日志以获取更多信息"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (复制) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
+msgstr "每种语言最低翻译进度的百分比值，可用于文档制作。"
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "通过 http 或 https 访问软件仓库。"
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "自动加载 Znuny4OTRSRepo 扩展。"
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
+msgstr "配置冲突检查模块的后台模块注册。"
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
+msgstr "文件冲突检查模块的后台模块注册。"
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
+msgstr "重新定义检查模块功能的后台模块注册。"
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "手动设置模块的后台模块注册。"
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "为 BS 广告清除创建拦截钩。"
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
+msgstr "为软件包管理器输出过滤器创建的块钩子。"
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "分支视图提交限制"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "代码政策"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
-msgstr ""
+msgstr "分支视图屏幕每页的提交限制"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "创建分析文件"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "根据此票单创建分析文件并发送给 Znuny。"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "为此票单创建分析文件。"
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "定义私有插件仓库"
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "定义处理 HTML 模板的过滤器。"
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "定义用于检查代码策略的测试模块。"
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "GIT 克隆/推送 URL 前缀的定义。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"动态字段的定义：Group => 可以访问动态字段的组；AlwaysVisible => "
+"可以删除的字段 (0|1)；InformationAreaName => Widgets 名称；"
+"InformationAreaSize => Widgets 的大小和位置（大|小）；Name => "
+"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
+"= 禁用；1 = 激活；2 = 强制）；FilterRelease => 资源库名称必须匹配的 "
+"Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRelease => "
+"必须与版本库名称匹配的 Regex 才能显示, FilterPackage => "
+"必须与软件包名称匹配的 Regex 才能显示, FilterBranch => 必须与分支名称匹配的 "
+"Regex 才能显示, FilterRelease => 必须与删除版本字符串匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"动态字段的定义：组 => 可访问动态字段的组；AlwaysVisible => 可移除的字段 "
+"(0|1)；InformationAreaName => 小工具名称；InformationAreaSize => "
+"小工具的大小和位置（大|小）；Name => 应使用的动态字段的名称；Priority => "
+"动态字段的顺序；State => 字段的状态（0 = 禁用，1 = 激活，2 = 强制）；"
+"FilterRepository => 资源库名称必须与之匹配的 Regex。字段的状态（0 = 禁用，1 "
+"= 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 Regex "
+"才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，"
+"FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
+"必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
+msgstr "外部 MD5 和的定义（key => MD5，Value => "
+"Vendor、PackageName、Version、Date）。"
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
+msgstr "定义公共存储库请求与 OPMS 内部存储库之间的映射。"
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "包件状态的定义。"
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "重新命名的 OPMS 软件包的定义。"
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "目录，Git 使用它来缓存版本库。"
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "目录，Git 用它来存储临时数据。"
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "目录，Git 用它来存储工作副本。"
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "禁用在线存储库。"
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
+msgstr "不记录这些用户的 git ssh 连接授权结果。适用于自动化操作。"
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "动态字段屏幕"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "动态字段屏幕"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
-msgstr ""
+msgstr "将所有可用公钥导出到 authorized_keys 文件。"
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "将所有相关版本导出到 ftp 服务器。"
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
+msgstr "在代理界面中注册 OPMS 对象的前端模块。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
+msgstr "在公共接口中为 PublicOPMSRepository 对象注册前台模块。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
+msgstr "在公共接口中为 PublicOPMSRepositoryLookup 对象注册前端模块。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
+msgstr "在公共界面中为 PublicOPMSTestBuild 对象注册前端模块。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
+msgstr "公共界面中 PublicPackageVerification 对象的前台模块注册。"
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "管理界面的前台模块注册。"
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "GIT 作者注册。"
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
+msgstr "为指定区块生成 HTML 注释钩子，以便过滤器使用。"
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "每晚生成一次文件。"
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Git 管理"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "Git 仓库"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr ""
+msgstr "组，其成员在 OPMS 中拥有删除管理员权限。"
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
+msgstr "组，其成员在 OPMS 中拥有存储库管理权限。"
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
+msgstr "组，其成员将在 OPMS 屏幕中看到 CI 检测结果信息。"
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
+msgstr "已通过身份验证的用户（通过用户登录名和密码）必须是组的成员，才能通过公共接口"
+"构建测试包。"
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
+msgstr "在添加 OPMS 仓库时，将在 git 项目创建过程中设置的组。"
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "管理屏幕中的动态字段。"
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
+msgstr "在此管理用于访问 Git 的 SSH 公钥。添加新密钥时，请确保保存此首选项。"
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "模块，生成有关新增代码行的统计数据。"
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "模块来生成代码增长的统计数据。"
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
+msgstr "模块来生成有关 git 提交次数的统计数据。"
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
+msgstr "模块，生成有关删除代码行的统计数据。"
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
+msgstr "只有在这些组中拥有 rw 权限的用户才能访问 git。"
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "手动设置软件包兼容性的选项。"
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "分支视图屏幕页面的参数。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"GITProjectName\" 动态字段的预定义：Group => 可访问动态字段的组；"
+"AlwaysVisible => 可移除的字段 (0|1)；InformationAreaName => 小部件名称；"
+"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
+"应使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = "
+"禁用，1 = 激活，2 = 强制）；FilterRepository => Regex（字词）。字段的状态（0 "
+"= 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 "
+"Regex 才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，"
+"FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
+"必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"GITRepositoryName\" 动态字段的预定义：Group => 可以访问动态字段的组；"
+"AlwaysVisible => 可以移除的字段 (0|1)；InformationAreaName => 小部件名称；"
+"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
+"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
+"= 禁用；1 = 激活；2 = 强制）；FilterRepository => 重写字段 "
+"(0|1)。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => "
+"必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => "
+"必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => "
+"必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
+"必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"PackageDeprecated \"动态字段的预定义：Group => 可以访问动态字段的组；"
+"AlwaysVisible => 可以删除的字段 (0|1)；InformationAreaName => 小部件的名称；"
+"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
+"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
+"= 禁用，1 = 激活，2 = 强制）；FilterRepository => 与动态字段相关的 "
+"Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => "
+"必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => "
+"必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => "
+"必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
+"必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "如果出现错误，将通过电子邮件通知收件人。"
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "访问 Git 的 SSH 密钥"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "发送分析文件"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
-msgstr ""
+msgstr "设置版本库列表中使用的 git 克隆地址。"
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "设置 git 仓库的主目录。"
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
+msgstr "设置 BugzillaAddComment post 接收脚本位置的路径。"
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
+msgstr "设置 OTRSCodePolicy 脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，并通过 "
+"cron 更新。"
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
+msgstr "设置 OTRSCodePolicy 预接收脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，"
+"并通过 cron 更新。"
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "显示 git 仓库中的最新提交。"
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
+msgstr "在菜单中显示一个链接，以便从当前票单创建单元测试。"
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "将 OPMS 表与远程数据库同步。"
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "sphinx 库的最低版本。"
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "要使用的狮身人面像主题名称。"
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "OTRS CSS 文件的路径（相对于静态路径）。"
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "OTRS 徽标的路径（相对于静态路径）。"
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "静态文件夹的路径，其中包含图片和 css 文件。"
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "主题文件夹的路径，其中包含 sphinx 主题。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
+msgstr "此配置定义了启用或禁用默认列的所有可能屏幕。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
+msgstr "该配置定义了启用或禁用动态字段的所有可能屏幕。"
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
+msgstr "该配置定义了只显示有效动态字段还是显示所有（无效）动态字段。"
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
+msgstr "此配置定义 OTRS 软件包验证是激活还是禁用。如果禁用，所有软件包都显示为已验证"
+"。我们仍然建议只使用经过验证的软件包。"
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"此配置定义了 OTRS CloudService 代理服务的 URL。将根据选择的 SysConfig "
+"\"Znuny4OTRSRepoType \"添加 http 或 https 前缀。"
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
+msgstr "此配置注册了一个输出后置过滤器，以扩展软件包验证。"
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
+msgstr "此配置注册了一个 OutputFilter 模块，用于删除 OTRS Business Solution TM 广告。"
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
+msgstr "此配置注册了一个输出过滤器，以隐藏软件包管理器中的在线版本库选择。"
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
+msgstr "整理长期未通过测试模块检查的未处理版本。"
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
+msgstr "在这些组中拥有 rw 权限的用户可以执行 \"git push --force\" 强制推送。"
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
+msgstr "在其中一个组中拥有 rw 权限的用户可以管理项目。此外，成员还拥有管理 git "
+"的权限。"
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 GB"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U：17.5 英寸（44.45 厘米）"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 GB"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 GB"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U：21 英寸（53.34 厘米）"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U：26.25 英寸（66.68 厘米）"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 GB"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U：31.5 英寸（80.01 厘米）"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "19 英寸机架"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U：1.75 英寸（4.45 厘米）"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U：35 英寸（88.9 厘米）"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "21 英寸支架"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U：38.5 英寸（97.79 厘米）"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "23 英寸机架"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23.6 英寸（600 毫米）"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 GB"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U：42 英寸（106.68 厘米）"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 GB"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U：47.25 英寸（120.02 厘米）"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K（2048 x 1080）"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U：3.5 英寸（8.89 厘米）"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U：52.5 英寸（133.35 厘米）"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31.5 英寸（800 毫米）"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 GB"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U：57.75 英寸（146.68 厘米）"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35.4 英寸（900 毫米）"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U：63 英寸（160.02 厘米）"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39.4 英寸（1000 毫米）"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U：68.25 英寸（173.35 厘米）"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U：5.25 英寸（13.34 厘米）"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U：73.5 英寸（186.69 厘米）"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43.3 英寸（1100 毫米）："
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U：78.75 英寸（200.02 厘米）"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47.2 英寸（1200 毫米）"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 GB"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U：84 英寸（213.36 厘米）"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K 超高清（3840 x 2160）："
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U：7 英寸（17.78 厘米）"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 GB"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U：8.75 英寸（22.23 厘米）"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 GB"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U：10.5 英寸（26.67 厘米）"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U：12.25 英寸（31.12 厘米）"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 GB"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K 超高清（7680 x 4320）"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U：14 英寸（35.56 厘米）"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 GB"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U：15.75 英寸（40.01 厘米）"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "会计"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "地址分配"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "管理员"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "设备类型"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "反向链接"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "电池容量（安时）"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "电池类型"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "总线接口"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "CPU 等级"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "容量（GB）"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "每个图形卡的容量"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "卡号"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "卡片类型"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "客户证书"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "客户端软件"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "客户类别"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "时钟频率"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "时钟速度"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "代码签名证书"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "联系方式"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "联系经销商"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "合同"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "合同类型"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "合同期从"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "合同期至"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "成本单位"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "许可证数量"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "创建日期"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "定制机架"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP 保留"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "发票日期"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "订购日期"
 
 #. ITSM class bundles
 msgid "Date of Warrenty"
-msgstr ""
+msgstr "授权日期"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "发布日期"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "文件签名证书"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "ETSI 机架"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "电子邮件证书（S/MIME 证书）"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "终端 IP 地址"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "支持结束"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "有效期"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "火线（IEEE 1394）"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "固件"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "飞轮储能"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "外形尺寸"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "全高清（1920 x 1080）"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "一般信息"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "图形卡"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "图形卡"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "高清（1280 x 720）"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "硬件型号"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "硬件重量"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "IP 协议"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "库存编号"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "转换成本"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "发票号码"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "LCD 显示器（液晶显示器）"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "LED 显示器（发光二极管）"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC（低引脚数）"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "纬度"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "第 1 层：物理层"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "第 2 层：数据链路层"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "第 3 层：网络层"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "第 3 层：网络层（超级网）"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "第 4 层：传输层"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "第 5 层：会话层"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "第 6 层：显示层"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "第 7 层：应用层"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "许可证密钥"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "许可证类型"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "许可证有效期从"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "许可证有效期至"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "磷酸铁锂（LiFePO4）电池"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "锂离子（Li-Ion）电池"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "位于"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "经度"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA（微通道架构）"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "制造商"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "玛丽亚数据库"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "最大负载能力（瓦）"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "内存"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "内存类型"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "微软 SQL 服务器"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "迷你机架"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "手机号码"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "型号说明"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "显示器分辨率"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "显示器尺寸"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "网络信息"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "网络信息"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "网络层"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "镍镉（NiCd）电池"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "镍氢（NiMH）电池"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "CPU 数量"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "内存模块数量"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "图形卡数量"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "OLED 显示器（有机发光二极管）"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "运营成本"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "甲骨文数据库"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "订单号"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "输出"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "PCI Express（PCIe）"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "密码"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "密码 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "电话号码"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "电话类型"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "物理磁芯"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "电力输送"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "在"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "四倍高清（2560 x 1440）"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "机架深度"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "机架单元 (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "客户参考"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "SIM 卡"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "SSL/TLS 证书"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "密封铅酸 (SLA) 电池"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "序列号"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "服务器软件"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "服务标签"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "插座类型"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "启动 IP 地址"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "存储"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "存储分区"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "附属机构"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "线程"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "雷电"
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "显卡总内存（GB）"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "总内存（GB）"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "触摸屏显示器"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "塔楼"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB（通用串行总线）"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "VESA 本地总线 (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "显像管"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "虚拟链接"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA（1366 x 768）"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "模拟电话"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "读卡器"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "会议电话"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "咨询协议"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "集装箱管理"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "无绳电话（DECT 电话）"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "DNS 服务器"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "雇佣合同"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "外置硬盘"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "防火墙"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "特许经营协议"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "耳机"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "身份和访问管理（IAM）"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "固定电话"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "租赁协议"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "许可协议"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "贷款协议"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "移动/嵌入式"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "保密协议（NDA）"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "笔记本"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "合伙协议"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "电话/VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "销售合同"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "卫星电话"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "服务协议"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "发言人"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "瘦客户机"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "USB 集线器"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "虚拟专用网"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "VR 头盔"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "网络电话"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
-
+msgstr "网络摄像头"
