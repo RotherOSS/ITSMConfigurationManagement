@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/lt/>\n"
 "Language: lt\n"
@@ -1096,7 +1096,7 @@ msgstr "Puslapių (kuriuose rodomi konfigūracijos elementai) parametrai."
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Leidimų grupė"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -2069,7 +2069,7 @@ msgstr "Įtraukti negaliojančias ACL"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Patikrinkite oficialią% sdokumentaciją%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
