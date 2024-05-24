@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ro/>\n"
 "Language: ro\n"
@@ -746,7 +746,7 @@ msgstr "Nelimitat"
 
 #. JS File: ITSM.Agent.ConfigItem.Zoom
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 #. SysConfig
 msgid "Assigned CIs"
@@ -1099,7 +1099,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "Drepturi Grup"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
@@ -1380,7 +1380,7 @@ msgstr "Nu s-au găsit versiuni!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Nu ai permisiuni."
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
