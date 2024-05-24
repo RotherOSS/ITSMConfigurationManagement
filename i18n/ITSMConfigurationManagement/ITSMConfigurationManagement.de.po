@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/de/>\n"
 "Language: de\n"
@@ -1610,6 +1610,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Die angezeigten Dynamischen Felder in der Ansicht \"zusätzliche ITSM-Felder\""
+" im Agenten-Interface."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1767,6 +1769,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"Führt die konfigurierte Aktion für jedes Ereignis für jeden konfigurierten "
+"Webservice aus (als Invoker)."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1834,111 +1838,121 @@ msgstr "Die allgemeinen Informationen werden in der Kopfzeile angezeigt."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Allgemeine Invoker-Daten"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Dieses Invoker-Backend-Modul wird aufgerufen, um die Daten zum Versand an "
+"das entfernte System sowie die zurückgelieferten Daten aufzubereiten."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Einstellungen für ausgehende Request-Daten"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "Mapping"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"Die Daten des OTOBO-Invokers werden von diesem Mapping verarbeitet, um sie "
+"so umzuformen, wie das entfernte System die Daten benötigt."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"Die Antwort-Daten des entfernten Systems werden von diesem Mapping "
+"verarbeitet, um sie so umzuformen, wie der Invoker von OTOBO sie benötigt."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Einstellungen für eingehende Antwortdaten"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Ereignisdaten"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Event hinzufügen"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"Asynchrone Ereignisauslöser werden vom OTOBO Scheduler Daemon im Hintergrund "
+"verarbeitet (empfohlen)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "Code automatisch einrücken"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "Code kommentieren/Kommentierung entfernen"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "Suchen & Ersetzen"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Alles markieren"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "Vollbild"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Sortieren"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "Filtern nach Status valid"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "Ungültige ACLs anzeigen"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Überprüfen Sie die offizielle %sdocumentation%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "Ungültige dynamische Felder anzeigen"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "Feld nach Objekttyp filtern"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "Feld nach Namespace filtern"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Neue Dynamische Felder"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Möchten Sie die Vorteile weiterer dynamischer Felder nutzen? Sie haben "
+"vollen Zugriff auf folgende Feldtypen:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "Dieses Feld kopieren"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "Beim Autocomplete durchsuchtes Attribut"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
@@ -1952,59 +1966,68 @@ msgstr ""
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "Für die Werte angezeigtes Attribut"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "Wählen Sie die Anzeigeart aus"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
+msgstr "Grundstruktur ungültig. Bitte verwenden Sie ein Arry im YAML-Format."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Die ACLs konnten wegen eines unbekannten Fehlers nicht importiert werden. "
+"Weitere Informationen finden Sie in den OTOBO Logdateien"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (Kopie) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"Ein prozentualer Wert des minimalen Übersetzungsfortschritts pro Sprache, "
+"der für Dokumentationen verwendet werden kann."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "Zugriff auf die Repositories über http oder https."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "Autoloading von Znuny4OTRSRepo-Erweiterungen."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
 msgstr ""
+"Registrierung des Backend-Moduls für das Modul zur Prüfung von "
+"Konfigurationskonflikten."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
 msgstr ""
+"Registrierung des Backend-Moduls für das Modul zur Prüfung von "
+"Dateikonflikten."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
 msgstr ""
+"Registrierung des Backend-Moduls für die Funktion \"redefine check module\"."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "Backend-Modulregistrierung für das Modul \"manual set module\"."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "Block hooks für die Entfernung von BS ad erstellen."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
+msgstr "Blockhaken, die für Paketmanager-Ausgabefilter erstellt werden sollen."
 
 #. SysConfig
 msgid "Branch View commit limit"
@@ -2012,7 +2035,7 @@ msgstr "Commit-Limit der Zweigansicht"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "CodePolicy"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
@@ -2032,15 +2055,15 @@ msgstr "Erstellt einen Analysedatei von diesem Ticket."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "Definieren Sie private Addon-Repos."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Definiert den zum Verarbeiten der HTML-Vorlagen verwendeten Filter."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "Definiert das Testmodul zur Überprüfung der Code-Policy."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
@@ -2073,18 +2096,21 @@ msgstr "Definition umbenannter OPMS Pakete."
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
 msgstr ""
+"Verzeichnis, das von Git zum Zwischenspeichern von Repositories verwendet "
+"wird."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "Verzeichnis, das von Git zum Speichern temporärer Daten verwendet wird."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
 msgstr ""
+"Verzeichnis, das von Git zum Speichern von Arbeitskopien verwendet wird."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "Deaktivieren Sie Online-Repositories."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
@@ -2096,7 +2122,7 @@ msgstr "Dynamische Felder Oberflächen"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
@@ -2128,7 +2154,7 @@ msgstr "Frontendmodul-Registration für das PublicPackageVerification Objekt im 
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Frontend-Modulregistrierung im Agentenbereich."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -2137,10 +2163,12 @@ msgstr "Registrierung der GIT Verfasser"
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"Generiert HTML-Kommentar-Anker für die angegebenen Blöcke, damit Filter "
+"diese nutzen können."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "Erstellen Sie einmal pro Nacht Dokumentationen."
 
 #. SysConfig
 msgid "Git"
@@ -2152,7 +2180,7 @@ msgstr "Git-Verwaltung"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "Git-Repository"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
@@ -2165,6 +2193,8 @@ msgstr "Gruppe, dessen Mitglieder Repository-Admin-Rechte in OPMS haben."
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
 msgstr ""
+"Gruppe, deren Mitglieder Informationen zu CI-Testergebnissen in OPMS-"
+"Bildschirmen sehen."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
@@ -2208,7 +2238,7 @@ msgstr "Nur Benutzer, die über rw-Berechtigungen in einer dieser Gruppen verfü
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "Option zur manuellen Einstellung der Paketkompatibilität."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
@@ -2228,7 +2258,7 @@ msgstr "Vor-Definition des dynamischen Feldes 'PackageDeprecated': Group => Grup
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "Empfänger, die im Falle von Fehlern per E-Mail informiert werden."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
@@ -2253,6 +2283,9 @@ msgstr "Legt den Pfad zums BugzillaAddComment post receive Skript fest."
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Legt den Pfad für den Speicherort des OTRSCodePolicy-Skripts fest. Es wird "
+"empfohlen, einen separaten Klon des OTRSCodePolicy-Moduls zu haben, der über "
+"Cron aktualisiert wird."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
@@ -2260,11 +2293,13 @@ msgstr "Legt den Pfad zum OTRSCodePolicy pre-receive Skript fest. Es wird empfoh
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "Letzte Übertragungen in Git-Repositories anzeigen."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
 msgstr ""
+"Zeigt einen Link im Menü an, um einen Einheitstest aus dem aktuellen Ticket "
+"heraus zu erstellen."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2272,27 +2307,27 @@ msgstr "Synchronisiert OPMS Tabellen mit einer entfernten Datenbank."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "Die Mindestversion der Sphinx-Bibliothek."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "Der Name des zu verwendenden Sphinx-Themas."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "Der Pfad zur OTRS-CSS-Datei (relativ unter dem statischen Pfad)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "Der Pfad zum OTRS-Logo (relativ unterhalb des statischen Pfades)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "Der Pfad zum statischen Ordner, der Bilder und CSS-Dateien enthält."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "Der Pfad zum Themenordner, der die Sphinx-Themen enthält."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
@@ -2309,26 +2344,41 @@ msgstr "Diese Konfiguration definiert ob nur gültige oder alle (ungültige) dyn
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"Diese Konfiguration legt fest, ob die OTRS-Paketverifizierung aktiv oder "
+"deaktiviert sein soll. Ist sie deaktiviert, werden alle Pakete als "
+"verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete "
+"zu verwenden."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"Diese Konfiguration definiert die URL zum OTRS CloudService Proxy-Dienst. "
+"Das http oder https Präfix wird hinzugefügt, abhängig von der Auswahl der "
+"SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
 msgstr ""
+"Mit dieser Konfiguration wird ein Output-Post-Filter registriert, um die "
+"Paketprüfung zu erweitern."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"Diese Konfiguration registriert ein OutputFilter-Modul, das die OTRS "
+"Business Solution TM-Werbung entfernt."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
+"Diese Konfiguration registriert einen Ausgabefilter, um die Auswahl des "
+"Online-Repositorys im Paketmanager auszublenden."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
 msgstr ""
+"Aufgeräumte, unbearbeitete Freigabe, die schon lange nicht mehr von "
+"Testpomulen geprüft wurde."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
@@ -2592,7 +2642,7 @@ msgstr "7U: 12,25 Zoll (31,12 cm)"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
@@ -2792,7 +2842,7 @@ msgstr "ETSI-Gestell"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
@@ -2980,7 +3030,7 @@ msgstr "Hersteller"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
@@ -3344,7 +3394,7 @@ msgstr "Notebook"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
