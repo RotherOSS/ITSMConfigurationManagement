@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Italian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/it/>\n"
 "Language: it\n"
@@ -1199,7 +1199,7 @@ msgstr ""
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Vuoi continuare?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
@@ -1219,7 +1219,7 @@ msgstr "Nessuna versione trovata!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "Nessun permesso"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1631,6 +1631,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Campi dinamici visualizzati nella schermata del campo ITSM aggiuntiva "
+"dell'interfaccia agenti."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1862,6 +1864,8 @@ msgstr "Dati generali dell'invocatore"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"Questo modulo di Invoker di backend viene utilizzato per preparare i dati da "
+"inviare al sistema remoto e per processare le risposte."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1874,10 +1878,14 @@ msgstr "Mappatura"
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"I dati dell'Invoker OTOBO saranno trasformati con questa mappatura, per "
+"modificarli secondo le aspettative del sistema remoto."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"I dati del sistema remoto saranno trasformati con questa mappatura, per "
+"modificarli secondo le aspettative del sistema OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1889,11 +1897,13 @@ msgstr "Dati dell'evento"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "Aggiungi evento"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"I trigger di eventi asincroni sono gestiti dal demone Scheduler OTOBO in "
+"background (consigliato)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1933,7 +1943,7 @@ msgstr "Includere ACL non valide"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "Controlla la %s documentazione ufficiale %s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
@@ -1992,10 +2002,12 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"Non è stato possibile importare ACL a causa di un errore sconosciuto. Per "
+"ulteriori informazioni, consultare i registri OTOBO"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (copia) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
@@ -3516,7 +3528,7 @@ msgstr "Taccuino"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
