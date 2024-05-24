@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:13+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Persian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/fa/>\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -76,11 +79,11 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
-msgstr ""
+msgstr "وضعیت نصب"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "وضعیت رخداد"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
@@ -136,7 +139,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
-msgstr ""
+msgstr "اجرا جستجو"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
@@ -332,11 +335,11 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "عملیاتی"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
-msgstr ""
+msgstr "اخطار"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
@@ -817,6 +820,11 @@ msgstr "ساخت و مدیریت تعاریف آیتم‌های پیکربندی
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"تعریف عملیات که در آن یک دکمه تنظیمات در دسترس است در اشیاء مرتبط ویجت ("
+"LinkObject :: ViewMode = \\\\ \"پیچیده \"). لطفا توجه داشته باشید که این "
+"اقدامات باید در بر داشت زیر JS و CSS فایل های ثبت نام کرده اند: Core."
+"AllocationList.css، Core.UI.AllocationList.js، Core.UI.Table.Sort.js، Core."
+"Agent.TableFilters.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -956,7 +964,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Overview."
-msgstr ""
+msgstr "پیش نمایش"
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
@@ -1084,7 +1092,7 @@ msgstr ""
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "کلاس"
 
 #. SysConfig
 msgid "global"
@@ -1168,7 +1176,7 @@ msgstr ""
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "نوع موضوع"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
@@ -1204,7 +1212,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
-msgstr ""
+msgstr "بدون مجوز و اجازه."
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
@@ -1593,6 +1601,8 @@ msgstr ""
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"انجام عمل پیکربندی برای هر رویداد (به عنوان یک Invoker) برای هر از "
+"webservice پیکربندی شده است."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1649,6 +1659,8 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"این invoker ماژول باطن OTOBO خواهد شد به نام برای آماده سازی داده ها به "
+"سیستم از راه دور ارسال می شود، و برای پردازش داده ها پاسخ آن است."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1661,10 +1673,14 @@ msgstr ""
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"داده ها از فراخواننده OTOBO خواهد شد این نقشه برداری پردازش، آن را تبدیل به "
+"نوع داده سیستم از راه دور انتظار."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"پاسخ داده خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده "
+"فراخواننده OTOBO انتظار."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1676,11 +1692,13 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "اضافه کردن رویداد"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"باعث رویداد آسنکرون توسط OTOBO زمانبند شبح در پس زمینه به کار گرفته (توصیه "
+"می شود)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1696,7 +1714,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "انتخاب همه"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
@@ -1773,6 +1791,8 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"ACL ها نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفابرای اطلاعات بیشتر "
+"OTOBO سیاهه های مربوط را بررسی کنید"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3152,7 +3172,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
@@ -3201,4 +3221,3 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
-
