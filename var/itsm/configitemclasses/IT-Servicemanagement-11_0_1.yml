@@ -258,7 +258,7 @@
           Phone / VOIP: Phone / VOIP
           VPN: VPN
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1118
@@ -872,7 +872,7 @@
           Other: Other
           Server: Server
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1042
@@ -923,8 +923,10 @@
           48GHz: 4.8 GHz
           49GHz: 4.9 GHz
           50GHz: 5.0 GHz
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1043
       Label: Clockspeed
@@ -947,8 +949,10 @@
           '6': '6'
           '7': '7'
           '8': '8'
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1044
       Label: Number of CPUs
@@ -1037,12 +1041,14 @@
           LGA20113: LGA2011-3
           LGA2066: LGA2066
           LGA775: LGA775
+          Other: Other
           PGA: PGA
           Socket370: Socket 370
           Socket478: Socket 478
           TR4: TR4
-        RegExList: ~
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1046
       Label: Socket Type
@@ -1170,7 +1176,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -1369,7 +1375,7 @@
           Other: Other
           ThinClient: Thin Client
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1050
@@ -1438,7 +1444,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1056
@@ -1465,7 +1471,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1152
@@ -1663,7 +1669,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1154
@@ -1713,7 +1719,7 @@
           VGA: VGA
           VirtualLink: VirtualLink
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1060
@@ -1726,8 +1732,10 @@
         AJAXTriggers:
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
-        Expression: '[% DynamicField_ITSMGraphicsCard-Count * DynamicField_ITSMGraphicsCard-MemorySize
-          %]'
+        Expression: "[% Count = \"DynamicField_ITSMGraphicsCard-Count\" %][% Capacity
+          = \"DynamicField_ITSMGraphicsCard-MemorySize\" %]\r\n[% Total = Data.$Count
+          * Data.$Capacity %]\r\n[% Total %] GB"
+        Interpreter: ~
         Link: ''
         LinkPreview: ''
         Readonly: 1
@@ -1736,7 +1744,11 @@
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - NameUpdate
+        - ValueUpdate
+        - VersionCreate
       FieldType: ScriptTemplateToolkit
       ID: 1153
       Label: Total Graphics card RAM (GB)
@@ -1766,7 +1778,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1151
@@ -1858,7 +1870,10 @@
         - DynamicField_ITSMMemory-Capacity
         - DynamicField_ITSMMemory-Count
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - ValueUpdate
+        - VersionDelete
       FieldType: ScriptTemplateToolkit
       ID: 1150
       Label: Total RAM (GB)
@@ -2251,7 +2266,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 HDDHardDiskDrive: HDD (Hard Disk Drive)
@@ -2261,7 +2275,7 @@
                 SSDSolidStateDrive: SSD (Solid State Drive)
                 SSHDSolidStateHybridDrive: SSHD (Solid State Hybrid Drive)
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1089
@@ -2292,7 +2306,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 ADATA: ADATA
@@ -2327,7 +2340,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1085
@@ -2858,7 +2871,7 @@
         MultiValue: '0'
         PossibleNone: '1'
         PossibleValues:
-          'Consulting Agreement:': 'Consulting Agreement:'
+          'Consulting Agreement:': Consulting Agreement
           Employment Contract: Employment Contract
           Franchise Agreement: Franchise Agreement
           Lease Agreement: Lease Agreement
@@ -2870,7 +2883,7 @@
           Sales Contract: Sales Contract
           Service Agreement: Service Agreement
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1125
@@ -2942,7 +2955,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -2998,7 +3011,7 @@
           Redis: Redis
           SQLite: SQLite
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1126
@@ -3365,7 +3378,7 @@
           WUXGA (1920 x 1200): WUXGA (1920 x 1200)
           WXGA (1366 x 768): WXGA (1366 x 768)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1141
@@ -3391,7 +3404,7 @@
           '55': 55"
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1139
@@ -3414,7 +3427,7 @@
           Other: Other
           Touchscreen Monitor: Touchscreen Monitor
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1140
@@ -3655,7 +3668,7 @@
           IPv6: IPv6
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1155
@@ -4255,7 +4268,7 @@
           VR Headset: VR Headset
           Webcam: Webcam
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1145
@@ -4630,7 +4643,7 @@
           Satellite Phone: Satellite Phone
           VoIP Phone: VoIP Phone
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1147
@@ -6692,7 +6705,7 @@
           Other: Other
           Server: Server
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1042
@@ -6743,8 +6756,10 @@
           48GHz: 4.8 GHz
           49GHz: 4.9 GHz
           50GHz: 5.0 GHz
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1043
       Label: Clockspeed
@@ -6767,8 +6782,10 @@
           '6': '6'
           '7': '7'
           '8': '8'
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1044
       Label: Number of CPUs
@@ -6857,12 +6874,14 @@
           LGA20113: LGA2011-3
           LGA2066: LGA2066
           LGA775: LGA775
+          Other: Other
           PGA: PGA
           Socket370: Socket 370
           Socket478: Socket 478
           TR4: TR4
-        RegExList: ~
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1046
       Label: Socket Type
@@ -6990,7 +7009,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -7192,7 +7211,7 @@
           47.2 inches (1200 mm): 47.2 inches (1200 mm)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1162
@@ -7234,7 +7253,7 @@
           '9': '9U: 15.75 inches (40.01 cm)'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1161
@@ -7259,7 +7278,7 @@
           Other: Other
           Tower: Tower
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1160
@@ -7305,7 +7324,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1056
@@ -7332,7 +7351,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1152
@@ -7530,7 +7549,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1154
@@ -7580,7 +7599,7 @@
           VGA: VGA
           VirtualLink: VirtualLink
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1060
@@ -7593,8 +7612,10 @@
         AJAXTriggers:
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
-        Expression: '[% DynamicField_ITSMGraphicsCard-Count * DynamicField_ITSMGraphicsCard-MemorySize
-          %]'
+        Expression: "[% Count = \"DynamicField_ITSMGraphicsCard-Count\" %][% Capacity
+          = \"DynamicField_ITSMGraphicsCard-MemorySize\" %]\r\n[% Total = Data.$Count
+          * Data.$Capacity %]\r\n[% Total %] GB"
+        Interpreter: ~
         Link: ''
         LinkPreview: ''
         Readonly: 1
@@ -7603,7 +7624,11 @@
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - NameUpdate
+        - ValueUpdate
+        - VersionCreate
       FieldType: ScriptTemplateToolkit
       ID: 1153
       Label: Total Graphics card RAM (GB)
@@ -7633,7 +7658,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1151
@@ -7725,7 +7750,10 @@
         - DynamicField_ITSMMemory-Capacity
         - DynamicField_ITSMMemory-Count
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - ValueUpdate
+        - VersionDelete
       FieldType: ScriptTemplateToolkit
       ID: 1150
       Label: Total RAM (GB)
@@ -8118,7 +8146,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -8141,7 +8169,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 HDDHardDiskDrive: HDD (Hard Disk Drive)
@@ -8151,7 +8178,7 @@
                 SSDSolidStateDrive: SSD (Solid State Drive)
                 SSHDSolidStateHybridDrive: SSHD (Solid State Hybrid Drive)
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1089
@@ -8182,7 +8209,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 ADATA: ADATA
@@ -8217,7 +8243,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1085
@@ -8468,15 +8494,15 @@
         LinkDirection: ReferencingIsTarget
         LinkReferencingType: Dynamic
         LinkType: DependsOn
-        MultiValue: '0'
-        Multiselect: 0
+        MultiValue: '1'
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
-        ReferencedObjectType: ITSMConfigItemVersion
+        ReferencedObjectType: ITSMConfigItem
         SearchAttribute: Name
         Tooltip: ''
-      FieldType: ConfigItemVersion
-      ID: 1137
+      FieldType: ConfigItem
+      ID: 1168
       Label: Contract
       Name: ITSM-ReferenceToContract
       ObjectType: ITSMConfigItem
@@ -8814,7 +8840,7 @@
           WUXGA (1920 x 1200): WUXGA (1920 x 1200)
           WXGA (1366 x 768): WXGA (1366 x 768)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1141
@@ -8840,7 +8866,7 @@
           '55': 55"
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1139
@@ -8863,7 +8889,7 @@
           Other: Other
           Touchscreen Monitor: Touchscreen Monitor
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1140
@@ -9098,7 +9124,7 @@
           Other: Other
           Server: Server
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1042
@@ -9149,8 +9175,10 @@
           48GHz: 4.8 GHz
           49GHz: 4.9 GHz
           50GHz: 5.0 GHz
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1043
       Label: Clockspeed
@@ -9173,8 +9201,10 @@
           '6': '6'
           '7': '7'
           '8': '8'
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1044
       Label: Number of CPUs
@@ -9263,12 +9293,14 @@
           LGA20113: LGA2011-3
           LGA2066: LGA2066
           LGA775: LGA775
+          Other: Other
           PGA: PGA
           Socket370: Socket 370
           Socket478: Socket 478
           TR4: TR4
-        RegExList: ~
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1046
       Label: Socket Type
@@ -9396,7 +9428,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -9598,7 +9630,7 @@
           47.2 inches (1200 mm): 47.2 inches (1200 mm)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1162
@@ -9640,7 +9672,7 @@
           '9': '9U: 15.75 inches (40.01 cm)'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1161
@@ -9665,7 +9697,7 @@
           Other: Other
           Tower: Tower
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1160
@@ -9711,7 +9743,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1056
@@ -9738,7 +9770,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1152
@@ -9936,7 +9968,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1154
@@ -9986,7 +10018,7 @@
           VGA: VGA
           VirtualLink: VirtualLink
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1060
@@ -9999,8 +10031,10 @@
         AJAXTriggers:
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
-        Expression: '[% DynamicField_ITSMGraphicsCard-Count * DynamicField_ITSMGraphicsCard-MemorySize
-          %]'
+        Expression: "[% Count = \"DynamicField_ITSMGraphicsCard-Count\" %][% Capacity
+          = \"DynamicField_ITSMGraphicsCard-MemorySize\" %]\r\n[% Total = Data.$Count
+          * Data.$Capacity %]\r\n[% Total %] GB"
+        Interpreter: ~
         Link: ''
         LinkPreview: ''
         Readonly: 1
@@ -10009,7 +10043,11 @@
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - NameUpdate
+        - ValueUpdate
+        - VersionCreate
       FieldType: ScriptTemplateToolkit
       ID: 1153
       Label: Total Graphics card RAM (GB)
@@ -10039,7 +10077,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1151
@@ -10131,7 +10169,10 @@
         - DynamicField_ITSMMemory-Capacity
         - DynamicField_ITSMMemory-Count
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - ValueUpdate
+        - VersionDelete
       FieldType: ScriptTemplateToolkit
       ID: 1150
       Label: Total RAM (GB)
@@ -10524,7 +10565,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -10547,7 +10588,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 HDDHardDiskDrive: HDD (Hard Disk Drive)
@@ -10557,7 +10597,7 @@
                 SSDSolidStateDrive: SSD (Solid State Drive)
                 SSHDSolidStateHybridDrive: SSHD (Solid State Hybrid Drive)
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1089
@@ -10588,7 +10628,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 ADATA: ADATA
@@ -10623,7 +10662,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1085
@@ -12124,7 +12163,7 @@
           Other: Other
           SLA: Sealed Lead-Acid (SLA) Battery
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1165
@@ -12270,7 +12309,7 @@
           Other: Other
           Server: Server
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1042
@@ -12321,8 +12360,10 @@
           48GHz: 4.8 GHz
           49GHz: 4.9 GHz
           50GHz: 5.0 GHz
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1043
       Label: Clockspeed
@@ -12345,8 +12386,10 @@
           '6': '6'
           '7': '7'
           '8': '8'
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1044
       Label: Number of CPUs
@@ -12435,12 +12478,14 @@
           LGA20113: LGA2011-3
           LGA2066: LGA2066
           LGA775: LGA775
+          Other: Other
           PGA: PGA
           Socket370: Socket 370
           Socket478: Socket 478
           TR4: TR4
-        RegExList: ~
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1046
       Label: Socket Type
@@ -12568,7 +12613,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -12767,7 +12812,7 @@
           Other: Other
           ThinClient: Thin Client
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1050
@@ -12836,7 +12881,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1056
@@ -12863,7 +12908,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1152
@@ -13061,7 +13106,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1154
@@ -13111,7 +13156,7 @@
           VGA: VGA
           VirtualLink: VirtualLink
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1060
@@ -13124,8 +13169,10 @@
         AJAXTriggers:
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
-        Expression: '[% DynamicField_ITSMGraphicsCard-Count * DynamicField_ITSMGraphicsCard-MemorySize
-          %]'
+        Expression: "[% Count = \"DynamicField_ITSMGraphicsCard-Count\" %][% Capacity
+          = \"DynamicField_ITSMGraphicsCard-MemorySize\" %]\r\n[% Total = Data.$Count
+          * Data.$Capacity %]\r\n[% Total %] GB"
+        Interpreter: ~
         Link: ''
         LinkPreview: ''
         Readonly: 1
@@ -13134,7 +13181,11 @@
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - NameUpdate
+        - ValueUpdate
+        - VersionCreate
       FieldType: ScriptTemplateToolkit
       ID: 1153
       Label: Total Graphics card RAM (GB)
@@ -13164,7 +13215,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1151
@@ -13256,7 +13307,10 @@
         - DynamicField_ITSMMemory-Capacity
         - DynamicField_ITSMMemory-Count
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - ValueUpdate
+        - VersionDelete
       FieldType: ScriptTemplateToolkit
       ID: 1150
       Label: Total RAM (GB)
@@ -13649,7 +13703,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 HDDHardDiskDrive: HDD (Hard Disk Drive)
@@ -13659,7 +13712,7 @@
                 SSDSolidStateDrive: SSD (Solid State Drive)
                 SSHDSolidStateHybridDrive: SSHD (Solid State Hybrid Drive)
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1089
@@ -13690,7 +13743,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 ADATA: ADATA
@@ -13725,7 +13777,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1085
@@ -13985,7 +14037,7 @@
           Other: Other
           Server: Server
         Tooltip: ''
-        TranslatableValues: '0'
+        TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1042
@@ -14036,8 +14088,10 @@
           48GHz: 4.8 GHz
           49GHz: 4.9 GHz
           50GHz: 5.0 GHz
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1043
       Label: Clockspeed
@@ -14060,8 +14114,10 @@
           '6': '6'
           '7': '7'
           '8': '8'
-        RegExList: ~
+          Other: Other
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1044
       Label: Number of CPUs
@@ -14150,12 +14206,14 @@
           LGA20113: LGA2011-3
           LGA2066: LGA2066
           LGA775: LGA775
+          Other: Other
           PGA: PGA
           Socket370: Socket 370
           Socket478: Socket 478
           TR4: TR4
-        RegExList: ~
         Tooltip: ''
+        TranslatableValues: '0'
+        TreeView: '0'
       FieldType: Dropdown
       ID: 1046
       Label: Socket Type
@@ -14283,7 +14341,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -14485,7 +14543,7 @@
           47.2 inches (1200 mm): 47.2 inches (1200 mm)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1162
@@ -14527,7 +14585,7 @@
           '9': '9U: 15.75 inches (40.01 cm)'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1161
@@ -14552,7 +14610,7 @@
           Other: Other
           Tower: Tower
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1160
@@ -14598,7 +14656,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1056
@@ -14625,7 +14683,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1152
@@ -14823,7 +14881,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1154
@@ -14873,7 +14931,7 @@
           VGA: VGA
           VirtualLink: VirtualLink
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1060
@@ -14886,8 +14944,10 @@
         AJAXTriggers:
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
-        Expression: '[% DynamicField_ITSMGraphicsCard-Count * DynamicField_ITSMGraphicsCard-MemorySize
-          %]'
+        Expression: "[% Count = \"DynamicField_ITSMGraphicsCard-Count\" %][% Capacity
+          = \"DynamicField_ITSMGraphicsCard-MemorySize\" %]\r\n[% Total = Data.$Count
+          * Data.$Capacity %]\r\n[% Total %] GB"
+        Interpreter: ~
         Link: ''
         LinkPreview: ''
         Readonly: 1
@@ -14896,7 +14956,11 @@
         - DynamicField_ITSMGraphicsCard-Count
         - DynamicField_ITSMGraphicsCard-MemorySize
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - NameUpdate
+        - ValueUpdate
+        - VersionCreate
       FieldType: ScriptTemplateToolkit
       ID: 1153
       Label: Total Graphics card RAM (GB)
@@ -14926,7 +14990,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       ID: 1151
@@ -15018,7 +15082,10 @@
         - DynamicField_ITSMMemory-Capacity
         - DynamicField_ITSMMemory-Count
         Tooltip: ''
-        UpdateEvents: []
+        UpdateEvents:
+        - ConfigItemCreate
+        - ValueUpdate
+        - VersionDelete
       FieldType: ScriptTemplateToolkit
       ID: 1150
       Label: Total RAM (GB)
@@ -15411,7 +15478,7 @@
         LinkReferencingType: Dynamic
         LinkType: DependsOn
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -15434,7 +15501,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 HDDHardDiskDrive: HDD (Hard Disk Drive)
@@ -15444,7 +15510,7 @@
                 SSDSolidStateDrive: SSD (Solid State Drive)
                 SSHDSolidStateHybridDrive: SSHD (Solid State Hybrid Drive)
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1089
@@ -15475,7 +15541,6 @@
               Link: ''
               LinkPreview: ''
               MultiValue: '0'
-              PartOfSet: '1083'
               PossibleNone: '1'
               PossibleValues:
                 ADATA: ADATA
@@ -15510,7 +15575,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             ID: 1085
