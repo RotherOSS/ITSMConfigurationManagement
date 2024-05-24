@@ -1,0 +1,1846 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# This file is distributed under the same license as the OTOBO Installation Guide package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 08:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../content/index.rst:20
+msgid "Sacrifice to Sphinx"
+msgstr ""
+
+#: ../../content/index.rst:23
+msgid "Description"
+msgstr ""
+
+#: ../../content/index.rst:24
+msgid "The OTOBO::ITSM Configuration Management package."
+msgstr ""
+
+#: ../../content/index.rst:27
+msgid "System requirements"
+msgstr ""
+
+#: ../../content/index.rst:30
+msgid "Framework"
+msgstr ""
+
+#: ../../content/index.rst:31
+msgid "OTOBO 11.0.x"
+msgstr ""
+
+#: ../../content/index.rst:34
+msgid "Packages"
+msgstr ""
+
+#: ../../content/index.rst:35
+msgid "ITSMCore 11.0.1"
+msgstr ""
+
+#: ../../content/index.rst:38
+msgid "Third-party software"
+msgstr ""
+
+#: ../../content/index.rst:39
+msgid "\\-"
+msgstr ""
+
+#: ../../content/index.rst:42
+msgid "Usage"
+msgstr ""
+
+#: ../../content/index.rst:45
+msgid "Setup"
+msgstr ""
+
+#: ../../content/index.rst:48
+msgid "Configuration Reference"
+msgstr ""
+
+#: ../../content/index.rst:51
+msgid "Core::BulkAction"
+msgstr ""
+
+#: ../../content/index.rst:54
+msgid "ITSMConfigItem::Frontend::BulkFeature"
+msgstr ""
+
+#: ../../content/index.rst:55
+msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
+msgstr ""
+
+#: ../../content/index.rst:58
+msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
+msgstr ""
+
+#: ../../content/index.rst:59
+msgid "Enables configuration item bulk action feature only for the listed groups."
+msgstr ""
+
+#: ../../content/index.rst:62
+msgid "Core::DynamicFields::DriverRegistration"
+msgstr ""
+
+#: ../../content/index.rst:65
+msgid "DynamicFields::Driver###ConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:66
+#: ../../content/index.rst:70
+msgid "DynamicField backend registration."
+msgstr ""
+
+#: ../../content/index.rst:69
+msgid "DynamicFields::Driver###ConfigItemVersion"
+msgstr ""
+
+#: ../../content/index.rst:73
+msgid "Core::DynamicFields::ObjectTypeRegistration"
+msgstr ""
+
+#: ../../content/index.rst:76
+msgid "DynamicFields::ObjectType###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:77
+msgid "DynamicField object registration."
+msgstr ""
+
+#: ../../content/index.rst:80
+msgid "Core::Elasticsearch::Settings"
+msgstr ""
+
+#: ../../content/index.rst:83
+msgid "Elasticsearch::ExcludedCIClasses"
+msgstr ""
+
+#: ../../content/index.rst:84
+msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
+msgstr ""
+
+#: ../../content/index.rst:87
+msgid "Elasticsearch::ExcludedCIDeploymentStates"
+msgstr ""
+
+#: ../../content/index.rst:88
+msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
+msgstr ""
+
+#: ../../content/index.rst:91
+msgid "Elasticsearch::ConfigItemStoreFields"
+msgstr ""
+
+#: ../../content/index.rst:92
+msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
+msgstr ""
+
+#: ../../content/index.rst:95
+msgid "Elasticsearch::ConfigItemSearchFields"
+msgstr ""
+
+#: ../../content/index.rst:96
+msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
+msgstr ""
+
+#: ../../content/index.rst:99
+msgid "Elasticsearch::QuickSearchShow###ConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:100
+msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
+msgstr ""
+
+#: ../../content/index.rst:103
+msgid "Core::Event::ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:106
+msgid "ITSMConfigItem::EventModulePost###100-History"
+msgstr ""
+
+#: ../../content/index.rst:107
+msgid "Config item event module that enables logging to history in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:110
+msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
+msgstr ""
+
+#: ../../content/index.rst:111
+msgid "Config item event module that updates config items to their current definition."
+msgstr ""
+
+#: ../../content/index.rst:114
+msgid "ITSMConfigItem::EventModulePost###400-LinkSync"
+msgstr ""
+
+#: ../../content/index.rst:115
+msgid "Config item event module that updates the table configitem_ĺink."
+msgstr ""
+
+#: ../../content/index.rst:118
+msgid "ITSMConfigItem::EventModulePost###500-RecalcCurInciState"
+msgstr ""
+
+#: ../../content/index.rst:119
+msgid "Config item event module updates the current incident state."
+msgstr ""
+
+#: ../../content/index.rst:122
+msgid "ITSMConfigItem::EventModulePost###4000-ScriptDynamicFields"
+msgstr ""
+
+#: ../../content/index.rst:123
+msgid "Evaluate all script fields."
+msgstr ""
+
+#: ../../content/index.rst:126
+msgid "DynamicField::EventModulePost###200-DynamicFieldSync"
+msgstr ""
+
+#: ../../content/index.rst:127
+msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
+msgstr ""
+
+#: ../../content/index.rst:130
+msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
+msgstr ""
+
+#: ../../content/index.rst:131
+msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
+msgstr ""
+
+#: ../../content/index.rst:134
+msgid "Core::Event::Ticket"
+msgstr ""
+
+#: ../../content/index.rst:137
+msgid "ITSMConfigItem::EventModulePost###042-ITSMConfigItemTicketStatusLink"
+msgstr ""
+
+#: ../../content/index.rst:138
+#: ../../content/index.rst:142
+msgid "Event module to set configitem-status on ticket-configitem-link."
+msgstr ""
+
+#: ../../content/index.rst:141
+msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
+msgstr ""
+
+#: ../../content/index.rst:145
+msgid "Core::GeneralCatalog"
+msgstr ""
+
+#: ../../content/index.rst:148
+msgid "GeneralCatalogPreferences###DeploymentStates"
+msgstr ""
+
+#: ../../content/index.rst:149
+msgid "Parameters for the deployment states in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:152
+msgid "GeneralCatalogPreferences###DeploymentStatesColors"
+msgstr ""
+
+#: ../../content/index.rst:153
+msgid "Parameters for the deployment states color in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:156
+msgid "GeneralCatalogPreferences###NameModule"
+msgstr ""
+
+#: ../../content/index.rst:157
+msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:160
+msgid "GeneralCatalogPreferences###NumberModule"
+msgstr ""
+
+#: ../../content/index.rst:161
+msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:164
+msgid "GeneralCatalogPreferences###VersionStringModule"
+msgstr ""
+
+#: ../../content/index.rst:165
+msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:168
+msgid "GeneralCatalogPreferences###VersionStringExpression"
+msgstr ""
+
+#: ../../content/index.rst:169
+msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:172
+msgid "GeneralCatalogPreferences###VersionTrigger"
+msgstr ""
+
+#: ../../content/index.rst:173
+msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:176
+msgid "GeneralCatalogPreferences###Categories"
+msgstr ""
+
+#: ../../content/index.rst:177
+msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:180
+msgid "GeneralCatalogPreferences###Permissions"
+msgstr ""
+
+#: ../../content/index.rst:181
+msgid "Parameters for the example permission groups of the general catalog attributes."
+msgstr ""
+
+#: ../../content/index.rst:184
+msgid "Core::ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:187
+msgid "ITSMConfigItem::CINameRegex"
+msgstr ""
+
+#: ../../content/index.rst:188
+msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
+msgstr ""
+
+#: ../../content/index.rst:191
+msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
+msgstr ""
+
+#: ../../content/index.rst:192
+msgid "Module to check the group responsible for a class."
+msgstr ""
+
+#: ../../content/index.rst:195
+msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
+msgstr ""
+
+#: ../../content/index.rst:196
+msgid "Module to check the group responsible for a configuration item."
+msgstr ""
+
+#: ../../content/index.rst:199
+msgid "ITSMConfigItem::Hook"
+msgstr ""
+
+#: ../../content/index.rst:200
+msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
+msgstr ""
+
+#: ../../content/index.rst:203
+msgid "UniqueCIName::EnableUniquenessCheck"
+msgstr ""
+
+#: ../../content/index.rst:204
+msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
+msgstr ""
+
+#: ../../content/index.rst:207
+msgid "UniqueCIName::UniquenessCheckScope"
+msgstr ""
+
+#: ../../content/index.rst:208
+msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
+msgstr ""
+
+#: ../../content/index.rst:211
+msgid "Customer::ConfigItem::PermissionConditions###01"
+msgstr ""
+
+#: ../../content/index.rst:212
+#: ../../content/index.rst:216
+#: ../../content/index.rst:220
+#: ../../content/index.rst:224
+#: ../../content/index.rst:228
+msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
+msgstr ""
+
+#: ../../content/index.rst:215
+msgid "Customer::ConfigItem::PermissionConditions###02"
+msgstr ""
+
+#: ../../content/index.rst:219
+msgid "Customer::ConfigItem::PermissionConditions###03"
+msgstr ""
+
+#: ../../content/index.rst:223
+msgid "Customer::ConfigItem::PermissionConditions###04"
+msgstr ""
+
+#: ../../content/index.rst:227
+msgid "Customer::ConfigItem::PermissionConditions###05"
+msgstr ""
+
+#: ../../content/index.rst:231
+msgid "Customer::ConfigItem::PermissionConditionColumns###Default"
+msgstr ""
+
+#: ../../content/index.rst:235
+msgid "Customer::ConfigItem::PermissionConditionColumns###01"
+msgstr ""
+
+#: ../../content/index.rst:239
+msgid "Customer::ConfigItem::PermissionConditionColumns###02"
+msgstr ""
+
+#: ../../content/index.rst:243
+msgid "Customer::ConfigItem::PermissionConditionColumns###03"
+msgstr ""
+
+#: ../../content/index.rst:247
+msgid "Customer::ConfigItem::PermissionConditionColumns###04"
+msgstr ""
+
+#: ../../content/index.rst:251
+msgid "Customer::ConfigItem::PermissionConditionColumns###05"
+msgstr ""
+
+#: ../../content/index.rst:255
+msgid "CMDBTreeView::DefaultDepth"
+msgstr ""
+
+#: ../../content/index.rst:256
+msgid "Defines the default relations depth to be shown."
+msgstr ""
+
+#: ../../content/index.rst:259
+msgid "CMDBTreeView::ShowLinkLabels"
+msgstr ""
+
+#: ../../content/index.rst:260
+msgid "Defines if the link type labels must be shown in the node connections."
+msgstr ""
+
+#: ../../content/index.rst:263
+msgid "Core::ITSMConfigItem::ACL"
+msgstr ""
+
+#: ../../content/index.rst:266
+msgid "ITSMConfigItemACLKeysLevel1Match"
+msgstr ""
+
+#: ../../content/index.rst:267
+#: ../../content/index.rst:271
+msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
+msgstr ""
+
+#: ../../content/index.rst:270
+msgid "ITSMConfigItemACLKeysLevel1Change"
+msgstr ""
+
+#: ../../content/index.rst:274
+msgid "ITSMConfigItemACLKeysLevel2::Possible"
+msgstr ""
+
+#: ../../content/index.rst:275
+#: ../../content/index.rst:279
+#: ../../content/index.rst:283
+#: ../../content/index.rst:287
+#: ../../content/index.rst:291
+msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
+msgstr ""
+
+#: ../../content/index.rst:278
+msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
+msgstr ""
+
+#: ../../content/index.rst:282
+msgid "ITSMConfigItemACLKeysLevel2::PossibleNot"
+msgstr ""
+
+#: ../../content/index.rst:286
+msgid "ITSMConfigItemACLKeysLevel2::Properties"
+msgstr ""
+
+#: ../../content/index.rst:290
+msgid "ITSMConfigItemACLKeysLevel2::PropertiesDatabase"
+msgstr ""
+
+#: ../../content/index.rst:294
+msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
+msgstr ""
+
+#: ../../content/index.rst:295
+msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
+msgstr ""
+
+#: ../../content/index.rst:298
+msgid "ConfigItemACL::ACLPreselection"
+msgstr ""
+
+#: ../../content/index.rst:299
+msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
+msgstr ""
+
+#: ../../content/index.rst:302
+msgid "ConfigItemACL::Autoselect"
+msgstr ""
+
+#: ../../content/index.rst:303
+msgid "Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2)."
+msgstr ""
+
+#: ../../content/index.rst:306
+msgid "Core::ImportExport::ObjectBackend::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:309
+msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:310
+msgid "Object backend module registration for the import/export module."
+msgstr ""
+
+#: ../../content/index.rst:313
+msgid "Core::LinkObject"
+msgstr ""
+
+#: ../../content/index.rst:316
+msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:317
+msgid "Defines the default subobject of the class 'ITSMConfigItem'."
+msgstr ""
+
+#: ../../content/index.rst:320
+msgid "LinkObject::ITSMConfigItem::ShowColumns"
+msgstr ""
+
+#: ../../content/index.rst:321
+msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
+msgstr ""
+
+#: ../../content/index.rst:324
+msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
+msgstr ""
+
+#: ../../content/index.rst:325
+msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
+msgstr ""
+
+#: ../../content/index.rst:328
+msgid "Core::LinkStatus"
+msgstr ""
+
+#: ../../content/index.rst:331
+msgid "ITSMConfigItem::SetIncidentStateOnLink"
+msgstr ""
+
+#: ../../content/index.rst:332
+msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr ""
+
+#: ../../content/index.rst:335
+msgid "ITSMConfigItem::LinkStatus::TicketTypes"
+msgstr ""
+
+#: ../../content/index.rst:336
+msgid "Defines which type of ticket can affect the status of a linked CI."
+msgstr ""
+
+#: ../../content/index.rst:339
+msgid "ITSMConfigItem::LinkStatus::DeploymentStates"
+msgstr ""
+
+#: ../../content/index.rst:340
+msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
+msgstr ""
+
+#: ../../content/index.rst:343
+msgid "ITSMConfigItem::LinkStatus::IncidentStates"
+msgstr ""
+
+#: ../../content/index.rst:344
+msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
+msgstr ""
+
+#: ../../content/index.rst:347
+msgid "ITSMConfigItem::LinkStatus::LinkTypes"
+msgstr ""
+
+#: ../../content/index.rst:348
+msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
+msgstr ""
+
+#: ../../content/index.rst:351
+msgid "Core::Stats"
+msgstr ""
+
+#: ../../content/index.rst:354
+msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:355
+msgid "Module to generate ITSM config item statistics."
+msgstr ""
+
+#: ../../content/index.rst:358
+msgid "Daemon::SchedulerCronTaskManager::Task"
+msgstr ""
+
+#: ../../content/index.rst:361
+msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-01"
+msgstr ""
+
+#: ../../content/index.rst:362
+#: ../../content/index.rst:366
+#: ../../content/index.rst:370
+msgid "Triggers ConfigItemFetch invoker automatically."
+msgstr ""
+
+#: ../../content/index.rst:365
+msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-02"
+msgstr ""
+
+#: ../../content/index.rst:369
+msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-03"
+msgstr ""
+
+#: ../../content/index.rst:373
+msgid "Frontend::Admin"
+msgstr ""
+
+#: ../../content/index.rst:376
+msgid "Events###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:377
+msgid "List of all Package events to be displayed in the GUI."
+msgstr ""
+
+#: ../../content/index.rst:380
+msgid "Frontend::Admin::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:383
+msgid "Frontend::Module###AdminITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:384
+#: ../../content/index.rst:388
+#: ../../content/index.rst:537
+#: ../../content/index.rst:541
+#: ../../content/index.rst:545
+#: ../../content/index.rst:549
+#: ../../content/index.rst:553
+#: ../../content/index.rst:557
+#: ../../content/index.rst:561
+#: ../../content/index.rst:565
+#: ../../content/index.rst:569
+#: ../../content/index.rst:573
+#: ../../content/index.rst:577
+msgid "Frontend module registration for the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:387
+msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:391
+msgid "Frontend::Admin::ModuleRegistration::AdminOverview"
+msgstr ""
+
+#: ../../content/index.rst:394
+msgid "Frontend::NavigationModule###AdminITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:395
+msgid "Admin area navigation for the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:398
+msgid "Frontend::Admin::ModuleRegistration::Loader"
+msgstr ""
+
+#: ../../content/index.rst:401
+msgid "Loader::Module::AdminITSMConfigItem###002-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:402
+#: ../../content/index.rst:406
+#: ../../content/index.rst:584
+#: ../../content/index.rst:588
+#: ../../content/index.rst:592
+#: ../../content/index.rst:596
+#: ../../content/index.rst:600
+#: ../../content/index.rst:604
+#: ../../content/index.rst:608
+msgid "Loader module registration for the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:405
+msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
+msgstr ""
+
+#: ../../content/index.rst:409
+msgid "Frontend::Admin::ModuleRegistration::MainMenu"
+msgstr ""
+
+#: ../../content/index.rst:412
+msgid "Frontend::Navigation###AdminITSMConfigItem###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:413
+#: ../../content/index.rst:615
+#: ../../content/index.rst:619
+#: ../../content/index.rst:623
+#: ../../content/index.rst:627
+#: ../../content/index.rst:909
+msgid "Main menu item registration."
+msgstr ""
+
+#: ../../content/index.rst:416
+msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
+msgstr ""
+
+#: ../../content/index.rst:419
+msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
+msgstr ""
+
+#: ../../content/index.rst:420
+msgid "Defines the number of rows for the CI definition editor in the admin interface."
+msgstr ""
+
+#: ../../content/index.rst:423
+msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
+msgstr ""
+
+#: ../../content/index.rst:426
+msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
+msgstr ""
+
+#: ../../content/index.rst:427
+msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:430
+msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
+msgstr ""
+
+#: ../../content/index.rst:431
+msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:434
+msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
+msgstr ""
+
+#: ../../content/index.rst:435
+msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:438
+msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
+msgstr ""
+
+#: ../../content/index.rst:439
+msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:442
+msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
+msgstr ""
+
+#: ../../content/index.rst:443
+msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:446
+msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
+msgstr ""
+
+#: ../../content/index.rst:447
+msgid "Shows a link in the menu to display the configuration item links as a Tree View."
+msgstr ""
+
+#: ../../content/index.rst:450
+msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
+msgstr ""
+
+#: ../../content/index.rst:451
+msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:454
+msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
+msgstr ""
+
+#: ../../content/index.rst:455
+msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:458
+msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
+msgstr ""
+
+#: ../../content/index.rst:461
+msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
+msgstr ""
+
+#: ../../content/index.rst:462
+msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:465
+msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
+msgstr ""
+
+#: ../../content/index.rst:466
+msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:469
+msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
+msgstr ""
+
+#: ../../content/index.rst:470
+msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:473
+msgid "Frontend::Agent::ITSMConfigItem::Permission"
+msgstr ""
+
+#: ../../content/index.rst:476
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
+msgstr ""
+
+#: ../../content/index.rst:477
+msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:480
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
+msgstr ""
+
+#: ../../content/index.rst:481
+msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:484
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
+msgstr ""
+
+#: ../../content/index.rst:485
+msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:488
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
+msgstr ""
+
+#: ../../content/index.rst:489
+msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:492
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
+msgstr ""
+
+#: ../../content/index.rst:493
+msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:496
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
+msgstr ""
+
+#: ../../content/index.rst:497
+msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:500
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
+msgstr ""
+
+#: ../../content/index.rst:501
+msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:504
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
+msgstr ""
+
+#: ../../content/index.rst:505
+msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:508
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
+msgstr ""
+
+#: ../../content/index.rst:509
+msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:512
+msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
+msgstr ""
+
+#: ../../content/index.rst:515
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
+msgstr ""
+
+#: ../../content/index.rst:516
+msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:519
+msgid "Frontend::Agent::ITSMConfigItemOverview"
+msgstr ""
+
+#: ../../content/index.rst:522
+msgid "ITSMConfigItem::Frontend::Overview###Small"
+msgstr ""
+
+#: ../../content/index.rst:523
+#: ../../content/index.rst:868
+msgid "Defines an overview module to show the small view of a configuration item list."
+msgstr ""
+
+#: ../../content/index.rst:526
+msgid "Frontend::Agent::LinkObject"
+msgstr ""
+
+#: ../../content/index.rst:529
+msgid "LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:530
+msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
+msgstr ""
+
+#: ../../content/index.rst:533
+msgid "Frontend::Agent::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:536
+msgid "Frontend::Module###AgentITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:540
+msgid "Frontend::Module###AgentITSMConfigItemZoom"
+msgstr ""
+
+#: ../../content/index.rst:544
+msgid "Frontend::Module###AgentITSMConfigItemEdit"
+msgstr ""
+
+#: ../../content/index.rst:548
+msgid "Frontend::Module###AgentITSMConfigItemPrint"
+msgstr ""
+
+#: ../../content/index.rst:552
+msgid "Frontend::Module###AgentITSMConfigItemDelete"
+msgstr ""
+
+#: ../../content/index.rst:556
+msgid "Frontend::Module###AgentITSMConfigItemTreeView"
+msgstr ""
+
+#: ../../content/index.rst:560
+msgid "Frontend::Module###AgentITSMConfigItemAdd"
+msgstr ""
+
+#: ../../content/index.rst:564
+msgid "Frontend::Module###AgentITSMConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:568
+msgid "Frontend::Module###AgentITSMConfigItemHistory"
+msgstr ""
+
+#: ../../content/index.rst:572
+msgid "Frontend::Module###AgentITSMConfigItemBulk"
+msgstr ""
+
+#: ../../content/index.rst:576
+msgid "Frontend::Module###AgentITSMConfigItemAttachment"
+msgstr ""
+
+#: ../../content/index.rst:580
+msgid "Frontend::Agent::ModuleRegistration::Loader"
+msgstr ""
+
+#: ../../content/index.rst:583
+msgid "Loader::Module::AgentITSMConfigItem###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:587
+msgid "Loader::Module::AgentITSMConfigItemZoom###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:591
+msgid "Loader::Module::AgentITSMConfigItemEdit###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:595
+msgid "Loader::Module::AgentITSMConfigItemTreeView###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:599
+msgid "Loader::Module::AgentITSMConfigItemAdd###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:603
+msgid "Loader::Module::AgentITSMConfigItemSearch###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:607
+msgid "Loader::Module::AgentITSMConfigItemHistory###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:611
+msgid "Frontend::Agent::ModuleRegistration::MainMenu"
+msgstr ""
+
+#: ../../content/index.rst:614
+msgid "Frontend::Navigation###AgentITSMConfigItem###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:618
+msgid "Frontend::Navigation###AgentITSMConfigItemAdd###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:622
+msgid "Frontend::Navigation###AgentITSMConfigItemSearch###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:626
+msgid "Frontend::Navigation###AgentITSMConfigItemBulk###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:630
+msgid "Frontend::Agent::ModuleRegistration::MainMenu::Search"
+msgstr ""
+
+#: ../../content/index.rst:633
+msgid "Frontend::Search###ConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:634
+msgid "Configuration item search backend router of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:637
+msgid "Frontend::Search::JavaScript###ConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:638
+msgid "JavaScript function for the search frontend."
+msgstr ""
+
+#: ../../content/index.rst:641
+msgid "Frontend::Agent::View::AgentITSMConfigItemBulk"
+msgstr ""
+
+#: ../../content/index.rst:644
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:645
+#: ../../content/index.rst:652
+#: ../../content/index.rst:659
+#: ../../content/index.rst:666
+msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:648
+msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
+msgstr ""
+
+#: ../../content/index.rst:651
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:655
+msgid "Frontend::Agent::View::AgentITSMConfigItemHistory"
+msgstr ""
+
+#: ../../content/index.rst:658
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:662
+msgid "Frontend::Agent::View::AgentITSMConfigItemZoom"
+msgstr ""
+
+#: ../../content/index.rst:665
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:669
+msgid "Frontend::Agent::View::ConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:672
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ExtendedSearchCondition"
+msgstr ""
+
+#: ../../content/index.rst:673
+msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr ""
+
+#: ../../content/index.rst:676
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
+msgstr ""
+
+#: ../../content/index.rst:677
+msgid "Number of config items to be displayed in each page of a search result in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:680
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
+msgstr ""
+
+#: ../../content/index.rst:681
+msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:684
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
+msgstr ""
+
+#: ../../content/index.rst:685
+msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
+msgstr ""
+
+#: ../../content/index.rst:688
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
+msgstr ""
+
+#: ../../content/index.rst:689
+#: ../../content/index.rst:693
+#: ../../content/index.rst:697
+#: ../../content/index.rst:701
+#: ../../content/index.rst:705
+#: ../../content/index.rst:709
+#: ../../content/index.rst:721
+#: ../../content/index.rst:725
+#: ../../content/index.rst:817
+#: ../../content/index.rst:944
+#: ../../content/index.rst:948
+#: ../../content/index.rst:952
+#: ../../content/index.rst:956
+msgid "Defines the default shown config item search attribute for config item search screen."
+msgstr ""
+
+#: ../../content/index.rst:692
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
+msgstr ""
+
+#: ../../content/index.rst:696
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###DeploymentStateIDs"
+msgstr ""
+
+#: ../../content/index.rst:700
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###IncidentStateIDs"
+msgstr ""
+
+#: ../../content/index.rst:704
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###CustomerID"
+msgstr ""
+
+#: ../../content/index.rst:708
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###CustomerUserLogin"
+msgstr ""
+
+#: ../../content/index.rst:712
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimePoint"
+msgstr ""
+
+#: ../../content/index.rst:713
+msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr ""
+
+#: ../../content/index.rst:716
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
+msgstr ""
+
+#: ../../content/index.rst:717
+msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
+msgstr ""
+
+#: ../../content/index.rst:720
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
+msgstr ""
+
+#: ../../content/index.rst:724
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimeSlot"
+msgstr ""
+
+#: ../../content/index.rst:728
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:729
+#: ../../content/index.rst:960
+msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
+msgstr ""
+
+#: ../../content/index.rst:732
+msgid "Frontend::Agent::View::CustomerInformationCenter"
+msgstr ""
+
+#: ../../content/index.rst:735
+msgid "AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany"
+msgstr ""
+
+#: ../../content/index.rst:736
+#: ../../content/index.rst:743
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
+msgstr ""
+
+#: ../../content/index.rst:739
+msgid "Frontend::Agent::View::CustomerUserInformationCenter"
+msgstr ""
+
+#: ../../content/index.rst:742
+msgid "AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser"
+msgstr ""
+
+#: ../../content/index.rst:746
+msgid "Frontend::Agent::View::ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:749
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns"
+msgstr ""
+
+#: ../../content/index.rst:750
+msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+
+#: ../../content/index.rst:753
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
+msgstr ""
+
+#: ../../content/index.rst:754
+msgid "Defines the search limit for the AgentITSMConfigItem screen."
+msgstr ""
+
+#: ../../content/index.rst:757
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
+msgstr ""
+
+#: ../../content/index.rst:758
+msgid "The default category which is shown, if none is selected."
+msgstr ""
+
+#: ../../content/index.rst:761
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable"
+msgstr ""
+
+#: ../../content/index.rst:762
+#: ../../content/index.rst:975
+msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#: ../../content/index.rst:765
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault"
+msgstr ""
+
+#: ../../content/index.rst:766
+#: ../../content/index.rst:979
+msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#: ../../content/index.rst:769
+msgid "Frontend::Agent::View::ITSMConfigItemBulk"
+msgstr ""
+
+#: ../../content/index.rst:772
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
+msgstr ""
+
+#: ../../content/index.rst:773
+msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:776
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
+msgstr ""
+
+#: ../../content/index.rst:777
+msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:780
+msgid "Frontend::Agent::View::ITSMConfigItemDelete"
+msgstr ""
+
+#: ../../content/index.rst:783
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
+msgstr ""
+
+#: ../../content/index.rst:784
+msgid "Required privileges to delete config items."
+msgstr ""
+
+#: ../../content/index.rst:787
+msgid "Frontend::Agent::View::ITSMConfigItemEdit"
+msgstr ""
+
+#: ../../content/index.rst:790
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
+msgstr ""
+
+#: ../../content/index.rst:791
+msgid "Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#: ../../content/index.rst:794
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
+msgstr ""
+
+#: ../../content/index.rst:795
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#: ../../content/index.rst:798
+msgid "Frontend::Agent::View::ITSMConfigItemHistory"
+msgstr ""
+
+#: ../../content/index.rst:801
+msgid "ITSMConfigItem::Frontend::HistoryOrder"
+msgstr ""
+
+#: ../../content/index.rst:802
+msgid "Shows the config item history (reverse ordered) in the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:805
+msgid "Frontend::Agent::View::ITSMConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:808
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
+msgstr ""
+
+#: ../../content/index.rst:809
+msgid "Data used to export the search result in CSV format."
+msgstr ""
+
+#: ../../content/index.rst:812
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
+msgstr ""
+
+#: ../../content/index.rst:813
+msgid "Dynamic Fields used to export the search result in CSV format."
+msgstr ""
+
+#: ../../content/index.rst:816
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
+msgstr ""
+
+#: ../../content/index.rst:820
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
+msgstr ""
+
+#: ../../content/index.rst:821
+msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgstr ""
+
+#: ../../content/index.rst:824
+msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:825
+msgid "Dynamic fields shown in the config item search screen of the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:828
+msgid "Frontend::Agent::View::Preferences"
+msgstr ""
+
+#: ../../content/index.rst:831
+msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
+msgstr ""
+
+#: ../../content/index.rst:832
+msgid "Parameters for the pages (in which the configuration items are shown)."
+msgstr ""
+
+#: ../../content/index.rst:835
+msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
+msgstr ""
+
+#: ../../content/index.rst:836
+msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
+msgstr ""
+
+#: ../../content/index.rst:839
+msgid "Frontend::Base::DynamicFieldScreens"
+msgstr ""
+
+#: ../../content/index.rst:842
+msgid "DynamicFieldScreens###ITSMConfigurationManagement"
+msgstr ""
+
+#: ../../content/index.rst:843
+msgid "This configuration defines all possible screens to enable or disable dynamic fields."
+msgstr ""
+
+#: ../../content/index.rst:846
+msgid "DefaultColumnsScreens###ITSMConfigurationManagement"
+msgstr ""
+
+#: ../../content/index.rst:847
+msgid "This configuration defines all possible screens to enable or disable default columns."
+msgstr ""
+
+#: ../../content/index.rst:850
+msgid "Frontend::Base::Loader"
+msgstr ""
+
+#: ../../content/index.rst:853
+msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
+msgstr ""
+
+#: ../../content/index.rst:854
+msgid "List of JS files to always be loaded for the agent interface."
+msgstr ""
+
+#: ../../content/index.rst:857
+msgid "Frontend::Base::NavBarModule"
+msgstr ""
+
+#: ../../content/index.rst:860
+msgid "Frontend::AdminModuleGroups###200-ITSMConfigurationManagement"
+msgstr ""
+
+#: ../../content/index.rst:861
+msgid "Defines available groups for the admin overview screen."
+msgstr ""
+
+#: ../../content/index.rst:864
+msgid "Frontend::Customer::ITSMConfigItemOverview"
+msgstr ""
+
+#: ../../content/index.rst:867
+msgid "ITSMConfigItem::Frontend::CustomerOverview###Small"
+msgstr ""
+
+#: ../../content/index.rst:871
+msgid "Frontend::Customer::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:874
+msgid "CustomerFrontend::Module###CustomerITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:875
+#: ../../content/index.rst:879
+#: ../../content/index.rst:883
+#: ../../content/index.rst:887
+msgid "Frontend module registration for the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:878
+msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:882
+msgid "CustomerFrontend::Module###CustomerITSMConfigItemZoom"
+msgstr ""
+
+#: ../../content/index.rst:886
+msgid "CustomerFrontend::Module###CustomerITSMConfigItemAttachment"
+msgstr ""
+
+#: ../../content/index.rst:890
+msgid "Frontend::Customer::ModuleRegistration::Loader"
+msgstr ""
+
+#: ../../content/index.rst:893
+msgid "Loader::Module::CustomerITSMConfigItem###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:894
+#: ../../content/index.rst:898
+#: ../../content/index.rst:902
+msgid "Loader module registration for the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:897
+msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:901
+msgid "Loader::Module::CustomerITSMConfigItemZoom###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:905
+msgid "Frontend::Customer::ModuleRegistration::MainMenu"
+msgstr ""
+
+#: ../../content/index.rst:908
+msgid "CustomerFrontend::Navigation###CustomerITSMConfigItem###003-ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:912
+msgid "Frontend::Customer::View::ConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:915
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
+msgstr ""
+
+#: ../../content/index.rst:916
+msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:919
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
+msgstr ""
+
+#: ../../content/index.rst:920
+msgid "Includes deployment states in the config item search of the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:923
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###IncidentState"
+msgstr ""
+
+#: ../../content/index.rst:924
+msgid "Includes incident states in the config item search of the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:927
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCondition"
+msgstr ""
+
+#: ../../content/index.rst:928
+msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr ""
+
+#: ../../content/index.rst:931
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
+msgstr ""
+
+#: ../../content/index.rst:932
+msgid "Number of config items to be displayed in each page of a search result in the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:935
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
+msgstr ""
+
+#: ../../content/index.rst:936
+msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:939
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
+msgstr ""
+
+#: ../../content/index.rst:940
+msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
+msgstr ""
+
+#: ../../content/index.rst:943
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
+msgstr ""
+
+#: ../../content/index.rst:947
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Name"
+msgstr ""
+
+#: ../../content/index.rst:951
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DeploymentStateIDs"
+msgstr ""
+
+#: ../../content/index.rst:955
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###IncidentStateIDs"
+msgstr ""
+
+#: ../../content/index.rst:959
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:963
+msgid "Frontend::Customer::View::ITSMConfigItem"
+msgstr ""
+
+#: ../../content/index.rst:966
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns"
+msgstr ""
+
+#: ../../content/index.rst:967
+msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+
+#: ../../content/index.rst:970
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
+msgstr ""
+
+#: ../../content/index.rst:971
+msgid "Defines the search limit for the CustomerITSMConfigItem screen."
+msgstr ""
+
+#: ../../content/index.rst:974
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
+msgstr ""
+
+#: ../../content/index.rst:978
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsDefault"
+msgstr ""
+
+#: ../../content/index.rst:982
+msgid "Frontend::Customer::View::ITSMConfigItemOverview"
+msgstr ""
+
+#: ../../content/index.rst:985
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:986
+#: ../../content/index.rst:990
+msgid "Dynamic fields shown in the config item overview screen of the customer interface."
+msgstr ""
+
+#: ../../content/index.rst:989
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField"
+msgstr ""
+
+#: ../../content/index.rst:993
+msgid "Frontend::Customer::View::ITSMConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:996
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
+msgstr ""
+
+#: ../../content/index.rst:997
+msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
+msgstr ""
+
+#: ../../content/index.rst:1000
+msgid "Frontend::Customer::View::ITSMConfigItemZoom"
+msgstr ""
+
+#: ../../content/index.rst:1003
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsEnabled"
+msgstr ""
+
+#: ../../content/index.rst:1004
+msgid "Customers can see historic CI versions."
+msgstr ""
+
+#: ../../content/index.rst:1007
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsSelectable"
+msgstr ""
+
+#: ../../content/index.rst:1008
+msgid "Customers have the possibility to manually switch between historic CI versions."
+msgstr ""
+
+#: ../../content/index.rst:1011
+msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo"
+msgstr ""
+
+#: ../../content/index.rst:1012
+msgid "Which general information is shown in the header."
+msgstr ""
+
+#: ../../content/index.rst:1015
+msgid "GenericInterface::Invoker"
+msgstr ""
+
+#: ../../content/index.rst:1018
+msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
+msgstr ""
+
+#: ../../content/index.rst:1019
+msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
+msgstr ""
+
+#: ../../content/index.rst:1022
+msgid "GenericInterface::Invoker::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:1025
+msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
+msgstr ""
+
+#: ../../content/index.rst:1026
+msgid "GenericInterface module registration for the invoker layer."
+msgstr ""
+
+#: ../../content/index.rst:1029
+msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
+msgstr ""
+
+#: ../../content/index.rst:1030
+msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
+msgstr ""
+
+#: ../../content/index.rst:1033
+msgid "GenericInterface::Operation::ConfigItemCreate"
+msgstr ""
+
+#: ../../content/index.rst:1036
+msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
+msgstr ""
+
+#: ../../content/index.rst:1037
+msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
+msgstr ""
+
+#: ../../content/index.rst:1040
+msgid "GenericInterface::Operation::ConfigItemDelete"
+msgstr ""
+
+#: ../../content/index.rst:1043
+msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
+msgstr ""
+
+#: ../../content/index.rst:1044
+msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
+msgstr ""
+
+#: ../../content/index.rst:1047
+msgid "GenericInterface::Operation::ConfigItemGet"
+msgstr ""
+
+#: ../../content/index.rst:1050
+msgid "GenericInterface::Operation::ConfigItemGet###Permission"
+msgstr ""
+
+#: ../../content/index.rst:1051
+msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
+msgstr ""
+
+#: ../../content/index.rst:1054
+msgid "GenericInterface::Operation::ConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:1057
+msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
+msgstr ""
+
+#: ../../content/index.rst:1058
+msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
+msgstr ""
+
+#: ../../content/index.rst:1061
+msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
+msgstr ""
+
+#: ../../content/index.rst:1062
+msgid "Maximum number of config items to be displayed in the result of this operation."
+msgstr ""
+
+#: ../../content/index.rst:1065
+msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
+msgstr ""
+
+#: ../../content/index.rst:1066
+msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
+msgstr ""
+
+#: ../../content/index.rst:1069
+msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
+msgstr ""
+
+#: ../../content/index.rst:1070
+msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
+msgstr ""
+
+#: ../../content/index.rst:1073
+msgid "GenericInterface::Operation::ConfigItemUpdate"
+msgstr ""
+
+#: ../../content/index.rst:1076
+msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
+msgstr ""
+
+#: ../../content/index.rst:1077
+msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
+msgstr ""
+
+#: ../../content/index.rst:1080
+msgid "GenericInterface::Operation::ModuleRegistration"
+msgstr ""
+
+#: ../../content/index.rst:1083
+msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemCreate"
+msgstr ""
+
+#: ../../content/index.rst:1084
+#: ../../content/index.rst:1088
+#: ../../content/index.rst:1092
+#: ../../content/index.rst:1096
+#: ../../content/index.rst:1100
+msgid "GenericInterface module registration for the operation layer."
+msgstr ""
+
+#: ../../content/index.rst:1087
+msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
+msgstr ""
+
+#: ../../content/index.rst:1091
+msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemUpdate"
+msgstr ""
+
+#: ../../content/index.rst:1095
+msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemSearch"
+msgstr ""
+
+#: ../../content/index.rst:1099
+msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemDelete"
+msgstr ""
+
+#: ../../content/index.rst:1103
+msgid "About"
+msgstr ""
+
+#: ../../content/index.rst:1106
+msgid "Contact"
+msgstr ""
+
+#: ../../content/index.rst:1107
+msgid "Rother OSS GmbH"
+msgstr ""
+
+#: ../../content/index.rst:1108
+msgid "Email: hello@otobo.de"
+msgstr ""
+
+#: ../../content/index.rst:1109
+msgid "Web: https://otobo.de"
+msgstr ""
+
+#: ../../content/index.rst:1112
+msgid "Version"
+msgstr ""
+
+#: ../../content/index.rst:1113
+msgid "Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-datestamp|"
+msgstr ""
+
