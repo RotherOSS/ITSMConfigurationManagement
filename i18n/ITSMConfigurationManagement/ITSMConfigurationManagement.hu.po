@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-05-24 08:14+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Hungarian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/hu/>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -1104,83 +1107,90 @@ msgstr "beüzemelve"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Szerepdefiníció módosítása"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "Ready2Import osztálycsomagok"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"Itt importálhatja a Ready2Import osztálycsomagokat, amelyek a "
+"legáltalánosabb konfigurációs elemeket mutatják be. Kérjük, vegye "
+"figyelembe, hogy néhány további konfigurációra lehet szükség."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "Meglévő entitások frissítése"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "Ready2Adopt osztálycsomagok importálása"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Konfigurációs elem szerepe"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "A konfigurációs elem verziószáma"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"A verziószám már használatban van a ConfigItems által a következő számmal "
+"(számokkal): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "Nem találtunk konfigurációs elemadatot."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "Válassza ki ezt a konfigurációs elemet"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "TreeView a ConfigItem számára"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "Mélységi szint"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "Nagyítás/ kicsinyítés"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "A ConfigItem maximális hivatkozási szintje elérte!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "Az Ön ConfigItems"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "ConfigItem keresés"
 
 #. Template: AdminACL
 msgid "Object Type"
-msgstr ""
+msgstr "Objektum típusa"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "A következő osztályok kerülnek importálásra"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "A következő szerepkörök kerülnek importálásra"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"Vegye figyelembe, hogy a megfelelő dinamikus mezők és GeneralCatalog "
+"osztályok is létrejönnek, és nincs automatikus eltávolítás."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1188,19 +1198,19 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "Szükség van ExampleClasses!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "A definíció nem érvényes YAML hash."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "ConfigItem nem található!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "Nem találtunk verziót!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
@@ -1208,283 +1218,395 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "Szűrő érvénytelen!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "Search params érvénytelen!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "Osztálykorlátozások a konfigurációs elemhez"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
 msgstr ""
+"Egy vagy több osztály kiválasztása a választható konfigurációs elemek "
+"korlátozásához"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "Link típusa"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "Válassza ki a link típusát."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "Előre: (Forrás) -> Hivatkozás (Cél)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "Hátrafelé: Hivatkozás (Forrás) -> Hivatkozás (Cél)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "Link iránya"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 msgstr ""
+"A hivatkozó objektum az, amelyik tartalmazza ezt a dinamikus mezőt, a "
+"hivatkozott objektum pedig az, amelyik a dinamikus mező értékeként van "
+"kiválasztva."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "Dinamikus (ConfigItem)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "Static (változat)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "Link hivatkozási típus"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 msgstr ""
+"A hivatkozás a hivatkozó objektum ConfigItem vagy statikus változatára "
+"vonatkozik-e. Az aktuális incidensállapot számítása csak dinamikus "
+"hivatkozások esetén történik."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
 msgstr ""
+"Válassza ki azt az attribútumot, amely alapján a konfigurációs elemeket "
+"keresni fogják."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "A YAML karakterláncot '---'-val kell kezdeni."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "Nem sikerült törölni a configitem_link táblát."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "Nem találtunk releváns dinamikus mezőket"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "Nem sikerült beszúrni a configitem_link táblázatba"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "0 sor beszúrása a configitem_link táblába"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
+msgstr "Hiba a definíciók szinkronizálásában. Kérjük, ellenőrizze a naplót."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 msgstr ""
+"ITSMConfigItem definíciói nincsenek szinkronizálva. Kérjük, telepítse az "
+"ITSMConfigItem dinamikus mezőinek módosításait."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "Áttekintés és megerősítés"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "Hiba történt az osztály importálása során."
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - Rejtett"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - Megjelenítve"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Lehetővé teszi a kiterjesztett keresési feltételeket az ügynöki felület "
+"konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a "
+"konfigurációs elem nevére olyan feltételekkel, mint \"(*key1*&&*key2*)\" "
+"vagy \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Lehetővé teszi a kiterjesztett keresési feltételeket az ügyfélfelület "
+"konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a "
+"konfigurációs elem nevére olyan feltételekkel, mint \"(*key1*&&*key2*)\" "
+"vagy \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "Válasszon egy modult a névséma érvényesítéséhez."
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "Válasszon egy modult a számséma érvényesítéséhez."
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "Válasszon ki egy modult a verziós karakterlánc-séma érvényesítéséhez."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
+msgstr "Válassza ki az új verzió létrehozását kiváltó attribútumokat."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
+msgstr "Válassza ki a konfigurációs elemosztályhoz rendelendő kategóriákat."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
+msgstr "A ConfigItem Overview oszlop konfigurációs elemszűrői."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Az ügynöki felület konfigurációs elemeinek áttekintésében szűrhető oszlopok. "
+"Megjegyzés: Csak a konfigurációs elem attribútumai és a dinamikus mezők "
+"(DynamicField_NameX) engedélyezettek."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"Az ügyfélfelület konfigurációs elemeinek áttekintésében szűrhető oszlopok. "
+"Megjegyzés: Csak a konfigurációs elem attribútumai és a dinamikus mezők "
+"(DynamicField_NameX) engedélyezettek."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr ""
+"Konfigurációs elem eseménymodul, amely frissíti a konfigurációs elemeket az "
+"aktuális definíciójukra."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
 msgstr ""
+"Konfigurációs elem eseménymodul, amely frissíti a configitem_ĺink táblázatot."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
 msgstr ""
+"A konfigurációs elem eseménymodul frissíti az aktuális eseményállapotot."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "ConfigItem fa nézet"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "ConfigItem verzió"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"A következő osztályok ConfigItems nem kerülnek tárolásra az Elasticsearch "
+"kiszolgálón. Ahhoz, hogy ezt a meglévő CI-kre alkalmazzuk, a CI migrációt a "
+"konzolon keresztül kell futtatni, miután megváltoztattuk ezt az opciót."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"A következő telepítési állapotokkal rendelkező ConfigItems nem kerül "
+"tárolásra az Elasticsearch-kiszolgálón. A meglévő CI-kre való alkalmazáshoz "
+"a CI-migrációt a konzolon keresztül kell futtatni, miután megváltoztattuk "
+"ezt az opciót."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "Az ügyfelek láthatják a korábbi CI-verziókat."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
 msgstr ""
+"Az ügyfeleknek lehetőségük van manuálisan váltani a korábbi CI-verziók "
+"között."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"A konfigurációs elem keresési képernyőjének attribútumán használandó "
+"alapértelmezett adatok. Példa: \"ITSMConfigItemCreateTimePointFormat=year;ITS"
+"MConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"A konfigurációs elem keresési képernyőjének attribútumán használandó "
+"alapértelmezett adatok. Példa: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMC"
+"onfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfi"
+"gItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigI"
+"temCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr ""
+"Template::Toolkit séma definiálása a verziósztringekhez. Csak akkor "
+"használatos, ha a Version String Module értéke TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 msgstr ""
+"Határozza meg azon feltételek körét, amelyek mellett az ügyfél láthat egy "
+"konfigurációs elemet. A feltételek opcionálisan korlátozhatók bizonyos "
+"ügyfélcsoportokra. A név az egyetlen kötelező attribútum. Ha nincs más opció "
+"megadva, akkor az összes konfigurációs elem látható lesz az adott kategória "
+"alatt."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr ""
+"Meghatározza, hogy a csomópontkapcsolatokban meg kell-e jeleníteni a "
+"kapcsolattípus címkéit."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Meghatározza a CI-k elérhető oszlopait a konfigurációs elem áttekintésében a "
+"CI-osztálytól függően. Minden egyes bejegyzésnek egy osztálynévből és a "
+"megfelelő osztályhoz rendelkezésre álló mezők tömbjéből kell állnia. A "
+"dinamikus mezőbejegyzéseknek a DynamicField_FieldName sémát kell követniük."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Meghatározza az alapértelmezett konfigurációs elem attribútumot az ügynöki "
+"felület konfigurációs elem keresési eredményének konfigurációs elem "
+"rendezéséhez."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 msgstr ""
+"Meghatározza az ügyfélfelület konfigurációs elem keresési eredményének "
+"konfigurációs elem rendezéséhez használt alapértelmezett konfigurációs elem "
+"attribútumot."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Meghatározza az alapértelmezett konfigurációs elem attribútumot a művelet "
+"konfigurációs elem keresési eredményének konfigurációs elem rendezéséhez."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Meghatározza a konfigurációs elemek alapértelmezett sorrendjét az ügynöki "
+"felület konfigurációs elemkeresési eredményében. Felfelé: a legrégebbi a "
+"tetején. Lefelé: a legfrissebb van felül."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Meghatározza a konfigurációs elemek alapértelmezett sorrendjét az "
+"ügyfélfelület konfigurációs elem keresési eredményében. Felfelé: a "
+"legrégebbi felül. Lefelé: a legfrissebb van felül."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Meghatározza a konfigurációs elemek alapértelmezett sorrendjét a "
+"konfigurációs elemek keresési eredményében. Felfelé: a legrégebbi felül. "
+"Lefelé: a legfrissebb a tetején."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"Meghatározza a CI-k alapértelmezett megjelenített oszlopait a konfigurációs "
+"elem áttekintésében a CI-osztálytól függően. Minden bejegyzésnek egy "
+"osztálynévből és a megfelelő osztályhoz rendelkezésre álló mezők tömbjéből "
+"kell állnia. A dinamikus mezőbejegyzéseknek a DynamicField_FieldName sémát "
+"kell követniük."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "Meghatározza a megjelenítendő kapcsolatok alapértelmezett mélységét."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Meghatározza az alapértelmezett megjelenített konfigurációs elem keresési "
+"attribútumot a konfigurációs elem keresési képernyőn."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Meghatározza az alapértelmezett megjelenített konfigurációs elem keresési "
+"attribútumot a konfigurációs elem keresési képernyőn. Példa: \"Key\" a "
+"dinamikus mező neve, ebben az esetben 'X', \"Content\" a dinamikus mező "
+"értéke a dinamikus mező típusától függően, Text: 'a text', Dropdown: '1', "
+"Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' és vagy "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Meghatározza a CustomerITSMConfigItem képernyő keresési határát."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr ""
+"Meghatározza a CustomerITSMConfigItemSearch képernyő keresési korlátját."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Meghatározza, hogy az ITSM Config Item ACL struktúra harmadik szintjén mely "
+"elemek állnak rendelkezésre az \"Action\" (Művelet) számára."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Meghatározza, hogy mely elemek állnak rendelkezésre az ITSM Config Item ACL "
+"struktúra első szintjén."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Meghatározza, hogy mely elemek állnak rendelkezésre az ITSM Config Item ACL "
+"struktúra második szintjén."
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "Meghatározás frissítése"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "DeplState"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 msgstr ""
+"Dinamikus mező eseménymodul, amely a konfigurációs elem definícióit "
+"szinkronizálatlannak jelöli, ha a dinamikus mezők megváltoznak."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
@@ -1493,102 +1615,154 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
 msgstr ""
+"Az ügyfélfelület konfigurációs elem áttekintő képernyőjén megjelenő "
+"dinamikus mezők."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
 msgstr ""
+"Az ügynöki felület konfigurációs elemkereső képernyőjén megjelenő dinamikus "
+"mezők."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 msgstr ""
+"Az ITSM onfiguration elemek egyedi nevének ellenőrzésére szolgáló funkció "
+"engedélyezése/letiltása. Mielőtt engedélyezné ezt a beállítást, ellenőrizze "
+"a rendszerét a már meglévő, duplikált nevű konfigurációs elemek "
+"tekintetében. Ezt az Admin::ITSM::Configitem::ListDuplicates "
+"konzolparanccsal teheti meg."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 msgstr ""
+"A konfigurációs elemindex mezői, amelyeket a teljes szöveges kereséshez "
+"használnak. A mezők szintén tárolásra kerülnek, de az általános "
+"funkcionalitás szempontjából nem kötelezőek. A mellékletek bevonása "
+"letiltható a bejegyzés 0-ra állításával vagy törlésével."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 msgstr ""
+"A konfigurációs elemindexben tárolt mezők, amelyeket a teljes szöveges "
+"keresésen kívül másra is használnak. A teljes funkcionalitás érdekében "
+"minden mező kötelező."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"Minden egyes webszolgáltatáshoz (kulcs) megadható egy sor osztály (érték), "
+"amelyekre az importálás korlátozva van. Az összes kiválasztott osztályhoz "
+"vagy az összes létező osztályhoz az azonosító attribútumokat kell "
+"kiválasztani az invoker konfigurációban."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
+msgstr "GenericInterface modul regisztráció a ConfigItemFetch invoker réteghez."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "InciState"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
 msgstr ""
+"A telepítési állapotokat tartalmazza az ügyfélfelület konfigurációs "
+"elemkeresőjében."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
 msgstr ""
+"Beleértve az incidensállapotokat az ügyfélfelület konfigurációs "
+"elemkeresőjében."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"A művelet eredményében megjelenítendő konfigurációs elemek maximális száma."
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "Név modul"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "Szám modul"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Az ügynöki felületen a keresési eredmények egyes oldalain megjelenítendő "
+"konfigurációs elemek száma."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Az ügyfélfelületen a keresési eredmények minden egyes oldalán megjelenítendő "
+"konfigurációs elemek száma."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 msgstr ""
+"A keresendő objektumok, hány bejegyzés és milyen attribútumok jelenjenek "
+"meg. A ConfigItem attribútumokat kifejezetten az Elasticsearch segítségével "
+"kell tárolni."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"A konfigurációs elemosztályok kategóriáinak paraméterei az ügynöki felület "
+"beállítások nézetében."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"A kis konfigurációs elemek áttekintésének oszlopszűrőinek paraméterei. "
+"Megjegyzés: az \"Aktív\" 0-ra állítása csak azt akadályozza meg, hogy az "
+"ügynökök szerkesszék a csoport beállításait a személyes beállításaikban, de "
+"a rendszergazdáknak továbbra is lehetővé teszi, hogy egy másik felhasználó "
+"nevében szerkesszék a beállításokat. A 'PreferenceGroup' segítségével "
+"szabályozhatja, hogy ezek a beállítások melyik területen jelenjenek meg a "
+"felhasználói felületen."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"A konfigurációs elemosztályok névmoduljának paraméterei az ügynökfelület "
+"beállítások nézetében."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"A konfigurációs elemosztályok számmoduljának paraméterei az ügynökfelület "
+"beállítások nézetében."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"A konfigurációs elemosztályok verziósztring moduljának paraméterei az "
+"ügynöki felület beállítások nézetében."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Az ügynöki felület beállítások nézetében a konfigurációs elemosztályok "
+"konfigurációs elemosztályaihoz tartozó verziósztring sablon eszközkészlet "
+"moduljának paraméterei."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"A konfigurációs elemosztályok verzióindítójának paraméterei az ügynöki "
+"felület beállítások nézetében."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
@@ -1597,54 +1771,68 @@ msgstr ""
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Az ITSM konfigurációs elem csatolási művelet használatához szükséges "
+"engedélyek az ügynöki felületen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Az ITSM konfigurációs elemek keresési képernyőjének használatához szükséges "
+"jogosultságok az ügyfélfelületen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Az ITSM konfigurációs elemfát megjelenítő képernyő használatához szükséges "
+"jogosultságok az ügynöki felületen."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Az ITSM konfigurációs elemek ömlesztett képernyőjének használatához "
+"szükséges jogosultságok az ügynöki felületen."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr ""
+"Megjelenít egy linket a menüben a konfigurációs elemek hivatkozásainak fa "
+"nézetben történő megjelenítéséhez."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "Az alapértelmezett kategória, amely megjelenik, ha nincs kiválasztva."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "Automatikusan kiváltja a ConfigItemFetch hívót."
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "Verzió karakterlánc kifejezés"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "Version String modul"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "Verzió kiváltó"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"Elkerülhető-e a ConfigItemACL végrehajtása a gyorsítótárban tárolt "
+"mezőfüggőségek ellenőrzésével. Ez javíthatja az űrlapok betöltési idejét, de "
+"ki kell kapcsolni, ha az ACLModulokat az ITSMConfigItem- és Form-ReturnType "
+"típusok esetében kell használni."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "Milyen általános információk jelennek meg a fejlécben."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "Általános hívó adatok"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
@@ -1652,7 +1840,7 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "A kimenő kérési adatok beállításai"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
@@ -1668,11 +1856,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Bejövő válaszadatok beállításai"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "Eseményadatok"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
@@ -1684,39 +1872,39 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "Automatikus behúzás kód"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "Megjegyzés/nem megjegyzés kód"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "Keresés és csere"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
-msgstr ""
+msgstr "Válasszon ki mindent"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "Teljes képernyő"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "ConfigItems"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "Rendezés"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "Szűrés érvényes állapot szerint"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "Érvénytelen ACL-ek felvétele"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
@@ -1724,51 +1912,57 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "Érvénytelen dinamikus mezők felvétele"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "Mező szűrése objektumtípus szerint"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "Mező szűrése névtér szerint"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Új dinamikus mezők"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"Szeretne további dinamikus mezőtípusokat használni? Teljes körű hozzáférést "
+"biztosítunk a következő mezőtípusokhoz:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "Másolja ezt a mezőt"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "Attribútum, amelyet az automatikus kitöltés során keresni fogunk"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "Külső forráskulcs"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 msgstr ""
+"Ha külső forrásból (pl. webszolgáltatás vagy import/export) állítják be, az "
+"értéket ezen attribútumként kell értelmezni."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "Az értékeknél megjelenített attribútum"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "A kijelző típusának kiválasztása"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
 msgstr ""
+"Az alapszerkezet nem érvényes. Kérjük, adjon meg egy tömböt YAML formátumú "
+"adatokkal."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
@@ -1781,158 +1975,198 @@ msgstr ""
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"A minimális fordítási előrehaladás nyelvenkénti százalékos értéke, amely a "
+"dokumentációkhoz használható."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "Hozzáférés a tárolókhoz http-n vagy https-en keresztül."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "A Znuny4OTRSRepo kiterjesztések automatikus betöltése."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
+msgstr "Backend modul regisztráció a config conflict check modulhoz."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
+msgstr "Backend modul regisztráció a fájlkonfliktus ellenőrző modulhoz."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
+msgstr "Backend modul regisztráció a redefine check modul funkcióhoz."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "Backend modul regisztráció a kézi készlet modulhoz."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "A BS hirdetés eltávolításához létrehozandó blokkhorgok."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
+msgstr "A csomagkezelő kimeneti szűrőjéhez létrehozandó blokkhorgok."
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "Branch View commit limit"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "CodePolicy"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
-msgstr ""
+msgstr "Kötelezettségvállalási korlát oldalanként a Branch view képernyőn"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "Elemzési fájl létrehozása"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "Létrehoz egy elemzési fájlt ebből a jegyből, és elküldi Znuny-nak."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "Elemzési fájlt hoz létre ebből a jegyből."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "Privát addon tárolók definiálása."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "Meghatározza a HTML-sablonokat feldolgozó szűrőt."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "Meghatározza a kódpolitika ellenőrzésére szolgáló tesztmodult."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "A GIT clone/push URL prefix definíciója."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"A dinamikus mező meghatározása: Group => A dinamikus mezőkhöz hozzáférő "
+"csoport; AlwaysVisible => A mező eltávolítható (0|1); InformationAreaName => "
+"A widgetek neve; InformationAreaSize => A widgetek mérete és pozíciója "
+"(Large|Small); Name => A dinamikus mező neve, amelyet használni kell; "
+"Priority => A dinamikus mezők sorrendje; State => A dinamikus mezők "
+"sorrendje. A mezők állapota (0 = letiltva, 1 = aktív, 2 = kötelező), "
+"FilterRelease => Regex, amelynek a repository nevének meg kell felelnie a "
+"megjelenítéshez, FilterPackage => Regex, amelynek a csomag nevének meg kell "
+"felelnie a megjelenítéshez, FilterBranch => Regex, amelynek a branch nevének "
+"meg kell felelnie a megjelenítéshez, FilterRelease => Regex, amelynek a "
+"repelase version stringnek meg kell felelnie a megjelenítéshez."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"A dinamikus mező meghatározása: Group => A dinamikus mezőkhöz hozzáférő "
+"csoport; AlwaysVisible => A mező eltávolítható (0|1); InformationAreaName => "
+"A widgetek neve; InformationAreaSize => A widgetek mérete és pozíciója "
+"(Large|Small); Name => A dinamikus mező neve, amelyet használni kell; "
+"Priority => A dinamikus mezők sorrendje; State => A dinamikus mezők "
+"sorrendje. A mezők állapota (0 = letiltva, 1 = aktív, 2 = kötelező), "
+"FilterRepository => Regex, amelynek a repository nevének meg kell felelnie a "
+"megjelenítéshez, FilterPackage => Regex, amelynek a csomag nevének meg kell "
+"felelnie a megjelenítéshez, FilterBranch => Regex, amelynek a branch nevének "
+"meg kell felelnie a megjelenítéshez, FilterRelease => Regex, amelynek a "
+"repelase version stringnek meg kell felelnie a megjelenítéshez."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 msgstr ""
+"Külső MD5 összegek meghatározása (kulcs => MD5, érték => gyártó, csomagnév, "
+"verzió, dátum)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
 msgstr ""
+"A nyilvános adattár-kérelmek és a belső OPMS-adattárak közötti "
+"megfeleltetések meghatározása."
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "A csomagállapotok meghatározása."
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "Az átnevezett OPMS csomagok meghatározása."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "Directory, amelyet a Git a tárolók gyorsítótárazására használ."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "Directory, amelyet a Git az ideiglenes adatok tárolására használ."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "Directory, amelyet a Git a munkamásolatok tárolására használ."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "Online tárolók letiltása."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 msgstr ""
+"Ne naplózza a git ssh kapcsolat engedélyezési eredményeit ezeknek a "
+"felhasználóknak. Hasznos automatizált dolgokhoz."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "Dinamikus mezők képernyők"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
 msgstr ""
+"Exportálja az összes rendelkezésre álló nyilvános kulcsot az authorized_keys "
+"fájlba."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "Exportálja az összes releváns kiadást az ftp-kiszolgálóra."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
+msgstr "Frontend modul regisztráció az OPMS objektumhoz az ügynöki felületen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Frontend modul regisztráció a PublicOPMSRepository objektumhoz a nyilvános "
+"interfészen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Frontend modul regisztráció a PublicOPMSRepositoryLookup objektumhoz a "
+"nyilvános interfészen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Frontendmodul regisztráció a PublicOPMSTestBuild objektumhoz a nyilvános "
+"interfészen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
 msgstr ""
+"Frontend modul regisztráció a PublicPackageVerification objektumhoz a "
+"nyilvános interfészen."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -1940,1215 +2174,1304 @@ msgstr ""
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "GIT Szerzői regisztráció."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"HTML-kommentár horgokat generál a megadott blokkokhoz, hogy a szűrők "
+"használni tudják őket."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "Éjszakánként egyszer generálja a dokumentációkat."
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Git menedzsment"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "Git tároló"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
 msgstr ""
+"Csoport, amelynek tagjai törlési adminisztrátori jogosultságokkal "
+"rendelkeznek az OPMS-ben."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
 msgstr ""
+"Csoport, amelynek tagjai az OPMS-ben tárolóadminisztrátori jogosultságokkal "
+"rendelkeznek."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
 msgstr ""
+"Csoport, amelynek tagjai az OPMS képernyőkön látják a CI-tesztek eredményeit."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 msgstr ""
+"Csoportok, amelyeknek egy hitelesített felhasználónak (felhasználói "
+"bejelentkezéssel és jelszóval) tagja kell lennie ahhoz, hogy tesztcsomagokat "
+"készíthessen a nyilvános felületen keresztül."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
 msgstr ""
+"Csoportok, amelyeket a git-projekt létrehozási folyamatok során kell "
+"beállítani az OPMS-tárhelyek hozzáadásakor."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "Dinamikus mező kezelése a képernyőkön."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 msgstr ""
+"Itt kezelheti a nyilvános SSH-kulcs(ok)at a Git-hozzáféréshez. Győződjön meg "
+"róla, hogy elmenti ezt a beállítást, amikor új kulcsot ad hozzá."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "Modul a hozzáadott kódsorok statisztikáinak generálásához."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "Modul a kód növekedésére vonatkozó statisztikák generálásához."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
+msgstr "Modul a git commitok számáról szóló statisztikák generálásához."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
+msgstr "Modul az eltávolított kódsorok statisztikáinak generálásához."
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
 msgstr ""
+"Csak azok a felhasználók férhetnek hozzá a git-hez, akiknek rw jogosultságuk "
+"van valamelyik csoportban."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "Lehetőség a csomagkompatibilitás manuális beállítására."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "A BranchView képernyő oldalainak paraméterei."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"A 'GITProjectName' dinamikus mező előzetes meghatározása: Group => A "
+"dinamikus mezőkhöz hozzáférő csoport; AlwaysVisible => A mező eltávolítható "
+"(0|1); InformationAreaName => A widgetek neve; InformationAreaSize => A "
+"widgetek mérete és pozíciója (Large|Small); Name => A dinamikus mező neve, "
+"amelyet használni kell; Priority => A dinamikus mezők sorrendje; State => A "
+"mezők állapota (0 = letiltva, 1 = aktív, 2 = kötelező), FilterRepository => "
+"Regex, amelynek a repository nevének meg kell felelnie a megjelenítéshez, "
+"FilterPackage => Regex, amelynek a csomag nevének meg kell felelnie a "
+"megjelenítéshez, FilterBranch => Regex, amelynek a branch nevének meg kell "
+"felelnie a megjelenítéshez, FilterRelease => Regex, amelynek a repelase "
+"version stringnek meg kell felelnie a megjelenítéshez."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"A 'GITRepositoryName' dinamikus mező előzetes meghatározása: Group => A "
+"dinamikus mezőkhöz hozzáférő csoport; AlwaysVisible => A mező eltávolítható "
+"(0|1); InformationAreaName => A widgetek neve; InformationAreaSize => A "
+"widgetek mérete és pozíciója (Large|Small); Name => A használandó dinamikus "
+"mező neve; Priority => A dinamikus mezők sorrendje; State => A dinamikus "
+"mezők sorrendje. A mezők állapota (0 = letiltva, 1 = aktív, 2 = kötelező), "
+"FilterRepository => Regex, amelynek a repository nevének meg kell felelnie a "
+"megjelenítéshez, FilterPackage => Regex, amelynek a csomag nevének meg kell "
+"felelnie a megjelenítéshez, FilterBranch => Regex, amelynek a branch nevének "
+"meg kell felelnie a megjelenítéshez, FilterRelease => Regex, amelynek a "
+"repelase version stringnek meg kell felelnie a megjelenítéshez."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"A 'PackageDeprecated' dinamikus mező előzetes meghatározása: Group => A "
+"dinamikus mezőkhöz hozzáférő csoport; AlwaysVisible => A mező eltávolítható "
+"(0|1); InformationAreaName => A widgetek neve; InformationAreaSize => A "
+"widgetek mérete és pozíciója (Large|Small); Name => A használandó dinamikus "
+"mező neve; Priority => A dinamikus mezők sorrendje; State => A dinamikus "
+"mezők sorrendje. A mezők állapota (0 = letiltva, 1 = aktív, 2 = kötelező), "
+"FilterRepository => Regex, amelynek a repository nevének meg kell felelnie a "
+"megjelenítéshez, FilterPackage => Regex, amelynek a csomag nevének meg kell "
+"felelnie a megjelenítéshez, FilterBranch => Regex, amelynek a branch nevének "
+"meg kell felelnie a megjelenítéshez, FilterRelease => Regex, amelynek a "
+"repelase version stringnek meg kell felelnie a megjelenítéshez."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "A címzettek, akiket hiba esetén e-mailben értesítünk."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "SSH kulcsok Git hozzáféréshez"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "Elemzési fájl küldése"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
 msgstr ""
+"Beállítja a git klón címét, amelyet az adattár listáiban használni kell."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "Beállítja a git-tárhelyek főkönyvtárát."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
 msgstr ""
+"Beállítja a BugzillaAddComment post receive script helyének elérési "
+"útvonalát."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Az OTRSCodePolicy parancsfájl helyének elérési útvonalát állítja be. "
+"Ajánlott az OTRSCodePolicy modul külön klónja, amelyet a cron segítségével "
+"frissítünk."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"Beállítja az OTRSCodePolicy előzetes vételi parancsfájl helyének elérési "
+"útvonalát. Ajánlott az OTRSCodePolicy modul külön klónja, amelyet a cron "
+"segítségével frissítünk."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "A git tárolók legújabb commitjainak megjelenítése."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
 msgstr ""
+"Megjelenít egy linket a menüben, amellyel egységtesztet hozhat létre az "
+"aktuális jegyből."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "Az OPMS táblák szinkronizálása egy távoli adatbázissal."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "A sphinx könyvtár minimális verziója."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "A használni kívánt szfinx téma neve."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
 msgstr ""
+"Az OTRS CSS fájl elérési útvonala (relatív a statikus elérési útvonal alatt)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
 msgstr ""
+"Az OTRS logó elérési útvonala (relatív a statikus elérési útvonal alatt)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
 msgstr ""
+"A statikus mappa elérési útvonala, amely a képeket és css fájlokat "
+"tartalmazza."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "A theme mappa elérési útvonala, amely a sphinx témákat tartalmazza."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"Ez a konfiguráció meghatározza az összes lehetséges képernyőt az "
+"alapértelmezett oszlopok engedélyezéséhez vagy letiltásához."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
 msgstr ""
+"Ez a konfiguráció meghatározza az összes lehetséges képernyőt a dinamikus "
+"mezők engedélyezéséhez vagy letiltásához."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"Ez a beállítás határozza meg, hogy csak az értékek vagy az összes "
+"(érvénytelen) dinamikus mezőt kell-e megjeleníteni."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"Ez a beállítás határozza meg, hogy az OTRS csomagellenőrzés aktív vagy "
+"letiltott legyen. Ha kikapcsolva van, minden csomag ellenőrzöttként jelenik "
+"meg. Továbbra is ajánlott csak ellenőrzött csomagokat használni."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"Ez a konfiguráció határozza meg az OTRS CloudService Proxy szolgáltatás URL-"
+"címét. A http vagy https előtag a SysConfig 'Znuny4OTRSRepoType' "
+"kiválasztásától függően kerül hozzáadásra."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
 msgstr ""
+"Ez a konfiguráció regisztrál egy kimeneti utószűrőt a csomagellenőrzés "
+"kiterjesztéséhez."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"Ez a konfiguráció regisztrál egy OutputFilter modult, amely eltávolítja az "
+"OTRS Business Solution TM hirdetéseket."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
+"Ez a konfiguráció regisztrál egy kimeneti szűrőt az online tárolók "
+"kiválasztásának elrejtéséhez a csomagkezelőben."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
 msgstr ""
+"Rendezett, feldolgozatlan kiadás, amely hosszú ideig nem ment át a "
+"tesztpompulák ellenőrzésén."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 msgstr ""
+"Azok a felhasználók, akik rw jogosultsággal rendelkeznek valamelyik "
+"csoportban, jogosultak force push-okat végrehajtani 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 msgstr ""
+"Azok a felhasználók, akik e csoportok valamelyikében rw-jogosultsággal "
+"rendelkeznek, jogosultak projektek kezelésére. Ezen kívül a tagok "
+"adminisztrációs jogosultságokkal rendelkeznek a git kezeléshez."
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 GB"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U: 44,45 cm (17,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 GB"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 GB"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U: 53,34 cm (21 hüvelyk)"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U: 66,68 cm (26,25 hüvelyk)"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 GB"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U: 80,01 cm (31,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "19 hüvelykes állvány"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U: 4,45 cm (1,75 hüvelyk)"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U: 88,9 cm (35 hüvelyk)"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "21 hüvelykes állvány"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U: 38,5 hüvelyk (97,79 cm)"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "23 hüvelykes állvány"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23,6 hüvelyk (600 mm)"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 GB"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U: 106,68 cm (42 hüvelyk)"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 GB"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U: 47,25 hüvelyk (120,02 cm)"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K (2048 x 1080)"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U: 8,89 cm (3,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U: 133,35 cm (52,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31,5 hüvelyk (800 mm)"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 GB"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U: 57,75 hüvelyk (146,68 cm)"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35,4 hüvelyk (900 mm)"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U: 160,02 cm (63 hüvelyk)"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39,4 hüvelyk (1000 mm)"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U: 68,25 hüvelyk (173,35 cm)"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U: 13,34 cm (5,25 hüvelyk)"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U: 186,69 cm (73,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43,3 hüvelyk (1100 mm):"
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U: 200,02 cm (78,75 hüvelyk)"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47,2 hüvelyk (1200 mm)"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 GB"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U: 213,36 cm (84 hüvelyk)"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K Ultra HD (3840 x 2160):"
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U: 17,78 cm (7 hüvelyk)"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 GB"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U: 22,23 cm (8,75 hüvelyk)"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 GB"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U: 26,67 cm (10,5 hüvelyk)"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U: 31,12 cm (12,25 hüvelyk)"
 
 #. ITSM class bundles
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 GB"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K Ultra HD (7680 x 4320)"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U: 35,56 cm (14 hüvelyk)"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 GB"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U: 40,01 cm (15,75 hüvelyk)"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Számvitel"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "Címkiosztás"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Adminisztrátor"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "Készülék típusa"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "Backlinkek"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "Akkumulátor kapacitás (Ah)"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "Akkumulátor típusa"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Busz interfész"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "CPU osztály"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "Kapacitás (GB)"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "Grafikus kártyánkénti kapacitás"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "Kártya száma"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "Kártya típusa"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "Ügyféltanúsítványok"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "Ügyfélszoftver"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "Ügyfél kategória"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "Clockrate"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "Clockspeed"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "Kódaláíró tanúsítványok"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "Kapcsolat"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "Kapcsolat a forgalmazóval"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "Szerződés"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "Szerződés típusa"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "A szerződés időtartama"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "A szerződés időtartama"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "Költségviselő"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "Az engedélyek száma"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "Létrehozás dátuma"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "Egyedi Rack"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP Fenntartva"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "A számla dátuma"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "A megrendelés dátuma"
 
 #. ITSM class bundles
 msgid "Date of Warrenty"
-msgstr ""
+msgstr "A garancia dátuma"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "A kiadás dátuma"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "Dokumentum aláíró tanúsítványok"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "ETSI Rack"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "E-mail tanúsítványok (S/MIME tanúsítványok)"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Vég IP-cím"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "A támogatás megszűnése"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "Lejárati dátum"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "FireWire (IEEE 1394)"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "Firmware"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "Lendkerekes energiatárolás"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "Formafaktor"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "Full HD (1920 x 1080)"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "Általános információk"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "Grafikus kártyák"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "Grafikus kártya"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "HD (1280 x 720)"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "Hardveres modell"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "Hardver súlya"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "IP protokoll"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "Leltári szám"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "Inverterköltségek"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "Számla száma"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "LCD monitor (folyadékkristályos kijelző)"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "LED monitor (fénykibocsátó dióda)"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC (alacsony tűszám)"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "Szélesség"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "1. réteg: Fizikai réteg"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "2. réteg: adatkapcsolati réteg"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "3. réteg: Hálózati réteg"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "3. réteg: Hálózati réteg (Supernet)"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "4. réteg: Szállítási réteg"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "5. réteg: Munkamenetréteg"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "6. réteg: Bemutatási réteg"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "7. réteg: Alkalmazási réteg"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Licenc kulcs"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Licenc típusa"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "Licencidőszak a következő időponttól"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "Licencidőszak a következő időpontig"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "Lítium vas-foszfát (LiFePO4) akkumulátor"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "Lítium-ion (Li-ion) akkumulátor"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "Található"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "Hosszúság"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA (mikrocsatorna-architektúra)"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "Gyártó"
 
 #. ITSM class bundles
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "Maximális terhelhetőség (W)"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "Memória"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "Memória típusa"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "Microsoft SQL Server"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "Mini-Rack"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "Mobilszám"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "Modell Leírás"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "Monitor felbontás"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "Monitor mérete"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "Hálózati információk"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "Hálózati információk"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "Hálózati réteg"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "Nikkel-kadmium (NiCd) akkumulátor"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "Nikkel-metálhidrid (NiMH) akkumulátor"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "CPU-k száma"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "RAM modulok száma"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "Grafikus kártyák száma"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "OLED monitor (szerves fénykibocsátó dióda)"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "Működési költségek"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "Oracle adatbázis"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "Rendelési szám"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Kimenetek"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "PCI Express (PCIe)"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "PIN-KÓD"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "PIN 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonszám"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "Telefon típusa"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "Fizikai magok"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "Teljesítményszolgáltatás"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "Vásárolt"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "Quad HD (2560 x 1440)"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "Rack mélység"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "Rack egységek (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "Hivatkozás az ügyfélre"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "SIM-kártya"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "SSL/TLS tanúsítványok"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "Zárt ólomakkumulátor (SLA)"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Sorszám"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "Szerver szoftver"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "Szervizcímke"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "Aljzat típusa"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "IP-cím indítása"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "Tárolás"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "Tárolási partíció"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "Leányvállalat"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "Összefoglaló"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "Szálak"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Thunderbolt"
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "Grafikus kártya RAM (GB)"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "Teljes RAM (GB)"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "Érintőképernyős monitor"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "Torony"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB (univerzális soros busz)"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "VESA helyi busz (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "VGA"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "VirtualLink"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA (1366 x 768)"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "Analóg telefon"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "Kártyaolvasó"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "Konferenciatelefon"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "Tanácsadási megállapodás"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "Konténer menedzsment"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "Vezeték nélküli telefon (DECT telefon)"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "DNS-kiszolgáló"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "Munkaszerződés"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "Külső merevlemez"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "Tűzfal"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "Franchise megállapodás"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "Fejhallgató"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "Identitás- és hozzáférés-kezelés (IAM)"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "Vezetékes telefon"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "Bérleti szerződés"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "Licencszerződés"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "Hitelszerződés"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "Mobil/beágyazott"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "Titoktartási megállapodás (NDA)"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "Notebook"
 
 #. ITSM class bundles
 msgid "OTOBO"
@@ -3156,49 +3479,48 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "Partnerségi megállapodás"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "Telefon / VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "Értékesítési szerződés"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "Műholdas telefon"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Szolgáltatási megállapodás"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "Hangszórók"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "Thin Client"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "USB hub"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "VR headset"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "VoIP telefon"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
-
+msgstr "Webkamera"
