@@ -2008,7 +2008,7 @@ sub _ProcessRoles {
         }
 
         # do not check any further, if the role is only about to be imported
-        return { Success => 1 } unless $RoleID;
+        return { Success => 1 } if $ImportRoles{$RoleName};
 
         # This already parses the YAML
         my $RoleDefinition = $Self->RoleDefinitionGet(
