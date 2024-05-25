@@ -187,7 +187,7 @@ sub Data {
     $Self->{Translation}->{'Expiration Date'} = '';
     $Self->{Translation}->{'Media'} = '';
 
-    # Database XML Definition: ITSMConfigurationManagement.sopm
+    # Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
     $Self->{Translation}->{'Computer'} = '';
     $Self->{Translation}->{'Hardware'} = '';
     $Self->{Translation}->{'Network'} = '';
@@ -203,7 +203,6 @@ sub Data {
     $Self->{Translation}->{'Laptop'} = '';
     $Self->{Translation}->{'Desktop'} = '';
     $Self->{Translation}->{'PDA'} = '';
-    $Self->{Translation}->{'Server'} = '';
     $Self->{Translation}->{'Other'} = '';
     $Self->{Translation}->{'Monitor'} = '';
     $Self->{Translation}->{'Printer'} = '';
@@ -259,144 +258,178 @@ sub Data {
     $Self->{Translation}->{'Ok'} = '';
 
     # SysConfig
-    $Self->{Translation}->{'A precentage value of the minimal translation progress per language, to be usable for documentations.'} =
+    $Self->{Translation}->{'Assigned CIs'} = 'Dodeljene konfiguracione stavke';
+    $Self->{Translation}->{'CIs assigned to customer company'} = 'Konfiguracione stavke dodeljene firmi klijenta';
+    $Self->{Translation}->{'CIs assigned to customer user'} = 'Konfiguracione stavke dodeljene klijentu korisniku';
+    $Self->{Translation}->{'CMDB Settings'} = 'CMDB podešavanja';
+    $Self->{Translation}->{'Check for a unique name only within the same ConfigItem class (\'class\') or globally (\'global\'), which means every existing ConfigItem is taken into account when looking for duplicates.'} =
+        'Provera jedinstvenog imena samo u okviru iste klase konfiguracionih stavki (\'klasa\') ili globalno (\'globalno\'), što znači da je svaka postojeća Konfiguraciona stavka uzeta u obzir u proveri duplikata.';
+    $Self->{Translation}->{'Config Items'} = 'Konfiguracione stavke';
+    $Self->{Translation}->{'Config item add.'} = 'Dodavanje konfiguracione stavke.';
+    $Self->{Translation}->{'Config item edit.'} = 'Uređivanje konfiguracione stavke.';
+    $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
+        'Modul događaja konfiguracionih stavki koji omogućava beleženje u istorijat u interfejsu operatera.';
+    $Self->{Translation}->{'Config item history.'} = 'Istorijat konfiguracione stavke.';
+    $Self->{Translation}->{'Config item print.'} = 'Štampa konfiguracione stavke';
+    $Self->{Translation}->{'Config item zoom.'} = 'Detaljni prikaz konfiguracine stavke.';
+    $Self->{Translation}->{'ConfigItemNumber'} = 'Broj konfiguracione stavke';
+    $Self->{Translation}->{'ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
         '';
-    $Self->{Translation}->{'Access repos via http or https.'} = '';
-    $Self->{Translation}->{'Autoloading of Znuny4OTRSRepo extensions.'} = '';
-    $Self->{Translation}->{'Backend module registration for the config conflict check module.'} =
+    $Self->{Translation}->{'ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
         '';
-    $Self->{Translation}->{'Backend module registration for the file conflict check module.'} =
+    $Self->{Translation}->{'Configuration Item Limit'} = 'Ograničenje konfiguracione stavke';
+    $Self->{Translation}->{'Configuration Item limit per page.'} = 'Ograničenje konfiguracionih stavki po strani.';
+    $Self->{Translation}->{'Configuration Management Database.'} = 'Baza podataka upravljanja konfiguracijom.';
+    $Self->{Translation}->{'Configuration item bulk module.'} = 'Modul masovne akcije na konfiguracionim stavkama.';
+    $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
+        'Konfiguraciona stavka pretražuje pozadinski ruter u interfejsu operatera.';
+    $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Kreiranje i upravljanje definicija za konfiguracione stavke.';
+    $Self->{Translation}->{'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.'} =
+        'Definiše akcije gde je dugme postavki dostupno u povezanom grafičkom elementu objekta (LinkObject::ViewMode = "complex"). Molimo da imate na umu da ove Akcije moraju da budu registrovane u sledećim JS i CSS datotekama: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js i Core.Agent.LinkObject.js.';
+    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
+        'Definiše neophodne dozvole za kreiranje ITSM konfiguracionih stavki korišćenjem generičkog interfejsa.';
+    $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
+        'Određuje potrebne dozvole za brisanje ITSM konfiguracionih stavki kroz generički interfejs.';
+    $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
+        'Definiše neophodne dozvole za dobijanje ITSM konfiguracionih stavki korišćenjem generičkog interfejsa.';
+    $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
+        'Definiše neophodne dozvole za pretragu ITSM konfiguracionih stavki korišćenjem generičkog interfejsa.';
+    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
+        'Definiše neophodne dozvole za ažuriranje ITSM konfiguracionih stavki korišćenjem generičkog interfejsa.';
+    $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
+        'Definiše modul pregleda za mali prikaz liste konfiguracionih stavki. ';
+    $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
+        'Određuje regularne izraze za svaku klasu konfiguracione stavke radi provere naziva konfiguracione stavke i prikaza pripadajućih poruka o greškama.';
+    $Self->{Translation}->{'Defines the default frontend (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otobo.org/.'} =
         '';
-    $Self->{Translation}->{'Backend module registration for the function redefine check module.'} =
+    $Self->{Translation}->{'Defines the default frontend language. All the possible values are determined by the available language files on the system. These values are listed as the keys in the setting \'DefaultUsedLanguages\'.'} =
         '';
-    $Self->{Translation}->{'Backend module registration for the manual set module.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for BS ad removal.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for package manager output filter.'} =
+    $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
+        'Određuje podrazumevani podobjekat klase ITSM konfiguraciona stavka.';
+    $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
+        'Određuje broj redova za editor definicije CI u administrativnom interfejsu.';
+    $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
+        'Određuje redosled incidentnih stanja od visokog (npr kritično) do niskog (npr funkcionalno).';
+    $Self->{Translation}->{'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Only works if DashboardBackend::AllowCmdOutput is enabled in Config.pm.'} =
         '';
-    $Self->{Translation}->{'Branch View commit limit'} = 'Ograničenje broja komitova u prikazu grane';
-    $Self->{Translation}->{'CodePolicy'} = '';
-    $Self->{Translation}->{'Commit limit per page for Branch view screen'} = 'Ograničenje broja komitova po strani u ekranu prikaza grane';
-    $Self->{Translation}->{'Create analysis file'} = '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket and sends to Znuny.'} =
+    $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
+        'Određuje relevantna stanja raspoređivanja gde povezani tiketi mogu da utiču na status CI.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =
+        'Definiše granicu pretrage za ekran AgentITSMConfigItem.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItemSearch screen.'} =
+        'Definiše granicu pretrage za ekran AgentITSMConfigItemSearch.';
+    $Self->{Translation}->{'Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter \'All\' is selected.'} =
+        'Određuje prikazane kolone u pregledu konfiguracionih stavki. Ova opcije nema uticaj na pozicije kolona. Napomena: ukoliko je izabran filter \'Sve\' klasa kolone je uvek dostupna.';
+    $Self->{Translation}->{'Defines the shown columns in the config item search. This option has no effect on the position of the column.'} =
+        'Definiše prikazane kolone u pretrazi konfiguracionih stavki. Ova opcije nema uticaj na pozicije kolona.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns.'} =
+        'Definiše prikazane kolone konfiguracionih stavki u pregledu u zavisnosti od klase. Svaki unos mora sadržati prefiks sa nazivom klase i dvotačkom (npr. Computer::). Postoji par atributa koji su zajednički za sve klase (npr. za klasu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz pojedinačnih atributa iz definicije, morate koristiti sledeću šemu (primer za klasu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ukoliko ne postoji unos za pojedinačnu klasu, biće prikazane podrazumevane kolone definisane u ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns.'} =
+        'Definiše prikazane kolone konfiguracionih stavki u pretrazi u zavisnosti od klase. Svaki unos mora sadržati prefiks sa nazivom klase i dvotačkom (npr. Computer::). Postoji par atributa koji su zajednički za sve klase (npr. za klasu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz pojedinačnih atributa iz definicije, morate koristiti sledeću šemu (primer za klasu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ukoliko ne postoji unos za pojedinačnu klasu, biće prikazane podrazumevane kolone definisane u ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns).'} =
+        'Definiše prikazane kolone konfiguracionih stavki u dodatku komandne table u zavisnosti od klase. Svaki unos mora sadržati prefiks sa nazivom klase i dvotačkom (npr. Computer::). Postoji par atributa koji su zajednički za sve klase (npr. za klasu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz pojedinačnih atributa iz definicije, morate koristiti sledeću šemu (primer za klasu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ukoliko ne postoji unos za pojedinačnu klasu, biće prikazane podrazumevane kolone definisane u AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (ključ DefaultColumns).';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown.'} =
+        'Definiše prikazane kolone konfiguracionih stavki u tabeli veza u zavisnosti od klase. Ukoliko ne postoji unos za pojedinačnu klasu, biće prikazane podrazumevane kolone.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown.'} =
+        'Definiše prikazane kolone konfiguracionih stavki u tabeli veza u zavisnosti od klase. Svaki unos mora sadržati prefiks sa nazivom klase i dvotačkom (npr. Computer::). Postoji par atributa koji su zajednički za sve klase (npr. za klasu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz pojedinačnih atributa iz definicije, morate koristiti sledeću šemu (primer za klasu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ukoliko ne postoji unos za pojedinačnu klasu, biće prikazane podrazumevane kolone.';
+    $Self->{Translation}->{'Defines which type of link (named from the ticket perspective) can affect the status of a linked CI.'} =
+        'Određuje koji tip veze (gledano iz perspektive tiketa) može da utiče na povezanu CI.';
+    $Self->{Translation}->{'Defines which type of ticket can affect the status of a linked CI.'} =
+        'Određuje koji tip tiketa može da utiče na status povezane CI.';
+    $Self->{Translation}->{'Delete Configuration Item'} = 'Brisanje konfiguracione stavke';
+    $Self->{Translation}->{'Deployment State Color'} = 'Boja statusa raspoređivanja';
+    $Self->{Translation}->{'Duplicate'} = 'Duplikat';
+    $Self->{Translation}->{'Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time.'} =
+        'Omogućava masovnu akciju na konfiguracionim stavkama u pristupnom sistemu operatera na više od jedne stavke istovremeno.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
+        'Aktivira svojstvo masovne akcije na konfigiracionim stavkama samo za izlistane grupe.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl.'} =
+        'Aktivira/deaktivira funkciju za proveru jedinstvenosti imana konfiguracionih stavki. Pre aktiviranja ove opcije trebate proveriti u vašem sistemu postojanje duplikata na postojećim stavkama. To možete uraditi pomoću skripta bin/otobo.ITSMConfigItemListDuplicates.pl. ';
+    $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
+        'Modul događaja za podešavanje statusa konfiguracionih stavki prilikom postavljanja veza.';
+    $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket.'} = '';
-    $Self->{Translation}->{'Define private addon repos.'} = '';
-    $Self->{Translation}->{'Defines the filter that processes the HTML templates.'} = '';
-    $Self->{Translation}->{'Defines the test module for checking code policy.'} = '';
-    $Self->{Translation}->{'Definition of GIT clone/push URL Prefix.'} = 'Definicija adresnog prefiksa za GIT kloniranje i slanje.';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        'Definicija dinamičkog polja: Group => grupa za pristup dinamičkim poljima; AlwaysVisible => polje može biti uklonjeno (0|1); InformationAreaName => naslov dodataka; InformationAreaSize => veličina i pozicija dodataka (Large|Small); Name => naziv dinamičkog polja; Priority => redosled dinamičkih polja; State => status polja (0 = onemogućeno, 1 = omogućeno, 2 = obavezno); FilterRepository => regularni izraz koji naziv skladišta mora da zadovoljava da bi polje bilo prikazano; FilterPackage => regularni izraz koje naziv paketa mora da zadovoljava da bi polje bilo prikazano; FilterBranch => regularni izraz koji naziv grane mora da zadovoljava da bi polje bilo prikazano; FilterRelease => regularni izraz koji verzija izdanja mora da zadovoljava da bi polje bilo prikazano.';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        'Definicija dinamičkog polja: Group => grupa za pristup dinamičkim poljima; AlwaysVisible => polje može biti uklonjeno (0|1); InformationAreaName => naslov dodataka; InformationAreaSize => veličina i pozicija dodataka (Large|Small); Name => naziv dinamičkog polja; Priority => redosled dinamičkih polja; State => status polja (0 = onemogućeno, 1 = omogućeno, 2 = obavezno); FilterRepository => regularni izraz koji naziv skladišta mora da zadovoljava da bi polje bilo prikazano; FilterPackage => regularni izraz koje naziv paketa mora da zadovoljava da bi polje bilo prikazano; FilterBranch => regularni izraz koji naziv grane mora da zadovoljava da bi polje bilo prikazano; FilterRelease => regularni izraz koji verzija izdanja mora da zadovoljava da bi polje bilo prikazano.';
-    $Self->{Translation}->{'Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date).'} =
-        'Definicija eksternih MD5 vrednosti (ključ => MD5, vrednost => Vendor, PackageName, Version, Date).';
-    $Self->{Translation}->{'Definition of mappings between public repository requests and internal OPMS repositories.'} =
-        'Mapiranje skladišta u javnim zahtevima sa internim OPMS skladištima.';
-    $Self->{Translation}->{'Definition of package states.'} = 'Definicija stanja paketa.';
-    $Self->{Translation}->{'Definition of renamed OPMS packages.'} = 'Definicija OPMS paketa sa promenjenim imenom.';
-    $Self->{Translation}->{'Directory, which is used by Git to cache repositories.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store temporary data.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store working copies.'} = '';
-    $Self->{Translation}->{'Disable online repositories.'} = '';
-    $Self->{Translation}->{'Do not log git ssh connection authorization results for these users. Useful for automated stuff.'} =
-        'Isključi beleženje autorizacija prilikom ostvarivanja Git SSH konekcija za ove korisnike. Korisno za automatizaciju.';
-    $Self->{Translation}->{'Dynamic Fields Screens'} = '';
-    $Self->{Translation}->{'DynamicFieldScreen'} = '';
-    $Self->{Translation}->{'Export all available public keys to authorized_keys file.'} = 'Izvezi sve dostupne javne ključeve u datoteku authorized_keys.';
-    $Self->{Translation}->{'Export all relevant releases to ftp server.'} = 'Izvoz svih relevantnih izdanja na FTP server.';
-    $Self->{Translation}->{'Frontend module registration for the OPMS object in the agent interface.'} =
-        'Modul registracije za OPMS objekat u interfejsu operatera.';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepository object in the public interface.'} =
-        'Modul registracije za PublicOPMSRepository objekat u javnom interfejsu.';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface.'} =
-        'Modul registracije za PublicOPMSRepositoryLookup objekat u javnom interfejsu.';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSTestBuild object in the public interface.'} =
-        'Modul registracije za PublicOPMSTestBuild objekat u javnom interfejsu.';
-    $Self->{Translation}->{'Frontend module registration for the PublicPackageVerification object in the public interface.'} =
-        'Modul registracije za PublicPackageVerification objekat u javnom interfejsu.';
-    $Self->{Translation}->{'Frontend module registration for the admin interface.'} = '';
-    $Self->{Translation}->{'GIT Author registration.'} = 'Registracija Git autora.';
-    $Self->{Translation}->{'Generate HTML comment hooks for the specified blocks so that filters can use them.'} =
+    $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         '';
-    $Self->{Translation}->{'Generate documentations once per night.'} = '';
-    $Self->{Translation}->{'Git'} = 'Git';
-    $Self->{Translation}->{'Git Management'} = 'Git upravljanje';
-    $Self->{Translation}->{'Git Repository'} = '';
-    $Self->{Translation}->{'Group, whose members have delete admin permissions in OPMS.'} = 'Grupa čiji članovi imaju dozvolu za brisanje u OPMS.';
-    $Self->{Translation}->{'Group, whose members have repository admin permissions in OPMS.'} =
-        'Grupa čiji članovi imaju administratorske dozvole u OPMS.';
-    $Self->{Translation}->{'Group, whose members will see CI test result information in OPMS screens.'} =
+    $Self->{Translation}->{'ITSM config item overview.'} = 'Pregled ITSM konfiguracione stavke.';
+    $Self->{Translation}->{'If "LDAP" was selected for Customer::AuthModule and you wish to use TLS security to communicate with the LDAP server, the "verify" parameter can be specified here. See Net::LDAP::start_tls for more information about the parameter.'} =
         '';
-    $Self->{Translation}->{'Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface.'} =
-        'Grupe u kojima registrovani korisnik (po korisničkom imenu i lozinci) mora biti član da bi imao dozvolu za kreiranje test izdanja paketa u javnom interfejsu.';
-    $Self->{Translation}->{'Groups which will be set during git project creation processes while adding OPMS repositories.'} =
-        'Grupe koje će biti podešene prilikom kreiranja GIT projekta u slučaju dodavanja OPMS skladišta.';
-    $Self->{Translation}->{'Manage dynamic field in screens.'} = '';
-    $Self->{Translation}->{'Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key.'} =
-        'Uredite svoje javne SSH ključeve za Git pristup. Obratite pažnju da morate sačuvati ovo podešavanje prilikom dodavanja novog ključa.';
-    $Self->{Translation}->{'Module to generate statistics about the added code lines.'} = 'Modul za generisanje statistika o broju dodatih linija koda.';
-    $Self->{Translation}->{'Module to generate statistics about the growth of code.'} = 'Modul za generisanje statistika o uvećanju koda.';
-    $Self->{Translation}->{'Module to generate statistics about the number of git commits.'} =
-        'Modul za generisanje statistika o broju Git komitova.';
-    $Self->{Translation}->{'Module to generate statistics about the removed code lines.'} = 'Modul za generisanje statistika o broju uklonjenih linija koda.';
-    $Self->{Translation}->{'OPMS'} = 'OPMS';
-    $Self->{Translation}->{'Only users who have rw permissions in one of these groups may access git.'} =
-        'Samo korisnici koji imaju rw dozvolu u jednoj od ovih grupa imaće Git pristup.';
-    $Self->{Translation}->{'Option to set a package compatibility manually.'} = '';
-    $Self->{Translation}->{'Parameters for the pages in the BranchView screen.'} = 'Parametri za stranice u ekranu prikaza grane.';
-    $Self->{Translation}->{'Pre-Definition of the \'GITProjectName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        'Predefinisanje dinamičkog polja \'GITProjectName\': Group => grupa za pristup dinamičkim poljima; AlwaysVisible => polje može biti uklonjeno (0|1); InformationAreaName => naslov dodataka; InformationAreaSize => veličina i pozicija dodataka (Large|Small); Name => naziv dinamičkog polja; Priority => redosled dinamičkih polja; State => status polja (0 = onemogućeno, 1 = omogućeno, 2 = obavezno); FilterRepository => regularni izraz koji naziv skladišta mora da zadovoljava da bi polje bilo prikazano; FilterPackage => regularni izraz koje naziv paketa mora da zadovoljava da bi polje bilo prikazano; FilterBranch => regularni izraz koji naziv grane mora da zadovoljava da bi polje bilo prikazano; FilterRelease => regularni izraz koji verzija izdanja mora da zadovoljava da bi polje bilo prikazano.';
-    $Self->{Translation}->{'Pre-Definition of the \'GITRepositoryName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        'Predefinisanje dinamičkog polja \'GITRepositoryName\': Group => grupa za pristup dinamičkim poljima; AlwaysVisible => polje može biti uklonjeno (0|1); InformationAreaName => naslov dodataka; InformationAreaSize => veličina i pozicija dodataka (Large|Small); Name => naziv dinamičkog polja; Priority => redosled dinamičkih polja; State => status polja (0 = onemogućeno, 1 = omogućeno, 2 = obavezno); FilterRepository => regularni izraz koji naziv skladišta mora da zadovoljava da bi polje bilo prikazano; FilterPackage => regularni izraz koje naziv paketa mora da zadovoljava da bi polje bilo prikazano; FilterBranch => regularni izraz koji naziv grane mora da zadovoljava da bi polje bilo prikazano; FilterRelease => regularni izraz koji verzija izdanja mora da zadovoljava da bi polje bilo prikazano.';
-    $Self->{Translation}->{'Pre-Definition of the \'PackageDeprecated\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        'Predefinisanje dinamičkog polja \'PackageDeprecated\': Group => grupa za pristup dinamičkim poljima; AlwaysVisible => polje može biti uklonjeno (0|1); InformationAreaName => naslov dodataka; InformationAreaSize => veličina i pozicija dodataka (Large|Small); Name => naziv dinamičkog polja; Priority => redosled dinamičkih polja; State => status polja (0 = onemogućeno, 1 = omogućeno, 2 = obavezno); FilterRepository => regularni izraz koji naziv skladišta mora da zadovoljava da bi polje bilo prikazano; FilterPackage => regularni izraz koje naziv paketa mora da zadovoljava da bi polje bilo prikazano; FilterBranch => regularni izraz koji naziv grane mora da zadovoljava da bi polje bilo prikazano; FilterRelease => regularni izraz koji verzija izdanja mora da zadovoljava da bi polje bilo prikazano.';
-    $Self->{Translation}->{'Recipients that will be informed by email in case of errors.'} =
+    $Self->{Translation}->{'Ignores not ticket related attributes.'} = '';
+    $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul za proveru grupe odgovorne za klasu.';
+    $Self->{Translation}->{'Module to check the group responsible for a configuration item.'} =
+        'Modul za proveru grupe odgovorne za konfiguracionu stavku.';
+    $Self->{Translation}->{'Module to generate ITSM config item statistics.'} = 'Modul za generisanje statistike ITSM konfiguracionih stavki.';
+    $Self->{Translation}->{'Object backend module registration for the import/export module.'} =
+        'Registracija modula objekta za dodatak uvoz/izvoz.';
+    $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
         '';
-    $Self->{Translation}->{'SSH Keys for Git Access'} = 'SSH ključevi za Git pristup';
-    $Self->{Translation}->{'Send analysis file'} = '';
-    $Self->{Translation}->{'Sets the git clone address to be used in repository listings.'} =
-        'Definiše adresu za Git kloniranje koja će biti korišćena u prikazu repozitorija.';
-    $Self->{Translation}->{'Sets the home directory for git repositories.'} = 'Definiše direktorijum za Git repozitorije.';
-    $Self->{Translation}->{'Sets the path for the BugzillaAddComment post receive script location.'} =
-        'Definiše putanju do BugzillaAddComment skripta.';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
+    $Self->{Translation}->{'Overview.'} = 'Pregled.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
+        'Parametri za pozadinski prikaz kontrolne table liste konfiguracionih stavki firme klijenta u interfejsu operatera. "Limit" definiše podrazumevani broj prikazanih stavki. "Group" se koristi da ograniči pristup dodatku (npr. Group: admin;group1;group2;). "Default" određuje da li je dodatak podrazumevano aktiviran ili da je neophodno da ga korisnik manuelno aktivira. "CacheTTLLocal" je vreme u minutima za keširanje dodatka.';
+    $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
+        'Parametri za boje statusa primene na prikazu postavki u interfejsu operatera.';
+    $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
+        'Parametri za statuse primene na prikazu postavki u interfejsu operatera.';
+    $Self->{Translation}->{'Parameters for the example permission groups of the general catalog attributes.'} =
+        'Parametri za atribute uzorka grupe za dozvole opšteg kataloga';
+    $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
+        'Parametri za stranice (na kojima su konfiguracione stavke prikazane).';
+    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
         '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        'Definiše putanju do OTRSCodePolicy skripta. Preporučeno je da postoji poseban klon OTRSCodePolicy modula koji se redovno osvežava putem cron.';
-    $Self->{Translation}->{'Show latest commits in git repositories.'} = '';
-    $Self->{Translation}->{'Shows a link in the menu to go create a unit test from the current ticket.'} =
-        '';
-    $Self->{Translation}->{'Synchronize OPMS tables with a remote database.'} = 'Sinhronizacija OPMS tabela sa udaljenom bazom.';
-    $Self->{Translation}->{'The minimum version of the sphinx library.'} = '';
-    $Self->{Translation}->{'The name of the sphinx theme to be used.'} = '';
-    $Self->{Translation}->{'The path to the OTRS CSS file (relative below the static path).'} =
-        '';
-    $Self->{Translation}->{'The path to the OTRS logo (relative below the static path).'} = '';
-    $Self->{Translation}->{'The path to the static folder, containing images and css files.'} =
-        '';
-    $Self->{Translation}->{'The path to the theme folder, containing the sphinx themes.'} = '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable default columns.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable dynamic fields.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if only valids or all (invalids) dynamic fields should be shown.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It\'s still recommended to use only verified packages.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig \'Znuny4OTRSRepoType\'.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers a Output post-filter to extend package verification.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an output filter to hide online repository selection in package manager.'} =
-        '';
-    $Self->{Translation}->{'Tidy unprocessed release that not passed test pomules checks for a long time.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to execute force pushes \'git push --force\'.'} =
-        'Korisnici koji imaju rw dozvolu u jednoj od ovih grupa imaće mogućnost izvršavanja komande \'git push --force\'.';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management.'} =
-        'Korisnici koji imaju rw dozvolu u jednoj od ovih grupa imaće mogućnost upravljanja projektima. Dodatno pripadnici će imati administracione privilegije za Git upravljanje.';
+    $Self->{Translation}->{'Permission Group'} = 'Grupa pristupa';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana pretrage ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item zoom screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana detalnog prikaza ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the add ITSM configuration item screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana dodavanja ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the edit ITSM configuration item screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana izmene ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the history ITSM configuration item screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana istorijata ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required permissions to use the print ITSM configuration item screen in the agent interface.'} =
+        'Potrebne dozvole za upotrebu ekrana štampe ITSM konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Required privileges to delete config items.'} = 'Potrebna prava za brisanje konfiguracione stavke.';
+    $Self->{Translation}->{'Search config items.'} = 'Pretraga konfiguracionih stavki.';
+    $Self->{Translation}->{'Selects the configuration item number generator module. "AutoIncrement" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is "SystemID.ConfigItemClassID.Counter", e.g. 1205000004, 1205000005.'} =
+        'Bira modul operatora automatskog uvećanja konfiguracione stavke. Operator automatskog uvećanja povećava broj stavke, SystemID, ConfigItemClassID i korišćeni brojač. Format je "SystemID.ConfigItemClassID.brojač", npr 1205000004, 1205000005.';
+    $Self->{Translation}->{'Set the incident state of a CI automatically when a Ticket is Linked to a CI.'} =
+        'Postavlja stanje incidenta konfiguracione stavke kada je tiket povezan sa stavkom.';
+    $Self->{Translation}->{'Sets the deployment state in the configuration item bulk screen of the agent interface.'} =
+        'Određuje status primene na ekranu masovne akcije konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Sets the incident state in the configuration item bulk screen of the agent interface.'} =
+        'Određuje status incidenta na ekranu masovne akcije konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu koja omogućava povezivanje konfiguracione stavke sa drugim objektom na detaljnom prikazu konfiguracije u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface.'} =
+        'U meniju prikazuje vezu za pristup istorijatu konfiguracione stavke na pregledu konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za pristup istorijatu konfiguracione stavke na detaljnom prikazu u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to delete a configuration item in its zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za brisanje konfiguracione stavke na njenom detaljnom prikazu u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface.'} =
+        'U meniju prikazuje vezu za umnožavanje konfiguracione stavke na pregledu konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za umnožavanje konfiguracione stavke na njenom detaljnom prikazu u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za izmenu konfiguracione stavke na njenom detaljnom prikazu u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to go back in the configuration item zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za povratak na detaljni prikaz konfiguracione stavke  u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to print a configuration item in the its zoom view of the agent interface.'} =
+        'U meniju prikazuje vezu za štampu konfiguracione stavke na njenom detaljnom prikazu u interfejsu operatera.';
+    $Self->{Translation}->{'Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface.'} =
+        'U meniju prikazuje vezu za detaljni prikaz konfiguracione stavke na pregledu konfiguracione stavke u interfejsu operatera.';
+    $Self->{Translation}->{'Shows the config item history (reverse ordered) in the agent interface.'} =
+        'Prikazuje istorijat konfiguracione stavke (obrnut redosled) u interfejsu operatera.';
+    $Self->{Translation}->{'The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#.'} =
+        'Identifikator za konfiguracionu stavku, npr. ConfigItem#, MyConfigItem#. Podrazumevano je ConfigItem#.';
+    $Self->{Translation}->{'class'} = 'klasa';
+    $Self->{Translation}->{'global'} = 'globalno';
+    $Self->{Translation}->{'postproductive'} = 'post-produkcija';
+    $Self->{Translation}->{'preproductive'} = 'pre-produkcija';
+    $Self->{Translation}->{'productive'} = 'produkcija';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
