@@ -1385,10 +1385,10 @@ sub ClassImport {
 
         my %ClassData;
         
-        my $Definition = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+        my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $DefinitionItem->{Definition},
         );
-        if ( !$Definition ) {
+        if ( !$DefinitionRef ) {
             my $Name = $DefinitionItem->{RoleName} || $DefinitionItem->{Class}{Name};
 
             return {
@@ -1396,18 +1396,28 @@ sub ClassImport {
                 ErrorMessage => "Item '$Name' has not a valid YAML definition field.",
             };
         }
-        for my $DefinitionKey ( keys %{$Definition} ) {
-            $DefinitionItem->{$DefinitionKey} = $Definition->{$DefinitionKey};
+        for my $DefinitionKey ( keys %{$DefinitionRef} ) {
+            $DefinitionItem->{$DefinitionKey} = $DefinitionRef->{$DefinitionKey};
         }
 
         my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
 
-        # check definition for validity
-        my $CheckResult = $Self->DefinitionCheck(
-            Definition  => $Definition,
-            Type        => $Type,
-            ImportRoles => [ keys %ImportRoles ],
-        );
+# TODO: Add a preliminary check
+#        # check definition for validity
+#        my $CheckResult = $Self->DefinitionCheck(
+#            Definition  => $DefinitionItem->{Definition},
+#            Type        => $Type,
+#            ImportRoles => [ keys %ImportRoles ],
+#        );
+#
+#        if ( !$CheckResult->{Success} ) {
+#            my $Name = $DefinitionItem->{RoleName} || $DefinitionItem->{Class}{Name};
+#
+#            return {
+#                Success      => 0,
+#                ErrorMessage => "Item '$Name' failed initial definition check.",
+#            };
+#        }
 
         # collect class tags
         @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
