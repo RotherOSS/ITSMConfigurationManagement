@@ -14,7 +14,6 @@
     <Description Lang="hu">Az OTOBO::ITSM konfigurációmenedzsment csomag.</Description>
     <Filelist>
         <!-- TODO: move to Kernel? -->
-        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_1.yml" />
         <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
         <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicField.pm" />
         <File Permission="660" Location="Custom/Kernel/Modules/AgentDashboardCommon.pm" />
@@ -261,6 +260,7 @@
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItemOverview.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Table.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/img/devices_black_24dp.svg" />
+        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_2.yml" />
         <File Permission="660" Location="var/packagesetup/ITSMConfigurationManagement.pm" />
     </Filelist>
     <DatabaseInstall Type="post">
