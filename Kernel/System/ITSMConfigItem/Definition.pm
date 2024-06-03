@@ -256,6 +256,13 @@ sub DefinitionGet {
     $Definition{DefinitionRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
         Data => $Definition{Definition},
     );
+
+    # this can be changes to produce an error somewhen
+    # currently (11.0) we will have to deal with legacy definitions in the system
+    if ( ref $Definition{DefinitionRef} ne 'HASH' ) {
+        $Definition{DefinitionRef} = {};
+    }
+
     $Definition{DynamicFieldRef} = $Kernel::OM->Get('Kernel::System::YAML')->Load(
         Data => $DynamicFields,
     );
