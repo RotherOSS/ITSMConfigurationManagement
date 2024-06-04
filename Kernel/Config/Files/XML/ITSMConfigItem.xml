@@ -2387,6 +2387,16 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="DynamicField::EventModulePost###2400-RebuildACLPreselectionCache" Required="0" Valid="1">
+        <Description Translatable="1">Rebuilds the ACL preselection cache.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::RebuildACLPreselectionCache</Item>
+                <Item Key="Event">DefinitionCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Customer::ConfigItem::PermissionConditions###01" Required="0" Valid="0">
         <Description Translatable="1">Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
