@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 40db3c0a7b808d59423546bee89e6586a038c60f - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -345,7 +345,7 @@ sub _ShowOverview {
         PossibleNone => 1,
         Sort         => 'AlphanumericValue',
         SelectedID   => $ObjectTypeFilter,
-        Class        => 'Modernize W95pc',
+        Class        => 'Modernize',
     );
 
     $LayoutObject->Block(
@@ -369,7 +369,7 @@ sub _ShowOverview {
             PossibleNone => 1,
             Translation  => 0,
             Sort         => 'AlphanumericValue',
-            Class        => 'Modernize W95pc',
+            Class        => 'Modernize',
         );
 
         $LayoutObject->Block(

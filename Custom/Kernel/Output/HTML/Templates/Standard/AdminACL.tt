@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - ae71afc3e6657cacf322c1c030cdb8a3d97c4433 - Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+# $origin: otobo - 3745bd7a374d0731e9838b5178075cb54acdef6c - Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -126,6 +126,9 @@
                 </p>
                 <p class="FieldExplanation">
                     [% Translate("Changes to the ACLs here only affect the behavior of the system, if you deploy the ACL data afterwards. By deploying the ACL data, the newly made changes will be written to the configuration.") | html %]
+                </p>
+                <p class="FieldExplanation">
+                    [% Translate("To delete an existing ACL you have to set the validity to invalid and save it. Afterwards a new button to delete the ACL will appear.") | html %]
                 </p>
             </div>
         </div>

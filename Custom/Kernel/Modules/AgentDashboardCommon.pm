@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
-# $origin: otobo - ea7af25118721e16d361e6e00403764eaa379dab - Kernel/Modules/AgentDashboardCommon.pm
+# $origin: otobo - 57384f5e4aaed1f4d0fd1266a3e0bddd38c58fac - Kernel/Modules/AgentDashboardCommon.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -944,7 +944,6 @@ sub _Element {
             CustomerID     => $Self->{CustomerID}     || '',
             CustomerUserID => $Self->{CustomerUserID} || '',
         );
-
         return $FilterContent;
     }
 
