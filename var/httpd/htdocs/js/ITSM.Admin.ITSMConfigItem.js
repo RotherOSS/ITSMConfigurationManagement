@@ -70,11 +70,12 @@ ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
                             Type: undefined,
                             Class: 'Confirm CallForAction',
                             Function: function() {
+                                var Message = "Importing classes/roles and their related fields. This may take a while...";
+                                $('.Dialog').html("<p style='margin:5px'>" + Core.Language.Translate(Message) + "</p>");
                                 Core.AJAX.FunctionCall(
                                     Core.Config.Get('CGIHandle'),
                                     'Action=' + 'AdminITSMConfigItem' + ';Subaction=ClassImport;ExampleClass=' + ImportItem + ';UpdateExistingEntities=' + UpdateExistingEntities,
                                     function (Response) {
-
                                         if (!Response || !Response.Success) {
                                             Core.UI.Dialog.ShowAlert(
                                                 Core.Language.Translate('An error occurred during class import.'),
