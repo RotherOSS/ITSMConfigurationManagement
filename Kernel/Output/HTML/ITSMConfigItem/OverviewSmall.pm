@@ -611,6 +611,10 @@ sub Run {
         Key   => 'LinkPage',
         Value => $Param{LinkPage},
     );
+    $LayoutObject->AddJSData(
+        Key   => 'Category',
+        Value => $Param{CategoryFilter},
+    );
 
     $LayoutObject->Block(
         Name => 'DocumentContent',

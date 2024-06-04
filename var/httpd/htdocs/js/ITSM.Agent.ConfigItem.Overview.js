@@ -97,7 +97,7 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
         $('.ColumnFilter').on('change', function () {
 
             // define variables
-            URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage');
+            URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage') + 'Category=' + Core.Config.Get('Category') + ';';
             SessionInformation = Core.App.GetSessionInformation();
             $.each(SessionInformation, function (Key, Value) {
                 URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
