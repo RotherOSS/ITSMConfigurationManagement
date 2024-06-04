@@ -502,15 +502,8 @@ sub DefinitionAdd {
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
-        my $Message = "Can't add new definition! The definition was not changed.";
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $Message,
-        );
-
         return {
-            Success => 0,
-            Error   => $Message,
+            Success => 1,
         };
     }
 
@@ -643,15 +636,8 @@ sub RoleDefinitionAdd {
 
     # stop add, if definition was not changed
     if ( !$DefinitionChanged ) {
-        my $Message = "Can't add new definition! The definition was not changed.";
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $Message,
-        );
-
         return {
-            Success => 0,
-            Error   => $Message,
+            Success => 1,
         };
     }
 
