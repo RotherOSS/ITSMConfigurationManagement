@@ -70,8 +70,22 @@ ITSM.Admin.ITSMConfigItem = (function (TargetNS) {
                             Type: undefined,
                             Class: 'Confirm CallForAction',
                             Function: function() {
-                                var Message = "Importing classes/roles and their related fields. This may take a while...";
-                                $('.Dialog').html("<p>" + Core.Language.Translate(Message) + "</p>");
+
+                                var DialogTemplate = Core.Template.Render('Dialog/Waiting', {
+                                    Text: Core.Language.Translate("Importing classes/roles and their related fields")
+                                });
+                                Core.UI.Dialog.ShowDialog({
+                                    HTML: DialogTemplate,
+                                    Title: "",   // Not applicable if header is hidden
+                                    Modal: true,
+                                    CloseOnClickOutside: false,
+                                    CloseOnEscape: false,
+                                    PositionTop: '20%',
+                                    PositionLeft: 'Center',
+                                    AllowAutoGrow: false,
+                                    HideHeader: true,
+                                    HideFooter: true
+                                });
                                 Core.AJAX.FunctionCall(
                                     Core.Config.Get('CGIHandle'),
                                     'Action=' + 'AdminITSMConfigItem' + ';Subaction=ClassImport;ExampleClass=' + ImportItem + ';UpdateExistingEntities=' + UpdateExistingEntities,
