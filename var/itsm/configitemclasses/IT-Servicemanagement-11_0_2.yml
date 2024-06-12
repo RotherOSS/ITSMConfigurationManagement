@@ -53,7 +53,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -68,7 +67,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -83,7 +81,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -97,7 +94,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -114,7 +110,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -128,7 +123,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -142,7 +136,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -156,7 +149,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -170,7 +162,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -187,7 +178,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -201,7 +191,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -217,7 +206,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -234,7 +222,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -259,7 +246,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1118
       Label: Appliance Type
       Name: ITSMAppliance-ApplianceType
       ObjectType: ITSMConfigItem
@@ -314,7 +300,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -328,7 +313,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -342,7 +326,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -356,7 +339,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -370,7 +352,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -396,7 +377,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -405,7 +385,7 @@
             CIClass: Appliance
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -420,7 +400,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -442,7 +421,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -458,7 +436,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -474,7 +451,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -483,9 +459,9 @@
             CIClass: Appliance
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -500,7 +476,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -516,7 +491,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -532,7 +506,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -548,7 +521,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -564,7 +536,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -585,7 +556,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -605,14 +575,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -639,7 +607,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -686,7 +653,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1101
       Label: Subsidiary
       Name: Location-ReferenceToSubsidiary
       ObjectType: ITSMConfigItem
@@ -727,7 +693,6 @@
         YearsInPast: '5'
         YearsPeriod: '0'
       FieldType: Date
-      ID: 1120
       Label: Creation Date
       Name: ITSMCertificate-CreationDate
       ObjectType: ITSMConfigItem
@@ -744,7 +709,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 1121
       Label: Expiry Date
       Name: ITSMCertificate-ExpiryDate
       ObjectType: ITSMConfigItem
@@ -767,7 +731,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1119
       Label: Type
       Name: ITSMCertificate-Type
       ObjectType: ITSMConfigItem
@@ -869,7 +832,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1042
       Label: CPU Class
       Name: CPU-CPUClass
       ObjectType: ITSMConfigItem
@@ -922,7 +884,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1043
       Label: Clockspeed
       Name: CPU-Clockspeed
       ObjectType: ITSMConfigItem
@@ -948,7 +909,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1044
       Label: Number of CPUs
       Name: CPU-NumberOfCPU
       ObjectType: ITSMConfigItem
@@ -1012,7 +972,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1045
       Label: Physical Cores
       Name: CPU-PhysicalCores
       ObjectType: ITSMConfigItem
@@ -1044,7 +1003,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1046
       Label: Socket Type
       Name: CPU-SocketType
       ObjectType: ITSMConfigItem
@@ -1108,7 +1066,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1047
       Label: Threads
       Name: CPU-Threads
       ObjectType: ITSMConfigItem
@@ -1124,7 +1081,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -1139,7 +1095,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -1154,7 +1109,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -1166,7 +1120,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -1179,7 +1132,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -1192,7 +1144,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -1205,7 +1156,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -1229,7 +1179,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -1252,7 +1201,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1063
       Label: Operating System
       Name: ITSM-ReferenceToOS
       ObjectType: ITSMConfigItem
@@ -1266,7 +1214,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -1283,7 +1230,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -1297,7 +1243,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -1311,7 +1256,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -1325,7 +1269,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -1339,7 +1282,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -1356,7 +1298,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -1370,7 +1311,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -1386,7 +1326,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -1403,7 +1342,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -1425,7 +1363,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1050
       Label: Client category
       Name: ITSMClient-ClientCategory
       ObjectType: ITSMConfigItem
@@ -1439,7 +1376,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1051
       Label: Firmware
       Name: ITSMClient-Firmware
       ObjectType: ITSMConfigItem
@@ -1462,7 +1398,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1064
       Label: Client Software
       Name: ITSMClientSoftware-ReferenceToClientSoftware
       ObjectType: ITSMConfigItem
@@ -1494,7 +1429,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1056
       Label: Bus Interface
       Name: ITSMGraphicsCard-BusInterface
       ObjectType: ITSMConfigItem
@@ -1521,7 +1455,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1152
       Label: Number of graphics cards
       Name: ITSMGraphicsCard-Count
       ObjectType: ITSMConfigItem
@@ -1688,7 +1621,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1057
       Label: Graphics card
       Name: ITSMGraphicsCard-GraphicsCardVendor
       ObjectType: ITSMConfigItem
@@ -1719,7 +1651,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1154
       Label: Capacity per graphics card
       Name: ITSMGraphicsCard-MemorySize
       ObjectType: ITSMConfigItem
@@ -1744,7 +1675,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1059
       Label: Memory Type
       Name: ITSMGraphicsCard-MemoryType
       ObjectType: ITSMConfigItem
@@ -1769,7 +1699,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1060
       Label: Outputs
       Name: ITSMGraphicsCard-Outputs
       ObjectType: ITSMConfigItem
@@ -1797,7 +1726,6 @@
         - ValueUpdate
         - VersionCreate
       FieldType: ScriptTemplateToolkit
-      ID: 1153
       Label: Total Graphics card RAM (GB)
       Name: ITSMGraphicsCard-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -1828,7 +1756,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1151
       Label: Capacity (GB)
       Name: ITSMMemory-Capacity
       ObjectType: ITSMConfigItem
@@ -1860,7 +1787,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1062
       Label: Clockrate
       Name: ITSMMemory-ClockRate
       ObjectType: ITSMConfigItem
@@ -1895,7 +1821,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1148
       Label: Number of RAM modules
       Name: ITSMMemory-Count
       ObjectType: ITSMConfigItem
@@ -1922,7 +1847,6 @@
         - ValueUpdate
         - VersionDelete
       FieldType: ScriptTemplateToolkit
-      ID: 1150
       Label: Total RAM (GB)
       Name: ITSMMemory-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -1946,7 +1870,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1065
       Label: Type
       Name: ITSMMemory-Type
       ObjectType: ITSMConfigItem
@@ -2001,7 +1924,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -2015,7 +1937,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -2029,7 +1950,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -2043,7 +1963,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -2057,7 +1976,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -2083,7 +2001,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -2092,7 +2009,7 @@
             CIClass: Client
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -2107,7 +2024,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -2129,7 +2045,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -2145,7 +2060,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -2161,7 +2075,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -2170,9 +2083,9 @@
             CIClass: Client
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -2187,7 +2100,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -2203,7 +2115,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -2219,7 +2130,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -2235,7 +2145,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -2251,7 +2160,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -2272,7 +2180,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -2292,14 +2199,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -2327,7 +2232,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1089
             Label: Storage Type
             Name: ITSMStorage-Type
             ObjectType: ITSMConfigItem
@@ -2343,7 +2247,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1084
             Label: Storage Capacity
             Name: ITSMStorage-Capacity
             ObjectType: ITSMConfigItem
@@ -2392,7 +2295,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1085
             Label: Storage Manufacturer
             Name: ITSMStorage-Manufacturer
             ObjectType: ITSMConfigItem
@@ -2408,7 +2310,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1086
             Label: Model
             Name: ITSMStorage-Model
             ObjectType: ITSMConfigItem
@@ -2424,14 +2325,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1088
             Label: Storage SerialNumber
             Name: ITSMStorage-SerialNumber
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1083
       Label: Storage
       Name: ITSMStorage-Storage
       ObjectType: ITSMConfigItem
@@ -2451,7 +2350,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1093
             Label: Partition Name
             Name: ITSMStoragePartition-Name
             ObjectType: ITSMConfigItem
@@ -2467,7 +2365,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1090
             Label: Partition Capacity
             Name: ITSMStoragePartition-Capacity
             ObjectType: ITSMConfigItem
@@ -2483,7 +2380,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1091
             Label: Partition Free Capacity
             Name: ITSMStoragePartition-FreeCapacity
             ObjectType: ITSMConfigItem
@@ -2499,7 +2395,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1094
             Label: Partition Used Capacity
             Name: ITSMStoragePartition-UsedCapacity
             ObjectType: ITSMConfigItem
@@ -2515,14 +2410,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1092
             Label: Partition Mount Point
             Name: ITSMStoragePartition-MountPoint
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1087
       Label: Storage Partition
       Name: ITSMStoragePartition-Partition
       ObjectType: ITSMConfigItem
@@ -2549,7 +2442,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -2586,7 +2478,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -2599,7 +2490,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -2612,7 +2502,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -2625,7 +2514,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -2649,7 +2537,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -2686,7 +2573,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -2699,7 +2585,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -2712,7 +2597,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -2725,7 +2609,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -2749,7 +2632,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -2772,7 +2654,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1122
       Label: Server
       Name: ITSM-ReferenceToServer
       ObjectType: ITSMConfigItem
@@ -2786,7 +2667,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -2803,7 +2683,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -2817,7 +2696,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -2831,7 +2709,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -2845,7 +2722,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -2859,7 +2735,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -2876,7 +2751,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -2890,7 +2764,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -2906,7 +2779,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -2923,7 +2795,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -2991,7 +2862,6 @@
         YearsInPast: '5'
         YearsPeriod: '0'
       FieldType: Date
-      ID: 1123
       Label: Contract period from
       Name: Contract-PeriodFrom
       ObjectType: ITSMConfigItem
@@ -3008,7 +2878,6 @@
         YearsInPast: '5'
         YearsPeriod: '0'
       FieldType: Date
-      ID: 1124
       Label: Contract period until
       Name: Contract-PeriodUntil
       ObjectType: ITSMConfigItem
@@ -3036,7 +2905,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1125
       Label: Contract Type
       Name: Contract-Type
       ObjectType: ITSMConfigItem
@@ -3050,7 +2918,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -3067,7 +2934,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -3081,7 +2947,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -3095,7 +2960,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -3109,7 +2973,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -3123,7 +2986,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -3140,7 +3002,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -3154,7 +3015,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -3170,7 +3030,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -3187,7 +3046,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -3248,7 +3106,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -3261,7 +3118,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -3274,7 +3130,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -3287,7 +3142,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -3311,7 +3165,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -3334,7 +3187,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1122
       Label: Server
       Name: ITSM-ReferenceToServer
       ObjectType: ITSMConfigItem
@@ -3363,7 +3215,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1126
       Label: Database
       Name: ITSMSoftware-DatabaseType
       ObjectType: ITSMConfigItem
@@ -3380,7 +3231,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 1096
       Label: End of support
       Name: ITSMSoftware-DateEndOfSupport
       ObjectType: ITSMConfigItem
@@ -3397,7 +3247,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 1169
       Label: Date of release
       Name: ITSMSoftware-DateRelease
       ObjectType: ITSMConfigItem
@@ -3444,7 +3293,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -3459,7 +3307,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -3474,7 +3321,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -3501,7 +3347,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -3554,7 +3399,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -3569,7 +3413,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -3584,7 +3427,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -3598,7 +3440,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -3615,7 +3456,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -3629,7 +3469,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -3643,7 +3482,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -3657,7 +3495,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -3671,7 +3508,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -3688,7 +3524,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -3702,7 +3537,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -3718,7 +3552,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -3735,7 +3568,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -3754,7 +3586,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1142
       Label: Power Delivery
       Name: ITSMDisplay-PowerDelivery
       ObjectType: ITSMConfigItem
@@ -3782,7 +3613,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1141
       Label: Monitor Resolution
       Name: ITSMDisplay-Resolution
       ObjectType: ITSMConfigItem
@@ -3808,7 +3638,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1139
       Label: Monitor Size
       Name: ITSMDisplay-SizeInch
       ObjectType: ITSMConfigItem
@@ -3831,7 +3660,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1140
       Label: Type
       Name: ITSMDisplay-Type
       ObjectType: ITSMConfigItem
@@ -3886,7 +3714,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -3900,7 +3727,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -3914,7 +3740,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -3928,7 +3753,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -3942,7 +3766,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -3969,7 +3792,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -4036,7 +3858,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1156
       Label: Address Allocation
       Name: ITSMIPNetwork-AddressAllocation
       ObjectType: ITSMConfigItem
@@ -4050,7 +3871,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1129
       Label: CIDR
       Name: ITSMIPNetwork-CIDR
       ObjectType: ITSMConfigItem
@@ -4070,7 +3890,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1155
       Label: IP Protocol
       Name: ITSMIPNetwork-IPProtocol
       ObjectType: ITSMConfigItem
@@ -4084,7 +3903,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1128
       Label: End IP Address
       Name: ITSMIPNetwork-IPRanchEnd
       ObjectType: ITSMConfigItem
@@ -4098,7 +3916,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1127
       Label: Start IP Address
       Name: ITSMIPNetwork-IPRanchStart
       ObjectType: ITSMConfigItem
@@ -4124,7 +3941,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1157
       Label: Network Layer
       Name: ITSMIPNetwork-NetworkLayer
       ObjectType: ITSMConfigItem
@@ -4283,7 +4099,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -4300,7 +4115,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -4314,7 +4128,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -4328,7 +4141,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -4342,7 +4154,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -4356,7 +4167,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -4373,7 +4183,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -4387,7 +4196,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -4403,7 +4211,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -4420,7 +4227,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -4434,7 +4240,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 931
       Label: Count of licenses
       Name: ITSMLicense-LicenseCount
       ObjectType: ITSMConfigItem
@@ -4448,7 +4253,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 932
       Label: License Key
       Name: ITSMLicense-LicenseKey
       ObjectType: ITSMConfigItem
@@ -4465,7 +4269,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 933
       Label: License period from
       Name: ITSMLicense-LicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -4482,7 +4285,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 934
       Label: License period until
       Name: ITSMLicense-LicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -4518,7 +4320,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 935
       Label: License Type
       Name: ITSMLicense-LicenseType
       ObjectType: ITSMConfigItem
@@ -4565,7 +4366,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -4580,7 +4380,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -4595,7 +4394,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -4609,7 +4407,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -4626,7 +4423,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -4640,7 +4436,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -4654,7 +4449,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -4668,7 +4462,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -4682,7 +4475,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -4699,7 +4491,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -4713,7 +4504,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -4729,7 +4519,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -4746,7 +4535,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -4801,7 +4589,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -4815,7 +4602,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -4829,7 +4615,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -4843,7 +4628,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -4857,7 +4641,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -4869,7 +4652,6 @@
         ReferenceDFName: DynamicField_ITSMSIM-ReferencetoSIMCard
         Tooltip: ''
       FieldType: Lens
-      ID: 1177
       Label: Mobil Number
       Name: ITSMSIM-LenstoSIMIMobileNumber
       ObjectType: ITSMConfigItem
@@ -4892,7 +4674,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1130
       Label: SIM Card
       Name: ITSMSIM-ReferencetoSIMCard
       ObjectType: ITSMConfigItem
@@ -4932,7 +4713,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -4945,7 +4725,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -4958,7 +4737,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -4971,7 +4749,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -4995,7 +4772,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -5009,7 +4785,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -5026,7 +4801,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -5040,7 +4814,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -5054,7 +4827,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -5068,7 +4840,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -5082,7 +4853,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -5099,7 +4869,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -5113,7 +4882,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -5129,7 +4897,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -5146,7 +4913,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -5196,7 +4962,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -5211,7 +4976,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -5226,7 +4990,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -5240,7 +5003,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -5257,7 +5019,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -5271,7 +5032,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -5285,7 +5045,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -5299,7 +5058,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -5313,7 +5071,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -5330,7 +5087,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -5344,7 +5100,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -5360,7 +5115,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -5377,7 +5131,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -5404,7 +5157,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1145
       Label: Type
       Name: ITSMOtherAccessories-Type
       ObjectType: ITSMConfigItem
@@ -5431,7 +5183,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -5489,7 +5240,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -5504,7 +5254,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -5519,7 +5268,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -5533,7 +5281,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -5550,7 +5297,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -5564,7 +5310,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -5578,7 +5323,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -5592,7 +5336,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -5606,7 +5349,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -5623,7 +5365,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -5637,7 +5378,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -5653,7 +5393,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -5670,7 +5409,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -5725,7 +5463,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -5739,7 +5476,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -5753,7 +5489,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -5767,7 +5502,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -5781,7 +5515,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -5807,7 +5540,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -5816,7 +5548,7 @@
             CIClass: Phone
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -5831,7 +5563,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -5853,7 +5584,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -5869,7 +5599,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -5885,7 +5614,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -5894,9 +5622,9 @@
             CIClass: Phone
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -5911,7 +5639,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -5927,7 +5654,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -5943,7 +5669,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -5959,7 +5684,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -5975,7 +5699,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -5996,7 +5719,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -6016,14 +5738,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -6037,7 +5757,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1146
       Label: Phone Number
       Name: ITSMPhone-Number
       ObjectType: ITSMConfigItem
@@ -6061,7 +5780,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1147
       Label: Phone Type
       Name: ITSMPhone-Type
       ObjectType: ITSMConfigItem
@@ -6088,7 +5806,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -6146,7 +5863,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -6161,7 +5877,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -6176,7 +5891,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -6190,7 +5904,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -6207,7 +5920,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -6221,7 +5933,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -6235,7 +5946,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -6249,7 +5959,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -6263,7 +5972,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -6280,7 +5988,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -6294,7 +6001,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -6310,7 +6016,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -6327,7 +6032,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -6382,7 +6086,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -6396,7 +6099,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -6410,7 +6112,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -6424,7 +6125,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -6438,7 +6138,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -6464,7 +6163,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -6473,7 +6171,7 @@
             CIClass: Printer
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -6488,7 +6186,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -6510,7 +6207,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -6526,7 +6222,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -6542,7 +6237,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -6551,9 +6245,9 @@
             CIClass: Printer
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -6568,7 +6262,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -6584,7 +6277,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -6600,7 +6292,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -6616,7 +6307,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -6632,7 +6322,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -6653,7 +6342,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -6673,14 +6361,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -6707,7 +6393,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -6765,7 +6450,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -6780,7 +6464,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -6795,7 +6478,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -6809,7 +6491,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -6826,7 +6507,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -6840,7 +6520,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -6854,7 +6533,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -6868,7 +6546,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -6882,7 +6559,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -6899,7 +6575,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -6913,7 +6588,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -6929,7 +6603,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -6946,7 +6619,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -7001,7 +6673,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -7015,7 +6686,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -7029,7 +6699,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -7043,7 +6712,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -7057,7 +6725,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -7083,7 +6750,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -7092,7 +6758,7 @@
             CIClass: Projector
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -7107,7 +6773,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -7129,7 +6794,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -7145,7 +6809,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -7161,7 +6824,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -7170,9 +6832,9 @@
             CIClass: Projector
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -7187,7 +6849,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -7203,7 +6864,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -7219,7 +6879,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -7235,7 +6894,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -7251,7 +6909,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -7272,7 +6929,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -7292,14 +6948,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -7326,7 +6980,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -7380,7 +7033,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1162
       Label: Rack Depth
       Name: ITSMFormFactor-RackDepth
       ObjectType: ITSMConfigItem
@@ -7422,7 +7074,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1161
       Label: Rack Units (U)
       Name: ITSMFormFactor-RackUnits
       ObjectType: ITSMConfigItem
@@ -7447,7 +7098,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1160
       Label: Form Factor
       Name: ITSMFormFactor-Type
       ObjectType: ITSMConfigItem
@@ -7461,7 +7111,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1163
       Label: Hardware Weight
       Name: ITSMFormFactor-Weight
       ObjectType: ITSMConfigItem
@@ -7484,7 +7133,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1106
       Label: Room
       Name: Location-ReferenceToRoom
       ObjectType: ITSMConfigItem
@@ -7534,7 +7182,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1105
       Label: Building
       Name: Location-ReferenceToBuilding
       ObjectType: ITSMConfigItem
@@ -7591,7 +7238,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -7606,7 +7252,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -7621,7 +7266,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -7635,7 +7279,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -7652,7 +7295,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -7666,7 +7308,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -7680,7 +7321,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -7694,7 +7334,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -7708,7 +7347,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -7725,7 +7363,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -7739,7 +7376,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -7755,7 +7391,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -7772,7 +7407,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -7827,7 +7461,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -7841,7 +7474,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -7855,7 +7487,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -7869,7 +7500,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -7883,7 +7513,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -7909,7 +7538,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -7918,7 +7546,7 @@
             CIClass: Router (Hardware Firewall)
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -7933,7 +7561,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -7955,7 +7582,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -7971,7 +7597,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -7987,7 +7612,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -7996,9 +7620,9 @@
             CIClass: Router (Hardware Firewall)
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -8013,7 +7637,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -8029,7 +7652,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -8045,7 +7667,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -8061,7 +7682,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -8077,7 +7697,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -8098,7 +7717,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -8118,14 +7736,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -8152,7 +7768,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -8253,7 +7868,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1042
       Label: CPU Class
       Name: CPU-CPUClass
       ObjectType: ITSMConfigItem
@@ -8306,7 +7920,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1043
       Label: Clockspeed
       Name: CPU-Clockspeed
       ObjectType: ITSMConfigItem
@@ -8332,7 +7945,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1044
       Label: Number of CPUs
       Name: CPU-NumberOfCPU
       ObjectType: ITSMConfigItem
@@ -8396,7 +8008,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1045
       Label: Physical Cores
       Name: CPU-PhysicalCores
       ObjectType: ITSMConfigItem
@@ -8428,7 +8039,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1046
       Label: Socket Type
       Name: CPU-SocketType
       ObjectType: ITSMConfigItem
@@ -8492,7 +8102,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1047
       Label: Threads
       Name: CPU-Threads
       ObjectType: ITSMConfigItem
@@ -8508,7 +8117,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -8523,7 +8131,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -8538,7 +8145,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -8550,7 +8156,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -8563,7 +8168,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -8576,7 +8180,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -8589,7 +8192,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -8613,7 +8215,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -8636,7 +8237,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1063
       Label: Operating System
       Name: ITSM-ReferenceToOS
       ObjectType: ITSMConfigItem
@@ -8650,7 +8250,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -8667,7 +8266,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -8681,7 +8279,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -8695,7 +8292,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -8709,7 +8305,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -8723,7 +8318,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -8740,7 +8334,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -8754,7 +8347,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -8770,7 +8362,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -8787,7 +8378,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -8811,7 +8401,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1162
       Label: Rack Depth
       Name: ITSMFormFactor-RackDepth
       ObjectType: ITSMConfigItem
@@ -8853,7 +8442,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1161
       Label: Rack Units (U)
       Name: ITSMFormFactor-RackUnits
       ObjectType: ITSMConfigItem
@@ -8878,7 +8466,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1160
       Label: Form Factor
       Name: ITSMFormFactor-Type
       ObjectType: ITSMConfigItem
@@ -8892,7 +8479,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1163
       Label: Hardware Weight
       Name: ITSMFormFactor-Weight
       ObjectType: ITSMConfigItem
@@ -8924,7 +8510,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1056
       Label: Bus Interface
       Name: ITSMGraphicsCard-BusInterface
       ObjectType: ITSMConfigItem
@@ -8951,7 +8536,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1152
       Label: Number of graphics cards
       Name: ITSMGraphicsCard-Count
       ObjectType: ITSMConfigItem
@@ -9118,7 +8702,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1057
       Label: Graphics card
       Name: ITSMGraphicsCard-GraphicsCardVendor
       ObjectType: ITSMConfigItem
@@ -9149,7 +8732,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1154
       Label: Capacity per graphics card
       Name: ITSMGraphicsCard-MemorySize
       ObjectType: ITSMConfigItem
@@ -9174,7 +8756,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1059
       Label: Memory Type
       Name: ITSMGraphicsCard-MemoryType
       ObjectType: ITSMConfigItem
@@ -9199,7 +8780,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1060
       Label: Outputs
       Name: ITSMGraphicsCard-Outputs
       ObjectType: ITSMConfigItem
@@ -9227,7 +8807,6 @@
         - ValueUpdate
         - VersionCreate
       FieldType: ScriptTemplateToolkit
-      ID: 1153
       Label: Total Graphics card RAM (GB)
       Name: ITSMGraphicsCard-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -9258,7 +8837,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1151
       Label: Capacity (GB)
       Name: ITSMMemory-Capacity
       ObjectType: ITSMConfigItem
@@ -9290,7 +8868,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1062
       Label: Clockrate
       Name: ITSMMemory-ClockRate
       ObjectType: ITSMConfigItem
@@ -9325,7 +8902,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1148
       Label: Number of RAM modules
       Name: ITSMMemory-Count
       ObjectType: ITSMConfigItem
@@ -9352,7 +8928,6 @@
         - ValueUpdate
         - VersionDelete
       FieldType: ScriptTemplateToolkit
-      ID: 1150
       Label: Total RAM (GB)
       Name: ITSMMemory-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -9376,7 +8951,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1065
       Label: Type
       Name: ITSMMemory-Type
       ObjectType: ITSMConfigItem
@@ -9431,7 +9005,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -9445,7 +9018,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -9459,7 +9031,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -9473,7 +9044,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -9487,7 +9057,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -9513,7 +9082,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -9522,7 +9090,7 @@
             CIClass: Server
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -9537,7 +9105,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -9559,7 +9126,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -9575,7 +9141,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -9591,7 +9156,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -9600,9 +9164,9 @@
             CIClass: Server
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -9617,7 +9181,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -9633,7 +9196,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -9649,7 +9211,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -9665,7 +9226,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -9681,7 +9241,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -9702,7 +9261,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -9722,14 +9280,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -9752,7 +9308,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1167
       Label: Server Software
       Name: ITSMServerSoftware-ReferenceToServerSoftware
       ObjectType: ITSMConfigItem
@@ -9780,7 +9335,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1089
             Label: Storage Type
             Name: ITSMStorage-Type
             ObjectType: ITSMConfigItem
@@ -9796,7 +9350,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1084
             Label: Storage Capacity
             Name: ITSMStorage-Capacity
             ObjectType: ITSMConfigItem
@@ -9845,7 +9398,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1085
             Label: Storage Manufacturer
             Name: ITSMStorage-Manufacturer
             ObjectType: ITSMConfigItem
@@ -9861,7 +9413,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1086
             Label: Model
             Name: ITSMStorage-Model
             ObjectType: ITSMConfigItem
@@ -9877,14 +9428,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1088
             Label: Storage SerialNumber
             Name: ITSMStorage-SerialNumber
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1083
       Label: Storage
       Name: ITSMStorage-Storage
       ObjectType: ITSMConfigItem
@@ -9904,7 +9453,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1093
             Label: Partition Name
             Name: ITSMStoragePartition-Name
             ObjectType: ITSMConfigItem
@@ -9920,7 +9468,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1090
             Label: Partition Capacity
             Name: ITSMStoragePartition-Capacity
             ObjectType: ITSMConfigItem
@@ -9936,7 +9483,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1091
             Label: Partition Free Capacity
             Name: ITSMStoragePartition-FreeCapacity
             ObjectType: ITSMConfigItem
@@ -9952,7 +9498,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1094
             Label: Partition Used Capacity
             Name: ITSMStoragePartition-UsedCapacity
             ObjectType: ITSMConfigItem
@@ -9968,14 +9513,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1092
             Label: Partition Mount Point
             Name: ITSMStoragePartition-MountPoint
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1087
       Label: Storage Partition
       Name: ITSMStoragePartition-Partition
       ObjectType: ITSMConfigItem
@@ -10002,7 +9545,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -10040,7 +9582,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -10053,7 +9594,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -10066,7 +9606,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -10079,7 +9618,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -10103,7 +9641,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -10126,7 +9663,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1122
       Label: Server
       Name: ITSM-ReferenceToServer
       ObjectType: ITSMConfigItem
@@ -10164,7 +9700,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToContract
         Tooltip: ''
       FieldType: Lens
-      ID: 1171
       Label: Contract period from
       Name: ITSM-LensToContractPeriodFrom
       ObjectType: ITSMConfigItem
@@ -10177,7 +9712,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToContract
         Tooltip: ''
       FieldType: Lens
-      ID: 1172
       Label: Contract period until
       Name: ITSM-LensToContractPeriodUntil
       ObjectType: ITSMConfigItem
@@ -10190,7 +9724,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToContract
         Tooltip: ''
       FieldType: Lens
-      ID: 1170
       Label: Type
       Name: ITSM-LensToContractType
       ObjectType: ITSMConfigItem
@@ -10214,7 +9747,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1168
       Label: Contract
       Name: ITSM-ReferenceToContract
       ObjectType: ITSMConfigItem
@@ -10228,7 +9760,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1131
       Label: Card Number
       Name: ITSMSIM-Cardnumber
       ObjectType: ITSMConfigItem
@@ -10242,7 +9773,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1136
       Label: Mobile Number
       Name: ITSMSIM-MobileNumber
       ObjectType: ITSMConfigItem
@@ -10256,7 +9786,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1132
       Label: PIN
       Name: ITSMSIM-PIN
       ObjectType: ITSMConfigItem
@@ -10270,7 +9799,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1133
       Label: PIN 2
       Name: ITSMSIM-PIN2
       ObjectType: ITSMConfigItem
@@ -10284,7 +9812,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1134
       Label: PUK
       Name: ITSMSIM-PUK
       ObjectType: ITSMConfigItem
@@ -10298,7 +9825,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1135
       Label: PUK 2
       Name: ITSMSIM-PUK2
       ObjectType: ITSMConfigItem
@@ -10320,7 +9846,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1138
       Label: Card Type
       Name: ITSMSIM-Type
       ObjectType: ITSMConfigItem
@@ -10373,7 +9898,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -10388,7 +9912,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -10403,7 +9926,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -10417,7 +9939,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -10434,7 +9955,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -10448,7 +9968,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -10462,7 +9981,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -10476,7 +9994,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -10490,7 +10007,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -10507,7 +10023,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -10521,7 +10036,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -10537,7 +10051,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -10554,7 +10067,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -10573,7 +10085,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1142
       Label: Power Delivery
       Name: ITSMDisplay-PowerDelivery
       ObjectType: ITSMConfigItem
@@ -10601,7 +10112,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1141
       Label: Monitor Resolution
       Name: ITSMDisplay-Resolution
       ObjectType: ITSMConfigItem
@@ -10627,7 +10137,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1139
       Label: Monitor Size
       Name: ITSMDisplay-SizeInch
       ObjectType: ITSMConfigItem
@@ -10650,7 +10159,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1140
       Label: Type
       Name: ITSMDisplay-Type
       ObjectType: ITSMConfigItem
@@ -10705,7 +10213,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -10719,7 +10226,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -10733,7 +10239,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -10747,7 +10252,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -10761,7 +10265,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -10788,7 +10291,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -10889,7 +10391,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1042
       Label: CPU Class
       Name: CPU-CPUClass
       ObjectType: ITSMConfigItem
@@ -10942,7 +10443,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1043
       Label: Clockspeed
       Name: CPU-Clockspeed
       ObjectType: ITSMConfigItem
@@ -10968,7 +10468,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1044
       Label: Number of CPUs
       Name: CPU-NumberOfCPU
       ObjectType: ITSMConfigItem
@@ -11032,7 +10531,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1045
       Label: Physical Cores
       Name: CPU-PhysicalCores
       ObjectType: ITSMConfigItem
@@ -11064,7 +10562,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1046
       Label: Socket Type
       Name: CPU-SocketType
       ObjectType: ITSMConfigItem
@@ -11128,7 +10625,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1047
       Label: Threads
       Name: CPU-Threads
       ObjectType: ITSMConfigItem
@@ -11144,7 +10640,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -11159,7 +10654,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -11174,7 +10668,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -11186,7 +10679,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -11199,7 +10691,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -11212,7 +10703,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -11225,7 +10715,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -11249,7 +10738,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -11272,7 +10760,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1063
       Label: Operating System
       Name: ITSM-ReferenceToOS
       ObjectType: ITSMConfigItem
@@ -11286,7 +10773,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -11303,7 +10789,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -11317,7 +10802,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -11331,7 +10815,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -11345,7 +10828,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -11359,7 +10841,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -11376,7 +10857,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -11390,7 +10870,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -11406,7 +10885,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -11423,7 +10901,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -11447,7 +10924,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1162
       Label: Rack Depth
       Name: ITSMFormFactor-RackDepth
       ObjectType: ITSMConfigItem
@@ -11489,7 +10965,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1161
       Label: Rack Units (U)
       Name: ITSMFormFactor-RackUnits
       ObjectType: ITSMConfigItem
@@ -11514,7 +10989,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1160
       Label: Form Factor
       Name: ITSMFormFactor-Type
       ObjectType: ITSMConfigItem
@@ -11528,7 +11002,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1163
       Label: Hardware Weight
       Name: ITSMFormFactor-Weight
       ObjectType: ITSMConfigItem
@@ -11560,7 +11033,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1056
       Label: Bus Interface
       Name: ITSMGraphicsCard-BusInterface
       ObjectType: ITSMConfigItem
@@ -11587,7 +11059,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1152
       Label: Number of graphics cards
       Name: ITSMGraphicsCard-Count
       ObjectType: ITSMConfigItem
@@ -11754,7 +11225,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1057
       Label: Graphics card
       Name: ITSMGraphicsCard-GraphicsCardVendor
       ObjectType: ITSMConfigItem
@@ -11785,7 +11255,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1154
       Label: Capacity per graphics card
       Name: ITSMGraphicsCard-MemorySize
       ObjectType: ITSMConfigItem
@@ -11810,7 +11279,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1059
       Label: Memory Type
       Name: ITSMGraphicsCard-MemoryType
       ObjectType: ITSMConfigItem
@@ -11835,7 +11303,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1060
       Label: Outputs
       Name: ITSMGraphicsCard-Outputs
       ObjectType: ITSMConfigItem
@@ -11863,7 +11330,6 @@
         - ValueUpdate
         - VersionCreate
       FieldType: ScriptTemplateToolkit
-      ID: 1153
       Label: Total Graphics card RAM (GB)
       Name: ITSMGraphicsCard-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -11894,7 +11360,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1151
       Label: Capacity (GB)
       Name: ITSMMemory-Capacity
       ObjectType: ITSMConfigItem
@@ -11926,7 +11391,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1062
       Label: Clockrate
       Name: ITSMMemory-ClockRate
       ObjectType: ITSMConfigItem
@@ -11961,7 +11425,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1148
       Label: Number of RAM modules
       Name: ITSMMemory-Count
       ObjectType: ITSMConfigItem
@@ -11988,7 +11451,6 @@
         - ValueUpdate
         - VersionDelete
       FieldType: ScriptTemplateToolkit
-      ID: 1150
       Label: Total RAM (GB)
       Name: ITSMMemory-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -12012,7 +11474,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1065
       Label: Type
       Name: ITSMMemory-Type
       ObjectType: ITSMConfigItem
@@ -12067,7 +11528,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -12081,7 +11541,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -12095,7 +11554,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -12109,7 +11567,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -12123,7 +11580,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -12149,7 +11605,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -12158,7 +11613,7 @@
             CIClass: Storage
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -12173,7 +11628,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -12195,7 +11649,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -12211,7 +11664,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -12227,7 +11679,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -12236,9 +11687,9 @@
             CIClass: Storage
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -12253,7 +11704,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -12269,7 +11719,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -12285,7 +11734,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -12301,7 +11749,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -12317,7 +11764,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -12338,7 +11784,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -12358,14 +11803,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -12388,7 +11831,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1167
       Label: Server Software
       Name: ITSMServerSoftware-ReferenceToServerSoftware
       ObjectType: ITSMConfigItem
@@ -12416,7 +11858,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1089
             Label: Storage Type
             Name: ITSMStorage-Type
             ObjectType: ITSMConfigItem
@@ -12432,7 +11873,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1084
             Label: Storage Capacity
             Name: ITSMStorage-Capacity
             ObjectType: ITSMConfigItem
@@ -12481,7 +11921,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1085
             Label: Storage Manufacturer
             Name: ITSMStorage-Manufacturer
             ObjectType: ITSMConfigItem
@@ -12497,7 +11936,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1086
             Label: Model
             Name: ITSMStorage-Model
             ObjectType: ITSMConfigItem
@@ -12513,14 +11951,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1088
             Label: Storage SerialNumber
             Name: ITSMStorage-SerialNumber
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1083
       Label: Storage
       Name: ITSMStorage-Storage
       ObjectType: ITSMConfigItem
@@ -12540,7 +11976,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1093
             Label: Partition Name
             Name: ITSMStoragePartition-Name
             ObjectType: ITSMConfigItem
@@ -12556,7 +11991,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1090
             Label: Partition Capacity
             Name: ITSMStoragePartition-Capacity
             ObjectType: ITSMConfigItem
@@ -12572,7 +12006,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1091
             Label: Partition Free Capacity
             Name: ITSMStoragePartition-FreeCapacity
             ObjectType: ITSMConfigItem
@@ -12588,7 +12021,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1094
             Label: Partition Used Capacity
             Name: ITSMStoragePartition-UsedCapacity
             ObjectType: ITSMConfigItem
@@ -12604,14 +12036,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1092
             Label: Partition Mount Point
             Name: ITSMStoragePartition-MountPoint
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1087
       Label: Storage Partition
       Name: ITSMStoragePartition-Partition
       ObjectType: ITSMConfigItem
@@ -12638,7 +12068,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -12679,7 +12108,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1103
       Label: City
       Name: Location-City
       ObjectType: ITSMConfigItem
@@ -12693,7 +12121,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1098
       Label: Latitude
       Name: Location-Latitude
       ObjectType: ITSMConfigItem
@@ -12707,7 +12134,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1099
       Label: Longitude
       Name: Location-Longitude
       ObjectType: ITSMConfigItem
@@ -12730,7 +12156,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1100
       Label: Country
       Name: Location-ReferenceToCountry
       ObjectType: ITSMConfigItem
@@ -12744,7 +12169,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1104
       Label: Street
       Name: Location-Street
       ObjectType: ITSMConfigItem
@@ -12801,7 +12225,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -12816,7 +12239,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -12831,7 +12253,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -12845,7 +12266,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -12862,7 +12282,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -12876,7 +12295,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -12890,7 +12308,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -12904,7 +12321,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -12918,7 +12334,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -12935,7 +12350,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -12949,7 +12363,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -12965,7 +12378,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -12982,7 +12394,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -13037,7 +12448,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -13051,7 +12461,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -13065,7 +12474,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -13079,7 +12487,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -13093,7 +12500,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -13119,7 +12525,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -13128,7 +12533,7 @@
             CIClass: Switch
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -13143,7 +12548,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -13165,7 +12569,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -13181,7 +12584,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -13197,7 +12599,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -13206,9 +12607,9 @@
             CIClass: Switch
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -13223,7 +12624,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -13239,7 +12639,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -13255,7 +12654,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -13271,7 +12669,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -13287,7 +12684,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -13308,7 +12704,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -13328,14 +12723,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -13362,7 +12755,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -13419,7 +12811,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -13434,7 +12825,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -13449,7 +12839,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -13463,7 +12852,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -13480,7 +12868,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -13494,7 +12881,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -13508,7 +12894,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -13522,7 +12907,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -13536,7 +12920,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -13553,7 +12936,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -13567,7 +12949,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -13583,7 +12964,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -13600,7 +12980,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -13655,7 +13034,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -13669,7 +13047,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -13683,7 +13060,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -13697,7 +13073,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -13711,7 +13086,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -13737,7 +13111,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -13746,7 +13119,7 @@
             CIClass: UPS
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -13761,7 +13134,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -13783,7 +13155,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -13799,7 +13170,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -13815,7 +13185,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -13824,9 +13193,9 @@
             CIClass: UPS
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -13841,7 +13210,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -13857,7 +13225,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -13873,7 +13240,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -13889,7 +13255,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -13905,7 +13270,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -13926,7 +13290,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -13946,14 +13309,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -13967,7 +13328,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1166
       Label: Battery Capacity (Ah)
       Name: ITSMUPS-BatteryCapacity
       ObjectType: ITSMConfigItem
@@ -13991,7 +13351,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1165
       Label: Battery Type
       Name: ITSMUPS-BatteryType
       ObjectType: ITSMConfigItem
@@ -14005,7 +13364,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1164
       Label: Maximum Load Capacity (W)
       Name: ITSMUPS-MaximumLoadCapacity
       ObjectType: ITSMConfigItem
@@ -14032,7 +13390,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -14126,7 +13483,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1042
       Label: CPU Class
       Name: CPU-CPUClass
       ObjectType: ITSMConfigItem
@@ -14179,7 +13535,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1043
       Label: Clockspeed
       Name: CPU-Clockspeed
       ObjectType: ITSMConfigItem
@@ -14205,7 +13560,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1044
       Label: Number of CPUs
       Name: CPU-NumberOfCPU
       ObjectType: ITSMConfigItem
@@ -14269,7 +13623,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1045
       Label: Physical Cores
       Name: CPU-PhysicalCores
       ObjectType: ITSMConfigItem
@@ -14301,7 +13654,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1046
       Label: Socket Type
       Name: CPU-SocketType
       ObjectType: ITSMConfigItem
@@ -14365,7 +13717,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1047
       Label: Threads
       Name: CPU-Threads
       ObjectType: ITSMConfigItem
@@ -14381,7 +13732,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -14396,7 +13746,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -14411,7 +13760,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -14423,7 +13771,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -14436,7 +13783,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -14449,7 +13795,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -14462,7 +13807,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -14486,7 +13830,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -14509,7 +13852,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1063
       Label: Operating System
       Name: ITSM-ReferenceToOS
       ObjectType: ITSMConfigItem
@@ -14523,7 +13865,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -14540,7 +13881,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -14554,7 +13894,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -14568,7 +13907,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -14582,7 +13920,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -14596,7 +13933,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -14613,7 +13949,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -14627,7 +13962,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -14643,7 +13977,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -14660,7 +13993,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -14682,7 +14014,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1050
       Label: Client category
       Name: ITSMClient-ClientCategory
       ObjectType: ITSMConfigItem
@@ -14696,7 +14027,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1051
       Label: Firmware
       Name: ITSMClient-Firmware
       ObjectType: ITSMConfigItem
@@ -14719,7 +14049,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1064
       Label: Client Software
       Name: ITSMClientSoftware-ReferenceToClientSoftware
       ObjectType: ITSMConfigItem
@@ -14751,7 +14080,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1056
       Label: Bus Interface
       Name: ITSMGraphicsCard-BusInterface
       ObjectType: ITSMConfigItem
@@ -14778,7 +14106,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1152
       Label: Number of graphics cards
       Name: ITSMGraphicsCard-Count
       ObjectType: ITSMConfigItem
@@ -14945,7 +14272,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1057
       Label: Graphics card
       Name: ITSMGraphicsCard-GraphicsCardVendor
       ObjectType: ITSMConfigItem
@@ -14976,7 +14302,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1154
       Label: Capacity per graphics card
       Name: ITSMGraphicsCard-MemorySize
       ObjectType: ITSMConfigItem
@@ -15001,7 +14326,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1059
       Label: Memory Type
       Name: ITSMGraphicsCard-MemoryType
       ObjectType: ITSMConfigItem
@@ -15026,7 +14350,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1060
       Label: Outputs
       Name: ITSMGraphicsCard-Outputs
       ObjectType: ITSMConfigItem
@@ -15054,7 +14377,6 @@
         - ValueUpdate
         - VersionCreate
       FieldType: ScriptTemplateToolkit
-      ID: 1153
       Label: Total Graphics card RAM (GB)
       Name: ITSMGraphicsCard-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -15085,7 +14407,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1151
       Label: Capacity (GB)
       Name: ITSMMemory-Capacity
       ObjectType: ITSMConfigItem
@@ -15117,7 +14438,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1062
       Label: Clockrate
       Name: ITSMMemory-ClockRate
       ObjectType: ITSMConfigItem
@@ -15152,7 +14472,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1148
       Label: Number of RAM modules
       Name: ITSMMemory-Count
       ObjectType: ITSMConfigItem
@@ -15179,7 +14498,6 @@
         - ValueUpdate
         - VersionDelete
       FieldType: ScriptTemplateToolkit
-      ID: 1150
       Label: Total RAM (GB)
       Name: ITSMMemory-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -15203,7 +14521,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1065
       Label: Type
       Name: ITSMMemory-Type
       ObjectType: ITSMConfigItem
@@ -15258,7 +14575,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -15272,7 +14588,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -15286,7 +14601,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -15300,7 +14614,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -15314,7 +14627,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -15340,7 +14652,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -15349,7 +14660,7 @@
             CIClass: Virtual Clients
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -15364,7 +14675,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -15386,7 +14696,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -15402,7 +14711,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -15418,7 +14726,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -15427,9 +14734,9 @@
             CIClass: Virtual Clients
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -15444,7 +14751,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -15460,7 +14766,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -15476,7 +14781,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -15492,7 +14796,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -15508,7 +14811,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -15529,7 +14831,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -15549,14 +14850,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -15584,7 +14883,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1089
             Label: Storage Type
             Name: ITSMStorage-Type
             ObjectType: ITSMConfigItem
@@ -15600,7 +14898,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1084
             Label: Storage Capacity
             Name: ITSMStorage-Capacity
             ObjectType: ITSMConfigItem
@@ -15649,7 +14946,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1085
             Label: Storage Manufacturer
             Name: ITSMStorage-Manufacturer
             ObjectType: ITSMConfigItem
@@ -15665,7 +14961,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1086
             Label: Model
             Name: ITSMStorage-Model
             ObjectType: ITSMConfigItem
@@ -15681,14 +14976,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1088
             Label: Storage SerialNumber
             Name: ITSMStorage-SerialNumber
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1083
       Label: Storage
       Name: ITSMStorage-Storage
       ObjectType: ITSMConfigItem
@@ -15708,7 +15001,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1093
             Label: Partition Name
             Name: ITSMStoragePartition-Name
             ObjectType: ITSMConfigItem
@@ -15724,7 +15016,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1090
             Label: Partition Capacity
             Name: ITSMStoragePartition-Capacity
             ObjectType: ITSMConfigItem
@@ -15740,7 +15031,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1091
             Label: Partition Free Capacity
             Name: ITSMStoragePartition-FreeCapacity
             ObjectType: ITSMConfigItem
@@ -15756,7 +15046,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1094
             Label: Partition Used Capacity
             Name: ITSMStoragePartition-UsedCapacity
             ObjectType: ITSMConfigItem
@@ -15772,14 +15061,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1092
             Label: Partition Mount Point
             Name: ITSMStoragePartition-MountPoint
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1087
       Label: Storage Partition
       Name: ITSMStoragePartition-Partition
       ObjectType: ITSMConfigItem
@@ -15806,7 +15093,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -15907,7 +15193,6 @@
         TranslatableValues: '1'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1042
       Label: CPU Class
       Name: CPU-CPUClass
       ObjectType: ITSMConfigItem
@@ -15960,7 +15245,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1043
       Label: Clockspeed
       Name: CPU-Clockspeed
       ObjectType: ITSMConfigItem
@@ -15986,7 +15270,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1044
       Label: Number of CPUs
       Name: CPU-NumberOfCPU
       ObjectType: ITSMConfigItem
@@ -16050,7 +15333,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1045
       Label: Physical Cores
       Name: CPU-PhysicalCores
       ObjectType: ITSMConfigItem
@@ -16082,7 +15364,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1046
       Label: Socket Type
       Name: CPU-SocketType
       ObjectType: ITSMConfigItem
@@ -16146,7 +15427,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Dropdown
-      ID: 1047
       Label: Threads
       Name: CPU-Threads
       ObjectType: ITSMConfigItem
@@ -16162,7 +15442,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -16177,7 +15456,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -16192,7 +15470,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -16204,7 +15481,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1174
       Label: License Count
       Name: ITSM-LensToLicenseCount
       ObjectType: ITSMConfigItem
@@ -16217,7 +15493,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1175
       Label: License period from
       Name: ITSM-LensToLicensePeriodFrom
       ObjectType: ITSMConfigItem
@@ -16230,7 +15505,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1176
       Label: License period until
       Name: ITSM-LensToLicensePeriodUntil
       ObjectType: ITSMConfigItem
@@ -16243,7 +15517,6 @@
         ReferenceDFName: DynamicField_ITSM-ReferenceToLicense
         Tooltip: ''
       FieldType: Lens
-      ID: 1173
       Label: License Type
       Name: ITSM-LensToLicenseType
       ObjectType: ITSMConfigItem
@@ -16267,7 +15540,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1143
       Label: License
       Name: ITSM-ReferenceToLicense
       ObjectType: ITSMConfigItem
@@ -16290,7 +15562,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1063
       Label: Operating System
       Name: ITSM-ReferenceToOS
       ObjectType: ITSMConfigItem
@@ -16304,7 +15575,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -16321,7 +15591,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -16335,7 +15604,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -16349,7 +15617,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -16363,7 +15630,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -16377,7 +15643,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -16394,7 +15659,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -16408,7 +15672,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -16424,7 +15687,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -16441,7 +15703,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -16465,7 +15726,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1162
       Label: Rack Depth
       Name: ITSMFormFactor-RackDepth
       ObjectType: ITSMConfigItem
@@ -16507,7 +15767,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1161
       Label: Rack Units (U)
       Name: ITSMFormFactor-RackUnits
       ObjectType: ITSMConfigItem
@@ -16532,7 +15791,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1160
       Label: Form Factor
       Name: ITSMFormFactor-Type
       ObjectType: ITSMConfigItem
@@ -16546,7 +15804,6 @@
         RegExList: []
         Tooltip: ''
       FieldType: Text
-      ID: 1163
       Label: Hardware Weight
       Name: ITSMFormFactor-Weight
       ObjectType: ITSMConfigItem
@@ -16578,7 +15835,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1056
       Label: Bus Interface
       Name: ITSMGraphicsCard-BusInterface
       ObjectType: ITSMConfigItem
@@ -16605,7 +15861,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1152
       Label: Number of graphics cards
       Name: ITSMGraphicsCard-Count
       ObjectType: ITSMConfigItem
@@ -16772,7 +16027,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1057
       Label: Graphics card
       Name: ITSMGraphicsCard-GraphicsCardVendor
       ObjectType: ITSMConfigItem
@@ -16803,7 +16057,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1154
       Label: Capacity per graphics card
       Name: ITSMGraphicsCard-MemorySize
       ObjectType: ITSMConfigItem
@@ -16828,7 +16081,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1059
       Label: Memory Type
       Name: ITSMGraphicsCard-MemoryType
       ObjectType: ITSMConfigItem
@@ -16853,7 +16105,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1060
       Label: Outputs
       Name: ITSMGraphicsCard-Outputs
       ObjectType: ITSMConfigItem
@@ -16881,7 +16132,6 @@
         - ValueUpdate
         - VersionCreate
       FieldType: ScriptTemplateToolkit
-      ID: 1153
       Label: Total Graphics card RAM (GB)
       Name: ITSMGraphicsCard-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -16912,7 +16162,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1151
       Label: Capacity (GB)
       Name: ITSMMemory-Capacity
       ObjectType: ITSMConfigItem
@@ -16944,7 +16193,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1062
       Label: Clockrate
       Name: ITSMMemory-ClockRate
       ObjectType: ITSMConfigItem
@@ -16979,7 +16227,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1148
       Label: Number of RAM modules
       Name: ITSMMemory-Count
       ObjectType: ITSMConfigItem
@@ -17006,7 +16253,6 @@
         - ValueUpdate
         - VersionDelete
       FieldType: ScriptTemplateToolkit
-      ID: 1150
       Label: Total RAM (GB)
       Name: ITSMMemory-TotalRAMGB
       ObjectType: ITSMConfigItem
@@ -17030,7 +16276,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 1065
       Label: Type
       Name: ITSMMemory-Type
       ObjectType: ITSMConfigItem
@@ -17085,7 +16330,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -17099,7 +16343,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -17113,7 +16356,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -17127,7 +16369,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -17141,7 +16382,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -17167,7 +16407,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -17176,7 +16415,7 @@
             CIClass: Virtual Server
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -17191,7 +16430,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -17213,7 +16451,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -17229,7 +16466,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -17245,7 +16481,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -17254,9 +16489,9 @@
             CIClass: Virtual Server
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -17271,7 +16506,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -17287,7 +16521,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -17303,7 +16536,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -17319,7 +16551,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -17335,7 +16566,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -17356,7 +16586,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -17376,14 +16605,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -17406,7 +16633,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1167
       Label: Server Software
       Name: ITSMServerSoftware-ReferenceToServerSoftware
       ObjectType: ITSMConfigItem
@@ -17434,7 +16660,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1089
             Label: Storage Type
             Name: ITSMStorage-Type
             ObjectType: ITSMConfigItem
@@ -17450,7 +16675,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1084
             Label: Storage Capacity
             Name: ITSMStorage-Capacity
             ObjectType: ITSMConfigItem
@@ -17499,7 +16723,6 @@
               TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1085
             Label: Storage Manufacturer
             Name: ITSMStorage-Manufacturer
             ObjectType: ITSMConfigItem
@@ -17515,7 +16738,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1086
             Label: Model
             Name: ITSMStorage-Model
             ObjectType: ITSMConfigItem
@@ -17531,14 +16753,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1088
             Label: Storage SerialNumber
             Name: ITSMStorage-SerialNumber
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1083
       Label: Storage
       Name: ITSMStorage-Storage
       ObjectType: ITSMConfigItem
@@ -17558,7 +16778,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1093
             Label: Partition Name
             Name: ITSMStoragePartition-Name
             ObjectType: ITSMConfigItem
@@ -17574,7 +16793,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1090
             Label: Partition Capacity
             Name: ITSMStoragePartition-Capacity
             ObjectType: ITSMConfigItem
@@ -17590,7 +16808,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1091
             Label: Partition Free Capacity
             Name: ITSMStoragePartition-FreeCapacity
             ObjectType: ITSMConfigItem
@@ -17606,7 +16823,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1094
             Label: Partition Used Capacity
             Name: ITSMStoragePartition-UsedCapacity
             ObjectType: ITSMConfigItem
@@ -17622,14 +16838,12 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1092
             Label: Partition Mount Point
             Name: ITSMStoragePartition-MountPoint
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1087
       Label: Storage Partition
       Name: ITSMStoragePartition-Partition
       ObjectType: ITSMConfigItem
@@ -17656,7 +16870,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
@@ -17713,7 +16926,6 @@
         ReferencedObjectType: Agent
         Tooltip: ''
       FieldType: Agent
-      ID: 1066
       Label: Administrator
       Name: Contact-Administrator
       ObjectType: ITSMConfigItem
@@ -17728,7 +16940,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1054
       Label: Contact Distributor
       Name: Contact-Distributor
       ObjectType: ITSMConfigItem
@@ -17743,7 +16954,6 @@
         ReferencedObjectType: CustomerUser
         Tooltip: ''
       FieldType: CustomerUser
-      ID: 1055
       Label: Reference to Customer
       Name: Contact-User
       ObjectType: ITSMConfigItem
@@ -17757,7 +16967,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 920
       Label: Cost unit
       Name: ITSMAccounting-CostUnit
       ObjectType: ITSMConfigItem
@@ -17774,7 +16983,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 921
       Label: Date of Invoice
       Name: ITSMAccounting-DateOfInvoice
       ObjectType: ITSMConfigItem
@@ -17788,7 +16996,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 922
       Label: Inventory Number
       Name: ITSMAccounting-InventoryNumber
       ObjectType: ITSMConfigItem
@@ -17802,7 +17009,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 923
       Label: Inverstment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
@@ -17816,7 +17022,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 924
       Label: Invoice Number
       Name: ITSMAccounting-InvoiceNumber
       ObjectType: ITSMConfigItem
@@ -17830,7 +17035,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 925
       Label: Operating costs
       Name: ITSMAccounting-OperatingCosts
       ObjectType: ITSMConfigItem
@@ -17847,7 +17051,6 @@
         YearsInPast: '5'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 926
       Label: Date of Order
       Name: ITSMAccounting-OrderDate
       ObjectType: ITSMConfigItem
@@ -17861,7 +17064,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 927
       Label: Order Number
       Name: ITSMAccounting-OrderNumber
       ObjectType: ITSMConfigItem
@@ -17877,7 +17079,6 @@
         SearchAttribute: CustomerCompanyName
         Tooltip: ''
       FieldType: CustomerCompany
-      ID: 1097
       Label: Purchased at
       Name: ITSMAccounting-ReferenceToAccount
       ObjectType: ITSMConfigItem
@@ -17894,7 +17095,6 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      ID: 930
       Label: Date of Warrenty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
@@ -17949,7 +17149,6 @@
         TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
-      ID: 914
       Label: Manufacturer
       Name: ITSMModel-Manufacturer
       ObjectType: ITSMConfigItem
@@ -17963,7 +17162,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 915
       Label: Model
       Name: ITSMModel-Model
       ObjectType: ITSMConfigItem
@@ -17977,7 +17175,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: TextArea
-      ID: 916
       Label: Model Description
       Name: ITSMModel-ModelNote
       ObjectType: ITSMConfigItem
@@ -17991,7 +17188,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 917
       Label: Serialnumber
       Name: ITSMModel-SerialNumber
       ObjectType: ITSMConfigItem
@@ -18005,7 +17201,6 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      ID: 918
       Label: Service Tag
       Name: ITSMModel-ServiceTag
       ObjectType: ITSMConfigItem
@@ -18031,7 +17226,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1074
             Label: IP Protocol
             Name: ITSMNetworkInfo-IPProtocol
             ObjectType: ITSMConfigItem
@@ -18040,7 +17234,7 @@
             CIClass: WLAN access point
             Config:
               ClassIDs:
-              - '130'
+              - IP Network
               DisplayType: ConfigItemName
               EditFieldMode: Dropdown
               ImportSearchAttribute: ''
@@ -18055,7 +17249,6 @@
               SearchAttribute: Name
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1079
             Label: IP Network
             Name: ITSMNetworkInfo-ReferenceToIPNetwork
             ObjectType: ITSMConfigItem
@@ -18077,7 +17270,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1069
             Label: Address Allocation
             Name: ITSMNetworkInfo-AddressAllocation
             ObjectType: ITSMConfigItem
@@ -18093,7 +17285,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1072
             Label: IP Address
             Name: ITSMNetworkInfo-IPAddress
             ObjectType: ITSMConfigItem
@@ -18109,7 +17300,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1077
             Label: MAC Address
             Name: ITSMNetworkInfo-MACAddress
             ObjectType: ITSMConfigItem
@@ -18118,9 +17308,9 @@
             CIClass: WLAN access point
             Config:
               ClassIDs:
-              - '128'
-              - '127'
-              - '129'
+              - Router (Hardware Firewall)
+              - Switch
+              - WLAN access point
               DisplayType: ConfigItemName
               EditFieldMode: AutoComplete
               ImportSearchAttribute: ''
@@ -18135,7 +17325,6 @@
               SearchAttribute: ''
               Tooltip: ''
             FieldType: ConfigItem
-            ID: 1080
             Label: Target Object
             Name: ITSMNetworkInfo-TargetObject
             ObjectType: ITSMConfigItem
@@ -18151,7 +17340,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1081
             Label: Target object port
             Name: ITSMNetworkInfo-TargetObjectPort
             ObjectType: ITSMConfigItem
@@ -18167,7 +17355,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1071
             Label: Hostname
             Name: ITSMNetworkInfo-Hostname
             ObjectType: ITSMConfigItem
@@ -18183,7 +17370,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1070
             Label: FQDN
             Name: ITSMNetworkInfo-FQDN
             ObjectType: ITSMConfigItem
@@ -18199,7 +17385,6 @@
               RegExList: []
               Tooltip: ''
             FieldType: Text
-            ID: 1048
             Label: CNAME/Alias
             Name: ITSMNetworkInfo-CNAMEAlias
             ObjectType: ITSMConfigItem
@@ -18220,7 +17405,6 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1078
             Label: Primary
             Name: ITSMNetworkInfo-Primary
             ObjectType: ITSMConfigItem
@@ -18240,14 +17424,12 @@
               TranslatableValues: '1'
               TreeView: '0'
             FieldType: Dropdown
-            ID: 1068
             Label: Active
             Name: ITSMNetworkInfo-Active
             ObjectType: ITSMConfigItem
         MultiValue: '1'
         Tooltip: ~
       FieldType: Set
-      ID: 1073
       Label: Network Information
       Name: ITSMNetworkInfo-NetworkInfo
       ObjectType: ITSMConfigItem
@@ -18274,7 +17456,6 @@
         SearchAttribute: Name
         Tooltip: ''
       FieldType: ConfigItem
-      ID: 1082
       Label: Location
       Name: Location-ReferenceToLocation
       ObjectType: ITSMConfigItem
