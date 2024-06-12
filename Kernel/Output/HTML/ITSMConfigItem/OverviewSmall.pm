@@ -265,7 +265,7 @@ sub ActionRow {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 
     # add translations for the allocation lists for regular columns
-    my $Columns = $Self->{Config}->{DefaultColumns} || $ConfigObject->Get('DefaultOverviewColumns') || {};
+    my $Columns = $Self->{Config}->{DefaultColumns} || {};
     if ( $Columns && IsHashRefWithData($Columns) ) {
 
         COLUMN:

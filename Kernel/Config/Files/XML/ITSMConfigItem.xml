@@ -1408,14 +1408,14 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Agent::View::ConfigItemSearch</Navigation>
         <Value>
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Agent::View::ConfigItemSearch</Navigation>
         <Value>
@@ -1715,6 +1715,30 @@
     </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns" Required="0" Valid="1">
         <Description Translatable="1">Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                </DefaultItem>
+                <Item Key="Class" SelectedID="2"></Item>
+                <Item Key="Number" SelectedID="2"></Item>
+                <Item Key="Name" SelectedID="2"></Item>
+                <Item Key="CurDeplState" SelectedID="2"></Item>
+                <Item Key="CurInciState" SelectedID="2"></Item>
+                <Item Key="DeplState" SelectedID="0"></Item>
+                <Item Key="InciState" SelectedID="0"></Item>
+                <Item Key="LastChanged" SelectedID="2"></Item>
+                <Item Key="CurDeplStateType" SelectedID="1"></Item>
+                <Item Key="CurInciStateType" SelectedID="1"></Item>
+                <Item Key="Created" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DefaultColumns" Required="0" Valid="1">
+        <Description Translatable="1">Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
