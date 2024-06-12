@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -269,7 +269,7 @@ sub Run {
     {
         my @SortedCategories = sort keys %Category2ClassID;
 
-        if ( !$CategoryFilter || !$Category2ClassID{ $CategoryFilter } ) {
+        if ( !$CategoryFilter || !$Category2ClassID{$CategoryFilter} ) {
             $CategoryFilter = $Category2ClassID{Default} ? 'Default' : $SortedCategories[0];
         }
 
@@ -278,7 +278,7 @@ sub Run {
             $_ => {
                 Name => $_,
                 Prio => $Prio++,
-            },
+            }
         } @SortedCategories;
 
         if ( $CategoryFilters{Default} ) {
@@ -289,15 +289,17 @@ sub Run {
     # get the class filters for the selected category
     my $CountTotal = 0;
     my @AllCurrentClasses;
-    if ( $CategoryFilter ) {
+    if ($CategoryFilter) {
 
         my $Prio = 2;
         for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } $Category2ClassID{$CategoryFilter}->@* ) {
             my $CountClass = $ConfigItemObject->ConfigItemCount(
                 ClassID => $ClassID,
             );
-            $CountTotal += $CountClass;
-            
+            if ( $Filter eq 'All' || ( $Filter && $Filter == $ClassID ) ) {
+                $CountTotal += $CountClass;
+            }
+
             push @AllCurrentClasses, $ClassID;
 
             # add filter with params for the search method
@@ -319,7 +321,7 @@ sub Run {
 
     # add "all" filter if there is not only one current filter, set the filter if not provided
     if ( scalar keys %Filters == 1 ) {
-        ( $Filter ) = keys %Filters;
+        ($Filter) = keys %Filters;
     }
     else {
         $Filters{All} = {
@@ -459,14 +461,14 @@ sub Run {
         $CategoryFilters{$_}{Prio} => {
             CategoryFilter => $_,
             $CategoryFilters{$_}->%*,
-        },
+        }
     } keys %CategoryFilters;
 
     my %ClassFilter = map {
         $Filters{$_}{Prio} => {
             Filter => $_,
             $Filters{$_}->%*,
-        },
+        }
     } keys %Filters;
 
     my $ColumnFilterLink = '';
