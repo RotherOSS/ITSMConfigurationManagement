@@ -2402,6 +2402,15 @@ sub _DynamicFieldConfigTransform {
         }
     }
 
+    # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
+    if ( $Param{Action} eq "Export" && IsArrayRefWithData( $DynamicFieldConfig->{Config}->{Include} )) {
+        INCLUDED_DF:
+        for my $IncludedDF ( $DynamicFieldConfig->{Config}->{Include}->@* ) {
+            next INCLUDED_DF unless $IncludedDF->{Definition}->{Config}->{PartOfSet};
+            delete $IncludedDF->{Definition}->{Config}->{PartOfSet};
+        }
+    }
+
     return $Param{DynamicFieldConfig};
 }
 
