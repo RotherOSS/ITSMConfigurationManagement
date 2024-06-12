@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -973,7 +973,7 @@ sub DefinitionCheck {
         if ( %ImportRoles && $SectionName =~ /::/ ) {
             ROLE:
             for my $Role ( keys %{ $DefinitionRef->{Roles} // {} } ) {
-                next ROLE if !$ImportRoles{ $Role };
+                next ROLE if !$ImportRoles{$Role};
 
                 # this section will be imported and checked with the specific role
                 delete $SectionIsMissing{$SectionName} if $SectionName =~ /$DefinitionRef->{Roles}{$Role}{Name}::/;
@@ -1376,8 +1376,6 @@ sub ClassImport {
     # perform sanity checks II - more class and role specifics; collect category and df data
     for my $DefinitionItem ( $DefinitionList->@* ) {
 
-        my %ClassData;
-        
         my $DefinitionRef = $Kernel::OM->Get('Kernel::System::YAML')->Load(
             Data => $DefinitionItem->{Definition},
         );
@@ -1413,10 +1411,12 @@ sub ClassImport {
 #        }
 
         # collect class tags
-        @ClassCategories = uniq( @ClassCategories, ( $ClassData{Categories} // [] )->@* );
+        if ( $DefinitionItem->{Class} ) {
+            @ClassCategories = uniq( @ClassCategories, ( $DefinitionItem->{Class}{Categories} // [] )->@* );
+        }
 
         # collect dynamic fields (if they exist)
-        if ($DefinitionItem->{DynamicFields}) {
+        if ( $DefinitionItem->{DynamicFields} ) {
             %DynamicFields = (
                 %DynamicFields,
                 $DefinitionItem->{DynamicFields}->%*,
