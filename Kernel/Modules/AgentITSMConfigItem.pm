@@ -292,7 +292,7 @@ sub Run {
     if ($CategoryFilter) {
 
         my $Prio = 2;
-        for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } $Category2ClassID{$CategoryFilter}->@* ) {
+        for my $ClassID ( $Category2ClassID{$CategoryFilter}->@* ) {
             my $CountClass = $ConfigItemObject->ConfigItemCount(
                 ClassID => $ClassID,
             );
