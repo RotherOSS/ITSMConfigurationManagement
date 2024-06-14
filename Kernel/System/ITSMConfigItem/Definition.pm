@@ -1058,6 +1058,10 @@ sub DefinitionNeedSync {
         Key  => 'OutOfSyncClasses',
     );
 
+    if ( IsHashRefWithData($Cache) ) {
+        return $Cache->%*;
+    }
+
     $DBObject->Prepare(
         SQL => 'SELECT class_id, field_id FROM configitem_definition_sync',
     );
@@ -1305,7 +1309,6 @@ sub ClassImport {
     # get needed objects
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
     # expect array ref of definitions
     my $DefinitionList = $Param{Content};
@@ -1391,8 +1394,8 @@ sub ClassImport {
             $DefinitionItem->{$DefinitionKey} = $DefinitionRef->{$DefinitionKey};
         }
 
-        my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
-
+#        my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
+#
 # TODO: Add a preliminary check
 #        # check definition for validity
 #        my $CheckResult = $Self->DefinitionCheck(
