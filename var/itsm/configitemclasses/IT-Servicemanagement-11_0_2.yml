@@ -222,7 +222,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMAppliance-ApplianceType:
@@ -1342,7 +1342,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMClient-ClientCategory:
@@ -2795,7 +2795,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
 - Definition: "---\r\nSections:\r\n  Accounting:\r\n    Content:\r\n    - Header:
@@ -3046,7 +3046,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
 - Class:
@@ -3568,7 +3568,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMDisplay-PowerDelivery:
@@ -4227,7 +4227,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMLicense-LicenseCount:
@@ -4535,7 +4535,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -4913,7 +4913,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
 - Class:
@@ -5131,7 +5131,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMOtherAccessories-Type:
@@ -5409,7 +5409,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -6032,7 +6032,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -6619,7 +6619,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -7407,7 +7407,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -8378,7 +8378,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMFormFactor-RackDepth:
@@ -10067,7 +10067,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMDisplay-PowerDelivery:
@@ -10901,7 +10901,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMFormFactor-RackDepth:
@@ -12394,7 +12394,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -12980,7 +12980,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:
@@ -13993,7 +13993,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMClient-ClientCategory:
@@ -15703,7 +15703,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMFormFactor-RackDepth:
@@ -17095,7 +17095,7 @@
         YearsInPast: '1'
         YearsPeriod: '1'
       FieldType: Date
-      Label: Date of Warrenty
+      Label: Date of Warranty
       Name: ITSMAccounting-WarrantyDate
       ObjectType: ITSMConfigItem
     ITSMModel-Manufacturer:

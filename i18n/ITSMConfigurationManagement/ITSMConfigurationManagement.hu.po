@@ -2912,7 +2912,7 @@ msgid "Date of Order"
 msgstr "A megrendelés dátuma"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "A garancia dátuma"
 
 #. ITSM class bundles

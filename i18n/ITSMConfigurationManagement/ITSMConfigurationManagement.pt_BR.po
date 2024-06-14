@@ -2944,7 +2944,7 @@ msgid "Date of Order"
 msgstr "Data do pedido"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Data da garantia"
 
 #. ITSM class bundles

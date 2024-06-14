@@ -3077,7 +3077,7 @@ msgid "Date of Order"
 msgstr "Datum bestelling"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Datum van garantie"
 
 #. ITSM class bundles

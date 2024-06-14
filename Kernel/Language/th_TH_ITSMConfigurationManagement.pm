@@ -475,7 +475,7 @@ sub Data {
     $Self->{Translation}->{'DNS-Server'} = '';
     $Self->{Translation}->{'Date of Invoice'} = '';
     $Self->{Translation}->{'Date of Order'} = '';
-    $Self->{Translation}->{'Date of Warrenty'} = '';
+    $Self->{Translation}->{'Date of Warranty'} = '';
     $Self->{Translation}->{'Date of release'} = '';
     $Self->{Translation}->{'Desktop'} = 'เดสทอป';
     $Self->{Translation}->{'Document Signing Certificates'} = '';

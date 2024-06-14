@@ -2784,7 +2784,7 @@ msgid "Date of Order"
 msgstr "注文日"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "ワラント取得日"
 
 #. ITSM class bundles

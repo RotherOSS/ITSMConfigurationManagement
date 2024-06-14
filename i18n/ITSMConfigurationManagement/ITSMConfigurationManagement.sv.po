@@ -3046,7 +3046,7 @@ msgid "Date of Order"
 msgstr "Datum för beställning"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Datum för teckningsoption"
 
 #. ITSM class bundles

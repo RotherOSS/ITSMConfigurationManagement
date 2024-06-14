@@ -2940,7 +2940,7 @@ msgid "Date of Order"
 msgstr "Fecha del pedido"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Fecha de la garantía"
 
 #. ITSM class bundles

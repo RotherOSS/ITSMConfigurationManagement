@@ -3007,8 +3007,8 @@ msgid "Date of Order"
 msgstr "Date of Order"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
-msgstr "Date of Warrenty"
+msgid "Date of Warranty"
+msgstr "Date of Warranty"
 
 #. ITSM class bundles
 msgid "Date of release"

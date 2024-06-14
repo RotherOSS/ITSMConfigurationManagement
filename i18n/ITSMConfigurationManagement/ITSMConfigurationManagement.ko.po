@@ -2848,7 +2848,7 @@ msgid "Date of Order"
 msgstr "주문 날짜"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "보증 기간"
 
 #. ITSM class bundles

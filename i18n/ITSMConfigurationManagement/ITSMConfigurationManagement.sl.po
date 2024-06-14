@@ -3032,7 +3032,7 @@ msgid "Date of Order"
 msgstr "Datum naročila"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Datum garancije"
 
 #. ITSM class bundles

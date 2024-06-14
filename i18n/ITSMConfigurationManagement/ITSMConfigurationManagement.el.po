@@ -3139,7 +3139,7 @@ msgid "Date of Order"
 msgstr "Ημερομηνία παραγγελίας"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Ημερομηνία χορήγησης εγγύησης"
 
 #. ITSM class bundles

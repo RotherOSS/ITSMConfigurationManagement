@@ -3030,7 +3030,7 @@ msgid "Date of Order"
 msgstr "Pasūtījuma datums"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Garantijas datums"
 
 #. ITSM class bundles

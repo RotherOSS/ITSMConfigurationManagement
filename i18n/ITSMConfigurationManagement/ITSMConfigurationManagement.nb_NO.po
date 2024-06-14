@@ -3052,7 +3052,7 @@ msgid "Date of Order"
 msgstr "Dato for bestilling"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Dato for garantistillelse"
 
 #. ITSM class bundles

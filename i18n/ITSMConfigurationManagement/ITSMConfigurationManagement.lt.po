@@ -3048,7 +3048,7 @@ msgid "Date of Order"
 msgstr "Užsakymo data"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Garantijos išdavimo data"
 
 #. ITSM class bundles

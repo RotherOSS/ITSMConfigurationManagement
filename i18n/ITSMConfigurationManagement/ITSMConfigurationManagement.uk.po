@@ -3033,7 +3033,7 @@ msgid "Date of Order"
 msgstr "Дата замовлення"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Дата початку дії гарантії"
 
 #. ITSM class bundles

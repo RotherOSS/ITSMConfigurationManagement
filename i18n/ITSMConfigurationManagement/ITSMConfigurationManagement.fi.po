@@ -3050,7 +3050,7 @@ msgid "Date of Order"
 msgstr "Tilauspäivä"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Takuuajan päivämäärä"
 
 #. ITSM class bundles

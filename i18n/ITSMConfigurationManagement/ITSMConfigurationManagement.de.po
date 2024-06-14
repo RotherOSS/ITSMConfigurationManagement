@@ -2823,7 +2823,7 @@ msgid "Date of Order"
 msgstr "Datum der Bestellung"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Datum der Bürgschaft"
 
 #. ITSM class bundles

@@ -2922,7 +2922,7 @@ msgid "Date of Order"
 msgstr "Дата на поръчката"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Дата на издаване на гаранцията"
 
 #. ITSM class bundles

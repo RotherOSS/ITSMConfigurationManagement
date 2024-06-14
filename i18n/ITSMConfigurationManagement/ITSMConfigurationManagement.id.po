@@ -2928,7 +2928,7 @@ msgid "Date of Order"
 msgstr "Tanggal Pemesanan"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "Tanggal Waran"
 
 #. ITSM class bundles

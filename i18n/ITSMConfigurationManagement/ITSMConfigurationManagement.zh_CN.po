@@ -2692,7 +2692,7 @@ msgid "Date of Order"
 msgstr "订购日期"
 
 #. ITSM class bundles
-msgid "Date of Warrenty"
+msgid "Date of Warranty"
 msgstr "授权日期"
 
 #. ITSM class bundles
