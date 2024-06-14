@@ -3893,7 +3893,7 @@
       Label: IP Protocol
       Name: ITSMIPNetwork-IPProtocol
       ObjectType: ITSMConfigItem
-    ITSMIPNetwork-IPRanchEnd:
+    ITSMIPNetwork-IPRangeEnd:
       CIClass: IP Network
       Config:
         DefaultValue: ''
@@ -3904,9 +3904,9 @@
         Tooltip: ''
       FieldType: Text
       Label: End IP Address
-      Name: ITSMIPNetwork-IPRanchEnd
+      Name: ITSMIPNetwork-IPRangeEnd
       ObjectType: ITSMConfigItem
-    ITSMIPNetwork-IPRanchStart:
+    ITSMIPNetwork-IPRangeStart:
       CIClass: IP Network
       Config:
         DefaultValue: ''
@@ -3917,7 +3917,7 @@
         Tooltip: ''
       FieldType: Text
       Label: Start IP Address
-      Name: ITSMIPNetwork-IPRanchStart
+      Name: ITSMIPNetwork-IPRangeStart
       ObjectType: ITSMConfigItem
     ITSMIPNetwork-NetworkLayer:
       CIClass: IP Network
@@ -3992,7 +3992,7 @@
 - Definition: "---\r\nSections:\r\n  General Information:\r\n    Content:\r\n      -
     Header: General Information\r\n      - DF: ITSMIPNetwork-NetworkLayer\r\n      -
     DF: ITSMIPNetwork-IPProtocol\r\n      - DF: ITSMIPNetwork-AddressAllocation\r\n
-    \     - DF: ITSMIPNetwork-IPRanchStart\r\n      - DF: ITSMIPNetwork-IPRanchEnd\r\n
+    \     - DF: ITSMIPNetwork-IPRangeStart\r\n      - DF: ITSMIPNetwork-IPRangeEnd\r\n
     \     - DF: ITSMIPNetwork-CIDR"
   RoleName: ITSM GF IP Network
 - Definition: "---\r\nSections:\r\n  General Information:\r\n    Content:\r\n      -
