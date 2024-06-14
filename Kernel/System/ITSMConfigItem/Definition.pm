@@ -2423,6 +2423,10 @@ sub _DynamicFieldConfigTransform {
         }
     }
 
+    if ( $Param{Action} eq 'Export' ) {
+        delete $Param{DynamicFieldConfig}{ID};
+    }
+
     return $Param{DynamicFieldConfig};
 }
 
