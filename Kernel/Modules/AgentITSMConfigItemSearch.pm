@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -19,6 +19,12 @@ package Kernel::Modules::AgentITSMConfigItemSearch;
 use strict;
 use warnings;
 
+# core modules
+use List::Util qw(uniq);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -131,6 +137,31 @@ sub Run {
                 UserLogin => $Self->{UserLogin},
             );
 
+            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+
+            # set default params of default attributes
+            if ( $Self->{Config}{Defaults} ) {
+                KEY:
+                for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
+                    next KEY if !$Self->{Config}{Defaults}->{$Key};
+                    next KEY if $Key eq 'DynamicField';
+
+                    if ( $Key =~ /^(ConfigItem)(Create|Change)/ ) {
+                        my @Items = split /;/, $Self->{Config}{Defaults}->{$Key};
+                        for my $Item (@Items) {
+                            my ( $Key, $Value ) = split /=/, $Item;
+                            $GetParam{$Key} ||= $Value;
+                            @ShownAttributes = uniq( @ShownAttributes, $Key );
+                        }
+                    }
+                    else {
+                        $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
+                        @ShownAttributes = uniq( @ShownAttributes, $Key );
+                    }
+                }
+            }
+            $GetParam{ShownAttributes} = \@ShownAttributes;
+
             # convert attributes
             if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
                 $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
@@ -229,26 +260,28 @@ sub Run {
             $EmptySearch = 1;
         }
 
-        # if no profile is used, set default params of default attributes
-        if ( !$Self->{Profile} ) {
-            if ( $Self->{Config}{Defaults} ) {
-                KEY:
-                for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
-                    next KEY if !$Self->{Config}{Defaults}->{$Key};
-                    next KEY if $Key eq 'DynamicField';
+        # set default params of default attributes
+        if ( $Self->{Config}{Defaults} ) {
+            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+            KEY:
+            for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
+                next KEY if !$Self->{Config}{Defaults}->{$Key};
+                next KEY if $Key eq 'DynamicField';
 
-                    if ( $Key =~ /^(ConfigItem)(Create|Change)/ ) {
-                        my @Items = split /;/, $Self->{Config}{Defaults}->{$Key};
-                        for my $Item (@Items) {
-                            my ( $Key, $Value ) = split /=/, $Item;
-                            $GetParam{$Key} = $Value;
-                        }
-                    }
-                    else {
-                        $GetParam{$Key} = $Self->{Config}{Defaults}->{$Key};
+                if ( $Key =~ /^(ConfigItem)(Create|Change)/ ) {
+                    my @Items = split /;/, $Self->{Config}{Defaults}->{$Key};
+                    for my $Item (@Items) {
+                        my ( $Key, $Value ) = split /=/, $Item;
+                        $GetParam{$Key} ||= $Value;
+                        @ShownAttributes = uniq( @ShownAttributes, $Key );
                     }
                 }
+                else {
+                    $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
+                    @ShownAttributes = uniq( @ShownAttributes, $Key );
+                }
             }
+            $GetParam{ShownAttributes} = \@ShownAttributes;
         }
 
         # convert attributes
@@ -319,6 +352,35 @@ sub Run {
                 Message => Translatable('No access rights for this class given!'),
                 Comment => Translatable('Please contact the administrator.'),
             );
+        }
+
+        # set default params of default attributes
+        if ( $Self->{Config}{Defaults} ) {
+            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+            KEY:
+            for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
+                next KEY if !$Self->{Config}{Defaults}->{$Key};
+                next KEY if $Key eq 'DynamicField';
+
+                if ( $Key =~ /^(ConfigItem)(Create|Change)/ ) {
+                    my @Items = split /;/, $Self->{Config}{Defaults}->{$Key};
+                    for my $Item (@Items) {
+                        my ( $Key, $Value ) = split /=/, $Item;
+                        $GetParam{$Key} ||= $Value;
+                        @ShownAttributes = uniq( @ShownAttributes, $Key );
+                    }
+                }
+                else {
+                    $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
+                    @ShownAttributes = uniq( @ShownAttributes, $Key );
+                }
+            }
+            $GetParam{ShownAttributes}->@* = @ShownAttributes;
+
+            # convert attributes
+            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
+                $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
+            }
         }
 
         # TODO maybe nicer to have this also in a sysconfig setting
@@ -637,7 +699,7 @@ sub Run {
         }
         my %AlreadyShown;
 
-        if ( $Self->{Profile} ) {
+        if ($ClassID) {
             ITEM:
             for my $Item (@Attributes) {
                 my $Key = $Item->{Key};
