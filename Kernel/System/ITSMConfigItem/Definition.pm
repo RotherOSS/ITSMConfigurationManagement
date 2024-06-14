@@ -2402,12 +2402,21 @@ sub _DynamicFieldConfigTransform {
         }
     }
 
-    # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
+    # sanitize configs of set-included DFs
     if ( $Param{Action} eq "Export" && IsArrayRefWithData( $DynamicFieldConfig->{Config}->{Include} ) ) {
         INCLUDED_DF:
         for my $IncludedDF ( $DynamicFieldConfig->{Config}->{Include}->@* ) {
-            next INCLUDED_DF unless $IncludedDF->{Definition}->{Config}->{PartOfSet};
+
+            delete $IncludedDF->{Definition}{ID};
+
+            # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
             delete $IncludedDF->{Definition}->{Config}->{PartOfSet};
+
+            # transform included configs recursively on export
+            $IncludedDF->{Definition} = $Self->_DynamicFieldConfigTransform(
+                DynamicFieldConfig => $IncludedDF->{Definition},
+                Action             => 'Export',
+            );
         }
     }
 
