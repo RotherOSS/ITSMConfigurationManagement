@@ -1,9 +1,9 @@
 # --
 # OTOBO is a web-based ticketing system for service organisations.
 # --
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 3185f02de546185a2805008b16468354c9985bc9 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 6ba5a1e2ed5d9ad89183e1f0f8bc0f1ba9fd49b6 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -331,8 +331,8 @@ sub SearchFieldRender {
     my ( $Self, %Param ) = @_;
 
     # take config from field config
-    my $FieldName   = 'Search_DynamicField_' . $Param{DynamicFieldConfig}->{Name};
-    my $FieldLabel  = $Param{DynamicFieldConfig}->{Label};
+    my $FieldName  = 'Search_DynamicField_' . $Param{DynamicFieldConfig}->{Name};
+    my $FieldLabel = $Param{DynamicFieldConfig}->{Label};
 
     # set the field value
     my $Value = $Param{DefaultValue} // '';
@@ -667,41 +667,17 @@ sub GetFieldState {
         Behavior           => 'IsACLReducible',
     );
 
+    my %Return;
     my $ReferenceID = $DFParam->{ $DynamicFieldConfig->{Config}{ReferenceDFName} } ? $DFParam->{ $DynamicFieldConfig->{Config}{ReferenceDFName} }[0] : undef;
 
     # get the current value of the referenced attribute field if an object is referenced
     if ($ReferenceID) {
 
-        if ( defined $Param{SetIndex} ) {
-            $DynamicFieldConfig->{SetIndex} = $Param{SetIndex};
-        }
-
-        $AttributeFieldValue = $Self->ValueGet(
-            DynamicFieldConfig => $DynamicFieldConfig,
-
-            # TODO: Instead we could just send $DFParam->{ $DynamicFieldConfig->{Config}{ReferenceDFName} } as ObjectID
-            # but we would need to interpret it later (from ConfigItemID to LastVersionID, e.g.)
-            # TODO: Validate the Reference ObjectID here, or earlier, to prevent data leaks!
-            ObjectID              => 1,    # will not be used;
-            UseReferenceEditField => 1,
-        );
-    }
-
-    my %Return;
-
-    # set the new value if it differs
-    if (
-        $Self->ValueIsDifferent(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            Value1             => $DFParam->{"DynamicField_$DynamicFieldConfig->{Name}"},
-            Value2             => $AttributeFieldValue,
-        )
-        )
-    {
         my $ReferenceDFName = $DynamicFieldConfig->{Config}{ReferenceDFName};
 
         if ( defined $Param{SetIndex} ) {
             $ReferenceDFName .= "_$Param{SetIndex}";
+            $DynamicFieldConfig->{SetIndex} = $Param{SetIndex};
         }
 
         # if the value would change, we need to verify that the user is really allowed
@@ -733,12 +709,42 @@ sub GetFieldState {
         # if a search has already been performed for this form id
         my $Allowed = ( grep { $_ eq $ReferenceID } $LastSearchResults->@* ) ? 1 : 0;
 
-        if ($Allowed) {
-            $Return{NewValue} = $AttributeFieldValue;
-
-            # already write the new value to DFParam, for possible values check further down
-            $DFParam->{"DynamicField_$DynamicFieldConfig->{Name}"} = $AttributeFieldValue;
+        # abort if requested value is not allowed
+        if ( !$Allowed ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => "Value $ReferenceID for lens field $DynamicFieldConfig->{Name} is not allowed.",
+            );
+            return;
         }
+
+        $AttributeFieldValue = $Self->ValueGet(
+            DynamicFieldConfig => $DynamicFieldConfig,
+
+            # TODO: Instead we could just send $DFParam->{ $DynamicFieldConfig->{Config}{ReferenceDFName} } as ObjectID
+            # but we would need to interpret it later (from ConfigItemID to LastVersionID, e.g.)
+            # TODO: Validate the Reference ObjectID here, or earlier, to prevent data leaks!
+            ObjectID              => 1,    # will not be used;
+            UseReferenceEditField => 1,
+        );
+    }
+    else {
+        $AttributeFieldValue = '';
+    }
+
+    # set the new value if it differs
+    if (
+        $Self->ValueIsDifferent(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Value1             => $DFParam->{"DynamicField_$DynamicFieldConfig->{Name}"},
+            Value2             => $AttributeFieldValue,
+        )
+        )
+    {
+        $Return{NewValue} = $AttributeFieldValue;
+
+        # already write the new value to DFParam, for possible values check further down
+        $DFParam->{"DynamicField_$DynamicFieldConfig->{Name}"} = $AttributeFieldValue;
     }
 
     # if this field is non ACL reducible, set the field values
@@ -876,7 +882,7 @@ sub _GetAttributeDFConfig {
         my $DynamicFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
             ID => $Param{LensDynamicFieldConfig}{Config}{AttributeDF},
         );
-        $Self->{AttributeDFCache}{ $Param{LensDynamicFieldConfig}{ID} } = $DynamicFieldConfig // {};
+        $Self->{AttributeDFCache}{ $Param{LensDynamicFieldConfig}{ID} } = $DynamicFieldConfig ? { $DynamicFieldConfig->%* } : {};
     }
 
 # Rother OSS / ITSMConfigurationManagement
