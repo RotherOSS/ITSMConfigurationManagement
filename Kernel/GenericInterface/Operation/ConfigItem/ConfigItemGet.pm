@@ -112,8 +112,8 @@ one or more ConfigItem entries in one call.
                     CurDeplStateType   => 'some deployment state type',
                     CreateTime         => '2010-10-27 20:15:00'
                     CreateBy           => 123,
-                    CIXMLData          => $XMLDataHashRef,
-
+                    DynamicField_Name  => $Value,
+    
                     Attachment => [
                         {
                             Content            => "xxxx",     # actual attachment contents, base64 enconded
@@ -156,7 +156,7 @@ sub Run {
 
     if ( !$UserID ) {
         return $Self->ReturnError(
-            ErrorCode    => '$Self->{OperationName}.AuthFail',
+            ErrorCode    => "$Self->{OperationName}.AuthFail",
             ErrorMessage => "$Self->{OperationName}: Authorization failing!",
         );
     }
@@ -216,8 +216,9 @@ sub Run {
 
         # get the latest version of ConfigItem entry
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $ConfigItemID,
-            UserID       => $UserID,
+            ConfigItemID  => $ConfigItemID,
+            UserID        => $UserID,
+            DynamicFields => 1,
         );
 
         if ( !IsHashRefWithData($ConfigItem) ) {
@@ -226,7 +227,7 @@ sub Run {
                 . ' in Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet::Run()';
 
             return $Self->ReturnError(
-                ErrorCode    => '$Self->{OperationName}.InvalidParameter',
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
                 ErrorMessage => "$Self->{OperationName}: $ErrorMessage",
             );
         }
@@ -237,23 +238,7 @@ sub Run {
         delete $ConfigItem->{CurInciStateID};
         delete $ConfigItem->{DeplStateID};
         delete $ConfigItem->{InciStateID};
-        delete $ConfigItem->{XMLDefinitionID};
-
-        my $Definition = delete $ConfigItem->{XMLDefinition};
-
-        my $FormatedXMLData = $Self->InvertFormatXMLData(
-            XMLData => $ConfigItem->{XMLData}->[1]->{ConfigItem},
-        );
-
-        my $ReplacedXMLData = $Self->InvertReplaceXMLData(
-            XMLData    => $FormatedXMLData,
-            Definition => $Definition,
-        );
-
-        $ConfigItem->{XMLData} = $ReplacedXMLData;
-
-        # rename XMLData since SOAP transport complains about XML prefix on names
-        $ConfigItem->{CIXMLData} = delete $ConfigItem->{XMLData};
+        delete $ConfigItem->{DefinitionID};
 
         # set ConfigItem entry data
         my $ConfigItemBundle = $ConfigItem;
@@ -300,7 +285,7 @@ sub Run {
             . ' in Kernel::GenericInterface::Operation::ConfigItem::ConfigItemGet::Run()';
 
         return $Self->ReturnError(
-            ErrorCode    => '$Self->{OperationName}.NoConfigItemData',
+            ErrorCode    => "$Self->{OperationName}.NoConfigItemData",
             ErrorMessage => "$Self->{OperationName}: $ErrorMessage",
         );
     }

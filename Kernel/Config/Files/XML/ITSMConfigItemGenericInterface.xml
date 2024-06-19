@@ -11,11 +11,51 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="GenericInterface::Operation::Module###ConfigItem::ConfigItemSet" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemSet</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationConfigItem</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::Module###ConfigItem::ConfigItemSearch" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemSearch</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::Module###ConfigItem::ConfigItemDelete" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemDelete</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemGet###Permission" Required="1" Valid="1">
         <Description Translatable="1">Defines Required permissions to get ITSM configuration items using the Generic Interface.</Description>
         <Navigation>GenericInterface::Operation::ConfigItemGet</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">ro</Item>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::ConfigItemSet###Permission" Required="1" Valid="1">
+        <Description Translatable="1">Defines Required permissions to set ITSM configuration items using the Generic Interface.</Description>
+        <Navigation>GenericInterface::Operation::ConfigItemSet</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">rw</Item>
         </Value>
     </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemSearch###Permission" Required="1" Valid="1">
@@ -158,6 +198,55 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.Agent.Admin.GenericInterfaceInvoker.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Operation::ConfigItemSet::Classes" Required="0" Valid="0">
+        <Description Translatable="1">For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.</Description>
+        <Navigation>GenericInterface::Operation</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem><Array></Array></DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminGenericInterfaceOperationConfigItem" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">GenericInterface Operation GUI</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminGenericInterfaceOperationConfigItem###002-GenericInterface" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterface.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.GenericInterfaceOperation.js</Item>
                     </Array>
                 </Item>
             </Hash>

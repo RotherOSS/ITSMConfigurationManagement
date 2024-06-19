@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::GenericInterface::Invoker::ConfigItem::ConfigItemFetch;
+package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemSet;
 
 use v5.24;
 use strict;
@@ -22,7 +22,10 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
+use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
+
 # core modules
+use MIME::Base64;
 
 # CPAN modules
 
@@ -33,136 +36,136 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::ConfigItem::ConfigItemFetch - GenericInterface for ITSM ConfigItems
-
-=head1 SYNOPSIS
-
-GenericInterface for ITSM ConfigItems
+Kernel::GenericInterface::Operation::ConfigItem::ConfigItemSet - GenericInterface Configuration Item Add and Update Operation backend
 
 =head1 PUBLIC INTERFACE
 
-=over 4
-
-=cut
-
-=item new()
+=head2 new()
 
 usually, you want to create an instance of this
-by using Kernel::GenericInterface::Invoker->new();
+by using Kernel::GenericInterface::Operation->new();
 
 =cut
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
-    # check needed params
-    for my $Needed (
-        qw(DebuggerObject WebserviceID Invoker)
-        )
-    {
+    # check needed objects
+    for my $Needed (qw( DebuggerObject WebserviceID )) {
         if ( !$Param{$Needed} ) {
             return {
                 Success      => 0,
-                ErrorMessage => "Got no $Needed!"
+                ErrorMessage => "Got no $Needed!",
             };
         }
 
         $Self->{$Needed} = $Param{$Needed};
     }
 
+    $Self->{OperationName} = 'ConfigItemSet';
+
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemSet');
+
     return $Self;
 }
 
-=item PrepareRequest()
+=head2 Run()
 
-prepare the invocation of the configured remote web service.
-This will just return the data that was passed to the function.
+perform ConfigItemSet Operation. This function is able to accept
+one or more ConfigItem entries in one call.
 
-    my $Result = $InvokerObject->PrepareRequest(
-        Data => {                               # data payload
-            ...
+    my $Result = $OperationObject->Run(
+        Data => {
+            UserLogin  => 'some agent login',                            # UserLogin or SessionID is
+            SessionID  => 123,                                           #   required
+            Password   => 'some password',                               # if UserLogin is sent then Password is required
+            ConfigItem => [                                              # required
+                { ... },
+                ...
+            ]
         },
     );
 
     $Result = {
-        Success         => 1,                   # 0 or 1
-        ErrorMessage    => '',                  # in case of error
-        Data            => {                    # data payload after Invoker
-            ...
+        Success      => 1,                                # 0 or 1
+        ErrorMessage => '',                               # In case of an error
+        Data         => {
+            ConfigItem => [
+                {
+                    Number             => '20101027000001',
+                    ConfigItemID       => 123,
+                },
+                {
+                    # . . .
+                },
+            ],
         },
     };
 
 =cut
 
-sub PrepareRequest {
+sub Run {
     my ( $Self, %Param ) = @_;
 
-    return {
-        Success => 1,
-        Data    => IsHashRefWithData( $Param{Data} ) ? $Param{Data} : {},
-    };
-}
-
-=item HandleResponse()
-
-handle response data of the configured remote web service.
-This will just return the data that was passed to the function.
-
-    my $Result = $InvokerObject->HandleResponse(
-        ResponseSuccess      => 1,              # success status of the remote web service
-        ResponseErrorMessage => '',             # in case of web service error
-        Data => {                               # data payload
-            ...
-        },
+    my $Result = $Self->Init(
+        WebserviceID => $Self->{WebserviceID},
     );
 
-    $Result = {
-        Success         => 1,                   # 0 or 1
-        ErrorMessage    => '',                  # in case of error
-        Data            => {                    # data payload after Invoker
-            ...
-        },
-    };
-
-=cut
-
-sub HandleResponse {
-    my ( $Self, %Param ) = @_;
-
-    # if there was an error in the response, forward it
-    if ( !$Param{ResponseSuccess} ) {
-
-        return $Self->Error(
-            ErrorMessage => $Param{ResponseErrorMessage} || 'Unknown Error',
+    if ( !$Result->{Success} ) {
+        $Self->ReturnError(
+            ErrorCode    => 'Webservice.InvalidConfiguration',
+            ErrorMessage => $Result->{ErrorMessage},
         );
     }
 
-    if ( ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
+    my ($UserID) = $Self->Auth(
+        %Param
+    );
 
-        return $Self->Error(
-            ErrorMessage => "Invalid structure for parameter 'Data'.",
+    if ( !$UserID ) {
+        return $Self->ReturnError(
+            ErrorCode    => "$Self->{OperationName}.AuthFail",
+            ErrorMessage => "$Self->{OperationName}: Authorization failing!",
         );
     }
 
-    # Nothing to do.
-    if ( !IsHashRefWithData( $Param{Data} ) && !IsArrayRefWithData( $Param{Data} ) ) {
-        return $Self->Success(
-            Data => $Param{Data},
-        );
+    # check needed stuff
+    for my $Needed (qw(ConfigItem)) {
+        if ( !$Param{Data}->{$Needed} ) {
+            return $Self->ReturnError(
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
+                ErrorMessage => "$Self->{OperationName}: $Needed parameter is missing!",
+            );
+        }
+    }
+    my $ErrorMessage = '';
+
+    # transform single CIs to an array reference
+    if ( !IsArrayRefWithData( $Param{Data}{ConfigItem} ) ) {
+        $Param{Data}{ConfigItem} = [ $Param{Data}{ConfigItem} ];
     }
 
-    # remove toplevel ConfigItems if not given as direct array
-    if ( IsHashRefWithData( $Param{Data} ) && $Param{Data}{ConfigItems} ) {
-        $Param{Data} = $Param{Data}{ConfigItems};
-    }
+    for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
+        if ( !IsHashRefWithData( $RemoteCIData ) ) {
+            return $Self->ReturnError(
+                ErrorCode    => "$Self->{OperationName}.WrongStructure",
+                ErrorMessage => "$Self->{OperationName}: Structure for ConfigItem is not correct!",
+            );
+        }
 
-    # transform to array reference
-    if ( IsHashRefWithData( $Param{Data} ) ) {
-        $Param{Data} = [ $Param{Data} ];
+        my @RequiredAttributes = qw(Class DeploymentState IncidentState);
+        for my $Needed ( sort @RequiredAttributes ) {
+
+            if ( !IsStringWithData( $RemoteCIData->{$Needed} ) ) {
+                return $Self->ReturnError(
+                    ErrorCode    => "$Self->{OperationName}.MissingParameter",
+                    ErrorMessage => "$Self->{OperationName}: Need $Needed for every ConfigItem!",
+                );
+            }
+        }
     }
 
     # get webservice configuration
@@ -170,8 +173,8 @@ sub HandleResponse {
         ID => $Self->{WebserviceID},
     );
 
-    # get invoker config
-    my $InvokerConfig = $Webservice->{Config}->{Requester}->{Invoker}->{ $Self->{Invoker} };
+    # get operation config
+    my $OperationConfig = $Webservice->{Config}->{Provider}->{Operation}->{ $Self->{Operation} };
 
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -184,38 +187,11 @@ sub HandleResponse {
 
     my %GeneralCatalogItemLookup;
     my %NameModuleObjects;
+    my @CIsHandled;
     CI:
-    for my $RemoteCIData ( @{ $Param{Data} } ) {
+    for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
 
-        if ( !IsHashRefWithData($RemoteCIData) ) {
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "Invalid remote CI structure found. Skipping item.",
-            );
-
-            next CI;
-        }
-
-        my @RequiredAttributes = qw(Class DeploymentState IncidentState);
-        my %RequiredAttributes;
-        for my $Needed ( sort @RequiredAttributes ) {
-
-            if ( !IsStringWithData( $RemoteCIData->{$Needed} ) ) {
-
-                my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';
-                $NoticeInfo .= $RemoteCIData->{Name} ? "Name: $RemoteCIData->{Name};" : '';
-
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'notice',
-                    Message  => "Missing '$Needed' parameter for creating/updating a CI. Skipping item. $NoticeInfo",
-                );
-
-                next CI;
-            }
-
-            $RequiredAttributes{$Needed} = $RemoteCIData->{$Needed};
-        }
+        my %RequiredAttributes = map { $_ => $RemoteCIData->{$_} } qw(Class DeploymentState IncidentState) ;
 
         # get IDs for Class, Depl- and InciState
         for my $CurrentCI ( sort keys %CIClassMapping ) {
@@ -248,12 +224,13 @@ sub HandleResponse {
             $RequiredAttributes{ $CurrentCI . 'ID' } = $GeneralCatalogItem->{ItemID};
         }
 
-        my $Identifier = $InvokerConfig->{ 'Identifier' . $RequiredAttributes{ClassID} };
+        my $Identifier = $OperationConfig->{ 'Identifier' . $RequiredAttributes{ClassID} };
         if ( !$Identifier ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
                 Message  => "Not importing items in class $RequiredAttributes{Class} - skipping.",
             );
+            push @CIsHandled, {};
 
             next CI;
         }
@@ -295,6 +272,7 @@ sub HandleResponse {
                         Priority => 'notice',
                         Message  => "Not importing items in class $RequiredAttributes{Class} - skipping.",
                     );
+                    push @CIsHandled, {};
 
                     next CI;
                 }
@@ -308,6 +286,7 @@ sub HandleResponse {
                     Priority => 'notice',
                     Message  => "Cannot use $Attribute as Identifier - skipping.",
                 );
+                push @CIsHandled, {};
 
                 next CI;
             }
@@ -331,9 +310,36 @@ sub HandleResponse {
                     Priority => 'notice',
                     Message  => "Cannot use ambiguos search result - skipping. Parameters: $SearchParameters;",
                 );
+                push @CIsHandled, {};
 
                 next CI;
             }
+        }
+
+        # check permissions
+        my $Permission;
+        if ( $ConfigItemID ) { 
+            $Permission = $ConfigItemObject->Permission(
+                Scope  => 'Item',
+                ItemID => $ConfigItemID,
+                UserID => $UserID,
+                Type   => $Self->{Config}->{Permission},
+            );
+        }
+        else {
+            $Permission = $ConfigItemObject->Permission(
+                Scope   => 'Class',
+                ClassID => $RequiredAttributes{ClassID},
+                UserID  => $UserID,
+                Type    => $Self->{Config}->{Permission},
+            );
+        }
+        
+        if ( !$Permission ) {
+            return $Self->ReturnError(
+                ErrorCode    => "$Self->{OperationName}.AccessDenied",
+                ErrorMessage => "$Self->{OperationName}: Can not write configuration item!",
+            );
         }
 
         my $ClassPreferences = $GeneralCatalogObject->ItemGet(
@@ -350,6 +356,7 @@ sub HandleResponse {
                         Priority => 'error',
                         Message  => "Can't load name module for class $RemoteCIData->{Class}!",
                     );
+                    push @CIsHandled, {};
 
                     next CI;
                 }
@@ -379,6 +386,7 @@ sub HandleResponse {
                 Priority => 'notice',
                 Message  => "Missing 'Name' parameter for creating a CI. Skipping item. $NoticeInfo",
             );
+            push @CIsHandled, {};
 
             next CI;
         }
@@ -403,10 +411,9 @@ sub HandleResponse {
             $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                DeplStateID    => $RequiredAttributes{DeploymentStateID},
-                InciStateID    => $RequiredAttributes{IncidentStateID},
-                UserID         => 1,
-                ExternalSource => 1,
+                DeplStateID => $RequiredAttributes{DeploymentStateID},
+                InciStateID => $RequiredAttributes{IncidentStateID},
+                UserID      => 1,
             );
 
             if ( !$ConfigItemID ) {
@@ -416,96 +423,16 @@ sub HandleResponse {
                 );
             }
         }
+
+        push @CIsHandled, {
+            ConfigItemID => $ConfigItemID,
+            Name         => $RequiredAttributes{Name},
+        };
     }
 
-    return $Self->Success(
-        Data => $Param{Data},
-    );
-}
-
-=item Error()
-
-Write error message to OTOBO log and return exit structure.
-
-    my $ExitStructure = $CommonObject->Error(
-        ErrorMessage    => 'an error message',
-    );
-
-returns
-
-    $ExitStructure = {
-        Success      => 0,
-        ErrorMessage => 'an error message',
-    };
-
-=cut
-
-sub Error {
-    my ( $Self, %Param ) = @_;
-
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'error',
-        Message  => "Error in '" . $Self->{Invoker}
-            . "' Invoker (WebserviceID: " . $Self->{WebserviceID} . "):"
-            . $Param{ErrorMessage},
-    );
-
     return {
-        Success      => 0,
-        ErrorMessage => $Param{ErrorMessage},
-    };
-}
-
-=item Success()
-
-Write LastRunTimestamp cache entry and return exit structure.
-
-    my $ExitStructure = $CommonObject->Success(
-        Data => $ReturnData,
-    );
-
-returns
-
-    $ExitStructure = {
-        Success => 1,
-        Data    => $ReturnData,
-    };
-
-=cut
-
-sub Success {
-    my ( $Self, %Param ) = @_;
-
-    my $LastRunTimestamp = $Kernel::OM->Create('Kernel::System::DateTime')->ToString();
-
-    $Kernel::OM->Get('Kernel::System::Cache')->Set(
-        Key   => 'GenericInterface::ITSM::ConfigItem::' . $Self->{Invoker} . '::LastRunTimestamp',
-        Value => $LastRunTimestamp,
-        Type  => 'ITSMChangeItemWebservice' . $Self->{WebserviceID},
-        TTL   => 60 * 60 * 24 * 7,
-    );
-
-    # log completion
-    $Self->{DebuggerObject}->Debug(
-        Summary => 'Successfully completed.',
-    );
-
-    return {
-        Success => 1,
-        Data    => $Param{Data},
+        Data => { ConfigItem => \@CIsHandled },
     };
 }
 
 1;
-
-=back
-
-=head1 TERMS AND CONDITIONS
-
-This software is part of the OTOBO project (L<https://otobo.org/>).
-
-This software comes with ABSOLUTELY NO WARRANTY. For details, see
-the enclosed file COPYING for license information (GPL). If you
-did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
-
-=cut
