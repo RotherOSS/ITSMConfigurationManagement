@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 6ba5a1e2ed5d9ad89183e1f0f8bc0f1ba9fd49b6 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 4b20064fb492c267880980b9e76ea95ed66d85a1 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -306,7 +306,10 @@ sub EditFieldValueValidate {
     # call attribute df config validation
     return $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->EditFieldValueValidate(
         %Param,
-        DynamicFieldConfig => $AttributeDFConfig,
+        DynamicFieldConfig => {
+            $AttributeDFConfig->%*,
+            Name => $Param{DynamicFieldConfig}{Name},
+        },
     );
 }
 
