@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Indonesian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/id/>\n"
+"Language-Team: Indonesian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -291,8 +290,7 @@ msgstr "Tidak ada ConfigItemID atau VersionID yang diberikan!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
-"Tidak dapat menampilkan item konfigurasi, tidak ada hak akses yang diberikan!"
+msgstr "Tidak dapat menampilkan item konfigurasi, tidak ada hak akses yang diberikan!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
@@ -332,9 +330,7 @@ msgstr "Konfigurasi pencarian nilai"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
-"Tidak dapat menampilkan item, tidak ada hak akses untuk ConfigItem yang "
-"diberikan!"
+msgstr "Tidak dapat menampilkan item, tidak ada hak akses untuk ConfigItem yang diberikan!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -492,35 +488,35 @@ msgstr "Jaringan"
 msgid "Software"
 msgstr "Perangkat lunak"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Telah kadaluarsa"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "Pemeliharaan"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilot"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Telah direncanakan"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Perbaiki"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Pensiun"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Ulasan"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Uji/QA"
 
@@ -822,11 +818,7 @@ msgstr "Buat dan atur definisi - definisi untuk item konfigurasi"
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Tentukan Tindakan adalah tombol pengaturan tersedia di objek widget terkait "
-"(LinkObject::ViewMode = \"complex\"). Harap dicatat bahwa Tindakan ini harus "
-"telah mendaftarkan berikut JS dan CSS file: Core.AllocationList.css, "
-"Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js."
+msgstr "Tentukan Tindakan adalah tombol pengaturan tersedia di objek widget terkait (LinkObject::ViewMode = \"complex\"). Harap dicatat bahwa Tindakan ini harus telah mendaftarkan berikut JS dan CSS file: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -834,9 +826,7 @@ msgstr "Definisikan izin yang di butuhkan untuk menciptakan item konfigurasi ITS
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Mendefinisikan izin yang diperlukan untuk menghapus item konfigurasi ITSM "
-"menggunakan Antarmuka Generik."
+msgstr "Mendefinisikan izin yang diperlukan untuk menghapus item konfigurasi ITSM menggunakan Antarmuka Generik."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
@@ -868,15 +858,11 @@ msgstr "Definisikan jumlah baris untuk pengubah definisiCI pada antarmuka Admin"
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Menentukan urutan status insiden dari tinggi (mis. krusial) ke rendah (mis. "
-"fungsional)."
+msgstr "Menentukan urutan status insiden dari tinggi (mis. krusial) ke rendah (mis. fungsional)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Mendefinisikan status penyebaran yang relevan di mana tiket yang ditautkan "
-"dapat memengaruhi status CI."
+msgstr "Mendefinisikan status penyebaran yang relevan di mana tiket yang ditautkan dapat memengaruhi status CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -904,26 +890,11 @@ msgstr "Mendefinisikan kolom yang ditampilkan dari CI dalam pencarian config bar
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Mendefinisikan kolom CI yang ditampilkan di widget item konfigurasi "
-"tergantung pada kelas CI. Setiap entri harus diawali dengan nama kelas dan "
-"tanda titik dua ganda (mis. Komputer::). Ada beberapa CI-Atribut yang umum "
-"untuk semua CI (contoh untuk kelas Computer: Computer::Name, Computer::"
-"CurDeplState, Computer::CreateTime). Untuk menampilkan masing-masing CI-"
-"Atribut seperti yang didefinisikan dalam Definisi CI, skema berikut harus "
-"digunakan (contoh untuk kelas Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Jika tidak ada entri untuk kelas CI, "
-"maka kolom default akan ditampilkan seperti yang didefinisikan dalam "
-"pengaturan AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (kunci DefaultColumns)."
+msgstr "Mendefinisikan kolom CI yang ditampilkan di widget item konfigurasi tergantung pada kelas CI. Setiap entri harus diawali dengan nama kelas dan tanda titik dua ganda (mis. Komputer::). Ada beberapa CI-Atribut yang umum untuk semua CI (contoh untuk kelas Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Untuk menampilkan masing-masing CI-Atribut seperti yang didefinisikan dalam Definisi CI, skema berikut harus digunakan (contoh untuk kelas Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jika tidak ada entri untuk kelas CI, maka kolom default akan ditampilkan seperti yang didefinisikan dalam pengaturan AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (kunci DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Menentukan kolom CI yang ditampilkan dalam tampilan kompleks tabel tautan "
-"untuk semua kelas CI. Jika tidak ada entri, maka kolom default akan "
-"ditampilkan."
+msgstr "Menentukan kolom CI yang ditampilkan dalam tampilan kompleks tabel tautan untuk semua kelas CI. Jika tidak ada entri, maka kolom default akan ditampilkan."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
@@ -931,15 +902,11 @@ msgstr "Mendefinisikan kolom yang ditampilkan dari CI di link tabel tampilan yan
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Mendefinisikan jenis tautan mana (dinamai dari perspektif tiket) yang dapat "
-"memengaruhi status CI yang ditautkan."
+msgstr "Mendefinisikan jenis tautan mana (dinamai dari perspektif tiket) yang dapat memengaruhi status CI yang ditautkan."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
-"Mendefinisikan jenis tiket mana yang dapat memengaruhi status CI yang "
-"ditautkan."
+msgstr "Mendefinisikan jenis tiket mana yang dapat memengaruhi status CI yang ditautkan."
 
 #. SysConfig
 msgid "Delete Configuration Item"
@@ -967,9 +934,7 @@ msgstr "Mengaktifkan / menonaktifkan fungsi untuk memeriksa ConfigItems untuk na
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
-"Modul peristiwa untuk mengatur status konfigurasi pada tautan konfigurasi "
-"tiket."
+msgstr "Modul peristiwa untuk mengatur status konfigurasi pada tautan konfigurasi tiket."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -997,14 +962,7 @@ msgstr "Gambaran umum."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Parameter untuk backend dasbor dari ikhtisar item konfigurasi perusahaan "
-"pelanggan dari antarmuka agen. \"Limit\" adalah jumlah entri yang "
-"ditampilkan secara default. \"Group\" digunakan untuk membatasi akses ke "
-"plugin (mis. Group: admin; group1; group2;). \"Default\" menentukan apakah "
-"plugin diaktifkan secara default atau jika pengguna perlu mengaktifkannya "
-"secara manual. \"CacheTTLLocal\" adalah waktu cache dalam hitungan menit "
-"untuk plugin."
+msgstr "Parameter untuk backend dasbor dari ikhtisar item konfigurasi perusahaan pelanggan dari antarmuka agen. \"Limit\" adalah jumlah entri yang ditampilkan secara default. \"Group\" digunakan untuk membatasi akses ke plugin (mis. Group: admin; group1; group2;). \"Default\" menentukan apakah plugin diaktifkan secara default atau jika pengguna perlu mengaktifkannya secara manual. \"CacheTTLLocal\" adalah waktu cache dalam hitungan menit untuk plugin."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
@@ -1068,8 +1026,7 @@ msgstr "Memilih item konfigurasi modul generator nomor. \"AutoIncrement\" increm
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
-"Mengatur status insiden CI secara otomatis ketika Tiket ditautkan ke CI."
+msgstr "Mengatur status insiden CI secara otomatis ketika Tiket ditautkan ke CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
@@ -1093,9 +1050,7 @@ msgstr "Menunjukkan link dalam menu untuk mengakses sejarah item konfigurasi dal
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"Menampilkan tautan dalam menu untuk menghapus item konfigurasi dalam "
-"tampilan zoom antarmuka agen."
+msgstr "Menampilkan tautan dalam menu untuk menghapus item konfigurasi dalam tampilan zoom antarmuka agen."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
@@ -1159,10 +1114,7 @@ msgstr "Bundel Kelas Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Di sini Anda dapat mengimpor bundel kelas Ready2Import yang menampilkan item "
-"konfigurasi yang paling umum. Harap dicatat bahwa beberapa konfigurasi "
-"tambahan mungkin diperlukan."
+msgstr "Di sini Anda dapat mengimpor bundel kelas Ready2Import yang menampilkan item konfigurasi yang paling umum. Harap dicatat bahwa beberapa konfigurasi tambahan mungkin diperlukan."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1182,8 +1134,7 @@ msgstr "Nomor versi item konfigurasi ini"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Nomor Versi sudah digunakan oleh ConfigItems dengan Nomor berikut ini: %s"
+msgstr "Nomor Versi sudah digunakan oleh ConfigItems dengan Nomor berikut ini: %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1231,9 +1182,7 @@ msgstr "Peran-peran berikut ini akan diimpor"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Perhatikan bahwa bidang dinamis dan kelas GeneralCatalog yang sesuai juga "
-"akan dibuat dan tidak ada penghapusan otomatis."
+msgstr "Perhatikan bahwa bidang dinamis dan kelas GeneralCatalog yang sesuai juga akan dibuat dan tidak ada penghapusan otomatis."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1273,9 +1222,7 @@ msgstr "Pembatasan kelas untuk item konfigurasi"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Pilih satu kelas atau lebih untuk membatasi item konfigurasi yang dapat "
-"dipilih"
+msgstr "Pilih satu kelas atau lebih untuk membatasi item konfigurasi yang dapat dipilih"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1299,9 +1246,7 @@ msgstr "Arah Tautan"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Objek yang direferensikan adalah objek yang berisi bidang dinamis ini, objek "
-"yang direferensikan adalah objek yang dipilih sebagai nilai bidang dinamis."
+msgstr "Objek yang direferensikan adalah objek yang berisi bidang dinamis ini, objek yang direferensikan adalah objek yang dipilih sebagai nilai bidang dinamis."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1317,10 +1262,7 @@ msgstr "Jenis Referensi Tautan"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Apakah tautan ini berlaku untuk ConfigItem atau versi statis dari objek "
-"referensi. Perhitungan Status Insiden saat ini hanya dilakukan pada tautan "
-"dinamis."
+msgstr "Apakah tautan ini berlaku untuk ConfigItem atau versi statis dari objek referensi. Perhitungan Status Insiden saat ini hanya dilakukan pada tautan dinamis."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1352,9 +1294,7 @@ msgstr "Kesalahan menyinkronkan definisi. Silakan periksa log."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Anda memiliki definisi ITSMConfigItem yang tidak tersinkronisasi. Terapkan "
-"perubahan bidang dinamis ITSMConfigItem Anda."
+msgstr "Anda memiliki definisi ITSMConfigItem yang tidak tersinkronisasi. Terapkan perubahan bidang dinamis ITSMConfigItem Anda."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1374,19 +1314,11 @@ msgstr "1 - Ditampilkan"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Memungkinkan kondisi pencarian yang diperluas dalam pencarian item "
-"konfigurasi pada antarmuka agen. Dengan fitur ini, Anda dapat mencari, "
-"misalnya nama item konfigurasi dengan kondisi seperti ini, seperti \""
-"(*key1*&&*key2*)\" atau \"(*key1*||*key2*)\"."
+msgstr "Memungkinkan kondisi pencarian yang diperluas dalam pencarian item konfigurasi pada antarmuka agen. Dengan fitur ini, Anda dapat mencari, misalnya nama item konfigurasi dengan kondisi seperti ini, seperti \"(*key1*&&*key2*)\" atau \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Memungkinkan kondisi pencarian yang diperluas dalam pencarian item "
-"konfigurasi pada antarmuka pelanggan. Dengan fitur ini, Anda dapat mencari, "
-"misalnya nama item konfigurasi dengan kondisi seperti ini seperti \""
-"(*key1*&&*key2*)\" atau \"(*key1*||*key2*)\"."
+msgstr "Memungkinkan kondisi pencarian yang diperluas dalam pencarian item konfigurasi pada antarmuka pelanggan. Dengan fitur ini, Anda dapat mencari, misalnya nama item konfigurasi dengan kondisi seperti ini seperti \"(*key1*&&*key2*)\" atau \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1414,28 +1346,19 @@ msgstr "Filter item konfigurasi kolom untuk Ikhtisar Item Konfigurasi."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka "
-"agen. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis "
-"(DynamicField_NameX) yang diperbolehkan."
+msgstr "Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka agen. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka "
-"pelanggan. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis "
-"(DynamicField_NameX) yang diperbolehkan."
+msgstr "Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka pelanggan. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Modul peristiwa item konfigurasi yang memperbarui item konfigurasi ke "
-"definisi saat ini."
+msgstr "Modul peristiwa item konfigurasi yang memperbarui item konfigurasi ke definisi saat ini."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
-"Modul peristiwa item konfigurasi yang memperbarui tabel configitem_ĺink."
+msgstr "Modul peristiwa item konfigurasi yang memperbarui tabel configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
@@ -1451,17 +1374,11 @@ msgstr "Versi ConfigItem"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems dari kelas-kelas berikut ini tidak akan disimpan di server "
-"Elasticsearch. Untuk menerapkan ini pada CI yang sudah ada, migrasi CI harus "
-"dijalankan melalui konsol, setelah mengubah opsi ini."
+msgstr "ConfigItems dari kelas-kelas berikut ini tidak akan disimpan di server Elasticsearch. Untuk menerapkan ini pada CI yang sudah ada, migrasi CI harus dijalankan melalui konsol, setelah mengubah opsi ini."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems dengan status penyebaran berikut tidak akan disimpan di server "
-"Elasticsearch. Untuk menerapkan ini pada CI yang sudah ada, migrasi CI harus "
-"dijalankan melalui konsol, setelah mengubah opsi ini."
+msgstr "ConfigItems dengan status penyebaran berikut tidak akan disimpan di server Elasticsearch. Untuk menerapkan ini pada CI yang sudah ada, migrasi CI harus dijalankan melalui konsol, setelah mengubah opsi ini."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1473,36 +1390,19 @@ msgstr "Pelanggan dapat beralih secara manual di antara versi CI terdahulu."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Data default yang akan digunakan pada atribut untuk layar pencarian item "
-"konfigurasi. Contoh: \"ITSMConfigItemCreateTimePointFormat = tahun; "
-"ITSMConfigItemCreateTimePointStart = Terakhir; ITSMConfigItemCreateTimePoint "
-"= 2;\"."
+msgstr "Data default yang akan digunakan pada atribut untuk layar pencarian item konfigurasi. Contoh: \"ITSMConfigItemCreateTimePointFormat = tahun; ITSMConfigItemCreateTimePointStart = Terakhir; ITSMConfigItemCreateTimePoint = 2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Data default yang akan digunakan pada atribut untuk layar pencarian item "
-"konfigurasi. Contoh: \"ITSMConfigItemCreateTimeStartYear = 2010; "
-"ITSMConfigItemCreateTimeStartMonth = 10; ITSMConfigItemCreateTimeStartDay = "
-"4; ITSMConfigItemCreateTimeStopYear = 2010; "
-"ITSMConfigItemCreateTimeStopMonth = 11; ITSMConfigItemCreateTimeStopDay = 3;"
-"\"."
+msgstr "Data default yang akan digunakan pada atribut untuk layar pencarian item konfigurasi. Contoh: \"ITSMConfigItemCreateTimeStartYear = 2010; ITSMConfigItemCreateTimeStartMonth = 10; ITSMConfigItemCreateTimeStartDay = 4; ITSMConfigItemCreateTimeStopYear = 2010; ITSMConfigItemCreateTimeStopMonth = 11; ITSMConfigItemCreateTimeStopDay = 3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Mendefinisikan skema Template::Toolkit untuk string versi. Hanya digunakan "
-"jika Modul String Versi diatur ke TemplateToolkit."
+msgstr "Mendefinisikan skema Template::Toolkit untuk string versi. Hanya digunakan jika Modul String Versi diatur ke TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Tentukan serangkaian kondisi di mana pelanggan diizinkan untuk melihat item "
-"konfigurasi. Kondisi dapat secara opsional dibatasi untuk grup pelanggan "
-"tertentu. Nama adalah satu-satunya atribut wajib. Jika tidak ada pilihan "
-"lain yang diberikan, semua item konfigurasi akan terlihat di bawah kategori "
-"tersebut."
+msgstr "Tentukan serangkaian kondisi di mana pelanggan diizinkan untuk melihat item konfigurasi. Kondisi dapat secara opsional dibatasi untuk grup pelanggan tertentu. Nama adalah satu-satunya atribut wajib. Jika tidak ada pilihan lain yang diberikan, semua item konfigurasi akan terlihat di bawah kategori tersebut."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
@@ -1510,57 +1410,35 @@ msgstr "Menentukan apakah label jenis tautan harus ditampilkan di koneksi node."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Mendefinisikan kolom CI yang tersedia dalam ikhtisar item konfigurasi "
-"tergantung pada kelas CI. Setiap entri harus terdiri dari nama kelas dan "
-"larik kolom yang tersedia untuk kelas yang bersangkutan. Entri bidang "
-"dinamis harus sesuai dengan skema DynamicField_FieldName."
+msgstr "Mendefinisikan kolom CI yang tersedia dalam ikhtisar item konfigurasi tergantung pada kelas CI. Setiap entri harus terdiri dari nama kelas dan larik kolom yang tersedia untuk kelas yang bersangkutan. Entri bidang dinamis harus sesuai dengan skema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Mendefinisikan atribut item konfigurasi default untuk pengurutan item "
-"konfigurasi dari hasil pencarian item konfigurasi antarmuka agen."
+msgstr "Mendefinisikan atribut item konfigurasi default untuk pengurutan item konfigurasi dari hasil pencarian item konfigurasi antarmuka agen."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Menentukan atribut item konfigurasi default untuk pengurutan item "
-"konfigurasi dari hasil pencarian item konfigurasi pada antarmuka pelanggan."
+msgstr "Menentukan atribut item konfigurasi default untuk pengurutan item konfigurasi dari hasil pencarian item konfigurasi pada antarmuka pelanggan."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Menentukan atribut item konfigurasi default untuk pengurutan item "
-"konfigurasi dari hasil pencarian item konfigurasi operasi ini."
+msgstr "Menentukan atribut item konfigurasi default untuk pengurutan item konfigurasi dari hasil pencarian item konfigurasi operasi ini."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Menentukan urutan item konfigurasi default dalam hasil pencarian item "
-"konfigurasi pada antarmuka agen. Atas: tertua di atas. Turun: terbaru di "
-"atas."
+msgstr "Menentukan urutan item konfigurasi default dalam hasil pencarian item konfigurasi pada antarmuka agen. Atas: tertua di atas. Turun: terbaru di atas."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Menentukan urutan item konfigurasi default dalam hasil pencarian item "
-"konfigurasi pada antarmuka pelanggan. Atas: tertua di atas. Turun: terbaru "
-"di atas."
+msgstr "Menentukan urutan item konfigurasi default dalam hasil pencarian item konfigurasi pada antarmuka pelanggan. Atas: tertua di atas. Turun: terbaru di atas."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Menentukan urutan item konfigurasi default dalam hasil pencarian item "
-"konfigurasi dari operasi ini. Atas: tertua di atas. Turun: terbaru di atas."
+msgstr "Menentukan urutan item konfigurasi default dalam hasil pencarian item konfigurasi dari operasi ini. Atas: tertua di atas. Turun: terbaru di atas."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Menentukan kolom CI yang ditampilkan secara default dalam ikhtisar item "
-"konfigurasi tergantung pada kelas CI. Setiap entri harus terdiri dari nama "
-"kelas dan larik bidang yang tersedia untuk kelas yang sesuai. Entri bidang "
-"dinamis harus sesuai dengan skema DynamicField_FieldName."
+msgstr "Menentukan kolom CI yang ditampilkan secara default dalam ikhtisar item konfigurasi tergantung pada kelas CI. Setiap entri harus terdiri dari nama kelas dan larik bidang yang tersedia untuk kelas yang sesuai. Entri bidang dinamis harus sesuai dengan skema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1568,32 +1446,11 @@ msgstr "Menentukan kedalaman relasi default yang akan ditampilkan."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Menentukan atribut pencarian item konfigurasi yang ditampilkan secara "
-"default untuk layar pencarian item konfigurasi."
+msgstr "Menentukan atribut pencarian item konfigurasi yang ditampilkan secara default untuk layar pencarian item konfigurasi."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Menentukan atribut pencarian item konfigurasi yang ditampilkan secara "
-"default untuk layar pencarian item konfigurasi. Contoh: \"Key\" harus "
-"memiliki nama Bidang Dinamis dalam hal ini 'X', \"Content\" harus memiliki "
-"nilai Bidang Dinamis tergantung pada jenis Bidang Dinamis, Teks: 'teks', "
-"Dropdown: '1', Tanggal/Waktu: 'Search_DynamicField_XTimeSlotStartYear = 1974;"
-" Search_DynamicField_XTimeSlotStartMonth = 01; "
-"Search_DynamicField_XTimeSlotStartDay = 26; "
-"Search_DynamicField_XTimeSlotStartHour = 00; "
-"Search_DynamicField_XTimeSlotStartMinute = 00; "
-"Search_DynamicField_XTimeSlotStartSecond = 00; "
-"Search_DynamicField_XTimeSlotStopYear = 2013; "
-"Search_DynamicField_XTimeSlotStopMonth = 01; "
-"Search_DynamicField_XTimeSlotStopDay = 26; "
-"Search_DynamicField_XTimeSlotStopHour = 23; "
-"Search_DynamicField_XTimeSlotStopMinute = 59; "
-"Search_DynamicField_XTimeSlotStopSecond = 59;' dan atau "
-"'Search_DynamicField_XTimePointFormat = minggu; "
-"Search_DynamicField_XTimePointStart = Sebelum; "
-"Search_DynamicField_XTimePointValue = 7';."
+msgstr "Menentukan atribut pencarian item konfigurasi yang ditampilkan secara default untuk layar pencarian item konfigurasi. Contoh: \"Key\" harus memiliki nama Bidang Dinamis dalam hal ini 'X', \"Content\" harus memiliki nilai Bidang Dinamis tergantung pada jenis Bidang Dinamis, Teks: 'teks', Dropdown: '1', Tanggal/Waktu: 'Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth = 01; Search_DynamicField_XTimeSlotStartDay = 26; Search_DynamicField_XTimeSlotStartHour = 00; Search_DynamicField_XTimeSlotStartMinute = 00; Search_DynamicField_XTimeSlotStartSecond = 00; Search_DynamicField_XTimeSlotStopYear = 2013; Search_DynamicField_XTimeSlotStopMonth = 01; Search_DynamicField_XTimeSlotStopDay = 26; Search_DynamicField_XTimeSlotStopHour = 23; Search_DynamicField_XTimeSlotStopMinute = 59; Search_DynamicField_XTimeSlotStopSecond = 59;' dan atau 'Search_DynamicField_XTimePointFormat = minggu; Search_DynamicField_XTimePointStart = Sebelum; Search_DynamicField_XTimePointValue = 7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1605,21 +1462,15 @@ msgstr "Menentukan batas pencarian untuk layar CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Mendefinisikan item mana yang tersedia untuk 'Tindakan' di tingkat ketiga "
-"dari struktur ACL Item Konfigurasi ITSM."
+msgstr "Mendefinisikan item mana yang tersedia untuk 'Tindakan' di tingkat ketiga dari struktur ACL Item Konfigurasi ITSM."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Mendefinisikan item mana yang tersedia di tingkat pertama struktur ACL Item "
-"Konfigurasi ITSM."
+msgstr "Mendefinisikan item mana yang tersedia di tingkat pertama struktur ACL Item Konfigurasi ITSM."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Mendefinisikan item mana yang tersedia di tingkat kedua dari struktur ACL "
-"Item Konfigurasi ITSM."
+msgstr "Mendefinisikan item mana yang tersedia di tingkat kedua dari struktur ACL Item Konfigurasi ITSM."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1635,64 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Modul peristiwa bidang dinamis yang menandai definisi item konfigurasi "
-"sebagai tidak sinkron, jika mengandung perubahan bidang dinamis."
+msgstr "Modul peristiwa bidang dinamis yang menandai definisi item konfigurasi sebagai tidak sinkron, jika mengandung perubahan bidang dinamis."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Bidang dinamis yang ditampilkan di layar bidang ITSM tambahan pada antarmuka "
-"agen."
+msgstr "Bidang dinamis yang ditampilkan di layar bidang ITSM tambahan pada antarmuka agen."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Bidang dinamis yang ditampilkan di layar ikhtisar item konfigurasi pada "
-"antarmuka pelanggan."
+msgstr "Bidang dinamis yang ditampilkan di layar ikhtisar item konfigurasi pada antarmuka pelanggan."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Bidang dinamis yang ditampilkan di layar pencarian item konfigurasi pada "
-"antarmuka agen."
+msgstr "Bidang dinamis yang ditampilkan di layar pencarian item konfigurasi pada antarmuka agen."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Mengaktifkan/menonaktifkan fungsionalitas untuk memeriksa item konfigurasi "
-"ITSM untuk nama yang unik. Sebelum mengaktifkan opsi ini, Anda harus "
-"memeriksa sistem Anda untuk item konfigurasi yang sudah ada dengan nama "
-"ganda. Anda dapat melakukan ini dengan perintah konsol "
-"Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Mengaktifkan/menonaktifkan fungsionalitas untuk memeriksa item konfigurasi ITSM untuk nama yang unik. Sebelum mengaktifkan opsi ini, Anda harus memeriksa sistem Anda untuk item konfigurasi yang sudah ada dengan nama ganda. Anda dapat melakukan ini dengan perintah konsol Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Bidang indeks item konfigurasi, digunakan untuk pencarian teks lengkap. "
-"Bidang juga disimpan, tetapi tidak wajib untuk fungsionalitas keseluruhan. "
-"Penyertaan lampiran dapat dinonaktifkan dengan mengatur entri ke 0 atau "
-"menghapusnya."
+msgstr "Bidang indeks item konfigurasi, digunakan untuk pencarian teks lengkap. Bidang juga disimpan, tetapi tidak wajib untuk fungsionalitas keseluruhan. Penyertaan lampiran dapat dinonaktifkan dengan mengatur entri ke 0 atau menghapusnya."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Bidang yang disimpan dalam indeks item konfigurasi yang digunakan untuk hal-"
-"hal lain selain pencarian teks lengkap. Untuk fungsionalitas yang lengkap, "
-"semua bidang wajib diisi."
+msgstr "Bidang yang disimpan dalam indeks item konfigurasi yang digunakan untuk hal-hal lain selain pencarian teks lengkap. Untuk fungsionalitas yang lengkap, semua bidang wajib diisi."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Untuk setiap layanan web (key), sebuah larik kelas (value) dapat "
-"didefinisikan di mana impor dibatasi. Untuk semua kelas yang dipilih, atau "
-"semua kelas yang ada, atribut pengenal harus dipilih dalam konfigurasi "
-"pemanggil."
+msgstr "Untuk setiap layanan web (key), sebuah larik kelas (value) dapat didefinisikan di mana impor dibatasi. Untuk semua kelas yang dipilih, atau semua kelas yang ada, atribut pengenal harus dipilih dalam konfigurasi pemanggil."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"Registrasi modul GenericInterface untuk lapisan pemanggil ConfigItemFetch."
+msgstr "Registrasi modul GenericInterface untuk lapisan pemanggil ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1708,21 +1534,15 @@ msgstr "StatusInsiden"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Termasuk status penerapan dalam pencarian item konfigurasi pada antarmuka "
-"pelanggan."
+msgstr "Termasuk status penerapan dalam pencarian item konfigurasi pada antarmuka pelanggan."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Termasuk status insiden dalam pencarian item konfigurasi pada antarmuka "
-"pelanggan."
+msgstr "Termasuk status insiden dalam pencarian item konfigurasi pada antarmuka pelanggan."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Jumlah maksimum item konfigurasi yang akan ditampilkan dalam hasil operasi "
-"ini."
+msgstr "Jumlah maksimum item konfigurasi yang akan ditampilkan dalam hasil operasi ini."
 
 #. SysConfig
 msgid "Name Module"
@@ -1734,104 +1554,67 @@ msgstr "Modul Angka"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Jumlah item konfigurasi yang akan ditampilkan di setiap halaman hasil "
-"pencarian di antarmuka agen."
+msgstr "Jumlah item konfigurasi yang akan ditampilkan di setiap halaman hasil pencarian di antarmuka agen."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Jumlah item konfigurasi yang akan ditampilkan di setiap halaman hasil "
-"pencarian di antarmuka pelanggan."
+msgstr "Jumlah item konfigurasi yang akan ditampilkan di setiap halaman hasil pencarian di antarmuka pelanggan."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Objek yang akan dicari, berapa banyak entri dan atribut mana yang akan "
-"ditampilkan. Atribut ConfigItem harus secara eksplisit disimpan melalui "
-"Elasticsearch."
+msgstr "Objek yang akan dicari, berapa banyak entri dan atribut mana yang akan ditampilkan. Atribut ConfigItem harus secara eksplisit disimpan melalui Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk kategori untuk kelas item konfigurasi di tampilan preferensi "
-"antarmuka agen."
+msgstr "Parameter untuk kategori untuk kelas item konfigurasi di tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parameter untuk filter kolom pada ikhtisar item konfigurasi kecil. Harap "
-"diperhatikan: mengatur 'Active' ke 0 hanya akan mencegah agen mengedit "
-"pengaturan grup ini dalam preferensi pribadi mereka, tetapi masih "
-"memungkinkan administrator untuk mengedit pengaturan atas nama pengguna "
-"lain. Gunakan 'PreferenceGroup' untuk mengontrol di area mana pengaturan ini "
-"harus ditampilkan di antarmuka pengguna."
+msgstr "Parameter untuk filter kolom pada ikhtisar item konfigurasi kecil. Harap diperhatikan: mengatur 'Active' ke 0 hanya akan mencegah agen mengedit pengaturan grup ini dalam preferensi pribadi mereka, tetapi masih memungkinkan administrator untuk mengedit pengaturan atas nama pengguna lain. Gunakan 'PreferenceGroup' untuk mengontrol di area mana pengaturan ini harus ditampilkan di antarmuka pengguna."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk modul nama untuk kelas item konfigurasi dalam tampilan "
-"preferensi antarmuka agen."
+msgstr "Parameter untuk modul nama untuk kelas item konfigurasi dalam tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk modul nomor untuk kelas item konfigurasi dalam tampilan "
-"preferensi antarmuka agen."
+msgstr "Parameter untuk modul nomor untuk kelas item konfigurasi dalam tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk modul string versi untuk kelas item konfigurasi dalam "
-"tampilan preferensi antarmuka agen."
+msgstr "Parameter untuk modul string versi untuk kelas item konfigurasi dalam tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk modul toolkit template string versi untuk kelas item "
-"konfigurasi di tampilan preferensi antarmuka agen."
+msgstr "Parameter untuk modul toolkit template string versi untuk kelas item konfigurasi di tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter untuk pemicu versi untuk kelas item konfigurasi dalam tampilan "
-"preferensi antarmuka agen."
+msgstr "Parameter untuk pemicu versi untuk kelas item konfigurasi dalam tampilan preferensi antarmuka agen."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Melakukan tindakan dikonfigurasi untuk setiap acara (sebagai Invoker) untuk "
-"setiap Layanan Web dikonfigurasi."
+msgstr "Melakukan tindakan dikonfigurasi untuk setiap acara (sebagai Invoker) untuk setiap Layanan Web dikonfigurasi."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Izin yang diperlukan untuk menggunakan tindakan lampiran item konfigurasi "
-"ITSM di antarmuka agen."
+msgstr "Izin yang diperlukan untuk menggunakan tindakan lampiran item konfigurasi ITSM di antarmuka agen."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Izin yang diperlukan untuk menggunakan layar pencarian item konfigurasi ITSM "
-"di antarmuka pelanggan."
+msgstr "Izin yang diperlukan untuk menggunakan layar pencarian item konfigurasi ITSM di antarmuka pelanggan."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Izin yang diperlukan untuk menggunakan layar tampilan pohon item konfigurasi "
-"ITSM di antarmuka agen."
+msgstr "Izin yang diperlukan untuk menggunakan layar tampilan pohon item konfigurasi ITSM di antarmuka agen."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Izin yang diperlukan untuk menggunakan layar item konfigurasi ITSM massal di "
-"antarmuka agen."
+msgstr "Izin yang diperlukan untuk menggunakan layar item konfigurasi ITSM massal di antarmuka agen."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Menampilkan tautan dalam menu untuk menampilkan tautan item konfigurasi "
-"sebagai Tampilan Pohon."
+msgstr "Menampilkan tautan dalam menu untuk menampilkan tautan item konfigurasi sebagai Tampilan Pohon."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -1855,11 +1638,7 @@ msgstr "Pemicu Versi"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Apakah eksekusi ConfigItemACL dapat dihindari dengan memeriksa "
-"ketergantungan bidang yang di-cache. Hal ini dapat meningkatkan waktu "
-"pemuatan formular, tetapi harus dinonaktifkan, jika ACLModules akan "
-"digunakan untuk ITSMConfigItem dan Form-ReturnTypes."
+msgstr "Apakah eksekusi ConfigItemACL dapat dihindari dengan memeriksa ketergantungan bidang yang di-cache. Hal ini dapat meningkatkan waktu pemuatan formular, tetapi harus dinonaktifkan, jika ACLModules akan digunakan untuk ITSMConfigItem dan Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1871,9 +1650,7 @@ msgstr "Data pemanggil umum"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Modul backend Invoker OTOBO ini akan dipanggil untuk menyiapkan data yang "
-"akan dikirim ke sistem remote , dan akan diproses data tanggapannya."
+msgstr "Modul backend Invoker OTOBO ini akan dipanggil untuk menyiapkan data yang akan dikirim ke sistem remote , dan akan diproses data tanggapannya."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1885,15 +1662,11 @@ msgstr "Pemetaan"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"Data dari Invoker dari OTOBO akan diproses oleh pemetaan ini , untuk "
-"mengubahnya dengan jenis data sistem remote yang diharapkan."
+msgstr "Data dari Invoker dari OTOBO akan diproses oleh pemetaan ini , untuk mengubahnya dengan jenis data sistem remote yang diharapkan."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Data respon akan diproses oleh pemetaan ini , untuk mengubahnya dengan jenis "
-"data Invoker dari OTOBO sesuai harapan.`"
+msgstr "Data respon akan diproses oleh pemetaan ini , untuk mengubahnya dengan jenis data Invoker dari OTOBO sesuai harapan.`"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1909,9 +1682,7 @@ msgstr "Tambahkan event"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Asynchronous ditangani oleh OTOBO Scheduler Daemon di latar belakang ( "
-"dianjurkan ) ."
+msgstr "Asynchronous ditangani oleh OTOBO Scheduler Daemon di latar belakang ( dianjurkan ) ."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1971,9 +1742,7 @@ msgstr "Bidang Dinamis Baru"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Apakah Anda ingin mendapatkan manfaat dari jenis bidang dinamis tambahan? "
-"Anda memiliki akses penuh ke jenis bidang berikut ini:"
+msgstr "Apakah Anda ingin mendapatkan manfaat dari jenis bidang dinamis tambahan? Anda memiliki akses penuh ke jenis bidang berikut ini:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1989,9 +1758,7 @@ msgstr "Kunci sumber eksternal"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"Ketika ditetapkan melalui sumber eksternal (misalnya layanan web atau impor/"
-"ekspor), nilainya akan ditafsirkan sebagai atribut ini."
+msgstr "Ketika ditetapkan melalui sumber eksternal (misalnya layanan web atau impor/ekspor), nilainya akan ditafsirkan sebagai atribut ini."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -2003,15 +1770,11 @@ msgstr "Pilih jenis tampilan"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
-"Struktur dasar tidak valid. Harap sediakan larik dengan data dalam format "
-"YAML."
+msgstr "Struktur dasar tidak valid. Harap sediakan larik dengan data dalam format YAML."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACL tidak dapat diimpor karena kesalahan yang tidak diketahui, silahkan cek "
-"OTOBO log untuk informasi lebih lanjut"
+msgstr "ACL tidak dapat diimpor karena kesalahan yang tidak diketahui, silahkan cek OTOBO log untuk informasi lebih lanjut"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2019,9 +1782,7 @@ msgstr "%s (salin) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"Nilai persentase kemajuan terjemahan minimal per bahasa, agar dapat "
-"digunakan untuk dokumentasi."
+msgstr "Nilai persentase kemajuan terjemahan minimal per bahasa, agar dapat digunakan untuk dokumentasi."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2041,8 +1802,7 @@ msgstr "Registrasi modul backend untuk modul pemeriksaan konflik file."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
-"Registrasi modul backend untuk fungsi mendefinisikan ulang modul pemeriksaan."
+msgstr "Registrasi modul backend untuk fungsi mendefinisikan ulang modul pemeriksaan."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
@@ -2098,43 +1858,19 @@ msgstr "Definisi awalan URL klon/push GIT."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Definisi Bidang Dinamis: Group => Grup dengan akses ke Bidang Dinamis; "
-"AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama "
-"Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name "
-"=> Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang "
-"Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), "
-"FilterRelease => Regex yang harus cocok dengan nama repositori untuk "
-"ditampilkan, FilterPackage => Regex yang harus cocok dengan nama paket untuk "
-"ditampilkan, FilterBranch => Regex yang harus cocok dengan nama cabang untuk "
-"ditampilkan, FilterRelease => Regex yang harus cocok dengan string versi "
-"rilis untuk ditampilkan."
+msgstr "Definisi Bidang Dinamis: Group => Grup dengan akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), FilterRelease => Regex yang harus cocok dengan nama repositori untuk ditampilkan, FilterPackage => Regex yang harus cocok dengan nama paket untuk ditampilkan, FilterBranch => Regex yang harus cocok dengan nama cabang untuk ditampilkan, FilterRelease => Regex yang harus cocok dengan string versi rilis untuk ditampilkan."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Definisi Bidang Dinamis: Group => Grup dengan akses ke Bidang Dinamis; "
-"AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama "
-"Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name "
-"=> Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang "
-"Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), "
-"FilterRepositori => Regex yang nama repositori harus sesuai untuk "
-"ditampilkan, FilterPaket => Regex yang nama paket harus sesuai untuk "
-"ditampilkan, FilterCabang => Regex yang nama cabang harus sesuai untuk "
-"ditampilkan, FilterRilis => Regex yang string versi rilis harus sesuai untuk "
-"ditampilkan."
+msgstr "Definisi Bidang Dinamis: Group => Grup dengan akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis harus sesuai untuk ditampilkan."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
-"Definisi jumlah MD5 eksternal (kunci => MD5, Nilai => Vendor, NamaPaket, "
-"Versi, Tanggal)."
+msgstr "Definisi jumlah MD5 eksternal (kunci => MD5, Nilai => Vendor, NamaPaket, Versi, Tanggal)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
-"Definisi pemetaan antara permintaan repositori publik dan repositori "
-"internal OPMS."
+msgstr "Definisi pemetaan antara permintaan repositori publik dan repositori internal OPMS."
 
 #. SysConfig
 msgid "Definition of package states."
@@ -2146,8 +1882,7 @@ msgstr "Definisi paket OPMS yang diganti namanya."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
-"Direktori, yang digunakan oleh Git untuk menyimpan repositori dalam cache."
+msgstr "Direktori, yang digunakan oleh Git untuk menyimpan repositori dalam cache."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
@@ -2163,9 +1898,7 @@ msgstr "Menonaktifkan repositori online."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
-"Jangan mencatat hasil otorisasi koneksi git ssh untuk pengguna ini. Berguna "
-"untuk hal-hal otomatis."
+msgstr "Jangan mencatat hasil otorisasi koneksi git ssh untuk pengguna ini. Berguna untuk hal-hal otomatis."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2189,27 +1922,19 @@ msgstr "Registrasi modul frontend untuk objek OPMS di antarmuka agen."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
-"Registrasi modul frontend untuk objek PublicOPMSRepository di antarmuka "
-"publik."
+msgstr "Registrasi modul frontend untuk objek PublicOPMSRepository di antarmuka publik."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
-"Registrasi modul frontend untuk objek PublicOPMSRepositoryLookup di "
-"antarmuka publik."
+msgstr "Registrasi modul frontend untuk objek PublicOPMSRepositoryLookup di antarmuka publik."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
-"Registrasi modul frontend untuk objek PublicOPMSTestBuild di antarmuka "
-"publik."
+msgstr "Registrasi modul frontend untuk objek PublicOPMSTestBuild di antarmuka publik."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
-"Registrasi modul frontend untuk objek PublicPackageVerification di antarmuka "
-"publik."
+msgstr "Registrasi modul frontend untuk objek PublicPackageVerification di antarmuka publik."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2221,9 +1946,7 @@ msgstr "Pendaftaran Penulis GIT."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Buatlah kait komentar HTML untuk blok yang ditentukan sehingga filter dapat "
-"menggunakannya."
+msgstr "Buatlah kait komentar HTML untuk blok yang ditentukan sehingga filter dapat menggunakannya."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2251,21 +1974,15 @@ msgstr "Grup, yang anggotanya memiliki izin admin repositori di OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
-"Grup, yang anggotanya akan melihat informasi hasil tes CI di layar OPMS."
+msgstr "Grup, yang anggotanya akan melihat informasi hasil tes CI di layar OPMS."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"Grup yang harus diautentikasi oleh pengguna (dengan login dan kata sandi "
-"pengguna) harus menjadi anggota untuk membuat paket pengujian melalui "
-"antarmuka publik."
+msgstr "Grup yang harus diautentikasi oleh pengguna (dengan login dan kata sandi pengguna) harus menjadi anggota untuk membuat paket pengujian melalui antarmuka publik."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
-"Grup yang akan diatur selama proses pembuatan proyek git saat menambahkan "
-"repositori OPMS."
+msgstr "Grup yang akan diatur selama proses pembuatan proyek git saat menambahkan repositori OPMS."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2273,9 +1990,7 @@ msgstr "Mengelola bidang dinamis di layar."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
-"Kelola kunci SSH publik Anda untuk akses Git di sini. Pastikan untuk "
-"menyimpan preferensi ini saat Anda menambahkan kunci baru."
+msgstr "Kelola kunci SSH publik Anda untuk akses Git di sini. Pastikan untuk menyimpan preferensi ini saat Anda menambahkan kunci baru."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2299,9 +2014,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
-"Hanya pengguna yang memiliki izin rw di salah satu grup ini yang dapat "
-"mengakses git."
+msgstr "Hanya pengguna yang memiliki izin rw di salah satu grup ini yang dapat mengakses git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2313,45 +2026,15 @@ msgstr "Parameter untuk halaman di layar BranchView."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pra-Pendefinisian Bidang Dinamis 'GITProjectName': Group => Grup dengan "
-"akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); "
-"InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi "
-"widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; "
-"Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = "
-"dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama "
-"repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama "
-"paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang "
-"harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis "
-"harus sesuai untuk ditampilkan."
+msgstr "Pra-Pendefinisian Bidang Dinamis 'GITProjectName': Group => Grup dengan akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis harus sesuai untuk ditampilkan."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pra-Pendefinisian Bidang Dinamis 'GITRepositoryName': Group => Grup dengan "
-"akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); "
-"InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi "
-"widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; "
-"Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = "
-"dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama "
-"repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama "
-"paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang "
-"harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis "
-"harus sesuai untuk ditampilkan."
+msgstr "Pra-Pendefinisian Bidang Dinamis 'GITRepositoryName': Group => Grup dengan akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis harus sesuai untuk ditampilkan."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pra-Definisi Bidang Dinamis 'PackageDeprecated': Group => Grup dengan akses "
-"ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); "
-"InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi "
-"widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; "
-"Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = "
-"dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama "
-"repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama "
-"paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang "
-"harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis "
-"harus sesuai untuk ditampilkan."
+msgstr "Pra-Definisi Bidang Dinamis 'PackageDeprecated': Group => Grup dengan akses ke Bidang Dinamis; AlwaysVisible => Bidang dapat dihapus (0|1); InformationAreaName => Nama Widget; InformationAreaSize => Ukuran dan posisi widget (Besar|Kecil); Name => Nama Bidang Dinamis yang harus digunakan; Prioritas => Urutan Bidang Dinamis; State => Status Bidang (0 = dinonaktifkan, 1 = aktif, 2 = wajib), FilterRepositori => Regex yang nama repositori harus sesuai untuk ditampilkan, FilterPaket => Regex yang nama paket harus sesuai untuk ditampilkan, FilterCabang => Regex yang nama cabang harus sesuai untuk ditampilkan, FilterRilis => Regex yang string versi rilis harus sesuai untuk ditampilkan."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2375,21 +2058,15 @@ msgstr "Mengatur direktori beranda untuk repositori git."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
-"Mengatur jalur untuk lokasi skrip penerimaan postingan BugzillaAddComment."
+msgstr "Mengatur jalur untuk lokasi skrip penerimaan postingan BugzillaAddComment."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Mengatur jalur untuk lokasi skrip OTRSCodePolicy. Disarankan untuk memiliki "
-"klon terpisah dari modul OTRSCodePolicy yang diperbarui melalui cron."
+msgstr "Mengatur jalur untuk lokasi skrip OTRSCodePolicy. Disarankan untuk memiliki klon terpisah dari modul OTRSCodePolicy yang diperbarui melalui cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Mengatur jalur untuk lokasi skrip pra-penerimaan OTRSCodePolicy. Disarankan "
-"untuk memiliki klon terpisah dari modul OTRSCodePolicy yang diperbarui "
-"melalui cron."
+msgstr "Mengatur jalur untuk lokasi skrip pra-penerimaan OTRSCodePolicy. Disarankan untuk memiliki klon terpisah dari modul OTRSCodePolicy yang diperbarui melalui cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2397,9 +2074,7 @@ msgstr "Tampilkan komit terbaru di repositori git."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"Menampilkan tautan di menu untuk membuat unit test dari tiket yang sedang "
-"dikerjakan."
+msgstr "Menampilkan tautan di menu untuk membuat unit test dari tiket yang sedang dikerjakan."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2431,73 +2106,47 @@ msgstr "Jalur ke folder tema, yang berisi tema sphinx."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
-"Konfigurasi ini menentukan semua layar yang memungkinkan untuk mengaktifkan "
-"atau menonaktifkan kolom default."
+msgstr "Konfigurasi ini menentukan semua layar yang memungkinkan untuk mengaktifkan atau menonaktifkan kolom default."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
-"Konfigurasi ini menentukan semua layar yang memungkinkan untuk mengaktifkan "
-"atau menonaktifkan bidang dinamis."
+msgstr "Konfigurasi ini menentukan semua layar yang memungkinkan untuk mengaktifkan atau menonaktifkan bidang dinamis."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
-"Konfigurasi ini menentukan apakah hanya bidang dinamis yang valid atau semua "
-"(tidak valid) yang harus ditampilkan."
+msgstr "Konfigurasi ini menentukan apakah hanya bidang dinamis yang valid atau semua (tidak valid) yang harus ditampilkan."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"Konfigurasi ini menentukan apakah verifikasi paket OTRS harus aktif atau "
-"dinonaktifkan. Jika dinonaktifkan, semua paket akan ditampilkan sebagai "
-"terverifikasi. Tetap disarankan untuk hanya menggunakan paket yang "
-"terverifikasi."
+msgstr "Konfigurasi ini menentukan apakah verifikasi paket OTRS harus aktif atau dinonaktifkan. Jika dinonaktifkan, semua paket akan ditampilkan sebagai terverifikasi. Tetap disarankan untuk hanya menggunakan paket yang terverifikasi."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"Konfigurasi ini mendefinisikan URL ke layanan OTRS CloudService Proxy. "
-"Awalan http atau https akan ditambahkan, tergantung pada pilihan SysConfig "
-"'Znuny4OTRSRepoType'."
+msgstr "Konfigurasi ini mendefinisikan URL ke layanan OTRS CloudService Proxy. Awalan http atau https akan ditambahkan, tergantung pada pilihan SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"Konfigurasi ini mendaftarkan Output post-filter untuk memperpanjang "
-"verifikasi paket."
+msgstr "Konfigurasi ini mendaftarkan Output post-filter untuk memperpanjang verifikasi paket."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"Konfigurasi ini mendaftarkan modul OutputFilter yang menghapus iklan OTRS "
-"Business Solution TM."
+msgstr "Konfigurasi ini mendaftarkan modul OutputFilter yang menghapus iklan OTRS Business Solution TM."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"Konfigurasi ini mendaftarkan filter keluaran untuk menyembunyikan pilihan "
-"repositori online di manajer paket."
+msgstr "Konfigurasi ini mendaftarkan filter keluaran untuk menyembunyikan pilihan repositori online di manajer paket."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Merapikan rilis yang belum diproses yang tidak lulus uji pomules untuk waktu "
-"yang lama."
+msgstr "Merapikan rilis yang belum diproses yang tidak lulus uji pomules untuk waktu yang lama."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"Pengguna yang memiliki izin rw di salah satu grup ini diizinkan untuk "
-"melakukan push paksa 'git push --force'."
+msgstr "Pengguna yang memiliki izin rw di salah satu grup ini diizinkan untuk melakukan push paksa 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"Pengguna yang memiliki izin rw di salah satu grup ini diizinkan untuk "
-"mengelola proyek. Selain itu, para anggota memiliki izin administrasi ke "
-"manajemen git."
+msgstr "Pengguna yang memiliki izin rw di salah satu grup ini diizinkan untuk mengelola proyek. Selain itu, para anggota memiliki izin administrasi ke manajemen git."
 
 #. ITSM class bundles
 msgid "1"
@@ -3554,3 +3203,16 @@ msgstr "Telepon VoIP"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Kamera web"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

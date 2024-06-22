@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -23,40 +23,17 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # Template: AdminGenericInterfaceInvokerConfigItem
-    $Self->{Translation}->{'General invoker data'} = '';
-    $Self->{Translation}->{'This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.'} =
-        '';
-    $Self->{Translation}->{'Settings for outgoing request data'} = '';
-    $Self->{Translation}->{'Mapping'} = '';
-    $Self->{Translation}->{'The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects.'} =
-        '';
-    $Self->{Translation}->{'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects.'} =
-        '';
-    $Self->{Translation}->{'Settings for incoming response data'} = '';
-    $Self->{Translation}->{'Event data'} = '';
-    $Self->{Translation}->{'Add Event'} = '';
-    $Self->{Translation}->{'Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended).'} =
-        '';
-
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Hantering av konfigurationsenheter';
     $Self->{Translation}->{'Change class definition'} = 'Ändra klassdefinition';
-    $Self->{Translation}->{'Change role definition'} = '';
-    $Self->{Translation}->{'Ready2Import Class Bundles'} = '';
+    $Self->{Translation}->{'Change role definition'} = 'Ändra rolldefinition';
+    $Self->{Translation}->{'Ready2Import Class Bundles'} = 'Ready2Import-klassbuntar';
     $Self->{Translation}->{'Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required.'} =
-        '';
-    $Self->{Translation}->{'Update existing entities'} = '';
-    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = '';
-    $Self->{Translation}->{'Config Item Class'} = '';
-    $Self->{Translation}->{'Config Item Role'} = '';
-    $Self->{Translation}->{'Definition'} = 'Definition';
-    $Self->{Translation}->{'Change'} = 'Ändra';
-    $Self->{Translation}->{'Auto Indent Code'} = '';
-    $Self->{Translation}->{'Comment/Uncomment Code'} = '';
-    $Self->{Translation}->{'Search & Replace'} = '';
-    $Self->{Translation}->{'Select All'} = '';
-    $Self->{Translation}->{'Full Screen'} = '';
+        'Här kan du importera Ready2Import-klassbuntar som visar våra vanligaste konfigurationsobjekt. Observera att viss ytterligare konfiguration kan krävas.';
+    $Self->{Translation}->{'Update existing entities'} = 'Uppdatera befintliga enheter';
+    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = 'Importera Ready2Adopt-klassbuntar';
+    $Self->{Translation}->{'Config Item Class'} = 'Klass för konfigurationsobjekt';
+    $Self->{Translation}->{'Config Item Role'} = 'Konfig Artikel Roll';
 
     # Template: AgentITSMConfigItemAdd
     $Self->{Translation}->{'Config Item'} = 'Konfigurationsenhet';
@@ -65,29 +42,29 @@ sub Data {
     $Self->{Translation}->{'Class'} = 'Klass';
 
     # Template: AgentITSMConfigItemBulk
-    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = '';
+    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = 'ITSM ConfigItem Massåtgärd';
     $Self->{Translation}->{'Deployment state'} = 'Driftläge';
     $Self->{Translation}->{'Incident state'} = 'Incidentläge';
     $Self->{Translation}->{'Link to another'} = 'Länka till annan';
-    $Self->{Translation}->{'Invalid Configuration Item number!'} = '';
-    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = '';
+    $Self->{Translation}->{'Invalid Configuration Item number!'} = 'Ogiltigt nummer på konfigurationsobjektet!';
+    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = 'Numret på ett annat Configuration Item att länka till.';
 
     # Template: AgentITSMConfigItemDelete
-    $Self->{Translation}->{'Do you really want to delete this config item?'} = '';
+    $Self->{Translation}->{'Do you really want to delete this config item?'} = 'Vill du verkligen ta bort det här konfigurationsobjektet?';
 
     # Template: AgentITSMConfigItemEdit
     $Self->{Translation}->{'The name of this config item'} = 'Namnet på denna konfigurationsenhet';
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Namnet används redan i konfigurationsenheter med förljande nummer: %s';
     $Self->{Translation}->{'Version Number'} = 'Versionsnummer';
-    $Self->{Translation}->{'The version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = '';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
-        '';
+        'Versionsnumret används redan av ConfigItems med följande nummer: %s';
     $Self->{Translation}->{'Deployment State'} = 'Driftläge';
     $Self->{Translation}->{'Incident State'} = 'Incidentläge';
 
     # Template: AgentITSMConfigItemHistory
-    $Self->{Translation}->{'History of Config Item: %s'} = '';
+    $Self->{Translation}->{'History of Config Item: %s'} = 'Historik för konfigureringsobjekt: %s';
     $Self->{Translation}->{'History Content'} = 'Historikinnehåll';
     $Self->{Translation}->{'Createtime'} = 'Tidpunkt för skapande';
     $Self->{Translation}->{'Zoom view'} = 'Fokusvy';
@@ -96,18 +73,18 @@ sub Data {
     $Self->{Translation}->{'Config Items per page'} = 'Konfigurationsenheter per sida';
 
     # Template: AgentITSMConfigItemOverviewSmall
-    $Self->{Translation}->{'No config item data found.'} = '';
-    $Self->{Translation}->{'Select this config item'} = '';
+    $Self->{Translation}->{'No config item data found.'} = 'Inga data för konfigurationsobjekt hittades.';
+    $Self->{Translation}->{'Select this config item'} = 'Välj detta konfigurationsobjekt';
 
     # Template: AgentITSMConfigItemSearch
     $Self->{Translation}->{'Run Search'} = 'Utför sökning';
     $Self->{Translation}->{'Also search in previous versions?'} = 'Sök även i tidigare versioner?';
 
     # Template: AgentITSMConfigItemTreeView
-    $Self->{Translation}->{'TreeView for ConfigItem'} = '';
-    $Self->{Translation}->{'Depth Level'} = '';
-    $Self->{Translation}->{'Zoom In/Out'} = '';
-    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = '';
+    $Self->{Translation}->{'TreeView for ConfigItem'} = 'TreeView för ConfigItem';
+    $Self->{Translation}->{'Depth Level'} = 'Djupnivå';
+    $Self->{Translation}->{'Zoom In/Out'} = 'Zooma in/ut';
+    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = 'Max länknivå uppnådd för ConfigItem!';
 
     # Template: AgentITSMConfigItemZoom
     $Self->{Translation}->{'Configuration Item'} = 'Konfigurationsenhet';
@@ -118,107 +95,91 @@ sub Data {
     $Self->{Translation}->{'Last changed by'} = 'Senast ändrad av';
 
     # Template: CustomerITSMConfigItem
-    $Self->{Translation}->{'Your ConfigItems'} = '';
-    $Self->{Translation}->{'ConfigItems'} = '';
-    $Self->{Translation}->{'Sort'} = '';
+    $Self->{Translation}->{'Your ConfigItems'} = 'Dina ConfigItems';
 
     # Template: CustomerITSMConfigItemSearch
-    $Self->{Translation}->{'ConfigItem Search'} = '';
+    $Self->{Translation}->{'ConfigItem Search'} = 'ConfigItem Sök';
 
     # Template: AdminACL
-    $Self->{Translation}->{'Filter by valid state'} = '';
-    $Self->{Translation}->{'Include invalid ACLs'} = '';
-    $Self->{Translation}->{'Object Type'} = '';
-
-    # Template: AdminACLEdit
-    $Self->{Translation}->{'Check the official %sdocumentation%s.'} = '';
-
-    # Template: AdminDynamicField
-    $Self->{Translation}->{'Include invalid dynamic fields'} = '';
-    $Self->{Translation}->{'Filter field by object type'} = '';
-    $Self->{Translation}->{'Filter field by namespace'} = '';
-    $Self->{Translation}->{'New Dynamic Fields'} = '';
-    $Self->{Translation}->{'Would you like to benefit from additional dynamic field types? You have full access to the following field types:'} =
-        '';
-    $Self->{Translation}->{'Copy this field'} = '';
+    $Self->{Translation}->{'Object Type'} = 'Objekttyp';
 
     # JS Template: ClassImportConfirm
-    $Self->{Translation}->{'The following classes will be imported'} = '';
-    $Self->{Translation}->{'The following roles will be imported'} = '';
+    $Self->{Translation}->{'The following classes will be imported'} = 'Följande klasser kommer att importeras';
+    $Self->{Translation}->{'The following roles will be imported'} = 'Följande roller kommer att importeras';
     $Self->{Translation}->{'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.'} =
-        '';
-    $Self->{Translation}->{'Do you want to proceed?'} = '';
+        'Observera att även motsvarande dynamiska fält och GeneralCatalog-klasser kommer att skapas och att det inte sker någon automatisk borttagning.';
+    $Self->{Translation}->{'Do you want to proceed?'} = 'Vill du fortsätta?';
 
     # Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-    $Self->{Translation}->{'Need ExampleClasses!'} = '';
-    $Self->{Translation}->{'Definition is no valid YAML hash.'} = '';
+    $Self->{Translation}->{'Need ExampleClasses!'} = 'Behöver exempelklasser!';
+    $Self->{Translation}->{'Definition is no valid YAML hash.'} = 'Definitionen är ingen giltig YAML-hash.';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = '';
+    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = 'Översikt: ITSM KonfigItem';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-    $Self->{Translation}->{'No ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = '';
+    $Self->{Translation}->{'No ConfigItemID is given!'} = 'Inget ConfigItemID anges!';
+    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = 'Du behöver minst ett valt Configuration Item!';
     $Self->{Translation}->{'You don\'t have write access to this configuration item: %s.'} =
-        '';
-    $Self->{Translation}->{'No definition was defined for class %s!'} = '';
+        'Du har inte skrivbehörighet till det här konfigurationsobjektet: %s.';
+    $Self->{Translation}->{'No definition was defined for class %s!'} = 'Ingen definition har definierats för klassen %s!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
-    $Self->{Translation}->{'Config item "%s" not found in database!'} = '';
-    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = '';
-    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = '';
+    $Self->{Translation}->{'Config item "%s" not found in database!'} = 'Konfigobjektet "%s" hittades inte i databasen!';
+    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = 'Det gick inte att ta bort konfigurationsobjektet ID %s!';
+    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = 'Ingen version hittades för ConfigItemID %s!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
-    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = '';
-    $Self->{Translation}->{'No access is given!'} = '';
+    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = 'Inget ConfigItemID, DuplicateID eller ClassID anges!';
+    $Self->{Translation}->{'No access is given!'} = 'Ingen åtkomst ges!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
-    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = '';
-    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = '';
-    $Self->{Translation}->{'New version (ID=%s)'} = '';
-    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) added'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = '';
-    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = '';
-    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = '';
-    $Self->{Translation}->{'Version %s deleted'} = '';
+    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = 'Kan inte visa historik, inget ConfigItemID anges!';
+    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = 'Kan inte visa historik, inga åtkomsträttigheter ges!';
+    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = 'Ny konfigurationspost (ID=%s)';
+    $Self->{Translation}->{'New version (ID=%s)'} = 'Ny version (ID=%s)';
+    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = 'Deploymentstatus uppdaterad (ny=%s, gammal=%s)';
+    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = 'Incidentstatus uppdaterad (ny=%s, gammal=%s)';
+    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = 'KonfigItem (ID=%s) borttagen';
+    $Self->{Translation}->{'Link to %s (type=%s) added'} = 'Länk till %s (type=%s) tillagd';
+    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = 'Länk till %s (type=%s) borttagen';
+    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = 'Uppdatering av ConfigItem-definitionen (ID=%s)';
+    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Namn uppdaterat (nytt=%s, gammalt=%s)';
+    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Attribut %s uppdaterat från "%s" till "%s"';
+    $Self->{Translation}->{'Version %s deleted'} = 'Version %s raderad';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = '';
-    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = '';
+    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Inget ConfigItemID eller VersionID har angetts!';
+    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = 'Kan inte visa konfigurationsobjekt, inga åtkomsträttigheter ges!';
+    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s hittades inte i databasen!';
     $Self->{Translation}->{'ConfigItem'} = 'Konfigurationsenhet';
-    $Self->{Translation}->{'printed by %s at %s'} = '';
+    $Self->{Translation}->{'printed by %s at %s'} = 'utskriven av %s vid %s';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
-    $Self->{Translation}->{'Invalid ClassID!'} = '';
-    $Self->{Translation}->{'No ClassID is given!'} = '';
-    $Self->{Translation}->{'No access rights for this class given!'} = '';
+    $Self->{Translation}->{'Invalid ClassID!'} = 'Ogiltigt klass-ID!';
+    $Self->{Translation}->{'No ClassID is given!'} = 'Inget klassID anges!';
+    $Self->{Translation}->{'No access rights for this class given!'} = 'Inga åtkomsträttigheter för denna klass ges!';
     $Self->{Translation}->{'No Result!'} = 'Inget resultat!';
-    $Self->{Translation}->{'Config Item Search Results'} = '';
+    $Self->{Translation}->{'Config Item Search Results'} = 'Sökresultat för konfigurerade objekt';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
     $Self->{Translation}->{'Can\'t show item, no access rights for ConfigItem are given!'} =
-        '';
-    $Self->{Translation}->{'ConfigItem not found!'} = '';
-    $Self->{Translation}->{'No versions found!'} = '';
-    $Self->{Translation}->{'operational'} = '';
-    $Self->{Translation}->{'warning'} = '';
-    $Self->{Translation}->{'incident'} = '';
+        'Kan inte visa objektet, inga åtkomsträttigheter för ConfigItem har getts!';
+    $Self->{Translation}->{'ConfigItem not found!'} = 'KonfigItem hittades inte!';
+    $Self->{Translation}->{'No versions found!'} = 'Inga versioner hittades!';
+    $Self->{Translation}->{'operational'} = 'Operativ';
+    $Self->{Translation}->{'warning'} = 'varning';
+    $Self->{Translation}->{'incident'} = 'Händelse';
     $Self->{Translation}->{'The deployment state of this config item'} = 'Driftläge för konfigurationsenhet';
     $Self->{Translation}->{'The incident state of this config item'} = 'Incidentläge för konfigurationsenhet';
 
     # Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-    $Self->{Translation}->{'No permission'} = '';
-    $Self->{Translation}->{'Filter invalid!'} = '';
-    $Self->{Translation}->{'Search params invalid!'} = '';
+    $Self->{Translation}->{'No permission'} = 'Saknar rättigheter!';
+    $Self->{Translation}->{'Filter invalid!'} = 'Filter ogiltigt!';
+    $Self->{Translation}->{'Search params invalid!'} = 'Sökparametrar ogiltiga!';
 
     # Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-    $Self->{Translation}->{'Shown config items'} = '';
+    $Self->{Translation}->{'Shown config items'} = 'Visade konfigurationsobjekt';
     $Self->{Translation}->{'Deployment State Type'} = 'Driftlägestyper';
     $Self->{Translation}->{'Current Incident State Type'} = 'Nuvarande typ av incidentläge';
 
@@ -226,56 +187,43 @@ sub Data {
     $Self->{Translation}->{'Between'} = 'Mellan';
 
     # Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-    $Self->{Translation}->{'Class restrictions for the config item'} = '';
+    $Self->{Translation}->{'Class restrictions for the config item'} = 'Klassbegränsningar för konfigurationsobjektet';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
-        '';
-    $Self->{Translation}->{'Link type'} = '';
-    $Self->{Translation}->{'Select the link type.'} = '';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = '';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = '';
-    $Self->{Translation}->{'Link Direction'} = '';
+        'Välj en eller flera klasser för att begränsa valbara konfigurationsobjekt';
+    $Self->{Translation}->{'Link type'} = 'Typ av länk';
+    $Self->{Translation}->{'Select the link type.'} = 'Välj länktyp.';
+    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Framåt i tiden: Referencing (Source) -> Referenced (Target)';
+    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Bakåt i tiden: Refererad (Källa) -> Refererande (Mål)';
+    $Self->{Translation}->{'Link Direction'} = 'Länkens riktning';
     $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        '';
-    $Self->{Translation}->{'Dynamic (ConfigItem)'} = '';
-    $Self->{Translation}->{'Static (Version)'} = '';
-    $Self->{Translation}->{'Link Referencing Type'} = '';
+        'Det refererande objektet är det som innehåller det här dynamiska fältet, det refererade objektet är det som valts som värde för det dynamiska fältet.';
+    $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dynamisk (KonfigItem)';
+    $Self->{Translation}->{'Static (Version)'} = 'Statisk (version)';
+    $Self->{Translation}->{'Link Referencing Type'} = 'Typ av länkreferens';
     $Self->{Translation}->{'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'} =
-        '';
-    $Self->{Translation}->{'Attribute which will be searched on autocomplete'} = '';
-    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = '';
-    $Self->{Translation}->{'External-source key'} = '';
-    $Self->{Translation}->{'When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute.'} =
-        '';
-    $Self->{Translation}->{'Attribute which is displayed for values'} = '';
-    $Self->{Translation}->{'Select the type of display'} = '';
+        'Om denna länk gäller för ConfigItem eller den statiska versionen av det objekt som refereras till. Beräkningen av Current Incident State utförs endast på dynamiska länkar.';
+    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = 'Välj det attribut som konfigurationsobjekten ska sökas efter';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-    $Self->{Translation}->{'Base structure is not valid. Please provide an array with data in YAML format.'} =
-        '';
-    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = '';
+    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'Det krävs att YAML-strängen inleds med "---".';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-    $Self->{Translation}->{'Could not purge the table configitem_link.'} = '';
-    $Self->{Translation}->{'No relevant dynamic fields were found'} = '';
-    $Self->{Translation}->{'Could not insert into the table configitem_link'} = '';
-    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = '';
+    $Self->{Translation}->{'Could not purge the table configitem_link.'} = 'Det gick inte att rensa tabellen configitem_link.';
+    $Self->{Translation}->{'No relevant dynamic fields were found'} = 'Inga relevanta dynamiska fält hittades';
+    $Self->{Translation}->{'Could not insert into the table configitem_link'} = 'Det gick inte att infoga i tabellen configitem_link';
+    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = 'Infogade 0 rader i tabellen configitem_link';
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Max antal av ett element';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tomma fält anger att tidigare värden ska användas.';
     $Self->{Translation}->{'Skipped'} = 'Hoppade över';
 
-    # Perl Module: Kernel/Modules/AdminACL.pm
-    $Self->{Translation}->{'ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information'} =
-        '';
-    $Self->{Translation}->{'%s (copy) %s'} = '';
-
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
-    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = '';
+    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Fel vid synkronisering av definitionerna. Vänligen kontrollera loggen.';
     $Self->{Translation}->{'You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes.'} =
-        '';
+        'Du har ITSMConfigItem-definitioner som inte är synkroniserade. Vänligen distribuera dina ITSMConfigItem dynamiska fältändringar.';
 
-    # Database XML Definition: ITSMConfigurationManagement.sopm
+    # Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
     $Self->{Translation}->{'Expired'} = 'Löpt ut';
     $Self->{Translation}->{'Maintenance'} = 'Underhåll';
     $Self->{Translation}->{'Pilot'} = 'Pilot';
@@ -286,308 +234,291 @@ sub Data {
     $Self->{Translation}->{'Test/QA'} = 'Test/QA';
 
     # JS File: ITSM.Admin.ITSMConfigItem
-    $Self->{Translation}->{'Overview and Confirmation'} = '';
-    $Self->{Translation}->{'An error occurred during class import.'} = '';
-
-    # JS File: ITSM.Agent.ConfigItem.Zoom
-    $Self->{Translation}->{'Ok'} = 'Ok';
+    $Self->{Translation}->{'Overview and Confirmation'} = 'Översikt och bekräftelse';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'An error occurred during class import.'} = 'Ett fel inträffade under klassimporten.';
 
     # SysConfig
-    $Self->{Translation}->{'A precentage value of the minimal translation progress per language, to be usable for documentations.'} =
+    $Self->{Translation}->{'0 - Hidden'} = '0 - Dold';
+    $Self->{Translation}->{'1 - Shown'} = '1 - Visas';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i agentgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i kundgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Assigned CIs'} = 'Tilldelade CI';
+    $Self->{Translation}->{'CIs assigned to customer company'} = 'CI:s som tilldelats kundföretag';
+    $Self->{Translation}->{'CIs assigned to customer user'} = 'CI:er som tilldelats kundanvändare';
+    $Self->{Translation}->{'CMDB Settings'} = 'CMDB-inställningar';
+    $Self->{Translation}->{'Check for a unique name only within the same ConfigItem class (\'class\') or globally (\'global\'), which means every existing ConfigItem is taken into account when looking for duplicates.'} =
+        'Sök efter ett unikt namn endast inom samma ConfigItem-klass ("class") eller globalt ("global"), vilket innebär att varje befintligt ConfigItem tas med i beräkningen när man letar efter dubbletter.';
+    $Self->{Translation}->{'Choose a module to enforce a naming scheme.'} = 'Välj en modul för att genomdriva ett namngivningsschema.';
+    $Self->{Translation}->{'Choose a module to enforce a number scheme.'} = 'Välj en modul för att verkställa ett nummersystem.';
+    $Self->{Translation}->{'Choose a module to enforce a version string scheme.'} = 'Välj en modul för att genomdriva ett system med versionssträngar.';
+    $Self->{Translation}->{'Choose attributes to trigger the creation of a new version.'} = 'Välj attribut för att utlösa skapandet av en ny version.';
+    $Self->{Translation}->{'Choose categories to assign to this config item class.'} = 'Välj kategorier som ska tilldelas denna klass av konfigurationsobjekt.';
+    $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Kolumnfilter för ConfigItem-objekt för ConfigItem Overview.';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Kolumner som kan filtreras i översikten över konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Kolumner som kan filtreras i översikten över konfigurationsobjekt i kundgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
+    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '';
-    $Self->{Translation}->{'Access repos via http or https.'} = '';
-    $Self->{Translation}->{'Autoloading of Znuny4OTRSRepo extensions.'} = '';
-    $Self->{Translation}->{'Backend module registration for the config conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the file conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the function redefine check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the manual set module.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for BS ad removal.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for package manager output filter.'} =
-        '';
-    $Self->{Translation}->{'Branch View commit limit'} = '';
-    $Self->{Translation}->{'CodePolicy'} = '';
-    $Self->{Translation}->{'Commit limit per page for Branch view screen'} = '';
-    $Self->{Translation}->{'Create analysis file'} = '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket and sends to Znuny.'} =
-        '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket.'} = '';
-    $Self->{Translation}->{'Define private addon repos.'} = '';
-    $Self->{Translation}->{'Defines the filter that processes the HTML templates.'} = '';
-    $Self->{Translation}->{'Defines the test module for checking code policy.'} = '';
-    $Self->{Translation}->{'Definition of GIT clone/push URL Prefix.'} = '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date).'} =
-        '';
-    $Self->{Translation}->{'Definition of mappings between public repository requests and internal OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Definition of package states.'} = '';
-    $Self->{Translation}->{'Definition of renamed OPMS packages.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to cache repositories.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store temporary data.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store working copies.'} = '';
-    $Self->{Translation}->{'Disable online repositories.'} = '';
-    $Self->{Translation}->{'Do not log git ssh connection authorization results for these users. Useful for automated stuff.'} =
-        '';
-    $Self->{Translation}->{'Dynamic Fields Screens'} = '';
-    $Self->{Translation}->{'DynamicFieldScreen'} = '';
-    $Self->{Translation}->{'Export all available public keys to authorized_keys file.'} = '';
-    $Self->{Translation}->{'Export all relevant releases to ftp server.'} = '';
-    $Self->{Translation}->{'Frontend module registration for the OPMS object in the agent interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepository object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSTestBuild object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicPackageVerification object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the admin interface.'} = '';
-    $Self->{Translation}->{'GIT Author registration.'} = '';
-    $Self->{Translation}->{'Generate HTML comment hooks for the specified blocks so that filters can use them.'} =
-        '';
-    $Self->{Translation}->{'Generate documentations once per night.'} = '';
-    $Self->{Translation}->{'Git'} = '';
-    $Self->{Translation}->{'Git Management'} = '';
-    $Self->{Translation}->{'Git Repository'} = '';
-    $Self->{Translation}->{'Group, whose members have delete admin permissions in OPMS.'} = '';
-    $Self->{Translation}->{'Group, whose members have repository admin permissions in OPMS.'} =
-        '';
-    $Self->{Translation}->{'Group, whose members will see CI test result information in OPMS screens.'} =
-        '';
-    $Self->{Translation}->{'Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface.'} =
-        '';
-    $Self->{Translation}->{'Groups which will be set during git project creation processes while adding OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Manage dynamic field in screens.'} = '';
-    $Self->{Translation}->{'Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the added code lines.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the growth of code.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the number of git commits.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the removed code lines.'} = '';
-    $Self->{Translation}->{'OPMS'} = '';
-    $Self->{Translation}->{'Only users who have rw permissions in one of these groups may access git.'} =
-        '';
-    $Self->{Translation}->{'Option to set a package compatibility manually.'} = '';
-    $Self->{Translation}->{'Parameters for the pages in the BranchView screen.'} = '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITProjectName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITRepositoryName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'PackageDeprecated\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Recipients that will be informed by email in case of errors.'} =
-        '';
-    $Self->{Translation}->{'SSH Keys for Git Access'} = '';
-    $Self->{Translation}->{'Send analysis file'} = '';
-    $Self->{Translation}->{'Sets the git clone address to be used in repository listings.'} =
-        '';
-    $Self->{Translation}->{'Sets the home directory for git repositories.'} = '';
-    $Self->{Translation}->{'Sets the path for the BugzillaAddComment post receive script location.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Show latest commits in git repositories.'} = '';
-    $Self->{Translation}->{'Shows a link in the menu to go create a unit test from the current ticket.'} =
-        '';
-    $Self->{Translation}->{'Synchronize OPMS tables with a remote database.'} = '';
-    $Self->{Translation}->{'The minimum version of the sphinx library.'} = '';
-    $Self->{Translation}->{'The name of the sphinx theme to be used.'} = '';
-    $Self->{Translation}->{'The path to the OTRS CSS file (relative below the static path).'} =
-        '';
-    $Self->{Translation}->{'The path to the OTRS logo (relative below the static path).'} = '';
-    $Self->{Translation}->{'The path to the static folder, containing images and css files.'} =
-        '';
-    $Self->{Translation}->{'The path to the theme folder, containing the sphinx themes.'} = '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable default columns.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable dynamic fields.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if only valids or all (invalids) dynamic fields should be shown.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It\'s still recommended to use only verified packages.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig \'Znuny4OTRSRepoType\'.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers a Output post-filter to extend package verification.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an output filter to hide online repository selection in package manager.'} =
-        '';
-    $Self->{Translation}->{'Tidy unprocessed release that not passed test pomules checks for a long time.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to execute force pushes \'git push --force\'.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management.'} =
-        '';
-
-    # ITSM class bundles
-    $Self->{Translation}->{'Accounting'} = '';
-    $Self->{Translation}->{'Address Allocation'} = '';
-    $Self->{Translation}->{'Administrator'} = '';
-    $Self->{Translation}->{'Analog Phone'} = '';
-    $Self->{Translation}->{'Appliance Type'} = '';
-    $Self->{Translation}->{'Backlinks'} = '';
-    $Self->{Translation}->{'Battery Capacity (Ah)'} = '';
-    $Self->{Translation}->{'Battery Type'} = '';
-    $Self->{Translation}->{'Building'} = 'Byggnad';
-    $Self->{Translation}->{'Bus Interface'} = '';
-    $Self->{Translation}->{'CIDR'} = '';
-    $Self->{Translation}->{'CPU'} = 'CPU';
-    $Self->{Translation}->{'CPU Class'} = '';
-    $Self->{Translation}->{'Capacity (GB)'} = '';
-    $Self->{Translation}->{'Capacity per graphics card'} = '';
-    $Self->{Translation}->{'Card Number'} = '';
-    $Self->{Translation}->{'Card Reader'} = '';
-    $Self->{Translation}->{'Card Type'} = '';
-    $Self->{Translation}->{'Client Certificates'} = '';
-    $Self->{Translation}->{'Client Software'} = '';
-    $Self->{Translation}->{'Client category'} = '';
-    $Self->{Translation}->{'Clockrate'} = '';
-    $Self->{Translation}->{'Clockspeed'} = '';
-    $Self->{Translation}->{'Code Signing Certificates'} = '';
-    $Self->{Translation}->{'Conference Phone'} = '';
-    $Self->{Translation}->{'Consulting Agreement'} = '';
-    $Self->{Translation}->{'Contact'} = '';
-    $Self->{Translation}->{'Contact Distributor'} = '';
-    $Self->{Translation}->{'Container Management'} = '';
-    $Self->{Translation}->{'Contract'} = '';
-    $Self->{Translation}->{'Contract Type'} = '';
-    $Self->{Translation}->{'Contract period from'} = '';
-    $Self->{Translation}->{'Contract period until'} = '';
-    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = '';
-    $Self->{Translation}->{'Cost unit'} = '';
-    $Self->{Translation}->{'Count of licenses'} = '';
-    $Self->{Translation}->{'Creation Date'} = '';
-    $Self->{Translation}->{'DHCP'} = '';
-    $Self->{Translation}->{'DHCP Reserved'} = '';
-    $Self->{Translation}->{'DNS-Server'} = '';
-    $Self->{Translation}->{'Date of Invoice'} = '';
-    $Self->{Translation}->{'Date of Order'} = '';
-    $Self->{Translation}->{'Date of Warranty'} = '';
-    $Self->{Translation}->{'Date of release'} = '';
-    $Self->{Translation}->{'Desktop'} = 'Desktop';
-    $Self->{Translation}->{'Document Signing Certificates'} = '';
-    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = '';
-    $Self->{Translation}->{'Employment Contract'} = '';
-    $Self->{Translation}->{'End IP Address'} = '';
-    $Self->{Translation}->{'End of support'} = '';
-    $Self->{Translation}->{'Expiry Date'} = '';
-    $Self->{Translation}->{'External Hard Drive'} = '';
-    $Self->{Translation}->{'Firewall'} = '';
-    $Self->{Translation}->{'Firmware'} = '';
-    $Self->{Translation}->{'Form Factor'} = '';
-    $Self->{Translation}->{'Franchise Agreement'} = '';
-    $Self->{Translation}->{'General Information'} = '';
-    $Self->{Translation}->{'Graphics Cards'} = '';
-    $Self->{Translation}->{'Graphics card'} = '';
-    $Self->{Translation}->{'Hardware'} = '';
-    $Self->{Translation}->{'Hardware Model'} = '';
-    $Self->{Translation}->{'Hardware Weight'} = '';
-    $Self->{Translation}->{'Headset'} = '';
-    $Self->{Translation}->{'IP Protocol'} = '';
-    $Self->{Translation}->{'Identity and Access Management (IAM)'} = '';
-    $Self->{Translation}->{'Inventory Number'} = '';
-    $Self->{Translation}->{'Inverstment costs'} = '';
-    $Self->{Translation}->{'Invoice Number'} = '';
-    $Self->{Translation}->{'Keyboard'} = 'Tangentbord';
-    $Self->{Translation}->{'Landline Phone'} = '';
-    $Self->{Translation}->{'Laptop'} = 'Laptop';
-    $Self->{Translation}->{'Latitude'} = '';
-    $Self->{Translation}->{'Layer 1: Physical Layer'} = '';
-    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '';
-    $Self->{Translation}->{'Layer 4: Transport Layer'} = '';
-    $Self->{Translation}->{'Layer 5: Session Layer'} = '';
-    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '';
-    $Self->{Translation}->{'Layer 7: Application Layer'} = '';
-    $Self->{Translation}->{'Lease Agreement'} = '';
-    $Self->{Translation}->{'License Agreement'} = '';
-    $Self->{Translation}->{'License Key'} = '';
-    $Self->{Translation}->{'License Type'} = '';
-    $Self->{Translation}->{'License period from'} = '';
-    $Self->{Translation}->{'License period until'} = '';
-    $Self->{Translation}->{'Loan Agreement'} = '';
-    $Self->{Translation}->{'Located in'} = '';
-    $Self->{Translation}->{'Longitude'} = '';
-    $Self->{Translation}->{'Manufacturer'} = '';
-    $Self->{Translation}->{'Maximum Load Capacity (W)'} = '';
-    $Self->{Translation}->{'Memory'} = '';
-    $Self->{Translation}->{'Memory Type'} = '';
-    $Self->{Translation}->{'Mobile Number'} = '';
-    $Self->{Translation}->{'Mobile/Embedded'} = '';
-    $Self->{Translation}->{'Model'} = 'Modell';
-    $Self->{Translation}->{'Model Description'} = '';
-    $Self->{Translation}->{'Monitor Resolution'} = '';
-    $Self->{Translation}->{'Monitor Size'} = '';
-    $Self->{Translation}->{'Mouse'} = 'Mus';
-    $Self->{Translation}->{'Network'} = '';
-    $Self->{Translation}->{'Network Info'} = '';
-    $Self->{Translation}->{'Network Information'} = '';
-    $Self->{Translation}->{'Network Layer'} = '';
-    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = '';
-    $Self->{Translation}->{'Notebook'} = '';
-    $Self->{Translation}->{'Number of CPUs'} = '';
-    $Self->{Translation}->{'Number of RAM modules'} = '';
-    $Self->{Translation}->{'Number of graphics cards'} = '';
-    $Self->{Translation}->{'OTOBO'} = '';
-    $Self->{Translation}->{'Operating costs'} = '';
-    $Self->{Translation}->{'Order Number'} = '';
-    $Self->{Translation}->{'Other'} = 'Annan';
-    $Self->{Translation}->{'Outputs'} = '';
-    $Self->{Translation}->{'PIN'} = '';
-    $Self->{Translation}->{'PIN 2'} = '';
-    $Self->{Translation}->{'PUK'} = '';
-    $Self->{Translation}->{'PUK 2'} = '';
-    $Self->{Translation}->{'Partnership Agreement'} = '';
-    $Self->{Translation}->{'Phone / VOIP'} = '';
-    $Self->{Translation}->{'Phone Number'} = '';
-    $Self->{Translation}->{'Phone Type'} = '';
-    $Self->{Translation}->{'Physical Cores'} = '';
-    $Self->{Translation}->{'Power Delivery'} = '';
-    $Self->{Translation}->{'Purchased at'} = '';
-    $Self->{Translation}->{'Rack Depth'} = '';
-    $Self->{Translation}->{'Rack Units (U)'} = '';
-    $Self->{Translation}->{'Reference to Customer'} = '';
-    $Self->{Translation}->{'Room'} = 'Rum';
-    $Self->{Translation}->{'SIM Card'} = '';
-    $Self->{Translation}->{'SSL/TLS Certificates'} = '';
-    $Self->{Translation}->{'Sales Contract'} = '';
-    $Self->{Translation}->{'Satellite Phone'} = '';
-    $Self->{Translation}->{'Serialnumber'} = '';
-    $Self->{Translation}->{'Server'} = 'Server';
-    $Self->{Translation}->{'Server Software'} = '';
-    $Self->{Translation}->{'Service Agreement'} = '';
-    $Self->{Translation}->{'Service Tag'} = '';
-    $Self->{Translation}->{'Socket Type'} = '';
-    $Self->{Translation}->{'Software'} = '';
-    $Self->{Translation}->{'Speakers'} = '';
-    $Self->{Translation}->{'Start IP Address'} = '';
-    $Self->{Translation}->{'Storage'} = '';
-    $Self->{Translation}->{'Storage Partition'} = '';
-    $Self->{Translation}->{'Subsidiary'} = '';
-    $Self->{Translation}->{'Summary'} = '';
-    $Self->{Translation}->{'Thin Client'} = '';
-    $Self->{Translation}->{'Threads'} = '';
-    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = '';
-    $Self->{Translation}->{'Total RAM (GB)'} = '';
-    $Self->{Translation}->{'USB Hub'} = '';
-    $Self->{Translation}->{'VPN'} = '';
-    $Self->{Translation}->{'VR Headset'} = '';
-    $Self->{Translation}->{'VoIP Phone'} = '';
-    $Self->{Translation}->{'Webcam'} = '';
+    $Self->{Translation}->{'Config Items'} = 'Konfigurationsenheter';
+    $Self->{Translation}->{'Config item add.'} = 'Lägg till konfigureringsobjekt.';
+    $Self->{Translation}->{'Config item edit.'} = 'Redigera konfigureringsobjekt.';
+    $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
+        'Konfigureringsobjekt för händelsemodul som möjliggör loggning till historik i agentgränssnittet.';
+    $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
+        'Händelsemodul för konfigurationsobjekt som uppdaterar konfigurationsobjekten till deras aktuella definition.';
+    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
+        'Config item event-modul som uppdaterar tabellen configitem_ĺink.';
+    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
+        'Config item event-modulen uppdaterar det aktuella incidenttillståndet.';
+    $Self->{Translation}->{'Config item history.'} = 'Konfigurerar artikelhistorik.';
+    $Self->{Translation}->{'Config item print.'} = 'Utskrift av konfigureringsobjekt.';
+    $Self->{Translation}->{'Config item zoom.'} = 'Konfigurera zoom för objekt.';
+    $Self->{Translation}->{'ConfigItem Tree View'} = 'KonfigItem trädvy';
+    $Self->{Translation}->{'ConfigItem Version'} = 'KonfigItem Version';
+    $Self->{Translation}->{'ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        'ConfigItems av följande klasser kommer inte att lagras på Elasticsearch-servern. Om du vill tillämpa detta på befintliga CI måste CI-migreringen köras via konsolen efter att du har ändrat detta alternativ.';
+    $Self->{Translation}->{'ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        'ConfigItems med följande driftsättningsstatus kommer inte att lagras på Elasticsearch-servern. För att tillämpa detta på befintliga CI måste CI-migreringen köras via konsolen efter att detta alternativ har ändrats.';
+    $Self->{Translation}->{'Configuration Item Limit'} = 'Begränsning konfigurationsenheter';
+    $Self->{Translation}->{'Configuration Item limit per page.'} = 'Konfiguration Artikelgräns per sida.';
+    $Self->{Translation}->{'Configuration Management Database.'} = 'Databas för konfigurationshantering.';
+    $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfigurationsobjekt bulkmodul.';
+    $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
+        'Konfigurationsobjekt sök backend-router för agentgränssnittet.';
+    $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Skapa och hantera definitioner för konfigurationsenheter';
+    $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kunderna kan se historiska CI-versioner.';
+    $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
+        'Kunderna har möjlighet att manuellt växla mellan historiska CI-versioner.';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".'} =
+        'Standarddata som ska användas på attributet för sökskärmen för konfigurationsobjekt. Exempel: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".'} =
+        'Standarddata som ska användas på attribut för sökskärmen för konfigurationsobjekt. Exempel: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".';
+    $Self->{Translation}->{'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.'} =
+        'Definiera åtgärder där en inställningsknapp är tillgänglig i widgeten för länkade objekt (LinkObject::ViewMode = "complex"). Observera att dessa åtgärder måste ha registrerat följande JS- och CSS-filer: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js och Core.Agent.LinkObject.js.';
+    $Self->{Translation}->{'Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit.'} =
+        'Definiera ett Template::Toolkit-schema för versionssträngar. Används endast om Version String Module är inställd på TemplateToolkit.';
+    $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
+        'Definiera en uppsättning villkor under vilka en kund får se ett konfigurationsobjekt. Villkoren kan eventuellt begränsas till vissa kundgrupper. Namn är det enda obligatoriska attributet. Om inga andra alternativ anges kommer alla konfigurationsobjekt att vara synliga under den kategorin.';
+    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
+        'Definierar nödvändiga behörigheter för att skapa ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
+    $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
+        'Definierar nödvändiga behörigheter för att ta bort ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
+    $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
+        'Definierar nödvändiga behörigheter för att hämta ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
+    $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
+        'Definierar nödvändiga behörigheter för att söka ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
+    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
+        'Definierar nödvändiga behörigheter för att uppdatera ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
+    $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
+        'Definierar en översiktsmodul som visar den lilla vyn av en lista med konfigurationsobjekt.';
+    $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
+        'Definierar om länktypens etiketter måste visas i nodanslutningarna.';
+    $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
+        'Definierar reguljära uttryck individuellt för varje ConfigItem-klass för att kontrollera ConfigItem-namnet och visa motsvarande felmeddelanden.';
+    $Self->{Translation}->{'Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Definierar de tillgängliga kolumnerna för CI:er i konfigurationsobjektets översikt beroende på CI-klassen. Varje post måste bestå av ett klassnamn och en matris med tillgängliga fält för motsvarande klass. Dynamiska fältposter måste följa schemat DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the agent interface.'} =
+        'Definierar standardattributet för konfigurationsobjekt för sortering av konfigurationsobjekt i sökresultatet för konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the customer interface.'} =
+        'Definierar standardattributet för konfigurationsobjekt för sortering av konfigurationsobjekt i sökresultatet för konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of this operation.'} =
+        'Definierar standardattributet för konfigurationsobjekt för sortering av konfigurationsobjekt i resultatet av sökningen efter konfigurationsobjekt i denna åtgärd.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top.'} =
+        'Definierar standardordningen för konfigurationsobjekt i sökresultatet för konfigurationsobjekt i agentgränssnittet. Upp: äldst på toppen. Ner: det senaste överst.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
+        'Definierar standardordningen för konfigurationsobjekt i sökresultatet för konfigurationsobjekt i kundgränssnittet. Upp: äldst överst. Ner: den senaste överst.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
+        'Definierar standardordningen för konfigurationsobjekt i resultatet av sökningen efter konfigurationsobjekt i den här åtgärden. Upp: äldst överst. Ner: senaste överst.';
+    $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Definierar de kolumner som visas som standard för CI:er i konfigurationsobjektets översikt beroende på CI-klassen. Varje post måste bestå av ett klassnamn och en matris med tillgängliga fält för motsvarande klass. Dynamiska fältposter måste följa schemat DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Definierar det standarddjup för relationer som ska visas.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen.'} =
+        'Definierar standardattributet för sökning av konfigurationsobjekt som visas för skärmen för sökning av konfigurationsobjekt.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.'} =
+        'Definierar standardattributet för sökning av konfigurationsobjekt som visas på skärmen för sökning av konfigurationsobjekt. Exempel: "Key" måste ha namnet på det dynamiska fältet i det här fallet "X", "Content" måste ha värdet på det dynamiska fältet beroende på typen av dynamiskt fält, Text: "a text", Dropdown: "1", Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' och eller \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
+    $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
+        'Definierar standardunderobjektet för klassen \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
+        'Anger antal rader för KE-editorn i admingränssnittet.';
+    $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
+        'Definierar ordningsföljden för incidenttillstånd från hög (t.ex. cricital) till låg (t.ex. functional).';
+    $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
+        'Definierar de relevanta driftsättningsstatusar där länkade ärenden kan påverka statusen för ett CI.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =
+        'Definierar sökgränsen för skärmen AgentITSMConfigItem.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItemSearch screen.'} =
+        'Definierar sökgränsen för skärmen AgentITSMConfigItemSearch.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItem screen.'} =
+        'Definierar sökgränsen för skärmen CustomerITSMConfigItem.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItemSearch screen.'} =
+        'Definierar sökgränsen för skärmen CustomerITSMConfigItemSearch.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown.'} =
+        'Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen för alla CI-klasser. Om det inte finns någon post visas standardkolumnerna.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown.'} =
+        'Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen, beroende på CI-klass. Varje post måste inledas med klassnamnet och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna.';
+    $Self->{Translation}->{'Defines which items are available for \'Action\' in third level of the ITSM Config Item ACL structure.'} =
+        'Definierar vilka objekt som är tillgängliga för "Action" i den tredje nivån i ITSM Config Item ACL-strukturen.';
+    $Self->{Translation}->{'Defines which items are available in first level of the ITSM Config Item ACL structure.'} =
+        'Definierar vilka objekt som är tillgängliga i den första nivån i ITSM Config Item ACL-strukturen.';
+    $Self->{Translation}->{'Defines which items are available in second level of the ITSM Config Item ACL structure.'} =
+        'Definierar vilka objekt som är tillgängliga i den andra nivån i ITSM Config Item ACL-strukturen.';
+    $Self->{Translation}->{'Defines which type of link (named from the ticket perspective) can affect the status of a linked CI.'} =
+        'Definierar vilken typ av länk (namngiven ur ett ärendeperspektiv) som kan påverka statusen för ett länkat CI.';
+    $Self->{Translation}->{'Defines which type of ticket can affect the status of a linked CI.'} =
+        'Definierar vilken typ av ärende som kan påverka statusen för ett länkat CI.';
+    $Self->{Translation}->{'Definition Update'} = 'Definition Uppdatering';
+    $Self->{Translation}->{'Delete Configuration Item'} = 'Ta bort konfigurationsobjekt';
+    $Self->{Translation}->{'DeplState'} = 'DeplState';
+    $Self->{Translation}->{'Deployment State Color'} = 'Deployment State Färg';
+    $Self->{Translation}->{'DeploymentState'} = 'DeploymentState';
+    $Self->{Translation}->{'Duplicate'} = 'Duplicera';
+    $Self->{Translation}->{'Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.'} =
+        'Händelsemodul för dynamiska fält som markerar konfigurationsobjektdefinitioner som osynkroniserade om de innehåller dynamiska fält som ändras.';
+    $Self->{Translation}->{'Dynamic fields shown in the additional ITSM field screen of the agent interface.'} =
+        'Dynamiska fält som visas på skärmen för ytterligare ITSM-fält i agentgränssnittet.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item overview screen of the customer interface.'} =
+        'Dynamiska fält som visas på skärmen för översikt av konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item search screen of the agent interface.'} =
+        'Dynamiska fält som visas på skärmen för sökning av konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time.'} =
+        'Aktiverar funktionen för massåtgärder för konfigurationsobjekt så att agentens frontend kan arbeta med mer än ett konfigurationsobjekt åt gången.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
+        'Aktiverar funktionen för massåtgärder för konfigurationsobjekt endast för de grupper som anges i listan.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+        'Aktiverar/inaktiverar funktionen för att kontrollera att ITSM-konfigurationsobjekt har unika namn. Innan du aktiverar det här alternativet bör du kontrollera om det redan finns konfigurationsobjekt med dubbla namn i systemet. Du kan göra detta med konsolkommandot Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
+        'Händelsemodul för att sätta configitem-status på ticket-configitem-link.';
+    $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
+        'Fält i konfigurationsobjektets index som används för fulltextsökning. Fält lagras också, men är inte obligatoriska för den övergripande funktionaliteten. Inkludering av bilagor kan inaktiveras genom att sätta posten till 0 eller radera den.';
+    $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
+        'Fält som lagras i konfigurationsobjektets index och som används för andra saker än fulltextsökning. För fullständig funktionalitet är alla fält obligatoriska.';
+    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
+        'För varje webbtjänst (nyckel) kan en array av klasser (värde) definieras för vilka importen är begränsad. För alla valda klasser, eller alla befintliga klasser, måste de identifierande attributen väljas i konfigurationen av invokern.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
+        'Registrering av GenericInterface-modul för ConfigItemFetch-inkallningslagret.';
+    $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM KonfigItem';
+    $Self->{Translation}->{'ITSM config item overview.'} = 'Översikt över ITSM-konfigurationsobjekt.';
+    $Self->{Translation}->{'InciState'} = 'InciState';
+    $Self->{Translation}->{'IncidentState'} = 'HändelseStatus';
+    $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
+        'Inkluderar driftsättningsstatusar i sökningen efter konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
+        'Inkluderar incidentstatusar i sökningen efter konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
+        'Maximalt antal konfigurationsobjekt som ska visas i resultatet av denna åtgärd.';
+    $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul för att kontrollera vilken grupp som är ansvarig för en klass.';
+    $Self->{Translation}->{'Module to check the group responsible for a configuration item.'} =
+        'Modul för att kontrollera vilken grupp som är ansvarig för ett konfigurationsobjekt.';
+    $Self->{Translation}->{'Module to generate ITSM config item statistics.'} = 'Modul för att generera statistik över ITSM-konfigurationsobjekt.';
+    $Self->{Translation}->{'Name Module'} = 'Namn Modul';
+    $Self->{Translation}->{'Number Module'} = 'Nummer Modul';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the agent interface.'} =
+        'Antal konfigurationsobjekt som ska visas på varje sida i ett sökresultat i agentgränssnittet.';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the customer interface.'} =
+        'Antal konfigurationsobjekt som ska visas på varje sida av ett sökresultat i kundgränssnittet.';
+    $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
+        'Objekt att söka efter, hur många poster och vilka attribut som ska visas. ConfigItem-attribut måste uttryckligen lagras via Elasticsearch.';
+    $Self->{Translation}->{'Overview.'} = 'Översikt.';
+    $Self->{Translation}->{'Parameters for the categories for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för kategorierna för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
+        'Parametrar för kolumnfiltren i den lilla översikten över konfigurationsobjekt. Observera: om du anger "Active" till 0 förhindras endast handläggare från att redigera inställningar för denna grupp i sina personliga inställningar, men administratörer kan fortfarande redigera inställningarna för en annan användares räkning. Använd "PreferenceGroup" för att styra i vilket område dessa inställningar ska visas i användargränssnittet.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
+        'Parametrar för dashboard backend för kundföretagets konfigurationsobjekt översikt över agentgränssnittet. "Limit" är antalet poster som visas som standard. "Group" används för att begränsa åtkomsten till insticksprogrammet (t.ex. Group: admin;group1;group2;). "Default" avgör om insticksprogrammet är aktiverat som standard eller om användaren måste aktivera det manuellt. "CacheTTLLocal" är cachetiden i minuter för insticksprogrammet.';
+    $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
+        'Parametrar för färgen för driftsättningsstatus i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
+        'Parametrar för driftsättningstillstånd i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the example permission groups of the general catalog attributes.'} =
+        'Parametrar för exempel på behörighetsegrupper i grundkatalogens attribut.';
+    $Self->{Translation}->{'Parameters for the name module for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för namnmodulen för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the number module for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för nummermodulen för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
+        'Parametrar för sidorna (där konfigurationsobjekten visas).';
+    $Self->{Translation}->{'Parameters for the version string module for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för modulen version string för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för version string template toolkit module för config item classes i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
+        'Parametrar för versionsutlösaren för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
+        'Utför den konfigurerade åtgärden för varje händelse (som en Invoker) för varje konfigurerad webbtjänst.';
+    $Self->{Translation}->{'Permission Group'} = 'Behörighetsgrupp';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
+        'Behörighet krävs för att använda åtgärden Attachment för ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the agent interface.'} =
+        'Behörighet krävs för att använda sökskärmen för ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the customer interface.'} =
+        'Behörighet krävs för att använda sökskärmen för ITSM-konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item tree view screen in the agent interface.'} =
+        'Behörighet krävs för att använda trädvyn för ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item zoom screen in the agent interface.'} =
+        'Behörighet krävs för att använda zoomskärmen för ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the add ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen Lägg till ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the bulk ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen för ITSM-konfigurationsobjekt i bulk i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the edit ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen Redigera ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the history ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen Historik över ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required permissions to use the print ITSM configuration item screen in the agent interface.'} =
+        'Behörighet krävs för att använda skärmen Skriv ut ITSM-konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Required privileges to delete config items.'} = 'Behörighet krävs för att ta bort konfigurationsobjekt.';
+    $Self->{Translation}->{'Search config items.'} = 'Sök i konfigurationsobjekt.';
+    $Self->{Translation}->{'Set the incident state of a CI automatically when a Ticket is Linked to a CI.'} =
+        'Ställ in incidentstatus för ett CI automatiskt när en Ticket länkas till ett CI.';
+    $Self->{Translation}->{'Sets the deployment state in the configuration item bulk screen of the agent interface.'} =
+        'Ställer in driftsättningsstatus i konfigurationsobjektets bulkskärm i agentgränssnittet.';
+    $Self->{Translation}->{'Sets the incident state in the configuration item bulk screen of the agent interface.'} =
+        'Ställer in incidentstatus i konfigurationsobjektets bulkskärm i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface.'} =
+        'Visar en länk i menyn som gör det möjligt att länka ett konfigurationsobjekt till ett annat objekt i zoomvyn för konfigurationsobjektet i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface.'} =
+        'Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i zoomvyn i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to delete a configuration item in its zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att ta bort ett konfigurationsobjekt i dess zoomvy av agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to display the configuration item links as a Tree View.'} =
+        'Visar en länk i menyn för att visa länkarna till konfigurationsobjekten som en trädvy.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface.'} =
+        'Visar en länk i menyn för att duplicera ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att duplicera ett konfigurationsobjekt i zoomvyn av agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att redigera ett konfigurationsobjekt i zoomvyn av agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to go back in the configuration item zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att gå tillbaka i zoomvyn för konfigurationsobjektet i agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to print a configuration item in the its zoom view of the agent interface.'} =
+        'Visar en länk i menyn för att skriva ut ett konfigurationsobjekt i zoomvyn av agentgränssnittet.';
+    $Self->{Translation}->{'Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface.'} =
+        'Visar en länk i menyn för att zooma in på ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet.';
+    $Self->{Translation}->{'Shows the config item history (reverse ordered) in the agent interface.'} =
+        'Visar historiken för konfigurationsobjekt (omvänd ordning) i agentgränssnittet.';
+    $Self->{Translation}->{'The default category which is shown, if none is selected.'} = 'Den standardkategori som visas om ingen kategori har valts.';
+    $Self->{Translation}->{'The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#.'} =
+        'Identifieraren för ett konfigurationsobjekt, t.ex. ConfigItem#, MyConfigItem#. Standardvärdet är ConfigItem#.';
+    $Self->{Translation}->{'Triggers ConfigItemFetch invoker automatically.'} = 'Utlöser ConfigItemFetch-inkallaren automatiskt.';
+    $Self->{Translation}->{'Version String Expression'} = 'Version String Uttryck';
+    $Self->{Translation}->{'Version String Module'} = 'Version String Modul';
+    $Self->{Translation}->{'Version Trigger'} = 'Version Trigger';
+    $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
+        'Om körningen av ConfigItemACL kan undvikas genom att kontrollera cachelagrade fältberoenden. Detta kan förbättra laddningstiderna för formulär, men måste avaktiveras om ACLModules ska användas för ITSMConfigItem- och Form-ReturnTypes.';
+    $Self->{Translation}->{'Which general information is shown in the header.'} = 'Vilken allmän information visas i rubriken.';
+    $Self->{Translation}->{'class'} = 'klass';
+    $Self->{Translation}->{'global'} = 'globala';
+    $Self->{Translation}->{'postproductive'} = 'postproduktiv';
+    $Self->{Translation}->{'preproductive'} = 'preproduktiv';
+    $Self->{Translation}->{'productive'} = 'produktiv';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
@@ -600,6 +531,7 @@ sub Data {
     'Delete',
     'Dismiss',
     'Do you want to proceed?',
+    'Importing classes/roles and their related fields',
     'No',
     'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.',
     'Ok',

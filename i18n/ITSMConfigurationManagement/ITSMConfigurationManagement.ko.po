@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ko/>\n"
+"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -331,8 +330,7 @@ msgstr "구성 항목 검색 결과"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr "항목을 표시할 수 없습니다. 구성 항목에 대한 액세스 권한이 부여되지 "
-"않았습니다!"
+msgstr "항목을 표시할 수 없습니다. 구성 항목에 대한 액세스 권한이 부여되지 않았습니다!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -490,35 +488,35 @@ msgstr "네트워크"
 msgid "Software"
 msgstr "소프트웨어"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "만료됨"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "유지 관리"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "파일럿"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "계획된"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "수리"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "은퇴"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "검토"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "테스트/QA"
 
@@ -760,9 +758,7 @@ msgstr "CMDB 설정"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"동일한 구성항목 클래스('class') 또는 전역('global') 내에서만 고유한 이름을 "
-"확인하므로 중복을 찾을 때 기존의 모든 구성항목이 고려됩니다."
+msgstr "동일한 구성항목 클래스('class') 또는 전역('global') 내에서만 고유한 이름을 확인하므로 중복을 찾을 때 기존의 모든 구성항목이 고려됩니다."
 
 #. SysConfig
 msgid "Config Items"
@@ -822,36 +818,27 @@ msgstr "구성 항목에 대한 정의를 만들고 관리합니다."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"링크 객체 위젯에서 설정 버튼을 사용할 수있는 액션 정의 (LinkObject :: "
-"ViewMode = \"complex\"). 이러한 작업은 다음 JS 및 CSS 파일을 등록해야합니다. "
-"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
-"Core.Agent.TableFilters.js."
+msgstr "링크 객체 위젯에서 설정 버튼을 사용할 수있는 액션 정의 (LinkObject :: ViewMode = \"complex\"). 이러한 작업은 다음 JS 및 CSS 파일을 등록해야합니다. Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 만드는 데 필요한 권한을 "
-"정의합니다."
+msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 만드는 데 필요한 권한을 정의합니다."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 삭제하는 데 필요한 권한을 "
-"정의합니다."
+msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 삭제하는 데 필요한 권한을 정의합니다."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 가져오는 데 필요한 권한을 "
-"정의합니다."
+msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 가져오는 데 필요한 권한을 정의합니다."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 검색하는 데 필요한 권한을 "
-"정의합니다."
+msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 검색하는 데 필요한 권한을 정의합니다."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 업데이트하는 데 필요한 권한을 "
-"정의합니다."
+msgstr "일반 인터페이스를 사용하여 ITSM 구성 항목을 업데이트하는 데 필요한 권한을 정의합니다."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
@@ -859,8 +846,7 @@ msgstr "구성 항목 목록의 작은 보기를 표시하는 개요 모듈을 �
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr "각 구성 항목 클래스에 대해 개별적으로 정규식을 정의하여 구성 항목 이름을 "
-"확인하고 해당 오류 메시지를 표시합니다."
+msgstr "각 구성 항목 클래스에 대해 개별적으로 정규식을 정의하여 구성 항목 이름을 확인하고 해당 오류 메시지를 표시합니다."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
@@ -888,80 +874,35 @@ msgstr "AgentITSMConfigItemSearch 화면의 검색 제한을 정의합니다."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
-"구성 항목 개요에 표시되는 열을 정의합니다. 이 옵션은 열의 위치에는 영향을 "
-"주지 않습니다. 참고: '모두' 필터를 선택하면 클래스 열을 항상 사용할 수 "
-"있습니다."
+msgstr "구성 항목 개요에 표시되는 열을 정의합니다. 이 옵션은 열의 위치에는 영향을 주지 않습니다. 참고: '모두' 필터를 선택하면 클래스 열을 항상 사용할 수 있습니다."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr "구성 항목 검색에 표시되는 열을 정의합니다. 이 옵션은 열의 위치에는 영향을 "
-"주지 않습니다."
+msgstr "구성 항목 검색에 표시되는 열을 정의합니다. 이 옵션은 열의 위치에는 영향을 주지 않습니다."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"CI 클래스에 따라 구성 항목 개요에 표시되는 CI 열을 정의합니다. 각 항목 "
-"앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 "
-"공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우 "
-"Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI "
-"정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 "
-"합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, "
-"컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, "
-"컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우 기본 열은 "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns 설정에 정의된 "
-"대로 표시됩니다."
+msgstr "CI 클래스에 따라 구성 항목 개요에 표시되는 CI 열을 정의합니다. 각 항목 앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우 Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI 정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, 컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, 컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우 기본 열은 ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns 설정에 정의된 대로 표시됩니다."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"CI 클래스에 따라 구성 항목 검색에 표시되는 CI 열을 정의합니다. 각 항목 "
-"앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 "
-"공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우 "
-"Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI "
-"정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 "
-"합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, "
-"컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, "
-"컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우 기본 열은 "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns 설정에 정의된 "
-"대로 표시됩니다."
+msgstr "CI 클래스에 따라 구성 항목 검색에 표시되는 CI 열을 정의합니다. 각 항목 앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우 Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI 정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, 컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, 컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우 기본 열은 ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns 설정에 정의된 대로 표시됩니다."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"CI 클래스에 따라 구성 항목 위젯에 표시되는 CI 열을 정의합니다. 각 항목 "
-"앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 "
-"공통으로 적용되는 몇 가지 CI-속성이 있습니다(예: Computer 클래스의 경우 "
-"Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI "
-"정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 "
-"합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, "
-"컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, "
-"컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우에는 기본 "
-"열이 AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany(키 DefaultColumns) 설정에 정의된 대로 "
-"표시됩니다."
+msgstr "CI 클래스에 따라 구성 항목 위젯에 표시되는 CI 열을 정의합니다. 각 항목 앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)을 붙여야 합니다. 모든 CI에 공통으로 적용되는 몇 가지 CI-속성이 있습니다(예: Computer 클래스의 경우 Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI 정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, 컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, 컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우에는 기본 열이 AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany(키 DefaultColumns) 설정에 정의된 대로 표시됩니다."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr "모든 CI 클래스에 대해 링크 테이블 복합 보기에 표시되는 CI 열을 정의합니다. "
-"항목이 없으면 기본 열이 표시됩니다."
+msgstr "모든 CI 클래스에 대해 링크 테이블 복합 보기에 표시되는 CI 열을 정의합니다. 항목이 없으면 기본 열이 표시됩니다."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"CI 클래스에 따라 링크 테이블 복합 보기에 표시되는 CI 열을 정의합니다. 각 "
-"항목 앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)이 와야 합니다. 모든 CI에 "
-"공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우: "
-"Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI 정의에 "
-"정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 합니다(예: "
-"Computer 클래스의 경우): 컴퓨터::하드디스크::1, 컴퓨터::하드디스크::1::용량::"
-"1, 컴퓨터::하드디스크::2, 컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 "
-"항목이 없는 경우 기본 열이 표시됩니다."
+msgstr "CI 클래스에 따라 링크 테이블 복합 보기에 표시되는 CI 열을 정의합니다. 각 항목 앞에는 클래스 이름과 이중 콜론(예: 컴퓨터::)이 와야 합니다. 모든 CI에 공통으로 적용되는 몇 가지 CI 속성이 있습니다(예: Computer 클래스의 경우: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI 정의에 정의된 대로 개별 CI 속성을 표시하려면 다음 스키마를 사용해야 합니다(예: Computer 클래스의 경우): 컴퓨터::하드디스크::1, 컴퓨터::하드디스크::1::용량::1, 컴퓨터::하드디스크::2, 컴퓨터::하드디스크::2::용량::1. CI 클래스에 대한 항목이 없는 경우 기본 열이 표시됩니다."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr "연결된 CI의 상태에 영향을 미칠 수 있는 링크 유형(티켓 관점에서 명명됨)을 "
-"정의합니다."
+msgstr "연결된 CI의 상태에 영향을 미칠 수 있는 링크 유형(티켓 관점에서 명명됨)을 정의합니다."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
@@ -981,8 +922,7 @@ msgstr "중복"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr "상담원 프런트엔드에서 한 번에 두 개 이상의 구성 항목에 대해 작업할 수 있도록 "
-"구성 항목 일괄 작업 기능을 사용 설정합니다."
+msgstr "상담원 프런트엔드에서 한 번에 두 개 이상의 구성 항목에 대해 작업할 수 있도록 구성 항목 일괄 작업 기능을 사용 설정합니다."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
@@ -990,16 +930,11 @@ msgstr "나열된 그룹에 대해서만 구성 항목 일괄 작업 기능을 �
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"구성 항목에서 고유한 이름을 확인하는 기능을 활성화/비활성화합니다. 이 옵션을 "
-"활성화하기 전에 시스템에 이미 존재하는 중복된 이름의 구성 항목이 있는지 "
-"확인해야 합니다. 이 작업은 bin/otobo.ITSMConfigItemListDuplicates.pl "
-"스크립트로 수행할 수 있습니다."
+msgstr "구성 항목에서 고유한 이름을 확인하는 기능을 활성화/비활성화합니다. 이 옵션을 활성화하기 전에 시스템에 이미 존재하는 중복된 이름의 구성 항목이 있는지 확인해야 합니다. 이 작업은 bin/otobo.ITSMConfigItemListDuplicates.pl 스크립트로 수행할 수 있습니다."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr "이벤트 모듈을 사용하여 티켓-configitem-link에서 configitem-status를 "
-"설정합니다."
+msgstr "이벤트 모듈을 사용하여 티켓-configitem-link에서 configitem-status를 설정합니다."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -1027,18 +962,11 @@ msgstr "개요."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"고객 회사의 대시보드 백엔드에 대한 매개 변수로서 상담원 인터페이스의 항목 "
-"개요를 구성합니다. \"제한\"은 기본적으로 표시되는 항목 수입니다. \"그룹\"은 "
-"플러그인에 대한 액세스를 제한하는 데 사용됩니다(예: 그룹: "
-"admin;group1;group2;). \"기본값\"은 플러그인이 기본적으로 사용 설정되는지 "
-"아니면 사용자가 수동으로 사용 설정해야 하는지 결정합니다. \"CacheTTLLocal\"은"
-" 플러그인에 대한 캐시 시간(분)을 나타냅니다."
+msgstr "고객 회사의 대시보드 백엔드에 대한 매개 변수로서 상담원 인터페이스의 항목 개요를 구성합니다. \"제한\"은 기본적으로 표시되는 항목 수입니다. \"그룹\"은 플러그인에 대한 액세스를 제한하는 데 사용됩니다(예: 그룹: admin;group1;group2;). \"기본값\"은 플러그인이 기본적으로 사용 설정되는지 아니면 사용자가 수동으로 사용 설정해야 하는지 결정합니다. \"CacheTTLLocal\"은 플러그인에 대한 캐시 시간(분)을 나타냅니다."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 배포 상태의 매개변수 색상을 지정할 수 "
-"있습니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 배포 상태의 매개변수 색상을 지정할 수 있습니다."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
@@ -1062,33 +990,27 @@ msgstr "상담원 인터페이스에서 ITSM 구성 항목 화면을 사용하�
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 검색 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 검색 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 확대 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 확대 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 추가 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 추가 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 편집 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 편집 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr "상담원 인터페이스에서 기록 ITSM 구성 항목 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 기록 ITSM 구성 항목 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 인쇄 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 인쇄 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1100,10 +1022,7 @@ msgstr "구성 항목을 검색합니다."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"구성 항목 번호 생성기 모듈을 선택합니다. \"자동 증가\"는 구성 항목 번호를 "
-"증가시키며, SystemID, ConfigItemClassID 및 카운터가 사용됩니다. 형식은 "
-"\"SystemID.ConfigItemClassID.Counter\"(예: 1205000004, 1205000005)입니다."
+msgstr "구성 항목 번호 생성기 모듈을 선택합니다. \"자동 증가\"는 구성 항목 번호를 증가시키며, SystemID, ConfigItemClassID 및 카운터가 사용됩니다. 형식은 \"SystemID.ConfigItemClassID.Counter\"(예: 1205000004, 1205000005)입니다."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
@@ -1119,53 +1038,43 @@ msgstr "상담원 인터페이스의 구성 항목 일괄 화면에서 인시던
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr "상담원 인터페이스의 구성 항목 확대/축소 보기에서 구성 항목을 다른 개체와 "
-"연결할 수 있는 링크를 메뉴에 표시합니다."
+msgstr "상담원 인터페이스의 구성 항목 확대/축소 보기에서 구성 항목을 다른 개체와 연결할 수 있는 링크를 메뉴에 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목의 기록에 액세스할 수 "
-"있는 링크를 메뉴에 표시합니다."
+msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목의 기록에 액세스할 수 있는 링크를 메뉴에 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr "메뉴에 상담원 인터페이스의 확대 보기에서 구성 항목의 기록에 액세스할 수 있는 "
-"링크를 표시합니다."
+msgstr "메뉴에 상담원 인터페이스의 확대 보기에서 구성 항목의 기록에 액세스할 수 있는 링크를 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr "메뉴에 상담원 인터페이스의 확대 보기에서 구성 항목을 삭제할 수 있는 링크를 "
-"표시합니다."
+msgstr "메뉴에 상담원 인터페이스의 확대 보기에서 구성 항목을 삭제할 수 있는 링크를 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목을 복제할 수 있는 링크를 "
-"메뉴에 표시합니다."
+msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목을 복제할 수 있는 링크를 메뉴에 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr "메뉴에 링크를 표시하여 상담원 인터페이스의 확대/축소 보기에서 구성 항목을 "
-"복제할 수 있습니다."
+msgstr "메뉴에 링크를 표시하여 상담원 인터페이스의 확대/축소 보기에서 구성 항목을 복제할 수 있습니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr "상담원 인터페이스의 확대 보기에서 구성 항목을 편집할 수 있는 링크를 메뉴에 "
-"표시합니다."
+msgstr "상담원 인터페이스의 확대 보기에서 구성 항목을 편집할 수 있는 링크를 메뉴에 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr "메뉴에 상담원 인터페이스의 구성 항목 확대/축소 보기로 돌아갈 수 있는 링크를 "
-"표시합니다."
+msgstr "메뉴에 상담원 인터페이스의 구성 항목 확대/축소 보기로 돌아갈 수 있는 링크를 표시합니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr "메뉴에 링크를 표시하여 상담원 인터페이스의 확대 보기에서 구성 항목을 인쇄할 "
-"수 있습니다."
+msgstr "메뉴에 링크를 표시하여 상담원 인터페이스의 확대 보기에서 구성 항목을 인쇄할 수 있습니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목을 확대할 수 있는 링크를 "
-"메뉴에 표시합니다."
+msgstr "상담원 인터페이스의 구성 항목 개요에 있는 구성 항목을 확대할 수 있는 링크를 메뉴에 표시합니다."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
@@ -1173,8 +1082,7 @@ msgstr "상담원 인터페이스에 구성 항목 기록을 표시합니다(역
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr "구성 항목의 식별자(예: ConfigItem#, MyConfigItem#)입니다. 기본값은 "
-"ConfigItem#입니다."
+msgstr "구성 항목의 식별자(예: ConfigItem#, MyConfigItem#)입니다. 기본값은 ConfigItem#입니다."
 
 #. SysConfig
 msgid "class"
@@ -1206,9 +1114,7 @@ msgstr "Ready2Import 클래스 번들"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"여기에서 가장 일반적인 구성 항목을 보여주는 Ready2Import 클래스 번들을 "
-"가져올 수 있습니다. 몇 가지 추가 구성이 필요할 수 있습니다."
+msgstr "여기에서 가장 일반적인 구성 항목을 보여주는 Ready2Import 클래스 번들을 가져올 수 있습니다. 몇 가지 추가 구성이 필요할 수 있습니다."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1276,8 +1182,7 @@ msgstr "다음 역할을 가져옵니다."
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "해당 동적 필드와 일반 카탈로그 클래스도 생성되며 자동으로 제거되지 않는다는 "
-"점에 유의하세요."
+msgstr "해당 동적 필드와 일반 카탈로그 클래스도 생성되며 자동으로 제거되지 않는다는 점에 유의하세요."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1341,8 +1246,7 @@ msgstr "링크 방향"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "참조 객체는 이 동적 필드를 포함하는 객체이고, 참조 객체는 동적 필드의 값으로 "
-"선택된 객체입니다."
+msgstr "참조 객체는 이 동적 필드를 포함하는 객체이고, 참조 객체는 동적 필드의 값으로 선택된 객체입니다."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1358,9 +1262,7 @@ msgstr "링크 참조 유형"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"이 링크가 구성 항목에 적용되는지 또는 참조 개체의 정적 버전에 적용되는지 "
-"여부입니다. 현재 인시던트 상태 계산은 동적 링크에서만 수행됩니다."
+msgstr "이 링크가 구성 항목에 적용되는지 또는 참조 개체의 정적 버전에 적용되는지 여부입니다. 현재 인시던트 상태 계산은 동적 링크에서만 수행됩니다."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1392,8 +1294,7 @@ msgstr "정의 동기화 중 오류가 발생했습니다. 로그를 확인해 �
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "동기화되지 않은 ITSMConfigItem 정의가 있습니다. ITSMConfigItem 동적 필드 "
-"변경 사항을 배포하세요."
+msgstr "동기화되지 않은 ITSMConfigItem 정의가 있습니다. ITSMConfigItem 동적 필드 변경 사항을 배포하세요."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1413,17 +1314,11 @@ msgstr "1 - 표시됨"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"상담원 인터페이스의 구성 항목 검색에서 확장 검색 조건을 허용합니다. 이 "
-"기능을 사용하면 예를 들어 \"(*key1*&&*key2*)\" 또는 \"(*key1*||*key2*)\"와 "
-"같은 조건으로 구성 항목 이름을 검색할 수 있습니다."
+msgstr "상담원 인터페이스의 구성 항목 검색에서 확장 검색 조건을 허용합니다. 이 기능을 사용하면 예를 들어 \"(*key1*&&*key2*)\" 또는 \"(*key1*||*key2*)\"와 같은 조건으로 구성 항목 이름을 검색할 수 있습니다."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"고객 인터페이스의 설정 항목 검색에서 확장 검색 조건을 허용합니다. 이 기능을 "
-"사용하면 예를 들어 \"(*key1*&&*key2*)\" 또는 \"(*key1*||*key2*)\"와 같은 "
-"조건으로 구성 항목 이름을 검색할 수 있습니다."
+msgstr "고객 인터페이스의 설정 항목 검색에서 확장 검색 조건을 허용합니다. 이 기능을 사용하면 예를 들어 \"(*key1*&&*key2*)\" 또는 \"(*key1*||*key2*)\"와 같은 조건으로 구성 항목 이름을 검색할 수 있습니다."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1451,15 +1346,11 @@ msgstr "구성 항목 개요에 대한 열 구성 항목 필터."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"상담원 인터페이스의 구성 항목 개요에서 필터링할 수 있는 열입니다. 참고: 구성 "
-"항목 속성과 동적 필드(DynamicField_NameX) 만 허용됩니다."
+msgstr "상담원 인터페이스의 구성 항목 개요에서 필터링할 수 있는 열입니다. 참고: 구성 항목 속성과 동적 필드(DynamicField_NameX) 만 허용됩니다."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"고객 인터페이스의 구성 항목 개요에서 필터링할 수 있는 열입니다. 참고: 구성 "
-"항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다."
+msgstr "고객 인터페이스의 구성 항목 개요에서 필터링할 수 있는 열입니다. 참고: 구성 항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
@@ -1483,17 +1374,11 @@ msgstr "구성 항목 버전"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"다음 클래스의 구성 항목은 Elasticsearch 서버에 저장되지 않습니다. 이를 기존 "
-"CI에 적용하려면 이 옵션을 변경한 후 콘솔을 통해 CI 마이그레이션을 실행해야 "
-"합니다."
+msgstr "다음 클래스의 구성 항목은 Elasticsearch 서버에 저장되지 않습니다. 이를 기존 CI에 적용하려면 이 옵션을 변경한 후 콘솔을 통해 CI 마이그레이션을 실행해야 합니다."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"다음 배포 상태의 구성 항목은 Elasticsearch 서버에 저장되지 않습니다. 이를 "
-"기존 CI에 적용하려면 이 옵션을 변경한 후 콘솔을 통해 CI 마이그레이션을 "
-"실행해야 합니다."
+msgstr "다음 배포 상태의 구성 항목은 Elasticsearch 서버에 저장되지 않습니다. 이를 기존 CI에 적용하려면 이 옵션을 변경한 후 콘솔을 통해 CI 마이그레이션을 실행해야 합니다."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1505,32 +1390,19 @@ msgstr "고객은 이전 CI 버전 간에 수동으로 전환할 수 있습니�
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"구성 항목 검색 화면의 속성에 사용할 기본 데이터입니다. 예: "
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "구성 항목 검색 화면의 속성에 사용할 기본 데이터입니다. 예: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"구성 항목 검색 화면의 속성에 사용할 기본 데이터입니다. 예: "
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
+msgstr "구성 항목 검색 화면의 속성에 사용할 기본 데이터입니다. 예: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"버전 문자열에 대한 템플릿::툴킷 체계를 정의합니다. 버전 문자열 모듈이 "
-"TemplateToolkit으로 설정된 경우에만 사용됩니다."
+msgstr "버전 문자열에 대한 템플릿::툴킷 체계를 정의합니다. 버전 문자열 모듈이 TemplateToolkit으로 설정된 경우에만 사용됩니다."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"고객이 구성 항목을 볼 수 있도록 허용되는 조건 집합을 정의합니다. 조건은 "
-"선택적으로 특정 고객 그룹으로 제한할 수 있습니다. 이름은 유일한 필수 "
-"속성입니다. 다른 옵션을 지정하지 않으면 모든 구성 항목이 해당 카테고리 "
-"아래에 표시됩니다."
+msgstr "고객이 구성 항목을 볼 수 있도록 허용되는 조건 집합을 정의합니다. 조건은 선택적으로 특정 고객 그룹으로 제한할 수 있습니다. 이름은 유일한 필수 속성입니다. 다른 옵션을 지정하지 않으면 모든 구성 항목이 해당 카테고리 아래에 표시됩니다."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
@@ -1538,52 +1410,35 @@ msgstr "노드 연결에 링크 유형 레이블을 표시할지 여부를 정�
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"CI 클래스에 따라 구성 항목 개요에서 사용 가능한 CI 열을 정의합니다. 각 "
-"항목은 클래스 이름과 해당 클래스에서 사용 가능한 필드 배열로 구성되어야 "
-"합니다. 동적 필드 항목은 DynamicField_FieldName 스키마를 따라야 합니다."
+msgstr "CI 클래스에 따라 구성 항목 개요에서 사용 가능한 CI 열을 정의합니다. 각 항목은 클래스 이름과 해당 클래스에서 사용 가능한 필드 배열로 구성되어야 합니다. 동적 필드 항목은 DynamicField_FieldName 스키마를 따라야 합니다."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr "상담원 인터페이스의 구성 항목 검색 결과의 구성 항목 정렬을 위한 기본 구성 "
-"항목 속성을 정의합니다."
+msgstr "상담원 인터페이스의 구성 항목 검색 결과의 구성 항목 정렬을 위한 기본 구성 항목 속성을 정의합니다."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr "고객 인터페이스의 구성 항목 검색 결과의 구성 항목 정렬을 위한 기본 구성 항목 "
-"속성을 정의합니다."
+msgstr "고객 인터페이스의 구성 항목 검색 결과의 구성 항목 정렬을 위한 기본 구성 항목 속성을 정의합니다."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr "이 작업의 구성 항목 검색 결과의 구성 항목 정렬에 대한 기본 구성 항목 속성을 "
-"정의합니다."
+msgstr "이 작업의 구성 항목 검색 결과의 구성 항목 정렬에 대한 기본 구성 항목 속성을 정의합니다."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"상담원 인터페이스의 구성 항목 검색 결과에서 기본 구성 항목 순서를 "
-"정의합니다. 위쪽: 가장 오래된 항목을 맨 위에 배치합니다. 아래로: 최신 항목이 "
-"맨 위에 있습니다."
+msgstr "상담원 인터페이스의 구성 항목 검색 결과에서 기본 구성 항목 순서를 정의합니다. 위쪽: 가장 오래된 항목을 맨 위에 배치합니다. 아래로: 최신 항목이 맨 위에 있습니다."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"고객 인터페이스의 구성 항목 검색 결과에서 기본 구성 항목 순서를 정의합니다. "
-"위쪽: 가장 오래된 항목을 맨 위에 표시합니다. 아래로: 최신 항목을 맨 위에 "
-"배치합니다."
+msgstr "고객 인터페이스의 구성 항목 검색 결과에서 기본 구성 항목 순서를 정의합니다. 위쪽: 가장 오래된 항목을 맨 위에 표시합니다. 아래로: 최신 항목을 맨 위에 배치합니다."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"이 작업의 구성 항목 검색 결과에서 기본 구성 항목 순서를 정의합니다. 위로: "
-"가장 오래된 항목을 위에 표시합니다. 아래로: 최신 항목을 맨 위에 배치합니다."
+msgstr "이 작업의 구성 항목 검색 결과에서 기본 구성 항목 순서를 정의합니다. 위로: 가장 오래된 항목을 위에 표시합니다. 아래로: 최신 항목을 맨 위에 배치합니다."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"CI 클래스에 따라 구성 항목 개요에 표시되는 CI의 기본 열을 정의합니다. 각 "
-"항목은 클래스 이름과 해당 클래스에 사용 가능한 필드 배열로 구성되어야 "
-"합니다. 동적 필드 항목은 DynamicField_FieldName 스키마를 따라야 합니다."
+msgstr "CI 클래스에 따라 구성 항목 개요에 표시되는 CI의 기본 열을 정의합니다. 각 항목은 클래스 이름과 해당 클래스에 사용 가능한 필드 배열로 구성되어야 합니다. 동적 필드 항목은 DynamicField_FieldName 스키마를 따라야 합니다."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1595,25 +1450,7 @@ msgstr "구성 항목 검색 화면에 기본적으로 표시되는 구성 항�
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"구성 항목 검색 화면에 기본적으로 표시되는 구성 항목 검색 속성을 정의합니다. "
-"예: \"키\"는 동적 필드의 이름(이 경우 'X'), \"콘텐츠\"는 동적 필드 유형에 "
-"따라 동적 필드의 값(텍스트: '텍스트', 드롭다운: '1', 날짜/시간)이어야 합니다:"
-" 'Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00'; "
-"Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59;' 및 또는 "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "구성 항목 검색 화면에 기본적으로 표시되는 구성 항목 검색 속성을 정의합니다. 예: \"키\"는 동적 필드의 이름(이 경우 'X'), \"콘텐츠\"는 동적 필드 유형에 따라 동적 필드의 값(텍스트: '텍스트', 드롭다운: '1', 날짜/시간)이어야 합니다: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00'; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' 및 또는 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1625,8 +1462,7 @@ msgstr "CustomerITSMConfigItemSearch 화면의 검색 제한을 정의합니다.
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr "ITSM 구성 항목 ACL 구조의 세 번째 수준에서 '동작'에 사용할 수 있는 항목을 "
-"정의합니다."
+msgstr "ITSM 구성 항목 ACL 구조의 세 번째 수준에서 '동작'에 사용할 수 있는 항목을 정의합니다."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
@@ -1650,8 +1486,7 @@ msgstr "배포 상태"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr "동적 필드 변경 사항이 포함된 경우 구성 항목 정의가 동기화되지 않은 것으로 "
-"표시하는 동적 필드 이벤트 모듈입니다."
+msgstr "동적 필드 변경 사항이 포함된 경우 구성 항목 정의가 동기화되지 않은 것으로 표시하는 동적 필드 이벤트 모듈입니다."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
@@ -1667,31 +1502,19 @@ msgstr "상담원 인터페이스의 구성 항목 검색 화면에 표시되는
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"고유한 이름이 있는지 ITSM 구성 항목을 확인하는 기능을 사용/사용 안 함으로 "
-"설정합니다. 이 옵션을 사용 설정하기 전에 시스템에 이미 존재하는 구성 항목에 "
-"중복된 이름이 있는지 확인해야 합니다. 이 작업은 콘솔 명령인 "
-"Admin::ITSM::Configitem::ListDuplicates를 사용하여 수행할 수 있습니다."
+msgstr "고유한 이름이 있는지 ITSM 구성 항목을 확인하는 기능을 사용/사용 안 함으로 설정합니다. 이 옵션을 사용 설정하기 전에 시스템에 이미 존재하는 구성 항목에 중복된 이름이 있는지 확인해야 합니다. 이 작업은 콘솔 명령인 Admin::ITSM::Configitem::ListDuplicates를 사용하여 수행할 수 있습니다."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"전체 텍스트 검색에 사용되는 구성 항목 인덱스의 필드입니다. 필드도 저장되지만 "
-"전체 기능에 필수적인 것은 아닙니다. 첨부 파일 포함은 항목을 0으로 설정하거나 "
-"삭제하여 비활성화할 수 있습니다."
+msgstr "전체 텍스트 검색에 사용되는 구성 항목 인덱스의 필드입니다. 필드도 저장되지만 전체 기능에 필수적인 것은 아닙니다. 첨부 파일 포함은 항목을 0으로 설정하거나 삭제하여 비활성화할 수 있습니다."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"전체 텍스트 검색 외에 다른 용도로 사용되는 구성 항목 인덱스에 저장된 "
-"필드입니다. 전체 기능을 사용하려면 모든 필드가 필수입니다."
+msgstr "전체 텍스트 검색 외에 다른 용도로 사용되는 구성 항목 인덱스에 저장된 필드입니다. 전체 기능을 사용하려면 모든 필드가 필수입니다."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"모든 웹서비스(키)에 대해 가져오기가 제한되는 클래스(값)의 배열을 정의할 수 "
-"있습니다. 선택한 모든 클래스 또는 모든 기존 클래스에 대해 식별 속성을 인보커 "
-"구성에서 선택해야 합니다."
+msgstr "모든 웹서비스(키)에 대해 가져오기가 제한되는 클래스(값)의 배열을 정의할 수 있습니다. 선택한 모든 클래스 또는 모든 기존 클래스에 대해 식별 속성을 인보커 구성에서 선택해야 합니다."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
@@ -1739,46 +1562,35 @@ msgstr "고객 인터페이스에서 검색 결과의 각 페이지에 표시할
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr "검색할 개체, 표시할 항목 수, 표시할 속성. 구성 항목 속성은 Elasticsearch를 "
-"통해 명시적으로 저장해야 합니다."
+msgstr "검색할 개체, 표시할 항목 수, 표시할 속성. 구성 항목 속성은 Elasticsearch를 통해 명시적으로 저장해야 합니다."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 카테고리에 대한 "
-"매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 카테고리에 대한 매개 변수입니다."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"작은 구성 항목 개요의 열 필터에 대한 매개 변수입니다. 참고: '활성'을 0으로 "
-"설정하면 상담원이 개인 기본 설정에서 이 그룹의 설정을 편집할 수 없지만 "
-"관리자가 다른 사용자의 설정을 대신 편집할 수 있습니다. 사용자 인터페이스에서 "
-"이러한 설정이 표시될 영역을 제어하려면 'PreferenceGroup'을 사용하세요."
+msgstr "작은 구성 항목 개요의 열 필터에 대한 매개 변수입니다. 참고: '활성'을 0으로 설정하면 상담원이 개인 기본 설정에서 이 그룹의 설정을 편집할 수 없지만 관리자가 다른 사용자의 설정을 대신 편집할 수 있습니다. 사용자 인터페이스에서 이러한 설정이 표시될 영역을 제어하려면 'PreferenceGroup'을 사용하세요."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 이름 모듈에 대한 "
-"매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 이름 모듈에 대한 매개 변수입니다."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 번호 모듈에 대한 "
-"매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스의 번호 모듈에 대한 매개 변수입니다."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 문자열 "
-"모듈의 매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 문자열 모듈의 매개 변수입니다."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 문자열 "
-"템플릿 툴킷 모듈의 매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 문자열 템플릿 툴킷 모듈의 매개 변수입니다."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 트리거의 "
-"매개 변수입니다."
+msgstr "상담원 인터페이스의 기본 설정 보기에서 구성 항목 클래스에 대한 버전 트리거의 매개 변수입니다."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
@@ -1786,23 +1598,19 @@ msgstr "구성된 각 웹서비스의 각 이벤트에 대해 구성된 작업�
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 첨부 작업을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 첨부 작업을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr "고객 인터페이스에서 ITSM 구성 항목 검색 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "고객 인터페이스에서 ITSM 구성 항목 검색 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr "상담원 인터페이스에서 ITSM 구성 항목 트리 보기 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 ITSM 구성 항목 트리 보기 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr "상담원 인터페이스에서 일괄 ITSM 구성 항목 화면을 사용하기 위해 필요한 "
-"권한입니다."
+msgstr "상담원 인터페이스에서 일괄 ITSM 구성 항목 화면을 사용하기 위해 필요한 권한입니다."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
@@ -1830,10 +1638,7 @@ msgstr "버전 트리거"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"캐시된 필드 종속성을 확인하여 ConfigItemACL의 실행을 피할 수 있는지 여부. 이 "
-"옵션은 수식의 로딩 시간을 개선할 수 있지만, ACLModule을 ITSMConfigItem 및 "
-"Form-ReturnTypes에 사용하려는 경우 비활성화해야 합니다."
+msgstr "캐시된 필드 종속성을 확인하여 ConfigItemACL의 실행을 피할 수 있는지 여부. 이 옵션은 수식의 로딩 시간을 개선할 수 있지만, ACLModule을 ITSMConfigItem 및 Form-ReturnTypes에 사용하려는 경우 비활성화해야 합니다."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1845,8 +1650,7 @@ msgstr "일반 호출자 데이터"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "이 OTOBO 호출자 백엔드 모듈은 원격 시스템에 전송할 데이터를 준비하고 응답 "
-"데이터를 처리하기 위해 호출됩니다."
+msgstr "이 OTOBO 호출자 백엔드 모듈은 원격 시스템에 전송할 데이터를 준비하고 응답 데이터를 처리하기 위해 호출됩니다."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1858,13 +1662,11 @@ msgstr "매핑"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "OTOBO 호출자의 데이터는이 매핑에 의해 처리되어 원격 시스템이 예상하는 종류의 "
-"데이터로 변환됩니다."
+msgstr "OTOBO 호출자의 데이터는이 매핑에 의해 처리되어 원격 시스템이 예상하는 종류의 데이터로 변환됩니다."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr "응답 데이터는이 매핑에 의해 처리되어 OTOBO의 호출자가 예상하는 종류의 "
-"데이터로 변환됩니다."
+msgstr "응답 데이터는이 매핑에 의해 처리되어 OTOBO의 호출자가 예상하는 종류의 데이터로 변환됩니다."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1880,8 +1682,7 @@ msgstr "이벤트 추가"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr "비동기 이벤트 트리거는 백그라운드에서 OTOBO Scheduler Daemon에 의해 "
-"처리됩니다 (권장)."
+msgstr "비동기 이벤트 트리거는 백그라운드에서 OTOBO Scheduler Daemon에 의해 처리됩니다 (권장)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1941,8 +1742,7 @@ msgstr "새로운 다이내믹 필드"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr "추가적인 동적 필드 유형을 활용하고 싶으신가요? 다음 필드 유형에 대한 전체 "
-"액세스 권한이 있습니다:"
+msgstr "추가적인 동적 필드 유형을 활용하고 싶으신가요? 다음 필드 유형에 대한 전체 액세스 권한이 있습니다:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1958,8 +1758,7 @@ msgstr "외부 소스 키"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr "외부 소스(예: 웹 서비스 또는 가져오기/내보내기)를 통해 설정한 경우 이 값은 "
-"이 속성으로 해석됩니다."
+msgstr "외부 소스(예: 웹 서비스 또는 가져오기/내보내기)를 통해 설정한 경우 이 값은 이 속성으로 해석됩니다."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -1975,8 +1774,7 @@ msgstr "기본 구조가 유효하지 않습니다. YAML 형식의 데이터가 
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr "알 수없는 오류로 인해 ACL을 가져올 수 없습니다. 자세한 내용은 OTOBO 로그를 "
-"확인하십시오."
+msgstr "알 수없는 오류로 인해 ACL을 가져올 수 없습니다. 자세한 내용은 OTOBO 로그를 확인하십시오."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2060,28 +1858,11 @@ msgstr "GIT 복제/푸시 URL 접두사의 정의."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"동적 필드의 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible "
-"=> 필드 제거 가능(0|1), InformationAreaName => 위젯의 이름, "
-"InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 "
-"동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = "
-"비활성화, 1 = 활성화, 2 = 필수), FilterRelease => 리포지토리 이름이 일치해야 "
-"표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, "
-"FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => "
-"리펄스 버전 문자열이 일치해야 표시되는 정규식입니다."
+msgstr "동적 필드의 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => 위젯의 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), FilterRelease => 리포지토리 이름이 일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식입니다."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"동적 필드의 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible "
-"=> 필드 제거 가능(0|1), InformationAreaName => 위젯의 이름, "
-"InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 "
-"동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = "
-"비활성화, 1 = 활성화, 2 = 필수), FilterRepository => 리포지토리 이름이 "
-"일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 "
-"정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, "
-"FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식, 필터링할 "
-"리펄스 버전이 표시되는 정규식."
+msgstr "동적 필드의 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => 위젯의 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), FilterRepository => 리포지토리 이름이 일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식, 필터링할 리펄스 버전이 표시되는 정규식."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
@@ -2117,8 +1898,7 @@ msgstr "온라인 리포지토리를 비활성화합니다."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr "이러한 사용자에 대한 git ssh 연결 권한 부여 결과를 기록하지 마세요. 자동화된 "
-"작업에 유용합니다."
+msgstr "이러한 사용자에 대한 git ssh 연결 권한 부여 결과를 기록하지 마세요. 자동화된 작업에 유용합니다."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2146,8 +1926,7 @@ msgstr "퍼블릭 인터페이스에서 PublicOPMSRepository 개체에 대한 �
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr "퍼블릭 인터페이스의 PublicOPMSRepositoryLookup 개체에 대한 프런트엔드 모듈 "
-"등록."
+msgstr "퍼블릭 인터페이스의 PublicOPMSRepositoryLookup 개체에 대한 프런트엔드 모듈 등록."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
@@ -2155,8 +1934,7 @@ msgstr "퍼블릭 인터페이스의 PublicOPMSTestBuild 개체에 대한 프런
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr "퍼블릭 인터페이스의 PublicPackageVerification 객체에 대한 프론트엔드 모듈 "
-"등록."
+msgstr "퍼블릭 인터페이스의 PublicPackageVerification 객체에 대한 프론트엔드 모듈 등록."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2192,8 +1970,7 @@ msgstr "그룹을 만들고, 구성원에게 OPMS에서 관리자 삭제 권한�
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr "그룹을 만들고, 구성원에게 OPMS에서 리포지토리 관리자 권한이 있는 그룹을 "
-"만듭니다."
+msgstr "그룹을 만들고, 구성원에게 OPMS에서 리포지토리 관리자 권한이 있는 그룹을 만듭니다."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
@@ -2201,13 +1978,11 @@ msgstr "그룹을 만들면 구성원이 OPMS 화면에서 CI 테스트 결과 �
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr "공개 인터페이스를 통해 테스트 패키지를 빌드하려면 인증된 사용자(사용자 "
-"로그인 및 비밀번호로)가 구성원이어야 하는 그룹입니다."
+msgstr "공개 인터페이스를 통해 테스트 패키지를 빌드하려면 인증된 사용자(사용자 로그인 및 비밀번호로)가 구성원이어야 하는 그룹입니다."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr "OPMS 리포지토리를 추가하는 동안 git 프로젝트 생성 프로세스 중에 설정할 "
-"그룹입니다."
+msgstr "OPMS 리포지토리를 추가하는 동안 git 프로젝트 생성 프로세스 중에 설정할 그룹입니다."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2215,8 +1990,7 @@ msgstr "화면에서 동적 필드를 관리합니다."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr "여기에서 Git 액세스를 위한 공개 SSH 키를 관리하세요. 새 키를 추가할 때 이 "
-"환경설정을 저장하세요."
+msgstr "여기에서 Git 액세스를 위한 공개 SSH 키를 관리하세요. 새 키를 추가할 때 이 환경설정을 저장하세요."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2252,42 +2026,15 @@ msgstr "BranchView 화면의 페이지에 대한 매개변수입니다."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"'GITProjectName' 동적 필드에 대한 사전 정의: Group => 동적 필드에 액세스할 "
-"수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => "
-"위젯 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => "
-"사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 "
-"상태(0 = 비활성화, 1 = 활성화, 2 = 필수), FilterRepository => 리포지토리 "
-"이름이 일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 "
-"표시되는 정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, "
-"FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식, 필터링할 "
-"리펄스 버전이 표시되는 정규식."
+msgstr "'GITProjectName' 동적 필드에 대한 사전 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => 위젯 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), FilterRepository => 리포지토리 이름이 일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식, 필터링할 리펄스 버전이 표시되는 정규식."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"'GITRepositoryName' 동적 필드에 대한 사전 정의: Group => 동적 필드에 "
-"액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), "
-"InformationAreaName => 위젯 이름, InformationAreaSize => 위젯의 크기 및 "
-"위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 "
-"순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), 필터 "
-"리포지토리 => 리포지토리 이름이 일치해야 표시되는 정규식, 필터 패키지 => "
-"패키지 이름이 일치해야 표시되는 정규식, 필터 브랜치 => 브랜치 이름이 "
-"일치해야 표시되는 정규식, 필터 릴리즈 => 리팰리스 버전 문자열이 일치해야 "
-"표시되는 정규식입니다."
+msgstr "'GITRepositoryName' 동적 필드에 대한 사전 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => 위젯 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), 필터 리포지토리 => 리포지토리 이름이 일치해야 표시되는 정규식, 필터 패키지 => 패키지 이름이 일치해야 표시되는 정규식, 필터 브랜치 => 브랜치 이름이 일치해야 표시되는 정규식, 필터 릴리즈 => 리팰리스 버전 문자열이 일치해야 표시되는 정규식입니다."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"'PackageDeprecated' 동적 필드에 대한 사전 정의: Group => 동적 필드에 "
-"액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), "
-"InformationAreaName => 위젯의 이름, InformationAreaSize => 위젯의 크기 및 "
-"위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 "
-"순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), "
-"FilterRepository => 리포지토리 이름이 일치해야 표시되는 정규식, "
-"FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, FilterBranch => "
-"브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => 리펄스 버전 "
-"문자열이 일치해야 표시되는 정규식, 필터링할 리펄스 버전이 표시되는 정규식."
+msgstr "'PackageDeprecated' 동적 필드에 대한 사전 정의: Group => 동적 필드에 액세스할 수 있는 그룹, AlwaysVisible => 필드 제거 가능(0|1), InformationAreaName => 위젯의 이름, InformationAreaSize => 위젯의 크기 및 위치(큰|작은), Name => 사용해야 하는 동적 필드 이름, Priority => 동적 필드의 순서, State => 필드의 상태(0 = 비활성화, 1 = 활성화, 2 = 필수), FilterRepository => 리포지토리 이름이 일치해야 표시되는 정규식, FilterPackage => 패키지 이름이 일치해야 표시되는 정규식, FilterBranch => 브랜치 이름이 일치해야 표시되는 정규식, FilterRelease => 리펄스 버전 문자열이 일치해야 표시되는 정규식, 필터링할 리펄스 버전이 표시되는 정규식."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2315,15 +2062,11 @@ msgstr "버그질라 추가 댓글 포스트 수신 스크립트 위치의 경�
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"OTRSCodePolicy 스크립트 위치의 경로를 설정합니다. cron을 통해 업데이트되는 "
-"OTRSCodePolicy 모듈의 별도 복제본을 만드는 것이 좋습니다."
+msgstr "OTRSCodePolicy 스크립트 위치의 경로를 설정합니다. cron을 통해 업데이트되는 OTRSCodePolicy 모듈의 별도 복제본을 만드는 것이 좋습니다."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"OTRSCodePolicy 사전 수신 스크립트 위치의 경로를 설정합니다. cron을 통해 "
-"업데이트되는 OTRSCodePolicy 모듈의 별도 복제본을 만드는 것이 좋습니다."
+msgstr "OTRSCodePolicy 사전 수신 스크립트 위치의 경로를 설정합니다. cron을 통해 업데이트되는 OTRSCodePolicy 모듈의 별도 복제본을 만드는 것이 좋습니다."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2363,31 +2106,23 @@ msgstr "스핑크스 테마가 포함된 테마 폴더의 경로입니다."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr "이 구성은 기본 열을 사용하거나 사용하지 않도록 설정할 수 있는 모든 화면을 "
-"정의합니다."
+msgstr "이 구성은 기본 열을 사용하거나 사용하지 않도록 설정할 수 있는 모든 화면을 정의합니다."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr "이 구성은 동적 필드를 활성화 또는 비활성화할 수 있는 모든 가능한 화면을 "
-"정의합니다."
+msgstr "이 구성은 동적 필드를 활성화 또는 비활성화할 수 있는 모든 가능한 화면을 정의합니다."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr "이 구성은 유효한 필드만 표시할지, 아니면 모든(유효하지 않은) 동적 필드를 "
-"표시할지를 정의합니다."
+msgstr "이 구성은 유효한 필드만 표시할지, 아니면 모든(유효하지 않은) 동적 필드를 표시할지를 정의합니다."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"이 구성은 OTRS 패키지 확인을 활성화할지 비활성화할지를 정의합니다. "
-"비활성화하면 모든 패키지가 확인된 것으로 표시됩니다. 그래도 확인된 패키지만 "
-"사용하는 것이 좋습니다."
+msgstr "이 구성은 OTRS 패키지 확인을 활성화할지 비활성화할지를 정의합니다. 비활성화하면 모든 패키지가 확인된 것으로 표시됩니다. 그래도 확인된 패키지만 사용하는 것이 좋습니다."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"이 구성은 OTRS 클라우드서비스 프록시 서비스에 대한 URL을 정의합니다. 선택에 "
-"따라 http 또는 https 접두사가 추가됩니다. SysConfig 'Znuny4OTRSRepoType'."
+msgstr "이 구성은 OTRS 클라우드서비스 프록시 서비스에 대한 URL을 정의합니다. 선택에 따라 http 또는 https 접두사가 추가됩니다. SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
@@ -2395,29 +2130,23 @@ msgstr "이 구성은 패키지 확인을 확장하기 위해 출력 포스트 �
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr "이 구성은 OTRS 비즈니스 솔루션 TM 광고를 제거하는 출력 필터 모듈을 "
-"등록합니다."
+msgstr "이 구성은 OTRS 비즈니스 솔루션 TM 광고를 제거하는 출력 필터 모듈을 등록합니다."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr "이 구성은 패키지 관리자에서 온라인 리포지토리 선택을 숨기는 출력 필터를 "
-"등록합니다."
+msgstr "이 구성은 패키지 관리자에서 온라인 리포지토리 선택을 숨기는 출력 필터를 등록합니다."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr "오랫동안 테스트 포뮬러 검사를 통과하지 못한 미처리 릴리스를 깔끔하게 "
-"정리합니다."
+msgstr "오랫동안 테스트 포뮬러 검사를 통과하지 못한 미처리 릴리스를 깔끔하게 정리합니다."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr "이러한 그룹 중 하나에서 rw 권한이 있는 사용자는 'git push --force' 강제 "
-"푸시를 실행할 수 있습니다."
+msgstr "이러한 그룹 중 하나에서 rw 권한이 있는 사용자는 'git push --force' 강제 푸시를 실행할 수 있습니다."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"이러한 그룹 중 하나에서 rw 권한이 있는 사용자는 프로젝트를 관리할 수 "
-"있습니다. 또한 멤버는 git 관리에 대한 관리 권한이 있습니다."
+msgstr "이러한 그룹 중 하나에서 rw 권한이 있는 사용자는 프로젝트를 관리할 수 있습니다. 또한 멤버는 git 관리에 대한 관리 권한이 있습니다."
 
 #. ITSM class bundles
 msgid "1"
@@ -3474,3 +3203,16 @@ msgstr "VoIP 전화"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "웹캠"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

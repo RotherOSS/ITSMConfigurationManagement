@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Името е веќе во употреба од страна на КонфигЧленовите со следнов/те Број(еви): %s';
     $Self->{Translation}->{'Version Number'} = 'Број на Верзија';
-    $Self->{Translation}->{'The version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = '';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         '';
     $Self->{Translation}->{'Deployment State'} = 'Состојба на Распоред';
@@ -66,7 +66,7 @@ sub Data {
     # Template: AgentITSMConfigItemHistory
     $Self->{Translation}->{'History of Config Item: %s'} = '';
     $Self->{Translation}->{'History Content'} = '';
-    $Self->{Translation}->{'Createtime'} = '';
+    $Self->{Translation}->{'Createtime'} = 'КреирајВреме';
     $Self->{Translation}->{'Zoom view'} = 'Зумирај';
 
     # Template: AgentITSMConfigItemOverviewNavBar
@@ -101,7 +101,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItem Search'} = '';
 
     # Template: AdminACL
-    $Self->{Translation}->{'Object Type'} = '';
+    $Self->{Translation}->{'Object Type'} = 'Тип на објект';
 
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = '';
@@ -167,14 +167,14 @@ sub Data {
         '';
     $Self->{Translation}->{'ConfigItem not found!'} = '';
     $Self->{Translation}->{'No versions found!'} = '';
-    $Self->{Translation}->{'operational'} = '';
-    $Self->{Translation}->{'warning'} = '';
-    $Self->{Translation}->{'incident'} = '';
+    $Self->{Translation}->{'operational'} = 'Операциски';
+    $Self->{Translation}->{'warning'} = 'Предупредување';
+    $Self->{Translation}->{'incident'} = 'Инцидент';
     $Self->{Translation}->{'The deployment state of this config item'} = 'Распоредувачката состојба на овој конфиг член';
     $Self->{Translation}->{'The incident state of this config item'} = 'Инидент состојба на овој конфиг член';
 
     # Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-    $Self->{Translation}->{'No permission'} = '';
+    $Self->{Translation}->{'No permission'} = 'Немате Дозвола!';
     $Self->{Translation}->{'Filter invalid!'} = '';
     $Self->{Translation}->{'Search params invalid!'} = '';
 
@@ -235,6 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
     $Self->{Translation}->{'An error occurred during class import.'} = '';
 
     # SysConfig
@@ -259,6 +260,8 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        '';
+    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '';
     $Self->{Translation}->{'Config Items'} = 'Конфиг Членови';
     $Self->{Translation}->{'Config item add.'} = '';
@@ -419,7 +422,7 @@ sub Data {
         '';
     $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
         '';
-    $Self->{Translation}->{'Overview.'} = '';
+    $Self->{Translation}->{'Overview.'} = 'Преглед';
     $Self->{Translation}->{'Parameters for the categories for config item classes in the preferences view of the agent interface.'} =
         '';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
@@ -511,7 +514,7 @@ sub Data {
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         '';
     $Self->{Translation}->{'Which general information is shown in the header.'} = '';
-    $Self->{Translation}->{'class'} = '';
+    $Self->{Translation}->{'class'} = 'Класа';
     $Self->{Translation}->{'global'} = '';
     $Self->{Translation}->{'postproductive'} = '';
     $Self->{Translation}->{'preproductive'} = '';
@@ -528,6 +531,7 @@ sub Data {
     'Delete',
     'Dismiss',
     'Do you want to proceed?',
+    'Importing classes/roles and their related fields',
     'No',
     'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.',
     'Ok',

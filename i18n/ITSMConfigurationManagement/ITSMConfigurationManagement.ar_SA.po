@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Arabic (Saudi Arabia) <http://weblate.otobo.org/projects/"
-"opm-packages/itsm-configurationmanagement/ar_SA/>\n"
+"Language-Team: Arabic (Saudi Arabia) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ar_SA/>\n"
 "Language: ar_SA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -490,35 +488,35 @@ msgstr ""
 msgid "Software"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr ""
 
@@ -820,11 +818,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"تعريف العمليات التي يجب أن يتوفر بها زر الإعدادات في ودجة كائن الرابط "
-"(LinkObject::ViewMode = \"complex\"). الرجاء ملاحظة أنه يجب تسجيل ملفات JS و "
-"CSS التالية لهذه الإجراءات: Core.CustomList.css، Core.UI.AllocationList.js، "
-"Core.UI.Table.Sort.js، Core.Agent.TableFilter.js."
+msgstr "تعريف العمليات التي يجب أن يتوفر بها زر الإعدادات في ودجة كائن الرابط (LinkObject::ViewMode = \"complex\"). الرجاء ملاحظة أنه يجب تسجيل ملفات JS و CSS التالية لهذه الإجراءات: Core.CustomList.css، Core.UI.AllocationList.js، Core.UI.Table.Sort.js، Core.Agent.TableFilter.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
@@ -1656,9 +1650,7 @@ msgstr "بيانات المستدعي العامة"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"سيتم استدعاء وحدة الواجهة الخلفية OTOBO Invoker لإعداد البيانات لإرسالها إلى "
-"النظام البعيد، ومعالجة بيانات الاستجابة الخاصة به."
+msgstr "سيتم استدعاء وحدة الواجهة الخلفية OTOBO Invoker لإعداد البيانات لإرسالها إلى النظام البعيد، ومعالجة بيانات الاستجابة الخاصة به."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1670,15 +1662,11 @@ msgstr "تَخْطِيطٌ"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"تتم معالجة بيانات استدعاء OTOBO بواسطة هذا التعيين لإعادة تشكيلها عندما "
-"يحتاج النظام البعيد إلى البيانات."
+msgstr "تتم معالجة بيانات استدعاء OTOBO بواسطة هذا التعيين لإعادة تشكيلها عندما يحتاج النظام البعيد إلى البيانات."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"تتم معالجة بيانات الاستجابة للنظام البعيد بواسطة هذا التعيين لإعادة تشكيله "
-"كما هو مطلوب من قبل مستحضر OTOBO."
+msgstr "تتم معالجة بيانات الاستجابة للنظام البعيد بواسطة هذا التعيين لإعادة تشكيله كما هو مطلوب من قبل مستحضر OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1694,9 +1682,7 @@ msgstr "إضافة حدث"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"تتم معالجة مشغلات الأحداث غير المتزامنة بواسطة OTOBO Scheduler Daemon في "
-"الخلفية (موصى به)."
+msgstr "تتم معالجة مشغلات الأحداث غير المتزامنة بواسطة OTOBO Scheduler Daemon في الخلفية (موصى به)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1756,9 +1742,7 @@ msgstr "حقول ديناميكية جديدة"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"هل ترغب في الاستفادة من المجالات الديناميكية الأخرى؟ لديك حق الوصول الكامل "
-"إلى أنواع الحقول التالية:"
+msgstr "هل ترغب في الاستفادة من المجالات الديناميكية الأخرى؟ لديك حق الوصول الكامل إلى أنواع الحقول التالية:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1790,9 +1774,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"تعذر استيراد قوائم التحكم في الوصول (ACLs) بسبب خطأ غير معروف، يرجى مراجعة "
-"سجلات OTOBO لمزيد من المعلومات"
+msgstr "تعذر استيراد قوائم التحكم في الوصول (ACLs) بسبب خطأ غير معروف، يرجى مراجعة سجلات OTOBO لمزيد من المعلومات"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3221,3 +3203,16 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

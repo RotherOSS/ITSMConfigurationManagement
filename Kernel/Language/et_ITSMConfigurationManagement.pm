@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -23,571 +23,502 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # Template: AdminGenericInterfaceInvokerConfigItem
-    $Self->{Translation}->{'General invoker data'} = '';
-    $Self->{Translation}->{'This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.'} =
-        '';
-    $Self->{Translation}->{'Settings for outgoing request data'} = '';
-    $Self->{Translation}->{'Mapping'} = '';
-    $Self->{Translation}->{'The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects.'} =
-        '';
-    $Self->{Translation}->{'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects.'} =
-        '';
-    $Self->{Translation}->{'Settings for incoming response data'} = '';
-    $Self->{Translation}->{'Event data'} = '';
-    $Self->{Translation}->{'Add Event'} = '';
-    $Self->{Translation}->{'Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended).'} =
-        '';
-
     # Template: AdminITSMConfigItem
-    $Self->{Translation}->{'Config Item Management'} = '';
-    $Self->{Translation}->{'Change class definition'} = '';
-    $Self->{Translation}->{'Change role definition'} = '';
-    $Self->{Translation}->{'Ready2Import Class Bundles'} = '';
+    $Self->{Translation}->{'Config Item Management'} = 'Server OS';
+    $Self->{Translation}->{'Change class definition'} = 'Muuda klassi määratlust';
+    $Self->{Translation}->{'Change role definition'} = 'Muuda rolli määratlust';
+    $Self->{Translation}->{'Ready2Import Class Bundles'} = 'Ready2Import klassikomplektid';
     $Self->{Translation}->{'Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required.'} =
-        '';
-    $Self->{Translation}->{'Update existing entities'} = '';
-    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = '';
-    $Self->{Translation}->{'Config Item Class'} = '';
-    $Self->{Translation}->{'Config Item Role'} = '';
-    $Self->{Translation}->{'Definition'} = '';
-    $Self->{Translation}->{'Change'} = '';
-    $Self->{Translation}->{'Auto Indent Code'} = '';
-    $Self->{Translation}->{'Comment/Uncomment Code'} = '';
-    $Self->{Translation}->{'Search & Replace'} = '';
-    $Self->{Translation}->{'Select All'} = '';
-    $Self->{Translation}->{'Full Screen'} = '';
+        'Siit saate importida Ready2Import-klasside pakette, mis tutvustavad meie kõige tavalisemaid konfiguratsioonielemente. Pange tähele, et mõned täiendavad konfiguratsioonid võivad olla vajalikud.';
+    $Self->{Translation}->{'Update existing entities'} = 'Olemasolevate üksuste ajakohastamine';
+    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = 'Impordi Ready2Adopt klassi paketid';
+    $Self->{Translation}->{'Config Item Class'} = 'Config Item Class';
+    $Self->{Translation}->{'Config Item Role'} = 'Config Item Role (seadistuselemendi roll)';
 
     # Template: AgentITSMConfigItemAdd
-    $Self->{Translation}->{'Config Item'} = '';
-    $Self->{Translation}->{'Filter for Classes'} = '';
-    $Self->{Translation}->{'Select a Class from the list to create a new Config Item.'} = '';
-    $Self->{Translation}->{'Class'} = '';
+    $Self->{Translation}->{'Config Item'} = 'Config Item';
+    $Self->{Translation}->{'Filter for Classes'} = 'Klasside filter';
+    $Self->{Translation}->{'Select a Class from the list to create a new Config Item.'} = 'Uue Config Item\'i loomiseks valige nimekirjast klass.';
+    $Self->{Translation}->{'Class'} = 'Klass';
 
     # Template: AgentITSMConfigItemBulk
-    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = '';
-    $Self->{Translation}->{'Deployment state'} = '';
-    $Self->{Translation}->{'Incident state'} = '';
-    $Self->{Translation}->{'Link to another'} = '';
-    $Self->{Translation}->{'Invalid Configuration Item number!'} = '';
-    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = '';
+    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = 'ITSM ConfigItem Bulk Action';
+    $Self->{Translation}->{'Deployment state'} = 'Kasutuselevõtu seisund';
+    $Self->{Translation}->{'Incident state'} = 'Intsidentide olukord';
+    $Self->{Translation}->{'Link to another'} = 'Link teisele';
+    $Self->{Translation}->{'Invalid Configuration Item number!'} = 'Vigane konfiguratsiooni kirje number!';
+    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = 'Teise konfiguratsioonielemendi number, millega siduda.';
 
     # Template: AgentITSMConfigItemDelete
-    $Self->{Translation}->{'Do you really want to delete this config item?'} = '';
+    $Self->{Translation}->{'Do you really want to delete this config item?'} = 'Võrk';
 
     # Template: AgentITSMConfigItemEdit
-    $Self->{Translation}->{'The name of this config item'} = '';
+    $Self->{Translation}->{'The name of this config item'} = 'Selle konfiguratsioonielemendi nimi';
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
-        '';
-    $Self->{Translation}->{'Version Number'} = '';
-    $Self->{Translation}->{'The version number of this config item'} = '';
+        'Nimi on juba kasutusel ConfigItems\'i poolt järgmise(te) numbri(de)ga: %s';
+    $Self->{Translation}->{'Version Number'} = 'Versiooni number';
+    $Self->{Translation}->{'Version number of this config item'} = '';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
-        '';
-    $Self->{Translation}->{'Deployment State'} = '';
-    $Self->{Translation}->{'Incident State'} = '';
+        'Versiooninumber on juba kasutusel ConfigItems\'is, mille number(d) on järgmine(d): %s';
+    $Self->{Translation}->{'Deployment State'} = 'Kasutuselevõtu riik';
+    $Self->{Translation}->{'Incident State'} = 'Intsidentide riik';
 
     # Template: AgentITSMConfigItemHistory
-    $Self->{Translation}->{'History of Config Item: %s'} = '';
-    $Self->{Translation}->{'History Content'} = '';
-    $Self->{Translation}->{'Createtime'} = '';
-    $Self->{Translation}->{'Zoom view'} = '';
+    $Self->{Translation}->{'History of Config Item: %s'} = 'Config Item\'i ajalugu: %s';
+    $Self->{Translation}->{'History Content'} = 'Ajalugu Sisu';
+    $Self->{Translation}->{'Createtime'} = 'Createtime';
+    $Self->{Translation}->{'Zoom view'} = 'Suurendusvaade';
 
     # Template: AgentITSMConfigItemOverviewNavBar
-    $Self->{Translation}->{'Config Items per page'} = '';
+    $Self->{Translation}->{'Config Items per page'} = 'Config Items per page (seadistuselemendid lehekülje kohta)';
 
     # Template: AgentITSMConfigItemOverviewSmall
-    $Self->{Translation}->{'No config item data found.'} = '';
-    $Self->{Translation}->{'Select this config item'} = '';
+    $Self->{Translation}->{'No config item data found.'} = 'Config-elemendi andmeid ei leitud.';
+    $Self->{Translation}->{'Select this config item'} = 'Valige see konfiguratsioonielement';
 
     # Template: AgentITSMConfigItemSearch
-    $Self->{Translation}->{'Run Search'} = '';
-    $Self->{Translation}->{'Also search in previous versions?'} = '';
+    $Self->{Translation}->{'Run Search'} = 'Käivita otsing';
+    $Self->{Translation}->{'Also search in previous versions?'} = 'Otsi ka eelmistes versioonides?';
 
     # Template: AgentITSMConfigItemTreeView
-    $Self->{Translation}->{'TreeView for ConfigItem'} = '';
-    $Self->{Translation}->{'Depth Level'} = '';
-    $Self->{Translation}->{'Zoom In/Out'} = '';
-    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = '';
+    $Self->{Translation}->{'TreeView for ConfigItem'} = 'ConfigItem\'i TreeView';
+    $Self->{Translation}->{'Depth Level'} = 'Sügavuse tase';
+    $Self->{Translation}->{'Zoom In/Out'} = 'Suumimine sisse/välja';
+    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = 'ConfigItem\'i maksimaalne linkide tase on saavutatud!';
 
     # Template: AgentITSMConfigItemZoom
-    $Self->{Translation}->{'Configuration Item'} = '';
-    $Self->{Translation}->{'Configuration Item Information'} = '';
-    $Self->{Translation}->{'Current Deployment State'} = '';
-    $Self->{Translation}->{'Current Incident State'} = '';
-    $Self->{Translation}->{'Last changed'} = '';
-    $Self->{Translation}->{'Last changed by'} = '';
+    $Self->{Translation}->{'Configuration Item'} = 'Konfigureerimisobjekt';
+    $Self->{Translation}->{'Configuration Item Information'} = 'Konfigureerimiselemendi teave';
+    $Self->{Translation}->{'Current Deployment State'} = 'Praegune kasutuselevõtu olukord';
+    $Self->{Translation}->{'Current Incident State'} = 'Praegune juhtumite olukord';
+    $Self->{Translation}->{'Last changed'} = 'Viimati muudetud';
+    $Self->{Translation}->{'Last changed by'} = 'Viimati muutis';
 
     # Template: CustomerITSMConfigItem
-    $Self->{Translation}->{'Your ConfigItems'} = '';
-    $Self->{Translation}->{'ConfigItems'} = '';
-    $Self->{Translation}->{'Sort'} = '';
+    $Self->{Translation}->{'Your ConfigItems'} = 'Teie ConfigItems';
 
     # Template: CustomerITSMConfigItemSearch
-    $Self->{Translation}->{'ConfigItem Search'} = '';
+    $Self->{Translation}->{'ConfigItem Search'} = 'ConfigItem otsing';
 
     # Template: AdminACL
-    $Self->{Translation}->{'Filter by valid state'} = '';
-    $Self->{Translation}->{'Include invalid ACLs'} = '';
-    $Self->{Translation}->{'Object Type'} = '';
-
-    # Template: AdminACLEdit
-    $Self->{Translation}->{'Check the official %sdocumentation%s.'} = '';
-
-    # Template: AdminDynamicField
-    $Self->{Translation}->{'Include invalid dynamic fields'} = '';
-    $Self->{Translation}->{'Filter field by object type'} = '';
-    $Self->{Translation}->{'Filter field by namespace'} = '';
-    $Self->{Translation}->{'New Dynamic Fields'} = '';
-    $Self->{Translation}->{'Would you like to benefit from additional dynamic field types? You have full access to the following field types:'} =
-        '';
-    $Self->{Translation}->{'Copy this field'} = '';
+    $Self->{Translation}->{'Object Type'} = 'Objekti tüüp';
 
     # JS Template: ClassImportConfirm
-    $Self->{Translation}->{'The following classes will be imported'} = '';
-    $Self->{Translation}->{'The following roles will be imported'} = '';
+    $Self->{Translation}->{'The following classes will be imported'} = 'Imporditakse järgmised klassid';
+    $Self->{Translation}->{'The following roles will be imported'} = 'Imporditakse järgmised rollid';
     $Self->{Translation}->{'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.'} =
-        '';
-    $Self->{Translation}->{'Do you want to proceed?'} = '';
+        'Pange tähele, et ka vastavad dünaamilised väljad ja GeneralCatalogi klassid luuakse ja neid ei eemaldata automaatselt.';
+    $Self->{Translation}->{'Do you want to proceed?'} = 'Kas soovite jätkata?';
 
     # Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-    $Self->{Translation}->{'Need ExampleClasses!'} = '';
-    $Self->{Translation}->{'Definition is no valid YAML hash.'} = '';
+    $Self->{Translation}->{'Need ExampleClasses!'} = 'Vajad ExampleClasses!';
+    $Self->{Translation}->{'Definition is no valid YAML hash.'} = 'Määratlus ei ole kehtiv YAML-hash.';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = '';
+    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = 'Ülevaade: ITSM ConfigItem';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-    $Self->{Translation}->{'No ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = '';
+    $Self->{Translation}->{'No ConfigItemID is given!'} = 'ConfigItemID ei ole antud!';
+    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = 'Teil on vaja vähemalt ühte valitud konfiguratsioonielementi!';
     $Self->{Translation}->{'You don\'t have write access to this configuration item: %s.'} =
-        '';
-    $Self->{Translation}->{'No definition was defined for class %s!'} = '';
+        'Teil ei ole sellele konfiguratsioonielemendile kirjutamisõigust: %s.';
+    $Self->{Translation}->{'No definition was defined for class %s!'} = 'Klassile %s ei ole määratletud definitsiooni!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
-    $Self->{Translation}->{'Config item "%s" not found in database!'} = '';
-    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = '';
-    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = '';
+    $Self->{Translation}->{'Config item "%s" not found in database!'} = 'Config item "%s" ei ole andmebaasis leitud!';
+    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = 'Ei õnnestunud kustutada konfiguratsioonielementi ID %s!';
+    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = 'ConfigItemID %s jaoks ei leitud versiooni!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
-    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = '';
-    $Self->{Translation}->{'No access is given!'} = '';
+    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = 'ConfigItemID, DuplicateID või ClassID ei ole antud!';
+    $Self->{Translation}->{'No access is given!'} = 'Juurdepääsu ei anta!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
-    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = '';
-    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = '';
-    $Self->{Translation}->{'New version (ID=%s)'} = '';
-    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) added'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = '';
-    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = '';
-    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = '';
-    $Self->{Translation}->{'Version %s deleted'} = '';
+    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = 'Ei saa näidata ajalugu, ConfigItemID ei ole antud!';
+    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = 'Ei saa näidata ajalugu, juurdepääsuõigust ei ole antud!';
+    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = 'Uus ConfigItem (ID=%s)';
+    $Self->{Translation}->{'New version (ID=%s)'} = 'Uus versioon (ID=%s)';
+    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = 'Üldiste kataloogi atribuutide näidisõiguste rühmade parameetrid.';
+    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = 'Juhtumite seisundi uuendamine (new=%s, old=%s)';
+    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = 'ConfigItem (ID=%s) kustutatud';
+    $Self->{Translation}->{'Link to %s (type=%s) added'} = 'Lisatud link %s (type=%s)';
+    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = 'Link %s (type=%s) kustutatud';
+    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = 'ConfigItem määratlus uuendatud (ID=%s)';
+    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Nimi uuendatud (new=%s, old=%s)';
+    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Ei saa näidata elementi, ConfigItemile ei ole antud juurdepääsuõigusi!';
+    $Self->{Translation}->{'Version %s deleted'} = 'Versioon %s kustutatud';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = '';
-    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = '';
-    $Self->{Translation}->{'ConfigItem'} = '';
-    $Self->{Translation}->{'printed by %s at %s'} = '';
+    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'ConfigItemID või VersionID ei ole antud!';
+    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = 'Ei saa kuvada konfiguratsioonielementi, ei ole antud juurdepääsuõigusi!';
+    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s ei leitud andmebaasis!';
+    $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
+    $Self->{Translation}->{'printed by %s at %s'} = 'trükitud %s poolt aadressil %s';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
-    $Self->{Translation}->{'Invalid ClassID!'} = '';
-    $Self->{Translation}->{'No ClassID is given!'} = '';
-    $Self->{Translation}->{'No access rights for this class given!'} = '';
-    $Self->{Translation}->{'No Result!'} = '';
-    $Self->{Translation}->{'Config Item Search Results'} = '';
+    $Self->{Translation}->{'Invalid ClassID!'} = 'Vale ClassID!';
+    $Self->{Translation}->{'No ClassID is given!'} = 'ClassID ei ole antud!';
+    $Self->{Translation}->{'No access rights for this class given!'} = 'Sellele klassile ei ole juurdepääsuõigust antud!';
+    $Self->{Translation}->{'No Result!'} = 'Tulemust ei ole!';
+    $Self->{Translation}->{'Config Item Search Results'} = 'Config Item otsingu tulemused';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
     $Self->{Translation}->{'Can\'t show item, no access rights for ConfigItem are given!'} =
-        '';
-    $Self->{Translation}->{'ConfigItem not found!'} = '';
-    $Self->{Translation}->{'No versions found!'} = '';
-    $Self->{Translation}->{'operational'} = '';
-    $Self->{Translation}->{'warning'} = '';
-    $Self->{Translation}->{'incident'} = '';
-    $Self->{Translation}->{'The deployment state of this config item'} = '';
-    $Self->{Translation}->{'The incident state of this config item'} = '';
+        'Ei saa näidata elementi, ConfigItemile ei ole antud juurdepääsuõigusi!';
+    $Self->{Translation}->{'ConfigItem not found!'} = 'ConfigItem ei leitud!';
+    $Self->{Translation}->{'No versions found!'} = 'Ühtegi versiooni ei leitud!';
+    $Self->{Translation}->{'operational'} = 'operatiivne';
+    $Self->{Translation}->{'warning'} = 'hoiatus';
+    $Self->{Translation}->{'incident'} = 'juhtum';
+    $Self->{Translation}->{'The deployment state of this config item'} = 'Selle konfiguratsioonielemendi kasutuselevõtu olek';
+    $Self->{Translation}->{'The incident state of this config item'} = 'Selle konfiguratsioonielemendi intsidentne olek';
 
     # Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-    $Self->{Translation}->{'No permission'} = '';
-    $Self->{Translation}->{'Filter invalid!'} = '';
-    $Self->{Translation}->{'Search params invalid!'} = '';
+    $Self->{Translation}->{'No permission'} = 'Luba puudub';
+    $Self->{Translation}->{'Filter invalid!'} = 'Filter kehtetu!';
+    $Self->{Translation}->{'Search params invalid!'} = 'Search params kehtetu!';
 
     # Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-    $Self->{Translation}->{'Shown config items'} = '';
-    $Self->{Translation}->{'Deployment State Type'} = '';
-    $Self->{Translation}->{'Current Incident State Type'} = '';
+    $Self->{Translation}->{'Shown config items'} = 'Näidatud konfiguratsiooni elemendid';
+    $Self->{Translation}->{'Deployment State Type'} = 'Kasutuselevõtu riigi tüüp';
+    $Self->{Translation}->{'Current Incident State Type'} = 'Praegune õnnetusjuhtumi seisunditüüp';
 
     # Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
     $Self->{Translation}->{'Between'} = 'Between';
 
     # Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-    $Self->{Translation}->{'Class restrictions for the config item'} = '';
+    $Self->{Translation}->{'Class restrictions for the config item'} = 'Klassi piirangud konfiguratsioonielemendi jaoks';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
-        '';
-    $Self->{Translation}->{'Link type'} = '';
-    $Self->{Translation}->{'Select the link type.'} = '';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = '';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = '';
-    $Self->{Translation}->{'Link Direction'} = '';
+        'Valige üks või mitu klassi, et piirata valitavaid konfiguratsioonielemente.';
+    $Self->{Translation}->{'Link type'} = 'Lingi tüüp';
+    $Self->{Translation}->{'Select the link type.'} = 'Valige lingi tüüp.';
+    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Forwardid: Viidatud (Allikas) -> Viidatud (Siht)';
+    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Tagasi: Viidatud (Allikas) -> Viitamine (Sihtmärk): Viidatud (Allikas) -> Viidatud (Sihtmärk)';
+    $Self->{Translation}->{'Link Direction'} = 'Link Suund';
     $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        '';
-    $Self->{Translation}->{'Dynamic (ConfigItem)'} = '';
-    $Self->{Translation}->{'Static (Version)'} = '';
-    $Self->{Translation}->{'Link Referencing Type'} = '';
+        'Viitav objekt on see, mis sisaldab seda dünaamilist välja, viidatav objekt on see, mis on valitud dünaamilise välja väärtuseks.';
+    $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dünaamiline (ConfigItem)';
+    $Self->{Translation}->{'Static (Version)'} = 'Staatiline (versioon)';
+    $Self->{Translation}->{'Link Referencing Type'} = 'Linkide viitamise tüüp';
     $Self->{Translation}->{'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'} =
-        '';
-    $Self->{Translation}->{'Attribute which will be searched on autocomplete'} = '';
-    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = '';
-    $Self->{Translation}->{'External-source key'} = '';
-    $Self->{Translation}->{'When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute.'} =
-        '';
-    $Self->{Translation}->{'Attribute which is displayed for values'} = '';
-    $Self->{Translation}->{'Select the type of display'} = '';
+        'Kas see link kehtib viitava objekti ConfigItem\'i või staatilise versiooni kohta. Current Incident State\'i arvutamine toimub ainult dünaamiliste linkide puhul.';
+    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = 'Valige atribuut, mille järgi konfiguratsioonielemente otsitakse';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-    $Self->{Translation}->{'Base structure is not valid. Please provide an array with data in YAML format.'} =
-        '';
-    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = '';
+    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'YAML-stringi alustamine sõnaga \'---\' on nõutav.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-    $Self->{Translation}->{'Could not purge the table configitem_link.'} = '';
-    $Self->{Translation}->{'No relevant dynamic fields were found'} = '';
-    $Self->{Translation}->{'Could not insert into the table configitem_link'} = '';
-    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = '';
+    $Self->{Translation}->{'Could not purge the table configitem_link.'} = 'Tabelit configitem_link ei õnnestunud puhastada.';
+    $Self->{Translation}->{'No relevant dynamic fields were found'} = 'Asjakohaseid dünaamilisi välju ei leitud';
+    $Self->{Translation}->{'Could not insert into the table configitem_link'} = 'Ei õnnestunud sisestada tabelisse configitem_link';
+    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = 'Sisestatud 0 rida tabelisse configitem_link';
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-    $Self->{Translation}->{'Maximum number of one element'} = '';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '';
-    $Self->{Translation}->{'Skipped'} = '';
-
-    # Perl Module: Kernel/Modules/AdminACL.pm
-    $Self->{Translation}->{'ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information'} =
-        '';
-    $Self->{Translation}->{'%s (copy) %s'} = '';
+    $Self->{Translation}->{'Maximum number of one element'} = 'Ühe elemendi maksimaalne arv';
+    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tühjad väljad näitavad, et praegused väärtused jäävad alles.';
+    $Self->{Translation}->{'Skipped'} = 'Välja jäetud';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
-    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = '';
+    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Viga määratluste sünkroniseerimisel. Palun kontrollige logi.';
     $Self->{Translation}->{'You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes.'} =
-        '';
+        'Teil on ITSMConfigItem määratlused, mis ei ole sünkroniseeritud. Palun võtke kasutusele oma ITSMConfigItem dünaamiliste väljade muudatused.';
 
-    # Database XML Definition: ITSMConfigurationManagement.sopm
-    $Self->{Translation}->{'Expired'} = '';
-    $Self->{Translation}->{'Maintenance'} = '';
-    $Self->{Translation}->{'Pilot'} = '';
-    $Self->{Translation}->{'Planned'} = '';
-    $Self->{Translation}->{'Repair'} = '';
-    $Self->{Translation}->{'Retired'} = '';
-    $Self->{Translation}->{'Review'} = '';
-    $Self->{Translation}->{'Test/QA'} = '';
+    # Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
+    $Self->{Translation}->{'Expired'} = 'Aegunud';
+    $Self->{Translation}->{'Maintenance'} = 'Hooldus';
+    $Self->{Translation}->{'Pilot'} = 'Piloot';
+    $Self->{Translation}->{'Planned'} = 'Planeeritud';
+    $Self->{Translation}->{'Repair'} = 'Remont';
+    $Self->{Translation}->{'Retired'} = 'Pensionile jäänud';
+    $Self->{Translation}->{'Review'} = 'Ülevaade';
+    $Self->{Translation}->{'Test/QA'} = 'Test/QA';
 
     # JS File: ITSM.Admin.ITSMConfigItem
-    $Self->{Translation}->{'Overview and Confirmation'} = '';
-    $Self->{Translation}->{'An error occurred during class import.'} = '';
-
-    # JS File: ITSM.Agent.ConfigItem.Zoom
-    $Self->{Translation}->{'Ok'} = '';
+    $Self->{Translation}->{'Overview and Confirmation'} = 'Ülevaade ja kinnitus';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'An error occurred during class import.'} = 'Klassi importimisel tekkis viga.';
 
     # SysConfig
-    $Self->{Translation}->{'A precentage value of the minimal translation progress per language, to be usable for documentations.'} =
+    $Self->{Translation}->{'0 - Hidden'} = '0 - peidetud';
+    $Self->{Translation}->{'1 - Shown'} = '1 - näidatud';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Võimaldab laiendatud otsingutingimusi agentide kasutajaliidese konfiguratsioonielementide otsingus. Selle funktsiooniga saate otsida nt config-elemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Võimaldab laiendatud otsingutingimusi kliendi kasutajaliidese konfiguratsioonielemendi otsingus. Selle funktsiooniga saate otsida nt konfiguratsioonielemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Assigned CIs'} = 'Määratud elutähtsad infrastruktuurid';
+    $Self->{Translation}->{'CIs assigned to customer company'} = 'Klientidele määratud CId kliendiettevõttele';
+    $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliendikasutajale määratud CId';
+    $Self->{Translation}->{'CMDB Settings'} = 'CMDB seaded';
+    $Self->{Translation}->{'Check for a unique name only within the same ConfigItem class (\'class\') or globally (\'global\'), which means every existing ConfigItem is taken into account when looking for duplicates.'} =
+        'Kontrollida unikaalset nime ainult sama ConfigItem klassi (\'class\') või globaalselt (\'global\'), mis tähendab, et dubleeringute otsimisel võetakse arvesse iga olemasolevat ConfigItem\'i.';
+    $Self->{Translation}->{'Choose a module to enforce a naming scheme.'} = 'Valige moodul nimeskeemi jõustamiseks.';
+    $Self->{Translation}->{'Choose a module to enforce a number scheme.'} = 'Valige moodul numbriskeemi jõustamiseks.';
+    $Self->{Translation}->{'Choose a module to enforce a version string scheme.'} = 'Valige moodul, et kehtestada versioonijada skeem.';
+    $Self->{Translation}->{'Choose attributes to trigger the creation of a new version.'} = 'Valige atribuudid, mis käivitavad uue versiooni loomise.';
+    $Self->{Translation}->{'Choose categories to assign to this config item class.'} = 'Valige kategooriad, mis määratakse sellele konfiguratsioonielemendi klassile.';
+    $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'ConfigItem Overview veergu ConfigItem elemendi filtrid.';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Veerud, mida saab filtreerida agentide kasutajaliidese konfiguratsioonielemendi ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Veerud, mida saab filtreerida kliendi kasutajaliidese konfiguratsioonielemendi ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
+    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '';
-    $Self->{Translation}->{'Access repos via http or https.'} = '';
-    $Self->{Translation}->{'Autoloading of Znuny4OTRSRepo extensions.'} = '';
-    $Self->{Translation}->{'Backend module registration for the config conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the file conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the function redefine check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the manual set module.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for BS ad removal.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for package manager output filter.'} =
-        '';
-    $Self->{Translation}->{'Branch View commit limit'} = '';
-    $Self->{Translation}->{'CodePolicy'} = '';
-    $Self->{Translation}->{'Commit limit per page for Branch view screen'} = '';
-    $Self->{Translation}->{'Create analysis file'} = '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket and sends to Znuny.'} =
-        '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket.'} = '';
-    $Self->{Translation}->{'Define private addon repos.'} = '';
-    $Self->{Translation}->{'Defines the filter that processes the HTML templates.'} = '';
-    $Self->{Translation}->{'Defines the test module for checking code policy.'} = '';
-    $Self->{Translation}->{'Definition of GIT clone/push URL Prefix.'} = '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date).'} =
-        '';
-    $Self->{Translation}->{'Definition of mappings between public repository requests and internal OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Definition of package states.'} = '';
-    $Self->{Translation}->{'Definition of renamed OPMS packages.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to cache repositories.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store temporary data.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store working copies.'} = '';
-    $Self->{Translation}->{'Disable online repositories.'} = '';
-    $Self->{Translation}->{'Do not log git ssh connection authorization results for these users. Useful for automated stuff.'} =
-        '';
-    $Self->{Translation}->{'Dynamic Fields Screens'} = '';
-    $Self->{Translation}->{'DynamicFieldScreen'} = '';
-    $Self->{Translation}->{'Export all available public keys to authorized_keys file.'} = '';
-    $Self->{Translation}->{'Export all relevant releases to ftp server.'} = '';
-    $Self->{Translation}->{'Frontend module registration for the OPMS object in the agent interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepository object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSTestBuild object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicPackageVerification object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the admin interface.'} = '';
-    $Self->{Translation}->{'GIT Author registration.'} = '';
-    $Self->{Translation}->{'Generate HTML comment hooks for the specified blocks so that filters can use them.'} =
-        '';
-    $Self->{Translation}->{'Generate documentations once per night.'} = '';
-    $Self->{Translation}->{'Git'} = '';
-    $Self->{Translation}->{'Git Management'} = '';
-    $Self->{Translation}->{'Git Repository'} = '';
-    $Self->{Translation}->{'Group, whose members have delete admin permissions in OPMS.'} = '';
-    $Self->{Translation}->{'Group, whose members have repository admin permissions in OPMS.'} =
-        '';
-    $Self->{Translation}->{'Group, whose members will see CI test result information in OPMS screens.'} =
-        '';
-    $Self->{Translation}->{'Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface.'} =
-        '';
-    $Self->{Translation}->{'Groups which will be set during git project creation processes while adding OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Manage dynamic field in screens.'} = '';
-    $Self->{Translation}->{'Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the added code lines.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the growth of code.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the number of git commits.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the removed code lines.'} = '';
-    $Self->{Translation}->{'OPMS'} = '';
-    $Self->{Translation}->{'Only users who have rw permissions in one of these groups may access git.'} =
-        '';
-    $Self->{Translation}->{'Option to set a package compatibility manually.'} = '';
-    $Self->{Translation}->{'Parameters for the pages in the BranchView screen.'} = '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITProjectName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITRepositoryName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'PackageDeprecated\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Recipients that will be informed by email in case of errors.'} =
-        '';
-    $Self->{Translation}->{'SSH Keys for Git Access'} = '';
-    $Self->{Translation}->{'Send analysis file'} = '';
-    $Self->{Translation}->{'Sets the git clone address to be used in repository listings.'} =
-        '';
-    $Self->{Translation}->{'Sets the home directory for git repositories.'} = '';
-    $Self->{Translation}->{'Sets the path for the BugzillaAddComment post receive script location.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Show latest commits in git repositories.'} = '';
-    $Self->{Translation}->{'Shows a link in the menu to go create a unit test from the current ticket.'} =
-        '';
-    $Self->{Translation}->{'Synchronize OPMS tables with a remote database.'} = '';
-    $Self->{Translation}->{'The minimum version of the sphinx library.'} = '';
-    $Self->{Translation}->{'The name of the sphinx theme to be used.'} = '';
-    $Self->{Translation}->{'The path to the OTRS CSS file (relative below the static path).'} =
-        '';
-    $Self->{Translation}->{'The path to the OTRS logo (relative below the static path).'} = '';
-    $Self->{Translation}->{'The path to the static folder, containing images and css files.'} =
-        '';
-    $Self->{Translation}->{'The path to the theme folder, containing the sphinx themes.'} = '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable default columns.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable dynamic fields.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if only valids or all (invalids) dynamic fields should be shown.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It\'s still recommended to use only verified packages.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig \'Znuny4OTRSRepoType\'.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers a Output post-filter to extend package verification.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an output filter to hide online repository selection in package manager.'} =
-        '';
-    $Self->{Translation}->{'Tidy unprocessed release that not passed test pomules checks for a long time.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to execute force pushes \'git push --force\'.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management.'} =
-        '';
-
-    # ITSM class bundles
-    $Self->{Translation}->{'Accounting'} = '';
-    $Self->{Translation}->{'Address Allocation'} = '';
-    $Self->{Translation}->{'Administrator'} = '';
-    $Self->{Translation}->{'Analog Phone'} = '';
-    $Self->{Translation}->{'Appliance Type'} = '';
-    $Self->{Translation}->{'Backlinks'} = '';
-    $Self->{Translation}->{'Battery Capacity (Ah)'} = '';
-    $Self->{Translation}->{'Battery Type'} = '';
-    $Self->{Translation}->{'Building'} = '';
-    $Self->{Translation}->{'Bus Interface'} = '';
-    $Self->{Translation}->{'CIDR'} = '';
-    $Self->{Translation}->{'CPU'} = '';
-    $Self->{Translation}->{'CPU Class'} = '';
-    $Self->{Translation}->{'Capacity (GB)'} = '';
-    $Self->{Translation}->{'Capacity per graphics card'} = '';
-    $Self->{Translation}->{'Card Number'} = '';
-    $Self->{Translation}->{'Card Reader'} = '';
-    $Self->{Translation}->{'Card Type'} = '';
-    $Self->{Translation}->{'Client Certificates'} = '';
-    $Self->{Translation}->{'Client Software'} = '';
-    $Self->{Translation}->{'Client category'} = '';
-    $Self->{Translation}->{'Clockrate'} = '';
-    $Self->{Translation}->{'Clockspeed'} = '';
-    $Self->{Translation}->{'Code Signing Certificates'} = '';
-    $Self->{Translation}->{'Conference Phone'} = '';
-    $Self->{Translation}->{'Consulting Agreement'} = '';
-    $Self->{Translation}->{'Contact'} = '';
-    $Self->{Translation}->{'Contact Distributor'} = '';
-    $Self->{Translation}->{'Container Management'} = '';
-    $Self->{Translation}->{'Contract'} = '';
-    $Self->{Translation}->{'Contract Type'} = '';
-    $Self->{Translation}->{'Contract period from'} = '';
-    $Self->{Translation}->{'Contract period until'} = '';
-    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = '';
-    $Self->{Translation}->{'Cost unit'} = '';
-    $Self->{Translation}->{'Count of licenses'} = '';
-    $Self->{Translation}->{'Creation Date'} = '';
-    $Self->{Translation}->{'DHCP'} = '';
-    $Self->{Translation}->{'DHCP Reserved'} = '';
-    $Self->{Translation}->{'DNS-Server'} = '';
-    $Self->{Translation}->{'Date of Invoice'} = '';
-    $Self->{Translation}->{'Date of Order'} = '';
-    $Self->{Translation}->{'Date of Warranty'} = '';
-    $Self->{Translation}->{'Date of release'} = '';
-    $Self->{Translation}->{'Desktop'} = '';
-    $Self->{Translation}->{'Document Signing Certificates'} = '';
-    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = '';
-    $Self->{Translation}->{'Employment Contract'} = '';
-    $Self->{Translation}->{'End IP Address'} = '';
-    $Self->{Translation}->{'End of support'} = '';
-    $Self->{Translation}->{'Expiry Date'} = '';
-    $Self->{Translation}->{'External Hard Drive'} = '';
-    $Self->{Translation}->{'Firewall'} = '';
-    $Self->{Translation}->{'Firmware'} = '';
-    $Self->{Translation}->{'Form Factor'} = '';
-    $Self->{Translation}->{'Franchise Agreement'} = '';
-    $Self->{Translation}->{'General Information'} = '';
-    $Self->{Translation}->{'Graphics Cards'} = '';
-    $Self->{Translation}->{'Graphics card'} = '';
-    $Self->{Translation}->{'Hardware'} = '';
-    $Self->{Translation}->{'Hardware Model'} = '';
-    $Self->{Translation}->{'Hardware Weight'} = '';
-    $Self->{Translation}->{'Headset'} = '';
-    $Self->{Translation}->{'IP Protocol'} = '';
-    $Self->{Translation}->{'Identity and Access Management (IAM)'} = '';
-    $Self->{Translation}->{'Inventory Number'} = '';
-    $Self->{Translation}->{'Inverstment costs'} = '';
-    $Self->{Translation}->{'Invoice Number'} = '';
-    $Self->{Translation}->{'Keyboard'} = '';
-    $Self->{Translation}->{'Landline Phone'} = '';
-    $Self->{Translation}->{'Laptop'} = '';
-    $Self->{Translation}->{'Latitude'} = '';
-    $Self->{Translation}->{'Layer 1: Physical Layer'} = '';
-    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '';
-    $Self->{Translation}->{'Layer 4: Transport Layer'} = '';
-    $Self->{Translation}->{'Layer 5: Session Layer'} = '';
-    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '';
-    $Self->{Translation}->{'Layer 7: Application Layer'} = '';
-    $Self->{Translation}->{'Lease Agreement'} = '';
-    $Self->{Translation}->{'License Agreement'} = '';
-    $Self->{Translation}->{'License Key'} = '';
-    $Self->{Translation}->{'License Type'} = '';
-    $Self->{Translation}->{'License period from'} = '';
-    $Self->{Translation}->{'License period until'} = '';
-    $Self->{Translation}->{'Loan Agreement'} = '';
-    $Self->{Translation}->{'Located in'} = '';
-    $Self->{Translation}->{'Longitude'} = '';
-    $Self->{Translation}->{'Manufacturer'} = '';
-    $Self->{Translation}->{'Maximum Load Capacity (W)'} = '';
-    $Self->{Translation}->{'Memory'} = '';
-    $Self->{Translation}->{'Memory Type'} = '';
-    $Self->{Translation}->{'Mobile Number'} = '';
-    $Self->{Translation}->{'Mobile/Embedded'} = '';
-    $Self->{Translation}->{'Model'} = '';
-    $Self->{Translation}->{'Model Description'} = '';
-    $Self->{Translation}->{'Monitor Resolution'} = '';
-    $Self->{Translation}->{'Monitor Size'} = '';
-    $Self->{Translation}->{'Mouse'} = '';
-    $Self->{Translation}->{'Network'} = '';
-    $Self->{Translation}->{'Network Info'} = '';
-    $Self->{Translation}->{'Network Information'} = '';
-    $Self->{Translation}->{'Network Layer'} = '';
-    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = '';
-    $Self->{Translation}->{'Notebook'} = '';
-    $Self->{Translation}->{'Number of CPUs'} = '';
-    $Self->{Translation}->{'Number of RAM modules'} = '';
-    $Self->{Translation}->{'Number of graphics cards'} = '';
-    $Self->{Translation}->{'OTOBO'} = '';
-    $Self->{Translation}->{'Operating costs'} = '';
-    $Self->{Translation}->{'Order Number'} = '';
-    $Self->{Translation}->{'Other'} = '';
-    $Self->{Translation}->{'Outputs'} = '';
-    $Self->{Translation}->{'PIN'} = '';
-    $Self->{Translation}->{'PIN 2'} = '';
-    $Self->{Translation}->{'PUK'} = '';
-    $Self->{Translation}->{'PUK 2'} = '';
-    $Self->{Translation}->{'Partnership Agreement'} = '';
-    $Self->{Translation}->{'Phone / VOIP'} = '';
-    $Self->{Translation}->{'Phone Number'} = '';
-    $Self->{Translation}->{'Phone Type'} = '';
-    $Self->{Translation}->{'Physical Cores'} = '';
-    $Self->{Translation}->{'Power Delivery'} = '';
-    $Self->{Translation}->{'Purchased at'} = '';
-    $Self->{Translation}->{'Rack Depth'} = '';
-    $Self->{Translation}->{'Rack Units (U)'} = '';
-    $Self->{Translation}->{'Reference to Customer'} = '';
-    $Self->{Translation}->{'Room'} = '';
-    $Self->{Translation}->{'SIM Card'} = '';
-    $Self->{Translation}->{'SSL/TLS Certificates'} = '';
-    $Self->{Translation}->{'Sales Contract'} = '';
-    $Self->{Translation}->{'Satellite Phone'} = '';
-    $Self->{Translation}->{'Serialnumber'} = '';
-    $Self->{Translation}->{'Server'} = '';
-    $Self->{Translation}->{'Server Software'} = '';
-    $Self->{Translation}->{'Service Agreement'} = '';
-    $Self->{Translation}->{'Service Tag'} = '';
-    $Self->{Translation}->{'Socket Type'} = '';
-    $Self->{Translation}->{'Software'} = '';
-    $Self->{Translation}->{'Speakers'} = '';
-    $Self->{Translation}->{'Start IP Address'} = '';
-    $Self->{Translation}->{'Storage'} = '';
-    $Self->{Translation}->{'Storage Partition'} = '';
-    $Self->{Translation}->{'Subsidiary'} = '';
-    $Self->{Translation}->{'Summary'} = '';
-    $Self->{Translation}->{'Thin Client'} = '';
-    $Self->{Translation}->{'Threads'} = '';
-    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = '';
-    $Self->{Translation}->{'Total RAM (GB)'} = '';
-    $Self->{Translation}->{'USB Hub'} = '';
-    $Self->{Translation}->{'VPN'} = '';
-    $Self->{Translation}->{'VR Headset'} = '';
-    $Self->{Translation}->{'VoIP Phone'} = '';
-    $Self->{Translation}->{'Webcam'} = '';
+    $Self->{Translation}->{'Config Items'} = 'Konfigureerimisobjektid';
+    $Self->{Translation}->{'Config item add.'} = 'Config item add.';
+    $Self->{Translation}->{'Config item edit.'} = 'Config item edit.';
+    $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
+        'Config item event moodul, mis võimaldab agendi kasutajaliideses ajalukku logida.';
+    $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
+        'Config elementide sündmuste moodul, mis uuendab config elemente nende praeguse määratluse järgi.';
+    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
+        'Config item sündmuse moodul, mis uuendab tabelit configitem_ĺink.';
+    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
+        'Config item\'i sündmuse moodul uuendab praegust intsidendi olekut.';
+    $Self->{Translation}->{'Config item history.'} = 'Väljalaskeava';
+    $Self->{Translation}->{'Config item print.'} = 'Config item print.';
+    $Self->{Translation}->{'Config item zoom.'} = 'Config item zoom.';
+    $Self->{Translation}->{'ConfigItem Tree View'} = 'ConfigItem Tree View';
+    $Self->{Translation}->{'ConfigItem Version'} = 'ConfigItem versioon';
+    $Self->{Translation}->{'ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        'Järgmiste klasside ConfigItems ei salvestata Elasticsearchi serverisse. Et seda olemasolevatele CI-dele rakendada, tuleb pärast selle valiku muutmist käivitada CI migratsioon konsooli kaudu.';
+    $Self->{Translation}->{'ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        'ConfigItems, millel on järgmised kasutuselevõtu olekud, ei salvestata Elasticsearchi serverisse. Selle kohaldamiseks olemasolevatele CI-dele tuleb pärast selle valiku muutmist käivitada CI-migratsioon konsooli kaudu.';
+    $Self->{Translation}->{'Configuration Item Limit'} = 'Konfigureerimisüksuse piirang';
+    $Self->{Translation}->{'Configuration Item limit per page.'} = 'Konfiguratsioon Elementide piirarv lehekülje kohta.';
+    $Self->{Translation}->{'Configuration Management Database.'} = 'Konfiguratsiooni juhtimise andmebaas.';
+    $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfiguratsioonielemendi lahtine moodul.';
+    $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
+        'Konfigureerimiselemendi otsing agentide liidese tagasiside marsruuter.';
+    $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Luua ja hallata konfiguratsiooniobjektide määratlusi.';
+    $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kliendid saavad näha ajaloolisi CI-versioone.';
+    $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
+        'Klientidel on võimalus käsitsi vahetada varasemate CI-versioonide vahel.';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".'} =
+        'Vaikimisi andmed, mida kasutatakse atribuutide puhul konfiguratsioonielemendi otsingu ekraanil. Näide: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".'} =
+        'Vaikimisi andmed, mida kasutatakse atribuutide puhul konfiguratsioonielemendi otsingu ekraanil. Näide: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".';
+    $Self->{Translation}->{'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.'} =
+        'Määrake toimingud, mille puhul on seotud objektide vidina (LinkObject::ViewMode = "complex") saadaval seadete nupp (LinkObject::ViewMode = "complex"). Pange tähele, et need toimingud peavad olema registreeritud järgmised JS- ja CSS-failid: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ja Core.Agent.LinkObject.js.';
+    $Self->{Translation}->{'Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit.'} =
+        'Määrake malli::Toolkit skeem versiooni stringide jaoks. Kasutatakse ainult siis, kui Version String Module\'ile on määratud TemplateToolkit.';
+    $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
+        'Määrake tingimused, mille alusel kliendil on lubatud konfiguratsioonielementi näha. Tingimusi saab valikuliselt piirata teatud kliendirühmadele. Nimi on ainus kohustuslik atribuut. Kui muid valikuid ei ole antud, on kõik konfiguratsioonielemendid selle kategooria all nähtavad.';
+    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
+        'Määratleb nõutavad õigused ITSM-konfiguratsiooni elementide loomiseks, kasutades üldist liidest.';
+    $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
+        'Määratleb nõutavad õigused ITSMi konfiguratsiooniobjektide kustutamiseks üldise liidese abil.';
+    $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
+        'Määratleb nõutavad õigused ITSMi konfiguratsioonielementide saamiseks üldise liidese abil.';
+    $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
+        'Määratleb nõutavad õigused ITSMi konfiguratsiooniobjektide otsimiseks üldise liidese abil.';
+    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
+        'Kuvab menüüs lingi, mille abil saab seadistusobjekti redigeerida agentide kasutajaliidese suumivaates.';
+    $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
+        'Määratleb ülevaatemooduli, mis näitab konfiguratsioonielementide loendi väikest vaadet.';
+    $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
+        'Määrab, kas lingitüübi sildid peavad olema kuvatud sõlmeühendustes.';
+    $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
+        'Määratleb iga ConfigItem-klassi jaoks eraldi regulaaravaldised ConfigItem-nime kontrollimiseks ja vastavate veateadete kuvamiseks.';
+    $Self->{Translation}->{'Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Määratleb CIde olemasolevad veerud konfiguratsioonielemendi ülevaates sõltuvalt CI-klassist. Iga kirje peab koosnema klassi nimest ja vastava klassi jaoks kättesaadavate väljade massiivi. Dünaamiliste väljade kirjed peavad järgima skeemi DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the agent interface.'} =
+        'Määratleb vaikimisi konfiguratsioonielemendi atribuudi, mis on vajalik agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuse sorteerimiseks.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the customer interface.'} =
+        'Määrab vaikimisi konfiguratsioonielemendi atribuudi kliendi kasutajaliidese konfiguratsioonielemendi otsingutulemuse sorteerimiseks.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of this operation.'} =
+        'Määrab vaikimisi konfiguratsioonielemendi atribuudi selle operatsiooni konfiguratsioonielemendi otsingutulemuse sorteerimiseks.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top.'} =
+        'Määrab vaikimisi konfiguratsioonielemendi järjekorra agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuses. Üles: vanim on üleval. Alla: uusim üleval.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
+        'Määrab vaikimisi konfiguratsioonielemendi järjekorra kliendi kasutajaliidese konfiguratsioonielemendi otsingutulemuses. Üles: vanim on üleval. Alla: uusim üleval.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
+        'Määrab vaikimisi konfiguratsioonielemendi järjekorra selle operatsiooni konfiguratsioonielemendi otsingutulemuses. Üles: vanim peal. Alla: uusim üleval.';
+    $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Määratleb CIde vaikimisi kuvatavad veerud konfiguratsioonielemendi ülevaates sõltuvalt CI-klassist. Iga kirje peab koosnema klassi nimest ja vastava klassi jaoks kättesaadavate väljade massiivi. Dünaamiliste väljade kirjed peavad järgima skeemi DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Määrab vaikimisi kuvatavate suhete sügavuse.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen.'} =
+        'Määratleb vaikimisi kuvatava konfiguratsioonielemendi otsingu atribuudi konfiguratsioonielemendi otsingu ekraanil.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.'} =
+        'Määratleb vaikimisi kuvatava konfiguratsioonielemendi otsingu atribuudi konfiguratsioonielemendi otsingu ekraanil. Näide: "Key" peab olema dünaamilise välja nimi, antud juhul \'X\', "Content" peab olema dünaamilise välja väärtus sõltuvalt dünaamilise välja tüübist, Text: \'a text\', Dropdown: \'1\', Date/Time: Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' ja või \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
+    $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
+        'Määratleb klassi \'ITSMConfigItem\' vaikimisi alamobjekti.';
+    $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
+        'Määratleb CI määratluse redaktori ridade arvu haldusliideses.';
+    $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
+        'Määratleb juhtumi seisundite järjekorra kõrgest (nt kritsiaalne) kuni madalani (nt funktsionaalne).';
+    $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
+        'Määratleb asjaomased kasutuselevõtu olekud, mille puhul seotud piletid võivad mõjutada CI olekut.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =
+        'Määratleb agentITSMConfigItem ekraani otsingupiirangu.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItemSearch screen.'} =
+        'Määratleb otsingupiirangu ekraani AgentITSMConfigItemSearch jaoks.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItem screen.'} =
+        'Määrab otsingupiirangu ekraani CustomerITSMConfigItem jaoks.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItemSearch screen.'} =
+        'Määrab otsingupiirangu ekraanil CustomerITSMConfigItemSearch.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown.'} =
+        'Määratleb kõikide CI-klasside jaoks lingitabelis kompleksvaates näidatud CIde veerud. Kui kanne puudub, kuvatakse vaikimisi veerud.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown.'} =
+        'Määratleb lingitabelis kompleksvaates näidatud CIde veerud sõltuvalt CI-klassist. Iga kirje ees peab olema klassi nimi ja kaks koolonit (nt Computer::). On olemas mõned CI-Attribuudid, mis on kõigile CIdele ühised (näiteks klassi Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Üksikute CI-Attribuutide näitamiseks, nagu on määratletud CI-Definitsioonis, tuleb kasutada järgmist skeemi (näide klassi Computer puhul): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Kui CI-klassi kohta puudub kanne, kuvatakse vaikimisi veerud.';
+    $Self->{Translation}->{'Defines which items are available for \'Action\' in third level of the ITSM Config Item ACL structure.'} =
+        'Määrab, millised elemendid on saadaval "Action" jaoks ITSM Config Item ACLi struktuuri kolmandal tasandil.';
+    $Self->{Translation}->{'Defines which items are available in first level of the ITSM Config Item ACL structure.'} =
+        'Määrab, millised elemendid on saadaval ITSM Config Item ACLi struktuuri esimesel tasandil.';
+    $Self->{Translation}->{'Defines which items are available in second level of the ITSM Config Item ACL structure.'} =
+        'Määrab, millised elemendid on saadaval ITSM Config Item ACLi struktuuri teisel tasandil.';
+    $Self->{Translation}->{'Defines which type of link (named from the ticket perspective) can affect the status of a linked CI.'} =
+        'Määrab, millist tüüpi link (nimega pileti vaatenurgast) võib mõjutada seotud CI staatust.';
+    $Self->{Translation}->{'Defines which type of ticket can affect the status of a linked CI.'} =
+        'Määrab, millist tüüpi piletid võivad mõjutada seotud CI staatust.';
+    $Self->{Translation}->{'Definition Update'} = 'Määratluse ajakohastamine';
+    $Self->{Translation}->{'Delete Configuration Item'} = 'Kustuta konfiguratsioonielement';
+    $Self->{Translation}->{'DeplState'} = 'DeplState';
+    $Self->{Translation}->{'Deployment State Color'} = 'Kasutuselevõtu olek Värv';
+    $Self->{Translation}->{'DeploymentState'} = 'DeploymentState';
+    $Self->{Translation}->{'Duplicate'} = 'Duplikaat';
+    $Self->{Translation}->{'Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.'} =
+        'Dünaamiliste väljade sündmuste moodul, mis märgib konfiguratsioonielemendi määratlused sünkroonist väljas olevaks, kui dünaamilisi välju sisaldavad dünaamilised väljad muutuvad.';
+    $Self->{Translation}->{'Dynamic fields shown in the additional ITSM field screen of the agent interface.'} =
+        'Dünaamilised väljad, mis kuvatakse agentide kasutajaliidese täiendavate ITSM-väljade ekraanil.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item overview screen of the customer interface.'} =
+        'Dünaamilised väljad, mis kuvatakse kliendi kasutajaliidese konfiguratsioonielemendi ülevaate ekraanil.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item search screen of the agent interface.'} =
+        'Dünaamilised väljad, mis kuvatakse agendi kasutajaliidese konfiguratsioonielemendi otsingu ekraanil.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time.'} =
+        'Võimaldab konfiguratsioonielemendi massitegevuse funktsiooni, et agentide frontend saaks töötada korraga rohkem kui ühe konfiguratsioonielemendiga.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
+        'Selle konfiguratsioonielemendi kasutuselevõtu olek';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+        'Võimaldab/välja lülitab ITSMi konfiguratsioonielementide kontrollimise funktsiooni unikaalsete nimede osas. Enne selle suvandi lubamist peaksite kontrollima oma süsteemi juba olemasolevate dubleerivate nimedega konfiguratsioonielementide suhtes. Seda saate teha konsooli käsuga Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
+        'Sündmuse moodul, et määrata configitem-status ticket-configitem-linkile.';
+    $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
+        'Konfiguratsioonielemendi indeksi väljad, mida kasutatakse täistekstiotsinguks. Väljad on samuti salvestatud, kuid ei ole üldise funktsionaalsuse jaoks kohustuslikud. Manuste lisamise saab keelata, kui määrata kirje väärtuseks 0 või kustutada see.';
+    $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
+        'Konfiguratsioonielemendi indeksisse salvestatud väljad, mida kasutatakse lisaks täistekstotsingutele ka muudeks asjadeks. Täieliku funktsionaalsuse tagamiseks on kõik väljad kohustuslikud.';
+    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
+        'Iga veebiteenuse (võti) jaoks saab määratleda klasside massiivi (väärtus), mille puhul on import piiratud. Kõigi valitud klasside või kõigi olemasolevate klasside jaoks tuleb invoker\'i konfiguratsioonis valida identifitseerivad atribuudid.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
+        'GenericInterface\'i mooduli registreerimine ConfigItemFetch kutsuva kihi jaoks.';
+    $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
+    $Self->{Translation}->{'ITSM config item overview.'} = 'ITSMi konfiguratsioonielemendi ülevaade.';
+    $Self->{Translation}->{'InciState'} = 'InciState';
+    $Self->{Translation}->{'IncidentState'} = 'IncidentState';
+    $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
+        'Sisaldab kliendi kasutajaliidese konfiguratsioonielemendi otsingusse kasutuselevõtu olekuid.';
+    $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
+        'Sisaldab kliendiliidese konfiguratsioonielemendi otsingusse intsidentide olekud.';
+    $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
+        'Selle operatsiooni tulemusel kuvatavate konfiguratsioonielementide maksimaalne arv.';
+    $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Moodul, et kontrollida klassi eest vastutavat rühma.';
+    $Self->{Translation}->{'Module to check the group responsible for a configuration item.'} =
+        'Moodul, et kontrollida konfiguratsioonielemendi eest vastutavat rühma.';
+    $Self->{Translation}->{'Module to generate ITSM config item statistics.'} = 'Moodul ITSM-i konfiguratsioonielementide statistika genereerimiseks.';
+    $Self->{Translation}->{'Name Module'} = 'Nimi Moodul';
+    $Self->{Translation}->{'Number Module'} = 'Numbrimoodul';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the agent interface.'} =
+        'Konfigureerimisobjektide arv, mis kuvatakse agendi kasutajaliideses igal otsingutulemuse lehel.';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the customer interface.'} =
+        'Klientide kasutajaliideses igal otsingutulemuse lehel kuvatavate konfiguratsioonielementide arv.';
+    $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
+        'objektid, mida otsida, kui palju kirjeid ja milliseid atribuute näidata. ConfigItem atribuudid tuleb selgesõnaliselt salvestada Elasticsearchi kaudu.';
+    $Self->{Translation}->{'Overview.'} = 'Ülevaade.';
+    $Self->{Translation}->{'Parameters for the categories for config item classes in the preferences view of the agent interface.'} =
+        'Parameetrid konfiguratsioonielemendi klasside kategooriate jaoks agentide kasutajaliidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
+        'Parameetrid väikese konfiguratsioonielemendi ülevaate veergude filtrite jaoks. Pange tähele: kui määrata \'Active\' väärtuseks 0, takistab see ainult agentidel selle grupi seadete muutmist oma isiklikes eelistustes, kuid lubab administraatoritel siiski teise kasutaja nimel seadete muutmist. Kasutage \'PreferenceGroup\', et kontrollida, millises piirkonnas neid seadeid kasutajaliideses näidatakse.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
+        'Parameetrid armatuurlaua tagaküljel kliendi ettevõtte config item ülevaate agent liides . "Limit" on vaikimisi kuvatavate kirjete arv. "Group" kasutatakse pluginale juurdepääsu piiramiseks (nt Group: admin;group1;group2;). "Default" määrab, kas plugin on vaikimisi lubatud või peab kasutaja selle käsitsi lubama. "CacheTTLLocal" on pluginale määratud vahemälu aeg minutites.';
+    $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
+        'Kasutuselevõtu olekute parameetrite värv agentide kasutajaliidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
+        'kasutuselevõtu olekute parameetrid agentide kasutajaliidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the example permission groups of the general catalog attributes.'} =
+        'Üldiste kataloogi atribuutide näidisõiguste rühmade parameetrid.';
+    $Self->{Translation}->{'Parameters for the name module for config item classes in the preferences view of the agent interface.'} =
+        'Nimemooduli parameetrid konfigureeritud elemendiklasside jaoks agentide kasutajaliidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the number module for config item classes in the preferences view of the agent interface.'} =
+        'Parameetrid numbrimooduli jaoks konfigureeritud elemendiklasside jaoks agentide kasutajaliidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
+        'Lehekülgede parameetrid (kus kuvatakse konfiguratsioonielemente).';
+    $Self->{Translation}->{'Parameters for the version string module for config item classes in the preferences view of the agent interface.'} =
+        'Parameetrid versiooni stringi mooduli jaoks config elementide klasside jaoks agentide liidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface.'} =
+        'Parameetrid versiooni stringi malli tööriistakomplekti mooduli jaoks konfigureeritud elemendiklasside jaoks agentide liidese eelistuste vaates.';
+    $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
+        'Parameetrid versiooni käivitamiseks konfiguratsioonielemendi klasside jaoks agentide liidese eelistuste vaates.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
+        'Teostab seadistatud toimingu iga sündmuse jaoks (kui kutsuja) iga konfigureeritud veebiteenuse jaoks.';
+    $Self->{Translation}->{'Permission Group'} = 'Loa grupp';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
+        'Nõutavad õigused ITSMi konfiguratsioonielemendi kinnitamise toimingu kasutamiseks agendi kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused ITSMi konfiguratsioonielemendi ekraani kasutamiseks agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the agent interface.'} =
+        'Vajalikud õigused ITSMi konfiguratsioonielemendi otsingu ekraani kasutamiseks agendi kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the customer interface.'} =
+        'Nõutavad õigused ITSMi konfiguratsioonielemendi otsingu ekraani kasutamiseks kliendi kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item tree view screen in the agent interface.'} =
+        'Vajalikud õigused ITSMi konfiguratsioonielemendi puu vaate ekraani kasutamiseks agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item zoom screen in the agent interface.'} =
+        'Vajalikud õigused ITSMi konfiguratsioonielemendi suumimisekraani kasutamiseks agendi kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the add ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused, et kasutada ITSMi konfiguratsioonielemendi lisamise ekraani agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the bulk ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused, et kasutada ITSMi masskonfiguratsiooni elemendi ekraani agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the edit ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused, et kasutada ITSMi konfiguratsioonielemendi redigeerimise ekraani agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the history ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused, et kasutada ITSMi konfiguratsioonielemendi ajaloo ekraani agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required permissions to use the print ITSM configuration item screen in the agent interface.'} =
+        'Vajalikud õigused, et kasutada ITSMi konfiguratsioonielemendi ekraani printimine agentide kasutajaliideses.';
+    $Self->{Translation}->{'Required privileges to delete config items.'} = 'Nõutavad õigused konfiguratsioonielementide kustutamiseks.';
+    $Self->{Translation}->{'Search config items.'} = 'Otsi konfigureeritud elemente.';
+    $Self->{Translation}->{'Set the incident state of a CI automatically when a Ticket is Linked to a CI.'} =
+        'Seadistage CI intsidendi staatus automaatselt, kui pilet on seotud CIga.';
+    $Self->{Translation}->{'Sets the deployment state in the configuration item bulk screen of the agent interface.'} =
+        'Määrab kasutuselevõtu oleku agentide kasutajaliidese konfiguratsioonielemendi hulgiaknas.';
+    $Self->{Translation}->{'Sets the incident state in the configuration item bulk screen of the agent interface.'} =
+        'Määrab intsidendi oleku agentide liidese konfiguratsioonielemendi hulgiaknas.';
+    $Self->{Translation}->{'Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface.'} =
+        'preproduktiivne';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil pääseb konfiguratsioonielemendi ajalukku agentide kasutajaliidese konfiguratsioonielemendi ülevaates.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil saab juurdepääsu konfiguratsioonielemendi ajaloole agendi kasutajaliidese suumivaates.';
+    $Self->{Translation}->{'Shows a link in the menu to delete a configuration item in its zoom view of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil saab kustutada konfiguratsioonielementi oma agendi kasutajaliidese suumivaates.';
+    $Self->{Translation}->{'Shows a link in the menu to display the configuration item links as a Tree View.'} =
+        'Kuvab menüüs lingi, et kuvada konfiguratsioonielementide lingid puuvaatena.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil saab konfigureerimisobjekti dubleerida agentide kasutajaliidese konfiguratsiooniobjektide ülevaates.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil saab konfigureerimisobjekti dubleerida selle suumivaates agentide kasutajaliideses.';
+    $Self->{Translation}->{'Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface.'} =
+        'Kuvab menüüs lingi, mille abil saab seadistusobjekti redigeerida agentide kasutajaliidese suumivaates.';
+    $Self->{Translation}->{'Shows a link in the menu to go back in the configuration item zoom view of the agent interface.'} =
+        'Näitab menüüs linki, mille abil saab minna tagasi agentide kasutajaliidese konfiguratsioonielemendi suumivaates.';
+    $Self->{Translation}->{'Shows a link in the menu to print a configuration item in the its zoom view of the agent interface.'} =
+        'Kuvab menüüs lingi, et printida konfiguratsioonielementi selle suumivaates agendi kasutajaliideses.';
+    $Self->{Translation}->{'Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface.'} =
+        'Näitab menüüs linki, mille abil saab konfiguratsioonielementi suurendama asjandusliidese konfiguratsioonielemendi ülevaates.';
+    $Self->{Translation}->{'Shows the config item history (reverse ordered) in the agent interface.'} =
+        'Näitab konfigureeritud elemendi ajalugu (vastupidises järjekorras) agendi kasutajaliideses.';
+    $Self->{Translation}->{'The default category which is shown, if none is selected.'} = 'Vaikimisi kategooria, mis kuvatakse, kui ükski kategooria ei ole valitud.';
+    $Self->{Translation}->{'The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#.'} =
+        'Konfiguratsioonielemendi identifikaator, nt ConfigItem#, MyConfigItem#. Vaikimisi on ConfigItem#.';
+    $Self->{Translation}->{'Triggers ConfigItemFetch invoker automatically.'} = 'Käivitab ConfigItemFetch-i kutsuja automaatselt.';
+    $Self->{Translation}->{'Version String Expression'} = 'Versioon String Väljend';
+    $Self->{Translation}->{'Version String Module'} = 'Versiooni string moodul';
+    $Self->{Translation}->{'Version Trigger'} = 'Versiooni vallandaja';
+    $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
+        'Kas ConfigItemACLi täitmist saab vältida, kontrollides vahemälu väljaliste sõltuvusi. See võib parandada vormide laadimisaega, kuid tuleb keelata, kui ACLModules\'i kasutatakse ITSMConfigItem- ja Form-ReturnTypes\'i puhul.';
+    $Self->{Translation}->{'Which general information is shown in the header.'} = 'Millised üldandmed on esitatud päises.';
+    $Self->{Translation}->{'class'} = 'klass';
+    $Self->{Translation}->{'global'} = 'globaalne';
+    $Self->{Translation}->{'postproductive'} = 'postproduktiivne';
+    $Self->{Translation}->{'preproductive'} = 'preproduktiivne';
+    $Self->{Translation}->{'productive'} = 'produktiivne';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
@@ -600,6 +531,7 @@ sub Data {
     'Delete',
     'Dismiss',
     'Do you want to proceed?',
+    'Importing classes/roles and their related fields',
     'No',
     'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.',
     'Ok',

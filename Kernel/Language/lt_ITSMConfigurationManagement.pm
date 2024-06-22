@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -23,571 +23,502 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # Template: AdminGenericInterfaceInvokerConfigItem
-    $Self->{Translation}->{'General invoker data'} = '';
-    $Self->{Translation}->{'This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.'} =
-        '';
-    $Self->{Translation}->{'Settings for outgoing request data'} = '';
-    $Self->{Translation}->{'Mapping'} = '';
-    $Self->{Translation}->{'The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects.'} =
-        '';
-    $Self->{Translation}->{'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects.'} =
-        '';
-    $Self->{Translation}->{'Settings for incoming response data'} = '';
-    $Self->{Translation}->{'Event data'} = '';
-    $Self->{Translation}->{'Add Event'} = '';
-    $Self->{Translation}->{'Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended).'} =
-        '';
-
     # Template: AdminITSMConfigItem
-    $Self->{Translation}->{'Config Item Management'} = '';
-    $Self->{Translation}->{'Change class definition'} = '';
-    $Self->{Translation}->{'Change role definition'} = '';
-    $Self->{Translation}->{'Ready2Import Class Bundles'} = '';
+    $Self->{Translation}->{'Config Item Management'} = 'Konfigūracijos elementų valdymas';
+    $Self->{Translation}->{'Change class definition'} = 'Keisti klasės apibrėžtį';
+    $Self->{Translation}->{'Change role definition'} = 'Keisti vaidmens apibrėžtį';
+    $Self->{Translation}->{'Ready2Import Class Bundles'} = '"Ready2Import" klasių paketai';
     $Self->{Translation}->{'Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required.'} =
-        '';
-    $Self->{Translation}->{'Update existing entities'} = '';
-    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = '';
-    $Self->{Translation}->{'Config Item Class'} = '';
-    $Self->{Translation}->{'Config Item Role'} = '';
-    $Self->{Translation}->{'Definition'} = '';
-    $Self->{Translation}->{'Change'} = '';
-    $Self->{Translation}->{'Auto Indent Code'} = '';
-    $Self->{Translation}->{'Comment/Uncomment Code'} = '';
-    $Self->{Translation}->{'Search & Replace'} = '';
-    $Self->{Translation}->{'Select All'} = '';
-    $Self->{Translation}->{'Full Screen'} = '';
+        'Čia galite importuoti "Ready2Import" klasių paketus, kuriuose demonstruojami įprastiniai konfigūracijos elementai. Atkreipkite dėmesį, kad gali prireikti tam tikros papildomos konfigūracijos.';
+    $Self->{Translation}->{'Update existing entities'} = 'Atnaujinti esamus subjektus';
+    $Self->{Translation}->{'Import Ready2Adopt class bundles'} = 'Importuoti "Ready2Adopt" klasės paketus';
+    $Self->{Translation}->{'Config Item Class'} = 'Konfigūracijos elemento klasė';
+    $Self->{Translation}->{'Config Item Role'} = 'Konfigūracijos elemento vaidmuo';
 
     # Template: AgentITSMConfigItemAdd
-    $Self->{Translation}->{'Config Item'} = '';
-    $Self->{Translation}->{'Filter for Classes'} = '';
-    $Self->{Translation}->{'Select a Class from the list to create a new Config Item.'} = '';
-    $Self->{Translation}->{'Class'} = '';
+    $Self->{Translation}->{'Config Item'} = 'Konfigūracijos elementas';
+    $Self->{Translation}->{'Filter for Classes'} = 'Klasių filtras';
+    $Self->{Translation}->{'Select a Class from the list to create a new Config Item.'} = 'Norėdami sukurti naują konfigūracijos elementą, sąraše pasirinkite klasę.';
+    $Self->{Translation}->{'Class'} = 'Klasė';
 
     # Template: AgentITSMConfigItemBulk
-    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = '';
-    $Self->{Translation}->{'Deployment state'} = '';
-    $Self->{Translation}->{'Incident state'} = '';
-    $Self->{Translation}->{'Link to another'} = '';
-    $Self->{Translation}->{'Invalid Configuration Item number!'} = '';
-    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = '';
+    $Self->{Translation}->{'ITSM ConfigItem Bulk Action'} = 'ITSM ConfigItem Bulk Action';
+    $Self->{Translation}->{'Deployment state'} = 'Diegimo būsena';
+    $Self->{Translation}->{'Incident state'} = 'Incidento būsena';
+    $Self->{Translation}->{'Link to another'} = 'Nuoroda į kitą';
+    $Self->{Translation}->{'Invalid Configuration Item number!'} = 'Neteisingas konfigūracijos elemento numeris!';
+    $Self->{Translation}->{'The number of another Configuration Item to link with.'} = 'Kito konfigūracijos elemento, su kuriuo norite susieti, numeris.';
 
     # Template: AgentITSMConfigItemDelete
-    $Self->{Translation}->{'Do you really want to delete this config item?'} = '';
+    $Self->{Translation}->{'Do you really want to delete this config item?'} = 'Ar tikrai norite ištrinti šį konfigūracijos elementą?';
 
     # Template: AgentITSMConfigItemEdit
-    $Self->{Translation}->{'The name of this config item'} = '';
+    $Self->{Translation}->{'The name of this config item'} = 'Šio konfigūracijos elemento pavadinimas';
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
-        '';
-    $Self->{Translation}->{'Version Number'} = '';
-    $Self->{Translation}->{'The version number of this config item'} = '';
+        'Pavadinimas jau naudojamas ConfigItems su šiuo (-iais) numeriu (-iais): %s';
+    $Self->{Translation}->{'Version Number'} = 'Versijos numeris';
+    $Self->{Translation}->{'Version number of this config item'} = '';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
-        '';
-    $Self->{Translation}->{'Deployment State'} = '';
-    $Self->{Translation}->{'Incident State'} = '';
+        'Versijos numeris jau naudojamas "ConfigItems" su šiuo (-iais) numeriu (-iais): %s';
+    $Self->{Translation}->{'Deployment State'} = 'Diegimo būsena';
+    $Self->{Translation}->{'Incident State'} = 'Incidento būklė';
 
     # Template: AgentITSMConfigItemHistory
-    $Self->{Translation}->{'History of Config Item: %s'} = '';
-    $Self->{Translation}->{'History Content'} = '';
-    $Self->{Translation}->{'Createtime'} = '';
+    $Self->{Translation}->{'History of Config Item: %s'} = 'Konfigūracijos elemento istorija: %s';
+    $Self->{Translation}->{'History Content'} = 'Istorijos turinys';
+    $Self->{Translation}->{'Createtime'} = 'Createtime';
     $Self->{Translation}->{'Zoom view'} = 'Pritraukti apžvalgą';
 
     # Template: AgentITSMConfigItemOverviewNavBar
-    $Self->{Translation}->{'Config Items per page'} = '';
+    $Self->{Translation}->{'Config Items per page'} = 'Konfigūracijos elementai viename puslapyje';
 
     # Template: AgentITSMConfigItemOverviewSmall
-    $Self->{Translation}->{'No config item data found.'} = '';
-    $Self->{Translation}->{'Select this config item'} = '';
+    $Self->{Translation}->{'No config item data found.'} = 'Konfigūracijos elemento duomenų nerasta.';
+    $Self->{Translation}->{'Select this config item'} = 'Pasirinkite šį konfigūracijos elementą';
 
     # Template: AgentITSMConfigItemSearch
-    $Self->{Translation}->{'Run Search'} = '';
-    $Self->{Translation}->{'Also search in previous versions?'} = '';
+    $Self->{Translation}->{'Run Search'} = 'Vykdyti paiešką';
+    $Self->{Translation}->{'Also search in previous versions?'} = 'Taip pat ieškoti ankstesnėse versijose?';
 
     # Template: AgentITSMConfigItemTreeView
-    $Self->{Translation}->{'TreeView for ConfigItem'} = '';
-    $Self->{Translation}->{'Depth Level'} = '';
-    $Self->{Translation}->{'Zoom In/Out'} = '';
-    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = '';
+    $Self->{Translation}->{'TreeView for ConfigItem'} = '"ConfigItem" medžio rodinys';
+    $Self->{Translation}->{'Depth Level'} = 'Gylio lygis';
+    $Self->{Translation}->{'Zoom In/Out'} = 'Padidinti / sumažinti mastelį';
+    $Self->{Translation}->{'Max links level reached for ConfigItem!'} = 'Pasiektas maksimalus ConfigItem nuorodų lygis!';
 
     # Template: AgentITSMConfigItemZoom
-    $Self->{Translation}->{'Configuration Item'} = '';
-    $Self->{Translation}->{'Configuration Item Information'} = '';
-    $Self->{Translation}->{'Current Deployment State'} = '';
-    $Self->{Translation}->{'Current Incident State'} = '';
-    $Self->{Translation}->{'Last changed'} = '';
-    $Self->{Translation}->{'Last changed by'} = '';
+    $Self->{Translation}->{'Configuration Item'} = 'Konfigūracijos elementas';
+    $Self->{Translation}->{'Configuration Item Information'} = 'Konfigūracijos elemento informacija';
+    $Self->{Translation}->{'Current Deployment State'} = 'Dabartinė diegimo būsena';
+    $Self->{Translation}->{'Current Incident State'} = 'Dabartinė incidento būsena';
+    $Self->{Translation}->{'Last changed'} = 'Paskutinį kartą pakeista';
+    $Self->{Translation}->{'Last changed by'} = 'Paskutinį kartą pakeitė';
 
     # Template: CustomerITSMConfigItem
-    $Self->{Translation}->{'Your ConfigItems'} = '';
-    $Self->{Translation}->{'ConfigItems'} = '';
-    $Self->{Translation}->{'Sort'} = '';
+    $Self->{Translation}->{'Your ConfigItems'} = 'Jūsų ConfigItems';
 
     # Template: CustomerITSMConfigItemSearch
-    $Self->{Translation}->{'ConfigItem Search'} = '';
+    $Self->{Translation}->{'ConfigItem Search'} = 'ConfigItem Paieška';
 
     # Template: AdminACL
-    $Self->{Translation}->{'Filter by valid state'} = '';
-    $Self->{Translation}->{'Include invalid ACLs'} = '';
-    $Self->{Translation}->{'Object Type'} = '';
-
-    # Template: AdminACLEdit
-    $Self->{Translation}->{'Check the official %sdocumentation%s.'} = '';
-
-    # Template: AdminDynamicField
-    $Self->{Translation}->{'Include invalid dynamic fields'} = '';
-    $Self->{Translation}->{'Filter field by object type'} = '';
-    $Self->{Translation}->{'Filter field by namespace'} = '';
-    $Self->{Translation}->{'New Dynamic Fields'} = '';
-    $Self->{Translation}->{'Would you like to benefit from additional dynamic field types? You have full access to the following field types:'} =
-        '';
-    $Self->{Translation}->{'Copy this field'} = '';
+    $Self->{Translation}->{'Object Type'} = 'Objekto tipas';
 
     # JS Template: ClassImportConfirm
-    $Self->{Translation}->{'The following classes will be imported'} = '';
-    $Self->{Translation}->{'The following roles will be imported'} = '';
+    $Self->{Translation}->{'The following classes will be imported'} = 'Importuojamos šios klasės';
+    $Self->{Translation}->{'The following roles will be imported'} = 'Bus importuojami šie vaidmenys';
     $Self->{Translation}->{'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.'} =
-        '';
-    $Self->{Translation}->{'Do you want to proceed?'} = '';
+        'Atkreipkite dėmesį, kad taip pat bus sukurti atitinkami dinaminiai laukai ir "GeneralCatalog" klasės, o automatinio pašalinimo nebus.';
+    $Self->{Translation}->{'Do you want to proceed?'} = 'Ar norite tęsti?';
 
     # Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-    $Self->{Translation}->{'Need ExampleClasses!'} = '';
-    $Self->{Translation}->{'Definition is no valid YAML hash.'} = '';
+    $Self->{Translation}->{'Need ExampleClasses!'} = 'Reikia pavyzdžių klasių!';
+    $Self->{Translation}->{'Definition is no valid YAML hash.'} = 'Apibrėžtis nėra galiojantis YAML hash.';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = '';
+    $Self->{Translation}->{'Overview: ITSM ConfigItem'} = 'Apžvalga: ITSM ConfigItem';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-    $Self->{Translation}->{'No ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = '';
+    $Self->{Translation}->{'No ConfigItemID is given!'} = 'Nenurodytas joks ConfigItemID!';
+    $Self->{Translation}->{'You need at least one selected Configuration Item!'} = 'Reikia bent vieno pasirinkto konfigūracijos elemento!';
     $Self->{Translation}->{'You don\'t have write access to this configuration item: %s.'} =
-        '';
-    $Self->{Translation}->{'No definition was defined for class %s!'} = '';
+        'Jūs neturite prieigos prie šio konfigūracijos elemento rašyti: %s.';
+    $Self->{Translation}->{'No definition was defined for class %s!'} = 'Klasei %s neapibrėžtas joks apibrėžimas!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
-    $Self->{Translation}->{'Config item "%s" not found in database!'} = '';
-    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = '';
-    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = '';
+    $Self->{Translation}->{'Config item "%s" not found in database!'} = 'Konfigūracijos elementas "%s" nerastas duomenų bazėje!';
+    $Self->{Translation}->{'Was not able to delete the configitem ID %s!'} = 'Nepavyko ištrinti konfigūracijos elemento ID %s!';
+    $Self->{Translation}->{'No version found for ConfigItemID %s!'} = 'ConfigItemID %s versija nerasta!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
-    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = '';
-    $Self->{Translation}->{'No access is given!'} = '';
+    $Self->{Translation}->{'No ConfigItemID, DuplicateID or ClassID is given!'} = 'Nenurodytas ConfigItemID, DuplicateID arba ClassID!';
+    $Self->{Translation}->{'No access is given!'} = 'Prieiga nesuteikiama!';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
-    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = '';
-    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = '';
-    $Self->{Translation}->{'New version (ID=%s)'} = '';
-    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) added'} = '';
-    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = '';
-    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = '';
-    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = '';
-    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = '';
-    $Self->{Translation}->{'Version %s deleted'} = '';
+    $Self->{Translation}->{'Can\'t show history, no ConfigItemID is given!'} = 'Negalima rodyti istorijos, nepateiktas ConfigItemID!';
+    $Self->{Translation}->{'Can\'t show history, no access rights given!'} = 'Negalima rodyti istorijos, nes nesuteiktos prieigos teisės!';
+    $Self->{Translation}->{'New ConfigItem (ID=%s)'} = 'Naujas konfigūracijos elementas (ID=%s)';
+    $Self->{Translation}->{'New version (ID=%s)'} = 'Nauja versija (ID=%s)';
+    $Self->{Translation}->{'Deployment state updated (new=%s, old=%s)'} = 'Atnaujinta diegimo būsena (new=%s, old=%s)';
+    $Self->{Translation}->{'Incident state updated (new=%s, old=%s)'} = 'Atnaujinta incidento būsena (new=%s, old=%s)';
+    $Self->{Translation}->{'ConfigItem (ID=%s) deleted'} = 'Konfigūracijos elementas (ID=%s) ištrintas';
+    $Self->{Translation}->{'Link to %s (type=%s) added'} = 'Pridėta nuoroda į %s (type=%s)';
+    $Self->{Translation}->{'Link to %s (type=%s) deleted'} = 'Nuoroda į %s (type=%s) pašalinta';
+    $Self->{Translation}->{'ConfigItem definition updated (ID=%s)'} = 'Atnaujinta ConfigItem apibrėžtis (ID=%s)';
+    $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Pavadinimas atnaujintas (new=%s, old=%s)';
+    $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Atributas %s atnaujintas iš "%s" į "%s"';
+    $Self->{Translation}->{'Version %s deleted'} = 'Versija %s ištrinta';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = '';
-    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = '';
-    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = '';
-    $Self->{Translation}->{'ConfigItem'} = '';
-    $Self->{Translation}->{'printed by %s at %s'} = '';
+    $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Nenurodytas ConfigItemID arba VersionID!';
+    $Self->{Translation}->{'Can\'t show config item, no access rights given!'} = 'Negalima parodyti konfigūracijos elemento, nes nesuteiktos prieigos teisės!';
+    $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'Duomenų bazėje nerasta ConfigItemID %s!';
+    $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
+    $Self->{Translation}->{'printed by %s at %s'} = '%s spausdina %s adresu %s';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
-    $Self->{Translation}->{'Invalid ClassID!'} = '';
-    $Self->{Translation}->{'No ClassID is given!'} = '';
-    $Self->{Translation}->{'No access rights for this class given!'} = '';
-    $Self->{Translation}->{'No Result!'} = '';
-    $Self->{Translation}->{'Config Item Search Results'} = '';
+    $Self->{Translation}->{'Invalid ClassID!'} = 'Neteisingas ClassID!';
+    $Self->{Translation}->{'No ClassID is given!'} = 'Nenurodytas joks ClassID!';
+    $Self->{Translation}->{'No access rights for this class given!'} = 'Šiai klasei prieigos teisės nesuteiktos!';
+    $Self->{Translation}->{'No Result!'} = 'Jokio rezultato!';
+    $Self->{Translation}->{'Config Item Search Results'} = 'Konfigūracijos elemento paieškos rezultatai';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
     $Self->{Translation}->{'Can\'t show item, no access rights for ConfigItem are given!'} =
-        '';
-    $Self->{Translation}->{'ConfigItem not found!'} = '';
-    $Self->{Translation}->{'No versions found!'} = '';
-    $Self->{Translation}->{'operational'} = '';
-    $Self->{Translation}->{'warning'} = '';
-    $Self->{Translation}->{'incident'} = '';
-    $Self->{Translation}->{'The deployment state of this config item'} = '';
-    $Self->{Translation}->{'The incident state of this config item'} = '';
+        'Negalima parodyti elemento, nes nesuteiktos prieigos teisės prie ConfigItem!';
+    $Self->{Translation}->{'ConfigItem not found!'} = 'ConfigItem nerastas!';
+    $Self->{Translation}->{'No versions found!'} = 'Versijų nerasta!';
+    $Self->{Translation}->{'operational'} = 'veiklos';
+    $Self->{Translation}->{'warning'} = 'įspėjimas';
+    $Self->{Translation}->{'incident'} = 'incidentas';
+    $Self->{Translation}->{'The deployment state of this config item'} = 'Šio konfigūracijos elemento diegimo būsena';
+    $Self->{Translation}->{'The incident state of this config item'} = 'Šio konfigūracijos elemento incidento būsena';
 
     # Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-    $Self->{Translation}->{'No permission'} = '';
-    $Self->{Translation}->{'Filter invalid!'} = '';
-    $Self->{Translation}->{'Search params invalid!'} = '';
+    $Self->{Translation}->{'No permission'} = 'Leidimo nėra';
+    $Self->{Translation}->{'Filter invalid!'} = 'Filtras negalioja!';
+    $Self->{Translation}->{'Search params invalid!'} = 'Paieškos parametrai negalioja!';
 
     # Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-    $Self->{Translation}->{'Shown config items'} = '';
-    $Self->{Translation}->{'Deployment State Type'} = '';
-    $Self->{Translation}->{'Current Incident State Type'} = '';
+    $Self->{Translation}->{'Shown config items'} = 'Rodomi konfigūracijos elementai';
+    $Self->{Translation}->{'Deployment State Type'} = 'Diegimo būsenos tipas';
+    $Self->{Translation}->{'Current Incident State Type'} = 'Dabartinis incidento būsenos tipas';
 
     # Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
     $Self->{Translation}->{'Between'} = 'Tarp';
 
     # Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-    $Self->{Translation}->{'Class restrictions for the config item'} = '';
+    $Self->{Translation}->{'Class restrictions for the config item'} = 'Konfigūracijos elemento klasės apribojimai';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
-        '';
-    $Self->{Translation}->{'Link type'} = '';
-    $Self->{Translation}->{'Select the link type.'} = '';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = '';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = '';
-    $Self->{Translation}->{'Link Direction'} = '';
+        'Pasirinkite vieną ar daugiau klasių, kad apribotumėte pasirenkamus konfigūracijos elementus';
+    $Self->{Translation}->{'Link type'} = 'Nuorodos tipas';
+    $Self->{Translation}->{'Select the link type.'} = 'Pasirinkite nuorodos tipą.';
+    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Įžaidėjai: (Šaltinis) -> Nuoroda (Tikslas)';
+    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Atgal: (Šaltinis) -> Nuoroda (Tikslas)';
+    $Self->{Translation}->{'Link Direction'} = 'Nuorodos kryptis';
     $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        '';
-    $Self->{Translation}->{'Dynamic (ConfigItem)'} = '';
-    $Self->{Translation}->{'Static (Version)'} = '';
-    $Self->{Translation}->{'Link Referencing Type'} = '';
+        'Nuorodos objektas yra tas, kuriame yra šis dinaminis laukas, o nuorodos objektas yra tas, kuris pasirinktas kaip dinaminio lauko reikšmė.';
+    $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dinaminis (ConfigItem)';
+    $Self->{Translation}->{'Static (Version)'} = 'Statinis (versija)';
+    $Self->{Translation}->{'Link Referencing Type'} = 'Nuorodos tipas';
     $Self->{Translation}->{'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'} =
-        '';
-    $Self->{Translation}->{'Attribute which will be searched on autocomplete'} = '';
-    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = '';
-    $Self->{Translation}->{'External-source key'} = '';
-    $Self->{Translation}->{'When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute.'} =
-        '';
-    $Self->{Translation}->{'Attribute which is displayed for values'} = '';
-    $Self->{Translation}->{'Select the type of display'} = '';
+        'Ar ši sąsaja taikoma ConfigItem, ar statinei nuorodą pateikiančio objekto versijai. Dabartinės incidento būsenos skaičiavimas atliekamas tik dinaminėms nuorodoms.';
+    $Self->{Translation}->{'Select the attribute which config items will be searched by'} = 'Pasirinkite atributą, pagal kurį bus ieškoma konfigūracijos elementų';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-    $Self->{Translation}->{'Base structure is not valid. Please provide an array with data in YAML format.'} =
-        '';
-    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = '';
+    $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'YAML eilutę reikia pradėti nuo \'---\'.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-    $Self->{Translation}->{'Could not purge the table configitem_link.'} = '';
-    $Self->{Translation}->{'No relevant dynamic fields were found'} = '';
-    $Self->{Translation}->{'Could not insert into the table configitem_link'} = '';
-    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = '';
+    $Self->{Translation}->{'Could not purge the table configitem_link.'} = 'Nepavyko išvalyti lentelės configitem_link.';
+    $Self->{Translation}->{'No relevant dynamic fields were found'} = 'Nerastas nė vienas svarbus dinaminis laukas';
+    $Self->{Translation}->{'Could not insert into the table configitem_link'} = 'Nepavyko įterpti į lentelę configitem_link';
+    $Self->{Translation}->{'Inserted 0 rows into the table configitem_link'} = 'Į lentelę configitem_link įterpta 0 eilučių';
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-    $Self->{Translation}->{'Maximum number of one element'} = '';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '';
-    $Self->{Translation}->{'Skipped'} = '';
-
-    # Perl Module: Kernel/Modules/AdminACL.pm
-    $Self->{Translation}->{'ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information'} =
-        '';
-    $Self->{Translation}->{'%s (copy) %s'} = '';
+    $Self->{Translation}->{'Maximum number of one element'} = 'Didžiausias vieno elemento skaičius';
+    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tušti laukai rodo, kad dabartinės reikšmės paliekamos.';
+    $Self->{Translation}->{'Skipped'} = 'Praleistas';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
-    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = '';
+    $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Klaida sinchronizuojant apibrėžtis. Patikrinkite žurnalą.';
     $Self->{Translation}->{'You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes.'} =
-        '';
+        'Turite ITSMConfigItem apibrėžtis, kurios nėra sinchronizuotos. Įdiekite savo ITSMConfigItem dinaminių laukų pakeitimus.';
 
-    # Database XML Definition: ITSMConfigurationManagement.sopm
-    $Self->{Translation}->{'Expired'} = '';
-    $Self->{Translation}->{'Maintenance'} = '';
-    $Self->{Translation}->{'Pilot'} = '';
-    $Self->{Translation}->{'Planned'} = '';
-    $Self->{Translation}->{'Repair'} = '';
-    $Self->{Translation}->{'Retired'} = '';
-    $Self->{Translation}->{'Review'} = '';
-    $Self->{Translation}->{'Test/QA'} = '';
+    # Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
+    $Self->{Translation}->{'Expired'} = 'Pasibaigęs';
+    $Self->{Translation}->{'Maintenance'} = 'Techninė priežiūra';
+    $Self->{Translation}->{'Pilot'} = 'Bandomasis';
+    $Self->{Translation}->{'Planned'} = 'Planuojama';
+    $Self->{Translation}->{'Repair'} = 'Remontas';
+    $Self->{Translation}->{'Retired'} = 'Išėjęs į pensiją';
+    $Self->{Translation}->{'Review'} = 'Peržiūrėkite';
+    $Self->{Translation}->{'Test/QA'} = 'Testavimas / kokybės užtikrinimas';
 
     # JS File: ITSM.Admin.ITSMConfigItem
-    $Self->{Translation}->{'Overview and Confirmation'} = '';
-    $Self->{Translation}->{'An error occurred during class import.'} = '';
-
-    # JS File: ITSM.Agent.ConfigItem.Zoom
-    $Self->{Translation}->{'Ok'} = '';
+    $Self->{Translation}->{'Overview and Confirmation'} = 'Apžvalga ir patvirtinimas';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'An error occurred during class import.'} = 'Importuojant klasę įvyko klaida.';
 
     # SysConfig
-    $Self->{Translation}->{'A precentage value of the minimal translation progress per language, to be usable for documentations.'} =
+    $Self->{Translation}->{'0 - Hidden'} = '0 - Paslėpta';
+    $Self->{Translation}->{'1 - Shown'} = '1 - parodyta';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Leidžia taikyti išplėstines paieškos sąlygas agento sąsajos konfigūracijos elementų paieškai. Naudodami šią funkciją galite ieškoti, pvz., konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip "(*key1*&&*key2*)" arba "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
+        'Leidžia taikyti išplėstines paieškos sąlygas klientų sąsajos konfigūracijos elementų paieškoje. Naudodami šią funkciją galite ieškoti, pvz., konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip "(*key1*&&*key2*)" arba "(*key1*||*key2*)".';
+    $Self->{Translation}->{'Assigned CIs'} = 'Priskirti KI';
+    $Self->{Translation}->{'CIs assigned to customer company'} = 'Kliento įmonei priskirti KI';
+    $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliento naudotojui priskirti CI';
+    $Self->{Translation}->{'CMDB Settings'} = 'CMDB nustatymai';
+    $Self->{Translation}->{'Check for a unique name only within the same ConfigItem class (\'class\') or globally (\'global\'), which means every existing ConfigItem is taken into account when looking for duplicates.'} =
+        'Unikalaus pavadinimo tikrinama tik toje pačioje ConfigItem klasėje ("class") arba pasauliniu mastu ("global"), todėl ieškant pasikartojimų atsižvelgiama į kiekvieną esamą ConfigItem.';
+    $Self->{Translation}->{'Choose a module to enforce a naming scheme.'} = 'Pasirinkite modulį, kuris užtikrins pavadinimų schemą.';
+    $Self->{Translation}->{'Choose a module to enforce a number scheme.'} = 'Pasirinkite modulį, kuris užtikrins numerių schemą.';
+    $Self->{Translation}->{'Choose a module to enforce a version string scheme.'} = 'Pasirinkite modulį, kuris užtikrins versijų eilučių schemą.';
+    $Self->{Translation}->{'Choose attributes to trigger the creation of a new version.'} = 'Pasirinkite atributus, kad būtų sukurta nauja versija.';
+    $Self->{Translation}->{'Choose categories to assign to this config item class.'} = 'Pasirinkite kategorijas, kurias norite priskirti šiai konfigūracijos elementų klasei.';
+    $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Stulpelio konfigūracijos elementų filtrai ConfigItem Overview.';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elementų apžvalgoje. Pastaba: Leidžiami tik konfigūracijos elemento atributai ir dinaminiai laukai (DynamicField_NameX).';
+    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
+        'Stulpeliai, kuriuos galima filtruoti kliento sąsajos konfigūracijos elementų apžvalgoje. Pastaba: leidžiama naudoti tik konfigūracijos elemento atributus ir dinaminius laukus (DynamicField_NameX).';
+    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '';
-    $Self->{Translation}->{'Access repos via http or https.'} = '';
-    $Self->{Translation}->{'Autoloading of Znuny4OTRSRepo extensions.'} = '';
-    $Self->{Translation}->{'Backend module registration for the config conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the file conflict check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the function redefine check module.'} =
-        '';
-    $Self->{Translation}->{'Backend module registration for the manual set module.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for BS ad removal.'} = '';
-    $Self->{Translation}->{'Block hooks to be created for package manager output filter.'} =
-        '';
-    $Self->{Translation}->{'Branch View commit limit'} = '';
-    $Self->{Translation}->{'CodePolicy'} = '';
-    $Self->{Translation}->{'Commit limit per page for Branch view screen'} = '';
-    $Self->{Translation}->{'Create analysis file'} = '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket and sends to Znuny.'} =
-        '';
-    $Self->{Translation}->{'Creates a analysis file from this ticket.'} = '';
-    $Self->{Translation}->{'Define private addon repos.'} = '';
-    $Self->{Translation}->{'Defines the filter that processes the HTML templates.'} = '';
-    $Self->{Translation}->{'Defines the test module for checking code policy.'} = '';
-    $Self->{Translation}->{'Definition of GIT clone/push URL Prefix.'} = '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date).'} =
-        '';
-    $Self->{Translation}->{'Definition of mappings between public repository requests and internal OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Definition of package states.'} = '';
-    $Self->{Translation}->{'Definition of renamed OPMS packages.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to cache repositories.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store temporary data.'} = '';
-    $Self->{Translation}->{'Directory, which is used by Git to store working copies.'} = '';
-    $Self->{Translation}->{'Disable online repositories.'} = '';
-    $Self->{Translation}->{'Do not log git ssh connection authorization results for these users. Useful for automated stuff.'} =
-        '';
-    $Self->{Translation}->{'Dynamic Fields Screens'} = '';
-    $Self->{Translation}->{'DynamicFieldScreen'} = '';
-    $Self->{Translation}->{'Export all available public keys to authorized_keys file.'} = '';
-    $Self->{Translation}->{'Export all relevant releases to ftp server.'} = '';
-    $Self->{Translation}->{'Frontend module registration for the OPMS object in the agent interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepository object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicOPMSTestBuild object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the PublicPackageVerification object in the public interface.'} =
-        '';
-    $Self->{Translation}->{'Frontend module registration for the admin interface.'} = '';
-    $Self->{Translation}->{'GIT Author registration.'} = '';
-    $Self->{Translation}->{'Generate HTML comment hooks for the specified blocks so that filters can use them.'} =
-        '';
-    $Self->{Translation}->{'Generate documentations once per night.'} = '';
-    $Self->{Translation}->{'Git'} = '';
-    $Self->{Translation}->{'Git Management'} = '';
-    $Self->{Translation}->{'Git Repository'} = '';
-    $Self->{Translation}->{'Group, whose members have delete admin permissions in OPMS.'} = '';
-    $Self->{Translation}->{'Group, whose members have repository admin permissions in OPMS.'} =
-        '';
-    $Self->{Translation}->{'Group, whose members will see CI test result information in OPMS screens.'} =
-        '';
-    $Self->{Translation}->{'Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface.'} =
-        '';
-    $Self->{Translation}->{'Groups which will be set during git project creation processes while adding OPMS repositories.'} =
-        '';
-    $Self->{Translation}->{'Manage dynamic field in screens.'} = '';
-    $Self->{Translation}->{'Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the added code lines.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the growth of code.'} = '';
-    $Self->{Translation}->{'Module to generate statistics about the number of git commits.'} =
-        '';
-    $Self->{Translation}->{'Module to generate statistics about the removed code lines.'} = '';
-    $Self->{Translation}->{'OPMS'} = '';
-    $Self->{Translation}->{'Only users who have rw permissions in one of these groups may access git.'} =
-        '';
-    $Self->{Translation}->{'Option to set a package compatibility manually.'} = '';
-    $Self->{Translation}->{'Parameters for the pages in the BranchView screen.'} = '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITProjectName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'GITRepositoryName\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Pre-Definition of the \'PackageDeprecated\' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed.'} =
-        '';
-    $Self->{Translation}->{'Recipients that will be informed by email in case of errors.'} =
-        '';
-    $Self->{Translation}->{'SSH Keys for Git Access'} = '';
-    $Self->{Translation}->{'Send analysis file'} = '';
-    $Self->{Translation}->{'Sets the git clone address to be used in repository listings.'} =
-        '';
-    $Self->{Translation}->{'Sets the home directory for git repositories.'} = '';
-    $Self->{Translation}->{'Sets the path for the BugzillaAddComment post receive script location.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron.'} =
-        '';
-    $Self->{Translation}->{'Show latest commits in git repositories.'} = '';
-    $Self->{Translation}->{'Shows a link in the menu to go create a unit test from the current ticket.'} =
-        '';
-    $Self->{Translation}->{'Synchronize OPMS tables with a remote database.'} = '';
-    $Self->{Translation}->{'The minimum version of the sphinx library.'} = '';
-    $Self->{Translation}->{'The name of the sphinx theme to be used.'} = '';
-    $Self->{Translation}->{'The path to the OTRS CSS file (relative below the static path).'} =
-        '';
-    $Self->{Translation}->{'The path to the OTRS logo (relative below the static path).'} = '';
-    $Self->{Translation}->{'The path to the static folder, containing images and css files.'} =
-        '';
-    $Self->{Translation}->{'The path to the theme folder, containing the sphinx themes.'} = '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable default columns.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines all possible screens to enable or disable dynamic fields.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if only valids or all (invalids) dynamic fields should be shown.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It\'s still recommended to use only verified packages.'} =
-        '';
-    $Self->{Translation}->{'This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig \'Znuny4OTRSRepoType\'.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers a Output post-filter to extend package verification.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements.'} =
-        '';
-    $Self->{Translation}->{'This configuration registers an output filter to hide online repository selection in package manager.'} =
-        '';
-    $Self->{Translation}->{'Tidy unprocessed release that not passed test pomules checks for a long time.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to execute force pushes \'git push --force\'.'} =
-        '';
-    $Self->{Translation}->{'Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management.'} =
-        '';
-
-    # ITSM class bundles
-    $Self->{Translation}->{'Accounting'} = '';
-    $Self->{Translation}->{'Address Allocation'} = '';
-    $Self->{Translation}->{'Administrator'} = '';
-    $Self->{Translation}->{'Analog Phone'} = '';
-    $Self->{Translation}->{'Appliance Type'} = '';
-    $Self->{Translation}->{'Backlinks'} = '';
-    $Self->{Translation}->{'Battery Capacity (Ah)'} = '';
-    $Self->{Translation}->{'Battery Type'} = '';
-    $Self->{Translation}->{'Building'} = '';
-    $Self->{Translation}->{'Bus Interface'} = '';
-    $Self->{Translation}->{'CIDR'} = '';
-    $Self->{Translation}->{'CPU'} = '';
-    $Self->{Translation}->{'CPU Class'} = '';
-    $Self->{Translation}->{'Capacity (GB)'} = '';
-    $Self->{Translation}->{'Capacity per graphics card'} = '';
-    $Self->{Translation}->{'Card Number'} = '';
-    $Self->{Translation}->{'Card Reader'} = '';
-    $Self->{Translation}->{'Card Type'} = '';
-    $Self->{Translation}->{'Client Certificates'} = '';
-    $Self->{Translation}->{'Client Software'} = '';
-    $Self->{Translation}->{'Client category'} = '';
-    $Self->{Translation}->{'Clockrate'} = '';
-    $Self->{Translation}->{'Clockspeed'} = '';
-    $Self->{Translation}->{'Code Signing Certificates'} = '';
-    $Self->{Translation}->{'Conference Phone'} = '';
-    $Self->{Translation}->{'Consulting Agreement'} = '';
-    $Self->{Translation}->{'Contact'} = '';
-    $Self->{Translation}->{'Contact Distributor'} = '';
-    $Self->{Translation}->{'Container Management'} = '';
-    $Self->{Translation}->{'Contract'} = '';
-    $Self->{Translation}->{'Contract Type'} = '';
-    $Self->{Translation}->{'Contract period from'} = '';
-    $Self->{Translation}->{'Contract period until'} = '';
-    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = '';
-    $Self->{Translation}->{'Cost unit'} = '';
-    $Self->{Translation}->{'Count of licenses'} = '';
-    $Self->{Translation}->{'Creation Date'} = '';
-    $Self->{Translation}->{'DHCP'} = '';
-    $Self->{Translation}->{'DHCP Reserved'} = '';
-    $Self->{Translation}->{'DNS-Server'} = '';
-    $Self->{Translation}->{'Date of Invoice'} = '';
-    $Self->{Translation}->{'Date of Order'} = '';
-    $Self->{Translation}->{'Date of Warranty'} = '';
-    $Self->{Translation}->{'Date of release'} = '';
-    $Self->{Translation}->{'Desktop'} = '';
-    $Self->{Translation}->{'Document Signing Certificates'} = '';
-    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = '';
-    $Self->{Translation}->{'Employment Contract'} = '';
-    $Self->{Translation}->{'End IP Address'} = '';
-    $Self->{Translation}->{'End of support'} = '';
-    $Self->{Translation}->{'Expiry Date'} = '';
-    $Self->{Translation}->{'External Hard Drive'} = '';
-    $Self->{Translation}->{'Firewall'} = '';
-    $Self->{Translation}->{'Firmware'} = '';
-    $Self->{Translation}->{'Form Factor'} = '';
-    $Self->{Translation}->{'Franchise Agreement'} = '';
-    $Self->{Translation}->{'General Information'} = '';
-    $Self->{Translation}->{'Graphics Cards'} = '';
-    $Self->{Translation}->{'Graphics card'} = '';
-    $Self->{Translation}->{'Hardware'} = '';
-    $Self->{Translation}->{'Hardware Model'} = '';
-    $Self->{Translation}->{'Hardware Weight'} = '';
-    $Self->{Translation}->{'Headset'} = '';
-    $Self->{Translation}->{'IP Protocol'} = '';
-    $Self->{Translation}->{'Identity and Access Management (IAM)'} = '';
-    $Self->{Translation}->{'Inventory Number'} = '';
-    $Self->{Translation}->{'Inverstment costs'} = '';
-    $Self->{Translation}->{'Invoice Number'} = '';
-    $Self->{Translation}->{'Keyboard'} = '';
-    $Self->{Translation}->{'Landline Phone'} = '';
-    $Self->{Translation}->{'Laptop'} = '';
-    $Self->{Translation}->{'Latitude'} = '';
-    $Self->{Translation}->{'Layer 1: Physical Layer'} = '';
-    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer'} = '';
-    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '';
-    $Self->{Translation}->{'Layer 4: Transport Layer'} = '';
-    $Self->{Translation}->{'Layer 5: Session Layer'} = '';
-    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '';
-    $Self->{Translation}->{'Layer 7: Application Layer'} = '';
-    $Self->{Translation}->{'Lease Agreement'} = '';
-    $Self->{Translation}->{'License Agreement'} = '';
-    $Self->{Translation}->{'License Key'} = '';
-    $Self->{Translation}->{'License Type'} = '';
-    $Self->{Translation}->{'License period from'} = '';
-    $Self->{Translation}->{'License period until'} = '';
-    $Self->{Translation}->{'Loan Agreement'} = '';
-    $Self->{Translation}->{'Located in'} = '';
-    $Self->{Translation}->{'Longitude'} = '';
-    $Self->{Translation}->{'Manufacturer'} = '';
-    $Self->{Translation}->{'Maximum Load Capacity (W)'} = '';
-    $Self->{Translation}->{'Memory'} = '';
-    $Self->{Translation}->{'Memory Type'} = '';
-    $Self->{Translation}->{'Mobile Number'} = '';
-    $Self->{Translation}->{'Mobile/Embedded'} = '';
-    $Self->{Translation}->{'Model'} = '';
-    $Self->{Translation}->{'Model Description'} = '';
-    $Self->{Translation}->{'Monitor Resolution'} = '';
-    $Self->{Translation}->{'Monitor Size'} = '';
-    $Self->{Translation}->{'Mouse'} = '';
-    $Self->{Translation}->{'Network'} = '';
-    $Self->{Translation}->{'Network Info'} = '';
-    $Self->{Translation}->{'Network Information'} = '';
-    $Self->{Translation}->{'Network Layer'} = '';
-    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = '';
-    $Self->{Translation}->{'Notebook'} = '';
-    $Self->{Translation}->{'Number of CPUs'} = '';
-    $Self->{Translation}->{'Number of RAM modules'} = '';
-    $Self->{Translation}->{'Number of graphics cards'} = '';
-    $Self->{Translation}->{'OTOBO'} = '';
-    $Self->{Translation}->{'Operating costs'} = '';
-    $Self->{Translation}->{'Order Number'} = '';
-    $Self->{Translation}->{'Other'} = '';
-    $Self->{Translation}->{'Outputs'} = '';
-    $Self->{Translation}->{'PIN'} = '';
-    $Self->{Translation}->{'PIN 2'} = '';
-    $Self->{Translation}->{'PUK'} = '';
-    $Self->{Translation}->{'PUK 2'} = '';
-    $Self->{Translation}->{'Partnership Agreement'} = '';
-    $Self->{Translation}->{'Phone / VOIP'} = '';
-    $Self->{Translation}->{'Phone Number'} = '';
-    $Self->{Translation}->{'Phone Type'} = '';
-    $Self->{Translation}->{'Physical Cores'} = '';
-    $Self->{Translation}->{'Power Delivery'} = '';
-    $Self->{Translation}->{'Purchased at'} = '';
-    $Self->{Translation}->{'Rack Depth'} = '';
-    $Self->{Translation}->{'Rack Units (U)'} = '';
-    $Self->{Translation}->{'Reference to Customer'} = '';
-    $Self->{Translation}->{'Room'} = '';
-    $Self->{Translation}->{'SIM Card'} = '';
-    $Self->{Translation}->{'SSL/TLS Certificates'} = '';
-    $Self->{Translation}->{'Sales Contract'} = '';
-    $Self->{Translation}->{'Satellite Phone'} = '';
-    $Self->{Translation}->{'Serialnumber'} = '';
-    $Self->{Translation}->{'Server'} = '';
-    $Self->{Translation}->{'Server Software'} = '';
-    $Self->{Translation}->{'Service Agreement'} = '';
-    $Self->{Translation}->{'Service Tag'} = '';
-    $Self->{Translation}->{'Socket Type'} = '';
-    $Self->{Translation}->{'Software'} = '';
-    $Self->{Translation}->{'Speakers'} = '';
-    $Self->{Translation}->{'Start IP Address'} = '';
-    $Self->{Translation}->{'Storage'} = '';
-    $Self->{Translation}->{'Storage Partition'} = '';
-    $Self->{Translation}->{'Subsidiary'} = '';
-    $Self->{Translation}->{'Summary'} = '';
-    $Self->{Translation}->{'Thin Client'} = '';
-    $Self->{Translation}->{'Threads'} = '';
-    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = '';
-    $Self->{Translation}->{'Total RAM (GB)'} = '';
-    $Self->{Translation}->{'USB Hub'} = '';
-    $Self->{Translation}->{'VPN'} = '';
-    $Self->{Translation}->{'VR Headset'} = '';
-    $Self->{Translation}->{'VoIP Phone'} = '';
-    $Self->{Translation}->{'Webcam'} = '';
+    $Self->{Translation}->{'Config Items'} = 'Konfigūracijos elementai';
+    $Self->{Translation}->{'Config item add.'} = 'Konfigūracijos elemento pridėjimas.';
+    $Self->{Translation}->{'Config item edit.'} = 'Konfigūracijos elemento redagavimas.';
+    $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
+        'Konfigūruokite elemento įvykių modulį, kuris leidžia registruoti istoriją agento sąsajoje.';
+    $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
+        'Konfigūracijos elementų įvykių modulis, kuris atnaujina konfigūracijos elementų dabartinę apibrėžtį.';
+    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
+        'Konfigūracijos elemento įvykių modulis, kuris atnaujina lentelę configitem_ĺink.';
+    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
+        'Konfigūracijos elemento įvykio modulis atnaujina esamą incidento būseną.';
+    $Self->{Translation}->{'Config item history.'} = 'Konfigūracijos elementų istorija.';
+    $Self->{Translation}->{'Config item print.'} = 'Konfigūracijos elemento spausdinimas.';
+    $Self->{Translation}->{'Config item zoom.'} = 'Konfigūruoti elemento priartinimą.';
+    $Self->{Translation}->{'ConfigItem Tree View'} = 'Konfigūracijos elementų medžio vaizdas';
+    $Self->{Translation}->{'ConfigItem Version'} = 'ConfigItem Versija';
+    $Self->{Translation}->{'ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        'Šių klasių ConfigItems nebus saugomi "Elasticsearch" serveryje. Norint tai pritaikyti esamiems CI, CI migraciją reikia paleisti per konsolę, pakeitus šią parinktį.';
+    $Self->{Translation}->{'ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option.'} =
+        '"Elasticsearch" serveryje nebus saugomi "ConfigItems" su šiomis diegimo būsenomis. Norint tai pritaikyti esamiems CI, CI perkėlimą reikia paleisti per konsolę, pakeitus šią parinktį.';
+    $Self->{Translation}->{'Configuration Item Limit'} = 'Konfigūracijos elemento riba';
+    $Self->{Translation}->{'Configuration Item limit per page.'} = 'Konfigūracijos elementų limitas viename puslapyje.';
+    $Self->{Translation}->{'Configuration Management Database.'} = 'Konfigūracijos valdymo duomenų bazė.';
+    $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfigūracijos elemento masinis modulis.';
+    $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
+        'Konfigūracijos elemento paieška agento sąsajos galiniame maršrutizatoriuje.';
+    $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Sukurkite ir tvarkykite konfigūracijos elementų apibrėžtis.';
+    $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klientai gali matyti istorines CI versijas.';
+    $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
+        'Klientai turi galimybę rankiniu būdu perjungti istorines CI versijas.';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".'} =
+        'Numatytieji duomenys, kuriuos reikia naudoti konfigūracijos elemento paieškos ekrano atributui. Pavyzdys: "ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;".';
+    $Self->{Translation}->{'Default data to use on attribute for config item search screen. Example: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".'} =
+        'Numatytieji duomenys, kuriuos reikia naudoti konfigūracijos elemento paieškos ekrano atributui. Pavyzdys: "ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;".';
+    $Self->{Translation}->{'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.'} =
+        'Apibrėžti veiksmus, kai susietų objektų valdiklyje (LinkObject::ViewMode = "complex") yra nustatymų mygtukas. Atkreipkite dėmesį, kad šiuose veiksmuose turi būti užregistruoti šie JS ir CSS failai: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ir Core.Agent.LinkObject.js.';
+    $Self->{Translation}->{'Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit.'} =
+        'Apibrėžkite "Template::Toolkit" schemą, skirtą versijų eilutėms. Naudojama tik tada, jei versijų eilučių modulis nustatytas į TemplateToolkit.';
+    $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
+        'Apibrėžkite sąlygų, kuriomis klientui leidžiama matyti konfigūracijos elementą, rinkinį. Sąlygas galima apriboti tam tikroms klientų grupėms. Pavadinimas yra vienintelis privalomas atributas. Jei kitų parinkčių nenurodyta, visi konfigūracijos elementai bus matomi toje kategorijoje.';
+    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
+        'Apibrėžiami reikalingi leidimai kurti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
+        'Apibrėžiami reikalingi leidimai ištrinti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
+        'Apibrėžiami reikalingi leidimai gauti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
+        'Apibrėžiami reikalingi leidimai ieškoti ITSM konfigūracijos elementų naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
+        'Apibrėžiami reikalingi leidimai atnaujinti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
+        'Apibrėžia apžvalgos modulį, skirtą mažajam konfigūracijos elementų sąrašo vaizdui rodyti.';
+    $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
+        'Nustato, ar mazgų jungtyse turi būti rodomos nuorodos tipo etiketės.';
+    $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
+        'Apibrėžia reguliarias išraiškas atskirai kiekvienai "ConfigItem" klasei, kad būtų galima patikrinti "ConfigItem" pavadinimą ir rodyti atitinkamus klaidų pranešimus.';
+    $Self->{Translation}->{'Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Nustato galimus KI stulpelius konfigūracijos elementų apžvalgoje, priklausomai nuo KI klasės. Kiekvieną įrašą turi sudaryti klasės pavadinimas ir atitinkamos klasės galimų laukų masyvas. Dinaminių laukų įrašai turi atitikti schemą DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the agent interface.'} =
+        'Nustato numatytojo konfigūracijos elemento atributą konfigūracijos elementų rūšiavimui agento sąsajos konfigūracijos elementų paieškos rezultatuose.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of the customer interface.'} =
+        'Nustato numatytąjį konfigūracijos elemento atributą konfigūracijos elementų rūšiavimui klientų sąsajos konfigūracijos elementų paieškos rezultatuose.';
+    $Self->{Translation}->{'Defines the default config item attribute for config item sorting of the config item search result of this operation.'} =
+        'Nustato numatytojo konfigūracijos elemento atributą, skirtą šios operacijos konfigūracijos elementų paieškos rezultatui rūšiuoti.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top.'} =
+        'Nustato numatytąją konfigūracijos elementų tvarką agento sąsajos konfigūracijos elementų paieškos rezultatuose. Aukštyn: seniausias viršuje. Žemyn: naujausias viršuje.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
+        'Nustato numatytoji konfigūracijos elementų tvarka kliento sąsajos konfigūracijos elementų paieškos rezultatuose. Aukštyn: seniausias viršuje. Žemyn: naujausias viršuje.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
+        'Nustato numatytoji konfigūracijos elementų tvarka šios operacijos konfigūracijos elementų paieškos rezultate. Į viršų: seniausia viršuje. Žemyn: naujausias viršuje.';
+    $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        'Nustato pagal nutylėjimą rodomus KI stulpelius konfigūracijos elementų apžvalgoje, priklausomai nuo KI klasės. Kiekvieną įrašą turi sudaryti klasės pavadinimas ir atitinkamos klasės galimų laukų masyvas. Dinaminių laukų įrašai turi atitikti schemą DynamicField_FieldName.';
+    $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Apibrėžiamas numatytasis rodomų santykių gylis.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen.'} =
+        'Nustato pagal nutylėjimą rodomą konfigūracijos elementų paieškos atributą konfigūracijos elementų paieškos ekrane.';
+    $Self->{Translation}->{'Defines the default shown config item search attribute for config item search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.'} =
+        'Nustato pagal nutylėjimą rodomą konfigūracijos elementų paieškos atributą konfigūracijos elementų paieškos ekrane. Pavyzdys: "Key" (raktas) turi turėti dinaminio lauko pavadinimą, šiuo atveju "X", "Content" (turinys) turi turėti dinaminio lauko reikšmę, priklausančią nuo dinaminio lauko tipo, "Text" (tekstas): "a text" (tekstas), "Dropdown" (išskleidžiama): "1" (išskleidžiama), "Date/Time" (data ir laikas): Paieška_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' ir arba \'Search_DynamicField_XTimePointFormat=savaitė; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
+    $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
+        'Apibrėžia numatytąjį klasės "ITSMConfigItem" subobjektą.';
+    $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
+        'Nustato CI apibrėžimo redaktoriaus eilučių skaičių administratoriaus sąsajoje.';
+    $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
+        'Nustato įvykio būsenų eiliškumą nuo aukštų (pvz., kritiškų) iki žemų (pvz., funkcinių).';
+    $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
+        'Apibrėžiamos atitinkamos diegimo būsenos, kuriose susieti bilietai gali turėti įtakos CI būsenai.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =
+        'Nustato AgentITSMConfigItem ekrano paieškos ribą.';
+    $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItemSearch screen.'} =
+        'Nustato AgentITSMConfigItemSearch ekrano paieškos ribą.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItem screen.'} =
+        'Nustato CustomerITSMConfigItem ekrano paieškos ribą.';
+    $Self->{Translation}->{'Defines the search limit for the CustomerITSMConfigItemSearch screen.'} =
+        'Nustato CustomerITSMConfigItemSearch ekrano paieškos ribą.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown.'} =
+        'Nustato nuorodų lentelės sudėtingame rodinyje rodomus visų klasių KI stulpelius. Jei įrašo nėra, rodomi numatytieji stulpeliai.';
+    $Self->{Translation}->{'Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown.'} =
+        'Nustato nuorodų lentelės sudėtingame rodinyje rodomus KI stulpelius, priklausomai nuo KI klasės. Prieš kiekvieną įrašą turi būti įrašytas klasės pavadinimas ir dvigubi dvitaškiai (t. y. Computer::). Yra keletas CI atributų, kurie bendri visiems CI (pavyzdys klasės Computer (Kompiuteris): Computer::Name, Computer::CurDeplState, Computer::CreateTime). Norint parodyti atskirus CI atributus, apibrėžtus CI apibrėžtyje, reikia naudoti tokią schemą (klasės Computer pavyzdys): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jei nėra CI klasės įrašo, rodomi numatytuosius nustatymus atitinkantys stulpeliai.';
+    $Self->{Translation}->{'Defines which items are available for \'Action\' in third level of the ITSM Config Item ACL structure.'} =
+        'Apibrėžia, kuriuos elementus galima naudoti "Action" trečiajame ITSM Config Item ACL struktūros lygyje.';
+    $Self->{Translation}->{'Defines which items are available in first level of the ITSM Config Item ACL structure.'} =
+        'Nustato, kurie elementai yra prieinami pirmojo lygio ITSM Config Item ACL struktūroje.';
+    $Self->{Translation}->{'Defines which items are available in second level of the ITSM Config Item ACL structure.'} =
+        'Nustato, kurie elementai yra prieinami antrajame ITSM Config Item ACL struktūros lygyje.';
+    $Self->{Translation}->{'Defines which type of link (named from the ticket perspective) can affect the status of a linked CI.'} =
+        'Apibrėžia, kokio tipo nuoroda (įvardyta iš bilieto perspektyvos) gali turėti įtakos susietos CI būklei.';
+    $Self->{Translation}->{'Defines which type of ticket can affect the status of a linked CI.'} =
+        'Nustato, kokio tipo bilietas gali turėti įtakos susietos CI būklei.';
+    $Self->{Translation}->{'Definition Update'} = 'Apibrėžimo atnaujinimas';
+    $Self->{Translation}->{'Delete Configuration Item'} = 'Ištrinti konfigūracijos elementą';
+    $Self->{Translation}->{'DeplState'} = 'DeplState';
+    $Self->{Translation}->{'Deployment State Color'} = 'Diegimo būsenos spalva';
+    $Self->{Translation}->{'DeploymentState'} = 'Diegimo būsena';
+    $Self->{Translation}->{'Duplicate'} = 'Dublikatas';
+    $Self->{Translation}->{'Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change.'} =
+        'Dinaminių laukų įvykių modulis, kuris žymi konfigūracijos elementų apibrėžtis kaip nesinchronizuotas, jei pasikeičia dinaminiai laukai.';
+    $Self->{Translation}->{'Dynamic fields shown in the additional ITSM field screen of the agent interface.'} =
+        'Dinaminiai laukai, rodomi agento sąsajos papildomo ITSM lauko ekrane.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item overview screen of the customer interface.'} =
+        'Dinaminiai laukai, rodomi kliento sąsajos konfigūracijos elemento apžvalgos ekrane.';
+    $Self->{Translation}->{'Dynamic fields shown in the config item search screen of the agent interface.'} =
+        'Dinaminiai laukai, rodomi agento sąsajos konfigūracijos elementų paieškos ekrane.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time.'} =
+        'Įjungiama konfigūracijos elemento masinio veiksmo funkcija, kad agento priekinėje dalyje vienu metu būtų galima dirbti su daugiau nei vienu konfigūracijos elementu.';
+    $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
+        'Įjungiama konfigūracijos elemento masinio veiksmo funkcija tik išvardytoms grupėms.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+        'Įjungiama / išjungiama funkcija, skirta patikrinti ITSM konfigūracijos elementų unikalius pavadinimus. Prieš įjungdami šią parinktį, turėtumėte patikrinti, ar jūsų sistemoje nėra jau esamų konfigūracijos elementų su pasikartojančiais pavadinimais. Tai galite padaryti naudodami konsolės komandą Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
+        'Įvykių modulis, skirtas nustatyti "ticket-configitem-link" konfigūracijos elemento būseną.';
+    $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
+        'Konfigūracijos elemento indekso laukai, naudojami viso teksto paieškai. Laukai taip pat saugomi, tačiau nėra privalomi bendrai funkcijai. Priedų įtraukimą galima išjungti nustatant įrašo reikšmę 0 arba jį ištrinant.';
+    $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
+        'Konfigūracijos elemento indekse saugomi laukai, kurie naudojami ne tik viso teksto paieškai, bet ir kitiems dalykams. Kad funkcijos būtų pilnai išnaudotos, visi laukai yra privalomi.';
+    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
+        'Kiekvienai žiniatinklio paslaugai (raktas) galima apibrėžti klasių masyvą (reikšmė), kurio importas yra ribojamas. Visoms pasirinktoms klasėms arba visoms esamoms klasėms identifikuojantys atributai turės būti pasirinkti invokerio konfigūracijoje.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
+        '"GenericInterface" modulio registracija "ConfigItemFetch" iškvietėjo sluoksniui.';
+    $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
+    $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigūracijos elementų apžvalga.';
+    $Self->{Translation}->{'InciState'} = 'InciState';
+    $Self->{Translation}->{'IncidentState'} = 'IncidentState';
+    $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
+        'Įtraukti diegimo būsenas į konfigūracijos elementų paiešką kliento sąsajoje.';
+    $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
+        'Įtraukti incidento būsenas į konfigūracijos elementų paiešką klientų sąsajoje.';
+    $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
+        'Didžiausias konfigūracijos elementų, kurie bus rodomi šios operacijos rezultate, skaičius.';
+    $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modulis, skirtas už klasę atsakingai grupei patikrinti.';
+    $Self->{Translation}->{'Module to check the group responsible for a configuration item.'} =
+        'Modulis, skirtas patikrinti grupę, atsakingą už konfigūracijos elementą.';
+    $Self->{Translation}->{'Module to generate ITSM config item statistics.'} = 'ITSM konfigūracijos elementų statistikos generavimo modulis.';
+    $Self->{Translation}->{'Name Module'} = 'Pavadinimo modulis';
+    $Self->{Translation}->{'Number Module'} = 'Numerio modulis';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the agent interface.'} =
+        'Konfigūracijos elementų, rodomų kiekviename paieškos rezultatų puslapyje agento sąsajoje, skaičius.';
+    $Self->{Translation}->{'Number of config items to be displayed in each page of a search result in the customer interface.'} =
+        'Konfigūracijos elementų, kurie bus rodomi kiekviename paieškos rezultatų puslapyje kliento sąsajoje, skaičius.';
+    $Self->{Translation}->{'Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.'} =
+        'Objektų, kurių reikia ieškoti, kiek įrašų ir kokius atributus rodyti. ConfigItem atributai turi būti aiškiai saugomi per "Elasticsearch".';
+    $Self->{Translation}->{'Overview.'} = 'Apžvalga.';
+    $Self->{Translation}->{'Parameters for the categories for config item classes in the preferences view of the agent interface.'} =
+        'Parametrai, skirti konfigūracijos elementų klasių kategorijoms agento sąsajos nuostatų rodinyje.';
+    $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
+        'Mažosios konfigūracijos elementų apžvalgos stulpelių filtrų parametrai. Atkreipkite dėmesį: nustačius "Active" vertę 0, agentai negalės redaguoti tik šios grupės nustatymų savo asmeninėse parinktyse, tačiau administratoriams vis tiek bus leidžiama redaguoti kito naudotojo nustatymus. Naudokite "PreferenceGroup", norėdami valdyti, kurioje srityje šie nustatymai turėtų būti rodomi naudotojo sąsajoje.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
+        'Kliento įmonės konfigūracijos elemento peržiūros agento sąsajos prietaisų skydelio backend parametrai . "Limit" (riba) - pagal numatytuosius nustatymus rodomų įrašų skaičius. "Group" (grupė) naudojama norint apriboti prieigą prie įskiepio (pvz., Group: admin;group1;group2;). "Default" (pagal numatytuosius nustatymus) nustato, ar įskiepis įjungtas pagal numatytuosius nustatymus, ar naudotojas turi jį įjungti rankiniu būdu. "CacheTTLLocal" (spartinančioji atmintinė) - įskiepio spartinančiosios atmintinės laikas minutėmis.';
+    $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
+        'Įdiegimo būsenų parametrai nuspalvinti agento sąsajos nuostatų rodinyje.';
+    $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
+        'diegimo būsenų parametrai agento sąsajos nuostatų rodinyje.';
+    $Self->{Translation}->{'Parameters for the example permission groups of the general catalog attributes.'} =
+        'Bendrųjų katalogo atributų leidimų grupių pavyzdžių parametrai.';
+    $Self->{Translation}->{'Parameters for the name module for config item classes in the preferences view of the agent interface.'} =
+        'Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių vardų modulio parametrai.';
+    $Self->{Translation}->{'Parameters for the number module for config item classes in the preferences view of the agent interface.'} =
+        'Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių numerio modulio parametrai.';
+    $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
+        'Puslapių (kuriuose rodomi konfigūracijos elementai) parametrai.';
+    $Self->{Translation}->{'Parameters for the version string module for config item classes in the preferences view of the agent interface.'} =
+        'Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių versijos eilutės modulio parametrai.';
+    $Self->{Translation}->{'Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface.'} =
+        'Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių konfigūracijos eilutės šablono įrankių rinkinio modulio parametrai.';
+    $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
+        'Agento sąsajos nuostatų rodinyje esančių konfigūracijos elementų klasių versijos trigerio parametrai.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
+        'Atlieka sukonfigūruotą veiksmą kiekvienam įvykiui (kaip Invoker) kiekvienai sukonfigūruotai žiniatinklio paslaugai.';
+    $Self->{Translation}->{'Permission Group'} = 'Leidimų grupė';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elemento prijungimo veiksmą agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elemento ekraną agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elementų paieškos langą agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item search screen in the customer interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elementų paieškos ekraną kliento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item tree view screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elementų medžio peržiūros ekraną agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the ITSM configuration item zoom screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elemento priartinimo ekraną agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the add ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elemento pridėjimo langą agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the bulk ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai, kad būtų galima naudoti agento sąsajos ITSM konfigūracijos elemento ekraną.';
+    $Self->{Translation}->{'Required permissions to use the edit ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai naudoti ITSM konfigūracijos elemento redagavimo ekraną agento sąsajoje.';
+    $Self->{Translation}->{'Required permissions to use the history ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai, kad būtų galima naudoti agento sąsajos istorijos ITSM konfigūracijos elemento ekraną.';
+    $Self->{Translation}->{'Required permissions to use the print ITSM configuration item screen in the agent interface.'} =
+        'Reikalingi leidimai, kad būtų galima naudoti agento sąsajos ITSM konfigūracijos elemento spausdinimo ekraną.';
+    $Self->{Translation}->{'Required privileges to delete config items.'} = 'Reikalingos privilegijos norint ištrinti konfigūracijos elementus.';
+    $Self->{Translation}->{'Search config items.'} = 'Ieškoti konfigūracijos elementų.';
+    $Self->{Translation}->{'Set the incident state of a CI automatically when a Ticket is Linked to a CI.'} =
+        'Automatiškai nustatykite KI incidento būseną, kai bilietas susiejamas su KI.';
+    $Self->{Translation}->{'Sets the deployment state in the configuration item bulk screen of the agent interface.'} =
+        'Nustato diegimo būseną agento sąsajos konfigūracijos elemento didmeniniame ekrane.';
+    $Self->{Translation}->{'Sets the incident state in the configuration item bulk screen of the agent interface.'} =
+        'Nustato incidento būseną agento sąsajos konfigūracijos elemento didmeninės konfigūracijos ekrane.';
+    $Self->{Translation}->{'Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface.'} =
+        'Meniu rodoma nuoroda, leidžianti susieti konfigūracijos elementą su kitu objektu agento sąsajos konfigūracijos elemento priartinimo rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface.'} =
+        'Rodo meniu nuorodą, skirtą pasiekti konfigūracijos elemento istoriją agento sąsajos konfigūracijos elementų apžvalgoje.';
+    $Self->{Translation}->{'Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface.'} =
+        'Meniu rodoma nuoroda, kuria galima pasiekti konfigūracijos elemento istoriją agento sąsajos priartinimo rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to delete a configuration item in its zoom view of the agent interface.'} =
+        'Rodoma meniu nuoroda, skirta ištrinti konfigūracijos elementą jo priartintame agento sąsajos rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to display the configuration item links as a Tree View.'} =
+        'Rodo meniu nuorodą, kad konfigūracijos elementų nuorodos būtų rodomos medžio rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface.'} =
+        'Rodoma meniu nuoroda, skirta dubliuoti konfigūracijos elementą agento sąsajos konfigūracijos elementų apžvalgoje.';
+    $Self->{Translation}->{'Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface.'} =
+        'Meniu rodoma nuoroda, skirta konfigūracijos elementui dubliuoti agento sąsajos priartinimo rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface.'} =
+        'Rodoma meniu nuoroda, skirta redaguoti konfigūracijos elementą agento sąsajos priartintame rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to go back in the configuration item zoom view of the agent interface.'} =
+        'Meniu rodoma nuoroda, kuria galima grįžti į agento sąsajos konfigūracijos elemento priartinimo rodinį.';
+    $Self->{Translation}->{'Shows a link in the menu to print a configuration item in the its zoom view of the agent interface.'} =
+        'Rodoma meniu nuoroda, skirta spausdinti konfigūracijos elementą agento sąsajos priartintame rodinyje.';
+    $Self->{Translation}->{'Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface.'} =
+        'Rodoma meniu nuoroda, skirta priartinti konfigūracijos elementą agento sąsajos konfigūracijos elementų apžvalgoje.';
+    $Self->{Translation}->{'Shows the config item history (reverse ordered) in the agent interface.'} =
+        'Rodo konfigūracijos elementų istoriją (atvirkštine tvarka) agento sąsajoje.';
+    $Self->{Translation}->{'The default category which is shown, if none is selected.'} = 'Numatytoji kategorija, kuri rodoma, jei nepasirinkta nė viena.';
+    $Self->{Translation}->{'The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#.'} =
+        'Konfigūracijos elemento identifikatorius, pvz., ConfigItem#, MyConfigItem#. Numatytoji reikšmė yra ConfigItem#.';
+    $Self->{Translation}->{'Triggers ConfigItemFetch invoker automatically.'} = 'Automatiškai paleidžia ConfigItemFetch invokatorių.';
+    $Self->{Translation}->{'Version String Expression'} = 'Versija Styginių eilutė Išraiška';
+    $Self->{Translation}->{'Version String Module'} = 'Versijos eilutės modulis';
+    $Self->{Translation}->{'Version Trigger'} = 'Versija Triggeris';
+    $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
+        'Ar galima išvengti "ConfigItemACL" vykdymo tikrinant talpykloje esančių laukų priklausomybes. Tai gali pagerinti formuliarų įkėlimo laiką, tačiau turi būti išjungta, jei ACLModules turi būti naudojami ITSMConfigItem- ir Form-ReturnTypes.';
+    $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kokia bendra informacija pateikiama antraštėje.';
+    $Self->{Translation}->{'class'} = 'klasė';
+    $Self->{Translation}->{'global'} = 'pasaulinis';
+    $Self->{Translation}->{'postproductive'} = 'postprodukcinis';
+    $Self->{Translation}->{'preproductive'} = 'priešprodukcinis';
+    $Self->{Translation}->{'productive'} = 'produktyvus';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
@@ -600,6 +531,7 @@ sub Data {
     'Delete',
     'Dismiss',
     'Do you want to proceed?',
+    'Importing classes/roles and their related fields',
     'No',
     'Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal.',
     'Ok',

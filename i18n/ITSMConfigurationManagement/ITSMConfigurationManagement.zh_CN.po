@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Simplified) <http://weblate.otobo.org/projects/"
-"opm-packages/itsm-configurationmanagement/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,35 +488,35 @@ msgstr "网络"
 msgid "Software"
 msgstr "软件"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "已过期"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "维护"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "试验"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "已计划"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "修复"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "报废"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "复审"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "测试/品质保证"
 
@@ -1115,8 +1114,7 @@ msgstr "Ready2Import 类包"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "在这里，您可以导入 Ready2Import "
-"类捆绑包，其中展示了我们最常用的配置项。请注意，可能需要一些额外的配置。"
+msgstr "在这里，您可以导入 Ready2Import 类捆绑包，其中展示了我们最常用的配置项。请注意，可能需要一些额外的配置。"
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1264,8 +1262,7 @@ msgstr "链接引用类型"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr "此链接适用于引用对象的配置项还是静态版本。当前事件状态计算仅在动态链接上执行"
-"。"
+msgstr "此链接适用于引用对象的配置项还是静态版本。当前事件状态计算仅在动态链接上执行。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1317,15 +1314,11 @@ msgstr "1 - 显示"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"允许在代理界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\""
-"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
+msgstr "允许在代理界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"允许在客户界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\""
-"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
+msgstr "允许在客户界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用\"(*key1*&&*key2*) \"或\"(*key1*||*key2*) \"等条件搜索配置项名称。"
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1353,13 +1346,11 @@ msgstr "配置项概览的列配置项过滤器。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "可在代理界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 "
-"(DynamicField_NameX)。"
+msgstr "可在代理界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "可在客户界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 "
-"(DynamicField_NameX)。"
+msgstr "可在客户界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。"
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
@@ -1383,14 +1374,11 @@ msgstr "配置项目版本"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr "以下类别的配置项将不会存储在 Elasticsearch 服务器上。要将此应用于现有的 CI，"
-"必须在更改此选项后通过控制台运行 CI 迁移。"
+msgstr "以下类别的配置项将不会存储在 Elasticsearch 服务器上。要将此应用于现有的 CI，必须在更改此选项后通过控制台运行 CI 迁移。"
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"具有以下部署状态的配置项将不会存储在 Elasticsearch 服务器上。"
-"要将此应用于现有的 CI，必须在更改此选项后通过控制台运行 CI 迁移。"
+msgstr "具有以下部署状态的配置项将不会存储在 Elasticsearch 服务器上。要将此应用于现有的 CI，必须在更改此选项后通过控制台运行 CI 迁移。"
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1402,28 +1390,19 @@ msgstr "客户可以手动切换历史 CI 版本。"
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"在配置项搜索屏幕的属性上使用的默认数据。例如："
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"。"
+msgstr "在配置项搜索屏幕的属性上使用的默认数据。例如：\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"。"
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"在配置项搜索屏幕的属性上使用的默认数据。例如："
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
+msgstr "在配置项搜索屏幕的属性上使用的默认数据。例如：\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr "为版本字符串定义一个 Template::Toolkit 方案。仅在版本字符串模块设置为 "
-"TemplateToolkit 时使用。"
+msgstr "为版本字符串定义一个 Template::Toolkit 方案。仅在版本字符串模块设置为 TemplateToolkit 时使用。"
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr "定义一组允许客户查看配置项的条件。可选择将条件限制为某些客户组。名称是唯一的"
-"强制属性。如果没有给出其他选项，则该类别下的所有配置项都将可见。"
+msgstr "定义一组允许客户查看配置项的条件。可选择将条件限制为某些客户组。名称是唯一的强制属性。如果没有给出其他选项，则该类别下的所有配置项都将可见。"
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
@@ -1431,10 +1410,7 @@ msgstr "定义是否必须在节点连接中显示链接类型标签。"
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"根据 CI 类别定义配置项概览中 CI "
-"的可用列。每个条目必须包含一个类名和相应类的可用字段数组。"
-"动态字段条目必须遵守 DynamicField_FieldName 方案。"
+msgstr "根据 CI 类别定义配置项概览中 CI 的可用列。每个条目必须包含一个类名和相应类的可用字段数组。动态字段条目必须遵守 DynamicField_FieldName 方案。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
@@ -1450,25 +1426,19 @@ msgstr "定义此操作的配置项搜索结果的配置项排序默认配置项
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "定义代理界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
-"在上。"
+msgstr "定义代理界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的在上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr "定义客户界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
-"在上。"
+msgstr "定义客户界面配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的在上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr "定义此操作的配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
-"在上。"
+msgstr "定义此操作的配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的在上。"
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"根据 CI 类定义配置项概览中默认显示的 CI "
-"列。每个条目必须包含一个类名和相应类的可用字段数组。动态字段条目必须遵守 "
-"DynamicField_FieldName 方案。"
+msgstr "根据 CI 类定义配置项概览中默认显示的 CI 列。每个条目必须包含一个类名和相应类的可用字段数组。动态字段条目必须遵守 DynamicField_FieldName 方案。"
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1480,22 +1450,7 @@ msgstr "定义配置项目搜索界面默认显示的配置项目搜索属性。
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"定义配置项搜索屏幕默认显示的配置项搜索属性。Example: \"Key\" must have the "
-"name of the Dynamic Field in this case 'X', \"Content\" must have the value "
-"of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', "
-"Dropdown: '1', Date/Time:Search_DynamicField_XTimeSlotStartYear=1974；Search_"
-"DynamicField_XTimeSlotStartMonth=01；Search_DynamicField_XTimeSlotStartDay=26"
-"；Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotSta"
-"rtMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStop"
-"Month=01；Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59；'和或 "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';。"
+msgstr "定义配置项搜索屏幕默认显示的配置项搜索属性。Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time:Search_DynamicField_XTimeSlotStartYear=1974；Search_DynamicField_XTimeSlotStartMonth=01；Search_DynamicField_XTimeSlotStartDay=26；Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01；Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59；'和或 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';。"
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1547,26 +1502,19 @@ msgstr "在代理界面的配置项搜索屏幕中显示的动态字段。"
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是"
-"否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::Configitem::"
-"ListDuplicates 进行检查。"
+msgstr "启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::Configitem::ListDuplicates 进行检查。"
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr "配置项索引字段，用于全文搜索。字段也会被存储，但对于整体功能来说并非必须。"
-"可通过将条目设置为 0 或删除来禁用附件的包含。"
+msgstr "配置项索引字段，用于全文搜索。字段也会被存储，但对于整体功能来说并非必须。可通过将条目设置为 0 或删除来禁用附件的包含。"
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr "存储在配置项索引中的字段，除用于全文检索外，还可用于其他用途。为了实现完整的"
-"功能，所有字段都是必填字段。"
+msgstr "存储在配置项索引中的字段，除用于全文检索外，还可用于其他用途。为了实现完整的功能，所有字段都是必填字段。"
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"可以为每个 webservice（键）定义一个类（值）数组，在此基础上限制导入。对于所有"
-"选定的类或所有现有的类，必须在调用者配置中选择识别属性。"
+msgstr "可以为每个 webservice（键）定义一个类（值）数组，在此基础上限制导入。对于所有选定的类或所有现有的类，必须在调用者配置中选择识别属性。"
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
@@ -1614,8 +1562,7 @@ msgstr "客户界面搜索结果每页显示的配置项数量。"
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr "要搜索的对象、条目数量以及要显示的属性。配置项属性必须通过 Elasticsearch "
-"明确存储。"
+msgstr "要搜索的对象、条目数量以及要显示的属性。配置项属性必须通过 Elasticsearch 明确存储。"
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
@@ -1623,10 +1570,7 @@ msgstr "代理界面首选项视图中配置项类别的参数。"
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"小配置项目概览的列过滤器参数。请注意：将 \"Active（活动）\"设置为 0 只会阻止"
-"代理在其个人偏好设置中编辑该组的设置，但仍允许管理员编辑其他用户的设置。使用 "
-"\"PreferenceGroup（偏好组）\"可控制这些设置应显示在用户界面的哪个区域。"
+msgstr "小配置项目概览的列过滤器参数。请注意：将 \"Active（活动）\"设置为 0 只会阻止代理在其个人偏好设置中编辑该组的设置，但仍允许管理员编辑其他用户的设置。使用 \"PreferenceGroup（偏好组）\"可控制这些设置应显示在用户界面的哪个区域。"
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
@@ -1694,10 +1638,7 @@ msgstr "版本触发器"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"是否可以通过检查缓存的字段依赖关系来避免执行 "
-"ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-"
-"ReturnType 中使用 ACL 模块，则必须禁用。"
+msgstr "是否可以通过检查缓存的字段依赖关系来避免执行 ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-ReturnType 中使用 ACL 模块，则必须禁用。"
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1709,8 +1650,7 @@ msgstr "一般调用者数据"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "这个OTOBO调用程序后端模块被调用后，负责准备需要发送给远程系统的数据，并处理它"
-"的响应数据。"
+msgstr "这个OTOBO调用程序后端模块被调用后，负责准备需要发送给远程系统的数据，并处理它的响应数据。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1918,34 +1858,15 @@ msgstr "GIT 克隆/推送 URL 前缀的定义。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"动态字段的定义：Group => 可以访问动态字段的组；AlwaysVisible => "
-"可以删除的字段 (0|1)；InformationAreaName => Widgets 名称；"
-"InformationAreaSize => Widgets 的大小和位置（大|小）；Name => "
-"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
-"= 禁用；1 = 激活；2 = 强制）；FilterRelease => 资源库名称必须匹配的 "
-"Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRelease => "
-"必须与版本库名称匹配的 Regex 才能显示, FilterPackage => "
-"必须与软件包名称匹配的 Regex 才能显示, FilterBranch => 必须与分支名称匹配的 "
-"Regex 才能显示, FilterRelease => 必须与删除版本字符串匹配的 Regex 才能显示。"
+msgstr "动态字段的定义：Group => 可以访问动态字段的组；AlwaysVisible => 可以删除的字段 (0|1)；InformationAreaName => Widgets 名称；InformationAreaSize => Widgets 的大小和位置（大|小）；Name => 应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = 禁用；1 = 激活；2 = 强制）；FilterRelease => 资源库名称必须匹配的 Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRelease => 必须与版本库名称匹配的 Regex 才能显示, FilterPackage => 必须与软件包名称匹配的 Regex 才能显示, FilterBranch => 必须与分支名称匹配的 Regex 才能显示, FilterRelease => 必须与删除版本字符串匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"动态字段的定义：组 => 可访问动态字段的组；AlwaysVisible => 可移除的字段 "
-"(0|1)；InformationAreaName => 小工具名称；InformationAreaSize => "
-"小工具的大小和位置（大|小）；Name => 应使用的动态字段的名称；Priority => "
-"动态字段的顺序；State => 字段的状态（0 = 禁用，1 = 激活，2 = 强制）；"
-"FilterRepository => 资源库名称必须与之匹配的 Regex。字段的状态（0 = 禁用，1 "
-"= 激活，2 = 强制）, FilterRepository => 必须与版本库名称匹配的 "
-"Regex，才能显示；FilterPackage => 必须与软件包名称匹配的 Regex，才能显示；"
-"FilterBranch => 必须与分支名称匹配的 Regex，才能显示；FilterRelease => "
-"必须与删除版本字符串匹配的 Regex，才能显示。"
+msgstr "动态字段的定义：组 => 可访问动态字段的组；AlwaysVisible => 可移除的字段 (0|1)；InformationAreaName => 小工具名称；InformationAreaSize => 小工具的大小和位置（大|小）；Name => 应使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = 禁用，1 = 激活，2 = 强制）；FilterRepository => 资源库名称必须与之匹配的 Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称匹配的 Regex，才能显示；FilterPackage => 必须与软件包名称匹配的 Regex，才能显示；FilterBranch => 必须与分支名称匹配的 Regex，才能显示；FilterRelease => 必须与删除版本字符串匹配的 Regex，才能显示。"
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr "外部 MD5 和的定义（key => MD5，Value => "
-"Vendor、PackageName、Version、Date）。"
+msgstr "外部 MD5 和的定义（key => MD5，Value => Vendor、PackageName、Version、Date）。"
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
@@ -2057,8 +1978,7 @@ msgstr "组，其成员将在 OPMS 屏幕中看到 CI 检测结果信息。"
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr "已通过身份验证的用户（通过用户登录名和密码）必须是组的成员，才能通过公共接口"
-"构建测试包。"
+msgstr "已通过身份验证的用户（通过用户登录名和密码）必须是组的成员，才能通过公共接口构建测试包。"
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
@@ -2106,44 +2026,15 @@ msgstr "分支视图屏幕页面的参数。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"GITProjectName\" 动态字段的预定义：Group => 可访问动态字段的组；"
-"AlwaysVisible => 可移除的字段 (0|1)；InformationAreaName => 小部件名称；"
-"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
-"应使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = "
-"禁用，1 = 激活，2 = 强制）；FilterRepository => Regex（字词）。字段的状态（0 "
-"= 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 "
-"Regex 才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，"
-"FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
-"必须与删除版本字符串相匹配的 Regex 才能显示。"
+msgstr "GITProjectName\" 动态字段的预定义：Group => 可访问动态字段的组；AlwaysVisible => 可移除的字段 (0|1)；InformationAreaName => 小部件名称；InformationAreaSize => 小部件的大小和位置 (大|小)；Name => 应使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = 禁用，1 = 激活，2 = 强制）；FilterRepository => Regex（字词）。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => 必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"GITRepositoryName\" 动态字段的预定义：Group => 可以访问动态字段的组；"
-"AlwaysVisible => 可以移除的字段 (0|1)；InformationAreaName => 小部件名称；"
-"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
-"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
-"= 禁用；1 = 激活；2 = 强制）；FilterRepository => 重写字段 "
-"(0|1)。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => "
-"必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => "
-"必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => "
-"必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
-"必须与删除版本字符串相匹配的 Regex 才能显示。"
+msgstr "GITRepositoryName\" 动态字段的预定义：Group => 可以访问动态字段的组；AlwaysVisible => 可以移除的字段 (0|1)；InformationAreaName => 小部件名称；InformationAreaSize => 小部件的大小和位置 (大|小)；Name => 应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = 禁用；1 = 激活；2 = 强制）；FilterRepository => 重写字段 (0|1)。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => 必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"PackageDeprecated \"动态字段的预定义：Group => 可以访问动态字段的组；"
-"AlwaysVisible => 可以删除的字段 (0|1)；InformationAreaName => 小部件的名称；"
-"InformationAreaSize => 小部件的大小和位置 (大|小)；Name => "
-"应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 "
-"= 禁用，1 = 激活，2 = 强制）；FilterRepository => 与动态字段相关的 "
-"Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => "
-"必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => "
-"必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => "
-"必须与分支名称相匹配的 Regex 才能显示，FilterRelease => "
-"必须与删除版本字符串相匹配的 Regex 才能显示。"
+msgstr "PackageDeprecated \"动态字段的预定义：Group => 可以访问动态字段的组；AlwaysVisible => 可以删除的字段 (0|1)；InformationAreaName => 小部件的名称；InformationAreaSize => 小部件的大小和位置 (大|小)；Name => 应该使用的动态字段的名称；Priority => 动态字段的顺序；State => 字段的状态（0 = 禁用，1 = 激活，2 = 强制）；FilterRepository => 与动态字段相关的 Regex。字段的状态（0 = 禁用，1 = 激活，2 = 强制）, FilterRepository => 必须与版本库名称相匹配的 Regex 才能显示，FilterPackage => 必须与软件包名称相匹配的 Regex 才能显示，FilterBranch => 必须与分支名称相匹配的 Regex 才能显示，FilterRelease => 必须与删除版本字符串相匹配的 Regex 才能显示。"
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2171,13 +2062,11 @@ msgstr "设置 BugzillaAddComment post 接收脚本位置的路径。"
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "设置 OTRSCodePolicy 脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，并通过 "
-"cron 更新。"
+msgstr "设置 OTRSCodePolicy 脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，并通过 cron 更新。"
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "设置 OTRSCodePolicy 预接收脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，"
-"并通过 cron 更新。"
+msgstr "设置 OTRSCodePolicy 预接收脚本位置的路径。建议单独克隆 OTRSCodePolicy 模块，并通过 cron 更新。"
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2229,14 +2118,11 @@ msgstr "这个配置定义了是否只显示有效的动态字段，还是显示
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr "此配置定义 OTRS 软件包验证是激活还是禁用。如果禁用，所有软件包都显示为已验证"
-"。我们仍然建议只使用经过验证的软件包。"
+msgstr "此配置定义 OTRS 软件包验证是激活还是禁用。如果禁用，所有软件包都显示为已验证。我们仍然建议只使用经过验证的软件包。"
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"此配置定义了 OTRS CloudService 代理服务的 URL。将根据选择的 SysConfig "
-"\"Znuny4OTRSRepoType \"添加 http 或 https 前缀。"
+msgstr "此配置定义了 OTRS CloudService 代理服务的 URL。将根据选择的 SysConfig \"Znuny4OTRSRepoType \"添加 http 或 https 前缀。"
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
@@ -2260,8 +2146,7 @@ msgstr "在这些组中拥有 rw 权限的用户可以执行 \"git push --force\
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr "在其中一个组中拥有 rw 权限的用户可以管理项目。此外，成员还拥有管理 git "
-"的权限。"
+msgstr "在其中一个组中拥有 rw 权限的用户可以管理项目。此外，成员还拥有管理 git 的权限。"
 
 #. ITSM class bundles
 msgid "1"
@@ -3318,3 +3203,16 @@ msgstr "网络电话"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "网络摄像头"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

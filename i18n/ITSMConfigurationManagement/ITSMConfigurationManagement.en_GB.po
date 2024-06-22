@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: English (United Kingdom) <http://weblate.otobo.org/projects/"
-"opm-packages/itsm-configurationmanagement/en_GB/>\n"
+"Language-Team: English (United Kingdom) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/en_GB/>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,9 +82,7 @@ msgstr "Deployment state"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
-"Required permissions to use the ITSM configuration item search screen in the "
-"agent interface."
+msgstr "Required permissions to use the ITSM configuration item search screen in the agent interface."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
@@ -329,9 +326,7 @@ msgstr "No Result!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Config Item Search Results"
-msgstr ""
-"Required permissions to use the edit ITSM configuration item screen in the "
-"agent interface."
+msgstr "Required permissions to use the edit ITSM configuration item screen in the agent interface."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
@@ -493,35 +488,35 @@ msgstr "Network"
 msgid "Software"
 msgstr "Software"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Expired"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "Maintenance"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilot"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Planned"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Repair"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Retired"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Review"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Test/QA"
 
@@ -763,10 +758,7 @@ msgstr "CMDB Settings"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"Check for a unique name only within the same ConfigItem class ('class') or "
-"globally ('global'), which means every existing ConfigItem is taken into "
-"account when looking for duplicates."
+msgstr "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 
 #. SysConfig
 msgid "Config Items"
@@ -782,9 +774,7 @@ msgstr "Config item edit."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
-"Config item event module that enables logging to history in the agent "
-"interface."
+msgstr "Config item event module that enables logging to history in the agent interface."
 
 #. SysConfig
 msgid "Config item history."
@@ -828,48 +818,31 @@ msgstr "Create and manage the definitions for Configuration Items."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Define Actions where a settings button is available in the linked objects "
-"widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions "
-"must have registered the following JS and CSS files: "
-"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
-"Core.Agent.TableFilters.js."
+msgstr "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
-"Defines Required permissions to create ITSM configuration items using the "
-"Generic Interface."
+msgstr "Defines Required permissions to create ITSM configuration items using the Generic Interface."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Defines Required permissions to delete ITSM configuration items using the "
-"Generic Interface."
+msgstr "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
-"Defines Required permissions to get ITSM configuration items using the "
-"Generic Interface."
+msgstr "Defines Required permissions to get ITSM configuration items using the Generic Interface."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
-"Defines Required permissions to search ITSM configuration items using the "
-"Generic Interface."
+msgstr "Defines Required permissions to search ITSM configuration items using the Generic Interface."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
-"Defines Required permissions to update ITSM configuration items using the "
-"Generic Interface."
+msgstr "Defines Required permissions to update ITSM configuration items using the Generic Interface."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
-"Defines an overview module to show the small view of a configuration item "
-"list."
+msgstr "Defines an overview module to show the small view of a configuration item list."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
@@ -881,21 +854,15 @@ msgstr "Defines the default subobject of the class 'ITSMConfigItem'."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
-"Defines the number of rows for the CI definition editor in the admin "
-"interface."
+msgstr "Defines the number of rows for the CI definition editor in the admin interface."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Defines the order of incident states from high (e.g. cricital) to low (e.g. "
-"functional)."
+msgstr "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Defines the relevant deployment states where linked tickets can affect the "
-"status of a CI."
+msgstr "Defines the relevant deployment states where linked tickets can affect the status of a CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -911,77 +878,31 @@ msgstr "Open Source"
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
-"Defines the shown columns in the config item search. This option has no "
-"effect on the position of the column."
+msgstr "Defines the shown columns in the config item search. This option has no effect on the position of the column."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Defines the shown columns of CIs in the config item overview depending on "
-"the CI class. Each entry must be prefixed with the class name and double "
-"colons (i.e. Computer::). There are a few CI-Attributes that are common to "
-"all CIs (example for the class Computer: Computer::Name, Computer::"
-"CurDeplState, Computer::CreateTime). To show individual CI-Attributes as "
-"defined in the CI-Definition, the following scheme must be used (example for "
-"the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::"
-"1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no "
-"entry for a CI class, then the default columns are shown as defined in the "
-"setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Defines the shown columns of CIs in the config item search depending on the "
-"CI class. Each entry must be prefixed with the class name and double colons ("
-"i.e. Computer::). There are a few CI-Attributes that are common to all CIs ("
-"example for the class Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). To show individual CI-Attributes as defined in the CI-"
-"Definition, the following scheme must be used (example for the class "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no "
-"entry for a CI class, then the default columns are shown as defined in the "
-"setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Defines the shown columns of CIs in the config item widget depending on the "
-"CI class. Each entry must be prefixed with the class name and double colons ("
-"i.e. Computer::). There are a few CI-Attributes that are common to all CIs ("
-"example for the class Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). To show individual CI-Attributes as defined in the CI-"
-"Definition, the following scheme must be used (example for the class "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no "
-"entry for a CI class, then the default columns are shown as defined in the "
-"setting AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (key DefaultColumns)."
+msgstr "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Defines the shown columns of CIs in the link table complex view for all CI "
-"classes. If there is no entry, then the default columns are shown."
+msgstr "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"Defines the shown columns of CIs in the link table complex view, depending "
-"on the CI class. Each entry must be prefixed with the class name and double "
-"colons (i.e. Computer::). There are a few CI-Attributes that common to all "
-"CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). To show individual CI-Attributes as defined in the CI-"
-"Definition, the following scheme must be used (example for the class "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no "
-"entry for a CI class, then the default columns are shown."
+msgstr "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Defines which type of link (named from the ticket perspective) can affect "
-"the status of a linked CI."
+msgstr "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
@@ -1001,22 +922,15 @@ msgstr "Duplicate"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
-"Enables configuration item bulk action feature for the agent frontend to "
-"work on more than one configuration item at a time."
+msgstr "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
-"Enables configuration item bulk action feature only for the listed groups."
+msgstr "Enables configuration item bulk action feature only for the listed groups."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"Enables/disables the functionality to check ConfigItems for unique names. "
-"Before enabling this option you should check your system for already "
-"existing config items with duplicate names. You can do this with the script "
-"bin/otobo.ITSMConfigItemListDuplicates.pl."
+msgstr "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
@@ -1048,25 +962,15 @@ msgstr "Overview."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Parameters for the dashboard backend of the customer company config item "
-"overview of the agent interface . \"Limit\" is the number of entries shown "
-"by default. \"Group\" is used to restrict the access to the plugin (e. g. "
-"Group: admin;group1;group2;). \"Default\" determines if the plugin is "
-"enabled by default or if the user needs to enable it manually. "
-"\"CacheTTLLocal\" is the cache time in minutes for the plugin."
+msgstr "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the deployment states color in the preferences view of the "
-"agent interface."
+msgstr "Parameters for the deployment states color in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the deployment states in the preferences view of the agent "
-"interface."
+msgstr "Parameters for the deployment states in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
@@ -1082,15 +986,11 @@ msgstr "Permission Group"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the ITSM configuration item screen in the agent "
-"interface."
+msgstr "Required permissions to use the ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
-"Required permissions to use the ITSM configuration item search screen in the "
-"agent interface."
+msgstr "Required permissions to use the ITSM configuration item search screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
@@ -1098,27 +998,19 @@ msgstr "VersionID %s not found in database!"
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the add ITSM configuration item screen in the "
-"agent interface."
+msgstr "Required permissions to use the add ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the edit ITSM configuration item screen in the "
-"agent interface."
+msgstr "Required permissions to use the edit ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the history ITSM configuration item screen in "
-"the agent interface."
+msgstr "Required permissions to use the history ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the print ITSM configuration item screen in the "
-"agent interface."
+msgstr "Required permissions to use the print ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1126,94 +1018,63 @@ msgstr "Required privileges to delete config items."
 
 #. SysConfig
 msgid "Search config items."
-msgstr ""
-"Shows a link in the menu to access the history of a configuration item in "
-"the its zoom view of the agent interface."
+msgstr "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"Selects the configuration item number generator module. \"AutoIncrement\" "
-"increments the configuration item number, the SystemID, the "
-"ConfigItemClassID and the counter are used. The format is \"SystemID."
-"ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
+msgstr "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
-"Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Sets the deployment state in the configuration item bulk screen of the agent "
-"interface."
+msgstr "Sets the deployment state in the configuration item bulk screen of the agent interface."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Sets the incident state in the configuration item bulk screen of the agent "
-"interface."
+msgstr "Sets the incident state in the configuration item bulk screen of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu that allows linking a configuration item with "
-"another object in the config item zoom view of the agent interface."
+msgstr "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Shows a link in the menu to access the history of a configuration item in "
-"the configuration item overview of the agent interface."
+msgstr "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to access the history of a configuration item in "
-"the its zoom view of the agent interface."
+msgstr "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to delete a configuration item in its zoom view of "
-"the agent interface."
+msgstr "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Shows a link in the menu to duplicate a configuration item in the "
-"configuration item overview of the agent interface."
+msgstr "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to duplicate a configuration item in the its zoom "
-"view of the agent interface."
+msgstr "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to edit a configuration item in the its zoom view "
-"of the agent interface."
+msgstr "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to go back in the configuration item zoom view of "
-"the agent interface."
+msgstr "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Shows a link in the menu to print a configuration item in the its zoom view "
-"of the agent interface."
+msgstr "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Shows a link in the menu to zoom into a configuration item in the "
-"configuration item overview of the agent interface."
+msgstr "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
@@ -1221,9 +1082,7 @@ msgstr "Shows the config item history (reverse ordered) in the agent interface."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
-"The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. "
-"The default is ConfigItem#."
+msgstr "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
 
 #. SysConfig
 msgid "class"
@@ -1255,9 +1114,7 @@ msgstr "Ready2Import Class Bundles"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Here you can import Ready2Import class bundles showcasing our most usual "
-"config items. Please note that some additional configuration may be required."
+msgstr "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1277,9 +1134,7 @@ msgstr "The version number of this config item"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Version Number is already in use by the ConfigItems with the following "
-"Number(s): %s"
+msgstr "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1327,9 +1182,7 @@ msgstr "The following roles will be imported"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Note that also corresponding dynamic fields and GeneralCatalog classes will "
-"be created and there is no automatic removal."
+msgstr "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1393,9 +1246,7 @@ msgstr "Link Direction"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"The referencing object is the one containing this dynamic field, the "
-"referenced object is the one selected as value of the dynamic field."
+msgstr "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1411,10 +1262,7 @@ msgstr "Link Referencing Type"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Whether this link applies to the ConfigItem or the static version of the "
-"referencing object. Current Incident State calculation only is performed on "
-"dynamic links."
+msgstr "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1446,9 +1294,7 @@ msgstr "Error synchronizing the definitions. Please check the log."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"You have ITSMConfigItem definitions which are not synchronized. Please "
-"deploy your ITSMConfigItem dynamic field changes."
+msgstr "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1468,17 +1314,11 @@ msgstr "1 - Shown"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Allows extended search conditions in config item search of the agent "
-"interface. With this feature you can search e. g. config item name with this "
-"kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Allows extended search conditions in config item search of the customer "
-"interface. With this feature you can search e. g. config item name with this "
-"kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1506,23 +1346,15 @@ msgstr "Column config item filters for ConfigItem Overview."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Columns that can be filtered in the config item overview of the agent "
-"interface. Note: Only Config Item attributes and Dynamic Fields "
-"(DynamicField_NameX) are allowed."
+msgstr "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Columns that can be filtered in the config item overview of the customer "
-"interface. Note: Only Config Item attributes and Dynamic Fields "
-"(DynamicField_NameX) are allowed."
+msgstr "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Config item event module that updates config items to their current "
-"definition."
+msgstr "Config item event module that updates config items to their current definition."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
@@ -1542,17 +1374,11 @@ msgstr "ConfigItem Version"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems of the following classes will not be stored on the Elasticsearch "
-"server. To apply this to existing CIs, the CI migration has to be run via "
-"console, after changing this option."
+msgstr "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems with the following deployment states will not be stored on the "
-"Elasticsearch server. To apply this to existing CIs, the CI migration has to "
-"be run via console, after changing this option."
+msgstr "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1560,38 +1386,23 @@ msgstr "Customers can see historic CI versions."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
-"Customers have the possibility to manually switch between historic CI "
-"versions."
+msgstr "Customers have the possibility to manually switch between historic CI versions."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Default data to use on attribute for config item search screen. Example: "
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Default data to use on attribute for config item search screen. Example: "
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
+msgstr "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Define a Template::Toolkit scheme for version strings. Only used if Version "
-"String Module is set to TemplateToolkit."
+msgstr "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Define a set of conditions under which a customer is allowed to see a config "
-"item. Conditions can optionally be restricted to certain customer groups. "
-"Name is the only mandatory attribute. If no other options are given, all "
-"config items will be visible under that category."
+msgstr "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
@@ -1599,55 +1410,35 @@ msgstr "Defines if the link type labels must be shown in the node connections."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Defines the available columns of CIs in the config item overview depending "
-"on the CI class. Each entry must consist of a class name and an array of "
-"available fields for the corresponding class. Dynamic field entries have to "
-"honor the scheme DynamicField_FieldName."
+msgstr "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Defines the default config item attribute for config item sorting of the "
-"config item search result of the agent interface."
+msgstr "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Defines the default config item attribute for config item sorting of the "
-"config item search result of the customer interface."
+msgstr "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Defines the default config item attribute for config item sorting of the "
-"config item search result of this operation."
+msgstr "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Defines the default config item order in the config item search result of "
-"the agent interface. Up: oldest on top. Down: latest on top."
+msgstr "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Defines the default config item order in the config item search result of "
-"the customer interface. Up: oldest on top. Down: latest on top."
+msgstr "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Defines the default config item order in the config item search result of "
-"the this operation. Up: oldest on top. Down: latest on top."
+msgstr "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Defines the default displayed columns of CIs in the config item overview "
-"depending on the CI class. Each entry must consist of a class name and an "
-"array of available fields for the corresponding class. Dynamic field entries "
-"have to honor the scheme DynamicField_FieldName."
+msgstr "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1655,32 +1446,11 @@ msgstr "Defines the default relations depth to be shown."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Defines the default shown config item search attribute for config item "
-"search screen."
+msgstr "Defines the default shown config item search attribute for config item search screen."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Defines the default shown config item search attribute for config item "
-"search screen. Example: \"Key\" must have the name of the Dynamic Field in "
-"this case 'X', \"Content\" must have the value of the Dynamic Field "
-"depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/"
-"Time: 'Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00; "
-"Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59;' and or "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1692,21 +1462,15 @@ msgstr "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Defines which items are available for 'Action' in third level of the ITSM "
-"Config Item ACL structure."
+msgstr "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Defines which items are available in first level of the ITSM Config Item ACL "
-"structure."
+msgstr "Defines which items are available in first level of the ITSM Config Item ACL structure."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Defines which items are available in second level of the ITSM Config Item "
-"ACL structure."
+msgstr "Defines which items are available in second level of the ITSM Config Item ACL structure."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1722,62 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Dynamic field event module that marks config item definitions as out of "
-"sync, if containing dynamic fields change."
+msgstr "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Dynamic fields shown in the additional ITSM field screen of the agent "
-"interface."
+msgstr "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Dynamic fields shown in the config item overview screen of the customer "
-"interface."
+msgstr "Dynamic fields shown in the config item overview screen of the customer interface."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Dynamic fields shown in the config item search screen of the agent interface."
+msgstr "Dynamic fields shown in the config item search screen of the agent interface."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Enables/disables the functionality to check ITSM onfiguration items for "
-"unique names. Before enabling this option you should check your system for "
-"already existing config items with duplicate names. You can do this with the "
-"console command Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Fields of the configuration item index, used for the fulltext search. Fields "
-"are also stored, but are not mandatory for the overall functionality. "
-"Inclusion of attachments can be disabled by setting the entry to 0 or "
-"deleting it."
+msgstr "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Fields stored in the configuration item index which are used for other "
-"things besides fulltext searches. For the complete functionality all fields "
-"are mandatory."
+msgstr "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"For every webservice (key) an array of classes (value) can be defined on "
-"which the import is restricted. For all chosen classes, or all existing "
-"classes the identifying attributes will have to be chosen in the invoker "
-"config."
+msgstr "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"GenericInterface module registration for the ConfigItemFetch invoker layer."
+msgstr "GenericInterface module registration for the ConfigItemFetch invoker layer."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1793,20 +1534,15 @@ msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Includes deployment states in the config item search of the customer "
-"interface."
+msgstr "Includes deployment states in the config item search of the customer interface."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Includes incident states in the config item search of the customer interface."
+msgstr "Includes incident states in the config item search of the customer interface."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Maximum number of config items to be displayed in the result of this "
-"operation."
+msgstr "Maximum number of config items to be displayed in the result of this operation."
 
 #. SysConfig
 msgid "Name Module"
@@ -1818,103 +1554,67 @@ msgstr "Number Module"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Number of config items to be displayed in each page of a search result in "
-"the agent interface."
+msgstr "Number of config items to be displayed in each page of a search result in the agent interface."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Number of config items to be displayed in each page of a search result in "
-"the customer interface."
+msgstr "Number of config items to be displayed in each page of a search result in the customer interface."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Objects to search for, how many entries and which attributs to show. "
-"ConfigItem attributes have to explicitly be stored via Elasticsearch."
+msgstr "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the categories for config item classes in the preferences "
-"view of the agent interface."
+msgstr "Parameters for the categories for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parameters for the column filters of the small config item overview. Please "
-"note: setting 'Active' to 0 will only prevent agents from editing settings "
-"of this group in their personal preferences, but will still allow "
-"administrators to edit the settings of another user's behalf. Use "
-"'PreferenceGroup' to control in which area these settings should be shown in "
-"the user interface."
+msgstr "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the name module for config item classes in the preferences "
-"view of the agent interface."
+msgstr "Parameters for the name module for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the number module for config item classes in the preferences "
-"view of the agent interface."
+msgstr "Parameters for the number module for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the version string module for config item classes in the "
-"preferences view of the agent interface."
+msgstr "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the version string template toolkit module for config item "
-"classes in the preferences view of the agent interface."
+msgstr "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameters for the version trigger for config item classes in the "
-"preferences view of the agent interface."
+msgstr "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Performs the configured action for each event (as an Invoker) for each "
-"configured Webservice."
+msgstr "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Required permissions to use the ITSM configuration item attachment action in "
-"the agent interface."
+msgstr "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Required permissions to use the ITSM configuration item search screen in the "
-"customer interface."
+msgstr "Required permissions to use the ITSM configuration item search screen in the customer interface."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Required permissions to use the ITSM configuration item tree view screen in "
-"the agent interface."
+msgstr "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Required permissions to use the bulk ITSM configuration item screen in the "
-"agent interface."
+msgstr "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Shows a link in the menu to display the configuration item links as a Tree "
-"View."
+msgstr "Shows a link in the menu to display the configuration item links as a Tree View."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -1938,11 +1638,7 @@ msgstr "Version Trigger"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Whether the execution of ConfigItemACL can be avoided by checking cached "
-"field dependencies. This can improve loading times of formulars, but has to "
-"be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-"
-"ReturnTypes."
+msgstr "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1954,9 +1650,7 @@ msgstr "General invoker data"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"This OTOBO invoker backend module will be called to prepare the data to be "
-"sent to the remote system, and to process its response data."
+msgstr "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1968,15 +1662,11 @@ msgstr "Mapping"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"The data from the invoker of OTOBO will be processed by this mapping, to "
-"transform it to the kind of data the remote system expects."
+msgstr "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"The response data will be processed by this mapping, to transform it to the "
-"kind of data the invoker of OTOBO expects."
+msgstr "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1992,9 +1682,7 @@ msgstr "Add Event"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in "
-"background (recommended)."
+msgstr "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2054,9 +1742,7 @@ msgstr "New Dynamic Fields"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Would you like to benefit from additional dynamic field types? You have full "
-"access to the following field types:"
+msgstr "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -2072,9 +1758,7 @@ msgstr "External-source key"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"When set via an external source (e.g. web service or import / export), the "
-"value will be interpreted as this attribute."
+msgstr "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -2086,15 +1770,11 @@ msgstr "Select the type of display"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
-"Base structure is not valid. Please provide an array with data in YAML "
-"format."
+msgstr "Base structure is not valid. Please provide an array with data in YAML format."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACLs could not be Imported due to a unknown error, please check OTOBO logs "
-"for more information"
+msgstr "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2102,9 +1782,7 @@ msgstr "%s (copy) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"A precentage value of the minimal translation progress per language, to be "
-"usable for documentations."
+msgstr "A precentage value of the minimal translation progress per language, to be usable for documentations."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2180,43 +1858,19 @@ msgstr "Definition of GIT clone/push URL Prefix."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Definition of a Dynamic Field: Group => Group with access to the Dynamic "
-"Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => "
-"Name of the Widgets; InformationAreaSize => Size and position of the widgets "
-"(Large|Small); Name => Name of the Dynamic Field which should be used; "
-"Priority => Order of the Dynamic Fields; State => State of the Fields (0 = "
-"disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the "
-"repository name has to match to be displayed, FilterPackage => Regex which "
-"the package name has to match to be displayed, FilterBranch => Regex which "
-"the branch name has to match to be displayed, FilterRelease => Regex which "
-"the repelase version string has to match to be displayed."
+msgstr "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Definition of a Dynamic Field: Group => Group with access to the Dynamic "
-"Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => "
-"Name of the Widgets; InformationAreaSize => Size and position of the widgets "
-"(Large|Small); Name => Name of the Dynamic Field which should be used; "
-"Priority => Order of the Dynamic Fields; State => State of the Fields (0 = "
-"disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the "
-"repository name has to match to be displayed, FilterPackage => Regex which "
-"the package name has to match to be displayed, FilterBranch => Regex which "
-"the branch name has to match to be displayed, FilterRelease => Regex which "
-"the repelase version string has to match to be displayed."
+msgstr "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
-"Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, "
-"Version, Date)."
+msgstr "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
-"Definition of mappings between public repository requests and internal OPMS "
-"repositories."
+msgstr "Definition of mappings between public repository requests and internal OPMS repositories."
 
 #. SysConfig
 msgid "Definition of package states."
@@ -2244,9 +1898,7 @@ msgstr "Disable online repositories."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
-"Do not log git ssh connection authorization results for these users. Useful "
-"for automated stuff."
+msgstr "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2266,32 +1918,23 @@ msgstr "Export all relevant releases to ftp server."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
-"Frontend module registration for the OPMS object in the agent interface."
+msgstr "Frontend module registration for the OPMS object in the agent interface."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
-"Frontend module registration for the PublicOPMSRepository object in the "
-"public interface."
+msgstr "Frontend module registration for the PublicOPMSRepository object in the public interface."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
-"Frontend module registration for the PublicOPMSRepositoryLookup object in "
-"the public interface."
+msgstr "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
-"Frontend module registration for the PublicOPMSTestBuild object in the "
-"public interface."
+msgstr "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
-"Frontend module registration for the PublicPackageVerification object in the "
-"public interface."
+msgstr "Frontend module registration for the PublicPackageVerification object in the public interface."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2303,9 +1946,7 @@ msgstr "GIT Author registration."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Generate HTML comment hooks for the specified blocks so that filters can use "
-"them."
+msgstr "Generate HTML comment hooks for the specified blocks so that filters can use them."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2333,20 +1974,15 @@ msgstr "Group, whose members have repository admin permissions in OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
-"Group, whose members will see CI test result information in OPMS screens."
+msgstr "Group, whose members will see CI test result information in OPMS screens."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"Groups an authenticated user (by user login and password) must be member of "
-"to build test packages via the public interface."
+msgstr "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
-"Groups which will be set during git project creation processes while adding "
-"OPMS repositories."
+msgstr "Groups which will be set during git project creation processes while adding OPMS repositories."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2354,9 +1990,7 @@ msgstr "Manage dynamic field in screens."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
-"Manage your public SSH key(s) for Git access here. Make sure to save this "
-"preference when you add a new key."
+msgstr "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2380,8 +2014,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
-"Only users who have rw permissions in one of these groups may access git."
+msgstr "Only users who have rw permissions in one of these groups may access git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2393,48 +2026,15 @@ msgstr "Parameters for the pages in the BranchView screen."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with "
-"access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); "
-"InformationAreaName => Name of the Widgets; InformationAreaSize => Size and "
-"position of the widgets (Large|Small); Name => Name of the Dynamic Field "
-"which should be used; Priority => Order of the Dynamic Fields; State => "
-"State of the Fields (0 = disabled, 1 = active, 2 = mandatory), "
-"FilterRepository => Regex which the repository name has to match to be "
-"displayed, FilterPackage => Regex which the package name has to match to be "
-"displayed, FilterBranch => Regex which the branch name has to match to be "
-"displayed, FilterRelease => Regex which the repelase version string has to "
-"match to be displayed."
+msgstr "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with "
-"access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); "
-"InformationAreaName => Name of the Widgets; InformationAreaSize => Size and "
-"position of the widgets (Large|Small); Name => Name of the Dynamic Field "
-"which should be used; Priority => Order of the Dynamic Fields; State => "
-"State of the Fields (0 = disabled, 1 = active, 2 = mandatory), "
-"FilterRepository => Regex which the repository name has to match to be "
-"displayed, FilterPackage => Regex which the package name has to match to be "
-"displayed, FilterBranch => Regex which the branch name has to match to be "
-"displayed, FilterRelease => Regex which the repelase version string has to "
-"match to be displayed."
+msgstr "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with "
-"access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); "
-"InformationAreaName => Name of the Widgets; InformationAreaSize => Size and "
-"position of the widgets (Large|Small); Name => Name of the Dynamic Field "
-"which should be used; Priority => Order of the Dynamic Fields; State => "
-"State of the Fields (0 = disabled, 1 = active, 2 = mandatory), "
-"FilterRepository => Regex which the repository name has to match to be "
-"displayed, FilterPackage => Regex which the package name has to match to be "
-"displayed, FilterBranch => Regex which the branch name has to match to be "
-"displayed, FilterRelease => Regex which the repelase version string has to "
-"match to be displayed."
+msgstr "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2462,16 +2062,11 @@ msgstr "Sets the path for the BugzillaAddComment post receive script location."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Sets the path for the OTRSCodePolicy  script location. It is recommended to "
-"have a separate clone of the OTRSCodePolicy module that is updated via cron."
+msgstr "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Sets the path for the OTRSCodePolicy pre receive script location. It is "
-"recommended to have a separate clone of the OTRSCodePolicy module that is "
-"updated via cron."
+msgstr "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2479,8 +2074,7 @@ msgstr "Show latest commits in git repositories."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"Shows a link in the menu to go create a unit test from the current ticket."
+msgstr "Shows a link in the menu to go create a unit test from the current ticket."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2512,71 +2106,47 @@ msgstr "The path to the theme folder, containing the sphinx themes."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
-"This configuration defines all possible screens to enable or disable default "
-"columns."
+msgstr "This configuration defines all possible screens to enable or disable default columns."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
-"This configuration defines all possible screens to enable or disable dynamic "
-"fields."
+msgstr "This configuration defines all possible screens to enable or disable dynamic fields."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
-"This configuration defines if only valids or all (invalids) dynamic fields "
-"should be shown."
+msgstr "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"This configuration defines if the OTRS package verification should be active "
-"or disabled. If disabled all packages are shown as verified. It's still "
-"recommended to use only verified packages."
+msgstr "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"This configuration defines the URL to the OTRS CloudService Proxy service. "
-"The http or https prefix will be added, depending on selection SysConfig "
-"'Znuny4OTRSRepoType'."
+msgstr "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"This configuration registers a Output post-filter to extend package "
-"verification."
+msgstr "This configuration registers a Output post-filter to extend package verification."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"This configuration registers an OutputFilter module that removes OTRS "
-"Business Solution TM advertisements."
+msgstr "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"This configuration registers an output filter to hide online repository "
-"selection in package manager."
+msgstr "This configuration registers an output filter to hide online repository selection in package manager."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Tidy unprocessed release that not passed test pomules checks for a long time."
+msgstr "Tidy unprocessed release that not passed test pomules checks for a long time."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"Users who have rw permissions in one of these groups are permitted to "
-"execute force pushes 'git push --force'."
+msgstr "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"Users who have rw permissions in one of these groups are permitted to manage "
-"projects. Additionally the members have administration permissions to the "
-"git management."
+msgstr "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 
 #. ITSM class bundles
 msgid "1"
@@ -3633,3 +3203,16 @@ msgstr "VoIP Phone"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Webcam"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

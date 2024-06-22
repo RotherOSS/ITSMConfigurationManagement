@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Slovenian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/sl/>\n"
+"Language-Team: Slovenian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -72,8 +70,7 @@ msgstr "Filter za razrede"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
-msgstr ""
-"Če želite ustvariti nov element konfiguracije, s seznama izberite razred."
+msgstr "Če želite ustvariti nov element konfiguracije, s seznama izberite razred."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -333,8 +330,7 @@ msgstr "Rezultati iskanja elementa konfiguracije"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
-"Elementa ni mogoče prikazati, pravice dostopa za ConfigItem niso podane!"
+msgstr "Elementa ni mogoče prikazati, pravice dostopa za ConfigItem niso podane!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -492,35 +488,35 @@ msgstr "Omrežje"
 msgid "Software"
 msgstr "Programska oprema"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Pretekla veljavnost"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "Vzdrževanje"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilot"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Načrtovano"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Popravila"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Upokojeni"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Pregled"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Testiranje/QA"
 
@@ -762,10 +758,7 @@ msgstr "Nastavitve CMDB"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"Preverjanje edinstvenega imena samo znotraj istega razreda ConfigItem "
-"('class') ali globalno ('global'), kar pomeni, da se pri iskanju podvojitev "
-"upošteva vsak obstoječi ConfigItem."
+msgstr "Preverjanje edinstvenega imena samo znotraj istega razreda ConfigItem ('class') ali globalno ('global'), kar pomeni, da se pri iskanju podvojitev upošteva vsak obstoječi ConfigItem."
 
 #. SysConfig
 msgid "Config Items"
@@ -781,9 +774,7 @@ msgstr "Urejanje elementa konfiguracije."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
-"Modul za dogodke elementa konfiguracije, ki omogoča beleženje v zgodovino v "
-"vmesniku agenta."
+msgstr "Modul za dogodke elementa konfiguracije, ki omogoča beleženje v zgodovino v vmesniku agenta."
 
 #. SysConfig
 msgid "Config item history."
@@ -819,8 +810,7 @@ msgstr "Postavka za konfiguracijo modula v razsutem stanju."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
-"Element konfiguracije za iskanje zalednega usmerjevalnika vmesnika agenta."
+msgstr "Element konfiguracije za iskanje zalednega usmerjevalnika vmesnika agenta."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
@@ -828,56 +818,35 @@ msgstr "Ustvarjanje in upravljanje definicij za elemente konfiguracije."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Opredelite dejanja, pri katerih je v gradniku povezanih predmetov na voljo "
-"gumb za nastavitve (LinkObject::ViewMode = \"complex\"). Upoštevajte, da "
-"morajo te akcije registrirati naslednje datoteke JS in CSS: V tem primeru je "
-"treba za uporabo nastavitev in funkcij za povezovanje objektov in njihovih "
-"funkcij v sistemu nastaviti naslednje datoteke: Core.AllocationList.css, "
-"Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js "
-"in Core.Agent.LinkObject.js."
+msgstr "Opredelite dejanja, pri katerih je v gradniku povezanih predmetov na voljo gumb za nastavitve (LinkObject::ViewMode = \"complex\"). Upoštevajte, da morajo te akcije registrirati naslednje datoteke JS in CSS: V tem primeru je treba za uporabo nastavitev in funkcij za povezovanje objektov in njihovih funkcij v sistemu nastaviti naslednje datoteke: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js in Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
-"Opredeljuje Zahtevana dovoljenja za ustvarjanje elementov konfiguracije ITSM "
-"z uporabo splošnega vmesnika."
+msgstr "Opredeljuje Zahtevana dovoljenja za ustvarjanje elementov konfiguracije ITSM z uporabo splošnega vmesnika."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Opredeljuje Zahtevana dovoljenja za brisanje elementov konfiguracije ITSM z "
-"uporabo splošnega vmesnika."
+msgstr "Opredeljuje Zahtevana dovoljenja za brisanje elementov konfiguracije ITSM z uporabo splošnega vmesnika."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
-"Opredeljuje Zahtevana dovoljenja za pridobitev elementov konfiguracije ITSM "
-"z uporabo splošnega vmesnika."
+msgstr "Opredeljuje Zahtevana dovoljenja za pridobitev elementov konfiguracije ITSM z uporabo splošnega vmesnika."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
-"Opredeljuje Zahtevana dovoljenja za iskanje elementov konfiguracije ITSM z "
-"uporabo splošnega vmesnika."
+msgstr "Opredeljuje Zahtevana dovoljenja za iskanje elementov konfiguracije ITSM z uporabo splošnega vmesnika."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
-"Opredeljuje Zahtevana dovoljenja za posodabljanje elementov konfiguracije "
-"ITSM z uporabo splošnega vmesnika."
+msgstr "Opredeljuje Zahtevana dovoljenja za posodabljanje elementov konfiguracije ITSM z uporabo splošnega vmesnika."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
-"Opredeljuje modul za pregled, ki prikazuje majhen pogled seznama elementov "
-"konfiguracije."
+msgstr "Opredeljuje modul za pregled, ki prikazuje majhen pogled seznama elementov konfiguracije."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr ""
-"Za vsak razred ConfigItem posebej določa regularne izraze za preverjanje "
-"imena ConfigItem in prikaz ustreznih sporočil o napakah."
+msgstr "Za vsak razred ConfigItem posebej določa regularne izraze za preverjanje imena ConfigItem in prikaz ustreznih sporočil o napakah."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
@@ -885,20 +854,15 @@ msgstr "Opredeljuje privzeti podobjekt razreda 'ITSMConfigItem'."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
-"Določa število vrstic za urejevalnik definicij CI v upraviteljskem vmesniku."
+msgstr "Določa število vrstic za urejevalnik definicij CI v upraviteljskem vmesniku."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Opredeljuje vrstni red stanj incidenta od visokega (npr. cricitalno) do "
-"nizkega (npr. funkcionalno)."
+msgstr "Opredeljuje vrstni red stanj incidenta od visokega (npr. cricitalno) do nizkega (npr. funkcionalno)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Opredeljuje ustrezna stanja uvajanja, v katerih lahko povezane vozovnice "
-"vplivajo na stanje CI."
+msgstr "Opredeljuje ustrezna stanja uvajanja, v katerih lahko povezane vozovnice vplivajo na stanje CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -910,84 +874,35 @@ msgstr "Določa omejitev iskanja za zaslon AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
-"Določa prikazane stolpce v pregledu elementa konfiguracije. Ta možnost ne "
-"vpliva na položaj stolpca. Opomba: Stolpec Razred je vedno na voljo, če je "
-"izbran filter \"Vse\"."
+msgstr "Določa prikazane stolpce v pregledu elementa konfiguracije. Ta možnost ne vpliva na položaj stolpca. Opomba: Stolpec Razred je vedno na voljo, če je izbran filter \"Vse\"."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
-"Določa prikazane stolpce pri iskanju elementa konfiguracije. Ta možnost ne "
-"vpliva na položaj stolpca."
+msgstr "Določa prikazane stolpce pri iskanju elementa konfiguracije. Ta možnost ne vpliva na položaj stolpca."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Opredeljuje prikazane stolpce CI v pregledu elementa konfiguracije glede na "
-"razred CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi "
-"dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so "
-"skupni vsem CI (primer za razred Računalnik: Computer::Name, Computer::"
-"CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot "
-"so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer "
-"za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::"
-"1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če ni vnosa za "
-"razred CI, se prikažejo privzeti stolpci, kot so določeni v nastavitvi "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Opredeljuje prikazane stolpce CI v pregledu elementa konfiguracije glede na razred CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so skupni vsem CI (primer za razred Računalnik: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če ni vnosa za razred CI, se prikažejo privzeti stolpci, kot so določeni v nastavitvi ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Določa prikazane stolpce CI v iskanju elementa konfiguracije glede na razred "
-"CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi dvopičji ("
-"npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so skupni vsem "
-"CI (primer za razred Računalnik: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Za prikaz posameznih CI-atributov, kot so opredeljeni "
-"v definiciji CI, je treba uporabiti naslednjo shemo (primer za razred "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred CI "
-"ni vnosa, se prikažejo privzeti stolpci, kot so določeni v nastavitvi "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Določa prikazane stolpce CI v iskanju elementa konfiguracije glede na razred CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so skupni vsem CI (primer za razred Računalnik: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred CI ni vnosa, se prikažejo privzeti stolpci, kot so določeni v nastavitvi ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Določa prikazane stolpce CI v gradniku elementa konfiguracije glede na "
-"razred CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi "
-"dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so "
-"skupni vsem CI (primer za razred Computer: Computer::Name, Computer::"
-"CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot "
-"so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer "
-"za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::"
-"1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred "
-"CI ni vnosa, se prikažejo privzeti stolpci, kot so določeni v nastavitvi "
-"AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (ključ DefaultColumns)."
+msgstr "Določa prikazane stolpce CI v gradniku elementa konfiguracije glede na razred CI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so skupni vsem CI (primer za razred Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred CI ni vnosa, se prikažejo privzeti stolpci, kot so določeni v nastavitvi AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (ključ DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Opredeljuje prikazane stolpce KI v kompleksnem pogledu preglednice povezav "
-"za vse razrede KI. Če vnosa ni, so prikazani privzeti stolpci."
+msgstr "Opredeljuje prikazane stolpce KI v kompleksnem pogledu preglednice povezav za vse razrede KI. Če vnosa ni, so prikazani privzeti stolpci."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"Opredeljuje prikazane stolpce KI v kompleksnem pogledu preglednice povezav, "
-"odvisno od razreda KI. Vsak vnos mora biti opremljen z imenom razreda in "
-"dvojnimi dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, "
-"ki so skupni vsem CI (primer za razred Računalnik: Computer::Name, Computer::"
-"CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot "
-"so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer "
-"za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::"
-"1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred "
-"CI ni vnosa, so prikazani privzeti stolpci."
+msgstr "Opredeljuje prikazane stolpce KI v kompleksnem pogledu preglednice povezav, odvisno od razreda KI. Vsak vnos mora biti opremljen z imenom razreda in dvojnimi dvopičji (npr. Computer::). Obstaja nekaj atributov CI-Attributes, ki so skupni vsem CI (primer za razred Računalnik: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Za prikaz posameznih CI-atributov, kot so opredeljeni v definiciji CI, je treba uporabiti naslednjo shemo (primer za razred Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Če za razred CI ni vnosa, so prikazani privzeti stolpci."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Določa, katera vrsta povezave (poimenovana z vidika vozovnice) lahko vpliva "
-"na stanje povezanega CI."
+msgstr "Določa, katera vrsta povezave (poimenovana z vidika vozovnice) lahko vpliva na stanje povezanega CI."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
@@ -1007,30 +922,19 @@ msgstr "Duplikatni"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
-"Omogoča funkcijo množičnega delovanja za konfiguracijske elemente za "
-"sprednji del agenta, ki deluje na več kot enem konfiguracijskem elementu "
-"naenkrat."
+msgstr "Omogoča funkcijo množičnega delovanja za konfiguracijske elemente za sprednji del agenta, ki deluje na več kot enem konfiguracijskem elementu naenkrat."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
-"Omogoči funkcijo množičnega delovanja konfiguracijskih elementov samo za "
-"navedene skupine."
+msgstr "Omogoči funkcijo množičnega delovanja konfiguracijskih elementov samo za navedene skupine."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov "
-"konfiguracije ConfigItems. Preden omogočite to možnost, morate preveriti, "
-"ali v vašem sistemu že obstajajo konfiguracijski elementi s podvojenimi "
-"imeni. To lahko storite s skripto bin/otobo.ITSMConfigItemListDuplicates.pl."
+msgstr "Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov konfiguracije ConfigItems. Preden omogočite to možnost, morate preveriti, ali v vašem sistemu že obstajajo konfiguracijski elementi s podvojenimi imeni. To lahko storite s skripto bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
-"Modul dogodkov za nastavitev stanja konfiguracije na povezavi ticket-"
-"configitem-link."
+msgstr "Modul dogodkov za nastavitev stanja konfiguracije na povezavi ticket-configitem-link."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -1058,18 +962,11 @@ msgstr "Pregled."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Parametri za nadzorno ploščo zaledja pregled konfiguracijskih elementov "
-"podjetja stranke v vmesniku agenta . \"Limit\" je privzeto število "
-"prikazanih vnosov. \"Group\" se uporablja za omejitev dostopa do vtičnika ("
-"npr. Group: admin;group1;group2;). \"Default\" določa, ali je vtičnik "
-"privzeto omogočen ali ga mora uporabnik omogočiti ročno. \"CacheTTLLocal\" "
-"je čas predpomnilnika v minutah za vtičnik."
+msgstr "Parametri za nadzorno ploščo zaledja pregled konfiguracijskih elementov podjetja stranke v vmesniku agenta . \"Limit\" je privzeto število prikazanih vnosov. \"Group\" se uporablja za omejitev dostopa do vtičnika (npr. Group: admin;group1;group2;). \"Default\" določa, ali je vtičnik privzeto omogočen ali ga mora uporabnik omogočiti ročno. \"CacheTTLLocal\" je čas predpomnilnika v minutah za vtičnik."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
-"Parametri za barvo stanja uvajanja v pogledu nastavitev v vmesniku agenta."
+msgstr "Parametri za barvo stanja uvajanja v pogledu nastavitev v vmesniku agenta."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
@@ -1089,45 +986,31 @@ msgstr "Skupina dovoljenj"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona elementa konfiguracije ITSM v "
-"vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za iskanje elementov konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za iskanje elementov konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za povečavo elementa konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za povečavo elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona Dodaj element konfiguracije ITSM v "
-"vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona Dodaj element konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za urejanje elementa konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za urejanje elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za zgodovino elementa konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za zgodovino elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za tiskanje elementa konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za tiskanje elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1139,100 +1022,67 @@ msgstr "Iskanje elementov konfiguracije."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"Izbere modul generatorja številk konfiguracijskih elementov. \"AutoIncrement"
-"\" poveča številko konfiguracijskega elementa, uporabijo se SystemID, "
-"ConfigItemClassID in števec. Oblika je \"SystemID.ConfigItemClassID.Counter\""
-", npr. 1205000004, 1205000005."
+msgstr "Izbere modul generatorja številk konfiguracijskih elementov. \"AutoIncrement\" poveča številko konfiguracijskega elementa, uporabijo se SystemID, ConfigItemClassID in števec. Oblika je \"SystemID.ConfigItemClassID.Counter\", npr. 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
-"samodejno nastavite stanje incidenta v CI, ko je vozovnica povezana s CI."
+msgstr "samodejno nastavite stanje incidenta v CI, ko je vozovnica povezana s CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Nastavi stanje uvajanja na zaslonu za množične elemente konfiguracije v "
-"vmesniku agenta."
+msgstr "Nastavi stanje uvajanja na zaslonu za množične elemente konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Nastavi stanje incidenta na zaslonu za množično konfiguracijo elementov v "
-"vmesniku agenta."
+msgstr "Nastavi stanje incidenta na zaslonu za množično konfiguracijo elementov v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju, ki omogoča povezavo elementa konfiguracije z "
-"drugim objektom v pogledu povečave elementa konfiguracije v vmesniku agenta."
+msgstr "Prikaže povezavo v meniju, ki omogoča povezavo elementa konfiguracije z drugim objektom v pogledu povečave elementa konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za dostop do zgodovine elementa konfiguracije v "
-"pregledu elementa konfiguracije v vmesniku agenta."
+msgstr "Prikaže povezavo v meniju za dostop do zgodovine elementa konfiguracije v pregledu elementa konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za dostop do zgodovine elementa konfiguracije v "
-"pogledu povečave vmesnika agenta."
+msgstr "Prikaže povezavo v meniju za dostop do zgodovine elementa konfiguracije v pogledu povečave vmesnika agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"V meniju prikaže povezavo za brisanje elementa konfiguracije v povečanem "
-"pogledu vmesnika agenta."
+msgstr "V meniju prikaže povezavo za brisanje elementa konfiguracije v povečanem pogledu vmesnika agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"V meniju prikaže povezavo za podvojitev konfiguracijske elementa v pregledu "
-"konfiguracijskih elementov v vmesniku agenta."
+msgstr "V meniju prikaže povezavo za podvojitev konfiguracijske elementa v pregledu konfiguracijskih elementov v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za podvojitev elementa konfiguracije v pogledu "
-"povečave vmesnika agenta."
+msgstr "Prikaže povezavo v meniju za podvojitev elementa konfiguracije v pogledu povečave vmesnika agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za urejanje elementa konfiguracije v pogledu "
-"povečave vmesnika agenta."
+msgstr "Prikaže povezavo v meniju za urejanje elementa konfiguracije v pogledu povečave vmesnika agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
-"V meniju prikaže povezavo za vrnitev v pogled povečave konfiguracijske enote "
-"v vmesniku agenta."
+msgstr "V meniju prikaže povezavo za vrnitev v pogled povečave konfiguracijske enote v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za tiskanje elementa konfiguracije v pogledu "
-"povečave vmesnika agenta."
+msgstr "Prikaže povezavo v meniju za tiskanje elementa konfiguracije v pogledu povečave vmesnika agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Prikaže povezavo v meniju za povečavo elementa konfiguracije v pregledu "
-"elementov konfiguracije v vmesniku agenta."
+msgstr "Prikaže povezavo v meniju za povečavo elementa konfiguracije v pregledu elementov konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
-"Prikaže zgodovino elementov konfiguracije (v obratnem vrstnem redu) v "
-"vmesniku agenta."
+msgstr "Prikaže zgodovino elementov konfiguracije (v obratnem vrstnem redu) v vmesniku agenta."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
-"Identifikator elementa konfiguracije, npr. ConfigItem#, MyConfigItem#. "
-"Privzeto je ConfigItem#."
+msgstr "Identifikator elementa konfiguracije, npr. ConfigItem#, MyConfigItem#. Privzeto je ConfigItem#."
 
 #. SysConfig
 msgid "class"
@@ -1264,10 +1114,7 @@ msgstr "Paketi razredov Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Tu lahko uvozite svežnje razredov Ready2Import, ki prikazujejo naše najbolj "
-"običajne elemente konfiguracije. Upoštevajte, da bo morda potrebna dodatna "
-"konfiguracija."
+msgstr "Tu lahko uvozite svežnje razredov Ready2Import, ki prikazujejo naše najbolj običajne elemente konfiguracije. Upoštevajte, da bo morda potrebna dodatna konfiguracija."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1287,9 +1134,7 @@ msgstr "Številka različice tega elementa konfiguracije"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Številka različice je že v uporabi pri ConfigItems z naslednjo številko "
-"(številkami): %s"
+msgstr "Številka različice je že v uporabi pri ConfigItems z naslednjo številko (številkami): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1337,9 +1182,7 @@ msgstr "Uvožene bodo naslednje vloge"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Upoštevajte, da bodo ustvarjena tudi ustrezna dinamična polja in razredi "
-"GeneralCatalog, ki ne bodo samodejno odstranjeni."
+msgstr "Upoštevajte, da bodo ustvarjena tudi ustrezna dinamična polja in razredi GeneralCatalog, ki ne bodo samodejno odstranjeni."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1379,8 +1222,7 @@ msgstr "Omejitve razreda za element konfiguracije"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Izberite enega ali več razredov za omejitev izbirnih elementov konfiguracije"
+msgstr "Izberite enega ali več razredov za omejitev izbirnih elementov konfiguracije"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1404,10 +1246,7 @@ msgstr "Smer povezave"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Objekt, na katerega se sklicuje, je objekt, ki vsebuje to dinamično polje, "
-"objekt, na katerega se sklicuje, pa je objekt, ki je izbran kot vrednost "
-"dinamičnega polja."
+msgstr "Objekt, na katerega se sklicuje, je objekt, ki vsebuje to dinamično polje, objekt, na katerega se sklicuje, pa je objekt, ki je izbran kot vrednost dinamičnega polja."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1423,10 +1262,7 @@ msgstr "Vrsta sklicevanja na povezavo"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Ali ta povezava velja za ConfigItem ali statično različico objekta, na "
-"katerega se sklicuje. Izračun trenutnega stanja incidenta se izvede samo pri "
-"dinamičnih povezavah."
+msgstr "Ali ta povezava velja za ConfigItem ali statično različico objekta, na katerega se sklicuje. Izračun trenutnega stanja incidenta se izvede samo pri dinamičnih povezavah."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1458,9 +1294,7 @@ msgstr "Napaka pri sinhronizaciji definicij. Preverite dnevnik."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Imate definicije ITSMConfigItem, ki niso sinhronizirane. Umeščajte spremembe "
-"dinamičnih polj ITSMConfigItem."
+msgstr "Imate definicije ITSMConfigItem, ki niso sinhronizirane. Umeščajte spremembe dinamičnih polj ITSMConfigItem."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1480,18 +1314,11 @@ msgstr "1 - prikazano"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Omogoča razširjene pogoje iskanja pri iskanju elementov konfiguracije v "
-"vmesniku agenta. S to funkcijo lahko iščete npr. ime elementa konfiguracije "
-"s takšnimi pogoji, kot so \"(*key1*&&*key2*)\" ali \"(*key1*||*key2*)\"."
+msgstr "Omogoča razširjene pogoje iskanja pri iskanju elementov konfiguracije v vmesniku agenta. S to funkcijo lahko iščete npr. ime elementa konfiguracije s takšnimi pogoji, kot so \"(*key1*&&*key2*)\" ali \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Omogoča razširjene pogoje iskanja v iskanju elementov konfiguracije v "
-"vmesniku za stranke. S to funkcijo lahko iščete npr. ime elementa "
-"konfiguracije s takšnimi pogoji, kot so \"(*key1*&&*key2*)\" ali \""
-"(*key1*||*key2*)\"."
+msgstr "Omogoča razširjene pogoje iskanja v iskanju elementov konfiguracije v vmesniku za stranke. S to funkcijo lahko iščete npr. ime elementa konfiguracije s takšnimi pogoji, kot so \"(*key1*&&*key2*)\" ali \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1511,44 +1338,31 @@ msgstr "Izberite atribute za sprožitev ustvarjanja nove različice."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
-"Izberite kategorije, ki jih želite dodeliti temu razredu elementov "
-"konfiguracije."
+msgstr "Izberite kategorije, ki jih želite dodeliti temu razredu elementov konfiguracije."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
-"Filtri elementa konfiguracije stolpca za pregled elementa konfiguracije."
+msgstr "Filtri elementa konfiguracije stolpca za pregled elementa konfiguracije."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v "
-"vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa konfiguracije "
-"in dinamična polja (DynamicField_NameX)."
+msgstr "Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v "
-"vmesniku za stranke. Opomba: Dovoljeni so samo atributi elementa "
-"konfiguracije in dinamična polja (DynamicField_NameX)."
+msgstr "Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v vmesniku za stranke. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Modul dogodkov za elemente konfiguracije, ki posodobi elemente konfiguracije "
-"na njihovo trenutno definicijo."
+msgstr "Modul dogodkov za elemente konfiguracije, ki posodobi elemente konfiguracije na njihovo trenutno definicijo."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
-"Modul dogodkov za elemente konfiguracije, ki posodobi tabelo configitem_ĺink."
+msgstr "Modul dogodkov za elemente konfiguracije, ki posodobi tabelo configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
-"Modul dogodkov elementa konfiguracije posodobi trenutno stanje incidenta."
+msgstr "Modul dogodkov elementa konfiguracije posodobi trenutno stanje incidenta."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1560,17 +1374,11 @@ msgstr "ConfigItem Različica"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"Konfiguracijski elementi naslednjih razredov ne bodo shranjeni v strežniku "
-"Elasticsearch. Če želite to uporabiti za obstoječe CI, je treba po spremembi "
-"te možnosti zagnati migracijo CI prek konzole."
+msgstr "Konfiguracijski elementi naslednjih razredov ne bodo shranjeni v strežniku Elasticsearch. Če želite to uporabiti za obstoječe CI, je treba po spremembi te možnosti zagnati migracijo CI prek konzole."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"Konfiguracijski elementi z naslednjimi stanji namestitve ne bodo shranjeni v "
-"strežniku Elasticsearch. Če želite to uporabiti za obstoječe CI, je treba po "
-"spremembi te možnosti zagnati migracijo CI prek konzole."
+msgstr "Konfiguracijski elementi z naslednjimi stanji namestitve ne bodo shranjeni v strežniku Elasticsearch. Če želite to uporabiti za obstoječe CI, je treba po spremembi te možnosti zagnati migracijo CI prek konzole."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1582,94 +1390,55 @@ msgstr "Stranke lahko ročno preklapljajo med preteklimi različicami CI."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Privzete podatke, ki se uporabijo v atributu za zaslon za iskanje elementov "
-"konfiguracije. Primer: \"ITSMConfigItemCreateTimePointFormat=leto;ITSMConfigI"
-"temCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "Privzete podatke, ki se uporabijo v atributu za zaslon za iskanje elementov konfiguracije. Primer: \"ITSMConfigItemCreateTimePointFormat=leto;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Privzete podatke, ki se uporabijo v atributu za zaslon za iskanje elementov "
-"konfiguracije. Primer: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigIte"
-"mCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCre"
-"ateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreat"
-"eTimeStopDay=3;\"."
+msgstr "Privzete podatke, ki se uporabijo v atributu za zaslon za iskanje elementov konfiguracije. Primer: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Opredelitev sheme Template::Toolkit za niza različic. Uporablja se samo, če "
-"je modul Version String Module nastavljen na TemplateToolkit."
+msgstr "Opredelitev sheme Template::Toolkit za niza različic. Uporablja se samo, če je modul Version String Module nastavljen na TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Opredelite niz pogojev, pod katerimi lahko stranka vidi element "
-"konfiguracije. Pogoji so lahko po želji omejeni na določene skupine strank. "
-"Ime je edini obvezni atribut. Če ne navedete drugih možnosti, bodo v tej "
-"kategoriji vidni vsi elementi konfiguracije."
+msgstr "Opredelite niz pogojev, pod katerimi lahko stranka vidi element konfiguracije. Pogoji so lahko po želji omejeni na določene skupine strank. Ime je edini obvezni atribut. Če ne navedete drugih možnosti, bodo v tej kategoriji vidni vsi elementi konfiguracije."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
-"Določa, ali morajo biti v povezavah vozlišč prikazane oznake vrste povezave."
+msgstr "Določa, ali morajo biti v povezavah vozlišč prikazane oznake vrste povezave."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Opredeljuje razpoložljive stolpce CI v pregledu elementa konfiguracije glede "
-"na razred CI. Vsak vnos mora biti sestavljen iz imena razreda in polja "
-"razpoložljivih polj za ustrezni razred. Vnosi dinamičnih polj morajo "
-"upoštevati shemo DynamicField_FieldName."
+msgstr "Opredeljuje razpoložljive stolpce CI v pregledu elementa konfiguracije glede na razred CI. Vsak vnos mora biti sestavljen iz imena razreda in polja razpoložljivih polj za ustrezni razred. Vnosi dinamičnih polj morajo upoštevati shemo DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Določa privzeti atribut elementa konfiguracije za razvrščanje elementov "
-"konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku agenta."
+msgstr "Določa privzeti atribut elementa konfiguracije za razvrščanje elementov konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Določa privzeti atribut elementa konfiguracije za razvrščanje elementov "
-"konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku za "
-"stranke."
+msgstr "Določa privzeti atribut elementa konfiguracije za razvrščanje elementov konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku za stranke."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Določa privzeti atribut elementa konfiguracije za razvrščanje elementa "
-"konfiguracije v rezultat iskanja elementa konfiguracije te operacije."
+msgstr "Določa privzeti atribut elementa konfiguracije za razvrščanje elementa konfiguracije v rezultat iskanja elementa konfiguracije te operacije."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja "
-"elementov konfiguracije v vmesniku agenta. Navzgor: najstarejši na vrhu. "
-"Navzdol: najnovejši na vrhu."
+msgstr "Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku agenta. Navzgor: najstarejši na vrhu. Navzdol: najnovejši na vrhu."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja "
-"elementov konfiguracije v vmesniku za stranke. Navzgor: najstarejši na vrhu. "
-"Navzdol: najnovejši na vrhu."
+msgstr "Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja elementov konfiguracije v vmesniku za stranke. Navzgor: najstarejši na vrhu. Navzdol: najnovejši na vrhu."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja "
-"elementov konfiguracije te operacije. Navzgor: najstarejši na vrhu. Navzdol: "
-"najnovejši na vrhu."
+msgstr "Določa privzeti vrstni red elementov konfiguracije v rezultatu iskanja elementov konfiguracije te operacije. Navzgor: najstarejši na vrhu. Navzdol: najnovejši na vrhu."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Določa privzete prikazane stolpce CI v pregledu elementa konfiguracije glede "
-"na razred CI. Vsak vnos mora biti sestavljen iz imena razreda in polja "
-"razpoložljivih polj za ustrezni razred. Vnosi dinamičnih polj morajo "
-"upoštevati shemo DynamicField_FieldName."
+msgstr "Določa privzete prikazane stolpce CI v pregledu elementa konfiguracije glede na razred CI. Vsak vnos mora biti sestavljen iz imena razreda in polja razpoložljivih polj za ustrezni razred. Vnosi dinamičnih polj morajo upoštevati shemo DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1677,32 +1446,11 @@ msgstr "Določa privzeto globino odnosov, ki se prikažejo."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Določa privzeto prikazan atribut iskanja elementa konfiguracije za zaslon "
-"iskanja elementa konfiguracije."
+msgstr "Določa privzeto prikazan atribut iskanja elementa konfiguracije za zaslon iskanja elementa konfiguracije."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Določa privzeto prikazan atribut iskanja elementa konfiguracije za zaslon "
-"iskanja elementa konfiguracije. Primer: \"Key\" mora imeti ime dinamičnega "
-"polja, v tem primeru \"X\", \"Content\" mora imeti vrednost dinamičnega "
-"polja, odvisno od vrste dinamičnega polja, Text: \"a text\", Dropdown: \"1\""
-", Date/Time: \"Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00; "
-"Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59;' in ali "
-"'Search_DynamicField_XTimePointFormat=teden; "
-"Search_DynamicField_XTimePointStart=Pred; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Določa privzeto prikazan atribut iskanja elementa konfiguracije za zaslon iskanja elementa konfiguracije. Primer: \"Key\" mora imeti ime dinamičnega polja, v tem primeru \"X\", \"Content\" mora imeti vrednost dinamičnega polja, odvisno od vrste dinamičnega polja, Text: \"a text\", Dropdown: \"1\", Date/Time: \"Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' in ali 'Search_DynamicField_XTimePointFormat=teden; Search_DynamicField_XTimePointStart=Pred; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1714,21 +1462,15 @@ msgstr "Določa omejitev iskanja za zaslon CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Opredeljuje, kateri elementi so na voljo za \"Action\" na tretji ravni "
-"strukture ITSM Config Item ACL."
+msgstr "Opredeljuje, kateri elementi so na voljo za \"Action\" na tretji ravni strukture ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Določa, kateri elementi so na voljo na prvi ravni strukture ITSM Config Item "
-"ACL."
+msgstr "Določa, kateri elementi so na voljo na prvi ravni strukture ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Določa, kateri elementi so na voljo na drugi ravni strukture ITSM Config "
-"Item ACL."
+msgstr "Določa, kateri elementi so na voljo na drugi ravni strukture ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1744,62 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Modul za dogodke dinamičnih polj, ki označi definicije elementov "
-"konfiguracije kot nesinhronizirane, če se spremenijo dinamična polja, ki jih "
-"vsebujejo."
+msgstr "Modul za dogodke dinamičnih polj, ki označi definicije elementov konfiguracije kot nesinhronizirane, če se spremenijo dinamična polja, ki jih vsebujejo."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Dinamična polja, prikazana na zaslonu dodatnega polja ITSM v vmesniku agenta."
+msgstr "Dinamična polja, prikazana na zaslonu dodatnega polja ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Dinamična polja, prikazana na zaslonu za pregled elementa konfiguracije v "
-"vmesniku za stranke."
+msgstr "Dinamična polja, prikazana na zaslonu za pregled elementa konfiguracije v vmesniku za stranke."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Dinamična polja, prikazana na zaslonu za iskanje elementov konfiguracije v "
-"vmesniku agenta."
+msgstr "Dinamična polja, prikazana na zaslonu za iskanje elementov konfiguracije v vmesniku agenta."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov "
-"konfiguracije ITSM. Preden omogočite to možnost, morate preveriti svoj "
-"sistem za že obstoječe elemente konfiguracije s podvojenimi imeni. To lahko "
-"storite s konzolnim ukazom Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov konfiguracije ITSM. Preden omogočite to možnost, morate preveriti svoj sistem za že obstoječe elemente konfiguracije s podvojenimi imeni. To lahko storite s konzolnim ukazom Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Polja indeksa elementa konfiguracije, ki se uporabljajo za iskanje po "
-"celotnem besedilu. Polja so prav tako shranjena, vendar niso obvezna za "
-"celotno funkcionalnost. Vključevanje prilog lahko onemogočite tako, da vnos "
-"nastavite na 0 ali ga izbrišete."
+msgstr "Polja indeksa elementa konfiguracije, ki se uporabljajo za iskanje po celotnem besedilu. Polja so prav tako shranjena, vendar niso obvezna za celotno funkcionalnost. Vključevanje prilog lahko onemogočite tako, da vnos nastavite na 0 ali ga izbrišete."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Polja, shranjena v indeksu elementov konfiguracije, ki se poleg iskanja po "
-"celotnem besedilu uporabljajo tudi za druge stvari. Za popolno "
-"funkcionalnost so vsa polja obvezna."
+msgstr "Polja, shranjena v indeksu elementov konfiguracije, ki se poleg iskanja po celotnem besedilu uporabljajo tudi za druge stvari. Za popolno funkcionalnost so vsa polja obvezna."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Za vsako spletno storitev (ključ) lahko določite niz razredov (vrednost), za "
-"katere je uvoz omejen. Za vse izbrane razrede ali vse obstoječe razrede bo "
-"treba v konfiguraciji invokerja izbrati identifikacijske atribute."
+msgstr "Za vsako spletno storitev (ključ) lahko določite niz razredov (vrednost), za katere je uvoz omejen. Za vse izbrane razrede ali vse obstoječe razrede bo treba v konfiguraciji invokerja izbrati identifikacijske atribute."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"Registracija modula GenericInterface za sloj invokatorja ConfigItemFetch."
+msgstr "Registracija modula GenericInterface za sloj invokatorja ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1815,21 +1534,15 @@ msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Vključuje stanja uvajanja v iskanje elementov konfiguracije v uporabniškem "
-"vmesniku."
+msgstr "Vključuje stanja uvajanja v iskanje elementov konfiguracije v uporabniškem vmesniku."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Vključuje stanja incidentov v iskanje elementov konfiguracije v uporabniškem "
-"vmesniku."
+msgstr "Vključuje stanja incidentov v iskanje elementov konfiguracije v uporabniškem vmesniku."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Največje število elementov konfiguracije, ki se prikažejo v rezultatu te "
-"operacije."
+msgstr "Največje število elementov konfiguracije, ki se prikažejo v rezultatu te operacije."
 
 #. SysConfig
 msgid "Name Module"
@@ -1841,104 +1554,67 @@ msgstr "Modul števila"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Število elementov konfiguracije, ki se prikažejo na vsaki strani rezultata "
-"iskanja v vmesniku agenta."
+msgstr "Število elementov konfiguracije, ki se prikažejo na vsaki strani rezultata iskanja v vmesniku agenta."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Število elementov konfiguracije, ki se prikažejo na vsaki strani rezultata "
-"iskanja v uporabniškem vmesniku."
+msgstr "Število elementov konfiguracije, ki se prikažejo na vsaki strani rezultata iskanja v uporabniškem vmesniku."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Predmeti za iskanje, koliko vnosov in kateri atributi naj se prikažejo. "
-"Atributi ConfigItem morajo biti izrecno shranjeni prek storitve "
-"Elasticsearch."
+msgstr "Predmeti za iskanje, koliko vnosov in kateri atributi naj se prikažejo. Atributi ConfigItem morajo biti izrecno shranjeni prek storitve Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za kategorije za razrede elementov konfiguracije v pogledu "
-"nastavitev v vmesniku agenta."
+msgstr "Parametri za kategorije za razrede elementov konfiguracije v pogledu nastavitev v vmesniku agenta."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parametri za filtre stolpcev v pregledu majhnih elementov konfiguracije. "
-"Upoštevajte: z nastavitvijo \"Aktivno\" na 0 bo agentom preprečeno le "
-"urejanje nastavitev te skupine v njihovih osebnih nastavitvah, vendar bo "
-"administratorjem še vedno omogočeno urejanje nastavitev v imenu drugega "
-"uporabnika. S funkcijo 'PreferenceGroup' lahko nadzirate, v katerem območju "
-"naj bodo te nastavitve prikazane v uporabniškem vmesniku."
+msgstr "Parametri za filtre stolpcev v pregledu majhnih elementov konfiguracije. Upoštevajte: z nastavitvijo \"Aktivno\" na 0 bo agentom preprečeno le urejanje nastavitev te skupine v njihovih osebnih nastavitvah, vendar bo administratorjem še vedno omogočeno urejanje nastavitev v imenu drugega uporabnika. S funkcijo 'PreferenceGroup' lahko nadzirate, v katerem območju naj bodo te nastavitve prikazane v uporabniškem vmesniku."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za modul imena za razrede elementov konfiguracije v pogledu "
-"nastavitev vmesnika agenta."
+msgstr "Parametri za modul imena za razrede elementov konfiguracije v pogledu nastavitev vmesnika agenta."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za modul števila za razrede elementov konfiguracije v pogledu "
-"nastavitev v vmesniku agenta."
+msgstr "Parametri za modul števila za razrede elementov konfiguracije v pogledu nastavitev v vmesniku agenta."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za modul verzije niza za razrede elementov konfiguracije v pogledu "
-"nastavitev v vmesniku agenta."
+msgstr "Parametri za modul verzije niza za razrede elementov konfiguracije v pogledu nastavitev v vmesniku agenta."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za modul predloge niza različic za razrede elementov konfiguracije "
-"v pogledu nastavitev v vmesniku agenta."
+msgstr "Parametri za modul predloge niza različic za razrede elementov konfiguracije v pogledu nastavitev v vmesniku agenta."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametri za sprožilec različice za razrede elementov konfiguracije v "
-"pogledu nastavitev vmesnika agenta."
+msgstr "Parametri za sprožilec različice za razrede elementov konfiguracije v pogledu nastavitev vmesnika agenta."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Izvede konfigurirano dejanje za vsak dogodek (kot Invoker) za vsako "
-"konfigurirano spletno storitev."
+msgstr "Izvede konfigurirano dejanje za vsak dogodek (kot Invoker) za vsako konfigurirano spletno storitev."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo dejanja pritrditve elementa konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo dejanja pritrditve elementa konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za iskanje elementov konfiguracije "
-"ITSM v uporabniškem vmesniku."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za iskanje elementov konfiguracije ITSM v uporabniškem vmesniku."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona drevesnega prikaza elementov "
-"konfiguracije ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona drevesnega prikaza elementov konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Zahtevana dovoljenja za uporabo zaslona za postavko skupinske konfiguracije "
-"ITSM v vmesniku agenta."
+msgstr "Zahtevana dovoljenja za uporabo zaslona za postavko skupinske konfiguracije ITSM v vmesniku agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Prikaže povezavo v meniju za prikaz povezav elementov konfiguracije v obliki "
-"drevesnega pogleda."
+msgstr "Prikaže povezavo v meniju za prikaz povezav elementov konfiguracije v obliki drevesnega pogleda."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -1962,11 +1638,7 @@ msgstr "Sprožilnik različice"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Ali se lahko izvedbi ConfigItemACL izognemo s preverjanjem odvisnosti polj v "
-"predpomnilniku. To lahko izboljša čas nalaganja obrazcev, vendar mora biti "
-"onemogočeno, če se za tipe ITSMConfigItem- in Form-ReturnType uporabljajo "
-"moduli ACL."
+msgstr "Ali se lahko izvedbi ConfigItemACL izognemo s preverjanjem odvisnosti polj v predpomnilniku. To lahko izboljša čas nalaganja obrazcev, vendar mora biti onemogočeno, če se za tipe ITSMConfigItem- in Form-ReturnType uporabljajo moduli ACL."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1978,9 +1650,7 @@ msgstr "Splošni podatki o klicatelju"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Ta zaledni modul OTOBO invoker bo poklican za pripravo podatkov, ki se "
-"pošljejo oddaljenemu sistemu, in za obdelavo njegovih odzivnih podatkov."
+msgstr "Ta zaledni modul OTOBO invoker bo poklican za pripravo podatkov, ki se pošljejo oddaljenemu sistemu, in za obdelavo njegovih odzivnih podatkov."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1992,15 +1662,11 @@ msgstr "Kartiranje"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"Ta preslikava bo obdelala podatke, ki jih je posredoval sprožilec OTOBO, in "
-"jih pretvorila v vrsto podatkov, ki jih pričakuje oddaljeni sistem."
+msgstr "Ta preslikava bo obdelala podatke, ki jih je posredoval sprožilec OTOBO, in jih pretvorila v vrsto podatkov, ki jih pričakuje oddaljeni sistem."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Ta preslikava bo obdelala odzivne podatke in jih pretvorila v vrsto "
-"podatkov, ki jih pričakuje sprožilec OTOBO."
+msgstr "Ta preslikava bo obdelala odzivne podatke in jih pretvorila v vrsto podatkov, ki jih pričakuje sprožilec OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -2016,9 +1682,7 @@ msgstr "Dodajanje dogodka"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Asinhrone sprožilce dogodkov obravnava demon načrtovalca OTOBO v ozadju "
-"(priporočljivo)."
+msgstr "Asinhrone sprožilce dogodkov obravnava demon načrtovalca OTOBO v ozadju (priporočljivo)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2078,9 +1742,7 @@ msgstr "Nova dinamična polja"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Želite izkoristiti dodatne dinamične vrste polj? Imate popoln dostop do "
-"naslednjih vrst polj:"
+msgstr "Želite izkoristiti dodatne dinamične vrste polj? Imate popoln dostop do naslednjih vrst polj:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -2096,9 +1758,7 @@ msgstr "Ključ zunanjega vira"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"Če je vrednost nastavljena prek zunanjega vira (npr. spletne storitve ali "
-"uvoza/izvoza), se interpretira kot ta atribut."
+msgstr "Če je vrednost nastavljena prek zunanjega vira (npr. spletne storitve ali uvoza/izvoza), se interpretira kot ta atribut."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -2114,9 +1774,7 @@ msgstr "Osnovna struktura ni veljavna. Navedite polje s podatki v obliki YAML."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACL ni bilo mogoče uvoziti zaradi neznane napake, za več informacij "
-"preverite dnevnike OTOBO"
+msgstr "ACL ni bilo mogoče uvoziti zaradi neznane napake, za več informacij preverite dnevnike OTOBO"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2124,9 +1782,7 @@ msgstr "%s (kopija) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"Vrednost odstotka minimalnega napredka pri prevajanju na jezik, ki se lahko "
-"uporabi za dokumentacijo."
+msgstr "Vrednost odstotka minimalnega napredka pri prevajanju na jezik, ki se lahko uporabi za dokumentacijo."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2138,14 +1794,11 @@ msgstr "Samodejno nalaganje razširitev Znuny4OTRSRepo."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
-"Registracija zalednega modula za modul za preverjanje konfliktov v "
-"konfiguraciji."
+msgstr "Registracija zalednega modula za modul za preverjanje konfliktov v konfiguraciji."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
-"Registracija zalednega modula za modul za preverjanje konfliktov datotek."
+msgstr "Registracija zalednega modula za modul za preverjanje konfliktov datotek."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
@@ -2161,9 +1814,7 @@ msgstr "Ustvarite blokirne kljuke za odstranjevanje oglasov BS."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
-"Blokovni kavlji, ki jih je treba ustvariti za izhodni filter upravitelja "
-"paketov."
+msgstr "Blokovni kavlji, ki jih je treba ustvariti za izhodni filter upravitelja paketov."
 
 #. SysConfig
 msgid "Branch View commit limit"
@@ -2207,43 +1858,19 @@ msgstr "Opredelitev predpon GIT clone/push URL Prefix."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Opredelitev dinamičnega polja: Group => Skupina z dostopom do dinamičnih "
-"polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => "
-"Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov "
-"(Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => "
-"Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = "
-"aktivno, 2 = obvezno), FilterRelease => Regex, ki mu mora ustrezati ime "
-"skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime "
-"paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, "
-"da se prikaže, FilterRelease => Regex, ki mu mora ustrezati niz različic "
-"repelmajev, da se prikaže."
+msgstr "Opredelitev dinamičnega polja: Group => Skupina z dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = aktivno, 2 = obvezno), FilterRelease => Regex, ki mu mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora ustrezati niz različic repelmajev, da se prikaže."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Opredelitev dinamičnega polja: Group => Skupina z dostopom do dinamičnih "
-"polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => "
-"Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov "
-"(Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => "
-"Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = "
-"aktivno, 2 = obvezno), FilterRepository => Regex, ki mu mora ustrezati ime "
-"skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime "
-"paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, "
-"da se prikaže, FilterRelease => Regex, ki mu mora ustrezati veriga različice "
-"repelasa, da se prikaže."
+msgstr "Opredelitev dinamičnega polja: Group => Skupina z dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora ustrezati veriga različice repelasa, da se prikaže."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
-"Opredelitev zunanjih vsot MD5 (ključ => MD5, vrednost => prodajalec, ime "
-"paketa, različica, datum)."
+msgstr "Opredelitev zunanjih vsot MD5 (ključ => MD5, vrednost => prodajalec, ime paketa, različica, datum)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
-"Opredelitev preslikav med javnimi zahtevami za repozitorij in notranjimi "
-"repozitoriji OPMS."
+msgstr "Opredelitev preslikav med javnimi zahtevami za repozitorij in notranjimi repozitoriji OPMS."
 
 #. SysConfig
 msgid "Definition of package states."
@@ -2271,9 +1898,7 @@ msgstr "Onemogočite spletne shrambe."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
-"Ne beležite rezultatov avtorizacije povezave git ssh za te uporabnike. "
-"Uporabno za avtomatizirane stvari."
+msgstr "Ne beležite rezultatov avtorizacije povezave git ssh za te uporabnike. Uporabno za avtomatizirane stvari."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2297,26 +1922,19 @@ msgstr "Registracija modula Frontend za objekt OPMS v vmesniku agenta."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
-"Registracija modula Frontend za objekt PublicOPMSRepository v javnem "
-"vmesniku."
+msgstr "Registracija modula Frontend za objekt PublicOPMSRepository v javnem vmesniku."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
-"Registracija modula Frontend za objekt PublicOPMSRepositoryLookup v javnem "
-"vmesniku."
+msgstr "Registracija modula Frontend za objekt PublicOPMSRepositoryLookup v javnem vmesniku."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
-"Registracija modula Frontend za objekt PublicOPMSTestBuild v javnem vmesniku."
+msgstr "Registracija modula Frontend za objekt PublicOPMSTestBuild v javnem vmesniku."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
-"Registracija modula Frontend za objekt PublicPackageVerification v javnem "
-"vmesniku."
+msgstr "Registracija modula Frontend za objekt PublicPackageVerification v javnem vmesniku."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2328,9 +1946,7 @@ msgstr "Registracija avtorja GIT."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Ustvarjanje kavljev za komentarje HTML za določene bloke, tako da jih lahko "
-"filtri uporabijo."
+msgstr "Ustvarjanje kavljev za komentarje HTML za določene bloke, tako da jih lahko filtri uporabijo."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2350,31 +1966,23 @@ msgstr "Repozitorij Git"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr ""
-"Skupina, katere člani imajo pooblastila za brisanje administratorja v OPMS."
+msgstr "Skupina, katere člani imajo pooblastila za brisanje administratorja v OPMS."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
-"Skupina, katere člani imajo pooblastila administratorja repozitorija v OPMS."
+msgstr "Skupina, katere člani imajo pooblastila administratorja repozitorija v OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
-"Skupina, katere člani bodo na zaslonih OPMS videli informacije o rezultatih "
-"testov CI."
+msgstr "Skupina, katere člani bodo na zaslonih OPMS videli informacije o rezultatih testov CI."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"Skupine, katerih član mora biti avtentificirani uporabnik (z uporabniškim "
-"imenom in geslom), če želi sestaviti testne pakete prek javnega vmesnika."
+msgstr "Skupine, katerih član mora biti avtentificirani uporabnik (z uporabniškim imenom in geslom), če želi sestaviti testne pakete prek javnega vmesnika."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
-"Skupine, ki bodo nastavljene med ustvarjanjem projekta git in dodajanjem "
-"skladišč OPMS."
+msgstr "Skupine, ki bodo nastavljene med ustvarjanjem projekta git in dodajanjem skladišč OPMS."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2382,9 +1990,7 @@ msgstr "Upravljanje dinamičnega polja v zaslonih."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
-"Tukaj upravljajte svoje javne ključe SSH za dostop do sistema Git. Ko dodate "
-"nov ključ, obvezno shranite te nastavitve."
+msgstr "Tukaj upravljajte svoje javne ključe SSH za dostop do sistema Git. Ko dodate nov ključ, obvezno shranite te nastavitve."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2408,9 +2014,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
-"Do sistema git lahko dostopajo samo uporabniki, ki imajo dovoljenja rw v eni "
-"od teh skupin."
+msgstr "Do sistema git lahko dostopajo samo uporabniki, ki imajo dovoljenja rw v eni od teh skupin."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2422,45 +2026,15 @@ msgstr "Parametri za strani na zaslonu BranchView."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Preddefinicija dinamičnega polja 'GITProjectName': Group => Skupina z "
-"dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); "
-"InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in "
-"položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se "
-"uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = "
-"onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu "
-"mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu "
-"mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora "
-"ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora "
-"ustrezati veriga različice repelasa, da se prikaže."
+msgstr "Preddefinicija dinamičnega polja 'GITProjectName': Group => Skupina z dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora ustrezati veriga različice repelasa, da se prikaže."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Preddefinicija dinamičnega polja 'GITRepositoryName': Group => Skupina z "
-"dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); "
-"InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in "
-"položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se "
-"uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = "
-"onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu "
-"mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu "
-"mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora "
-"ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora "
-"ustrezati veriga različice repelasa, da se prikaže."
+msgstr "Preddefinicija dinamičnega polja 'GITRepositoryName': Group => Skupina z dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora ustrezati veriga različice repelasa, da se prikaže."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Preddefinicija dinamičnega polja \"PackageDeprecated\": Group => Skupina z "
-"dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); "
-"InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in "
-"položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se "
-"uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = "
-"onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu "
-"mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu "
-"mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora "
-"ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora "
-"ustrezati veriga različice repelasa, da se prikaže."
+msgstr "Preddefinicija dinamičnega polja \"PackageDeprecated\": Group => Skupina z dostopom do dinamičnih polj; AlwaysVisible => Polje se lahko odstrani (0|1); InformationAreaName => Ime gradnikov; InformationAreaSize => Velikost in položaj gradnikov (Large|Small); Name => Ime dinamičnega polja, ki naj se uporabi; Priority => Vrstni red dinamičnih polj; State => Stanje polj (0 = onemogočeno, 1 = aktivno, 2 = obvezno), FilterRepository => Regex, ki mu mora ustrezati ime skladišča, da se prikaže, FilterPackage => Regex, ki mu mora ustrezati ime paketa, da se prikaže, FilterBranch => Regex, ki mu mora ustrezati ime veje, da se prikaže, FilterRelease => Regex, ki mu mora ustrezati veriga različice repelasa, da se prikaže."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2488,15 +2062,11 @@ msgstr "Nastavi pot za lokacijo skripte za prejem sporočila BugzillaAddComment.
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Nastavi pot za lokacijo skripte OTRSCodePolicy. Priporočljivo je imeti ločen "
-"klon modula OTRSCodePolicy, ki se posodablja prek crona."
+msgstr "Nastavi pot za lokacijo skripte OTRSCodePolicy. Priporočljivo je imeti ločen klon modula OTRSCodePolicy, ki se posodablja prek crona."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Nastavi pot za lokacijo skripte OTRSCodePolicy pred prejemom. Priporočljivo "
-"je imeti ločen klon modula OTRSCodePolicy, ki se posodablja prek crona."
+msgstr "Nastavi pot za lokacijo skripte OTRSCodePolicy pred prejemom. Priporočljivo je imeti ločen klon modula OTRSCodePolicy, ki se posodablja prek crona."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2504,8 +2074,7 @@ msgstr "Prikažite zadnje spremembe v skladiščih git."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"V meniju prikaže povezavo za ustvarjanje testa enote iz trenutne vozovnice."
+msgstr "V meniju prikaže povezavo za ustvarjanje testa enote iz trenutne vozovnice."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2537,71 +2106,47 @@ msgstr "Pot do mape s temami, ki vsebuje teme sphinxa."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
-"Ta konfiguracija določa vse možne zaslone za omogočanje ali onemogočanje "
-"privzetih stolpcev."
+msgstr "Ta konfiguracija določa vse možne zaslone za omogočanje ali onemogočanje privzetih stolpcev."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
-"Ta konfiguracija določa vse možne zaslone za omogočanje ali onemogočanje "
-"dinamičnih polj."
+msgstr "Ta konfiguracija določa vse možne zaslone za omogočanje ali onemogočanje dinamičnih polj."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
-"Ta konfiguracija določa, ali naj se prikažejo samo veljavna ali vsa "
-"(neveljavna) dinamična polja."
+msgstr "Ta konfiguracija določa, ali naj se prikažejo samo veljavna ali vsa (neveljavna) dinamična polja."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"Ta konfiguracija določa, ali naj bo preverjanje paketov OTRS aktivno ali "
-"onemogočeno. Če je onemogočena, so vsi paketi prikazani kot preverjeni. Še "
-"vedno je priporočljivo uporabljati samo preverjene pakete."
+msgstr "Ta konfiguracija določa, ali naj bo preverjanje paketov OTRS aktivno ali onemogočeno. Če je onemogočena, so vsi paketi prikazani kot preverjeni. Še vedno je priporočljivo uporabljati samo preverjene pakete."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"Ta konfiguracija določa naslov URL storitve OTRS CloudService Proxy. Dodana "
-"bo predpona http ali https, odvisno od izbire SysConfig 'Znuny4OTRSRepoType'."
+msgstr "Ta konfiguracija določa naslov URL storitve OTRS CloudService Proxy. Dodana bo predpona http ali https, odvisno od izbire SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"Ta konfiguracija registrira naknadni filter Output za razširitev preverjanja "
-"paketov."
+msgstr "Ta konfiguracija registrira naknadni filter Output za razširitev preverjanja paketov."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"Ta konfiguracija registrira modul OutputFilter, ki odstranjuje oglase OTRS "
-"Business Solution TM."
+msgstr "Ta konfiguracija registrira modul OutputFilter, ki odstranjuje oglase OTRS Business Solution TM."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"Ta konfiguracija registrira izhodni filter za skrivanje izbire spletnega "
-"skladišča v upravitelju paketov."
+msgstr "Ta konfiguracija registrira izhodni filter za skrivanje izbire spletnega skladišča v upravitelju paketov."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Urejena neobdelana izdaja, ki že dlje časa ni prestala testnih pregledov "
-"pomulov."
+msgstr "Urejena neobdelana izdaja, ki že dlje časa ni prestala testnih pregledov pomulov."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"Uporabniki, ki imajo dovoljenja rw v eni od teh skupin, lahko izvedejo "
-"prisilno potiskanje 'git push --force'."
+msgstr "Uporabniki, ki imajo dovoljenja rw v eni od teh skupin, lahko izvedejo prisilno potiskanje 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"Uporabniki, ki imajo dovoljenja rw v eni od teh skupin, lahko upravljajo "
-"projekte. Poleg tega imajo člani tudi upraviteljska dovoljenja za "
-"upravljanje sistema git."
+msgstr "Uporabniki, ki imajo dovoljenja rw v eni od teh skupin, lahko upravljajo projekte. Poleg tega imajo člani tudi upraviteljska dovoljenja za upravljanje sistema git."
 
 #. ITSM class bundles
 msgid "1"
@@ -3658,3 +3203,16 @@ msgstr "Telefon VoIP"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Spletna kamera"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

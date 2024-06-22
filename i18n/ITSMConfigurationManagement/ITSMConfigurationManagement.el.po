@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/el/>\n"
+"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,9 +70,7 @@ msgstr "Φίλτρο για τάξεις"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
-msgstr ""
-"Επιλέξτε μια κλάση από τη λίστα για να δημιουργήσετε ένα νέο στοιχείο "
-"διαμόρφωσης."
+msgstr "Επιλέξτε μια κλάση από τη λίστα για να δημιουργήσετε ένα νέο στοιχείο διαμόρφωσης."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -109,9 +106,7 @@ msgstr "Το όνομα αυτού του στοιχείου διαμόρφωσ�
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Το όνομα χρησιμοποιείται ήδη από τα ConfigItems με τον ακόλουθο αριθμό(-ους):"
-" %s"
+msgstr "Το όνομα χρησιμοποιείται ήδη από τα ConfigItems με τον ακόλουθο αριθμό(-ους): %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
@@ -243,8 +238,7 @@ msgstr "Δεν μπορεί να εμφανιστεί το ιστορικό, δ�
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
-"Δεν μπορεί να εμφανιστεί το ιστορικό, δεν έχουν δοθεί δικαιώματα πρόσβασης!"
+msgstr "Δεν μπορεί να εμφανιστεί το ιστορικό, δεν έχουν δοθεί δικαιώματα πρόσβασης!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
@@ -256,9 +250,7 @@ msgstr "Νέα έκδοση (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
-msgstr ""
-"Παράμετροι για τις ομάδες δικαιωμάτων του παραδείγματος των γενικών "
-"χαρακτηριστικών καταλόγου."
+msgstr "Παράμετροι για τις ομάδες δικαιωμάτων του παραδείγματος των γενικών χαρακτηριστικών καταλόγου."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Incident state updated (new=%s, old=%s)"
@@ -286,9 +278,7 @@ msgstr "Όνομα ενημερωμένο (new=%s, old=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Attribute %s updated from \"%s\" to \"%s\""
-msgstr ""
-"Δεν μπορεί να εμφανιστεί το στοιχείο, δεν έχουν δοθεί δικαιώματα πρόσβασης "
-"για το ConfigItem!"
+msgstr "Δεν μπορεί να εμφανιστεί το στοιχείο, δεν έχουν δοθεί δικαιώματα πρόσβασης για το ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Version %s deleted"
@@ -300,9 +290,7 @@ msgstr "Δεν δίνεται ConfigItemID ή VersionID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
-"Δεν μπορεί να εμφανιστεί το στοιχείο διαμόρφωσης, δεν έχουν δοθεί δικαιώματα "
-"πρόσβασης!"
+msgstr "Δεν μπορεί να εμφανιστεί το στοιχείο διαμόρφωσης, δεν έχουν δοθεί δικαιώματα πρόσβασης!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
@@ -342,9 +330,7 @@ msgstr "Αποτελέσματα αναζήτησης αντικειμένου C
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
-"Δεν μπορεί να εμφανιστεί το στοιχείο, δεν έχουν δοθεί δικαιώματα πρόσβασης "
-"για το ConfigItem!"
+msgstr "Δεν μπορεί να εμφανιστεί το στοιχείο, δεν έχουν δοθεί δικαιώματα πρόσβασης για το ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -502,35 +488,35 @@ msgstr "Δίκτυο"
 msgid "Software"
 msgstr "Λογισμικό"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Λειτούργησε"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "Συντήρηση"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Πιλότος"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Προγραμματισμένο"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Επισκευή"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Συνταξιούχος"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Ανασκόπηση"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Δοκιμή/QA"
 
@@ -676,9 +662,7 @@ msgstr "Middleware"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Server Application"
-msgstr ""
-"Καθορίζει τη σειρά των καταστάσεων συμβάντων από υψηλή (π.χ. κρίσιμη) έως "
-"χαμηλή (π.χ. λειτουργική)."
+msgstr "Καθορίζει τη σειρά των καταστάσεων συμβάντων από υψηλή (π.χ. κρίσιμη) έως χαμηλή (π.χ. λειτουργική)."
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client OS"
@@ -774,10 +758,7 @@ msgstr "Ρυθμίσεις CMDB"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"Ελέγξτε για ένα μοναδικό όνομα μόνο εντός της ίδιας κλάσης ConfigItem "
-"('class') ή σε παγκόσμιο επίπεδο ('global'), πράγμα που σημαίνει ότι κάθε "
-"υπάρχον ConfigItem λαμβάνεται υπόψη κατά την αναζήτηση αντιγράφων."
+msgstr "Ελέγξτε για ένα μοναδικό όνομα μόνο εντός της ίδιας κλάσης ConfigItem ('class') ή σε παγκόσμιο επίπεδο ('global'), πράγμα που σημαίνει ότι κάθε υπάρχον ConfigItem λαμβάνεται υπόψη κατά την αναζήτηση αντιγράφων."
 
 #. SysConfig
 msgid "Config Items"
@@ -793,9 +774,7 @@ msgstr "Επεξεργασία στοιχείου διαμόρφωσης."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
-"Μονάδα συμβάντων στοιχείου ρύθμισης παραμέτρων που επιτρέπει την καταγραφή "
-"στο ιστορικό στη διεπαφή του πράκτορα."
+msgstr "Μονάδα συμβάντων στοιχείου ρύθμισης παραμέτρων που επιτρέπει την καταγραφή στο ιστορικό στη διεπαφή του πράκτορα."
 
 #. SysConfig
 msgid "Config item history."
@@ -831,9 +810,7 @@ msgstr "Στοιχείο διαμόρφωσης μαζικής μονάδας."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
-"Στοιχείο διαμόρφωσης στοιχείο αναζήτησης backend router της διασύνδεσης "
-"πράκτορα."
+msgstr "Στοιχείο διαμόρφωσης στοιχείο αναζήτησης backend router της διασύνδεσης πράκτορα."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
@@ -841,56 +818,35 @@ msgstr "Δημιουργία και διαχείριση των ορισμών �
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Ορισμός Ενεργειών όπου ένα κουμπί ρυθμίσεων είναι διαθέσιμο στο widget των "
-"συνδεδεμένων αντικειμένων (LinkObject::ViewMode = \"complex\"). Σημειώστε "
-"ότι αυτές οι Ενέργειες πρέπει να έχουν καταχωρίσει τα ακόλουθα αρχεία JS και "
-"CSS: Core.AllocationList.css, Core.UI.AllocationList.js, "
-"Core.UI.Table.Sort.js, Core.Agent.TableFilters.js και Core.Agent.LinkObject."
-"js."
+msgstr "Ορισμός Ενεργειών όπου ένα κουμπί ρυθμίσεων είναι διαθέσιμο στο widget των συνδεδεμένων αντικειμένων (LinkObject::ViewMode = \"complex\"). Σημειώστε ότι αυτές οι Ενέργειες πρέπει να έχουν καταχωρίσει τα ακόλουθα αρχεία JS και CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js και Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
-"Καθορίζει τα απαιτούμενα δικαιώματα για τη δημιουργία στοιχείων διαμόρφωσης "
-"ITSM με χρήση της γενικής διεπαφής."
+msgstr "Καθορίζει τα απαιτούμενα δικαιώματα για τη δημιουργία στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Καθορίζει τα απαιτούμενα δικαιώματα για τη διαγραφή στοιχείων διαμόρφωσης "
-"ITSM με χρήση της γενικής διεπαφής."
+msgstr "Καθορίζει τα απαιτούμενα δικαιώματα για τη διαγραφή στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
-"Καθορίζει τα απαιτούμενα δικαιώματα για τη λήψη στοιχείων διαμόρφωσης ITSM "
-"με χρήση της γενικής διεπαφής."
+msgstr "Καθορίζει τα απαιτούμενα δικαιώματα για τη λήψη στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
-"Καθορίζει τα απαιτούμενα δικαιώματα για την αναζήτηση στοιχείων διαμόρφωσης "
-"ITSM με χρήση της γενικής διεπαφής."
+msgstr "Καθορίζει τα απαιτούμενα δικαιώματα για την αναζήτηση στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου "
-"διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
-"Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας "
-"λίστας στοιχείων διαμόρφωσης."
+msgstr "Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας λίστας στοιχείων διαμόρφωσης."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr ""
-"Ορίζει κανονικές εκφράσεις ξεχωριστά για κάθε κλάση ConfigItem για τον "
-"έλεγχο του ονόματος του ConfigItem και την εμφάνιση των αντίστοιχων "
-"μηνυμάτων σφάλματος."
+msgstr "Ορίζει κανονικές εκφράσεις ξεχωριστά για κάθε κλάση ConfigItem για τον έλεγχο του ονόματος του ConfigItem και την εμφάνιση των αντίστοιχων μηνυμάτων σφάλματος."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
@@ -898,21 +854,15 @@ msgstr "Ορίζει το προεπιλεγμένο υποαντικείμεν�
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
-"Καθορίζει τον αριθμό των γραμμών για τον επεξεργαστή ορισμού CI στο "
-"περιβάλλον εργασίας διαχείρισης."
+msgstr "Καθορίζει τον αριθμό των γραμμών για τον επεξεργαστή ορισμού CI στο περιβάλλον εργασίας διαχείρισης."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Καθορίζει τη σειρά των καταστάσεων συμβάντων από υψηλή (π.χ. κρίσιμη) έως "
-"χαμηλή (π.χ. λειτουργική)."
+msgstr "Καθορίζει τη σειρά των καταστάσεων συμβάντων από υψηλή (π.χ. κρίσιμη) έως χαμηλή (π.χ. λειτουργική)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Καθορίζει τις σχετικές καταστάσεις ανάπτυξης όπου τα συνδεδεμένα εισιτήρια "
-"μπορούν να επηρεάσουν την κατάσταση ενός CI."
+msgstr "Καθορίζει τις σχετικές καταστάσεις ανάπτυξης όπου τα συνδεδεμένα εισιτήρια μπορούν να επηρεάσουν την κατάσταση ενός CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -924,99 +874,39 @@ msgstr "Καθορίζει το όριο αναζήτησης για την οθ
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες στην επισκόπηση στοιχείων διαμόρφωσης. "
-"Αυτή η επιλογή δεν έχει καμία επίδραση στη θέση της στήλης. Σημείωση: Η "
-"στήλη Class είναι πάντα διαθέσιμη αν έχει επιλεγεί το φίλτρο 'All'."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες στην επισκόπηση στοιχείων διαμόρφωσης. Αυτή η επιλογή δεν έχει καμία επίδραση στη θέση της στήλης. Σημείωση: Η στήλη Class είναι πάντα διαθέσιμη αν έχει επιλεγεί το φίλτρο 'All'."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες στην αναζήτηση στοιχείων διαμόρφωσης. "
-"Αυτή η επιλογή δεν έχει καμία επίδραση στη θέση της στήλης."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες στην αναζήτηση στοιχείων διαμόρφωσης. Αυτή η επιλογή δεν έχει καμία επίδραση στη θέση της στήλης."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες των CI στην επισκόπηση στοιχείων "
-"διαμόρφωσης ανάλογα με την κατηγορία CI. Σε κάθε καταχώρηση πρέπει να "
-"προτάσσεται το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. "
-"Computer:::). Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI ("
-"παράδειγμα για την κλάση Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως "
-"ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα ("
-"παράδειγμα για την κλάση Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση "
-"CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες των CI στην επισκόπηση στοιχείων διαμόρφωσης ανάλογα με την κατηγορία CI. Σε κάθε καταχώρηση πρέπει να προτάσσεται το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::). Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα για την κλάση Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα (παράδειγμα για την κλάση Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες των CI στην αναζήτηση στοιχείων "
-"διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να έχει ως "
-"πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::)"
-". Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα "
-"για την κλάση Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως "
-"ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα ("
-"παράδειγμα για την κλάση Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση "
-"CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες των CI στην αναζήτηση στοιχείων διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να έχει ως πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::). Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα για την κλάση Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα (παράδειγμα για την κλάση Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες των CI στο widget του στοιχείου "
-"διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε εγγραφή πρέπει να έχει ως "
-"πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::)"
-". Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα "
-"για την κλάση Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως "
-"ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα ("
-"παράδειγμα για την κλάση Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση "
-"CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση "
-"AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (κλειδί DefaultColumns)."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες των CI στο widget του στοιχείου διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε εγγραφή πρέπει να έχει ως πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::). Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα για την κλάση Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα (παράδειγμα για την κλάση Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες όπως ορίζονται στη ρύθμιση AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (κλειδί DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες των CI στην πολύπλοκη προβολή του πίνακα "
-"συνδέσεων για όλες τις κατηγορίες CI. Εάν δεν υπάρχει καταχώριση, τότε "
-"εμφανίζονται οι προεπιλεγμένες στήλες."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες των CI στην πολύπλοκη προβολή του πίνακα συνδέσεων για όλες τις κατηγορίες CI. Εάν δεν υπάρχει καταχώριση, τότε εμφανίζονται οι προεπιλεγμένες στήλες."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"Καθορίζει τις εμφανιζόμενες στήλες των CI στην πολύπλοκη προβολή του πίνακα "
-"συνδέσμων, ανάλογα με την κατηγορία CI. Κάθε εγγραφή πρέπει να έχει ως "
-"πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::)"
-". Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα "
-"για την κλάση Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως "
-"ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα ("
-"παράδειγμα για την κλάση Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση "
-"CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες."
+msgstr "Καθορίζει τις εμφανιζόμενες στήλες των CI στην πολύπλοκη προβολή του πίνακα συνδέσμων, ανάλογα με την κατηγορία CI. Κάθε εγγραφή πρέπει να έχει ως πρόθεμα το όνομα της κλάσης και διπλές άνω και κάτω τελεία (π.χ. Computer:::). Υπάρχουν μερικά CI-Attributes που είναι κοινά για όλα τα CI (παράδειγμα για την κλάση Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Για να εμφανιστούν μεμονωμένα CI-Attributes όπως ορίζονται στον CI-Definition, πρέπει να χρησιμοποιηθεί το ακόλουθο σχήμα (παράδειγμα για την κλάση Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Εάν δεν υπάρχει καταχώρηση για μια κλάση CI, τότε εμφανίζονται οι προεπιλεγμένες στήλες."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Καθορίζει ποιος τύπος σύνδεσης (με όνομα από την οπτική γωνία του εισιτηρίου)"
-" μπορεί να επηρεάσει την κατάσταση ενός συνδεδεμένου CI."
+msgstr "Καθορίζει ποιος τύπος σύνδεσης (με όνομα από την οπτική γωνία του εισιτηρίου) μπορεί να επηρεάσει την κατάσταση ενός συνδεδεμένου CI."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
-"Καθορίζει ποιος τύπος εισιτηρίου μπορεί να επηρεάσει την κατάσταση ενός "
-"συνδεδεμένου CI."
+msgstr "Καθορίζει ποιος τύπος εισιτηρίου μπορεί να επηρεάσει την κατάσταση ενός συνδεδεμένου CI."
 
 #. SysConfig
 msgid "Delete Configuration Item"
@@ -1032,10 +922,7 @@ msgstr "Διπλό"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
-"Ενεργοποιεί τη δυνατότητα μαζικής δράσης στοιχείων διαμόρφωσης για το "
-"frontend του πράκτορα ώστε να εργάζεται σε περισσότερα από ένα στοιχεία "
-"διαμόρφωσης ταυτόχρονα."
+msgstr "Ενεργοποιεί τη δυνατότητα μαζικής δράσης στοιχείων διαμόρφωσης για το frontend του πράκτορα ώστε να εργάζεται σε περισσότερα από ένα στοιχεία διαμόρφωσης ταυτόχρονα."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
@@ -1043,17 +930,11 @@ msgstr "Η κατάσταση ανάπτυξης αυτού του στοιχε�
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των ConfigItems για μοναδικά "
-"ονόματα. Πριν ενεργοποιήσετε αυτή την επιλογή, θα πρέπει να ελέγξετε το "
-"σύστημά σας για ήδη υπάρχοντα στοιχεία config με διπλά ονόματα. Μπορείτε να "
-"το κάνετε αυτό με το σενάριο bin/otobo.ITSMConfigItemListDuplicates.pl."
+msgstr "Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των ConfigItems για μοναδικά ονόματα. Πριν ενεργοποιήσετε αυτή την επιλογή, θα πρέπει να ελέγξετε το σύστημά σας για ήδη υπάρχοντα στοιχεία config με διπλά ονόματα. Μπορείτε να το κάνετε αυτό με το σενάριο bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
-"Ενότητα συμβάντος για να ορίσετε την κατάσταση του στοιχείου "
-"παραμετροποίησης στο σύνδεσμο ticket-configitem-link."
+msgstr "Ενότητα συμβάντος για να ορίσετε την κατάσταση του στοιχείου παραμετροποίησης στο σύνδεσμο ticket-configitem-link."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -1065,9 +946,7 @@ msgstr "Ενότητα για τον έλεγχο της ομάδας που ε�
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
-"Ενότητα για τον έλεγχο της ομάδας που είναι υπεύθυνη για ένα στοιχείο "
-"διαμόρφωσης."
+msgstr "Ενότητα για τον έλεγχο της ομάδας που είναι υπεύθυνη για ένα στοιχείο διαμόρφωσης."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
@@ -1075,8 +954,7 @@ msgstr "Ενότητα για τη δημιουργία στατιστικών �
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
-"Καταχώρηση μονάδας backend αντικειμένων για την ενότητα εισαγωγής/εξαγωγής."
+msgstr "Καταχώρηση μονάδας backend αντικειμένων για την ενότητα εισαγωγής/εξαγωγής."
 
 #. SysConfig
 msgid "Overview."
@@ -1084,38 +962,23 @@ msgstr "Επισκόπηση."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Παράμετροι για το ταμπλό backend της επισκόπησης στοιχείων διαμόρφωσης της "
-"εταιρείας πελατών της διεπαφής πράκτορα . \"Limit\" είναι ο αριθμός των "
-"καταχωρήσεων που εμφανίζονται από προεπιλογή. \"Group\" χρησιμοποιείται για "
-"τον περιορισμό της πρόσβασης στο πρόσθετο (π.χ. Group: admin;group1;group2;)"
-". \"Default\" καθορίζει αν το πρόσθετο είναι ενεργοποιημένο από προεπιλογή ή "
-"αν ο χρήστης πρέπει να το ενεργοποιήσει χειροκίνητα. \"CacheTTLLocal\" είναι "
-"ο χρόνος προσωρινής αποθήκευσης σε λεπτά για το πρόσθετο."
+msgstr "Παράμετροι για το ταμπλό backend της επισκόπησης στοιχείων διαμόρφωσης της εταιρείας πελατών της διεπαφής πράκτορα . \"Limit\" είναι ο αριθμός των καταχωρήσεων που εμφανίζονται από προεπιλογή. \"Group\" χρησιμοποιείται για τον περιορισμό της πρόσβασης στο πρόσθετο (π.χ. Group: admin;group1;group2;). \"Default\" καθορίζει αν το πρόσθετο είναι ενεργοποιημένο από προεπιλογή ή αν ο χρήστης πρέπει να το ενεργοποιήσει χειροκίνητα. \"CacheTTLLocal\" είναι ο χρόνος προσωρινής αποθήκευσης σε λεπτά για το πρόσθετο."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για το χρώμα των καταστάσεων ανάπτυξης στην προβολή προτιμήσεων "
-"της διεπαφής του πράκτορα."
+msgstr "Παράμετροι για το χρώμα των καταστάσεων ανάπτυξης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για τις καταστάσεις ανάπτυξης στην προβολή προτιμήσεων της "
-"διεπαφής του πράκτορα."
+msgstr "Παράμετροι για τις καταστάσεις ανάπτυξης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr ""
-"Παράμετροι για τις ομάδες δικαιωμάτων του παραδείγματος των γενικών "
-"χαρακτηριστικών καταλόγου."
+msgstr "Παράμετροι για τις ομάδες δικαιωμάτων του παραδείγματος των γενικών χαρακτηριστικών καταλόγου."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
-"Παράμετροι για τις σελίδες (στις οποίες εμφανίζονται τα στοιχεία "
-"διαμόρφωσης)."
+msgstr "Παράμετροι για τις σελίδες (στις οποίες εμφανίζονται τα στοιχεία διαμόρφωσης)."
 
 #. SysConfig
 msgid "Permission Group"
@@ -1123,45 +986,31 @@ msgstr "Ομάδα αδειών"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης στοιχείων διαμόρφωσης ITSM "
-"στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης στοιχείων διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης αναζήτησης στοιχείων "
-"διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης αναζήτησης στοιχείων διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης μεγέθυνσης στοιχείων "
-"διαμόρφωσης ITSM στη διεπαφή του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης μεγέθυνσης στοιχείων διαμόρφωσης ITSM στη διεπαφή του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης προσθήκης στοιχείου "
-"διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης προσθήκης στοιχείου διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης επεξεργασίας στοιχείων "
-"διαμόρφωσης ITSM στη διεπαφή του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης επεξεργασίας στοιχείων διαμόρφωσης ITSM στη διεπαφή του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης στοιχείων διαμόρφωσης "
-"ιστορικού ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης στοιχείων διαμόρφωσης ιστορικού ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης print ITSM configuration item "
-"στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης print ITSM configuration item στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1173,29 +1022,19 @@ msgstr "Αναζήτηση στοιχείων διαμόρφωσης."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"Επιλέγει τη μονάδα γεννήτριας αριθμού στοιχείων διαμόρφωσης. \"AutoIncrement"
-"\" αυξάνει τον αριθμό στοιχείων διαμόρφωσης, χρησιμοποιούνται το SystemID, "
-"το ConfigItemClassID και ο μετρητής. Η μορφή είναι \"SystemID."
-"ConfigItemClassID.Counter\", π.χ. 1205000004, 1205000005."
+msgstr "Επιλέγει τη μονάδα γεννήτριας αριθμού στοιχείων διαμόρφωσης. \"AutoIncrement\" αυξάνει τον αριθμό στοιχείων διαμόρφωσης, χρησιμοποιούνται το SystemID, το ConfigItemClassID και ο μετρητής. Η μορφή είναι \"SystemID.ConfigItemClassID.Counter\", π.χ. 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
-"Ορίστε αυτόματα την κατάσταση συμβάντος ενός CI όταν ένα Ticket συνδέεται με "
-"ένα CI."
+msgstr "Ορίστε αυτόματα την κατάσταση συμβάντος ενός CI όταν ένα Ticket συνδέεται με ένα CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Ορίζει την κατάσταση ανάπτυξης στην οθόνη μαζικής προβολής στοιχείων "
-"διαμόρφωσης της διασύνδεσης του πράκτορα."
+msgstr "Ορίζει την κατάσταση ανάπτυξης στην οθόνη μαζικής προβολής στοιχείων διαμόρφωσης της διασύνδεσης του πράκτορα."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Ορίζει την κατάσταση συμβάντος στην οθόνη μαζικής προβολής στοιχείων "
-"διαμόρφωσης της διεπαφής πράκτορα."
+msgstr "Ορίζει την κατάσταση συμβάντος στην οθόνη μαζικής προβολής στοιχείων διαμόρφωσης της διεπαφής πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
@@ -1203,72 +1042,47 @@ msgstr "προπαραγωγική"
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για πρόσβαση στο ιστορικό ενός στοιχείου "
-"διαμόρφωσης στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας "
-"του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για πρόσβαση στο ιστορικό ενός στοιχείου διαμόρφωσης στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για πρόσβαση στο ιστορικό ενός στοιχείου "
-"διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για πρόσβαση στο ιστορικό ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για τη διαγραφή ενός στοιχείου διαμόρφωσης "
-"στην προβολή μεγέθυνσης της διεπαφής του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για τη διαγραφή ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την αντιγραφή ενός στοιχείου "
-"διαμόρφωσης στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας "
-"του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την αντιγραφή ενός στοιχείου διαμόρφωσης στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την αντιγραφή ενός στοιχείου "
-"διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την αντιγραφή ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου "
-"διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για να επιστρέψετε στην προβολή μεγέθυνσης "
-"του στοιχείου διαμόρφωσης της διεπαφής του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για να επιστρέψετε στην προβολή μεγέθυνσης του στοιχείου διαμόρφωσης της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την εκτύπωση ενός στοιχείου "
-"διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την εκτύπωση ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για μεγέθυνση σε ένα στοιχείο διαμόρφωσης "
-"στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του "
-"πράκτορα."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για μεγέθυνση σε ένα στοιχείο διαμόρφωσης στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
-"Εμφανίζει το ιστορικό στοιχείων διαμόρφωσης (αντίστροφη σειρά) στο "
-"περιβάλλον εργασίας του πράκτορα."
+msgstr "Εμφανίζει το ιστορικό στοιχείων διαμόρφωσης (αντίστροφη σειρά) στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
-"Το αναγνωριστικό για ένα στοιχείο διαμόρφωσης, π.χ. ConfigItem#, "
-"MyConfigItem#. Η προεπιλογή είναι ConfigItem#."
+msgstr "Το αναγνωριστικό για ένα στοιχείο διαμόρφωσης, π.χ. ConfigItem#, MyConfigItem#. Η προεπιλογή είναι ConfigItem#."
 
 #. SysConfig
 msgid "class"
@@ -1300,10 +1114,7 @@ msgstr "Δέσμες κλάσεων Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Εδώ μπορείτε να εισαγάγετε δέσμες κλάσεων Ready2Import που παρουσιάζουν τα "
-"πιο συνηθισμένα στοιχεία ρυθμίσεων. Παρακαλούμε σημειώστε ότι ενδέχεται να "
-"απαιτούνται κάποιες πρόσθετες ρυθμίσεις."
+msgstr "Εδώ μπορείτε να εισαγάγετε δέσμες κλάσεων Ready2Import που παρουσιάζουν τα πιο συνηθισμένα στοιχεία ρυθμίσεων. Παρακαλούμε σημειώστε ότι ενδέχεται να απαιτούνται κάποιες πρόσθετες ρυθμίσεις."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1323,9 +1134,7 @@ msgstr "Ο αριθμός έκδοσης αυτού του στοιχείου δ
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Ο αριθμός έκδοσης χρησιμοποιείται ήδη από τα ConfigItems με τον(τους) "
-"ακόλουθο(-ους) αριθμό(-ους): %s"
+msgstr "Ο αριθμός έκδοσης χρησιμοποιείται ήδη από τα ConfigItems με τον(τους) ακόλουθο(-ους) αριθμό(-ους): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1373,9 +1182,7 @@ msgstr "Θα εισαχθούν οι ακόλουθοι ρόλοι"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Σημειώστε ότι θα δημιουργηθούν επίσης τα αντίστοιχα δυναμικά πεδία και οι "
-"κλάσεις GeneralCatalog και δεν υπάρχει αυτόματη αφαίρεση."
+msgstr "Σημειώστε ότι θα δημιουργηθούν επίσης τα αντίστοιχα δυναμικά πεδία και οι κλάσεις GeneralCatalog και δεν υπάρχει αυτόματη αφαίρεση."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1415,9 +1222,7 @@ msgstr "Περιορισμοί κλάσης για το στοιχείο δια�
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Επιλέξτε μία ή περισσότερες κλάσεις για να περιορίσετε τα επιλέξιμα στοιχεία "
-"διαμόρφωσης"
+msgstr "Επιλέξτε μία ή περισσότερες κλάσεις για να περιορίσετε τα επιλέξιμα στοιχεία διαμόρφωσης"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1441,9 +1246,7 @@ msgstr "Κατεύθυνση συνδέσμου"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Το αντικείμενο αναφοράς είναι αυτό που περιέχει αυτό το δυναμικό πεδίο, το "
-"αντικείμενο αναφοράς είναι αυτό που επιλέγεται ως τιμή του δυναμικού πεδίου."
+msgstr "Το αντικείμενο αναφοράς είναι αυτό που περιέχει αυτό το δυναμικό πεδίο, το αντικείμενο αναφοράς είναι αυτό που επιλέγεται ως τιμή του δυναμικού πεδίου."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1459,16 +1262,11 @@ msgstr "Τύπος αναφοράς συνδέσμου"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Εάν αυτή η σύνδεση ισχύει για το ConfigItem ή τη στατική έκδοση του "
-"αντικειμένου αναφοράς. Ο υπολογισμός της τρέχουσας κατάστασης συμβάντος "
-"εκτελείται μόνο σε δυναμικές συνδέσεις."
+msgstr "Εάν αυτή η σύνδεση ισχύει για το ConfigItem ή τη στατική έκδοση του αντικειμένου αναφοράς. Ο υπολογισμός της τρέχουσας κατάστασης συμβάντος εκτελείται μόνο σε δυναμικές συνδέσεις."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
-"Επιλέξτε το χαρακτηριστικό με βάση το οποίο θα γίνεται η αναζήτηση των "
-"στοιχείων διαμόρφωσης"
+msgstr "Επιλέξτε το χαρακτηριστικό με βάση το οποίο θα γίνεται η αναζήτηση των στοιχείων διαμόρφωσης"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
@@ -1496,9 +1294,7 @@ msgstr "Σφάλμα συγχρονισμού των ορισμών. Ελέγξ�
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Έχετε ορισμούς ITSMConfigItem που δεν είναι συγχρονισμένοι. Παρακαλούμε "
-"αναπτύξτε τις αλλαγές των δυναμικών πεδίων ITSMConfigItem."
+msgstr "Έχετε ορισμούς ITSMConfigItem που δεν είναι συγχρονισμένοι. Παρακαλούμε αναπτύξτε τις αλλαγές των δυναμικών πεδίων ITSMConfigItem."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1518,19 +1314,11 @@ msgstr "1 - Εμφανίζεται"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων "
-"διαμόρφωσης της διεπαφής πράκτορα. Με αυτή τη δυνατότητα μπορείτε να "
-"αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους "
-"συνθήκες όπως \"(*key1*&&*key2*)\" ή \"(*key1*||*key2*)\"."
+msgstr "Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πράκτορα. Με αυτή τη δυνατότητα μπορείτε να αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους συνθήκες όπως \"(*key1*&&*key2*)\" ή \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων "
-"διαμόρφωσης της διεπαφής πελατών. Με αυτή τη δυνατότητα μπορείτε να "
-"αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους "
-"συνθήκες όπως \"(*key1*&&*key2*)\" ή \"(*key1*||*key2*)\"."
+msgstr "Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελατών. Με αυτή τη δυνατότητα μπορείτε να αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους συνθήκες όπως \"(*key1*&&*key2*)\" ή \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1542,58 +1330,39 @@ msgstr "Επιλέξτε μια ενότητα για την επιβολή εν
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
-"Επιλέξτε μια ενότητα για την επιβολή ενός σχήματος συμβολοσειράς εκδόσεων."
+msgstr "Επιλέξτε μια ενότητα για την επιβολή ενός σχήματος συμβολοσειράς εκδόσεων."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
-"Επιλέξτε χαρακτηριστικά για να ενεργοποιήσετε τη δημιουργία μιας νέας "
-"έκδοσης."
+msgstr "Επιλέξτε χαρακτηριστικά για να ενεργοποιήσετε τη δημιουργία μιας νέας έκδοσης."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
-"Επιλέξτε κατηγορίες για να αναθέσετε σε αυτή την κατηγορία στοιχείων "
-"διαμόρφωσης."
+msgstr "Επιλέξτε κατηγορίες για να αναθέσετε σε αυτή την κατηγορία στοιχείων διαμόρφωσης."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
-"Φίλτρα στοιχείων παραμέτρων στήλης για την Επισκόπηση στοιχείων παραμέτρων."
+msgstr "Φίλτρα στοιχείων παραμέτρων στήλης για την Επισκόπηση στοιχείων παραμέτρων."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης "
-"του περιβάλλοντος εργασίας του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα "
-"χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία "
-"(DynamicField_NameX)."
+msgstr "Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης "
-"της διεπαφής πελάτη. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων "
-"διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX)."
+msgstr "Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης της διεπαφής πελάτη. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Μονάδα συμβάντων στοιχείων διαμόρφωσης που ενημερώνει τα στοιχεία "
-"διαμόρφωσης στον τρέχοντα ορισμό τους."
+msgstr "Μονάδα συμβάντων στοιχείων διαμόρφωσης που ενημερώνει τα στοιχεία διαμόρφωσης στον τρέχοντα ορισμό τους."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
-"Μονάδα συμβάντων αντικειμένου διαμόρφωσης που ενημερώνει τον πίνακα "
-"configitem_ĺink."
+msgstr "Μονάδα συμβάντων αντικειμένου διαμόρφωσης που ενημερώνει τον πίνακα configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
-"Η ενότητα συμβάντων στοιχείων διαμόρφωσης ενημερώνει την τρέχουσα κατάσταση "
-"συμβάντος."
+msgstr "Η ενότητα συμβάντων στοιχείων διαμόρφωσης ενημερώνει την τρέχουσα κατάσταση συμβάντος."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1605,18 +1374,11 @@ msgstr "ConfigItem Έκδοση"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"Τα ConfigItems των ακόλουθων κλάσεων δεν θα αποθηκεύονται στο διακομιστή "
-"Elasticsearch. Για να εφαρμοστεί αυτό σε υπάρχοντα CI, η μετάβαση CI πρέπει "
-"να εκτελεστεί μέσω της κονσόλας, μετά την αλλαγή αυτής της επιλογής."
+msgstr "Τα ConfigItems των ακόλουθων κλάσεων δεν θα αποθηκεύονται στο διακομιστή Elasticsearch. Για να εφαρμοστεί αυτό σε υπάρχοντα CI, η μετάβαση CI πρέπει να εκτελεστεί μέσω της κονσόλας, μετά την αλλαγή αυτής της επιλογής."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"Τα ConfigItems με τις ακόλουθες καταστάσεις ανάπτυξης δεν θα αποθηκεύονται "
-"στο διακομιστή Elasticsearch. Για να εφαρμοστεί αυτό σε υπάρχοντα CIs, η "
-"μετάβαση CI πρέπει να εκτελεστεί μέσω της κονσόλας, μετά την αλλαγή αυτής "
-"της επιλογής."
+msgstr "Τα ConfigItems με τις ακόλουθες καταστάσεις ανάπτυξης δεν θα αποθηκεύονται στο διακομιστή Elasticsearch. Για να εφαρμοστεί αυτό σε υπάρχοντα CIs, η μετάβαση CI πρέπει να εκτελεστεί μέσω της κονσόλας, μετά την αλλαγή αυτής της επιλογής."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1624,108 +1386,59 @@ msgstr "Οι πελάτες μπορούν να δουν ιστορικές εκ
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
-"Οι πελάτες έχουν τη δυνατότητα να εναλλάσσονται χειροκίνητα μεταξύ των "
-"ιστορικών εκδόσεων CI."
+msgstr "Οι πελάτες έχουν τη δυνατότητα να εναλλάσσονται χειροκίνητα μεταξύ των ιστορικών εκδόσεων CI."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Προεπιλεγμένα δεδομένα που θα χρησιμοποιούνται στο χαρακτηριστικό για την "
-"οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: "
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "Προεπιλεγμένα δεδομένα που θα χρησιμοποιούνται στο χαρακτηριστικό για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Προεπιλεγμένα δεδομένα που θα χρησιμοποιούνται στο χαρακτηριστικό για την "
-"οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: "
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
+msgstr "Προεπιλεγμένα δεδομένα που θα χρησιμοποιούνται στο χαρακτηριστικό για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Ορισμός ενός σχήματος Template::Toolkit για συμβολοσειρές έκδοσης. "
-"Χρησιμοποιείται μόνο αν η ενότητα Version String Module έχει οριστεί σε "
-"TemplateToolkit."
+msgstr "Ορισμός ενός σχήματος Template::Toolkit για συμβολοσειρές έκδοσης. Χρησιμοποιείται μόνο αν η ενότητα Version String Module έχει οριστεί σε TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Ορίστε ένα σύνολο συνθηκών υπό τις οποίες επιτρέπεται σε έναν πελάτη να δει "
-"ένα στοιχείο διαμόρφωσης. Οι συνθήκες μπορούν προαιρετικά να περιοριστούν σε "
-"ορισμένες ομάδες πελατών. Το όνομα είναι το μόνο υποχρεωτικό χαρακτηριστικό. "
-"Εάν δεν δοθούν άλλες επιλογές, όλα τα στοιχεία διαμόρφωσης θα είναι ορατά "
-"στο πλαίσιο αυτής της κατηγορίας."
+msgstr "Ορίστε ένα σύνολο συνθηκών υπό τις οποίες επιτρέπεται σε έναν πελάτη να δει ένα στοιχείο διαμόρφωσης. Οι συνθήκες μπορούν προαιρετικά να περιοριστούν σε ορισμένες ομάδες πελατών. Το όνομα είναι το μόνο υποχρεωτικό χαρακτηριστικό. Εάν δεν δοθούν άλλες επιλογές, όλα τα στοιχεία διαμόρφωσης θα είναι ορατά στο πλαίσιο αυτής της κατηγορίας."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
-"Καθορίζει εάν οι ετικέτες τύπου συνδέσμου πρέπει να εμφανίζονται στις "
-"συνδέσεις κόμβων."
+msgstr "Καθορίζει εάν οι ετικέτες τύπου συνδέσμου πρέπει να εμφανίζονται στις συνδέσεις κόμβων."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Καθορίζει τις διαθέσιμες στήλες των CI στην επισκόπηση στοιχείων διαμόρφωσης "
-"ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να αποτελείται από ένα "
-"όνομα κλάσης και έναν πίνακα διαθέσιμων πεδίων για την αντίστοιχη κλάση. Οι "
-"καταχωρίσεις δυναμικών πεδίων πρέπει να τηρούν το σχήμα "
-"DynamicField_FieldName."
+msgstr "Καθορίζει τις διαθέσιμες στήλες των CI στην επισκόπηση στοιχείων διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να αποτελείται από ένα όνομα κλάσης και έναν πίνακα διαθέσιμων πεδίων για την αντίστοιχη κλάση. Οι καταχωρίσεις δυναμικών πεδίων πρέπει να τηρούν το σχήμα DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την "
-"ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων "
-"παραμέτρων της διασύνδεσης πράκτορα."
+msgstr "Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων παραμέτρων της διασύνδεσης πράκτορα."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την "
-"ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων "
-"παραμέτρων της διεπαφής πελάτη."
+msgstr "Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων παραμέτρων της διεπαφής πελάτη."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την "
-"ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων "
-"παραμέτρων αυτής της λειτουργίας."
+msgstr "Καθορίζει το προεπιλεγμένο χαρακτηριστικό στοιχείο παραμέτρων για την ταξινόμηση στοιχείων παραμέτρων του αποτελέσματος αναζήτησης στοιχείων παραμέτρων αυτής της λειτουργίας."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα "
-"αναζήτησης στοιχείων παραμέτρων της διασύνδεσης πράκτορα. Up: το παλαιότερο "
-"στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
+msgstr "Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα αναζήτησης στοιχείων παραμέτρων της διασύνδεσης πράκτορα. Up: το παλαιότερο στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα "
-"αναζήτησης στοιχείων παραμέτρων της διεπαφής πελάτη. Πάνω: το παλαιότερο "
-"στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
+msgstr "Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα αναζήτησης στοιχείων παραμέτρων της διεπαφής πελάτη. Πάνω: το παλαιότερο στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα "
-"αναζήτησης στοιχείων παραμέτρων της λειτουργίας αυτής. Πάνω: το παλαιότερο "
-"στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
+msgstr "Καθορίζει την προεπιλεγμένη σειρά στοιχείων παραμέτρων στο αποτέλεσμα αναζήτησης στοιχείων παραμέτρων της λειτουργίας αυτής. Πάνω: το παλαιότερο στην κορυφή. Κάτω: το τελευταίο στην κορυφή."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Καθορίζει τις προεπιλεγμένες εμφανιζόμενες στήλες των CI στην επισκόπηση "
-"στοιχείων διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να "
-"αποτελείται από ένα όνομα κλάσης και έναν πίνακα διαθέσιμων πεδίων για την "
-"αντίστοιχη κλάση. Οι καταχωρήσεις δυναμικών πεδίων πρέπει να τηρούν το σχήμα "
-"DynamicField_FieldName."
+msgstr "Καθορίζει τις προεπιλεγμένες εμφανιζόμενες στήλες των CI στην επισκόπηση στοιχείων διαμόρφωσης ανάλογα με την κατηγορία CI. Κάθε καταχώρηση πρέπει να αποτελείται από ένα όνομα κλάσης και έναν πίνακα διαθέσιμων πεδίων για την αντίστοιχη κλάση. Οι καταχωρήσεις δυναμικών πεδίων πρέπει να τηρούν το σχήμα DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1733,33 +1446,11 @@ msgstr "Καθορίζει το προεπιλεγμένο βάθος σχέσε
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων "
-"διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης."
+msgstr "Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων "
-"διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: \"Key"
-"\" πρέπει να έχει το όνομα του δυναμικού πεδίου στην προκειμένη περίπτωση "
-"'X', \"Content\" πρέπει να έχει την τιμή του δυναμικού πεδίου ανάλογα με τον "
-"τύπο του δυναμικού πεδίου, Text: 'a text', Dropdown: '1', Date/Time: "
-"'Search_DynamicField_XTimeSlotStartYear=1974- "
-"Search_DynamicField_XTimeSlotStartMonth=01- "
-"Search_DynamicField_XTimeSlotStartDay=26- "
-"Search_DynamicField_XTimeSlotStartHour=00, "
-"Search_DynamicField_XTimeSlotStartMinute=00- "
-"Search_DynamicField_XTimeSlotStartSecond=00- "
-"Search_DynamicField_XTimeSlotStopYear=2013- "
-"Search_DynamicField_XTimeSlotStopMonth=01, "
-"Search_DynamicField_XTimeSlotStopDay=26- "
-"Search_DynamicField_XTimeSlotStopHour=23- "
-"Search_DynamicField_XTimeSlotStopMinute=59- "
-"Search_DynamicField_XTimeSlotStopSecond=59,' και ή "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: \"Key\" πρέπει να έχει το όνομα του δυναμικού πεδίου στην προκειμένη περίπτωση 'X', \"Content\" πρέπει να έχει την τιμή του δυναμικού πεδίου ανάλογα με τον τύπο του δυναμικού πεδίου, Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974- Search_DynamicField_XTimeSlotStartMonth=01- Search_DynamicField_XTimeSlotStartDay=26- Search_DynamicField_XTimeSlotStartHour=00, Search_DynamicField_XTimeSlotStartMinute=00- Search_DynamicField_XTimeSlotStartSecond=00- Search_DynamicField_XTimeSlotStopYear=2013- Search_DynamicField_XTimeSlotStopMonth=01, Search_DynamicField_XTimeSlotStopDay=26- Search_DynamicField_XTimeSlotStopHour=23- Search_DynamicField_XTimeSlotStopMinute=59- Search_DynamicField_XTimeSlotStopSecond=59,' και ή 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1767,26 +1458,19 @@ msgstr "Καθορίζει το όριο αναζήτησης για την οθ
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
-"Καθορίζει το όριο αναζήτησης για την οθόνη CustomerITSMConfigItemSearch."
+msgstr "Καθορίζει το όριο αναζήτησης για την οθόνη CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Καθορίζει ποια στοιχεία είναι διαθέσιμα για \"Δράση\" στο τρίτο επίπεδο της "
-"δομής ITSM Config Item ACL."
+msgstr "Καθορίζει ποια στοιχεία είναι διαθέσιμα για \"Δράση\" στο τρίτο επίπεδο της δομής ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Καθορίζει ποια στοιχεία είναι διαθέσιμα στο πρώτο επίπεδο της δομής ITSM "
-"Config Item ACL."
+msgstr "Καθορίζει ποια στοιχεία είναι διαθέσιμα στο πρώτο επίπεδο της δομής ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Καθορίζει ποια στοιχεία είναι διαθέσιμα στο δεύτερο επίπεδο της δομής ITSM "
-"Config Item ACL."
+msgstr "Καθορίζει ποια στοιχεία είναι διαθέσιμα στο δεύτερο επίπεδο της δομής ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1802,66 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Μονάδα συμβάντων δυναμικών πεδίων που επισημαίνει τους ορισμούς στοιχείων "
-"διαμόρφωσης ως μη συγχρονισμένους, εάν αλλάξουν τα δυναμικά πεδία που "
-"περιέχουν."
+msgstr "Μονάδα συμβάντων δυναμικών πεδίων που επισημαίνει τους ορισμούς στοιχείων διαμόρφωσης ως μη συγχρονισμένους, εάν αλλάξουν τα δυναμικά πεδία που περιέχουν."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Δυναμικά πεδία που εμφανίζονται στην οθόνη πρόσθετων πεδίων ITSM της "
-"διεπαφής του πράκτορα."
+msgstr "Δυναμικά πεδία που εμφανίζονται στην οθόνη πρόσθετων πεδίων ITSM της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Δυναμικά πεδία που εμφανίζονται στην οθόνη επισκόπησης στοιχείων διαμόρφωσης "
-"της διεπαφής πελάτη."
+msgstr "Δυναμικά πεδία που εμφανίζονται στην οθόνη επισκόπησης στοιχείων διαμόρφωσης της διεπαφής πελάτη."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Δυναμικά πεδία που εμφανίζονται στην οθόνη αναζήτησης στοιχείων διαμόρφωσης "
-"του περιβάλλοντος εργασίας του πράκτορα."
+msgstr "Δυναμικά πεδία που εμφανίζονται στην οθόνη αναζήτησης στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των στοιχείων παραμέτρων "
-"ITSM για μοναδικά ονόματα. Πριν ενεργοποιήσετε αυτήν την επιλογή, θα πρέπει "
-"να ελέγξετε το σύστημά σας για ήδη υπάρχοντα στοιχεία διαμόρφωσης με διπλά "
-"ονόματα. Μπορείτε να το κάνετε αυτό με την εντολή της κονσόλας "
-"Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των στοιχείων παραμέτρων ITSM για μοναδικά ονόματα. Πριν ενεργοποιήσετε αυτήν την επιλογή, θα πρέπει να ελέγξετε το σύστημά σας για ήδη υπάρχοντα στοιχεία διαμόρφωσης με διπλά ονόματα. Μπορείτε να το κάνετε αυτό με την εντολή της κονσόλας Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Πεδία του ευρετηρίου στοιχείων διαμόρφωσης, που χρησιμοποιούνται για την "
-"αναζήτηση πλήρους κειμένου. Τα πεδία αποθηκεύονται επίσης, αλλά δεν είναι "
-"υποχρεωτικά για τη συνολική λειτουργικότητα. Η συμπερίληψη των συνημμένων "
-"μπορεί να απενεργοποιηθεί θέτοντας την καταχώρηση σε 0 ή διαγράφοντάς την."
+msgstr "Πεδία του ευρετηρίου στοιχείων διαμόρφωσης, που χρησιμοποιούνται για την αναζήτηση πλήρους κειμένου. Τα πεδία αποθηκεύονται επίσης, αλλά δεν είναι υποχρεωτικά για τη συνολική λειτουργικότητα. Η συμπερίληψη των συνημμένων μπορεί να απενεργοποιηθεί θέτοντας την καταχώρηση σε 0 ή διαγράφοντάς την."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Πεδία που αποθηκεύονται στο ευρετήριο στοιχείων διαμόρφωσης και "
-"χρησιμοποιούνται για άλλα πράγματα εκτός από την αναζήτηση πλήρους κειμένου. "
-"Για την πλήρη λειτουργικότητα όλα τα πεδία είναι υποχρεωτικά."
+msgstr "Πεδία που αποθηκεύονται στο ευρετήριο στοιχείων διαμόρφωσης και χρησιμοποιούνται για άλλα πράγματα εκτός από την αναζήτηση πλήρους κειμένου. Για την πλήρη λειτουργικότητα όλα τα πεδία είναι υποχρεωτικά."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Για κάθε υπηρεσία ιστού (κλειδί) μπορεί να οριστεί ένας πίνακας κλάσεων "
-"(τιμή), στις οποίες περιορίζεται η εισαγωγή. Για όλες τις επιλεγμένες "
-"κλάσεις ή για όλες τις υπάρχουσες κλάσεις θα πρέπει να επιλεγούν τα "
-"χαρακτηριστικά αναγνώρισης στο config του invoker."
+msgstr "Για κάθε υπηρεσία ιστού (κλειδί) μπορεί να οριστεί ένας πίνακας κλάσεων (τιμή), στις οποίες περιορίζεται η εισαγωγή. Για όλες τις επιλεγμένες κλάσεις ή για όλες τις υπάρχουσες κλάσεις θα πρέπει να επιλεγούν τα χαρακτηριστικά αναγνώρισης στο config του invoker."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"Εγγραφή μονάδας GenericInterface για το επίπεδο επικαλούμενου "
-"ConfigItemFetch."
+msgstr "Εγγραφή μονάδας GenericInterface για το επίπεδο επικαλούμενου ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1877,21 +1534,15 @@ msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Περιλαμβάνει καταστάσεις ανάπτυξης στην αναζήτηση στοιχείων διαμόρφωσης της "
-"διεπαφής πελάτη."
+msgstr "Περιλαμβάνει καταστάσεις ανάπτυξης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελάτη."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Περιλαμβάνει καταστάσεις συμβάντων στην αναζήτηση στοιχείων διαμόρφωσης της "
-"διεπαφής πελάτη."
+msgstr "Περιλαμβάνει καταστάσεις συμβάντων στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελάτη."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Μέγιστος αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται στο αποτέλεσμα "
-"αυτής της λειτουργίας."
+msgstr "Μέγιστος αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται στο αποτέλεσμα αυτής της λειτουργίας."
 
 #. SysConfig
 msgid "Name Module"
@@ -1903,106 +1554,67 @@ msgstr "Ενότητα αριθμού"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται σε κάθε σελίδα ενός "
-"αποτελέσματος αναζήτησης στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται σε κάθε σελίδα ενός αποτελέσματος αναζήτησης στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται σε κάθε σελίδα ενός "
-"αποτελέσματος αναζήτησης στο περιβάλλον εργασίας του πελάτη."
+msgstr "Αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται σε κάθε σελίδα ενός αποτελέσματος αναζήτησης στο περιβάλλον εργασίας του πελάτη."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Αντικείμενα για τα οποία θα γίνει αναζήτηση, πόσες καταχωρήσεις και ποια "
-"χαρακτηριστικά θα εμφανιστούν. Τα χαρακτηριστικά ConfigItem πρέπει να "
-"αποθηκεύονται ρητά μέσω του Elasticsearch."
+msgstr "Αντικείμενα για τα οποία θα γίνει αναζήτηση, πόσες καταχωρήσεις και ποια χαρακτηριστικά θα εμφανιστούν. Τα χαρακτηριστικά ConfigItem πρέπει να αποθηκεύονται ρητά μέσω του Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για τις κατηγορίες των κλάσεων στοιχείων διαμόρφωσης στην προβολή "
-"προτιμήσεων της διεπαφής του πράκτορα."
+msgstr "Παράμετροι για τις κατηγορίες των κλάσεων στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Παράμετροι για τα φίλτρα στήλης της επισκόπησης στοιχείων μικρής "
-"διαμόρφωσης. Σημείωση: η ρύθμιση 'Active' σε 0 θα εμποδίσει μόνο τους "
-"πράκτορες να επεξεργάζονται τις ρυθμίσεις αυτής της ομάδας στις προσωπικές "
-"τους προτιμήσεις, αλλά θα επιτρέψει στους διαχειριστές να επεξεργάζονται τις "
-"ρυθμίσεις για λογαριασμό άλλου χρήστη. Χρησιμοποιήστε το 'PreferenceGroup' "
-"για να ελέγξετε σε ποια περιοχή θα εμφανίζονται αυτές οι ρυθμίσεις στο "
-"περιβάλλον εργασίας χρήστη."
+msgstr "Παράμετροι για τα φίλτρα στήλης της επισκόπησης στοιχείων μικρής διαμόρφωσης. Σημείωση: η ρύθμιση 'Active' σε 0 θα εμποδίσει μόνο τους πράκτορες να επεξεργάζονται τις ρυθμίσεις αυτής της ομάδας στις προσωπικές τους προτιμήσεις, αλλά θα επιτρέψει στους διαχειριστές να επεξεργάζονται τις ρυθμίσεις για λογαριασμό άλλου χρήστη. Χρησιμοποιήστε το 'PreferenceGroup' για να ελέγξετε σε ποια περιοχή θα εμφανίζονται αυτές οι ρυθμίσεις στο περιβάλλον εργασίας χρήστη."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για τη μονάδα ονόματος για τις κλάσεις στοιχείων διαμόρφωσης στην "
-"προβολή προτιμήσεων της διεπαφής πράκτορα."
+msgstr "Παράμετροι για τη μονάδα ονόματος για τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για τη μονάδα αριθμού για τις κλάσεις στοιχείων διαμόρφωσης στην "
-"προβολή προτιμήσεων της διεπαφής πράκτορα."
+msgstr "Παράμετροι για τη μονάδα αριθμού για τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για τη μονάδα συμβολοσειράς έκδοσης για τις κλάσεις στοιχείων "
-"διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
+msgstr "Παράμετροι για τη μονάδα συμβολοσειράς έκδοσης για τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για την ενότητα εργαλειοθήκης προτύπου συμβολοσειράς έκδοσης για "
-"τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του "
-"πράκτορα."
+msgstr "Παράμετροι για την ενότητα εργαλειοθήκης προτύπου συμβολοσειράς έκδοσης για τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Παράμετροι για την ενεργοποίηση έκδοσης για τις κλάσεις στοιχείων "
-"διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
+msgstr "Παράμετροι για την ενεργοποίηση έκδοσης για τις κλάσεις στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Εκτελεί τη ρυθμισμένη ενέργεια για κάθε συμβάν (ως Invoker) για κάθε "
-"ρυθμισμένη υπηρεσία Webservice."
+msgstr "Εκτελεί τη ρυθμισμένη ενέργεια για κάθε συμβάν (ως Invoker) για κάθε ρυθμισμένη υπηρεσία Webservice."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της ενέργειας προσάρτησης στοιχείου "
-"διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της ενέργειας προσάρτησης στοιχείου διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης αναζήτησης στοιχείων "
-"διαμόρφωσης ITSM στη διεπαφή πελάτη."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης αναζήτησης στοιχείων διαμόρφωσης ITSM στη διεπαφή πελάτη."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης δενδρικής προβολής στοιχείων "
-"διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης δενδρικής προβολής στοιχείων διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Απαιτούμενα δικαιώματα για τη χρήση της οθόνης μαζικών στοιχείων διαμόρφωσης "
-"ITSM στο περιβάλλον εργασίας του πράκτορα."
+msgstr "Απαιτούμενα δικαιώματα για τη χρήση της οθόνης μαζικών στοιχείων διαμόρφωσης ITSM στο περιβάλλον εργασίας του πράκτορα."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για την εμφάνιση των συνδέσμων των "
-"στοιχείων διαμόρφωσης ως δενδρική προβολή."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για την εμφάνιση των συνδέσμων των στοιχείων διαμόρφωσης ως δενδρική προβολή."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -2026,12 +1638,7 @@ msgstr "Σκανδάλη έκδοσης"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Εάν η εκτέλεση του ConfigItemACL μπορεί να αποφευχθεί με τον έλεγχο των "
-"εξαρτήσεων των πεδίων που έχουν αποθηκευτεί στην προσωρινή μνήμη. Αυτό "
-"μπορεί να βελτιώσει τους χρόνους φόρτωσης των φορμών, αλλά πρέπει να "
-"απενεργοποιηθεί, εάν πρόκειται να χρησιμοποιηθούν ACLModules για "
-"ITSMConfigItem- και Form-ReturnTypes."
+msgstr "Εάν η εκτέλεση του ConfigItemACL μπορεί να αποφευχθεί με τον έλεγχο των εξαρτήσεων των πεδίων που έχουν αποθηκευτεί στην προσωρινή μνήμη. Αυτό μπορεί να βελτιώσει τους χρόνους φόρτωσης των φορμών, αλλά πρέπει να απενεργοποιηθεί, εάν πρόκειται να χρησιμοποιηθούν ACLModules για ITSMConfigItem- και Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -2043,10 +1650,7 @@ msgstr "Γενικά δεδομένα του επικαλούμενου"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Αυτή η ενότητα OTOBO invoker backend θα κληθεί για να προετοιμάσει τα "
-"δεδομένα που θα αποσταλούν στο απομακρυσμένο σύστημα και να επεξεργαστεί τα "
-"δεδομένα απόκρισης."
+msgstr "Αυτή η ενότητα OTOBO invoker backend θα κληθεί για να προετοιμάσει τα δεδομένα που θα αποσταλούν στο απομακρυσμένο σύστημα και να επεξεργαστεί τα δεδομένα απόκρισης."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -2058,17 +1662,11 @@ msgstr "Χαρτογράφηση"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"Τα δεδομένα από τον καλούντα το OTOBO θα υποβληθούν σε επεξεργασία από αυτή "
-"την αντιστοίχιση, για να μετατραπούν στο είδος των δεδομένων που αναμένει το "
-"απομακρυσμένο σύστημα."
+msgstr "Τα δεδομένα από τον καλούντα το OTOBO θα υποβληθούν σε επεξεργασία από αυτή την αντιστοίχιση, για να μετατραπούν στο είδος των δεδομένων που αναμένει το απομακρυσμένο σύστημα."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Τα δεδομένα απόκρισης θα υποβληθούν σε επεξεργασία από αυτή την "
-"αντιστοίχιση, για να μετατραπούν στο είδος των δεδομένων που αναμένει ο "
-"φορέας που καλεί το OTOBO."
+msgstr "Τα δεδομένα απόκρισης θα υποβληθούν σε επεξεργασία από αυτή την αντιστοίχιση, για να μετατραπούν στο είδος των δεδομένων που αναμένει ο φορέας που καλεί το OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -2084,9 +1682,7 @@ msgstr "Προσθήκη συμβάντος"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Οι ασύγχρονες ενεργοποιήσεις συμβάντων χειρίζονται από τον δαίμονα "
-"χρονοπρογραμματισμού OTOBO στο παρασκήνιο (συνιστάται)."
+msgstr "Οι ασύγχρονες ενεργοποιήσεις συμβάντων χειρίζονται από τον δαίμονα χρονοπρογραμματισμού OTOBO στο παρασκήνιο (συνιστάται)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2146,9 +1742,7 @@ msgstr "Νέα δυναμικά πεδία"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Θα θέλατε να επωφεληθείτε από πρόσθετους δυναμικούς τύπους πεδίων; Έχετε "
-"πλήρη πρόσβαση στους ακόλουθους τύπους πεδίων:"
+msgstr "Θα θέλατε να επωφεληθείτε από πρόσθετους δυναμικούς τύπους πεδίων; Έχετε πλήρη πρόσβαση στους ακόλουθους τύπους πεδίων:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -2164,9 +1758,7 @@ msgstr "Κλειδί εξωτερικής πηγής"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"Όταν ορίζεται μέσω εξωτερικής πηγής (π.χ. υπηρεσία ιστού ή εισαγωγή/εξαγωγή)"
-", η τιμή θα ερμηνεύεται ως αυτό το χαρακτηριστικό."
+msgstr "Όταν ορίζεται μέσω εξωτερικής πηγής (π.χ. υπηρεσία ιστού ή εισαγωγή/εξαγωγή), η τιμή θα ερμηνεύεται ως αυτό το χαρακτηριστικό."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -2178,15 +1770,11 @@ msgstr "Επιλέξτε τον τύπο της οθόνης"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
-"Η βασική δομή δεν είναι έγκυρη. Παρακαλούμε δώστε έναν πίνακα με δεδομένα σε "
-"μορφή YAML."
+msgstr "Η βασική δομή δεν είναι έγκυρη. Παρακαλούμε δώστε έναν πίνακα με δεδομένα σε μορφή YAML."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"Οι ACLs δεν μπόρεσαν να εισαχθούν λόγω ενός άγνωστου σφάλματος, παρακαλούμε "
-"ελέγξτε τα αρχεία καταγραφής του OTOBO για περισσότερες πληροφορίες."
+msgstr "Οι ACLs δεν μπόρεσαν να εισαχθούν λόγω ενός άγνωστου σφάλματος, παρακαλούμε ελέγξτε τα αρχεία καταγραφής του OTOBO για περισσότερες πληροφορίες."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2194,9 +1782,7 @@ msgstr "%s (αντίγραφο) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"Μια ποσοστιαία τιμή της ελάχιστης προόδου της μετάφρασης ανά γλώσσα, ώστε να "
-"μπορεί να χρησιμοποιηθεί για τεκμηρίωση."
+msgstr "Μια ποσοστιαία τιμή της ελάχιστης προόδου της μετάφρασης ανά γλώσσα, ώστε να μπορεί να χρησιμοποιηθεί για τεκμηρίωση."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2224,14 +1810,11 @@ msgstr "Εγγραφή μονάδας backend για την ενότητα manua
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
-"Να δημιουργηθούν άγκιστρα μπλοκαρίσματος για την αφαίρεση διαφημίσεων BS."
+msgstr "Να δημιουργηθούν άγκιστρα μπλοκαρίσματος για την αφαίρεση διαφημίσεων BS."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
-"Άγκιστρα μπλοκ που πρέπει να δημιουργηθούν για το φίλτρο εξόδου του "
-"διαχειριστή πακέτων."
+msgstr "Άγκιστρα μπλοκ που πρέπει να δημιουργηθούν για το φίλτρο εξόδου του διαχειριστή πακέτων."
 
 #. SysConfig
 msgid "Branch View commit limit"
@@ -2251,9 +1834,7 @@ msgstr "Δημιουργία αρχείου ανάλυσης"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
-"Δημιουργεί ένα αρχείο ανάλυσης από αυτό το εισιτήριο και το αποστέλλει στο "
-"Znuny."
+msgstr "Δημιουργεί ένα αρχείο ανάλυσης από αυτό το εισιτήριο και το αποστέλλει στο Znuny."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
@@ -2277,45 +1858,19 @@ msgstr "Ορισμός του προθέματος URL GIT clone/push."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Ορισμός ενός δυναμικού πεδίου: Group => Ομάδα με πρόσβαση στα δυναμικά "
-"πεδία. AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1). "
-"InformationAreaName => Όνομα των widgets. InformationAreaSize => Μέγεθος και "
-"θέση των widgets (Large|Small). Name => Όνομα του δυναμικού πεδίου που "
-"πρέπει να χρησιμοποιηθεί. Κατάσταση των πεδίων (0 = απενεργοποιημένα, 1 = "
-"ενεργά, 2 = υποχρεωτικά), FilterRelease => Regex με το οποίο πρέπει να "
-"ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex "
-"με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, "
-"FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου "
-"για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η "
-"συμβολοσειρά έκδοσης επαναφοράς για να εμφανιστεί."
+msgstr "Ορισμός ενός δυναμικού πεδίου: Group => Ομάδα με πρόσβαση στα δυναμικά πεδία. AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1). InformationAreaName => Όνομα των widgets. InformationAreaSize => Μέγεθος και θέση των widgets (Large|Small). Name => Όνομα του δυναμικού πεδίου που πρέπει να χρησιμοποιηθεί. Κατάσταση των πεδίων (0 = απενεργοποιημένα, 1 = ενεργά, 2 = υποχρεωτικά), FilterRelease => Regex με το οποίο πρέπει να ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά έκδοσης επαναφοράς για να εμφανιστεί."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Ορισμός ενός δυναμικού πεδίου: Group => Ομάδα με πρόσβαση στα δυναμικά "
-"πεδία. AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1). "
-"InformationAreaName => Όνομα των widgets. InformationAreaSize => Μέγεθος και "
-"θέση των widgets (Large|Small). Name => Όνομα του δυναμικού πεδίου που "
-"πρέπει να χρησιμοποιηθεί. Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = "
-"ενεργό, 2 = υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να "
-"ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex "
-"με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, "
-"FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου "
-"για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η "
-"συμβολοσειρά της έκδοσης επαναφοράς για να εμφανιστεί."
+msgstr "Ορισμός ενός δυναμικού πεδίου: Group => Ομάδα με πρόσβαση στα δυναμικά πεδία. AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1). InformationAreaName => Όνομα των widgets. InformationAreaSize => Μέγεθος και θέση των widgets (Large|Small). Name => Όνομα του δυναμικού πεδίου που πρέπει να χρησιμοποιηθεί. Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της έκδοσης επαναφοράς για να εμφανιστεί."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
-"Ορισμός εξωτερικών αθροισμάτων MD5 (κλειδί => MD5, τιμή => Προμηθευτής, "
-"όνομα πακέτου, έκδοση, ημερομηνία)."
+msgstr "Ορισμός εξωτερικών αθροισμάτων MD5 (κλειδί => MD5, τιμή => Προμηθευτής, όνομα πακέτου, έκδοση, ημερομηνία)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
-"Ορισμός αντιστοιχίσεων μεταξύ δημόσιων αιτήσεων αποθετηρίων και εσωτερικών "
-"αποθετηρίων του OPMS."
+msgstr "Ορισμός αντιστοιχίσεων μεταξύ δημόσιων αιτήσεων αποθετηρίων και εσωτερικών αποθετηρίων του OPMS."
 
 #. SysConfig
 msgid "Definition of package states."
@@ -2327,21 +1882,15 @@ msgstr "Ορισμός των μετονομασμένων πακέτων OPMS."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
-"Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την προσωρινή αποθήκευση "
-"αποθετηρίων."
+msgstr "Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την προσωρινή αποθήκευση αποθετηρίων."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
-"Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την αποθήκευση προσωρινών "
-"δεδομένων."
+msgstr "Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την αποθήκευση προσωρινών δεδομένων."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
-"Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την αποθήκευση αντιγράφων "
-"εργασίας."
+msgstr "Κατάλογος, ο οποίος χρησιμοποιείται από το Git για την αποθήκευση αντιγράφων εργασίας."
 
 #. SysConfig
 msgid "Disable online repositories."
@@ -2349,9 +1898,7 @@ msgstr "Απενεργοποιήστε τα online αποθετήρια."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
-"Μην καταγράφετε τα αποτελέσματα εξουσιοδότησης σύνδεσης git ssh για αυτούς "
-"τους χρήστες. Χρήσιμο για αυτοματοποιημένα πράγματα."
+msgstr "Μην καταγράφετε τα αποτελέσματα εξουσιοδότησης σύνδεσης git ssh για αυτούς τους χρήστες. Χρήσιμο για αυτοματοποιημένα πράγματα."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2363,8 +1910,7 @@ msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
-msgstr ""
-"Εξαγωγή όλων των διαθέσιμων δημόσιων κλειδιών στο αρχείο authorized_keys."
+msgstr "Εξαγωγή όλων των διαθέσιμων δημόσιων κλειδιών στο αρχείο authorized_keys."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
@@ -2376,27 +1922,19 @@ msgstr "Εγγραφή μονάδας frontend για το αντικείμεν�
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
-"Εγγραφή μονάδας frontend για το αντικείμενο PublicOPMSRepository στη δημόσια "
-"διεπαφή."
+msgstr "Εγγραφή μονάδας frontend για το αντικείμενο PublicOPMSRepository στη δημόσια διεπαφή."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
-"Εγγραφή μονάδας frontend για το αντικείμενο PublicOPMSRepositoryLookup στη "
-"δημόσια διεπαφή."
+msgstr "Εγγραφή μονάδας frontend για το αντικείμενο PublicOPMSRepositoryLookup στη δημόσια διεπαφή."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
-"Καταχώρηση μονάδας frontend για το αντικείμενο PublicOPMSTestBuild στη "
-"δημόσια διεπαφή."
+msgstr "Καταχώρηση μονάδας frontend για το αντικείμενο PublicOPMSTestBuild στη δημόσια διεπαφή."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
-"Καταχώρηση μονάδας frontend για το αντικείμενο PublicPackageVerification στη "
-"δημόσια διασύνδεση."
+msgstr "Καταχώρηση μονάδας frontend για το αντικείμενο PublicPackageVerification στη δημόσια διασύνδεση."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2408,9 +1946,7 @@ msgstr "GIT Εγγραφή συγγραφέα."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Δημιουργεί άγκιστρα σχολίων HTML για τα καθορισμένα μπλοκ, ώστε τα φίλτρα να "
-"μπορούν να τα χρησιμοποιήσουν."
+msgstr "Δημιουργεί άγκιστρα σχολίων HTML για τα καθορισμένα μπλοκ, ώστε τα φίλτρα να μπορούν να τα χρησιμοποιήσουν."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2430,32 +1966,23 @@ msgstr "Αποθετήριο Git"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr ""
-"Ομάδα, τα μέλη της οποίας έχουν δικαιώματα διαχειριστή διαγραφής στο OPMS."
+msgstr "Ομάδα, τα μέλη της οποίας έχουν δικαιώματα διαχειριστή διαγραφής στο OPMS."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
-"Ομάδα, τα μέλη της οποίας έχουν δικαιώματα διαχειριστή αποθετηρίου στο OPMS."
+msgstr "Ομάδα, τα μέλη της οποίας έχουν δικαιώματα διαχειριστή αποθετηρίου στο OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
-"Ομάδα, τα μέλη της οποίας θα βλέπουν τις πληροφορίες για τα αποτελέσματα των "
-"δοκιμών CI στις οθόνες του OPMS."
+msgstr "Ομάδα, τα μέλη της οποίας θα βλέπουν τις πληροφορίες για τα αποτελέσματα των δοκιμών CI στις οθόνες του OPMS."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"Ομάδες στις οποίες πρέπει να είναι μέλος ένας πιστοποιημένος χρήστης (με "
-"σύνδεση χρήστη και κωδικό πρόσβασης) για να δημιουργήσει πακέτα δοκιμών μέσω "
-"της δημόσιας διεπαφής."
+msgstr "Ομάδες στις οποίες πρέπει να είναι μέλος ένας πιστοποιημένος χρήστης (με σύνδεση χρήστη και κωδικό πρόσβασης) για να δημιουργήσει πακέτα δοκιμών μέσω της δημόσιας διεπαφής."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
-"Ομάδες οι οποίες θα οριστούν κατά τη διαδικασία δημιουργίας έργου git κατά "
-"την προσθήκη αποθετηρίων OPMS."
+msgstr "Ομάδες οι οποίες θα οριστούν κατά τη διαδικασία δημιουργίας έργου git κατά την προσθήκη αποθετηρίων OPMS."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2463,33 +1990,23 @@ msgstr "Διαχείριση δυναμικού πεδίου σε οθόνες."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
-"Διαχειριστείτε το δημόσιο κλειδί SSH για πρόσβαση στο Git εδώ. Βεβαιωθείτε "
-"ότι έχετε αποθηκεύσει αυτή την προτίμηση όταν προσθέτετε ένα νέο κλειδί."
+msgstr "Διαχειριστείτε το δημόσιο κλειδί SSH για πρόσβαση στο Git εδώ. Βεβαιωθείτε ότι έχετε αποθηκεύσει αυτή την προτίμηση όταν προσθέτετε ένα νέο κλειδί."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
-"Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τις προστιθέμενες "
-"γραμμές κώδικα."
+msgstr "Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τις προστιθέμενες γραμμές κώδικα."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
-"Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με την ανάπτυξη του "
-"κώδικα."
+msgstr "Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με την ανάπτυξη του κώδικα."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
-"Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τον αριθμό των "
-"κοινοποιήσεων git."
+msgstr "Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τον αριθμό των κοινοποιήσεων git."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
-"Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τις γραμμές "
-"κώδικα που έχουν αφαιρεθεί."
+msgstr "Ενότητα για τη δημιουργία στατιστικών στοιχείων σχετικά με τις γραμμές κώδικα που έχουν αφαιρεθεί."
 
 #. SysConfig
 msgid "OPMS"
@@ -2497,9 +2014,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
-"Μόνο οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες μπορούν "
-"να έχουν πρόσβαση στο git."
+msgstr "Μόνο οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες μπορούν να έχουν πρόσβαση στο git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2511,57 +2026,19 @@ msgstr "Παράμετροι για τις σελίδες στην οθόνη Br
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Προ-ορισμός του δυναμικού πεδίου 'GITProjectName': Group => Ομάδα με "
-"πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί "
-"(0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => "
-"Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού "
-"πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- "
-"State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = "
-"υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το "
-"όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο "
-"πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => "
-"Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, "
-"FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της "
-"έκδοσης επαναφοράς για να εμφανιστεί."
+msgstr "Προ-ορισμός του δυναμικού πεδίου 'GITProjectName': Group => Ομάδα με πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της έκδοσης επαναφοράς για να εμφανιστεί."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Προ-ορισμός του δυναμικού πεδίου 'GITRepositoryName': Group => Ομάδα με "
-"πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί "
-"(0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => "
-"Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού "
-"πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- "
-"State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = "
-"υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το "
-"όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο "
-"πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => "
-"Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, "
-"FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της "
-"έκδοσης επαναφοράς για να εμφανιστεί."
+msgstr "Προ-ορισμός του δυναμικού πεδίου 'GITRepositoryName': Group => Ομάδα με πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της έκδοσης επαναφοράς για να εμφανιστεί."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Προ-ορισμός του δυναμικού πεδίου 'PackageDeprecated': Group => Ομάδα με "
-"πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί "
-"(0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => "
-"Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού "
-"πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- "
-"State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = "
-"υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το "
-"όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο "
-"πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => "
-"Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, "
-"FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της "
-"έκδοσης επαναφοράς για να εμφανιστεί."
+msgstr "Προ-ορισμός του δυναμικού πεδίου 'PackageDeprecated': Group => Ομάδα με πρόσβαση στα δυναμικά πεδία- AlwaysVisible => Το πεδίο μπορεί να αφαιρεθεί (0|1)- InformationAreaName => Όνομα των widgets- InformationAreaSize => Μέγεθος και θέση των widgets (Large|Small)- Name => Όνομα του δυναμικού πεδίου που πρέπει να χρησιμοποιηθεί- Priority => Σειρά των δυναμικών πεδίων- State => Κατάσταση των πεδίων (0 = απενεργοποιημένο, 1 = ενεργό, 2 = υποχρεωτικό), FilterRepository => Regex με το οποίο πρέπει να ταιριάζει το όνομα του αποθετηρίου για να εμφανιστεί, FilterPackage => Regex με το οποίο πρέπει να ταιριάζει το όνομα του πακέτου για να εμφανιστεί, FilterBranch => Regex με το οποίο πρέπει να ταιριάζει το όνομα του κλάδου για να εμφανιστεί, FilterRelease => Regex με το οποίο πρέπει να ταιριάζει η συμβολοσειρά της έκδοσης επαναφοράς για να εμφανιστεί."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
-"Παραλήπτες που θα ενημερωθούν μέσω ηλεκτρονικού ταχυδρομείου σε περίπτωση "
-"σφαλμάτων."
+msgstr "Παραλήπτες που θα ενημερωθούν μέσω ηλεκτρονικού ταχυδρομείου σε περίπτωση σφαλμάτων."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
@@ -2573,9 +2050,7 @@ msgstr "Αποστολή αρχείου ανάλυσης"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
-msgstr ""
-"Ορίζει τη διεύθυνση κλώνου git που θα χρησιμοποιείται στις λίστες των "
-"αποθετηρίων."
+msgstr "Ορίζει τη διεύθυνση κλώνου git που θα χρησιμοποιείται στις λίστες των αποθετηρίων."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
@@ -2583,23 +2058,15 @@ msgstr "Ορίζει τον αρχικό κατάλογο για τα αποθε
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
-"Καθορίζει τη διαδρομή για τη θέση του σεναρίου λήψης της δημοσίευσης "
-"BugzillaAddComment."
+msgstr "Καθορίζει τη διαδρομή για τη θέση του σεναρίου λήψης της δημοσίευσης BugzillaAddComment."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Ορίζει τη διαδρομή για τη θέση δέσμης ενεργειών OTRSCodePolicy. Συνιστάται "
-"να έχετε έναν ξεχωριστό κλώνο της ενότητας OTRSCodePolicy που ενημερώνεται "
-"μέσω του cron."
+msgstr "Ορίζει τη διαδρομή για τη θέση δέσμης ενεργειών OTRSCodePolicy. Συνιστάται να έχετε έναν ξεχωριστό κλώνο της ενότητας OTRSCodePolicy που ενημερώνεται μέσω του cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Ορίζει τη διαδρομή για τη θέση του σεναρίου προ-λήψης OTRSCodePolicy. "
-"Συνιστάται να έχετε έναν ξεχωριστό κλώνο της ενότητας OTRSCodePolicy που "
-"ενημερώνεται μέσω cron."
+msgstr "Ορίζει τη διαδρομή για τη θέση του σεναρίου προ-λήψης OTRSCodePolicy. Συνιστάται να έχετε έναν ξεχωριστό κλώνο της ενότητας OTRSCodePolicy που ενημερώνεται μέσω cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2607,9 +2074,7 @@ msgstr "Εμφάνιση των τελευταίων αλλαγών στα απ�
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"Εμφανίζει έναν σύνδεσμο στο μενού για τη δημιουργία μιας δοκιμής μονάδας από "
-"το τρέχον εισιτήριο."
+msgstr "Εμφανίζει έναν σύνδεσμο στο μενού για τη δημιουργία μιας δοκιμής μονάδας από το τρέχον εισιτήριο."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2633,8 +2098,7 @@ msgstr "Η διαδρομή προς το λογότυπο OTRS (σχετική 
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
-"Η διαδρομή προς τον στατικό φάκελο, που περιέχει εικόνες και αρχεία css."
+msgstr "Η διαδρομή προς τον στατικό φάκελο, που περιέχει εικόνες και αρχεία css."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
@@ -2642,73 +2106,47 @@ msgstr "Η διαδρομή προς το φάκελο theme, που περιέ�
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
-"Αυτή η διαμόρφωση ορίζει όλες τις πιθανές οθόνες για την ενεργοποίηση ή "
-"απενεργοποίηση των προεπιλεγμένων στηλών."
+msgstr "Αυτή η διαμόρφωση ορίζει όλες τις πιθανές οθόνες για την ενεργοποίηση ή απενεργοποίηση των προεπιλεγμένων στηλών."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων ορίζει όλες τις πιθανές οθόνες για την "
-"ενεργοποίηση ή απενεργοποίηση των δυναμικών πεδίων."
+msgstr "Αυτή η ρύθμιση παραμέτρων ορίζει όλες τις πιθανές οθόνες για την ενεργοποίηση ή απενεργοποίηση των δυναμικών πεδίων."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
-"Αυτή η ρύθμιση καθορίζει αν θα εμφανίζονται μόνο τα έγκυρα ή όλα τα (άκυρα) "
-"δυναμικά πεδία."
+msgstr "Αυτή η ρύθμιση καθορίζει αν θα εμφανίζονται μόνο τα έγκυρα ή όλα τα (άκυρα) δυναμικά πεδία."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων καθορίζει εάν η επαλήθευση πακέτων OTRS θα πρέπει "
-"να είναι ενεργή ή απενεργοποιημένη. Εάν είναι απενεργοποιημένο, όλα τα "
-"πακέτα εμφανίζονται ως επαληθευμένα. Εξακολουθεί να συνιστάται η χρήση μόνο "
-"επαληθευμένων πακέτων."
+msgstr "Αυτή η ρύθμιση παραμέτρων καθορίζει εάν η επαλήθευση πακέτων OTRS θα πρέπει να είναι ενεργή ή απενεργοποιημένη. Εάν είναι απενεργοποιημένο, όλα τα πακέτα εμφανίζονται ως επαληθευμένα. Εξακολουθεί να συνιστάται η χρήση μόνο επαληθευμένων πακέτων."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων ορίζει τη διεύθυνση URL της υπηρεσίας OTRS "
-"CloudService Proxy. Το πρόθεμα http ή https θα προστεθεί, ανάλογα με την "
-"επιλογή SysConfig 'Znuny4OTRSRepoType'."
+msgstr "Αυτή η ρύθμιση παραμέτρων ορίζει τη διεύθυνση URL της υπηρεσίας OTRS CloudService Proxy. Το πρόθεμα http ή https θα προστεθεί, ανάλογα με την επιλογή SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων καταχωρίζει ένα μετα-φίλτρο εξόδου για την "
-"επέκταση της επαλήθευσης πακέτων."
+msgstr "Αυτή η ρύθμιση παραμέτρων καταχωρίζει ένα μετα-φίλτρο εξόδου για την επέκταση της επαλήθευσης πακέτων."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων καταχωρίζει μια μονάδα OutputFilter που αφαιρεί "
-"τις διαφημίσεις OTRS Business Solution TM."
+msgstr "Αυτή η ρύθμιση παραμέτρων καταχωρίζει μια μονάδα OutputFilter που αφαιρεί τις διαφημίσεις OTRS Business Solution TM."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"Αυτή η ρύθμιση παραμέτρων καταχωρεί ένα φίλτρο εξόδου για την απόκρυψη της "
-"επιλογής online αποθετηρίου στο διαχειριστή πακέτων."
+msgstr "Αυτή η ρύθμιση παραμέτρων καταχωρεί ένα φίλτρο εξόδου για την απόκρυψη της επιλογής online αποθετηρίου στο διαχειριστή πακέτων."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Τακτοποίηση μη επεξεργασμένων εκδόσεων που δεν έχουν περάσει ελέγχους "
-"δοκιμαστικών πυρήνων για μεγάλο χρονικό διάστημα."
+msgstr "Τακτοποίηση μη επεξεργασμένων εκδόσεων που δεν έχουν περάσει ελέγχους δοκιμαστικών πυρήνων για μεγάλο χρονικό διάστημα."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"Οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες επιτρέπεται "
-"να εκτελούν force pushes 'git push --force'."
+msgstr "Οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες επιτρέπεται να εκτελούν force pushes 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"Οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες επιτρέπεται "
-"να διαχειρίζονται έργα. Επιπλέον, τα μέλη έχουν δικαιώματα διαχείρισης στη "
-"διαχείριση git."
+msgstr "Οι χρήστες που έχουν δικαιώματα rw σε μία από αυτές τις ομάδες επιτρέπεται να διαχειρίζονται έργα. Επιπλέον, τα μέλη έχουν δικαιώματα διαχείρισης στη διαχείριση git."
 
 #. ITSM class bundles
 msgid "1"
@@ -3765,3 +3203,16 @@ msgstr "Τηλέφωνο VoIP"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Webcam"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

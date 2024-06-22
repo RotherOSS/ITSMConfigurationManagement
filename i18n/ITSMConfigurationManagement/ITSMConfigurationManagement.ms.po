@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Malay <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ms/>\n"
+"Language-Team: Malay <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ms/>\n"
 "Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,35 +488,35 @@ msgstr ""
 msgid "Software"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Tamat Tempoh"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "penyelenggaraan"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilot"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Dirancang"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Membaiki"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "bersara"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "mengkaji"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Ujian/QA"
 
@@ -1595,9 +1594,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Melakukan tindakan yang telah dikonfigurasi untuk setiap acara (sebagai "
-"pencetus) untuk setiap Webservice yang telah dikonfigurasi."
+msgstr "Melakukan tindakan yang telah dikonfigurasi untuk setiap acara (sebagai pencetus) untuk setiap Webservice yang telah dikonfigurasi."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
@@ -1653,9 +1650,7 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Modul OTOBO invoker backend ini akan dipanggil untuk menyediakan data untuk "
-"dihantar ke sistem jauh, dan untuk memproses data respons."
+msgstr "Modul OTOBO invoker backend ini akan dipanggil untuk menyediakan data untuk dihantar ke sistem jauh, dan untuk memproses data respons."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1667,15 +1662,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"Data dari invoker daripada OTOBO akan diproses oleh pemetaan ini, untuk "
-"mengubah kepada jenis data sistem jauh menjangka."
+msgstr "Data dari invoker daripada OTOBO akan diproses oleh pemetaan ini, untuk mengubah kepada jenis data sistem jauh menjangka."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Data tindak balas akan diproses oleh pemetaan ini, untuk mengubah kepada "
-"jenis data invoker jangkaan OTOBO."
+msgstr "Data tindak balas akan diproses oleh pemetaan ini, untuk mengubah kepada jenis data invoker jangkaan OTOBO."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1691,9 +1682,7 @@ msgstr "Tambah Acara"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Pencetus peristiwa tidak selari dikendalikan oleh Penjadual Daemon OTOBO "
-"pada latar belakang (disyorkan)."
+msgstr "Pencetus peristiwa tidak selari dikendalikan oleh Penjadual Daemon OTOBO pada latar belakang (disyorkan)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1785,9 +1774,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACLs tidak boleh diimport kerana kesalahan yang tidak dapat dikenalpasti, "
-"sila semak log OTOBO untuk maklumat lanjut"
+msgstr "ACLs tidak boleh diimport kerana kesalahan yang tidak dapat dikenalpasti, sila semak log OTOBO untuk maklumat lanjut"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3216,3 +3203,16 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

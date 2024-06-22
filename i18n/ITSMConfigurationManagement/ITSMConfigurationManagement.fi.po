@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 18:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Finnish <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/fi/>\n"
+"Language-Team: Finnish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,9 +106,7 @@ msgstr "Tämän konfiguraatioelementin nimi"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Nimi on jo käytössä ConfigItems-kohteissa seuraavalla numerolla (seuraavilla "
-"numeroilla): %s."
+msgstr "Nimi on jo käytössä ConfigItems-kohteissa seuraavalla numerolla (seuraavilla numeroilla): %s."
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
@@ -293,8 +290,7 @@ msgstr "ConfigItemID- tai VersionID-numeroa ei ole annettu!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
-"Konfiguraatioelementtiä ei voi näyttää, koska käyttöoikeuksia ei ole annettu!"
+msgstr "Konfiguraatioelementtiä ei voi näyttää, koska käyttöoikeuksia ei ole annettu!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
@@ -334,8 +330,7 @@ msgstr "Config Item hakutulokset"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
-"Elementtiä ei voi näyttää, ConfigItemille ei ole annettu käyttöoikeuksia!"
+msgstr "Elementtiä ei voi näyttää, ConfigItemille ei ole annettu käyttöoikeuksia!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -493,35 +488,35 @@ msgstr "Verkko"
 msgid "Software"
 msgstr "Ohjelmisto"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Vanhentunut"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "Huolto"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilotti"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Suunniteltu"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "Korjaus"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Eläkkeellä"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Arvostelu"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Testi/QA"
 
@@ -763,10 +758,7 @@ msgstr "CMDB-asetukset"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"Tarkista, että nimi on yksilöllinen vain saman ConfigItem-luokan ('class') "
-"sisällä tai globaalisti ('global'), mikä tarkoittaa, että jokainen olemassa "
-"oleva ConfigItem otetaan huomioon, kun etsitään kaksoiskappaleita."
+msgstr "Tarkista, että nimi on yksilöllinen vain saman ConfigItem-luokan ('class') sisällä tai globaalisti ('global'), mikä tarkoittaa, että jokainen olemassa oleva ConfigItem otetaan huomioon, kun etsitään kaksoiskappaleita."
 
 #. SysConfig
 msgid "Config Items"
@@ -782,9 +774,7 @@ msgstr "Määrityskohteen muokkaus."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
-"Määritä kohteen tapahtumamoduuli, joka mahdollistaa kirjaamisen historiaan "
-"agentin käyttöliittymässä."
+msgstr "Määritä kohteen tapahtumamoduuli, joka mahdollistaa kirjaamisen historiaan agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Config item history."
@@ -828,55 +818,35 @@ msgstr "Luo ja hallitse määrittelyjä määrityskohteille."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Määritä toiminnot, joissa asetuspainike on käytettävissä linkitettyjen "
-"objektien widgetissä (LinkObject::ViewMode = \"complex\"). Huomaa, että "
-"näillä toiminnoilla on oltava rekisteröidyt seuraavat JS- ja CSS-tiedostot: "
-"Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js "
-"ja Core.Agent.LinkObject.js."
+msgstr "Määritä toiminnot, joissa asetuspainike on käytettävissä linkitettyjen objektien widgetissä (LinkObject::ViewMode = \"complex\"). Huomaa, että näillä toiminnoilla on oltava rekisteröidyt seuraavat JS- ja CSS-tiedostot: Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ja Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
-"Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden luomiseen yleisen "
-"käyttöliittymän avulla."
+msgstr "Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden luomiseen yleisen käyttöliittymän avulla."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden poistamiseen yleisen "
-"käyttöliittymän avulla."
+msgstr "Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden poistamiseen yleisen käyttöliittymän avulla."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
-"Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakemiseen yleisen "
-"käyttöliittymän avulla."
+msgstr "Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakemiseen yleisen käyttöliittymän avulla."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
-"Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakuun yleisen "
-"käyttöliittymän avulla."
+msgstr "Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakuun yleisen käyttöliittymän avulla."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
-"Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden päivittämiseen yleisen "
-"käyttöliittymän avulla."
+msgstr "Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden päivittämiseen yleisen käyttöliittymän avulla."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
-"Määrittää yleiskatsausmoduulin, joka näyttää kokoonpanokohdeluettelon pienen "
-"näkymän."
+msgstr "Määrittää yleiskatsausmoduulin, joka näyttää kokoonpanokohdeluettelon pienen näkymän."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr ""
-"Määrittää säännölliset lausekkeet erikseen kullekin ConfigItem-luokalle "
-"ConfigItem-nimen tarkistamiseksi ja vastaavien virheilmoitusten "
-"näyttämiseksi."
+msgstr "Määrittää säännölliset lausekkeet erikseen kullekin ConfigItem-luokalle ConfigItem-nimen tarkistamiseksi ja vastaavien virheilmoitusten näyttämiseksi."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
@@ -888,15 +858,11 @@ msgstr "Määrittää hallintakäyttöliittymän CI-määrittelyeditorin rivien 
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Määrittää tapahtumatilojen järjestyksen korkeasta (esim. sydänkohtaus) "
-"matalaan (esim. toiminnallinen)."
+msgstr "Määrittää tapahtumatilojen järjestyksen korkeasta (esim. sydänkohtaus) matalaan (esim. toiminnallinen)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Määrittää asiaankuuluvat käyttöönottotilat, joissa linkitetyt liput voivat "
-"vaikuttaa CI:n tilaan."
+msgstr "Määrittää asiaankuuluvat käyttöönottotilat, joissa linkitetyt liput voivat vaikuttaa CI:n tilaan."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -908,88 +874,35 @@ msgstr "Määrittää AgentITSMConfigItemSearch-näytön hakurajan."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
-"Määrittää konfigurointikohdan yleiskatsauksessa näkyvät sarakkeet. Tällä "
-"vaihtoehdolla ei ole vaikutusta sarakkeen sijaintiin. Huomautus: Luokka-"
-"sarake on aina käytettävissä, jos suodatin 'Kaikki' on valittu."
+msgstr "Määrittää konfigurointikohdan yleiskatsauksessa näkyvät sarakkeet. Tällä vaihtoehdolla ei ole vaikutusta sarakkeen sijaintiin. Huomautus: Luokka-sarake on aina käytettävissä, jos suodatin 'Kaikki' on valittu."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
-"Määrittää näytettävät sarakkeet konfiguraatiokohteen haussa. Tällä "
-"vaihtoehdolla ei ole vaikutusta sarakkeen sijaintiin."
+msgstr "Määrittää näytettävät sarakkeet konfiguraatiokohteen haussa. Tällä vaihtoehdolla ei ole vaikutusta sarakkeen sijaintiin."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Määrittää CI:iden näkyvät sarakkeet konfiguraatiokohteen yleiskatsauksessa "
-"CI-luokan mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja "
-"kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, "
-"jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::"
-"Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-"
-"attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on "
-"käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): "
-"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle "
-"ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Määrittää CI:iden näkyvät sarakkeet konfiguraatiokohteen yleiskatsauksessa CI-luokan mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Määrittää CI:iden näytettävät sarakkeet konfigurointikohdehaussa CI-luokan "
-"mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja "
-"kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, "
-"jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::"
-"Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-"
-"attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on "
-"käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): "
-"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle "
-"ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Määrittää CI:iden näytettävät sarakkeet konfigurointikohdehaussa CI-luokan mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Määrittää CI-luokkien sarakkeet, jotka näkyvät konfigurointikohdevidgetissä "
-"CI-luokan mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja "
-"kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, "
-"jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::"
-"Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-"
-"attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on "
-"käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): "
-"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle "
-"ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa "
-"AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (avain DefaultColumns)."
+msgstr "Määrittää CI-luokkien sarakkeet, jotka näkyvät konfigurointikohdevidgetissä CI-luokan mukaan. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle ei ole merkintää, näytetään oletussarakkeet, jotka on määritelty asetuksessa AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (avain DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Määrittää kaikkien CI-luokkien yhteystietotaulukon monitahoisessa näkymässä "
-"näkyvät CI-sarakkeet. Jos merkintää ei ole, näytetään oletussarakkeet."
+msgstr "Määrittää kaikkien CI-luokkien yhteystietotaulukon monitahoisessa näkymässä näkyvät CI-sarakkeet. Jos merkintää ei ole, näytetään oletussarakkeet."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"Määrittää linkkitaulukon monitahoisessa näkymässä näkyvät CI-sarakkeet CI-"
-"luokasta riippuen. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja "
-"kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, "
-"jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::"
-"Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-"
-"attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on "
-"käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): "
-"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle "
-"ei ole merkintää, näytetään oletussarakkeet."
+msgstr "Määrittää linkkitaulukon monitahoisessa näkymässä näkyvät CI-sarakkeet CI-luokasta riippuen. Jokaisen merkinnän etuliitteenä on oltava luokan nimi ja kaksoispiste (esim. Computer::). On olemassa muutamia CI-attribuutteja, jotka ovat yhteisiä kaikille CI:ille (esimerkki luokan Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Yksittäisten CI-attribuuttien näyttämiseksi CI-määrittelyssä määritellyllä tavalla on käytettävä seuraavaa kaavaa (esimerkki luokan Computer osalta): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Jos CI-luokalle ei ole merkintää, näytetään oletussarakkeet."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Määrittää, minkä tyyppinen linkki (nimetty tiketin näkökulmasta) voi "
-"vaikuttaa linkitetyn CI:n tilaan."
+msgstr "Määrittää, minkä tyyppinen linkki (nimetty tiketin näkökulmasta) voi vaikuttaa linkitetyn CI:n tilaan."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
@@ -1009,30 +922,19 @@ msgstr "Kaksoiskappaleet"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
-"Ottaa käyttöön konfiguraatiokohteen massatoiminto-ominaisuuden, jonka avulla "
-"agentin etusivu voi käsitellä useampaa kuin yhtä konfiguraatiokohdetta "
-"kerrallaan."
+msgstr "Ottaa käyttöön konfiguraatiokohteen massatoiminto-ominaisuuden, jonka avulla agentin etusivu voi käsitellä useampaa kuin yhtä konfiguraatiokohdetta kerrallaan."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
-"Ottaa käyttöön määrityskohteiden massatoimintatoiminnon vain luetelluille "
-"ryhmille."
+msgstr "Ottaa käyttöön määrityskohteiden massatoimintatoiminnon vain luetelluille ryhmille."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"Ottaa käyttöön tai poistaa käytöstä toiminnon, jolla tarkistetaan "
-"ConfigItems-kohteiden yksilölliset nimet. Ennen tämän vaihtoehdon ottamista "
-"käyttöön sinun tulisi tarkistaa järjestelmäsi jo olemassa olevien "
-"ConfigItems-kohteiden kaksoiskappaleiden nimien varalta. Voit tehdä tämän "
-"skriptillä bin/otobo.ITSMConfigItemListDuplicates.pl."
+msgstr "Ottaa käyttöön tai poistaa käytöstä toiminnon, jolla tarkistetaan ConfigItems-kohteiden yksilölliset nimet. Ennen tämän vaihtoehdon ottamista käyttöön sinun tulisi tarkistaa järjestelmäsi jo olemassa olevien ConfigItems-kohteiden kaksoiskappaleiden nimien varalta. Voit tehdä tämän skriptillä bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
-"Tapahtumamoduuli, joka asettaa konfigitem-tilan ticket-configitem-linkille."
+msgstr "Tapahtumamoduuli, joka asettaa konfigitem-tilan ticket-configitem-linkille."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -1044,8 +946,7 @@ msgstr "Moduuli luokasta vastaavan ryhmän tarkistamiseksi."
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
-"Moduuli, jolla voit tarkistaa konfiguraatioelementistä vastaavan ryhmän."
+msgstr "Moduuli, jolla voit tarkistaa konfiguraatioelementistä vastaavan ryhmän."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
@@ -1061,24 +962,15 @@ msgstr "Yleiskatsaus."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Parametrit asiakasyrityksen kojelaudan taustapäätteelle config item overview "
-"of the agent interface . \"Limit\" on oletusarvoisesti näytettävien "
-"merkintöjen määrä. \"Group\" rajoittaa lisäosan käyttöoikeuksia (esim. Group:"
-" admin;group1;group2;). \"Default\" määrittää, onko lisäosa oletusarvoisesti "
-"käytössä vai pitääkö käyttäjän ottaa se käyttöön manuaalisesti. "
-"\"CacheTTLLocal\" on liitännäisen välimuistiaika minuutteina."
+msgstr "Parametrit asiakasyrityksen kojelaudan taustapäätteelle config item overview of the agent interface . \"Limit\" on oletusarvoisesti näytettävien merkintöjen määrä. \"Group\" rajoittaa lisäosan käyttöoikeuksia (esim. Group: admin;group1;group2;). \"Default\" määrittää, onko lisäosa oletusarvoisesti käytössä vai pitääkö käyttäjän ottaa se käyttöön manuaalisesti. \"CacheTTLLocal\" on liitännäisen välimuistiaika minuutteina."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
-"Käyttöönottotilojen värin parametrit agentin käyttöliittymän preferences-"
-"näkymässä."
+msgstr "Käyttöönottotilojen värin parametrit agentin käyttöliittymän preferences-näkymässä."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
-"Käyttöönottotilojen parametrit agentin käyttöliittymän preferences-näkymässä."
+msgstr "Käyttöönottotilojen parametrit agentin käyttöliittymän preferences-näkymässä."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
@@ -1094,45 +986,31 @@ msgstr "Luparyhmä"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat oikeudet ITSM-konfiguraatiokohteiden näytön käyttämiseen "
-"agenttikäyttöliittymässä."
+msgstr "Tarvittavat oikeudet ITSM-konfiguraatiokohteiden näytön käyttämiseen agenttikäyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden hakunäytön "
-"käyttämiseen agentin käyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden hakunäytön käyttämiseen agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteen zoomausnäytön "
-"käyttämiseen agentin käyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteen zoomausnäytön käyttämiseen agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet agenttikäyttöliittymän add ITSM configuration "
-"item -näytön käyttämiseen."
+msgstr "Tarvittavat käyttöoikeudet agenttikäyttöliittymän add ITSM configuration item -näytön käyttämiseen."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteen muokkausnäytön "
-"käyttämiseen agenttikäyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteen muokkausnäytön käyttämiseen agenttikäyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden historia-näytön "
-"käyttämiseen agentin käyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden historia-näytön käyttämiseen agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteiden tulostaminen -näytön "
-"käyttämiseen agenttikäyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteiden tulostaminen -näytön käyttämiseen agenttikäyttöliittymässä."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1144,11 +1022,7 @@ msgstr "Haku konfigurointielementit."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"Valitaan konfiguraatiokohteen numerogeneraattorimoduuli. \"AutoIncrement\" "
-"kasvattaa konfiguraatiokohteen numeroa, käytetään SystemID:tä, "
-"ConfigItemClassID:tä ja laskuria. Muoto on \"SystemID.ConfigItemClassID."
-"Counter\", esim. 1205000004, 1205000005."
+msgstr "Valitaan konfiguraatiokohteen numerogeneraattorimoduuli. \"AutoIncrement\" kasvattaa konfiguraatiokohteen numeroa, käytetään SystemID:tä, ConfigItemClassID:tä ja laskuria. Muoto on \"SystemID.ConfigItemClassID.Counter\", esim. 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
@@ -1156,8 +1030,7 @@ msgstr "Aseta CI:n tapahtumatila automaattisesti, kun lippu linkitetään CI:hen
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Asettaa käyttöönoton tilan agenttiliittymän määrityskohteen bulk-näytössä."
+msgstr "Asettaa käyttöönoton tilan agenttiliittymän määrityskohteen bulk-näytössä."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
@@ -1165,76 +1038,51 @@ msgstr "Asettaa tapahtumatilan agenttiliittymän määrityskohteen bulk-näytös
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla konfigurointikohde voidaan yhdistää "
-"toiseen kohteeseen agentin käyttöliittymän konfigurointikohteen "
-"zoomausnäkymässä."
+msgstr "Näyttää valikossa linkin, jonka avulla konfigurointikohde voidaan yhdistää toiseen kohteeseen agentin käyttöliittymän konfigurointikohteen zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla pääsee määrityskohteen historiaan "
-"agenttikäyttöliittymän määrityskohteiden yleiskatsauksessa."
+msgstr "Näyttää valikossa linkin, jonka avulla pääsee määrityskohteen historiaan agenttikäyttöliittymän määrityskohteiden yleiskatsauksessa."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla pääsee määrityskohteen historiaan "
-"agentin käyttöliittymän zoomausnäkymässä."
+msgstr "Näyttää valikossa linkin, jonka avulla pääsee määrityskohteen historiaan agentin käyttöliittymän zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit poistaa määrityskohteen agentin "
-"käyttöliittymän zoomausnäkymässä."
+msgstr "Näyttää valikossa linkin, jonka avulla voit poistaa määrityskohteen agentin käyttöliittymän zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jolla voit kopioida määrityskohteen "
-"agenttiliittymän määrityskohteiden yleiskatsauksessa."
+msgstr "Näyttää valikossa linkin, jolla voit kopioida määrityskohteen agenttiliittymän määrityskohteiden yleiskatsauksessa."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit kopioida määrityskohteen agentin "
-"käyttöliittymän zoomausnäkymässä."
+msgstr "Näyttää valikossa linkin, jonka avulla voit kopioida määrityskohteen agentin käyttöliittymän zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Näyttää linkin valikkoon, jonka avulla voit muokata määrityskohdetta agentin "
-"käyttöliittymän zoomausnäkymässä."
+msgstr "Näyttää linkin valikkoon, jonka avulla voit muokata määrityskohdetta agentin käyttöliittymän zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit palata takaisin agentin "
-"käyttöliittymän määrityskohteen zoomausnäkymään."
+msgstr "Näyttää valikossa linkin, jonka avulla voit palata takaisin agentin käyttöliittymän määrityskohteen zoomausnäkymään."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit tulostaa määrityskohteen agentin "
-"käyttöliittymän zoomausnäkymässä."
+msgstr "Näyttää valikossa linkin, jonka avulla voit tulostaa määrityskohteen agentin käyttöliittymän zoomausnäkymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit zoomata määrityskohteeseen "
-"agenttikäyttöliittymän määrityskohteiden yleiskatsauksessa."
+msgstr "Näyttää valikossa linkin, jonka avulla voit zoomata määrityskohteeseen agenttikäyttöliittymän määrityskohteiden yleiskatsauksessa."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
-"Näyttää määrityskohteiden historian (käänteisessä järjestyksessä) "
-"agenttiliittymässä."
+msgstr "Näyttää määrityskohteiden historian (käänteisessä järjestyksessä) agenttiliittymässä."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
-"Konfiguraatioelementin tunniste, esim. ConfigItem#, MyConfigItem#. "
-"Oletusarvo on ConfigItem#."
+msgstr "Konfiguraatioelementin tunniste, esim. ConfigItem#, MyConfigItem#. Oletusarvo on ConfigItem#."
 
 #. SysConfig
 msgid "class"
@@ -1266,10 +1114,7 @@ msgstr "Ready2Import-luokkakokonaisuudet"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Täältä voit tuoda Ready2Import-luokkakokonaisuuksia, jotka esittelevät "
-"tavallisimpia konfigurointikohteitamme. Huomaa, että joitakin "
-"lisäkonfiguraatioita saatetaan tarvita."
+msgstr "Täältä voit tuoda Ready2Import-luokkakokonaisuuksia, jotka esittelevät tavallisimpia konfigurointikohteitamme. Huomaa, että joitakin lisäkonfiguraatioita saatetaan tarvita."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1289,9 +1134,7 @@ msgstr "Tämän konfiguraatioelementin versionumero"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Versioluku on jo käytössä ConfigItemsissa, joilla on seuraava(t) numero(t): "
-"%s"
+msgstr "Versioluku on jo käytössä ConfigItemsissa, joilla on seuraava(t) numero(t): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1339,9 +1182,7 @@ msgstr "Seuraavat roolit tuodaan"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Huomaa, että myös vastaavat dynaamiset kentät ja GeneralCatalog-luokat "
-"luodaan, eikä niitä poisteta automaattisesti."
+msgstr "Huomaa, että myös vastaavat dynaamiset kentät ja GeneralCatalog-luokat luodaan, eikä niitä poisteta automaattisesti."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1381,9 +1222,7 @@ msgstr "Luokkarajoitukset konfigurointikohdetta varten"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Valitse yksi tai useampi luokka rajoittaaksesi valittavissa olevia "
-"konfiguraatiokohteita."
+msgstr "Valitse yksi tai useampi luokka rajoittaaksesi valittavissa olevia konfiguraatiokohteita."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1407,9 +1246,7 @@ msgstr "Linkki Suunta"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Viittaava objekti on se, joka sisältää tämän dynaamisen kentän, ja viitattu "
-"objekti on se, joka on valittu dynaamisen kentän arvoksi."
+msgstr "Viittaava objekti on se, joka sisältää tämän dynaamisen kentän, ja viitattu objekti on se, joka on valittu dynaamisen kentän arvoksi."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1425,10 +1262,7 @@ msgstr "Linkki Viittaustyyppi"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Koskeeko tämä linkki ConfigItem-objektia vai viittaavan objektin staattista "
-"versiota. Current Incident State -laskenta suoritetaan vain dynaamisille "
-"linkeille."
+msgstr "Koskeeko tämä linkki ConfigItem-objektia vai viittaavan objektin staattista versiota. Current Incident State -laskenta suoritetaan vain dynaamisille linkeille."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1460,9 +1294,7 @@ msgstr "Virhe määritelmien synkronoinnissa. Tarkista loki."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Sinulla on ITSMConfigItem-määrityksiä, joita ei ole synkronoitu. Ota "
-"käyttöön ITSMConfigItem-dynaamisten kenttien muutokset."
+msgstr "Sinulla on ITSMConfigItem-määrityksiä, joita ei ole synkronoitu. Ota käyttöön ITSMConfigItem-dynaamisten kenttien muutokset."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1482,19 +1314,11 @@ msgstr "1 - Kuvassa"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Mahdollistaa laajennetut hakuehdot agentin käyttöliittymän "
-"konfigurointikohdehaussa. Tämän ominaisuuden avulla voit hakea esim. "
-"konfiguraatioelementin nimeä tällaisilla ehdoilla kuten \"(*key1*&&*key2*)\" "
-"tai \"(*key1*||*key2*)\"."
+msgstr "Mahdollistaa laajennetut hakuehdot agentin käyttöliittymän konfigurointikohdehaussa. Tämän ominaisuuden avulla voit hakea esim. konfiguraatioelementin nimeä tällaisilla ehdoilla kuten \"(*key1*&&*key2*)\" tai \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Mahdollistaa laajennetut hakuehdot asiakkaan käyttöliittymän "
-"konfiguraatiokohteiden haussa. Tämän ominaisuuden avulla voit hakea esim. "
-"konfiguraatioelementin nimeä tällaisilla ehdoilla kuten \"(*key1*&&*key2*)\" "
-"tai \"(*key1*||*key2*)\"."
+msgstr "Mahdollistaa laajennetut hakuehdot asiakkaan käyttöliittymän konfiguraatiokohteiden haussa. Tämän ominaisuuden avulla voit hakea esim. konfiguraatioelementin nimeä tällaisilla ehdoilla kuten \"(*key1*&&*key2*)\" tai \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1518,28 +1342,19 @@ msgstr "Valitse luokat, jotka osoitetaan tälle määrityskohdeluokalle."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
-"Sarakkeen ConfigItem-kohteen suodattimet ConfigItem Overview -kohteelle."
+msgstr "Sarakkeen ConfigItem-kohteen suodattimet ConfigItem Overview -kohteelle."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Sarakkeet, joita voidaan suodattaa agentin käyttöliittymän määrityskohteiden "
-"yleiskatsauksessa. Huomautus: Vain Config Item -attribuutit ja dynaamiset "
-"kentät (DynamicField_NameX) ovat sallittuja."
+msgstr "Sarakkeet, joita voidaan suodattaa agentin käyttöliittymän määrityskohteiden yleiskatsauksessa. Huomautus: Vain Config Item -attribuutit ja dynaamiset kentät (DynamicField_NameX) ovat sallittuja."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Sarakkeet, joita voidaan suodattaa asiakkaan käyttöliittymän "
-"määrityskohteiden yleiskatsauksessa. Huomautus: Vain Config Item -"
-"attribuutit ja dynaamiset kentät (DynamicField_NameX) ovat sallittuja."
+msgstr "Sarakkeet, joita voidaan suodattaa asiakkaan käyttöliittymän määrityskohteiden yleiskatsauksessa. Huomautus: Vain Config Item -attribuutit ja dynaamiset kentät (DynamicField_NameX) ovat sallittuja."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Konfig-kohteen tapahtumamoduuli, joka päivittää konfig-kohteet niiden "
-"nykyiseen määritelmään."
+msgstr "Konfig-kohteen tapahtumamoduuli, joka päivittää konfig-kohteet niiden nykyiseen määritelmään."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
@@ -1559,18 +1374,11 @@ msgstr "ConfigItem Version"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"Seuraavien luokkien ConfigItems-elementtejä ei tallenneta Elasticsearch-"
-"palvelimelle. Jotta tätä voidaan soveltaa olemassa oleviin CI:hin, CI-siirto "
-"on suoritettava konsolin kautta tämän vaihtoehdon muuttamisen jälkeen."
+msgstr "Seuraavien luokkien ConfigItems-elementtejä ei tallenneta Elasticsearch-palvelimelle. Jotta tätä voidaan soveltaa olemassa oleviin CI:hin, CI-siirto on suoritettava konsolin kautta tämän vaihtoehdon muuttamisen jälkeen."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems-kohteita, joilla on seuraavat käyttöönottotilat, ei tallenneta "
-"Elasticsearch-palvelimelle. Jotta tätä voidaan soveltaa olemassa oleviin CI:"
-"hin, CI-siirto on suoritettava konsolin kautta tämän vaihtoehdon muuttamisen "
-"jälkeen."
+msgstr "ConfigItems-kohteita, joilla on seuraavat käyttöönottotilat, ei tallenneta Elasticsearch-palvelimelle. Jotta tätä voidaan soveltaa olemassa oleviin CI:hin, CI-siirto on suoritettava konsolin kautta tämän vaihtoehdon muuttamisen jälkeen."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1578,102 +1386,59 @@ msgstr "Asiakkaat voivat nähdä historialliset CI-versiot."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
-"Asiakkailla on mahdollisuus vaihtaa manuaalisesti historiallisten CI-"
-"versioiden välillä."
+msgstr "Asiakkailla on mahdollisuus vaihtaa manuaalisesti historiallisten CI-versioiden välillä."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Oletusarvoiset tiedot, joita käytetään määritteen määrittelykohteen "
-"hakunäytössä. Esimerkki: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfi"
-"gItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "Oletusarvoiset tiedot, joita käytetään määritteen määrittelykohteen hakunäytössä. Esimerkki: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Oletusarvoiset tiedot, joita käytetään määritteen määrittelykohteen "
-"hakunäytössä. Esimerkki: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigI"
-"temCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemC"
-"reateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCre"
-"ateTimeStopDay=3;\"."
+msgstr "Oletusarvoiset tiedot, joita käytetään määritteen määrittelykohteen hakunäytössä. Esimerkki: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Määritä Template::Toolkit-skeema versiojonoja varten. Käytetään vain, jos "
-"Version String Module -moduulin arvoksi on asetettu TemplateToolkit."
+msgstr "Määritä Template::Toolkit-skeema versiojonoja varten. Käytetään vain, jos Version String Module -moduulin arvoksi on asetettu TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Määritä joukko ehtoja, joiden mukaisesti asiakas saa nähdä "
-"konfigurointikohteen. Ehdot voidaan valinnaisesti rajoittaa tiettyihin "
-"asiakasryhmiin. Nimi on ainoa pakollinen määrite. Jos muita vaihtoehtoja ei "
-"anneta, kaikki konfigurointikohteet näkyvät kyseisessä luokassa."
+msgstr "Määritä joukko ehtoja, joiden mukaisesti asiakas saa nähdä konfigurointikohteen. Ehdot voidaan valinnaisesti rajoittaa tiettyihin asiakasryhmiin. Nimi on ainoa pakollinen määrite. Jos muita vaihtoehtoja ei anneta, kaikki konfigurointikohteet näkyvät kyseisessä luokassa."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
-"Määrittää, onko linkin tyypin merkinnät näytettävä solmujen yhteyksissä."
+msgstr "Määrittää, onko linkin tyypin merkinnät näytettävä solmujen yhteyksissä."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Määrittää käytettävissä olevat CI-sarakkeet konfigurointikohteen "
-"yleiskatsauksessa CI-luokan mukaan. Jokaisen merkinnän on koostuttava luokan "
-"nimestä ja kyseisen luokan käytettävissä olevien kenttien joukosta. "
-"Dynaamisten kenttien merkintöjen on noudatettava kaavaa "
-"DynamicField_FieldName."
+msgstr "Määrittää käytettävissä olevat CI-sarakkeet konfigurointikohteen yleiskatsauksessa CI-luokan mukaan. Jokaisen merkinnän on koostuttava luokan nimestä ja kyseisen luokan käytettävissä olevien kenttien joukosta. Dynaamisten kenttien merkintöjen on noudatettava kaavaa DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Määrittää oletusarvoisen konfigurointikohdetta koskevan attribuutin "
-"agenttiliittymän konfigurointikohdehakutuloksen lajittelua varten."
+msgstr "Määrittää oletusarvoisen konfigurointikohdetta koskevan attribuutin agenttiliittymän konfigurointikohdehakutuloksen lajittelua varten."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Määrittää oletusarvoisen konfiguraatiokohdeattribuutin asiakkaan "
-"käyttöliittymän konfiguraatiokohteiden hakutuloksen lajittelua varten."
+msgstr "Määrittää oletusarvoisen konfiguraatiokohdeattribuutin asiakkaan käyttöliittymän konfiguraatiokohteiden hakutuloksen lajittelua varten."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Määrittää oletusarvoisen konfiguraatiokohteen attribuutin "
-"konfiguraatiokohteen lajittelua varten tämän toiminnon konfiguraatiokohteen "
-"hakutuloksessa."
+msgstr "Määrittää oletusarvoisen konfiguraatiokohteen attribuutin konfiguraatiokohteen lajittelua varten tämän toiminnon konfiguraatiokohteen hakutuloksessa."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Määrittää konfiguraatiokohteiden oletusjärjestyksen agenttiliittymän "
-"konfiguraatiokohteiden hakutuloksissa. Ylös: vanhin päällimmäisenä. Alas: "
-"uusin on päällimmäisenä."
+msgstr "Määrittää konfiguraatiokohteiden oletusjärjestyksen agenttiliittymän konfiguraatiokohteiden hakutuloksissa. Ylös: vanhin päällimmäisenä. Alas: uusin on päällimmäisenä."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Määrittää konfiguraatiokohteiden oletusjärjestyksen asiakkaan "
-"käyttöliittymän konfiguraatiokohteiden hakutuloksissa. Ylös: vanhin "
-"päällimmäisenä. Alas: uusin on ylhäällä."
+msgstr "Määrittää konfiguraatiokohteiden oletusjärjestyksen asiakkaan käyttöliittymän konfiguraatiokohteiden hakutuloksissa. Ylös: vanhin päällimmäisenä. Alas: uusin on ylhäällä."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Määrittää konfiguraatiokohteiden oletusjärjestyksen tämän toiminnon "
-"konfiguraatiokohteiden hakutuloksessa. Ylös: Vanhin on ylhäällä. Alas: uusin "
-"on ylhäällä."
+msgstr "Määrittää konfiguraatiokohteiden oletusjärjestyksen tämän toiminnon konfiguraatiokohteiden hakutuloksessa. Ylös: Vanhin on ylhäällä. Alas: uusin on ylhäällä."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Määrittää CI:iden oletussarakkeet, jotka näkyvät konfigurointikohteen "
-"yleiskatsauksessa CI-luokasta riippuen. Jokaisen merkinnän on koostuttava "
-"luokan nimestä ja kyseisen luokan käytettävissä olevien kenttien joukosta. "
-"Dynaamisten kenttien merkintöjen on noudatettava kaavaa "
-"DynamicField_FieldName."
+msgstr "Määrittää CI:iden oletussarakkeet, jotka näkyvät konfigurointikohteen yleiskatsauksessa CI-luokasta riippuen. Jokaisen merkinnän on koostuttava luokan nimestä ja kyseisen luokan käytettävissä olevien kenttien joukosta. Dynaamisten kenttien merkintöjen on noudatettava kaavaa DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1681,32 +1446,11 @@ msgstr "Määrittää näytettävien suhteiden oletussyvyyden."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Määrittää oletusarvoisesti näytettävän konfiguraatiokohteen hakuattribuutin "
-"konfiguraatiokohteen hakunäytölle."
+msgstr "Määrittää oletusarvoisesti näytettävän konfiguraatiokohteen hakuattribuutin konfiguraatiokohteen hakunäytölle."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Määrittää oletusarvoisesti näytettävän konfiguraatiokohteen hakuattribuutin "
-"konfiguraatiokohteen hakunäytölle. Esimerkki: \"Avain\" on oltava dynaamisen "
-"kentän nimi tässä tapauksessa 'X', \"Sisältö\" on oltava dynaamisen kentän "
-"arvo dynaamisen kentän tyypistä riippuen, Teksti: 'teksti', Pudotusvalikko: "
-"'1', Päivämäärä/Aika: 'Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00; "
-"Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59;' ja tai "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Määrittää oletusarvoisesti näytettävän konfiguraatiokohteen hakuattribuutin konfiguraatiokohteen hakunäytölle. Esimerkki: \"Avain\" on oltava dynaamisen kentän nimi tässä tapauksessa 'X', \"Sisältö\" on oltava dynaamisen kentän arvo dynaamisen kentän tyypistä riippuen, Teksti: 'teksti', Pudotusvalikko: '1', Päivämäärä/Aika: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' ja tai 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1718,21 +1462,15 @@ msgstr "Määrittää CustomerITSMConfigItemSearch-näytön hakurajan."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Määrittää, mitkä kohteet ovat käytettävissä \"Action\" -toimintoa varten "
-"ITSM Config Item ACL -rakenteen kolmannella tasolla."
+msgstr "Määrittää, mitkä kohteet ovat käytettävissä \"Action\" -toimintoa varten ITSM Config Item ACL -rakenteen kolmannella tasolla."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Määrittää, mitkä kohteet ovat käytettävissä ITSM Config Item ACL -rakenteen "
-"ensimmäisellä tasolla."
+msgstr "Määrittää, mitkä kohteet ovat käytettävissä ITSM Config Item ACL -rakenteen ensimmäisellä tasolla."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Määrittää, mitkä kohteet ovat käytettävissä ITSM Config Item ACL -rakenteen "
-"toisella tasolla."
+msgstr "Määrittää, mitkä kohteet ovat käytettävissä ITSM Config Item ACL -rakenteen toisella tasolla."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1748,65 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Dynaamisten kenttien tapahtumamoduuli, joka merkitsee konfiguraatiokohteen "
-"määritelmät epäsynkronisiksi, jos dynaamisia kenttiä sisältävät kentät "
-"muuttuvat."
+msgstr "Dynaamisten kenttien tapahtumamoduuli, joka merkitsee konfiguraatiokohteen määritelmät epäsynkronisiksi, jos dynaamisia kenttiä sisältävät kentät muuttuvat."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Dynaamiset kentät, jotka näkyvät asiamiehen käyttöliittymän ITSM-"
-"lisäkenttänäytössä."
+msgstr "Dynaamiset kentät, jotka näkyvät asiamiehen käyttöliittymän ITSM-lisäkenttänäytössä."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Dynaamiset kentät, jotka näkyvät asiakkaan käyttöliittymän "
-"konfigurointikohteen yleiskatsausnäytössä."
+msgstr "Dynaamiset kentät, jotka näkyvät asiakkaan käyttöliittymän konfigurointikohteen yleiskatsausnäytössä."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Dynaamiset kentät, jotka näkyvät agentin käyttöliittymän määrityskohteen "
-"hakunäytössä."
+msgstr "Dynaamiset kentät, jotka näkyvät agentin käyttöliittymän määrityskohteen hakunäytössä."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Ottaa käyttöön tai poistaa käytöstä toiminnon, jolla tarkistetaan ITSM "
-"onfiguration -kohteiden yksilölliset nimet. Ennen tämän vaihtoehdon "
-"ottamista käyttöön sinun tulisi tarkistaa järjestelmäsi jo olemassa olevien "
-"konfigurointielementtien kaksoiskappaleiden nimet. Voit tehdä tämän konsolin "
-"komennolla Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Ottaa käyttöön tai poistaa käytöstä toiminnon, jolla tarkistetaan ITSM onfiguration -kohteiden yksilölliset nimet. Ennen tämän vaihtoehdon ottamista käyttöön sinun tulisi tarkistaa järjestelmäsi jo olemassa olevien konfigurointielementtien kaksoiskappaleiden nimet. Voit tehdä tämän konsolin komennolla Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Kokotekstihaussa käytettävät konfiguraatiokohteen indeksin kentät. Kentät "
-"tallennetaan myös, mutta ne eivät ole pakollisia yleisen toiminnallisuuden "
-"kannalta. Liitetiedostojen sisällyttäminen voidaan estää asettamalla "
-"merkinnän arvoksi 0 tai poistamalla se."
+msgstr "Kokotekstihaussa käytettävät konfiguraatiokohteen indeksin kentät. Kentät tallennetaan myös, mutta ne eivät ole pakollisia yleisen toiminnallisuuden kannalta. Liitetiedostojen sisällyttäminen voidaan estää asettamalla merkinnän arvoksi 0 tai poistamalla se."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Määrityskohdeindeksiin tallennetut kentät, joita käytetään muuhun kuin "
-"kokotekstihakuun. Täydellisen toiminnallisuuden kannalta kaikki kentät ovat "
-"pakollisia."
+msgstr "Määrityskohdeindeksiin tallennetut kentät, joita käytetään muuhun kuin kokotekstihakuun. Täydellisen toiminnallisuuden kannalta kaikki kentät ovat pakollisia."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Jokaiselle verkkopalvelulle (avain) voidaan määritellä joukko luokkia (arvo)"
-", joihin tuonti on rajoitettu. Kaikille valituille luokille tai kaikille "
-"olemassa oleville luokille on valittava tunnistavat attribuutit kutsujan "
-"konfiguraatiossa."
+msgstr "Jokaiselle verkkopalvelulle (avain) voidaan määritellä joukko luokkia (arvo), joihin tuonti on rajoitettu. Kaikille valituille luokille tai kaikille olemassa oleville luokille on valittava tunnistavat attribuutit kutsujan konfiguraatiossa."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"GenericInterface-moduulin rekisteröinti ConfigItemFetch-kutsukerrosta varten."
+msgstr "GenericInterface-moduulin rekisteröinti ConfigItemFetch-kutsukerrosta varten."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1822,21 +1534,15 @@ msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Sisältää käyttöönottotilat asiakkaan käyttöliittymän "
-"konfigurointikohdehaussa."
+msgstr "Sisältää käyttöönottotilat asiakkaan käyttöliittymän konfigurointikohdehaussa."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Sisältää vaaratilanteiden tilat asiakkaan käyttöliittymän "
-"konfigurointikohdehaussa."
+msgstr "Sisältää vaaratilanteiden tilat asiakkaan käyttöliittymän konfigurointikohdehaussa."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Tämän toiminnon tuloksena näytettävien konfigurointielementtien "
-"enimmäismäärä."
+msgstr "Tämän toiminnon tuloksena näytettävien konfigurointielementtien enimmäismäärä."
 
 #. SysConfig
 msgid "Name Module"
@@ -1848,104 +1554,67 @@ msgstr "Numeromoduuli"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Agentin käyttöliittymässä kullakin hakutulossivulla näytettävien "
-"määrityskohteiden määrä."
+msgstr "Agentin käyttöliittymässä kullakin hakutulossivulla näytettävien määrityskohteiden määrä."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Asiakkaan käyttöliittymässä kullakin hakutulossivulla näytettävien "
-"määrityskohteiden määrä."
+msgstr "Asiakkaan käyttöliittymässä kullakin hakutulossivulla näytettävien määrityskohteiden määrä."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Etsittävät kohteet, kuinka monta merkintää ja mitkä ominaisuudet näytetään. "
-"ConfigItem-attribuutit on tallennettava nimenomaisesti Elasticsearchin "
-"kautta."
+msgstr "Etsittävät kohteet, kuinka monta merkintää ja mitkä ominaisuudet näytetään. ConfigItem-attribuutit on tallennettava nimenomaisesti Elasticsearchin kautta."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agenttikäyttöliittymän preferences-näkymän konfigurointikohdeluokkien "
-"luokkien parametrit."
+msgstr "Agenttikäyttöliittymän preferences-näkymän konfigurointikohdeluokkien luokkien parametrit."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parametrit pienten konfigurointikohteiden yleiskatsauksen sarakesuodattimia "
-"varten. Huomaa: 'Aktiivinen'-asetuksen asettaminen arvoon 0 estää vain "
-"agentteja muokkaamasta tämän ryhmän asetuksia henkilökohtaisissa "
-"asetuksissaan, mutta sallii silti järjestelmänvalvojien muokata toisen "
-"käyttäjän asetuksia. Käytä 'PreferenceGroup'-kohtaa, kun haluat hallita, "
-"millä alueella nämä asetukset näytetään käyttöliittymässä."
+msgstr "Parametrit pienten konfigurointikohteiden yleiskatsauksen sarakesuodattimia varten. Huomaa: 'Aktiivinen'-asetuksen asettaminen arvoon 0 estää vain agentteja muokkaamasta tämän ryhmän asetuksia henkilökohtaisissa asetuksissaan, mutta sallii silti järjestelmänvalvojien muokata toisen käyttäjän asetuksia. Käytä 'PreferenceGroup'-kohtaa, kun haluat hallita, millä alueella nämä asetukset näytetään käyttöliittymässä."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agentin käyttöliittymän preferences-näkymässä olevien "
-"konfigurointikohdeluokkien nimimoduulin parametrit."
+msgstr "Agentin käyttöliittymän preferences-näkymässä olevien konfigurointikohdeluokkien nimimoduulin parametrit."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agenttikäyttöliittymän preferences-näkymässä olevien "
-"konfigurointikohdeluokkien numeromoduulin parametrit."
+msgstr "Agenttikäyttöliittymän preferences-näkymässä olevien konfigurointikohdeluokkien numeromoduulin parametrit."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agentin käyttöliittymän preferences-näkymässä olevien konfigurointiluokkien "
-"version merkkijonomoduulin parametrit."
+msgstr "Agentin käyttöliittymän preferences-näkymässä olevien konfigurointiluokkien version merkkijonomoduulin parametrit."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agentin käyttöliittymän preferences-näkymässä olevien "
-"konfigurointikohdeluokkien version merkkijonomalli-työkalupakkimoduulin "
-"parametrit."
+msgstr "Agentin käyttöliittymän preferences-näkymässä olevien konfigurointikohdeluokkien version merkkijonomalli-työkalupakkimoduulin parametrit."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Agenttikäyttöliittymän preferences-näkymässä olevien konfigurointiluokkien "
-"versiolaukaisimen parametrit."
+msgstr "Agenttikäyttöliittymän preferences-näkymässä olevien konfigurointiluokkien versiolaukaisimen parametrit."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Suorittaa määritetyn toiminnon kullekin tapahtumalle (kutsujana) kunkin "
-"määritetyn verkkopalvelun osalta."
+msgstr "Suorittaa määritetyn toiminnon kullekin tapahtumalle (kutsujana) kunkin määritetyn verkkopalvelun osalta."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteen kiinnitystoiminnon "
-"käyttämiseen agentin käyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteen kiinnitystoiminnon käyttämiseen agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden hakunäytön "
-"käyttämiseen asiakkaan käyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-konfiguraatiokohteiden hakunäytön käyttämiseen asiakkaan käyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteiden puunäkymän näyttöön "
-"agenttikäyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM-kokoonpanokohteiden puunäkymän näyttöön agenttikäyttöliittymässä."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Tarvittavat käyttöoikeudet ITSM:n määrityskohteiden irtotavaranäytön "
-"käyttämiseen agenttikäyttöliittymässä."
+msgstr "Tarvittavat käyttöoikeudet ITSM:n määrityskohteiden irtotavaranäytön käyttämiseen agenttikäyttöliittymässä."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Näyttää valikossa linkin, joka näyttää määrityskohteiden linkit puunäkymässä."
+msgstr "Näyttää valikossa linkin, joka näyttää määrityskohteiden linkit puunäkymässä."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -1969,11 +1638,7 @@ msgstr "Versio Laukaisin"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Voidaanko ConfigItemACL:n suorittaminen välttää tarkistamalla välimuistiin "
-"tallennettujen kenttien riippuvuudet. Tämä voi parantaa lomakkeiden "
-"latausaikoja, mutta se on poistettava käytöstä, jos ACLModuleja käytetään "
-"ITSMConfigItem- ja Form-ReturnTypes-tyypeissä."
+msgstr "Voidaanko ConfigItemACL:n suorittaminen välttää tarkistamalla välimuistiin tallennettujen kenttien riippuvuudet. Tämä voi parantaa lomakkeiden latausaikoja, mutta se on poistettava käytöstä, jos ACLModuleja käytetään ITSMConfigItem- ja Form-ReturnTypes-tyypeissä."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1985,9 +1650,7 @@ msgstr "Yleiset kutsujan tiedot"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Tätä OTOBO invoker backend -moduulia kutsutaan valmistelemaan "
-"etäjärjestelmään lähetettävät tiedot ja käsittelemään sen vastaustiedot."
+msgstr "Tätä OTOBO invoker backend -moduulia kutsutaan valmistelemaan etäjärjestelmään lähetettävät tiedot ja käsittelemään sen vastaustiedot."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1999,15 +1662,11 @@ msgstr "Kartoitus"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"OTOBO:n kutsujalta saatuja tietoja käsitellään tässä kartoituksessa, jotta "
-"ne voidaan muuntaa etäjärjestelmän odottamiksi tiedoiksi."
+msgstr "OTOBO:n kutsujalta saatuja tietoja käsitellään tässä kartoituksessa, jotta ne voidaan muuntaa etäjärjestelmän odottamiksi tiedoiksi."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Vastaustiedot käsitellään tällä kartoituksella, jotta ne voidaan muuntaa "
-"sellaisiksi, joita OTOBO:n kutsuja odottaa."
+msgstr "Vastaustiedot käsitellään tällä kartoituksella, jotta ne voidaan muuntaa sellaisiksi, joita OTOBO:n kutsuja odottaa."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -2023,9 +1682,7 @@ msgstr "Lisää tapahtuma"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"OTOBO Scheduler Daemon käsittelee asynkroniset tapahtumalaukaisut taustalla "
-"(suositellaan)."
+msgstr "OTOBO Scheduler Daemon käsittelee asynkroniset tapahtumalaukaisut taustalla (suositellaan)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -2085,9 +1742,7 @@ msgstr "Uudet dynaamiset kentät"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Haluaisitko hyödyntää muita dynaamisia kenttätyyppejä? Sinulla on täysi "
-"pääsy seuraaviin kenttätyyppeihin:"
+msgstr "Haluaisitko hyödyntää muita dynaamisia kenttätyyppejä? Sinulla on täysi pääsy seuraaviin kenttätyyppeihin:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -2103,9 +1758,7 @@ msgstr "Ulkoisen lähteen avain"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"Kun arvo asetetaan ulkoisen lähteen kautta (esim. verkkopalvelu tai tuonti/"
-"vienti), se tulkitaan tämän ominaisuuden arvoksi."
+msgstr "Kun arvo asetetaan ulkoisen lähteen kautta (esim. verkkopalvelu tai tuonti/vienti), se tulkitaan tämän ominaisuuden arvoksi."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -2121,9 +1774,7 @@ msgstr "Perusrakenne ei ole kelvollinen. Toimita YAML-muotoinen tietomuoto."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACL:iä ei voitu tuoda tuntemattoman virheen vuoksi, tarkista lisätietoja "
-"OTOBO:n lokitiedoista."
+msgstr "ACL:iä ei voitu tuoda tuntemattoman virheen vuoksi, tarkista lisätietoja OTOBO:n lokitiedoista."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -2131,9 +1782,7 @@ msgstr "%s (kopio) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"Prosenttiarvo, joka on vähimmäiskäännöskehityksen prosentuaalinen arvo "
-"kieltä kohti, jotta sitä voidaan käyttää dokumentoinnissa."
+msgstr "Prosenttiarvo, joka on vähimmäiskäännöskehityksen prosentuaalinen arvo kieltä kohti, jotta sitä voidaan käyttää dokumentoinnissa."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2145,15 +1794,11 @@ msgstr "Znuny4OTRSRepo-laajennusten automaattinen lataus."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
-"Backend-moduulin rekisteröinti konfiguraatioristiriitojen tarkistusmoduulia "
-"varten."
+msgstr "Backend-moduulin rekisteröinti konfiguraatioristiriitojen tarkistusmoduulia varten."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
-"Taustamoduulin rekisteröinti tiedostojen ristiriitojen tarkistusmoduulia "
-"varten."
+msgstr "Taustamoduulin rekisteröinti tiedostojen ristiriitojen tarkistusmoduulia varten."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
@@ -2213,45 +1858,19 @@ msgstr "GIT-kloonauksen määritelmä URL-osoitteen etuliite."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Dynaamisen kentän määritelmä: Group => Ryhmä, jolla on pääsy dynaamisiin "
-"kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName "
-"=> Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti "
-"(Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => "
-"Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu "
-"käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRelease => Regex, jota "
-"repository-nimen on vastattava, jotta se voidaan näyttää, FilterPackage => "
-"Regex, jota package-nimen on vastattava, jotta se voidaan näyttää, "
-"FilterBranch => Regex, jota branch-nimen on vastattava, jotta se voidaan "
-"näyttää, FilterRelease => Regex, jota repelase-versio-merkkijonon on "
-"vastattava, jotta se voidaan näyttää."
+msgstr "Dynaamisen kentän määritelmä: Group => Ryhmä, jolla on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRelease => Regex, jota repository-nimen on vastattava, jotta se voidaan näyttää, FilterPackage => Regex, jota package-nimen on vastattava, jotta se voidaan näyttää, FilterBranch => Regex, jota branch-nimen on vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jota repelase-versio-merkkijonon on vastattava, jotta se voidaan näyttää."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Dynaamisen kentän määritelmä: Group => Ryhmä, jolla on pääsy dynaamisiin "
-"kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName "
-"=> Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti "
-"(Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => "
-"Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu "
-"käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => Regex, jonka "
-"mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, FilterPackage "
-"=> Regex, jonka mukaan paketin nimen on vastattava, jotta se voidaan "
-"näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on vastattava, "
-"jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan "
-"palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
+msgstr "Dynaamisen kentän määritelmä: Group => Ryhmä, jolla on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr ""
-"Ulkoisen MD5-summan määrittely (avain => MD5, arvo => myyjä, paketin nimi, "
-"versio, päivämäärä)."
+msgstr "Ulkoisen MD5-summan määrittely (avain => MD5, arvo => myyjä, paketin nimi, versio, päivämäärä)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
-"Julkisten arkistopyyntöjen ja OPMS:n sisäisten arkistojen välisten "
-"vastaavuuksien määrittely."
+msgstr "Julkisten arkistopyyntöjen ja OPMS:n sisäisten arkistojen välisten vastaavuuksien määrittely."
 
 #. SysConfig
 msgid "Definition of package states."
@@ -2279,9 +1898,7 @@ msgstr "Poista verkkovarastot käytöstä."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr ""
-"Älä kirjaa näiden käyttäjien git ssh -yhteyden valtuutustuloksia. "
-"Hyödyllinen automatisoituja asioita varten."
+msgstr "Älä kirjaa näiden käyttäjien git ssh -yhteyden valtuutustuloksia. Hyödyllinen automatisoituja asioita varten."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2293,8 +1910,7 @@ msgstr "DynamicFieldScreen"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
-msgstr ""
-"Vie kaikki käytettävissä olevat julkiset avaimet authorized_keys-tiedostoon."
+msgstr "Vie kaikki käytettävissä olevat julkiset avaimet authorized_keys-tiedostoon."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
@@ -2302,33 +1918,23 @@ msgstr "Vie kaikki asiaankuuluvat julkaisut ftp-palvelimelle."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
-"Frontend-moduulin rekisteröinti OPMS-objektia varten agentin "
-"käyttöliittymässä."
+msgstr "Frontend-moduulin rekisteröinti OPMS-objektia varten agentin käyttöliittymässä."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
-"Julkisen rajapinnan PublicOPMSRepository-objektin frontend-moduulin "
-"rekisteröinti."
+msgstr "Julkisen rajapinnan PublicOPMSRepository-objektin frontend-moduulin rekisteröinti."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr ""
-"Julkisen rajapinnan PublicOPMSRepositoryLookup-objektin etusivumoduulin "
-"rekisteröinti."
+msgstr "Julkisen rajapinnan PublicOPMSRepositoryLookup-objektin etusivumoduulin rekisteröinti."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
-"Julkisen rajapinnan PublicOPMSTestBuild-objektin etusivumoduulin "
-"rekisteröinti."
+msgstr "Julkisen rajapinnan PublicOPMSTestBuild-objektin etusivumoduulin rekisteröinti."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr ""
-"Julkisen rajapinnan PublicPackageVerification-objektin etumoduulin "
-"rekisteröinti."
+msgstr "Julkisen rajapinnan PublicPackageVerification-objektin etumoduulin rekisteröinti."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2340,9 +1946,7 @@ msgstr "GIT Tekijän rekisteröinti."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Luo HTML-kommenttikoukut määritetyille lohkoille, jotta suodattimet voivat "
-"käyttää niitä."
+msgstr "Luo HTML-kommenttikoukut määritetyille lohkoille, jotta suodattimet voivat käyttää niitä."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2374,16 +1978,11 @@ msgstr "Ryhmä, jonka jäsenet näkevät CI-testin tulostiedot OPMS-näytöissä
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"Ryhmät, joihin todennetun käyttäjän (käyttäjätunnus ja salasana) on "
-"kuuluttava, jotta hän voi rakentaa testipaketteja julkisen käyttöliittymän "
-"kautta."
+msgstr "Ryhmät, joihin todennetun käyttäjän (käyttäjätunnus ja salasana) on kuuluttava, jotta hän voi rakentaa testipaketteja julkisen käyttöliittymän kautta."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
-"Ryhmät, jotka asetetaan git-projektin luomisprosessin aikana, kun lisätään "
-"OPMS-arkistoja."
+msgstr "Ryhmät, jotka asetetaan git-projektin luomisprosessin aikana, kun lisätään OPMS-arkistoja."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
@@ -2391,9 +1990,7 @@ msgstr "Hallitse dynaamista kenttää näytöissä."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr ""
-"Hallinnoi julkisia SSH-avaim(e)eitasi Gitin käyttöä varten täällä. Muista "
-"tallentaa tämä asetus, kun lisäät uuden avaimen."
+msgstr "Hallinnoi julkisia SSH-avaim(e)eitasi Gitin käyttöä varten täällä. Muista tallentaa tämä asetus, kun lisäät uuden avaimen."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2417,9 +2014,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
-"Vain käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, voivat "
-"käyttää gitiä."
+msgstr "Vain käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, voivat käyttää gitiä."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2431,48 +2026,15 @@ msgstr "BranchView-näytön sivujen parametrit."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Dynaamisen kentän 'GITProjectName' esimäärittely: Group => Ryhmä, jolla on "
-"pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); "
-"InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien "
-"koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; "
-"Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = "
-"poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => "
-"Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, "
-"FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se "
-"voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on "
-"vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan "
-"palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
+msgstr "Dynaamisen kentän 'GITProjectName' esimäärittely: Group => Ryhmä, jolla on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Dynaamisen kentän 'GITRepositoryName' esimäärittely: Group => Ryhmä, jolla "
-"on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1);"
-" InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien "
-"koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; "
-"Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = "
-"poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => "
-"Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, "
-"FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se "
-"voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on "
-"vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan "
-"palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
+msgstr "Dynaamisen kentän 'GITRepositoryName' esimäärittely: Group => Ryhmä, jolla on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"Dynaamisen kentän 'PackageDeprecated' esimäärittely: Group => Ryhmä, jolla "
-"on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1);"
-" InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien "
-"koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; "
-"Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = "
-"poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => "
-"Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, "
-"FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se "
-"voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on "
-"vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan "
-"palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
+msgstr "Dynaamisen kentän 'PackageDeprecated' esimäärittely: Group => Ryhmä, jolla on pääsy dynaamisiin kenttiin; AlwaysVisible => Kenttä voidaan poistaa (0|1); InformationAreaName => Widgettien nimi; InformationAreaSize => Widgettien koko ja sijainti (Large|Small); Name => Käytettävän dynaamisen kentän nimi; Priority => Dynaamisten kenttien järjestys; State => Kenttien tila (0 = poistettu käytöstä, 1 = aktiivinen, 2 = pakollinen), FilterRepository => Regex, jonka mukaan arkiston nimen on vastattava, jotta se voidaan näyttää, FilterPackage => Regex, jonka mukaan paketin nimen on vastattava, jotta se voidaan näyttää, FilterBranch => Regex, jonka mukaan haaran nimen on vastattava, jotta se voidaan näyttää, FilterRelease => Regex, jonka mukaan palautusversio-merkkijonon on vastattava, jotta se voidaan näyttää."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2496,23 +2058,15 @@ msgstr "Asettaa git-arkistojen kotihakemiston."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
-"Asettaa BugzillaAddComment-vastaanottosarjan vastaanottokäsikirjoituksen "
-"sijainnin polun."
+msgstr "Asettaa BugzillaAddComment-vastaanottosarjan vastaanottokäsikirjoituksen sijainnin polun."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Määrittää OTRSCodePolicy-skriptin sijainnin polun. On suositeltavaa, että "
-"OTRSCodePolicy-moduulista on erillinen klooni, joka päivitetään cronin "
-"kautta."
+msgstr "Määrittää OTRSCodePolicy-skriptin sijainnin polun. On suositeltavaa, että OTRSCodePolicy-moduulista on erillinen klooni, joka päivitetään cronin kautta."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Määrittää OTRSCodePolicy-vastaanottoa edeltävän komentosarjan sijainnin "
-"polun. On suositeltavaa, että OTRSCodePolicy-moduulista on erillinen klooni, "
-"joka päivitetään cronin kautta."
+msgstr "Määrittää OTRSCodePolicy-vastaanottoa edeltävän komentosarjan sijainnin polun. On suositeltavaa, että OTRSCodePolicy-moduulista on erillinen klooni, joka päivitetään cronin kautta."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2520,9 +2074,7 @@ msgstr "Näytä uusimmat komennukset git-arkistoissa."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"Näyttää valikossa linkin, jonka avulla voit luoda yksikkötestin nykyisestä "
-"tiketistä."
+msgstr "Näyttää valikossa linkin, jonka avulla voit luoda yksikkötestin nykyisestä tiketistä."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2538,8 +2090,7 @@ msgstr "Käytettävän sfinksi-teeman nimi."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
-"Polku OTRS:n CSS-tiedostoon (suhteellinen staattisen polun alapuolella)."
+msgstr "Polku OTRS:n CSS-tiedostoon (suhteellinen staattisen polun alapuolella)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
@@ -2555,71 +2106,47 @@ msgstr "Polku teemakansioon, joka sisältää sphinx-teemat."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr ""
-"Tässä määrityksessä määritellään kaikki mahdolliset näytöt, joilla "
-"oletussarakkeet voidaan ottaa käyttöön tai poistaa käytöstä."
+msgstr "Tässä määrityksessä määritellään kaikki mahdolliset näytöt, joilla oletussarakkeet voidaan ottaa käyttöön tai poistaa käytöstä."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
-"Tässä määrityksessä määritellään kaikki mahdolliset näytöt, joilla "
-"dynaamiset kentät voidaan ottaa käyttöön tai poistaa käytöstä."
+msgstr "Tässä määrityksessä määritellään kaikki mahdolliset näytöt, joilla dynaamiset kentät voidaan ottaa käyttöön tai poistaa käytöstä."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr ""
-"Tämä määritys määrittää, näytetäänkö vain validit vai kaikki (invalidit) "
-"dynaamiset kentät."
+msgstr "Tämä määritys määrittää, näytetäänkö vain validit vai kaikki (invalidit) dynaamiset kentät."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"Tämä määritys määrittää, onko OTRS-pakettien tarkistuksen oltava aktiivinen "
-"vai ei. Jos toiminto on poistettu käytöstä, kaikki paketit näytetään "
-"tarkistettuina. On silti suositeltavaa käyttää vain varmennettuja paketteja."
+msgstr "Tämä määritys määrittää, onko OTRS-pakettien tarkistuksen oltava aktiivinen vai ei. Jos toiminto on poistettu käytöstä, kaikki paketit näytetään tarkistettuina. On silti suositeltavaa käyttää vain varmennettuja paketteja."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"Tämä määritys määrittää OTRS CloudService Proxy -palvelun URL-osoitteen. "
-"Etuliite http tai https lisätään valinnasta SysConfig 'Znuny4OTRSRepoType' "
-"riippuen."
+msgstr "Tämä määritys määrittää OTRS CloudService Proxy -palvelun URL-osoitteen. Etuliite http tai https lisätään valinnasta SysConfig 'Znuny4OTRSRepoType' riippuen."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"Tämä määritys rekisteröi Output-postisuodattimen paketin tarkistuksen "
-"laajentamiseksi."
+msgstr "Tämä määritys rekisteröi Output-postisuodattimen paketin tarkistuksen laajentamiseksi."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"Tämä määritys rekisteröi OutputFilter-moduulin, joka poistaa OTRS Business "
-"Solution TM -mainokset."
+msgstr "Tämä määritys rekisteröi OutputFilter-moduulin, joka poistaa OTRS Business Solution TM -mainokset."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"Tämä määritys rekisteröi tulostussuodattimen, joka piilottaa "
-"paketinhallinnan online-repository-valinnan."
+msgstr "Tämä määritys rekisteröi tulostussuodattimen, joka piilottaa paketinhallinnan online-repository-valinnan."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Siisti käsittelemätön julkaisu, joka ei ole läpäissyt testipomulien "
-"tarkastuksia pitkään aikaan."
+msgstr "Siisti käsittelemätön julkaisu, joka ei ole läpäissyt testipomulien tarkastuksia pitkään aikaan."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"Käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, saavat suorittaa "
-"force push -työntöjä 'git push --force'."
+msgstr "Käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, saavat suorittaa force push -työntöjä 'git push --force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"Käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, voivat hallita "
-"projekteja. Lisäksi jäsenillä on git-hallinnan hallintaoikeudet."
+msgstr "Käyttäjät, joilla on rw-oikeudet jossakin näistä ryhmistä, voivat hallita projekteja. Lisäksi jäsenillä on git-hallinnan hallintaoikeudet."
 
 #. ITSM class bundles
 msgid "1"
@@ -3676,3 +3203,16 @@ msgstr "VoIP-puhelin"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Webkamera"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Thai <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/th/>\n"
+"Language-Team: Thai <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/th/>\n"
 "Language: th_TH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,35 +488,35 @@ msgstr ""
 msgid "Software"
 msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "หมดอายุ"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "การดูแลรักษา"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "การนำร่อง"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "การวางแผน"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "ซ่อม"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "เกษียณ"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "ตัวอย่าง"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "ทดสอบ/QA"
 
@@ -1651,9 +1650,7 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"โมดูลผู้ร้องขอเบื้องหลังของOTOBOนี้จะถูกเรียกเพื่อเตรียมข้อมูลที่จะส่งไปยังระ"
-"บบระยะไกลและเพื่อประมวลผลข้อมูลการตอบสนอง"
+msgstr "โมดูลผู้ร้องขอเบื้องหลังของOTOBOนี้จะถูกเรียกเพื่อเตรียมข้อมูลที่จะส่งไปยังระบบระยะไกลและเพื่อประมวลผลข้อมูลการตอบสนอง"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1665,15 +1662,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"ข้อมูลจากผู้ร้องขอของOTOBO  จะถูกดำเนินการจากแผนที่นี้เพื่อเปลี่ยนมันไปเป็นปร"
-"ะเภทของข้อมูลที่คาดว่าเป็นระบบจากระยะไกล"
+msgstr "ข้อมูลจากผู้ร้องขอของOTOBO  จะถูกดำเนินการจากแผนที่นี้เพื่อเปลี่ยนมันไปเป็นประเภทของข้อมูลที่คาดว่าเป็นระบบจากระยะไกล"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"ข้อมูลการตอบสนองจะถูกประมวลผลโดยแผนที่นี้เพื่อเปลี่ยนมันไปเป็นข้อมูลผู้ร้"
-"องขอตามการคาดการของ OTOBO"
+msgstr "ข้อมูลการตอบสนองจะถูกประมวลผลโดยแผนที่นี้เพื่อเปลี่ยนมันไปเป็นข้อมูลผู้ร้องขอตามการคาดการของ OTOBO"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1689,9 +1682,7 @@ msgstr "เพิ่มกิจกรรม"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"ตัวกระตุ้นกิจกรรมที่ไม่ตรงกันจะถูกจัดการโดย OTOBO Scheduler Daemon "
-"ในเบื้องหลัง (แนะนำ)"
+msgstr "ตัวกระตุ้นกิจกรรมที่ไม่ตรงกันจะถูกจัดการโดย OTOBO Scheduler Daemon ในเบื้องหลัง (แนะนำ)"
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1783,9 +1774,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"ACLsไม่สามารถนำเข้าเนื่องจากข้อผิดพลาดที่ไม่ทราบโปรดตรวจสอบการล็อก OTOBO "
-"สำหรับข้อมูลเพิ่มเติม"
+msgstr "ACLsไม่สามารถนำเข้าเนื่องจากข้อผิดพลาดที่ไม่ทราบโปรดตรวจสอบการล็อก OTOBO สำหรับข้อมูลเพิ่มเติม"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -3214,3 +3203,16 @@ msgstr ""
 #. ITSM class bundles
 msgid "Webcam"
 msgstr ""
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

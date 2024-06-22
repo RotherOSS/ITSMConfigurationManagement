@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ro/>\n"
+"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -72,8 +70,7 @@ msgstr "Filtru pentru clase"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
-msgstr ""
-"Selectați o clasă din listă pentru a crea un nou element de configurare."
+msgstr "Selectați o clasă din listă pentru a crea un nou element de configurare."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -109,8 +106,7 @@ msgstr "Numele acestui element de configurare"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Numele este deja utilizat de ConfigItems cu următorul număr (numere): %s"
+msgstr "Numele este deja utilizat de ConfigItems cu următorul număr (numere): %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
@@ -294,9 +290,7 @@ msgstr "Nu este indicat niciun ConfigItemID sau VersionID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
-"Nu se poate afișa elementul de configurare, nu sunt acordate drepturi de "
-"acces!"
+msgstr "Nu se poate afișa elementul de configurare, nu sunt acordate drepturi de acces!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
@@ -336,9 +330,7 @@ msgstr "Rezultatele căutării elementelor de configurare"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
-"Nu se poate afișa elementul, nu sunt acordate drepturi de acces pentru "
-"ConfigItem!"
+msgstr "Nu se poate afișa elementul, nu sunt acordate drepturi de acces pentru ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
@@ -766,10 +758,7 @@ msgstr "Setări CMDB"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
-msgstr ""
-"Verifică un nume unic numai în cadrul aceleiași clase de ConfigItem (\"class"
-"\") sau la nivel global (\"global\"), ceea ce înseamnă că fiecare ConfigItem "
-"existent este luat în considerare atunci când se caută duplicate."
+msgstr "Verifică un nume unic numai în cadrul aceleiași clase de ConfigItem (\"class\") sau la nivel global (\"global\"), ceea ce înseamnă că fiecare ConfigItem existent este luat în considerare atunci când se caută duplicate."
 
 #. SysConfig
 msgid "Config Items"
@@ -785,9 +774,7 @@ msgstr "Editare element de configurare."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
-"Modulul de evenimente al elementului de configurare care permite "
-"înregistrarea în istoric în interfața agentului."
+msgstr "Modulul de evenimente al elementului de configurare care permite înregistrarea în istoric în interfața agentului."
 
 #. SysConfig
 msgid "Config item history."
@@ -823,8 +810,7 @@ msgstr "Element de configurare modul bulk."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
-"Elementul de configurare căutare router backend al interfeței agentului."
+msgstr "Elementul de configurare căutare router backend al interfeței agentului."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
@@ -832,55 +818,35 @@ msgstr "Creați și gestionați definițiile pentru elementele de configurare."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr ""
-"Definiți acțiunile în care este disponibil un buton de setări în widgetul "
-"obiectelor legate (LinkObject::ViewMode = \"complex\"). Rețineți că aceste "
-"acțiuni trebuie să aibă înregistrate următoarele fișiere JS și CSS: "
-"Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, "
-"Core.Agent.TableFilters.js și Core.Agent.LinkObject.js."
+msgstr "Definiți acțiunile în care este disponibil un buton de setări în widgetul obiectelor legate (LinkObject::ViewMode = \"complex\"). Rețineți că aceste acțiuni trebuie să aibă înregistrate următoarele fișiere JS și CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js și Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr ""
-"Definește permisiunile necesare pentru a crea elemente de configurare ITSM "
-"utilizând interfața generică."
+msgstr "Definește permisiunile necesare pentru a crea elemente de configurare ITSM utilizând interfața generică."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr ""
-"Definește permisiunile necesare pentru a șterge elementele de configurare "
-"ITSM utilizând interfața generică."
+msgstr "Definește permisiunile necesare pentru a șterge elementele de configurare ITSM utilizând interfața generică."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr ""
-"Definește permisiunile necesare pentru a obține elemente de configurare ITSM "
-"utilizând interfața generică."
+msgstr "Definește permisiunile necesare pentru a obține elemente de configurare ITSM utilizând interfața generică."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr ""
-"Definește permisiunile necesare pentru a căuta elemente de configurare ITSM "
-"utilizând interfața generică."
+msgstr "Definește permisiunile necesare pentru a căuta elemente de configurare ITSM utilizând interfața generică."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
-"Definește permisiunile necesare pentru actualizarea elementelor de "
-"configurare ITSM utilizând interfața generică."
+msgstr "Definește permisiunile necesare pentru actualizarea elementelor de configurare ITSM utilizând interfața generică."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
-"Definește un modul de prezentare generală pentru a afișa vizualizarea mică a "
-"unei liste de elemente de configurare."
+msgstr "Definește un modul de prezentare generală pentru a afișa vizualizarea mică a unei liste de elemente de configurare."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr ""
-"Definește expresii regulate individual pentru fiecare clasă ConfigItem "
-"pentru a verifica numele ConfigItem și pentru a afișa mesajele de eroare "
-"corespunzătoare."
+msgstr "Definește expresii regulate individual pentru fiecare clasă ConfigItem pentru a verifica numele ConfigItem și pentru a afișa mesajele de eroare corespunzătoare."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
@@ -888,21 +854,15 @@ msgstr "Definește subobiectul implicit al clasei \"ITSMConfigItem\"."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
-"Definește numărul de rânduri pentru editorul de definiții CI din interfața "
-"de administrare."
+msgstr "Definește numărul de rânduri pentru editorul de definiții CI din interfața de administrare."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
-"Definește ordinea stărilor incidente de la mare (de exemplu, cricitală) la "
-"mică (de exemplu, funcțională)."
+msgstr "Definește ordinea stărilor incidente de la mare (de exemplu, cricitală) la mică (de exemplu, funcțională)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr ""
-"Definește stările de implementare relevante în care biletele legate pot "
-"afecta starea unui IC."
+msgstr "Definește stările de implementare relevante în care biletele legate pot afecta starea unui IC."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
@@ -914,84 +874,35 @@ msgstr "Definește limita de căutare pentru ecranul AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr ""
-"Definește coloanele afișate în prezentarea generală a elementelor de "
-"configurare. Această opțiune nu are niciun efect asupra poziției coloanei. "
-"Notă: Coloana \"Class\" este întotdeauna disponibilă dacă este selectat "
-"filtrul \"All\" (Toate)."
+msgstr "Definește coloanele afișate în prezentarea generală a elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei. Notă: Coloana \"Class\" este întotdeauna disponibilă dacă este selectat filtrul \"All\" (Toate)."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr ""
-"Definește coloanele afișate în căutarea elementelor de configurare. Această "
-"opțiune nu are niciun efect asupra poziției coloanei."
+msgstr "Definește coloanele afișate în căutarea elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Definește coloanele afișate în căutarea elementelor de configurare. Această "
-"opțiune nu are niciun efect asupra poziției coloanei."
+msgstr "Definește coloanele afișate în căutarea elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr ""
-"Definește coloanele de IC afișate în căutarea elementelor de configurare în "
-"funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele "
-"clasei și de două puncte de suspensie (de exemplu, Computer:::). Există "
-"câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru "
-"clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime)"
-". Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în "
-"definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există "
-"nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, "
-"așa cum sunt definite în setarea "
-"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
+msgstr "Definește coloanele de IC afișate în căutarea elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, așa cum sunt definite în setarea ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr ""
-"Definește coloanele de IC afișate în widgetul elementului de configurare în "
-"funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele "
-"clasei și de două puncte de suspensie (de exemplu, Computer:::). Există "
-"câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru "
-"clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime)"
-". Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în "
-"definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa "
-"Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
-"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există "
-"nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, "
-"așa cum sunt definite în setarea "
-"AgentCustomerInformationCenter::Backend###0060-CIC-"
-"ITSMConfigItemCustomerCompany (cheia DefaultColumns)."
+msgstr "Definește coloanele de IC afișate în widgetul elementului de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, așa cum sunt definite în setarea AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (cheia DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
-"Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de "
-"legături pentru toate clasele de IC. Dacă nu există nicio intrare, sunt "
-"afișate coloanele implicite."
+msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături pentru toate clasele de IC. Dacă nu există nicio intrare, sunt afișate coloanele implicite."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr ""
-"Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de "
-"legături, în funcție de clasa IC. Fiecare intrare trebuie să fie precedată "
-"de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). "
-"Există câteva CI-Attributes care sunt comune tuturor IC-urilor (exemplu "
-"pentru clasa Computer: Computer::Name, Computer::CurDeplState, "
-"Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel "
-"cum sunt definite în definiția IC, trebuie utilizată următoarea schemă ("
-"exemplu pentru clasa Computer): Computer::HardDisk::1, "
-"Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
-"Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o "
-"clasă de IC, sunt afișate coloanele implicite."
+msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături, în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor IC-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, sunt afișate coloanele implicite."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr ""
-"Definește ce tip de legătură (numită din perspectiva biletului) poate afecta "
-"starea unui IC legat."
+msgstr "Definește ce tip de legătură (numită din perspectiva biletului) poate afecta starea unui IC legat."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
@@ -1011,31 +922,19 @@ msgstr "Duplicat"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr ""
-"Activează caracteristica de acțiune în masă a elementelor de configurare "
-"pentru ca frontend-ul agentului să lucreze la mai mult de un element de "
-"configurare odată."
+msgstr "Activează caracteristica de acțiune în masă a elementelor de configurare pentru ca frontend-ul agentului să lucreze la mai mult de un element de configurare odată."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
-"Activează funcția de acțiune în bloc a elementelor de configurare numai "
-"pentru grupurile enumerate."
+msgstr "Activează funcția de acțiune în bloc a elementelor de configurare numai pentru grupurile enumerate."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr ""
-"Activează/dezactivează funcționalitatea de verificare a numelor unice pentru "
-"ConfigItems. Înainte de a activa această opțiune, ar trebui să verificați "
-"dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți "
-"face acest lucru cu ajutorul scriptului bin/otobo."
-"ITSMConfigItemItemListDuplicates.pl."
+msgstr "Activează/dezactivează funcționalitatea de verificare a numelor unice pentru ConfigItems. Înainte de a activa această opțiune, ar trebui să verificați dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți face acest lucru cu ajutorul scriptului bin/otobo.ITSMConfigItemItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
-"Modulul de eveniment pentru a seta starea articolului de configurare pe "
-"biletul-configitem-link."
+msgstr "Modulul de eveniment pentru a seta starea articolului de configurare pe biletul-configitem-link."
 
 #. SysConfig
 msgid "ITSM config item overview."
@@ -1047,8 +946,7 @@ msgstr "Modul de verificare a grupului responsabil pentru o clasă."
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
-"Modul de verificare a grupului responsabil pentru un element de configurare."
+msgstr "Modul de verificare a grupului responsabil pentru un element de configurare."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
@@ -1056,8 +954,7 @@ msgstr "Modul de generare a statisticilor elementelor de configurare ITSM."
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
-"Înregistrarea modulului backend de obiecte pentru modulul de import/export."
+msgstr "Înregistrarea modulului backend de obiecte pentru modulul de import/export."
 
 #. SysConfig
 msgid "Overview."
@@ -1065,37 +962,23 @@ msgstr "Prezentare generală."
 
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
-"Parametrii pentru backend-ul tabloului de bord al firmei clientului "
-"configurare element de prezentare generală a interfeței agentului . \"Limit\""
-" este numărul de intrări afișate în mod implicit. \"Group\" este utilizat "
-"pentru a restricționa accesul la plugin (de exemplu, Group: "
-"admin;group1;group2;). \"Default\" determină dacă plugin-ul este activat în "
-"mod implicit sau dacă utilizatorul trebuie să îl activeze manual. "
-"\"CacheTTLLocal\" este timpul de cache în minute pentru plugin."
+msgstr "Parametrii pentru backend-ul tabloului de bord al firmei clientului configurare element de prezentare generală a interfeței agentului . \"Limit\" este numărul de intrări afișate în mod implicit. \"Group\" este utilizat pentru a restricționa accesul la plugin (de exemplu, Group: admin;group1;group2;). \"Default\" determină dacă plugin-ul este activat în mod implicit sau dacă utilizatorul trebuie să îl activeze manual. \"CacheTTLLocal\" este timpul de cache în minute pentru plugin."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru culoarea stărilor de desfășurare în vizualizarea "
-"preferințelor din interfața agentului."
+msgstr "Parametrii pentru culoarea stărilor de desfășurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru stările de desfășurare din vizualizarea preferințelor din "
-"interfața agentului."
+msgstr "Parametrii pentru stările de desfășurare din vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr ""
-"Parametrii pentru grupurile de permisiuni de exemplu ale atributelor "
-"generale ale catalogului."
+msgstr "Parametrii pentru grupurile de permisiuni de exemplu ale atributelor generale ale catalogului."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
-"Parametrii pentru pagini (în care sunt afișate elementele de configurare)."
+msgstr "Parametrii pentru pagini (în care sunt afișate elementele de configurare)."
 
 #. SysConfig
 msgid "Permission Group"
@@ -1103,45 +986,31 @@ msgstr "Drepturi Grup"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul elementului de configurare ITSM "
-"din interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul elementului de configurare ITSM din interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de "
-"configurare ITSM în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de mărire a elementelor de "
-"configurare ITSM în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de mărire a elementelor de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de adăugare a unui element de "
-"configurare ITSM în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de adăugare a unui element de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de editare a elementului de "
-"configurare ITSM din interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de editare a elementului de configurare ITSM din interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul cu elemente de configurare ITSM "
-"istoric în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul cu elemente de configurare ITSM istoric în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de tipărire a elementelor de "
-"configurare ITSM din interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de tipărire a elementelor de configurare ITSM din interfața agentului."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1153,103 +1022,67 @@ msgstr "Căutarea elementelor de configurare."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr ""
-"Selectează modulul generator al numărului de elemente de configurare. "
-"\"AutoIncrement\" incrementează numărul de elemente de configurare, se "
-"utilizează SystemID, ConfigItemClassID și contorul. Formatul este \"SystemID."
-"ConfigItemClassID.Counter\", de exemplu, 1205000004, 1205000005."
+msgstr "Selectează modulul generator al numărului de elemente de configurare. \"AutoIncrement\" incrementează numărul de elemente de configurare, se utilizează SystemID, ConfigItemClassID și contorul. Formatul este \"SystemID.ConfigItemClassID.Counter\", de exemplu, 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
-"Setați automat starea de incident a unui IC atunci când un bilet este legat "
-"de un IC."
+msgstr "Setați automat starea de incident a unui IC atunci când un bilet este legat de un IC."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Stabilește starea de desfășurare în ecranul de ansamblu al elementelor de "
-"configurare din interfața agentului."
+msgstr "Stabilește starea de desfășurare în ecranul de ansamblu al elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
-"Stabilește starea incidentului în ecranul de ansamblu al elementelor de "
-"configurare din interfața agentului."
+msgstr "Stabilește starea incidentului în ecranul de ansamblu al elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu care permite corelarea unui element de "
-"configurare cu un alt obiect în vizualizarea cu zoom a elementului de "
-"configurare din interfața agentului."
+msgstr "Afișează o legătură în meniu care permite corelarea unui element de configurare cu un alt obiect în vizualizarea cu zoom a elementului de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a accesa istoricul unui element de "
-"configurare în prezentarea generală a elementelor de configurare din "
-"interfața agentului."
+msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a accesa istoricul unui element de "
-"configurare în vizualizarea cu zoom a interfeței agentului."
+msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în vizualizarea cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a șterge un element de configurare în "
-"vizualizarea sa cu zoom a interfeței agentului."
+msgstr "Afișează o legătură în meniu pentru a șterge un element de configurare în vizualizarea sa cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a duplica un element de configurare în "
-"prezentarea generală a elementelor de configurare din interfața agentului."
+msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a duplica un element de configurare în "
-"vizualizarea cu zoom a interfeței agentului."
+msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în vizualizarea cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a edita un element de configurare în "
-"vizualizarea cu zoom a interfeței agentului."
+msgstr "Afișează o legătură în meniu pentru a edita un element de configurare în vizualizarea cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a reveni în vizualizarea cu zoom a "
-"elementelor de configurare din interfața agentului."
+msgstr "Afișează o legătură în meniu pentru a reveni în vizualizarea cu zoom a elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a imprima un element de configurare în "
-"vizualizarea cu zoom a interfeței agentului."
+msgstr "Afișează o legătură în meniu pentru a imprima un element de configurare în vizualizarea cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
-"Afișează o legătură în meniu pentru a mări un element de configurare în "
-"prezentarea generală a elementelor de configurare din interfața agentului."
+msgstr "Afișează o legătură în meniu pentru a mări un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
-"Afișează istoricul elementelor de configurare (în ordine inversă) în "
-"interfața agentului."
+msgstr "Afișează istoricul elementelor de configurare (în ordine inversă) în interfața agentului."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr ""
-"Identificatorul pentru un element de configurare, de exemplu ConfigItem#, "
-"MyConfigItem#. Valoarea implicită este ConfigItem#."
+msgstr "Identificatorul pentru un element de configurare, de exemplu ConfigItem#, MyConfigItem#. Valoarea implicită este ConfigItem#."
 
 #. SysConfig
 msgid "class"
@@ -1281,10 +1114,7 @@ msgstr "Pachete de clase Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Aici puteți importa pachete de clase Ready2Import care prezintă cele mai "
-"uzuale elemente de configurare. Vă rugăm să rețineți că este posibil să fie "
-"necesară o anumită configurare suplimentară."
+msgstr "Aici puteți importa pachete de clase Ready2Import care prezintă cele mai uzuale elemente de configurare. Vă rugăm să rețineți că este posibil să fie necesară o anumită configurare suplimentară."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1304,9 +1134,7 @@ msgstr "Numărul de versiune al acestui element de configurare"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Numărul de versiune este deja utilizat de ConfigItems cu următorul număr "
-"(numere): %s"
+msgstr "Numărul de versiune este deja utilizat de ConfigItems cu următorul număr (numere): %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1354,9 +1182,7 @@ msgstr "Următoarele roluri vor fi importate"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Rețineți că vor fi create și câmpurile dinamice corespunzătoare și clasele "
-"GeneralCatalog și că nu există o eliminare automată."
+msgstr "Rețineți că vor fi create și câmpurile dinamice corespunzătoare și clasele GeneralCatalog și că nu există o eliminare automată."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1396,9 +1222,7 @@ msgstr "Restricții de clasă pentru elementul de configurare"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Selectați una sau mai multe clase pentru a restricționa elementele de "
-"configurare selectabile"
+msgstr "Selectați una sau mai multe clase pentru a restricționa elementele de configurare selectabile"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1422,9 +1246,7 @@ msgstr "Direcția legăturii"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Obiectul de referință este cel care conține acest câmp dinamic, iar obiectul "
-"referit este cel selectat ca valoare a câmpului dinamic."
+msgstr "Obiectul de referință este cel care conține acest câmp dinamic, iar obiectul referit este cel selectat ca valoare a câmpului dinamic."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1440,10 +1262,7 @@ msgstr "Tipul de referință a legăturii"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Dacă această legătură se aplică la ConfigItem sau la versiunea statică a "
-"obiectului de referință. Calculul \"Current Incident State\" se efectuează "
-"numai în cazul legăturilor dinamice."
+msgstr "Dacă această legătură se aplică la ConfigItem sau la versiunea statică a obiectului de referință. Calculul \"Current Incident State\" se efectuează numai în cazul legăturilor dinamice."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1475,9 +1294,7 @@ msgstr "Eroare de sincronizare a definițiilor. Vă rugăm să verificați jurna
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Aveți definiții ITSMConfigItem care nu sunt sincronizate. Vă rugăm să "
-"implementați modificările câmpurilor dinamice ale ITSMConfigItem."
+msgstr "Aveți definiții ITSMConfigItem care nu sunt sincronizate. Vă rugăm să implementați modificările câmpurilor dinamice ale ITSMConfigItem."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1497,19 +1314,11 @@ msgstr "1 - Afișat"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Permite condiții de căutare extinse în căutarea elementelor de configurare "
-"din interfața agentului. Cu această funcție puteți căuta, de exemplu, numele "
-"elementului de configurare cu acest tip de condiții, cum ar fi \""
-"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
+msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața agentului. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Permite condiții de căutare extinse în căutarea elementelor de configurare "
-"din interfața cu clienții. Cu această funcție puteți căuta, de exemplu, "
-"numele elementului de configurare cu acest tip de condiții, cum ar fi \""
-"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
+msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața cu clienții. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1529,47 +1338,31 @@ msgstr "Alegeți atributele pentru a declanșa crearea unei noi versiuni."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
-"Alegeți categoriile pe care să le atribuiți acestei clase de elemente de "
-"configurare."
+msgstr "Alegeți categoriile pe care să le atribuiți acestei clase de elemente de configurare."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
-"Filtre de coloană pentru elementele de configurare pentru ConfigItem "
-"Overview."
+msgstr "Filtre de coloană pentru elementele de configurare pentru ConfigItem Overview."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Coloane care pot fi filtrate în prezentarea generală a elementelor de "
-"configurare din interfața agentului. Notă: Sunt permise numai atributele "
-"elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
+msgstr "Coloane care pot fi filtrate în prezentarea generală a elementelor de configurare din interfața agentului. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Coloane care pot fi filtrate în prezentarea generală a elementelor de "
-"configurare din interfața cu clienții. Notă: Sunt permise numai atributele "
-"elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
+msgstr "Coloane care pot fi filtrate în prezentarea generală a elementelor de configurare din interfața cu clienții. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Modul de eveniment al elementelor de configurare care actualizează "
-"elementele de configurare la definiția lor curentă."
+msgstr "Modul de eveniment al elementelor de configurare care actualizează elementele de configurare la definiția lor curentă."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
-"Modulul de evenimente pentru elemente de configurare care actualizează "
-"tabelul configitem_ĺink."
+msgstr "Modulul de evenimente pentru elemente de configurare care actualizează tabelul configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
-"Modulul de eveniment al elementelor de configurare actualizează starea "
-"curentă a incidentului."
+msgstr "Modulul de eveniment al elementelor de configurare actualizează starea curentă a incidentului."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1581,19 +1374,11 @@ msgstr "Versiunea ConfigItem"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems din următoarele clase nu vor fi stocate pe serverul "
-"Elasticsearch. Pentru a aplica acest lucru la IC-urile existente, migrarea "
-"IC-urilor trebuie să fie executată prin intermediul consolei, după "
-"modificarea acestei opțiuni."
+msgstr "ConfigItems din următoarele clase nu vor fi stocate pe serverul Elasticsearch. Pentru a aplica acest lucru la IC-urile existente, migrarea IC-urilor trebuie să fie executată prin intermediul consolei, după modificarea acestei opțiuni."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems cu următoarele stări de implementare nu vor fi stocate pe "
-"serverul Elasticsearch. Pentru a aplica acest lucru la IC-urile existente, "
-"migrarea IC-urilor trebuie să fie executată prin intermediul consolei, după "
-"modificarea acestei opțiuni."
+msgstr "ConfigItems cu următoarele stări de implementare nu vor fi stocate pe serverul Elasticsearch. Pentru a aplica acest lucru la IC-urile existente, migrarea IC-urilor trebuie să fie executată prin intermediul consolei, după modificarea acestei opțiuni."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1601,107 +1386,59 @@ msgstr "Clienții pot vedea versiunile istorice ale CI."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
-"Clienții au posibilitatea de a comuta manual între versiunile istorice CI."
+msgstr "Clienții au posibilitatea de a comuta manual între versiunile istorice CI."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Date implicite care trebuie utilizate în atributul pentru ecranul de căutare "
-"a elementelor de configurare. Exemplu: \"ITSMConfigItemCreateTimePointFormat="
-"year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;"
-"\"."
+msgstr "Date implicite care trebuie utilizate în atributul pentru ecranul de căutare a elementelor de configurare. Exemplu: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Date implicite care trebuie utilizate în atributul pentru ecranul de căutare "
-"a elementelor de configurare. Exemplu: \"ITSMConfigItemCreateTimeStartYear=20"
-"10;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;I"
-"TSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITS"
-"MConfigItemCreateTimeStopDay=3;\"."
+msgstr "Date implicite care trebuie utilizate în atributul pentru ecranul de căutare a elementelor de configurare. Exemplu: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Definiți o schemă Template::Toolkit pentru șirurile de versiuni. Se "
-"utilizează numai dacă modulul de șiruri de versiuni este setat la "
-"TemplateToolkit."
+msgstr "Definiți o schemă Template::Toolkit pentru șirurile de versiuni. Se utilizează numai dacă modulul de șiruri de versiuni este setat la TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Definiți un set de condiții în care un client are voie să vadă un element de "
-"configurare. Condițiile pot fi opțional restricționate la anumite grupuri de "
-"clienți. Numele este singurul atribut obligatoriu. Dacă nu se oferă alte "
-"opțiuni, toate elementele de configurare vor fi vizibile în categoria "
-"respectivă."
+msgstr "Definiți un set de condiții în care un client are voie să vadă un element de configurare. Condițiile pot fi opțional restricționate la anumite grupuri de clienți. Numele este singurul atribut obligatoriu. Dacă nu se oferă alte opțiuni, toate elementele de configurare vor fi vizibile în categoria respectivă."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
-"Definește dacă etichetele tipului de legătură trebuie să fie afișate în "
-"conexiunile nodurilor."
+msgstr "Definește dacă etichetele tipului de legătură trebuie să fie afișate în conexiunile nodurilor."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Definește coloanele disponibile pentru IC în prezentarea generală a "
-"elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie "
-"să fie compusă dintr-un nume de clasă și o matrice de câmpuri disponibile "
-"pentru clasa corespunzătoare. Intrările de câmpuri dinamice trebuie să "
-"respecte schema DynamicField_FieldName."
+msgstr "Definește coloanele disponibile pentru IC în prezentarea generală a elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie compusă dintr-un nume de clasă și o matrice de câmpuri disponibile pentru clasa corespunzătoare. Intrările de câmpuri dinamice trebuie să respecte schema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Definește atributul implicit al elementului de configurare pentru sortarea "
-"elementelor de configurare din rezultatul căutării elementelor de "
-"configurare din interfața agentului."
+msgstr "Definește atributul implicit al elementului de configurare pentru sortarea elementelor de configurare din rezultatul căutării elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Definește atributul implicit al elementului de configurare pentru sortarea "
-"elementelor de configurare din rezultatul căutării elementelor de "
-"configurare din interfața cu clienții."
+msgstr "Definește atributul implicit al elementului de configurare pentru sortarea elementelor de configurare din rezultatul căutării elementelor de configurare din interfața cu clienții."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Definește atributul implicit al elementului de configurare pentru sortarea "
-"elementului de configurare al rezultatului căutării elementelor de "
-"configurare din această operațiune."
+msgstr "Definește atributul implicit al elementului de configurare pentru sortarea elementului de configurare al rezultatului căutării elementelor de configurare din această operațiune."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Definește ordinea implicită a elementelor de configurare în rezultatul "
-"căutării elementelor de configurare din interfața agentului. Sus: cel mai "
-"vechi în partea de sus. Jos: cel mai recent în partea de sus."
+msgstr "Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din interfața agentului. Sus: cel mai vechi în partea de sus. Jos: cel mai recent în partea de sus."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Definește ordinea implicită a elementelor de configurare în rezultatul "
-"căutării elementelor de configurare din interfața cu clienții. Sus: cel mai "
-"vechi în partea de sus. Jos: cel mai recent în partea de sus."
+msgstr "Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din interfața cu clienții. Sus: cel mai vechi în partea de sus. Jos: cel mai recent în partea de sus."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Definește ordinea implicită a elementelor de configurare în rezultatul "
-"căutării elementelor de configurare din această operațiune. În sus: cel mai "
-"vechi în sus. Jos: cel mai recent în partea de sus."
+msgstr "Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din această operațiune. În sus: cel mai vechi în sus. Jos: cel mai recent în partea de sus."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Definește coloanele afișate în mod implicit ale IC în prezentarea generală a "
-"elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie "
-"să fie compusă dintr-un nume de clasă și o matrice de câmpuri disponibile "
-"pentru clasa corespunzătoare. Intrările de câmpuri dinamice trebuie să "
-"respecte schema DynamicField_FieldName."
+msgstr "Definește coloanele afișate în mod implicit ale IC în prezentarea generală a elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie compusă dintr-un nume de clasă și o matrice de câmpuri disponibile pentru clasa corespunzătoare. Intrările de câmpuri dinamice trebuie să respecte schema DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1709,33 +1446,11 @@ msgstr "Definește adâncimea implicită a relațiilor care urmează să fie afi
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Definește atributul de căutare a elementelor de configurare afișat în mod "
-"implicit pentru ecranul de căutare a elementelor de configurare."
+msgstr "Definește atributul de căutare a elementelor de configurare afișat în mod implicit pentru ecranul de căutare a elementelor de configurare."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Definește atributul de căutare a elementelor de configurare afișat în mod "
-"implicit pentru ecranul de căutare a elementelor de configurare. Exemplu: "
-"\"Key\" trebuie să aibă numele câmpului dinamic, în acest caz \"X\", "
-"\"Content\" trebuie să aibă valoarea câmpului dinamic în funcție de tipul de "
-"câmp dinamic, Text: \"a text\", Dropdown: \"1\", Date/Time: "
-"\"Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00; "
-"Search_DynamicField_XTimeSlotSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopStopSecond=59;' și sau "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Definește atributul de căutare a elementelor de configurare afișat în mod implicit pentru ecranul de căutare a elementelor de configurare. Exemplu: \"Key\" trebuie să aibă numele câmpului dinamic, în acest caz \"X\", \"Content\" trebuie să aibă valoarea câmpului dinamic în funcție de tipul de câmp dinamic, Text: \"a text\", Dropdown: \"1\", Date/Time: \"Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotSlotStartMinute=00; Search_DynamicField_XTimeSlotSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopStopSecond=59;' și sau 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1743,26 +1458,19 @@ msgstr "Definește limita de căutare pentru ecranul CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
-"Definește limita de căutare pentru ecranul CustomerITSMConfigItemSearch."
+msgstr "Definește limita de căutare pentru ecranul CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Definește elementele care sunt disponibile pentru \"Acțiune\" în al treilea "
-"nivel al structurii ITSM Config Item ACL."
+msgstr "Definește elementele care sunt disponibile pentru \"Acțiune\" în al treilea nivel al structurii ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Definește ce elemente sunt disponibile în primul nivel al structurii ITSM "
-"Config Item ACL."
+msgstr "Definește ce elemente sunt disponibile în primul nivel al structurii ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Definește ce elemente sunt disponibile în al doilea nivel al structurii ITSM "
-"Config Item ACL."
+msgstr "Definește ce elemente sunt disponibile în al doilea nivel al structurii ITSM Config Item ACL."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1778,66 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Modul de eveniment pentru câmpuri dinamice care marchează definițiile "
-"elementelor de configurare ca fiind nesincronizate, dacă se modifică "
-"câmpurile dinamice care le conțin."
+msgstr "Modul de eveniment pentru câmpuri dinamice care marchează definițiile elementelor de configurare ca fiind nesincronizate, dacă se modifică câmpurile dinamice care le conțin."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Câmpuri dinamice afișate în ecranul câmpului ITSM suplimentar din interfața "
-"agentului."
+msgstr "Câmpuri dinamice afișate în ecranul câmpului ITSM suplimentar din interfața agentului."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Câmpuri dinamice afișate în ecranul de prezentare generală a elementelor de "
-"configurare din interfața cu clienții."
+msgstr "Câmpuri dinamice afișate în ecranul de prezentare generală a elementelor de configurare din interfața cu clienții."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Câmpuri dinamice afișate în ecranul de căutare a elementelor de configurare "
-"din interfața agentului."
+msgstr "Câmpuri dinamice afișate în ecranul de căutare a elementelor de configurare din interfața agentului."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Activează/dezactivează funcționalitatea de verificare a elementelor de "
-"onfigurare ITSM pentru nume unice. Înainte de a activa această opțiune, ar "
-"trebui să verificați dacă există deja elemente de configurare cu nume "
-"duplicate în sistem. Puteți face acest lucru cu ajutorul comenzii de consolă "
-"Admin::ITSM::Configitem::ListDuplicates."
+msgstr "Activează/dezactivează funcționalitatea de verificare a elementelor de onfigurare ITSM pentru nume unice. Înainte de a activa această opțiune, ar trebui să verificați dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți face acest lucru cu ajutorul comenzii de consolă Admin::ITSM::Configitem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Câmpuri ale indexului elementului de configurare, utilizate pentru căutarea "
-"fulltext. Câmpurile sunt, de asemenea, stocate, dar nu sunt obligatorii "
-"pentru funcționalitatea generală. Includerea atașamentelor poate fi "
-"dezactivată prin setarea intrării la 0 sau prin ștergerea acesteia."
+msgstr "Câmpuri ale indexului elementului de configurare, utilizate pentru căutarea fulltext. Câmpurile sunt, de asemenea, stocate, dar nu sunt obligatorii pentru funcționalitatea generală. Includerea atașamentelor poate fi dezactivată prin setarea intrării la 0 sau prin ștergerea acesteia."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Câmpuri stocate în indexul elementului de configurare care sunt utilizate "
-"pentru alte scopuri în afară de căutările fulltext. Pentru o funcționalitate "
-"completă, toate câmpurile sunt obligatorii."
+msgstr "Câmpuri stocate în indexul elementului de configurare care sunt utilizate pentru alte scopuri în afară de căutările fulltext. Pentru o funcționalitate completă, toate câmpurile sunt obligatorii."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Pentru fiecare serviciu web (cheie) se poate defini o serie de clase "
-"(valoare) pentru care se limitează importul. Pentru toate clasele alese sau "
-"pentru toate clasele existente, atributele de identificare vor trebui să fie "
-"alese în configurația invocatorului."
+msgstr "Pentru fiecare serviciu web (cheie) se poate defini o serie de clase (valoare) pentru care se limitează importul. Pentru toate clasele alese sau pentru toate clasele existente, atributele de identificare vor trebui să fie alese în configurația invocatorului."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"Înregistrarea modulului GenericInterface pentru stratul de invocare "
-"ConfigItemFetch."
+msgstr "Înregistrarea modulului GenericInterface pentru stratul de invocare ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1853,21 +1534,15 @@ msgstr "IncidentState"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Include stările de implementare în căutarea elementelor de configurare din "
-"interfața cu clienții."
+msgstr "Include stările de implementare în căutarea elementelor de configurare din interfața cu clienții."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Include stările incidentelor în căutarea elementelor de configurare din "
-"interfața cu clienții."
+msgstr "Include stările incidentelor în căutarea elementelor de configurare din interfața cu clienții."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Numărul maxim de elemente de configurare care urmează să fie afișate în "
-"rezultatul acestei operațiuni."
+msgstr "Numărul maxim de elemente de configurare care urmează să fie afișate în rezultatul acestei operațiuni."
 
 #. SysConfig
 msgid "Name Module"
@@ -1879,106 +1554,67 @@ msgstr "Număr Modulul de numere"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Numărul de elemente de configurare care urmează să fie afișate în fiecare "
-"pagină a unui rezultat de căutare în interfața agentului."
+msgstr "Numărul de elemente de configurare care urmează să fie afișate în fiecare pagină a unui rezultat de căutare în interfața agentului."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Numărul de elemente de configurare care urmează să fie afișate pe fiecare "
-"pagină a unui rezultat de căutare în interfața cu clienții."
+msgstr "Numărul de elemente de configurare care urmează să fie afișate pe fiecare pagină a unui rezultat de căutare în interfața cu clienții."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Obiectele care trebuie căutate, câte intrări și ce atribute trebuie afișate. "
-"Atributele ConfigItem trebuie să fie stocate în mod explicit prin "
-"Elasticsearch."
+msgstr "Obiectele care trebuie căutate, câte intrări și ce atribute trebuie afișate. Atributele ConfigItem trebuie să fie stocate în mod explicit prin Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru categoriile pentru clasele de elemente de configurare în "
-"vizualizarea preferințelor din interfața agentului."
+msgstr "Parametrii pentru categoriile pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parametrii pentru filtrele de coloană din prezentarea generală a elementelor "
-"de configurare mici. Vă rugăm să rețineți: setarea \"Active\" la 0 va "
-"împiedica doar agenții să editeze setările acestui grup în preferințele lor "
-"personale, dar va permite în continuare administratorilor să editeze "
-"setările în numele unui alt utilizator. Utilizați \"PreferenceGroup\" pentru "
-"a controla în ce zonă trebuie afișate aceste setări în interfața cu "
-"utilizatorul."
+msgstr "Parametrii pentru filtrele de coloană din prezentarea generală a elementelor de configurare mici. Vă rugăm să rețineți: setarea \"Active\" la 0 va împiedica doar agenții să editeze setările acestui grup în preferințele lor personale, dar va permite în continuare administratorilor să editeze setările în numele unui alt utilizator. Utilizați \"PreferenceGroup\" pentru a controla în ce zonă trebuie afișate aceste setări în interfața cu utilizatorul."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru modulul de nume pentru clasele de elemente de configurare "
-"în vizualizarea preferințelor din interfața agentului."
+msgstr "Parametrii pentru modulul de nume pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru modulul de numere pentru clasele de elemente de "
-"configurare în vizualizarea preferințelor din interfața agentului."
+msgstr "Parametrii pentru modulul de numere pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru modulul de șiruri de versiuni pentru clasele de elemente "
-"de configurare în vizualizarea preferințelor din interfața agentului."
+msgstr "Parametrii pentru modulul de șiruri de versiuni pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru modulul setului de instrumente de șabloane de șiruri de "
-"versiuni pentru clasele de elemente de configurare în vizualizarea "
-"preferințelor din interfața agentului."
+msgstr "Parametrii pentru modulul setului de instrumente de șabloane de șiruri de versiuni pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parametrii pentru declanșarea versiunii pentru clasele de elemente de "
-"configurare în vizualizarea preferințelor din interfața agentului."
+msgstr "Parametrii pentru declanșarea versiunii pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Efectuează acțiunea configurată pentru fiecare eveniment (ca Invoker) pentru "
-"fiecare serviciu web configurat."
+msgstr "Efectuează acțiunea configurată pentru fiecare eveniment (ca Invoker) pentru fiecare serviciu web configurat."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza acțiunea de atașare a elementului de "
-"configurare ITSM în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza acțiunea de atașare a elementului de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de "
-"configurare ITSM în interfața cu clienții."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de configurare ITSM în interfața cu clienții."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de vizualizare a arborelui de "
-"elemente de configurare ITSM în interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de vizualizare a arborelui de elemente de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Permisiuni necesare pentru a utiliza ecranul de elemente de configurare ITSM "
-"în masă din interfața agentului."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de elemente de configurare ITSM în masă din interfața agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Afișează o legătură în meniu pentru a afișa legăturile elementelor de "
-"configurare sub formă de Tree View."
+msgstr "Afișează o legătură în meniu pentru a afișa legăturile elementelor de configurare sub formă de Tree View."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
@@ -2002,12 +1638,21 @@ msgstr "Versiune Trigger"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Dacă execuția ConfigItemACL poate fi evitată prin verificarea dependențelor "
-"de câmpuri din memoria cache. Acest lucru poate îmbunătăți timpii de "
-"încărcare a formularelor, dar trebuie dezactivat dacă se utilizează "
-"ACLModules pentru ITSMConfigItem- și Form-ReturnTypes."
+msgstr "Dacă execuția ConfigItemACL poate fi evitată prin verificarea dependențelor de câmpuri din memoria cache. Acest lucru poate îmbunătăți timpii de încărcare a formularelor, dar trebuie dezactivat dacă se utilizează ACLModules pentru ITSMConfigItem- și Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
 msgstr "Ce informații generale sunt afișate în antet."
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

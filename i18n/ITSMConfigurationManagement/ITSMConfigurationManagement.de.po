@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-05-24 08:13+0000\n"
 "Last-Translator: Hauke Böttcher <hb@rother-oss.com>\n"
-"Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/de/>\n"
+"Language-Team: German <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,35 +488,35 @@ msgstr "Netzwerk"
 msgid "Software"
 msgstr "Software"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "Abgelaufen"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "In Wartung"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "Pilotbetrieb"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "Geplant"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "In Reparatur"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "Außer Dienst"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "Unter Review"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "Test/QS"
 
@@ -1115,10 +1114,7 @@ msgstr "Ready2Import-Klassenbündel"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr ""
-"Hier können Sie Ready2Import-Klassenbündel importieren, die unsere "
-"gebräuchlichsten Konfigurationspunkte zeigen. Bitte beachten Sie, dass "
-"einige zusätzliche Konfigurationen erforderlich sein können."
+msgstr "Hier können Sie Ready2Import-Klassenbündel importieren, die unsere gebräuchlichsten Konfigurationspunkte zeigen. Bitte beachten Sie, dass einige zusätzliche Konfigurationen erforderlich sein können."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1138,9 +1134,7 @@ msgstr "Die Versionsnummer dieses Config Items"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
-"Die Versionsnummer wird bereits von den ConfigItems mit den folgenden "
-"Nummern verwendet: %s"
+msgstr "Die Versionsnummer wird bereits von den ConfigItems mit den folgenden Nummern verwendet: %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1188,9 +1182,7 @@ msgstr "Die folgenden Rollen werden importiert"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr ""
-"Beachten Sie, dass auch entsprechende dynamische Felder und GeneralCatalog-"
-"Klassen erstellt werden und es keine automatische Löschung gibt."
+msgstr "Beachten Sie, dass auch entsprechende dynamische Felder und GeneralCatalog-Klassen erstellt werden und es keine automatische Löschung gibt."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1230,9 +1222,7 @@ msgstr "Klasseneinschränkungen für das Konfigurationsobjekt"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
-"Wählen Sie eine oder mehrere Klassen aus, um die auswählbaren Config Items "
-"einzuschränken"
+msgstr "Wählen Sie eine oder mehrere Klassen aus, um die auswählbaren Config Items einzuschränken"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
@@ -1256,10 +1246,7 @@ msgstr "Link Richtung"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr ""
-"Das referenzierende Objekt ist dasjenige, das dieses dynamische Feld "
-"enthält, das referenzierte Objekt ist dasjenige, das als Wert für das "
-"dynamische Feld ausgewählt wurde."
+msgstr "Das referenzierende Objekt ist dasjenige, das dieses dynamische Feld enthält, das referenzierte Objekt ist dasjenige, das als Wert für das dynamische Feld ausgewählt wurde."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1275,16 +1262,11 @@ msgstr "Link-Referenzierungsart"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"Angabe, ob sich dieser Link auf das ConfigItem oder die statische Version "
-"des referenzierenden Objekts bezieht. Die Berechnung des aktuellen "
-"Vorfallsstatus wird nur bei dynamischen Links durchgeführt."
+msgstr "Angabe, ob sich dieser Link auf das ConfigItem oder die statische Version des referenzierenden Objekts bezieht. Die Berechnung des aktuellen Vorfallsstatus wird nur bei dynamischen Links durchgeführt."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
-"Wählen Sie das Attribut aus, nach dem die Konfigurationselemente durchsucht "
-"werden sollen"
+msgstr "Wählen Sie das Attribut aus, nach dem die Konfigurationselemente durchsucht werden sollen"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
@@ -1308,14 +1290,11 @@ msgstr "0 Zeilen in die Tabelle configitem_link eingefügt"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
-"Fehler beim Synchronisieren der Definitionen. Bitte prüfen Sie das Protokoll."
+msgstr "Fehler beim Synchronisieren der Definitionen. Bitte prüfen Sie das Protokoll."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr ""
-"Sie haben ITSMConfigItem-Definitionen, die nicht synchronisiert sind. Bitte "
-"stellen Sie Ihre dynamischen ITSMConfigItem-Feldänderungen bereit."
+msgstr "Sie haben ITSMConfigItem-Definitionen, die nicht synchronisiert sind. Bitte stellen Sie Ihre dynamischen ITSMConfigItem-Feldänderungen bereit."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1335,19 +1314,11 @@ msgstr "1 - Abgebildet"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Ermöglicht erweiterte Suchbedingungen bei der Suche nach "
-"Konfigurationsobjekten in der Agentenschnittstelle. Mit dieser Funktion "
-"können Sie z. B. den Namen des Konfigurationseintrags mit solchen "
-"Bedingungen wie \"(*key1*&&*key2*)\" oder \"(*key1*||*key2*)\" suchen."
+msgstr "Ermöglicht erweiterte Suchbedingungen bei der Suche nach Konfigurationsobjekten in der Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Namen des Konfigurationseintrags mit solchen Bedingungen wie \"(*key1*&&*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"Ermöglicht erweiterte Suchbedingungen bei der Suche nach "
-"Konfigurationseinträgen in der Kundenschnittstelle. Mit dieser Funktion "
-"können Sie z. B. den Namen eines Konfigurationseintrags mit Bedingungen wie "
-"\"(*key1*&&*key2*)\" oder \"(*key1*||*key2*)\" suchen."
+msgstr "Ermöglicht erweiterte Suchbedingungen bei der Suche nach Konfigurationseinträgen in der Kundenschnittstelle. Mit dieser Funktion können Sie z. B. den Namen eines Konfigurationseintrags mit Bedingungen wie \"(*key1*&&*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1367,9 +1338,7 @@ msgstr "Wählen Sie Attribute, um die Erstellung einer neuen Version auszulösen
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
-"Wählen Sie Kategorien aus, die Sie dieser Konfigurationselementklasse "
-"zuordnen möchten."
+msgstr "Wählen Sie Kategorien aus, die Sie dieser Konfigurationselementklasse zuordnen möchten."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
@@ -1377,23 +1346,15 @@ msgstr "Spaltenkonfigurationsfilter für ConfigItem Overview."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Spalten, die in der Config Item Übersicht der Agentenschnittstelle gefiltert "
-"werden können. Hinweis: Nur Config Item Attribute und Dynamic Fields "
-"(DynamicField_NameX) sind erlaubt."
+msgstr "Spalten, die in der Config Item Übersicht der Agentenschnittstelle gefiltert werden können. Hinweis: Nur Config Item Attribute und Dynamic Fields (DynamicField_NameX) sind erlaubt."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Spalten, die in der Config Item Übersicht der Kundenschnittstelle gefiltert "
-"werden können. Hinweis: Nur Config Item Attribute und Dynamic Fields "
-"(DynamicField_NameX) sind erlaubt."
+msgstr "Spalten, die in der Config Item Übersicht der Kundenschnittstelle gefiltert werden können. Hinweis: Nur Config Item Attribute und Dynamic Fields (DynamicField_NameX) sind erlaubt."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
-"Config-Element-Ereignismodul, das Config-Elemente auf ihre aktuelle "
-"Definition aktualisiert."
+msgstr "Config-Element-Ereignismodul, das Config-Elemente auf ihre aktuelle Definition aktualisiert."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
@@ -1401,8 +1362,7 @@ msgstr "Config item event module, das die Tabelle configitem_ĺink aktualisiert.
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
-"Das Config-Item-Ereignismodul aktualisiert den aktuellen Ereignisstatus."
+msgstr "Das Config-Item-Ereignismodul aktualisiert den aktuellen Ereignisstatus."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1414,18 +1374,11 @@ msgstr "ConfigItem Version"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems der folgenden Klassen werden nicht auf dem Elasticsearch-Server "
-"gespeichert. Um dies auf bestehende CIs anzuwenden, muss die CI-Migration "
-"über die Konsole ausgeführt werden, nachdem diese Option geändert wurde."
+msgstr "ConfigItems der folgenden Klassen werden nicht auf dem Elasticsearch-Server gespeichert. Um dies auf bestehende CIs anzuwenden, muss die CI-Migration über die Konsole ausgeführt werden, nachdem diese Option geändert wurde."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"ConfigItems mit den folgenden Bereitstellungszuständen werden nicht auf dem "
-"Elasticsearch-Server gespeichert. Um dies auf bestehende CIs anzuwenden, "
-"muss die CI-Migration über die Konsole ausgeführt werden, nachdem diese "
-"Option geändert wurde."
+msgstr "ConfigItems mit den folgenden Bereitstellungszuständen werden nicht auf dem Elasticsearch-Server gespeichert. Um dies auf bestehende CIs anzuwenden, muss die CI-Migration über die Konsole ausgeführt werden, nachdem diese Option geändert wurde."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1433,139 +1386,71 @@ msgstr "Kunden können historische CI-Versionen einsehen."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
-"Kunden haben die Möglichkeit, manuell zwischen historischen CI-Versionen zu "
-"wechseln."
+msgstr "Kunden haben die Möglichkeit, manuell zwischen historischen CI-Versionen zu wechseln."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"Standarddaten, die auf dem Attribut für den Suchbildschirm für "
-"Konfigurationsobjekte verwendet werden sollen. Beispiel: "
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"."
+msgstr "Standarddaten, die auf dem Attribut für den Suchbildschirm für Konfigurationsobjekte verwendet werden sollen. Beispiel: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"Standarddaten, die für das Attribut für den Suchbildschirm für "
-"Konfigurationsobjekte verwendet werden sollen. Beispiel: "
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
+msgstr "Standarddaten, die für das Attribut für den Suchbildschirm für Konfigurationsobjekte verwendet werden sollen. Beispiel: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"Definiert ein Template::Toolkit-Schema für Versionsstrings. Wird nur "
-"verwendet, wenn Version String Module auf TemplateToolkit eingestellt ist."
+msgstr "Definiert ein Template::Toolkit-Schema für Versionsstrings. Wird nur verwendet, wenn Version String Module auf TemplateToolkit eingestellt ist."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"Definieren Sie eine Reihe von Bedingungen, unter denen ein Kunde ein "
-"Konfigurationsobjekt sehen darf. Die Bedingungen können optional auf "
-"bestimmte Kundengruppen beschränkt werden. Der Name ist das einzige "
-"obligatorische Attribut. Wenn keine anderen Optionen angegeben werden, sind "
-"alle Konfigurationsobjekte unter dieser Kategorie sichtbar."
+msgstr "Definieren Sie eine Reihe von Bedingungen, unter denen ein Kunde ein Konfigurationsobjekt sehen darf. Die Bedingungen können optional auf bestimmte Kundengruppen beschränkt werden. Der Name ist das einzige obligatorische Attribut. Wenn keine anderen Optionen angegeben werden, sind alle Konfigurationsobjekte unter dieser Kategorie sichtbar."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
-"Legt fest, ob die Beschriftungen der Verbindungstypen in den "
-"Knotenverbindungen angezeigt werden müssen."
+msgstr "Legt fest, ob die Beschriftungen der Verbindungstypen in den Knotenverbindungen angezeigt werden müssen."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Definiert die verfügbaren Spalten der CIs in der Konfigurationsübersicht in "
-"Abhängigkeit von der CI-Klasse. Jeder Eintrag muss aus einem Klassennamen "
-"und einem Array von verfügbaren Feldern für die entsprechende Klasse "
-"bestehen. Dynamische Feldeinträge müssen das Schema DynamicField_FieldName "
-"einhalten."
+msgstr "Definiert die verfügbaren Spalten der CIs in der Konfigurationsübersicht in Abhängigkeit von der CI-Klasse. Jeder Eintrag muss aus einem Klassennamen und einem Array von verfügbaren Feldern für die entsprechende Klasse bestehen. Dynamische Feldeinträge müssen das Schema DynamicField_FieldName einhalten."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr ""
-"Definiert das Standard-Konfigurationsattribut für die Sortierung des "
-"Konfigurationsergebnisses der Agentenschnittstelle."
+msgstr "Definiert das Standard-Konfigurationsattribut für die Sortierung des Konfigurationsergebnisses der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr ""
-"Definiert das Standard-Konfigurationsattribut für die Sortierung des "
-"Suchergebnisses der Kundenschnittstelle nach Konfig-Elementen."
+msgstr "Definiert das Standard-Konfigurationsattribut für die Sortierung des Suchergebnisses der Kundenschnittstelle nach Konfig-Elementen."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr ""
-"Definiert das Standard-Konfigurationsattribut für die Sortierung des "
-"Konfigurations-Suchergebnisses dieser Operation."
+msgstr "Definiert das Standard-Konfigurationsattribut für die Sortierung des Konfigurations-Suchergebnisses dieser Operation."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Legt die Standardreihenfolge der Konfigurationsobjekte in den "
-"Suchergebnissen der Agentenschnittstelle fest. Up: ältester Eintrag oben. "
-"Nach unten: das neueste oben."
+msgstr "Legt die Standardreihenfolge der Konfigurationsobjekte in den Suchergebnissen der Agentenschnittstelle fest. Up: ältester Eintrag oben. Nach unten: das neueste oben."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Definiert die Standardreihenfolge der Konfigurationsobjekte in den "
-"Suchergebnissen der Kundenschnittstelle. Oben: ältester Eintrag ganz oben. "
-"Unten: neueste oben."
+msgstr "Definiert die Standardreihenfolge der Konfigurationsobjekte in den Suchergebnissen der Kundenschnittstelle. Oben: ältester Eintrag ganz oben. Unten: neueste oben."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
-"Legt die Standardreihenfolge der Konfigurationsobjekte im Suchergebnis "
-"dieser Operation fest. Up: ältester Eintrag oben. Nach unten: das Neueste "
-"oben."
+msgstr "Legt die Standardreihenfolge der Konfigurationsobjekte im Suchergebnis dieser Operation fest. Up: ältester Eintrag oben. Nach unten: das Neueste oben."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"Definiert die standardmäßig angezeigten Spalten der CIs in der "
-"Konfigurationsübersicht in Abhängigkeit von der CI-Klasse. Jeder Eintrag "
-"muss aus einem Klassennamen und einem Array von verfügbaren Feldern für die "
-"entsprechende Klasse bestehen. Dynamische Feldeinträge müssen das Schema "
-"DynamicField_FieldName einhalten."
+msgstr "Definiert die standardmäßig angezeigten Spalten der CIs in der Konfigurationsübersicht in Abhängigkeit von der CI-Klasse. Jeder Eintrag muss aus einem Klassennamen und einem Array von verfügbaren Feldern für die entsprechende Klasse bestehen. Dynamische Feldeinträge müssen das Schema DynamicField_FieldName einhalten."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
-"Legt die Standardtiefe der Beziehungen fest, die angezeigt werden sollen."
+msgstr "Legt die Standardtiefe der Beziehungen fest, die angezeigt werden sollen."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
-"Definiert das standardmäßig angezeigte Suchattribut für die Suche nach "
-"Konfigurationsobjekten."
+msgstr "Definiert das standardmäßig angezeigte Suchattribut für die Suche nach Konfigurationsobjekten."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"Definiert das standardmäßig angezeigte Suchattribut für die Suchmaske des "
-"Konfigurationsobjekts. Beispiel: \"Key\" muss den Namen des dynamischen "
-"Feldes enthalten, in diesem Fall 'X', \"Content\" muss den Wert des "
-"dynamischen Feldes enthalten, abhängig vom Typ des dynamischen Feldes, Text: "
-"'a text', Dropdown: '1', Date/Time: "
-"'Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; "
-"Search_DynamicField_XTimeSlotStartHour=00; "
-"Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; "
-"Search_DynamicField_XTimeSlotStopMonth=01; "
-"Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59;' und oder "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "Definiert das standardmäßig angezeigte Suchattribut für die Suchmaske des Konfigurationsobjekts. Beispiel: \"Key\" muss den Namen des dynamischen Feldes enthalten, in diesem Fall 'X', \"Content\" muss den Wert des dynamischen Feldes enthalten, abhängig vom Typ des dynamischen Feldes, Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' und oder 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1573,26 +1458,19 @@ msgstr "Definiert die Suchgrenze für den Bildschirm CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
-"Legt die Suchgrenze für den Bildschirm CustomerITSMConfigItemSearch fest."
+msgstr "Legt die Suchgrenze für den Bildschirm CustomerITSMConfigItemSearch fest."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr ""
-"Legt fest, welche Elemente in der dritten Ebene der ITSM Config Item ACL-"
-"Struktur für \"Action\" verfügbar sind."
+msgstr "Legt fest, welche Elemente in der dritten Ebene der ITSM Config Item ACL-Struktur für \"Action\" verfügbar sind."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
-"Legt fest, welche Elemente in der ersten Ebene der ITSM Config Item ACL-"
-"Struktur verfügbar sind."
+msgstr "Legt fest, welche Elemente in der ersten Ebene der ITSM Config Item ACL-Struktur verfügbar sind."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
-"Legt fest, welche Elemente in der zweiten Ebene der ITSM Config Item ACL-"
-"Struktur verfügbar sind."
+msgstr "Legt fest, welche Elemente in der zweiten Ebene der ITSM Config Item ACL-Struktur verfügbar sind."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1608,65 +1486,39 @@ msgstr "DeploymentState"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"Dynamisches Feld-Ereignismodul, das Konfigurationsdefinitionen als nicht "
-"mehr synchron markiert, wenn sich die darin enthaltenen dynamischen Felder "
-"ändern."
+msgstr "Dynamisches Feld-Ereignismodul, das Konfigurationsdefinitionen als nicht mehr synchron markiert, wenn sich die darin enthaltenen dynamischen Felder ändern."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
-"Die angezeigten Dynamischen Felder in der Ansicht \"zusätzliche ITSM-Felder\""
-" im Agenten-Interface."
+msgstr "Die angezeigten Dynamischen Felder in der Ansicht \"zusätzliche ITSM-Felder\" im Agenten-Interface."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
-"Dynamische Felder, die in der Übersichtsmaske der Kundenschnittstelle "
-"angezeigt werden."
+msgstr "Dynamische Felder, die in der Übersichtsmaske der Kundenschnittstelle angezeigt werden."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
-"Dynamische Felder, die in der Suchmaske der Agentenschnittstelle für "
-"Konfigurationsobjekte angezeigt werden."
+msgstr "Dynamische Felder, die in der Suchmaske der Agentenschnittstelle für Konfigurationsobjekte angezeigt werden."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"Aktiviert/deaktiviert die Funktion, ITSM-Konfigurationselemente auf "
-"eindeutige Namen zu prüfen. Bevor Sie diese Option aktivieren, sollten Sie "
-"Ihr System auf bereits vorhandene Konfigurationselemente mit doppelten Namen "
-"überprüfen. Sie können dies mit dem Konsolenbefehl Admin::ITSM::Configitem::"
-"ListDuplicates tun."
+msgstr "Aktiviert/deaktiviert die Funktion, ITSM-Konfigurationselemente auf eindeutige Namen zu prüfen. Bevor Sie diese Option aktivieren, sollten Sie Ihr System auf bereits vorhandene Konfigurationselemente mit doppelten Namen überprüfen. Sie können dies mit dem Konsolenbefehl Admin::ITSM::Configitem::ListDuplicates tun."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"Felder des Konfigurationselementindex, die für die Volltextsuche verwendet "
-"werden. Felder werden ebenfalls gespeichert, sind aber für die "
-"Gesamtfunktionalität nicht zwingend erforderlich. Die Aufnahme von Anhängen "
-"kann deaktiviert werden, indem der Eintrag auf 0 gesetzt oder gelöscht wird."
+msgstr "Felder des Konfigurationselementindex, die für die Volltextsuche verwendet werden. Felder werden ebenfalls gespeichert, sind aber für die Gesamtfunktionalität nicht zwingend erforderlich. Die Aufnahme von Anhängen kann deaktiviert werden, indem der Eintrag auf 0 gesetzt oder gelöscht wird."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-"Im Index der Konfigurationselemente gespeicherte Felder, die neben der "
-"Volltextsuche auch für andere Zwecke verwendet werden. Für die vollständige "
-"Funktionalität sind alle Felder obligatorisch."
+msgstr "Im Index der Konfigurationselemente gespeicherte Felder, die neben der Volltextsuche auch für andere Zwecke verwendet werden. Für die vollständige Funktionalität sind alle Felder obligatorisch."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"Für jeden Webservice (Schlüssel) kann ein Array von Klassen (Wert) definiert "
-"werden, auf die der Import beschränkt wird. Für alle gewählten Klassen oder "
-"alle vorhandenen Klassen müssen die identifizierenden Attribute in der "
-"Invokerkonfiguration ausgewählt werden."
+msgstr "Für jeden Webservice (Schlüssel) kann ein Array von Klassen (Wert) definiert werden, auf die der Import beschränkt wird. Für alle gewählten Klassen oder alle vorhandenen Klassen müssen die identifizierenden Attribute in der Invokerkonfiguration ausgewählt werden."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
-"GenericInterface-Modulregistrierung für die ConfigItemFetch-Aufruferschicht."
+msgstr "GenericInterface-Modulregistrierung für die ConfigItemFetch-Aufruferschicht."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1682,21 +1534,15 @@ msgstr "VorfallZustand"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
-"Schließt Bereitstellungszustände in die Suche nach Konfigurationselementen "
-"in der Kundenschnittstelle ein."
+msgstr "Schließt Bereitstellungszustände in die Suche nach Konfigurationselementen in der Kundenschnittstelle ein."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
-"Schließt Vorfallszustände in die Konfigurationssuche der Kundenschnittstelle "
-"ein."
+msgstr "Schließt Vorfallszustände in die Konfigurationssuche der Kundenschnittstelle ein."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
-"Maximale Anzahl der Konfigurationsobjekte, die im Ergebnis dieser Operation "
-"angezeigt werden sollen."
+msgstr "Maximale Anzahl der Konfigurationsobjekte, die im Ergebnis dieser Operation angezeigt werden sollen."
 
 #. SysConfig
 msgid "Name Module"
@@ -1708,111 +1554,71 @@ msgstr "Nummer Modul"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
-"Anzahl der Konfigurationspunkte, die auf jeder Seite eines Suchergebnisses "
-"in der Agentenschnittstelle angezeigt werden sollen."
+msgstr "Anzahl der Konfigurationspunkte, die auf jeder Seite eines Suchergebnisses in der Agentenschnittstelle angezeigt werden sollen."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
-"Anzahl der Konfigurationspunkte, die auf jeder Seite eines Suchergebnisses "
-"in der Kundenschnittstelle angezeigt werden sollen."
+msgstr "Anzahl der Konfigurationspunkte, die auf jeder Seite eines Suchergebnisses in der Kundenschnittstelle angezeigt werden sollen."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"Objekte, nach denen gesucht werden soll, wie viele Einträge und welche "
-"Attribute angezeigt werden sollen. ConfigItem-Attribute müssen explizit über "
-"Elasticsearch gespeichert werden."
+msgstr "Objekte, nach denen gesucht werden soll, wie viele Einträge und welche Attribute angezeigt werden sollen. ConfigItem-Attribute müssen explizit über Elasticsearch gespeichert werden."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für die Kategorien für Konfigurationsobjektklassen in der "
-"Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für die Kategorien für Konfigurationsobjektklassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"Parameter für die Spaltenfilter der kleinen Konfigurationsübersicht. Bitte "
-"beachten Sie: Wenn Sie 'Active' auf 0 setzen, können Agenten die "
-"Einstellungen dieser Gruppe nur in ihren persönlichen Präferenzen "
-"bearbeiten, Administratoren können jedoch weiterhin die Einstellungen eines "
-"anderen Benutzers bearbeiten. Verwenden Sie 'PreferenceGroup', um zu "
-"steuern, in welchem Bereich diese Einstellungen in der Benutzeroberfläche "
-"angezeigt werden sollen."
+msgstr "Parameter für die Spaltenfilter der kleinen Konfigurationsübersicht. Bitte beachten Sie: Wenn Sie 'Active' auf 0 setzen, können Agenten die Einstellungen dieser Gruppe nur in ihren persönlichen Präferenzen bearbeiten, Administratoren können jedoch weiterhin die Einstellungen eines anderen Benutzers bearbeiten. Verwenden Sie 'PreferenceGroup', um zu steuern, in welchem Bereich diese Einstellungen in der Benutzeroberfläche angezeigt werden sollen."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für das Namensmodul für Konfigurationsobjektklassen in der "
-"Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für das Namensmodul für Konfigurationsobjektklassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für das Nummernmodul für Konfigurationsobjektklassen in der "
-"Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für das Nummernmodul für Konfigurationsobjektklassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für das Versionsstringmodul für Konfigurationsobjektklassen in der "
-"Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für das Versionsstringmodul für Konfigurationsobjektklassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für das Versionstring-Template-Toolkit-Modul für Config-Item-"
-"Klassen in der Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für das Versionstring-Template-Toolkit-Modul für Config-Item-Klassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr ""
-"Parameter für den Versions-Trigger für Config-Item-Klassen in der "
-"Einstellungsansicht der Agentenschnittstelle."
+msgstr "Parameter für den Versions-Trigger für Config-Item-Klassen in der Einstellungsansicht der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr ""
-"Führt die konfigurierte Aktion für jedes Ereignis für jeden konfigurierten "
-"Webservice aus (als Invoker)."
+msgstr "Führt die konfigurierte Aktion für jedes Ereignis für jeden konfigurierten Webservice aus (als Invoker)."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
-"Erforderliche Berechtigungen für die Verwendung der ITSM-"
-"Konfigurationsobjekt-Anhängeaktion in der Agentenschnittstelle."
+msgstr "Erforderliche Berechtigungen für die Verwendung der ITSM-Konfigurationsobjekt-Anhängeaktion in der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
-"Erforderliche Berechtigungen zur Verwendung des ITSM-Suchbildschirms für "
-"Konfigurationselemente in der Kundenschnittstelle."
+msgstr "Erforderliche Berechtigungen zur Verwendung des ITSM-Suchbildschirms für Konfigurationselemente in der Kundenschnittstelle."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
-"Erforderliche Berechtigungen für die Verwendung der ITSM-"
-"Konfigurationsbaumansicht in der Agentenschnittstelle."
+msgstr "Erforderliche Berechtigungen für die Verwendung der ITSM-Konfigurationsbaumansicht in der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
-"Erforderliche Berechtigungen zur Verwendung des ITSM-"
-"Konfigurationsbildschirms in der Agentenschnittstelle."
+msgstr "Erforderliche Berechtigungen zur Verwendung des ITSM-Konfigurationsbildschirms in der Agentenschnittstelle."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
-"Zeigt einen Link im Menü an, um die Links zu den Konfigurationselementen in "
-"einer Baumansicht anzuzeigen."
+msgstr "Zeigt einen Link im Menü an, um die Links zu den Konfigurationselementen in einer Baumansicht anzuzeigen."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
-"Die Standardkategorie, die angezeigt wird, wenn keine Kategorie ausgewählt "
-"ist."
+msgstr "Die Standardkategorie, die angezeigt wird, wenn keine Kategorie ausgewählt ist."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
@@ -1832,11 +1638,7 @@ msgstr "Version Auslöser"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"Ob die Ausführung von ConfigItemACL durch Überprüfung von "
-"zwischengespeicherten Feldabhängigkeiten vermieden werden kann. Dies kann "
-"die Ladezeiten von Formularen verbessern, muss aber deaktiviert werden, wenn "
-"ACLModule für ITSMConfigItem- und Form-ReturnTypes verwendet werden sollen."
+msgstr "Ob die Ausführung von ConfigItemACL durch Überprüfung von zwischengespeicherten Feldabhängigkeiten vermieden werden kann. Dies kann die Ladezeiten von Formularen verbessern, muss aber deaktiviert werden, wenn ACLModule für ITSMConfigItem- und Form-ReturnTypes verwendet werden sollen."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1848,9 +1650,7 @@ msgstr "Allgemeine Invoker-Daten"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"Dieses Invoker-Backend-Modul wird aufgerufen, um die Daten zum Versand an "
-"das entfernte System sowie die zurückgelieferten Daten aufzubereiten."
+msgstr "Dieses Invoker-Backend-Modul wird aufgerufen, um die Daten zum Versand an das entfernte System sowie die zurückgelieferten Daten aufzubereiten."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1862,15 +1662,11 @@ msgstr "Mapping"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr ""
-"Die Daten des OTOBO-Invokers werden von diesem Mapping verarbeitet, um sie "
-"so umzuformen, wie das entfernte System die Daten benötigt."
+msgstr "Die Daten des OTOBO-Invokers werden von diesem Mapping verarbeitet, um sie so umzuformen, wie das entfernte System die Daten benötigt."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr ""
-"Die Antwort-Daten des entfernten Systems werden von diesem Mapping "
-"verarbeitet, um sie so umzuformen, wie der Invoker von OTOBO sie benötigt."
+msgstr "Die Antwort-Daten des entfernten Systems werden von diesem Mapping verarbeitet, um sie so umzuformen, wie der Invoker von OTOBO sie benötigt."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1886,9 +1682,7 @@ msgstr "Event hinzufügen"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr ""
-"Asynchrone Ereignisauslöser werden vom OTOBO Scheduler Daemon im Hintergrund "
-"verarbeitet (empfohlen)."
+msgstr "Asynchrone Ereignisauslöser werden vom OTOBO Scheduler Daemon im Hintergrund verarbeitet (empfohlen)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1948,9 +1742,7 @@ msgstr "Neue Dynamische Felder"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr ""
-"Möchten Sie die Vorteile weiterer dynamischer Felder nutzen? Sie haben "
-"vollen Zugriff auf folgende Feldtypen:"
+msgstr "Möchten Sie die Vorteile weiterer dynamischer Felder nutzen? Sie haben vollen Zugriff auf folgende Feldtypen:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1966,9 +1758,7 @@ msgstr "Schlüssel der externen Quelle"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr ""
-"Wenn der Wert über eine externe Quelle (z. B. Webdienst oder Import/Export) "
-"gesetzt wird, wird er als dieses Attribut interpretiert."
+msgstr "Wenn der Wert über eine externe Quelle (z. B. Webdienst oder Import/Export) gesetzt wird, wird er als dieses Attribut interpretiert."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -1984,9 +1774,7 @@ msgstr "Grundstruktur ungültig. Bitte verwenden Sie ein Arry im YAML-Format."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr ""
-"Die ACLs konnten wegen eines unbekannten Fehlers nicht importiert werden. "
-"Weitere Informationen finden Sie in den OTOBO Logdateien"
+msgstr "Die ACLs konnten wegen eines unbekannten Fehlers nicht importiert werden. Weitere Informationen finden Sie in den OTOBO Logdateien"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -1994,9 +1782,7 @@ msgstr "%s (Kopie) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr ""
-"Ein prozentualer Wert des minimalen Übersetzungsfortschritts pro Sprache, "
-"der für Dokumentationen verwendet werden kann."
+msgstr "Ein prozentualer Wert des minimalen Übersetzungsfortschritts pro Sprache, der für Dokumentationen verwendet werden kann."
 
 #. SysConfig
 msgid "Access repos via http or https."
@@ -2008,20 +1794,15 @@ msgstr "Autoloading von Znuny4OTRSRepo-Erweiterungen."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
-"Registrierung des Backend-Moduls für das Modul zur Prüfung von "
-"Konfigurationskonflikten."
+msgstr "Registrierung des Backend-Moduls für das Modul zur Prüfung von Konfigurationskonflikten."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
-"Registrierung des Backend-Moduls für das Modul zur Prüfung von "
-"Dateikonflikten."
+msgstr "Registrierung des Backend-Moduls für das Modul zur Prüfung von Dateikonflikten."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
-"Registrierung des Backend-Moduls für die Funktion \"redefine check module\"."
+msgstr "Registrierung des Backend-Moduls für die Funktion \"redefine check module\"."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
@@ -2101,9 +1882,7 @@ msgstr "Definition umbenannter OPMS Pakete."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
-"Verzeichnis, das von Git zum Zwischenspeichern von Repositories verwendet "
-"wird."
+msgstr "Verzeichnis, das von Git zum Zwischenspeichern von Repositories verwendet wird."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
@@ -2111,8 +1890,7 @@ msgstr "Verzeichnis, das von Git zum Speichern temporärer Daten verwendet wird.
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
-"Verzeichnis, das von Git zum Speichern von Arbeitskopien verwendet wird."
+msgstr "Verzeichnis, das von Git zum Speichern von Arbeitskopien verwendet wird."
 
 #. SysConfig
 msgid "Disable online repositories."
@@ -2168,9 +1946,7 @@ msgstr "Registrierung der GIT Verfasser"
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr ""
-"Generiert HTML-Kommentar-Anker für die angegebenen Blöcke, damit Filter "
-"diese nutzen können."
+msgstr "Generiert HTML-Kommentar-Anker für die angegebenen Blöcke, damit Filter diese nutzen können."
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2198,9 +1974,7 @@ msgstr "Gruppe, dessen Mitglieder Repository-Admin-Rechte in OPMS haben."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
-"Gruppe, deren Mitglieder Informationen zu CI-Testergebnissen in OPMS-"
-"Bildschirmen sehen."
+msgstr "Gruppe, deren Mitglieder Informationen zu CI-Testergebnissen in OPMS-Bildschirmen sehen."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
@@ -2288,10 +2062,7 @@ msgstr "Legt den Pfad zums BugzillaAddComment post receive Skript fest."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"Legt den Pfad für den Speicherort des OTRSCodePolicy-Skripts fest. Es wird "
-"empfohlen, einen separaten Klon des OTRSCodePolicy-Moduls zu haben, der über "
-"Cron aktualisiert wird."
+msgstr "Legt den Pfad für den Speicherort des OTRSCodePolicy-Skripts fest. Es wird empfohlen, einen separaten Klon des OTRSCodePolicy-Moduls zu haben, der über Cron aktualisiert wird."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
@@ -2303,9 +2074,7 @@ msgstr "Letzte Übertragungen in Git-Repositories anzeigen."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
-"Zeigt einen Link im Menü an, um einen Einheitstest aus dem aktuellen Ticket "
-"heraus zu erstellen."
+msgstr "Zeigt einen Link im Menü an, um einen Einheitstest aus dem aktuellen Ticket heraus zu erstellen."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2349,42 +2118,27 @@ msgstr "Diese Konfiguration definiert ob nur gültige oder alle (ungültige) dyn
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"Diese Konfiguration legt fest, ob die OTRS-Paketverifizierung aktiv oder "
-"deaktiviert sein soll. Ist sie deaktiviert, werden alle Pakete als "
-"verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete "
-"zu verwenden."
+msgstr "Diese Konfiguration legt fest, ob die OTRS-Paketverifizierung aktiv oder deaktiviert sein soll. Ist sie deaktiviert, werden alle Pakete als verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete zu verwenden."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"Diese Konfiguration definiert die URL zum OTRS CloudService Proxy-Dienst. "
-"Das http oder https Präfix wird hinzugefügt, abhängig von der Auswahl der "
-"SysConfig 'Znuny4OTRSRepoType'."
+msgstr "Diese Konfiguration definiert die URL zum OTRS CloudService Proxy-Dienst. Das http oder https Präfix wird hinzugefügt, abhängig von der Auswahl der SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
-"Mit dieser Konfiguration wird ein Output-Post-Filter registriert, um die "
-"Paketprüfung zu erweitern."
+msgstr "Mit dieser Konfiguration wird ein Output-Post-Filter registriert, um die Paketprüfung zu erweitern."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr ""
-"Diese Konfiguration registriert ein OutputFilter-Modul, das die OTRS "
-"Business Solution TM-Werbung entfernt."
+msgstr "Diese Konfiguration registriert ein OutputFilter-Modul, das die OTRS Business Solution TM-Werbung entfernt."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
-"Diese Konfiguration registriert einen Ausgabefilter, um die Auswahl des "
-"Online-Repositorys im Paketmanager auszublenden."
+msgstr "Diese Konfiguration registriert einen Ausgabefilter, um die Auswahl des Online-Repositorys im Paketmanager auszublenden."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
-"Aufgeräumte, unbearbeitete Freigabe, die schon lange nicht mehr von "
-"Testpomulen geprüft wurde."
+msgstr "Aufgeräumte, unbearbeitete Freigabe, die schon lange nicht mehr von Testpomulen geprüft wurde."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
@@ -3449,3 +3203,16 @@ msgstr "VoIP-Telefon"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "Webcam"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+

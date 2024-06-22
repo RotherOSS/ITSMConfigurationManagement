@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
 "PO-Revision-Date: 2024-05-24 08:14+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ja/>\n"
+"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -489,35 +488,35 @@ msgstr "ネットワーク"
 msgid "Software"
 msgstr "ソフトウェア"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
 msgstr "期限切れ"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
 msgstr "メンテナンス"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
 msgstr "パイロット"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
 msgstr "計画"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
 msgstr "修理"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
 msgstr "引退"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
 msgstr "レビュー"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
+#. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
 msgstr "テスト / QA"
 
@@ -1119,8 +1118,7 @@ msgstr "Ready2Import クラスバンドル"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "ここでは、Ready2Importクラスバンドルをインポートすることができます。追加設定"
-"が必要な場合もありますのでご注意ください。"
+msgstr "ここでは、Ready2Importクラスバンドルをインポートすることができます。追加設定が必要な場合もありますのでご注意ください。"
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1188,8 +1186,7 @@ msgstr "以下の役割がインポートされる。"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "対応するダイナミック・フィールドとGeneralCatalogクラスも作成され、自動的に削"
-"除されないことに注意してください。"
+msgstr "対応するダイナミック・フィールドとGeneralCatalogクラスも作成され、自動的に削除されないことに注意してください。"
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
@@ -1253,8 +1250,7 @@ msgstr "リンク方向"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "参照するオブジェクトはこのダイナミック・フィールドを含むもので、参照されるオ"
-"ブジェクトはダイナミック・フィールドの値として選択されたものです。"
+msgstr "参照するオブジェクトはこのダイナミック・フィールドを含むもので、参照されるオブジェクトはダイナミック・フィールドの値として選択されたものです。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
@@ -1270,10 +1266,7 @@ msgstr "リンク参照タイプ"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr ""
-"このリンクが参照オブジェクトの ConfigItem と静的バージョンのどちらに適用され"
-"るか。現在のインシデント・ステートの計算は、ダイナミック・リンクに対してのみ"
-"実行されます。"
+msgstr "このリンクが参照オブジェクトの ConfigItem と静的バージョンのどちらに適用されるか。現在のインシデント・ステートの計算は、ダイナミック・リンクに対してのみ実行されます。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
@@ -1305,8 +1298,7 @@ msgstr "定義の同期にエラーが発生しました。ログを確認して
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "ITSMConfigItemの定義が同期されていません。ITSMConfigItemの動的フィールドの変"
-"更を展開してください。"
+msgstr "ITSMConfigItemの定義が同期されていません。ITSMConfigItemの動的フィールドの変更を展開してください。"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
@@ -1326,17 +1318,11 @@ msgstr "1 - 表示"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"エージェントインタフェースの設定項目検索において、拡張検索条件を許可します。"
-"この機能により、\"(*key1*&*key2*) \"や\"(*key1*|*key2*) "
-"\"のような条件で設定項目名を検索することができます。"
+msgstr "エージェントインタフェースの設定項目検索において、拡張検索条件を許可します。この機能により、\"(*key1*&*key2*) \"や\"(*key1*|*key2*) \"のような条件で設定項目名を検索することができます。"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
-"カスタマーインターフェイスの設定項目検索において、検索条件を拡張することがで"
-"きます。この機能を使用すると、\"(*key1*&*key2*) \"または\"(*key1*|*key2*) "
-"\"のような条件で設定項目名を検索できます。"
+msgstr "カスタマーインターフェイスの設定項目検索において、検索条件を拡張することができます。この機能を使用すると、\"(*key1*&*key2*) \"または\"(*key1*|*key2*) \"のような条件で設定項目名を検索できます。"
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1364,16 +1350,11 @@ msgstr "ConfigItem概要のカラム設定項目フィルタ。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"エージェントインタフェースの設定項目概要でフィルタリングできる列。注意: "
-"コンフィグ項目属性と動的フィールド (DynamicField_NameX) のみ許可されます。"
+msgstr "エージェントインタフェースの設定項目概要でフィルタリングできる列。注意: コンフィグ項目属性と動的フィールド (DynamicField_NameX) のみ許可されます。"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"カスタマー・インターフェースの構成項目概要でフィルタリングできる列。注: "
-"コンフィグ項目属性とダイナミック・フィールド (DynamicField_NameX) "
-"のみ許可されます。"
+msgstr "カスタマー・インターフェースの構成項目概要でフィルタリングできる列。注: コンフィグ項目属性とダイナミック・フィールド (DynamicField_NameX) のみ許可されます。"
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
@@ -1385,8 +1366,7 @@ msgstr "configitem_ĺinkテーブルを更新する設定項目イベント・�
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr "コンフィグ・アイテム・イベント・モジュールは、現在のインシデント状態を更新す"
-"る。"
+msgstr "コンフィグ・アイテム・イベント・モジュールは、現在のインシデント状態を更新する。"
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1398,17 +1378,11 @@ msgstr "設定項目バージョン"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"以下のクラスのConfigItemsはElasticsearchサーバに保存されません。既存のCIに適"
-"用するには、このオプションを変更した後に、コンソール経由でCIマイグレーション"
-"を実行する必要があります。"
+msgstr "以下のクラスのConfigItemsはElasticsearchサーバに保存されません。既存のCIに適用するには、このオプションを変更した後に、コンソール経由でCIマイグレーションを実行する必要があります。"
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-"以下のデプロイ状態のConfigItemsは、Elasticsearchサーバに保存されません。既存"
-"のCIに適用するには、このオプションを変更した後に、コンソール経由でCIマイグレ"
-"ーションを実行する必要があります。"
+msgstr "以下のデプロイ状態のConfigItemsは、Elasticsearchサーバに保存されません。既存のCIに適用するには、このオプションを変更した後に、コンソール経由でCIマイグレーションを実行する必要があります。"
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
@@ -1420,33 +1394,19 @@ msgstr "顧客は、過去のCIバージョンを手動で切り替えること�
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
-"設定項目検索画面の属性で使用するデフォルトデータ。例："
-"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
-"=Last;ITSMConfigItemCreateTimePoint=2;\"。"
+msgstr "設定項目検索画面の属性で使用するデフォルトデータ。例：\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"。"
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
-"コンフィグ項目検索画面の属性で使用するデフォルトデータ。例："
-"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
-"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
-"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
+msgstr "コンフィグ項目検索画面の属性で使用するデフォルトデータ。例：\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
-msgstr ""
-"バージョン文字列用の Template::Toolkit スキームを定義します。"
-"バージョン文字列モジュールが TemplateToolkit "
-"に設定されている場合にのみ使用されます。"
+msgstr "バージョン文字列用の Template::Toolkit スキームを定義します。バージョン文字列モジュールが TemplateToolkit に設定されている場合にのみ使用されます。"
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
-msgstr ""
-"顧客が設定項目を見ることを許可される一連の条件を定義します。条件は、オプショ"
-"ンで特定の顧客グループに制限することができます。名前は唯一の必須属性です。他"
-"のオプションが指定されていない場合、すべての設定項目がそのカテゴリの下に表示"
-"されます。"
+msgstr "顧客が設定項目を見ることを許可される一連の条件を定義します。条件は、オプションで特定の顧客グループに制限することができます。名前は唯一の必須属性です。他のオプションが指定されていない場合、すべての設定項目がそのカテゴリの下に表示されます。"
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
@@ -1454,49 +1414,35 @@ msgstr "ノードの接続にリンクタイプのラベルを表示するかど
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"CIクラスに応じて、設定項目の概要で利用可能なCIの列を定義します。各項目は、ク"
-"ラス名と、対応するクラスで利用可能なフィールドの配列から構成されなければなり"
-"ません。動的フィールドのエントリは、DynamicField_FieldName "
-"スキームに従わなければなりません。"
+msgstr "CIクラスに応じて、設定項目の概要で利用可能なCIの列を定義します。各項目は、クラス名と、対応するクラスで利用可能なフィールドの配列から構成されなければなりません。動的フィールドのエントリは、DynamicField_FieldName スキームに従わなければなりません。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
-msgstr "エージェントインタフェースの設定項目検索結果の設定項目ソートのデフォルトの設"
-"定項目属性を定義します。"
+msgstr "エージェントインタフェースの設定項目検索結果の設定項目ソートのデフォルトの設定項目属性を定義します。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
-msgstr "顧客インタフェースの設定項目検索結果の設定項目ソートのデフォルトの設定項目属"
-"性を定義します。"
+msgstr "顧客インタフェースの設定項目検索結果の設定項目ソートのデフォルトの設定項目属性を定義します。"
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
-msgstr "この操作のコンフィグ項目検索結果のコンフィグ項目ソートのデフォルトのコンフィ"
-"グ項目属性を定義します。"
+msgstr "この操作のコンフィグ項目検索結果のコンフィグ項目ソートのデフォルトのコンフィグ項目属性を定義します。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "エージェントインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義"
-"します。上: 最も古いものが上。Down: 最新が上。"
+msgstr "エージェントインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義します。上: 最も古いものが上。Down: 最新が上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
-msgstr "カスタマインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義しま"
-"す。上: 古い順に表示されます。下：最新が上。"
+msgstr "カスタマインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義します。上: 古い順に表示されます。下：最新が上。"
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr "この操作のコンフィグ項目検索結果のデフォルトのコンフィグ項目順序を定義します"
-"。Up:古い順。Down：最新が上。"
+msgstr "この操作のコンフィグ項目検索結果のデフォルトのコンフィグ項目順序を定義します。Up:古い順。Down：最新が上。"
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
-"CIクラスに応じて、設定項目の概要に表示されるCIのデフォルトの列を定義します。"
-"各項目は、クラス名と、対応するクラスで利用可能なフィールドの配列から構成され"
-"なければなりません。動的フィールドのエントリは、DynamicField_FieldNameスキー"
-"ムに従わなければなりません。"
+msgstr "CIクラスに応じて、設定項目の概要に表示されるCIのデフォルトの列を定義します。各項目は、クラス名と、対応するクラスで利用可能なフィールドの配列から構成されなければなりません。動的フィールドのエントリは、DynamicField_FieldNameスキームに従わなければなりません。"
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
@@ -1508,24 +1454,7 @@ msgstr "設定項目検索画面のデフォルトの表示設定項目検索属
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
-msgstr ""
-"コンフィグ項目検索画面にデフォルトで表示されるコンフィグ項目検索属性を定義し"
-"ます。例: \"Key \"にはダイナミック・フィールドの名前 (この場合は 'X')、"
-"\"Content\" にはダイナミック・フィールドのタイプに応じてダイナミック・フィー"
-"ルドの値、Text: 'a text'、Dropdown: '1'、Date/"
-"Time：'Search_DynamicField_XTimeSlotStartYear=1974; "
-"Search_DynamicField_XTimeSlotStartMonth=01; "
-"Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartH"
-"our=00；Search_DynamicField_XTimeSlotStartMinute=00; "
-"Search_DynamicField_XTimeSlotStartSecond=00; "
-"Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStop"
-"Month=01；Search_DynamicField_XTimeSlotStopDay=26; "
-"Search_DynamicField_XTimeSlotStopHour=23; "
-"Search_DynamicField_XTimeSlotStopMinute=59; "
-"Search_DynamicField_XTimeSlotStopSecond=59；'、または "
-"'Search_DynamicField_XTimePointFormat=week; "
-"Search_DynamicField_XTimePointStart=Before; "
-"Search_DynamicField_XTimePointValue=7';."
+msgstr "コンフィグ項目検索画面にデフォルトで表示されるコンフィグ項目検索属性を定義します。例: \"Key \"にはダイナミック・フィールドの名前 (この場合は 'X')、\"Content\" にはダイナミック・フィールドのタイプに応じてダイナミック・フィールドの値、Text: 'a text'、Dropdown: '1'、Date/Time：'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01；Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59；'、または 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1537,8 +1466,7 @@ msgstr "CustomerITSMConfigItemSearch 画面の検索制限を定義します。"
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
-msgstr "ITSM 構成項目 ACL 構造の第 3 "
-"レベルで、「アクション」に使用できる項目を定義します。"
+msgstr "ITSM 構成項目 ACL 構造の第 3 レベルで、「アクション」に使用できる項目を定義します。"
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
@@ -1562,9 +1490,7 @@ msgstr "展開状態"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
-msgstr ""
-"ダイナミック・フィールド・イベント・モジュールは、ダイナミック・フィールドが"
-"変更された場合、コンフィグ・アイテムの定義が同期されていないとマークします。"
+msgstr "ダイナミック・フィールド・イベント・モジュールは、ダイナミック・フィールドが変更された場合、コンフィグ・アイテムの定義が同期されていないとマークします。"
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
@@ -1580,30 +1506,19 @@ msgstr "エージェントインターフェースの設定項目検索画面に
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr ""
-"ITSMの設定項目が一意な名前であるかどうかをチェックする機能の有効/無効を設定し"
-"ます。このオプションを有効にする前に、重複した名前を持つ既存の設定項目がない"
-"かシステムをチェックする必要があります。これは、コンソールコマンド "
-"Admin::ITSM::Configitem::ListDuplicates で実行できます。"
+msgstr "ITSMの設定項目が一意な名前であるかどうかをチェックする機能の有効/無効を設定します。このオプションを有効にする前に、重複した名前を持つ既存の設定項目がないかシステムをチェックする必要があります。これは、コンソールコマンド Admin::ITSM::Configitem::ListDuplicates で実行できます。"
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-"全文検索に使用される設定項目インデックスのフィールド。フィールドも保存されま"
-"すが、全体的な機能には必須ではありません。エントリを 0 に設定するか、削除する"
-"ことで、添付ファイルのインクルードを無効にすることができます。"
+msgstr "全文検索に使用される設定項目インデックスのフィールド。フィールドも保存されますが、全体的な機能には必須ではありません。エントリを 0 に設定するか、削除することで、添付ファイルのインクルードを無効にすることができます。"
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr "設定項目インデックスに格納されるフィールドで、全文検索以外に使用される。完全"
-"な機能のために、すべてのフィールドは必須です。"
+msgstr "設定項目インデックスに格納されるフィールドで、全文検索以外に使用される。完全な機能のために、すべてのフィールドは必須です。"
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
-msgstr ""
-"各Webサービス(キー)に対して、インポートを制限するクラスの配列(値)を定義するこ"
-"とができます。選択されたすべてのクラス、あるいは既存のすべてのクラスについて"
-"、インボーカの設定で識別属性を選択する必要があります。"
+msgstr "各Webサービス(キー)に対して、インポートを制限するクラスの配列(値)を定義することができます。選択されたすべてのクラス、あるいは既存のすべてのクラスについて、インボーカの設定で識別属性を選択する必要があります。"
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
@@ -1623,8 +1538,7 @@ msgstr "インシデントステート"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr "カスタマーインターフェースの設定項目検索にデプロイメントステートが含まれるよ"
-"うになりました。"
+msgstr "カスタマーインターフェースの設定項目検索にデプロイメントステートが含まれるようになりました。"
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
@@ -1652,57 +1566,43 @@ msgstr "カスタマーインターフェースの検索結果の各ページに
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-"検索するオブジェクト、エントリ数、表示する属性。ConfigItem の属性は、"
-"明示的に Elasticsearch 経由で保存する必要があります。"
+msgstr "検索するオブジェクト、エントリ数、表示する属性。ConfigItem の属性は、明示的に Elasticsearch 経由で保存する必要があります。"
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのカテゴリのパラメ"
-"ータ。"
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのカテゴリのパラメータ。"
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
-msgstr ""
-"小設定項目概要の列フィルタ用のパラメータです。注意: 'Active' を 0 に設定する"
-"と、エージェントは個人設定でこのグループの設定を編集できなくなりますが、管理"
-"者は他のユーザの設定を編集することができます。PreferenceGroup' を使用して、こ"
-"れらの設定をユーザインターフェイスのどのエリアに表示するかを制御します。"
+msgstr "小設定項目概要の列フィルタ用のパラメータです。注意: 'Active' を 0 に設定すると、エージェントは個人設定でこのグループの設定を編集できなくなりますが、管理者は他のユーザの設定を編集することができます。PreferenceGroup' を使用して、これらの設定をユーザインターフェイスのどのエリアに表示するかを制御します。"
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの名前モジュールの"
-"パラメータ。"
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの名前モジュールのパラメータ。"
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの番号モジュールの"
-"パラメータ。"
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの番号モジュールのパラメータ。"
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョン文字列"
-"モジュールのパラメータ。"
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョン文字列モジュールのパラメータ。"
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインターフェイスの環境設定ビューの設定項目クラス用のバージョン文"
-"字列テンプレートツールキットモジュールのパラメータ。"
+msgstr "エージェントインターフェイスの環境設定ビューの設定項目クラス用のバージョン文字列テンプレートツールキットモジュールのパラメータ。"
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
-msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョントリガ"
-"ーのパラメータ。"
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョントリガーのパラメータ。"
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
-msgstr "設定された各Webサービスの各イベントに対して（Invokerとして）設定されたアクシ"
-"ョンを実行します。"
+msgstr "設定された各Webサービスの各イベントに対して（Invokerとして）設定されたアクションを実行します。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr "エージェントインターフェイスでITSM構成項目添付アクションを使用するために必要"
-"な権限。"
+msgstr "エージェントインターフェイスでITSM構成項目添付アクションを使用するために必要な権限。"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
@@ -1710,13 +1610,11 @@ msgstr "カスタマーインターフェースのITSM構成項目検索画面�
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr "エージェントインターフェイスでITSM構成項目ツリービュー画面を使用するために必"
-"要な権限。"
+msgstr "エージェントインターフェイスでITSM構成項目ツリービュー画面を使用するために必要な権限。"
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr "エージェントインターフェイスの一括ITSM設定項目画面を使用するために必要な権限"
-"。"
+msgstr "エージェントインターフェイスの一括ITSM設定項目画面を使用するために必要な権限。"
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
@@ -1744,11 +1642,7 @@ msgstr "バージョン・トリガー"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
-msgstr ""
-"キャッシュされたフィールドの依存関係をチェックすることで、ConfigItemACLの実行"
-"を回避できるかどうか。これはフォームのロード時間を改善することができるが、"
-"ACLModule を ITSMConfigItem- と Form-ReturnType "
-"で使用する場合は無効にしなければならない。"
+msgstr "キャッシュされたフィールドの依存関係をチェックすることで、ConfigItemACLの実行を回避できるかどうか。これはフォームのロード時間を改善することができるが、ACLModule を ITSMConfigItem- と Form-ReturnType で使用する場合は無効にしなければならない。"
 
 #. SysConfig
 msgid "Which general information is shown in the header."
@@ -1760,9 +1654,7 @@ msgstr "一般インボーカーデータ"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr ""
-"このOTOBOのAPI実行元のバックエンドモジュールは、リモートシステムに送信される"
-"データを準備し、その応答データを処理するために呼び出されます。"
+msgstr "このOTOBOのAPI実行元のバックエンドモジュールは、リモートシステムに送信されるデータを準備し、その応答データを処理するために呼び出されます。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
@@ -1774,13 +1666,11 @@ msgstr "マッピング"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "OTOBOのAPI実行元からのデータは、このマッピングによって処理され、リモートシス"
-"テムが予期している種類のデータに変換されます。"
+msgstr "OTOBOのAPI実行元からのデータは、このマッピングによって処理され、リモートシステムが予期している種類のデータに変換されます。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr "レスポンスデータをこのマッピングにのっとって OTOBO "
-"のAPI実行元が期待するデータの種類に変換します。"
+msgstr "レスポンスデータをこのマッピングにのっとって OTOBO のAPI実行元が期待するデータの種類に変換します。"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
@@ -1796,8 +1686,7 @@ msgstr "イベントを追加"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr "非同期型イベントトリガーは、OTOBOスケジューラー・デーモンによってバックグラウ"
-"ンドで実行されます（推奨）。"
+msgstr "非同期型イベントトリガーは、OTOBOスケジューラー・デーモンによってバックグラウンドで実行されます（推奨）。"
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
@@ -1857,8 +1746,7 @@ msgstr "新しいダイナミックフィールド"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr "ダイナミック・フィールドをもっと有効に活用したいですか? "
-"以下の型を利用することができます:"
+msgstr "ダイナミック・フィールドをもっと有効に活用したいですか? 以下の型を利用することができます:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
@@ -1874,8 +1762,7 @@ msgstr "外部ソースキー"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr "外部ソース（ウェブサービスやインポート/エクスポートなど）を介して設定された場"
-"合、値はこの属性として解釈されます。"
+msgstr "外部ソース（ウェブサービスやインポート/エクスポートなど）を介して設定された場合、値はこの属性として解釈されます。"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
@@ -1891,8 +1778,7 @@ msgstr "ベース構造が無効です。YAML形式のデータを含む配列�
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr "不明なエラーのためにACLをインポートできませんでした。詳細については、OTOBOロ"
-"グを確認してください"
+msgstr "不明なエラーのためにACLをインポートできませんでした。詳細については、OTOBOログを確認してください"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
@@ -1976,34 +1862,11 @@ msgstr "GIT clone/push URLプレフィックスの定義。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"ダイナミック・フィールドの定義：Group => "
-"ダイナミック・フィールドにアクセスできるグループ; AlwaysVisible => "
-"フィールドは削除可能(0|1); InformationAreaName => ウィジェットの名前; "
-"InformationAreaSize => ウィジェットのサイズと位置(大|小); Name => "
-"使用するダイナミック・フィールドの名前; Priority => "
-"ダイナミック・フィールドの順序; State => フィールドの状態(0 = 無効; 1 = 有効;"
-" 2 = 必須); FilterRelease => "
-"表示するためにリポジトリ名と一致する必要がある正規表現(Regex)。FilterRelease "
-"=> リポジトリ名とマッチする正規表現、FilterPackage => "
-"パッケージ名とマッチする正規表現、FilterBranch => "
-"ブランチ名とマッチする正規表現、FilterRelease => "
-"リリリースバージョン文字列とマッチする正規表現。"
+msgstr "ダイナミック・フィールドの定義：Group => ダイナミック・フィールドにアクセスできるグループ; AlwaysVisible => フィールドは削除可能(0|1); InformationAreaName => ウィジェットの名前; InformationAreaSize => ウィジェットのサイズと位置(大|小); Name => 使用するダイナミック・フィールドの名前; Priority => ダイナミック・フィールドの順序; State => フィールドの状態(0 = 無効; 1 = 有効; 2 = 必須); FilterRelease => 表示するためにリポジトリ名と一致する必要がある正規表現(Regex)。FilterRelease => リポジトリ名とマッチする正規表現、FilterPackage => パッケージ名とマッチする正規表現、FilterBranch => ブランチ名とマッチする正規表現、FilterRelease => リリリースバージョン文字列とマッチする正規表現。"
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"ダイナミック・フィールドの定義：Group => "
-"動的フィールドにアクセスできるグループ、AlwaysVisible => "
-"フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、"
-"InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => "
-"使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => "
-"フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => "
-"リポジトリ名と一致する必要がある正規表現。FilterRepository => "
-"リポジトリ名とマッチする正規表現、FilterPackage => "
-"パッケージ名とマッチする正規表現、FilterBranch => "
-"ブランチ名とマッチする正規表現、FilterRelease => "
-"リリースのバージョン文字列とマッチする正規表現。"
+msgstr "ダイナミック・フィールドの定義：Group => 動的フィールドにアクセスできるグループ、AlwaysVisible => フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => 使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => リポジトリ名と一致する必要がある正規表現。FilterRepository => リポジトリ名とマッチする正規表現、FilterPackage => パッケージ名とマッチする正規表現、FilterBranch => ブランチ名とマッチする正規表現、FilterRelease => リリースのバージョン文字列とマッチする正規表現。"
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
@@ -2039,8 +1902,7 @@ msgstr "オンラインリポジトリを無効にする。"
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr "これらのユーザの git ssh "
-"接続の認証結果を記録しない。自動化されたものに便利です。"
+msgstr "これらのユーザの git ssh 接続の認証結果を記録しない。自動化されたものに便利です。"
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
@@ -2060,28 +1922,23 @@ msgstr "すべての関連リリースをftpサーバーにエクスポートす
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr "エージェントインターフェースのOPMSオブジェクトのフロントエンドモジュール登録"
-"。"
+msgstr "エージェントインターフェースのOPMSオブジェクトのフロントエンドモジュール登録。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr "パブリックインターフェイスのPublicOPMSRepositoryオブジェクトのフロントエンド"
-"モジュール登録。"
+msgstr "パブリックインターフェイスのPublicOPMSRepositoryオブジェクトのフロントエンドモジュール登録。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr "パブリックインターフェイスのPublicOPMSRepositoryLookupオブジェクトのフロント"
-"エンドモジュール登録。"
+msgstr "パブリックインターフェイスのPublicOPMSRepositoryLookupオブジェクトのフロントエンドモジュール登録。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr "パブリック・インターフェースのPublicOPMSTestBuildオブジェクトのフロントエンド"
-"モジュール登録。"
+msgstr "パブリック・インターフェースのPublicOPMSTestBuildオブジェクトのフロントエンドモジュール登録。"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr "パブリック・インターフェースにおける PublicPackageVerification "
-"オブジェクトのフロントエンド・モジュール登録。"
+msgstr "パブリック・インターフェースにおける PublicPackageVerification オブジェクトのフロントエンド・モジュール登録。"
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
@@ -2093,8 +1950,7 @@ msgstr "GIT著者登録。"
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr "フィルターが使用できるように、指定されたブロックのHTMLコメントフックを生成す"
-"る。"
+msgstr "フィルターが使用できるように、指定されたブロックのHTMLコメントフックを生成する。"
 
 #. SysConfig
 msgid "Generate documentations once per night."
@@ -2126,9 +1982,7 @@ msgstr "このグループのメンバーには、OPMSの画面でCI検査結果
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr ""
-"認証されたユーザが（ユーザログインとパスワードによって）パブリックインタフェ"
-"ース経由でテストパッケージをビルドするために所属しなければならないグループ。"
+msgstr "認証されたユーザが（ユーザログインとパスワードによって）パブリックインタフェース経由でテストパッケージをビルドするために所属しなければならないグループ。"
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
@@ -2140,8 +1994,7 @@ msgstr "ダイナミック・フィールドの画面表示を管理します。
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr "Git にアクセスするための公開 SSH "
-"鍵を管理します。新しい鍵を追加する際には、必ずこの設定を保存してください。"
+msgstr "Git にアクセスするための公開 SSH 鍵を管理します。新しい鍵を追加する際には、必ずこの設定を保存してください。"
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
@@ -2165,8 +2018,7 @@ msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr "gitにアクセスできるのは、これらのグループのいずれかでrw権限を持つユーザーだけ"
-"です。"
+msgstr "gitにアクセスできるのは、これらのグループのいずれかでrw権限を持つユーザーだけです。"
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
@@ -2178,48 +2030,15 @@ msgstr "BranchView 画面のページのパラメータ。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"GITProjectName' ダイナミック・フィールドの事前定義：Group => "
-"動的フィールドにアクセスできるグループ、AlwaysVisible => "
-"フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、"
-"InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => "
-"使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => "
-"フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => "
-"リポジトリ名が必要とする正規表現。FilterRepository => "
-"リポジトリ名とマッチする正規表現、FilterPackage => "
-"パッケージ名とマッチする正規表現、FilterBranch => "
-"ブランチ名とマッチする正規表現、FilterRelease => "
-"リリースのバージョン文字列とマッチする正規表現。"
+msgstr "GITProjectName' ダイナミック・フィールドの事前定義：Group => 動的フィールドにアクセスできるグループ、AlwaysVisible => フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => 使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => リポジトリ名が必要とする正規表現。FilterRepository => リポジトリ名とマッチする正規表現、FilterPackage => パッケージ名とマッチする正規表現、FilterBranch => ブランチ名とマッチする正規表現、FilterRelease => リリースのバージョン文字列とマッチする正規表現。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"GITRepositoryName' ダイナミック・フィールドの事前定義：Group => "
-"動的フィールドにアクセスできるグループ、AlwaysVisible => "
-"フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、"
-"InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => "
-"使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => "
-"フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => "
-"リポジトリ名の正規表現。FilterRepository => "
-"リポジトリ名とマッチする正規表現、FilterPackage => "
-"パッケージ名とマッチする正規表現、FilterBranch => "
-"ブランチ名とマッチする正規表現、FilterRelease => "
-"リリースのバージョン文字列とマッチする正規表現。"
+msgstr "GITRepositoryName' ダイナミック・フィールドの事前定義：Group => 動的フィールドにアクセスできるグループ、AlwaysVisible => フィールドは削除可能（0|1）、InformationAreaName => ウィジェットの名前、InformationAreaSize => ウィジェットのサイズと位置（Large|Small）、Name => 使用する動的フィールドの名前、Priority => 動的フィールドの順序、State => フィールドの状態（0 = 無効、1 = 有効、2 = 必須）、FilterRepository => リポジトリ名の正規表現。FilterRepository => リポジトリ名とマッチする正規表現、FilterPackage => パッケージ名とマッチする正規表現、FilterBranch => ブランチ名とマッチする正規表現、FilterRelease => リリースのバージョン文字列とマッチする正規表現。"
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr ""
-"PackageDeprecated' ダイナミック・フィールドの事前定義：Group => "
-"ダイナミック・フィールドにアクセスできるグループ、AlwaysVisible => "
-"フィールドは削除可能(0|1)、InformationAreaName => ウィジェットの名前、"
-"InformationAreaSize => ウィジェットのサイズと位置(Large|Small)、Name => "
-"使用するダイナミック・フィールドの名前、Priority => "
-"ダイナミック・フィールドの順序、State => フィールドの状態(0 = 無効、1 = "
-"有効、2 = 必須)、FilterRepository => リポジトリ名が必要な正規表現。"
-"FilterRepository => リポジトリ名とマッチする正規表現、FilterPackage => "
-"パッケージ名とマッチする正規表現、FilterBranch => "
-"ブランチ名とマッチする正規表現、FilterRelease => "
-"リリースのバージョン文字列とマッチする正規表現。"
+msgstr "PackageDeprecated' ダイナミック・フィールドの事前定義：Group => ダイナミック・フィールドにアクセスできるグループ、AlwaysVisible => フィールドは削除可能(0|1)、InformationAreaName => ウィジェットの名前、InformationAreaSize => ウィジェットのサイズと位置(Large|Small)、Name => 使用するダイナミック・フィールドの名前、Priority => ダイナミック・フィールドの順序、State => フィールドの状態(0 = 無効、1 = 有効、2 = 必須)、FilterRepository => リポジトリ名が必要な正規表現。FilterRepository => リポジトリ名とマッチする正規表現、FilterPackage => パッケージ名とマッチする正規表現、FilterBranch => ブランチ名とマッチする正規表現、FilterRelease => リリースのバージョン文字列とマッチする正規表現。"
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
@@ -2247,15 +2066,11 @@ msgstr "BugzillaAddComment ポスト受信スクリプトの場所のパスを�
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"OTRSCodePolicy スクリプトの場所のパスを設定します。cron経由で更新されるOTRSCo"
-"dePolicyモジュールのクローンを別に用意することを推奨します。"
+msgstr "OTRSCodePolicy スクリプトの場所のパスを設定します。cron経由で更新されるOTRSCodePolicyモジュールのクローンを別に用意することを推奨します。"
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr ""
-"OTRSCodePolicy 事前受信スクリプトの場所のパスを設定します。cron経由で更新され"
-"るOTRSCodePolicyモジュールのクローンを別に用意することを推奨します。"
+msgstr "OTRSCodePolicy 事前受信スクリプトの場所のパスを設定します。cron経由で更新されるOTRSCodePolicyモジュールのクローンを別に用意することを推奨します。"
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
@@ -2263,8 +2078,7 @@ msgstr "gitリポジトリの最新コミットを表示する。"
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr "現在のチケットからユニットテストを作成するためのリンクをメニューに表示します"
-"。"
+msgstr "現在のチケットからユニットテストを作成するためのリンクをメニューに表示します。"
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
@@ -2296,47 +2110,35 @@ msgstr "sphinxテーマを含むテーマフォルダへのパス。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr "このコンフィギュレーションは、デフォルトのカラムを有効または無効にするために"
-"可能なすべての画面を定義します。"
+msgstr "このコンフィギュレーションは、デフォルトのカラムを有効または無効にするために可能なすべての画面を定義します。"
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr "ダイナミック・フィールド管理画面でダイナミック・フィールドを表示・非表示にす"
-"る画面を指定します。"
+msgstr "ダイナミック・フィールド管理画面でダイナミック・フィールドを表示・非表示にする画面を指定します。"
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr "この設定は、有効なダイナミック・フィールドのみを表示するか、すべての（無効な"
-"）ダイナミック・フィールドを表示するかを定義する。"
+msgstr "この設定は、有効なダイナミック・フィールドのみを表示するか、すべての（無効な）ダイナミック・フィールドを表示するかを定義する。"
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr ""
-"この設定は OTRS パッケージ検証を有効にするか無効にするかを定義します。無効の"
-"場合、すべてのパッケージが検証済みとして表示されます。検証済みのパッケージの"
-"みを使用することをお勧めします。"
+msgstr "この設定は OTRS パッケージ検証を有効にするか無効にするかを定義します。無効の場合、すべてのパッケージが検証済みとして表示されます。検証済みのパッケージのみを使用することをお勧めします。"
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr ""
-"このコンフィギュレーションは OTRS CloudService Proxy サービスへの URL "
-"を定義します。選択した SysConfig 'Znuny4OTRSRepoType' に応じて、http または "
-"https のプレフィックスが追加されます。"
+msgstr "このコンフィギュレーションは OTRS CloudService Proxy サービスへの URL を定義します。選択した SysConfig 'Znuny4OTRSRepoType' に応じて、http または https のプレフィックスが追加されます。"
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr "このコンフィギュレーションは、パッケージ検証を拡張するためにOutputポストフィ"
-"ルターを登録する。"
+msgstr "このコンフィギュレーションは、パッケージ検証を拡張するためにOutputポストフィルターを登録する。"
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr "この構成では、OTRS Business Solution TM 広告を削除する OutputFilter "
-"モジュールを登録します。"
+msgstr "この構成では、OTRS Business Solution TM 広告を削除する OutputFilter モジュールを登録します。"
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr "このコンフィギュレーションは、パッケージマネージャのオンラインリポジトリ選択"
-"を非表示にする出力フィルタを登録します。"
+msgstr "このコンフィギュレーションは、パッケージマネージャのオンラインリポジトリ選択を非表示にする出力フィルタを登録します。"
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
@@ -2344,16 +2146,11 @@ msgstr "長い間テストポミュールのチェックを通過しなかった
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr ""
-"これらのグループのいずれかにrwパーミッションを持っているユーザーは、"
-"強制プッシュ'git push --force'の実行が許可されています。"
+msgstr "これらのグループのいずれかにrwパーミッションを持っているユーザーは、強制プッシュ'git push --force'の実行が許可されています。"
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr ""
-"これらのグループのいずれかに rw "
-"権限を持つユーザーは、プロジェクトを管理することができます。さらに、"
-"メンバーには git 管理の管理権限も与えられます。"
+msgstr "これらのグループのいずれかに rw 権限を持つユーザーは、プロジェクトを管理することができます。さらに、メンバーには git 管理の管理権限も与えられます。"
 
 #. ITSM class bundles
 msgid "1"
@@ -3410,3 +3207,16 @@ msgstr "VoIPフォン"
 #. ITSM class bundles
 msgid "Webcam"
 msgstr "ウェブカメラ"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr ""
+
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr ""
+
