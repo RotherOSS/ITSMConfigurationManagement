@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
-"PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ja/>\n"
+"PO-Revision-Date: 2024-06-24 10:42+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3210,13 +3211,15 @@ msgstr "ウェブカメラ"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "この設定項目のバージョン番号"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
-msgstr ""
+msgstr "クラス/役割とその関連フィールドのインポート"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
-
+"エージェントインタフェースの設定項目検索結果の概要でフィルタリングできる列。"
+"注意: コンフィグ項目属性と動的フィールド (DynamicField_NameX) "
+"のみ許可されます。"
