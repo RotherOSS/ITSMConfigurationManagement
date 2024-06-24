@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Slovenian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/sl/>\n"
+"PO-Revision-Date: 2024-06-24 10:42+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Slovenian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -3206,13 +3208,15 @@ msgstr "Spletna kamera"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "Številka različice tega elementa konfiguracije"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
-msgstr ""
+msgstr "Uvoz razredov/vlog in z njimi povezanih polj"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
-
+"Stolpci, ki jih je mogoče filtrirati v pregledu rezultatov iskanja elementov "
+"konfiguracije v vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa "
+"konfiguracije in dinamična polja (DynamicField_NameX)."
