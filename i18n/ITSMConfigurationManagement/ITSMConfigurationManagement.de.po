@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-06-24 10:42+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"PO-Revision-Date: 2024-06-24 12:13+0000\n"
+"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
 "Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/de/>\n"
 "Language: de\n"
@@ -1847,7 +1847,7 @@ msgstr "Definieren Sie private Addon-Repos."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr "Definiert den zum Verarbeiten der HTML-Vorlagen verwendeten Filter."
+msgstr "Definiert den Filter, der die HTML-Vorlagen verarbeitet."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
@@ -1939,7 +1939,7 @@ msgstr "Frontendmodul-Registration für das PublicPackageVerification Objekt im 
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr "Frontend-Modulregistrierung im Agentenbereich."
+msgstr "Registrierung des Frontend-Moduls für die Verwaltungsoberfläche."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -1951,7 +1951,7 @@ msgstr "Generiert HTML-Kommentar-Anker für die angegebenen Blöcke, damit Filte
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr "Erstellen Sie einmal pro Nacht Dokumentationen."
+msgstr "Dokumentationen einmal pro Nacht erstellen."
 
 #. SysConfig
 msgid "Git"
