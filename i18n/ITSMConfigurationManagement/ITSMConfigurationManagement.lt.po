@@ -2,14 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/lt/>\n"
+"PO-Revision-Date: 2024-06-24 10:42+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
+"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
+"1 : 2);\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -3206,13 +3209,15 @@ msgstr "Interneto kamera"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "Šio konfigūracijos elemento versijos numeris"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
-msgstr ""
+msgstr "Klasių ir (arba) vaidmenų bei su jais susijusių laukų importavimas"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
-
+"Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elemento "
+"paieškos rezultatų apžvalgoje. Pastaba: Leidžiami tik konfigūracijos "
+"elemento atributai ir dinaminiai laukai (DynamicField_NameX)."
