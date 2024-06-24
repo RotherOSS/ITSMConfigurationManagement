@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Simplified) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/zh_Hans/>\n"
+"PO-Revision-Date: 2024-06-24 10:42+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Chinese (Simplified) <http://weblate.otobo.org/projects/"
+"opm-packages/itsm-configurationmanagement/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3206,13 +3207,13 @@ msgstr "网络摄像头"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "该配置项的版本号"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
-msgstr ""
+msgstr "导入类/角色及其相关字段"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-
+msgstr "可在代理界面的配置项搜索结果概览中过滤的列。注意："
+"只允许使用配置项属性和动态字段 (DynamicField_NameX)。"
