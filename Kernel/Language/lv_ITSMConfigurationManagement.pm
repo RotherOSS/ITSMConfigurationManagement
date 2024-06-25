@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nosaukums jau tiek izmantots ConfigItems ar šādu(-iem) numuru(-iem): %s';
     $Self->{Translation}->{'Version Number'} = 'Versijas numurs';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Šī konfigurācijas elementa versijas numurs';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versijas numuru jau izmanto ConfigItems ar šādu(-iem) numuru(-iem): %s';
     $Self->{Translation}->{'Deployment State'} = 'Izvietošanas stāvoklis';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Pārskats un apstiprinājums';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Klašu/ lomu un ar tām saistīto lauku importēšana';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Klases importēšanas laikā notika kļūda.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolonnas, kuras var filtrēt klienta saskarnes konfigurācijas elementu pārskatā. Piezīme: Ir atļauti tikai konfigurācijas elementu atribūti un dinamiskie lauki (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Kolonnas, kuras var filtrēt aģenta saskarnes konfigurēto elementu meklēšanas rezultātu pārskatā. Piezīme: Ir atļauti tikai konfigurācijas elementu atribūti un dinamiskie lauki (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Konfigurācijas elementi';
     $Self->{Translation}->{'Config item add.'} = 'Konfigurācijas elementa pievienošana.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurācijas elementa rediģēšana.';

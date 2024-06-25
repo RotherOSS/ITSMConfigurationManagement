@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'A nevet már használják a konfigurációelemek a következő számokkal: %s';
     $Self->{Translation}->{'Version Number'} = 'Verziószám';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'A konfigurációs elem verziószáma';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'A verziószám már használatban van a ConfigItems által a következő számmal (számokkal): %s';
     $Self->{Translation}->{'Deployment State'} = 'Üzembe állítási állapot';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Áttekintés és megerősítés';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Osztályok/szerepkörök és kapcsolódó mezőik importálása';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Hiba történt az osztály importálása során.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Az ügyfélfelület konfigurációs elemeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a konfigurációs elem attribútumai és a dinamikus mezők (DynamicField_NameX) engedélyezettek.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Az ügynöki felület konfigurációs elem keresési eredményeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a Config Item attribútumok és a dinamikus mezők (DynamicField_NameX) engedélyezettek.';
     $Self->{Translation}->{'Config Items'} = 'Konfigurációelemek';
     $Self->{Translation}->{'Config item add.'} = 'Konfigurációelem hozzáadása.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurációelem szerkesztése.';

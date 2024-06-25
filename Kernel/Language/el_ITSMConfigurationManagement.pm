@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Το όνομα χρησιμοποιείται ήδη από τα ConfigItems με τον ακόλουθο αριθμό(-ους): %s';
     $Self->{Translation}->{'Version Number'} = 'Αριθμός έκδοσης';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Αριθμός έκδοσης αυτού του στοιχείου διαμόρφωσης';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Ο αριθμός έκδοσης χρησιμοποιείται ήδη από τα ConfigItems με τον(τους) ακόλουθο(-ους) αριθμό(-ους): %s';
     $Self->{Translation}->{'Deployment State'} = 'Κατάσταση ανάπτυξης';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Επισκόπηση και επιβεβαίωση';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Εισαγωγή κλάσεων/ρόλων και των σχετικών πεδίων τους';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Προέκυψε σφάλμα κατά την εισαγωγή της κλάσης.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης της διεπαφής πελάτη. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση αποτελεσμάτων αναζήτησης στοιχείων διαμόρφωσης της διεπαφής του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Στοιχεία διαμόρφωσης';
     $Self->{Translation}->{'Config item add.'} = 'Προσθήκη στοιχείου διαμόρφωσης.';
     $Self->{Translation}->{'Config item edit.'} = 'Επεξεργασία στοιχείου διαμόρφωσης.';

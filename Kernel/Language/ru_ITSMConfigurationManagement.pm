@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Имя уже используется другой КЕ со следующим номером (ами): %s';
     $Self->{Translation}->{'Version Number'} = 'Номер версии';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Номер версии этого элемента конфигурации';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Номер версии уже используется ConfigItems со следующим номером (номерами): %s';
     $Self->{Translation}->{'Deployment State'} = 'Состояние использования';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Обзор и подтверждение';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Импорт классов/ролей и связанных с ними полей';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Во время импорта класса произошла ошибка.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Столбцы, которые можно фильтровать в обзоре элементов конфигурации в интерфейсе клиента. Примечание: Разрешены только атрибуты элементов конфигурации и динамические поля (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Столбцы, которые можно фильтровать в обзоре результатов поиска элементов конфигурации в интерфейсе агента. Примечание: Разрешены только атрибуты элементов конфигурации и динамические поля (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Конфигурационные единицы';
     $Self->{Translation}->{'Config item add.'} = 'Создать конфигурационную единицу';
     $Self->{Translation}->{'Config item edit.'} = 'Редактировать конфигурационную единицу';

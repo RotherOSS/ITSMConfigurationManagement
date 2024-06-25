@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Název je již používán položkou ConfigItems s následujícím číslem (čísly): %s';
     $Self->{Translation}->{'Version Number'} = 'Číslo verze';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Číslo verze této položky konfigurace';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Číslo verze je již použito v položce ConfigItems s následujícím číslem (čísly): %s';
     $Self->{Translation}->{'Deployment State'} = 'Stav Nasazení';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Přehled a potvrzení';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Import tříd/rolí a jejich souvisejících polí';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Při importu třídy došlo k chybě.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Sloupce, které lze filtrovat v přehledu konfiguračních položek zákaznického rozhraní. Poznámka: Povoleny jsou pouze atributy konfiguračních položek a dynamická pole (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Sloupce, které lze filtrovat v přehledu výsledků vyhledávání položek konfigurace v rozhraní agenta. Poznámka: Povoleny jsou pouze atributy konfiguračních položek a dynamická pole (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Položky konfigurace';
     $Self->{Translation}->{'Config item add.'} = 'Přidání položky konfigurace.';
     $Self->{Translation}->{'Config item edit.'} = 'Úprava položky konfigurace.';

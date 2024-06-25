@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nimi on juba kasutusel ConfigItems\'i poolt järgmise(te) numbri(de)ga: %s';
     $Self->{Translation}->{'Version Number'} = 'Versiooni number';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Selle konfiguratsioonielemendi versiooni number';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versiooninumber on juba kasutusel ConfigItems\'is, mille number(d) on järgmine(d): %s';
     $Self->{Translation}->{'Deployment State'} = 'Kasutuselevõtu riik';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Ülevaade ja kinnitus';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Klasside/rollide ja nendega seotud väljade importimine';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Klassi importimisel tekkis viga.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Veerud, mida saab filtreerida kliendi kasutajaliidese konfiguratsioonielemendi ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Veerud, mida saab filtreerida agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuste ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Konfigureerimisobjektid';
     $Self->{Translation}->{'Config item add.'} = 'Config item add.';
     $Self->{Translation}->{'Config item edit.'} = 'Config item edit.';

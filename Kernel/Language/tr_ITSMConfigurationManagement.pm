@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Ad, aşağıdaki Sayı(lar)a sahip ConfigItems tarafından zaten kullanılıyor: %s';
     $Self->{Translation}->{'Version Number'} = 'Sürüm Numarası';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Bu yapılandırma öğesinin sürüm numarası';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Sürüm Numarası, aşağıdaki Numaraya/Numaralara sahip ConfigItems tarafından zaten kullanılıyor: %s';
     $Self->{Translation}->{'Deployment State'} = 'Dağıtım Durumu';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Genel Bakış ve Onay';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Sınıfları/rolleri ve ilgili alanları içe aktarma';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Sınıf içe aktarımı sırasında bir hata oluştu.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Müşteri arayüzünün yapılandırma öğesine genel bakışında filtrelenebilen sütunlar. Not: Yalnızca Yapılandırma Öğesi özniteliklerine ve Dinamik Alanlara (DynamicField_NameX) izin verilir.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Temsilci arayüzünün yapılandırma öğesi arama sonucu genel bakışında filtrelenebilen sütunlar. Not: Yalnızca Yapılandırma Öğesi özniteliklerine ve Dinamik Alanlara (DynamicField_NameX) izin verilir.';
     $Self->{Translation}->{'Config Items'} = 'Yapılandırma Öğeleri';
     $Self->{Translation}->{'Config item add.'} = 'Yapılandırma öğesi ekle.';
     $Self->{Translation}->{'Config item edit.'} = 'Yapılandırma öğesi düzenleme.';

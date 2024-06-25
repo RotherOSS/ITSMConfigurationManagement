@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nazwa jest już używana przez CI o następujących numerach: %s';
     $Self->{Translation}->{'Version Number'} = 'Wersja';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Numer wersji tego elementu konfiguracji';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Numer wersji jest już używany przez ConfigItems z następującym numerem (numerami): %s';
     $Self->{Translation}->{'Deployment State'} = 'Stan wdrożenia';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Przegląd i potwierdzenie';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Importowanie klas/ról i powiązanych z nimi pól';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Wystąpił błąd podczas importowania klasy.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolumny, które można filtrować w przeglądzie elementów konfiguracji interfejsu klienta. Uwaga: Dozwolone są tylko atrybuty pozycji konfiguracji i pola dynamiczne (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Kolumny, które można filtrować w przeglądzie wyników wyszukiwania elementów konfiguracji w interfejsie agenta. Uwaga: Dozwolone są tylko atrybuty pozycji konfiguracji i pola dynamiczne (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Elementy konfiguracji';
     $Self->{Translation}->{'Config item add.'} = 'Dodanie elementu konfiguracji.';
     $Self->{Translation}->{'Config item edit.'} = 'Edycja elementu konfiguracji.';

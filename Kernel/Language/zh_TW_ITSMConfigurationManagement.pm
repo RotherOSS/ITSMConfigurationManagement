@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         '名称已被配置项使用，编号如下：%s';
     $Self->{Translation}->{'Version Number'} = '版本號碼';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = '该配置项的版本号';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         '版本号已被配置项使用，其编号如下：%s';
     $Self->{Translation}->{'Deployment State'} = '部署狀態';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = '概述和确认';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '导入类/角色及其相关字段';
     $Self->{Translation}->{'An error occurred during class import.'} = '类导入时发生错误。';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '可在客户界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        '可在代理界面的配置项搜索结果概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。';
     $Self->{Translation}->{'Config Items'} = '配置項';
     $Self->{Translation}->{'Config item add.'} = '添加配置项目。';
     $Self->{Translation}->{'Config item edit.'} = '配置项目编辑。';

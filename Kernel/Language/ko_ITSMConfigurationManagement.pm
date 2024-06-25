@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         '이름이 이미 다음 번호의 구성 항목에서 사용 중입니다: %s.';
     $Self->{Translation}->{'Version Number'} = '버전 번호';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = '이 구성 항목의 버전 번호';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         '버전 번호가 다음 번호의 ConfigItems에서 이미 사용 중입니다: %s.';
     $Self->{Translation}->{'Deployment State'} = '배포 상태';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = '개요 및 확인';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '클래스/역할 및 관련 필드 가져오기';
     $Self->{Translation}->{'An error occurred during class import.'} = '클래스 가져오기 중에 오류가 발생했습니다.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '고객 인터페이스의 구성 항목 개요에서 필터링할 수 있는 열입니다. 참고: 구성 항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        '상담원 인터페이스의 구성 항목 검색 결과 개요에서 필터링할 수 있는 열입니다. 참고: 구성 항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다.';
     $Self->{Translation}->{'Config Items'} = '구성 항목';
     $Self->{Translation}->{'Config item add.'} = '구성 항목 추가.';
     $Self->{Translation}->{'Config item edit.'} = '구성 항목 편집.';

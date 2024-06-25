@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'この名称はすでに Number(s): %s の構成アイテムで使用中です。';
     $Self->{Translation}->{'Version Number'} = 'バージョンナンバー';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'この設定項目のバージョン番号';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'バージョン番号は、以下の番号の ConfigItems によって既に使用されています: %s';
     $Self->{Translation}->{'Deployment State'} = 'デプロイ・ステータス';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = '概要と確認';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'クラス/役割とその関連フィールドのインポート';
     $Self->{Translation}->{'An error occurred during class import.'} = 'クラスのインポート中にエラーが発生しました。';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'カスタマー・インターフェースの構成項目概要でフィルタリングできる列。注: コンフィグ項目属性とダイナミック・フィールド (DynamicField_NameX) のみ許可されます。';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'エージェントインタフェースの設定項目検索結果の概要でフィルタリングできる列。注意: コンフィグ項目属性と動的フィールド (DynamicField_NameX) のみ許可されます。';
     $Self->{Translation}->{'Config Items'} = '構成アイテム';
     $Self->{Translation}->{'Config item add.'} = '構成アイテムを追加します。';
     $Self->{Translation}->{'Config item edit.'} = '構成アイテムを修正します。';

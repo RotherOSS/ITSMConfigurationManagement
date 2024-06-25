@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Името вече се използва от Конфигурационни елементи със следния Номер(а): %s';
     $Self->{Translation}->{'Version Number'} = 'Номер на версията';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Номер на версията на този елемент от конфигурацията';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Номерът на версията вече се използва от елементите на конфигурацията със следния номер(и): %s';
     $Self->{Translation}->{'Deployment State'} = 'Състояние на използване';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Преглед и потвърждение';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Импортиране на класове/роли и свързаните с тях полета';
     $Self->{Translation}->{'An error occurred during class import.'} = 'По време на импортирането на класа е възникнала грешка.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Колони, които могат да се филтрират в прегледа на елементите на конфигурацията в интерфейса на клиента. Забележка: Разрешени са само атрибути на елемента на конфигурацията и динамични полета (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Колони, които могат да се филтрират в прегледа на резултатите от търсенето на елементите на конфигурацията в интерфейса на агента. Забележка: Разрешени са само атрибути на елементите на конфигурацията и динамични полета (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Конфигурационни елементи';
     $Self->{Translation}->{'Config item add.'} = 'Добавяне на конфигурационен елемент.';
     $Self->{Translation}->{'Config item edit.'} = 'Редактиране на конфигурационен елемент.';

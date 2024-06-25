@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Numele este deja utilizat de ConfigItems cu următorul număr (numere): %s';
     $Self->{Translation}->{'Version Number'} = 'Numărul versiunii';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Numărul de versiune al acestui element de configurare';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Numărul de versiune este deja utilizat de ConfigItems cu următorul număr (numere): %s';
     $Self->{Translation}->{'Deployment State'} = 'Starea de desfășurare';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Prezentare generală și confirmare';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Importul claselor/rolurilor și al câmpurilor aferente acestora';
     $Self->{Translation}->{'An error occurred during class import.'} = 'S-a produs o eroare în timpul importului clasei.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Coloane care pot fi filtrate în prezentarea generală a elementelor de configurare din interfața cu clienții. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Coloane care pot fi filtrate în prezentarea generală a rezultatelor căutării elementelor de configurare din interfața agentului. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Elemente de configurare';
     $Self->{Translation}->{'Config item add.'} = 'Adăugare element de configurare.';
     $Self->{Translation}->{'Config item edit.'} = 'Editare element de configurare.';

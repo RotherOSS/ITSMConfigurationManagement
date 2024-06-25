@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Pavadinimas jau naudojamas ConfigItems su šiuo (-iais) numeriu (-iais): %s';
     $Self->{Translation}->{'Version Number'} = 'Versijos numeris';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Šio konfigūracijos elemento versijos numeris';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versijos numeris jau naudojamas "ConfigItems" su šiuo (-iais) numeriu (-iais): %s';
     $Self->{Translation}->{'Deployment State'} = 'Diegimo būsena';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Apžvalga ir patvirtinimas';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Klasių ir (arba) vaidmenų bei su jais susijusių laukų importavimas';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Importuojant klasę įvyko klaida.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Stulpeliai, kuriuos galima filtruoti kliento sąsajos konfigūracijos elementų apžvalgoje. Pastaba: leidžiama naudoti tik konfigūracijos elemento atributus ir dinaminius laukus (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elemento paieškos rezultatų apžvalgoje. Pastaba: Leidžiami tik konfigūracijos elemento atributai ir dinaminiai laukai (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Konfigūracijos elementai';
     $Self->{Translation}->{'Config item add.'} = 'Konfigūracijos elemento pridėjimas.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigūracijos elemento redagavimas.';

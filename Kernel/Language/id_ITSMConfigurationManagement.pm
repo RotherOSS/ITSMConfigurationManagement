@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nama ini telah di gunakan oleh ItemKonfigurasi dengan nomor(nomor-nomor) berikut: %s';
     $Self->{Translation}->{'Version Number'} = 'Nomor versi';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Nomor versi item konfigurasi ini';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nomor Versi sudah digunakan oleh ConfigItems dengan Nomor berikut ini: %s';
     $Self->{Translation}->{'Deployment State'} = 'Status penyebaran';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Ikhtisar dan Konfirmasi';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Mengimpor kelas/peran dan bidang terkaitnya';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Terjadi kesalahan saat mengimpor kelas.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka pelanggan. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Kolom yang dapat difilter dalam ikhtisar hasil pencarian item konfigurasi pada antarmuka agen. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan.';
     $Self->{Translation}->{'Config Items'} = 'item konfigurasi';
     $Self->{Translation}->{'Config item add.'} = 'Tambah item konfigurasi.';
     $Self->{Translation}->{'Config item edit.'} = 'Edit item konfigurasi.';

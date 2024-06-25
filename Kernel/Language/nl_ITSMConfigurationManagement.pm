@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Naam is al in gebruik door de ConfigItems met de volgende Nummer(s): %s';
     $Self->{Translation}->{'Version Number'} = 'Versienummer';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Versienummer van dit config item';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versienummer is al in gebruik door de ConfigItems met het volgende nummer: %s';
     $Self->{Translation}->{'Deployment State'} = 'Status';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Overzicht en bevestiging';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Klassen/rollen en hun gerelateerde velden importeren';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Er is een fout opgetreden tijdens het importeren van de klasse.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolommen die kunnen worden gefilterd in het config item overzicht van de klanteninterface. Opmerking: alleen Config Item attributen en Dynamische velden (DynamicField_NameX) zijn toegestaan.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Kolommen die kunnen worden gefilterd in het overzicht met zoekresultaten van config items in de agent interface. Opmerking: Alleen Config Item attributen en Dynamische velden (DynamicField_NameX) zijn toegestaan.';
     $Self->{Translation}->{'Config Items'} = 'Configuratie-items';
     $Self->{Translation}->{'Config item add.'} = 'Configuratie-item toevoegen.';
     $Self->{Translation}->{'Config item edit.'} = 'Configuratie-item bewerken.';

@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Ime je že v uporabi v ConfigItems z naslednjo(-imi) številko(-ami): %s';
     $Self->{Translation}->{'Version Number'} = 'Številka različice';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Številka različice tega elementa konfiguracije';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Številka različice je že v uporabi pri ConfigItems z naslednjo številko (številkami): %s';
     $Self->{Translation}->{'Deployment State'} = 'Stanje uvajanja';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Pregled in potrditev';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Uvoz razredov/vlog in z njimi povezanih polj';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Pri uvozu razreda je prišlo do napake.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v vmesniku za stranke. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Stolpci, ki jih je mogoče filtrirati v pregledu rezultatov iskanja elementov konfiguracije v vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Elementi konfiguracije';
     $Self->{Translation}->{'Config item add.'} = 'Dodajanje elementa konfiguracije.';
     $Self->{Translation}->{'Config item edit.'} = 'Urejanje elementa konfiguracije.';

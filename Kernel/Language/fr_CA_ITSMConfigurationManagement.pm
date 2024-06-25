@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Le nom est déjà utilisé par les ConfigItems avec le(s) numéro(s) suivant(s) : %s';
     $Self->{Translation}->{'Version Number'} = 'Numéro de version';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Numéro de version de cet élément de configuration';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Le numéro de version est déjà utilisé par les ConfigItems avec le(s) numéro(s) suivant(s) : %s';
     $Self->{Translation}->{'Deployment State'} = 'État de déploiement';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Vue d\'ensemble et confirmation';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Importation de classes/rôles et de leurs champs connexes';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Une erreur s\'est produite lors de l\'importation de la classe.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Colonnes pouvant être filtrées dans l\'aperçu des éléments de configuration de l\'interface client. Remarque : seuls les attributs des éléments de configuration et les champs dynamiques (DynamicField_NameX) sont autorisés.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Colonnes pouvant être filtrées dans l\'aperçu des résultats de la recherche d\'éléments de configuration dans l\'interface de l\'agent. Remarque : seuls les attributs des éléments de configuration et les champs dynamiques (DynamicField_NameX) sont autorisés.';
     $Self->{Translation}->{'Config Items'} = 'Éléments de configuration';
     $Self->{Translation}->{'Config item add.'} = 'Ajout d\'un élément de configuration.';
     $Self->{Translation}->{'Config item edit.'} = 'Édition d\'un élément de configuration.';

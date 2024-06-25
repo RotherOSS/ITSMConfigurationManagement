@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Il nome è già in uso da ConfigItems con i seguente/i numer(o)i: %s';
     $Self->{Translation}->{'Version Number'} = 'Numero di versione';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Numero di versione di questo elemento di configurazione';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Il numero di versione è già utilizzato dai ConfigItem con il seguente numero: %s';
     $Self->{Translation}->{'Deployment State'} = 'Stato di implementazione';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Panoramica e conferma';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Importazione di classi/ruoli e dei relativi campi';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Si è verificato un errore durante l\'importazione della classe.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Colonne che possono essere filtrate nella panoramica degli elementi di configurazione dell\'interfaccia cliente. Nota: Sono ammessi solo gli attributi degli elementi di configurazione e i campi dinamici (DynamicField_NameX).';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Colonne che possono essere filtrate nella panoramica dei risultati della ricerca degli elementi di configurazione dell\'interfaccia agente. Nota: Sono ammessi solo gli attributi degli elementi di configurazione e i campi dinamici (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Elementi di configurazione';
     $Self->{Translation}->{'Config item add.'} = 'Aggiungi elemento di configurazione.';
     $Self->{Translation}->{'Config item edit.'} = 'Modifica elemento di configurazione.';

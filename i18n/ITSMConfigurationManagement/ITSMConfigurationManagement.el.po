@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-06-24 10:42+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/el/>\n"
+"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3215,8 +3214,5 @@ msgstr "Εισαγωγή κλάσεων/ρόλων και των σχετικώ�
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση αποτελεσμάτων αναζήτησης "
-"στοιχείων διαμόρφωσης της διεπαφής του πράκτορα. Σημείωση: Επιτρέπονται μόνο "
-"τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία "
-"(DynamicField_NameX)."
+msgstr "Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση αποτελεσμάτων αναζήτησης στοιχείων διαμόρφωσης της διεπαφής του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX)."
+

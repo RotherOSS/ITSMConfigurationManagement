@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Namnet används redan i konfigurationsenheter med förljande nummer: %s';
     $Self->{Translation}->{'Version Number'} = 'Versionsnummer';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Versionsnummer för detta konfigurationsobjekt';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versionsnumret används redan av ConfigItems med följande nummer: %s';
     $Self->{Translation}->{'Deployment State'} = 'Driftläge';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Översikt och bekräftelse';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Importera klasser/roller och deras relaterade fält';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Ett fel inträffade under klassimporten.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolumner som kan filtreras i översikten över konfigurationsobjekt i kundgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Kolumner som kan filtreras i sökresultatöversikten för konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
     $Self->{Translation}->{'Config Items'} = 'Konfigurationsenheter';
     $Self->{Translation}->{'Config item add.'} = 'Lägg till konfigureringsobjekt.';
     $Self->{Translation}->{'Config item edit.'} = 'Redigera konfigureringsobjekt.';

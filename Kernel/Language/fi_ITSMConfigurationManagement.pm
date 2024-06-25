@@ -57,7 +57,7 @@ sub Data {
     $Self->{Translation}->{'Name is already in use by the ConfigItems with the following Number(s): %s'} =
         'Nimi on jo käytössä ConfigItems-kohteissa seuraavalla numerolla (seuraavilla numeroilla): %s.';
     $Self->{Translation}->{'Version Number'} = 'Version numero';
-    $Self->{Translation}->{'Version number of this config item'} = '';
+    $Self->{Translation}->{'Version number of this config item'} = 'Tämän konfiguraatioelementin versionumero';
     $Self->{Translation}->{'Version Number is already in use by the ConfigItems with the following Number(s): %s'} =
         'Versioluku on jo käytössä ConfigItemsissa, joilla on seuraava(t) numero(t): %s';
     $Self->{Translation}->{'Deployment State'} = 'Käyttöönoton tila';
@@ -235,7 +235,7 @@ sub Data {
 
     # JS File: ITSM.Admin.ITSMConfigItem
     $Self->{Translation}->{'Overview and Confirmation'} = 'Yleiskatsaus ja vahvistus';
-    $Self->{Translation}->{'Importing classes/roles and their related fields'} = '';
+    $Self->{Translation}->{'Importing classes/roles and their related fields'} = 'Luokkien/roolien ja niihin liittyvien kenttien tuominen';
     $Self->{Translation}->{'An error occurred during class import.'} = 'Luokan tuonnin aikana tapahtui virhe.';
 
     # SysConfig
@@ -262,7 +262,7 @@ sub Data {
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Sarakkeet, joita voidaan suodattaa asiakkaan käyttöliittymän määrityskohteiden yleiskatsauksessa. Huomautus: Vain Config Item -attribuutit ja dynaamiset kentät (DynamicField_NameX) ovat sallittuja.';
     $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '';
+        'Sarakkeet, joita voidaan suodattaa agentin käyttöliittymän määrityskohteen hakutulosten yleiskatsauksessa. Huomautus: Vain Config Item -attribuutit ja dynaamiset kentät (DynamicField_NameX) ovat sallittuja.';
     $Self->{Translation}->{'Config Items'} = 'Määrityskohteet';
     $Self->{Translation}->{'Config item add.'} = 'Määrityskohteen lisääminen.';
     $Self->{Translation}->{'Config item edit.'} = 'Määrityskohteen muokkaus.';

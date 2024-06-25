@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-06-24 10:42+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ko/>\n"
+"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3215,6 +3214,5 @@ msgstr "클래스/역할 및 관련 필드 가져오기"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr ""
-"상담원 인터페이스의 구성 항목 검색 결과 개요에서 필터링할 수 있는 열입니다. "
-"참고: 구성 항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다."
+msgstr "상담원 인터페이스의 구성 항목 검색 결과 개요에서 필터링할 수 있는 열입니다. 참고: 구성 항목 속성과 동적 필드(DynamicField_NameX)만 허용됩니다."
+
