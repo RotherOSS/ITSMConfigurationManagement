@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -187,11 +187,37 @@ my %InciStateListReverse = reverse %{$InciStateList};
 
 my @ConfigItemIDs;
 
+my $FirstClassResult = $ConfigItemObject->DefinitionAdd(
+    ClassID    => $FirstClassID,
+    Definition => <<'DEFINITION',
+---
+Pages:
+  - Name: Content
+    Layout:
+      Columns: 1
+      ColumnWidth: 1fr
+    Content:
+      - Section: Attributes
+        ColumnStart: 1
+        RowStart: 1
+
+Sections:
+  Attributes:
+    Type: Description
+DEFINITION
+    UserID => 1,
+);
+
+# fetch the definition id
+my $FirstClassDefinition = $ConfigItemObject->DefinitionGet(
+    ClassID => $FirstClassID,
+);
+
 # add a configitem to each class
 my $FirstConfigItemID = $ConfigItemObject->ConfigItemAdd(
     ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'First#001',
-    DefinitionID => $FirstDefinitionID,
+    DefinitionID => $FirstClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -206,10 +232,36 @@ if ( !$FirstConfigItemID ) {
 
 push @ConfigItemIDs, $FirstConfigItemID;
 
+my $SecondClassResult = $ConfigItemObject->DefinitionAdd(
+    ClassID    => $SecondClassID,
+    Definition => <<'DEFINITION',
+---
+Pages:
+  - Name: Content
+    Layout:
+      Columns: 1
+      ColumnWidth: 1fr
+    Content:
+      - Section: Attributes
+        ColumnStart: 1
+        RowStart: 1
+
+Sections:
+  Attributes:
+    Type: Description
+DEFINITION
+    UserID => 1,
+);
+
+# fetch the definition id
+my $SecondClassDefinition = $ConfigItemObject->DefinitionGet(
+    ClassID => $SecondClassID,
+);
+
 my $SecondConfigItemID = $ConfigItemObject->ConfigItemAdd(
     ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#001',
-    DefinitionID => $SecondDefinitionID,
+    DefinitionID => $SecondClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -247,6 +299,7 @@ push @ConfigItemIDs, $ThirdConfigItemID;
 my $FirstInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     Name         => $NamePrefix . 'First#001',
+    DefinitionID => $FirstClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -262,6 +315,7 @@ if ( !$FirstInitialVersionID ) {
 my $SecondInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     Name         => $NamePrefix . 'Second#001',
+    DefinitionID => $SecondClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -277,6 +331,7 @@ if ( !$SecondInitialVersionID ) {
 my $ThirdInitialVersionID = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $ThirdConfigItemID,
     Name         => $NamePrefix . 'Second#002',
+    DefinitionID => $SecondClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -318,6 +373,7 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
+    DefinitionID => $FirstClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -333,6 +389,7 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
+    DefinitionID => $FirstClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -354,6 +411,7 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $FirstConfigItemID,
     ClassID      => $FirstClassID,
     Name         => $NamePrefix . 'Second#001',
+    DefinitionID => $FirstClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
@@ -369,6 +427,7 @@ $RenameSuccess = $ConfigItemObject->ConfigItemUpdate(
     ConfigItemID => $SecondConfigItemID,
     ClassID      => $SecondClassID,
     Name         => $NamePrefix . 'Second#002',
+    DefinitionID => $SecondClassDefinition->{DefinitionID},
     DeplStateID  => $DeplStateListReverse{Production},
     InciStateID  => $InciStateListReverse{Operational},
     UserID       => 1,
