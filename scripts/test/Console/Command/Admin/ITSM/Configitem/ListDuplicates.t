@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -55,12 +55,50 @@ $Self->Is(
 # add test config item
 my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
-# get 'Hardware' catalog class IDs
-my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
-    Class => 'ITSM::ConfigItem::Class',
-    Name  => 'Hardware',
+my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+    Group  => 'itsm-configitem',
+    UserID => 1,
 );
-my $HardwareConfigItemID = $ConfigItemDataRef->{ItemID};
+
+# add test general catalog item
+my $GeneralCatalogHardwareID = $GeneralCatalogObject->ItemAdd(
+    Class   => 'ITSM::ConfigItem::Class',
+    Name    => $RandomClass . 'Hardware',
+    ValidID => 1,
+    Comment => 'Comment',
+    UserID  => 1,
+);
+
+$GeneralCatalogObject->GeneralCatalogPreferencesSet(
+    ItemID => $GeneralCatalogHardwareID,
+    Key    => 'Permission',
+    Value  => [$ConfigItemGroupID],
+);
+$GeneralCatalogObject->GeneralCatalogPreferencesSet(
+    ItemID => $GeneralCatalogHardwareID,
+    Key    => 'VersionStringModule',
+    Value  => ['Incremental'],
+);
+
+# add test general catalog item
+my $GeneralCatalogSoftwareID = $GeneralCatalogObject->ItemAdd(
+    Class   => 'ITSM::ConfigItem::Class',
+    Name    => $RandomClass . 'Software',
+    ValidID => 1,
+    Comment => 'Comment',
+    UserID  => 1,
+);
+
+$GeneralCatalogObject->GeneralCatalogPreferencesSet(
+    ItemID => $GeneralCatalogSoftwareID,
+    Key    => 'Permission',
+    Value  => [$ConfigItemGroupID],
+);
+$GeneralCatalogObject->GeneralCatalogPreferencesSet(
+    ItemID => $GeneralCatalogSoftwareID,
+    Key    => 'VersionStringModule',
+    Value  => ['Incremental'],
+);
 
 # get 'Production' deployment state IDs
 my $ProductionDeplStateDataRef = $GeneralCatalogObject->ItemGet(
@@ -75,7 +113,7 @@ my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 # create ConfigItem number
 my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
     Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
-    ClassID => $HardwareConfigItemID,
+    ClassID => $GeneralCatalogHardwareID,
 );
 
 my $ConfigItemName = 'TestConfigItem' . $Helper->GetRandomID();
@@ -86,7 +124,7 @@ my @ConfigItemID;
 my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
     Number      => $ConfigItemNumber,
     Name        => $ConfigItemName,
-    ClassID     => $HardwareConfigItemID,
+    ClassID     => $GeneralCatalogHardwareID,
     DeplStateID => $ProductionDeplStateID,
     InciStateID => 1,
     UserID      => 1,
@@ -96,7 +134,7 @@ push @ConfigItemID, $ConfigItemID;
 # add the new duplicate ConfigItem
 $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
     Name        => $ConfigItemName,
-    ClassID     => $HardwareConfigItemID,
+    ClassID     => $GeneralCatalogHardwareID,
     DeplStateID => $ProductionDeplStateID,
     InciStateID => 1,
     UserID      => 1,
@@ -104,16 +142,9 @@ $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
 push @ConfigItemID, $ConfigItemID;
 
 # add the new duplicate ConfigItem in Software catalog class
-# get 'Software' catalog class IDs
-$ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
-    Class => 'ITSM::ConfigItem::Class',
-    Name  => 'Software',
-);
-my $SoftwareConfigItemID = $ConfigItemDataRef->{ItemID};
-
 $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
     Name        => $ConfigItemName,
-    ClassID     => $SoftwareConfigItemID,
+    ClassID     => $GeneralCatalogSoftwareID,
     DeplStateID => $ProductionDeplStateID,
     InciStateID => 1,
     UserID      => 1,
@@ -121,12 +152,12 @@ $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
 push @ConfigItemID, $ConfigItemID;
 
 # check command with --class Hardware options
-$ExitCode = $CommandObject->Execute( '--class', "Hardware" );
+$ExitCode = $CommandObject->Execute( '--class', "${RandomClass}Hardware" );
 
 $Self->Is(
     $ExitCode,
     0,
-    "Option 'class' (Hardware) ",
+    "Option 'class' (${RandomClass}Hardware) ",
 );
 
 # check command with --scope options (invalid scope)
