@@ -37,6 +37,9 @@ $Kernel::OM->ObjectParamAdd(
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
+# define needed variable
+my $RandomID = $Helper->GetRandomID;
+
 my $ExitCode = $CommandObject->Execute;
 is(
     $ExitCode,
@@ -66,6 +69,12 @@ is(
 # get general catalog object
 my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
+my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+    Group  => 'itsm-configitem',
+    UserID => 1,
+);
+ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
+
 # add test general catalog item
 my $GeneralCatalogItemID = $GeneralCatalogObject->ItemAdd(
     Class   => 'ITSM::ConfigItem::Class',
@@ -78,13 +87,43 @@ my $GeneralCatalogItemID = $GeneralCatalogObject->ItemAdd(
 $GeneralCatalogObject->GeneralCatalogPreferencesSet(
     ItemID => $GeneralCatalogItemID,
     Key    => 'Permission',
-    Value  => 5,
+    Value  => [$ConfigItemGroupID],
+);
+$GeneralCatalogObject->GeneralCatalogPreferencesSet(
+    ItemID => $GeneralCatalogItemID,
+    Key    => 'VersionStringModule',
+    Value  => ['Incremental'],
 );
 
 ok(
     $GeneralCatalogItemID,
     "Test general catalog item is created - $GeneralCatalogItemID ",
 );
+
+# Add config item definitions
+my $ConfigItemPerlDefinition = {
+    Pages => [
+        {
+            Name   => 'Description',    # will be reused in class name
+            Layout => {
+                Columns     => 1,
+                ColumnWidth => '1fr'
+            },
+            Content => [
+                {
+                    Section     => 'Section1',
+                    ColumnStart => 1,
+                    RowStart    => 1
+                }
+            ],
+        }
+    ],
+    Sections => {
+        Section1 => {
+            Type => 'Description',
+        }
+    },
+};
 
 # get ConfigItem object
 my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
@@ -104,6 +143,22 @@ my %ReverseInciStateList = reverse %{$InciStateList};
 my @ConfigItemNumbers;
 my $ConfigItemID;
 
+my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+# add a definition to the class
+my $YAMLDefinition = $YAMLObject->Dump(
+    Data => $ConfigItemPerlDefinition,
+);
+ok( $YAMLDefinition, 'got some YAML' );
+
+my $Result = $ConfigItemObject->DefinitionAdd(
+    ClassID    => $GeneralCatalogItemID,
+    Definition => $YAMLDefinition,
+    UserID     => 1,
+);
+ok( $Result->{Success},      'DefinitionAdd() successful' );
+ok( $Result->{DefinitionID}, 'got DefinitionID' );
+
 for ( 1 .. 10 ) {
 
     # create ConfigItem number
@@ -114,9 +169,13 @@ for ( 1 .. 10 ) {
 
     # add test ConfigItem
     $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-        Number  => $ConfigItemNumber,
-        ClassID => $GeneralCatalogItemID,
-        UserID  => 1,
+        Number       => $ConfigItemNumber,
+        Name         => 'CI' . $RandomID++,
+        ClassID      => $GeneralCatalogItemID,
+        DefinitionID => $Result->{DefinitionID},
+        DeplStateID  => $ReverseDeplStateList{Production},
+        InciStateID  => $ReverseInciStateList{Operational},
+        UserID       => 1,
     );
 
     push @ConfigItemNumbers, $ConfigItemNumber;
@@ -175,7 +234,7 @@ for ( 1 .. 10 ) {
     # result should only be 40 versions now
     is(
         scalar @{$VersionList},
-        40,
+        41,
         "Number of remaining versions after running command with Options --all-older-than-days-versions 1",
     );
 
