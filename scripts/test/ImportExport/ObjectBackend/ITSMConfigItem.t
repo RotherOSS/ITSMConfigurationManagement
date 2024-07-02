@@ -311,14 +311,14 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
     $GeneralCatalogObject->GeneralCatalogPreferencesSet(
         ItemID => $ItemID,
         Key    => 'Permission',
-        Value  => $ConfigItemGroupID,
+        Value  => [$ConfigItemGroupID],
     );
 
     # Set version string module.
     $GeneralCatalogObject->GeneralCatalogPreferencesSet(
         ItemID => $ItemID,
         Key    => 'VersionStringModule',
-        Value  => 'Incremental',
+        Value  => ['Incremental'],
     );
 }
 
@@ -780,14 +780,14 @@ $ConfigItemPerlDefinitions[2] = " [
         $GeneralCatalogObject->GeneralCatalogPreferencesSet(
             ItemID => $ClassID,
             Key    => 'Permission',
-            Value  => $ConfigItemGroupID,
+            Value  => [$ConfigItemGroupID],
         );
 
         # Set version string module.
         $GeneralCatalogObject->GeneralCatalogPreferencesSet(
             ItemID => $ClassID,
             Key    => 'VersionStringModule',
-            Value  => 'Incremental',
+            Value  => ['Incremental'],
         );
 
         # add a definition to the class
@@ -896,9 +896,9 @@ push @ConfigItemSetups,
             UserID                                     => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{male_CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
-                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                [ [ $Agent2UserID{FrowningAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
+                { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
+                { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{FrowningAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
             ],
         },
     },
@@ -914,8 +914,8 @@ push @ConfigItemSetups,
             UserID                                     => $TestUserID,
             "DynamicField_CustomerCIO$TestIDSuffix"    => $CustomerUsers{male_CIO},
             "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
-                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ],     'Agent2'. $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },
+                { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{FrowningAgent} ] },
             ],
         },
     };
@@ -933,7 +933,7 @@ push @ConfigItemSetups,
             InciStateID                                          => $InciStateListReverse{Operational},
             UserID                                               => $TestUserID,
             "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
-                [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+                { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterAfrica} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
             ],
         },
     },
@@ -948,7 +948,7 @@ push @ConfigItemSetups,
             InciStateID                                          => $InciStateListReverse{Operational},
             UserID                                               => $TestUserID,
             "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
-                [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ],
+                { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterEurope} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterEurope} ] },
             ],
         },
     };
@@ -1738,7 +1738,7 @@ my @ExportDataTests = (
 
                 # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}",
+                    Key => "DynamicField_CustomerCIO${TestIDSuffix}",
                 },
 
                 # CustomerSalesTeam is a multivalue field.
@@ -1746,13 +1746,13 @@ my @ExportDataTests = (
                 # - get the value at a specific index, that is the first and the second element
                 # - get the complete list
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}::1",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}::1",
                 },
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}::2",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}::2",
                 },
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -1831,7 +1831,7 @@ my @ExportDataTests = (
 
                 # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "FirstMonday${TestIDSuffix}",
+                    Key => "DynamicField_FirstMonday${TestIDSuffix}",
                 },
 
                 # FirstWeekend is a multivalue field.
@@ -1839,13 +1839,13 @@ my @ExportDataTests = (
                 # - get the value at a specific index, that is the first and the second element
                 # - get the complete list
                 {
-                    Key => "FirstWeekend${TestIDSuffix}",
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}",
                 },
                 {
-                    Key => "FirstWeekend${TestIDSuffix}::1",
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}::1",
                 },
                 {
-                    Key => "FirstWeekend${TestIDSuffix}::2",
+                    Key => "DynamicField_FirstWeekend${TestIDSuffix}::2",
                 },
             ],
             SearchData => {
@@ -1921,7 +1921,7 @@ my @ExportDataTests = (
 
                 # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}",
+                    Key => "DynamicField_CustomerCIO${TestIDSuffix}",
                 },
 
                 # ZZZSetOfAgents is a multivalue field.
@@ -1929,10 +1929,10 @@ my @ExportDataTests = (
                 # - get the value at a specific index, that is second element
                 # - get the complete list
                 {
-                    Key => "ZZZSetOfAgents${TestIDSuffix}::2",
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}::2",
                 },
                 {
-                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -1959,14 +1959,14 @@ my @ExportDataTests = (
             [
                 $ConfigItemNumbers[3],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]},
-                qq{[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]},
+                qq{{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{FrowningAgent}]}},
+                qq{[{"Agent1$TestIDSuffix":[$Agent2UserID{DeskAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{LotusAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{FrowningAgent}]}]},
             ],
             [
                 $ConfigItemNumbers[2],
                 qq{male chief information officer "🗄"$RandomID},
-                qq{[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]},
-                qq{[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]},
+                qq{{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]}},
+                qq{[{"Agent1$TestIDSuffix":[$Agent2UserID{LotusAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{FrowningAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]}]},
             ],
         ],
         ReferenceExportContent => [
@@ -1974,15 +1974,15 @@ my @ExportDataTests = (
                 ';',
                 qq{"$ConfigItemNumbers[3]"},
                 qq{"male chief information officer ""🗄""$RandomID"},    # not JSON because single value
-                qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]"},
-                qq{"[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]"},
+                qq{"{""Agent1$TestIDSuffix"":[$Agent2UserID{ClimbingAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{FrowningAgent}]}"},
+                qq{"[{""Agent1$TestIDSuffix"":[$Agent2UserID{DeskAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{LotusAgent}]},{""Agent1$TestIDSuffix"":[$Agent2UserID{ClimbingAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{FrowningAgent}]}]"},
             ),
             join(
                 ';',
                 qq{"$ConfigItemNumbers[2]"},
                 qq{"male chief information officer ""🗄""$RandomID"},
-                qq{"[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]]"},
-                qq{"[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]"},
+                qq{"{""Agent1$TestIDSuffix"":[$Agent2UserID{ClimbingAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{DeskAgent}]}"},
+                qq{"[{""Agent1$TestIDSuffix"":[$Agent2UserID{LotusAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{DeskAgent}]},{""Agent1$TestIDSuffix"":[$Agent2UserID{ClimbingAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{DeskAgent}]},{""Agent1$TestIDSuffix"":[$Agent2UserID{FrowningAgent}],""Agent2$TestIDSuffix"":[$Agent2UserID{DeskAgent}]}]"},
             ),
         ],
     },
@@ -1998,7 +1998,7 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
                 {
-                    Key => "ZZZSetContinentalSupport${TestIDSuffix}",
+                    Key => "DynamicField_ZZZSetContinentalSupport${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2024,23 +2024,23 @@ my @ExportDataTests = (
         ReferenceExportData => [
             [
                 $ConfigItemNumbers[5],
-                qq{[[[$Agent2UserID{FirstLevelSupporterEurope}],[$Agent2UserID{SecondLevelSupporterEurope}]]]},
+                qq{[{"LevelFirst$TestIDSuffix":[$Agent2UserID{FirstLevelSupporterEurope}],"LevelSecond$TestIDSuffix":[$Agent2UserID{SecondLevelSupporterEurope}]}]},
             ],
             [
                 $ConfigItemNumbers[4],
-                qq{[[[$Agent2UserID{FirstLevelSupporterAfrica}],[$Agent2UserID{SecondLevelSupporterAfrica}]]]},
+                qq{[{"LevelFirst$TestIDSuffix":[$Agent2UserID{FirstLevelSupporterAfrica}],"LevelSecond$TestIDSuffix":[$Agent2UserID{SecondLevelSupporterAfrica}]}]},
             ],
         ],
         ReferenceExportContent => [
             join(
                 ';',
                 qq{"$ConfigItemNumbers[5]"},
-                qq{"[[[$Agent2UserID{FirstLevelSupporterEurope}],[$Agent2UserID{SecondLevelSupporterEurope}]]]"},
+                qq{"[{""LevelFirst$TestIDSuffix"":[$Agent2UserID{FirstLevelSupporterEurope}],""LevelSecond$TestIDSuffix"":[$Agent2UserID{SecondLevelSupporterEurope}]}]"},
             ),
             join(
                 ';',
                 qq{"$ConfigItemNumbers[4]"},
-                qq{"[[[$Agent2UserID{FirstLevelSupporterAfrica}],[$Agent2UserID{SecondLevelSupporterAfrica}]]]"},
+                qq{"[{""LevelFirst$TestIDSuffix"":[$Agent2UserID{FirstLevelSupporterAfrica}],""LevelSecond$TestIDSuffix"":[$Agent2UserID{SecondLevelSupporterAfrica}]}]"},
             ),
         ],
     },
@@ -2063,7 +2063,7 @@ my @ExportDataTests = (
 
                 # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}",
+                    Key => "DynamicField_CustomerCIO${TestIDSuffix}",
                 },
 
                 # CustomerSalesTeam is a multivalue field.
@@ -2071,13 +2071,13 @@ my @ExportDataTests = (
                 # - get the value at a specific index, that is the first and the second element
                 # - get the complete list
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}::1",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}::1",
                 },
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}::2",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}::2",
                 },
                 {
-                    Key => "CustomerSalesTeam${TestIDSuffix}",
+                    Key => "DynamicField_CustomerSalesTeam${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2143,7 +2143,7 @@ my @ExportDataTests = (
 
                 # CustomerCIO is a singlevalue field. Thus no index is passed.
                 {
-                    Key => "CustomerCIO${TestIDSuffix}",
+                    Key => "DynamicField_CustomerCIO${TestIDSuffix}",
                 },
 
                 # ZZZSetOfAgents is a multivalue field.
@@ -2151,10 +2151,10 @@ my @ExportDataTests = (
                 # - get the value at a specific index, that is second element
                 # - get the complete list
                 {
-                    Key => "ZZZSetOfAgents${TestIDSuffix}::2",
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}::2",
                 },
                 {
-                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2180,26 +2180,26 @@ my @ExportDataTests = (
             [
                 $ConfigItemNumbers[3],
                 qq{male chief information officer "🗄"$RandomID},
-                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ] },
                 [
-                    [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ] },
                 ],
             ],
             [
                 $ConfigItemNumbers[2],
                 qq{male chief information officer "🗄"$RandomID},
-                [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                { "Agent1$TestIDSuffix" => $Agent2UserID{ClimbingAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
                 [
-                    [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{FrowningAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    { "Agent1$TestIDSuffix" => $Agent2UserID{LotusAgent},    "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
+                    { "Agent1$TestIDSuffix" => $Agent2UserID{ClimbingAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
+                    { "Agent1$TestIDSuffix" => $Agent2UserID{FrowningAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
                 ],
             ],
         ],
         ReferenceExportContent => [
-            qq{["$ConfigItemNumbers[3]","male chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]],[[[$Agent2UserID{DeskAgent}],[$Agent2UserID{LotusAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{FrowningAgent}]]]]},
-            qq{["$ConfigItemNumbers[2]","male chief information officer \\"\x{1F5C4}\\"$RandomID",[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[[$Agent2UserID{LotusAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{ClimbingAgent}],[$Agent2UserID{DeskAgent}]],[[$Agent2UserID{FrowningAgent}],[$Agent2UserID{DeskAgent}]]]]},
+            qq{["$ConfigItemNumbers[3]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{FrowningAgent}"]},[{"Agent1$TestIDSuffix":["$Agent2UserID{DeskAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{LotusAgent}"]},{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{FrowningAgent}"]}]},
+            qq{["$ConfigItemNumbers[2]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]},[{"Agent1$TestIDSuffix":["$Agent2UserID{LotusAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]}],[{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]},{"Agent1$TestIDSuffix":["$Agent2UserID{FrowningAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]}]},
         ],
     },
 
@@ -2214,10 +2214,10 @@ my @ExportDataTests = (
                     Key => 'Number',
                 },
                 {
-                    Key => "CustomerCIO${TestIDSuffix}",
+                    Key => "DynamicField_CustomerCIO${TestIDSuffix}",
                 },
                 {
-                    Key => "ZZZSetOfAgents${TestIDSuffix}",
+                    Key => "DynamicField_ZZZSetOfAgents${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2240,46 +2240,46 @@ my @ExportDataTests = (
 
         # The expected rows need to be sorted by config item number in descending order.
         # There is no way to specify the sort order in ExportDataGet().
-        ReferenceExportData => [
+        ReferenceExportData => {
             [
                 $ConfigItemNumbers[3],
                 qq{male chief information officer "🗄"$RandomID},
                 [
-                    [ [ $Agent2UserID{DeskAgent} ],     [ $Agent2UserID{LotusAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ] },
                 ],
             ],
             [
                 $ConfigItemNumbers[2],
                 qq{male chief information officer "🗄"$RandomID},
                 [
-                    [ [ $Agent2UserID{LotusAgent} ],    [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{FrowningAgent} ], [ $Agent2UserID{DeskAgent} ] ],
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
                 ],
             ],
-        ],
+        },
         ReferenceExportContent => [ <<"ITEM_1", <<"ITEM_2" ],
 [
    "$ConfigItemNumbers[3]",
    "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
-      [
-         [
+      {
+         "Agent1$TestIDSuffix": [
             $Agent2UserID{DeskAgent}
          ],
-         [
+         "Agent2$TestIDSuffix": [
             $Agent2UserID{LotusAgent}
          ]
-      ],
-      [
-         [
+      },
+      {
+         "Agent1$TestIDSuffix": [
             $Agent2UserID{ClimbingAgent}
          ],
-         [
+         "Agent2$TestIDSuffix": [
             $Agent2UserID{FrowningAgent}
          ]
-      ]
+      }
    ]
 ]
 ITEM_1
@@ -2287,30 +2287,30 @@ ITEM_1
    "$ConfigItemNumbers[2]",
    "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
-      [
-         [
+      {
+         "Agent1$TestIDSuffix": [
             $Agent2UserID{LotusAgent}
          ],
-         [
+         "Agent2$TestIDSuffix": [
             $Agent2UserID{DeskAgent}
          ]
-      ],
-      [
-         [
+      },
+      {
+         "Agent1$TestIDSuffix": [
             $Agent2UserID{ClimbingAgent}
          ],
-         [
+         "Agent2$TestIDSuffix": [
             $Agent2UserID{DeskAgent}
          ]
-      ],
-      [
-         [
+      },
+      {
+         "Agent1$TestIDSuffix": [
             $Agent2UserID{FrowningAgent}
          ],
-         [
+         "Agent2$TestIDSuffix": [
             $Agent2UserID{DeskAgent}
          ]
-      ]
+      }
    ]
 ]
 ITEM_2
@@ -2327,7 +2327,7 @@ ITEM_2
                     Key => 'Number',
                 },
                 {
-                    Key => "ZZZSetContinentalSupport${TestIDSuffix}",
+                    Key => "DynamicField_ZZZSetContinentalSupport${TestIDSuffix}",
                 },
             ],
             SearchData => {
@@ -2351,42 +2351,42 @@ ITEM_2
 
         # The expected rows need to be sorted by config item number in descending order.
         # There is no way to specify the sort order in ExportDataGet().
-        ReferenceExportData => [
+        ReferenceExportData => {
             [
                 $ConfigItemNumbers[5],
-                [ [ [ $Agent2UserID{FirstLevelSupporterEurope} ], [ $Agent2UserID{SecondLevelSupporterEurope} ] ] ],
+                [ { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterEurope} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterEurope} ] } ],
             ],
             [
                 $ConfigItemNumbers[4],
-                [ [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ] ],
+                [ { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterAfrica} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterAfrica} ] } ],
             ],
-        ],
+        },
         ReferenceExportContent => [ <<"ITEM_3", <<"ITEM_4" ],
 [
    "$ConfigItemNumbers[5]",
    [
-      [
-         [
+      {
+         "LevelFirst$TestIDSuffix" => [
             $Agent2UserID{FirstLevelSupporterEurope}
          ],
-         [
+         "LevelSecond$TestIDSuffix" => [
             $Agent2UserID{SecondLevelSupporterEurope}
          ]
-      ]
+      }
    ]
 ]
 ITEM_3
 [
    "$ConfigItemNumbers[4]",
    [
-      [
-         [
+      {
+         "LevelFirst$TestIDSuffix" => [
             $Agent2UserID{FirstLevelSupporterAfrica}
          ],
-         [
+         "LevelSecond$TestIDSuffix" => [
             $Agent2UserID{SecondLevelSupporterAfrica}
          ]
-      ]
+      }
    ]
 ]
 ITEM_4
@@ -4560,26 +4560,26 @@ END_JSON_FOR_INDEX_20
                     $CustomerUsers{male_CIO},
                 ],
                 "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                    [ [ $Agent2UserID{DeskAgent} ],  [ $Agent2UserID{LotusAgent} ] ],
-                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{LotusAgent} ] ],    # changed
-                    [ undef,                         undef ],                            # index 3 to 19 skipped
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ undef,                         undef ],
-                    [ [ $Agent2UserID{DeskAgent} ],  [ $Agent2UserID{DeskAgent} ] ],     # added
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },    # changed
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },                            # index 3 to 19 skipped
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },     # added
                 ],
             },
         },
