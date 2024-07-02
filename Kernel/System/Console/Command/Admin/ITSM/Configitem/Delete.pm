@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -117,7 +117,7 @@ sub PreRun {
             . " For more details use --help\n";
     }
 
-    my $AllOptionTypeCount;
+    my $AllOptionTypeCount = 0;
     for my $Value ( $All, $AllOldVersions, $AllButKeepLast, $AllOlderThanDays ) {
         if ($Value) {
             $AllOptionTypeCount++;
@@ -238,6 +238,7 @@ sub Run {
 
             # define the search param for the class search
             my %SearchParam = (
+                Result   => 'ARRAY',
                 ClassIDs => [$ID],
             );
 
@@ -268,9 +269,7 @@ sub Run {
             }
 
             # get ids of this class (and maybe deployment state) config items
-            @ConfigItemIDs = @{
-                $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(%SearchParam)
-            };
+            @ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(%SearchParam);
         }
         else {
             $Self->PrintError("Unable to find class name $Class.");
