@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -171,6 +171,13 @@ Sections:
        - Header: "This is section 2"
 END_YAML
 
+# add a general catalog test list
+my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+    Group  => 'itsm-configitem',
+    UserID => 1,
+);
+ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
+
 # add the test classes, actually only one test class
 my ( @ConfigItemClassIDs, @ConfigItemClasses, @ConfigItemDefinitionIDs );
 for my $Definition (@ConfigItemDefinitions) {
@@ -187,6 +194,20 @@ for my $Definition (@ConfigItemDefinitions) {
         UserID  => 1,
     );
     ok( $ClassID, "Added class $ClassName to the general catalog" );
+
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ClassID,
+        Key    => 'Permission',
+        Value  => [$ConfigItemGroupID],
+    );
+
+    # Set version string module.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ClassID,
+        Key    => 'VersionStringModule',
+        Value  => ['Incremental'],
+    );
+
     push @ConfigItemClassIDs, $ClassID;
 
     # add a definition to the class
