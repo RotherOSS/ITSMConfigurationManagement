@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -312,6 +312,13 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
         ItemID => $ItemID,
         Key    => 'Permission',
         Value  => [$ConfigItemGroupID],
+    );
+
+    # Set version string module.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ItemID,
+        Key    => 'VersionStringModule',
+        Value  => ['Incremental'],
     );
 
     # Set version string module.
@@ -781,6 +788,13 @@ $ConfigItemPerlDefinitions[2] = " [
             ItemID => $ClassID,
             Key    => 'Permission',
             Value  => [$ConfigItemGroupID],
+        );
+
+        # Set version string module.
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $ClassID,
+            Key    => 'VersionStringModule',
+            Value  => ['Incremental'],
         );
 
         # Set version string module.
@@ -2189,17 +2203,17 @@ my @ExportDataTests = (
             [
                 $ConfigItemNumbers[2],
                 qq{male chief information officer "🗄"$RandomID},
-                { "Agent1$TestIDSuffix" => $Agent2UserID{ClimbingAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
+                { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
                 [
-                    { "Agent1$TestIDSuffix" => $Agent2UserID{LotusAgent},    "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
-                    { "Agent1$TestIDSuffix" => $Agent2UserID{ClimbingAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
-                    { "Agent1$TestIDSuffix" => $Agent2UserID{FrowningAgent}, "Agent2$TestIDSuffix" => $Agent2UserID{DeskAgent} },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ],    "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
                 ],
             ],
         ],
         ReferenceExportContent => [
-            qq{["$ConfigItemNumbers[3]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{FrowningAgent}"]},[{"Agent1$TestIDSuffix":["$Agent2UserID{DeskAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{LotusAgent}"]},{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{FrowningAgent}"]}]},
-            qq{["$ConfigItemNumbers[2]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]},[{"Agent1$TestIDSuffix":["$Agent2UserID{LotusAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]}],[{"Agent1$TestIDSuffix":["$Agent2UserID{ClimbingAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]},{"Agent1$TestIDSuffix":["$Agent2UserID{FrowningAgent}"],"Agent2$TestIDSuffix":["$Agent2UserID{DeskAgent}"]}]},
+            qq{["$ConfigItemNumbers[3]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{FrowningAgent}]},[{"Agent1$TestIDSuffix":[$Agent2UserID{DeskAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{LotusAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{FrowningAgent}]}]]},
+            qq{["$ConfigItemNumbers[2]","male chief information officer \\"\x{1F5C4}\\"$RandomID",{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]},[{"Agent1$TestIDSuffix":[$Agent2UserID{LotusAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{ClimbingAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]},{"Agent1$TestIDSuffix":[$Agent2UserID{FrowningAgent}],"Agent2$TestIDSuffix":[$Agent2UserID{DeskAgent}]}]]},
         ],
     },
 
@@ -2240,43 +2254,43 @@ my @ExportDataTests = (
 
         # The expected rows need to be sorted by config item number in descending order.
         # There is no way to specify the sort order in ExportDataGet().
-        ReferenceExportData => {
+        ReferenceExportData => [
             [
                 $ConfigItemNumbers[3],
                 qq{male chief information officer "🗄"$RandomID},
                 [
-                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ] },
-                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ "$Agent2UserID{DeskAgent}" ], "Agent2$TestIDSuffix" => [ "$Agent2UserID{LotusAgent}" ] },
+                    { "Agent1$TestIDSuffix" => [ "$Agent2UserID{ClimbingAgent}" ], "Agent2$TestIDSuffix" => [ "$Agent2UserID{FrowningAgent}" ] },
                 ],
             ],
             [
                 $ConfigItemNumbers[2],
                 qq{male chief information officer "🗄"$RandomID},
                 [
-                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{LotusAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
-                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{ClimbingAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
-                    { "Agent1$TestIDSuffix" => [ $Agent2UserID{FrowningAgent} ], "Agent2$TestIDSuffix" => [ $Agent2UserID{DeskAgent} ] },
+                    { "Agent1$TestIDSuffix" => [ "$Agent2UserID{LotusAgent}" ], "Agent2$TestIDSuffix" => [ "$Agent2UserID{DeskAgent}" ] },
+                    { "Agent1$TestIDSuffix" => [ "$Agent2UserID{ClimbingAgent}" ], "Agent2$TestIDSuffix" => [ "$Agent2UserID{DeskAgent}" ] },
+                    { "Agent1$TestIDSuffix" => [ "$Agent2UserID{FrowningAgent}" ], "Agent2$TestIDSuffix" => [ "$Agent2UserID{DeskAgent}" ] },
                 ],
             ],
-        },
+        ],
         ReferenceExportContent => [ <<"ITEM_1", <<"ITEM_2" ],
 [
    "$ConfigItemNumbers[3]",
    "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
       {
-         "Agent1$TestIDSuffix": [
+         "Agent1$TestIDSuffix" : [
             $Agent2UserID{DeskAgent}
          ],
-         "Agent2$TestIDSuffix": [
+         "Agent2$TestIDSuffix" : [
             $Agent2UserID{LotusAgent}
          ]
       },
       {
-         "Agent1$TestIDSuffix": [
+         "Agent1$TestIDSuffix" : [
             $Agent2UserID{ClimbingAgent}
          ],
-         "Agent2$TestIDSuffix": [
+         "Agent2$TestIDSuffix" : [
             $Agent2UserID{FrowningAgent}
          ]
       }
@@ -2288,26 +2302,26 @@ ITEM_1
    "male chief information officer \\"\x{1F5C4}\\"$RandomID",
    [
       {
-         "Agent1$TestIDSuffix": [
+         "Agent1$TestIDSuffix" : [
             $Agent2UserID{LotusAgent}
          ],
-         "Agent2$TestIDSuffix": [
+         "Agent2$TestIDSuffix" : [
             $Agent2UserID{DeskAgent}
          ]
       },
       {
-         "Agent1$TestIDSuffix": [
+         "Agent1$TestIDSuffix" : [
             $Agent2UserID{ClimbingAgent}
          ],
-         "Agent2$TestIDSuffix": [
+         "Agent2$TestIDSuffix" : [
             $Agent2UserID{DeskAgent}
          ]
       },
       {
-         "Agent1$TestIDSuffix": [
+         "Agent1$TestIDSuffix" : [
             $Agent2UserID{FrowningAgent}
          ],
-         "Agent2$TestIDSuffix": [
+         "Agent2$TestIDSuffix" : [
             $Agent2UserID{DeskAgent}
          ]
       }
@@ -2351,7 +2365,7 @@ ITEM_2
 
         # The expected rows need to be sorted by config item number in descending order.
         # There is no way to specify the sort order in ExportDataGet().
-        ReferenceExportData => {
+        ReferenceExportData => [
             [
                 $ConfigItemNumbers[5],
                 [ { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterEurope} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterEurope} ] } ],
@@ -2360,16 +2374,16 @@ ITEM_2
                 $ConfigItemNumbers[4],
                 [ { "LevelFirst$TestIDSuffix" => [ $Agent2UserID{FirstLevelSupporterAfrica} ], "LevelSecond$TestIDSuffix" => [ $Agent2UserID{SecondLevelSupporterAfrica} ] } ],
             ],
-        },
+        ],
         ReferenceExportContent => [ <<"ITEM_3", <<"ITEM_4" ],
 [
    "$ConfigItemNumbers[5]",
    [
       {
-         "LevelFirst$TestIDSuffix" => [
+         "LevelFirst$TestIDSuffix" : [
             $Agent2UserID{FirstLevelSupporterEurope}
          ],
-         "LevelSecond$TestIDSuffix" => [
+         "LevelSecond$TestIDSuffix" : [
             $Agent2UserID{SecondLevelSupporterEurope}
          ]
       }
@@ -2380,10 +2394,10 @@ ITEM_3
    "$ConfigItemNumbers[4]",
    [
       {
-         "LevelFirst$TestIDSuffix" => [
+         "LevelFirst$TestIDSuffix" : [
             $Agent2UserID{FirstLevelSupporterAfrica}
          ],
-         "LevelSecond$TestIDSuffix" => [
+         "LevelSecond$TestIDSuffix" : [
             $Agent2UserID{SecondLevelSupporterAfrica}
          ]
       }
@@ -4333,7 +4347,7 @@ my @ImportDataTests = (
 
                     # from JSON export
                     [
-                        [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+                        { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ], 'Agent2' . $TestIDSuffix =>  [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
                     ],
 
                     'Operational',
@@ -4348,7 +4362,7 @@ my @ImportDataTests = (
                 DeplState                                            => 'Production',
                 InciState                                            => 'Operational',
                 "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
-                    [ [ $Agent2UserID{FirstLevelSupporterAfrica} ], [ $Agent2UserID{SecondLevelSupporterAfrica} ] ],
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
                 ],
             },
         },
