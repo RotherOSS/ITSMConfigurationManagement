@@ -742,7 +742,7 @@ sub DefinitionCheck {
     # YAML invalid
     if ( !IsHashRefWithData($DefinitionRef) ) {
         return $ReturnError->(
-            Translatable('Base structure is not valid. Please provide an array with data in YAML format.')
+            Translatable('Base structure is not valid. Please provide a hash with data in YAML format.')
         );
     }
 
