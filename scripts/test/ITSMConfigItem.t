@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -170,7 +170,7 @@ for my $Name ( sort keys %DynamicFieldDefinitions ) {
 my @ConfigItemPerlDefinitions;
 
 # define the first test definition (basic definition without DynamicFields)
-$ConfigItemPerlDefinitions[0] = " [
+$ConfigItemPerlDefinitions[0] = "
 {
         Pages  => [
             {
@@ -192,12 +192,34 @@ $ConfigItemPerlDefinitions[0] = " [
                     }
                 ],
             }
-        ]
+        ],
+        Sections => {
+            Section1 => {
+                Content => [
+                    {
+                        DF => 'Test1$TestIDSuffix'
+                    },
+                    {
+                        DF => 'Test2$TestIDSuffix'
+                    }
+                ]
+            },
+            Section2 => {
+                Content => [
+                    {
+                        DF => 'Test3$TestIDSuffix'
+                    },
+                    {
+                        DF => 'Test4$TestIDSuffix'
+                    }
+                ]
+            }
+        },
 }
-]";
+";
 
 # define the second test definition (definition with DynamicFields)
-$ConfigItemPerlDefinitions[1] = " [
+$ConfigItemPerlDefinitions[1] = "
 {
         Pages  => [
             {
@@ -228,10 +250,10 @@ $ConfigItemPerlDefinitions[1] = " [
             }
         },
 }
-]";
+";
 
 # define the third test definition (especially for search tests with XMLData)
-$ConfigItemPerlDefinitions[2] = " [
+$ConfigItemPerlDefinitions[2] = "
 {
         Pages  => [
             {
@@ -277,10 +299,10 @@ $ConfigItemPerlDefinitions[2] = " [
             }
         },
 }
-]";
+";
 
 # define the fourth test definition (only for search tests)
-$ConfigItemPerlDefinitions[3] = " [
+$ConfigItemPerlDefinitions[3] = "
 {
         Pages  => [
             {
@@ -326,11 +348,11 @@ $ConfigItemPerlDefinitions[3] = " [
             }
         },
 }
-]";
+";
 
 # define the fifth test definition (only for search tests)
 
-$ConfigItemPerlDefinitions[4] = " [
+$ConfigItemPerlDefinitions[4] = "
 {
         Pages  => [
             {
@@ -358,11 +380,11 @@ $ConfigItemPerlDefinitions[4] = " [
             },
         },
 }
-]";
+";
 
 # define the sixth test definition (only for search tests)
 
-$ConfigItemPerlDefinitions[5] = " [
+$ConfigItemPerlDefinitions[5] = "
 {
         Pages  => [
             {
@@ -393,7 +415,7 @@ $ConfigItemPerlDefinitions[5] = " [
             },
         },
 }
-]";
+";
 
 my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
@@ -404,6 +426,13 @@ for my $PerlDefinition (@ConfigItemPerlDefinitions) {
     );
     push @ConfigItemDefinitions, $YAMLDefinition;
 }
+
+# add a general catalog test list
+my $ConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+    Group  => 'itsm-configitem',
+    UserID => 1,
+);
+ok( $ConfigItemGroupID, 'got group id for itsm-configitem' );
 
 # add the test classes
 my @ConfigItemClassIDs;
@@ -430,6 +459,27 @@ for my $Definition (@ConfigItemDefinitions) {
             "Can't add new config item class.",
         );
     }
+
+    # Set permission.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ClassID,
+        Key    => 'Permission',
+        Value  => [$ConfigItemGroupID],
+    );
+
+    # Set version string module.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ClassID,
+        Key    => 'VersionStringModule',
+        Value  => ['Incremental'],
+    );
+
+    # Set version triggers.
+    $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+        ItemID => $ClassID,
+        Key    => 'VersionTrigger',
+        Value  => [ 'Name', 'DeplStateID', 'InciStateID' ],
+    );
 
     push @ConfigItemClassIDs, $ClassID;
     push @ConfigItemClasses,  $ClassName;
@@ -970,12 +1020,12 @@ my $ConfigItemTests = [
                 Number           => $ConfigItemNumbers[51],
                 ClassID          => $ConfigItemClassIDs[2],
                 Class            => $ClassList->{ $ConfigItemClassIDs[2] },
-                CurDeplStateID   => $DeplStateListReverse{Production},
-                CurDeplState     => 'Production',
+                CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                CurDeplState     => 'Maintenance',
                 CurDeplStateType => 'productive',
-                CurInciStateID   => $InciStateListReverse{Operational},
-                CurInciState     => 'Operational',
-                CurInciStateType => 'operational',
+                CurInciStateID   => $InciStateListReverse{Incident},
+                CurInciState     => 'Incident',
+                CurInciStateType => 'incident',
                 CreateBy         => 1,
                 ChangeBy         => $UserIDs[1],
             },
@@ -989,8 +1039,8 @@ my $ConfigItemTests = [
                     DeplStateID      => $DeplStateListReverse{Production},
                     DeplState        => 'Production',
                     DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
+                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                    CurDeplState     => 'Maintenance',
                     CurDeplStateType => 'productive',
                     InciStateID      => $InciStateListReverse{Operational},
                     InciState        => 'Operational',
@@ -1009,8 +1059,8 @@ my $ConfigItemTests = [
                     DeplStateID      => $DeplStateListReverse{Maintenance},
                     DeplState        => 'Maintenance',
                     DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
+                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                    CurDeplState     => 'Maintenance',
                     CurDeplStateType => 'productive',
                     InciStateID      => $InciStateListReverse{Incident},
                     InciState        => 'Incident',
@@ -1054,9 +1104,9 @@ my $ConfigItemTests = [
                 CurDeplStateID   => $DeplStateListReverse{Production},
                 CurDeplState     => 'Production',
                 CurDeplStateType => 'productive',
-                CurInciStateID   => $InciStateListReverse{Operational},
-                CurInciState     => 'Operational',
-                CurInciStateType => 'operational',
+                CurInciStateID   => $InciStateListReverse{Incident},
+                CurInciState     => 'Incident',
+                CurInciStateType => 'incident',
                 CreateBy         => 1,
                 ChangeBy         => 1,
             },
@@ -1119,9 +1169,9 @@ my $ConfigItemTests = [
                 CurDeplStateID   => $DeplStateListReverse{Production},
                 CurDeplState     => 'Production',
                 CurDeplStateType => 'productive',
-                CurInciStateID   => $InciStateListReverse{Operational},
-                CurInciState     => 'Operational',
-                CurInciStateType => 'operational',
+                CurInciStateID   => $InciStateListReverse{Incident},
+                CurInciState     => 'Incident',
+                CurInciStateType => 'incident',
                 CreateBy         => $UserIDs[2],
                 ChangeBy         => $UserIDs[2],
             },
@@ -1183,9 +1233,9 @@ my $ConfigItemTests = [
                 CurDeplStateID   => $DeplStateListReverse{Production},
                 CurDeplState     => 'Production',
                 CurDeplStateType => 'productive',
-                CurInciStateID   => $InciStateListReverse{Operational},
-                CurInciState     => 'Operational',
-                CurInciStateType => 'operational',
+                CurInciStateID   => $InciStateListReverse{Incident},
+                CurInciState     => 'Incident',
+                CurInciStateType => 'incident',
                 CreateBy         => $UserIDs[2],
                 ChangeBy         => $UserIDs[2],
             },
@@ -1306,12 +1356,12 @@ my $ConfigItemTests = [
                 Number           => $ConfigItemNumbers[70],
                 ClassID          => $ConfigItemClassIDs[0],
                 Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                CurDeplStateID   => $DeplStateListReverse{Production},
-                CurDeplState     => 'Production',
+                CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                CurDeplState     => 'Maintenance',
                 CurDeplStateType => 'productive',
-                CurInciStateID   => $InciStateListReverse{Operational},
-                CurInciState     => 'Operational',
-                CurInciStateType => 'operational',
+                CurInciStateID   => $InciStateListReverse{Incident},
+                CurInciState     => 'Incident',
+                CurInciStateType => 'incident',
                 CreateBy         => 1,
                 ChangeBy         => 1,
             },
@@ -1325,8 +1375,8 @@ my $ConfigItemTests = [
                     DeplStateID      => $DeplStateListReverse{Planned},
                     DeplState        => 'Planned',
                     DeplStateType    => 'preproductive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
+                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                    CurDeplState     => 'Maintenance',
                     CurDeplStateType => 'productive',
                     InciStateID      => $InciStateListReverse{Operational},
                     InciState        => 'Operational',
@@ -1345,8 +1395,8 @@ my $ConfigItemTests = [
                     DeplStateID      => $DeplStateListReverse{Maintenance},
                     DeplState        => 'Maintenance',
                     DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Production},
-                    CurDeplState     => 'Production',
+                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
+                    CurDeplState     => 'Maintenance',
                     CurDeplStateType => 'productive',
                     InciStateID      => $InciStateListReverse{Incident},
                     InciState        => 'Incident',
@@ -1432,18 +1482,6 @@ my $ConfigItemTests = [
                     InciStateID => $InciStateListReverse{Incident},
                     UserID      => 1,
                 },
-                {
-                    Name        => 'UnitTest - Bugfix4196 V2',
-                    DeplStateID => $DeplStateListReverse{Maintenance},
-                    InciStateID => $InciStateListReverse{Incident},
-                    UserID      => 1,
-                },
-                {
-                    Name        => 'UnitTest - Bugfix4196 V2',
-                    DeplStateID => $DeplStateListReverse{Maintenance},
-                    InciStateID => $InciStateListReverse{Incident},
-                    UserID      => 1,
-                },
             ],
         },
         ReferenceData => {
@@ -1476,46 +1514,6 @@ my $ConfigItemTests = [
                     InciStateID      => $InciStateListReverse{Operational},
                     InciState        => 'Operational',
                     InciStateType    => 'operational',
-                    CurInciStateID   => $InciStateListReverse{Incident},
-                    CurInciState     => 'Incident',
-                    CurInciStateType => 'incident',
-                    CreateBy         => 1,
-                },
-                {
-                    Number           => $ConfigItemNumbers[71],
-                    ClassID          => $ConfigItemClassIDs[0],
-                    Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                    Name             => 'UnitTest - Bugfix4196 V2',
-                    DefinitionID     => $ConfigItemDefinitionIDs[0],
-                    DeplStateID      => $DeplStateListReverse{Maintenance},
-                    DeplState        => 'Maintenance',
-                    DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
-                    CurDeplState     => 'Maintenance',
-                    CurDeplStateType => 'productive',
-                    InciStateID      => $InciStateListReverse{Incident},
-                    InciState        => 'Incident',
-                    InciStateType    => 'incident',
-                    CurInciStateID   => $InciStateListReverse{Incident},
-                    CurInciState     => 'Incident',
-                    CurInciStateType => 'incident',
-                    CreateBy         => 1,
-                },
-                {
-                    Number           => $ConfigItemNumbers[71],
-                    ClassID          => $ConfigItemClassIDs[0],
-                    Class            => $ClassList->{ $ConfigItemClassIDs[0] },
-                    Name             => 'UnitTest - Bugfix4196 V2',
-                    DefinitionID     => $ConfigItemDefinitionIDs[0],
-                    DeplStateID      => $DeplStateListReverse{Maintenance},
-                    DeplState        => 'Maintenance',
-                    DeplStateType    => 'productive',
-                    CurDeplStateID   => $DeplStateListReverse{Maintenance},
-                    CurDeplState     => 'Maintenance',
-                    CurDeplStateType => 'productive',
-                    InciStateID      => $InciStateListReverse{Incident},
-                    InciState        => 'Incident',
-                    InciStateType    => 'incident',
                     CurInciStateID   => $InciStateListReverse{Incident},
                     CurInciState     => 'Incident',
                     CurInciStateType => 'incident',
