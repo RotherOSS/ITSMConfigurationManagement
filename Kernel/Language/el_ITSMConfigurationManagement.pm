@@ -205,6 +205,8 @@ sub Data {
     $Self->{Translation}->{'Select the attribute which config items will be searched by'} = 'Επιλέξτε το χαρακτηριστικό με βάση το οποίο θα γίνεται η αναζήτηση των στοιχείων διαμόρφωσης';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+    $Self->{Translation}->{'Base structure is not valid. Please provide a hash with data in YAML format.'} =
+        '';
     $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'Απαιτείται η έναρξη της συμβολοσειράς YAML με \'---\'.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm

@@ -3216,3 +3216,7 @@ msgstr "导入类/角色及其相关字段"
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr "可在代理界面的配置项搜索结果概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。"
 
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr ""
+

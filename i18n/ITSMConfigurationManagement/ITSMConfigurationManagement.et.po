@@ -3216,3 +3216,7 @@ msgstr "Klasside/rollide ja nendega seotud väljade importimine"
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr "Veerud, mida saab filtreerida agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuste ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX)."
 
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr ""
+

@@ -3216,3 +3216,7 @@ msgstr "Импортиране на класове/роли и свързани�
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr "Колони, които могат да се филтрират в прегледа на резултатите от търсенето на елементите на конфигурацията в интерфейса на агента. Забележка: Разрешени са само атрибути на елементите на конфигурацията и динамични полета (DynamicField_NameX)."
 
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr ""
+

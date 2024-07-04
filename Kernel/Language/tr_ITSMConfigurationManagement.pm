@@ -205,6 +205,8 @@ sub Data {
     $Self->{Translation}->{'Select the attribute which config items will be searched by'} = 'Yapılandırma öğelerinin aranacağı özniteliği seçin';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+    $Self->{Translation}->{'Base structure is not valid. Please provide a hash with data in YAML format.'} =
+        '';
     $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'YAML dizesinin \'---\' ile başlaması gereklidir.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm

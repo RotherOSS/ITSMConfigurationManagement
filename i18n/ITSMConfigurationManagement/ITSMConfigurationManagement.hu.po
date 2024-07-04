@@ -3216,3 +3216,7 @@ msgstr "Osztályok/szerepkörök és kapcsolódó mezőik importálása"
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr "Az ügynöki felület konfigurációs elem keresési eredményeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a Config Item attribútumok és a dinamikus mezők (DynamicField_NameX) engedélyezettek."
 
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr ""
+
