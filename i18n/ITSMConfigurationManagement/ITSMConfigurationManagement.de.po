@@ -2119,7 +2119,7 @@ msgstr ""
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr "ITSM ConfigItem"
+msgstr "ITSM ConfigElement"
 
 #. SysConfig
 msgid "InciState"
