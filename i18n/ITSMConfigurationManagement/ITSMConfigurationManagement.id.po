@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-06-24 10:42+0000\n"
+"PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Indonesian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/id/>\n"
+"Language-Team: Indonesian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3218,5 +3219,4 @@ msgstr "Kolom yang dapat difilter dalam ikhtisar hasil pencarian item konfiguras
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr ""
-
+msgstr "Struktur dasar tidak valid. Berikan hash dengan data dalam format YAML."
