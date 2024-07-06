@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Chinese (Traditional) <http://weblate.otobo.org/projects/"
-"opm-packages/itsm-configurationmanagement/zh_Hant/>\n"
+"Language-Team: Chinese (Traditional) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3220,3 +3219,4 @@ msgstr "可在代理界面的配置项搜索结果概览中过滤的列。注意
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
 msgstr "基础结构无效。请提供包含 YAML 格式数据的哈希值。"
+

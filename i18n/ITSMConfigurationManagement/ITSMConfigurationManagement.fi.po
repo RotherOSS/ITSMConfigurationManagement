@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Finnish <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/fi/>\n"
+"Language-Team: Finnish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3219,6 +3218,5 @@ msgstr "Sarakkeet, joita voidaan suodattaa agentin käyttöliittymän määritys
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr ""
-"Perusrakenne ei ole kelvollinen. Toimita hash, jossa on tietoja YAML-"
-"muodossa."
+msgstr "Perusrakenne ei ole kelvollinen. Toimita hash, jossa on tietoja YAML-muodossa."
+

@@ -206,7 +206,7 @@ sub Data {
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
     $Self->{Translation}->{'Base structure is not valid. Please provide a hash with data in YAML format.'} =
-        '';
+        'Basisstruktur ist nicht gültig. Bitte geben Sie einen Hash mit Daten im YAML-Format an.';
     $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'Der Beginn der YAML-Zeichenkette mit \'---\' ist erforderlich.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm
@@ -402,7 +402,7 @@ sub Data {
         'Für jeden Webservice (Schlüssel) kann ein Array von Klassen (Wert) definiert werden, auf die der Import beschränkt wird. Für alle gewählten Klassen oder alle vorhandenen Klassen müssen die identifizierenden Attribute in der Invokerkonfiguration ausgewählt werden.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'GenericInterface-Modulregistrierung für die ConfigItemFetch-Aufruferschicht.';
-    $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM KonfigElement';
+    $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigElement';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM Configuration Item-Übersicht.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'VorfallZustand';

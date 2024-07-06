@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
 "PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Portuguese <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/pt/>\n"
+"Language-Team: Portuguese <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3219,5 +3218,5 @@ msgstr "Colunas que podem ser filtradas na síntese do resultado da pesquisa de 
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr ""
-"A estrutura de base não é válida. Forneça um hash com dados em formato YAML."
+msgstr "A estrutura de base não é válida. Forneça um hash com dados em formato YAML."
+

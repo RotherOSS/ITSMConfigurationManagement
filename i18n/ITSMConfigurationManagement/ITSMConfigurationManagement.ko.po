@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ko/>\n"
+"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3220,3 +3219,4 @@ msgstr "상담원 인터페이스의 구성 항목 검색 결과 개요에서 �
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
 msgstr "기본 구조가 유효하지 않습니다. YAML 형식의 데이터 해시를 입력하세요."
+

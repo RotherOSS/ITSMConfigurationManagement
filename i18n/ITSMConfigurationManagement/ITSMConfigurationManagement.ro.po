@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-05 09:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ro/>\n"
+"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -1660,6 +1658,5 @@ msgstr "Coloane care pot fi filtrate în prezentarea generală a rezultatelor c�
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr ""
-"Structura de bază nu este validă. Vă rugăm să furnizați un hash cu date în "
-"format YAML."
+msgstr "Structura de bază nu este validă. Vă rugăm să furnizați un hash cu date în format YAML."
+

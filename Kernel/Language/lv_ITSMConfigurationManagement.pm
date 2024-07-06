@@ -206,7 +206,7 @@ sub Data {
 
     # Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
     $Self->{Translation}->{'Base structure is not valid. Please provide a hash with data in YAML format.'} =
-        '';
+        'Bāzes struktūra nav derīga. Lūdzu, norādiet hash ar datiem YAML formātā.';
     $Self->{Translation}->{'Starting the YAML string with \'---\' is required.'} = 'YAML virkne jāsāk ar \'---\'.';
 
     # Perl Module: Kernel/System/ITSMConfigItem/Link.pm
