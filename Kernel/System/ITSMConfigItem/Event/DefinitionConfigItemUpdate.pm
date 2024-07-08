@@ -151,9 +151,14 @@ sub Run {
     # if we do not need to add a new version, update all affected versions and clear the cache
     else {
         $DBObject->Do(
-            SQL => 'UPDATE configitem_version v INNER JOIN configitem ci ON v.id = ci.last_version_id'
-                . ' SET v.definition_id = ?'
-                . " WHERE ci.class_id = ? AND ci.cur_depl_state_id IN ( $DeplStateString )",
+            SQL => 'UPDATE configitem_version'
+                . ' SET definition_id = ?'
+                . ' WHERE id IN ('
+                .   ' SELECT last_version_id'
+                .   ' FROM configitem'
+                .   ' WHERE class_id = ?'
+                .   " AND cur_depl_state_id IN ( $DeplStateString )"
+                . ' )',
             Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
         );
 
