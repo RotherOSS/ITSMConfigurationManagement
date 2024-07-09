@@ -32,7 +32,6 @@ use parent qw(
     Kernel::System::ITSMConfigItem::Number
     Kernel::System::ITSMConfigItem::Permission
     Kernel::System::ITSMConfigItem::Version
-    Kernel::System::ITSMConfigItem::XML
 );
 
 # core modules
