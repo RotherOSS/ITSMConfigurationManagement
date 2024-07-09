@@ -167,7 +167,7 @@ sub Data {
         'Kann das Element nicht anzeigen, keine Zugriffsrechte für das ConfigItem vergeben!';
     $Self->{Translation}->{'ConfigItem not found!'} = 'Config Item nicht gefunden!';
     $Self->{Translation}->{'No versions found!'} = 'Keine Versionen gefunden!';
-    $Self->{Translation}->{'operational'} = 'Operativ';
+    $Self->{Translation}->{'operational'} = 'operativ';
     $Self->{Translation}->{'warning'} = 'Warnung';
     $Self->{Translation}->{'incident'} = 'Vorfall';
     $Self->{Translation}->{'The deployment state of this config item'} = 'Der Verwendungsstatus dieses Config Items';
