@@ -313,12 +313,16 @@ sub _PrepareDefinitions {
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
+        my $FilenameClean = $MainObject->FilenameCleanUp(
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+        );
+
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/' . $FilenameClean;
 
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+            Filename  => $FilenameClean,
         );
 
         # Skip the class when there is no attribute mapping.
@@ -342,6 +346,7 @@ sub _PrepareDefinitions {
                 Attributes   => \@Attributes,
                 AttributeMap => $AttributeMap,
                 Class        => $Self->{ClassList}{$ClassID},
+                DefinitionID => $Definition->{DefinitionID},
             );
 
             my $FileLocation = $MainObject->FileWrite(
@@ -399,18 +404,26 @@ sub _MigrateDefinitions {
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
+        my $FilenameClean = $MainObject->FilenameCleanUp(
+            Filename => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+        );
+
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/' . $FilenameClean;
 
         DEFINITION:
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
 
+            my $FilenameClean = $MainObject->FilenameCleanUp(
+                Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
+            );
+
             # skip definitions if files are not provided; TODO: only skip without error if this is for the whole class
-            next DEFINITION unless -e $Self->{WorkingDir} . '/' . $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml';
+            next DEFINITION unless -e $Self->{WorkingDir} . '/' . $FilenameClean;
 
             my $ConfigItemYAML = $MainObject->FileRead(
                 Directory => $Self->{WorkingDir},
-                Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Filename  => $FilenameClean,
             );
 
             my $ConfigItemDefinition = $YAMLObject->Load(
@@ -425,9 +438,13 @@ sub _MigrateDefinitions {
                 return;
             }
 
+            $FilenameClean = $MainObject->FilenameCleanUp(
+                Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
+            );
+
             my $DynamicFieldYAML = $MainObject->FileRead(
                 Directory => $Self->{WorkingDir},
-                Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Filename  => $FilenameClean,
             );
 
             my $DynamicFieldDefinition = $YAMLObject->Load(
@@ -551,8 +568,12 @@ sub _MigrateDefinitions {
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys %Definitions ) {
 
+        my $FilenameClean = $MainObject->FilenameCleanUp(
+            Filename => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+        );
+
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/' . $FilenameClean;
 
         DEFINITION:
         for my $DefinitionID ( sort { $a <=> $b } keys $Definitions{$ClassID}->%* ) {
@@ -636,13 +657,17 @@ sub _MigrateAttributeData {
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
+        my $FilenameClean = $MainObject->FilenameCleanUp(
+            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+        );
+
         # Skip the class when there is no attribute mapping.
-        next CLASS_ID unless -e $Self->{WorkingDir} . '/AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml';
+        next CLASS_ID unless -e $Self->{WorkingDir} . '/' . $FilenameClean;
 
         my %Definition;
         my $MapRef = $MainObject->FileRead(
             Directory => $Self->{WorkingDir},
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+            Filename  => $FilenameClean,
         );
 
         # Skip the class when there is no attribute mapping.
@@ -896,7 +921,7 @@ sub _DeleteLegacyData {
     $Self->Print(
         "<yellow>Optionally all legacy data can be deleted. This step is not necessary for the migrated CMDB to work and can be done at any later time.</yellow>\n"
     );
-    $Self->Print("\n<red>Do you really want to permanently delete all legacy data from the system? (yes|no)</red>\n");
+    $Self->Print("\n<red>Do you really want to permanently delete all backup legacy data from the system? (type 'yes')</red>\n");
 
     if ( <STDIN> =~ m/^yes$/i ) {    ## no critic qw(InputOutput::ProhibitExplicitStdin);
 
@@ -1039,10 +1064,11 @@ END_YAML
             Attribute    => $Attribute,
             AttributeMap => $Param{AttributeMap},
             Class        => $Param{Class},
+            DefinitionID => $Param{DefinitionID},
         );
 
         if ( !%DFSpecific ) {
-            $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}')!</red>\n");
+            $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}'; DefinitionID: '$Param{DefinitionID}') - skipping attribute!</red>\n");
 
             next ATTRIBUTE;
         }
@@ -1154,10 +1180,11 @@ sub _DFConfigFromLegacy {
                 Attribute    => $Attribute,
                 AttributeMap => $Param{AttributeMap},
                 Class        => $Param{Class},
+                DefinitionID => $Param{DefinitionID},
             );
 
             if ( !%DFSpecific ) {
-                $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}')!</red>\n");
+                $Self->Print("<red>Could not convert sub attribute '$Attribute->{Name}' ($Param{Attribute}{Key}::$Attribute->{Key}) to DynamicField (Class: '$Param{Class}';  DefinitionID: '$Param{DefinitionID}') - skipped attribute!</red>\n");
 
                 next ATTRIBUTE;
             }
