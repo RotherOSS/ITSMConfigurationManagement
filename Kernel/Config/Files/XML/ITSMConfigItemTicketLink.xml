@@ -65,4 +65,805 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###RotherOSSCMDBNotifications" Required="0" Valid="1">
+        <Description Translatable="1">Creates Tickets for ConfigItems at specific time points.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">RotherOSSCMDBNotifications</Item>
+                <Item Key="Schedule">0 4 * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::ITSM::ConfigItem::CreateConditionalTickets</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###001" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item ValueType="Entity" ValueEntityType="Queue" ValueRegex="">Raw</Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item ValueType="Entity" ValueEntityType="DynamicField" ValueRegex="">Raw</Item>
+                        <Item Key="Lock"></Item>
+                        <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">Raw</Item>
+                        <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">Raw</Item>
+                        <Item ValueType="Entity" ValueEntityType="Type" ValueRegex="">Raw</Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###002" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###003" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###004" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###005" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###006" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###007" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###008" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###009" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###010" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###011" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###012" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###013" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###014" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###015" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###016" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###017" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###018" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###019" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="RotherOSSCMDBNotifications::Rules###020" Required="0" Valid="0">
+        <Description Translatable="1">At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \&lt;OTOBO_CONFIGITEM_X\&gt; where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".</Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Class"></Item>
+                <Item Key="ActiveDeploymentStates">
+                    <Array></Array>
+                </Item>
+                <Item Key="TimeCIKey"></Item>
+                <Item Key="TimeModifier"></Item>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Queue"></Item>
+                        <Item Key="Text" ValueType="Textarea"></Item>
+                        <Item Key="DynamicField">RotherOSSCMDBNotification</Item>
+                        <Item Key="Lock"></Item>
+                        <Item Key="Priority"></Item>
+                        <Item Key="State"></Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Service"></Item>
+                        <Item Key="SLA"></Item>
+                        <Item Key="CustomerID"></Item>
+                        <Item Key="CustomerUser"></Item>
+                        <Item Key="OwnerID"></Item>
+                        <Item Key="Title"></Item>
+                        <Item Key="ArticleType">note-report</Item>
+                        <Item Key="SenderType">system</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+<!-- TODO perhaps remove -->
+    <Setting Name="License::NotificationText" Required="1" Valid="1">
+        <Description Translatable="1"></Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Item ValueType="Textarea">Hallo HRC Servicedesk
+
+Eine Lizenz oder ein Zertifikat läuft bald ab:
+
+  CI Nummer     : &lt;OTOBO_LICENSE_NUMBER&gt;
+  Name          : &lt;OTOBO_LICENSE_NAME&gt;
+  Ablaufdatum   : &lt;OTOBO_LICENSE_EXPIRE&gt;
+
+Für die Erneuerung kann das verknüpfte Config Item angewählt werden.
+
+Ihr OTRS Lizenz und Zertifikat Manager</Item>
+        </Value>
+    </Setting>
+    <Setting Name="License::NotificationQueueSetting" Required="1" Valid="1">
+        <Description Translatable="1"></Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ArticleType">note-report</Item>
+                <Item Key="CustomerID"></Item>
+                <Item Key="CustomerUser"></Item>
+                <Item Key="DynamicFieldExpireName">LicenseExpireTicketExists</Item>
+                <Item Key="Lock">unlock</Item>
+                <Item Key="OwnerID">1</Item>
+                <Item Key="Priority">3 normal</Item>
+                <Item Key="Queue">Servicedesk_Intern</Item>
+                <Item Key="SLA"></Item>
+                <Item Key="SenderType">system</Item>
+                <Item Key="Service"></Item>
+                <Item Key="State">new</Item>
+                <Item Key="Title">Zertifikat/Lizenz läuft ab!</Item>
+                <Item Key="Type"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="License::NotificationBeforeExpire" Required="1" Valid="1">
+        <Description Translatable="1"></Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Item>129600</Item>
+        </Value>
+    </Setting>
+    <Setting Name="License::NotificationSendDeploymentStates" Required="1" Valid="1">
+        <Description Translatable="1"></Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="01_New">1</Item>
+                <Item Key="02_Stock">1</Item>
+                <Item Key="03_Test/QA">1</Item>
+                <Item Key="04_Pilot">1</Item>
+                <Item Key="05_Production">1</Item>
+                <Item Key="06_Maintenance">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="License::ClassAndExpireFields" Required="1" Valid="1">
+        <Description Translatable="1"></Description>
+        <Navigation>Core::Event::ITSMConfigItem::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Certificate">ExpiryDate</Item>
+                <Item Key="Certificate Customer">ExpiryDate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+<!-- OTRSCILicenseCount -->
+    <Setting Name="ITSMConfigItem::CILicenseDefaultSettings" Required="0" Valid="1">
+        <Description Translatable="1">With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CounterClassName">Software</Item>
+                <Item Key="CounterFieldNameUsedLicense">UsedLicenseCounter</Item>
+                <Item Key="CounterFieldNameStockLicense">StockLicenseCounter</Item>
+                <Item Key="CounterFieldNameAvailibleLicense">AvailibleLicenseCounter</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::CILicenseLinkTypSettings" Required="0" Valid="1">
+        <Description Translatable="1">With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Target">Target</Item>
+                <Item Key="Source">Source</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::CILicenseDeploymentTypSettings" Required="0" Valid="1">
+        <Description Translatable="1">With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="05_Production">05_Production</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::CILicenseLinkedClassRestrictions" Required="0" Valid="1">
+        <Description Translatable="1">If this option is activated, linked items are only counted if they belong to one of the listed classes.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Array>
+                <Item>Client</Item>
+                <Item>Server</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###200-LinkCount" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module that count the licenses for OTOBOCILicenseCount feature.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoLinkCount</Item>
+                <Item Key="Event">(DeploymentStateUpdate|LinkAdd|LinkDelete)</Item>
+                <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
