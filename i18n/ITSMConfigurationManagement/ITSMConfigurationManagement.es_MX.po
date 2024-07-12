@@ -3220,3 +3220,31 @@ msgstr "Número de versión de este elemento de configuración"
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
 msgstr "La estructura base no es válida. Por favor, proporcione un hash con datos en formato YAML."
 
+#. SysConfig
+msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
+msgstr ""
+
+#. SysConfig
+msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
+msgstr ""
+
+#. SysConfig
+msgid "Creates Tickets for ConfigItems at specific time points."
+msgstr ""
+
+#. SysConfig
+msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
+msgstr ""
+
+#. SysConfig
+msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
+msgstr ""
+
+#. SysConfig
+msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
+msgstr ""
+
+#. SysConfig
+msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
+msgstr ""
+

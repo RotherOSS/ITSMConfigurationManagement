@@ -248,6 +248,8 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Ļauj paplašināt meklēšanas nosacījumus klienta saskarnes konfigurācijas elementu meklēšanā. Izmantojot šo funkciju, jūs varat meklēt, piemēram, konfigurācijas elementa nosaukumu ar šādiem nosacījumiem, piemēram, "(*key1*&&&*key2*)" vai "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Piešķirtie KI';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Klienta uzņēmumam piešķirtie KI';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Klienta lietotājam piešķirtie CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB iestatījumi';
@@ -268,6 +270,8 @@ sub Data {
     $Self->{Translation}->{'Config Items'} = 'Konfigurācijas elementi';
     $Self->{Translation}->{'Config item add.'} = 'Konfigurācijas elementa pievienošana.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurācijas elementa rediģēšana.';
+    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigurējiet elementu notikumu moduli, kas aģenta saskarnē ļauj reģistrēt vēsturi.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -292,6 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigurācijas elementa meklēšana aģenta interfeisa aizmugurējā maršrutētājā.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Izveidot un pārvaldīt konfigurācijas elementu definīcijas.';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klienti var skatīt vēsturiskās CI versijas.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Klientiem ir iespēja manuāli pārslēgties starp vēsturiskajām CI versijām.';
@@ -404,6 +409,8 @@ sub Data {
         'GenericInterface moduļa reģistrācija ConfigItemFetch invokatora slānim.';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigurācijas elementu pārskats.';
+    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
+        '';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -516,6 +523,12 @@ sub Data {
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Vai ConfigItemACL izpildi var novērst, pārbaudot kešatmiņā esošo lauku atkarības. Tas var uzlabot veidlapu ielādes laiku, bet tas ir jāatslēdz, ja ACLModules ir jāizmanto ITSMConfigItem- un Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kāda vispārīga informācija ir norādīta galvenē.';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
+        '';
     $Self->{Translation}->{'class'} = 'klase';
     $Self->{Translation}->{'global'} = 'globālā';
     $Self->{Translation}->{'postproductive'} = 'postproduktīvo';

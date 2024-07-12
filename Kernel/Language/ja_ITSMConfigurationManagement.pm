@@ -248,6 +248,8 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'カスタマーインターフェイスの設定項目検索において、検索条件を拡張することができます。この機能を使用すると、"(*key1*&*key2*) "または"(*key1*|*key2*) "のような条件で設定項目名を検索できます。';
     $Self->{Translation}->{'Assigned CIs'} = '割り当てられたCI';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = '顧客企業に割り当てられたCI';
     $Self->{Translation}->{'CIs assigned to customer user'} = '顧客ユーザーに割り当てられたCI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDBの設定';
@@ -268,6 +270,8 @@ sub Data {
     $Self->{Translation}->{'Config Items'} = '構成アイテム';
     $Self->{Translation}->{'Config item add.'} = '構成アイテムを追加します。';
     $Self->{Translation}->{'Config item edit.'} = '構成アイテムを修正します。';
+    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         '担当者Webインタフェースの履歴を記録する構成アイテムのイベントモジュール';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -292,6 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         '担当者インターフェースの構成アイテムの検索バックエンドルーター';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = '構成アイテムの作成と管理します。';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = '顧客は過去のCIバージョンを見ることができる。';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         '顧客は、過去のCIバージョンを手動で切り替えることができる。';
@@ -404,6 +409,8 @@ sub Data {
         'ConfigItemFetch invokerレイヤーのGenericInterfaceモジュール登録。';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM 設定項目';
     $Self->{Translation}->{'ITSM config item overview.'} = '構成アイテムの一覧';
+    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
+        '';
     $Self->{Translation}->{'InciState'} = 'インシステート';
     $Self->{Translation}->{'IncidentState'} = 'インシデントステート';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -516,6 +523,12 @@ sub Data {
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'キャッシュされたフィールドの依存関係をチェックすることで、ConfigItemACLの実行を回避できるかどうか。これはフォームのロード時間を改善することができるが、ACLModule を ITSMConfigItem- と Form-ReturnType で使用する場合は無効にしなければならない。';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'どの一般的な情報がヘッダーに表示されているか。';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
+        '';
     $Self->{Translation}->{'class'} = 'クラス';
     $Self->{Translation}->{'global'} = 'グローバル';
     $Self->{Translation}->{'postproductive'} = '次の生産';

@@ -248,6 +248,8 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         '允许在客户界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用"(*key1*&&*key2*) "或"(*key1*||*key2*) "等条件搜索配置项名称。';
     $Self->{Translation}->{'Assigned CIs'} = '已分配的配置项';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = '已分配给客户单位的配置项';
     $Self->{Translation}->{'CIs assigned to customer user'} = '已分配给客户用户的配置项';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB设置';
@@ -268,6 +270,8 @@ sub Data {
     $Self->{Translation}->{'Config Items'} = '配置项';
     $Self->{Translation}->{'Config item add.'} = '添加配置项。';
     $Self->{Translation}->{'Config item edit.'} = '编辑配置项。';
+    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         '服务人员界面用于记录配置项事件到历史的模块。';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -292,6 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         '服务人员界面的配置项搜索后端路由。';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = '创建和管理配置项定义';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = '客户可以查看历史 CI 版本。';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         '客户可以手动切换历史 CI 版本。';
@@ -404,6 +409,8 @@ sub Data {
         '用于 ConfigItemFetch 调用层的 GenericInterface 模块注册。';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM 配置项目';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM配置项概览。';
+    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
+        '';
     $Self->{Translation}->{'InciState'} = '状态';
     $Self->{Translation}->{'IncidentState'} = '事件状态';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -516,6 +523,12 @@ sub Data {
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         '是否可以通过检查缓存的字段依赖关系来避免执行 ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-ReturnType 中使用 ACL 模块，则必须禁用。';
     $Self->{Translation}->{'Which general information is shown in the header.'} = '标题中显示了哪些一般信息。';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
+        '';
+    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
+        '';
     $Self->{Translation}->{'class'} = '类';
     $Self->{Translation}->{'global'} = '全局';
     $Self->{Translation}->{'postproductive'} = '闲置';
