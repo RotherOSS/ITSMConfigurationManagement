@@ -180,15 +180,6 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Version.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/VersionString/Incremental.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/VersionString/TemplateToolkit.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Customer.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/CustomerCompany.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Date.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/DateTime.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Dummy.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/GeneralCatalog.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Integer.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/Text.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/XML/Type/TextArea.pm" />
         <File Permission="660" Location="Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ProcessManagement/TransitionAction/ConfigItemAdd.pm" />
