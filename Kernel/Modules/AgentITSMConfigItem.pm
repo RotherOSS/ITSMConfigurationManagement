@@ -484,6 +484,7 @@ sub Run {
 
     my $LinkPage = 'Filter='
         . $LayoutObject->Ascii2Html( Text => $Filter )
+        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilter )
         . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
         . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
         . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
