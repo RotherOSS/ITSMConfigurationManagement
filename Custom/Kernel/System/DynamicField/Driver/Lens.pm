@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 4b20064fb492c267880980b9e76ea95ed66d85a1 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 415ec8721a5ed329868db3cf7b81471463bcf8c6 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -81,6 +81,7 @@ sub new {
     $Self->{FieldCSSClass} = 'DynamicFieldLens';
 
     # set field behaviors
+    #   NOTE behaviors IsACLReducible and IsCustomerInterfaceCapable get overridden with the attribute fields behaviors in sub HasBehavior
     $Self->{Behaviors} = {
         'IsACLReducible'               => 0,
         'IsNotificationEventCondition' => 1,
@@ -676,7 +677,7 @@ sub GetFieldState {
     # get the current value of the referenced attribute field if an object is referenced
     if ($ReferenceID) {
 
-        my $ReferenceDFName = $DynamicFieldConfig->{Config}{ReferenceDFName};
+        my $ReferenceDFName = $DynamicFieldConfig->{Config}{ReferenceDFName} . ( $DynamicFieldConfig->{ProcessSuffix} // '' );
 
         if ( defined $Param{SetIndex} ) {
             $ReferenceDFName .= "_$Param{SetIndex}";
