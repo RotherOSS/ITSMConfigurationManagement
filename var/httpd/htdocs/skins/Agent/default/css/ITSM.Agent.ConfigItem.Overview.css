@@ -37,6 +37,14 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     line-height: 18px;
 }
 
+.ConfigItemList table td.Checkbox {
+    margin-left: 0px;
+}
+
+.ConfigItemList table input.Checkbox {
+    margin-right: 7px;
+}
+
 .ConfigItemList td.From div,
 .ConfigItemList td.Subject div,
 .ConfigItemList td.Created a {
@@ -73,7 +81,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 #OverviewContainer {
     display: grid;
     grid-template-columns: 1fr 7fr;
-    margin: 10px 16px 8px 8px;
+    margin: 0px 16px 8px 8px;
 }
 
 #OverviewContainer > #OverviewControl {
@@ -87,6 +95,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 8px;
+    margin-bottom: 5px;
 }
 
 #OverviewContainer > #OverviewControl > ul > li > a {
@@ -96,34 +105,24 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.2px;
-    color: var(--colTextLight);
+    color: var(--colTextDark);
 }
 
 #OverviewContainer > #OverviewControl > ul > li.Active {
-    background-color: var(--colBGMedium);
+    background-color: var(--colBGMediumDark);
 }
 
 #OverviewContainer > #OverviewControl > ul > li.Active > a {
     color: var(--colTextDark);
 }
 
-div.Flag.Small {
-    display: inline-block;
-    width: 16px;
-    height: 14px;
-    margin: 2px 8px 0 0;
-    vertical-align: top;
-}
-
-div.Flag.Small > span {
-    display: inline-block;
-    border-radius: 5px;
-    width: 16px;
-    height: 12px;
-}
-
-.FlaggedName {
-    display: inline-block;
+.OverviewControl .ActionRow {
+    margin-left: 12.5%;
+    margin-top: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 /*  All devices with a smaller resolution than the current OTOBO minimum solution */
