@@ -25,6 +25,11 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
  * @subsubsection     AdminITSMConfigItem
  */
 
+.SidebarColumn .WidgetSimple .CallForAction {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 fieldset > .Field .CodeMirror-wrap {
     height: calc(100vh - 500px);
     min-height: 320px;
