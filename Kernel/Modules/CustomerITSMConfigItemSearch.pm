@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -413,12 +413,16 @@ sub Run {
 
         # restrict search by permission condition customer company and customer user
         # NOTE this overwrites previously set search params for the configured dynamic fields
-        $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}"} = {
-            Equals => $Self->{CustomerID},
-        };
-        $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}"} = {
-            Equals => $Self->{UserID},
-        };
+        if ( $PermissionConditionConfig->{CustomerCompanyDynamicField} ) {
+            $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}"} = {
+                Equals => $Self->{CustomerID},
+            };
+        }
+        if ( $PermissionConditionConfig->{CustomerUserDynamicField} ) {
+            $SearchConfig{"DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}"} = {
+                Equals => $Self->{UserID},
+            };
+        }
 
         my %Filters = (
             $Filter => {
