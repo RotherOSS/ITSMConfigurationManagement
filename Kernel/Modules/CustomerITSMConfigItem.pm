@@ -278,16 +278,23 @@ sub Run {
                 }
             }
 
+            my %PermissionConditionSearchParams;
+            if ( $PermissionConditionConfig->{CustomerCompanyDynamicField} ) {
+                $PermissionConditionSearchParams{"DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}"} = {
+                    Equals => $Self->{CustomerID},
+                };
+            }
+            if ( $PermissionConditionConfig->{CustomerUserDynamicField} ) {
+                $PermissionConditionSearchParams{"DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}"} = {
+                    Equals => $Self->{UserID},
+                };
+            }
+
             my %FilterSearch = (
                 Classes    => $PermissionConditionConfig->{Classes},
                 DeplStates => $PermissionConditionConfig->{DeploymentStates},
                 %DFSearchParams,
-                "DynamicField_$PermissionConditionConfig->{CustomerCompanyDynamicField}" => {
-                    Equals => $Self->{CustomerID},
-                },
-                "DynamicField_$PermissionConditionConfig->{CustomerUserDynamicField}" => {
-                    Equals => $Self->{UserID},
-                },
+                %PermissionConditionSearchParams,
                 %Sort,
                 Limit => $Self->{SearchLimit} // '1000',
             );
