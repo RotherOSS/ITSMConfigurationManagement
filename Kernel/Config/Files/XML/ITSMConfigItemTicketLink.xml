@@ -32,7 +32,8 @@
         <Navigation>Core::LinkStatus</Navigation>
         <Value>
             <Array>
-                <Item>Incident</Item>
+                <DefaultItem ValueType="Entity" ValueEntityType="Type" ValueRegex=""></DefaultItem>
+                <Item ValueType="Entity" ValueEntityType="Type" ValueRegex="">Incident</Item>
             </Array>
         </Value>
     </Setting>
