@@ -19,8 +19,8 @@
         <h1>[% Translate("Your ConfigItems") | html %]</h1>
 [% RenderBlockStart("SearchBox") %]
         <div id="oooSearchBox">
-            <button id="ITSMConfigItemSearch" class="oooL" title="Search" type="Submit" value="Search">[% Translate("Search") | html %]</button>
         </div>
+        <a id='oooHeaderButton' href="[% Env("Baselink") %]Action=CustomerITSMConfigItemSearch;Filter=1;View=Small;SortBy=Age;OrderBy=Up" title="[% Translate("Search") | html %]" accesskey="[% Data.AccessKey | html %]"><button><span> [% Translate("Search") | html %]</span></button></a>
 [% RenderBlockEnd("SearchBox") %]
     </div>
     <div id='oooMainBox'>

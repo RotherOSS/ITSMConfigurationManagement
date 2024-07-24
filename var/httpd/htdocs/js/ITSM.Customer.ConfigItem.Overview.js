@@ -71,19 +71,6 @@ ITSM.Customer.ConfigItem.Overview = (function (TargetNS) {
             return false;
         });
 
-        $('#ITSMConfigItemSearch').on('click', function () {
-
-            // define variables
-            URL = Core.Config.Get("Baselink") + 'Action=CustomerITSMConfigItemSearch;' + Core.Config.Get('LinkPage');
-            SessionInformation = Core.App.GetSessionInformation();
-            $.each(SessionInformation, function (Key, Value) {
-                URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
-            });
-
-            // redirect
-            window.location.href =  URL;
-        });
-
         Core.UI.InitCheckboxSelection($('table td.Checkbox'));
 
         // change event for column filter
