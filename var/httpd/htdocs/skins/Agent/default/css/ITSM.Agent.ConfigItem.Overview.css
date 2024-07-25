@@ -125,6 +125,25 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     border-bottom-right-radius: 0px;
 }
 
+div.Flag.Small {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    margin: 2px 8px 0 0;
+    vertical-align: top;
+}
+
+div.Flag.Small > span {
+    display: inline-block;
+    border-radius: 5px;
+    width: 16px;
+    height: 12px;
+}
+
+.FlaggedName {
+    display: inline-block;
+}
+
 /*  All devices with a smaller resolution than the current OTOBO minimum solution */
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
