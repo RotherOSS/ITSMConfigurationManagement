@@ -520,6 +520,12 @@ sub Run {
                 ITSMConfigItemListHTML => $ConfigItemListHTML,
             },
         );
+
+        if ( defined $ConfigObject->Get("CustomerFrontend::Module")->{"CustomerITSMConfigItemSearch"} ) {
+            $LayoutObject->Block(
+                Name => 'SearchBox',
+            );
+        }
     }
     elsif ( !$Self->{Subaction} ) {
 
