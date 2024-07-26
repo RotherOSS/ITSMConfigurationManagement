@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Czech <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/cs/>\n"
+"Language-Team: Czech <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,28 +3224,46 @@ msgstr "Základní struktura není platná. Poskytněte hash s daty ve formátu 
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"V určitém časovém okamžiku vytvořte lístek pro položky konfigurace, pokud "
+"jsou splněny nakonfigurované požadavky. Časový bod je určen hodnotou pole "
+"nakonfigurovaného v položce \"TimeCIKey\" položky ConfigItem a upraveného "
+"pomocí \"TimeModifier\". Ten může být buď jen číslo, nebo znaménko (+/-), "
+"číslo a jednotka (d/h/m): \"7\" odpovídá \"+7d\". Dynamické pole \"Ticket->"
+"DynamicField\" bude použito pro označení vytvořených tipů - musí existovat. "
+"Příznaky \\\\<OTOBO_CONFIGITEM_X\\>, kde X může být JMÉNO, ČÍSLO a DATUM, "
+"budou nahrazeny příslušnými hodnotami v \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Modul událostí položky konfigurace, který počítá licence pro funkci "
+"OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Vytváří tipy pro položky ConfigItems v určitých časových bodech."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Pokud je tato možnost aktivována, jsou propojené položky započítány pouze "
+"tehdy, pokud patří do jedné z uvedených tříd."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"Pomocí této možnosti je možné automaticky vyplnit pole CI v závislosti na "
+"počtu propojených CI s existujícím typem DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"Pomocí této možnosti je možné automaticky vyplnit pole CI v závislosti na "
+"počtu propojených CI."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"Pomocí této možnosti je možné automaticky vyplnit pole CI v závislosti na "
+"počtu propojených CI. Nastavení CounterClassName obsahuje název třídy a "
+"CounterFieldName slouží k uložení počtu použitých licencí."
