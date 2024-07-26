@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ko/>\n"
+"Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,28 +3224,39 @@ msgstr "기본 구조가 유효하지 않습니다. YAML 형식의 데이터 해
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"특정 시점에 구성된 요구 사항이 충족되는 경우 구성 항목에 대한 티켓을 "
+"만듭니다. 시점은 구성 항목의 \"TimeCIKey\" 아래에 구성된 필드의 값에 의해 "
+"결정되며 \"TimeModifier\"로 수정됩니다. 후자는 숫자이거나 부호(+/-), 숫자, "
+"단위(d/h/m)일 수 있습니다. \"7\"은 \"+7d\"에 해당합니다. 생성된 티켓을 "
+"표시하는 데는 \"티켓->다이나믹 필드\"가 사용되며 이 필드는 반드시 존재해야 "
+"합니다. 여기서 X는 이름, 번호, 날짜가 될 수 있는 \\\\<OTOBO_CONFIGITEM_X\\\\"
+"> 플래그는 \"Ticket->Text\"의 각 값으로 대체됩니다."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr ""
+msgstr "구성 항목 이벤트 모듈은 OTOBOCILicenseCount 기능의 라이선스를 계산합니다."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "특정 시점에 구성 항목에 대한 티켓을 만듭니다."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr ""
+msgstr "이 옵션을 활성화하면 연결된 항목은 나열된 클래스 중 하나에 속하는 경우에만 "
+"계산됩니다."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr ""
+msgstr "이 옵션을 사용하면 기존 DependsOn 유형으로 연결된 CI의 수에 따라 CI 필드를 "
+"자동으로 채울 수 있습니다."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr ""
+msgstr "이 옵션을 사용하면 연결된 CI의 수에 따라 CI 필드를 자동으로 채울 수 있습니다."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"이 옵션을 사용하면 연결된 CI의 수에 따라 CI 필드를 자동으로 채울 수 "
+"있습니다. 카운터클래스명 설정에는 클래스 이름이 포함되며, 카운터필드명은 "
+"사용된 라이선스 수를 저장하는 데 사용됩니다."
