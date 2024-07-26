@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Latvian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/lv/>\n"
+"Language-Team: Latvian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/lv/>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= 19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 0 || n % 100 >= 11 && n % 100 <= "
+"19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -3223,28 +3225,48 @@ msgstr "Bāzes struktūra nav derīga. Lūdzu, norādiet hash ar datiem YAML for
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"Noteiktā brīdī izveidojiet biļeti par konfigurācijas elementiem, ja ir "
+"izpildītas konfigurētās prasības. Laika punktu nosaka pēc lauka vērtības, "
+"kas konfigurēta ConfigItem \"TimeCIKey\" (konfigurācijas elementa \"TimeCIKey"
+"\") un modificēta ar \"TimeModifier\" (laika modifikators). Pēdējais var būt "
+"vai nu tikai skaitlis, vai arī zīme (+/-), skaitlis un mērvienība (d/h/m): "
+"\"7\" ir līdzvērtīgs \"+7d\". Dinamiskais lauks \"Ticket->DynamicField\" "
+"tiks izmantots, lai atzīmētu izveidotās biļetes - tam ir jābūt. Flagus \\\\<"
+"OTOBO_CONFIGITEM_X\\>, kur X var būt NAME (nosaukums), NUMBER (skaitlis) un "
+"DATE (datums), aizstās ar attiecīgajām vērtībām \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Konfigurējiet elementu notikumu moduli, kas skaita licences "
+"OTOBOCILicenseCount funkcijai."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Izveido ConfigItems biļetes konkrētos laika punktos."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Ja šī opcija ir aktivizēta, saistītie vienumi tiek ieskaitīti tikai tad, ja "
+"tie pieder kādai no uzskaitītajām klasēm."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā "
+"no piesaistīto CI skaita ar esošo tipu DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā "
+"no piesaistīto CI skaita."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā "
+"no piesaistīto CI skaita. Iestatījums CounterClassName (skaitītāja klases "
+"nosaukums) ietver klases nosaukumu, bet CounterFieldName (skaitītāja lauka "
+"nosaukums) tiek izmantots, lai saglabātu izmantoto licenču skaitu."
