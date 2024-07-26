@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Dutch <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/nl/>\n"
+"Language-Team: Dutch <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,28 +3224,48 @@ msgstr "Basisstructuur is ongeldig. Geef een hash met gegevens in YAML-indeling.
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"Maak op een bepaald tijdstip een ticket aan voor configuratie-items als aan "
+"de geconfigureerde vereisten is voldaan. Het tijdstip wordt bepaald door de "
+"waarde van het veld dat is geconfigureerd onder \"TimeCIKey\" van het "
+"ConfigItem, en gewijzigd door \"TimeModifier\". Deze laatste kan ofwel "
+"gewoon een getal zijn, ofwel een teken (+/-), een getal en een eenheid (d/h/"
+"m): \"7\" is gelijk aan \"+7d\". Het DynamicField \"Ticket->DynamicField\" "
+"wordt gebruikt om aangemaakte tickets te markeren - het moet bestaan. De "
+"vlaggen OTOBO_CONFIGITEM_X, waarbij X kan staan voor NAAM, GETAL en DATUM, "
+"worden vervangen door de respectievelijke waarden in \"Ticket->Tekst\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Configuratie-item gebeurtenismodule die de licenties telt voor "
+"OTOBOCILicenseCount-functie."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Creëert tickets voor ConfigItems op specifieke tijdstippen."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Als deze optie is geactiveerd, worden gekoppelde items alleen geteld als ze "
+"behoren tot een van de genoemde klassen."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"Met deze optie is het mogelijk om automatisch een CI-veld te vullen, "
+"afhankelijk van het aantal gekoppelde CI's met het bestaande type DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"Met deze optie is het mogelijk om automatisch een CI-veld te vullen, "
+"afhankelijk van het aantal gekoppelde CI's."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"Met deze optie is het mogelijk om automatisch een CI-veld te vullen, "
+"afhankelijk van het aantal gekoppelde CI's. De instelling CounterClassName "
+"bevat de naam van de klasse en CounterFieldName wordt gebruikt om het aantal "
+"gebruikte licenties op te slaan."
