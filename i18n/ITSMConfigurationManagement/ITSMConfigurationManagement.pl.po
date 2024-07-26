@@ -2,14 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Polish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/pl/>\n"
+"Language-Team: Polish <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -3223,28 +3225,47 @@ msgstr "Struktura bazowa jest nieprawidłowa. Podaj hash z danymi w formacie YAM
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"W określonym punkcie czasowym tworzy bilet dla elementów konfiguracji, jeśli "
+"spełnione są skonfigurowane wymagania. Punkt czasowy jest określony przez "
+"wartość pola skonfigurowanego w \"TimeCIKey\" elementu ConfigItem i "
+"zmodyfikowanego przez \"TimeModifier\". Jeśli ten ostatni może być albo "
+"tylko liczbą, albo znakiem (+/-), liczbą i jednostką (d/h/m): \"7\" jest "
+"równoważne \"+7d\". Pole dynamiczne \"Ticket->DynamicField\" będzie używane "
+"do oznaczania utworzonych biletów - musi istnieć. Flagi \\\\<"
+"OTOBO_CONFIGITEM_X\\\\>, gdzie X może być NAZWĄ, LICZBĄ i DATĄ, zostaną "
+"zastąpione odpowiednimi wartościami w \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Moduł zdarzeń elementu konfiguracji zliczający licencje dla funkcji "
+"OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Tworzy bilety dla ConfigItems w określonych punktach czasowych."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Jeśli ta opcja jest aktywna, połączone elementy są liczone tylko wtedy, gdy "
+"należą do jednej z wymienionych klas."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"Dzięki tej opcji możliwe jest automatyczne wypełnienie pola CI, w zależności "
+"od liczby powiązanych CI z istniejącym typem DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"Dzięki tej opcji możliwe jest automatyczne wypełnienie pola CI, w zależności "
+"od liczby połączonych CI."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"Dzięki tej opcji możliwe jest automatyczne wypełnienie pola CI, w zależności "
+"od liczby połączonych CI. Ustawienie CounterClassName zawiera nazwę klasy, a "
+"CounterFieldName służy do przechowywania liczby użytych licencji."
