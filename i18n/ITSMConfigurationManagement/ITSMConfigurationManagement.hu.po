@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Hungarian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/hu/>\n"
+"Language-Team: Hungarian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,28 +3224,47 @@ msgstr "Az alapszerkezet nem érvényes. Kérjük, adjon meg egy hash-t az adato
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"Egy adott időpontban hozzon létre egy jegyet a konfigurációs elemekhez, ha a "
+"konfigurált követelmények teljesülnek. Az időpontot a ConfigItem \"TimeCIKey"
+"\" alatt konfigurált mező értéke határozza meg, és a \"TimeModifier\" "
+"módosítja. Ha ez utóbbi lehet csak egy szám, vagy egy jel (+/-), egy szám és "
+"egy egység (d/h/m): \"7\" egyenértékű a \"+7d\"-vel. A \"Ticket->"
+"DynamicField\" dinamikus mezőt a létrehozott jegyek jelölésére használjuk - "
+"ennek léteznie kell. A \\\\\\<OTOBO_CONFIGITEM_X\\\\\\> jelzőket, ahol X "
+"lehet NÉV, SZÁM és DÁTUM, a \"Ticket->Text\" megfelelő értékeivel kell "
+"helyettesíteni."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Konfigurációs elem eseménymodul, amely az OTOBOCILicenseCount funkció "
+"licenceit számolja."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Bizonyos időpontokban jegyeket hoz létre a ConfigItems számára."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Ha ez az opció be van kapcsolva, a hivatkozott elemek csak akkor számítanak, "
+"ha a felsorolt osztályok valamelyikébe tartoznak."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"Ezzel az opcióval automatikusan kitölthető egy CI-mező, a meglévő DependsOn "
+"típusú összekapcsolt CI-k számától függően."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k "
+"számától függően."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k "
+"számától függően. A CounterClassName beállítás tartalmazza az osztály nevét, "
+"a CounterFieldName pedig a felhasznált licencek számának tárolására szolgál."
