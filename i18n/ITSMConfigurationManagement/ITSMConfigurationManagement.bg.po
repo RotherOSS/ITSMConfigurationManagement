@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-05 09:13+0000\n"
+"PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/bg/>\n"
+"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,28 +3224,49 @@ msgstr "Базовата структура не е валидна. Моля, п
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"В определен момент от време създайте билет за елементите на конфигурацията, "
+"ако са изпълнени конфигурираните изисквания. Времевият момент се определя от "
+"стойността на полето, конфигурирано в \"TimeCIKey\" на ConfigItem, и се "
+"модифицира от \"TimeModifier\". Ако последното може да бъде или само число, "
+"или знак (+/-), число и единица (d/h/m): \"7\" е еквивалентно на \"+7d\". "
+"Динамичното поле \"Ticket->DynamicField\" ще се използва за маркиране на "
+"създадените билети - то трябва да съществува. Флаговете \\\\<"
+"OTOBO_CONFIGITEM_X\\>, където X може да бъде NAME (име), NUMBER (число) и "
+"DATE (дата), ще бъдат заменени със съответните стойности в \"Ticket->Text\" "
+"(билет->текст)."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"Модул за събития на елемента за конфигуриране, който брои лицензите за "
+"функцията OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "Създава билети за ConfigItems в определени моменти от време."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"Ако тази опция е активирана, свързаните елементи се отчитат само ако "
+"принадлежат към един от изброените класове."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"С тази опция е възможно автоматично да се запълни полето за CI в зависимост "
+"от броя на свързаните CI със съществуващия тип DependsOn (Зависи от)."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"С тази опция е възможно автоматично да се запълни поле за CI в зависимост от "
+"броя на свързаните CI."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
-
+"С тази опция е възможно автоматично да се запълни поле за CI в зависимост от "
+"броя на свързаните CI. Настройката CounterClassName включва името на класа, "
+"а CounterFieldName се използва за съхраняване на броя на използваните "
+"лицензи."
