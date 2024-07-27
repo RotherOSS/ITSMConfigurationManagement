@@ -249,7 +249,7 @@ sub Data {
         '고객 인터페이스의 설정 항목 검색에서 확장 검색 조건을 허용합니다. 이 기능을 사용하면 예를 들어 "(*key1*&&*key2*)" 또는 "(*key1*||*key2*)"와 같은 조건으로 구성 항목 이름을 검색할 수 있습니다.';
     $Self->{Translation}->{'Assigned CIs'} = '할당된 CI';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        '특정 시점에 구성된 요구 사항이 충족되는 경우 구성 항목에 대한 티켓을 만듭니다. 시점은 구성 항목의 "TimeCIKey" 아래에 구성된 필드의 값에 의해 결정되며 "TimeModifier"로 수정됩니다. 후자는 숫자이거나 부호(+/-), 숫자, 단위(d/h/m)일 수 있습니다. "7"은 "+7d"에 해당합니다. 생성된 티켓을 표시하는 데는 "티켓->다이나믹 필드"가 사용되며 이 필드는 반드시 존재해야 합니다. 여기서 X는 이름, 번호, 날짜가 될 수 있는 \<OTOBO_CONFIGITEM_X\> 플래그는 "Ticket->Text"의 각 값으로 대체됩니다.';
     $Self->{Translation}->{'CIs assigned to customer company'} = '고객사에 할당된 CI';
     $Self->{Translation}->{'CIs assigned to customer user'} = '고객 사용자에게 할당된 CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB 설정';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = '구성 항목 추가.';
     $Self->{Translation}->{'Config item edit.'} = '구성 항목 편집.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        '구성 항목 이벤트 모듈은 OTOBOCILicenseCount 기능의 라이선스를 계산합니다.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         '상담원 인터페이스에서 기록에 로깅할 수 있는 구성 항목 이벤트 모듈입니다.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         '상담원 인터페이스의 구성 항목 검색 백엔드 라우터입니다.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = '구성 항목에 대한 정의를 만들고 관리합니다.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '특정 시점에 구성 항목에 대한 티켓을 만듭니다.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = '고객은 과거 CI 버전을 볼 수 있습니다.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         '고객은 이전 CI 버전 간에 수동으로 전환할 수 있습니다.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM 구성 항목';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM 구성 항목 개요.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        '이 옵션을 활성화하면 연결된 항목은 나열된 클래스 중 하나에 속하는 경우에만 계산됩니다.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = '인시던트 상태';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         '캐시된 필드 종속성을 확인하여 ConfigItemACL의 실행을 피할 수 있는지 여부. 이 옵션은 수식의 로딩 시간을 개선할 수 있지만, ACLModule을 ITSMConfigItem 및 Form-ReturnTypes에 사용하려는 경우 비활성화해야 합니다.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = '헤더에 표시되는 일반 정보입니다.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        '이 옵션을 사용하면 기존 DependsOn 유형으로 연결된 CI의 수에 따라 CI 필드를 자동으로 채울 수 있습니다.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        '이 옵션을 사용하면 연결된 CI의 수에 따라 CI 필드를 자동으로 채울 수 있습니다.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        '이 옵션을 사용하면 연결된 CI의 수에 따라 CI 필드를 자동으로 채울 수 있습니다. 카운터클래스명 설정에는 클래스 이름이 포함되며, 카운터필드명은 사용된 라이선스 수를 저장하는 데 사용됩니다.';
     $Self->{Translation}->{'class'} = '클래스';
     $Self->{Translation}->{'global'} = '글로벌';
     $Self->{Translation}->{'postproductive'} = '포스트 프로덕션';

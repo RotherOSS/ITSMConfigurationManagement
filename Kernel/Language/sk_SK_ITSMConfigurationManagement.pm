@@ -249,7 +249,7 @@ sub Data {
         'Umožňuje rozšírené podmienky vyhľadávania vo vyhľadávaní konfiguračných položiek v rozhraní zákazníka. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky pomocou podmienok typu "(*key1*&&*key2*)" alebo "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Priradené CI';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'V určitom časovom bode vytvorte lístok pre konfiguračné položky, ak sú splnené nakonfigurované požiadavky. Časový bod je určený hodnotou poľa nakonfigurovaného v položke "TimeCIKey" položky ConfigItem a upraveného pomocou "TimeModifier". Ak ten môže byť buď len číslo, alebo znamienko (+/-), číslo a jednotka (d/h/m): "7" je ekvivalentné "+7d". Na označenie vytvorených lístkov sa použije dynamické pole "Ticket->DynamicField" - musí existovať. Príznaky \<OTOBO_CONFIGITEM_X\>, kde X môže byť NAME (názov), NUMBER (číslo) a DATE (dátum), budú nahradené príslušnými hodnotami v "Ticket->Text" (lístok->text).';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI priradené k zákazníckej spoločnosti';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI priradené používateľovi zákazníka';
     $Self->{Translation}->{'CMDB Settings'} = 'Nastavenia CMDB';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Pridanie položky konfigurácie.';
     $Self->{Translation}->{'Config item edit.'} = 'Úprava položky konfigurácie.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Modul udalostí konfiguračnej položky, ktorý počíta licencie pre funkciu OTOBOCILicenseCount.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Modul udalostí konfiguračnej položky, ktorý umožňuje zaznamenávanie do histórie v rozhraní agenta.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Vyhľadávanie konfiguračnej položky backendového smerovača rozhrania agenta.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Vytvorenie a správa definícií konfiguračných položiek.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Vytvára lístky pre položky ConfigItems v určitých časových bodoch.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Zákazníci môžu vidieť historické verzie CI.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Zákazníci majú možnosť manuálne prepínať medzi historickými verziami CI.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Prehľad konfiguračných položiek ITSM.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Ak je táto možnosť aktivovaná, prepojené položky sa započítajú len vtedy, ak patria do jednej z uvedených tried.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Či je možné vyhnúť sa vykonaniu príkazu ConfigItemACL kontrolou závislostí polí uložených v medzipamäti. Toto môže zlepšiť časy načítania formulárov, ale musí byť vypnuté, ak sa majú používať ACLModuly pre ITSMConfigItem- a Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Ktoré všeobecné informácie sú uvedené v záhlaví.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI s existujúcim typom DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI. Nastavenie CounterClassName obsahuje názov triedy a CounterFieldName sa používa na uloženie počtu použitých licencií.';
     $Self->{Translation}->{'class'} = 'trieda';
     $Self->{Translation}->{'global'} = 'globálne';
     $Self->{Translation}->{'postproductive'} = 'postprodukčné';

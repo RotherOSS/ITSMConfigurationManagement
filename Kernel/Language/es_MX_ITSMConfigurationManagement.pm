@@ -249,7 +249,7 @@ sub Data {
         'Permite ampliar las condiciones de búsqueda en la búsqueda de elementos de configuración de la interfaz de cliente. Con esta función puede buscar, por ejemplo, el nombre del elemento de configuración con este tipo de condiciones como "(*clave1*&&*clave2*)" o "(*clave1*||*clave2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'CIs asignados';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'En un punto de tiempo específico crea un ticket para los elementos config, si se cumplen los requisitos configurados. El punto temporal viene determinado por el valor del campo configurado en "TimeCIKey" del ConfigItem, y modificado por "TimeModifier". Este último puede ser sólo un número, o un signo (+/-), un número y una unidad (d/h/m): "7" equivale a "+7d". El DynamicField "Ticket->DynamicField" se utilizará para marcar los tickets creados - tiene que existir. Los indicadores \<OTOBO_CONFIGITEM_X\> donde X puede ser NOMBRE, NÚMERO y FECHA, se sustituirán por los valores respectivos en "Ticket->Texto".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CIs asignados a la empresa cliente';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CIs asignados al usuario cliente';
     $Self->{Translation}->{'CMDB Settings'} = 'Configuración de la CMDB';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Añadir elemento de configuración.';
     $Self->{Translation}->{'Config item edit.'} = 'Edición de elemento de configuración.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Configure el módulo de eventos que cuenta las licencias para la función OTOBOCILicenseCount.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Módulo de eventos de elementos de configuración que permite el registro en el historial de la interfaz del agente.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Elemento de configuración que busca el enrutamiento backend de la interfaz del agente.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Crear y gestionar las definiciones de los elementos de configuración.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Con esta opción es posible rellenar automáticamente un campo CI, dependiendo del recuento de CI vinculados con el tipo existente DependsOn.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Los clientes pueden ver las versiones históricas de CI.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Los clientes tienen la posibilidad de cambiar manualmente entre versiones históricas de CI.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Resumen de elementos de configuración de ITSM.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Si esta opción está activada, los elementos vinculados sólo se contabilizan si pertenecen a una de las clases de la lista.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'EstadoIncidente';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Si se puede evitar la ejecución de ConfigItemACL comprobando las dependencias de campos en caché. Esto puede mejorar los tiempos de carga de los formularios, pero debe desactivarse si se van a utilizar ACLModules para ITSMConfigItem- y Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Qué información general se muestra en la cabecera.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Con esta opción es posible rellenar automáticamente un campo CI, dependiendo del recuento de CI vinculados con el tipo existente DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Con esta opción es posible rellenar automáticamente un campo CI, dependiendo del recuento de CI vinculados.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Con esta opción es posible rellenar automáticamente un campo CI, dependiendo del recuento de CI vinculados. La configuración CounterClassName incluye el nombre de la clase y CounterFieldName se utiliza para almacenar el recuento de la licencia utilizada.';
     $Self->{Translation}->{'class'} = 'Clase';
     $Self->{Translation}->{'global'} = 'global';
     $Self->{Translation}->{'postproductive'} = 'postproductivo';

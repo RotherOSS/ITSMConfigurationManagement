@@ -249,7 +249,7 @@ sub Data {
         'Lehetővé teszi a kiterjesztett keresési feltételeket az ügyfélfelület konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a konfigurációs elem nevére olyan feltételekkel, mint "(*key1*&&*key2*)" vagy "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Hozzárendelt konfigurációelemek';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Egy adott időpontban hozzon létre egy jegyet a konfigurációs elemekhez, ha a konfigurált követelmények teljesülnek. Az időpontot a ConfigItem "TimeCIKey" alatt konfigurált mező értéke határozza meg, és a "TimeModifier" módosítja. Ha ez utóbbi lehet csak egy szám, vagy egy jel (+/-), egy szám és egy egység (d/h/m): "7" egyenértékű a "+7d"-vel. A "Ticket->DynamicField" dinamikus mezőt a létrehozott jegyek jelölésére használjuk - ennek léteznie kell. A \\<OTOBO_CONFIGITEM_X\\> jelzőket, ahol X lehet NÉV, SZÁM és DÁTUM, a "Ticket->Text" megfelelő értékeivel kell helyettesíteni.';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Ügyfél-vállalathoz hozzárendelt konfigurációelemek';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Ügyfél-felhasználóhoz hozzárendelt konfigurációelemek';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB beállítások';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Konfigurációelem hozzáadása.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurációelem szerkesztése.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Konfigurációs elem eseménymodul, amely az OTOBOCILicenseCount funkció licenceit számolja.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigurációelem esemény modul, amely engedélyezi a naplózást az előzményekbe az ügyintézői felületen.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Az ügyintézői felület konfigurációelem keresési háttérprogram útválasztója.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Meghatározások létrehozása és kezelése a konfigurációelemeknél.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Bizonyos időpontokban jegyeket hoz létre a ConfigItems számára.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Az ügyfelek láthatják a korábbi CI-verziókat.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Az ügyfeleknek lehetőségük van manuálisan váltani a korábbi CI-verziók között.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigurációelem áttekintés.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Ha ez az opció be van kapcsolva, a hivatkozott elemek csak akkor számítanak, ha a felsorolt osztályok valamelyikébe tartoznak.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Elkerülhető-e a ConfigItemACL végrehajtása a gyorsítótárban tárolt mezőfüggőségek ellenőrzésével. Ez javíthatja az űrlapok betöltési idejét, de ki kell kapcsolni, ha az ACLModulokat az ITSMConfigItem- és Form-ReturnType típusok esetében kell használni.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Milyen általános információk jelennek meg a fejlécben.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a meglévő DependsOn típusú összekapcsolt CI-k számától függően.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k számától függően.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k számától függően. A CounterClassName beállítás tartalmazza az osztály nevét, a CounterFieldName pedig a felhasznált licencek számának tárolására szolgál.';
     $Self->{Translation}->{'class'} = 'osztály';
     $Self->{Translation}->{'global'} = 'globális';
     $Self->{Translation}->{'postproductive'} = 'beüzemelés után';

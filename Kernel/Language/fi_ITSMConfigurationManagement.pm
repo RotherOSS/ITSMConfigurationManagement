@@ -249,7 +249,7 @@ sub Data {
         'Mahdollistaa laajennetut hakuehdot asiakkaan käyttöliittymän konfiguraatiokohteiden haussa. Tämän ominaisuuden avulla voit hakea esim. konfiguraatioelementin nimeä tällaisilla ehdoilla kuten "(*key1*&&*key2*)" tai "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Myönnetyt CI:t';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Luo tiettynä ajankohtana tiketti konfiguroiduille kohteille, jos määritetyt vaatimukset täyttyvät. Ajankohta määräytyy ConfigItem-kohdan "TimeCIKey" -kohdassa määritetyn kentän arvon perusteella, ja sitä muutetaan "TimeModifier"-kentällä. Jälkimmäinen voi olla joko pelkkä numero tai merkki (+/-), numero ja yksikkö (d/h/m): "7" vastaa "+7d". Dynaamista kenttää "Ticket->DynamicField" käytetään luotujen lippujen merkitsemiseen - sen on oltava olemassa. Liput \\<OTOBO_CONFIGITEM_X\\>, joissa X voi olla NAME, NUMBER ja DATE, korvataan vastaavilla arvoilla kohdassa "Ticket->Text".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Asiakasyritykselle osoitetut CI:t';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Asiakaskäyttäjälle määritetyt CI:t';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB-asetukset';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Määrityskohteen lisääminen.';
     $Self->{Translation}->{'Config item edit.'} = 'Määrityskohteen muokkaus.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Määritä kohteen tapahtumamoduuli, joka laskee OTOBOCILicenseCount-ominaisuuden lisenssit.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Määritä kohteen tapahtumamoduuli, joka mahdollistaa kirjaamisen historiaan agentin käyttöliittymässä.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Määrityskohteen haku agenttiliittymän taustareitittimeen.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Luo ja hallitse määrittelyjä määrityskohteille.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Luo lippuja ConfigItems-kohteille tiettyinä ajankohtina.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Asiakkaat voivat nähdä historialliset CI-versiot.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Asiakkailla on mahdollisuus vaihtaa manuaalisesti historiallisten CI-versioiden välillä.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM-määrityskohteen yleiskatsaus.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Jos tämä vaihtoehto on aktivoitu, linkitetyt kohteet lasketaan vain, jos ne kuuluvat johonkin luetelluista luokista.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Voidaanko ConfigItemACL:n suorittaminen välttää tarkistamalla välimuistiin tallennettujen kenttien riippuvuudet. Tämä voi parantaa lomakkeiden latausaikoja, mutta se on poistettava käytöstä, jos ACLModuleja käytetään ITSMConfigItem- ja Form-ReturnTypes-tyypeissä.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Mitkä yleiset tiedot näkyvät otsikossa.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Tämän vaihtoehdon avulla on mahdollista täyttää automaattisesti CI-kenttä riippuen linkitettyjen CI:iden määrästä, joiden tyyppi on DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Tämän vaihtoehdon avulla on mahdollista täyttää CI-kenttä automaattisesti linkitettyjen CI:iden lukumäärän mukaan.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Tämän vaihtoehdon avulla on mahdollista täyttää CI-kenttä automaattisesti linkitettyjen CI:iden lukumäärän mukaan. Asetuksessa CounterClassName on luokan nimi ja CounterFieldName tallennetaan käytetyn lisenssin määrä.';
     $Self->{Translation}->{'class'} = 'luokka';
     $Self->{Translation}->{'global'} = 'maailmanlaajuinen';
     $Self->{Translation}->{'postproductive'} = 'postproductive';

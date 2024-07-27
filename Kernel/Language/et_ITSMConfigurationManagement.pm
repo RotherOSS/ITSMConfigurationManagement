@@ -249,7 +249,7 @@ sub Data {
         'Võimaldab laiendatud otsingutingimusi kliendi kasutajaliidese konfiguratsioonielemendi otsingus. Selle funktsiooniga saate otsida nt konfiguratsioonielemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Määratud elutähtsad infrastruktuurid';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Teatud ajahetkel loo pilet konfigureeritud elementide jaoks, kui konfigureeritud nõuded on täidetud. Ajahetk määratakse kindlaks ConfigItem\'i "TimeCIKey" all konfigureeritud välja väärtusega ja seda muudetakse "TimeModifier" abil. Kui viimane võib olla kas lihtsalt number või märk (+/-), number ja ühik (d/h/m): "7" vastab "+7d". DynamicFieldi "Ticket->DynamicField" kasutatakse loodud piletite märgistamiseks - see peab olema olemas. Lipud \\<OTOBO_CONFIGITEM_X\\>, kus X võib olla NAME, NUMBER ja DATE, asendatakse vastavate väärtustega jaotises "Ticket->Text".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Klientidele määratud CId kliendiettevõttele';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliendikasutajale määratud CId';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB seaded';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Config item add.';
     $Self->{Translation}->{'Config item edit.'} = 'Config item edit.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Config item event moodul, mis loeb OTOBOCILicenseCount funktsiooni jaoks litsentse.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Config item event moodul, mis võimaldab agendi kasutajaliideses ajalukku logida.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigureerimiselemendi otsing agentide liidese tagasiside marsruuter.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Luua ja hallata konfiguratsiooniobjektide määratlusi.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Loob ConfigItems\'i piletid teatud ajahetkedel.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kliendid saavad näha ajaloolisi CI-versioone.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Klientidel on võimalus käsitsi vahetada varasemate CI-versioonide vahel.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSMi konfiguratsioonielemendi ülevaade.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Kui see valik on aktiveeritud, arvestatakse lingitud elemendid ainult siis, kui nad kuuluvad ühte loetletud klassidest.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Kas ConfigItemACLi täitmist saab vältida, kontrollides vahemälu väljaliste sõltuvusi. See võib parandada vormide laadimisaega, kuid tuleb keelata, kui ACLModules\'i kasutatakse ITSMConfigItem- ja Form-ReturnTypes\'i puhul.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Millised üldandmed on esitatud päises.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt olemasoleva tüübiga DependsOn seotud CI-de arvust.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust. Seade CounterClassName sisaldab klassi nime ja CounterFieldName salvestab kasutatud litsentsi arvu.';
     $Self->{Translation}->{'class'} = 'klass';
     $Self->{Translation}->{'global'} = 'globaalne';
     $Self->{Translation}->{'postproductive'} = 'postproduktiivne';

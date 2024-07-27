@@ -249,7 +249,7 @@ sub Data {
         'Müşteri arayüzünün yapılandırma öğesi aramasında genişletilmiş arama koşullarına izin verir. Bu özellik sayesinde, örneğin yapılandırma öğesi adını "(*anahtar1*&*anahtar2*)" veya "(*anahtar1*|*anahtar2*)" gibi bu tür koşullarla arayabilirsiniz.';
     $Self->{Translation}->{'Assigned CIs'} = 'Atanmış CI\'lar';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Belirli bir zaman noktasında, yapılandırılan gereksinimler karşılanırsa yapılandırma öğeleri için bir bilet oluşturun. Zaman noktası, ConfigItem\'ın "TimeCIKey" altında yapılandırılan alanın değeri tarafından belirlenir ve "TimeModifier" tarafından değiştirilir. İkincisi sadece bir sayı veya bir işaret (+/-), bir sayı ve bir birim (d/h/m) olabilir: "7", "+7d" ile eşdeğerdir. DynamicField "Ticket->DynamicField" oluşturulan biletleri işaretlemek için kullanılacaktır - var olması gerekir. X\'in İSİM, SAYI ve TARİH olabileceği \<OTOBO_CONFIGITEM_X\> bayrakları "Ticket->Text" içinde ilgili değerlerle değiştirilecektir.';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Müşteri şirkete atanan CI\'lar';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Müşteri kullanıcıya atanan CI\'lar';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB Ayarları';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Yapılandırma öğesi ekle.';
     $Self->{Translation}->{'Config item edit.'} = 'Yapılandırma öğesi düzenleme.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'OTOBOCILicenseCount özelliği için lisansları sayan konfigürasyon öğesi olay modülü.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Temsilci arayüzünde geçmişe günlüğe kaydetmeyi sağlayan yapılandırma öğesi olay modülü.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Aracı arayüzünün yapılandırma öğesi arama arka uç yönlendiricisi.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Yapılandırma Öğeleri için tanımlar oluşturun ve yönetin.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Belirli zaman noktalarında ConfigItems için Biletler oluşturur.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Müşteriler geçmiş CI sürümlerini görebilirler.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Müşteriler, geçmiş CI sürümleri arasında manuel olarak geçiş yapma olanağına sahiptir.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM yapılandırma öğesine genel bakış.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Bu seçenek etkinleştirilirse, bağlantılı öğeler yalnızca listelenen sınıflardan birine aitlerse sayılır.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'ConfigItemACL\'nin yürütülmesinin önbelleğe alınmış alan bağımlılıklarını kontrol ederek önlenip önlenemeyeceği. Bu, formülerlerin yükleme sürelerini iyileştirebilir, ancak ACLModülleri ITSMConfigItem- ve Form-ReturnTypes için kullanılacaksa devre dışı bırakılmalıdır.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Başlıkta hangi genel bilgiler gösterilir.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Bu seçenekle, mevcut DependsOn türüne sahip bağlantılı CI\'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Bu seçenekle, bağlantılı CI\'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Bu seçenekle, bağlantılı CI\'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür. CounterClassName ayarı sınıfın adını içerir ve CounterFieldName kullanılan lisans sayısını saklamak için kullanılır.';
     $Self->{Translation}->{'class'} = 'sınıf';
     $Self->{Translation}->{'global'} = 'küresel';
     $Self->{Translation}->{'postproductive'} = 'ÜREME SONRASI';

@@ -249,7 +249,7 @@ sub Data {
         'Ļauj paplašināt meklēšanas nosacījumus klienta saskarnes konfigurācijas elementu meklēšanā. Izmantojot šo funkciju, jūs varat meklēt, piemēram, konfigurācijas elementa nosaukumu ar šādiem nosacījumiem, piemēram, "(*key1*&&&*key2*)" vai "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Piešķirtie KI';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Noteiktā brīdī izveidojiet biļeti par konfigurācijas elementiem, ja ir izpildītas konfigurētās prasības. Laika punktu nosaka pēc lauka vērtības, kas konfigurēta ConfigItem "TimeCIKey" (konfigurācijas elementa "TimeCIKey") un modificēta ar "TimeModifier" (laika modifikators). Pēdējais var būt vai nu tikai skaitlis, vai arī zīme (+/-), skaitlis un mērvienība (d/h/m): "7" ir līdzvērtīgs "+7d". Dinamiskais lauks "Ticket->DynamicField" tiks izmantots, lai atzīmētu izveidotās biļetes - tam ir jābūt. Flagus \<OTOBO_CONFIGITEM_X\>, kur X var būt NAME (nosaukums), NUMBER (skaitlis) un DATE (datums), aizstās ar attiecīgajām vērtībām "Ticket->Text".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Klienta uzņēmumam piešķirtie KI';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Klienta lietotājam piešķirtie CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB iestatījumi';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Konfigurācijas elementa pievienošana.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurācijas elementa rediģēšana.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Konfigurējiet elementu notikumu moduli, kas skaita licences OTOBOCILicenseCount funkcijai.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigurējiet elementu notikumu moduli, kas aģenta saskarnē ļauj reģistrēt vēsturi.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigurācijas elementa meklēšana aģenta interfeisa aizmugurējā maršrutētājā.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Izveidot un pārvaldīt konfigurācijas elementu definīcijas.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Izveido ConfigItems biļetes konkrētos laika punktos.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klienti var skatīt vēsturiskās CI versijas.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Klientiem ir iespēja manuāli pārslēgties starp vēsturiskajām CI versijām.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigurācijas elementu pārskats.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Ja šī opcija ir aktivizēta, saistītie vienumi tiek ieskaitīti tikai tad, ja tie pieder kādai no uzskaitītajām klasēm.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Vai ConfigItemACL izpildi var novērst, pārbaudot kešatmiņā esošo lauku atkarības. Tas var uzlabot veidlapu ielādes laiku, bet tas ir jāatslēdz, ja ACLModules ir jāizmanto ITSMConfigItem- un Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kāda vispārīga informācija ir norādīta galvenē.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā no piesaistīto CI skaita ar esošo tipu DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā no piesaistīto CI skaita.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Izmantojot šo opciju, ir iespējams automātiski aizpildīt CI lauku atkarībā no piesaistīto CI skaita. Iestatījums CounterClassName (skaitītāja klases nosaukums) ietver klases nosaukumu, bet CounterFieldName (skaitītāja lauka nosaukums) tiek izmantots, lai saglabātu izmantoto licenču skaitu.';
     $Self->{Translation}->{'class'} = 'klase';
     $Self->{Translation}->{'global'} = 'globālā';
     $Self->{Translation}->{'postproductive'} = 'postproduktīvo';

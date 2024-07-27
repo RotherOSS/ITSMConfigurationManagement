@@ -249,7 +249,7 @@ sub Data {
         'Consente condizioni di ricerca estese nella ricerca degli elementi di configurazione dell\'interfaccia cliente. Con questa funzione è possibile cercare, ad esempio, il nome dell\'elemento di configurazione con condizioni del tipo "(*key1*&&*key2*)" o "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'CIs assegnati';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'In un momento specifico, crea un ticket per gli elementi di configurazione, se i requisiti configurati sono soddisfatti. Il punto temporale è determinato dal valore del campo configurato sotto "TimeCIKey" del ConfigItem e modificato da "TimeModifier". Quest\'ultimo può essere solo un numero, oppure un segno (+/-), un numero e un\'unità (d/h/m): "7" equivale a "+7d". Il campo dinamico "Ticket->DynamicField" verrà utilizzato per contrassegnare i biglietti creati: deve esistere. I flag \\<OTOBO_CONFIGITEM_X\\>, dove X può essere NOME, NUMERO e DATA, saranno sostituiti dai rispettivi valori in "Ticket->Text".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CIs assegnati alla società cliente';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CIs assegnati all\'utenza cliente';
     $Self->{Translation}->{'CMDB Settings'} = 'Impostazioni CMDB';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Aggiungi elemento di configurazione.';
     $Self->{Translation}->{'Config item edit.'} = 'Modifica elemento di configurazione.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Modulo di configurazione dell\'evento che conta le licenze per la funzione OTOBOCILicenseCount.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Modulo eventi elemento di configurazione che consente la registrazione nella cronologia nell\'interfaccia agenti.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Voce di configurazione ricerca router backend dell\'interfaccia agente.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Crea e gestisci le definizioni per gli elementi di configurazione.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Crea biglietti per i ConfigItem in momenti specifici.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'I clienti possono vedere le versioni storiche dei CI.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'I clienti hanno la possibilità di passare manualmente tra le versioni storiche di CI.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Panoramica degli elementi di configurazione ITSM.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Se questa opzione è attivata, gli elementi collegati vengono conteggiati solo se appartengono a una delle classi elencate.';
     $Self->{Translation}->{'InciState'} = 'Stato Inci';
     $Self->{Translation}->{'IncidentState'} = 'Stato dell\'incidente';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Se l\'esecuzione di ConfigItemACL può essere evitata controllando le dipendenze dei campi nella cache. Questo può migliorare i tempi di caricamento dei moduli, ma deve essere disabilitato se si vogliono usare i moduli ACLM per i tipi ITSMConfigItem e Form-Return.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Le informazioni generali sono riportate nell\'intestazione.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Con questa opzione è possibile riempire automaticamente un campo CI, in base al numero di CI collegati con il tipo esistente DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Con questa opzione è possibile riempire automaticamente un campo CI, a seconda del numero di CI collegati.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Con questa opzione è possibile riempire automaticamente un campo CI, a seconda del numero di CI collegati. Le impostazioni di CounterClassName includono il nome della classe e CounterFieldName è usato per memorizzare il conteggio delle licenze usate.';
     $Self->{Translation}->{'class'} = 'classe';
     $Self->{Translation}->{'global'} = 'globale';
     $Self->{Translation}->{'postproductive'} = 'postproductive';

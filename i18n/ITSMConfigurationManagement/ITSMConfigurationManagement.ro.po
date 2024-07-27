@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ro/>\n"
+"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -1664,22 +1662,11 @@ msgstr "Structura de bază nu este validă. Vă rugăm să furnizați un hash cu
 
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr ""
-"La un anumit moment, creează un bilet pentru elementele de configurare, dacă "
-"sunt îndeplinite cerințele configurate. Momentul este determinat de valoarea "
-"câmpului configurat la \"TimeCIKey\" din ConfigItem și modificat de "
-"\"TimeModifier\". Dacă acesta din urmă poate fi fie doar un număr, fie un "
-"semn (+/-), un număr și o unitate (d/h/m): \"7\" este echivalent cu \"+7d\". "
-"Câmpul dinamic \"Ticket->DynamicField\" va fi utilizat pentru a marca "
-"biletele create - acesta trebuie să existe. Indicatoarele \\\\<"
-"OTOBO_CONFIGITEM_X\\\\> unde X poate fi NAME, NUMBER și DATE, vor fi "
-"înlocuite cu valorile respective în \"Ticket->Text\"."
+msgstr "La un anumit moment, creează un bilet pentru elementele de configurare, dacă sunt îndeplinite cerințele configurate. Momentul este determinat de valoarea câmpului configurat la \"TimeCIKey\" din ConfigItem și modificat de \"TimeModifier\". Dacă acesta din urmă poate fi fie doar un număr, fie un semn (+/-), un număr și o unitate (d/h/m): \"7\" este echivalent cu \"+7d\". Câmpul dinamic \"Ticket->DynamicField\" va fi utilizat pentru a marca biletele create - acesta trebuie să existe. Indicatoarele \\\\<OTOBO_CONFIGITEM_X\\\\> unde X poate fi NAME, NUMBER și DATE, vor fi înlocuite cu valorile respective în \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr ""
-"Modul de configurare a evenimentului element care numără licențele pentru "
-"funcția OTOBOCILicenseCount."
+msgstr "Modul de configurare a evenimentului element care numără licențele pentru funcția OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
@@ -1687,26 +1674,17 @@ msgstr "Creează bilete pentru ConfigItems la anumite momente."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr ""
-"Dacă această opțiune este activată, elementele legate sunt luate în "
-"considerare numai dacă aparțin uneia dintre clasele enumerate."
+msgstr "Dacă această opțiune este activată, elementele legate sunt luate în considerare numai dacă aparțin uneia dintre clasele enumerate."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr ""
-"Cu această opțiune este posibil să se completeze automat un câmp CI, în "
-"funcție de numărul de CI-uri legate cu tipul existent DependsOn."
+msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate cu tipul existent DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr ""
-"Cu această opțiune este posibil să se completeze automat un câmp CI, în "
-"funcție de numărul de CI-uri legate."
+msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr ""
-"Cu această opțiune este posibil să se completeze automat un câmp CI, în "
-"funcție de numărul de CI-uri legate. Setarea CounterClassName include numele "
-"clasei, iar CounterFieldName este utilizată pentru a stoca numărul de "
-"licențe utilizate."
+msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate. Setarea CounterClassName include numele clasei, iar CounterFieldName este utilizată pentru a stoca numărul de licențe utilizate."
+

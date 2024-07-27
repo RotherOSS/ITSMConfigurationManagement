@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/el/>\n"
+"Language-Team: Greek <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,23 +3222,11 @@ msgstr "Η βασική δομή δεν είναι έγκυρη. Παρακαλ�
 
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr ""
-"Σε ένα συγκεκριμένο χρονικό σημείο δημιουργήστε ένα εισιτήριο για στοιχεία "
-"διαμόρφωσης, εάν πληρούνται οι διαμορφωμένες απαιτήσεις. Το χρονικό σημείο "
-"καθορίζεται από την τιμή του πεδίου που διαμορφώνεται στο \"TimeCIKey\" του "
-"ConfigItem και τροποποιείται από το \"TimeModifier\". Εάν το τελευταίο "
-"μπορεί να είναι είτε μόνο ένας αριθμός, είτε ένα σύμβολο (+/-), ένας αριθμός "
-"και μια μονάδα (δ/χ/μ): το \"7\" ισοδυναμεί με \"+7d\". Το DynamicField "
-"\"Ticket->DynamicField\" θα χρησιμοποιηθεί για τη σήμανση των δημιουργημένων "
-"εισιτηρίων - πρέπει να υπάρχει. Οι σημαίες \\\\\\<OTOBO_CONFIGITEM_X\\\\\\> "
-"όπου X μπορεί να είναι NAME, NUMBER και DATE, θα αντικατασταθούν με τις "
-"αντίστοιχες τιμές στο \"Ticket->Text\"."
+msgstr "Σε ένα συγκεκριμένο χρονικό σημείο δημιουργήστε ένα εισιτήριο για στοιχεία διαμόρφωσης, εάν πληρούνται οι διαμορφωμένες απαιτήσεις. Το χρονικό σημείο καθορίζεται από την τιμή του πεδίου που διαμορφώνεται στο \"TimeCIKey\" του ConfigItem και τροποποιείται από το \"TimeModifier\". Εάν το τελευταίο μπορεί να είναι είτε μόνο ένας αριθμός, είτε ένα σύμβολο (+/-), ένας αριθμός και μια μονάδα (δ/χ/μ): το \"7\" ισοδυναμεί με \"+7d\". Το DynamicField \"Ticket->DynamicField\" θα χρησιμοποιηθεί για τη σήμανση των δημιουργημένων εισιτηρίων - πρέπει να υπάρχει. Οι σημαίες \\\\\\\\<OTOBO_CONFIGITEM_X\\\\\\\\> όπου X μπορεί να είναι NAME, NUMBER και DATE, θα αντικατασταθούν με τις αντίστοιχες τιμές στο \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr ""
-"Μονάδα συμβάντων στοιχείου διαμόρφωσης που μετρά τις άδειες για τη "
-"λειτουργία OTOBOCILicenseCount."
+msgstr "Μονάδα συμβάντων στοιχείου διαμόρφωσης που μετρά τις άδειες για τη λειτουργία OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
@@ -3247,26 +3234,17 @@ msgstr "Δημιουργεί εισιτήρια για ConfigItems σε συγκ
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr ""
-"Εάν αυτή η επιλογή είναι ενεργοποιημένη, τα συνδεδεμένα στοιχεία "
-"υπολογίζονται μόνο εάν ανήκουν σε μία από τις παρατιθέμενες κλάσεις."
+msgstr "Εάν αυτή η επιλογή είναι ενεργοποιημένη, τα συνδεδεμένα στοιχεία υπολογίζονται μόνο εάν ανήκουν σε μία από τις παρατιθέμενες κλάσεις."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr ""
-"Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, "
-"ανάλογα με τον αριθμό των συνδεδεμένων CI με τον υπάρχοντα τύπο DependsOn."
+msgstr "Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI με τον υπάρχοντα τύπο DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr ""
-"Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, "
-"ανάλογα με τον αριθμό των συνδεδεμένων CI."
+msgstr "Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr ""
-"Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, "
-"ανάλογα με τον αριθμό των συνδεδεμένων CI. Η ρύθμιση CounterClassName "
-"περιλαμβάνει το όνομα της κλάσης και το CounterFieldName χρησιμοποιείται για "
-"την αποθήκευση του αριθμού των χρησιμοποιημένων αδειών."
+msgstr "Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI. Η ρύθμιση CounterClassName περιλαμβάνει το όνομα της κλάσης και το CounterFieldName χρησιμοποιείται για την αποθήκευση του αριθμού των χρησιμοποιημένων αδειών."
+

@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-07-26 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Estonian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/et/>\n"
+"Language-Team: Estonian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3223,21 +3222,11 @@ msgstr "Baasstruktuur ei ole kehtiv. Palun esitage YAML-vormingus andmete hash."
 
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr ""
-"Teatud ajahetkel loo pilet konfigureeritud elementide jaoks, kui "
-"konfigureeritud nõuded on täidetud. Ajahetk määratakse kindlaks ConfigItem'i "
-"\"TimeCIKey\" all konfigureeritud välja väärtusega ja seda muudetakse "
-"\"TimeModifier\" abil. Kui viimane võib olla kas lihtsalt number või märk "
-"(+/-), number ja ühik (d/h/m): \"7\" vastab \"+7d\". DynamicFieldi \"Ticket->"
-"DynamicField\" kasutatakse loodud piletite märgistamiseks - see peab olema "
-"olemas. Lipud \\\\\\<OTOBO_CONFIGITEM_X\\\\\\>, kus X võib olla NAME, NUMBER "
-"ja DATE, asendatakse vastavate väärtustega jaotises \"Ticket->Text\"."
+msgstr "Teatud ajahetkel loo pilet konfigureeritud elementide jaoks, kui konfigureeritud nõuded on täidetud. Ajahetk määratakse kindlaks ConfigItem'i \"TimeCIKey\" all konfigureeritud välja väärtusega ja seda muudetakse \"TimeModifier\" abil. Kui viimane võib olla kas lihtsalt number või märk (+/-), number ja ühik (d/h/m): \"7\" vastab \"+7d\". DynamicFieldi \"Ticket->DynamicField\" kasutatakse loodud piletite märgistamiseks - see peab olema olemas. Lipud \\\\\\\\<OTOBO_CONFIGITEM_X\\\\\\\\>, kus X võib olla NAME, NUMBER ja DATE, asendatakse vastavate väärtustega jaotises \"Ticket->Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr ""
-"Config item event moodul, mis loeb OTOBOCILicenseCount funktsiooni jaoks "
-"litsentse."
+msgstr "Config item event moodul, mis loeb OTOBOCILicenseCount funktsiooni jaoks litsentse."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
@@ -3245,25 +3234,17 @@ msgstr "Loob ConfigItems'i piletid teatud ajahetkedel."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr ""
-"Kui see valik on aktiveeritud, arvestatakse lingitud elemendid ainult siis, "
-"kui nad kuuluvad ühte loetletud klassidest."
+msgstr "Kui see valik on aktiveeritud, arvestatakse lingitud elemendid ainult siis, kui nad kuuluvad ühte loetletud klassidest."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr ""
-"Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt "
-"olemasoleva tüübiga DependsOn seotud CI-de arvust."
+msgstr "Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt olemasoleva tüübiga DependsOn seotud CI-de arvust."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr ""
-"Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-"
-"de arvust."
+msgstr "Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr ""
-"Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-"
-"de arvust. Seade CounterClassName sisaldab klassi nime ja CounterFieldName "
-"salvestab kasutatud litsentsi arvu."
+msgstr "Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust. Seade CounterClassName sisaldab klassi nime ja CounterFieldName salvestab kasutatud litsentsi arvu."
+

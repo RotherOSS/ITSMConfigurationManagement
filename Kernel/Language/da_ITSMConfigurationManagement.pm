@@ -249,7 +249,7 @@ sub Data {
         'Tillader udvidede søgebetingelser i søgning efter konfigurationselementer i kundegrænsefladen. Med denne funktion kan du f.eks. søge i navnet på et konfigurationselement med betingelser som "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Tildelte CI\'er';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'På et bestemt tidspunkt oprettes en billet til konfigurationselementer, hvis de konfigurerede krav er opfyldt. Tidspunktet bestemmes af værdien af det felt, der er konfigureret under "TimeCIKey" i ConfigItem, og ændres af "TimeModifier". Sidstnævnte kan enten bare være et tal eller et tegn (+/-), et tal og en enhed (d/h/m): "7" svarer til "+7d". Det dynamiske felt "Ticket->DynamicField" vil blive brugt til at markere oprettede billetter - det skal eksistere. Flagene \<OTOBO_CONFIGITEM_X\>, hvor X kan være NAVN, TAL og DATO, erstattes med de respektive værdier i "Billet->Tekst".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI\'er tildelt kundevirksomhed';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI\'er tildelt kundebruger';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB-indstillinger';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Tilføj konfig-element.';
     $Self->{Translation}->{'Config item edit.'} = 'Rediger konfigurationselement.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Konfigurationselementets hændelsesmodul, der tæller licenserne for funktionen OTOBOCILicenseCount.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Config item-hændelsesmodul, der muliggør logning til historik i agentgrænsefladen.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigurationselement søg backend-router for agentgrænsefladen.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Opret og administrer definitionerne for Configuration Items.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Opretter billetter til ConfigItems på bestemte tidspunkter.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kunder kan se historiske CI-versioner.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Kunderne har mulighed for manuelt at skifte mellem historiske CI-versioner.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Oversigt over ITSM-konfigurationselementer.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Hvis denne indstilling er aktiveret, tælles sammenkædede elementer kun med, hvis de tilhører en af de anførte klasser.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'Hændelsesstatus';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Om udførelsen af ConfigItemACL kan undgås ved at tjekke cachelagrede feltafhængigheder. Dette kan forbedre indlæsningstiden for formularer, men skal deaktiveres, hvis ACLModules skal bruges til ITSMConfigItem- og Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Hvilke generelle oplysninger vises i overskriften.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Med denne indstilling er det muligt at udfylde et CI-felt automatisk, afhængigt af antallet af linkede CI\'er med den eksisterende type DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Med denne indstilling er det muligt at udfylde et CI-felt automatisk, afhængigt af antallet af linkede CI\'er.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Med denne indstilling er det muligt automatisk at udfylde et CI-felt afhængigt af antallet af forbundne CI\'er. Indstillingen CounterClassName inkluderer navnet på klassen, og CounterFieldName bruges til at gemme antallet af brugte licenser.';
     $Self->{Translation}->{'class'} = 'klasse';
     $Self->{Translation}->{'global'} = 'globalt';
     $Self->{Translation}->{'postproductive'} = 'postproduktiv';

@@ -249,7 +249,7 @@ sub Data {
         'Leidžia taikyti išplėstines paieškos sąlygas klientų sąsajos konfigūracijos elementų paieškoje. Naudodami šią funkciją galite ieškoti, pvz., konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip "(*key1*&&*key2*)" arba "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Priskirti KI';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Tam tikru metu sukurkite bilietą dėl konfigūracijos elementų, jei įvykdyti nustatyti reikalavimai. Laiko momentas nustatomas pagal lauko, sukonfigūruoto ConfigItem "TimeCIKey", reikšmę ir modifikuojamas pagal "TimeModifier". Jei pastarasis gali būti tik skaičius arba ženklas (+/-), skaičius ir vienetas (d/h/m): "7" atitinka "+7d". Dinaminis laukas "Ticket->DynamicField" bus naudojamas sukurtiems bilietams žymėti - jis turi egzistuoti. Žymos \<OTOBO_CONFIGITEM_X\>, kur X gali būti NAME (pavadinimas), NUMBER (skaičius) ir DATE (data), bus pakeistos atitinkamomis reikšmėmis "Ticket->Text" (bilietas->tekstas).';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Kliento įmonei priskirti KI';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliento naudotojui priskirti CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB nustatymai';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Konfigūracijos elemento pridėjimas.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigūracijos elemento redagavimas.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Konfigūruoti elemento įvykių modulį, kuris skaičiuoja OTOBOCILicenseCount funkcijos licencijas.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigūruokite elemento įvykių modulį, kuris leidžia registruoti istoriją agento sąsajoje.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigūracijos elemento paieška agento sąsajos galiniame maršrutizatoriuje.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Sukurkite ir tvarkykite konfigūracijos elementų apibrėžtis.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Sukuria "ConfigItems" bilietus tam tikrais laiko momentais.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klientai gali matyti istorines CI versijas.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Klientai turi galimybę rankiniu būdu perjungti istorines CI versijas.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigūracijos elementų apžvalga.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Jei ši parinktis įjungta, susieti elementai skaičiuojami tik tada, jei jie priklauso vienai iš išvardytų klasių.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Ar galima išvengti "ConfigItemACL" vykdymo tikrinant talpykloje esančių laukų priklausomybes. Tai gali pagerinti formuliarų įkėlimo laiką, tačiau turi būti išjungta, jei ACLModules turi būti naudojami ITSMConfigItem- ir Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kokia bendra informacija pateikiama antraštėje.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Naudojant šią parinktį galima automatiškai užpildyti KI lauką, atsižvelgiant į susietų KI, turinčių esamą tipą DependsOn, skaičių.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Naudojant šią parinktį galima automatiškai užpildyti CI lauką, atsižvelgiant į susietų CI skaičių.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Naudojant šią parinktį galima automatiškai užpildyti CI lauką, atsižvelgiant į susietų CI skaičių. Nustatyme CounterClassName (Skaitiklio klasės pavadinimas) įrašomas klasės pavadinimas, o CounterFieldName (Skaitiklio lauko pavadinimas) naudojamas naudojamų licencijų skaičiui saugoti.';
     $Self->{Translation}->{'class'} = 'klasė';
     $Self->{Translation}->{'global'} = 'pasaulinis';
     $Self->{Translation}->{'postproductive'} = 'postprodukcinis';

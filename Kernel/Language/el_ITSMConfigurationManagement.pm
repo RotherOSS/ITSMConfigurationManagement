@@ -249,7 +249,7 @@ sub Data {
         'Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελατών. Με αυτή τη δυνατότητα μπορείτε να αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους συνθήκες όπως "(*key1*&&*key2*)" ή "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Εκχωρηθέντα CIs';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '';
+        'Σε ένα συγκεκριμένο χρονικό σημείο δημιουργήστε ένα εισιτήριο για στοιχεία διαμόρφωσης, εάν πληρούνται οι διαμορφωμένες απαιτήσεις. Το χρονικό σημείο καθορίζεται από την τιμή του πεδίου που διαμορφώνεται στο "TimeCIKey" του ConfigItem και τροποποιείται από το "TimeModifier". Εάν το τελευταίο μπορεί να είναι είτε μόνο ένας αριθμός, είτε ένα σύμβολο (+/-), ένας αριθμός και μια μονάδα (δ/χ/μ): το "7" ισοδυναμεί με "+7d". Το DynamicField "Ticket->DynamicField" θα χρησιμοποιηθεί για τη σήμανση των δημιουργημένων εισιτηρίων - πρέπει να υπάρχει. Οι σημαίες \\<OTOBO_CONFIGITEM_X\\> όπου X μπορεί να είναι NAME, NUMBER και DATE, θα αντικατασταθούν με τις αντίστοιχες τιμές στο "Ticket->Text".';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CIs που ανατίθενται στην εταιρεία-πελάτη';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CIs που έχουν εκχωρηθεί σε χρήστη πελάτη';
     $Self->{Translation}->{'CMDB Settings'} = 'Ρυθμίσεις CMDB';
@@ -271,7 +271,7 @@ sub Data {
     $Self->{Translation}->{'Config item add.'} = 'Προσθήκη στοιχείου διαμόρφωσης.';
     $Self->{Translation}->{'Config item edit.'} = 'Επεξεργασία στοιχείου διαμόρφωσης.';
     $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '';
+        'Μονάδα συμβάντων στοιχείου διαμόρφωσης που μετρά τις άδειες για τη λειτουργία OTOBOCILicenseCount.';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Μονάδα συμβάντων στοιχείου ρύθμισης παραμέτρων που επιτρέπει την καταγραφή στο ιστορικό στη διεπαφή του πράκτορα.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
@@ -296,7 +296,7 @@ sub Data {
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Στοιχείο διαμόρφωσης στοιχείο αναζήτησης backend router της διασύνδεσης πράκτορα.';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Δημιουργία και διαχείριση των ορισμών για τα στοιχεία διαμόρφωσης.';
-    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '';
+    $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Δημιουργεί εισιτήρια για ConfigItems σε συγκεκριμένα χρονικά σημεία.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Οι πελάτες μπορούν να δουν ιστορικές εκδόσεις CI.';
     $Self->{Translation}->{'Customers have the possibility to manually switch between historic CI versions.'} =
         'Οι πελάτες έχουν τη δυνατότητα να εναλλάσσονται χειροκίνητα μεταξύ των ιστορικών εκδόσεων CI.';
@@ -410,7 +410,7 @@ sub Data {
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Επισκόπηση στοιχείων ρυθμίσεων ITSM.';
     $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '';
+        'Εάν αυτή η επιλογή είναι ενεργοποιημένη, τα συνδεδεμένα στοιχεία υπολογίζονται μόνο εάν ανήκουν σε μία από τις παρατιθέμενες κλάσεις.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
@@ -524,11 +524,11 @@ sub Data {
         'Εάν η εκτέλεση του ConfigItemACL μπορεί να αποφευχθεί με τον έλεγχο των εξαρτήσεων των πεδίων που έχουν αποθηκευτεί στην προσωρινή μνήμη. Αυτό μπορεί να βελτιώσει τους χρόνους φόρτωσης των φορμών, αλλά πρέπει να απενεργοποιηθεί, εάν πρόκειται να χρησιμοποιηθούν ACLModules για ITSMConfigItem- και Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Ποιες γενικές πληροφορίες εμφανίζονται στην επικεφαλίδα.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '';
+        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI με τον υπάρχοντα τύπο DependsOn.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '';
+        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI.';
     $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '';
+        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI. Η ρύθμιση CounterClassName περιλαμβάνει το όνομα της κλάσης και το CounterFieldName χρησιμοποιείται για την αποθήκευση του αριθμού των χρησιμοποιημένων αδειών.';
     $Self->{Translation}->{'class'} = 'κατηγορία';
     $Self->{Translation}->{'global'} = 'παγκόσμιο';
     $Self->{Translation}->{'postproductive'} = 'μεταπαραγωγική';
