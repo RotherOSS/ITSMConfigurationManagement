@@ -3248,3 +3248,7 @@ msgstr "使用该选项可以根据链接的 CI 数量自动填充 CI 字段。"
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr "使用该选项可以根据链接的 CI 数量自动填充 CI 字段。设置 CounterClassName 包含类的名称，CounterFieldName 用于存储已使用许可证的计数。"
 
+#. SysConfig
+msgid "Defines the initial height for the rich text editor component in pixels."
+msgstr ""
+

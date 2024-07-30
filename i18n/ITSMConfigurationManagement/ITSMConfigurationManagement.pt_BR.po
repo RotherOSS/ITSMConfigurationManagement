@@ -3248,3 +3248,7 @@ msgstr "Com essa opção, é possível preencher automaticamente um campo de IC,
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr "Com essa opção, é possível preencher automaticamente um campo de IC, dependendo da contagem de ICs vinculados. A configuração CounterClassName inclui o nome da classe e CounterFieldName é usada para armazenar a contagem da licença usada."
 
+#. SysConfig
+msgid "Defines the initial height for the rich text editor component in pixels."
+msgstr ""
+

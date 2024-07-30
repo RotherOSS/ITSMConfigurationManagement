@@ -3248,3 +3248,7 @@ msgstr "Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolód
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr "Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k számától függően. A CounterClassName beállítás tartalmazza az osztály nevét, a CounterFieldName pedig a felhasznált licencek számának tárolására szolgál."
 
+#. SysConfig
+msgid "Defines the initial height for the rich text editor component in pixels."
+msgstr ""
+

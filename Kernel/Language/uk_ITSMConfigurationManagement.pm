@@ -349,6 +349,8 @@ sub Data {
         'Визначає типовий атрибут пошуку елемента конфігурації, який буде показано на екрані пошуку елемента конфігурації. Приклад: "Ключ" має містити назву динамічного поля, у цьому випадку \'X\', "Зміст" має містити значення динамічного поля залежно від типу динамічного поля, Текст: \'текст\', Випадаючий список: \'1\', Дата/Час: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' та або \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Визначає підоб\'єкт за замовчуванням класу \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Визначає кількість рядків для редактора визначень CI в інтерфейсі адміністратора.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
