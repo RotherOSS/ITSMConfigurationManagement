@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2024-07-30 02:36+0000\n"
+"POT-Creation-Date: 2024-08-01 02:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -779,6 +779,10 @@ msgid "Defines an overview module to show the small view of a configuration item
 msgstr ""
 
 #. SysConfig
+msgid "Defines if parent-child translations for queues and services should be generated automatically."
+msgstr ""
+
+#. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr ""
 
@@ -836,6 +840,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
 
 #. SysConfig

@@ -322,6 +322,8 @@ sub Data {
         'Meghatározza a szükséges jogosultságokat az ITSM konfigurációelemek frissítéséhez az általános felület használatával.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Egy áttekintő modult határoz meg egy konfigurációelem lista kis nézetének megjelenítéséhez.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Meghatározza, hogy a csomópontkapcsolatokban meg kell-e jeleníteni a kapcsolattípus címkéit.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Meghatározza az „ITSMConfigItem” osztály alapértelmezett alobjektumát.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Meghatározza a CI meghatározás-szerkesztő sorainak számát az adminisztrációs felületen.';

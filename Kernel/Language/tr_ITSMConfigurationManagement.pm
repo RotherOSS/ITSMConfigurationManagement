@@ -322,6 +322,8 @@ sub Data {
         'Genel Arayüzü kullanarak ITSM yapılandırma öğelerini güncellemek için Gerekli izinleri tanımlar.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Bir yapılandırma öğesi listesinin küçük görünümünü göstermek için bir genel bakış modülü tanımlar.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Bağlantı türü etiketlerinin düğüm bağlantılarında gösterilip gösterilmeyeceğini tanımlar.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '\'ITSMConfigItem\' sınıfının varsayılan alt nesnesini tanımlar.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Yönetici arayüzündeki CI tanımı düzenleyicisi için satır sayısını tanımlar.';

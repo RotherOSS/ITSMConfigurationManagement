@@ -322,6 +322,8 @@ sub Data {
         'Дефинира Барани пермисии за надградба на ITSM конфигурациски членови на Генерички Интерфејс.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Дефинира преглед модул за приказ на мал преглед на кофигурациска лчен листа.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         '';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Дефинира стандарден субобјект за класата \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Дефинира број на редици за CI дефиницискиот уредник во админ интерфејсот.';

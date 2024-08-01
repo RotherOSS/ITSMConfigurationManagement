@@ -322,6 +322,8 @@ sub Data {
         'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden päivittämiseen yleisen käyttöliittymän avulla.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Määrittää yleiskatsausmoduulin, joka näyttää kokoonpanokohdeluettelon pienen näkymän.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Määrittää, onko linkin tyypin merkinnät näytettävä solmujen yhteyksissä.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Määrittää luokan \'ITSMConfigItem\' oletusarvoisen aliobjektin.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Määrittää hallintakäyttöliittymän CI-määrittelyeditorin rivien määrän.';

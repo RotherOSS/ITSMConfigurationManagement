@@ -322,6 +322,8 @@ sub Data {
         'Definisikan izin yang di butuhkan untuk memperbarui item konfigurasi ITSM dengan menggunakan antarmuka umum.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definisikan modul gambaran untuk menunjukan tampilan kecil dari sebuah daftar item konfigurasi';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Menentukan apakah label jenis tautan harus ditampilkan di koneksi node.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definisikan subobjek default dari kelas \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definisikan jumlah baris untuk pengubah definisiCI pada antarmuka Admin';

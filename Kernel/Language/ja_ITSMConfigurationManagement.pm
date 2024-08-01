@@ -322,6 +322,8 @@ sub Data {
         'ジェネリックインターフェイスを活用して構成アイテムを変更する権限を定義する。';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '構成アイテムを定義して、構成アイテムのリストの小さなビューを表示します。';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'ノードの接続にリンクタイプのラベルを表示するかどうかを定義します。';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '構成アイテムのクラスのデフォルトのサブオブジェクトを定義する。';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         '管理インターフェイス Cl 定義エディタの行数を定義する。';

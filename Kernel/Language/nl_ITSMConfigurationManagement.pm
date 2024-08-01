@@ -322,6 +322,8 @@ sub Data {
         'Definieert de vereiste machtigingen om ITSM-configuratie-items bij te werken met de Generieke Interface.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definieert een overzichtsmodule om de kleine weergave van een lijst met configuratie-items weer te geven.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Definieert of de labels van het linktype moeten worden weergegeven in de knooppuntverbindingen.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definieert het standaard subobject van de klasse \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definieert het aantal rijen voor de CI-definitie-editor in de beheerinterface.';

@@ -322,6 +322,8 @@ sub Data {
         '일반 인터페이스를 사용하여 ITSM 구성 항목을 업데이트하는 데 필요한 권한을 정의합니다.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '구성 항목 목록의 작은 보기를 표시하는 개요 모듈을 정의합니다.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         '노드 연결에 링크 유형 레이블을 표시할지 여부를 정의합니다.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '\'ITSMConfigItem\' 클래스의 기본 하위 객체를 정의합니다.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         '관리자 인터페이스에서 CI 정의 편집기의 행 수를 정의합니다.';

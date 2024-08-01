@@ -322,6 +322,8 @@ sub Data {
         'Definuje požadované oprávnenia na aktualizáciu konfiguračných položiek ITSM pomocou všeobecného rozhrania.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definuje modul prehľadu na zobrazenie malého zobrazenia zoznamu konfiguračných položiek.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Definuje, či sa v spojeniach uzlov musia zobrazovať značky typu spojenia.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definuje predvolený podobjekt triedy "ITSMConfigItem".';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definuje počet riadkov pre editor definícií CI v rozhraní správcu.';

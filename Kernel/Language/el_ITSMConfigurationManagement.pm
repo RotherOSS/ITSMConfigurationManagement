@@ -322,6 +322,8 @@ sub Data {
         'Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας λίστας στοιχείων διαμόρφωσης.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Καθορίζει εάν οι ετικέτες τύπου συνδέσμου πρέπει να εμφανίζονται στις συνδέσεις κόμβων.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Ορίζει το προεπιλεγμένο υποαντικείμενο της κλάσης \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Καθορίζει τον αριθμό των γραμμών για τον επεξεργαστή ορισμού CI στο περιβάλλον εργασίας διαχείρισης.';

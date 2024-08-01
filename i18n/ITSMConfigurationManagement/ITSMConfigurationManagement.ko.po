@@ -3252,3 +3252,11 @@ msgstr "이 옵션을 사용하면 연결된 CI의 수에 따라 CI 필드를 �
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
 
+#. SysConfig
+msgid "Defines if parent-child translations for queues and services should be generated automatically."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the initial height in pixels for the rich text editor component for this screen."
+msgstr ""
+

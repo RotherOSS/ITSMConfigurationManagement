@@ -322,6 +322,8 @@ sub Data {
         'Задает требуемые права для одновления ITSM КЕ с использованием Generic Interface';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Задает модуль просмотра КЕ в кратком виде.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Определяет, должны ли метки типов связей отображаться в соединениях узлов.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Задает умалчивамый подобъект для класса \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Задает количество строк для редактора описаний КЕ (CI) в интерфейсе админа.';

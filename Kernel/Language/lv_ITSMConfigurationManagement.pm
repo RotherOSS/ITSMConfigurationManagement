@@ -322,6 +322,8 @@ sub Data {
         'Definē Nepieciešamās atļaujas ITSM konfigurācijas elementu atjaunināšanai, izmantojot vispārējo saskarni.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definē pārskata moduli, lai parādītu konfigurācijas elementu saraksta mazo skatu.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Nosaka, vai mezglu savienojumos ir jānorāda saites tipa etiķetes.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definē klases "ITSMConfigItem" noklusējuma apakšobjektu.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Nosaka rindu skaitu CI definīciju redaktoram administratora saskarnē.';

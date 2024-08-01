@@ -322,6 +322,8 @@ sub Data {
         'Визначає необхідні дозволи для оновлення елементів конфігурації ITSM за допомогою загального інтерфейсу.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Визначає модуль огляду для відображення невеликого списку елементів конфігурації.';
+    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
+        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Визначає, чи потрібно показувати мітки типу зв\'язку у з\'єднаннях вузлів.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -350,6 +352,8 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Визначає підоб\'єкт за замовчуванням класу \'ITSMConfigItem\'.';
     $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
+        '';
+    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Визначає кількість рядків для редактора визначень CI в інтерфейсі адміністратора.';
