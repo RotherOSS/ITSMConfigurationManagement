@@ -322,8 +322,6 @@ sub Data {
         'Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας λίστας στοιχείων διαμόρφωσης.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Καθορίζει εάν οι ετικέτες τύπου συνδέσμου πρέπει να εμφανίζονται στις συνδέσεις κόμβων.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: "Key" πρέπει να έχει το όνομα του δυναμικού πεδίου στην προκειμένη περίπτωση \'X\', "Content" πρέπει να έχει την τιμή του δυναμικού πεδίου ανάλογα με τον τύπο του δυναμικού πεδίου, Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974- Search_DynamicField_XTimeSlotStartMonth=01- Search_DynamicField_XTimeSlotStartDay=26- Search_DynamicField_XTimeSlotStartHour=00, Search_DynamicField_XTimeSlotStartMinute=00- Search_DynamicField_XTimeSlotStartSecond=00- Search_DynamicField_XTimeSlotStopYear=2013- Search_DynamicField_XTimeSlotStopMonth=01, Search_DynamicField_XTimeSlotStopDay=26- Search_DynamicField_XTimeSlotStopHour=23- Search_DynamicField_XTimeSlotStopMinute=59- Search_DynamicField_XTimeSlotStopSecond=59,\' και ή \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Ορίζει το προεπιλεγμένο υποαντικείμενο της κλάσης \'ITSMConfigItem\'.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Καθορίζει τον αριθμό των γραμμών για τον επεξεργαστή ορισμού CI στο περιβάλλον εργασίας διαχείρισης.';

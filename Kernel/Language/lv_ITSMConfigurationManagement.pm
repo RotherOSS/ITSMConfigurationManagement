@@ -322,8 +322,6 @@ sub Data {
         'Definē Nepieciešamās atļaujas ITSM konfigurācijas elementu atjaunināšanai, izmantojot vispārējo saskarni.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definē pārskata moduli, lai parādītu konfigurācijas elementu saraksta mazo skatu.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Nosaka, vai mezglu savienojumos ir jānorāda saites tipa etiķetes.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Nosaka noklusējuma rādīto konfigurācijas elementu meklēšanas atribūtu konfigurācijas elementu meklēšanas ekrānam. Piemērs: "Key" jābūt dinamiskā lauka nosaukumam, šajā gadījumā "X", "Content" jābūt dinamiskā lauka vērtībai atkarībā no dinamiskā lauka tipa, Text: "a text", Dropdown: "1", Date/Time: "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' un vai \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definē klases "ITSMConfigItem" noklusējuma apakšobjektu.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Nosaka rindu skaitu CI definīciju redaktoram administratora saskarnē.';

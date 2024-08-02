@@ -322,8 +322,6 @@ sub Data {
         'Inafafanua ruhusa zinazohitajika kusasisha vipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Inafafanua moduli ya mapitio kuonyesha mandhari ndogo ya orodha ya vipengele vya usanidi.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         '';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         '';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Inafafanua kipengele cha chaguo msingi cha tabaka la \'Kipengelecha Usanidi cha ITSM\'.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Inafafanua namba ya safu mlalo kwa mhariri wa ufafanuzi wa CI katika kiolesura cha kiongozi';

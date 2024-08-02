@@ -322,8 +322,6 @@ sub Data {
         'Definisikan izin yang di butuhkan untuk memperbarui item konfigurasi ITSM dengan menggunakan antarmuka umum.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definisikan modul gambaran untuk menunjukan tampilan kecil dari sebuah daftar item konfigurasi';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Menentukan apakah label jenis tautan harus ditampilkan di koneksi node.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Menentukan atribut pencarian item konfigurasi yang ditampilkan secara default untuk layar pencarian item konfigurasi. Contoh: "Key" harus memiliki nama Bidang Dinamis dalam hal ini \'X\', "Content" harus memiliki nilai Bidang Dinamis tergantung pada jenis Bidang Dinamis, Teks: \'teks\', Dropdown: \'1\', Tanggal/Waktu: \'Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth = 01; Search_DynamicField_XTimeSlotStartDay = 26; Search_DynamicField_XTimeSlotStartHour = 00; Search_DynamicField_XTimeSlotStartMinute = 00; Search_DynamicField_XTimeSlotStartSecond = 00; Search_DynamicField_XTimeSlotStopYear = 2013; Search_DynamicField_XTimeSlotStopMonth = 01; Search_DynamicField_XTimeSlotStopDay = 26; Search_DynamicField_XTimeSlotStopHour = 23; Search_DynamicField_XTimeSlotStopMinute = 59; Search_DynamicField_XTimeSlotStopSecond = 59;\' dan atau \'Search_DynamicField_XTimePointFormat = minggu; Search_DynamicField_XTimePointStart = Sebelum; Search_DynamicField_XTimePointValue = 7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definisikan subobjek default dari kelas \'ITSMConfigItem\'.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definisikan jumlah baris untuk pengubah definisiCI pada antarmuka Admin';

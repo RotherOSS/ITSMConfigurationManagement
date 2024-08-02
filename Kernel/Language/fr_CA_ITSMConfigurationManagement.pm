@@ -322,8 +322,6 @@ sub Data {
         'Définit les autorisations requises pour mettre à jour les éléments de configuration ITSM à l\'aide de l\'interface générique.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Définit un module de vue d\'ensemble pour afficher la petite vue d\'une liste d\'éléments de configuration.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Définit si les étiquettes de type de lien doivent être affichées dans les connexions de nœuds.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Définit l\'attribut de recherche de l\'élément de configuration affiché par défaut pour l\'écran de recherche de l\'élément de configuration. Exemple : "Key" doit contenir le nom du champ dynamique, dans ce cas "X", "Content" doit contenir la valeur du champ dynamique en fonction du type de champ dynamique, Text : "un texte", Dropdown : "1", Date/Time : "Search_DynamicField_XTimeSlotStartYear=1974 ; Search_DynamicField_XTimeSlotStartYear=1974" : \'Search_DynamicField_XTimeSlotStartYear=1974 ; Search_DynamicField_XTimeSlotStartMonth=01 ; Search_DynamicField_XTimeSlotStartDay=26 ; Search_DynamicField_XTimeSlotStartHour=00 ; Search_DynamicField_XTimeSlotStartMinute=00 ; Search_DynamicField_XTimeSlotStartSecond=00 ; Search_DynamicField_XTimeSlotStopYear=2013 ; Search_DynamicField_XTimeSlotStopMonth=01 ; Search_DynamicField_XTimeSlotStopDay=26 ; Search_DynamicField_XTimeSlotStopHour=23 ; Search_DynamicField_XTimeSlotStopMinute=59 ; Search_DynamicField_XTimeSlotStopSecond=59 ;et ou "Search_DynamicField_XTimePointFormat=week ; Search_DynamicField_XTimePointStart=Before ; Search_DynamicField_XTimePointValue=7" ;.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Définit le sous-objet par défaut de la classe "ITSMConfigItem".';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Définit le nombre de lignes pour l\'éditeur de définition de CI dans l\'interface d\'administration.';

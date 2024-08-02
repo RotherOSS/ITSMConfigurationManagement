@@ -322,8 +322,6 @@ sub Data {
         'Define as permissões necessárias para atualizar os itens de configuração ITSM utilizando a Interface Genérica.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Define um módulo de vista geral para mostrar a vista pequena da lista de itens de configuração.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Define se as etiquetas do tipo de ligação devem ser apresentadas nas ligações dos nós.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Define o atributo de pesquisa de item de configuração mostrado por defeito para o ecrã de pesquisa de item de configuração. Exemplo: "Key" (Chave) deve ter o nome do campo dinâmico, neste caso "X", "Content" (Conteúdo) deve ter o valor do campo dinâmico, dependendo do tipo de campo dinâmico, Text (Texto): "um texto", Dropdown (Menu suspenso): "1", Date/Time (Data/Hora): \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' e ou \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Define o subobjeto por omissão da classe \'ITSMConfigItem\'.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Define o número de linhas para o editor de definição de IC na interface de administração.';

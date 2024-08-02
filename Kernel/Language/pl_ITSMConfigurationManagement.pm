@@ -322,8 +322,6 @@ sub Data {
         'Definiuje wymagane uprawnienia do aktualizacji elementów konfiguracji ITSM przy użyciu interfejsu ogólnego.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definiuje moduł przeglądu do wyświetlania małego widoku listy elementów konfiguracji.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Określa, czy etykiety typu łącza muszą być wyświetlane w połączeniach węzłów.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Określa domyślnie wyświetlany atrybut wyszukiwania elementu konfiguracji dla ekranu wyszukiwania elementu konfiguracji. Przykład: "Klucz" musi mieć nazwę pola dynamicznego, w tym przypadku "X", "Zawartość" musi mieć wartość pola dynamicznego w zależności od typu pola dynamicznego, Tekst: "tekst", Lista rozwijana: "1", Data/godzina: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' i lub \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definiuje domyślny podobiekt klasy "ITSMConfigItem".';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Określa liczbę wierszy edytora definicji CI w interfejsie administratora.';

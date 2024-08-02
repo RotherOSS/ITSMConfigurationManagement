@@ -322,8 +322,6 @@ sub Data {
         'Дефинира необходимите разрешения за актуализиране на ITSM конфигурационни елементи с помощта на общия интерфейс.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Дефинира модул за преглед, за да покаже малък изглед на списък с конфигурационни елементи.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Определя дали етикетите за типа на връзката трябва да се показват във връзките на възлите.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Дефинира показания по подразбиране атрибут за търсене на елементи на конфигурацията за екрана за търсене на елементи на конфигурацията. Пример: "Key" (Ключ) трябва да съдържа името на динамичното поле в този случай "X", "Content" (Съдържание) трябва да съдържа стойността на динамичното поле в зависимост от типа на динамичното поле, Text (Текст): "a text" (текст), Dropdown (падащо): "1" (1), Date/Time (Дата/час): "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' и или \'Search_DynamicField_XTimePointFormat=седмица; Search_DynamicField_XTimePointStart=Преди; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Дефинира подобекта по подразбиране на класа „ITSM конфигурационен елемент“.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Определя броя на редовете за редактора на КЕ дефиниции в администраторския интерфейс.';

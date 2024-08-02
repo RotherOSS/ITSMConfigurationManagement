@@ -322,8 +322,6 @@ sub Data {
         'Definește permisiunile necesare pentru actualizarea elementelor de configurare ITSM utilizând interfața generică.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definește un modul de prezentare generală pentru a afișa vizualizarea mică a unei liste de elemente de configurare.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Definește dacă etichetele tipului de legătură trebuie să fie afișate în conexiunile nodurilor.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Definește atributul de căutare a elementelor de configurare afișat în mod implicit pentru ecranul de căutare a elementelor de configurare. Exemplu: "Key" trebuie să aibă numele câmpului dinamic, în acest caz "X", "Content" trebuie să aibă valoarea câmpului dinamic în funcție de tipul de câmp dinamic, Text: "a text", Dropdown: "1", Date/Time: "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotSlotStartMinute=00; Search_DynamicField_XTimeSlotSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopStopSecond=59;\' și sau \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definește subobiectul implicit al clasei "ITSMConfigItem".';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definește numărul de rânduri pentru editorul de definiții CI din interfața de administrare.';

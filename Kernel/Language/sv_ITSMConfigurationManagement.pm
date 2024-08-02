@@ -322,8 +322,6 @@ sub Data {
         'Definierar nödvändiga behörigheter för att uppdatera ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definierar en översiktsmodul som visar den lilla vyn av en lista med konfigurationsobjekt.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Definierar om länktypens etiketter måste visas i nodanslutningarna.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Definierar standardattributet för sökning av konfigurationsobjekt som visas på skärmen för sökning av konfigurationsobjekt. Exempel: "Key" måste ha namnet på det dynamiska fältet i det här fallet "X", "Content" måste ha värdet på det dynamiska fältet beroende på typen av dynamiskt fält, Text: "a text", Dropdown: "1", Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' och eller \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definierar standardunderobjektet för klassen \'ITSMConfigItem\'.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Anger antal rader för KE-editorn i admingränssnittet.';

@@ -1700,3 +1700,7 @@ msgstr ""
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
 
+#. SysConfig
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr ""
+

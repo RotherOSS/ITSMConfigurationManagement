@@ -322,8 +322,6 @@ sub Data {
         'Definuje požadované oprávnenia na aktualizáciu konfiguračných položiek ITSM pomocou všeobecného rozhrania.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definuje modul prehľadu na zobrazenie malého zobrazenia zoznamu konfiguračných položiek.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Definuje, či sa v spojeniach uzlov musia zobrazovať značky typu spojenia.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Definuje predvolený zobrazený atribút vyhľadávania konfiguračných položiek pre obrazovku vyhľadávania konfiguračných položiek. Príklad: "Key" (Kľúč) musí mať názov dynamického poľa v tomto prípade "X", "Content" (Obsah) musí mať hodnotu dynamického poľa v závislosti od typu dynamického poľa, Text: "a text", Dropdown: "1", Date/Time: "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' a alebo \'Search_DynamicField_XTimePointFormat=týždeň; Search_DynamicField_XTimePointStart=Pred; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definuje predvolený podobjekt triedy "ITSMConfigItem".';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Definuje počet riadkov pre editor definícií CI v rozhraní správcu.';

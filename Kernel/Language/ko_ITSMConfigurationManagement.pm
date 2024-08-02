@@ -322,8 +322,6 @@ sub Data {
         '일반 인터페이스를 사용하여 ITSM 구성 항목을 업데이트하는 데 필요한 권한을 정의합니다.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '구성 항목 목록의 작은 보기를 표시하는 개요 모듈을 정의합니다.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         '노드 연결에 링크 유형 레이블을 표시할지 여부를 정의합니다.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         '구성 항목 검색 화면에 기본적으로 표시되는 구성 항목 검색 속성을 정의합니다. 예: "키"는 동적 필드의 이름(이 경우 \'X\'), "콘텐츠"는 동적 필드 유형에 따라 동적 필드의 값(텍스트: \'텍스트\', 드롭다운: \'1\', 날짜/시간)이어야 합니다: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00\'; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' 및 또는 \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '\'ITSMConfigItem\' 클래스의 기본 하위 객체를 정의합니다.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         '관리자 인터페이스에서 CI 정의 편집기의 행 수를 정의합니다.';

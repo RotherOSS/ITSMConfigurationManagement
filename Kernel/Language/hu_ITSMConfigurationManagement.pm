@@ -322,8 +322,6 @@ sub Data {
         'Meghatározza a szükséges jogosultságokat az ITSM konfigurációelemek frissítéséhez az általános felület használatával.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Egy áttekintő modult határoz meg egy konfigurációelem lista kis nézetének megjelenítéséhez.';
-    $Self->{Translation}->{'Defines if parent-child translations for queues and services should be generated automatically.'} =
-        '';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
         'Meghatározza, hogy a csomópontkapcsolatokban meg kell-e jeleníteni a kapcsolattípus címkéit.';
     $Self->{Translation}->{'Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages.'} =
@@ -351,9 +349,7 @@ sub Data {
         'Meghatározza az alapértelmezett megjelenített konfigurációs elem keresési attribútumot a konfigurációs elem keresési képernyőn. Példa: "Key" a dinamikus mező neve, ebben az esetben \'X\', "Content" a dinamikus mező értéke a dinamikus mező típusától függően, Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' és vagy \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Meghatározza az „ITSMConfigItem” osztály alapértelmezett alobjektumát.';
-    $Self->{Translation}->{'Defines the initial height for the rich text editor component in pixels.'} =
-        '';
-    $Self->{Translation}->{'Defines the initial height in pixels for the rich text editor component for this screen.'} =
+    $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Meghatározza a CI meghatározás-szerkesztő sorainak számát az adminisztrációs felületen.';
