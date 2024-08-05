@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 415ec8721a5ed329868db3cf7b81471463bcf8c6 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - db349fdf2f9c36b3b68696b776c967087c96686a - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -371,7 +371,7 @@ EOF
 
     my $AdditionalText;
     if ( $Param{UseLabelHints} ) {
-        $AdditionalText = Translatable('e.g. Text or Te*t');
+        $AdditionalText = Translatable('Notice: search in lens fields is currently disabled');
     }
 
     # call EditLabelRender on the common Driver
