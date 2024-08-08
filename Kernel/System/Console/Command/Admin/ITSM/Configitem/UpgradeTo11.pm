@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -314,7 +314,7 @@ sub _PrepareDefinitions {
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         my $FilenameClean = $MainObject->FilenameCleanUp(
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+            Filename => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
         );
 
         # Skip the class when there is no attribute mapping.
@@ -415,7 +415,7 @@ sub _MigrateDefinitions {
         for my $Definition ( $Self->{DefinitionList}{$ClassID}->@* ) {
 
             my $FilenameClean = $MainObject->FilenameCleanUp(
-                Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Filename => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
             );
 
             # skip definitions if files are not provided; TODO: only skip without error if this is for the whole class
@@ -439,7 +439,7 @@ sub _MigrateDefinitions {
             }
 
             $FilenameClean = $MainObject->FilenameCleanUp(
-                Filename  => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
+                Filename => $Self->{ClassList}{$ClassID} . '_DFDefinition_' . $Definition->{DefinitionID} . '.yml',
             );
 
             my $DynamicFieldYAML = $MainObject->FileRead(
@@ -658,7 +658,7 @@ sub _MigrateAttributeData {
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
         my $FilenameClean = $MainObject->FilenameCleanUp(
-            Filename  => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
+            Filename => 'AttributeMap_' . $Self->{ClassList}{$ClassID} . '.yml',
         );
 
         # Skip the class when there is no attribute mapping.
@@ -1068,7 +1068,8 @@ END_YAML
         );
 
         if ( !%DFSpecific ) {
-            $Self->Print("<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}'; DefinitionID: '$Param{DefinitionID}') - skipping attribute!</red>\n");
+            $Self->Print(
+                "<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}'; DefinitionID: '$Param{DefinitionID}') - skipping attribute!</red>\n");
 
             next ATTRIBUTE;
         }
@@ -1184,7 +1185,9 @@ sub _DFConfigFromLegacy {
             );
 
             if ( !%DFSpecific ) {
-                $Self->Print("<red>Could not convert sub attribute '$Attribute->{Name}' ($Param{Attribute}{Key}::$Attribute->{Key}) to DynamicField (Class: '$Param{Class}';  DefinitionID: '$Param{DefinitionID}') - skipped attribute!</red>\n");
+                $Self->Print(
+                    "<red>Could not convert sub attribute '$Attribute->{Name}' ($Param{Attribute}{Key}::$Attribute->{Key}) to DynamicField (Class: '$Param{Class}';  DefinitionID: '$Param{DefinitionID}') - skipped attribute!</red>\n"
+                );
 
                 next ATTRIBUTE;
             }

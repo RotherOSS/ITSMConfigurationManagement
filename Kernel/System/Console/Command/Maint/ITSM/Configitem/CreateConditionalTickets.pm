@@ -1,12 +1,19 @@
 # --
-# Copyright (C) 2020 Rother OSS GmbH, https://rother-oss.com/
+# OTOBO is a web-based ticketing system for service organisations.
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Maint::ITSM::ConfigItem::CreateConditionalTickets;
+package Kernel::System::Console::Command::Maint::ITSM::Configitem::CreateConditionalTickets;
 
 use strict;
 use warnings;
@@ -16,7 +23,15 @@ use parent qw(Kernel::System::Console::BaseCommand);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config'
+    'Kernel::Config',
+    'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::GeneralCatalog',
+    'Kernel::System::ITSMConfigItem',
+    'Kernel::System::LinkObject',
+    'Kernel::System::Log',
+    'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
 );
 
 sub Configure {
@@ -45,22 +60,26 @@ sub Run {
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    my %ClassList = reverse %{$GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    )};
-    my %DeplStateList = reverse %{$GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::DeploymentState',
-    )};
+    my %ClassList = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        )
+    };
+    my %DeplStateList = reverse %{
+        $GeneralCatalogObject->ItemList(
+            Class => 'ITSM::ConfigItem::DeploymentState',
+        )
+    };
 
     # go through all configured notification setups
     CONFIG:
-    for my $Config ( values %{ $NotificationConfigs } ) {
-        
+    for my $Config ( values %{$NotificationConfigs} ) {
+
         # get class and deployment state ids
-        my $ClassID = $ClassList{ $Config->{Class} };
+        my $ClassID      = $ClassList{ $Config->{Class} };
         my $DeplStateIDs = [ map { $DeplStateList{$_} } @{ $Config->{ActiveDeploymentStates} } ];
 
-        if ( !$ClassID || !IsArrayRefWithData( $DeplStateIDs ) ) {
+        if ( !$ClassID || !IsArrayRefWithData($DeplStateIDs) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "No class '$Config->{Class}', or valid deployment states configured!",
@@ -69,14 +88,14 @@ sub Run {
         }
 
         my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
-            ClassIDs     => [ $ClassID ],
+            ClassIDs     => [$ClassID],
             DeplStateIDs => $DeplStateIDs,
             Result       => 'ARRAY',
         );
 
         # go through all config items
         CONFIGITEMID:
-        for my $ConfigItemID ( @ConfigItemIDs ) {
+        for my $ConfigItemID (@ConfigItemIDs) {
             my $LastVersion = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID => $ConfigItemID,
             );
@@ -91,31 +110,33 @@ sub Run {
 
             # define the trigger date;
             my $TriggerDateObject;
+
             # date field format
             if ( $LastVersion->{ $Config->{TimeCIKey} } =~ /^(\d+)-(\d+)-(\d+)/ ) {
                 $TriggerDateObject = $Kernel::OM->Create(
                     'Kernel::System::DateTime',
                     ObjectParams => {
-                        Year     => $1,
-                        Month    => $2,
-                        Day      => $3,
-                        Hour     => 0,
-                        Minute   => 0,
-                        Second   => 0,
+                        Year   => $1,
+                        Month  => $2,
+                        Day    => $3,
+                        Hour   => 0,
+                        Minute => 0,
+                        Second => 0,
                     }
                 );
             }
+
             # try old text field format
             elsif ( $LastVersion->{ $Config->{TimeCIKey} } =~ /^\s*(\d+)\.\s*(\d+)\.\s*(\d+)\s*(\d*):?\s*(\d*):?\s*(\d*)/ ) {
                 $TriggerDateObject = $Kernel::OM->Create(
                     'Kernel::System::DateTime',
                     ObjectParams => {
-                        Year     => $3,
-                        Month    => $2,
-                        Day      => $1,
-                        Hour     => $4 || 0,
-                        Minute   => $5 || 0,
-                        Second   => $6 || 0,
+                        Year   => $3,
+                        Month  => $2,
+                        Day    => $1,
+                        Hour   => $4 || 0,
+                        Minute => $5 || 0,
+                        Second => $6 || 0,
                     }
                 );
             }
@@ -129,7 +150,7 @@ sub Run {
 
             # prepare the modifier
             my ( $Sign, $Summand, $Unit ) = ( $Config->{TimeModifier} =~ /^\s*([+-]?)\s*(\d+)\s*([dhm]?)/ );
-            $Summand *= (  $Sign && $Sign eq '-' ) ? -1 : 1;
+            $Summand *= ( $Sign && $Sign eq '-' )  ? -1 : 1;
             $Summand *= ( !$Unit || $Unit eq 'd' ) ? 86400 :
                 ( $Unit eq 'h' ) ? 3600 : 60;
 
@@ -160,7 +181,12 @@ sub Run {
                 );
 
                 # skip config item, if an open ticket was already created
-                if ( $Ticket{ 'DynamicField_'.$Config->{Ticket}{DynamicField} } && $Ticket{ 'DynamicField_'.$Config->{Ticket}{DynamicField} } == 1 && $Ticket{StateType} ne "closed") {
+                if (
+                    $Ticket{ 'DynamicField_' . $Config->{Ticket}{DynamicField} }
+                    && $Ticket{ 'DynamicField_' . $Config->{Ticket}{DynamicField} } == 1
+                    && $Ticket{StateType} ne "closed"
+                    )
+                {
                     next CONFIGITEMID;
                 }
             }
@@ -174,11 +200,11 @@ sub Run {
             my %DefinitionRefs = map { $_->{Key} => $_ } @{ $LastVersion->{DefinitionRef} };
 
             SUBKEY:
-            for my $Key ( ( $Config->{Ticket}{Title}.$Config->{Ticket}{Text} ) =~ /<OTOBO_CONFIGITEM_([^>]+)>/g ) {
+            for my $Key ( ( $Config->{Ticket}{Title} . $Config->{Ticket}{Text} ) =~ /<OTOBO_CONFIGITEM_([^>]+)>/g ) {
                 next SUBKEY if exists $Substitutions{"<OTOBO_CONFIGITEM_$Key>"};
-                next SUBKEY if !$LastVersion->{ $Key };
+                next SUBKEY if !$LastVersion->{$Key};
 
-                $Substitutions{"<OTOBO_CONFIGITEM_$Key>"} = $LastVersion->{ $Key } // '';
+                $Substitutions{"<OTOBO_CONFIGITEM_$Key>"} = $LastVersion->{$Key} // '';
             }
 
             my $TicketTitle      = $Config->{Ticket}{Title};
@@ -190,21 +216,21 @@ sub Run {
 
             # all checks finished -> create a ticket as notification
             my $TicketID = $TicketObject->TicketCreate(
-                TN            => $TicketObject->TicketCreateNumber(),
-                Title         => $TicketTitle,
-                Queue         => $Config->{Ticket}{Queue},
-                Lock          => $Config->{Ticket}{Lock} || 'unlock',
-                Priority      => $Config->{Ticket}{Priority} || '3 normal',
-                State         => $Config->{Ticket}{State} || 'new',
-                Type          => $Config->{Ticket}{Type} || '',
-                Service       => $Config->{Ticket}{Service} || '',
-                SLA           => $Config->{Ticket}{SLA} || '',
-                CustomerID    => $Config->{Ticket}{CustomerID} || '',
-                CustomerUser  => $Config->{Ticket}{CustomerUser} || '',
-                OwnerID       => $Config->{Ticket}{OwnerID} || '1',
-                UserID        => 1,
+                TN           => $TicketObject->TicketCreateNumber(),
+                Title        => $TicketTitle,
+                Queue        => $Config->{Ticket}{Queue},
+                Lock         => $Config->{Ticket}{Lock}         || 'unlock',
+                Priority     => $Config->{Ticket}{Priority}     || '3 normal',
+                State        => $Config->{Ticket}{State}        || 'new',
+                Type         => $Config->{Ticket}{Type}         || '',
+                Service      => $Config->{Ticket}{Service}      || '',
+                SLA          => $Config->{Ticket}{SLA}          || '',
+                CustomerID   => $Config->{Ticket}{CustomerID}   || '',
+                CustomerUser => $Config->{Ticket}{CustomerUser} || '',
+                OwnerID      => $Config->{Ticket}{OwnerID}      || '1',
+                UserID       => 1,
             );
-            if (!$TicketID) {
+            if ( !$TicketID ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "Could not create a ticket for ConfigItemID: $ConfigItemID!",
@@ -214,17 +240,17 @@ sub Run {
 
             # do article db insert
             my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
-            my $ArticleID = $InternalArticleBackendObject->ArticleCreate(
-                TicketID         => $TicketID,
-                ArticleType      => $Config->{Ticket}{ArticleType} || 'note-report',
-                SenderType       => $Config->{Ticket}{SenderType} || 'system',
-                ContentType      => 'text/plain; charset=ISO-8859-15',
-                Body             => $NotificationText,
-                Subject          => $TicketTitle,
+            my $ArticleID                    = $InternalArticleBackendObject->ArticleCreate(
+                TicketID             => $TicketID,
+                ArticleType          => $Config->{Ticket}{ArticleType} || 'note-report',
+                SenderType           => $Config->{Ticket}{SenderType}  || 'system',
+                ContentType          => 'text/plain; charset=ISO-8859-15',
+                Body                 => $NotificationText,
+                Subject              => $TicketTitle,
                 IsVisibleForCustomer => 0,
-                UserID           => 1,
-                HistoryType      => 'NewTicket',
-                HistoryComment   => "\%\% RotherOSS-CMDBNotification",
+                UserID               => 1,
+                HistoryType          => 'NewTicket',
+                HistoryComment       => "\%\% RotherOSS-CMDBNotification",
             );
 
             # close ticket if article create failed!

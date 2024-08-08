@@ -1,12 +1,17 @@
-# Rother OSS
 # --
-# Kernel/System/ITSMConfigItem/Event/DoLinkCount.pm - a event module for config items
+# OTOBO is a web-based ticketing system for service organisations.
+# --
 # Copyright (C) 2014-2018 Rother OSS Enterprises, http://otrs.ch/
-# Copyright (C) 2019-2022 Rother OSS GmbH, https://rother-oss.com/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (AGPL). If you
-# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
 package Kernel::System::ITSMConfigItem::Event::DoLinkCount;
@@ -15,14 +20,15 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::ITSMConfigItem',
-    'Kernel::System::Log',
     'Kernel::Config',
+    'Kernel::System::ITSMConfigItem',
+    'Kernel::System::LinkObject',
+    'Kernel::System::Log',
 );
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::DoLinkCount - Event handler that count licenses using linked CI´s
+Kernel::System::ITSMConfigItem::Event::DoLinkCount - Event handler that count licenses using linked CI's
 
 =head1 SYNOPSIS
 

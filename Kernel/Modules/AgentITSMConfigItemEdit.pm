@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -241,7 +241,7 @@ sub Run {
         ) // [];
 
         for my $FieldName ( $ActiveFields->@* ) {
-            push @{ $DynamicFieldList }, $Definition->{DynamicFieldRef}{$FieldName};
+            push @{$DynamicFieldList}, $Definition->{DynamicFieldRef}{$FieldName};
         }
 
         # get general form data
@@ -1401,8 +1401,8 @@ sub Run {
 
                 next SECTION unless $HTML =~ /\w/;
 
-                my ( $SectionHeader ) = grep { $_->{Header} } $Section->{Content}->@*;
-                if ( $SectionHeader ) {
+                my ($SectionHeader) = grep { $_->{Header} } $Section->{Content}->@*;
+                if ($SectionHeader) {
                     $PageDynamicFieldHTML .= $LayoutObject->Output(
                         Template => $SectionHeaderTemplate,
                         Data     => {
@@ -1434,17 +1434,17 @@ sub Run {
         if ( scalar @PageHTML > 1 ) {
             my $HeaderTemplate = '<div class="Row Row_PageHeader"><h2>[% Translate(Data.Name) | html %]</h2><hr/></div>';
 
-            for my $Page ( @PageHTML ) {
+            for my $Page (@PageHTML) {
                 $DynamicFieldHTML .= $LayoutObject->Output(
                     Template => $HeaderTemplate,
                     Data     => {
                         Name => $Page->{Name},
                     },
                 );
-                $DynamicFieldHTML .= $Page->{HTML},
+                $DynamicFieldHTML .= $Page->{HTML};
             }
 
-            if ( $ShowDescription ) {
+            if ($ShowDescription) {
                 $DynamicFieldHTML .= $LayoutObject->Output(
                     Template => $HeaderTemplate,
                     Data     => {
@@ -1453,11 +1453,11 @@ sub Run {
                 );
             }
         }
-        elsif ( @PageHTML ) {
-            $DynamicFieldHTML .= $PageHTML[0]{HTML},
+        elsif (@PageHTML) {
+            $DynamicFieldHTML .= $PageHTML[0]{HTML};
         }
 
-        if ( $ShowDescription ) {
+        if ($ShowDescription) {
             $LayoutObject->Block(
                 Name => 'RowDescription',
                 Data => {
