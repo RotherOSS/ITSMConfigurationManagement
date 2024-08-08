@@ -28,8 +28,6 @@ use List::Util qw(any);
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
 
-use Data::Dumper;
-
 our $ObjectManagerDisabled = 1;
 
 sub new {
