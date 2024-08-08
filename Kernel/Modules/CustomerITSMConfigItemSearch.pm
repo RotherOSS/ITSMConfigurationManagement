@@ -28,6 +28,8 @@ use List::Util qw(any);
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
 
+use Data::Dumper;
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -228,7 +230,7 @@ sub Run {
             $LinkSort .= ";$SearchParam=" . $LayoutObject->Ascii2Html( Text => $GetParam{$SearchParam} );
         }
 
-        my @ArraySearchParams = qw(Classes);
+        my @ArraySearchParams = qw(ClassIDs);
 
         if ( $Config->{DeploymentState} ) {
             push @ArraySearchParams, 'DeplStateIDs';
@@ -344,10 +346,6 @@ sub Run {
             $Output .= $LayoutObject->CustomerFooter();
 
             return $Output;
-        }
-
-        else {
-            $SearchConfig{Classes} = $PermissionConditionConfig->{Classes};
         }
 
         # merge filtered deployment states with permission condition deployment states
