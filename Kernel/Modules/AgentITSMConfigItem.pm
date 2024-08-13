@@ -396,6 +396,7 @@ sub Run {
         {
             @OriginalViewableConfigItems = $ConfigItemObject->ConfigItemSearch(
                 %{ $Filters{$Filter}->{Search} },
+                %ColumnFilter,
                 Limit  => $Limit,
                 Result => 'ARRAY',
             );
@@ -521,7 +522,7 @@ sub Run {
         GetColumnFilter       => \%GetColumnFilter,
         LastColumnFilter      => $LastColumnFilter,
         Action                => 'AgentITSMConfigItem',
-        Total                 => $CountTotal,
+        Total                 => scalar @OriginalViewableConfigItems,
         RequestedURL          => $Self->{RequestedURL},
         View                  => $View,
         Bulk                  => 1,
