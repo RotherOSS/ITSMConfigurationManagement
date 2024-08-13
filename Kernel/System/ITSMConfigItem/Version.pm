@@ -739,11 +739,22 @@ END_SQL
             Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
             UserID             => $Param{UserID},
             ConfigItemHandled  => 1,
+            ExternalSource     => $Param{ExternalSource},
         );
 
         # only throw events for fields changed from the last version - checked by ConfigItemUpdate()
         if ( $Success && exists $Param{ 'DynamicField_' . $DynamicField->{Name} } ) {
             push @UpdatedDynamicFields, $DynamicField->{Name};
+        }
+
+        # update version data with actual dynamic field values
+        # important in case of reference fields
+        if ( $Param{ExternalSource} && $DynamicField->{Config}{ImportSearchAttribute} ) {
+            my $Value = $DynamicFieldBackendObject->ValueGet(
+                DynamicFieldConfig => $DynamicField,
+                ObjectID           => $VersionID,
+            );
+            $Version{ 'DynamicField_' . $DynamicField->{Name} } = $Value;
         }
     }
 
@@ -1027,10 +1038,21 @@ END_SQL
             Value              => $Param{$Attribute},
             UserID             => $Param{UserID},
             ConfigItemHandled  => 1,
+            ExternalSource     => $Param{ExternalSource},
         );
 
         if ($Success) {
             push @UpdatedDynamicFields, $DynamicField->{Name};
+        }
+
+        # update version data with actual dynamic field values
+        # important in case of reference fields
+        if ( $Param{ExternalSource} && $DynamicField->{Config}{ImportSearchAttribute} ) {
+            my $Value = $DynamicFieldBackendObject->ValueGet(
+                DynamicFieldConfig => $DynamicField,
+                ObjectID           => $Version->{VersionID},
+            );
+            $Param{$Attribute} = $Value;
         }
     }
 

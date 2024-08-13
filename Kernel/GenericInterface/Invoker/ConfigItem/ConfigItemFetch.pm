@@ -398,9 +398,10 @@ sub HandleResponse {
             $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                DeplStateID => $RequiredAttributes{DeploymentStateID},
-                InciStateID => $RequiredAttributes{IncidentStateID},
-                UserID      => 1,
+                DeplStateID    => $RequiredAttributes{DeploymentStateID},
+                InciStateID    => $RequiredAttributes{IncidentStateID},
+                UserID         => 1,
+                ExternalSource => 1,
             );
 
             if ( !$ConfigItemID ) {

@@ -1397,6 +1397,7 @@ sub ImportDataSave {
             InciStateID  => $VersionData->{InciStateID},
             UserID       => $Param{UserID},
             $MergedDFData->%*,
+            ExternalSource => 1,
         );
 
         if ( !$VersionID ) {
@@ -1426,12 +1427,13 @@ sub ImportDataSave {
 
         # no config item was found, so add new config item
         my $ConfigItemID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemAdd(
-            ClassID      => $ObjectData->{ClassID},
-            Name         => $VersionData->{Name},
-            DefinitionID => $Definition->{DefinitionID},
-            DeplStateID  => $VersionData->{DeplStateID},
-            InciStateID  => $VersionData->{InciStateID},
-            UserID       => $Param{UserID},
+            ClassID        => $ObjectData->{ClassID},
+            Name           => $VersionData->{Name},
+            DefinitionID   => $Definition->{DefinitionID},
+            DeplStateID    => $VersionData->{DeplStateID},
+            InciStateID    => $VersionData->{InciStateID},
+            UserID         => $Param{UserID},
+            ExternalSource => 1,
             %DFVersionData,
         );
 
