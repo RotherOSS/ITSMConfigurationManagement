@@ -39,6 +39,7 @@ our @ObjectDependencies = (
     'Kernel::System::ImportExport',
     'Kernel::System::JSON',
     'Kernel::System::Log',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME
@@ -1696,17 +1697,45 @@ sub _DFImportSearchDataPrepare {
     for my $DFName ( sort keys $Param{DynamicFieldRef}->%* ) {
 
         my $DynamicFieldConfig = $Param{DynamicFieldRef}->{$DFName};
-        my $DFName             = $DynamicFieldConfig->{Name};
 
         # create key
         my $Key = join '::',
             ( $Param{Prefix} || () ),
             $DFName;
 
-        next DF_NAME unless $Param{Identifier}->{$Key};
+        next DF_NAME unless $Param{Identifier}->{"DynamicField_$Key"};
 
         # TODO: this is broken for multivalue dynamic fields
-        $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{SearchData}->{$Key} ] };
+        $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{Identifier}->{"DynamicField_$Key"} ] };
+
+        # check if value transformation is neccessary
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $IsReferenceField          = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsReferenceField',
+        );
+        if ($IsReferenceField) {
+
+            my $Value = $Param{Identifier}->{"DynamicField_$Key"};
+
+            next DF_NAME unless $Value;
+
+            # TODO skipping multivalue fields
+            next DF_NAME if ref $Value;
+
+            # perform search based on value and previously fetched data
+            my @ObjectIDs = $DynamicFieldBackendObject->SearchObjects(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Term               => $Value,
+                ExternalSource     => 1,
+                ParamObject        => $Kernel::OM->Get('Kernel::System::Web::Request'),    ## nofilter(TidyAll::Plugin::OTOBO::Perl::ParamObject)
+                UserID             => $Param{UserID},
+            );
+
+            if ( scalar @ObjectIDs == 1 ) {
+                $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $ObjectIDs[0] ] };
+            }
+        }
 
         # TODO: handle Sets
         next DF_NAME unless $DynamicFieldConfig->{Sub};
