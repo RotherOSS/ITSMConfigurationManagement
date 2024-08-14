@@ -150,7 +150,7 @@ sub new {
             Name => $FieldName,
         );
 
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELDNAME if !IsHashRefWithData($DynamicFieldConfig);
 
         # store field config
         if ( $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem' ) {
