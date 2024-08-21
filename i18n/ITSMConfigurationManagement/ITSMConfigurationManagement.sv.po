@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Swedish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/sv/>\n"
+"Language-Team: Swedish <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,16 +3252,23 @@ msgstr "Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fä
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
+"Definierar den initiala höjden för redigeringskomponenten för rik text i "
+"pixlar."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Anger om parent-child-översättningar för köer och tjänster ska genereras "
+"automatiskt."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Definierar den initiala höjden i pixlar för redigeringskomponenten för rik "
+"text för den här skärmen."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Definierar höjden för redigeringskomponenten för rik text för den här "
+"skärmen. Ange antal (pixlar) eller procentvärde (relativt)."
