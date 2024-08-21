@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Korean <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ko/>\n"
 "Language: ko\n"
@@ -3264,4 +3264,5 @@ msgstr "이 화면의 서식 있는 텍스트 편집기 구성 요소의 초기 
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "이 화면의 서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) "
+"또는 퍼센트 값 (상대)을 입력하십시오."
