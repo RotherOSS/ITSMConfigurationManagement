@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Slovak <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/sk/>\n"
+"Language-Team: Slovak <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sk/>\n"
 "Language: sk_SK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3250,17 +3251,22 @@ msgstr "Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závis
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
+msgstr "Definuje počiatočnú výšku komponentu textového editora v pixeloch."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Definuje, či sa majú automaticky generovať preklady rodič-dieťa pre fronty a "
+"služby."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Definuje počiatočnú výšku v pixeloch pre komponent textového editora pre "
+"túto obrazovku."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Definuje výšku komponentu textového editora pre túto obrazovku. Zadajte "
+"číslo (pixely) alebo percentuálnu hodnotu (relatívnu)."
