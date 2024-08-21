@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Danish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/da/>\n"
+"Language-Team: Danish <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,16 +3252,22 @@ msgstr "Med denne indstilling er det muligt automatisk at udfylde et CI-felt afh
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
+"Definerer den oprindelige højde for rich text editor-komponenten i pixels."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Angiver, om forældre-barn-oversættelser for køer og tjenester skal genereres "
+"automatisk."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Definerer den oprindelige højde i pixel for rich text-editor-komponenten for "
+"denne skærm."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Definerer højden for Rich Text Editor-komponenten for denne skærm. Indtast "
+"tal (pixels) eller procentværdi (relativ)."
