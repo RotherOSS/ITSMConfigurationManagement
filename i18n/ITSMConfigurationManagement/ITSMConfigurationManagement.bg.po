@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/bg/>\n"
+"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,16 +3252,23 @@ msgstr "С тази опция е възможно автоматично да �
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
+"Дефинира първоначалната височина на компонента за редактор на богат текст в "
+"пиксели."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Определя дали преводите родител-дете за опашки и услуги да се генерират "
+"автоматично."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Дефинира първоначалната височина в пиксели за компонента на богатия текстов "
+"редактор за този екран."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Определя височината на компонента на редактора за богат текст за този екран. "
+"Въведете число (пиксели) или процентна стойност (относителна)."
