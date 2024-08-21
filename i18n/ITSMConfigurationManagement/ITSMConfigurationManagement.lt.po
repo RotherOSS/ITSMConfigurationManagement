@@ -2,14 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/lt/>\n"
+"Language-Team: Lithuanian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
+"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
+"1 : 2);\n"
 "X-Generator: Weblate 5.4.2\n"
 
 #. Template: AdminITSMConfigItem
@@ -3250,17 +3253,22 @@ msgstr "Naudojant šią parinktį galima automatiškai užpildyti CI lauką, ats
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
+msgstr "Nustato pradinį teksto redaktoriaus komponento aukštį pikseliais."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Nustato, ar eilių ir paslaugų tėvų ir vaikų vertimai turėtų būti generuojami "
+"automatiškai."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Apibrėžia pradinį teksto redaktoriaus komponento pradinį aukštį pikseliais "
+"šiame ekrane."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Nustato šio ekrano teksto redaktoriaus komponento aukštį. Įveskite skaičių "
+"(pikseliai) arba procentinę vertę (santykinė)."
