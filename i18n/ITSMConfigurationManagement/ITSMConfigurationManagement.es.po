@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:09+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Spanish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/es/>\n"
+"Language-Team: Spanish <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,16 +3252,23 @@ msgstr "Con esta opción es posible rellenar automáticamente un campo CI, depen
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
+"Define la altura inicial del componente editor de texto enriquecido en "
+"píxeles."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Define si las traducciones padre-hijo para colas y servicios deben generarse "
+"automáticamente."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Define la altura inicial en píxeles del componente editor de texto "
+"enriquecido para esta pantalla."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
+"Define la altura del componente editor de texto enriquecido para esta "
+"pantalla. Introduzca un número (píxeles) o un valor porcentual (relativo)."
