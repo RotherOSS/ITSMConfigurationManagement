@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language-Team: Indonesian <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/id/>\n"
 "Language: id\n"
@@ -3251,15 +3251,19 @@ msgstr "Dengan opsi ini, dimungkinkan untuk mengisi bidang CI secara otomatis, t
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
+msgstr "Menentukan tinggi awal untuk komponen editor teks kaya dalam piksel."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Menentukan apakah terjemahan induk-anak untuk antrean dan layanan harus "
+"dibuat secara otomatis."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Menentukan tinggi awal dalam piksel untuk komponen editor teks kaya untuk "
+"layar ini."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
