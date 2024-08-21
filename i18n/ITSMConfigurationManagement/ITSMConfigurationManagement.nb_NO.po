@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-07-26 07:13+0000\n"
+"PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Norwegian Bokmål <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/nb_NO/>\n"
+"Language-Team: Norwegian Bokmål <http://weblate.otobo.org/projects/"
+"opm-packages/itsm-configurationmanagement/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,16 +3252,21 @@ msgstr "Med dette alternativet er det mulig å fylle ut et CI-felt automatisk, a
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
 msgstr ""
+"Definerer den opprinnelige høyden for redigeringskomponenten for rik tekst i "
+"piksler."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"Angir om foreldre-barn-oversettelser for køer og tjenester skal genereres "
+"automatisk."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
 msgstr ""
+"Definerer den opprinnelige høyden i piksler for redigeringskomponenten for "
+"rik tekst for denne skjermen."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
-
