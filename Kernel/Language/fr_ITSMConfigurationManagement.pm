@@ -350,7 +350,7 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Définit le sous-objet par défaut de la classe "ITSMConfigItem".';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
-        '';
+        'Définit la hauteur du composant de l\'éditeur de texte enrichi pour cet écran. Entrez un nombre (pixels) ou une valeur en pourcentage (relative).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Définit le nombre de lignes pour l\'éditeur de définition de CI dans l\'interface d\'administration.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =

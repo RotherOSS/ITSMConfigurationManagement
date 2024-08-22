@@ -350,7 +350,7 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
-        '';
+        'تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن برای این صفحه نمایش. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         '';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =

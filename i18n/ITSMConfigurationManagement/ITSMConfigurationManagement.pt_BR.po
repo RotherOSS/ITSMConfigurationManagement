@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Portuguese (Brazil) <http://weblate.otobo.org/projects/"
-"opm-packages/itsm-configurationmanagement/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3255,18 +3254,13 @@ msgstr "Define a altura inicial do componente do editor de rich text em pixels."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr ""
-"Define se as traduções pai-filho para filas e serviços devem ser geradas "
-"automaticamente."
+msgstr "Define se as traduções pai-filho para filas e serviços devem ser geradas automaticamente."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
-"Define a altura inicial em pixels do componente do editor de rich text para "
-"essa tela."
+msgstr "Define a altura inicial em pixels do componente do editor de rich text para essa tela."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
-"Define a altura do componente de edição rich text desta tela. Registre um "
-"número (pixels) ou uma porcentagem (relativo)."
+msgstr "Define a altura do componente de edição rich text desta tela. Registre um número (pixels) ou uma porcentagem (relativo)."
+

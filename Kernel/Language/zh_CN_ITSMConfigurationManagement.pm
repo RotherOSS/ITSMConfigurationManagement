@@ -350,7 +350,7 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '定义\'ITSMConfigItem\'类的默认子对象。';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
-        '';
+        '定义本屏幕富文本编辑器组件的高度。输入数值（像素值）或百分比值（相对值）。';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         '定义在系统管理面板中修改配置项定义的编辑器的行数。';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =

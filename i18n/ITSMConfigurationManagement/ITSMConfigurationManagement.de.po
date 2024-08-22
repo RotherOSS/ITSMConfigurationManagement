@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: German <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/de/>\n"
+"Language-Team: German <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,23 +3250,17 @@ msgstr "Mit dieser Option ist es möglich, ein CI-Feld automatisch zu füllen, a
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
-"Legt die Anfangshöhe für die Rich-Text-Editor-Komponente in Pixeln fest."
+msgstr "Legt die Anfangshöhe für die Rich-Text-Editor-Komponente in Pixeln fest."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr ""
-"Legt fest, ob Eltern-Kind-Übersetzungen für Warteschlangen und Dienste "
-"automatisch erstellt werden sollen."
+msgstr "Legt fest, ob Eltern-Kind-Übersetzungen für Warteschlangen und Dienste automatisch erstellt werden sollen."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
-"Definiert die Anfangshöhe in Pixeln für die Rich-Text-Editor-Komponente für "
-"diesen Bildschirm."
+msgstr "Definiert die Anfangshöhe in Pixeln für die Rich-Text-Editor-Komponente für diesen Bildschirm."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
-"Definiert die Höhe der RichText-Editor Komponente. Geben Sie einen Zahlen- "
-"(Pixel) oder Prozenwert (relativ) an."
+msgstr "Definiert die Höhe der RichText-Editor Komponente. Geben Sie einen Zahlen- (Pixel) oder Prozenwert (relativ) an."
+

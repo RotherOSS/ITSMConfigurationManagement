@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Dutch <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/nl/>\n"
+"Language-Team: Dutch <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,23 +3250,17 @@ msgstr "Met deze optie is het mogelijk om automatisch een CI-veld te vullen, afh
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
-"Bepaalt de initiële hoogte voor de rich text editor component in pixels."
+msgstr "Bepaalt de initiële hoogte voor de rich text editor component in pixels."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr ""
-"Definieert of ouder-kind vertalingen voor wachtrijen en diensten automatisch "
-"moeten worden gegenereerd."
+msgstr "Definieert of ouder-kind vertalingen voor wachtrijen en diensten automatisch moeten worden gegenereerd."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
-"Definieert de initiële hoogte in pixels voor de rich tekst editor component "
-"voor dit scherm."
+msgstr "Definieert de initiële hoogte in pixels voor de rich tekst editor component voor dit scherm."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
-"Bepaalt de hoogte voor de rich text editorcomponent voor dit scherm. Voer "
-"een getal (pixels) of een procentuele waarde (relatief) in."
+msgstr "Bepaalt de hoogte voor de rich text editorcomponent voor dit scherm. Voer een getal (pixels) of een procentuele waarde (relatief) in."
+

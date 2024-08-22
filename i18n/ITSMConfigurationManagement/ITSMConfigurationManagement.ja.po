@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ja/>\n"
+"Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3263,10 +3262,9 @@ msgstr "キューとサービスの親子変換を自動的に生成するかど
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr "この画面のリッチ・テキスト・エディタ・コンポーネントの最初の高さをピクセル単"
-"位で定義します。"
+msgstr "この画面のリッチ・テキスト・エディタ・コンポーネントの最初の高さをピクセル単位で定義します。"
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr "この画面のリッチ・テキスト・エディタ・コンポーネントの高さを定義します。数値"
-"（ピクセル）またはパーセント値（相対）を入力します。"
+msgstr "この画面のリッチ・テキスト・エディタ・コンポーネントの高さを定義します。数値（ピクセル）またはパーセント値（相対）を入力します。"
+

@@ -350,7 +350,7 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Дефинира подобекта по подразбиране на класа „ITSM конфигурационен елемент“.';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
-        '';
+        'Определя височината на компонента на редактора за богат текст за този екран. Въведете число (пиксели) или процентна стойност (относителна).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Определя броя на редовете за редактора на КЕ дефиниции в администраторския интерфейс.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =

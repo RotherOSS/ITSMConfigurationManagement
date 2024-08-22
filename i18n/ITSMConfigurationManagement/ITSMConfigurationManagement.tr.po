@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Turkish <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/tr/>\n"
+"Language-Team: Turkish <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,24 +3250,17 @@ msgstr "Bu seçenekle, bağlantılı CI'ların sayısına bağlı olarak bir CI 
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
-"Zengin metin düzenleyici bileşeni için başlangıç yüksekliğini piksel "
-"cinsinden tanımlar."
+msgstr "Zengin metin düzenleyici bileşeni için başlangıç yüksekliğini piksel cinsinden tanımlar."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr ""
-"Kuyruklar ve hizmetler için ebeveyn-çocuk çevirilerinin otomatik olarak "
-"oluşturulup oluşturulmayacağını tanımlar."
+msgstr "Kuyruklar ve hizmetler için ebeveyn-çocuk çevirilerinin otomatik olarak oluşturulup oluşturulmayacağını tanımlar."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
-"Bu ekran için zengin metin düzenleyici bileşeninin piksel cinsinden ilk "
-"yüksekliğini tanımlar."
+msgstr "Bu ekran için zengin metin düzenleyici bileşeninin piksel cinsinden ilk yüksekliğini tanımlar."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
-"Bu ekran için zengin metin düzenleyici bileşeninin yüksekliğini tanımlar. "
-"Sayı (piksel) veya yüzde değeri (göreli) girin."
+msgstr "Bu ekran için zengin metin düzenleyici bileşeninin yüksekliğini tanımlar. Sayı (piksel) veya yüzde değeri (göreli) girin."
+

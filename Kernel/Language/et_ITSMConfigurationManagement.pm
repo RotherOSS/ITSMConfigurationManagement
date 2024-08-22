@@ -350,7 +350,7 @@ sub Data {
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Määratleb klassi \'ITSMConfigItem\' vaikimisi alamobjekti.';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
-        '';
+        'Määrab selle ekraani rikkaliku tekstiredaktori komponendi kõrguse. Sisestage arv (pikslid) või protsentuaalne väärtus (suhteline).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
         'Määratleb CI määratluse redaktori ridade arvu haldusliideses.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =

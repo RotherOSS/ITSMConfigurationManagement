@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
 "PO-Revision-Date: 2024-08-21 07:13+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: French <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/fr/>\n"
+"Language-Team: French <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3251,24 +3250,17 @@ msgstr "Cette option permet de remplir automatiquement un champ CI, en fonction 
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
-"Définit la hauteur initiale du composant de l'éditeur de texte enrichi en "
-"pixels."
+msgstr "Définit la hauteur initiale du composant de l'éditeur de texte enrichi en pixels."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr ""
-"Définit si les traductions parent-enfant pour les files d'attente et les "
-"services doivent être générées automatiquement."
+msgstr "Définit si les traductions parent-enfant pour les files d'attente et les services doivent être générées automatiquement."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
-"Définit la hauteur initiale en pixels du composant de l'éditeur de texte "
-"enrichi pour cet écran."
+msgstr "Définit la hauteur initiale en pixels du composant de l'éditeur de texte enrichi pour cet écran."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr ""
-"Définit la hauteur du composant de l'éditeur de texte enrichi pour cet "
-"écran. Entrez un nombre (pixels) ou une valeur en pourcentage (relative)."
+msgstr "Définit la hauteur du composant de l'éditeur de texte enrichi pour cet écran. Entrez un nombre (pixels) ou une valeur en pourcentage (relative)."
+
