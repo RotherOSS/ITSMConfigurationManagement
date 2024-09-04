@@ -451,7 +451,7 @@ sub Data {
     $Self->{Translation}->{'Parameters for the number module for config item classes in the preferences view of the agent interface.'} =
         'エージェントインタフェースの環境設定ビューの設定項目クラスの番号モジュールのパラメータ。';
     $Self->{Translation}->{'Parameters for the pages (in which the configuration items are shown).'} =
-        'ページのパラメータ（構成アイテムが表示されます）';
+        'ページのパラメータ（構成アイテムが表示されます）。';
     $Self->{Translation}->{'Parameters for the version string module for config item classes in the preferences view of the agent interface.'} =
         'エージェントインタフェースの環境設定ビューの設定項目クラスのバージョン文字列モジュールのパラメータ。';
     $Self->{Translation}->{'Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface.'} =
