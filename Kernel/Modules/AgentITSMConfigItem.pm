@@ -293,8 +293,14 @@ sub Run {
 
         my $Prio = 2;
         for my $ClassID ( $Category2ClassID{$CategoryFilter}->@* ) {
-            my $CountClass = $ConfigItemObject->ConfigItemCount(
-                ClassID => $ClassID,
+            my $CountClass = $ConfigItemObject->ConfigItemSearch(
+                %ColumnFilter,
+                ClassIDs     => [$ClassID],
+                DeplStateIDs => $DeplStateIDs,
+                Limit        => $Self->{SearchLimit},
+                Permission   => $Permission,
+                UserID       => $Self->{UserID},
+                Result       => 'COUNT',
             );
             if ( $Filter eq 'All' || ( $Filter && $Filter == $ClassID ) ) {
                 $CountTotal += $CountClass;
@@ -483,9 +489,15 @@ sub Run {
             . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
     }
 
+    my $CategoryFilterURI = $LayoutObject->Output(
+        Template => '[% Data.CategoryFilter | uri %]',
+        Data     => {
+            CategoryFilter => $CategoryFilter,
+        },
+    );
     my $LinkPage = 'Filter='
         . $LayoutObject->Ascii2Html( Text => $Filter )
-        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilter )
+        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilterURI )
         . ';View=' . $LayoutObject->Ascii2Html( Text => $View )
         . ';SortBy=' . $LayoutObject->Ascii2Html( Text => $SortBy )
         . ';OrderBy=' . $LayoutObject->Ascii2Html( Text => $OrderBy )
@@ -493,7 +505,7 @@ sub Run {
         . ';';
 
     my $LinkSort = 'View=' . $LayoutObject->Ascii2Html( Text => $View )
-        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilter )
+        . ';Category=' . $LayoutObject->Ascii2Html( Text => $CategoryFilterURI )
         . ';Filter=' . $LayoutObject->Ascii2Html( Text => $Filter )
         . $ColumnFilterLink
         . ';';
@@ -536,7 +548,8 @@ sub Run {
         SortBy                => $SortBy,
         EnableColumnFilters   => 1,
         ColumnFilterForm      => {
-            Filter => $Filter || '',
+            Filter   => $Filter         || '',
+            Category => $CategoryFilter || '',
         },
 
         # do not print the result earlier, but return complete content
