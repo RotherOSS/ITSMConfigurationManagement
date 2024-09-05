@@ -896,40 +896,6 @@ sub Run {
             );
         }
 
-        # get Dynamic fields from param object
-        # cycle trough the activated Dynamic Fields for this screen
-        DYNAMICFIELD:
-        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
-            next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
-
-            # get search field preferences
-            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
-                DynamicFieldConfig => $DynamicFieldConfig,
-            );
-
-            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
-
-            PREFERENCE:
-            for my $Preference ( @{$SearchFieldPreferences} ) {
-
-                # extract the dynamic field value from the web request
-                my $DynamicFieldValue = $BackendObject->SearchFieldValueGet(
-                    DynamicFieldConfig     => $DynamicFieldConfig,
-                    ParamObject            => $ParamObject,
-                    ReturnProfileStructure => 1,
-                    LayoutObject           => $LayoutObject,
-                    Type                   => $Preference->{Type},
-                );
-
-                # set the complete value structure in GetParam to store it later in the search profile
-                if ( IsHashRefWithData($DynamicFieldValue) ) {
-                    %GetParam = ( %GetParam, %{$DynamicFieldValue} );
-                }
-            }
-        }
-
         # convert attributes
         if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
             $GetParam{ShownAttributes} = [ split /;/, $GetParam{ShownAttributes} ];
