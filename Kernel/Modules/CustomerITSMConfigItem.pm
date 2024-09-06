@@ -255,7 +255,7 @@ sub Run {
             }
 
             # set as selected filter if not present
-            $Filter ||= $PermissionConditionConfig->{Name};
+            $Filter ||= $ConfigCounter;
 
             # collect dynamic field search params
             my %DFSearchParams;
