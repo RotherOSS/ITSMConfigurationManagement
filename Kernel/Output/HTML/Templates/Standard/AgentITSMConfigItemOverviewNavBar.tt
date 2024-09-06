@@ -124,14 +124,14 @@
 [% RenderBlockStart("OverviewNavBarViewMode") %]
 [% RenderBlockStart("OverviewNavBarViewModeSelected") %]
                         <li class="Active">
-                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %]Category=[% Data.CategoryFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Category=[% Data.CategoryFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                 [% Translate(Data.NameShort) | html %]
                             </a>
                         </li>
 [% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
 [% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
                         <li>
-                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %]Category=[% Data.CategoryFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
+                            <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Category=[% Data.CategoryFilter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                 [% Translate(Data.NameShort) | html %]
                             </a>
                         </li>
