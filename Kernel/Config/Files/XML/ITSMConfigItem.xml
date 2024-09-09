@@ -1809,7 +1809,7 @@
             <Item ValueType="String" ValueRegex="^\d+$">10000</Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory" Required="0" Valid="1">
         <Description Translatable="1">The default category which is shown, if none is selected.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
         <Value>
