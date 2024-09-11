@@ -88,8 +88,19 @@ sub Run {
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # get filter from web request
-    my $Filter         = $ParamObject->GetParam( Param => 'Filter' )   || 'All';
-    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' ) || $Config->{DefaultCategory};
+    my $Filter         = $ParamObject->GetParam( Param => 'Filter' ) || 'All';
+    my $CategoryFilter = $ParamObject->GetParam( Param => 'Category' );
+
+    # get general catalog object
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+    # get class list
+    my $CategoryList = $GeneralCatalogObject->ItemList(
+        Class => 'ITSM::ConfigItem::Class::Category',
+    );
+    my %ReverseCategoryList = reverse $CategoryList->%*;
+    my $DefaultCategoryID   = $ReverseCategoryList{ $Config->{DefaultCategory} };
+    $CategoryFilter ||= $DefaultCategoryID;
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -177,9 +188,6 @@ sub Run {
         $Output .= $LayoutObject->NavigationBar();
     }
 
-    # get general catalog object
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
-
     # get class list
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
@@ -260,7 +268,8 @@ sub Run {
         next CLASSID if !IsArrayRefWithData( $ClassPreferences{Categories} );
 
         for my $Category ( $ClassPreferences{Categories}->@* ) {
-            push @{ $Category2ClassID{$Category} }, $ClassID;
+            my $CategoryID = $ReverseCategoryList{$Category};
+            push @{ $Category2ClassID{$CategoryID} }, $ClassID;
         }
     }
 
@@ -269,20 +278,16 @@ sub Run {
     {
         my @SortedCategories = sort keys %Category2ClassID;
 
-        if ( !$CategoryFilter || !$Category2ClassID{$CategoryFilter} ) {
-            $CategoryFilter = $Category2ClassID{Default} ? 'Default' : $SortedCategories[0];
-        }
-
         my $Prio = 2;
         %CategoryFilters = map {
             $_ => {
-                Name => $_,
+                Name => $CategoryList->{$_},
                 Prio => $Prio++,
             }
         } @SortedCategories;
 
-        if ( $CategoryFilters{Default} ) {
-            $CategoryFilters{Default}{Prio} = 1;
+        if ( $CategoryFilters{$DefaultCategoryID} ) {
+            $CategoryFilters{$DefaultCategoryID}{Prio} = 1;
         }
     }
 
