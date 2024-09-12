@@ -137,7 +137,10 @@ sub Run {
                 UserLogin => $Self->{UserLogin},
             );
 
-            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+            # convert attributes
+            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
+                $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
+            }
 
             # set default params of default attributes
             if ( $Self->{Config}{Defaults} ) {
@@ -151,20 +154,12 @@ sub Run {
                         for my $Item (@Items) {
                             my ( $Key, $Value ) = split /=/, $Item;
                             $GetParam{$Key} ||= $Value;
-                            @ShownAttributes = uniq( @ShownAttributes, $Key );
                         }
                     }
                     else {
                         $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
-                        @ShownAttributes = uniq( @ShownAttributes, $Key );
                     }
                 }
-            }
-            $GetParam{ShownAttributes} = \@ShownAttributes;
-
-            # convert attributes
-            if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
-                $GetParam{ShownAttributes} = join ';', @{ $GetParam{ShownAttributes} };
             }
         }
         else {
@@ -262,7 +257,7 @@ sub Run {
 
         # set default params of default attributes
         if ( $Self->{Config}{Defaults} ) {
-            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+
             KEY:
             for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
                 next KEY if !$Self->{Config}{Defaults}->{$Key};
@@ -273,21 +268,12 @@ sub Run {
                     for my $Item (@Items) {
                         my ( $Key, $Value ) = split /=/, $Item;
                         $GetParam{$Key} ||= $Value;
-                        @ShownAttributes = uniq( @ShownAttributes, $Key );
                     }
                 }
                 else {
                     $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
-                    @ShownAttributes = uniq( @ShownAttributes, $Key );
                 }
             }
-            $GetParam{ShownAttributes} = \@ShownAttributes;
-        }
-
-        # convert attributes
-        if ( IsArrayRefWithData( $GetParam{ShownAttributes} ) ) {
-            my @ShowAttributes = grep {defined} @{ $GetParam{ShownAttributes} };
-            $GetParam{ShownAttributes} = join ';', @ShowAttributes;
         }
 
         # generate dropdown for selecting the class
@@ -356,7 +342,7 @@ sub Run {
 
         # set default params of default attributes
         if ( $Self->{Config}{Defaults} ) {
-            my @ShownAttributes = @{ $GetParam{ShownAttributes} // [] };
+
             KEY:
             for my $Key ( sort keys %{ $Self->{Config}{Defaults} } ) {
                 next KEY if !$Self->{Config}{Defaults}->{$Key};
@@ -367,15 +353,12 @@ sub Run {
                     for my $Item (@Items) {
                         my ( $Key, $Value ) = split /=/, $Item;
                         $GetParam{$Key} ||= $Value;
-                        @ShownAttributes = uniq( @ShownAttributes, $Key );
                     }
                 }
                 else {
                     $GetParam{$Key} ||= $Self->{Config}{Defaults}->{$Key};
-                    @ShownAttributes = uniq( @ShownAttributes, $Key );
                 }
             }
-            $GetParam{ShownAttributes}->@* = @ShownAttributes;
 
             # convert attributes
             if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq 'ARRAY' ) {
@@ -796,11 +779,13 @@ sub Run {
 
         # if no attribute is shown, show configitem number
         if ( !$Self->{Profile} ) {
+
+            # merge search and profile attributes
             if (@SearchAttributes) {
-                push @ProfileAttributes, @SearchAttributes;
+                @ProfileAttributes = uniq( @ProfileAttributes, @SearchAttributes );
             }
             else {
-                push @ProfileAttributes, 'Number';
+                @ProfileAttributes = uniq( @ProfileAttributes, 'Number' );
             }
         }
 
