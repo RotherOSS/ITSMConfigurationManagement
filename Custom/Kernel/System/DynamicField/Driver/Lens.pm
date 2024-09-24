@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - db349fdf2f9c36b3b68696b776c967087c96686a - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 35afbe2af9292006662ad7b707ba85d1b2398800 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -730,7 +730,7 @@ sub GetFieldState {
             # TODO: Validate the Reference ObjectID here, or earlier, to prevent data leaks!
             ObjectID              => 1,    # will not be used;
             UseReferenceEditField => 1,
-        );
+        ) // '';
     }
     else {
         $AttributeFieldValue = '';
