@@ -145,7 +145,7 @@
 [% RenderBlockStart("ContentLargeConfigItemGenericConfigItemColumn") %]
 [% RenderBlockStart("ContentLargeConfigItemGenericConfigItemNumber") %]
                 <td>
-                    <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID %]" title="[% Data.Title | html %]" class="AsBlock MasterActionLink">[% Data.ConfigItemNumber | html %]</a>
+                    <a href="[% Env("Baselink") %]Action=AgentITSMConfigItemZoom;ConfigItemID=[% Data.ConfigItemID %]" title="[% Data.Title | html %]" class="AsBlock MasterActionLink">[% Data.Number | html %]</a>
                 </td>
 [% RenderBlockEnd("ContentLargeConfigItemGenericConfigItemNumber") %]
 [% RenderBlockStart("ContentLargeConfigItemSignal") %]

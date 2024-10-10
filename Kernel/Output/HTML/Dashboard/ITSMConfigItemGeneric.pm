@@ -720,7 +720,7 @@ sub Run {
     my $Summary = $CacheObject->Get(
         Type => 'Dashboard',
         Key  => $CacheKey . '-Summary',
-    );
+    ) // {};
 
     # If no cache or new list result, do count lookup.
     if ( !$Summary || !$CacheUsed ) {
@@ -1310,6 +1310,16 @@ sub Run {
                 my $BlockType = '';
                 my $CSSClass  = '';
 
+                if ( $ConfigItemColumn eq 'Number' ) {
+                    $LayoutObject->Block(
+                        Name => 'ContentLargeConfigItemGenericConfigItemNumber',
+                        Data => {
+                            %ConfigItem,
+                            Title => $ConfigItem{Number},
+                        },
+                    );
+                    next COLUMN;
+                }
                 if ( $ConfigItemColumn eq 'Age' ) {
                     $DataValue = $LayoutObject->CustomerAge(
                         Age   => $ConfigItem{Age},
@@ -1878,7 +1888,6 @@ sub _SearchParamsGet {
     );
 
     my %ConfigItemSearchSummary;
-
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
         # Add filters for assigend and accessible config items for the customer user information center as a
