@@ -244,7 +244,7 @@ sub Run {
     );
 
     # output header
-    my $Output = $LayoutObject->Header( Value => $ConfigItem->{Number} );
+    my $Output = $LayoutObject->Header( Value => "CI#$ConfigItem->{Number}" );
     $Output .= $LayoutObject->NavigationBar();
 
     # if a version already exists (TODO: When does it not?)
