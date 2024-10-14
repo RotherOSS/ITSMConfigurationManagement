@@ -122,7 +122,7 @@
                     </Item>
                     <Item Key="Description" Translatable="1">ITSM config item overview.</Item>
                     <Item Key="NavBarName">Config Item</Item>
-                    <Item Key="Title" Translatable="1">Config Item</Item>
+                    <Item Key="Title" Translatable="1">Config Item Overview</Item>
                 </Hash>
             </Item>
         </Value>
