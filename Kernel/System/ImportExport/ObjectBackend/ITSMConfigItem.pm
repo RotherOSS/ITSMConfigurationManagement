@@ -1413,6 +1413,7 @@ sub ImportDataSave {
         grep {m/^DynamicField/}
         keys %NewVersionData;
 
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     if ($ConfigItemID) {
 
         # TODO: ConfigItemUpdate
@@ -1444,6 +1445,43 @@ sub ImportDataSave {
             );
 
             return;
+        }
+
+        # TODO handle overwriting of attachments
+        # the last and unmapped entries are attachments
+        my @Attachments = @{ $Param{ImportDataRow} }[ $RowIndex .. $#{ $Param{ImportDataRow} } ];
+        if ( $ObjectData->{IncludeAttachments} && @Attachments ) {
+            for my $AttachmentString (@Attachments) {
+                my %Attachment = split( /###/, $AttachmentString, -1 );
+
+                for my $Key ( keys %Attachment ) {
+                    $Attachment{$Key} = $Attachment{$Key} eq '' ? '' : decode_base64( $Attachment{$Key} );
+                }
+
+                KEY:
+                for my $Key (qw( Filename ContentType Disposition )) {
+                    next KEY unless $Attachment{$Key};
+
+                    $Attachment{$Key} = Encode::decode( 'UTF-8', $Attachment{$Key} );
+                }
+
+                my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
+                    ConfigItemID => $ConfigItemID,
+                    UserID       => 1,
+                    %Attachment,
+                );
+
+                # check the new config item id
+                if ( !$Success ) {
+
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Error with importing an attachment for config item $ConfigItemID",
+                    );
+
+                    return;
+                }
+            }
         }
 
         # The import was successful as we got a version id
@@ -1483,6 +1521,42 @@ sub ImportDataSave {
             );
 
             return;
+        }
+
+        # the last and unmapped entries are attachments
+        my @Attachments = @{ $Param{ImportDataRow} }[ $RowIndex .. $#{ $Param{ImportDataRow} } ];
+        if ( $ObjectData->{IncludeAttachments} && @Attachments ) {
+            for my $AttachmentString (@Attachments) {
+                my %Attachment = split( /###/, $AttachmentString, -1 );
+
+                for my $Key ( keys %Attachment ) {
+                    $Attachment{$Key} = $Attachment{$Key} eq '' ? '' : decode_base64( $Attachment{$Key} );
+                }
+
+                KEY:
+                for my $Key (qw( Filename ContentType Disposition )) {
+                    next KEY unless $Attachment{$Key};
+
+                    $Attachment{$Key} = Encode::decode( 'UTF-8', $Attachment{$Key} );
+                }
+
+                my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
+                    ConfigItemID => $ConfigItemID,
+                    UserID       => 1,
+                    %Attachment,
+                );
+
+                # check the new config item id
+                if ( !$Success ) {
+
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Error with importing an attachment for config item $ConfigItemID",
+                    );
+
+                    return;
+                }
+            }
         }
 
         return $ConfigItemID, Translatable('Created');
