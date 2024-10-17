@@ -131,6 +131,13 @@ sub ObjectAttributesGet {
                 Type => 'Checkbox',
             },
         },
+        {
+            Key   => 'IncludeAttachments',
+            Name  => 'Import/Export attachments (as the last entries per line)',
+            Input => {
+                Type => 'Checkbox',
+            },
+        },
     ];
 }
 
