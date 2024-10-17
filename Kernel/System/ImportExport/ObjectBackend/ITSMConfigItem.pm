@@ -23,7 +23,9 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use Encode;
 use List::AllUtils qw(pairwise);
+use MIME::Base64   qw(encode_base64);
 
 # CPAN modules
 
@@ -614,6 +616,7 @@ sub ExportDataGet {
     );
 
     my @Rows;
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     CONFIGITEMID:
     for my $ConfigItemID (@ConfigItemIDs) {
 
@@ -737,6 +740,30 @@ sub ExportDataGet {
 
             # the regular case
             push @RowItems, $ActualValue;
+        }
+        if ( $ObjectData->{IncludeAttachments} ) {
+            my @Attachments = $ConfigItemObject->ConfigItemAttachmentList(
+                ConfigItemID => $ConfigItem->{ConfigItemID},
+            );
+            for my $Filename (@Attachments) {
+                my $Attachment = $ConfigItemObject->ConfigItemAttachmentGet(
+                    ConfigItemID => $ConfigItem->{ConfigItemID},
+                    Filename     => $Filename,
+                );
+
+                for my $Key (qw( Filename ContentType Disposition )) {
+                    $Attachment->{$Key} = Encode::encode( 'UTF-8', $Attachment->{$Key} );
+                }
+
+                my $AttachmentString;
+                for my $Key (qw( Filename ContentID ContentType Disposition Content ContentAlternative )) {
+                    $Attachment->{$Key} //= '';
+                    $AttachmentString .= $AttachmentString ? '###' : '';
+                    $AttachmentString .= $Key . '###' . encode_base64( $Attachment->{$Key} );
+                }
+
+                push @RowItems, $AttachmentString;
+            }
         }
 
         push @Rows, \@RowItems;
