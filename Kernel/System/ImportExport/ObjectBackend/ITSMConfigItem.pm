@@ -25,7 +25,7 @@ use utf8;
 # core modules
 use Encode;
 use List::AllUtils qw(pairwise);
-use MIME::Base64   qw(encode_base64);
+use MIME::Base64   qw(decode_base64 encode_base64);
 
 # CPAN modules
 
@@ -1447,7 +1447,6 @@ sub ImportDataSave {
             return;
         }
 
-        # TODO handle overwriting of attachments
         # the last and unmapped entries are attachments
         my @Attachments = @{ $Param{ImportDataRow} }[ $RowIndex .. $#{ $Param{ImportDataRow} } ];
         if ( $ObjectData->{IncludeAttachments} && @Attachments ) {
@@ -1465,18 +1464,45 @@ sub ImportDataSave {
                     $Attachment{$Key} = Encode::decode( 'UTF-8', $Attachment{$Key} );
                 }
 
+                # check for duplicates
+                my $Exists = $ConfigItemObject->ConfigItemAttachmentExists(
+                    ConfigItemID => $ConfigItemID,
+                    Filename     => $Attachment{Filename},
+                    UserID       => 1,
+                );
+
+                # if duplicate exists, delete it to overwrite with the imported attachment
+                if ($Exists) {
+                    my $DeleteSuccess = $ConfigItemObject->ConfigItemAttachmentDelete(
+                        ConfigItemID => $ConfigItemID,
+                        Filename     => $Attachment{Filename},
+                        UserID       => 1,
+                    );
+
+                    # check the attachment delete success
+                    if ( !$DeleteSuccess ) {
+
+                        $Kernel::OM->Get('Kernel::System::Log')->Log(
+                            Priority => 'error',
+                            Message  => "Error with importing an attachment for config item $ConfigItemID: Couldn't clean up existing file $Attachment{Filename}!",
+                        );
+
+                        return;
+                    }
+                }
+
                 my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
                     ConfigItemID => $ConfigItemID,
                     UserID       => 1,
                     %Attachment,
                 );
 
-                # check the new config item id
+                # check the attachment add success
                 if ( !$Success ) {
 
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message  => "Error with importing an attachment for config item $ConfigItemID",
+                        Message  => "Error with importing an attachment for config item $ConfigItemID: Adding file $Attachment{Filename} failed!",
                     );
 
                     return;
@@ -1546,12 +1572,12 @@ sub ImportDataSave {
                     %Attachment,
                 );
 
-                # check the new config item id
+                # check the attachment add success
                 if ( !$Success ) {
 
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message  => "Error with importing an attachment for config item $ConfigItemID",
+                        Message  => "Error with importing an attachment for config item $ConfigItemID: Adding file $Attachment{Filename} failed!",
                     );
 
                     return;
