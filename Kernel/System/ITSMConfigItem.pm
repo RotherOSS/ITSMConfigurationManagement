@@ -231,6 +231,14 @@ A specific version is returned when the C<VersionID> is passed.
 When both C<ConfigItemID> and C<VersionID> are passed, then a consistency check is performed
 and the data for the specific version is returned.
 
+Error messages are suppressed if the parameter C<Silent> is passed.
+
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        VersionID     => 243,
+        DynamicFields => 1,    # (optional) default 0 (0|1)
+        Silent        => 1,    # (optional) default 0 (0|1)
+    );
+
 A hashref with the following keys is returned:
 
 =over 4
@@ -298,12 +306,17 @@ When the parameter C<DynamicFields> is passed then the dynamic fields are return
 sub ConfigItemGet {
     my ( $Self, %Param ) = @_;
 
+    # wether to suppress error messages
+    my $Silent = $Param{Silent} ? 1 : 0;
+
     # check needed stuff
     if ( !$Param{ConfigItemID} && !$Param{VersionID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Need ConfigItemID or VersionID!',
-        );
+        if ( !$Silent ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Need ConfigItemID or VersionID!',
+            );
+        }
 
         return;
     }
@@ -335,10 +348,12 @@ sub ConfigItemGet {
 
     if ($Cache) {
         if ( $Param{VersionID} && $Param{ConfigItemID} && $Param{ConfigItemID} ne $Cache->{ConfigItemID} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
-            );
+            if ( !$Silent ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
+                );
+            }
 
             return;
         }
@@ -408,18 +423,22 @@ END_SQL
 
     # check config item
     if ( !$ConfigItem{ConfigItemID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "No such ConfigItemID ($Param{ConfigItemID})!",
-        );
+        if ( !$Silent ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "No such ConfigItemID ($Param{ConfigItemID})!",
+            );
+        }
 
         return;
     }
     if ( $Param{VersionID} && $Param{ConfigItemID} && $Param{ConfigItemID} ne $ConfigItem{ConfigItemID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
-        );
+        if ( !$Silent ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "VersionID $Param{VersionID} is not a version of ConfigItemID $Param{ConfigItemID}!",
+            );
+        }
 
         return;
     }
