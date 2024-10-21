@@ -875,14 +875,26 @@ sub ConfigItemDelete {
         UserID => $Param{UserID},
     );
 
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     # delete versions
-    $Kernel::OM->Get('Kernel::System::DB')->Do(
+    $DBObject->Do(
         SQL  => 'DELETE FROM configitem_version WHERE configitem_id = ?',
         Bind => [ \$Param{ConfigItemID} ],
     );
 
+    # delete link table entries
+    $DBObject->Do(
+        SQL  => 'DELETE FROM configitem_link WHERE source_configitem_id = ?',
+        Bind => [ \$Param{ConfigItemID} ],
+    );
+    $DBObject->Do(
+        SQL  => 'DELETE FROM configitem_link WHERE target_configitem_id = ?',
+        Bind => [ \$Param{ConfigItemID} ],
+    );
+
     # delete config item
-    my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+    my $Success = $DBObject->Do(
         SQL  => 'DELETE FROM configitem WHERE id = ?',
         Bind => [ \$Param{ConfigItemID} ],
     );
