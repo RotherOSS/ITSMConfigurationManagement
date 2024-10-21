@@ -621,7 +621,7 @@ sub ExportDataGet {
     for my $ConfigItemID (@ConfigItemIDs) {
 
         # get the latest version of the config item, including the dynamic fields
-        my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID  => $ConfigItemID,
             DynamicFields => 1,
         );
@@ -1419,13 +1419,13 @@ sub ImportDataSave {
         # TODO: ConfigItemUpdate
         # the specified config item already exists
         # get id of the latest version, for checking later whether a version was created
-        my $VersionList = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionList(
+        my $VersionList = $ConfigItemObject->VersionList(
             ConfigItemID => $ConfigItemID,
         ) || [];
         my $LatestVersionID = $VersionList->[-1] // 0;
 
         # add new version
-        my $VersionID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionAdd(
+        my $VersionID = $ConfigItemObject->VersionAdd(
             ConfigItemID => $ConfigItemID,
             Name         => $VersionData->{Name},
             DefinitionID => $Definition->{DefinitionID},
@@ -1525,7 +1525,7 @@ sub ImportDataSave {
     else {
 
         # no config item was found, so add new config item
-        my $ConfigItemID = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemAdd(
+        my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
             ClassID        => $ObjectData->{ClassID},
             Name           => $VersionData->{Name},
             DefinitionID   => $Definition->{DefinitionID},
