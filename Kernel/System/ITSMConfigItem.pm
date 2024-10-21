@@ -721,6 +721,7 @@ END_SQL
 
     # add the first version
     my $VersionID = $Self->VersionAdd(
+        Description => '',
         %Param,
         ConfigItemID => $ConfigItemID,
         LastVersion  => {
@@ -1110,6 +1111,7 @@ sub ConfigItemUpdate {
 
     if ($AddVersion) {
         my $Success = $Self->VersionAdd(
+            Description => '',
             %Param,
             LastVersion => $ConfigItem,
         );
