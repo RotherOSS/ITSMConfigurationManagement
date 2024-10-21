@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -412,7 +412,12 @@ sub ObjectDescriptionGet {
         ConfigItemID => $Param{ObjectID},
     );
 
-    return unless $ConfigItem;
+    if ( !$ConfigItem ) {
+        return (
+            Normal => "$Param{ObjectID} (deleted)",
+            Long   => "$Param{ObjectID} (deleted)",
+        );
+    }
 
     my %Descriptions;
     if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}{Config}{DisplayType} ) {
@@ -708,7 +713,7 @@ sub ValueForLens {
 
     my @LastVersionIDs;
 
-    unless ( $Param{Set} ) {
+    unless ( $Param{Set} ) {    ## no critic qw(ControlStructures::ProhibitUnlessBlocks)
         CONFIG_ITEM_ID:
         for my $ConfigItemID ( $Param{Value}->@* ) {
             my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
@@ -728,7 +733,7 @@ sub ValueForLens {
     # for sets we need to translate for every set value
     for my $SetValue ( $Param{Value}->@* ) {
         if ( ref $SetValue ne 'ARRAY' ) {
-            $SetValue = [ $SetValue ];
+            $SetValue = [$SetValue];
         }
 
         my @SetVersionIDs;

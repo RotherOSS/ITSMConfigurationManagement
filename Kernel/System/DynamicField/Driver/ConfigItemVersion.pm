@@ -123,7 +123,12 @@ sub ObjectDescriptionGet {
         VersionID => $Param{ObjectID},
     );
 
-    return unless $ConfigItem;
+    if ( !$ConfigItem ) {
+        return (
+            Normal => "$Param{ObjectID} (deleted)",
+            Long   => "$Param{ObjectID} (deleted)",
+        );
+    }
 
     my %Descriptions;
     if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}{Config}{DisplayType} ) {
