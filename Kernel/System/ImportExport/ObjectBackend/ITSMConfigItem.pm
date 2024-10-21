@@ -135,7 +135,7 @@ sub ObjectAttributesGet {
         },
         {
             Key   => 'IncludeAttachments',
-            Name  => 'Import/Export attachments (as the last entries per line)',
+            Name  => Translatable('Import/Export attachments (as the last entries per line)'),
             Input => {
                 Type => 'Checkbox',
             },
@@ -1449,6 +1449,21 @@ sub ImportDataSave {
 
         # the last and unmapped entries are attachments
         my @Attachments = @{ $Param{ImportDataRow} }[ $RowIndex .. $#{ $Param{ImportDataRow} } ];
+
+        # if EmptyFieldsLeaveTheOldValues is false, clear all attachments
+        if ( !$EmptyFieldsLeaveTheOldValues ) {
+            my @Attachments = $ConfigItemObject->ConfigItemAttachmentList(
+                ConfigItemID => $ConfigItemID,
+            );
+            for my $Filename (@Attachments) {
+                my $ClearSuccess = $ConfigItemObject->ConfigItemAttachmentDelete(
+                    ConfigItemID => $ConfigItemID,
+                    Filename     => $Filename,
+                    UserID       => 1,
+                );
+            }
+        }
+
         if ( $ObjectData->{IncludeAttachments} && @Attachments ) {
             for my $AttachmentString (@Attachments) {
                 my %Attachment = split( /###/, $AttachmentString, -1 );
