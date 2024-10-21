@@ -410,6 +410,7 @@ sub ObjectDescriptionGet {
 
     my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
         ConfigItemID => $Param{ObjectID},
+        Silent       => 1,
     );
 
     if ( !$ConfigItem ) {
