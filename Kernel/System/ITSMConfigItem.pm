@@ -1111,7 +1111,7 @@ sub ConfigItemUpdate {
 
     if ($AddVersion) {
         my $Success = $Self->VersionAdd(
-            Description => '',
+            Description => $ConfigItem->{Description} // '',
             %Param,
             LastVersion => $ConfigItem,
         );
