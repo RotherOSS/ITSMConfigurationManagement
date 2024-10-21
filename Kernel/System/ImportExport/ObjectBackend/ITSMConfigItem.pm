@@ -277,6 +277,15 @@ sub MappingObjectAttributesGet {
         },
     );
 
+    # add description if defined
+    my $HasDescription = ( grep { $_->{Type} && $_->{Type} eq 'Description' } values $Definition->{DefinitionRef}{Sections}->%* ) ? 1 : 0;
+    if ($HasDescription) {
+        push @Elements, {
+            Key   => 'Description',
+            Value => Translatable('Description'),
+        };
+    }
+
     # add elements
     push @Elements, $Self->_MappingObjectAttributesGet(
         DynamicFieldRef => $Definition->{DynamicFieldRef},    # page layout is ignored here
@@ -670,6 +679,13 @@ sub ExportDataGet {
             if ( $Key eq 'InciState' ) {
                 $ConfigItem->{InciStateID} ||= 'DUMMY';
                 push @RowItems, $InciStateList->{ $ConfigItem->{InciStateID} };
+
+                next MAPPINGOBJECT;
+            }
+
+            # handle description
+            if ( $Key eq 'Description' ) {
+                push @RowItems, $ConfigItem->{Description};
 
                 next MAPPINGOBJECT;
             }
@@ -1282,6 +1298,30 @@ sub ImportDataSave {
             next MAPPING_OBJECT_DATA;
         }
 
+        if ( $Key eq 'Description' ) {
+
+            if ( $EmptyFieldsLeaveTheOldValues && ( !defined $Value || $Value eq '' ) ) {
+
+                # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA;
+            }
+
+            if ( !$Value ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "The description '$Value' is invalid!",
+                );
+
+                return;
+            }
+
+            $VersionData->{$Key} = $Value;
+
+            next MAPPING_OBJECT_DATA;
+        }
+
         if ( $Key =~ m/^DynamicField_(?<DFNameWithIndex>.+)/ ) {
 
             # The key might encompass an index, indicated by '::'.
@@ -1431,6 +1471,7 @@ sub ImportDataSave {
             DefinitionID => $Definition->{DefinitionID},
             DeplStateID  => $VersionData->{DeplStateID},
             InciStateID  => $VersionData->{InciStateID},
+            Description  => $VersionData->{Description},
             UserID       => $Param{UserID},
             $MergedDFData->%*,
             ExternalSource => 1,
@@ -1546,6 +1587,7 @@ sub ImportDataSave {
             DefinitionID   => $Definition->{DefinitionID},
             DeplStateID    => $VersionData->{DeplStateID},
             InciStateID    => $VersionData->{InciStateID},
+            Description    => $VersionData->{Description},
             UserID         => $Param{UserID},
             ExternalSource => 1,
             %DFVersionData,
