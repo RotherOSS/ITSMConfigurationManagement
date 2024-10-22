@@ -275,6 +275,10 @@ sub MappingObjectAttributesGet {
             Key   => 'InciState',
             Value => Translatable('Incident State'),
         },
+        {
+            Key   => 'VersionString',
+            Value => Translatable('Version String'),
+        },
     );
 
     # add description if defined
@@ -686,6 +690,13 @@ sub ExportDataGet {
             # handle description
             if ( $Key eq 'Description' ) {
                 push @RowItems, $ConfigItem->{Description};
+
+                next MAPPINGOBJECT;
+            }
+
+            # handle version string
+            if ( $Key eq 'VersionString' ) {
+                push @RowItems, $ConfigItem->{VersionString};
 
                 next MAPPINGOBJECT;
             }
@@ -1322,6 +1333,30 @@ sub ImportDataSave {
             next MAPPING_OBJECT_DATA;
         }
 
+        if ( $Key eq 'VersionString' ) {
+
+            if ( $EmptyFieldsLeaveTheOldValues && ( !defined $Value || $Value eq '' ) ) {
+
+                # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA;
+            }
+
+            if ( !$Value ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Can't import entity $Param{Counter}: "
+                        . "The version string '$Value' is invalid!",
+                );
+
+                return;
+            }
+
+            $VersionData->{$Key} = $Value;
+
+            next MAPPING_OBJECT_DATA;
+        }
+
         if ( $Key =~ m/^DynamicField_(?<DFNameWithIndex>.+)/ ) {
 
             # The key might encompass an index, indicated by '::'.
@@ -1466,13 +1501,14 @@ sub ImportDataSave {
 
         # add new version
         my $VersionID = $ConfigItemObject->VersionAdd(
-            ConfigItemID => $ConfigItemID,
-            Name         => $VersionData->{Name},
-            DefinitionID => $Definition->{DefinitionID},
-            DeplStateID  => $VersionData->{DeplStateID},
-            InciStateID  => $VersionData->{InciStateID},
-            Description  => $VersionData->{Description},
-            UserID       => $Param{UserID},
+            ConfigItemID  => $ConfigItemID,
+            Name          => $VersionData->{Name},
+            DefinitionID  => $Definition->{DefinitionID},
+            DeplStateID   => $VersionData->{DeplStateID},
+            InciStateID   => $VersionData->{InciStateID},
+            Description   => $VersionData->{Description},
+            VersionString => $VersionData->{VersionString},
+            UserID        => $Param{UserID},
             $MergedDFData->%*,
             ExternalSource => 1,
         );
@@ -1588,6 +1624,7 @@ sub ImportDataSave {
             DeplStateID    => $VersionData->{DeplStateID},
             InciStateID    => $VersionData->{InciStateID},
             Description    => $VersionData->{Description},
+            VersionString  => $VersionData->{VersionString},
             UserID         => $Param{UserID},
             ExternalSource => 1,
             %DFVersionData,
