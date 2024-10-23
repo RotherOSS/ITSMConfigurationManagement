@@ -689,7 +689,40 @@ sub ExportDataGet {
 
             # handle description
             if ( $Key eq 'Description' ) {
-                push @RowItems, $ConfigItem->{Description};
+
+                my $Description = $ConfigItem->{Description};
+
+                # prepare description inline images for export
+                {
+                    # fetch config item attachment list for handling inline attachments
+                    my @AttachmentList = $ConfigItemObject->VersionAttachmentList(
+                        VersionID => $ConfigItem->{VersionID},
+                    );
+
+                    # fetch attachment data and replace content id in description with base64-encoded attachment string
+                    for my $Filename (@AttachmentList) {
+                        my $Attachment = $ConfigItemObject->VersionAttachmentGet(
+                            VersionID => $ConfigItem->{VersionID},
+                            Filename  => $Filename,
+                        );
+                        $Attachment->{ContentID} = $Attachment->{Preferences}{ContentID};
+
+                        for my $Key (qw( Filename ContentType Disposition )) {
+                            $Attachment->{$Key} = Encode::encode( 'UTF-8', $Attachment->{$Key} );
+                        }
+
+                        my $AttachmentString;
+                        for my $Key (qw( Filename ContentID ContentType Disposition Content ContentAlternative )) {
+                            $Attachment->{$Key} //= '';
+                            $AttachmentString .= $AttachmentString ? '###' : '';
+                            $AttachmentString .= $Key . '###' . encode_base64( $Attachment->{$Key} );
+                        }
+
+                        $Description =~ s/(?<open>src=")(cid:)(?<cid>$Attachment->{ContentID})(?<close>" )/$+{open}$AttachmentString$+{close}/g;
+                    }
+                }
+
+                push @RowItems, $Description;
 
                 next MAPPINGOBJECT;
             }
@@ -1328,6 +1361,41 @@ sub ImportDataSave {
                 return;
             }
 
+            # retrieve and store description inline images for import
+            {
+                my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+                my @DescriptionAttachments;
+
+                # attachments are stored in the src attribute of their img tag as base64 encoded string
+                my @AttachmentStrings = $Value =~ /src=\"(.+?)\" /gs;
+                for my $AttachmentString (@AttachmentStrings) {
+                    my %Attachment = split( /###/, $AttachmentString, -1 );
+
+                    for my $Key ( keys %Attachment ) {
+                        $Attachment{$Key} = $Attachment{$Key} eq '' ? '' : decode_base64( $Attachment{$Key} );
+                    }
+
+                    KEY:
+                    for my $Key (qw( Filename ContentType Disposition )) {
+                        next KEY unless $Attachment{$Key};
+
+                        $Attachment{$Key} = Encode::decode( 'UTF-8', $Attachment{$Key} );
+                    }
+
+                    push @DescriptionAttachments, \%Attachment;
+
+                    # escape base64 special characters '/' and '+'
+                    my $AttachmentStringEscaped = $AttachmentString;
+                    $AttachmentStringEscaped =~ s/\//\\\//g;
+                    $AttachmentStringEscaped =~ s/\+/\\\+/g;
+
+                    # replace base64 encoded string in description with contend id
+                    $Value =~ s/$AttachmentStringEscaped/cid:$Attachment{ContentID}/gs;
+                }
+
+                $VersionData->{DescriptionAttachments} = \@DescriptionAttachments;
+            }
+
             $VersionData->{$Key} = $Value;
 
             next MAPPING_OBJECT_DATA;
@@ -1524,6 +1592,17 @@ sub ImportDataSave {
             return;
         }
 
+        # import description inline images
+        if ( IsArrayRefWithData( $VersionData->{DescriptionAttachments} ) ) {
+            for my $Attachment ( $VersionData->{DescriptionAttachments}->@* ) {
+                my $VersionAttachmentSuccess = $ConfigItemObject->VersionAttachmentAdd(
+                    VersionID => $VersionID,
+                    $Attachment->%*,
+                    UserID => 1,
+                );
+            }
+        }
+
         # the last and unmapped entries are attachments
         my @Attachments = @{ $Param{ImportDataRow} }[ $RowIndex .. $#{ $Param{ImportDataRow} } ];
 
@@ -1641,6 +1720,24 @@ sub ImportDataSave {
             );
 
             return;
+        }
+
+        # import description inline images
+        if ( IsArrayRefWithData( $VersionData->{DescriptionAttachments} ) ) {
+
+            # get latest version id
+            my $VersionList = $ConfigItemObject->VersionList(
+                ConfigItemID => $ConfigItemID,
+            ) || [];
+            my $LatestVersionID = $VersionList->[-1] // 0;
+
+            for my $Attachment ( $VersionData->{DescriptionAttachments}->@* ) {
+                my $VersionAttachmentSuccess = $ConfigItemObject->VersionAttachmentAdd(
+                    VersionID => $LatestVersionID,
+                    $Attachment->%*,
+                    UserID => 1,
+                );
+            }
         }
 
         # the last and unmapped entries are attachments
