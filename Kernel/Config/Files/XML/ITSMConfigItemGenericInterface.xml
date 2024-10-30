@@ -11,12 +11,12 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Operation::Module###ConfigItem::ConfigItemSet" Required="0" Valid="1">
+    <Setting Name="GenericInterface::Operation::Module###ConfigItem::ConfigItemUpsert" Required="0" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
         <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="Name">ConfigItemSet</Item>
+                <Item Key="Name">ConfigItemUpsert</Item>
                 <Item Key="Controller">ConfigItem</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceOperationConfigItem</Item>
             </Hash>
@@ -51,9 +51,9 @@
             <Item ValueType="String" ValueRegex="">ro</Item>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Operation::ConfigItemSet###Permission" Required="1" Valid="1">
+    <Setting Name="GenericInterface::Operation::ConfigItemUpsert###Permission" Required="1" Valid="1">
         <Description Translatable="1">Defines Required permissions to set ITSM configuration items using the Generic Interface.</Description>
-        <Navigation>GenericInterface::Operation::ConfigItemSet</Navigation>
+        <Navigation>GenericInterface::Operation::ConfigItemUpsert</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">rw</Item>
         </Value>
@@ -203,7 +203,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Operation::ConfigItemSet::Classes" Required="0" Valid="0">
+    <Setting Name="GenericInterface::Operation::ConfigItemUpsert::Classes" Required="0" Valid="0">
         <Description Translatable="1">For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.</Description>
         <Navigation>GenericInterface::Operation</Navigation>
         <Value>

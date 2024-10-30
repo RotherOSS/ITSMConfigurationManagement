@@ -808,7 +808,7 @@ sub _ExtraSettings {
     my ( $Self, %Param ) = @_;
 
     my $ClassList         = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList( Class => 'ITSM::ConfigItem::Class' );
-    my $ClassRestrictions = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemSet::Classes');
+    my $ClassRestrictions = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemUpsert::Classes');
     my @Classes;
 
     if ( $ClassRestrictions && $ClassRestrictions->{ $Param{Webservice} } ) {

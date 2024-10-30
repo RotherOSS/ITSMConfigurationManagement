@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemSet;
+package Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpsert;
 
 use v5.24;
 use strict;
@@ -36,7 +36,7 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Operation::ConfigItem::ConfigItemSet - GenericInterface Configuration Item Add and Update Operation backend
+Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpsert - GenericInterface Configuration Item Add and Update Operation backend
 
 =head1 PUBLIC INTERFACE
 
@@ -65,16 +65,16 @@ sub new {
         $Self->{$Needed} = $Param{$Needed};
     }
 
-    $Self->{OperationName} = 'ConfigItemSet';
+    $Self->{OperationName} = 'ConfigItemUpsert';
 
-    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemSet');
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemUpsert');
 
     return $Self;
 }
 
 =head2 Run()
 
-perform ConfigItemSet Operation. This function is able to accept
+perform ConfigItemUpsert Operation. This function is able to accept
 one or more ConfigItem entries in one call.
 
     my $Result = $OperationObject->Run(

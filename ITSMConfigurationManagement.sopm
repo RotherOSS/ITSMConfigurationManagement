@@ -34,7 +34,7 @@
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemCreate.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemDelete.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemGet.pm" />
-        <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemSet.pm" />
+        <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemUpsert.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/Language/ar_SA_ITSMConfigurationManagement.pm" />
