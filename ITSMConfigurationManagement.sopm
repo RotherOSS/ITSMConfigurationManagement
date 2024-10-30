@@ -34,6 +34,7 @@
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemCreate.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemDelete.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemGet.pm" />
+        <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemSet.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Operation/ConfigItem/ConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/Language/ar_SA_ITSMConfigurationManagement.pm" />
@@ -86,6 +87,7 @@
         <File Permission="660" Location="Kernel/Language/zh_CN_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Language/zh_TW_ITSMConfigurationManagement.pm" />
         <File Permission="660" Location="Kernel/Modules/AdminGenericInterfaceInvokerConfigItem.pm" />
+        <File Permission="660" Location="Kernel/Modules/AdminGenericInterfaceOperationConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
@@ -120,6 +122,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItemTreeView.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerConfigItem.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentDashboardITSMConfigItemGeneric.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AgentITSMConfigItemAdd.tt" />
