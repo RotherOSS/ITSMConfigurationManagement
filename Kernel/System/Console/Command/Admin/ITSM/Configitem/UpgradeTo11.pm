@@ -1069,7 +1069,8 @@ END_YAML
 
         if ( !%DFSpecific ) {
             $Self->Print(
-                "<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}'; DefinitionID: '$Param{DefinitionID}') - skipping attribute!</red>\n");
+                "<red>Could not convert '$Attribute->{Name}' to DynamicField (Class: '$Param{Class}'; DefinitionID: '$Param{DefinitionID}') - skipping attribute!</red>\n"
+            );
 
             next ATTRIBUTE;
         }

@@ -154,10 +154,10 @@ sub Run {
             SQL => 'UPDATE configitem_version'
                 . ' SET definition_id = ?'
                 . ' WHERE id IN ('
-                .   ' SELECT last_version_id'
-                .   ' FROM configitem'
-                .   ' WHERE class_id = ?'
-                .   " AND cur_depl_state_id IN ( $DeplStateString )"
+                . ' SELECT last_version_id'
+                . ' FROM configitem'
+                . ' WHERE class_id = ?'
+                . " AND cur_depl_state_id IN ( $DeplStateString )"
                 . ' )',
             Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
         );

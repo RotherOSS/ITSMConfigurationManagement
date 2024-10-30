@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -149,7 +149,7 @@ sub Run {
     }
 
     for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
-        if ( !IsHashRefWithData( $RemoteCIData ) ) {
+        if ( !IsHashRefWithData($RemoteCIData) ) {
             return $Self->ReturnError(
                 ErrorCode    => "$Self->{OperationName}.WrongStructure",
                 ErrorMessage => "$Self->{OperationName}: Structure for ConfigItem is not correct!",
@@ -191,7 +191,7 @@ sub Run {
     CI:
     for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
 
-        my %RequiredAttributes = map { $_ => $RemoteCIData->{$_} } qw(Class DeploymentState IncidentState) ;
+        my %RequiredAttributes = map { $_ => $RemoteCIData->{$_} } qw(Class DeploymentState IncidentState);
 
         # get IDs for Class, Depl- and InciState
         for my $CurrentCI ( sort keys %CIClassMapping ) {
@@ -318,7 +318,7 @@ sub Run {
 
         # check permissions
         my $Permission;
-        if ( $ConfigItemID ) { 
+        if ($ConfigItemID) {
             $Permission = $ConfigItemObject->Permission(
                 Scope  => 'Item',
                 ItemID => $ConfigItemID,
@@ -334,7 +334,7 @@ sub Run {
                 Type    => $Self->{Config}->{Permission},
             );
         }
-        
+
         if ( !$Permission ) {
             return $Self->ReturnError(
                 ErrorCode    => "$Self->{OperationName}.AccessDenied",
