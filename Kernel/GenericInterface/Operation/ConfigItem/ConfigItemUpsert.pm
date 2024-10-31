@@ -54,7 +54,7 @@ sub new {
     bless( $Self, $Type );
 
     # check needed objects
-    for my $Needed (qw( DebuggerObject WebserviceID )) {
+    for my $Needed (qw( Operation DebuggerObject WebserviceID )) {
         if ( !$Param{$Needed} ) {
             return {
                 Success      => 0,
@@ -431,7 +431,8 @@ sub Run {
     }
 
     return {
-        Data => { ConfigItem => \@CIsHandled },
+        Success => 1,
+        Data    => { ConfigItem => \@CIsHandled },
     };
 }
 
