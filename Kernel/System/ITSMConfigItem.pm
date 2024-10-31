@@ -633,6 +633,59 @@ sub ConfigItemAdd {
         );
     }
 
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
+
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
+            );
+
+            return;
+        }
+
+        delete $Param{Name};
+    }
+    else {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $ConfigObject->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => 'NEW',
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                );
+
+                return;
+            }
+        }
+    }
+
+    # check needed stuff II
+    if ( !$Param{Name} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need Name!",
+        );
+
+        return;
+    }
+
     # insert new config item
     $Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => 'INSERT INTO configitem ('
