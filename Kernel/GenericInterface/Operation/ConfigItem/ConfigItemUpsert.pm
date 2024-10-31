@@ -186,7 +186,6 @@ sub Run {
     );
 
     my %GeneralCatalogItemLookup;
-    my %NameModuleObjects;
     my @CIsHandled;
     CI:
     for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
@@ -358,38 +357,6 @@ sub Run {
             Class => 'ITSM::ConfigItem::Class',
             Name  => $RemoteCIData->{Class},
         );
-        my $NameModule = $ClassPreferences->{NameModule} ? $ClassPreferences->{NameModule}[0] : '';
-        if ($NameModule) {
-            if ( !$NameModuleObjects{ $RemoteCIData->{Class} } ) {
-
-                # check if name module exists
-                if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ITSMConfigItem::Name::' . $NameModule ) ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "Can't load name module for class $RemoteCIData->{Class}!",
-                    );
-                    push @CIsHandled, {};
-
-                    next CI;
-                }
-
-                # create a backend object
-                $NameModuleObjects{ $RemoteCIData->{Class} } = $Kernel::OM->Get( 'Kernel::System::ITSMConfigItem::Name::' . $NameModule );
-            }
-
-            if ($ConfigItemID) {
-                delete $RemoteCIData->{Name};
-            }
-            else {
-                $RemoteCIData->{Name} = $NameModuleObjects{ $RemoteCIData->{Class} }->ConfigItemNameCreate(
-                    $RemoteCIData->%*,
-                    %RequiredAttributes,
-                    DeplStateID => $RequiredAttributes{DeploymentStateID},
-                    InciStateID => $RequiredAttributes{IncidentStateID},
-                    UserID      => 1,
-                );
-            }
-        }
 
         if ( !$ConfigItemID && !$RemoteCIData->{Name} ) {
             my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';
