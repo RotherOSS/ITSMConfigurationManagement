@@ -191,6 +191,16 @@ sub Run {
     CI:
     for my $RemoteCIData ( @{ $Param{Data}{ConfigItem} } ) {
 
+        if ( !IsHashRefWithData($RemoteCIData) ) {
+
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => "Invalid remote CI structure found. Skipping item.",
+            );
+
+            next CI;
+        }
+
         my %RequiredAttributes = map { $_ => $RemoteCIData->{$_} } qw(Class DeploymentState IncidentState);
 
         # get IDs for Class, Depl- and InciState
@@ -240,7 +250,9 @@ sub Run {
         my $ConfigItemNumber;
 
         # prepare search
-        my %SearchParam;
+        my %SearchParam = (
+            Result => 'ARRAY',
+        );
         ATTRIBUTE:
         for my $Attribute ( $Identifier->@* ) {
             if ( $Attribute =~ /^Dyn/ ) {
@@ -344,7 +356,7 @@ sub Run {
 
         my $ClassPreferences = $GeneralCatalogObject->ItemGet(
             Class => 'ITSM::ConfigItem::Class',
-            Name  => $$RemoteCIData->{Class},
+            Name  => $RemoteCIData->{Class},
         );
         my $NameModule = $ClassPreferences->{NameModule} ? $ClassPreferences->{NameModule}[0] : '';
         if ($NameModule) {
