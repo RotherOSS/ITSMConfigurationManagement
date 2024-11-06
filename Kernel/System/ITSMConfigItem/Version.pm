@@ -616,7 +616,8 @@ sub VersionAdd {
 
         # override possible incoming version string
         $Version{VersionString} = $VersionStringModuleObject->VersionStringGet(
-            Version => \%Version,
+            Version    => \%Version,
+            VersionAdd => 1,
         );
     }
 

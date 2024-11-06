@@ -54,6 +54,8 @@ sub new {
 sub VersionStringGet {
     my ( $Self, %Param ) = @_;
 
+    return $Param{Version}{VersionString} if ( $Param{Version}{VersionString} && !$Param{VersionAdd} );
+
     # expected params: Version
     my $VersionListRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->VersionListAll(
         ConfigItemIDs => [ $Param{Version}{ConfigItemID} ],
