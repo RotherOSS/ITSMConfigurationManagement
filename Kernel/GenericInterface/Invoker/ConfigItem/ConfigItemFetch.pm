@@ -173,7 +173,10 @@ sub HandleResponse {
     # get invoker config
     my $InvokerConfig = $Webservice->{Config}->{Requester}->{Invoker}->{ $Self->{Invoker} };
 
-    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    # get config item object
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # get general catalog object
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
     my %CIClassMapping = (
@@ -263,7 +266,9 @@ sub HandleResponse {
         my $ConfigItemNumber;
 
         # prepare search
-        my %SearchParam;
+        my %SearchParam = (
+            Result => 'ARRAY',
+        );
         ATTRIBUTE:
         for my $Attribute ( $Identifier->@* ) {
             if ( $Attribute =~ /^Dyn/ ) {
@@ -338,7 +343,7 @@ sub HandleResponse {
 
         my $ClassPreferences = $GeneralCatalogObject->ItemGet(
             Class => 'ITSM::ConfigItem::Class',
-            Name  => $$RemoteCIData->{Class},
+            Name  => $RemoteCIData->{Class},
         );
         my $NameModule = $ClassPreferences->{NameModule} ? $ClassPreferences->{NameModule}[0] : '';
         if ($NameModule) {
