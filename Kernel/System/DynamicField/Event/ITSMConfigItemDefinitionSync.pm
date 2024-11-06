@@ -93,7 +93,7 @@ sub Run {
         );
 
         # use OldData to account for name changes
-        if ( $DefinitionRef->{DynamicFieldRef}{ $DynamicField->{Name} } ) {
+        if ( $DefinitionRef->{DynamicFieldRef}{ $Param{Data}{OldData}{Name} } ) {
             push @{ $OutOfSyncDefinitions{$ClassID} }, $DynamicField->{ID};
         }
     }
