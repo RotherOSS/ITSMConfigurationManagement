@@ -467,18 +467,37 @@ sub Run {
             }
         }
 
-        for my $Attachment (@AttachmentList) {
-            my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
-                $Attachment->%*,
+        # handle config item attachments
+        if (@AttachmentList) {
+
+            my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
                 ConfigItemID => $ConfigItemID,
-                UserID       => 1,
             );
 
-            if ( !$Success ) {
-                return $Self->Error(
-                    ErrorMessage =>
-                        "Error while adding attachment with Name '$Attachment->{Filename}' for ConfigItem ID $ConfigItemID.",
+            for my $Filename (@ExistingAttachments) {
+                my $DeleteSuccess = $ConfigItemObject->ConfigItemAttachmentDelete(
+                    ConfigItemID => $ConfigItemID,
+                    Filename     => $Filename,
+                    UserID       => $UserID,
                 );
+            }
+
+            for my $Attachment (@AttachmentList) {
+
+                # delete all config item attachments
+
+                my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
+                    $Attachment->%*,
+                    ConfigItemID => $ConfigItemID,
+                    UserID       => $UserID,
+                );
+
+                if ( !$Success ) {
+                    return $Self->Error(
+                        ErrorMessage =>
+                            "Error while adding attachment with Name '$Attachment->{Filename}' for ConfigItem ID $ConfigItemID.",
+                    );
+                }
             }
         }
 
