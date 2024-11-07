@@ -26,7 +26,6 @@ use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
 
 # core modules
 use Scalar::Util qw(reftype);
-use MIME::Base64 qw(encode_base64);
 
 # CPAN modules
 
@@ -68,7 +67,7 @@ sub new {
 
     $Self->{OperationName} = 'ConfigItemUpsert';
 
-    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ConfigItemUpsert');
+    $Self->{Config} = $Kernel::OM->Get('Kernel::Config')->Get("GenericInterface::Operation::$Self->{OperationName}");
 
     return $Self;
 }
@@ -441,7 +440,7 @@ sub Run {
                 ConfigItemID => $ConfigItemID,
                 DeplStateID  => $RequiredAttributes{DeploymentStateID},
                 InciStateID  => $RequiredAttributes{IncidentStateID},
-                UserID       => 1,
+                UserID       => $UserID,
             );
 
             if ( !$Success ) {
@@ -456,7 +455,7 @@ sub Run {
                 %RequiredAttributes,
                 DeplStateID => $RequiredAttributes{DeploymentStateID},
                 InciStateID => $RequiredAttributes{IncidentStateID},
-                UserID      => 1,
+                UserID      => $UserID,
             );
 
             if ( !$ConfigItemID ) {
