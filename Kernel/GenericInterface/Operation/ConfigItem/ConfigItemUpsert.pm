@@ -25,7 +25,8 @@ use utf8;
 use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
 
 # core modules
-use MIME::Base64;
+use Scalar::Util qw(reftype);
+use MIME::Base64 qw(encode_base64);
 
 # CPAN modules
 
@@ -141,6 +142,22 @@ sub Run {
             );
         }
     }
+
+    # check optional array/hashes
+    for my $Optional (qw(DynamicField Attachment)) {
+        if (
+            defined $Param{Data}->{$Optional}
+            && !IsHashRefWithData( $Param{Data}->{$Optional} )
+            && !IsArrayRefWithData( $Param{Data}->{$Optional} )
+            )
+        {
+            return $Self->ReturnError(
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
+                ErrorMessage => "$Self->{OperationName}: $Optional parameter is missing or not valid!",
+            );
+        }
+    }
+
     my $ErrorMessage = '';
 
     # transform single CIs to an array reference
@@ -370,6 +387,53 @@ sub Run {
             next CI;
         }
 
+        my @AttachmentList;
+        if ( defined $RemoteCIData->{Attachment} ) {
+
+            # isolate Attachment parameter
+            my $Attachment = $RemoteCIData->{Attachment};
+
+            # homogenate input to array
+            if ( ref $Attachment eq 'HASH' ) {
+                push @AttachmentList, $Attachment;
+            }
+            else {
+                @AttachmentList = @{$Attachment};
+            }
+
+            # check Attachment internal structure
+            for my $AttachmentItem (@AttachmentList) {
+                if ( !IsHashRefWithData($AttachmentItem) ) {
+                    return {
+                        ErrorCode    => "$Self->{OperationName}.InvalidParameter",
+                        ErrorMessage =>
+                            "$Self->{OperationName}: ConfigItem->Attachment parameter is invalid!",
+                    };
+                }
+
+                # remove leading and trailing spaces
+                for my $Attribute ( sort keys $AttachmentItem->%* ) {
+                    if ( !reftype $AttachmentItem->{$Attribute} ) {
+
+                        #remove leading spaces
+                        $AttachmentItem->{$Attribute} =~ s{\A\s+}{};
+
+                        #remove trailing spaces
+                        $AttachmentItem->{$Attribute} =~ s{\s+\z}{};
+                    }
+                }
+
+                # check Attachment attribute values
+                my $AttachmentCheck = $Self->_CheckAttachment(
+                    Attachment => $AttachmentItem,
+                );
+
+                if ( !$AttachmentCheck->{Success} ) {
+                    return $Self->ReturnError( %{$AttachmentCheck} );
+                }
+            }
+        }
+
         if ($ConfigItemID) {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
@@ -403,6 +467,21 @@ sub Run {
             }
         }
 
+        for my $Attachment (@AttachmentList) {
+            my $Success = $ConfigItemObject->ConfigItemAttachmentAdd(
+                $Attachment->%*,
+                ConfigItemID => $ConfigItemID,
+                UserID       => 1,
+            );
+
+            if ( !$Success ) {
+                return $Self->Error(
+                    ErrorMessage =>
+                        "Error while adding attachment with Name '$Attachment->{Filename}' for ConfigItem ID $ConfigItemID.",
+                );
+            }
+        }
+
         push @CIsHandled, {
             ConfigItemID => $ConfigItemID,
             Name         => $RequiredAttributes{Name},
@@ -412,6 +491,125 @@ sub Run {
     return {
         Success => 1,
         Data    => { ConfigItem => \@CIsHandled },
+    };
+}
+
+=head2 ValidateContentType()
+
+checks the validity of the content type.
+
+Valid values for the MIME header I<Content-Type> are specified in L<RFC 2045|https://www.rfc-editor.org/rfc/rfc2045#section-5.1>.
+This spec allows e.g. bare carriage return and backslash quoted line feed characters in the value. But in OTOBO we
+can be more strict. This is because usually we are only interested in the media type and in the charset.
+Thus the following, somewhat arbitrary, conditions are imposed:
+
+=over 4
+
+=item The character carriage return is not allowed
+
+=item The character line feed is not allowed
+
+=item The MIME type, aka media type, is at the start of the value and matches C<qr{\w/\w}i>
+
+=item The character set is extracted by some regexes and is recognized by the C<Encode> module
+
+=back
+
+=cut
+
+sub ValidateContentType {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    return unless $Param{ContentType};
+
+    my $ContentType = $Param{ContentType};
+
+    # prohibit carriage return and line feed
+    return if $ContentType =~ m/[\r\n]/;
+
+    # check the optional Charset part
+    my $Charset = '';
+    if ( $ContentType =~ m/charset=/i ) {
+        $Charset = $ContentType;
+        $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+        $Charset =~ s/"|'//g;
+        $Charset =~ s/(.+?);.*/$1/g;
+    }
+
+    if ( $Charset && !$Self->ValidateCharset( Charset => $Charset ) ) {
+        return;
+    }
+
+    # check the required MimeType part
+    my $MimeType = '';
+    if ( $ContentType =~ m/^(\w+\/\w+)/i ) {
+        $MimeType = $1;
+        $MimeType =~ s/"|'//g;
+    }
+
+    if ( !$Self->ValidateMimeType( MimeType => $MimeType ) ) {
+        return;
+    }
+
+    # looks valid
+    return 1;
+}
+
+=head2 _CheckAttachment()
+
+checks if the given attachment parameter is valid.
+
+    my $AttachmentCheck = $OperationObject->_CheckAttachment(
+        Attachment => $Attachment,                  # all attachment parameters
+    );
+
+    returns:
+
+    $AttachmentCheck = {
+        Success => 1,                               # if everything is OK
+    }
+
+    $AttachmentCheck = {
+        ErrorCode    => 'Function.Error',           # if error
+        ErrorMessage => 'Error description',
+    }
+
+=cut
+
+sub _CheckAttachment {
+    my ( $Self, %Param ) = @_;
+
+    my $Attachment = $Param{Attachment};
+
+    # check attachment item internally
+    for my $Needed (qw(Content ContentType Filename)) {
+        if ( !IsStringWithData( $Attachment->{$Needed} ) ) {
+            return {
+                ErrorCode    => "$Self->{OperationName}.MissingParameter",
+                ErrorMessage => "$Self->{OperationName}: Attachment->$Needed  parameter is missing!",
+            };
+        }
+    }
+
+    # check Attachment->ContentType
+    if ( $Attachment->{ContentType} ) {
+
+        # The MIME header field Content-Type is only in some parts case insensitive,
+        # but lowercasing the whole string simplifies the handling in OTOBO.
+        $Attachment->{ContentType} = lc $Attachment->{ContentType};
+
+        if ( !$Self->ValidateContentType( ContentType => $Attachment->{ContentType} ) ) {
+            return {
+                ErrorCode    => "$Self->{OperationName}.InvalidParameter",
+                ErrorMessage => "$Self->{OperationName}: Attachment->ContentType is invalid!",
+            };
+        }
+    }
+
+    # if everything is OK then return Success
+    return {
+        Success => 1,
     };
 }
 
