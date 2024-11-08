@@ -437,10 +437,11 @@ sub Run {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                ConfigItemID => $ConfigItemID,
-                DeplStateID  => $RequiredAttributes{DeploymentStateID},
-                InciStateID  => $RequiredAttributes{IncidentStateID},
-                UserID       => $UserID,
+                ConfigItemID   => $ConfigItemID,
+                DeplStateID    => $RequiredAttributes{DeploymentStateID},
+                InciStateID    => $RequiredAttributes{IncidentStateID},
+                UserID         => $UserID,
+                ExternalSource => 1,
             );
 
             if ( !$Success ) {
@@ -453,9 +454,10 @@ sub Run {
             $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                DeplStateID => $RequiredAttributes{DeploymentStateID},
-                InciStateID => $RequiredAttributes{IncidentStateID},
-                UserID      => $UserID,
+                DeplStateID    => $RequiredAttributes{DeploymentStateID},
+                InciStateID    => $RequiredAttributes{IncidentStateID},
+                UserID         => $UserID,
+                ExternalSource => 1,
             );
 
             if ( !$ConfigItemID ) {
