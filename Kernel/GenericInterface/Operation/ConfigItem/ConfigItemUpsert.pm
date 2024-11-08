@@ -479,6 +479,13 @@ sub Run {
                     Filename     => $Filename,
                     UserID       => $UserID,
                 );
+
+                if ( !$DeleteSuccess ) {
+                    return $Self->Error(
+                        ErrorMessage =>
+                            "Error while deleting existing attachment with Name '$Filename' for ConfigItem ID $ConfigItemID.",
+                    );
+                }
             }
 
             for my $Attachment (@AttachmentList) {
