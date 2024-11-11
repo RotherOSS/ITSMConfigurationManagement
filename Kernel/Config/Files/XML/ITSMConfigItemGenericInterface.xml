@@ -100,20 +100,6 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Operation::ConfigItemCreate###Permission" Required="1" Valid="1">
-        <Description Translatable="1">Defines Required permissions to create ITSM configuration items using the Generic Interface.</Description>
-        <Navigation>GenericInterface::Operation::ConfigItemCreate</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">rw</Item>
-        </Value>
-    </Setting>
-    <Setting Name="GenericInterface::Operation::ConfigItemUpdate###Permission" Required="1" Valid="1">
-        <Description Translatable="1">Defines Required permissions to update ITSM configuration items using the Generic Interface.</Description>
-        <Navigation>GenericInterface::Operation::ConfigItemUpdate</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">rw</Item>
-        </Value>
-    </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemDelete###Permission" Required="1" Valid="1">
         <Description Translatable="1">Defines Required permissions to delete ITSM configuration items using the Generic Interface.</Description>
         <Navigation>GenericInterface::Operation::ConfigItemDelete</Navigation>
