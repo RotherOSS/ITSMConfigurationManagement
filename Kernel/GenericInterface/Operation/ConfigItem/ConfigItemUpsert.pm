@@ -25,6 +25,7 @@ use utf8;
 use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
 
 # core modules
+use List::Util qw(pairs);
 use Scalar::Util qw(reftype);
 
 # CPAN modules
@@ -200,6 +201,37 @@ sub Run {
         DeploymentState => 'ITSM::ConfigItem::DeploymentState',
         Class           => 'ITSM::ConfigItem::Class',
     );
+
+    # build dynamic field reference and lens lookup
+    my %DFRefLookup;
+    my %DFLensLookup;
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldList          = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        ObjectType => ['ITSMConfigItem'],
+        Valid      => 1,
+    ) || [];
+
+    DFCONFIG:
+    for my $DFConfig ( $DynamicFieldList->@* ) {
+
+        next DFCONFIG unless IsHashRefWithData($DFConfig);
+
+        if ( $DFConfig->{FieldType} eq 'Lens' ) {
+            $DFLensLookup{ $DFConfig->{Name} } = $DFConfig;
+        }
+        elsif (
+            $DynamicFieldBackendObject->HasBehavior(
+                DynamicFieldConfig => $DFConfig,
+                Behavior           => 'IsReferenceField'
+            )
+            )
+        {
+            $DFRefLookup{ $DFConfig->{Name} } = $DFConfig;
+        }
+    }
+
+    # store dynamic field reference and lens values to set them after config item add / update
+    my %AllDFShiftedValues;
 
     my %GeneralCatalogItemLookup;
     my @CIsHandled;
@@ -433,6 +465,16 @@ sub Run {
             }
         }
 
+        # shift dynamic field reference and lens values from configitem data to set them afterwards
+        my %DFShiftedValues;
+        DFNAME:
+        for my $DFName ( keys %DFRefLookup, keys %DFLensLookup ) {
+
+            next DFNAME unless defined $RemoteCIData->{"DynamicField_$DFName"};
+
+            $DFShiftedValues{$DFName} = delete $RemoteCIData->{"DynamicField_$DFName"};
+        }
+
         if ($ConfigItemID) {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
@@ -467,6 +509,8 @@ sub Run {
                 );
             }
         }
+
+        $AllDFShiftedValues{$ConfigItemID} = \%DFShiftedValues;
 
         # handle config item attachments
         if (@AttachmentList) {
@@ -513,6 +557,47 @@ sub Run {
             ConfigItemID => $ConfigItemID,
             Name         => $RequiredAttributes{Name},
         };
+    }
+
+    # set dynamic field reference and lens values after adding / updating all config items
+    CONFIGITEMID:
+    for my $CIDFPair ( pairs %AllDFShiftedValues ) {
+
+        my ( $ConfigItemID, $DFValues ) = $CIDFPair->@*;
+
+        next CONFIGITEMID unless IsHashRefWithData($DFValues);
+
+        # first, set dynamic field reference values
+        DFREF:
+        for my $DFRefName ( keys %DFRefLookup ) {
+
+            next DFREF unless exists $DFValues->{$DFRefName};
+
+            my $Success = $DynamicFieldBackendObject->ValueSet(
+                DynamicFieldConfig => $DFRefLookup{$DFRefName},
+                ObjectID           => $ConfigItemID,
+                Value              => $DFValues->{$DFRefName},
+                UserID             => $UserID,
+                ConfigItemHandled  => 1,
+                ExternalSource     => 1,
+            );
+        }
+
+        # second, set dynamic field lens values
+        DFLENS:
+        for my $DFLensName ( keys %DFLensLookup ) {
+
+            next DFLENS unless exists $DFValues->{$DFLensName};
+
+            my $Success = $DynamicFieldBackendObject->ValueSet(
+                DynamicFieldConfig => $DFLensLookup{$DFLensName},
+                ObjectID           => $ConfigItemID,
+                Value              => $DFValues->{$DFLensName},
+                UserID             => $UserID,
+                ConfigItemHandled  => 1,
+                ExternalSource     => 1,
+            );
+        }
     }
 
     return {
