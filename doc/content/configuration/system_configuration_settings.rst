@@ -1,8 +1,5 @@
 Configuration Reference
 -----------------------
-.. This chapter is always mandatory and should be added automatically when initiating the documentation.
-
-.. _example-system-configuration-option:
 
 Core::BulkAction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

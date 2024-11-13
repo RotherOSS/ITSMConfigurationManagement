@@ -124,13 +124,16 @@ An additional key *Content* is mandatory here. The *Content* is essentially the 
    * *Columns* - Number of columns
    * *ColumnWidth* (optional) - Widths of the colums (e.g. "1fr 40px 2fr"; "%" cannot be used)
    * *Rows* - The dynamic field matrix (i.e. an array of arrays [[DF: DF11,DF: DF12, DF: DF13], [DF: DF21, DF: DF22, DF: DF23], ...])
-      
-      * \- (The indicator for a each line in the grid as array)
-      .. putting the DF options (columnstart, columnspan) into another sublist creates "too deep nesting" error for pdflatex
-         
-         * *DF* - A dynamic field (the name - see above)
-         * *ColumnStart*
-         * *ColumnSpan*
+
+.. putting the DF options (columnstart, columnspan) into another sublist creates "too deep nesting" error for pdflatex
+
+Each row mus look as follows:
+
+\- (The indicator for a each line in the grid as array)
+   * *DF* - A dynamic field (the name - see above)
+   
+      * *ColumnStart*
+      * *ColumnSpan*
 
 Example for a dynamic field section (the Type is implicit, if none is given):
 
@@ -149,13 +152,13 @@ Example for a dynamic field section (the Type is implicit, if none is given):
                Rows:
                   # The first row of the grid
                   -
-                  - DF: DateBought
-                     Readonly: 1
-                  - DF: DateWarranty
+                     - DF: DateBought
+                        Readonly: 1
+                     - DF: DateWarranty
                   # The second row of the grid
                   -
-                  - DF: Computer-Application
-                  - DF: Computer-LicenseKey
+                     - DF: Computer-Application
+                     - DF: Computer-LicenseKey
 
 **Type: Description**
 No further settings are available.
