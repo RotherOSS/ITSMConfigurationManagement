@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Config Item Management';
     $Self->{Translation}->{'Change class definition'} = 'Muuta luokan määritelmää';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Yhden elementin enimmäismäärä';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tyhjät kentät osoittavat, että nykyiset arvot säilytetään.';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Ohitettu';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Määritä Template::Toolkit-skeema versiojonoja varten. Käytetään vain, jos Version String Module -moduulin arvoksi on asetettu TemplateToolkit.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Määritä joukko ehtoja, joiden mukaisesti asiakas saa nähdä konfigurointikohteen. Ehdot voidaan valinnaisesti rajoittaa tiettyihin asiakasryhmiin. Nimi on ainoa pakollinen määrite. Jos muita vaihtoehtoja ei anneta, kaikki konfigurointikohteet näkyvät kyseisessä luokassa.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden luomiseen yleisen käyttöliittymän avulla.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden poistamiseen yleisen käyttöliittymän avulla.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakemiseen yleisen käyttöliittymän avulla.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden hakuun yleisen käyttöliittymän avulla.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Määrittää vaaditut oikeudet ITSM-kokoonpanokohteiden päivittämiseen yleisen käyttöliittymän avulla.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Määrittää yleiskatsausmoduulin, joka näyttää kokoonpanokohdeluettelon pienen näkymän.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

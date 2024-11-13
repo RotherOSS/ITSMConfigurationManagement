@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Конфиг Член Менаџмент';
     $Self->{Translation}->{'Change class definition'} = 'Промени дефиниција на класа';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Максимален број на еден елемент';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Празните полиња индицираат дека сегашните вредности се задржани';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Скокнато';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         '';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         '';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Дефинира Барани пермисии да креира ITSM конфигурациски членови користејќи Генерички Интерфејси.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         '';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Дефинира Барани пермисии за  да земе ITSM конфигурациски членови користејќи Генерички Интерфејс.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Дефинира Барани пермисии за ITSM конфигурациски членови користејќи Генерички Интерфејси.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Дефинира Барани пермисии за надградба на ITSM конфигурациски членови на Генерички Интерфејс.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Дефинира преглед модул за приказ на мал преглед на кофигурациска лчен листа.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

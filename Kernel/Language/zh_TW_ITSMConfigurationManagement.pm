@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = '管理配置項';
     $Self->{Translation}->{'Change class definition'} = '修改類定義';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = '此元素的最大數量';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '空字段表示當前值被保存';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = '跳過的';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         '为版本字符串定义一个 Template::Toolkit 方案。仅在版本字符串模块设置为 TemplateToolkit 时使用。';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         '定义一组允许客户查看配置项的条件。可选择将条件限制为某些客户组。名称是唯一的强制属性。如果没有给出其他选项，则该类别下的所有配置项都将可见。';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        '定义使用通用接口创建 ITSM 配置项所需的权限。';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         '定义使用通用接口删除 ITSM 配置项所需的权限。';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         '定义使用通用接口获取 ITSM 配置项所需的权限。';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         '定义使用通用接口搜索 ITSM 配置项所需的权限。';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        '定义使用通用接口更新 ITSM 配置项所需的权限。';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '定义一个概览模块，用于显示配置项目列表的小视图。';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

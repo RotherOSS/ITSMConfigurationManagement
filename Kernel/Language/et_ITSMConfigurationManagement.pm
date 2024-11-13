@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Server OS';
     $Self->{Translation}->{'Change class definition'} = 'Muuda klassi määratlust';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Ühe elemendi maksimaalne arv';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tühjad väljad näitavad, et praegused väärtused jäävad alles.';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Välja jäetud';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Määrake malli::Toolkit skeem versiooni stringide jaoks. Kasutatakse ainult siis, kui Version String Module\'ile on määratud TemplateToolkit.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Määrake tingimused, mille alusel kliendil on lubatud konfiguratsioonielementi näha. Tingimusi saab valikuliselt piirata teatud kliendirühmadele. Nimi on ainus kohustuslik atribuut. Kui muid valikuid ei ole antud, on kõik konfiguratsioonielemendid selle kategooria all nähtavad.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Määratleb nõutavad õigused ITSM-konfiguratsiooni elementide loomiseks, kasutades üldist liidest.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Määratleb nõutavad õigused ITSMi konfiguratsiooniobjektide kustutamiseks üldise liidese abil.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Määratleb nõutavad õigused ITSMi konfiguratsioonielementide saamiseks üldise liidese abil.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Määratleb nõutavad õigused ITSMi konfiguratsiooniobjektide otsimiseks üldise liidese abil.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Kuvab menüüs lingi, mille abil saab seadistusobjekti redigeerida agentide kasutajaliidese suumivaates.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Määratleb ülevaatemooduli, mis näitab konfiguratsioonielementide loendi väikest vaadet.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

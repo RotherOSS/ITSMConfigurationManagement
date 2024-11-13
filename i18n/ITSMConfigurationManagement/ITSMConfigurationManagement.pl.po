@@ -3264,3 +3264,27 @@ msgstr "Określa początkową wysokość w pikselach dla komponentu edytora teks
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr "Określa wysokość elementu edytora tekstu sformatowanego dla tego ekranu. Wprowadź liczbę (piksele) lub wartość procentową (względną)."
 
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "General operation data"
+msgstr ""
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for incoming request data"
+msgstr ""
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for outgoing response data"
+msgstr ""
+
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Import/Export attachments (as the last entries per line)"
+msgstr ""
+
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Version String"
+msgstr ""
+
+#. SysConfig
+msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+msgstr ""
+

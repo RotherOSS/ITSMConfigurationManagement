@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = '構成アイテム管理';
     $Self->{Translation}->{'Change class definition'} = 'クラス定義を変更';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = '一エレメントあたりの最大数';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '空欄の項目は現在の値が保持されること意味します';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'スキップされました';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'バージョン文字列用の Template::Toolkit スキームを定義します。バージョン文字列モジュールが TemplateToolkit に設定されている場合にのみ使用されます。';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         '顧客が設定項目を見ることを許可される一連の条件を定義します。条件は、オプションで特定の顧客グループに制限することができます。名前は唯一の必須属性です。他のオプションが指定されていない場合、すべての設定項目がそのカテゴリの下に表示されます。';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'ジェネリックインターフェイスを活用して構成アイテムを作成する権限を定義する。';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'ジェネリック・インターフェースを活用して構成アイテムを削除するために必要な権限を定義します。';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'ジェネリックインターフェイスを活用して構成アイテムを取得する権限を定義する。';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'ジェネリックインターフェイスを活用して構成アイテムを検索する権限を定義する。';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'ジェネリックインターフェイスを活用して構成アイテムを変更する権限を定義する。';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '構成アイテムを定義して、構成アイテムのリストの小さなビューを表示します。';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

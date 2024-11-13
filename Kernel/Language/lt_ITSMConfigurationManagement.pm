@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Konfigūracijos elementų valdymas';
     $Self->{Translation}->{'Change class definition'} = 'Keisti klasės apibrėžtį';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Didžiausias vieno elemento skaičius';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tušti laukai rodo, kad dabartinės reikšmės paliekamos.';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Praleistas';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Apibrėžkite "Template::Toolkit" schemą, skirtą versijų eilutėms. Naudojama tik tada, jei versijų eilučių modulis nustatytas į TemplateToolkit.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Apibrėžkite sąlygų, kuriomis klientui leidžiama matyti konfigūracijos elementą, rinkinį. Sąlygas galima apriboti tam tikroms klientų grupėms. Pavadinimas yra vienintelis privalomas atributas. Jei kitų parinkčių nenurodyta, visi konfigūracijos elementai bus matomi toje kategorijoje.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Apibrėžiami reikalingi leidimai kurti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Apibrėžiami reikalingi leidimai ištrinti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Apibrėžiami reikalingi leidimai gauti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Apibrėžiami reikalingi leidimai ieškoti ITSM konfigūracijos elementų naudojant bendrąją sąsają.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Apibrėžiami reikalingi leidimai atnaujinti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Apibrėžia apžvalgos modulį, skirtą mažajam konfigūracijos elementų sąrašo vaizdui rodyti.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

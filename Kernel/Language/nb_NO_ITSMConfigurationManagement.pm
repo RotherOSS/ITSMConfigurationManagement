@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Administrasjon av konfigurasjonsenheter';
     $Self->{Translation}->{'Change class definition'} = 'Endre klassedefinisjon';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Maks. antall av ett element';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tomme felter indikerer at de nåværende verdiene beholdes';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Hoppet over';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Definer et Template::Toolkit-skjema for versjonsstrenger. Brukes bare hvis Versjonsstrengmodul er satt til TemplateToolkit.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Definer et sett med betingelser for at en kunde skal kunne se et konfigurasjonselement. Betingelsene kan eventuelt begrenses til bestemte kundegrupper. Navn er det eneste obligatoriske attributtet. Hvis ingen andre alternativer er angitt, vil alle konfigurasjonselementer være synlige under den aktuelle kategorien.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Definerer nødvendige tillatelser for å opprette ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Definerer nødvendige tillatelser for å slette ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Definerer nødvendige tillatelser for å hente ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Definerer nødvendige tillatelser for å søke i ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Definerer nødvendige tillatelser for å oppdatere ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definerer en oversiktsmodul som viser den lille visningen av en liste med konfigurasjonselementer.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

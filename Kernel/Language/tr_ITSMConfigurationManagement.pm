@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Konfigürasyon Öğesi Yönetimi';
     $Self->{Translation}->{'Change class definition'} = 'Sınıf tanımını değiştir';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Maksimum bir eleman sayısı';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Boş alanlar mevcut değerlerin korunduğunu gösterir';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Atlandı';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Sürüm dizeleri için bir Template::Toolkit şeması tanımlayın. Yalnızca Sürüm Dizesi Modülü TemplateToolkit olarak ayarlanmışsa kullanılır.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Bir müşterinin bir yapılandırma öğesini görmesine izin verilen bir dizi koşul tanımlayın. Koşullar isteğe bağlı olarak belirli müşteri gruplarıyla sınırlandırılabilir. Ad tek zorunlu niteliktir. Başka bir seçenek belirtilmezse, tüm yapılandırma öğeleri bu kategori altında görünür olacaktır.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Genel Arayüzü kullanarak ITSM yapılandırma öğeleri oluşturmak için Gerekli izinleri tanımlar.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Genel Arayüzü kullanarak ITSM yapılandırma öğelerini silmek için Gerekli izinleri tanımlar.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Genel Arayüzü kullanarak ITSM yapılandırma öğelerini almak için Gerekli izinleri tanımlar.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Genel Arayüzü kullanarak ITSM yapılandırma öğelerini aramak için Gerekli izinleri tanımlar.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Genel Arayüzü kullanarak ITSM yapılandırma öğelerini güncellemek için Gerekli izinleri tanımlar.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Bir yapılandırma öğesi listesinin küçük görünümünü göstermek için bir genel bakış modülü tanımlar.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = '구성 항목 관리';
     $Self->{Translation}->{'Change class definition'} = '클래스 정의 변경';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = '하나의 요소의 최대 개수';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '빈 필드는 현재 값이 유지됨을 나타냅니다.';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = '건너뛰기';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         '버전 문자열에 대한 템플릿::툴킷 체계를 정의합니다. 버전 문자열 모듈이 TemplateToolkit으로 설정된 경우에만 사용됩니다.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         '고객이 구성 항목을 볼 수 있도록 허용되는 조건 집합을 정의합니다. 조건은 선택적으로 특정 고객 그룹으로 제한할 수 있습니다. 이름은 유일한 필수 속성입니다. 다른 옵션을 지정하지 않으면 모든 구성 항목이 해당 카테고리 아래에 표시됩니다.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        '일반 인터페이스를 사용하여 ITSM 구성 항목을 만드는 데 필요한 권한을 정의합니다.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         '일반 인터페이스를 사용하여 ITSM 구성 항목을 삭제하는 데 필요한 권한을 정의합니다.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         '일반 인터페이스를 사용하여 ITSM 구성 항목을 가져오는 데 필요한 권한을 정의합니다.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         '일반 인터페이스를 사용하여 ITSM 구성 항목을 검색하는 데 필요한 권한을 정의합니다.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        '일반 인터페이스를 사용하여 ITSM 구성 항목을 업데이트하는 데 필요한 권한을 정의합니다.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '구성 항목 목록의 작은 보기를 표시하는 개요 모듈을 정의합니다.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =

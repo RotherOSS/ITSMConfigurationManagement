@@ -23,6 +23,11 @@ use utf8;
 sub Data {
     my $Self = shift;
 
+    # Template: AdminGenericInterfaceOperationConfigItem
+    $Self->{Translation}->{'General operation data'} = '';
+    $Self->{Translation}->{'Settings for incoming request data'} = '';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Λειτουργικό σύστημα διακομιστή';
     $Self->{Translation}->{'Change class definition'} = 'Αλλαγή ορισμού κλάσης';
@@ -218,6 +223,8 @@ sub Data {
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Μέγιστος αριθμός ενός στοιχείου';
     $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Τα κενά πεδία υποδεικνύουν ότι οι τρέχουσες τιμές διατηρούνται';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
+    $Self->{Translation}->{'Version String'} = '';
     $Self->{Translation}->{'Skipped'} = 'Παραλείπεται';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
@@ -310,16 +317,14 @@ sub Data {
         'Ορισμός ενός σχήματος Template::Toolkit για συμβολοσειρές έκδοσης. Χρησιμοποιείται μόνο αν η ενότητα Version String Module έχει οριστεί σε TemplateToolkit.';
     $Self->{Translation}->{'Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.'} =
         'Ορίστε ένα σύνολο συνθηκών υπό τις οποίες επιτρέπεται σε έναν πελάτη να δει ένα στοιχείο διαμόρφωσης. Οι συνθήκες μπορούν προαιρετικά να περιοριστούν σε ορισμένες ομάδες πελατών. Το όνομα είναι το μόνο υποχρεωτικό χαρακτηριστικό. Εάν δεν δοθούν άλλες επιλογές, όλα τα στοιχεία διαμόρφωσης θα είναι ορατά στο πλαίσιο αυτής της κατηγορίας.';
-    $Self->{Translation}->{'Defines Required permissions to create ITSM configuration items using the Generic Interface.'} =
-        'Καθορίζει τα απαιτούμενα δικαιώματα για τη δημιουργία στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
     $Self->{Translation}->{'Defines Required permissions to delete ITSM configuration items using the Generic Interface.'} =
         'Καθορίζει τα απαιτούμενα δικαιώματα για τη διαγραφή στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
     $Self->{Translation}->{'Defines Required permissions to get ITSM configuration items using the Generic Interface.'} =
         'Καθορίζει τα απαιτούμενα δικαιώματα για τη λήψη στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Καθορίζει τα απαιτούμενα δικαιώματα για την αναζήτηση στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
-    $Self->{Translation}->{'Defines Required permissions to update ITSM configuration items using the Generic Interface.'} =
-        'Εμφανίζει έναν σύνδεσμο στο μενού για την επεξεργασία ενός στοιχείου διαμόρφωσης στην προβολή μεγέθυνσης του περιβάλλοντος εργασίας του πράκτορα.';
+    $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
+        '';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας λίστας στοιχείων διαμόρφωσης.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
