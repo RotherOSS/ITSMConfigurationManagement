@@ -1,6 +1,6 @@
 Configuration: Web Services
 ==================================================
-The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html are known>`_, are known.
+The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
 
 Operations
 ----------
