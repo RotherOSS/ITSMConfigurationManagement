@@ -272,9 +272,10 @@ Resulting data may be returned as follows:
 
 ConfigItemUpsert
 ^^^^^^^^^^^^^^^^
-Add or update one or more config items based on the sent data.
+With this operation, it is possible to add or update one or more config items based on the sent data. A simple example web service definition could look as follows:
 
- .. code-block:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     Debugger:
@@ -286,6 +287,11 @@ Add or update one or more config items based on the sent data.
       Operation:
         ConfigItemUpsert:
           Description: Add or update one or more Config Items.
+          Identifier41:
+          - Number
+          [...]
+          Identifier74:
+          - Number
           IncludeTicketData: ~
           MappingInbound:
             Type: Simple
@@ -302,6 +308,80 @@ Add or update one or more config items based on the sent data.
               Route: /ConfigItemUpsert/
         Type: HTTP::REST
     RemoteSystem: ''
+
+Based on this definition, a request may look like this:
+
+.. code-block:: bash
+
+    curl -X POST --header "Content-Type: application/json"
+    --data '{
+        "UserLogin": "AgentUser",
+        "Password": "Password",
+        "ConfigItem": [
+            {
+              "Attachment": "",
+              "ChangeBy": 2,
+              "ChangeTime": "2024-11-14 09:06:47",
+              "Class": "Building",
+              "ConfigItemID": 2,
+              "CreateBy": 2,
+              "CreateTime": "2024-11-14 09:06:47",
+              "CurDeplState": "Production",
+              "CurDeplStateType": "productive",
+              "CurInciState": "Operational",
+              "CurInciStateType": "operational",
+              "DeplState": "Production",
+              "DeplStateType": "productive",
+              "Description": "[Description]",
+              "DynamicField_Location-ReferenceToSubsidiary": [
+                1
+              ],
+              "InciState": "Operational",
+              "InciStateType": "operational",
+              "LastVersionID": 2,
+              "Name": "Building 01",
+              "Number": "1042000001",
+              "VersionID": 2,
+              "VersionString": "1"
+            }
+        ]
+    }'
+    https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemUpsert
+
+Possible parameters to pass are:
+
+UserLogin
+    either UserLogin and Password or SessionID are required
+
+Password
+    Passwords are passed in plaintext
+
+SessionID
+    SessionID may be retrieved by using a SessionCreate web service operation
+
+ConfigItem
+    either a single config item data hash or an array of config item data hashes to add or update
+
+    .. note::
+
+        The system determines wether to perform an insertion or update based on the identifier configured per class in the web service configuration.
+
+Resulting data may be returned as follows:
+
+.. code-block:: json
+
+    {
+      "ConfigItem": [
+        {
+          "ConfigItemID": "1",
+          "Name": "Subsidiary 01"
+        },
+        {
+          "ConfigItemID": "3",
+          "Name": "Building 02"
+        }
+      ]
+    }
 
 ConfigItemDelete
 ^^^^^^^^^^^^^^^^
