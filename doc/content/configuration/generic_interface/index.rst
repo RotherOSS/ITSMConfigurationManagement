@@ -242,7 +242,7 @@ DynamicFields
 
     .. caution::
 
-    The set of operators available is restricted for some dynamic field types. For example, dynamic fields of type checkbox only support the operators 'Empty' and 'Equals'.
+        The set of operators available is restricted for some dynamic field types. For example, dynamic fields of type checkbox only support the operators 'Empty' and 'Equals'.
 
 ConfigItemCreateTimeOlderMinutes
     optional, filter for config items which have been created more than ... minutes ago, number of minutes as String
