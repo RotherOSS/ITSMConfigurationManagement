@@ -385,9 +385,10 @@ Resulting data may be returned as follows:
 
 ConfigItemDelete
 ^^^^^^^^^^^^^^^^
-Delete a config item.
+With this operation, it is possible to delete an existing config item. A simple example web service definition could look as follows:
 
- .. code-block:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     Debugger:
@@ -415,6 +416,45 @@ Delete a config item.
               Route: /ConfigItemDelete/:ConfigItemID
         Type: HTTP::REST
     RemoteSystem: ''
+
+Based on this definition, a request may look like this:
+
+.. code-block:: bash
+
+    curl -X POST --header "Content-Type: application/json"
+    --data '{
+        "UserLogin": "AgentUser",
+        "Password": "Password",
+    }'
+    https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemDelete/<ConfigItemID>
+
+Possible parameters to pass are:
+
+UserLogin
+    either UserLogin and Password or SessionID are required
+
+Password
+    Passwords are passed in plaintext
+
+SessionID
+    SessionID may be retrieved by using a SessionCreate web service operation
+
+ConfigItemID
+    required, could be comma separated IDs or an Array
+
+    .. note::
+
+        In the above curl example, the ConfigItemID is appended to the URL string. This is possible because the example web service definition contains a route mapping which allows this (`Route: /ConfigItemGet/:ConfigItemID`).
+
+Resulting data may be returned as follows:
+
+.. code-block:: json
+
+    {
+      "ConfigItemID": [
+        "4"
+      ]
+    }
 
 Invoker
 -------
