@@ -458,12 +458,14 @@ Resulting data may be returned as follows:
 
 Invoker
 -------
+When using OTOBO as a requester to other systems API, the ConfigItemFetch invoker adds functionality within the ITSMConfigurationManagement package.
 
 ConfigItemFetch
 ^^^^^^^^^^^^^^^
-Fetch data from remote endpoint and add or update one or more config items based on that data.
+Using the ConfigItemFetch invoker, it is possible to fetch data from a remote endpoint and add or update one or more config items based on that data. A simple example web service definition could look as follows:
 
- .. code-block:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     Debugger:
@@ -476,6 +478,23 @@ Fetch data from remote endpoint and add or update one or more config items based
       Invoker:
         ConfigItemFetch:
           Description: Fetch Config Item data.
+          Events:
+          - Asynchronous: '1'
+            Condition:
+              Condition:
+                '1':
+                  Fields:
+                    Title:
+                      Match: .+
+                      Type: Regexp
+                  Type: and
+              ConditionLinking: and
+            Event: TicketQueueUpdate
+          Identifier41:
+          - Number
+          [...]
+          Identifier74:
+          - Number
           MappingInbound:
             Type: Simple
           MappingOutbound:
@@ -485,15 +504,23 @@ Fetch data from remote endpoint and add or update one or more config items based
         Config:
           Authentication:
             AuthType: BasicAuth
-            BasicAuthPassword: somepassword
-            BasicAuthUser: someusername
+            BasicAuthPassword: Password
+            BasicAuthUser: AgentUser
           DefaultCommand: GET
-          Host: web:5000/otobo/nph-genericinterface.pl/WebserviceID/3
+          Host: https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>
           InvokerControllerMapping:
             ConfigItemFetch:
               Controller: /ConfigItemFetch/
           Timeout: '120'
         Type: HTTP::REST
+
+The ConfigItemFetch invoker works slightly similar to the ConfigItemUpsert operation in terms that it adds or updates one or more config items based on the defined identifier attributes. Upon being triggered by the configured events (in the example above TicketQueueUpdate), the remote system is requested and the returned data are processed.
+
+It is also possible to trigger a ConfigItemFetch invoker manually via console command:
+
+.. code-block:: bash
+
+   bin/otobo.Console.pl Maint::WebService::TriggerConfigItemFetch <WEBSERVICE_NAME> <INVOKER_NAME>
 
 .. toctree::
    :maxdepth: 2
