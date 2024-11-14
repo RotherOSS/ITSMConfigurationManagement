@@ -1,15 +1,17 @@
-Custom Configuration: Web Services
+Configuration: Web Services
 ==================================================
-This page holds examples for Web Service invoker and operations included in the ITSMConfigurationManagement package.
+The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html are known>`_, are known.
 
 Operations
 ----------
+Most of the actions available via GUI are implemented as operations, such as searching, creating, editing and fetching config item data.
 
 ConfigItemGet
 ^^^^^^^^^^^^^
-Provide the config item data for the requested config item.
+With this operation, it is possible to fetch config item data from an OTOBO system. A simple example web service definition could look as follows:
 
- .. code-block:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     Debugger:
@@ -33,10 +35,78 @@ Provide the config item data for the requested config item.
           KeepAlive: ''
           MaxLength: '1000000'
           RouteOperationMapping:
-            ConfigItemDelete:
-              Route: /ConfigItemDelete/:ConfigItemID
+            ConfigItemGet:
+              Route: /ConfigItemGet/:ConfigItemID
         Type: HTTP::REST
     RemoteSystem: ''
+
+Based on this definition, a request may look like this:
+
+.. code-block:: bash
+
+    curl -X POST --header "Content-Type: application/json"
+    --data '{
+        "UserLogin": "AgentUser",
+        "Password": "Password",
+        "Attachments": 1
+    }'
+    https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemGet/<ConfigItemID>
+
+Possible parameters to pass are:
+
+UserLogin
+    either UserLogin and Password or SessionID are required
+
+Password
+    Passwords are passed in plaintext
+
+SessionID
+    SessionID may be retrieved by using a SessionCreate web service operation
+
+ConfigItemID
+    required, could be comma separated IDs or an Array
+
+    .. note::
+
+        In the above curl example, the ConfigItemID is appended to the URL string. This is possible because the example web service definition contains a route mapping which allows this (`Route: /ConfigItemGet/:ConfigItemID`).
+
+Attachments
+    optional, 1 as default. If it's set with the value 1, attachments for articles will be included on ConfigItem data
+
+Resulting data may be returned as follows:
+
+.. code-block:: json
+
+    {
+      "ConfigItem": [
+        {
+          "Attachment": "",
+          "ChangeBy": 2,
+          "ChangeTime": "2024-11-14 09:06:47",
+          "Class": "Building",
+          "ConfigItemID": 2,
+          "CreateBy": 2,
+          "CreateTime": "2024-11-14 09:06:47",
+          "CurDeplState": "Production",
+          "CurDeplStateType": "productive",
+          "CurInciState": "Operational",
+          "CurInciStateType": "operational",
+          "DeplState": "Production",
+          "DeplStateType": "productive",
+          "Description": "[Description]",
+          "DynamicField_Location-ReferenceToSubsidiary": [
+            1
+          ],
+          "InciState": "Operational",
+          "InciStateType": "operational",
+          "LastVersionID": 2,
+          "Name": "Building 01",
+          "Number": "1042000001",
+          "VersionID": 2,
+          "VersionString": "1"
+        }
+      ]
+    }
 
 ConfigItemSearch
 ^^^^^^^^^^^^^^^^
