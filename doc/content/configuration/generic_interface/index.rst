@@ -2,6 +2,14 @@ Configuration: Web Services
 ==================================================
 The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
 
+.. note::
+
+    For readability, not all combinations of possible setups are shown here, but some basic examples, which serve the purpose to provide a sufficient illustration of possibilites. The presets taken, which may be subject to custom configuration, are the following:
+
+    **Authentication:** BasicAuth method with username and password
+
+    **Transport:** HTTP\:\:REST
+
 .. attention::
 
     Every operation and the invoker listed and described below require an agent account as well as permission to perform the respective action on the respective config item(s). Customer access to these modules is currently not implemented.
