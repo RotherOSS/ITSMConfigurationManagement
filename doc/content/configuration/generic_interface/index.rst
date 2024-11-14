@@ -12,11 +12,11 @@ The ITSMConfigurationManagement package also includes extensions to the existing
 
 .. attention::
 
-    Every operation and the invoker listed and described below require an agent account as well as permission to perform the respective action on the respective config item(s). Customer access to these modules is currently not implemented.
+    Every operation and the invoker listed and described below requires authentication via an agent account as well as permission to perform the respective action on the respective config item(s). Customer user access to these modules is currently not implemented.
 
 Operations
 ----------
-Most of the actions available via GUI are implemented as operations, such as creating, editing or deleting a config item as well as searching and fetching config item data.
+Most of the config item actions available via Frontend are implemented as operations, such as creating, editing or deleting a config item as well as searching and fetching config item data.
 
 ConfigItemGet
 ^^^^^^^^^^^^^
@@ -34,7 +34,6 @@ With this operation, it is possible to fetch config item data from an OTOBO syst
       Operation:
         ConfigItemGet:
           Description: Get Config Item data.
-          IncludeTicketData: '0'
           MappingInbound:
             Type: Simple
           MappingOutbound:
@@ -135,7 +134,6 @@ With this operation, it is possible to search for config items based on a wide v
       Operation:
         ConfigItemSearch:
           Description: Search for Config Items.
-          IncludeTicketData: '0'
           MappingInbound:
             Type: Simple
           MappingOutbound:
@@ -314,7 +312,6 @@ With this operation, it is possible to add or update one or more config items ba
           [...]
           Identifier74:
           - Number
-          IncludeTicketData: ~
           MappingInbound:
             Type: Simple
           MappingOutbound:
@@ -425,7 +422,6 @@ With this operation, it is possible to delete an existing config item. A simple 
       Operation:
         ConfigItemDelete:
           Description: Delete a Config Item.
-          IncludeTicketData: '0'
           MappingInbound:
             Type: Simple
           MappingOutbound:
