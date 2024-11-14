@@ -110,9 +110,10 @@ Resulting data may be returned as follows:
 
 ConfigItemSearch
 ^^^^^^^^^^^^^^^^
-Search for one or more config items.
+With this operation, it is possible to search for config items based on a wide variety of search query options. A simple example web service definition could look as follows:
 
- .. code-block:: yaml
+.. code-block:: yaml
+    :linenos:
 
     ---
     Debugger:
@@ -140,6 +141,134 @@ Search for one or more config items.
               Route: /ConfigItemSearch/
         Type: HTTP::REST
     RemoteSystem: ''
+
+Based on this definition, a request may look like this:
+
+.. code-block:: bash
+
+    curl -X POST --header "Content-Type: application/json"
+    --data '{
+        "UserLogin": "AgentUser",
+        "Password": "Password",
+        "Name": "Building*"
+    }'
+    https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemSearch
+
+Possible parameters to pass are:
+
+UserLogin
+    either UserLogin and Password or SessionID are required
+
+Password
+    Passwords are passed in plaintext
+
+SessionID
+    SessionID may be retrieved by using a SessionCreate web service operation
+
+ConfigItemID
+    optional, String or array of Strings. Use ConfigItemSearch as a config item filter on a single config item or a predefined config item list
+
+Number
+	optional, String or array of Strings. SQL placeholders like `%` are possible
+
+Name
+	optional, String or array of Strings. SQL placeholders like `%` are possible
+
+Classes
+	optional, array of Strings
+
+ClassIDs
+	optional, array of Strings
+
+DeplStates
+	optional, deployment state names of config items, array of Strings
+
+DeplStateIDs
+	optional, deployment state IDs of config items, array of Strings
+
+CurDeplStates
+	optional, current deployment state names of config items, array of Strings
+
+CurDeplStateIDs
+	optional, current deployment state IDs of config items, array of Strings
+
+InciStates
+	optional, incident state names of config items, array of Strings
+
+InciStateIDs
+	optional, incident state IDs of config items, array of Strings
+
+CurInciStates
+	optional, current incident state names of config items, array of Strings
+
+CurInciStateIDs
+	optional, current incident state IDs of config items, array of Strings
+
+Limit
+	optional, maximal number of config items returned, default is 10000
+
+CreateBy
+    optional, agent user ID of agent who created the config item, array of Strings
+
+ChangeBy
+    optional, agent user ID of agent who performed the latest change to the config item, array of Strings
+
+DynamicFields
+    At least one operator must be specified. Operators will be connected with AND, values in an operator with OR. You can also pass more than one argument to an operator: `['value1', 'value2']`. Available operators are:
+
+    .. code-block:: perl
+
+        DynamicField_FieldNameX => {
+            Empty             => 1,                       # will return dynamic fields without a value
+                                                          #     set to 0 to search fields with a value present.
+            Equals            => 123,
+            Like              => 'value*',                # "equals" operator with wildcard support
+            GreaterThan       => '2001-01-01 01:01:01',
+            GreaterThanEquals => '2001-01-01 01:01:01',
+            SmallerThan       => '2002-02-02 02:02:02',
+            SmallerThanEquals => '2002-02-02 02:02:02',
+        }
+
+ConfigItemCreateTimeOlderMinutes
+    optional, filter for config items which have been created more than ... minutes ago, number of minutes as String
+
+ConfigItemCreateTimeNewerMinutes
+    optional, filter for config items which have been created less than ... minutes ago, number of minutes as String
+
+ConfigItemCreateTimeNewerDate
+    optional, filter for config items which have been created later than the given time stamp, DateTime-String in format 'YYYY-MM-DD HH:MM:SS'
+
+ConfigItemCreateTimeOlderDate
+    optional, filter for config items which have been created before the given time stamp, DateTime-String in format 'YYYY-MM-DD HH:MM:SS'
+
+ConfigItemLastChangeTimeOlderMinutes
+    optional, filter for config items which have been updated more than ... minutes ago, number of minutes as String
+
+ConfigItemLastChangeTimeNewerMinutes
+    optional, filter for config items which have been updated less than ... minutes ago, number of minutes as String
+
+ConfigItemLastChangeTimeNewerDate
+    optional, filter for config items which have been updated later than the given time stamp, DateTime-String in format 'YYYY-MM-DD HH:MM:SS'
+
+ConfigItemLastChangeTimeOlderDate
+    optional, filter for config items which have been updated before the given time stamp, DateTime-String in format 'YYYY-MM-DD HH:MM:SS'
+
+OrderBy
+    optional, direction to order result in, possible values: 'Down', 'Up'. Also possible as array for sub sorting
+
+SortBy
+    optional, attribute to sort result by, possible values: ConfigItem, Number, Name, DeplState, InciState, CurDeplState, CurInciState, Age, Created, Changed. Also possible as array for sub sorting
+
+Resulting data may be returned as follows:
+
+.. code-block:: json
+
+    {
+      "ConfigItemID": [
+        "2",
+        "1"
+      ]
+    }
 
 ConfigItemUpsert
 ^^^^^^^^^^^^^^^^
