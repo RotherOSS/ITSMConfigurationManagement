@@ -2,9 +2,13 @@ Configuration: Web Services
 ==================================================
 The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
 
+.. attention::
+
+    Every operation and the invoker listed and described below require an agent account as well as permission to perform the respective action on the respective config item(s). Customer access to these modules is currently not implemented.
+
 Operations
 ----------
-Most of the actions available via GUI are implemented as operations, such as searching, creating, editing and fetching config item data.
+Most of the actions available via GUI are implemented as operations, such as creating, editing or deleting a config item as well as searching and fetching config item data.
 
 ConfigItemGet
 ^^^^^^^^^^^^^
@@ -236,6 +240,10 @@ DynamicFields
     - SmallerThan
     - SmallerThanEquals
 
+    .. caution::
+
+    The set of operators available is restricted for some dynamic field types. For example, dynamic fields of type checkbox only support the operators 'Empty' and 'Equals'.
+
 ConfigItemCreateTimeOlderMinutes
     optional, filter for config items which have been created more than ... minutes ago, number of minutes as String
 
@@ -282,7 +290,6 @@ ConfigItemUpsert
 With this operation, it is possible to add or update one or more config items based on the sent data. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
-    :linenos:
 
     ---
     Debugger:
@@ -355,6 +362,10 @@ Based on this definition, a request may look like this:
     }'
     https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemUpsert
 
+.. hint::
+
+   Note that, based on the version trigger configured per class in the admin general catalog interface, a new version may or may not be created based on the data provided via request.
+
 Possible parameters to pass are:
 
 UserLogin
@@ -369,7 +380,7 @@ SessionID
 ConfigItem
     either a single config item data hash or an array of config item data hashes to add or update
 
-    .. note::
+    .. hint::
 
         The system determines wether to perform an insertion or update based on the identifier configured per class in the web service configuration.
 
@@ -395,7 +406,6 @@ ConfigItemDelete
 With this operation, it is possible to delete an existing config item. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
-    :linenos:
 
     ---
     Debugger:
@@ -472,7 +482,6 @@ ConfigItemFetch
 Using the ConfigItemFetch invoker, it is possible to fetch data from a remote endpoint and add or update one or more config items based on that data. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
-    :linenos:
 
     ---
     Debugger:
@@ -522,6 +531,10 @@ Using the ConfigItemFetch invoker, it is possible to fetch data from a remote en
         Type: HTTP::REST
 
 The ConfigItemFetch invoker works slightly similar to the ConfigItemUpsert operation in terms that it adds or updates one or more config items based on the defined identifier attributes. Upon being triggered by the configured events (in the example above TicketQueueUpdate), the remote system is requested and the returned data are processed.
+
+.. hint::
+
+   Note that, based on the version trigger configured per class in the admin general catalog interface, a new version may or may not be created based on the data fetched via request.
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
