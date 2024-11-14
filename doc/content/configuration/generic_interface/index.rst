@@ -11,7 +11,6 @@ ConfigItemGet
 With this operation, it is possible to fetch config item data from an OTOBO system. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
-    :linenos:
 
     ---
     Debugger:
@@ -93,7 +92,7 @@ Resulting data may be returned as follows:
           "CurInciStateType": "operational",
           "DeplState": "Production",
           "DeplStateType": "productive",
-          "Description": "[Description]",
+          "Description": "Some meaningful Description",
           "DynamicField_Location-ReferenceToSubsidiary": [
             1
           ],
@@ -113,7 +112,6 @@ ConfigItemSearch
 With this operation, it is possible to search for config items based on a wide variety of search query options. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
-    :linenos:
 
     ---
     Debugger:
@@ -150,7 +148,21 @@ Based on this definition, a request may look like this:
     --data '{
         "UserLogin": "AgentUser",
         "Password": "Password",
-        "Name": "Building*"
+        "Name": "Building*",
+        "DynamicField_FieldNameA": {
+            "Empty": 1
+        },
+        "DynamicField_FieldNameB": {
+            "Equals": "SomeString"
+        },
+        "DynamicField_FieldNameC": {
+            "GreaterThan": "1970-01-01 00:00:01",
+            "SmallerThan": "1980-12-31 23:59:59"
+        },
+        "DynamicField_FieldNameD": {
+            "GreaterThanEquals": "1970-01-01 00:00:01",
+            "SmallerThanEquals": "1980-12-31 23:59:59"
+        }
     }'
     https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>/ConfigItemSearch
 
@@ -216,18 +228,13 @@ ChangeBy
 DynamicFields
     At least one operator must be specified. Operators will be connected with AND, values in an operator with OR. You can also pass more than one argument to an operator: `['value1', 'value2']`. Available operators are:
 
-    .. code-block:: perl
-
-        DynamicField_FieldNameX => {
-            Empty             => 1,                       # will return dynamic fields without a value
-                                                          #     set to 0 to search fields with a value present.
-            Equals            => 123,
-            Like              => 'value*',                # "equals" operator with wildcard support
-            GreaterThan       => '2001-01-01 01:01:01',
-            GreaterThanEquals => '2001-01-01 01:01:01',
-            SmallerThan       => '2002-02-02 02:02:02',
-            SmallerThanEquals => '2002-02-02 02:02:02',
-        }
+    - Empty: will return dynamic fields without a value, set to 0 to search fields with a value present
+    - Equals
+    - Like: 'Equals' operator with wildcard support
+    - GreaterThan
+    - GreaterThanEquals
+    - SmallerThan
+    - SmallerThanEquals
 
 ConfigItemCreateTimeOlderMinutes
     optional, filter for config items which have been created more than ... minutes ago, number of minutes as String
@@ -332,7 +339,7 @@ Based on this definition, a request may look like this:
               "CurInciStateType": "operational",
               "DeplState": "Production",
               "DeplStateType": "productive",
-              "Description": "[Description]",
+              "Description": "Some meaningful Description",
               "DynamicField_Location-ReferenceToSubsidiary": [
                 1
               ],
