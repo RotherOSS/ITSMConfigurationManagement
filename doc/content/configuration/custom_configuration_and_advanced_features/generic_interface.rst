@@ -550,17 +550,17 @@ Number
 Name
 	optional if a name module is configured for the class, Name of config item
 
-ClassID
-	required, ID of class for config item to be created in
+Class
+	required, name of class for config item to be created in
 
 VersionString
     optional if a version string module is configured for the class, version identifier of config item
 
-DeplStateID
-	required, ID of deployment state of config item
+DeploymentState
+	required, name of deployment state of config item
 
-InciStateID
-	required, ID of incident state of config item
+IncidentState
+	required, name of incident state of config item
 
 Description
     optional, description text if a description is configured for the respective class
