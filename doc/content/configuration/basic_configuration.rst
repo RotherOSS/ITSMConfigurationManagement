@@ -3,7 +3,7 @@ Basic Configuration
 Following the basic configuration you will learn to assign permissions to agents and customer users and how to get started with the most usual CIs.
 
 Assign Permissions
------------------------
+------------------
 Agents/customer users who need access to CIs of the CMDB have to be assigned to the group "itsm-configitem".
 
 Starting with the most usual CIs

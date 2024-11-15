@@ -1,5 +1,5 @@
 Configuration: Web Services
-==================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
 
 .. note::
@@ -15,11 +15,11 @@ The ITSMConfigurationManagement package also includes extensions to the existing
     Every operation and the invoker listed and described below requires authentication via an agent account as well as permission to perform the respective action on the respective config item(s). Customer user access to these modules is currently not implemented.
 
 Operations
-----------
+""""""""""
 Most of the config item actions available via Frontend are implemented as operations, such as creating, editing or deleting a config item as well as searching and fetching config item data.
 
-ConfigItemGet
-^^^^^^^^^^^^^
+**ConfigItemGet**
+
 With this operation, it is possible to fetch config item data from an OTOBO system. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
@@ -118,8 +118,8 @@ Resulting data may be returned as follows:
       ]
     }
 
-ConfigItemSearch
-^^^^^^^^^^^^^^^^
+**ConfigItemSearch**
+
 With this operation, it is possible to search for config items based on a wide variety of search query options. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
@@ -291,8 +291,8 @@ Resulting data may be returned as follows:
       ]
     }
 
-ConfigItemUpsert
-^^^^^^^^^^^^^^^^
+**ConfigItemUpsert**
+
 With this operation, it is possible to add or update one or more config items based on the sent data. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
@@ -406,8 +406,8 @@ Resulting data may be returned as follows:
       ]
     }
 
-ConfigItemDelete
-^^^^^^^^^^^^^^^^
+**ConfigItemDelete**
+
 With this operation, it is possible to delete an existing config item. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
@@ -478,11 +478,11 @@ Resulting data may be returned as follows:
     }
 
 Invoker
--------
+"""""""
 When using OTOBO as a requester to other systems API, the ConfigItemFetch invoker adds functionality within the ITSMConfigurationManagement package.
 
-ConfigItemFetch
-^^^^^^^^^^^^^^^
+**ConfigItemFetch**
+
 Using the ConfigItemFetch invoker, it is possible to fetch data from a remote endpoint and add or update one or more config items based on that data. A simple example web service definition could look as follows:
 
 .. code-block:: yaml
