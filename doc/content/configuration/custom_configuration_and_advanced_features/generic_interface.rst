@@ -10,6 +10,8 @@ The ITSMConfigurationManagement package also includes extensions to the existing
 
     **Transport:** HTTP\:\:REST
 
+    **Mapping Type:** Simple
+
 .. attention::
 
     Every operation and the invoker listed and described below requires authentication via an agent account as well as permission to perform the respective action on the respective config item(s). Customer user access to these modules is currently not implemented.
@@ -539,6 +541,36 @@ The ConfigItemFetch invoker works slightly similar to the ConfigItemUpsert opera
 .. hint::
 
    Note that, based on the version trigger configured per class in the admin general catalog interface, a new version may or may not be created based on the data fetched via request.
+
+The data provided by the remote system which is requested by the invoker need to be mapped to the usual config item data, which are the following:
+
+Number
+	optional, Number of config item, will be generated if not given
+
+Name
+	optional if a name module is configured for the class, Name of config item
+
+ClassID
+	required, ID of class for config item to be created in
+
+VersionString
+    optional if a version string module is configured for the class, version identifier of config item
+
+DeplStateID
+	required, ID of deployment state of config item
+
+InciStateID
+	required, ID of incident state of config item
+
+Description
+    optional, description text if a description is configured for the respective class
+
+DynamicFields
+    optional, data of config item dynamic fields
+
+.. hint::
+
+    The system determines wether to perform an insertion or update based on the identifier configured per class in the web service configuration.
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
