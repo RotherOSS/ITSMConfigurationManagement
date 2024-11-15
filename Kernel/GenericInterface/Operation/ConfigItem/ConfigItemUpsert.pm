@@ -555,7 +555,7 @@ sub Run {
 
         push @CIsHandled, {
             ConfigItemID => $ConfigItemID,
-            Name         => $RequiredAttributes{Name},
+            Name         => $RemoteCIData->{Name},
         };
     }
 
