@@ -25,7 +25,7 @@ use utf8;
 use parent qw(Kernel::GenericInterface::Operation::ConfigItem::Common);
 
 # core modules
-use List::Util qw(pairs);
+use List::Util   qw(pairs);
 use Scalar::Util qw(reftype);
 
 # CPAN modules
