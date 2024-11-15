@@ -208,9 +208,8 @@ sub _AddAction {
     }
 
     my $OperationConfig = {
-        Description       => $GetParam->{Description},
-        Type              => $GetParam->{OperationType},
-        IncludeTicketData => $GetParam->{IncludeTicketData},
+        Description => $GetParam->{Description},
+        Type        => $GetParam->{OperationType},
     };
 
     for my $ParamConfig (@ExtraParams) {
@@ -350,11 +349,6 @@ sub _ChangeAction {
                 Name  => 'MappingOutbound',
                 Type  => 'String',
                 Check => 'MappingType',
-            },
-            {
-                Name    => 'IncludeTicketData',
-                Type    => 'String',
-                Default => 0,
             },
             {
                 Name    => 'ContinueAfterSave',
@@ -678,23 +672,6 @@ sub _ShowScreen {
                 }
             );
         }
-    }
-
-    if (
-        $TemplateData{OperationType} eq 'Ticket::TicketCreate'
-        || $TemplateData{OperationType} eq 'Ticket::TicketUpdate'
-        )
-    {
-        $TemplateData{IncludeTicketDataStrg} = $LayoutObject->BuildSelection(
-            Data => {
-                0 => Translatable('No'),
-                1 => Translatable('Yes'),
-            },
-            Name       => 'IncludeTicketData',
-            SelectedID => $Param{OperationConfig}->{IncludeTicketData} // 0,
-            Sort       => 'NumericKey',
-            Class      => 'Modernize W50pc',
-        );
     }
 
     $Output .= $LayoutObject->Output(
