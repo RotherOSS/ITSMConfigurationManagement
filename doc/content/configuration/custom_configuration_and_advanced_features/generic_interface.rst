@@ -589,7 +589,7 @@ Response data structures of a remote system may vary, but an example is nonethel
             "next_payment_date": "01 January 1970",
             "number": "198",
             "parent_id": 0,
-            "parent_order_id": 100,
+            "parent_order_id": 98,
             "product_name": "OTOBO Cloud Package",
             "recurring_amount": 42,
             "refunds": [],
@@ -597,7 +597,7 @@ Response data structures of a remote system may vary, but an example is nonethel
             "shipping_tax": "0.00",
             "shipping_total": "0.00",
             "status": "processing",
-            "subscription_id": 100,
+            "subscription_id": 98,
             "subscriptions_expiry_date": "01 January 1970",
             "tax_lines": [],
             "total": "0.00",
@@ -733,6 +733,41 @@ Given the incoming data and the needed config item data structure, a mapping may
             </data>
         </xsl:template>
     </xsl:stylesheet>
+
+The combination of the incoming data and the mapping above will result in the following data for config item creation or update, respectively:
+
+.. code-block:: json
+
+    [
+        {
+            "Class": "Subscription",
+            "DeploymentState": "Production",
+            "DynamicField_SUBSC-NextPaymentDate": "1970-01-01 00:00:00",
+            "DynamicField_SUBSC-OrderID": "100",
+            "DynamicField_SUBSC-ProductName": "OTOBO Cloud Package",
+            "DynamicField_SUBSC-RecurringAmount": "42",
+            "DynamicField_SUBSC-SubscStatus": "pending",
+            "DynamicField_SUBSC-SubscriptionID": "100",
+            "DynamicField_SUBSC-SubscriptionsExpiryDate": "1970-01-01 00:00:00",
+            "DynamicField_SUBSC-UserName": "AgentUser",
+            "IncidentState": "Operational",
+            "Name": "100"
+        },
+        {
+            "Class": "Subscription",
+            "DeploymentState": "Production",
+            "DynamicField_SUBSC-NextPaymentDate": "1970-01-01 00:00:00",
+            "DynamicField_SUBSC-OrderID": "98",
+            "DynamicField_SUBSC-ProductName": "OTOBO Cloud Package",
+            "DynamicField_SUBSC-RecurringAmount": "42",
+            "DynamicField_SUBSC-SubscStatus": "pending",
+            "DynamicField_SUBSC-SubscriptionID": "98",
+            "DynamicField_SUBSC-SubscriptionsExpiryDate": "1970-01-01 00:00:00",
+            "DynamicField_SUBSC-UserName": "AgentUser",
+            "IncidentState": "Operational",
+            "Name": "100"
+        }
+    ]
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
