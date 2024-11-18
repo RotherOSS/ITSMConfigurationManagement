@@ -538,6 +538,77 @@ Using the ConfigItemFetch invoker, it is possible to fetch data from a remote en
 
 The ConfigItemFetch invoker works slightly similar to the ConfigItemUpsert operation in terms that it adds or updates one or more config items based on the defined identifier attributes. Upon being triggered by the configured events (in the example above TicketQueueUpdate), the remote system is requested and the returned data are processed.
 
+*Mapping of incoming data*
+
+Response data structures of a remote system may vary, but an example is nonetheless helpful for understanding. Given the following data structure:
+
+.. code-block:: json
+
+    [
+        {
+            "created_via": "",
+            "currency": "EUR",
+            "currency_symbol": "€",
+            "customer_id": 1,
+            "customer_ip_address": "127.0.0.1",
+            "customer_note": "",
+            "discount_tax": "0.00",
+            "discount_total": "0.00",
+            "fee_lines": [],
+            "id": 200,
+            "next_payment_date": "01 January 1970",
+            "number": "200",
+            "parent_id": 0,
+            "parent_order_id": 100,
+            "product_name": "OTOBO Cloud Package",
+            "recurring_amount": 42,
+            "refunds": [],
+            "shipping_lines": [],
+            "shipping_tax": "0.00",
+            "shipping_total": "0.00",
+            "status": "pending",
+            "subscription_id": 100,
+            "subscriptions_expiry_date": "01 January 1970",
+            "tax_lines": [],
+            "total": "0.05",
+            "total_tax": "0.00",
+            "transaction_id": "",
+            "user_name": "AgentUser"
+        },
+        {
+            "created_via": "store-api",
+            "currency": "EUR",
+            "currency_symbol": "€",
+            "customer_id": 1,
+            "customer_ip_address": "127.0.0.1",
+            "customer_note": "",
+            "discount_tax": "0.00",
+            "discount_total": "0.00",
+            "fee_lines": [],
+            "id": 198,
+            "next_payment_date": "01 January 1970",
+            "number": "198",
+            "parent_id": 0,
+            "parent_order_id": 100,
+            "product_name": "OTOBO Cloud Package",
+            "recurring_amount": 42,
+            "refunds": [],
+            "shipping_lines": [],
+            "shipping_tax": "0.00",
+            "shipping_total": "0.00",
+            "status": "processing",
+            "subscription_id": 100,
+            "subscriptions_expiry_date": "01 January 1970",
+            "tax_lines": [],
+            "total": "0.00",
+            "total_tax": "0.00",
+            "transaction_id": "",
+            "user_name": "AgentUser"
+        }
+    ]
+
+The data stems from a WordPress system. A ConfigItemFetch invoker receiving such data needs to also contain a mapping to select and transform it into a data structure for creating or updating a config item. The usable config item attributes are:
+
 .. hint::
 
    Note that, based on the version trigger configured per class in the admin general catalog interface, a new version may or may not be created based on the data fetched via request.
@@ -571,6 +642,97 @@ DynamicFields
 .. hint::
 
     The system determines wether to perform an insertion or update based on the identifier configured per class in the web service configuration.
+
+Given the incoming data and the needed config item data structure, a mapping may look like this:
+
+.. code-block:: xslt
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+        <xsl:output method="xml" indent="yes"/>
+
+        <!-- Main template for transformation -->
+        <xsl:template match="/RootElement">
+            <data>
+                <xsl:for-each select="data">
+                    <ConfigItems>
+
+                        <!-- Straight date conversion for next_payment_date -->
+                        <DynamicField_SUBSC-NextPaymentDate>
+                            <xsl:variable name="inputDate" select="next_payment_date"/>
+                            <xsl:variable name="day" select="format-number(substring-before($inputDate, ' '), '00')"/>
+                            <xsl:variable name="monthName" select="substring-before(substring-after($inputDate, ' '), ' ')"/>
+                            <xsl:variable name="year" select="substring-after(substring-after($inputDate, ' '), ' ')"/>
+
+                            <!-- Conversion of month name into two-digit number -->
+                            <xsl:variable name="month">
+                                <xsl:choose>
+                                    <xsl:when test="$monthName = 'January'">01</xsl:when>
+                                    <xsl:when test="$monthName = 'February'">02</xsl:when>
+                                    <xsl:when test="$monthName = 'March'">03</xsl:when>
+                                    <xsl:when test="$monthName = 'April'">04</xsl:when>
+                                    <xsl:when test="$monthName = 'May'">05</xsl:when>
+                                    <xsl:when test="$monthName = 'June'">06</xsl:when>
+                                    <xsl:when test="$monthName = 'July'">07</xsl:when>
+                                    <xsl:when test="$monthName = 'August'">08</xsl:when>
+                                    <xsl:when test="$monthName = 'September'">09</xsl:when>
+                                    <xsl:when test="$monthName = 'October'">10</xsl:when>
+                                    <xsl:when test="$monthName = 'November'">11</xsl:when>
+                                    <xsl:when test="$monthName = 'December'">12</xsl:when>
+                                </xsl:choose>
+                            </xsl:variable>
+
+                            <!-- Composing the date in format YYYY-MM-DD HH:MM:SS -->
+                            <xsl:value-of select="concat($year, '-', $month, '-', $day, ' 00:00:00')"/>
+                        </DynamicField_SUBSC-NextPaymentDate>
+
+                        <!-- Conditional printing and date conversion for subscriptions_expiry_date -->
+                        <xsl:variable name="expiryDate" select="subscriptions_expiry_date"/>
+                        <xsl:if test="normalize-space($expiryDate) != '' and $expiryDate != '---'">
+                            <DynamicField_SUBSC-SubscriptionsExpiryDate>
+
+                                <!-- Conversion of expiryDate in preferred format -->
+                                <xsl:variable name="expiryDay" select="format-number(substring-before($expiryDate, ' '), '00')"/>
+                                <xsl:variable name="expiryMonthName" select="substring-before(substring-after($expiryDate, ' '), ' ')"/>
+                                <xsl:variable name="expiryYear" select="substring-after(substring-after($expiryDate, ' '), ' ')"/>
+                                <xsl:variable name="expiryMonth">
+                                    <xsl:choose>
+                                        <xsl:when test="$expiryMonthName = 'January'">01</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'February'">02</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'March'">03</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'April'">04</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'May'">05</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'June'">06</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'July'">07</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'August'">08</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'September'">09</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'October'">10</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'November'">11</xsl:when>
+                                        <xsl:when test="$expiryMonthName = 'December'">12</xsl:when>
+                                    </xsl:choose>
+                                </xsl:variable>
+
+                                <!-- Printing the formatted date -->
+                                <xsl:value-of select="concat($expiryYear, '-', $expiryMonth, '-', $expiryDay, ' 00:00:00')"/>
+                            </DynamicField_SUBSC-SubscriptionsExpiryDate>
+                        </xsl:if>
+
+                        <!-- Printing other fields without conversion -->
+                        <Class>Subscription</Class>
+                        <DeploymentState>Production</DeploymentState>
+                        <IncidentState>Operational</IncidentState>
+                        <Name><xsl:value-of select="parent_order_id"/></Name>
+                        <DynamicField_SUBSC-OrderID><xsl:value-of select="parent_order_id"/></DynamicField_SUBSC-OrderID>
+                        <DynamicField_SUBSC-ProductName><xsl:value-of select="product_name"/></DynamicField_SUBSC-ProductName>
+                        <DynamicField_SUBSC-RecurringAmount><xsl:value-of select="recurring_amount"/></DynamicField_SUBSC-RecurringAmount>
+                        <DynamicField_SUBSC-SubscStatus><xsl:value-of select="status"/></DynamicField_SUBSC-SubscStatus>
+                        <DynamicField_SUBSC-SubscriptionID><xsl:value-of select="subscription_id"/></DynamicField_SUBSC-SubscriptionID>
+                        <DynamicField_SUBSC-UserName><xsl:value-of select="user_name"/></DynamicField_SUBSC-UserName>
+                    </ConfigItems>
+                </xsl:for-each>
+            </data>
+        </xsl:template>
+    </xsl:stylesheet>
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
