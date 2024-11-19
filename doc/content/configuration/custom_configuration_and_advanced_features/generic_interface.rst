@@ -643,6 +643,15 @@ DynamicFields
 
     The system determines wether to perform an insertion or update based on the identifier configured per class in the web service configuration.
 
+.. attention::
+
+   When implementing the following mapping, the presets listed at the start of the page get overwritten in the following points:
+
+    **Mapping Type:** Simple -> XSLT
+
+    This also implies that the above webservice config would need to be adapted.
+
+
 Given the incoming data and the needed config item data structure, a mapping may look like this:
 
 .. code-block:: xslt
