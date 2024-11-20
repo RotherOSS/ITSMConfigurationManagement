@@ -375,26 +375,41 @@ sub _MigrateDefinitions {
     my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
     my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $XMLObject          = $Kernel::OM->Get('Kernel::System::XML');
 
     # keep the legacy definition for now
-    if (
-        # TODO: make this viable for all DB types
-        $DBObject->Do(
-            SQL => 'ALTER TABLE configitem_definition ADD COLUMN configitem_definition_legacy longblob',
-        )
-        )
-    {
-        $DBObject->Do(
-            SQL => 'UPDATE configitem_definition SET configitem_definition_legacy = configitem_definition',
-        );
-    }
-    else {
-        $Self->Print(
-            "<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n\t"
-        );
+    my $ColumnAddXML = <<'END_XML';
+<TableAlter Name="configitem_definition">
+  <ColumnAdd Name="configitem_definition_legacy" Required="false" Type="LONGBLOB" />
+</TableAlter>
+END_XML
 
-        return if <STDIN> !~ m/^con(tinue)?$/;
+    # Create database specific SQL and PostSQL commands out of XML.
+    my @AddXMLARRAY = $XMLObject->XMLParse( String => $ColumnAddXML );
+
+    # Create database specific SQL.
+    my @ColumnAddSQL = $DBObject->SQLProcessor(
+        Database => \@AddXMLARRAY,
+    );
+
+    # Create database specific PostSQL.
+    my @ColumnAddSQLPost = $DBObject->SQLProcessorPost();
+
+    # Execute SQL.
+    for my $SQL ( @ColumnAddSQL, @ColumnAddSQLPost ) {
+        my $Success = $DBObject->Do( SQL => $SQL );
+        if ( !$Success ) {
+            $Self->Print(
+                "<yellow>Could not clone the configitem_definition column DB table. If you attempted this step earlier, please write 'con' to continue.</yellow>\n\t"
+            );
+
+            return if <STDIN> !~ m/^con(tinue)?$/;
+        }
     }
+
+    $DBObject->Do(
+        SQL => 'UPDATE configitem_definition SET configitem_definition_legacy = configitem_definition',
+    );
 
     my %DynamicFields;
     my %Definitions;
