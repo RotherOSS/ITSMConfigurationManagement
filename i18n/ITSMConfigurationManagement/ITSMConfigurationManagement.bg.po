@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-08-21 07:13+0000\n"
+"PO-Revision-Date: 2024-11-22 09:30+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/bg/>\n"
+"Language-Team: Bulgarian <http://weblate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3266,25 +3267,27 @@ msgstr "Определя височината на компонента на р�
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "General operation data"
-msgstr ""
+msgstr "Общи данни за работа"
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for incoming request data"
-msgstr ""
+msgstr "Настройки за входящи данни за заявки"
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for outgoing response data"
-msgstr ""
+msgstr "Настройки за изходящите данни за отговор"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Import/Export attachments (as the last entries per line)"
 msgstr ""
+"Импортиране/експортиране на прикачени файлове (като последни записи на ред)"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Version String"
-msgstr ""
+msgstr "Версия Редица"
 
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
 msgstr ""
-
+"Дефинира Задължителни разрешения за задаване на елементи от конфигурацията "
+"на ITSM с помощта на общия интерфейс."
