@@ -392,10 +392,11 @@ sub HandleResponse {
             my $Success = $ConfigItemObject->ConfigItemUpdate(
                 $RemoteCIData->%*,
                 %RequiredAttributes,
-                ConfigItemID => $ConfigItemID,
-                DeplStateID  => $RequiredAttributes{DeploymentStateID},
-                InciStateID  => $RequiredAttributes{IncidentStateID},
-                UserID       => 1,
+                ConfigItemID   => $ConfigItemID,
+                DeplStateID    => $RequiredAttributes{DeploymentStateID},
+                InciStateID    => $RequiredAttributes{IncidentStateID},
+                UserID         => 1,
+                ExternalSource => 1,
             );
 
             if ( !$Success ) {
