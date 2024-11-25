@@ -21,6 +21,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::System::ITSMConfigItem',
     'Kernel::System::Log',
     'Kernel::System::LinkObject',
 );
@@ -59,7 +60,7 @@ sub DataGet {
     }
 
     for my $Needed (qw(ConfigItemID)) {
-        if ( !$Param{Data}->{$Needed} ) {
+        if ( !$Param{Data}{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need ConfigItemID!",
@@ -69,12 +70,12 @@ sub DataGet {
     }
 
     my $ObjectData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
-        ConfigItemID  => $Param{Data}->{ConfigItemID},
+        ConfigItemID  => $Param{Data}{ConfigItemID},
         DynamicFields => 1,
         Silent        => 1,
     );
 
-    return %{ $ObjectData };
+    return %{$ObjectData};
 }
 
 1;
