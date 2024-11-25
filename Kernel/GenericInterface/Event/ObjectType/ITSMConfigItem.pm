@@ -68,7 +68,13 @@ sub DataGet {
         }
     }
 
-    return %{ $Param{Data} };
+    my $ObjectData = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
+        ConfigItemID  => $Param{Data}->{ConfigItemID},
+        DynamicFields => 1,
+        Silent        => 1,
+    );
+
+    return %{ $ObjectData };
 }
 
 1;
