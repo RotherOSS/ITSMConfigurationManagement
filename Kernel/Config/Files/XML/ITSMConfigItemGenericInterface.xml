@@ -138,12 +138,34 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###ConfigItem::ConfigItemCreate" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the ConfigItemCreate invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemCreate</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch" Required="0" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the ConfigItemFetch invoker layer.</Description>
         <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
         <Value>
             <Hash>
                 <Item Key="Name">ConfigItemFetch</Item>
+                <Item Key="Controller">ConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###ConfigItem::ConfigItemUpdate" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the ConfigItemUpdate invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">ConfigItemUpdate</Item>
                 <Item Key="Controller">ConfigItem</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
             </Hash>
