@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
-"PO-Revision-Date: 2024-11-22 09:30+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"PO-Revision-Date: 2024-11-26 03:34+0000\n"
+"Last-Translator: Kozo Sakurai <sakurai@io-architect.com>\n"
 "Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ja/>\n"
 "Language: ja\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -115,11 +115,11 @@ msgstr "構成アイテムの履歴: %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
-msgstr "履歴内容"
+msgstr "コメント履歴"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr "作成日時"
+msgstr "作成時間"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -127,7 +127,7 @@ msgstr "ズーム・ビュー"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Context Settings"
-msgstr "コンテキストの設定"
+msgstr "コンテキスト設定"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
@@ -159,7 +159,7 @@ msgstr "現在のデプロイ・ステータス"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
-msgstr "最終変更者"
+msgstr "最終更新者"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show one version"
