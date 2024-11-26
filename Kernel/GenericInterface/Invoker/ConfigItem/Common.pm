@@ -89,14 +89,22 @@ Result example:
     {
         Data => {
             ConfigItem => {
+                Class                  => 'CIClass',
+                ClassID                => 1,
                 ConfigItemID           => 123,
+                DeplState              => 'Production',
+                DeplStateID            => 2,
+                DeplStateType          => 'productive',
+                Description            => 'Some description',
+                DynamicField_FieldName => 'DFValue',
+                InciState              => 'Operational',
+                InciStateID            => 1,
+                InciStateType          => 'operational',
+                LastVersionID          => 1,
                 Name                   => 'ConfigItemName',
                 Number                 => 456,
-                ClassID                => 1,
-                DeplState              => 2,
-                InciState              => 3,
-                VersionString          => '04',
-                DynamicField_FieldName => 'DFValue',
+                VersionID              => 1,
+                VersionString          => 1,
             },
         },
     };
@@ -106,13 +114,7 @@ Result example:
 sub PrepareRequest {
     my ( $Self, %Param ) = @_;
 
-    # TODO: Add Authentification for Request:
-    # UserLogin
-    # CustomerUserLogin
-    # SessionID
-    # Password
-
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ConfigItem');
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # check needed stuff
     if ( !IsHashRefWithData( $Param{Data} ) ) {
@@ -122,10 +124,10 @@ sub PrepareRequest {
         );
     }
 
-    if ( !$Param{Data}{ConfigItemID} && !$Param{Data}{Number} ) {
+    if ( !$Param{Data}{ConfigItemID} ) {
         return $Self->ReturnError(
-            ErrorCode    => 'ConfigItem.MissingConfigItemNumber',
-            ErrorMessage => $Self->{Invoker} . ": ConfigItemID or Number is required!",
+            ErrorCode    => 'ConfigItem.MissingConfigItemID',
+            ErrorMessage => $Self->{Invoker} . ": ConfigItemID is required!",
         );
     }
 
@@ -139,13 +141,13 @@ sub PrepareRequest {
         );
     }
 
-    my %ConfigItemData = $ConfigItemObject->ConfigItemGet(
+    my $ConfigItemData = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => $ConfigItemID,
-        DynamicFields => 0,
+        DynamicFields => 1,
         UserID        => 1,
     );
 
-    if ( !IsHashRefWithData( \%ConfigItemData ) ) {
+    if ( !IsHashRefWithData($ConfigItemData) ) {
         return $Self->ReturnError(
             ErrorCode    => 'ConfigItem.AccessDenied',
             ErrorMessage => $Self->{Invoker} . ": User does not have access to the config item!",
@@ -195,21 +197,14 @@ sub PrepareRequest {
 
     # add attachments with old structure
     if ( IsArrayRefWithData( \@AttachmentData ) ) {
-        $ConfigItemData{Attachment} = \@AttachmentData;
+        $ConfigItemData->{Attachment} = \@AttachmentData;
     }
-
-    # prepare return data
-    my %ReturnData = (
-        ConfigItemID => $ConfigItemData{ConfigItemID},
-        Number       => $ConfigItemData{Number},
-        ConfigItem   => \%ConfigItemData,
-    );
 
     $Self->{RequestData} = \%Param;
 
     return {
         Success => 1,
-        Data    => \%ReturnData,
+        Data    => $ConfigItemData,
     };
 }
 
@@ -238,10 +233,6 @@ handle response data of the configured remote web-service.
 sub HandleResponse {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
     # if there was an error in the response, forward it
     if ( !$Param{ResponseSuccess} && !$Param{Data} ) {
         if ( !IsStringWithData( $Param{ResponseErrorMessage} ) ) {
@@ -255,115 +246,6 @@ sub HandleResponse {
             Success      => 0,
             ErrorMessage => $Param{ResponseErrorMessage},
         };
-    }
-
-    # get webservice configuration
-    my $Webservice = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceGet(
-        ID => $Self->{WebserviceID},
-    );
-
-    # get invoker config
-    my $InvokerConfig         = $Webservice->{Config}{Requester}{Invoker}{ $Self->{Invoker} };
-    my $SelectedDynamicFields = $InvokerConfig->{DynamicFieldList};
-
-    # get data for dynamic field
-    my %DynamicFieldData = $Self->_GenerateDynamicFieldData(
-        DynamicFieldNames => $SelectedDynamicFields,
-        Data              => $Param{Data},
-    );
-
-    # transfer the dynamic field values from response data to the matched local dynamic fields
-    if (%DynamicFieldData) {
-        for my $DynamicFieldName ( sort keys %DynamicFieldData ) {
-            my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-                Name => $DynamicFieldName,
-            );
-            if ( IsHashRefWithData($DynamicFieldConfig) ) {
-                if (
-                    !IsStringWithData( $DynamicFieldData{$DynamicFieldName} )
-                    && !IsArrayRefWithData( $DynamicFieldData{$DynamicFieldName} )
-                    )
-                {
-                    $DynamicFieldData{$DynamicFieldName} = '';
-                }
-
-                my $Success = $DynamicFieldBackendObject->ValueSet(
-                    DynamicFieldConfig => $DynamicFieldConfig,
-                    ObjectID           => $Self->{RequestData}{Data}{ConfigItemID},
-                    Value              => $DynamicFieldData{$DynamicFieldName},
-                    ExternalSource     => 1,
-                    UserID             => 1,
-                );
-
-                if ( !$Success ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => $Self->{Invoker}
-                            . ": Can\'t set response values for dynamic field!",
-                    );
-                }
-            }
-            else {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => $Self->{Invoker}
-                        . ": Dynamic field for response values not found!",
-                );
-            }
-        }
-    }
-
-    # set the config item id from response data to dynamic field
-    # use the sysconfig option as fallback
-    my $ResponsibleFieldTicketID = $InvokerConfig->{TicketIdToDynamicField};
-    if ( !$ResponsibleFieldTicketID ) {
-        my $ResponseDynamicFields = $ConfigObject->Get('GenericInterface::Invoker::Settings::ResponseDynamicField');
-        if ( IsHashRefWithData($ResponseDynamicFields) ) {
-
-            DYNAMICFIELD:
-            for my $Field ( sort keys %{$ResponseDynamicFields} ) {
-                next DYNAMICFIELD if $Field != $Self->{WebserviceID};
-
-                $ResponsibleFieldTicketID = $ResponseDynamicFields->{$Field};
-                last DYNAMICFIELD;
-            }
-        }
-    }
-
-    if ( IsStringWithData($ResponsibleFieldTicketID) ) {
-        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-            Name => $ResponsibleFieldTicketID,
-        );
-
-        if (
-            IsHashRefWithData($DynamicFieldConfig)
-            && IsStringWithData( $Param{Data}{TicketID} )
-            )
-        {
-
-            my $Success = $DynamicFieldBackendObject->ValueSet(
-                DynamicFieldConfig => $DynamicFieldConfig,
-                ObjectID           => $Self->{RequestData}{Data}{TicketID},
-                Value              => $Param{Data}{TicketID},
-                ExternalSource     => 1,
-                UserID             => 1,
-            );
-
-            if ( !$Success ) {
-                return $Self->ReturnError(
-                    ErrorCode    => 'TicketCreate.ResponseDynamicFieldValueSet',
-                    ErrorMessage => $Self->{Invoker}
-                        . ": Can\'t set response values for dynamic field!",
-                );
-            }
-        }
-        elsif ( !IsHashRefWithData($DynamicFieldConfig) ) {
-            return $Self->ReturnError(
-                ErrorCode    => 'TicketCreate.ResponseDynamicFieldValueGet',
-                ErrorMessage => $Self->{Invoker}
-                    . ": Dynamic field for response values not found!",
-            );
-        }
     }
 
     return {
