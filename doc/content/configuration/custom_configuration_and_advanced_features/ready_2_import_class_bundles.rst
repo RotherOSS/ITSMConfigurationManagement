@@ -1,6 +1,6 @@
 Ready2Import Class Bundles
 --------------------------
 
-.. - Wo?
+.. - Where?
 
-* IT-Servicemanagement
+- **IT-Servicemanagement**
