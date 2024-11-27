@@ -1,6 +1,6 @@
 Configuration: Web Services
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The ITSMConfigurationManagement package also includes extensions to the existing web service possibilites. For this section, it is assumed that the contents explained in the basic webservice documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
+The ITSMConfigurationManagement package also includes extensions to the existing web service possibilities. For this section, it is assumed that the contents explained in the basic web service documentation, available at `OTOBO 11 Administration Manual: Webservices <https://doc.otobo.de/manual/admin/11.0/en/content/administration-area/processes-automation/web-services.html>`_, are known.
 
 .. note::
 
@@ -70,7 +70,7 @@ UserLogin
     either UserLogin and Password or SessionID are required
 
 Password
-    Passwords are passed in plaintext
+    Passwords are passed in plain text
 
 SessionID
     SessionID may be retrieved by using a SessionCreate web service operation
@@ -184,7 +184,7 @@ UserLogin
     either UserLogin and Password or SessionID are required
 
 Password
-    Passwords are passed in plaintext
+    Passwords are passed in plain text
 
 SessionID
     SessionID may be retrieved by using a SessionCreate web service operation
@@ -242,7 +242,7 @@ DynamicFields
 
     - Empty: will return dynamic fields without a value, set to 0 to search fields with a value present
     - Equals
-    - Like: 'Equals' operator with wildcard support
+    - Like: 'Equals' operator with wild card support
     - GreaterThan
     - GreaterThanEquals
     - SmallerThan
@@ -379,7 +379,7 @@ UserLogin
     either UserLogin and Password or SessionID are required
 
 Password
-    Passwords are passed in plaintext
+    Passwords are passed in plain text
 
 SessionID
     SessionID may be retrieved by using a SessionCreate web service operation
@@ -457,7 +457,7 @@ UserLogin
     either UserLogin and Password or SessionID are required
 
 Password
-    Passwords are passed in plaintext
+    Passwords are passed in plain text
 
 SessionID
     SessionID may be retrieved by using a SessionCreate web service operation
