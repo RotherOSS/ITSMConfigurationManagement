@@ -200,6 +200,11 @@ sub PrepareRequest {
         $ConfigItemData->{Attachment} = \@AttachmentData;
     }
 
+    # replace config item values with readable values
+    $ConfigItemData = $Self->_TransitionDynamicFieldData(
+        ConfigItem => $ConfigItemData,
+    );
+
     $Self->{RequestData} = \%Param;
 
     return {
@@ -286,59 +291,41 @@ sub ReturnError {
     };
 }
 
-sub _GenerateDynamicFieldData {
+sub _TransitionDynamicFieldData {
     my ( $Self, %Param ) = @_;
 
-    return () if !IsArrayRefWithData( $Param{DynamicFieldNames} );
+    return () if !IsHashRefWithData( $Param{ConfigItem} );
 
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my %ConfigItemData = (
+        $Param{ConfigItem}->%*,
+    );
 
-    # Compile received data for ticket and article(s) into one uniform structure.
-    my @StructureArray;
-    STRUCTURE:
-    for my $Structure (
-        $Param{Data}{ConfigItem},
-        )
-    {
-        if ( IsHashRefWithData($Structure) ) {
-            push @StructureArray, dclone($Structure);
-        }
-        elsif ( IsArrayRefWithData($Structure) ) {
-            push @StructureArray, @{ dclone($Structure) };
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    KEY:
+    for my $Key ( sort keys %ConfigItemData ) {
+
+        next KEY unless $ConfigItemData{$Key};
+
+        if ( $Key =~ /^DynamicField_(.*)$/ ) {
+            my $FieldName   = $1;
+            my $FieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                Name => $FieldName,
+            );
+
+            my $ReadableValue = $DynamicFieldBackendObject->ReadableValueRender(
+                DynamicFieldConfig => $FieldConfig,
+                Value              => $Param{ConfigItem}{$Key},
+            );
+
+            if ( IsHashRefWithData($ReadableValue) ) {
+                $ConfigItemData{$Key} = $ReadableValue->{Value};
+            }
         }
     }
 
-    # Extract dynamic fields from structure.
-    my @ReceivedDynamicFields;
-    STRUCTURE:
-    for my $Structure (@StructureArray) {
-        if ( IsHashRefWithData( $Structure->{DynamicField} ) ) {
-            push @ReceivedDynamicFields, $Structure->{DynamicField};
-        }
-        elsif ( IsArrayRefWithData( $Structure->{DynamicField} ) ) {
-            push @ReceivedDynamicFields, @{ $Structure->{DynamicField} };
-        }
-    }
-
-    # Get values for configured dynamic fields from received data.
-    my %DynamicFieldData;
-    DYNAMICFIELDNAME:
-    for my $DynamicField ( @{ $Param{DynamicFieldNames} } ) {
-        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-            Name => $DynamicField,
-        );
-        next DYNAMICFIELDNAME if !IsHashRefWithData($DynamicFieldConfig);
-
-        my $DynamicFieldName = $DynamicFieldConfig->{Name};
-
-        my @MatchedFields = grep { $_->{Name} eq $DynamicFieldName } @ReceivedDynamicFields;
-        next DYNAMICFIELDNAME if !@MatchedFields;
-
-        # Should we have more than one match (e.g. ArticleDynamicField in more than one received article), the first one wins.
-        $DynamicFieldData{$DynamicFieldName} = $MatchedFields[0]{Value};
-    }
-
-    return %DynamicFieldData;
+    return \%ConfigItemData;
 }
 
 1;
