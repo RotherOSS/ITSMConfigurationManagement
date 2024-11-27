@@ -531,6 +531,48 @@ Using the ConfigItemCreate invoker, it is possible to send config item data to a
           Timeout: '120'
         Type: HTTP::REST
 
+Without any mapping applied, the outgoing config item data will look like the following:
+
+.. code-block:: json
+
+    {
+        "ChangeBy": "2",
+        "ChangeTime": "1970-01-01 00:00:01",
+        "Class": "Client Software",
+        "ClassID": "45",
+        "ConfigItemID": "1",
+        "CreateBy": "2",
+        "CreateTime": "1970-01-01 00:00:01",
+        "CurDeplState": "Production",
+        "CurDeplStateID": "2",
+        "CurDeplStateType": "productive",
+        "CurInciState": "Operational",
+        "CurInciStateID": "1",
+        "CurInciStateType": "operational",
+        "DefinitionID": "1",
+        "DeplState": "Production",
+        "DeplStateID": "2",
+        "DeplStateType": "productive",
+        "Description": "Some meaningful description",
+        "DynamicField_ITSM-LensToLicenseCount": "2",
+        "DynamicField_ITSM-LensToLicensePeriodFrom": "1970-01-01 00:00:00",
+        "DynamicField_ITSM-LensToLicensePeriodUntil": "2069-12-31 00:00:00",
+        "DynamicField_ITSM-LensToLicenseType": "ApacheLizenz",
+        "DynamicField_ITSM-ReferenceToLicense": "Name of License",
+        "InciState": "Operational",
+        "InciStateID": "1",
+        "InciStateType": "operational",
+        "LastVersionID": "1",
+        "Name": "ClientSoftware",
+        "Number": "1045000002",
+        "VersionID": "1",
+        "VersionString": "1"
+    };
+
+.. note::
+
+   Note that values of dynamic fields are transformed. E.g. reference fields will not be included with their value ID, but with a readable value. For reference dynamic fields of type ConfigItem, ConfigItemVersion and Ticket, this value can be configured with the attribute 'Display value'.
+
 **ConfigItemFetch**
 
 Using the ConfigItemFetch invoker, it is possible to fetch data from a remote endpoint and add or update one or more config items based on that data. A simple example web service definition could look as follows:
@@ -868,6 +910,48 @@ Using the ConfigItemUpdate invoker, it is possible to send config item data to a
               Controller: /ConfigItemUpdate/
           Timeout: '120'
         Type: HTTP::REST
+
+Without any mapping applied, the outgoing config item data will look like the following:
+
+.. code-block:: json
+
+    {
+        "ChangeBy": "2",
+        "ChangeTime": "1970-01-01 00:00:01",
+        "Class": "Client Software",
+        "ClassID": "45",
+        "ConfigItemID": "1",
+        "CreateBy": "2",
+        "CreateTime": "1970-01-01 00:00:01",
+        "CurDeplState": "Production",
+        "CurDeplStateID": "2",
+        "CurDeplStateType": "productive",
+        "CurInciState": "Operational",
+        "CurInciStateID": "1",
+        "CurInciStateType": "operational",
+        "DefinitionID": "1",
+        "DeplState": "Production",
+        "DeplStateID": "2",
+        "DeplStateType": "productive",
+        "Description": "Some meaningful description",
+        "DynamicField_ITSM-LensToLicenseCount": "2",
+        "DynamicField_ITSM-LensToLicensePeriodFrom": "1970-01-01 00:00:00",
+        "DynamicField_ITSM-LensToLicensePeriodUntil": "2069-12-31 00:00:00",
+        "DynamicField_ITSM-LensToLicenseType": "ApacheLizenz",
+        "DynamicField_ITSM-ReferenceToLicense": "Name of License",
+        "InciState": "Operational",
+        "InciStateID": "1",
+        "InciStateType": "operational",
+        "LastVersionID": "1",
+        "Name": "ClientSoftware",
+        "Number": "1045000002",
+        "VersionID": "1",
+        "VersionString": "1"
+    };
+
+.. note::
+
+   Note that values of dynamic fields are transformed. E.g. reference fields will not be included with their value ID, but with a readable value. For reference dynamic fields of type ConfigItem, ConfigItemVersion and Ticket, this value can be configured with the attribute 'Display value'.
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
