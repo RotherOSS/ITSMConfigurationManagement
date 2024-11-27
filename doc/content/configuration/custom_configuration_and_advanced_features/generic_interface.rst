@@ -481,7 +481,55 @@ Resulting data may be returned as follows:
 
 Invoker
 """""""
-When using OTOBO as a requester to other systems API, the ConfigItemFetch invoker adds functionality within the ITSMConfigurationManagement package.
+When using OTOBO as a requester to other systems API, the invokers ConfigItemCreate, ConfigItemFetch and ConfigItemUpdate add functionality within the ITSMConfigurationManagement package.
+
+**ConfigItemCreate**
+
+Using the ConfigItemCreate invoker, it is possible to send config item data to a remote endpoint. A simple example web service definition could look as follows:
+
+.. code-block:: yaml
+
+    ---
+    Debugger:
+      DebugThreshold: debug
+      TestMode: '0'
+    Description: ''
+    FrameworkVersion: 11.0.x
+    RemoteSystem: ''
+    Requester:
+      Invoker:
+        ConfigItemCreate:
+          Description: 'Send Config Item data to remote system.'
+          Events:
+          - Asynchronous: '1'
+            Condition:
+              Condition:
+                '1':
+                  Fields:
+                    Number:
+                      Match: .+
+                      Type: Regexp
+                  Type: and
+              ConditionLinking: and
+            Event: ConfigItemCreate
+          MappingInbound:
+            Type: Simple
+          MappingOutbound:
+            Type: Simple
+          Type: ConfigItem::ConfigItemCreate
+      Transport:
+        Config:
+          Authentication:
+            AuthType: BasicAuth
+            BasicAuthPassword: Password
+            BasicAuthUser: AgentUser
+          DefaultCommand: GET
+          Host: https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>
+          InvokerControllerMapping:
+            ConfigItemCreate:
+              Controller: /ConfigItemCreate/
+          Timeout: '120'
+        Type: HTTP::REST
 
 **ConfigItemFetch**
 
@@ -512,11 +560,6 @@ Using the ConfigItemFetch invoker, it is possible to fetch data from a remote en
                   Type: and
               ConditionLinking: and
             Event: TicketQueueUpdate
-          Identifier41:
-          - Number
-          [...]
-          Identifier74:
-          - Number
           MappingInbound:
             Type: Simple
           MappingOutbound:
@@ -777,6 +820,54 @@ The combination of the incoming data and the mapping above will result in the fo
             "Name": "100"
         }
     ]
+
+**ConfigItemUpdate**
+
+Using the ConfigItemUpdate invoker, it is possible to send config item data to a remote endpoint. A simple example web service definition could look as follows:
+
+.. code-block:: yaml
+
+    ---
+    Debugger:
+      DebugThreshold: debug
+      TestMode: '0'
+    Description: ''
+    FrameworkVersion: 11.0.x
+    RemoteSystem: ''
+    Requester:
+      Invoker:
+        ConfigItemUpdate:
+          Description: 'Send Config Item data to remote system.'
+          Events:
+          - Asynchronous: '1'
+            Condition:
+              Condition:
+                '1':
+                  Fields:
+                    Number:
+                      Match: .+
+                      Type: Regexp
+                  Type: and
+              ConditionLinking: and
+            Event: VersionCreate
+          MappingInbound:
+            Type: Simple
+          MappingOutbound:
+            Type: Simple
+          Type: ConfigItem::ConfigItemUpdate
+      Transport:
+        Config:
+          Authentication:
+            AuthType: BasicAuth
+            BasicAuthPassword: Password
+            BasicAuthUser: AgentUser
+          DefaultCommand: GET
+          Host: https://YOURSERVER/otobo/nph-genericinterface.pl/Webservice/<WEBSERVICE_NAME>
+          InvokerControllerMapping:
+            ConfigItemUpdate:
+              Controller: /ConfigItemUpdate/
+          Timeout: '120'
+        Type: HTTP::REST
 
 It is also possible to trigger a ConfigItemFetch invoker manually via console command:
 
