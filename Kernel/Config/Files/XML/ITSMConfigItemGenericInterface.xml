@@ -145,7 +145,7 @@
             <Hash>
                 <Item Key="Name">ConfigItemCreate</Item>
                 <Item Key="Controller">ConfigItem</Item>
-                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
             </Hash>
         </Value>
     </Setting>
@@ -167,7 +167,7 @@
             <Hash>
                 <Item Key="Name">ConfigItemUpdate</Item>
                 <Item Key="Controller">ConfigItem</Item>
-                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerConfigItem</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
             </Hash>
         </Value>
     </Setting>
