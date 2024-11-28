@@ -420,6 +420,12 @@ sub ObjectDescriptionGet {
         );
     }
 
+    # prepare translation of class name if possible
+    my $ClassNameStrg = $ConfigItem->{Class};
+    if ( $Param{LayoutObject} ) {
+        $ClassNameStrg = $Param{LayoutObject}{LanguageObject}->Translate($ClassNameStrg);
+    }
+
     my %Descriptions;
     if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}{Config}{DisplayType} ) {
 
@@ -434,17 +440,17 @@ sub ObjectDescriptionGet {
             $Descriptions{Long}   = "$ConfigItem->{Name}";
         }
         elsif ( $DisplayType eq 'ClassConfigItemNumber' ) {
-            $Descriptions{Normal} = "$ConfigItem->{Class}: $ConfigItem->{Number}";
-            $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Number}";
+            $Descriptions{Normal} = "$ClassNameStrg: $ConfigItem->{Number}";
+            $Descriptions{Long}   = "$ClassNameStrg: $ConfigItem->{Number}";
         }
         elsif ( $DisplayType eq 'ClassConfigItemName' ) {
-            $Descriptions{Normal} = "$ConfigItem->{Class}: $ConfigItem->{Name}";
-            $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Name}";
+            $Descriptions{Normal} = "$ClassNameStrg: $ConfigItem->{Name}";
+            $Descriptions{Long}   = "$ClassNameStrg: $ConfigItem->{Name}";
         }
     }
     else {
         $Descriptions{Normal} = "$ConfigItem->{Name}";
-        $Descriptions{Long}   = "$ConfigItem->{Class}: $ConfigItem->{Name}";
+        $Descriptions{Long}   = "$ClassNameStrg: $ConfigItem->{Name}";
     }
 
     my $Link;
@@ -486,7 +492,7 @@ sub SearchObjects {
 
     $Param{Term} //= '';
 
-    my $DFDetails = $Param{DynamicFieldConfig}->{Config} // {};
+    my $DFDetails = $Param{DynamicFieldConfig}{Config} // {};
 
     my %SearchParams;
 
