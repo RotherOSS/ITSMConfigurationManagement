@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
-"PO-Revision-Date: 2024-11-26 03:34+0000\n"
+"PO-Revision-Date: 2024-11-28 07:34+0000\n"
 "Last-Translator: Kozo Sakurai <sakurai@io-architect.com>\n"
 "Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ja/>\n"
@@ -323,7 +323,7 @@ msgstr "このクラスのアクセス権はありません！"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No Result!"
-msgstr "結果がありません！"
+msgstr "結果なし!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Config Item Search Results"
