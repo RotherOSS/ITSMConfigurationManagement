@@ -69,7 +69,12 @@ sub Run {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # show the list of CI classes sorted by name
-    for my $ItemID ( sort { ${$ClassList}{$a} cmp ${$ClassList}{$b} } keys %{$ClassList} ) {
+    for my $ItemID (
+        sort {
+            $LayoutObject->{LanguageObject}->Translate( ${$ClassList}{$a} ) cmp $LayoutObject->{LanguageObject}->Translate( ${$ClassList}{$b} )
+        } keys %{$ClassList}
+        )
+    {
 
         # output overview item list
         $LayoutObject->Block(
