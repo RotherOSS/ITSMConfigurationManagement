@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2020-01-24 12:09+0000\n"
-"PO-Revision-Date: 2024-11-28 07:34+0000\n"
+"PO-Revision-Date: 2024-11-29 02:34+0000\n"
 "Last-Translator: Kozo Sakurai <sakurai@io-architect.com>\n"
 "Language-Team: Japanese <http://weblate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/ja/>\n"
@@ -819,7 +819,12 @@ msgstr "構成アイテムの作成と管理します。"
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "リンクオブジェクトウィジェット（LinkObject :: ViewMode = \"complex\"）で設定ボタンを使用できるアクションを定義します。 これらのアクションは、次のJSおよびCSSファイルを登録している必要があります。Core.AllocationList.css、Core.UI.AllocationList.js、Core.UI.Table.Sort.js、Core.Agent.TableFilters.js、及びCore.Agent .LinkObject.js"
+msgstr ""
+"リンクされたオブジェクト ウィジェット (LinkObject::ViewMode = \"complex\") "
+"で設定ボタンが使用できるアクションを定義します。これらのアクションには、Core."
+"AllocationList.css、Core.UI.AllocationList.js、Core.UI.Table.Sort.js、Core."
+"Agent.TableFilters.js、および Core.Agent.LinkObject.js の JS および CSS "
+"ファイルが登録されている必要があることに注意してください。"
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
