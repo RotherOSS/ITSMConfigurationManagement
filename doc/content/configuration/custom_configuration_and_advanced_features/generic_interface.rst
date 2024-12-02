@@ -629,7 +629,6 @@ Response data structures of a remote system may vary, but an example is nonethel
 
     [
         {
-            "created_via": "",
             "currency": "EUR",
             "currency_symbol": "€",
             "customer_id": 1,
@@ -643,7 +642,6 @@ Response data structures of a remote system may vary, but an example is nonethel
             "number": "200",
             "parent_id": 0,
             "parent_order_id": 100,
-            "product_name": "OTOBO Cloud Package",
             "recurring_amount": 42,
             "refunds": [],
             "shipping_lines": [],
@@ -659,7 +657,6 @@ Response data structures of a remote system may vary, but an example is nonethel
             "user_name": "AgentUser"
         },
         {
-            "created_via": "store-api",
             "currency": "EUR",
             "currency_symbol": "€",
             "customer_id": 1,
@@ -673,7 +670,6 @@ Response data structures of a remote system may vary, but an example is nonethel
             "number": "198",
             "parent_id": 0,
             "parent_order_id": 98,
-            "product_name": "OTOBO Cloud Package",
             "recurring_amount": 42,
             "refunds": [],
             "shipping_lines": [],
@@ -815,7 +811,6 @@ Given the incoming data and the needed config item data structure, a mapping may
                         <IncidentState>Operational</IncidentState>
                         <Name><xsl:value-of select="parent_order_id"/></Name>
                         <DynamicField_SUBSC-OrderID><xsl:value-of select="parent_order_id"/></DynamicField_SUBSC-OrderID>
-                        <DynamicField_SUBSC-ProductName><xsl:value-of select="product_name"/></DynamicField_SUBSC-ProductName>
                         <DynamicField_SUBSC-RecurringAmount><xsl:value-of select="recurring_amount"/></DynamicField_SUBSC-RecurringAmount>
                         <DynamicField_SUBSC-SubscStatus><xsl:value-of select="status"/></DynamicField_SUBSC-SubscStatus>
                         <DynamicField_SUBSC-SubscriptionID><xsl:value-of select="subscription_id"/></DynamicField_SUBSC-SubscriptionID>
@@ -836,7 +831,6 @@ The combination of the incoming data and the mapping above will result in the fo
             "DeploymentState": "Production",
             "DynamicField_SUBSC-NextPaymentDate": "1970-01-01 00:00:00",
             "DynamicField_SUBSC-OrderID": "100",
-            "DynamicField_SUBSC-ProductName": "OTOBO Cloud Package",
             "DynamicField_SUBSC-RecurringAmount": "42",
             "DynamicField_SUBSC-SubscStatus": "pending",
             "DynamicField_SUBSC-SubscriptionID": "100",
@@ -850,7 +844,6 @@ The combination of the incoming data and the mapping above will result in the fo
             "DeploymentState": "Production",
             "DynamicField_SUBSC-NextPaymentDate": "1970-01-01 00:00:00",
             "DynamicField_SUBSC-OrderID": "98",
-            "DynamicField_SUBSC-ProductName": "OTOBO Cloud Package",
             "DynamicField_SUBSC-RecurringAmount": "42",
             "DynamicField_SUBSC-SubscStatus": "pending",
             "DynamicField_SUBSC-SubscriptionID": "98",
