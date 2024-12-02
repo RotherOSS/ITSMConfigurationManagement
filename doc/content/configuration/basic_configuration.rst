@@ -47,3 +47,14 @@ Classes of CIs provide possibilites for customization. To change attributes of a
 #. Locate the **Name** table in the middle and click the class name of the class you want to edit.
 
 Among the attributes customizable are for instance the permission groups providing access to CIs of the respective class as well as the categories.
+
+Change advanced settings for Config Item Classes (Optional)
+-----------------------------------------------------------
+Additionally, appearance and data related to a CI class can be changed in the Admin Config Item screen:
+
+#. Open the admin view of your OTOBO Web UI.
+#. Navigate to **Config Items** in the **CMDB Settings** section.
+#. Locate the **Actions** panel on the left side and select the class you want to edit.
+#. Click the button **Change class definition**.
+
+In the YAML editor on the page you can configure various thing, such as dynamic fields used as attributes for the class and the appearance of CIs belonging to the class in the zoom views.
