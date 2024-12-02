@@ -16,7 +16,7 @@ Import the Ready to Adopt ConfigItem Classes
 OTOBO provides the option to import class bundles that showcase some of the most commonly used Configuration Items (CIs).  
 To get started, perform the following steps:
 
-#. Open the admin view of your OTOBO Web UI. 
+#. Open the admin view of your OTOBO Web UI.
 #. Navigate to **Config Items** in the **CMDB Settings** section.
 #. Locate the **Ready2Import Class Bundles** panel on the left side and select the class bundle you want to import.
 
@@ -34,3 +34,17 @@ Enabling customer access to CIs requires, depending on the use case, enabling a 
 - *CustomerFrontend::Module###CustomerITSMConfigItemZoom*: Enabling the config item zoom view for the customer interface
 
 Furthermore, at least one permission condition needs to be enabled and defined for a customer. A basic example setup which enables the customer user to view all config items across all classes can be used by enabling the system configuration setting *Customer::ConfigItem::PermissionConditions###01*.
+
+Change common settings for Config Item Classes
+----------------------------------------------
+Classes of CIs provide possibilites for customization. To change attributes of a CI class, perform the following steps:
+
+#. Open the admin view of your OTOBO Web UI.
+#. Navigate to **General Catalog** in the **Administration** section.
+#. Locate the **Catalog Class** table in the middle and click the entry **ITSM::ConfigItem::Class**.
+#. Locate the **Name** table in the middle and click the class name of the class you want to edit.
+
+   .. figure:: ../images/general_catalog_ci_class.png.png
+      :alt: General Catalog Class attributes
+
+Among the attributes customizable are for instance the name of the class as well as the version triggers and categories.
