@@ -5,7 +5,7 @@ Overview
 Summary
 -------
 
-With this documentation, you should gain a good overview of the OTOBO package “ITSMConfigurationManagement.” 
+This documentation is an overview of the functionality of the OTOBO package “ITSMConfigurationManagement”. 
 We provide a Basic Configuration based on a selection of the most commonly used Configuration Items to get you up and running quickly. If you are interested in configuring your own Configuration Items, you should be able to do so using the Advanced Configuration.
 
 Introduction
