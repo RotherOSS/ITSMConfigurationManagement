@@ -178,13 +178,13 @@ Passing both config item ID and config item version ID is fine too.
         ConfigItemID => 321,
         VersionID    => 489,
         Types        => [ 'ParentChild', 'IsInspiredBy' ], # optional
-        Direction    => 'Both # one of Source, Target, Both
+        Direction    => 'Source', # one of Source, Target, Both
         UserID       => 1,
     );
 
 The semantics of the parameter C<Direction> can be confusing. The above call can be verbalized as:
-"Give me all config items that are marked as 'Source' that have a 'ParentChild' relationship
-with the the config item 321.
+"Give me all config items that have a 'ParentChild' or 'IsInspiredBy' relationship in which the
+config item 321 is the Source object."
 
 Returns an empty array ref when no relationships were found:
 
@@ -269,19 +269,22 @@ sub LinkedConfigItems {
         # these  arrays have either 1 or 2 elements
         my ( @SourceConditions, @TargetConditions, @IDBinds );
         if ( $Param{ConfigItemID} ) {
-            push @SourceConditions, 'target_configitem_id = ?';
-            push @TargetConditions, 'source_configitem_id = ?';
+            push @SourceConditions, 'source_configitem_id = ?';
+            push @TargetConditions, 'target_configitem_id = ?';
             push @IDBinds,          $Param{ConfigItemID};
         }
         if ( $Param{VersionID} ) {
-            push @SourceConditions, 'target_configitem_version_id = ?';
-            push @TargetConditions, 'source_configitem_version_id = ?';
+            push @SourceConditions, 'source_configitem_version_id = ?';
+            push @TargetConditions, 'target_configitem_version_id = ?';
             push @IDBinds,          $Param{VersionID};
         }
 
+        # link directions are read in the same manner as wind directions - north wind comes from the north,
+        # a "Source" direction returns all linked CIs where we come from $Param{ConfigItemID} as source
+        # ...or so; this is consistent with Kernel/System/LinkObject.pm most importantly
         if ( $Param{Direction} eq 'Source' ) {
             $SQL = <<"END_SQL";
-SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source', dynamic_field_id
+SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Source', dynamic_field_id
   FROM configitem_link
   WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions ), @TypeConditions ]}
 END_SQL
@@ -289,7 +292,7 @@ END_SQL
         }
         elsif ( $Param{Direction} eq 'Target' ) {
             $SQL = <<"END_SQL";
-SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target', dynamic_field_id
+SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Target', dynamic_field_id
   FROM configitem_link
   WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions ), @TypeConditions ]}
 END_SQL
@@ -300,13 +303,13 @@ END_SQL
             # TODO: test with PostgreSQL and Oracle
             $SQL = <<"END_SQL";
 (
-  SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Source', dynamic_field_id
+  SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Source', dynamic_field_id
     FROM configitem_link
     WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @SourceConditions), @TypeConditions ]}
 )
 UNION
 (
-  SELECT DISTINCT target_configitem_id, target_configitem_version_id, link_type_id, 'Target', dynamic_field_id
+  SELECT DISTINCT source_configitem_id, source_configitem_version_id, link_type_id, 'Target', dynamic_field_id
     FROM configitem_link
     WHERE @{[ join ' AND ', ( map { "($_)" } join ' OR ', @TargetConditions), @TypeConditions ]}
 )
