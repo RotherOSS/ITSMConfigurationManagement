@@ -2426,7 +2426,7 @@
         <Navigation>Core::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
-                <Item Key="Name"></Item>
+                <Item Key="Name">All</Item>
                 <Item Key="Groups"><Array></Array></Item>
                 <Item Key="Classes"><Array></Array></Item>
                 <Item Key="DeploymentStates"><Array></Array></Item>
