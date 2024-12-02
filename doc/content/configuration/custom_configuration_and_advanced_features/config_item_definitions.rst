@@ -3,28 +3,28 @@ Config Item Definitions
 
 General Structure
 """""""""""""""""
+A CI definition defines all pages which are shown on the ConfigItemZoom masks and implicitely define which attributes are part of a class (where each attribute corresponds to a dynamic field of the object type "ConfigItem" which has to exists).
+Structurally the "Pages" of the definition yml contain a layout on which "Sections" containing bundled sections of information are placed, as well as some additional attributes. The Sections are defined more in detail afterwards, and e.g. contain a list of dynamic fields to be displayed. Sections can also be included as "Roles" and be defined separately in the definition of the respective role.
 Example class "Domain":
 
 .. code-block:: yaml
 
    Pages:
-   # The individual tabs in AgentITSMConfigItemZoom are called Pages.
-   # The fields to be displayed there are defined in the roles
-   # listed on the left under "Roles".
-      - Name: Summary
+      - Name: Domain Information
         Layout:
            Columns: 2
            ColumnWidth: 1fr 1fr
         Interfaces:
            - Agent
+           - Customer
         Content:
-           - Section: General Fields::Domain Information
+           - Section: Domain Info::Summary
              RowStart: 1
              ColumnStart: 1
-           - Section: CMDB Backlinks::Backlinks
+           - Section: Domain Info::Backlinks
              RowStart: 2
              ColumnStart: 1
-           - Section: CMDB Description::Description
+           - Section: Domain Info::Description
              RowStart: 1
              RowSpan: 2
              ColumnStart: 2
@@ -34,10 +34,11 @@ Example class "Domain":
            ColumnWidth: 1fr 1fr
         Interfaces:
            - Agent
+        Groups:
+           - accounting
         Content:
-           - Section: CMDB Accounting::Accounting
-             RowStart: 1
-             ColumnStart: 1
+           - Section: Accounting
+
    Sections:
       Accounting:
          Content:
@@ -59,15 +60,11 @@ Example class "Domain":
                      - DF: ITSMAccounting-OrderNumber
                      - DF: ITSMAccounting-InvoiceNumber
                      - DF: ITSMAccounting-ReferenceToAccount
-   Roles: 
-      # Roles are used to define the Sections and their individual fields.
-      # Sections can also be defined directly in the class definitions, but we
-      # move them to "Roles" for clarity.
 
-      # For each class with class-specific fields, there is a "General Fields"
-      # definition referring to a role with the name "ITSM GF class name."
-      # This is where the fields of the respective class can be customized.
-      General Fields:
+   # here the latest version of the role "ITSM Domain Information" is included as "Domain Info"
+   # and its sections can be used on the pages above
+   Roles: 
+      Domain Info:
          Name: ITSM Domain Information
 
 .. _internal-link-example:
