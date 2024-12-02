@@ -42,7 +42,7 @@ Import the Ready to Adopt ConfigItem Classes
 
 .. attention::
 
-   Please perform the following steps on a test system first because a large number of dynamic fields will be created by importing the classes.
+    Importing the Ready2Import classes will create a large number of dynamic fields and is not automatically reversible. If in doubt, consider trying this on a non-productive system first.
 
 OTOBO provides the option to import class bundles that showcase some of the most commonly used Configuration Items (CIs).  
 To get started, perform the following steps:
