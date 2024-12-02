@@ -18,7 +18,6 @@ The ITSMConfigurationManagement package also includes extensions to the existing
 
 Operations
 """"""""""
-Most of the config item actions available via Frontend are implemented as operations, such as creating, editing or deleting a config item as well as searching and fetching config item data.
 
 **ConfigItemGet**
 
@@ -481,7 +480,6 @@ Resulting data may be returned as follows:
 
 Invoker
 """""""
-When using OTOBO as a requester to other systems API, the invokers ConfigItemCreate, ConfigItemFetch and ConfigItemUpdate add functionality within the ITSMConfigurationManagement package.
 
 **ConfigItemCreate**
 
