@@ -8,6 +8,11 @@ Agents who need access to CIs in the Configuration Management Database (CMDB) mu
 
 Import the Ready to Adopt ConfigItem Classes
 --------------------------------------------
+
+.. attention::
+
+   Please perform the following steps on a test system first because a large number of dynamic fields will be created by importing the classes.
+
 OTOBO provides the option to import class bundles that showcase some of the most commonly used Configuration Items (CIs).  
 To get started, perform the following steps:
 
