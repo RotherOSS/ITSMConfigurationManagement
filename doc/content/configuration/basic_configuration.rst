@@ -39,7 +39,7 @@ If needed, the permission condition can be customized and expanded in the respec
 
 Change common settings for Config Item Classes (Optional)
 ---------------------------------------------------------
-Classes of CIs provide possibilites for customization. To change attributes of a CI class, perform the following steps:
+Classes of CIs provide possibilites for customization. To change general attributes of a CI class, perform the following steps:
 
 #. Open the admin view of your OTOBO Web UI.
 #. Navigate to **General Catalog** in the **Administration** section.
@@ -58,3 +58,13 @@ Additionally, appearance and data related to a CI class can be changed in the Ad
 #. Click the button **Change class definition**.
 
 In the YAML editor on the page you can configure various thing, such as dynamic fields used as attributes for the class and the appearance of CIs belonging to the class in the zoom views.
+
+Customize attributes shown in Config Item overview (Optional)
+-------------------------------------------------------------
+
+For configuring the attributes available and viewable in Config Item overviews, the following system configuration settings can be used:
+
+- *ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable*
+- *ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault*
+- *ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable*
+- *ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsDefault*
