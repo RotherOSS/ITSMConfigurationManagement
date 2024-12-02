@@ -21,6 +21,7 @@ To get started, perform the following steps:
 #. Locate the **Ready2Import Class Bundles** panel on the left side and select the class bundle you want to import.
 
    .. figure:: ../images/ready2import_class_bundles.png
+      :scale: 65%
       :alt: Ready2Import Class Bundles panel
 
 #. Click the button to import the Ready2Adopt class bundles.
@@ -36,8 +37,8 @@ To provide customer access to CIs, enable the following system configuration set
 
 If needed, the permission condition can be customized and expanded in the respective system configuration settings.
 
-Change common settings for Config Item Classes
-----------------------------------------------
+Change common settings for Config Item Classes (Optional)
+---------------------------------------------------------
 Classes of CIs provide possibilites for customization. To change attributes of a CI class, perform the following steps:
 
 #. Open the admin view of your OTOBO Web UI.
@@ -45,4 +46,4 @@ Classes of CIs provide possibilites for customization. To change attributes of a
 #. Locate the **Catalog Class** table in the middle and click the entry **ITSM::ConfigItem::Class**.
 #. Locate the **Name** table in the middle and click the class name of the class you want to edit.
 
-Among the attributes customizable are for instance the name of the class as well as the version triggers and categories.
+Among the attributes customizable are for instance the permission groups providing access to CIs of the respective class as well as the categories.
