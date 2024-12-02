@@ -57,7 +57,7 @@ Additionally, appearance and data related to a CI class can be changed in the Ad
 #. Locate the **Actions** panel on the left side and select the class you want to edit.
 #. Click the button **Change class definition**.
 
-In the YAML editor on the page you can configure various thing, such as dynamic fields used as attributes for the class and the appearance of CIs belonging to the class in the zoom views.
+In the YAML editor on the page you can configure various things, such as dynamic fields used as attributes for the class and the appearance of CIs belonging to the class in the zoom views.
 
 Customize attributes shown in Config Item overview (Optional)
 -------------------------------------------------------------
