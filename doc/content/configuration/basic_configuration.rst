@@ -25,15 +25,16 @@ To get started, perform the following steps:
 
 #. Click the button to import the Ready2Adopt class bundles.
 
-Assign Customer Permissions
----------------------------
-Enabling customer access to CIs requires, depending on the use case, enabling a subset or all of the following system configurations:
+Assign Customer Permissions (Optional)
+--------------------------------------
+To provide customer access to CIs, enable the following system configuration settings:
 
-- *CustomerFrontend::Module###CustomerITSMConfigItem*: Enabling the config item overview for the customer interface
-- *CustomerFrontend::Module###CustomerITSMConfigItemSearch*: Enabling the config item search for the customer interface
-- *CustomerFrontend::Module###CustomerITSMConfigItemZoom*: Enabling the config item zoom view for the customer interface
+- *CustomerFrontend::Module###CustomerITSMConfigItem*
+- *CustomerFrontend::Module###CustomerITSMConfigItemSearch*
+- *CustomerFrontend::Module###CustomerITSMConfigItemZoom*
+- *Customer::ConfigItem::PermissionConditions###01*: A basic example permission condition granting customer users access to all CIs
 
-Furthermore, at least one permission condition needs to be enabled and defined for a customer. A basic example setup which enables the customer user to view all config items across all classes can be used by enabling the system configuration setting *Customer::ConfigItem::PermissionConditions###01*.
+If needed, the permission condition can be customized and expanded in the respective system configuration settings.
 
 Change common settings for Config Item Classes
 ----------------------------------------------
