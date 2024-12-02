@@ -44,7 +44,7 @@ Classes of CIs provide possibilites for customization. To change attributes of a
 #. Locate the **Catalog Class** table in the middle and click the entry **ITSM::ConfigItem::Class**.
 #. Locate the **Name** table in the middle and click the class name of the class you want to edit.
 
-   .. figure:: ../images/general_catalog_ci_class.png.png
+   .. figure:: ../images/general_catalog_ci_class.png
       :alt: General Catalog Class attributes
 
 Among the attributes customizable are for instance the name of the class as well as the version triggers and categories.
