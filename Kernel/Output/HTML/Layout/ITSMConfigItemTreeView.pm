@@ -128,9 +128,9 @@ sub GenerateHierarchyGraph {
             # need to consider the special case when linking to the origin
             my $NextLevel = $Level - 1;
 
-            for my $LinkedTo ( @{ $Element->{LinkedTo} // [] } ) {
-                my $LinkedToElement = $NextLevel ? $LinkedTo . '_S' . $NextLevel : $LinkedTo;
-                push @LinkDataSource, join ',', $LinkedToElement, $ID, $Element->{Link};
+            for my $Link ( @{ $Element->{Link} // [] } ) {
+                my $LinkedToElement = $NextLevel ? $Link->{LinkedTo} . '_S' . $NextLevel : $Link->{LinkedTo};
+                push @LinkDataSource, join ',', $LinkedToElement, $ID, $Link->{LinkType};
             }
         }
     }
@@ -182,9 +182,9 @@ sub GenerateHierarchyGraph {
 
             # need to consider the special case when linking to the origin
             my $PreviousLevel = $Level - 1;
-            for my $LinkedTo ( @{ $Element->{LinkedTo} // [] } ) {
-                my $LinkedToElement = $PreviousLevel ? $LinkedTo . '_T' . $PreviousLevel : $LinkedTo;
-                push @LinkDataTarget, join ',', $ID, $LinkedToElement, $Element->{Link};
+            for my $Link ( @{ $Element->{Link} // [] } ) {
+                my $LinkedToElement = $PreviousLevel ? $Link->{LinkedTo} . '_T' . $PreviousLevel : $Link->{LinkedTo};
+                push @LinkDataTarget, join ',', $ID, $LinkedToElement, $Link->{LinkType};
             }
         }
     }
@@ -243,7 +243,7 @@ sub GetCISubTreeData {
 
             my $DataForItem = $Self->GetLinkOutputData(
                 LinkedConfigItems => $LinkedConfigItems,
-                LinkedTo          => [ $Element->{ID} ],
+                LinkedTo          => $Element->{ID},
                 Direction         => $Direction,
             );
 
@@ -252,7 +252,7 @@ sub GetCISubTreeData {
 
                 # if this item already exists on this layer, just add another link to it
                 if ( defined $ItemMap{ $SingleItem->{ID} } ) {
-                    push @{ $ItemsPerLevel[ $ItemMap{ $SingleItem->{ID} } ]{LinkedTo} }, $Element->{ID};
+                    push @{ $ItemsPerLevel[ $ItemMap{ $SingleItem->{ID} } ]{Link} }, $SingleItem->{Link}[0];
 
                     next ITEM;
                 }
@@ -361,9 +361,12 @@ sub GetLinkOutputData {
         # is always directed from Source to Target. Therefore the SourceName is the arc label.
         my $LinkType = $LinkedConfigItem->{LinkType};
         my $ArcLabel = $ConfiguredTypes->{$LinkType}->{SourceName} || $LinkType;
+        my $Link     = [ { LinkedTo => $Param{LinkedTo},  LinkType => $ArcLabel } ];
 
         # Was the link to this item version specific ?
         # The VersionString is only shown in the TreeView when an explicit version is linked.
+        # TODO: if we want multiple links to the version on the same layer, only partly version specific
+        #       we would need separate ids for both. This currently is not implemented.
         my $LinkedAsVersion = $IncomingIDs{VersionID} ? 1 : 0;
 
         # define item data
@@ -371,6 +374,7 @@ sub GetLinkOutputData {
             %OutgoingIDs,
             ID              => $Self->_GenerateID(%OutgoingIDs),    # used for linking in the graph
             Name            => $ConfigItem->{Name},
+            Link            => $Link,
             LinkedAsVersion => $LinkedAsVersion,
             Contents        => $Self->_GetContents(
                 Attributes => [
@@ -379,8 +383,6 @@ sub GetLinkOutputData {
                 ],
                 ConfigItem => $ConfigItem,
             ),
-            Link     => $LayoutObject->{LanguageObject}->Translate($ArcLabel),
-            LinkedTo => $Param{LinkedTo} || [],
         };
     }
 
