@@ -207,7 +207,7 @@ sub GetFieldTypeSettings {
             push @SelectionData,
                 {
                     Key   => $PossibleType,
-                    Value => "$Type{SourceName} -> $Type{TargetName}",
+                    Value => "Source -$Type{SourceName}\-> Target ($Type{TargetName})",
                 };
         }
 
