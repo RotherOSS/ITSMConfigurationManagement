@@ -9235,7 +9235,7 @@
         LinkDirection: ReferencingIsTarget
         LinkReferencingType: Dynamic
         LinkType: DependsOn
-        MultiValue: '0'
+        MultiValue: '1'
         Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
