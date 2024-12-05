@@ -525,7 +525,7 @@
               DefaultValue: ''
               Link: ''
               LinkPreview: ''
-              MultiValue: '0'
+              MultiValue: '1'
               RegExList: []
               Tooltip: ''
             FieldType: Text
