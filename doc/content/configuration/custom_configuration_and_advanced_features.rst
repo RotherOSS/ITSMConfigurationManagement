@@ -5,7 +5,7 @@ Custom Configuration and Advanced Features
 .. toctree:: 
    :caption: Table of Contents
    
-   custom_configuration_and_advanced_features/classes_and_roles_in_the_general_catalog
+   custom_configuration_and_advanced_features/general_catalog_classes_of_the_CMDB
    custom_configuration_and_advanced_features/config_item_definitions
    custom_configuration_and_advanced_features/config_item_versioning_and_history
    custom_configuration_and_advanced_features/dynamic_fields_specifics
