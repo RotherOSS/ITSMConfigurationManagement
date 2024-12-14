@@ -2854,8 +2854,6 @@ msgstr ""
 #~ msgid "Sacrifice to Sphinx"
 #~ msgstr ""
 
-#~ msgid "Description"
-#~ msgstr ""
 
 #~ msgid "The OTOBO::ITSM Configuration Management package."
 #~ msgstr ""
