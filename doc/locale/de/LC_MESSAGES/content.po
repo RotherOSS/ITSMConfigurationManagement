@@ -4,18 +4,21 @@
 # Guide package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2024-12-15 14:40+0000\n"
+"Last-Translator: Stefan Rother <sr@rother-oss.com>\n"
+"Language-Team: German <http://weblate.otobo.org/projects/"
+"manual-itsmconfigurationmanagement/master/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.8.4\n"
 "Generated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
@@ -179,7 +182,7 @@ msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:112
 msgid "**Pages**"
-msgstr ""
+msgstr "**Pages**"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:97
 msgid "*Name* (required) - The name of the page"
@@ -191,7 +194,7 @@ msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:100
 msgid "*Columns* - number of columns"
-msgstr ""
+msgstr "*Columns* - Anzahl Spalten"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:101
 msgid "e.g. `Columns: 3` will display 3 columns"
@@ -206,18 +209,24 @@ msgid ""
 "*Interfaces* (optional) - An array containing the interfaces on which "
 "this page is available (default: [Agent])"
 msgstr ""
+"*Interfaces* (optional) - Ein Array mit den Oberflächen, auf der dieses Tab "
+"verfügbar ist (Standard: [Agent])"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:105
 msgid ""
 "*Groups* (optional) - If defined, an array containing groups which a user"
 " has to be member of, to be able to view this page"
 msgstr ""
+"*Groups* (optional) - Falls definiert, ein Array, das die Gruppen enthält, "
+"in denen ein Benutzer Mitglied sein muss, um diese Seite sehen zu können"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:106
 msgid ""
 "*Content* (required) - The content, i.e. an array of sections and their "
 "position on this page"
 msgstr ""
+"*Content* (benötigt) - Der Inhalt, d. h. eine Reihe von Abschnitten und ihre "
+"Position auf dieser Seite"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:108
 msgid "*Section* (required) - The section name"
@@ -296,7 +305,7 @@ msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:132
 msgid "*Grid* - A multi column section of dynamic fields"
-msgstr ""
+msgstr "*Grid* - Ein mehrspaltiger Abschnitt mit dynamischen Feldern"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:134
 msgid "*Columns* - Number of columns"
@@ -324,7 +333,7 @@ msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:143
 msgid "*DF* - A dynamic field (the name - see above)"
-msgstr ""
+msgstr "*DF* - Ein Dynamisches Feld (der Name - siehe oben)"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:145
 msgid "*ColumnStart*"
@@ -2854,7 +2863,6 @@ msgstr ""
 #~ msgid "Sacrifice to Sphinx"
 #~ msgstr ""
 
-
 #~ msgid "The OTOBO::ITSM Configuration Management package."
 #~ msgstr ""
 
@@ -2869,4 +2877,3 @@ msgstr ""
 
 #~ msgid "Web: https://otobo.de"
 #~ msgstr ""
-
