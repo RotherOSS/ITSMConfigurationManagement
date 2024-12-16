@@ -1,17 +1,21 @@
+.. _basic-configuration:
+
 Basic Configuration
 ===================
-In this section, you will learn all necessary steps to set up a basic but usable CMDB with the most commonly used Configuration Items (CIs).
+This section provides a basic approach on how to set up an initial CMDB for productive use. It comes with a set of ready to adopt and most common Configuration Item (CIs) classes. You'll save valuable time and can start right away mapping your infrastructure and most valuable assets.
 
 Assign Agent Permissions
 ------------------------
 Agents who need access to CIs in the Configuration Management Database (CMDB) must be assigned to the group "itsm-configitem".
+
+.. _import-ready2import-classes:
 
 Import the Ready to Adopt ConfigItem Classes
 --------------------------------------------
 
 .. attention::
 
-    Importing the Ready2Import classes will create a large number of dynamic fields and is not automatically reversible. If in doubt, consider trying this on a non-productive system first.
+    Importing the Ready2Import classes will create a large number of dynamic fields and is not automatically reversible. We recommend trying this on a non-productive system first.
 
 OTOBO provides the option to import class bundles that showcase some of the most commonly used Configuration Items (CIs).  
 To get started, perform the following steps:
@@ -24,47 +28,49 @@ To get started, perform the following steps:
       :scale: 65%
       :alt: Ready2Import Class Bundles panel
 
-#. Click the button to import the Ready2Adopt class bundles.
+#. Click the button to import the Ready2Import class bundles.
 
 Assign Customer Permissions (Optional)
 --------------------------------------
 To provide customer access to CIs, enable the following system configuration settings:
 
-- *CustomerFrontend::Module###CustomerITSMConfigItem*
-- *CustomerFrontend::Module###CustomerITSMConfigItemSearch*
-- *CustomerFrontend::Module###CustomerITSMConfigItemZoom*
-- *Customer::ConfigItem::PermissionConditions###01*: A basic example permission condition granting customer users access to all CIs
+- :ref:`Module###CustomerITSMConfigItem`
+- :ref:`Module###CustomerITSMConfigItemSearch`
+- :ref:`Module###CustomerITSMConfigItemZoom`
+- :ref:`PermissionConditions###01`
 
-If needed, the permission condition can be customized and expanded in the respective system configuration settings.
+If needed, the permission condition can be customized and expanded as described in :ref:`acl-section-label`.
 
-Change common settings for Config Item Classes (Optional)
+Change Common Settings for Config Item Classes (Optional)
 ---------------------------------------------------------
-Classes of CIs provide possibilites for customization. To change general attributes of a CI class, perform the following steps:
+CI classes offer a ton of flexibility when it comes to tailoring them to your needs. Here's what you need to do to change the general attributes of a CI class:
 
 #. Open the admin view of your OTOBO Web UI.
 #. Navigate to **General Catalog** in the **Administration** section.
-#. Locate the **Catalog Class** table in the middle and click the entry **ITSM::ConfigItem::Class**.
-#. Locate the **Name** table in the middle and click the class name of the class you want to edit.
+#. Locate the **Catalog Class** table in the middle, then click on the **ITSM::ConfigItem::Class** entry.
+#. Find the **Name** table right in the middle, then click on the class name of the specific class you're looking to modify.
 
-Among the attributes customizable are for instance the permission groups providing access to CIs of the respective class as well as the categories.
+You can customize attributes like permission groups that control who gets access to CIs in a particular class, as well as categories.
+A more detailed description is provided in :ref:`general-catalog-classes`.
 
-Change advanced settings for Config Item Classes (Optional)
+Change Advanced Settings for Config Item Classes (Optional)
 -----------------------------------------------------------
-Additionally, appearance and data related to a CI class can be changed in the Admin Config Item screen:
+You can also tweak the look and feel of a CI class, as well as its associated data, right from the Admin Config Item screen.
 
 #. Open the admin view of your OTOBO Web UI.
 #. Navigate to **Config Items** in the **CMDB Settings** section.
-#. Locate the **Actions** panel on the left side and select the class you want to edit.
+#. Find the **Actions** panel on the left side and select the class you want to edit.
 #. Click the button **Change class definition**.
 
-In the YAML editor on the page you can configure various things, such as dynamic fields used as attributes for the class and the appearance of CIs belonging to the class in the zoom views.
+In the `YAML <https://en.wikipedia.org/wiki/YAML>`_ editor on the page you can configure various things, such as Dynamic Fields used as attributes for the Class and the appearance of CIs belonging to the class in the zoom views.
+This is covered more in-depth in :ref:`config-item-definitions`.
 
-Customize attributes shown in Config Item overview (Optional)
+Customize Attributes Shown in Config Item Overview (Optional)
 -------------------------------------------------------------
 
-For configuring the attributes available and viewable in Config Item overviews, the following system configuration settings can be used:
+For configuring the attributes available and visible in the Config Item overviews, the following system configuration settings can be used:
 
-- *ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable*
-- *ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault*
-- *ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable*
-- *ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsDefault*
+- :ref:`AgentITSMConfigItem###ClassColumnsAvailable`
+- :ref:`AgentITSMConfigItem###ClassColumnsDefault`
+- :ref:`CustomerITSMConfigItem###ClassColumnsAvailable`
+- :ref:`CustomerITSMConfigItem###ClassColumnsDefault`

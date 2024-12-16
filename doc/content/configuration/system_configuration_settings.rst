@@ -161,6 +161,8 @@ UniqueCIName::UniquenessCheckScope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates.
 
+.. _PermissionConditions###01:
+
 Customer::ConfigItem::PermissionConditions###01
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category.
@@ -711,9 +713,13 @@ ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 The default category which is shown, if none is selected.
 
+.. _AgentITSMConfigItem###ClassColumnsAvailable:
+
 ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.
+
+.. _AgentITSMConfigItem###ClassColumnsDefault:
 
 ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -824,13 +830,19 @@ Defines an overview module to show the small view of a configuration item list.
 Frontend::Customer::ModuleRegistration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. _Module###CustomerITSMConfigItem:
+
 CustomerFrontend::Module###CustomerITSMConfigItem
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Frontend module registration for the customer interface.
 
+.. _Module###CustomerITSMConfigItemSearch:
+
 CustomerFrontend::Module###CustomerITSMConfigItemSearch
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Frontend module registration for the customer interface.
+
+.. _Module###CustomerITSMConfigItemZoom:
 
 CustomerFrontend::Module###CustomerITSMConfigItemZoom
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -924,9 +936,13 @@ ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Defines the search limit for the CustomerITSMConfigItem screen.
 
+.. _CustomerITSMConfigItem###ClassColumnsAvailable:
+
 ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.
+
+.. _CustomerITSMConfigItem###ClassColumnsDefault:
 
 ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsDefault
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

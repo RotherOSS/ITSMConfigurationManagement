@@ -1,10 +1,14 @@
+.. _config-item-definitions:
+
 Config Item Definitions
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 General Structure
 """""""""""""""""
-A CI definition defines all pages which are shown on the ConfigItemZoom masks and implicitely define which attributes are part of a class (where each attribute corresponds to a dynamic field of the object type "ConfigItem" which has to exists).
-Structurally the "Pages" of the definition yml contain a layout on which "Sections" containing bundled sections of information are placed, as well as some additional attributes. The Sections are defined more in detail afterwards, and e.g. contain a list of dynamic fields to be displayed. Sections can also be included as "Roles" and be defined separately in the definition of the respective role.
+A CI definition outlines all the ':ref:`Pages<pages>`' that appear on the ConfigItemZoom masks and implicitly determines which attributes belong to a class. Each attribute corresponds to a dynamic field of the "ConfigItem" object type, which must exist. 
+
+Structurally, the 'Pages' in the definitions YAML contain a layout with ':ref:`Sections<sections>`' that bundle information blocks and some additional attributes. These 'Sections'  are later defined in more detail and may include, for example, a list of dynamic fields to be displayed. Sections can also be embedded as ':ref:`Roles<roles>`' and separately defined within each role's definition.
+
 Example class "Domain":
 
 .. code-block:: yaml
@@ -71,13 +75,15 @@ Example class "Domain":
 
 Setting Reference
 """""""""""""""""
+.. _pages:
+
 **Pages**
 
 - **Name** (required): The name of the page.
 - **Layout** (required): The layout of the grid on this page.
 
   - **Columns**: Number of columns.
-    Example: ``Columns: 3`` displays three columns.
+    Example: "``Columns: 3``" displays three columns.
   - **ColumnWidth**: Basic CSS defining the column widths.
 
 - **Interfaces** (optional): An array containing the interfaces on which this page is available (default: [Agent]).
@@ -90,14 +96,16 @@ Setting Reference
   - **ColumnStart** (optional): The starting column in the page grid of this section.
   - **ColumnSpan** (optional): The number of columns this section should span.
 
+.. _sections:
+
 **Sections**
 
-The **Sections** section of the YAML contains a hash of the sections referenced in the **Pages**. The following keys are valid for each section:
+The **Sections** subsection of the YAML contains a hash of the sections referenced in the **Pages**. The following keys are valid for each section:
 
 - **Type** (optional): Defines the type of the section. Depending on the type, other attributes may or may not be available. Available types include:
 
   - **DynamicFields** (default): A standard section containing dynamic fields.
-  - **Description**: A rich-text description possibly containing images, which can be defined on CI edit masks.
+  - **Description**: A rich text description that may contain images that can be defined in the CI editing masks.
   - **ConfigItemLinks**: Displays ConfigItems linked via dynamic fields (not used for edit masks).
   - **ReferencedSection**: Displays a section of a referenced CI in a reference dynamic field (not used for edit masks).
 
@@ -107,11 +115,13 @@ An additional key, **Content**, is mandatory. This works like content in ticket 
 
 - **Header** (optional): A header for this section.
 - **DF**: A dynamic field (the name).
-  - **Mandatory** (optional): Set to `1` if the field is required in edit masks.
+
+  - **Mandatory** (optional): Set to `1` if the field is mandatory in edit masks.
   - **Readonly** (optional): Set to `1` if the field is read-only in edit masks (only for basic field types).
-  - **Label** (optional): Overrides the label of the field in edit masks.
+  - **Label** (optional): Overrides the field label in edit masks.
 
 - **Grid**: A multi-column section of dynamic fields.
+
   - **Columns**: Number of columns.
   - **ColumnWidth** (optional): Column widths (e.g., "1fr 40px 2fr"; "%" is not supported).
   - **Rows**: A matrix of dynamic fields (array of arrays).
@@ -155,13 +165,13 @@ Lists linked Config Items.
 
 **Type: ReferencedSection**
 
-- **ReferenceField** (required): The reference field containing the referenced Config Item.
-- **SectionName** (required): The name of the section of the referenced Config Item to display.
+- **ReferenceField** (mandatory): The reference field containing the referenced Config Item.
+- **SectionName** (mandatory): The section name of the referenced Config Item to display.
 - **FieldListPre** (optional): Dynamic fields of this Config Item rendered before the referenced section.
 - **FieldListPost** (optional): Dynamic fields rendered after the referenced section.
 
-**Type: Module**
+.. **Type: Module**
 
-This type is not yet implemented.
+.. This type is not yet implemented.
 
-- **Module** (required): A custom module returning HTML to render in this section.
+.. - **Module** (mandatory): A custom module returning HTML to render in this section.

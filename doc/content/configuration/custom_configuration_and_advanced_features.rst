@@ -1,3 +1,5 @@
+.. _custom-configuration-and-advanced-features:
+
 Custom Configuration and Advanced Features
 ==========================================
 .. This should contain more in depth information if applicable. Might be about more complex configuration or use cases. 

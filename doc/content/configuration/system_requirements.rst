@@ -1,5 +1,5 @@
 *******************
-System requirements
+System Requirements
 *******************
 
 Framework
@@ -14,6 +14,5 @@ Packages
 
 ITSMCore 11.0.1
 
-Third-party software
---------------------
-\-
+.. Third-Party Software
+.. --------------------
