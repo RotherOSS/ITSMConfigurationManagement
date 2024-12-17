@@ -37,6 +37,29 @@ To provide customer access to CIs, enable the following system configuration set
 
 If needed, the permission condition can be customized and expanded in the respective system configuration settings.
 
+Show assigned CIs for Customer Users or Customer Companies (Optional)
+-------------------------------------------------------------------------------------
+It is possible to view linked CIs for Customer Users or Customer Companies:
+
+.. figure:: ../images/example-CUIC-CIs.png
+   :scale: 65%
+   :alt: Example of assigned CIs to a Customer User
+
+To view assigned CIs in the Customer User or Customer Company Information Center you have to edit the following system configuration settings:
+
+- *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser*
+- *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany*
+
+At *ConfigItemKey* click on the plus sign and insert into the first row the name of the class you want to be shown and in the second the link reference.
+
+.. figure:: ../images/setting-0060-CUIC-ITSMConfigItemCustomerUser.png
+   :scale: 65%
+   :alt: Example configuration for *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser*
+
+.. figure:: ../images/setting-0060-CIC-ITSMConfigItemCustomerCompany.png
+   :scale: 65%
+   :alt: Example configuration for *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany*
+
 Change common settings for Config Item Classes (Optional)
 ---------------------------------------------------------
 Classes of CIs provide possibilites for customization. To change general attributes of a CI class, perform the following steps:
