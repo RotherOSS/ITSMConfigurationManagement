@@ -38,7 +38,7 @@ To provide customer access to CIs, enable the following system configuration set
 If needed, the permission condition can be customized and expanded in the respective system configuration settings.
 
 Show assigned CIs for Customer Users or Customer Companies (Optional)
--------------------------------------------------------------------------------------
+---------------------------------------------------------------------
 It is possible to view linked CIs for Customer Users or Customer Companies:
 
 .. figure:: ../images/example-CUIC-CIs.png
