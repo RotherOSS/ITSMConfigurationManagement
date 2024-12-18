@@ -37,28 +37,40 @@ To provide customer access to CIs, enable the following system configuration set
 
 If needed, the permission condition can be customized and expanded in the respective system configuration settings.
 
-Show assigned CIs for Customer Users or Customer Companies (Optional)
----------------------------------------------------------------------
-It is possible to view linked CIs for Customer Users or Customer Companies:
+Viewing Assigned Configuration Items (CIs) for Customer Users or Customer Companies (Optional)
+----------------------------------------------------------------------------------------------
+You can enable the display of linked Configuration Items (CIs) for Customer Users or Customer Companies in the respective Information Centers.
+
+**Example: Assigned CIs for a Customer User**
 
 .. figure:: ../images/example-CUIC-CIs.png
    :scale: 65%
-   :alt: Example of assigned CIs to a Customer User
+   :alt: Example showing assigned CIs for a Customer User
 
-To view assigned CIs in the Customer User or Customer Company Information Center you have to edit the following system configuration settings:
+Steps to Enable Viewing Assigned CIs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To display assigned CIs in the Customer User Information Center or the Customer Company Information Center, modify the following system configuration settings:
 
-- *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser*
-- *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany*
+- *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser* for Customer User Information Center.
+- *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany* for Customer Company Information Center.
 
-At *ConfigItemKey* click on the plus sign and insert into the first row the name of the class you want to be shown and in the second the link reference.
+Configuration instruction per setting:
+
+1. In the ConfigItemKey section of the respective setting, click the plus sign to add a new entry.
+2. In the first row, specify the name of the CI class you want to display.
+3. In the second row, provide the link reference.
+
+**Example Configuration for Customer User Information Center**
 
 .. figure:: ../images/setting-0060-CUIC-ITSMConfigItemCustomerUser.png
    :scale: 65%
-   :alt: Example configuration for *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser*
+   :alt: Configuration for *AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser*
+
+**Example Configuration for Customer Company Information Center**
 
 .. figure:: ../images/setting-0060-CIC-ITSMConfigItemCustomerCompany.png
    :scale: 65%
-   :alt: Example configuration for *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany*
+   :alt: Configuration for *AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany*
 
 Change common settings for Config Item Classes (Optional)
 ---------------------------------------------------------
