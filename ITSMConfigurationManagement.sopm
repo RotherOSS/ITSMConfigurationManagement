@@ -146,6 +146,7 @@
         <File Permission="660" Location="Kernel/Output/JavaScript/Templates/Standard/Agent/ITSMConfigurationManagement/ClassImportConfirm.html.tmpl" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassExport.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassImport.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ConvertLegacyRefDFs.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/DumpGraph.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
@@ -1026,6 +1027,12 @@
         <br/>
         ((enjoy))<br/>
         <br/>
+
+    ]]></IntroUpgrade>
+    <IntroUpgrade Type="post" Title="Convert legacy reference fields" Lang="en"><![CDATA[
+
+        <br/>
+        You must now execute the Console command 'Admin::ITSM::Configitem::ConvertLegacyRefDFs'.<br/>
 
     ]]></IntroUpgrade>
     <IntroUninstall Type="pre" Title="Uninstallation Information" Lang="en"><![CDATA[
