@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-10 11:22+0000\n"
+"PO-Revision-Date: 2025-01-10 13:21+0000\n"
 "Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: German <http://weblate.otobo.org/projects/"
+"Language-Team: German <http://translate.otobo.org/projects/"
 "manual-itsmconfigurationmanagement/master/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -2751,17 +2751,17 @@ msgstr ""
 #: ../../content/configuration/system_requirements.rst:16
 #: ../../content/system_requirements.rst:16
 msgid "Framework"
-msgstr ""
+msgstr "Framework"
 
 #: ../../content/configuration/system_requirements.rst:19
 #: ../../content/system_requirements.rst:19
 msgid "OTOBO 11.0.x"
-msgstr ""
+msgstr "OTOBO 11.0.x"
 
 #: ../../content/configuration/system_requirements.rst:22
 #: ../../content/system_requirements.rst:22
 msgid "Packages"
-msgstr ""
+msgstr "Pakete"
 
 #: ../../content/configuration/system_requirements.rst:25
 #: ../../content/system_requirements.rst:25
@@ -2893,3 +2893,11 @@ msgstr "Web: https://otobo.io"
 msgctxt "1"
 msgid "Framework"
 msgstr "Framework"
+
+msgctxt "1"
+msgid "Packages"
+msgstr "Pakete"
+
+msgctxt "1"
+msgid "OTOBO 11.0.x"
+msgstr "OTOBO 11.0.x"
