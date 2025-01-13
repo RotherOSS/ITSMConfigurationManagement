@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
+"PO-Revision-Date: 2025-01-13 15:21+0000\n"
 "Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
 "Language-Team: German <http://translate.otobo.org/projects/"
 "manual-itsmconfigurationmanagement/master/de/>\n"
@@ -140,7 +140,7 @@ msgstr ""
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
 msgid "Configuration Reference"
-msgstr ""
+msgstr "Konfigurationsreferenz"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "CMDB"
@@ -2773,7 +2773,7 @@ msgstr ""
 #: ../../content/configuration/system_requirements.rst:28
 #: ../../content/system_requirements.rst:28
 msgid "Third-party software"
-msgstr ""
+msgstr "Drittanbieter-Software"
 
 #: ../../content/configuration/system_requirements.rst:29
 #: ../../content/system_requirements.rst:29
@@ -2927,3 +2927,11 @@ msgstr ""
 msgctxt "1"
 msgid "Version"
 msgstr "Version"
+
+msgctxt "1"
+msgid "Third-party software"
+msgstr "Drittanbieter-Software"
+
+msgctxt "1"
+msgid "Configuration Reference"
+msgstr "Konfigurationsreferenz"
