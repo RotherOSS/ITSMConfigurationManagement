@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-10 13:21+0000\n"
+"PO-Revision-Date: 2025-01-13 11:21+0000\n"
 "Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
 "Language-Team: German <http://translate.otobo.org/projects/"
 "manual-itsmconfigurationmanagement/master/de/>\n"
@@ -31,7 +31,7 @@ msgstr "Kontakt"
 
 #: ../../content/about.rst:17
 msgid "Rother OSS GmbH"
-msgstr ""
+msgstr "Rother OSS GmbH"
 
 #: ../../content/about.rst:18
 msgid "Email: hello@otobo.io"
@@ -43,13 +43,15 @@ msgstr "Web: https://otobo.io"
 
 #: ../../content/about.rst:22
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../../content/about.rst:23
 msgid ""
 "Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-"
 "datestamp|"
 msgstr ""
+"Autor: |doc-vendor| / Version: |doc-version| / Datum der Veröffentlichung: "
+"|doc-datestamp|"
 
 #: ../../content/about.rst:27
 msgid "Terms and Conditions"
@@ -2746,7 +2748,7 @@ msgstr ""
 #: ../../content/configuration/system_requirements.rst:13
 #: ../../content/system_requirements.rst:13
 msgid "System requirements"
-msgstr ""
+msgstr "Systemanforderungen"
 
 #: ../../content/configuration/system_requirements.rst:16
 #: ../../content/system_requirements.rst:16
@@ -2776,7 +2778,7 @@ msgstr ""
 #: ../../content/configuration/system_requirements.rst:29
 #: ../../content/system_requirements.rst:29
 msgid "\\-"
-msgstr ""
+msgstr "\\-"
 
 #: ../../content/index.rst:13
 msgid "Package Documentation: ITSMConfigurationManagement"
@@ -2901,3 +2903,27 @@ msgstr "Pakete"
 msgctxt "1"
 msgid "OTOBO 11.0.x"
 msgstr "OTOBO 11.0.x"
+
+msgctxt "1"
+msgid "System requirements"
+msgstr "Systemanforderungen"
+
+msgctxt "1"
+msgid "Rother OSS GmbH"
+msgstr "Rother OSS GmbH"
+
+msgctxt "1"
+msgid "\\-"
+msgstr "\\-"
+
+msgctxt "1"
+msgid ""
+"Author: |doc-vendor| / Version: |doc-version| / Date of release: |doc-"
+"datestamp|"
+msgstr ""
+"Autor: |doc-vendor| / Version: |doc-version| / Datum der Veröffentlichung: "
+"|doc-datestamp|"
+
+msgctxt "1"
+msgid "Version"
+msgstr "Version"
