@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -138,7 +138,7 @@ sub _UpdateDynamicFieldConfig {
 
     my $NewConfig = {
         'ImportSearchAttribute' => '',
-        'Multiselect'           => ( $DF->{Config}->{MaxArraySize} > 1 ? 1 : 0 ),
+        'Multiselect'           => ( $DF->{Config}{MaxArraySize} > 1 ? 1 : 0 ),
         'ReferenceFilterList'   => [],
         'SearchAttribute'       => '',
         'PossibleNone'          => '1',
@@ -146,9 +146,9 @@ sub _UpdateDynamicFieldConfig {
         'MultiValue'            => 0,
         'LinkType'              => '',
         'LinkDirection'         => 'ReferencingIsSource',
-        'DisplayType'           => $Self->_ConvertFromDisplayPattern( Pattern => $DF->{Config}->{DisplayPattern} ),
-        'ClassIDs'              => $DF->{Config}->{ITSMConfigItemClasses},
-        'DeplStateIDs'          => $DF->{Config}->{DeploymentStates},
+        'DisplayType'           => $Self->_ConvertFromDisplayPattern( Pattern => $DF->{Config}{DisplayPattern} ),
+        'ClassIDs'              => $DF->{Config}{ITSMConfigItemClasses},
+        'DeplStateIDs'          => $DF->{Config}{DeploymentStates},
         'Tooltip'               => '',
         'ReferencedObjectType'  => 'ITSMConfigItem',
     };
@@ -170,7 +170,7 @@ sub _UpdateDynamicFieldConfig {
         return $Self->ExitCodeError();
     }
 
-    my @LocalConstrictions = split( /\r\n/, $DF->{Config}->{Constrictions} );
+    my @LocalConstrictions = split( /\r\n/, $DF->{Config}{Constrictions} );
     for my $Constriction (@LocalConstrictions) {
         push @{$ConstrictionsList}, {
             ID           => $ID,

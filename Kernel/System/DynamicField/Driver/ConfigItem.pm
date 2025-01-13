@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -32,7 +32,7 @@ use List::Util qw(any);
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
@@ -284,7 +284,7 @@ sub GetFieldTypeSettings {
                 ConfigParamName => 'LinkReferencingType',
                 Label           => Translatable('Link Referencing Type'),
                 Explanation     => Translatable(
-                    'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'
+                'Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links.'
                 ),
                 InputType     => 'Selection',
                 SelectionData => \@SelectionData,
@@ -705,7 +705,7 @@ sub SearchObjects {
     }
 
     # Support restriction by deployment state
-    if ( IsArrayRefWithData( $DFDetails->{DeplStateIDs} ) && !$Param{ExternalSource} ) {
+    if ( IsArrayRefWithData( $DFDetails->{DeplStateIDs} ) ) {
         if ( $SearchParams{DeplStateIDs} ) {
             my @DeploymentStateIDs;
             for my $DeploymentStateID ( $SearchParams{DeplStateIDs}->@* ) {
