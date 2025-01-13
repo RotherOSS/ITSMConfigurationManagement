@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -13,15 +13,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
-
-# NOTAS:
-# Pode não repetir valores ou pode ter o autocomplete, um dos comportamentos fica excluído.
-# AutoComplete => MultiSelect = 0 incondicionalmente
-#
-# Para permitir múltiplos valores sem repetição, só com MultiSelect = 1
-# Compromisso:
-# Se legado MaxArraySize = 1 então Autocomplete, senão MultiSelect
-
 
 package Kernel::System::Console::Command::Admin::ITSM::Configitem::ConvertLegacyRefDFs;
 
@@ -36,8 +27,6 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 # OTOBO modules
 use Kernel::System::Console::InterfaceConsole;    ## no perlimports
-
-use Data::Dumper;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -57,7 +46,7 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'file',
-        Description => "File name for the constrictions report, by default 'constrictions.txt'.",
+        Description => "File name for the constrictions report, by default prints the report to the display.",
         Required    => 0,
         HasValue    => 1,
         ValueRegex  => qr/./,
@@ -77,7 +66,7 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $FileName       = $Self->GetOption('file') || "constrictions.txt";
+    my $FileName       = $Self->GetOption('file');
     my $ForceOverwrite = $Self->GetOption('force');
 
     if ( -e $FileName && !$ForceOverwrite ) {
@@ -93,17 +82,17 @@ sub Run {
     my $PackageObject           = $Kernel::OM->Get('Kernel::System::Package');
 
     # support console command
-    if( !defined $DBObject->{dbh} ) {
+    if ( !defined $DBObject->{dbh} ) {
         $DBObject->Connect();
     }
-    if( !defined $DBObject->{dbh} ) {
-        die ("unable to connect to Database.");
+    if ( !defined $DBObject->{dbh} ) {
+        die("unable to connect to Database.");
     }
 
     $DBObject->BeginWork();
     my @IDs = $Self->_GetDFTypeIDs(
         DBObject => $DBObject,
-        DFType => 'ITSMConfigItemReference',
+        DFType   => 'ITSMConfigItemReference',
     );
 
     my $CountFieldUpdates = 0;
@@ -112,14 +101,14 @@ sub Run {
 
     for my $ID (@IDs) {
         $Self->_UpdateDynamicFieldConfig(
-            ID => $ID,
+            ID                 => $ID,
             DynamicFieldObject => $DynamicFieldObject,
-            ConstrictionsList => \@ConstrictionsList,
+            ConstrictionsList  => \@ConstrictionsList,
         );
         $CountFieldUpdates++;
         $CountValueUpdates += $Self->_UpdateDynamicFieldValues(
-            ID => $ID,
-            DBObject => $DBObject,
+            ID                      => $ID,
+            DBObject                => $DBObject,
             DynamicFieldValueObject => $DynamicFieldValueObject,
         );
     }
@@ -130,9 +119,9 @@ sub Run {
     $Self->Print("$CountValueUpdates field values updated\n");
 
     $Self->_ReportConstrictions(
-                ConstrictionsList => \@ConstrictionsList,
-                FileName => $FileName,
-            );
+        ConstrictionsList => \@ConstrictionsList,
+        FileName          => $FileName,
+    );
     $Self->Print("<green>Done</green>\n");
     return $Self->ExitCodeOk();
 }
@@ -141,27 +130,27 @@ sub _UpdateDynamicFieldConfig {
 
     my ( $Self, %Param ) = @_;
 
-    my $ID                  = $Param{'ID'};
-    my $DynamicFieldObject  = $Param{'DynamicFieldObject'};
-    my $ConstrictionsList   = $Param{'ConstrictionsList'};
+    my $ID                 = $Param{'ID'};
+    my $DynamicFieldObject = $Param{'DynamicFieldObject'};
+    my $ConstrictionsList  = $Param{'ConstrictionsList'};
 
     my $DF = $DynamicFieldObject->DynamicFieldGet( ID => $ID );
 
     my $NewConfig = {
         'ImportSearchAttribute' => '',
-        'Multiselect' => ( $DF->{Config}->{MaxArraySize} > 1 ? 1 : 0 ),
-        'ReferenceFilterList' => [],
-        'SearchAttribute' => '',
-        'PossibleNone' => '1',
-        'EditFieldMode' => 'AutoComplete',
-        'MultiValue' => 0,
-        'LinkType' => '',
-        'LinkDirection' => 'ReferencingIsSource',
-        'DisplayType' => $Self->_ConvertFromDisplayPattern( Pattern => $DF->{Config}->{DisplayPattern} ),
-        'ClassIDs' => $DF->{Config}->{ITSMConfigItemClasses},
-        'DeplStateIDs' => $DF->{Config}->{DeploymentStates},
-        'Tooltip' => '',
-        'ReferencedObjectType' => 'ITSMConfigItem',
+        'Multiselect'           => ( $DF->{Config}->{MaxArraySize} > 1 ? 1 : 0 ),
+        'ReferenceFilterList'   => [],
+        'SearchAttribute'       => '',
+        'PossibleNone'          => '1',
+        'EditFieldMode'         => 'AutoComplete',
+        'MultiValue'            => 0,
+        'LinkType'              => '',
+        'LinkDirection'         => 'ReferencingIsSource',
+        'DisplayType'           => $Self->_ConvertFromDisplayPattern( Pattern => $DF->{Config}->{DisplayPattern} ),
+        'ClassIDs'              => $DF->{Config}->{ITSMConfigItemClasses},
+        'DeplStateIDs'          => $DF->{Config}->{DeploymentStates},
+        'Tooltip'               => '',
+        'ReferencedObjectType'  => 'ITSMConfigItem',
     };
 
     my $Success = $DynamicFieldObject->DynamicFieldUpdate(
@@ -177,16 +166,17 @@ sub _UpdateDynamicFieldConfig {
     );
 
     if ( !$Success ) {
-        $Self->Print("<red>Unable to set DF Config for " . $DF->{Name} . " ($ID) with:\n $NewConfig</red>\n");
+        $Self->Print( "<red>Unable to set DF Config for " . $DF->{Name} . " ($ID) with:\n $NewConfig</red>\n" );
         return $Self->ExitCodeError();
     }
 
-    my @LocalConstrictions = split("\r\n", $DF->{Config}->{Constrictions});
+    my @LocalConstrictions = split( /\r\n/, $DF->{Config}->{Constrictions} );
     for my $Constriction (@LocalConstrictions) {
         push @{$ConstrictionsList}, {
-                    ID => $ID,
-                    Constriction => $Constriction,
-                };
+            ID           => $ID,
+            FieldName    => $DF->{Name},
+            Constriction => $Constriction,
+        };
     }
     return;
 }
@@ -196,13 +186,13 @@ sub _ConvertFromDisplayPattern {
 
     my $Pattern = $Param{'Pattern'};
 
-    if ($Pattern =~ /<CI_Class>/ && $Pattern =~ /<CI_Name>/) {
+    if ( $Pattern =~ /<CI_Class>/ && $Pattern =~ /<CI_Name>/ ) {
         return 'ClassConfigItemName';
     }
-    elsif ($Pattern =~ /<CI_Class>/ && $Pattern =~ /<CI_Number>/) {
+    elsif ( $Pattern =~ /<CI_Class>/ && $Pattern =~ /<CI_Number>/ ) {
         return 'ClassConfigItemNumber';
     }
-    elsif ($Pattern =~ /<CI_Name>/) {
+    elsif ( $Pattern =~ /<CI_Name>/ ) {
         return 'ConfigItemName';
     }
     else {
@@ -238,8 +228,8 @@ sub _UpdateDynamicFieldValues {
         my $IndexValue = 0;
         for my $ExistingValue ( $ExistingValues->@* ) {
             my $NewValue = {
-                ValueText  => undef,
-                ValueInt   => $ExistingValue->{ValueText},
+                ValueText => undef,
+                ValueInt  => $ExistingValue->{ValueText},
             };
             if ( scalar $ExistingValues->@* > 1 ) {
                 $NewValue->{IndexValue} = $IndexValue;
@@ -247,7 +237,7 @@ sub _UpdateDynamicFieldValues {
             }
             push @NewValues, $NewValue;
         }
-            
+
         my $Success = $DynamicFieldValueObject->ValueSet(
             FieldID  => $FieldID,
             ObjectID => $ObjectID,
@@ -290,26 +280,34 @@ sub _ReportConstrictions {
     my ( $Self, %Param ) = @_;
 
     my $ConstrictionsList = $Param{'ConstrictionsList'};
-    my $FileName = $Param{'FileName'};
+    my $FileName          = $Param{'FileName'};
 
-    if (@{$ConstrictionsList}) {
-        my $ConstrictionsStr = "object_id\tconstriction\n";
-        for my $Constriction (@{$ConstrictionsList}) {
-            $ConstrictionsStr .= $Constriction->{ID} . "\t" . $Constriction->{Constriction} . "\n";
-        }
-        my $Success = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
-            Location => $FileName,
-            Content  => \$ConstrictionsStr,
-        );
-        if (!$Success) {
-            $Self->Print("<red>Could not write file.</red>\n");
+    if ( @{$ConstrictionsList} ) {
+        my $ConstrictionsStr = "field\tconstriction\n";
+        for my $Constriction ( @{$ConstrictionsList} ) {
+            $ConstrictionsStr .= $Constriction->{FieldName} . "\t" . $Constriction->{Constriction} . "\n";
         }
         my $Count = scalar @{$ConstrictionsList};
-        $Self->Print("<yellow>Found $Count constrictions, they require manual configuration. Please check the report file '$FileName'.</yellow>\n");
+        if ($FileName) {
+            my $Success = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
+                Location => $FileName,
+                Content  => \$ConstrictionsStr,
+            );
+            if ( !$Success ) {
+                $Self->Print("<red>Could not write file.</red>\n");
+            }
+            $Self->Print("<yellow>Found $Count constrictions, they require manual configuration. Please check the report file '$FileName'.</yellow>\n");
+        }
+        else {
+            print $ConstrictionsStr;
+            $Self->Print("<yellow>Found $Count constrictions, they require manual configuration.</yellow>\n");
+        }
     }
     else {
         $Self->Print("No constrictions were found.\n");
     }
+
+    return;
 }
 
 1;

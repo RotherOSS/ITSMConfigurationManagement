@@ -1032,7 +1032,7 @@
     <IntroUpgrade Type="post" Title="Convert legacy reference fields" Lang="en"><![CDATA[
 
         <br/>
-        You must now execute the Console command 'Admin::ITSM::Configitem::ConvertLegacyRefDFs'.<br/>
+        If you have the OTOBO 10.1 package "DynamicFieldITSMConfigItem" installed, in order to migrate the dynamic fields of type "ITSMConfigItemReference" please execute the console command "Admin::ITSM::Configitem::ConvertLegacyRefDFs"<br/>
 
     ]]></IntroUpgrade>
     <IntroUninstall Type="pre" Title="Uninstallation Information" Lang="en"><![CDATA[
