@@ -1,9 +1,9 @@
 # --
 # OTOBO is a web-based ticketing system for service organisations.
 # --
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 1e5fb255f2d32e9f7692377727c48f596b7534a0 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 50644e590081edd0b65fc8117adb4221488b9467 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
