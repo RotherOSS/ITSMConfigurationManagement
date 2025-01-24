@@ -927,6 +927,8 @@ END_SQL
         );
     }
 
+    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(Type => 'ITSMConfigurationManagement');
+
     return 'Next';
 }
 
@@ -1061,6 +1063,22 @@ END_YAML
     ATTRIBUTE:
     for my $Attribute ( $Param{Attributes}->@* ) {
         next ATTRIBUTE if !$Param{AttributeMap}{ $Attribute->{Key} };
+
+        if ( grep { $Attribute->{Input}{Type} eq $_ } qw(ServiceReference) ) {
+            my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+            my $DynamicFieldTicketsAttributesPackageName = 'DynamicFieldTicketsAttributes';
+            my $IsInstalledDynamicFieldTicketsAttributes = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
+                Name => $DynamicFieldTicketsAttributesPackageName
+            );
+            if (!$IsInstalledDynamicFieldTicketsAttributes) {
+                $Self->Print("<yellow>The package $DynamicFieldTicketsAttributesPackageName needs to be installed.</yellow>\n");
+                $Self->Print("<yellow>Do you want to proceed? (type 'yes')</yellow>\n");
+                if ( <STDIN> !~ m/^yes$/i ) {    ## no critic qw(InputOutput::ProhibitExplicitStdin);
+                    $Self->Print("<red>An error occured!</red>\n");
+                    return $Self->ExitCodeError;
+                }
+            }
+        }
 
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
@@ -1295,6 +1313,44 @@ sub _DFConfigFromLegacy {
         else {
             $DF{Config}{PossibleNone} = 1;
         }
+    }
+    elsif ( $Type eq 'TicketReference' ) {
+        $DF{FieldType} = 'Ticket';
+        $DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+        $DF{Config}{ReferencedObjectType} = 'Ticket';
+    }
+    elsif ( $Type eq 'CIClassReference' ) {
+        $DF{FieldType} = 'ConfigItem';
+        #$DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+        $DF{Config}{SearchAttribute} = 'Name';
+
+        if ( $Param{Attribute}{Input}{ReferencedCIClassName} ) {
+            my $ReferencedCIClassName = $Param{Attribute}{Input}{ReferencedCIClassName};
+            my %ClassName2ID = reverse %{
+                $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                    Class => 'ITSM::ConfigItem::Class',
+                ) // {}
+            };
+            if ( $ClassName2ID{$ReferencedCIClassName} ) {
+                $DF{Config}{ClassIDs} = [ $ClassName2ID{$ReferencedCIClassName} ];
+            }
+            else {
+                my $AttrKey = $Param{Attribute}{Key};
+                $Self->Print("<yellow>The ReferencedCIClassName '$ReferencedCIClassName' in attribute '$AttrKey' has no match</yellow>\n");
+            }
+        }
+    }
+    elsif ( $Type eq 'User' ) {
+        $DF{FieldType} = 'Agent';
+        #$DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'ServiceReference' ) {
+        $DF{FieldType} = 'Service';
+        #$DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     else {
         $Self->Print("<red>Unknown input type '$Type'!</red>\n");
