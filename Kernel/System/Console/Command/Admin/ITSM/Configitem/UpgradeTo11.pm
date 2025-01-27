@@ -1064,22 +1064,6 @@ END_YAML
     for my $Attribute ( $Param{Attributes}->@* ) {
         next ATTRIBUTE if !$Param{AttributeMap}{ $Attribute->{Key} };
 
-        if ( grep { $Attribute->{Input}{Type} eq $_ } qw(ServiceReference) ) {
-            my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
-            my $DynamicFieldTicketsAttributesPackageName = 'DynamicFieldTicketsAttributes';
-            my $IsInstalledDynamicFieldTicketsAttributes = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
-                Name => $DynamicFieldTicketsAttributesPackageName
-            );
-            if (!$IsInstalledDynamicFieldTicketsAttributes) {
-                $Self->Print("<yellow>The package $DynamicFieldTicketsAttributesPackageName needs to be installed.</yellow>\n");
-                $Self->Print("<yellow>Do you want to proceed? (type 'yes')</yellow>\n");
-                if ( <STDIN> !~ m/^yes$/i ) {    ## no critic qw(InputOutput::ProhibitExplicitStdin);
-                    $Self->Print("<red>An error occured!</red>\n");
-                    return $Self->ExitCodeError;
-                }
-            }
-        }
-
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
         if ( $Attribute->{Input}{Required} ) {
@@ -1153,6 +1137,23 @@ sub _GetAttributesFromLegacyYAML {
             push @Attributes, $PrimarySub;
             my @SubAttributes = $Self->_GetAttributesFromLegacyYAML( DefinitionRef => $Attribute->{Sub} );
             push @Attributes, map { { Key => $Attribute->{Key} . '::' . $_->{Key} } } @SubAttributes;
+        }
+
+        my $Type = $Attribute->{Input}{Type};
+        if ( grep { $Type eq $_ } qw(ServiceReference) ) {
+            my $NewType;
+            my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+            my $DynamicFieldTicketsAttributesPackageName = 'DynamicFieldTicketsAttributes';
+            my $IsInstalledDynamicFieldTicketsAttributes = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
+                Name => $DynamicFieldTicketsAttributesPackageName
+            );
+            if (!$IsInstalledDynamicFieldTicketsAttributes) {
+                if ( $Type eq 'ServiceReference') {
+                    $NewType = 'Service';
+                }
+                $Self->Print("<red>The field type $Type will be mapped to a $NewType field.</red>\n");
+                $Self->Print("<red>This $NewType field type is part of a $DynamicFieldTicketsAttributesPackageName package that needs to be installed.</red>\n");
+            }
         }
     }
 
