@@ -1140,7 +1140,7 @@ sub _GetAttributesFromLegacyYAML {
         }
 
         my $Type = $Attribute->{Input}{Type};
-        if ( grep { $Type eq $_ } qw(ServiceReference) ) {
+        if ( grep { $Type eq $_ } qw(QueueReference) ) {
             my $NewType;
             my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
             my $DynamicFieldTicketsAttributesPackageName = 'DynamicFieldTicketsAttributes';
@@ -1148,8 +1148,8 @@ sub _GetAttributesFromLegacyYAML {
                 Name => $DynamicFieldTicketsAttributesPackageName
             );
             if (!$IsInstalledDynamicFieldTicketsAttributes) {
-                if ( $Type eq 'ServiceReference') {
-                    $NewType = 'Service';
+                if ( $Type eq 'QueueReference') {
+                    $NewType = 'Queue';
                 }
                 $Self->Print("<red>The field type $Type will be mapped to a $NewType field.</red>\n");
                 $Self->Print("<red>This $NewType field type is part of a $DynamicFieldTicketsAttributesPackageName package that needs to be installed.</red>\n");
@@ -1350,6 +1350,11 @@ sub _DFConfigFromLegacy {
     }
     elsif ( $Type eq 'ServiceReference' ) {
         $DF{FieldType} = 'Service';
+        #$DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'QueueReference' ) {
+        $DF{FieldType} = 'Queue';
         #$DF{Config}{PossibleNone} = 1;
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
