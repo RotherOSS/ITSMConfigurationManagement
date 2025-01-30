@@ -196,6 +196,7 @@
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
+        <File Permission="660" Location="Kernel/System/UnitTest/ITSMConfigItemHelper.pm" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ConfigItem/Delete.t" />
