@@ -306,7 +306,7 @@ When the parameter C<DynamicFields> is passed then the dynamic fields are return
 sub ConfigItemGet {
     my ( $Self, %Param ) = @_;
 
-    # wether to suppress error messages
+    # whether to suppress error messages
     my $Silent = $Param{Silent} ? 1 : 0;
 
     # check needed stuff
@@ -999,45 +999,49 @@ sub ConfigItemUpdate {
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
         ItemID => $ConfigItem->{ClassID},
     );
-    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
-    if ($NameModule) {
 
-        # check if name module exists
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
-            );
+    # execute name check only if name has changed
+    if ($Param{Name} ne $ConfigItem->{Name}) {
+        my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+        if ($NameModule) {
 
-            return;
-        }
-
-        delete $Param{Name};
-    }
-    else {
-
-        # check, whether the feature to check for a unique name is enabled
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
-
-            my $NameDuplicates = $Self->UniqueNameCheck(
-                ConfigItemID => $Param{ConfigItemID},
-                ClassID      => $Param{ClassID},
-                Name         => $Param{Name},
-            );
-
-            # stop processing if the name is not unique
-            if ( IsArrayRefWithData($NameDuplicates) ) {
-
-                # build a string of all duplicate IDs
-                my $Duplicates = join ', ', @{$NameDuplicates};
-
-                # write an error log message containing all the duplicate IDs
+            # check if name module exists
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                    Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
                 );
 
                 return;
+            }
+
+            delete $Param{Name};
+        }
+        else {
+
+            # check, whether the feature to check for a unique name is enabled
+            if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+                my $NameDuplicates = $Self->UniqueNameCheck(
+                    ConfigItemID => $Param{ConfigItemID},
+                    ClassID      => $Param{ClassID},
+                    Name         => $Param{Name},
+                );
+
+                # stop processing if the name is not unique
+                if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                    # build a string of all duplicate IDs
+                    my $Duplicates = join ', ', @{$NameDuplicates};
+
+                    # write an error log message containing all the duplicate IDs
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
+                    );
+
+                    return;
+                }
             }
         }
     }
@@ -1898,7 +1902,7 @@ sub CurInciStateRecalc {
         # set default incident state type
         my $CurInciStateTypeFromCIs = 'operational';
 
-        # get the unique config item ids which are direcly linked to this service
+        # get the unique config item ids which are directly linked to this service
         my %UniqueConfigItemIDs = map { $_ => 1 } @{ $ServiceCIRelation{$ServiceID} };
 
         # investigate the current incident state of each config item
