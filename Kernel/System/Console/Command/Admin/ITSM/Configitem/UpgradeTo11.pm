@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -40,12 +40,14 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::Cache',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::Main',
+    'Kernel::System::Package',
     'Kernel::System::SysConfig',
     'Kernel::System::XML',
     'Kernel::System::YAML',
@@ -348,6 +350,8 @@ sub _PrepareDefinitions {
                 Class        => $Self->{ClassList}{$ClassID},
                 DefinitionID => $Definition->{DefinitionID},
             );
+
+            return 'Exit' if !$DefinitionYAML;
 
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
@@ -927,7 +931,9 @@ END_SQL
         );
     }
 
-    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(Type => 'ITSMConfigurationManagement');
+    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        Type => 'ITSMConfigurationManagement'
+    );
 
     return 'Next';
 }
@@ -1064,6 +1070,18 @@ END_YAML
     for my $Attribute ( $Param{Attributes}->@* ) {
         next ATTRIBUTE if !$Param{AttributeMap}{ $Attribute->{Key} };
 
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            Type        => $Attribute->{Input}{Type},
+            Package     => 'DynamicFieldTicketsAttributes',
+            TypeMapping => {
+                'QueueReference' => 'Queue',
+                'SLAReference'   => 'SLA',
+                'TypeReference'  => 'Type',
+            },
+        );
+
+        return if !$CheckPackage && $Self->{UseDefaults};
+
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
         if ( $Attribute->{Input}{Required} ) {
@@ -1137,23 +1155,6 @@ sub _GetAttributesFromLegacyYAML {
             push @Attributes, $PrimarySub;
             my @SubAttributes = $Self->_GetAttributesFromLegacyYAML( DefinitionRef => $Attribute->{Sub} );
             push @Attributes, map { { Key => $Attribute->{Key} . '::' . $_->{Key} } } @SubAttributes;
-        }
-
-        my $Type = $Attribute->{Input}{Type};
-        if ( grep { $Type eq $_ } qw(QueueReference) ) {
-            my $NewType;
-            my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
-            my $DynamicFieldTicketsAttributesPackageName = 'DynamicFieldTicketsAttributes';
-            my $IsInstalledDynamicFieldTicketsAttributes = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
-                Name => $DynamicFieldTicketsAttributesPackageName
-            );
-            if (!$IsInstalledDynamicFieldTicketsAttributes) {
-                if ( $Type eq 'QueueReference') {
-                    $NewType = 'Queue';
-                }
-                $Self->Print("<red>The field type $Type will be mapped to a $NewType field.</red>\n");
-                $Self->Print("<red>This $NewType field type is part of a $DynamicFieldTicketsAttributesPackageName package that needs to be installed.</red>\n");
-            }
         }
     }
 
@@ -1316,20 +1317,19 @@ sub _DFConfigFromLegacy {
         }
     }
     elsif ( $Type eq 'TicketReference' ) {
-        $DF{FieldType} = 'Ticket';
-        $DF{Config}{PossibleNone} = 1;
-        $DF{Config}{EditFieldMode} = 'AutoComplete';
+        $DF{FieldType}                    = 'Ticket';
+        $DF{Config}{PossibleNone}         = 1;
+        $DF{Config}{EditFieldMode}        = 'AutoComplete';
         $DF{Config}{ReferencedObjectType} = 'Ticket';
     }
     elsif ( $Type eq 'CIClassReference' ) {
-        $DF{FieldType} = 'ConfigItem';
-        #$DF{Config}{PossibleNone} = 1;
-        $DF{Config}{EditFieldMode} = 'AutoComplete';
+        $DF{FieldType}               = 'ConfigItem';
+        $DF{Config}{EditFieldMode}   = 'AutoComplete';
         $DF{Config}{SearchAttribute} = 'Name';
 
         if ( $Param{Attribute}{Input}{ReferencedCIClassName} ) {
             my $ReferencedCIClassName = $Param{Attribute}{Input}{ReferencedCIClassName};
-            my %ClassName2ID = reverse %{
+            my %ClassName2ID          = reverse %{
                 $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
                     Class => 'ITSM::ConfigItem::Class',
                 ) // {}
@@ -1345,17 +1345,22 @@ sub _DFConfigFromLegacy {
     }
     elsif ( $Type eq 'User' ) {
         $DF{FieldType} = 'Agent';
-        #$DF{Config}{PossibleNone} = 1;
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'ServiceReference' ) {
         $DF{FieldType} = 'Service';
-        #$DF{Config}{PossibleNone} = 1;
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'QueueReference' ) {
         $DF{FieldType} = 'Queue';
-        #$DF{Config}{PossibleNone} = 1;
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'SLAReference' ) {
+        $DF{FieldType} = 'SLA';
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'TypeReference' ) {
+        $DF{FieldType} = 'Type';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     else {
@@ -1383,6 +1388,25 @@ sub _ContinueOrNot {
     return 'Next' if <STDIN> =~ m/^def(ault)?$/;
 
     return 'Exit';
+}
+
+sub _CheckInstalledPackage {
+    my ( $Self, %Param ) = @_;
+
+    my %TypeMapping        = $Param{TypeMapping}->%*;
+    my $IsInstalledPackage = 1;
+    if ( grep { $Param{Type} eq $_ } keys %TypeMapping ) {
+        $IsInstalledPackage = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
+            Name => $Param{Package},
+        );
+        if ( !$IsInstalledPackage ) {
+            my $NewType = $TypeMapping{ $Param{Type} };
+            $Self->Print("<red>The field type $Param{Type} will be mapped to a $NewType field.</red>\n");
+            $Self->Print("<red>This $NewType field type is part of the $Param{Package} package that needs to be installed.</red>\n");
+        }
+    }
+
+    return $IsInstalledPackage;
 }
 
 1;
