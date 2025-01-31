@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -99,8 +99,12 @@ sub Run {
         Class => 'ITSM::ConfigItem::Class::Category',
     );
     my %ReverseCategoryList = reverse $CategoryList->%*;
-    my $DefaultCategoryID   = $ReverseCategoryList{ $Config->{DefaultCategory} };
-    $CategoryFilter ||= $DefaultCategoryID;
+    my $DefaultCategory     = $Config->{DefaultCategory};
+    my $DefaultCategoryID;
+    if ( $DefaultCategory && $ReverseCategoryList{$DefaultCategory} ) {
+        $DefaultCategoryID = $ReverseCategoryList{ $Config->{DefaultCategory} };
+        $CategoryFilter ||= $DefaultCategoryID;
+    }
 
     # get filters stored in the user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -239,10 +243,6 @@ sub Run {
     # my config item object
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # define position of the filter in the frontend
-    my $PrioCounter         = 1000;
-    my $CategoryPrioCounter = 1000;
-
     # to store the NavBar filters
     my %Filters;
     my %Category2ClassID;
@@ -286,7 +286,7 @@ sub Run {
             }
         } @SortedCategories;
 
-        if ( $CategoryFilters{$DefaultCategoryID} ) {
+        if ( $DefaultCategoryID && $CategoryFilters{$DefaultCategoryID} ) {
             $CategoryFilters{$DefaultCategoryID}{Prio} = 1;
         }
     }
@@ -542,7 +542,7 @@ sub Run {
         View                  => $View,
         Bulk                  => 1,
         TitleName             => $LayoutObject->{LanguageObject}->Translate('Overview: ITSM ConfigItem'),
-        TitleValue            => $Self->{Filters}{$Filter}->{Name},
+        TitleValue            => $Self->{Filters}{$Filter}{Name},
         Env                   => $Self,
         LinkPage              => $LinkPage,
         LinkSort              => $LinkSort,
