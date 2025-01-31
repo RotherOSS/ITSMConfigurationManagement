@@ -347,27 +347,6 @@ sub TestConfigItemClassCreate {
     return $TestClassID;
 }
 
-=head2 CreateS()
-
-creates a test config item class that can be used in tests. It will
-be set to invalid automatically during L</DESTROY()>. Returns
-the class id of the new config item class.
-
-    my $TestCIClassName = $Helper->TestConfigItemClassCreate(
-        Name                => 'SomeClassName',     # optional, randomly generated if not given
-        VersionStringModule => ,                    # optional, default is 'Incremental'
-        VersionTrigger      => ,                    # optional, default is ''
-        DynamicFields       => ,                    # optional
-        Definition          => ,                    # optional
-    );
-
-=cut
-
-sub TestConfigItemClassCreate {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
 
 =head2 DESTROY()
 
