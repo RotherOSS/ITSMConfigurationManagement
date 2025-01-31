@@ -307,9 +307,7 @@ sub Run {
                 UserID       => $Self->{UserID},
                 Result       => 'COUNT',
             );
-            if ( $Filter eq 'All' || ( $Filter && $Filter == $ClassID ) ) {
-                $CountTotal += $CountClass;
-            }
+            $CountTotal += $CountClass;
 
             push @AllCurrentClasses, $ClassID;
 
