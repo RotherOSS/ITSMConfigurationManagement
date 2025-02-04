@@ -1001,47 +1001,45 @@ sub ConfigItemUpdate {
     );
 
     # execute name check only if name has changed
-    if ($Param{Name} ne $ConfigItem->{Name}) {
-        my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
-        if ($NameModule) {
+    my $NameModule = $ClassPreferences{NameModule} ? $ClassPreferences{NameModule}[0] : '';
+    if ($NameModule) {
 
-            # check if name module exists
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+        # check if name module exists
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($NameModule) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
+            );
+
+            return;
+        }
+
+        delete $Param{Name};
+    }
+    elsif ( $Param{Name} && $Param{Name} ne $ConfigItem->{Name} ) {
+
+        # check, whether the feature to check for a unique name is enabled
+        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
+
+            my $NameDuplicates = $Self->UniqueNameCheck(
+                ConfigItemID => $Param{ConfigItemID},
+                ClassID      => $Param{ClassID},
+                Name         => $Param{Name},
+            );
+
+            # stop processing if the name is not unique
+            if ( IsArrayRefWithData($NameDuplicates) ) {
+
+                # build a string of all duplicate IDs
+                my $Duplicates = join ', ', @{$NameDuplicates};
+
+                # write an error log message containing all the duplicate IDs
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message  => "Can't load name module for class $ClassList->{ $Param{ClassID} }!",
+                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
                 );
 
                 return;
-            }
-
-            delete $Param{Name};
-        }
-        else {
-
-            # check, whether the feature to check for a unique name is enabled
-            if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
-
-                my $NameDuplicates = $Self->UniqueNameCheck(
-                    ConfigItemID => $Param{ConfigItemID},
-                    ClassID      => $Param{ClassID},
-                    Name         => $Param{Name},
-                );
-
-                # stop processing if the name is not unique
-                if ( IsArrayRefWithData($NameDuplicates) ) {
-
-                    # build a string of all duplicate IDs
-                    my $Duplicates = join ', ', @{$NameDuplicates};
-
-                    # write an error log message containing all the duplicate IDs
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
-                    );
-
-                    return;
-                }
             }
         }
     }
