@@ -33,6 +33,8 @@ use List::Util  qw(any uniq);
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
+use Data::Dumper;
+
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::ForeachToFor)
 
 # Inform the object manager about the hard dependencies.
@@ -1082,6 +1084,16 @@ END_YAML
 
         return if !$CheckPackage && $Self->{UseDefaults};
 
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            Type        => $Attribute->{Input}{Type},
+            Package     => 'DynamicFieldAttachment',
+            TypeMapping => {
+                'CIAttachment' => 'Attachment',
+            },
+        );
+
+        return if !$CheckPackage && $Self->{UseDefaults};
+
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
         if ( $Attribute->{Input}{Required} ) {
@@ -1169,6 +1181,9 @@ sub _DFConfigFromLegacy {
 
         return;
     }
+
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     my $Type = $Param{Attribute}{Input}{Type};
     my %DF;
@@ -1347,6 +1362,18 @@ sub _DFConfigFromLegacy {
         $DF{FieldType} = 'Agent';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
+    elsif ( $Type eq 'CIACCustomerCompany' ) {
+        $DF{FieldType} = 'CustomerCompany';
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'CustomerUserCompany' ) {
+        $DF{FieldType} = 'CustomerCompany';
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'CIAttachment' ) {
+        $DF{FieldType} = 'Attachment';
+        $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
     elsif ( $Type eq 'ServiceReference' ) {
         $DF{FieldType} = 'Service';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
@@ -1362,6 +1389,29 @@ sub _DFConfigFromLegacy {
     elsif ( $Type eq 'TypeReference' ) {
         $DF{FieldType} = 'Type';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
+    }
+    elsif ( $Type eq 'TextLink' ) {
+        $DF{FieldType} = 'Text';
+        $DF{Config}{Link} = '[% Data.Value | url %]';
+    }
+    # Legacy DF type 'DynamicField' from the package CIAttributesCollection
+    # This type references a generic DF whose type must be specified by the legacy attribute Name
+    elsif ( $Type eq 'DynamicField' ) {
+        if ($Param{Attribute}{Input}{Name}) {
+            my $LegacyField = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Param{Attribute}{Input}{Name},
+            );
+            $DF{FieldType} = 'Dropdown';
+            $DF{Config}{MultiValue} = ( $Param{Attribute}{CountMax} && $Param{Attribute}{CountMax} > 1 ) ? 1 : 0;
+            $DF{Config}{PossibleValues} = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $LegacyField,
+            );
+        }
+        else {
+            $Self->Print("<red>Field type 'DynamicField' requires Name specification!</red>\n");
+
+            return;
+        }
     }
     else {
         $Self->Print("<red>Unknown input type '$Type'!</red>\n");
