@@ -953,6 +953,8 @@ sub _DeleteLegacyData {
         # get neccessary objects
         my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $PackageObject   = $Kernel::OM->Get('Kernel::System::Package');
+
 
         # 1. delete files from temporary directory
         $Self->Print("<yellow>Deleting previously created temporary files from disk...</yellow>\n");
@@ -1034,6 +1036,31 @@ END_SQL
             );
         }
         $Self->Print("<green>Done deleting config item data from xml storage.</green>\n");
+
+        # remove CIAttributesCollection package if present
+        my $PackageName = 'ITSM-CIAttributeCollection';
+        my @Repos = $PackageObject->RepositoryList(
+            Result => 'Short'
+        );
+        my @PackageEntry = grep { $_->{Name} eq $PackageName } @Repos;
+        if (@PackageEntry) {
+            $Self->Print("<yellow>Uninstalling $PackageName package...</yellow>\n");
+            my $PackageVersion = $PackageEntry[0]->{Version};
+            $Self->Print( "<yellow>Found $PackageName Version $PackageVersion</yellow>\n" );
+            my $Package = $PackageObject->RepositoryGet(
+                Name    => $PackageName,
+                Version => $PackageVersion,
+            );
+            my $Success = $PackageObject->PackageUninstall(
+                String => $Package,
+            );
+            if ($Success) {
+                $Self->Print("<green>Done uninstalling $PackageName package.</green>\n");
+            }
+            else {
+                $Self->Print( "<red>Could not uninstall $PackageName package!</red>\n" );
+            }
+        }
     }
     else {
         $Self->Print(
@@ -1084,7 +1111,7 @@ END_YAML
 
         return if !$CheckPackage && $Self->{UseDefaults};
 
-        my $CheckPackage = $Self->_CheckInstalledPackage(
+        $CheckPackage = $Self->_CheckInstalledPackage(
             Type        => $Attribute->{Input}{Type},
             Package     => 'DynamicFieldAttachment',
             TypeMapping => {
