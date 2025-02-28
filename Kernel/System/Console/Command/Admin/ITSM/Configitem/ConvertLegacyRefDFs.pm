@@ -130,12 +130,12 @@ sub Run {
         Result => 'Short'
     );
     my @PackageEntry = grep { $_->{Name} eq $PackageName } @Repos;
-    if (!@PackageEntry) {
-        $Self->Print( "<red>Could not find $PackageName package!</red>\n" );
+    if ( !@PackageEntry ) {
+        $Self->Print("<red>Could not find $PackageName package!</red>\n");
     }
     else {
-        my $PackageVersion = $PackageEntry[0]->{Version};
-        $Self->Print( "<yellow>Found $PackageName Version $PackageVersion</yellow>\n" );
+        my $PackageVersion = $PackageEntry[0]{Version};
+        $Self->Print("<yellow>Found $PackageName Version $PackageVersion</yellow>\n");
         my $Package = $PackageObject->RepositoryGet(
             Name    => $PackageName,
             Version => $PackageVersion,
@@ -144,10 +144,10 @@ sub Run {
             String => $Package,
         );
         if ($Success) {
-           $Self->Print("<green>Done uninstalling $PackageName package.</green>\n");
+            $Self->Print("<green>Done uninstalling $PackageName package.</green>\n");
         }
         else {
-            $Self->Print( "<red>Could not uninstall $PackageName package!</red>\n" );
+            $Self->Print("<red>Could not uninstall $PackageName package!</red>\n");
         }
     }
 

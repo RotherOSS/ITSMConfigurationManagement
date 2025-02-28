@@ -33,8 +33,6 @@ use List::Util  qw(any uniq);
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
-use Data::Dumper;
-
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::ForeachToFor)
 
 # Inform the object manager about the hard dependencies.
@@ -43,6 +41,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
     'Kernel::System::Cache',
+    'Kernel::System::CIAttachmentStorage::AttachmentStorage',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
@@ -314,6 +313,12 @@ sub _PrepareDefinitions {
 
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    # when checking for the necessary packages to install without --use-defaults
+    # if exists more than one element or more than one version of an element that requires a package
+    # the same message is issued repeatedly referring to the same package
+    # this hash is used to prevent message repetition
+    my %CheckedPackages;
+
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
@@ -347,10 +352,11 @@ sub _PrepareDefinitions {
             );
 
             my $DefinitionYAML = $Self->_GenerateDefinitionYAML(
-                Attributes   => \@Attributes,
-                AttributeMap => $AttributeMap,
-                Class        => $Self->{ClassList}{$ClassID},
-                DefinitionID => $Definition->{DefinitionID},
+                Attributes      => \@Attributes,
+                AttributeMap    => $AttributeMap,
+                Class           => $Self->{ClassList}{$ClassID},
+                DefinitionID    => $Definition->{DefinitionID},
+                CheckedPackages => \%CheckedPackages,
             );
 
             return 'Exit' if !$DefinitionYAML;
@@ -889,6 +895,21 @@ END_SQL
                     if ( $DynamicField->{FieldType} eq 'DateTime' ) {
                         $Value .= ':00';
                     }
+                    elsif ( $DynamicField->{FieldType} eq 'Attachment' ) {
+                        my $DynamicFieldAttachmentBackendObject = $Kernel::OM->Get('Kernel::System::CIAttachmentStorage::AttachmentStorage');
+                        my $Attachment                          = $DynamicFieldAttachmentBackendObject->AttachmentStorageGet(
+                            ID => $Value,
+                        );
+
+                        $Value = [
+                            {
+                                Content     => ${ $Attachment->{ContentRef} },
+                                ContentType => $Attachment->{Preferences}{DataType},
+                                Filename    => $Attachment->{FileName},
+                                FileSize    => $Attachment->{Preferences}{FileSizeBytes},
+                            }
+                        ];
+                    }
 
                     next ATTRIBUTE if !defined $Value || $Value eq '';
                 }
@@ -954,7 +975,6 @@ sub _DeleteLegacyData {
         my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
         my $PackageObject   = $Kernel::OM->Get('Kernel::System::Package');
-
 
         # 1. delete files from temporary directory
         $Self->Print("<yellow>Deleting previously created temporary files from disk...</yellow>\n");
@@ -1037,16 +1057,22 @@ END_SQL
         }
         $Self->Print("<green>Done deleting config item data from xml storage.</green>\n");
 
-        # remove CIAttributesCollection package if present
+        # remove CIAttributeCollection package if present
         my $PackageName = 'ITSM-CIAttributeCollection';
-        my @Repos = $PackageObject->RepositoryList(
+        my @Repos       = $PackageObject->RepositoryList(
             Result => 'Short'
         );
         my @PackageEntry = grep { $_->{Name} eq $PackageName } @Repos;
         if (@PackageEntry) {
             $Self->Print("<yellow>Uninstalling $PackageName package...</yellow>\n");
-            my $PackageVersion = $PackageEntry[0]->{Version};
-            $Self->Print( "<yellow>Found $PackageName Version $PackageVersion</yellow>\n" );
+            my $PackageVersion = $PackageEntry[0]{Version};
+            $Self->Print("<yellow>Found $PackageName Version $PackageVersion</yellow>\n");
+
+            # reset settings that this legacy package unsuccessfully attempts to reset upon uninstallation (lock is missing)
+            $Self->_ResetSettings(
+                SettingName => 'Loader::Agent::CommonJS###100-ConfigurationManagement',
+            );
+
             my $Package = $PackageObject->RepositoryGet(
                 Name    => $PackageName,
                 Version => $PackageVersion,
@@ -1058,7 +1084,7 @@ END_SQL
                 $Self->Print("<green>Done uninstalling $PackageName package.</green>\n");
             }
             else {
-                $Self->Print( "<red>Could not uninstall $PackageName package!</red>\n" );
+                $Self->Print("<red>Could not uninstall $PackageName package!</red>\n");
             }
         }
     }
@@ -1107,6 +1133,7 @@ END_YAML
                 'SLAReference'   => 'SLA',
                 'TypeReference'  => 'Type',
             },
+            CheckedPackages => $Param{CheckedPackages},
         );
 
         return if !$CheckPackage && $Self->{UseDefaults};
@@ -1117,6 +1144,7 @@ END_YAML
             TypeMapping => {
                 'CIAttachment' => 'Attachment',
             },
+            CheckedPackages => $Param{CheckedPackages},
         );
 
         return if !$CheckPackage && $Self->{UseDefaults};
@@ -1209,7 +1237,7 @@ sub _DFConfigFromLegacy {
         return;
     }
 
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     my $Type = $Param{Attribute}{Input}{Type};
@@ -1421,15 +1449,16 @@ sub _DFConfigFromLegacy {
         $DF{FieldType} = 'Text';
         $DF{Config}{Link} = '[% Data.Value | url %]';
     }
+
     # Legacy DF type 'DynamicField' from the package CIAttributesCollection
     # This type references a generic DF whose type must be specified by the legacy attribute Name
     elsif ( $Type eq 'DynamicField' ) {
-        if ($Param{Attribute}{Input}{Name}) {
+        if ( $Param{Attribute}{Input}{Name} ) {
             my $LegacyField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $Param{Attribute}{Input}{Name},
             );
-            $DF{FieldType} = 'Dropdown';
-            $DF{Config}{MultiValue} = ( $Param{Attribute}{CountMax} && $Param{Attribute}{CountMax} > 1 ) ? 1 : 0;
+            $DF{FieldType}              = 'Dropdown';
+            $DF{Config}{MultiValue}     = ( $Param{Attribute}{CountMax} && $Param{Attribute}{CountMax} > 1 ) ? 1 : 0;
             $DF{Config}{PossibleValues} = $DynamicFieldBackendObject->PossibleValuesGet(
                 DynamicFieldConfig => $LegacyField,
             );
@@ -1470,20 +1499,74 @@ sub _ContinueOrNot {
 sub _CheckInstalledPackage {
     my ( $Self, %Param ) = @_;
 
-    my %TypeMapping        = $Param{TypeMapping}->%*;
-    my $IsInstalledPackage = 1;
+    my $Pass = 1;
+
+    my %TypeMapping = $Param{TypeMapping}->%*;
     if ( grep { $Param{Type} eq $_ } keys %TypeMapping ) {
-        $IsInstalledPackage = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
+
+        return $Pass if $Param{CheckedPackages}{ $Param{Type} };
+
+        $Pass = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
             Name => $Param{Package},
         );
-        if ( !$IsInstalledPackage ) {
+        if ( !$Pass ) {
             my $NewType = $TypeMapping{ $Param{Type} };
-            $Self->Print("<red>The field type $Param{Type} will be mapped to a $NewType field.</red>\n");
+            $Self->Print("<red>\nThe field type $Param{Type} will be mapped to a $NewType field.</red>\n");
             $Self->Print("<red>This $NewType field type is part of the $Param{Package} package that needs to be installed.</red>\n");
         }
+        $Param{CheckedPackages}{ $Param{Type} } = 1;
+
     }
 
-    return $IsInstalledPackage;
+    return $Pass;
+}
+
+sub _ResetSettings {
+    my ( $Self, %Param ) = @_;
+
+    my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
+    my $SettingName       = $Param{SettingName};
+    my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+        UserID => 1,
+        Force  => 1,
+        Name   => $SettingName,
+    );
+    if ( !$ExclusiveLockGUID ) {
+        $Self->Print("<red>Could not lock '$SettingName' for reset</red>\n");
+
+        return;
+    }
+    my $Success = $SysConfigObject->SettingReset(
+        Name              => $SettingName,
+        ExclusiveLockGUID => $ExclusiveLockGUID,
+        UserID            => 1,
+    );
+    if ( !$Success ) {
+        $Self->Print("<red>Could not reset '$SettingName'</red>\n");
+
+        return;
+    }
+    $Success = $SysConfigObject->SettingUnlock(
+        UserID => 1,
+        Name   => $SettingName,
+    );
+    if ( !$Success ) {
+        $Self->Print("<red>Could not unlock '$SettingName'</red>\n");
+
+        return;
+    }
+    my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
+        Comments => "Reset $SettingName.",
+        UserID   => 1,
+        Force    => 1,
+    );
+    if ( !$DeploymentResult{Success} ) {
+        $Self->Print("<red>Could not deploy reset of '$SettingName'</red>\n");
+
+        return;
+    }
+    $Self->Print("<green>Successfully reset '$SettingName'.</green>\n");
+    return;
 }
 
 1;
