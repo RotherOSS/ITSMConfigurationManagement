@@ -139,23 +139,35 @@ sub Run {
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    my @ConfigItemIDs;
+    my %ConfigItemIDs;
 
-    # recalculate the current incident state of the CI that contains the Reference dynamic field
-    push @ConfigItemIDs, $Param{Data}->{ConfigItemID};
+    ID:
+    for my $ID ( ( $Param{Data}->{OldValue} // [] )->@* ) {
+        next ID if !$ID;
 
-    # recalculate incident state of previously linked CIs
-    # TODO: filter out unchanged IDs
-    push @ConfigItemIDs, ( $Param{Data}->{OldValue} // [] )->@*;
+        $ConfigItemIDs{ $ID } = 1;
+    }
 
-    # recalculate incident state of newly linked CIs
-    push @ConfigItemIDs, $Param{Data}->{Value}->@*;
+    for my $ID ( ( $Param{Data}->{Value} // [] )->@* ) {
+        next ID if !$ID;
+
+        if ( $ConfigItemIDs{ $ID } ) {
+            delete $ConfigItemIDs{ $ID };
+        }
+        else {
+            $ConfigItemIDs{ $ID } = 1;
+        }
+    }
+
+    return 1 unless %ConfigItemIDs;
+
+    $ConfigItemIDs{ $Param{Data}->{ConfigItemID} } = 1;
 
     # these will be changed in calls to CurInciStateRecalc()
     my %NewConfigItemIncidentState;
     my %ScannedConfigItemIDs;
 
-    for my $ConfigItemID (@ConfigItemIDs) {
+    for my $ConfigItemID ( keys %ConfigItemIDs ) {
         $ConfigItemObject->CurInciStateRecalc(
             ConfigItemID               => $ConfigItemID,
             NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
