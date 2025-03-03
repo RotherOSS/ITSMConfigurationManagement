@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -274,6 +274,45 @@ sub ObjectDataGet {
         ObjectID => $ConfigItemID,
         Data     => \%ConfigItem,
     );
+}
+
+=head2 GetEntityIDforLinking()
+
+retrieves ConfigItemID for given VersionID
+
+    my $ConfigItemID = $DynamicFieldITSMConfigItemHandlerObject->GetEntityIDforLinking(
+        VersionID => 123,
+        LinkKey => 'Source',      # or 'Target'
+        TypeName => 'ConfigItem', # or 'ConfigItemVersion'
+    );
+
+=cut
+
+sub GetEntityIDforLinking {
+
+    my ( $Self, %Param ) = @_;
+
+    my $ID       = $Param{ID};
+    my $LinkKey  = $Param{LinkKey};
+    my $TypeName = $Param{TypeName};
+
+    # if the key is a 'Target' key ...
+    if ( $LinkKey eq 'Target' ) {
+
+        # ...then only ConfigItemVersion items will need VersionID resolution
+        if ( $TypeName eq 'ConfigItem' ) {
+            return $ID;
+        }
+    }
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        VersionID     => $ID,
+        DynamicFields => 0,
+    );
+
+    return $ConfigItem->{ConfigItemID};
 }
 
 1;

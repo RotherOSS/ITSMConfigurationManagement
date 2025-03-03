@@ -27,7 +27,8 @@ use utf8;
 use parent qw(Kernel::System::DynamicField::Driver::BaseReference);
 
 # core modules
-use List::Util qw(any);
+use List::Util   qw(any);
+use Scalar::Util qw(reftype);
 
 # CPAN modules
 
@@ -37,11 +38,11 @@ use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Language',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Log',
     'Kernel::System::GeneralCatalog',
-    'Kernel::System::LinkObject',
     'Kernel::System::ITSMConfigItem',
 );
 
@@ -121,6 +122,74 @@ sub ValueGet {
     );
 }
 
+=head2 ValueSet()
+
+This method handles ConfigItem-Link sync for C<ITSMConfigItem>s when Dynamic Field References between 2
+ConfigItem(Version) are updated.
+
+=cut
+
+sub ValueSet {
+    my ( $Self, %Param ) = @_;
+
+    my $Result = $Self->SUPER::ValueSet(%Param);
+
+    if ($Result) {
+
+        my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+
+        my $ObjectType = $DynamicFieldConfig->{ObjectType};
+        my $FieldType  = $DynamicFieldConfig->{FieldType};
+
+        # only proceed if this is a CI <-> CI relationship
+        return $Result unless $ObjectType =~ /^ITSMConfigItem/;
+        return $Result unless $FieldType  =~ /^ConfigItem/;
+
+        my $ValueType = ref( $Param{Value} );
+        my $Value     = $ValueType && $ValueType eq 'ARRAY' ? $Param{Value}->[0] : $Param{Value};
+
+        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        my $ConfigItem       = $ConfigItemObject->ConfigItemGet(
+            VersionID     => $Param{ObjectID},
+            DynamicFields => 0,
+        );
+
+        # update configitem_link
+        $ConfigItemObject->SyncLinkTable(
+            DynamicFieldConfig      => $DynamicFieldConfig,
+            ConfigItemID            => $ConfigItem->{ConfigItemID},
+            ConfigItemLastVersionID => $ConfigItem->{LastVersionID},
+            ConfigItemVersionID     => $ConfigItem->{VersionID},
+            Value                   => $Value,
+        );
+    }
+
+    return $Result;
+}
+
+# Override from BaseReference to prevent LinkObject-Auto-Linking for CI <-> CI relations
+
+sub _CreateAutoLinkObjectLink {
+    my ( $Self, %Param ) = @_;
+
+    my $DynamicField = $Param{DynamicField};
+    my $ObjectType   = $DynamicField->{ObjectType};
+    my $FieldType    = $DynamicField->{FieldType};
+
+    $FieldType  =~ s/^ConfigItem/ITSMConfigItem/;
+    $FieldType  =~ s/^ITSMConfigItemVersion/ITSMConfigItem/;
+    $ObjectType =~ s/^ITSMConfigItemVersion/ITSMConfigItem/;
+
+    if ( $FieldType eq $ObjectType && $FieldType =~ /^ITSMConfigItem/ ) {
+
+        # skip dynamic linking for ConfigItem <-> ConfigItem links
+        return;
+    }
+
+    my $Result = $Self->SUPER::_CreateAutoLinkObjectLink(%Param);
+    return $Result;
+}
+
 sub EditFieldValueGet {
     my ( $Self, %Param ) = @_;
 
@@ -145,6 +214,7 @@ sub GetFieldTypeSettings {
     my ( $Self, %Param ) = @_;
 
     my $ReferencingObjectType = $Param{ObjectType};
+    my $LanguageObject        = $Kernel::OM->Get('Kernel::Language');
 
     # First fetch the generic settings.
     my @FieldTypeSettings = $Self->SUPER::GetFieldTypeSettings(
@@ -183,86 +253,6 @@ sub GetFieldTypeSettings {
                 SelectionData   => $DeploymentStatesList,
                 PossibleNone    => 1,
                 Multiple        => 1,
-            };
-    }
-
-    # Select the link type.
-    # The same link types as with the generic LinkObject feature are available.
-    # The direction can be selected in a separate dropdown.
-    # No distinction is made between the object types ITSMConfigItem  and ITSMConfigItemVersion.
-    {
-        my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
-
-        # Create the selectable type list from the possible types from the SysConfig.
-        my @SelectionData;
-
-        # get possible types list,
-        # actually the order of Object1 and Object2 is not relevant
-        my $Object1           = $ReferencingObjectType        =~ s/^ITSMConfigItemVersion$/ITSMConfigItem/r;
-        my $Object2           = $Self->{ReferencedObjectType} =~ s/^ITSMConfigItemVersion$/ITSMConfigItem/r;
-        my %PossibleTypesList = $LinkObject->PossibleTypesList(
-            Object1 => $Object1,    # the entity that holds the Reference dynamic field can be a config item or a ticket
-            Object2 => $Object2,    # the referenced object
-        );
-
-        POSSIBLETYPE:
-        for my $PossibleType ( sort { lc $a cmp lc $b } keys %PossibleTypesList ) {
-
-            # look up type id,
-            # insert the name into the table link_type if it does not exist yet
-            my $TypeID = $LinkObject->TypeLookup(
-                Name   => $PossibleType,
-                UserID => 1,               # TODO: get the actual id of the current user
-            );
-
-            # get type
-            my %Type = $LinkObject->TypeGet(
-                TypeID => $TypeID,
-                UserID => $Self->{UserID},
-            );
-
-            push @SelectionData,
-                {
-                    Key   => $PossibleType,
-                    Value => "Source -$Type{SourceName}\-> Target ($Type{TargetName})",
-                };
-        }
-
-        # TODO: saner grouping, and saner ordering
-        push @FieldTypeSettings,
-            {
-                InputType       => 'Selection',
-                ConfigParamName => 'LinkType',
-                Label           => Translatable('Link type'),
-                Explanation     => Translatable('Select the link type.'),
-                SelectionData   => \@SelectionData,
-                PossibleNone    => 1,
-            };
-    }
-
-    # Select the link direction
-    {
-        my @SelectionData = (
-            {
-                Key   => 'ReferencingIsSource',
-                Value => Translatable('Forwards: Referencing (Source) -> Referenced (Target)'),
-            },
-            {
-                Key   => 'ReferencingIsTarget',
-                Value => Translatable('Backwards: Referenced (Source) -> Referencing (Target)'),
-            },
-        );
-
-        push @FieldTypeSettings,
-            {
-                ConfigParamName => 'LinkDirection',
-                Label           => Translatable('Link Direction'),
-                Explanation     =>
-                Translatable('The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'),
-                InputType     => 'Selection',
-                SelectionData => \@SelectionData,
-                DefaultKey    => 'ReferencingIsSource',
-                PossibleNone  => 0,
             };
     }
 

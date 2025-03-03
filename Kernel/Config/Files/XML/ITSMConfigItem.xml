@@ -956,17 +956,6 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::EventModulePost###400-LinkSync" Required="0" Valid="1">
-        <Description Translatable="1">Config item event module that updates the table configitem_ĺink.</Description>
-        <Navigation>Core::Event::ITSMConfigItem</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::LinkSync</Item>
-                <Item Key="Event">^ConfigItemDynamicFieldUpdate_</Item>
-                <Item Key="Transaction">1</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="ITSMConfigItem::EventModulePost###500-RecalcCurInciState" Required="0" Valid="1">
         <Description Translatable="1">Config item event module updates the current incident state.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
