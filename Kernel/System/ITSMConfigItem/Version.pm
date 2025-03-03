@@ -733,6 +733,7 @@ END_SQL
     DYNAMICFIELD:
     for my $DynamicField ( values $Definition->{DynamicFieldRef}->%* ) {
         next DYNAMICFIELD if !defined $Version{ 'DynamicField_' . $DynamicField->{Name} };
+        next DYNAMICFIELD if $DynamicField->{FieldType} eq 'Lens' && !$Param{ 'DynamicField_' . $DynamicField->{Name} };
 
         my $Success = $DynamicFieldBackendObject->ValueSet(
             DynamicFieldConfig => $DynamicField,
@@ -758,19 +759,6 @@ END_SQL
             $Version{ 'DynamicField_' . $DynamicField->{Name} } = $Value;
         }
     }
-
-    # TODO: Incorporate somewhere probably
-    #    # trigger definition update event
-    #    if ( $Events->{DefinitionUpdate} ) {
-    #        $Self->EventHandler(
-    #            Event => 'DefinitionUpdate',
-    #            Data  => {
-    #                ConfigItemID => $Param{ConfigItemID},
-    #                Comment      => $Events->{DefinitionUpdate},
-    #            },
-    #            UserID => $Param{UserID},
-    #        );
-    #    }
 
     # Clear the cache for ConfigItemGet
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');

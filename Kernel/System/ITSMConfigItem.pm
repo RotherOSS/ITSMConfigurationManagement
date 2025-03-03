@@ -1049,12 +1049,12 @@ sub ConfigItemUpdate {
         ( $ClassPreferences{VersionTrigger} // [] )->@*;
 
     my %Changed;           # track changed values for the Event handler, e.g. for writing history
-    my $AddVersion = 0;    # flag for deciding whether a new version is created
+    my $AddVersion    = 0; # flag for deciding whether a new version is created
+    my $UpdateVersion = 0; # flag for deciding whether the current version needs an update
 
-    # name, deployment and incident state
-    # TODO: check for unique config item name, like it is done in ConfigItemAdd()
+    # check name, deployment and incident state, as well as Description
     ATTR:
-    for my $Attribute (qw/Name DeplStateID InciStateID/) {
+    for my $Attribute (qw/Name DeplStateID InciStateID Description/) {
         next ATTR unless defined $Param{$Attribute};
         next ATTR if $Param{$Attribute} eq $ConfigItem->{$Attribute};
 
@@ -1062,6 +1062,8 @@ sub ConfigItemUpdate {
             Old => $ConfigItem->{$Attribute},
             New => $Param{$Attribute},
         };
+
+        $UpdateVersion = 1;
 
         if ( $VersionTrigger{$Attribute} ) {
             $AddVersion = 1;
@@ -1073,7 +1075,7 @@ sub ConfigItemUpdate {
         ClassID => $ConfigItem->{ClassID},
     );
 
-    # TODO: Think about DefinitionID changes
+    my %SkipForUdateDFs;
 
     # check for changed dynamic fields to trigger versions and filter history entries
     if (@DynamicFieldNames) {
@@ -1094,14 +1096,18 @@ sub ConfigItemUpdate {
                     DynamicFieldConfig => $DynamicField,
                     Value1             => $Param{"DynamicField_$Name"},
                     Value2             => $ConfigItem->{"DynamicField_$Name"},
+                    ExternalSource     => $Param{ExternalSource},
                 )
                 )
             {
-                # pass unchanged dynamic fields to neither VersionAdd() nor VersionUpdate()
-                delete $Param{"DynamicField_$Name"};
+                # do not pass unchanged dynamic fields to VersionUpdate()
+                # store them for VersionAdd() because of potential difference from ExternalSource
+                $SkipForUdateDFs{"DynamicField_$Name"} = delete $Param{"DynamicField_$Name"};
 
                 next NAME;
             }
+
+            $UpdateVersion = 1;
 
             if ( $VersionTrigger{"DynamicField_$Name"} ) {
                 $AddVersion = 1;
@@ -1113,11 +1119,12 @@ sub ConfigItemUpdate {
         my $Success = $Self->VersionAdd(
             Description => $ConfigItem->{Description} // '',
             %Param,
+            %SkipForUdateDFs,
             LastVersion => $ConfigItem,
         );
         return unless $Success;
     }
-    else {
+    elsif ($UpdateVersion) {
         my $Success = $Self->VersionUpdate(
             %Param,
             Version => $ConfigItem,
@@ -1131,7 +1138,10 @@ sub ConfigItemUpdate {
         InciStateID => 'IncidentStateUpdate',
     );
 
+    CHANGE:
     for my $Key ( keys %Changed ) {
+        next CHANGE if !$Events{$Key};
+
         $Self->EventHandler(
             Event => $Events{$Key},
             Data  => {
