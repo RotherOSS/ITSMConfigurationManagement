@@ -784,7 +784,7 @@ sub ConfigItemDelete {
         ConfigItemID => $Param{ConfigItemID},
     );
 
-    # Delete all links to this config item before deleting the versions.
+    # delete all links to this config item before deleting the versions.
     # LinkDeleteAll() calls LinkDelete() internally. This means that
     # the event handlers are honored. This means that the table configitem_link
     # is also purged.
@@ -793,6 +793,34 @@ sub ConfigItemDelete {
         Key    => $Param{ConfigItemID},
         UserID => $Param{UserID},
     );
+
+    # delete dynamic link table entries, if any
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    $DBObject->Do(
+        SQL  => 'DELETE FROM configitem_link WHERE source_configitem_id = ?',
+        Bind => [ \$Param{ConfigItemID} ],
+    );
+    $DBObject->Do(
+        SQL  => 'DELETE FROM configitem_link WHERE target_configitem_id = ?',
+        Bind => [ \$Param{ConfigItemID} ],
+    );
+
+    # if there are static (versioned) links, delete all of them
+    my $VersionListRef = $Self->VersionList(
+        ConfigItemID => $Param{ConfigItemID},
+    );
+
+    for my $VersionID (@$VersionListRef) {
+        $DBObject->Do(
+            SQL  => 'DELETE FROM configitem_link WHERE source_configitem_version_id = ?',
+            Bind => [ \$VersionID ],
+        );
+        $DBObject->Do(
+            SQL  => 'DELETE FROM configitem_link WHERE target_configitem_version_id = ?',
+            Bind => [ \$VersionID ],
+        );
+    }
 
     # delete existing versions
     $Self->VersionDelete(
@@ -891,24 +919,6 @@ sub ConfigItemDelete {
             Class        => $ConfigItemData->{Class},
         },
         UserID => $Param{UserID},
-    );
-
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
-    # delete versions
-    $DBObject->Do(
-        SQL  => 'DELETE FROM configitem_version WHERE configitem_id = ?',
-        Bind => [ \$Param{ConfigItemID} ],
-    );
-
-    # delete link table entries
-    $DBObject->Do(
-        SQL  => 'DELETE FROM configitem_link WHERE source_configitem_id = ?',
-        Bind => [ \$Param{ConfigItemID} ],
-    );
-    $DBObject->Do(
-        SQL  => 'DELETE FROM configitem_link WHERE target_configitem_id = ?',
-        Bind => [ \$Param{ConfigItemID} ],
     );
 
     # delete config item

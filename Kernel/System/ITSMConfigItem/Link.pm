@@ -1,7 +1,7 @@
 # --
 # OTOBO is a web-based ticketing system for service organisations.
 # --
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -353,7 +353,7 @@ sub SyncLinkTable {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Missing ( grep { !$Param{$_} } qw(DynamicFieldConfig ConfigItemID ConfigItemLastVersionID ConfigItemVersionID Value) ) {
+    for my $Missing ( grep { !$Param{$_} } qw(DynamicFieldConfig ConfigItemID ConfigItemLastVersionID ConfigItemVersionID) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Need $Missing!",
@@ -467,14 +467,23 @@ sub SyncLinkTable {
         'id';
 
     # Clear out the old value array.
+    my $SourceCol = 'source_'. ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ).'_id';
+    my $TargetCol = 'target_'. ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ).'_id';
+
     $DBObject->Do(
         SQL => <<"END_SQL",
 DELETE FROM configitem_link
   WHERE dynamic_field_id     = ?
-    AND $ItemOrVersionCol = ?
+    AND ( $SourceCol = ? OR $TargetCol = ? )
 END_SQL
-        Bind => [ \( $DynamicFieldID, $ItemOrVersion ) ],
+        Bind => [ \( $DynamicFieldID, $ItemOrVersion, $ItemOrVersion ) ],
     );
+
+    my @NewValues = $Param{Value}
+        ? ref $Param{Value} ? ( grep { $_ } $Param{Value}->@* ) : ( $Param{Value} )
+        : ();
+
+    return 1 if !@NewValues;
 
     # INSERT the new value array.
     $DBObject->DoArray(
@@ -488,7 +497,7 @@ INSERT INTO configitem_link (
     current_timestamp, 1
   )
 END_SQL
-        Bind => [ $DynamicFieldID, $LinkTypeID, $ItemOrVersion, $Param{Value} ],
+        Bind => [ $DynamicFieldID, $LinkTypeID, $ItemOrVersion, \@NewValues ],
     );
 
     # assume success
@@ -582,7 +591,7 @@ sub RebuildLinkTable {
             BindMode => 1,
         );
         $Rows = $DBObject->SelectAll(
-            SQL => << "END_SQL",
+            SQL => <<"END_SQL",
 SELECT dfv.field_id, v.configitem_id, v.id, dfv.value_int, v_max.max_version_id
   FROM dynamic_field_value dfv
   INNER JOIN configitem_version v

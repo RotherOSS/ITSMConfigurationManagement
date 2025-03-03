@@ -3,7 +3,7 @@
     <Name>ITSMConfigurationManagement</Name>
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
-    <Framework>11.0.x</Framework>
+    <Framework Minimum="11.0.8">11.0.x</Framework>
     <PackageRequired Version="11.0.1">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.io/</URL>
@@ -169,7 +169,6 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DefinitionConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoLinkCount.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/LinkSync.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/RebuildACLPreselectionCache.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/RecalcCurInciState.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/EvaluateScriptFields.pm" />
@@ -205,10 +204,17 @@
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemSearch.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemUpdate.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/CIAutoLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/ConfigItemLink.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionAdd.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionGet.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionList.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/Role.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/StaticLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketAutoLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketRef.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/DynamicLink.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
         <File Permission="660" Location="scripts/test/ImportExport/ObjectBackend/ITSMConfigItem.t" />
@@ -228,6 +234,7 @@
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/DashboardITSMConfigItemGeneric.t" />
         <File Permission="660" Location="scripts/test/Selenium/Customer/ITSMConfigurationManagement/CustomerITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/sample/ImportExport/TemplateExport.csv" />
+        <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/Links/unittest.yml" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.TreeView.js" />

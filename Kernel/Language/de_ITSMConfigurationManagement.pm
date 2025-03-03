@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -197,9 +197,11 @@ sub Data {
         'Wählen Sie eine oder mehrere Klassen aus, um die auswählbaren Config Items einzuschränken';
     $Self->{Translation}->{'Link type'} = 'Link-Typ';
     $Self->{Translation}->{'Select the link type.'} = 'Link-Typ auswählen.';
+
     $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Vorwärts: Referenzierung (Quelle) -> Referenziert (Ziel)';
     $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Rückwärts: Referenziert (Quelle) -> Referenziert (Ziel)';
     $Self->{Translation}->{'Link Direction'} = 'Link Richtung';
+
     $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
         'Das referenzierende Objekt ist dasjenige, das dieses dynamische Feld enthält, das referenzierte Objekt ist dasjenige, das als Wert für das dynamische Feld ausgewählt wurde.';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dynamisch (ConfigItem)';

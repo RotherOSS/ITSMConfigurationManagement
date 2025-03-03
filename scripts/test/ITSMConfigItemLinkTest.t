@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -141,7 +141,7 @@ my %InciStateListReverse = reverse %{$InciStateList};
 
 # Definitions are added as YAML strings
 # define the first test definition (basic definition without DynamicFields)
-my @ConfigItemDefinitions = ( <<'END_YAML');
+my @ConfigItemDefinitions = (<<'END_YAML');
 ---
 Pages:
   - Name: Page1
@@ -272,8 +272,8 @@ my $OrigIncidentLinkTypeDirectionSetting = $ConfigObject->Get('ITSM::Core::Incid
 $ConfigObject->Set(
     Key   => 'ITSM::Core::IncidentLinkTypeDirection',
     Value => {
-        DependsOn => 'Source',
-        Includes  => 'Source',
+        DependsOn => 'Target',
+        Includes  => 'Target',
     },
 );
 
@@ -341,13 +341,13 @@ my %Links = (
             '3' => {
                 ITSMConfigItem => [ '1', '2' ],
             },
-            '1' => {
-                Service => ['1'],
+            '2' => {
+                Service => ['2'],
             },
         },
         Service => {
-            '2' => {
-                ITSMConfigItem => ['2'],
+            '1' => {
+                ITSMConfigItem => ['1'],
             }
         },
     },
