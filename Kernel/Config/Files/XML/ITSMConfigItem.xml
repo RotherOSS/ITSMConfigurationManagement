@@ -1802,7 +1802,7 @@
         <Description Translatable="1">The default category which is shown, if none is selected.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
         <Value>
-            <Item>Default</Item>
+            <Item>All</Item>
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable" Required="0" Valid="0">
@@ -2151,7 +2151,7 @@
     </Setting>
 
     <Setting Name="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany" Required="0" Valid="1">
-        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.</Description>
+        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).</Description>
         <Navigation>Frontend::Agent::View::CustomerInformationCenter</Navigation>
         <Value>
             <Hash>
@@ -2167,7 +2167,24 @@
                 <Item Key="Default">1</Item>
                 <Item Key="CacheTTLLocal">0.5</Item>
                 <Item Key="ConfigItemKey">
-                    <Hash>
+		    <Hash>
+			<Item Key="Appliance">Contact-User</Item>
+                        <Item Key="Client">Contact-User</Item>
+                        <Item Key="Client (virtual)">Contact-User</Item>
+                        <Item Key="Device (unidentified)">Contact-User</Item>
+                        <Item Key="Mobile Device">Contact-User</Item>
+                        <Item Key="Other Accessories">Contact-User</Item>
+                        <Item Key="Phone">Contact-User</Item>
+                        <Item Key="Printer">Contact-User</Item>
+                        <Item Key="Projector">Contact-User</Item>
+                        <Item Key="Router (Firewall)">Contact-User</Item>
+                        <Item Key="Server">Contact-User</Item>
+                        <Item Key="Server (virtual)">Contact-User</Item>
+                        <Item Key="Smartboard">Contact-User</Item>
+                        <Item Key="Storage">Contact-User</Item>
+                        <Item Key="Switch">Contact-User</Item>
+                        <Item Key="UPS">Contact-User</Item>
+                        <Item Key="WLAN access point">Contact-User</Item>
                     </Hash>
                 </Item>
                 <Item Key="DefaultColumns">
@@ -2192,7 +2209,7 @@
     </Setting>
 
     <Setting Name="AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser" Required="0" Valid="1">
-        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.</Description>
+        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).</Description>
         <Navigation>Frontend::Agent::View::CustomerUserInformationCenter</Navigation>
         <Value>
             <Hash>
@@ -2208,8 +2225,25 @@
                 <Item Key="Default">1</Item>
                 <Item Key="CacheTTLLocal">0.5</Item>
                 <Item Key="ConfigItemKey">
-                    <Hash>
-                    </Hash>
+		    <Hash>
+			<Item Key="Appliance">Contact-User</Item>
+                        <Item Key="Client">Contact-User</Item>
+                        <Item Key="Client (virtual)">Contact-User</Item>
+                        <Item Key="Device (unidentified)">Contact-User</Item>
+                        <Item Key="Mobile Device">Contact-User</Item>
+                        <Item Key="Other Accessories">Contact-User</Item>
+                        <Item Key="Phone">Contact-User</Item>
+                        <Item Key="Printer">Contact-User</Item>
+                        <Item Key="Projector">Contact-User</Item>
+                        <Item Key="Router (Firewall)">Contact-User</Item>
+                        <Item Key="Server">Contact-User</Item>
+                        <Item Key="Server (virtual)">Contact-User</Item>
+                        <Item Key="Smartboard">Contact-User</Item>
+                        <Item Key="Storage">Contact-User</Item>
+                        <Item Key="Switch">Contact-User</Item>
+                        <Item Key="UPS">Contact-User</Item>
+                        <Item Key="WLAN access point">Contact-User</Item>
+		    </Hash>
                 </Item>
                 <Item Key="DefaultColumns">
                     <Hash>

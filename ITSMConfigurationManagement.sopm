@@ -4,7 +4,7 @@
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
     <Framework Minimum="11.0.8">11.0.x</Framework>
-    <PackageRequired Version="11.0.1">ITSMCore</PackageRequired>
+    <PackageRequired Version="11.0.4">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.io/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
@@ -826,14 +826,14 @@
         <strong>NOTE</strong>
         <br/>
         <br/>
-        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.1, is considered a beta.<br/>
+        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
         It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -852,14 +852,14 @@
         <strong>HINWEIS</strong>
         <br/>
         <br/>
-        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.1, ist eine beta.<br/>
+        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
         Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -878,7 +878,7 @@
         <strong>NOTA</strong>
         <br/>
         <br/>
-        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.1, es considerada una versión beta.<br/>
+        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
         Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
@@ -886,7 +886,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -970,14 +970,14 @@
         <strong>NOTE</strong>
         <br/>
         <br/>
-        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.1, is considered a beta.<br/>
+        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
         It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -995,14 +995,14 @@
         <strong>HINWEIS</strong>
         <br/>
         <br/>
-        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.1, ist eine beta.<br/>
+        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
         Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1021,7 +1021,7 @@
         <strong>NOTA</strong>
         <br/>
         <br/>
-        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.1, es considerada una versión beta.<br/>
+        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
         Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
@@ -1029,7 +1029,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
