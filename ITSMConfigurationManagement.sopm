@@ -265,7 +265,7 @@
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItemOverview.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Table.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/img/devices_black_24dp.svg" />
-        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_2.yml" />
+        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_3.yml" />
         <File Permission="660" Location="var/packagesetup/ITSMConfigurationManagement.pm" />
     </Filelist>
     <DatabaseInstall Type="post">
