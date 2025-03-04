@@ -2172,6 +2172,7 @@
                         <Item Key="Client">Contact-User</Item>
                         <Item Key="Client (virtual)">Contact-User</Item>
                         <Item Key="Device (unidentified)">Contact-User</Item>
+                        <Item Key="Display">Contact-User</Item>
                         <Item Key="Mobile Device">Contact-User</Item>
                         <Item Key="Other Accessories">Contact-User</Item>
                         <Item Key="Phone">Contact-User</Item>
@@ -2229,6 +2230,7 @@
 			<Item Key="Appliance">Contact-User</Item>
                         <Item Key="Client">Contact-User</Item>
                         <Item Key="Client (virtual)">Contact-User</Item>
+                        <Item Key="Display">Contact-User</Item>
                         <Item Key="Device (unidentified)">Contact-User</Item>
                         <Item Key="Mobile Device">Contact-User</Item>
                         <Item Key="Other Accessories">Contact-User</Item>
