@@ -1247,7 +1247,7 @@ sub Run {
         );
 
         my @NavBarFilters;
-        for my $Prio ( sort keys %{ $Param{Filters} } ) {
+        for my $Prio ( sort { $a <=> $b } keys %{ $Param{Filters} } ) {
             push @NavBarFilters, $Param{Filters}->{$Prio};
         }
         $LayoutObject->Block(

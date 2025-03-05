@@ -482,7 +482,7 @@ sub ITSMConfigItemListShow {
     # filter selection
     if ( $Param{CategoryFilters} ) {
         my @NavBarFilters;
-        for my $Prio ( sort keys %{ $Param{CategoryFilters} } ) {
+        for my $Prio ( sort { $a <=> $b } keys %{ $Param{CategoryFilters} } ) {
             push @NavBarFilters, $Param{CategoryFilters}->{$Prio};
         }
         $Self->Block(
