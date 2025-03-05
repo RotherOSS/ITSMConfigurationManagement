@@ -641,7 +641,7 @@ END_XML
             Permission          => [$PermissionGroupID],
             NumberModule        => ['AutoIncrement'],
             VersionStringModule => ['Incremental'],
-            Categories          => ['Default'],
+            Categories          => ['All'],
         );
         for my $Preference ( keys %PreferencesDefaults ) {
             my $Success = $Self->{GeneralCatalogObject}->GeneralCatalogPreferencesSet(

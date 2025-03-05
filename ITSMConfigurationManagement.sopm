@@ -539,7 +539,7 @@
         </Insert>
         <Insert Table="general_catalog">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class::Category</Data>
-            <Data Key="name" Type="Quote" Translatable="1">Default</Data>
+            <Data Key="name" Type="Quote" Translatable="1">All</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
             <Data Key="create_by">1</Data>
@@ -729,7 +729,7 @@
         </Insert>
         <Insert Table="general_catalog" Version="11.0.1">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class::Category</Data>
-            <Data Key="name" Type="Quote" Translatable="1">Default</Data>
+            <Data Key="name" Type="Quote" Translatable="1">All</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
             <Data Key="create_by">1</Data>
