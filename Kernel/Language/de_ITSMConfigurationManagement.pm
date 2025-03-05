@@ -584,6 +584,7 @@ sub Data {
     $Self->{Translation}->{'Address Allocation'} = 'Adresszuweisung';
     $Self->{Translation}->{'Analog Phone'} = 'Analogtelefon';
     $Self->{Translation}->{'Appliance Type'} = 'Appliance-Typ';
+    $Self->{Translation}->{'Backlinks'} = 'Verlinkt von';
     $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Batteriekapazität (Ah)';
     $Self->{Translation}->{'Battery Type'} = 'Batterietyp';
     $Self->{Translation}->{'Bus Interface'} = 'Bus-Schnittstelle';
