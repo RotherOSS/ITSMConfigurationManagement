@@ -3,8 +3,8 @@
     <Name>ITSMConfigurationManagement</Name>
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
-    <Framework>11.0.x</Framework>
-    <PackageRequired Version="11.0.1">ITSMCore</PackageRequired>
+    <Framework Minimum="11.0.8">11.0.x</Framework>
+    <PackageRequired Version="11.0.4">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.io/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
@@ -22,6 +22,12 @@
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
+
+	<!-- Just for migration of the legacy package CIAttributeCollection - not applicable on OTOBO 11.1 or higher -->
+        <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorageDB.pm" />
+        <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorageFS.pm" />
+        <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorage.pm" />
+
         <File Permission="660" Location="Custom/Kernel/System/DynamicField/Driver/Lens.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
@@ -169,7 +175,6 @@
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DefinitionConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoHistory.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/DoLinkCount.pm" />
-        <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/LinkSync.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/RebuildACLPreselectionCache.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/RecalcCurInciState.pm" />
         <File Permission="660" Location="Kernel/System/ITSMConfigItem/Event/EvaluateScriptFields.pm" />
@@ -205,10 +210,17 @@
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemSearch.t" />
         <File Permission="660" Location="scripts/test/GenericInterface/Operation/ConfigItem/ConfigItemUpdate.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/CIAutoLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/ConfigItemLink.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionAdd.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionGet.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/DefinitionList.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItem/Definition/Role.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/StaticLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketAutoLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketLink.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/TicketRef.t" />
+        <File Permission="660" Location="scripts/test/ITSMConfigItem/DynamicLink.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemLinkTest.t" />
         <File Permission="660" Location="scripts/test/ITSMConfigItemUniqueCIName.t" />
         <File Permission="660" Location="scripts/test/ImportExport/ObjectBackend/ITSMConfigItem.t" />
@@ -228,6 +240,7 @@
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/DashboardITSMConfigItemGeneric.t" />
         <File Permission="660" Location="scripts/test/Selenium/Customer/ITSMConfigurationManagement/CustomerITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/sample/ImportExport/TemplateExport.csv" />
+        <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/Links/unittest.yml" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.TreeView.js" />
@@ -258,7 +271,7 @@
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Customer.ConfigItemOverview.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/css/ITSM.Table.css" />
         <File Permission="660" Location="var/httpd/htdocs/skins/Customer/default/img/devices_black_24dp.svg" />
-        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_2.yml" />
+        <File Permission="660" Location="var/itsm/configitemclasses/IT-Servicemanagement-11_0_3.yml" />
         <File Permission="660" Location="var/packagesetup/ITSMConfigurationManagement.pm" />
     </Filelist>
     <DatabaseInstall Type="post">
@@ -532,7 +545,7 @@
         </Insert>
         <Insert Table="general_catalog">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class::Category</Data>
-            <Data Key="name" Type="Quote" Translatable="1">Default</Data>
+            <Data Key="name" Type="Quote" Translatable="1">All</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
             <Data Key="create_by">1</Data>
@@ -722,7 +735,7 @@
         </Insert>
         <Insert Table="general_catalog" Version="11.0.1">
             <Data Key="general_catalog_class" Type="Quote">ITSM::ConfigItem::Class::Category</Data>
-            <Data Key="name" Type="Quote" Translatable="1">Default</Data>
+            <Data Key="name" Type="Quote" Translatable="1">All</Data>
             <Data Key="valid_id">1</Data>
             <Data Key="create_time">current_timestamp</Data>
             <Data Key="create_by">1</Data>
@@ -819,14 +832,14 @@
         <strong>NOTE</strong>
         <br/>
         <br/>
-        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.1, is considered a beta.<br/>
+        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
         It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -845,14 +858,14 @@
         <strong>HINWEIS</strong>
         <br/>
         <br/>
-        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.1, ist eine beta.<br/>
+        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
         Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -871,7 +884,7 @@
         <strong>NOTA</strong>
         <br/>
         <br/>
-        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.1, es considerada una versión beta.<br/>
+        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
         Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
@@ -879,7 +892,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -963,14 +976,14 @@
         <strong>NOTE</strong>
         <br/>
         <br/>
-        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.1, is considered a beta.<br/>
+        The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
         It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
         <strong>REQUIRED OTOBO PACKAGES</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -988,14 +1001,14 @@
         <strong>HINWEIS</strong>
         <br/>
         <br/>
-        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.1, ist eine beta.<br/>
+        Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
         Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
         <strong>BENÖTIGTE OTOBO-PAKETE</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
@@ -1014,7 +1027,7 @@
         <strong>NOTA</strong>
         <br/>
         <br/>
-        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.1, es considerada una versión beta.<br/>
+        El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
         Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
@@ -1022,7 +1035,7 @@
         <br/>
         <strong>PAQUETES OTOBO REQUERIDOS</strong>
         <ul>
-        <li>ITSMCore 11.0.1</li>
+        <li>ITSMCore 11.0.4</li>
         </ul>
         <br/>
         ((enjoy))<br/>
