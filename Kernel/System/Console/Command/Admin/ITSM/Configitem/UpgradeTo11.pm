@@ -319,6 +319,8 @@ sub _PrepareDefinitions {
     # this hash is used to prevent message repetition
     my %CheckedPackages;
 
+    $Self->{MissingPackages} = 0;
+
     CLASS_ID:
     for my $ClassID ( sort { $a <=> $b } keys $Self->{ClassList}->%* ) {
 
@@ -359,8 +361,6 @@ sub _PrepareDefinitions {
                 CheckedPackages => \%CheckedPackages,
             );
 
-            return 'Exit' if !$DefinitionYAML;
-
             my $FileLocation = $MainObject->FileWrite(
                 Directory => $Self->{WorkingDir},
                 Filename  => $Self->{ClassList}{$ClassID} . '_CIDefinition_' . $Definition->{DefinitionID} . '.yml',
@@ -373,6 +373,11 @@ sub _PrepareDefinitions {
                 Content   => \$DefinitionYAML->{DynamicField},
             );
         }
+    }
+
+    if ( $Self->{MissingPackages} ) {
+        $Self->Print("\n<red>Import failed. There are $Self->{MissingPackages} necessary package(s) missing installation.</red>\n");
+        return 'Exit';
     }
 
     return $Self->_ContinueOrNot( CurrentStep => $Param{CurrentStep} );
@@ -896,8 +901,8 @@ END_SQL
                         $Value .= ':00';
                     }
                     elsif ( $DynamicField->{FieldType} eq 'Attachment' ) {
-                        my $DynamicFieldAttachmentBackendObject = $Kernel::OM->Get('Kernel::System::CIAttachmentStorage::AttachmentStorage');
-                        my $Attachment                          = $DynamicFieldAttachmentBackendObject->AttachmentStorageGet(
+                        my $AttachmentBackendObject = $Kernel::OM->Get('Kernel::System::CIAttachmentStorage::AttachmentStorage');
+                        my $Attachment              = $AttachmentBackendObject->AttachmentStorageGet(
                             ID => $Value,
                         );
 
@@ -1124,30 +1129,6 @@ END_YAML
     ATTRIBUTE:
     for my $Attribute ( $Param{Attributes}->@* ) {
         next ATTRIBUTE if !$Param{AttributeMap}{ $Attribute->{Key} };
-
-        my $CheckPackage = $Self->_CheckInstalledPackage(
-            Type        => $Attribute->{Input}{Type},
-            Package     => 'DynamicFieldTicketsAttributes',
-            TypeMapping => {
-                'QueueReference' => 'Queue',
-                'SLAReference'   => 'SLA',
-                'TypeReference'  => 'Type',
-            },
-            CheckedPackages => $Param{CheckedPackages},
-        );
-
-        return if !$CheckPackage && $Self->{UseDefaults};
-
-        $CheckPackage = $Self->_CheckInstalledPackage(
-            Type        => $Attribute->{Input}{Type},
-            Package     => 'DynamicFieldAttachment',
-            TypeMapping => {
-                'CIAttachment' => 'Attachment',
-            },
-            CheckedPackages => $Param{CheckedPackages},
-        );
-
-        return if !$CheckPackage && $Self->{UseDefaults};
 
         my $YAMLLine = "      - DF: $Param{AttributeMap}{ $Attribute->{Key} }\n";
 
@@ -1426,6 +1407,14 @@ sub _DFConfigFromLegacy {
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'CIAttachment' ) {
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            %Param,
+            Package => 'DynamicFieldAttachment',
+        );
+
+        if ( !$CheckPackage && $Self->{UseDefaults} ) {
+            $Self->{MissingPackages}++;
+        }
         $DF{FieldType} = 'Attachment';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
@@ -1434,14 +1423,38 @@ sub _DFConfigFromLegacy {
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'QueueReference' ) {
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            %Param,
+            Package => 'DynamicFieldTicketsAttributes',
+        );
+
+        if ( !$CheckPackage && $Self->{UseDefaults} ) {
+            $Self->{MissingPackages}++;
+        }
         $DF{FieldType} = 'Queue';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'SLAReference' ) {
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            %Param,
+            Package => 'DynamicFieldTicketsAttributes',
+        );
+
+        if ( !$CheckPackage && $Self->{UseDefaults} ) {
+            $Self->{MissingPackages}++;
+        }
         $DF{FieldType} = 'SLA';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
     elsif ( $Type eq 'TypeReference' ) {
+        my $CheckPackage = $Self->_CheckInstalledPackage(
+            %Param,
+            Package => 'DynamicFieldTicketsAttributes',
+        );
+
+        if ( !$CheckPackage && $Self->{UseDefaults} ) {
+            $Self->{MissingPackages}++;
+        }
         $DF{FieldType} = 'Type';
         $DF{Config}{EditFieldMode} = 'AutoComplete';
     }
@@ -1501,22 +1514,20 @@ sub _CheckInstalledPackage {
 
     my $Pass = 1;
 
-    my %TypeMapping = $Param{TypeMapping}->%*;
-    if ( grep { $Param{Type} eq $_ } keys %TypeMapping ) {
+    return $Pass if $Self->{CheckedTypes}{ $Param{Attribute}{Input}{Type} };
 
-        return $Pass if $Param{CheckedPackages}{ $Param{Type} };
-
-        $Pass = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
-            Name => $Param{Package},
-        );
-        if ( !$Pass ) {
-            my $NewType = $TypeMapping{ $Param{Type} };
-            $Self->Print("<red>\nThe field type $Param{Type} will be mapped to a $NewType field.</red>\n");
-            $Self->Print("<red>This $NewType field type is part of the $Param{Package} package that needs to be installed.</red>\n");
-        }
-        $Param{CheckedPackages}{ $Param{Type} } = 1;
-
+    $Pass = $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled(
+        Name => $Param{Package},
+    );
+    if ( !$Pass ) {
+        my $Class        = $Param{Class};
+        my $DefinitionID = $Param{DefinitionID};
+        my $FieldType    = $Param{Attribute}{Input}{Type};
+        my $FieldName    = $Param{Attribute}{Name};
+        $Self->Print("<red>\nError converting DF (Class: $Class, DefinitionID: $DefinitionID, Field Type: $FieldType, Field Name: $FieldName). </red>");
+        $Self->Print("<red>The $Param{Package} package is required.</red>\n");
     }
+    $Self->{CheckedTypes}{ $Param{Attribute}{Input}{Type} } = 1;
 
     return $Pass;
 }
