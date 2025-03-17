@@ -696,7 +696,7 @@
                 <Reference Local="field_id" Foreign="id" />
             </ForeignKey>
         </TableCreate>
-        <TableCreate Name="configitem_link">
+        <TableCreate Name="configitem_link" Version="11.0.1">
             <Column Name="id"                           Required="true"  Type="BIGINT" PrimaryKey="true" AutoIncrement="true" />
             <Column Name="source_configitem_id"         Required="false" Type="BIGINT" />
             <Column Name="source_configitem_version_id" Required="false" Type="BIGINT" />
