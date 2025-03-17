@@ -679,7 +679,7 @@ sub _MigrateAttributeData {
         SQL => 'UPDATE configitem_version SET change_time=create_time, change_by=create_by WHERE change_by IS NULL;',
     );
 
-    my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser/;
+    my %BaseArrayFields = map { $_ => 1 } qw/GeneralCatalog CustomerCompany CustomerUser Ticket ConfigItem Agent Service Queue SLA Type/;
     my $DisabledHistory;
     my $HistorySetting = q{ITSMConfigItem::EventModulePost###100-History};
 
