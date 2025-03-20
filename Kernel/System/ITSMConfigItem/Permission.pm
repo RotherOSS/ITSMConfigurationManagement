@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -221,8 +221,15 @@ sub CustomerPermission {
         }
 
         if ( $ConditionSet->{CustomerUserDynamicField} ) {
+            my $CustomerUserDFArrayRef = [];
+            if ( !ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ) {
+                $CustomerUserDFArrayRef = [ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ];
+            }
+            else {
+                $CustomerUserDFArrayRef = $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
+            }
             next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
-            next CONDITION if none { $_ eq $Param{UserID} } $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} }->@*;
+            next CONDITION if none { $_ eq $Param{UserID} } $CustomerUserDFArrayRef->@*;
         }
 
         if ( $ConditionSet->{CustomerCompanyDynamicField} ) {
@@ -232,7 +239,15 @@ sub CustomerPermission {
                 CustomerUserID => $Param{UserID},
             );
 
-            next CONDITION if none { $AccessibleCustomers{$_} } $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} }->@*;
+            my $CustomerCompanyDFArrayRef = [];
+            if ( !ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } ) {
+                $CustomerCompanyDFArrayRef = [ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } ];
+            }
+            else {
+                $CustomerCompanyDFArrayRef = $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} };
+            }
+
+            next CONDITION if none { $AccessibleCustomers{$_} } $CustomerCompanyDFArrayRef->@*;
         }
 
         # grant access
