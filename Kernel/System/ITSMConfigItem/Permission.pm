@@ -215,39 +215,45 @@ sub CustomerPermission {
 
         if ( $ConditionSet->{DynamicFieldValues} ) {
             for my $FieldName ( keys $ConditionSet->{DynamicFieldValues}->%* ) {
-                my $FieldValue = $ConditionSet->{DynamicFieldValues}{$FieldName};
-                next CONDITION if $FieldValue && !$ConfigItem->{"DynamicField_$FieldName"} eq $FieldValue;
+                my $ConditionValue = $ConditionSet->{DynamicFieldValues}{$FieldName} // '';
+
+                if ( !defined $ConfigItem->{"DynamicField_$FieldName"} ) {
+                    next CONDITION if $ConditionValue ne '';
+                }
+                elsif ( !ref $ConfigItem->{"DynamicField_$FieldName"} ) {
+                    next CONDITION if $ConditionValue ne $ConfigItem->{"DynamicField_$FieldName"};
+                }
+                elsif ( $ConditionValue eq '' ) {
+                    next CONDITION if $ConfigItem->{"DynamicField_$FieldName"}->@*;
+                }
+                else {
+                    next CONDITION if none { $_ eq $ConditionValue } $ConfigItem->{"DynamicField_$FieldName"}->@*;
+                }
             }
         }
 
         if ( $ConditionSet->{CustomerUserDynamicField} ) {
-            my $CustomerUserDFArrayRef = [];
-            if ( !ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ) {
-                $CustomerUserDFArrayRef = [ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } ];
-            }
-            else {
-                $CustomerUserDFArrayRef = $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
-            }
             next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} };
-            next CONDITION if none { $_ eq $Param{UserID} } $CustomerUserDFArrayRef->@*;
+
+            my @CustomerUsers = ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} }
+                ? $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} }->@*
+                : ( $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerUserDynamicField} } );
+
+            next CONDITION if none { $_ eq $Param{UserID} } @CustomerUsers;
         }
 
         if ( $ConditionSet->{CustomerCompanyDynamicField} ) {
             next CONDITION if !$ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} };
 
+            my @CustomerCompanies = ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} }
+                ? $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} }->@*
+                : ( $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } );
+
             my %AccessibleCustomers = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupContextCustomers(
                 CustomerUserID => $Param{UserID},
             );
 
-            my $CustomerCompanyDFArrayRef = [];
-            if ( !ref $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } ) {
-                $CustomerCompanyDFArrayRef = [ $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} } ];
-            }
-            else {
-                $CustomerCompanyDFArrayRef = $ConfigItem->{ 'DynamicField_' . $ConditionSet->{CustomerCompanyDynamicField} };
-            }
-
-            next CONDITION if none { $AccessibleCustomers{$_} } $CustomerCompanyDFArrayRef->@*;
+            next CONDITION if none { $AccessibleCustomers{$_} } @CustomerCompanies;
         }
 
         # grant access
