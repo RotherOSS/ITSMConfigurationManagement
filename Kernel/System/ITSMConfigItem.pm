@@ -879,33 +879,6 @@ sub ConfigItemDelete {
             );
         }
     }
-    else {
-
-        # check, whether the feature to check for a unique name is enabled
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('UniqueCIName::EnableUniquenessCheck') ) {
-
-            my $NameDuplicates = $Self->UniqueNameCheck(
-                ConfigItemID => 'NEW',
-                ClassID      => $Param{ClassID},
-                Name         => $Param{Name},
-            );
-
-            # stop processing if the name is not unique
-            if ( IsArrayRefWithData($NameDuplicates) ) {
-
-                # build a string of all duplicate IDs
-                my $Duplicates = join ', ', @{$NameDuplicates};
-
-                # write an error log message containing all the duplicate IDs
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "The name $Param{Name} is already in use (ConfigItemIDs: $Duplicates)!",
-                );
-
-                return;
-            }
-        }
-    }
 
     # trigger ConfigItemDelete event
     # this must be done before deleting the config item from the database,
