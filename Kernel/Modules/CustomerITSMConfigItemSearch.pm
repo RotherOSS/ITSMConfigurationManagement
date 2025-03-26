@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -392,7 +392,6 @@ sub Run {
             my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
             DYNAMICFIELD:
             for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
-                next DYNAMICFIELD unless $PermissionConditionConfig->{DynamicFieldValues}{$FieldName};
 
                 my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
                     Name => $FieldName,
@@ -401,9 +400,16 @@ sub Run {
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
                 next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
 
-                $SearchConfig{"DynamicField_$FieldName"} = {
-                    Equals => $PermissionConditionConfig->{DynamicFieldValues}{$FieldName},
-                };
+                if ( $PermissionConditionConfig->{DynamicFieldValues}{$FieldName} ) {
+                    $SearchConfig{"DynamicField_$FieldName"} = {
+                        Equals => $PermissionConditionConfig->{DynamicFieldValues}{$FieldName},
+                    };
+                }
+                elsif ( $PermissionConditionConfig->{DynamicFieldValues}{$FieldName} eq '' ) {
+                    $SearchConfig{"DynamicField_$FieldName"} = {
+                        Empty => 1,
+                    };
+                }
             }
         }
 
