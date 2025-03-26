@@ -110,7 +110,7 @@ input.DynamicFieldText {
 
 .oooITSMConfigItemSearch > div {
     display: block;
-    width: calc( 100% -80px );
+    width: calc( 100% - 80px );
     height: auto;
     margin-top: 8px;
     padding-top: 24px;
@@ -118,7 +118,7 @@ input.DynamicFieldText {
     padding-left: 40px;
     padding-right: 40px;
     border-radius: 15px;
-    box-shadow: 0 1px 4px 0 rgba(4, 0 71, 0, 16);
+    box-shadow: 0 1px 4px 0 rgba(4, 0, 71, 0.16);
     box-shadow: 0 1px 4px 0 var(--colShadowDark);
     background-color: #ffffff;
 }
