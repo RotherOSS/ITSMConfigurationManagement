@@ -214,7 +214,6 @@ sub GetFieldTypeSettings {
     my ( $Self, %Param ) = @_;
 
     my $ReferencingObjectType = $Param{ObjectType};
-    my $LanguageObject        = $Kernel::OM->Get('Kernel::Language');
 
     # First fetch the generic settings.
     my @FieldTypeSettings = $Self->SUPER::GetFieldTypeSettings(
@@ -556,7 +555,7 @@ sub SearchObjects {
         FILTERITEM:
         for my $FilterItem ( $DFDetails->{ReferenceFilterList}->@* ) {
 
-            # map ID to IDs if neccessary
+            # map ID to IDs if necessary
             my $AttributeName = $FilterItem->{ReferenceObjectAttribute};
             if ( any { $_ eq $AttributeName } qw(QueueID TypeID StateID PriorityID ServiceID SLAID OwnerID ResponsibleID ) ) {
                 $AttributeName .= 's';
@@ -751,6 +750,7 @@ sub ValueForLens {
         for my $ConfigItemID ( $Param{Value}->@* ) {
             my $ConfigItem = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemGet(
                 ConfigItemID => $ConfigItemID,
+                Silent       => 1,
             );
 
             # only valid IDs
