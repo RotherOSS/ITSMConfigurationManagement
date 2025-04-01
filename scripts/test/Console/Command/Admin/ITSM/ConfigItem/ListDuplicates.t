@@ -23,7 +23,7 @@ use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the te
 our $Self;
 
 # get command object
-my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::ListDuplicates');
+my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::ConfigItem::ListDuplicates');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(

@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::ClassExport;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::ClassExport;
 
 use v5.24;
 use strict;
@@ -44,11 +44,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::Console::Command::Admin::ITSM::Configitem::ClassExport - support for upgrading the CMDB
+Kernel::System::Console::Command::Admin::ITSM::ConfigItem::ClassExport - support for upgrading the CMDB
 
 =head1 DESCRIPTION
 
-Module for the console command C<Admin::ITSM::Configitem::ClassExport>.
+Module for the console command C<Admin::ITSM::ConfigItem::ClassExport>.
 
 =head1 PUBLIC INTERFACE
 

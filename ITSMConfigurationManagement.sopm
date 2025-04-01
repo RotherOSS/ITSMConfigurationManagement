@@ -150,18 +150,18 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/Output/JavaScript/Templates/Standard/Agent/ITSMConfigurationManagement/ClassImportConfirm.html.tmpl" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassExport.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ClassImport.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ConvertLegacyRefDFs.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/Delete.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/DumpGraph.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/ListDuplicates.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/Configitem/UpgradeTo11.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ClassExport.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ClassImport.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ConvertLegacyRefDFs.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/Delete.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/DumpGraph.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ListDuplicates.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/UpgradeTo11.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ImportExport/Export.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ImportExport/Import.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/IncidentState/Recalculate.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/CreateConditionalTickets.pm" />
-        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/Configitem/RebuildLinkTable.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/ConfigItem/CreateConditionalTickets.pm" />
+        <File Permission="660" Location="Kernel/System/Console/Command/Maint/ITSM/ConfigItem/RebuildLinkTable.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Maint/WebService/TriggerConfigItemFetch.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/ConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/DynamicField/Driver/ConfigItemVersion.pm" />
@@ -198,9 +198,9 @@
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/Delete.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/ListDuplicates.t" />
-        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/Configitem/UpgradeTo11.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ConfigItem/Delete.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ConfigItem/ListDuplicates.t" />
+        <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ConfigItem/UpgradeTo11.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ImportExport/Export.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ImportExport/Import.t" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/IncidentState/Recalculate.t" />
@@ -833,7 +833,7 @@
         <br/>
         <br/>
         The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
-        It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
+        It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
@@ -859,7 +859,7 @@
         <br/>
         <br/>
         Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
-        Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
+        Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
@@ -886,7 +886,7 @@
         <br/>
         El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
-        Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
+        Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
         Una serie de nuevas clases por defecto están disponibles y pueden ser importadas mediante la opción: Admin->ConfigItems.<br/>
         <br/>
@@ -977,7 +977,7 @@
         <br/>
         <br/>
         The ITSMConfigurationManagement 11 has undergone major changes. This release, 11.0.4, is considered a beta.<br/>
-        It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
+        It is necessary to migrate your existing ConfigItem classes to the new structure. This can be done via the Console script bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11.
         During its execution the definitions will be updated and dynamic fields for all custom (old xml) attributes will be created.<br/>
         Bundles of new default classes are available and can be imported in Admin->ConfigItems.<br/>
         <br/>
@@ -1002,7 +1002,7 @@
         <br/>
         <br/>
         Das Paket ITSMConfigurationManagement wurde mit der Version 11 stark überarbeitet. Dieses Release, 11.0.4, ist eine beta.<br/>
-        Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 zu Verfügung.
+        Nach dem Upgrade von 10.1 müssen bestehende ConfigItem-Klassen zusätzlich auf die neue Struktur migriert werden. Hierzu steht das Console-Kommando bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 zu Verfügung.
         Dieses ändert die ConfigItem-Klassendefinitionen auf die neue Struktur und legt dynamische Felder für alle konfigurierbaren (d.h. die bisherigen xml-) Attribute an.<br/>
         Neue default-Klassen können unter Admin->ConfigItems direkt importiert werden.<br/>
         <br/>
@@ -1029,7 +1029,7 @@
         <br/>
         El módulo ITSMConfigurationManagement 11 ha sufrido cambios mayores. Esta liberación, 11.0.4, es considerada una versión beta.<br/>
         Es necesario migrar sus definiciones existentes de clases de elementos de configuración (ConfigItems) a la nueva estructura.
-        Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11.
+        Esto puede ser realizado ejecutando el comando de consola: bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11.
         Durante su ejecución, se actualizarán las definiciones de ConfigItems y se crearán nuevos campos dinámicos para todos los atributos personalizados existentes (antigua estructura XML).<br/>
         Una serie de nuevas clases por defecto están disponibles y pueden ser importadas mediante la opción: Admin->ConfigItems.<br/>
         <br/>
@@ -1045,7 +1045,7 @@
     <IntroUpgrade Type="post" Title="Convert legacy reference fields" Lang="en"><![CDATA[
 
         <br/>
-        If you have the OTOBO 10.1 package "DynamicFieldITSMConfigItem" installed, in order to migrate the dynamic fields of type "ITSMConfigItemReference" please execute the console command "Admin::ITSM::Configitem::ConvertLegacyRefDFs"<br/>
+        If you have the OTOBO 10.1 package "DynamicFieldITSMConfigItem" installed, in order to migrate the dynamic fields of type "ITSMConfigItemReference" please execute the console command "Admin::ITSM::ConfigItem::ConvertLegacyRefDFs"<br/>
 
     ]]></IntroUpgrade>
     <IntroUninstall Type="pre" Title="Uninstallation Information" Lang="en"><![CDATA[

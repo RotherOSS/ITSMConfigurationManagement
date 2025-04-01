@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Maint::ITSM::Configitem::RebuildLinkTable;
+package Kernel::System::Console::Command::Maint::ITSM::ConfigItem::RebuildLinkTable;
 
 use v5.24;
 use strict;

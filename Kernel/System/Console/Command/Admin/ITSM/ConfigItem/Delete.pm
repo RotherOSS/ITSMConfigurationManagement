@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::Delete;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::Delete;
 
 use strict;
 use warnings;

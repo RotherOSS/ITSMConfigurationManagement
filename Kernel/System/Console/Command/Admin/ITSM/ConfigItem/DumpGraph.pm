@@ -13,7 +13,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::DumpGraph;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::DumpGraph;
 
 use v5.24;
 use strict;

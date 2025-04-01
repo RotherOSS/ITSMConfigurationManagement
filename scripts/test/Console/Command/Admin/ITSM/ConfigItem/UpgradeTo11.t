@@ -29,7 +29,7 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 # TODO: test the command
-#my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
+#my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::ConfigItem::UpgradeTo11');
 
 # get helper object, database changes should be restored
 $Kernel::OM->ObjectParamAdd(
@@ -43,7 +43,7 @@ my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');    ## no crit
 #is(
 #    $ExitCode,
 #    1,
-#    "Admin::ITSM::Configitem::UpgradeTo11 exit code without options",
+#    "Admin::ITSM::ConfigItem::UpgradeTo11 exit code without options",
 #);
 
 my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
