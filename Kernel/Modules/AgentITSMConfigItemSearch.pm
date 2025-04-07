@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -44,7 +44,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
     my $Output;
 
-    # get neccessary objects
+    # get necessary objects
     my $BackendObject        = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
@@ -129,6 +129,26 @@ sub Run {
             );
         }
 
+        my @SetInnerFields;
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+
+            my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
+            for my $DF (@CurrentInnerFields) {
+
+                $DF->{Definition}{Label} = $DynamicFieldConfig->{Label} . '::' . $DF->{Definition}{Label};
+            }
+            push @SetInnerFields, ( map { $_->{Definition} } @CurrentInnerFields );
+        }
+
+        $Definition->{DynamicFieldRef} = {
+            $Definition->{DynamicFieldRef}->%*,
+            map { $_->{Name} => $_ } @SetInnerFields,
+        };
+
         # load profiles string params
         if ( ( $Self->{Subaction} eq 'LoadProfile' && $Self->{Profile} ) || $Self->{TakeLastSearch} ) {
             %GetParam = $SearchProfileObject->SearchProfileGet(
@@ -191,6 +211,7 @@ sub Run {
             # cycle trough the activated Dynamic Fields for this screen
             DYNAMICFIELD:
             for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
                 next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
                 next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
@@ -393,7 +414,8 @@ sub Run {
         # create dynamic fields search options for attribute select
         # cycle trough the activated Dynamic Fields for this definition
         DYNAMICFIELD:
-        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+        for my $DynamicFieldConfig ( sort { $a->{Label} cmp $b->{Label} } values $Definition->{DynamicFieldRef}->%* ) {
+
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
@@ -451,6 +473,7 @@ sub Run {
         # cycle trough the activated Dynamic Fields for this screen
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
@@ -637,6 +660,7 @@ sub Run {
         # cycle trough the activated Dynamic Fields for this screen
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
@@ -881,6 +905,25 @@ sub Run {
             );
         }
 
+        my @SetInnerFields;
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+
+            my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
+            for my $DF (@CurrentInnerFields) {
+
+                $DF->{Definition}{Label} = $DynamicFieldConfig->{Label} . '::' . $DF->{Definition}{Label};
+            }
+            push @SetInnerFields, ( map { $_->{Definition} } @CurrentInnerFields );
+        }
+        $Definition->{DynamicFieldRef} = {
+            $Definition->{DynamicFieldRef}->%*,
+            map { $_->{Name} => $_ } @SetInnerFields,
+        };
+
         # convert attributes
         if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
             $GetParam{ShownAttributes} = [ split /;/, $GetParam{ShownAttributes} ];
@@ -927,6 +970,7 @@ sub Run {
         # cycle trough the activated Dynamic Fields for this screen
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
+
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
