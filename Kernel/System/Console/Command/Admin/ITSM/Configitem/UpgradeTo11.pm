@@ -164,7 +164,7 @@ sub Run {
     $Self->{ConfigItemObject}     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     $Self->{YAMLObject}           = $Kernel::OM->Get('Kernel::System::YAML');
 
-    # list of configitem classes, either in OTOBO 10 or OTOBO 11 format
+    # list of ConfigItem classes, either in OTOBO 10 or OTOBO 11 format
     $Self->{ClassList} = $Self->{GeneralCatalogObject}->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
@@ -196,7 +196,7 @@ sub Run {
         return $Self->ExitCodeOk;
     }
     else {
-        $Self->Print("<red>An error occured!</red>\n");
+        $Self->Print("<red>An error occurred!</red>\n");
 
         return $Self->ExitCodeError;
     }
@@ -228,7 +228,7 @@ to the name that should be used for the config item in OTOBO 11.
 sub _PrepareAttributeMapping {
     my ( $Self, %Param ) = @_;
 
-    # TODO: create dir in a init subroutine
+    # TODO: create directory in an initialization subroutine
     if ( !-d $Self->{WorkingDir} ) {
         dir( $Self->{WorkingDir} )->mkpath( 0, oct('770') );    # 0 turns off verbosity
     }
@@ -919,6 +919,12 @@ END_SQL
                     next ATTRIBUTE if !defined $Value || $Value eq '';
                 }
 
+                if ( $DynamicField->{FieldType} eq 'Set' ) {
+                    if ( !( ref $Value ) || ( ref $Value ne 'ARRAY' ) ) {
+                        $Value = [$Value];
+                    }
+                }
+
                 $DynamicFieldBackendObject->ValueSet(
                     DynamicFieldConfig => $DynamicField,
                     ObjectID           => $VersionID,
@@ -976,7 +982,7 @@ sub _DeleteLegacyData {
 
     if ( <STDIN> =~ m/^yes$/i ) {    ## no critic qw(InputOutput::ProhibitExplicitStdin);
 
-        # get neccessary objects
+        # get necessary objects
         my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
         my $PackageObject   = $Kernel::OM->Get('Kernel::System::Package');
@@ -1105,7 +1111,7 @@ END_SQL
 sub _GenerateDefinitionYAML {
     my ( $Self, %Param ) = @_;
 
-    # Explictily generate a YAML string in order to have better control
+    # Explicitly generate a YAML string in order to have better control
     # of the layout.
     my $CIYAML = <<'END_YAML';
 ---
@@ -1352,11 +1358,8 @@ sub _DFConfigFromLegacy {
     elsif ( $Type eq 'Integer' ) {
         $DF{FieldType} = 'Dropdown';
 
-        if ( !$Param{Attribute}{Input}{ValueMin} || !$Param{Attribute}{Input}{ValueMax} ) {
-            $Self->Print("<red>Need ValueMin and ValueMax for integer fields!</red>\n");
-
-            return;
-        }
+        $Param{Attribute}{Input}{ValueMin} ||= 0;
+        $Param{Attribute}{Input}{ValueMax} ||= 30;
 
         $DF{Config}{PossibleValues} = { map { $_ => $_ } ( $Param{Attribute}{Input}{ValueMin} .. $Param{Attribute}{Input}{ValueMax} ) };
 
