@@ -477,7 +477,7 @@ msgid "Console Commands"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:261
-msgid "bin/otobo.Console.pl * Admin::ITSM::Configitem::ClassExport     - Export dynamic field classes and their respective dynamic fields. * Admin::ITSM::Configitem::ClassImport     - Import dynamic field classes and their respective dynamic fields. * Admin::ITSM::Configitem::Delete          - Delete config items (all, by class (and deployment state) or by number). * Admin::ITSM::Configitem::DumpGraph       - Dump the graph of config items as SVG to the file OTOBO_ITSM_Config_Items.svg. * Admin::ITSM::Configitem::ListDuplicates  - List ConfigItems which have a non-unique name. * Admin::ITSM::Configitem::UpgradeTo11     - Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated. * Maint::ITSM::Configitem::RebuildLinkTable - Rebuild the database table configitem_link from the dynamic fields of the type Reference. Only the fields linking config items are"
+msgid "bin/otobo.Console.pl * Admin::ITSM::ConfigItem::ClassExport     - Export dynamic field classes and their respective dynamic fields. * Admin::ITSM::ConfigItem::ClassImport     - Import dynamic field classes and their respective dynamic fields. * Admin::ITSM::ConfigItem::Delete          - Delete config items (all, by class (and deployment state) or by number). * Admin::ITSM::ConfigItem::DumpGraph       - Dump the graph of config items as SVG to the file OTOBO_ITSM_Config_Items.svg. * Admin::ITSM::ConfigItem::ListDuplicates  - List ConfigItems which have a non-unique name. * Admin::ITSM::ConfigItem::UpgradeTo11     - Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated. * Maint::ITSM::ConfigItem::RebuildLinkTable - Rebuild the database table configitem_link from the dynamic fields of the type Reference. Only the fields linking config items are"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:271
@@ -517,7 +517,7 @@ msgid "Migration from OTOBO 10 / OTRS"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:288
-msgid "bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11     - Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated."
+msgid "bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11     - Upgrade the complete CMDB from OTOBO 10 to OTOBO 11. All config item definitions will be changed, for each config item attribute a dynamic field will be prepared and the data will be migrated."
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:293
@@ -875,7 +875,7 @@ msgid "UniqueCIName::EnableUniquenessCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:168
-msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
+msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:171

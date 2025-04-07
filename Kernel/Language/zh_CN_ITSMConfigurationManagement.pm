@@ -402,8 +402,8 @@ sub Data {
         '在服务人员界面启用配置项批量操作功能，可以一次处理多个配置项。';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         '只有列表中的组才有权限使用配置项批量操作功能。';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        '启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::Configitem::ListDuplicates 进行检查。';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::ConfigItem::ListDuplicates 进行检查。';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         '在工单-配置项的链接中设置配置项-状态的事件模块。';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

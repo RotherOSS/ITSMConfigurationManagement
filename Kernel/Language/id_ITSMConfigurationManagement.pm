@@ -402,8 +402,8 @@ sub Data {
         'Memungkinkan fitur item konfigurasi tindakan massal untuk agen frontend untuk bekerja pada lebih dari satu item konfigurasi pada suatu waktu.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Memungkinkan fitur tindakan massal item konfigurasi hanya untuk kelompok terdaftar.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Mengaktifkan/menonaktifkan fungsionalitas untuk memeriksa item konfigurasi ITSM untuk nama yang unik. Sebelum mengaktifkan opsi ini, Anda harus memeriksa sistem Anda untuk item konfigurasi yang sudah ada dengan nama ganda. Anda dapat melakukan ini dengan perintah konsol Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Mengaktifkan/menonaktifkan fungsionalitas untuk memeriksa item konfigurasi ITSM untuk nama yang unik. Sebelum mengaktifkan opsi ini, Anda harus memeriksa sistem Anda untuk item konfigurasi yang sudah ada dengan nama ganda. Anda dapat melakukan ini dengan perintah konsol Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modul peristiwa untuk mengatur status konfigurasi pada tautan konfigurasi tiket.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

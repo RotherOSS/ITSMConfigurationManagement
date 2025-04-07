@@ -402,8 +402,8 @@ sub Data {
         'Omogoča funkcijo množičnega delovanja za konfiguracijske elemente za sprednji del agenta, ki deluje na več kot enem konfiguracijskem elementu naenkrat.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Omogoči funkcijo množičnega delovanja konfiguracijskih elementov samo za navedene skupine.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov konfiguracije ITSM. Preden omogočite to možnost, morate preveriti svoj sistem za že obstoječe elemente konfiguracije s podvojenimi imeni. To lahko storite s konzolnim ukazom Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Omogoči/odklopi funkcionalnost preverjanja edinstvenih imen elementov konfiguracije ITSM. Preden omogočite to možnost, morate preveriti svoj sistem za že obstoječe elemente konfiguracije s podvojenimi imeni. To lahko storite s konzolnim ukazom Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modul dogodkov za nastavitev stanja konfiguracije na povezavi ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

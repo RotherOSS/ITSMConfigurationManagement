@@ -402,8 +402,8 @@ sub Data {
         'Maakt bulkactie voor configuratie-items mogelijk, zodat de agent frontend aan meer dan één configuratie-item tegelijk kan werken.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Schakelt de functie bulkactie voor configuratie-items alleen in voor de vermelde groepen.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Schakelt de functionaliteit in of uit om ITSM onfiguratie items te controleren op unieke namen. Voordat je deze optie inschakelt, moet je je systeem controleren op bestaande configuratie-items met dubbele namen. Je kunt dit doen met het console commando Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Schakelt de functionaliteit in of uit om ITSM onfiguratie items te controleren op unieke namen. Voordat je deze optie inschakelt, moet je je systeem controleren op bestaande configuratie-items met dubbele namen. Je kunt dit doen met het console commando Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Gebeurtenismodule om configitem-status in te stellen op ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

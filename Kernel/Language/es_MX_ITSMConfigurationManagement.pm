@@ -402,8 +402,8 @@ sub Data {
         'Activa la función de acción masiva de elementos de configuración para que el frontend del agente trabaje en más de un elemento de configuración a la vez.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Activa la función de acción masiva de elementos de configuración sólo para los grupos de la lista.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Activa/desactiva la funcionalidad de comprobar los elementos de configuración ITSM para nombres únicos. Antes de habilitar esta opción debe comprobar si existen elementos de configuración con nombres duplicados. Puede hacerlo con el comando de consola Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Activa/desactiva la funcionalidad de comprobar los elementos de configuración ITSM para nombres únicos. Antes de habilitar esta opción debe comprobar si existen elementos de configuración con nombres duplicados. Puede hacerlo con el comando de consola Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Módulo de eventos para establecer el estado del elemento de configuración en el ticket-configitem-enlace.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

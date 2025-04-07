@@ -402,8 +402,8 @@ sub Data {
         'Włącza funkcję masowej akcji elementu konfiguracji dla interfejsu agenta, aby pracować na więcej niż jednym elemencie konfiguracji naraz.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Włącza funkcję akcji zbiorczej elementu konfiguracji tylko dla wymienionych grup.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Włącza/wyłącza funkcję sprawdzania elementów konfiguracji ITSM pod kątem unikalnych nazw. Przed włączeniem tej opcji należy sprawdzić system pod kątem już istniejących elementów konfiguracji ze zduplikowanymi nazwami. Można to zrobić za pomocą polecenia konsoli Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Włącza/wyłącza funkcję sprawdzania elementów konfiguracji ITSM pod kątem unikalnych nazw. Przed włączeniem tej opcji należy sprawdzić system pod kątem już istniejących elementów konfiguracji ze zduplikowanymi nazwami. Można to zrobić za pomocą polecenia konsoli Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Moduł zdarzeń do ustawiania statusu elementu konfiguracji na ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

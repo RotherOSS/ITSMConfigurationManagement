@@ -402,8 +402,8 @@ sub Data {
         'Вмикає функцію масових дій з елементами конфігурації для інтерфейсу агента, що дозволяє працювати з декількома елементами конфігурації одночасно.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Вмикає функцію масових дій для елементів конфігурації лише для перелічених груп.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Дозволяє ввімкнути/вимкнути функцію перевірки елементів конфігурації ITSM на наявність унікальних імен. Перш ніж увімкнути цю опцію, вам слід перевірити систему на наявність елементів конфігурації з повторюваними іменами. Це можна зробити за допомогою консольної команди Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Дозволяє ввімкнути/вимкнути функцію перевірки елементів конфігурації ITSM на наявність унікальних імен. Перш ніж увімкнути цю опцію, вам слід перевірити систему на наявність елементів конфігурації з повторюваними іменами. Це можна зробити за допомогою консольної команди Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Модуль подій для встановлення configitem-status за посиланням ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

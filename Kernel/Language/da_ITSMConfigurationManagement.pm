@@ -402,8 +402,8 @@ sub Data {
         'Aktiverer funktionen til massehandling af konfigurationselementer, så agentens frontend kan arbejde på mere end ét konfigurationselement ad gangen.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Definerer de relevante implementeringstilstande, hvor tilknyttede tickets kan påvirke status for et CI.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Aktiverer/deaktiverer funktionen til at kontrollere ITSM-konfigurationselementer for unikke navne. Før du aktiverer denne mulighed, bør du tjekke dit system for allerede eksisterende konfigurationselementer med duplikatnavne. Det kan du gøre med konsolkommandoen Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Aktiverer/deaktiverer funktionen til at kontrollere ITSM-konfigurationselementer for unikke navne. Før du aktiverer denne mulighed, bør du tjekke dit system for allerede eksisterende konfigurationselementer med duplikatnavne. Det kan du gøre med konsolkommandoen Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Hændelsesmodul til at sætte configitem-status på ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

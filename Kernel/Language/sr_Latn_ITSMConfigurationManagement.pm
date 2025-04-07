@@ -402,7 +402,7 @@ sub Data {
         'Omogućava masovnu akciju na konfiguracionim stavkama u pristupnom sistemu operatera na više od jedne stavke istovremeno.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Aktivira svojstvo masovne akcije na konfigiracionim stavkama samo za izlistane grupe.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
         '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modul događaja za podešavanje statusa konfiguracionih stavki prilikom postavljanja veza.';

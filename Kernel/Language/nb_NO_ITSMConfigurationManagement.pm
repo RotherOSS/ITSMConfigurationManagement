@@ -402,8 +402,8 @@ sub Data {
         'Aktiverer funksjonen for massehandlinger for konfigurasjonselementer, slik at agentens frontend kan arbeide med mer enn ett konfigurasjonselement om gangen.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Aktiverer funksjonen for massehandling av konfigurasjonselementer bare for de oppførte gruppene.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Aktiverer/deaktiverer funksjonaliteten for å sjekke om ITSM-konfigurasjonselementer har unike navn. Før du aktiverer dette alternativet, bør du sjekke systemet for allerede eksisterende konfigurasjonselementer med dupliserte navn. Du kan gjøre dette med konsollkommandoen Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Aktiverer/deaktiverer funksjonaliteten for å sjekke om ITSM-konfigurasjonselementer har unike navn. Før du aktiverer dette alternativet, bør du sjekke systemet for allerede eksisterende konfigurasjonselementer med dupliserte navn. Du kan gjøre dette med konsollkommandoen Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Hendelsesmodul for å angi configitem-status på ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

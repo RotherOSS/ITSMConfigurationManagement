@@ -402,8 +402,8 @@ sub Data {
         'Povoluje funkci hromadné akce konfigurační položky pro frontend agenta, aby bylo možné pracovat s více než jednou konfigurační položkou najednou.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Povolí funkci hromadné akce konfigurační položky pouze pro uvedené skupiny.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Povoluje/zakazuje funkci kontroly jedinečných názvů položek konfigurace ITSM. Před povolením této možnosti byste měli zkontrolovat systém, zda již neexistují konfigurační položky s duplicitními názvy. To můžete provést pomocí konzolového příkazu Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Povoluje/zakazuje funkci kontroly jedinečných názvů položek konfigurace ITSM. Před povolením této možnosti byste měli zkontrolovat systém, zda již neexistují konfigurační položky s duplicitními názvy. To můžete provést pomocí konzolového příkazu Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modul událostí pro nastavení configitem-status na ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

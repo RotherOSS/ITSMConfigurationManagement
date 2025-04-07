@@ -402,8 +402,8 @@ sub Data {
         '상담원 프런트엔드에서 한 번에 두 개 이상의 구성 항목에 대해 작업할 수 있도록 구성 항목 일괄 작업 기능을 사용 설정합니다.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         '나열된 그룹에 대해서만 구성 항목 일괄 작업 기능을 활성화합니다.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        '고유한 이름이 있는지 ITSM 구성 항목을 확인하는 기능을 사용/사용 안 함으로 설정합니다. 이 옵션을 사용 설정하기 전에 시스템에 이미 존재하는 구성 항목에 중복된 이름이 있는지 확인해야 합니다. 이 작업은 콘솔 명령인 Admin::ITSM::Configitem::ListDuplicates를 사용하여 수행할 수 있습니다.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '고유한 이름이 있는지 ITSM 구성 항목을 확인하는 기능을 사용/사용 안 함으로 설정합니다. 이 옵션을 사용 설정하기 전에 시스템에 이미 존재하는 구성 항목에 중복된 이름이 있는지 확인해야 합니다. 이 작업은 콘솔 명령인 Admin::ITSM::ConfigItem::ListDuplicates를 사용하여 수행할 수 있습니다.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         '이벤트 모듈을 사용하여 티켓-configitem-link에서 configitem-status를 설정합니다.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

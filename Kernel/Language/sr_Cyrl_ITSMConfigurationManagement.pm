@@ -402,7 +402,7 @@ sub Data {
         'Омогућава масовну акцију на конфигурационим ставкама у приступном систему оператера на више од једне ставке истовремено.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Активира својство масовне акције на конфигирационим ставкама само за излистане групе.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
         '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Модул догађаја за подешавање статуса конфигурационих ставки приликом постављања веза.';
