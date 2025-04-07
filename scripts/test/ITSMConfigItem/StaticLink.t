@@ -121,6 +121,7 @@ my @LinkTypes = keys %PossibleTypesList;
 for my $LinkType (@LinkTypes) {
 
     subtest "Test Static DF References for LinkType='$LinkType'" => sub {
+
         # create DF similar to Location-ReferenceToCountry
         # but with LinkReferencingType => Static and
         # ReferencedObjectType => ITSMConfigItemVersion
@@ -142,14 +143,14 @@ for my $LinkType (@LinkTypes) {
         # create TestLocation1
         my $TestLocation1ID = $ConfigItemObject->ConfigItemAdd(
             ClassID     => $CountryClassID,
-            Name        => 'WellblechsHausen' .$LinkType. $RandomID,
+            Name        => 'WellblechsHausen' . $LinkType . $RandomID,
             DeplStateID => $DeploymentStateProductionID,
             InciStateID => $IncidientStateOperationalID,
             Description => 'ABCD',
             UserID      => $UserID,
         );
-        $CountryLookup{$TestLocation1ID} = 'WellblechsHausen' . $LinkType.$RandomID;
-        ok( $TestLocation1ID, "TestLocation1 '".$CountryLookup{$TestLocation1ID} ."' ($TestLocation1ID) created." );
+        $CountryLookup{$TestLocation1ID} = 'WellblechsHausen' . $LinkType . $RandomID;
+        ok( $TestLocation1ID, "TestLocation1 '" . $CountryLookup{$TestLocation1ID} . "' ($TestLocation1ID) created." );
 
         subtest "Assert there is 1 version of TestLocation1 ID $TestLocation1ID" => sub {
             _AssertLocationVersion(
@@ -168,7 +169,7 @@ for my $LinkType (@LinkTypes) {
         # create a test subsidiary with a link to testlocation1 v1
         my $TestSubsidiaryID = $ConfigItemObject->ConfigItemAdd(
             ClassID                                                                    => $SubsidiaryClassID,
-            Name                                                                       => 'DerBauernhof' . $LinkType.$RandomID,
+            Name                                                                       => 'DerBauernhof' . $LinkType . $RandomID,
             DeplStateID                                                                => $DeploymentStateProductionID,
             InciStateID                                                                => $IncidientStateOperationalID,
             Description                                                                => 'ABCD',
@@ -177,15 +178,15 @@ for my $LinkType (@LinkTypes) {
                 $TestLocationFirstVersionID
             ],
         );
-        $SubsidiaryLookup{$TestSubsidiaryID} = 'DerBauernhof' .$LinkType.$RandomID;
+        $SubsidiaryLookup{$TestSubsidiaryID} = 'DerBauernhof' . $LinkType . $RandomID;
         ok(
             $TestSubsidiaryID,
-            "TestSubsidiary".$SubsidiaryLookup{$TestSubsidiaryID}." ($TestSubsidiaryID) with static link to ".$CountryLookup{$TestLocation1ID}." created."
+            "TestSubsidiary" . $SubsidiaryLookup{$TestSubsidiaryID} . " ($TestSubsidiaryID) with static link to " . $CountryLookup{$TestLocation1ID} . " created."
         );
 
         $ConfigItemObject->EventHandlerTransaction();
 
-        subtest "Assert Subsidiary has 1 version that points to '".$CountryLookup{$TestLocation1ID}."'" => sub {
+        subtest "Assert Subsidiary has 1 version that points to '" . $CountryLookup{$TestLocation1ID} . "'" => sub {
             _AssertSubsidiaryVersionsAndLocation(
                 LinkType     => $LinkType,
                 Direction    => 'Source',
@@ -220,7 +221,7 @@ for my $LinkType (@LinkTypes) {
             _AssertLocationVersion(
                 LocationID => $TestLocation1ID,
                 Versions   => [
-                    [ "WellblechsHausen$LinkType$RandomID"     => 1 ],
+                    [ "WellblechsHausen$LinkType$RandomID"    => 1 ],
                     [ "Niederkaltenkirchen$LinkType$RandomID" => 2 ],
                 ]
             );
@@ -232,7 +233,7 @@ for my $LinkType (@LinkTypes) {
         # points to static Location v1
         ###############################
 
-        subtest "Assert Subsidiary *still* has 1 version and *still* points to '".$CountryLookup{$TestLocation1ID}."'" => sub {
+        subtest "Assert Subsidiary *still* has 1 version and *still* points to '" . $CountryLookup{$TestLocation1ID} . "'" => sub {
             _AssertSubsidiaryVersionsAndLocation(
                 LinkType     => $LinkType,
                 Direction    => 'Source',
@@ -244,14 +245,14 @@ for my $LinkType (@LinkTypes) {
         # create TestLocation2
         my $TestLocation2ID = $ConfigItemObject->ConfigItemAdd(
             ClassID     => $CountryClassID,
-            Name        => 'Tuntenhausen' .$LinkType.$RandomID,
+            Name        => 'Tuntenhausen' . $LinkType . $RandomID,
             DeplStateID => $DeploymentStateProductionID,
             InciStateID => $IncidientStateOperationalID,
             Description => 'ABCD',
             UserID      => $UserID,
         );
-        $CountryLookup{$TestLocation2ID} = 'Tuntenhausen' .$LinkType.$RandomID;
-        ok( $TestLocation2ID, "TestLocation2 '".$CountryLookup{$TestLocation2ID}."'created." );
+        $CountryLookup{$TestLocation2ID} = 'Tuntenhausen' . $LinkType . $RandomID;
+        ok( $TestLocation2ID, "TestLocation2 '" . $CountryLookup{$TestLocation2ID} . "'created." );
         $ConfigItemObject->EventHandlerTransaction();
 
         subtest "Assert there is one version of TestLocation2 $TestLocation2ID after creation" => sub {
@@ -282,7 +283,7 @@ for my $LinkType (@LinkTypes) {
         );
         $ConfigItemObject->EventHandlerTransaction();
 
-        subtest "Assert Subsidiary has 1 version and now points to '".$CountryLookup{$TestLocation2ID}."'" => sub {
+        subtest "Assert Subsidiary has 1 version and now points to '" . $CountryLookup{$TestLocation2ID} . "'" => sub {
 
             _AssertSubsidiaryVersionsAndLocation(
                 LinkType     => $LinkType,
