@@ -1502,8 +1502,8 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "在代理界面的配置项搜索屏幕中显示的动态字段。"
 
 #. SysConfig
-msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr "启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::Configitem::ListDuplicates 进行检查。"
+msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
+msgstr "启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是否存在名称重复的配置项。您可以使用控制台命令 Admin::ITSM::ConfigItem::ListDuplicates 进行检查。"
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."

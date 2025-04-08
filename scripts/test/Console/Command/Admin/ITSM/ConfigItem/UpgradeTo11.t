@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -29,7 +29,7 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
 # TODO: test the command
-#my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11');
+#my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::ConfigItem::UpgradeTo11');
 
 # get helper object, database changes should be restored
 $Kernel::OM->ObjectParamAdd(
@@ -43,7 +43,7 @@ my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');    ## no crit
 #is(
 #    $ExitCode,
 #    1,
-#    "Admin::ITSM::Configitem::UpgradeTo11 exit code without options",
+#    "Admin::ITSM::ConfigItem::UpgradeTo11 exit code without options",
 #);
 
 my $DBObject = $Kernel::OM->Get('Kernel::System::DB');

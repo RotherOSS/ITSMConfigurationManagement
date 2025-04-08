@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -58,7 +58,7 @@ my @Tests = (
     {
         Name   => 'Missing ClasssID',
         Config => {
-            Definition => << 'EOF',
+            Definition => <<'EOF',
 ---
 - Pages:
   - Content:
@@ -89,7 +89,7 @@ EOF
         Name   => 'Missing UserID',
         Config => {
             ClassID    => $ClassID,
-            Definition => << 'EOF',
+            Definition => <<'EOF',
 ---
 - Pages:
   - Content:
@@ -111,7 +111,7 @@ EOF
         Name   => 'Wrong Definition (Legacy Perl)',
         Config => {
             ClassID    => $ClassID,
-            Definition => << 'EOF',
+            Definition => <<'EOF',
 [
 {
         Pages  => [
@@ -146,7 +146,7 @@ EOF
         Name   => 'Wrong Definition (Invalid YAML)',
         Config => {
             ClassID    => $ClassID,
-            Definition => << 'EOF',
+            Definition => <<'EOF',
 ---
 - Pages:
   - Content:
@@ -169,7 +169,7 @@ EOF
         Name   => 'Correct YAML',
         Config => {
             ClassID    => $ClassID,
-            Definition => << 'EOF',
+            Definition => <<'EOF',
 ---
 Pages:
   - Name: Page1

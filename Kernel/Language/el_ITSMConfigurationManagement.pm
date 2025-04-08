@@ -402,8 +402,8 @@ sub Data {
         'Ενεργοποιεί τη δυνατότητα μαζικής δράσης στοιχείων διαμόρφωσης για το frontend του πράκτορα ώστε να εργάζεται σε περισσότερα από ένα στοιχεία διαμόρφωσης ταυτόχρονα.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Η κατάσταση ανάπτυξης αυτού του στοιχείου διαμόρφωσης';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των στοιχείων παραμέτρων ITSM για μοναδικά ονόματα. Πριν ενεργοποιήσετε αυτήν την επιλογή, θα πρέπει να ελέγξετε το σύστημά σας για ήδη υπάρχοντα στοιχεία διαμόρφωσης με διπλά ονόματα. Μπορείτε να το κάνετε αυτό με την εντολή της κονσόλας Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Ενεργοποιεί/απενεργοποιεί τη λειτουργία ελέγχου των στοιχείων παραμέτρων ITSM για μοναδικά ονόματα. Πριν ενεργοποιήσετε αυτήν την επιλογή, θα πρέπει να ελέγξετε το σύστημά σας για ήδη υπάρχοντα στοιχεία διαμόρφωσης με διπλά ονόματα. Μπορείτε να το κάνετε αυτό με την εντολή της κονσόλας Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Ενότητα συμβάντος για να ορίσετε την κατάσταση του στοιχείου παραμετροποίησης στο σύνδεσμο ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::ListDuplicates;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::ListDuplicates;
 
 use v5.24;
 use strict;
@@ -114,11 +114,11 @@ sub Run {
         $Self->{SearchCriteria}->{DeplStateIDs} = [ keys $StateList->%* ];
     }
 
-    # get ITSMConfigitem object
-    my $ITSMConfigitemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    # get ITSMConfigItem object
+    my $ITSMConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     # get all config items ids
-    my @ConfigItemIDs = $ITSMConfigitemObject->ConfigItemSearch(
+    my @ConfigItemIDs = $ITSMConfigItemObject->ConfigItemSearch(
         $Self->{SearchCriteria}->%*,
         Result => 'ARRAY',
     );
@@ -158,7 +158,7 @@ sub Run {
         for my $ConfigItemID (@ConfigItemIDs) {
 
             # get the latest version of this config item
-            my $Version = $ITSMConfigitemObject->ConfigItemGet(
+            my $Version = $ITSMConfigItemObject->ConfigItemGet(
                 ConfigItemID  => $ConfigItemID,
                 DynamicFields => 1,
             );
@@ -171,7 +171,7 @@ sub Run {
                 next CONFIG_ITEM_ID;
             }
 
-            my $Duplicates = $ITSMConfigitemObject->UniqueNameCheck(
+            my $Duplicates = $ITSMConfigItemObject->UniqueNameCheck(
                 ConfigItemID => $ConfigItemID,
                 ClassID      => $Version->{ClassID},
                 Name         => $Version->{Name}
@@ -182,7 +182,7 @@ sub Run {
                 $DuplicatesFound = 1;
 
                 my @DuplicateData =
-                    map { $ITSMConfigitemObject->ConfigItemGet( ConfigItemID => $_ ) }
+                    map { $ITSMConfigItemObject->ConfigItemGet( ConfigItemID => $_ ) }
                     $Duplicates->@*;
 
                 $Self->Print(

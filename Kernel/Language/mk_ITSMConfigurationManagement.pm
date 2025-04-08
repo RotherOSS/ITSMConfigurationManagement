@@ -402,7 +402,7 @@ sub Data {
         'Овозможува конфигурациски член bulk action карактеристики за агент предендел за да работи со повење од ефен конфигурациски член во исто врме.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Овозможува конфигурациски член bulk action карактеристики само за групните листи.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
         '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         '';

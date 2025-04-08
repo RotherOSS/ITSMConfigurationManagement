@@ -1,7 +1,7 @@
 Migration from OTOBO 10 / OTRS
 ------------------------------
 
-**bin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11**
+**bin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11**
 
 This command upgrades the entire Configuration Management Database (CMDB) from OTOBO 10 to OTOBO 11. During the process, all Configuration Item definitions will be updated, a dynamic field will be created for each Configuration Item attribute, and the data will be migrated.
 

@@ -937,7 +937,7 @@ msgstr ""
 "الصلب::1::السعة::1، الكمبيوتر: القرص الصلب::2، الكمبيوتر: القرص الصلب::2: "
 "السعة::1. إذا لم يكن هناك إدخال لفئة CI، فسيتم عرض الأعمدة الافتراضية كما هو "
 "محدد في الإعداد AgentCustomerInformationCenter::Backend#0060-CIC-ITSMC-"
-"ITSMConfigitemItemCustomerCompany (المفتاح DefaultColumns)."
+"ITSMConfigItemItemCustomerCompany (المفتاح DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
@@ -1695,12 +1695,12 @@ msgstr ""
 "الحقول الديناميكية التي تظهر في شاشة البحث عن عنصر التكوين في واجهة الوكيل."
 
 #. SysConfig
-msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
+msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr ""
 "تمكين/تعطيل وظيفة التحقق من عناصر تكوين ITSM بحثاً عن أسماء فريدة. قبل تمكين "
 "هذا الخيار، يجب عليك التحقق من النظام الخاص بك بحثًا عن عناصر التكوين "
 "الموجودة بالفعل ذات الأسماء المكررة. يمكنك القيام بذلك باستخدام أمر وحدة "
-"التحكم Admin::ITSM::Configitem::ListDuplicates."
+"التحكم Admin::ITSM::ConfigItem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."

@@ -1503,8 +1503,8 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "Dinamiskie lauki, kas redzami aģenta saskarnes konfigurācijas elementu meklēšanas ekrānā."
 
 #. SysConfig
-msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates."
-msgstr "Ieslēdz/izslēdz funkcionalitāti, lai pārbaudītu ITSM konfigurācijas elementu unikālos nosaukumus. Pirms šīs opcijas ieslēgšanas jāpārbauda, vai jūsu sistēmā nav jau esošu konfigurācijas elementu ar dublējošiem nosaukumiem. To var izdarīt ar konsoles komandu Admin::ITSM::Configitem::ListDuplicates."
+msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
+msgstr "Ieslēdz/izslēdz funkcionalitāti, lai pārbaudītu ITSM konfigurācijas elementu unikālos nosaukumus. Pirms šīs opcijas ieslēgšanas jāpārbauda, vai jūsu sistēmā nav jau esošu konfigurācijas elementu ar dublējošiem nosaukumiem. To var izdarīt ar konsoles komandu Admin::ITSM::ConfigItem::ListDuplicates."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."

@@ -402,8 +402,8 @@ sub Data {
         '担当者フロントエンドが一度に複数の設定項目で機能するように設定項目一括操作機能を有効にします。';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'リストされたグループの構成アイテム一括処理機能のみを有効にします。';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'ITSMの設定項目が一意な名前であるかどうかをチェックする機能の有効/無効を設定します。このオプションを有効にする前に、重複した名前を持つ既存の設定項目がないかシステムをチェックする必要があります。これは、コンソールコマンド Admin::ITSM::Configitem::ListDuplicates で実行できます。';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'ITSMの設定項目が一意な名前であるかどうかをチェックする機能の有効/無効を設定します。このオプションを有効にする前に、重複した名前を持つ既存の設定項目がないかシステムをチェックする必要があります。これは、コンソールコマンド Admin::ITSM::ConfigItem::ListDuplicates で実行できます。';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'チケット構成アイテムのリンクに構成アイテムのステータスを設定するイベントモジュール';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

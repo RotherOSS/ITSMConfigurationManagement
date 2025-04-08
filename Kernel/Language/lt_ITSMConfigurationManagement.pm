@@ -402,8 +402,8 @@ sub Data {
         'Įjungiama konfigūracijos elemento masinio veiksmo funkcija, kad agento priekinėje dalyje vienu metu būtų galima dirbti su daugiau nei vienu konfigūracijos elementu.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Įjungiama konfigūracijos elemento masinio veiksmo funkcija tik išvardytoms grupėms.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::Configitem::ListDuplicates.'} =
-        'Įjungiama / išjungiama funkcija, skirta patikrinti ITSM konfigūracijos elementų unikalius pavadinimus. Prieš įjungdami šią parinktį, turėtumėte patikrinti, ar jūsų sistemoje nėra jau esamų konfigūracijos elementų su pasikartojančiais pavadinimais. Tai galite padaryti naudodami konsolės komandą Admin::ITSM::Configitem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        'Įjungiama / išjungiama funkcija, skirta patikrinti ITSM konfigūracijos elementų unikalius pavadinimus. Prieš įjungdami šią parinktį, turėtumėte patikrinti, ar jūsų sistemoje nėra jau esamų konfigūracijos elementų su pasikartojančiais pavadinimais. Tai galite padaryti naudodami konsolės komandą Admin::ITSM::ConfigItem::ListDuplicates.';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Įvykių modulis, skirtas nustatyti "ticket-configitem-link" konfigūracijos elemento būseną.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =

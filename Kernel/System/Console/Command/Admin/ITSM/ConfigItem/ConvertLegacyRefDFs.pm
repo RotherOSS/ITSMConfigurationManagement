@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::ConvertLegacyRefDFs;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::ConvertLegacyRefDFs;
 
 use strict;
 use warnings;

@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11;
+package Kernel::System::Console::Command::Admin::ITSM::ConfigItem::UpgradeTo11;
 
 use v5.24;
 use strict;
@@ -56,11 +56,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::Console::Command::Admin::ITSM::Configitem::UpgradeTo11 - support for upgrading the CMDB
+Kernel::System::Console::Command::Admin::ITSM::ConfigItem::UpgradeTo11 - support for upgrading the CMDB
 
 =head1 DESCRIPTION
 
-Module for the console command C<Admin::ITSM::Configitem::UpgradeTo11>.
+Module for the console command C<Admin::ITSM::ConfigItem::UpgradeTo11>.
 
 =head1 PUBLIC INTERFACE
 
@@ -1502,7 +1502,7 @@ sub _ContinueOrNot {
     $Self->Print(
         "<yellow>Done.\n\nYou can pause here to review and possibly alter the suggestions by inspecting and changing the files. Calling the script again later should automatically resume at the right step, you can manually enforce this by calling via:</yellow>\n"
     );
-    $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::Configitem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
+    $Self->Print( "\tbin/otobo.Console.pl Admin::ITSM::ConfigItem::UpgradeTo11 --start-at " . ( $Param{CurrentStep} + 1 ) . "\n" );
     $Self->Print(
         "\n<yellow>To finish the script now, just press enter. To directly continue with the default suggestions without review write 'def'.</yellow>\n\t"
     );

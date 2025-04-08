@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -27,7 +27,7 @@ use Test2::V0;
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 
-my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::Configitem::Delete');
+my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::ITSM::ConfigItem::Delete');
 
 # get helper object, database changes should be restored
 $Kernel::OM->ObjectParamAdd(
@@ -44,7 +44,7 @@ my $ExitCode = $CommandObject->Execute;
 is(
     $ExitCode,
     1,
-    "Admin::ITSM::Configitem::Delete exit code without options",
+    "Admin::ITSM::ConfigItem::Delete exit code without options",
 );
 
 # check command with option --all and argument --accept n ( cancel deleting all config item)
