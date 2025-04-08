@@ -293,7 +293,7 @@ sub Run {
                 if ( defined $SearchParameter ) {
 
                     # append search params to links
-                    if ( IsArrayRefWithData( $SearchParameter->{Parameter}{Equals} ) ) {
+                    if ( ref $SearchParameter->{Parameter}{Equals} eq 'ARRAY' ) {
                         $LinkPage .= join(
                             '',
                             map { ";Search_DynamicField_$DynamicFieldConfig->{Name}=" . $LayoutObject->Ascii2Html( Text => $_ ) } $SearchParameter->{Parameter}{Equals}->@*
