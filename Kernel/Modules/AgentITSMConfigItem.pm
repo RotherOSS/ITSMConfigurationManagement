@@ -94,15 +94,19 @@ sub Run {
     # get general catalog object
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
     # get class list
     my $CategoryList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class::Category',
     );
-    my %ReverseCategoryList = reverse $CategoryList->%*;
-    my $DefaultCategory     = $Config->{DefaultCategory};
+    my %TranslatedCategoryList = map { ( $_ => $LayoutObject->{LanguageObject}->Translate( $CategoryList->{$_} ) ) } keys $CategoryList->%*;
+    my %ReverseCategoryList    = reverse %TranslatedCategoryList;
+    my $DefaultCategory        = $Config->{DefaultCategory};
     my $DefaultCategoryID;
-    if ( $DefaultCategory && $ReverseCategoryList{$DefaultCategory} ) {
-        $DefaultCategoryID = $ReverseCategoryList{ $Config->{DefaultCategory} };
+    if ( $DefaultCategory && $ReverseCategoryList{ $LayoutObject->{LanguageObject}->Translate($DefaultCategory) } ) {
+        $DefaultCategoryID = $ReverseCategoryList{ $LayoutObject->{LanguageObject}->Translate( $Config->{DefaultCategory} ) };
         $CategoryFilter ||= $DefaultCategoryID;
     }
 
@@ -181,9 +185,6 @@ sub Run {
         $Refresh = 60 * $Self->{UserRefreshTime};
     }
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
     my $Output;
     if ( $Self->{Subaction} ne 'AJAXFilterUpdate' ) {
         $Output = $LayoutObject->Header(
@@ -196,6 +197,7 @@ sub Run {
     my $ClassList = $GeneralCatalogObject->ItemList(
         Class => 'ITSM::ConfigItem::Class',
     );
+    my %TranslatedClassList = map { ( $_ => $LayoutObject->{LanguageObject}->Translate( $ClassList->{$_} ) ) } keys $ClassList->%*;
 
     # get possible deployment state list for config items to be shown
     my $StateList = $GeneralCatalogObject->ItemList(
@@ -248,7 +250,7 @@ sub Run {
     my %Category2ClassID;
 
     CLASSID:
-    for my $ClassID ( sort { $ClassList->{$a} cmp $ClassList->{$b} } keys $ClassList->%* ) {
+    for my $ClassID ( sort { $TranslatedClassList{$a} cmp $TranslatedClassList{$b} } keys %TranslatedClassList ) {
 
         # show menu link only if user has access rights
         my $HasAccess = $ConfigItemObject->Permission(
@@ -268,7 +270,7 @@ sub Run {
         next CLASSID if !IsArrayRefWithData( $ClassPreferences{Categories} );
 
         for my $Category ( $ClassPreferences{Categories}->@* ) {
-            my $CategoryID = $ReverseCategoryList{$Category};
+            my $CategoryID = $ReverseCategoryList{ $LayoutObject->{LanguageObject}->Translate($Category) };
             push @{ $Category2ClassID{$CategoryID} }, $ClassID;
         }
     }
@@ -276,12 +278,12 @@ sub Run {
     # order the category filters and - if not yet set - select the categpry shown
     my %CategoryFilters;
     {
-        my @SortedCategories = sort keys %Category2ClassID;
+        my @SortedCategories = sort { $TranslatedCategoryList{$a} cmp $TranslatedCategoryList{$b} } keys %Category2ClassID;
 
         my $Prio = 2;
         %CategoryFilters = map {
             $_ => {
-                Name => $CategoryList->{$_},
+                Name => $TranslatedCategoryList{$_},
                 Prio => $Prio++,
             }
         } @SortedCategories;
@@ -297,7 +299,7 @@ sub Run {
     if ($CategoryFilter) {
 
         my $Prio = 2;
-        for my $ClassID ( $Category2ClassID{$CategoryFilter}->@* ) {
+        for my $ClassID ( sort { $TranslatedClassList{$a} cmp $TranslatedClassList{$b} } $Category2ClassID{$CategoryFilter}->@* ) {
             my $CountClass = $ConfigItemObject->ConfigItemSearch(
                 %ColumnFilter,
                 ClassIDs     => [$ClassID],
@@ -313,7 +315,7 @@ sub Run {
 
             # add filter with params for the search method
             $Filters{$ClassID} = {
-                Name   => $ClassList->{$ClassID},
+                Name   => $TranslatedClassList{$ClassID},
                 Prio   => $Prio++,
                 Count  => $CountClass,
                 Search => {
@@ -334,7 +336,7 @@ sub Run {
     }
     else {
         $Filters{All} = {
-            Name   => 'All',
+            Name   => $LayoutObject->{LanguageObject}->Translate('All'),
             Prio   => 1,
             Count  => $CountTotal,
             Search => {
