@@ -84,11 +84,6 @@
 [% RenderBlockEnd("Versions") %]
             </div>
 [% Data.DynamicFieldHTML %]
-[% RenderBlockStart("LinkTableComplex") %]
-            <div class="Content">
-                [% Data.LinkTableStrg %]
-            </div>
-[% RenderBlockEnd("LinkTableComplex") %]
         </div>
         <div class="Clear"></div>
     </div>
