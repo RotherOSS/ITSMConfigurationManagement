@@ -42,16 +42,17 @@
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
-            <div class="Content">
 # RotherOSS / ITSMConfigurationManagement
+            <div class="Content">
                 <fieldset class="TableLike">
                     <label for="ObjectSelection">[% Translate("Object Type") | html %]:</label>
                     <div class="Field">
                         [% Data.ObjectTypeSelectionStrg %]
                     </div>
                 </fieldset>
-                <div class="Clear"></div>
+            </div>
 # EO ITSMConfigurationManagement
+            <div class="Content">
                 <ul class="ActionList">
                     <li>
 # RotherOSS / ITSMConfigurationManagement
