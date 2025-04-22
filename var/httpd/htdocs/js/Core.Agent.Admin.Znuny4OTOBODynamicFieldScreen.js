@@ -73,9 +73,7 @@ Core.Agent.Admin.Znuny4OTOBODynamicFieldScreen = (function (TargetNS) {
         $( "#DynamicFieldSelectedObjectType" ).change(function() {
             let ObjectTypeFilter = $("#DynamicFieldSelectedObjectType").val();
             let URL = Core.Config.Get('Baselink') + 'Action=AdminDynamicFieldScreen';
-            if ( ObjectTypeFilter ) {
-                URL += ';SelectedObjectType=' + encodeURIComponent(ObjectTypeFilter);
-            }
+            URL += ';SelectedObjectType=' + encodeURIComponent(ObjectTypeFilter);
             window.location = URL;
         });
 // EO ITSMConfigurationManagement
