@@ -37,7 +37,7 @@
 # Rother OSS / ITSMConfigurationManagement
 [% RenderBlockStart("DynamicFieldObjectType") %]
             <div class="Content">
-                [% Data.DynamicFieldObjectStrg %]
+                [% Data.DynamicFieldObjectTypeStrg %]
                 <div class="FieldExplanation">
                     <p>[% Translate("Filter by object type") | html %]</p>
                 </div>

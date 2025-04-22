@@ -70,11 +70,11 @@ Core.Agent.Admin.Znuny4OTOBODynamicFieldScreen = (function (TargetNS) {
         });
 
 // Rother OSS / ITSMConfigurationManagement
-        $( "#DynamicFieldObjectType" ).change(function() {
-            let ObjectTypeFilter = $("#DynamicFieldObjectType").val();
+        $( "#DynamicFieldSelectedObjectType" ).change(function() {
+            let ObjectTypeFilter = $("#DynamicFieldSelectedObjectType").val();
             let URL = Core.Config.Get('Baselink') + 'Action=AdminDynamicFieldScreen';
             if ( ObjectTypeFilter ) {
-                URL += ';ObjectTypeFilter=' + encodeURIComponent(ObjectTypeFilter);
+                URL += ';SelectedObjectType=' + encodeURIComponent(ObjectTypeFilter);
             }
             window.location = URL;
         });
