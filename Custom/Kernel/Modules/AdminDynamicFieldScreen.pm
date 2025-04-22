@@ -42,12 +42,49 @@ sub new {
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $ZnunyHelperObject  = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 
+# Rother OSS / ITSMConfigurationManagement
+    # set pref for selected object type key
+    $Self->{PrefKeySelectedObjectType} = 'SelectedObjectType' . '-' . $Self->{Action};
+
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    $Self->{SelectedObjectType} = $Preferences{ $Self->{PrefKeySelectedObjectType} } || '';
+
+    # fetch selected object type from frontend and see if change is needed
+    my $SelectedObjectType = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'SelectedObjectType' );
+    if (defined $SelectedObjectType) {
+
+        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => $Self->{PrefKeySelectedObjectType},
+            Value  => $SelectedObjectType,
+        );
+
+        $Self->{SelectedObjectType} = $SelectedObjectType;
+    }
+    my @ObjectTypesFilter;
+    if ($Self->{SelectedObjectType} eq 'Ticket') {
+        push @ObjectTypesFilter, qw(Ticket Article);
+    }
+    elsif ($Self->{SelectedObjectType} eq 'ITSMConfigItem') {
+        push @ObjectTypesFilter, qw(ITSMConfigItem);
+    }
+# EO ITSMConfigurationManagement
+
     my $DynamicFields = $DynamicFieldObject->GetValidDynamicFields(
-        ObjectType => [ 'Ticket', 'Article' ],
+# Rother OSS / ITSMConfigurationManagement
+#         ObjectType => [ 'Ticket', 'Article' ],
+        ObjectType => \@ObjectTypesFilter,
+# EO ITSMConfigurationManagement
     );
     $Self->{DynamicFields} = $DynamicFields;
 
     my $ValidDynamicFieldScreenList = $ZnunyHelperObject->_ValidDynamicFieldScreenListGet(
+# Rother OSS / ITSMConfigurationManagement
+        ObjectType => \@ObjectTypesFilter,
+# EO ITSMConfigurationManagement
         Result => 'HASH',
     );
 
@@ -280,6 +317,28 @@ sub _ShowOverview {
 
     # show output
     $LayoutObject->Block( Name => 'Overview' );
+
+# Rother OSS / ITSMConfigurationManagement
+    # show object type selection
+    my $DynamicFieldObjectTypeStrg = $LayoutObject->BuildSelection(
+        Name          => 'DynamicFieldSelectedObjectType',
+        Data          => {
+            Ticket         => 'Ticket',
+            ITSMConfigItem => 'ITSM ConfigItem',
+        },
+        PossibleNone  => 1,
+        Translation   => 0,
+        SelectedValue => $Self->{SelectedObjectType},
+        Class         => 'Modernize W75pc',
+    );
+
+    $LayoutObject->Block(
+        Name => 'DynamicFieldObjectType',
+        Data => {
+            DynamicFieldObjectTypeStrg => $DynamicFieldObjectTypeStrg,
+        }
+    );
+# EO ITSMConfigurationManagement
 
     for my $DynamicFieldScreen ( sort { $DynamicFieldScreens{$a} cmp $DynamicFieldScreens{$b} } keys %DynamicFieldScreens ) {
 
