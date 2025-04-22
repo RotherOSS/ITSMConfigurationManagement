@@ -83,7 +83,7 @@ sub new {
 
     my $ValidDynamicFieldScreenList = $ZnunyHelperObject->_ValidDynamicFieldScreenListGet(
 # Rother OSS / ITSMConfigurationManagement
-        ObjectType => \@ObjectTypesFilter,
+        ObjectType => $Self->{SelectedObjectType},
 # EO ITSMConfigurationManagement
         Result => 'HASH',
     );
@@ -328,7 +328,7 @@ sub _ShowOverview {
         },
         PossibleNone  => 1,
         Translation   => 0,
-        SelectedValue => $Self->{SelectedObjectType},
+        SelectedID    => $Self->{SelectedObjectType},
         Class         => 'Modernize W75pc',
     );
 
