@@ -210,7 +210,7 @@ sub PrepareRequest {
         }
 
         # if the DeploymentState is changed, check if the ticket has to be created or deleted in ES
-        if ( defined $ExcludedDeplStates && $Param{Data}{Event} eq 'VersionCreate' ) {
+        if ( defined $ExcludedDeplStates && $Param{Data}{Event} =~ /VersionCreate|VersionUpdate|DeploymentStateUpdate/ ) {
 
             # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
             if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
@@ -413,58 +413,34 @@ sub PrepareRequest {
 
     # prepare request
     my %Content;
-    if ( $Param{Data}{Event} eq 'ConfigItemCreate' ) {
+    my $GetDynamicFields = ( IsArrayRefWithData( $Search->{DynamicField} ) || IsArrayRefWithData( $Store->{DynamicField} ) ) ? 1 : 0;
+    my $Version          = $ConfigItemObject->ConfigItemGet(
+        ConfigItemID  => $Param{Data}{ConfigItemID},
+        DynamicFields => 1,
+    );
 
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $Param{Data}{ConfigItemID},
-            DynamicFields => 0,
-        );
-        %Content = ( map { $_ => $ConfigItem->{$_} } keys %DataToStore );
-        $Content{Attachments} = [];
-
-        return {
-            Success => 1,
-            Data    => {
-                docapi => $API,
-                id     => $Param{Data}{ConfigItemID},
-                %Content,
-            },
-        };
-    }
-    else {
-        my $GetDynamicFields = ( IsArrayRefWithData( $Search->{DynamicField} ) || IsArrayRefWithData( $Store->{DynamicField} ) ) ? 1 : 0;
-        my $Version          = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $Param{Data}{ConfigItemID},
-            DynamicFields => 1,
-        );
-
-        # iterate over dynamic fields and replace value with DisplayValueRender result
-        if ($GetDynamicFields) {
-            DYNAMICFIELD:
-            for my $DFName ( grep { $DataToStore{$_} && $_ =~ /^DynamicField_/ } keys %DataToStore ) {
-                my $DFNameShort = substr $DFName, length('DynamicField_');
-                my $DFConfig    = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-                    Name => $DFNameShort,
-                );
-                next DYNAMICFIELD unless IsHashRefWithData($DFConfig);
-                my $DFValueStructure = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->DisplayValueRender(
-                    DynamicFieldConfig => $DFConfig,
-                    Value              => $Version->{$DFName},
-                    HTMLOutput         => 0,
-                    LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
-                );
-                $Version->{$DFName} = $DFValueStructure->{Value};
-            }
+    # iterate over dynamic fields and replace value with DisplayValueRender result
+    if ($GetDynamicFields) {
+        DYNAMICFIELD:
+        for my $DFName ( grep { $DataToStore{$_} && $_ =~ /^DynamicField_/ } keys %DataToStore ) {
+            my $DFNameShort = substr $DFName, length('DynamicField_');
+            my $DFConfig    = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+                Name => $DFNameShort,
+            );
+            next DYNAMICFIELD unless IsHashRefWithData($DFConfig);
+            my $DFValueStructure = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->DisplayValueRender(
+                DynamicFieldConfig => $DFConfig,
+                Value              => $Version->{$DFName},
+                HTMLOutput         => 0,
+                LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
+            );
+            $Version->{$DFName} = $DFValueStructure->{Value};
         }
-
-        # only submit potentially changed values
-        delete $DataToStore{Created};
-        delete $DataToStore{Number};
-
-        %Content = (
-            ( map { $_ => $Version->{$_} } keys %DataToStore ),
-        );
     }
+    %Content = (
+        ( map { $_ => $Version->{$_} } keys %DataToStore ),
+    );
+    $Content{Attachments} = [];
 
     return {
         Success => 1,
