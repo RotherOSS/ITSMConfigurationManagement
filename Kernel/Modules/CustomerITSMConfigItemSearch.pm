@@ -47,6 +47,7 @@ sub Run {
     my $BackendObject        = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject          = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -62,11 +63,35 @@ sub Run {
     );
 
     # get configured dynamic fields for this screen
-    $Self->{DynamicField} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    $Self->{DynamicField} = $DynamicFieldObject->DynamicFieldListGet(
         Valid       => 1,
         ObjectType  => ['ITSMConfigItem'],
         FieldFilter => $Config->{DynamicField},
     );
+
+    my @SetInnerFields;
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+
+        next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+
+        my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
+        for my $DF (@CurrentInnerFields) {
+            my $InnerFieldConfigRef = $DynamicFieldObject->DynamicFieldGet(
+                Name => $DF->{DF},
+            );
+
+            # necessary to not overwrite cached data of field config by altering the reference
+            my %InnerFieldConfig = $InnerFieldConfigRef->%*;
+
+            $InnerFieldConfig{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                . $LayoutObject->{LanguageObject}->Translate( $InnerFieldConfig{Label} );
+            push @SetInnerFields, \%InnerFieldConfig;
+        }
+    }
+
+    push @{ $Self->{DynamicField} }, @SetInnerFields;
 
     # build NavigationBar & to get the output faster!
     my $Refresh = '';
@@ -389,7 +414,7 @@ sub Run {
 
         # collect dynamic field search params
         if ( IsHashRefWithData( $PermissionConditionConfig->{DynamicFieldValues} ) ) {
-            my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
             DYNAMICFIELD:
             for my $FieldName ( keys $PermissionConditionConfig->{DynamicFieldValues}->%* ) {
 
