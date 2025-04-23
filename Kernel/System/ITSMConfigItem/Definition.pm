@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -934,6 +934,14 @@ sub DefinitionCheck {
 
         my @Grids;
         for my $ContentItem ( $Section->{Content}->@* ) {
+
+            if ( !IsHashRefWithData($ContentItem) ) {
+                return $ReturnError->(
+                    Translatable(q{An element of 'Content' in section %s does not contain key value pairs.}),
+                    $SectionName
+                );
+            }
+
             if ( !any { $ContentItem->{$_} } @NeededContentEntry ) {
                 return $ReturnError->(
                     Translatable(q{Section %s has content which doesn't provide one of the following entries <%s>.}),
@@ -1747,7 +1755,7 @@ sub ClassImport {
             );
         }
 
-        # if needed, perform neccessary transformations
+        # if needed, perform necessary transformations
         $FieldConfig = $Self->_DynamicFieldConfigTransform(
             DynamicFieldConfig => $FieldConfig,
             Action             => 'Import',
@@ -2133,7 +2141,7 @@ sub _DefinitionPrepare {
 =head2 _DefinitionDynamicFieldGet()
 
 Create a YAML string containing the definition of the dynamic fields relevant for this config item.
-The defintion can be passed in either as a YAML string or as a Perl data structure.
+The definition can be passed in either as a YAML string or as a Perl data structure.
 
     my $DynamicFieldDefinitionYAML = $Self->_DefinitionDynamicFieldGet(
         Definition => $Definition->{Definition},
@@ -2180,7 +2188,7 @@ sub _DefinitionDynamicFieldGet {
         return;
     }
 
-    # recurively collect the dynamic fields
+    # recursively collect the dynamic fields
     my %DynamicFields;
 
     # TODO: specify the path where DF fields are expected, maybe with JSON::Path
@@ -2294,7 +2302,6 @@ sub _DefinitionDynamicFieldGet {
 Transformations of the dynamic field config needed for Import/Export.
 Note that the passed in dynamic field config is modified in place.
 
-    # if needed, perform neccessary transformations
     $FieldConfig = $Self->_DynamicFieldConfigTransform(
         DynamicFieldConfig => $FieldConfig,
         Action             => 'Import',
@@ -2437,7 +2444,6 @@ that the use roles without specifying a version of the role. This
 means the class definitions may have to be update when a role is
 changed.
 
-    # if needed, perform neccessary transformations
     my $Success = $Self->_DefinitionCreateAfterRoleCreate(
         DynamicFieldConfig => $FieldConfig,
         Action             => 'Import',
