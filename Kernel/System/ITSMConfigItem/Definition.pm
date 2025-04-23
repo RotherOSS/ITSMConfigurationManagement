@@ -1779,6 +1779,11 @@ sub ClassImport {
         }
     }
 
+    # trigger dynamic field events
+    #   this is done because Set-inner dynamic fields are updated afterwards via
+    #   an event, causing the data in the config item definitions to become outdated
+    $DynamicFieldObject->EventHandlerTransaction();
+
     # 4. add definitions
     for my $RoleID ( keys %RoleDefinitions ) {
         my $Return = $Self->RoleDefinitionAdd(
@@ -2229,7 +2234,7 @@ sub _DefinitionDynamicFieldGet {
         }
     }
 
-    # the recursive calls only collect the dynamice fields
+    # the recursive calls only collect the dynamic fields
     return %DynamicFields unless $IsInitialCall;
 
     # some more work to do in the initial call
