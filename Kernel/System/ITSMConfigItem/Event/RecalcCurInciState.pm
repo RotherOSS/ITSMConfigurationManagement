@@ -145,17 +145,17 @@ sub Run {
     for my $ID ( ( $Param{Data}->{OldValue} // [] )->@* ) {
         next ID if !$ID;
 
-        $ConfigItemIDs{ $ID } = 1;
+        $ConfigItemIDs{$ID} = 1;
     }
 
     for my $ID ( ( $Param{Data}->{Value} // [] )->@* ) {
         next ID if !$ID;
 
-        if ( $ConfigItemIDs{ $ID } ) {
-            delete $ConfigItemIDs{ $ID };
+        if ( $ConfigItemIDs{$ID} ) {
+            delete $ConfigItemIDs{$ID};
         }
         else {
-            $ConfigItemIDs{ $ID } = 1;
+            $ConfigItemIDs{$ID} = 1;
         }
     }
 

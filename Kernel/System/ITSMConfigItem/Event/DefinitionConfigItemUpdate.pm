@@ -135,7 +135,7 @@ sub Run {
     }
 
     my $DefinitionRef = $ConfigItemObject->DefinitionGet(
-        ClassID => $Param{Data}->{ClassID},
+        ClassID      => $Param{Data}->{ClassID},
         DefinitionID => $Param{Data}->{DefinitionID},
     );
 
@@ -146,28 +146,28 @@ sub Run {
 
         IDS:
         for my $ID ( keys %AffectedCIs ) {
-        
+
             next IDS unless $DF->{Config}->{ReferencedObjectType};
             next IDS unless $DF->{Config}->{ReferencedObjectType} =~ '^ITSMConfigItem';
             my $ConfigItem = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID  => $ID,
-                DynamicFields => 1,    # (optional) default 0 (0|1)
-            );            
+                DynamicFields => 1,     # (optional) default 0 (0|1)
+            );
 
             my $Value = $ConfigItem->{"DynamicField_$DynamicFieldName"};
             next IDS unless $Value;
 
             $ConfigItemObject->SyncLinkTable(
-                DynamicFieldConfig      =>  $DF,
+                DynamicFieldConfig      => $DF,
                 ConfigItemID            => $ID,
                 ConfigItemLastVersionID => $ConfigItem->{LastVersionID},
                 ConfigItemVersionID     => $ConfigItem->{VersionID},
-  #              OldValue                => $Param{Data}->{OldValue},
-                Value                   => $Value,
-            );    
+
+                #              OldValue                => $Param{Data}->{OldValue},
+                Value => $Value,
+            );
         }
     }
-
 
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
         ItemID => $Param{Data}{ClassID},

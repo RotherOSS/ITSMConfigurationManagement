@@ -467,8 +467,8 @@ sub SyncLinkTable {
         'id';
 
     # Clear out the old value array.
-    my $SourceCol = 'source_'. ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ).'_id';
-    my $TargetCol = 'target_'. ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ).'_id';
+    my $SourceCol = 'source_' . ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ) . '_id';
+    my $TargetCol = 'target_' . ( $LinkIsDynamic ? 'configitem' : 'configitem_version' ) . '_id';
 
     $DBObject->Do(
         SQL => <<"END_SQL",
@@ -480,8 +480,8 @@ END_SQL
     );
 
     my @NewValues = $Param{Value}
-        ? ref $Param{Value} ? ( grep { $_ } $Param{Value}->@* ) : ( $Param{Value} )
-        : ();
+        ? ref $Param{Value} ? ( grep {$_} $Param{Value}->@* ) : ( $Param{Value} )
+        :                     ();
 
     return 1 if !@NewValues;
 

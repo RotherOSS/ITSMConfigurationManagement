@@ -732,7 +732,7 @@ sub Data {
     $Self->{Translation}->{'Deployment state restrictions for the config item'} = 'Verwendungsstatus-Einschränkungen für das Config Item';
     $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} = 'Einen oder mehrere Verwendungsstatus auswählen um auswählbare Config Items einzuschränken';
 
-    # EO 20250304    
+    # EO 20250304
 
     push @{ $Self->{JavaScriptStrings} // [] }, (
     'Add all',

@@ -245,7 +245,7 @@ $Selenium->RunTest(
             Value  => [$GroupID],
         );
 
-        my $Definition = << "EOF";
+        my $Definition = <<"EOF";
 ---
 - Key: CustomerID1
   Name: CustomerCompany 1

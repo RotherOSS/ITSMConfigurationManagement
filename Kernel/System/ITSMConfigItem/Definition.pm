@@ -1402,24 +1402,24 @@ sub ClassImport {
             $DefinitionItem->{$DefinitionKey} = $DefinitionRef->{$DefinitionKey};
         }
 
-#        my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
-#
-# TODO: Add a preliminary check
-#        # check definition for validity
-#        my $CheckResult = $Self->DefinitionCheck(
-#            Definition  => $DefinitionItem->{Definition},
-#            Type        => $Type,
-#            ImportRoles => [ keys %ImportRoles ],
-#        );
-#
-#        if ( !$CheckResult->{Success} ) {
-#            my $Name = $DefinitionItem->{RoleName} || $DefinitionItem->{Class}{Name};
-#
-#            return {
-#                Success      => 0,
-#                ErrorMessage => "Item '$Name' failed initial definition check.",
-#            };
-#        }
+        #        my $Type = $DefinitionItem->{Class} ? 'Class' : 'Role';
+        #
+        # TODO: Add a preliminary check
+        #        # check definition for validity
+        #        my $CheckResult = $Self->DefinitionCheck(
+        #            Definition  => $DefinitionItem->{Definition},
+        #            Type        => $Type,
+        #            ImportRoles => [ keys %ImportRoles ],
+        #        );
+        #
+        #        if ( !$CheckResult->{Success} ) {
+        #            my $Name = $DefinitionItem->{RoleName} || $DefinitionItem->{Class}{Name};
+        #
+        #            return {
+        #                Success      => 0,
+        #                ErrorMessage => "Item '$Name' failed initial definition check.",
+        #            };
+        #        }
 
         # collect class tags
         if ( $DefinitionItem->{Class} ) {
