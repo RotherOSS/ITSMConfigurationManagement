@@ -23,7 +23,7 @@
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
 
-	<!-- Just for migration of the legacy package CIAttributeCollection - not applicable on OTOBO 11.1 or higher -->
+        <!-- Just for migration of the legacy package CIAttributeCollection - not applicable on OTOBO 11.1 or higher -->
         <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorageDB.pm" />
         <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorageFS.pm" />
         <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorage.pm" />
