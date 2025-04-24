@@ -1031,9 +1031,9 @@ sub ConfigItemUpdate {
         { $_ => 1 }
         ( $ClassPreferences{VersionTrigger} // [] )->@*;
 
-    my %Changed;           # track changed values for the Event handler, e.g. for writing history
-    my $AddVersion    = 0; # flag for deciding whether a new version is created
-    my $UpdateVersion = 0; # flag for deciding whether the current version needs an update
+    my %Changed;              # track changed values for the Event handler, e.g. for writing history
+    my $AddVersion    = 0;    # flag for deciding whether a new version is created
+    my $UpdateVersion = 0;    # flag for deciding whether the current version needs an update
 
     # check name, deployment and incident state, as well as Description
     ATTR:
@@ -1650,21 +1650,27 @@ sub UniqueNameCheck {
 
 =head2 CurInciStateRecalc()
 
-recalculates the current incident state of this config item and of all config items
+recalculates the current incident state of this config item and of config items
 that are linked to it. Only links between config items are considered here. Links to
 or from config item versions are ignored.
 
-The current incident state depends on the incident states that this config depends on.
+The current incident state depends on the incident states that this config item depends on.
 A change of the incident state might have repercussions on the current incident state
 of the config items that depend on this config item.
 
-The parameters C<NewConfigItemIncidentState> and C<ScannedConfigItemIDs> carry state between
+It is a common use case that C<CurInciStateRecalc()> is called in a loop over a list of config items.
+Examples are the console command C<Admin::ITSM::IncidentState::Recalculate> or when the linking
+of the config items has changed. For optimizing that case there are the parameters
+C<NewConfigItemIncidentState> and C<ScannedConfigItemIDs> which carry state between
 invocations of this method. They provide caching and prevent infinite loops.
+
+Changing the incident state of config items has repercussions on services. These effects
+are handled in this method as well.
 
     my $Success = $ConfigItemObject->CurInciStateRecalc(
         ConfigItemID               => 123,
         NewConfigItemIncidentState => $NewConfigItemIncidentState,  # optional, incident states of already checked CIs
-        ScannedConfigItemIDs       => $ScannedConfigItemIDs,        # optional, IDs of already checked CIs
+        ScannedConfigItemIDs       => $ScannedConfigItemIDs,        # optional, IDs and incident states of already checked CIs
     );
 
 =cut
@@ -1690,7 +1696,8 @@ sub CurInciStateRecalc {
         return;
     }
 
-    # get incident link types and directions from config
+    # get incident link types and directions from config. E.g.
+    # { DependsOn => 'Both', LocationOf => 'Source' }
     my $IncidentLinkTypeDirection = $Kernel::OM->Get('Kernel::Config')->Get('ITSM::Core::IncidentLinkTypeDirection');
 
     # to store the new incident state for CIs
@@ -1699,20 +1706,24 @@ sub CurInciStateRecalc {
     $Param{NewConfigItemIncidentState} //= {};
     my $KnownNewConfigItemIncidentState = dclone( $Param{NewConfigItemIncidentState} );
 
-    # to store the relation between services and linked CIs
-    my %ServiceCIRelation;
-
     # remember the scanned config items
     # Incorporate data from previous run(s) and remember known data.
     $Param{ScannedConfigItemIDs} //= {};
     my $KnownScannedConfigItemIDs = dclone( $Param{ScannedConfigItemIDs} );
 
-    # Find all connected config items with an incident state.
+    # Find deeply connected config items with an incident state.
+    # The direction in $IncidentLinkTypeDirection is ignored here because depended on item could change
+    # the incident state of the current config item. Or changes in
+    # the current config item could change downstream items.
     $Self->_FindInciConfigItems(
         ConfigItemID              => $Param{ConfigItemID},
         IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
         ScannedConfigItemIDs      => $Param{ScannedConfigItemIDs},
     );
+
+    # to store the relation between services and linked CIs
+    # The info will be used for updating the services.
+    my %ServiceCIRelation;
 
     # calculate the new CI incident state for each configured linktype
     LINKTYPE:
@@ -2016,7 +2027,7 @@ find connected config items with an incident state.
         ScannedConfigItemIDs      => \%ScannedConfigItemIDs,
     );
 
-The scanned config items will be entered in the ScannedConfigItemIDs hashref. Each config item will be scanned only once.
+The scanned config items will be entered in the C<ScannedConfigItemIDs> hashref. Each config item will be scanned only once.
 The attribute C<Type> will be either 'operational' or 'incident'.
 
 The search for config items with incidents recurses into the graph of linked config items. The directly
@@ -2090,7 +2101,7 @@ sub _FindInciConfigItems {
 =head2 _FindWarnConfigItems()
 
 This method is called for config item that are in a incident or warning state.
-Find connected config items and annotate them with a warning in ScannedConfigItemIDs. Propagate the warning.
+Find connected config items and annotate them with a warning in C<ScannedConfigItemIDs>. Propagate the warning.
 
     $ConfigItemObject->_FindWarnConfigItems(
         ConfigItemID         => $ConfigItemID,
