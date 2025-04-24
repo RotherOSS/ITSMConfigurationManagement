@@ -139,7 +139,8 @@ sub Run {
             my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
             for my $DF (@CurrentInnerFields) {
 
-                $DF->{Definition}{Label} = $DynamicFieldConfig->{Label} . '::' . $DF->{Definition}{Label};
+                $DF->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                    . $LayoutObject->{LanguageObject}->Translate( $DF->{Definition}{Label} );
             }
             push @SetInnerFields, ( map { $_->{Definition} } @CurrentInnerFields );
         }
