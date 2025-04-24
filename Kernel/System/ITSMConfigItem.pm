@@ -1791,7 +1791,8 @@ sub CurInciStateRecalc {
             for my $ServiceID ( sort keys %LinkedServiceIDs ) {
 
                 # remember the CIs that are linked with this service
-                push @{ $ServiceCIRelation{$ServiceID} }, $ConfigItemID;
+                $ServiceCIRelation{$ServiceID} //= [];
+                push $ServiceCIRelation{$ServiceID}->@*, $ConfigItemID;
             }
 
             next CONFIGITEMID if $InciStateType eq 'incident';
@@ -1905,7 +1906,7 @@ sub CurInciStateRecalc {
         my $CurInciStateTypeFromCIs = 'operational';
 
         # get the unique config item ids which are directly linked to this service
-        my %UniqueConfigItemIDs = map { $_ => 1 } @{ $ServiceCIRelation{$ServiceID} };
+        my %UniqueConfigItemIDs = map { $_ => 1 } $ServiceCIRelation{$ServiceID}->@*;
 
         # investigate the current incident state of each config item
         CONFIGITEMID:
@@ -1930,6 +1931,7 @@ sub CurInciStateRecalc {
             # check if service must be set to 'incident'
             if ( $ConfigItemData->{CurInciStateType} eq 'incident' ) {
                 $CurInciStateTypeFromCIs = 'incident';
+
                 last CONFIGITEMID;
             }
         }
@@ -2044,9 +2046,10 @@ sub _FindInciConfigItems {
     return unless $Param{ConfigItemID};
 
     # ignore already scanned ids (infinite loop protection)
-    return if $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} };
+    return if defined $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} };
 
     # set a default so the ConfigITem won't be scanned again
+    $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} } = {};
     $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{Type} = 'operational';
 
     # add own config item id to list of linked config items
@@ -2122,8 +2125,7 @@ sub _FindWarnConfigItems {
     # Infinite loop protection.
     # Ignore already scanned ids.
     # It is ok that a config item is investigated as many times as there are configured link types * number of incident config iteems
-    my $IncidentCount = true
-    { ( $Param{ScannedConfigItemIDs}->{$_}->{Type} || '' ) eq 'incident' }
+    my $IncidentCount = true { ( $Param{ScannedConfigItemIDs}->{$_}->{Type} || '' ) eq 'incident' }
     keys $Param{ScannedConfigItemIDs}->%*;
     if (
         $Param{ScannedConfigItemIDs}->{ $Param{ConfigItemID} }->{FindWarn}
