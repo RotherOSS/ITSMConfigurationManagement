@@ -140,7 +140,7 @@ sub Run {
     );
 
     my @DynamicFieldNames = keys $DefinitionRef->{DynamicFieldRef}->%*;
-    foreach my $DynamicFieldName ( @DynamicFieldNames ) {
+    for my $DynamicFieldName (@DynamicFieldNames) {
 
         my $DF = $DefinitionRef->{DynamicFieldRef}->{$DynamicFieldName};
 
