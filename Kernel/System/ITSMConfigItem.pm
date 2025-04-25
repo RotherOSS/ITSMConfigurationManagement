@@ -1700,21 +1700,25 @@ sub CurInciStateRecalc {
     # { DependsOn => 'Both', LocationOf => 'Source' }
     my $IncidentLinkTypeDirection = $Kernel::OM->Get('Kernel::Config')->Get('ITSM::Core::IncidentLinkTypeDirection');
 
-    # to store the new incident state for CIs
-    # calculated from all incident link types
+    # $Param{NewConfigItemIncidentState} holds the determined incident states of the considered config items.
+    # It may contain contain content from previous calls of CurInciStateRecalc() so that unnecessary work
+    # can be skipped.
+    # New incident states are calculated from all incident link types.
+    # The newly determined incident states are made available to the caller, so that the caller
+    # can pass it to the next iteration.
     # Incorporate data from previous run(s) and remember known data.
     $Param{NewConfigItemIncidentState} //= {};
     my $KnownNewConfigItemIncidentState = dclone( $Param{NewConfigItemIncidentState} );
 
-    # remember the scanned config items
+    # Remember the scanned config items
     # Incorporate data from previous run(s) and remember known data.
     $Param{ScannedConfigItemIDs} //= {};
     my $KnownScannedConfigItemIDs = dclone( $Param{ScannedConfigItemIDs} );
 
     # Find deeply connected config items with an incident state.
-    # The direction in $IncidentLinkTypeDirection is ignored here because depended on item could change
+    # The direction in $Param{IncidentLinkTypeDirection} is ignored here because depended on items could change
     # the incident state of the current config item. Or changes in
-    # the current config item could change downstream items.
+    # the current config item could change downstream config items.
     $Self->_FindInciConfigItems(
         ConfigItemID              => $Param{ConfigItemID},
         IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
@@ -2091,6 +2095,8 @@ sub _FindInciConfigItems {
         }
 
         # no incident was encountered, continue with recursion
+        # _FindInciConfigItems() might be called with the current $Param{ConfigItemID}.
+        # But that call will do nothing.
         $Self->_FindInciConfigItems(
             ConfigItemID              => $ConfigItemID,
             IncidentLinkTypeDirection => $Param{IncidentLinkTypeDirection},
