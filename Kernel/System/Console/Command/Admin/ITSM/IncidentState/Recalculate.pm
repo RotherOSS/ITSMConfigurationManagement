@@ -34,6 +34,15 @@ sub Configure {
 
     $Self->Description('Recalculates the incident state of config items.');
 
+    $Self->AddOption(
+        Name        => 'configitem-number',
+        Description => "Recalculate listed config items.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/\d+/smx,
+        Multiple    => 1,
+    );
+
     return;
 }
 
@@ -42,22 +51,48 @@ sub Run {
 
     $Self->Print("<yellow>Recalculating the incident state of config items...</yellow>\n\n");
 
-    # get class list
-    my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    );
+    my @ConfigItemIDs;    # either explicit list or all valid classes
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # get the valid class ids
-    my @ValidClassIDs = sort keys %{$ClassList};
+    my @ConfigItemNumbers = @{ $Self->GetOption('configitem-number') // [] };
+    if (@ConfigItemNumbers) {
 
-    # get all config items ids form all valid classes
-    my %ConfigItemsIDsRef = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
-        ClassIDs => \@ValidClassIDs,
-        Result   => 'HASH'
-    );
+        CONFIG_ITEM_NUMBER:
+        for my $ConfigItemNumber (@ConfigItemNumbers) {
+
+            # checks the validity of the config item id
+            my $ID = $ConfigItemObject->ConfigItemLookup(
+                ConfigItemNumber => $ConfigItemNumber,
+            );
+
+            if ($ID) {
+                push @ConfigItemIDs, $ID;
+
+                next CONFIG_ITEM_NUMBER;
+            }
+
+            $Self->Print("<yellow>Unable to find config item $ConfigItemNumber.</yellow>\n");
+        }
+    }
+    else {
+
+        # get the valid class ids
+        my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+        my @ValidClassIDs = sort keys $ClassList->%*;
+
+        # get all config items ids form all valid classes
+        my %ConfigItemsIDsRef = $ConfigItemObject->ConfigItemSearch(
+            ClassIDs => \@ValidClassIDs,
+            Result   => 'HASH'
+        );
+
+        @ConfigItemIDs = keys %ConfigItemsIDsRef;
+    }
 
     # get number of config items
-    my $CICount = keys %ConfigItemsIDsRef;
+    my $CICount = scalar @ConfigItemIDs;
 
     $Self->Print("<yellow>Recalculating incident state for $CICount config items.</yellow>\n");
 
@@ -67,9 +102,9 @@ sub Run {
 
     my $Count = 0;
     CONFIGITEM:
-    for my $ConfigItemID ( keys %ConfigItemsIDsRef ) {
+    for my $ConfigItemID (@ConfigItemIDs) {
 
-        my $Success = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->CurInciStateRecalc(
+        my $Success = $ConfigItemObject->CurInciStateRecalc(
             ConfigItemID               => $ConfigItemID,
             NewConfigItemIncidentState => \%NewConfigItemIncidentState,
             ScannedConfigItemIDs       => \%ScannedConfigItemIDs,
