@@ -1,0 +1,110 @@
+---
+- Class:
+    Categories:
+    - All
+    Name: Location
+    NumberModule: AutoIncrement
+    PermissionGroup: itsm-configitem
+    VersionStringModule: Incremental
+  Definition: |
+    ---
+    Pages:
+      - Name: Content
+        Layout:
+          Columns: 1
+          ColumnWidth: 1fr
+        Content:
+          - Section: Attributes
+            ColumnStart: 1
+            RowStart: 1
+
+    Sections:
+      Attributes:
+        Content:
+          - DF: Location-Type
+          - DF: Location-CustomerID
+          - DF: Location-Owner
+          - DF: Location-Phone1
+          - DF: Location-Phone2
+          - DF: Location-Fax
+          - DF: Location-EMail
+          - DF: Location-Address
+          - DF: Location-Note
+            Mandatory: 1
+  DynamicFields:
+    Location-Address:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: TextArea
+      Label: Address
+      Name: Location-Address
+      ObjectType: ITSMConfigItem
+    Location-CustomerID:
+      CIClass: Location
+      Config:
+        EditFieldMode: Dropdown
+        PossibleNone: 1
+      FieldType: CustomerCompany
+      Label: Customer Company
+      Name: Location-CustomerID
+      ObjectType: ITSMConfigItem
+    Location-EMail:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: Text
+      Label: E-Mail
+      Name: Location-EMail
+      ObjectType: ITSMConfigItem
+    Location-Fax:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: Text
+      Label: Fax
+      Name: Location-Fax
+      ObjectType: ITSMConfigItem
+    Location-Note:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: TextArea
+      Label: Note
+      Name: Location-Note
+      ObjectType: ITSMConfigItem
+    Location-Owner:
+      CIClass: Location
+      Config:
+        EditFieldMode: AutoComplete
+        PossibleNone: 1
+      FieldType: CustomerUser
+      Label: Owner
+      Name: Location-Owner
+      ObjectType: ITSMConfigItem
+    Location-Phone1:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: Text
+      Label: Phone 1
+      Name: Location-Phone1
+      ObjectType: ITSMConfigItem
+    Location-Phone2:
+      CIClass: Location
+      Config:
+        RegExList: []
+      FieldType: Text
+      Label: Phone 2
+      Name: Location-Phone2
+      ObjectType: ITSMConfigItem
+    Location-Type:
+      CIClass: Location
+      Config:
+        Class: ITSM::ConfigItem::Location::Type
+        PossibleNone: 1
+        TranslatableValues: 1
+      FieldType: GeneralCatalog
+      Label: Type
+      Name: Location-Type
+      ObjectType: ITSMConfigItem
