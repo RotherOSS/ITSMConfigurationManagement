@@ -21,6 +21,8 @@ use warnings;
 use namespace::autoclean;
 use utf8;
 
+use parent qw(Kernel::System::AsynchronousExecutor);
+
 # core modules
 
 # CPAN modules
@@ -163,19 +165,15 @@ sub Run {
 
     $ConfigItemIDs{ $Param{Data}->{ConfigItemID} } = 1;
 
-    # these will be changed in calls to CurInciStateRecalc()
-    my %NewConfigItemIncidentState;
-    my %ScannedConfigItemIDs;
-
-    for my $ConfigItemID ( keys %ConfigItemIDs ) {
-        $ConfigItemObject->CurInciStateRecalc(
-            ConfigItemID               => $ConfigItemID,
-            NewConfigItemIncidentState => \%NewConfigItemIncidentState,    # optional, incident states of already checked CIs
-            ScannedConfigItemIDs       => \%ScannedConfigItemIDs,          # optional, IDs of already checked CIs
-        );
-    }
-
-    return 1;
+    # handle incident state recalc an asynchronous call
+    return $Self->AsyncCall(
+        ObjectName     => 'Kernel::System::ITSMConfigItem',
+        FunctionName   => 'CurInciStateRecalc',
+        FunctionParams => {
+            ConfigItemIDs => [ sort keys %ConfigItemIDs ],
+        },
+        MaximumParallelInstances => 1,
+    );
 }
 
 1;

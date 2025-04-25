@@ -1673,10 +1673,39 @@ are handled in this method as well.
         ScannedConfigItemIDs       => $ScannedConfigItemIDs,        # optional, IDs and incident states of already checked CIs
     );
 
+For asynchronous execution it is convenient to pass a list of config items to C<CurInciStateRecalc()>.
+
+    my $Success = $ConfigItemObject->CurInciStateRecalc(
+        ConfigItemIDs              => [ 123, 124, 125 ],
+    );
+
+In that case the loop is discontinued when an iteration reported a failure.
+
 =cut
 
 sub CurInciStateRecalc {
     my ( $Self, %Param ) = @_;
+
+    # useful for async execution
+    # all other parameters will be ignored
+    if ( $Param{ConfigItemIDs} ) {
+
+        # these hashes will be filled in the calls to CurInciStateRecalc
+        my ( %NewConfigItemIncidentState, %ScannedConfigItemIDs );
+
+        for my $ConfigItemID ( $Param{ConfigItemIDs}->@* ) {
+            my $Success = $Self->CurInciStateRecalc(
+                ConfigItemID               => $ConfigItemID,
+                NewConfigItemIncidentState => \%NewConfigItemIncidentState,
+                ScannedConfigItemIDs       => \%ScannedConfigItemIDs,
+            );
+
+            return unless $Success;
+        }
+
+        # all fine
+        return 1;
+    }
 
     # check needed stuff
     if ( !$Param{ConfigItemID} ) {
