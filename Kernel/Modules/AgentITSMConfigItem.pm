@@ -156,8 +156,9 @@ sub Run {
 
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-        next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+        next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
 
         # get filter from web request
         my $FilterValue = $ParamObject->GetParam(
@@ -169,7 +170,7 @@ sub Run {
             $FilterValue = $StoredFilters->{ 'DynamicField_' . $DynamicFieldConfig->{Name} }->{Equals};
         }
 
-        next DYNAMICFIELD if !defined $FilterValue;
+        next DYNAMICFIELD unless defined $FilterValue;
         next DYNAMICFIELD if $FilterValue eq '';
         next DYNAMICFIELD if $FilterValue eq 'DeleteFilter';
 
@@ -486,9 +487,11 @@ sub Run {
     my $ColumnFilterLink = '';
     COLUMNNAME:
     for my $ColumnName ( sort keys %GetColumnFilter ) {
-        next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
+
+        next COLUMNNAME unless $ColumnName;
+        next COLUMNNAME unless defined $GetColumnFilter{$ColumnName};
         next COLUMNNAME if $GetColumnFilter{$ColumnName} eq '';
+
         $ColumnFilterLink
             .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
             . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );

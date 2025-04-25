@@ -213,8 +213,8 @@ sub Run {
             DYNAMICFIELD:
             for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
-                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-                next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+                next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
                 next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
                 # get search field preferences
@@ -222,7 +222,7 @@ sub Run {
                     DynamicFieldConfig => $DynamicFieldConfig,
                 );
 
-                next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+                next DYNAMICFIELD unless IsArrayRefWithData($SearchFieldPreferences);
 
                 PREFERENCE:
                 for my $Preference ( @{$SearchFieldPreferences} ) {
@@ -417,8 +417,8 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( sort { $a->{Label} cmp $b->{Label} } values $Definition->{DynamicFieldRef}->%* ) {
 
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # create a separator for dynamic fields attributes
@@ -438,7 +438,7 @@ sub Run {
                 DynamicFieldConfig => $DynamicFieldConfig,
             );
 
-            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+            next DYNAMICFIELD unless IsArrayRefWithData($SearchFieldPreferences);
 
             # translate the dynamic field label
             my $TranslatedDynamicFieldLabel = $LayoutObject->{LanguageObject}->Translate(
@@ -475,7 +475,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             my $PossibleValuesFilter;
@@ -537,7 +537,7 @@ sub Run {
                 DynamicFieldConfig => $DynamicFieldConfig,
             );
 
-            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+            next DYNAMICFIELD unless IsArrayRefWithData($SearchFieldPreferences);
 
             PREFERENCE:
             for my $Preference ( @{$SearchFieldPreferences} ) {
@@ -662,8 +662,8 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
@@ -671,7 +671,7 @@ sub Run {
                 DynamicFieldConfig => $DynamicFieldConfig,
             );
 
-            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+            next DYNAMICFIELD unless IsArrayRefWithData($SearchFieldPreferences);
 
             PREFERENCE:
             for my $Preference ( @{$SearchFieldPreferences} ) {
@@ -972,8 +972,8 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
@@ -981,7 +981,7 @@ sub Run {
                 DynamicFieldConfig => $DynamicFieldConfig,
             );
 
-            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+            next DYNAMICFIELD unless IsArrayRefWithData($SearchFieldPreferences);
 
             PREFERENCE:
             for my $Preference ( @{$SearchFieldPreferences} ) {
@@ -1050,8 +1050,8 @@ sub Run {
             # include the selected dynamic fields in CVS results
             DYNAMICFIELD:
             for my $DynamicFieldConfig ( @{$CSVDynamicField} ) {
-                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-                next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+                next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+                next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
                 next DYNAMICFIELD if $DynamicFieldConfig->{Name} eq '';
 
                 push @TmpCSVHead, 'DynamicField_' . $DynamicFieldConfig->{Name};
@@ -1095,8 +1095,8 @@ sub Run {
                         # loop over the dynamic fields configured for CSV output
                         DYNAMICFIELD:
                         for my $DynamicFieldConfig ( @{$CSVDynamicField} ) {
-                            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-                            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+                            next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+                            next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
 
                             # skip all fields that does not match with current field name ($1)
                             # with out the 'DynamicField_' prefix
