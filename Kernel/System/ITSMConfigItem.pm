@@ -1716,13 +1716,13 @@ sub CurInciStateRecalc {
     my $KnownScannedConfigItemIDs = dclone( $Param{ScannedConfigItemIDs} );
 
     # Find deeply connected config items with an incident state.
-    # The direction in $Param{IncidentLinkTypeDirection} is ignored here because depended on items could change
+    # The direction in $IncidentLinkTypeDirection is ignored here because depended on items could change
     # the incident state of the current config item. Or changes in
     # the current config item could change downstream config items.
     $Self->_FindInciConfigItems(
-        ConfigItemID              => $Param{ConfigItemID},
-        IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
-        ScannedConfigItemIDs      => $Param{ScannedConfigItemIDs},
+        ConfigItemID         => $Param{ConfigItemID},
+        IncidentLinkTypes    => [ keys $IncidentLinkTypeDirection->%* ],
+        ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
     );
 
     # to store the relation between services and linked CIs
@@ -1827,7 +1827,7 @@ sub CurInciStateRecalc {
 
     # set the new current incident state for CIs
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %{ $Param{NewConfigItemIncidentState} } ) {
+    for my $ConfigItemID ( sort keys $Param{NewConfigItemIncidentState}->%* ) {
 
         # Skip config items known from previous execution(s).
         if (
@@ -2028,9 +2028,9 @@ sub ObjectAttributesGet {
 find connected config items with an incident state.
 
     $ConfigItemObject->_FindInciConfigItems(
-        ConfigItemID              => $ConfigItemID,
-        IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
-        ScannedConfigItemIDs      => \%ScannedConfigItemIDs,
+        ConfigItemID         => $ConfigItemID,
+        IncidentLinkTypes    => [ keys $IncidentLinkTypeDirection->%* ],
+        ScannedConfigItemIDs => \%ScannedConfigItemIDs,
     );
 
 The scanned config items will be entered in the C<ScannedConfigItemIDs> hashref. Each config item will be scanned only once.
@@ -2065,7 +2065,7 @@ sub _FindInciConfigItems {
         # all linked CIs that could influence this one!
         my $LinkedConfigItems = $Self->LinkedConfigItems(
             ConfigItemID => $Param{ConfigItemID},
-            Types        => [ keys $Param{IncidentLinkTypeDirection}->%* ],
+            Types        => $Param{IncidentLinkTypes},
             Direction    => 'Both',
             UserID       => 1,
         );
@@ -2098,9 +2098,9 @@ sub _FindInciConfigItems {
         # _FindInciConfigItems() might be called with the current $Param{ConfigItemID}.
         # But that call will do nothing.
         $Self->_FindInciConfigItems(
-            ConfigItemID              => $ConfigItemID,
-            IncidentLinkTypeDirection => $Param{IncidentLinkTypeDirection},
-            ScannedConfigItemIDs      => $Param{ScannedConfigItemIDs},
+            ConfigItemID         => $ConfigItemID,
+            IncidentLinkTypes    => $Param{IncidentLinkTypes},
+            ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
         );
     }
 
