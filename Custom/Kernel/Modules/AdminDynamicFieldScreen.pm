@@ -64,12 +64,31 @@ sub new {
 
         $Self->{SelectedObjectType} = $SelectedObjectType;
     }
+
     my @ObjectTypesFilter;
-    if ($Self->{SelectedObjectType} eq 'Ticket') {
-        push @ObjectTypesFilter, qw(Ticket Article);
+    my $DFObjectTypesConfig        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::ObjectType');
+    my $DFScreensObjectTypesConfig = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFieldScreens::ObjectTypes');
+    if ( IsHashRefWithData($DFScreensObjectTypesConfig) ) {
+        DFSCREENSOBJECTTYPE:
+        for my $DFScreenObjectType ( map { $DFScreensObjectTypesConfig->{$_}->@* } keys $DFScreensObjectTypesConfig->%* ) {
+
+            next DFSCREENSOBJECTTYPE unless $DFObjectTypesConfig->{$DFScreenObjectType};
+
+            $Self->{EnabledObjectTypes} //= [];
+            push $Self->{EnabledObjectTypes}->@*, $DFScreenObjectType;
+
+            if (
+                $DFScreenObjectType eq $Self->{SelectedObjectType}
+                || ( $DFScreenObjectType eq 'Article' && $Self->{SelectedObjectType} eq 'Ticket' )
+            ) {
+                push @ObjectTypesFilter, $DFScreenObjectType;
+            }
+        }
     }
-    elsif ($Self->{SelectedObjectType} eq 'ITSMConfigItem') {
-        push @ObjectTypesFilter, qw(ITSMConfigItem);
+
+    if (!grep { $_ eq 'Ticket' } $Self->{EnabledObjectTypes}->@* ) {
+        $Self->{EnabledObjectTypes} //= [];
+        push $Self->{EnabledObjectTypes}->@*, 'Ticket';
     }
 # EO ITSMConfigurationManagement
 
@@ -322,10 +341,7 @@ sub _ShowOverview {
     # show object type selection
     my $DynamicFieldObjectTypeStrg = $LayoutObject->BuildSelection(
         Name          => 'DynamicFieldSelectedObjectType',
-        Data          => {
-            Ticket         => 'Ticket',
-            ITSMConfigItem => 'ITSM ConfigItem',
-        },
+        Data          => $Self->{EnabledObjectTypes},
         PossibleNone  => 1,
         Translation   => 0,
         SelectedID    => $Self->{SelectedObjectType},
