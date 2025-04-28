@@ -56,7 +56,8 @@ sub new {
     $Self->{SelectedObjectType} = $Preferences{ $Self->{PrefKeySelectedObjectType} } || '';
 
     # fetch selected object type from frontend and see if change is needed
-    my $SelectedObjectType = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'SelectedObjectType' );
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $SelectedObjectType = $ParamObject->GetParam( Param => 'SelectedObjectType' );
     if (defined $SelectedObjectType) {
 
         $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
@@ -68,30 +69,82 @@ sub new {
         $Self->{SelectedObjectType} = $SelectedObjectType;
     }
 
+    # check if object type restrictions need to be derived from selected dynamic field or screen
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $DFScreensObjectTypesConfig = $ConfigObject->Get('DynamicFieldScreens::ObjectTypes');
+    my $ActionType = $ParamObject->GetParam( Param => 'Type' );
+    my $DerivedObjectType;
     my @ObjectTypesFilter;
-    my $DFObjectTypesConfig        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::ObjectType');
-    my $DFScreensObjectTypesConfig = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFieldScreens::ObjectTypes');
-    if ( IsHashRefWithData($DFScreensObjectTypesConfig) ) {
-        DFSCREENSOBJECTTYPE:
-        for my $DFScreenObjectType ( map { $DFScreensObjectTypesConfig->{$_}->@* } keys $DFScreensObjectTypesConfig->%* ) {
+    if ( $ActionType ) {
+        my $Element = $ParamObject->GetParam( Param => 'Element' );
 
-            next DFSCREENSOBJECTTYPE unless $DFObjectTypesConfig->{$DFScreenObjectType};
+        if ($ActionType eq 'DynamicFieldScreen') {
+            my $DFScreensConfig = $ConfigObject->Get('DynamicFieldScreens');
+            CONFIGKEY:
+            for my $ConfigKey (keys $DFScreensConfig->%*) {
+                if ($DFScreensConfig->{$ConfigKey}{$Element}) {
 
-            $Self->{EnabledObjectTypes} //= [];
-            push $Self->{EnabledObjectTypes}->@*, $DFScreenObjectType;
+                    if ($ConfigKey eq 'Framework') {
+                        @ObjectTypesFilter = qw(Ticket Article);
+                    }
+                    else {
+                        @ObjectTypesFilter = $DFScreensObjectTypesConfig->{$ConfigKey}->@*;
+                    }
+                    last CONFIGKEY;
+                }
+            }
+        }
+        elsif ($ActionType eq 'DefaultColumnsScreen') {
+            my $DefaultScreensConfig = $ConfigObject->Get('DefaultColumnsScreens');
+            CONFIGKEY:
+            for my $ConfigKey (keys $DefaultScreensConfig->%*) {
+                if ($DefaultScreensConfig->{$ConfigKey}{$Element}) {
 
-            if (
-                $DFScreenObjectType eq $Self->{SelectedObjectType}
-                || ( $DFScreenObjectType eq 'Article' && $Self->{SelectedObjectType} eq 'Ticket' )
-            ) {
-                push @ObjectTypesFilter, $DFScreenObjectType;
+                    if ($ConfigKey eq 'Framework') {
+                        @ObjectTypesFilter = qw(Ticket Article);
+                    }
+                    else {
+                        @ObjectTypesFilter = $DFScreensObjectTypesConfig->{$ConfigKey}->@*;
+                    }
+                    last CONFIGKEY;
+                }
+            }
+        }
+        elsif ($ActionType eq 'DynamicField') {
+            my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                Name => $Element,
+            );
+            $DerivedObjectType = $DynamicFieldConfig->{ObjectType};
+            @ObjectTypesFilter = ($DerivedObjectType);
+            if ($DerivedObjectType eq 'Ticket') {
+                push @ObjectTypesFilter, 'Article';
             }
         }
     }
+    else {
+        my $DFObjectTypesConfig = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::ObjectType');
+        if ( IsHashRefWithData($DFScreensObjectTypesConfig) ) {
+            DFSCREENSOBJECTTYPE:
+            for my $DFScreenObjectType ( map { $DFScreensObjectTypesConfig->{$_}->@* } keys $DFScreensObjectTypesConfig->%* ) {
 
-    if (!grep { $_ eq 'Ticket' } $Self->{EnabledObjectTypes}->@* ) {
-        $Self->{EnabledObjectTypes} //= [];
-        push $Self->{EnabledObjectTypes}->@*, 'Ticket';
+                next DFSCREENSOBJECTTYPE unless $DFObjectTypesConfig->{$DFScreenObjectType};
+
+                $Self->{EnabledObjectTypes} //= [];
+                push $Self->{EnabledObjectTypes}->@*, $DFScreenObjectType;
+
+                if (
+                    $DFScreenObjectType eq $Self->{SelectedObjectType}
+                    || ( $DFScreenObjectType eq 'Article' && $Self->{SelectedObjectType} eq 'Ticket' )
+                ) {
+                    push @ObjectTypesFilter, $DFScreenObjectType;
+                }
+            }
+        }
+
+        if (!grep { $_ eq 'Ticket' } $Self->{EnabledObjectTypes}->@* ) {
+            $Self->{EnabledObjectTypes} //= [];
+            push $Self->{EnabledObjectTypes}->@*, 'Ticket';
+        }
     }
 # EO ITSMConfigurationManagement
 
@@ -105,7 +158,7 @@ sub new {
 
     my $ValidDynamicFieldScreenList = $ZnunyHelperObject->_ValidDynamicFieldScreenListGet(
 # Rother OSS / ITSMConfigurationManagement
-        ObjectType => $Self->{SelectedObjectType},
+        ObjectType => $DerivedObjectType || $Self->{SelectedObjectType},
 # EO ITSMConfigurationManagement
         Result => 'HASH',
     );
