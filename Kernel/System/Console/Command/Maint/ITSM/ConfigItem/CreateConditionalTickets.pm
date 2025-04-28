@@ -45,7 +45,7 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $NotificationConfigs = $Kernel::OM->Get('Kernel::Config')->Get('RotherOSSCMDBNotifications::Rules');
+    my $NotificationConfigs = $Kernel::OM->Get('Kernel::Config')->Get('CMDBNotifications::Rules');
 
     if ( !$NotificationConfigs ) {
         $Self->Print("\n<green>No notifications configured.</green>\n");
@@ -97,13 +97,14 @@ sub Run {
         CONFIGITEMID:
         for my $ConfigItemID (@ConfigItemIDs) {
             my $LastVersion = $ConfigItemObject->ConfigItemGet(
-                ConfigItemID => $ConfigItemID,
+                ConfigItemID  => $ConfigItemID,
+                DynamicFields => 1,
             );
 
-            if ( !defined $LastVersion->{ $Config->{TimeCIKey} } ) {
+            if ( !defined $LastVersion->{ 'DynamicField_' . $Config->{TimeCIKey} } ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'info',
-                    Message  => "$Config->{TimeCIKey} field of ConfigItemID $ConfigItemID is empty - skip!",
+                    Message  => "Dynamic field $Config->{TimeCIKey} of ConfigItemID $ConfigItemID is empty or does not exist - skip!",
                 );
                 next CONFIGITEMID;
             }
@@ -112,7 +113,7 @@ sub Run {
             my $TriggerDateObject;
 
             # date field format
-            if ( $LastVersion->{ $Config->{TimeCIKey} } =~ /^(\d+)-(\d+)-(\d+)/ ) {
+            if ( $LastVersion->{ 'DynamicField_' . $Config->{TimeCIKey} } =~ /^(\d+)-(\d+)-(\d+)/ ) {
                 $TriggerDateObject = $Kernel::OM->Create(
                     'Kernel::System::DateTime',
                     ObjectParams => {
@@ -125,25 +126,10 @@ sub Run {
                     }
                 );
             }
-
-            # try old text field format
-            elsif ( $LastVersion->{ $Config->{TimeCIKey} } =~ /^\s*(\d+)\.\s*(\d+)\.\s*(\d+)\s*(\d*):?\s*(\d*):?\s*(\d*)/ ) {
-                $TriggerDateObject = $Kernel::OM->Create(
-                    'Kernel::System::DateTime',
-                    ObjectParams => {
-                        Year   => $3,
-                        Month  => $2,
-                        Day    => $1,
-                        Hour   => $4 || 0,
-                        Minute => $5 || 0,
-                        Second => $6 || 0,
-                    }
-                );
-            }
             else {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message  => "$Config->{TimeCIKey} field of ConfigItemID $ConfigItemID has an invalid format!",
+                    Message  => "Dynamic field $Config->{TimeCIKey} of ConfigItemID $ConfigItemID has an invalid format!",
                 );
                 next CONFIGITEMID;
             }
@@ -195,7 +181,7 @@ sub Run {
             my %Substitutions = (
                 '<OTOBO_CONFIGITEM_NUMBER>' => $LastVersion->{Number},
                 '<OTOBO_CONFIGITEM_NAME>'   => $LastVersion->{Name},
-                '<OTOBO_CONFIGITEM_DATE>'   => $LastVersion->{ $Config->{TimeCIKey} },
+                '<OTOBO_CONFIGITEM_DATE>'   => $LastVersion->{ 'DynamicField_' . $Config->{TimeCIKey} },
             );
             my %DefinitionRefs = map { $_->{Key} => $_ } @{ $LastVersion->{DefinitionRef} };
 
@@ -242,15 +228,14 @@ sub Run {
             my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
             my $ArticleID                    = $InternalArticleBackendObject->ArticleCreate(
                 TicketID             => $TicketID,
-                ArticleType          => $Config->{Ticket}{ArticleType} || 'note-report',
                 SenderType           => $Config->{Ticket}{SenderType}  || 'system',
-                ContentType          => 'text/plain; charset=ISO-8859-15',
+                IsVisibleForCustomer => 0,
+                ContentType          => 'text/plain; charset=utf-8',
                 Body                 => $NotificationText,
                 Subject              => $TicketTitle,
-                IsVisibleForCustomer => 0,
                 UserID               => 1,
                 HistoryType          => 'NewTicket',
-                HistoryComment       => "\%\% RotherOSS-CMDBNotification",
+                HistoryComment       => "\%\%CMDBNotification",
             );
 
             # close ticket if article create failed!
