@@ -78,61 +78,66 @@ sub new {
         $Self->{StoredFilters} = $StoredFilters;
     }
 
-    # check for filter
-    my $FilterName = IsHashRefWithData( $Self->{Filters}->{ $Self->{Filter} } ) ? $Self->{Filters}->{ $Self->{Filter} }->{Name} : 'All';
+    # look up filter as filter names in $Self are potentially translated
+    my $FilterName;
+    if ( IsHashRefWithData( $Self->{Filters}{ $Self->{Filter} } ) ) {
+        my $ItemList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::ConfigItem::Class',
+        );
+
+        $FilterName = $ItemList->{ $Self->{Filter} } // '';
+    }
+    $FilterName ||= 'All';
 
     # gather column config
     #   config from AgentITSMConfigItem overview is used for both overview and search result view
     my %ColumnConfig;
     if ( $Self->{Action} eq 'AgentITSMConfigItemSearch' ) {
         my $OverviewConfig = $ConfigObject->Get('ITSMConfigItem::Frontend::AgentITSMConfigItem');
-        $ColumnConfig{DefaultColumns}        = $OverviewConfig->{DefaultColumns}        || {};
-        $ColumnConfig{ClassColumnsDisabled}  = $OverviewConfig->{ClassColumnsDisabled}  || {};
-        $ColumnConfig{ClassColumnsAvailable} = $OverviewConfig->{ClassColumnsAvailable} || {};
-        $ColumnConfig{ClassColumnsDefault}   = $OverviewConfig->{ClassColumnsDefault}   || {};
+        $Self->{Config}{DefaultColumns}        = $OverviewConfig->{Config}{DefaultColumns};
+        $Self->{Config}{ClassColumnsAvailable} = $OverviewConfig->{Config}{ClassColumnsAvailable};
+        $Self->{Config}{ClassColumnsDefault}   = $OverviewConfig->{Config}{ClassColumnsDefault};
+        $Self->{Config}{ClassColumnsDisabled}  = $OverviewConfig->{Config}{ClassColumnsDisabled};
+        %ColumnConfig                          = $OverviewConfig->{DefaultColumns}->%*;
     }
     else {
-        $ColumnConfig{DefaultColumns}        = $Self->{Config}{DefaultColumns}        || {};
-        $ColumnConfig{ClassColumnsDisabled}  = $Self->{Config}{ClassColumnsDisabled}  || {};
-        $ColumnConfig{ClassColumnsAvailable} = $Self->{Config}{ClassColumnsAvailable} || {};
-        $ColumnConfig{ClassColumnsDefault}   = $Self->{Config}{ClassColumnsDefault}   || {};
+        %ColumnConfig = $Self->{Config}{DefaultColumns}->%*;
     }
 
     # if class filter is set, display class specific fields
-    my %ClassColumnDefinition;
     if ( $FilterName && $FilterName ne 'All' ) {
 
-        if ( $ColumnConfig{ClassColumnsDisabled} && IsArrayRefWithData( $ColumnConfig{ClassColumnsDisabled}{$FilterName} ) ) {
-            for my $DisabledColumn ( $ColumnConfig{ClassColumnsDisabled}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$DisabledColumn} = 0;
+        if ( $Self->{Config}{ClassColumnsAvailable} && IsArrayRefWithData( $Self->{Config}{ClassColumnsAvailable}{$FilterName} ) ) {
+            for my $AvailableColumn ( $Self->{Config}{ClassColumnsAvailable}{$FilterName}->@* ) {
+                $ColumnConfig{$AvailableColumn} = 1;
             }
         }
 
-        if ( $ColumnConfig{ClassColumnsAvailable} && IsArrayRefWithData( $ColumnConfig{ClassColumnsAvailable}{$FilterName} ) ) {
-            for my $AvailableColumn ( $ColumnConfig{ClassColumnsAvailable}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$AvailableColumn} = 1;
+        if ( $Self->{Config}{ClassColumnsDefault} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDefault}{$FilterName} ) ) {
+            for my $DefaultColumn ( $Self->{Config}{ClassColumnsDefault}{$FilterName}->@* ) {
+                $ColumnConfig{$DefaultColumn} = 2;
             }
         }
 
-        if ( $ColumnConfig{ClassColumnsDefault} && IsArrayRefWithData( $ColumnConfig{ClassColumnsDefault}{$FilterName} ) ) {
-            for my $DefaultColumn ( $ColumnConfig{ClassColumnsDefault}{$FilterName}->@* ) {
-                $ClassColumnDefinition{$DefaultColumn} = 2;
+        if ( $Self->{Config}{ClassColumnsDisabled} && IsArrayRefWithData( $Self->{Config}{ClassColumnsDisabled}{$FilterName} ) ) {
+            for my $DisabledColumn ( $Self->{Config}{ClassColumnsDisabled}{$FilterName}->@* ) {
+                $ColumnConfig{$DisabledColumn} = 0;
             }
         }
     }
 
     # merge settings from class config and default config
     COLUMN:
-    for my $Column ( sort _DefaultColumnSort ( keys $ColumnConfig{DefaultColumns}->%*, keys %ClassColumnDefinition ) ) {
+    for my $Column ( sort _DefaultColumnSort keys %ColumnConfig ) {
 
         # skip disabled columns
-        next COLUMN if ( defined $ClassColumnDefinition{$Column} && $ClassColumnDefinition{$Column} == 0 );
+        next COLUMN unless $ColumnConfig{$Column};
 
-        if ( ( $ClassColumnDefinition{$Column} || $ColumnConfig{DefaultColumns}{$Column} ) && !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
+        if ( !grep { $_ eq $Column } $Self->{ColumnsAvailable}->@* ) {
             push $Self->{ColumnsAvailable}->@*, $Column;
         }
 
-        if ( ( ( $ClassColumnDefinition{$Column} || $ColumnConfig{DefaultColumns}{$Column} ) // 0 ) == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
+        if ( $ColumnConfig{$Column} == 2 && !grep { $_ eq $Column } $Self->{ColumnsEnabled}->@* ) {
             push $Self->{ColumnsEnabled}->@*, $Column;
         }
     }
@@ -151,7 +156,7 @@ sub new {
             COLUMN:
             for my $Column ( $ColumnsEnabled->@* ) {
 
-                next COLUMN if ( defined $ClassColumnDefinition{$Column} && $ClassColumnDefinition{$Column} == 0 );
+                next COLUMN unless $ColumnConfig{$Column};
 
                 push @FilteredColumnsEnabled, $Column;
             }
