@@ -494,10 +494,21 @@ sub _ValidDynamicFieldScreenListGet {
 
     $Param{Result} = lc( $Param{Result} // 'array' );
 # Rother OSS / ITSMConfigurationManagement
-    my %RegistrationObjectTypeLookup = (
-        Ticket         => 'Framework',
-        ITSMConfigItem => 'ITSMConfigurationManagement',
-    );
+    my $DFScreensFilterKey;
+    if ($Param{ObjectType}) {
+
+        if ( $Param{ObjectType} eq 'Ticket' ) {
+            $DFScreensFilterKey = 'Framework';
+        }
+        else {
+            my $DFScreensObjectTypesConfig = $ConfigObject->Get('DynamicFieldScreens::ObjectTypes');
+            for my $DFScreensKey (keys $DFScreensObjectTypesConfig->%*) {
+                if (grep { $_ eq $Param{ObjectType} } $DFScreensObjectTypesConfig->{$DFScreensKey}->@* ) {
+                    $DFScreensFilterKey = $DFScreensKey;
+                }
+            }
+        }
+    }
 # EO ITSMConfigurationManagement
 
     my $ValidScreens;
@@ -517,7 +528,7 @@ sub _ValidDynamicFieldScreenListGet {
             }
 
 # Rother OSS / ITSMConfigurationManagement
-            next REGISTRATION if ($Param{ObjectType} && ($Registration !~ /$RegistrationObjectTypeLookup{$Param{ObjectType}}/));
+            next REGISTRATION if ($DFScreensFilterKey && $Registration ne $DFScreensFilterKey );
 # EO ITSMConfigurationManagement
 
             %{ $ValidScreens->{$Screen} } = (
