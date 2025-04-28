@@ -38,6 +38,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
+    'Kernel::System::Main',
     'Kernel::System::UnitTest::Helper',
     'Kernel::System::YAML',
 );
@@ -136,8 +137,7 @@ sub new {
 
 =head2 TestConfigItemClassCreate()
 
-creates a test config item class that can be used in tests. It will
-be set to invalid automatically during L</DESTROY()>. Returns
+creates a test config item class that can be used in tests. Returns
 the class id of the new config item class.
 
     my $TestCIClassName = $Helper->TestConfigItemClassCreate(
@@ -216,99 +216,10 @@ sub TestConfigItemClassCreate {
                     Value  => [ 'Name', 'DeplStateID', 'InciStateID' ],
                 );
 
-                # # Add dynamic fields for testing. These dynamic fields will be referenced
-                # # by name in dynamic field definitions.
-                # for my $Name ( sort keys %DynamicFieldDefinitions ) {
-                #     my $DFName = $Name . $TestIDSuffix;
-                #     my $ItemID = $DynamicFieldObject->DynamicFieldAdd(
-                #         InternalField => 0,
-                #         Name          => $DFName,
-                #         Label         => $DFName,
-                #         FieldOrder    => $Order++,
-                #         FieldType     => $DynamicFieldDefinitions{$Name}->{FieldType},
-                #         ObjectType    => 'ITSMConfigItem',
-                #         Config        => $DynamicFieldDefinitions{$Name},
-                #         Reorder       => 1,
-                #         ValidID       => 1,
-                #         UserID        => 1,
-                #     );
-                #     ok( $ItemID, "created dynamic field $DFName" );
-                # }
-
-                # define the first test definition (basic definition without DynamicFields)
-                my $ConfigItemPerlDefinition = "
-                {
-                        Pages  => [
-                            {
-                                Name => 'Content',
-                                Content => [
-                                    {
-                                        Section => 'Section1',
-                                        ColumnStart => 1,
-                                        RowStart => 1
-                                    }
-                                ],
-                            }
-                        ],
-                        Sections => {
-                            Section1 => {
-                                Type => 'Description',
-                            }
-                        },
-                }
-                ";
-                #                 my $ConfigItemPerlDefinition = "
-                #                 {
-                #                         Pages  => [
-                #                             {
-                #                                 Name => 'Content',
-                #                                 Layout => {
-                #                                     Columns => 2,
-                #                                     ColumnWidth => '1fr 1fr'
-                #                                 },
-                #                                 Content => [
-                #                                     {
-                #                                         Section => 'Section1',
-                #                                         ColumnStart => 1,
-                #                                         RowStart => 1
-                #                                     },
-                #                                     {
-                #                                         Section => 'Section2',
-                #                                         ColumnStart => 2,
-                #                                         RowStart => 1
-                #                                     }
-                #                                 ],
-                #                             }
-                #                         ],
-                #                         Sections => {
-                #                             Section1 => {
-                #                                 Content => [
-                #                                     {
-                #                                         DF => 'Test1$TestIDSuffix'
-                #                                     },
-                #                                     {
-                #                                         DF => 'Test2$TestIDSuffix'
-                #                                     }
-                #                                 ]
-                #                             },
-                #                             Section2 => {
-                #                                 Content => [
-                #                                     {
-                #                                         DF => 'Test3$TestIDSuffix'
-                #                                     },
-                #                                     {
-                #                                         DF => 'Test4$TestIDSuffix'
-                #                                     }
-                #                                 ]
-                #                             }
-                #                         },
-                #                 }
-                #                 ";
-
                 my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
                 my $YAMLDefinition = $YAMLObject->Dump(
-                    Data => eval $ConfigItemPerlDefinition,    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
+                    Data => eval $Param{Definition},    ## no critic qw(BuiltinFunctions::ProhibitStringyEval)
                 );
 
                 # add a definition to the class
@@ -347,41 +258,34 @@ sub TestConfigItemClassCreate {
     return $TestClassID;
 }
 
+sub TestConfigItemCreateClasses {
+    my ( $Self, %Param ) = @_;
 
-=head2 DESTROY()
+    my $Context = context();
 
-performs various clean-ups.
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-=cut
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $MainObject           = $Kernel::OM->Get('Kernel::System::Main');
+    my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
 
-sub DESTROY {
-    my $Self = shift;
+    # TODO import classes combined from one yaml file as array of classes
+    my $Content = $MainObject->FileRead(
+        Location => "$Home/scripts/test/sample/ITSMConfigurationManagement/LegacyClasses.yml",
+        Mode     => 'utf8',
+    );
 
-    # invalidate test config item classes
-    if ( ref $Self->{TestConfigItemClasses} eq 'ARRAY' && @{ $Self->{TestConfigItemClasses} } ) {
-        TESTCONFIGITEMCLASSES:
-        for my $TestConfigItemClassID ( @{ $Self->{TestConfigItemClasses} } ) {
+    my $DefinitionRaw = $YAMLObject->Load(
+        Data => ${$Content},
+    );
 
-            my $ConfigItemClass = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
-                ItemID => $TestConfigItemClassID,
-            );
+    my $Success = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ClassImport(
+        Content => $DefinitionRaw,
+    );
 
-            if ( !IsHashRefWithData($ConfigItemClass) ) {
+    $Context->release();
 
-                # if no such config item class exists, there is no need to set it to invalid;
-                # happens when the test config item class is created inside a transaction
-                # that is later rolled back.
-                next TESTCONFIGITEMCLASSES;
-            }
-
-            my $Success = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemUpdate(   ## no critic qw(ProhibitUnusedVarsStricter)
-                $ConfigItemClass->%*,
-                ValidID => 2,
-                UserID  => 1,
-            );
-        }
-    }
-
-    return;
+    return 1;
 }
+
 1;
