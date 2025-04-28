@@ -28,6 +28,9 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::Log',
     'Kernel::System::SysConfig',
+# Rother OSS / ITSMConfigurationManagement
+    'Kernel::System::User',
+# EO ITSMConfigurationManagement
     'Kernel::System::Web::Request',
     'Kernel::System::ZnunyHelper',
 );
