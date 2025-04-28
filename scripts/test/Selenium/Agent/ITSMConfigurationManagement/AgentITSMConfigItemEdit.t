@@ -36,8 +36,12 @@ $Selenium->RunTest(
     sub {
 
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CIHelper             = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
         my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+        # create config item classes
+        my $ClassID = $CIHelper->TestConfigItemClassCreate();
 
         my @Test = (
             {

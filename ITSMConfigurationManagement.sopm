@@ -16,11 +16,13 @@
         <!-- TODO: move to Kernel? -->
         <File Permission="660" Location="Custom/Kernel/Modules/AdminACL.pm" />
         <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicField.pm" />
+        <File Permission="660" Location="Custom/Kernel/Modules/AdminDynamicFieldScreen.pm" />
         <File Permission="660" Location="Custom/Kernel/Modules/AgentDashboardCommon.pm" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACL.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt" />
         <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt" />
+        <File Permission="660" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreen.tt" />
         <File Permission="660" Location="Custom/Kernel/System/ACL/DB/ACL.pm" />
 
         <!-- Just for migration of the legacy package CIAttributeCollection - not applicable on OTOBO 11.1 or higher -->
@@ -29,6 +31,7 @@
         <File Permission="660" Location="Custom/Kernel/System/CIAttachmentStorage/AttachmentStorage.pm" />
 
         <File Permission="660" Location="Custom/Kernel/System/DynamicField/Driver/Lens.pm" />
+        <File Permission="660" Location="Custom/Kernel/System/ZnunyHelper.pm" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
@@ -196,6 +199,7 @@
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
+        <File Permission="660" Location="Kernel/System/UnitTest/ITSMConfigItemHelper.pm" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.png" />
         <File Permission="660" Location="scripts/test/Console/Command/Admin/ITSM/ConfigItem/Delete.t" />
@@ -240,9 +244,11 @@
         <File Permission="660" Location="scripts/test/Selenium/Agent/ITSMConfigurationManagement/DashboardITSMConfigItemGeneric.t" />
         <File Permission="660" Location="scripts/test/Selenium/Customer/ITSMConfigurationManagement/CustomerITSMConfigItem.t" />
         <File Permission="660" Location="scripts/test/sample/ImportExport/TemplateExport.csv" />
+        <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/LegacyClasses.yml" />
         <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/Links/unittest.yml" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.Znuny4OTOBODynamicFieldScreen.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.TreeView.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Admin.ITSMConfigItem.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/ITSM.Agent.ConfigItem.Add.js" />
