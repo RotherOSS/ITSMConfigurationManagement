@@ -152,6 +152,7 @@ sub PageRender {
                 Name => 'ContentCell',
                 Data => {
                     GridArea => $GridArea,
+                    Type => $Section->{Type}
                 },
             );
 

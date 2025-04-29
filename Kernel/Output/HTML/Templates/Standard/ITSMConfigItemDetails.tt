@@ -15,7 +15,7 @@
 ## nofilter(TidyAll::Plugin::OTOBO::TT::ScriptUsage)
 <div class="oooContentGrid" style="grid-template-columns:[% Data.Widths | html %]">
 [% RenderBlockStart("ContentCell") %]
-    <div class="oooContentCell" style="[% Data.GridArea | html %]">
+    <div class="oooContentCell [% Data.Type | html %]_Cell" style="[% Data.GridArea | html %]">
 [% RenderBlockStart("HeaderRow") %]
         <h2 title="[% Translate(Data.Header) | html %]">[% Translate(Data.Header) | html %]</h2>
 [% RenderBlockEnd("HeaderRow") %]

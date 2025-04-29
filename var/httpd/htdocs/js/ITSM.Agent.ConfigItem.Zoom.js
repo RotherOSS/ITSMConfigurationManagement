@@ -81,6 +81,34 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
                 });
             });
         }
+
+        setTimeout(function () {
+            let LinkCells = $('.ConfigItemLinks_Cell');
+            if (LinkCells.length == 0) {
+                return;
+            }
+
+            LinkCells.each(function () {
+                let LinkCellStartRow = $(this).css('grid-row-start');
+                let LinkCellEndRow = $(this).css('grid-row-end');
+                let NewHeight = 0; /*specify default height here*/
+                if (LinkCellStartRow && LinkCellEndRow) {
+                    $(this).siblings('.oooContentCell:not(.ConfigItemLinks_Cell)').each(function () {
+                        let StartRow = $(this).css('grid-row-start');
+                        let EndRow = $(this).css('grid-row-end');
+                        if (StartRow == LinkCellStartRow && EndRow == LinkCellEndRow) {
+                            NewHeight = $(this).height();
+                        }
+                    })
+                }
+
+                if (NewHeight == 0) {
+                    NewHeight = parseInt(Math.min($(this).scrollHeight, 400));
+                }
+
+                $(this).height(NewHeight);
+            })
+        }, 100);
     };
 
     /**
