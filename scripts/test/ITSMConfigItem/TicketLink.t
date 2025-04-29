@@ -311,16 +311,11 @@ sub _LoadReadyToImportClasses {
 }
 
 sub _FetchConfigItemCount {
-
-    my $Success = $DBObject->Prepare(
-        SQL => 'SELECT Count(id) FROM configitem',
+    my ($Count) = $DBObject->SelectRowArray(
+        SQL => 'SELECT COUNT(id) FROM configitem',
     );
 
-    if ( my @Row = $DBObject->FetchrowArray ) {
-        return $Row[0];
-    }
-
-    return 0;
+    return $Count // 0;
 }
 
 sub _FetchConfigItemLinksCount {
