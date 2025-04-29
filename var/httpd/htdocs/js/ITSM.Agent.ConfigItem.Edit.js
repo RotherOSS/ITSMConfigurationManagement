@@ -43,7 +43,32 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
                 return false;
             }
         });
+
+        OpenRelevantPages();
+        $('form').on('submit', OpenRelevantPages);
     };
+
+    /**
+     * @function
+     * @description
+     *      Opens the details of all pages that contain invalid form input fields or contain a currently focused element.
+     */
+    function OpenRelevantPages() {
+        let $RelevantDetailsOpened = false;
+        $('details').each(function () {
+            if ($(this).find('.Error').length > 0) {
+                $(this).attr('open', true);
+                $RelevantDetailsOpened = true;
+            }
+            else if ($(this).find(':focus').length > 0) {
+                $(this).attr('open', true);
+                $RelevantDetailsOpened = true;
+            }
+        });
+        if (!$RelevantDetailsOpened) {
+            $('details:first-of-type').attr('open', true);
+        }
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

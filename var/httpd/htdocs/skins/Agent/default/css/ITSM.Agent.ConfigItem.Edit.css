@@ -48,4 +48,42 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     margin-left: 20%;
 }
 
+fieldset.TableLike details > label {
+    display: block;
+    margin-left: 30%;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+}
+
+/* Page Header Navigation */
+details summary {
+    list-style: none;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+details[open] summary .Toggle .fa-caret-right,
+details summary .Toggle .fa-caret-down {
+    display: none;
+}
+
+details[open] summary .Toggle .fa-caret-down {
+    display: block;
+}
+
+details summary .Row_PageHeader .Toggle {
+    display: inline-flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    padding-bottom: 4px; /* to align with h2 */
+    left: 30%;
+    top: 0; 
+}
+
 } /* end @media */

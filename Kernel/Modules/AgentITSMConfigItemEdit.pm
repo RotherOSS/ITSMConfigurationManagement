@@ -1432,9 +1432,20 @@ sub Run {
         );
 
         if ( scalar @PageHTML > 1 ) {
-            my $HeaderTemplate = '<div class="Row Row_PageHeader"><h2>[% Translate(Data.Name) | html %]</h2><hr/></div>';
+            my $HeaderTemplate = 
+            '<summary>
+                <div class="Row Row_PageHeader">
+                    <div class="Toggle">
+                        <i class="fa fa-caret-right"></i>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                    <h2>[% Translate(Data.Name) | html %]</h2>
+                    <hr/>
+                </div>
+            </summary>';
 
             for my $Page (@PageHTML) {
+                $DynamicFieldHTML .= '<details class="PageContent">';
                 $DynamicFieldHTML .= $LayoutObject->Output(
                     Template => $HeaderTemplate,
                     Data     => {
@@ -1442,9 +1453,11 @@ sub Run {
                     },
                 );
                 $DynamicFieldHTML .= $Page->{HTML};
+                $DynamicFieldHTML .= '</details>';
             }
 
             if ($ShowDescription) {
+                $DynamicFieldHTML .= '<details class="PageContent">';
                 $DynamicFieldHTML .= $LayoutObject->Output(
                     Template => $HeaderTemplate,
                     Data     => {
