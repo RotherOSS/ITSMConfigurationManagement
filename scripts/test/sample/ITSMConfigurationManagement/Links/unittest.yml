@@ -6,37 +6,20 @@
     NumberModule: AutoIncrement
     PermissionGroup: itsm-configitem
     VersionStringModule: Incremental
-  Definition: |
-    ---
-    Pages:
-      # The individual tabs in AgentITSMConfigItemZoom are called Pages.
-      # The fields to be displayed there are defined in the roles
-      # listed on the left under "Roles".
-      - Name: Summary
-        Layout:
-          Columns: 3
-          ColumnWidth: 1fr 1fr 1fr
-        Content:
-          - Section: CMDB Backlinks::Backlinks
-            RowStart: 1
-            ColumnStart: 1
-          - Section: CMDB Description::Description
-            RowStart: 1
-            ColumnStart: 2
-            ColumnSpan: 2
-
-    Roles:
-      # Roles are used to define the Sections and their individual fields.
-      # Of course, sections can also be defined directly here in the class definitions.
-      # We have simply moved them to "Roles" for the sake of clarity.
-
-      # For each class with class-specific fields, there is a "General Fields"
-      # definition referring to a role with the name "ITSM GF class name".
-      # This is where the fields of the respective class can be customised.
-      CMDB Backlinks:
-        Name: CMDB Backlinks
-      CMDB Description:
-        Name: CMDB Description"
+  Definition: "---\r\nPages:\r\n  # The individual tabs in AgentITSMConfigItemZoom
+    are called Pages.\r\n  # The fields to be displayed there are defined in the roles
+    \r\n  # listed on the left under \"Roles\".\r\n  - Name: Summary\r\n    Layout:\r\n
+    \     Columns: 3\r\n      ColumnWidth: 1fr 1fr 1fr\r\n    Content:\r\n      -
+    Section: CMDB Backlinks::Backlinks\r\n        RowStart: 1\r\n        ColumnStart:
+    1\r\n      - Section: CMDB Description::Description\r\n        RowStart: 1\r\n
+    \       ColumnStart: 2\r\n        ColumnSpan: 2\r\n        \r\nRoles:\r\n  # Roles
+    are used to define the Sections and their individual fields.\r\n  # Of course,
+    sections can also be defined directly here in the class definitions. \r\n  # We
+    have simply moved them to \"Roles\" for the sake of clarity.\r\n\r\n  # For each
+    class with class-specific fields, there is a \"General Fields\"\r\n  # definition
+    referring to a role with the name \"ITSM GF class name\". \r\n  # This is where
+    the fields of the respective class can be customised.\r\n  CMDB Backlinks:\r\n
+    \   Name: CMDB Backlinks\r\n  CMDB Description:\r\n    Name: CMDB Description"
 - Class:
     Categories:
     - Location
@@ -44,51 +27,25 @@
     NumberModule: AutoIncrement
     PermissionGroup: itsm-configitem
     VersionStringModule: Incremental
-  Definition: |
-    ---
-    Pages:
-      # The individual tabs in AgentITSMConfigItemZoom are called Pages.
-      # The fields to be displayed there are defined in the roles
-      # listed on the left under "Roles".
-      - Name: Summary
-        Layout:
-          Columns: 2
-          ColumnWidth: 1fr 1fr
-        Content:
-          - Section: Address
-            ColumnStart: 1
-            RowStart: 1
-          - Section: CMDB Backlinks::Backlinks
-            RowStart: 2
-            ColumnStart: 1
-          - Section: CMDB Description::Description
-            RowStart: 1
-            RowSpan: 2
-            ColumnStart: 2
-            ColumnSpan: 2
-
-    Roles:
-      # Roles are used to define the Sections and their individual fields.
-      # Of course, sections can also be defined directly here in the class definitions.
-      # We have simply moved them to "Roles" for the sake of clarity.
-
-      # For each class with class-specific fields, there is a "General Fields"
-      # definition referring to a role with the name "ITSM GF class name".
-      # This is where the fields of the respective class can be customised.
-      CMDB Backlinks:
-        Name: CMDB Backlinks
-      CMDB Description:
-        Name: CMDB Description
-
-    Sections:
-      Address:
-        Content:
-          - Header: Address
-          - DF: Location-Street
-          - DF: Location-City
-          - DF: Location-ReferenceToCountry
-          - DF: Location-Latitude
-          - DF: Location-Longitude"
+  Definition: "---\r\nPages:\r\n  # The individual tabs in AgentITSMConfigItemZoom
+    are called Pages.\r\n  # The fields to be displayed there are defined in the roles
+    \r\n  # listed on the left under \"Roles\".\r\n  - Name: Summary\r\n    Layout:\r\n
+    \     Columns: 2\r\n      ColumnWidth: 1fr 1fr\r\n    Content:\r\n      - Section:
+    Address\r\n        ColumnStart: 1\r\n        RowStart: 1\r\n      - Section: CMDB
+    Backlinks::Backlinks\r\n        RowStart: 2\r\n        ColumnStart: 1\r\n      -
+    Section: CMDB Description::Description\r\n        RowStart: 1\r\n        RowSpan:
+    2\r\n        ColumnStart: 2\r\n        ColumnSpan: 2\r\n        \r\nRoles:\r\n
+    \ # Roles are used to define the Sections and their individual fields.\r\n  #
+    Of course, sections can also be defined directly here in the class definitions.
+    \r\n  # We have simply moved them to \"Roles\" for the sake of clarity.\r\n\r\n
+    \ # For each class with class-specific fields, there is a \"General Fields\"\r\n
+    \ # definition referring to a role with the name \"ITSM GF class name\". \r\n
+    \ # This is where the fields of the respective class can be customised.\r\n  CMDB
+    Backlinks:\r\n    Name: CMDB Backlinks\r\n  CMDB Description:\r\n    Name: CMDB
+    Description\r\n\r\nSections:\r\n  Address:\r\n    Content:\r\n      - Header:
+    Address\r\n      - DF: Location-Street\r\n      - DF: Location-City\r\n      -
+    DF: Location-ReferenceToCountry\r\n      - DF: Location-Latitude\r\n      - DF:
+    Location-Longitude"
   DynamicFields:
     Location-City:
       CIClass: Subsidiary
