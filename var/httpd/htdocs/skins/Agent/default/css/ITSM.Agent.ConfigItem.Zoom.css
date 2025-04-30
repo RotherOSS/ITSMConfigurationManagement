@@ -79,11 +79,14 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         background: #fff;
         border-radius: 10px;
         padding: 8px;
-        overflow-y: auto;
     }
 
     .oooContentCell.ConfigItemLinks_Cell {
-        height: 50px;
+        overflow-y: auto;
+    }
+
+    .oooContentCell.ConfigItemLinks_Cell .LinkList {
+        max-height: 400px;
     }
 
     .FieldDisplayRow {

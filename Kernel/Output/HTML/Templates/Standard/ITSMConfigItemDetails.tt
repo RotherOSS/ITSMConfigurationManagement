@@ -19,21 +19,22 @@
 [% RenderBlockStart("HeaderRow") %]
         <h2 title="[% Translate(Data.Header) | html %]">[% Translate(Data.Header) | html %]</h2>
 [% RenderBlockEnd("HeaderRow") %]
+        <div class="LinkList">
 [% RenderBlockStart("FieldDisplayRow") %]
-        <div class="FieldDisplayRow" style="grid-template-columns:[% Data.Widths | html %]">
+            <div class="FieldDisplayRow" style="grid-template-columns:[% Data.Widths | html %]">
 [% RenderBlockStart("FieldDisplayCell") %]
 [% IF Data.Type == 'Label' %]
-            <label title="[% Translate(Data.Label) | html %]" style="[% Data.GridColumm | html %]">[% Translate(Data.Label) | html %]</label>
+                <label title="[% Translate(Data.Label) | html %]" style="[% Data.GridColumm | html %]">[% Translate(Data.Label) | html %]</label>
 [% ELSIF Data.Type == 'Value' %]
-            <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]">[% Data.Value %]</p>
+                <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]">[% Data.Value %]</p>
 [% ELSIF Data.Type == 'ValueLink' %]
-            <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] class="DynamicFieldLink">[% Data.Value %]</a></p>
+                <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] class="DynamicFieldLink">[% Data.Value %]</a></p>
 [% ELSIF Data.Type == 'ValueRaw' %]
-            <div style="[% Data.GridColumn | html %]">[% Data.Value %]</div>
+                <div style="[% Data.GridColumn | html %]">[% Data.Value %]</div>
 [% ELSIF Data.Type == 'FullRow' %]
-            <div style="grid-column: 1 / 3">[% Data.Value %]</div>
+                <div style="grid-column: 1 / 3">[% Data.Value %]</div>
 [% ELSIF Data.Type == 'Iframe' %]
-            <div>
+                <div>
 # execute IFrame JS asynchronously. Otherwise it could happen before our API was loaded
 # the following JS code must be within the template, otherwise it could happen, that also this code itself is not loaded yet
 <script>
@@ -51,15 +52,16 @@ function CheckIFrameHeight(IFrameID) {
 # Use the HTML5 sandbox attribute to prevent plugins and scripts from being executed in the browser.
 # Append session info to URL because IE will not send cookies.
 # Set 'allow-popups' to allow IE10+ to open links. ref: http://www.w3.org/html/wg/wiki/ChangeProposals/sandbox_allow_popups
-                <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" width="100%" frameborder="0" id="Iframe[% Data.ConfigItemID | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('Iframe[% Data.ConfigItemID | html %]'); }, 500);" src="[% Env("Baselink") %]Action=[% Data.Frontend | html %]ITSMConfigItemAttachment;Subaction=HTMLView;ConfigItemID=[% Data.ConfigItemID | html %];VersionID=[% Data.VersionID | html %];[% Env("SessionName") | html %]=[% Env("SessionID") | html %]"></iframe>
-            </div>
+                    <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" width="100%" frameborder="0" id="Iframe[% Data.ConfigItemID | html %]" onload="window.setTimeout( function (){ CheckIFrameHeight('Iframe[% Data.ConfigItemID | html %]'); }, 500);" src="[% Env("Baselink") %]Action=[% Data.Frontend | html %]ITSMConfigItemAttachment;Subaction=HTMLView;ConfigItemID=[% Data.ConfigItemID | html %];VersionID=[% Data.VersionID | html %];[% Env("SessionName") | html %]=[% Env("SessionID") | html %]"></iframe>
+                </div>
 [% END %]
 [% RenderBlockEnd("FieldDisplayCell") %]
-        </div>
+            </div>
 [% RenderBlockEnd("FieldDisplayRow") %]
 [% RenderBlockStart("GenericHTML") %]
         [% Data.HTML %]
 [% RenderBlockEnd("GenericHTML") %]
+        </div>
     </div>
 [% RenderBlockEnd("ContentCell") %]
 </div>

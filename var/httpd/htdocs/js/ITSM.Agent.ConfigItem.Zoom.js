@@ -89,24 +89,14 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
             }
 
             LinkCells.each(function () {
-                let LinkCellStartRow = $(this).css('grid-row-start');
-                let LinkCellEndRow = $(this).css('grid-row-end');
-                let NewHeight = 0; /*specify default height here*/
-                if (LinkCellStartRow && LinkCellEndRow) {
-                    $(this).siblings('.oooContentCell:not(.ConfigItemLinks_Cell)').each(function () {
-                        let StartRow = $(this).css('grid-row-start');
-                        let EndRow = $(this).css('grid-row-end');
-                        if (StartRow == LinkCellStartRow && EndRow == LinkCellEndRow) {
-                            NewHeight = $(this).height();
-                        }
-                    })
+                let $Content = $('.LinkList', this);
+                if ($Content.length == 0) {
+                    return;
                 }
 
-                if (NewHeight == 0) {
-                    NewHeight = parseInt(Math.min($(this).scrollHeight, 400));
+                if ($(this).height() > $Content.height()) {
+                    $Content.css('max-height', $(this).height());
                 }
-
-                $(this).height(NewHeight);
             })
         }, 100);
     };
