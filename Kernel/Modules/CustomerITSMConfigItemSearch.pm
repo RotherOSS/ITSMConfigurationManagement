@@ -75,19 +75,31 @@ sub Run {
 
         next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
         next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+        next DYNAMICFIELD unless IsArrayRefWithData( $DynamicFieldConfig->{Config}{Include} );
 
-        my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
-        for my $DF (@CurrentInnerFields) {
-            my $InnerFieldConfigRef = $DynamicFieldObject->DynamicFieldGet(
-                Name => $DF->{DF},
+        # fetch the list of included dynamic field names to get the configs
+        my $SetInnerFieldNames = $DynamicFieldObject->DynamicFieldListMask(
+            Content => $DynamicFieldConfig->{Config}{Include},
+        );
+
+        if ( IsArrayRefWithData($SetInnerFieldNames) ) {
+            my $InnerFieldConfigs = $DynamicFieldObject->DynamicFieldListGet(
+                Valid       => 1,
+                FieldFilter => { map { ( $_ => 1 ) } $SetInnerFieldNames->@* },
             );
 
-            # necessary to not overwrite cached data of field config by altering the reference
-            my %InnerFieldConfig = $InnerFieldConfigRef->%*;
+            if ( IsArrayRefWithData($InnerFieldConfigs) ) {
+                for my $InnerFieldConfigRef ( $InnerFieldConfigs->@* ) {
 
-            $InnerFieldConfig{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
-                . $LayoutObject->{LanguageObject}->Translate( $InnerFieldConfig{Label} );
-            push @SetInnerFields, \%InnerFieldConfig;
+                    # necessary to not overwrite cached data of field config by altering the reference
+                    my %InnerFieldConfig = $InnerFieldConfigRef->%*;
+
+                    $InnerFieldConfig{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                        . $LayoutObject->{LanguageObject}->Translate( $InnerFieldConfig{Label} );
+                    push @SetInnerFields, \%InnerFieldConfig;
+
+                }
+            }
         }
     }
 
