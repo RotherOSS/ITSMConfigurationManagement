@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -85,8 +85,6 @@ This will just return the data that was passed to the function.
 
 =cut
 
-use Data::Dumper;
-
 sub PrepareRequest {
     my ( $Self, %Param ) = @_;
 
@@ -100,10 +98,6 @@ sub PrepareRequest {
         }
     }
 
-    print STDERR "\n\nEvent = '$Param{Data}{Event}'\n\n";
-
-    print STDERR Dumper \%Param;
-    
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -126,8 +120,6 @@ sub PrepareRequest {
                 }
             }
         );
-
-        print STDERR Dumper \%Content;
 
         return {
             Success => 1,
@@ -210,7 +202,7 @@ sub PrepareRequest {
         );
 
         # return, if attachment was not added
-        if ( !$Result || !$Result->{Data}->{_id} ) {
+        if ( !$Result || !$Result->{Data}{_id} ) {
             return {
                 Success           => 1,
                 StopCommunication => 1,
@@ -219,7 +211,7 @@ sub PrepareRequest {
 
         # set parameters
         my %Request = (
-            id => $Result->{Data}->{_id},
+            id => $Result->{Data}{_id},
         );
         my %API = (
             docapi => '_doc',
@@ -242,10 +234,10 @@ sub PrepareRequest {
 
         # prepare processed data to be appended to the attachment array of the CI
         my @AttachmentArray;
-        for my $AttachmentAttr ( @{ $Result->{Data}->{_source}->{Attachments} } ) {
+        for my $AttachmentAttr ( @{ $Result->{Data}{_source}{Attachments} } ) {
             my %Attachment = (
                 Filename => $AttachmentAttr->{filename},
-                Content  => $AttachmentAttr->{attachment}->{content},
+                Content  => $AttachmentAttr->{attachment}{content},
             );
             push @AttachmentArray, \%Attachment;
         }
@@ -310,7 +302,7 @@ sub PrepareRequest {
 
         # prepare processed data to be appended to the attachment array of the CI
         my @AttachmentArray = ();
-        for my $Attachment ( @{ $Result->{Data}->{_source}->{Attachments} } ) {
+        for my $Attachment ( @{ $Result->{Data}{_source}{Attachments} } ) {
 
             # sort out deleted attachment
             if ( $Attachment->{Filename} ne $Param{Data}{Filename} ) {
@@ -404,7 +396,6 @@ sub PrepareRequest {
             }
         }
     }
-
 
     # gather all fields which have to be stored
     my $Store              = $ConfigObject->Get('Elasticsearch::ConfigItemStoreFields');
@@ -505,10 +496,10 @@ sub HandleResponse {
 
     # Per default there is no rescheduling of Elasticsearch::ConfigItemManagement requests,
     # but ErrorHandling::RequestRetry could have been configured manually, e.g. via the admin interface.
-    if ( $Param{Data}->{ResponseContent} && $Param{Data}->{ResponseContent} =~ m{ReSchedule=1} ) {
+    if ( $Param{Data}{ResponseContent} && $Param{Data}{ResponseContent} =~ m{ReSchedule=1} ) {
 
         # ResponseContent has URI like params, convert them into a hash
-        my %QueryParams = split /[&=]/, $Param{Data}->{ResponseContent};
+        my %QueryParams = split /[&=]/, $Param{Data}{ResponseContent};
 
         # unescape URI strings in query parameters
         for my $Param ( sort keys %QueryParams ) {
