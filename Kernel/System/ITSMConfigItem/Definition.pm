@@ -1797,11 +1797,10 @@ sub ClassImport {
         my %SetConfig;
         if ( $FieldConfig->{FieldType} eq 'Set' ) {
 
+            next FIELD unless IsArrayRefWithData( $FieldConfig->{Config}{Include} );
+
             # copy config to avoid destroying original data
             my %Config = $FieldConfig->{Config}->%*;
-
-            # iterate Include structure
-            next FIELD unless IsArrayRefWithData( $FieldConfig->{Config}{Include} );
 
             # iterate the entire Include structure
             INCLUDEELEMENT:
