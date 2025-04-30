@@ -2240,9 +2240,8 @@ sub _PrepareLikeString {
 
 =head1 ITSM Config Item events:
 
-ConfigItemCreate, VersionCreate, VersionUpdate, DeploymentStateUpdate, IncidentStateUpdate,
-ConfigItemDelete, LinkAdd, LinkDelete, DefinitionUpdate, NameUpdate,
-DefinitionCreate, VersionDelete
+ConfigItemCreate, ConfigItemUpdate, VersionCreate, VersionUpdate, DeploymentStateUpdate, IncidentStateUpdate,
+ConfigItemDelete, LinkAdd, LinkDelete, DefinitionUpdate, NameUpdate, DefinitionCreate, VersionDelete
 
 =cut
 
