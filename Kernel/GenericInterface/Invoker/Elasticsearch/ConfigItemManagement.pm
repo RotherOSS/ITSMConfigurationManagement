@@ -111,7 +111,7 @@ sub PrepareRequest {
 
     # handle all events which are neither update nor creation first
 
-    # delete the ticket
+    # delete the config item
     if ( $Param{Data}{Event} eq 'ConfigItemDelete' ) {
         my %Content = (
             query => {
@@ -186,71 +186,6 @@ sub PrepareRequest {
     # get needed objects
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
-    # handle exclusions
-    my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
-    my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
-    $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
-    $ExcludedDeplStates = $ExcludedDeplStates ? { map { $_ => 1 } @{$ExcludedDeplStates} } : undef;
-
-    # define the default API
-    my $API = $Param{Data}{Event} eq 'ConfigItemCreate' ? '_doc' : '_update';
-
-    # excluded classes and deployment states
-    if ( defined $ExcludedClasses || defined $ExcludedDeplStates ) {
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $Param{Data}{ConfigItemID},
-        );
-
-        # return if class is excluded
-        if ( defined $ExcludedClasses && $ExcludedClasses->{ $ConfigItem->{Class} } ) {
-            return {
-                Success           => 1,
-                StopCommunication => 1,
-            };
-        }
-
-        # if the DeploymentState is changed, check if the ticket has to be created or deleted in ES
-        if ( defined $ExcludedDeplStates && $Param{Data}{Event} eq 'VersionCreate' ) {
-
-            # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
-            if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                my %Content = (
-                    query => {
-                        term => {
-                            ConfigItemID => $Param{Data}{ConfigItemID},
-                        }
-                    }
-                );
-
-                return {
-                    Success => 1,
-                    Data    => {
-                        docapi => '_delete_by_query',
-                        id     => '',
-                        %Content,
-                    },
-                };
-            }
-
-            # do nothing if both, the old and the new state are excluded
-            elsif ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                return {
-                    Success           => 1,
-                    StopCommunication => 1,
-                };
-            }
-
-            # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
-            elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
-                my $ESObject = $Kernel::OM->Get('Kernel::System::Elasticsearch');
-
-                $ESObject->ConfigItemCreate(
-                    ConfigItemID => $Param{Data}{ConfigItemID},
-                );
-            }
-        }
-    }
-
     # attachment management
     if ( $Param{Data}{Event} eq 'AttachmentAddPost' ) {
         my $RequesterObject = $Kernel::OM->Get('Kernel::GenericInterface::Requester');
@@ -267,7 +202,7 @@ sub PrepareRequest {
         );
 
         # return, if attachment was not added
-        if ( !$Result || !$Result->{Data}->{_id} ) {
+        if ( !$Result || !$Result->{Data}{_id} ) {
             return {
                 Success           => 1,
                 StopCommunication => 1,
@@ -276,7 +211,7 @@ sub PrepareRequest {
 
         # set parameters
         my %Request = (
-            id => $Result->{Data}->{_id},
+            id => $Result->{Data}{_id},
         );
         my %API = (
             docapi => '_doc',
@@ -299,10 +234,10 @@ sub PrepareRequest {
 
         # prepare processed data to be appended to the attachment array of the CI
         my @AttachmentArray;
-        for my $AttachmentAttr ( @{ $Result->{Data}->{_source}->{Attachments} } ) {
+        for my $AttachmentAttr ( @{ $Result->{Data}{_source}{Attachments} } ) {
             my %Attachment = (
                 Filename => $AttachmentAttr->{filename},
-                Content  => $AttachmentAttr->{attachment}->{content},
+                Content  => $AttachmentAttr->{attachment}{content},
             );
             push @AttachmentArray, \%Attachment;
         }
@@ -367,7 +302,7 @@ sub PrepareRequest {
 
         # prepare processed data to be appended to the attachment array of the CI
         my @AttachmentArray = ();
-        for my $Attachment ( @{ $Result->{Data}->{_source}->{Attachments} } ) {
+        for my $Attachment ( @{ $Result->{Data}{_source}{Attachments} } ) {
 
             # sort out deleted attachment
             if ( $Attachment->{Filename} ne $Param{Data}{Filename} ) {
@@ -387,6 +322,79 @@ sub PrepareRequest {
                 doc    => \%Content,
             }
         };
+    }
+
+    # ignore events other than ConfigItemCreate or ConfigItemUpdate
+    if ( $Param{Data}{Event} !~ /ConfigItemCreate|ConfigItemUpdate/ ) {
+        return {
+            Success           => 1,
+            StopCommunication => 1,
+        };
+    }
+
+    # handle exclusions
+    my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
+    my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
+    $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
+    $ExcludedDeplStates = $ExcludedDeplStates ? { map { $_ => 1 } @{$ExcludedDeplStates} } : undef;
+
+    # define the default API
+    my $API = $Param{Data}{Event} eq 'ConfigItemCreate' ? '_doc' : '_update';
+
+    # excluded classes and deployment states
+    if ( defined $ExcludedClasses || defined $ExcludedDeplStates ) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $Param{Data}{ConfigItemID},
+        );
+
+        # return if class is excluded
+        if ( defined $ExcludedClasses && $ExcludedClasses->{ $ConfigItem->{Class} } ) {
+            return {
+                Success           => 1,
+                StopCommunication => 1,
+            };
+        }
+
+        # if the DeploymentState is changed, check if the config item has to be created or deleted in ES
+        if ( defined $ExcludedDeplStates ) {
+
+            # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
+            if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                my %Content = (
+                    query => {
+                        term => {
+                            ConfigItemID => $Param{Data}{ConfigItemID},
+                        }
+                    }
+                );
+
+                return {
+                    Success => 1,
+                    Data    => {
+                        docapi => '_delete_by_query',
+                        id     => '',
+                        %Content,
+                    },
+                };
+            }
+
+            # do nothing if both, the old and the new state are excluded
+            elsif ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                return {
+                    Success           => 1,
+                    StopCommunication => 1,
+                };
+            }
+
+            # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
+            elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
+                my $ESObject = $Kernel::OM->Get('Kernel::System::Elasticsearch');
+
+                $ESObject->ConfigItemCreate(
+                    ConfigItemID => $Param{Data}{ConfigItemID},
+                );
+            }
+        }
     }
 
     # gather all fields which have to be stored
@@ -413,58 +421,34 @@ sub PrepareRequest {
 
     # prepare request
     my %Content;
-    if ( $Param{Data}{Event} eq 'ConfigItemCreate' ) {
+    my $GetDynamicFields = ( IsArrayRefWithData( $Search->{DynamicField} ) || IsArrayRefWithData( $Store->{DynamicField} ) ) ? 1 : 0;
+    my $Version          = $ConfigItemObject->ConfigItemGet(
+        ConfigItemID  => $Param{Data}{ConfigItemID},
+        DynamicFields => 1,
+    );
 
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $Param{Data}{ConfigItemID},
-            DynamicFields => 0,
-        );
-        %Content = ( map { $_ => $ConfigItem->{$_} } keys %DataToStore );
-        $Content{Attachments} = [];
-
-        return {
-            Success => 1,
-            Data    => {
-                docapi => $API,
-                id     => $Param{Data}{ConfigItemID},
-                %Content,
-            },
-        };
-    }
-    else {
-        my $GetDynamicFields = ( IsArrayRefWithData( $Search->{DynamicField} ) || IsArrayRefWithData( $Store->{DynamicField} ) ) ? 1 : 0;
-        my $Version          = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID  => $Param{Data}{ConfigItemID},
-            DynamicFields => 1,
-        );
-
-        # iterate over dynamic fields and replace value with DisplayValueRender result
-        if ($GetDynamicFields) {
-            DYNAMICFIELD:
-            for my $DFName ( grep { $DataToStore{$_} && $_ =~ /^DynamicField_/ } keys %DataToStore ) {
-                my $DFNameShort = substr $DFName, length('DynamicField_');
-                my $DFConfig    = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-                    Name => $DFNameShort,
-                );
-                next DYNAMICFIELD unless IsHashRefWithData($DFConfig);
-                my $DFValueStructure = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->DisplayValueRender(
-                    DynamicFieldConfig => $DFConfig,
-                    Value              => $Version->{$DFName},
-                    HTMLOutput         => 0,
-                    LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
-                );
-                $Version->{$DFName} = $DFValueStructure->{Value};
-            }
+    # iterate over dynamic fields and replace value with DisplayValueRender result
+    if ($GetDynamicFields) {
+        DYNAMICFIELD:
+        for my $DFName ( grep { $DataToStore{$_} && $_ =~ /^DynamicField_/ } keys %DataToStore ) {
+            my $DFNameShort = substr $DFName, length('DynamicField_');
+            my $DFConfig    = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+                Name => $DFNameShort,
+            );
+            next DYNAMICFIELD unless IsHashRefWithData($DFConfig);
+            my $DFValueStructure = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->DisplayValueRender(
+                DynamicFieldConfig => $DFConfig,
+                Value              => $Version->{$DFName},
+                HTMLOutput         => 0,
+                LayoutObject       => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
+            );
+            $Version->{$DFName} = $DFValueStructure->{Value};
         }
-
-        # only submit potentially changed values
-        delete $DataToStore{Created};
-        delete $DataToStore{Number};
-
-        %Content = (
-            ( map { $_ => $Version->{$_} } keys %DataToStore ),
-        );
     }
+    %Content = (
+        ( map { $_ => $Version->{$_} } keys %DataToStore ),
+    );
+    $Content{Attachments} = [];
 
     return {
         Success => 1,
@@ -512,10 +496,10 @@ sub HandleResponse {
 
     # Per default there is no rescheduling of Elasticsearch::ConfigItemManagement requests,
     # but ErrorHandling::RequestRetry could have been configured manually, e.g. via the admin interface.
-    if ( $Param{Data}->{ResponseContent} && $Param{Data}->{ResponseContent} =~ m{ReSchedule=1} ) {
+    if ( $Param{Data}{ResponseContent} && $Param{Data}{ResponseContent} =~ m{ReSchedule=1} ) {
 
         # ResponseContent has URI like params, convert them into a hash
-        my %QueryParams = split /[&=]/, $Param{Data}->{ResponseContent};
+        my %QueryParams = split /[&=]/, $Param{Data}{ResponseContent};
 
         # unescape URI strings in query parameters
         for my $Param ( sort keys %QueryParams ) {

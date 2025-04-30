@@ -103,6 +103,7 @@ sub Run {
     # dispatch table for all events
     my %Dispatcher = (
         ConfigItemCreate      => \&_HistoryAdd,
+        ConfigItemUpdate      => \&_Return,
         ConfigItemDelete      => \&_ConfigItemDelete,
         LinkAdd               => \&_HistoryAdd,
         LinkDelete            => \&_HistoryAdd,
@@ -111,7 +112,7 @@ sub Run {
         DeploymentStateUpdate => \&_HistoryAdd,
         DefinitionUpdate      => \&_HistoryAdd,
         VersionCreate         => \&_HistoryAdd,
-        VersionUpdate         => \&_HistoryAdd,
+        VersionUpdate         => \&_Return,
         DefinitionCreate      => \&_Return,
         VersionDelete         => \&_HistoryAdd,
         AttachmentAddPost     => \&_HistoryAdd,

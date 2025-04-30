@@ -1004,6 +1004,17 @@ END_SQL
 
             # TODO: roll back the 'UPDATE INTO configitem_version'
             return unless $UpdateSuccess;
+
+            # trigger VersionUpdate event
+            $Self->EventHandler(
+                Event => 'VersionUpdate',
+                Data  => {
+                    ConfigItemID => $Version->{ConfigItemID},
+                    Comment      => $Version->{VersionID},
+                    OldDeplState => $Version->{CurDeplState},
+                },
+                UserID => $Param{UserID},
+            );
         }
     }
 

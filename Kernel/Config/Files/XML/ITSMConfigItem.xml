@@ -940,7 +940,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoHistory</Item>
-                <Item Key="Event">(ConfigItemCreate|VersionCreate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|ValueUpdate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
+                <Item Key="Event">(ConfigItemCreate|ConfigItemUpdate|VersionCreate|VersionUpdate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -2349,11 +2349,12 @@
         <Value>
             <Array>
                 <Item>ConfigItemCreate</Item>
+                <Item>ConfigItemUpdate</Item>
                 <Item>VersionCreate</Item>
+                <Item>VersionUpdate</Item>
                 <Item>DeploymentStateUpdate</Item>
                 <Item>IncidentStateUpdate</Item>
                 <Item>ConfigItemDelete</Item>
-                <Item>ValueUpdate</Item>
                 <Item>NameUpdate</Item>
                 <Item>AttachmentAddPost</Item>
                 <Item>AttachmentDeletePost</Item>
