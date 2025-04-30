@@ -1684,10 +1684,39 @@ are handled in this method as well.
         ScannedConfigItemIDs       => $ScannedConfigItemIDs,        # optional, IDs and incident states of already checked CIs
     );
 
+For asynchronous execution it is convenient to pass a list of config items to C<CurInciStateRecalc()>.
+
+    my $Success = $ConfigItemObject->CurInciStateRecalc(
+        ConfigItemIDs              => [ 123, 124, 125 ],
+    );
+
+In that case the loop is discontinued when an iteration reported a failure.
+
 =cut
 
 sub CurInciStateRecalc {
     my ( $Self, %Param ) = @_;
+
+    # useful for async execution
+    # all other parameters will be ignored
+    if ( $Param{ConfigItemIDs} ) {
+
+        # these hashes will be filled in the calls to CurInciStateRecalc
+        my ( %NewConfigItemIncidentState, %ScannedConfigItemIDs );
+
+        for my $ConfigItemID ( $Param{ConfigItemIDs}->@* ) {
+            my $Success = $Self->CurInciStateRecalc(
+                ConfigItemID               => $ConfigItemID,
+                NewConfigItemIncidentState => \%NewConfigItemIncidentState,
+                ScannedConfigItemIDs       => \%ScannedConfigItemIDs,
+            );
+
+            return unless $Success;
+        }
+
+        # all fine
+        return 1;
+    }
 
     # check needed stuff
     if ( !$Param{ConfigItemID} ) {
@@ -1711,25 +1740,29 @@ sub CurInciStateRecalc {
     # { DependsOn => 'Both', LocationOf => 'Source' }
     my $IncidentLinkTypeDirection = $Kernel::OM->Get('Kernel::Config')->Get('ITSM::Core::IncidentLinkTypeDirection');
 
-    # to store the new incident state for CIs
-    # calculated from all incident link types
+    # $Param{NewConfigItemIncidentState} holds the determined incident states of the considered config items.
+    # It may contain contain content from previous calls of CurInciStateRecalc() so that unnecessary work
+    # can be skipped.
+    # New incident states are calculated from all incident link types.
+    # The newly determined incident states are made available to the caller, so that the caller
+    # can pass it to the next iteration.
     # Incorporate data from previous run(s) and remember known data.
     $Param{NewConfigItemIncidentState} //= {};
     my $KnownNewConfigItemIncidentState = dclone( $Param{NewConfigItemIncidentState} );
 
-    # remember the scanned config items
+    # Remember the scanned config items
     # Incorporate data from previous run(s) and remember known data.
     $Param{ScannedConfigItemIDs} //= {};
     my $KnownScannedConfigItemIDs = dclone( $Param{ScannedConfigItemIDs} );
 
     # Find deeply connected config items with an incident state.
-    # The direction in $IncidentLinkTypeDirection is ignored here because depended on item could change
+    # The direction in $IncidentLinkTypeDirection is ignored here because depended on items could change
     # the incident state of the current config item. Or changes in
-    # the current config item could change downstream items.
+    # the current config item could change downstream config items.
     $Self->_FindInciConfigItems(
-        ConfigItemID              => $Param{ConfigItemID},
-        IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
-        ScannedConfigItemIDs      => $Param{ScannedConfigItemIDs},
+        ConfigItemID         => $Param{ConfigItemID},
+        IncidentLinkTypes    => [ keys $IncidentLinkTypeDirection->%* ],
+        ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
     );
 
     # to store the relation between services and linked CIs
@@ -1834,7 +1867,7 @@ sub CurInciStateRecalc {
 
     # set the new current incident state for CIs
     CONFIGITEMID:
-    for my $ConfigItemID ( sort keys %{ $Param{NewConfigItemIncidentState} } ) {
+    for my $ConfigItemID ( sort keys $Param{NewConfigItemIncidentState}->%* ) {
 
         # Skip config items known from previous execution(s).
         if (
@@ -2035,9 +2068,9 @@ sub ObjectAttributesGet {
 find connected config items with an incident state.
 
     $ConfigItemObject->_FindInciConfigItems(
-        ConfigItemID              => $ConfigItemID,
-        IncidentLinkTypeDirection => $IncidentLinkTypeDirection,
-        ScannedConfigItemIDs      => \%ScannedConfigItemIDs,
+        ConfigItemID         => $ConfigItemID,
+        IncidentLinkTypes    => [ keys $IncidentLinkTypeDirection->%* ],
+        ScannedConfigItemIDs => \%ScannedConfigItemIDs,
     );
 
 The scanned config items will be entered in the C<ScannedConfigItemIDs> hashref. Each config item will be scanned only once.
@@ -2072,7 +2105,7 @@ sub _FindInciConfigItems {
         # all linked CIs that could influence this one!
         my $LinkedConfigItems = $Self->LinkedConfigItems(
             ConfigItemID => $Param{ConfigItemID},
-            Types        => [ keys $Param{IncidentLinkTypeDirection}->%* ],
+            Types        => $Param{IncidentLinkTypes},
             Direction    => 'Both',
             UserID       => 1,
         );
@@ -2102,10 +2135,12 @@ sub _FindInciConfigItems {
         }
 
         # no incident was encountered, continue with recursion
+        # _FindInciConfigItems() might be called with the current $Param{ConfigItemID}.
+        # But that call will do nothing.
         $Self->_FindInciConfigItems(
-            ConfigItemID              => $ConfigItemID,
-            IncidentLinkTypeDirection => $Param{IncidentLinkTypeDirection},
-            ScannedConfigItemIDs      => $Param{ScannedConfigItemIDs},
+            ConfigItemID         => $ConfigItemID,
+            IncidentLinkTypes    => $Param{IncidentLinkTypes},
+            ScannedConfigItemIDs => $Param{ScannedConfigItemIDs},
         );
     }
 
