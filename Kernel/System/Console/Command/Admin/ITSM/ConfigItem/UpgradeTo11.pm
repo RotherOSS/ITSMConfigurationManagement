@@ -502,12 +502,43 @@ END_XML
                 }
 
                 if ( $DynamicFieldDefinition->{$Name}{FieldType} eq 'Set' ) {
-                    for my $Included ( $DynamicFieldDefinition->{$Name}{Config}{Include}->@* ) {
-                        if ( $Included->{DF} =~ /^([^-]+)-/ ) {
-                            $Namespaces{$1} = 1;
-                        }
 
-                        $DynamicFields{ $Included->{DF} } = $Included->{Definition};
+                    if ( IsArrayRefWithData( $DynamicFieldDefinition->{$Name}{Config}{Include} ) ) {
+
+                        # iterate the entire Include structure
+                        INCLUDEELEMENT:
+                        for my $IncludeElement ( $DynamicFieldDefinition->{$Name}{Config}{Include}->@* ) {
+
+                            if ( $IncludeElement->{DF} ) {
+                                if ( $IncludeElement->{DF} =~ /^([^-]+)-/ ) {
+                                    $Namespaces{$1} = 1;
+                                }
+
+                                $DynamicFields{ $IncludeElement->{DF} } = $IncludeElement->{Definition};
+                            }
+                            elsif ( $IncludeElement->{Grid} ) {
+
+                                next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                                next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                                ROW:
+                                for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                                    next ROW unless IsArrayRefWithData($Row);
+
+                                    ROWELEMENT:
+                                    for my $RowElement ( $Row->@* ) {
+                                        if ( $RowElement->{DF} ) {
+                                            if ( $RowElement->{DF} =~ /^([^-]+)-/ ) {
+                                                $Namespaces{$1} = 1;
+                                            }
+
+                                            $DynamicFields{ $RowElement->{DF} } = $RowElement->{Definition};
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -564,11 +595,42 @@ END_XML
     for my $Field ( sort keys %DynamicFields ) {
         my %SetConfig;
         if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
-            my @Included = map { { DF => $_->{DF} } } $DynamicFields{$Field}{Config}{Include}->@*;
+
+            next FIELD unless IsArrayRefWithData( $DynamicFields{$Field}->{Config}{Include} );
+
+            # copy config to avoid destroying original data
+            my %Config = $DynamicFields{$Field}->{Config}->%*;
+
+            # iterate the entire Include structure
+            INCLUDEELEMENT:
+            for my $IncludeElement ( $Config{Include}->@* ) {
+
+                if ( $IncludeElement->{DF} ) {
+                    delete $IncludeElement->{Definition};
+                }
+                elsif ( $IncludeElement->{Grid} ) {
+
+                    next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                    ROW:
+                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                        next ROW unless IsArrayRefWithData($Row);
+
+                        ROWELEMENT:
+                        for my $RowElement ( $Row->@* ) {
+                            if ( $RowElement->{DF} ) {
+                                delete $RowElement->{Definition};
+                            }
+                        }
+                    }
+                }
+            }
             %SetConfig = (
                 Config => {
                     $DynamicFields{$Field}{Config}->%*,
-                    Include => \@Included,
+                    %Config,
                 },
             );
         }
@@ -615,8 +677,35 @@ END_XML
                 $DynamicField->{ID} = $DynamicFields{ $DynamicField->{Name} }{ID};
 
                 if ( $DynamicField->{FieldType} eq 'Set' ) {
-                    for my $Included ( $DynamicField->{Config}{Include}->@* ) {
-                        $Included->{Definition}{ID} = $DynamicFields{ $Included->{DF} }{ID};
+
+                    if ( IsArrayRefWithData( $DynamicField->{Config}{Include} ) ) {
+
+                        # iterate the entire Include structure
+                        INCLUDEELEMENT:
+                        for my $IncludeElement ( $DynamicField->{Config}{Include}->@* ) {
+
+                            if ( $IncludeElement->{DF} ) {
+                                $IncludeElement->{Definition}{ID} = $DynamicFields{ $IncludeElement->{DF} }{ID};
+                            }
+                            elsif ( $IncludeElement->{Grid} ) {
+
+                                next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                                next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                                ROW:
+                                for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                                    next ROW unless IsArrayRefWithData($Row);
+
+                                    ROWELEMENT:
+                                    for my $RowElement ( $Row->@* ) {
+                                        if ( $RowElement->{DF} ) {
+                                            $RowElement->{Definition}{ID} = $DynamicFields{ $RowElement->{DF} }{ID};
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -836,37 +925,92 @@ END_SQL
                     for my $Set ( @{ $XML[1]{Version}[1]{$Attribute} }[ 1 .. $XML[1]{Version}[1]{$Attribute}->$#* ] ) {
                         my %SetValue;
 
-                        for my $Included ( $DynamicField->{Config}{Include}->@* ) {
-                            if ( $AttributeLookup->{ $Included->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
+                        next Attribute unless IsArrayRefWithData( $DynamicField->{Config}{Include} );
 
-                                if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
-                                    $Set->{Content} .= ':00';
-                                }
+                        # iterate the entire Include structure
+                        INCLUDEELEMENT:
+                        for my $IncludeElement ( $DynamicField->{Config}{Include}->@* ) {
 
-                                $SetValue{ $Included->{DF} } = $BaseArrayFields{ $Included->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
-                            }
-                            else {
-                                my $Name    = $AttributeLookup->{ $Included->{DF} } =~ s/^.+?:://r;
-                                my $SubAttr = $Set->{$Name};
-                                my $SubAttrValue;
-                                if ( $BaseArrayFields{ $Included->{Definition}{FieldType} } || $Included->{Definition}{Config}{MultiValue} ) {
-                                    $SubAttrValue = [ map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ] ];
+                            if ( $IncludeElement->{DF} ) {
+                                if ( $AttributeLookup->{ $IncludeElement->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
+
+                                    if ( $IncludeElement->{Definition}{FieldType} eq 'DateTime' ) {
+                                        $Set->{Content} .= ':00';
+                                    }
+
+                                    $SetValue{ $IncludeElement->{DF} } = $BaseArrayFields{ $IncludeElement->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
                                 }
                                 else {
-                                    $SubAttrValue = $SubAttr->[1]{Content};
-                                }
-                                my %Values = (
-                                    $Included->{DF} => $SubAttrValue,
-                                );
+                                    my $Name    = $AttributeLookup->{ $IncludeElement->{DF} } =~ s/^.+?:://r;
+                                    my $SubAttr = $Set->{$Name};
+                                    my $SubAttrValue;
+                                    if ( $BaseArrayFields{ $IncludeElement->{Definition}{FieldType} } || $IncludeElement->{Definition}{Config}{MultiValue} ) {
+                                        $SubAttrValue = [ map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ] ];
+                                    }
+                                    else {
+                                        $SubAttrValue = $SubAttr->[1]{Content};
+                                    }
+                                    my %Values = (
+                                        $IncludeElement->{DF} => $SubAttrValue,
+                                    );
 
-                                if ( $Included->{Definition}{FieldType} eq 'DateTime' ) {
-                                    %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
-                                }
+                                    if ( $IncludeElement->{Definition}{FieldType} eq 'DateTime' ) {
+                                        %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
+                                    }
 
-                                %SetValue = (
-                                    %SetValue,
-                                    %Values,
-                                );
+                                    %SetValue = (
+                                        %SetValue,
+                                        %Values,
+                                    );
+                                }
+                            }
+                            elsif ( $IncludeElement->{Grid} ) {
+
+                                next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                                next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                                ROW:
+                                for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                                    next ROW unless IsArrayRefWithData($Row);
+
+                                    ROWELEMENT:
+                                    for my $RowElement ( $Row->@* ) {
+                                        if ( $RowElement->{DF} ) {
+                                            if ( $AttributeLookup->{ $RowElement->{DF} } eq $Attribute . '::<SubPrimaryAttribute>' ) {
+
+                                                if ( $RowElement->{Definition}{FieldType} eq 'DateTime' ) {
+                                                    $Set->{Content} .= ':00';
+                                                }
+
+                                                $SetValue{ $RowElement->{DF} } = $BaseArrayFields{ $RowElement->{Definition}{FieldType} } ? [ $Set->{Content} ] : $Set->{Content};
+                                            }
+                                            else {
+                                                my $Name    = $AttributeLookup->{ $RowElement->{DF} } =~ s/^.+?:://r;
+                                                my $SubAttr = $Set->{$Name};
+                                                my $SubAttrValue;
+                                                if ( $BaseArrayFields{ $RowElement->{Definition}{FieldType} } || $RowElement->{Definition}{Config}{MultiValue} ) {
+                                                    $SubAttrValue = [ map { $_->{Content} } @{$SubAttr}[ 1 .. $SubAttr->$#* ] ];
+                                                }
+                                                else {
+                                                    $SubAttrValue = $SubAttr->[1]{Content};
+                                                }
+                                                my %Values = (
+                                                    $RowElement->{DF} => $SubAttrValue,
+                                                );
+
+                                                if ( $RowElement->{Definition}{FieldType} eq 'DateTime' ) {
+                                                    %Values = map { ( $_ => $Values{$_} . ':00' ) } keys %Values;
+                                                }
+
+                                                %SetValue = (
+                                                    %SetValue,
+                                                    %Values,
+                                                );
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
 
