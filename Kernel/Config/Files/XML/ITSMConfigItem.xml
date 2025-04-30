@@ -940,7 +940,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoHistory</Item>
-                <Item Key="Event">(ConfigItemCreate|VersionCreate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|ValueUpdate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
+                <Item Key="Event">(ConfigItemCreate|ConfigItemUpdate|VersionCreate|VersionUpdate|DeploymentStateUpdate|IncidentStateUpdate|ConfigItemDelete|LinkAdd|LinkDelete|DefinitionUpdate|NameUpdate|VersionDelete|AttachmentAddPost|AttachmentDeletePost|ConfigItemDynamicField)</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -2167,8 +2167,8 @@
                 <Item Key="Default">1</Item>
                 <Item Key="CacheTTLLocal">0.5</Item>
                 <Item Key="ConfigItemKey">
-		    <Hash>
-			<Item Key="Appliance">Contact-User</Item>
+                    <Hash>
+                        <Item Key="Appliance">Contact-User</Item>
                         <Item Key="Client">Contact-User</Item>
                         <Item Key="Client (virtual)">Contact-User</Item>
                         <Item Key="Device (unidentified)">Contact-User</Item>
@@ -2226,8 +2226,8 @@
                 <Item Key="Default">1</Item>
                 <Item Key="CacheTTLLocal">0.5</Item>
                 <Item Key="ConfigItemKey">
-		    <Hash>
-			<Item Key="Appliance">Contact-User</Item>
+                    <Hash>
+                        <Item Key="Appliance">Contact-User</Item>
                         <Item Key="Client">Contact-User</Item>
                         <Item Key="Client (virtual)">Contact-User</Item>
                         <Item Key="Display">Contact-User</Item>
@@ -2245,7 +2245,7 @@
                         <Item Key="Switch">Contact-User</Item>
                         <Item Key="UPS">Contact-User</Item>
                         <Item Key="WLAN access point">Contact-User</Item>
-		    </Hash>
+                    </Hash>
                 </Item>
                 <Item Key="DefaultColumns">
                     <Hash>
@@ -2349,11 +2349,12 @@
         <Value>
             <Array>
                 <Item>ConfigItemCreate</Item>
+                <Item>ConfigItemUpdate</Item>
                 <Item>VersionCreate</Item>
+                <Item>VersionUpdate</Item>
                 <Item>DeploymentStateUpdate</Item>
                 <Item>IncidentStateUpdate</Item>
                 <Item>ConfigItemDelete</Item>
-                <Item>ValueUpdate</Item>
                 <Item>NameUpdate</Item>
                 <Item>AttachmentAddPost</Item>
                 <Item>AttachmentDeletePost</Item>

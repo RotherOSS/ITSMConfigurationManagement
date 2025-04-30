@@ -85,6 +85,8 @@ This will just return the data that was passed to the function.
 
 =cut
 
+use Data::Dumper;
+
 sub PrepareRequest {
     my ( $Self, %Param ) = @_;
 
@@ -98,6 +100,10 @@ sub PrepareRequest {
         }
     }
 
+    print STDERR "\n\nEvent = '$Param{Data}{Event}'\n\n";
+
+    print STDERR Dumper \%Param;
+    
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -111,7 +117,7 @@ sub PrepareRequest {
 
     # handle all events which are neither update nor creation first
 
-    # delete the ticket
+    # delete the config item
     if ( $Param{Data}{Event} eq 'ConfigItemDelete' ) {
         my %Content = (
             query => {
@@ -120,6 +126,8 @@ sub PrepareRequest {
                 }
             }
         );
+
+        print STDERR Dumper \%Content;
 
         return {
             Success => 1,
@@ -185,71 +193,6 @@ sub PrepareRequest {
 
     # get needed objects
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # handle exclusions
-    my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
-    my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
-    $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
-    $ExcludedDeplStates = $ExcludedDeplStates ? { map { $_ => 1 } @{$ExcludedDeplStates} } : undef;
-
-    # define the default API
-    my $API = $Param{Data}{Event} eq 'ConfigItemCreate' ? '_doc' : '_update';
-
-    # excluded classes and deployment states
-    if ( defined $ExcludedClasses || defined $ExcludedDeplStates ) {
-        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-            ConfigItemID => $Param{Data}{ConfigItemID},
-        );
-
-        # return if class is excluded
-        if ( defined $ExcludedClasses && $ExcludedClasses->{ $ConfigItem->{Class} } ) {
-            return {
-                Success           => 1,
-                StopCommunication => 1,
-            };
-        }
-
-        # if the DeploymentState is changed, check if the ticket has to be created or deleted in ES
-        if ( defined $ExcludedDeplStates && $Param{Data}{Event} =~ /VersionCreate|VersionUpdate|DeploymentStateUpdate/ ) {
-
-            # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
-            if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                my %Content = (
-                    query => {
-                        term => {
-                            ConfigItemID => $Param{Data}{ConfigItemID},
-                        }
-                    }
-                );
-
-                return {
-                    Success => 1,
-                    Data    => {
-                        docapi => '_delete_by_query',
-                        id     => '',
-                        %Content,
-                    },
-                };
-            }
-
-            # do nothing if both, the old and the new state are excluded
-            elsif ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                return {
-                    Success           => 1,
-                    StopCommunication => 1,
-                };
-            }
-
-            # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
-            elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
-                my $ESObject = $Kernel::OM->Get('Kernel::System::Elasticsearch');
-
-                $ESObject->ConfigItemCreate(
-                    ConfigItemID => $Param{Data}{ConfigItemID},
-                );
-            }
-        }
-    }
 
     # attachment management
     if ( $Param{Data}{Event} eq 'AttachmentAddPost' ) {
@@ -388,6 +331,80 @@ sub PrepareRequest {
             }
         };
     }
+
+    # ignore events other than ConfigItemCreate or ConfigItemUpdate
+    if ( $Param{Data}{Event} !~ /ConfigItemCreate|ConfigItemUpdate/ ) {
+        return {
+            Success           => 1,
+            StopCommunication => 1,
+        };
+    }
+
+    # handle exclusions
+    my $ExcludedClasses    = $ConfigObject->Get('Elasticsearch::ExcludedCIClasses');
+    my $ExcludedDeplStates = $ConfigObject->Get('Elasticsearch::ExcludedCIDeploymentStates');
+    $ExcludedClasses    = $ExcludedClasses    ? { map { $_ => 1 } @{$ExcludedClasses} }    : undef;
+    $ExcludedDeplStates = $ExcludedDeplStates ? { map { $_ => 1 } @{$ExcludedDeplStates} } : undef;
+
+    # define the default API
+    my $API = $Param{Data}{Event} eq 'ConfigItemCreate' ? '_doc' : '_update';
+
+    # excluded classes and deployment states
+    if ( defined $ExcludedClasses || defined $ExcludedDeplStates ) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $Param{Data}{ConfigItemID},
+        );
+
+        # return if class is excluded
+        if ( defined $ExcludedClasses && $ExcludedClasses->{ $ConfigItem->{Class} } ) {
+            return {
+                Success           => 1,
+                StopCommunication => 1,
+            };
+        }
+
+        # if the DeploymentState is changed, check if the config item has to be created or deleted in ES
+        if ( defined $ExcludedDeplStates ) {
+
+            # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
+            if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                my %Content = (
+                    query => {
+                        term => {
+                            ConfigItemID => $Param{Data}{ConfigItemID},
+                        }
+                    }
+                );
+
+                return {
+                    Success => 1,
+                    Data    => {
+                        docapi => '_delete_by_query',
+                        id     => '',
+                        %Content,
+                    },
+                };
+            }
+
+            # do nothing if both, the old and the new state are excluded
+            elsif ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                return {
+                    Success           => 1,
+                    StopCommunication => 1,
+                };
+            }
+
+            # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
+            elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
+                my $ESObject = $Kernel::OM->Get('Kernel::System::Elasticsearch');
+
+                $ESObject->ConfigItemCreate(
+                    ConfigItemID => $Param{Data}{ConfigItemID},
+                );
+            }
+        }
+    }
+
 
     # gather all fields which have to be stored
     my $Store              = $ConfigObject->Get('Elasticsearch::ConfigItemStoreFields');
