@@ -142,8 +142,6 @@ sub Run {
             INCLUDEELEMENT:
             for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
 
-                next INCLUDEELEMENT unless ( $IncludeElement->{DF} || $IncludeElement->{Grid} );
-
                 if ( $IncludeElement->{DF} ) {
                     $IncludeElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
                         . $LayoutObject->{LanguageObject}->Translate( $IncludeElement->{Definition}{Label} );
@@ -1012,8 +1010,6 @@ sub Run {
             # iterate the entire Include structure to get the versioned dynamic field configs
             INCLUDEELEMENT:
             for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
-
-                next INCLUDEELEMENT unless ( $IncludeElement->{DF} || $IncludeElement->{Grid} );
 
                 if ( $IncludeElement->{DF} ) {
                     $IncludeElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
