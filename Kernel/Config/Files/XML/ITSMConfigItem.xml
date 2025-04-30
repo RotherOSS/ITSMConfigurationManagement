@@ -2395,6 +2395,7 @@
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField">AgentITSMConfigItemPrint</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField">AgentITSMConfigItemSearch</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField">AgentITSMConfigItemZoom</Item>
+                <Item Key="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField">CustomerITSMConfigItemSearch</Item>
             </Hash>
         </Value>
     </Setting>
