@@ -20,7 +20,7 @@ use strict;
 use warnings;
 
 # core modules
-use List::Util qw(uniq);
+use List::Util qw(any uniq);
 
 # CPAN modules
 
@@ -129,25 +129,52 @@ sub Run {
             );
         }
 
-        my @SetInnerFields;
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my %SetInnerFields;
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+            next DYNAMICFIELD unless IsArrayRefWithData( $DynamicFieldConfig->{Config}{Include} );
 
-            my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
-            for my $DF (@CurrentInnerFields) {
+            # iterate the entire Include structure to get the versioned dynamic field configs
+            INCLUDEELEMENT:
+            for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
 
-                $DF->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
-                    . $LayoutObject->{LanguageObject}->Translate( $DF->{Definition}{Label} );
+                next INCLUDEELEMENT unless ( $IncludeElement->{DF} || $IncludeElement->{Grid} );
+
+                if ( $IncludeElement->{DF} ) {
+                    $IncludeElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                        . $LayoutObject->{LanguageObject}->Translate( $IncludeElement->{Definition}{Label} );
+                    $SetInnerFields{ $IncludeElement->{DF} } = $IncludeElement->{Definition};
+                }
+                elsif ( $IncludeElement->{Grid} ) {
+
+                    next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                    ROW:
+                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                        next ROW unless IsArrayRefWithData($Row);
+
+                        ROWELEMENT:
+                        for my $RowElement ( $Row->@* ) {
+                            if ( $RowElement->{DF} ) {
+                                $RowElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                                    . $LayoutObject->{LanguageObject}->Translate( $RowElement->{Definition}{Label} );
+                                $SetInnerFields{ $RowElement->{DF} } = $RowElement->{Definition};
+                            }
+                        }
+                    }
+                }
             }
-            push @SetInnerFields, ( map { $_->{Definition} } @CurrentInnerFields );
         }
 
         $Definition->{DynamicFieldRef} = {
             $Definition->{DynamicFieldRef}->%*,
-            map { $_->{Name} => $_ } @SetInnerFields,
+            %SetInnerFields,
         };
 
         # load profiles string params
@@ -409,6 +436,70 @@ sub Run {
             },
         );
 
+        # walk through definition to check permissions on pages which contain dynamic fields
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my %PermittedDynamicFields;
+        my %GroupLookup;
+
+        PAGE:
+        for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+            # Interfaces is optional, effectively default to [ 'Agent' ]
+            if ( $Page->{Interfaces} ) {
+                next PAGE unless any { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+            }
+
+            if ( $Page->{Groups} ) {
+                if ( !%GroupLookup ) {
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
+                        UserID => $Self->{UserID},
+                        Type   => 'ro',
+                    );
+                }
+
+                # grant access to the page only when the user is in one of the specified groups
+                next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
+            }
+
+            SECTION:
+            for my $SectionConfig ( $Page->{Content}->@* ) {
+                my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+                next SECTION unless $Section;
+                if ( $Section->{Type} ) {
+                    if ( $Section->{Type} ne 'DynamicFields' ) {
+                        next SECTION;
+                    }
+                }
+
+                # do not proceed if content is empty
+                next SECTION unless $Section->{Content}->@*;
+
+                my $SectionDFs = $DynamicFieldObject->DynamicFieldListMask(
+                    Content => $Section->{Content},
+                );
+
+                if ( IsArrayRefWithData($SectionDFs) ) {
+                    for my $DFName ( $SectionDFs->@* ) {
+                        $PermittedDynamicFields{$DFName} = 1;
+
+                        # also include Set-inner fields
+                        if ( $Definition->{DynamicFieldRef}{$DFName}{FieldType} eq 'Set' ) {
+                            my $SetInnerFields = $DynamicFieldObject->DynamicFieldListMask(
+                                Content => $Definition->{DynamicFieldRef}{$DFName}{Config}{Include},
+                            );
+
+                            if ( IsArrayRefWithData($SetInnerFields) ) {
+                                for my $InnerDF ( $SetInnerFields->@* ) {
+                                    $PermittedDynamicFields{$InnerDF} = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         # dynamic fields
         my $DynamicFieldSeparator = 1;
 
@@ -420,6 +511,7 @@ sub Run {
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
+            next DYNAMICFIELD unless $PermittedDynamicFields{ $DynamicFieldConfig->{Name} };
 
             # create a separator for dynamic fields attributes
             if ($DynamicFieldSeparator) {
@@ -477,6 +569,7 @@ sub Run {
 
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
+            next DYNAMICFIELD unless $PermittedDynamicFields{ $DynamicFieldConfig->{Name} };
 
             my $PossibleValuesFilter;
 
@@ -665,6 +758,7 @@ sub Run {
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
+            next DYNAMICFIELD unless $PermittedDynamicFields{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
             my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
@@ -906,24 +1000,115 @@ sub Run {
             );
         }
 
-        my @SetInnerFields;
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my %SetInnerFields;
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {
 
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $DynamicFieldConfig->{FieldType} eq 'Set';
+            next DYNAMICFIELD unless IsArrayRefWithData( $DynamicFieldConfig->{Config}{Include} );
 
-            my @CurrentInnerFields = @{ $DynamicFieldConfig->{Config}{Include} // [] };
-            for my $DF (@CurrentInnerFields) {
+            # iterate the entire Include structure to get the versioned dynamic field configs
+            INCLUDEELEMENT:
+            for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
 
-                $DF->{Definition}{Label} = $DynamicFieldConfig->{Label} . '::' . $DF->{Definition}{Label};
+                next INCLUDEELEMENT unless ( $IncludeElement->{DF} || $IncludeElement->{Grid} );
+
+                if ( $IncludeElement->{DF} ) {
+                    $IncludeElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                        . $LayoutObject->{LanguageObject}->Translate( $IncludeElement->{Definition}{Label} );
+                    $SetInnerFields{ $IncludeElement->{DF} } = $IncludeElement->{Definition};
+                }
+                elsif ( $IncludeElement->{Grid} ) {
+
+                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid} );
+
+                    ROW:
+                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                        next ROW unless IsArrayRefWithData($Row);
+
+                        ROWELEMENT:
+                        for my $RowElement ( $Row->@* ) {
+                            if ( $RowElement->{DF} ) {
+                                $RowElement->{Definition}{Label} = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} ) . '::'
+                                    . $LayoutObject->{LanguageObject}->Translate( $RowElement->{Definition}{Label} );
+                                $SetInnerFields{ $RowElement->{DF} } = $RowElement->{Definition};
+                            }
+                        }
+                    }
+                }
             }
-            push @SetInnerFields, ( map { $_->{Definition} } @CurrentInnerFields );
         }
+
         $Definition->{DynamicFieldRef} = {
             $Definition->{DynamicFieldRef}->%*,
-            map { $_->{Name} => $_ } @SetInnerFields,
+            %SetInnerFields,
         };
+
+        # walk through definition to check permissions on pages which contain dynamic fields
+        my %PermittedDynamicFields;
+        my %GroupLookup;
+
+        PAGE:
+        for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+            # Interfaces is optional, effectively default to [ 'Agent' ]
+            if ( $Page->{Interfaces} ) {
+                next PAGE unless any { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+            }
+
+            if ( $Page->{Groups} ) {
+                if ( !%GroupLookup ) {
+                    %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
+                        UserID => $Self->{UserID},
+                        Type   => 'ro',
+                    );
+                }
+
+                # grant access to the page only when the user is in one of the specified groups
+                next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
+            }
+
+            SECTION:
+            for my $SectionConfig ( $Page->{Content}->@* ) {
+                my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+                next SECTION unless $Section;
+                if ( $Section->{Type} ) {
+                    if ( $Section->{Type} ne 'DynamicFields' ) {
+                        next SECTION;
+                    }
+                }
+
+                # do not proceed if content is empty
+                next SECTION unless $Section->{Content}->@*;
+
+                my $SectionDFs = $DynamicFieldObject->DynamicFieldListMask(
+                    Content => $Section->{Content},
+                );
+
+                if ( IsArrayRefWithData($SectionDFs) ) {
+                    for my $DFName ( $SectionDFs->@* ) {
+                        $PermittedDynamicFields{$DFName} = 1;
+
+                        # also include Set-inner fields
+                        if ( $Definition->{DynamicFieldRef}{$DFName}{FieldType} eq 'Set' ) {
+                            my $SetInnerFields = $DynamicFieldObject->DynamicFieldListMask(
+                                Content => $Definition->{DynamicFieldRef}{$DFName}{Config}{Include},
+                            );
+
+                            if ( IsArrayRefWithData($SetInnerFields) ) {
+                                for my $InnerDF ( $SetInnerFields->@* ) {
+                                    $PermittedDynamicFields{$InnerDF} = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         # convert attributes
         if ( $GetParam{ShownAttributes} && ref $GetParam{ShownAttributes} eq '' ) {
@@ -975,6 +1160,7 @@ sub Run {
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD unless $DynamicFieldConfig->{Name};
             next DYNAMICFIELD unless $Self->{Config}{DynamicField}{ $DynamicFieldConfig->{Name} };
+            next DYNAMICFIELD unless $PermittedDynamicFields{ $DynamicFieldConfig->{Name} };
 
             # get search field preferences
             my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
