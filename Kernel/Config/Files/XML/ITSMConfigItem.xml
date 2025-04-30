@@ -2407,6 +2407,7 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser">DashboardWidget CUIC-ITSMConfigItemCustomerUser</Item>
                 <Item Key="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany">DashboardWidget CIC-ITSMConfigItemCustomerCompany</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns">AgentITSMConfigItem</Item>
+                <Item Key="ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns">CustomerITSMConfigItem</Item>
             </Hash>
         </Value>
     </Setting>
