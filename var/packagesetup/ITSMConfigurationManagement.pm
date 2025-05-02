@@ -23,6 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
+use List::Util qw(pairs);
 
 # CPAN modules
 
@@ -35,6 +36,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
+    'Kernel::System::GeneralCatalog::PreferencesDB',
     'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
@@ -256,6 +258,28 @@ sub CodeUninstall {
     return 1;
 }
 
+=head2 CodeUninstallPost()
+
+run the code uninstall post part
+
+using a post function because config item definitions hold a foreign key constraint on config item class items
+
+    my $Result = $CodeObject->CodeUninstallPost();
+
+=cut
+
+sub CodeUninstallPost {
+    my ( $Self, %Param ) = @_;
+
+    # delete general catalog classes:
+    #   ITSM::ConfigItem::Class
+    #   ITSM::ConfigItem::Role
+    #   ITSM::ConfigItem::Class::Category
+    $Self->_GeneralCatalogClassesDelete();
+
+    return 1;
+}
+
 =head2 _SetDeploymentStatePreferences()
 
     my $Result = $CodeObject->_SetDeploymentStatePreferences()
@@ -441,7 +465,7 @@ sub _GroupDeactivate {
     return 1;
 }
 
-# TODO keep or delete?
+# TODO verify if all relevant links are deleted
 
 =head2 _LinkDelete()
 
@@ -825,6 +849,74 @@ sub _DynamicFieldsDelete {
                 'Message'  => "Could not delete DynamicField $DynamicFieldConfig->{Name}!",
             );
             next DYNAMICFIELD;
+        }
+    }
+
+    return 1;
+}
+
+=head2 _GeneralCatalogClassesDelete()
+
+Deletes the general catalog class items which are related to this package and their preferences as well.
+
+    my $Result = $CodeObject->_GeneralCatalogClassesDelete();
+
+=cut
+
+sub _GeneralCatalogClassesDelete {
+    my ( $Self, %Param ) = @_;
+
+    # get necessary objects
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $PreferencesObject    = $Kernel::OM->Get('Kernel::System::GeneralCatalog::PreferencesDB');
+    my $DBObject             = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject            = $Kernel::OM->Get('Kernel::System::Log');
+
+    my @ClassesToDelete
+        = qw(ITSM::ConfigItem::Class ITSM::ConfigItem::Role ITSM::ConfigItem::Class::Category ITSM::ConfigItem::DeploymentState ITSM::ConfigItem::YesNo);
+
+    CLASS:
+    for my $Class (@ClassesToDelete) {
+
+        my $ItemList = $GeneralCatalogObject->ItemList(
+            Class => $Class,
+            Valid => 0,
+        );
+
+        next CLASS unless IsHashRefWithData($ItemList);
+
+        for my $Item ( pairs $ItemList->%* ) {
+            my ( $ID, $Name ) = $Item->@*;
+
+            # unset preferences of item
+            my %Preferences = $PreferencesObject->GeneralCatalogPreferencesGet(
+                ItemID => $ID,
+            );
+
+            if (%Preferences) {
+                for my $Preference ( keys %Preferences ) {
+                    $PreferencesObject->GeneralCatalogPreferencesSet(
+                        ItemID => $ID,
+                        Key    => $Preference,
+                        Value  => '',
+                    );
+                }
+            }
+
+            # delete item from database
+            my $Success = $DBObject->Do(
+                SQL  => 'DELETE FROM general_catalog WHERE id = ?',
+                Bind => [
+                    \$ID,
+                ],
+            );
+            if ( !$Success ) {
+                $LogObject->Log(
+                    'Priority' => 'error',
+                    'Message'  => "Could not delete GeneralCatalog item $Name!",
+                );
+                next CLASS;
+            }
         }
     }
 
