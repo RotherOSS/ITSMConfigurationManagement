@@ -1805,6 +1805,18 @@
             <Item>All</Item>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDisabled" Required="0" Valid="0">
+        <Description Translatable="1">Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
+        <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable" Required="0" Valid="0">
         <Description Translatable="1">Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.</Description>
         <Navigation>Frontend::Agent::View::ITSMConfigItem</Navigation>
@@ -2384,6 +2396,7 @@
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###DynamicField">AgentITSMConfigItemPrint</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField">AgentITSMConfigItemSearch</Item>
                 <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###DynamicField">AgentITSMConfigItemZoom</Item>
+                <Item Key="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField">CustomerITSMConfigItemSearch</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2394,6 +2407,8 @@
             <Hash>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser">DashboardWidget CUIC-ITSMConfigItemCustomerUser</Item>
                 <Item Key="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany">DashboardWidget CIC-ITSMConfigItemCustomerCompany</Item>
+                <Item Key="ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns">AgentITSMConfigItem</Item>
+                <Item Key="ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns">CustomerITSMConfigItem</Item>
             </Hash>
         </Value>
     </Setting>

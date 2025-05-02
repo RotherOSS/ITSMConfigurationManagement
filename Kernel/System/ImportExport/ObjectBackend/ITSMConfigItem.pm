@@ -1218,15 +1218,33 @@ sub ImportDataSave {
         # set field names to differentiate dynamic fields from standard attributes
         $DynamicFieldList{$DFName} = $DynamicFieldConfig;
 
-        # TODO: is the special case for Set needed ?
         if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
-            for my $IncludedDF ( $DynamicFieldConfig->{Config}{Include}->@* ) {
-                $DynamicFieldList{ $IncludedDF->{DF} } = $IncludedDF->{Definition};
 
-                # assuming that df sets are not nested deeper than two stages
-                if ( $IncludedDF->{Definition}{FieldType} eq 'Set' ) {
-                    for my $NestedIncludedDF ( $IncludedDF->{Definition}{Config}{Include}->@* ) {
-                        $DynamicFieldList{ $NestedIncludedDF->{DF} } = $NestedIncludedDF->{Definition};
+            next DF_NAME unless IsArrayRefWithData( $DynamicFieldConfig->{Config}{Include} );
+
+            # iterate the entire Include structure to get the versioned dynamic field configs
+            INCLUDEELEMENT:
+            for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
+
+                if ( $IncludeElement->{DF} ) {
+                    $DynamicFieldList{ $IncludeElement->{DF} } = $IncludeElement->{Definition};
+                }
+                elsif ( $IncludeElement->{Grid} ) {
+
+                    next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
+                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
+
+                    ROW:
+                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
+
+                        next ROW unless IsArrayRefWithData($Row);
+
+                        ROWELEMENT:
+                        for my $RowElement ( $Row->@* ) {
+                            if ( $RowElement->{DF} ) {
+                                $DynamicFieldList{ $RowElement->{DF} } = $RowElement->{Definition};
+                            }
+                        }
                     }
                 }
             }
