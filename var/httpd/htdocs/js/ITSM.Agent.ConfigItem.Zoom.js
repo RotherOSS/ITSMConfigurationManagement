@@ -89,7 +89,7 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
             }
 
             LinkCells.each(function () {
-                let $Content = $('.LinkList', this);
+                let $Content = $('.CellContent', this);
                 if ($Content.length == 0) {
                     return;
                 }

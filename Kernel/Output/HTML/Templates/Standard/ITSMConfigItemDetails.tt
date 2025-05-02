@@ -19,7 +19,7 @@
 [% RenderBlockStart("HeaderRow") %]
         <h2 title="[% Translate(Data.Header) | html %]">[% Translate(Data.Header) | html %]</h2>
 [% RenderBlockEnd("HeaderRow") %]
-        <div class="LinkList">
+        <div class="CellContent">
 [% RenderBlockStart("FieldDisplayRow") %]
             <div class="FieldDisplayRow" style="grid-template-columns:[% Data.Widths | html %]">
 [% RenderBlockStart("FieldDisplayCell") %]
