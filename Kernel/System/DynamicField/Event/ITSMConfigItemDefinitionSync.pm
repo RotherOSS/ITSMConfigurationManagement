@@ -96,6 +96,11 @@ sub Run {
         if ( $DefinitionRef->{DynamicFieldRef}{ $Param{Data}{OldData}{Name} } ) {
             push @{ $OutOfSyncDefinitions{$ClassID} }, $DynamicField->{ID};
         }
+
+        # set-inner fields are not stored in definition dynamic field ref
+        elsif ( $DefinitionRef->{DynamicFieldRef}{ $DynamicField->{Name} } ) {
+            push @{ $OutOfSyncDefinitions{$ClassID} }, $DynamicField->{ID};
+        }
     }
 
     $ConfigItemObject->DefinitionSetOutOfSync(
