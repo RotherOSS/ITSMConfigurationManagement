@@ -295,7 +295,7 @@ sub Run {
 
         # get all attachments meta data
         my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
-            ConfigItemID => $ConfigItem->{ConfigItemID},
+            ConfigItemID => $DuplicateID || $ConfigItem->{ConfigItemID},
         );
 
         # copy all existing attachments to upload cache
@@ -304,7 +304,7 @@ sub Run {
 
             # get the existing attachment data
             my $AttachmentData = $ConfigItemObject->ConfigItemAttachmentGet(
-                ConfigItemID => $ConfigItem->{ConfigItemID},
+                ConfigItemID => $DuplicateID || $ConfigItem->{ConfigItemID},
                 Filename     => $Filename,
                 UserID       => $Self->{UserID},
             );
@@ -763,7 +763,7 @@ sub Run {
             for my $Attachment ( values %NewAttachment ) {
 
                 # add attachment
-                if ( $Attachment->{Disposition} eq 'inline' ) {
+                if ( $Attachment->{Disposition} && $Attachment->{Disposition} eq 'inline' ) {
                     my $Success = $ConfigItemObject->VersionAttachmentAdd(
                         %{$Attachment},
                         VersionID => $NewConfigItemData->{VersionID},
@@ -1432,8 +1432,8 @@ sub Run {
         );
 
         if ( scalar @PageHTML > 1 ) {
-            my $HeaderTemplate = 
-            '<summary>
+            my $HeaderTemplate =
+                '<summary>
                 <div class="Row Row_PageHeader">
                     <div class="Toggle">
                         <i class="fa fa-caret-right"></i>
