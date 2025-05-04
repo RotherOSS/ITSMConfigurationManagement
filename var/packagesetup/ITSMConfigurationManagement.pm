@@ -716,19 +716,7 @@ sub _UpdateElasticsearchWebService {
                 },
                 {
                     Asynchronous => '0',
-                    Event        => 'VersionCreate',
-                },
-                {
-                    Asynchronous => '0',
-                    Event        => 'VersionUpdate',
-                },
-                {
-                    Asynchronous => '0',
-                    Event        => 'NameUpdate',
-                },
-                {
-                    Asynchronous => '0',
-                    Event        => 'DeploymentStateUpdate',
+                    Event        => 'ConfigItemUpdate',
                 },
                 {
                     Asynchronous => '0',
