@@ -814,11 +814,11 @@ sub Run {
 
                 # return to overview or search results instead if called Duplicate from row action
                 if (
-                    $Self->{LastScreenView} eq 'Action=AgentITSMConfigItem'
-                    || $Self->{LastScreenView} =~ m{\A Action=AgentITSMConfigItem(?: Search)?;}msx
+                    $Self->{Session}{LastScreenView} eq 'Action=AgentITSMConfigItem'
+                    || $Self->{Session}{LastScreenView} =~ m{\A Action=AgentITSMConfigItem(?: Search)?;}msx
                     )
                 {
-                    $URL = $Self->{LastScreenView};
+                    $URL = $Self->{Session}{LastScreenView};
                 }
 
                 return $LayoutObject->PopupClose(
