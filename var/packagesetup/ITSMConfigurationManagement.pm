@@ -236,9 +236,13 @@ run the code uninstall part
 sub CodeUninstall {
     my ( $Self, %Param ) = @_;
 
+    # clear configitem_link table
+    #   placing this before _DynamicFieldsDelete to avoid foreign key constraints preventing dynamic field value deletion
+    $Self->_ConfigItemLinkDelete();
+
     # delete all dynamic fields:
-    # of object type config item
-    # of field type ITSMConfigItemReference and ITSMConfigItemVersionReference
+    #   of object type config item
+    #   of field type ITSMConfigItemReference and ITSMConfigItemVersionReference
     $Self->_DynamicFieldsDelete();
 
     # delete all links with configuration items
@@ -906,6 +910,24 @@ sub _GeneralCatalogClassesDelete {
                 next CLASS;
             }
         }
+    }
+
+    return 1;
+}
+
+sub _ConfigItemLinkDelete {
+    my ( $Self, %Param ) = @_;
+
+    # delete table rows from database
+    my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => 'DELETE FROM configitem_link',
+    );
+    if ( !$Success ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            'Priority' => 'error',
+            'Message'  => "Could not delete rows of table configitem_link!",
+        );
+        next CLASS;
     }
 
     return 1;
