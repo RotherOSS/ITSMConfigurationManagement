@@ -661,6 +661,18 @@ sub Run {
                 }
             }
 
+            # Get Separator from language file.
+            my $UserCSVSeparator = $LayoutObject->{LanguageObject}->{Separator};
+
+            if ( $ConfigObject->Get('PreferencesGroups')->{CSVSeparator}->{Active} ) {
+                my %UserData = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
+                    UserID => $Self->{UserID},
+                );
+                if ( $UserData{UserCSVSeparator} ) {
+                    $UserCSVSeparator = $UserData{UserCSVSeparator};
+                }
+            }
+
             my $CSVObject      = $Kernel::OM->Get('Kernel::System::CSV');
             my $CurSysDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
             if ( $GetParam{ResultForm} eq 'CSV' ) {
@@ -669,7 +681,7 @@ sub Run {
                 my $CSV = $CSVObject->Array2CSV(
                     Head      => \@CSVHead,
                     Data      => \@CSVData,
-                    Separator => $Self->{UserCSVSeparator},
+                    Separator => $UserCSVSeparator,
                 );
 
                 # Return CSV to download.
