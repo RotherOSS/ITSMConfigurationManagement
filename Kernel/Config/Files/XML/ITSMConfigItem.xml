@@ -1025,6 +1025,15 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Preferences::UpdateAJAX::Allowed###002-ITSMConfigurationManagement" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">A list of parameters which can be updated via the UpdateAJAX.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="UserConfigItemZoomTableHeight">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="GeneralCatalogPreferences###DeploymentStates" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the deployment states in the preferences view of the agent interface.</Description>
         <Navigation>Core::GeneralCatalog</Navigation>
