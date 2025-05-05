@@ -150,6 +150,7 @@ sub Run {
         $ConfigItemIDs{$ID} = 1;
     }
 
+    ID:
     for my $ID ( ( $Param{Data}->{Value} // [] )->@* ) {
         next ID if !$ID;
 
