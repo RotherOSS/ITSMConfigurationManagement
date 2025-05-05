@@ -4,6 +4,8 @@
 // Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 // Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 // --
+// $origin: otobo - c4729719b9788da163909113055de495fac35df4 - var/httpd/htdocs/js/Core.Agent.Admin.Znuny4OTOBODynamicFieldScreen.js
+// --
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
 // Foundation, either version 3 of the License, or (at your option) any later version.

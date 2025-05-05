@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - e44c18aea9abc125fddf9ceeed204db4fab290e0 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 8f042942db322201cf6a0760c446245c22458dee - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -592,7 +592,7 @@ sub _DynamicFieldsListShow {
                             Valid          => $Valid,
                             ConfigDialog   => $ConfigDialog,
                             FieldTypeName  => $FieldTypeName,
-                            ObjectTypeName => $ObjectTypeName,
+                            ObjectTypeName => $DynamicFieldData->{ObjectType},
                         },
                     );
                 }
