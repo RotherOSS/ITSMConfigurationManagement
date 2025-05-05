@@ -915,6 +915,14 @@ sub _GeneralCatalogClassesDelete {
     return 1;
 }
 
+=head2 _ConfigItemLinkDelete()
+
+Clears the configitem_link database table.
+
+    my $Result = $CodeObject->_ConfigItemLinkDelete();
+
+=cut
+
 sub _ConfigItemLinkDelete {
     my ( $Self, %Param ) = @_;
 
@@ -927,7 +935,6 @@ sub _ConfigItemLinkDelete {
             'Priority' => 'error',
             'Message'  => "Could not delete rows of table configitem_link!",
         );
-        next CLASS;
     }
 
     return 1;
