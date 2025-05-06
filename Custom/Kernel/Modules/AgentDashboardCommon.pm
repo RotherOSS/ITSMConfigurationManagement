@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - e44c18aea9abc125fddf9ceeed204db4fab290e0 - Kernel/Modules/AgentDashboardCommon.pm
+# $origin: otobo - 02c919daa3457da004b3d2eda877ccab41e068e5 - Kernel/Modules/AgentDashboardCommon.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -576,8 +576,8 @@ sub Run {
         }
 
         my $Key = $UserSettingsKey . $Name;
-        if ( defined $Self->{$Key} ) {
-            $Backends{$Name} = $Self->{$Key};
+        if ( defined $Self->{Session}{$Key} ) {
+            $Backends{$Name} = $Self->{Session}{$Key};
         }
         else {
             $Backends{$Name} = $Config->{$Name}->{Default};
@@ -592,7 +592,7 @@ sub Run {
     # set order of plugins
     my $Key = $UserSettingsKey . 'Position';
     my @Order;
-    my $Value = $Self->{$Key};
+    my $Value = $Self->{Session}{$Key};
 
     if ($Value) {
         @Order = split /;/, $Value;
@@ -745,7 +745,7 @@ sub Run {
                     Data => {
                         %{ $Element{Config} },
                         %{$Param},
-                        Data     => $Self->{ $Param->{Name} },
+                        Data     => $Self->{Session}{ $Param->{Name} },
                         NamePref => $Param->{Name},
                         Name     => $Name,
                         NameForm => $NameForm,
