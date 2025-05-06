@@ -3,7 +3,7 @@
     <Name>ITSMConfigurationManagement</Name>
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
     <Version>0.0.0</Version>
-    <Framework Minimum="11.0.8">11.0.x</Framework>
+    <Framework Minimum="11.0.9">11.0.x</Framework>
     <PackageRequired Version="11.0.4">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.io/</URL>
