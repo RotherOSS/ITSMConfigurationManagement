@@ -387,12 +387,9 @@ sub PrepareRequest {
             }
 
             # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
+            # in that case override the previous $API value to '_doc' even if it was '_update'
             elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
-                my $ESObject = $Kernel::OM->Get('Kernel::System::Elasticsearch');
-
-                $ESObject->ConfigItemCreate(
-                    ConfigItemID => $Param{Data}{ConfigItemID},
-                );
+                $API = '_doc';
             }
         }
     }
@@ -450,14 +447,24 @@ sub PrepareRequest {
     );
     $Content{Attachments} = [];
 
-    return {
+    if ($API eq '_update') {
         Success => 1,
         Data    => {
             docapi => $API,
             id     => $Param{Data}{ConfigItemID},
             doc    => \%Content,
         },
-    };
+    }
+    else {
+        return {
+            Success => 1,
+            Data    => {
+                docapi => $API,
+                id     => $Param{Data}{ConfigItemID},
+                %Content,
+            },
+        };
+    }
 }
 
 =head2 HandleResponse()
