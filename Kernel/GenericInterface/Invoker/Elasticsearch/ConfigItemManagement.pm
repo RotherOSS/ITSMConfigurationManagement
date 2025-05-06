@@ -448,12 +448,14 @@ sub PrepareRequest {
     $Content{Attachments} = [];
 
     if ($API eq '_update') {
-        Success => 1,
-        Data    => {
-            docapi => $API,
-            id     => $Param{Data}{ConfigItemID},
-            doc    => \%Content,
-        },
+        return {
+            Success => 1,
+            Data    => {
+                docapi => $API,
+                id     => $Param{Data}{ConfigItemID},
+                doc    => \%Content,
+            },
+        }
     }
     else {
         return {
