@@ -455,7 +455,7 @@ sub PrepareRequest {
                 id     => $Param{Data}{ConfigItemID},
                 doc    => \%Content,
             },
-        }
+        };
     }
     else {
         return {
