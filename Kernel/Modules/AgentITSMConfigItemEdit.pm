@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -397,11 +397,11 @@ sub Run {
 
                 # return to overview or search results instead if called Duplicate from row action
                 if (
-                    $Self->{LastScreenView} eq 'Action=AgentITSMConfigItem'
-                    || $Self->{LastScreenView} =~ m{\A Action=AgentITSMConfigItem(?: Search)?;}msx
+                    $Self->{Session}{LastScreenView} eq 'Action=AgentITSMConfigItem'
+                    || $Self->{Session}{LastScreenView} =~ m{\A Action=AgentITSMConfigItem(?: Search)?;}msx
                     )
                 {
-                    $URL = $Self->{LastScreenView};
+                    $URL = $Self->{Session}{LastScreenView};
                 }
                 return $LayoutObject->PopupClose(
                     URL => $URL,

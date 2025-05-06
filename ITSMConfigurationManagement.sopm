@@ -6,7 +6,7 @@
     <Framework>10.1.x</Framework>
     <PackageRequired Version="10.1.3">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
-    <URL>https://otobo.de/</URL>
+    <URL>https://otobo.io/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">The OTOBO::ITSM Configuration Management package.</Description>
     <Description Lang="de">Das OTOBO::ITSM Configuration Management Paket.</Description>
