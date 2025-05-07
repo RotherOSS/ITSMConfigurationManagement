@@ -358,38 +358,59 @@ sub PrepareRequest {
         # if the DeploymentState is changed, check if the config item has to be created or deleted in ES
         if ( defined $ExcludedDeplStates ) {
 
-            # if the ConfigItem exists (no old state means just created) and is moved to an excluded queue, delete it
-            if ( !( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                my %Content = (
-                    query => {
-                        term => {
-                            ConfigItemID => $Param{Data}{ConfigItemID},
-                        }
-                    }
+            # a CI with no old state and in a current excluded state
+            # means that the CI has just been created in that initial excluded state
+            # in that case do nothing and do not even bother to make an ES call
+            if ( !$Param{Data}{OldDeplState} ) {
+                if ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                    return {
+                        Success           => 1,
+                        StopCommunication => 1,
+                    };
+                }
+            }
+
+            # an old state already exists
+            else {
+                my $StateList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                    Class => 'ITSM::ConfigItem::DeploymentState',
                 );
+                my $OldDeplState = $StateList->{ $Param{Data}{OldDeplState} };
 
-                return {
-                    Success => 1,
-                    Data    => {
-                        docapi => '_delete_by_query',
-                        id     => '',
-                        %Content,
-                    },
-                };
-            }
+                # do nothing if both the old and the new state are excluded
+                if ( $ExcludedDeplStates->{$OldDeplState} && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                    return {
+                        Success           => 1,
+                        StopCommunication => 1,
+                    };
+                }
 
-            # do nothing if both, the old and the new state are excluded
-            elsif ( $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
-                return {
-                    Success           => 1,
-                    StopCommunication => 1,
-                };
-            }
+                # if the CI was moved to an excluded state, delete it
+                elsif ( !$ExcludedDeplStates->{$OldDeplState} && $ExcludedDeplStates->{ $ConfigItem->{CurDeplState} } ) {
+                    my %Content = (
+                        query => {
+                            term => {
+                                ConfigItemID => $Param{Data}{ConfigItemID},
+                            }
+                        }
+                    );
+                    return {
+                        Success => 1,
+                        Data    => {
+                            docapi => '_delete_by_query',
+                            id     => '',
+                            %Content,
+                        },
+                    };
+                }
 
-            # create the ConfigItem, if the config item was moved from an excluded deployment state, to an included one
-            # in that case override the previous $API value to '_doc' even if it was '_update'
-            elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{ $Param{Data}{OldDeplState} } ) {
-                $API = '_doc';
+                # if the CI was moved out of an excluded deployment state, create it
+                # in that case override the previous $API value to '_doc'
+                elsif ( $Param{Data}{OldDeplState} && $ExcludedDeplStates->{$OldDeplState} ) {
+                    $API = '_doc';
+                }
+
+                # else it was a normal transition between non excluded states, so nothing to do in this scope
             }
         }
     }
@@ -447,7 +468,7 @@ sub PrepareRequest {
     );
     $Content{Attachments} = [];
 
-    if ($API eq '_update') {
+    if ( $API eq '_update' ) {
         return {
             Success => 1,
             Data    => {

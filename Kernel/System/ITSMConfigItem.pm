@@ -1141,6 +1141,7 @@ sub ConfigItemUpdate {
             Data  => {
                 ConfigItemID => $ConfigItem->{ConfigItemID},
                 Comment      => $ConfigItem->{ConfigItemID} . '%%' . $Param{Number},
+                OldDeplState => $Changed{DeplStateID}{Old},
             },
             UserID => $Param{UserID},
         );
