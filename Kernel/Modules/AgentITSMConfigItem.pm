@@ -379,7 +379,7 @@ sub Run {
 
     # get personal page shown count
     my $PageShownPreferencesKey = 'UserConfigItemOverview' . $View . 'PageShown';
-    my $PageShown               = $Self->{$PageShownPreferencesKey} || 10;
+    my $PageShown               = $Self->{Session}{$PageShownPreferencesKey} || 10;
 
     # do shown config item lookup
     my $Limit = 1_000;
