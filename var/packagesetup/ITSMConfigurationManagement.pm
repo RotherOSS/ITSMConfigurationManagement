@@ -184,7 +184,7 @@ my $Result = $CodeObject->CodeUpgradeFromLowerThan_10_0_3();
 
 =cut
 
-sub CodeUpgradeFromLowerThan_10_0_3 {    ## no critic qw(OTOBO::RequireCamelCase)
+sub CodeUpgradeFromLowerThan_11_0_7 {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, %Param ) = @_;
 
     # add the ConfigItem management invoker to the Elasticsearch webservice

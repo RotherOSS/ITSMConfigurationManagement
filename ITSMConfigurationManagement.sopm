@@ -2,7 +2,7 @@
 <otobo_package version="1.0">
     <Name>ITSMConfigurationManagement</Name>
 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::DocumentationPresent) -->
-    <Version>0.0.0</Version>
+    <Version>11.0.7</Version>
     <Framework Minimum="11.0.9">11.0.x</Framework>
     <PackageRequired Version="11.0.4">ITSMCore</PackageRequired>
     <Vendor>Rother OSS GmbH</Vendor>
@@ -779,7 +779,7 @@
 
     ]]></CodeReinstall>
     <!-- It is IMPORTANT that all CodeUpgrade parts with version numbers come BEFORE the regular CodeUpgrade block without any version number! -->
-    <CodeUpgrade Type="post" Version="10.0.3"><![CDATA[
+    <CodeUpgrade Type="post" Version="11.0.7"><![CDATA[
 
         # create the package name
         my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
@@ -790,7 +790,7 @@
             ForcePackageReload => 1,
         );
 
-        $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_10_0_3();
+        $Kernel::OM->Get($CodeModule)->CodeUpgradeFromLowerThan_11_0_7();
 
     ]]></CodeUpgrade>
     <CodeUpgrade Type="post"><![CDATA[
