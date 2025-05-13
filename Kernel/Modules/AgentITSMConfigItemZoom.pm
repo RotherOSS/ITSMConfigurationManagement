@@ -486,7 +486,7 @@ sub Run {
 
     $LayoutObject->AddJSData(
         Key   => 'UserConfigItemZoomTableHeight',
-        Value => $Self->{UserConfigItemZoomTableHeight},
+        Value => $Self->{Session}{UserConfigItemZoomTableHeight},
     );
 
     # start template output
