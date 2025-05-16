@@ -145,6 +145,9 @@ sub new {
             $Self->{EnabledObjectTypes} //= [];
             push $Self->{EnabledObjectTypes}->@*, 'Ticket';
         }
+        if ( $Self->{SelectedObjectType} eq 'Ticket' && !(grep { $_ eq 'Ticket' } @ObjectTypesFilter) ) {
+            push @ObjectTypesFilter, qw(Ticket Article);
+        }
     }
 # EO ITSMConfigurationManagement
 
