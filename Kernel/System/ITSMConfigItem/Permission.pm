@@ -184,7 +184,7 @@ sub CustomerPermission {
     my %Conditions = %{ $Kernel::OM->Get('Kernel::Config')->Get('Customer::ConfigItem::PermissionConditions') // {} };
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
-        DynamicFields => any { $_->{CustomerUserDynamicField} || $_->{CustomerCompanyDynamicField} } values %Conditions,
+        DynamicFields => 1,
     );
 
     CONDITION:
