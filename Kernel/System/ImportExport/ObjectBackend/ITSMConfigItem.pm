@@ -1862,9 +1862,19 @@ sub _MappingObjectAttributesGet {
 
         # Limit the length of importable arrays, even if more elements can be set via the GUI.
         my $IsMulti          = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
-        my $CountMax         = $IsMulti ? ( $Param{CountMaxLimit}         // 10 ) : 0;
-        my $CountMaxSetOuter = $IsMulti ? ( $Param{CountMaxSetOuterLimit} // 10 ) : 0;
-        my $CountMaxSetInner = $IsMulti ? ( $Param{CountMaxSetInnerLimit} // 10 ) : 0;
+        my $CountMax = 0;
+        if ( $IsMulti ) {
+
+            # use SetOuter limit for Set fields themselves
+            if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+                $CountMax = $Param{CountMaxSetOuterLimit} // 10;
+            }
+
+            # use normal limit for everything else
+            else {
+                $CountMax = $Param{CountMaxLimit} // 10;
+            }
+        }
 
         COUNT:
         for my $Count ( 1 .. $CountMax ) {
@@ -1887,6 +1897,72 @@ sub _MappingObjectAttributesGet {
                     Key   => "DynamicField_$Key",
                     Value => "DynamicField_$Value",
                 };
+
+            # in case of Set, iterate inner fields as well
+            if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+
+                my $InnerFields = $DFDetails->{Include};
+
+                if ( IsArrayRefWithData($InnerFields) ) {
+                    for my $FieldItem ( $InnerFields->@* ) {
+                        my $FieldConfig = $FieldItem->{Definition};
+                        my $InnerDFDetails = $FieldConfig->{Config};
+
+                        # the version without prefix is always possible
+                        {
+                            # create key string, including a potential prefix and a potential count
+                            my $InnerKey = join '::',
+                                ( $Param{KeyPrefix} || () ),
+                                $DFName,
+                                $Count,
+                                $FieldConfig->{Name};
+
+                            # create key string, including a potential prefix and a potential count
+                            my $InnerValue = join '::',
+                                ( $Param{ValuePrefix} || () ),
+                                $DFName,
+                                $Count,
+                                $FieldConfig->{Name};
+
+                            # add row
+                            push @Elements,
+                                {
+                                    Key   => "DynamicField_$InnerKey",
+                                    Value => "DynamicField_$InnerValue",
+                                };
+                        }
+
+                        my $InnerIsMulti  = $InnerDFDetails->{Multiselect} || $InnerDFDetails->{MultiValue};
+                        my $CountInnerMax = $InnerIsMulti ? ( $Param{CountMaxSetInnerLimit} // 10 ) : 0;
+
+                        for my $CountInner ( 1 .. $CountInnerMax ) {
+
+                            # create key string, including a potential prefix and a potential count
+                            my $InnerKey = join '::',
+                                ( $Param{KeyPrefix} || () ),
+                                $DFName,
+                                $Count,
+                                $FieldConfig->{Name},
+                                $CountInner;
+
+                            # create key string, including a potential prefix and a potential count
+                            my $InnerValue = join '::',
+                                ( $Param{ValuePrefix} || () ),
+                                $DFName,
+                                $Count,
+                                $FieldConfig->{Name},
+                                $CountInner;
+
+                            # add row
+                            push @Elements,
+                                {
+                                    Key   => "DynamicField_$InnerKey",
+                                    Value => "DynamicField_$InnerValue",
+                                };
+                        }
+                    }
+                }
+            }
         }
     }
 
