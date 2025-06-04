@@ -127,6 +127,34 @@ sub ObjectAttributesGet {
             },
         },
         {
+            Key   => 'CountMaxSetOuter',
+            Name  => Translatable('Maximum number of one Set dynamic field element'),
+            Input => {
+                Type         => 'Text',
+                ValueDefault => '10',
+                Required     => 1,
+                Regex        => qr{ \A \d+ \z }xms,
+                Translation  => 0,
+                Size         => 5,
+                MaxLength    => 5,
+                DataType     => 'IntegerBiggerThanZero',
+            },
+        },
+        {
+            Key   => 'CountMaxSetInner',
+            Name  => Translatable('Maximum number of one element within a Set dynamic field element'),
+            Input => {
+                Type         => 'Text',
+                ValueDefault => '10',
+                Required     => 1,
+                Regex        => qr{ \A \d+ \z }xms,
+                Translation  => 0,
+                Size         => 5,
+                MaxLength    => 5,
+                DataType     => 'IntegerBiggerThanZero',
+            },
+        },
+        {
             Key   => 'EmptyFieldsLeaveTheOldValues',
             Name  => Translatable('Empty fields indicate that the current values are kept'),
             Input => {
@@ -292,8 +320,10 @@ sub MappingObjectAttributesGet {
 
     # add elements
     push @Elements, $Self->_MappingObjectAttributesGet(
-        DynamicFieldRef => $Definition->{DynamicFieldRef},    # page layout is ignored here
-        CountMaxLimit   => $ObjectData->{CountMax} || 10,
+        DynamicFieldRef       => $Definition->{DynamicFieldRef},    # page layout is ignored here
+        CountMaxLimit         => $ObjectData->{CountMax}         || 10,
+        CountMaxSetOuterLimit => $ObjectData->{CountMaxSetOuter} || 10,
+        CountMaxSetInnerLimit => $ObjectData->{CountMaxSetInner} || 10,
     );
 
     return [
@@ -1781,10 +1811,14 @@ recursive function for MappingObjectAttributesGet().
 Definitions for object attributes are passed in C<DynamicFieldRef>.
 The new object attributes are returned.
 C<CountMaxLimit> limits the max length of importable arrays.
+C<CountMaxSetOuterLimit> limits the max length of importable arrays of Set dynamic fields.
+C<CountMaxSetInnerLimit> limits the max length of importable arrays of Set dynamic field content fields.
 
     push @Elements, $ObjectBackend->_MappingObjectAttributesGet(
-        DynamicFieldRef => $HashRef,
-        CountMaxLimit   => 10,
+        DynamicFieldRef       => $HashRef,
+        CountMaxLimit         => 10,
+        CountMaxSetOuterLimit => 10,
+        CountMaxSetInnerLimit => 10,
     );
 
 =cut
@@ -1792,8 +1826,12 @@ C<CountMaxLimit> limits the max length of importable arrays.
 sub _MappingObjectAttributesGet {
     my ( $Self, %Param ) = @_;
 
-    return unless $Param{CountMaxLimit};
-    return unless ref $Param{CountMaxLimit} eq '';
+    # check params
+    for my $CountMaxAttr (qw(CountMaxLimit CountMaxSetOuterLimit CountMaxSetInnerLimit)) {
+        return unless $Param{$CountMaxAttr};
+        return unless ref $Param{$CountMaxAttr} eq '';
+    }
+
     return unless $Param{DynamicFieldRef};
     return unless ref $Param{DynamicFieldRef} eq 'HASH';
 
@@ -1823,8 +1861,10 @@ sub _MappingObjectAttributesGet {
         }
 
         # Limit the length of importable arrays, even if more elements can be set via the GUI.
-        my $IsMulti  = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
-        my $CountMax = $IsMulti ? ( $Param{CountMaxLimit} // 10 ) : 0;
+        my $IsMulti          = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
+        my $CountMax         = $IsMulti ? ( $Param{CountMaxLimit}         // 10 ) : 0;
+        my $CountMaxSetOuter = $IsMulti ? ( $Param{CountMaxSetOuterLimit} // 10 ) : 0;
+        my $CountMaxSetInner = $IsMulti ? ( $Param{CountMaxSetInnerLimit} // 10 ) : 0;
 
         COUNT:
         for my $Count ( 1 .. $CountMax ) {
