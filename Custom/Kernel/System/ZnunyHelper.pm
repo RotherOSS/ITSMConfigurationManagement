@@ -5,7 +5,7 @@
 # Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - d75fc242b3f7e3a74ae3ed0d08352e11f839883d - Kernel/System/ZnunyHelper.pm
+# $origin: otobo - a828d3417faf7e019a1785a30301f8a7a9703f66 - Kernel/System/ZnunyHelper.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -200,7 +200,8 @@ sub _PostmasterXHeaderAdd {
                 EffectiveValue => [ sort keys %ConfiguredHeaders ],
             },
         ],
-        UserID => 1,
+        Comments => 'PostmasterX-Header settings added.',
+        UserID   => 1,
     );
 }
 
@@ -276,7 +277,8 @@ sub _PostmasterXHeaderRemove {
                 EffectiveValue => [ sort keys %ConfiguredHeaders ],
             },
         ],
-        UserID => 1,
+        Comments => 'PostmasterX-Header settings removed.',
+        UserID   => 1,
     );
 }
 
@@ -358,7 +360,8 @@ sub _EventAdd {
                 EffectiveValue => \@ConfigEvents,
             },
         ],
-        UserID => 1,
+        Comments => 'Event settings added.',
+        UserID   => 1,
     );
 }
 
@@ -439,7 +442,8 @@ sub _EventRemove {
                 EffectiveValue => \@ConfigEvents,
             },
         ],
-        UserID => 1,
+        Comments => 'Event settings removed.',
+        UserID   => 1,
     );
 }
 
@@ -790,6 +794,7 @@ sub _DefaultColumnsEnable {
     $SysConfigObject->SettingsSet(
         Settings => \@Settings,
         UserID   => 1,
+        Comments => 'Default columns settings enabled.',
     );
 
     return 1 if $NoConfigRebuild;
@@ -917,7 +922,8 @@ sub _DefaultColumnsDisable {
                     EffectiveValue => \%NewDynamicFieldConfig,
                 },
             ],
-            UserID => 1,
+            Comments => 'Default columns settings disabled.',
+            UserID   => 1,
         );
     }
 
@@ -1229,6 +1235,7 @@ sub _DynamicFieldsScreenEnable {
 
     $SysConfigObject->SettingsSet(
         Settings => \@Settings,
+        Comments => 'DynamicFields screen settings enabled.',
         UserID   => 1,
     );
 
@@ -1365,7 +1372,8 @@ sub _DynamicFieldsScreenDisable {
                     EffectiveValue => \%NewDynamicFieldConfig,
                 },
             ],
-            UserID => 1,
+            Comments => 'DynamicFields screen settings disabled.',
+            UserID   => 1,
         );
 
         # reload the ZZZ files
@@ -4699,7 +4707,8 @@ sub _ProcessWidgetDynamicFieldGroupsAdd {
                 EffectiveValue => \%NewDynamicFieldConfig,
             },
         ],
-        UserID => 1,
+        Comments => 'Process widget dynamic field groups settings added.',
+        UserID   => 1,
     );
 
     # reload the ZZZ files
@@ -4780,7 +4789,8 @@ sub _ProcessWidgetDynamicFieldGroupsRemove {
                 EffectiveValue => \%NewDynamicFieldConfig,
             },
         ],
-        UserID => 1,
+        Comments => 'Process widget dynamic field groups settings removed.',
+        UserID   => 1,
     );
 
     # reload the ZZZ files
@@ -4899,7 +4909,8 @@ sub _ModuleGroupAdd {
                 EffectiveValue => $ModuleRegistration,
             },
         ],
-        UserID => 1,
+        Comments => 'Module group settings added.',
+        UserID   => 1,
     );
 
     return 1;
@@ -5011,7 +5022,8 @@ sub _ModuleGroupRemove {
                 EffectiveValue => $ModuleRegistration,
             },
         ],
-        UserID => 1,
+        Comments => 'Module group settings removed.',
+        UserID   => 1,
     );
 
     return 1;
@@ -5607,7 +5619,7 @@ sub _ArticleActionsAdd {
 
     my $SettingSet = $SysConfigObject->SettingsSet(
         UserID   => 1,
-        Comments => 'Article action settings added by package setup of Znuny4OTRS-MarkTicketSeenUnseen.',
+        Comments => 'Article action settings added.',
         Settings => \@Settings,
     );
 
@@ -5665,7 +5677,7 @@ sub _ArticleActionsRemove {
 
     my $SettingSet = $SysConfigObject->SettingsSet(
         UserID   => 1,
-        Comments => 'Article action settings removed by package setup of Znuny4OTRS-MarkTicketSeenUnseen.',
+        Comments => 'Article action settings removed.',
         Settings => \@Settings,
     );
 
