@@ -1876,7 +1876,6 @@ sub _MappingObjectAttributesGet {
             }
         }
 
-        COUNT:
         for my $Count ( 1 .. $CountMax ) {
 
             # create key string, including a potential prefix and a potential count
