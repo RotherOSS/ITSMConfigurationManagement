@@ -1861,9 +1861,9 @@ sub _MappingObjectAttributesGet {
         }
 
         # Limit the length of importable arrays, even if more elements can be set via the GUI.
-        my $IsMulti          = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
+        my $IsMulti  = $DFDetails->{Multiselect} || $DFDetails->{MultiValue};
         my $CountMax = 0;
-        if ( $IsMulti ) {
+        if ($IsMulti) {
 
             # use SetOuter limit for Set fields themselves
             if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
@@ -1904,7 +1904,7 @@ sub _MappingObjectAttributesGet {
 
                 if ( IsArrayRefWithData($InnerFields) ) {
                     for my $FieldItem ( $InnerFields->@* ) {
-                        my $FieldConfig = $FieldItem->{Definition};
+                        my $FieldConfig    = $FieldItem->{Definition};
                         my $InnerDFDetails = $FieldConfig->{Config};
 
                         # the version without prefix is always possible
@@ -1914,6 +1914,7 @@ sub _MappingObjectAttributesGet {
                                 ( $Param{KeyPrefix} || () ),
                                 $DFName,
                                 $Count,
+                                ( $Param{KeyPrefix} || () ),
                                 $FieldConfig->{Name};
 
                             # create key string, including a potential prefix and a potential count
@@ -1921,6 +1922,7 @@ sub _MappingObjectAttributesGet {
                                 ( $Param{ValuePrefix} || () ),
                                 $DFName,
                                 $Count,
+                                ( $Param{ValuePrefix} || () ),
                                 $FieldConfig->{Name};
 
                             # add row
@@ -1941,6 +1943,7 @@ sub _MappingObjectAttributesGet {
                                 ( $Param{KeyPrefix} || () ),
                                 $DFName,
                                 $Count,
+                                ( $Param{KeyPrefix} || () ),
                                 $FieldConfig->{Name},
                                 $CountInner;
 
@@ -1949,6 +1952,7 @@ sub _MappingObjectAttributesGet {
                                 ( $Param{ValuePrefix} || () ),
                                 $DFName,
                                 $Count,
+                                ( $Param{ValuePrefix} || () ),
                                 $FieldConfig->{Name},
                                 $CountInner;
 
