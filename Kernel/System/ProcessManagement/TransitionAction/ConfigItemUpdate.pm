@@ -14,15 +14,15 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ProcessManagement::TransitionAction::ConfigItemAdd;
+package Kernel::System::ProcessManagement::TransitionAction::ConfigItemUpdate;
 
 use strict;
 use warnings;
 use utf8;
 
-#use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::VariableCheck qw(:all);
 
-#use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
+use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -39,7 +39,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::ConfigItemAdd - A module to create a config item
+Kernel::System::ProcessManagement::TransitionAction::ConfigItemUpdate - A module to create a config item
 
 =head1 DESCRIPTION
 
@@ -81,21 +81,34 @@ sub Params {
 
     my @Params = (
         {
+            Key      => 'ConfigItemID',
+            Value    => 'ConfigItemID (required if no Number is given)',
+            Optional => 1,
+        },
+        {
+            Key      => 'Number',
+            Value    => 'ConfigItem Number (required if no ConfigItemID is given)',
+            Optional => 1,
+        },
+        {
             Key      => 'Name',
             Value    => 'A name (required if no name module is configured)',
             Optional => 1,
         },
         {
             Key   => 'Class',
-            Value => 'A class (required)',
+            Value => 'Move the ConfigItem to a new class',
+            Optional => 1,
         },
         {
             Key   => 'DeplState',
-            Value => 'A deployment state (required)',
+            Value => 'Set a new deployment state',
+            Optional => 1,
         },
         {
             Key   => 'InciState',
-            Value => 'An incident state (required)',
+            Value => 'Set a new incident state',
+            Optional => 1,
         },
         {
             Key      => 'DynamicField_<Name> (replace <Name>)',
@@ -126,7 +139,7 @@ sub Params {
 
     Run Data
 
-    my $ConfigItemCreateResult = $ConfigItemCreateActionObject->Run(
+    my $ConfigItemUpdateResult = $ConfigItemUpdateActionObject->Run(
         UserID                   => 123,
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
@@ -135,13 +148,15 @@ sub Params {
         TransitionActionEntityID => 'TA123',
         Config                   => {
             # config item required:
-            Class         => 'Class of the Config Item',
-            DeplState     => 'Some Deployment State',
-            InciState     => 'Some Incident State',
+            ConfigItemID  => 'ID of the Config Item',
+            # OR
+            Number        => 'Number of the ConfigItem',        
 
             # config item optional:
             Name          => 'Some Config Item Name',
-
+            Class         => 'Class of the Config Item',
+            DeplState     => 'Some Deployment State',
+            InciState     => 'Some Incident State',
             %DataPayload,                                               # some parameters depending of each communication channel
 
             # other:
@@ -150,7 +165,7 @@ sub Params {
             UserID => 123,                                              # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
+    ConfigItem contains the result of ConfigItemUpdate including DynamicFields
     Config is the Config Hash stored in a Process::TransitionAction's  Config key
     Returns:
 
@@ -169,11 +184,11 @@ sub Run {
         . " TransitionAction: $Param{TransitionActionEntityID} - ";
 
     # check for missing or wrong params
-    my $Success = $Self->_CheckParams(
+    my $SuccessParam = $Self->_CheckParams(
         %Param,
         CommonMessage => $CommonMessage,
     );
-    return if !$Success;
+    return if !$SuccessParam;
 
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
@@ -184,10 +199,31 @@ sub Run {
 
     # collect ticket params
     my %ConfigItemParam;
-    for my $Attribute (qw( Name Class DeplState InciState )) {
+    for my $Attribute (qw( ConfigItemID Number Name Class DeplState InciState )) {
         if ( defined $Param{Config}->{$Attribute} ) {
             $ConfigItemParam{$Attribute} = $Param{Config}->{$Attribute};
         }
+    }
+
+    # get ConfigItem object
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    if ( defined $Param{Config}->{Number} ) {
+
+        my $ID = $ConfigItemObject->ConfigItemLookup(
+            ConfigItemNumber => $Param{Config}->{Number},
+        ); 
+        $ConfigItemParam{ConfigItemID} = $ID;
+    } elsif ( defined $Param{Config}->{ConfigItemID} ) {
+    
+        $ConfigItemParam{ConfigItemID} = $Param{Config}->{ConfigItemID};
+    } else {
+
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need ConfigItemID or ConfigItemNumber for update!",
+        );
+        return;
     }
 
     # get general catalog object
@@ -217,20 +253,17 @@ sub Run {
     # translate inci state into inci state id
     $ConfigItemParam{InciStateID} = $InciState2IDMap{ $ConfigItemParam{InciState} };
 
-    # get ticket object
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-
-    # create ticket
-    my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
+    # update ticket
+    my $Success = $ConfigItemObject->ConfigItemUpdate(
         %ConfigItemParam,
         UserID => $Param{UserID},
     );
 
-    if ( !$ConfigItemID ) {
+    if ( !$Success ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => $CommonMessage
-                . "Couldn't create New ConfigItem from Ticket: "
+                . "Couldn't update ConfigItem from Ticket: "
                 . $Param{Ticket}->{TicketID} . '!',
         );
         return;
@@ -266,17 +299,17 @@ sub Run {
         next CONFIGPARAM unless $DynamicFieldConfig->{Name};
         next CONFIGPARAM unless $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem';
 
-        my $ObjectID = $ConfigItemID;
+        my $ObjectID = $ConfigItemParam{ConfigItemID};
 
         # set the value
-        my $Success = $DynamicFieldBackendObject->ValueSet(
+        my $SuccessValueSet = $DynamicFieldBackendObject->ValueSet(
             DynamicFieldConfig => $DynamicFieldConfig,
             ObjectID           => $ObjectID,
             Value              => $Param{Config}->{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
             UserID             => $Param{UserID},
         );
 
-        if ( !$Success ) {
+        if ( !$SuccessValueSet ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => $CommonMessage
@@ -328,14 +361,14 @@ sub Run {
             return;
         }
 
-        my $SourceObjectID   = $ConfigItemID;
+        my $SourceObjectID   = $ConfigItemParam{ConfigItemID};
         my $SourceObjectType = 'ITSMConfigItem';
         my $TargetObjectID   = $Param{Ticket}->{TicketID};
         my $TargetObjectType = 'Ticket';
         if ( $SelectedDirection eq 'Target' ) {
             $SourceObjectID   = $Param{Ticket}->{TicketID};
             $SourceObjectType = 'Ticket';
-            $TargetObjectID   = $ConfigItemID;
+            $TargetObjectID   = $ConfigItemParam{ConfigItemID};
             $TargetObjectType = 'ITSMConfigItem';
         }
 

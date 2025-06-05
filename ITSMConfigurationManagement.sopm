@@ -102,6 +102,7 @@
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
+        <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAttachment.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemBulk.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemDelete.pm" />
