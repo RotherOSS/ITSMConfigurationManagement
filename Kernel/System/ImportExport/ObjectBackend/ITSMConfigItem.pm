@@ -1516,18 +1516,60 @@ sub ImportDataSave {
 
             # The key might encompass an index, indicated by '::'.
             # Note that the  indexes are 1-based.
-            my ( $DFName, $Index ) = split /::/, $+{DFNameWithIndex};
+            my ( $DFName, $Index, $InnerDFName, $InnerIndex ) = split /::/, $+{DFNameWithIndex};
 
             # ignore unexpected indexes, but still cut the '::'
             if ( defined $Index && $Index !~ m/^[1-9][0-9]*$/ ) {
                 undef $Index;
+            }
+            if ( defined $InnerIndex && $InnerIndex !~ m/^[1-9][0-9]*$/ ) {
+                undef $InnerIndex;
             }
             my $DFKey = "DynamicField_$DFName";
 
             my $DynamicFieldConfig = $DynamicFieldList{$DFName};
 
             # skip import when the dynamic field is not found
-            next MAPPING_OBJECT_DATA unless $DynamicFieldConfig;
+            next MAPPING_OBJECT_DATA unless IsHashRefWithData($DynamicFieldConfig);
+
+            # handle set-inner dynamic fields
+            if ($InnerDFName) {
+                my $InnerDFConfig = $DynamicFieldList{$InnerDFName};
+
+                next MAPPING_OBJECT_DATA unless IsHashRefWithData($InnerDFConfig);
+
+                $DFHash{$DFKey} //= [];
+                $DFHash{$DFKey}[ $Index - 1 ]{$InnerDFName} //= [];
+
+                if ( ref $Value ) {
+                    $DFHash{$DFKey}[ $Index - 1 ]{$InnerDFName}[ $InnerIndex - 1 ] = $Value;
+
+                    next MAPPING_OBJECT_DATA;
+                }
+
+                # Multivalue fields are exported as JSON strings in the case of CSV exports.
+                my $InnerIsMultiValue = $InnerDFConfig->{Config}{MultiValue};
+
+                if ( $InnerIsMultiValue && $InnerIndex ) {
+                    $DFHash{$DFKey}[ $Index - 1 ]{$InnerDFName}[ $InnerIndex - 1 ] = $Value;
+
+                    next MAPPING_OBJECT_DATA;
+                }
+
+                # The value is encoded as JSON for multivalue
+                if ($InnerIsMultiValue) {
+                    $DFHash{$DFKey}[ $Index - 1 ]{$InnerDFName} = $JSONObject->Decode(
+                        Data => $Value,
+                    );
+
+                    next MAPPING_OBJECT_DATA;
+                }
+
+                # keep the value as is, for single value, non-set
+                $DFHash{$DFKey}[ $Index - 1 ]{$InnerDFName} = $Value;
+
+                next MAPPING_OBJECT_DATA;
+            }
 
             # references are never unpacked
             if ( ref $Value ) {
