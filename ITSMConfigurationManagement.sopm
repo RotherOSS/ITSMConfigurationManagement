@@ -102,7 +102,6 @@
         <File Permission="660" Location="Kernel/Modules/AdminITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAdd.pm" />
-        <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemAttachment.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemBulk.pm" />
         <File Permission="660" Location="Kernel/Modules/AgentITSMConfigItemDelete.pm" />
@@ -197,6 +196,7 @@
         <File Permission="660" Location="Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/ProcessManagement/TransitionAction/ConfigItemAdd.pm" />
+        <File Permission="660" Location="Kernel/System/ProcessManagement/TransitionAction/ConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
