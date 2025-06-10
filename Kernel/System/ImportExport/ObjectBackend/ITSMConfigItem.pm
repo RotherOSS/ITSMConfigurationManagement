@@ -1574,9 +1574,10 @@ sub ImportDataSave {
         keys %NewVersionData;
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    # the specified config item already exists
     if ($ConfigItemID) {
 
-        # the specified config item already exists
         my $Success = $ConfigItemObject->ConfigItemUpdate(
             ConfigItemID  => $ConfigItemID,
             Name          => $VersionData->{Name},
