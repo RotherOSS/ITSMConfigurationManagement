@@ -96,18 +96,18 @@ sub Params {
             Optional => 1,
         },
         {
-            Key   => 'Class',
-            Value => 'Move the ConfigItem to a new class',
+            Key      => 'Class',
+            Value    => 'Move the ConfigItem to a new class',
             Optional => 1,
         },
         {
-            Key   => 'DeplState',
-            Value => 'Set a new deployment state',
+            Key      => 'DeplState',
+            Value    => 'Set a new deployment state',
             Optional => 1,
         },
         {
-            Key   => 'InciState',
-            Value => 'Set a new incident state',
+            Key      => 'InciState',
+            Value    => 'Set a new incident state',
             Optional => 1,
         },
         {
@@ -150,7 +150,7 @@ sub Params {
             # config item required:
             ConfigItemID  => 'ID of the Config Item',
             # OR
-            Number        => 'Number of the ConfigItem',        
+            Number        => 'Number of the ConfigItem',
 
             # config item optional:
             Name          => 'Some Config Item Name',
@@ -212,12 +212,14 @@ sub Run {
 
         my $ID = $ConfigItemObject->ConfigItemLookup(
             ConfigItemNumber => $Param{Config}->{Number},
-        ); 
+        );
         $ConfigItemParam{ConfigItemID} = $ID;
-    } elsif ( defined $Param{Config}->{ConfigItemID} ) {
-    
+    }
+    elsif ( defined $Param{Config}->{ConfigItemID} ) {
+
         $ConfigItemParam{ConfigItemID} = $Param{Config}->{ConfigItemID};
-    } else {
+    }
+    else {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
