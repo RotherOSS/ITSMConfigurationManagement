@@ -1576,16 +1576,8 @@ sub ImportDataSave {
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     if ($ConfigItemID) {
 
-        # TODO: ConfigItemUpdate
         # the specified config item already exists
-        # get id of the latest version, for checking later whether a version was created
-        my $VersionList = $ConfigItemObject->VersionList(
-            ConfigItemID => $ConfigItemID,
-        ) || [];
-        my $LatestVersionID = $VersionList->[-1] // 0;
-
-        # add new version
-        my $VersionID = $ConfigItemObject->VersionAdd(
+        my $Success = $ConfigItemObject->ConfigItemUpdate(
             ConfigItemID  => $ConfigItemID,
             Name          => $VersionData->{Name},
             DefinitionID  => $Definition->{DefinitionID},
@@ -1597,8 +1589,7 @@ sub ImportDataSave {
             $MergedDFData->%*,
             ExternalSource => 1,
         );
-
-        if ( !$VersionID ) {
+        if ( !$Success ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  =>
@@ -1609,11 +1600,17 @@ sub ImportDataSave {
             return;
         }
 
+        # fetch updated data to get version id
+        my $UpdatedConfigItemData = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+            UserID       => $Param{UserID},
+        );
+
         # import description inline images
         if ( IsArrayRefWithData( $VersionData->{DescriptionAttachments} ) ) {
             for my $Attachment ( $VersionData->{DescriptionAttachments}->@* ) {
                 my $VersionAttachmentSuccess = $ConfigItemObject->VersionAttachmentAdd(
-                    VersionID => $VersionID,
+                    VersionID => $UpdatedConfigItemData->{LatestVersionID},
                     $Attachment->%*,
                     UserID => 1,
                 );
@@ -1698,15 +1695,8 @@ sub ImportDataSave {
             }
         }
 
-        # The import was successful as we got a version id
-
-        # When VersionAdd() returns the previous latest version ID, we know that
-        # no new version has been added.
-        # The import of this config item has been skipped.
+        # if ConfigItemUpdate succeeded, we consider the data as changed regardless whether data was different
         my $RetCode = Translatable('Changed');
-        if ( $LatestVersionID && $VersionID == $LatestVersionID ) {
-            $RetCode = Translatable('Skipped');
-        }
 
         return $ConfigItemID, $RetCode;
     }
