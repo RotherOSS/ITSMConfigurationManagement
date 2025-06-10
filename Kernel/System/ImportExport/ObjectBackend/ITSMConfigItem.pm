@@ -760,7 +760,7 @@ sub ExportDataGet {
                 next MAPPINGOBJECT;
             }
 
-            # The formating depends on the config of the dynamic field, which is not really nice.
+            # The formatting depends on the config of the dynamic field, which is not really nice.
             my $IsMultiValue = $Definition->{DynamicFieldRef}->{$DFName}->{Config}->{MultiValue} ? 2 : 0;
             my $IsSet        = ( $Definition->{DynamicFieldRef}->{$DFName}->{FieldType} // '' ) eq 'Set';
 
@@ -1381,7 +1381,6 @@ sub ImportDataSave {
 
             # retrieve and store description inline images for import
             {
-                my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
                 my @DescriptionAttachments;
 
                 # attachments are stored in the src attribute of their img tag as base64 encoded string
@@ -2051,7 +2050,7 @@ sub _DFImportSearchDataPrepare {
         # TODO: this is broken for multivalue dynamic fields
         $DFSearchParams{"DynamicField_$Key"} = { Equals => [ split /#####/, $Param{Identifier}->{"DynamicField_$Key"} ] };
 
-        # check if value transformation is neccessary
+        # check if value transformation is necessary
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
         my $IsReferenceField          = $DynamicFieldBackendObject->HasBehavior(
             DynamicFieldConfig => $DynamicFieldConfig,
@@ -2148,7 +2147,7 @@ sub _DFImportDataMerge {
         next DF_KEY;
     }
 
-    # TODO: check whether any field types need any special treatement
+    # TODO: check whether any field types need any special treatment
 
 =for never
 
