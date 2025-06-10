@@ -1610,7 +1610,7 @@ sub ImportDataSave {
         if ( IsArrayRefWithData( $VersionData->{DescriptionAttachments} ) ) {
             for my $Attachment ( $VersionData->{DescriptionAttachments}->@* ) {
                 my $VersionAttachmentSuccess = $ConfigItemObject->VersionAttachmentAdd(
-                    VersionID => $UpdatedConfigItemData->{LatestVersionID},
+                    VersionID => $UpdatedConfigItemData->{LastVersionID},
                     $Attachment->%*,
                     UserID => 1,
                 );
