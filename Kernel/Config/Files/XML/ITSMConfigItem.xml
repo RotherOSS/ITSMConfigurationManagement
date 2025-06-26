@@ -1165,6 +1165,7 @@
                 <Item Key="Data">
                     <Hash>
                         <Item Key="Name" Translatable="1">Name</Item>
+                        <Item Key="Description" Translatable="1">Description</Item>
                         <Item Key="DeplStateID" Translatable="1">DeploymentState</Item>
                         <Item Key="InciStateID" Translatable="1">IncidentState</Item>
                         <Item Key="DefinitionUpdate" Translatable="1">Definition Update</Item>
