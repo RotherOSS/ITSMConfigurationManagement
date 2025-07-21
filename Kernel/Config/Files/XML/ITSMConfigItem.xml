@@ -2002,11 +2002,11 @@
                 <Hash>
                     <Item Key="GroupRo">
                         <Array>
+                            <Item>itsm-configitem</Item>
                         </Array>
                     </Item>
                     <Item Key="Group">
                         <Array>
-                            <Item>itsm-configitem</Item>
                         </Array>
                     </Item>
                     <Item Key="Description" Translatable="1">To download attachments.</Item>
@@ -2035,7 +2035,6 @@
                     </Item>
                     <Item Key="Group">
                         <Array>
-                            <Item>itsm-configitem</Item>
                         </Array>
                     </Item>
                     <Item Key="Description" Translatable="1">To download attachments.</Item>
