@@ -199,6 +199,7 @@
         <File Permission="660" Location="Kernel/System/ProcessManagement/TransitionAction/ConfigItemUpdate.pm" />
         <File Permission="660" Location="Kernel/System/Service/PreferencesDB.pm" />
         <File Permission="660" Location="Kernel/System/Stats/Dynamic/ITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/System/SysConfig/ValueType/Entity/ConfigItemClass.pm" />
         <File Permission="660" Location="Kernel/System/Ticket/Event/TicketStatusLink.pm" />
         <File Permission="660" Location="Kernel/System/UnitTest/ITSMConfigItemHelper.pm" />
         <File Permission="660" Location="doc/itsm-configuration-management-database.dia" />
