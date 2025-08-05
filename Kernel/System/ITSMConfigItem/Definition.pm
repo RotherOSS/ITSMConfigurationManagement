@@ -1476,44 +1476,9 @@ sub ClassImport {
     }
 
     # add inner fields of set DFs to hash
-    my %SetFields;
-    FIELD:
     for my $Field ( keys %DynamicFields ) {
-
-        my $DynamicFieldConfig = $DynamicFields{$Field};
-
-        next FIELD unless IsHashRefWithData($DynamicFieldConfig);
-
         if ( $DynamicFields{$Field}{FieldType} eq 'Set' ) {
-
-            next FIELD unless IsArrayRefWithData( $DynamicFieldConfig->{Config}{Include} );
-
-            # iterate the entire Include structure to get the versioned dynamic field configs
-            INCLUDEELEMENT:
-            for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
-
-                if ( $IncludeElement->{DF} ) {
-                    $SetFields{ $IncludeElement->{DF} } = $IncludeElement->{Definition};
-                }
-                elsif ( $IncludeElement->{Grid} ) {
-
-                    next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
-                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
-
-                    ROW:
-                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
-
-                        next ROW unless IsArrayRefWithData($Row);
-
-                        ROWELEMENT:
-                        for my $RowElement ( $Row->@* ) {
-                            if ( $RowElement->{DF} ) {
-                                $SetFields{ $RowElement->{DF} } = $RowElement->{Definition};
-                            }
-                        }
-                    }
-                }
-            }
+            my %SetFields = map { $_->{DF} => $_->{Definition} } $DynamicFields{$Field}{Config}{Include}->@*;
 
             if ( !%SetFields ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1793,46 +1758,13 @@ sub ClassImport {
 
         my $FieldConfig = $AllFields{$FieldName};
 
-        # removes the field config definitions from the set-inner fields
         my %SetConfig;
         if ( $FieldConfig->{FieldType} eq 'Set' ) {
-
-            next FIELD unless IsArrayRefWithData( $FieldConfig->{Config}{Include} );
-
-            # copy config to avoid destroying original data
-            my %Config = $FieldConfig->{Config}->%*;
-
-            # iterate the entire Include structure
-            INCLUDEELEMENT:
-            for my $IncludeElement ( $Config{Include}->@* ) {
-
-                if ( $IncludeElement->{DF} ) {
-                    delete $IncludeElement->{Definition};
-                }
-                elsif ( $IncludeElement->{Grid} ) {
-
-                    next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
-                    next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
-
-                    ROW:
-                    for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
-
-                        next ROW unless IsArrayRefWithData($Row);
-
-                        ROWELEMENT:
-                        for my $RowElement ( $Row->@* ) {
-                            if ( $RowElement->{DF} ) {
-                                delete $RowElement->{Definition};
-                            }
-                        }
-                    }
-                }
-            }
-
+            my @Included = map { { DF => $_->{DF} } } $FieldConfig->{Config}{Include}->@*;
             %SetConfig = (
                 Config => {
                     $FieldConfig->{Config}->%*,
-                    %Config,
+                    Include => \@Included,
                 },
             );
         }
@@ -2289,6 +2221,7 @@ sub _DefinitionDynamicFieldGet {
 
         # do not descend into Interfaces and Groups,
         # as these may be empty and would be logged as errors
+        # TODO: are Interfaces and Groups still used ?
         next KEY if $Key eq 'Interfaces';
         next KEY if $Key eq 'Groups';
         next KEY if $Key eq 'Pages';
@@ -2339,54 +2272,23 @@ sub _DefinitionDynamicFieldGet {
 
             # for set fields also the contained dynamic fields have to be versioned
             if ( $DynamicField->{FieldType} eq 'Set' ) {
-
                 next DYNAMICFIELD unless IsArrayRefWithData( $DynamicField->{Config}{Include} );
 
-                # iterate the entire Include structure to get versioned dynamic field configs
-                INCLUDEELEMENT:
-                for my $IncludeElement ( $DynamicField->{Config}{Include}->@* ) {
+                INCLUDED:
+                for my $IncludedDF ( $DynamicField->{Config}{Include}->@* ) {
+                    next INCLUDED unless $IncludedDF->{DF};
 
-                    if ( $IncludeElement->{DF} ) {
-                        my $IncludedDFConfig = $DynamicFieldObject->DynamicFieldGet( Name => $IncludeElement->{DF} );
+                    my $IncludedDFConfig = $DynamicFieldObject->DynamicFieldGet( Name => $IncludedDF->{DF} );
 
-                        $IncludeElement->{Definition} = {
-                            ID         => $IncludedDFConfig->{ID},
-                            Name       => $IncludedDFConfig->{Name},
-                            Label      => $IncludedDFConfig->{Label},
-                            Config     => $IncludedDFConfig->{Config},
-                            FieldType  => $IncludedDFConfig->{FieldType},
-                            ObjectType => $IncludedDFConfig->{ObjectType},
-                            CIClass    => $Class,
-                        };
-                    }
-                    elsif ( $IncludeElement->{Grid} ) {
-
-                        next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
-                        next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
-
-                        ROW:
-                        for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
-
-                            next ROW unless IsArrayRefWithData($Row);
-
-                            ROWELEMENT:
-                            for my $RowElement ( $Row->@* ) {
-                                if ( $RowElement->{DF} ) {
-                                    my $IncludedDFConfig = $DynamicFieldObject->DynamicFieldGet( Name => $RowElement->{DF} );
-
-                                    $RowElement->{Definition} = {
-                                        ID         => $IncludedDFConfig->{ID},
-                                        Name       => $IncludedDFConfig->{Name},
-                                        Label      => $IncludedDFConfig->{Label},
-                                        Config     => $IncludedDFConfig->{Config},
-                                        FieldType  => $IncludedDFConfig->{FieldType},
-                                        ObjectType => $IncludedDFConfig->{ObjectType},
-                                        CIClass    => $Class,
-                                    };
-                                }
-                            }
-                        }
-                    }
+                    $IncludedDF->{Definition} = {
+                        ID         => $IncludedDFConfig->{ID},
+                        Name       => $IncludedDFConfig->{Name},
+                        Label      => $IncludedDFConfig->{Label},
+                        Config     => $IncludedDFConfig->{Config},
+                        FieldType  => $IncludedDFConfig->{FieldType},
+                        ObjectType => $IncludedDFConfig->{ObjectType},
+                        CIClass    => $Class,
+                    };
                 }
             }
 
@@ -2531,50 +2433,19 @@ sub _DynamicFieldConfigTransform {
 
     # sanitize configs of set-included DFs
     if ( $Param{Action} eq "Export" && IsArrayRefWithData( $DynamicFieldConfig->{Config}->{Include} ) ) {
+        INCLUDED_DF:
+        for my $IncludedDF ( $DynamicFieldConfig->{Config}->{Include}->@* ) {
 
-        # iterate the entire Include structure
-        INCLUDEELEMENT:
-        for my $IncludeElement ( $DynamicFieldConfig->{Config}{Include}->@* ) {
+            delete $IncludedDF->{Definition}{ID};
 
-            if ( $IncludeElement->{DF} ) {
-                delete $IncludeElement->{Definition}{ID};
+            # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
+            delete $IncludedDF->{Definition}->{Config}->{PartOfSet};
 
-                # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
-                delete $IncludeElement->{Definition}{Config}{PartOfSet};
-
-                # transform included configs recursively on export
-                $IncludeElement->{Definition} = $Self->_DynamicFieldConfigTransform(
-                    DynamicFieldConfig => $IncludeElement->{Definition},
-                    Action             => 'Export',
-                );
-            }
-            elsif ( $IncludeElement->{Grid} ) {
-
-                next INCLUDEELEMENT unless IsHashRefWithData( $IncludeElement->{Grid} );
-                next INCLUDEELEMENT unless IsArrayRefWithData( $IncludeElement->{Grid}{Rows} );
-
-                ROW:
-                for my $Row ( $IncludeElement->{Grid}{Rows}->@* ) {
-
-                    next ROW unless IsArrayRefWithData($Row);
-
-                    ROWELEMENT:
-                    for my $RowElement ( $Row->@* ) {
-                        if ( $RowElement->{DF} ) {
-                            delete $RowElement->{Definition}{ID};
-
-                            # Filter off the 'PartOfSet' attribute, it is not necessary and may cause inconsistency errors later on import
-                            delete $RowElement->{Definition}{Config}{PartOfSet};
-
-                            # transform included configs recursively on export
-                            $RowElement->{Definition} = $Self->_DynamicFieldConfigTransform(
-                                DynamicFieldConfig => $RowElement->{Definition},
-                                Action             => 'Export',
-                            );
-                        }
-                    }
-                }
-            }
+            # transform included configs recursively on export
+            $IncludedDF->{Definition} = $Self->_DynamicFieldConfigTransform(
+                DynamicFieldConfig => $IncludedDF->{Definition},
+                Action             => 'Export',
+            );
         }
     }
 
