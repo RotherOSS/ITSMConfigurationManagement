@@ -47,7 +47,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 .TableSmall th {
     line-height: 15px;
     vertical-align: middle;
-    word-wrap: keep-all;
+    word-break: keep-all;
 }
 
 .TableSmall tr:hover {
