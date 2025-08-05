@@ -1,5 +1,5 @@
 # --
-# OTOBO is a web-based config iteming system for service organisations.
+# OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
