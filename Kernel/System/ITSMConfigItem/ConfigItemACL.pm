@@ -16,9 +16,15 @@
 
 package Kernel::System::ITSMConfigItem::ConfigItemACL;
 
+use v5.24;
 use strict;
 use warnings;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -53,7 +59,7 @@ Example to restrict config item actions:
             # ...
         },
 
-        Action        => ITSMConfigItemEdit',         # Optional
+        Action        => 'AgentITSMConfigItemEdit',   # Optional
         ConfigItemID  => 123,                         # Optional
         DynamicField  => {                            # Optional
             DynamicField_NameX => 123,
@@ -131,6 +137,7 @@ sub ConfigItemAcl {
                 Priority => 'error',
                 Message  => "Need $Needed!"
             );
+
             return;
         }
     }
@@ -144,7 +151,7 @@ sub ConfigItemAcl {
     my $ACLs       = $ConfigObject->Get('ConfigItemAcl');
     my $AclModules = $ConfigObject->Get('ITSMConfigItem::Acl::Module');
 
-    # only execute ACLs if ACL or ACL module is configured
+    # do not execute ACLs if neither ConfigItemAcl nor ITSMConfigItem::Acl::Module is configured
     if ( !$ACLs && !$AclModules ) {
         return;
     }
@@ -157,18 +164,25 @@ sub ConfigItemAcl {
     MODULENAME:
     for my $ModuleName ( sort keys %{ $AclModules // {} } ) {
         my $Module = $AclModules->{$ModuleName};
+
         if ( $Module->{ReturnType} && $Module->{ReturnType} ne $Param{ReturnType} ) {
             next MODULENAME;
         }
+
         if ( $Module->{ReturnSubType} ) {
+
+            # TODO: this looks broken. $Module->{ReturnSubType} is a hashref, yet the value is derefenced as an array
             if ( ref( $Module->{ReturnSubType} ) eq 'HASH' ) {
                 next MODULENAME if !grep { $Param{ReturnSubType} eq $_ }
                     @{ $Module->{ReturnSubType} };
             }
             else {
 
-                # a scalar, we hope
-                next MODULENAME if !$Module->{ReturnSubType} eq $Param{ReturnSubType};
+                # a scalar, we hope, but it could also be an array
+                # TODO: this filter looks broken
+                # !$Module->{ReturnSubType} is either q{} or 1, (or !!0, and !!1)
+                # so it is unlikely that a string comparison would give a true value
+                next MODULENAME if ( !$Module->{ReturnSubType} ) eq $Param{ReturnSubType};
             }
         }
 
@@ -217,7 +231,7 @@ sub ConfigItemAcl {
     my %Checks         = %{ $CheckResult->{Checks}         || {} };
     my %ChecksDatabase = %{ $CheckResult->{ChecksDatabase} || {} };
 
-    # check ACL configuration
+    # note that %Acls is just the dereferenced $ACLs
     my %Acls;
     if ( $ConfigObject->Get('ConfigItemAcl') ) {
         %Acls = %{ $ConfigObject->Get('ConfigItemAcl') };
