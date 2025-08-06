@@ -91,18 +91,13 @@ sub new {
 
     # gather column config
     #   config from AgentITSMConfigItem overview is used for both overview and search result view
-    my %ColumnConfig;
-    if ( $Self->{Action} eq 'AgentITSMConfigItemSearch' ) {
-        my $OverviewConfig = $ConfigObject->Get('ITSMConfigItem::Frontend::AgentITSMConfigItem');
-        $Self->{Config}{DefaultColumns}        = $OverviewConfig->{Config}{DefaultColumns};
-        $Self->{Config}{ClassColumnsAvailable} = $OverviewConfig->{Config}{ClassColumnsAvailable};
-        $Self->{Config}{ClassColumnsDefault}   = $OverviewConfig->{Config}{ClassColumnsDefault};
-        $Self->{Config}{ClassColumnsDisabled}  = $OverviewConfig->{Config}{ClassColumnsDisabled};
-        %ColumnConfig                          = $OverviewConfig->{DefaultColumns}->%*;
-    }
-    else {
-        %ColumnConfig = $Self->{Config}{DefaultColumns}->%*;
-    }
+    my $OverviewConfig = $ConfigObject->Get('ITSMConfigItem::Frontend::AgentITSMConfigItem');
+
+    $Self->{Config}{DefaultColumns}        = $OverviewConfig->{DefaultColumns};
+    $Self->{Config}{ClassColumnsAvailable} = $OverviewConfig->{ClassColumnsAvailable};
+    $Self->{Config}{ClassColumnsDefault}   = $OverviewConfig->{ClassColumnsDefault};
+    $Self->{Config}{ClassColumnsDisabled}  = $OverviewConfig->{ClassColumnsDisabled};
+    my %ColumnConfig = $Self->{Config}{DefaultColumns}->%*;
 
     # if class filter is set, display class specific fields
     if ( $FilterName && $FilterName ne 'All' ) {
