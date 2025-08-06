@@ -302,7 +302,18 @@ sub new {
     my %RemoveKeys;
 
     if ( IsHashRefWithData( $Self->{Config}{ConfigItemKey} ) ) {
+        CLASS:
         for my $Class ( keys $Self->{Config}{ConfigItemKey}->%* ) {
+
+            # configured class not found on system
+            if ( !$RevertedClassList{$Class} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'notice',
+                    Message  => "The class '$Class' was configured for the widget $Self->{Action}, but does not exist on the system.",
+                );
+                next CLASS;
+            }
+
             push $ConfigItemKeys{ $Self->{Config}{ConfigItemKey}{$Class} }->@*, $RevertedClassList{$Class};
             $RemoveKeys{ $Self->{Config}{ConfigItemKey}{$Class} } = 1;
         }
