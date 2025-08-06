@@ -2165,24 +2165,6 @@
                 <Item Key="CacheTTLLocal">0.5</Item>
                 <Item Key="ConfigItemKey">
                     <Hash>
-                        <Item Key="Appliance">Contact-User</Item>
-                        <Item Key="Client">Contact-User</Item>
-                        <Item Key="Client (virtual)">Contact-User</Item>
-                        <Item Key="Device (unidentified)">Contact-User</Item>
-                        <Item Key="Display">Contact-User</Item>
-                        <Item Key="Mobile Device">Contact-User</Item>
-                        <Item Key="Other Accessories">Contact-User</Item>
-                        <Item Key="Phone">Contact-User</Item>
-                        <Item Key="Printer">Contact-User</Item>
-                        <Item Key="Projector">Contact-User</Item>
-                        <Item Key="Router (Firewall)">Contact-User</Item>
-                        <Item Key="Server">Contact-User</Item>
-                        <Item Key="Server (virtual)">Contact-User</Item>
-                        <Item Key="Smartboard">Contact-User</Item>
-                        <Item Key="Storage">Contact-User</Item>
-                        <Item Key="Switch">Contact-User</Item>
-                        <Item Key="UPS">Contact-User</Item>
-                        <Item Key="WLAN access point">Contact-User</Item>
                     </Hash>
                 </Item>
                 <Item Key="DefaultColumns">
