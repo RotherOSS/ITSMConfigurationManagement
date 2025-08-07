@@ -622,7 +622,6 @@ sub VersionAdd {
     }
 
     # new versions are always added with the newest definition
-    # TODO: support that the DefinitionId is passed as parameter
     my $Definition = $Self->DefinitionGet(
         ClassID => $Version{ClassID},
     );
@@ -666,7 +665,6 @@ END_SQL
     return unless $InsertSuccess;
 
     # get id of new version
-    # TODO: what about concurrent inserts ?
     my ( $VersionID, $VersionCreateTime ) = $DBObject->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id, create_time
@@ -713,8 +711,16 @@ END_SQL
         ],
     );
 
-    # TODO: roll back the 'INSERT INTO configitem_version'
-    return unless $UpdateSuccess;
+    # Clear the cache for ConfigItemGet without dynamic fields
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => join(
+            '::', 'ConfigItemGet',
+            ConfigItemID => $Version{ConfigItemID},
+            DFData       => 0,
+        ),
+    );
 
     # trigger VersionCreate event
     $Self->EventHandler(
@@ -760,18 +766,15 @@ END_SQL
         }
     }
 
-    # Clear the cache for ConfigItemGet
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-    for my $DFData (qw(0 1)) {
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => join(
-                '::', 'ConfigItemGet',
-                ConfigItemID => $Version{ConfigItemID},
-                DFData       => $DFData
-            ),
-        );
-    }
+    # Clear the cache for ConfigItemGet with dynamic fields
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => join(
+            '::', 'ConfigItemGet',
+            ConfigItemID => $Version{ConfigItemID},
+            DFData       => 1,
+        ),
+    );
 
     for my $Name (@UpdatedDynamicFields) {
 
@@ -949,6 +952,8 @@ sub VersionUpdate {
         );
     }
 
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
     if ( any { defined $Param{$_} } qw/Name VersionString DeplStateID InciStateID DefinitionID Description/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -982,7 +987,7 @@ END_SQL
 
             # Update version, cur_inci_state_id, cur_depl_state_id of the config item.
             # cur_inci_state_id is needed by CurInciStateRecalc().
-            my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
                 SQL => <<'END_SQL',
 UPDATE configitem
   SET
@@ -1002,8 +1007,28 @@ END_SQL
                 ],
             );
 
-            # TODO: roll back the 'UPDATE INTO configitem_version'
-            return unless $UpdateSuccess;
+            # Clear the cache for base attributes
+            $CacheObject->Delete(
+                Type => $Self->{CacheType},
+                Key  => join(
+                    '::', 'ConfigItemGet',
+                    VersionID => $Version->{VersionID},
+                    DFData    => 0,
+                ),
+            );
+            $CacheObject->Delete(
+                Type => $Self->{CacheType},
+                Key  => join(
+                    '::', 'ConfigItemGet',
+                    ConfigItemID => $Version->{ConfigItemID},
+                    DFData       => 0,
+                ),
+            );
+
+            $CacheObject->Delete(
+                Type => $Self->{CacheType},
+                Key  => join( '::', 'VersionNameGet', VersionID => $Version->{VersionID} ),
+            );
 
             # trigger VersionUpdate event
             $Self->EventHandler(
@@ -1057,30 +1082,22 @@ END_SQL
         }
     }
 
-    # Clear the cache for ConfigItemGet
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-    for my $DFData (qw(0 1)) {
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => join(
-                '::', 'ConfigItemGet',
-                VersionID => $Version->{VersionID},
-                DFData    => $DFData
-            ),
-        );
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => join(
-                '::', 'ConfigItemGet',
-                ConfigItemID => $Version->{ConfigItemID},
-                DFData       => $DFData
-            ),
-        );
-    }
-
+    # Clear the cache for dynamic fields, too
     $CacheObject->Delete(
         Type => $Self->{CacheType},
-        Key  => join( '::', 'VersionNameGet', VersionID => $Version->{VersionID} ),
+        Key  => join(
+            '::', 'ConfigItemGet',
+            VersionID => $Version->{VersionID},
+            DFData    => 1,
+        ),
+    );
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => join(
+            '::', 'ConfigItemGet',
+            ConfigItemID => $Version->{ConfigItemID},
+            DFData       => 1,
+        ),
     );
 
     for my $Name (@UpdatedDynamicFields) {
