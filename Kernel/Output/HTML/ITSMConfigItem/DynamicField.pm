@@ -152,7 +152,7 @@ sub PageRender {
                 Name => 'ContentCell',
                 Data => {
                     GridArea => $GridArea,
-                    Type => $Section->{Type}
+                    Type     => $Section->{Type}
                 },
             );
 
@@ -283,8 +283,14 @@ sub _SectionRender {
                 $Param{LayoutObject}->Block(
                     Name => 'FieldDisplayCell',
                     Data => {
+                        $DynamicField->{Name} => $DisplayValue->{Title},
+                        $Param{ConfigItem}->%*,
                         $DisplayValue->%*,
-                        Type => 'ValueLink',
+
+                        # Include unique parameter with dynamic field name in case of collision with others.
+                        #   Please see bug#13362 for more information.
+                        "DynamicField_$DynamicField->{Name}" => $DisplayValue->{Title},
+                        Type                                 => 'ValueLink',
                     },
                 );
             }
@@ -633,8 +639,14 @@ sub _RenderDF {
         $Param{LayoutObject}->Block(
             Name => 'FieldDisplayCell',
             Data => {
+                $DynamicField->{Name} => $DisplayValue->{Title},
+                $Param{ConfigItem}->%*,
                 $DisplayValue->%*,
-                Type => 'ValueLink',
+
+                # Include unique parameter with dynamic field name in case of collision with others.
+                #   Please see bug#13362 for more information.
+                "DynamicField_$DynamicField->{Name}" => $DisplayValue->{Title},
+                Type                                 => 'ValueLink',
             },
         );
     }
