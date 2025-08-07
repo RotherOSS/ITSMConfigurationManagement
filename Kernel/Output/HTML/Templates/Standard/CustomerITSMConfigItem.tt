@@ -43,7 +43,7 @@
 [% END %]
 [% RenderBlockStart("FilterDelete") %]
             <div id="oooITSMConfigItemFilterDelete">
-                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];DeleteFilters=DeleteFilters">
+                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];DeleteFilters=DeleteFilters">
                     [% Translate("Reset overview") | html %]
                     <i class="ooofo ooofo-delete_outl"></i>
                 </a>
