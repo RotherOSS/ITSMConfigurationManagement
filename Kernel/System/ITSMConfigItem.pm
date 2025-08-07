@@ -2093,7 +2093,7 @@ sub _FindInciConfigItems {
     # ignore already scanned ids (infinite loop protection)
     return if defined $Param{ScannedConfigItemIDs}{ $Param{ConfigItemID} };
 
-    # set a default so the ConfigITem won't be scanned again
+    # set a default so the ConfigItem won't be scanned again
     $Param{ScannedConfigItemIDs}{ $Param{ConfigItemID} } = {};
     $Param{ScannedConfigItemIDs}{ $Param{ConfigItemID} }->{Type} = 'operational';
 
