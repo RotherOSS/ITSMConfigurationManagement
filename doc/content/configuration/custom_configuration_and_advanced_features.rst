@@ -15,6 +15,7 @@ Custom Configuration and Advanced Features
    custom_configuration_and_advanced_features/import_export
    custom_configuration_and_advanced_features/console_commands
    custom_configuration_and_advanced_features/permissions_and_access_restrictions
+   custom_configuration_and_advanced_features/customer_interface_permission_conditions
    custom_configuration_and_advanced_features/generic_interface
    custom_configuration_and_advanced_features/migration_from_otobo10_or_otrs
    custom_configuration_and_advanced_features/ready_2_import_class_bundles
