@@ -665,9 +665,9 @@ END_SQL
     return unless $InsertSuccess;
 
     # get id of new version
-    my ( $VersionID, $VersionCreateTime ) = $DBObject->SelectRowArray(
+    my ( $VersionID ) = $DBObject->SelectRowArray(
         SQL => <<'END_SQL',
-SELECT id, create_time
+SELECT id
   FROM configitem_version
   WHERE configitem_id = ?
   ORDER BY id DESC
@@ -686,29 +686,11 @@ END_SQL
         return;
     }
 
-    # Update last version, cur_inci_state_id, cur_depl_state_id of the config item.
-    # cur_inci_state_id is needed by CurInciStateRecalc().
-    my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => <<'END_SQL',
-UPDATE configitem
-  SET
-    last_version_id   = ?,
-    cur_inci_state_id = ?,
-    cur_depl_state_id = ?,
-    change_time       = ?,
-    change_by         = ?
-  WHERE id = ?
-END_SQL
-        Bind => [
-            \(
-                $VersionID,
-                $Version{InciStateID},
-                $Version{DeplStateID},
-                $VersionCreateTime,
-                $Param{UserID},
-                $Version{ConfigItemID}
-            )
-        ],
+    my $RecalcCurInciState = $Self->_UpdateCurAttr(
+        Version     => \%Version,
+        LastVersion => $LastVersion,
+        VersionID   => $VersionID,
+        UserID      => $Param{UserID},
     );
 
     # Clear the cache for ConfigItemGet without dynamic fields
@@ -722,7 +704,7 @@ END_SQL
         ),
     );
 
-    # trigger VersionCreate event
+    # trigger VersionCreate even
     $Self->EventHandler(
         Event => 'VersionCreate',
         Data  => {
@@ -809,9 +791,11 @@ END_SQL
     }
 
     # recalculate the current incident state of all linked config items
-    $Self->CurInciStateRecalc(
-        ConfigItemID => $Version{ConfigItemID},
-    );
+    if ( $RecalcCurInciState ) {
+        $Self->CurInciStateRecalc(
+            ConfigItemID => $Version{ConfigItemID},
+        );
+    }
 
     return $VersionID;
 }
@@ -863,10 +847,6 @@ sub VersionUpdate {
 
         return;
     }
-
-    # The incident state is calculated for the current incident state. Therfore it only
-    # needs to be recalculation when the incident state of the last version has changed.
-    my $CurInciStateRecalc = ( $Param{InciStateID} && $Version->{VersionID} eq $Version->{LastVersionID} ) ? 1 : 0;
 
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
         ItemID => $Version->{ClassID},
@@ -952,7 +932,8 @@ sub VersionUpdate {
         );
     }
 
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+    my $RecalcCurInciState = 0;
 
     if ( any { defined $Param{$_} } qw/Name VersionString DeplStateID InciStateID DefinitionID Description/ ) {
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -984,27 +965,13 @@ END_SQL
 
         # The config item is only affected when the last version was modified
         if ( $Version->{VersionID} eq $Version->{LastVersionID} ) {
+            $Param{ConfigItemID} = $Version->{ConfigItemID};
 
-            # Update version, cur_inci_state_id, cur_depl_state_id of the config item.
-            # cur_inci_state_id is needed by CurInciStateRecalc().
-            $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
-                SQL => <<'END_SQL',
-UPDATE configitem
-  SET
-    cur_inci_state_id = ?,
-    cur_depl_state_id = ?,
-    change_time       = current_timestamp,
-    change_by         = ?
-  WHERE id = ?
-END_SQL
-                Bind => [
-                    \(
-                        $Param{InciStateID},
-                        $Param{DeplStateID},
-                        $Param{UserID},
-                        $Version->{ConfigItemID}
-                    )
-                ],
+            $RecalcCurInciState = $Self->_UpdateCurAttr(
+                Version     => \%Param,
+                LastVersion => $Version,
+                VersionID   => $Version->{VersionID},
+                UserID      => $Param{UserID},
             );
 
             # Clear the cache for base attributes
@@ -1132,7 +1099,7 @@ END_SQL
         );
     }
 
-    if ($CurInciStateRecalc) {
+    if ($RecalcCurInciState) {
 
         # recalculate the current incident state of all linked config items
         $Self->CurInciStateRecalc(
@@ -1832,5 +1799,63 @@ sub VersionAttachmentExists {
 
     return 1;
 }
+
+sub _UpdateCurAttr {
+    my ( $Self, %Param ) = @_;
+
+    my $CurInciStateID;
+    my $RecalcCurInciState = 0;
+
+    # if the last version does not yet have a CurInciStateID yet the ConfigItem is new
+    # set current InciStateID; recalculation is not necessary (no links can exist yet)
+    if ( !defined $Param{LastVersion}{CurInciStateID} ) {
+        $CurInciStateID = $Param{Version}{InciStateID};
+    }
+
+    # if the config item update does not change the InciStateID
+    # we just keep the CurInciStateID; no recalulation
+    elsif ( $Param{Version}{InciStateID} eq $Param{LastVersion}{InciStateID} ) {
+        $CurInciStateID = $Param{LastVersion}{CurInciStateID};
+    }
+
+    # if the incident state changes, we start the recalulation
+    # we do not test for cases like same InciStateType, or new InciState eq last CurInciState
+    else {
+        $CurInciStateID     = $Param{Version}{InciStateID};
+        $RecalcCurInciState = 1;
+    }
+
+    # Update last version, cur_inci_state_id, cur_depl_state_id of the config item.
+    # cur_inci_state_id is needed by CurInciStateRecalc().
+    my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        SQL => <<'END_SQL',
+UPDATE configitem
+  SET
+    last_version_id   = ?,
+    cur_inci_state_id = ?,
+    cur_depl_state_id = ?,
+    change_time       = current_timestamp,
+    change_by         = ?
+  WHERE id = ?
+END_SQL
+        Bind => [
+            \$Param{VersionID},
+            \$CurInciStateID,
+            \$Param{Version}{DeplStateID},
+            \$Param{UserID},
+            \$Param{Version}{ConfigItemID},
+        ],
+    );
+
+    if ( !$UpdateSuccess ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Could not update current attributes of ConfigItemID $Param{Version}{ConfigItemID}!",
+        );
+    }
+
+    return $RecalcCurInciState;
+}
+
 
 1;

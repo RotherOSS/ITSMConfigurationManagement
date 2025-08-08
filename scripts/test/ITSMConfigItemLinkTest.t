@@ -66,16 +66,6 @@ sub CheckExpectedResults {
                     ConfigItemID => $ObjectNameSuffix2ID{$Object}->{$NameSuffix},
                 );
 
-                ############################################################
-                # COMMENTS AYTE
-                ############################################################
-
-                # Check $ConfigItem->{CurInciState}  were is updated ????
-
-                ############################################################
-                # END CUSTOMIZING AYTE
-                ############################################################
-
                 # check the result
                 is(
                     $ConfigItem->{CurInciState},
