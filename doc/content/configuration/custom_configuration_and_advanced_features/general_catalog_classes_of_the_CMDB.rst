@@ -6,8 +6,18 @@ General Catalog Classes of the CMDB
 Classes
 """""""
 
-Define the Config Item Classes (ITSM::ConfigItem::Class) available on the system, and get their basic settings in place. This includes (but isn't limited to):
-    
+For using Config Item Classes, either the Ready2Adopt Classes, provided by the package, can be imported, or own customized Classes can be created. For doing so, please navigate to the Admin-Interface of the General Catalog. After installing the package, it looks like this:
+
+.. image:: ../../images/admingeneralcatalog_overview_REDO.png
+   :align: center
+
+For creating the first Config Item Class, you need to click on the button "Add Catalog Class". The following mask gives you a limited set of attributes to fill in.
+
+.. image:: ../../images/admingeneralcatalog_create_new_empty.png
+   :align: center
+
+Fill in the Catalog Class ('ITSM::ConfigItem::Class' in case of Config Item Classes), the name and choose a validity. Optionally a comment can be provided. When saving this information, you are redirected to the same edit mask, but with the additional attributes unique to Config Item Classes, which are the following:
+
     - **Access Group**: Controls user (agent) access to this class.
     - **Name Module**: No functionality in the default OTOBO Core installation. Allows extensions to automatically set CI names.
     - **Number Module**: Module used to define visible CI Numbers (in contrast to their internal IDs - compare TicketNumber and -ID)
@@ -15,6 +25,9 @@ Define the Config Item Classes (ITSM::ConfigItem::Class) available on the system
     - **Version-String Expression**: Currently only used in combination with the version string module "Template Toolkit"
     - **Version Trigger**: Defines which attributes trigger the creation of a new version when changed. See :ref:`versioning_and_history`.
     - **Categories**: Which categories this class should be listed in in the CI Overview of the agent interface.
+
+.. image:: ../../images/admingeneralcatalog_create_redirect_empty.png
+   :align: center
 
 Categories
 """"""""""
@@ -27,7 +40,6 @@ Config Item Roles
 """""""""""""""""
 
 Config Item Roles available on the system (ITSM::ConfigItem::Role). Can be defined and used in Admin->ConfigItem to define common sets of attributes between CI classes into a section, making it reusable across different areas.
-
 
 Deployment States
 """""""""""""""""
