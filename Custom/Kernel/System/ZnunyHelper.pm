@@ -5,7 +5,7 @@
 # Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - a828d3417faf7e019a1785a30301f8a7a9703f66 - Kernel/System/ZnunyHelper.pm
+# $origin: otobo - c4523088a2c65422114cc6c40f1aa9fa16159264 - Kernel/System/ZnunyHelper.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,6 +24,12 @@ package Kernel::System::ZnunyHelper;
 use strict;
 use warnings;
 
+# core modules
+use List::AllUtils qw(none);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -1177,7 +1183,7 @@ sub _DynamicFieldsScreenEnable {
         # Ticket::Frontend::CustomerTicketZoom###FollowUpDynamicField
         # Ticket::Frontend::AgentTicketSearch###SearchCSVDynamicField
         #
-        # on regular calls $View contains for examlpe "AgentTicketEmail"
+        # on regular calls $View contains for example "AgentTicketEmail"
         #
         # for the three special cases $View contains:
         # AgentTicketSearch###Defaults###DynamicField
@@ -1318,7 +1324,7 @@ sub _DynamicFieldsScreenDisable {
         # Ticket::Frontend::CustomerTicketZoom###FollowUpDynamicField
         # Ticket::Frontend::AgentTicketSearch###SearchCSVDynamicField
         #
-        # on regular calls $View contains for examlpe "AgentTicketEmail"
+        # on regular calls $View contains for example "AgentTicketEmail"
         #
         # for the three special cases $View contains:
         # AgentTicketSearch###Defaults###DynamicField
@@ -1665,9 +1671,125 @@ sub _DynamicFieldsCreate {
     # performance improvement for the FieldOrderAfterField functionality
     my $FieldOrderAfterFieldActive = grep { $_->{FieldOrderAfterField} || $_->{FieldOrderAfterFieldUpdate} } @DynamicFields;
 
+    # check dynamic fields and split dynamic fields in three separate groups
+    my %Namespaces;
+    my @NormalFields;
+    my @LensFields;
+    my @SetFields;
+    for my $DynamicFieldConfig (@DynamicFields) {
+
+        # check for namespaces
+        my $FieldName = $DynamicFieldConfig->{Name};
+        if ( $FieldName !~ m{ \A [a-zA-Z\d\-]+ \z }xms ) {
+            return {
+                Success      => 0,
+                ErrorMessage => "Invalid DynamicField name '$FieldName'.",
+            };
+        }
+        if ( $FieldName =~ /^([^-]+)-/ ) {
+            $Namespaces{$1} = 1;
+        }
+
+        # sort field into fitting array
+        if ( $DynamicFieldConfig->{FieldType} eq 'Lens' ) {
+            push @LensFields, $DynamicFieldConfig;
+        }
+        elsif ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
+            push @SetFields, $DynamicFieldConfig;
+        }
+        else {
+            push @NormalFields, $DynamicFieldConfig;
+        }
+    }
+
+    # sort lens fields in case a lens has another lens as attribute dynamic field
+    my @LensFieldsSorted = sort {
+        ( $b->{Name} eq $a->{Config}{AttributeDF} ) <=> ( $a->{Name} eq $b->{Config}{AttributeDF} )
+    } @LensFields;
+
+    # namespace handling
+    if (%Namespaces) {
+
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        # Get current setting value.
+        my %Setting = $SysConfigObject->SettingGet(
+            Name => 'DynamicField::Namespaces',
+        );
+
+        my $ExistingNamespaces = $Setting{EffectiveValue};
+        my %AllNamespaces      = (
+            ( map { $_ => 1 } $ExistingNamespaces->@* ),
+            %Namespaces,
+        );
+
+        # check if namespaces need to be changed
+        my $UpdateNamespaces = 0;
+        NEWNAMESPACE:
+        for my $NewNamespace ( keys %AllNamespaces ) {
+            if ( none { $NewNamespace eq $_ } $ExistingNamespaces->@* ) {
+                $UpdateNamespaces = 1;
+                last NEWNAMESPACE;
+            }
+        }
+        if ($UpdateNamespaces) {
+
+            my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+                UserID    => 1,
+                Force     => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+
+            # Update setting with modified data
+            my %Result = $SysConfigObject->SettingUpdate(
+                Name              => 'DynamicField::Namespaces',
+                IsValid           => 1,
+                EffectiveValue    => [ keys %AllNamespaces ],
+                ExclusiveLockGUID => $ExclusiveLockGUID,
+                UserID            => 1,
+            );
+            if ( !$Result{Success} ) {
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Could not update setting DynamicField::Namespaces.',
+                };
+            }
+
+            my $Success = $SysConfigObject->SettingUnlock(
+                UserID    => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+            if ( !$Success ) {
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Could not unlock setting DynamicField::Namespaces.',
+                };
+            }
+
+            my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
+                Comments      => "DynamicFieldImport updating DynamicField::Namespaces",
+                UserID        => 1,
+                Force         => 1,
+                DirtySettings => ['DynamicField::Namespaces'],
+            );
+
+            if ( !$DeploymentResult{Success} ) {
+                return {
+                    Success      => 0,
+                    ErrorMessage => 'Deployment failed!',
+                };
+            }
+        }
+    }
+
     # create or update dynamic fields
     DYNAMICFIELD:
-    for my $NewDynamicField (@DynamicFields) {
+    for my $NewDynamicField ( @NormalFields, @LensFieldsSorted, @SetFields ) {
+
+        # field config transformation
+        $NewDynamicField = $DynamicFieldObject->DynamicFieldConfigName2ID(
+            DynamicFieldConfig => $NewDynamicField,
+        );
 
         my $CreateDynamicField;
 
@@ -1958,6 +2080,17 @@ sub _DynamicFieldsConfigExport {
                 delete $DynamicField->{$Key};
             }
         }
+    }
+
+    # perform transformations if necessary
+    for my $DynamicFieldConfig (@DynamicFieldConfigs) {
+        $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldConfigID2Name(
+            DynamicFieldConfig => $DynamicFieldConfig,
+        );
+
+        # tidy export data
+        delete $DynamicFieldConfig->{Config}{PartOfSet};
+        delete $DynamicFieldConfig->{ID};
     }
 
     my $Data;
