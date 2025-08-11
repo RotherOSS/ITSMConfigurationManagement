@@ -805,8 +805,8 @@ sub _DynamicFieldsDelete {
         next DYNAMICFIELD
             unless (
                 $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem'
-                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemReference'
-                || $DynamicFieldConfig->{FieldType} eq 'ITSMConfigItemVersionReference'
+                || $DynamicFieldConfig->{FieldType} eq 'ConfigItem'
+                || $DynamicFieldConfig->{FieldType} eq 'ConfigItemVersion'
             );
 
         if ( $DynamicFieldConfig->{InternalField} ) {
