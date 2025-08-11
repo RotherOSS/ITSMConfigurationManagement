@@ -8,7 +8,7 @@ Classes
 
 For using Config Item Classes, either the Ready2Adopt Classes, provided by the package, can be imported, or own customized Classes can be created. For doing so, please navigate to the Admin-Interface of the General Catalog. After installing the package, it looks like this:
 
-.. image:: ../../images/admingeneralcatalog_overview_REDO.png
+.. image:: ../../images/admingeneralcatalog_overview.png
    :align: center
 
 For creating the first Config Item Class, you need to click on the button "Add Catalog Class". The following mask gives you a limited set of attributes to fill in.
