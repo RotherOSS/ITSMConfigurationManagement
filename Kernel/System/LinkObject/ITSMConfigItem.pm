@@ -415,11 +415,14 @@ sub LinkAddPost {
         );
     }
 
-    # Recalculate the current incident state of this CI.
-    # This is possible as the table configitem_link already has been updated.
-    $ConfigItemObject->CurInciStateRecalc(
-        ConfigItemID => $Param{Key},
-    );
+    # Recalculate the current incident state of this CI for links to services
+    # This will implicitly update the service incident state
+    # ConfigItemLinks will be handled by the ConfigItemLink object
+    elsif ( ( $Param{TargetObject} // $Param{SourceObject} ) eq 'Service' ) {
+        $ConfigItemObject->CurInciStateRecalc(
+            ConfigItemID => $Param{Key},
+        );
+    }
 
     # trigger LinkAdd event, the comment is a kind of hidden channel
     my $Comment = join '%%',
@@ -526,11 +529,9 @@ sub LinkDeletePost {
         );
     }
 
-    # Recalculate the current incident state of this CI.
-    # This is possible as the table configitem_link is already updated.
-    $ConfigItemObject->CurInciStateRecalc(
-        ConfigItemID => $Param{Key},
-    );
+    # TODO: Update the current incident state of unlinked services
+    # elsif ( ( $Param{TargetObject} // $Param{SourceObject} ) eq 'Service' ) {
+    # }
 
     # trigger LinkDelete event, the comment is a kind of hidden channel
     my $Comment = join '::',

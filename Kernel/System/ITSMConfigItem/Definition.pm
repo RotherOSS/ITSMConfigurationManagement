@@ -546,9 +546,10 @@ sub DefinitionAdd {
     $Self->EventHandler(
         Event => 'DefinitionCreate',
         Data  => {
-            DefinitionID => $DefinitionID,
-            ClassID      => $Param{ClassID},
-            Comment      => $DefinitionID,
+            DefinitionID  => $DefinitionID,
+            OldDefinition => $LastDefinition,
+            ClassID       => $Param{ClassID},
+            Comment       => $DefinitionID,
         },
         UserID => $Param{UserID},
     );
