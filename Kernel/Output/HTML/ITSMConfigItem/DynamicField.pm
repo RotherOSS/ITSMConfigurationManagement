@@ -195,16 +195,25 @@ sub _SectionRender {
 
     # Get HTML from additional modules
     elsif ( $Param{Section}{Module} ) {
+        my $Module = 'Kernel::Output::HTML::ITSMConfigItem::Section::' . $Param{Section}{Module};
 
-        # TODO: handle non dynamic field stuff
-        # my $Object = $MainObject->Require( $ConfigObject->Get('ModuleMap')->{ $Param{Section}{Module} } ) ...;
-        # my $HTML = $Object->Run( %Param );
-        # $LayoutObject->Block(
-        #    Name => 'GenericHTML',
-        #    Data => {
-        #        HTML => $HTML,
-        #    },
-        #);
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Module ) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Can't load section module '$Module'",
+            );
+
+            return '';
+        }
+
+        my $Object = $Kernel::OM->Get( $Module );
+        my $HTML   = $Object->Run( %Param );
+        $Param{LayoutObject}->Block(
+            Name => 'GenericHTML',
+            Data => {
+                HTML => $HTML,
+            },
+        );
 
         return 1;
     }

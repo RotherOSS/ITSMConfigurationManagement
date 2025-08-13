@@ -909,6 +909,19 @@ sub DefinitionCheck {
             );
         }
 
+        if ( $Section->{Module} ) {
+            my $Module = 'Kernel::Output::HTML::ITSMConfigItem::Section::' . $Section->{Module};
+
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Module ) ) {
+                return $ReturnError->(
+                    Translatable(q{Cannot load Module in section %s.}),
+                    $SectionName,
+                );
+            }
+
+            next SECTION;
+        }
+
         # skip description sections
         next SECTION if $Section->{Type} && $Section->{Type} eq 'Description';
 
