@@ -367,7 +367,7 @@ sub Run {
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'notice',
-                    Message  => "Cannot use ambiguos search result - skipping. Parameters: $SearchParameters;",
+                    Message  => "Cannot use ambiguous search result - skipping. Parameters: $SearchParameters;",
                 );
                 push @CIsHandled, {};
 
@@ -578,7 +578,6 @@ sub Run {
                 ObjectID           => $ConfigItemID,
                 Value              => $DFValues->{$DFRefName},
                 UserID             => $UserID,
-                ConfigItemHandled  => 1,
                 ExternalSource     => 1,
             );
         }
@@ -594,7 +593,6 @@ sub Run {
                 ObjectID           => $ConfigItemID,
                 Value              => $DFValues->{$DFLensName},
                 UserID             => $UserID,
-                ConfigItemHandled  => 1,
                 ExternalSource     => 1,
             );
         }
