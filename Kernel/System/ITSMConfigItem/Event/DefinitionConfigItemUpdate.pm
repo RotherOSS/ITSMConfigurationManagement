@@ -136,62 +136,6 @@ sub Run {
         );
     }
 
-    # if we change reference dynamic fields, we need to synchronise the link table accordingly
-    if ( $Param{Data}{OldDefinition} && $Param{Data}{OldDefinition}{DynamicFieldRef} ) {
-        my $OldDynamicFieldRef = $Param{Data}{OldDefinition}{DynamicFieldRef} // {};
-        my $DefinitionRef      = $ConfigItemObject->DefinitionGet(
-            ClassID      => $Param{Data}->{ClassID},
-            DefinitionID => $Param{Data}->{DefinitionID},
-        );
-
-        my @DynamicFieldNames = uniq ( keys $DefinitionRef->{DynamicFieldRef}->%*, keys $OldDynamicFieldRef->%* );
-        my %ConfigItem;
-
-        DYNAMICFIELD:
-        for my $DynamicFieldName ( @DynamicFieldNames ) {
-            my $NewDF = $DefinitionRef->{DynamicFieldRef}{ $DynamicFieldName };
-            my $OldDF = $OldDynamicFieldRef->{ $DynamicFieldName };
-            my $DF    = $NewDF // $OldDF;
-
-            next DYNAMICFIELD unless $DF->{Config}{ReferencedObjectType};
-            next DYNAMICFIELD unless $DF->{Config}{ReferencedObjectType} =~ '^ITSMConfigItem';
-
-            my $Skip = 1;
-            if ( $NewDF && $OldDF ) {
-                for my $Config ( qw/LinkType LinkReferencingType LinkDirection/ ) {
-                    if ( ( $NewDF->{Config}{ $Config } // '' ) ne ( $OldDF->{Config}{ $Config } // '' ) ) {
-                        $Skip = 0;
-                    }
-                }
-            }
-            else {
-                $Skip = 0;
-            }
-
-            next DYNAMICFIELD if $Skip;
-
-            IDS:
-            for my $ID ( keys %AffectedCIs ) {
-                $ConfigItem{ $ID } //= $ConfigItemObject->ConfigItemGet(
-                    ConfigItemID  => $ID,
-                    DynamicFields => 1,
-                );
-
-                my $Value = $ConfigItem{ $ID }{"DynamicField_$DynamicFieldName"};
-
-                next IDS unless $Value && $Value->[0];
-
-                $ConfigItemObject->SyncLinkTable(
-                    DynamicFieldConfig    => $NewDF,
-                    OldDynamicFieldConfig => $OldDF,
-                    ConfigItemID          => $ID,
-                    ConfigItemVersionID   => $ConfigItem{ $ID }{VersionID},
-                    Value                 => $Value,
-                );
-            }
-        }
-    }
-
     my %ClassPreferences = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesGet(
         ItemID => $Param{Data}{ClassID},
     );
@@ -240,6 +184,63 @@ sub Run {
                         VersionID => $AffectedCIs{$ID},
                         DFData    => $DFData,
                     ),
+                );
+            }
+        }
+    }
+
+    # if we changed reference dynamic fields, we need to synchronise the link table accordingly
+    if ( $Param{Data}{OldDefinition} && $Param{Data}{OldDefinition}{DynamicFieldRef} ) {
+        my $OldDynamicFieldRef = $Param{Data}{OldDefinition}{DynamicFieldRef} // {};
+        my $DefinitionRef      = $ConfigItemObject->DefinitionGet(
+            ClassID      => $Param{Data}->{ClassID},
+            DefinitionID => $Param{Data}->{DefinitionID},
+        );
+
+        my @DynamicFieldNames = uniq ( keys $DefinitionRef->{DynamicFieldRef}->%*, keys $OldDynamicFieldRef->%* );
+        my %ConfigItem;
+
+        DYNAMICFIELD:
+        for my $DynamicFieldName ( @DynamicFieldNames ) {
+            my $NewDF = $DefinitionRef->{DynamicFieldRef}{ $DynamicFieldName };
+            my $OldDF = $OldDynamicFieldRef->{ $DynamicFieldName };
+            my $DF    = $NewDF // $OldDF;
+
+            next DYNAMICFIELD unless $DF->{Config}{ReferencedObjectType};
+            next DYNAMICFIELD unless $DF->{Config}{ReferencedObjectType} =~ '^ITSMConfigItem';
+
+            my $Skip = 1;
+            if ( $NewDF && $OldDF ) {
+                for my $Config ( qw/LinkType LinkReferencingType LinkDirection/ ) {
+                    if ( ( $NewDF->{Config}{ $Config } // '' ) ne ( $OldDF->{Config}{ $Config } // '' ) ) {
+                        $Skip = 0;
+                    }
+                }
+            }
+            else {
+                $Skip = 0;
+            }
+
+            next DYNAMICFIELD if $Skip;
+
+            IDS:
+            for my $ID ( keys %AffectedCIs ) {
+                $ConfigItem{ $ID } //= $ConfigItemObject->ConfigItemGet(
+                    ConfigItemID  => $ID,
+                    DynamicFields => 1,
+                );
+
+                my $Value = $ConfigItem{ $ID }{"DynamicField_$DynamicFieldName"};
+
+                next IDS unless $Value && $Value->[0];
+
+                $ConfigItemObject->SyncLinkTable(
+                    DynamicFieldConfig      => $NewDF,
+                    OldDynamicFieldConfig   => $OldDF,
+                    ConfigItemID            => $ID,
+                    ConfigItemVersionID     => $ConfigItem{ $ID }{VersionID},
+                    ConfigItemLastVersionID => $ConfigItem{ $ID }{VersionID},
+                    Value                   => $Value,
                 );
             }
         }
