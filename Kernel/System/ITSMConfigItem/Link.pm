@@ -462,7 +462,7 @@ sub SyncLinkTable {
         #   target_configitem_version_id,
         #   source_configitem_id,
         #   source_configitem_version_id
-        my $ObjectColumn = join '_',
+        $ObjectColumn = join '_',
             ( $Config->{LinkDirection}       eq 'ReferencingIsSource' ? 'source'     : 'target' ),
             ( $Config->{LinkReferencingType} eq 'Dynamic'             ? 'configitem' : 'configitem_version' ),
             'id';
@@ -470,7 +470,7 @@ sub SyncLinkTable {
         # The column for the (referenced) value also depends on the link direction
         # and here on the field type; if the latter changes between definitions RebuildLinkTable has to be used
         # The possible columns are the same as above
-        my $ValueColumn = join '_',
+        $ValueColumn = join '_',
             ( $Config->{LinkDirection}         eq 'ReferencingIsSource' ? 'target'     : 'source' ),
             ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem'          ? 'configitem' : 'configitem_version' ),
             'id';
@@ -879,7 +879,7 @@ sub _TriggerCurInciStateRecalc {
 
     # the cache for DynamicFields => 0 is already emptied before DFs are written
     my $ReferencingCI = $Self->ConfigItemGet(
-        ConfigItemID  => $Param{ObjectID},
+        ConfigItemID  => $Param{ConfigItemID},
         DynamicFields => 0,
     );
 
@@ -888,7 +888,7 @@ sub _TriggerCurInciStateRecalc {
 
     # if the refencing CI does not have a matching CurInci and Inci state, just recalculate everything
     if ( $ReferencingCI->{CurInciStateID} ne $ReferencingCI->{InciStateID} ) {
-        @CIsToRecalc = ( $Param{ObjectID} );
+        @CIsToRecalc = ( $Param{ConfigItemID} );
 
         push @CIsToRecalc, $Param{Unlinked}->@*;
     }
@@ -903,7 +903,7 @@ sub _TriggerCurInciStateRecalc {
 
             # only initiate the whole recalculation if there is any difference between the CurInciStates
             if ( $ConfigItem->{CurInciStateID} ne $ReferencingCI->{CurInciStateID} ) {
-                @CIsToRecalc = ( $Param{ObjectID} );
+                @CIsToRecalc = ( $Param{ConfigItemID} );
 
                 last LINKED;
             }
@@ -917,7 +917,7 @@ sub _TriggerCurInciStateRecalc {
 
             # for unlinked CIs we always have to add both sides
             if ( $ConfigItem->{CurInciStateID} ne $ReferencingCI->{CurInciStateID} ) {
-                $CIsToRecalc[0] = $Param{ObjectID};
+                $CIsToRecalc[0] = $Param{ConfigItemID};
                 push @CIsToRecalc, $ID;
             }
         }
