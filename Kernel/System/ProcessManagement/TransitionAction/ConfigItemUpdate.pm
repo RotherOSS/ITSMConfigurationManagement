@@ -92,12 +92,12 @@ sub Params {
         },
         {
             Key      => 'Name',
-            Value    => 'A name (required if no name module is configured)',
+            Value    => 'A name (can only be changed if no name module is configured)',
             Optional => 1,
         },
         {
-            Key      => 'Class',
-            Value    => 'Move the ConfigItem to a new class',
+            Key      => 'VersionString',
+            Value    => 'The version string (only if no version string module is configured and a version is added)',
             Optional => 1,
         },
         {
@@ -113,11 +113,6 @@ sub Params {
         {
             Key      => 'DynamicField_<Name> (replace <Name>)',
             Value    => 'A value',
-            Optional => 1,
-        },
-        {
-            Key      => 'Attachments',
-            Value    => '...',
             Optional => 1,
         },
         {
@@ -154,10 +149,9 @@ sub Params {
 
             # config item optional:
             Name          => 'Some Config Item Name',
-            Class         => 'Class of the Config Item',
             DeplState     => 'Some Deployment State',
             InciState     => 'Some Incident State',
-            %DataPayload,                                               # some parameters depending of each communication channel
+            %DataPayload,
 
             # other:
             DynamicField_NameX => $Value,
@@ -165,7 +159,7 @@ sub Params {
             UserID => 123,                                              # optional, to override the UserID from the logged user
         }
     );
-    ConfigItem contains the result of ConfigItemUpdate including DynamicFields
+    Ticket contains the result of TicketGet including DynamicFields
     Config is the Config Hash stored in a Process::TransitionAction's  Config key
     Returns:
 
@@ -184,11 +178,11 @@ sub Run {
         . " TransitionAction: $Param{TransitionActionEntityID} - ";
 
     # check for missing or wrong params
-    my $SuccessParam = $Self->_CheckParams(
+    my $Success = $Self->_CheckParams(
         %Param,
         CommonMessage => $CommonMessage,
     );
-    return if !$SuccessParam;
+    return if !$Success;
 
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
@@ -197,66 +191,70 @@ sub Run {
     $Self->_ReplaceTicketAttributes(%Param);
     $Self->_ReplaceAdditionalAttributes(%Param);
 
-    # collect ticket params
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+
+    my %DeplState2IDMap = reverse $GeneralCatalogObject->ItemList( Class => 'ITSM::ConfigItem::DeploymentState' )->%*;
+    my %InciState2IDMap = reverse $GeneralCatalogObject->ItemList( Class => 'ITSM::Core::IncidentState' )->%*;
+
     my %ConfigItemParam;
-    for my $Attribute (qw( ConfigItemID Number Name Class DeplState InciState )) {
-        if ( defined $Param{Config}->{$Attribute} ) {
-            $ConfigItemParam{$Attribute} = $Param{Config}->{$Attribute};
-        }
-    }
 
-    # get ConfigItem object
-    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    $ConfigItemParam{ConfigItemID} = $Param{Config}{ConfigItemID} || $ConfigItemObject->ConfigItemLookup(
+        ConfigItemNumber => $Param{Config}{Number},
+    );
 
-    if ( defined $Param{Config}->{Number} ) {
-
-        my $ID = $ConfigItemObject->ConfigItemLookup(
-            ConfigItemNumber => $Param{Config}->{Number},
-        );
-        $ConfigItemParam{ConfigItemID} = $ID;
-    }
-    elsif ( defined $Param{Config}->{ConfigItemID} ) {
-
-        $ConfigItemParam{ConfigItemID} = $Param{Config}->{ConfigItemID};
-    }
-    else {
+    if ( $ConfigItemParam{ConfigItemID} ) {
+        my $Missing = $Param{Config}{Number} ? "No ConfigItem with Number '$Param{Config}{Number}'!"
+            : "Need ConfigItemID or Number!";
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need ConfigItemID or ConfigItemNumber for update!",
+            Message  => $CommonMessage
+                . "Could not update CI in Ticket:"
+                . $Param{Ticket}->{TicketID} . "! $Missing",
         );
+
         return;
     }
 
-    # get general catalog object
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+        ConfigItemID => $ConfigItemParam{ConfigItemID},
+    );
 
-    # get class list
-    my %Class2IDMap = reverse $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::Class',
-    )->%*;
+    if ( !$ConfigItem ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => $CommonMessage
+                . "No ConfigItem with ID '$ConfigItemParam{ConfigItemID}'; failed in Ticket:"
+                . $Param{Ticket}->{TicketID} . "!",
+        );
 
-    # translate class name into class id
-    $ConfigItemParam{ClassID} = $Class2IDMap{ $ConfigItemParam{Class} };
+        return;
+    }
 
-    # get deployment state list
-    my %DeplState2IDMap = reverse $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::ConfigItem::DeploymentState',
-    )->%*;
+    for my $OptionalAttribute ( qw/Name Number VersionString/ ) {
+        if ( $Param{Config}{ $OptionalAttribute } ) {
+            $ConfigItemParam{Name} = $Param{Config}{ $OptionalAttribute };
+        }
+    }
 
-    # translate depl state into depl state id
-    $ConfigItemParam{DeplStateID} = $DeplState2IDMap{ $ConfigItemParam{DeplState} };
+    if ( $Param{Config}{DeplState} && $DeplState2IDMap{ $Param{Config}{DeplState} } ) {
+        $ConfigItemParam{DeplStateID} = $DeplState2IDMap{ $Param{Config}{DeplState} };
+    }
+    if ( $Param{Config}{InciState} && $InciState2IDMap{ $Param{Config}{InciState} } ) {
+        $ConfigItemParam{InciStateID} = $InciState2IDMap{ $Param{Config}{InciState} };
+    }
 
-    # get incident state list
-    my %InciState2IDMap = reverse $GeneralCatalogObject->ItemList(
-        Class => 'ITSM::Core::IncidentState',
-    )->%*;
+    # add dynamic fields
+    CONFIGPARAM:
+    for my $ConfigParam ( keys $Param{Config}->%* ) {
+        next CONFIGPARAM unless $ConfigParam =~ /^DynamicField_/;
 
-    # translate inci state into inci state id
-    $ConfigItemParam{InciStateID} = $InciState2IDMap{ $ConfigItemParam{InciState} };
+        $ConfigItemParam{ $ConfigParam } = $Param{Config}{ $ConfigParam };
+    }
 
-    # update ticket
-    my $Success = $ConfigItemObject->ConfigItemUpdate(
+    # update config item
+    $Success = $ConfigItemObject->ConfigItemUpdate(
         %ConfigItemParam,
         UserID => $Param{UserID},
     );
@@ -265,62 +263,11 @@ sub Run {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => $CommonMessage
-                . "Couldn't update ConfigItem from Ticket: "
+                . "Couldn't update ConfigItem $ConfigItemParam{ConfigItemID} from Ticket: "
                 . $Param{Ticket}->{TicketID} . '!',
         );
+
         return;
-    }
-
-    # get dynamic field objects
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
-    # get class definition
-    my $Definition = $ConfigItemObject->DefinitionGet(
-        ClassID => $Class2IDMap{ $Param{Config}{Class} },
-    );
-
-    if ( !IsHashRefWithData($Definition) || !$Definition->{DefinitionID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $CommonMessage
-                . "Couldn't fetch config item definition for config item class: "
-                . $Param{Config}{Class} . '!',
-        );
-        return;
-    }
-
-    # set dynamic field values
-    CONFIGPARAM:
-    for my $ConfigParam ( keys $Param{Config}->%* ) {
-        next CONFIGPARAM unless $ConfigParam =~ m{\A DynamicField_ ( [a-zA-Z0-9\-]+ ) \z}msx;
-
-        my $DynamicFieldName   = $1;
-        my $DynamicFieldConfig = $Definition->{DynamicFieldRef}{$DynamicFieldName};
-
-        next CONFIGPARAM unless IsHashRefWithData($DynamicFieldConfig);
-        next CONFIGPARAM unless $DynamicFieldConfig->{Name};
-        next CONFIGPARAM unless $DynamicFieldConfig->{ObjectType} eq 'ITSMConfigItem';
-
-        my $ObjectID = $ConfigItemParam{ConfigItemID};
-
-        # set the value
-        my $SuccessValueSet = $DynamicFieldBackendObject->ValueSet(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            ObjectID           => $ObjectID,
-            Value              => $Param{Config}->{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
-            UserID             => $Param{UserID},
-        );
-
-        if ( !$SuccessValueSet ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => $CommonMessage
-                    . "Couldn't set DynamicField Value on $DynamicFieldConfig->{ObjectType}:"
-                    . " $ObjectID from Ticket: "
-                    . $Param{Ticket}->{TicketID} . '!',
-            );
-            return;
-        }
     }
 
     # link ticket
