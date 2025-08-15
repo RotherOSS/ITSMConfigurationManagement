@@ -20,21 +20,14 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DynamicField',
-    'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
     'Kernel::System::Log',
-    'Kernel::System::State',
-    'Kernel::System::DateTime',
-    'Kernel::System::User',
 );
 
 =head1 NAME
