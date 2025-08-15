@@ -245,10 +245,13 @@ sub Run {
     # add dynamic fields
     CONFIGPARAM:
     for my $ConfigParam ( keys $Param{Config}->%* ) {
-        next CONFIGPARAM unless $ConfigParam =~ /^DynamicField_/;
+        $ConfigParam  =~ /^DynamicField_(.+)/;
+        my $FieldName = $1;
+
+        next CONFIGPARAM unless $FieldName;
 
         my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
-            Name => $ConfigParam,
+            Name => $FieldName,
         );
 
         # for set fields we need to map the name of the inner fields
@@ -259,7 +262,7 @@ sub Run {
 
                 for my $InnerField ( keys $SetValue->%* ) {
                     if ( $SetMapping->{ $InnerField } ) {
-                        $SetValue->{ $InnerField } = delete $SetValue->{ $SetMapping->{ $InnerField } };
+                        $SetValue->{ $SetMapping->{ $InnerField } } = delete $SetValue->{ $InnerField };
                     }
                 }
             }
