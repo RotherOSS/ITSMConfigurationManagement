@@ -24,6 +24,7 @@ use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DynamicField',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
@@ -238,10 +239,31 @@ sub Run {
         $ConfigItemParam{InciStateID} = $InciState2IDMap{ $Param{Config}{InciState} };
     }
 
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $SetMapping         = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::DynamicFieldSet::InnerFieldsTicketToCI') // {};
+
     # add dynamic fields
     CONFIGPARAM:
     for my $ConfigParam ( keys $Param{Config}->%* ) {
         next CONFIGPARAM unless $ConfigParam =~ /^DynamicField_/;
+
+        my $DynamicField = $DynamicFieldObject->(
+            Name => $ConfigParam,
+        );
+
+        # for set fields we need to map the name of the inner fields
+        if ( $DynamicField && $DynamicField->{FieldType} eq 'Set' && ref $Param{Config}{ $ConfigParam } ) {
+            SETVALUE:
+            for my $SetValue ( $Param{Config}{ $ConfigParam }->@* ) {
+                next unless $SetValue;
+
+                for my $InnerField ( keys $SetValue->%* ) {
+                    if ( $SetMapping->{ $InnerField } ) {
+                        $SetValue->{ $InnerField } = delete $SetValue->{ $SetMapping->{ $InnerField } };
+                    }
+                }
+            }
+        }
 
         $ConfigItemParam{ $ConfigParam } = $Param{Config}{ $ConfigParam };
     }

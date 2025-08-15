@@ -2602,4 +2602,13 @@
         </Value>
     </Setting>
 
+    <Setting Name="DynamicFields::DynamicFieldSet::InnerFieldsTicketToCI" Required="0" Valid="0">
+        <Description Translatable="1">A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.</Description>
+        <Navigation>Core::DynamicFields</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="SwappedDiskSN">ITSMStorage-SerialNumber</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
