@@ -247,7 +247,7 @@ sub Run {
     for my $ConfigParam ( keys $Param{Config}->%* ) {
         next CONFIGPARAM unless $ConfigParam =~ /^DynamicField_/;
 
-        my $DynamicField = $DynamicFieldObject->(
+        my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
             Name => $ConfigParam,
         );
 
