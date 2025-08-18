@@ -53,6 +53,11 @@ is(
     "No --template-number  - exit code",
 );
 
+# create default config item classes
+$Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper')->TestConfigItemCreateClasses(
+    HelperObject => $Helper,
+);
+
 # get 'Hardware' catalog class ID
 my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
     Class => 'ITSM::ConfigItem::Class',

@@ -60,6 +60,11 @@ my $TemplateID = $ImportExportObject->TemplateAdd(
 );
 ok( $TemplateID, "Import/Export template is created - $TemplateID" );
 
+# create default config item classes
+$Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper')->TestConfigItemCreateClasses(
+    HelperObject => $Helper,
+);
+
 # get 'Hardware' catalog class ID
 my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
     Class => 'ITSM::ConfigItem::Class',
