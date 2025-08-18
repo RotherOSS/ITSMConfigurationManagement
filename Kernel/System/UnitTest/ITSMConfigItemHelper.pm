@@ -261,13 +261,35 @@ sub TestConfigItemClassCreate {
 sub TestConfigItemCreateClasses {
     my ( $Self, %Param ) = @_;
 
+    # check needed stuff
+    if ( !$Param{HelperObject} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need HelperObject!',
+        );
+
+        return;
+    }
+
     my $Context = context();
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
     my $MainObject           = $Kernel::OM->Get('Kernel::System::Main');
     my $YAMLObject           = $Kernel::OM->Get('Kernel::System::YAML');
+
+    # preliminary create needed namespaces to not interfere with sysconfig afterwards
+    $Param{HelperObject}->ConfigSettingChange(
+        Valid => 1,
+        Key   => 'DynamicField::Namespaces',
+        Value => [
+            'Computer',
+            'Hardware',
+            'Location',
+            'Network',
+            'Software',
+        ],
+    );
 
     # TODO import classes combined from one yaml file as array of classes
     my $Content = $MainObject->FileRead(
@@ -279,7 +301,7 @@ sub TestConfigItemCreateClasses {
         Data => ${$Content},
     );
 
-    my $Success = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ClassImport(
+    $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ClassImport(
         Content => $DefinitionRaw,
     );
 
