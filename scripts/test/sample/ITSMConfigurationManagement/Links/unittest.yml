@@ -121,3 +121,9 @@
       Label: Street
       Name: Location-Street
       ObjectType: ITSMConfigItem
+- Definition: "---\r\nSections:\r\n  Description:\r\n    Type: Description\r\n    Header:
+    Description"
+  RoleName: CMDB Description
+- Definition: "---\r\nSections:\r\n  Backlinks:\r\n    Type: ConfigItemLinks\r\n    Header:
+    Backlinks\r\n    LinkedAs: Source"
+  RoleName: CMDB Backlinks
