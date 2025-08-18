@@ -1690,7 +1690,7 @@ sub ClassImport {
         );
 
         # ensure compatibility with unit tests
-        my $ExistingNamespaces = $Kernel::OM->Get('Kernel::Config')->Get('DynamicField::Namespaces') || {};
+        my $ExistingNamespaces = $Kernel::OM->Get('Kernel::Config')->Get('DynamicField::Namespaces') || [];
         my %AllNamespaces      = (
             ( map { $_ => 1 } $ExistingNamespaces->@* ),
             %Namespaces,
