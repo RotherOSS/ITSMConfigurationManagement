@@ -785,7 +785,7 @@ sub DefinitionCheck {
             );
         }
 
-        # TODO: this is not translateable
+        # TODO: this is not translatable
         if ( ref $DefinitionRef->{$Key} ne uc( $ExpectedFormat{$Key} ) ) {
             return $ReturnError->(
                 Translatable(q{Data for %s is not a %s. Please correct the syntax.}),
@@ -912,7 +912,7 @@ sub DefinitionCheck {
         if ( $Section->{Module} ) {
             my $Module = 'Kernel::Output::HTML::ITSMConfigItem::Section::' . $Section->{Module};
 
-            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Module ) ) {
+            if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($Module) ) {
                 return $ReturnError->(
                     Translatable(q{Cannot load Module in section %s.}),
                     $SectionName,
@@ -1689,7 +1689,8 @@ sub ClassImport {
             Name => 'DynamicField::Namespaces',
         );
 
-        my $ExistingNamespaces = $Setting{EffectiveValue};
+        # ensure compatibility with unit tests
+        my $ExistingNamespaces = $Kernel::OM->Get('Kernel::Config')->Get('DynamicField::Namespaces') || {};
         my %AllNamespaces      = (
             ( map { $_ => 1 } $ExistingNamespaces->@* ),
             %Namespaces,
