@@ -193,11 +193,25 @@ sub Run {
 
     my %ConfigItemParam;
 
-    $ConfigItemParam{ConfigItemID} = $Param{Config}{ConfigItemID} || $ConfigItemObject->ConfigItemLookup(
-        ConfigItemNumber => $Param{Config}{Number},
-    );
+    if ( $Param{Config}{ConfigItemID} ) {
 
-    if ( $ConfigItemParam{ConfigItemID} ) {
+        # for the processes mostly the ConfigItems will come from reference fields
+        if ( ref $Param{Config}{ConfigItemID} ) {
+            $ConfigItemParam{ConfigItemID} = $Param{Config}{ConfigItemID}[0];
+        }
+
+        else {
+            $ConfigItemParam{ConfigItemID} = $Param{Config}{ConfigItemID};
+        }
+    }
+
+    else {
+        $ConfigItemParam{ConfigItemID} = $ConfigItemObject->ConfigItemLookup(
+            ConfigItemNumber => $Param{Config}{Number},
+        );
+    }
+
+    if ( !$ConfigItemParam{ConfigItemID} ) {
         my $Missing = $Param{Config}{Number} ? "No ConfigItem with Number '$Param{Config}{Number}'!"
             : "Need ConfigItemID or Number!";
 
