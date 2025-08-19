@@ -581,7 +581,7 @@ sub _LoadReadyToImportClasses {
         ClassExists => 'UPDATE',
     );
 
-    ok( $Result, "Classes have been imported." );
+    ok( $Result->{Success}, "Classes have been imported." );
 
     return;
 }
