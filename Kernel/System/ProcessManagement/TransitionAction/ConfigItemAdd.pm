@@ -25,6 +25,7 @@ use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DynamicField',
+    'Kernel::System::DynamicField::Backend',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
@@ -109,6 +110,11 @@ sub Params {
         {
             Key      => 'LinkAs',
             Value    => 'Alternative to|Depends on|Relevant to',
+            Optional => 1,
+        },
+        {
+            Key      => 'StoreConfigItemIDDynamicField',
+            Value    => 'NameX (name of DynamicField holding the id of the created ConfigItem in the original ticket)',
             Optional => 1,
         },
         {
@@ -259,6 +265,42 @@ sub Run {
         );
 
         return;
+    }
+
+    # store created ConfigItemID
+    if ( $Param{Config}->{StoreConfigItemIDDynamicField} ) {
+        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            Name => $Param{Config}->{StoreConfigItemIDDynamicField},
+        );
+
+        if ( !$DynamicFieldConfig || !IsHashRefWithData($DynamicFieldConfig) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => $CommonMessage
+                    . "Couldn't get DynamicField $Param{Config}->{StoreConfigItemIDDynamicField} for Ticket $Param{Ticket}->{TicketID}."
+            );
+
+            return;
+        }
+
+        # set the value
+        my $Success = $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->ValueSet(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            ObjectID           => $Param{Ticket}->{TicketID},
+            Value              => $ConfigItemID,
+            UserID             => $Param{UserID},
+        );
+
+        if ( !$Success ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => $CommonMessage
+                    . "Couldn't set DynamicField Value on $DynamicFieldConfig->{ObjectType}:"
+                    . " for Ticket: $Param{Ticket}->{TicketID}!",
+            );
+
+            return;
+        }
     }
 
     # link ticket
