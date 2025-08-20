@@ -152,7 +152,12 @@ my @TemplateIDs;
             },
             'Name' => 'Empty fields indicate that the current values are kept',
             'Key'  => 'EmptyFieldsLeaveTheOldValues',
-        }
+        },
+        {
+            Input => { Type => "Checkbox" },
+            Key   => "IncludeAttachments",
+            Name  => "Import/Export attachments (as the last entries per line)",
+        },
     ];
 
     is(
@@ -295,6 +300,8 @@ my %Agent2UserID;
 my $GeneralCatalogClass = 'UnitTest' . $RandomID;
 diag "GeneralCatalogClass: '$GeneralCatalogClass'";
 
+my $TestIDSuffix = "UnitTest$RandomID";
+diag "TestIDSuffix: '$TestIDSuffix'";
 for my $Name (qw(Test1 Test2 Test3 Test4)) {
 
     # add a new item
@@ -321,18 +328,16 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
         Value  => ['Incremental'],
     );
 
-    # Set version string module.
+    # Set version trigger.
     $GeneralCatalogObject->GeneralCatalogPreferencesSet(
         ItemID => $ItemID,
-        Key    => 'VersionStringModule',
-        Value  => ['Incremental'],
+        Key    => 'VersionTrigger',
+        Value  => ["DynamicField_FirstMonday$TestIDSuffix"],
     );
 }
 
 # Add dynamic fields for testing. These dynamic fields will be referenced
 # by name in dynamic field definitions.
-my $TestIDSuffix = "UnitTest$RandomID";
-diag "TestIDSuffix: '$TestIDSuffix'";
 {
     my $Order = 20000;
 
@@ -797,11 +802,15 @@ $ConfigItemPerlDefinitions[2] = " [
             Value  => ['Incremental'],
         );
 
-        # Set version string module.
+        # Set version trigger.
         $GeneralCatalogObject->GeneralCatalogPreferencesSet(
             ItemID => $ClassID,
-            Key    => 'VersionStringModule',
-            Value  => ['Incremental'],
+            Key    => 'VersionTrigger',
+            Value  => [
+                "DynamicField_FirstMonday$TestIDSuffix",
+                "DynamicField_FirstWeekend$TestIDSuffix",
+                "DynamicField_ZZZSetOfAgents$TestIDSuffix",
+            ],
         );
 
         # add a definition to the class
@@ -4347,7 +4356,7 @@ my @ImportDataTests = (
 
                     # from JSON export
                     [
-                        { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ], 'Agent2' . $TestIDSuffix =>  [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
+                        { 'LevelFirst' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ], 'LevelSecond' . $TestIDSuffix =>  [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
                     ],
 
                     'Operational',
@@ -4362,7 +4371,10 @@ my @ImportDataTests = (
                 DeplState                                            => 'Production',
                 InciState                                            => 'Operational',
                 "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
-                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{SecondLevelSupporterAfrica} ] },
+                    {
+                        'LevelFirst' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterAfrica} ],
+                        'LevelSecond' . $TestIDSuffix => [ $Agent2UserID{SecondLevelSupporterAfrica} ]
+                    },
                 ],
             },
         },
@@ -4398,7 +4410,7 @@ my @ImportDataTests = (
                     # Make sure that q{"} is quoted in the JSON string.
                     <<"END_JSON",
 [
-    [ [ "@{[$Agent2UserID{FirstLevelSupporterEurope} =~ s/"/\\"/gr ]}" ]       ,[ "@{[$Agent2UserID{SecondLevelSupporterEurope} =~ s/"/\\"/gr ]}" ] ]
+    { "LevelFirst$TestIDSuffix": [ "@{[$Agent2UserID{FirstLevelSupporterEurope} =~ s/"/\\"/gr ]}" ], "LevelSecond$TestIDSuffix": [ "@{[$Agent2UserID{SecondLevelSupporterEurope} =~ s/"/\\"/gr ]}" ] }
 ]
 END_JSON
 
@@ -4414,10 +4426,10 @@ END_JSON
                 DeplState                                            => 'Production',
                 InciState                                            => 'Operational',
                 "DynamicField_ZZZSetContinentalSupport$TestIDSuffix" => [
-                    [
-                        [ $Agent2UserID{FirstLevelSupporterEurope} ],
-                        [ $Agent2UserID{SecondLevelSupporterEurope} ],
-                    ],
+                    {
+                        'LevelFirst' . $TestIDSuffix => [ $Agent2UserID{FirstLevelSupporterEurope} ],
+                        'LevelSecond' . $TestIDSuffix => [ $Agent2UserID{SecondLevelSupporterEurope} ]
+                    },
                 ],
             },
         },
@@ -4452,9 +4464,9 @@ END_JSON
 
                     # from JSON export
                     [
-                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{ClimbingAgent} ] ],
-                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                        [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                        { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ] },
+                        { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
+                        { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{FrowningAgent} ] },
                     ],
 
                     'Production',
@@ -4471,9 +4483,9 @@ END_JSON
                 InciState                                  => 'Operational',
                 "DynamicField_CustomerCIO$TestIDSuffix"    => undef,                                                  # not in the mapping list
                 "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{ClimbingAgent} ] ],
-                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{LotusAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{FrowningAgent} ] },
                 ],
             },
         },
@@ -4508,9 +4520,9 @@ END_JSON
                     # similar to CSV export
                     <<"END_JSON",
                     [
-                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] ],
-                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] ],
-                        [ [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{FrowningAgent} =~ s/"/\\"/gr ]}" ] ]
+                        { "Agent1$TestIDSuffix": [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], "Agent2$TestIDSuffix": [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] },
+                        { "Agent1$TestIDSuffix": [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], "Agent2$TestIDSuffix": [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] },
+                        { "Agent1$TestIDSuffix": [ "@{[ $Agent2UserID{ClimbingAgent} =~ s/"/\\"/gr ]}" ], "Agent2$TestIDSuffix": [ "@{[ $Agent2UserID{FrowningAgent} =~ s/"/\\"/gr ]}" ] }
                     ]
 END_JSON
                     'Production',
@@ -4526,9 +4538,9 @@ END_JSON
                 InciState                                  => 'Operational',
                 "DynamicField_CustomerCIO$TestIDSuffix"    => undef,                                                  # not in the mapping list
                 "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{LotusAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{DeskAgent} ] ],
-                    [ [ $Agent2UserID{ClimbingAgent} ], [ $Agent2UserID{FrowningAgent} ] ],
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{ClimbingAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{FrowningAgent} ] },
                 ],
             },
         },
@@ -4558,10 +4570,10 @@ END_JSON
                 ImportDataRow => [
                     "UnitTest - ZZZSetOfAgents B $RandomID",
                     <<"END_JSON_FOR_INDEX_2",
-                        [ [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] ]
+                        { "Agent1$TestIDSuffix": [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ], "Agent2$TestIDSuffix": [ "@{[ $Agent2UserID{LotusAgent} =~ s/"/\\"/gr ]}" ] }
 END_JSON_FOR_INDEX_2
                     <<"END_JSON_FOR_INDEX_20",
-                        [ [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ], [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] ]
+                        { "Agent1$TestIDSuffix": [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ], "Agent2$TestIDSuffix": [ "@{[ $Agent2UserID{DeskAgent} =~ s/"/\\"/gr ]}" ] }
 END_JSON_FOR_INDEX_20
                 ],
                 UserID => $TestUserID,
