@@ -54,7 +54,7 @@ is(
 );
 
 # create default config item classes
-$Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper')->TestConfigItemCreateClasses(
+$Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper')->TestConfigItemCreateLegacyClasses(
     HelperObject => $Helper,
 );
 

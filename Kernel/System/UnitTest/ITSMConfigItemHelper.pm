@@ -258,7 +258,7 @@ sub TestConfigItemClassCreate {
     return $TestClassID;
 }
 
-sub TestConfigItemCreateClasses {
+sub TestConfigItemCreateLegacyClasses {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
