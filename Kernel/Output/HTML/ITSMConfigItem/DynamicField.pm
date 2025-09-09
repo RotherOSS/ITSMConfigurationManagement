@@ -276,6 +276,7 @@ sub _SectionRender {
                 Data => {
                     Label => $Row->{Label} || $DynamicField->{Label},
                     Type  => 'Label',
+                    IsSetLabel => $DynamicField->{FieldType} eq 'Set' ? 1 : 0,
                 },
             );
 

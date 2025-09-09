@@ -24,7 +24,7 @@
             <div class="FieldDisplayRow" style="grid-template-columns:[% Data.Widths | html %]">
 [% RenderBlockStart("FieldDisplayCell") %]
 [% IF Data.Type == 'Label' %]
-                <label title="[% Translate(Data.Label) | html %]" style="[% Data.GridColumm | html %]">[% Translate(Data.Label) | html %]</label>
+                <label [% IF Data.IsSetLabel == 1 %]class="DynamicFieldSetLabel" [% END %]title="[% Translate(Data.Label) | html %]" style="[% Data.GridColumm | html %]">[% Translate(Data.Label) | html %]</label>
 [% ELSIF Data.Type == 'Value' %]
                 <p title="[% Data.Title %]" style="[% Data.GridColumn | html %]">[% Data.Value %]</p>
 [% ELSIF Data.Type == 'ValueLink' %]

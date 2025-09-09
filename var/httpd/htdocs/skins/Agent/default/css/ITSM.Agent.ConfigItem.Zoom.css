@@ -94,16 +94,31 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
         margin-top: 12px;
     }
 
+    .FieldDisplayRow > label,
+    .FieldDisplayRow > p {
+        margin-top: 4px;
+    }
+
     .oooContentGrid label {
         color: #929292;
         text-shadow: 0 1px 0 #FAFAFA;
     }
 
+    .DynamicFieldSetLabel {
+        padding-top: 8px;
+    }
+
     .SetDisplayValue {
-        margin-top: 10px;
+        margin-top: 8px;
+        margin-bottom: 8px;
         margin-left: 24px;
         display: grid;
         grid-template-columns: calc( 50% - 24px ) 1fr;
+    }
+
+    .SetDisplayValue > label,
+    .SetDisplayValue > p {
+        margin-top: 4px;
     }
 
     .SetDisplayValue div.Clear {
