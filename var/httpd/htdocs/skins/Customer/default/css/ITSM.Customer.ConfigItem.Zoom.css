@@ -238,6 +238,10 @@ div.InputField_TreeContainer {
     padding: 16px 24px;
 }
 
+.oooContentCell h2 {
+    margin-bottom: 12px;
+}
+
 .FieldDisplayRow {
     display: grid;
 }
@@ -246,17 +250,35 @@ div.InputField_TreeContainer {
     margin-top: 12px;
 }
 
+.FieldDisplayRow label,
+.FieldDisplayRow p {
+    margin-top: 4px;
+}
+
+.FieldDisplayRow p,
+.FieldDisplayRow label {
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow-wrap: break-word;
+    line-height: 1.5em;
+}
+
 .oooContentGrid label {
     color: #929292;
     text-shadow: 0 1px 0 #FAFAFA;
+    font-size: 14px;
+}
+
+.DynamicFieldSetLabel {
+    padding-top: 16px;
 }
 
 .SetDisplayValue {
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     margin-left: 24px;
-    margin-bottom: 6px;
     display: grid;
-    grid-template-columns: calc( 50% - 24px ) 1fr;
+    grid-template-columns: calc( 50% - 12px ) calc( 50% + 12px );
 }
 
 .SetDisplayValue div.Clear {

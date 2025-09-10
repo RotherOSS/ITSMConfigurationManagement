@@ -274,9 +274,9 @@ sub _SectionRender {
             $Param{LayoutObject}->Block(
                 Name => 'FieldDisplayCell',
                 Data => {
-                    Label => $Row->{Label} || $DynamicField->{Label},
-                    Type  => 'Label',
-                    IsSetLabel => $DynamicField->{FieldType} eq 'Set' ? 1 : 0,
+                    Label    => $Row->{Label} || $DynamicField->{Label},
+                    Type     => 'Label',
+                    CSSClass => $DynamicField->{FieldType} eq 'Set' ? 'DynamicFieldSetLabel' : undef,
                 },
             );
 
