@@ -5,7 +5,7 @@
 # Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - c4523088a2c65422114cc6c40f1aa9fa16159264 - Kernel/System/ZnunyHelper.pm
+# $origin: otobo - ee1f8f72455a282a3bb5a4d8b15f0d9251fc4f90 - Kernel/System/ZnunyHelper.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -1630,6 +1630,7 @@ Returns:
 sub _DynamicFieldsCreate {
     my ( $Self, @DynamicFields ) = @_;
 
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
     my $ValidObject        = $Kernel::OM->Get('Kernel::System::Valid');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
@@ -1670,6 +1671,7 @@ sub _DynamicFieldsCreate {
 
     # performance improvement for the FieldOrderAfterField functionality
     my $FieldOrderAfterFieldActive = grep { $_->{FieldOrderAfterField} || $_->{FieldOrderAfterFieldUpdate} } @DynamicFields;
+    my $Error                      = 0;
 
     # check dynamic fields and split dynamic fields in three separate groups
     my %Namespaces;
@@ -1798,7 +1800,7 @@ sub _DynamicFieldsCreate {
             $CreateDynamicField = 1;
         }
 
-        # if the field exists check if the type match with the needed type
+        # if the field exists check if the type matches with the needed type
         elsif (
             $DynamicFieldLookup{ $NewDynamicField->{Name} }->{FieldType}
             ne $NewDynamicField->{FieldType}
@@ -1812,6 +1814,14 @@ sub _DynamicFieldsCreate {
                 Name   => $OldDynamicFieldConfig{Name} . 'Old',
                 UserID => 1,
             );
+
+            if ( !$Success ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => "Error while renaming dynamic field $OldDynamicFieldConfig{Name}!",
+                );
+                $Error = 1;
+            }
 
             $CreateDynamicField = 1;
         }
@@ -1832,6 +1842,13 @@ sub _DynamicFieldsCreate {
                 Reorder    => 0,
                 UserID     => 1,
             );
+            if ( !$Success ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => "Error while updating dynamic field $OldDynamicFieldConfig{Name}!",
+                );
+                $Error = 1;
+            }
         }
 
         # check if new field has to be created
@@ -1853,13 +1870,20 @@ sub _DynamicFieldsCreate {
             ValidID       => $NewDynamicField->{ValidID}       || $ValidID,
             UserID        => 1,
         );
+        if ( !$FieldID ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Error while creating dynamic field $NewDynamicField->{Name}!",
+            );
+            $Error = 1;
+        }
         next DYNAMICFIELD if !$FieldID;
 
         # increase the order number
         $NextOrderNumber++;
     }
 
-    return 1;
+    return !$Error;
 }
 
 =item DynamicFieldFieldOrderAfterFieldGet()
