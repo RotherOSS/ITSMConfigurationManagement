@@ -665,7 +665,7 @@ END_SQL
     return unless $InsertSuccess;
 
     # get id of new version
-    my ( $VersionID ) = $DBObject->SelectRowArray(
+    my ($VersionID) = $DBObject->SelectRowArray(
         SQL => <<'END_SQL',
 SELECT id
   FROM configitem_version
@@ -791,7 +791,7 @@ END_SQL
     }
 
     # recalculate the current incident state of all linked config items
-    if ( $RecalcCurInciState ) {
+    if ($RecalcCurInciState) {
         $Self->CurInciStateRecalc(
             ConfigItemID => $Version{ConfigItemID},
         );
@@ -1182,7 +1182,7 @@ sub VersionDelete {
     my $Success;
     for my $VersionID ( @{$VersionList} ) {
 
-        # get configitem id if neccessary
+        # get configitem id if necessary
         if ( $Param{VersionID} || $Param{VersionIDs} ) {
             $ConfigItemID = $Self->VersionConfigItemIDGet(
                 VersionID => $VersionID,
@@ -1813,12 +1813,12 @@ sub _UpdateCurAttr {
     }
 
     # if the config item update does not change the InciStateID
-    # we just keep the CurInciStateID; no recalulation
+    # we just keep the CurInciStateID; no recalculation
     elsif ( $Param{Version}{InciStateID} eq $Param{LastVersion}{InciStateID} ) {
         $CurInciStateID = $Param{LastVersion}{CurInciStateID};
     }
 
-    # if the incident state changes, we start the recalulation
+    # if the incident state changes, we start the recalculation
     # we do not test for cases like same InciStateType, or new InciState eq last CurInciState
     else {
         $CurInciStateID     = $Param{Version}{InciStateID};
@@ -1856,6 +1856,5 @@ END_SQL
 
     return $RecalcCurInciState;
 }
-
 
 1;
