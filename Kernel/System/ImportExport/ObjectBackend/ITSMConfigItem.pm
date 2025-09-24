@@ -1503,26 +1503,15 @@ sub ImportDataSave {
         $RowIndex++;
     }
 
-    # Edit $VersionData, so that the values in %DFHash take precedence.
-    # When a config item has no dynamic fields, then $MergedDFData may reference an empty hash
-    my $MergedDFData = $Self->_DFImportDataMerge(
-        DynamicFieldRef              => \%DynamicFieldList,
-        OldVersionData               => $VersionData,
-        NewVersionData               => \%DFHash,
-        EmptyFieldsLeaveTheOldValues => $EmptyFieldsLeaveTheOldValues,
-    );
-
-    # bail out, when there was a problem in _DFImportDataMerge()
-    if ( ref $MergedDFData ne 'HASH' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Can't import entity $Param{Counter}: Could not prepare the input!",
-        );
-
-        return;
+    # if empty fields imply that old values should be preserved,
+    #   we tidy the imported dynamic field data of empty or undefined values
+    for my $Key ( sort keys %DFHash ) {
+        if ( $EmptyFieldsLeaveTheOldValues && ( !defined $DFHash{$Key} || $DFHash{$Key} eq '' ) ) {
+            delete $DFHash{$Key};
+        }
     }
 
-    my %NewVersionData = $MergedDFData->%*;
+    my %NewVersionData = %DFHash;
 
     # check if the feature to check for a unique name is enabled
     if (
@@ -1583,7 +1572,7 @@ sub ImportDataSave {
             Description   => $VersionData->{Description},
             VersionString => $VersionData->{VersionString},
             UserID        => $Param{UserID},
-            $MergedDFData->%*,
+            %DFHash,
             ExternalSource => 1,
         );
         if ( !$Success ) {
@@ -2079,62 +2068,6 @@ sub _DFImportSearchDataPrepare {
     }
 
     return %DFSearchParams;
-}
-
-=head2 _DFImportDataMerge()
-
-merges existing data with the new data.
-Unpacks JSON when necessary.
-
-    my $MergedDFData = $ObjectBackend->_DFImportDataMerge(
-        DynamicFieldRef => $DynamicFieldRef,
-        VersionData     => $VersionData,  # will be changed
-        NewVersionData  => $HashRef,
-    );
-
-=cut
-
-sub _DFImportDataMerge {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    return unless $Param{DynamicFieldRef};
-    return unless ref $Param{DynamicFieldRef} eq 'HASH';    # the attributes of the config item class
-    return unless $Param{NewVersionData};
-    return unless ref $Param{NewVersionData} eq 'HASH';     # hash with values that should be imported
-    return unless $Param{OldVersionData};
-    return unless ref $Param{OldVersionData} eq 'HASH';     # hash with current values of the config item
-
-    my $Old = $Param{OldVersionData};
-    my $New = $Param{NewVersionData};
-    my %MergedDFData;                                       # will be returned
-    DF_KEY:
-    for my $DFKey ( sort keys $New->%* ) {
-
-        # a sanity check
-        next DF_KEY unless $DFKey =~ m/^DynamicField_/;
-
-        # The most simple case
-        if ( !ref $New->{$DFKey} ) {
-            $MergedDFData{$DFKey} = $New->{$DFKey} // $Old->{$DFKey};
-
-            next DF_KEY;
-        }
-
-        # only hashes are used
-        next DF_KEY unless ref $New->{$DFKey} eq 'ARRAY';
-
-        # merging based on definedness
-        # merging only on the top level
-        # TODO: decide whether that allows deletion of values
-        $Old->{$DFKey} = [] unless ref $Old->{$DFKey} eq 'ARRAY';
-        my @Merged = pairwise { $a // $b } $New->{$DFKey}->@*, $Old->{$DFKey}->@*;
-        $MergedDFData{$DFKey} = \@Merged;
-
-        next DF_KEY;
-    }
-
-    return \%MergedDFData;
 }
 
 1;
