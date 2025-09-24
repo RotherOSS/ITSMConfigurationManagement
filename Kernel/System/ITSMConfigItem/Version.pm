@@ -729,7 +729,7 @@ END_SQL
             Value              => $Version{ 'DynamicField_' . $DynamicField->{Name} },
             UserID             => $Param{UserID},
             ConfigItemHandled  => 1,
-            ExternalSource     => $Param{ExternalSource},
+            ExternalSource     => ( $Param{ExternalSource} && exists $Param{ 'DynamicField_' . $DynamicField->{Name} } ),
         );
 
         # only throw events for fields changed from the last version - checked by ConfigItemUpdate()
