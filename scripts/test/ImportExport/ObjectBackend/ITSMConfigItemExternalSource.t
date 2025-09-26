@@ -181,37 +181,7 @@ ok( $CISubsidiaryID, 'config item added' );
 # ------------------------------------------------------------ #
 my @ImportDataTests = (
     {
-        Name             => 'Importing data triggering a new version, keeping the old value',
-        SourceImportData => {
-            ObjectData => {
-                ClassID                      => $CIClassName2ID{Subsidiary},
-                EmptyFieldsLeaveTheOldValues => 'on',
-            },
-            ImportDataSave => {
-                TemplateID    => $TemplateID,
-                ImportDataRow => [
-                    'TestSubsidiary',
-                    'Production',
-                    'Operational',
-                    'Straubing',
-                    '',
-                ],
-                UserID => $TestUserID,
-            },
-        },
-        ReferenceImportData => {
-            VersionCount => 2,
-            LastVersion  => {
-                Name                                       => 'TestSubsidiary',
-                DeplState                                  => 'Production',
-                InciState                                  => 'Operational',
-                'DynamicField_Location-City'               => 'Straubing',
-                'DynamicField_Location-ReferenceToCountry' => [$CICountryID],
-            }
-        },
-    },
-    {
-        Name             => 'Importing data triggering a new version, emptying the old value',
+        Name             => 'Importing data without triggering a new version, emptying the old value',
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $CIClassName2ID{Subsidiary},
@@ -230,12 +200,115 @@ my @ImportDataTests = (
             },
         },
         ReferenceImportData => {
-            VersionCount => 3,
+            VersionCount => 1,
             LastVersion  => {
                 Name                         => 'TestSubsidiary',
                 DeplState                    => 'Production',
                 InciState                    => 'Operational',
                 'DynamicField_Location-City' => 'München',
+            }
+        },
+    },
+    {
+        Name             => 'Importing data without triggering a new version, keeping the old value',
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $CIClassName2ID{Subsidiary},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            ImportDataSave => {
+                TemplateID    => $TemplateID,
+                ImportDataRow => [
+                    'TestSubsidiary',
+                    'Production',
+                    'Operational',
+                    'Straubing',
+                    '',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 1,
+            LastVersion  => {
+                Name                                       => 'TestSubsidiary',
+                DeplState                                  => 'Production',
+                InciState                                  => 'Operational',
+                'DynamicField_Location-City'               => 'Straubing',
+                'DynamicField_Location-ReferenceToCountry' => [$CICountryID],
+            }
+        },
+    },
+    {
+        Name             => 'Importing data triggering a new version, keeping the old value',
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $CIClassName2ID{Subsidiary},
+                EmptyFieldsLeaveTheOldValues => 'on',
+            },
+            ClassPreferences => {
+                Subsidiary => {
+                    VersionTrigger => [
+                        'DynamicField_Location-City',
+                    ],
+                },
+            },
+            ImportDataSave => {
+                TemplateID    => $TemplateID,
+                ImportDataRow => [
+                    'TestSubsidiary',
+                    'Production',
+                    'Operational',
+                    'Berlin',
+                    '',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 2,
+            LastVersion  => {
+                Name                                       => 'TestSubsidiary',
+                DeplState                                  => 'Production',
+                InciState                                  => 'Operational',
+                'DynamicField_Location-City'               => 'Berlin',
+                'DynamicField_Location-ReferenceToCountry' => [$CICountryID],
+            }
+        },
+    },
+    {
+        Name             => 'Importing data triggering a new version, emptying the old value',
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $CIClassName2ID{Subsidiary},
+                EmptyFieldsLeaveTheOldValues => 'off',
+            },
+            ClassPreferences => {
+                Subsidiary => {
+                    VersionTrigger => [
+                        'DynamicField_Location-City',
+                    ],
+                },
+            },
+            ImportDataSave => {
+                TemplateID    => $TemplateID,
+                ImportDataRow => [
+                    'TestSubsidiary',
+                    'Production',
+                    'Operational',
+                    'Hamburg',
+                    '',
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 3,
+            LastVersion  => {
+                Name                         => 'TestSubsidiary',
+                DeplState                    => 'Production',
+                InciState                    => 'Operational',
+                'DynamicField_Location-City' => 'Hamburg',
             }
         },
     },
