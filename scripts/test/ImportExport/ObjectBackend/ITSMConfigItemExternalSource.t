@@ -267,21 +267,39 @@ for my $Test (@ImportDataTests) {
 
         # set the object data
         if (
-            $Test->{SourceImportData}->{ObjectData}
-            && ref $Test->{SourceImportData}->{ObjectData} eq 'HASH'
-            && $Test->{SourceImportData}->{ImportDataSave}->{TemplateID}
+            $Test->{SourceImportData}{ObjectData}
+            && ref $Test->{SourceImportData}{ObjectData} eq 'HASH'
+            && $Test->{SourceImportData}{ImportDataSave}{TemplateID}
             )
         {
             $ImportExportObject->ObjectDataSave(
-                TemplateID => $Test->{SourceImportData}->{ImportDataSave}->{TemplateID},
-                ObjectData => $Test->{SourceImportData}->{ObjectData},
+                TemplateID => $Test->{SourceImportData}{ImportDataSave}{TemplateID},
+                ObjectData => $Test->{SourceImportData}{ObjectData},
                 UserID     => $TestUserID,
             );
         }
 
+        # set the general catalog preferences
+        if (
+            $Test->{SourceImportData}{ClassPreferences}
+            && ref $Test->{SourceImportData}{ClassPreferences} eq 'HASH'
+            )
+        {
+            for my $ClassName ( sort keys $Test->{SourceImportData}{ClassPreferences}->%* ) {
+                for my $PreferenceKey ( sort keys $Test->{SourceImportData}{ClassPreferences}{$ClassName}->%* ) {
+                    my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+                        ItemID => $CIClassName2ID{$ClassName},
+                        Key    => $PreferenceKey,
+                        Value  => $Test->{SourceImportData}{ClassPreferences}{$ClassName}{$PreferenceKey},
+                    );
+                    ok( $Success, "Successfully set preference $PreferenceKey for class $ClassName" );
+                }
+            }
+        }
+
         # import data save
         my ( $ConfigItemID, $RetCode ) = $ObjectBackendObject->ImportDataSave(
-            %{ $Test->{SourceImportData}->{ImportDataSave} },
+            %{ $Test->{SourceImportData}{ImportDataSave} },
             Counter => $ImportTestCount,
         );
 
@@ -304,7 +322,7 @@ for my $Test (@ImportDataTests) {
 
             is(
                 scalar $VersionList->@*,
-                $Test->{ReferenceImportData}->{VersionCount} || 0,
+                $Test->{ReferenceImportData}{VersionCount} || 0,
                 "ImportDataSave() - correct number of versions",
             );
         }
@@ -319,24 +337,24 @@ for my $Test (@ImportDataTests) {
         ELEMENT:
         for my $Element (qw(Number Name DeplState InciState)) {
 
-            next ELEMENT unless exists $Test->{ReferenceImportData}->{LastVersion}->{$Element};
+            next ELEMENT unless exists $Test->{ReferenceImportData}{LastVersion}{$Element};
 
             is(
                 $VersionData->{$Element},
-                $Test->{ReferenceImportData}->{LastVersion}->{$Element},
+                $Test->{ReferenceImportData}{LastVersion}{$Element},
                 "ImportDataSave() $Element is identical",
             );
         }
 
         # check dynamic field elements
         DF_KEY:
-        for my $DFKey ( sort keys $Test->{ReferenceImportData}->{LastVersion}->%* ) {
+        for my $DFKey ( sort keys $Test->{ReferenceImportData}{LastVersion}->%* ) {
             next DF_KEY unless $DFKey =~ m/^DynamicField_/;
 
             ok( exists $VersionData->{$DFKey}, "$DFKey retrieved from new config item" );
             is(
                 $VersionData->{$DFKey},
-                $Test->{ReferenceImportData}->{LastVersion}->{$DFKey},
+                $Test->{ReferenceImportData}{LastVersion}{$DFKey},
                 "$DFKey has expected value"
             );
         }
