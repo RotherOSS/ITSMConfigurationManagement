@@ -5888,7 +5888,7 @@ END_JSON_FOR_INDEX_20
 =cut
 
 # run general ImportDataTests tests
-my $ImportTestCount = 0;
+my $ImportTestCount = 1;
 for my $Test (@ImportDataTests) {
 
     subtest "ImportData: $Test->{Name}" => sub {
