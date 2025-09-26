@@ -73,16 +73,6 @@ my $CIClassListRef = $GeneralCatalogObject->ItemList(
 );
 my %CIClassName2ID = reverse $CIClassListRef->%*;
 
-# set City as version trigger for class Subsidiary
-my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
-    ItemID => $CIClassName2ID{Subsidiary},
-    Key    => 'VersionTrigger',
-    Value  => [
-        'DynamicField_Location-City'
-    ],
-);
-ok( $Success, 'Successfully set dynamic field Location-City as version trigger' );
-
 # add ImportExport template
 my $TemplateID = $ImportExportObject->TemplateAdd(
     Object  => 'ITSMConfigItem',
@@ -357,6 +347,24 @@ for my $Test (@ImportDataTests) {
                 $Test->{ReferenceImportData}{LastVersion}{$DFKey},
                 "$DFKey has expected value"
             );
+        }
+
+        # tidy the general catalog preferences up
+        if (
+            $Test->{SourceImportData}{ClassPreferences}
+            && ref $Test->{SourceImportData}{ClassPreferences} eq 'HASH'
+            )
+        {
+            for my $ClassName ( sort keys $Test->{SourceImportData}{ClassPreferences}->%* ) {
+                for my $PreferenceKey ( sort keys $Test->{SourceImportData}{ClassPreferences}{$ClassName}->%* ) {
+                    my $Success = $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+                        ItemID => $CIClassName2ID{$ClassName},
+                        Key    => $PreferenceKey,
+                        Value  => [''],
+                    );
+                    ok( $Success, "Successfully reset preference $PreferenceKey for class $ClassName" );
+                }
+            }
         }
     };
 }
