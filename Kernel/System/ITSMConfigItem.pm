@@ -1140,7 +1140,7 @@ sub ConfigItemUpdate {
             Event => 'ConfigItemUpdate',
             Data  => {
                 ConfigItemID => $ConfigItem->{ConfigItemID},
-                Comment      => $ConfigItem->{ConfigItemID} . '%%' . $Param{Number},
+                Comment      => $ConfigItem->{ConfigItemID} . '%%' . $ConfigItem->{Number},
                 OldDeplState => $Changed{DeplStateID}{Old},
             },
             UserID => $Param{UserID},
