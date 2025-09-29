@@ -31,7 +31,7 @@ use MIME::Base64   qw(decode_base64 encode_base64);
 
 # OTOBO modules
 use Kernel::Language              qw(Translatable);
-use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData IsArrayRefWithData);
+use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData IsArrayRefWithData IsPositiveInteger);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -421,6 +421,15 @@ sub SearchAttributesGet {
                 Multiple    => 1,
             },
         },
+        {
+            Key   => 'Limit',
+            Name  => Translatable('Limit'),
+            Input => {
+                Type      => 'Text',
+                Size      => 80,
+                MaxLength => 191,
+            },
+        },
     );
 
     # add dynamic field attributes
@@ -602,6 +611,11 @@ sub ExportDataGet {
         my @InciStateIDs = split /#####/, $SearchData->{InciStateIDs};
         $SearchParams{InciStateIDs} = \@InciStateIDs;
         delete $SearchData->{InciStateIDs};
+    }
+
+    # add limit to the search params
+    if ( IsPositiveInteger( $SearchData->{Limit} ) ) {
+        $SearchParams{Limit} = delete $SearchData->{Limit};
     }
 
     # add all dynamic field data to the search params
