@@ -356,20 +356,34 @@ sub Run {
             );
         }
         elsif ( !$ConfigItemID ) {
-            my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParam);
 
-            $ConfigItemID = $ConfigItemIDs[0];
+            my $PerformSearch = 0;
+            SEARCHPARAMKEY:
+            for my $SearchParamKey ( keys %SearchParam ) {
+                if ( $SearchParamKey ne 'Result' && $SearchParam{$SearchParamKey} ) {
+                    $PerformSearch = 1;
 
-            if ( scalar @ConfigItemIDs > 1 ) {
-                my $SearchParameters = join( ';', map {"$_ => $SearchParam{$_}"} keys %SearchParam );
+                    last SEARCHPARAMKEY;
+                }
+            }
 
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'notice',
-                    Message  => "Cannot use ambiguous search result - skipping. Parameters: $SearchParameters;",
-                );
-                push @CIsHandled, {};
+            if ($PerformSearch) {
 
-                next CI;
+                my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParam);
+
+                $ConfigItemID = $ConfigItemIDs[0];
+
+                if ( scalar @ConfigItemIDs > 1 ) {
+                    my $SearchParameters = join( ';', map {"$_ => $SearchParam{$_}"} keys %SearchParam );
+
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'notice',
+                        Message  => "Cannot use ambiguous search result - skipping. Parameters: $SearchParameters;",
+                    );
+                    push @CIsHandled, {};
+
+                    next CI;
+                }
             }
         }
 
