@@ -289,9 +289,10 @@ sub Run {
     # get upload cache object
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-    # when there's no ClassID it means, an existing config item is edited as the ClassID is only
-    # provided as GET param when creating a new config item
-    if ( !$ParamObject->GetParam( Param => 'ClassID' ) ) {
+    # attachments of existing config item needs to be loaded in two cases:
+    #   1. an existing config item is edited - no class id present in GetParam
+    #   2. an existing config item is duplicated
+    if ( !$ParamObject->GetParam( Param => 'ClassID' ) || $DuplicateID ) {
 
         # get all attachments meta data
         my @ExistingAttachments = $ConfigItemObject->ConfigItemAttachmentList(
