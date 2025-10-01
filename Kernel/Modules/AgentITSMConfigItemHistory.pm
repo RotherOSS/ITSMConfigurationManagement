@@ -45,7 +45,7 @@ sub Run {
         Comment => Translatable('Please contact the administrator.'),
     ) unless $ConfigItemID;
 
-    # get neeeded objects
+    # get needed objects
     my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
     my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -76,6 +76,8 @@ sub Run {
         'CIHistory::NameUpdate'            => Translatable('Name updated (new=%s, old=%s)'),
         'CIHistory::ValueUpdate'           => Translatable('Attribute %s updated from "%s" to "%s"'),
         'CIHistory::VersionDelete'         => Translatable('Version %s deleted'),
+        'CIHistory::AttachmentAdd'         => Translatable('File "%s" uploaded'),
+        'CIHistory::AttachmentDelete'      => Translatable('File "%s" removed'),
     );
 
     # get all information about the config item
