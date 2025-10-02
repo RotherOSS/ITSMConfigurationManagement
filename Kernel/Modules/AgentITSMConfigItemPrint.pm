@@ -19,7 +19,8 @@ package Kernel::Modules::AgentITSMConfigItemPrint;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language                qw(Translatable);
+use Kernel::System::VariableCheck   qw(IsArrayRefWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -226,14 +227,12 @@ sub Run {
         ConfigItem => $ConfigItem,
     );
 
-    # output linked objects
-    if (%LinkData) {
-        $Self->_PDFOutputLinkedObjects(
-            PageData     => \%Page,
-            LinkData     => \%LinkData,
-            LinkTypeList => \%LinkTypeList,
-        );
-    }
+    # output version infos
+    $Self->_PDFOutputVersionInfos(
+        Page          => \%Page,
+        Version       => $ConfigItem,
+        VersionNumber => $VersionNumber,
+    );
 
     # output attachments
     if (@Attachments) {
@@ -244,12 +243,20 @@ sub Run {
         );
     }
 
-    # output version infos
-    $Self->_PDFOutputVersionInfos(
-        Page          => \%Page,
-        Version       => $ConfigItem,
-        VersionNumber => $VersionNumber,
+    # output internal back links
+    $Self->_PDFOutputBacklinks(
+        Page       => \%Page,
+        ConfigItem => $ConfigItem,
     );
+
+    # output linked objects
+    if (%LinkData) {
+        $Self->_PDFOutputLinkedObjects(
+            PageData     => \%Page,
+            LinkData     => \%LinkData,
+            LinkTypeList => \%LinkTypeList,
+        );
+    }
 
     # Get current system datetime object.
     my $CurrentSystemDTObj = $Kernel::OM->Create('Kernel::System::DateTime');
@@ -672,6 +679,23 @@ sub _PDFOutputVersionInfos {
         },
     ];
 
+    if ( $Param{Version}{Description} ) {
+        my $PlainDescription = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $Param{Version}{Description} );
+        $PlainDescription    =~ s/^[\n\r]+//;
+        $PlainDescription    =~ s/[\n\r]+$//;
+
+        push $Table->@*, (
+            {
+                Key   => ' ',
+                Value => ' ',
+            },
+            {
+                Key   => $LayoutObject->{LanguageObject}->Translate('Description') . ':',
+                Value => $PlainDescription,
+            },
+        );
+    }
+
     # add dynamic field data to table
     $Self->_PDFOutputDFOutput(
         ConfigItem => $Param{Version},
@@ -787,6 +811,160 @@ sub _PDFOutputDFOutput {
 
         # add row data
         push @{ $Param{TableData} }, $NewRow;
+    }
+
+    return 1;
+}
+
+sub _PDFOutputBacklinks {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Argument (qw(Page ConfigItem)) {
+        if ( !defined $Param{$Argument} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!"
+            );
+            return;
+        }
+    }
+
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+        DefinitionID => $Param{ConfigItem}{DefinitionID},
+    );
+
+    return if !$Definition->{DefinitionRef};
+
+    my %BacklinkSections;
+
+    PAGE:
+    for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+        next PAGE if $Page->{Interfaces} && !grep { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+
+        SECTION:
+        for my $SectionConfig ( $Page->{Content}->@* ) {
+            my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+            next SECTION if !$Section->{Type};
+            next SECTION if $Section->{Type} ne 'ConfigItemLinks';
+
+            $BacklinkSections{ $SectionConfig->{Section} } = $Section;
+        }
+    }
+
+    return 1 unless %BacklinkSections;
+
+    my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+    my $PDFObject        = $Kernel::OM->Get('Kernel::System::PDF');
+    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $DefaultHeader = $LayoutObject->{LanguageObject}->Translate('Referenced by');
+
+    SECTION:
+    for my $Section ( values %BacklinkSections ) {
+
+        my $Direction = $Section->{LinkedAs} || 'Source';
+        my $Types     = IsArrayRefWithData( $Section->{LinkTypes} ) ? $Section->{LinkTypes} : undef;
+        my $Header    = $Section->{Header} ? $LayoutObject->{LanguageObject}->Translate( $Section->{Header} ) : $DefaultHeader;
+
+        my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+            ConfigItemID => $Param{ConfigItem}{ConfigItemID},
+            Direction    => $Direction,
+            Types        => $Types,
+            UserID       => 1,
+        );
+
+        next SECTION if !$LinkedConfigItems;
+
+        my %LinkedClasses;
+
+        for my $Link ( $LinkedConfigItems->@* ) {
+            my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                ConfigItemID => $Link->{ConfigItemID},
+            );
+
+            push @{ $LinkedClasses{ $ConfigItem->{Class} } }, {
+                Name         => $ConfigItem->{Name},
+                ConfigItemID => $Link->{ConfigItemID},
+            };
+        }
+
+        # set new position
+        $PDFObject->PositionSet(
+            Move => 'relativ',
+            Y    => -15,
+        );
+
+        # output headline
+        $PDFObject->Text(
+            Text     => $Header,
+            Height   => 7,
+            Type     => 'Cut',
+            Font     => 'ProportionalBoldItalic',
+            FontSize => 7,
+            Color    => '#666666',
+        );
+
+        # set new position
+        $PDFObject->PositionSet(
+            Move => 'relativ',
+            Y    => -4,
+        );
+
+        # create table
+        my $Table = [];
+
+        for my $Class ( keys %LinkedClasses ) {
+            push $Table->@*, {
+                Key   => $LayoutObject->{LanguageObject}->Translate( $Class ),
+                Value => $LinkedClasses{ $Class }[0]{Name},
+            };
+
+            for my $i ( 1 .. $#{ $LinkedClasses{ $Class } } ) {
+                push $Table->@*, {
+                    Key   => ' ',
+                    Value => $LinkedClasses{ $Class }[$i]{Name},
+                };
+            }
+        }
+
+        my %TableParam;
+        my $Rows = @{$Table};
+
+        for my $Row ( 1 .. $Rows ) {
+            $Row--;
+            $TableParam{CellData}[$Row][0]{Content} = $Table->[$Row]->{Key};
+            $TableParam{CellData}[$Row][0]{Font}    = 'ProportionalBold';
+            $TableParam{CellData}[$Row][1]{Content} = $Table->[$Row]->{Value};
+        }
+
+        $TableParam{ColumnData}[0]{Width} = 100;
+        $TableParam{ColumnData}[1]{Width} = 411;
+        $TableParam{Type}                 = 'Cut';
+        $TableParam{Border}               = 0;
+        $TableParam{FontSize}             = 6;
+        $TableParam{BackgroundColor}      = '#DDDDDD';
+        $TableParam{Padding}              = 1;
+        $TableParam{PaddingTop}           = 3;
+        $TableParam{PaddingBottom}        = 3;
+
+        # output table
+        PAGE:
+        for ( $Param{Page}->{PageCount} .. $Param{Page}->{MaxPages} ) {
+
+            # output table (or a fragment of it)
+            %TableParam = $PDFObject->Table(%TableParam);
+
+            # stop output or output next page
+            last PAGE if $TableParam{State};
+
+            $PDFObject->PageNew(
+                %{ $Param{Page} },
+                FooterRight => $Param{Page}->{PageText} . ' ' . $Param{Page}->{PageCount},
+            );
+            $Param{Page}->{PageCount}++;
+        }
     }
 
     return 1;
