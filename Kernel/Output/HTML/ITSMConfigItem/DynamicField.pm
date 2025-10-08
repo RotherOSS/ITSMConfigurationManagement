@@ -34,6 +34,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::ITSMConfigItem',
+    'Kernel::System::Main',
 );
 
 =head1 NAME
@@ -197,7 +198,7 @@ sub _SectionRender {
     elsif ( $Param{Section}{Module} ) {
         my $Module = 'Kernel::Output::HTML::ITSMConfigItem::Section::' . $Param{Section}{Module};
 
-        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( $Module ) ) {
+        if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($Module) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Can't load section module '$Module'",
@@ -206,8 +207,8 @@ sub _SectionRender {
             return '';
         }
 
-        my $Object = $Kernel::OM->Get( $Module );
-        my $HTML   = $Object->Run( %Param );
+        my $Object = $Kernel::OM->Get($Module);
+        my $HTML   = $Object->Run(%Param);
         $Param{LayoutObject}->Block(
             Name => 'GenericHTML',
             Data => {

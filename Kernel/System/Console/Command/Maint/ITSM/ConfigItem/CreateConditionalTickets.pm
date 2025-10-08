@@ -37,7 +37,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Checks the configured config items and creates tickets as notification if the requirements are fullfilled.');
+    $Self->Description('Checks the configured config items and creates tickets as notification if the requirements are fulfilled.');
 
     return;
 }
@@ -183,7 +183,6 @@ sub Run {
                 '<OTOBO_CONFIGITEM_NAME>'   => $LastVersion->{Name},
                 '<OTOBO_CONFIGITEM_DATE>'   => $LastVersion->{ 'DynamicField_' . $Config->{TimeCIKey} },
             );
-            my %DefinitionRefs = map { $_->{Key} => $_ } @{ $LastVersion->{DefinitionRef} };
 
             SUBKEY:
             for my $Key ( ( $Config->{Ticket}{Title} . $Config->{Ticket}{Text} ) =~ /<OTOBO_CONFIGITEM_([^>]+)>/g ) {
@@ -228,7 +227,7 @@ sub Run {
             my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
             my $ArticleID                    = $InternalArticleBackendObject->ArticleCreate(
                 TicketID             => $TicketID,
-                SenderType           => $Config->{Ticket}{SenderType}  || 'system',
+                SenderType           => $Config->{Ticket}{SenderType} || 'system',
                 IsVisibleForCustomer => 0,
                 ContentType          => 'text/plain; charset=utf-8',
                 Body                 => $NotificationText,

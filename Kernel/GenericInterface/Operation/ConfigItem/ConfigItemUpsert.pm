@@ -158,8 +158,6 @@ sub Run {
         }
     }
 
-    my $ErrorMessage = '';
-
     # transform single CIs to an array reference
     if ( !IsArrayRefWithData( $Param{Data}{ConfigItem} ) ) {
         $Param{Data}{ConfigItem} = [ $Param{Data}{ConfigItem} ];
@@ -400,11 +398,6 @@ sub Run {
                 ErrorMessage => "$Self->{OperationName}: Can not write configuration item!",
             );
         }
-
-        my $ClassPreferences = $GeneralCatalogObject->ItemGet(
-            Class => 'ITSM::ConfigItem::Class',
-            Name  => $RemoteCIData->{Class},
-        );
 
         if ( !$ConfigItemID && !$RemoteCIData->{Name} ) {
             my $NoticeInfo = $RemoteCIData->{Number} ? "Number: $RemoteCIData->{Number};" : '';

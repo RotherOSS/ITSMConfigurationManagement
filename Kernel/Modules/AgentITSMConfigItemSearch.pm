@@ -129,7 +129,6 @@ sub Run {
             );
         }
 
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my %SetInnerFields;
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( values $Definition->{DynamicFieldRef}->%* ) {

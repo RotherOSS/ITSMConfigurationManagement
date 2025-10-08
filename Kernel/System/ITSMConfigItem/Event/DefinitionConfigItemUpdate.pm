@@ -197,13 +197,13 @@ sub Run {
             DefinitionID => $Param{Data}->{DefinitionID},
         );
 
-        my @DynamicFieldNames = uniq ( keys $DefinitionRef->{DynamicFieldRef}->%*, keys $OldDynamicFieldRef->%* );
+        my @DynamicFieldNames = uniq( keys $DefinitionRef->{DynamicFieldRef}->%*, keys $OldDynamicFieldRef->%* );
         my %ConfigItem;
 
         DYNAMICFIELD:
-        for my $DynamicFieldName ( @DynamicFieldNames ) {
-            my $NewDF = $DefinitionRef->{DynamicFieldRef}{ $DynamicFieldName };
-            my $OldDF = $OldDynamicFieldRef->{ $DynamicFieldName };
+        for my $DynamicFieldName (@DynamicFieldNames) {
+            my $NewDF = $DefinitionRef->{DynamicFieldRef}{$DynamicFieldName};
+            my $OldDF = $OldDynamicFieldRef->{$DynamicFieldName};
             my $DF    = $NewDF // $OldDF;
 
             next DYNAMICFIELD unless $DF->{Config}{ReferencedObjectType};
@@ -211,8 +211,8 @@ sub Run {
 
             my $Skip = 1;
             if ( $NewDF && $OldDF ) {
-                for my $Config ( qw/LinkType LinkReferencingType LinkDirection/ ) {
-                    if ( ( $NewDF->{Config}{ $Config } // '' ) ne ( $OldDF->{Config}{ $Config } // '' ) ) {
+                for my $Config (qw/LinkType LinkReferencingType LinkDirection/) {
+                    if ( ( $NewDF->{Config}{$Config} // '' ) ne ( $OldDF->{Config}{$Config} // '' ) ) {
                         $Skip = 0;
                     }
                 }
@@ -225,12 +225,12 @@ sub Run {
 
             IDS:
             for my $ID ( keys %AffectedCIs ) {
-                $ConfigItem{ $ID } //= $ConfigItemObject->ConfigItemGet(
+                $ConfigItem{$ID} //= $ConfigItemObject->ConfigItemGet(
                     ConfigItemID  => $ID,
                     DynamicFields => 1,
                 );
 
-                my $Value = $ConfigItem{ $ID }{"DynamicField_$DynamicFieldName"};
+                my $Value = $ConfigItem{$ID}{"DynamicField_$DynamicFieldName"};
 
                 next IDS unless $Value && $Value->[0];
 
@@ -238,8 +238,8 @@ sub Run {
                     DynamicFieldConfig      => $NewDF,
                     OldDynamicFieldConfig   => $OldDF,
                     ConfigItemID            => $ID,
-                    ConfigItemVersionID     => $ConfigItem{ $ID }{VersionID},
-                    ConfigItemLastVersionID => $ConfigItem{ $ID }{VersionID},
+                    ConfigItemVersionID     => $ConfigItem{$ID}{VersionID},
+                    ConfigItemLastVersionID => $ConfigItem{$ID}{VersionID},
                     Value                   => $Value,
                 );
             }

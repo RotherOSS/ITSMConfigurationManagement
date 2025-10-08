@@ -38,6 +38,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Group',
     'Kernel::System::ITSMConfigItem',
+    'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::UnitTest::Helper',
     'Kernel::System::YAML',

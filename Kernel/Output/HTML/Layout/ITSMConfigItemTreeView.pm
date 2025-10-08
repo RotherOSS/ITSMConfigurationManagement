@@ -332,7 +332,6 @@ sub _GenerateID {
 sub GetLinkOutputData {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $ConfiguredTypes  = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::Type');
 
