@@ -94,7 +94,7 @@ INSERT INTO configitem_link (
 END_SQL
         Bind => [ \( $TypeID, $Param{SourceConfigItemID}, $Param{TargetConfigItemID} ) ],
     );
- 
+
     $Self->_TriggerCurInciStateRecalc(
         ConfigItemID => $Param{SourceConfigItemID},
         Linked       => [ $Param{TargetConfigItemID} ],
@@ -409,10 +409,10 @@ sub SyncLinkTable {
 
         # When linking is set up we need the complete information for how
         # the linking should be done.
-        for my $Config ( @LinkConfigs ) {
+        for my $Config (@LinkConfigs) {
             NEEDED:
             for my $Needed (qw(LinkDirection LinkReferencingType)) {
-                next NEEDED if $DFDetails->{$Needed};
+                next NEEDED if $Config->{$Needed};
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
@@ -441,7 +441,7 @@ sub SyncLinkTable {
         my $Config = $_[0];
 
         my $LinkTypeName = $Config->{LinkType};
-        $LinkTypeID      = $LinkObject->TypeLookup(
+        $LinkTypeID = $LinkObject->TypeLookup(
             Name   => $LinkTypeName,
             UserID => 1,
         );
@@ -463,28 +463,28 @@ sub SyncLinkTable {
         #   source_configitem_id,
         #   source_configitem_version_id
         $ObjectColumn = join '_',
-            ( $Config->{LinkDirection}       eq 'ReferencingIsSource' ? 'source'     : 'target' ),
-            ( $Config->{LinkReferencingType} eq 'Dynamic'             ? 'configitem' : 'configitem_version' ),
+            ( $Config->{LinkDirection} eq 'ReferencingIsSource' ? 'source'     : 'target' ),
+            ( $Config->{LinkReferencingType} eq 'Dynamic'       ? 'configitem' : 'configitem_version' ),
             'id';
-        
+
         # The column for the (referenced) value also depends on the link direction
         # and here on the field type; if the latter changes between definitions RebuildLinkTable has to be used
         # The possible columns are the same as above
         $ValueColumn = join '_',
-            ( $Config->{LinkDirection}         eq 'ReferencingIsSource' ? 'target'     : 'source' ),
-            ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem'          ? 'configitem' : 'configitem_version' ),
+            ( $Config->{LinkDirection} eq 'ReferencingIsSource' ? 'target'     : 'source' ),
+            ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem'  ? 'configitem' : 'configitem_version' ),
             'id';
     };
 
     # first delete existing links
     if ( $OldDFDetails->{LinkType} ) {
-        $GetColumnData->( $OldDFDetails );
+        $GetColumnData->($OldDFDetails);
 
         # if we have CI - CI links, we have to trigger CurInciState Recalculation for deleted links
         if ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem' && $OldDFDetails->{LinkReferencingType} eq 'Dynamic' ) {
             @OldValues = $DBObject->SelectColArray(
-                SQL   => "SELECT $ValueColumn FROM configitem_link WHERE dynamic_field_id = ? AND $ObjectColumn = ?",
-                Bind  => [ \$DynamicFieldID, \$ObjectID ],
+                SQL  => "SELECT $ValueColumn FROM configitem_link WHERE dynamic_field_id = ? AND $ObjectColumn = ?",
+                Bind => [ \$DynamicFieldID, \$ObjectID ],
             );
         }
 
@@ -495,13 +495,13 @@ sub SyncLinkTable {
     }
 
     # if we did a definition update, we have to "load" the new DF Config
-    if ( $OldFieldConfig ) {
-        $GetColumnData->( $DFDetails );
+    if ($OldFieldConfig) {
+        $GetColumnData->($DFDetails);
     }
 
     my @NewValues = $Param{Value}
         ? ref $Param{Value} ? ( grep {$_} $Param{Value}->@* ) : ( $Param{Value} )
-        : ();
+        :                     ();
 
     # finally set the new links
     if ( $DFDetails->{LinkType} && @NewValues ) {
@@ -522,15 +522,19 @@ END_SQL
     }
 
     # lastly we have to recalc current incident states for fully dynamic links
-    if ( @OldValues ||
-        ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem' && $DFDetails->{LinkReferencingType} eq 'Dynamic' ) ) {
+    if (
+        @OldValues
+        ||
+        ( $DynamicFieldConfig->{FieldType} eq 'ConfigItem' && $DFDetails->{LinkReferencingType} eq 'Dynamic' )
+        )
+    {
 
         my %Linked;
         my %Unlinked = map { $_ => 1 } @OldValues;
 
         # if we have a normal field update, we do not need to recalculate links which do not change
         if ( !$OldFieldConfig ) {
-            for my $ID ( @NewValues ) {
+            for my $ID (@NewValues) {
                 if ( exists $Unlinked{$ID} ) {
                     delete $Unlinked{$ID};
                 }
@@ -664,7 +668,7 @@ END_SQL
 
     # prepare the dynamic field values so that it can be used in a batch insert
 
-    # for the link types we neet to do some work
+    # for the link types we need to do some work
     my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
     my (
         @LinkTypeIDs,
@@ -883,10 +887,10 @@ sub _TriggerCurInciStateRecalc {
         DynamicFields => 0,
     );
 
-    # to not always recalculate the complete 
+    # to not always recalculate the complete
     my @CIsToRecalc;
 
-    # if the refencing CI does not have a matching CurInci and Inci state, just recalculate everything
+    # if the referencing CI does not have a matching CurInci and Inci state, just recalculate everything
     if ( $ReferencingCI->{CurInciStateID} ne $ReferencingCI->{InciStateID} ) {
         @CIsToRecalc = ( $Param{ConfigItemID} );
 
