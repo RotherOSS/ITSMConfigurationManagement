@@ -136,6 +136,7 @@ sub ValueSet {
 
     if ($Result) {
 
+        # optional config item links
         my $DynamicFieldConfig = $Param{DynamicFieldConfig};
 
         my $ObjectType = $DynamicFieldConfig->{ObjectType};
@@ -146,7 +147,17 @@ sub ValueSet {
         return $Result unless $FieldType  =~ /^ConfigItem/;
 
         my $ValueType = ref( $Param{Value} );
-        my $Value     = $ValueType && $ValueType eq 'ARRAY' ? $Param{Value}->[0] : $Param{Value};
+        my @Values    = $ValueType && $ValueType eq 'ARRAY' ? $Param{Value}->@*
+            : $Param{Value} ? ( $Param{Value} ) : ();
+
+        if ( $Param{Set} ) {
+
+            # in sets we expect either array references or undef for the single set indices
+            # from [ [Val11, Val12], undef, [Val31] ]
+            # via  ( [Val11, Val12], undef, [Val31] )
+            # to   ( Val11, Val12, Val31 )
+            @Values = map { $_ ? $_->@* : () } @Values;
+        }
 
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $ConfigItem       = $ConfigItemObject->ConfigItemGet(
@@ -160,7 +171,7 @@ sub ValueSet {
             ConfigItemID            => $ConfigItem->{ConfigItemID},
             ConfigItemLastVersionID => $ConfigItem->{LastVersionID},
             ConfigItemVersionID     => $ConfigItem->{VersionID},
-            Value                   => $Value,
+            Value                   => \@Values,
         );
     }
 
