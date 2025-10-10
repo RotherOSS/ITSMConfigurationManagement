@@ -308,9 +308,12 @@ sub GetStatElement {
     }
 
     # start config item extended search
-    my $ConfigItemIDs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(%Param);
+    my $AmountOfCIs = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->ConfigItemSearch(
+        %Param,
+        Result => 'COUNT',
+    );
 
-    return scalar @{$ConfigItemIDs};
+    return $AmountOfCIs;
 }
 
 sub ExportWrapper {
