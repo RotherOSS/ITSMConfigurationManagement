@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 50644e590081edd0b65fc8117adb4221488b9467 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 3d9b2ddf797aa436ac0fface04e637fd03050b9a - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -116,6 +116,13 @@ sub ValueGet {
         LensDynamicFieldConfig => $LensDFConfig,
     );
 
+    # Get the dynamic field config for the referenced object
+    my $ReferenceDFConfig = $Self->_GetReferenceDFConfig(
+        LensDynamicFieldConfig => $LensDFConfig,
+    );
+
+    my $ObjectIDOrName = $ReferenceDFConfig->{FieldType} =~ /^Customer/ ? 'ObjectName' : 'ObjectID';
+
     # in set case, values need to be collected one by one
     if ( $Param{Set} ) {
         my @Values;
@@ -126,7 +133,7 @@ sub ValueGet {
             else {
                 push @Values, $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->ValueGet(
                     DynamicFieldConfig => $AttributeDFConfig,
-                    ObjectID           => $RefID,
+                    $ObjectIDOrName    => $RefID,
                 );
             }
         }
@@ -135,20 +142,29 @@ sub ValueGet {
 
     return $Kernel::OM->Get('Kernel::System::DynamicField::Backend')->ValueGet(
         DynamicFieldConfig => $AttributeDFConfig,
-        ObjectID           => $ReferencedObjectID,
+        $ObjectIDOrName    => $ReferencedObjectID,
     );
 }
 
 sub ValueSet {
     my ( $Self, %Param ) = @_;
 
-    my $LensDFConfig = $Param{DynamicFieldConfig};
+    # if not explicitly deactivated we assume being on an edit mask
+    my $EditFieldValue = $Param{EditFieldValue} // 1;
+    my $LensDFConfig   = $Param{DynamicFieldConfig};
 
 # Rother OSS / ITSMConfigurationManagement
 #    my $AttributeDFConfig = $Self->_GetAttributeDFConfig(
 #        LensDynamicFieldConfig => $LensDFConfig,
 #    );
 # EO ITSMConfigurationManagement
+
+    # Get the dynamic field config for the referenced object
+    my $ReferenceDFConfig = $Self->_GetReferenceDFConfig(
+        LensDynamicFieldConfig => $LensDFConfig,
+    );
+
+    my $ObjectIDOrName = $ReferenceDFConfig->{FieldType} =~ /^Customer/ ? 'ObjectName' : 'ObjectID';
 
     # in set case, we iterate over the values and set them one by one
     if ( $Param{Set} ) {
@@ -162,8 +178,13 @@ sub ValueSet {
             my $ReferencedObjectID = $Self->_GetReferencedObjectID(
                 ObjectID               => $Param{ObjectID},
                 LensDynamicFieldConfig => $LensDFConfig,
-                EditFieldValue         => $Param{EditFieldValue} // 1,
+                EditFieldValue         => $EditFieldValue,
             );
+
+            # clean up object id in case that ObjectName is passed to not collide
+            if ( $ObjectIDOrName eq 'ObjectName' ) {
+                delete $Param{ObjectID};
+            }
 
             next INDEX unless $ReferencedObjectID;
 
@@ -181,7 +202,7 @@ sub ValueSet {
                 EditFieldValue     => 0,
                 Set                => 0,
                 DynamicFieldConfig => $AttributeDFConfig,
-                ObjectID           => $ReferencedObjectID,
+                $ObjectIDOrName    => $ReferencedObjectID,
             );
         }
         return 1;
@@ -191,10 +212,15 @@ sub ValueSet {
     my $ReferencedObjectID = $Self->_GetReferencedObjectID(
         ObjectID               => $Param{ObjectID},
         LensDynamicFieldConfig => $LensDFConfig,
-        EditFieldValue         => $Param{EditFieldValue} // 1,
+        EditFieldValue         => $EditFieldValue,
     );
 
     return unless $ReferencedObjectID;
+
+    # clean up object id in case that ObjectName is passed to not collide
+    if ( $ObjectIDOrName eq 'ObjectName' ) {
+        delete $Param{ObjectID};
+    }
 
 # Rother OSS / ITSMConfigurationManagement
     my $AttributeDFConfig = $Self->_GetAttributeDFConfig(
@@ -208,7 +234,7 @@ sub ValueSet {
         ConfigItemHandled  => 0,
         EditFieldValue     => 0,
         DynamicFieldConfig => $AttributeDFConfig,
-        ObjectID           => $ReferencedObjectID,
+        $ObjectIDOrName    => $ReferencedObjectID,
     );
 }
 
