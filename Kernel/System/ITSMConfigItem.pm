@@ -960,7 +960,7 @@ sub ConfigItemUpdate {
     # get current config item, including info from the last version
     my $ConfigItem = $Self->ConfigItemGet(
         ConfigItemID  => $Param{ConfigItemID},
-        DynamicFields => ( @DynamicFieldNames ? 1 : 0 ),
+        DynamicFields => 1,
     );
 
     my $ClassList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
