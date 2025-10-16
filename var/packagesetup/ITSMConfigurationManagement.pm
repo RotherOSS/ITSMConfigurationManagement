@@ -29,7 +29,7 @@ use List::Util qw(pairs);
 
 # OTOBO modules
 use Kernel::Language              qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::DB',
@@ -39,6 +39,7 @@ our @ObjectDependencies = (
     'Kernel::System::GeneralCatalog::PreferencesDB',
     'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::Group',
+    'Kernel::System::ImportExport',
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
     'Kernel::System::Log',
@@ -244,6 +245,9 @@ sub CodeUninstall {
     #   of object type config item
     #   of field type ITSMConfigItemReference and ITSMConfigItemVersionReference
     $Self->_DynamicFieldsDelete();
+
+    # clean up ImportExport templates
+    $Self->_ConfigItemImportExportTemplatesDelete();
 
     # delete all links with configuration items
     $Self->_LinkDelete();
@@ -935,6 +939,43 @@ sub _ConfigItemLinkDelete {
             'Priority' => 'error',
             'Message'  => "Could not delete rows of table configitem_link!",
         );
+    }
+
+    return 1;
+}
+
+=head2 _ConfigItemImportExportTemplatesDelete()
+
+Deletes all ImportExport templates with object type ConfigItem.
+
+    my $Result = $CodeObject->_ConfigItemImportExportTemplatesDelete();
+
+=cut
+
+sub _ConfigItemImportExportTemplatesDelete {
+    my ( $Self, %Param ) = @_;
+
+    my $ImportExportObject = $Kernel::OM->Get('Kernel::System::ImportExport');
+
+    my $TemplateIDList = $ImportExportObject->TemplateList(
+        Object => 'ITSMConfigItem',
+        UserID => 1,
+    );
+    return 1 unless IsArrayRefWithData($TemplateIDList);
+
+    for my $TemplateID ( $TemplateIDList->@* ) {
+
+        # delete template from database
+        my $DeleteSuccess = $ImportExportObject->TemplateDelete(
+            TemplateID => $TemplateID,
+            UserID     => 1,
+        );
+        if ( !$DeleteSuccess ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                'Priority' => 'error',
+                'Message'  => "Could not delete ImportExport template of type ITSMConfigItem with ID $TemplateID!",
+            );
+        }
     }
 
     return 1;
