@@ -171,7 +171,7 @@ sub ConfigItemAcl {
 
         if ( $Module->{ReturnSubType} ) {
 
-            # TODO: this looks broken. $Module->{ReturnSubType} is a hashref, yet the value is derefenced as an array
+            # TODO: this looks broken. $Module->{ReturnSubType} is a hashref, yet the value is dereferenced as an array
             if ( ref( $Module->{ReturnSubType} ) eq 'HASH' ) {
                 next MODULENAME if !grep { $Param{ReturnSubType} eq $_ }
                     @{ $Module->{ReturnSubType} };
@@ -953,7 +953,7 @@ static config item data stored in the DB) with the required data to use as a bas
         },
 
         ResponsibleID    => 123,                      # Optional
-        NewResponsibleID => 123,                      # Optional, ResponsibleID or NewResposibleID
+        NewResponsibleID => 123,                      # Optional, ResponsibleID or NewResponsibleID
                                                       #   can be used and they both refers to
                                                       #     ResponsibleID
         Responsible      => 'some user login'         # Optional
@@ -1022,6 +1022,12 @@ sub _GetChecks {
 
         # keep database config item data separated since the reference is affected below
         $ChecksDatabase{ConfigItem} = \%{$ConfigItem};
+    }
+    else {
+        $Checks{ConfigItem} = {
+            Class   => $Param{Class},
+            ClassID => $Param{ClassID},
+        };
     }
 
     # check for dynamic fields

@@ -200,12 +200,13 @@ sub Run {
                 }
             }
 
-            # TODO Prio3: set default data
-            #else {
-            #for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
-            #    $GetParam{$Param} = ;
-            #}
-            #}
+            else {
+                %GetParam = (
+                    %GetParam,
+                    $ConfigItem->%*,
+                );
+                delete $GetParam{ConfigItemID};
+            }
         }
 
         else {
@@ -248,6 +249,9 @@ sub Run {
         for my $Param (qw(Name VersionString DeplStateID InciStateID Description)) {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
         }
+
+        # special case for class
+        $GetParam{ClassID} = $ConfigItem->{ClassID};
 
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
@@ -1295,7 +1299,7 @@ sub Run {
         NoJavaScript => 1,
     );
 
-    # take the safe content if neccessary
+    # take the safe content if necessary
     if ( $SafeContent{Replace} ) {
         $FieldContent = $SafeContent{String};
     }
@@ -1375,7 +1379,7 @@ sub Run {
                     }
                 }
 
-                # weed out multiple occurances of dynamic fields - see comment above
+                # weed out multiple occurrences of dynamic fields - see comment above
                 $Section->{Content} = $Self->_DiscardFieldsSeen(
                     Content => $Section->{Content},
                     Seen    => $FieldsSeen,
