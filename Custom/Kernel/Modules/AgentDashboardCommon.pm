@@ -394,7 +394,7 @@ sub Run {
         for my $ColumnName (
 # Rother OSS / ITSMConfigurationManagement
 #             qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID)
-            qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID Class)
+            qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID Class CurDeplState CurInciState)
 # EO ITSMConfigurationManagement
             )
         {
