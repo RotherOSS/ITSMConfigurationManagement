@@ -177,11 +177,11 @@ sub CodeReinstall {
     return 1;
 }
 
-=head2 CodeUpgradeFromLowerThan_10_0_3()
+=head2 CodeUpgradeFromLowerThan_11_0_7()
 
-This function is only executed if the installed module version is smaller than 10.0.3.
+This function is only executed if the installed module version is smaller than 11.0.7.
 
-my $Result = $CodeObject->CodeUpgradeFromLowerThan_10_0_3();
+my $Result = $CodeObject->CodeUpgradeFromLowerThan_11_0_7();
 
 =cut
 
