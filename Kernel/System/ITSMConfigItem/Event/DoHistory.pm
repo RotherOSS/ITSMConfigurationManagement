@@ -123,7 +123,7 @@ sub Run {
     if ( !exists $Dispatcher{ $Param{Event} } ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'non existant history type: ' . $Param{Event},
+            Message  => 'non existent history type: ' . $Param{Event},
         );
 
         return;
