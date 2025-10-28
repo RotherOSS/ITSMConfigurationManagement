@@ -1057,7 +1057,7 @@ sub ConfigItemUpdate {
         ClassID => $ConfigItem->{ClassID},
     );
 
-    my %SkipForUdateDFs;
+    my %SkipForUpdateDFs;
 
     # check for changed dynamic fields to trigger versions and filter history entries
     if (@DynamicFieldNames) {
@@ -1084,7 +1084,7 @@ sub ConfigItemUpdate {
             {
                 # do not pass unchanged dynamic fields to VersionUpdate()
                 # store them for VersionAdd() because of potential difference from ExternalSource
-                $SkipForUdateDFs{"DynamicField_$Name"} = delete $Param{"DynamicField_$Name"};
+                $SkipForUpdateDFs{"DynamicField_$Name"} = delete $Param{"DynamicField_$Name"};
 
                 next NAME;
             }
@@ -1101,7 +1101,7 @@ sub ConfigItemUpdate {
         my $Success = $Self->VersionAdd(
             Description => $ConfigItem->{Description} // '',
             %Param,
-            %SkipForUdateDFs,
+            %SkipForUpdateDFs,
             LastVersion => $ConfigItem,
         );
         return unless $Success;
