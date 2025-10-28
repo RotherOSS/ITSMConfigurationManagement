@@ -256,6 +256,7 @@ sub Run {
         DYNAMICFIELD:
         for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
             next DYNAMICFIELD unless IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELD if $DynamicFieldConfig->{Readonly};
 
             # extract the dynamic field value from the web request
             $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
@@ -728,6 +729,7 @@ sub Run {
             DYNAMICFIELD:
             for my $DynamicField ( $DynamicFieldList->@* ) {
                 next DYNAMICFIELD if !IsHashRefWithData($DynamicField);
+                next DYNAMICFIELD if $DynamicField->{Readonly};
 
                 $ConfigItem->{ 'DynamicField_' . $DynamicField->{Name} } = $DynamicFieldValues{ $DynamicField->{Name} };
             }
