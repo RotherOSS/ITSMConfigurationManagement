@@ -24,7 +24,7 @@ use utf8;
 
 # core modules
 use Encode;
-use List::AllUtils qw(pairwise);
+use List::AllUtils qw(first pairwise);
 use MIME::Base64   qw(decode_base64 encode_base64);
 
 # CPAN modules
@@ -785,15 +785,21 @@ sub ExportDataGet {
 
             # The Key encodes some extra information.
             # Note that the indexes start at 1 in the key names
-            my ( $DFFullName, $Index ) = split /::/, $Key;
+            my ( $DFFullName, $Index, $InnerDF, $InnerIndex ) = split /::/, $Key;
             my $DFName;
             if ( $DFFullName =~ /^DynamicField_(.*)/ ) {
                 $DFName = $1;
             }
+            my $FieldConfig = $Definition->{DynamicFieldRef}{$DFName};
+
+            next MAPPINGOBJECT unless IsHashRefWithData($FieldConfig);
 
             # ignore unexpected indexes, but still cut the '::'
             if ( defined $Index && $Index !~ m/^[1-9][0-9]*$/ ) {
                 undef $Index;
+            }
+            if ( defined $InnerIndex && $InnerIndex !~ m/^[1-9][0-9]*$/ ) {
+                undef $InnerIndex;
             }
 
             my $Value = $ConfigItem->{$DFFullName};
@@ -805,8 +811,8 @@ sub ExportDataGet {
             }
 
             # The formatting depends on the config of the dynamic field, which is not really nice.
-            my $IsMultiValue = $Definition->{DynamicFieldRef}->{$DFName}->{Config}->{MultiValue} ? 2 : 0;
-            my $IsSet        = ( $Definition->{DynamicFieldRef}->{$DFName}->{FieldType} // '' ) eq 'Set';
+            my $IsMultiValue = $FieldConfig->{Config}->{MultiValue} ? 2 : 0;
+            my $IsSet        = ( $FieldConfig->{FieldType} // '' ) eq 'Set';
 
             # handle special cases
             my $ActualValue = eval {
@@ -826,6 +832,44 @@ sub ExportDataGet {
                 # the default
                 return $Value;
             };
+
+            # check if we are dealing with a set-inner field
+            if ($InnerDF) {
+
+                # fetch and set field config
+                my $InnerFieldItem   = first { $_->{DF} eq $InnerDF } $FieldConfig->{Config}{Include}->@*;
+                my $InnerFieldConfig = $InnerFieldItem->{Definition};
+
+                next MAPPINGOBJECT unless IsHashRefWithData($InnerFieldConfig);
+
+                # set value
+                my $InnerValue = $ActualValue->{$InnerDF};
+
+                if ( !defined $InnerValue ) {
+                    push @RowItems, '';
+
+                    next MAPPINGOBJECT;
+                }
+
+                # The formatting depends on the config of the dynamic field, which is not really nice.
+                my $InnerIsMultiValue = $InnerFieldConfig->{Config}{MultiValue} ? 2 : 0;
+
+                # handle special cases
+                my $ActualInnerValue = eval {
+
+                    # a specific index was requested
+                    if ( $InnerIsMultiValue && $InnerIndex ) {
+                        return $InnerValue->[ $InnerIndex - 1 ] // '';    # as if an empty string were not valid
+                    }
+
+                    # get first element for single value fields
+                    return $InnerValue->[0] // '' if ( !$InnerIsMultiValue && ref $InnerValue eq 'ARRAY' );
+
+                    # the default
+                    return $InnerValue;
+                };
+                $ActualValue = $ActualInnerValue;
+            }
 
             # This is relevant for e.g. the CSV backend which can't transparently serialize data structures.
             # References are JSONified. This happens when:
