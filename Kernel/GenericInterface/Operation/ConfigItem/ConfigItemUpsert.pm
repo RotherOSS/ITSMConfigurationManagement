@@ -292,7 +292,6 @@ sub Run {
 
         # check whether this item exists (update) or is new (create)
         my $ConfigItemID;
-        my $ConfigItemNumber;
 
         # prepare search
         my %SearchParam = (
@@ -300,10 +299,30 @@ sub Run {
         );
         ATTRIBUTE:
         for my $Attribute ( $Identifier->@* ) {
-            if ( $Attribute =~ /^Dyn/ ) {
-                $SearchParam{$Attribute} = {
-                    Equals => $RemoteCIData->{$Attribute},
-                };
+
+            # if number or config item id are defined as identifiers, use only this
+            if ( $Attribute eq 'Number' ) {
+                if ( $RemoteCIData->{Number} ) {
+                    $ConfigItemID = $ConfigItemObject->ConfigItemLookup(
+                        ConfigItemNumber => $RemoteCIData->{Number},
+                    );
+                }
+
+                last ATTRIBUTE;
+            }
+            elsif ( $Attribute eq 'ConfigItemID' ) {
+                my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                    ConfigItemID => $RemoteCIData->{ConfigItemID},
+                );
+
+                if ( IsHashRefWithData($ConfigItem) ) {
+                    $ConfigItemID = $RemoteCIData->{ConfigItemID};
+                }
+                else {
+                    $ConfigItemID = '';
+                }
+
+                last ATTRIBUTE;
             }
             elsif ( $Attribute eq 'Classes' ) {
                 $SearchParam{Classes} = [ $RemoteCIData->{Class} ];
@@ -314,30 +333,12 @@ sub Run {
             elsif ( $Attribute eq 'DeplStates' ) {
                 $SearchParam{DeplStates} = [ $RemoteCIData->{DeploymentState} ];
             }
-            elsif ( $Attribute eq 'Number' ) {
-                $ConfigItemNumber = $RemoteCIData->{Number};
-
-                last ATTRIBUTE;
+            elsif ( $Attribute =~ /^Dyn/ ) {
+                $SearchParam{$Attribute} = {
+                    Equals => $RemoteCIData->{$Attribute},
+                };
             }
-            elsif ( $Attribute eq 'ConfigItemID' ) {
-                my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-                    ConfigItemID => $RemoteCIData->{ConfigItemID},
-                );
 
-                if ( !$ConfigItem ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'notice',
-                        Message  => "Not importing items in class $RequiredAttributes{Class} - skipping.",
-                    );
-                    push @CIsHandled, {};
-
-                    next CI;
-                }
-
-                $ConfigItemID = $RemoteCIData->{ConfigItemID};
-
-                last ATTRIBUTE;
-            }
             else {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'notice',
@@ -349,27 +350,36 @@ sub Run {
             }
         }
 
-        # if neither Number nor ID are provided directly, perform a the search
-        if ($ConfigItemNumber) {
-            $ConfigItemID = $ConfigItemObject->ConfigItemLookup(
-                ConfigItemNumber => $RemoteCIData->{Number},
-            );
-        }
-        elsif ( !$ConfigItemID ) {
-            my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParam);
+        if ( !defined $ConfigItemID ) {
 
-            $ConfigItemID = $ConfigItemIDs[0];
+            # avoid executing a search with empty search params (excluding 'Result => "ARRAY"' from meaningful params)
+            my $PerformSearch = 0;
+            SEARCHPARAMKEY:
+            for my $SearchParamKey ( keys %SearchParam ) {
+                if ( $SearchParamKey ne 'Result' && $SearchParam{$SearchParamKey} ) {
+                    $PerformSearch = 1;
 
-            if ( scalar @ConfigItemIDs > 1 ) {
-                my $SearchParameters = join( ';', map {"$_ => $SearchParam{$_}"} keys %SearchParam );
+                    last SEARCHPARAMKEY;
+                }
+            }
 
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'notice',
-                    Message  => "Cannot use ambiguous search result - skipping. Parameters: $SearchParameters;",
-                );
-                push @CIsHandled, {};
+            if ($PerformSearch) {
 
-                next CI;
+                my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(%SearchParam);
+
+                if ( scalar @ConfigItemIDs > 1 ) {
+                    my $SearchParameters = join( ';', map {"$_ => $SearchParam{$_}"} keys %SearchParam );
+
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'notice',
+                        Message  => "Cannot use ambiguous search result - skipping. Parameters: $SearchParameters;",
+                    );
+                    push @CIsHandled, {};
+
+                    next CI;
+                }
+
+                $ConfigItemID = $ConfigItemIDs[0];
             }
         }
 

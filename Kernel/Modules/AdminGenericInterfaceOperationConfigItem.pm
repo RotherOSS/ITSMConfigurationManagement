@@ -651,7 +651,7 @@ sub _ShowScreen {
             Data => {},
         );
 
-        for my $Setting ( $Self->{Settings}{$Section}->@* ) {
+        for my $Setting ( sort { $a->{Name} cmp $b->{Name} } $Self->{Settings}{$Section}->@* ) {
             my $SettingHTML;
             if ( $Setting->{Type} eq 'Array' ) {
                 $SettingHTML = $LayoutObject->BuildSelection(
