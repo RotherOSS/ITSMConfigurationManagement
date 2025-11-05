@@ -279,11 +279,11 @@ sub ActionRow {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 
     # add translations for the allocation lists for regular columns
-    my $Columns = $Self->{Config}->{DefaultColumns} || {};
-    if ( $Columns && IsHashRefWithData($Columns) ) {
+    my $Columns = $Self->{ColumnsAvailable};
+    if ( $Columns && IsArrayRefWithData($Columns) ) {
 
         COLUMN:
-        for my $Column ( sort keys %{$Columns} ) {
+        for my $Column ( $Columns->@* ) {
 
             # dynamic fields will be translated in the next block
             next COLUMN if $Column =~ m{ \A DynamicField_ }xms;
