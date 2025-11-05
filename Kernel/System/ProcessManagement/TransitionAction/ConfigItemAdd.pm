@@ -20,6 +20,8 @@ use strict;
 use warnings;
 use utf8;
 
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
+
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
@@ -224,14 +226,14 @@ sub Run {
     # add dynamic fields
     CONFIGPARAM:
     for my $ConfigParam ( keys $Param{Config}->%* ) {
-        $ConfigParam  =~ /^DynamicField_(.+)/;
-        my $FieldName = $1;
+        next CONFIGPARAM if $ConfigParam !~ /^DynamicField_(.+)/;
 
-        next CONFIGPARAM unless $FieldName;
-
+        my $FieldName    = $1;
         my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
             Name => $FieldName,
         );
+
+        next CONFIGPARAM if !IsHashRefWithData( $DynamicField );
 
         # for set fields we need to map the name of the inner fields
         if ( $DynamicField && $DynamicField->{FieldType} eq 'Set' && ref $Param{Config}{ $ConfigParam } ) {
