@@ -16,9 +16,18 @@
 
 package Kernel::Modules::AgentITSMConfigItemPrint;
 
+use v5.24;
 use strict;
 use warnings;
+use namespace::autoclean;
+use utf8;
 
+# core modules
+use List::Util qw(any);
+
+# CPAN modules
+
+# OTOBO modules
 use Kernel::Language                qw(Translatable);
 use Kernel::System::VariableCheck   qw(IsArrayRefWithData);
 
@@ -227,11 +236,17 @@ sub Run {
         ConfigItem => $ConfigItem,
     );
 
+    my %Sections = $Self->_GetCISections(
+        ConfigItem => $ConfigItem,
+    );
+
     # output version infos
     $Self->_PDFOutputVersionInfos(
         Page          => \%Page,
         Version       => $ConfigItem,
         VersionNumber => $VersionNumber,
+        DFSections    => $Sections{DFSections},
+        Description   => $Sections{Description},
     );
 
     # output attachments
@@ -245,8 +260,9 @@ sub Run {
 
     # output internal back links
     $Self->_PDFOutputBacklinks(
-        Page       => \%Page,
-        ConfigItem => $ConfigItem,
+        Page         => \%Page,
+        ConfigItem   => $ConfigItem,
+        LinkSections => $Sections{LinkSections},
     );
 
     # output linked objects
@@ -605,6 +621,70 @@ sub _PDFOutputAttachments {
     return 1;
 }
 
+sub _GetCISections {
+    my ( $Self, %Param ) = @_;
+
+    my $Definition = $Kernel::OM->Get('Kernel::System::ITSMConfigItem')->DefinitionGet(
+        DefinitionID => $Param{ConfigItem}{DefinitionID},
+    );
+
+    return if !$Definition->{DynamicFieldRef};
+    return if !$Definition->{DefinitionRef};
+
+    my $Description;
+    my @LinkSections;
+    my @DFSections;
+    my %SectionsSeen;
+    my %GroupLookup;
+
+    PAGE:
+    for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+
+        # Interfaces is optional, effectively default to [ 'Agent' ]
+        if ( $Page->{Interfaces} ) {
+            next PAGE unless any { $_ eq 'Agent' } $Page->{Interfaces}->@*;
+        }
+
+        if ( $Page->{Groups} ) {
+            if ( !%GroupLookup ) {
+                %GroupLookup = reverse $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
+                    UserID => $Self->{UserID},
+                    Type   => 'ro',
+                );
+            }
+
+            # grant access to the page only when the user is in one of the specified groups
+            next PAGE unless any { $GroupLookup{$_} } $Page->{Groups}->@*;
+        }
+
+        SECTION:
+        for my $SectionConfig ( $Page->{Content}->@* ) {
+            my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
+
+            next SECTION if $SectionsSeen{ $SectionConfig->{Section} }++;
+            next SECTION unless $Section;
+
+            if ( $Section->{Type} && $Section->{Type} ne 'DynamicFields' ) {
+                if ( $Section->{Type} eq 'Description' ) {
+                    $Description = 1;
+                }
+                elsif ( $Section->{Type} eq 'ConfigItemLinks' ) {
+                    push @LinkSections, $Section;
+                }
+            }
+            else {
+                push @DFSections, $Section;
+            }
+        }
+    }
+
+    return (
+        Description  => $Description,
+        DFSections   => \@DFSections,
+        LinkSections => \@LinkSections,
+    );
+}
+
 sub _PDFOutputVersionInfos {
     my ( $Self, %Param ) = @_;
 
@@ -679,7 +759,7 @@ sub _PDFOutputVersionInfos {
         },
     ];
 
-    if ( $Param{Version}{Description} ) {
+    if ( $Param{Description} && $Param{Version}{Description} ) {
         my $PlainDescription = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii( String => $Param{Version}{Description} );
         $PlainDescription    =~ s/^[\n\r]+//;
         $PlainDescription    =~ s/[\n\r]+$//;
@@ -699,6 +779,7 @@ sub _PDFOutputVersionInfos {
     # add dynamic field data to table
     $Self->_PDFOutputDFOutput(
         ConfigItem => $Param{Version},
+        DFSections => $Param{DFSections},
         TableData  => $Table,
     );
 
@@ -753,11 +834,14 @@ sub _PDFOutputDFOutput {
     return if !$Definition->{DefinitionRef};
 
     my @DFOrdered;
+    my %DFSeen;
     my $GrepDF;
     $GrepDF = sub {
         ENTRY:
         for my $Entry (@_) {
             if ( $Entry->{DF} ) {
+                next ENTRY if $DFSeen{ $Entry->{DF} }++;
+
                 push @DFOrdered, $Entry->{DF};
             }
             elsif ( $Entry->{Grid} && $Entry->{Grid}{Rows} ) {
@@ -768,16 +852,11 @@ sub _PDFOutputDFOutput {
         }
     };
 
-    for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
+    SECTION:
+    for my $Section ( @{ $Param{DFSections} // [] } ) {
+        next SECTION if !$Section->{Content};
 
-        SECTION:
-        for my $SectionConfig ( $Page->{Content}->@* ) {
-            my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
-
-            next SECTION if !$Section->{Content};
-
-            $GrepDF->( $Section->{Content}->@* );
-        }
+        $GrepDF->( $Section->{Content}->@* );
     }
 
     my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -834,26 +913,10 @@ sub _PDFOutputBacklinks {
         DefinitionID => $Param{ConfigItem}{DefinitionID},
     );
 
+    my @BacklinkSections = @{ $Param{LinkSections} // [] };
+
     return if !$Definition->{DefinitionRef};
-
-    my %BacklinkSections;
-
-    PAGE:
-    for my $Page ( $Definition->{DefinitionRef}{Pages}->@* ) {
-        next PAGE if $Page->{Interfaces} && !grep { $_ eq 'Agent' } $Page->{Interfaces}->@*;
-
-        SECTION:
-        for my $SectionConfig ( $Page->{Content}->@* ) {
-            my $Section = $Definition->{DefinitionRef}{Sections}{ $SectionConfig->{Section} };
-
-            next SECTION if !$Section->{Type};
-            next SECTION if $Section->{Type} ne 'ConfigItemLinks';
-
-            $BacklinkSections{ $SectionConfig->{Section} } = $Section;
-        }
-    }
-
-    return 1 unless %BacklinkSections;
+    return 1 if !@BacklinkSections;
 
     my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
     my $PDFObject        = $Kernel::OM->Get('Kernel::System::PDF');
@@ -862,7 +925,7 @@ sub _PDFOutputBacklinks {
     my $DefaultHeader = $LayoutObject->{LanguageObject}->Translate('Referenced by');
 
     SECTION:
-    for my $Section ( values %BacklinkSections ) {
+    for my $Section ( @BacklinkSections ) {
 
         my $Direction = $Section->{LinkedAs} || 'Source';
         my $Types     = IsArrayRefWithData( $Section->{LinkTypes} ) ? $Section->{LinkTypes} : undef;
@@ -875,7 +938,7 @@ sub _PDFOutputBacklinks {
             UserID       => 1,
         );
 
-        next SECTION if !$LinkedConfigItems;
+        next SECTION if !@{ $LinkedConfigItems // [] };
 
         my %LinkedClasses;
 
