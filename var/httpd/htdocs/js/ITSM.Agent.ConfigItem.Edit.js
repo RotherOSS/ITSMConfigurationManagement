@@ -44,6 +44,11 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
             }
         });
 
+        HideShowCompletePageSection( $('#ClassItem > .Content > fieldset') );
+        Core.App.Subscribe('Event.AJAX.FormUpdate.Callback', function() {
+            HideShowCompletePageSection( $('#ClassItem > .Content > fieldset') )
+        });
+
         OpenRelevantPages();
         $('form').on('submit', OpenRelevantPages);
     };
@@ -67,6 +72,55 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
         });
         if (!$RelevantDetailsOpened) {
             $('details:first-of-type').attr('open', true);
+        }
+    }
+
+    /**
+     * @function
+     * @description
+     *      HideShow a section or page header if the complete content is ACLHidden
+     */
+    function HideShowCompletePageSection( $Element, IsPage ) {
+        if ( !IsPage ) {
+            $Element.children("details.PageContent").each( function() {
+                HideShowCompletePageSection( $(this), true )
+            });
+        }
+
+        let HidePage = true;
+
+        $Element.children(".Row_SectionHeader").each( function() {
+            let $SectionRows = $(this).nextUntil(".Row_SectionHeader"),
+                VisibleRows  = $SectionRows.filter(":not(.oooACLHidden)").length > 0;
+
+            if ( $(this).hasClass("oooACLHidden") ) {
+                if ( VisibleRows ) {
+                    $(this).removeClass("oooACLHidden");
+                    HidePage = false;
+                }
+            }
+
+            else {
+                if ( !VisibleRows ) {
+                    $(this).addClass("oooACLHidden");
+                }
+                else {
+                    HidePage = false;
+                }
+            }
+        });
+
+        if ( IsPage ) {
+            if ( $Element.hasClass("oooACLHidden") ) {
+                if ( !HidePage ) {
+                    $Element.removeClass("oooACLHidden");
+                }
+            }
+            else {
+                if ( HidePage ) {
+                    $Element.addClass("oooACLHidden");
+                }
+            }
         }
     }
 
