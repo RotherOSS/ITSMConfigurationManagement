@@ -1896,7 +1896,9 @@ sub _MappingObjectAttributesGet {
         my $DFDetails          = $DynamicFieldConfig->{Config};
 
         # the version without prefix is always possible
-        {
+        #   despite for Set fields, which is controlled by CountMaxSetOuterLimit
+        if ( $DynamicFieldConfig->{FieldType} ne 'Set' || $Param{CountMaxSetOuterLimit} ) {
+
             # create key string, including a potential prefix and a potential count
             my $Key = join '::',
                 ( $Param{KeyPrefix} || () ),
