@@ -1883,7 +1883,7 @@ sub _MappingObjectAttributesGet {
 
     # check params
     for my $CountMaxAttr (qw(CountMaxLimit CountMaxSetOuterLimit CountMaxSetInnerLimit)) {
-        return unless $Param{$CountMaxAttr};
+        return unless defined $Param{$CountMaxAttr};
         return unless ref $Param{$CountMaxAttr} eq '';
     }
 
