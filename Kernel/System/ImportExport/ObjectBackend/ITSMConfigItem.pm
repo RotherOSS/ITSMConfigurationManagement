@@ -117,9 +117,9 @@ sub ObjectAttributesGet {
             Name  => Translatable('Maximum number of one element'),
             Input => {
                 Type         => 'Text',
-                ValueDefault => '10',
-                Required     => 1,
-                Regex        => qr{ \A \d+ \z }xms,
+                ValueDefault => '3',
+                Required     => 0,
+                Regex        => qr{ \A \d* \z }xms,
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
@@ -131,9 +131,9 @@ sub ObjectAttributesGet {
             Name  => Translatable('Maximum number of one Set dynamic field element'),
             Input => {
                 Type         => 'Text',
-                ValueDefault => '10',
-                Required     => 1,
-                Regex        => qr{ \A \d+ \z }xms,
+                ValueDefault => '0',
+                Required     => 0,
+                Regex        => qr{ \A \d* \z }xms,
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
@@ -145,9 +145,9 @@ sub ObjectAttributesGet {
             Name  => Translatable('Maximum number of one element within a Set dynamic field element'),
             Input => {
                 Type         => 'Text',
-                ValueDefault => '10',
-                Required     => 1,
-                Regex        => qr{ \A \d+ \z }xms,
+                ValueDefault => '0',
+                Required     => 0,
+                Regex        => qr{ \A \d* \z }xms,
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
@@ -201,34 +201,6 @@ Returns:
                     {
                         Key => "NamespaceBoden-Bodenfarbe::3",
                         Value => "NamespaceBoden-Bodenfarbe::3",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::4",
-                        Value => "NamespaceBoden-Bodenfarbe::4",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::5",
-                        Value => "NamespaceBoden-Bodenfarbe::5",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::6",
-                        Value => "NamespaceBoden-Bodenfarbe::6",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::7",
-                        Value => "NamespaceBoden-Bodenfarbe::7",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::8",
-                        Value => "NamespaceBoden-Bodenfarbe::8",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::9",
-                        Value => "NamespaceBoden-Bodenfarbe::9",
-                    },
-                    {
-                        Key => "NamespaceBoden-Bodenfarbe::10",
-                        Value => "NamespaceBoden-Bodenfarbe::10",
                     },
                 ],
                 PossibleNone => 1,
@@ -321,9 +293,9 @@ sub MappingObjectAttributesGet {
     # add elements
     push @Elements, $Self->_MappingObjectAttributesGet(
         DynamicFieldRef       => $Definition->{DynamicFieldRef},    # page layout is ignored here
-        CountMaxLimit         => $ObjectData->{CountMax}         || 10,
-        CountMaxSetOuterLimit => $ObjectData->{CountMaxSetOuter} || 10,
-        CountMaxSetInnerLimit => $ObjectData->{CountMaxSetInner} || 10,
+        CountMaxLimit         => $ObjectData->{CountMax}         || 3,
+        CountMaxSetOuterLimit => $ObjectData->{CountMaxSetOuter} || 0,
+        CountMaxSetInnerLimit => $ObjectData->{CountMaxSetInner} || 0,
     );
 
     return [
@@ -1902,9 +1874,9 @@ C<CountMaxSetInnerLimit> limits the max length of importable arrays of Set dynam
 
     push @Elements, $ObjectBackend->_MappingObjectAttributesGet(
         DynamicFieldRef       => $HashRef,
-        CountMaxLimit         => 10,
-        CountMaxSetOuterLimit => 10,
-        CountMaxSetInnerLimit => 10,
+        CountMaxLimit         => 3,
+        CountMaxSetOuterLimit => 0,
+        CountMaxSetInnerLimit => 0,
     );
 
 =cut
@@ -1953,12 +1925,12 @@ sub _MappingObjectAttributesGet {
 
             # use SetOuter limit for Set fields themselves
             if ( $DynamicFieldConfig->{FieldType} eq 'Set' ) {
-                $CountMax = $Param{CountMaxSetOuterLimit} // 10;
+                $CountMax = $Param{CountMaxSetOuterLimit} // 0;
             }
 
             # use normal limit for everything else
             else {
-                $CountMax = $Param{CountMaxLimit} // 10;
+                $CountMax = $Param{CountMaxLimit} // 3;
             }
         }
 
@@ -2020,7 +1992,7 @@ sub _MappingObjectAttributesGet {
                         }
 
                         my $InnerIsMulti  = $InnerDFDetails->{Multiselect} || $InnerDFDetails->{MultiValue};
-                        my $CountInnerMax = $InnerIsMulti ? ( $Param{CountMaxSetInnerLimit} // 10 ) : 0;
+                        my $CountInnerMax = $InnerIsMulti ? ( $Param{CountMaxSetInnerLimit} // 0 ) : 0;
 
                         for my $CountInner ( 1 .. $CountInnerMax ) {
 
