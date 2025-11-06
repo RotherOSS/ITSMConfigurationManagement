@@ -123,7 +123,6 @@ sub ObjectAttributesGet {
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
-                DataType     => 'IntegerBiggerThanZero',
             },
         },
         {
@@ -137,7 +136,6 @@ sub ObjectAttributesGet {
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
-                DataType     => 'IntegerBiggerThanZero',
             },
         },
         {
@@ -151,7 +149,6 @@ sub ObjectAttributesGet {
                 Translation  => 0,
                 Size         => 5,
                 MaxLength    => 5,
-                DataType     => 'IntegerBiggerThanZero',
             },
         },
         {
