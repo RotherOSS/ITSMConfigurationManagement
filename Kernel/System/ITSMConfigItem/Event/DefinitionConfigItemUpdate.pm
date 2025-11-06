@@ -140,56 +140,8 @@ sub Run {
         ItemID => $Param{Data}{ClassID},
     );
 
-    # if definition updates should trigger the creation of a new version, call VersionAdd
-    if ( grep { $_ eq 'DefinitionUpdate' } @{ $ClassPreferences{VersionTrigger} // [] } ) {
-        for my $ID ( keys %AffectedCIs ) {
-            $ConfigItemObject->VersionAdd(
-                ConfigItemID => $ID,
-                UserID       => $Param{UserID},
-            );
-        }
-    }
-
-    # if we do not need to add a new version, update all affected versions and clear the cache
-    else {
-        $DBObject->Do(
-            SQL => 'UPDATE configitem_version'
-                . ' SET definition_id = ?'
-                . ' WHERE id IN ('
-                . ' SELECT last_version_id'
-                . ' FROM configitem'
-                . ' WHERE class_id = ?'
-                . " AND cur_depl_state_id IN ( $DeplStateString )"
-                . ' )',
-            Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
-        );
-
-        # clear the cache
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-        for my $ID ( keys %AffectedCIs ) {
-            for my $DFData ( 0, 1 ) {
-                $CacheObject->Delete(
-                    Type => $ConfigItemObject->{CacheType},
-                    Key  => join(
-                        '::', 'ConfigItemGet',
-                        ConfigItemID => $ID,
-                        DFData       => $DFData,
-                    ),
-                );
-                $CacheObject->Delete(
-                    Type => $ConfigItemObject->{CacheType},
-                    Key  => join(
-                        '::', 'ConfigItemGet',
-                        VersionID => $AffectedCIs{$ID},
-                        DFData    => $DFData,
-                    ),
-                );
-            }
-        }
-    }
-
-    # if we changed reference dynamic fields, we need to synchronise the link table accordingly
+    # if we are changing reference dynamic fields, we need to synchronise the link table accordingly
+    # this is done before VersionAdd, which will inevitably write the links, too, with the new Config already
     if ( $Param{Data}{OldDefinition} && $Param{Data}{OldDefinition}{DynamicFieldRef} ) {
         my $OldDynamicFieldRef = $Param{Data}{OldDefinition}{DynamicFieldRef} // {};
         my $DefinitionRef      = $ConfigItemObject->DefinitionGet(
@@ -241,6 +193,55 @@ sub Run {
                     ConfigItemVersionID     => $ConfigItem{$ID}{VersionID},
                     ConfigItemLastVersionID => $ConfigItem{$ID}{VersionID},
                     Value                   => $Value,
+                );
+            }
+        }
+    }
+
+    # if definition updates should trigger the creation of a new version, call VersionAdd
+    if ( grep { $_ eq 'DefinitionUpdate' } @{ $ClassPreferences{VersionTrigger} // [] } ) {
+        for my $ID ( keys %AffectedCIs ) {
+            $ConfigItemObject->VersionAdd(
+                ConfigItemID => $ID,
+                UserID       => $Param{UserID},
+            );
+        }
+    }
+
+    # if we do not need to add a new version, update all affected versions and clear the cache
+    else {
+        $DBObject->Do(
+            SQL => 'UPDATE configitem_version'
+                . ' SET definition_id = ?'
+                . ' WHERE id IN ('
+                . ' SELECT last_version_id'
+                . ' FROM configitem'
+                . ' WHERE class_id = ?'
+                . " AND cur_depl_state_id IN ( $DeplStateString )"
+                . ' )',
+            Bind => [ \$Param{Data}{DefinitionID}, \$Param{Data}{ClassID} ],
+        );
+
+        # clear the cache
+        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+        for my $ID ( keys %AffectedCIs ) {
+            for my $DFData ( 0, 1 ) {
+                $CacheObject->Delete(
+                    Type => $ConfigItemObject->{CacheType},
+                    Key  => join(
+                        '::', 'ConfigItemGet',
+                        ConfigItemID => $ID,
+                        DFData       => $DFData,
+                    ),
+                );
+                $CacheObject->Delete(
+                    Type => $ConfigItemObject->{CacheType},
+                    Key  => join(
+                        '::', 'ConfigItemGet',
+                        VersionID => $AffectedCIs{$ID},
+                        DFData    => $DFData,
+                    ),
                 );
             }
         }
