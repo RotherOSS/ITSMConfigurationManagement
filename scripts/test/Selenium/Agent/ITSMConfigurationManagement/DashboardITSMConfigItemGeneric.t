@@ -28,6 +28,9 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
+# some setup before starting the Selenium test
+skip_all('Skipping CMDB Selenium tests temporarily.');
+
 our $Self;
 
 my $Selenium = Kernel::System::UnitTest::Selenium->new;

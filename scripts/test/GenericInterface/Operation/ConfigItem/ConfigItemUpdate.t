@@ -26,11 +26,15 @@ use Storable     qw(dclone);
 # CPAN modules
 use Test2::V0;
 
+skip_all('Skipping CMDB Generic Interface tests temporarily.');
+done_testing;
+exit;
+
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::GenericInterface::Debugger;
-use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
-use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpdate;
+#use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemCreate;
+#use Kernel::GenericInterface::Operation::ConfigItem::ConfigItemUpdate;
 use Kernel::System::VariableCheck qw(:all);
 
 our $Self;

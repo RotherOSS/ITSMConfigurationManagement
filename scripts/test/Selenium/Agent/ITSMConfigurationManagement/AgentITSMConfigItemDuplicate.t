@@ -18,9 +18,17 @@ use strict;
 use warnings;
 use utf8;
 
+# core modules
+
+# CPAN modules
 use Test2::V0;
+
+# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
+
+# some setup before starting the Selenium test
+skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 

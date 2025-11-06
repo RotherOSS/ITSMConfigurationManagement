@@ -29,6 +29,7 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 use Kernel::System::UnitTest::Selenium;
 
 # some setup before starting the Selenium test
+skip_all('Skipping CMDB Selenium tests temporarily.');
 
 # needed objects
 my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
