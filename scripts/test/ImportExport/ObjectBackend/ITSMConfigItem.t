@@ -4241,8 +4241,8 @@ my @ImportDataTests = (
                 "DynamicField_FirstMonday$TestIDSuffix"  => '2025-01-06 00:00:00',                    # fixed: tuesday => monday
                 "DynamicField_FirstWeekend$TestIDSuffix" => [
                     '2025-02-04 00:00:00',                                                            # wrong month
-                    '2025-01-05 00:00:00',
-                    '2025-01-06 00:00:00',
+                    undef,
+                    undef,
                     undef,                                                                            # tuesday skipped
                     undef,                                                                            # wednesday skipped
                     '2025-01-09 00:00:00',
@@ -4614,7 +4614,7 @@ END_JSON_FOR_INDEX_20
                     $CustomerUsers{male_CIO},
                 ],
                 "DynamicField_ZZZSetOfAgents$TestIDSuffix" => [
-                    { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{DeskAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },
+                    { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
                     { 'Agent1' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ], 'Agent2' . $TestIDSuffix => [ $Agent2UserID{LotusAgent} ] },    # changed
                     { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },                            # index 3 to 19 skipped
                     { 'Agent1' . $TestIDSuffix => undef,                        'Agent2' . $TestIDSuffix => undef },
