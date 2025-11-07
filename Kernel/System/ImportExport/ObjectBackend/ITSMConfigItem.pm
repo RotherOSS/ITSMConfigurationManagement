@@ -1483,6 +1483,19 @@ sub ImportDataSave {
 
         if ( $Key =~ m/^DynamicField_(?<DFNameWithIndex>.+)/ ) {
 
+            if ( $EmptyFieldsLeaveTheOldValues ) {
+
+                # do nothing, keep the old value
+                next MAPPING_OBJECT_DATA if !defined $Value;
+
+                if ( ref $Value ) {
+                    next MAPPING_OBJECT_DATA unless IsArrayRefWithData( $Value );
+                }
+                else {
+                    next MAPPING_OBJECT_DATA if $Value eq '';
+                }
+            }
+
             # The key might encompass an index, indicated by '::'.
             # Note that the  indexes are 1-based.
             my ( $DFName, $Index, $InnerDFName, $InnerIndex ) = split /::/, $+{DFNameWithIndex};
