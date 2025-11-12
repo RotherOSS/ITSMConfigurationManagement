@@ -87,7 +87,7 @@ ITSM.Agent.ConfigItem.Edit = (function (TargetNS) {
             });
         }
 
-        let HidePage = true;
+        let HidePage = IsPage && $Element.children(".Row_SectionHeader").length > 0;
 
         $Element.children(".Row_SectionHeader").each( function() {
             let $SectionRows = $(this).nextUntil(".Row_SectionHeader"),
