@@ -2,123 +2,125 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:14+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Hebrew <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/he/>\n"
+"PO-Revision-Date: 2025-12-06 18:00+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
+"Language-Team: Hebrew <http://translate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 5.4.2\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
-msgstr ""
+msgstr "ניהול פריטי תצורה"
 
 #. Template: AdminITSMConfigItem
 msgid "Change class definition"
-msgstr ""
+msgstr "שינוי הגדרת מחלקה"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "סוג פריט תצורה"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
-msgstr ""
+msgstr "הגדרה"
 
 #. Template: AdminITSMConfigItem
 msgid "Change"
-msgstr ""
+msgstr "שינוי"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Incident State"
-msgstr ""
+msgstr "מצב האירוע"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Deployment State"
-msgstr ""
+msgstr "מצב פריסה"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Class"
-msgstr ""
+msgstr "כיתה"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Deployment State Type"
-msgstr ""
+msgstr "סוג מצב הפריסה"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Incident State"
-msgstr ""
+msgstr "מצב האירוע הנוכחי"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Current Incident State Type"
-msgstr ""
+msgstr "סוג מצב האירוע הנוכחי"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
-msgstr ""
+msgstr "שינוי אחרון"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
-msgstr ""
+msgstr "פריט תצורה"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Filter for Classes"
-msgstr ""
+msgstr "מסנן עבור כיתות"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
-msgstr ""
+msgstr "בחר מחלקה מהרשימה כדי ליצור פריט תצורה חדש."
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
-msgstr ""
+msgstr "פעולה מרוכזת של פריט תצורה ITSM"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Deployment state"
-msgstr ""
+msgstr "מצב פריסה"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Incident state"
-msgstr ""
+msgstr "מצב האירוע"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Link to another"
-msgstr ""
+msgstr "קישור לאתר אחר"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "Invalid Configuration Item number!"
-msgstr ""
+msgstr "מספר פריט תצורה לא חוקי!"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "The number of another Configuration Item to link with."
-msgstr ""
+msgstr "מספר פריט תצורה אחר שיש לקשר אליו."
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "האם אתה באמת רוצה למחוק פריט תצורה זה?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
-msgstr ""
+msgstr "שם פריט התצורה הזה"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
+msgstr "השם כבר נמצא בשימוש על ידי ConfigItems עם המספרים הבאים: %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
-msgstr ""
+msgstr "היסטוריית פריט התצורה: %s"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "History Content"
-msgstr ""
+msgstr "תוכן היסטורי"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "זמן יצירה"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -126,15 +128,15 @@ msgstr "מבט זום"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Context Settings"
-msgstr ""
+msgstr "הגדרות הקשר"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
-msgstr ""
+msgstr "פריטי תצורה לדף"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "A generic ITSM Configuration Item table"
-msgstr ""
+msgstr "טבלה כללית של פריטי תצורה ITSM"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -142,199 +144,199 @@ msgstr "הרץ חיפוש"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
-msgstr ""
+msgstr "חפש גם בגרסאות קודמות?"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
-msgstr ""
+msgstr "פריט תצורה"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Information"
-msgstr ""
+msgstr "מידע על פריט תצורה"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Current Deployment State"
-msgstr ""
+msgstr "מצב הפריסה הנוכחי"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
-msgstr ""
+msgstr "שונה לאחרונה על ידי"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show one version"
-msgstr ""
+msgstr "הצג גרסה אחת"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Show all versions"
-msgstr ""
+msgstr "הצג את כל הגרסאות"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Incident State"
-msgstr ""
+msgstr "גרסה מצב האירוע"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Deployment State"
-msgstr ""
+msgstr "מצב פריסת הגרסה"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number"
-msgstr ""
+msgstr "מספר גרסה"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Version Details"
-msgstr ""
+msgstr "פרטי גרסת פריט התצורה"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Property"
-msgstr ""
+msgstr "נכס"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "No access to Class is given!"
-msgstr ""
+msgstr "אין גישה לשיעור!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
-msgstr ""
+msgstr "סקירה כללית: ITSM ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No ConfigItemID is given!"
-msgstr ""
+msgstr "לא ניתן ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You need at least one selected Configuration Item!"
-msgstr ""
+msgstr "אתה צריך לפחות פריט תצורה אחד שנבחר!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
-msgstr ""
+msgstr "אין לך גישה לכתיבה לפריט תצורה זה: %s."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
-msgstr ""
+msgstr "פריט התצורה \"%s\" לא נמצא במסד הנתונים!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Was not able to delete the configitem ID %s!"
-msgstr ""
+msgstr "לא ניתן למחוק את מזהה הפריט %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "No version found for ConfigItemID %s!"
-msgstr ""
+msgstr "לא נמצאה גרסה עבור ConfigItemID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No ConfigItemID, DuplicateID or ClassID is given!"
-msgstr ""
+msgstr "לא ניתן ConfigItemID, DuplicateID או ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
-msgstr ""
+msgstr "אין גישה!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No definition was defined for class %s!"
-msgstr ""
+msgstr "לא הוגדרה הגדרה עבור מחלקה %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
-msgstr ""
+msgstr "לא ניתן להציג את ההיסטוריה, לא ניתן ConfigItemID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
+msgstr "לא ניתן להציג את ההיסטוריה, אין זכויות גישה!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
-msgstr ""
+msgstr "פריט תצורה חדש (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New version (ID=%s)"
-msgstr ""
+msgstr "גרסה חדשה (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "מצב הפריסה עודכן (חדש=%s, ישן=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Incident state updated (new=%s, old=%s)"
-msgstr ""
+msgstr "מצב האירוע עודכן (חדש=%s, ישן=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem (ID=%s) deleted"
-msgstr ""
+msgstr "ConfigItem (ID=%s) נמחק"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) added"
-msgstr ""
+msgstr "קישור ל-%s (type=%s) נוסף"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) deleted"
-msgstr ""
+msgstr "קישור ל-%s (type=%s) נמחק"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem definition updated (ID=%s)"
-msgstr ""
+msgstr "הגדרת ConfigItem עודכנה (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Name updated (new=%s, old=%s)"
-msgstr ""
+msgstr "שם עודכן (חדש=%s, ישן=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Attribute %s updated from \"%s\" to \"%s\""
-msgstr ""
+msgstr "התכונה %s עודכנה מ-\"%s\" ל-\"%s\""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Version %s deleted"
-msgstr ""
+msgstr "גרסה %s נמחקה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
-msgstr ""
+msgstr "לא ניתן ConfigItemID או VersionID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "Can't show config item, no access rights given!"
-msgstr ""
+msgstr "לא ניתן להציג את פריט התצורה, אין זכויות גישה!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr ""
+msgstr "ConfigItemID %s לא נמצא במסד הנתונים!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
-msgstr ""
+msgstr "גרסת ID %s לא נמצאה במסד הנתונים!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
-msgstr ""
+msgstr "פריט תצורה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
-msgstr ""
+msgstr "הודפס על ידי %s ב-%s"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
-msgstr ""
+msgstr "ClassID לא חוקי!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No ClassID is given!"
-msgstr ""
+msgstr "לא ניתן ClassID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No access rights for this class given!"
-msgstr ""
+msgstr "אין זכויות גישה למחלקה זו!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No Result!"
-msgstr ""
+msgstr "אין תוצאות!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Config Item Search Results"
-msgstr ""
+msgstr "תוצאות חיפוש פריטי תצורה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "Can't show item, no access rights for ConfigItem are given!"
-msgstr ""
+msgstr "לא ניתן להציג את הפריט, אין זכויות גישה ל-ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
-msgstr ""
+msgstr "מבצעי"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "warning"
@@ -342,19 +344,19 @@ msgstr "אזהרה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "incident"
-msgstr ""
+msgstr "תקרית"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The deployment state of this config item"
-msgstr ""
+msgstr "מצב הפריסה של פריט תצורה זה"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "The incident state of this config item"
-msgstr ""
+msgstr "מצב התקלה של פריט תצורה זה"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
-msgstr ""
+msgstr "פריטי תצורה מוצגים"
 
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
@@ -362,251 +364,251 @@ msgstr "בין"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
-msgstr ""
+msgstr "מספר מרבי של אלמנט אחד"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Empty fields indicate that the current values are kept"
-msgstr ""
+msgstr "שדות ריקים מציינים שהערכים הנוכחיים נשמרים"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Skipped"
-msgstr ""
+msgstr "דילג"
 
 #. ITSM class bundles
 msgid "Model"
-msgstr ""
+msgstr "מודל"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "חברת הלקוח"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
-msgstr ""
+msgstr "מספר סידורי"
 
 #. ITSM class bundles
 msgid "CPU"
-msgstr ""
+msgstr "מעבד"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Ram"
-msgstr ""
+msgstr "ראם"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Hard Disk"
-msgstr ""
+msgstr "דיסק קשיח"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Capacity"
-msgstr ""
+msgstr "קיבולת"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Adapter"
-msgstr ""
+msgstr "מתאם רשת"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "IP over DHCP"
-msgstr ""
+msgstr "IP באמצעות DHCP"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "IP Address"
-msgstr ""
+msgstr "כתובת IP"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Graphic Adapter"
-msgstr ""
+msgstr "מתאם גרפי"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Other Equipment"
-msgstr ""
+msgstr "ציוד אחר"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Warranty Expiration Date"
-msgstr ""
+msgstr "תאריך תום תוקף האחריות"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Install Date"
-msgstr ""
+msgstr "תאריך התקנה"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 1"
-msgstr ""
+msgstr "טלפון 1"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 2"
-msgstr ""
+msgstr "טלפון 2"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "E-Mail"
-msgstr ""
+msgstr "דואר אלקטרוני"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Network Address"
-msgstr ""
+msgstr "כתובת רשת"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Subnet Mask"
-msgstr ""
+msgstr "מסכת רשת משנה"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Gateway"
-msgstr ""
+msgstr "שער"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Licence Type"
-msgstr ""
+msgstr "סוג הרישיון"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Licence Key"
-msgstr ""
+msgstr "מפתח רישיון"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Quantity"
-msgstr ""
+msgstr "כמות"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Expiration Date"
-msgstr ""
+msgstr "תאריך תפוגה"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Media"
-msgstr ""
+msgstr "מדיה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Computer"
-msgstr ""
+msgstr "מחשב"
 
 #. ITSM class bundles
 msgid "Hardware"
-msgstr ""
+msgstr "חומרה"
 
 #. ITSM class bundles
 msgid "Network"
-msgstr ""
+msgstr "רשת"
 
 #. ITSM class bundles
 msgid "Software"
-msgstr ""
+msgstr "תוכנה"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
-msgstr ""
+msgstr "פג תוקף"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
-msgstr ""
+msgstr "תחזוקה"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Pilot"
-msgstr ""
+msgstr "טייס"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Planned"
-msgstr ""
+msgstr "מתוכנן"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Repair"
-msgstr ""
+msgstr "תיקון"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Retired"
-msgstr ""
+msgstr "בדימוס"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Review"
-msgstr ""
+msgstr "סקירה"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Test/QA"
-msgstr ""
+msgstr "בדיקה/בקרת איכות"
 
 #. ITSM class bundles
 msgid "Laptop"
-msgstr ""
+msgstr "מחשב נייד"
 
 #. ITSM class bundles
 msgid "Desktop"
-msgstr ""
+msgstr "שולחן עבודה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "PDA"
-msgstr ""
+msgstr "PDA"
 
 #. ITSM class bundles
 msgid "Server"
-msgstr ""
+msgstr "שרת"
 
 #. ITSM class bundles
 msgid "Other"
-msgstr ""
+msgstr "אחר"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Monitor"
-msgstr ""
+msgstr "צג"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Printer"
-msgstr ""
+msgstr "מדפסת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Switch"
-msgstr ""
+msgstr "מתג"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Router"
-msgstr ""
+msgstr "נתב"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "WLAN Access Point"
-msgstr ""
+msgstr "נקודת גישה WLAN"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Security Device"
-msgstr ""
+msgstr "מכשיר אבטחה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Backup Device"
-msgstr ""
+msgstr "מכשיר גיבוי"
 
 #. ITSM class bundles
 msgid "Mouse"
-msgstr ""
+msgstr "עכבר"
 
 #. ITSM class bundles
 msgid "Keyboard"
-msgstr ""
+msgstr "מקלדת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Camera"
-msgstr ""
+msgstr "מצלמה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Beamer"
-msgstr ""
+msgstr "מקרן"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Modem"
-msgstr ""
+msgstr "מודם"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "PCMCIA Card"
-msgstr ""
+msgstr "כרטיס PCMCIA"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "USB Device"
-msgstr ""
+msgstr "התקן USB"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Docking Station"
-msgstr ""
+msgstr "תחנת עגינה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Scanner"
-msgstr ""
+msgstr "סורק"
 
 #. ITSM class bundles
 msgid "Building"
-msgstr ""
+msgstr "בנייה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Office"
@@ -614,347 +616,412 @@ msgstr "משרד"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Floor"
-msgstr ""
+msgstr "רצפה"
 
 #. ITSM class bundles
 msgid "Room"
-msgstr ""
+msgstr "חדר"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Rack"
-msgstr ""
+msgstr "מתלה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Workplace"
-msgstr ""
+msgstr "מקום העבודה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Outlet"
-msgstr ""
+msgstr "אאוטלט"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "IT Facility"
-msgstr ""
+msgstr "מתקן IT"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "LAN"
-msgstr ""
+msgstr "רשת מקומית"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "WLAN"
-msgstr ""
+msgstr "רשת אלחוטית"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Telco"
-msgstr ""
+msgstr "חברת תקשורת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "GSM"
-msgstr ""
+msgstr "GSM"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client Application"
-msgstr ""
+msgstr "יישום לקוח"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Middleware"
-msgstr ""
+msgstr "תוכנה אמצעית"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Server Application"
-msgstr ""
+msgstr "יישום שרת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Client OS"
-msgstr ""
+msgstr "מערכת הפעלה של הלקוח"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Server OS"
-msgstr ""
+msgstr "מערכת הפעלה של שרת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Admin Tool"
-msgstr ""
+msgstr "כלי ניהול"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "User Tool"
-msgstr ""
+msgstr "כלי משתמש"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Embedded"
-msgstr ""
+msgstr "משובץ"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Single Licence"
-msgstr ""
+msgstr "רישיון יחיד"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per User"
-msgstr ""
+msgstr "למשתמש"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Processor"
-msgstr ""
+msgstr "לכל מעבד"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Server"
-msgstr ""
+msgstr "לכל שרת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Per Node"
-msgstr ""
+msgstr "לכל צומת"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Volume Licence"
-msgstr ""
+msgstr "רישיון נפח"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Enterprise Licence"
-msgstr ""
+msgstr "רישיון ארגוני"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Developer Licence"
-msgstr ""
+msgstr "רישיון מפתח"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Demo"
-msgstr ""
+msgstr "הדגמה"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Time Restricted"
-msgstr ""
+msgstr "מוגבל בזמן"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Freeware"
-msgstr ""
+msgstr "תוכנה חופשית"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Open Source"
-msgstr ""
+msgstr "קוד פתוח"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Unlimited"
-msgstr ""
+msgstr "ללא הגבלה"
 
 #. JS File: ITSM.Agent.ConfigItem.Zoom
 msgid "Ok"
-msgstr ""
+msgstr "בסדר"
 
 #. SysConfig
 msgid "Assigned CIs"
-msgstr ""
+msgstr "CI שהוקצו"
 
 #. SysConfig
 msgid "CIs assigned to customer company"
-msgstr ""
+msgstr "CI שהוקצו לחברת הלקוח"
 
 #. SysConfig
 msgid "CIs assigned to customer user"
-msgstr ""
+msgstr "CIs שהוקצו למשתמש לקוח"
 
 #. SysConfig
 msgid "CMDB Settings"
-msgstr ""
+msgstr "הגדרות CMDB"
 
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr ""
+"בדוק אם השם ייחודי רק בתוך אותה מחלקת ConfigItem (&#x27;class&#x27;) או "
+"באופן גלובלי (&#x27;global&#x27;), כלומר כל ConfigItem קיים נלקח בחשבון בעת "
+"חיפוש כפילויות."
 
 #. SysConfig
 msgid "Config Items"
-msgstr ""
+msgstr "פריטי תצורה"
 
 #. SysConfig
 msgid "Config item add."
-msgstr ""
+msgstr "הוספת פריט תצורה."
 
 #. SysConfig
 msgid "Config item edit."
-msgstr ""
+msgstr "עריכת פריט תצורה."
 
 #. SysConfig
 msgid "Config item event module that enables logging to history in the agent interface."
-msgstr ""
+msgstr "מודול אירועי פריטי תצורה המאפשר רישום בהיסטוריה בממשק הסוכן."
 
 #. SysConfig
 msgid "Config item history."
-msgstr ""
+msgstr "היסטוריית פריטי התצורה."
 
 #. SysConfig
 msgid "Config item print."
-msgstr ""
+msgstr "הדפסת פריט תצורה."
 
 #. SysConfig
 msgid "Config item zoom."
-msgstr ""
+msgstr "זום פריט תצורה."
 
 #. SysConfig
 msgid "ConfigItemNumber"
-msgstr ""
+msgstr "מספר פריט תצורה"
 
 #. SysConfig
 msgid "Configuration Item Limit"
-msgstr ""
+msgstr "מגבלת פריטי תצורה"
 
 #. SysConfig
 msgid "Configuration Item limit per page."
-msgstr ""
+msgstr "מגבלת פריטי תצורה לכל עמוד."
 
 #. SysConfig
 msgid "Configuration Management Database."
-msgstr ""
+msgstr "מסד נתונים לניהול תצורה."
 
 #. SysConfig
 msgid "Configuration item bulk module."
-msgstr ""
+msgstr "מודול אצווה של פריטי תצורה."
 
 #. SysConfig
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "נתב אחורי לחיפוש פריטי תצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Create and manage the definitions for Configuration Items."
-msgstr ""
+msgstr "יצירת וניהול ההגדרות עבור פריטי תצורה."
 
 #. SysConfig
 msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
 msgstr ""
+"הגדר פעולות שבהן כפתור הגדרות זמין ביישומון האובייקטים המקושרים (LinkObject::"
+"ViewMode = \"complex\"). שימו לב שפעולות אלה חייבות להיות רשומות בקבצי JS ו-"
+"CSS הבאים: Core.AllocationList.css, Core.UI.AllocationList.js, "
+"Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ו-Core.Agent.LinkObject.js."
 
 #. SysConfig
 msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
 msgstr ""
+"מגדיר את ההרשאות הנדרשות ליצירת פריטי תצורה של ITSM באמצעות הממשק הגנרי."
 
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
 msgstr ""
+"מגדיר את ההרשאות הנדרשות למחיקת פריטי תצורה של ITSM באמצעות הממשק הגנרי."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
 msgstr ""
+"מגדיר את ההרשאות הנדרשות כדי להשיג פריטי תצורה של ITSM באמצעות הממשק הגנרי."
 
 #. SysConfig
 msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
 msgstr ""
+"מגדיר את ההרשאות הנדרשות לחיפוש פריטי תצורה של ITSM באמצעות הממשק הגנרי."
 
 #. SysConfig
 msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr ""
+msgstr "מגדיר את ההרשאות הנדרשות לעדכון פריטי תצורת ITSM באמצעות הממשק הגנרי."
 
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr ""
+msgstr "מגדיר מודול סקירה כללית להצגת תצוגה קטנה של רשימת פריטי תצורה."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
 msgstr ""
+"מגדיר ביטויים רגולריים בנפרד עבור כל מחלקת ConfigItem כדי לבדוק את שם ה-"
+"ConfigItem ולהציג הודעות שגיאה מתאימות."
 
 #. SysConfig
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "מגדיר את תת-האובייקט המוגדר כברירת מחדל של המחלקה 'ITSMConfigItem'."
 
 #. SysConfig
 msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr ""
+msgstr "מגדיר את מספר השורות עבור עורך הגדרת CI בממשק הניהול."
 
 #. SysConfig
 msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr ""
+msgstr "מגדיר את סדר מצבי האירוע מהגבוה (למשל, קריטי) לנמוך (למשל, תפקודי)."
 
 #. SysConfig
 msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
 msgstr ""
+"מגדיר את מצבי הפריסה הרלוונטיים שבהם כרטיסים מקושרים יכולים להשפיע על הסטטוס "
+"של CI."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "מגדיר את מגבלת החיפוש עבור מסך AgentITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "מגדיר את מגבלת החיפוש עבור מסך AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
 msgstr ""
+"מגדיר את העמודות המוצגות בסקירת פריטי התצורה. אפשרות זו אינה משפיעה על מיקום "
+"העמודה. הערה: עמודת Class זמינה תמיד אם נבחר המסנן 'All'."
 
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
 msgstr ""
+"מגדיר את העמודות המוצגות בחיפוש פריטי התצורה. אפשרות זו אינה משפיעה על מיקום "
+"העמודה."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"מגדיר את העמודות המוצגות של CI בסקירת פריטי התצורה בהתאם לסוג ה-CI. כל ערך "
+"חייב להיות מוקדם בשם הסוג ובשתי נקודות (כלומר, Computer::). ישנם כמה תכונות "
+"CI המשותפות לכל ה-CI (דוגמה לסוג Computer: Computer::Name, Computer::"
+"CurDeplState, Computer::CreateTime). כדי להציג תכונות CI בודדות כפי שהוגדרו "
+"בהגדרת ה-CI, יש להשתמש בתבנית הבאה (דוגמה למחלקת Computer): "
+"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
+"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. אם אין ערך עבור "
+"סוג CI, העמודות המוגדרות כברירת מחדל מוצגות כפי שהוגדרו בהגדרה "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 msgstr ""
+"מגדיר את העמודות המוצגות של CI בחיפוש פריטי התצורה בהתאם לסוג ה-CI. כל ערך "
+"חייב להיות מוקדם בשם הסוג ובשני נקודותיים (כלומר, Computer::). ישנם כמה "
+"תכונות CI המשותפות לכל ה-CI (דוגמה לסוג Computer: Computer::Name, Computer::"
+"CurDeplState, Computer::CreateTime). כדי להציג תכונות CI בודדות כפי שהוגדרו "
+"בהגדרת ה-CI, יש להשתמש בתבנית הבאה (דוגמה למחלקת Computer): "
+"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
+"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. אם אין ערך עבור "
+"סוג CI, העמודות המוגדרות כברירת מחדל מוצגות כפי שהוגדרו בהגדרה "
+"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"מגדיר את העמודות המוצגות של CI ברכיב התצורה בהתאם לסוג ה-CI. כל ערך חייב "
+"להיות מקדים בשם הסוג ובשתי נקודות כפולות (כלומר, Computer::). ישנם מספר "
+"תכונות CI המשותפות לכל ה-CI (דוגמה לסוג Computer: Computer::Name, Computer::"
+"CurDeplState, Computer::CreateTime). כדי להציג תכונות CI בודדות כפי שהוגדרו "
+"בהגדרת ה-CI, יש להשתמש בתבנית הבאה (דוגמה למחלקת Computer): "
+"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
+"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. אם אין ערך עבור "
+"סוג CI, העמודות המוגדרות כברירת מחדל מוצגות כפי שהוגדרו בהגדרה "
+"AgentCustomerInformationCenter::Backend###0060-CIC-"
+"ITSMConfigItemCustomerCompany (מפתח DefaultColumns)."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
 msgstr ""
+"מגדיר את העמודות המוצגות של CI בטבלת הקישורים בתצוגה מורכבת עבור כל סוגי ה-"
+"CI. אם אין ערך, מוצגות העמודות המוגדרות כברירת מחדל."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
 msgstr ""
+"מגדיר את העמודות המוצגות של CI בטבלת הקישורים במבט מורכב, בהתאם לסוג ה-CI. "
+"כל ערך חייב להיות מקדים בשם הסוג ובשתי נקודות כפולות (כלומר, Computer::). "
+"ישנם כמה תכונות CI המשותפות לכל ה-CI (דוגמה לסוג Computer: Computer::Name, "
+"Computer::CurDeplState, Computer::CreateTime). כדי להציג תכונות CI בודדות "
+"כפי שהוגדרו בהגדרת CI, יש להשתמש בתבנית הבאה (דוגמה למחלקת Computer): "
+"Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, "
+"Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. אם אין ערך למחלקת "
+"CI, יוצגו העמודות המוגדרות כברירת מחדל."
 
 #. SysConfig
 msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
 msgstr ""
+"מגדיר איזה סוג קישור (שנקרא מנקודת המבט של הכרטיס) יכול להשפיע על הסטטוס של "
+"CI מקושר."
 
 #. SysConfig
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "מגדיר איזה סוג כרטיס יכול להשפיע על הסטטוס של CI מקושר."
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "מחק פריט תצורה"
 
 #. SysConfig
 msgid "Deployment State Color"
-msgstr ""
+msgstr "צבע מצב הפריסה"
 
 #. SysConfig
 msgid "Duplicate"
-msgstr ""
+msgstr "כפיל"
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
 msgstr ""
+"מאפשרת לתכונת הפעולה המרוכזת של פריטי תצורה עבור ממשק המשתמש של הסוכן לעבוד "
+"על יותר מפריט תצורה אחד בכל פעם."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
 msgstr ""
+"מאפשרת את תכונת הפעולה המרוכזת של פריטי התצורה רק עבור הקבוצות המפורטות."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
 msgstr ""
+"מאפשר/מבטל את הפונקציונליות לבדיקת שמות ייחודיים ב-ConfigItems. לפני הפעלת "
+"אפשרות זו, עליך לבדוק במערכת שלך אם קיימים פריטי תצורה עם שמות כפולים. ניתן "
+"לעשות זאת באמצעות הסקריפט bin/otobo.ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
+msgstr "מודול אירועים להגדרת configitem-status ב-ticket-configitem-link."
 
 #. SysConfig
 msgid "ITSM config item overview."
-msgstr ""
+msgstr "סקירה כללית של פריטי התצורה של ITSM."
 
 #. SysConfig
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "מודול לבדיקת הקבוצה האחראית על כיתה."
 
 #. SysConfig
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "מודול לבדיקת הקבוצה האחראית על פריט תצורה."
 
 #. SysConfig
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "מודול ליצירת סטטיסטיקות פריטי תצורה של ITSM."
 
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "רישום מודול אחורי של אובייקט עבור מודול הייבוא/ייצוא."
 
 #. SysConfig
 msgid "Overview."
@@ -963,210 +1030,227 @@ msgstr "מבט-על"
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"פרמטרים עבור לוח המחוונים האחורי של פריט התצורה של חברת הלקוח בסקירת ממשק "
+"הסוכן. \"הגבלה\" הוא מספר הערכים המוצגים כברירת מחדל. \"קבוצה\" משמשת להגבלת "
+"הגישה לתוסף (לדוגמה, קבוצה: admin;group1;group2;). \"Default\" קובע אם התוסף "
+"מופעל כברירת מחדל או אם המשתמש צריך להפעיל אותו ידנית. \"CacheTTLLocal\" הוא "
+"זמן המטמון בדקות עבור התוסף."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr ""
+msgstr "פרמטרים עבור צבע מצבי הפריסה בתצוגת ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr ""
+msgstr "פרמטרים עבור מצבי הפריסה בתצוגת ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr ""
+msgstr "פרמטרים עבור קבוצות ההרשאות לדוגמה של תכונות הקטלוג הכללי."
 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "פרמטרים עבור הדפים (בהם מוצגים פריטי התצורה)."
 
 #. SysConfig
 msgid "Permission Group"
-msgstr ""
+msgstr "קבוצת הרשאות"
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך פריט התצורה ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך חיפוש פריטי תצורה ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך הזום של פריט התצורה ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך הוספת פריט תצורה ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך עריכת פריט תצורת ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך פריט התצורה ITSM היסטוריה בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך פריט התצורה ITSM הדפסה בממשק הסוכן."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "הרשאות נדרשות למחיקת פריטי תצורה."
 
 #. SysConfig
 msgid "Search config items."
-msgstr ""
+msgstr "חפש פריטי תצורה."
 
 #. SysConfig
 msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
 msgstr ""
+"בוחר את מודול מחולל המספרים של פריטי התצורה. \"AutoIncrement\" מגדיל את מספר "
+"פריט התצורה, SystemID, ConfigItemClassID והמונה משמשים. הפורמט הוא \"SystemID"
+".ConfigItemClassID.Counter\", לדוגמה 1205000004, 1205000005."
 
 #. SysConfig
 msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr ""
+msgstr "הגדר את מצב האירוע של CI באופן אוטומטי כאשר כרטיס מקושר ל-CI."
 
 #. SysConfig
 msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr ""
+msgstr "קובע את מצב הפריסה במסך התצורה של פריט התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr ""
+msgstr "קובע את מצב האירוע במסך התצורה של פריט התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
 msgstr ""
+"מציג קישור בתפריט המאפשר לקשר פריט תצורה עם אובייקט אחר בתצוגת הזום של פריט "
+"התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
 msgstr ""
+"מציג קישור בתפריט לגישה להיסטוריה של פריט תצורה בסקירת פריטי התצורה בממשק "
+"הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"מציג קישור בתפריט לגישה להיסטוריה של פריט תצורה בתצוגת הזום של ממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט למחיקת פריט תצורה בתצוגת הזום של ממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט לשכפול פריט תצורה בסקירת פריטי התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט לשכפול פריט תצורה בתצוגת הזום של ממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט לעריכת פריט תצורה בתצוגת הזום של ממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט כדי לחזור לתצוגת הזום של פריט התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט להדפסת פריט תצורה בתצוגת הזום של ממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr ""
+msgstr "מציג קישור בתפריט להגדלה של פריט תצורה בסקירת פריטי התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "מציג את היסטוריית פריטי התצורה (בסדר הפוך) בממשק הסוכן."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
 msgstr ""
+"המזהה של פריט תצורה, לדוגמה ConfigItem#, MyConfigItem#. ברירת המחדל היא "
+"ConfigItem#."
 
 #. SysConfig
 msgid "class"
-msgstr ""
+msgstr "כיתה"
 
 #. SysConfig
 msgid "global"
-msgstr ""
+msgstr "גלובלי"
 
 #. SysConfig
 msgid "postproductive"
-msgstr ""
+msgstr "פוסט-פרודוקטיבי"
 
 #. SysConfig
 msgid "preproductive"
-msgstr ""
+msgstr "טרום-פורייה"
 
 #. SysConfig
 msgid "productive"
-msgstr ""
+msgstr "פרודוקטיבי"
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "שינוי הגדרת תפקיד"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
-msgstr ""
+msgstr "חבילות שיעורים Ready2Import"
 
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"כאן תוכלו לייבא חבילות מחלקות Ready2Import המציגות את פריטי התצורה הנפוצים "
+"ביותר שלנו. שימו לב שייתכן שיידרשו תצורות נוספות."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
-msgstr ""
+msgstr "עדכון ישויות קיימות"
 
 #. Template: AdminITSMConfigItem
 msgid "Import Ready2Adopt class bundles"
-msgstr ""
+msgstr "ייבוא חבילות מחלקות Ready2Adopt"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "תפקיד פריט התצורה"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "מספר הגרסה של פריט התצורה הזה"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr ""
+msgstr "מספר הגרסה כבר נמצא בשימוש על ידי ConfigItems עם המספרים הבאים: %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
-msgstr ""
+msgstr "לא נמצאו נתוני פריטי תצורה."
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "Select this config item"
-msgstr ""
+msgstr "בחר פריט תצורה זה"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
-msgstr ""
+msgstr "TreeView עבור ConfigItem"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Depth Level"
-msgstr ""
+msgstr "רמת עומק"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Zoom In/Out"
-msgstr ""
+msgstr "התקרבות/התרחקות"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "Max links level reached for ConfigItem!"
-msgstr ""
+msgstr "רמת הקישורים המרבית שהושגה עבור ConfigItem!"
 
 #. Template: CustomerITSMConfigItem
 msgid "Your ConfigItems"
-msgstr ""
+msgstr "פריטי התצורה שלך"
 
 #. Template: CustomerITSMConfigItemSearch
 msgid "ConfigItem Search"
-msgstr ""
+msgstr "חיפוש פריט תצורה"
 
 #. Template: AdminACL
 msgid "Object Type"
@@ -1174,35 +1258,37 @@ msgstr "סוג האובייקט"
 
 #. JS Template: ClassImportConfirm
 msgid "The following classes will be imported"
-msgstr ""
+msgstr "השיעורים הבאים יובאו"
 
 #. JS Template: ClassImportConfirm
 msgid "The following roles will be imported"
-msgstr ""
+msgstr "התפקידים הבאים יובאו"
 
 #. JS Template: ClassImportConfirm
 msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
 msgstr ""
+"שימו לב שגם שדות דינמיים מתאימים ומחלקות GeneralCatalog ייווצרו, ואין הסרה "
+"אוטומטית."
 
 #. JS Template: ClassImportConfirm
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "האם ברצונך להמשיך?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "זקוק לדוגמאות!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
-msgstr ""
+msgstr "ההגדרה אינה חתימת YAML תקפה."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "ConfigItem not found!"
-msgstr ""
+msgstr "ConfigItem לא נמצא!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "No versions found!"
-msgstr ""
+msgstr "לא נמצאו גרסאות!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "No permission"
@@ -1210,295 +1296,371 @@ msgstr "אין הרשאה!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Filter invalid!"
-msgstr ""
+msgstr "המסנן אינו תקין!"
 
 #. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
 msgid "Search params invalid!"
-msgstr ""
+msgstr "פרמטרי החיפוש אינם חוקיים!"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Class restrictions for the config item"
-msgstr ""
+msgstr "הגבלות מחלקה עבור פריט התצורה"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select one or more classes to restrict selectable config items"
-msgstr ""
+msgstr "בחר שיעור אחד או יותר כדי להגביל את פריטי התצורה הניתנים לבחירה"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link type"
-msgstr ""
+msgstr "סוג הקישור"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the link type."
-msgstr ""
+msgstr "בחר את סוג הקישור."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr ""
+msgstr "קדימה: הפניה (מקור) -&gt; הפניה (יעד)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr ""
+msgstr "לאחור: הפניה (מקור) -&gt; הפניה (יעד)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Direction"
-msgstr ""
+msgstr "כיוון הקישור"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
 msgstr ""
+"האובייקט המפנה הוא זה המכיל שדה דינמי זה, והאובייקט המופנה הוא זה שנבחר כערך "
+"של השדה הדינמי."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Dynamic (ConfigItem)"
-msgstr ""
+msgstr "דינמי (ConfigItem)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Static (Version)"
-msgstr ""
+msgstr "סטטי (גרסה)"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Link Referencing Type"
-msgstr ""
+msgstr "סוג הפניה לקישור"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
 msgstr ""
+"האם קישור זה חל על ConfigItem או על הגרסה הסטטית של האובייקט המפנה. חישוב "
+"מצב האירוע הנוכחי מתבצע רק על קישורים דינמיים."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the attribute which config items will be searched by"
-msgstr ""
+msgstr "בחר את התכונה שלפיה יחפשו פריטי התצורה"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Starting the YAML string with '---' is required."
-msgstr ""
+msgstr "יש להתחיל את מחרוזת YAML ב-'---'."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not purge the table configitem_link."
-msgstr ""
+msgstr "לא ניתן לנקות את הטבלה configitem_link."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "No relevant dynamic fields were found"
-msgstr ""
+msgstr "לא נמצאו שדות דינמיים רלוונטיים"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Could not insert into the table configitem_link"
-msgstr ""
+msgstr "לא ניתן להוסיף לטבלה configitem_link"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
 msgid "Inserted 0 rows into the table configitem_link"
-msgstr ""
+msgstr "הוכנסו 0 שורות לטבלה configitem_link"
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "Error synchronizing the definitions. Please check the log."
-msgstr ""
+msgstr "שגיאה בסנכרון ההגדרות. אנא בדוק את היומן."
 
 #. Perl Module: Kernel/Modules/AdminDynamicField.pm
 msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
 msgstr ""
+"יש לך הגדרות ITSMConfigItem שאינן מסונכרנות. אנא הפץ את השינויים בשדה הדינמי "
+"ITSMConfigItem."
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Overview and Confirmation"
-msgstr ""
+msgstr "סקירה כללית ואישור"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "An error occurred during class import."
-msgstr ""
+msgstr "אירעה שגיאה במהלך ייבוא הכיתה."
 
 #. SysConfig
 msgid "0 - Hidden"
-msgstr ""
+msgstr "0 - מוסתר"
 
 #. SysConfig
 msgid "1 - Shown"
-msgstr ""
+msgstr "1 - מוצג"
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"מאפשר תנאי חיפוש מורחבים בחיפוש פריטי תצורה בממשק הסוכן. באמצעות תכונה זו "
+"ניתן לחפש, למשל, שם פריט תצורה בתנאים כגון \"(*key1*&amp;&amp;*key2*)\" או \""
+"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"מאפשר תנאי חיפוש מורחבים בחיפוש פריטי תצורה בממשק הלקוח. באמצעות תכונה זו "
+"ניתן לחפש, למשל, שם פריט תצורה בתנאים כגון \"(*key1*&amp;&amp;*key2*)\" או \""
+"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
-msgstr ""
+msgstr "בחר מודול כדי לאכוף שיטת שמות."
 
 #. SysConfig
 msgid "Choose a module to enforce a number scheme."
-msgstr ""
+msgstr "בחר מודול כדי לאכוף תוכנית מספריים."
 
 #. SysConfig
 msgid "Choose a module to enforce a version string scheme."
-msgstr ""
+msgstr "בחר מודול כדי לאכוף תבנית מחרוזת גרסה."
 
 #. SysConfig
 msgid "Choose attributes to trigger the creation of a new version."
-msgstr ""
+msgstr "בחר תכונות שיפעילו את יצירת גרסה חדשה."
 
 #. SysConfig
 msgid "Choose categories to assign to this config item class."
-msgstr ""
+msgstr "בחר קטגוריות להקצאה למחלקת פריט תצורה זו."
 
 #. SysConfig
 msgid "Column config item filters for ConfigItem Overview."
-msgstr ""
+msgstr "מסנני פריטי תצורה של עמודות עבור סקירת ConfigItem."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"עמודות שניתן לסנן בסקירת פריטי התצורה בממשק הסוכן. הערה: מותר להשתמש רק "
+"בתכונות פריטי תצורה ובשדות דינמיים (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"עמודות שניתן לסנן בסקירת פריטי התצורה בממשק הלקוח. הערה: מותר להשתמש רק "
+"בתכונות פריטי תצורה ובשדות דינמיים (DynamicField_NameX)."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
-msgstr ""
+msgstr "מודול אירועי פריטי תצורה המעדכן פריטי תצורה להגדרתם הנוכחית."
 
 #. SysConfig
 msgid "Config item event module that updates the table configitem_ĺink."
-msgstr ""
+msgstr "מודול אירוע פריט תצורה המעדכן את הטבלה configitem_ĺink."
 
 #. SysConfig
 msgid "Config item event module updates the current incident state."
-msgstr ""
+msgstr "מודול אירועי פריטי תצורה מעדכן את מצב התקלה הנוכחי."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
-msgstr ""
+msgstr "תצוגת עץ פריטי תצורה"
 
 #. SysConfig
 msgid "ConfigItem Version"
-msgstr ""
+msgstr "גרסת ConfigItem"
 
 #. SysConfig
 msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"פריטי התצורה (ConfigItems) מהסוגים הבאים לא יאוחסנו בשרת Elasticsearch. כדי "
+"להחיל זאת על פריטי תצורה קיימים, יש להפעיל את העברת פריטי התצורה באמצעות "
+"הקונסולה, לאחר שינוי אפשרות זו."
 
 #. SysConfig
 msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
 msgstr ""
+"פריטי תצורה עם מצבי הפריסה הבאים לא יאוחסנו בשרת Elasticsearch. כדי להחיל "
+"זאת על פריטי תצורה קיימים, יש להפעיל את העברת פריטי התצורה באמצעות המסוף, "
+"לאחר שינוי אפשרות זו."
 
 #. SysConfig
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "הלקוחות יכולים לראות את גרסאות ה-CI ההיסטוריות."
 
 #. SysConfig
 msgid "Customers have the possibility to manually switch between historic CI versions."
-msgstr ""
+msgstr "ללקוחות יש אפשרות לעבור באופן ידני בין גרסאות CI היסטוריות."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"נתונים ברירת מחדל לשימוש בתכונה עבור מסך חיפוש פריטי תצורה. דוגמה: "
+"\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart"
+"=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"נתונים ברירת מחדל לשימוש בתכונה עבור מסך חיפוש פריטי תצורה. דוגמה: "
+"\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=1"
+"0;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;IT"
+"SMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr ""
+"הגדר תבנית Template::Toolkit עבור מחרוזות גרסה. משמש רק אם מודול מחרוזת "
+"הגרסה מוגדר ל-TemplateToolkit."
 
 #. SysConfig
 msgid "Define a set of conditions under which a customer is allowed to see a config item. Conditions can optionally be restricted to certain customer groups. Name is the only mandatory attribute. If no other options are given, all config items will be visible under that category."
 msgstr ""
+"הגדר קבוצת תנאים שבהם לקוח רשאי לראות פריט תצורה. ניתן להגביל את התנאים "
+"לקבוצות לקוחות מסוימות. השם הוא התכונה היחידה החובה. אם לא צוינו אפשרויות "
+"אחרות, כל פריטי התצורה יהיו גלויים בקטגוריה זו."
 
 #. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "קובע אם יש להציג את תוויות סוג הקישור בחיבורי הצומת."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"מגדיר את העמודות הזמינות של CI בסקירת פריטי התצורה בהתאם לסוג ה-CI. כל ערך "
+"חייב לכלול שם סוג ומערך של שדות זמינים עבור הסוג המתאים. ערכי שדה דינמיים "
+"חייבים לעמוד בתבנית DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"מגדיר את תכונת פריט התצורה המוגדרת כברירת מחדל למיון פריטי התצורה בתוצאות "
+"החיפוש של פריטי התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
 msgstr ""
+"מגדיר את תכונת פריט התצורה המוגדרת כברירת מחדל למיון פריטי התצורה בתוצאות "
+"החיפוש של פריטי התצורה בממשק הלקוח."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"מגדיר את תכונת פריט התצורה המוגדרת כברירת מחדל למיון פריטי התצורה בתוצאות "
+"החיפוש של פריטי התצורה בפעולה זו."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"מגדיר את סדר פריטי התצורה המוגדר כברירת מחדל בתוצאות חיפוש פריטי התצורה "
+"בממשק הסוכן. למעלה: הישן ביותר בראש הרשימה. למטה: החדש ביותר בראש הרשימה."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"מגדיר את סדר פריטי התצורה המוגדר כברירת מחדל בתוצאות חיפוש פריטי התצורה "
+"בממשק הלקוח. למעלה: הישן ביותר בראש הרשימה. למטה: החדש ביותר בראש הרשימה."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"מגדיר את סדר פריטי התצורה המוגדר כברירת מחדל בתוצאות החיפוש של פריטי התצורה "
+"בפעולה זו. למעלה: הישן ביותר בראש הרשימה. למטה: החדש ביותר בראש הרשימה."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
 msgstr ""
+"מגדיר את העמודות המוצגות כברירת מחדל של CI בסקירת פריטי התצורה בהתאם לסוג ה-"
+"CI. כל ערך חייב לכלול שם סוג ומערך של שדות זמינים עבור הסוג המתאים. ערכי שדה "
+"דינמיים חייבים לעמוד בתבנית DynamicField_FieldName."
 
 #. SysConfig
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "מגדיר את עומק היחסים המוצג כברירת מחדל."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
-msgstr ""
+msgstr "מגדיר את תכונת החיפוש המוצגת כברירת מחדל עבור מסך חיפוש פריטי תצורה."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"מגדיר את תכונת החיפוש המוצגת כברירת מחדל עבור מסך חיפוש פריטי תצורה. דוגמה: "
+"\"מפתח\" חייב לכלול את שם השדה הדינמי, במקרה זה \"X\", \"תוכן\" חייב לכלול "
+"את הערך של השדה הדינמי בהתאם לסוג השדה הדינמי,  טקסט: \"טקסט\", תפריט נפתח: "
+"\"1\", תאריך/שעה: 'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;&#x27; ו- או "
+"&#x27;Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7&#x27;;."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "מגדיר את מגבלת החיפוש עבור מסך CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "מגדיר את מגבלת החיפוש עבור מסך CustomerITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"מגדיר אילו פריטים זמינים ל'פעולה' ברמה השלישית של מבנה ACL של פריט התצורה "
+"ITSM."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"מגדיר אילו פריטים זמינים ברמה הראשונה של מבנה ACL של פריטי התצורה של ITSM."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"מגדיר אילו פריטים זמינים ברמה השנייה של מבנה ACL של פריטי התצורה של ITSM."
 
 #. SysConfig
 msgid "Definition Update"
-msgstr ""
+msgstr "עדכון הגדרה"
 
 #. SysConfig
 msgid "DeplState"
-msgstr ""
+msgstr "DeplState"
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "מצב פריסה"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
 msgstr ""
+"מודול אירועי שדה דינמי המסמן הגדרות פריטי תצורה כלא מסונכרנות, אם שדות "
+"דינמיים המכילים אותם משתנים."
 
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
-msgstr ""
+msgstr "שדות דינמיים המוצגים במסך השדה ITSM הנוסף בממשק הסוכן."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
+msgstr "שדות דינמיים המוצגים במסך סקירת פריטי התצורה בממשק הלקוח."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
-msgstr ""
+msgstr "שדות דינמיים המוצגים במסך חיפוש פריטי התצורה בממשק הסוכן."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
@@ -1507,194 +1669,230 @@ msgstr ""
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
 msgstr ""
+"שדות של אינדקס פריט התצורה, המשמשים לחיפוש טקסט מלא. השדות גם מאוחסנים, אך "
+"אינם חובה עבור הפונקציונליות הכוללת. ניתן להשבית את הכללת הקבצים המצורפים על "
+"ידי הגדרת הערך ל-0 או מחיקתו."
 
 #. SysConfig
 msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
 msgstr ""
+"שדות המאוחסנים באינדקס פריטי התצורה המשמשים למטרות אחרות מלבד חיפושים בטקסט "
+"מלא. על מנת להשיג פונקציונליות מלאה, כל השדות הם חובה."
 
 #. SysConfig
 msgid "For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config."
 msgstr ""
+"עבור כל שירות אינטרנט (מפתח) ניתן להגדיר מערך של מחלקות (ערך) שעליהן מוגבלת "
+"הייבוא. עבור כל המחלקות שנבחרו, או כל המחלקות הקיימות, יש לבחור את התכונות "
+"המזהות בתצורת המפעיל."
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
+msgstr "רישום מודול GenericInterface עבור שכבת המפעיל ConfigItemFetch."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #. SysConfig
 msgid "InciState"
-msgstr ""
+msgstr "InciState"
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "מצב האירוע"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
-msgstr ""
+msgstr "כולל מצבי פריסה בחיפוש פריטי התצורה בממשק הלקוח."
 
 #. SysConfig
 msgid "Includes incident states in the config item search of the customer interface."
-msgstr ""
+msgstr "כולל מצבי תקלות בחיפוש פריטי התצורה בממשק הלקוח."
 
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
-msgstr ""
+msgstr "מספר מקסימלי של פריטי תצורה שיוצגו בתוצאת פעולה זו."
 
 #. SysConfig
 msgid "Name Module"
-msgstr ""
+msgstr "שם מודול"
 
 #. SysConfig
 msgid "Number Module"
-msgstr ""
+msgstr "מודול מספרים"
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
-msgstr ""
+msgstr "מספר פריטי התצורה שיוצגו בכל עמוד של תוצאות חיפוש בממשק הסוכן."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
-msgstr ""
+msgstr "מספר פריטי התצורה שיוצגו בכל עמוד של תוצאות חיפוש בממשק הלקוח."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
 msgstr ""
+"אובייקטים לחיפוש, כמה ערכים להציג ואילו תכונות להציג. תכונות ConfigItem "
+"חייבות להיות מאוחסנות באופן מפורש באמצעות Elasticsearch."
 
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור הקטגוריות של סוגי פריטי התצורה בתצוגת ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"פרמטרים למסנני העמודות של סקירת פריטי התצורה הקטנים. שימו לב: הגדרת 'פעיל' ל-"
+"0 תמנע רק מסוכנים לערוך את ההגדרות של קבוצה זו בהעדפות האישיות שלהם, אך "
+"עדיין תאפשר למנהלים לערוך את ההגדרות בשם משתמש אחר. השתמשו ב-"
+"'PreferenceGroup' כדי לשלוט באיזה אזור יופיעו הגדרות אלה בממשק המשתמש."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור מודול השם עבור סוגי פריטי תצורה בתצוגת ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור מודול המספרים עבור סוגי פריטי התצורה בתצוגת ההעדפות של ממשק "
+"הסוכן."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור מודול מחרוזת הגרסה עבור סוגי פריטי תצורה בתצוגת ההעדפות של ממשק "
+"הסוכן."
 
 #. SysConfig
 msgid "Parameters for the version string template toolkit module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור מודול ערכת הכלים של מחרוזת הגרסה עבור סוגי פריטי תצורה בתצוגת "
+"ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"פרמטרים עבור מפעיל הגרסה עבור סוגי פריטי תצורה בתצוגת ההעדפות של ממשק הסוכן."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
+"מבצע את הפעולה שהוגדרה עבור כל אירוע (כ-Invoker) עבור כל שירות אינטרנט "
+"שהוגדר."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש בפעולת צירוף פריט תצורה ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך חיפוש פריטי תצורה ITSM בממשק הלקוח."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך תצוגת עץ פריטי התצורה של ITSM בממשק הסוכן."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
-msgstr ""
+msgstr "הרשאות נדרשות לשימוש במסך פריטי התצורה של ITSM בכמות גדולה בממשק הסוכן."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
-msgstr ""
+msgstr "מציג קישור בתפריט כדי להציג את קישורי פריטי התצורה בתצוגת עץ."
 
 #. SysConfig
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "הקטגוריה המוצגת כברירת מחדל, אם לא נבחרה אף קטגוריה."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "מפעיל את ConfigItemFetch באופן אוטומטי."
 
 #. SysConfig
 msgid "Version String Expression"
-msgstr ""
+msgstr "ביטוי מחרוזת גרסה"
 
 #. SysConfig
 msgid "Version String Module"
-msgstr ""
+msgstr "מודול מחרוזת גרסה"
 
 #. SysConfig
 msgid "Version Trigger"
-msgstr ""
+msgstr "גרסת ההפעלה"
 
 #. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr ""
+"האם ניתן להימנע מהפעלת ConfigItemACL על ידי בדיקת תלות שדות במטמון. פעולה זו "
+"יכולה לשפר את זמני הטעינה של טפסים, אך יש להשביתה אם יש להשתמש ב-ACLModules "
+"עבור ITSMConfigItem ו-Form-ReturnTypes."
 
 #. SysConfig
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "אילו מידע כללי מוצג בכותרת."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "General invoker data"
-msgstr ""
+msgstr "נתונים כלליים על המפעיל"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
 msgstr ""
+"מודול ה-backend של OTOBO invoker ייקרא כדי להכין את הנתונים שיישלחו למערכת "
+"המרוחקת, ולעבד את נתוני התגובה שלה."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "הגדרות עבור נתוני בקשות יוצאות"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
-msgstr ""
+msgstr "מיפוי"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
 msgstr ""
+"הנתונים מהמפעיל של OTOBO יעובדו על ידי מיפוי זה, כדי להמיר אותם לסוג הנתונים "
+"שהמערכת המרוחקת מצפה לקבל."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
 msgstr ""
+"נתוני התגובה יעובדו על ידי מיפוי זה, כדי להמיר אותם לסוג הנתונים שהמפעיל של "
+"OTOBO מצפה לקבל."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "הגדרות עבור נתוני תגובה נכנסים"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
-msgstr ""
+msgstr "נתוני אירוע"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Add Event"
-msgstr ""
+msgstr "הוסף אירוע"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
 msgstr ""
+"מפעילים של אירועים אסינכרוניים מטופלים על ידי OTOBO Scheduler Daemon ברקע "
+"(מומלץ)."
 
 #. Template: AdminITSMConfigItem
 msgid "Auto Indent Code"
-msgstr ""
+msgstr "הזחה אוטומטית של קוד"
 
 #. Template: AdminITSMConfigItem
 msgid "Comment/Uncomment Code"
-msgstr ""
+msgstr "הוספת/הסרת הערות מקוד"
 
 #. Template: AdminITSMConfigItem
 msgid "Search & Replace"
-msgstr ""
+msgstr "חיפוש והחלפה"
 
 #. Template: AdminITSMConfigItem
 msgid "Select All"
@@ -1702,703 +1900,781 @@ msgstr "בחר הכל"
 
 #. Template: AdminITSMConfigItem
 msgid "Full Screen"
-msgstr ""
+msgstr "מסך מלא"
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "פריטי תצורה"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
-msgstr ""
+msgstr "מיין"
 
 #. Template: AdminACL
 msgid "Filter by valid state"
-msgstr ""
+msgstr "סינון לפי מצב תקף"
 
 #. Template: AdminACL
 msgid "Include invalid ACLs"
-msgstr ""
+msgstr "כלול ACLs לא חוקיים"
 
 #. Template: AdminACLEdit
 msgid "Check the official %sdocumentation%s."
-msgstr ""
+msgstr "בדוק את התיעוד הרשמי של %sdocumentation%s."
 
 #. Template: AdminDynamicField
 msgid "Include invalid dynamic fields"
-msgstr ""
+msgstr "כלול שדות דינמיים לא חוקיים"
 
 #. Template: AdminDynamicField
 msgid "Filter field by object type"
-msgstr ""
+msgstr "סינון שדה לפי סוג אובייקט"
 
 #. Template: AdminDynamicField
 msgid "Filter field by namespace"
-msgstr ""
+msgstr "סינון שדה לפי מרחב שמות"
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "שדות דינמיים חדשים"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
 msgstr ""
+"האם ברצונך ליהנות מסוגי שדות דינמיים נוספים? יש לך גישה מלאה לסוגי השדות "
+"הבאים:"
 
 #. Template: AdminDynamicField
 msgid "Copy this field"
-msgstr ""
+msgstr "העתק שדה זה"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which will be searched on autocomplete"
-msgstr ""
+msgstr "תכונה שתחפש בהשלמה אוטומטית"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "External-source key"
-msgstr ""
+msgstr "מפתח ממקור חיצוני"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
 msgstr ""
+"כאשר מוגדר באמצעות מקור חיצוני (לדוגמה, שירות אינטרנט או ייבוא/ייצוא), הערך "
+"יפורש כתכונה זו."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Attribute which is displayed for values"
-msgstr ""
+msgstr "תכונה המוצגת עבור ערכים"
 
 #. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
 msgid "Select the type of display"
-msgstr ""
+msgstr "בחר את סוג התצוגה"
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr ""
+msgstr "מבנה הבסיס אינו תקף. אנא ספק מערך עם נתונים בפורמט YAML."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
 msgstr ""
+"לא ניתן היה לייבא ACLs עקב שגיאה לא ידועה. אנא בדוק את יומני OTOBO לקבלת "
+"מידע נוסף."
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (העתק) %s"
 
 #. SysConfig
 msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
 msgstr ""
+"ערך אחוזי של התקדמות התרגום המינימלית לכל שפה, שניתן להשתמש בו עבור תיעוד."
 
 #. SysConfig
 msgid "Access repos via http or https."
-msgstr ""
+msgstr "גש למאגרי מידע באמצעות http או https."
 
 #. SysConfig
 msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr ""
+msgstr "טעינה אוטומטית של הרחבות Znuny4OTRSRepo."
 
 #. SysConfig
 msgid "Backend module registration for the config conflict check module."
-msgstr ""
+msgstr "רישום מודול אחורי עבור מודול בדיקת התנגשויות תצורה."
 
 #. SysConfig
 msgid "Backend module registration for the file conflict check module."
-msgstr ""
+msgstr "רישום מודול backend עבור מודול בדיקת התנגשויות קבצים."
 
 #. SysConfig
 msgid "Backend module registration for the function redefine check module."
-msgstr ""
+msgstr "רישום מודול backend עבור מודול בדיקת הגדרת מחדש של פונקציה."
 
 #. SysConfig
 msgid "Backend module registration for the manual set module."
-msgstr ""
+msgstr "רישום מודול בקאנד עבור המודול המוגדר ידנית."
 
 #. SysConfig
 msgid "Block hooks to be created for BS ad removal."
-msgstr ""
+msgstr "חסום ווים שייווצרו להסרת פרסומות BS."
 
 #. SysConfig
 msgid "Block hooks to be created for package manager output filter."
-msgstr ""
+msgstr "חסום יצירת ווים עבור מסנן הפלט של מנהל החבילות."
 
 #. SysConfig
 msgid "Branch View commit limit"
-msgstr ""
+msgstr "מגבלת התחייבויות בתצוגת ענף"
 
 #. SysConfig
 msgid "CodePolicy"
-msgstr ""
+msgstr "מדיניות קוד"
 
 #. SysConfig
 msgid "Commit limit per page for Branch view screen"
-msgstr ""
+msgstr "הגבלת התחייבויות לדף במסך תצוגת סניף"
 
 #. SysConfig
 msgid "Create analysis file"
-msgstr ""
+msgstr "צור קובץ ניתוח"
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr ""
+msgstr "יוצר קובץ ניתוח מהכרטיס הזה ושולח אותו ל-Znuny."
 
 #. SysConfig
 msgid "Creates a analysis file from this ticket."
-msgstr ""
+msgstr "יוצר קובץ ניתוח מהכרטיס הזה."
 
 #. SysConfig
 msgid "Define private addon repos."
-msgstr ""
+msgstr "הגדר מאגרי תוספים פרטיים."
 
 #. SysConfig
 msgid "Defines the filter that processes the HTML templates."
-msgstr ""
+msgstr "מגדיר את המסנן שמעבד את תבניות ה-HTML."
 
 #. SysConfig
 msgid "Defines the test module for checking code policy."
-msgstr ""
+msgstr "מגדיר את מודול הבדיקה לבדיקת מדיניות הקוד."
 
 #. SysConfig
 msgid "Definition of GIT clone/push URL Prefix."
-msgstr ""
+msgstr "הגדרת קידומת URL לשכפול/דחיפה של GIT."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"הגדרת שדה דינמי: קבוצה =&gt; קבוצה עם גישה לשדות הדינמיים; AlwaysVisible "
+"=&gt; ניתן להסיר את השדה (0|1); InformationAreaName =&gt; שם הווידג'טים; "
+"InformationAreaSize =&gt; גודל ומיקום הווידג'טים (גדול|קטן); שם =&gt; שם "
+"השדה הדינמי שיש להשתמש בו; עדיפות =&gt; סדר השדות הדינמיים; מצב =&gt; מצב "
+"השדות (0 = מושבת, 1 = פעיל, 2 = חובה), FilterRelease =&gt; ביטוי רגולרי שהשם "
+"של המאגר חייב להתאים לו כדי להופיע, FilterPackage =&gt; ביטוי רגולרי שהשם של "
+"החבילה צריך להתאים לו כדי להופיע, FilterBranch =&gt; ביטוי רגולרי שהשם של "
+"הענף צריך להתאים לו כדי להופיע, FilterRelease =&gt; ביטוי רגולרי שמחרוזת "
+"גרסת המהדורה צריכה להתאים לו כדי להופיע."
 
 #. SysConfig
 msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"הגדרת שדה דינמי: קבוצה =&gt; קבוצה עם גישה לשדות הדינמיים; AlwaysVisible "
+"=&gt; ניתן להסיר את השדה (0|1); InformationAreaName =&gt; שם הווידג'טים; "
+"InformationAreaSize =&gt; גודל ומיקום הווידג'טים (גדול|קטן); שם =&gt; שם "
+"השדה הדינמי שיש להשתמש בו; עדיפות =&gt; סדר השדות הדינמיים; מצב =&gt; מצב "
+"השדות (0 = מושבת, 1 = פעיל, 2 = חובה), מאגר מסננים =&gt; Regex שעל שם המאגר "
+"להתאים לו כדי להופיע, FilterPackage =&gt; Regex שעל שם החבילה להתאים לו כדי "
+"להופיע, FilterBranch =&gt; Regex שעל שם הענף להתאים לו כדי להופיע, "
+"FilterRelease =&gt; Regex שעל מחרוזת גרסת המהדורה להתאים לו כדי להופיע."
 
 #. SysConfig
 msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
 msgstr ""
+"הגדרת סכומים חיצוניים של MD5 (מפתח =&gt; MD5, ערך =&gt; ספק, שם חבילה, גרסה, "
+"תאריך)."
 
 #. SysConfig
 msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr ""
+msgstr "הגדרת מיפויים בין בקשות למאגרים ציבוריים לבין מאגרי OPMS פנימיים."
 
 #. SysConfig
 msgid "Definition of package states."
-msgstr ""
+msgstr "הגדרת מצבי חבילה."
 
 #. SysConfig
 msgid "Definition of renamed OPMS packages."
-msgstr ""
+msgstr "הגדרת חבילות OPMS ששמן שונה."
 
 #. SysConfig
 msgid "Directory, which is used by Git to cache repositories."
-msgstr ""
+msgstr "ספרייה, המשמשת את Git לאחסון מאגרי מידע במטמון."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store temporary data."
-msgstr ""
+msgstr "ספרייה, המשמשת את Git לאחסון נתונים זמניים."
 
 #. SysConfig
 msgid "Directory, which is used by Git to store working copies."
-msgstr ""
+msgstr "ספרייה, המשמשת את Git לאחסון עותקי עבודה."
 
 #. SysConfig
 msgid "Disable online repositories."
-msgstr ""
+msgstr "השבת מאגרי מידע מקוונים."
 
 #. SysConfig
 msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
 msgstr ""
+"אל תרשום את תוצאות אימות החיבור git ssh עבור משתמשים אלה. שימושי עבור פעולות "
+"אוטומטיות."
 
 #. SysConfig
 msgid "Dynamic Fields Screens"
-msgstr ""
+msgstr "מסכי שדות דינמיים"
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "מסך שדה דינמי"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
-msgstr ""
+msgstr "ייצא את כל המפתחות הציבוריים הזמינים לקובץ authorized_keys."
 
 #. SysConfig
 msgid "Export all relevant releases to ftp server."
-msgstr ""
+msgstr "ייצא את כל המהדורות הרלוונטיות לשרת ftp."
 
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr ""
+msgstr "רישום מודול Frontend עבור אובייקט OPMS בממשק הסוכן."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr ""
+msgstr "רישום מודול Frontend עבור האובייקט PublicOPMSRepository בממשק הציבורי."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"רישום מודול Frontend עבור האובייקט PublicOPMSRepositoryLookup בממשק הציבורי."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr ""
+msgstr "רישום מודול Frontend עבור האובייקט PublicOPMSTestBuild בממשק הציבורי."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
 msgstr ""
+"רישום מודול Frontend עבור האובייקט PublicPackageVerification בממשק הציבורי."
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "רישום מודול Frontend לממשק הניהול."
 
 #. SysConfig
 msgid "GIT Author registration."
-msgstr ""
+msgstr "רישום מחבר GIT."
 
 #. SysConfig
 msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
 msgstr ""
+"יצירת ווים להערות HTML עבור הבלוקים שצוינו, כך שמסננים יוכלו להשתמש בהם."
 
 #. SysConfig
 msgid "Generate documentations once per night."
-msgstr ""
+msgstr "הפק מסמכים פעם אחת בלילה."
 
 #. SysConfig
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "ניהול Git"
 
 #. SysConfig
 msgid "Git Repository"
-msgstr ""
+msgstr "מאגר Git"
 
 #. SysConfig
 msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr ""
+msgstr "קבוצה, שחבריה מחזיקים בהרשאות מחיקה של מנהל ב-OPMS."
 
 #. SysConfig
 msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr ""
+msgstr "קבוצה, שחבריה בעלי הרשאות ניהול מאגר ב-OPMS."
 
 #. SysConfig
 msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr ""
+msgstr "קבוצה, שחבריה יראו את תוצאות מבחן CI במסכי OPMS."
 
 #. SysConfig
 msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
 msgstr ""
+"קבוצות שמשתמש מאומת (על ידי שם משתמש וסיסמה) חייב להיות חבר בהן כדי לבנות "
+"חבילות בדיקה באמצעות הממשק הציבורי."
 
 #. SysConfig
 msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr ""
+msgstr "קבוצות שיוגדרו במהלך תהליכי יצירת פרויקטים ב-git בעת הוספת מאגרי OPMS."
 
 #. SysConfig
 msgid "Manage dynamic field in screens."
-msgstr ""
+msgstr "נהל שדה דינמי במסכים."
 
 #. SysConfig
 msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
 msgstr ""
+"נהל כאן את המפתחות הציבוריים שלך ב-SSH לצורך גישה ל-Git. הקפד לשמור את "
+"ההעדפה הזו כאשר אתה מוסיף מפתח חדש."
 
 #. SysConfig
 msgid "Module to generate statistics about the added code lines."
-msgstr ""
+msgstr "מודול ליצירת סטטיסטיקות על שורות הקוד שנוספו."
 
 #. SysConfig
 msgid "Module to generate statistics about the growth of code."
-msgstr ""
+msgstr "מודול ליצירת סטטיסטיקות על צמיחת הקוד."
 
 #. SysConfig
 msgid "Module to generate statistics about the number of git commits."
-msgstr ""
+msgstr "מודול ליצירת סטטיסטיקות על מספר ה-commits ב-git."
 
 #. SysConfig
 msgid "Module to generate statistics about the removed code lines."
-msgstr ""
+msgstr "מודול ליצירת סטטיסטיקות על שורות הקוד שהוסרו."
 
 #. SysConfig
 msgid "OPMS"
-msgstr ""
+msgstr "OPMS"
 
 #. SysConfig
 msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr ""
+msgstr "רק משתמשים בעלי הרשאות rw באחת מהקבוצות הללו יכולים לגשת ל-git."
 
 #. SysConfig
 msgid "Option to set a package compatibility manually."
-msgstr ""
+msgstr "אפשרות להגדיר תאימות חבילה באופן ידני."
 
 #. SysConfig
 msgid "Parameters for the pages in the BranchView screen."
-msgstr ""
+msgstr "פרמטרים עבור הדפים במסך BranchView."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"הגדרה מראש של השדה הדינמי 'GITProjectName': Group =&gt; קבוצה עם גישה לשדות "
+"הדינמיים; AlwaysVisible =&gt; ניתן להסיר את השדה (0|1); InformationAreaName "
+"=&gt; שם הווידג'טים; InformationAreaSize =&gt; גודל ומיקום הווידג'טים "
+"(גדול|קטן); Name =&gt; שם השדה הדינמי שיש להשתמש בו; Priority =&gt; סדר "
+"השדות הדינמיים; State =&gt; מצב השדות (0 = מושבת, 1 = פעיל, 2 = חובה), "
+"FilterRepository =&gt; Regex שעל שם המאגר להתאים לו כדי להופיע, "
+"FilterPackage =&gt; Regex שעל שם החבילה להתאים לו כדי להופיע, FilterBranch "
+"=&gt; Regex שעל שם הענף להתאים לו כדי להופיע, FilterRelease =&gt; Regex שעל "
+"מחרוזת גרסת המהדורה להתאים לו כדי להופיע."
 
 #. SysConfig
 msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"הגדרה מראש של השדה הדינמי 'GITRepositoryName': Group =&gt; קבוצה עם גישה "
+"לשדות הדינמיים; AlwaysVisible =&gt; ניתן להסיר את השדה (0|1); "
+"InformationAreaName =&gt; שם הווידג'טים; InformationAreaSize =&gt; גודל "
+"ומיקום הווידג'טים (גדול|קטן); Name =&gt; שם השדה הדינמי שיש להשתמש בו; "
+"Priority =&gt; סדר השדות הדינמיים; State =&gt; מצב השדות (0 = מושבת, 1 = "
+"פעיל, 2 = חובה), FilterRepository =&gt; Regex שעל שם המאגר להתאים לו כדי "
+"להופיע, FilterPackage =&gt; Regex שעל שם החבילה להתאים לו כדי להופיע, "
+"FilterBranch =&gt; Regex שעל שם הענף להתאים לו כדי להופיע, FilterRelease "
+"=&gt; Regex שעל מחרוזת גרסת המהדורה להתאים לו כדי להופיע."
 
 #. SysConfig
 msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
 msgstr ""
+"הגדרה מראש של השדה הדינמי 'PackageDeprecated': Group =&gt; קבוצה עם גישה "
+"לשדות הדינמיים; AlwaysVisible =&gt; ניתן להסיר את השדה (0|1); "
+"InformationAreaName =&gt; שם הווידג'טים; InformationAreaSize =&gt; גודל "
+"ומיקום הווידג'טים (גדול|קטן); שם =&gt; שם השדה הדינמי שיש להשתמש בו; "
+"Priority =&gt; סדר השדות הדינמיים; State =&gt; מצב השדות (0 = מושבת, 1 = "
+"פעיל, 2 = חובה), FilterRepository =&gt; Regex שעל שם המאגר להתאים לו כדי "
+"להופיע, FilterPackage =&gt; Regex שעל שם החבילה להתאים לו כדי להופיע, "
+"FilterBranch =&gt; Regex שעל שם הענף להתאים לו כדי להופיע, FilterRelease "
+"=&gt; Regex שעל מחרוזת גרסת המהדורה להתאים לו כדי להופיע."
 
 #. SysConfig
 msgid "Recipients that will be informed by email in case of errors."
-msgstr ""
+msgstr "נמענים שיקבלו הודעה בדוא\"ל במקרה של שגיאות."
 
 #. SysConfig
 msgid "SSH Keys for Git Access"
-msgstr ""
+msgstr "מפתחות SSH לגישה ל-Git"
 
 #. SysConfig
 msgid "Send analysis file"
-msgstr ""
+msgstr "שלח קובץ ניתוח"
 
 #. SysConfig
 msgid "Sets the git clone address to be used in repository listings."
-msgstr ""
+msgstr "קובע את כתובת git clone שתשמש ברשימות המאגרים."
 
 #. SysConfig
 msgid "Sets the home directory for git repositories."
-msgstr ""
+msgstr "קובע את ספריית הבית עבור מאגרי git."
 
 #. SysConfig
 msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr ""
+msgstr "קובע את הנתיב למיקום סקריפט קבלת ההודעות BugzillaAddComment."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"קובע את הנתיב למיקום הסקריפט OTRSCodePolicy. מומלץ ליצור שיבוט נפרד של מודול "
+"OTRSCodePolicy, אשר מתעדכן באמצעות cron."
 
 #. SysConfig
 msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
 msgstr ""
+"קובע את הנתיב למיקום סקריפט הקבלה המוקדמת של OTRSCodePolicy. מומלץ ליצור "
+"שיבוט נפרד של מודול OTRSCodePolicy, אשר מתעדכן באמצעות cron."
 
 #. SysConfig
 msgid "Show latest commits in git repositories."
-msgstr ""
+msgstr "הצג את ההתחייבויות האחרונות במאגרי git."
 
 #. SysConfig
 msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr ""
+msgstr "מציג קישור בתפריט כדי ליצור בדיקת יחידה מהכרטיס הנוכחי."
 
 #. SysConfig
 msgid "Synchronize OPMS tables with a remote database."
-msgstr ""
+msgstr "סנכרן טבלאות OPMS עם מסד נתונים מרוחק."
 
 #. SysConfig
 msgid "The minimum version of the sphinx library."
-msgstr ""
+msgstr "הגרסה המינימלית של ספריית sphinx."
 
 #. SysConfig
 msgid "The name of the sphinx theme to be used."
-msgstr ""
+msgstr "שם ערכת הנושא של הספינקס שיש להשתמש בה."
 
 #. SysConfig
 msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr ""
+msgstr "הנתיב לקובץ CSS של OTRS (יחסית מתחת לנתיב הסטטי)."
 
 #. SysConfig
 msgid "The path to the OTRS logo (relative below the static path)."
-msgstr ""
+msgstr "הנתיב ללוגו OTRS (יחסי מתחת לנתיב הסטטי)."
 
 #. SysConfig
 msgid "The path to the static folder, containing images and css files."
-msgstr ""
+msgstr "הנתיב לתיקייה הסטטית, המכילה תמונות וקבצי CSS."
 
 #. SysConfig
 msgid "The path to the theme folder, containing the sphinx themes."
-msgstr ""
+msgstr "הנתיב לתיקיית הנושאים, המכילה את נושאי הספינקס."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable default columns."
 msgstr ""
+"תצורה זו מגדירה את כל המסכים האפשריים להפעלה או השבתה של עמודות ברירת המחדל."
 
 #. SysConfig
 msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr ""
+msgstr "תצורה זו מגדירה את כל המסכים האפשריים להפעלה או השבתה של שדות דינמיים."
 
 #. SysConfig
 msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
 msgstr ""
+"תצורה זו קובעת אם להציג רק שדות דינמיים חוקיים או את כולם (גם את השדות הלא "
+"חוקיים)."
 
 #. SysConfig
 msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
+"תצורה זו קובעת אם אימות חבילות OTRS יהיה פעיל או מושבת. אם הוא מושבת, כל "
+"החבילות יוצגו כמאומתות. עדיין מומלץ להשתמש רק בחבילות מאומתות."
 
 #. SysConfig
 msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
 msgstr ""
+"תצורה זו מגדירה את כתובת ה-URL לשירות OTRS CloudService Proxy. הקידומת http "
+"או https תתווסף, בהתאם לבחירה ב-SysConfig 'Znuny4OTRSRepoType'."
 
 #. SysConfig
 msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr ""
+msgstr "תצורה זו רושמת פילטר פוסט-פלט כדי להרחיב את אימות החבילה."
 
 #. SysConfig
 msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
 msgstr ""
+"תצורה זו רושמת מודול OutputFilter שמסיר פרסומות של OTRS Business Solution TM."
 
 #. SysConfig
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr ""
+msgstr "תצורה זו רושמת מסנן פלט כדי להסתיר את בחירת המאגר המקוון במנהל החבילות."
 
 #. SysConfig
 msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr ""
+msgstr "גרסה מסודרת ולא מעובדת שלא עברה בדיקות pomules במשך זמן רב."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
 msgstr ""
+"משתמשים בעלי הרשאות rw באחת מהקבוצות הללו רשאים לבצע דחיפות בכוח 'git push "
+"--force'."
 
 #. SysConfig
 msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
 msgstr ""
+"משתמשים בעלי הרשאות rw באחת מהקבוצות הללו רשאים לנהל פרויקטים. בנוסף, לחברים "
+"יש הרשאות ניהול לניהול git."
 
 #. ITSM class bundles
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. ITSM class bundles
 msgid "1 GB"
-msgstr ""
+msgstr "1 GB"
 
 #. ITSM class bundles
 msgid "1024 GB"
-msgstr ""
+msgstr "1024 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "10U: 17.5 inches (44.45 cm)"
-msgstr ""
+msgstr "10U: 17.5 אינץ' (44.45 ס\"מ)"
 
 #. ITSM class bundles
 msgid "11 GB"
-msgstr ""
+msgstr "11 GB"
 
 #. ITSM class bundles
 msgid "12 GB"
-msgstr ""
+msgstr "12 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "128 GB"
-msgstr ""
+msgstr "128 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "12U: 21 inches (53.34 cm)"
-msgstr ""
+msgstr "12U: 21 אינץ' (53.34 ס\"מ)"
 
 #. ITSM class bundles
 msgid "15U: 26.25 inches (66.68 cm)"
-msgstr ""
+msgstr "15U: 26.25 אינץ' (66.68 ס\"מ)"
 
 #. ITSM class bundles
 msgid "16 GB"
-msgstr ""
+msgstr "16 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "18U: 31.5 inches (80.01 cm)"
-msgstr ""
+msgstr "18U: 31.5 אינץ' (80.01 ס\"מ)"
 
 #. ITSM class bundles
 msgid "19-inch Rack"
-msgstr ""
+msgstr "מתלה 19 אינץ'"
 
 #. ITSM class bundles
 msgid "1U: 1.75 inches (4.45 cm)"
-msgstr ""
+msgstr "1U: 1.75 אינץ' (4.45 ס\"מ)"
 
 #. ITSM class bundles
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. ITSM class bundles
 msgid "2 GB"
-msgstr ""
+msgstr "2 GB"
 
 #. ITSM class bundles
 msgid "20U: 35 inches (88.9 cm)"
-msgstr ""
+msgstr "20U: 35 אינץ' (88.9 ס\"מ)"
 
 #. ITSM class bundles
 msgid "21-inch Rack"
-msgstr ""
+msgstr "מתלה 21 אינץ'"
 
 #. ITSM class bundles
 msgid "22U: 38.5 inches (97.79 cm)"
-msgstr ""
+msgstr "22U: 38.5 אינץ' (97.79 ס\"מ)"
 
 #. ITSM class bundles
 msgid "23-inch Rack"
-msgstr ""
+msgstr "מתלה 23 אינץ'"
 
 #. ITSM class bundles
 msgid "23.6 inches (600 mm)"
-msgstr ""
+msgstr "23.6 אינץ' (600 מ\"מ)"
 
 #. ITSM class bundles
 msgid "24 GB"
-msgstr ""
+msgstr "24 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "24U: 42 inches (106.68 cm)"
-msgstr ""
+msgstr "24U: 42 אינץ' (106.68 ס\"מ)"
 
 #. ITSM class bundles
 msgid "256 GB"
-msgstr ""
+msgstr "256 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "27\""
-msgstr ""
+msgstr "27\""
 
 #. ITSM class bundles
 msgid "27U: 47.25 inches (120.02 cm)"
-msgstr ""
+msgstr "27U: 47.25 אינץ' (120.02 ס\"מ)"
 
 #. ITSM class bundles
 msgid "2K (2048 x 1080)"
-msgstr ""
+msgstr "2K (2048 x 1080)"
 
 #. ITSM class bundles
 msgid "2U: 3.5 inches (8.89 cm)"
-msgstr ""
+msgstr "2U: 3.5 אינץ' (8.89 ס\"מ)"
 
 #. ITSM class bundles
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. ITSM class bundles
 msgid "30U: 52.5 inches (133.35 cm)"
-msgstr ""
+msgstr "30U: 52.5 אינץ' (133.35 ס\"מ)"
 
 #. ITSM class bundles
 msgid "31.5 inches (800 mm)"
-msgstr ""
+msgstr "31.5 אינץ' (800 מ\"מ)"
 
 #. ITSM class bundles
 msgid "32 GB"
-msgstr ""
+msgstr "32 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "32\""
-msgstr ""
+msgstr "32\""
 
 #. ITSM class bundles
 msgid "33U: 57.75 inches (146.68 cm)"
-msgstr ""
+msgstr "33U: 57.75 אינץ' (146.68 ס\"מ)"
 
 #. ITSM class bundles
 msgid "34\""
-msgstr ""
+msgstr "34\""
 
 #. ITSM class bundles
 msgid "35\""
-msgstr ""
+msgstr "35\""
 
 #. ITSM class bundles
 msgid "35.4 inches (900 mm)"
-msgstr ""
+msgstr "35.4 אינץ' (900 מ\"מ)"
 
 #. ITSM class bundles
 msgid "36U: 63 inches (160.02 cm)"
-msgstr ""
+msgstr "36U: 63 אינץ' (160.02 ס\"מ)"
 
 #. ITSM class bundles
 msgid "39.4 inches (1000 mm)"
-msgstr ""
+msgstr "39.4 אינץ' (1000 מ\"מ)"
 
 #. ITSM class bundles
 msgid "39U: 68.25 inches (173.35 cm)"
-msgstr ""
+msgstr "39U: 68.25 אינץ' (173.35 ס\"מ)"
 
 #. ITSM class bundles
 msgid "3U: 5.25 inches (13.34 cm)"
-msgstr ""
+msgstr "3U: 5.25 אינץ' (13.34 ס\"מ)"
 
 #. ITSM class bundles
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. ITSM class bundles
 msgid "4 GB"
-msgstr ""
+msgstr "4 GB"
 
 #. ITSM class bundles
 msgid "40\""
-msgstr ""
+msgstr "40\""
 
 #. ITSM class bundles
 msgid "42U: 73.5 inches (186.69 cm)"
-msgstr ""
+msgstr "42U: 73.5 אינץ' (186.69 ס\"מ)"
 
 #. ITSM class bundles
 msgid "43\""
-msgstr ""
+msgstr "43\""
 
 #. ITSM class bundles
 msgid "43.3 inches (1100 mm):"
-msgstr ""
+msgstr "43.3 אינץ' (1100 מ\"מ):"
 
 #. ITSM class bundles
 msgid "45U: 78.75 inches (200.02 cm)"
-msgstr ""
+msgstr "45U: 78.75 אינץ' (200.02 ס\"מ)"
 
 #. ITSM class bundles
 msgid "47.2 inches (1200 mm)"
-msgstr ""
+msgstr "47.2 אינץ' (1200 מ\"מ)"
 
 #. ITSM class bundles
 msgid "48 GB"
-msgstr ""
+msgstr "48 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "48U: 84 inches (213.36 cm)"
-msgstr ""
+msgstr "48U: 84 אינץ' (213.36 ס\"מ)"
 
 #. ITSM class bundles
 msgid "49\""
-msgstr ""
+msgstr "49\""
 
 #. ITSM class bundles
 msgid "4K Ultra HD (3840 x 2160):"
-msgstr ""
+msgstr "4K Ultra HD (3840 x 2160):"
 
 #. ITSM class bundles
 msgid "4U: 7 inches (17.78 cm)"
-msgstr ""
+msgstr "4U: 7 אינץ' (17.78 ס\"מ)"
 
 #. ITSM class bundles
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. ITSM class bundles
 msgid "512 GB"
-msgstr ""
+msgstr "512 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "55\""
-msgstr ""
+msgstr "55\""
 
 #. ITSM class bundles
 msgid "5K (5120 x 2880)"
-msgstr ""
+msgstr "5K (5120 x 2880)"
 
 #. ITSM class bundles
 msgid "5U: 8.75 inches (22.23 cm)"
-msgstr ""
+msgstr "5U: 8.75 אינץ' (22.23 ס\"מ)"
 
 #. ITSM class bundles
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. ITSM class bundles
 msgid "64 GB"
-msgstr ""
+msgstr "64 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "6U: 10.5 inches (26.67 cm)"
-msgstr ""
+msgstr "6U: 10.5 אינץ' (26.67 ס\"מ)"
 
 #. ITSM class bundles
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. ITSM class bundles
 msgid "7U: 12.25 inches (31.12 cm)"
-msgstr ""
+msgstr "7U: 12.25 אינץ' (31.12 ס\"מ)"
 
 #. ITSM class bundles
 msgid "8"
@@ -2406,387 +2682,387 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "8 GB"
-msgstr ""
+msgstr "8 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "8K Ultra HD (7680 x 4320)"
-msgstr ""
+msgstr "8K Ultra HD (7680 x 4320)"
 
 #. ITSM class bundles
 msgid "8U: 14 inches (35.56 cm)"
-msgstr ""
+msgstr "8U: 14 אינץ' (35.56 ס\"מ)"
 
 #. ITSM class bundles
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. ITSM class bundles
 msgid "96 GB"
-msgstr ""
+msgstr "96 ג'יגה-בייט"
 
 #. ITSM class bundles
 msgid "9U: 15.75 inches (40.01 cm)"
-msgstr ""
+msgstr "9U: 15.75 אינץ' (40.01 ס\"מ)"
 
 #. ITSM class bundles
 msgid "AGP"
-msgstr ""
+msgstr "AGP"
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "חשבונאות"
 
 #. ITSM class bundles
 msgid "Address Allocation"
-msgstr ""
+msgstr "הקצאת כתובות"
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "מנהל"
 
 #. ITSM class bundles
 msgid "Appliance Type"
-msgstr ""
+msgstr "סוג המכשיר"
 
 #. ITSM class bundles
 msgid "Backlinks"
-msgstr ""
+msgstr "קישורים נכנסים"
 
 #. ITSM class bundles
 msgid "Battery Capacity (Ah)"
-msgstr ""
+msgstr "קיבולת סוללה (Ah)"
 
 #. ITSM class bundles
 msgid "Battery Type"
-msgstr ""
+msgstr "סוג הסוללה"
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "ממשק אוטובוס"
 
 #. ITSM class bundles
 msgid "CIDR"
-msgstr ""
+msgstr "CIDR"
 
 #. ITSM class bundles
 msgid "CPU Class"
-msgstr ""
+msgstr "סוג מעבד"
 
 #. ITSM class bundles
 msgid "Capacity (GB)"
-msgstr ""
+msgstr "קיבולת (GB)"
 
 #. ITSM class bundles
 msgid "Capacity per graphics card"
-msgstr ""
+msgstr "קיבולת לכל כרטיס גרפי"
 
 #. ITSM class bundles
 msgid "Card Number"
-msgstr ""
+msgstr "מספר כרטיס"
 
 #. ITSM class bundles
 msgid "Card Type"
-msgstr ""
+msgstr "סוג כרטיס"
 
 #. ITSM class bundles
 msgid "Chroma DB"
-msgstr ""
+msgstr "Chroma DB"
 
 #. ITSM class bundles
 msgid "Client Certificates"
-msgstr ""
+msgstr "תעודות לקוח"
 
 #. ITSM class bundles
 msgid "Client Software"
-msgstr ""
+msgstr "תוכנת לקוח"
 
 #. ITSM class bundles
 msgid "Client category"
-msgstr ""
+msgstr "קטגוריית לקוחות"
 
 #. ITSM class bundles
 msgid "Clockrate"
-msgstr ""
+msgstr "קצב שעון"
 
 #. ITSM class bundles
 msgid "Clockspeed"
-msgstr ""
+msgstr "מהירות שעון"
 
 #. ITSM class bundles
 msgid "Code Signing Certificates"
-msgstr ""
+msgstr "תעודות חתימת קוד"
 
 #. ITSM class bundles
 msgid "Contact"
-msgstr ""
+msgstr "צור קשר"
 
 #. ITSM class bundles
 msgid "Contact Distributor"
-msgstr ""
+msgstr "צור קשר עם המפיץ"
 
 #. ITSM class bundles
 msgid "Contract"
-msgstr ""
+msgstr "חוזה"
 
 #. ITSM class bundles
 msgid "Contract Type"
-msgstr ""
+msgstr "סוג החוזה"
 
 #. ITSM class bundles
 msgid "Contract period from"
-msgstr ""
+msgstr "תקופת החוזה מ"
 
 #. ITSM class bundles
 msgid "Contract period until"
-msgstr ""
+msgstr "תקופת החוזה עד"
 
 #. ITSM class bundles
 msgid "Cost unit"
-msgstr ""
+msgstr "יחידת עלות"
 
 #. ITSM class bundles
 msgid "Count of licenses"
-msgstr ""
+msgstr "מספר הרישיונות"
 
 #. ITSM class bundles
 msgid "Creation Date"
-msgstr ""
+msgstr "תאריך יצירה"
 
 #. ITSM class bundles
 msgid "Custom Rack"
-msgstr ""
+msgstr "מתלה מותאם אישית"
 
 #. ITSM class bundles
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #. ITSM class bundles
 msgid "DHCP Reserved"
-msgstr ""
+msgstr "DHCP שמור"
 
 #. ITSM class bundles
 msgid "DVI"
-msgstr ""
+msgstr "DVI"
 
 #. ITSM class bundles
 msgid "Date of Invoice"
-msgstr ""
+msgstr "תאריך החשבונית"
 
 #. ITSM class bundles
 msgid "Date of Order"
-msgstr ""
+msgstr "תאריך ההזמנה"
 
 #. ITSM class bundles
 msgid "Date of Warranty"
-msgstr ""
+msgstr "תאריך האחריות"
 
 #. ITSM class bundles
 msgid "Date of release"
-msgstr ""
+msgstr "תאריך השחרור"
 
 #. ITSM class bundles
 msgid "DisplayPort"
-msgstr ""
+msgstr "DisplayPort"
 
 #. ITSM class bundles
 msgid "Document Signing Certificates"
-msgstr ""
+msgstr "תעודות חתימה על מסמכים"
 
 #. ITSM class bundles
 msgid "EISA"
-msgstr ""
+msgstr "EISA"
 
 #. ITSM class bundles
 msgid "ETSI Rack"
-msgstr ""
+msgstr "ארון ETSI"
 
 #. ITSM class bundles
 msgid "Elasticsearch"
-msgstr ""
+msgstr "Elasticsearch"
 
 #. ITSM class bundles
 msgid "Email Certificates (S/MIME Certificates)"
-msgstr ""
+msgstr "תעודות דוא\"ל (תעודות S/MIME)"
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "כתובת IP סופית"
 
 #. ITSM class bundles
 msgid "End of support"
-msgstr ""
+msgstr "סיום התמיכה"
 
 #. ITSM class bundles
 msgid "Expiry Date"
-msgstr ""
+msgstr "תאריך תפוגה"
 
 #. ITSM class bundles
 msgid "FireWire (IEEE 1394)"
-msgstr ""
+msgstr "FireWire (IEEE 1394)"
 
 #. ITSM class bundles
 msgid "Firmware"
-msgstr ""
+msgstr "קושחה"
 
 #. ITSM class bundles
 msgid "Flywheel Energy Storage"
-msgstr ""
+msgstr "אגירת אנרגיה באמצעות גלגל תנופה"
 
 #. ITSM class bundles
 msgid "Form Factor"
-msgstr ""
+msgstr "גורם צורה"
 
 #. ITSM class bundles
 msgid "Full HD (1920 x 1080)"
-msgstr ""
+msgstr "Full HD (1920 x 1080)"
 
 #. ITSM class bundles
 msgid "General Information"
-msgstr ""
+msgstr "מידע כללי"
 
 #. ITSM class bundles
 msgid "Graphics Cards"
-msgstr ""
+msgstr "כרטיסי מסך"
 
 #. ITSM class bundles
 msgid "Graphics card"
-msgstr ""
+msgstr "כרטיס גרפי"
 
 #. ITSM class bundles
 msgid "HD (1280 x 720)"
-msgstr ""
+msgstr "HD (1280 x 720)"
 
 #. ITSM class bundles
 msgid "HDMI"
-msgstr ""
+msgstr "HDMI"
 
 #. ITSM class bundles
 msgid "Hardware Model"
-msgstr ""
+msgstr "דגם חומרה"
 
 #. ITSM class bundles
 msgid "Hardware Weight"
-msgstr ""
+msgstr "משקל החומרה"
 
 #. ITSM class bundles
 msgid "IBM Db2"
-msgstr ""
+msgstr "IBM Db2"
 
 #. ITSM class bundles
 msgid "IP Protocol"
-msgstr ""
+msgstr "פרוטוקול IP"
 
 #. ITSM class bundles
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #. ITSM class bundles
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #. ITSM class bundles
 msgid "ISA"
-msgstr ""
+msgstr "ISA"
 
 #. ITSM class bundles
 msgid "Inventory Number"
-msgstr ""
+msgstr "מספר מלאי"
 
 #. ITSM class bundles
 msgid "Inverstment costs"
-msgstr ""
+msgstr "עלויות השקעה"
 
 #. ITSM class bundles
 msgid "Invoice Number"
-msgstr ""
+msgstr "מספר חשבונית"
 
 #. ITSM class bundles
 msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr ""
+msgstr "צג LCD (תצוגת גביש נוזלי)"
 
 #. ITSM class bundles
 msgid "LED Monitor (Light Emitting Diode)"
-msgstr ""
+msgstr "צג LED (דיודה פולטת אור)"
 
 #. ITSM class bundles
 msgid "LPC (Low Pin Count)"
-msgstr ""
+msgstr "LPC (מספר פינים נמוך)"
 
 #. ITSM class bundles
 msgid "Latitude"
-msgstr ""
+msgstr "קו רוחב"
 
 #. ITSM class bundles
 msgid "Layer 1: Physical Layer"
-msgstr ""
+msgstr "שכבה 1: שכבה פיזית"
 
 #. ITSM class bundles
 msgid "Layer 2: Data Link Layer"
-msgstr ""
+msgstr "שכבה 2: שכבת קישור נתונים"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer"
-msgstr ""
+msgstr "שכבה 3: שכבת הרשת"
 
 #. ITSM class bundles
 msgid "Layer 3: Network Layer (Supernet)"
-msgstr ""
+msgstr "שכבה 3: שכבת הרשת (Supernet)"
 
 #. ITSM class bundles
 msgid "Layer 4: Transport Layer"
-msgstr ""
+msgstr "שכבה 4: שכבת התעבורה"
 
 #. ITSM class bundles
 msgid "Layer 5: Session Layer"
-msgstr ""
+msgstr "שכבה 5: שכבת הפעלה"
 
 #. ITSM class bundles
 msgid "Layer 6: Presentation Layer"
-msgstr ""
+msgstr "שכבה 6: שכבת הצגה"
 
 #. ITSM class bundles
 msgid "Layer 7: Application Layer"
-msgstr ""
+msgstr "שכבה 7: שכבת היישום"
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "מפתח רישיון"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "סוג הרישיון"
 
 #. ITSM class bundles
 msgid "License period from"
-msgstr ""
+msgstr "תקופת הרישיון מ"
 
 #. ITSM class bundles
 msgid "License period until"
-msgstr ""
+msgstr "תקופת הרישיון עד"
 
 #. ITSM class bundles
 msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr ""
+msgstr "סוללת ליתיום-ברזל-פוספט (LiFePO4)"
 
 #. ITSM class bundles
 msgid "Lithium-Ion (Li-ion) Battery"
-msgstr ""
+msgstr "סוללת ליתיום-יון (Li-ion)"
 
 #. ITSM class bundles
 msgid "Located in"
-msgstr ""
+msgstr "ממוקם ב"
 
 #. ITSM class bundles
 msgid "Longitude"
-msgstr ""
+msgstr "קו אורך"
 
 #. ITSM class bundles
 msgid "MCA (Micro Channel Architecture)"
-msgstr ""
+msgstr "MCA (ארכיטקטורת מיקרו-ערוצים)"
 
 #. ITSM class bundles
 msgid "Manufacturer"
-msgstr ""
+msgstr "יצרן"
 
 #. ITSM class bundles
 msgid "MariaDB"
@@ -2794,497 +3070,517 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Maximum Load Capacity (W)"
-msgstr ""
+msgstr "קיבולת עומס מרבית (W)"
 
 #. ITSM class bundles
 msgid "Memory"
-msgstr ""
+msgstr "זיכרון"
 
 #. ITSM class bundles
 msgid "Memory Type"
-msgstr ""
+msgstr "סוג זיכרון"
 
 #. ITSM class bundles
 msgid "Microsoft SQL Server"
-msgstr ""
+msgstr "Microsoft SQL Server"
 
 #. ITSM class bundles
 msgid "Mini-Rack"
-msgstr ""
+msgstr "מיני-מתלה"
 
 #. ITSM class bundles
 msgid "Mobile Number"
-msgstr ""
+msgstr "מספר טלפון נייד"
 
 #. ITSM class bundles
 msgid "Model Description"
-msgstr ""
+msgstr "תיאור הדגם"
 
 #. ITSM class bundles
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 #. ITSM class bundles
 msgid "Monitor Resolution"
-msgstr ""
+msgstr "רזולוציית המסך"
 
 #. ITSM class bundles
 msgid "Monitor Size"
-msgstr ""
+msgstr "גודל המסך"
 
 #. ITSM class bundles
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #. ITSM class bundles
 msgid "Network Info"
-msgstr ""
+msgstr "מידע על הרשת"
 
 #. ITSM class bundles
 msgid "Network Information"
-msgstr ""
+msgstr "מידע על הרשת"
 
 #. ITSM class bundles
 msgid "Network Layer"
-msgstr ""
+msgstr "שכבת הרשת"
 
 #. ITSM class bundles
 msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr ""
+msgstr "סוללת ניקל-קדמיום (NiCd)"
 
 #. ITSM class bundles
 msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr ""
+msgstr "סוללת ניקל-מתכת הידריד (NiMH)"
 
 #. ITSM class bundles
 msgid "NuBus"
-msgstr ""
+msgstr "NuBus"
 
 #. ITSM class bundles
 msgid "Number of CPUs"
-msgstr ""
+msgstr "מספר מעבדים"
 
 #. ITSM class bundles
 msgid "Number of RAM modules"
-msgstr ""
+msgstr "מספר מודולי RAM"
 
 #. ITSM class bundles
 msgid "Number of graphics cards"
-msgstr ""
+msgstr "מספר כרטיסי המסך"
 
 #. ITSM class bundles
 msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr ""
+msgstr "צג OLED (דיודה אורגנית פולטת אור)"
 
 #. ITSM class bundles
 msgid "Operating costs"
-msgstr ""
+msgstr "עלויות תפעול"
 
 #. ITSM class bundles
 msgid "Oracle Database"
-msgstr ""
+msgstr "מסד נתונים Oracle"
 
 #. ITSM class bundles
 msgid "Order Number"
-msgstr ""
+msgstr "מספר הזמנה"
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "תפוקות"
 
 #. ITSM class bundles
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #. ITSM class bundles
 msgid "PCI Express (PCIe)"
-msgstr ""
+msgstr "PCI Express (PCIe)"
 
 #. ITSM class bundles
 msgid "PCI-X"
-msgstr ""
+msgstr "PCI-X"
 
 #. ITSM class bundles
 msgid "PIN"
-msgstr ""
+msgstr "PIN"
 
 #. ITSM class bundles
 msgid "PIN 2"
-msgstr ""
+msgstr "PIN 2"
 
 #. ITSM class bundles
 msgid "PUK"
-msgstr ""
+msgstr "PUK"
 
 #. ITSM class bundles
 msgid "PUK 2"
-msgstr ""
+msgstr "PUK 2"
 
 #. ITSM class bundles
 msgid "Phone Number"
-msgstr ""
+msgstr "מספר טלפון"
 
 #. ITSM class bundles
 msgid "Phone Type"
-msgstr ""
+msgstr "סוג טלפון"
 
 #. ITSM class bundles
 msgid "Physical Cores"
-msgstr ""
+msgstr "ליבות פיזיות"
 
 #. ITSM class bundles
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 #. ITSM class bundles
 msgid "Power Delivery"
-msgstr ""
+msgstr "אספקת חשמל"
 
 #. ITSM class bundles
 msgid "Purchased at"
-msgstr ""
+msgstr "נרכש ב"
 
 #. ITSM class bundles
 msgid "Quad HD (2560 x 1440)"
-msgstr ""
+msgstr "Quad HD (2560 x 1440)"
 
 #. ITSM class bundles
 msgid "Rack Depth"
-msgstr ""
+msgstr "עומק המדף"
 
 #. ITSM class bundles
 msgid "Rack Units (U)"
-msgstr ""
+msgstr "יחידות מתלה (U)"
 
 #. ITSM class bundles
 msgid "Redis"
-msgstr ""
+msgstr "Redis"
 
 #. ITSM class bundles
 msgid "Reference to Customer"
-msgstr ""
+msgstr "הפניה ללקוח"
 
 #. ITSM class bundles
 msgid "SIM Card"
-msgstr ""
+msgstr "כרטיס SIM"
 
 #. ITSM class bundles
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #. ITSM class bundles
 msgid "SSL/TLS Certificates"
-msgstr ""
+msgstr "תעודות SSL/TLS"
 
 #. ITSM class bundles
 msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr ""
+msgstr "סוללת עופרת-חומצה אטומה (SLA)"
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "מספר סידורי"
 
 #. ITSM class bundles
 msgid "Server Software"
-msgstr ""
+msgstr "תוכנת שרת"
 
 #. ITSM class bundles
 msgid "Service Tag"
-msgstr ""
+msgstr "תג שירות"
 
 #. ITSM class bundles
 msgid "Socket Type"
-msgstr ""
+msgstr "סוג שקע"
 
 #. ITSM class bundles
 msgid "Start IP Address"
-msgstr ""
+msgstr "כתובת IP התחלתית"
 
 #. ITSM class bundles
 msgid "Storage"
-msgstr ""
+msgstr "אחסון"
 
 #. ITSM class bundles
 msgid "Storage Partition"
-msgstr ""
+msgstr "מחיצת אחסון"
 
 #. ITSM class bundles
 msgid "Subsidiary"
-msgstr ""
+msgstr "חברה בת"
 
 #. ITSM class bundles
 msgid "Summary"
-msgstr ""
+msgstr "סיכום"
 
 #. ITSM class bundles
 msgid "Threads"
-msgstr ""
+msgstr "חוטים"
 
 #. ITSM class bundles
 msgid "Thunderbolt"
-msgstr ""
+msgstr "ברק"
 
 #. ITSM class bundles
 msgid "Total Graphics card RAM (GB)"
-msgstr ""
+msgstr "סה\"כ זיכרון RAM של כרטיס המסך (GB)"
 
 #. ITSM class bundles
 msgid "Total RAM (GB)"
-msgstr ""
+msgstr "זיכרון RAM כולל (GB)"
 
 #. ITSM class bundles
 msgid "Touchscreen Monitor"
-msgstr ""
+msgstr "צג מגע"
 
 #. ITSM class bundles
 msgid "Tower"
-msgstr ""
+msgstr "מגדל"
 
 #. ITSM class bundles
 msgid "USB (Universal Serial Bus)"
-msgstr ""
+msgstr "USB (אוטובוס טורי אוניברסלי)"
 
 #. ITSM class bundles
 msgid "USB-C"
-msgstr ""
+msgstr "USB-C"
 
 #. ITSM class bundles
 msgid "UWQHD (3440 x 1440)"
-msgstr ""
+msgstr "UWQHD (3440 x 1440)"
 
 #. ITSM class bundles
 msgid "VESA Local Bus (VLB)"
-msgstr ""
+msgstr "אוטובוס מקומי VESA (VLB)"
 
 #. ITSM class bundles
 msgid "VGA"
-msgstr ""
+msgstr "VGA"
 
 #. ITSM class bundles
 msgid "VirtualLink"
-msgstr ""
+msgstr "VirtualLink"
 
 #. ITSM class bundles
 msgid "WUXGA (1920 x 1200)"
-msgstr ""
+msgstr "WUXGA (1920 x 1200)"
 
 #. ITSM class bundles
 msgid "WXGA (1366 x 768)"
-msgstr ""
+msgstr "WXGA (1366 x 768)"
 
 #. ITSM class bundles
 msgid "Analog Phone"
-msgstr ""
+msgstr "טלפון אנלוגי"
 
 #. ITSM class bundles
 msgid "Card Reader"
-msgstr ""
+msgstr "קורא כרטיסים"
 
 #. ITSM class bundles
 msgid "Conference Phone"
-msgstr ""
+msgstr "טלפון לכנסים"
 
 #. ITSM class bundles
 msgid "Consulting Agreement"
-msgstr ""
+msgstr "הסכם ייעוץ"
 
 #. ITSM class bundles
 msgid "Container Management"
-msgstr ""
+msgstr "ניהול מכולות"
 
 #. ITSM class bundles
 msgid "Cordless Phone (DECT Phone)"
-msgstr ""
+msgstr "טלפון אלחוטי (טלפון DECT)"
 
 #. ITSM class bundles
 msgid "DNS-Server"
-msgstr ""
+msgstr "שרת DNS"
 
 #. ITSM class bundles
 msgid "Employment Contract"
-msgstr ""
+msgstr "חוזה העסקה"
 
 #. ITSM class bundles
 msgid "External Hard Drive"
-msgstr ""
+msgstr "כונן קשיח חיצוני"
 
 #. ITSM class bundles
 msgid "Firewall"
-msgstr ""
+msgstr "חומת אש"
 
 #. ITSM class bundles
 msgid "Franchise Agreement"
-msgstr ""
+msgstr "הסכם זיכיון"
 
 #. ITSM class bundles
 msgid "Headset"
-msgstr ""
+msgstr "אוזניות"
 
 #. ITSM class bundles
 msgid "Identity and Access Management (IAM)"
-msgstr ""
+msgstr "ניהול זהויות וגישה (IAM)"
 
 #. ITSM class bundles
 msgid "Landline Phone"
-msgstr ""
+msgstr "טלפון קווי"
 
 #. ITSM class bundles
 msgid "Lease Agreement"
-msgstr ""
+msgstr "הסכם שכירות"
 
 #. ITSM class bundles
 msgid "License Agreement"
-msgstr ""
+msgstr "הסכם רישיון"
 
 #. ITSM class bundles
 msgid "Loan Agreement"
-msgstr ""
+msgstr "הסכם הלוואה"
 
 #. ITSM class bundles
 msgid "Mobile/Embedded"
-msgstr ""
+msgstr "מובייל/משובץ"
 
 #. ITSM class bundles
 msgid "Non-Disclosure Agreement (NDA)"
-msgstr ""
+msgstr "הסכם סודיות (NDA)"
 
 #. ITSM class bundles
 msgid "Notebook"
-msgstr ""
+msgstr "מחברת"
 
 #. ITSM class bundles
 msgid "OTOBO"
-msgstr ""
+msgstr "OTOBO"
 
 #. ITSM class bundles
 msgid "Partnership Agreement"
-msgstr ""
+msgstr "הסכם שותפות"
 
 #. ITSM class bundles
 msgid "Phone / VOIP"
-msgstr ""
+msgstr "טלפון / VOIP"
 
 #. ITSM class bundles
 msgid "Sales Contract"
-msgstr ""
+msgstr "חוזה מכירה"
 
 #. ITSM class bundles
 msgid "Satellite Phone"
-msgstr ""
+msgstr "טלפון לווייני"
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "הסכם שירות"
 
 #. ITSM class bundles
 msgid "Speakers"
-msgstr ""
+msgstr "רמקולים"
 
 #. ITSM class bundles
 msgid "Thin Client"
-msgstr ""
+msgstr "לקוח רזה"
 
 #. ITSM class bundles
 msgid "USB Hub"
-msgstr ""
+msgstr "מרכזת USB"
 
 #. ITSM class bundles
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #. ITSM class bundles
 msgid "VR Headset"
-msgstr ""
+msgstr "משקפי VR"
 
 #. ITSM class bundles
 msgid "VoIP Phone"
-msgstr ""
+msgstr "טלפון VoIP"
 
 #. ITSM class bundles
 msgid "Webcam"
-msgstr ""
+msgstr "מצלמת רשת"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "מספר הגרסה של פריט תצורה זה"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
-msgstr ""
+msgstr "ייבוא מחלקות/תפקידים והשדות הקשורים אליהם"
 
 #. SysConfig
 msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
+"עמודות שניתן לסנן בתצוגת תוצאות החיפוש של פריטי התצורה בממשק הסוכן. הערה: "
+"מותר להשתמש רק בתכונות פריטי תצורה ובשדות דינמיים (DynamicField_NameX)."
 
 #. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
 msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr ""
+msgstr "מבנה הבסיס אינו תקף. אנא ספק חתימה עם נתונים בפורמט YAML."
 
 #. SysConfig
 msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
 msgstr ""
+"בנקודת זמן ספציפית, צור כרטיס עבור פריטי התצורה, אם הדרישות שהוגדרו "
+"מתקיימות. נקודת הזמן נקבעת על פי הערך של השדה המוגדר תחת \"TimeCIKey\" של "
+"ConfigItem, ומשתנה על ידי \"TimeModifier\". אם האחרון יכול להיות מספר בלבד, "
+"או סימן (+/-), מספר ויחידת מידה (d/h/m): \"7\" שווה ל-\"+7d\". ה-"
+"DynamicField \"Ticket-&gt;DynamicField\" ישמש לסימון כרטיסים שנוצרו - הוא "
+"חייב להתקיים. הדגלים &lt;OTOBO_CONFIGITEM_X&gt;, כאשר X יכול להיות NAME, "
+"NUMBER ו-DATE, יוחלפו בערכים המתאימים ב-\"Ticket-&gt;Text\"."
 
 #. SysConfig
 msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
 msgstr ""
+"מודול אירוע פריט תצורה הסופר את הרישיונות עבור התכונה OTOBOCILicenseCount."
 
 #. SysConfig
 msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr ""
+msgstr "יוצר כרטיסים עבור פריטי תצורה בנקודות זמן ספציפיות."
 
 #. SysConfig
 msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
 msgstr ""
+"אם אפשרות זו מופעלת, פריטים מקושרים נספרים רק אם הם שייכים לאחת מהקטגוריות "
+"המפורטות."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
 msgstr ""
+"באמצעות אפשרות זו ניתן למלא באופן אוטומטי שדה CI, בהתאם למספר ה-CI המקושרים "
+"עם הסוג הקיים DependsOn."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
 msgstr ""
+"באמצעות אפשרות זו ניתן למלא באופן אוטומטי שדה CI, בהתאם למספר ה-CI המקושרים."
 
 #. SysConfig
 msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
 msgstr ""
+"באמצעות אפשרות זו ניתן למלא באופן אוטומטי שדה CI, בהתאם למספר ה-CI המקושרים. "
+"ההגדרה CounterClassName כוללת את שם הכיתה, וההגדרה CounterFieldName משמשת "
+"לאחסון מספר הרישיונות בשימוש."
 
 #. SysConfig
 msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr ""
+msgstr "מגדיר את הגובה הראשוני של רכיב עורך הטקסט העשיר בפיקסלים."
 
 #. SysConfig
 msgid "Defines if parent-child translations for queues and services should be generated automatically."
 msgstr ""
+"קובע אם יש ליצור באופן אוטומטי תרגומים בין הורה לילד עבור תורים ושירותים."
 
 #. SysConfig
 msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr ""
+msgstr "מגדיר את הגובה הראשוני בפיקסלים עבור רכיב עורך הטקסט העשיר עבור מסך זה."
 
 #. SysConfig
 msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
 msgstr ""
+"מגדיר את הגובה של רכיב עורך הטקסט העשיר עבור מסך זה. הזן מספר (פיקסלים) או "
+"ערך אחוז (יחסי)."
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "General operation data"
-msgstr ""
+msgstr "נתוני פעולה כלליים"
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for incoming request data"
-msgstr ""
+msgstr "הגדרות עבור נתוני בקשות נכנסות"
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for outgoing response data"
-msgstr ""
+msgstr "הגדרות עבור נתוני תגובה יוצאים"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Import/Export attachments (as the last entries per line)"
-msgstr ""
+msgstr "ייבוא/ייצוא קבצים מצורפים (כפריטים האחרונים בכל שורה)"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Version String"
-msgstr ""
+msgstr "מחרוזת גרסה"
 
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
-msgstr ""
-
+msgstr "מגדיר את ההרשאות הנדרשות להגדרת פריטי תצורת ITSM באמצעות הממשק הגנרי."
