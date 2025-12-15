@@ -90,8 +90,7 @@ sub new {
 
     if ( IsHashRefWithData($PermissionConditionsConfig) ) {
         PERMCONF:
-        for my $ConfigCounter ( 1 .. 5 ) {
-            my $ConfigIdentifier          = sprintf( "%02d", $ConfigCounter );
+        for my $ConfigIdentifier ( sort keys $PermissionConditionsConfig->%* ) {
             my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
@@ -501,7 +500,7 @@ sub Run {
         }
     }
 
-    # check if columnsenabled is a filled array referencd
+    # check if columnsenabled is a filled array reference
     if ( IsArrayRefWithData( $Self->{ColumnsEnabled} ) ) {
 
         # check if column is really filterable
