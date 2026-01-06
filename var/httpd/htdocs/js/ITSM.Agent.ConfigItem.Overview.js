@@ -40,7 +40,7 @@ ITSM.Agent.ConfigItem.Overview = (function (TargetNS) {
         var ITSMConfigItemSearch    = Core.Config.Get('ITSMConfigItemSearch');
         var ITSMConfigItemActionRow = Core.Config.Get('ITSMConfigItemActionRow') || {};
 
-        var URL, ColumnFilter, NewColumnFilterStrg, MyRegEx, SessionInformation, $MasterActionLink;
+        var URL, ColumnFilter, NewColumnFilterStrg, MyRegEx, SessionInformation;
 
         $('#ShowContextSettingsDialog').on('click', function (Event) {
             Core.UI.Dialog.ShowContentDialog($('#ContextSettingsDialogContainer'), Core.Language.Translate("Settings"), '15%', 'Center', true,

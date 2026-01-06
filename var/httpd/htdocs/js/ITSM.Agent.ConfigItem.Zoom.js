@@ -66,7 +66,7 @@ ITSM.Agent.ConfigItem.Zoom = (function (TargetNS) {
         Core.Agent.TableFilters.SetAllocationList();
 
         if (ITSMShowConfirmDialog) {
-            $.each(ITSMShowConfirmDialog, function(Key, Data) {
+            $.each(ITSMShowConfirmDialog, function(_Key, Data) {
                 ITSM.Agent.ConfirmDialog.BindConfirmDialog({
                     ElementID:                  Data.MenuID,
                     ElementSelector:            Data.ElementSelector,

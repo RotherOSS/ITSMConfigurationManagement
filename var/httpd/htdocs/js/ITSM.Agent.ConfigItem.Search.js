@@ -424,7 +424,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
         $('#DivClassID').addClass('ui-autocomplete-loading');
         Core.AJAX.ContentUpdate($('#AJAXUpdate'), URL, function() {
             var ITSMSearchProfileAttributes = Core.Config.Get('ITSMSearchProfileAttributes') || [];
-            $.each(ITSMSearchProfileAttributes, function(Idx, Attribute) {
+            $.each(ITSMSearchProfileAttributes, function(_Idx, Attribute) {
                 ITSM.Agent.ConfigItem.Search.SearchAttributeAdd(Core.App.EscapeSelector(Attribute));
                 ITSM.Agent.ConfigItem.Search.AdditionalAttributeSelectionRebuild();
             });
@@ -446,7 +446,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
      *      This function refresh the search dialog with the selected class
      */
 
-    TargetNS.LoadClass = function (Profile) {
+    TargetNS.LoadClass = function () {
         var BaseLink = Core.Config.Get('Baselink'),
             Action = 'Action=AgentITSMConfigItemSearch;',
             SubAction = 'Subaction=AJAXUpdate;',
@@ -456,7 +456,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
         $('#DivClassID').addClass('ui-autocomplete-loading');
         Core.AJAX.ContentUpdate($('#AJAXUpdate'), URL, function() {
             var ITSMSearchProfileAttributes = Core.Config.Get('ITSMSearchProfileAttributes') || [];
-            $.each(ITSMSearchProfileAttributes, function(Idx, Attribute) {
+            $.each(ITSMSearchProfileAttributes, function(_Idx, Attribute) {
                 ITSM.Agent.ConfigItem.Search.SearchAttributeAdd(Core.App.EscapeSelector(Attribute));
                 ITSM.Agent.ConfigItem.Search.AdditionalAttributeSelectionRebuild();
             });
@@ -483,7 +483,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
      *      "Please enter at least one search value or * to find anything"
      */
     function CheckForSearchedValues() {
-        // loop through the SerachForm labels
+        // loop through the SearchForm labels
         var SearchValueFlag = false;
         $('#SearchForm label').each(function () {
             var ElementName,
@@ -508,7 +508,7 @@ ITSM.Agent.ConfigItem.Search = (function (TargetNS) {
                 // Fix for bug#10845: make sure time slot fields with TimeInputFormat
                 // 'Input' set are being considered correctly, too. As this is only
                 // relevant for search type 'TimeSlot', we check for the first
-                // input type=text elment in the corresponding field element.
+                // input type=text element in the corresponding field element.
                 // All time field elements have to be filled in, but if only one
                 // is missing, we treat the whole field as invalid.
                 if ($FieldElement.find('input[name$="SearchType"]').val() === 'TimeSlot' && !$FieldElement.find('select').length) {
