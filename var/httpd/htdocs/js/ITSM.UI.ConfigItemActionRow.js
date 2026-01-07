@@ -81,7 +81,7 @@ ITSM.UI.ConfigItemActionRow = (function (TargetNS) {
         var Actions;
         // The element of the given ID must exist, JSONString must not be empty
         if (isJQueryObject($Element)) {
-            if (typeof JSONString === 'String') {
+            if (typeof JSONString === 'string') {
                 Actions = Core.JSON.Parse(JSONString);
             }
             else {
@@ -108,7 +108,7 @@ ITSM.UI.ConfigItemActionRow = (function (TargetNS) {
      *      The jQueryObject of the ActionRow wrapper (normally the <ul>-Element)
      * @return nothing
      */
-    TargetNS.UpdateActionRow = function ($ClickedElement, $Checkboxes, $ActionRow) {
+    TargetNS.UpdateActionRow = function (_$ClickedElement, $Checkboxes, $ActionRow) {
         var ConfigItemActionData,
             ActionRowElement;
 
@@ -135,7 +135,7 @@ ITSM.UI.ConfigItemActionRow = (function (TargetNS) {
             // and get the data
             ConfigItemActionData = Core.Data.Get($Checkboxes.closest('li, tr'), 'Actions');
             if (typeof ConfigItemActionData !== 'undefined') {
-                $.each(ConfigItemActionData, function (Index, Value) {
+                $.each(ConfigItemActionData, function (_Index, Value) {
                     if (Value.HTML) {
                         $(Value.HTML).attr('id', Value.ID).appendTo($ActionRow);
                         ActionRowElement = $ActionRow.find('#' + Value.ID).find('a');
