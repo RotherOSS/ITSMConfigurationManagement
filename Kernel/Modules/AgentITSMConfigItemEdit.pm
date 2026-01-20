@@ -902,7 +902,7 @@ sub Run {
             }
 
             my $DataValues = $DynFieldStates{Fields}{$Name}{NotACLReducible}
-                ? $GetParam{DynamicField}{"DynamicField_$Name"}
+                ? ( $GetParam{DynamicField}{"DynamicField_$Name"} // '' )
                 :
                 (
                     $DynamicFieldBackendObject->BuildSelectionDataGet(
@@ -958,7 +958,7 @@ sub Run {
                 }
 
                 my $DataValues = $SetField->{FieldStates}{$FrontendName}{NotACLReducible}
-                    ? $SetField->{Values}{$FrontendName}
+                    ? ( $SetField->{Values}{$FrontendName} // '' )
                     :
                     (
                         $DynamicFieldBackendObject->BuildSelectionDataGet(
