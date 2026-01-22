@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -780,7 +780,8 @@ sub ConfigItemDelete {
 
     # remember config item data before delete
     my $ConfigItemData = $Self->ConfigItemGet(
-        ConfigItemID => $Param{ConfigItemID},
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => 1,
     );
 
     # delete all links to this config item before deleting the versions.
@@ -889,6 +890,7 @@ sub ConfigItemDelete {
             Comment      => $Param{ConfigItemID},
             Number       => $ConfigItemData->{Number},
             Class        => $ConfigItemData->{Class},
+            ConfigItem   => $ConfigItemData,
         },
         UserID => $Param{UserID},
     );
