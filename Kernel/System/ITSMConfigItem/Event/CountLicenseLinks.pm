@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package Kernel::System::ITSMConfigItem::Event::DoLicensesAccounting;
+package Kernel::System::ITSMConfigItem::Event::CountLicenseLinks;
 
 use strict;
 use warnings;
@@ -32,7 +32,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ITSMConfigItem::Event::DoLicensesAccounting - Event handler that count licenses using linked CI's
+Kernel::System::ITSMConfigItem::Event::CountLicenseLinks - Event handler that count licenses using linked CI's
 
 =head1 SYNOPSIS
 
@@ -98,12 +98,8 @@ sub Run {
     my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 
     # Get Config options
-    my %LicenseSettings = $ConfigObject->Get('ITSMConfigItem::LicenseManagement')->%*;
+    my %LicenseSettings = $ConfigObject->Get('ITSMConfigItem::LicenseCount')->%*;
 
-    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-        ConfigItemID  => $Param{Data}{ConfigItemID},
-        DynamicFields => 1,
-    );
     my %DeploymentStateList = %{
         $GeneralCatalogObject->ItemList(
             Class => 'ITSM::ConfigItem::DeploymentState',
@@ -112,16 +108,23 @@ sub Run {
 
     if ( $Param{Event} eq 'DeploymentStateUpdate' ) {
 
-        my ( $CurrentDeplStateID, $PreviousDeplStateID ) = $Param{Data}{Comment} =~ /(\d+)%%(\d+)/;
-        my $CurrentDeplState  = $DeploymentStateList{$CurrentDeplStateID};
-        my $PreviousDeplState = $DeploymentStateList{$PreviousDeplStateID};
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $Param{Data}{ConfigItemID},
+            DynamicFields => 1,
+        );
+        my $CurrentDeplStateID  = $Param{Data}{NewKey};
+        my $PreviousDeplStateID = $Param{Data}{OldKey};
+        my $CurrentDeplState    = $DeploymentStateList{$CurrentDeplStateID};
+        my $PreviousDeplState   = $DeploymentStateList{$PreviousDeplStateID};
 
         LICENSE_SETTINGS_DEPL_STATE:
         for my $Key ( keys %LicenseSettings ) {
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
-            next LICENSE_SETTINGS_DEPL_STATE if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
 
+            next LICENSE_SETTINGS_DEPL_STATE if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
             my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
+
+            next LICENSE_SETTINGS_DEPL_STATE if !$LicenseSettings{$Key}{ValidDeplStates};
             if (
                 ( none { $_ eq $PreviousDeplState } @ValidDeplStates )
                 &&
@@ -160,10 +163,12 @@ sub Run {
         LICENSE_SETTINGS_DELETE:
         for my $Key ( keys %LicenseSettings ) {
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
-            next LICENSE_SETTINGS_DELETE if !$Param{Data}{ConfigItem}->{"DynamicField_$LicenseReferenceDF"};
+
+            next LICENSE_SETTINGS_DELETE if !$Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"};
             my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
-            next LICENSE_SETTINGS_DELETE if none { $_ eq $ConfigItem->{CurDeplState} } @ValidDeplStates;
-            for my $LicenseReference ( $Param{Data}{ConfigItem}->{"DynamicField_$LicenseReferenceDF"}->@* ) {
+
+            next LICENSE_SETTINGS_DELETE if @ValidDeplStates && none { $_ eq $Param{Data}{ConfigItem}{CurDeplState} } @ValidDeplStates;
+            for my $LicenseReference ( $Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"}->@* ) {
                 $Self->_LicensesAccountingUpdate(
                     ObjectID            => $LicenseReference,
                     ConfigItemID        => $Param{Data}{ConfigItemID},
@@ -175,36 +180,46 @@ sub Run {
         }
     }
     elsif ( $Param{Event} =~ /^ConfigItemDynamicFieldUpdate_/ ) {
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID  => $Param{Data}{ConfigItemID},
+            DynamicFields => 1,
+        );
+
         LICENSE_SETTINGS_UPDATE:
         for my $Key ( keys %LicenseSettings ) {
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
             my $TotalLicensesDF    = $LicenseSettings{$Key}{TotalLicensesDF};
             if ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$LicenseReferenceDF" ) {
                 my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
-                next LICENSE_SETTINGS_UPDATE if none { $_ eq $ConfigItem->{CurDeplState} } @ValidDeplStates;
+
+                next LICENSE_SETTINGS_UPDATE if @ValidDeplStates && none { $_ eq $ConfigItem->{CurDeplState} } @ValidDeplStates;
                 my @OldLicenseReferencesList = ( $Param{Data}{OldValue} || [] )->@*;
                 my @NewLicenseReferencesList = ( $Param{Data}{Value}    || [] )->@*;
+                my %Delta;
+
+                OLD_REFERENCES:
                 for my $LicenseReference (@OldLicenseReferencesList) {
-                    if ( none { $_ eq $LicenseReference } @NewLicenseReferencesList ) {
-                        $Self->_LicensesAccountingUpdate(
-                            ObjectID            => $LicenseReference,
-                            ConfigItemID        => $Param{Data}{ConfigItemID},
-                            AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                            UserID              => $Param{UserID},
-                            Delta               => 1
-                        );
-                    }
+                    next OLD_REFERENCES if !$LicenseReference;
+                    $Delta{$LicenseReference}++;
                 }
+
+                NEW_REFERENCES:
                 for my $LicenseReference (@NewLicenseReferencesList) {
-                    if ( none { $_ eq $LicenseReference } @OldLicenseReferencesList ) {
-                        $Self->_LicensesAccountingUpdate(
-                            ObjectID            => $LicenseReference,
-                            ConfigItemID        => $Param{Data}{ConfigItemID},
-                            AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                            UserID              => $Param{UserID},
-                            Delta               => -1
-                        );
-                    }
+                    next NEW_REFERENCES if !$LicenseReference;
+                    $Delta{$LicenseReference}--;
+                }
+
+                DELTA:
+                for my $LicenseReference ( keys %Delta ) {
+                    next DELTA if !$Delta{$LicenseReference};
+
+                    $Self->_LicensesAccountingUpdate(
+                        ObjectID            => $LicenseReference,
+                        ConfigItemID        => $Param{Data}{ConfigItemID},
+                        AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
+                        UserID              => $Param{UserID},
+                        Delta               => $Delta{$LicenseReference}
+                    );
                 }
             }
             elsif ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$TotalLicensesDF" ) {
@@ -216,7 +231,23 @@ sub Run {
                     State   => 'Valid',
                     UserID  => $Param{UserID},
                 );
-                my $CountLinks         = scalar keys $LinkList->{ITSMConfigItem}{RelevantTo}{Source}->%*;
+                my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
+                    ConfigItemID => $Param{Data}{ConfigItemID},
+                    Direction    => 'Both',                       # one of Source, Target, Both
+                    UserID       => $Param{UserID},
+                );
+                my $CountLinks = 0;
+
+                LINK:
+                for my $Link ( $LinkedConfigItems->@* ) {
+                    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
+                        ConfigItemID  => $Link->{ConfigItemID},
+                        DynamicFields => 1,
+                    );
+
+                    next LINK if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
+                    $CountLinks++;
+                }
                 my $TotalLicenses      = $ConfigItem->{"DynamicField_$TotalLicensesDF"};
                 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
                 my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
@@ -243,7 +274,6 @@ sub _LicensesAccountingUpdate {
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
     my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-    my $LinkObject                = $Kernel::OM->Get('Kernel::System::LinkObject');
 
     my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
         Name => $Param{AvailableLicensesDF},
@@ -252,11 +282,12 @@ sub _LicensesAccountingUpdate {
         ConfigItemID  => $Param{ObjectID},
         DynamicFields => 1,
     );
-    my $Success = $DynamicFieldBackendObject->ValueSet(
-        DynamicFieldConfig => $DynamicFieldConfig,
-        ObjectID           => $ConfigItem->{LastVersionID},
-        UserID             => $Param{UserID},
-        Value              => $ConfigItem->{ 'DynamicField_' . $Param{AvailableLicensesDF} } + $Param{Delta},
+
+    my $AvailableLicensesDF = 'DynamicField_' . $Param{AvailableLicensesDF};
+    my $Success             = $ConfigItemObject->ConfigItemUpdate(
+        ConfigItemID         => $ConfigItem->{ConfigItemID},
+        $AvailableLicensesDF => $ConfigItem->{$AvailableLicensesDF} + $Param{Delta},
+        UserID               => $Param{UserID},
     );
     if ( !$Success ) {
         $LogObject->Log(
@@ -265,14 +296,12 @@ sub _LicensesAccountingUpdate {
         );
         return;
     }
+
     if ( $Param{Delta} == 1 ) {
-        my $Success = $LinkObject->LinkDelete(
-            Object1 => 'ITSMConfigItem',
-            Key1    => $Param{ConfigItemID},
-            Object2 => 'ITSMConfigItem',
-            Key2    => $Param{ObjectID},
-            Type    => 'RelevantTo',
-            UserID  => $Param{UserID}
+        my $Success = $ConfigItemObject->DeleteConfigItemLink(
+            SourceConfigItemID => $Param{ConfigItemID},
+            TargetConfigItemID => $Param{ObjectID},
+            Type               => 'RelevantTo',
         );
         if ( !$Success ) {
             $LogObject->Log(
@@ -282,14 +311,10 @@ sub _LicensesAccountingUpdate {
         }
     }
     elsif ( $Param{Delta} == -1 ) {
-        my $Success = $LinkObject->LinkAdd(
-            SourceObject => 'ITSMConfigItem',
-            SourceKey    => $Param{ConfigItemID},
-            TargetObject => 'ITSMConfigItem',
-            TargetKey    => $Param{ObjectID},
-            Type         => 'RelevantTo',
-            State        => 'Valid',
-            UserID       => $Param{UserID}
+        my $Success = $ConfigItemObject->AddConfigItemLink(
+            SourceConfigItemID => $Param{ConfigItemID},
+            TargetConfigItemID => $Param{ObjectID},
+            Type               => 'RelevantTo',
         );
         if ( !$Success ) {
             $LogObject->Log(

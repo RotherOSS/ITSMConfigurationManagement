@@ -2585,4 +2585,96 @@
             </Hash>
         </Value>
     </Setting>
+
+    <Setting Name="ITSMConfigItem::LicenseCount###01" Required="0" Valid="1">
+        <Description Translatable="1">Attributes for licenses counting, where "TotalLicensesDF" is the name of the dynamic field 
+that represents the total number of licenses acquired;  "AvailableLicensesDF" is the name of the dynamic field that indicates the number of licenses currently available for use (automatically computed from the total number of licenses minus the licenses in use); "LicenseReferenceDF" is the name of the field on the licensed config item that stores the reference to the license; "ValidDeplStates" defines the list of deployment states in which a license is considered valid (only configuration items in one of these states count as a used license, an empty list means that all states are valid).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF">ServerLicenses</Item>
+                <Item Key="AvailableLicensesDF">ServerAvailableLicenses</Item>
+                <Item Key="LicenseReferenceDF">ServerLicenseReference</Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseCount###02" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for licenses counting, where "TotalLicensesDF" is the name of the dynamic field 
+that represents the total number of licenses acquired;  "AvailableLicensesDF" is the name of the dynamic field that indicates the number of licenses currently available for use (automatically computed from the total number of licenses minus the licenses in use); "LicenseReferenceDF" is the name of the field on the licensed config item that stores the reference to the license; "ValidDeplStates" defines the list of deployment states in which a license is considered valid (only configuration items in one of these states count as a used license, an empty list means that all states are valid).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseCount###03" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for licenses counting, where "TotalLicensesDF" is the name of the dynamic field 
+that represents the total number of licenses acquired;  "AvailableLicensesDF" is the name of the dynamic field that indicates the number of licenses currently available for use (automatically computed from the total number of licenses minus the licenses in use); "LicenseReferenceDF" is the name of the field on the licensed config item that stores the reference to the license; "ValidDeplStates" defines the list of deployment states in which a license is considered valid (only configuration items in one of these states count as a used license, an empty list means that all states are valid).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseCount###04" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for licenses counting, where "TotalLicensesDF" is the name of the dynamic field 
+that represents the total number of licenses acquired;  "AvailableLicensesDF" is the name of the dynamic field that indicates the number of licenses currently available for use (automatically computed from the total number of licenses minus the licenses in use); "LicenseReferenceDF" is the name of the field on the licensed config item that stores the reference to the license; "ValidDeplStates" defines the list of deployment states in which a license is considered valid (only configuration items in one of these states count as a used license, an empty list means that all states are valid).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseCount###05" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for licenses counting, where "TotalLicensesDF" is the name of the dynamic field 
+that represents the total number of licenses acquired;  "AvailableLicensesDF" is the name of the dynamic field that indicates the number of licenses currently available for use (automatically computed from the total number of licenses minus the licenses in use); "LicenseReferenceDF" is the name of the field on the licensed config item that stores the reference to the license; "ValidDeplStates" defines the list of deployment states in which a license is considered valid (only configuration items in one of these states count as a used license, an empty list means that all states are valid).</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###200-LicenseLinkCount" Required="0" Valid="1">
+        <Description Translatable="1">Config item event module that enables accounting licenses for a given config item.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::CountLicenseLinks</Item>
+                <Item Key="Event">DeploymentStateUpdate|ConfigItemDynamicFieldUpdate_|Delete</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>
