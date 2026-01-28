@@ -28,6 +28,8 @@ our @ObjectDependencies = (
     'Kernel::System::ITSMConfigItem',
     'Kernel::System::LinkObject',
     'Kernel::System::Log',
+    'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
 );
 
 =head1 NAME
@@ -133,11 +135,11 @@ sub Run {
             {
                 for my $LicenseReference ( $ConfigItem->{"DynamicField_$LicenseReferenceDF"}->@* ) {
                     $Self->_LicensesAccountingUpdate(
-                        ObjectID            => $LicenseReference,
-                        ConfigItemID        => $Param{Data}{ConfigItemID},
-                        AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                        UserID              => $Param{UserID},
-                        Delta               => -1
+                        ObjectID        => $LicenseReference,
+                        ConfigItemID    => $Param{Data}{ConfigItemID},
+                        LicenseSettings => $LicenseSettings{$Key},
+                        UserID          => $Param{UserID},
+                        Delta           => -1
                     );
                 }
             }
@@ -149,11 +151,11 @@ sub Run {
             {
                 for my $LicenseReference ( $ConfigItem->{"DynamicField_$LicenseReferenceDF"}->@* ) {
                     $Self->_LicensesAccountingUpdate(
-                        ObjectID            => $LicenseReference,
-                        ConfigItemID        => $Param{Data}{ConfigItemID},
-                        AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                        UserID              => $Param{UserID},
-                        Delta               => 1
+                        ObjectID        => $LicenseReference,
+                        ConfigItemID    => $Param{Data}{ConfigItemID},
+                        LicenseSettings => $LicenseSettings{$Key},
+                        UserID          => $Param{UserID},
+                        Delta           => 1
                     );
                 }
             }
@@ -170,11 +172,11 @@ sub Run {
             next LICENSE_SETTINGS_DELETE if @ValidDeplStates && none { $_ eq $Param{Data}{ConfigItem}{CurDeplState} } @ValidDeplStates;
             for my $LicenseReference ( $Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"}->@* ) {
                 $Self->_LicensesAccountingUpdate(
-                    ObjectID            => $LicenseReference,
-                    ConfigItemID        => $Param{Data}{ConfigItemID},
-                    AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                    UserID              => $Param{UserID},
-                    Delta               => 1
+                    ObjectID        => $LicenseReference,
+                    ConfigItemID    => $Param{Data}{ConfigItemID},
+                    LicenseSettings => $LicenseSettings{$Key},
+                    UserID          => $Param{UserID},
+                    Delta           => 1
                 );
             }
         }
@@ -214,11 +216,11 @@ sub Run {
                     next DELTA if !$Delta{$LicenseReference};
 
                     $Self->_LicensesAccountingUpdate(
-                        ObjectID            => $LicenseReference,
-                        ConfigItemID        => $Param{Data}{ConfigItemID},
-                        AvailableLicensesDF => $LicenseSettings{$Key}{AvailableLicensesDF},
-                        UserID              => $Param{UserID},
-                        Delta               => $Delta{$LicenseReference}
+                        ObjectID        => $LicenseReference,
+                        ConfigItemID    => $Param{Data}{ConfigItemID},
+                        LicenseSettings => $LicenseSettings{$Key},
+                        UserID          => $Param{UserID},
+                        Delta           => $Delta{$LicenseReference}
                     );
                 }
             }
@@ -276,23 +278,24 @@ sub _LicensesAccountingUpdate {
     my $ConfigItemObject          = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 
     my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-        Name => $Param{AvailableLicensesDF},
+        Name => $Param{LicenseSettings}{AvailableLicensesDF},
     );
     my $ConfigItem = $ConfigItemObject->ConfigItemGet(
         ConfigItemID  => $Param{ObjectID},
         DynamicFields => 1,
     );
 
-    my $AvailableLicensesDF = 'DynamicField_' . $Param{AvailableLicensesDF};
+    my $AvailableLicensesDF = 'DynamicField_' . $Param{LicenseSettings}{AvailableLicensesDF};
     my $Success             = $ConfigItemObject->ConfigItemUpdate(
         ConfigItemID         => $ConfigItem->{ConfigItemID},
+        Number               => $ConfigItem->{Number},
         $AvailableLicensesDF => $ConfigItem->{$AvailableLicensesDF} + $Param{Delta},
         UserID               => $Param{UserID},
     );
     if ( !$Success ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Could not update field '$Param{AvailableLicensesDF}'",
+            Message  => "Could not update field '$Param{LicenseSettings}{AvailableLicensesDF}'",
         );
         return;
     }
@@ -322,7 +325,153 @@ sub _LicensesAccountingUpdate {
                 Message  => "Could not create link",
             );
         }
+
+        $ConfigItem->{$AvailableLicensesDF} += $Param{Delta};    # Synchronize CI snapshot
+
+        my $MinimumLicensesDF = 'DynamicField_' . $Param{LicenseSettings}{MinimumLicensesDF};
+        if ( $ConfigItem->{$MinimumLicensesDF} && $ConfigItem->{$AvailableLicensesDF} < $ConfigItem->{$MinimumLicensesDF} ) {
+            $Self->_Notify(
+                ConfigItem      => $ConfigItem,
+                LicenseSettings => $Param{LicenseSettings}
+            );
+        }
     }
+
+    return 1;
+}
+
+sub _Notify {
+    my ( $Self, %Param ) = @_;
+
+    # check whether a ticket was generated previously and is not closed
+    my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
+    my %LinkList   = $LinkObject->LinkKeyList(
+        Object1 => 'ITSMConfigItem',
+        Key1    => $Param{ConfigItem}{ConfigItemID},
+        Object2 => 'Ticket',
+        State   => 'Valid',
+        Type    => 'DependsOn',
+        UserID  => 1,
+    );
+
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    for my $LinkedTicketID ( keys %LinkList ) {
+        my %Ticket = $TicketObject->TicketGet(
+            TicketID      => $LinkedTicketID,
+            DynamicFields => 1,
+            UserID        => 1,
+            Silent        => 1,
+        );
+
+        # skip notification if an open ticket was already created
+        if (
+            $Ticket{ 'DynamicField_' . $Param{LicenseSettings}{Ticket}{DynamicField} }
+            && $Ticket{ 'DynamicField_' . $Param{LicenseSettings}{Ticket}{DynamicField} } == 1
+            && $Ticket{StateType} ne "closed"
+            )
+        {
+            return;
+        }
+    }
+
+    # prepare substitutions
+    my %Substitutions = (
+        '<OTOBO_CONFIGITEM_NUMBER>'         => $Param{ConfigItem}{Number},
+        '<OTOBO_CONFIGITEM_NAME>'           => $Param{ConfigItem}{Name},
+        '<OTOBO_CONFIGITEM_LICENSES_AVAIL>' => $Param{ConfigItem}{ 'DynamicField_' . $Param{LicenseSettings}{AvailableLicensesDF} },
+        '<OTOBO_CONFIGITEM_LICENSES_MIN>'   => $Param{ConfigItem}{ 'DynamicField_' . $Param{LicenseSettings}{MinimumLicensesDF} },
+    );
+
+    SUBKEY:
+    for my $Key ( ( $Param{LicenseSettings}{Ticket}{Title} . $Param{LicenseSettings}{Ticket}{Text} ) =~ /<OTOBO_CONFIGITEM_([^>]+)>/g ) {
+        next SUBKEY if exists $Substitutions{"<OTOBO_CONFIGITEM_$Key>"};
+        next SUBKEY if !$Param{ConfigItem}{$Key};
+
+        $Substitutions{"<OTOBO_CONFIGITEM_$Key>"} = $Param{ConfigItem}{$Key} // '';
+    }
+
+    my $TicketTitle      = $Param{LicenseSettings}{Ticket}{Title};
+    my $NotificationText = $Param{LicenseSettings}{Ticket}{Text};
+    for my $Key ( keys %Substitutions ) {
+        $TicketTitle      =~ s/$Key/$Substitutions{ $Key }/g;
+        $NotificationText =~ s/$Key/$Substitutions{ $Key }/g;
+    }
+
+    # all checks finished -> create a ticket as notification
+    my $TicketID = $TicketObject->TicketCreate(
+        TN           => $TicketObject->TicketCreateNumber(),
+        Title        => $TicketTitle,
+        Queue        => $Param{LicenseSettings}{Ticket}{Queue},
+        Lock         => $Param{LicenseSettings}{Ticket}{Lock}         || 'unlock',
+        Priority     => $Param{LicenseSettings}{Ticket}{Priority}     || '3 normal',
+        State        => $Param{LicenseSettings}{Ticket}{State}        || 'new',
+        Type         => $Param{LicenseSettings}{Ticket}{Type}         || '',
+        Service      => $Param{LicenseSettings}{Ticket}{Service}      || '',
+        SLA          => $Param{LicenseSettings}{Ticket}{SLA}          || '',
+        CustomerID   => $Param{LicenseSettings}{Ticket}{CustomerID}   || '',
+        CustomerUser => $Param{LicenseSettings}{Ticket}{CustomerUser} || '',
+        OwnerID      => $Param{LicenseSettings}{Ticket}{OwnerID}      || '1',
+        UserID       => 1,
+    );
+    if ( !$TicketID ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Could not create a ticket for ConfigItemID: $Param{ConfigItem}{ConfigItemID}!",
+        );
+        return;
+    }
+
+    # do article db insert
+    my $ArticleObject                = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
+    my $ArticleID                    = $InternalArticleBackendObject->ArticleCreate(
+        TicketID             => $TicketID,
+        SenderType           => $Param{LicenseSettings}{Ticket}{SenderType} || 'system',
+        IsVisibleForCustomer => 0,
+        ContentType          => 'text/plain; charset=utf-8',
+        Body                 => $NotificationText,
+        Subject              => $TicketTitle,
+        UserID               => 1,
+        HistoryType          => 'NewTicket',
+        HistoryComment       => "\%\%CMDBNotification",
+    );
+
+    # close ticket if article create failed!
+    if ( !$ArticleID ) {
+        $TicketObject->TicketDelete(
+            TicketID => $TicketID,
+            UserID   => 1,
+        );
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Can't process ticket!",
+        );
+        return;
+    }
+
+    # link ticket and config item
+    $LinkObject->LinkAdd(
+        SourceObject => 'ITSMConfigItem',
+        SourceKey    => $Param{ConfigItem}{ConfigItemID},
+        TargetObject => 'Ticket',
+        TargetKey    => $TicketID,
+        Type         => 'DependsOn',
+        State        => 'Valid',
+        UserID       => 1,
+    );
+
+    # set the dynamic field  to 1, to mark the ticket as generated by this script
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicField              = $DynamicFieldObject->DynamicFieldGet(
+        Name => $Param{LicenseSettings}{Ticket}{DynamicField},
+    );
+    $DynamicFieldBackendObject->ValueSet(
+        DynamicFieldConfig => $DynamicField,
+        ObjectID           => $TicketID,
+        Value              => 1,
+        UserID             => 1,
+    );
 
     return 1;
 }
