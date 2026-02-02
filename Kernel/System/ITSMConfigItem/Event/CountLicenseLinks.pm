@@ -238,34 +238,25 @@ sub Run {
             }
 
             elsif ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$TotalLicensesDF" ) {
-                my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
-                my $LinkList   = $LinkObject->LinkListWithData(
-                    Object  => 'ITSMConfigItem',
-                    Key     => $Param{Data}{ConfigItemID},
-                    Object2 => 'ITSMConfigItem',
-                    State   => 'Valid',
-                    UserID  => $Param{UserID},
-                );
                 my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
                     ConfigItemID => $Param{Data}{ConfigItemID},
-                    Direction    => 'Both',                       # one of Source, Target, Both
+                    Direction    => 'Both',
                     UserID       => $Param{UserID},
                 );
-                my $CountLinks = 0;
+                my $CountLinks         = 0;
+                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $LicenseSettings{$Key}{LicenseReferenceDF},
+                );
+                my $ReferenceDynamicFieldID = $DynamicFieldConfig->{ID};
 
                 LINK:
                 for my $Link ( $LinkedConfigItems->@* ) {
-                    my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-                        ConfigItemID  => $Link->{ConfigItemID},
-                        DynamicFields => 1,
-                    );
-
-                    next LINK if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
+                    next LINK if $Link->{DynamicFieldID} != $ReferenceDynamicFieldID;
                     $CountLinks++;
                 }
-                my $TotalLicenses      = $ConfigItem->{"DynamicField_$TotalLicensesDF"};
-                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                my $TotalLicenses = $ConfigItem->{"DynamicField_$TotalLicensesDF"};
+                $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
                     Name => $LicenseSettings{$Key}{AvailableLicensesDF},
                 );
                 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -313,36 +304,10 @@ sub _LicensesAccountingUpdate {
         return;
     }
 
-    if ( $Param{Delta} == 1 ) {
-        my $Success = $ConfigItemObject->DeleteConfigItemLink(
-            SourceConfigItemID => $Param{ConfigItemID},
-            TargetConfigItemID => $Param{ObjectID},
-            Type               => 'RelevantTo',
-        );
-        if ( !$Success ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  => "Could not remove link",
-            );
-        }
-    }
-    elsif ( $Param{Delta} == -1 ) {
-        my $Success = $ConfigItemObject->AddConfigItemLink(
-            SourceConfigItemID => $Param{ConfigItemID},
-            TargetConfigItemID => $Param{ObjectID},
-            Type               => 'RelevantTo',
-        );
-        if ( !$Success ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  => "Could not create link",
-            );
-        }
-
+    if ( $Param{Delta} < 0 ) {
         $ConfigItem->{$AvailableLicensesDF} += $Param{Delta};    # Synchronize CI snapshot
-
-        my $MinimumLicensesDF = 'DynamicField_' . $Param{LicenseSettings}{MinimumLicensesDF};
-        if ( $ConfigItem->{$MinimumLicensesDF} && $ConfigItem->{$AvailableLicensesDF} < $ConfigItem->{$MinimumLicensesDF} ) {
+        my $MinimumLicenses = $Param{LicenseSettings}{MinimumLicenses};
+        if ( $MinimumLicenses && $ConfigItem->{$AvailableLicensesDF} < $MinimumLicenses ) {
             $Self->_Notify(
                 ConfigItem      => $ConfigItem,
                 LicenseSettings => $Param{LicenseSettings}
