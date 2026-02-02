@@ -114,19 +114,23 @@ sub Run {
             ConfigItemID  => $Param{Data}{ConfigItemID},
             DynamicFields => 1,
         );
+
         my $CurrentDeplStateID  = $Param{Data}{New};
         my $PreviousDeplStateID = $Param{Data}{Old};
         my $CurrentDeplState    = $DeploymentStateList{$CurrentDeplStateID};
         my $PreviousDeplState   = $DeploymentStateList{$PreviousDeplStateID};
 
-        LICENSE_SETTINGS_DEPL_STATE:
+        SETTING:
         for my $Key ( keys %LicenseSettings ) {
+
+            # if all deployment states are valid we do not check changes
+            next SETTING if !$LicenseSettings{$Key}{ValidDeplStates};
+
+            my @ValidDeplStates    = $LicenseSettings{$Key}{ValidDeplStates}->@*;
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
 
-            next LICENSE_SETTINGS_DEPL_STATE if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
-            my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
+            next SETTING if !$ConfigItem->{"DynamicField_$LicenseReferenceDF"};
 
-            next LICENSE_SETTINGS_DEPL_STATE if !$LicenseSettings{$Key}{ValidDeplStates};
             if (
                 ( none { $_ eq $PreviousDeplState } @ValidDeplStates )
                 &&
@@ -143,6 +147,7 @@ sub Run {
                     );
                 }
             }
+
             elsif (
                 ( any { $_ eq $PreviousDeplState } @ValidDeplStates )
                 &&
@@ -161,15 +166,17 @@ sub Run {
             }
         }
     }
+
     elsif ( $Param{Event} eq 'ConfigItemDelete' ) {
-        LICENSE_SETTINGS_DELETE:
+
+        SETTING:
         for my $Key ( keys %LicenseSettings ) {
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
+            my @ValidDeplStates    = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
 
-            next LICENSE_SETTINGS_DELETE if !$Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"};
-            my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
+            next SETTING if !$Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"};
+            next SETTING if @ValidDeplStates && none { $_ eq $Param{Data}{ConfigItem}{CurDeplState} } @ValidDeplStates;
 
-            next LICENSE_SETTINGS_DELETE if @ValidDeplStates && none { $_ eq $Param{Data}{ConfigItem}{CurDeplState} } @ValidDeplStates;
             for my $LicenseReference ( $Param{Data}{ConfigItem}{"DynamicField_$LicenseReferenceDF"}->@* ) {
                 $Self->_LicensesAccountingUpdate(
                     ObjectID        => $LicenseReference,
@@ -181,33 +188,38 @@ sub Run {
             }
         }
     }
+
     elsif ( $Param{Event} =~ /^ConfigItemDynamicFieldUpdate_/ ) {
         my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID  => $Param{Data}{ConfigItemID},
             DynamicFields => 1,
         );
 
-        LICENSE_SETTINGS_UPDATE:
+        SETTING:
         for my $Key ( keys %LicenseSettings ) {
             my $LicenseReferenceDF = $LicenseSettings{$Key}{LicenseReferenceDF};
             my $TotalLicensesDF    = $LicenseSettings{$Key}{TotalLicensesDF};
+
             if ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$LicenseReferenceDF" ) {
                 my @ValidDeplStates = ( $LicenseSettings{$Key}{ValidDeplStates} || [] )->@*;
 
-                next LICENSE_SETTINGS_UPDATE if @ValidDeplStates && none { $_ eq $ConfigItem->{CurDeplState} } @ValidDeplStates;
+                next SETTING if @ValidDeplStates && none { $_ eq $ConfigItem->{CurDeplState} } @ValidDeplStates;
+
                 my @OldLicenseReferencesList = ( $Param{Data}{OldValue} || [] )->@*;
                 my @NewLicenseReferencesList = ( $Param{Data}{Value}    || [] )->@*;
                 my %Delta;
 
-                OLD_REFERENCES:
+                OLD:
                 for my $LicenseReference (@OldLicenseReferencesList) {
-                    next OLD_REFERENCES if !$LicenseReference;
+                    next OLD if !$LicenseReference;
+
                     $Delta{$LicenseReference}++;
                 }
 
-                NEW_REFERENCES:
+                NEW:
                 for my $LicenseReference (@NewLicenseReferencesList) {
-                    next NEW_REFERENCES if !$LicenseReference;
+                    next NEW if !$LicenseReference;
+
                     $Delta{$LicenseReference}--;
                 }
 
@@ -224,6 +236,7 @@ sub Run {
                     );
                 }
             }
+
             elsif ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$TotalLicensesDF" ) {
                 my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
                 my $LinkList   = $LinkObject->LinkListWithData(
