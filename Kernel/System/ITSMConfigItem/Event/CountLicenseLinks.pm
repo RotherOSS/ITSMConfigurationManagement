@@ -114,8 +114,8 @@ sub Run {
             ConfigItemID  => $Param{Data}{ConfigItemID},
             DynamicFields => 1,
         );
-        my $CurrentDeplStateID  = $Param{Data}{NewKey};
-        my $PreviousDeplStateID = $Param{Data}{OldKey};
+        my $CurrentDeplStateID  = $Param{Data}{New};
+        my $PreviousDeplStateID = $Param{Data}{Old};
         my $CurrentDeplState    = $DeploymentStateList{$CurrentDeplStateID};
         my $PreviousDeplState   = $DeploymentStateList{$PreviousDeplStateID};
 

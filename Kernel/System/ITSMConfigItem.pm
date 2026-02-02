@@ -1131,8 +1131,8 @@ sub ConfigItemUpdate {
             Data  => {
                 ConfigItemID => $ConfigItem->{ConfigItemID},
                 Comment      => $Changed{$Key}{New} . '%%' . $Changed{$Key}{Old},
-                OldKey       => $Changed{$Key}{Old},
-                NewKey       => $Changed{$Key}{New},
+                Old          => $Changed{$Key}{Old},
+                New          => $Changed{$Key}{New},
             },
             UserID => $Param{UserID},
         );
