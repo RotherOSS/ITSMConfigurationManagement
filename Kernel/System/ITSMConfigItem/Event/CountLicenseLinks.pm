@@ -238,30 +238,34 @@ sub Run {
             }
 
             elsif ( $Param{Event} eq "ConfigItemDynamicFieldUpdate_$TotalLicensesDF" ) {
+                my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+                my $ReferenceDynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $LicenseSettings{$Key}{LicenseReferenceDF},
+                );
+                my $ReferenceDynamicFieldID = $ReferenceDynamicFieldConfig->{ID};
+
+                my $TotalLicenses = $ConfigItem->{"DynamicField_$TotalLicensesDF"};
+                my $CountLinks    = 0;
+
                 my $LinkedConfigItems = $ConfigItemObject->LinkedConfigItems(
                     ConfigItemID => $Param{Data}{ConfigItemID},
                     Direction    => 'Both',
                     UserID       => $Param{UserID},
                 );
-                my $CountLinks         = 0;
-                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-                    Name => $LicenseSettings{$Key}{LicenseReferenceDF},
-                );
-                my $ReferenceDynamicFieldID = $DynamicFieldConfig->{ID};
 
                 LINK:
                 for my $Link ( $LinkedConfigItems->@* ) {
                     next LINK if $Link->{DynamicFieldID} != $ReferenceDynamicFieldID;
                     $CountLinks++;
                 }
-                my $TotalLicenses = $ConfigItem->{"DynamicField_$TotalLicensesDF"};
-                $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+
+                my $AvailableDynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
                     Name => $LicenseSettings{$Key}{AvailableLicensesDF},
                 );
-                my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-                my $Success                   = $DynamicFieldBackendObject->ValueSet(
-                    DynamicFieldConfig => $DynamicFieldConfig,
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $AvailableDynamicFieldConfig,
                     ObjectID           => $ConfigItem->{LastVersionID},
                     UserID             => $Param{UserID},
                     Value              => $TotalLicenses - $CountLinks,
@@ -305,8 +309,9 @@ sub _LicensesAccountingUpdate {
     }
 
     if ( $Param{Delta} < 0 ) {
+        my $MinimumLicenses                  = $Param{LicenseSettings}{MinimumLicenses};
         $ConfigItem->{$AvailableLicensesDF} += $Param{Delta};    # Synchronize CI snapshot
-        my $MinimumLicenses = $Param{LicenseSettings}{MinimumLicenses};
+
         if ( $MinimumLicenses && $ConfigItem->{$AvailableLicensesDF} < $MinimumLicenses ) {
             $Self->_Notify(
                 ConfigItem      => $ConfigItem,
