@@ -37,6 +37,7 @@
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemACL.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemGenericInterface.xml" />
         <File Permission="660" Location="Kernel/Config/Files/XML/ITSMConfigItemTicketLink.xml" />
+        <File Permission="660" Location="Kernel/Config/Files/XML/PublicITSMConfigItem.xml" />
         <File Permission="660" Location="Kernel/GenericInterface/Event/ObjectType/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Invoker/ConfigItem/Common.pm" />
         <File Permission="660" Location="Kernel/GenericInterface/Invoker/ConfigItem/ConfigItemCreate.pm" />
@@ -115,6 +116,10 @@
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemSearch.pm" />
         <File Permission="660" Location="Kernel/Modules/CustomerITSMConfigItemZoom.pm" />
+        <File Permission="660" Location="Kernel/Modules/PublicITSMConfigItem.pm" />
+        <File Permission="660" Location="Kernel/Modules/PublicITSMConfigItemSearch.pm" />
+        <File Permission="660" Location="Kernel/Modules/PublicITSMConfigItemAttachment.pm" />
+        <File Permission="660" Location="Kernel/Modules/PublicITSMConfigItemZoom.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/DynamicField.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/LayoutCustomer.pm" />
@@ -129,8 +134,10 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/MenuGeneric.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/CustomerOverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/OverviewSmall.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/PublicOverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItemTreeView.pm" />
+        <File Permission="660" Location="Kernel/Output/HTML/Layout/Public.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationConfigItem.tt" />
@@ -154,6 +161,12 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DynamicField/Agent/ITSMConfigItemLens.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/Output/JavaScript/Templates/Standard/Agent/ITSMConfigurationManagement/ClassImportConfirm.html.tmpl" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemZoom.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicHeader.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemSearch.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicFooter.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemOverviewSmall.tt" />
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ClassExport.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ClassImport.pm" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ConvertLegacyRefDFs.pm" />

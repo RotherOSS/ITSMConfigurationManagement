@@ -1,0 +1,96 @@
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# --
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+# --
+<div id='oooContent' class='ARIARoleMain'>
+    [% Data.StyleClasses %]
+    <div id='oooHeader'>
+        <div class='oooWithSub'>
+            <h2 title="[% Data.Name | html %]">[% Data.Name | html %]</h2>
+[% RenderBlockStart("FullSub") %]
+            <p class="ooo12g" title="[% Translate(Data.Class) | html %]#[% Data.Number | html %]">[% Translate(Data.Class) | html %]#[% Data.Number | html %]</p>
+[% RenderBlockEnd("FullSub") %]
+[% RenderBlockStart("ClassSub") %]
+            <p class="ooo12g" title="[% Translate(Data.Class) | html %]">[% Translate(Data.Class) | html %]</p>
+[% RenderBlockEnd("ClassSub") %]
+        </div>
+        <div id='CIInfoBar'>
+[% RenderBlockStart("DeploymentState") %]
+            <p class="StateSignal [% Data.DeplStateColorClass | html %]" title="[% Translate(Data.CurDeplState) | html %]">
+                [% Translate(Data.CurDeplState) | html %]
+            </p>
+[% RenderBlockEnd("DeploymentState") %]
+[% RenderBlockStart("IncidentState") %]
+            <p class="StateSignal [% Data.InciStateColorClass | html %]" title="[% Translate(Data.CurInciState) | html %]">
+                [% Translate(Data.CurInciState) | html %]
+            </p>
+[% RenderBlockEnd("IncidentState") %]
+[% RenderBlockStart("CreatedTime") %]
+            <div>
+                <label>[% Translate("Created") | html %]:</label><p class="Value">[% Data.CreateTime | Localize("TimeLong") %]</p>
+            </div>
+[% RenderBlockEnd("CreatedTime") %]
+[% RenderBlockStart("LastChangedTime") %]
+            <div>
+                <label>[% Translate("Last Changed") | html %]:</label><p class="Value">[% Data.ChangeTime | Localize("TimeLong") %]</p>
+            </div>
+[% RenderBlockEnd("LastChangedTime") %]
+        </div>
+    </div>
+    <div id='oooMainBox'>
+
+# SHOULD KEEP?    
+[% RenderBlockStart("OverviewLink") %]
+        <div class="BacklinkBox"><a class="Backlink" title="Back to overview" href="[% Env("Baselink") %]Action=PublicITSMConfigItem"><i class="ooofo ooofo-arrow_l"></i><span>[% Translate("Back to overview") | html %]</span></a></div>
+[% RenderBlockEnd("OverviewLink") %]
+
+        <div class="ContentColumn">
+            <div id="ActionRow">
+                <div id="PageSelection">
+[% RenderBlockStart("PageName") %]
+                    <p>[% Translate(Data.PageName) | html %]</p>
+[% RenderBlockEnd("PageName") %]
+[% RenderBlockStart("PageLink") %]
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];ConfigItemID=[% Data.ConfigItemID | uri %];VersionID=[% Data.VersionID | uri %];Page=[% Data.PageName | uri %]">
+                        <button class="oooS PageSelectionButton[% IF Data.Selected %] Selected[% END %]">[% Translate(Data.PageName) | html %]</button>
+                    </a>
+[% RenderBlockEnd("PageLink") %]
+                </div>
+[% RenderBlockStart("Attachments") %]
+                <div id="AttachmentContainer">
+                    <a id="Attachments" href="#"><i class='ooofo ooofo-attachment'></i>[% Translate("Attachments") | html %]</a>
+                    <div id="AttachmentBox" class="Hidden">
+[% RenderBlockStart("AttachmentRow") %]
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadAttachment;Filename=[% Data.Filename | uri %];ConfigItemID=[% Data.ConfigItemID | uri %]">
+                            [% Data.Filename | html %]
+                        </a>
+                        ([% Data.Filesize | Localize('Filesize') | html %])<br/>
+[% RenderBlockEnd("AttachmentRow") %]
+                    </div>
+                </div>
+[% RenderBlockEnd("Attachments") %]
+[% RenderBlockStart("Versions") %]
+                <div id="VersionSelectionContainer">
+                    <div class="Field">
+                        [% Data.VersionSelection %]
+                    </div>
+                    <label for="VersionSelection">[% Translate("Version") | html %]</label>
+                </div>
+[% RenderBlockEnd("Versions") %]
+            </div>
+[% Data.DynamicFieldHTML %]
+        </div>
+        <div class="Clear"></div>
+    </div>
+</div>

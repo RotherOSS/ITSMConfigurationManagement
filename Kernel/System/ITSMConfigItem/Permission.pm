@@ -272,4 +272,73 @@ sub CustomerPermission {
     return;
 }
 
+=head2 CustomerPermission()
+
+returns whether the public non-logged user has permissions or not
+
+    my $Access = $ConfigItemObject->CustomerPermission(
+        ConfigItemID => 123,
+        UserID       => 123,
+        LogNo        => 1,    # optional, do not log, default: 0
+    );
+
+=cut
+
+sub PublicPermission {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(ConfigItemID)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return;
+        }
+    }
+
+    my %Conditions = %{ $Kernel::OM->Get('Kernel::Config')->Get('Public::ConfigItem::PermissionConditions') // {} };
+    my $ConfigItem = $Self->ConfigItemGet(
+        ConfigItemID  => $Param{ConfigItemID},
+        DynamicFields => any { $_->{CustomerUserDynamicField} || $_->{CustomerCompanyDynamicField} } values %Conditions,
+    );
+
+    CONDITION:
+    for my $ConditionSet ( values %Conditions ) {
+        if ( $ConditionSet->{Classes} ) {
+            my @Classes = ref $ConditionSet->{Classes} ? $ConditionSet->{Classes}->@* : ( $ConditionSet->{Classes} );
+
+            next CONDITION if @Classes && !grep { $_ eq $ConfigItem->{Class} } @Classes;
+        }
+
+        if ( $ConditionSet->{DeploymentStates} ) {
+            my @DeplStates = ref $ConditionSet->{DeploymentStates} ? $ConditionSet->{DeploymentStates}->@* : ( $ConditionSet->{DeploymentStates} );
+
+            next CONDITION if @DeplStates && !grep { $_ eq $ConfigItem->{DeplState} } @DeplStates;
+        }
+
+        if ( $ConditionSet->{DynamicFieldValues} ) {
+            for my $FieldName ( keys $ConditionSet->{DynamicFieldValues}->%* ) {
+                my $FieldValue = $ConditionSet->{DynamicFieldValues}{$FieldName};
+                next CONDITION if $FieldValue && !$ConfigItem->{"DynamicField_$FieldName"} eq $FieldValue;
+            }
+        }
+
+        # grant access
+        return 1;
+    }
+
+    if ( !$Param{LogNo} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => "Permission denied (Public access "
+                . "on ConfigItem: " . $Param{ConfigItemID} . ")!",
+        );
+    }
+
+    # don't grant access
+    return;
+}
+
 1;

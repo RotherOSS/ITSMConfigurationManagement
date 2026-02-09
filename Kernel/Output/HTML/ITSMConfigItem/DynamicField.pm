@@ -441,9 +441,13 @@ sub _RenderCILinks {
         );
     }
 
-    my $Action = $Param{LayoutObject}{UserType} && $Param{LayoutObject}{UserType} eq 'Customer'
-        ? 'CustomerITSMConfigItemZoom'
-        : 'AgentITSMConfigItemZoom';
+    my $Action;
+    if ( $Param{LayoutObject}{UserType} ) {
+        $Action = $Param{LayoutObject}{UserType} eq 'Customer' ? 'CustomerITSMConfigItemZoom' : 'AgentITSMConfigItemZoom';
+    }
+    else {
+        $Action = 'PublicITSMConfigItemZoom';
+    }
 
     for my $Class ( sort keys %LinkedClasses ) {
         $Param{LayoutObject}->Block(
@@ -495,13 +499,19 @@ sub _RenderDescriptionSection {
             Widths => '1fr',
         },
     );
-
+    my $Frontend;
+    if ( $Param{LayoutObject}{UserType} ) {
+        $Frontend = $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer';
+    }
+    else {
+        $Frontend = 'Public';
+    }
     $Param{LayoutObject}->Block(
         Name => 'FieldDisplayCell',
         Data => {
             ConfigItemID => $Param{ConfigItem}{ConfigItemID},
             VersionID    => $Param{ConfigItem}{VersionID},
-            Frontend     => $Param{LayoutObject}{UserType} eq 'User' ? 'Agent' : 'Customer',
+            Frontend     => $Frontend,
             Type         => 'Iframe',
         },
     );

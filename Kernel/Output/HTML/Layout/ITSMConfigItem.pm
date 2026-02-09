@@ -326,11 +326,13 @@ sub ITSMConfigItemListShow {
     my $View = $Param{View} || 'Small';
 
     # store latest view mode
-    $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
-        SessionID => $Self->{SessionID},
-        Key       => 'UserITSMConfigItemOverview' . $Env->{Action},
-        Value     => $View,
-    );
+    if ( $Param{Frontend} ne 'Public' ) {
+        $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+            SessionID => $Self->{SessionID},
+            Key       => 'UserITSMConfigItemOverview' . $Env->{Action},
+            Value     => $View,
+        );
+    }
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -348,8 +350,18 @@ sub ITSMConfigItemListShow {
     }
 
     # get backend from config
-    my $Backends
-        = $Param{Frontend} eq 'Agent' ? $ConfigObject->Get('ITSMConfigItem::Frontend::Overview') : $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerOverview');
+    my $Backends;
+    if ( $Param{Frontend} eq 'Agent' ) {
+        $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::Overview');
+    }
+    elsif ( $Param{Frontend} eq 'Customer' ) {
+        $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::CustomerOverview');
+    }
+    else {
+        # public frontend
+        $Backends = $ConfigObject->Get('ITSMConfigItem::Frontend::PublicOverview');
+    }
+
     if ( !$Backends ) {
         return $Self->FatalError(
             Message => 'Need config option ITSMConfigItem::Frontend::Overview',
@@ -651,7 +663,8 @@ sub ITSMConfigItemListShow {
 
     # create nav bar and run overview backend module
     my $NavBarHTML = '';
-    if ( $Param{Frontend} ne 'Customer' ) {
+
+    if ( $Param{Frontend} ne 'Customer' && $Param{Frontend} ne 'Public' ) {
         $NavBarHTML = $Self->Output(
             TemplateFile => 'AgentITSMConfigItemOverviewNavBar',
             Data         => { %Param, },
