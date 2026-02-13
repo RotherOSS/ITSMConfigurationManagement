@@ -1,5 +1,5 @@
 CMDB License Management
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 This package includes a license management feature that allows to control and track the number of licenses available in stock. For a licensable configuration item (e.g., software), given the total number of purchased licenses, it is possible to keep track of how many licenses are still available and automatically decrease this number whenever another configuration item (e.g., a server) consumes one of those licenses. This ensures continuous visibility over license usage and helps prevent over-allocation. Additionally, the functionality allows the definition of a minimum available licenses threshold, so that when the number of available licenses falls below this level, a notification ticket is automatically issued.
 
