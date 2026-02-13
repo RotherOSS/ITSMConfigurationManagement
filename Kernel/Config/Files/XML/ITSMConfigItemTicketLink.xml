@@ -725,4 +725,61 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="ITSMConfigItem::LicenseManagement###01-Standard" Required="0" Valid="1">
+        <Description Translatable="1">Attributes for license accounting.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF">ITSMLicense-LicenseCount</Item>
+                <Item Key="AvailableLicensesDF">ITSMLicense-AvailableLicenses</Item>
+                <Item Key="LicenseReferenceDF">ITSM-ReferenceToLicense</Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                        <Item>Production</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseManagement###02-Rules" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for license accounting.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::LicenseManagement###03-Rules" Required="0" Valid="0">
+        <Description Translatable="1">Attributes for license accounting.</Description>
+        <Navigation>Core::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TotalLicensesDF"></Item>
+                <Item Key="AvailableLicensesDF"></Item>
+                <Item Key="LicenseReferenceDF"></Item>
+                <Item Key="ValidDeplStates">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ITSMConfigItem::EventModulePost###200-LicenseUpdate" Required="0" Valid="1">
+        <Description Translatable="1">License accounting configuration item event module.</Description>
+        <Navigation>Core::Event::ITSMConfigItem</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoLicensesAccounting</Item>
+                <Item Key="Event">(DeploymentStateUpdate|ConfigItemDynamicFieldUpdate_|Delete)</Item>
+                <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otobo_config>

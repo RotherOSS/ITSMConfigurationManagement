@@ -287,7 +287,7 @@ for my $Key ( sort keys %CustomerUsers ) {
     is( $CustomerUserAdd, $Login, "customer user '$Login' added" );
 }
 
-# create agents that will be referenced in Agend dynamic fields
+# create agents that will be referenced in Agent dynamic fields
 my %Agent2UserID;
 {
     my %LastName = (
@@ -366,7 +366,7 @@ for my $Name (qw(Test1 Test2 Test3 Test4)) {
 {
     my $Order = 20000;
 
-    # not the no underscores are allowed in dynamic field names
+    # no underscores are allowed in dynamic field names
     my %DynamicFieldDefinitions = (
 
         # Dynamic fields that are not part of a set.
