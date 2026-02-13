@@ -21,3 +21,4 @@ Custom Configuration and Advanced Features
    custom_configuration_and_advanced_features/ready_2_import_class_bundles
    custom_configuration_and_advanced_features/relations
    custom_configuration_and_advanced_features/cmdb_notifications
+   custom_configuration_and_advanced_features/cmdb_public
