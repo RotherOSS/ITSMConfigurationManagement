@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -814,6 +814,64 @@ sub Run {
     }
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # add page nav bar - only pagination is needed
+    $LayoutObject->Block(
+        Name => 'ContentLargeConfigItemGenericFilter',
+        Data => {
+            %Param,
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+            %{$Summary},
+        },
+    );
+
+    my $Total            = $Summary->{ $Self->{Filter} } || 0;
+    my %GetColumnFilter  = $Self->{GetColumnFilter} ? %{ $Self->{GetColumnFilter} } : ();
+    my $ColumnFilterLink = '';
+    COLUMNNAME:
+    for my $ColumnName ( sort keys %GetColumnFilter ) {
+        next COLUMNNAME if !$ColumnName;
+        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
+        $ColumnFilterLink
+            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+    }
+
+    my $LinkPage =
+        'Subaction=Element;Name=' . $Self->{Name}
+        . ';Filter=' . $Self->{Filter}
+        . ';AdditionalFilter=' . ( $Self->{AdditionalFilter}  || '' )
+        . ';SortBy=' .           ( $Self->{SortBy}            || '' )
+        . ';OrderBy=' .          ( $ConfigItemSearch{OrderBy} || '' )
+        . $ColumnFilterLink
+        . ';';
+
+    if ( $Param{CustomerID} ) {
+        $LinkPage .= "CustomerID=$Param{CustomerID};";
+    }
+    if ( $Param{CustomerUserID} ) {
+        $LinkPage .= "CustomerUserID=$Param{CustomerUserID};";
+    }
+
+    my %PageNav = $LayoutObject->PageNavBar(
+        StartHit    => $Self->{StartHit},
+        PageShown   => $Self->{PageShown},
+        AllHits     => $Total || 1,
+        Action      => 'Action=' . $LayoutObject->{Action},
+        Link        => $LinkPage,
+        AJAXReplace => 'Dashboard' . $Self->{Name},
+        IDPrefix    => 'Dashboard' . $Self->{Name},
+        AJAX        => $Param{AJAX},
+    );
+    $LayoutObject->Block(
+        Name => 'ContentLargeConfigItemGenericFilterNavBar',
+        Data => {
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+            %PageNav,
+        },
+    );
 
     # show table header
     $LayoutObject->Block(
