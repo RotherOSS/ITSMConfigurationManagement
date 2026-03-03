@@ -776,7 +776,7 @@
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::DoLicensesAccounting</Item>
+                <Item Key="Module">Kernel::System::ITSMConfigItem::Event::CountLicenseLinks</Item>
                 <Item Key="Event">(DeploymentStateUpdate|ConfigItemDynamicFieldUpdate_|Delete)</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
