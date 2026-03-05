@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,17 +18,12 @@ use strict;
 use warnings;
 use utf8;
 
-# core modules
-
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
+use Kernel::System::UnitTest::ITSMConfigItemHelper;
+
+use Kernel::System::UnitTest::RegisterOM;        # Set up $Kernel::OM
 
 our $Self;
 
@@ -38,10 +33,19 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        # get helper objects
+        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
 
         # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
         my @ConfigItemClassIDs;
         my @ConfigItemClassNames;
         for my $ConfigItemClass (qw(Computer Hardware Location Network Software)) {

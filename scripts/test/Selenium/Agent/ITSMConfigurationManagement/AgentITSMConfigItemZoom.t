@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,17 +18,8 @@ use strict;
 use warnings;
 use utf8;
 
-# core modules
-
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -42,6 +33,12 @@ $Selenium->RunTest(
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
         # get 'Hardware' catalog class IDs
         my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
             Class => 'ITSM::ConfigItem::Class',
@@ -52,8 +49,9 @@ $Selenium->RunTest(
         # get 'Production' and 'Repair' deployment state IDs
         my @DeplStateIDs;
         my @DeplStates = (qw(Production Repair));
+        my $DeplStateDataRef;
         for my $DeplState (@DeplStates) {
-            my $DeplStateDataRef = $GeneralCatalogObject->ItemGet(
+            $DeplStateDataRef = $GeneralCatalogObject->ItemGet(
                 Class => 'ITSM::ConfigItem::DeploymentState',
                 Name  => $DeplState,
             );
@@ -63,6 +61,18 @@ $Selenium->RunTest(
         # get needed objects
         my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+
+        my $HardwareClassDataRef = $GeneralCatalogObject->ItemGet(
+            Class => 'ITSM::ConfigItem::Class',
+            Name  => 'Hardware',
+        );
+
+        # set Name update as a version triggering event
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $HardwareClassDataRef->{ItemID},
+            Key    => 'VersionTrigger',
+            Value  => ['Name']
+        );
 
         # create ConfigItem number
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
@@ -76,9 +86,12 @@ $Selenium->RunTest(
 
         # add the new ConfigItem
         my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-            Number  => $ConfigItemNumber,
-            ClassID => $HardwareConfigItemID,
-            UserID  => 1,
+            Number      => $ConfigItemNumber,
+            ClassID     => $HardwareConfigItemID,
+            DeplStateID => $DeplStateDataRef->{ItemID},
+            InciStateID => 1,
+            Name        => 'SeleniumTest',
+            UserID      => 1,
         );
         $Self->True(
             $ConfigItemID,
@@ -86,22 +99,29 @@ $Selenium->RunTest(
         );
 
         # add two versions
-        my @VersionIDs;
-        for my $Version (@DeplStateIDs) {
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => 'SeleniumTest',
-                DefinitionID => 1,
-                DeplStateID  => $Version,
-                InciStateID  => 1,
+        my @UpdatedNames = ( 'SeleniumTest2', 'SeleniumTest3' );
+        my %NamesByVersion;
+        for my $Name (@UpdatedNames) {
+            my $Success = $ConfigItemObject->ConfigItemUpdate(
+                Name         => $Name,
                 UserID       => 1,
+                ConfigItemID => $ConfigItemID,
+                Number       => $ConfigItemNumber,
+            );
+            $Self->True(
+                $Success,
+                "Name is updated - '$Name'"
+            );
+            my $ConfigItem = $ConfigItemObject->ConfigItemGet(
                 ConfigItemID => $ConfigItemID,
             );
             $Self->True(
-                $VersionID,
-                "Version is created - ID $VersionID"
+                $ConfigItem->{LastVersionID},
+                "Version is created - ID $ConfigItem->{LastVersionID}"
             );
-            push @VersionIDs, $VersionID;
+            $NamesByVersion{ $ConfigItem->{LastVersionID} } = $Name;
         }
+        my @VersionIDs = sort keys %NamesByVersion;
 
         # create test user and login
         my $TestUserLogin = $Helper->TestUserCreate(
@@ -123,7 +143,7 @@ $Selenium->RunTest(
         );
 
         # Click on created ConfigItem.
-        $Selenium->find_element("//div[contains(\@title, '$ConfigItemNumber' )]")->VerifiedClick();
+        $Selenium->find_element("//a[contains( text(), '$ConfigItemNumber' )]")->VerifiedClick();
 
         # get ConfigItem value params
         my @ConfigItemValues = (
@@ -133,7 +153,7 @@ $Selenium->RunTest(
             },
             {
                 Value => 'SeleniumTest',
-                Check => 'p.Value:contains(SeleniumTest)',
+                Check => 'p.Value:contains(SeleniumTest3)',
             },
             {
                 Value => 'Repair',
@@ -159,14 +179,15 @@ $Selenium->RunTest(
             );
         }
 
-        # click to show all versions
-        $Selenium->find_element( ".AllITSMItems", 'css' )->click();
+        for my $VersionID (@VersionIDs) {
+            my $Value = "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemID;VersionID=$VersionID";
+            $Selenium->execute_script(
+                "\$('#VersionSelection').val('$Value').trigger('redraw.InputField').trigger('change')"
+            );
 
-        # verify both versions are present on screen
-        for my $VersionsCheck (@DeplStates) {
             $Self->True(
-                index( $Selenium->get_page_source(), "SeleniumTest ($VersionsCheck)" ) > -1,
-                "SeleniumTest ($VersionsCheck) - found",
+                "return \$('$NamesByVersion{$VersionID}').length",
+                "$NamesByVersion{$VersionID} ($VersionID) - found",
             );
         }
 

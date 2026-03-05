@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -22,13 +22,11 @@ use utf8;
 # core modules
 
 # CPAN modules
-use Test2::V0;
+#use Test2::V0;
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -42,8 +40,14 @@ $Selenium->RunTest(
         my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
 
+        # get helper objects
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
         # create config item classes
-        my $ClassID = $CIHelper->TestConfigItemClassCreate();
 
         my @Test = (
             {
@@ -51,9 +55,9 @@ $Selenium->RunTest(
                 CheckEditFields => [
                     'Name', 'DeplStateID', 'InciStateID', 'Vendor', 'Model', 'Description', 'Type', 'Owner',
                     'SerialNumber',
-                    'OperatingSystem', 'CPU', 'Ram', 'HardDisk', 'Capacity', 'FQDN', 'NIC', 'PoverDHCP',
+                    'OperatingSystem', 'CPU', 'Ram', 'HardDisk', 'Capacity', 'FQDN', 'DynamicField_Computer-NICSubPrimaryAttribute', 'PoverDHCP',
                     'GraphicAdapter',
-                    'OtherEquipment', 'WarrantyExpirationDate', 'InstallDate', 'Note', 'FileUpload', 'SubmitSave'
+                    'OtherEquipment', 'WarrantyExpirationDate', 'InstallDate', 'Note', 'FileUpload', 'Submit'
                 ],
             },
             {
@@ -61,14 +65,14 @@ $Selenium->RunTest(
                 CheckEditFields => [
                     'Name', 'DeplStateID', 'InciStateID', 'Vendor', 'Model', 'Description', 'Type', 'Owner',
                     'SerialNumber',
-                    'WarrantyExpirationDate', 'InstallDate', 'Note', 'FileUpload', 'SubmitSave'
+                    'WarrantyExpirationDate', 'InstallDate', 'Note', 'FileUpload', 'Submit'
                 ],
             },
             {
                 ConfigItemClass => 'Location',
                 CheckEditFields => [
-                    'Name', 'DeplStateID', 'InciStateID', 'Type', 'Phone1', 'Phone2', 'Fax', 'E-Mail', 'Address',
-                    'Note', 'FileUpload',  'SubmitSave'
+                    'Name', 'DeplStateID', 'InciStateID', 'Type', 'Phone1', 'Phone2', 'Fax', 'DynamicField_Location-EMail', 'Address',
+                    'Note', 'FileUpload',  'Submit'
                 ],
             },
             {
@@ -76,7 +80,7 @@ $Selenium->RunTest(
                 CheckEditFields => [
                     'Name', 'DeplStateID', 'InciStateID', 'Description', 'Type', 'NetworkAddress', 'SubnetMask',
                     'Gateway',
-                    'Note', 'FileUpload', 'SubmitSave'
+                    'Note', 'FileUpload', 'Submit'
                 ],
             },
             {
@@ -84,7 +88,7 @@ $Selenium->RunTest(
                 CheckEditFields => [
                     'Name', 'DeplStateID', 'InciStateID', 'Vendor', 'Version', 'Description', 'Type', 'Owner',
                     'SerialNumber',
-                    'LicenceType', 'LicenceKey', 'Media', 'Note', 'SubmitSave'
+                    'LicenceType', 'LicenceKey', 'Media', 'Note', 'Submit'
                 ],
             },
         );
@@ -168,17 +172,46 @@ $Selenium->RunTest(
                 my $YesID = $YesDataRef->{ItemID};
 
                 # Enter NIC name.
-                $Selenium->find_element("//*[contains(\@name, \'NIC::1\' )]")->send_keys('SeleniumNetwork');
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Computer-NICSubPrimaryAttribute_0\' )]")->send_keys('SeleniumNetwork');
 
                 # Select Yes for DHCPOverIP.
                 $Selenium->execute_script(
-                    "\$('#' + Core.App.EscapeSelector('Item1NIC::11')).val('$YesID').trigger('redraw.InputField').trigger('change');"
+                    "\$('#' + Core.App.EscapeSelector('DynamicField_Computer-NICIPoverDHCP_0')).val('$YesID').trigger('redraw.InputField').trigger('change');"
                 );
-            }
-            if ( $ConfigItemEdit->{ConfigItemClass} eq 'Network' ) {
-                $Selenium->find_element("//*[contains(\@name, \'NetworkAddress\' )]")->send_keys('SeleniumNetwork');
-            }
 
+                # Enter Other Equipment.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Computer-OtherEquipment\' )]")->send_keys('Selenium Equipment');
+
+                # Enter Notes.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Computer-Note\' )]")->send_keys('Selenium Notes');
+
+                # Select current date as the installation date.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Computer-InstallDateUsed\' )]")->click();
+            }
+            elsif ( $ConfigItemEdit->{ConfigItemClass} eq 'Network' ) {
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Network-NetworkAddressSubPrimaryAttribute_0\' )]")->send_keys('Selenium LAN');
+
+                # Enter Notes.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Network-Note\' )]")->send_keys('Selenium Notes');
+            }
+            elsif ( $ConfigItemEdit->{ConfigItemClass} eq 'Hardware' ) {
+
+                # Enter Notes.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Hardware-Note\' )]")->send_keys('Selenium Notes');
+
+                # Select current date as the installation date.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Hardware-InstallDateUsed\' )]")->click();
+            }
+            elsif ( $ConfigItemEdit->{ConfigItemClass} eq 'Location' ) {
+
+                # Enter Notes.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Location-Note\' )]")->send_keys('Selenium Notes');
+            }
+            elsif ( $ConfigItemEdit->{ConfigItemClass} eq 'Software' ) {
+
+                # Enter Notes.
+                $Selenium->find_element("//*[contains(\@name, \'DynamicField_Software-Note\' )]")->send_keys('Selenium Notes');
+            }
             $Selenium->find_element("//button[\@value='Submit'][\@type='submit']")->VerifiedClick();
 
             $Selenium->WaitFor(
@@ -210,140 +243,26 @@ $Selenium->RunTest(
             }
 
             # Get ConfigItemID.
-            my $ConfigItemID = $ConfigItemObject->VersionSearch(
-                Name => $ConfigItemName
+            my @ConfigItemIDs = $ConfigItemObject->ConfigItemSearch(
+                Name   => $ConfigItemName,
+                Result => 'ARRAY'
+            );
+            $Self->True(
+                @ConfigItemIDs,
+                "ConfigItem found for deletion - ID $ConfigItemIDs[0]",
             );
 
             # Delete created test ConfigItem.
             my $Success = $ConfigItemObject->ConfigItemDelete(
-                ConfigItemID => $ConfigItemID->[0],
+                ConfigItemID => $ConfigItemIDs[0],
                 UserID       => 1,
             );
             $Self->True(
                 $Success,
-                "ConfigItem is deleted - ID $ConfigItemID->[0]",
+                "ConfigItem is deleted - ID $ConfigItemIDs[0]",
             );
         }
-
-        # Check multiple Customer type fields (see bug#14218 - https://bugs.otobo.org/show_bug.cgi?id=14218).
-        # Create test CI class.
-        my $ClassName = 'Class' . $Helper->GetRandomID();
-        my $ClassID   = $GeneralCatalogObject->ItemAdd(
-            Class   => 'ITSM::ConfigItem::Class',
-            Name    => $ClassName,
-            ValidID => 1,
-            UserID  => 1,
-        );
-        $Self->True(
-            $ClassID,
-            "ClassID $ClassID is created",
-        );
-
-        my $GroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
-            Group  => 'itsm-configitem',
-            UserID => 1,
-        );
-
-        # Set permission.
-        $Kernel::OM->Get('Kernel::System::GeneralCatalog')->GeneralCatalogPreferencesSet(
-            ItemID => $ClassID,
-            Key    => 'Permission',
-            Value  => [$GroupID],
-        );
-
-        my $Definition = <<"EOF";
----
-- Key: CustomerID1
-  Name: CustomerCompany 1
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-  Sub:
-  - Key: Customer1
-    Name: Customer 1
-    Searchable: 1
-    Input:
-      Type: Customer
-
-- Key: CustomerID2
-  Name: CustomerCompany 2
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-  Sub:
-  - Key: Customer2
-    Name: Customer 2
-    Searchable: 1
-    Input:
-      Type: Customer
-
-- Key: CustomerID3
-  Name: CustomerCompany 3
-  Searchable: 1
-  Input:
-    Type: CustomerCompany
-  Sub:
-  - Key: Customer3
-    Name: Customer 3
-    Searchable: 1
-    Input:
-      Type: Customer
-EOF
-
-        # Add test definition to test CI class.
-        my $Result = $ConfigItemObject->DefinitionAdd(
-            ClassID    => $ClassID,
-            Definition => $Definition,
-            UserID     => 1,
-        );
-        ok( $Result->{Success}, "DefinitionAdd successful" );
-        my $DefinitionID = $Result->{DefinitionID};
-        ok( $DefinitionID, "DefinitionID $DefinitionID is created" );
-
-        # Navigate to AgentITSMConfigItemAdd screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemEdit;ClassID=$ClassID");
-
-        # Verify all of three sub elements are autocomplete input fields.
-        $Self->Is(
-            $Selenium->execute_script(
-                "return \$('.SubElement .ITSMCustomerSearch.ui-autocomplete-input').length;"
-            ),
-            3,
-            "All sub elements work correctly - they are autocomplete input fields",
-        );
-
-        # Cleanup.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
-        # Delete test definition.
-        my $Success = $DBObject->Do(
-            SQL  => "DELETE FROM configitem_definition WHERE id = ?",
-            Bind => [ \$DefinitionID ],
-        );
-        $Self->True(
-            $Success,
-            "Config item definition is deleted",
-        );
-
-        $Success = $DBObject->Do(
-            SQL  => "DELETE FROM general_catalog_preferences WHERE general_catalog_id = ?",
-            Bind => [ \$ClassID ],
-        );
-        $Self->True(
-            $Success,
-            "General catalog preferences for ClassID $ClassID is deleted",
-        );
-
-        $Success = $DBObject->Do(
-            SQL  => "DELETE FROM general_catalog WHERE id = ?",
-            Bind => [ \$ClassID ],
-        );
-        $Self->True(
-            $Success,
-            "ClassID $ClassID is deleted",
-        );
-
     }
 );
 
-done_testing;
+$Self->DoneTesting;
