@@ -137,7 +137,6 @@
         <File Permission="660" Location="Kernel/Output/HTML/ITSMConfigItem/PublicOverviewSmall.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Layout/ITSMConfigItemTreeView.pm" />
-        <File Permission="660" Location="Kernel/Output/HTML/Layout/Public.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/LinkObject/ITSMConfigItem.pm" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerConfigItem.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationConfigItem.tt" />
@@ -162,9 +161,7 @@
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ITSMConfigItemDetails.tt" />
         <File Permission="660" Location="Kernel/Output/JavaScript/Templates/Standard/Agent/ITSMConfigurationManagement/ClassImportConfirm.html.tmpl" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemZoom.tt" />
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicHeader.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemSearch.tt" />
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicFooter.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItemOverviewSmall.tt" />
         <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/PublicITSMConfigItem.tt" />
         <File Permission="660" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/ClassExport.pm" />

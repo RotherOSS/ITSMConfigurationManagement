@@ -163,7 +163,7 @@ sub Run {
     }
 
     # output header
-    my $Output = $LayoutObject->PublicHeader( Value => $ConfigItem->{Number} );
+    my $Output = $LayoutObject->CustomerHeader( Value => $ConfigItem->{Number} );
 
     if ( $Config->{GeneralInfo} ) {
         if ( $Config->{GeneralInfo}{Number} ) {
