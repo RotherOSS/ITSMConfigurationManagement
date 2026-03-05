@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -26,7 +26,7 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -112,7 +112,7 @@ sub Run {
     # get filter from web request or use first valid permission condition
     my $Filter =
         $ParamObject->GetParam( Param => 'PermissionCondition' ) ||
-        $ParamObject->GetParam( Param => 'Filter' ) ||
+        $ParamObject->GetParam( Param => 'Filter' )              ||
         ( sort { $a <=> $b } keys $PermissionConditionConfigs->%* )[0];
 
     my $PermissionConditionConfig = $PermissionConditionConfigs->{ sprintf( "%02d", $Filter ) };
@@ -192,7 +192,7 @@ sub Run {
         my %GetParam;
         PARAM:
         for my $SearchParam (qw(Number Name)) {
-            next PARAM if !$Config->{ $SearchParam };
+            next PARAM if !$Config->{$SearchParam};
 
             # fetch single value params
             $GetParam{$SearchParam} = $ParamObject->GetParam( Param => $SearchParam );
@@ -774,7 +774,7 @@ sub Run {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'PublicITSMConfigItemSearch',
         Data         => {
-            Title    => $HeaderTitle,
+            Title => $HeaderTitle,
             %PageNav,
         },
     );

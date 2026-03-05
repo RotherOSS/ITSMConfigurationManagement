@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -26,7 +26,7 @@ use List::Util qw(any none);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -500,7 +500,7 @@ sub Run {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'PublicITSMConfigItem',
         Data         => {
-            Title    => $HeaderTitle,
+            Title                  => $HeaderTitle,
             ITSMConfigItemListHTML => $ConfigItemListHTML,
             %PageNav,
         },
