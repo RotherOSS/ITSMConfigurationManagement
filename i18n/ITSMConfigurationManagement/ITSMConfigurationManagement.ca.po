@@ -2,15 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-05-24 08:13+0000\n"
+"PO-Revision-Date: 2026-03-06 20:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Catalan <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/ca/>\n"
+"Language-Team: Catalan <http://translate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.16\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -30,7 +31,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Change"
-msgstr ""
+msgstr "Modificat"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Incident State"
@@ -98,7 +99,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Realment desitja eliminar aquest invocador?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -118,7 +119,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "Temps de creació"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -378,7 +379,7 @@ msgstr ""
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Empreses del client"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -430,11 +431,11 @@ msgstr ""
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 1"
-msgstr ""
+msgstr "Telèfono"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Phone 2"
-msgstr ""
+msgstr "Telèfono"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "E-Mail"
@@ -490,7 +491,7 @@ msgstr ""
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
-msgstr ""
+msgstr "Expira"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
@@ -546,7 +547,7 @@ msgstr ""
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Printer"
-msgstr ""
+msgstr "Imprimir"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "Switch"
@@ -634,7 +635,7 @@ msgstr ""
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "IT Facility"
-msgstr ""
+msgstr "Facilitat"
 
 #. Database XML Definition: ITSMConfigurationManagement.sopm
 msgid "LAN"
@@ -1654,7 +1655,7 @@ msgstr "Aquest mòdul del motor de l'invocador de OTOBO es dirà per preparar le
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Assignació per a les dades de petició sortints"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
@@ -1670,7 +1671,7 @@ msgstr "Les dades de resposta seran processats per aquesta assignació, per tran
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Assignació per a les dades de petició entrants"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
@@ -1738,7 +1739,7 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Camps dinàmics"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
@@ -1958,7 +1959,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Administració PGP"
 
 #. SysConfig
 msgid "Git Repository"
@@ -2462,7 +2463,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Interfície"
 
 #. ITSM class bundles
 msgid "CIDR"
@@ -2890,7 +2891,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Formulari de resultats"
 
 #. ITSM class bundles
 msgid "PCI"
@@ -3174,7 +3175,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Acord de Nivell de Servei"
 
 #. ITSM class bundles
 msgid "Speakers"
@@ -3287,4 +3288,3 @@ msgstr ""
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
 msgstr ""
-
