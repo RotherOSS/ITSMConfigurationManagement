@@ -2,15 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-08-21 07:13+0000\n"
+"PO-Revision-Date: 2026-03-06 20:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Galician <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/gl/>\n"
+"Language-Team: Galician <http://translate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/gl/>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.16\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -30,7 +31,7 @@ msgstr "Definición"
 
 #. Template: AdminITSMConfigItem
 msgid "Change"
-msgstr ""
+msgstr "Cambiado"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Incident State"
@@ -54,7 +55,7 @@ msgstr "Estado do Incidente actual"
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Current Incident State Type"
-msgstr ""
+msgstr "Estado do Incidente actual"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
@@ -98,7 +99,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Quere realmente borrar esta Actividade?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -118,7 +119,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Createtime"
-msgstr ""
+msgstr "Crear tempo"
 
 #. Template: AgentITSMConfigItemHistory
 msgid "Zoom view"
@@ -146,7 +147,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
-msgstr ""
+msgstr "Importar Configuración"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Information"
@@ -170,7 +171,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Incident State"
-msgstr ""
+msgstr "Estado de Incidente de Servizo"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Version Deployment State"
@@ -378,7 +379,7 @@ msgstr "Modelo"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Empresas do cliente"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -843,6 +844,8 @@ msgstr ""
 #. SysConfig
 msgid "Defines an overview module to show the small view of a configuration item list."
 msgstr ""
+"Define un módulo de vista xeral para mostrar a vista pequena dunha lista de "
+"enquisas."
 
 #. SysConfig
 msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
@@ -879,6 +882,8 @@ msgstr ""
 #. SysConfig
 msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
 msgstr ""
+"Define as columnas mostradas na visión xeral de enquisa. Esta opción non ten "
+"ningún efecto sobre a posición das columnas."
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
@@ -923,10 +928,14 @@ msgstr "Duplicado"
 #. SysConfig
 msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
 msgstr ""
+"Permite función de acción en masa do ticket para o frontend de axente para "
+"traballar en máis dun ticket á vez."
 
 #. SysConfig
 msgid "Enables configuration item bulk action feature only for the listed groups."
 msgstr ""
+"Permite función de acción en masa de ticket soamente para os grupos "
+"enumerados."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
@@ -955,6 +964,7 @@ msgstr ""
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
 msgstr ""
+"Módulo de rexistro do formato de backend para o módulo importar/exportar"
 
 #. SysConfig
 msgid "Overview."
@@ -963,6 +973,12 @@ msgstr "Vista xeral"
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"Os parámetros para o cadro de mando do backend da vista xeral da lista do "
+"cliente usuario da interface de axente. \"Limite\" e o número de entradas "
+"mostradas por defecto. \"Grupo\" é utilizado para restrinxir o acceso ao "
+"plugin (e. g. Grupo: admin;group1;group2;). \"Defecto\" determina se o "
+"plugin se permite por defecto ou se o usuario necesita activalo manualmente. "
+"\"CacheTTLLocal\" é o tempo de cache en minutos para o plugin."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
@@ -987,30 +1003,40 @@ msgstr ""
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla de decisión na interface de axente."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla de decisión na interface de axente."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla de decisión na interface de axente."
 
 #. SysConfig
 msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla campo ITSM adicional na interface "
+"de axente."
 
 #. SysConfig
 msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla de decisión na interface de axente."
 
 #. SysConfig
 msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla campo ITSM adicional na interface "
+"de axente."
 
 #. SysConfig
 msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla campo ITSM adicional na interface "
+"de axente."
 
 #. SysConfig
 msgid "Required privileges to delete config items."
@@ -1035,6 +1061,8 @@ msgstr ""
 #. SysConfig
 msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
 msgstr ""
+"Establece o tipo de ticket na pantalla de ticket masivo da interface de "
+"axente."
 
 #. SysConfig
 msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
@@ -1047,10 +1075,14 @@ msgstr ""
 #. SysConfig
 msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para cambiar a decisión dun ticket na súa vista "
+"zoom da interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para editar unha enquisa na súa vista zoom da "
+"interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
@@ -1059,18 +1091,26 @@ msgstr ""
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para editar unha enquisa na súa vista zoom da "
+"interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para editar unha enquisa na súa vista zoom da "
+"interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para voltar atrás na vista zoom de enquisa da "
+"interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
 msgstr ""
+"Mostra un enlace no menu para editar unha enquisa na súa vista zoom da "
+"interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
@@ -1078,7 +1118,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "Mostra o historico do ticket (ordeado o revé) na interface de axente."
 
 #. SysConfig
 msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
@@ -1391,10 +1431,16 @@ msgstr ""
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Datos por defecto para usar no atributo para a pantalla busca de ticket. "
+"Exemplo: "
+"\"TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Datos por defecto para usar no atributo para a pantalla busca de ticket. "
+"Exemplo: "
+"\"TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
@@ -1415,6 +1461,8 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Define os atributos de ticket por defecto para a ordenación de ticket do "
+"resultado da busca de ticket da interface axente."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
@@ -1423,18 +1471,27 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Define os atributos de ticket por defecto para a ordenación de ticket do "
+"resultado da busca de ticket desta operación."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Define a orde por defecto de ticket nos resultados de busca de ticket da "
+"interface de axente. Arriba: os mais antigos no alto. Abaixo: os últimos no "
+"alto."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Define a orde por defecto de ticket nos resultados de busca na interface de "
+"axente. Arriba: os mais antigos no alto. Abaixo: os últimos no alto."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Define a orde por defecto de ticket nos resultados de busca de ticket desta "
+"operación. Arriba: os mais antigos no alto. Abaixo: os últimos no alto."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1447,10 +1504,31 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Define os atributos de busca mostrados no ticket por defecto para a pantalla "
+"busca de ticket."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Define os atributos de busca mostrados no ticket por defecto para a pantalla "
+"busca de ticket. Exemplo: \"Chave\" debe ter o nome do Campo Dinámico neste "
+"caso 'X', \"Contido\" debe ter o valor do Campo Dinámico dependendo do tipo "
+"de Campo Dinámico, Texto: 'un texto', Dropdown:'1', Data/Tempo:  "
+"'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' and or "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
@@ -1463,14 +1541,18 @@ msgstr ""
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Define cales elementos están dispoñibles para 'Acción' no terceiro nivel da "
+"estructura ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Define cales elementos están dispoñibles no primeiro nivel da estructura ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Define cales elementos están dispoñibles no segundo nivel da estructura ACL."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1491,6 +1573,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Mostra campos de título na pantalla campo ITSM adicional da interface de "
+"axente."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1518,7 +1602,7 @@ msgstr ""
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
+msgstr "InterfaceXenérica módulo rexistro para a capa do invocador."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1530,7 +1614,7 @@ msgstr ""
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "Estado do Incidente"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
@@ -1543,6 +1627,7 @@ msgstr ""
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Número máximo de tickets para ser mostrados no resultado desta operación."
 
 #. SysConfig
 msgid "Name Module"
@@ -1555,10 +1640,14 @@ msgstr ""
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Número de tickets para ser mostrados en cada páxina dun resultado de busca "
+"na interface de axente."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Número de tickets para ser mostrados en cada páxina dun resultado de busca "
+"na interface de cliente."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
@@ -1607,10 +1696,13 @@ msgstr ""
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Permisos requiridos para empregar a pantalla de texto libre de tíckets da "
+"interface do axente."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Permisos requiridos para usar a pantalla de decisión na interface de axente."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
@@ -1654,7 +1746,7 @@ msgstr "O módulo backend do invocador sera chamado para preparar os datos á en
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Mapeado dos datos requiridos de saída"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
@@ -1670,7 +1762,7 @@ msgstr "Os datos de resposta serán procesados por este mapeado, para transforma
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Mapeado das respostas de datos entrantes"
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
@@ -1738,7 +1830,7 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Campos Dinámicos"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
@@ -1919,18 +2011,22 @@ msgstr ""
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
 msgstr ""
+"Rexistro Módulo FrontEnd para ó obxeto AgentITSMSLA na interface do axente"
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Rexistro módulo frontend para obxecto EnquisaPublica na área Enquisa pública."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Rexistro módulo frontend para obxecto EnquisaPublica na área Enquisa pública."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Rexistro módulo frontend para obxecto EnquisaPublica na área Enquisa pública."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
@@ -1938,7 +2034,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
-msgstr ""
+msgstr "Rexistro módulo frontend para a interface de axente."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -1958,7 +2054,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Xestión PGP"
 
 #. SysConfig
 msgid "Git Repository"
@@ -2434,7 +2530,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilizar Tempo"
 
 #. ITSM class bundles
 msgid "Address Allocation"
@@ -2442,7 +2538,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Administración"
 
 #. ITSM class bundles
 msgid "Appliance Type"
@@ -2462,7 +2558,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Interface"
 
 #. ITSM class bundles
 msgid "CIDR"
@@ -2610,7 +2706,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Enderezo IP"
 
 #. ITSM class bundles
 msgid "End of support"
@@ -2750,11 +2846,11 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Chave Licenza"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Tipo Licenza"
 
 #. ITSM class bundles
 msgid "License period from"
@@ -2890,7 +2986,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Saída"
 
 #. ITSM class bundles
 msgid "PCI"
@@ -2982,7 +3078,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Número de serie"
 
 #. ITSM class bundles
 msgid "Server Software"
@@ -3174,7 +3270,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Acordo de nivel de servizo"
 
 #. ITSM class bundles
 msgid "Speakers"
@@ -3270,11 +3366,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for incoming request data"
-msgstr ""
+msgstr "Mapeado para as peticións de datos de entrada."
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for outgoing response data"
-msgstr ""
+msgstr "Mapeado para os datos de resposta de saída"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Import/Export attachments (as the last entries per line)"
@@ -3287,4 +3383,3 @@ msgstr ""
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
 msgstr ""
-
