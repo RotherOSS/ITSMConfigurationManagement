@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2019-06-25 12:05+0000\n"
+"POT-Creation-Date: 2024-05-25 04:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -530,10 +530,6 @@ msgstr "Работна површина"
 msgid "PDA"
 msgstr "PDA"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server"
-msgstr "Сервер"
-
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Other"
 msgstr "Друго"
@@ -791,6 +787,14 @@ msgid "ConfigItemNumber"
 msgstr ""
 
 #. SysConfig
+msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
+msgstr ""
+
+#. SysConfig
+msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
+msgstr ""
+
+#. SysConfig
 msgid "Configuration Item Limit"
 msgstr "Конфигурациски Член Лимит"
 
@@ -935,6 +939,14 @@ msgid "Event module to set configitem-status on ticket-configitem-link."
 msgstr ""
 
 #. SysConfig
+msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
+msgstr ""
+
+#. SysConfig
+msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
+msgstr ""
+
+#. SysConfig
 msgid "ITSM config item overview."
 msgstr ""
 
@@ -953,6 +965,10 @@ msgstr "Модул за генерирање ITSM конфиг член стат
 #. SysConfig
 msgid "Object backend module registration for the import/export module."
 msgstr "Објект позадински модул регирстациа за увоз/извоз модулот."
+
+#. SysConfig
+msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
+msgstr ""
 
 #. SysConfig
 msgid "Overview."
@@ -977,6 +993,10 @@ msgstr "Параметри за пример дозволите за групи 
 #. SysConfig
 msgid "Parameters for the pages (in which the configuration items are shown)."
 msgstr "Параметри за страниви(во кои конфигурациските членови се прикажани)."
+
+#. SysConfig
+msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
+msgstr ""
 
 #. SysConfig
 msgid "Permission Group"
@@ -1100,29 +1120,5 @@ msgstr ""
 
 #. SysConfig
 msgid "productive"
-msgstr ""
-
-#. SysConfig
-msgid "ConfigItems of the following classes will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-
-#. SysConfig
-msgid "ConfigItems with the following deployment states will not be stored on the Elasticsearch server. To apply this to existing CIs, the CI migration has to be run via console, after changing this option."
-msgstr ""
-
-#. SysConfig
-msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
-msgstr ""
-
-#. SysConfig
-msgid "Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory."
-msgstr ""
-
-#. SysConfig
-msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
-
-#. SysConfig
-msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
 msgstr ""
 
