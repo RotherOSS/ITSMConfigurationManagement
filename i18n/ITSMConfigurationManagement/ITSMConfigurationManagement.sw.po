@@ -2,15 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-08-21 07:13+0000\n"
+"PO-Revision-Date: 2026-03-06 22:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Swahili <http://weblate.otobo.org/projects/opm-packages/itsm-configurationmanagement/sw/>\n"
+"Language-Team: Swahili <http://translate.otobo.org/projects/opm-packages/"
+"itsm-configurationmanagement/sw/>\n"
 "Language: sw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.16\n"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -22,7 +23,7 @@ msgstr "Badili ufafanuzi wa tabaka"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "Vipengele vya usanidi"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
@@ -98,7 +99,7 @@ msgstr "Namba ya kipengele kingine cha usanidi cha kuunganisha nacho."
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Kweli unataka kufuta mabadiliko haya?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -378,7 +379,7 @@ msgstr "Mfano"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Customer Company"
-msgstr ""
+msgstr "Kampuni ya mteja"
 
 #. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
 msgid "Serial Number"
@@ -827,6 +828,8 @@ msgstr "Inafafanua ruhusa zinazohitajika kutengeneza vipengele vya usanidi vya I
 #. SysConfig
 msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
 msgstr ""
+"Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa "
+"kutumia kiolesura cha jeneriki."
 
 #. SysConfig
 msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
@@ -893,6 +896,18 @@ msgstr "Inafafanua safu wima za CI zilizoonyeshwa katika kutafuta kipengele cha 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
 msgstr ""
+"Inafafanua safu wima za CI zilizoonyeshwa katika kutafuta kipengele cha "
+"usanidi kutegemeana na tabaka la CI. Kila ingizo lazima liwe na kiambishi "
+"awali jina la tabaka na :: ( mfano Tarakilishi::)Kuna viumbi vichache vya CI "
+"ambavyo vipo kwa CI zote (mfano kwenye tabaka la tarakilishi: "
+"tarakilishi::jina, Tarakilishi::Hali yaCurDep, Tarakilishi::Muda wa "
+"kutengeneza). Kuonyesha kiumbi cha CI kimoja kimoja kama vilivyo fafanuliwa "
+"kwenye ufafanuzi wa CI, mpangilio ufuatao lazima utumike (mfano kwenye "
+"tabaka tarakilishi): Tarakilishi::diski kuu::1, Tarakilishi::Diski kuu "
+"ngumu::1Uwezo::1, Tarakilishi::Diski kuu ngumu::2, Tarakilishi::Diski kuu "
+"ngumu::2::Uwezo::1. Kama hakuna ingizo kwa tabaka la CI, safuwima chaguo "
+"msingi zinaonyeshwa kama zilivyofafanuliwa katika mpangilio\n"
+"ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns"
 
 #. SysConfig
 msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
@@ -912,11 +927,11 @@ msgstr ""
 
 #. SysConfig
 msgid "Delete Configuration Item"
-msgstr ""
+msgstr "Kipengele cha Usanidi"
 
 #. SysConfig
 msgid "Deployment State Color"
-msgstr ""
+msgstr "Hali ya kutumia"
 
 #. SysConfig
 msgid "Duplicate"
@@ -965,6 +980,12 @@ msgstr "Mapitio"
 #. SysConfig
 msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
 msgstr ""
+"Parameta kwa mazingira ya nyuma ya dashibodi mapitio ya orodha ya mteja "
+"mtumiaji ya kiolesura cha wakala. ''Kikundi'' kinatumika kuzuia kufikia "
+"kuchomeka (mfano Kikundi:Utawala;kikundi cha 1;kikundi cha 2;). ''Chaguo-"
+"msingi'' inahakiki kama mchomeko umewezeshwa kwa mchaguo-msingi au kama "
+"mtumizi anahitaji kuwezesha kwa mkono. ''HifadhimudaTTLKiambo'' ni muda wa "
+"hifadhi muda katika dakika kwa mchomeko."
 
 #. SysConfig
 msgid "Parameters for the deployment states color in the preferences view of the agent interface."
@@ -1016,7 +1037,7 @@ msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM cha ku
 
 #. SysConfig
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "Upendeleo unaotakiwa ili kufuta mabadiliko."
 
 #. SysConfig
 msgid "Search config items."
@@ -1053,6 +1074,8 @@ msgstr "Inaonyesha kiungo kwenye  menyu kuweza kufikia historia ya kipengele cha
 #. SysConfig
 msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
 msgstr ""
+"Onyesha kiungo katika menyu kuhariri  kipengele cha usanidi katika mandhari "
+"yake iliyokuzwa ya kiolesura cha wakala."
 
 #. SysConfig
 msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
@@ -1069,6 +1092,8 @@ msgstr "Onyesha kiungo katika menyu kuhariri  kipengele cha usanidi katika mandh
 #. SysConfig
 msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
 msgstr ""
+"Inaonyesha kiungo kwenye menyu ili kurudi nyuma kwenye muonekano wa "
+"mabadiliko uliokuzwa wa kiolesura cha wakala."
 
 #. SysConfig
 msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
@@ -1108,7 +1133,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Change role definition"
-msgstr ""
+msgstr "Badili ufafanuzi wa tabaka"
 
 #. Template: AdminITSMConfigItem
 msgid "Ready2Import Class Bundles"
@@ -1128,15 +1153,17 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Role"
-msgstr ""
+msgstr "Usanidi wa Kipengele"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The version number of this config item"
-msgstr ""
+msgstr "Jina la hiki kipengele cha usanidi"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
 msgstr ""
+"Jina hili tayari limekwisha tumikana kipengele cha usanidi chenye namba i(z)"
+"fuatazo: %s"
 
 #. Template: AgentITSMConfigItemOverviewSmall
 msgid "No config item data found."
@@ -1393,10 +1420,22 @@ msgstr ""
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Data chaguo misngi kutumika katika sifa kwa ajili ya skrini ya kutafuta ya "
+"tiketi.\n"
+"Mfano:\n"
+"\"Umbizo la Muda la Kutengeneza Tiketi= mwaka; Mwanzo wa Muda wa kutengeneza "
+"tiketi= Mwisho; Pointi ya muda wa kutengeneza tiketi=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Data chaguo-msingi kutumia katika sifa kwa ajili ya skrini ya kutafuta ya "
+"tiketi:\n"
+"\"Mwaka wa kuanza wa muda wa kutengeneza tiketi=2010; Mwezi wa kuanza wa "
+"muda wa kutengeneza tiketi=10; Siku ya kuanza ya muda wa kutengeneza "
+"tiketi=4; Mwaka wa kuacha wa muda wa kutengeneza tiketi =2010; Mwezi wa "
+"kuacha wa muda wa kutengeneza tiketi = 11; Siku ya kuacha ya muda wa "
+"kutengeneza tiketi=3; \"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
@@ -1417,6 +1456,8 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Inafafanua sifa ya tiketi chaguo-msingi kwa ajili ya kupanga matokeo ya "
+"utafutaji wa tiketi ya kiolesura cha mteja."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
@@ -1425,18 +1466,26 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Inafafanua sifa ya tiketi chaguo-msingi kwa ajili ya kupanga matokeo ya "
+"utafutaji wa tiketi ya uendeshaji huu."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya "
+"tiketi ya kiolesura cha wakala. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya "
+"tiketi ya kiolesura cha mteja. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya "
+"tiketi ya mchakato huu. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1449,30 +1498,64 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Inafafanua sifa ya tiketi iliyotafutwa iliyoonyeshwa chaguo msingi kwa "
+"skrini ya kutafuta tiketi."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Inafafanua sifa ya tiketi iliyotafutwa iliyoonyeshwa chaguo msingi kwa "
+"skrini ya kutafuta tiketi. Mfano: \"Kibonye\" lazima iwe na jina la uga "
+"wenye nguvu kwa hapa ni 'X', \"Maudhui\" lazima iwe na thamani ua uga wenye "
+"nguvu kutegemeana na aina ya uga wenye nguvu, Matini:'Matini', Kunjuzi: '1', "
+"Tarehe/Muda:  Mwaka wa kuanza wa majira ya muda uliopangwa X ya uga wenye "
+"nguvu uliotafutafutwa=1974; Mwezi wa kuanza wa majira ya muda uliopangwa X "
+"ya uga wenye nguvu uliotafutafutwa=01; Siku ya kuanza ya majira ya muda "
+"uliopangwa X ya uga wenye nguvu uliotafutafutwa=26; Saa ya kuanza ya majira "
+"ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =00; Dakika ya "
+"kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa = "
+"00; Sekunde ya kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu "
+"uliotafutafutwa = 00; Mwaka wa kuisha wa majira ya muda uliopangwa X ya uga "
+"wenye nguvu uliotafutafutwa =2013; Mwezi wa kuisha wa majira ya muda "
+"uliopangwa X ya uga wenye nguvu uliotafutafutwa =01; Siku ya kuisha ya "
+"majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =26; Saa ya "
+"kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa "
+"=23; Dakika ya kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu "
+"uliotafutafutwa =59; Sekunde ya kuisha ya majira ya muda uliopangwa X ya uga "
+"wenye nguvu uliotafutafutwa =59; na au Umbizo la pointi ya muda X ya uga "
+"wenye nguvu uliotafutafutwa = Week; Mwanzo wa pointi ya muda X ya uga wenye "
+"nguvu uliotafutafutwa = Kabla; Thamani ya pointi ya muda X ya uga wenye "
+"nguvu uliotafutafutwa = 7;"
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
 msgstr ""
+"Inawezesha upeo wa kutafuta kwa skerini ya Kipengele cha usanidi cha ITSM "
+"cha wakala."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr ""
+"Inafafanua kikomo cha kutafuta kwa skrini ya Kutafuta Kipengele cha usanidi "
+"cha ITSM  cha Wakala."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Inafafa vipengelee ambavyo vinapatikana kwa ajili ya 'Kitendo' katika ngazi "
+"ya tatu ya muundo wa ACL."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
 msgstr ""
+"Inafafanua vipengele ambavyo vinapatikana katika ngazi ya kwanza ya muundo "
+"wa ACL."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
 msgstr ""
+"Inafafanua vipengele ambavyo vinapatikana katika ngazi ya pili ya muundo wa "
+"ACL."
 
 #. SysConfig
 msgid "Definition Update"
@@ -1484,7 +1567,7 @@ msgstr ""
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "Hali ya kutumia"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1493,6 +1576,8 @@ msgstr ""
 #. SysConfig
 msgid "Dynamic fields shown in the additional ITSM field screen of the agent interface."
 msgstr ""
+"Inyesha uga za kichwa cha habari katika skrini ya uga wa ITSM ulioongezwa wa "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
@@ -1505,6 +1590,10 @@ msgstr ""
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr ""
+"Wezesha/Kutowezesha kitendeakazi cha kuangalia vipengele vya usanidi kwa "
+"majina ya pekee. Kabla ya kuwezesha chaguo hili unatakiwa kuangalia mfumo "
+"wako kwa vipengele vya usanidi kama vipo tayari kwa majina nakala pacha. "
+"Unaweza kufanya hivi na maandiko bin/otobo. ITSMConfigItemListDuplicates.pl."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
@@ -1521,10 +1610,11 @@ msgstr ""
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr ""
+"Usajili wa moduli ya kiolesura cha jumla kwaajili la tabaka la kihamshaji."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
-msgstr ""
+msgstr "Kipengele cha usanidi"
 
 #. SysConfig
 msgid "InciState"
@@ -1532,7 +1622,7 @@ msgstr ""
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "Hali ya tukio"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
@@ -1545,6 +1635,8 @@ msgstr ""
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Namba ya upeo wa juu wa tiketi zitakazo onyeshwa katika matokeo ya mchakato "
+"huu."
 
 #. SysConfig
 msgid "Name Module"
@@ -1557,10 +1649,14 @@ msgstr ""
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Namba ta tiketi zitakazoonyeshwa katika kila ukurasa wa matokeo ya utafutaji "
+"katika kiolesura cha wakala."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Namba ta tiketi zitakazoonyeshwa katika kila ukurasa wa matokeo ya utafutaji "
+"katika kiolesura cha mteja."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
@@ -1569,6 +1665,8 @@ msgstr ""
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
@@ -1577,10 +1675,14 @@ msgstr ""
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1593,6 +1695,8 @@ msgstr ""
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
@@ -1601,18 +1705,26 @@ msgstr "Fanya kitecndo cha usanidishwaji kwa kila tukio (kama Kichochezi) kwa ki
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Inahitaji ruhusa kutumia skrini ya kutafuta kipengele cha usanidi cha ITSM "
+"katika kiolesura cha wakala."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Inahitaji ruhusa kutumia skrini ya kutafuta kipengele cha usanidi cha ITSM "
+"katika kiolesura cha wakala."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM katika "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM katika "
+"kiolesura cha wakala."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
@@ -1656,7 +1768,7 @@ msgstr "Moduli ya mazingira ya nyuma ya kichochezi cha OTOBO itaitwa kuandaa dat
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for outgoing request data"
-msgstr ""
+msgstr "Kuunganishwa kwa data za maombi zinazotoka nje."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Mapping"
@@ -1672,7 +1784,7 @@ msgstr "Data za majibu zitashughulikiwa na kuunganishwa kwa ramani, kuibadilisha
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Settings for incoming response data"
-msgstr ""
+msgstr "Kuunganisha data za majibu zinazoingia ndani."
 
 #. Template: AdminGenericInterfaceInvokerConfigItem
 msgid "Event data"
@@ -1708,7 +1820,7 @@ msgstr ""
 
 #. Template: CustomerITSMConfigItem
 msgid "ConfigItems"
-msgstr ""
+msgstr "Vipengele vya usanidi"
 
 #. Template: CustomerITSMConfigItem
 msgid "Sort"
@@ -1740,7 +1852,7 @@ msgstr ""
 
 #. Template: AdminDynamicField
 msgid "New Dynamic Fields"
-msgstr ""
+msgstr "Sehemu zinazobadilika"
 
 #. Template: AdminDynamicField
 msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
@@ -1908,7 +2020,7 @@ msgstr ""
 
 #. SysConfig
 msgid "DynamicFieldScreen"
-msgstr ""
+msgstr "SehemuInayobadilika"
 
 #. SysConfig
 msgid "Export all available public keys to authorized_keys file."
@@ -1921,18 +2033,26 @@ msgstr ""
 #. SysConfig
 msgid "Frontend module registration for the OPMS object in the agent interface."
 msgstr ""
+"Usajili wa moduli ya mazingira ya mbele kwa kipengee cha ITSMSLA cha wakala  "
+"katika kiolesura cha wakala."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
 msgstr ""
+"Moduli ya Frontend ya kusajili kwa ajili ya UtafitiUmma katika eneo la "
+"utafiti wa umma."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
 msgstr ""
+"Moduli ya Frontend ya kusajili kwa ajili ya UtafitiUmma katika eneo la "
+"utafiti wa umma."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
 msgstr ""
+"Moduli ya Frontend ya kusajili kwa ajili ya UtafitiUmma katika eneo la "
+"utafiti wa umma."
 
 #. SysConfig
 msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
@@ -1941,6 +2061,7 @@ msgstr ""
 #. SysConfig
 msgid "Frontend module registration for the admin interface."
 msgstr ""
+"Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala."
 
 #. SysConfig
 msgid "GIT Author registration."
@@ -1960,7 +2081,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Git Management"
-msgstr ""
+msgstr "Usimamizi PGP"
 
 #. SysConfig
 msgid "Git Repository"
@@ -2436,7 +2557,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Accounting"
-msgstr ""
+msgstr "Uhasibu wa muda"
 
 #. ITSM class bundles
 msgid "Address Allocation"
@@ -2444,7 +2565,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Administrator"
-msgstr ""
+msgstr "Utawala"
 
 #. ITSM class bundles
 msgid "Appliance Type"
@@ -2464,7 +2585,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Bus Interface"
-msgstr ""
+msgstr "Kiolesura"
 
 #. ITSM class bundles
 msgid "CIDR"
@@ -2612,7 +2733,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "End IP Address"
-msgstr ""
+msgstr "Anwani ya IP"
 
 #. ITSM class bundles
 msgid "End of support"
@@ -2752,11 +2873,11 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "License Key"
-msgstr ""
+msgstr "Neno kuu la leseni"
 
 #. ITSM class bundles
 msgid "License Type"
-msgstr ""
+msgstr "Aina ya leseni"
 
 #. ITSM class bundles
 msgid "License period from"
@@ -2892,7 +3013,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Outputs"
-msgstr ""
+msgstr "Matokeo"
 
 #. ITSM class bundles
 msgid "PCI"
@@ -2984,7 +3105,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Serialnumber"
-msgstr ""
+msgstr "Namba tambulishi"
 
 #. ITSM class bundles
 msgid "Server Software"
@@ -3176,7 +3297,7 @@ msgstr ""
 
 #. ITSM class bundles
 msgid "Service Agreement"
-msgstr ""
+msgstr "Kubaliano ya kivango cha huduma"
 
 #. ITSM class bundles
 msgid "Speakers"
@@ -3208,7 +3329,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Version number of this config item"
-msgstr ""
+msgstr "Jina la hiki kipengele cha usanidi"
 
 #. JS File: ITSM.Admin.ITSMConfigItem
 msgid "Importing classes/roles and their related fields"
@@ -3272,11 +3393,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for incoming request data"
-msgstr ""
+msgstr "Tengeneza ramani kwa ajili ya data za maombi zinazoingia."
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for outgoing response data"
-msgstr ""
+msgstr "Kuunganisha data za majibu zinazotoka nje."
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Import/Export attachments (as the last entries per line)"
@@ -3289,4 +3410,5 @@ msgstr ""
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
 msgstr ""
-
+"Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa "
+"kutumia kiolesura cha jeneriki."
