@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2019-06-25 12:11+0000\n"
-"PO-Revision-Date: 2026-03-06 18:00+0000\n"
+"PO-Revision-Date: 2026-03-06 20:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Serbian <http://translate.otobo.org/projects/opm-packages/"
 "itsm-configurationmanagement/sr/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Class"
-msgstr ""
+msgstr "Конфигурационе ставке"
 
 #. Template: AdminITSMConfigItem
 msgid "Definition"
@@ -36,11 +36,11 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Incident State"
-msgstr ""
+msgstr "Тип стања инцидента"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "Deployment State"
-msgstr ""
+msgstr "Боја статуса распоређивања"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Class"
@@ -56,7 +56,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Current Incident State Type"
-msgstr ""
+msgstr "Тип стања инцидента"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Last changed"
@@ -64,7 +64,7 @@ msgstr "Задњи пут промењено"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
-msgstr ""
+msgstr "Конфигурационе ставке"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Filter for Classes"
@@ -100,7 +100,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemDelete
 msgid "Do you really want to delete this config item?"
-msgstr ""
+msgstr "Да ли заиста желите да избришете ову промену?"
 
 #. Template: AgentITSMConfigItemEdit
 msgid "The name of this config item"
@@ -148,7 +148,7 @@ msgstr ""
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
-msgstr ""
+msgstr "Ограничење конфигурационе ставке"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item Information"
@@ -200,7 +200,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No ConfigItemID is given!"
-msgstr ""
+msgstr "Није дат ИД Ставке!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You need at least one selected Configuration Item!"
@@ -212,11 +212,11 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
-msgstr ""
+msgstr "Промена \"%s\" није нађена у бази података!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Was not able to delete the configitem ID %s!"
-msgstr ""
+msgstr "Није било могуће обрисати ChangeID %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "No version found for ConfigItemID %s!"
@@ -228,7 +228,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
-msgstr ""
+msgstr "Није дат %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "No definition was defined for class %s!"
@@ -236,11 +236,11 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
-msgstr ""
+msgstr "Не може се приказати историјат, јер није дат ИД Ставке!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no access rights given!"
-msgstr ""
+msgstr "Не може се приказати историјат, није дат TicketID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New ConfigItem (ID=%s)"
@@ -248,7 +248,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "New version (ID=%s)"
-msgstr ""
+msgstr "Нова акција (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Deployment state updated (new=%s, old=%s)"
@@ -260,15 +260,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem (ID=%s) deleted"
-msgstr ""
+msgstr "Обрисан услов (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) added"
-msgstr ""
+msgstr "Повезано са %s (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Link to %s (type=%s) deleted"
-msgstr ""
+msgstr "Обрисана веза са %s (ID=%s)"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "ConfigItem definition updated (ID=%s)"
@@ -296,7 +296,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItemID %s not found in database!"
-msgstr ""
+msgstr "Промена \"%s\" није нађена у бази података!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "VersionID %s not found in database!"
@@ -304,7 +304,7 @@ msgstr "Ид верзије %s није нађен у бази података!
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
-msgstr ""
+msgstr "Конфигурационе ставке"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
@@ -316,7 +316,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No ClassID is given!"
-msgstr ""
+msgstr "Није дат ChangeID!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "No access rights for this class given!"
@@ -492,7 +492,7 @@ msgstr ""
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
-msgstr ""
+msgstr "Истиче"
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Maintenance"
@@ -1117,6 +1117,9 @@ msgstr ""
 #. Template: AdminITSMConfigItem
 msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
 msgstr ""
+"Овде можете активирати Ready2Adopt процесе примера најбоље праксе који су "
+"спремни за употребу. Молимо обратите пажњу да је можда неопходна додатна "
+"конфигурација."
 
 #. Template: AdminITSMConfigItem
 msgid "Update existing entities"
@@ -1192,7 +1195,7 @@ msgstr "Да ли желите да наставите?"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Need ExampleClasses!"
-msgstr ""
+msgstr "Неопходан ExampleProcesses!"
 
 #. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
 msgid "Definition is no valid YAML hash."
@@ -1317,10 +1320,16 @@ msgstr ""
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Омогућава напредне услове претраге тикета у интерфејсу оператера. Са овом "
+"опцијом моћете претраживати нпр. наслов тикета са условима као \""
+"(*key1*&&*key2*)\" или \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Омогућава напредне услове претраге тикета у интерфејсу корисника. Са овом "
+"опцијом моћете претраживати нпр. наслов тикета са условима као \""
+"(*key1*&&*key2*)\" или \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1393,10 +1402,16 @@ msgstr ""
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 msgstr ""
+"Подразумевани подаци за коришћење на атрибутима за приказ претраге тикета. "
+"Пример: "
+"\"TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;\"."
 
 #. SysConfig
 msgid "Default data to use on attribute for config item search screen. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 msgstr ""
+"Подразумевани подаци за коришћење на атрибутима за приказ претраге тикета. "
+"Пример: "
+"\"TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;\"."
 
 #. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
@@ -1417,6 +1432,8 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the agent interface."
 msgstr ""
+"Дефинише подразумевани атрибут тикета за сортирање тикета у резултату "
+"претраге тикета интерфејса оператера."
 
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of the customer interface."
@@ -1425,18 +1442,27 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default config item attribute for config item sorting of the config item search result of this operation."
 msgstr ""
+"Дефинише подразумевани атрибут тикета за сортирање тикета у резултату "
+"претраге тикета у овој операцији."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Дефинише подразумевани редослед тикета (после сортирања по приоритету) у "
+"прегледу претраге тикета у интерфејсу опрератера. Горе: Најстарији на врху. "
+"Доле: Најновије на врху."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Одређује подразумевани редослед тикета у прегледу претраге резултата у "
+"интерфејсу клијента. Горе: Најстарији на врху. Доле: Најновије на врху."
 
 #. SysConfig
 msgid "Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
+"Дефинише подразумевани редослед тикета у прегледу претраге тикета у овој "
+"операцији. Горе: Најстарији на врху. Доле: Најновије на врху."
 
 #. SysConfig
 msgid "Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1449,30 +1475,52 @@ msgstr ""
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen."
 msgstr ""
+"Дефинише подразумевани приказ претраге атрибута тикета за приказ екрана "
+"претраге тикета."
 
 #. SysConfig
 msgid "Defines the default shown config item search attribute for config item search screen. Example: \"Key\" must have the name of the Dynamic Field in this case 'X', \"Content\" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 msgstr ""
+"Дефинише подразумевани приказ претраге атрибута тикета за приказ екрана "
+"претраге тикета. Пример: \"Key\" мора имати назив динамичког поља, у овом "
+"случају 'X', \"Content\" мора имати вредност динамичког поља у зависности од "
+"типа динамичког поља, Текст: 'a text', Падајући: '1', Датум/Време: "
+"'Search_DynamicField_XTimeSlotStartYear=1974; "
+"Search_DynamicField_XTimeSlotStartMonth=01; "
+"Search_DynamicField_XTimeSlotStartDay=26; "
+"Search_DynamicField_XTimeSlotStartHour=00; "
+"Search_DynamicField_XTimeSlotStartMinute=00; "
+"Search_DynamicField_XTimeSlotStartSecond=00; "
+"Search_DynamicField_XTimeSlotStopYear=2013; "
+"Search_DynamicField_XTimeSlotStopMonth=01; "
+"Search_DynamicField_XTimeSlotStopDay=26; "
+"Search_DynamicField_XTimeSlotStopHour=23; "
+"Search_DynamicField_XTimeSlotStopMinute=59; "
+"Search_DynamicField_XTimeSlotStopSecond=59;' и/или "
+"'Search_DynamicField_XTimePointFormat=week; "
+"Search_DynamicField_XTimePointStart=Before; "
+"Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Дефинише границу претраге за екран AgentITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Дефинише границу претраге за екран AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
 msgstr ""
+"Дефинише које су ставке слободне за 'Action' у трећем нивоу ACL структуре."
 
 #. SysConfig
 msgid "Defines which items are available in first level of the ITSM Config Item ACL structure."
-msgstr ""
+msgstr "Дефинише које су ставке слободне у првом нивоу ACL структуре."
 
 #. SysConfig
 msgid "Defines which items are available in second level of the ITSM Config Item ACL structure."
-msgstr ""
+msgstr "Дефинише које су ставке слободне у другом нивоу ACL структуре"
 
 #. SysConfig
 msgid "Definition Update"
@@ -1484,7 +1532,7 @@ msgstr ""
 
 #. SysConfig
 msgid "DeploymentState"
-msgstr ""
+msgstr "Боја статуса распоређивања"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1496,11 +1544,12 @@ msgstr "Динамичка поља приказана у екрану дода�
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item overview screen of the customer interface."
-msgstr ""
+msgstr "Динамичка поља приказана у прегледу FAQ у интерфејсу клијента."
 
 #. SysConfig
 msgid "Dynamic fields shown in the config item search screen of the agent interface."
 msgstr ""
+"Динамичка поља приказана у екрану претраге промена у интерфејсу оператера."
 
 #. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
@@ -1520,7 +1569,7 @@ msgstr ""
 
 #. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
-msgstr ""
+msgstr "Регистрација модула генеричког интерфејса за слој позиваоца."
 
 #. SysConfig
 msgid "ITSM ConfigItem"
@@ -1532,7 +1581,7 @@ msgstr ""
 
 #. SysConfig
 msgid "IncidentState"
-msgstr ""
+msgstr "Тип стања инцидента"
 
 #. SysConfig
 msgid "Includes deployment states in the config item search of the customer interface."
@@ -1545,6 +1594,7 @@ msgstr ""
 #. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr ""
+"Максимални број тикета који ће бити приказани у резултату ове операције."
 
 #. SysConfig
 msgid "Name Module"
@@ -1557,10 +1607,14 @@ msgstr ""
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the agent interface."
 msgstr ""
+"Број тикета који ће бити приказани на свакој страни резултата претраге у "
+"интерфејсу оператера."
 
 #. SysConfig
 msgid "Number of config items to be displayed in each page of a search result in the customer interface."
 msgstr ""
+"Број тикета који ће бити приказани на свакој страни резултата претраге у "
+"интерфејсу клијента."
 
 #. SysConfig
 msgid "Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch."
@@ -1569,18 +1623,26 @@ msgstr ""
 #. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Параметри за статусе примене на приказу поставки у интерфејсу оператера."
 
 #. SysConfig
 msgid "Parameters for the column filters of the small config item overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
 msgstr ""
+"Параметри за филтер колона у умањеном прегледу тикета. Напомена: подешавање "
+"'Active' на 0 ће само онемогућити оператерима да мењају своја лична "
+"подешавања из ове групе, али ће администратори и даље моћи да их мењају у "
+"њихово име. Подесите 'PreferenceGroup' да бисте одредили у ком делу "
+"интерфејса ова подешавања треба да буду приказана."
 
 #. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Параметри за статусе примене на приказу поставки у интерфејсу оператера."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Параметри за статусе примене на приказу поставки у интерфејсу оператера."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1593,6 +1655,7 @@ msgstr ""
 #. SysConfig
 msgid "Parameters for the version trigger for config item classes in the preferences view of the agent interface."
 msgstr ""
+"Параметри за статусе примене на приказу поставки у интерфејсу оператера."
 
 #. SysConfig
 msgid "Performs the configured action for each event (as an Invoker) for each configured Webservice."
@@ -1601,18 +1664,26 @@ msgstr "Извршава подешену акцију за сваки дога�
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr ""
+"Потребне дозволе за употребу екрана претраге ITSM конфигурационе ставке у "
+"интерфејсу оператера."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
 msgstr ""
+"Потребне дозволе за употребу екрана претраге ITSM конфигурационе ставке у "
+"интерфејсу оператера."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item tree view screen in the agent interface."
 msgstr ""
+"Потребне дозволе за употребу екрана ITSM конфигурационе ставке у интерфејсу "
+"оператера."
 
 #. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr ""
+"Потребне дозволе за употребу екрана ITSM конфигурационе ставке у интерфејсу "
+"оператера."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
@@ -3272,11 +3343,11 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for incoming request data"
-msgstr ""
+msgstr "Мапирање за долазне податке захтева"
 
 #. Template: AdminGenericInterfaceOperationConfigItem
 msgid "Settings for outgoing response data"
-msgstr ""
+msgstr "Мапирање за излазне податке одговора"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Import/Export attachments (as the last entries per line)"
@@ -3289,3 +3360,5 @@ msgstr ""
 #. SysConfig
 msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
 msgstr ""
+"Дефинише неопходне дозволе за добијање ITSM конфигурационих ставки "
+"коришћењем генеричког интерфејса."
