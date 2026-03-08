@@ -1,4 +1,4 @@
-# Rother OSS GmbH CMDB
+# Rother OSS GmbH CMDB.
 # Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # This file is distributed under the same license as the OTOBO Installation Guide package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
