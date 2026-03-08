@@ -1,4 +1,4 @@
- .. image:: images/otobo-logo.png
+.. image:: images/otobo-logo.png
    :alt: OTOBO Logo
    :align: center
    :width: 70%
