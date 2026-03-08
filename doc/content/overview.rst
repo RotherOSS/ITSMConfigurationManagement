@@ -47,6 +47,7 @@ Common Usecases and Main Benefits
 **Proactive Risk Analysis** - By offering transparency into system dependencies, the CMDB helps identify potential vulnerabilities and risks before they escalate. IT teams can proactively address weaknesses, improving overall infrastructure resilience.
 
 .. _further reading:
+
 Further Reading
 ---------------
 
