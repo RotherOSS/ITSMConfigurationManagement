@@ -5,21 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 15:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: German <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/de/>\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-08 10:40+0000\nLast-Translator: Stefan Rother <sr@rother-oss.com>\nLanguage-Team: German <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/de/>\nLanguage: de\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -35,7 +21,7 @@ msgstr "Rother OSS GmbH"
 
 #: ../../content/about.rst:18
 msgid "Email: hello@otobo.io"
-msgstr ""
+msgstr "E-Mail: hello@otobo.io"
 
 #: ../../content/about.rst:19
 msgid "Web: https://otobo.io"
@@ -55,7 +41,7 @@ msgstr ""
 
 #: ../../content/about.rst:27
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "Allgemeine Geschäftsbedingungen"
 
 #: ../../content/about.rst:29
 msgid ""
@@ -64,66 +50,66 @@ msgid ""
 " later version published by the Free Software Foundation; with no "
 "Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy"
 " of the license is included in the section entitled \"COPYING\"."
-msgstr ""
+msgstr "Die Genehmigung zum Kopieren, Verteilen und/oder Modifizieren dieses Dokuments wird gemäß den Bedingungen der GNU Free Documentation License, Version 1.3 oder einer späteren Version, veröffentlicht von der Free Software Foundation, erteilt; ohne unveränderliche Abschnitte, ohne Texte auf der Vorderseite und ohne Texte auf der Rückseite. Eine Kopie der Lizenz ist im Abschnitt „COPYING” enthalten."
 
 #: ../../content/about.rst:35
 msgid ""
 "Published by: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 "
 "Leiblfing, Germany."
-msgstr ""
+msgstr "Herausgeber: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 Leiblfing, Deutschland."
 
 #: ../../content/configuration.rst:13
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
 msgid "Table of Contents"
-msgstr ""
+msgstr "Inhaltsverzeichnis"
 
 #: ../../content/configuration/basic_configuration.rst:12
 msgid "Basic Configuration"
-msgstr ""
+msgstr "Grundkonfiguration"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
 "Following the basic configuration you will learn to assign permissions to"
 " agents and customer users and how to get started with the most usual "
 "CIs."
-msgstr ""
+msgstr "Nach der Grundkonfiguration lernen Sie, wie Sie Agenten und Kundenbenutzern Berechtigungen zuweisen und wie Sie mit den gängigsten CIs beginnen."
 
 #: ../../content/configuration/basic_configuration.rst:16
 msgid "Assign Permissions"
-msgstr ""
+msgstr "Berechtigungen zuweisen"
 
 #: ../../content/configuration/basic_configuration.rst:17
 msgid ""
 "Agents/customer users who need access to CIs of the CMDB have to be "
 "assigned to the group \"itsm-configitem\"."
-msgstr ""
+msgstr "Agenten/Kundenbenutzer, die Zugriff auf die CIs der CMDB benötigen, müssen der Gruppe „itsm-configitem” zugewiesen werden."
 
 #: ../../content/configuration/basic_configuration.rst:20
 msgid "Starting with the most usual CIs"
-msgstr ""
+msgstr "Beginnend mit den gängigsten CIs"
 
 #: ../../content/configuration/basic_configuration.rst:21
 msgid ""
 "OTOBO provides the option to import class bundles showcasing the most "
 "usual CIs. To start with them please perform the following actions:"
-msgstr ""
+msgstr "OTOBO bietet die Möglichkeit, Klassen mit den gängigsten CIs zu importieren. Um damit zu beginnen, führen Sie bitte die folgenden Schritte aus:"
 
 #: ../../content/configuration/basic_configuration.rst:24
 msgid "Open the admin-view of your OTOBO Web-UI."
-msgstr ""
+msgstr "Öffnen Sie die Admin-Ansicht Ihrer OTOBO-Weboberfläche."
 
 #: ../../content/configuration/basic_configuration.rst:25
 msgid "Open \"Config Items\" in the section \"CMDB settings\"."
-msgstr ""
+msgstr "Öffnen Sie „Configuration Items“ im Abschnitt „CMDB-Einstellungen“."
 
 #: ../../content/configuration/basic_configuration.rst
 msgid ""
 "Locate the \"Ready2Import Class Bundles\" panel on the left side and "
 "select the class bundle you want to import."
-msgstr ""
+msgstr "Suchen Sie das Fenster „Ready2Import-Klassenbündel“ auf der linken Seite und wählen Sie das Klassenbündel aus, das Sie importieren möchten."
 
 #: ../../content/configuration/basic_configuration.rst
 msgid ".. figure:: images/ready2import_class_bundles.png"
@@ -135,7 +121,7 @@ msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst:29
 msgid "Click the button to import the Ready2Adopt class bundles."
-msgstr ""
+msgstr "Klicken Sie auf die Schaltfläche, um die Ready2Adopt-Klassenbündel zu importieren."
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
@@ -144,43 +130,43 @@ msgstr "Konfigurationsreferenz"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "CMDB"
-msgstr ""
+msgstr "CMDB"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "Configuration Management Database"
-msgstr ""
+msgstr "Configuration Management Database"
 
 #: ../../content/configuration/configuration_reference.rst:17
 msgid "CI"
-msgstr ""
+msgstr "CI"
 
 #: ../../content/configuration/configuration_reference.rst:18
 msgid "Configuration Item"
-msgstr ""
+msgstr "Configuration Item"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
-msgstr ""
+msgstr "Benutzerdefinierte Konfiguration und erweiterte Funktionen"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:16
 msgid "Classes and Roles in the General Catalog"
-msgstr ""
+msgstr "Klassen und Rollen im General Katalog"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:20
 msgid "Config Item Definitions"
-msgstr ""
+msgstr "Config Item Definitions"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:24
 msgid "General Structure"
-msgstr ""
+msgstr "Allgemeiner Aufbau"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:25
 msgid "Example class \"Domain\":"
-msgstr ""
+msgstr "Beispielklasse „Domain“:"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:95
 msgid "Setting Reference"
-msgstr ""
+msgstr "Referenz möglicher Einstellungen"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:112
 msgid "**Pages**"
@@ -188,11 +174,11 @@ msgstr "**Pages**"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:97
 msgid "*Name* (required) - The name of the page"
-msgstr ""
+msgstr "*Name* (erforderlich) – Der Name der Page"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:98
 msgid "*Layout* (required) - The layout of the grid on this page"
-msgstr ""
+msgstr "*Layout* (erforderlich) – Das Layout des Rasters in dieser Page"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:100
 msgid "*Columns* - number of columns"
@@ -200,11 +186,11 @@ msgstr "*Columns* - Anzahl Spalten"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:101
 msgid "e.g. `Columns: 3` will display 3 columns"
-msgstr ""
+msgstr "z. B. `Colums: 3` zeigt 3 Spalten an"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:102
 msgid "*ColumnWidth* - basic css defining the column widths"
-msgstr ""
+msgstr "*ColumnWidth* – grundlegendes CSS zur Definition der Spaltenbreiten"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:104
 msgid ""
@@ -232,15 +218,15 @@ msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:108
 msgid "*Section* (required) - The section name"
-msgstr ""
+msgstr "*Section* (erforderlich) – Der Name der Section"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:109
 msgid "*RowStart* (optional) - The starting row in the page grid of this section"
-msgstr ""
+msgstr "*RowStart* (optional) – Die Startzeile im Grid dieser Section"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:110
 msgid "*RowSpan* (optional) - The number of rows this section should span"
-msgstr ""
+msgstr "*RowSpan* (optional) – Die Anzahl der Zeilen, über die sich diese Section erstrecken soll"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:111
 msgid ""
