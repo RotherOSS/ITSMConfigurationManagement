@@ -12,3 +12,4 @@ The following features and settings have important interactions with CI versions
  - Version view for the customers can be enabled or disabled via the SysConfig in ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom
  - To ensure audit-proof documentation, you'll need to disable the option to delete config items.
  .. - TODO: please complete
+
