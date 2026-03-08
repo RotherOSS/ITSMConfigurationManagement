@@ -1,7 +1,7 @@
 .. image:: images/otobo-logo.png
    :alt: OTOBO Logo
    :align: center
-   :width: 70%
+   :width: 50%
 
 ##################################################
 Package Documentation: ITSMConfigurationManagement
