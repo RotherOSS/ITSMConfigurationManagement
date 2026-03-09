@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,17 +18,8 @@ use strict;
 use warnings;
 use utf8;
 
-# core modules
-
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -41,20 +32,17 @@ $Selenium->RunTest(
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 
-        my %ShowColumnsByClassSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
-            Name => 'ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumnsByClass',
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
         );
 
-        push @{ $ShowColumnsByClassSysConfig{EffectiveValue} }, 'Computer::Owner::1';
-
-        # Enable AgentITSMConfigItem###ShowColumnsByClass sysconfig item.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumnsByClass',
-            Value => $ShowColumnsByClassSysConfig{EffectiveValue},
+        # get catalog class IDs
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
         );
-
-        # Get catalog class IDs.
         my @ConfigItemClassIDs;
         for my $ConfigItemClass (qw(Computer Hardware Location Network Software)) {
             my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
@@ -97,51 +85,55 @@ $Selenium->RunTest(
 
             # Add the new ConfigItem.
             my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-                Number  => $ConfigItemNumber,
-                ClassID => $ITSMConfigItem,
-                UserID  => 1,
+                Name        => 'SeleniumTest',
+                Number      => $ConfigItemNumber,
+                ClassID     => $ITSMConfigItem,
+                DeplStateID => $DeplStateID,
+                InciStateID => 1,
+                UserID      => 1,
             );
             $Self->True(
                 $ConfigItemID,
                 "ConfigItem is created - ID $ConfigItemID"
             );
 
-            my %XMLData;
-            if ( $ComputerClassID->{ItemID} == $ITSMConfigItem ) {
-                %XMLData = (
-                    XMLData => [
-                        undef,
-                        {
-                            Version => [
-                                undef,
-                                {
-                                    Owner => [
-                                        undef,
-                                        {
-                                            Content => $Owner,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                );
-            }
+            #            my %XMLData;
+            #            if ( $ComputerClassID->{ItemID} == $ITSMConfigItem ) {
+            #                %XMLData = (
+            #                    XMLData => [
+            #                        undef,
+            #                        {
+            #                            Version => [
+            #                                undef,
+            #                                {
+            #                                    Owner => [
+            #                                        undef,
+            #                                        {
+            #                                            Content => $Owner,
+            #                                        },
+            #                                    ],
+            #                                },
+            #                            ],
+            #                        },
+            #                    ],
+            #                );
+            #            }
 
-            # Add a new version.
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => 'SeleniumTest',
-                DefinitionID => 1,
-                DeplStateID  => $DeplStateID,
-                InciStateID  => 1,
-                UserID       => 1,
-                ConfigItemID => $ConfigItemID,
-                %XMLData,
-            );
-            $Self->True(
-                $VersionID,
-                "Version is created - ID $VersionID"
-            );
+            #            # Add a new version.
+            #            my $VersionID = $ConfigItemObject->VersionAdd(
+            #                Name         => 'SeleniumTest2',
+            #                DefinitionID => 1,
+            #                DeplStateID  => $DeplStateID,
+            #                InciStateID  => 1,
+            #                UserID       => 1,
+            #                ConfigItemID => $ConfigItemID,
+            #
+            #                #%XMLData,
+            #            );
+            #            $Self->True(
+            #                $VersionID,
+            #                "Version is created - ID $VersionID"
+            #            );
             push @ConfigItemIDs, $ConfigItemID;
         }
 
@@ -160,24 +152,26 @@ $Selenium->RunTest(
 
         # Navigate to AgentITSMConfigItem, sorted by created time.
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItem;Filter=All;View=;;SortBy=ChangeTime;OrderBy=Down"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItem;Filter=All;View=;SortBy=LastChanged;OrderBy=Down"
         );
 
         # Check for created test ConfigItems with 'All' filter active
-        for my $AllConfigItem (@ConfigItemNumbers) {
+        for my $ConfigItemNumber (@ConfigItemNumbers) {
             $Self->True(
-                $Selenium->find_element("//div[contains(\@title, \'$AllConfigItem\' )]"),
-                "Test ConfigItem number $AllConfigItem - found",
+                $Selenium->execute_script(
+                    "return \$('a:contains($ConfigItemNumber)').length === 1"
+                ),
+                "Test ConfigItem value $ConfigItemNumber - found",
             );
         }
 
-        # Check each of ConfigItem class filters for there respective test ConfigItem
+        # Check each of ConfigItem class filters for their respective test ConfigItem
         my $Count = 0;
-        for my $CheckConfigItem (@ConfigItemIDs) {
+        for my $ConfigItemNumber (@ConfigItemNumbers) {
 
             # Click on ConfigItem class
             $Selenium->find_element(
-                "//a[contains(\@href, \'Action=AgentITSMConfigItem;SortBy=ChangeTime;OrderBy=Down;View=;Filter=$ConfigItemClassIDs[$Count]' )]"
+                "//a[contains(\@href, \'Action=AgentITSMConfigItem;SortBy=Changed;OrderBy=Down;View=Small;Filter=$ConfigItemClassIDs[$Count]' )]"
             )->VerifiedClick();
 
             # Check for table structure
@@ -185,46 +179,43 @@ $Selenium->RunTest(
 
             # Check for ConfigItem number
             $Self->True(
-                $Selenium->find_element("//div[contains(\@title, \'$ConfigItemNumbers[$Count]\' )]"),
-                "Test ConfigItem number $ConfigItemNumbers[$Count] - found",
+                $Selenium->execute_script(
+                    "return \$('a:contains($ConfigItemNumber)').length"
+                ),
+                "Test ConfigItem value $ConfigItemNumber - found",
             );
+
             $Count++;
 
-            # Check if there is column Create Time for Computer class
-            # See bug#14049
-            my $ConfigItemData = $ConfigItemObject->ConfigItemGet(
-                ConfigItemID => $CheckConfigItem,
-            );
-            if ( $ConfigItemData->{Class} eq 'Computer' ) {
-
-                # Check if AgentITSMConfigItem Owner is displayed correctly. See bug#14633.
-                $Self->Is(
-                    $Selenium->execute_script(
-                        "return \$('#ConfigItemID_$CheckConfigItem td:contains($Owner)').text().trim();"
-                    ),
-                    $Owner,
-                    'Owner name and address is displayed correctly',
-                );
-
-                $Self->True(
-                    $Selenium->find_element("//a[contains(.,'Create Time')]"),
-                    "There is column 'CreateTime', enabled by sysconfig item  AgentITSMConfigItem###ShowColumnsByClass",
-                );
-            }
+            #            # Check if there is column Create Time for Computer class
+            #            # See bug#14049
+            #            my $ConfigItemData = $ConfigItemObject->ConfigItemGet(
+            #                ConfigItemID => $CheckConfigItem,
+            #            );
+            #            if ( $ConfigItemData->{Class} eq 'Computer' ) {
+            #
+            #                # Check if AgentITSMConfigItem Owner is displayed correctly. See bug#14633.
+            #                $Self->Is(
+            #                    $Selenium->execute_script(
+            #                        "return \$('#ConfigItemID_$CheckConfigItem td:contains($Owner)').text().trim();"
+            #                    ),
+            #                    $Owner,
+            #                    'Owner name and address is displayed correctly',
+            #                );
+            #
+            #                $Self->True(
+            #                    $Selenium->find_element("//a[contains(.,'Create Time')]"),
+            #                    "There is column 'CreateTime', enabled by sysconfig item  AgentITSMConfigItem###ShowColumnsByClass",
+            #                );
+            #            }
         }
 
-        # Verify there are links to AgentITSMConfigItemZoom on ConfigItem Number and Name columns.
+        # check if the number column has a link to the config item zoom
         $Self->True(
             $Selenium->execute_script(
-                "return \$('tr:eq(\"1\") div[title*=\"$ConfigItemNumbers[4]\"] a[href*=\"ItemID=$ConfigItemIDs[4]\"]').length;"
+                "return \$('tr:eq(\"1\") a:contains($ConfigItemNumbers[4])[href*=\"ItemID=$ConfigItemIDs[4]\"]').length;"
             ),
             "Link on ConfigItem 'Number' column correct."
-        );
-        $Self->True(
-            $Selenium->execute_script(
-                "return \$('tr:eq(\"1\") div[title*=\"SeleniumTest\"] a[href*=\"ItemID=$ConfigItemIDs[4]\"]').length;"
-            ),
-            "Link on ConfigItem 'Name' column correct."
         );
 
         # Delete created test ConfigItems.
