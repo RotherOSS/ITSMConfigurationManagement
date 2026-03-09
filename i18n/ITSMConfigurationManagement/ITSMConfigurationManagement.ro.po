@@ -1,18 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-11-22 09:30+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Romanian <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/ro/>\n"
-"Language: ro\n"
+"POT-Creation-Date: 2026-03-09 13:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.4.2\n"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "General operation data"
+msgstr "Date generale de funcționare"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for incoming request data"
+msgstr "Setări pentru datele de solicitare primite"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for outgoing response data"
+msgstr "Setări pentru ieșirea datelor de răspuns"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -23,44 +31,32 @@ msgid "Change class definition"
 msgstr "Modificarea definiției clasei"
 
 #. Template: AdminITSMConfigItem
+msgid "Change role definition"
+msgstr "Modificarea definiției rolului"
+
+#. Template: AdminITSMConfigItem
+msgid "Ready2Import Class Bundles"
+msgstr "Pachete de clase Ready2Import"
+
+#. Template: AdminITSMConfigItem
+msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
+msgstr "Aici puteți importa pachete de clase Ready2Import care prezintă cele mai uzuale elemente de configurare. Vă rugăm să rețineți că este posibil să fie necesară o anumită configurare suplimentară."
+
+#. Template: AdminITSMConfigItem
+msgid "Update existing entities"
+msgstr "Actualizarea entităților existente"
+
+#. Template: AdminITSMConfigItem
+msgid "Import Ready2Adopt class bundles"
+msgstr "Importați pachetele de clase Ready2Adopt"
+
+#. Template: AdminITSMConfigItem
 msgid "Config Item Class"
 msgstr "Clasa de elemente de configurare"
 
 #. Template: AdminITSMConfigItem
-msgid "Definition"
-msgstr "Definiție"
-
-#. Template: AdminITSMConfigItem
-msgid "Change"
-msgstr "Schimbare"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Incident State"
-msgstr "Statul incidentului"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Deployment State"
-msgstr "Starea de desfășurare"
-
-#. Template: AgentITSMConfigItemAdd
-msgid "Class"
-msgstr "Clasa"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Deployment State Type"
-msgstr "Tip de stat de desfășurare"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Current Incident State"
-msgstr "Starea actuală a incidentului"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Current Incident State Type"
-msgstr "Tipul de stat al incidentului curent"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Last changed"
-msgstr "Ultima modificare"
+msgid "Config Item Role"
+msgstr "Rolul elementului de configurare"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -73,6 +69,10 @@ msgstr "Filtru pentru clase"
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
 msgstr "Selectați o clasă din listă pentru a crea un nou element de configurare."
+
+#. Template: AgentITSMConfigItemAdd
+msgid "Class"
+msgstr "Clasa"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -110,6 +110,26 @@ msgstr "Numele acestui element de configurare"
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
 msgstr "Numele este deja utilizat de ConfigItems cu următorul număr (numere): %s"
 
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number"
+msgstr "Numărul versiunii"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr "Numărul de versiune al acestui element de configurare"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
+msgstr "Numărul de versiune este deja utilizat de ConfigItems cu următorul număr (numere): %s"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Deployment State"
+msgstr "Starea de desfășurare"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Incident State"
+msgstr "Statul incidentului"
+
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
 msgstr "Istoricul elementului de configurare: %s"
@@ -127,16 +147,16 @@ msgid "Zoom view"
 msgstr "Vedere de detaliu"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
-msgid "Context Settings"
-msgstr "Setări contextuale"
-
-#. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
 msgstr "Config Elemente pe pagină"
 
 #. Template: AgentITSMConfigItemOverviewSmall
-msgid "A generic ITSM Configuration Item table"
-msgstr "Un tabel generic de elemente de configurare ITSM"
+msgid "No config item data found."
+msgstr "Nu s-au găsit date despre elementul de configurare."
+
+#. Template: AgentITSMConfigItemOverviewSmall
+msgid "Select this config item"
+msgstr "Selectați acest element de configurare"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -145,6 +165,22 @@ msgstr "Rulați căutarea"
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
 msgstr "De asemenea, căutați în versiunile anterioare?"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "TreeView for ConfigItem"
+msgstr "TreeView pentru ConfigItem"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Depth Level"
+msgstr "Nivelul de adâncime"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Zoom In/Out"
+msgstr "Zoom In/Out"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Max links level reached for ConfigItem!"
+msgstr "Nivelul maxim de legături a fost atins pentru ConfigItem!"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
@@ -159,40 +195,56 @@ msgid "Current Deployment State"
 msgstr "Starea actuală de desfășurare"
 
 #. Template: AgentITSMConfigItemZoom
+msgid "Current Incident State"
+msgstr "Starea actuală a incidentului"
+
+#. Template: AgentITSMConfigItemZoom
+msgid "Last changed"
+msgstr "Ultima modificare"
+
+#. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
 msgstr "Modificat ultima dată de"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show one version"
-msgstr "Afișați o versiune"
+#. Template: CustomerITSMConfigItem
+msgid "Your ConfigItems"
+msgstr "Elementele de configurare"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show all versions"
-msgstr "Afișați toate versiunile"
+#. Template: CustomerITSMConfigItemSearch
+msgid "ConfigItem Search"
+msgstr "Căutare ConfigItem"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Incident State"
-msgstr "Versiune Stat incident"
+#. Template: AdminACL
+msgid "Object Type"
+msgstr "Tip de obiect"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Deployment State"
-msgstr "Versiune Stare de implementare"
+#. Template: AdminDynamicFieldScreen
+msgid "Filter by object type"
+msgstr ""
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number"
-msgstr "Numărul versiunii"
+#. JS Template: ClassImportConfirm
+msgid "The following classes will be imported"
+msgstr "Se vor importa următoarele clase"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Configuration Item Version Details"
-msgstr "Detalii privind versiunea elementului de configurare"
+#. JS Template: ClassImportConfirm
+msgid "The following roles will be imported"
+msgstr "Următoarele roluri vor fi importate"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Property"
-msgstr "Proprietate"
+#. JS Template: ClassImportConfirm
+msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
+msgstr "Rețineți că vor fi create și câmpurile dinamice corespunzătoare și clasele GeneralCatalog și că nu există o eliminare automată."
 
-#. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-msgid "No access to Class is given!"
-msgstr "Nu se oferă acces la Clasa!"
+#. JS Template: ClassImportConfirm
+msgid "Do you want to proceed?"
+msgstr "Vreți să continuați?"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Need ExampleClasses!"
+msgstr "Aveți nevoie de ExampleClasses!"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Definition is no valid YAML hash."
+msgstr "Definiția nu este un hash YAML valid."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
@@ -209,6 +261,10 @@ msgstr "Aveți nevoie de cel puțin un element de configurare selectat!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
 msgstr "Nu aveți acces de scriere la acest element de configurare: %s."
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
+msgid "No definition was defined for class %s!"
+msgstr "Nu a fost definită nicio definiție pentru clasa %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
@@ -229,10 +285,6 @@ msgstr "Nu este indicat niciun ConfigItemID, DuplicateID sau ClassID!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
 msgstr "Nu se oferă acces!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-msgid "No definition was defined for class %s!"
-msgstr "Nu a fost definită nicio definiție pentru clasa %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
@@ -286,6 +338,14 @@ msgstr "Atributul %s a fost actualizat de la \"%s\" la \"%s\""
 msgid "Version %s deleted"
 msgstr "Versiunea %s ștearsă"
 
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" uploaded"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" removed"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
 msgstr "Nu este indicat niciun ConfigItemID sau VersionID!"
@@ -299,16 +359,16 @@ msgid "ConfigItemID %s not found in database!"
 msgstr "ConfigItemID %s nu a fost găsit în baza de date!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-msgid "VersionID %s not found in database!"
-msgstr "VersionID %s nu a fost găsit în baza de date!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
 msgstr "ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
 msgstr "tipărit de %s la %s"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
+msgid "Referenced by"
+msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
@@ -335,6 +395,14 @@ msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr "Nu se poate afișa elementul, nu sunt acordate drepturi de acces pentru ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "ConfigItem not found!"
+msgstr "ConfigItem nu a fost găsit!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "No versions found!"
+msgstr "Nu s-au găsit versiuni!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
 msgstr "operațional"
 
@@ -354,141 +422,121 @@ msgstr "Starea de desfășurare a acestui element de configurare"
 msgid "The incident state of this config item"
 msgstr "Starea incidentă a acestui element de configurare"
 
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "No permission"
+msgstr "Nu ai permisiuni."
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Filter invalid!"
+msgstr "Filtru invalid!"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Search params invalid!"
+msgstr "Search params invalid!"
+
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
 msgstr "Elemente de configurare afișate"
 
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Deployment State Type"
+msgstr "Tip de stat de desfășurare"
+
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Current Incident State Type"
+msgstr "Tipul de stat al incidentului curent"
+
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
 msgstr "Între"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Class restrictions for the config item"
+msgstr "Restricții de clasă pentru elementul de configurare"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more classes to restrict selectable config items"
+msgstr "Selectați una sau mai multe clase pentru a restricționa elementele de configurare selectabile"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Deployment state restrictions for the config item"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more deployment states to restrict selectable config items"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Dynamic (ConfigItem)"
+msgstr "Dinamic (ConfigItem)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Static (Version)"
+msgstr "Static (Versiune)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Link Referencing Type"
+msgstr "Tipul de referință a legăturii"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
+msgstr "Dacă această legătură se aplică la ConfigItem sau la versiunea statică a obiectului de referință. Calculul \"Current Incident State\" se efectuează numai în cazul legăturilor dinamice."
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select the attribute which config items will be searched by"
+msgstr "Selectați atributul după care vor fi căutate elementele de configurare"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr "Structura de bază nu este validă. Vă rugăm să furnizați un hash cu date în format YAML."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Starting the YAML string with '---' is required."
+msgstr "Este necesar ca șirul YAML să înceapă cu \"---\"."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not purge the table configitem_link."
+msgstr "Nu s-a putut curăța tabelul configitem_link."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "No relevant dynamic fields were found"
+msgstr "Nu au fost găsite câmpuri dinamice relevante"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not insert into the table configitem_link"
+msgstr "Nu s-a putut insera în tabelul configitem_link"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Inserted 0 rows into the table configitem_link"
+msgstr "Inserate 0 rânduri în tabelul configitem_link"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
 msgstr "Numărul maxim al unui element"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Empty fields indicate that the current values are kept"
-msgstr "Câmpurile goale indică faptul că se păstrează valorile curente."
+msgid "Maximum number of one Set dynamic field element"
+msgstr ""
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Skipped"
-msgstr "Sărit"
+msgid "Maximum number of one element within a Set dynamic field element"
+msgstr ""
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Model"
-msgstr "Model"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Import/Export attachments (as the last entries per line)"
+msgstr "Import/Export atașamente (ca ultimele intrări pe linie)"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Customer Company"
-msgstr "Companie client"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Version String"
+msgstr "Versiunea String"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Serial Number"
-msgstr "Număr de serie"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "Error synchronizing the definitions. Please check the log."
+msgstr "Eroare de sincronizare a definițiilor. Vă rugăm să verificați jurnalul."
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "CPU"
-msgstr "CPU"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Ram"
-msgstr "Ram"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Hard Disk"
-msgstr "Hard Disk"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Capacity"
-msgstr "Capacitate"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Adapter"
-msgstr "Adaptor de rețea"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP over DHCP"
-msgstr "IP prin DHCP"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP Address"
-msgstr "Adresa IP"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Graphic Adapter"
-msgstr "Adaptor grafic"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Other Equipment"
-msgstr "Alte echipamente"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Warranty Expiration Date"
-msgstr "Data de expirare a garanției"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Install Date"
-msgstr "Data instalării"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 1"
-msgstr "Telefon 1"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 2"
-msgstr "Telefon 2"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "E-Mail"
-msgstr "E-mail"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Address"
-msgstr "Adresa de rețea"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Subnet Mask"
-msgstr "Masca de subrețea"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Gateway"
-msgstr "Gateway"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Type"
-msgstr "Tipul de licență"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Key"
-msgstr "Cheia de licență"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Quantity"
-msgstr "Cantitate"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Expiration Date"
-msgstr "Data expirării"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Media"
-msgstr "Media"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Computer"
-msgstr "Computer"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Hardware"
-msgstr "Hardware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Network"
-msgstr "Rețea"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Software"
-msgstr "Software"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
+msgstr "Aveți definiții ITSMConfigItem care nu sunt sincronizate. Vă rugăm să implementați modificările câmpurilor dinamice ale ITSMConfigItem."
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -522,229 +570,53 @@ msgstr "Revizuire"
 msgid "Test/QA"
 msgstr "Testare/QA"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Laptop"
-msgstr "Laptop"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Overview and Confirmation"
+msgstr "Prezentare generală și confirmare"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Desktop"
-msgstr "Desktop"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr "Importul claselor/rolurilor și al câmpurilor aferente acestora"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PDA"
-msgstr "PDA"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "An error occurred during class import."
+msgstr "S-a produs o eroare în timpul importului clasei."
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server"
-msgstr "Server"
+#. SysConfig
+msgid "0 - Hidden"
+msgstr "0 - Ascuns"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Other"
-msgstr "Altele"
+#. SysConfig
+msgid "1 - Shown"
+msgstr "1 - Afișat"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Monitor"
-msgstr "Monitor"
+#. SysConfig
+msgid "A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem."
+msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Printer"
-msgstr "Imprimantă"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața agentului. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Switch"
-msgstr "Comutator"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Router"
-msgstr "Router"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN Access Point"
-msgstr "Punct de acces WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Security Device"
-msgstr "Dispozitiv de securitate"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Backup Device"
-msgstr "Dispozitiv de rezervă"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Mouse"
-msgstr "Șoarece"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Keyboard"
-msgstr "Tastatura"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Camera"
-msgstr "Camera"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Beamer"
-msgstr "Beamer"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Modem"
-msgstr "Modem"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PCMCIA Card"
-msgstr "Card PCMCIA"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "USB Device"
-msgstr "Dispozitiv USB"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Docking Station"
-msgstr "Stație de andocare"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Scanner"
-msgstr "Scanner"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Building"
-msgstr "Clădire"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Office"
-msgstr "Birou"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Floor"
-msgstr "Etaj"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Room"
-msgstr "Cameră"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Rack"
-msgstr "Rack"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Workplace"
-msgstr "Locul de muncă"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Outlet"
-msgstr "Ieșire"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "IT Facility"
-msgstr "Facilitatea IT"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "LAN"
-msgstr "LAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN"
-msgstr "WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Telco"
-msgstr "Telco"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "GSM"
-msgstr "GSM"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client Application"
-msgstr "Aplicație client"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Middleware"
-msgstr "Middleware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server Application"
-msgstr "Aplicație server"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client OS"
-msgstr "Sistemul de operare al clientului"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server OS"
-msgstr "Sistemul de operare al serverului"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Admin Tool"
-msgstr "Instrumentul de administrare"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "User Tool"
-msgstr "Instrumentul utilizatorului"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Embedded"
-msgstr "Integrat"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Single Licence"
-msgstr "Licență unică"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per User"
-msgstr "Pe utilizator"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Processor"
-msgstr "Pe procesor"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Server"
-msgstr "Pe server"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Node"
-msgstr "Pe nod"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Volume Licence"
-msgstr "Licență de volum"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Enterprise Licence"
-msgstr "Licență Enterprise"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Developer Licence"
-msgstr "Licență pentru dezvoltatori"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Demo"
-msgstr "Demo"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Time Restricted"
-msgstr "Timp restricționat"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Freeware"
-msgstr "Freeware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Open Source"
-msgstr "Sursă deschisă"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Unlimited"
-msgstr "Nelimitat"
-
-#. JS File: ITSM.Agent.ConfigItem.Zoom
-msgid "Ok"
-msgstr "确定"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața cu clienții. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
 
 #. SysConfig
 msgid "Assigned CIs"
 msgstr "IC atribuite"
+
+#. SysConfig
+msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for license accounting."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for licenses counting, where \"TotalLicensesDF\", \"AvailableLicensesDF\" and \"LicenseReferenceDF\" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in \"ValidDeplStates\" are considered. If a threshold is defined in \"MinimumLicenses\", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field \"Ticket->DynamicField\" must exist. The tags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in \"Ticket->Text\" by the config item name, number, available licenses, and minimum required available licenses, respectively."
+msgstr ""
 
 #. SysConfig
 msgid "CIs assigned to customer company"
@@ -761,566 +633,6 @@ msgstr "Setări CMDB"
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr "Verifică un nume unic numai în cadrul aceleiași clase de ConfigItem (\"class\") sau la nivel global (\"global\"), ceea ce înseamnă că fiecare ConfigItem existent este luat în considerare atunci când se caută duplicate."
-
-#. SysConfig
-msgid "Config Items"
-msgstr "Elemente de configurare"
-
-#. SysConfig
-msgid "Config item add."
-msgstr "Adăugare element de configurare."
-
-#. SysConfig
-msgid "Config item edit."
-msgstr "Editare element de configurare."
-
-#. SysConfig
-msgid "Config item event module that enables logging to history in the agent interface."
-msgstr "Modulul de evenimente al elementului de configurare care permite înregistrarea în istoric în interfața agentului."
-
-#. SysConfig
-msgid "Config item history."
-msgstr "Istoricul elementelor de configurare."
-
-#. SysConfig
-msgid "Config item print."
-msgstr "Imprimare element de configurare."
-
-#. SysConfig
-msgid "Config item zoom."
-msgstr "Configurați zoomul elementului."
-
-#. SysConfig
-msgid "ConfigItemNumber"
-msgstr "ConfigItemNumber"
-
-#. SysConfig
-msgid "Configuration Item Limit"
-msgstr "Configurație Element limită"
-
-#. SysConfig
-msgid "Configuration Item limit per page."
-msgstr "Configurație Limita de elemente pe pagină."
-
-#. SysConfig
-msgid "Configuration Management Database."
-msgstr "Baza de date de gestionare a configurației."
-
-#. SysConfig
-msgid "Configuration item bulk module."
-msgstr "Element de configurare modul bulk."
-
-#. SysConfig
-msgid "Configuration item search backend router of the agent interface."
-msgstr "Elementul de configurare căutare router backend al interfeței agentului."
-
-#. SysConfig
-msgid "Create and manage the definitions for Configuration Items."
-msgstr "Creați și gestionați definițiile pentru elementele de configurare."
-
-#. SysConfig
-msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "Definiți acțiunile în care este disponibil un buton de setări în widgetul obiectelor legate (LinkObject::ViewMode = \"complex\"). Rețineți că aceste acțiuni trebuie să aibă înregistrate următoarele fișiere JS și CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js și Core.Agent.LinkObject.js."
-
-#. SysConfig
-msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr "Definește permisiunile necesare pentru a crea elemente de configurare ITSM utilizând interfața generică."
-
-#. SysConfig
-msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr "Definește permisiunile necesare pentru a șterge elementele de configurare ITSM utilizând interfața generică."
-
-#. SysConfig
-msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr "Definește permisiunile necesare pentru a obține elemente de configurare ITSM utilizând interfața generică."
-
-#. SysConfig
-msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr "Definește permisiunile necesare pentru a căuta elemente de configurare ITSM utilizând interfața generică."
-
-#. SysConfig
-msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr "Definește permisiunile necesare pentru actualizarea elementelor de configurare ITSM utilizând interfața generică."
-
-#. SysConfig
-msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr "Definește un modul de prezentare generală pentru a afișa vizualizarea mică a unei liste de elemente de configurare."
-
-#. SysConfig
-msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr "Definește expresii regulate individual pentru fiecare clasă ConfigItem pentru a verifica numele ConfigItem și pentru a afișa mesajele de eroare corespunzătoare."
-
-#. SysConfig
-msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr "Definește subobiectul implicit al clasei \"ITSMConfigItem\"."
-
-#. SysConfig
-msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr "Definește numărul de rânduri pentru editorul de definiții CI din interfața de administrare."
-
-#. SysConfig
-msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr "Definește ordinea stărilor incidente de la mare (de exemplu, cricitală) la mică (de exemplu, funcțională)."
-
-#. SysConfig
-msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr "Definește stările de implementare relevante în care biletele legate pot afecta starea unui IC."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr "Definește limita de căutare pentru ecranul AgentITSMConfigItem."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr "Definește limita de căutare pentru ecranul AgentITSMConfigItemSearch."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr "Definește coloanele afișate în prezentarea generală a elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei. Notă: Coloana \"Class\" este întotdeauna disponibilă dacă este selectat filtrul \"All\" (Toate)."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr "Definește coloanele afișate în căutarea elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definește coloanele afișate în căutarea elementelor de configurare. Această opțiune nu are niciun efect asupra poziției coloanei."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definește coloanele de IC afișate în căutarea elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, așa cum sunt definite în setarea ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr "Definește coloanele de IC afișate în widgetul elementului de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor CI-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, atunci sunt afișate coloanele implicite, așa cum sunt definite în setarea AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (cheia DefaultColumns)."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături pentru toate clasele de IC. Dacă nu există nicio intrare, sunt afișate coloanele implicite."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături, în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor IC-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, sunt afișate coloanele implicite."
-
-#. SysConfig
-msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr "Definește ce tip de legătură (numită din perspectiva biletului) poate afecta starea unui IC legat."
-
-#. SysConfig
-msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr "Definește ce tip de tichet poate afecta starea unui IC legat."
-
-#. SysConfig
-msgid "Delete Configuration Item"
-msgstr "Ștergerea elementului de configurare"
-
-#. SysConfig
-msgid "Deployment State Color"
-msgstr "Culoarea stării de desfășurare"
-
-#. SysConfig
-msgid "Duplicate"
-msgstr "Duplicat"
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr "Activează caracteristica de acțiune în masă a elementelor de configurare pentru ca frontend-ul agentului să lucreze la mai mult de un element de configurare odată."
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr "Activează funcția de acțiune în bloc a elementelor de configurare numai pentru grupurile enumerate."
-
-#. SysConfig
-msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr "Activează/dezactivează funcționalitatea de verificare a numelor unice pentru ConfigItems. Înainte de a activa această opțiune, ar trebui să verificați dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți face acest lucru cu ajutorul scriptului bin/otobo.ITSMConfigItemItemListDuplicates.pl."
-
-#. SysConfig
-msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr "Modulul de eveniment pentru a seta starea articolului de configurare pe biletul-configitem-link."
-
-#. SysConfig
-msgid "ITSM config item overview."
-msgstr "Prezentare generală a elementelor de configurare ITSM."
-
-#. SysConfig
-msgid "Module to check the group responsible for a class."
-msgstr "Modul de verificare a grupului responsabil pentru o clasă."
-
-#. SysConfig
-msgid "Module to check the group responsible for a configuration item."
-msgstr "Modul de verificare a grupului responsabil pentru un element de configurare."
-
-#. SysConfig
-msgid "Module to generate ITSM config item statistics."
-msgstr "Modul de generare a statisticilor elementelor de configurare ITSM."
-
-#. SysConfig
-msgid "Object backend module registration for the import/export module."
-msgstr "Înregistrarea modulului backend de obiecte pentru modulul de import/export."
-
-#. SysConfig
-msgid "Overview."
-msgstr "Prezentare generală."
-
-#. SysConfig
-msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr "Parametrii pentru backend-ul tabloului de bord al firmei clientului configurare element de prezentare generală a interfeței agentului . \"Limit\" este numărul de intrări afișate în mod implicit. \"Group\" este utilizat pentru a restricționa accesul la plugin (de exemplu, Group: admin;group1;group2;). \"Default\" determină dacă plugin-ul este activat în mod implicit sau dacă utilizatorul trebuie să îl activeze manual. \"CacheTTLLocal\" este timpul de cache în minute pentru plugin."
-
-#. SysConfig
-msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr "Parametrii pentru culoarea stărilor de desfășurare în vizualizarea preferințelor din interfața agentului."
-
-#. SysConfig
-msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr "Parametrii pentru stările de desfășurare din vizualizarea preferințelor din interfața agentului."
-
-#. SysConfig
-msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Parametrii pentru grupurile de permisiuni de exemplu ale atributelor generale ale catalogului."
-
-#. SysConfig
-msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr "Parametrii pentru pagini (în care sunt afișate elementele de configurare)."
-
-#. SysConfig
-msgid "Permission Group"
-msgstr "Drepturi Grup"
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul elementului de configurare ITSM din interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de configurare ITSM în interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul de mărire a elementelor de configurare ITSM în interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul de adăugare a unui element de configurare ITSM în interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul de editare a elementului de configurare ITSM din interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul cu elemente de configurare ITSM istoric în interfața agentului."
-
-#. SysConfig
-msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr "Permisiuni necesare pentru a utiliza ecranul de tipărire a elementelor de configurare ITSM din interfața agentului."
-
-#. SysConfig
-msgid "Required privileges to delete config items."
-msgstr "Privilegii necesare pentru a șterge elementele de configurare."
-
-#. SysConfig
-msgid "Search config items."
-msgstr "Căutarea elementelor de configurare."
-
-#. SysConfig
-msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr "Selectează modulul generator al numărului de elemente de configurare. \"AutoIncrement\" incrementează numărul de elemente de configurare, se utilizează SystemID, ConfigItemClassID și contorul. Formatul este \"SystemID.ConfigItemClassID.Counter\", de exemplu, 1205000004, 1205000005."
-
-#. SysConfig
-msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr "Setați automat starea de incident a unui IC atunci când un bilet este legat de un IC."
-
-#. SysConfig
-msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr "Stabilește starea de desfășurare în ecranul de ansamblu al elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr "Stabilește starea incidentului în ecranul de ansamblu al elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu care permite corelarea unui element de configurare cu un alt obiect în vizualizarea cu zoom a elementului de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în vizualizarea cu zoom a interfeței agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a șterge un element de configurare în vizualizarea sa cu zoom a interfeței agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în vizualizarea cu zoom a interfeței agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a edita un element de configurare în vizualizarea cu zoom a interfeței agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a reveni în vizualizarea cu zoom a elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a imprima un element de configurare în vizualizarea cu zoom a interfeței agentului."
-
-#. SysConfig
-msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr "Afișează o legătură în meniu pentru a mări un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
-
-#. SysConfig
-msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr "Afișează istoricul elementelor de configurare (în ordine inversă) în interfața agentului."
-
-#. SysConfig
-msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr "Identificatorul pentru un element de configurare, de exemplu ConfigItem#, MyConfigItem#. Valoarea implicită este ConfigItem#."
-
-#. SysConfig
-msgid "class"
-msgstr "clasa"
-
-#. SysConfig
-msgid "global"
-msgstr "global"
-
-#. SysConfig
-msgid "postproductive"
-msgstr "postproductiv"
-
-#. SysConfig
-msgid "preproductive"
-msgstr "preproductivă"
-
-#. SysConfig
-msgid "productive"
-msgstr "productiv"
-
-#. Template: AdminITSMConfigItem
-msgid "Change role definition"
-msgstr "Modificarea definiției rolului"
-
-#. Template: AdminITSMConfigItem
-msgid "Ready2Import Class Bundles"
-msgstr "Pachete de clase Ready2Import"
-
-#. Template: AdminITSMConfigItem
-msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "Aici puteți importa pachete de clase Ready2Import care prezintă cele mai uzuale elemente de configurare. Vă rugăm să rețineți că este posibil să fie necesară o anumită configurare suplimentară."
-
-#. Template: AdminITSMConfigItem
-msgid "Update existing entities"
-msgstr "Actualizarea entităților existente"
-
-#. Template: AdminITSMConfigItem
-msgid "Import Ready2Adopt class bundles"
-msgstr "Importați pachetele de clase Ready2Adopt"
-
-#. Template: AdminITSMConfigItem
-msgid "Config Item Role"
-msgstr "Rolul elementului de configurare"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "The version number of this config item"
-msgstr "Numărul de versiune al acestui element de configurare"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr "Numărul de versiune este deja utilizat de ConfigItems cu următorul număr (numere): %s"
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "No config item data found."
-msgstr "Nu s-au găsit date despre elementul de configurare."
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "Select this config item"
-msgstr "Selectați acest element de configurare"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "TreeView for ConfigItem"
-msgstr "TreeView pentru ConfigItem"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Depth Level"
-msgstr "Nivelul de adâncime"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Zoom In/Out"
-msgstr "Zoom In/Out"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Max links level reached for ConfigItem!"
-msgstr "Nivelul maxim de legături a fost atins pentru ConfigItem!"
-
-#. Template: CustomerITSMConfigItem
-msgid "Your ConfigItems"
-msgstr "Elementele de configurare"
-
-#. Template: CustomerITSMConfigItemSearch
-msgid "ConfigItem Search"
-msgstr "Căutare ConfigItem"
-
-#. Template: AdminACL
-msgid "Object Type"
-msgstr "Tip de obiect"
-
-#. JS Template: ClassImportConfirm
-msgid "The following classes will be imported"
-msgstr "Se vor importa următoarele clase"
-
-#. JS Template: ClassImportConfirm
-msgid "The following roles will be imported"
-msgstr "Următoarele roluri vor fi importate"
-
-#. JS Template: ClassImportConfirm
-msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "Rețineți că vor fi create și câmpurile dinamice corespunzătoare și clasele GeneralCatalog și că nu există o eliminare automată."
-
-#. JS Template: ClassImportConfirm
-msgid "Do you want to proceed?"
-msgstr "Vreți să continuați?"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Need ExampleClasses!"
-msgstr "Aveți nevoie de ExampleClasses!"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Definition is no valid YAML hash."
-msgstr "Definiția nu este un hash YAML valid."
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "ConfigItem not found!"
-msgstr "ConfigItem nu a fost găsit!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "No versions found!"
-msgstr "Nu s-au găsit versiuni!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "No permission"
-msgstr "Nu ai permisiuni."
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Filter invalid!"
-msgstr "Filtru invalid!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Search params invalid!"
-msgstr "Search params invalid!"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Class restrictions for the config item"
-msgstr "Restricții de clasă pentru elementul de configurare"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select one or more classes to restrict selectable config items"
-msgstr "Selectați una sau mai multe clase pentru a restricționa elementele de configurare selectabile"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link type"
-msgstr "Tipul de legătură"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the link type."
-msgstr "Selectați tipul de legătură."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr "Atacanți: Referință (Sursă) -> Referință (Țintă)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr "Înapoi: Referință (Sursă) -> Referință (Țintă)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Direction"
-msgstr "Direcția legăturii"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "Obiectul de referință este cel care conține acest câmp dinamic, iar obiectul referit este cel selectat ca valoare a câmpului dinamic."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Dynamic (ConfigItem)"
-msgstr "Dinamic (ConfigItem)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Static (Version)"
-msgstr "Static (Versiune)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Referencing Type"
-msgstr "Tipul de referință a legăturii"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr "Dacă această legătură se aplică la ConfigItem sau la versiunea statică a obiectului de referință. Calculul \"Current Incident State\" se efectuează numai în cazul legăturilor dinamice."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the attribute which config items will be searched by"
-msgstr "Selectați atributul după care vor fi căutate elementele de configurare"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Starting the YAML string with '---' is required."
-msgstr "Este necesar ca șirul YAML să înceapă cu \"---\"."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not purge the table configitem_link."
-msgstr "Nu s-a putut curăța tabelul configitem_link."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "No relevant dynamic fields were found"
-msgstr "Nu au fost găsite câmpuri dinamice relevante"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not insert into the table configitem_link"
-msgstr "Nu s-a putut insera în tabelul configitem_link"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Inserted 0 rows into the table configitem_link"
-msgstr "Inserate 0 rânduri în tabelul configitem_link"
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "Error synchronizing the definitions. Please check the log."
-msgstr "Eroare de sincronizare a definițiilor. Vă rugăm să verificați jurnalul."
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "Aveți definiții ITSMConfigItem care nu sunt sincronizate. Vă rugăm să implementați modificările câmpurilor dinamice ale ITSMConfigItem."
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Overview and Confirmation"
-msgstr "Prezentare generală și confirmare"
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "An error occurred during class import."
-msgstr "S-a produs o eroare în timpul importului clasei."
-
-#. SysConfig
-msgid "0 - Hidden"
-msgstr "0 - Ascuns"
-
-#. SysConfig
-msgid "1 - Shown"
-msgstr "1 - Afișat"
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața agentului. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața cu clienții. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi \"(*key1*&&&*key2*)\" sau \"(*key1*|||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1351,20 +663,40 @@ msgid "Columns that can be filtered in the config item overview of the agent int
 msgstr "Coloane care pot fi filtrate în prezentarea generală a elementelor de configurare din interfața agentului. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
 
 #. SysConfig
-msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Coloane care pot fi filtrate în prezentarea generală a elementelor de configurare din interfața cu clienții. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
+msgid "Config Items"
+msgstr "Elemente de configurare"
+
+#. SysConfig
+msgid "Config item add."
+msgstr "Adăugare element de configurare."
+
+#. SysConfig
+msgid "Config item edit."
+msgstr "Editare element de configurare."
+
+#. SysConfig
+msgid "Config item event module that enables accounting licenses for a given config item."
+msgstr ""
+
+#. SysConfig
+msgid "Config item event module that enables logging to history in the agent interface."
+msgstr "Modulul de evenimente al elementului de configurare care permite înregistrarea în istoric în interfața agentului."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr "Modul de eveniment al elementelor de configurare care actualizează elementele de configurare la definiția lor curentă."
 
 #. SysConfig
-msgid "Config item event module that updates the table configitem_ĺink."
-msgstr "Modulul de evenimente pentru elemente de configurare care actualizează tabelul configitem_ĺink."
+msgid "Config item history."
+msgstr "Istoricul elementelor de configurare."
 
 #. SysConfig
-msgid "Config item event module updates the current incident state."
-msgstr "Modulul de eveniment al elementelor de configurare actualizează starea curentă a incidentului."
+msgid "Config item print."
+msgstr "Imprimare element de configurare."
+
+#. SysConfig
+msgid "Config item zoom."
+msgstr "Configurați zoomul elementului."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1383,6 +715,42 @@ msgid "ConfigItems with the following deployment states will not be stored on th
 msgstr "ConfigItems cu următoarele stări de implementare nu vor fi stocate pe serverul Elasticsearch. Pentru a aplica acest lucru la IC-urile existente, migrarea IC-urilor trebuie să fie executată prin intermediul consolei, după modificarea acestei opțiuni."
 
 #. SysConfig
+msgid "Configuration Item Limit"
+msgstr "Configurație Element limită"
+
+#. SysConfig
+msgid "Configuration Item limit per page."
+msgstr "Configurație Limita de elemente pe pagină."
+
+#. SysConfig
+msgid "Configuration Management Database."
+msgstr "Baza de date de gestionare a configurației."
+
+#. SysConfig
+msgid "Configuration item bulk module."
+msgstr "Element de configurare modul bulk."
+
+#. SysConfig
+msgid "Configuration item search backend router of the agent interface."
+msgstr "Elementul de configurare căutare router backend al interfeței agentului."
+
+#. SysConfig
+msgid "Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings."
+msgstr ""
+
+#. SysConfig
+msgid "Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Create and manage the definitions for Configuration Items."
+msgstr "Creați și gestionați definițiile pentru elementele de configurare."
+
+#. SysConfig
+msgid "Creates Tickets for ConfigItems at specific time points."
+msgstr "Creează bilete pentru ConfigItems la anumite momente."
+
+#. SysConfig
 msgid "Customers can see historic CI versions."
 msgstr "Clienții pot vedea versiunile istorice ale CI."
 
@@ -1399,6 +767,10 @@ msgid "Default data to use on attribute for config item search screen. Example: 
 msgstr "Date implicite care trebuie utilizate în atributul pentru ecranul de căutare a elementelor de configurare. Exemplu: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
+msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
+msgstr "Definiți acțiunile în care este disponibil un buton de setări în widgetul obiectelor legate (LinkObject::ViewMode = \"complex\"). Rețineți că aceste acțiuni trebuie să aibă înregistrate următoarele fișiere JS și CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js și Core.Agent.LinkObject.js."
+
+#. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr "Definiți o schemă Template::Toolkit pentru șirurile de versiuni. Se utilizează numai dacă modulul de șiruri de versiuni este setat la TemplateToolkit."
 
@@ -1407,8 +779,32 @@ msgid "Define a set of conditions under which a customer is allowed to see a con
 msgstr "Definiți un set de condiții în care un client are voie să vadă un element de configurare. Condițiile pot fi opțional restricționate la anumite grupuri de clienți. Numele este singurul atribut obligatoriu. Dacă nu se oferă alte opțiuni, toate elementele de configurare vor fi vizibile în categoria respectivă."
 
 #. SysConfig
+msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
+msgstr "Definește permisiunile necesare pentru a șterge elementele de configurare ITSM utilizând interfața generică."
+
+#. SysConfig
+msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
+msgstr "Definește permisiunile necesare pentru a obține elemente de configurare ITSM utilizând interfața generică."
+
+#. SysConfig
+msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
+msgstr "Definește permisiunile necesare pentru a căuta elemente de configurare ITSM utilizând interfața generică."
+
+#. SysConfig
+msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+msgstr "Definește permisiunile necesare pentru a seta elemente de configurare ITSM utilizând interfața generică."
+
+#. SysConfig
+msgid "Defines an overview module to show the small view of a configuration item list."
+msgstr "Definește un modul de prezentare generală pentru a afișa vizualizarea mică a unei liste de elemente de configurare."
+
+#. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr "Definește dacă etichetele tipului de legătură trebuie să fie afișate în conexiunile nodurilor."
+
+#. SysConfig
+msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
+msgstr "Definește expresii regulate individual pentru fiecare clasă ConfigItem pentru a verifica numele ConfigItem și pentru a afișa mesajele de eroare corespunzătoare."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1455,12 +851,52 @@ msgid "Defines the default shown config item search attribute for config item se
 msgstr "Definește atributul de căutare a elementelor de configurare afișat în mod implicit pentru ecranul de căutare a elementelor de configurare. Exemplu: \"Key\" trebuie să aibă numele câmpului dinamic, în acest caz \"X\", \"Content\" trebuie să aibă valoarea câmpului dinamic în funcție de tipul de câmp dinamic, Text: \"a text\", Dropdown: \"1\", Date/Time: \"Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotSlotStartMinute=00; Search_DynamicField_XTimeSlotSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopStopSecond=59;' și sau 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
+msgid "Defines the default subobject of the class 'ITSMConfigItem'."
+msgstr "Definește subobiectul implicit al clasei \"ITSMConfigItem\"."
+
+#. SysConfig
+msgid "Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr "Definește înălțimea pentru componenta editor de text bogat pentru acest ecran. Introduceți numărul (pixeli) sau valoarea procentuală (relativă)."
+
+#. SysConfig
+msgid "Defines the number of rows for the CI definition editor in the admin interface."
+msgstr "Definește numărul de rânduri pentru editorul de definiții CI din interfața de administrare."
+
+#. SysConfig
+msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
+msgstr "Definește ordinea stărilor incidente de la mare (de exemplu, cricitală) la mică (de exemplu, funcțională)."
+
+#. SysConfig
+msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
+msgstr "Definește stările de implementare relevante în care biletele legate pot afecta starea unui IC."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItem screen."
+msgstr "Definește limita de căutare pentru ecranul AgentITSMConfigItem."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgstr "Definește limita de căutare pentru ecranul AgentITSMConfigItemSearch."
+
+#. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
 msgstr "Definește limita de căutare pentru ecranul CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr "Definește limita de căutare pentru ecranul CustomerITSMConfigItemSearch."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
+msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături pentru toate clasele de IC. Dacă nu există nicio intrare, sunt afișate coloanele implicite."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
+msgstr "Definește coloanele afișate ale IC în vizualizarea complexă a tabelului de legături, în funcție de clasa IC. Fiecare intrare trebuie să fie precedată de numele clasei și de două puncte de suspensie (de exemplu, Computer:::). Există câteva CI-Attributes care sunt comune tuturor IC-urilor (exemplu pentru clasa Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Pentru a afișa atributele individuale ale IC, astfel cum sunt definite în definiția IC, trebuie utilizată următoarea schemă (exemplu pentru clasa Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Dacă nu există nicio intrare pentru o clasă de IC, sunt afișate coloanele implicite."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
@@ -1475,16 +911,36 @@ msgid "Defines which items are available in second level of the ITSM Config Item
 msgstr "Definește ce elemente sunt disponibile în al doilea nivel al structurii ITSM Config Item ACL."
 
 #. SysConfig
+msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
+msgstr "Definește ce tip de legătură (numită din perspectiva biletului) poate afecta starea unui IC legat."
+
+#. SysConfig
+msgid "Defines which type of ticket can affect the status of a linked CI."
+msgstr "Definește ce tip de tichet poate afecta starea unui IC legat."
+
+#. SysConfig
 msgid "Definition Update"
 msgstr "Actualizare definiție"
+
+#. SysConfig
+msgid "Delete Configuration Item"
+msgstr "Ștergerea elementului de configurare"
 
 #. SysConfig
 msgid "DeplState"
 msgstr "DeplState"
 
 #. SysConfig
+msgid "Deployment State Color"
+msgstr "Culoarea stării de desfășurare"
+
+#. SysConfig
 msgid "DeploymentState"
 msgstr "DeploymentState"
+
+#. SysConfig
+msgid "Duplicate"
+msgstr "Duplicat"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1503,8 +959,20 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "Câmpuri dinamice afișate în ecranul de căutare a elementelor de configurare din interfața agentului."
 
 #. SysConfig
+msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
+msgstr "Activează caracteristica de acțiune în masă a elementelor de configurare pentru ca frontend-ul agentului să lucreze la mai mult de un element de configurare odată."
+
+#. SysConfig
+msgid "Enables configuration item bulk action feature only for the listed groups."
+msgstr "Activează funcția de acțiune în bloc a elementelor de configurare numai pentru grupurile enumerate."
+
+#. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr "Activează/dezactivează funcționalitatea de verificare a elementelor de onfigurare ITSM pentru nume unice. Înainte de a activa această opțiune, ar trebui să verificați dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți face acest lucru cu ajutorul comenzii de consolă Admin::ITSM::ConfigItem::ListDuplicates."
+
+#. SysConfig
+msgid "Event module to set configitem-status on ticket-configitem-link."
+msgstr "Modulul de eveniment pentru a seta starea articolului de configurare pe biletul-configitem-link."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
@@ -1519,12 +987,24 @@ msgid "For every webservice (key) an array of classes (value) can be defined on 
 msgstr "Pentru fiecare serviciu web (cheie) se poate defini o serie de clase (valoare) pentru care se limitează importul. Pentru toate clasele alese sau pentru toate clasele existente, atributele de identificare vor trebui să fie alese în configurația invocatorului."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemCreate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr "Înregistrarea modulului GenericInterface pentru stratul de invocare ConfigItemFetch."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemUpdate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "ITSM ConfigItem"
 msgstr "ITSM ConfigItem"
+
+#. SysConfig
+msgid "ITSM config item overview."
+msgstr "Prezentare generală a elementelor de configurare ITSM."
 
 #. SysConfig
 msgid "InciState"
@@ -1543,8 +1023,24 @@ msgid "Includes incident states in the config item search of the customer interf
 msgstr "Include stările incidentelor în căutarea elementelor de configurare din interfața cu clienții."
 
 #. SysConfig
+msgid "License accounting configuration item event module."
+msgstr ""
+
+#. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr "Numărul maxim de elemente de configurare care urmează să fie afișate în rezultatul acestei operațiuni."
+
+#. SysConfig
+msgid "Module to check the group responsible for a class."
+msgstr "Modul de verificare a grupului responsabil pentru o clasă."
+
+#. SysConfig
+msgid "Module to check the group responsible for a configuration item."
+msgstr "Modul de verificare a grupului responsabil pentru un element de configurare."
+
+#. SysConfig
+msgid "Module to generate ITSM config item statistics."
+msgstr "Modul de generare a statisticilor elementelor de configurare ITSM."
 
 #. SysConfig
 msgid "Name Module"
@@ -1567,6 +1063,10 @@ msgid "Objects to search for, how many entries and which attributs to show. Conf
 msgstr "Obiectele care trebuie căutate, câte intrări și ce atribute trebuie afișate. Atributele ConfigItem trebuie să fie stocate în mod explicit prin Elasticsearch."
 
 #. SysConfig
+msgid "Overview."
+msgstr "Prezentare generală."
+
+#. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr "Parametrii pentru categoriile pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
@@ -1575,12 +1075,36 @@ msgid "Parameters for the column filters of the small config item overview. Plea
 msgstr "Parametrii pentru filtrele de coloană din prezentarea generală a elementelor de configurare mici. Vă rugăm să rețineți: setarea \"Active\" la 0 va împiedica doar agenții să editeze setările acestui grup în preferințele lor personale, dar va permite în continuare administratorilor să editeze setările în numele unui alt utilizator. Utilizați \"PreferenceGroup\" pentru a controla în ce zonă trebuie afișate aceste setări în interfața cu utilizatorul."
 
 #. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries per config item class shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the deployment states color in the preferences view of the agent interface."
+msgstr "Parametrii pentru culoarea stărilor de desfășurare în vizualizarea preferințelor din interfața agentului."
+
+#. SysConfig
+msgid "Parameters for the deployment states in the preferences view of the agent interface."
+msgstr "Parametrii pentru stările de desfășurare din vizualizarea preferințelor din interfața agentului."
+
+#. SysConfig
+msgid "Parameters for the example permission groups of the general catalog attributes."
+msgstr "Parametrii pentru grupurile de permisiuni de exemplu ale atributelor generale ale catalogului."
+
+#. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr "Parametrii pentru modulul de nume pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr "Parametrii pentru modulul de numere pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului."
+
+#. SysConfig
+msgid "Parameters for the pages (in which the configuration items are shown)."
+msgstr "Parametrii pentru pagini (în care sunt afișate elementele de configurare)."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1599,8 +1123,20 @@ msgid "Performs the configured action for each event (as an Invoker) for each co
 msgstr "Efectuează acțiunea configurată pentru fiecare eveniment (ca Invoker) pentru fiecare serviciu web configurat."
 
 #. SysConfig
+msgid "Permission Group"
+msgstr "Drepturi Grup"
+
+#. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr "Permisiuni necesare pentru a utiliza acțiunea de atașare a elementului de configurare ITSM în interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul elementului de configurare ITSM din interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de căutare a elementelor de configurare ITSM în interfața agentului."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
@@ -1611,16 +1147,104 @@ msgid "Required permissions to use the ITSM configuration item tree view screen 
 msgstr "Permisiuni necesare pentru a utiliza ecranul de vizualizare a arborelui de elemente de configurare ITSM în interfața agentului."
 
 #. SysConfig
+msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de mărire a elementelor de configurare ITSM în interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de adăugare a unui element de configurare ITSM în interfața agentului."
+
+#. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr "Permisiuni necesare pentru a utiliza ecranul de elemente de configurare ITSM în masă din interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de editare a elementului de configurare ITSM din interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul cu elemente de configurare ITSM istoric în interfața agentului."
+
+#. SysConfig
+msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
+msgstr "Permisiuni necesare pentru a utiliza ecranul de tipărire a elementelor de configurare ITSM din interfața agentului."
+
+#. SysConfig
+msgid "Required privileges to delete config items."
+msgstr "Privilegii necesare pentru a șterge elementele de configurare."
+
+#. SysConfig
+msgid "Search config items."
+msgstr "Căutarea elementelor de configurare."
+
+#. SysConfig
+msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr "Setați automat starea de incident a unui IC atunci când un bilet este legat de un IC."
+
+#. SysConfig
+msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
+msgstr "Stabilește starea de desfășurare în ecranul de ansamblu al elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
+msgstr "Stabilește starea incidentului în ecranul de ansamblu al elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu care permite corelarea unui element de configurare cu un alt obiect în vizualizarea cu zoom a elementului de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a accesa istoricul unui element de configurare în vizualizarea cu zoom a interfeței agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a șterge un element de configurare în vizualizarea sa cu zoom a interfeței agentului."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr "Afișează o legătură în meniu pentru a afișa legăturile elementelor de configurare sub formă de Tree View."
 
 #. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a duplica un element de configurare în vizualizarea cu zoom a interfeței agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a edita un element de configurare în vizualizarea cu zoom a interfeței agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a reveni în vizualizarea cu zoom a elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a imprima un element de configurare în vizualizarea cu zoom a interfeței agentului."
+
+#. SysConfig
+msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
+msgstr "Afișează o legătură în meniu pentru a mări un element de configurare în prezentarea generală a elementelor de configurare din interfața agentului."
+
+#. SysConfig
+msgid "Shows the config item history (reverse ordered) in the agent interface."
+msgstr "Afișează istoricul elementelor de configurare (în ordine inversă) în interfața agentului."
+
+#. SysConfig
 msgid "The default category which is shown, if none is selected."
 msgstr "Categoria implicită care este afișată dacă nu este selectată niciuna."
+
+#. SysConfig
+msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
+msgstr "Identificatorul pentru un element de configurare, de exemplu ConfigItem#, MyConfigItem#. Valoarea implicită este ConfigItem#."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
@@ -1639,6 +1263,10 @@ msgid "Version Trigger"
 msgstr "Versiune Trigger"
 
 #. SysConfig
+msgid "Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2)."
+msgstr ""
+
+#. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr "Dacă execuția ConfigItemACL poate fi evitată prin verificarea dependențelor de câmpuri din memoria cache. Acest lucru poate îmbunătăți timpii de încărcare a formularelor, dar trebuie dezactivat dacă se utilizează ACLModules pentru ITSMConfigItem- și Form-ReturnTypes."
 
@@ -1646,88 +1274,939 @@ msgstr "Dacă execuția ConfigItemACL poate fi evitată prin verificarea depende
 msgid "Which general information is shown in the header."
 msgstr "Ce informații generale sunt afișate în antet."
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version number of this config item"
-msgstr "Numărul de versiune al acestui element de configurare"
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Importing classes/roles and their related fields"
-msgstr "Importul claselor/rolurilor și al câmpurilor aferente acestora"
+#. SysConfig
+msgid "class"
+msgstr "clasa"
 
 #. SysConfig
-msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Coloane care pot fi filtrate în prezentarea generală a rezultatelor căutării elementelor de configurare din interfața agentului. Notă: Sunt permise numai atributele elementelor de configurare și câmpurile dinamice (DynamicField_NameX)."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr "Structura de bază nu este validă. Vă rugăm să furnizați un hash cu date în format YAML."
+msgid "global"
+msgstr "global"
 
 #. SysConfig
-msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr "La un anumit moment, creează un bilet pentru elementele de configurare, dacă sunt îndeplinite cerințele configurate. Momentul este determinat de valoarea câmpului configurat la \"TimeCIKey\" din ConfigItem și modificat de \"TimeModifier\". Dacă acesta din urmă poate fi fie doar un număr, fie un semn (+/-), un număr și o unitate (d/h/m): \"7\" este echivalent cu \"+7d\". Câmpul dinamic \"Ticket->DynamicField\" va fi utilizat pentru a marca biletele create - acesta trebuie să existe. Indicatoarele \\\\<OTOBO_CONFIGITEM_X\\\\> unde X poate fi NAME, NUMBER și DATE, vor fi înlocuite cu valorile respective în \"Ticket->Text\"."
+msgid "postproductive"
+msgstr "postproductiv"
 
 #. SysConfig
-msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr "Modul de configurare a evenimentului element care numără licențele pentru funcția OTOBOCILicenseCount."
+msgid "preproductive"
+msgstr "preproductivă"
 
 #. SysConfig
-msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr "Creează bilete pentru ConfigItems la anumite momente."
+msgid "productive"
+msgstr "productiv"
 
-#. SysConfig
-msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr "Dacă această opțiune este activată, elementele legate sunt luate în considerare numai dacă aparțin uneia dintre clasele enumerate."
-
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate cu tipul existent DependsOn."
-
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate."
-
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr "Cu această opțiune este posibil să se completeze automat un câmp CI, în funcție de numărul de CI-uri legate. Setarea CounterClassName include numele clasei, iar CounterFieldName este utilizată pentru a stoca numărul de licențe utilizate."
-
-#. SysConfig
-msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr "Definește înălțimea inițială pentru componenta editor de text bogat în pixeli."
-
-#. SysConfig
-msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr "Definește dacă traducerile părinte-copil pentru cozi și servicii ar trebui să fie generate automat."
-
-#. SysConfig
-msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr "Definește înălțimea inițială în pixeli pentru componenta editor de text bogat pentru acest ecran."
-
-#. SysConfig
-msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr "Definește înălțimea pentru componenta editor de text bogat pentru acest ecran. Introduceți numărul (pixeli) sau valoarea procentuală (relativă)."
-
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "General operation data"
-msgstr "Date generale de funcționare"
-
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for incoming request data"
-msgstr "Setări pentru datele de solicitare primite"
-
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for outgoing response data"
-msgstr "Setări pentru ieșirea datelor de răspuns"
-
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Import/Export attachments (as the last entries per line)"
-msgstr "Import/Export atașamente (ca ultimele intrări pe linie)"
-
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Version String"
-msgstr "Versiunea String"
-
-#. SysConfig
-msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Summary"
 msgstr ""
-"Definește permisiunile necesare pentru a seta elemente de configurare ITSM "
-"utilizând interfața generică."
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Info"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Located in"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Order"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Operating costs"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Tag"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Warranty"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Manufacturer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model Description"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact Distributor"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Appliance Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone / VoIP"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Firewall"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VPN"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DNS-Server"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Container Management"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Identity and Access Management (IAM)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Other"
+msgstr "Altele"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Order Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cost unit"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Invoice"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model"
+msgstr "Model"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Purchased at"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Invoice Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Administrator"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inverstment costs"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inventory Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Serialnumber"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subsidiary"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SSL/TLS Certificates"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Code Signing Certificates"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Email Certificates (S/MIME Certificates)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Document Signing Certificates"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Certificates"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creation Date"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Expiry Date"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware"
+msgstr "Hardware"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Software"
+msgstr "Software"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of graphics cards"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total Graphics card RAM (GB)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client category"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Notebook"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Desktop"
+msgstr "Desktop"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Virtual Client"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thin Client"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage Partition"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Count"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Physical Cores"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Outputs"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thunderbolt"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DVI"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VGA"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "HDMI"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VirtualLink"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DisplayPort"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB-C"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Bus Interface"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics card"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Threads"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity per graphics card"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockrate"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockspeed"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Software"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period from"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total RAM (GB)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of RAM modules"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of CPUs"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity (GB)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Socket Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU Class"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile/Embedded"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Laptop"
+msgstr "Laptop"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period until"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Firmware"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Non-Disclosure Agreement (NDA)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Franchise Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Loan Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Consulting Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lease Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Employment Contract"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sales Contract"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Partnership Agreement"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period until"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period from"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End of support"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of release"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Size"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Power Delivery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Touchscreen Monitor"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LED Monitor (Light Emitting Diode)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "OLED Monitor (Organic Light Emitting Diode)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LCD Monitor (Liquid Crystal Display)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Resolution"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CIDR"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Start IP Address"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 2: Data Link Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 5: Session Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 7: Application Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer (Supernet)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 6: Presentation Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 1: Physical Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 4: Transport Layer"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End IP Address"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "IP Protocol"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Address Allocation"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP Reserved"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU"
+msgstr "CPU"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Form Factor"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "General Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics Cards"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Model"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network"
+msgstr "Rețea"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Server Software"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SIM Card"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Count of licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Seat licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MIT Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MPL (Mozilla Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creative Commons"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Perpetual licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "EPL (Eclipse Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "BSD Lizenz (Berkeley Software Distribution License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "AGPL (Affero General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Freeware"
+msgstr "Freeware"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subscription-based licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CC0 (Creative Commons Zero)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "GPL (General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Public Domain"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Volume licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Apache Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Shareware"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LGPL (Lesser General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Key"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Reader"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VR Headset"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Headset"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "External Hard Drive"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Speakers"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB Hub"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mouse"
+msgstr "Șoarece"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Keyboard"
+msgstr "Tastatura"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Webcam"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VoIP Phone"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Satellite Phone"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Analog Phone"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Conference Phone"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cordless Phone (DECT Phone)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Landline Phone"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Depth"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23.6 inches (600 mm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39.4 inches (1000 mm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "47.2 inches (1200 mm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "35.4 inches (900 mm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "31.5 inches (800 mm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "43.3 inches (1100 mm):"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Units (U)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "2U: 3.5 inches (8.89 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "45U: 78.75 inches (200.02 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "1U: 1.75 inches (4.45 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "10U: 17.5 inches (44.45 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39U: 68.25 inches (173.35 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "20U: 35 inches (88.9 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "4U: 7 inches (17.78 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "15U: 26.25 inches (66.68 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "36U: 63 inches (160.02 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "24U: 42 inches (106.68 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "7U: 12.25 inches (31.12 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "9U: 15.75 inches (40.01 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "8U: 14 inches (35.56 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "12U: 21 inches (53.34 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "30U: 52.5 inches (133.35 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "22U: 38.5 inches (97.79 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "48U: 84 inches (213.36 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "5U: 8.75 inches (22.23 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "6U: 10.5 inches (26.67 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "42U: 73.5 inches (186.69 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "33U: 57.75 inches (146.68 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "3U: 5.25 inches (13.34 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "27U: 47.25 inches (120.02 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "18U: 31.5 inches (80.01 cm)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "ETSI Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23-inch Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "21-inch Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Custom Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Tower"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mini-Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "19-inch Rack"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Weight"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Room"
+msgstr "Cameră"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Building"
+msgstr "Clădire"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Micro SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Standard SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nano SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Embedded SIM (eSIM)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK 2"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Number"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN 2"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Longitude"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Latitude"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Type"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium-Ion (Li-ion) Battery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium Iron Phosphate (LiFePO4) Battery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Metal Hydride (NiMH) Battery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sealed Lead-Acid (SLA) Battery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Cadmium (NiCd) Battery"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Flywheel Energy Storage"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Capacity (Ah)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Maximum Load Capacity (W)"
+msgstr ""
+

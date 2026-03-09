@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = '一般运行数据';
+    $Self->{Translation}->{'Settings for incoming request data'} = '接收请求数据的设置';
+    $Self->{Translation}->{'Settings for outgoing response data'} = '外发响应数据的设置';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = '管理配置項';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = '对象类型';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = '将导入以下类别';
     $Self->{Translation}->{'The following roles will be imported'} = '将导入以下角色';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = '名称已更新（新=%s，旧=%s）';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = '属性 %s 从"%s "更新为"%s"';
     $Self->{Translation}->{'Version %s deleted'} = '版本 %s 已删除';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = '未给出 ConfigItemID 或 VersionID！';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = '数据库中找不到配置项目编号 %s！';
     $Self->{Translation}->{'ConfigItem'} = '配置項';
     $Self->{Translation}->{'printed by %s at %s'} = '由 %s 在 %s 打印';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = '无效 ClassID！';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = '配置项的类别限制';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         '选择一个或多个类别来限制可选择的配置项';
-    $Self->{Translation}->{'Link type'} = '链接类型';
-    $Self->{Translation}->{'Select the link type.'} = '选择链接类型。';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = '转发：引用（源） -> 引用（目标）';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = '向后引用（源） -> 引用（目标）';
-    $Self->{Translation}->{'Link Direction'} = '链接方向';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        '引用对象是包含该动态字段的对象，被引用对象是被选为动态字段值的对象。';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = '动态（ConfigItem）';
     $Self->{Translation}->{'Static (Version)'} = '静态（版本）';
     $Self->{Translation}->{'Link Referencing Type'} = '链接引用类型';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = '此元素的最大數量';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = '空字段表示當前值被保存';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = '跳過的';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '导入/导出附件（作为每行的最后一个条目）';
+    $Self->{Translation}->{'Version String'} = '版本字符串';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = '同步定义时出错。请查看日志。';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - 隐藏';
     $Self->{Translation}->{'1 - Shown'} = '1 - 显示';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         '允许在代理界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用"(*key1*&&*key2*) "或"(*key1*||*key2*) "等条件搜索配置项名称。';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         '允许在客户界面的配置项搜索中使用扩展搜索条件。利用该功能，您可以使用"(*key1*&&*key2*) "或"(*key1*||*key2*) "等条件搜索配置项名称。';
     $Self->{Translation}->{'Assigned CIs'} = '分配的 CI';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        '如果符合配置要求，则在特定时间点为配置项创建票据。时间点由配置项 "TimeCIKey "下配置的字段值决定，并由 "TimeModifier "修改。后者可以是一个数字，也可以是一个符号（+/-）、一个数字和一个单位（d/h/m）："7 "相当于 "+7d"。动态字段 "Ticket->DynamicField "将用于标记创建的票单--它必须存在。标记（\<OTOBO_CONFIGITEM_X\>），其中 X 可以是 NAME、NUMBER 和 DATE，将被替换为 "Ticket->Text"（票据->文本）中的相应值。';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = '分配给客户公司的 CI';
     $Self->{Translation}->{'CIs assigned to customer user'} = '分配给客户用户的 CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB 设置';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = '配置项概览的列配置项过滤器。';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         '可在代理界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '可在客户界面配置项概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        '可在代理界面的配置项搜索结果概览中过滤的列。注意：只允许使用配置项属性和动态字段 (DynamicField_NameX)。';
     $Self->{Translation}->{'Config Items'} = '配置項';
     $Self->{Translation}->{'Config item add.'} = '添加配置项目。';
     $Self->{Translation}->{'Config item edit.'} = '配置项目编辑。';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        '用于计算 OTOBOCILicenseCount 功能许可证的配置项事件模块。';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         '配置项事件模块，可将日志记录到代理界面的历史记录中。';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         '配置项事件模块，用于将配置项更新为当前定义。';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        '更新表 configitem_ĺink 的配置项事件模块。';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        '配置项目事件模块更新当前事件状态。';
     $Self->{Translation}->{'Config item history.'} = '配置项目历史。';
     $Self->{Translation}->{'Config item print.'} = '配置项目打印。';
     $Self->{Translation}->{'Config item zoom.'} = '配置项目缩放。';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = '配置项批量模块。';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         '配置项搜索代理接口的后端路由器。';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = '創建和管理配置項定義';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = '在特定时间点为 ConfigItems 创建 Tickets。';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = '客户可以查看历史 CI 版本。';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         '定义使用通用接口搜索 ITSM 配置项所需的权限。';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        '定义使用通用接口设置 ITSM 配置项所需的权限。';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         '定义一个概览模块，用于显示配置项目列表的小视图。';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         '定义配置项搜索屏幕默认显示的配置项搜索属性。Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time:Search_DynamicField_XTimeSlotStartYear=1974；Search_DynamicField_XTimeSlotStartMonth=01；Search_DynamicField_XTimeSlotStartDay=26；Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01；Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59；\'和或 \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';。';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         '定义 "ITSMConfigItem "类的默认子对象。';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         '定义该屏幕富文本编辑器组件的高度。输入数字（像素）或百分比值（相对值）。';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         '存储在配置项索引中的字段，除用于全文检索外，还可用于其他用途。为了实现完整的功能，所有字段都是必填字段。';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         '可以为每个 webservice（键）定义一个类（值）数组，在此基础上限制导入。对于所有选定的类或所有现有的类，必须在调用者配置中选择识别属性。';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         '用于 ConfigItemFetch 调用层的 GenericInterface 模块注册。';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM 配置项目';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM 配置项目概览。';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        '如果激活此选项，则只有属于所列类别之一的链接项才会被计算在内。';
     $Self->{Translation}->{'InciState'} = '状态';
     $Self->{Translation}->{'IncidentState'} = '事件状态';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         '在客户界面的配置项搜索中包含部署状态。';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         '在客户界面的配置项目搜索中包含事件状态。';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         '在此操作结果中显示的配置项的最大数量。';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = '检查负责班级的小组的模块。';
@@ -443,8 +452,10 @@ sub Data {
         '代理界面首选项视图中配置项类别的参数。';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         '小配置项目概览的列过滤器参数。请注意：将 "Active（活动）"设置为 0 只会阻止代理在其个人偏好设置中编辑该组的设置，但仍允许管理员编辑其他用户的设置。使用 "PreferenceGroup（偏好组）"可控制这些设置应显示在用户界面的哪个区域。';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        '"限制 "是默认显示的条目数量。"组 "用于限制插件的访问权限（例如，组：admin;group1;group2;）。"默认 "决定插件是默认启用还是用户需要手动启用。"CacheTTLLocal "是插件的缓存时间，以分钟为单位。';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         '代理界面首选项视图中部署状态颜色的参数。';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = '版本字符串表达式';
     $Self->{Translation}->{'Version String Module'} = '版本字符串模块';
     $Self->{Translation}->{'Version Trigger'} = '版本触发器';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         '是否可以通过检查缓存字段依赖关系来避免执行 ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-ReturnType 中使用 ACL 模块，则必须禁用。';
     $Self->{Translation}->{'Which general information is shown in the header.'} = '标题中显示了哪些一般信息。';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        '使用该选项可以根据现有类型为 DependsOn 的链接 CI 的数量自动填充 CI 字段。';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        '使用该选项可以根据链接的 CI 数量自动填充 CI 字段。';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        '使用该选项可以根据链接的 CI 数量自动填充 CI 字段。设置 CounterClassName 包含类的名称，CounterFieldName 用于存储已使用许可证的计数。';
     $Self->{Translation}->{'class'} = '类';
     $Self->{Translation}->{'global'} = '全球';
     $Self->{Translation}->{'postproductive'} = '后生产';
     $Self->{Translation}->{'preproductive'} = '生殖前';
     $Self->{Translation}->{'productive'} = '生产性';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U：17.5 英寸（44.45 厘米）';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U：21 英寸（53.34 厘米）';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U：26.25 英寸（66.68 厘米）';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U：31.5 英寸（80.01 厘米）';
+    $Self->{Translation}->{'19-inch Rack'} = '19 英寸机架';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U：1.75 英寸（4.45 厘米）';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U：35 英寸（88.9 厘米）';
+    $Self->{Translation}->{'21-inch Rack'} = '21 英寸支架';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U：38.5 英寸（97.79 厘米）';
+    $Self->{Translation}->{'23-inch Rack'} = '23 英寸机架';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23.6 英寸（600 毫米）';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U：42 英寸（106.68 厘米）';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U：47.25 英寸（120.02 厘米）';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U：3.5 英寸（8.89 厘米）';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U：52.5 英寸（133.35 厘米）';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31.5 英寸（800 毫米）';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U：57.75 英寸（146.68 厘米）';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35.4 英寸（900 毫米）';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U：63 英寸（160.02 厘米）';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39.4 英寸（1000 毫米）';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U：68.25 英寸（173.35 厘米）';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U：5.25 英寸（13.34 厘米）';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U：73.5 英寸（186.69 厘米）';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43.3 英寸（1100 毫米）：';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U：78.75 英寸（200.02 厘米）';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47.2 英寸（1200 毫米）';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U：84 英寸（213.36 厘米）';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U：7 英寸（17.78 厘米）';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U：8.75 英寸（22.23 厘米）';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U：10.5 英寸（26.67 厘米）';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U：12.25 英寸（31.12 厘米）';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U：14 英寸（35.56 厘米）';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U：15.75 英寸（40.01 厘米）';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = '会计';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = '地址分配';
+    $Self->{Translation}->{'Administrator'} = '管理员';
+    $Self->{Translation}->{'Analog Phone'} = '模拟电话';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = '设备类型';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = '电池容量（安时）';
+    $Self->{Translation}->{'Battery Type'} = '电池类型';
+    $Self->{Translation}->{'Building'} = '大廈';
+    $Self->{Translation}->{'Bus Interface'} = '总线接口';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU 等级';
+    $Self->{Translation}->{'Capacity (GB)'} = '容量（GB）';
+    $Self->{Translation}->{'Capacity per graphics card'} = '每个图形卡的容量';
+    $Self->{Translation}->{'Card Number'} = '卡号';
+    $Self->{Translation}->{'Card Reader'} = '读卡器';
+    $Self->{Translation}->{'Card Type'} = '卡片类型';
+    $Self->{Translation}->{'Client Certificates'} = '客户证书';
+    $Self->{Translation}->{'Client Software'} = '客户端软件';
+    $Self->{Translation}->{'Client category'} = '客户类别';
+    $Self->{Translation}->{'Clockrate'} = '时钟频率';
+    $Self->{Translation}->{'Clockspeed'} = '时钟速度';
+    $Self->{Translation}->{'Code Signing Certificates'} = '代码签名证书';
+    $Self->{Translation}->{'Conference Phone'} = '会议电话';
+    $Self->{Translation}->{'Consulting Agreement'} = '咨询协议';
+    $Self->{Translation}->{'Contact'} = '联系方式';
+    $Self->{Translation}->{'Contact Distributor'} = '联系经销商';
+    $Self->{Translation}->{'Container Management'} = '集装箱管理';
+    $Self->{Translation}->{'Contract'} = '合同';
+    $Self->{Translation}->{'Contract Type'} = '合同类型';
+    $Self->{Translation}->{'Contract period from'} = '合同期从';
+    $Self->{Translation}->{'Contract period until'} = '合同期至';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = '无绳电话（DECT 电话）';
+    $Self->{Translation}->{'Cost unit'} = '成本单位';
+    $Self->{Translation}->{'Count of licenses'} = '许可证数量';
+    $Self->{Translation}->{'Creation Date'} = '创建日期';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = '定制机架';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP 保留';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS 服务器';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = '发票日期';
+    $Self->{Translation}->{'Date of Order'} = '订购日期';
+    $Self->{Translation}->{'Date of Warranty'} = '授权日期';
+    $Self->{Translation}->{'Date of release'} = '发布日期';
+    $Self->{Translation}->{'Desktop'} = '桌上型電腦';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = '文件签名证书';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI 机架';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = '电子邮件证书（S/MIME 证书）';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = '雇佣合同';
+    $Self->{Translation}->{'End IP Address'} = '终端 IP 地址';
+    $Self->{Translation}->{'End of support'} = '支持结束';
+    $Self->{Translation}->{'Expiry Date'} = '有效期';
+    $Self->{Translation}->{'External Hard Drive'} = '外置硬盘';
+    $Self->{Translation}->{'Firewall'} = '防火墙';
+    $Self->{Translation}->{'Firmware'} = '固件';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = '飞轮储能';
+    $Self->{Translation}->{'Form Factor'} = '外形尺寸';
+    $Self->{Translation}->{'Franchise Agreement'} = '特许经营协议';
+    $Self->{Translation}->{'Freeware'} = '免費軟件';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = '一般信息';
+    $Self->{Translation}->{'Graphics Cards'} = '图形卡';
+    $Self->{Translation}->{'Graphics card'} = '图形卡';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = '硬件';
+    $Self->{Translation}->{'Hardware Model'} = '硬件型号';
+    $Self->{Translation}->{'Hardware Weight'} = '硬件重量';
+    $Self->{Translation}->{'Headset'} = '耳机';
+    $Self->{Translation}->{'IP Protocol'} = 'IP 协议';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = '身份和访问管理（IAM）';
+    $Self->{Translation}->{'Inventory Number'} = '库存编号';
+    $Self->{Translation}->{'Inverstment costs'} = '转换成本';
+    $Self->{Translation}->{'Invoice Number'} = '发票号码';
+    $Self->{Translation}->{'Keyboard'} = '鍵盤';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD 显示器（液晶显示器）';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED 显示器（发光二极管）';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = '固定电话';
+    $Self->{Translation}->{'Laptop'} = '筆記本';
+    $Self->{Translation}->{'Latitude'} = '纬度';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = '第 1 层：物理层';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '第 2 层：数据链路层';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = '第 3 层：网络层';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '第 3 层：网络层（超级网）';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = '第 4 层：传输层';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = '第 5 层：会话层';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '第 6 层：显示层';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = '第 7 层：应用层';
+    $Self->{Translation}->{'Lease Agreement'} = '租赁协议';
+    $Self->{Translation}->{'License Agreement'} = '许可协议';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = '许可证密钥';
+    $Self->{Translation}->{'License Type'} = '许可证类型';
+    $Self->{Translation}->{'License period from'} = '许可证有效期从';
+    $Self->{Translation}->{'License period until'} = '许可证有效期至';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = '磷酸铁锂（LiFePO4）电池';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = '锂离子（Li-Ion）电池';
+    $Self->{Translation}->{'Loan Agreement'} = '贷款协议';
+    $Self->{Translation}->{'Located in'} = '位于';
+    $Self->{Translation}->{'Longitude'} = '经度';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = '制造商';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = '最大负载能力（瓦）';
+    $Self->{Translation}->{'Memory'} = '内存';
+    $Self->{Translation}->{'Memory Type'} = '内存类型';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = '迷你机架';
+    $Self->{Translation}->{'Mobile Number'} = '手机号码';
+    $Self->{Translation}->{'Mobile/Embedded'} = '移动/嵌入式';
+    $Self->{Translation}->{'Model'} = '型號';
+    $Self->{Translation}->{'Model Description'} = '型号说明';
+    $Self->{Translation}->{'Monitor Resolution'} = '显示器分辨率';
+    $Self->{Translation}->{'Monitor Size'} = '显示器尺寸';
+    $Self->{Translation}->{'Mouse'} = '滑鼠';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = '网络';
+    $Self->{Translation}->{'Network Info'} = '网络信息';
+    $Self->{Translation}->{'Network Information'} = '网络信息';
+    $Self->{Translation}->{'Network Layer'} = '网络层';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = '镍镉（NiCd）电池';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = '镍氢（NiMH）电池';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = '保密协议（NDA）';
+    $Self->{Translation}->{'Notebook'} = '笔记本';
+    $Self->{Translation}->{'Number of CPUs'} = 'CPU 数量';
+    $Self->{Translation}->{'Number of RAM modules'} = '内存模块数量';
+    $Self->{Translation}->{'Number of graphics cards'} = '图形卡数量';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED 显示器（有机发光二极管）';
+    $Self->{Translation}->{'Operating costs'} = '运营成本';
+    $Self->{Translation}->{'Order Number'} = '订单号';
+    $Self->{Translation}->{'Other'} = '其它';
+    $Self->{Translation}->{'Outputs'} = '输出';
+    $Self->{Translation}->{'PIN'} = '密码';
+    $Self->{Translation}->{'PIN 2'} = '密码 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = '合伙协议';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = '电话号码';
+    $Self->{Translation}->{'Phone Type'} = '电话类型';
+    $Self->{Translation}->{'Physical Cores'} = '物理磁芯';
+    $Self->{Translation}->{'Power Delivery'} = '电力输送';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = '在';
+    $Self->{Translation}->{'Rack Depth'} = '机架深度';
+    $Self->{Translation}->{'Rack Units (U)'} = '机架单元 (U)';
+    $Self->{Translation}->{'Room'} = '房間';
+    $Self->{Translation}->{'SIM Card'} = 'SIM 卡';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS 证书';
+    $Self->{Translation}->{'Sales Contract'} = '销售合同';
+    $Self->{Translation}->{'Satellite Phone'} = '卫星电话';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = '密封铅酸 (SLA) 电池';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = '序列号';
+    $Self->{Translation}->{'Server Software'} = '服务器软件';
+    $Self->{Translation}->{'Service Agreement'} = '服务协议';
+    $Self->{Translation}->{'Service Tag'} = '服务标签';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = '插座类型';
+    $Self->{Translation}->{'Software'} = '软件';
+    $Self->{Translation}->{'Speakers'} = '发言人';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = '启动 IP 地址';
+    $Self->{Translation}->{'Storage'} = '存储';
+    $Self->{Translation}->{'Storage Partition'} = '存储分区';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = '附属机构';
+    $Self->{Translation}->{'Summary'} = '摘要';
+    $Self->{Translation}->{'Thin Client'} = '瘦客户机';
+    $Self->{Translation}->{'Threads'} = '线程';
+    $Self->{Translation}->{'Thunderbolt'} = '雷电';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = '显卡总内存（GB）';
+    $Self->{Translation}->{'Total RAM (GB)'} = '总内存（GB）';
+    $Self->{Translation}->{'Touchscreen Monitor'} = '触摸屏显示器';
+    $Self->{Translation}->{'Tower'} = '塔楼';
+    $Self->{Translation}->{'USB Hub'} = 'USB 集线器';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = '显像管';
+    $Self->{Translation}->{'VPN'} = '虚拟专用网';
+    $Self->{Translation}->{'VR Headset'} = 'VR 头盔';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = '虚拟链接';
+    $Self->{Translation}->{'VoIP Phone'} = '网络电话';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = '网络摄像头';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

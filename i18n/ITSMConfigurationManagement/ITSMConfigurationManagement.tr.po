@@ -1,17 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-11-22 09:30+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Turkish <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/tr/>\n"
-"Language: tr\n"
+"POT-Creation-Date: 2026-03-09 13:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "General operation data"
+msgstr "Genel çalışma verileri"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for incoming request data"
+msgstr "Gelen talep verileri için ayarlar"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for outgoing response data"
+msgstr "Giden yanıt verileri için ayarlar"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -22,44 +31,32 @@ msgid "Change class definition"
 msgstr "Sınıf tanımını değiştir"
 
 #. Template: AdminITSMConfigItem
+msgid "Change role definition"
+msgstr "Rol tanımını değiştir"
+
+#. Template: AdminITSMConfigItem
+msgid "Ready2Import Class Bundles"
+msgstr "Ready2Import Sınıf Paketleri"
+
+#. Template: AdminITSMConfigItem
+msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
+msgstr "Burada, en yaygın yapılandırma öğelerimizi sergileyen Ready2Import sınıf paketlerini içe aktarabilirsiniz. Bazı ek yapılandırmaların gerekli olabileceğini lütfen unutmayın."
+
+#. Template: AdminITSMConfigItem
+msgid "Update existing entities"
+msgstr "Mevcut varlıkları güncelleyin"
+
+#. Template: AdminITSMConfigItem
+msgid "Import Ready2Adopt class bundles"
+msgstr "Ready2Adopt sınıf paketlerini içe aktarın"
+
+#. Template: AdminITSMConfigItem
 msgid "Config Item Class"
 msgstr "Config Öğe Sınıfı"
 
 #. Template: AdminITSMConfigItem
-msgid "Definition"
-msgstr "Tanım"
-
-#. Template: AdminITSMConfigItem
-msgid "Change"
-msgstr "Değişim"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Incident State"
-msgstr "Olay Durumu"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Deployment State"
-msgstr "Dağıtım Durumu"
-
-#. Template: AgentITSMConfigItemAdd
-msgid "Class"
-msgstr "Sınıf"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Deployment State Type"
-msgstr "Dağıtım Durumu Türü"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Current Incident State"
-msgstr "Mevcut Olay Durumu"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Current Incident State Type"
-msgstr "Mevcut Olay Durum Türü"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Last changed"
-msgstr "Son değişiklik"
+msgid "Config Item Role"
+msgstr "Yapılandırma Öğesi Rolü"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -72,6 +69,10 @@ msgstr "Sınıflar için Filtre"
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
 msgstr "Yeni bir Yapılandırma Öğesi oluşturmak için listeden bir Sınıf seçin."
+
+#. Template: AgentITSMConfigItemAdd
+msgid "Class"
+msgstr "Sınıf"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -109,6 +110,26 @@ msgstr "Bu yapılandırma öğesinin adı"
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
 msgstr "Ad, aşağıdaki Sayı(lar)a sahip ConfigItems tarafından zaten kullanılıyor: %s"
 
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number"
+msgstr "Sürüm Numarası"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr "Bu yapılandırma öğesinin sürüm numarası"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
+msgstr "Sürüm Numarası, aşağıdaki Numaraya/Numaralara sahip ConfigItems tarafından zaten kullanılıyor: %s"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Deployment State"
+msgstr "Dağıtım Durumu"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Incident State"
+msgstr "Olay Durumu"
+
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
 msgstr "Yapılandırma Öğesinin Geçmişi: %s"
@@ -126,16 +147,16 @@ msgid "Zoom view"
 msgstr "Yakınlaştırma görünümü"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
-msgid "Context Settings"
-msgstr "Bağlam Ayarları"
-
-#. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
 msgstr "Sayfa başına Konfigürasyon Öğeleri"
 
 #. Template: AgentITSMConfigItemOverviewSmall
-msgid "A generic ITSM Configuration Item table"
-msgstr "Genel bir ITSM Yapılandırma Öğesi tablosu"
+msgid "No config item data found."
+msgstr "Yapılandırma öğesi verisi bulunamadı."
+
+#. Template: AgentITSMConfigItemOverviewSmall
+msgid "Select this config item"
+msgstr "Bu yapılandırma öğesini seçin"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -144,6 +165,22 @@ msgstr "Arama Çalıştır"
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
 msgstr "Ayrıca önceki sürümlerde arama?"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "TreeView for ConfigItem"
+msgstr "ConfigItem için TreeView"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Depth Level"
+msgstr "Derinlik Seviyesi"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Zoom In/Out"
+msgstr "Yakınlaştırma/Uzaklaştırma"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Max links level reached for ConfigItem!"
+msgstr "ConfigItem için maksimum bağlantı düzeyine ulaşıldı!"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
@@ -158,40 +195,56 @@ msgid "Current Deployment State"
 msgstr "Mevcut Dağıtım Durumu"
 
 #. Template: AgentITSMConfigItemZoom
+msgid "Current Incident State"
+msgstr "Mevcut Olay Durumu"
+
+#. Template: AgentITSMConfigItemZoom
+msgid "Last changed"
+msgstr "Son değişiklik"
+
+#. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
 msgstr "Son değiştiren"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show one version"
-msgstr "Bir sürüm göster"
+#. Template: CustomerITSMConfigItem
+msgid "Your ConfigItems"
+msgstr "ConfigItems öğeleriniz"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show all versions"
-msgstr "Tüm sürümleri göster"
+#. Template: CustomerITSMConfigItemSearch
+msgid "ConfigItem Search"
+msgstr "ConfigItem Arama"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Incident State"
-msgstr "Sürüm Olay Durumu"
+#. Template: AdminACL
+msgid "Object Type"
+msgstr "Nesne Türü"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Deployment State"
-msgstr "Sürüm Dağıtım Durumu"
+#. Template: AdminDynamicFieldScreen
+msgid "Filter by object type"
+msgstr ""
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number"
-msgstr "Sürüm Numarası"
+#. JS Template: ClassImportConfirm
+msgid "The following classes will be imported"
+msgstr "Aşağıdaki sınıflar içe aktarılacaktır"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Configuration Item Version Details"
-msgstr "Yapılandırma Öğesi Sürüm Ayrıntıları"
+#. JS Template: ClassImportConfirm
+msgid "The following roles will be imported"
+msgstr "Aşağıdaki roller içe aktarılacaktır"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Property"
-msgstr "Mülkiyet"
+#. JS Template: ClassImportConfirm
+msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
+msgstr "İlgili dinamik alanların ve GeneralCatalog sınıflarının da oluşturulacağını ve otomatik olarak kaldırılmayacağını unutmayın."
 
-#. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-msgid "No access to Class is given!"
-msgstr "Sınıfa erişim izni verilmemiştir!"
+#. JS Template: ClassImportConfirm
+msgid "Do you want to proceed?"
+msgstr "Devam etmek istiyor musun?"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Need ExampleClasses!"
+msgstr "Örnek Sınıflara İhtiyaç Var!"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Definition is no valid YAML hash."
+msgstr "Tanım geçerli bir YAML karması değildir."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
@@ -208,6 +261,10 @@ msgstr "En az bir seçili Yapılandırma Öğesine ihtiyacınız var!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
 msgstr "Bu yapılandırma öğesine yazma erişiminiz yok: %s."
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
+msgid "No definition was defined for class %s!"
+msgstr "Sınıf %s için tanımlama yapılmadı!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
@@ -228,10 +285,6 @@ msgstr "ConfigItemID, DuplicateID veya ClassID verilmemiştir!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
 msgstr "Erişim izni yok!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-msgid "No definition was defined for class %s!"
-msgstr "Sınıf %s için tanımlama yapılmadı!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
@@ -285,6 +338,14 @@ msgstr "Öznitelik %s \"%s \"den \"%s \"ye güncellendi"
 msgid "Version %s deleted"
 msgstr "Sürüm %s silindi"
 
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" uploaded"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" removed"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
 msgstr "ConfigItemID veya VersionID verilmedi!"
@@ -298,16 +359,16 @@ msgid "ConfigItemID %s not found in database!"
 msgstr "ConfigItemID %s veritabanında bulunamadı!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-msgid "VersionID %s not found in database!"
-msgstr "VersionID %s veritabanında bulunamadı!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
 msgstr "ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
 msgstr "s'de %s tarafından yazdırıldı"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
+msgid "Referenced by"
+msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
@@ -334,6 +395,14 @@ msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr "Öğe gösterilemiyor, ConfigItem için erişim hakkı verilmemiş!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "ConfigItem not found!"
+msgstr "ConfigItem bulunamadı!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "No versions found!"
+msgstr "Hiçbir versiyon bulunamadı!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
 msgstr "operasyonel"
 
@@ -353,141 +422,121 @@ msgstr "Bu yapılandırma öğesinin dağıtım durumu"
 msgid "The incident state of this config item"
 msgstr "Bu yapılandırma öğesinin olay durumu"
 
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "No permission"
+msgstr "İzin yok"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Filter invalid!"
+msgstr "Filtre geçersiz!"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Search params invalid!"
+msgstr "Arama parametreleri geçersiz!"
+
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
 msgstr "Gösterilen yapılandırma öğeleri"
 
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Deployment State Type"
+msgstr "Dağıtım Durumu Türü"
+
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Current Incident State Type"
+msgstr "Mevcut Olay Durum Türü"
+
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
 msgstr "Arasında"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Class restrictions for the config item"
+msgstr "Yapılandırma öğesi için sınıf kısıtlamaları"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more classes to restrict selectable config items"
+msgstr "Seçilebilir yapılandırma öğelerini kısıtlamak için bir veya daha fazla sınıf seçin"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Deployment state restrictions for the config item"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more deployment states to restrict selectable config items"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Dynamic (ConfigItem)"
+msgstr "Dinamik (ConfigItem)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Static (Version)"
+msgstr "Static (Versiyon)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Link Referencing Type"
+msgstr "Bağlantı Referanslama Türü"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
+msgstr "Bu bağlantının ConfigItem için mi yoksa başvuran nesnenin statik sürümü için mi geçerli olduğu. Geçerli Olay Durumu hesaplaması yalnızca dinamik bağlantılarda gerçekleştirilir."
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select the attribute which config items will be searched by"
+msgstr "Yapılandırma öğelerinin aranacağı özniteliği seçin"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr "Temel yapı geçerli değil. Lütfen YAML biçiminde veri içeren bir karma girin."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Starting the YAML string with '---' is required."
+msgstr "YAML dizesinin '---' ile başlaması gereklidir."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not purge the table configitem_link."
+msgstr "configitem_link tablosu temizlenemedi."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "No relevant dynamic fields were found"
+msgstr "İlgili dinamik alan bulunamadı"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not insert into the table configitem_link"
+msgstr "configitem_link tablosuna eklenemedi"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Inserted 0 rows into the table configitem_link"
+msgstr "configitem_link tablosuna 0 satır eklendi"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
 msgstr "Maksimum bir eleman sayısı"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Empty fields indicate that the current values are kept"
-msgstr "Boş alanlar mevcut değerlerin korunduğunu gösterir"
+msgid "Maximum number of one Set dynamic field element"
+msgstr ""
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Skipped"
-msgstr "Atlandı"
+msgid "Maximum number of one element within a Set dynamic field element"
+msgstr ""
 
-#. ITSM class bundles
-msgid "Model"
-msgstr "Model"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Import/Export attachments (as the last entries per line)"
+msgstr "Ekleri içe/dışa aktarma (satır başına son girişler olarak)"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Customer Company"
-msgstr "Müşteri Şirket"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Version String"
+msgstr "Sürüm Dizesi"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Serial Number"
-msgstr "Seri Numarası"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "Error synchronizing the definitions. Please check the log."
+msgstr "Tanımlar senkronize edilirken hata oluştu. Lütfen günlüğü kontrol edin."
 
-#. ITSM class bundles
-msgid "CPU"
-msgstr "CPU"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Ram"
-msgstr "Ram"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Hard Disk"
-msgstr "Sabit Disk"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Capacity"
-msgstr "Kapasite"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Adapter"
-msgstr "Ağ Adaptörü"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP over DHCP"
-msgstr "DHCP üzerinden IP"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP Address"
-msgstr "IP Adresi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Graphic Adapter"
-msgstr "Grafik Adaptörü"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Other Equipment"
-msgstr "Diğer Ekipmanlar"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Warranty Expiration Date"
-msgstr "Garanti Bitiş Tarihi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Install Date"
-msgstr "Kurulum Tarihi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 1"
-msgstr "Telefon 1"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 2"
-msgstr "Telefon 2"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "E-Mail"
-msgstr "E-Posta"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Address"
-msgstr "Ağ Adresi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Subnet Mask"
-msgstr "Alt Ağ Maskesi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Gateway"
-msgstr "Ağ Geçidi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Type"
-msgstr "Ruhsat Türü"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Key"
-msgstr "Lisans Anahtarı"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Quantity"
-msgstr "Miktar"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Expiration Date"
-msgstr "Son Kullanma Tarihi"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Media"
-msgstr "Medya"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Computer"
-msgstr "Bilgisayar"
-
-#. ITSM class bundles
-msgid "Hardware"
-msgstr "Donanım"
-
-#. ITSM class bundles
-msgid "Network"
-msgstr "Şebeke"
-
-#. ITSM class bundles
-msgid "Software"
-msgstr "Yazılım"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
+msgstr "Senkronize edilmemiş ITSMConfigItem tanımlarınız var. Lütfen ITSMConfigItem dinamik alan değişikliklerinizi dağıtın."
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -521,229 +570,53 @@ msgstr "İnceleme"
 msgid "Test/QA"
 msgstr "Test/QA"
 
-#. ITSM class bundles
-msgid "Laptop"
-msgstr "Dizüstü Bilgisayar"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Overview and Confirmation"
+msgstr "Genel Bakış ve Onay"
 
-#. ITSM class bundles
-msgid "Desktop"
-msgstr "Masaüstü"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr "Sınıfları/rolleri ve ilgili alanları içe aktarma"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PDA"
-msgstr "PDA"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "An error occurred during class import."
+msgstr "Sınıf içe aktarımı sırasında bir hata oluştu."
 
-#. ITSM class bundles
-msgid "Server"
-msgstr "Sunucu"
+#. SysConfig
+msgid "0 - Hidden"
+msgstr "0 - Gizli"
 
-#. ITSM class bundles
-msgid "Other"
-msgstr "Diğer"
+#. SysConfig
+msgid "1 - Shown"
+msgstr "1 - Gösterilen"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Monitor"
-msgstr "Monitör"
+#. SysConfig
+msgid "A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem."
+msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Printer"
-msgstr "Yazıcı"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Aracı arayüzünün yapılandırma öğesi aramasında genişletilmiş arama koşullarına izin verir. Bu özellik sayesinde, örneğin yapılandırma öğesi adını \"(*key1*&*key2*)\" veya \"(*key1*|*key2*)\" gibi bu tür koşullarla arayabilirsiniz."
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Switch"
-msgstr "Anahtar"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Router"
-msgstr "Yönlendirici"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN Access Point"
-msgstr "WLAN Erişim Noktası"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Security Device"
-msgstr "Güvenlik Cihazı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Backup Device"
-msgstr "Yedekleme Cihazı"
-
-#. ITSM class bundles
-msgid "Mouse"
-msgstr "Fare"
-
-#. ITSM class bundles
-msgid "Keyboard"
-msgstr "Klavye"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Camera"
-msgstr "Kamera"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Beamer"
-msgstr "Beamer"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Modem"
-msgstr "Modem"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PCMCIA Card"
-msgstr "PCMCIA Kartı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "USB Device"
-msgstr "USB Aygıtı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Docking Station"
-msgstr "Yerleştirme İstasyonu"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Scanner"
-msgstr "Tarayıcı"
-
-#. ITSM class bundles
-msgid "Building"
-msgstr "Bina"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Office"
-msgstr "Ofis"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Floor"
-msgstr "Zemin"
-
-#. ITSM class bundles
-msgid "Room"
-msgstr "Oda"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Rack"
-msgstr "Raf"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Workplace"
-msgstr "İşyeri"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Outlet"
-msgstr "Outlet"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "IT Facility"
-msgstr "BT Tesisi"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "LAN"
-msgstr "LAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN"
-msgstr "WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Telco"
-msgstr "Telco"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "GSM"
-msgstr "GSM"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client Application"
-msgstr "Müşteri Başvurusu"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Middleware"
-msgstr "Orta Yazılım"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server Application"
-msgstr "Sunucu Uygulaması"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client OS"
-msgstr "İstemci İşletim Sistemi"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server OS"
-msgstr "Sunucu İşletim Sistemi"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Admin Tool"
-msgstr "Yönetici Aracı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "User Tool"
-msgstr "Kullanıcı Aracı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Embedded"
-msgstr "Gömülü"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Single Licence"
-msgstr "Tek Lisans"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per User"
-msgstr "Kullanıcı Başına"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Processor"
-msgstr "İşlemci Başına"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Server"
-msgstr "Sunucu Başına"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Node"
-msgstr "Düğüm Başına"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Volume Licence"
-msgstr "Cilt Lisansı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Enterprise Licence"
-msgstr "Kurumsal Lisans"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Developer Licence"
-msgstr "Geliştirici Lisansı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Demo"
-msgstr "Demo"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Time Restricted"
-msgstr "Zaman Kısıtlı"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Freeware"
-msgstr "Ücretsiz yazılım"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Open Source"
-msgstr "Açık Kaynak"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Unlimited"
-msgstr "Sınırsız"
-
-#. JS File: ITSM.Agent.ConfigItem.Zoom
-msgid "Ok"
-msgstr "Tamam."
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Müşteri arayüzünün yapılandırma öğesi aramasında genişletilmiş arama koşullarına izin verir. Bu özellik sayesinde, örneğin yapılandırma öğesi adını \"(*anahtar1*&*anahtar2*)\" veya \"(*anahtar1*|*anahtar2*)\" gibi bu tür koşullarla arayabilirsiniz."
 
 #. SysConfig
 msgid "Assigned CIs"
 msgstr "Atanmış CI'lar"
+
+#. SysConfig
+msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for license accounting."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for licenses counting, where \"TotalLicensesDF\", \"AvailableLicensesDF\" and \"LicenseReferenceDF\" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in \"ValidDeplStates\" are considered. If a threshold is defined in \"MinimumLicenses\", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field \"Ticket->DynamicField\" must exist. The tags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in \"Ticket->Text\" by the config item name, number, available licenses, and minimum required available licenses, respectively."
+msgstr ""
 
 #. SysConfig
 msgid "CIs assigned to customer company"
@@ -760,566 +633,6 @@ msgstr "CMDB Ayarları"
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr "Yalnızca aynı ConfigItem sınıfı ('class') içinde veya genel olarak ('global') benzersiz bir ad olup olmadığını kontrol edin; bu, yinelenenleri ararken mevcut her ConfigItem'ın dikkate alındığı anlamına gelir."
-
-#. SysConfig
-msgid "Config Items"
-msgstr "Yapılandırma Öğeleri"
-
-#. SysConfig
-msgid "Config item add."
-msgstr "Yapılandırma öğesi ekle."
-
-#. SysConfig
-msgid "Config item edit."
-msgstr "Yapılandırma öğesi düzenleme."
-
-#. SysConfig
-msgid "Config item event module that enables logging to history in the agent interface."
-msgstr "Temsilci arayüzünde geçmişe günlüğe kaydetmeyi sağlayan yapılandırma öğesi olay modülü."
-
-#. SysConfig
-msgid "Config item history."
-msgstr "Yapılandırma öğesi geçmişi."
-
-#. SysConfig
-msgid "Config item print."
-msgstr "Yapılandırma öğesi yazdırma."
-
-#. SysConfig
-msgid "Config item zoom."
-msgstr "Yapılandırma öğesi yakınlaştırma."
-
-#. SysConfig
-msgid "ConfigItemNumber"
-msgstr "ConfigItemNumber"
-
-#. SysConfig
-msgid "Configuration Item Limit"
-msgstr "Yapılandırma Öğesi Sınırı"
-
-#. SysConfig
-msgid "Configuration Item limit per page."
-msgstr "Konfigürasyon Sayfa başına öğe sınırı."
-
-#. SysConfig
-msgid "Configuration Management Database."
-msgstr "Konfigürasyon Yönetimi Veritabanı."
-
-#. SysConfig
-msgid "Configuration item bulk module."
-msgstr "Yapılandırma öğesi toplu modülü."
-
-#. SysConfig
-msgid "Configuration item search backend router of the agent interface."
-msgstr "Aracı arayüzünün yapılandırma öğesi arama arka uç yönlendiricisi."
-
-#. SysConfig
-msgid "Create and manage the definitions for Configuration Items."
-msgstr "Yapılandırma Öğeleri için tanımlar oluşturun ve yönetin."
-
-#. SysConfig
-msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "Bağlantılı nesneler widget'ında (LinkObject::ViewMode = \"complex\") bir ayar düğmesinin mevcut olduğu Eylemleri tanımlayın. Lütfen bu Eylemlerin aşağıdaki JS ve CSS dosyalarını kaydetmiş olması gerektiğini unutmayın: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ve Core.Agent.LinkObject.js."
-
-#. SysConfig
-msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğeleri oluşturmak için Gerekli izinleri tanımlar."
-
-#. SysConfig
-msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini silmek için Gerekli izinleri tanımlar."
-
-#. SysConfig
-msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini almak için Gerekli izinleri tanımlar."
-
-#. SysConfig
-msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini aramak için Gerekli izinleri tanımlar."
-
-#. SysConfig
-msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini güncellemek için Gerekli izinleri tanımlar."
-
-#. SysConfig
-msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr "Bir yapılandırma öğesi listesinin küçük görünümünü göstermek için bir genel bakış modülü tanımlar."
-
-#. SysConfig
-msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr "ConfigItem adını denetlemek ve ilgili hata iletilerini göstermek için her ConfigItem sınıfı için ayrı ayrı düzenli ifadeler tanımlar."
-
-#. SysConfig
-msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr "'ITSMConfigItem' sınıfının varsayılan alt nesnesini tanımlar."
-
-#. SysConfig
-msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr "Yönetici arayüzündeki CI tanımı düzenleyicisi için satır sayısını tanımlar."
-
-#. SysConfig
-msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr "Olay durumlarının yüksek (örn. krikital) ile düşük (örn. fonksiyonel) arasındaki sırasını tanımlar."
-
-#. SysConfig
-msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr "Bağlantılı destek taleplerinin bir CI'nın durumunu etkileyebileceği ilgili dağıtım durumlarını tanımlar."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr "AgentITSMConfigItem ekranı için arama sınırını tanımlar."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr "AgentITSMConfigItemSearch ekranı için arama sınırını tanımlar."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr "Yapılandırma öğesi genel görünümünde gösterilen sütunları tanımlar. Bu seçeneğin sütunun konumu üzerinde hiçbir etkisi yoktur. Not: 'Tümü' filtresi seçildiğinde Sınıf sütunu her zaman kullanılabilir."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr "Yapılandırma öğesi aramasında gösterilen sütunları tanımlar. Bu seçeneğin sütunun konumu üzerinde hiçbir etkisi yoktur."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "CI sınıfına bağlı olarak yapılandırma öğesi genel görünümünde gösterilen CI sütunlarını tanımlar. Her girdinin önüne sınıf adı ve çift iki nokta üst üste konulmalıdır (örn. Bilgisayar::). Tüm CI'lar için ortak olan birkaç CI-Özniteliği vardır (Bilgisayar sınıfı için örnek: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI-Tanımında tanımlandığı gibi bireysel CI-Özelliklerini göstermek için aşağıdaki şema kullanılmalıdır (Bilgisayar sınıfı için örnek): Bilgisayar::HardDisk::1, Bilgisayar::HardDisk::1::Kapasite::1, Bilgisayar::HardDisk::2, Bilgisayar::HardDisk::2::Kapasite::1. Bir CI sınıfı için giriş yoksa, varsayılan sütunlar ITSMConfigItem::Frontend::AgentITSMConfigItem##ShowColumns ayarında tanımlandığı şekilde gösterilir."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "CI sınıfına bağlı olarak yapılandırma öğesi aramasında CI'ların gösterilen sütunlarını tanımlar. Her girdinin önüne sınıf adı ve çift iki nokta üst üste konulmalıdır (örn. Bilgisayar::). Tüm CI'lar için ortak olan birkaç CI-Özniteliği vardır (Bilgisayar sınıfı için örnek: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI-Tanımında tanımlandığı gibi bireysel CI-Özelliklerini göstermek için aşağıdaki şema kullanılmalıdır (Bilgisayar sınıfı için örnek): Bilgisayar::HardDisk::1, Bilgisayar::HardDisk::1::Kapasite::1, Bilgisayar::HardDisk::2, Bilgisayar::HardDisk::2::Kapasite::1. Bir CI sınıfı için giriş yoksa, varsayılan sütunlar ITSMConfigItem::Frontend::AgentITSMConfigItem##ShowColumns ayarında tanımlandığı şekilde gösterilir."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr "CI sınıfına bağlı olarak yapılandırma öğesi widget'ında gösterilen CI sütunlarını tanımlar. Her girdinin önüne sınıf adı ve çift iki nokta üst üste konulmalıdır (örn. Bilgisayar::). Tüm CI'lar için ortak olan birkaç CI-Özniteliği vardır (Bilgisayar sınıfı için örnek: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI-Tanımında tanımlandığı gibi bireysel CI-Özelliklerini göstermek için aşağıdaki şema kullanılmalıdır (Bilgisayar sınıfı için örnek): Bilgisayar::HardDisk::1, Bilgisayar::HardDisk::1::Kapasite::1, Bilgisayar::HardDisk::2, Bilgisayar::HardDisk::2::Kapasite::1. Bir CI sınıfı için giriş yoksa, varsayılan sütunlar AgentCustomerInformationCenter::Backend##0060-CIC-ITSMConfigItemCustomerCompany (DefaultColumns anahtarı) ayarında tanımlandığı şekilde gösterilir."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr "Tüm CI sınıfları için bağlantı tablosu karmaşık görünümünde CI'ların gösterilen sütunlarını tanımlar. Herhangi bir giriş yoksa, varsayılan sütunlar gösterilir."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr "CI sınıfına bağlı olarak bağlantı tablosu karmaşık görünümünde CI'ların gösterilen sütunlarını tanımlar. Her girişin önüne sınıf adı ve çift iki nokta üst üste konulmalıdır (örneğin Bilgisayar::). Tüm CI'larda ortak olan birkaç CI-Özniteliği vardır (Bilgisayar sınıfı için örnek: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI-Tanımında tanımlandığı gibi bireysel CI-Özniteliklerini göstermek için aşağıdaki şema kullanılmalıdır (Bilgisayar sınıfı için örnek): Bilgisayar::HardDisk::1, Bilgisayar::HardDisk::1::Kapasite::1, Bilgisayar::HardDisk::2, Bilgisayar::HardDisk::2::Kapasite::1. Bir CI sınıfı için giriş yoksa, varsayılan sütunlar gösterilir."
-
-#. SysConfig
-msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr "Hangi bağlantı türünün (bilet perspektifinden adlandırılan) bağlantılı bir CI'nın durumunu etkileyebileceğini tanımlar."
-
-#. SysConfig
-msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr "Bağlı bir CI'nın durumunu hangi tür biletlerin etkileyebileceğini tanımlar."
-
-#. SysConfig
-msgid "Delete Configuration Item"
-msgstr "Yapılandırma Öğesini Sil"
-
-#. SysConfig
-msgid "Deployment State Color"
-msgstr "Dağıtım Durumu Rengi"
-
-#. SysConfig
-msgid "Duplicate"
-msgstr "Yinelenen"
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr "Temsilci ön ucunun aynı anda birden fazla yapılandırma öğesi üzerinde çalışması için yapılandırma öğesi toplu eylem özelliğini etkinleştirir."
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr "Yapılandırma öğesi toplu eylem özelliğini yalnızca listelenen gruplar için etkinleştirir."
-
-#. SysConfig
-msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr "ConfigItems öğelerini benzersiz adlar için kontrol etme işlevini etkinleştirir/devre dışı bırakır. Bu seçeneği etkinleştirmeden önce sisteminizde yinelenen adlara sahip yapılandırma öğeleri olup olmadığını kontrol etmelisiniz. Bunu bin/otobo.ITSMConfigItemListDuplicates.pl betiği ile yapabilirsiniz."
-
-#. SysConfig
-msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr "Bilet-configitem-link üzerinde configitem-status ayarlamak için olay modülü."
-
-#. SysConfig
-msgid "ITSM config item overview."
-msgstr "ITSM yapılandırma öğesine genel bakış."
-
-#. SysConfig
-msgid "Module to check the group responsible for a class."
-msgstr "Bir sınıftan sorumlu grubu kontrol etmek için modül."
-
-#. SysConfig
-msgid "Module to check the group responsible for a configuration item."
-msgstr "Bir yapılandırma öğesinden sorumlu grubu kontrol etmek için modül."
-
-#. SysConfig
-msgid "Module to generate ITSM config item statistics."
-msgstr "ITSM yapılandırma öğesi istatistikleri oluşturmak için modül."
-
-#. SysConfig
-msgid "Object backend module registration for the import/export module."
-msgstr "İçe/dışa aktarma modülü için nesne arka uç modülü kaydı."
-
-#. SysConfig
-msgid "Overview."
-msgstr "Genel bakış."
-
-#. SysConfig
-msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr "Müşteri temsilcisi arayüzünün müşteri şirketi yapılandırma öğesi genel bakışının gösterge tablosu arka ucu için parametreler. \"Limit\" varsayılan olarak gösterilen giriş sayısıdır. \"Grup\" eklentiye erişimi kısıtlamak için kullanılır (örn. Grup: admin;group1;group2;). \"Varsayılan\" eklentinin varsayılan olarak etkin olup olmadığını veya kullanıcının manuel olarak etkinleştirmesi gerekip gerekmediğini belirler. \"CacheTTLLocal\" eklenti için dakika cinsinden önbellek süresidir."
-
-#. SysConfig
-msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr "Dağıtım durumları için parametreler, müşteri temsilcisi arayüzünün tercihler görünümünde renklendirilir."
-
-#. SysConfig
-msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr "Temsilci arayüzünün tercihler görünümündeki dağıtım durumları için parametreler."
-
-#. SysConfig
-msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Genel katalog özniteliklerinin örnek izin gruplarının parametreleri."
-
-#. SysConfig
-msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr "Sayfalar için parametreler (yapılandırma öğelerinin gösterildiği)."
-
-#. SysConfig
-msgid "Permission Group"
-msgstr "İzin grubu"
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi arama ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi yakınlaştırma ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ekleme ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi düzenleme ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr "Temsilci arayüzünde geçmiş ITSM yapılandırma öğesi ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi yazdır ekranını kullanmak için gerekli izinler."
-
-#. SysConfig
-msgid "Required privileges to delete config items."
-msgstr "Yapılandırma öğelerini silmek için gerekli ayrıcalıklar."
-
-#. SysConfig
-msgid "Search config items."
-msgstr "Yapılandırma öğelerini arayın."
-
-#. SysConfig
-msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr "Yapılandırma öğesi numarası üreteci modülünü seçer. \"AutoIncrement\" yapılandırma öğesi numarasını artırır, SystemID, ConfigItemClassID ve sayaç kullanılır. Format \"SystemID.ConfigItemClassID.Counter\" şeklindedir, örn. 1205000004, 1205000005."
-
-#. SysConfig
-msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr "Bir Bilet bir CI'ya Bağlandığında CI'nın olay durumunu otomatik olarak ayarlayın."
-
-#. SysConfig
-msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr "Aracı arayüzünün yapılandırma öğesi toplu ekranında dağıtım durumunu ayarlar."
-
-#. SysConfig
-msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr "Temsilci arayüzünün yapılandırma öğesi toplu ekranında olay durumunu ayarlar."
-
-#. SysConfig
-msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr "Menüde, aracı arayüzünün yapılandırma öğesi yakınlaştırma görünümünde bir yapılandırma öğesini başka bir nesneyle ilişkilendirmeyi sağlayan bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümündeki bir yapılandırma öğesinin geçmişine erişmek için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesinin geçmişine erişmek için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini silmek için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümünde bir yapılandırma öğesini çoğaltmak için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini çoğaltmak için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini düzenlemek için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yapılandırma öğesi yakınlaştırma görünümüne geri dönmek için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini yazdırmak için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümünde bir yapılandırma öğesini yakınlaştırmak için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr "Temsilci arayüzünde yapılandırma öğesi geçmişini (ters sıralı) gösterir."
-
-#. SysConfig
-msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr "Bir yapılandırma öğesinin tanımlayıcısı, örneğin ConfigItem#, MyConfigItem#. Varsayılan ConfigItem#'dir."
-
-#. SysConfig
-msgid "class"
-msgstr "sınıf"
-
-#. SysConfig
-msgid "global"
-msgstr "küresel"
-
-#. SysConfig
-msgid "postproductive"
-msgstr "ÜREME SONRASI"
-
-#. SysConfig
-msgid "preproductive"
-msgstr "ÜREME ÖNCESİ"
-
-#. SysConfig
-msgid "productive"
-msgstr "üretken"
-
-#. Template: AdminITSMConfigItem
-msgid "Change role definition"
-msgstr "Rol tanımını değiştir"
-
-#. Template: AdminITSMConfigItem
-msgid "Ready2Import Class Bundles"
-msgstr "Ready2Import Sınıf Paketleri"
-
-#. Template: AdminITSMConfigItem
-msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "Burada, en yaygın yapılandırma öğelerimizi sergileyen Ready2Import sınıf paketlerini içe aktarabilirsiniz. Bazı ek yapılandırmaların gerekli olabileceğini lütfen unutmayın."
-
-#. Template: AdminITSMConfigItem
-msgid "Update existing entities"
-msgstr "Mevcut varlıkları güncelleyin"
-
-#. Template: AdminITSMConfigItem
-msgid "Import Ready2Adopt class bundles"
-msgstr "Ready2Adopt sınıf paketlerini içe aktarın"
-
-#. Template: AdminITSMConfigItem
-msgid "Config Item Role"
-msgstr "Yapılandırma Öğesi Rolü"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "The version number of this config item"
-msgstr "Bu yapılandırma öğesinin sürüm numarası"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr "Sürüm Numarası, aşağıdaki Numaraya/Numaralara sahip ConfigItems tarafından zaten kullanılıyor: %s"
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "No config item data found."
-msgstr "Yapılandırma öğesi verisi bulunamadı."
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "Select this config item"
-msgstr "Bu yapılandırma öğesini seçin"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "TreeView for ConfigItem"
-msgstr "ConfigItem için TreeView"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Depth Level"
-msgstr "Derinlik Seviyesi"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Zoom In/Out"
-msgstr "Yakınlaştırma/Uzaklaştırma"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Max links level reached for ConfigItem!"
-msgstr "ConfigItem için maksimum bağlantı düzeyine ulaşıldı!"
-
-#. Template: CustomerITSMConfigItem
-msgid "Your ConfigItems"
-msgstr "ConfigItems öğeleriniz"
-
-#. Template: CustomerITSMConfigItemSearch
-msgid "ConfigItem Search"
-msgstr "ConfigItem Arama"
-
-#. Template: AdminACL
-msgid "Object Type"
-msgstr "Nesne Türü"
-
-#. JS Template: ClassImportConfirm
-msgid "The following classes will be imported"
-msgstr "Aşağıdaki sınıflar içe aktarılacaktır"
-
-#. JS Template: ClassImportConfirm
-msgid "The following roles will be imported"
-msgstr "Aşağıdaki roller içe aktarılacaktır"
-
-#. JS Template: ClassImportConfirm
-msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "İlgili dinamik alanların ve GeneralCatalog sınıflarının da oluşturulacağını ve otomatik olarak kaldırılmayacağını unutmayın."
-
-#. JS Template: ClassImportConfirm
-msgid "Do you want to proceed?"
-msgstr "Devam etmek istiyor musun?"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Need ExampleClasses!"
-msgstr "Örnek Sınıflara İhtiyaç Var!"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Definition is no valid YAML hash."
-msgstr "Tanım geçerli bir YAML karması değildir."
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "ConfigItem not found!"
-msgstr "ConfigItem bulunamadı!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "No versions found!"
-msgstr "Hiçbir versiyon bulunamadı!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "No permission"
-msgstr "İzin yok"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Filter invalid!"
-msgstr "Filtre geçersiz!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Search params invalid!"
-msgstr "Arama parametreleri geçersiz!"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Class restrictions for the config item"
-msgstr "Yapılandırma öğesi için sınıf kısıtlamaları"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select one or more classes to restrict selectable config items"
-msgstr "Seçilebilir yapılandırma öğelerini kısıtlamak için bir veya daha fazla sınıf seçin"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link type"
-msgstr "Bağlantı türü"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the link type."
-msgstr "Bağlantı türünü seçin."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr "İleriye doğru: Referans Verme (Kaynak) -> Referans Verilen (Hedef)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr "Geriye doğru: Referanslı (Kaynak) -> Referanslı (Hedef)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Direction"
-msgstr "Bağlantı Yönü"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "Referans veren nesne bu dinamik alanı içeren nesnedir, referans alınan nesne ise dinamik alanın değeri olarak seçilen nesnedir."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Dynamic (ConfigItem)"
-msgstr "Dinamik (ConfigItem)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Static (Version)"
-msgstr "Static (Versiyon)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Referencing Type"
-msgstr "Bağlantı Referanslama Türü"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr "Bu bağlantının ConfigItem için mi yoksa başvuran nesnenin statik sürümü için mi geçerli olduğu. Geçerli Olay Durumu hesaplaması yalnızca dinamik bağlantılarda gerçekleştirilir."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the attribute which config items will be searched by"
-msgstr "Yapılandırma öğelerinin aranacağı özniteliği seçin"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Starting the YAML string with '---' is required."
-msgstr "YAML dizesinin '---' ile başlaması gereklidir."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not purge the table configitem_link."
-msgstr "configitem_link tablosu temizlenemedi."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "No relevant dynamic fields were found"
-msgstr "İlgili dinamik alan bulunamadı"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not insert into the table configitem_link"
-msgstr "configitem_link tablosuna eklenemedi"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Inserted 0 rows into the table configitem_link"
-msgstr "configitem_link tablosuna 0 satır eklendi"
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "Error synchronizing the definitions. Please check the log."
-msgstr "Tanımlar senkronize edilirken hata oluştu. Lütfen günlüğü kontrol edin."
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "Senkronize edilmemiş ITSMConfigItem tanımlarınız var. Lütfen ITSMConfigItem dinamik alan değişikliklerinizi dağıtın."
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Overview and Confirmation"
-msgstr "Genel Bakış ve Onay"
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "An error occurred during class import."
-msgstr "Sınıf içe aktarımı sırasında bir hata oluştu."
-
-#. SysConfig
-msgid "0 - Hidden"
-msgstr "0 - Gizli"
-
-#. SysConfig
-msgid "1 - Shown"
-msgstr "1 - Gösterilen"
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Aracı arayüzünün yapılandırma öğesi aramasında genişletilmiş arama koşullarına izin verir. Bu özellik sayesinde, örneğin yapılandırma öğesi adını \"(*key1*&*key2*)\" veya \"(*key1*|*key2*)\" gibi bu tür koşullarla arayabilirsiniz."
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Müşteri arayüzünün yapılandırma öğesi aramasında genişletilmiş arama koşullarına izin verir. Bu özellik sayesinde, örneğin yapılandırma öğesi adını \"(*anahtar1*&*anahtar2*)\" veya \"(*anahtar1*|*anahtar2*)\" gibi bu tür koşullarla arayabilirsiniz."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1350,20 +663,40 @@ msgid "Columns that can be filtered in the config item overview of the agent int
 msgstr "Temsilci arayüzünün yapılandırma öğesine genel bakışında filtrelenebilen sütunlar. Not: Yalnızca Yapılandırma Öğesi özniteliklerine ve Dinamik Alanlara (DynamicField_NameX) izin verilir."
 
 #. SysConfig
-msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Müşteri arayüzünün yapılandırma öğesine genel bakışında filtrelenebilen sütunlar. Not: Yalnızca Yapılandırma Öğesi özniteliklerine ve Dinamik Alanlara (DynamicField_NameX) izin verilir."
+msgid "Config Items"
+msgstr "Yapılandırma Öğeleri"
+
+#. SysConfig
+msgid "Config item add."
+msgstr "Yapılandırma öğesi ekle."
+
+#. SysConfig
+msgid "Config item edit."
+msgstr "Yapılandırma öğesi düzenleme."
+
+#. SysConfig
+msgid "Config item event module that enables accounting licenses for a given config item."
+msgstr ""
+
+#. SysConfig
+msgid "Config item event module that enables logging to history in the agent interface."
+msgstr "Temsilci arayüzünde geçmişe günlüğe kaydetmeyi sağlayan yapılandırma öğesi olay modülü."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr "Yapılandırma öğelerini geçerli tanımlarına göre güncelleyen yapılandırma öğesi olay modülü."
 
 #. SysConfig
-msgid "Config item event module that updates the table configitem_ĺink."
-msgstr "configitem_ĺink tablosunu güncelleyen yapılandırma öğesi olay modülü."
+msgid "Config item history."
+msgstr "Yapılandırma öğesi geçmişi."
 
 #. SysConfig
-msgid "Config item event module updates the current incident state."
-msgstr "Konfigürasyon öğesi olay modülü mevcut olay durumunu günceller."
+msgid "Config item print."
+msgstr "Yapılandırma öğesi yazdırma."
+
+#. SysConfig
+msgid "Config item zoom."
+msgstr "Yapılandırma öğesi yakınlaştırma."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1382,6 +715,42 @@ msgid "ConfigItems with the following deployment states will not be stored on th
 msgstr "Aşağıdaki dağıtım durumlarına sahip ConfigItems, Elasticsearch sunucusunda depolanmayacaktır. Bunu mevcut CI'lara uygulamak için, bu seçenek değiştirildikten sonra CI geçişinin konsol üzerinden çalıştırılması gerekir."
 
 #. SysConfig
+msgid "Configuration Item Limit"
+msgstr "Yapılandırma Öğesi Sınırı"
+
+#. SysConfig
+msgid "Configuration Item limit per page."
+msgstr "Konfigürasyon Sayfa başına öğe sınırı."
+
+#. SysConfig
+msgid "Configuration Management Database."
+msgstr "Konfigürasyon Yönetimi Veritabanı."
+
+#. SysConfig
+msgid "Configuration item bulk module."
+msgstr "Yapılandırma öğesi toplu modülü."
+
+#. SysConfig
+msgid "Configuration item search backend router of the agent interface."
+msgstr "Aracı arayüzünün yapılandırma öğesi arama arka uç yönlendiricisi."
+
+#. SysConfig
+msgid "Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings."
+msgstr ""
+
+#. SysConfig
+msgid "Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Create and manage the definitions for Configuration Items."
+msgstr "Yapılandırma Öğeleri için tanımlar oluşturun ve yönetin."
+
+#. SysConfig
+msgid "Creates Tickets for ConfigItems at specific time points."
+msgstr "Belirli zaman noktalarında ConfigItems için Biletler oluşturur."
+
+#. SysConfig
 msgid "Customers can see historic CI versions."
 msgstr "Müşteriler geçmiş CI sürümlerini görebilirler."
 
@@ -1398,6 +767,10 @@ msgid "Default data to use on attribute for config item search screen. Example: 
 msgstr "Yapılandırma öğesi arama ekranı için öznitelikte kullanılacak varsayılan veriler. Örnek: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
+msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
+msgstr "Bağlantılı nesneler widget'ında (LinkObject::ViewMode = \"complex\") bir ayar düğmesinin mevcut olduğu Eylemleri tanımlayın. Lütfen bu Eylemlerin aşağıdaki JS ve CSS dosyalarını kaydetmiş olması gerektiğini unutmayın: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js ve Core.Agent.LinkObject.js."
+
+#. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr "Sürüm dizeleri için bir Template::Toolkit şeması tanımlayın. Yalnızca Sürüm Dizesi Modülü TemplateToolkit olarak ayarlanmışsa kullanılır."
 
@@ -1406,8 +779,32 @@ msgid "Define a set of conditions under which a customer is allowed to see a con
 msgstr "Bir müşterinin bir yapılandırma öğesini görmesine izin verilen bir dizi koşul tanımlayın. Koşullar isteğe bağlı olarak belirli müşteri gruplarıyla sınırlandırılabilir. Ad tek zorunlu niteliktir. Başka bir seçenek belirtilmezse, tüm yapılandırma öğeleri bu kategori altında görünür olacaktır."
 
 #. SysConfig
+msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
+msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini silmek için Gerekli izinleri tanımlar."
+
+#. SysConfig
+msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
+msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini almak için Gerekli izinleri tanımlar."
+
+#. SysConfig
+msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
+msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini aramak için Gerekli izinleri tanımlar."
+
+#. SysConfig
+msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+msgstr "Genel Arayüzü kullanarak ITSM yapılandırma öğelerini ayarlamak için Gerekli izinleri tanımlar."
+
+#. SysConfig
+msgid "Defines an overview module to show the small view of a configuration item list."
+msgstr "Bir yapılandırma öğesi listesinin küçük görünümünü göstermek için bir genel bakış modülü tanımlar."
+
+#. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr "Bağlantı türü etiketlerinin düğüm bağlantılarında gösterilip gösterilmeyeceğini tanımlar."
+
+#. SysConfig
+msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
+msgstr "ConfigItem adını denetlemek ve ilgili hata iletilerini göstermek için her ConfigItem sınıfı için ayrı ayrı düzenli ifadeler tanımlar."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1454,12 +851,52 @@ msgid "Defines the default shown config item search attribute for config item se
 msgstr "Yapılandırma öğesi arama ekranı için varsayılan gösterilen yapılandırma öğesi arama niteliğini tanımlar. Örnek: \"Anahtar\" Dinamik Alanın adını içermelidir, bu durumda 'X', \"İçerik\" Dinamik Alan türüne bağlı olarak Dinamik Alanın değerini içermelidir, Metin: 'bir metin', Açılır menü: '1', Tarih/Saat: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' ve veya 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
+msgid "Defines the default subobject of the class 'ITSMConfigItem'."
+msgstr "'ITSMConfigItem' sınıfının varsayılan alt nesnesini tanımlar."
+
+#. SysConfig
+msgid "Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr "Bu ekran için zengin metin düzenleyici bileşeninin yüksekliğini tanımlar. Sayı (piksel) veya yüzde değeri (göreli) girin."
+
+#. SysConfig
+msgid "Defines the number of rows for the CI definition editor in the admin interface."
+msgstr "Yönetici arayüzündeki CI tanımı düzenleyicisi için satır sayısını tanımlar."
+
+#. SysConfig
+msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
+msgstr "Olay durumlarının yüksek (örn. krikital) ile düşük (örn. fonksiyonel) arasındaki sırasını tanımlar."
+
+#. SysConfig
+msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
+msgstr "Bağlantılı destek taleplerinin bir CI'nın durumunu etkileyebileceği ilgili dağıtım durumlarını tanımlar."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItem screen."
+msgstr "AgentITSMConfigItem ekranı için arama sınırını tanımlar."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgstr "AgentITSMConfigItemSearch ekranı için arama sınırını tanımlar."
+
+#. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
 msgstr "CustomerITSMConfigItem ekranı için arama sınırını tanımlar."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr "CustomerITSMConfigItemSearch ekranı için arama sınırını tanımlar."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
+msgstr "Tüm CI sınıfları için bağlantı tablosu karmaşık görünümünde CI'ların gösterilen sütunlarını tanımlar. Herhangi bir giriş yoksa, varsayılan sütunlar gösterilir."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
+msgstr "CI sınıfına bağlı olarak bağlantı tablosu karmaşık görünümünde CI'ların gösterilen sütunlarını tanımlar. Her girişin önüne sınıf adı ve çift iki nokta üst üste konulmalıdır (örneğin Bilgisayar::). Tüm CI'larda ortak olan birkaç CI-Özniteliği vardır (Bilgisayar sınıfı için örnek: Computer::Name, Computer::CurDeplState, Computer::CreateTime). CI-Tanımında tanımlandığı gibi bireysel CI-Özniteliklerini göstermek için aşağıdaki şema kullanılmalıdır (Bilgisayar sınıfı için örnek): Bilgisayar::HardDisk::1, Bilgisayar::HardDisk::1::Kapasite::1, Bilgisayar::HardDisk::2, Bilgisayar::HardDisk::2::Kapasite::1. Bir CI sınıfı için giriş yoksa, varsayılan sütunlar gösterilir."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
@@ -1474,16 +911,36 @@ msgid "Defines which items are available in second level of the ITSM Config Item
 msgstr "ITSM Config Item ACL yapısının ikinci seviyesinde hangi öğelerin mevcut olduğunu tanımlar."
 
 #. SysConfig
+msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
+msgstr "Hangi bağlantı türünün (bilet perspektifinden adlandırılan) bağlantılı bir CI'nın durumunu etkileyebileceğini tanımlar."
+
+#. SysConfig
+msgid "Defines which type of ticket can affect the status of a linked CI."
+msgstr "Bağlı bir CI'nın durumunu hangi tür biletlerin etkileyebileceğini tanımlar."
+
+#. SysConfig
 msgid "Definition Update"
 msgstr "Tanım Güncellemesi"
+
+#. SysConfig
+msgid "Delete Configuration Item"
+msgstr "Yapılandırma Öğesini Sil"
 
 #. SysConfig
 msgid "DeplState"
 msgstr "DeplState"
 
 #. SysConfig
+msgid "Deployment State Color"
+msgstr "Dağıtım Durumu Rengi"
+
+#. SysConfig
 msgid "DeploymentState"
 msgstr "DeploymentState"
+
+#. SysConfig
+msgid "Duplicate"
+msgstr "Yinelenen"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1502,8 +959,20 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "Temsilci arayüzünün yapılandırma öğesi arama ekranında gösterilen dinamik alanlar."
 
 #. SysConfig
+msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
+msgstr "Temsilci ön ucunun aynı anda birden fazla yapılandırma öğesi üzerinde çalışması için yapılandırma öğesi toplu eylem özelliğini etkinleştirir."
+
+#. SysConfig
+msgid "Enables configuration item bulk action feature only for the listed groups."
+msgstr "Yapılandırma öğesi toplu eylem özelliğini yalnızca listelenen gruplar için etkinleştirir."
+
+#. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr "ITSM yapılandırma öğelerini benzersiz adlar için kontrol etme işlevini etkinleştirir/devre dışı bırakır. Bu seçeneği etkinleştirmeden önce sisteminizde yinelenen adlara sahip yapılandırma öğeleri olup olmadığını kontrol etmelisiniz. Bunu Admin::ITSM::ConfigItem::ListDuplicates konsol komutu ile yapabilirsiniz."
+
+#. SysConfig
+msgid "Event module to set configitem-status on ticket-configitem-link."
+msgstr "Bilet-configitem-link üzerinde configitem-status ayarlamak için olay modülü."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
@@ -1518,12 +987,24 @@ msgid "For every webservice (key) an array of classes (value) can be defined on 
 msgstr "Her web hizmeti (anahtar) için, içe aktarmanın kısıtlandığı bir dizi sınıf (değer) tanımlanabilir. Seçilen tüm sınıflar veya mevcut tüm sınıflar için tanımlayıcı niteliklerin invoker yapılandırmasında seçilmesi gerekecektir."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemCreate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr "ConfigItemFetch çağırıcı katmanı için GenericInterface modül kaydı."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemUpdate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "ITSM ConfigItem"
 msgstr "ITSM ConfigItem"
+
+#. SysConfig
+msgid "ITSM config item overview."
+msgstr "ITSM yapılandırma öğesine genel bakış."
 
 #. SysConfig
 msgid "InciState"
@@ -1542,8 +1023,24 @@ msgid "Includes incident states in the config item search of the customer interf
 msgstr "Müşteri arayüzünün yapılandırma öğesi aramasına olay durumlarını dahil eder."
 
 #. SysConfig
+msgid "License accounting configuration item event module."
+msgstr ""
+
+#. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr "Bu işlemin sonucunda görüntülenecek maksimum yapılandırma öğesi sayısı."
+
+#. SysConfig
+msgid "Module to check the group responsible for a class."
+msgstr "Bir sınıftan sorumlu grubu kontrol etmek için modül."
+
+#. SysConfig
+msgid "Module to check the group responsible for a configuration item."
+msgstr "Bir yapılandırma öğesinden sorumlu grubu kontrol etmek için modül."
+
+#. SysConfig
+msgid "Module to generate ITSM config item statistics."
+msgstr "ITSM yapılandırma öğesi istatistikleri oluşturmak için modül."
 
 #. SysConfig
 msgid "Name Module"
@@ -1566,6 +1063,10 @@ msgid "Objects to search for, how many entries and which attributs to show. Conf
 msgstr "Aranacak nesneler, kaç giriş ve hangi özniteliklerin gösterileceği. ConfigItem özniteliklerinin Elasticsearch aracılığıyla açıkça depolanması gerekir."
 
 #. SysConfig
+msgid "Overview."
+msgstr "Genel bakış."
+
+#. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr "Temsilci arayüzünün tercihler görünümünde yapılandırma öğesi sınıfları kategorileri için parametreler."
 
@@ -1574,12 +1075,36 @@ msgid "Parameters for the column filters of the small config item overview. Plea
 msgstr "Küçük yapılandırma öğesine genel bakışın sütun filtreleri için parametreler. Lütfen dikkat: 'Aktif' değerini 0 olarak ayarlamak, temsilcilerin bu grubun ayarlarını kişisel tercihlerinde düzenlemelerini engeller, ancak yöneticilerin başka bir kullanıcı adına ayarları düzenlemelerine izin verir. Bu ayarların kullanıcı arayüzünde hangi alanda gösterileceğini kontrol etmek için 'PreferenceGroup' kullanın."
 
 #. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries per config item class shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the deployment states color in the preferences view of the agent interface."
+msgstr "Dağıtım durumları için parametreler, müşteri temsilcisi arayüzünün tercihler görünümünde renklendirilir."
+
+#. SysConfig
+msgid "Parameters for the deployment states in the preferences view of the agent interface."
+msgstr "Temsilci arayüzünün tercihler görünümündeki dağıtım durumları için parametreler."
+
+#. SysConfig
+msgid "Parameters for the example permission groups of the general catalog attributes."
+msgstr "Genel katalog özniteliklerinin örnek izin gruplarının parametreleri."
+
+#. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr "Temsilci arayüzünün tercihler görünümünde yapılandırma öğesi sınıfları için ad modülü parametreleri."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr "Temsilci arayüzünün tercihler görünümünde yapılandırma öğesi sınıfları için sayı modülü parametreleri."
+
+#. SysConfig
+msgid "Parameters for the pages (in which the configuration items are shown)."
+msgstr "Sayfalar için parametreler (yapılandırma öğelerinin gösterildiği)."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1598,8 +1123,20 @@ msgid "Performs the configured action for each event (as an Invoker) for each co
 msgstr "Yapılandırılmış her Webservice için her olay için (Invoker olarak) yapılandırılmış eylemi gerçekleştirir."
 
 #. SysConfig
+msgid "Permission Group"
+msgstr "İzin grubu"
+
+#. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ekleme eylemini kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi arama ekranını kullanmak için gerekli izinler."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
@@ -1610,16 +1147,104 @@ msgid "Required permissions to use the ITSM configuration item tree view screen 
 msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ağaç görünümü ekranını kullanmak için gerekli izinler."
 
 #. SysConfig
+msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi yakınlaştırma ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi ekleme ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr "Temsilci arayüzünde toplu ITSM yapılandırma öğesi ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi düzenleme ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
+msgstr "Temsilci arayüzünde geçmiş ITSM yapılandırma öğesi ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
+msgstr "Temsilci arayüzünde ITSM yapılandırma öğesi yazdır ekranını kullanmak için gerekli izinler."
+
+#. SysConfig
+msgid "Required privileges to delete config items."
+msgstr "Yapılandırma öğelerini silmek için gerekli ayrıcalıklar."
+
+#. SysConfig
+msgid "Search config items."
+msgstr "Yapılandırma öğelerini arayın."
+
+#. SysConfig
+msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr "Bir Bilet bir CI'ya Bağlandığında CI'nın olay durumunu otomatik olarak ayarlayın."
+
+#. SysConfig
+msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
+msgstr "Aracı arayüzünün yapılandırma öğesi toplu ekranında dağıtım durumunu ayarlar."
+
+#. SysConfig
+msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
+msgstr "Temsilci arayüzünün yapılandırma öğesi toplu ekranında olay durumunu ayarlar."
+
+#. SysConfig
+msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
+msgstr "Menüde, aracı arayüzünün yapılandırma öğesi yakınlaştırma görünümünde bir yapılandırma öğesini başka bir nesneyle ilişkilendirmeyi sağlayan bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
+msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümündeki bir yapılandırma öğesinin geçmişine erişmek için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesinin geçmişine erişmek için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini silmek için menüde bir bağlantı gösterir."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr "Yapılandırma öğesi bağlantılarını Ağaç Görünümü olarak görüntülemek için menüde bir bağlantı gösterir."
 
 #. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
+msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümünde bir yapılandırma öğesini çoğaltmak için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini çoğaltmak için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini düzenlemek için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yapılandırma öğesi yakınlaştırma görünümüne geri dönmek için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
+msgstr "Temsilci arayüzünün yakınlaştırma görünümünde bir yapılandırma öğesini yazdırmak için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
+msgstr "Temsilci arayüzünün yapılandırma öğesi genel görünümünde bir yapılandırma öğesini yakınlaştırmak için menüde bir bağlantı gösterir."
+
+#. SysConfig
+msgid "Shows the config item history (reverse ordered) in the agent interface."
+msgstr "Temsilci arayüzünde yapılandırma öğesi geçmişini (ters sıralı) gösterir."
+
+#. SysConfig
 msgid "The default category which is shown, if none is selected."
 msgstr "Hiçbiri seçilmemişse gösterilen varsayılan kategori."
+
+#. SysConfig
+msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
+msgstr "Bir yapılandırma öğesinin tanımlayıcısı, örneğin ConfigItem#, MyConfigItem#. Varsayılan ConfigItem#'dir."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
@@ -1638,6 +1263,10 @@ msgid "Version Trigger"
 msgstr "Sürüm Tetikleyici"
 
 #. SysConfig
+msgid "Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2)."
+msgstr ""
+
+#. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr "ConfigItemACL'nin yürütülmesinin önbelleğe alınmış alan bağımlılıklarını kontrol ederek önlenip önlenemeyeceği. Bu, formülerlerin yükleme sürelerini iyileştirebilir, ancak ACLModülleri ITSMConfigItem- ve Form-ReturnTypes için kullanılacaksa devre dışı bırakılmalıdır."
 
@@ -1645,1648 +1274,939 @@ msgstr "ConfigItemACL'nin yürütülmesinin önbelleğe alınmış alan bağıml
 msgid "Which general information is shown in the header."
 msgstr "Başlıkta hangi genel bilgiler gösterilir."
 
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "General invoker data"
-msgstr "Genel çağıran verileri"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "Bu OTOBO invoker arka uç modülü, uzak sisteme gönderilecek verileri hazırlamak ve yanıt verilerini işlemek için çağrılacaktır."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for outgoing request data"
-msgstr "Giden talep verileri için ayarlar"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Mapping"
-msgstr "Haritalama"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "OTOBO'yu çağırandan gelen veriler, uzak sistemin beklediği veri türüne dönüştürmek için bu eşleme tarafından işlenecektir."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr "Yanıt verileri, OTOBO'yu çağıranın beklediği veri türüne dönüştürmek için bu eşleme tarafından işlenecektir."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for incoming response data"
-msgstr "Gelen yanıt verileri için ayarlar"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Event data"
-msgstr "Etkinlik verileri"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Add Event"
-msgstr "Etkinlik Ekle"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr "Asenkron olay tetikleyicileri arka planda OTOBO Scheduler Daemon tarafından işlenir (önerilir)."
-
-#. Template: AdminITSMConfigItem
-msgid "Auto Indent Code"
-msgstr "Otomatik Girinti Kodu"
-
-#. Template: AdminITSMConfigItem
-msgid "Comment/Uncomment Code"
-msgstr "Yorum/Yorumsuz Kodu"
-
-#. Template: AdminITSMConfigItem
-msgid "Search & Replace"
-msgstr "Ara ve Değiştir"
-
-#. Template: AdminITSMConfigItem
-msgid "Select All"
-msgstr "Tümünü Seçin"
-
-#. Template: AdminITSMConfigItem
-msgid "Full Screen"
-msgstr "Tam Ekran"
-
-#. Template: CustomerITSMConfigItem
-msgid "ConfigItems"
-msgstr "ConfigItems"
-
-#. Template: CustomerITSMConfigItem
-msgid "Sort"
-msgstr "Sırala"
-
-#. Template: AdminACL
-msgid "Filter by valid state"
-msgstr "Geçerli duruma göre filtreleme"
-
-#. Template: AdminACL
-msgid "Include invalid ACLs"
-msgstr "Geçersiz ACL'leri dahil et"
-
-#. Template: AdminACLEdit
-msgid "Check the official %sdocumentation%s."
-msgstr "Resmi %sdocumentation%s belgesini kontrol edin."
-
-#. Template: AdminDynamicField
-msgid "Include invalid dynamic fields"
-msgstr "Geçersiz dinamik alanları dahil etme"
-
-#. Template: AdminDynamicField
-msgid "Filter field by object type"
-msgstr "Alanı nesne türüne göre filtreleme"
-
-#. Template: AdminDynamicField
-msgid "Filter field by namespace"
-msgstr "Alanı ad alanına göre filtreleme"
-
-#. Template: AdminDynamicField
-msgid "New Dynamic Fields"
-msgstr "Yeni Dinamik Alanlar"
-
-#. Template: AdminDynamicField
-msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr "Ek dinamik alan türlerinden yararlanmak ister misiniz? Aşağıdaki alan türlerine tam erişime sahipsiniz:"
-
-#. Template: AdminDynamicField
-msgid "Copy this field"
-msgstr "Bu alanı kopyala"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which will be searched on autocomplete"
-msgstr "Otomatik tamamlamada aranacak öznitelik"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "External-source key"
-msgstr "Harici kaynak anahtarı"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr "Harici bir kaynak (örn. web hizmeti veya içe/dışa aktarma) aracılığıyla ayarlandığında, değer bu öznitelik olarak yorumlanacaktır."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which is displayed for values"
-msgstr "Değerler için görüntülenen öznitelik"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the type of display"
-msgstr "Ekran türünü seçin"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr "Temel yapı geçerli değil. Lütfen YAML biçiminde veri içeren bir dizi sağlayın."
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr "ACL'ler bilinmeyen bir hata nedeniyle içe aktarılamadı, lütfen daha fazla bilgi için OTOBO günlüklerini kontrol edin"
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "%s (copy) %s"
-msgstr "%s (kopya) %s"
-
-#. SysConfig
-msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr "Belgeler için kullanılabilecek, dil başına minimum çeviri ilerlemesinin yüzdelik değeri."
-
-#. SysConfig
-msgid "Access repos via http or https."
-msgstr "Repolara http veya https üzerinden erişin."
-
-#. SysConfig
-msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr "Znuny4OTRSRepo uzantılarının otomatik yüklenmesi."
-
-#. SysConfig
-msgid "Backend module registration for the config conflict check module."
-msgstr "Yapılandırma çakışması kontrol modülü için arka uç modül kaydı."
-
-#. SysConfig
-msgid "Backend module registration for the file conflict check module."
-msgstr "Dosya çakışması kontrol modülü için arka uç modül kaydı."
-
-#. SysConfig
-msgid "Backend module registration for the function redefine check module."
-msgstr "Kontrol modülünü yeniden tanımla işlevi için arka uç modül kaydı."
-
-#. SysConfig
-msgid "Backend module registration for the manual set module."
-msgstr "Manuel set modülü için arka uç modül kaydı."
-
-#. SysConfig
-msgid "Block hooks to be created for BS ad removal."
-msgstr "BS reklam kaldırma için oluşturulacak kancaları engelleyin."
-
-#. SysConfig
-msgid "Block hooks to be created for package manager output filter."
-msgstr "Paket yöneticisi çıktı filtresi için oluşturulacak blok kancaları."
-
-#. SysConfig
-msgid "Branch View commit limit"
-msgstr "Branch View commit limiti"
-
-#. SysConfig
-msgid "CodePolicy"
-msgstr "CodePolicy"
-
-#. SysConfig
-msgid "Commit limit per page for Branch view screen"
-msgstr "Şube görünümü ekranı için sayfa başına taahhüt limiti"
-
-#. SysConfig
-msgid "Create analysis file"
-msgstr "Analiz dosyası oluşturun"
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr "Bu biletten bir analiz dosyası oluşturur ve Znuny'ye gönderir."
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket."
-msgstr "Bu biletten bir analiz dosyası oluşturur."
-
-#. SysConfig
-msgid "Define private addon repos."
-msgstr "Özel addon depolarını tanımlayın."
-
-#. SysConfig
-msgid "Defines the filter that processes the HTML templates."
-msgstr "HTML şablonlarını işleyen filtreyi tanımlar."
-
-#. SysConfig
-msgid "Defines the test module for checking code policy."
-msgstr "Kod ilkesini kontrol etmek için test modülünü tanımlar."
-
-#. SysConfig
-msgid "Definition of GIT clone/push URL Prefix."
-msgstr "GIT clone/push URL Önekinin tanımı."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Bir Dinamik Alanın tanımı: Group => Dinamik Alanlara erişimi olan grup; AlwaysVisible => Alan kaldırılabilir (0|1); InformationAreaName => Widget'ların adı; InformationAreaSize => Widget'ların boyutu ve konumu (Large|Small); Name => Kullanılması gereken Dinamik Alanın adı; Priority => Dinamik Alanların sırası; State => Alanların Durumu (0 = devre dışı, 1 = aktif, 2 = zorunlu), FilterRelease => Depo adının görüntülenmesi için eşleşmesi gereken Regex, FilterPackage => Paket adının görüntülenmesi için eşleşmesi gereken Regex, FilterBranch => Şube adının görüntülenmesi için eşleşmesi gereken Regex, FilterRelease => Repelase sürüm dizesinin görüntülenmesi için eşleşmesi gereken Regex."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Bir Dinamik Alanın tanımı: Group => Dinamik Alanlara erişimi olan grup; AlwaysVisible => Alan kaldırılabilir (0|1); InformationAreaName => Widget'ların adı; InformationAreaSize => Widget'ların boyutu ve konumu (Large|Small); Name => Kullanılması gereken Dinamik Alanın adı; Priority => Dinamik Alanların sırası; State => Alanların Durumu (0 = devre dışı, 1 = aktif, 2 = zorunlu), FilterRepository => Depo adının görüntülenmesi için eşleşmesi gereken Regex, FilterPackage => Paket adının görüntülenmesi için eşleşmesi gereken Regex, FilterBranch => Şube adının görüntülenmesi için eşleşmesi gereken Regex, FilterRelease => Repelase sürüm dizesinin görüntülenmesi için eşleşmesi gereken Regex."
-
-#. SysConfig
-msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr "Harici MD5 toplamlarının tanımı (anahtar => MD5, Değer => Satıcı, PaketAdı, Sürüm, Tarih)."
-
-#. SysConfig
-msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr "Genel depo talepleri ile dahili OPMS depoları arasındaki eşlemelerin tanımı."
-
-#. SysConfig
-msgid "Definition of package states."
-msgstr "Paket durumlarının tanımı."
-
-#. SysConfig
-msgid "Definition of renamed OPMS packages."
-msgstr "Yeniden adlandırılan OPMS paketlerinin tanımı."
-
-#. SysConfig
-msgid "Directory, which is used by Git to cache repositories."
-msgstr "Git tarafından depoları önbelleğe almak için kullanılan dizin."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store temporary data."
-msgstr "Git tarafından geçici verileri depolamak için kullanılan dizin."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store working copies."
-msgstr "Git tarafından çalışma kopyalarını depolamak için kullanılan dizin."
-
-#. SysConfig
-msgid "Disable online repositories."
-msgstr "Çevrimiçi depoları devre dışı bırakın."
-
-#. SysConfig
-msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr "Bu kullanıcılar için git ssh bağlantı yetkilendirme sonuçlarını günlüğe kaydetmeyin. Otomatikleştirilmiş şeyler için kullanışlıdır."
-
-#. SysConfig
-msgid "Dynamic Fields Screens"
-msgstr "Dinamik Alanlar Ekranları"
-
-#. SysConfig
-msgid "DynamicFieldScreen"
-msgstr "DynamicFieldScreen"
-
-#. SysConfig
-msgid "Export all available public keys to authorized_keys file."
-msgstr "Mevcut tüm açık anahtarları authorized_keys dosyasına aktarın."
-
-#. SysConfig
-msgid "Export all relevant releases to ftp server."
-msgstr "İlgili tüm sürümleri ftp sunucusuna aktarın."
-
-#. SysConfig
-msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr "Temsilci arayüzündeki OPMS nesnesi için ön uç modül kaydı."
-
-#. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr "PublicOPMSRepository nesnesi için genel arayüzde ön uç modül kaydı."
-
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr "Genel arayüzdeki PublicOPMSRepositoryLookup nesnesi için ön uç modül kaydı."
+msgid "class"
+msgstr "sınıf"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr "PublicOPMSTestBuild nesnesi için genel arayüzde ön uç modül kaydı."
+msgid "global"
+msgstr "küresel"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr "Genel arayüzdeki PublicPackageVerification nesnesi için ön uç modül kaydı."
+msgid "postproductive"
+msgstr "ÜREME SONRASI"
 
 #. SysConfig
-msgid "Frontend module registration for the admin interface."
-msgstr "Yönetici arayüzü için ön uç modül kaydı."
+msgid "preproductive"
+msgstr "ÜREME ÖNCESİ"
 
 #. SysConfig
-msgid "GIT Author registration."
-msgstr "GIT Yazar kaydı."
-
-#. SysConfig
-msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr "Filtrelerin kullanabilmesi için belirtilen bloklar için HTML yorum kancaları oluşturun."
-
-#. SysConfig
-msgid "Generate documentations once per night."
-msgstr "Her gece bir kez belge oluşturun."
-
-#. SysConfig
-msgid "Git"
-msgstr "Git"
-
-#. SysConfig
-msgid "Git Management"
-msgstr "Git Yönetimi"
-
-#. SysConfig
-msgid "Git Repository"
-msgstr "Git Deposu"
-
-#. SysConfig
-msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr "Üyeleri OPMS'de yönetici silme izinlerine sahip olan grup."
-
-#. SysConfig
-msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr "Üyeleri OPMS'de depo yöneticisi izinlerine sahip olan grup."
-
-#. SysConfig
-msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr "Üyeleri OPMS ekranlarında CI test sonucu bilgilerini görecek olan Grup."
-
-#. SysConfig
-msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr "Kimliği doğrulanmış bir kullanıcının (kullanıcı girişi ve parolası ile) genel arayüz üzerinden test paketleri oluşturmak için üye olması gereken gruplar."
-
-#. SysConfig
-msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr "OPMS depoları eklenirken git projesi oluşturma işlemleri sırasında ayarlanacak gruplar."
-
-#. SysConfig
-msgid "Manage dynamic field in screens."
-msgstr "Ekranlardaki dinamik alanı yönetin."
-
-#. SysConfig
-msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr "Git erişimi için genel SSH anahtar(lar)ınızı buradan yönetin. Yeni bir anahtar eklediğinizde bu tercihi kaydettiğinizden emin olun."
-
-#. SysConfig
-msgid "Module to generate statistics about the added code lines."
-msgstr "Eklenen kod satırları hakkında istatistikler oluşturmak için modül."
-
-#. SysConfig
-msgid "Module to generate statistics about the growth of code."
-msgstr "Kodun büyümesi hakkında istatistikler oluşturmak için modül."
-
-#. SysConfig
-msgid "Module to generate statistics about the number of git commits."
-msgstr "Git taahhütlerinin sayısı hakkında istatistik oluşturmak için modül."
-
-#. SysConfig
-msgid "Module to generate statistics about the removed code lines."
-msgstr "Kaldırılan kod satırları hakkında istatistikler oluşturmak için modül."
-
-#. SysConfig
-msgid "OPMS"
-msgstr "OPMS"
-
-#. SysConfig
-msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr "Yalnızca bu gruplardan birinde rw izinlerine sahip kullanıcılar git'e erişebilir."
-
-#. SysConfig
-msgid "Option to set a package compatibility manually."
-msgstr "Paket uyumluluğunu manuel olarak ayarlama seçeneği."
-
-#. SysConfig
-msgid "Parameters for the pages in the BranchView screen."
-msgstr "BranchView ekranındaki sayfalar için parametreler."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "'GITProjectName' Dinamik Alanının Ön Tanımlaması: Group => Dinamik Alanlara erişimi olan grup; AlwaysVisible => Alan kaldırılabilir (0|1); InformationAreaName => Widget'ların adı; InformationAreaSize => Widget'ların boyutu ve konumu (Large|Small); Name => Kullanılması gereken Dinamik Alanın adı; Priority => Dinamik Alanların sırası; State => Alanların Durumu (0 = devre dışı, 1 = aktif, 2 = zorunlu), FilterRepository => Depo adının görüntülenmesi için eşleşmesi gereken Regex, FilterPackage => Paket adının görüntülenmesi için eşleşmesi gereken Regex, FilterBranch => Şube adının görüntülenmesi için eşleşmesi gereken Regex, FilterRelease => Repelase sürüm dizesinin görüntülenmesi için eşleşmesi gereken Regex."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "'GITRepositoryName' Dinamik Alanının Ön Tanımı: Group => Dinamik Alanlara erişimi olan grup; AlwaysVisible => Alan kaldırılabilir (0|1); InformationAreaName => Widget'ların adı; InformationAreaSize => Widget'ların boyutu ve konumu (Large|Small); Name => Kullanılması gereken Dinamik Alanın adı; Priority => Dinamik Alanların sırası; State => Alanların Durumu (0 = devre dışı, 1 = aktif, 2 = zorunlu), FilterRepository => Depo adının görüntülenmesi için eşleşmesi gereken Regex, FilterPackage => Paket adının görüntülenmesi için eşleşmesi gereken Regex, FilterBranch => Şube adının görüntülenmesi için eşleşmesi gereken Regex, FilterRelease => Repelase sürüm dizesinin görüntülenmesi için eşleşmesi gereken Regex."
-
-#. SysConfig
-msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "'PackageDeprecated' Dinamik Alanının Ön Tanımı: Group => Dinamik Alanlara erişimi olan grup; AlwaysVisible => Alan kaldırılabilir (0|1); InformationAreaName => Widget'ların adı; InformationAreaSize => Widget'ların boyutu ve konumu (Large|Small); Name => Kullanılması gereken Dinamik Alanın adı; Priority => Dinamik Alanların sırası; State => Alanların Durumu (0 = devre dışı, 1 = aktif, 2 = zorunlu), FilterRepository => Depo adının görüntülenmesi için eşleşmesi gereken Regex, FilterPackage => Paket adının görüntülenmesi için eşleşmesi gereken Regex, FilterBranch => Şube adının görüntülenmesi için eşleşmesi gereken Regex, FilterRelease => Repelase sürüm dizesinin görüntülenmesi için eşleşmesi gereken Regex."
-
-#. SysConfig
-msgid "Recipients that will be informed by email in case of errors."
-msgstr "Hata durumunda e-posta ile bilgilendirilecek alıcılar."
-
-#. SysConfig
-msgid "SSH Keys for Git Access"
-msgstr "Git Erişimi için SSH Anahtarları"
-
-#. SysConfig
-msgid "Send analysis file"
-msgstr "Analiz dosyası gönder"
-
-#. SysConfig
-msgid "Sets the git clone address to be used in repository listings."
-msgstr "Depo listelerinde kullanılacak git clone adresini ayarlar."
-
-#. SysConfig
-msgid "Sets the home directory for git repositories."
-msgstr "git depoları için ana dizini ayarlar."
-
-#. SysConfig
-msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr "BugzillaAddComment post receive kod konumunun yolunu ayarlar."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "OTRSCodePolicy komut dosyası konumu için yolu ayarlar. OTRSCodePolicy modülünün cron aracılığıyla güncellenen ayrı bir klonunun olması önerilir."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "OTRSCodePolicy ön alma komut dosyası konumu için yolu ayarlar. OTRSCodePolicy modülünün cron aracılığıyla güncellenen ayrı bir klonunun olması önerilir."
-
-#. SysConfig
-msgid "Show latest commits in git repositories."
-msgstr "Git depolarındaki en son değişiklikleri gösterin."
-
-#. SysConfig
-msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr "Geçerli biletten bir birim testi oluşturmak için menüde bir bağlantı gösterir."
-
-#. SysConfig
-msgid "Synchronize OPMS tables with a remote database."
-msgstr "OPMS tablolarını uzak bir veritabanı ile senkronize edin."
-
-#. SysConfig
-msgid "The minimum version of the sphinx library."
-msgstr "Sphinx kütüphanesinin minimum sürümü."
-
-#. SysConfig
-msgid "The name of the sphinx theme to be used."
-msgstr "Kullanılacak sfenks temasının adı."
-
-#. SysConfig
-msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr "OTRS CSS dosyasının yolu (statik yolun altında göreli)."
-
-#. SysConfig
-msgid "The path to the OTRS logo (relative below the static path)."
-msgstr "OTRS logosuna giden yol (statik yolun altına göre)."
-
-#. SysConfig
-msgid "The path to the static folder, containing images and css files."
-msgstr "Görüntüleri ve css dosyalarını içeren statik klasörün yolu."
-
-#. SysConfig
-msgid "The path to the theme folder, containing the sphinx themes."
-msgstr "Sphinx temalarını içeren tema klasörünün yolu."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr "Bu yapılandırma, varsayılan sütunları etkinleştirmek veya devre dışı bırakmak için tüm olası ekranları tanımlar."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr "Bu yapılandırma, dinamik alanları etkinleştirmek veya devre dışı bırakmak için tüm olası ekranları tanımlar."
-
-#. SysConfig
-msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr "Bu yapılandırma, dinamik alanların yalnızca değerlerinin mi yoksa tümünün mü (geçersizler) gösterileceğini tanımlar."
-
-#. SysConfig
-msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr "Bu yapılandırma, OTRS paket doğrulamasının etkin mi yoksa devre dışı mı olması gerektiğini tanımlar. Devre dışı bırakılırsa tüm paketler doğrulanmış olarak gösterilir. Yine de yalnızca doğrulanmış paketlerin kullanılması önerilir."
-
-#. SysConfig
-msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr "Bu yapılandırma, OTRS CloudService Proxy hizmetinin URL'sini tanımlar. SysConfig 'Znuny4OTRSRepoType' seçimine bağlı olarak http veya https öneki eklenecektir."
-
-#. SysConfig
-msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr "Bu yapılandırma, paket doğrulamasını genişletmek için bir Çıkış son filtresi kaydeder."
-
-#. SysConfig
-msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr "Bu yapılandırma, OTRS Business Solution TM reklamlarını kaldıran bir OutputFilter modülünü kaydeder."
-
-#. SysConfig
-msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr "Bu yapılandırma, paket yöneticisinde çevrimiçi depo seçimini gizlemek için bir çıktı filtresi kaydeder."
-
-#. SysConfig
-msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr "Uzun süre test pomülleri kontrollerinden geçmeyen işlenmemiş sürümü düzenleyin."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr "Bu gruplardan birinde rw iznine sahip olan kullanıcılar 'git push --force' force push işlemini gerçekleştirebilirler."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr "Bu gruplardan birinde rw izinlerine sahip olan kullanıcıların projeleri yönetmesine izin verilir. Ayrıca üyelerin git yönetimi için yönetim izinleri vardır."
-
-#. ITSM class bundles
-msgid "1"
-msgstr "1"
-
-#. ITSM class bundles
-msgid "1 GB"
-msgstr "1 GB"
-
-#. ITSM class bundles
-msgid "1024 GB"
-msgstr "1024 GB"
-
-#. ITSM class bundles
-msgid "10U: 17.5 inches (44.45 cm)"
-msgstr "10U: 17,5 inç (44,45 cm)"
-
-#. ITSM class bundles
-msgid "11 GB"
-msgstr "11 GB"
-
-#. ITSM class bundles
-msgid "12 GB"
-msgstr "12 GB"
-
-#. ITSM class bundles
-msgid "128 GB"
-msgstr "128 GB"
-
-#. ITSM class bundles
-msgid "12U: 21 inches (53.34 cm)"
-msgstr "12U: 21 inç (53,34 cm)"
-
-#. ITSM class bundles
-msgid "15U: 26.25 inches (66.68 cm)"
-msgstr "15U: 26,25 inç (66,68 cm)"
-
-#. ITSM class bundles
-msgid "16 GB"
-msgstr "16 GB"
-
-#. ITSM class bundles
-msgid "18U: 31.5 inches (80.01 cm)"
-msgstr "18U: 31,5 inç (80,01 cm)"
-
-#. ITSM class bundles
-msgid "19-inch Rack"
-msgstr "19 inç Raf"
-
-#. ITSM class bundles
-msgid "1U: 1.75 inches (4.45 cm)"
-msgstr "1U: 1,75 inç (4,45 cm)"
-
-#. ITSM class bundles
-msgid "2"
-msgstr "2"
-
-#. ITSM class bundles
-msgid "2 GB"
-msgstr "2 GB"
-
-#. ITSM class bundles
-msgid "20U: 35 inches (88.9 cm)"
-msgstr "20U: 35 inç (88,9 cm)"
-
-#. ITSM class bundles
-msgid "21-inch Rack"
-msgstr "21 inç Raf"
-
-#. ITSM class bundles
-msgid "22U: 38.5 inches (97.79 cm)"
-msgstr "22U: 38,5 inç (97,79 cm)"
-
-#. ITSM class bundles
-msgid "23-inch Rack"
-msgstr "23 inç Raf"
-
-#. ITSM class bundles
-msgid "23.6 inches (600 mm)"
-msgstr "23,6 inç (600 mm)"
-
-#. ITSM class bundles
-msgid "24 GB"
-msgstr "24 GB"
-
-#. ITSM class bundles
-msgid "24U: 42 inches (106.68 cm)"
-msgstr "24U: 42 inç (106,68 cm)"
-
-#. ITSM class bundles
-msgid "256 GB"
-msgstr "256 GB"
-
-#. ITSM class bundles
-msgid "27\""
-msgstr "27\""
-
-#. ITSM class bundles
-msgid "27U: 47.25 inches (120.02 cm)"
-msgstr "27U: 47,25 inç (120,02 cm)"
-
-#. ITSM class bundles
-msgid "2K (2048 x 1080)"
-msgstr "2K (2048 x 1080)"
-
-#. ITSM class bundles
-msgid "2U: 3.5 inches (8.89 cm)"
-msgstr "2U: 3,5 inç (8,89 cm)"
-
-#. ITSM class bundles
-msgid "3"
-msgstr "3"
-
-#. ITSM class bundles
-msgid "30U: 52.5 inches (133.35 cm)"
-msgstr "30U: 52,5 inç (133,35 cm)"
-
-#. ITSM class bundles
-msgid "31.5 inches (800 mm)"
-msgstr "31,5 inç (800 mm)"
-
-#. ITSM class bundles
-msgid "32 GB"
-msgstr "32 GB"
-
-#. ITSM class bundles
-msgid "32\""
-msgstr "32\""
-
-#. ITSM class bundles
-msgid "33U: 57.75 inches (146.68 cm)"
-msgstr "33U: 57,75 inç (146,68 cm)"
-
-#. ITSM class bundles
-msgid "34\""
-msgstr "34\""
-
-#. ITSM class bundles
-msgid "35\""
-msgstr "35\""
-
-#. ITSM class bundles
-msgid "35.4 inches (900 mm)"
-msgstr "35,4 inç (900 mm)"
-
-#. ITSM class bundles
-msgid "36U: 63 inches (160.02 cm)"
-msgstr "36U: 63 inç (160,02 cm)"
-
-#. ITSM class bundles
-msgid "39.4 inches (1000 mm)"
-msgstr "39,4 inç (1000 mm)"
-
-#. ITSM class bundles
-msgid "39U: 68.25 inches (173.35 cm)"
-msgstr "39U: 68,25 inç (173,35 cm)"
-
-#. ITSM class bundles
-msgid "3U: 5.25 inches (13.34 cm)"
-msgstr "3U: 5,25 inç (13,34 cm)"
-
-#. ITSM class bundles
-msgid "4"
-msgstr "4"
-
-#. ITSM class bundles
-msgid "4 GB"
-msgstr "4 GB"
-
-#. ITSM class bundles
-msgid "40\""
-msgstr "40\""
-
-#. ITSM class bundles
-msgid "42U: 73.5 inches (186.69 cm)"
-msgstr "42U: 73,5 inç (186,69 cm)"
-
-#. ITSM class bundles
-msgid "43\""
-msgstr "43\""
-
-#. ITSM class bundles
-msgid "43.3 inches (1100 mm):"
-msgstr "43,3 inç (1100 mm):"
-
-#. ITSM class bundles
-msgid "45U: 78.75 inches (200.02 cm)"
-msgstr "45U: 78,75 inç (200,02 cm)"
-
-#. ITSM class bundles
-msgid "47.2 inches (1200 mm)"
-msgstr "47,2 inç (1200 mm)"
-
-#. ITSM class bundles
-msgid "48 GB"
-msgstr "48 GB"
-
-#. ITSM class bundles
-msgid "48U: 84 inches (213.36 cm)"
-msgstr "48U: 84 inç (213,36 cm)"
-
-#. ITSM class bundles
-msgid "49\""
-msgstr "49\""
-
-#. ITSM class bundles
-msgid "4K Ultra HD (3840 x 2160):"
-msgstr "4K Ultra HD (3840 x 2160):"
-
-#. ITSM class bundles
-msgid "4U: 7 inches (17.78 cm)"
-msgstr "4U: 7 inç (17,78 cm)"
-
-#. ITSM class bundles
-msgid "5"
-msgstr "5"
-
-#. ITSM class bundles
-msgid "512 GB"
-msgstr "512 GB"
-
-#. ITSM class bundles
-msgid "55\""
-msgstr "55\""
-
-#. ITSM class bundles
-msgid "5K (5120 x 2880)"
-msgstr "5K (5120 x 2880)"
-
-#. ITSM class bundles
-msgid "5U: 8.75 inches (22.23 cm)"
-msgstr "5U: 8,75 inç (22,23 cm)"
-
-#. ITSM class bundles
-msgid "6"
-msgstr "6"
-
-#. ITSM class bundles
-msgid "64 GB"
-msgstr "64 GB"
-
-#. ITSM class bundles
-msgid "6U: 10.5 inches (26.67 cm)"
-msgstr "6U: 10,5 inç (26,67 cm)"
-
-#. ITSM class bundles
-msgid "7"
-msgstr "7"
-
-#. ITSM class bundles
-msgid "7U: 12.25 inches (31.12 cm)"
-msgstr "7U: 12,25 inç (31,12 cm)"
-
-#. ITSM class bundles
-msgid "8"
-msgstr "8"
-
-#. ITSM class bundles
-msgid "8 GB"
-msgstr "8 GB"
-
-#. ITSM class bundles
-msgid "8K Ultra HD (7680 x 4320)"
-msgstr "8K Ultra HD (7680 x 4320)"
-
-#. ITSM class bundles
-msgid "8U: 14 inches (35.56 cm)"
-msgstr "8U: 14 inç (35,56 cm)"
-
-#. ITSM class bundles
-msgid "9"
-msgstr "9"
-
-#. ITSM class bundles
-msgid "96 GB"
-msgstr "96 GB"
-
-#. ITSM class bundles
-msgid "9U: 15.75 inches (40.01 cm)"
-msgstr "9U: 15,75 inç (40,01 cm)"
-
-#. ITSM class bundles
-msgid "AGP"
-msgstr "AGP"
-
-#. ITSM class bundles
-msgid "Accounting"
-msgstr "Muhasebe"
-
-#. ITSM class bundles
-msgid "Address Allocation"
-msgstr "Adres Tahsisi"
-
-#. ITSM class bundles
-msgid "Administrator"
-msgstr "Yönetici"
-
-#. ITSM class bundles
-msgid "Appliance Type"
-msgstr "Cihaz Tipi"
-
-#. ITSM class bundles
-msgid "Backlinks"
-msgstr "Geri Bağlantılar"
-
-#. ITSM class bundles
-msgid "Battery Capacity (Ah)"
-msgstr "Akü Kapasitesi (Ah)"
-
-#. ITSM class bundles
-msgid "Battery Type"
-msgstr "Pil Tipi"
-
-#. ITSM class bundles
-msgid "Bus Interface"
-msgstr "Otobüs Arayüzü"
-
-#. ITSM class bundles
-msgid "CIDR"
-msgstr "CIDR"
-
-#. ITSM class bundles
-msgid "CPU Class"
-msgstr "CPU Sınıfı"
-
-#. ITSM class bundles
-msgid "Capacity (GB)"
-msgstr "Kapasite (GB)"
-
-#. ITSM class bundles
-msgid "Capacity per graphics card"
-msgstr "Grafik kartı başına kapasite"
-
-#. ITSM class bundles
-msgid "Card Number"
-msgstr "Kart Numarası"
-
-#. ITSM class bundles
-msgid "Card Type"
-msgstr "Kart Tipi"
-
-#. ITSM class bundles
-msgid "Chroma DB"
-msgstr "Chroma DB"
-
-#. ITSM class bundles
-msgid "Client Certificates"
-msgstr "Müşteri Sertifikaları"
-
-#. ITSM class bundles
-msgid "Client Software"
-msgstr "Müşteri Yazılımı"
-
-#. ITSM class bundles
-msgid "Client category"
-msgstr "Müşteri kategorisi"
-
-#. ITSM class bundles
-msgid "Clockrate"
-msgstr "Saat Hızı"
-
-#. ITSM class bundles
-msgid "Clockspeed"
-msgstr "Saat Hızı"
-
-#. ITSM class bundles
-msgid "Code Signing Certificates"
-msgstr "Kod İmzalama Sertifikaları"
-
-#. ITSM class bundles
-msgid "Contact"
-msgstr "İletişim"
-
-#. ITSM class bundles
-msgid "Contact Distributor"
-msgstr "Distribütörle İletişime Geçin"
-
-#. ITSM class bundles
-msgid "Contract"
-msgstr "Sözleşme"
-
-#. ITSM class bundles
-msgid "Contract Type"
-msgstr "Sözleşme Türü"
-
-#. ITSM class bundles
-msgid "Contract period from"
-msgstr "Sözleşme süresi"
-
-#. ITSM class bundles
-msgid "Contract period until"
-msgstr "Sözleşme süresi"
-
-#. ITSM class bundles
-msgid "Cost unit"
-msgstr "Maliyet birimi"
-
-#. ITSM class bundles
-msgid "Count of licenses"
-msgstr "Ruhsat sayısı"
-
-#. ITSM class bundles
-msgid "Creation Date"
-msgstr "Oluşturulma Tarihi"
-
-#. ITSM class bundles
-msgid "Custom Rack"
-msgstr "Özel Raf"
-
-#. ITSM class bundles
-msgid "DHCP"
-msgstr "DHCP"
-
-#. ITSM class bundles
-msgid "DHCP Reserved"
-msgstr "DHCP Ayrılmış"
-
-#. ITSM class bundles
-msgid "DVI"
-msgstr "DVI"
-
-#. ITSM class bundles
-msgid "Date of Invoice"
-msgstr "Fatura Tarihi"
-
-#. ITSM class bundles
-msgid "Date of Order"
-msgstr "Sipariş Tarihi"
-
-#. ITSM class bundles
-msgid "Date of Warranty"
-msgstr "Teminat Tarihi"
-
-#. ITSM class bundles
-msgid "Date of release"
-msgstr "Yayınlanma tarihi"
-
-#. ITSM class bundles
-msgid "DisplayPort"
-msgstr "DisplayPort"
-
-#. ITSM class bundles
-msgid "Document Signing Certificates"
-msgstr "Belge İmzalama Sertifikaları"
-
-#. ITSM class bundles
-msgid "EISA"
-msgstr "EISA"
-
-#. ITSM class bundles
-msgid "ETSI Rack"
-msgstr "ETSI Rafı"
-
-#. ITSM class bundles
-msgid "Elasticsearch"
-msgstr "Elasticsearch"
-
-#. ITSM class bundles
-msgid "Email Certificates (S/MIME Certificates)"
-msgstr "E-posta Sertifikaları (S/MIME Sertifikaları)"
-
-#. ITSM class bundles
-msgid "End IP Address"
-msgstr "Son IP Adresi"
-
-#. ITSM class bundles
-msgid "End of support"
-msgstr "Desteğin sonu"
-
-#. ITSM class bundles
-msgid "Expiry Date"
-msgstr "Son Kullanma Tarihi"
-
-#. ITSM class bundles
-msgid "FireWire (IEEE 1394)"
-msgstr "FireWire (IEEE 1394)"
-
-#. ITSM class bundles
-msgid "Firmware"
-msgstr "Ürün Yazılımı"
-
-#. ITSM class bundles
-msgid "Flywheel Energy Storage"
-msgstr "Volan Enerji Depolama"
-
-#. ITSM class bundles
-msgid "Form Factor"
-msgstr "Form Faktörü"
-
-#. ITSM class bundles
-msgid "Full HD (1920 x 1080)"
-msgstr "Full HD (1920 x 1080)"
-
-#. ITSM class bundles
-msgid "General Information"
-msgstr "Genel Bilgiler"
-
-#. ITSM class bundles
-msgid "Graphics Cards"
-msgstr "Grafik Kartları"
-
-#. ITSM class bundles
-msgid "Graphics card"
-msgstr "Grafik kartı"
-
-#. ITSM class bundles
-msgid "HD (1280 x 720)"
-msgstr "HD (1280 x 720)"
-
-#. ITSM class bundles
-msgid "HDMI"
-msgstr "HDMI"
-
-#. ITSM class bundles
-msgid "Hardware Model"
-msgstr "Donanım Modeli"
-
-#. ITSM class bundles
-msgid "Hardware Weight"
-msgstr "Donanım Ağırlığı"
-
-#. ITSM class bundles
-msgid "IBM Db2"
-msgstr "IBM Db2"
-
-#. ITSM class bundles
-msgid "IP Protocol"
-msgstr "IP Protokolü"
-
-#. ITSM class bundles
-msgid "IPv4"
-msgstr "IPv4"
-
-#. ITSM class bundles
-msgid "IPv6"
-msgstr "IPv6"
-
-#. ITSM class bundles
-msgid "ISA"
-msgstr "ISA"
-
-#. ITSM class bundles
-msgid "Inventory Number"
-msgstr "Envanter Numarası"
-
-#. ITSM class bundles
-msgid "Inverstment costs"
-msgstr "Yatırım maliyetleri"
-
-#. ITSM class bundles
-msgid "Invoice Number"
-msgstr "Fatura Numarası"
-
-#. ITSM class bundles
-msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr "LCD Monitör (Sıvı Kristal Ekran)"
-
-#. ITSM class bundles
-msgid "LED Monitor (Light Emitting Diode)"
-msgstr "LED Monitör (Işık Yayan Diyot)"
-
-#. ITSM class bundles
-msgid "LPC (Low Pin Count)"
-msgstr "LPC (Düşük Pin Sayısı)"
-
-#. ITSM class bundles
-msgid "Latitude"
-msgstr "Enlem"
-
-#. ITSM class bundles
-msgid "Layer 1: Physical Layer"
-msgstr "Katman 1: Fiziksel Katman"
-
-#. ITSM class bundles
-msgid "Layer 2: Data Link Layer"
-msgstr "Katman 2: Veri Bağlantı Katmanı"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer"
-msgstr "Katman 3: Ağ Katmanı"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer (Supernet)"
-msgstr "Katman 3: Ağ Katmanı (Supernet)"
-
-#. ITSM class bundles
-msgid "Layer 4: Transport Layer"
-msgstr "Katman 4: Taşıma Katmanı"
-
-#. ITSM class bundles
-msgid "Layer 5: Session Layer"
-msgstr "Katman 5: Oturum Katmanı"
-
-#. ITSM class bundles
-msgid "Layer 6: Presentation Layer"
-msgstr "Katman 6: Sunum Katmanı"
-
-#. ITSM class bundles
-msgid "Layer 7: Application Layer"
-msgstr "Katman 7: Uygulama Katmanı"
-
-#. ITSM class bundles
-msgid "License Key"
-msgstr "Lisans Anahtarı"
-
-#. ITSM class bundles
-msgid "License Type"
-msgstr "Lisans Türü"
-
-#. ITSM class bundles
-msgid "License period from"
-msgstr "Lisans süresi"
-
-#. ITSM class bundles
-msgid "License period until"
-msgstr "Şu tarihe kadar lisans süresi"
-
-#. ITSM class bundles
-msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr "Lityum Demir Fosfat (LiFePO4) Pil"
-
-#. ITSM class bundles
-msgid "Lithium-Ion (Li-ion) Battery"
-msgstr "Lityum İyon (Li-ion) Pil"
-
-#. ITSM class bundles
-msgid "Located in"
-msgstr "İçinde bulunan"
-
-#. ITSM class bundles
-msgid "Longitude"
-msgstr "Boylam"
-
-#. ITSM class bundles
-msgid "MCA (Micro Channel Architecture)"
-msgstr "MCA (Mikro Kanal Mimarisi)"
-
-#. ITSM class bundles
-msgid "Manufacturer"
-msgstr "Üretici firma"
-
-#. ITSM class bundles
-msgid "MariaDB"
-msgstr "MariaDB"
-
-#. ITSM class bundles
-msgid "Maximum Load Capacity (W)"
-msgstr "Maksimum Yük Kapasitesi (W)"
-
-#. ITSM class bundles
-msgid "Memory"
-msgstr "Hafıza"
-
-#. ITSM class bundles
-msgid "Memory Type"
-msgstr "Bellek Türü"
-
-#. ITSM class bundles
-msgid "Microsoft SQL Server"
-msgstr "Microsoft SQL Server"
-
-#. ITSM class bundles
-msgid "Mini-Rack"
-msgstr "Mini Raf"
-
-#. ITSM class bundles
-msgid "Mobile Number"
-msgstr "Cep Telefonu Numarası"
-
-#. ITSM class bundles
-msgid "Model Description"
-msgstr "Model Açıklaması"
-
-#. ITSM class bundles
-msgid "MongoDB"
-msgstr "MongoDB"
-
-#. ITSM class bundles
-msgid "Monitor Resolution"
-msgstr "Monitör Çözünürlüğü"
-
-#. ITSM class bundles
-msgid "Monitor Size"
-msgstr "Monitör Boyutu"
-
-#. ITSM class bundles
-msgid "MySQL"
-msgstr "MySQL"
-
-#. ITSM class bundles
-msgid "Network Info"
-msgstr "Ağ Bilgisi"
-
-#. ITSM class bundles
-msgid "Network Information"
-msgstr "Ağ Bilgileri"
-
-#. ITSM class bundles
-msgid "Network Layer"
-msgstr "Ağ Katmanı"
-
-#. ITSM class bundles
-msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr "Nikel-Kadmiyum (NiCd) Pil"
-
-#. ITSM class bundles
-msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr "Nikel-Metal Hidrit (NiMH) Pil"
-
-#. ITSM class bundles
-msgid "NuBus"
-msgstr "NuBus"
-
-#. ITSM class bundles
-msgid "Number of CPUs"
-msgstr "CPU sayısı"
-
-#. ITSM class bundles
-msgid "Number of RAM modules"
-msgstr "RAM modülü sayısı"
-
-#. ITSM class bundles
-msgid "Number of graphics cards"
-msgstr "Grafik kartı sayısı"
-
-#. ITSM class bundles
-msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr "OLED Monitör (Organik Işık Yayan Diyot)"
-
-#. ITSM class bundles
-msgid "Operating costs"
-msgstr "İşletme maliyetleri"
-
-#. ITSM class bundles
-msgid "Oracle Database"
-msgstr "Oracle Veritabanı"
-
-#. ITSM class bundles
-msgid "Order Number"
-msgstr "Sipariş Numarası"
-
-#. ITSM class bundles
-msgid "Outputs"
-msgstr "Çıktılar"
-
-#. ITSM class bundles
-msgid "PCI"
-msgstr "PCI"
-
-#. ITSM class bundles
-msgid "PCI Express (PCIe)"
-msgstr "PCI Express (PCIe)"
-
-#. ITSM class bundles
-msgid "PCI-X"
-msgstr "PCI-X"
-
-#. ITSM class bundles
-msgid "PIN"
-msgstr "PIN"
-
-#. ITSM class bundles
-msgid "PIN 2"
-msgstr "PIN 2"
-
-#. ITSM class bundles
-msgid "PUK"
-msgstr "PUK"
-
-#. ITSM class bundles
-msgid "PUK 2"
-msgstr "PUK 2"
-
-#. ITSM class bundles
-msgid "Phone Number"
-msgstr "Telefon Numarası"
-
-#. ITSM class bundles
-msgid "Phone Type"
-msgstr "Telefon Tipi"
-
-#. ITSM class bundles
-msgid "Physical Cores"
-msgstr "Fiziksel Çekirdekler"
-
-#. ITSM class bundles
-msgid "PostgreSQL"
-msgstr "PostgreSQL"
-
-#. ITSM class bundles
-msgid "Power Delivery"
-msgstr "Güç Dağıtımı"
-
-#. ITSM class bundles
-msgid "Purchased at"
-msgstr "Şuradan satın alındı"
-
-#. ITSM class bundles
-msgid "Quad HD (2560 x 1440)"
-msgstr "Quad HD (2560 x 1440)"
-
-#. ITSM class bundles
-msgid "Rack Depth"
-msgstr "Raf Derinliği"
-
-#. ITSM class bundles
-msgid "Rack Units (U)"
-msgstr "Raf Üniteleri (U)"
-
-#. ITSM class bundles
-msgid "Redis"
-msgstr "Redis"
-
-#. ITSM class bundles
-msgid "Reference to Customer"
-msgstr "Müşteriye Referans"
-
-#. ITSM class bundles
-msgid "SIM Card"
-msgstr "SIM Kart"
-
-#. ITSM class bundles
-msgid "SQLite"
-msgstr "SQLite"
-
-#. ITSM class bundles
-msgid "SSL/TLS Certificates"
-msgstr "SSL/TLS Sertifikaları"
-
-#. ITSM class bundles
-msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr "Sızdırmaz Kurşun-Asit (SLA) Akü"
-
-#. ITSM class bundles
-msgid "Serialnumber"
-msgstr "Seri numarası"
-
-#. ITSM class bundles
-msgid "Server Software"
-msgstr "Sunucu Yazılımı"
-
-#. ITSM class bundles
-msgid "Service Tag"
-msgstr "Servis Etiketi"
-
-#. ITSM class bundles
-msgid "Socket Type"
-msgstr "Soket Tipi"
-
-#. ITSM class bundles
-msgid "Start IP Address"
-msgstr "Başlangıç IP Adresi"
-
-#. ITSM class bundles
-msgid "Storage"
-msgstr "Depolama"
-
-#. ITSM class bundles
-msgid "Storage Partition"
-msgstr "Depolama Bölümü"
-
-#. ITSM class bundles
-msgid "Subsidiary"
-msgstr "Bağlı Ortaklık"
+msgid "productive"
+msgstr "üretken"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Summary"
 msgstr "Özet"
 
-#. ITSM class bundles
-msgid "Threads"
-msgstr "İplikler"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Info"
+msgstr "Ağ Bilgisi"
 
-#. ITSM class bundles
-msgid "Thunderbolt"
-msgstr "Thunderbolt"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting"
+msgstr "Muhasebe"
 
-#. ITSM class bundles
-msgid "Total Graphics card RAM (GB)"
-msgstr "Toplam Grafik kartı RAM'i (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Located in"
+msgstr "İçinde bulunan"
 
-#. ITSM class bundles
-msgid "Total RAM (GB)"
-msgstr "Toplam RAM (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Order"
+msgstr "Sipariş Tarihi"
 
-#. ITSM class bundles
-msgid "Touchscreen Monitor"
-msgstr "Dokunmatik Ekran Monitörü"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Information"
+msgstr "Ağ Bilgileri"
 
-#. ITSM class bundles
-msgid "Tower"
-msgstr "Kule"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Operating costs"
+msgstr "İşletme maliyetleri"
 
-#. ITSM class bundles
-msgid "USB (Universal Serial Bus)"
-msgstr "USB (Evrensel Seri Veri Yolu)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Tag"
+msgstr "Servis Etiketi"
 
-#. ITSM class bundles
-msgid "USB-C"
-msgstr "USB-C"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Warranty"
+msgstr "Teminat Tarihi"
 
-#. ITSM class bundles
-msgid "UWQHD (3440 x 1440)"
-msgstr "UWQHD (3440 x 1440)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Manufacturer"
+msgstr "Üretici firma"
 
-#. ITSM class bundles
-msgid "VESA Local Bus (VLB)"
-msgstr "VESA Yerel Veri Yolu (VLB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model Description"
+msgstr "Model Açıklaması"
 
-#. ITSM class bundles
-msgid "VGA"
-msgstr "VGA"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact Distributor"
+msgstr "Distribütörle İletişime Geçin"
 
-#. ITSM class bundles
-msgid "VirtualLink"
-msgstr "VirtualLink"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Appliance Type"
+msgstr "Cihaz Tipi"
 
-#. ITSM class bundles
-msgid "WUXGA (1920 x 1200)"
-msgstr "WUXGA (1920 x 1200)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone / VoIP"
+msgstr ""
 
-#. ITSM class bundles
-msgid "WXGA (1366 x 768)"
-msgstr "WXGA (1366 x 768)"
-
-#. ITSM class bundles
-msgid "Analog Phone"
-msgstr "Analog Telefon"
-
-#. ITSM class bundles
-msgid "Card Reader"
-msgstr "Kart Okuyucu"
-
-#. ITSM class bundles
-msgid "Conference Phone"
-msgstr "Konferans Telefonu"
-
-#. ITSM class bundles
-msgid "Consulting Agreement"
-msgstr "Danışmanlık Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Container Management"
-msgstr "Konteyner Yönetimi"
-
-#. ITSM class bundles
-msgid "Cordless Phone (DECT Phone)"
-msgstr "Kablosuz Telefon (DECT Telefon)"
-
-#. ITSM class bundles
-msgid "DNS-Server"
-msgstr "DNS Sunucusu"
-
-#. ITSM class bundles
-msgid "Employment Contract"
-msgstr "İş Sözleşmesi"
-
-#. ITSM class bundles
-msgid "External Hard Drive"
-msgstr "Harici Sabit Sürücü"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Firewall"
 msgstr "Güvenlik Duvarı"
 
-#. ITSM class bundles
-msgid "Franchise Agreement"
-msgstr "Franchise Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Headset"
-msgstr "Kulaklık"
-
-#. ITSM class bundles
-msgid "Identity and Access Management (IAM)"
-msgstr "Kimlik ve Erişim Yönetimi (IAM)"
-
-#. ITSM class bundles
-msgid "Landline Phone"
-msgstr "Sabit Telefon"
-
-#. ITSM class bundles
-msgid "Lease Agreement"
-msgstr "Kira Sözleşmesi"
-
-#. ITSM class bundles
-msgid "License Agreement"
-msgstr "Lisans Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Loan Agreement"
-msgstr "Kredi Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Mobile/Embedded"
-msgstr "Mobil/Embedded"
-
-#. ITSM class bundles
-msgid "Non-Disclosure Agreement (NDA)"
-msgstr "Gizlilik Sözleşmesi (NDA)"
-
-#. ITSM class bundles
-msgid "Notebook"
-msgstr "Not Defteri"
-
-#. ITSM class bundles
-msgid "OTOBO"
-msgstr "OTOBO"
-
-#. ITSM class bundles
-msgid "Partnership Agreement"
-msgstr "Ortaklık Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Phone / VOIP"
-msgstr "Telefon / VOIP"
-
-#. ITSM class bundles
-msgid "Sales Contract"
-msgstr "Satış Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Satellite Phone"
-msgstr "Uydu Telefonu"
-
-#. ITSM class bundles
-msgid "Service Agreement"
-msgstr "Hizmet Sözleşmesi"
-
-#. ITSM class bundles
-msgid "Speakers"
-msgstr "Konuşmacılar"
-
-#. ITSM class bundles
-msgid "Thin Client"
-msgstr "İnce İstemci"
-
-#. ITSM class bundles
-msgid "USB Hub"
-msgstr "USB Hub"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VPN"
 msgstr "VPN"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DNS-Server"
+msgstr "DNS Sunucusu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Container Management"
+msgstr "Konteyner Yönetimi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Identity and Access Management (IAM)"
+msgstr "Kimlik ve Erişim Yönetimi (IAM)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Other"
+msgstr "Diğer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Order Number"
+msgstr "Sipariş Numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cost unit"
+msgstr "Maliyet birimi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Invoice"
+msgstr "Fatura Tarihi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model"
+msgstr "Model"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Purchased at"
+msgstr "Şuradan satın alındı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Invoice Number"
+msgstr "Fatura Numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Administrator"
+msgstr "Yönetici"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inverstment costs"
+msgstr "Yatırım maliyetleri"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inventory Number"
+msgstr "Envanter Numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Serialnumber"
+msgstr "Seri numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subsidiary"
+msgstr "Bağlı Ortaklık"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SSL/TLS Certificates"
+msgstr "SSL/TLS Sertifikaları"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Code Signing Certificates"
+msgstr "Kod İmzalama Sertifikaları"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Email Certificates (S/MIME Certificates)"
+msgstr "E-posta Sertifikaları (S/MIME Sertifikaları)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Document Signing Certificates"
+msgstr "Belge İmzalama Sertifikaları"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Certificates"
+msgstr "Müşteri Sertifikaları"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creation Date"
+msgstr "Oluşturulma Tarihi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Expiry Date"
+msgstr "Son Kullanma Tarihi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware"
+msgstr "Donanım"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Software"
+msgstr "Yazılım"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of graphics cards"
+msgstr "Grafik kartı sayısı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total Graphics card RAM (GB)"
+msgstr "Toplam Grafik kartı RAM'i (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client category"
+msgstr "Müşteri kategorisi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Notebook"
+msgstr "Not Defteri"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Desktop"
+msgstr "Masaüstü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Virtual Client"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thin Client"
+msgstr "İnce İstemci"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage Partition"
+msgstr "Depolama Bölümü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Count"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Physical Cores"
+msgstr "Fiziksel Çekirdekler"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage"
+msgstr "Depolama"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Outputs"
+msgstr "Çıktılar"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DVI"
+msgstr "DVI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VGA"
+msgstr "VGA"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "HDMI"
+msgstr "HDMI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VirtualLink"
+msgstr "VirtualLink"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DisplayPort"
+msgstr "DisplayPort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB-C"
+msgstr "USB-C"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory Type"
+msgstr "Bellek Türü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Bus Interface"
+msgstr "Otobüs Arayüzü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics card"
+msgstr "Grafik kartı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Threads"
+msgstr "İplikler"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity per graphics card"
+msgstr "Grafik kartı başına kapasite"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockrate"
+msgstr "Saat Hızı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockspeed"
+msgstr "Saat Hızı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Software"
+msgstr "Müşteri Yazılımı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period from"
+msgstr "Lisans süresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total RAM (GB)"
+msgstr "Toplam RAM (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of RAM modules"
+msgstr "RAM modülü sayısı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of CPUs"
+msgstr "CPU sayısı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity (GB)"
+msgstr "Kapasite (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Socket Type"
+msgstr "Soket Tipi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU Class"
+msgstr "CPU Sınıfı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile/Embedded"
+msgstr "Mobil/Embedded"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Laptop"
+msgstr "Dizüstü Bilgisayar"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Type"
+msgstr "Lisans Türü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period until"
+msgstr "Şu tarihe kadar lisans süresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Firmware"
+msgstr "Ürün Yazılımı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract Type"
+msgstr "Sözleşme Türü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Agreement"
+msgstr "Hizmet Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Non-Disclosure Agreement (NDA)"
+msgstr "Gizlilik Sözleşmesi (NDA)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Agreement"
+msgstr "Lisans Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Franchise Agreement"
+msgstr "Franchise Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Loan Agreement"
+msgstr "Kredi Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Consulting Agreement"
+msgstr "Danışmanlık Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lease Agreement"
+msgstr "Kira Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Employment Contract"
+msgstr "İş Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sales Contract"
+msgstr "Satış Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Partnership Agreement"
+msgstr "Ortaklık Sözleşmesi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period until"
+msgstr "Sözleşme süresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period from"
+msgstr "Sözleşme süresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End of support"
+msgstr "Desteğin sonu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of release"
+msgstr "Yayınlanma tarihi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Size"
+msgstr "Monitör Boyutu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Power Delivery"
+msgstr "Güç Dağıtımı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Touchscreen Monitor"
+msgstr "Dokunmatik Ekran Monitörü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LED Monitor (Light Emitting Diode)"
+msgstr "LED Monitör (Işık Yayan Diyot)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "OLED Monitor (Organic Light Emitting Diode)"
+msgstr "OLED Monitör (Organik Işık Yayan Diyot)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LCD Monitor (Liquid Crystal Display)"
+msgstr "LCD Monitör (Sıvı Kristal Ekran)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Resolution"
+msgstr "Monitör Çözünürlüğü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CIDR"
+msgstr "CIDR"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Start IP Address"
+msgstr "Başlangıç IP Adresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Layer"
+msgstr "Ağ Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 2: Data Link Layer"
+msgstr "Katman 2: Veri Bağlantı Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 5: Session Layer"
+msgstr "Katman 5: Oturum Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 7: Application Layer"
+msgstr "Katman 7: Uygulama Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer (Supernet)"
+msgstr "Katman 3: Ağ Katmanı (Supernet)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 6: Presentation Layer"
+msgstr "Katman 6: Sunum Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 1: Physical Layer"
+msgstr "Katman 1: Fiziksel Katman"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer"
+msgstr "Katman 3: Ağ Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 4: Transport Layer"
+msgstr "Katman 4: Taşıma Katmanı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End IP Address"
+msgstr "Son IP Adresi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "IP Protocol"
+msgstr "IP Protokolü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Address Allocation"
+msgstr "Adres Tahsisi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP Reserved"
+msgstr "DHCP Ayrılmış"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP"
+msgstr "DHCP"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact"
+msgstr "İletişim"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract"
+msgstr "Sözleşme"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU"
+msgstr "CPU"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Form Factor"
+msgstr "Form Faktörü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "General Information"
+msgstr "Genel Bilgiler"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics Cards"
+msgstr "Grafik Kartları"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory"
+msgstr "Hafıza"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Model"
+msgstr "Donanım Modeli"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network"
+msgstr "Şebeke"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Server Software"
+msgstr "Sunucu Yazılımı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SIM Card"
+msgstr "SIM Kart"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Count of licenses"
+msgstr "Ruhsat sayısı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Seat licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MIT Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MPL (Mozilla Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creative Commons"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Perpetual licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "EPL (Eclipse Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "BSD Lizenz (Berkeley Software Distribution License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "AGPL (Affero General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Freeware"
+msgstr "Ücretsiz yazılım"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subscription-based licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CC0 (Creative Commons Zero)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "GPL (General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Public Domain"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Volume licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Apache Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Shareware"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LGPL (Lesser General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Key"
+msgstr "Lisans Anahtarı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile Number"
+msgstr "Cep Telefonu Numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Reader"
+msgstr "Kart Okuyucu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VR Headset"
 msgstr "VR Kulaklık"
 
-#. ITSM class bundles
-msgid "VoIP Phone"
-msgstr "VoIP Telefon"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Headset"
+msgstr "Kulaklık"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "External Hard Drive"
+msgstr "Harici Sabit Sürücü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Speakers"
+msgstr "Konuşmacılar"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB Hub"
+msgstr "USB Hub"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mouse"
+msgstr "Fare"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Keyboard"
+msgstr "Klavye"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Webcam"
 msgstr "Web kamerası"
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version number of this config item"
-msgstr "Bu yapılandırma öğesinin sürüm numarası"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Number"
+msgstr "Telefon Numarası"
 
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Importing classes/roles and their related fields"
-msgstr "Sınıfları/rolleri ve ilgili alanları içe aktarma"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Type"
+msgstr "Telefon Tipi"
 
-#. SysConfig
-msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Temsilci arayüzünün yapılandırma öğesi arama sonucu genel bakışında filtrelenebilen sütunlar. Not: Yalnızca Yapılandırma Öğesi özniteliklerine ve Dinamik Alanlara (DynamicField_NameX) izin verilir."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VoIP Phone"
+msgstr "VoIP Telefon"
 
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr "Temel yapı geçerli değil. Lütfen YAML biçiminde veri içeren bir karma girin."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Satellite Phone"
+msgstr "Uydu Telefonu"
 
-#. SysConfig
-msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr "Belirli bir zaman noktasında, yapılandırılan gereksinimler karşılanırsa yapılandırma öğeleri için bir bilet oluşturun. Zaman noktası, ConfigItem'ın \"TimeCIKey\" altında yapılandırılan alanın değeri tarafından belirlenir ve \"TimeModifier\" tarafından değiştirilir. İkincisi sadece bir sayı veya bir işaret (+/-), bir sayı ve bir birim (d/h/m) olabilir: \"7\", \"+7d\" ile eşdeğerdir. DynamicField \"Ticket->DynamicField\" oluşturulan biletleri işaretlemek için kullanılacaktır - var olması gerekir. X'in İSİM, SAYI ve TARİH olabileceği \\\\<OTOBO_CONFIGITEM_X\\\\> bayrakları \"Ticket->Text\" içinde ilgili değerlerle değiştirilecektir."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Analog Phone"
+msgstr "Analog Telefon"
 
-#. SysConfig
-msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr "OTOBOCILicenseCount özelliği için lisansları sayan konfigürasyon öğesi olay modülü."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Conference Phone"
+msgstr "Konferans Telefonu"
 
-#. SysConfig
-msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr "Belirli zaman noktalarında ConfigItems için Biletler oluşturur."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cordless Phone (DECT Phone)"
+msgstr "Kablosuz Telefon (DECT Telefon)"
 
-#. SysConfig
-msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr "Bu seçenek etkinleştirilirse, bağlantılı öğeler yalnızca listelenen sınıflardan birine aitlerse sayılır."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Landline Phone"
+msgstr "Sabit Telefon"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr "Bu seçenekle, mevcut DependsOn türüne sahip bağlantılı CI'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Depth"
+msgstr "Raf Derinliği"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr "Bu seçenekle, bağlantılı CI'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23.6 inches (600 mm)"
+msgstr "23,6 inç (600 mm)"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr "Bu seçenekle, bağlantılı CI'ların sayısına bağlı olarak bir CI alanını otomatik olarak doldurmak mümkündür. CounterClassName ayarı sınıfın adını içerir ve CounterFieldName kullanılan lisans sayısını saklamak için kullanılır."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39.4 inches (1000 mm)"
+msgstr "39,4 inç (1000 mm)"
 
-#. SysConfig
-msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr "Zengin metin düzenleyici bileşeni için başlangıç yüksekliğini piksel cinsinden tanımlar."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "47.2 inches (1200 mm)"
+msgstr "47,2 inç (1200 mm)"
 
-#. SysConfig
-msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr "Kuyruklar ve hizmetler için ebeveyn-çocuk çevirilerinin otomatik olarak oluşturulup oluşturulmayacağını tanımlar."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "35.4 inches (900 mm)"
+msgstr "35,4 inç (900 mm)"
 
-#. SysConfig
-msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr "Bu ekran için zengin metin düzenleyici bileşeninin piksel cinsinden ilk yüksekliğini tanımlar."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "31.5 inches (800 mm)"
+msgstr "31,5 inç (800 mm)"
 
-#. SysConfig
-msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr "Bu ekran için zengin metin düzenleyici bileşeninin yüksekliğini tanımlar. Sayı (piksel) veya yüzde değeri (göreli) girin."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "43.3 inches (1100 mm):"
+msgstr "43,3 inç (1100 mm):"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "General operation data"
-msgstr "Genel çalışma verileri"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Units (U)"
+msgstr "Raf Üniteleri (U)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for incoming request data"
-msgstr "Gelen talep verileri için ayarlar"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "2U: 3.5 inches (8.89 cm)"
+msgstr "2U: 3,5 inç (8,89 cm)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for outgoing response data"
-msgstr "Giden yanıt verileri için ayarlar"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "45U: 78.75 inches (200.02 cm)"
+msgstr "45U: 78,75 inç (200,02 cm)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Import/Export attachments (as the last entries per line)"
-msgstr "Ekleri içe/dışa aktarma (satır başına son girişler olarak)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "1U: 1.75 inches (4.45 cm)"
+msgstr "1U: 1,75 inç (4,45 cm)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Version String"
-msgstr "Sürüm Dizesi"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "10U: 17.5 inches (44.45 cm)"
+msgstr "10U: 17,5 inç (44,45 cm)"
 
-#. SysConfig
-msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39U: 68.25 inches (173.35 cm)"
+msgstr "39U: 68,25 inç (173,35 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "20U: 35 inches (88.9 cm)"
+msgstr "20U: 35 inç (88,9 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "4U: 7 inches (17.78 cm)"
+msgstr "4U: 7 inç (17,78 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "15U: 26.25 inches (66.68 cm)"
+msgstr "15U: 26,25 inç (66,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "36U: 63 inches (160.02 cm)"
+msgstr "36U: 63 inç (160,02 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "24U: 42 inches (106.68 cm)"
+msgstr "24U: 42 inç (106,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "7U: 12.25 inches (31.12 cm)"
+msgstr "7U: 12,25 inç (31,12 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "9U: 15.75 inches (40.01 cm)"
+msgstr "9U: 15,75 inç (40,01 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "8U: 14 inches (35.56 cm)"
+msgstr "8U: 14 inç (35,56 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "12U: 21 inches (53.34 cm)"
+msgstr "12U: 21 inç (53,34 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "30U: 52.5 inches (133.35 cm)"
+msgstr "30U: 52,5 inç (133,35 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "22U: 38.5 inches (97.79 cm)"
+msgstr "22U: 38,5 inç (97,79 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "48U: 84 inches (213.36 cm)"
+msgstr "48U: 84 inç (213,36 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "5U: 8.75 inches (22.23 cm)"
+msgstr "5U: 8,75 inç (22,23 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "6U: 10.5 inches (26.67 cm)"
+msgstr "6U: 10,5 inç (26,67 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "42U: 73.5 inches (186.69 cm)"
+msgstr "42U: 73,5 inç (186,69 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "33U: 57.75 inches (146.68 cm)"
+msgstr "33U: 57,75 inç (146,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "3U: 5.25 inches (13.34 cm)"
+msgstr "3U: 5,25 inç (13,34 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "27U: 47.25 inches (120.02 cm)"
+msgstr "27U: 47,25 inç (120,02 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "18U: 31.5 inches (80.01 cm)"
+msgstr "18U: 31,5 inç (80,01 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "ETSI Rack"
+msgstr "ETSI Rafı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23-inch Rack"
+msgstr "23 inç Raf"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "21-inch Rack"
+msgstr "21 inç Raf"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Custom Rack"
+msgstr "Özel Raf"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Tower"
+msgstr "Kule"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mini-Rack"
+msgstr "Mini Raf"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "19-inch Rack"
+msgstr "19 inç Raf"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Weight"
+msgstr "Donanım Ağırlığı"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Room"
+msgstr "Oda"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Building"
+msgstr "Bina"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Type"
+msgstr "Kart Tipi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Micro SIM"
 msgstr ""
-"Genel Arayüzü kullanarak ITSM yapılandırma öğelerini ayarlamak için Gerekli "
-"izinleri tanımlar."
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Standard SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nano SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Embedded SIM (eSIM)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK 2"
+msgstr "PUK 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Number"
+msgstr "Kart Numarası"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN"
+msgstr "PIN"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN 2"
+msgstr "PIN 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK"
+msgstr "PUK"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Longitude"
+msgstr "Boylam"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Latitude"
+msgstr "Enlem"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Type"
+msgstr "Pil Tipi"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium-Ion (Li-ion) Battery"
+msgstr "Lityum İyon (Li-ion) Pil"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium Iron Phosphate (LiFePO4) Battery"
+msgstr "Lityum Demir Fosfat (LiFePO4) Pil"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Metal Hydride (NiMH) Battery"
+msgstr "Nikel-Metal Hidrit (NiMH) Pil"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sealed Lead-Acid (SLA) Battery"
+msgstr "Sızdırmaz Kurşun-Asit (SLA) Akü"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Cadmium (NiCd) Battery"
+msgstr "Nikel-Kadmiyum (NiCd) Pil"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Flywheel Energy Storage"
+msgstr "Volan Enerji Depolama"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Capacity (Ah)"
+msgstr "Akü Kapasitesi (Ah)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Maximum Load Capacity (W)"
+msgstr "Maksimum Yük Kapasitesi (W)"
+

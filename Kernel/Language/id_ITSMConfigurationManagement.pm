@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Data operasi umum';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Pengaturan untuk data permintaan yang masuk';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Pengaturan untuk data respons keluar';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Pengelolaan item konfigurasi';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Jenis Objek';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Kelas-kelas berikut akan diimpor';
     $Self->{Translation}->{'The following roles will be imported'} = 'Peran-peran berikut ini akan diimpor';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Nama diperbarui (baru = %s, lama = %s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Atribut %s diperbarui dari "%s" menjadi "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Versi %s dihapus';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Tidak ada ConfigItemID atau VersionID yang diberikan!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID% tidak ditemukan dalam database!';
     $Self->{Translation}->{'ConfigItem'} = 'ItemKonfigurasi';
     $Self->{Translation}->{'printed by %s at %s'} = 'dicetak oleh%s pada%s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'ClassID tidak valid!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Pembatasan kelas untuk item konfigurasi';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Pilih satu kelas atau lebih untuk membatasi item konfigurasi yang dapat dipilih';
-    $Self->{Translation}->{'Link type'} = 'Jenis tautan';
-    $Self->{Translation}->{'Select the link type.'} = 'Pilih jenis tautan.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Ke depan: Merujuk (Sumber) -> Merujuk (Target)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Mundur: Merujuk (Sumber) -> Merujuk (Target)';
-    $Self->{Translation}->{'Link Direction'} = 'Arah Tautan';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Objek yang direferensikan adalah objek yang berisi bidang dinamis ini, objek yang direferensikan adalah objek yang dipilih sebagai nilai bidang dinamis.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dinamis (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statis (Versi)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Jenis Referensi Tautan';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Jumlah maksimum dari 1 elemen';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Bidang kosong mengindikasikan bahwa nilai saat ini disimpan';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Dilewati';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Lampiran Impor/Ekspor (sebagai entri terakhir per baris)';
+    $Self->{Translation}->{'Version String'} = 'String Versi';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Kesalahan menyinkronkan definisi. Silakan periksa log.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Tersembunyi';
     $Self->{Translation}->{'1 - Shown'} = '1 - Ditampilkan';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Memungkinkan kondisi pencarian yang diperluas dalam pencarian item konfigurasi pada antarmuka agen. Dengan fitur ini, Anda dapat mencari, misalnya nama item konfigurasi dengan kondisi seperti ini, seperti "(*key1*&&*key2*)" atau "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Memungkinkan kondisi pencarian yang diperluas dalam pencarian item konfigurasi pada antarmuka pelanggan. Dengan fitur ini, Anda dapat mencari, misalnya nama item konfigurasi dengan kondisi seperti ini seperti "(*key1*&&*key2*)" atau "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'CI yang ditugaskan';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Pada titik waktu tertentu, buatlah tiket untuk item konfigurasi, jika persyaratan yang dikonfigurasi terpenuhi. Titik waktu ditentukan oleh nilai bidang yang dikonfigurasi di bawah "TimeCIKey" pada ConfigItem, dan dimodifikasi oleh "TimeModifier". Jika yang terakhir ini dapat berupa angka, atau tanda (+/-), angka, dan unit (d/h/m): "7" setara dengan "+7d". DynamicField "Ticket->DynamicField" akan digunakan untuk menandai tiket yang telah dibuat - harus ada. Bendera \<OTOBO_CONFIGITEM_X\> di mana X dapat berupa NAMA, NOMOR dan TANGGAL, akan digantikan dengan nilai masing-masing di "Ticket->Text".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI yang ditugaskan ke perusahaan pelanggan';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI yang diberikan kepada pengguna pelanggan';
     $Self->{Translation}->{'CMDB Settings'} = 'Pengaturan CMDB';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Filter item konfigurasi kolom untuk Ikhtisar Item Konfigurasi.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka agen. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolom yang dapat difilter dalam ikhtisar item konfigurasi pada antarmuka pelanggan. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolom yang dapat difilter dalam ikhtisar hasil pencarian item konfigurasi pada antarmuka agen. Catatan: Hanya atribut Item Konfigurasi dan Bidang Dinamis (DynamicField_NameX) yang diperbolehkan.';
     $Self->{Translation}->{'Config Items'} = 'item konfigurasi';
     $Self->{Translation}->{'Config item add.'} = 'Tambah item konfigurasi.';
     $Self->{Translation}->{'Config item edit.'} = 'Edit item konfigurasi.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Modul peristiwa item konfigurasi yang menghitung lisensi untuk fitur OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Modul peristiwa item konfigurasi yang mengaktifkan logging ke riwayat pada antarmuka agen';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Modul peristiwa item konfigurasi yang memperbarui item konfigurasi ke definisi saat ini.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Modul peristiwa item konfigurasi yang memperbarui tabel configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Modul peristiwa item konfigurasi memperbarui status insiden saat ini.';
     $Self->{Translation}->{'Config item history.'} = 'Riwayat item konfigurasi.';
     $Self->{Translation}->{'Config item print.'} = 'Cetak item konfigurasi.';
     $Self->{Translation}->{'Config item zoom.'} = 'Zoom item konfigurasi.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Modul massal item konfigurasi.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Router pencarian backend item konfigurasi pada antarmuka agen';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Buat dan atur definisi - definisi untuk item konfigurasi';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Membuat Tiket untuk ConfigItems pada titik waktu tertentu.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Pelanggan dapat melihat versi CI historis.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Definisikan izin yang di butuhkan untuk mencari item konfigurasi ITSM dengan menggunakan antarmuka umum.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Mendefinisikan izin yang diperlukan untuk mengatur item konfigurasi ITSM menggunakan Antarmuka Generik.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definisikan modul gambaran untuk menunjukan tampilan kecil dari sebuah daftar item konfigurasi';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Menentukan atribut pencarian item konfigurasi yang ditampilkan secara default untuk layar pencarian item konfigurasi. Contoh: "Key" harus memiliki nama Bidang Dinamis dalam hal ini \'X\', "Content" harus memiliki nilai Bidang Dinamis tergantung pada jenis Bidang Dinamis, Teks: \'teks\', Dropdown: \'1\', Tanggal/Waktu: \'Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth = 01; Search_DynamicField_XTimeSlotStartDay = 26; Search_DynamicField_XTimeSlotStartHour = 00; Search_DynamicField_XTimeSlotStartMinute = 00; Search_DynamicField_XTimeSlotStartSecond = 00; Search_DynamicField_XTimeSlotStopYear = 2013; Search_DynamicField_XTimeSlotStopMonth = 01; Search_DynamicField_XTimeSlotStopDay = 26; Search_DynamicField_XTimeSlotStopHour = 23; Search_DynamicField_XTimeSlotStopMinute = 59; Search_DynamicField_XTimeSlotStopSecond = 59;\' dan atau \'Search_DynamicField_XTimePointFormat = minggu; Search_DynamicField_XTimePointStart = Sebelum; Search_DynamicField_XTimePointValue = 7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definisikan subobjek default dari kelas \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Mendefinisikan tinggi untuk komponen editor teks kaya untuk layar ini. Masukkan nomor (piksel) atau nilai persen (relatif).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Bidang yang disimpan dalam indeks item konfigurasi yang digunakan untuk hal-hal lain selain pencarian teks lengkap. Untuk fungsionalitas yang lengkap, semua bidang wajib diisi.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Untuk setiap layanan web (key), sebuah larik kelas (value) dapat didefinisikan di mana impor dibatasi. Untuk semua kelas yang dipilih, atau semua kelas yang ada, atribut pengenal harus dipilih dalam konfigurasi pemanggil.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Registrasi modul GenericInterface untuk lapisan pemanggil ConfigItemFetch.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'Item Konfigurasi ITSM';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Ikhtisar item konfigurasi ITSM.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Jika opsi ini diaktifkan, item yang ditautkan hanya dihitung jika item tersebut termasuk dalam salah satu kelas yang terdaftar.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'StatusInsiden';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Termasuk status penerapan dalam pencarian item konfigurasi pada antarmuka pelanggan.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Termasuk status insiden dalam pencarian item konfigurasi pada antarmuka pelanggan.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Jumlah maksimum item konfigurasi yang akan ditampilkan dalam hasil operasi ini.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul untuk memeriksa kelompok yang bertanggung jawab untuk kelas.';
@@ -443,8 +452,10 @@ sub Data {
         'Parameter untuk kategori untuk kelas item konfigurasi di tampilan preferensi antarmuka agen.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parameter untuk filter kolom pada ikhtisar item konfigurasi kecil. Harap diperhatikan: mengatur \'Active\' ke 0 hanya akan mencegah agen mengedit pengaturan grup ini dalam preferensi pribadi mereka, tetapi masih memungkinkan administrator untuk mengedit pengaturan atas nama pengguna lain. Gunakan \'PreferenceGroup\' untuk mengontrol di area mana pengaturan ini harus ditampilkan di antarmuka pengguna.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parameter untuk backend dasbor dari ikhtisar item konfigurasi perusahaan pelanggan dari antarmuka agen. "Limit" adalah jumlah entri yang ditampilkan secara default. "Group" digunakan untuk membatasi akses ke plugin (mis. Group: admin; group1; group2;). "Default" menentukan apakah plugin diaktifkan secara default atau jika pengguna perlu mengaktifkannya secara manual. "CacheTTLLocal" adalah waktu cache dalam hitungan menit untuk plugin.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parameter untuk warna state penyebaran dalam preferensi melihat antarmuka agen.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Ekspresi String Versi';
     $Self->{Translation}->{'Version String Module'} = 'Modul String Versi';
     $Self->{Translation}->{'Version Trigger'} = 'Pemicu Versi';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Apakah eksekusi ConfigItemACL dapat dihindari dengan memeriksa ketergantungan bidang yang di-cache. Hal ini dapat meningkatkan waktu pemuatan formular, tetapi harus dinonaktifkan, jika ACLModules akan digunakan untuk ITSMConfigItem dan Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Informasi umum mana yang ditampilkan di header.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Dengan opsi ini, dimungkinkan untuk mengisi bidang CI secara otomatis, tergantung pada jumlah CI yang ditautkan dengan tipe DependsOn yang ada.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Dengan opsi ini, dimungkinkan untuk mengisi kolom CI secara otomatis, tergantung pada jumlah CI yang ditautkan.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Dengan opsi ini, dimungkinkan untuk mengisi bidang CI secara otomatis, tergantung pada jumlah CI yang ditautkan. Pengaturan CounterClassName menyertakan nama kelas dan CounterFieldName digunakan untuk menyimpan jumlah lisensi yang digunakan.';
     $Self->{Translation}->{'class'} = 'kelas';
     $Self->{Translation}->{'global'} = 'global';
     $Self->{Translation}->{'postproductive'} = 'pascaproduktif';
     $Self->{Translation}->{'preproductive'} = 'praproduktif';
     $Self->{Translation}->{'productive'} = 'produktif';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 inci (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 inci (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 inci (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 inci (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = 'Rak 19 inci';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 1,75 inci (4,45 cm)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 inci (88,9 cm)';
+    $Self->{Translation}->{'21-inch Rack'} = 'Rak 21 inci';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 inci (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = 'Rak 23 inci';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 inci (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 inci (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 inci (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 inci (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 inci (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 inci (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 inci (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 inci (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 inci (160,02 cm)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 inci (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 inci (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 5,25 inci (13,34 cm)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 inci (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 inci (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 78,75 inci (200,02 cm)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 inci (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 inci (213,36 cm)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 inci (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 inci (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 inci (26,67 cm)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 inci (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 inci (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 inci (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Akuntansi';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Alokasi Alamat';
+    $Self->{Translation}->{'Administrator'} = 'Administrator';
+    $Self->{Translation}->{'Analog Phone'} = 'Telepon Analog';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Jenis Alat';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Kapasitas Baterai (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Jenis Baterai';
+    $Self->{Translation}->{'Building'} = 'Membangun';
+    $Self->{Translation}->{'Bus Interface'} = 'Antarmuka Bus';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'Kelas CPU';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Kapasitas (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Kapasitas per kartu grafis';
+    $Self->{Translation}->{'Card Number'} = 'Nomor Kartu';
+    $Self->{Translation}->{'Card Reader'} = 'Pembaca Kartu';
+    $Self->{Translation}->{'Card Type'} = 'Jenis Kartu';
+    $Self->{Translation}->{'Client Certificates'} = 'Sertifikat Klien';
+    $Self->{Translation}->{'Client Software'} = 'Perangkat Lunak Klien';
+    $Self->{Translation}->{'Client category'} = 'Kategori klien';
+    $Self->{Translation}->{'Clockrate'} = 'Clockrate';
+    $Self->{Translation}->{'Clockspeed'} = 'Kecepatan jam';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Sertifikat Penandatanganan Kode';
+    $Self->{Translation}->{'Conference Phone'} = 'Telepon Konferensi';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Perjanjian Konsultasi';
+    $Self->{Translation}->{'Contact'} = 'Kontak';
+    $Self->{Translation}->{'Contact Distributor'} = 'Hubungi Distributor';
+    $Self->{Translation}->{'Container Management'} = 'Manajemen Kontainer';
+    $Self->{Translation}->{'Contract'} = 'Kontrak';
+    $Self->{Translation}->{'Contract Type'} = 'Jenis Kontrak';
+    $Self->{Translation}->{'Contract period from'} = 'Jangka waktu kontrak dari';
+    $Self->{Translation}->{'Contract period until'} = 'Jangka waktu kontrak sampai dengan';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Telepon Tanpa Kabel (Telepon DECT)';
+    $Self->{Translation}->{'Cost unit'} = 'Unit biaya';
+    $Self->{Translation}->{'Count of licenses'} = 'Jumlah lisensi';
+    $Self->{Translation}->{'Creation Date'} = 'Tanggal Pembuatan';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Rak Khusus';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Dicadangkan';
+    $Self->{Translation}->{'DNS-Server'} = 'Server DNS';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Tanggal Faktur';
+    $Self->{Translation}->{'Date of Order'} = 'Tanggal Pemesanan';
+    $Self->{Translation}->{'Date of Warranty'} = 'Tanggal Waran';
+    $Self->{Translation}->{'Date of release'} = 'Tanggal rilis';
+    $Self->{Translation}->{'Desktop'} = 'Desktop';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Sertifikat Penandatanganan Dokumen';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'Rak ETSI';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'Sertifikat Email (Sertifikat S/MIME)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Kontrak Kerja';
+    $Self->{Translation}->{'End IP Address'} = 'Alamat IP Akhir';
+    $Self->{Translation}->{'End of support'} = 'Akhir dukungan';
+    $Self->{Translation}->{'Expiry Date'} = 'Tanggal Kedaluwarsa';
+    $Self->{Translation}->{'External Hard Drive'} = 'Hard Drive Eksternal';
+    $Self->{Translation}->{'Firewall'} = 'Firewall';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Penyimpanan Energi Roda Gila';
+    $Self->{Translation}->{'Form Factor'} = 'Faktor Bentuk';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Perjanjian Waralaba';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Informasi Umum';
+    $Self->{Translation}->{'Graphics Cards'} = 'Kartu Grafis';
+    $Self->{Translation}->{'Graphics card'} = 'Kartu grafis';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Perangkat keras';
+    $Self->{Translation}->{'Hardware Model'} = 'Model Perangkat Keras';
+    $Self->{Translation}->{'Hardware Weight'} = 'Berat Perangkat Keras';
+    $Self->{Translation}->{'Headset'} = 'Headset';
+    $Self->{Translation}->{'IP Protocol'} = 'Protokol IP';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Manajemen Identitas dan Akses (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Nomor Persediaan';
+    $Self->{Translation}->{'Inverstment costs'} = 'Biaya pembalikan';
+    $Self->{Translation}->{'Invoice Number'} = 'Nomor Faktur';
+    $Self->{Translation}->{'Keyboard'} = 'Keyboard';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'Monitor LCD (Layar Kristal Cair)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'Monitor LED (Light Emitting Diode)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Telepon rumah';
+    $Self->{Translation}->{'Laptop'} = 'Laptop';
+    $Self->{Translation}->{'Latitude'} = 'Lintang';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Lapisan 1: Lapisan Fisik';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Lapisan 2: Lapisan Tautan Data';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Lapisan 3: Lapisan Jaringan';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Lapisan 3: Lapisan Jaringan (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Lapisan 4: Lapisan Transportasi';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Lapisan 5: Lapisan Sesi';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Lapisan 6: Lapisan Presentasi';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Lapisan 7: Lapisan Aplikasi';
+    $Self->{Translation}->{'Lease Agreement'} = 'Perjanjian Sewa Menyewa';
+    $Self->{Translation}->{'License Agreement'} = 'Perjanjian Lisensi';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Kunci Lisensi';
+    $Self->{Translation}->{'License Type'} = 'Jenis Lisensi';
+    $Self->{Translation}->{'License period from'} = 'Periode lisensi dari';
+    $Self->{Translation}->{'License period until'} = 'Masa berlaku lisensi sampai';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Baterai Lithium Iron Phosphate (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Baterai Lithium-Ion (Li-ion)';
+    $Self->{Translation}->{'Loan Agreement'} = 'Perjanjian Pinjaman';
+    $Self->{Translation}->{'Located in'} = 'Berlokasi di';
+    $Self->{Translation}->{'Longitude'} = 'Bujur';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Produsen';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Kapasitas Beban Maksimum (W)';
+    $Self->{Translation}->{'Memory'} = 'Memori';
+    $Self->{Translation}->{'Memory Type'} = 'Jenis Memori';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Rak Mini';
+    $Self->{Translation}->{'Mobile Number'} = 'Nomor ponsel';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Seluler / Tertanam';
+    $Self->{Translation}->{'Model'} = 'Model';
+    $Self->{Translation}->{'Model Description'} = 'Deskripsi Model';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Resolusi Monitor';
+    $Self->{Translation}->{'Monitor Size'} = 'Ukuran Monitor';
+    $Self->{Translation}->{'Mouse'} = 'Mouse';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Jaringan';
+    $Self->{Translation}->{'Network Info'} = 'Info Jaringan';
+    $Self->{Translation}->{'Network Information'} = 'Informasi Jaringan';
+    $Self->{Translation}->{'Network Layer'} = 'Lapisan Jaringan';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Baterai Nikel-Kadmium (NiCd)';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Baterai Nikel-Logam Hidrida (NiMH)';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Perjanjian Kerahasiaan (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Buku catatan';
+    $Self->{Translation}->{'Number of CPUs'} = 'Jumlah CPU';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Jumlah modul RAM';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Jumlah kartu grafis';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'Monitor OLED (Dioda Pemancar Cahaya Organik)';
+    $Self->{Translation}->{'Operating costs'} = 'Biaya operasional';
+    $Self->{Translation}->{'Order Number'} = 'Nomor Pesanan';
+    $Self->{Translation}->{'Other'} = 'Lain-lain';
+    $Self->{Translation}->{'Outputs'} = 'Keluaran';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Perjanjian Kemitraan';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Nomor Telepon';
+    $Self->{Translation}->{'Phone Type'} = 'Jenis Telepon';
+    $Self->{Translation}->{'Physical Cores'} = 'Inti Fisik';
+    $Self->{Translation}->{'Power Delivery'} = 'Pengiriman Daya';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Dibeli di';
+    $Self->{Translation}->{'Rack Depth'} = 'Kedalaman Rak';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Unit Rak (U)';
+    $Self->{Translation}->{'Room'} = 'Ruangan';
+    $Self->{Translation}->{'SIM Card'} = 'Kartu SIM';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'Sertifikat SSL / TLS';
+    $Self->{Translation}->{'Sales Contract'} = 'Kontrak Penjualan';
+    $Self->{Translation}->{'Satellite Phone'} = 'Telepon Satelit';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Baterai Asam Timbal Tersegel (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Nomor seri';
+    $Self->{Translation}->{'Server Software'} = 'Perangkat Lunak Server';
+    $Self->{Translation}->{'Service Agreement'} = 'Perjanjian Layanan';
+    $Self->{Translation}->{'Service Tag'} = 'Tag Layanan';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Jenis Soket';
+    $Self->{Translation}->{'Software'} = 'Perangkat lunak';
+    $Self->{Translation}->{'Speakers'} = 'Pembicara';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Mulai Alamat IP';
+    $Self->{Translation}->{'Storage'} = 'Penyimpanan';
+    $Self->{Translation}->{'Storage Partition'} = 'Partisi Penyimpanan';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Anak Perusahaan';
+    $Self->{Translation}->{'Summary'} = 'Ringkasan';
+    $Self->{Translation}->{'Thin Client'} = 'Klien Tipis';
+    $Self->{Translation}->{'Threads'} = 'Benang';
+    $Self->{Translation}->{'Thunderbolt'} = 'Petir';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Total RAM kartu grafis (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Total RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Monitor Layar Sentuh';
+    $Self->{Translation}->{'Tower'} = 'Menara';
+    $Self->{Translation}->{'USB Hub'} = 'Hub USB';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'Headset VR';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'Telepon VoIP';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Kamera web';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

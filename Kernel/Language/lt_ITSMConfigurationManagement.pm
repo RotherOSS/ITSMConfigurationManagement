@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Bendrieji veikimo duomenys';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Įeinančių užklausų duomenų nustatymai';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Išeinančių atsakymo duomenų nustatymai';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Konfigūracijos elementų valdymas';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Objekto tipas';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Importuojamos šios klasės';
     $Self->{Translation}->{'The following roles will be imported'} = 'Bus importuojami šie vaidmenys';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Pavadinimas atnaujintas (new=%s, old=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Atributas %s atnaujintas iš "%s" į "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Versija %s ištrinta';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Nenurodytas ConfigItemID arba VersionID!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'Duomenų bazėje nerasta ConfigItemID %s!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = '%s spausdina %s adresu %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Neteisingas ClassID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Konfigūracijos elemento klasės apribojimai';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Pasirinkite vieną ar daugiau klasių, kad apribotumėte pasirenkamus konfigūracijos elementus';
-    $Self->{Translation}->{'Link type'} = 'Nuorodos tipas';
-    $Self->{Translation}->{'Select the link type.'} = 'Pasirinkite nuorodos tipą.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Įžaidėjai: (Šaltinis) -> Nuoroda (Tikslas)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Atgal: (Šaltinis) -> Nuoroda (Tikslas)';
-    $Self->{Translation}->{'Link Direction'} = 'Nuorodos kryptis';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Nuorodos objektas yra tas, kuriame yra šis dinaminis laukas, o nuorodos objektas yra tas, kuris pasirinktas kaip dinaminio lauko reikšmė.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dinaminis (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statinis (versija)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Nuorodos tipas';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Didžiausias vieno elemento skaičius';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tušti laukai rodo, kad dabartinės reikšmės paliekamos.';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Praleistas';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Importuoti ir (arba) eksportuoti priedus (kaip paskutinius įrašus eilutėje)';
+    $Self->{Translation}->{'Version String'} = 'Versijos eilutė';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Klaida sinchronizuojant apibrėžtis. Patikrinkite žurnalą.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Paslėpta';
     $Self->{Translation}->{'1 - Shown'} = '1 - parodyta';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Leidžia taikyti išplėstines paieškos sąlygas agento sąsajos konfigūracijos elementų paieškai. Naudodami šią funkciją galite ieškoti, pvz., konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip "(*key1*&&*key2*)" arba "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Leidžia taikyti išplėstines paieškos sąlygas klientų sąsajos konfigūracijos elementų paieškoje. Naudodami šią funkciją galite ieškoti, pvz., konfigūracijos elemento pavadinimo su tokiomis sąlygomis, kaip "(*key1*&&*key2*)" arba "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Priskirti KI';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Tam tikru metu sukurkite bilietą dėl konfigūracijos elementų, jei įvykdyti nustatyti reikalavimai. Laiko momentas nustatomas pagal lauko, sukonfigūruoto ConfigItem "TimeCIKey", reikšmę ir modifikuojamas pagal "TimeModifier". Jei pastarasis gali būti tik skaičius arba ženklas (+/-), skaičius ir vienetas (d/h/m): "7" atitinka "+7d". Dinaminis laukas "Ticket->DynamicField" bus naudojamas sukurtiems bilietams žymėti - jis turi egzistuoti. Žymos \<OTOBO_CONFIGITEM_X\>, kur X gali būti NAME (pavadinimas), NUMBER (skaičius) ir DATE (data), bus pakeistos atitinkamomis reikšmėmis "Ticket->Text" (bilietas->tekstas).';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Kliento įmonei priskirti KI';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliento naudotojui priskirti CI';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB nustatymai';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Stulpelio konfigūracijos elementų filtrai ConfigItem Overview.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elementų apžvalgoje. Pastaba: Leidžiami tik konfigūracijos elemento atributai ir dinaminiai laukai (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stulpeliai, kuriuos galima filtruoti kliento sąsajos konfigūracijos elementų apžvalgoje. Pastaba: leidžiama naudoti tik konfigūracijos elemento atributus ir dinaminius laukus (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stulpeliai, kuriuos galima filtruoti agento sąsajos konfigūracijos elemento paieškos rezultatų apžvalgoje. Pastaba: Leidžiami tik konfigūracijos elemento atributai ir dinaminiai laukai (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Konfigūracijos elementai';
     $Self->{Translation}->{'Config item add.'} = 'Konfigūracijos elemento pridėjimas.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigūracijos elemento redagavimas.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Konfigūruoti elemento įvykių modulį, kuris skaičiuoja OTOBOCILicenseCount funkcijos licencijas.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigūruokite elemento įvykių modulį, kuris leidžia registruoti istoriją agento sąsajoje.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Konfigūracijos elementų įvykių modulis, kuris atnaujina konfigūracijos elementų dabartinę apibrėžtį.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Konfigūracijos elemento įvykių modulis, kuris atnaujina lentelę configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Konfigūracijos elemento įvykio modulis atnaujina esamą incidento būseną.';
     $Self->{Translation}->{'Config item history.'} = 'Konfigūracijos elementų istorija.';
     $Self->{Translation}->{'Config item print.'} = 'Konfigūracijos elemento spausdinimas.';
     $Self->{Translation}->{'Config item zoom.'} = 'Konfigūruoti elemento priartinimą.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfigūracijos elemento masinis modulis.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigūracijos elemento paieška agento sąsajos galiniame maršrutizatoriuje.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Sukurkite ir tvarkykite konfigūracijos elementų apibrėžtis.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Sukuria "ConfigItems" bilietus tam tikrais laiko momentais.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klientai gali matyti istorines CI versijas.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Apibrėžiami reikalingi leidimai ieškoti ITSM konfigūracijos elementų naudojant bendrąją sąsają.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Apibrėžia Reikalingi leidimai nustatyti ITSM konfigūracijos elementus naudojant bendrąją sąsają.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Apibrėžia apžvalgos modulį, skirtą mažajam konfigūracijos elementų sąrašo vaizdui rodyti.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Nustato pagal nutylėjimą rodomą konfigūracijos elementų paieškos atributą konfigūracijos elementų paieškos ekrane. Pavyzdys: "Key" (raktas) turi turėti dinaminio lauko pavadinimą, šiuo atveju "X", "Content" (turinys) turi turėti dinaminio lauko reikšmę, priklausančią nuo dinaminio lauko tipo, "Text" (tekstas): "a text" (tekstas), "Dropdown" (išskleidžiama): "1" (išskleidžiama), "Date/Time" (data ir laikas): Paieška_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' ir arba \'Search_DynamicField_XTimePointFormat=savaitė; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Apibrėžia numatytąjį klasės "ITSMConfigItem" subobjektą.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Nustato šio ekrano teksto redaktoriaus komponento aukštį. Įveskite skaičių (pikseliai) arba procentinę vertę (santykinė).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Konfigūracijos elemento indekse saugomi laukai, kurie naudojami ne tik viso teksto paieškai, bet ir kitiems dalykams. Kad funkcijos būtų pilnai išnaudotos, visi laukai yra privalomi.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Kiekvienai žiniatinklio paslaugai (raktas) galima apibrėžti klasių masyvą (reikšmė), kurio importas yra ribojamas. Visoms pasirinktoms klasėms arba visoms esamoms klasėms identifikuojantys atributai turės būti pasirinkti invokerio konfigūracijoje.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         '"GenericInterface" modulio registracija "ConfigItemFetch" iškvietėjo sluoksniui.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigūracijos elementų apžvalga.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Jei ši parinktis įjungta, susieti elementai skaičiuojami tik tada, jei jie priklauso vienai iš išvardytų klasių.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Įtraukti diegimo būsenas į konfigūracijos elementų paiešką kliento sąsajoje.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Įtraukti incidento būsenas į konfigūracijos elementų paiešką klientų sąsajoje.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Didžiausias konfigūracijos elementų, kurie bus rodomi šios operacijos rezultate, skaičius.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modulis, skirtas už klasę atsakingai grupei patikrinti.';
@@ -443,8 +452,10 @@ sub Data {
         'Parametrai, skirti konfigūracijos elementų klasių kategorijoms agento sąsajos nuostatų rodinyje.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Mažosios konfigūracijos elementų apžvalgos stulpelių filtrų parametrai. Atkreipkite dėmesį: nustačius "Active" vertę 0, agentai negalės redaguoti tik šios grupės nustatymų savo asmeninėse parinktyse, tačiau administratoriams vis tiek bus leidžiama redaguoti kito naudotojo nustatymus. Naudokite "PreferenceGroup", norėdami valdyti, kurioje srityje šie nustatymai turėtų būti rodomi naudotojo sąsajoje.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Kliento įmonės konfigūracijos elemento peržiūros agento sąsajos prietaisų skydelio backend parametrai . "Limit" (riba) - pagal numatytuosius nustatymus rodomų įrašų skaičius. "Group" (grupė) naudojama norint apriboti prieigą prie įskiepio (pvz., Group: admin;group1;group2;). "Default" (pagal numatytuosius nustatymus) nustato, ar įskiepis įjungtas pagal numatytuosius nustatymus, ar naudotojas turi jį įjungti rankiniu būdu. "CacheTTLLocal" (spartinančioji atmintinė) - įskiepio spartinančiosios atmintinės laikas minutėmis.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Įdiegimo būsenų parametrai nuspalvinti agento sąsajos nuostatų rodinyje.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Versija Styginių eilutė Išraiška';
     $Self->{Translation}->{'Version String Module'} = 'Versijos eilutės modulis';
     $Self->{Translation}->{'Version Trigger'} = 'Versija Triggeris';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Ar galima išvengti "ConfigItemACL" vykdymo tikrinant talpykloje esančių laukų priklausomybes. Tai gali pagerinti formuliarų įkėlimo laiką, tačiau turi būti išjungta, jei ACLModules turi būti naudojami ITSMConfigItem- ir Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kokia bendra informacija pateikiama antraštėje.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Naudojant šią parinktį galima automatiškai užpildyti KI lauką, atsižvelgiant į susietų KI, turinčių esamą tipą DependsOn, skaičių.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Naudojant šią parinktį galima automatiškai užpildyti CI lauką, atsižvelgiant į susietų CI skaičių.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Naudojant šią parinktį galima automatiškai užpildyti CI lauką, atsižvelgiant į susietų CI skaičių. Nustatyme CounterClassName (Skaitiklio klasės pavadinimas) įrašomas klasės pavadinimas, o CounterFieldName (Skaitiklio lauko pavadinimas) naudojamas naudojamų licencijų skaičiui saugoti.';
     $Self->{Translation}->{'class'} = 'klasė';
     $Self->{Translation}->{'global'} = 'pasaulinis';
     $Self->{Translation}->{'postproductive'} = 'postprodukcinis';
     $Self->{Translation}->{'preproductive'} = 'priešprodukcinis';
     $Self->{Translation}->{'productive'} = 'produktyvus';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 colio (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 colis (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 colio (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 colio (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = '19 colių stovas';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 1,75 colio (4,45 cm)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 coliai (88,9 cm)';
+    $Self->{Translation}->{'21-inch Rack'} = '21 colio stovas';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 colio (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23 colių stovas';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 colio (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 coliai (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 colio (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 colio (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 colio (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 colio (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 colio (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 colio (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 coliai (160,02 cm)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 colio (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 colio (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 5,25 colio (13,34 cm)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 colio (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 colio (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 78,75 colio (200,02 cm)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 colio (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 coliai (213,36 cm)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 coliai (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 colio (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 colio (26,67 cm)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 colio (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 colių (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 colio (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Apskaita';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Adresų priskyrimas';
+    $Self->{Translation}->{'Administrator'} = 'Administratorius';
+    $Self->{Translation}->{'Analog Phone'} = 'Analoginis telefonas';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Prietaiso tipas';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Akumuliatoriaus talpa (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Akumuliatoriaus tipas';
+    $Self->{Translation}->{'Building'} = 'Pastatas';
+    $Self->{Translation}->{'Bus Interface'} = 'Magistralės sąsaja';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU klasė';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Talpa (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Vienos vaizdo plokštės talpa';
+    $Self->{Translation}->{'Card Number'} = 'Kortelės numeris';
+    $Self->{Translation}->{'Card Reader'} = 'Kortelių skaitytuvas';
+    $Self->{Translation}->{'Card Type'} = 'Kortelės tipas';
+    $Self->{Translation}->{'Client Certificates'} = 'Klientų sertifikatai';
+    $Self->{Translation}->{'Client Software'} = 'Kliento programinė įranga';
+    $Self->{Translation}->{'Client category'} = 'Kliento kategorija';
+    $Self->{Translation}->{'Clockrate'} = 'Laikrodžio rodyklė';
+    $Self->{Translation}->{'Clockspeed'} = 'Laikrodžių greitis';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Kodo pasirašymo sertifikatai';
+    $Self->{Translation}->{'Conference Phone'} = 'Konferencinis telefonas';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Konsultavimo sutartis';
+    $Self->{Translation}->{'Contact'} = 'Susisiekite su';
+    $Self->{Translation}->{'Contact Distributor'} = 'Susisiekite su platintoju';
+    $Self->{Translation}->{'Container Management'} = 'Konteinerių valdymas';
+    $Self->{Translation}->{'Contract'} = 'Sutartis';
+    $Self->{Translation}->{'Contract Type'} = 'Sutarties tipas';
+    $Self->{Translation}->{'Contract period from'} = 'Sutarties laikotarpis nuo';
+    $Self->{Translation}->{'Contract period until'} = 'Sutarties laikotarpis iki';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Belaidis telefonas (DECT telefonas)';
+    $Self->{Translation}->{'Cost unit'} = 'Išlaidų vienetas';
+    $Self->{Translation}->{'Count of licenses'} = 'Licencijų skaičius';
+    $Self->{Translation}->{'Creation Date'} = 'Sukūrimo data';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Pasirinktinis stovas';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP rezervuota';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS serveris';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Sąskaitos faktūros data';
+    $Self->{Translation}->{'Date of Order'} = 'Užsakymo data';
+    $Self->{Translation}->{'Date of Warranty'} = 'Garantijos išdavimo data';
+    $Self->{Translation}->{'Date of release'} = 'Išleidimo data';
+    $Self->{Translation}->{'Desktop'} = 'Stalinis kompiuteris';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Dokumentų pasirašymo sertifikatai';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI stelažas';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'El. pašto sertifikatai (S/MIME sertifikatai)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Darbo sutartis';
+    $Self->{Translation}->{'End IP Address'} = 'Galinis IP adresas';
+    $Self->{Translation}->{'End of support'} = 'Paramos pabaiga';
+    $Self->{Translation}->{'Expiry Date'} = 'Galiojimo data';
+    $Self->{Translation}->{'External Hard Drive'} = 'Išorinis kietasis diskas';
+    $Self->{Translation}->{'Firewall'} = 'Ugniasienė';
+    $Self->{Translation}->{'Firmware'} = 'Programinė įranga';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Energijos kaupimas smagračiu';
+    $Self->{Translation}->{'Form Factor'} = 'Formos faktorius';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Franšizės sutartis';
+    $Self->{Translation}->{'Freeware'} = 'Nemokama programinė įranga';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Bendra informacija';
+    $Self->{Translation}->{'Graphics Cards'} = 'Vaizdo plokštės';
+    $Self->{Translation}->{'Graphics card'} = 'Vaizdo plokštė';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Techninė įranga';
+    $Self->{Translation}->{'Hardware Model'} = 'Techninės įrangos modelis';
+    $Self->{Translation}->{'Hardware Weight'} = 'Techninės įrangos svoris';
+    $Self->{Translation}->{'Headset'} = 'Ausinės';
+    $Self->{Translation}->{'IP Protocol'} = 'IP protokolas';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Tapatybės ir prieigos valdymas (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventorinis numeris';
+    $Self->{Translation}->{'Inverstment costs'} = 'Inverstravimo išlaidos';
+    $Self->{Translation}->{'Invoice Number'} = 'Sąskaitos faktūros numeris';
+    $Self->{Translation}->{'Keyboard'} = 'Klaviatūra';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitorius (skystųjų kristalų ekranas)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED monitorius (šviesos diodas)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Stacionarusis telefonas';
+    $Self->{Translation}->{'Laptop'} = 'Nešiojamasis kompiuteris';
+    $Self->{Translation}->{'Latitude'} = 'Platuma';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = '1 sluoksnis: fizinis sluoksnis';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '2 sluoksnis: duomenų ryšio sluoksnis';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = '3 sluoksnis: tinklo sluoksnis';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '3 sluoksnis: tinklo sluoksnis (supernetas)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = '4 sluoksnis: transporto sluoksnis';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = '5 sluoksnis: sesijos sluoksnis';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '6 sluoksnis: pateikimo sluoksnis';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = '7 sluoksnis: taikomųjų programų sluoksnis';
+    $Self->{Translation}->{'Lease Agreement'} = 'Nuomos sutartis';
+    $Self->{Translation}->{'License Agreement'} = 'Licencijos sutartis';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licencijos raktas';
+    $Self->{Translation}->{'License Type'} = 'Licencijos tipas';
+    $Self->{Translation}->{'License period from'} = 'Licencijos laikotarpis nuo';
+    $Self->{Translation}->{'License period until'} = 'Licencijos laikotarpis iki';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Ličio geležies fosfato (LiFePO4) akumuliatorius';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Ličio jonų (ličio jonų) akumuliatorius';
+    $Self->{Translation}->{'Loan Agreement'} = 'Paskolos sutartis';
+    $Self->{Translation}->{'Located in'} = 'Įsikūręs';
+    $Self->{Translation}->{'Longitude'} = 'Ilguma';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Gamintojas';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Didžiausia apkrovos galia (W)';
+    $Self->{Translation}->{'Memory'} = 'Atmintis';
+    $Self->{Translation}->{'Memory Type'} = 'Atminties tipas';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini stelažas';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobiliojo telefono numeris';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobilusis / įterptasis';
+    $Self->{Translation}->{'Model'} = 'Modelis';
+    $Self->{Translation}->{'Model Description'} = 'Modelis Aprašymas';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Monitoriaus skiriamoji geba';
+    $Self->{Translation}->{'Monitor Size'} = 'Monitoriaus dydis';
+    $Self->{Translation}->{'Mouse'} = 'Pelė';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Tinklas';
+    $Self->{Translation}->{'Network Info'} = 'Tinklo informacija';
+    $Self->{Translation}->{'Network Information'} = 'Tinklo informacija';
+    $Self->{Translation}->{'Network Layer'} = 'Tinklo lygmuo';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikelio-kadmio (NiCd) akumuliatorius';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikelio-metalo hidrido (NiMH) akumuliatorius';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Susitarimas dėl informacijos neatskleidimo (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Nešiojamasis kompiuteris';
+    $Self->{Translation}->{'Number of CPUs'} = 'Procesorių skaičius';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Operatyviosios atminties modulių skaičius';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Vaizdo plokščių skaičius';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED monitorius (organinis šviesos diodas)';
+    $Self->{Translation}->{'Operating costs'} = 'Veiklos sąnaudos';
+    $Self->{Translation}->{'Order Number'} = 'Užsakymo numeris';
+    $Self->{Translation}->{'Other'} = 'Kita';
+    $Self->{Translation}->{'Outputs'} = 'Išėjimai';
+    $Self->{Translation}->{'PIN'} = 'PIN KODAS';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Partnerystės susitarimas';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefono numeris';
+    $Self->{Translation}->{'Phone Type'} = 'Telefono tipas';
+    $Self->{Translation}->{'Physical Cores'} = 'Fiziniai branduoliai';
+    $Self->{Translation}->{'Power Delivery'} = 'Maitinimo tiekimas';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Įsigyta';
+    $Self->{Translation}->{'Rack Depth'} = 'Stovo gylis';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Stovo vienetai (U)';
+    $Self->{Translation}->{'Room'} = 'Kambarys';
+    $Self->{Translation}->{'SIM Card'} = 'SIM kortelė';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS sertifikatai';
+    $Self->{Translation}->{'Sales Contract'} = 'Pardavimo sutartis';
+    $Self->{Translation}->{'Satellite Phone'} = 'Palydovinis telefonas';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Sandarus švino rūgštinis (SLA) akumuliatorius';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Serijos numeris';
+    $Self->{Translation}->{'Server Software'} = 'Serverio programinė įranga';
+    $Self->{Translation}->{'Service Agreement'} = 'Paslaugų sutartis';
+    $Self->{Translation}->{'Service Tag'} = 'Paslaugos žyma';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Lizdo tipas';
+    $Self->{Translation}->{'Software'} = 'Programinė įranga';
+    $Self->{Translation}->{'Speakers'} = 'Garsiakalbiai';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Pradinis IP adresas';
+    $Self->{Translation}->{'Storage'} = 'Saugykla';
+    $Self->{Translation}->{'Storage Partition'} = 'Saugyklos skirsnis';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Dukterinė įmonė';
+    $Self->{Translation}->{'Summary'} = 'Santrauka';
+    $Self->{Translation}->{'Thin Client'} = 'Plonasis klientas';
+    $Self->{Translation}->{'Threads'} = 'Siūlai';
+    $Self->{Translation}->{'Thunderbolt'} = '"Thunderbolt"';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Iš viso grafinės plokštės operatyviosios atminties (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Iš viso RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Jutiklinio ekrano monitorius';
+    $Self->{Translation}->{'Tower'} = 'Bokštas';
+    $Self->{Translation}->{'USB Hub'} = 'USB šakotuvas';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'VR ausinės';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP telefonas';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Interneto kamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

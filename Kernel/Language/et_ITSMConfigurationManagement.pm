@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Üldised tegevusandmed';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Sissetulevate taotluste andmete seaded';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Väljaminevate vastusandmete seaded';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Server OS';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Objekti tüüp';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Imporditakse järgmised klassid';
     $Self->{Translation}->{'The following roles will be imported'} = 'Imporditakse järgmised rollid';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Nimi uuendatud (new=%s, old=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Ei saa näidata elementi, ConfigItemile ei ole antud juurdepääsuõigusi!';
     $Self->{Translation}->{'Version %s deleted'} = 'Versioon %s kustutatud';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'ConfigItemID või VersionID ei ole antud!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s ei leitud andmebaasis!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = 'trükitud %s poolt aadressil %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Vale ClassID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Klassi piirangud konfiguratsioonielemendi jaoks';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Valige üks või mitu klassi, et piirata valitavaid konfiguratsioonielemente.';
-    $Self->{Translation}->{'Link type'} = 'Lingi tüüp';
-    $Self->{Translation}->{'Select the link type.'} = 'Valige lingi tüüp.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Forwardid: Viidatud (Allikas) -> Viidatud (Siht)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Tagasi: Viidatud (Allikas) -> Viitamine (Sihtmärk): Viidatud (Allikas) -> Viidatud (Sihtmärk)';
-    $Self->{Translation}->{'Link Direction'} = 'Link Suund';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Viitav objekt on see, mis sisaldab seda dünaamilist välja, viidatav objekt on see, mis on valitud dünaamilise välja väärtuseks.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dünaamiline (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Staatiline (versioon)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Linkide viitamise tüüp';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Ühe elemendi maksimaalne arv';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tühjad väljad näitavad, et praegused väärtused jäävad alles.';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Välja jäetud';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Impordi/ekspordi manused (viimased kirjed rea kohta)';
+    $Self->{Translation}->{'Version String'} = 'Versioon String';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Viga määratluste sünkroniseerimisel. Palun kontrollige logi.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - peidetud';
     $Self->{Translation}->{'1 - Shown'} = '1 - näidatud';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Võimaldab laiendatud otsingutingimusi agentide kasutajaliidese konfiguratsioonielementide otsingus. Selle funktsiooniga saate otsida nt config-elemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Võimaldab laiendatud otsingutingimusi kliendi kasutajaliidese konfiguratsioonielemendi otsingus. Selle funktsiooniga saate otsida nt konfiguratsioonielemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Määratud elutähtsad infrastruktuurid';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Teatud ajahetkel loo pilet konfigureeritud elementide jaoks, kui konfigureeritud nõuded on täidetud. Ajahetk määratakse kindlaks ConfigItem\'i "TimeCIKey" all konfigureeritud välja väärtusega ja seda muudetakse "TimeModifier" abil. Kui viimane võib olla kas lihtsalt number või märk (+/-), number ja ühik (d/h/m): "7" vastab "+7d". DynamicFieldi "Ticket->DynamicField" kasutatakse loodud piletite märgistamiseks - see peab olema olemas. Lipud \\<OTOBO_CONFIGITEM_X\\>, kus X võib olla NAME, NUMBER ja DATE, asendatakse vastavate väärtustega jaotises "Ticket->Text".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Klientidele määratud CId kliendiettevõttele';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Kliendikasutajale määratud CId';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB seaded';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'ConfigItem Overview veergu ConfigItem elemendi filtrid.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Veerud, mida saab filtreerida agentide kasutajaliidese konfiguratsioonielemendi ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Veerud, mida saab filtreerida kliendi kasutajaliidese konfiguratsioonielemendi ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Veerud, mida saab filtreerida agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuste ülevaates. Märkus: Lubatud on ainult Config Item atribuudid ja dünaamilised väljad (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Konfigureerimisobjektid';
     $Self->{Translation}->{'Config item add.'} = 'Config item add.';
     $Self->{Translation}->{'Config item edit.'} = 'Config item edit.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Config item event moodul, mis loeb OTOBOCILicenseCount funktsiooni jaoks litsentse.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Config item event moodul, mis võimaldab agendi kasutajaliideses ajalukku logida.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Config elementide sündmuste moodul, mis uuendab config elemente nende praeguse määratluse järgi.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Config item sündmuse moodul, mis uuendab tabelit configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Config item\'i sündmuse moodul uuendab praegust intsidendi olekut.';
     $Self->{Translation}->{'Config item history.'} = 'Väljalaskeava';
     $Self->{Translation}->{'Config item print.'} = 'Config item print.';
     $Self->{Translation}->{'Config item zoom.'} = 'Config item zoom.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfiguratsioonielemendi lahtine moodul.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigureerimiselemendi otsing agentide liidese tagasiside marsruuter.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Luua ja hallata konfiguratsiooniobjektide määratlusi.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Loob ConfigItems\'i piletid teatud ajahetkedel.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kliendid saavad näha ajaloolisi CI-versioone.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Määratleb nõutavad õigused ITSMi konfiguratsiooniobjektide otsimiseks üldise liidese abil.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Määratleb nõutavad õigused ITSMi konfiguratsioonielementide seadistamiseks üldise liidese abil.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Määratleb ülevaatemooduli, mis näitab konfiguratsioonielementide loendi väikest vaadet.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Määratleb vaikimisi kuvatava konfiguratsioonielemendi otsingu atribuudi konfiguratsioonielemendi otsingu ekraanil. Näide: "Key" peab olema dünaamilise välja nimi, antud juhul \'X\', "Content" peab olema dünaamilise välja väärtus sõltuvalt dünaamilise välja tüübist, Text: \'a text\', Dropdown: \'1\', Date/Time: Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' ja või \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Määratleb klassi \'ITSMConfigItem\' vaikimisi alamobjekti.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Määrab selle ekraani rikkaliku tekstiredaktori komponendi kõrguse. Sisestage arv (pikslid) või protsentuaalne väärtus (suhteline).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Konfiguratsioonielemendi indeksisse salvestatud väljad, mida kasutatakse lisaks täistekstotsingutele ka muudeks asjadeks. Täieliku funktsionaalsuse tagamiseks on kõik väljad kohustuslikud.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Iga veebiteenuse (võti) jaoks saab määratleda klasside massiivi (väärtus), mille puhul on import piiratud. Kõigi valitud klasside või kõigi olemasolevate klasside jaoks tuleb invoker\'i konfiguratsioonis valida identifitseerivad atribuudid.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'GenericInterface\'i mooduli registreerimine ConfigItemFetch kutsuva kihi jaoks.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSMi konfiguratsioonielemendi ülevaade.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Kui see valik on aktiveeritud, arvestatakse lingitud elemendid ainult siis, kui nad kuuluvad ühte loetletud klassidest.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Sisaldab kliendi kasutajaliidese konfiguratsioonielemendi otsingusse kasutuselevõtu olekuid.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Sisaldab kliendiliidese konfiguratsioonielemendi otsingusse intsidentide olekud.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Selle operatsiooni tulemusel kuvatavate konfiguratsioonielementide maksimaalne arv.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Moodul, et kontrollida klassi eest vastutavat rühma.';
@@ -443,8 +452,10 @@ sub Data {
         'Parameetrid konfiguratsioonielemendi klasside kategooriate jaoks agentide kasutajaliidese eelistuste vaates.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parameetrid väikese konfiguratsioonielemendi ülevaate veergude filtrite jaoks. Pange tähele: kui määrata \'Active\' väärtuseks 0, takistab see ainult agentidel selle grupi seadete muutmist oma isiklikes eelistustes, kuid lubab administraatoritel siiski teise kasutaja nimel seadete muutmist. Kasutage \'PreferenceGroup\', et kontrollida, millises piirkonnas neid seadeid kasutajaliideses näidatakse.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parameetrid armatuurlaua tagaküljel kliendi ettevõtte config item ülevaate agent liides . "Limit" on vaikimisi kuvatavate kirjete arv. "Group" kasutatakse pluginale juurdepääsu piiramiseks (nt Group: admin;group1;group2;). "Default" määrab, kas plugin on vaikimisi lubatud või peab kasutaja selle käsitsi lubama. "CacheTTLLocal" on pluginale määratud vahemälu aeg minutites.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Kasutuselevõtu olekute parameetrite värv agentide kasutajaliidese eelistuste vaates.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Versioon String Väljend';
     $Self->{Translation}->{'Version String Module'} = 'Versiooni string moodul';
     $Self->{Translation}->{'Version Trigger'} = 'Versiooni vallandaja';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Kas ConfigItemACLi täitmist saab vältida, kontrollides vahemälu väljaliste sõltuvusi. See võib parandada vormide laadimisaega, kuid tuleb keelata, kui ACLModules\'i kasutatakse ITSMConfigItem- ja Form-ReturnTypes\'i puhul.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Millised üldandmed on esitatud päises.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt olemasoleva tüübiga DependsOn seotud CI-de arvust.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Selle valikuga on võimalik automaatselt täita CI-välja, sõltuvalt seotud CI-de arvust. Seade CounterClassName sisaldab klassi nime ja CounterFieldName salvestab kasutatud litsentsi arvu.';
     $Self->{Translation}->{'class'} = 'klass';
     $Self->{Translation}->{'global'} = 'globaalne';
     $Self->{Translation}->{'postproductive'} = 'postproduktiivne';
     $Self->{Translation}->{'preproductive'} = 'preproduktiivne';
     $Self->{Translation}->{'productive'} = 'produktiivne';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 tolli (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 tolli (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 tolli (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 tolli (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-tolline riiul';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 4,45 cm (1,75 tolli)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 tolli (88,9 cm)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-tolline riiul';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 tolli (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-tolline riiul';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 tolli (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 tolli (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 tolli (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 tolli (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 tolli (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 tolli (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 tolli (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 tolli (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 160,02 cm (63 tolli)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 tolli (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 tolli (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 13,34 cm (5,25 tolli)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 tolli (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 tolli (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 200,02 cm (78,75 tolli)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 tolli (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 tolli (213,36 cm)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 tolli (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 tolli (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 26,67 cm (10,5 tolli)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 tolli (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 tolli (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 tolli (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Raamatupidamine';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Aadressi eraldamine';
+    $Self->{Translation}->{'Administrator'} = 'Administraator';
+    $Self->{Translation}->{'Analog Phone'} = 'Analoogtelefon';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Seadme tüüp';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Aku mahutavus (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Aku tüüp';
+    $Self->{Translation}->{'Building'} = 'Hoone';
+    $Self->{Translation}->{'Bus Interface'} = 'Bussiliides';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU klass';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Maht (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Võimsus ühe graafikakaardi kohta';
+    $Self->{Translation}->{'Card Number'} = 'Kaardi number';
+    $Self->{Translation}->{'Card Reader'} = 'Kaardilugeja';
+    $Self->{Translation}->{'Card Type'} = 'Kaardi tüüp';
+    $Self->{Translation}->{'Client Certificates'} = 'Klientide sertifikaadid';
+    $Self->{Translation}->{'Client Software'} = 'Klienditarkvara';
+    $Self->{Translation}->{'Client category'} = 'Kliendikategooria';
+    $Self->{Translation}->{'Clockrate'} = 'Kellaaeg';
+    $Self->{Translation}->{'Clockspeed'} = 'Clockspeed';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Koodi allkirjastamise sertifikaadid';
+    $Self->{Translation}->{'Conference Phone'} = 'Konverentsitelefon';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Konsultatsioonileping';
+    $Self->{Translation}->{'Contact'} = 'Kontakt';
+    $Self->{Translation}->{'Contact Distributor'} = 'Võtke ühendust edasimüüjaga';
+    $Self->{Translation}->{'Container Management'} = 'Konteinerite haldamine';
+    $Self->{Translation}->{'Contract'} = 'Leping';
+    $Self->{Translation}->{'Contract Type'} = 'Lepingu tüüp';
+    $Self->{Translation}->{'Contract period from'} = 'Lepinguperiood alates';
+    $Self->{Translation}->{'Contract period until'} = 'Lepingu kestus kuni';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Juhtmeta telefon (DECT-telefon)';
+    $Self->{Translation}->{'Cost unit'} = 'Kuluühik';
+    $Self->{Translation}->{'Count of licenses'} = 'Litsentside arv';
+    $Self->{Translation}->{'Creation Date'} = 'Loomise kuupäev';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Kohandatud riiul';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Reserveeritud';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-server';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Arve kuupäev';
+    $Self->{Translation}->{'Date of Order'} = 'Tellimuse kuupäev';
+    $Self->{Translation}->{'Date of Warranty'} = 'Garantii kuupäev';
+    $Self->{Translation}->{'Date of release'} = 'Väljalaskmise kuupäev';
+    $Self->{Translation}->{'Desktop'} = 'Töölauaarvuti';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Dokumendi allkirjastamise sertifikaadid';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI riiul';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'E-posti sertifikaadid (S/MIME sertifikaadid)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Tööleping';
+    $Self->{Translation}->{'End IP Address'} = 'Lõpp-IP-aadress';
+    $Self->{Translation}->{'End of support'} = 'Toetuse lõppemine';
+    $Self->{Translation}->{'Expiry Date'} = 'Kehtivuskuupäev';
+    $Self->{Translation}->{'External Hard Drive'} = 'Väline kõvaketas';
+    $Self->{Translation}->{'Firewall'} = 'Tulemüür';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Nõgaratta energiasalvestus';
+    $Self->{Translation}->{'Form Factor'} = 'Vormifaktor';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Frantsiisileping';
+    $Self->{Translation}->{'Freeware'} = 'Tasuta';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Üldine teave';
+    $Self->{Translation}->{'Graphics Cards'} = 'Graafikakaardid';
+    $Self->{Translation}->{'Graphics card'} = 'Graafikakaart';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Riistvara';
+    $Self->{Translation}->{'Hardware Model'} = 'Riistvara mudel';
+    $Self->{Translation}->{'Hardware Weight'} = 'Riistvara kaal';
+    $Self->{Translation}->{'Headset'} = 'Peakomplekt';
+    $Self->{Translation}->{'IP Protocol'} = 'IP-protokoll';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identiteedi ja juurdepääsu haldamine (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventarinumber';
+    $Self->{Translation}->{'Inverstment costs'} = 'Inverstmenti kulud';
+    $Self->{Translation}->{'Invoice Number'} = 'Arve number';
+    $Self->{Translation}->{'Keyboard'} = 'Klaviatuur';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitor (vedelkristallkuvar)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED monitor (valgusdiood)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Lauatelefon';
+    $Self->{Translation}->{'Laptop'} = 'Sülearvuti';
+    $Self->{Translation}->{'Latitude'} = 'Laiuskraad';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Kiht 1: füüsiline kiht';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Kiht 2: andmesidekihi';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Kiht 3: võrgukihi';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Kiht 3: võrgukihi (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Kiht 4: Transpordikiht';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Kiht 5: Seansikihi';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Kiht 6: Esitluskihi';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Kiht 7: Rakenduskihi';
+    $Self->{Translation}->{'Lease Agreement'} = 'Rendileping';
+    $Self->{Translation}->{'License Agreement'} = 'Litsentsileping';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Litsentsi võti';
+    $Self->{Translation}->{'License Type'} = 'Litsentsitüüp';
+    $Self->{Translation}->{'License period from'} = 'Litsentsi kehtivusaeg alates';
+    $Self->{Translation}->{'License period until'} = 'Litsentsi kehtivusaeg kuni';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Liitiumraudfosfaat (LiFePO4) aku';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Liitium-ioon aku (Li-ion)';
+    $Self->{Translation}->{'Loan Agreement'} = 'Laenuleping';
+    $Self->{Translation}->{'Located in'} = 'Asub';
+    $Self->{Translation}->{'Longitude'} = 'Pikkuskraad';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Tootja';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Maksimaalne kandevõime (W)';
+    $Self->{Translation}->{'Memory'} = 'Mälu';
+    $Self->{Translation}->{'Memory Type'} = 'Mälu tüüp';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobiilinumber';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobiilne/integreeritud';
+    $Self->{Translation}->{'Model'} = 'Mudel';
+    $Self->{Translation}->{'Model Description'} = 'Mudeli kirjeldus';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Monitori resolutsioon';
+    $Self->{Translation}->{'Monitor Size'} = 'Monitori suurus';
+    $Self->{Translation}->{'Mouse'} = 'Hiir';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Võrk';
+    $Self->{Translation}->{'Network Info'} = 'Võrguinfo';
+    $Self->{Translation}->{'Network Information'} = 'Võrguteave';
+    $Self->{Translation}->{'Network Layer'} = 'Võrgukorraldus';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikkel-kaadmium (NiCd) aku';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikkel-metallhüdriid (NiMH) aku';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Mitteavaldamise leping (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Märkmik';
+    $Self->{Translation}->{'Number of CPUs'} = 'Protsessorite arv';
+    $Self->{Translation}->{'Number of RAM modules'} = 'RAM-moodulite arv';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Graafikakaartide arv';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED monitor (orgaaniline valgusdiood)';
+    $Self->{Translation}->{'Operating costs'} = 'Tegevuskulud';
+    $Self->{Translation}->{'Order Number'} = 'Tellimuse number';
+    $Self->{Translation}->{'Other'} = 'Muud';
+    $Self->{Translation}->{'Outputs'} = 'Väljundid';
+    $Self->{Translation}->{'PIN'} = 'PIN-KOOD';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Partnerlusleping';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefoninumber';
+    $Self->{Translation}->{'Phone Type'} = 'Telefoni tüüp';
+    $Self->{Translation}->{'Physical Cores'} = 'Füüsilised südamikud';
+    $Self->{Translation}->{'Power Delivery'} = 'Toitevarustus';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Ostetud aadressil';
+    $Self->{Translation}->{'Rack Depth'} = 'Riiuli sügavus';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Riiuliüksused (U)';
+    $Self->{Translation}->{'Room'} = 'Tuba';
+    $Self->{Translation}->{'SIM Card'} = 'SIM-kaart';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS sertifikaadid';
+    $Self->{Translation}->{'Sales Contract'} = 'Müügileping';
+    $Self->{Translation}->{'Satellite Phone'} = 'Satelliittelefon';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Suletud plii-soolhappe aku (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Seerianumber';
+    $Self->{Translation}->{'Server Software'} = 'Serveri tarkvara';
+    $Self->{Translation}->{'Service Agreement'} = 'Teenuseleping';
+    $Self->{Translation}->{'Service Tag'} = 'Teenuse silt';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Pistikupesa tüüp';
+    $Self->{Translation}->{'Software'} = 'Tarkvara';
+    $Self->{Translation}->{'Speakers'} = 'Kõnelejad';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Start IP-aadress';
+    $Self->{Translation}->{'Storage'} = 'Ladustamine';
+    $Self->{Translation}->{'Storage Partition'} = 'Salvestusruumi eraldiseisund';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Tütarettevõte';
+    $Self->{Translation}->{'Summary'} = 'Kokkuvõte';
+    $Self->{Translation}->{'Thin Client'} = 'Õhuke klient';
+    $Self->{Translation}->{'Threads'} = 'Niidid';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Graafikakaardi RAM kokku (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'RAM kokku (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Puuteekraaniga monitor';
+    $Self->{Translation}->{'Tower'} = 'Torni';
+    $Self->{Translation}->{'USB Hub'} = 'USB pesa';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'VR peakomplekt';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP-telefon';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Veebikaamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

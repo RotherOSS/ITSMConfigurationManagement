@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Általános működési adatok';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Bejövő kérési adatok beállításai';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'A kimenő válaszadatok beállításai';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Konfigurációelem-menedzsment';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Objektum típusa';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'A következő osztályok kerülnek importálásra';
     $Self->{Translation}->{'The following roles will be imported'} = 'A következő szerepkörök kerülnek importálásra';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Név frissítve (új = %s, régi = %s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Attribútum (%s) frissítve erről: „%s”, erre: „%s”';
     $Self->{Translation}->{'Version %s deleted'} = '%s. verzió törölve';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Nincs konfigurációelem-azonosító vagy verzióazonosító megadva!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'A(z) %s konfigurációelem-azonosító nem található az adatbázisban!';
     $Self->{Translation}->{'ConfigItem'} = 'Konfigurációelem';
     $Self->{Translation}->{'printed by %s at %s'} = 'nyomtatta: %s – %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Érvénytelen osztályazonosító!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Osztálykorlátozások a konfigurációs elemhez';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Egy vagy több osztály kiválasztása a választható konfigurációs elemek korlátozásához';
-    $Self->{Translation}->{'Link type'} = 'Link típusa';
-    $Self->{Translation}->{'Select the link type.'} = 'Válassza ki a link típusát.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Előre: (Forrás) -> Hivatkozás (Cél)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Hátrafelé: Hivatkozás (Forrás) -> Hivatkozás (Cél)';
-    $Self->{Translation}->{'Link Direction'} = 'Link iránya';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'A hivatkozó objektum az, amelyik tartalmazza ezt a dinamikus mezőt, a hivatkozott objektum pedig az, amelyik a dinamikus mező értékeként van kiválasztva.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dinamikus (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Static (változat)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Link hivatkozási típus';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Egy elem legnagyobb száma';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Az üres mezők azt jelzik, hogy az aktuális mezők megtartásra kerülnek';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Kihagyva';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Mellékletek importálása/exportálása (soronként az utolsó bejegyzésként)';
+    $Self->{Translation}->{'Version String'} = 'Verzió karakterlánc';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Hiba a definíciók szinkronizálásában. Kérjük, ellenőrizze a naplót.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Rejtett';
     $Self->{Translation}->{'1 - Shown'} = '1 - Megjelenítve';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Lehetővé teszi a kiterjesztett keresési feltételeket az ügynöki felület konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a konfigurációs elem nevére olyan feltételekkel, mint "(*key1*&&*key2*)" vagy "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Lehetővé teszi a kiterjesztett keresési feltételeket az ügyfélfelület konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a konfigurációs elem nevére olyan feltételekkel, mint "(*key1*&&*key2*)" vagy "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Hozzárendelt konfigurációelemek';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Egy adott időpontban hozzon létre egy jegyet a konfigurációs elemekhez, ha a konfigurált követelmények teljesülnek. Az időpontot a ConfigItem "TimeCIKey" alatt konfigurált mező értéke határozza meg, és a "TimeModifier" módosítja. Ha ez utóbbi lehet csak egy szám, vagy egy jel (+/-), egy szám és egy egység (d/h/m): "7" egyenértékű a "+7d"-vel. A "Ticket->DynamicField" dinamikus mezőt a létrehozott jegyek jelölésére használjuk - ennek léteznie kell. A \\<OTOBO_CONFIGITEM_X\\> jelzőket, ahol X lehet NÉV, SZÁM és DÁTUM, a "Ticket->Text" megfelelő értékeivel kell helyettesíteni.';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'Ügyfél-vállalathoz hozzárendelt konfigurációelemek';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'Ügyfél-felhasználóhoz hozzárendelt konfigurációelemek';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB beállítások';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'A ConfigItem Overview oszlop konfigurációs elemszűrői.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Az ügynöki felület konfigurációs elemeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a konfigurációs elem attribútumai és a dinamikus mezők (DynamicField_NameX) engedélyezettek.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Az ügyfélfelület konfigurációs elemeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a konfigurációs elem attribútumai és a dinamikus mezők (DynamicField_NameX) engedélyezettek.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Az ügynöki felület konfigurációs elem keresési eredményeinek áttekintésében szűrhető oszlopok. Megjegyzés: Csak a Config Item attribútumok és a dinamikus mezők (DynamicField_NameX) engedélyezettek.';
     $Self->{Translation}->{'Config Items'} = 'Konfigurációelemek';
     $Self->{Translation}->{'Config item add.'} = 'Konfigurációelem hozzáadása.';
     $Self->{Translation}->{'Config item edit.'} = 'Konfigurációelem szerkesztése.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Konfigurációs elem eseménymodul, amely az OTOBOCILicenseCount funkció licenceit számolja.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigurációelem esemény modul, amely engedélyezi a naplózást az előzményekbe az ügyintézői felületen.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Konfigurációs elem eseménymodul, amely frissíti a konfigurációs elemeket az aktuális definíciójukra.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Konfigurációs elem eseménymodul, amely frissíti a configitem_ĺink táblázatot.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'A konfigurációs elem eseménymodul frissíti az aktuális eseményállapotot.';
     $Self->{Translation}->{'Config item history.'} = 'Konfigurációelem előzményei.';
     $Self->{Translation}->{'Config item print.'} = 'Konfigurációelem nyomtatása.';
     $Self->{Translation}->{'Config item zoom.'} = 'Konfigurációelem nagyítása.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfigurációelem tömeges modul.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Az ügyintézői felület konfigurációelem keresési háttérprogram útválasztója.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Meghatározások létrehozása és kezelése a konfigurációelemeknél.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Bizonyos időpontokban jegyeket hoz létre a ConfigItems számára.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Az ügyfelek láthatják a korábbi CI-verziókat.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Meghatározza a szükséges jogosultságokat az ITSM konfigurációelemek kereséséhez az általános felület használatával.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Meghatározza az ITSM konfigurációs elemek beállításához szükséges jogosultságokat az általános felület használatával.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Egy áttekintő modult határoz meg egy konfigurációelem lista kis nézetének megjelenítéséhez.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Meghatározza az alapértelmezett megjelenített konfigurációs elem keresési attribútumot a konfigurációs elem keresési képernyőn. Példa: "Key" a dinamikus mező neve, ebben az esetben \'X\', "Content" a dinamikus mező értéke a dinamikus mező típusától függően, Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' és vagy \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Meghatározza az „ITSMConfigItem” osztály alapértelmezett alobjektumát.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Meghatározza a RichText szerkesztő komponens magasságát ennél a képernyőnél. Szám (képpont) vagy százalék (relatív) értéket adjon meg.';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'A konfigurációs elemindexben tárolt mezők, amelyeket a teljes szöveges keresésen kívül másra is használnak. A teljes funkcionalitás érdekében minden mező kötelező.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Minden egyes webszolgáltatáshoz (kulcs) megadható egy sor osztály (érték), amelyekre az importálás korlátozva van. Az összes kiválasztott osztályhoz vagy az összes létező osztályhoz az azonosító attribútumokat kell kiválasztani az invoker konfigurációban.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'GenericInterface modul regisztráció a ConfigItemFetch invoker réteghez.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'ITSM konfigurációelem áttekintés.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Ha ez az opció be van kapcsolva, a hivatkozott elemek csak akkor számítanak, ha a felsorolt osztályok valamelyikébe tartoznak.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'A telepítési állapotokat tartalmazza az ügyfélfelület konfigurációs elemkeresőjében.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Beleértve az incidensállapotokat az ügyfélfelület konfigurációs elemkeresőjében.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'A művelet eredményében megjelenítendő konfigurációs elemek maximális száma.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Egy modul egy osztályért felelős csoport ellenőrzéséhez.';
@@ -443,8 +452,10 @@ sub Data {
         'A konfigurációs elemosztályok kategóriáinak paraméterei az ügynöki felület beállítások nézetében.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'A kis konfigurációs elemek áttekintésének oszlopszűrőinek paraméterei. Megjegyzés: az "Aktív" 0-ra állítása csak azt akadályozza meg, hogy az ügynökök szerkesszék a csoport beállításait a személyes beállításaikban, de a rendszergazdáknak továbbra is lehetővé teszi, hogy egy másik felhasználó nevében szerkesszék a beállításokat. A \'PreferenceGroup\' segítségével szabályozhatja, hogy ezek a beállítások melyik területen jelenjenek meg a felhasználói felületen.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Paraméterek az ügyintézői felület ügyfél-vállalat konfigurációelem áttekintőjének vezérlőpult háttérprogramjához. A „Limit” az alapértelmezetten megjelenített bejegyzések száma. A „Group” használható a hozzáférés korlátozásához a bővítményre (például Group: admin;csoport1;csoport2;). A „Default” azt határozza meg, hogy a bővítmény alapértelmezetten engedélyezve van, vagy hogy a felhasználónak kézzel kell engedélyeznie azt. A „CacheTTLLocal” a bővítmény gyorsítótár ideje percben.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Paraméterek az üzembe állítási állapotok színeihez az ügyintézői felület beállítások nézetében.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Verzió karakterlánc kifejezés';
     $Self->{Translation}->{'Version String Module'} = 'Version String modul';
     $Self->{Translation}->{'Version Trigger'} = 'Verzió kiváltó';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Elkerülhető-e a ConfigItemACL végrehajtása a gyorsítótárban tárolt mezőfüggőségek ellenőrzésével. Ez javíthatja az űrlapok betöltési idejét, de ki kell kapcsolni, ha az ACLModulokat az ITSMConfigItem- és Form-ReturnType típusok esetében kell használni.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Milyen általános információk jelennek meg a fejlécben.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a meglévő DependsOn típusú összekapcsolt CI-k számától függően.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k számától függően.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Ezzel az opcióval automatikusan kitölthető egy CI-mező, a kapcsolódó CI-k számától függően. A CounterClassName beállítás tartalmazza az osztály nevét, a CounterFieldName pedig a felhasznált licencek számának tárolására szolgál.';
     $Self->{Translation}->{'class'} = 'osztály';
     $Self->{Translation}->{'global'} = 'globális';
     $Self->{Translation}->{'postproductive'} = 'beüzemelés után';
     $Self->{Translation}->{'preproductive'} = 'beüzemelés előtt';
     $Self->{Translation}->{'productive'} = 'beüzemelve';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 44,45 cm (17,5 hüvelyk)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 53,34 cm (21 hüvelyk)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 66,68 cm (26,25 hüvelyk)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 80,01 cm (31,5 hüvelyk)';
+    $Self->{Translation}->{'19-inch Rack'} = '19 hüvelykes állvány';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 4,45 cm (1,75 hüvelyk)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 88,9 cm (35 hüvelyk)';
+    $Self->{Translation}->{'21-inch Rack'} = '21 hüvelykes állvány';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 hüvelyk (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23 hüvelykes állvány';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 hüvelyk (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 106,68 cm (42 hüvelyk)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 hüvelyk (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 8,89 cm (3,5 hüvelyk)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 133,35 cm (52,5 hüvelyk)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 hüvelyk (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 hüvelyk (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 hüvelyk (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 160,02 cm (63 hüvelyk)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 hüvelyk (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 hüvelyk (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 13,34 cm (5,25 hüvelyk)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 186,69 cm (73,5 hüvelyk)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 hüvelyk (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 200,02 cm (78,75 hüvelyk)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 hüvelyk (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 213,36 cm (84 hüvelyk)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 17,78 cm (7 hüvelyk)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 22,23 cm (8,75 hüvelyk)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 26,67 cm (10,5 hüvelyk)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 31,12 cm (12,25 hüvelyk)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 35,56 cm (14 hüvelyk)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 40,01 cm (15,75 hüvelyk)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Számvitel';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Címkiosztás';
+    $Self->{Translation}->{'Administrator'} = 'Adminisztrátor';
+    $Self->{Translation}->{'Analog Phone'} = 'Analóg telefon';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Készülék típusa';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Akkumulátor kapacitás (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Akkumulátor típusa';
+    $Self->{Translation}->{'Building'} = 'Épület';
+    $Self->{Translation}->{'Bus Interface'} = 'Busz interfész';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU osztály';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Kapacitás (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Grafikus kártyánkénti kapacitás';
+    $Self->{Translation}->{'Card Number'} = 'Kártya száma';
+    $Self->{Translation}->{'Card Reader'} = 'Kártyaolvasó';
+    $Self->{Translation}->{'Card Type'} = 'Kártya típusa';
+    $Self->{Translation}->{'Client Certificates'} = 'Ügyféltanúsítványok';
+    $Self->{Translation}->{'Client Software'} = 'Ügyfélszoftver';
+    $Self->{Translation}->{'Client category'} = 'Ügyfél kategória';
+    $Self->{Translation}->{'Clockrate'} = 'Clockrate';
+    $Self->{Translation}->{'Clockspeed'} = 'Clockspeed';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Kódaláíró tanúsítványok';
+    $Self->{Translation}->{'Conference Phone'} = 'Konferenciatelefon';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Tanácsadási megállapodás';
+    $Self->{Translation}->{'Contact'} = 'Kapcsolat';
+    $Self->{Translation}->{'Contact Distributor'} = 'Kapcsolat a forgalmazóval';
+    $Self->{Translation}->{'Container Management'} = 'Konténer menedzsment';
+    $Self->{Translation}->{'Contract'} = 'Szerződés';
+    $Self->{Translation}->{'Contract Type'} = 'Szerződés típusa';
+    $Self->{Translation}->{'Contract period from'} = 'A szerződés időtartama';
+    $Self->{Translation}->{'Contract period until'} = 'A szerződés időtartama';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Vezeték nélküli telefon (DECT telefon)';
+    $Self->{Translation}->{'Cost unit'} = 'Költségviselő';
+    $Self->{Translation}->{'Count of licenses'} = 'Az engedélyek száma';
+    $Self->{Translation}->{'Creation Date'} = 'Létrehozás dátuma';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Egyedi Rack';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Fenntartva';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-kiszolgáló';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'A számla dátuma';
+    $Self->{Translation}->{'Date of Order'} = 'A megrendelés dátuma';
+    $Self->{Translation}->{'Date of Warranty'} = 'A garancia dátuma';
+    $Self->{Translation}->{'Date of release'} = 'A kiadás dátuma';
+    $Self->{Translation}->{'Desktop'} = 'Asztali';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Dokumentum aláíró tanúsítványok';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI Rack';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'E-mail tanúsítványok (S/MIME tanúsítványok)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Munkaszerződés';
+    $Self->{Translation}->{'End IP Address'} = 'Vég IP-cím';
+    $Self->{Translation}->{'End of support'} = 'A támogatás megszűnése';
+    $Self->{Translation}->{'Expiry Date'} = 'Lejárati dátum';
+    $Self->{Translation}->{'External Hard Drive'} = 'Külső merevlemez';
+    $Self->{Translation}->{'Firewall'} = 'Tűzfal';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Lendkerekes energiatárolás';
+    $Self->{Translation}->{'Form Factor'} = 'Formafaktor';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Franchise megállapodás';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Általános információk';
+    $Self->{Translation}->{'Graphics Cards'} = 'Grafikus kártyák';
+    $Self->{Translation}->{'Graphics card'} = 'Grafikus kártya';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Hardver';
+    $Self->{Translation}->{'Hardware Model'} = 'Hardveres modell';
+    $Self->{Translation}->{'Hardware Weight'} = 'Hardver súlya';
+    $Self->{Translation}->{'Headset'} = 'Fejhallgató';
+    $Self->{Translation}->{'IP Protocol'} = 'IP protokoll';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identitás- és hozzáférés-kezelés (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Leltári szám';
+    $Self->{Translation}->{'Inverstment costs'} = 'Inverterköltségek';
+    $Self->{Translation}->{'Invoice Number'} = 'Számla száma';
+    $Self->{Translation}->{'Keyboard'} = 'Billentyűzet';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitor (folyadékkristályos kijelző)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED monitor (fénykibocsátó dióda)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Vezetékes telefon';
+    $Self->{Translation}->{'Laptop'} = 'Laptop';
+    $Self->{Translation}->{'Latitude'} = 'Szélesség';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = '1. réteg: Fizikai réteg';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = '2. réteg: adatkapcsolati réteg';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = '3. réteg: Hálózati réteg';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '3. réteg: Hálózati réteg (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = '4. réteg: Szállítási réteg';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = '5. réteg: Munkamenetréteg';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = '6. réteg: Bemutatási réteg';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = '7. réteg: Alkalmazási réteg';
+    $Self->{Translation}->{'Lease Agreement'} = 'Bérleti szerződés';
+    $Self->{Translation}->{'License Agreement'} = 'Licencszerződés';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licenc kulcs';
+    $Self->{Translation}->{'License Type'} = 'Licenc típusa';
+    $Self->{Translation}->{'License period from'} = 'Licencidőszak a következő időponttól';
+    $Self->{Translation}->{'License period until'} = 'Licencidőszak a következő időpontig';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Lítium vas-foszfát (LiFePO4) akkumulátor';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Lítium-ion (Li-ion) akkumulátor';
+    $Self->{Translation}->{'Loan Agreement'} = 'Hitelszerződés';
+    $Self->{Translation}->{'Located in'} = 'Található';
+    $Self->{Translation}->{'Longitude'} = 'Hosszúság';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Gyártó';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Maximális terhelhetőség (W)';
+    $Self->{Translation}->{'Memory'} = 'Memória';
+    $Self->{Translation}->{'Memory Type'} = 'Memória típusa';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobilszám';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobil/beágyazott';
+    $Self->{Translation}->{'Model'} = 'Modell';
+    $Self->{Translation}->{'Model Description'} = 'Modell Leírás';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Monitor felbontás';
+    $Self->{Translation}->{'Monitor Size'} = 'Monitor mérete';
+    $Self->{Translation}->{'Mouse'} = 'Egér';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Hálózat';
+    $Self->{Translation}->{'Network Info'} = 'Hálózati információk';
+    $Self->{Translation}->{'Network Information'} = 'Hálózati információk';
+    $Self->{Translation}->{'Network Layer'} = 'Hálózati réteg';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikkel-kadmium (NiCd) akkumulátor';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikkel-metálhidrid (NiMH) akkumulátor';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Titoktartási megállapodás (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Notebook';
+    $Self->{Translation}->{'Number of CPUs'} = 'CPU-k száma';
+    $Self->{Translation}->{'Number of RAM modules'} = 'RAM modulok száma';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Grafikus kártyák száma';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED monitor (szerves fénykibocsátó dióda)';
+    $Self->{Translation}->{'Operating costs'} = 'Működési költségek';
+    $Self->{Translation}->{'Order Number'} = 'Rendelési szám';
+    $Self->{Translation}->{'Other'} = 'Egyéb';
+    $Self->{Translation}->{'Outputs'} = 'Kimenetek';
+    $Self->{Translation}->{'PIN'} = 'PIN-KÓD';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Partnerségi megállapodás';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefonszám';
+    $Self->{Translation}->{'Phone Type'} = 'Telefon típusa';
+    $Self->{Translation}->{'Physical Cores'} = 'Fizikai magok';
+    $Self->{Translation}->{'Power Delivery'} = 'Teljesítményszolgáltatás';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Vásárolt';
+    $Self->{Translation}->{'Rack Depth'} = 'Rack mélység';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Rack egységek (U)';
+    $Self->{Translation}->{'Room'} = 'Szoba';
+    $Self->{Translation}->{'SIM Card'} = 'SIM-kártya';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS tanúsítványok';
+    $Self->{Translation}->{'Sales Contract'} = 'Értékesítési szerződés';
+    $Self->{Translation}->{'Satellite Phone'} = 'Műholdas telefon';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Zárt ólomakkumulátor (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Sorszám';
+    $Self->{Translation}->{'Server Software'} = 'Szerver szoftver';
+    $Self->{Translation}->{'Service Agreement'} = 'Szolgáltatási megállapodás';
+    $Self->{Translation}->{'Service Tag'} = 'Szervizcímke';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Aljzat típusa';
+    $Self->{Translation}->{'Software'} = 'Szoftver';
+    $Self->{Translation}->{'Speakers'} = 'Hangszórók';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'IP-cím indítása';
+    $Self->{Translation}->{'Storage'} = 'Tárolás';
+    $Self->{Translation}->{'Storage Partition'} = 'Tárolási partíció';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Leányvállalat';
+    $Self->{Translation}->{'Summary'} = 'Összefoglaló';
+    $Self->{Translation}->{'Thin Client'} = 'Thin Client';
+    $Self->{Translation}->{'Threads'} = 'Szálak';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Grafikus kártya RAM (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Teljes RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Érintőképernyős monitor';
+    $Self->{Translation}->{'Tower'} = 'Torony';
+    $Self->{Translation}->{'USB Hub'} = 'USB hub';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'VR headset';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP telefon';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Webkamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

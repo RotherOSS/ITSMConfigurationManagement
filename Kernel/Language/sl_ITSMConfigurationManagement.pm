@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Splošni podatki o delovanju';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Nastavitve za vhodne podatke zahtevka';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Nastavitve za izhodne odzivne podatke';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Upravljanje elementov konfiguracije';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Vrsta predmeta';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Uvoženi bodo naslednji razredi';
     $Self->{Translation}->{'The following roles will be imported'} = 'Uvožene bodo naslednje vloge';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Ime posodobljeno (novo=%s, staro=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Atribut %s posodobljen iz "%s" v "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Različica %s izbrisana';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Ni podan ConfigItemID ali VersionID!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s ni najden v podatkovni bazi!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = 'natisnil %s na %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Nepravilen ID razreda!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Omejitve razreda za element konfiguracije';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Izberite enega ali več razredov za omejitev izbirnih elementov konfiguracije';
-    $Self->{Translation}->{'Link type'} = 'Vrsta povezave';
-    $Self->{Translation}->{'Select the link type.'} = 'Izberite vrsto povezave.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Napadalci: Referenciranje (Vir) -> Referenciranje (Cilj)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Nazaj: (Vir) -> Sklicevanje (Cilj)';
-    $Self->{Translation}->{'Link Direction'} = 'Smer povezave';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Objekt, na katerega se sklicuje, je objekt, ki vsebuje to dinamično polje, objekt, na katerega se sklicuje, pa je objekt, ki je izbran kot vrednost dinamičnega polja.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dinamično (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statično (različica)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Vrsta sklicevanja na povezavo';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Največje število enega elementa';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Prazna polja pomenijo, da se ohranijo trenutne vrednosti.';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Preskočeno';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Uvoz/izvoz priponk (kot zadnji vnosi v vrstici)';
+    $Self->{Translation}->{'Version String'} = 'Verzija String';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Napaka pri sinhronizaciji definicij. Preverite dnevnik.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Skrito';
     $Self->{Translation}->{'1 - Shown'} = '1 - prikazano';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Omogoča razširjene pogoje iskanja pri iskanju elementov konfiguracije v vmesniku agenta. S to funkcijo lahko iščete npr. ime elementa konfiguracije s takšnimi pogoji, kot so "(*key1*&&*key2*)" ali "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Omogoča razširjene pogoje iskanja v iskanju elementov konfiguracije v vmesniku za stranke. S to funkcijo lahko iščete npr. ime elementa konfiguracije s takšnimi pogoji, kot so "(*key1*&&*key2*)" ali "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Dodeljeni KI';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'V določenem trenutku ustvarite vozovnico za elemente konfiguracije, če so izpolnjene konfigurirane zahteve. Časovna točka je določena z vrednostjo polja, ki je konfigurirano pod "TimeCIKey" elementa ConfigItem in spremenjeno s "TimeModifier". Če je slednja lahko samo številka ali znak (+/-), številka in enota (d/h/m): "7" je enakovredno "+7d". Dinamično polje "Ticket->DynamicField" se bo uporabljalo za označevanje ustvarjenih vozovnic - obstajati mora. Zastavice \<OTOBO_CONFIGITEM_X\>, kjer je X lahko NAME, NUMBER in DATE, bodo nadomeščene z ustreznimi vrednostmi v "Ticket->Text".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'KI, dodeljeni podjetju stranke';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI, dodeljeni uporabniku stranke';
     $Self->{Translation}->{'CMDB Settings'} = 'Nastavitve CMDB';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Filtri elementa konfiguracije stolpca za pregled elementa konfiguracije.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stolpci, ki jih je mogoče filtrirati v pregledu elementov konfiguracije v vmesniku za stranke. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stolpci, ki jih je mogoče filtrirati v pregledu rezultatov iskanja elementov konfiguracije v vmesniku agenta. Opomba: Dovoljeni so samo atributi elementa konfiguracije in dinamična polja (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Elementi konfiguracije';
     $Self->{Translation}->{'Config item add.'} = 'Dodajanje elementa konfiguracije.';
     $Self->{Translation}->{'Config item edit.'} = 'Urejanje elementa konfiguracije.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Modul dogodkov za element konfiguracije, ki šteje licence za funkcijo OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Modul za dogodke elementa konfiguracije, ki omogoča beleženje v zgodovino v vmesniku agenta.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Modul dogodkov za elemente konfiguracije, ki posodobi elemente konfiguracije na njihovo trenutno definicijo.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Modul dogodkov za elemente konfiguracije, ki posodobi tabelo configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Modul dogodkov elementa konfiguracije posodobi trenutno stanje incidenta.';
     $Self->{Translation}->{'Config item history.'} = 'Zgodovina elementov konfiguracije.';
     $Self->{Translation}->{'Config item print.'} = 'Tiskanje elementa konfiguracije.';
     $Self->{Translation}->{'Config item zoom.'} = 'Konfiguracija povečave elementa.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Postavka za konfiguracijo modula v razsutem stanju.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Element konfiguracije za iskanje zalednega usmerjevalnika vmesnika agenta.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Ustvarjanje in upravljanje definicij za elemente konfiguracije.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Ustvari vozovnice za elemente ConfigItems v določenih časovnih točkah.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Stranke si lahko ogledajo pretekle različice CI.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Opredeljuje Zahtevana dovoljenja za iskanje elementov konfiguracije ITSM z uporabo splošnega vmesnika.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Opredeljuje Zahtevana dovoljenja za nastavljanje elementov konfiguracije ITSM z uporabo splošnega vmesnika.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Opredeljuje modul za pregled, ki prikazuje majhen pogled seznama elementov konfiguracije.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Določa privzeto prikazan atribut iskanja elementa konfiguracije za zaslon iskanja elementa konfiguracije. Primer: "Key" mora imeti ime dinamičnega polja, v tem primeru "X", "Content" mora imeti vrednost dinamičnega polja, odvisno od vrste dinamičnega polja, Text: "a text", Dropdown: "1", Date/Time: "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' in ali \'Search_DynamicField_XTimePointFormat=teden; Search_DynamicField_XTimePointStart=Pred; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Opredeljuje privzeti podobjekt razreda \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Določa višino komponente urejevalnika bogatega besedila za ta zaslon. Vnesite število (piksli) ali odstotno vrednost (relativno).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Polja, shranjena v indeksu elementov konfiguracije, ki se poleg iskanja po celotnem besedilu uporabljajo tudi za druge stvari. Za popolno funkcionalnost so vsa polja obvezna.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Za vsako spletno storitev (ključ) lahko določite niz razredov (vrednost), za katere je uvoz omejen. Za vse izbrane razrede ali vse obstoječe razrede bo treba v konfiguraciji invokerja izbrati identifikacijske atribute.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Registracija modula GenericInterface za sloj invokatorja ConfigItemFetch.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Pregled elementa konfiguracije ITSM.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Če je ta možnost aktivirana, se povezani predmeti upoštevajo le, če pripadajo enemu od naštetih razredov.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Vključuje stanja uvajanja v iskanje elementov konfiguracije v uporabniškem vmesniku.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Vključuje stanja incidentov v iskanje elementov konfiguracije v uporabniškem vmesniku.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Največje število elementov konfiguracije, ki se prikažejo v rezultatu te operacije.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul za preverjanje skupine, odgovorne za razred.';
@@ -443,8 +452,10 @@ sub Data {
         'Parametri za kategorije za razrede elementov konfiguracije v pogledu nastavitev v vmesniku agenta.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametri za filtre stolpcev v pregledu majhnih elementov konfiguracije. Upoštevajte: z nastavitvijo "Aktivno" na 0 bo agentom preprečeno le urejanje nastavitev te skupine v njihovih osebnih nastavitvah, vendar bo administratorjem še vedno omogočeno urejanje nastavitev v imenu drugega uporabnika. S funkcijo \'PreferenceGroup\' lahko nadzirate, v katerem območju naj bodo te nastavitve prikazane v uporabniškem vmesniku.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parametri za nadzorno ploščo zaledja pregled konfiguracijskih elementov podjetja stranke v vmesniku agenta . "Limit" je privzeto število prikazanih vnosov. "Group" se uporablja za omejitev dostopa do vtičnika (npr. Group: admin;group1;group2;). "Default" določa, ali je vtičnik privzeto omogočen ali ga mora uporabnik omogočiti ročno. "CacheTTLLocal" je čas predpomnilnika v minutah za vtičnik.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametri za barvo stanja uvajanja v pogledu nastavitev v vmesniku agenta.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Različica String Izraz';
     $Self->{Translation}->{'Version String Module'} = 'Različica String Modul';
     $Self->{Translation}->{'Version Trigger'} = 'Sprožilnik različice';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Ali se lahko izvedbi ConfigItemACL izognemo s preverjanjem odvisnosti polj v predpomnilniku. To lahko izboljša čas nalaganja obrazcev, vendar mora biti onemogočeno, če se za tipe ITSMConfigItem- in Form-ReturnType uporabljajo moduli ACL.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Kateri splošni podatki so prikazani v glavi.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'S to možnostjo je mogoče samodejno izpolniti polje CI glede na število povezanih CI z obstoječim tipom Odvisno od.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'S to možnostjo je mogoče samodejno zapolniti polje CI glede na število povezanih CI.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'S to možnostjo je mogoče samodejno zapolniti polje CI glede na število povezanih CI. Nastavitev CounterClassName vključuje ime razreda, CounterFieldName pa se uporablja za shranjevanje števila uporabljenih licenc.';
     $Self->{Translation}->{'class'} = 'razred';
     $Self->{Translation}->{'global'} = 'globalno';
     $Self->{Translation}->{'postproductive'} = 'postproduktivni';
     $Self->{Translation}->{'preproductive'} = 'predproduktivni';
     $Self->{Translation}->{'productive'} = 'produktivno';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 palca (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 palcev (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 palca (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 palca (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-palčni nosilec';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 1,75 palca (4,45 cm)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 palcev (88,9 cm)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-palčni nosilec';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 palca (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-palčno stojalo';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 palca (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 palcev (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 palca (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 palca (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 palca (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 palca (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 palca (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 palca (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 palcev (160,02 cm)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 palca (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 palca (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 5,25 palca (13,34 cm)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 palca (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 palca (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 78,75 palca (200,02 cm)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 palca (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 palcev (213,36 cm)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 palcev (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 palca (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 palca (26,67 cm)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 palca (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 palcev (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 palca (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Računovodstvo';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Dodeljevanje naslovov';
+    $Self->{Translation}->{'Administrator'} = 'Upravitelj';
+    $Self->{Translation}->{'Analog Phone'} = 'Analogni telefon';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Vrsta naprave';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Zmogljivost baterije (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Vrsta baterije';
+    $Self->{Translation}->{'Building'} = 'Stavba';
+    $Self->{Translation}->{'Bus Interface'} = 'Vmesnik vodila';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'Razred procesorja';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Zmogljivost (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Zmogljivost na grafično kartico';
+    $Self->{Translation}->{'Card Number'} = 'Številka kartice';
+    $Self->{Translation}->{'Card Reader'} = 'Bralnik kartic';
+    $Self->{Translation}->{'Card Type'} = 'Vrsta kartice';
+    $Self->{Translation}->{'Client Certificates'} = 'Potrdila strank';
+    $Self->{Translation}->{'Client Software'} = 'Odjemalska programska oprema';
+    $Self->{Translation}->{'Client category'} = 'Kategorija strank';
+    $Self->{Translation}->{'Clockrate'} = 'Časovna stopnja';
+    $Self->{Translation}->{'Clockspeed'} = 'Hitrost ur';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Potrdila za podpisovanje kode';
+    $Self->{Translation}->{'Conference Phone'} = 'Konferenčni telefon';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Pogodba o svetovanju';
+    $Self->{Translation}->{'Contact'} = 'Pišite na';
+    $Self->{Translation}->{'Contact Distributor'} = 'Stik z distributerjem';
+    $Self->{Translation}->{'Container Management'} = 'Upravljanje zabojnikov';
+    $Self->{Translation}->{'Contract'} = 'Pogodba';
+    $Self->{Translation}->{'Contract Type'} = 'Vrsta pogodbe';
+    $Self->{Translation}->{'Contract period from'} = 'Pogodbeno obdobje od';
+    $Self->{Translation}->{'Contract period until'} = 'Pogodbeno obdobje do';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Brezžični telefon (telefon DECT)';
+    $Self->{Translation}->{'Cost unit'} = 'Stroškovna enota';
+    $Self->{Translation}->{'Count of licenses'} = 'Število licenc';
+    $Self->{Translation}->{'Creation Date'} = 'Datum ustanovitve';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Stojalo po meri';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Rezervirano';
+    $Self->{Translation}->{'DNS-Server'} = 'Strežnik DNS';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Datum računa';
+    $Self->{Translation}->{'Date of Order'} = 'Datum naročila';
+    $Self->{Translation}->{'Date of Warranty'} = 'Datum garancije';
+    $Self->{Translation}->{'Date of release'} = 'Datum izdaje';
+    $Self->{Translation}->{'Desktop'} = 'Namizni računalnik';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Potrdila za podpisovanje dokumentov';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI Rack';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'Potrdila za e-pošto (potrdila S/MIME)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Pogodba o zaposlitvi';
+    $Self->{Translation}->{'End IP Address'} = 'Končni naslov IP';
+    $Self->{Translation}->{'End of support'} = 'Konec podpore';
+    $Self->{Translation}->{'Expiry Date'} = 'Datum izteka veljavnosti';
+    $Self->{Translation}->{'External Hard Drive'} = 'Zunanji trdi disk';
+    $Self->{Translation}->{'Firewall'} = 'Požarni zid';
+    $Self->{Translation}->{'Firmware'} = 'Vdelana programska oprema';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Skladiščenje energije z vztrajnikom';
+    $Self->{Translation}->{'Form Factor'} = 'Faktor oblike';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Pogodba o franšizi';
+    $Self->{Translation}->{'Freeware'} = 'Brezplačna programska oprema';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Splošne informacije';
+    $Self->{Translation}->{'Graphics Cards'} = 'Grafične kartice';
+    $Self->{Translation}->{'Graphics card'} = 'Grafična kartica';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Strojna oprema';
+    $Self->{Translation}->{'Hardware Model'} = 'Model strojne opreme';
+    $Self->{Translation}->{'Hardware Weight'} = 'Teža strojne opreme';
+    $Self->{Translation}->{'Headset'} = 'Slušalke';
+    $Self->{Translation}->{'IP Protocol'} = 'Protokol IP';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Upravljanje identitet in dostopa (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventarna številka';
+    $Self->{Translation}->{'Inverstment costs'} = 'Stroški inverzije';
+    $Self->{Translation}->{'Invoice Number'} = 'Številka računa';
+    $Self->{Translation}->{'Keyboard'} = 'Tipkovnica';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'Monitor LCD (zaslon s tekočimi kristali)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'Monitor LED (svetleča dioda)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Stacionarni telefon';
+    $Self->{Translation}->{'Laptop'} = 'Prenosni računalnik';
+    $Self->{Translation}->{'Latitude'} = 'Zemljepisna širina';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Plast 1: fizična plast';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Plast 2: plast podatkovnih povezav';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Plast 3: omrežna plast';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = '3. plast: omrežna plast (nadomrežje)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Sloj 4: Transportni sloj';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Sloj 5: Sejni sloj';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Sloj 6: Predstavitveni sloj';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Sloj 7: aplikacijski sloj';
+    $Self->{Translation}->{'Lease Agreement'} = 'Pogodba o najemu';
+    $Self->{Translation}->{'License Agreement'} = 'Licenčna pogodba';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licenčni ključ';
+    $Self->{Translation}->{'License Type'} = 'Vrsta licence';
+    $Self->{Translation}->{'License period from'} = 'Obdobje licence od';
+    $Self->{Translation}->{'License period until'} = 'Obdobje licence do';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Baterije iz litij-železovega fosfata (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Litij-ionska (Li-ion) baterija';
+    $Self->{Translation}->{'Loan Agreement'} = 'Pogodba o posojilu';
+    $Self->{Translation}->{'Located in'} = 'Nahaja se v';
+    $Self->{Translation}->{'Longitude'} = 'Zemljepisna dolžina';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Proizvajalec';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Največja zmogljivost obremenitve (W)';
+    $Self->{Translation}->{'Memory'} = 'Spomin';
+    $Self->{Translation}->{'Memory Type'} = 'Vrsta pomnilnika';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini stojalo';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobilna številka';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobilni/vgrajeni';
+    $Self->{Translation}->{'Model'} = 'Model';
+    $Self->{Translation}->{'Model Description'} = 'Opis modela';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Ločljivost monitorja';
+    $Self->{Translation}->{'Monitor Size'} = 'Velikost monitorja';
+    $Self->{Translation}->{'Mouse'} = 'Miška';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Omrežje';
+    $Self->{Translation}->{'Network Info'} = 'Informacije o omrežju';
+    $Self->{Translation}->{'Network Information'} = 'Informacije o omrežju';
+    $Self->{Translation}->{'Network Layer'} = 'Omrežna plast';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikelj-kadmijeva (NiCd) baterija';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikelj-metalhidridna (NiMH) baterija';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Sporazum o nerazkrivanju (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Beležnica';
+    $Self->{Translation}->{'Number of CPUs'} = 'Število procesorjev';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Število modulov RAM';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Število grafičnih kartic';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'Monitor OLED (organska svetleča dioda)';
+    $Self->{Translation}->{'Operating costs'} = 'Stroški poslovanja';
+    $Self->{Translation}->{'Order Number'} = 'Številka naročila';
+    $Self->{Translation}->{'Other'} = 'Drugo';
+    $Self->{Translation}->{'Outputs'} = 'Izhodi';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Sporazum o partnerstvu';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefonska številka';
+    $Self->{Translation}->{'Phone Type'} = 'Vrsta telefona';
+    $Self->{Translation}->{'Physical Cores'} = 'Fizična jedra';
+    $Self->{Translation}->{'Power Delivery'} = 'Zagotavljanje napajanja';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Kupljeno v';
+    $Self->{Translation}->{'Rack Depth'} = 'Globina regala';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Enote stojala (U)';
+    $Self->{Translation}->{'Room'} = 'Soba';
+    $Self->{Translation}->{'SIM Card'} = 'Kartica SIM';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'Potrdila SSL/TLS';
+    $Self->{Translation}->{'Sales Contract'} = 'Prodajna pogodba';
+    $Self->{Translation}->{'Satellite Phone'} = 'Satelitski telefon';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Zaprta svinčeno-kislinska baterija (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Serijska številka';
+    $Self->{Translation}->{'Server Software'} = 'Programska oprema za strežnike';
+    $Self->{Translation}->{'Service Agreement'} = 'Sporazum o storitvah';
+    $Self->{Translation}->{'Service Tag'} = 'Storitvena oznaka';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Vrsta vtičnice';
+    $Self->{Translation}->{'Software'} = 'Programska oprema';
+    $Self->{Translation}->{'Speakers'} = 'Zvočniki';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Začetni naslov IP';
+    $Self->{Translation}->{'Storage'} = 'Shranjevanje';
+    $Self->{Translation}->{'Storage Partition'} = 'Razdelek za shranjevanje';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Podružnica';
+    $Self->{Translation}->{'Summary'} = 'Povzetek';
+    $Self->{Translation}->{'Thin Client'} = 'Tanek odjemalec';
+    $Self->{Translation}->{'Threads'} = 'Niti';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Skupaj RAM grafične kartice (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Skupni RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Monitor z zaslonom na dotik';
+    $Self->{Translation}->{'Tower'} = 'Stolp';
+    $Self->{Translation}->{'USB Hub'} = 'Vozlišče USB';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'Naglavna slušalka VR';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'Telefon VoIP';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Spletna kamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

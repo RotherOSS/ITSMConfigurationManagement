@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Všeobecné prevádzkové údaje';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Nastavenia pre prichádzajúce údaje žiadosti';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Nastavenia pre údaje odchádzajúcej odpovede';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Správa konfiguračných položiek';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Typ objektu';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Importujú sa tieto triedy';
     $Self->{Translation}->{'The following roles will be imported'} = 'Importujú sa tieto úlohy';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Názov aktualizovaný (new=%s, old=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Atribút %s aktualizovaný z "%s" na "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Verzia %s odstránená';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Nie je uvedené žiadne ConfigItemID ani VersionID!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s sa nenašlo v databáze!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = 'vytlačené %s na %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Neplatné ClassID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Obmedzenia triedy pre položku konfigurácie';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Výber jednej alebo viacerých tried na obmedzenie vyberateľných položiek konfigurácie';
-    $Self->{Translation}->{'Link type'} = 'Typ prepojenia';
-    $Self->{Translation}->{'Select the link type.'} = 'Vyberte typ prepojenia.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Útočníci: Odkazovanie (Zdroj) -> Odkazované (Cieľ)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Spätne: Odkazovanie (Zdroj) -> Odkazovanie (Cieľ)';
-    $Self->{Translation}->{'Link Direction'} = 'Smer prepojenia';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Odkazujúci objekt je ten, ktorý obsahuje toto dynamické pole, odkazovaný objekt je ten, ktorý je vybraný ako hodnota dynamického poľa.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dynamické (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statický (verzia)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Typ odkazu';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Maximálny počet jedného prvku';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Prázdne polia znamenajú, že aktuálne hodnoty sú zachované';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Vynechané';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Import/export príloh (ako posledné položky na riadku)';
+    $Self->{Translation}->{'Version String'} = 'Reťazec verzie';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Chyba pri synchronizácii definícií. Skontrolujte, prosím, protokol.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Skryté';
     $Self->{Translation}->{'1 - Shown'} = '1 - Zobrazené';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Umožňuje rozšírené podmienky vyhľadávania v konfiguračnej položke vyhľadávania v rozhraní agenta. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky s podmienkami typu "(*key1*&&*key2*)" alebo "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Umožňuje rozšírené podmienky vyhľadávania vo vyhľadávaní konfiguračných položiek v rozhraní zákazníka. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky pomocou podmienok typu "(*key1*&&*key2*)" alebo "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Priradené CI';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'V určitom časovom bode vytvorte lístok pre konfiguračné položky, ak sú splnené nakonfigurované požiadavky. Časový bod je určený hodnotou poľa nakonfigurovaného v položke "TimeCIKey" položky ConfigItem a upraveného pomocou "TimeModifier". Ak ten môže byť buď len číslo, alebo znamienko (+/-), číslo a jednotka (d/h/m): "7" je ekvivalentné "+7d". Na označenie vytvorených lístkov sa použije dynamické pole "Ticket->DynamicField" - musí existovať. Príznaky \<OTOBO_CONFIGITEM_X\>, kde X môže byť NAME (názov), NUMBER (číslo) a DATE (dátum), budú nahradené príslušnými hodnotami v "Ticket->Text" (lístok->text).';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI priradené k zákazníckej spoločnosti';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI priradené používateľovi zákazníka';
     $Self->{Translation}->{'CMDB Settings'} = 'Nastavenia CMDB';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Filtre stĺpcových konfiguračných položiek pre ConfigItem Overview.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Stĺpce, ktoré možno filtrovať v prehľade konfiguračných položiek v rozhraní agenta. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stĺpce, ktoré možno filtrovať v prehľade konfiguračných položiek v rozhraní zákazníka. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Stĺpce, ktoré možno filtrovať v prehľade výsledkov vyhľadávania konfiguračných položiek v rozhraní agenta. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Položky konfigurácie';
     $Self->{Translation}->{'Config item add.'} = 'Pridanie položky konfigurácie.';
     $Self->{Translation}->{'Config item edit.'} = 'Úprava položky konfigurácie.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Modul udalostí konfiguračnej položky, ktorý počíta licencie pre funkciu OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Modul udalostí konfiguračnej položky, ktorý umožňuje zaznamenávanie do histórie v rozhraní agenta.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Modul udalostí konfiguračných položiek, ktorý aktualizuje konfiguračné položky podľa ich aktuálnej definície.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Modul udalostí položky konfigurácie, ktorý aktualizuje tabuľku configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Modul udalostí položky konfigurácie aktualizuje aktuálny stav incidentu.';
     $Self->{Translation}->{'Config item history.'} = 'Výstup';
     $Self->{Translation}->{'Config item print.'} = 'Tlač konfiguračnej položky.';
     $Self->{Translation}->{'Config item zoom.'} = 'Priblíženie konfiguračnej položky.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Hromadný modul konfiguračnej položky.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Vyhľadávanie konfiguračnej položky backendového smerovača rozhrania agenta.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Vytvorenie a správa definícií konfiguračných položiek.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Vytvára lístky pre položky ConfigItems v určitých časových bodoch.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Zákazníci môžu vidieť historické verzie CI.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Definuje požadované oprávnenia na vyhľadávanie konfiguračných položiek ITSM pomocou všeobecného rozhrania.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Definuje požadované oprávnenia na nastavenie konfiguračných položiek ITSM pomocou všeobecného rozhrania.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definuje modul prehľadu na zobrazenie malého zobrazenia zoznamu konfiguračných položiek.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Definuje predvolený zobrazený atribút vyhľadávania konfiguračných položiek pre obrazovku vyhľadávania konfiguračných položiek. Príklad: "Key" (Kľúč) musí mať názov dynamického poľa v tomto prípade "X", "Content" (Obsah) musí mať hodnotu dynamického poľa v závislosti od typu dynamického poľa, Text: "a text", Dropdown: "1", Date/Time: "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' a alebo \'Search_DynamicField_XTimePointFormat=týždeň; Search_DynamicField_XTimePointStart=Pred; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definuje predvolený podobjekt triedy "ITSMConfigItem".';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Definuje výšku komponentu textového editora pre túto obrazovku. Zadajte číslo (pixely) alebo percentuálnu hodnotu (relatívnu).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Polia uložené v indexe konfiguračnej položky, ktoré sa okrem fulltextového vyhľadávania používajú aj na iné účely. Pre úplnú funkčnosť sú všetky polia povinné.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Pre každú webovú službu (kľúč) možno definovať pole tried (hodnota), na ktoré je import obmedzený. Pre všetky vybrané triedy alebo všetky existujúce triedy sa budú musieť v konfigurácii invokera zvoliť identifikačné atribúty.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Registrácia modulu GenericInterface pre vrstvu vyvolávača ConfigItemFetch.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Prehľad konfiguračných položiek ITSM.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Ak je táto možnosť aktivovaná, prepojené položky sa započítajú len vtedy, ak patria do jednej z uvedených tried.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Zahŕňa stavy nasadenia do vyhľadávania konfiguračných položiek v rozhraní zákazníka.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Zahŕňa stavy incidentov do vyhľadávania konfiguračných položiek v rozhraní zákazníka.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Maximálny počet konfiguračných položiek, ktoré sa zobrazia vo výsledku tejto operácie.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul na kontrolu skupiny zodpovednej za triedu.';
@@ -443,8 +452,10 @@ sub Data {
         'Parametre pre kategórie tried konfiguračných položiek v zobrazení preferencií rozhrania agenta.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametre pre stĺpcové filtre prehľadu malých konfiguračných položiek. Upozornenie: nastavenie hodnoty "Aktívne" na 0 zabráni agentom upravovať nastavenia tejto skupiny iba v ich osobných nastaveniach, ale správcom stále umožní upravovať nastavenia v mene iného používateľa. Pomocou položky \'PreferenceGroup\' môžete ovládať, v ktorej oblasti sa majú tieto nastavenia zobrazovať v používateľskom rozhraní.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parametre pre backend dashboardu prehľadu konfiguračných položiek zákazníckej spoločnosti agentského rozhrania . "Limit" je predvolený počet zobrazených položiek. "Group" sa používa na obmedzenie prístupu k zásuvnému modulu (napr. Group: admin;group1;group2;). "Default" určuje, či je zásuvný modul predvolene povolený alebo či ho musí používateľ povoliť ručne. "CacheTTLLocal" je čas vyrovnávacej pamäte v minútach pre zásuvný modul.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametre pre stavy nasadenia sa vyfarbia v zobrazení preferencií rozhrania agenta.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Verzia Reťazec vyjadrenia';
     $Self->{Translation}->{'Version String Module'} = 'Modul reťazca verzie';
     $Self->{Translation}->{'Version Trigger'} = 'Spúšťač verzie';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Či je možné vyhnúť sa vykonaniu príkazu ConfigItemACL kontrolou závislostí polí uložených v medzipamäti. Toto môže zlepšiť časy načítania formulárov, ale musí byť vypnuté, ak sa majú používať ACLModuly pre ITSMConfigItem- a Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Ktoré všeobecné informácie sú uvedené v záhlaví.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI s existujúcim typom DependsOn.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI. Nastavenie CounterClassName obsahuje názov triedy a CounterFieldName sa používa na uloženie počtu použitých licencií.';
     $Self->{Translation}->{'class'} = 'trieda';
     $Self->{Translation}->{'global'} = 'globálne';
     $Self->{Translation}->{'postproductive'} = 'postprodukčné';
     $Self->{Translation}->{'preproductive'} = 'predprodukčné';
     $Self->{Translation}->{'productive'} = 'produktívne';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 palca (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 palcov (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 palca (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 palca (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-palcový stojan';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 1,75 palca (4,45 cm)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 palcov (88,9 cm)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-palcový stojan';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 palca (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-palcový stojan';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 palca (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 palcov (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 palca (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 palca (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 palca (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 palca (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 palca (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 palca (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 palcov (160,02 cm)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 palca (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 palca (173,35 cm)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 5,25 palca (13,34 cm)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 palca (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 palca (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 78,75 palca (200,02 cm)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 palca (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 palcov (213,36 cm)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 palcov (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 palca (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 palca (26,67 cm)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 palca (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 palcov (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 palca (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Účtovníctvo';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Prideľovanie adries';
+    $Self->{Translation}->{'Administrator'} = 'Správca';
+    $Self->{Translation}->{'Analog Phone'} = 'Analógový telefón';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Typ spotrebiča';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Kapacita batérie (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Typ batérie';
+    $Self->{Translation}->{'Building'} = 'Budova';
+    $Self->{Translation}->{'Bus Interface'} = 'Rozhranie zbernice';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'Trieda CPU';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Kapacita (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Kapacita na grafickú kartu';
+    $Self->{Translation}->{'Card Number'} = 'Číslo karty';
+    $Self->{Translation}->{'Card Reader'} = 'Čítačka kariet';
+    $Self->{Translation}->{'Card Type'} = 'Typ karty';
+    $Self->{Translation}->{'Client Certificates'} = 'Certifikáty klientov';
+    $Self->{Translation}->{'Client Software'} = 'Klientsky softvér';
+    $Self->{Translation}->{'Client category'} = 'Kategória klientov';
+    $Self->{Translation}->{'Clockrate'} = 'Hodiny';
+    $Self->{Translation}->{'Clockspeed'} = 'Rýchlosť hodín';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Certifikáty na podpisovanie kódu';
+    $Self->{Translation}->{'Conference Phone'} = 'Konferenčný telefón';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Dohoda o poradenstve';
+    $Self->{Translation}->{'Contact'} = 'Kontakt';
+    $Self->{Translation}->{'Contact Distributor'} = 'Kontakt na distribútora';
+    $Self->{Translation}->{'Container Management'} = 'Správa kontajnerov';
+    $Self->{Translation}->{'Contract'} = 'Zmluva';
+    $Self->{Translation}->{'Contract Type'} = 'Typ zmluvy';
+    $Self->{Translation}->{'Contract period from'} = 'Zmluvné obdobie od';
+    $Self->{Translation}->{'Contract period until'} = 'Obdobie platnosti zmluvy do';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Bezdrôtový telefón (telefón DECT)';
+    $Self->{Translation}->{'Cost unit'} = 'Nákladová jednotka';
+    $Self->{Translation}->{'Count of licenses'} = 'Počet licencií';
+    $Self->{Translation}->{'Creation Date'} = 'Dátum vytvorenia';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Vlastný stojan';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Rezervované';
+    $Self->{Translation}->{'DNS-Server'} = 'Server DNS';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Dátum faktúry';
+    $Self->{Translation}->{'Date of Order'} = 'Dátum objednávky';
+    $Self->{Translation}->{'Date of Warranty'} = 'Dátum záruky';
+    $Self->{Translation}->{'Date of release'} = 'Dátum vydania';
+    $Self->{Translation}->{'Desktop'} = 'Stolný počítač';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Certifikáty na podpisovanie dokumentov';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI Rack';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'E-mailové certifikáty (certifikáty S/MIME)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Pracovná zmluva';
+    $Self->{Translation}->{'End IP Address'} = 'Koncová IP adresa';
+    $Self->{Translation}->{'End of support'} = 'Ukončenie podpory';
+    $Self->{Translation}->{'Expiry Date'} = 'Dátum skončenia platnosti';
+    $Self->{Translation}->{'External Hard Drive'} = 'Externý pevný disk';
+    $Self->{Translation}->{'Firewall'} = 'Firewall';
+    $Self->{Translation}->{'Firmware'} = 'Firmvér';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Skladovanie energie na zotrvačníku';
+    $Self->{Translation}->{'Form Factor'} = 'Faktor formy';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Franchisingová zmluva';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Všeobecné informácie';
+    $Self->{Translation}->{'Graphics Cards'} = 'Grafické karty';
+    $Self->{Translation}->{'Graphics card'} = 'Grafická karta';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Hardvér';
+    $Self->{Translation}->{'Hardware Model'} = 'Model hardvéru';
+    $Self->{Translation}->{'Hardware Weight'} = 'Hmotnosť hardvéru';
+    $Self->{Translation}->{'Headset'} = 'Náhlavná súprava';
+    $Self->{Translation}->{'IP Protocol'} = 'Protokol IP';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Správa identít a prístupu (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventárne číslo';
+    $Self->{Translation}->{'Inverstment costs'} = 'Náklady na inverstráciu';
+    $Self->{Translation}->{'Invoice Number'} = 'Číslo faktúry';
+    $Self->{Translation}->{'Keyboard'} = 'Klávesnica';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitor (displej z tekutých kryštálov)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'Monitor LED (svetelná dióda)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Telefón pevnej linky';
+    $Self->{Translation}->{'Laptop'} = 'Laptop';
+    $Self->{Translation}->{'Latitude'} = 'Zemepisná šírka';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Vrstva 1: Fyzická vrstva';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Vrstva 2: vrstva dátového spojenia';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Vrstva 3: Sieťová vrstva';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Vrstva 3: Sieťová vrstva (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Vrstva 4: Transportná vrstva';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Vrstva 5: Realizačná vrstva';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Vrstva 6: prezentačná vrstva';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Vrstva 7: Aplikačná vrstva';
+    $Self->{Translation}->{'Lease Agreement'} = 'Nájomná zmluva';
+    $Self->{Translation}->{'License Agreement'} = 'Licenčná zmluva';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licenčný kľúč';
+    $Self->{Translation}->{'License Type'} = 'Typ licencie';
+    $Self->{Translation}->{'License period from'} = 'Obdobie platnosti licencie od';
+    $Self->{Translation}->{'License period until'} = 'Doba platnosti licencie do';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Batéria s fosfátom lítia a železa (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Lítium-iónová (Li-ion) batéria';
+    $Self->{Translation}->{'Loan Agreement'} = 'Zmluva o pôžičke';
+    $Self->{Translation}->{'Located in'} = 'Nachádza sa v';
+    $Self->{Translation}->{'Longitude'} = 'Zemepisná dĺžka';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Výrobca';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Maximálna nosnosť (W)';
+    $Self->{Translation}->{'Memory'} = 'Pamäť';
+    $Self->{Translation}->{'Memory Type'} = 'Typ pamäte';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Minirack';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobilné číslo';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobilné/vložené';
+    $Self->{Translation}->{'Model'} = 'Model';
+    $Self->{Translation}->{'Model Description'} = 'Popis modelu';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Rozlíšenie monitora';
+    $Self->{Translation}->{'Monitor Size'} = 'Veľkosť monitora';
+    $Self->{Translation}->{'Mouse'} = 'Myš';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Sieť';
+    $Self->{Translation}->{'Network Info'} = 'Informácie o sieti';
+    $Self->{Translation}->{'Network Information'} = 'Informácie o sieti';
+    $Self->{Translation}->{'Network Layer'} = 'Sieťová vrstva';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikel-kadmiová (NiCd) batéria';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikel-metalhydridová (NiMH) batéria';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Dohoda o mlčanlivosti (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Notebook';
+    $Self->{Translation}->{'Number of CPUs'} = 'Počet procesorov';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Počet modulov RAM';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Počet grafických kariet';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'Monitor OLED (organická dióda emitujúca svetlo)';
+    $Self->{Translation}->{'Operating costs'} = 'Prevádzkové náklady';
+    $Self->{Translation}->{'Order Number'} = 'Objednávacie číslo';
+    $Self->{Translation}->{'Other'} = 'Iné';
+    $Self->{Translation}->{'Outputs'} = 'Výstupy';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Dohoda o partnerstve';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefónne číslo';
+    $Self->{Translation}->{'Phone Type'} = 'Typ telefónu';
+    $Self->{Translation}->{'Physical Cores'} = 'Fyzické jadrá';
+    $Self->{Translation}->{'Power Delivery'} = 'Dodávka energie';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Zakúpené v';
+    $Self->{Translation}->{'Rack Depth'} = 'Hĺbka stojana';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Regálové jednotky (U)';
+    $Self->{Translation}->{'Room'} = 'Izba';
+    $Self->{Translation}->{'SIM Card'} = 'Karta SIM';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'Certifikáty SSL/TLS';
+    $Self->{Translation}->{'Sales Contract'} = 'Predajná zmluva';
+    $Self->{Translation}->{'Satellite Phone'} = 'Satelitný telefón';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Uzavretá olovená batéria (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Sériové číslo';
+    $Self->{Translation}->{'Server Software'} = 'Serverový softvér';
+    $Self->{Translation}->{'Service Agreement'} = 'Zmluva o poskytovaní služieb';
+    $Self->{Translation}->{'Service Tag'} = 'Servisný štítok';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Typ zásuvky';
+    $Self->{Translation}->{'Software'} = 'Softvér';
+    $Self->{Translation}->{'Speakers'} = 'Reproduktory';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Počiatočná IP adresa';
+    $Self->{Translation}->{'Storage'} = 'Úložisko';
+    $Self->{Translation}->{'Storage Partition'} = 'Úložný oddiel';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Dcérska spoločnosť';
+    $Self->{Translation}->{'Summary'} = 'Zhrnutie';
+    $Self->{Translation}->{'Thin Client'} = 'Tenký klient';
+    $Self->{Translation}->{'Threads'} = 'Vlákna';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Celková pamäť RAM grafickej karty (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Celková pamäť RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Dotykový monitor';
+    $Self->{Translation}->{'Tower'} = 'Veža';
+    $Self->{Translation}->{'USB Hub'} = 'Rozbočovač USB';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'Náhlavná súprava VR';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'Telefón VoIP';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Webová kamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

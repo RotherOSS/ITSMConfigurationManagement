@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Общи данни за работа';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Настройки за входящи данни за заявки';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Настройки за изходящите данни за отговор';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Управление на конфигурационните единици CI';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Тип на обекта';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Ще бъдат импортирани следните класове';
     $Self->{Translation}->{'The following roles will be imported'} = 'Ще бъдат импортирани следните роли';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Името е актуализирано (ново=%s, старо=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Атрибутът %s е актуализиран от „%s“ на „%s“';
     $Self->{Translation}->{'Version %s deleted'} = 'Версия %s е изтрита';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Не е даден ID на конфигурационен елемент или ID на версия!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ID на конфигурационен елемент %s не е намерен в базата данни!';
     $Self->{Translation}->{'ConfigItem'} = 'Конфигурационен елемент';
     $Self->{Translation}->{'printed by %s at %s'} = 'отпечатано от %s в %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Невалиден идентификатор на клас!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Ограничения на класа за елемента от конфигурацията';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Изберете един или повече класове, за да ограничите избираемите елементи на конфигурацията';
-    $Self->{Translation}->{'Link type'} = 'Тип връзка';
-    $Self->{Translation}->{'Select the link type.'} = 'Изберете типа на връзката.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Нападатели: Препратка (Източник) -> Препратка (Цел)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'В обратна посока: Препратка (Източник) -> Препратка (Цел)';
-    $Self->{Translation}->{'Link Direction'} = 'Посока на връзката';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Препращащият обект е този, който съдържа това динамично поле, а препращаният обект е този, който е избран като стойност на динамичното поле.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Динамичен (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Статичен (версия)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Тип препратка към връзката';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Максимален брой на един елемент';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Празните полета показват, че текущите стойности се запазват';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Пропуснато';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Импортиране/експортиране на прикачени файлове (като последни записи на ред)';
+    $Self->{Translation}->{'Version String'} = 'Версия Редица';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Грешка при синхронизирането на дефинициите. Моля, проверете дневника.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Скрито';
     $Self->{Translation}->{'1 - Shown'} = '1 - показано';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Позволява разширени условия за търсене при търсене на елементи от конфигурацията в интерфейса на агента. С тази функция можете да търсите например името на елемента от конфигурацията с такива условия като "(*key1*&&*key2*)" или "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Позволява разширени условия за търсене в търсенето на елементи от конфигурацията в интерфейса на клиента. С тази функция можете да търсите например името на елемента от конфигурацията с такива условия като "(*key1*&&*key2*)" или "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Зачислени KE';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'В определен момент от време създайте билет за елементите на конфигурацията, ако са изпълнени конфигурираните изисквания. Времевият момент се определя от стойността на полето, конфигурирано в "TimeCIKey" на ConfigItem, и се модифицира от "TimeModifier". Ако последното може да бъде или само число, или знак (+/-), число и единица (d/h/m): "7" е еквивалентно на "+7d". Динамичното поле "Ticket->DynamicField" ще се използва за маркиране на създадените билети - то трябва да съществува. Флаговете \<OTOBO_CONFIGITEM_X\>, където X може да бъде NAME (име), NUMBER (число) и DATE (дата), ще бъдат заменени със съответните стойности в "Ticket->Text" (билет->текст).';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'KE зачислени на компанията клиент';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'КЕ, зачислени на потребител';
     $Self->{Translation}->{'CMDB Settings'} = 'Настройка на CMDB';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Филтри за елементи на колоната за ConfigItem Overview.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Колони, които могат да се филтрират в прегледа на елементите на конфигурацията в интерфейса на агента. Забележка: Разрешени са само атрибути на елемента на конфигурацията и динамични полета (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Колони, които могат да се филтрират в прегледа на елементите на конфигурацията в интерфейса на клиента. Забележка: Разрешени са само атрибути на елемента на конфигурацията и динамични полета (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Колони, които могат да се филтрират в прегледа на резултатите от търсенето на елементите на конфигурацията в интерфейса на агента. Забележка: Разрешени са само атрибути на елементите на конфигурацията и динамични полета (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Конфигурационни елементи';
     $Self->{Translation}->{'Config item add.'} = 'Добавяне на конфигурационен елемент.';
     $Self->{Translation}->{'Config item edit.'} = 'Редактиране на конфигурационен елемент.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Модул за събития на елемента за конфигуриране, който брои лицензите за функцията OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Модул за събитие за конфигуриране на елемент, който позволява записване в хронология в интерфейса на агента.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Модул за събития на елементите на конфигурацията, който актуализира елементите на конфигурацията до текущата им дефиниция.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Модул за събития на елемента на конфигурацията, който актуализира таблицата configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Модулът за събития на елемента на конфигурацията актуализира текущото състояние на инцидента.';
     $Self->{Translation}->{'Config item history.'} = 'Конфигурирайте хронологията на елементите.';
     $Self->{Translation}->{'Config item print.'} = 'Печат на конфигурационен елемент.';
     $Self->{Translation}->{'Config item zoom.'} = 'Конфигуриране на мащаба на елемента.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Групов модул за конфигурационен елемент.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Модул за търсене на конфигурационен елемент на интерфейса на агента.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Създавайте и управлявайте дефинициите за конфигурационни елементи.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Създава билети за ConfigItems в определени моменти от време.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Клиентите могат да виждат исторически версии на CI.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Дефинира необходимите разрешения за търсене на ITSM конфигурационни елементи с помощта на общия интерфейс.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Дефинира Задължителни разрешения за задаване на елементи от конфигурацията на ITSM с помощта на общия интерфейс.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Дефинира модул за преглед, за да покаже малък изглед на списък с конфигурационни елементи.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Дефинира показания по подразбиране атрибут за търсене на елементи на конфигурацията за екрана за търсене на елементи на конфигурацията. Пример: "Key" (Ключ) трябва да съдържа името на динамичното поле в този случай "X", "Content" (Съдържание) трябва да съдържа стойността на динамичното поле в зависимост от типа на динамичното поле, Text (Текст): "a text" (текст), Dropdown (падащо): "1" (1), Date/Time (Дата/час): "Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' и или \'Search_DynamicField_XTimePointFormat=седмица; Search_DynamicField_XTimePointStart=Преди; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Дефинира подобекта по подразбиране на класа „ITSM конфигурационен елемент“.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Определя височината на компонента на редактора за богат текст за този екран. Въведете число (пиксели) или процентна стойност (относителна).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Полета, съхранявани в индекса на елемента на конфигурацията, които се използват за други цели, освен за пълнотекстово търсене. За пълната функционалност всички полета са задължителни.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'За всяка уеб услуга (ключ) може да се дефинира масив от класове (стойност), за които вносът е ограничен. За всички избрани класове или за всички съществуващи класове идентифициращите атрибути ще трябва да бъдат избрани в конфигурацията на извикващия.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Регистриране на модул GenericInterface за слоя за извикване на ConfigItemFetch.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Преглед на ITSM конфигурационен елемент.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Ако тази опция е активирана, свързаните елементи се отчитат само ако принадлежат към един от изброените класове.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Включва състояния на внедряване в търсенето на елементи на конфигурацията в клиентския интерфейс.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Включва състояния на инциденти в търсенето на елементи от конфигурацията в интерфейса на клиента.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Максимален брой елементи на конфигурацията, които да бъдат показани в резултата от тази операция.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Модул за проверка на групата, отговаряща за даден клас.';
@@ -443,8 +452,10 @@ sub Data {
         'Параметри за категориите за класовете на елементите на конфигурацията в изгледа на предпочитанията на интерфейса на агента.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Параметри за филтрите на колоните в прегледа на малкия елемент на конфигурацията. Моля, обърнете внимание: задаването на стойност "Активен" на 0 ще попречи само на агентите да редактират настройките на тази група в личните си предпочитания, но все пак ще позволи на администраторите да редактират настройките от името на друг потребител. Използвайте \'PreferenceGroup\' (Група предпочитания), за да контролирате в коя област на потребителския интерфейс да се показват тези настройки.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Параметри за задната част на таблото за управление на клиентската компания конфигурационен елемент преглед на интерфейса на агента. „Ограничение“ е броят на записите, показан по подразбиране. „Група“ се използва за ограничаване на достъпа до плъгина (напр. Група: admin;group1;group2;). „По подразбиране“ определя дали приставката е активирана по подразбиране или потребителят трябва да я активира ръчно. „CacheTTLLocal“ е времето за кеширане в минути за плъгина.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Параметрите за състоянието на използване се оцветяват в изгледа с предпочитания от интерфейса на агента.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Версия Стринг изразяване';
     $Self->{Translation}->{'Version String Module'} = 'Версия Струнен модул';
     $Self->{Translation}->{'Version Trigger'} = 'Версия Trigger';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Дали изпълнението на ConfigItemACL може да бъде избегнато чрез проверка на кешираните зависимости на полетата. Това може да подобри времето за зареждане на формулярите, но трябва да бъде деактивирано, ако ACLModules трябва да се използват за ITSMConfigItem- и Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Коя обща информация е показана в заглавието.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'С тази опция е възможно автоматично да се запълни полето за CI в зависимост от броя на свързаните CI със съществуващия тип DependsOn (Зависи от).';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'С тази опция е възможно автоматично да се запълни поле за CI в зависимост от броя на свързаните CI.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'С тази опция е възможно автоматично да се запълни поле за CI в зависимост от броя на свързаните CI. Настройката CounterClassName включва името на класа, а CounterFieldName се използва за съхраняване на броя на използваните лицензи.';
     $Self->{Translation}->{'class'} = 'клас';
     $Self->{Translation}->{'global'} = 'глобален';
     $Self->{Translation}->{'postproductive'} = 'постпродуктивен';
     $Self->{Translation}->{'preproductive'} = 'препродуктивен';
     $Self->{Translation}->{'productive'} = 'продуктивен';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 инча (44,45 см)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 инча (53,34 см)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 инча (66,68 см)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 инча (80,01 см)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-инчов стелаж';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 1,75 инча (4,45 см)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 35 инча (88,9 см)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-инчов багажник';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 инча (97,79 см)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-инчова стойка';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 инча (600 мм)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 инча (106,68 см)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 инча (120,02 см)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 инча (8,89 см)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 инча (133,35 см)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 инча (800 мм)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 инча (146,68 см)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 инча (900 мм)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 инча (160,02 см)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 инча (1000 мм)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 68,25 инча (173,35 см)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 5,25 инча (13,34 см)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 инча (186,69 см)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 инча (1100 мм):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 78,75 инча (200,02 см)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 инча (1200 мм)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 84 инча (213,36 см)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 инча (17,78 см)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 инча (22,23 см)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 инча (26,67 см)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 инча (31,12 см)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 инча (35,56 см)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 инча (40,01 см)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Счетоводство';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Разпределение на адреси';
+    $Self->{Translation}->{'Administrator'} = 'Администратор';
+    $Self->{Translation}->{'Analog Phone'} = 'Аналогов телефон';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Тип на уреда';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Капацитет на батерията (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Тип батерия';
+    $Self->{Translation}->{'Building'} = 'Сграда';
+    $Self->{Translation}->{'Bus Interface'} = 'Интерфейс на шината';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'Процесор';
+    $Self->{Translation}->{'CPU Class'} = 'Клас на процесора';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Капацитет (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Капацитет на графична карта';
+    $Self->{Translation}->{'Card Number'} = 'Номер на картата';
+    $Self->{Translation}->{'Card Reader'} = 'Четец на карти';
+    $Self->{Translation}->{'Card Type'} = 'Тип карта';
+    $Self->{Translation}->{'Client Certificates'} = 'Клиентски сертификати';
+    $Self->{Translation}->{'Client Software'} = 'Клиентски софтуер';
+    $Self->{Translation}->{'Client category'} = 'Категория на клиента';
+    $Self->{Translation}->{'Clockrate'} = 'Часовник';
+    $Self->{Translation}->{'Clockspeed'} = 'Скорост на часовника';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Сертификати за подписване на код';
+    $Self->{Translation}->{'Conference Phone'} = 'Конферентен телефон';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Споразумение за консултиране';
+    $Self->{Translation}->{'Contact'} = 'Свържете се с';
+    $Self->{Translation}->{'Contact Distributor'} = 'Свържете се с дистрибутора';
+    $Self->{Translation}->{'Container Management'} = 'Управление на контейнери';
+    $Self->{Translation}->{'Contract'} = 'Договор';
+    $Self->{Translation}->{'Contract Type'} = 'Вид на договора';
+    $Self->{Translation}->{'Contract period from'} = 'Срок на договора от';
+    $Self->{Translation}->{'Contract period until'} = 'Срок на договора до';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Безжичен телефон (DECT телефон)';
+    $Self->{Translation}->{'Cost unit'} = 'Разходна единица';
+    $Self->{Translation}->{'Count of licenses'} = 'Брой на лицензите';
+    $Self->{Translation}->{'Creation Date'} = 'Дата на създаване';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Потребителски стелаж';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Запазено';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-сървър';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Дата на фактурата';
+    $Self->{Translation}->{'Date of Order'} = 'Дата на поръчката';
+    $Self->{Translation}->{'Date of Warranty'} = 'Дата на издаване на гаранцията';
+    $Self->{Translation}->{'Date of release'} = 'Дата на издаване';
+    $Self->{Translation}->{'Desktop'} = 'Настолен';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Сертификати за подписване на документи';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI Rack';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'Сертификати за електронна поща (S/MIME сертификати)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Трудов договор';
+    $Self->{Translation}->{'End IP Address'} = 'Краен IP адрес';
+    $Self->{Translation}->{'End of support'} = 'Край на подкрепата';
+    $Self->{Translation}->{'Expiry Date'} = 'Дата на изтичане на валидността';
+    $Self->{Translation}->{'External Hard Drive'} = 'Външен твърд диск';
+    $Self->{Translation}->{'Firewall'} = 'Защитна стена';
+    $Self->{Translation}->{'Firmware'} = 'Фърмуер';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Съхранение на енергия чрез маховик';
+    $Self->{Translation}->{'Form Factor'} = 'Фактор на формата';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Споразумение за франчайз';
+    $Self->{Translation}->{'Freeware'} = 'Безплатно разпространяван';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Обща информация';
+    $Self->{Translation}->{'Graphics Cards'} = 'Графични карти';
+    $Self->{Translation}->{'Graphics card'} = 'Графична карта';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Хардуер';
+    $Self->{Translation}->{'Hardware Model'} = 'Модел на хардуера';
+    $Self->{Translation}->{'Hardware Weight'} = 'Тегло на хардуера';
+    $Self->{Translation}->{'Headset'} = 'Слушалки';
+    $Self->{Translation}->{'IP Protocol'} = 'IP протокол';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Управление на идентичността и достъпа (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Инвентарен номер';
+    $Self->{Translation}->{'Inverstment costs'} = 'Разходи за инвертиране';
+    $Self->{Translation}->{'Invoice Number'} = 'Номер на фактурата';
+    $Self->{Translation}->{'Keyboard'} = 'Клавиатура';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD монитор (дисплей с течни кристали)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED монитор (светлоизлъчващ диод)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Стационарен телефон';
+    $Self->{Translation}->{'Laptop'} = 'Преносим';
+    $Self->{Translation}->{'Latitude'} = 'Географска ширина';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Слой 1: Физически слой';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Слой 2: Слой за връзка с данни';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Слой 3: Мрежов слой';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Слой 3: Мрежов слой (супермрежа)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Слой 4: Транспортен слой';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Слой 5: Слой на сесията';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Слой 6: Слой на представяне';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Слой 7: Слой на приложението';
+    $Self->{Translation}->{'Lease Agreement'} = 'Споразумение за лизинг';
+    $Self->{Translation}->{'License Agreement'} = 'Споразумение за лиценз';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Ключ за лиценз';
+    $Self->{Translation}->{'License Type'} = 'Вид лиценз';
+    $Self->{Translation}->{'License period from'} = 'Период на лиценза от';
+    $Self->{Translation}->{'License period until'} = 'Срок на лиценза до';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Батерия от литиево-железен фосфат (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Литиево-йонна (Li-ion) батерия';
+    $Self->{Translation}->{'Loan Agreement'} = 'Споразумение за заем';
+    $Self->{Translation}->{'Located in'} = 'Намира се в';
+    $Self->{Translation}->{'Longitude'} = 'Дължина';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Производител';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Максимален капацитет на натоварване (W)';
+    $Self->{Translation}->{'Memory'} = 'Памет';
+    $Self->{Translation}->{'Memory Type'} = 'Тип памет';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Мобилен номер';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Мобилни/вградени';
+    $Self->{Translation}->{'Model'} = 'Модел';
+    $Self->{Translation}->{'Model Description'} = 'Описание на модела';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Резолюция на монитора';
+    $Self->{Translation}->{'Monitor Size'} = 'Размер на монитора';
+    $Self->{Translation}->{'Mouse'} = 'Мишка';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Мрежа';
+    $Self->{Translation}->{'Network Info'} = 'Информация за мрежата';
+    $Self->{Translation}->{'Network Information'} = 'Информация за мрежата';
+    $Self->{Translation}->{'Network Layer'} = 'Мрежово ниво';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Никел-кадмиева (NiCd) батерия';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Никел-металхидридна (NiMH) батерия';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Споразумение за неразкриване на информация (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Бележник';
+    $Self->{Translation}->{'Number of CPUs'} = 'Брой процесори';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Брой модули RAM';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Брой графични карти';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED монитор (органичен светоизлъчващ диод)';
+    $Self->{Translation}->{'Operating costs'} = 'Оперативни разходи';
+    $Self->{Translation}->{'Order Number'} = 'Номер на поръчката';
+    $Self->{Translation}->{'Other'} = 'Други';
+    $Self->{Translation}->{'Outputs'} = 'Изходи';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'ПИН 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Споразумение за партньорство';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Телефонен номер';
+    $Self->{Translation}->{'Phone Type'} = 'Тип на телефона';
+    $Self->{Translation}->{'Physical Cores'} = 'Физически ядра';
+    $Self->{Translation}->{'Power Delivery'} = 'Доставка на енергия';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Закупено в';
+    $Self->{Translation}->{'Rack Depth'} = 'Дълбочина на стелажа';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Единици за стелаж (U)';
+    $Self->{Translation}->{'Room'} = 'Стая';
+    $Self->{Translation}->{'SIM Card'} = 'SIM карта';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS сертификати';
+    $Self->{Translation}->{'Sales Contract'} = 'Договор за продажба';
+    $Self->{Translation}->{'Satellite Phone'} = 'Сателитен телефон';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Запечатана оловно-киселинна батерия (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Сериен номер';
+    $Self->{Translation}->{'Server Software'} = 'Софтуер за сървъри';
+    $Self->{Translation}->{'Service Agreement'} = 'Споразумение за услуги';
+    $Self->{Translation}->{'Service Tag'} = 'Сервизен етикет';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Тип гнездо';
+    $Self->{Translation}->{'Software'} = 'Софтуер';
+    $Self->{Translation}->{'Speakers'} = 'Високоговорители';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Начален IP адрес';
+    $Self->{Translation}->{'Storage'} = 'Съхранение';
+    $Self->{Translation}->{'Storage Partition'} = 'Раздел за съхранение';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Дъщерно дружество';
+    $Self->{Translation}->{'Summary'} = 'Резюме';
+    $Self->{Translation}->{'Thin Client'} = 'Тънък клиент';
+    $Self->{Translation}->{'Threads'} = 'Нишки';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Обща оперативна памет на графичната карта (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Общо RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Монитор със сензорен екран';
+    $Self->{Translation}->{'Tower'} = 'Кула';
+    $Self->{Translation}->{'USB Hub'} = 'USB концентратор';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'Слушалки за VR';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP телефон';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Уеб камера';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

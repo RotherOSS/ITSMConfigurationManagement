@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Γενικά στοιχεία λειτουργίας';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Ρυθμίσεις για εισερχόμενα δεδομένα αίτησης';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Ρυθμίσεις για δεδομένα εξερχόμενης απάντησης';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Λειτουργικό σύστημα διακομιστή';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Τύπος αντικειμένου';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Θα εισαχθούν οι ακόλουθες κλάσεις';
     $Self->{Translation}->{'The following roles will be imported'} = 'Θα εισαχθούν οι ακόλουθοι ρόλοι';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Όνομα ενημερωμένο (new=%s, old=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Δεν μπορεί να εμφανιστεί το στοιχείο, δεν έχουν δοθεί δικαιώματα πρόσβασης για το ConfigItem!';
     $Self->{Translation}->{'Version %s deleted'} = 'Έκδοση %s διαγράφηκε';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Δεν δίνεται ConfigItemID ή VersionID!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'Το ConfigItemID %s δεν βρέθηκε στη βάση δεδομένων!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = 'τυπωμένο από %s στο %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Μη έγκυρο ClassID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Περιορισμοί κλάσης για το στοιχείο διαμόρφωσης';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Επιλέξτε μία ή περισσότερες κλάσεις για να περιορίσετε τα επιλέξιμα στοιχεία διαμόρφωσης';
-    $Self->{Translation}->{'Link type'} = 'Τύπος συνδέσμου';
-    $Self->{Translation}->{'Select the link type.'} = 'Επιλέξτε τον τύπο συνδέσμου.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Μπροστά: Αναφορά (Πηγή) -> Αναφορά (Στόχος)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Ανάποδα: Αναφορά (Πηγή) -> Αναφορά (Στόχος)';
-    $Self->{Translation}->{'Link Direction'} = 'Κατεύθυνση συνδέσμου';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Το αντικείμενο αναφοράς είναι αυτό που περιέχει αυτό το δυναμικό πεδίο, το αντικείμενο αναφοράς είναι αυτό που επιλέγεται ως τιμή του δυναμικού πεδίου.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Δυναμικό (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Static (Έκδοση)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Τύπος αναφοράς συνδέσμου';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Μέγιστος αριθμός ενός στοιχείου';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Τα κενά πεδία υποδεικνύουν ότι οι τρέχουσες τιμές διατηρούνται';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Παραλείπεται';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Εισαγωγή/Εξαγωγή συνημμένων (ως οι τελευταίες καταχωρήσεις ανά γραμμή)';
+    $Self->{Translation}->{'Version String'} = 'Συμβολοσειρά έκδοσης';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Σφάλμα συγχρονισμού των ορισμών. Ελέγξτε το αρχείο καταγραφής.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Κρυφό';
     $Self->{Translation}->{'1 - Shown'} = '1 - Εμφανίζεται';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πράκτορα. Με αυτή τη δυνατότητα μπορείτε να αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους συνθήκες όπως "(*key1*&&*key2*)" ή "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Επιτρέπει εκτεταμένες συνθήκες αναζήτησης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελατών. Με αυτή τη δυνατότητα μπορείτε να αναζητήσετε π.χ. το όνομα του στοιχείου διαμόρφωσης με τέτοιου είδους συνθήκες όπως "(*key1*&&*key2*)" ή "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Εκχωρηθέντα CIs';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Σε ένα συγκεκριμένο χρονικό σημείο δημιουργήστε ένα εισιτήριο για στοιχεία διαμόρφωσης, εάν πληρούνται οι διαμορφωμένες απαιτήσεις. Το χρονικό σημείο καθορίζεται από την τιμή του πεδίου που διαμορφώνεται στο "TimeCIKey" του ConfigItem και τροποποιείται από το "TimeModifier". Εάν το τελευταίο μπορεί να είναι είτε μόνο ένας αριθμός, είτε ένα σύμβολο (+/-), ένας αριθμός και μια μονάδα (δ/χ/μ): το "7" ισοδυναμεί με "+7d". Το DynamicField "Ticket->DynamicField" θα χρησιμοποιηθεί για τη σήμανση των δημιουργημένων εισιτηρίων - πρέπει να υπάρχει. Οι σημαίες \\<OTOBO_CONFIGITEM_X\\> όπου X μπορεί να είναι NAME, NUMBER και DATE, θα αντικατασταθούν με τις αντίστοιχες τιμές στο "Ticket->Text".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CIs που ανατίθενται στην εταιρεία-πελάτη';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CIs που έχουν εκχωρηθεί σε χρήστη πελάτη';
     $Self->{Translation}->{'CMDB Settings'} = 'Ρυθμίσεις CMDB';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Φίλτρα στοιχείων παραμέτρων στήλης για την Επισκόπηση στοιχείων παραμέτρων.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης του περιβάλλοντος εργασίας του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση στοιχείων διαμόρφωσης της διεπαφής πελάτη. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX).';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Στήλες που μπορούν να φιλτραριστούν στην επισκόπηση αποτελεσμάτων αναζήτησης στοιχείων διαμόρφωσης της διεπαφής του πράκτορα. Σημείωση: Επιτρέπονται μόνο τα χαρακτηριστικά στοιχείων διαμόρφωσης και τα δυναμικά πεδία (DynamicField_NameX).';
     $Self->{Translation}->{'Config Items'} = 'Στοιχεία διαμόρφωσης';
     $Self->{Translation}->{'Config item add.'} = 'Προσθήκη στοιχείου διαμόρφωσης.';
     $Self->{Translation}->{'Config item edit.'} = 'Επεξεργασία στοιχείου διαμόρφωσης.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Μονάδα συμβάντων στοιχείου διαμόρφωσης που μετρά τις άδειες για τη λειτουργία OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Μονάδα συμβάντων στοιχείου ρύθμισης παραμέτρων που επιτρέπει την καταγραφή στο ιστορικό στη διεπαφή του πράκτορα.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Μονάδα συμβάντων στοιχείων διαμόρφωσης που ενημερώνει τα στοιχεία διαμόρφωσης στον τρέχοντα ορισμό τους.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Μονάδα συμβάντων αντικειμένου διαμόρφωσης που ενημερώνει τον πίνακα configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Η ενότητα συμβάντων στοιχείων διαμόρφωσης ενημερώνει την τρέχουσα κατάσταση συμβάντος.';
     $Self->{Translation}->{'Config item history.'} = 'Έξοδος';
     $Self->{Translation}->{'Config item print.'} = 'Εκτύπωση στοιχείων διαμόρφωσης.';
     $Self->{Translation}->{'Config item zoom.'} = 'Ρύθμιση ζουμ αντικειμένου.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Στοιχείο διαμόρφωσης μαζικής μονάδας.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Στοιχείο διαμόρφωσης στοιχείο αναζήτησης backend router της διασύνδεσης πράκτορα.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Δημιουργία και διαχείριση των ορισμών για τα στοιχεία διαμόρφωσης.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Δημιουργεί εισιτήρια για ConfigItems σε συγκεκριμένα χρονικά σημεία.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Οι πελάτες μπορούν να δουν ιστορικές εκδόσεις CI.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Καθορίζει τα απαιτούμενα δικαιώματα για την αναζήτηση στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Καθορίζει τα απαιτούμενα δικαιώματα για τον καθορισμό στοιχείων διαμόρφωσης ITSM με χρήση της γενικής διεπαφής.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Ορίζει μια ενότητα επισκόπησης για την εμφάνιση της μικρής προβολής μιας λίστας στοιχείων διαμόρφωσης.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Καθορίζει το προεπιλεγμένο εμφανιζόμενο χαρακτηριστικό αναζήτησης στοιχείων διαμόρφωσης για την οθόνη αναζήτησης στοιχείων διαμόρφωσης. Παράδειγμα: "Key" πρέπει να έχει το όνομα του δυναμικού πεδίου στην προκειμένη περίπτωση \'X\', "Content" πρέπει να έχει την τιμή του δυναμικού πεδίου ανάλογα με τον τύπο του δυναμικού πεδίου, Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974- Search_DynamicField_XTimeSlotStartMonth=01- Search_DynamicField_XTimeSlotStartDay=26- Search_DynamicField_XTimeSlotStartHour=00, Search_DynamicField_XTimeSlotStartMinute=00- Search_DynamicField_XTimeSlotStartSecond=00- Search_DynamicField_XTimeSlotStopYear=2013- Search_DynamicField_XTimeSlotStopMonth=01, Search_DynamicField_XTimeSlotStopDay=26- Search_DynamicField_XTimeSlotStopHour=23- Search_DynamicField_XTimeSlotStopMinute=59- Search_DynamicField_XTimeSlotStopSecond=59,\' και ή \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Ορίζει το προεπιλεγμένο υποαντικείμενο της κλάσης \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Καθορίζει το ύψος για το στοιχείο του επεξεργαστή πλούσιου κειμένου για αυτή την οθόνη. Εισάγετε αριθμό (pixels) ή ποσοστιαία τιμή (σχετική).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Πεδία που αποθηκεύονται στο ευρετήριο στοιχείων διαμόρφωσης και χρησιμοποιούνται για άλλα πράγματα εκτός από την αναζήτηση πλήρους κειμένου. Για την πλήρη λειτουργικότητα όλα τα πεδία είναι υποχρεωτικά.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Για κάθε υπηρεσία ιστού (κλειδί) μπορεί να οριστεί ένας πίνακας κλάσεων (τιμή), στις οποίες περιορίζεται η εισαγωγή. Για όλες τις επιλεγμένες κλάσεις ή για όλες τις υπάρχουσες κλάσεις θα πρέπει να επιλεγούν τα χαρακτηριστικά αναγνώρισης στο config του invoker.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Εγγραφή μονάδας GenericInterface για το επίπεδο επικαλούμενου ConfigItemFetch.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Επισκόπηση στοιχείων ρυθμίσεων ITSM.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Εάν αυτή η επιλογή είναι ενεργοποιημένη, τα συνδεδεμένα στοιχεία υπολογίζονται μόνο εάν ανήκουν σε μία από τις παρατιθέμενες κλάσεις.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Περιλαμβάνει καταστάσεις ανάπτυξης στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελάτη.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Περιλαμβάνει καταστάσεις συμβάντων στην αναζήτηση στοιχείων διαμόρφωσης της διεπαφής πελάτη.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Μέγιστος αριθμός στοιχείων διαμόρφωσης που θα εμφανίζονται στο αποτέλεσμα αυτής της λειτουργίας.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Ενότητα για τον έλεγχο της ομάδας που είναι υπεύθυνη για μια τάξη.';
@@ -443,8 +452,10 @@ sub Data {
         'Παράμετροι για τις κατηγορίες των κλάσεων στοιχείων διαμόρφωσης στην προβολή προτιμήσεων της διεπαφής του πράκτορα.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Παράμετροι για τα φίλτρα στήλης της επισκόπησης στοιχείων μικρής διαμόρφωσης. Σημείωση: η ρύθμιση \'Active\' σε 0 θα εμποδίσει μόνο τους πράκτορες να επεξεργάζονται τις ρυθμίσεις αυτής της ομάδας στις προσωπικές τους προτιμήσεις, αλλά θα επιτρέψει στους διαχειριστές να επεξεργάζονται τις ρυθμίσεις για λογαριασμό άλλου χρήστη. Χρησιμοποιήστε το \'PreferenceGroup\' για να ελέγξετε σε ποια περιοχή θα εμφανίζονται αυτές οι ρυθμίσεις στο περιβάλλον εργασίας χρήστη.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Παράμετροι για το ταμπλό backend της επισκόπησης στοιχείων διαμόρφωσης της εταιρείας πελατών της διεπαφής πράκτορα . "Limit" είναι ο αριθμός των καταχωρήσεων που εμφανίζονται από προεπιλογή. "Group" χρησιμοποιείται για τον περιορισμό της πρόσβασης στο πρόσθετο (π.χ. Group: admin;group1;group2;). "Default" καθορίζει αν το πρόσθετο είναι ενεργοποιημένο από προεπιλογή ή αν ο χρήστης πρέπει να το ενεργοποιήσει χειροκίνητα. "CacheTTLLocal" είναι ο χρόνος προσωρινής αποθήκευσης σε λεπτά για το πρόσθετο.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Παράμετροι για το χρώμα των καταστάσεων ανάπτυξης στην προβολή προτιμήσεων της διεπαφής του πράκτορα.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Έκδοση String Expression';
     $Self->{Translation}->{'Version String Module'} = 'Έκδοση String Module';
     $Self->{Translation}->{'Version Trigger'} = 'Σκανδάλη έκδοσης';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Εάν η εκτέλεση του ConfigItemACL μπορεί να αποφευχθεί με τον έλεγχο των εξαρτήσεων των πεδίων που έχουν αποθηκευτεί στην προσωρινή μνήμη. Αυτό μπορεί να βελτιώσει τους χρόνους φόρτωσης των φορμών, αλλά πρέπει να απενεργοποιηθεί, εάν πρόκειται να χρησιμοποιηθούν ACLModules για ITSMConfigItem- και Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Ποιες γενικές πληροφορίες εμφανίζονται στην επικεφαλίδα.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI με τον υπάρχοντα τύπο DependsOn.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Με αυτή την επιλογή είναι δυνατό να συμπληρώνεται αυτόματα ένα πεδίο CI, ανάλογα με τον αριθμό των συνδεδεμένων CI. Η ρύθμιση CounterClassName περιλαμβάνει το όνομα της κλάσης και το CounterFieldName χρησιμοποιείται για την αποθήκευση του αριθμού των χρησιμοποιημένων αδειών.';
     $Self->{Translation}->{'class'} = 'κατηγορία';
     $Self->{Translation}->{'global'} = 'παγκόσμιο';
     $Self->{Translation}->{'postproductive'} = 'μεταπαραγωγική';
     $Self->{Translation}->{'preproductive'} = 'προπαραγωγική';
     $Self->{Translation}->{'productive'} = 'παραγωγικό';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 44,45 cm (17,5 ίντσες)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 21 ίντσες (53,34 cm)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 66,68 cm (26,25 ίντσες)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 80,01 cm (31,5 ίντσες)';
+    $Self->{Translation}->{'19-inch Rack'} = 'Ράφι 19 ιντσών';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 4,45 cm (1,75 ίντσες)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 88,9 cm (35 ίντσες)';
+    $Self->{Translation}->{'21-inch Rack'} = 'Ράφι 21 ιντσών';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 ίντσες (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = 'Ράφι 23 ιντσών';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 ίντσες (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 ίντσες (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 ίντσες (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 8,89 cm (3,5 ίντσες)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 ίντσες (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 ίντσες (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 ίντσες (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 ίντσες (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 160,02 cm (63 ίντσες)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 ίντσες (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 173,35 cm (68,25 ίντσες)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 13,34 cm (5,25 ίντσες)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 186,69 cm (73,5 ίντσες)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 ίντσες (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 200,02 cm (78,75 ίντσες)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 ίντσες (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 213,36 cm (84 ίντσες)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 ίντσες (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 22,23 cm (8,75 ίντσες)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 26,67 cm (10,5 ίντσες)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 31,12 cm (12,25 ίντσες)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 ίντσες (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 40,01 cm (15,75 ίντσες)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Λογιστική';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Κατανομή διευθύνσεων';
+    $Self->{Translation}->{'Administrator'} = 'Διαχειριστής';
+    $Self->{Translation}->{'Analog Phone'} = 'Αναλογικό τηλέφωνο';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Τύπος συσκευής';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Χωρητικότητα μπαταρίας (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Τύπος μπαταρίας';
+    $Self->{Translation}->{'Building'} = 'Κτίριο';
+    $Self->{Translation}->{'Bus Interface'} = 'Διασύνδεση διαύλου';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'Κατηγορία CPU';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Χωρητικότητα (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Χωρητικότητα ανά κάρτα γραφικών';
+    $Self->{Translation}->{'Card Number'} = 'Αριθμός κάρτας';
+    $Self->{Translation}->{'Card Reader'} = 'Αναγνώστης καρτών';
+    $Self->{Translation}->{'Card Type'} = 'Τύπος κάρτας';
+    $Self->{Translation}->{'Client Certificates'} = 'Πιστοποιητικά πελατών';
+    $Self->{Translation}->{'Client Software'} = 'Λογισμικό πελάτη';
+    $Self->{Translation}->{'Client category'} = 'Κατηγορία πελάτη';
+    $Self->{Translation}->{'Clockrate'} = 'Ρυθμός ρολογιού';
+    $Self->{Translation}->{'Clockspeed'} = 'Ταχύτητα ρολογιού';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Πιστοποιητικά υπογραφής κώδικα';
+    $Self->{Translation}->{'Conference Phone'} = 'Τηλέφωνο συνδιάσκεψης';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Συμβουλευτική συμφωνία';
+    $Self->{Translation}->{'Contact'} = 'Επικοινωνία';
+    $Self->{Translation}->{'Contact Distributor'} = 'Επικοινωνήστε με τον διανομέα';
+    $Self->{Translation}->{'Container Management'} = 'Διαχείριση εμπορευματοκιβωτίων';
+    $Self->{Translation}->{'Contract'} = 'Σύμβαση';
+    $Self->{Translation}->{'Contract Type'} = 'Τύπος σύμβασης';
+    $Self->{Translation}->{'Contract period from'} = 'Περίοδος σύμβασης από';
+    $Self->{Translation}->{'Contract period until'} = 'Περίοδος σύμβασης έως';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Ασύρματο τηλέφωνο (τηλέφωνο DECT)';
+    $Self->{Translation}->{'Cost unit'} = 'Μονάδα κόστους';
+    $Self->{Translation}->{'Count of licenses'} = 'Αριθμός αδειών';
+    $Self->{Translation}->{'Creation Date'} = 'Ημερομηνία δημιουργίας';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Προσαρμοσμένο ράφι';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Κρατημένο';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-Server';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Ημερομηνία του τιμολογίου';
+    $Self->{Translation}->{'Date of Order'} = 'Ημερομηνία παραγγελίας';
+    $Self->{Translation}->{'Date of Warranty'} = 'Ημερομηνία χορήγησης εγγύησης';
+    $Self->{Translation}->{'Date of release'} = 'Ημερομηνία κυκλοφορίας';
+    $Self->{Translation}->{'Desktop'} = 'Επιτραπέζια επιφάνεια εργασίας';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Πιστοποιητικά υπογραφής εγγράφων';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'Ράφι ETSI';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'Πιστοποιητικά ηλεκτρονικού ταχυδρομείου (πιστοποιητικά S/MIME)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Σύμβαση εργασίας';
+    $Self->{Translation}->{'End IP Address'} = 'Διεύθυνση IP τέλους';
+    $Self->{Translation}->{'End of support'} = 'Τέλος της στήριξης';
+    $Self->{Translation}->{'Expiry Date'} = 'Ημερομηνία λήξης';
+    $Self->{Translation}->{'External Hard Drive'} = 'Εξωτερικός σκληρός δίσκος';
+    $Self->{Translation}->{'Firewall'} = 'Τείχος προστασίας';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Αποθήκευση ενέργειας με ιπτάμενο τροχό';
+    $Self->{Translation}->{'Form Factor'} = 'Παράγοντας μορφής';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Συμφωνία Franchise';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Γενικές πληροφορίες';
+    $Self->{Translation}->{'Graphics Cards'} = 'Κάρτες γραφικών';
+    $Self->{Translation}->{'Graphics card'} = 'Κάρτα γραφικών';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Υλικό';
+    $Self->{Translation}->{'Hardware Model'} = 'Μοντέλο υλικού';
+    $Self->{Translation}->{'Hardware Weight'} = 'Βάρος υλικού';
+    $Self->{Translation}->{'Headset'} = 'Ακουστικά';
+    $Self->{Translation}->{'IP Protocol'} = 'Πρωτόκολλο IP';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Διαχείριση ταυτότητας και πρόσβασης (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Αριθμός απογραφής';
+    $Self->{Translation}->{'Inverstment costs'} = 'Κόστος μετατροπής';
+    $Self->{Translation}->{'Invoice Number'} = 'Αριθμός τιμολογίου';
+    $Self->{Translation}->{'Keyboard'} = 'Πληκτρολόγιο';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'Οθόνη LCD (Οθόνη υγρών κρυστάλλων)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'Οθόνη LED (δίοδος εκπομπής φωτός)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Σταθερό τηλέφωνο';
+    $Self->{Translation}->{'Laptop'} = 'Φορητός υπολογιστής';
+    $Self->{Translation}->{'Latitude'} = 'Γεωγραφικό πλάτος';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Στρώμα 1: Φυσικό στρώμα';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Στρώμα 2: Στρώμα ζεύξης δεδομένων';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Στρώμα 3: Στρώμα δικτύου';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Επίπεδο 3: Επίπεδο δικτύου (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Στρώμα 4: Στρώμα μεταφοράς';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Στρώμα 5: Στρώμα συνόδου';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Στρώμα 6: Στρώμα παρουσίασης';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Στρώμα 7: Στρώμα εφαρμογής';
+    $Self->{Translation}->{'Lease Agreement'} = 'Συμφωνία μίσθωσης';
+    $Self->{Translation}->{'License Agreement'} = 'Συμφωνία άδειας χρήσης';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Κλειδί άδειας χρήσης';
+    $Self->{Translation}->{'License Type'} = 'Τύπος άδειας';
+    $Self->{Translation}->{'License period from'} = 'Περίοδος άδειας από';
+    $Self->{Translation}->{'License period until'} = 'Περίοδος άδειας μέχρι';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Μπαταρία φωσφορικού σιδήρου λιθίου (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Μπαταρία ιόντων λιθίου (Li-ion)';
+    $Self->{Translation}->{'Loan Agreement'} = 'Σύμβαση δανείου';
+    $Self->{Translation}->{'Located in'} = 'Βρίσκεται στην';
+    $Self->{Translation}->{'Longitude'} = 'Γεωγραφικό μήκος';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Κατασκευαστής';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Μέγιστη χωρητικότητα φορτίου (W)';
+    $Self->{Translation}->{'Memory'} = 'Μνήμη';
+    $Self->{Translation}->{'Memory Type'} = 'Τύπος μνήμης';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Αριθμός κινητού τηλεφώνου';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Κινητό/ενσωματωμένο';
+    $Self->{Translation}->{'Model'} = 'Μοντέλο';
+    $Self->{Translation}->{'Model Description'} = 'Περιγραφή μοντέλου';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Ανάλυση οθόνης';
+    $Self->{Translation}->{'Monitor Size'} = 'Μέγεθος οθόνης';
+    $Self->{Translation}->{'Mouse'} = 'Ποντίκι';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Δίκτυο';
+    $Self->{Translation}->{'Network Info'} = 'Πληροφορίες δικτύου';
+    $Self->{Translation}->{'Network Information'} = 'Πληροφορίες δικτύου';
+    $Self->{Translation}->{'Network Layer'} = 'Επίπεδο δικτύου';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Μπαταρία νικελίου-καδμίου (NiCd)';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Μπαταρία νικελίου-μεταλλικού υδριδίου (NiMH)';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Συμφωνία μη αποκάλυψης (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Σημειωματάριο';
+    $Self->{Translation}->{'Number of CPUs'} = 'Αριθμός CPUs';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Αριθμός μονάδων RAM';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Αριθμός καρτών γραφικών';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'Οθόνη OLED (οργανική δίοδος εκπομπής φωτός)';
+    $Self->{Translation}->{'Operating costs'} = 'Λειτουργικό κόστος';
+    $Self->{Translation}->{'Order Number'} = 'Αριθμός παραγγελίας';
+    $Self->{Translation}->{'Other'} = 'Άλλα';
+    $Self->{Translation}->{'Outputs'} = 'Έξοδοι';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Συμφωνία εταιρικής σχέσης';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Αριθμός τηλεφώνου';
+    $Self->{Translation}->{'Phone Type'} = 'Τύπος τηλεφώνου';
+    $Self->{Translation}->{'Physical Cores'} = 'Φυσικοί πυρήνες';
+    $Self->{Translation}->{'Power Delivery'} = 'Παράδοση ισχύος';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Αγοράστηκε στο';
+    $Self->{Translation}->{'Rack Depth'} = 'Βάθος ραφιού';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Μονάδες Rack (U)';
+    $Self->{Translation}->{'Room'} = 'Δωμάτιο';
+    $Self->{Translation}->{'SIM Card'} = 'Κάρτα SIM';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'Πιστοποιητικά SSL/TLS';
+    $Self->{Translation}->{'Sales Contract'} = 'Σύμβαση πώλησης';
+    $Self->{Translation}->{'Satellite Phone'} = 'Δορυφορικό τηλέφωνο';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Σφραγισμένη μπαταρία μολύβδου-οξέος (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Αύξων αριθμός';
+    $Self->{Translation}->{'Server Software'} = 'Λογισμικό διακομιστή';
+    $Self->{Translation}->{'Service Agreement'} = 'Συμφωνία παροχής υπηρεσιών';
+    $Self->{Translation}->{'Service Tag'} = 'Ετικέτα υπηρεσίας';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Τύπος υποδοχής';
+    $Self->{Translation}->{'Software'} = 'Λογισμικό';
+    $Self->{Translation}->{'Speakers'} = 'Ομιλητές';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Διεύθυνση IP έναρξης';
+    $Self->{Translation}->{'Storage'} = 'Αποθήκευση';
+    $Self->{Translation}->{'Storage Partition'} = 'Διαμέρισμα αποθήκευσης';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Θυγατρική';
+    $Self->{Translation}->{'Summary'} = 'Περίληψη';
+    $Self->{Translation}->{'Thin Client'} = 'Λεπτός πελάτης';
+    $Self->{Translation}->{'Threads'} = 'Νήματα';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Συνολική μνήμη RAM κάρτας γραφικών (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Συνολική μνήμη RAM (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Οθόνη αφής';
+    $Self->{Translation}->{'Tower'} = 'Πύργος';
+    $Self->{Translation}->{'USB Hub'} = 'Διανομέας USB';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'Ακουστικά VR';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'Τηλέφωνο VoIP';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Webcam';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

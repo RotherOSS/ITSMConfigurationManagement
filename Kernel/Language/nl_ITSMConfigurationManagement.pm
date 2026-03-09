@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Algemene bedrijfsgegevens';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Instellingen voor inkomende aanvraaggegevens';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Instellingen voor uitgaande responsgegevens';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Configuratie-item beheer';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Type object';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'De volgende klassen worden geïmporteerd';
     $Self->{Translation}->{'The following roles will be imported'} = 'De volgende rollen worden geïmporteerd';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Naam bijgewerkt (nieuw=%s, oud=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Attribuut %s bijgewerkt van "%s" naar "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Versie %s verwijderd';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Er is geen ConfigItemID of VersionID opgegeven!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s niet gevonden in database!';
     $Self->{Translation}->{'ConfigItem'} = 'ConfigItem';
     $Self->{Translation}->{'printed by %s at %s'} = 'afgedrukt door %s op %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Ongeldige ClassID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Klassebeperkingen voor het config item';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Selecteer een of meer klassen om selecteerbare configuratie-items te beperken';
-    $Self->{Translation}->{'Link type'} = 'Type verbinding';
-    $Self->{Translation}->{'Select the link type.'} = 'Selecteer het type koppeling.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Voorwaarts: Referencing (Bron) -> Referenced (Doel)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Achterwaarts: Referenced (Source) -> Referencing (Target)';
-    $Self->{Translation}->{'Link Direction'} = 'Link Richting';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Het object waarnaar verwezen wordt is het object dat dit dynamische veld bevat, het object waarnaar verwezen wordt is het object dat geselecteerd is als waarde van het dynamische veld.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dynamisch (ConfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statisch (versie)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Type verwijzing';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Maximale hoeveelheid';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Lege velden geven aan dat de huidige waarden worden behouden.';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Overgeslagen';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Bijlagen importeren/exporteren (als laatste invoer per regel)';
+    $Self->{Translation}->{'Version String'} = 'Versie String';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Fout bij het synchroniseren van de definities. Controleer het logboek.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Verborgen';
     $Self->{Translation}->{'1 - Shown'} = '1 - Afgebeeld';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Maakt uitgebreide zoekvoorwaarden mogelijk bij het zoeken naar config items in de agent interface. Met deze functie kun je bijvoorbeeld zoeken op config item naam met dit soort condities zoals "(*key1*&&*key2*)" of "(*key1*|*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Maakt uitgebreide zoekvoorwaarden mogelijk bij het zoeken naar configuraties in de klanteninterface. Met deze functie kun je bijvoorbeeld zoeken op config item naam met dit soort condities zoals "(*key1*&&*key2*)" of "(*key1*|*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Toegewezen CI\'s';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Maak op een bepaald tijdstip een ticket aan voor configuratie-items als aan de geconfigureerde vereisten is voldaan. Het tijdstip wordt bepaald door de waarde van het veld dat is geconfigureerd onder "TimeCIKey" van het ConfigItem, en gewijzigd door "TimeModifier". Deze laatste kan ofwel gewoon een getal zijn, ofwel een teken (+/-), een getal en een eenheid (d/h/m): "7" is gelijk aan "+7d". Het DynamicField "Ticket->DynamicField" wordt gebruikt om aangemaakte tickets te markeren - het moet bestaan. De vlaggen OTOBO_CONFIGITEM_X, waarbij X kan staan voor NAAM, GETAL en DATUM, worden vervangen door de respectievelijke waarden in "Ticket->Tekst".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI\'s toegewezen aan klantbedrijf';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI\'s toegewezen aan klantgebruiker';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB-instellingen';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Kolom config item filters voor ConfigItem Overzicht.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolommen die kunnen worden gefilterd in het config item overzicht van de agent interface. Opmerking: Alleen Config Item attributen en Dynamische velden (DynamicField_NameX) zijn toegestaan.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolommen die kunnen worden gefilterd in het config item overzicht van de klanteninterface. Opmerking: alleen Config Item attributen en Dynamische velden (DynamicField_NameX) zijn toegestaan.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolommen die kunnen worden gefilterd in het overzicht met zoekresultaten van config items in de agent interface. Opmerking: Alleen Config Item attributen en Dynamische velden (DynamicField_NameX) zijn toegestaan.';
     $Self->{Translation}->{'Config Items'} = 'Configuratie-items';
     $Self->{Translation}->{'Config item add.'} = 'Configuratie-item toevoegen.';
     $Self->{Translation}->{'Config item edit.'} = 'Configuratie-item bewerken.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Configuratie-item gebeurtenismodule die de licenties telt voor OTOBOCILicenseCount-functie.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Configuratie-item gebeurtenismodule die het loggen naar geschiedenis in de agentinterface mogelijk maakt.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Config item event module die config items bijwerkt naar hun huidige definitie.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Config item gebeurtenismodule die de tabel configitem_ĺink bijwerkt.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Config item gebeurtenismodule werkt de huidige incidentstatus bij.';
     $Self->{Translation}->{'Config item history.'} = 'Configuratie-item geschiedenis.';
     $Self->{Translation}->{'Config item print.'} = 'Configuratie-item afdrukken.';
     $Self->{Translation}->{'Config item zoom.'} = 'Configuratie-item zoom.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Configuratie-item bulkmodule.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Configuratie-item zoek backend router van de agentinterface.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Aanmaken en beheren van definities voor configuratie-items.';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Creëert tickets voor ConfigItems op specifieke tijdstippen.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Klanten kunnen historische CI-versies zien.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Definieert de vereiste machtigingen om ITSM-configuratie-items te doorzoeken met behulp van de Generieke Interface.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Definieert de vereiste machtigingen om ITSM-configuratie-items in te stellen met behulp van de Generieke Interface.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definieert een overzichtsmodule om de kleine weergave van een lijst met configuratie-items weer te geven.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Definieert het standaard getoonde config item zoekkenmerk voor het config item zoekscherm. Voorbeeld: "Key" moet de naam hebben van het dynamische veld in dit geval \'X\', "Content" moet de waarde hebben van het dynamische veld afhankelijk van het dynamische veldtype, Text: "een tekst", Dropdown: "1", Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' en of \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definieert het standaard subobject van de klasse \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Bepaalt de hoogte voor de rich text editorcomponent voor dit scherm. Voer een getal (pixels) of een procentuele waarde (relatief) in.';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Velden die zijn opgeslagen in de index van het configuratie-item en die worden gebruikt voor andere dingen dan zoeken in de volledige tekst. Voor de volledige functionaliteit zijn alle velden verplicht.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'Voor elke webservice (key) kan een array van klassen (value) worden gedefinieerd waarop de import wordt beperkt. Voor alle gekozen klassen, of alle bestaande klassen moeten de identificerende attributen worden gekozen in de config van de invoker.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'GenericInterface moduleregistratie voor de ConfigItemFetch invoker laag.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM ConfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Overzicht van ITSM-configuratie-items.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Als deze optie is geactiveerd, worden gekoppelde items alleen geteld als ze behoren tot een van de genoemde klassen.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'IncidentState';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Omvat deployment states in het zoeken naar configuratie-items in de klanteninterface.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Inclusief incidenttoestanden in het zoeken naar configuraties in de klanteninterface.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Maximumaantal configuratie-items dat moet worden weergegeven in het resultaat van deze bewerking.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Module om de groep te controleren die verantwoordelijk is voor een klas.';
@@ -443,8 +452,10 @@ sub Data {
         'Parameters voor de categorieën voor config item klassen in de voorkeuren weergave van de agent interface.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parameters voor de kolomfilters van het kleine configuratie-itemoverzicht. Let op: als je \'Actief\' op 0 zet, kunnen agents alleen de instellingen van deze groep niet bewerken in hun persoonlijke voorkeuren, maar kunnen beheerders wel de instellingen van een andere gebruiker bewerken. Gebruik \'PreferenceGroup\' om te bepalen in welk gebied deze instellingen moeten worden weergegeven in de gebruikersinterface.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parameters voor het dashboard backend van de klant bedrijf config item overzicht van de agent interface . "Limit" is het aantal items dat standaard wordt getoond. "Group" wordt gebruikt om de toegang tot de plugin te beperken (bijv. Groep: admin;group1;group2;). "Default" bepaalt of de plugin standaard is ingeschakeld of dat de gebruiker deze handmatig moet inschakelen. "CacheTTLLocal" is de cache tijd in minuten voor de plugin.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parameters voor de inzetstatussen kleuren in de voorkeurenweergave van de agentinterface.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Versie String Uitdrukking';
     $Self->{Translation}->{'Version String Module'} = 'Versie String Module';
     $Self->{Translation}->{'Version Trigger'} = 'Versie trekker';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Of het uitvoeren van ConfigItemACL vermeden kan worden door veldafhankelijkheden in de cache te controleren. Dit kan de laadtijd van formulieren verbeteren, maar moet uitgeschakeld worden als ACLModules gebruikt moeten worden voor ITSMConfigItem- en Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Welke algemene informatie wordt weergegeven in de koptekst.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Met deze optie is het mogelijk om automatisch een CI-veld te vullen, afhankelijk van het aantal gekoppelde CI\'s met het bestaande type DependsOn.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Met deze optie is het mogelijk om automatisch een CI-veld te vullen, afhankelijk van het aantal gekoppelde CI\'s.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Met deze optie is het mogelijk om automatisch een CI-veld te vullen, afhankelijk van het aantal gekoppelde CI\'s. De instelling CounterClassName bevat de naam van de klasse en CounterFieldName wordt gebruikt om het aantal gebruikte licenties op te slaan.';
     $Self->{Translation}->{'class'} = 'klasse';
     $Self->{Translation}->{'global'} = 'wereldwijd';
     $Self->{Translation}->{'postproductive'} = 'postproductief';
     $Self->{Translation}->{'preproductive'} = 'preproductief';
     $Self->{Translation}->{'productive'} = 'productief';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 17,5 inch (44,45 cm)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 53,34 cm (21 inch)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 26,25 inch (66,68 cm)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 31,5 inch (80,01 cm)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-inch rek';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 4,45 cm (1,75 inch)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 88,9 cm (35 inch)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-inch rek';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 inch (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-inch rek';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 inch (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 42 inch (106,68 cm)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 inch (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 3,5 inch (8,89 cm)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 52,5 inch (133,35 cm)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 inch (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 57,75 inch (146,68 cm)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 inch (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 63 inch (160,02 cm)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 inch (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 173,35 cm (68,25 inch)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 13,34 cm (5,25 inch)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 73,5 inch (186,69 cm)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 inch (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 200,02 cm (78,75 inch)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 inch (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 213,36 cm (84 inch)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 7 inch (17,78 cm)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 8,75 inch (22,23 cm)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 10,5 inch (26,67 cm)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 12,25 inch (31,12 cm)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 inch (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 inch (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Boekhouding';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Adrestoewijzing';
+    $Self->{Translation}->{'Administrator'} = 'Beheerder';
+    $Self->{Translation}->{'Analog Phone'} = 'Analoge telefoon';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Type apparaat';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Accucapaciteit (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Batterijtype';
+    $Self->{Translation}->{'Building'} = 'Gebouw';
+    $Self->{Translation}->{'Bus Interface'} = 'Businterface';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU-klasse';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Capaciteit (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Capaciteit per grafische kaart';
+    $Self->{Translation}->{'Card Number'} = 'Kaartnummer';
+    $Self->{Translation}->{'Card Reader'} = 'Kaartlezer';
+    $Self->{Translation}->{'Card Type'} = 'Kaarttype';
+    $Self->{Translation}->{'Client Certificates'} = 'Klantcertificaten';
+    $Self->{Translation}->{'Client Software'} = 'Software voor klanten';
+    $Self->{Translation}->{'Client category'} = 'Categorie klanten';
+    $Self->{Translation}->{'Clockrate'} = 'Kloksnelheid';
+    $Self->{Translation}->{'Clockspeed'} = 'Kloksnelheid';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Code ondertekenende certificaten';
+    $Self->{Translation}->{'Conference Phone'} = 'Conferentietelefoon';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Adviesovereenkomst';
+    $Self->{Translation}->{'Contact'} = 'Neem contact op met';
+    $Self->{Translation}->{'Contact Distributor'} = 'Neem contact op met distributeur';
+    $Self->{Translation}->{'Container Management'} = 'Beheer van containers';
+    $Self->{Translation}->{'Contract'} = 'Contract';
+    $Self->{Translation}->{'Contract Type'} = 'Type contract';
+    $Self->{Translation}->{'Contract period from'} = 'Contractperiode van';
+    $Self->{Translation}->{'Contract period until'} = 'Contractperiode tot';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Draadloze telefoon (DECT-telefoon)';
+    $Self->{Translation}->{'Cost unit'} = 'Kosteneenheid';
+    $Self->{Translation}->{'Count of licenses'} = 'Aantal licenties';
+    $Self->{Translation}->{'Creation Date'} = 'Aanmaakdatum';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Rek op maat';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Gereserveerd';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-server';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Datum factuur';
+    $Self->{Translation}->{'Date of Order'} = 'Datum bestelling';
+    $Self->{Translation}->{'Date of Warranty'} = 'Datum van garantie';
+    $Self->{Translation}->{'Date of release'} = 'Datum van uitgave';
+    $Self->{Translation}->{'Desktop'} = 'Desktop';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Certificaten voor documentondertekening';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI-rek';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'E-mailcertificaten (S/MIME-certificaten)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Arbeidsovereenkomst';
+    $Self->{Translation}->{'End IP Address'} = 'IP-adres einde';
+    $Self->{Translation}->{'End of support'} = 'Einde ondersteuning';
+    $Self->{Translation}->{'Expiry Date'} = 'Vervaldatum';
+    $Self->{Translation}->{'External Hard Drive'} = 'Externe harde schijf';
+    $Self->{Translation}->{'Firewall'} = 'Firewall';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Vliegwiel Energieopslag';
+    $Self->{Translation}->{'Form Factor'} = 'Vormfactor';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Franchiseovereenkomst';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Algemene informatie';
+    $Self->{Translation}->{'Graphics Cards'} = 'Grafische kaarten';
+    $Self->{Translation}->{'Graphics card'} = 'Grafische kaart';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Hardware';
+    $Self->{Translation}->{'Hardware Model'} = 'Hardwaremodel';
+    $Self->{Translation}->{'Hardware Weight'} = 'Gewicht hardware';
+    $Self->{Translation}->{'Headset'} = 'Hoofdtelefoon';
+    $Self->{Translation}->{'IP Protocol'} = 'IP-protocol';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identiteits- en toegangsbeheer (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventarisnummer';
+    $Self->{Translation}->{'Inverstment costs'} = 'Inversteringskosten';
+    $Self->{Translation}->{'Invoice Number'} = 'Factuurnummer';
+    $Self->{Translation}->{'Keyboard'} = 'Toetsenbord';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD-monitor (vloeibaar-kristalscherm)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED-monitor (lichtemitterende diode)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Vaste telefoon';
+    $Self->{Translation}->{'Laptop'} = 'Laptop';
+    $Self->{Translation}->{'Latitude'} = 'Breedte';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Laag 1: Fysieke laag';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Laag 2: Datalinklaag';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Laag 3: netwerklaag';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Laag 3: netwerklaag (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Laag 4: Transportlaag';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Laag 5: Sessielaag';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Laag 6: Presentatielaag';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Laag 7: Toepassingslaag';
+    $Self->{Translation}->{'Lease Agreement'} = 'Huurovereenkomst';
+    $Self->{Translation}->{'License Agreement'} = 'Licentieovereenkomst';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licentiesleutel';
+    $Self->{Translation}->{'License Type'} = 'Licentie Type';
+    $Self->{Translation}->{'License period from'} = 'Licentieperiode van';
+    $Self->{Translation}->{'License period until'} = 'Licentieperiode tot';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Lithium-ijzerfosfaatbatterij (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Lithium-Ion (Li-ion) batterij';
+    $Self->{Translation}->{'Loan Agreement'} = 'Leningsovereenkomst';
+    $Self->{Translation}->{'Located in'} = 'Gevestigd in';
+    $Self->{Translation}->{'Longitude'} = 'Lengte';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Fabrikant';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Maximaal draagvermogen (W)';
+    $Self->{Translation}->{'Memory'} = 'Geheugen';
+    $Self->{Translation}->{'Memory Type'} = 'Type geheugen';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobiel nummer';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobiel ingebed';
+    $Self->{Translation}->{'Model'} = 'Model';
+    $Self->{Translation}->{'Model Description'} = 'Model Beschrijving';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Monitorresolutie';
+    $Self->{Translation}->{'Monitor Size'} = 'Afmeting monitor';
+    $Self->{Translation}->{'Mouse'} = 'Muis';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Netwerk';
+    $Self->{Translation}->{'Network Info'} = 'Netwerk informatie';
+    $Self->{Translation}->{'Network Information'} = 'Netwerkinformatie';
+    $Self->{Translation}->{'Network Layer'} = 'Netwerklaag';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nikkel-cadmiumbatterij (NiCd)';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nikkelmetaalhydride (NiMH) batterij';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Geheimhoudingsovereenkomst (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Notebook';
+    $Self->{Translation}->{'Number of CPUs'} = 'Aantal CPU\'s';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Aantal RAM-modules';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Aantal grafische kaarten';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED-monitor (organische lichtemitterende diode)';
+    $Self->{Translation}->{'Operating costs'} = 'Bedrijfskosten';
+    $Self->{Translation}->{'Order Number'} = 'Bestelnummer';
+    $Self->{Translation}->{'Other'} = 'Overige';
+    $Self->{Translation}->{'Outputs'} = 'Uitgangen';
+    $Self->{Translation}->{'PIN'} = 'PIN';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Partnerschapsovereenkomst';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefoonnummer';
+    $Self->{Translation}->{'Phone Type'} = 'Telefoon Type';
+    $Self->{Translation}->{'Physical Cores'} = 'Fysieke kernen';
+    $Self->{Translation}->{'Power Delivery'} = 'Stroomvoorziening';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Gekocht bij';
+    $Self->{Translation}->{'Rack Depth'} = 'Diepte rek';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Eenheden rek (U)';
+    $Self->{Translation}->{'Room'} = 'Kamer';
+    $Self->{Translation}->{'SIM Card'} = 'SIM-kaart';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS-certificaten';
+    $Self->{Translation}->{'Sales Contract'} = 'Verkoopcontract';
+    $Self->{Translation}->{'Satellite Phone'} = 'Satelliet telefoon';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Verzegelde loodzuurbatterij (SLA)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Serienummer';
+    $Self->{Translation}->{'Server Software'} = 'Server Software';
+    $Self->{Translation}->{'Service Agreement'} = 'Serviceovereenkomst';
+    $Self->{Translation}->{'Service Tag'} = 'Servicetag';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Type stopcontact';
+    $Self->{Translation}->{'Software'} = 'Software';
+    $Self->{Translation}->{'Speakers'} = 'Luidsprekers';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Start IP-adres';
+    $Self->{Translation}->{'Storage'} = 'Opslag';
+    $Self->{Translation}->{'Storage Partition'} = 'Opslagpartitie';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Dochteronderneming';
+    $Self->{Translation}->{'Summary'} = 'Samenvatting';
+    $Self->{Translation}->{'Thin Client'} = 'Thin Client';
+    $Self->{Translation}->{'Threads'} = 'Draden';
+    $Self->{Translation}->{'Thunderbolt'} = 'Thunderbolt';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Totaal RAM-geheugen grafische kaart (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Totaal RAM-geheugen (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Touchscreen monitor';
+    $Self->{Translation}->{'Tower'} = 'Toren';
+    $Self->{Translation}->{'USB Hub'} = 'USB-hub';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'VR-koptelefoon';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'VirtualLink';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP-telefoon';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Webcam';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

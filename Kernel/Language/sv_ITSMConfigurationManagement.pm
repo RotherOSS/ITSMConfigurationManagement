@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -24,9 +24,9 @@ sub Data {
     my $Self = shift;
 
     # Template: AdminGenericInterfaceOperationConfigItem
-    $Self->{Translation}->{'General operation data'} = '';
-    $Self->{Translation}->{'Settings for incoming request data'} = '';
-    $Self->{Translation}->{'Settings for outgoing response data'} = '';
+    $Self->{Translation}->{'General operation data'} = 'Allmänna driftdata';
+    $Self->{Translation}->{'Settings for incoming request data'} = 'Inställningar för inkommande förfrågningsdata';
+    $Self->{Translation}->{'Settings for outgoing response data'} = 'Inställningar för utgående svarsdata';
 
     # Template: AdminITSMConfigItem
     $Self->{Translation}->{'Config Item Management'} = 'Hantering av konfigurationsenheter';
@@ -108,6 +108,9 @@ sub Data {
     # Template: AdminACL
     $Self->{Translation}->{'Object Type'} = 'Objekttyp';
 
+    # Template: AdminDynamicFieldScreen
+    $Self->{Translation}->{'Filter by object type'} = '';
+
     # JS Template: ClassImportConfirm
     $Self->{Translation}->{'The following classes will be imported'} = 'Följande klasser kommer att importeras';
     $Self->{Translation}->{'The following roles will be imported'} = 'Följande roller kommer att importeras';
@@ -152,6 +155,8 @@ sub Data {
     $Self->{Translation}->{'Name updated (new=%s, old=%s)'} = 'Namn uppdaterat (nytt=%s, gammalt=%s)';
     $Self->{Translation}->{'Attribute %s updated from "%s" to "%s"'} = 'Attribut %s uppdaterat från "%s" till "%s"';
     $Self->{Translation}->{'Version %s deleted'} = 'Version %s raderad';
+    $Self->{Translation}->{'File "%s" uploaded'} = '';
+    $Self->{Translation}->{'File "%s" removed'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
     $Self->{Translation}->{'No ConfigItemID or VersionID is given!'} = 'Inget ConfigItemID eller VersionID har angetts!';
@@ -159,6 +164,7 @@ sub Data {
     $Self->{Translation}->{'ConfigItemID %s not found in database!'} = 'ConfigItemID %s hittades inte i databasen!';
     $Self->{Translation}->{'ConfigItem'} = 'Konfigurationsenhet';
     $Self->{Translation}->{'printed by %s at %s'} = 'utskriven av %s vid %s';
+    $Self->{Translation}->{'Referenced by'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
     $Self->{Translation}->{'Invalid ClassID!'} = 'Ogiltigt klass-ID!';
@@ -195,13 +201,9 @@ sub Data {
     $Self->{Translation}->{'Class restrictions for the config item'} = 'Klassbegränsningar för konfigurationsobjektet';
     $Self->{Translation}->{'Select one or more classes to restrict selectable config items'} =
         'Välj en eller flera klasser för att begränsa valbara konfigurationsobjekt';
-    $Self->{Translation}->{'Link type'} = 'Typ av länk';
-    $Self->{Translation}->{'Select the link type.'} = 'Välj länktyp.';
-    $Self->{Translation}->{'Forwards: Referencing (Source) -> Referenced (Target)'} = 'Framåt i tiden: Referencing (Source) -> Referenced (Target)';
-    $Self->{Translation}->{'Backwards: Referenced (Source) -> Referencing (Target)'} = 'Bakåt i tiden: Refererad (Källa) -> Refererande (Mål)';
-    $Self->{Translation}->{'Link Direction'} = 'Länkens riktning';
-    $Self->{Translation}->{'The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field.'} =
-        'Det refererande objektet är det som innehåller det här dynamiska fältet, det refererade objektet är det som valts som värde för det dynamiska fältet.';
+    $Self->{Translation}->{'Deployment state restrictions for the config item'} = '';
+    $Self->{Translation}->{'Select one or more deployment states to restrict selectable config items'} =
+        '';
     $Self->{Translation}->{'Dynamic (ConfigItem)'} = 'Dynamisk (KonfigItem)';
     $Self->{Translation}->{'Static (Version)'} = 'Statisk (version)';
     $Self->{Translation}->{'Link Referencing Type'} = 'Typ av länkreferens';
@@ -222,10 +224,11 @@ sub Data {
 
     # Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
     $Self->{Translation}->{'Maximum number of one element'} = 'Max antal av ett element';
-    $Self->{Translation}->{'Empty fields indicate that the current values are kept'} = 'Tomma fält anger att tidigare värden ska användas.';
-    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = '';
-    $Self->{Translation}->{'Version String'} = '';
-    $Self->{Translation}->{'Skipped'} = 'Hoppade över';
+    $Self->{Translation}->{'Maximum number of one Set dynamic field element'} = '';
+    $Self->{Translation}->{'Maximum number of one element within a Set dynamic field element'} =
+        '';
+    $Self->{Translation}->{'Import/Export attachments (as the last entries per line)'} = 'Importera/exportera bilagor (som de sista posterna per rad)';
+    $Self->{Translation}->{'Version String'} = 'Version String';
 
     # Perl Module: Kernel/Modules/AdminDynamicField.pm
     $Self->{Translation}->{'Error synchronizing the definitions. Please check the log.'} = 'Fel vid synkronisering av definitionerna. Vänligen kontrollera loggen.';
@@ -250,13 +253,18 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{'0 - Hidden'} = '0 - Dold';
     $Self->{Translation}->{'1 - Shown'} = '1 - Visas';
+    $Self->{Translation}->{'A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem.'} =
+        '';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i agentgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i kundgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Tilldelade CI';
-    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
-        'Vid en viss tidpunkt skapa ett ärende för konfigurationsobjekt om de konfigurerade kraven är uppfyllda. Tidpunkten bestäms av värdet på det fält som konfigurerats under "TimeCIKey" i ConfigItem, och modifieras av "TimeModifier". Om den senare kan vara antingen bara ett tal eller ett tecken (+/-), ett tal och en enhet (d/h/m): "7" motsvarar "+7d". DynamicField "Ticket->DynamicField" kommer att användas för att markera skapade biljetter - den måste finnas. Flaggorna \<OTOBO_CONFIGITEM_X\> där X kan vara NAME, NUMBER och DATE, kommer att ersättas med respektive värden i "Ticket->Text".';
+    $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
+        '';
+    $Self->{Translation}->{'Attributes for license accounting.'} = '';
+    $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
+        '';
     $Self->{Translation}->{'CIs assigned to customer company'} = 'CI:s som tilldelats kundföretag';
     $Self->{Translation}->{'CIs assigned to customer user'} = 'CI:er som tilldelats kundanvändare';
     $Self->{Translation}->{'CMDB Settings'} = 'CMDB-inställningar';
@@ -270,23 +278,15 @@ sub Data {
     $Self->{Translation}->{'Column config item filters for ConfigItem Overview.'} = 'Kolumnfilter för ConfigItem-objekt för ConfigItem Overview.';
     $Self->{Translation}->{'Columns that can be filtered in the config item overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
         'Kolumner som kan filtreras i översikten över konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolumner som kan filtreras i översikten över konfigurationsobjekt i kundgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
-    $Self->{Translation}->{'Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed.'} =
-        'Kolumner som kan filtreras i sökresultatöversikten för konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna.';
     $Self->{Translation}->{'Config Items'} = 'Konfigurationsenheter';
     $Self->{Translation}->{'Config item add.'} = 'Lägg till konfigureringsobjekt.';
     $Self->{Translation}->{'Config item edit.'} = 'Redigera konfigureringsobjekt.';
-    $Self->{Translation}->{'Config item event module that count the licenses for OTOBOCILicenseCount feature.'} =
-        'Konfigureringsobjekt för händelsemodul som räknar licenser för funktionen OTOBOCILicenseCount.';
+    $Self->{Translation}->{'Config item event module that enables accounting licenses for a given config item.'} =
+        '';
     $Self->{Translation}->{'Config item event module that enables logging to history in the agent interface.'} =
         'Konfigureringsobjekt för händelsemodul som möjliggör loggning till historik i agentgränssnittet.';
     $Self->{Translation}->{'Config item event module that updates config items to their current definition.'} =
         'Händelsemodul för konfigurationsobjekt som uppdaterar konfigurationsobjekten till deras aktuella definition.';
-    $Self->{Translation}->{'Config item event module that updates the table configitem_ĺink.'} =
-        'Config item event-modul som uppdaterar tabellen configitem_ĺink.';
-    $Self->{Translation}->{'Config item event module updates the current incident state.'} =
-        'Config item event-modulen uppdaterar det aktuella incidenttillståndet.';
     $Self->{Translation}->{'Config item history.'} = 'Konfigurerar artikelhistorik.';
     $Self->{Translation}->{'Config item print.'} = 'Utskrift av konfigureringsobjekt.';
     $Self->{Translation}->{'Config item zoom.'} = 'Konfigurera zoom för objekt.';
@@ -302,6 +302,10 @@ sub Data {
     $Self->{Translation}->{'Configuration item bulk module.'} = 'Konfigurationsobjekt bulkmodul.';
     $Self->{Translation}->{'Configuration item search backend router of the agent interface.'} =
         'Konfigurationsobjekt sök backend-router för agentgränssnittet.';
+    $Self->{Translation}->{'Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings.'} =
+        '';
+    $Self->{Translation}->{'Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface.'} =
+        '';
     $Self->{Translation}->{'Create and manage the definitions for Configuration Items.'} = 'Skapa och hantera definitioner för konfigurationsenheter';
     $Self->{Translation}->{'Creates Tickets for ConfigItems at specific time points.'} = 'Skapar biljetter för ConfigItems vid specifika tidpunkter.';
     $Self->{Translation}->{'Customers can see historic CI versions.'} = 'Kunderna kan se historiska CI-versioner.';
@@ -324,7 +328,7 @@ sub Data {
     $Self->{Translation}->{'Defines Required permissions to search ITSM configuration items using the Generic Interface.'} =
         'Definierar nödvändiga behörigheter för att söka ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
     $Self->{Translation}->{'Defines Required permissions to set ITSM configuration items using the Generic Interface.'} =
-        '';
+        'Definierar nödvändiga behörigheter för att ställa in ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet.';
     $Self->{Translation}->{'Defines an overview module to show the small view of a configuration item list.'} =
         'Definierar en översiktsmodul som visar den lilla vyn av en lista med konfigurationsobjekt.';
     $Self->{Translation}->{'Defines if the link type labels must be shown in the node connections.'} =
@@ -354,6 +358,8 @@ sub Data {
         'Definierar standardattributet för sökning av konfigurationsobjekt som visas på skärmen för sökning av konfigurationsobjekt. Exempel: "Key" måste ha namnet på det dynamiska fältet i det här fallet "X", "Content" måste ha värdet på det dynamiska fältet beroende på typen av dynamiskt fält, Text: "a text", Dropdown: "1", Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' och eller \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.';
     $Self->{Translation}->{'Defines the default subobject of the class \'ITSMConfigItem\'.'} =
         'Definierar standardunderobjektet för klassen \'ITSMConfigItem\'.';
+    $Self->{Translation}->{'Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
+        '';
     $Self->{Translation}->{'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).'} =
         'Definierar höjden för redigeringskomponenten för rik text för den här skärmen. Ange antal (pixlar) eller procentvärde (relativt).';
     $Self->{Translation}->{'Defines the number of rows for the CI definition editor in the admin interface.'} =
@@ -412,18 +418,21 @@ sub Data {
         'Fält som lagras i konfigurationsobjektets index och som används för andra saker än fulltextsökning. För fullständig funktionalitet är alla fält obligatoriska.';
     $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
         'För varje webbtjänst (nyckel) kan en array av klasser (värde) definieras för vilka importen är begränsad. För alla valda klasser, eller alla befintliga klasser, måste de identifierande attributen väljas i konfigurationen av invokern.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
         'Registrering av GenericInterface-modul för ConfigItemFetch-inkallningslagret.';
+    $Self->{Translation}->{'GenericInterface module registration for the ConfigItemUpdate invoker layer.'} =
+        '';
     $Self->{Translation}->{'ITSM ConfigItem'} = 'ITSM KonfigItem';
     $Self->{Translation}->{'ITSM config item overview.'} = 'Översikt över ITSM-konfigurationsobjekt.';
-    $Self->{Translation}->{'If this option is activated, linked items are only counted if they belong to one of the listed classes.'} =
-        'Om detta alternativ är aktiverat räknas länkade objekt endast om de tillhör någon av de listade klasserna.';
     $Self->{Translation}->{'InciState'} = 'InciState';
     $Self->{Translation}->{'IncidentState'} = 'HändelseStatus';
     $Self->{Translation}->{'Includes deployment states in the config item search of the customer interface.'} =
         'Inkluderar driftsättningsstatusar i sökningen efter konfigurationsobjekt i kundgränssnittet.';
     $Self->{Translation}->{'Includes incident states in the config item search of the customer interface.'} =
         'Inkluderar incidentstatusar i sökningen efter konfigurationsobjekt i kundgränssnittet.';
+    $Self->{Translation}->{'License accounting configuration item event module.'} = '';
     $Self->{Translation}->{'Maximum number of config items to be displayed in the result of this operation.'} =
         'Maximalt antal konfigurationsobjekt som ska visas i resultatet av denna åtgärd.';
     $Self->{Translation}->{'Module to check the group responsible for a class.'} = 'Modul för att kontrollera vilken grupp som är ansvarig för en klass.';
@@ -443,8 +452,10 @@ sub Data {
         'Parametrar för kategorierna för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametrar för kolumnfiltren i den lilla översikten över konfigurationsobjekt. Observera: om du anger "Active" till 0 förhindras endast handläggare från att redigera inställningar för denna grupp i sina personliga inställningar, men administratörer kan fortfarande redigera inställningarna för en annan användares räkning. Använd "PreferenceGroup" för att styra i vilket område dessa inställningar ska visas i användargränssnittet.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.'} =
-        'Parametrar för dashboard backend för kundföretagets konfigurationsobjekt översikt över agentgränssnittet. "Limit" är antalet poster som visas som standard. "Group" används för att begränsa åtkomsten till insticksprogrammet (t.ex. Group: admin;group1;group2;). "Default" avgör om insticksprogrammet är aktiverat som standard eller om användaren måste aktivera det manuellt. "CacheTTLLocal" är cachetiden i minuter för insticksprogrammet.';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName).'} =
+        '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametrar för färgen för driftsättningsstatus i preferensvyn i agentgränssnittet.';
     $Self->{Translation}->{'Parameters for the deployment states in the preferences view of the agent interface.'} =
@@ -527,20 +538,247 @@ sub Data {
     $Self->{Translation}->{'Version String Expression'} = 'Version String Uttryck';
     $Self->{Translation}->{'Version String Module'} = 'Version String Modul';
     $Self->{Translation}->{'Version Trigger'} = 'Version Trigger';
+    $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
+        '';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Om körningen av ConfigItemACL kan undvikas genom att kontrollera cachelagrade fältberoenden. Detta kan förbättra laddningstiderna för formulär, men måste avaktiveras om ACLModules ska användas för ITSMConfigItem- och Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Vilken allmän information visas i rubriken.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn.'} =
-        'Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI med den befintliga typen DependsOn.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s.'} =
-        'Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI:er.';
-    $Self->{Translation}->{'With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence.'} =
-        'Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI. Inställningen CounterClassName innehåller namnet på klassen och CounterFieldName används för att lagra antalet använda licenser.';
     $Self->{Translation}->{'class'} = 'klass';
     $Self->{Translation}->{'global'} = 'globala';
     $Self->{Translation}->{'postproductive'} = 'postproduktiv';
     $Self->{Translation}->{'preproductive'} = 'preproduktiv';
     $Self->{Translation}->{'productive'} = 'produktiv';
+
+    # Ready to adopt classes: IT-Servicemanagement-11_0_3
+    $Self->{Translation}->{'10U: 17.5 inches (44.45 cm)'} = '10U: 44,45 cm (17,5 tum)';
+    $Self->{Translation}->{'12U: 21 inches (53.34 cm)'} = '12U: 53,34 cm (21 tum)';
+    $Self->{Translation}->{'15U: 26.25 inches (66.68 cm)'} = '15U: 66,68 cm (26,25 tum)';
+    $Self->{Translation}->{'18U: 31.5 inches (80.01 cm)'} = '18U: 80,01 cm (31,5 tum)';
+    $Self->{Translation}->{'19-inch Rack'} = '19-tums rack';
+    $Self->{Translation}->{'1U: 1.75 inches (4.45 cm)'} = '1U: 4,45 cm (1,75 tum)';
+    $Self->{Translation}->{'20U: 35 inches (88.9 cm)'} = '20U: 88,9 cm (35 tum)';
+    $Self->{Translation}->{'21-inch Rack'} = '21-tums kuggstång';
+    $Self->{Translation}->{'22U: 38.5 inches (97.79 cm)'} = '22U: 38,5 tum (97,79 cm)';
+    $Self->{Translation}->{'23-inch Rack'} = '23-tums kuggstång';
+    $Self->{Translation}->{'23.6 inches (600 mm)'} = '23,6 tum (600 mm)';
+    $Self->{Translation}->{'24U: 42 inches (106.68 cm)'} = '24U: 106,68 cm (42 tum)';
+    $Self->{Translation}->{'27U: 47.25 inches (120.02 cm)'} = '27U: 47,25 tum (120,02 cm)';
+    $Self->{Translation}->{'2U: 3.5 inches (8.89 cm)'} = '2U: 8,89 cm (3,5 tum)';
+    $Self->{Translation}->{'30U: 52.5 inches (133.35 cm)'} = '30U: 133,35 cm (52,5 tum)';
+    $Self->{Translation}->{'31.5 inches (800 mm)'} = '31,5 tum (800 mm)';
+    $Self->{Translation}->{'33U: 57.75 inches (146.68 cm)'} = '33U: 146,68 cm (57,75 tum)';
+    $Self->{Translation}->{'35.4 inches (900 mm)'} = '35,4 tum (900 mm)';
+    $Self->{Translation}->{'36U: 63 inches (160.02 cm)'} = '36U: 160,02 cm (63 tum)';
+    $Self->{Translation}->{'39.4 inches (1000 mm)'} = '39,4 tum (1000 mm)';
+    $Self->{Translation}->{'39U: 68.25 inches (173.35 cm)'} = '39U: 173,35 cm (68,25 tum)';
+    $Self->{Translation}->{'3U: 5.25 inches (13.34 cm)'} = '3U: 13,34 cm (5,25 tum)';
+    $Self->{Translation}->{'42U: 73.5 inches (186.69 cm)'} = '42U: 186,69 cm (73,5 tum)';
+    $Self->{Translation}->{'43.3 inches (1100 mm):'} = '43,3 tum (1100 mm):';
+    $Self->{Translation}->{'45U: 78.75 inches (200.02 cm)'} = '45U: 200,02 cm (78,75 tum)';
+    $Self->{Translation}->{'47.2 inches (1200 mm)'} = '47,2 tum (1200 mm)';
+    $Self->{Translation}->{'48U: 84 inches (213.36 cm)'} = '48U: 213,36 cm (84 tum)';
+    $Self->{Translation}->{'4U: 7 inches (17.78 cm)'} = '4U: 17,78 cm (7 tum)';
+    $Self->{Translation}->{'5U: 8.75 inches (22.23 cm)'} = '5U: 22,23 cm (8,75 tum)';
+    $Self->{Translation}->{'6U: 10.5 inches (26.67 cm)'} = '6U: 26,67 cm (10,5 tum)';
+    $Self->{Translation}->{'7U: 12.25 inches (31.12 cm)'} = '7U: 31,12 cm (12,25 tum)';
+    $Self->{Translation}->{'8U: 14 inches (35.56 cm)'} = '8U: 14 tum (35,56 cm)';
+    $Self->{Translation}->{'9U: 15.75 inches (40.01 cm)'} = '9U: 15,75 tum (40,01 cm)';
+    $Self->{Translation}->{'AGPL (Affero General Public License)'} = '';
+    $Self->{Translation}->{'Accounting'} = 'Redovisning';
+    $Self->{Translation}->{'Accounting Information'} = '';
+    $Self->{Translation}->{'Address Allocation'} = 'Adresstilldelning';
+    $Self->{Translation}->{'Administrator'} = 'Administratör';
+    $Self->{Translation}->{'Analog Phone'} = 'Analog telefon';
+    $Self->{Translation}->{'Apache Lizenz'} = '';
+    $Self->{Translation}->{'Appliance Type'} = 'Typ av apparat';
+    $Self->{Translation}->{'BSD Lizenz (Berkeley Software Distribution License)'} = '';
+    $Self->{Translation}->{'Battery Capacity (Ah)'} = 'Batterikapacitet (Ah)';
+    $Self->{Translation}->{'Battery Type'} = 'Batterityp';
+    $Self->{Translation}->{'Building'} = 'Byggnad';
+    $Self->{Translation}->{'Bus Interface'} = 'Bussgränssnitt';
+    $Self->{Translation}->{'CC0 (Creative Commons Zero)'} = '';
+    $Self->{Translation}->{'CIDR'} = 'CIDR';
+    $Self->{Translation}->{'CPU'} = 'CPU';
+    $Self->{Translation}->{'CPU Class'} = 'CPU-klass';
+    $Self->{Translation}->{'Capacity (GB)'} = 'Kapacitet (GB)';
+    $Self->{Translation}->{'Capacity per graphics card'} = 'Kapacitet per grafikkort';
+    $Self->{Translation}->{'Card Number'} = 'Kortnummer';
+    $Self->{Translation}->{'Card Reader'} = 'Kortläsare';
+    $Self->{Translation}->{'Card Type'} = 'Typ av kort';
+    $Self->{Translation}->{'Client Certificates'} = 'Kundcertifikat';
+    $Self->{Translation}->{'Client Software'} = 'Programvara för klienter';
+    $Self->{Translation}->{'Client category'} = 'Kundkategori';
+    $Self->{Translation}->{'Clockrate'} = 'Klockslag';
+    $Self->{Translation}->{'Clockspeed'} = 'Klockhastighet';
+    $Self->{Translation}->{'Code Signing Certificates'} = 'Kodsignerande certifikat';
+    $Self->{Translation}->{'Conference Phone'} = 'Telefon för konferens';
+    $Self->{Translation}->{'Consulting Agreement'} = 'Konsultavtal';
+    $Self->{Translation}->{'Contact'} = 'Kontakt';
+    $Self->{Translation}->{'Contact Distributor'} = 'Kontakta distributören';
+    $Self->{Translation}->{'Container Management'} = 'Containerhantering';
+    $Self->{Translation}->{'Contract'} = 'Kontrakt';
+    $Self->{Translation}->{'Contract Type'} = 'Kontraktstyp';
+    $Self->{Translation}->{'Contract period from'} = 'Avtalsperiod från';
+    $Self->{Translation}->{'Contract period until'} = 'Avtalstid till och med';
+    $Self->{Translation}->{'Cordless Phone (DECT Phone)'} = 'Sladdlös telefon (DECT-telefon)';
+    $Self->{Translation}->{'Cost unit'} = 'Kostnadsenhet';
+    $Self->{Translation}->{'Count of licenses'} = 'Antal licenser';
+    $Self->{Translation}->{'Creation Date'} = 'Datum för skapande';
+    $Self->{Translation}->{'Creative Commons'} = '';
+    $Self->{Translation}->{'Custom Rack'} = 'Anpassat ställ';
+    $Self->{Translation}->{'DHCP'} = 'DHCP';
+    $Self->{Translation}->{'DHCP Reserved'} = 'DHCP Reserverad';
+    $Self->{Translation}->{'DNS-Server'} = 'DNS-server';
+    $Self->{Translation}->{'DVI'} = 'DVI';
+    $Self->{Translation}->{'Date of Invoice'} = 'Fakturans datum';
+    $Self->{Translation}->{'Date of Order'} = 'Datum för beställning';
+    $Self->{Translation}->{'Date of Warranty'} = 'Datum för teckningsoption';
+    $Self->{Translation}->{'Date of release'} = 'Datum för utgivning';
+    $Self->{Translation}->{'Desktop'} = 'Desktop';
+    $Self->{Translation}->{'DisplayPort'} = 'DisplayPort';
+    $Self->{Translation}->{'Document Signing Certificates'} = 'Certifikat för dokumentsignering';
+    $Self->{Translation}->{'EPL (Eclipse Public License)'} = '';
+    $Self->{Translation}->{'ETSI Rack'} = 'ETSI Rack';
+    $Self->{Translation}->{'Email Certificates (S/MIME Certificates)'} = 'E-postcertifikat (S/MIME-certifikat)';
+    $Self->{Translation}->{'Embedded SIM (eSIM)'} = '';
+    $Self->{Translation}->{'Employment Contract'} = 'Anställningsavtal';
+    $Self->{Translation}->{'End IP Address'} = 'IP-adress för slut';
+    $Self->{Translation}->{'End of support'} = 'Upphörande av stöd';
+    $Self->{Translation}->{'Expiry Date'} = 'Utgångsdatum';
+    $Self->{Translation}->{'External Hard Drive'} = 'Extern hårddisk';
+    $Self->{Translation}->{'Firewall'} = 'Brandvägg';
+    $Self->{Translation}->{'Firmware'} = 'Firmware';
+    $Self->{Translation}->{'Flywheel Energy Storage'} = 'Energilagring med svänghjul';
+    $Self->{Translation}->{'Form Factor'} = 'Formfaktor';
+    $Self->{Translation}->{'Franchise Agreement'} = 'Franchiseavtal';
+    $Self->{Translation}->{'Freeware'} = 'Freeware';
+    $Self->{Translation}->{'GPL (General Public License)'} = '';
+    $Self->{Translation}->{'General Information'} = 'Allmän information';
+    $Self->{Translation}->{'Graphics Cards'} = 'Grafikkort';
+    $Self->{Translation}->{'Graphics card'} = 'Grafikkort';
+    $Self->{Translation}->{'HDMI'} = 'HDMI';
+    $Self->{Translation}->{'Hardware'} = 'Hårdvara';
+    $Self->{Translation}->{'Hardware Model'} = 'Hårdvarumodell';
+    $Self->{Translation}->{'Hardware Weight'} = 'Hårdvara Vikt';
+    $Self->{Translation}->{'Headset'} = 'Headset';
+    $Self->{Translation}->{'IP Protocol'} = 'IP-protokoll';
+    $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identitets- och åtkomsthantering (IAM)';
+    $Self->{Translation}->{'Inventory Number'} = 'Inventarienummer';
+    $Self->{Translation}->{'Inverstment costs'} = 'Inversteringskostnader';
+    $Self->{Translation}->{'Invoice Number'} = 'Fakturanummer';
+    $Self->{Translation}->{'Keyboard'} = 'Tangentbord';
+    $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD-monitor (flytande kristallskärm)';
+    $Self->{Translation}->{'LED Monitor (Light Emitting Diode)'} = 'LED-monitor (ljusemitterande diod)';
+    $Self->{Translation}->{'LGPL (Lesser General Public License)'} = '';
+    $Self->{Translation}->{'Landline Phone'} = 'Fast telefon';
+    $Self->{Translation}->{'Laptop'} = 'Laptop';
+    $Self->{Translation}->{'Latitude'} = 'Latitud';
+    $Self->{Translation}->{'Layer 1: Physical Layer'} = 'Lager 1: Fysiskt lager';
+    $Self->{Translation}->{'Layer 2: Data Link Layer'} = 'Lager 2: Datalänklager';
+    $Self->{Translation}->{'Layer 3: Network Layer'} = 'Lager 3: Nätverkslager';
+    $Self->{Translation}->{'Layer 3: Network Layer (Supernet)'} = 'Lager 3: Nätverkslager (Supernet)';
+    $Self->{Translation}->{'Layer 4: Transport Layer'} = 'Lager 4: Transportlager';
+    $Self->{Translation}->{'Layer 5: Session Layer'} = 'Lager 5: Sessionslager';
+    $Self->{Translation}->{'Layer 6: Presentation Layer'} = 'Lager 6: Presentationslager';
+    $Self->{Translation}->{'Layer 7: Application Layer'} = 'Lager 7: Applikationslager';
+    $Self->{Translation}->{'Lease Agreement'} = 'Hyresavtal';
+    $Self->{Translation}->{'License Agreement'} = 'Licensavtal';
+    $Self->{Translation}->{'License Count'} = '';
+    $Self->{Translation}->{'License Key'} = 'Licensnyckel';
+    $Self->{Translation}->{'License Type'} = 'Typ av licens';
+    $Self->{Translation}->{'License period from'} = 'Licensperiod från';
+    $Self->{Translation}->{'License period until'} = 'Licensperiod till och med';
+    $Self->{Translation}->{'Lithium Iron Phosphate (LiFePO4) Battery'} = 'Litiumjärnfosfatbatteri (LiFePO4)';
+    $Self->{Translation}->{'Lithium-Ion (Li-ion) Battery'} = 'Litiumjonbatteri (Li-ion)';
+    $Self->{Translation}->{'Loan Agreement'} = 'Låneavtal';
+    $Self->{Translation}->{'Located in'} = 'Beläget i';
+    $Self->{Translation}->{'Longitude'} = 'Longitud';
+    $Self->{Translation}->{'MIT Lizenz'} = '';
+    $Self->{Translation}->{'MPL (Mozilla Public License)'} = '';
+    $Self->{Translation}->{'Manufacturer'} = 'Tillverkare';
+    $Self->{Translation}->{'Maximum Load Capacity (W)'} = 'Maximal lastkapacitet (W)';
+    $Self->{Translation}->{'Memory'} = 'Minne';
+    $Self->{Translation}->{'Memory Type'} = 'Minnestyp';
+    $Self->{Translation}->{'Micro SIM'} = '';
+    $Self->{Translation}->{'Mini-Rack'} = 'Mini-Rack';
+    $Self->{Translation}->{'Mobile Number'} = 'Mobilnummer';
+    $Self->{Translation}->{'Mobile/Embedded'} = 'Mobil/Embedded';
+    $Self->{Translation}->{'Model'} = 'Modell';
+    $Self->{Translation}->{'Model Description'} = 'Modellbeskrivning';
+    $Self->{Translation}->{'Monitor Resolution'} = 'Monitorns upplösning';
+    $Self->{Translation}->{'Monitor Size'} = 'Monitorns storlek';
+    $Self->{Translation}->{'Mouse'} = 'Mus';
+    $Self->{Translation}->{'Nano SIM'} = '';
+    $Self->{Translation}->{'Network'} = 'Nätverk';
+    $Self->{Translation}->{'Network Info'} = 'Nätverksinformation';
+    $Self->{Translation}->{'Network Information'} = 'Information om nätverket';
+    $Self->{Translation}->{'Network Layer'} = 'Nätverksskikt';
+    $Self->{Translation}->{'Nickel-Cadmium (NiCd) Battery'} = 'Nickel-kadmiumbatteri (NiCd)';
+    $Self->{Translation}->{'Nickel-Metal Hydride (NiMH) Battery'} = 'Nickel-metallhydridbatteri (NiMH)';
+    $Self->{Translation}->{'Non-Disclosure Agreement (NDA)'} = 'Avtal om tystnadsplikt (NDA)';
+    $Self->{Translation}->{'Notebook'} = 'Anteckningsbok';
+    $Self->{Translation}->{'Number of CPUs'} = 'Antal processorer';
+    $Self->{Translation}->{'Number of RAM modules'} = 'Antal RAM-moduler';
+    $Self->{Translation}->{'Number of graphics cards'} = 'Antal grafikkort';
+    $Self->{Translation}->{'OLED Monitor (Organic Light Emitting Diode)'} = 'OLED-monitor (organisk ljusemitterande diod)';
+    $Self->{Translation}->{'Operating costs'} = 'Rörelsekostnader';
+    $Self->{Translation}->{'Order Number'} = 'Beställningsnummer';
+    $Self->{Translation}->{'Other'} = 'Annan';
+    $Self->{Translation}->{'Outputs'} = 'Utgångar';
+    $Self->{Translation}->{'PIN'} = 'PIN-KOD';
+    $Self->{Translation}->{'PIN 2'} = 'PIN 2';
+    $Self->{Translation}->{'PUK'} = 'PUK';
+    $Self->{Translation}->{'PUK 2'} = 'PUK 2';
+    $Self->{Translation}->{'Partnership Agreement'} = 'Partnerskapsavtal';
+    $Self->{Translation}->{'Perpetual licenses'} = '';
+    $Self->{Translation}->{'Phone / VoIP'} = '';
+    $Self->{Translation}->{'Phone Number'} = 'Telefonnummer';
+    $Self->{Translation}->{'Phone Type'} = 'Typ av telefon';
+    $Self->{Translation}->{'Physical Cores'} = 'Fysiska kärnor';
+    $Self->{Translation}->{'Power Delivery'} = 'Strömförsörjning';
+    $Self->{Translation}->{'Public Domain'} = '';
+    $Self->{Translation}->{'Purchased at'} = 'Köpta på';
+    $Self->{Translation}->{'Rack Depth'} = 'Rackdjup';
+    $Self->{Translation}->{'Rack Units (U)'} = 'Rack-enheter (U)';
+    $Self->{Translation}->{'Room'} = 'Rum';
+    $Self->{Translation}->{'SIM Card'} = 'SIM-kort';
+    $Self->{Translation}->{'SSL/TLS Certificates'} = 'SSL/TLS-certifikat';
+    $Self->{Translation}->{'Sales Contract'} = 'Försäljningsavtal';
+    $Self->{Translation}->{'Satellite Phone'} = 'Satellittelefon';
+    $Self->{Translation}->{'Sealed Lead-Acid (SLA) Battery'} = 'Förseglat SLA-batteri (Lead-Acid)';
+    $Self->{Translation}->{'Seat licenses'} = '';
+    $Self->{Translation}->{'Serialnumber'} = 'Serienummer';
+    $Self->{Translation}->{'Server Software'} = 'Programvara för server';
+    $Self->{Translation}->{'Service Agreement'} = 'Serviceavtal';
+    $Self->{Translation}->{'Service Tag'} = 'Service Tag';
+    $Self->{Translation}->{'Shareware'} = '';
+    $Self->{Translation}->{'Socket Type'} = 'Typ av uttag';
+    $Self->{Translation}->{'Software'} = 'Programvara';
+    $Self->{Translation}->{'Speakers'} = 'Högtalare';
+    $Self->{Translation}->{'Standard SIM'} = '';
+    $Self->{Translation}->{'Start IP Address'} = 'Start IP-adress';
+    $Self->{Translation}->{'Storage'} = 'Förvaring';
+    $Self->{Translation}->{'Storage Partition'} = 'Lagringspartition';
+    $Self->{Translation}->{'Subscription-based licenses'} = '';
+    $Self->{Translation}->{'Subsidiary'} = 'Dotterbolag';
+    $Self->{Translation}->{'Summary'} = 'Sammanfattning';
+    $Self->{Translation}->{'Thin Client'} = 'Tunn klient';
+    $Self->{Translation}->{'Threads'} = 'Trådar';
+    $Self->{Translation}->{'Thunderbolt'} = 'Blixtsnabb anslutning';
+    $Self->{Translation}->{'Total Graphics card RAM (GB)'} = 'Totalt RAM-minne för grafikkort (GB)';
+    $Self->{Translation}->{'Total RAM (GB)'} = 'Totalt RAM-minne (GB)';
+    $Self->{Translation}->{'Touchscreen Monitor'} = 'Monitor med pekskärm';
+    $Self->{Translation}->{'Tower'} = 'Torn';
+    $Self->{Translation}->{'USB Hub'} = 'USB-hubb';
+    $Self->{Translation}->{'USB-C'} = 'USB-C';
+    $Self->{Translation}->{'VGA'} = 'VGA';
+    $Self->{Translation}->{'VPN'} = 'VPN';
+    $Self->{Translation}->{'VR Headset'} = 'VR-headset';
+    $Self->{Translation}->{'Virtual Client'} = '';
+    $Self->{Translation}->{'VirtualLink'} = 'Virtuell länk';
+    $Self->{Translation}->{'VoIP Phone'} = 'VoIP-telefon';
+    $Self->{Translation}->{'Volume licenses'} = '';
+    $Self->{Translation}->{'Webcam'} = 'Webbkamera';
 
 
     push @{ $Self->{JavaScriptStrings} // [] }, (

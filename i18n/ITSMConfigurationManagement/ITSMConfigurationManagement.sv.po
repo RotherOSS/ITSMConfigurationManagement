@@ -1,17 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-11-22 09:30+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Swedish <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/sv/>\n"
-"Language: sv\n"
+"POT-Creation-Date: 2026-03-09 13:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "General operation data"
+msgstr "Allmänna driftdata"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for incoming request data"
+msgstr "Inställningar för inkommande förfrågningsdata"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for outgoing response data"
+msgstr "Inställningar för utgående svarsdata"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -22,44 +31,32 @@ msgid "Change class definition"
 msgstr "Ändra klassdefinition"
 
 #. Template: AdminITSMConfigItem
+msgid "Change role definition"
+msgstr "Ändra rolldefinition"
+
+#. Template: AdminITSMConfigItem
+msgid "Ready2Import Class Bundles"
+msgstr "Ready2Import-klassbuntar"
+
+#. Template: AdminITSMConfigItem
+msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
+msgstr "Här kan du importera Ready2Import-klassbuntar som visar våra vanligaste konfigurationsobjekt. Observera att viss ytterligare konfiguration kan krävas."
+
+#. Template: AdminITSMConfigItem
+msgid "Update existing entities"
+msgstr "Uppdatera befintliga enheter"
+
+#. Template: AdminITSMConfigItem
+msgid "Import Ready2Adopt class bundles"
+msgstr "Importera Ready2Adopt-klassbuntar"
+
+#. Template: AdminITSMConfigItem
 msgid "Config Item Class"
 msgstr "Klass för konfigurationsobjekt"
 
 #. Template: AdminITSMConfigItem
-msgid "Definition"
-msgstr "Definition"
-
-#. Template: AdminITSMConfigItem
-msgid "Change"
-msgstr "Ändra"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Incident State"
-msgstr "Incidentläge"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Deployment State"
-msgstr "Driftläge"
-
-#. Template: AgentITSMConfigItemAdd
-msgid "Class"
-msgstr "Klass"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Deployment State Type"
-msgstr "Driftlägestyper"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Current Incident State"
-msgstr "Nuvarande incidentläge"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Current Incident State Type"
-msgstr "Nuvarande typ av incidentläge"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Last changed"
-msgstr "Senast ändrad"
+msgid "Config Item Role"
+msgstr "Konfig Artikel Roll"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -72,6 +69,10 @@ msgstr "Filtrera klasser"
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
 msgstr "Välj en klass från listan för att skapa en ny konfigurationsenhet"
+
+#. Template: AgentITSMConfigItemAdd
+msgid "Class"
+msgstr "Klass"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -109,6 +110,26 @@ msgstr "Namnet på denna konfigurationsenhet"
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
 msgstr "Namnet används redan i konfigurationsenheter med förljande nummer: %s"
 
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number"
+msgstr "Versionsnummer"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr "Versionsnummer för detta konfigurationsobjekt"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
+msgstr "Versionsnumret används redan av ConfigItems med följande nummer: %s"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Deployment State"
+msgstr "Driftläge"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Incident State"
+msgstr "Incidentläge"
+
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
 msgstr "Historik för konfigureringsobjekt: %s"
@@ -126,16 +147,16 @@ msgid "Zoom view"
 msgstr "Fokusvy"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
-msgid "Context Settings"
-msgstr "Anpassa vy"
-
-#. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
 msgstr "Konfigurationsenheter per sida"
 
 #. Template: AgentITSMConfigItemOverviewSmall
-msgid "A generic ITSM Configuration Item table"
-msgstr "En generisk tabell över ITSM-konfigurationsobjekt"
+msgid "No config item data found."
+msgstr "Inga data för konfigurationsobjekt hittades."
+
+#. Template: AgentITSMConfigItemOverviewSmall
+msgid "Select this config item"
+msgstr "Välj detta konfigurationsobjekt"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -144,6 +165,22 @@ msgstr "Utför sökning"
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
 msgstr "Sök även i tidigare versioner?"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "TreeView for ConfigItem"
+msgstr "TreeView för ConfigItem"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Depth Level"
+msgstr "Djupnivå"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Zoom In/Out"
+msgstr "Zooma in/ut"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Max links level reached for ConfigItem!"
+msgstr "Max länknivå uppnådd för ConfigItem!"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
@@ -158,40 +195,56 @@ msgid "Current Deployment State"
 msgstr "Nuvarande driftläge"
 
 #. Template: AgentITSMConfigItemZoom
+msgid "Current Incident State"
+msgstr "Nuvarande incidentläge"
+
+#. Template: AgentITSMConfigItemZoom
+msgid "Last changed"
+msgstr "Senast ändrad"
+
+#. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
 msgstr "Senast ändrad av"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show one version"
-msgstr "Visa en version"
+#. Template: CustomerITSMConfigItem
+msgid "Your ConfigItems"
+msgstr "Dina ConfigItems"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show all versions"
-msgstr "Visa alla versioner"
+#. Template: CustomerITSMConfigItemSearch
+msgid "ConfigItem Search"
+msgstr "ConfigItem Sök"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Incident State"
-msgstr "Incidentläge för version"
+#. Template: AdminACL
+msgid "Object Type"
+msgstr "Objekttyp"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Deployment State"
-msgstr "Version Driftsättning Status"
+#. Template: AdminDynamicFieldScreen
+msgid "Filter by object type"
+msgstr ""
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number"
-msgstr "Versionsnummer"
+#. JS Template: ClassImportConfirm
+msgid "The following classes will be imported"
+msgstr "Följande klasser kommer att importeras"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Configuration Item Version Details"
-msgstr "Versionsinformation för konfigurationsenhet"
+#. JS Template: ClassImportConfirm
+msgid "The following roles will be imported"
+msgstr "Följande roller kommer att importeras"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Property"
-msgstr "Egenskap"
+#. JS Template: ClassImportConfirm
+msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
+msgstr "Observera att även motsvarande dynamiska fält och GeneralCatalog-klasser kommer att skapas och att det inte sker någon automatisk borttagning."
 
-#. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-msgid "No access to Class is given!"
-msgstr "Ingen tillgång till Class ges!"
+#. JS Template: ClassImportConfirm
+msgid "Do you want to proceed?"
+msgstr "Vill du fortsätta?"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Need ExampleClasses!"
+msgstr "Behöver exempelklasser!"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Definition is no valid YAML hash."
+msgstr "Definitionen är ingen giltig YAML-hash."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
@@ -208,6 +261,10 @@ msgstr "Du behöver minst ett valt Configuration Item!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
 msgstr "Du har inte skrivbehörighet till det här konfigurationsobjektet: %s."
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
+msgid "No definition was defined for class %s!"
+msgstr "Ingen definition har definierats för klassen %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
@@ -228,10 +285,6 @@ msgstr "Inget ConfigItemID, DuplicateID eller ClassID anges!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
 msgstr "Ingen åtkomst ges!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-msgid "No definition was defined for class %s!"
-msgstr "Ingen definition har definierats för klassen %s!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
@@ -285,6 +338,14 @@ msgstr "Attribut %s uppdaterat från \"%s\" till \"%s\""
 msgid "Version %s deleted"
 msgstr "Version %s raderad"
 
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" uploaded"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" removed"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
 msgstr "Inget ConfigItemID eller VersionID har angetts!"
@@ -298,16 +359,16 @@ msgid "ConfigItemID %s not found in database!"
 msgstr "ConfigItemID %s hittades inte i databasen!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-msgid "VersionID %s not found in database!"
-msgstr "VersionID %s hittades inte i databasen!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
 msgstr "Konfigurationsenhet"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
 msgstr "utskriven av %s vid %s"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
+msgid "Referenced by"
+msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
@@ -334,6 +395,14 @@ msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr "Kan inte visa objektet, inga åtkomsträttigheter för ConfigItem har getts!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "ConfigItem not found!"
+msgstr "KonfigItem hittades inte!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "No versions found!"
+msgstr "Inga versioner hittades!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
 msgstr "Operativ"
 
@@ -353,141 +422,121 @@ msgstr "Driftläge för konfigurationsenhet"
 msgid "The incident state of this config item"
 msgstr "Incidentläge för konfigurationsenhet"
 
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "No permission"
+msgstr "Saknar rättigheter!"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Filter invalid!"
+msgstr "Filter ogiltigt!"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Search params invalid!"
+msgstr "Sökparametrar ogiltiga!"
+
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
 msgstr "Visade konfigurationsobjekt"
 
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Deployment State Type"
+msgstr "Driftlägestyper"
+
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Current Incident State Type"
+msgstr "Nuvarande typ av incidentläge"
+
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
 msgstr "Mellan"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Class restrictions for the config item"
+msgstr "Klassbegränsningar för konfigurationsobjektet"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more classes to restrict selectable config items"
+msgstr "Välj en eller flera klasser för att begränsa valbara konfigurationsobjekt"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Deployment state restrictions for the config item"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more deployment states to restrict selectable config items"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Dynamic (ConfigItem)"
+msgstr "Dynamisk (KonfigItem)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Static (Version)"
+msgstr "Statisk (version)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Link Referencing Type"
+msgstr "Typ av länkreferens"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
+msgstr "Om denna länk gäller för ConfigItem eller den statiska versionen av det objekt som refereras till. Beräkningen av Current Incident State utförs endast på dynamiska länkar."
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select the attribute which config items will be searched by"
+msgstr "Välj det attribut som konfigurationsobjekten ska sökas efter"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr "Basstrukturen är inte giltig. Ange en hash med data i YAML-format."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Starting the YAML string with '---' is required."
+msgstr "Det krävs att YAML-strängen inleds med \"---\"."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not purge the table configitem_link."
+msgstr "Det gick inte att rensa tabellen configitem_link."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "No relevant dynamic fields were found"
+msgstr "Inga relevanta dynamiska fält hittades"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not insert into the table configitem_link"
+msgstr "Det gick inte att infoga i tabellen configitem_link"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Inserted 0 rows into the table configitem_link"
+msgstr "Infogade 0 rader i tabellen configitem_link"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
 msgstr "Max antal av ett element"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Empty fields indicate that the current values are kept"
-msgstr "Tomma fält anger att tidigare värden ska användas."
+msgid "Maximum number of one Set dynamic field element"
+msgstr ""
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Skipped"
-msgstr "Hoppade över"
+msgid "Maximum number of one element within a Set dynamic field element"
+msgstr ""
 
-#. ITSM class bundles
-msgid "Model"
-msgstr "Modell"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Import/Export attachments (as the last entries per line)"
+msgstr "Importera/exportera bilagor (som de sista posterna per rad)"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Customer Company"
-msgstr "Kundföretag"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Version String"
+msgstr "Version String"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Serial Number"
-msgstr "Serienummer"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "Error synchronizing the definitions. Please check the log."
+msgstr "Fel vid synkronisering av definitionerna. Vänligen kontrollera loggen."
 
-#. ITSM class bundles
-msgid "CPU"
-msgstr "CPU"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Ram"
-msgstr "RAM"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Hard Disk"
-msgstr "Hårddisk"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Capacity"
-msgstr "Kapacitet"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Adapter"
-msgstr "Nätverkskort"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP over DHCP"
-msgstr "IP över DHCP"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP Address"
-msgstr "IP-adress"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Graphic Adapter"
-msgstr "Grafikkort"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Other Equipment"
-msgstr "Annan utrustning"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Warranty Expiration Date"
-msgstr "Sista dag för garanti"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Install Date"
-msgstr "Installationsdatum"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 1"
-msgstr "Telefon 1"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 2"
-msgstr "Telefon 2"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "E-Mail"
-msgstr "E-post"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Address"
-msgstr "Nätverksadress"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Subnet Mask"
-msgstr "Subnätmask"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Gateway"
-msgstr "Gateway"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Type"
-msgstr "Licenstyper"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Key"
-msgstr "Licensnyckel"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Quantity"
-msgstr "Mängd"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Expiration Date"
-msgstr "Löper ut datum"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Media"
-msgstr "Media"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Computer"
-msgstr "Dator"
-
-#. ITSM class bundles
-msgid "Hardware"
-msgstr "Hårdvara"
-
-#. ITSM class bundles
-msgid "Network"
-msgstr "Nätverk"
-
-#. ITSM class bundles
-msgid "Software"
-msgstr "Programvara"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
+msgstr "Du har ITSMConfigItem-definitioner som inte är synkroniserade. Vänligen distribuera dina ITSMConfigItem dynamiska fältändringar."
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -521,229 +570,53 @@ msgstr "Översyn"
 msgid "Test/QA"
 msgstr "Test/QA"
 
-#. ITSM class bundles
-msgid "Laptop"
-msgstr "Laptop"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Overview and Confirmation"
+msgstr "Översikt och bekräftelse"
 
-#. ITSM class bundles
-msgid "Desktop"
-msgstr "Desktop"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr "Importera klasser/roller och deras relaterade fält"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PDA"
-msgstr "PDA"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "An error occurred during class import."
+msgstr "Ett fel inträffade under klassimporten."
 
-#. ITSM class bundles
-msgid "Server"
-msgstr "Server"
+#. SysConfig
+msgid "0 - Hidden"
+msgstr "0 - Dold"
 
-#. ITSM class bundles
-msgid "Other"
-msgstr "Annan"
+#. SysConfig
+msgid "1 - Shown"
+msgstr "1 - Visas"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Monitor"
-msgstr "Monitor"
+#. SysConfig
+msgid "A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem."
+msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Printer"
-msgstr "Skrivare"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i agentgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen \"(*key1*&&*key2*)\" eller \"(*key1*||*key2*)\"."
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Switch"
-msgstr "Switch"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Router"
-msgstr "Router"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN Access Point"
-msgstr "WLAN Accesspunkt"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Security Device"
-msgstr "Säkerhetsutrustning"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Backup Device"
-msgstr "Backupenhet"
-
-#. ITSM class bundles
-msgid "Mouse"
-msgstr "Mus"
-
-#. ITSM class bundles
-msgid "Keyboard"
-msgstr "Tangentbord"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Camera"
-msgstr "Kamera"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Beamer"
-msgstr "Beamer"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Modem"
-msgstr "Modem"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PCMCIA Card"
-msgstr "PCMCIA-kort"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "USB Device"
-msgstr "USB-enhet"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Docking Station"
-msgstr "Dockningsstation"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Scanner"
-msgstr "Scanner"
-
-#. ITSM class bundles
-msgid "Building"
-msgstr "Byggnad"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Office"
-msgstr "Kontor"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Floor"
-msgstr "Våning"
-
-#. ITSM class bundles
-msgid "Room"
-msgstr "Rum"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Rack"
-msgstr "Rack"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Workplace"
-msgstr "Arbetsplats"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Outlet"
-msgstr "Väggkontakt"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "IT Facility"
-msgstr "IT-byggnad"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "LAN"
-msgstr "LAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN"
-msgstr "WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Telco"
-msgstr "Telco"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "GSM"
-msgstr "GSM"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client Application"
-msgstr "Klientapplikation"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Middleware"
-msgstr "Middleware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server Application"
-msgstr "Serverapplikation"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client OS"
-msgstr "Klient-OS"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server OS"
-msgstr "Server-OS"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Admin Tool"
-msgstr "Administrationsverktyg"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "User Tool"
-msgstr "Användarverktyg"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Embedded"
-msgstr "Embedded"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Single Licence"
-msgstr "Enstaka licens"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per User"
-msgstr "Per användare"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Processor"
-msgstr "Per processor"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Server"
-msgstr "Per server"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Node"
-msgstr "Per nod"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Volume Licence"
-msgstr "Volymlicens"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Enterprise Licence"
-msgstr "Enterpriselicens"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Developer Licence"
-msgstr "Utvecklarlicens"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Demo"
-msgstr "Demo"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Time Restricted"
-msgstr "Tidsbegränsad"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Freeware"
-msgstr "Freeware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Open Source"
-msgstr "Öppen källkod"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Unlimited"
-msgstr "Obegränsad"
-
-#. JS File: ITSM.Agent.ConfigItem.Zoom
-msgid "Ok"
-msgstr "Ok"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i kundgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen \"(*key1*&&*key2*)\" eller \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Assigned CIs"
 msgstr "Tilldelade CI"
+
+#. SysConfig
+msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for license accounting."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for licenses counting, where \"TotalLicensesDF\", \"AvailableLicensesDF\" and \"LicenseReferenceDF\" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in \"ValidDeplStates\" are considered. If a threshold is defined in \"MinimumLicenses\", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field \"Ticket->DynamicField\" must exist. The tags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in \"Ticket->Text\" by the config item name, number, available licenses, and minimum required available licenses, respectively."
+msgstr ""
 
 #. SysConfig
 msgid "CIs assigned to customer company"
@@ -760,566 +633,6 @@ msgstr "CMDB-inställningar"
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr "Sök efter ett unikt namn endast inom samma ConfigItem-klass (\"class\") eller globalt (\"global\"), vilket innebär att varje befintligt ConfigItem tas med i beräkningen när man letar efter dubbletter."
-
-#. SysConfig
-msgid "Config Items"
-msgstr "Konfigurationsenheter"
-
-#. SysConfig
-msgid "Config item add."
-msgstr "Lägg till konfigureringsobjekt."
-
-#. SysConfig
-msgid "Config item edit."
-msgstr "Redigera konfigureringsobjekt."
-
-#. SysConfig
-msgid "Config item event module that enables logging to history in the agent interface."
-msgstr "Konfigureringsobjekt för händelsemodul som möjliggör loggning till historik i agentgränssnittet."
-
-#. SysConfig
-msgid "Config item history."
-msgstr "Konfigurerar artikelhistorik."
-
-#. SysConfig
-msgid "Config item print."
-msgstr "Utskrift av konfigureringsobjekt."
-
-#. SysConfig
-msgid "Config item zoom."
-msgstr "Konfigurera zoom för objekt."
-
-#. SysConfig
-msgid "ConfigItemNumber"
-msgstr "KonfigItemNummer"
-
-#. SysConfig
-msgid "Configuration Item Limit"
-msgstr "Begränsning konfigurationsenheter"
-
-#. SysConfig
-msgid "Configuration Item limit per page."
-msgstr "Konfiguration Artikelgräns per sida."
-
-#. SysConfig
-msgid "Configuration Management Database."
-msgstr "Databas för konfigurationshantering."
-
-#. SysConfig
-msgid "Configuration item bulk module."
-msgstr "Konfigurationsobjekt bulkmodul."
-
-#. SysConfig
-msgid "Configuration item search backend router of the agent interface."
-msgstr "Konfigurationsobjekt sök backend-router för agentgränssnittet."
-
-#. SysConfig
-msgid "Create and manage the definitions for Configuration Items."
-msgstr "Skapa och hantera definitioner för konfigurationsenheter"
-
-#. SysConfig
-msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "Definiera åtgärder där en inställningsknapp är tillgänglig i widgeten för länkade objekt (LinkObject::ViewMode = \"complex\"). Observera att dessa åtgärder måste ha registrerat följande JS- och CSS-filer: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js och Core.Agent.LinkObject.js."
-
-#. SysConfig
-msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr "Definierar nödvändiga behörigheter för att skapa ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
-
-#. SysConfig
-msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr "Definierar nödvändiga behörigheter för att ta bort ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
-
-#. SysConfig
-msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr "Definierar nödvändiga behörigheter för att hämta ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
-
-#. SysConfig
-msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr "Definierar nödvändiga behörigheter för att söka ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
-
-#. SysConfig
-msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr "Definierar nödvändiga behörigheter för att uppdatera ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
-
-#. SysConfig
-msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr "Definierar en översiktsmodul som visar den lilla vyn av en lista med konfigurationsobjekt."
-
-#. SysConfig
-msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr "Definierar reguljära uttryck individuellt för varje ConfigItem-klass för att kontrollera ConfigItem-namnet och visa motsvarande felmeddelanden."
-
-#. SysConfig
-msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr "Definierar standardunderobjektet för klassen 'ITSMConfigItem'."
-
-#. SysConfig
-msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr "Anger antal rader för KE-editorn i admingränssnittet."
-
-#. SysConfig
-msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr "Definierar ordningsföljden för incidenttillstånd från hög (t.ex. cricital) till låg (t.ex. functional)."
-
-#. SysConfig
-msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr "Definierar de relevanta driftsättningsstatusar där länkade ärenden kan påverka statusen för ett CI."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr "Definierar sökgränsen för skärmen AgentITSMConfigItem."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr "Definierar sökgränsen för skärmen AgentITSMConfigItemSearch."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr "Definierar vilka kolumner som visas i konfigurationsobjektets översikt. Detta alternativ har ingen effekt på kolumnens position. Obs: Klass-kolumnen är alltid tillgänglig om filtret \"Alla\" är valt."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr "Definierar vilka kolumner som visas i sökningen av konfigurationsobjekt. Detta alternativ har ingen effekt på kolumnens position."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definierar de kolumner som visas för CI:er i konfigurationsobjektets översikt beroende på CI-klass. Varje post måste inledas med klassens namn och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna som definierats i inställningen ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definierar de kolumner med CI som visas i sökningen efter konfigurationsobjekt beroende på CI-klass. Varje post måste inledas med klassens namn och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna som definierats i inställningen ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr "Definierar de kolumner med CI som visas i widgeten för konfigurationsobjekt beroende på CI-klass. Varje post måste inledas med klassens namn och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna enligt inställningen AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (nyckel DefaultColumns)."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr "Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen för alla CI-klasser. Om det inte finns någon post visas standardkolumnerna."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr "Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen, beroende på CI-klass. Varje post måste inledas med klassnamnet och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna."
-
-#. SysConfig
-msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr "Definierar vilken typ av länk (namngiven ur ett ärendeperspektiv) som kan påverka statusen för ett länkat CI."
-
-#. SysConfig
-msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr "Definierar vilken typ av ärende som kan påverka statusen för ett länkat CI."
-
-#. SysConfig
-msgid "Delete Configuration Item"
-msgstr "Ta bort konfigurationsobjekt"
-
-#. SysConfig
-msgid "Deployment State Color"
-msgstr "Deployment State Färg"
-
-#. SysConfig
-msgid "Duplicate"
-msgstr "Duplicera"
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr "Aktiverar funktionen för massåtgärder för konfigurationsobjekt så att agentens frontend kan arbeta med mer än ett konfigurationsobjekt åt gången."
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr "Aktiverar funktionen för massåtgärder för konfigurationsobjekt endast för de grupper som anges i listan."
-
-#. SysConfig
-msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr "Aktiverar/inaktiverar funktionen för att kontrollera att ConfigItems har unika namn. Innan du aktiverar det här alternativet bör du kontrollera om det redan finns konfigurationsobjekt med dubbla namn i systemet. Du kan göra detta med skriptet bin/otobo.ITSMConfigItemListDuplicates.pl."
-
-#. SysConfig
-msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr "Händelsemodul för att sätta configitem-status på ticket-configitem-link."
-
-#. SysConfig
-msgid "ITSM config item overview."
-msgstr "Översikt över ITSM-konfigurationsobjekt."
-
-#. SysConfig
-msgid "Module to check the group responsible for a class."
-msgstr "Modul för att kontrollera vilken grupp som är ansvarig för en klass."
-
-#. SysConfig
-msgid "Module to check the group responsible for a configuration item."
-msgstr "Modul för att kontrollera vilken grupp som är ansvarig för ett konfigurationsobjekt."
-
-#. SysConfig
-msgid "Module to generate ITSM config item statistics."
-msgstr "Modul för att generera statistik över ITSM-konfigurationsobjekt."
-
-#. SysConfig
-msgid "Object backend module registration for the import/export module."
-msgstr "Registrering av backend-modul för objekt för import/export-modulen."
-
-#. SysConfig
-msgid "Overview."
-msgstr "Översikt."
-
-#. SysConfig
-msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr "Parametrar för dashboard backend för kundföretagets konfigurationsobjekt översikt över agentgränssnittet. \"Limit\" är antalet poster som visas som standard. \"Group\" används för att begränsa åtkomsten till insticksprogrammet (t.ex. Group: admin;group1;group2;). \"Default\" avgör om insticksprogrammet är aktiverat som standard eller om användaren måste aktivera det manuellt. \"CacheTTLLocal\" är cachetiden i minuter för insticksprogrammet."
-
-#. SysConfig
-msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr "Parametrar för färgen för driftsättningsstatus i preferensvyn i agentgränssnittet."
-
-#. SysConfig
-msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr "Parametrar för driftsättningstillstånd i preferensvyn i agentgränssnittet."
-
-#. SysConfig
-msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Parametrar för exempel på behörighetsegrupper i grundkatalogens attribut."
-
-#. SysConfig
-msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr "Parametrar för sidorna (där konfigurationsobjekten visas)."
-
-#. SysConfig
-msgid "Permission Group"
-msgstr "Behörighetsgrupp"
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr "Behörighet krävs för att använda skärmen ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr "Behörighet krävs för att använda sökskärmen för ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr "Behörighet krävs för att använda zoomskärmen för ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr "Behörighet krävs för att använda skärmen Lägg till ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr "Behörighet krävs för att använda skärmen Redigera ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr "Behörighet krävs för att använda skärmen Historik över ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr "Behörighet krävs för att använda skärmen Skriv ut ITSM-konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Required privileges to delete config items."
-msgstr "Behörighet krävs för att ta bort konfigurationsobjekt."
-
-#. SysConfig
-msgid "Search config items."
-msgstr "Sök i konfigurationsobjekt."
-
-#. SysConfig
-msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr "Väljer modul för generering av konfigurationsartikelnummer. \"AutoIncrement\" inkrementerar konfigurationsartikelnumret, SystemID, ConfigItemClassID och räknaren används. Formatet är \"SystemID.ConfigItemClassID.Counter\", t.ex. 1205000004, 1205000005."
-
-#. SysConfig
-msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr "Ställ in incidentstatus för ett CI automatiskt när en Ticket länkas till ett CI."
-
-#. SysConfig
-msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr "Ställer in driftsättningsstatus i konfigurationsobjektets bulkskärm i agentgränssnittet."
-
-#. SysConfig
-msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr "Ställer in incidentstatus i konfigurationsobjektets bulkskärm i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr "Visar en länk i menyn som gör det möjligt att länka ett konfigurationsobjekt till ett annat objekt i zoomvyn för konfigurationsobjektet i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr "Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i zoomvyn i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att ta bort ett konfigurationsobjekt i dess zoomvy av agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr "Visar en länk i menyn för att duplicera ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att duplicera ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att redigera ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att gå tillbaka i zoomvyn för konfigurationsobjektet i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr "Visar en länk i menyn för att skriva ut ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
-
-#. SysConfig
-msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr "Visar en länk i menyn för att zooma in på ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
-
-#. SysConfig
-msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr "Visar historiken för konfigurationsobjekt (omvänd ordning) i agentgränssnittet."
-
-#. SysConfig
-msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr "Identifieraren för ett konfigurationsobjekt, t.ex. ConfigItem#, MyConfigItem#. Standardvärdet är ConfigItem#."
-
-#. SysConfig
-msgid "class"
-msgstr "klass"
-
-#. SysConfig
-msgid "global"
-msgstr "globala"
-
-#. SysConfig
-msgid "postproductive"
-msgstr "postproduktiv"
-
-#. SysConfig
-msgid "preproductive"
-msgstr "preproduktiv"
-
-#. SysConfig
-msgid "productive"
-msgstr "produktiv"
-
-#. Template: AdminITSMConfigItem
-msgid "Change role definition"
-msgstr "Ändra rolldefinition"
-
-#. Template: AdminITSMConfigItem
-msgid "Ready2Import Class Bundles"
-msgstr "Ready2Import-klassbuntar"
-
-#. Template: AdminITSMConfigItem
-msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "Här kan du importera Ready2Import-klassbuntar som visar våra vanligaste konfigurationsobjekt. Observera att viss ytterligare konfiguration kan krävas."
-
-#. Template: AdminITSMConfigItem
-msgid "Update existing entities"
-msgstr "Uppdatera befintliga enheter"
-
-#. Template: AdminITSMConfigItem
-msgid "Import Ready2Adopt class bundles"
-msgstr "Importera Ready2Adopt-klassbuntar"
-
-#. Template: AdminITSMConfigItem
-msgid "Config Item Role"
-msgstr "Konfig Artikel Roll"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "The version number of this config item"
-msgstr "Versionsnumret för detta konfigurationsobjekt"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr "Versionsnumret används redan av ConfigItems med följande nummer: %s"
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "No config item data found."
-msgstr "Inga data för konfigurationsobjekt hittades."
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "Select this config item"
-msgstr "Välj detta konfigurationsobjekt"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "TreeView for ConfigItem"
-msgstr "TreeView för ConfigItem"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Depth Level"
-msgstr "Djupnivå"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Zoom In/Out"
-msgstr "Zooma in/ut"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Max links level reached for ConfigItem!"
-msgstr "Max länknivå uppnådd för ConfigItem!"
-
-#. Template: CustomerITSMConfigItem
-msgid "Your ConfigItems"
-msgstr "Dina ConfigItems"
-
-#. Template: CustomerITSMConfigItemSearch
-msgid "ConfigItem Search"
-msgstr "ConfigItem Sök"
-
-#. Template: AdminACL
-msgid "Object Type"
-msgstr "Objekttyp"
-
-#. JS Template: ClassImportConfirm
-msgid "The following classes will be imported"
-msgstr "Följande klasser kommer att importeras"
-
-#. JS Template: ClassImportConfirm
-msgid "The following roles will be imported"
-msgstr "Följande roller kommer att importeras"
-
-#. JS Template: ClassImportConfirm
-msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "Observera att även motsvarande dynamiska fält och GeneralCatalog-klasser kommer att skapas och att det inte sker någon automatisk borttagning."
-
-#. JS Template: ClassImportConfirm
-msgid "Do you want to proceed?"
-msgstr "Vill du fortsätta?"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Need ExampleClasses!"
-msgstr "Behöver exempelklasser!"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Definition is no valid YAML hash."
-msgstr "Definitionen är ingen giltig YAML-hash."
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "ConfigItem not found!"
-msgstr "KonfigItem hittades inte!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "No versions found!"
-msgstr "Inga versioner hittades!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "No permission"
-msgstr "Saknar rättigheter!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Filter invalid!"
-msgstr "Filter ogiltigt!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Search params invalid!"
-msgstr "Sökparametrar ogiltiga!"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Class restrictions for the config item"
-msgstr "Klassbegränsningar för konfigurationsobjektet"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select one or more classes to restrict selectable config items"
-msgstr "Välj en eller flera klasser för att begränsa valbara konfigurationsobjekt"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link type"
-msgstr "Typ av länk"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the link type."
-msgstr "Välj länktyp."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr "Framåt i tiden: Referencing (Source) -> Referenced (Target)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr "Bakåt i tiden: Refererad (Källa) -> Refererande (Mål)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Direction"
-msgstr "Länkens riktning"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "Det refererande objektet är det som innehåller det här dynamiska fältet, det refererade objektet är det som valts som värde för det dynamiska fältet."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Dynamic (ConfigItem)"
-msgstr "Dynamisk (KonfigItem)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Static (Version)"
-msgstr "Statisk (version)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Referencing Type"
-msgstr "Typ av länkreferens"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr "Om denna länk gäller för ConfigItem eller den statiska versionen av det objekt som refereras till. Beräkningen av Current Incident State utförs endast på dynamiska länkar."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the attribute which config items will be searched by"
-msgstr "Välj det attribut som konfigurationsobjekten ska sökas efter"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Starting the YAML string with '---' is required."
-msgstr "Det krävs att YAML-strängen inleds med \"---\"."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not purge the table configitem_link."
-msgstr "Det gick inte att rensa tabellen configitem_link."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "No relevant dynamic fields were found"
-msgstr "Inga relevanta dynamiska fält hittades"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not insert into the table configitem_link"
-msgstr "Det gick inte att infoga i tabellen configitem_link"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Inserted 0 rows into the table configitem_link"
-msgstr "Infogade 0 rader i tabellen configitem_link"
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "Error synchronizing the definitions. Please check the log."
-msgstr "Fel vid synkronisering av definitionerna. Vänligen kontrollera loggen."
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "Du har ITSMConfigItem-definitioner som inte är synkroniserade. Vänligen distribuera dina ITSMConfigItem dynamiska fältändringar."
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Overview and Confirmation"
-msgstr "Översikt och bekräftelse"
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "An error occurred during class import."
-msgstr "Ett fel inträffade under klassimporten."
-
-#. SysConfig
-msgid "0 - Hidden"
-msgstr "0 - Dold"
-
-#. SysConfig
-msgid "1 - Shown"
-msgstr "1 - Visas"
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i agentgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen \"(*key1*&&*key2*)\" eller \"(*key1*||*key2*)\"."
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Tillåter utökade sökvillkor vid sökning av konfigurationsobjekt i kundgränssnittet. Med den här funktionen kan du t.ex. söka efter konfigurationsobjektets namn med villkor av typen \"(*key1*&&*key2*)\" eller \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1350,20 +663,40 @@ msgid "Columns that can be filtered in the config item overview of the agent int
 msgstr "Kolumner som kan filtreras i översikten över konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna."
 
 #. SysConfig
-msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Kolumner som kan filtreras i översikten över konfigurationsobjekt i kundgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna."
+msgid "Config Items"
+msgstr "Konfigurationsenheter"
+
+#. SysConfig
+msgid "Config item add."
+msgstr "Lägg till konfigureringsobjekt."
+
+#. SysConfig
+msgid "Config item edit."
+msgstr "Redigera konfigureringsobjekt."
+
+#. SysConfig
+msgid "Config item event module that enables accounting licenses for a given config item."
+msgstr ""
+
+#. SysConfig
+msgid "Config item event module that enables logging to history in the agent interface."
+msgstr "Konfigureringsobjekt för händelsemodul som möjliggör loggning till historik i agentgränssnittet."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr "Händelsemodul för konfigurationsobjekt som uppdaterar konfigurationsobjekten till deras aktuella definition."
 
 #. SysConfig
-msgid "Config item event module that updates the table configitem_ĺink."
-msgstr "Config item event-modul som uppdaterar tabellen configitem_ĺink."
+msgid "Config item history."
+msgstr "Konfigurerar artikelhistorik."
 
 #. SysConfig
-msgid "Config item event module updates the current incident state."
-msgstr "Config item event-modulen uppdaterar det aktuella incidenttillståndet."
+msgid "Config item print."
+msgstr "Utskrift av konfigureringsobjekt."
+
+#. SysConfig
+msgid "Config item zoom."
+msgstr "Konfigurera zoom för objekt."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1382,6 +715,42 @@ msgid "ConfigItems with the following deployment states will not be stored on th
 msgstr "ConfigItems med följande driftsättningsstatus kommer inte att lagras på Elasticsearch-servern. För att tillämpa detta på befintliga CI måste CI-migreringen köras via konsolen efter att detta alternativ har ändrats."
 
 #. SysConfig
+msgid "Configuration Item Limit"
+msgstr "Begränsning konfigurationsenheter"
+
+#. SysConfig
+msgid "Configuration Item limit per page."
+msgstr "Konfiguration Artikelgräns per sida."
+
+#. SysConfig
+msgid "Configuration Management Database."
+msgstr "Databas för konfigurationshantering."
+
+#. SysConfig
+msgid "Configuration item bulk module."
+msgstr "Konfigurationsobjekt bulkmodul."
+
+#. SysConfig
+msgid "Configuration item search backend router of the agent interface."
+msgstr "Konfigurationsobjekt sök backend-router för agentgränssnittet."
+
+#. SysConfig
+msgid "Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings."
+msgstr ""
+
+#. SysConfig
+msgid "Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Create and manage the definitions for Configuration Items."
+msgstr "Skapa och hantera definitioner för konfigurationsenheter"
+
+#. SysConfig
+msgid "Creates Tickets for ConfigItems at specific time points."
+msgstr "Skapar biljetter för ConfigItems vid specifika tidpunkter."
+
+#. SysConfig
 msgid "Customers can see historic CI versions."
 msgstr "Kunderna kan se historiska CI-versioner."
 
@@ -1398,6 +767,10 @@ msgid "Default data to use on attribute for config item search screen. Example: 
 msgstr "Standarddata som ska användas på attribut för sökskärmen för konfigurationsobjekt. Exempel: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
+msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
+msgstr "Definiera åtgärder där en inställningsknapp är tillgänglig i widgeten för länkade objekt (LinkObject::ViewMode = \"complex\"). Observera att dessa åtgärder måste ha registrerat följande JS- och CSS-filer: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js och Core.Agent.LinkObject.js."
+
+#. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr "Definiera ett Template::Toolkit-schema för versionssträngar. Används endast om Version String Module är inställd på TemplateToolkit."
 
@@ -1406,8 +779,32 @@ msgid "Define a set of conditions under which a customer is allowed to see a con
 msgstr "Definiera en uppsättning villkor under vilka en kund får se ett konfigurationsobjekt. Villkoren kan eventuellt begränsas till vissa kundgrupper. Namn är det enda obligatoriska attributet. Om inga andra alternativ anges kommer alla konfigurationsobjekt att vara synliga under den kategorin."
 
 #. SysConfig
+msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
+msgstr "Definierar nödvändiga behörigheter för att ta bort ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
+
+#. SysConfig
+msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
+msgstr "Definierar nödvändiga behörigheter för att hämta ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
+
+#. SysConfig
+msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
+msgstr "Definierar nödvändiga behörigheter för att söka ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
+
+#. SysConfig
+msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+msgstr "Definierar nödvändiga behörigheter för att ställa in ITSM-konfigurationsobjekt med hjälp av det generiska gränssnittet."
+
+#. SysConfig
+msgid "Defines an overview module to show the small view of a configuration item list."
+msgstr "Definierar en översiktsmodul som visar den lilla vyn av en lista med konfigurationsobjekt."
+
+#. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr "Definierar om länktypens etiketter måste visas i nodanslutningarna."
+
+#. SysConfig
+msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
+msgstr "Definierar reguljära uttryck individuellt för varje ConfigItem-klass för att kontrollera ConfigItem-namnet och visa motsvarande felmeddelanden."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1454,12 +851,52 @@ msgid "Defines the default shown config item search attribute for config item se
 msgstr "Definierar standardattributet för sökning av konfigurationsobjekt som visas på skärmen för sökning av konfigurationsobjekt. Exempel: \"Key\" måste ha namnet på det dynamiska fältet i det här fallet \"X\", \"Content\" måste ha värdet på det dynamiska fältet beroende på typen av dynamiskt fält, Text: \"a text\", Dropdown: \"1\", Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' och eller 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
+msgid "Defines the default subobject of the class 'ITSMConfigItem'."
+msgstr "Definierar standardunderobjektet för klassen 'ITSMConfigItem'."
+
+#. SysConfig
+msgid "Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr "Definierar höjden för redigeringskomponenten för rik text för den här skärmen. Ange antal (pixlar) eller procentvärde (relativt)."
+
+#. SysConfig
+msgid "Defines the number of rows for the CI definition editor in the admin interface."
+msgstr "Anger antal rader för KE-editorn i admingränssnittet."
+
+#. SysConfig
+msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
+msgstr "Definierar ordningsföljden för incidenttillstånd från hög (t.ex. cricital) till låg (t.ex. functional)."
+
+#. SysConfig
+msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
+msgstr "Definierar de relevanta driftsättningsstatusar där länkade ärenden kan påverka statusen för ett CI."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItem screen."
+msgstr "Definierar sökgränsen för skärmen AgentITSMConfigItem."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgstr "Definierar sökgränsen för skärmen AgentITSMConfigItemSearch."
+
+#. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
 msgstr "Definierar sökgränsen för skärmen CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr "Definierar sökgränsen för skärmen CustomerITSMConfigItemSearch."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
+msgstr "Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen för alla CI-klasser. Om det inte finns någon post visas standardkolumnerna."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
+msgstr "Definierar de kolumner som visas för CI i den komplexa vyn för länktabellen, beroende på CI-klass. Varje post måste inledas med klassnamnet och dubbla kolon (t.ex. Computer::). Det finns ett fåtal CI-attribut som är gemensamma för alla CI (exempel för klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). För att visa enskilda CI-attribut som definieras i CI-definitionen måste följande schema användas (exempel för klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Om det inte finns någon post för en CI-klass visas standardkolumnerna."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
@@ -1474,16 +911,36 @@ msgid "Defines which items are available in second level of the ITSM Config Item
 msgstr "Definierar vilka objekt som är tillgängliga i den andra nivån i ITSM Config Item ACL-strukturen."
 
 #. SysConfig
+msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
+msgstr "Definierar vilken typ av länk (namngiven ur ett ärendeperspektiv) som kan påverka statusen för ett länkat CI."
+
+#. SysConfig
+msgid "Defines which type of ticket can affect the status of a linked CI."
+msgstr "Definierar vilken typ av ärende som kan påverka statusen för ett länkat CI."
+
+#. SysConfig
 msgid "Definition Update"
 msgstr "Definition Uppdatering"
+
+#. SysConfig
+msgid "Delete Configuration Item"
+msgstr "Ta bort konfigurationsobjekt"
 
 #. SysConfig
 msgid "DeplState"
 msgstr "DeplState"
 
 #. SysConfig
+msgid "Deployment State Color"
+msgstr "Deployment State Färg"
+
+#. SysConfig
 msgid "DeploymentState"
 msgstr "DeploymentState"
+
+#. SysConfig
+msgid "Duplicate"
+msgstr "Duplicera"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1502,8 +959,20 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "Dynamiska fält som visas på skärmen för sökning av konfigurationsobjekt i agentgränssnittet."
 
 #. SysConfig
+msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
+msgstr "Aktiverar funktionen för massåtgärder för konfigurationsobjekt så att agentens frontend kan arbeta med mer än ett konfigurationsobjekt åt gången."
+
+#. SysConfig
+msgid "Enables configuration item bulk action feature only for the listed groups."
+msgstr "Aktiverar funktionen för massåtgärder för konfigurationsobjekt endast för de grupper som anges i listan."
+
+#. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr "Aktiverar/inaktiverar funktionen för att kontrollera att ITSM-konfigurationsobjekt har unika namn. Innan du aktiverar det här alternativet bör du kontrollera om det redan finns konfigurationsobjekt med dubbla namn i systemet. Du kan göra detta med konsolkommandot Admin::ITSM::ConfigItem::ListDuplicates."
+
+#. SysConfig
+msgid "Event module to set configitem-status on ticket-configitem-link."
+msgstr "Händelsemodul för att sätta configitem-status på ticket-configitem-link."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
@@ -1518,12 +987,24 @@ msgid "For every webservice (key) an array of classes (value) can be defined on 
 msgstr "För varje webbtjänst (nyckel) kan en array av klasser (värde) definieras för vilka importen är begränsad. För alla valda klasser, eller alla befintliga klasser, måste de identifierande attributen väljas i konfigurationen av invokern."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemCreate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr "Registrering av GenericInterface-modul för ConfigItemFetch-inkallningslagret."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemUpdate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "ITSM ConfigItem"
 msgstr "ITSM KonfigItem"
+
+#. SysConfig
+msgid "ITSM config item overview."
+msgstr "Översikt över ITSM-konfigurationsobjekt."
 
 #. SysConfig
 msgid "InciState"
@@ -1542,8 +1023,24 @@ msgid "Includes incident states in the config item search of the customer interf
 msgstr "Inkluderar incidentstatusar i sökningen efter konfigurationsobjekt i kundgränssnittet."
 
 #. SysConfig
+msgid "License accounting configuration item event module."
+msgstr ""
+
+#. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr "Maximalt antal konfigurationsobjekt som ska visas i resultatet av denna åtgärd."
+
+#. SysConfig
+msgid "Module to check the group responsible for a class."
+msgstr "Modul för att kontrollera vilken grupp som är ansvarig för en klass."
+
+#. SysConfig
+msgid "Module to check the group responsible for a configuration item."
+msgstr "Modul för att kontrollera vilken grupp som är ansvarig för ett konfigurationsobjekt."
+
+#. SysConfig
+msgid "Module to generate ITSM config item statistics."
+msgstr "Modul för att generera statistik över ITSM-konfigurationsobjekt."
 
 #. SysConfig
 msgid "Name Module"
@@ -1566,6 +1063,10 @@ msgid "Objects to search for, how many entries and which attributs to show. Conf
 msgstr "Objekt att söka efter, hur många poster och vilka attribut som ska visas. ConfigItem-attribut måste uttryckligen lagras via Elasticsearch."
 
 #. SysConfig
+msgid "Overview."
+msgstr "Översikt."
+
+#. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr "Parametrar för kategorierna för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet."
 
@@ -1574,12 +1075,36 @@ msgid "Parameters for the column filters of the small config item overview. Plea
 msgstr "Parametrar för kolumnfiltren i den lilla översikten över konfigurationsobjekt. Observera: om du anger \"Active\" till 0 förhindras endast handläggare från att redigera inställningar för denna grupp i sina personliga inställningar, men administratörer kan fortfarande redigera inställningarna för en annan användares räkning. Använd \"PreferenceGroup\" för att styra i vilket område dessa inställningar ska visas i användargränssnittet."
 
 #. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries per config item class shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the deployment states color in the preferences view of the agent interface."
+msgstr "Parametrar för färgen för driftsättningsstatus i preferensvyn i agentgränssnittet."
+
+#. SysConfig
+msgid "Parameters for the deployment states in the preferences view of the agent interface."
+msgstr "Parametrar för driftsättningstillstånd i preferensvyn i agentgränssnittet."
+
+#. SysConfig
+msgid "Parameters for the example permission groups of the general catalog attributes."
+msgstr "Parametrar för exempel på behörighetsegrupper i grundkatalogens attribut."
+
+#. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr "Parametrar för namnmodulen för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr "Parametrar för nummermodulen för klasser av konfigurationsobjekt i preferensvyn i agentgränssnittet."
+
+#. SysConfig
+msgid "Parameters for the pages (in which the configuration items are shown)."
+msgstr "Parametrar för sidorna (där konfigurationsobjekten visas)."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1598,8 +1123,20 @@ msgid "Performs the configured action for each event (as an Invoker) for each co
 msgstr "Utför den konfigurerade åtgärden för varje händelse (som en Invoker) för varje konfigurerad webbtjänst."
 
 #. SysConfig
+msgid "Permission Group"
+msgstr "Behörighetsgrupp"
+
+#. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr "Behörighet krävs för att använda åtgärden Attachment för ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
+msgstr "Behörighet krävs för att använda skärmen ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
+msgstr "Behörighet krävs för att använda sökskärmen för ITSM-konfigurationsobjekt i agentgränssnittet."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
@@ -1610,16 +1147,104 @@ msgid "Required permissions to use the ITSM configuration item tree view screen 
 msgstr "Behörighet krävs för att använda trädvyn för ITSM-konfigurationsobjekt i agentgränssnittet."
 
 #. SysConfig
+msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
+msgstr "Behörighet krävs för att använda zoomskärmen för ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
+msgstr "Behörighet krävs för att använda skärmen Lägg till ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr "Behörighet krävs för att använda skärmen för ITSM-konfigurationsobjekt i bulk i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
+msgstr "Behörighet krävs för att använda skärmen Redigera ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
+msgstr "Behörighet krävs för att använda skärmen Historik över ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
+msgstr "Behörighet krävs för att använda skärmen Skriv ut ITSM-konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Required privileges to delete config items."
+msgstr "Behörighet krävs för att ta bort konfigurationsobjekt."
+
+#. SysConfig
+msgid "Search config items."
+msgstr "Sök i konfigurationsobjekt."
+
+#. SysConfig
+msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr "Ställ in incidentstatus för ett CI automatiskt när en Ticket länkas till ett CI."
+
+#. SysConfig
+msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
+msgstr "Ställer in driftsättningsstatus i konfigurationsobjektets bulkskärm i agentgränssnittet."
+
+#. SysConfig
+msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
+msgstr "Ställer in incidentstatus i konfigurationsobjektets bulkskärm i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
+msgstr "Visar en länk i menyn som gör det möjligt att länka ett konfigurationsobjekt till ett annat objekt i zoomvyn för konfigurationsobjektet i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
+msgstr "Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att komma åt historiken för ett konfigurationsobjekt i zoomvyn i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att ta bort ett konfigurationsobjekt i dess zoomvy av agentgränssnittet."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr "Visar en länk i menyn för att visa länkarna till konfigurationsobjekten som en trädvy."
 
 #. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
+msgstr "Visar en länk i menyn för att duplicera ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att duplicera ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att redigera ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att gå tillbaka i zoomvyn för konfigurationsobjektet i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
+msgstr "Visar en länk i menyn för att skriva ut ett konfigurationsobjekt i zoomvyn av agentgränssnittet."
+
+#. SysConfig
+msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
+msgstr "Visar en länk i menyn för att zooma in på ett konfigurationsobjekt i översikten över konfigurationsobjekt i agentgränssnittet."
+
+#. SysConfig
+msgid "Shows the config item history (reverse ordered) in the agent interface."
+msgstr "Visar historiken för konfigurationsobjekt (omvänd ordning) i agentgränssnittet."
+
+#. SysConfig
 msgid "The default category which is shown, if none is selected."
 msgstr "Den standardkategori som visas om ingen kategori har valts."
+
+#. SysConfig
+msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
+msgstr "Identifieraren för ett konfigurationsobjekt, t.ex. ConfigItem#, MyConfigItem#. Standardvärdet är ConfigItem#."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
@@ -1638,6 +1263,10 @@ msgid "Version Trigger"
 msgstr "Version Trigger"
 
 #. SysConfig
+msgid "Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2)."
+msgstr ""
+
+#. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr "Om körningen av ConfigItemACL kan undvikas genom att kontrollera cachelagrade fältberoenden. Detta kan förbättra laddningstiderna för formulär, men måste avaktiveras om ACLModules ska användas för ITSMConfigItem- och Form-ReturnTypes."
 
@@ -1645,1648 +1274,939 @@ msgstr "Om körningen av ConfigItemACL kan undvikas genom att kontrollera cachel
 msgid "Which general information is shown in the header."
 msgstr "Vilken allmän information visas i rubriken."
 
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "General invoker data"
-msgstr "Allmänna uppgifter om inringaren"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "Denna OTOBO invoker backend-modul kommer att anropas för att förbereda de data som ska skickas till fjärrsystemet och för att bearbeta dess svarsdata."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for outgoing request data"
-msgstr "Inställningar för utgående förfrågningsdata"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Mapping"
-msgstr "Kartläggning"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "Data från den som anropar OTOBO kommer att behandlas av denna mappning, för att omvandlas till den typ av data som fjärrsystemet förväntar sig."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr "Svarsdata kommer att behandlas av denna mappning för att omvandlas till den typ av data som den som åberopar OTOBO förväntar sig."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for incoming response data"
-msgstr "Inställningar för inkommande svarsdata"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Event data"
-msgstr "Händelseinformation"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Add Event"
-msgstr "Lägg till Händelse"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr "Asynkrona händelseutlösare hanteras av OTOBO Scheduler Daemon i bakgrunden (rekommenderas)."
-
-#. Template: AdminITSMConfigItem
-msgid "Auto Indent Code"
-msgstr "Autoindragning Kod"
-
-#. Template: AdminITSMConfigItem
-msgid "Comment/Uncomment Code"
-msgstr "Kommentar/icke kommentar Kod"
-
-#. Template: AdminITSMConfigItem
-msgid "Search & Replace"
-msgstr "Sök och ersätt"
-
-#. Template: AdminITSMConfigItem
-msgid "Select All"
-msgstr "Välj alla"
-
-#. Template: AdminITSMConfigItem
-msgid "Full Screen"
-msgstr "Full skärm"
-
-#. Template: CustomerITSMConfigItem
-msgid "ConfigItems"
-msgstr "Konfigureringsobjekt"
-
-#. Template: CustomerITSMConfigItem
-msgid "Sort"
-msgstr "Sortera"
-
-#. Template: AdminACL
-msgid "Filter by valid state"
-msgstr "Filtrera efter giltigt tillstånd"
-
-#. Template: AdminACL
-msgid "Include invalid ACLs"
-msgstr "Inkludera ogiltiga ACL:er"
-
-#. Template: AdminACLEdit
-msgid "Check the official %sdocumentation%s."
-msgstr "Kontrollera den officiella %sdokumentationen%s."
-
-#. Template: AdminDynamicField
-msgid "Include invalid dynamic fields"
-msgstr "Inkludera ogiltiga dynamiska fält"
-
-#. Template: AdminDynamicField
-msgid "Filter field by object type"
-msgstr "Filtrera fält efter objekttyp"
-
-#. Template: AdminDynamicField
-msgid "Filter field by namespace"
-msgstr "Filtrera fält efter namnrymd"
-
-#. Template: AdminDynamicField
-msgid "New Dynamic Fields"
-msgstr "Nya dynamiska fält"
-
-#. Template: AdminDynamicField
-msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr "Vill du dra nytta av ytterligare dynamiska fälttyper? Du har full tillgång till följande fälttyper:"
-
-#. Template: AdminDynamicField
-msgid "Copy this field"
-msgstr "Kopiera detta fält"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which will be searched on autocomplete"
-msgstr "Attribut som kommer att sökas vid autokomplettering"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "External-source key"
-msgstr "Nyckel för extern källa"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr "När värdet ställs in via en extern källa (t.ex. webbtjänst eller import/export) tolkas det som detta attribut."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which is displayed for values"
-msgstr "Attribut som visas för värden"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the type of display"
-msgstr "Välj typ av display"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr "Basstrukturen är inte giltig. Vänligen ange en array med data i YAML-format."
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr "ACL:er kunde inte importeras på grund av ett okänt fel, kontrollera OTOBO-loggar för mer information"
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "%s (copy) %s"
-msgstr "%s (kopia) %s"
-
-#. SysConfig
-msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr "Ett procentuellt värde av den minsta översättningsframstegen per språk, för att kunna användas för dokumentationer."
-
-#. SysConfig
-msgid "Access repos via http or https."
-msgstr "Åtkomst till repos via http eller https."
-
-#. SysConfig
-msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr "Autoladdning av Znuny4OTRSRepo-tillägg."
-
-#. SysConfig
-msgid "Backend module registration for the config conflict check module."
-msgstr "Registrering av backendmodul för modulen för kontroll av konfigurationskonflikter."
-
-#. SysConfig
-msgid "Backend module registration for the file conflict check module."
-msgstr "Registrering av backendmodul för modulen för kontroll av filkonflikter."
-
-#. SysConfig
-msgid "Backend module registration for the function redefine check module."
-msgstr "Registrering av backend-modul för funktionen redefine check module."
-
-#. SysConfig
-msgid "Backend module registration for the manual set module."
-msgstr "Registrering av backendmodul för modulen för manuell uppsättning."
-
-#. SysConfig
-msgid "Block hooks to be created for BS ad removal."
-msgstr "Blockera krokar som ska skapas för BS annonsborttagning."
-
-#. SysConfig
-msgid "Block hooks to be created for package manager output filter."
-msgstr "Blockera krokar som ska skapas för pakethanterarens utdatafilter."
-
-#. SysConfig
-msgid "Branch View commit limit"
-msgstr "Gren Visa commit limit"
-
-#. SysConfig
-msgid "CodePolicy"
-msgstr "KodPolicy"
-
-#. SysConfig
-msgid "Commit limit per page for Branch view screen"
-msgstr "Begränsning av antal åtaganden per sida för Branch view screen"
-
-#. SysConfig
-msgid "Create analysis file"
-msgstr "Skapa analysfil"
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr "Skapar en analysfil från denna biljett och skickar till Znuny."
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket."
-msgstr "Skapar en analysfil från denna biljett."
-
-#. SysConfig
-msgid "Define private addon repos."
-msgstr "Definiera privata addon-repos."
-
-#. SysConfig
-msgid "Defines the filter that processes the HTML templates."
-msgstr "Definierar det filter som bearbetar HTML-mallarna."
-
-#. SysConfig
-msgid "Defines the test module for checking code policy."
-msgstr "Definierar testmodulen för kontroll av kodpolicy."
-
-#. SysConfig
-msgid "Definition of GIT clone/push URL Prefix."
-msgstr "Definition av GIT clone/push URL Prefix."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Definition av ett dynamiskt fält: Group => Grupp med tillgång till de dynamiska fälten; AlwaysVisible => Fältet kan tas bort (0|1); InformationAreaName => Widgetarnas namn; InformationAreaSize => Widgetarnas storlek och position (Large|Small); Name => Namn på det dynamiska fält som ska användas; Priority => Ordningsföljd för de dynamiska fälten; State => Fältets status (0 = inaktiverad, 1 = aktiv, 2 = obligatorisk) Fältets tillstånd (0 = inaktiverat, 1 = aktivt, 2 = obligatoriskt), FilterRelease => Regex som repository-namnet måste matcha för att visas, FilterPackage => Regex som paketnamnet måste matcha för att visas, FilterBranch => Regex som grennamnet måste matcha för att visas, FilterRelease => Regex som repelase-versionsträngen måste matcha för att visas."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Definition av ett dynamiskt fält: Group => Grupp med tillgång till de dynamiska fälten; AlwaysVisible => Fältet kan tas bort (0|1); InformationAreaName => Widgetarnas namn; InformationAreaSize => Widgetarnas storlek och position (Large|Small); Name => Namnet på det dynamiska fält som ska användas; Priority => Ordningsföljd för de dynamiska fälten; State => Fältets status (0 = inaktiverad, 1 = aktiv, 2 = obligatorisk) Fältets tillstånd (0 = inaktiverat, 1 = aktivt, 2 = obligatoriskt), FilterRepository => Regex som repository-namnet måste matcha för att visas, FilterPackage => Regex som paketnamnet måste matcha för att visas, FilterBranch => Regex som grennamnet måste matcha för att visas, FilterRelease => Regex som versionssträngen för repelase måste matcha för att visas."
-
-#. SysConfig
-msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr "Definition av externa MD5-summor (nyckel => MD5, värde => leverantör, paketnamn, version, datum)."
-
-#. SysConfig
-msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr "Definition av mappningar mellan offentliga förfrågningar om arkiv och interna OPMS-arkiv."
-
-#. SysConfig
-msgid "Definition of package states."
-msgstr "Definition av pakettillstånd."
-
-#. SysConfig
-msgid "Definition of renamed OPMS packages."
-msgstr "Definition av omdöpta OPMS-paket."
-
-#. SysConfig
-msgid "Directory, which is used by Git to cache repositories."
-msgstr "Directory, som används av Git för att cacha repositories."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store temporary data."
-msgstr "Directory, som används av Git för att lagra tillfälliga data."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store working copies."
-msgstr "Directory, som används av Git för att lagra arbetskopior."
-
-#. SysConfig
-msgid "Disable online repositories."
-msgstr "Inaktivera onlinearkiv."
-
-#. SysConfig
-msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr "Logga inte auktoriseringsresultat för git ssh-anslutning för dessa användare. Användbart för automatiserade saker."
-
-#. SysConfig
-msgid "Dynamic Fields Screens"
-msgstr "Skärmar för dynamiska fält"
-
-#. SysConfig
-msgid "DynamicFieldScreen"
-msgstr "DynamicFieldScreen"
-
-#. SysConfig
-msgid "Export all available public keys to authorized_keys file."
-msgstr "Exportera alla tillgängliga offentliga nycklar till filen authorized_keys."
-
-#. SysConfig
-msgid "Export all relevant releases to ftp server."
-msgstr "Exportera alla relevanta releaser till ftp-server."
-
-#. SysConfig
-msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr "Frontend-modulregistrering för OPMS-objektet i agentgränssnittet."
-
-#. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr "Frontendmodulregistrering för PublicOPMSRepository-objektet i det publika gränssnittet."
-
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr "Frontend-modulregistrering för PublicOPMSRepositoryLookup-objektet i det publika gränssnittet."
+msgid "class"
+msgstr "klass"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr "Registrering av frontendmodul för objektet PublicOPMSTestBuild i det publika gränssnittet."
+msgid "global"
+msgstr "globala"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr "Frontendmodulregistrering för objektet PublicPackageVerification i det publika gränssnittet."
+msgid "postproductive"
+msgstr "postproduktiv"
 
 #. SysConfig
-msgid "Frontend module registration for the admin interface."
-msgstr "Registrering av frontend-modul för admin-gränssnittet."
+msgid "preproductive"
+msgstr "preproduktiv"
 
 #. SysConfig
-msgid "GIT Author registration."
-msgstr "GIT Författarregistrering."
-
-#. SysConfig
-msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr "Genererar HTML-kommentarkrokar för de angivna blocken så att filtren kan använda dem."
-
-#. SysConfig
-msgid "Generate documentations once per night."
-msgstr "Generera dokumentationer en gång per natt."
-
-#. SysConfig
-msgid "Git"
-msgstr "Git"
-
-#. SysConfig
-msgid "Git Management"
-msgstr "Git-hantering"
-
-#. SysConfig
-msgid "Git Repository"
-msgstr "Git-förvar"
-
-#. SysConfig
-msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr "Grupp, vars medlemmar har administratörsbehörighet för borttagning i OPMS."
-
-#. SysConfig
-msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr "Grupp, vars medlemmar har administratörsbehörighet för förvaret i OPMS."
-
-#. SysConfig
-msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr "Grupp, vars medlemmar kommer att se information om CI-testresultat på OPMS-skärmar."
-
-#. SysConfig
-msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr "Grupper som en autentiserad användare (med användarinloggning och lösenord) måste vara medlem i för att kunna bygga testpaket via det publika gränssnittet."
-
-#. SysConfig
-msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr "Grupper som kommer att ställas in under skapandeprocessen för git-projekt när OPMS-arkiv läggs till."
-
-#. SysConfig
-msgid "Manage dynamic field in screens."
-msgstr "Hantera dynamiska fält i skärmar."
-
-#. SysConfig
-msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr "Hantera dina offentliga SSH-nycklar för Git-åtkomst här. Se till att spara denna inställning när du lägger till en ny nyckel."
-
-#. SysConfig
-msgid "Module to generate statistics about the added code lines."
-msgstr "Modul för att generera statistik om de kodrader som lagts till."
-
-#. SysConfig
-msgid "Module to generate statistics about the growth of code."
-msgstr "Modul för att generera statistik om tillväxten av kod."
-
-#. SysConfig
-msgid "Module to generate statistics about the number of git commits."
-msgstr "Modul för att generera statistik om antalet git-överföringar."
-
-#. SysConfig
-msgid "Module to generate statistics about the removed code lines."
-msgstr "Modul för att generera statistik om de borttagna kodraderna."
-
-#. SysConfig
-msgid "OPMS"
-msgstr "OPMS"
-
-#. SysConfig
-msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr "Endast användare som har rw-behörighet i någon av dessa grupper har åtkomst till git."
-
-#. SysConfig
-msgid "Option to set a package compatibility manually."
-msgstr "Möjlighet att ställa in paketkompatibilitet manuellt."
-
-#. SysConfig
-msgid "Parameters for the pages in the BranchView screen."
-msgstr "Parametrar för sidorna i BranchView-skärmen."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Fördefiniering av det dynamiska fältet \"GITProjectName\": Group => Grupp med tillgång till de dynamiska fälten; AlwaysVisible => Fältet kan tas bort (0|1); InformationAreaName => Widgetarnas namn; InformationAreaSize => Widgetarnas storlek och position (Large|Small); Name => Namnet på det dynamiska fält som ska användas; Priority => Ordningsföljd för de dynamiska fälten; State => Fältets status (0 = inaktiverad, 1 = aktiv, 2 = obligatorisk) Fältets tillstånd (0 = inaktiverat, 1 = aktivt, 2 = obligatoriskt), FilterRepository => Regex som repository-namnet måste matcha för att visas, FilterPackage => Regex som paketnamnet måste matcha för att visas, FilterBranch => Regex som grennamnet måste matcha för att visas, FilterRelease => Regex som versionssträngen för repelase måste matcha för att visas."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Fördefiniering av det dynamiska fältet 'GITRepositoryName': Group => Grupp med tillgång till de dynamiska fälten; AlwaysVisible => Fältet kan tas bort (0|1); InformationAreaName => Widgetarnas namn; InformationAreaSize => Widgetarnas storlek och position (Large|Small); Name => Namnet på det dynamiska fält som ska användas; Priority => Ordningsföljd för de dynamiska fälten; State => Fältets status (0 = inaktiverad, 1 = aktiv, 2 = obligatorisk) Fältets tillstånd (0 = inaktiverat, 1 = aktivt, 2 = obligatoriskt), FilterRepository => Regex som repository-namnet måste matcha för att visas, FilterPackage => Regex som paketnamnet måste matcha för att visas, FilterBranch => Regex som grennamnet måste matcha för att visas, FilterRelease => Regex som versionssträngen för repelase måste matcha för att visas."
-
-#. SysConfig
-msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Fördefiniering av det dynamiska fältet 'PackageDeprecated': Group => Grupp med tillgång till de dynamiska fälten; AlwaysVisible => Fältet kan tas bort (0|1); InformationAreaName => Widgetarnas namn; InformationAreaSize => Widgetarnas storlek och position (Large|Small); Name => Namnet på det dynamiska fält som ska användas; Priority => Ordningsföljd för de dynamiska fälten; State => Fältets tillstånd (0 = inaktiverat, 1 = aktivt, 2 = obligatoriskt), FilterRepository => Regex som repository-namnet måste matcha för att visas, FilterPackage => Regex som paketnamnet måste matcha för att visas, FilterBranch => Regex som grennamnet måste matcha för att visas, FilterRelease => Regex som versionssträngen för repelase måste matcha för att visas."
-
-#. SysConfig
-msgid "Recipients that will be informed by email in case of errors."
-msgstr "Mottagare som kommer att informeras via e-post i händelse av fel."
-
-#. SysConfig
-msgid "SSH Keys for Git Access"
-msgstr "SSH-nycklar för Git-åtkomst"
-
-#. SysConfig
-msgid "Send analysis file"
-msgstr "Skicka analysfil"
-
-#. SysConfig
-msgid "Sets the git clone address to be used in repository listings."
-msgstr "Ställer in git-klonadressen som ska användas i repository-listor."
-
-#. SysConfig
-msgid "Sets the home directory for git repositories."
-msgstr "Ställer in hemkatalogen för git-arkiv."
-
-#. SysConfig
-msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr "Anger sökvägen för platsen för BugzillaAddComment-skriptet för mottagning av inlägg."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "Ställer in sökvägen för platsen för OTRSCodePolicy-skriptet. Vi rekommenderar att du har en separat klon av OTRSCodePolicy-modulen som uppdateras via cron."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "Ställer in sökvägen för platsen för OTRSCodePolicy-skriptet för mottagning. Vi rekommenderar att du har en separat klon av OTRSCodePolicy-modulen som uppdateras via cron."
-
-#. SysConfig
-msgid "Show latest commits in git repositories."
-msgstr "Visa de senaste ändringarna i git-arkiv."
-
-#. SysConfig
-msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr "Visar en länk i menyn för att skapa ett enhetstest från det aktuella ärendet."
-
-#. SysConfig
-msgid "Synchronize OPMS tables with a remote database."
-msgstr "Synkronisera OPMS-tabeller med en fjärrdatabas."
-
-#. SysConfig
-msgid "The minimum version of the sphinx library."
-msgstr "Minsta version av biblioteket Sphinx."
-
-#. SysConfig
-msgid "The name of the sphinx theme to be used."
-msgstr "Namnet på det sfinxtema som ska användas."
-
-#. SysConfig
-msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr "Sökvägen till OTRS CSS-fil (relativt under den statiska sökvägen)."
-
-#. SysConfig
-msgid "The path to the OTRS logo (relative below the static path)."
-msgstr "Sökvägen till OTRS-logotypen (relativt under den statiska sökvägen)."
-
-#. SysConfig
-msgid "The path to the static folder, containing images and css files."
-msgstr "Sökvägen till den statiska mappen, som innehåller bilder och css-filer."
-
-#. SysConfig
-msgid "The path to the theme folder, containing the sphinx themes."
-msgstr "Sökvägen till temamappen som innehåller sfinxteman."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr "Denna konfiguration definierar alla möjliga skärmar för att aktivera eller inaktivera standardkolumner."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr "Denna konfiguration definierar alla möjliga skärmar för att aktivera eller inaktivera dynamiska fält."
-
-#. SysConfig
-msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr "Den här konfigurationen anger om endast valida eller alla (invalida) dynamiska fält ska visas."
-
-#. SysConfig
-msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr "Denna konfiguration definierar om OTRS-paketverifieringen ska vara aktiv eller inaktiverad. Om den är inaktiverad visas alla paket som verifierade. Det är fortfarande rekommenderat att endast använda verifierade paket."
-
-#. SysConfig
-msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr "Denna konfiguration definierar URL:en till OTRS CloudService Proxy-tjänsten. Prefixet http eller https kommer att läggas till, beroende på valet SysConfig 'Znuny4OTRSRepoType'."
-
-#. SysConfig
-msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr "Denna konfiguration registrerar ett Output-postfilter för att utöka paketverifieringen."
-
-#. SysConfig
-msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr "Denna konfiguration registrerar en OutputFilter-modul som tar bort OTRS Business Solution TM-reklam."
-
-#. SysConfig
-msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr "Den här konfigurationen registrerar ett utdatafilter för att dölja valet av onlineförvar i pakethanteraren."
-
-#. SysConfig
-msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr "Snygg obearbetad release som inte passerat test pomules kontroller på länge."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr "Användare som har rw-behörighet i någon av dessa grupper har rätt att utföra force-pushar \"git push --force\"."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr "Användare som har rw-behörighet i någon av dessa grupper har rätt att hantera projekt. Dessutom har medlemmarna administrationsbehörighet till git-hanteringen."
-
-#. ITSM class bundles
-msgid "1"
-msgstr "1"
-
-#. ITSM class bundles
-msgid "1 GB"
-msgstr "1 GB"
-
-#. ITSM class bundles
-msgid "1024 GB"
-msgstr "1024 GB"
-
-#. ITSM class bundles
-msgid "10U: 17.5 inches (44.45 cm)"
-msgstr "10U: 44,45 cm (17,5 tum)"
-
-#. ITSM class bundles
-msgid "11 GB"
-msgstr "11 GB"
-
-#. ITSM class bundles
-msgid "12 GB"
-msgstr "12 GB"
-
-#. ITSM class bundles
-msgid "128 GB"
-msgstr "128 GB"
-
-#. ITSM class bundles
-msgid "12U: 21 inches (53.34 cm)"
-msgstr "12U: 53,34 cm (21 tum)"
-
-#. ITSM class bundles
-msgid "15U: 26.25 inches (66.68 cm)"
-msgstr "15U: 66,68 cm (26,25 tum)"
-
-#. ITSM class bundles
-msgid "16 GB"
-msgstr "16 GB"
-
-#. ITSM class bundles
-msgid "18U: 31.5 inches (80.01 cm)"
-msgstr "18U: 80,01 cm (31,5 tum)"
-
-#. ITSM class bundles
-msgid "19-inch Rack"
-msgstr "19-tums rack"
-
-#. ITSM class bundles
-msgid "1U: 1.75 inches (4.45 cm)"
-msgstr "1U: 4,45 cm (1,75 tum)"
-
-#. ITSM class bundles
-msgid "2"
-msgstr "2"
-
-#. ITSM class bundles
-msgid "2 GB"
-msgstr "2 GB"
-
-#. ITSM class bundles
-msgid "20U: 35 inches (88.9 cm)"
-msgstr "20U: 88,9 cm (35 tum)"
-
-#. ITSM class bundles
-msgid "21-inch Rack"
-msgstr "21-tums kuggstång"
-
-#. ITSM class bundles
-msgid "22U: 38.5 inches (97.79 cm)"
-msgstr "22U: 38,5 tum (97,79 cm)"
-
-#. ITSM class bundles
-msgid "23-inch Rack"
-msgstr "23-tums kuggstång"
-
-#. ITSM class bundles
-msgid "23.6 inches (600 mm)"
-msgstr "23,6 tum (600 mm)"
-
-#. ITSM class bundles
-msgid "24 GB"
-msgstr "24 GB"
-
-#. ITSM class bundles
-msgid "24U: 42 inches (106.68 cm)"
-msgstr "24U: 106,68 cm (42 tum)"
-
-#. ITSM class bundles
-msgid "256 GB"
-msgstr "256 GB"
-
-#. ITSM class bundles
-msgid "27\""
-msgstr "27\""
-
-#. ITSM class bundles
-msgid "27U: 47.25 inches (120.02 cm)"
-msgstr "27U: 47,25 tum (120,02 cm)"
-
-#. ITSM class bundles
-msgid "2K (2048 x 1080)"
-msgstr "2K (2048 x 1080)"
-
-#. ITSM class bundles
-msgid "2U: 3.5 inches (8.89 cm)"
-msgstr "2U: 8,89 cm (3,5 tum)"
-
-#. ITSM class bundles
-msgid "3"
-msgstr "3"
-
-#. ITSM class bundles
-msgid "30U: 52.5 inches (133.35 cm)"
-msgstr "30U: 133,35 cm (52,5 tum)"
-
-#. ITSM class bundles
-msgid "31.5 inches (800 mm)"
-msgstr "31,5 tum (800 mm)"
-
-#. ITSM class bundles
-msgid "32 GB"
-msgstr "32 GB"
-
-#. ITSM class bundles
-msgid "32\""
-msgstr "32\""
-
-#. ITSM class bundles
-msgid "33U: 57.75 inches (146.68 cm)"
-msgstr "33U: 146,68 cm (57,75 tum)"
-
-#. ITSM class bundles
-msgid "34\""
-msgstr "34\""
-
-#. ITSM class bundles
-msgid "35\""
-msgstr "35\""
-
-#. ITSM class bundles
-msgid "35.4 inches (900 mm)"
-msgstr "35,4 tum (900 mm)"
-
-#. ITSM class bundles
-msgid "36U: 63 inches (160.02 cm)"
-msgstr "36U: 160,02 cm (63 tum)"
-
-#. ITSM class bundles
-msgid "39.4 inches (1000 mm)"
-msgstr "39,4 tum (1000 mm)"
-
-#. ITSM class bundles
-msgid "39U: 68.25 inches (173.35 cm)"
-msgstr "39U: 173,35 cm (68,25 tum)"
-
-#. ITSM class bundles
-msgid "3U: 5.25 inches (13.34 cm)"
-msgstr "3U: 13,34 cm (5,25 tum)"
-
-#. ITSM class bundles
-msgid "4"
-msgstr "4"
-
-#. ITSM class bundles
-msgid "4 GB"
-msgstr "4 GB"
-
-#. ITSM class bundles
-msgid "40\""
-msgstr "40\""
-
-#. ITSM class bundles
-msgid "42U: 73.5 inches (186.69 cm)"
-msgstr "42U: 186,69 cm (73,5 tum)"
-
-#. ITSM class bundles
-msgid "43\""
-msgstr "43\""
-
-#. ITSM class bundles
-msgid "43.3 inches (1100 mm):"
-msgstr "43,3 tum (1100 mm):"
-
-#. ITSM class bundles
-msgid "45U: 78.75 inches (200.02 cm)"
-msgstr "45U: 200,02 cm (78,75 tum)"
-
-#. ITSM class bundles
-msgid "47.2 inches (1200 mm)"
-msgstr "47,2 tum (1200 mm)"
-
-#. ITSM class bundles
-msgid "48 GB"
-msgstr "48 GB"
-
-#. ITSM class bundles
-msgid "48U: 84 inches (213.36 cm)"
-msgstr "48U: 213,36 cm (84 tum)"
-
-#. ITSM class bundles
-msgid "49\""
-msgstr "49\""
-
-#. ITSM class bundles
-msgid "4K Ultra HD (3840 x 2160):"
-msgstr "4K Ultra HD (3840 x 2160):"
-
-#. ITSM class bundles
-msgid "4U: 7 inches (17.78 cm)"
-msgstr "4U: 17,78 cm (7 tum)"
-
-#. ITSM class bundles
-msgid "5"
-msgstr "5"
-
-#. ITSM class bundles
-msgid "512 GB"
-msgstr "512 GB"
-
-#. ITSM class bundles
-msgid "55\""
-msgstr "55\""
-
-#. ITSM class bundles
-msgid "5K (5120 x 2880)"
-msgstr "5K (5120 x 2880)"
-
-#. ITSM class bundles
-msgid "5U: 8.75 inches (22.23 cm)"
-msgstr "5U: 22,23 cm (8,75 tum)"
-
-#. ITSM class bundles
-msgid "6"
-msgstr "6"
-
-#. ITSM class bundles
-msgid "64 GB"
-msgstr "64 GB"
-
-#. ITSM class bundles
-msgid "6U: 10.5 inches (26.67 cm)"
-msgstr "6U: 26,67 cm (10,5 tum)"
-
-#. ITSM class bundles
-msgid "7"
-msgstr "7"
-
-#. ITSM class bundles
-msgid "7U: 12.25 inches (31.12 cm)"
-msgstr "7U: 31,12 cm (12,25 tum)"
-
-#. ITSM class bundles
-msgid "8"
-msgstr "8"
-
-#. ITSM class bundles
-msgid "8 GB"
-msgstr "8 GB"
-
-#. ITSM class bundles
-msgid "8K Ultra HD (7680 x 4320)"
-msgstr "8K Ultra HD (7680 x 4320)"
-
-#. ITSM class bundles
-msgid "8U: 14 inches (35.56 cm)"
-msgstr "8U: 14 tum (35,56 cm)"
-
-#. ITSM class bundles
-msgid "9"
-msgstr "9"
-
-#. ITSM class bundles
-msgid "96 GB"
-msgstr "96 GB"
-
-#. ITSM class bundles
-msgid "9U: 15.75 inches (40.01 cm)"
-msgstr "9U: 15,75 tum (40,01 cm)"
-
-#. ITSM class bundles
-msgid "AGP"
-msgstr "AGP"
-
-#. ITSM class bundles
-msgid "Accounting"
-msgstr "Redovisning"
-
-#. ITSM class bundles
-msgid "Address Allocation"
-msgstr "Adresstilldelning"
-
-#. ITSM class bundles
-msgid "Administrator"
-msgstr "Administratör"
-
-#. ITSM class bundles
-msgid "Appliance Type"
-msgstr "Typ av apparat"
-
-#. ITSM class bundles
-msgid "Backlinks"
-msgstr "Bakåtlänkar"
-
-#. ITSM class bundles
-msgid "Battery Capacity (Ah)"
-msgstr "Batterikapacitet (Ah)"
-
-#. ITSM class bundles
-msgid "Battery Type"
-msgstr "Batterityp"
-
-#. ITSM class bundles
-msgid "Bus Interface"
-msgstr "Bussgränssnitt"
-
-#. ITSM class bundles
-msgid "CIDR"
-msgstr "CIDR"
-
-#. ITSM class bundles
-msgid "CPU Class"
-msgstr "CPU-klass"
-
-#. ITSM class bundles
-msgid "Capacity (GB)"
-msgstr "Kapacitet (GB)"
-
-#. ITSM class bundles
-msgid "Capacity per graphics card"
-msgstr "Kapacitet per grafikkort"
-
-#. ITSM class bundles
-msgid "Card Number"
-msgstr "Kortnummer"
-
-#. ITSM class bundles
-msgid "Card Type"
-msgstr "Typ av kort"
-
-#. ITSM class bundles
-msgid "Chroma DB"
-msgstr "Chroma DB"
-
-#. ITSM class bundles
-msgid "Client Certificates"
-msgstr "Kundcertifikat"
-
-#. ITSM class bundles
-msgid "Client Software"
-msgstr "Programvara för klienter"
-
-#. ITSM class bundles
-msgid "Client category"
-msgstr "Kundkategori"
-
-#. ITSM class bundles
-msgid "Clockrate"
-msgstr "Klockslag"
-
-#. ITSM class bundles
-msgid "Clockspeed"
-msgstr "Klockhastighet"
-
-#. ITSM class bundles
-msgid "Code Signing Certificates"
-msgstr "Kodsignerande certifikat"
-
-#. ITSM class bundles
-msgid "Contact"
-msgstr "Kontakt"
-
-#. ITSM class bundles
-msgid "Contact Distributor"
-msgstr "Kontakta distributören"
-
-#. ITSM class bundles
-msgid "Contract"
-msgstr "Kontrakt"
-
-#. ITSM class bundles
-msgid "Contract Type"
-msgstr "Kontraktstyp"
-
-#. ITSM class bundles
-msgid "Contract period from"
-msgstr "Avtalsperiod från"
-
-#. ITSM class bundles
-msgid "Contract period until"
-msgstr "Avtalstid till och med"
-
-#. ITSM class bundles
-msgid "Cost unit"
-msgstr "Kostnadsenhet"
-
-#. ITSM class bundles
-msgid "Count of licenses"
-msgstr "Antal licenser"
-
-#. ITSM class bundles
-msgid "Creation Date"
-msgstr "Datum för skapande"
-
-#. ITSM class bundles
-msgid "Custom Rack"
-msgstr "Anpassat ställ"
-
-#. ITSM class bundles
-msgid "DHCP"
-msgstr "DHCP"
-
-#. ITSM class bundles
-msgid "DHCP Reserved"
-msgstr "DHCP Reserverad"
-
-#. ITSM class bundles
-msgid "DVI"
-msgstr "DVI"
-
-#. ITSM class bundles
-msgid "Date of Invoice"
-msgstr "Fakturans datum"
-
-#. ITSM class bundles
-msgid "Date of Order"
-msgstr "Datum för beställning"
-
-#. ITSM class bundles
-msgid "Date of Warranty"
-msgstr "Datum för teckningsoption"
-
-#. ITSM class bundles
-msgid "Date of release"
-msgstr "Datum för utgivning"
-
-#. ITSM class bundles
-msgid "DisplayPort"
-msgstr "DisplayPort"
-
-#. ITSM class bundles
-msgid "Document Signing Certificates"
-msgstr "Certifikat för dokumentsignering"
-
-#. ITSM class bundles
-msgid "EISA"
-msgstr "EISA"
-
-#. ITSM class bundles
-msgid "ETSI Rack"
-msgstr "ETSI Rack"
-
-#. ITSM class bundles
-msgid "Elasticsearch"
-msgstr "Elasticsearch"
-
-#. ITSM class bundles
-msgid "Email Certificates (S/MIME Certificates)"
-msgstr "E-postcertifikat (S/MIME-certifikat)"
-
-#. ITSM class bundles
-msgid "End IP Address"
-msgstr "IP-adress för slut"
-
-#. ITSM class bundles
-msgid "End of support"
-msgstr "Upphörande av stöd"
-
-#. ITSM class bundles
-msgid "Expiry Date"
-msgstr "Utgångsdatum"
-
-#. ITSM class bundles
-msgid "FireWire (IEEE 1394)"
-msgstr "FireWire (IEEE 1394)"
-
-#. ITSM class bundles
-msgid "Firmware"
-msgstr "Firmware"
-
-#. ITSM class bundles
-msgid "Flywheel Energy Storage"
-msgstr "Energilagring med svänghjul"
-
-#. ITSM class bundles
-msgid "Form Factor"
-msgstr "Formfaktor"
-
-#. ITSM class bundles
-msgid "Full HD (1920 x 1080)"
-msgstr "Full HD (1920 x 1080)"
-
-#. ITSM class bundles
-msgid "General Information"
-msgstr "Allmän information"
-
-#. ITSM class bundles
-msgid "Graphics Cards"
-msgstr "Grafikkort"
-
-#. ITSM class bundles
-msgid "Graphics card"
-msgstr "Grafikkort"
-
-#. ITSM class bundles
-msgid "HD (1280 x 720)"
-msgstr "HD (1280 x 720)"
-
-#. ITSM class bundles
-msgid "HDMI"
-msgstr "HDMI"
-
-#. ITSM class bundles
-msgid "Hardware Model"
-msgstr "Hårdvarumodell"
-
-#. ITSM class bundles
-msgid "Hardware Weight"
-msgstr "Hårdvara Vikt"
-
-#. ITSM class bundles
-msgid "IBM Db2"
-msgstr "IBM Db2"
-
-#. ITSM class bundles
-msgid "IP Protocol"
-msgstr "IP-protokoll"
-
-#. ITSM class bundles
-msgid "IPv4"
-msgstr "IPv4"
-
-#. ITSM class bundles
-msgid "IPv6"
-msgstr "IPv6"
-
-#. ITSM class bundles
-msgid "ISA"
-msgstr "ISA"
-
-#. ITSM class bundles
-msgid "Inventory Number"
-msgstr "Inventarienummer"
-
-#. ITSM class bundles
-msgid "Inverstment costs"
-msgstr "Inversteringskostnader"
-
-#. ITSM class bundles
-msgid "Invoice Number"
-msgstr "Fakturanummer"
-
-#. ITSM class bundles
-msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr "LCD-monitor (flytande kristallskärm)"
-
-#. ITSM class bundles
-msgid "LED Monitor (Light Emitting Diode)"
-msgstr "LED-monitor (ljusemitterande diod)"
-
-#. ITSM class bundles
-msgid "LPC (Low Pin Count)"
-msgstr "LPC (lågt antal stift)"
-
-#. ITSM class bundles
-msgid "Latitude"
-msgstr "Latitud"
-
-#. ITSM class bundles
-msgid "Layer 1: Physical Layer"
-msgstr "Lager 1: Fysiskt lager"
-
-#. ITSM class bundles
-msgid "Layer 2: Data Link Layer"
-msgstr "Lager 2: Datalänklager"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer"
-msgstr "Lager 3: Nätverkslager"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer (Supernet)"
-msgstr "Lager 3: Nätverkslager (Supernet)"
-
-#. ITSM class bundles
-msgid "Layer 4: Transport Layer"
-msgstr "Lager 4: Transportlager"
-
-#. ITSM class bundles
-msgid "Layer 5: Session Layer"
-msgstr "Lager 5: Sessionslager"
-
-#. ITSM class bundles
-msgid "Layer 6: Presentation Layer"
-msgstr "Lager 6: Presentationslager"
-
-#. ITSM class bundles
-msgid "Layer 7: Application Layer"
-msgstr "Lager 7: Applikationslager"
-
-#. ITSM class bundles
-msgid "License Key"
-msgstr "Licensnyckel"
-
-#. ITSM class bundles
-msgid "License Type"
-msgstr "Typ av licens"
-
-#. ITSM class bundles
-msgid "License period from"
-msgstr "Licensperiod från"
-
-#. ITSM class bundles
-msgid "License period until"
-msgstr "Licensperiod till och med"
-
-#. ITSM class bundles
-msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr "Litiumjärnfosfatbatteri (LiFePO4)"
-
-#. ITSM class bundles
-msgid "Lithium-Ion (Li-ion) Battery"
-msgstr "Litiumjonbatteri (Li-ion)"
-
-#. ITSM class bundles
-msgid "Located in"
-msgstr "Beläget i"
-
-#. ITSM class bundles
-msgid "Longitude"
-msgstr "Longitud"
-
-#. ITSM class bundles
-msgid "MCA (Micro Channel Architecture)"
-msgstr "MCA (mikrokanalarkitektur)"
-
-#. ITSM class bundles
-msgid "Manufacturer"
-msgstr "Tillverkare"
-
-#. ITSM class bundles
-msgid "MariaDB"
-msgstr "MariaDB"
-
-#. ITSM class bundles
-msgid "Maximum Load Capacity (W)"
-msgstr "Maximal lastkapacitet (W)"
-
-#. ITSM class bundles
-msgid "Memory"
-msgstr "Minne"
-
-#. ITSM class bundles
-msgid "Memory Type"
-msgstr "Minnestyp"
-
-#. ITSM class bundles
-msgid "Microsoft SQL Server"
-msgstr "Microsoft SQL Server"
-
-#. ITSM class bundles
-msgid "Mini-Rack"
-msgstr "Mini-Rack"
-
-#. ITSM class bundles
-msgid "Mobile Number"
-msgstr "Mobilnummer"
-
-#. ITSM class bundles
-msgid "Model Description"
-msgstr "Modellbeskrivning"
-
-#. ITSM class bundles
-msgid "MongoDB"
-msgstr "MongoDB"
-
-#. ITSM class bundles
-msgid "Monitor Resolution"
-msgstr "Monitorns upplösning"
-
-#. ITSM class bundles
-msgid "Monitor Size"
-msgstr "Monitorns storlek"
-
-#. ITSM class bundles
-msgid "MySQL"
-msgstr "MySQL"
-
-#. ITSM class bundles
-msgid "Network Info"
-msgstr "Nätverksinformation"
-
-#. ITSM class bundles
-msgid "Network Information"
-msgstr "Information om nätverket"
-
-#. ITSM class bundles
-msgid "Network Layer"
-msgstr "Nätverksskikt"
-
-#. ITSM class bundles
-msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr "Nickel-kadmiumbatteri (NiCd)"
-
-#. ITSM class bundles
-msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr "Nickel-metallhydridbatteri (NiMH)"
-
-#. ITSM class bundles
-msgid "NuBus"
-msgstr "NuBus"
-
-#. ITSM class bundles
-msgid "Number of CPUs"
-msgstr "Antal processorer"
-
-#. ITSM class bundles
-msgid "Number of RAM modules"
-msgstr "Antal RAM-moduler"
-
-#. ITSM class bundles
-msgid "Number of graphics cards"
-msgstr "Antal grafikkort"
-
-#. ITSM class bundles
-msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr "OLED-monitor (organisk ljusemitterande diod)"
-
-#. ITSM class bundles
-msgid "Operating costs"
-msgstr "Rörelsekostnader"
-
-#. ITSM class bundles
-msgid "Oracle Database"
-msgstr "Oracle databas"
-
-#. ITSM class bundles
-msgid "Order Number"
-msgstr "Beställningsnummer"
-
-#. ITSM class bundles
-msgid "Outputs"
-msgstr "Utgångar"
-
-#. ITSM class bundles
-msgid "PCI"
-msgstr "PCI"
-
-#. ITSM class bundles
-msgid "PCI Express (PCIe)"
-msgstr "PCI Express (PCIe)"
-
-#. ITSM class bundles
-msgid "PCI-X"
-msgstr "PCI-X"
-
-#. ITSM class bundles
-msgid "PIN"
-msgstr "PIN-KOD"
-
-#. ITSM class bundles
-msgid "PIN 2"
-msgstr "PIN 2"
-
-#. ITSM class bundles
-msgid "PUK"
-msgstr "PUK"
-
-#. ITSM class bundles
-msgid "PUK 2"
-msgstr "PUK 2"
-
-#. ITSM class bundles
-msgid "Phone Number"
-msgstr "Telefonnummer"
-
-#. ITSM class bundles
-msgid "Phone Type"
-msgstr "Typ av telefon"
-
-#. ITSM class bundles
-msgid "Physical Cores"
-msgstr "Fysiska kärnor"
-
-#. ITSM class bundles
-msgid "PostgreSQL"
-msgstr "PostgreSQL"
-
-#. ITSM class bundles
-msgid "Power Delivery"
-msgstr "Strömförsörjning"
-
-#. ITSM class bundles
-msgid "Purchased at"
-msgstr "Köpta på"
-
-#. ITSM class bundles
-msgid "Quad HD (2560 x 1440)"
-msgstr "Quad HD (2560 x 1440)"
-
-#. ITSM class bundles
-msgid "Rack Depth"
-msgstr "Rackdjup"
-
-#. ITSM class bundles
-msgid "Rack Units (U)"
-msgstr "Rack-enheter (U)"
-
-#. ITSM class bundles
-msgid "Redis"
-msgstr "Redis"
-
-#. ITSM class bundles
-msgid "Reference to Customer"
-msgstr "Referens till kund"
-
-#. ITSM class bundles
-msgid "SIM Card"
-msgstr "SIM-kort"
-
-#. ITSM class bundles
-msgid "SQLite"
-msgstr "SQLite"
-
-#. ITSM class bundles
-msgid "SSL/TLS Certificates"
-msgstr "SSL/TLS-certifikat"
-
-#. ITSM class bundles
-msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr "Förseglat SLA-batteri (Lead-Acid)"
-
-#. ITSM class bundles
-msgid "Serialnumber"
-msgstr "Serienummer"
-
-#. ITSM class bundles
-msgid "Server Software"
-msgstr "Programvara för server"
-
-#. ITSM class bundles
-msgid "Service Tag"
-msgstr "Service Tag"
-
-#. ITSM class bundles
-msgid "Socket Type"
-msgstr "Typ av uttag"
-
-#. ITSM class bundles
-msgid "Start IP Address"
-msgstr "Start IP-adress"
-
-#. ITSM class bundles
-msgid "Storage"
-msgstr "Förvaring"
-
-#. ITSM class bundles
-msgid "Storage Partition"
-msgstr "Lagringspartition"
-
-#. ITSM class bundles
-msgid "Subsidiary"
-msgstr "Dotterbolag"
+msgid "productive"
+msgstr "produktiv"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Summary"
 msgstr "Sammanfattning"
 
-#. ITSM class bundles
-msgid "Threads"
-msgstr "Trådar"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Info"
+msgstr "Nätverksinformation"
 
-#. ITSM class bundles
-msgid "Thunderbolt"
-msgstr "Blixtsnabb anslutning"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting"
+msgstr "Redovisning"
 
-#. ITSM class bundles
-msgid "Total Graphics card RAM (GB)"
-msgstr "Totalt RAM-minne för grafikkort (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Located in"
+msgstr "Beläget i"
 
-#. ITSM class bundles
-msgid "Total RAM (GB)"
-msgstr "Totalt RAM-minne (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Order"
+msgstr "Datum för beställning"
 
-#. ITSM class bundles
-msgid "Touchscreen Monitor"
-msgstr "Monitor med pekskärm"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Information"
+msgstr "Information om nätverket"
 
-#. ITSM class bundles
-msgid "Tower"
-msgstr "Torn"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Operating costs"
+msgstr "Rörelsekostnader"
 
-#. ITSM class bundles
-msgid "USB (Universal Serial Bus)"
-msgstr "USB (universell seriell buss)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Tag"
+msgstr "Service Tag"
 
-#. ITSM class bundles
-msgid "USB-C"
-msgstr "USB-C"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Warranty"
+msgstr "Datum för teckningsoption"
 
-#. ITSM class bundles
-msgid "UWQHD (3440 x 1440)"
-msgstr "UWQHD (3440 x 1440)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Manufacturer"
+msgstr "Tillverkare"
 
-#. ITSM class bundles
-msgid "VESA Local Bus (VLB)"
-msgstr "VESA:s lokala buss (VLB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model Description"
+msgstr "Modellbeskrivning"
 
-#. ITSM class bundles
-msgid "VGA"
-msgstr "VGA"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact Distributor"
+msgstr "Kontakta distributören"
 
-#. ITSM class bundles
-msgid "VirtualLink"
-msgstr "Virtuell länk"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Appliance Type"
+msgstr "Typ av apparat"
 
-#. ITSM class bundles
-msgid "WUXGA (1920 x 1200)"
-msgstr "WUXGA (1920 x 1200)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone / VoIP"
+msgstr ""
 
-#. ITSM class bundles
-msgid "WXGA (1366 x 768)"
-msgstr "WXGA (1366 x 768)"
-
-#. ITSM class bundles
-msgid "Analog Phone"
-msgstr "Analog telefon"
-
-#. ITSM class bundles
-msgid "Card Reader"
-msgstr "Kortläsare"
-
-#. ITSM class bundles
-msgid "Conference Phone"
-msgstr "Telefon för konferens"
-
-#. ITSM class bundles
-msgid "Consulting Agreement"
-msgstr "Konsultavtal"
-
-#. ITSM class bundles
-msgid "Container Management"
-msgstr "Containerhantering"
-
-#. ITSM class bundles
-msgid "Cordless Phone (DECT Phone)"
-msgstr "Sladdlös telefon (DECT-telefon)"
-
-#. ITSM class bundles
-msgid "DNS-Server"
-msgstr "DNS-server"
-
-#. ITSM class bundles
-msgid "Employment Contract"
-msgstr "Anställningsavtal"
-
-#. ITSM class bundles
-msgid "External Hard Drive"
-msgstr "Extern hårddisk"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Firewall"
 msgstr "Brandvägg"
 
-#. ITSM class bundles
-msgid "Franchise Agreement"
-msgstr "Franchiseavtal"
-
-#. ITSM class bundles
-msgid "Headset"
-msgstr "Headset"
-
-#. ITSM class bundles
-msgid "Identity and Access Management (IAM)"
-msgstr "Identitets- och åtkomsthantering (IAM)"
-
-#. ITSM class bundles
-msgid "Landline Phone"
-msgstr "Fast telefon"
-
-#. ITSM class bundles
-msgid "Lease Agreement"
-msgstr "Hyresavtal"
-
-#. ITSM class bundles
-msgid "License Agreement"
-msgstr "Licensavtal"
-
-#. ITSM class bundles
-msgid "Loan Agreement"
-msgstr "Låneavtal"
-
-#. ITSM class bundles
-msgid "Mobile/Embedded"
-msgstr "Mobil/Embedded"
-
-#. ITSM class bundles
-msgid "Non-Disclosure Agreement (NDA)"
-msgstr "Avtal om tystnadsplikt (NDA)"
-
-#. ITSM class bundles
-msgid "Notebook"
-msgstr "Anteckningsbok"
-
-#. ITSM class bundles
-msgid "OTOBO"
-msgstr "OTOBO"
-
-#. ITSM class bundles
-msgid "Partnership Agreement"
-msgstr "Partnerskapsavtal"
-
-#. ITSM class bundles
-msgid "Phone / VOIP"
-msgstr "Telefon / VOIP"
-
-#. ITSM class bundles
-msgid "Sales Contract"
-msgstr "Försäljningsavtal"
-
-#. ITSM class bundles
-msgid "Satellite Phone"
-msgstr "Satellittelefon"
-
-#. ITSM class bundles
-msgid "Service Agreement"
-msgstr "Serviceavtal"
-
-#. ITSM class bundles
-msgid "Speakers"
-msgstr "Högtalare"
-
-#. ITSM class bundles
-msgid "Thin Client"
-msgstr "Tunn klient"
-
-#. ITSM class bundles
-msgid "USB Hub"
-msgstr "USB-hubb"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VPN"
 msgstr "VPN"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DNS-Server"
+msgstr "DNS-server"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Container Management"
+msgstr "Containerhantering"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Identity and Access Management (IAM)"
+msgstr "Identitets- och åtkomsthantering (IAM)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Other"
+msgstr "Annan"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Order Number"
+msgstr "Beställningsnummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cost unit"
+msgstr "Kostnadsenhet"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Invoice"
+msgstr "Fakturans datum"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model"
+msgstr "Modell"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Purchased at"
+msgstr "Köpta på"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Invoice Number"
+msgstr "Fakturanummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Administrator"
+msgstr "Administratör"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inverstment costs"
+msgstr "Inversteringskostnader"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inventory Number"
+msgstr "Inventarienummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Serialnumber"
+msgstr "Serienummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subsidiary"
+msgstr "Dotterbolag"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SSL/TLS Certificates"
+msgstr "SSL/TLS-certifikat"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Code Signing Certificates"
+msgstr "Kodsignerande certifikat"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Email Certificates (S/MIME Certificates)"
+msgstr "E-postcertifikat (S/MIME-certifikat)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Document Signing Certificates"
+msgstr "Certifikat för dokumentsignering"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Certificates"
+msgstr "Kundcertifikat"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creation Date"
+msgstr "Datum för skapande"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Expiry Date"
+msgstr "Utgångsdatum"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware"
+msgstr "Hårdvara"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Software"
+msgstr "Programvara"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of graphics cards"
+msgstr "Antal grafikkort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total Graphics card RAM (GB)"
+msgstr "Totalt RAM-minne för grafikkort (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client category"
+msgstr "Kundkategori"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Notebook"
+msgstr "Anteckningsbok"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Desktop"
+msgstr "Desktop"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Virtual Client"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thin Client"
+msgstr "Tunn klient"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage Partition"
+msgstr "Lagringspartition"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Count"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Physical Cores"
+msgstr "Fysiska kärnor"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage"
+msgstr "Förvaring"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Outputs"
+msgstr "Utgångar"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thunderbolt"
+msgstr "Blixtsnabb anslutning"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DVI"
+msgstr "DVI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VGA"
+msgstr "VGA"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "HDMI"
+msgstr "HDMI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VirtualLink"
+msgstr "Virtuell länk"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DisplayPort"
+msgstr "DisplayPort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB-C"
+msgstr "USB-C"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory Type"
+msgstr "Minnestyp"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Bus Interface"
+msgstr "Bussgränssnitt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics card"
+msgstr "Grafikkort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Threads"
+msgstr "Trådar"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity per graphics card"
+msgstr "Kapacitet per grafikkort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockrate"
+msgstr "Klockslag"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockspeed"
+msgstr "Klockhastighet"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Software"
+msgstr "Programvara för klienter"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period from"
+msgstr "Licensperiod från"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total RAM (GB)"
+msgstr "Totalt RAM-minne (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of RAM modules"
+msgstr "Antal RAM-moduler"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of CPUs"
+msgstr "Antal processorer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity (GB)"
+msgstr "Kapacitet (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Socket Type"
+msgstr "Typ av uttag"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU Class"
+msgstr "CPU-klass"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile/Embedded"
+msgstr "Mobil/Embedded"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Laptop"
+msgstr "Laptop"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Type"
+msgstr "Typ av licens"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period until"
+msgstr "Licensperiod till och med"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Firmware"
+msgstr "Firmware"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract Type"
+msgstr "Kontraktstyp"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Agreement"
+msgstr "Serviceavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Non-Disclosure Agreement (NDA)"
+msgstr "Avtal om tystnadsplikt (NDA)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Agreement"
+msgstr "Licensavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Franchise Agreement"
+msgstr "Franchiseavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Loan Agreement"
+msgstr "Låneavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Consulting Agreement"
+msgstr "Konsultavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lease Agreement"
+msgstr "Hyresavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Employment Contract"
+msgstr "Anställningsavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sales Contract"
+msgstr "Försäljningsavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Partnership Agreement"
+msgstr "Partnerskapsavtal"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period until"
+msgstr "Avtalstid till och med"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period from"
+msgstr "Avtalsperiod från"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End of support"
+msgstr "Upphörande av stöd"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of release"
+msgstr "Datum för utgivning"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Size"
+msgstr "Monitorns storlek"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Power Delivery"
+msgstr "Strömförsörjning"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Touchscreen Monitor"
+msgstr "Monitor med pekskärm"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LED Monitor (Light Emitting Diode)"
+msgstr "LED-monitor (ljusemitterande diod)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "OLED Monitor (Organic Light Emitting Diode)"
+msgstr "OLED-monitor (organisk ljusemitterande diod)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LCD Monitor (Liquid Crystal Display)"
+msgstr "LCD-monitor (flytande kristallskärm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Resolution"
+msgstr "Monitorns upplösning"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CIDR"
+msgstr "CIDR"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Start IP Address"
+msgstr "Start IP-adress"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Layer"
+msgstr "Nätverksskikt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 2: Data Link Layer"
+msgstr "Lager 2: Datalänklager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 5: Session Layer"
+msgstr "Lager 5: Sessionslager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 7: Application Layer"
+msgstr "Lager 7: Applikationslager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer (Supernet)"
+msgstr "Lager 3: Nätverkslager (Supernet)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 6: Presentation Layer"
+msgstr "Lager 6: Presentationslager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 1: Physical Layer"
+msgstr "Lager 1: Fysiskt lager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer"
+msgstr "Lager 3: Nätverkslager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 4: Transport Layer"
+msgstr "Lager 4: Transportlager"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End IP Address"
+msgstr "IP-adress för slut"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "IP Protocol"
+msgstr "IP-protokoll"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Address Allocation"
+msgstr "Adresstilldelning"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP Reserved"
+msgstr "DHCP Reserverad"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP"
+msgstr "DHCP"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact"
+msgstr "Kontakt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract"
+msgstr "Kontrakt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU"
+msgstr "CPU"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Form Factor"
+msgstr "Formfaktor"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "General Information"
+msgstr "Allmän information"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics Cards"
+msgstr "Grafikkort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory"
+msgstr "Minne"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Model"
+msgstr "Hårdvarumodell"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network"
+msgstr "Nätverk"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Server Software"
+msgstr "Programvara för server"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SIM Card"
+msgstr "SIM-kort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Count of licenses"
+msgstr "Antal licenser"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Seat licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MIT Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MPL (Mozilla Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creative Commons"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Perpetual licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "EPL (Eclipse Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "BSD Lizenz (Berkeley Software Distribution License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "AGPL (Affero General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Freeware"
+msgstr "Freeware"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subscription-based licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CC0 (Creative Commons Zero)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "GPL (General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Public Domain"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Volume licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Apache Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Shareware"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LGPL (Lesser General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Key"
+msgstr "Licensnyckel"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile Number"
+msgstr "Mobilnummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Reader"
+msgstr "Kortläsare"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VR Headset"
 msgstr "VR-headset"
 
-#. ITSM class bundles
-msgid "VoIP Phone"
-msgstr "VoIP-telefon"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Headset"
+msgstr "Headset"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "External Hard Drive"
+msgstr "Extern hårddisk"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Speakers"
+msgstr "Högtalare"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB Hub"
+msgstr "USB-hubb"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mouse"
+msgstr "Mus"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Webcam"
 msgstr "Webbkamera"
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version number of this config item"
-msgstr "Versionsnummer för detta konfigurationsobjekt"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Number"
+msgstr "Telefonnummer"
 
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Importing classes/roles and their related fields"
-msgstr "Importera klasser/roller och deras relaterade fält"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Type"
+msgstr "Typ av telefon"
 
-#. SysConfig
-msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Kolumner som kan filtreras i sökresultatöversikten för konfigurationsobjekt i agentgränssnittet. Observera: Endast Config Item-attribut och dynamiska fält (DynamicField_NameX) är tillåtna."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VoIP Phone"
+msgstr "VoIP-telefon"
 
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr "Basstrukturen är inte giltig. Ange en hash med data i YAML-format."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Satellite Phone"
+msgstr "Satellittelefon"
 
-#. SysConfig
-msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr "Vid en viss tidpunkt skapa ett ärende för konfigurationsobjekt om de konfigurerade kraven är uppfyllda. Tidpunkten bestäms av värdet på det fält som konfigurerats under \"TimeCIKey\" i ConfigItem, och modifieras av \"TimeModifier\". Om den senare kan vara antingen bara ett tal eller ett tecken (+/-), ett tal och en enhet (d/h/m): \"7\" motsvarar \"+7d\". DynamicField \"Ticket->DynamicField\" kommer att användas för att markera skapade biljetter - den måste finnas. Flaggorna \\\\<OTOBO_CONFIGITEM_X\\\\> där X kan vara NAME, NUMBER och DATE, kommer att ersättas med respektive värden i \"Ticket->Text\"."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Analog Phone"
+msgstr "Analog telefon"
 
-#. SysConfig
-msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr "Konfigureringsobjekt för händelsemodul som räknar licenser för funktionen OTOBOCILicenseCount."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Conference Phone"
+msgstr "Telefon för konferens"
 
-#. SysConfig
-msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr "Skapar biljetter för ConfigItems vid specifika tidpunkter."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cordless Phone (DECT Phone)"
+msgstr "Sladdlös telefon (DECT-telefon)"
 
-#. SysConfig
-msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr "Om detta alternativ är aktiverat räknas länkade objekt endast om de tillhör någon av de listade klasserna."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Landline Phone"
+msgstr "Fast telefon"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr "Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI med den befintliga typen DependsOn."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Depth"
+msgstr "Rackdjup"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr "Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI:er."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23.6 inches (600 mm)"
+msgstr "23,6 tum (600 mm)"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr "Med detta alternativ är det möjligt att automatiskt fylla i ett CI-fält, beroende på antalet länkade CI. Inställningen CounterClassName innehåller namnet på klassen och CounterFieldName används för att lagra antalet använda licenser."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39.4 inches (1000 mm)"
+msgstr "39,4 tum (1000 mm)"
 
-#. SysConfig
-msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr "Definierar den initiala höjden för redigeringskomponenten för rik text i pixlar."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "47.2 inches (1200 mm)"
+msgstr "47,2 tum (1200 mm)"
 
-#. SysConfig
-msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr "Anger om parent-child-översättningar för köer och tjänster ska genereras automatiskt."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "35.4 inches (900 mm)"
+msgstr "35,4 tum (900 mm)"
 
-#. SysConfig
-msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr "Definierar den initiala höjden i pixlar för redigeringskomponenten för rik text för den här skärmen."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "31.5 inches (800 mm)"
+msgstr "31,5 tum (800 mm)"
 
-#. SysConfig
-msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr "Definierar höjden för redigeringskomponenten för rik text för den här skärmen. Ange antal (pixlar) eller procentvärde (relativt)."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "43.3 inches (1100 mm):"
+msgstr "43,3 tum (1100 mm):"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "General operation data"
-msgstr "Allmänna driftdata"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Units (U)"
+msgstr "Rack-enheter (U)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for incoming request data"
-msgstr "Inställningar för inkommande förfrågningsdata"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "2U: 3.5 inches (8.89 cm)"
+msgstr "2U: 8,89 cm (3,5 tum)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for outgoing response data"
-msgstr "Inställningar för utgående svarsdata"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "45U: 78.75 inches (200.02 cm)"
+msgstr "45U: 200,02 cm (78,75 tum)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Import/Export attachments (as the last entries per line)"
-msgstr "Importera/exportera bilagor (som de sista posterna per rad)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "1U: 1.75 inches (4.45 cm)"
+msgstr "1U: 4,45 cm (1,75 tum)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Version String"
-msgstr "Version String"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "10U: 17.5 inches (44.45 cm)"
+msgstr "10U: 44,45 cm (17,5 tum)"
 
-#. SysConfig
-msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39U: 68.25 inches (173.35 cm)"
+msgstr "39U: 173,35 cm (68,25 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "20U: 35 inches (88.9 cm)"
+msgstr "20U: 88,9 cm (35 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "4U: 7 inches (17.78 cm)"
+msgstr "4U: 17,78 cm (7 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "15U: 26.25 inches (66.68 cm)"
+msgstr "15U: 66,68 cm (26,25 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "36U: 63 inches (160.02 cm)"
+msgstr "36U: 160,02 cm (63 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "24U: 42 inches (106.68 cm)"
+msgstr "24U: 106,68 cm (42 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "7U: 12.25 inches (31.12 cm)"
+msgstr "7U: 31,12 cm (12,25 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "9U: 15.75 inches (40.01 cm)"
+msgstr "9U: 15,75 tum (40,01 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "8U: 14 inches (35.56 cm)"
+msgstr "8U: 14 tum (35,56 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "12U: 21 inches (53.34 cm)"
+msgstr "12U: 53,34 cm (21 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "30U: 52.5 inches (133.35 cm)"
+msgstr "30U: 133,35 cm (52,5 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "22U: 38.5 inches (97.79 cm)"
+msgstr "22U: 38,5 tum (97,79 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "48U: 84 inches (213.36 cm)"
+msgstr "48U: 213,36 cm (84 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "5U: 8.75 inches (22.23 cm)"
+msgstr "5U: 22,23 cm (8,75 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "6U: 10.5 inches (26.67 cm)"
+msgstr "6U: 26,67 cm (10,5 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "42U: 73.5 inches (186.69 cm)"
+msgstr "42U: 186,69 cm (73,5 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "33U: 57.75 inches (146.68 cm)"
+msgstr "33U: 146,68 cm (57,75 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "3U: 5.25 inches (13.34 cm)"
+msgstr "3U: 13,34 cm (5,25 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "27U: 47.25 inches (120.02 cm)"
+msgstr "27U: 47,25 tum (120,02 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "18U: 31.5 inches (80.01 cm)"
+msgstr "18U: 80,01 cm (31,5 tum)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "ETSI Rack"
+msgstr "ETSI Rack"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23-inch Rack"
+msgstr "23-tums kuggstång"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "21-inch Rack"
+msgstr "21-tums kuggstång"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Custom Rack"
+msgstr "Anpassat ställ"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Tower"
+msgstr "Torn"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mini-Rack"
+msgstr "Mini-Rack"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "19-inch Rack"
+msgstr "19-tums rack"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Weight"
+msgstr "Hårdvara Vikt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Room"
+msgstr "Rum"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Building"
+msgstr "Byggnad"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Type"
+msgstr "Typ av kort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Micro SIM"
 msgstr ""
-"Definierar nödvändiga behörigheter för att ställa in ITSM-"
-"konfigurationsobjekt med hjälp av det generiska gränssnittet."
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Standard SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nano SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Embedded SIM (eSIM)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK 2"
+msgstr "PUK 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Number"
+msgstr "Kortnummer"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN"
+msgstr "PIN-KOD"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN 2"
+msgstr "PIN 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK"
+msgstr "PUK"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Longitude"
+msgstr "Longitud"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Latitude"
+msgstr "Latitud"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Type"
+msgstr "Batterityp"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium-Ion (Li-ion) Battery"
+msgstr "Litiumjonbatteri (Li-ion)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium Iron Phosphate (LiFePO4) Battery"
+msgstr "Litiumjärnfosfatbatteri (LiFePO4)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Metal Hydride (NiMH) Battery"
+msgstr "Nickel-metallhydridbatteri (NiMH)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sealed Lead-Acid (SLA) Battery"
+msgstr "Förseglat SLA-batteri (Lead-Acid)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Cadmium (NiCd) Battery"
+msgstr "Nickel-kadmiumbatteri (NiCd)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Flywheel Energy Storage"
+msgstr "Energilagring med svänghjul"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Capacity (Ah)"
+msgstr "Batterikapacitet (Ah)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Maximum Load Capacity (W)"
+msgstr "Maximal lastkapacitet (W)"
+

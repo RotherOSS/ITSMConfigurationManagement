@@ -1,17 +1,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2019-06-25 12:05+0000\n"
-"PO-Revision-Date: 2024-11-22 09:30+0000\n"
-"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
-"Language-Team: Slovak <http://weblate.otobo.org/projects/opm-packages/"
-"itsm-configurationmanagement/sk/>\n"
-"Language: sk_SK\n"
+"POT-Creation-Date: 2026-03-09 13:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.4.2\n"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "General operation data"
+msgstr "Všeobecné prevádzkové údaje"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for incoming request data"
+msgstr "Nastavenia pre prichádzajúce údaje žiadosti"
+
+#. Template: AdminGenericInterfaceOperationConfigItem
+msgid "Settings for outgoing response data"
+msgstr "Nastavenia pre údaje odchádzajúcej odpovede"
 
 #. Template: AdminITSMConfigItem
 msgid "Config Item Management"
@@ -22,44 +31,32 @@ msgid "Change class definition"
 msgstr "Zmena definície triedy"
 
 #. Template: AdminITSMConfigItem
+msgid "Change role definition"
+msgstr "Zmena definície úlohy"
+
+#. Template: AdminITSMConfigItem
+msgid "Ready2Import Class Bundles"
+msgstr "Balíky tried Ready2Import"
+
+#. Template: AdminITSMConfigItem
+msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
+msgstr "Tu môžete importovať balíky tried Ready2Import, ktoré predstavujú naše najbežnejšie konfiguračné položky. Upozorňujeme, že môže byť potrebná dodatočná konfigurácia."
+
+#. Template: AdminITSMConfigItem
+msgid "Update existing entities"
+msgstr "Aktualizácia existujúcich subjektov"
+
+#. Template: AdminITSMConfigItem
+msgid "Import Ready2Adopt class bundles"
+msgstr "Import zväzkov tried Ready2Adopt"
+
+#. Template: AdminITSMConfigItem
 msgid "Config Item Class"
 msgstr "Trieda položky konfigurácie"
 
 #. Template: AdminITSMConfigItem
-msgid "Definition"
-msgstr "Definícia"
-
-#. Template: AdminITSMConfigItem
-msgid "Change"
-msgstr "Zmena"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Incident State"
-msgstr "Stav incidentu"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Deployment State"
-msgstr "Stav nasadenia"
-
-#. Template: AgentITSMConfigItemAdd
-msgid "Class"
-msgstr "Trieda"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Deployment State Type"
-msgstr "Typ stavu nasadenia"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Current Incident State"
-msgstr "Aktuálny stav incidentu"
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
-msgid "Current Incident State Type"
-msgstr "Typ aktuálneho incidentu"
-
-#. Template: AgentITSMConfigItemZoom
-msgid "Last changed"
-msgstr "Posledná zmena"
+msgid "Config Item Role"
+msgstr "Úloha položky konfigurácie"
 
 #. Template: AgentITSMConfigItemAdd
 msgid "Config Item"
@@ -72,6 +69,10 @@ msgstr "Filter pre triedy"
 #. Template: AgentITSMConfigItemAdd
 msgid "Select a Class from the list to create a new Config Item."
 msgstr "Ak chcete vytvoriť novú položku konfigurácie, vyberte triedu zo zoznamu."
+
+#. Template: AgentITSMConfigItemAdd
+msgid "Class"
+msgstr "Trieda"
 
 #. Template: AgentITSMConfigItemBulk
 msgid "ITSM ConfigItem Bulk Action"
@@ -109,6 +110,26 @@ msgstr "Názov tejto konfiguračnej položky"
 msgid "Name is already in use by the ConfigItems with the following Number(s): %s"
 msgstr "Názov sa už používa v položke ConfigItems s nasledujúcim číslom (číslami): %s"
 
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number"
+msgstr "Číslo verzie"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version number of this config item"
+msgstr "Číslo verzie tejto položky konfigurácie"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
+msgstr "Číslo verzie sa už používa v položke ConfigItems s nasledujúcim číslom (číslami): %s"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Deployment State"
+msgstr "Stav nasadenia"
+
+#. Template: AgentITSMConfigItemEdit
+msgid "Incident State"
+msgstr "Stav incidentu"
+
 #. Template: AgentITSMConfigItemHistory
 msgid "History of Config Item: %s"
 msgstr "História položky konfigurácie: %s"
@@ -126,16 +147,16 @@ msgid "Zoom view"
 msgstr "Zväčšiť pohľad"
 
 #. Template: AgentITSMConfigItemOverviewNavBar
-msgid "Context Settings"
-msgstr "Kontextové nastavenia"
-
-#. Template: AgentITSMConfigItemOverviewNavBar
 msgid "Config Items per page"
 msgstr "Konfiguračné položky na stránku"
 
 #. Template: AgentITSMConfigItemOverviewSmall
-msgid "A generic ITSM Configuration Item table"
-msgstr "Všeobecná tabuľka položiek konfigurácie ITSM"
+msgid "No config item data found."
+msgstr "Nenašli sa žiadne údaje konfiguračnej položky."
+
+#. Template: AgentITSMConfigItemOverviewSmall
+msgid "Select this config item"
+msgstr "Vyberte túto položku konfigurácie"
 
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
@@ -144,6 +165,22 @@ msgstr "Spustiť vyhľadávanie"
 #. Template: AgentITSMConfigItemSearch
 msgid "Also search in previous versions?"
 msgstr "Vyhľadávanie aj v predchádzajúcich verziách?"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "TreeView for ConfigItem"
+msgstr "TreeView pre ConfigItem"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Depth Level"
+msgstr "Úroveň hĺbky"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Zoom In/Out"
+msgstr "Priblíženie/oddialenie"
+
+#. Template: AgentITSMConfigItemTreeView
+msgid "Max links level reached for ConfigItem!"
+msgstr "Maximálna úroveň odkazov dosiahnutá pre ConfigItem!"
 
 #. Template: AgentITSMConfigItemZoom
 msgid "Configuration Item"
@@ -158,40 +195,56 @@ msgid "Current Deployment State"
 msgstr "Aktuálny stav nasadenia"
 
 #. Template: AgentITSMConfigItemZoom
+msgid "Current Incident State"
+msgstr "Aktuálny stav incidentu"
+
+#. Template: AgentITSMConfigItemZoom
+msgid "Last changed"
+msgstr "Posledná zmena"
+
+#. Template: AgentITSMConfigItemZoom
 msgid "Last changed by"
 msgstr "Naposledy zmenil"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show one version"
-msgstr "Zobraziť jednu verziu"
+#. Template: CustomerITSMConfigItem
+msgid "Your ConfigItems"
+msgstr "Vaše položky ConfigItems"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Show all versions"
-msgstr "Zobraziť všetky verzie"
+#. Template: CustomerITSMConfigItemSearch
+msgid "ConfigItem Search"
+msgstr "Vyhľadávanie položky ConfigItem"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Incident State"
-msgstr "Verzia Stav incidentu"
+#. Template: AdminACL
+msgid "Object Type"
+msgstr "Typ objektu"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Version Deployment State"
-msgstr "Stav nasadenia verzie"
+#. Template: AdminDynamicFieldScreen
+msgid "Filter by object type"
+msgstr ""
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number"
-msgstr "Číslo verzie"
+#. JS Template: ClassImportConfirm
+msgid "The following classes will be imported"
+msgstr "Importujú sa tieto triedy"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Configuration Item Version Details"
-msgstr "Podrobnosti o verzii konfiguračnej položky"
+#. JS Template: ClassImportConfirm
+msgid "The following roles will be imported"
+msgstr "Importujú sa tieto úlohy"
 
-#. Template: AgentITSMConfigItemZoom
-msgid "Property"
-msgstr "Vlastníctvo"
+#. JS Template: ClassImportConfirm
+msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
+msgstr "Upozorňujeme, že sa vytvoria aj príslušné dynamické polia a triedy GeneralCatalog a nedôjde k ich automatickému odstráneniu."
 
-#. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
-msgid "No access to Class is given!"
-msgstr "Prístup do triedy sa neudeľuje!"
+#. JS Template: ClassImportConfirm
+msgid "Do you want to proceed?"
+msgstr "Chcete pokračovať?"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Need ExampleClasses!"
+msgstr "Potrebujete príklady tried!"
+
+#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
+msgid "Definition is no valid YAML hash."
+msgstr "Definícia nie je platný hash YAML."
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItem.pm
 msgid "Overview: ITSM ConfigItem"
@@ -208,6 +261,10 @@ msgstr "Potrebujete aspoň jednu vybranú položku konfigurácie!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
 msgid "You don't have write access to this configuration item: %s."
 msgstr "K tejto konfiguračnej položke nemáte prístup na zápis: %s."
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
+msgid "No definition was defined for class %s!"
+msgstr "Pre triedu %s nebola definovaná žiadna definícia!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemDelete.pm
 msgid "Config item \"%s\" not found in database!"
@@ -228,10 +285,6 @@ msgstr "Nie je uvedené žiadne ConfigItemID, DuplicateID ani ClassID!"
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemEdit.pm
 msgid "No access is given!"
 msgstr "Prístup nie je umožnený!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemBulk.pm
-msgid "No definition was defined for class %s!"
-msgstr "Pre triedu %s nebola definovaná žiadna definícia!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
 msgid "Can't show history, no ConfigItemID is given!"
@@ -285,6 +338,14 @@ msgstr "Atribút %s aktualizovaný z \"%s\" na \"%s\""
 msgid "Version %s deleted"
 msgstr "Verzia %s odstránená"
 
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" uploaded"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemHistory.pm
+msgid "File \"%s\" removed"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "No ConfigItemID or VersionID is given!"
 msgstr "Nie je uvedené žiadne ConfigItemID ani VersionID!"
@@ -298,16 +359,16 @@ msgid "ConfigItemID %s not found in database!"
 msgstr "ConfigItemID %s sa nenašlo v databáze!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
-msgid "VersionID %s not found in database!"
-msgstr "VersionID %s sa nenašlo v databáze!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "ConfigItem"
 msgstr "ConfigItem"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
 msgid "printed by %s at %s"
 msgstr "vytlačené %s na %s"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemPrint.pm
+msgid "Referenced by"
+msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemSearch.pm
 msgid "Invalid ClassID!"
@@ -334,6 +395,14 @@ msgid "Can't show item, no access rights for ConfigItem are given!"
 msgstr "Nie je možné zobraziť položku, nie sú dané žiadne prístupové práva pre ConfigItem!"
 
 #. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "ConfigItem not found!"
+msgstr "Položka ConfigItem nebola nájdená!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
+msgid "No versions found!"
+msgstr "Nenašli sa žiadne verzie!"
+
+#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
 msgid "operational"
 msgstr "prevádzkové"
 
@@ -353,141 +422,121 @@ msgstr "Stav nasadenia tejto položky konfigurácie"
 msgid "The incident state of this config item"
 msgstr "Stav incidentu tejto konfiguračnej položky"
 
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "No permission"
+msgstr "Žiadne povolenie"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Filter invalid!"
+msgstr "Filter je neplatný!"
+
+#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
+msgid "Search params invalid!"
+msgstr "Vyhľadávacie parametre sú neplatné!"
+
 #. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
 msgid "Shown config items"
 msgstr "Zobrazené položky konfigurácie"
 
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Deployment State Type"
+msgstr "Typ stavu nasadenia"
+
+#. Perl Module: Kernel/Output/HTML/Dashboard/ITSMConfigItemGeneric.pm
+msgid "Current Incident State Type"
+msgstr "Typ aktuálneho incidentu"
+
 #. Perl Module: Kernel/Output/HTML/ITSMConfigItem/LayoutDate.pm
 msgid "Between"
 msgstr "Medzi"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Class restrictions for the config item"
+msgstr "Obmedzenia triedy pre položku konfigurácie"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more classes to restrict selectable config items"
+msgstr "Výber jednej alebo viacerých tried na obmedzenie vyberateľných položiek konfigurácie"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Deployment state restrictions for the config item"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select one or more deployment states to restrict selectable config items"
+msgstr ""
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Dynamic (ConfigItem)"
+msgstr "Dynamické (ConfigItem)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Static (Version)"
+msgstr "Statický (verzia)"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Link Referencing Type"
+msgstr "Typ odkazu"
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
+msgstr "Či sa toto prepojenie vzťahuje na ConfigItem alebo statickú verziu odkazujúceho objektu. Výpočet aktuálneho stavu incidentu sa vykonáva len pri dynamických odkazoch."
+
+#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
+msgid "Select the attribute which config items will be searched by"
+msgstr "Vyberte atribút, podľa ktorého sa budú vyhľadávať položky konfigurácie"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Base structure is not valid. Please provide a hash with data in YAML format."
+msgstr "Základná štruktúra nie je platná. Poskytnite hash s údajmi vo formáte YAML."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
+msgid "Starting the YAML string with '---' is required."
+msgstr "Reťazec YAML sa musí začínať znakom '---'."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not purge the table configitem_link."
+msgstr "Nepodarilo sa vyčistiť tabuľku configitem_link."
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "No relevant dynamic fields were found"
+msgstr "Neboli nájdené žiadne relevantné dynamické polia"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Could not insert into the table configitem_link"
+msgstr "Nepodarilo sa vložiť do tabuľky configitem_link"
+
+#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
+msgid "Inserted 0 rows into the table configitem_link"
+msgstr "Vloženie 0 riadkov do tabuľky configitem_link"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
 msgid "Maximum number of one element"
 msgstr "Maximálny počet jedného prvku"
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Empty fields indicate that the current values are kept"
-msgstr "Prázdne polia znamenajú, že aktuálne hodnoty sú zachované"
+msgid "Maximum number of one Set dynamic field element"
+msgstr ""
 
 #. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Skipped"
-msgstr "Vynechané"
+msgid "Maximum number of one element within a Set dynamic field element"
+msgstr ""
 
-#. ITSM class bundles
-msgid "Model"
-msgstr "Model"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Import/Export attachments (as the last entries per line)"
+msgstr "Import/export príloh (ako posledné položky na riadku)"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Customer Company"
-msgstr "Zákazník Spoločnosť"
+#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
+msgid "Version String"
+msgstr "Reťazec verzie"
 
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Serial Number"
-msgstr "Sériové číslo"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "Error synchronizing the definitions. Please check the log."
+msgstr "Chyba pri synchronizácii definícií. Skontrolujte, prosím, protokol."
 
-#. ITSM class bundles
-msgid "CPU"
-msgstr "CPU"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Ram"
-msgstr "Ram"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Hard Disk"
-msgstr "Pevný disk"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Capacity"
-msgstr "Kapacita"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Adapter"
-msgstr "Sieťový adaptér"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP over DHCP"
-msgstr "IP cez DHCP"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "IP Address"
-msgstr "IP adresa"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Graphic Adapter"
-msgstr "Grafický adaptér"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Other Equipment"
-msgstr "Ostatné vybavenie"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Warranty Expiration Date"
-msgstr "Dátum skončenia platnosti záruky"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Install Date"
-msgstr "Dátum inštalácie"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 1"
-msgstr "Telefón 1"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Phone 2"
-msgstr "Telefón 2"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "E-Mail"
-msgstr "E-mail"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Network Address"
-msgstr "Sieťová adresa"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Subnet Mask"
-msgstr "Maska podsiete"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Gateway"
-msgstr "Brána"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Type"
-msgstr "Typ licencie"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Licence Key"
-msgstr "Licenčný kľúč"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Quantity"
-msgstr "Množstvo"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Expiration Date"
-msgstr "Dátum skončenia platnosti"
-
-#. Perl Module: var/packagesetup/ITSMConfigurationManagement.pm
-msgid "Media"
-msgstr "Médiá"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Computer"
-msgstr "Počítač"
-
-#. ITSM class bundles
-msgid "Hardware"
-msgstr "Hardvér"
-
-#. ITSM class bundles
-msgid "Network"
-msgstr "Sieť"
-
-#. ITSM class bundles
-msgid "Software"
-msgstr "Softvér"
+#. Perl Module: Kernel/Modules/AdminDynamicField.pm
+msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
+msgstr "Máte definície ITSMConfigItem, ktoré nie sú synchronizované. Nasaďte dynamické zmeny polí ITSMConfigItem."
 
 #. Database XML / SOPM Definition: ITSMConfigurationManagement.sopm
 msgid "Expired"
@@ -521,229 +570,53 @@ msgstr "Prehľad"
 msgid "Test/QA"
 msgstr "Testovanie/QA"
 
-#. ITSM class bundles
-msgid "Laptop"
-msgstr "Laptop"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Overview and Confirmation"
+msgstr "Prehľad a potvrdenie"
 
-#. ITSM class bundles
-msgid "Desktop"
-msgstr "Stolný počítač"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "Importing classes/roles and their related fields"
+msgstr "Importovanie tried/rolí a ich súvisiacich polí"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PDA"
-msgstr "PDA"
+#. JS File: ITSM.Admin.ITSMConfigItem
+msgid "An error occurred during class import."
+msgstr "Počas importu triedy došlo k chybe."
 
-#. ITSM class bundles
-msgid "Server"
-msgstr "Server"
+#. SysConfig
+msgid "0 - Hidden"
+msgstr "0 - Skryté"
 
-#. ITSM class bundles
-msgid "Other"
-msgstr "Iné"
+#. SysConfig
+msgid "1 - Shown"
+msgstr "1 - Zobrazené"
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Monitor"
-msgstr "Monitor"
+#. SysConfig
+msgid "A mapping of inner field names used in the Process Management TransitionActions ConfigItemAdd and -Update. The keys are the names of the set inner fields of the set with object type ticket which will be used to create/update the CI, and the values are the names of the inner fields of the set with object type ITSMConfigItem."
+msgstr ""
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Printer"
-msgstr "Tlačiareň"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Umožňuje rozšírené podmienky vyhľadávania v konfiguračnej položke vyhľadávania v rozhraní agenta. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky s podmienkami typu \"(*key1*&&*key2*)\" alebo \"(*key1*||*key2*)\"."
 
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Switch"
-msgstr "Prepínač"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Router"
-msgstr "Smerovač"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN Access Point"
-msgstr "Prístupový bod WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Security Device"
-msgstr "Bezpečnostné zariadenie"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Backup Device"
-msgstr "Záložné zariadenie"
-
-#. ITSM class bundles
-msgid "Mouse"
-msgstr "Myš"
-
-#. ITSM class bundles
-msgid "Keyboard"
-msgstr "Klávesnica"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Camera"
-msgstr "Fotoaparát"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Beamer"
-msgstr "Beamer"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Modem"
-msgstr "Modem"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "PCMCIA Card"
-msgstr "Karta PCMCIA"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "USB Device"
-msgstr "Zariadenie USB"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Docking Station"
-msgstr "Dokovacia stanica"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Scanner"
-msgstr "Skener"
-
-#. ITSM class bundles
-msgid "Building"
-msgstr "Budova"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Office"
-msgstr "Kancelária"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Floor"
-msgstr "Podlaha"
-
-#. ITSM class bundles
-msgid "Room"
-msgstr "Izba"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Rack"
-msgstr "Rack"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Workplace"
-msgstr "Pracovisko"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Outlet"
-msgstr "Výstup"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "IT Facility"
-msgstr "Zariadenie IT"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "LAN"
-msgstr "LAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "WLAN"
-msgstr "WLAN"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Telco"
-msgstr "Telco"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "GSM"
-msgstr "GSM"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client Application"
-msgstr "Aplikácia klienta"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Middleware"
-msgstr "Middleware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server Application"
-msgstr "Serverová aplikácia"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Client OS"
-msgstr "Klientsky operačný systém"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Server OS"
-msgstr "Serverový operačný systém"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Admin Tool"
-msgstr "Nástroj pre administrátorov"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "User Tool"
-msgstr "Používateľský nástroj"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Embedded"
-msgstr "Vložené"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Single Licence"
-msgstr "Jedna licencia"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per User"
-msgstr "Na používateľa"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Processor"
-msgstr "Na procesor"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Server"
-msgstr "Na server"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Per Node"
-msgstr "Na uzol"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Volume Licence"
-msgstr "Objemová licencia"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Enterprise Licence"
-msgstr "Podniková licencia"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Developer Licence"
-msgstr "Licencia pre vývojárov"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Demo"
-msgstr "Demo"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Time Restricted"
-msgstr "Časovo obmedzené"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Freeware"
-msgstr "Freeware"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Open Source"
-msgstr "Otvorený zdrojový kód"
-
-#. Database XML Definition: ITSMConfigurationManagement.sopm
-msgid "Unlimited"
-msgstr "Neobmedzené"
-
-#. JS File: ITSM.Agent.ConfigItem.Zoom
-msgid "Ok"
-msgstr "Ok"
+#. SysConfig
+msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
+msgstr "Umožňuje rozšírené podmienky vyhľadávania vo vyhľadávaní konfiguračných položiek v rozhraní zákazníka. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky pomocou podmienok typu \"(*key1*&&*key2*)\" alebo \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Assigned CIs"
 msgstr "Priradené CI"
+
+#. SysConfig
+msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for license accounting."
+msgstr ""
+
+#. SysConfig
+msgid "Attributes for licenses counting, where \"TotalLicensesDF\", \"AvailableLicensesDF\" and \"LicenseReferenceDF\" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in \"ValidDeplStates\" are considered. If a threshold is defined in \"MinimumLicenses\", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field \"Ticket->DynamicField\" must exist. The tags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in \"Ticket->Text\" by the config item name, number, available licenses, and minimum required available licenses, respectively."
+msgstr ""
 
 #. SysConfig
 msgid "CIs assigned to customer company"
@@ -760,566 +633,6 @@ msgstr "Nastavenia CMDB"
 #. SysConfig
 msgid "Check for a unique name only within the same ConfigItem class ('class') or globally ('global'), which means every existing ConfigItem is taken into account when looking for duplicates."
 msgstr "Kontrolovať jedinečný názov len v rámci tej istej triedy ConfigItem (\"class\") alebo globálne (\"global\"), čo znamená, že pri hľadaní duplikátov sa berie do úvahy každý existujúci ConfigItem."
-
-#. SysConfig
-msgid "Config Items"
-msgstr "Položky konfigurácie"
-
-#. SysConfig
-msgid "Config item add."
-msgstr "Pridanie položky konfigurácie."
-
-#. SysConfig
-msgid "Config item edit."
-msgstr "Úprava položky konfigurácie."
-
-#. SysConfig
-msgid "Config item event module that enables logging to history in the agent interface."
-msgstr "Modul udalostí konfiguračnej položky, ktorý umožňuje zaznamenávanie do histórie v rozhraní agenta."
-
-#. SysConfig
-msgid "Config item history."
-msgstr "Výstup"
-
-#. SysConfig
-msgid "Config item print."
-msgstr "Tlač konfiguračnej položky."
-
-#. SysConfig
-msgid "Config item zoom."
-msgstr "Priblíženie konfiguračnej položky."
-
-#. SysConfig
-msgid "ConfigItemNumber"
-msgstr "ConfigItemNumber"
-
-#. SysConfig
-msgid "Configuration Item Limit"
-msgstr "Limit položky konfigurácie"
-
-#. SysConfig
-msgid "Configuration Item limit per page."
-msgstr "Konfigurácia Limit položky na stránku."
-
-#. SysConfig
-msgid "Configuration Management Database."
-msgstr "Databáza na správu konfigurácie."
-
-#. SysConfig
-msgid "Configuration item bulk module."
-msgstr "Hromadný modul konfiguračnej položky."
-
-#. SysConfig
-msgid "Configuration item search backend router of the agent interface."
-msgstr "Vyhľadávanie konfiguračnej položky backendového smerovača rozhrania agenta."
-
-#. SysConfig
-msgid "Create and manage the definitions for Configuration Items."
-msgstr "Vytvorenie a správa definícií konfiguračných položiek."
-
-#. SysConfig
-msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
-msgstr "Definujte Akcie, pri ktorých je vo widgete prepojených objektov k dispozícii tlačidlo nastavenia (LinkObject::ViewMode = \"complex\"). Upozorňujeme, že tieto Akcie musia mať zaregistrované nasledujúce súbory JS a CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js a Core.Agent.LinkObject.js."
-
-#. SysConfig
-msgid "Defines Required permissions to create ITSM configuration items using the Generic Interface."
-msgstr "Definuje požadované oprávnenia na vytváranie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
-
-#. SysConfig
-msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
-msgstr "Definuje požadované oprávnenia na vymazanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
-
-#. SysConfig
-msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
-msgstr "Definuje požadované oprávnenia na získanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
-
-#. SysConfig
-msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
-msgstr "Definuje požadované oprávnenia na vyhľadávanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
-
-#. SysConfig
-msgid "Defines Required permissions to update ITSM configuration items using the Generic Interface."
-msgstr "Definuje požadované oprávnenia na aktualizáciu konfiguračných položiek ITSM pomocou všeobecného rozhrania."
-
-#. SysConfig
-msgid "Defines an overview module to show the small view of a configuration item list."
-msgstr "Definuje modul prehľadu na zobrazenie malého zobrazenia zoznamu konfiguračných položiek."
-
-#. SysConfig
-msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
-msgstr "Definuje regulárne výrazy jednotlivo pre každú triedu ConfigItem na kontrolu názvu ConfigItem a zobrazenie príslušných chybových správ."
-
-#. SysConfig
-msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr "Definuje predvolený podobjekt triedy \"ITSMConfigItem\"."
-
-#. SysConfig
-msgid "Defines the number of rows for the CI definition editor in the admin interface."
-msgstr "Definuje počet riadkov pre editor definícií CI v rozhraní správcu."
-
-#. SysConfig
-msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
-msgstr "Definuje poradie incidentných stavov od vysokého (napr. cricital) po nízky (napr. functional)."
-
-#. SysConfig
-msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
-msgstr "Definuje príslušné stavy nasadenia, v ktorých môžu prepojené tipy ovplyvniť stav CI."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr "Definuje limit vyhľadávania pre obrazovku AgentITSMConfigItem."
-
-#. SysConfig
-msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr "Definuje limit vyhľadávania pre obrazovku AgentITSMConfigItemSearch."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item overview. This option has no effect on the position of the column. Note: Class column is always available if filter 'All' is selected."
-msgstr "Definuje zobrazené stĺpce v prehľade konfiguračných položiek. Táto možnosť nemá žiadny vplyv na pozíciu stĺpca. Poznámka: Stĺpec Trieda je vždy k dispozícii, ak je vybraný filter \"Všetky\"."
-
-#. SysConfig
-msgid "Defines the shown columns in the config item search. This option has no effect on the position of the column."
-msgstr "Definuje zobrazené stĺpce vo vyhľadávaní konfiguračných položiek. Táto možnosť nemá vplyv na pozíciu stĺpca."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item overview depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definuje zobrazené stĺpce CI v prehľade konfiguračných položiek v závislosti od triedy CI. Každá položka musí mať predponu s názvom triedy a dvojitými dvojbodkami (t. j. Computer::). Existuje niekoľko atribútov CI-Attributes, ktoré sú spoločné pre všetky CI (príklad pre triedu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Na zobrazenie jednotlivých CI-atribútov, ako sú definované v CI-definícii, sa musí použiť nasledujúca schéma (príklad pre triedu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ak pre triedu CI neexistuje žiadna položka, zobrazia sa predvolené stĺpce definované v nastavení ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item search depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-msgstr "Definuje zobrazené stĺpce CI vo vyhľadávaní konfiguračných položiek v závislosti od triedy CI. Každá položka musí mať predponu s názvom triedy a dvojitými dvojbodkami (t. j. Computer::). Existuje niekoľko atribútov CI-Attributes, ktoré sú spoločné pre všetky CI (príklad pre triedu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Na zobrazenie jednotlivých CI-atribútov, ako sú definované v CI-definícii, sa musí použiť nasledujúca schéma (príklad pre triedu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ak pre triedu CI neexistuje žiadna položka, zobrazia sa predvolené stĺpce definované v nastavení ITSMConfigItem::Frontend::AgentITSMConfigItem###ShowColumns."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the config item widget depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that are common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown as defined in the setting AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (key DefaultColumns)."
-msgstr "Definuje zobrazené stĺpce CI vo widgete položky konfigurácie v závislosti od triedy CI. Každá položka musí mať predponu s názvom triedy a dvojitými dvojbodkami (t. j. Computer::). Existuje niekoľko atribútov CI-Attributes, ktoré sú spoločné pre všetky CI (príklad pre triedu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Na zobrazenie jednotlivých CI-atribútov, ako sú definované v CI-definícii, sa musí použiť nasledujúca schéma (príklad pre triedu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ak pre triedu CI neexistuje žiadna položka, zobrazia sa predvolené stĺpce definované v nastavení AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany (kľúč DefaultColumns)."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
-msgstr "Definuje zobrazené stĺpce CI v komplexnom zobrazení tabuľky prepojení pre všetky triedy CI. Ak neexistuje žiadna položka, zobrazia sa predvolené stĺpce."
-
-#. SysConfig
-msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
-msgstr "Definuje zobrazené stĺpce CI v komplexnom zobrazení tabuľky prepojení v závislosti od triedy CI. Každý záznam musí mať predponu s názvom triedy a dvojitými dvojbodkami (t. j. Computer::). Existuje niekoľko CI-Attributes (atribútov CI), ktoré sú spoločné pre všetky CI (príklad pre triedu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Na zobrazenie jednotlivých CI-atribútov definovaných v CI-definícii sa musí použiť nasledujúca schéma (príklad pre triedu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ak pre triedu CI neexistuje žiadna položka, zobrazia sa predvolené stĺpce."
-
-#. SysConfig
-msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
-msgstr "Určuje, ktorý typ prepojenia (pomenovaný z pohľadu tiketu) môže ovplyvniť stav prepojenej CI."
-
-#. SysConfig
-msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr "Určuje, ktorý typ tipu môže ovplyvniť stav prepojenej CI."
-
-#. SysConfig
-msgid "Delete Configuration Item"
-msgstr "Odstránenie položky konfigurácie"
-
-#. SysConfig
-msgid "Deployment State Color"
-msgstr "Farba stavu nasadenia"
-
-#. SysConfig
-msgid "Duplicate"
-msgstr "Duplikát"
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
-msgstr "Povolí funkciu hromadnej akcie konfiguračnej položky pre frontend agenta na prácu s viac ako jednou konfiguračnou položkou naraz."
-
-#. SysConfig
-msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr "Stav nasadenia tejto položky konfigurácie"
-
-#. SysConfig
-msgid "Enables/disables the functionality to check ConfigItems for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the script bin/otobo.ITSMConfigItemListDuplicates.pl."
-msgstr "Zapína/vypína funkciu kontroly jedinečných názvov ConfigItems. Pred povolením tejto možnosti by ste mali skontrolovať systém, či už neexistujú konfiguračné položky s duplicitnými názvami. Môžete to urobiť pomocou skriptu bin/otobo.ITSMConfigItemListDuplicates.pl."
-
-#. SysConfig
-msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr "Modul udalosti na nastavenie configitem-status na ticket-configitem-link."
-
-#. SysConfig
-msgid "ITSM config item overview."
-msgstr "Prehľad konfiguračných položiek ITSM."
-
-#. SysConfig
-msgid "Module to check the group responsible for a class."
-msgstr "Modul na kontrolu skupiny zodpovednej za triedu."
-
-#. SysConfig
-msgid "Module to check the group responsible for a configuration item."
-msgstr "Modul na kontrolu skupiny zodpovednej za položku konfigurácie."
-
-#. SysConfig
-msgid "Module to generate ITSM config item statistics."
-msgstr "Modul na generovanie štatistík konfiguračných položiek ITSM."
-
-#. SysConfig
-msgid "Object backend module registration for the import/export module."
-msgstr "Registrácia modulu backend objektu pre modul import/export."
-
-#. SysConfig
-msgid "Overview."
-msgstr "Prehľad."
-
-#. SysConfig
-msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr "Parametre pre backend dashboardu prehľadu konfiguračných položiek zákazníckej spoločnosti agentského rozhrania . \"Limit\" je predvolený počet zobrazených položiek. \"Group\" sa používa na obmedzenie prístupu k zásuvnému modulu (napr. Group: admin;group1;group2;). \"Default\" určuje, či je zásuvný modul predvolene povolený alebo či ho musí používateľ povoliť ručne. \"CacheTTLLocal\" je čas vyrovnávacej pamäte v minútach pre zásuvný modul."
-
-#. SysConfig
-msgid "Parameters for the deployment states color in the preferences view of the agent interface."
-msgstr "Parametre pre stavy nasadenia sa vyfarbia v zobrazení preferencií rozhrania agenta."
-
-#. SysConfig
-msgid "Parameters for the deployment states in the preferences view of the agent interface."
-msgstr "Parametre pre stavy nasadenia v zobrazení preferencií rozhrania agenta."
-
-#. SysConfig
-msgid "Parameters for the example permission groups of the general catalog attributes."
-msgstr "Parametre pre príklady skupín oprávnení všeobecných atribútov katalógu."
-
-#. SysConfig
-msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr "Parametre stránok (na ktorých sa zobrazujú konfiguračné položky)."
-
-#. SysConfig
-msgid "Permission Group"
-msgstr "Skupina oprávnení"
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky položky konfigurácie ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky na vyhľadávanie konfiguračných položiek ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky zväčšenia konfiguračnej položky ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky pridania položky konfigurácie ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky úprav položky konfigurácie ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky položky histórie konfigurácie ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
-msgstr "Požadované oprávnenia na používanie obrazovky tlač položky konfigurácie ITSM v rozhraní agenta."
-
-#. SysConfig
-msgid "Required privileges to delete config items."
-msgstr "Požadované oprávnenia na odstránenie konfiguračných položiek."
-
-#. SysConfig
-msgid "Search config items."
-msgstr "Vyhľadávanie konfiguračných položiek."
-
-#. SysConfig
-msgid "Selects the configuration item number generator module. \"AutoIncrement\" increments the configuration item number, the SystemID, the ConfigItemClassID and the counter are used. The format is \"SystemID.ConfigItemClassID.Counter\", e.g. 1205000004, 1205000005."
-msgstr "Vyberá modul generátora čísla konfiguračnej položky. \"AutoIncrement\" (Automatický prírastok) inkrementuje číslo konfiguračnej položky, používa sa SystemID, ConfigItemClassID a počítadlo. Formát je \"SystemID.ConfigItemClassID.Counter\", napr. 1205000004, 1205000005."
-
-#. SysConfig
-msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
-msgstr "Automatické nastavenie stavu incidentu CI, keď je tiket prepojený s CI."
-
-#. SysConfig
-msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
-msgstr "Nastaví stav nasadenia na obrazovke hromadnej položky konfigurácie v rozhraní agenta."
-
-#. SysConfig
-msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
-msgstr "Nastaví stav udalosti na obrazovke hromadnej položky konfigurácie rozhrania agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke, ktorý umožňuje prepojenie konfiguračnej položky s iným objektom v zobrazení zväčšenia konfiguračnej položky v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na prístup k histórii konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na prístup k histórii konfiguračnej položky v jej zväčšenom zobrazení v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na odstránenie konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na duplikovanie konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na duplikovanie konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na úpravu konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na návrat do zobrazenia zväčšenia konfiguračnej položky v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na tlač konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
-
-#. SysConfig
-msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
-msgstr "Zobrazí odkaz v ponuke na priblíženie konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
-
-#. SysConfig
-msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr "Zobrazí históriu konfiguračných položiek (v opačnom poradí) v rozhraní agenta."
-
-#. SysConfig
-msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
-msgstr "Identifikátor konfiguračnej položky, napr. ConfigItem#, MyConfigItem#. Predvolená hodnota je ConfigItem#."
-
-#. SysConfig
-msgid "class"
-msgstr "trieda"
-
-#. SysConfig
-msgid "global"
-msgstr "globálne"
-
-#. SysConfig
-msgid "postproductive"
-msgstr "postprodukčné"
-
-#. SysConfig
-msgid "preproductive"
-msgstr "predprodukčné"
-
-#. SysConfig
-msgid "productive"
-msgstr "produktívne"
-
-#. Template: AdminITSMConfigItem
-msgid "Change role definition"
-msgstr "Zmena definície úlohy"
-
-#. Template: AdminITSMConfigItem
-msgid "Ready2Import Class Bundles"
-msgstr "Balíky tried Ready2Import"
-
-#. Template: AdminITSMConfigItem
-msgid "Here you can import Ready2Import class bundles showcasing our most usual config items. Please note that some additional configuration may be required."
-msgstr "Tu môžete importovať balíky tried Ready2Import, ktoré predstavujú naše najbežnejšie konfiguračné položky. Upozorňujeme, že môže byť potrebná dodatočná konfigurácia."
-
-#. Template: AdminITSMConfigItem
-msgid "Update existing entities"
-msgstr "Aktualizácia existujúcich subjektov"
-
-#. Template: AdminITSMConfigItem
-msgid "Import Ready2Adopt class bundles"
-msgstr "Import zväzkov tried Ready2Adopt"
-
-#. Template: AdminITSMConfigItem
-msgid "Config Item Role"
-msgstr "Úloha položky konfigurácie"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "The version number of this config item"
-msgstr "Číslo verzie tejto položky konfigurácie"
-
-#. Template: AgentITSMConfigItemEdit
-msgid "Version Number is already in use by the ConfigItems with the following Number(s): %s"
-msgstr "Číslo verzie sa už používa v položke ConfigItems s nasledujúcim číslom (číslami): %s"
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "No config item data found."
-msgstr "Nenašli sa žiadne údaje konfiguračnej položky."
-
-#. Template: AgentITSMConfigItemOverviewSmall
-msgid "Select this config item"
-msgstr "Vyberte túto položku konfigurácie"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "TreeView for ConfigItem"
-msgstr "TreeView pre ConfigItem"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Depth Level"
-msgstr "Úroveň hĺbky"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Zoom In/Out"
-msgstr "Priblíženie/oddialenie"
-
-#. Template: AgentITSMConfigItemTreeView
-msgid "Max links level reached for ConfigItem!"
-msgstr "Maximálna úroveň odkazov dosiahnutá pre ConfigItem!"
-
-#. Template: CustomerITSMConfigItem
-msgid "Your ConfigItems"
-msgstr "Vaše položky ConfigItems"
-
-#. Template: CustomerITSMConfigItemSearch
-msgid "ConfigItem Search"
-msgstr "Vyhľadávanie položky ConfigItem"
-
-#. Template: AdminACL
-msgid "Object Type"
-msgstr "Typ objektu"
-
-#. JS Template: ClassImportConfirm
-msgid "The following classes will be imported"
-msgstr "Importujú sa tieto triedy"
-
-#. JS Template: ClassImportConfirm
-msgid "The following roles will be imported"
-msgstr "Importujú sa tieto úlohy"
-
-#. JS Template: ClassImportConfirm
-msgid "Note that also corresponding dynamic fields and GeneralCatalog classes will be created and there is no automatic removal."
-msgstr "Upozorňujeme, že sa vytvoria aj príslušné dynamické polia a triedy GeneralCatalog a nedôjde k ich automatickému odstráneniu."
-
-#. JS Template: ClassImportConfirm
-msgid "Do you want to proceed?"
-msgstr "Chcete pokračovať?"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Need ExampleClasses!"
-msgstr "Potrebujete príklady tried!"
-
-#. Perl Module: Kernel/Modules/AdminITSMConfigItem.pm
-msgid "Definition is no valid YAML hash."
-msgstr "Definícia nie je platný hash YAML."
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "ConfigItem not found!"
-msgstr "Položka ConfigItem nebola nájdená!"
-
-#. Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm
-msgid "No versions found!"
-msgstr "Nenašli sa žiadne verzie!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "No permission"
-msgstr "Žiadne povolenie"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Filter invalid!"
-msgstr "Filter je neplatný!"
-
-#. Perl Module: Kernel/Modules/CustomerITSMConfigItemSearch.pm
-msgid "Search params invalid!"
-msgstr "Vyhľadávacie parametre sú neplatné!"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Class restrictions for the config item"
-msgstr "Obmedzenia triedy pre položku konfigurácie"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select one or more classes to restrict selectable config items"
-msgstr "Výber jednej alebo viacerých tried na obmedzenie vyberateľných položiek konfigurácie"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link type"
-msgstr "Typ prepojenia"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the link type."
-msgstr "Vyberte typ prepojenia."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Forwards: Referencing (Source) -> Referenced (Target)"
-msgstr "Útočníci: Odkazovanie (Zdroj) -> Odkazované (Cieľ)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Backwards: Referenced (Source) -> Referencing (Target)"
-msgstr "Spätne: Odkazovanie (Zdroj) -> Odkazovanie (Cieľ)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Direction"
-msgstr "Smer prepojenia"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "The referencing object is the one containing this dynamic field, the referenced object is the one selected as value of the dynamic field."
-msgstr "Odkazujúci objekt je ten, ktorý obsahuje toto dynamické pole, odkazovaný objekt je ten, ktorý je vybraný ako hodnota dynamického poľa."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Dynamic (ConfigItem)"
-msgstr "Dynamické (ConfigItem)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Static (Version)"
-msgstr "Statický (verzia)"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Link Referencing Type"
-msgstr "Typ odkazu"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Whether this link applies to the ConfigItem or the static version of the referencing object. Current Incident State calculation only is performed on dynamic links."
-msgstr "Či sa toto prepojenie vzťahuje na ConfigItem alebo statickú verziu odkazujúceho objektu. Výpočet aktuálneho stavu incidentu sa vykonáva len pri dynamických odkazoch."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the attribute which config items will be searched by"
-msgstr "Vyberte atribút, podľa ktorého sa budú vyhľadávať položky konfigurácie"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Starting the YAML string with '---' is required."
-msgstr "Reťazec YAML sa musí začínať znakom '---'."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not purge the table configitem_link."
-msgstr "Nepodarilo sa vyčistiť tabuľku configitem_link."
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "No relevant dynamic fields were found"
-msgstr "Neboli nájdené žiadne relevantné dynamické polia"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Could not insert into the table configitem_link"
-msgstr "Nepodarilo sa vložiť do tabuľky configitem_link"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Link.pm
-msgid "Inserted 0 rows into the table configitem_link"
-msgstr "Vloženie 0 riadkov do tabuľky configitem_link"
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "Error synchronizing the definitions. Please check the log."
-msgstr "Chyba pri synchronizácii definícií. Skontrolujte, prosím, protokol."
-
-#. Perl Module: Kernel/Modules/AdminDynamicField.pm
-msgid "You have ITSMConfigItem definitions which are not synchronized. Please deploy your ITSMConfigItem dynamic field changes."
-msgstr "Máte definície ITSMConfigItem, ktoré nie sú synchronizované. Nasaďte dynamické zmeny polí ITSMConfigItem."
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Overview and Confirmation"
-msgstr "Prehľad a potvrdenie"
-
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "An error occurred during class import."
-msgstr "Počas importu triedy došlo k chybe."
-
-#. SysConfig
-msgid "0 - Hidden"
-msgstr "0 - Skryté"
-
-#. SysConfig
-msgid "1 - Shown"
-msgstr "1 - Zobrazené"
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the agent interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Umožňuje rozšírené podmienky vyhľadávania v konfiguračnej položke vyhľadávania v rozhraní agenta. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky s podmienkami typu \"(*key1*&&*key2*)\" alebo \"(*key1*||*key2*)\"."
-
-#. SysConfig
-msgid "Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr "Umožňuje rozšírené podmienky vyhľadávania vo vyhľadávaní konfiguračných položiek v rozhraní zákazníka. Pomocou tejto funkcie môžete vyhľadávať napr. názov konfiguračnej položky pomocou podmienok typu \"(*key1*&&*key2*)\" alebo \"(*key1*||*key2*)\"."
 
 #. SysConfig
 msgid "Choose a module to enforce a naming scheme."
@@ -1350,20 +663,40 @@ msgid "Columns that can be filtered in the config item overview of the agent int
 msgstr "Stĺpce, ktoré možno filtrovať v prehľade konfiguračných položiek v rozhraní agenta. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX)."
 
 #. SysConfig
-msgid "Columns that can be filtered in the config item overview of the customer interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Stĺpce, ktoré možno filtrovať v prehľade konfiguračných položiek v rozhraní zákazníka. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX)."
+msgid "Config Items"
+msgstr "Položky konfigurácie"
+
+#. SysConfig
+msgid "Config item add."
+msgstr "Pridanie položky konfigurácie."
+
+#. SysConfig
+msgid "Config item edit."
+msgstr "Úprava položky konfigurácie."
+
+#. SysConfig
+msgid "Config item event module that enables accounting licenses for a given config item."
+msgstr ""
+
+#. SysConfig
+msgid "Config item event module that enables logging to history in the agent interface."
+msgstr "Modul udalostí konfiguračnej položky, ktorý umožňuje zaznamenávanie do histórie v rozhraní agenta."
 
 #. SysConfig
 msgid "Config item event module that updates config items to their current definition."
 msgstr "Modul udalostí konfiguračných položiek, ktorý aktualizuje konfiguračné položky podľa ich aktuálnej definície."
 
 #. SysConfig
-msgid "Config item event module that updates the table configitem_ĺink."
-msgstr "Modul udalostí položky konfigurácie, ktorý aktualizuje tabuľku configitem_ĺink."
+msgid "Config item history."
+msgstr "Výstup"
 
 #. SysConfig
-msgid "Config item event module updates the current incident state."
-msgstr "Modul udalostí položky konfigurácie aktualizuje aktuálny stav incidentu."
+msgid "Config item print."
+msgstr "Tlač konfiguračnej položky."
+
+#. SysConfig
+msgid "Config item zoom."
+msgstr "Priblíženie konfiguračnej položky."
 
 #. SysConfig
 msgid "ConfigItem Tree View"
@@ -1382,6 +715,42 @@ msgid "ConfigItems with the following deployment states will not be stored on th
 msgstr "Položky ConfigItems s nasledujúcimi stavmi nasadenia nebudú uložené na serveri Elasticsearch. Ak chcete túto možnosť použiť na existujúce CI, je potrebné po zmene tejto možnosti spustiť migráciu CI prostredníctvom konzoly."
 
 #. SysConfig
+msgid "Configuration Item Limit"
+msgstr "Limit položky konfigurácie"
+
+#. SysConfig
+msgid "Configuration Item limit per page."
+msgstr "Konfigurácia Limit položky na stránku."
+
+#. SysConfig
+msgid "Configuration Management Database."
+msgstr "Databáza na správu konfigurácie."
+
+#. SysConfig
+msgid "Configuration item bulk module."
+msgstr "Hromadný modul konfiguračnej položky."
+
+#. SysConfig
+msgid "Configuration item search backend router of the agent interface."
+msgstr "Vyhľadávanie konfiguračnej položky backendového smerovača rozhrania agenta."
+
+#. SysConfig
+msgid "Configure the columns which are available for viewing Permission Conditions in the customer interface, when the corresponding Permission Condition Columns are not specifically configured. This setting is used as a fallback for the other Permission Condition Columns settings."
+msgstr ""
+
+#. SysConfig
+msgid "Configure the columns which are available when viewing the corresponding Permission Condition in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Create and manage the definitions for Configuration Items."
+msgstr "Vytvorenie a správa definícií konfiguračných položiek."
+
+#. SysConfig
+msgid "Creates Tickets for ConfigItems at specific time points."
+msgstr "Vytvára lístky pre položky ConfigItems v určitých časových bodoch."
+
+#. SysConfig
 msgid "Customers can see historic CI versions."
 msgstr "Zákazníci môžu vidieť historické verzie CI."
 
@@ -1398,6 +767,10 @@ msgid "Default data to use on attribute for config item search screen. Example: 
 msgstr "Predvolené údaje, ktoré sa majú použiť na obrazovke vyhľadávania atribútov konfiguračných položiek. Príklad: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #. SysConfig
+msgid "Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = \"complex\"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js."
+msgstr "Definujte Akcie, pri ktorých je vo widgete prepojených objektov k dispozícii tlačidlo nastavenia (LinkObject::ViewMode = \"complex\"). Upozorňujeme, že tieto Akcie musia mať zaregistrované nasledujúce súbory JS a CSS: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js a Core.Agent.LinkObject.js."
+
+#. SysConfig
 msgid "Define a Template::Toolkit scheme for version strings. Only used if Version String Module is set to TemplateToolkit."
 msgstr "Definovanie schémy Template::Toolkit pre reťazce verzií. Používa sa len vtedy, ak je modul Version String nastavený na TemplateToolkit."
 
@@ -1406,8 +779,32 @@ msgid "Define a set of conditions under which a customer is allowed to see a con
 msgstr "Definujte súbor podmienok, za ktorých môže zákazník vidieť položku konfigurácie. Podmienky môžu byť voliteľne obmedzené na určité skupiny zákazníkov. Názov je jediný povinný atribút. Ak nie sú zadané žiadne ďalšie možnosti, všetky konfiguračné položky budú viditeľné v rámci tejto kategórie."
 
 #. SysConfig
+msgid "Defines Required permissions to delete ITSM configuration items using the Generic Interface."
+msgstr "Definuje požadované oprávnenia na vymazanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
+
+#. SysConfig
+msgid "Defines Required permissions to get ITSM configuration items using the Generic Interface."
+msgstr "Definuje požadované oprávnenia na získanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
+
+#. SysConfig
+msgid "Defines Required permissions to search ITSM configuration items using the Generic Interface."
+msgstr "Definuje požadované oprávnenia na vyhľadávanie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
+
+#. SysConfig
+msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+msgstr "Definuje požadované oprávnenia na nastavenie konfiguračných položiek ITSM pomocou všeobecného rozhrania."
+
+#. SysConfig
+msgid "Defines an overview module to show the small view of a configuration item list."
+msgstr "Definuje modul prehľadu na zobrazenie malého zobrazenia zoznamu konfiguračných položiek."
+
+#. SysConfig
 msgid "Defines if the link type labels must be shown in the node connections."
 msgstr "Definuje, či sa v spojeniach uzlov musia zobrazovať značky typu spojenia."
+
+#. SysConfig
+msgid "Defines regular expressions individually for each ConfigItem class to check the ConfigItem name and to show corresponding error messages."
+msgstr "Definuje regulárne výrazy jednotlivo pre každú triedu ConfigItem na kontrolu názvu ConfigItem a zobrazenie príslušných chybových správ."
 
 #. SysConfig
 msgid "Defines the available columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
@@ -1454,12 +851,52 @@ msgid "Defines the default shown config item search attribute for config item se
 msgstr "Definuje predvolený zobrazený atribút vyhľadávania konfiguračných položiek pre obrazovku vyhľadávania konfiguračných položiek. Príklad: \"Key\" (Kľúč) musí mať názov dynamického poľa v tomto prípade \"X\", \"Content\" (Obsah) musí mať hodnotu dynamického poľa v závislosti od typu dynamického poľa, Text: \"a text\", Dropdown: \"1\", Date/Time: \"Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' a alebo 'Search_DynamicField_XTimePointFormat=týždeň; Search_DynamicField_XTimePointStart=Pred; Search_DynamicField_XTimePointValue=7';."
 
 #. SysConfig
+msgid "Defines the default subobject of the class 'ITSMConfigItem'."
+msgstr "Definuje predvolený podobjekt triedy \"ITSMConfigItem\"."
+
+#. SysConfig
+msgid "Defines the disabled columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
+msgstr "Definuje výšku komponentu textového editora pre túto obrazovku. Zadajte číslo (pixely) alebo percentuálnu hodnotu (relatívnu)."
+
+#. SysConfig
+msgid "Defines the number of rows for the CI definition editor in the admin interface."
+msgstr "Definuje počet riadkov pre editor definícií CI v rozhraní správcu."
+
+#. SysConfig
+msgid "Defines the order of incident states from high (e.g. cricital) to low (e.g. functional)."
+msgstr "Definuje poradie incidentných stavov od vysokého (napr. cricital) po nízky (napr. functional)."
+
+#. SysConfig
+msgid "Defines the relevant deployment states where linked tickets can affect the status of a CI."
+msgstr "Definuje príslušné stavy nasadenia, v ktorých môžu prepojené tipy ovplyvniť stav CI."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItem screen."
+msgstr "Definuje limit vyhľadávania pre obrazovku AgentITSMConfigItem."
+
+#. SysConfig
+msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgstr "Definuje limit vyhľadávania pre obrazovku AgentITSMConfigItemSearch."
+
+#. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
 msgstr "Definuje limit vyhľadávania pre obrazovku CustomerITSMConfigItem."
 
 #. SysConfig
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
 msgstr "Definuje limit vyhľadávania pre obrazovku CustomerITSMConfigItemSearch."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view for all CI classes. If there is no entry, then the default columns are shown."
+msgstr "Definuje zobrazené stĺpce CI v komplexnom zobrazení tabuľky prepojení pre všetky triedy CI. Ak neexistuje žiadna položka, zobrazia sa predvolené stĺpce."
+
+#. SysConfig
+msgid "Defines the shown columns of CIs in the link table complex view, depending on the CI class. Each entry must be prefixed with the class name and double colons (i.e. Computer::). There are a few CI-Attributes that common to all CIs (example for the class Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). To show individual CI-Attributes as defined in the CI-Definition, the following scheme must be used (example for the class Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, then the default columns are shown."
+msgstr "Definuje zobrazené stĺpce CI v komplexnom zobrazení tabuľky prepojení v závislosti od triedy CI. Každý záznam musí mať predponu s názvom triedy a dvojitými dvojbodkami (t. j. Computer::). Existuje niekoľko CI-Attributes (atribútov CI), ktoré sú spoločné pre všetky CI (príklad pre triedu Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). Na zobrazenie jednotlivých CI-atribútov definovaných v CI-definícii sa musí použiť nasledujúca schéma (príklad pre triedu Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Ak pre triedu CI neexistuje žiadna položka, zobrazia sa predvolené stĺpce."
 
 #. SysConfig
 msgid "Defines which items are available for 'Action' in third level of the ITSM Config Item ACL structure."
@@ -1474,16 +911,36 @@ msgid "Defines which items are available in second level of the ITSM Config Item
 msgstr "Definuje, ktoré položky sú dostupné v druhej úrovni štruktúry ITSM Config Item ACL."
 
 #. SysConfig
+msgid "Defines which type of link (named from the ticket perspective) can affect the status of a linked CI."
+msgstr "Určuje, ktorý typ prepojenia (pomenovaný z pohľadu tiketu) môže ovplyvniť stav prepojenej CI."
+
+#. SysConfig
+msgid "Defines which type of ticket can affect the status of a linked CI."
+msgstr "Určuje, ktorý typ tipu môže ovplyvniť stav prepojenej CI."
+
+#. SysConfig
 msgid "Definition Update"
 msgstr "Aktualizácia definície"
+
+#. SysConfig
+msgid "Delete Configuration Item"
+msgstr "Odstránenie položky konfigurácie"
 
 #. SysConfig
 msgid "DeplState"
 msgstr "DeplState"
 
 #. SysConfig
+msgid "Deployment State Color"
+msgstr "Farba stavu nasadenia"
+
+#. SysConfig
 msgid "DeploymentState"
 msgstr "DeploymentState"
+
+#. SysConfig
+msgid "Duplicate"
+msgstr "Duplikát"
 
 #. SysConfig
 msgid "Dynamic field event module that marks config item definitions as out of sync, if containing dynamic fields change."
@@ -1502,8 +959,20 @@ msgid "Dynamic fields shown in the config item search screen of the agent interf
 msgstr "Dynamické polia zobrazené na obrazovke vyhľadávania konfiguračných položiek v rozhraní agenta."
 
 #. SysConfig
+msgid "Enables configuration item bulk action feature for the agent frontend to work on more than one configuration item at a time."
+msgstr "Povolí funkciu hromadnej akcie konfiguračnej položky pre frontend agenta na prácu s viac ako jednou konfiguračnou položkou naraz."
+
+#. SysConfig
+msgid "Enables configuration item bulk action feature only for the listed groups."
+msgstr "Stav nasadenia tejto položky konfigurácie"
+
+#. SysConfig
 msgid "Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr "Povolí/vypne funkciu kontroly jedinečných názvov položiek konfigurácie ITSM. Pred zapnutím tejto možnosti by ste mali skontrolovať systém, či už neexistujú konfiguračné položky s duplicitnými názvami. Môžete to urobiť pomocou konzolového príkazu Admin::ITSM::ConfigItem::ListDuplicates."
+
+#. SysConfig
+msgid "Event module to set configitem-status on ticket-configitem-link."
+msgstr "Modul udalosti na nastavenie configitem-status na ticket-configitem-link."
 
 #. SysConfig
 msgid "Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it."
@@ -1518,12 +987,24 @@ msgid "For every webservice (key) an array of classes (value) can be defined on 
 msgstr "Pre každú webovú službu (kľúč) možno definovať pole tried (hodnota), na ktoré je import obmedzený. Pre všetky vybrané triedy alebo všetky existujúce triedy sa budú musieť v konfigurácii invokera zvoliť identifikačné atribúty."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemCreate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "GenericInterface module registration for the ConfigItemFetch invoker layer."
 msgstr "Registrácia modulu GenericInterface pre vrstvu vyvolávača ConfigItemFetch."
 
 #. SysConfig
+msgid "GenericInterface module registration for the ConfigItemUpdate invoker layer."
+msgstr ""
+
+#. SysConfig
 msgid "ITSM ConfigItem"
 msgstr "ITSM ConfigItem"
+
+#. SysConfig
+msgid "ITSM config item overview."
+msgstr "Prehľad konfiguračných položiek ITSM."
 
 #. SysConfig
 msgid "InciState"
@@ -1542,8 +1023,24 @@ msgid "Includes incident states in the config item search of the customer interf
 msgstr "Zahŕňa stavy incidentov do vyhľadávania konfiguračných položiek v rozhraní zákazníka."
 
 #. SysConfig
+msgid "License accounting configuration item event module."
+msgstr ""
+
+#. SysConfig
 msgid "Maximum number of config items to be displayed in the result of this operation."
 msgstr "Maximálny počet konfiguračných položiek, ktoré sa zobrazia vo výsledku tejto operácie."
+
+#. SysConfig
+msgid "Module to check the group responsible for a class."
+msgstr "Modul na kontrolu skupiny zodpovednej za triedu."
+
+#. SysConfig
+msgid "Module to check the group responsible for a configuration item."
+msgstr "Modul na kontrolu skupiny zodpovednej za položku konfigurácie."
+
+#. SysConfig
+msgid "Module to generate ITSM config item statistics."
+msgstr "Modul na generovanie štatistík konfiguračných položiek ITSM."
 
 #. SysConfig
 msgid "Name Module"
@@ -1566,6 +1063,10 @@ msgid "Objects to search for, how many entries and which attributs to show. Conf
 msgstr "Objekty, ktoré sa majú vyhľadávať, koľko záznamov a ktoré atribúty sa majú zobraziť. Atribúty ConfigItem musia byť explicitne uložené prostredníctvom Elasticsearch."
 
 #. SysConfig
+msgid "Overview."
+msgstr "Prehľad."
+
+#. SysConfig
 msgid "Parameters for the categories for config item classes in the preferences view of the agent interface."
 msgstr "Parametre pre kategórie tried konfiguračných položiek v zobrazení preferencií rozhrania agenta."
 
@@ -1574,12 +1075,36 @@ msgid "Parameters for the column filters of the small config item overview. Plea
 msgstr "Parametre pre stĺpcové filtre prehľadu malých konfiguračných položiek. Upozornenie: nastavenie hodnoty \"Aktívne\" na 0 zabráni agentom upravovať nastavenia tejto skupiny iba v ich osobných nastaveniach, ale správcom stále umožní upravovať nastavenia v mene iného používateľa. Pomocou položky 'PreferenceGroup' môžete ovládať, v ktorej oblasti sa majú tieto nastavenia zobrazovať v používateľskom rozhraní."
 
 #. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries per config item class shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the dashboard backend of the customer company config item overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"ConfigItemKey\" is used to specify which reference field is used for a ConfigItem class (Key=Class, Value=DynamicFieldName)."
+msgstr ""
+
+#. SysConfig
+msgid "Parameters for the deployment states color in the preferences view of the agent interface."
+msgstr "Parametre pre stavy nasadenia sa vyfarbia v zobrazení preferencií rozhrania agenta."
+
+#. SysConfig
+msgid "Parameters for the deployment states in the preferences view of the agent interface."
+msgstr "Parametre pre stavy nasadenia v zobrazení preferencií rozhrania agenta."
+
+#. SysConfig
+msgid "Parameters for the example permission groups of the general catalog attributes."
+msgstr "Parametre pre príklady skupín oprávnení všeobecných atribútov katalógu."
+
+#. SysConfig
 msgid "Parameters for the name module for config item classes in the preferences view of the agent interface."
 msgstr "Parametre modulu názvu pre triedy konfiguračných položiek v zobrazení preferencií rozhrania agenta."
 
 #. SysConfig
 msgid "Parameters for the number module for config item classes in the preferences view of the agent interface."
 msgstr "Parametre pre modul čísla pre triedy konfiguračných položiek v zobrazení preferencií rozhrania agenta."
+
+#. SysConfig
+msgid "Parameters for the pages (in which the configuration items are shown)."
+msgstr "Parametre stránok (na ktorých sa zobrazujú konfiguračné položky)."
 
 #. SysConfig
 msgid "Parameters for the version string module for config item classes in the preferences view of the agent interface."
@@ -1598,8 +1123,20 @@ msgid "Performs the configured action for each event (as an Invoker) for each co
 msgstr "Vykoná nakonfigurovanú akciu pre každú udalosť (ako Invoker) pre každú nakonfigurovanú webovú službu."
 
 #. SysConfig
+msgid "Permission Group"
+msgstr "Skupina oprávnení"
+
+#. SysConfig
 msgid "Required permissions to use the ITSM configuration item attachment action in the agent interface."
 msgstr "Požadované oprávnenia na použitie akcie pripojenia konfiguračnej položky ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky položky konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the ITSM configuration item search screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky na vyhľadávanie konfiguračných položiek ITSM v rozhraní agenta."
 
 #. SysConfig
 msgid "Required permissions to use the ITSM configuration item search screen in the customer interface."
@@ -1610,16 +1147,104 @@ msgid "Required permissions to use the ITSM configuration item tree view screen 
 msgstr "Požadované oprávnenia na používanie obrazovky zobrazenia stromu konfiguračných položiek ITSM v rozhraní agenta."
 
 #. SysConfig
+msgid "Required permissions to use the ITSM configuration item zoom screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky zväčšenia konfiguračnej položky ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the add ITSM configuration item screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky pridania položky konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
 msgid "Required permissions to use the bulk ITSM configuration item screen in the agent interface."
 msgstr "Požadované oprávnenia na používanie obrazovky položky hromadnej konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the edit ITSM configuration item screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky úprav položky konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the history ITSM configuration item screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky položky histórie konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required permissions to use the print ITSM configuration item screen in the agent interface."
+msgstr "Požadované oprávnenia na používanie obrazovky tlač položky konfigurácie ITSM v rozhraní agenta."
+
+#. SysConfig
+msgid "Required privileges to delete config items."
+msgstr "Požadované oprávnenia na odstránenie konfiguračných položiek."
+
+#. SysConfig
+msgid "Search config items."
+msgstr "Vyhľadávanie konfiguračných položiek."
+
+#. SysConfig
+msgid "Set the incident state of a CI automatically when a Ticket is Linked to a CI."
+msgstr "Automatické nastavenie stavu incidentu CI, keď je tiket prepojený s CI."
+
+#. SysConfig
+msgid "Sets the deployment state in the configuration item bulk screen of the agent interface."
+msgstr "Nastaví stav nasadenia na obrazovke hromadnej položky konfigurácie v rozhraní agenta."
+
+#. SysConfig
+msgid "Sets the incident state in the configuration item bulk screen of the agent interface."
+msgstr "Nastaví stav udalosti na obrazovke hromadnej položky konfigurácie rozhrania agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu that allows linking a configuration item with another object in the config item zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke, ktorý umožňuje prepojenie konfiguračnej položky s iným objektom v zobrazení zväčšenia konfiguračnej položky v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the configuration item overview of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na prístup k histórii konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to access the history of a configuration item in the its zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na prístup k histórii konfiguračnej položky v jej zväčšenom zobrazení v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to delete a configuration item in its zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na odstránenie konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
 
 #. SysConfig
 msgid "Shows a link in the menu to display the configuration item links as a Tree View."
 msgstr "Zobrazí odkaz v ponuke na zobrazenie odkazov na konfiguračné položky ako stromové zobrazenie."
 
 #. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the configuration item overview of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na duplikovanie konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to duplicate a configuration item in the its zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na duplikovanie konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to edit a configuration item in the its zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na úpravu konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to go back in the configuration item zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na návrat do zobrazenia zväčšenia konfiguračnej položky v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to print a configuration item in the its zoom view of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na tlač konfiguračnej položky v jej zväčšenom zobrazení rozhrania agenta."
+
+#. SysConfig
+msgid "Shows a link in the menu to zoom into a configuration item in the configuration item overview of the agent interface."
+msgstr "Zobrazí odkaz v ponuke na priblíženie konfiguračnej položky v prehľade konfiguračných položiek v rozhraní agenta."
+
+#. SysConfig
+msgid "Shows the config item history (reverse ordered) in the agent interface."
+msgstr "Zobrazí históriu konfiguračných položiek (v opačnom poradí) v rozhraní agenta."
+
+#. SysConfig
 msgid "The default category which is shown, if none is selected."
 msgstr "Predvolená kategória, ktorá sa zobrazí, ak nie je vybratá žiadna."
+
+#. SysConfig
+msgid "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#. The default is ConfigItem#."
+msgstr "Identifikátor konfiguračnej položky, napr. ConfigItem#, MyConfigItem#. Predvolená hodnota je ConfigItem#."
 
 #. SysConfig
 msgid "Triggers ConfigItemFetch invoker automatically."
@@ -1638,6 +1263,10 @@ msgid "Version Trigger"
 msgstr "Spúšťač verzie"
 
 #. SysConfig
+msgid "Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2)."
+msgstr ""
+
+#. SysConfig
 msgid "Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes."
 msgstr "Či je možné vyhnúť sa vykonaniu príkazu ConfigItemACL kontrolou závislostí polí uložených v medzipamäti. Toto môže zlepšiť časy načítania formulárov, ale musí byť vypnuté, ak sa majú používať ACLModuly pre ITSMConfigItem- a Form-ReturnTypes."
 
@@ -1645,1648 +1274,939 @@ msgstr "Či je možné vyhnúť sa vykonaniu príkazu ConfigItemACL kontrolou z�
 msgid "Which general information is shown in the header."
 msgstr "Ktoré všeobecné informácie sú uvedené v záhlaví."
 
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "General invoker data"
-msgstr "Všeobecné údaje o vyvolávateľovi"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "This OTOBO invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "Tento backendový modul OTOBO invoker sa zavolá na prípravu údajov, ktoré sa majú odoslať do vzdialeného systému, a na spracovanie údajov odpovede."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for outgoing request data"
-msgstr "Nastavenia pre údaje odchádzajúcej žiadosti"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Mapping"
-msgstr "Mapovanie"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The data from the invoker of OTOBO will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "Údaje od vyvolávateľa OTOBO sa spracujú pomocou tohto mapovania, aby sa transformovali na druh údajov, ktoré očakáva vzdialený systém."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTOBO expects."
-msgstr "Údaje odpovede sa spracujú pomocou tohto mapovania, aby sa transformovali na druh údajov, ktoré vyvolávateľ OTOBO očakáva."
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Settings for incoming response data"
-msgstr "Nastavenia pre prichádzajúce údaje odpovede"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Event data"
-msgstr "Údaje o udalostiach"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Add Event"
-msgstr "Pridať udalosť"
-
-#. Template: AdminGenericInterfaceInvokerConfigItem
-msgid "Asynchronous event triggers are handled by the OTOBO Scheduler Daemon in background (recommended)."
-msgstr "Asynchrónne spúšťače udalostí spracúva démon plánovača OTOBO na pozadí (odporúčané)."
-
-#. Template: AdminITSMConfigItem
-msgid "Auto Indent Code"
-msgstr "Kód automatického odsadenia"
-
-#. Template: AdminITSMConfigItem
-msgid "Comment/Uncomment Code"
-msgstr "Kód komentára/nekomentára"
-
-#. Template: AdminITSMConfigItem
-msgid "Search & Replace"
-msgstr "Vyhľadávanie a nahradenie"
-
-#. Template: AdminITSMConfigItem
-msgid "Select All"
-msgstr "Vybrať všetko"
-
-#. Template: AdminITSMConfigItem
-msgid "Full Screen"
-msgstr "Na celú obrazovku"
-
-#. Template: CustomerITSMConfigItem
-msgid "ConfigItems"
-msgstr "ConfigItems"
-
-#. Template: CustomerITSMConfigItem
-msgid "Sort"
-msgstr "Triediť"
-
-#. Template: AdminACL
-msgid "Filter by valid state"
-msgstr "Filtrovanie podľa platného stavu"
-
-#. Template: AdminACL
-msgid "Include invalid ACLs"
-msgstr "Zahrnúť neplatné ACL"
-
-#. Template: AdminACLEdit
-msgid "Check the official %sdocumentation%s."
-msgstr "Pozrite si oficiálnu %sdokumentáciu%s."
-
-#. Template: AdminDynamicField
-msgid "Include invalid dynamic fields"
-msgstr "Zahrnúť neplatné dynamické polia"
-
-#. Template: AdminDynamicField
-msgid "Filter field by object type"
-msgstr "Filtrovanie poľa podľa typu objektu"
-
-#. Template: AdminDynamicField
-msgid "Filter field by namespace"
-msgstr "Filtrovanie poľa podľa menného priestoru"
-
-#. Template: AdminDynamicField
-msgid "New Dynamic Fields"
-msgstr "Nové dynamické polia"
-
-#. Template: AdminDynamicField
-msgid "Would you like to benefit from additional dynamic field types? You have full access to the following field types:"
-msgstr "Chcete využívať ďalšie typy dynamických polí? Máte plný prístup k nasledujúcim typom polí:"
-
-#. Template: AdminDynamicField
-msgid "Copy this field"
-msgstr "Kopírovať toto pole"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which will be searched on autocomplete"
-msgstr "Atribút, ktorý sa bude vyhľadávať pri automatickom dokončovaní"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "External-source key"
-msgstr "Kľúč externého zdroja"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "When set via an external source (e.g. web service or import / export), the value will be interpreted as this attribute."
-msgstr "Ak sa hodnota nastaví prostredníctvom externého zdroja (napr. webovej služby alebo importu/exportu), bude interpretovaná ako tento atribút."
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Attribute which is displayed for values"
-msgstr "Atribút, ktorý sa zobrazuje pre hodnoty"
-
-#. Perl Module: Kernel/System/DynamicField/Driver/ConfigItem.pm
-msgid "Select the type of display"
-msgstr "Výber typu displeja"
-
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide an array with data in YAML format."
-msgstr "Základná štruktúra nie je platná. Poskytnite pole s údajmi vo formáte YAML."
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "ACLs could not be Imported due to a unknown error, please check OTOBO logs for more information"
-msgstr "ACL sa nepodarilo importovať z dôvodu neznámej chyby, viac informácií nájdete v záznamoch OTOBO"
-
-#. Perl Module: Kernel/Modules/AdminACL.pm
-msgid "%s (copy) %s"
-msgstr "%s (kópia) %s"
-
-#. SysConfig
-msgid "A precentage value of the minimal translation progress per language, to be usable for documentations."
-msgstr "Percentuálna hodnota minimálneho pokroku v preklade pre každý jazyk, ktorá sa má použiť na dokumentáciu."
-
-#. SysConfig
-msgid "Access repos via http or https."
-msgstr "Prístup k úložiskám cez http alebo https."
-
-#. SysConfig
-msgid "Autoloading of Znuny4OTRSRepo extensions."
-msgstr "Automatické načítanie rozšírení Znuny4OTRSRepo."
-
-#. SysConfig
-msgid "Backend module registration for the config conflict check module."
-msgstr "Registrácia backendového modulu pre modul kontroly konfliktu konfigurácie."
-
-#. SysConfig
-msgid "Backend module registration for the file conflict check module."
-msgstr "Registrácia backendového modulu pre modul kontroly konfliktov súborov."
-
-#. SysConfig
-msgid "Backend module registration for the function redefine check module."
-msgstr "Registrácia backendového modulu pre funkciu redefine check module."
-
-#. SysConfig
-msgid "Backend module registration for the manual set module."
-msgstr "Registrácia backendového modulu pre modul manuálnej súpravy."
-
-#. SysConfig
-msgid "Block hooks to be created for BS ad removal."
-msgstr "Vytvorenie blokovacích háčikov na odstránenie reklamy BS."
-
-#. SysConfig
-msgid "Block hooks to be created for package manager output filter."
-msgstr "Blokové háčiky, ktoré sa majú vytvoriť pre výstupný filter správcu balíkov."
-
-#. SysConfig
-msgid "Branch View commit limit"
-msgstr "Limit revízie zobrazenia vetvy"
-
-#. SysConfig
-msgid "CodePolicy"
-msgstr "CodePolicy"
-
-#. SysConfig
-msgid "Commit limit per page for Branch view screen"
-msgstr "Limit záväzkov na stránku pre obrazovku zobrazenia pobočky"
-
-#. SysConfig
-msgid "Create analysis file"
-msgstr "Vytvorenie súboru analýzy"
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket and sends to Znuny."
-msgstr "Vytvorí z tohto tiketu súbor analýzy a odošle ho do programu Znuny."
-
-#. SysConfig
-msgid "Creates a analysis file from this ticket."
-msgstr "Vytvorí súbor analýzy z tohto tipu."
-
-#. SysConfig
-msgid "Define private addon repos."
-msgstr "Definovanie súkromných repozitárov doplnkov."
-
-#. SysConfig
-msgid "Defines the filter that processes the HTML templates."
-msgstr "Definuje filter, ktorý spracováva šablóny HTML."
-
-#. SysConfig
-msgid "Defines the test module for checking code policy."
-msgstr "Definuje testovací modul na kontrolu zásad kódu."
-
-#. SysConfig
-msgid "Definition of GIT clone/push URL Prefix."
-msgstr "Definícia GIT clone/push URL Prefix."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRelease => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Definícia dynamického poľa: Group => Skupina s prístupom k dynamickým poliam; AlwaysVisible => Pole možno odstrániť (0|1); InformationAreaName => Názov widgetov; InformationAreaSize => Veľkosť a pozícia widgetov (Large|Small); Name => Názov dynamického poľa, ktoré sa má použiť; Priority => Poradie dynamických polí; State => Stav polí (0 = vypnuté, 1 = aktívne, 2 = povinné), FilterRelease => Regex, ktorému musí vyhovovať názov úložiska, aby sa zobrazil, FilterPackage => Regex, ktorému musí vyhovovať názov balíka, aby sa zobrazil, FilterBranch => Regex, ktorému musí vyhovovať názov vetvy, aby sa zobrazil, FilterRelease => Regex, ktorému musí vyhovovať reťazec verzie repelentu, aby sa zobrazil."
-
-#. SysConfig
-msgid "Definition of a Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Definícia dynamického poľa: Group => Skupina s prístupom k dynamickým poliam; AlwaysVisible => Pole možno odstrániť (0|1); InformationAreaName => Názov widgetov; InformationAreaSize => Veľkosť a pozícia widgetov (Large|Small); Name => Názov dynamického poľa, ktoré sa má použiť; Priority => Poradie dynamických polí; State => Stav polí (0 = vypnuté, 1 = aktívne, 2 = povinné), FilterRepository => Regex, ktorému musí vyhovovať názov úložiska, aby sa zobrazil, FilterPackage => Regex, ktorému musí vyhovovať názov balíka, aby sa zobrazil, FilterBranch => Regex, ktorému musí vyhovovať názov vetvy, aby sa zobrazil, FilterRelease => Regex, ktorému musí vyhovovať reťazec verzie repelentu, aby sa zobrazil."
-
-#. SysConfig
-msgid "Definition of external MD5 sums (key => MD5, Value => Vendor, PackageName, Version, Date)."
-msgstr "Definícia externých súm MD5 (kľúč => MD5, hodnota => dodávateľ, názov balíka, verzia, dátum)."
-
-#. SysConfig
-msgid "Definition of mappings between public repository requests and internal OPMS repositories."
-msgstr "Definícia mapovania medzi požiadavkami na verejné úložisko a internými úložiskami OPMS."
-
-#. SysConfig
-msgid "Definition of package states."
-msgstr "Definícia stavov balíka."
-
-#. SysConfig
-msgid "Definition of renamed OPMS packages."
-msgstr "Definícia premenovaných balíkov OPMS."
-
-#. SysConfig
-msgid "Directory, which is used by Git to cache repositories."
-msgstr "Adresár, ktorý systém Git používa na ukladanie úložísk do vyrovnávacej pamäte."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store temporary data."
-msgstr "Adresár, ktorý systém Git používa na ukladanie dočasných údajov."
-
-#. SysConfig
-msgid "Directory, which is used by Git to store working copies."
-msgstr "Adresár, ktorý systém Git používa na ukladanie pracovných kópií."
-
-#. SysConfig
-msgid "Disable online repositories."
-msgstr "Zakázanie online úložísk."
-
-#. SysConfig
-msgid "Do not log git ssh connection authorization results for these users. Useful for automated stuff."
-msgstr "Nezaznamenávajte výsledky autorizácie pripojenia git ssh pre týchto používateľov. Užitočné pre automatizované veci."
-
-#. SysConfig
-msgid "Dynamic Fields Screens"
-msgstr "Obrazovky dynamických polí"
-
-#. SysConfig
-msgid "DynamicFieldScreen"
-msgstr "DynamicFieldScreen"
-
-#. SysConfig
-msgid "Export all available public keys to authorized_keys file."
-msgstr "Export všetkých dostupných verejných kľúčov do súboru authorized_keys."
-
-#. SysConfig
-msgid "Export all relevant releases to ftp server."
-msgstr "Export všetkých relevantných verzií na server ftp."
-
-#. SysConfig
-msgid "Frontend module registration for the OPMS object in the agent interface."
-msgstr "Registrácia modulu frontend pre objekt OPMS v rozhraní agenta."
-
-#. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepository object in the public interface."
-msgstr "Registrácia modulu frontend pre objekt PublicOPMSRepository vo verejnom rozhraní."
-
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSRepositoryLookup object in the public interface."
-msgstr "Registrácia modulu frontend pre objekt PublicOPMSRepositoryLookup vo verejnom rozhraní."
+msgid "class"
+msgstr "trieda"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicOPMSTestBuild object in the public interface."
-msgstr "Registrácia frontendového modulu pre objekt PublicOPMSTestBuild vo verejnom rozhraní."
+msgid "global"
+msgstr "globálne"
 
 #. SysConfig
-msgid "Frontend module registration for the PublicPackageVerification object in the public interface."
-msgstr "Registrácia modulu frontend pre objekt PublicPackageVerification vo verejnom rozhraní."
+msgid "postproductive"
+msgstr "postprodukčné"
 
 #. SysConfig
-msgid "Frontend module registration for the admin interface."
-msgstr "Registrácia frontendového modulu pre rozhranie správcu."
+msgid "preproductive"
+msgstr "predprodukčné"
 
 #. SysConfig
-msgid "GIT Author registration."
-msgstr "Registrácia autora GIT."
-
-#. SysConfig
-msgid "Generate HTML comment hooks for the specified blocks so that filters can use them."
-msgstr "Generovanie háčikov na komentáre HTML pre zadané bloky, aby ich mohli používať filtre."
-
-#. SysConfig
-msgid "Generate documentations once per night."
-msgstr "Generovanie dokumentácie raz za noc."
-
-#. SysConfig
-msgid "Git"
-msgstr "Git"
-
-#. SysConfig
-msgid "Git Management"
-msgstr "Správa systému Git"
-
-#. SysConfig
-msgid "Git Repository"
-msgstr "Úložisko Git"
-
-#. SysConfig
-msgid "Group, whose members have delete admin permissions in OPMS."
-msgstr "Skupina, ktorej členovia majú oprávnenia administrátora na vymazanie v OPMS."
-
-#. SysConfig
-msgid "Group, whose members have repository admin permissions in OPMS."
-msgstr "Skupina, ktorej členovia majú oprávnenia správcu úložiska v systéme OPMS."
-
-#. SysConfig
-msgid "Group, whose members will see CI test result information in OPMS screens."
-msgstr "Skupina, ktorej členovia uvidia informácie o výsledkoch testov CI na obrazovkách OPMS."
-
-#. SysConfig
-msgid "Groups an authenticated user (by user login and password) must be member of to build test packages via the public interface."
-msgstr "Skupiny, ktorých členom musí byť overený používateľ (podľa prihlasovacieho mena a hesla), aby mohol zostavovať testovacie balíky prostredníctvom verejného rozhrania."
-
-#. SysConfig
-msgid "Groups which will be set during git project creation processes while adding OPMS repositories."
-msgstr "Skupiny, ktoré sa nastavia počas procesov vytvárania projektu git pri pridávaní repozitárov OPMS."
-
-#. SysConfig
-msgid "Manage dynamic field in screens."
-msgstr "Správa dynamických polí na obrazovkách."
-
-#. SysConfig
-msgid "Manage your public SSH key(s) for Git access here. Make sure to save this preference when you add a new key."
-msgstr "Spravujte tu svoj verejný kľúč (kľúče) SSH pre prístup do systému Git. Pri pridávaní nového kľúča nezabudnite túto voľbu uložiť."
-
-#. SysConfig
-msgid "Module to generate statistics about the added code lines."
-msgstr "Modul na generovanie štatistík o pridaných riadkoch kódu."
-
-#. SysConfig
-msgid "Module to generate statistics about the growth of code."
-msgstr "Modul na generovanie štatistík o raste kódu."
-
-#. SysConfig
-msgid "Module to generate statistics about the number of git commits."
-msgstr "Modul na generovanie štatistík o počte revízií systému git."
-
-#. SysConfig
-msgid "Module to generate statistics about the removed code lines."
-msgstr "Modul na generovanie štatistík o odstránených riadkoch kódu."
-
-#. SysConfig
-msgid "OPMS"
-msgstr "OPMS"
-
-#. SysConfig
-msgid "Only users who have rw permissions in one of these groups may access git."
-msgstr "Prístup do systému git majú len používatelia, ktorí majú oprávnenie rw v jednej z týchto skupín."
-
-#. SysConfig
-msgid "Option to set a package compatibility manually."
-msgstr "Možnosť manuálneho nastavenia kompatibility balíka."
-
-#. SysConfig
-msgid "Parameters for the pages in the BranchView screen."
-msgstr "Parametre stránok na obrazovke BranchView."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITProjectName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Preddefinícia dynamického poľa \"GITProjectName\": Group => Skupina s prístupom k dynamickým poliam; AlwaysVisible => Pole možno odstrániť (0|1); InformationAreaName => Názov widgetov; InformationAreaSize => Veľkosť a pozícia widgetov (Large|Small); Name => Názov dynamického poľa, ktoré sa má použiť; Priority => Poradie dynamických polí; State => Stav polí (0 = vypnuté, 1 = aktívne, 2 = povinné), FilterRepository => Regex, ktorému musí vyhovovať názov úložiska, aby sa zobrazil, FilterPackage => Regex, ktorému musí vyhovovať názov balíka, aby sa zobrazil, FilterBranch => Regex, ktorému musí vyhovovať názov vetvy, aby sa zobrazil, FilterRelease => Regex, ktorému musí vyhovovať reťazec verzie repelentu, aby sa zobrazil."
-
-#. SysConfig
-msgid "Pre-Definition of the 'GITRepositoryName' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Preddefinícia dynamického poľa \"GITRepositoryName\": Group => Skupina s prístupom k dynamickým poliam; AlwaysVisible => Pole možno odstrániť (0|1); InformationAreaName => Názov widgetov; InformationAreaSize => Veľkosť a pozícia widgetov (Large|Small); Name => Názov dynamického poľa, ktoré sa má použiť; Priority => Poradie dynamických polí; State => Stav polí (0 = vypnuté, 1 = aktívne, 2 = povinné), FilterRepository => Regex, ktorému musí vyhovovať názov úložiska, aby sa zobrazil, FilterPackage => Regex, ktorému musí vyhovovať názov balíka, aby sa zobrazil, FilterBranch => Regex, ktorému musí vyhovovať názov vetvy, aby sa zobrazil, FilterRelease => Regex, ktorému musí vyhovovať reťazec verzie repelentu, aby sa zobrazil."
-
-#. SysConfig
-msgid "Pre-Definition of the 'PackageDeprecated' Dynamic Field: Group => Group with access to the Dynamic Fields; AlwaysVisible => Field can be removed (0|1); InformationAreaName => Name of the Widgets; InformationAreaSize => Size and position of the widgets (Large|Small); Name => Name of the Dynamic Field which should be used; Priority => Order of the Dynamic Fields; State => State of the Fields (0 = disabled, 1 = active, 2 = mandatory), FilterRepository => Regex which the repository name has to match to be displayed, FilterPackage => Regex which the package name has to match to be displayed, FilterBranch => Regex which the branch name has to match to be displayed, FilterRelease => Regex which the repelase version string has to match to be displayed."
-msgstr "Preddefinícia dynamického poľa \"PackageDeprecated\": Group => Skupina s prístupom k dynamickým poliam; AlwaysVisible => Pole možno odstrániť (0|1); InformationAreaName => Názov widgetov; InformationAreaSize => Veľkosť a pozícia widgetov (Large|Small); Name => Názov dynamického poľa, ktoré sa má použiť; Priority => Poradie dynamických polí; State => Stav polí (0 = vypnuté, 1 = aktívne, 2 = povinné), FilterRepository => Regex, ktorému musí vyhovovať názov úložiska, aby sa zobrazil, FilterPackage => Regex, ktorému musí vyhovovať názov balíka, aby sa zobrazil, FilterBranch => Regex, ktorému musí vyhovovať názov vetvy, aby sa zobrazil, FilterRelease => Regex, ktorému musí vyhovovať reťazec verzie repelentu, aby sa zobrazil."
-
-#. SysConfig
-msgid "Recipients that will be informed by email in case of errors."
-msgstr "Príjemcovia, ktorí budú v prípade chýb informovaní e-mailom."
-
-#. SysConfig
-msgid "SSH Keys for Git Access"
-msgstr "Kľúče SSH pre prístup k systému Git"
-
-#. SysConfig
-msgid "Send analysis file"
-msgstr "Odoslanie súboru analýzy"
-
-#. SysConfig
-msgid "Sets the git clone address to be used in repository listings."
-msgstr "Nastaví adresu klonu git, ktorá sa bude používať vo výpisoch úložísk."
-
-#. SysConfig
-msgid "Sets the home directory for git repositories."
-msgstr "Nastaví domovský adresár pre repozitáre git."
-
-#. SysConfig
-msgid "Sets the path for the BugzillaAddComment post receive script location."
-msgstr "Nastaví cestu k umiestneniu skriptu pre príjem príspevku BugzillaAddComment."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy  script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "Nastaví cestu k umiestneniu skriptu OTRSCodePolicy. Odporúča sa mať samostatný klon modulu OTRSCodePolicy, ktorý sa aktualizuje prostredníctvom cronu."
-
-#. SysConfig
-msgid "Sets the path for the OTRSCodePolicy pre receive script location. It is recommended to have a separate clone of the OTRSCodePolicy module that is updated via cron."
-msgstr "Nastaví cestu k umiestneniu skriptu OTRSCodePolicy pre príjem. Odporúča sa mať samostatný klon modulu OTRSCodePolicy, ktorý sa aktualizuje prostredníctvom cronu."
-
-#. SysConfig
-msgid "Show latest commits in git repositories."
-msgstr "Zobrazenie najnovších revízií v repozitároch git."
-
-#. SysConfig
-msgid "Shows a link in the menu to go create a unit test from the current ticket."
-msgstr "Zobrazí odkaz v ponuke na vytvorenie testu jednotky z aktuálneho tiketu."
-
-#. SysConfig
-msgid "Synchronize OPMS tables with a remote database."
-msgstr "Synchronizácia tabuliek OPMS so vzdialenou databázou."
-
-#. SysConfig
-msgid "The minimum version of the sphinx library."
-msgstr "Minimálna verzia knižnice sphinx."
-
-#. SysConfig
-msgid "The name of the sphinx theme to be used."
-msgstr "Názov témy sfingy, ktorá sa má použiť."
-
-#. SysConfig
-msgid "The path to the OTRS CSS file (relative below the static path)."
-msgstr "Cesta k súboru OTRS CSS (relatívna pod statickou cestou)."
-
-#. SysConfig
-msgid "The path to the OTRS logo (relative below the static path)."
-msgstr "Cesta k logu OTRS (relatívna pod statickou cestou)."
-
-#. SysConfig
-msgid "The path to the static folder, containing images and css files."
-msgstr "Cesta k statickému priečinku, ktorý obsahuje obrázky a css súbory."
-
-#. SysConfig
-msgid "The path to the theme folder, containing the sphinx themes."
-msgstr "Cesta k priečinku s témami, ktorý obsahuje témy sphinx."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable default columns."
-msgstr "Táto konfigurácia definuje všetky možné obrazovky na povolenie alebo zakázanie predvolených stĺpcov."
-
-#. SysConfig
-msgid "This configuration defines all possible screens to enable or disable dynamic fields."
-msgstr "Táto konfigurácia definuje všetky možné obrazovky na povolenie alebo zakázanie dynamických polí."
-
-#. SysConfig
-msgid "This configuration defines if only valids or all (invalids) dynamic fields should be shown."
-msgstr "Táto konfigurácia definuje, či sa majú zobrazovať iba validné alebo všetky (invalidné) dynamické polia."
-
-#. SysConfig
-msgid "This configuration defines if the OTRS package verification should be active or disabled. If disabled all packages are shown as verified. It's still recommended to use only verified packages."
-msgstr "Táto konfigurácia definuje, či má byť overovanie balíkov OTRS aktívne alebo zakázané. Ak je vypnutá, všetky balíky sa zobrazia ako overené. Stále sa odporúča používať len overené balíky."
-
-#. SysConfig
-msgid "This configuration defines the URL to the OTRS CloudService Proxy service. The http or https prefix will be added, depending on selection SysConfig 'Znuny4OTRSRepoType'."
-msgstr "Táto konfigurácia definuje adresu URL služby OTRS CloudService Proxy. Pridá sa prefix http alebo https v závislosti od výberu SysConfig 'Znuny4OTRSRepoType'."
-
-#. SysConfig
-msgid "This configuration registers a Output post-filter to extend package verification."
-msgstr "Táto konfigurácia registruje výstupný post-filter na rozšírenie overovania balíka."
-
-#. SysConfig
-msgid "This configuration registers an OutputFilter module that removes OTRS Business Solution TM advertisements."
-msgstr "Táto konfigurácia registruje modul OutputFilter, ktorý odstraňuje reklamy OTRS Business Solution TM."
-
-#. SysConfig
-msgid "This configuration registers an output filter to hide online repository selection in package manager."
-msgstr "Táto konfigurácia registruje výstupný filter na skrytie výberu online úložiska v správcovi balíkov."
-
-#. SysConfig
-msgid "Tidy unprocessed release that not passed test pomules checks for a long time."
-msgstr "Upratanie nespracovaného vydania, ktoré dlho neprešlo kontrolou testovacích pomúl."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to execute force pushes 'git push --force'."
-msgstr "Používatelia, ktorí majú oprávnenie rw v jednej z týchto skupín, môžu vykonávať vynútené tlačenie 'git push --force'."
-
-#. SysConfig
-msgid "Users who have rw permissions in one of these groups are permitted to manage projects. Additionally the members have administration permissions to the git management."
-msgstr "Používatelia, ktorí majú oprávnenie rw v jednej z týchto skupín, môžu spravovať projekty. Okrem toho majú členovia oprávnenia na správu git."
-
-#. ITSM class bundles
-msgid "1"
-msgstr "1"
-
-#. ITSM class bundles
-msgid "1 GB"
-msgstr "1 GB"
-
-#. ITSM class bundles
-msgid "1024 GB"
-msgstr "1024 GB"
-
-#. ITSM class bundles
-msgid "10U: 17.5 inches (44.45 cm)"
-msgstr "10U: 17,5 palca (44,45 cm)"
-
-#. ITSM class bundles
-msgid "11 GB"
-msgstr "11 GB"
-
-#. ITSM class bundles
-msgid "12 GB"
-msgstr "12 GB"
-
-#. ITSM class bundles
-msgid "128 GB"
-msgstr "128 GB"
-
-#. ITSM class bundles
-msgid "12U: 21 inches (53.34 cm)"
-msgstr "12U: 21 palcov (53,34 cm)"
-
-#. ITSM class bundles
-msgid "15U: 26.25 inches (66.68 cm)"
-msgstr "15U: 26,25 palca (66,68 cm)"
-
-#. ITSM class bundles
-msgid "16 GB"
-msgstr "16 GB"
-
-#. ITSM class bundles
-msgid "18U: 31.5 inches (80.01 cm)"
-msgstr "18U: 31,5 palca (80,01 cm)"
-
-#. ITSM class bundles
-msgid "19-inch Rack"
-msgstr "19-palcový stojan"
-
-#. ITSM class bundles
-msgid "1U: 1.75 inches (4.45 cm)"
-msgstr "1U: 1,75 palca (4,45 cm)"
-
-#. ITSM class bundles
-msgid "2"
-msgstr "2"
-
-#. ITSM class bundles
-msgid "2 GB"
-msgstr "2 GB"
-
-#. ITSM class bundles
-msgid "20U: 35 inches (88.9 cm)"
-msgstr "20U: 35 palcov (88,9 cm)"
-
-#. ITSM class bundles
-msgid "21-inch Rack"
-msgstr "21-palcový stojan"
-
-#. ITSM class bundles
-msgid "22U: 38.5 inches (97.79 cm)"
-msgstr "22U: 38,5 palca (97,79 cm)"
-
-#. ITSM class bundles
-msgid "23-inch Rack"
-msgstr "23-palcový stojan"
-
-#. ITSM class bundles
-msgid "23.6 inches (600 mm)"
-msgstr "23,6 palca (600 mm)"
-
-#. ITSM class bundles
-msgid "24 GB"
-msgstr "24 GB"
-
-#. ITSM class bundles
-msgid "24U: 42 inches (106.68 cm)"
-msgstr "24U: 42 palcov (106,68 cm)"
-
-#. ITSM class bundles
-msgid "256 GB"
-msgstr "256 GB"
-
-#. ITSM class bundles
-msgid "27\""
-msgstr "27\""
-
-#. ITSM class bundles
-msgid "27U: 47.25 inches (120.02 cm)"
-msgstr "27U: 47,25 palca (120,02 cm)"
-
-#. ITSM class bundles
-msgid "2K (2048 x 1080)"
-msgstr "2K (2048 x 1080)"
-
-#. ITSM class bundles
-msgid "2U: 3.5 inches (8.89 cm)"
-msgstr "2U: 3,5 palca (8,89 cm)"
-
-#. ITSM class bundles
-msgid "3"
-msgstr "3"
-
-#. ITSM class bundles
-msgid "30U: 52.5 inches (133.35 cm)"
-msgstr "30U: 52,5 palca (133,35 cm)"
-
-#. ITSM class bundles
-msgid "31.5 inches (800 mm)"
-msgstr "31,5 palca (800 mm)"
-
-#. ITSM class bundles
-msgid "32 GB"
-msgstr "32 GB"
-
-#. ITSM class bundles
-msgid "32\""
-msgstr "32\""
-
-#. ITSM class bundles
-msgid "33U: 57.75 inches (146.68 cm)"
-msgstr "33U: 57,75 palca (146,68 cm)"
-
-#. ITSM class bundles
-msgid "34\""
-msgstr "34\""
-
-#. ITSM class bundles
-msgid "35\""
-msgstr "35\""
-
-#. ITSM class bundles
-msgid "35.4 inches (900 mm)"
-msgstr "35,4 palca (900 mm)"
-
-#. ITSM class bundles
-msgid "36U: 63 inches (160.02 cm)"
-msgstr "36U: 63 palcov (160,02 cm)"
-
-#. ITSM class bundles
-msgid "39.4 inches (1000 mm)"
-msgstr "39,4 palca (1000 mm)"
-
-#. ITSM class bundles
-msgid "39U: 68.25 inches (173.35 cm)"
-msgstr "39U: 68,25 palca (173,35 cm)"
-
-#. ITSM class bundles
-msgid "3U: 5.25 inches (13.34 cm)"
-msgstr "3U: 5,25 palca (13,34 cm)"
-
-#. ITSM class bundles
-msgid "4"
-msgstr "4"
-
-#. ITSM class bundles
-msgid "4 GB"
-msgstr "4 GB"
-
-#. ITSM class bundles
-msgid "40\""
-msgstr "40\""
-
-#. ITSM class bundles
-msgid "42U: 73.5 inches (186.69 cm)"
-msgstr "42U: 73,5 palca (186,69 cm)"
-
-#. ITSM class bundles
-msgid "43\""
-msgstr "43\""
-
-#. ITSM class bundles
-msgid "43.3 inches (1100 mm):"
-msgstr "43,3 palca (1100 mm):"
-
-#. ITSM class bundles
-msgid "45U: 78.75 inches (200.02 cm)"
-msgstr "45U: 78,75 palca (200,02 cm)"
-
-#. ITSM class bundles
-msgid "47.2 inches (1200 mm)"
-msgstr "47,2 palca (1200 mm)"
-
-#. ITSM class bundles
-msgid "48 GB"
-msgstr "48 GB"
-
-#. ITSM class bundles
-msgid "48U: 84 inches (213.36 cm)"
-msgstr "48U: 84 palcov (213,36 cm)"
-
-#. ITSM class bundles
-msgid "49\""
-msgstr "49\""
-
-#. ITSM class bundles
-msgid "4K Ultra HD (3840 x 2160):"
-msgstr "4K Ultra HD (3840 x 2160):"
-
-#. ITSM class bundles
-msgid "4U: 7 inches (17.78 cm)"
-msgstr "4U: 7 palcov (17,78 cm)"
-
-#. ITSM class bundles
-msgid "5"
-msgstr "5"
-
-#. ITSM class bundles
-msgid "512 GB"
-msgstr "512 GB"
-
-#. ITSM class bundles
-msgid "55\""
-msgstr "55\""
-
-#. ITSM class bundles
-msgid "5K (5120 x 2880)"
-msgstr "5K (5120 x 2880)"
-
-#. ITSM class bundles
-msgid "5U: 8.75 inches (22.23 cm)"
-msgstr "5U: 8,75 palca (22,23 cm)"
-
-#. ITSM class bundles
-msgid "6"
-msgstr "6"
-
-#. ITSM class bundles
-msgid "64 GB"
-msgstr "64 GB"
-
-#. ITSM class bundles
-msgid "6U: 10.5 inches (26.67 cm)"
-msgstr "6U: 10,5 palca (26,67 cm)"
-
-#. ITSM class bundles
-msgid "7"
-msgstr "7"
-
-#. ITSM class bundles
-msgid "7U: 12.25 inches (31.12 cm)"
-msgstr "7U: 12,25 palca (31,12 cm)"
-
-#. ITSM class bundles
-msgid "8"
-msgstr "8"
-
-#. ITSM class bundles
-msgid "8 GB"
-msgstr "8 GB"
-
-#. ITSM class bundles
-msgid "8K Ultra HD (7680 x 4320)"
-msgstr "8K Ultra HD (7680 x 4320)"
-
-#. ITSM class bundles
-msgid "8U: 14 inches (35.56 cm)"
-msgstr "8U: 14 palcov (35,56 cm)"
-
-#. ITSM class bundles
-msgid "9"
-msgstr "9"
-
-#. ITSM class bundles
-msgid "96 GB"
-msgstr "96 GB"
-
-#. ITSM class bundles
-msgid "9U: 15.75 inches (40.01 cm)"
-msgstr "9U: 15,75 palca (40,01 cm)"
-
-#. ITSM class bundles
-msgid "AGP"
-msgstr "AGP"
-
-#. ITSM class bundles
-msgid "Accounting"
-msgstr "Účtovníctvo"
-
-#. ITSM class bundles
-msgid "Address Allocation"
-msgstr "Prideľovanie adries"
-
-#. ITSM class bundles
-msgid "Administrator"
-msgstr "Správca"
-
-#. ITSM class bundles
-msgid "Appliance Type"
-msgstr "Typ spotrebiča"
-
-#. ITSM class bundles
-msgid "Backlinks"
-msgstr "Spätné odkazy"
-
-#. ITSM class bundles
-msgid "Battery Capacity (Ah)"
-msgstr "Kapacita batérie (Ah)"
-
-#. ITSM class bundles
-msgid "Battery Type"
-msgstr "Typ batérie"
-
-#. ITSM class bundles
-msgid "Bus Interface"
-msgstr "Rozhranie zbernice"
-
-#. ITSM class bundles
-msgid "CIDR"
-msgstr "CIDR"
-
-#. ITSM class bundles
-msgid "CPU Class"
-msgstr "Trieda CPU"
-
-#. ITSM class bundles
-msgid "Capacity (GB)"
-msgstr "Kapacita (GB)"
-
-#. ITSM class bundles
-msgid "Capacity per graphics card"
-msgstr "Kapacita na grafickú kartu"
-
-#. ITSM class bundles
-msgid "Card Number"
-msgstr "Číslo karty"
-
-#. ITSM class bundles
-msgid "Card Type"
-msgstr "Typ karty"
-
-#. ITSM class bundles
-msgid "Chroma DB"
-msgstr "Chroma DB"
-
-#. ITSM class bundles
-msgid "Client Certificates"
-msgstr "Certifikáty klientov"
-
-#. ITSM class bundles
-msgid "Client Software"
-msgstr "Klientsky softvér"
-
-#. ITSM class bundles
-msgid "Client category"
-msgstr "Kategória klientov"
-
-#. ITSM class bundles
-msgid "Clockrate"
-msgstr "Hodiny"
-
-#. ITSM class bundles
-msgid "Clockspeed"
-msgstr "Rýchlosť hodín"
-
-#. ITSM class bundles
-msgid "Code Signing Certificates"
-msgstr "Certifikáty na podpisovanie kódu"
-
-#. ITSM class bundles
-msgid "Contact"
-msgstr "Kontakt"
-
-#. ITSM class bundles
-msgid "Contact Distributor"
-msgstr "Kontakt na distribútora"
-
-#. ITSM class bundles
-msgid "Contract"
-msgstr "Zmluva"
-
-#. ITSM class bundles
-msgid "Contract Type"
-msgstr "Typ zmluvy"
-
-#. ITSM class bundles
-msgid "Contract period from"
-msgstr "Zmluvné obdobie od"
-
-#. ITSM class bundles
-msgid "Contract period until"
-msgstr "Obdobie platnosti zmluvy do"
-
-#. ITSM class bundles
-msgid "Cost unit"
-msgstr "Nákladová jednotka"
-
-#. ITSM class bundles
-msgid "Count of licenses"
-msgstr "Počet licencií"
-
-#. ITSM class bundles
-msgid "Creation Date"
-msgstr "Dátum vytvorenia"
-
-#. ITSM class bundles
-msgid "Custom Rack"
-msgstr "Vlastný stojan"
-
-#. ITSM class bundles
-msgid "DHCP"
-msgstr "DHCP"
-
-#. ITSM class bundles
-msgid "DHCP Reserved"
-msgstr "DHCP Rezervované"
-
-#. ITSM class bundles
-msgid "DVI"
-msgstr "DVI"
-
-#. ITSM class bundles
-msgid "Date of Invoice"
-msgstr "Dátum faktúry"
-
-#. ITSM class bundles
-msgid "Date of Order"
-msgstr "Dátum objednávky"
-
-#. ITSM class bundles
-msgid "Date of Warranty"
-msgstr "Dátum záruky"
-
-#. ITSM class bundles
-msgid "Date of release"
-msgstr "Dátum vydania"
-
-#. ITSM class bundles
-msgid "DisplayPort"
-msgstr "DisplayPort"
-
-#. ITSM class bundles
-msgid "Document Signing Certificates"
-msgstr "Certifikáty na podpisovanie dokumentov"
-
-#. ITSM class bundles
-msgid "EISA"
-msgstr "EISA"
-
-#. ITSM class bundles
-msgid "ETSI Rack"
-msgstr "ETSI Rack"
-
-#. ITSM class bundles
-msgid "Elasticsearch"
-msgstr "Elasticsearch"
-
-#. ITSM class bundles
-msgid "Email Certificates (S/MIME Certificates)"
-msgstr "E-mailové certifikáty (certifikáty S/MIME)"
-
-#. ITSM class bundles
-msgid "End IP Address"
-msgstr "Koncová IP adresa"
-
-#. ITSM class bundles
-msgid "End of support"
-msgstr "Ukončenie podpory"
-
-#. ITSM class bundles
-msgid "Expiry Date"
-msgstr "Dátum skončenia platnosti"
-
-#. ITSM class bundles
-msgid "FireWire (IEEE 1394)"
-msgstr "FireWire (IEEE 1394)"
-
-#. ITSM class bundles
-msgid "Firmware"
-msgstr "Firmvér"
-
-#. ITSM class bundles
-msgid "Flywheel Energy Storage"
-msgstr "Skladovanie energie na zotrvačníku"
-
-#. ITSM class bundles
-msgid "Form Factor"
-msgstr "Faktor formy"
-
-#. ITSM class bundles
-msgid "Full HD (1920 x 1080)"
-msgstr "Rozlíšenie Full HD (1920 x 1080)"
-
-#. ITSM class bundles
-msgid "General Information"
-msgstr "Všeobecné informácie"
-
-#. ITSM class bundles
-msgid "Graphics Cards"
-msgstr "Grafické karty"
-
-#. ITSM class bundles
-msgid "Graphics card"
-msgstr "Grafická karta"
-
-#. ITSM class bundles
-msgid "HD (1280 x 720)"
-msgstr "HD (1280 x 720)"
-
-#. ITSM class bundles
-msgid "HDMI"
-msgstr "HDMI"
-
-#. ITSM class bundles
-msgid "Hardware Model"
-msgstr "Model hardvéru"
-
-#. ITSM class bundles
-msgid "Hardware Weight"
-msgstr "Hmotnosť hardvéru"
-
-#. ITSM class bundles
-msgid "IBM Db2"
-msgstr "IBM Db2"
-
-#. ITSM class bundles
-msgid "IP Protocol"
-msgstr "Protokol IP"
-
-#. ITSM class bundles
-msgid "IPv4"
-msgstr "IPv4"
-
-#. ITSM class bundles
-msgid "IPv6"
-msgstr "IPv6"
-
-#. ITSM class bundles
-msgid "ISA"
-msgstr "ISA"
-
-#. ITSM class bundles
-msgid "Inventory Number"
-msgstr "Inventárne číslo"
-
-#. ITSM class bundles
-msgid "Inverstment costs"
-msgstr "Náklady na inverstráciu"
-
-#. ITSM class bundles
-msgid "Invoice Number"
-msgstr "Číslo faktúry"
-
-#. ITSM class bundles
-msgid "LCD Monitor (Liquid Crystal Display)"
-msgstr "LCD monitor (displej z tekutých kryštálov)"
-
-#. ITSM class bundles
-msgid "LED Monitor (Light Emitting Diode)"
-msgstr "Monitor LED (svetelná dióda)"
-
-#. ITSM class bundles
-msgid "LPC (Low Pin Count)"
-msgstr "LPC (nízky počet pinov)"
-
-#. ITSM class bundles
-msgid "Latitude"
-msgstr "Zemepisná šírka"
-
-#. ITSM class bundles
-msgid "Layer 1: Physical Layer"
-msgstr "Vrstva 1: Fyzická vrstva"
-
-#. ITSM class bundles
-msgid "Layer 2: Data Link Layer"
-msgstr "Vrstva 2: vrstva dátového spojenia"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer"
-msgstr "Vrstva 3: Sieťová vrstva"
-
-#. ITSM class bundles
-msgid "Layer 3: Network Layer (Supernet)"
-msgstr "Vrstva 3: Sieťová vrstva (Supernet)"
-
-#. ITSM class bundles
-msgid "Layer 4: Transport Layer"
-msgstr "Vrstva 4: Transportná vrstva"
-
-#. ITSM class bundles
-msgid "Layer 5: Session Layer"
-msgstr "Vrstva 5: Realizačná vrstva"
-
-#. ITSM class bundles
-msgid "Layer 6: Presentation Layer"
-msgstr "Vrstva 6: prezentačná vrstva"
-
-#. ITSM class bundles
-msgid "Layer 7: Application Layer"
-msgstr "Vrstva 7: Aplikačná vrstva"
-
-#. ITSM class bundles
-msgid "License Key"
-msgstr "Licenčný kľúč"
-
-#. ITSM class bundles
-msgid "License Type"
-msgstr "Typ licencie"
-
-#. ITSM class bundles
-msgid "License period from"
-msgstr "Obdobie platnosti licencie od"
-
-#. ITSM class bundles
-msgid "License period until"
-msgstr "Doba platnosti licencie do"
-
-#. ITSM class bundles
-msgid "Lithium Iron Phosphate (LiFePO4) Battery"
-msgstr "Batéria s fosfátom lítia a železa (LiFePO4)"
-
-#. ITSM class bundles
-msgid "Lithium-Ion (Li-ion) Battery"
-msgstr "Lítium-iónová (Li-ion) batéria"
-
-#. ITSM class bundles
-msgid "Located in"
-msgstr "Nachádza sa v"
-
-#. ITSM class bundles
-msgid "Longitude"
-msgstr "Zemepisná dĺžka"
-
-#. ITSM class bundles
-msgid "MCA (Micro Channel Architecture)"
-msgstr "MCA (mikrokanálová architektúra)"
-
-#. ITSM class bundles
-msgid "Manufacturer"
-msgstr "Výrobca"
-
-#. ITSM class bundles
-msgid "MariaDB"
-msgstr "MariaDB"
-
-#. ITSM class bundles
-msgid "Maximum Load Capacity (W)"
-msgstr "Maximálna nosnosť (W)"
-
-#. ITSM class bundles
-msgid "Memory"
-msgstr "Pamäť"
-
-#. ITSM class bundles
-msgid "Memory Type"
-msgstr "Typ pamäte"
-
-#. ITSM class bundles
-msgid "Microsoft SQL Server"
-msgstr "Microsoft SQL Server"
-
-#. ITSM class bundles
-msgid "Mini-Rack"
-msgstr "Minirack"
-
-#. ITSM class bundles
-msgid "Mobile Number"
-msgstr "Mobilné číslo"
-
-#. ITSM class bundles
-msgid "Model Description"
-msgstr "Popis modelu"
-
-#. ITSM class bundles
-msgid "MongoDB"
-msgstr "MongoDB"
-
-#. ITSM class bundles
-msgid "Monitor Resolution"
-msgstr "Rozlíšenie monitora"
-
-#. ITSM class bundles
-msgid "Monitor Size"
-msgstr "Veľkosť monitora"
-
-#. ITSM class bundles
-msgid "MySQL"
-msgstr "MySQL"
-
-#. ITSM class bundles
-msgid "Network Info"
-msgstr "Informácie o sieti"
-
-#. ITSM class bundles
-msgid "Network Information"
-msgstr "Informácie o sieti"
-
-#. ITSM class bundles
-msgid "Network Layer"
-msgstr "Sieťová vrstva"
-
-#. ITSM class bundles
-msgid "Nickel-Cadmium (NiCd) Battery"
-msgstr "Nikel-kadmiová (NiCd) batéria"
-
-#. ITSM class bundles
-msgid "Nickel-Metal Hydride (NiMH) Battery"
-msgstr "Nikel-metalhydridová (NiMH) batéria"
-
-#. ITSM class bundles
-msgid "NuBus"
-msgstr "NuBus"
-
-#. ITSM class bundles
-msgid "Number of CPUs"
-msgstr "Počet procesorov"
-
-#. ITSM class bundles
-msgid "Number of RAM modules"
-msgstr "Počet modulov RAM"
-
-#. ITSM class bundles
-msgid "Number of graphics cards"
-msgstr "Počet grafických kariet"
-
-#. ITSM class bundles
-msgid "OLED Monitor (Organic Light Emitting Diode)"
-msgstr "Monitor OLED (organická dióda emitujúca svetlo)"
-
-#. ITSM class bundles
-msgid "Operating costs"
-msgstr "Prevádzkové náklady"
-
-#. ITSM class bundles
-msgid "Oracle Database"
-msgstr "Databáza Oracle"
-
-#. ITSM class bundles
-msgid "Order Number"
-msgstr "Objednávacie číslo"
-
-#. ITSM class bundles
-msgid "Outputs"
-msgstr "Výstupy"
-
-#. ITSM class bundles
-msgid "PCI"
-msgstr "PCI"
-
-#. ITSM class bundles
-msgid "PCI Express (PCIe)"
-msgstr "PCI Express (PCIe)"
-
-#. ITSM class bundles
-msgid "PCI-X"
-msgstr "PCI-X"
-
-#. ITSM class bundles
-msgid "PIN"
-msgstr "PIN"
-
-#. ITSM class bundles
-msgid "PIN 2"
-msgstr "PIN 2"
-
-#. ITSM class bundles
-msgid "PUK"
-msgstr "PUK"
-
-#. ITSM class bundles
-msgid "PUK 2"
-msgstr "PUK 2"
-
-#. ITSM class bundles
-msgid "Phone Number"
-msgstr "Telefónne číslo"
-
-#. ITSM class bundles
-msgid "Phone Type"
-msgstr "Typ telefónu"
-
-#. ITSM class bundles
-msgid "Physical Cores"
-msgstr "Fyzické jadrá"
-
-#. ITSM class bundles
-msgid "PostgreSQL"
-msgstr "PostgreSQL"
-
-#. ITSM class bundles
-msgid "Power Delivery"
-msgstr "Dodávka energie"
-
-#. ITSM class bundles
-msgid "Purchased at"
-msgstr "Zakúpené v"
-
-#. ITSM class bundles
-msgid "Quad HD (2560 x 1440)"
-msgstr "Quad HD (2560 x 1440)"
-
-#. ITSM class bundles
-msgid "Rack Depth"
-msgstr "Hĺbka stojana"
-
-#. ITSM class bundles
-msgid "Rack Units (U)"
-msgstr "Regálové jednotky (U)"
-
-#. ITSM class bundles
-msgid "Redis"
-msgstr "Redis"
-
-#. ITSM class bundles
-msgid "Reference to Customer"
-msgstr "Odkaz na zákazníka"
-
-#. ITSM class bundles
-msgid "SIM Card"
-msgstr "Karta SIM"
-
-#. ITSM class bundles
-msgid "SQLite"
-msgstr "SQLite"
-
-#. ITSM class bundles
-msgid "SSL/TLS Certificates"
-msgstr "Certifikáty SSL/TLS"
-
-#. ITSM class bundles
-msgid "Sealed Lead-Acid (SLA) Battery"
-msgstr "Uzavretá olovená batéria (SLA)"
-
-#. ITSM class bundles
-msgid "Serialnumber"
-msgstr "Sériové číslo"
-
-#. ITSM class bundles
-msgid "Server Software"
-msgstr "Serverový softvér"
-
-#. ITSM class bundles
-msgid "Service Tag"
-msgstr "Servisný štítok"
-
-#. ITSM class bundles
-msgid "Socket Type"
-msgstr "Typ zásuvky"
-
-#. ITSM class bundles
-msgid "Start IP Address"
-msgstr "Počiatočná IP adresa"
-
-#. ITSM class bundles
-msgid "Storage"
-msgstr "Úložisko"
-
-#. ITSM class bundles
-msgid "Storage Partition"
-msgstr "Úložný oddiel"
-
-#. ITSM class bundles
-msgid "Subsidiary"
-msgstr "Dcérska spoločnosť"
+msgid "productive"
+msgstr "produktívne"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Summary"
 msgstr "Zhrnutie"
 
-#. ITSM class bundles
-msgid "Threads"
-msgstr "Vlákna"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Info"
+msgstr "Informácie o sieti"
 
-#. ITSM class bundles
-msgid "Thunderbolt"
-msgstr "Thunderbolt"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting"
+msgstr "Účtovníctvo"
 
-#. ITSM class bundles
-msgid "Total Graphics card RAM (GB)"
-msgstr "Celková pamäť RAM grafickej karty (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Located in"
+msgstr "Nachádza sa v"
 
-#. ITSM class bundles
-msgid "Total RAM (GB)"
-msgstr "Celková pamäť RAM (GB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Order"
+msgstr "Dátum objednávky"
 
-#. ITSM class bundles
-msgid "Touchscreen Monitor"
-msgstr "Dotykový monitor"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Information"
+msgstr "Informácie o sieti"
 
-#. ITSM class bundles
-msgid "Tower"
-msgstr "Veža"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Operating costs"
+msgstr "Prevádzkové náklady"
 
-#. ITSM class bundles
-msgid "USB (Universal Serial Bus)"
-msgstr "USB (Universal Serial Bus)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Tag"
+msgstr "Servisný štítok"
 
-#. ITSM class bundles
-msgid "USB-C"
-msgstr "USB-C"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Warranty"
+msgstr "Dátum záruky"
 
-#. ITSM class bundles
-msgid "UWQHD (3440 x 1440)"
-msgstr "UWQHD (3440 x 1440)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Manufacturer"
+msgstr "Výrobca"
 
-#. ITSM class bundles
-msgid "VESA Local Bus (VLB)"
-msgstr "Miestna zbernica VESA (VLB)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model Description"
+msgstr "Popis modelu"
 
-#. ITSM class bundles
-msgid "VGA"
-msgstr "VGA"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact Distributor"
+msgstr "Kontakt na distribútora"
 
-#. ITSM class bundles
-msgid "VirtualLink"
-msgstr "VirtualLink"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Appliance Type"
+msgstr "Typ spotrebiča"
 
-#. ITSM class bundles
-msgid "WUXGA (1920 x 1200)"
-msgstr "WUXGA (1920 x 1200)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone / VoIP"
+msgstr ""
 
-#. ITSM class bundles
-msgid "WXGA (1366 x 768)"
-msgstr "WXGA (1366 x 768)"
-
-#. ITSM class bundles
-msgid "Analog Phone"
-msgstr "Analógový telefón"
-
-#. ITSM class bundles
-msgid "Card Reader"
-msgstr "Čítačka kariet"
-
-#. ITSM class bundles
-msgid "Conference Phone"
-msgstr "Konferenčný telefón"
-
-#. ITSM class bundles
-msgid "Consulting Agreement"
-msgstr "Dohoda o poradenstve"
-
-#. ITSM class bundles
-msgid "Container Management"
-msgstr "Správa kontajnerov"
-
-#. ITSM class bundles
-msgid "Cordless Phone (DECT Phone)"
-msgstr "Bezdrôtový telefón (telefón DECT)"
-
-#. ITSM class bundles
-msgid "DNS-Server"
-msgstr "Server DNS"
-
-#. ITSM class bundles
-msgid "Employment Contract"
-msgstr "Pracovná zmluva"
-
-#. ITSM class bundles
-msgid "External Hard Drive"
-msgstr "Externý pevný disk"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Firewall"
 msgstr "Firewall"
 
-#. ITSM class bundles
-msgid "Franchise Agreement"
-msgstr "Franchisingová zmluva"
-
-#. ITSM class bundles
-msgid "Headset"
-msgstr "Náhlavná súprava"
-
-#. ITSM class bundles
-msgid "Identity and Access Management (IAM)"
-msgstr "Správa identít a prístupu (IAM)"
-
-#. ITSM class bundles
-msgid "Landline Phone"
-msgstr "Telefón pevnej linky"
-
-#. ITSM class bundles
-msgid "Lease Agreement"
-msgstr "Nájomná zmluva"
-
-#. ITSM class bundles
-msgid "License Agreement"
-msgstr "Licenčná zmluva"
-
-#. ITSM class bundles
-msgid "Loan Agreement"
-msgstr "Zmluva o pôžičke"
-
-#. ITSM class bundles
-msgid "Mobile/Embedded"
-msgstr "Mobilné/vložené"
-
-#. ITSM class bundles
-msgid "Non-Disclosure Agreement (NDA)"
-msgstr "Dohoda o mlčanlivosti (NDA)"
-
-#. ITSM class bundles
-msgid "Notebook"
-msgstr "Notebook"
-
-#. ITSM class bundles
-msgid "OTOBO"
-msgstr "OTOBO"
-
-#. ITSM class bundles
-msgid "Partnership Agreement"
-msgstr "Dohoda o partnerstve"
-
-#. ITSM class bundles
-msgid "Phone / VOIP"
-msgstr "Telefón / VOIP"
-
-#. ITSM class bundles
-msgid "Sales Contract"
-msgstr "Predajná zmluva"
-
-#. ITSM class bundles
-msgid "Satellite Phone"
-msgstr "Satelitný telefón"
-
-#. ITSM class bundles
-msgid "Service Agreement"
-msgstr "Zmluva o poskytovaní služieb"
-
-#. ITSM class bundles
-msgid "Speakers"
-msgstr "Reproduktory"
-
-#. ITSM class bundles
-msgid "Thin Client"
-msgstr "Tenký klient"
-
-#. ITSM class bundles
-msgid "USB Hub"
-msgstr "Rozbočovač USB"
-
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VPN"
 msgstr "VPN"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DNS-Server"
+msgstr "Server DNS"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Container Management"
+msgstr "Správa kontajnerov"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Identity and Access Management (IAM)"
+msgstr "Správa identít a prístupu (IAM)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Other"
+msgstr "Iné"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Order Number"
+msgstr "Objednávacie číslo"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cost unit"
+msgstr "Nákladová jednotka"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of Invoice"
+msgstr "Dátum faktúry"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Model"
+msgstr "Model"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Purchased at"
+msgstr "Zakúpené v"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Invoice Number"
+msgstr "Číslo faktúry"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Administrator"
+msgstr "Správca"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inverstment costs"
+msgstr "Náklady na inverstráciu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Inventory Number"
+msgstr "Inventárne číslo"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Serialnumber"
+msgstr "Sériové číslo"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subsidiary"
+msgstr "Dcérska spoločnosť"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SSL/TLS Certificates"
+msgstr "Certifikáty SSL/TLS"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Code Signing Certificates"
+msgstr "Certifikáty na podpisovanie kódu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Email Certificates (S/MIME Certificates)"
+msgstr "E-mailové certifikáty (certifikáty S/MIME)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Document Signing Certificates"
+msgstr "Certifikáty na podpisovanie dokumentov"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Certificates"
+msgstr "Certifikáty klientov"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creation Date"
+msgstr "Dátum vytvorenia"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Expiry Date"
+msgstr "Dátum skončenia platnosti"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware"
+msgstr "Hardvér"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Software"
+msgstr "Softvér"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of graphics cards"
+msgstr "Počet grafických kariet"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total Graphics card RAM (GB)"
+msgstr "Celková pamäť RAM grafickej karty (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client category"
+msgstr "Kategória klientov"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Notebook"
+msgstr "Notebook"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Desktop"
+msgstr "Stolný počítač"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Virtual Client"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thin Client"
+msgstr "Tenký klient"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage Partition"
+msgstr "Úložný oddiel"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Count"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Physical Cores"
+msgstr "Fyzické jadrá"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Storage"
+msgstr "Úložisko"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Outputs"
+msgstr "Výstupy"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DVI"
+msgstr "DVI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VGA"
+msgstr "VGA"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "HDMI"
+msgstr "HDMI"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VirtualLink"
+msgstr "VirtualLink"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DisplayPort"
+msgstr "DisplayPort"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB-C"
+msgstr "USB-C"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory Type"
+msgstr "Typ pamäte"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Bus Interface"
+msgstr "Rozhranie zbernice"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics card"
+msgstr "Grafická karta"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Threads"
+msgstr "Vlákna"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity per graphics card"
+msgstr "Kapacita na grafickú kartu"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockrate"
+msgstr "Hodiny"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Clockspeed"
+msgstr "Rýchlosť hodín"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Client Software"
+msgstr "Klientsky softvér"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period from"
+msgstr "Obdobie platnosti licencie od"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Total RAM (GB)"
+msgstr "Celková pamäť RAM (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of RAM modules"
+msgstr "Počet modulov RAM"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Number of CPUs"
+msgstr "Počet procesorov"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Capacity (GB)"
+msgstr "Kapacita (GB)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Socket Type"
+msgstr "Typ zásuvky"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU Class"
+msgstr "Trieda CPU"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile/Embedded"
+msgstr "Mobilné/vložené"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Laptop"
+msgstr "Laptop"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Type"
+msgstr "Typ licencie"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License period until"
+msgstr "Doba platnosti licencie do"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Firmware"
+msgstr "Firmvér"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Accounting Information"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract Type"
+msgstr "Typ zmluvy"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Service Agreement"
+msgstr "Zmluva o poskytovaní služieb"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Non-Disclosure Agreement (NDA)"
+msgstr "Dohoda o mlčanlivosti (NDA)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Agreement"
+msgstr "Licenčná zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Franchise Agreement"
+msgstr "Franchisingová zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Loan Agreement"
+msgstr "Zmluva o pôžičke"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Consulting Agreement"
+msgstr "Dohoda o poradenstve"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lease Agreement"
+msgstr "Nájomná zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Employment Contract"
+msgstr "Pracovná zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sales Contract"
+msgstr "Predajná zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Partnership Agreement"
+msgstr "Dohoda o partnerstve"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period until"
+msgstr "Obdobie platnosti zmluvy do"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract period from"
+msgstr "Zmluvné obdobie od"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End of support"
+msgstr "Ukončenie podpory"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Date of release"
+msgstr "Dátum vydania"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Size"
+msgstr "Veľkosť monitora"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Power Delivery"
+msgstr "Dodávka energie"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Touchscreen Monitor"
+msgstr "Dotykový monitor"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LED Monitor (Light Emitting Diode)"
+msgstr "Monitor LED (svetelná dióda)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "OLED Monitor (Organic Light Emitting Diode)"
+msgstr "Monitor OLED (organická dióda emitujúca svetlo)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LCD Monitor (Liquid Crystal Display)"
+msgstr "LCD monitor (displej z tekutých kryštálov)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Monitor Resolution"
+msgstr "Rozlíšenie monitora"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CIDR"
+msgstr "CIDR"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Start IP Address"
+msgstr "Počiatočná IP adresa"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network Layer"
+msgstr "Sieťová vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 2: Data Link Layer"
+msgstr "Vrstva 2: vrstva dátového spojenia"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 5: Session Layer"
+msgstr "Vrstva 5: Realizačná vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 7: Application Layer"
+msgstr "Vrstva 7: Aplikačná vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer (Supernet)"
+msgstr "Vrstva 3: Sieťová vrstva (Supernet)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 6: Presentation Layer"
+msgstr "Vrstva 6: prezentačná vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 1: Physical Layer"
+msgstr "Vrstva 1: Fyzická vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 3: Network Layer"
+msgstr "Vrstva 3: Sieťová vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Layer 4: Transport Layer"
+msgstr "Vrstva 4: Transportná vrstva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "End IP Address"
+msgstr "Koncová IP adresa"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "IP Protocol"
+msgstr "Protokol IP"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Address Allocation"
+msgstr "Prideľovanie adries"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP Reserved"
+msgstr "DHCP Rezervované"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "DHCP"
+msgstr "DHCP"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contact"
+msgstr "Kontakt"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Contract"
+msgstr "Zmluva"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CPU"
+msgstr "CPU"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Form Factor"
+msgstr "Faktor formy"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "General Information"
+msgstr "Všeobecné informácie"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Graphics Cards"
+msgstr "Grafické karty"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Memory"
+msgstr "Pamäť"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Model"
+msgstr "Model hardvéru"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Network"
+msgstr "Sieť"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Server Software"
+msgstr "Serverový softvér"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "SIM Card"
+msgstr "Karta SIM"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Count of licenses"
+msgstr "Počet licencií"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Seat licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MIT Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "MPL (Mozilla Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Creative Commons"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Perpetual licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "EPL (Eclipse Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "BSD Lizenz (Berkeley Software Distribution License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "AGPL (Affero General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Freeware"
+msgstr "Freeware"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Subscription-based licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "CC0 (Creative Commons Zero)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "GPL (General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Public Domain"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Volume licenses"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Apache Lizenz"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Shareware"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "LGPL (Lesser General Public License)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "License Key"
+msgstr "Licenčný kľúč"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mobile Number"
+msgstr "Mobilné číslo"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Reader"
+msgstr "Čítačka kariet"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "VR Headset"
 msgstr "Náhlavná súprava VR"
 
-#. ITSM class bundles
-msgid "VoIP Phone"
-msgstr "Telefón VoIP"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Headset"
+msgstr "Náhlavná súprava"
 
-#. ITSM class bundles
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "External Hard Drive"
+msgstr "Externý pevný disk"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Speakers"
+msgstr "Reproduktory"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "USB Hub"
+msgstr "Rozbočovač USB"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mouse"
+msgstr "Myš"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Keyboard"
+msgstr "Klávesnica"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Webcam"
 msgstr "Webová kamera"
 
-#. Template: AgentITSMConfigItemEdit
-msgid "Version number of this config item"
-msgstr "Číslo verzie tejto položky konfigurácie"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Number"
+msgstr "Telefónne číslo"
 
-#. JS File: ITSM.Admin.ITSMConfigItem
-msgid "Importing classes/roles and their related fields"
-msgstr "Importovanie tried/rolí a ich súvisiacich polí"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Phone Type"
+msgstr "Typ telefónu"
 
-#. SysConfig
-msgid "Columns that can be filtered in the config item search result overview of the agent interface. Note: Only Config Item attributes and Dynamic Fields (DynamicField_NameX) are allowed."
-msgstr "Stĺpce, ktoré možno filtrovať v prehľade výsledkov vyhľadávania konfiguračných položiek v rozhraní agenta. Poznámka: Povolené sú len atribúty konfiguračnej položky a dynamické polia (DynamicField_NameX)."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "VoIP Phone"
+msgstr "Telefón VoIP"
 
-#. Perl Module: Kernel/System/ITSMConfigItem/Definition.pm
-msgid "Base structure is not valid. Please provide a hash with data in YAML format."
-msgstr "Základná štruktúra nie je platná. Poskytnite hash s údajmi vo formáte YAML."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Satellite Phone"
+msgstr "Satelitný telefón"
 
-#. SysConfig
-msgid "At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the field configured under \"TimeCIKey\" of the ConfigItem, and modified by \"TimeModifier\". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): \"7\" is equivalent to \"+7d\". The DynamicField \"Ticket->DynamicField\" will be used to mark created tickets - it has to exist. The flags \\\\<OTOBO_CONFIGITEM_X\\\\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in \"Ticket->Text\"."
-msgstr "V určitom časovom bode vytvorte lístok pre konfiguračné položky, ak sú splnené nakonfigurované požiadavky. Časový bod je určený hodnotou poľa nakonfigurovaného v položke \"TimeCIKey\" položky ConfigItem a upraveného pomocou \"TimeModifier\". Ak ten môže byť buď len číslo, alebo znamienko (+/-), číslo a jednotka (d/h/m): \"7\" je ekvivalentné \"+7d\". Na označenie vytvorených lístkov sa použije dynamické pole \"Ticket->DynamicField\" - musí existovať. Príznaky \\\\<OTOBO_CONFIGITEM_X\\\\>, kde X môže byť NAME (názov), NUMBER (číslo) a DATE (dátum), budú nahradené príslušnými hodnotami v \"Ticket->Text\" (lístok->text)."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Analog Phone"
+msgstr "Analógový telefón"
 
-#. SysConfig
-msgid "Config item event module that count the licenses for OTOBOCILicenseCount feature."
-msgstr "Modul udalostí konfiguračnej položky, ktorý počíta licencie pre funkciu OTOBOCILicenseCount."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Conference Phone"
+msgstr "Konferenčný telefón"
 
-#. SysConfig
-msgid "Creates Tickets for ConfigItems at specific time points."
-msgstr "Vytvára lístky pre položky ConfigItems v určitých časových bodoch."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Cordless Phone (DECT Phone)"
+msgstr "Bezdrôtový telefón (telefón DECT)"
 
-#. SysConfig
-msgid "If this option is activated, linked items are only counted if they belong to one of the listed classes."
-msgstr "Ak je táto možnosť aktivovaná, prepojené položky sa započítajú len vtedy, ak patria do jednej z uvedených tried."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Landline Phone"
+msgstr "Telefón pevnej linky"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s with the existing type DependsOn."
-msgstr "Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI s existujúcim typom DependsOn."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Depth"
+msgstr "Hĺbka stojana"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s."
-msgstr "Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23.6 inches (600 mm)"
+msgstr "23,6 palca (600 mm)"
 
-#. SysConfig
-msgid "With this option it´s possible to fill automaticly a CI field, depending on the count of linked CI´s. The setting CounterClassName include the name of the class and CounterFieldName is used to store the count of used licence."
-msgstr "Pomocou tejto možnosti je možné automaticky vyplniť pole CI v závislosti od počtu prepojených CI. Nastavenie CounterClassName obsahuje názov triedy a CounterFieldName sa používa na uloženie počtu použitých licencií."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39.4 inches (1000 mm)"
+msgstr "39,4 palca (1000 mm)"
 
-#. SysConfig
-msgid "Defines the initial height for the rich text editor component in pixels."
-msgstr "Definuje počiatočnú výšku komponentu textového editora v pixeloch."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "47.2 inches (1200 mm)"
+msgstr "47,2 palca (1200 mm)"
 
-#. SysConfig
-msgid "Defines if parent-child translations for queues and services should be generated automatically."
-msgstr "Definuje, či sa majú automaticky generovať preklady rodič-dieťa pre fronty a služby."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "35.4 inches (900 mm)"
+msgstr "35,4 palca (900 mm)"
 
-#. SysConfig
-msgid "Defines the initial height in pixels for the rich text editor component for this screen."
-msgstr "Definuje počiatočnú výšku v pixeloch pre komponent textového editora pre túto obrazovku."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "31.5 inches (800 mm)"
+msgstr "31,5 palca (800 mm)"
 
-#. SysConfig
-msgid "Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative)."
-msgstr "Definuje výšku komponentu textového editora pre túto obrazovku. Zadajte číslo (pixely) alebo percentuálnu hodnotu (relatívnu)."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "43.3 inches (1100 mm):"
+msgstr "43,3 palca (1100 mm):"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "General operation data"
-msgstr "Všeobecné prevádzkové údaje"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Rack Units (U)"
+msgstr "Regálové jednotky (U)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for incoming request data"
-msgstr "Nastavenia pre prichádzajúce údaje žiadosti"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "2U: 3.5 inches (8.89 cm)"
+msgstr "2U: 3,5 palca (8,89 cm)"
 
-#. Template: AdminGenericInterfaceOperationConfigItem
-msgid "Settings for outgoing response data"
-msgstr "Nastavenia pre údaje odchádzajúcej odpovede"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "45U: 78.75 inches (200.02 cm)"
+msgstr "45U: 78,75 palca (200,02 cm)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Import/Export attachments (as the last entries per line)"
-msgstr "Import/export príloh (ako posledné položky na riadku)"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "1U: 1.75 inches (4.45 cm)"
+msgstr "1U: 1,75 palca (4,45 cm)"
 
-#. Perl Module: Kernel/System/ImportExport/ObjectBackend/ITSMConfigItem.pm
-msgid "Version String"
-msgstr "Reťazec verzie"
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "10U: 17.5 inches (44.45 cm)"
+msgstr "10U: 17,5 palca (44,45 cm)"
 
-#. SysConfig
-msgid "Defines Required permissions to set ITSM configuration items using the Generic Interface."
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "39U: 68.25 inches (173.35 cm)"
+msgstr "39U: 68,25 palca (173,35 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "20U: 35 inches (88.9 cm)"
+msgstr "20U: 35 palcov (88,9 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "4U: 7 inches (17.78 cm)"
+msgstr "4U: 7 palcov (17,78 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "15U: 26.25 inches (66.68 cm)"
+msgstr "15U: 26,25 palca (66,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "36U: 63 inches (160.02 cm)"
+msgstr "36U: 63 palcov (160,02 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "24U: 42 inches (106.68 cm)"
+msgstr "24U: 42 palcov (106,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "7U: 12.25 inches (31.12 cm)"
+msgstr "7U: 12,25 palca (31,12 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "9U: 15.75 inches (40.01 cm)"
+msgstr "9U: 15,75 palca (40,01 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "8U: 14 inches (35.56 cm)"
+msgstr "8U: 14 palcov (35,56 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "12U: 21 inches (53.34 cm)"
+msgstr "12U: 21 palcov (53,34 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "30U: 52.5 inches (133.35 cm)"
+msgstr "30U: 52,5 palca (133,35 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "22U: 38.5 inches (97.79 cm)"
+msgstr "22U: 38,5 palca (97,79 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "48U: 84 inches (213.36 cm)"
+msgstr "48U: 84 palcov (213,36 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "5U: 8.75 inches (22.23 cm)"
+msgstr "5U: 8,75 palca (22,23 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "6U: 10.5 inches (26.67 cm)"
+msgstr "6U: 10,5 palca (26,67 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "42U: 73.5 inches (186.69 cm)"
+msgstr "42U: 73,5 palca (186,69 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "33U: 57.75 inches (146.68 cm)"
+msgstr "33U: 57,75 palca (146,68 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "3U: 5.25 inches (13.34 cm)"
+msgstr "3U: 5,25 palca (13,34 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "27U: 47.25 inches (120.02 cm)"
+msgstr "27U: 47,25 palca (120,02 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "18U: 31.5 inches (80.01 cm)"
+msgstr "18U: 31,5 palca (80,01 cm)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "ETSI Rack"
+msgstr "ETSI Rack"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "23-inch Rack"
+msgstr "23-palcový stojan"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "21-inch Rack"
+msgstr "21-palcový stojan"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Custom Rack"
+msgstr "Vlastný stojan"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Tower"
+msgstr "Veža"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Mini-Rack"
+msgstr "Minirack"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "19-inch Rack"
+msgstr "19-palcový stojan"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Hardware Weight"
+msgstr "Hmotnosť hardvéru"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Room"
+msgstr "Izba"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Building"
+msgstr "Budova"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Type"
+msgstr "Typ karty"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Micro SIM"
 msgstr ""
-"Definuje požadované oprávnenia na nastavenie konfiguračných položiek ITSM "
-"pomocou všeobecného rozhrania."
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Standard SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nano SIM"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Embedded SIM (eSIM)"
+msgstr ""
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK 2"
+msgstr "PUK 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Card Number"
+msgstr "Číslo karty"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN"
+msgstr "PIN"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PIN 2"
+msgstr "PIN 2"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "PUK"
+msgstr "PUK"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Longitude"
+msgstr "Zemepisná dĺžka"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Latitude"
+msgstr "Zemepisná šírka"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Type"
+msgstr "Typ batérie"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium-Ion (Li-ion) Battery"
+msgstr "Lítium-iónová (Li-ion) batéria"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Lithium Iron Phosphate (LiFePO4) Battery"
+msgstr "Batéria s fosfátom lítia a železa (LiFePO4)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Metal Hydride (NiMH) Battery"
+msgstr "Nikel-metalhydridová (NiMH) batéria"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Sealed Lead-Acid (SLA) Battery"
+msgstr "Uzavretá olovená batéria (SLA)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Nickel-Cadmium (NiCd) Battery"
+msgstr "Nikel-kadmiová (NiCd) batéria"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Flywheel Energy Storage"
+msgstr "Skladovanie energie na zotrvačníku"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Battery Capacity (Ah)"
+msgstr "Kapacita batérie (Ah)"
+
+#. Ready to adopt classes: IT-Servicemanagement-11_0_3
+msgid "Maximum Load Capacity (W)"
+msgstr "Maximálna nosnosť (W)"
+
