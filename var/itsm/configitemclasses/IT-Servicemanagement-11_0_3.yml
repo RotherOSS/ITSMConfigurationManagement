@@ -300,7 +300,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -878,7 +878,7 @@
           50GHz: 5.0 GHz
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockspeed
@@ -903,7 +903,7 @@
           '8': '8'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of CPUs
@@ -997,7 +997,7 @@
           Socket478: Socket 478
           TR4: TR4
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Socket Type
@@ -1425,7 +1425,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Bus Interface
@@ -1451,7 +1451,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of graphics cards
@@ -1617,7 +1617,7 @@
           NVIDIATitanXp: NVIDIA Titan Xp
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Graphics card
@@ -1647,7 +1647,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity per graphics card
@@ -1671,7 +1671,7 @@
           HBMHighBandwidthMemory: HBM (High Bandwidth Memory)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Memory Type
@@ -1752,7 +1752,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity (GB)
@@ -1783,7 +1783,7 @@
           '600': '600'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockrate
@@ -1920,7 +1920,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -2281,7 +2281,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             Label: Storage Manufacturer
@@ -2567,7 +2567,7 @@
           50GHz: 5.0 GHz
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockspeed
@@ -2592,7 +2592,7 @@
           '8': '8'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of CPUs
@@ -2686,7 +2686,7 @@
           Socket478: Socket 478
           TR4: TR4
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Socket Type
@@ -3114,7 +3114,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Bus Interface
@@ -3140,7 +3140,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of graphics cards
@@ -3306,7 +3306,7 @@
           NVIDIATitanXp: NVIDIA Titan Xp
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Graphics card
@@ -3336,7 +3336,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity per graphics card
@@ -3360,7 +3360,7 @@
           HBMHighBandwidthMemory: HBM (High Bandwidth Memory)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Memory Type
@@ -3441,7 +3441,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity (GB)
@@ -3472,7 +3472,7 @@
           '600': '600'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockrate
@@ -3609,7 +3609,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -3970,7 +3970,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             Label: Storage Manufacturer
@@ -4889,7 +4889,7 @@
           Redis: Redis
           SQLite: SQLite
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Database
@@ -4995,8 +4995,8 @@
         EditFieldMode: AutoComplete
         ImportSearchAttribute: ''
         MultiValue: '0'
-        Multiselect: 0
-        PossibleNone: 1
+        Multiselect: '0'
+        PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: CustomerUser
         Tooltip: ''
@@ -5020,7 +5020,7 @@
         LinkReferencingType: Dynamic
         LinkType: LocationOf
         MultiValue: '0'
-        Multiselect: 0
+        Multiselect: '0'
         PossibleNone: '1'
         ReferenceFilterList: []
         ReferencedObjectType: ITSMConfigItem
@@ -5293,7 +5293,7 @@
           WUXGA (1920 x 1200): WUXGA (1920 x 1200)
           WXGA (1366 x 768): WXGA (1366 x 768)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Monitor Resolution
@@ -5318,7 +5318,7 @@
           '55': 55"
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Monitor Size
@@ -5394,7 +5394,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -6274,7 +6274,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -7155,7 +7155,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -7772,7 +7772,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -8353,7 +8353,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -9138,7 +9138,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -9589,7 +9589,7 @@
           50GHz: 5.0 GHz
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockspeed
@@ -9614,7 +9614,7 @@
           '8': '8'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of CPUs
@@ -9708,7 +9708,7 @@
           Socket478: Socket 478
           TR4: TR4
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Socket Type
@@ -10181,7 +10181,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Bus Interface
@@ -10207,7 +10207,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of graphics cards
@@ -10373,7 +10373,7 @@
           NVIDIATitanXp: NVIDIA Titan Xp
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Graphics card
@@ -10403,7 +10403,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity per graphics card
@@ -10427,7 +10427,7 @@
           HBMHighBandwidthMemory: HBM (High Bandwidth Memory)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Memory Type
@@ -10508,7 +10508,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity (GB)
@@ -10539,7 +10539,7 @@
           '600': '600'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockrate
@@ -10676,7 +10676,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -11059,7 +11059,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             Label: Storage Manufacturer
@@ -11352,7 +11352,7 @@
           50GHz: 5.0 GHz
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockspeed
@@ -11377,7 +11377,7 @@
           '8': '8'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of CPUs
@@ -11471,7 +11471,7 @@
           Socket478: Socket 478
           TR4: TR4
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Socket Type
@@ -11944,7 +11944,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Bus Interface
@@ -11970,7 +11970,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of graphics cards
@@ -12136,7 +12136,7 @@
           NVIDIATitanXp: NVIDIA Titan Xp
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Graphics card
@@ -12166,7 +12166,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity per graphics card
@@ -12190,7 +12190,7 @@
           HBMHighBandwidthMemory: HBM (High Bandwidth Memory)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Memory Type
@@ -12271,7 +12271,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity (GB)
@@ -12302,7 +12302,7 @@
           '600': '600'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockrate
@@ -12439,7 +12439,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -12822,7 +12822,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             Label: Storage Manufacturer
@@ -13534,7 +13534,7 @@
           WUXGA (1920 x 1200): WUXGA (1920 x 1200)
           WXGA (1366 x 768): WXGA (1366 x 768)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Monitor Resolution
@@ -13559,7 +13559,7 @@
           '55': 55"
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Monitor Size
@@ -13635,7 +13635,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -13866,7 +13866,7 @@
           50GHz: 5.0 GHz
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockspeed
@@ -13891,7 +13891,7 @@
           '8': '8'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of CPUs
@@ -13985,7 +13985,7 @@
           Socket478: Socket 478
           TR4: TR4
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Socket Type
@@ -14458,7 +14458,7 @@
           USBUniversalSerialBus: USB (Universal Serial Bus)
           VESALocalBusVLB: VESA Local Bus (VLB)
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Bus Interface
@@ -14484,7 +14484,7 @@
           '9': '9'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Number of graphics cards
@@ -14650,7 +14650,7 @@
           NVIDIATitanXp: NVIDIA Titan Xp
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Graphics card
@@ -14680,7 +14680,7 @@
           '8': 8 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity per graphics card
@@ -14704,7 +14704,7 @@
           HBMHighBandwidthMemory: HBM (High Bandwidth Memory)
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Memory Type
@@ -14785,7 +14785,7 @@
           '96': 96 GB
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Capacity (GB)
@@ -14816,7 +14816,7 @@
           '600': '600'
           Other: Other
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Clockrate
@@ -14953,7 +14953,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -15336,7 +15336,7 @@
                 Transcend: Transcend
                 WesternDigital: Western Digital
               Tooltip: ''
-              TranslatableValues: '1'
+              TranslatableValues: '0'
               TreeView: '0'
             FieldType: Dropdown
             Label: Storage Manufacturer
@@ -15860,7 +15860,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -16440,7 +16440,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
@@ -17069,7 +17069,7 @@
           Wiwynn: Wiwynn
           Zotac: Zotac
         Tooltip: ''
-        TranslatableValues: '1'
+        TranslatableValues: '0'
         TreeView: '0'
       FieldType: Dropdown
       Label: Manufacturer
