@@ -1,7 +1,7 @@
 # --
 # OTOBO is a web-based ticketing system for service organisations.
 # --
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -135,6 +135,10 @@ To find config items in your system.
 
         # CacheTTL, cache search result in seconds (optional, the default is four minutes)
         CacheTTL => 60 * 15,
+
+        # En- or disable usage of QueryCondition; controlling the evaluation of some special characters, e.g. '+', as search operators
+        # default 1
+        QueryCondition => (1|0),
     );
 
 Returns for C<Result => 'ARRAY'>:
@@ -160,10 +164,11 @@ sub ConfigItemSearch {
     my ( $Self, %Param ) = @_;
 
     # default values
-    my $Result  = $Param{Result}  || 'HASH';
-    my $OrderBy = $Param{OrderBy} || 'Down';
-    my $SortBy  = $Param{SortBy}  || 'Number';
-    my $Limit   = $Param{Limit}   || 10000;
+    my $Result         = $Param{Result}  || 'HASH';
+    my $OrderBy        = $Param{OrderBy} || 'Down';
+    my $SortBy         = $Param{SortBy}  || 'Number';
+    my $Limit          = $Param{Limit}   || 10000;
+    my $QueryCondition = $Param{QueryCondition} // 1;
 
     my %SortOptions = (
         ConfigItem   => 'ci.configitem_number',
@@ -536,11 +541,17 @@ sub ConfigItemSearch {
                 $SQLExt .= ' OR ';
             }
 
-            # use search condition extension
-            $SQLExt .= $DBObject->QueryCondition(
-                Key   => $FieldSQLMap{$Key},
-                Value => $Value,
-            );
+            if ($QueryCondition) {
+
+                # use search condition extension
+                $SQLExt .= $DBObject->QueryCondition(
+                    Key   => $FieldSQLMap{$Key},
+                    Value => $Value,
+                );
+            }
+            else {
+                $SQLExt .= $FieldSQLMap{$Key} . " = '" . $DBObject->Quote($Value) . "'";
+            }
         }
 
         if ($Used) {
