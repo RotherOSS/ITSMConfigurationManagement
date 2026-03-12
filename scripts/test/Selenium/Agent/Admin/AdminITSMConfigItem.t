@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,17 +18,8 @@ use strict;
 use warnings;
 use utf8;
 
-# core modules
-
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -37,9 +28,27 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        # get helper objects
+        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
 
-        my $RandomID = $Helper->GetRandomID();
+        # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
+        my @ConfigItemClassNames;
+        for my $ConfigItemClass (qw(Computer Hardware Location Network Software)) {
+            my $ConfigItemDataRef = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemGet(
+                Class => 'ITSM::ConfigItem::Class',
+                Name  => $ConfigItemClass,
+            );
+            push @ConfigItemClassNames, $ConfigItemDataRef->{Name};
+        }
 
         # Create test user and login.
         my $TestUserLogin = $Helper->TestUserCreate(
@@ -58,7 +67,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminITSMConfigItem");
 
         # Test default ITSMConfigItem class.
-        for my $Item (qw( Computer Hardware Location Network Software )) {
+        for my $Item (@ConfigItemClassNames) {
             my $Element = $Selenium->find_element( $Item, 'link_text' );
             $Element->is_enabled();
             $Element->is_displayed();
@@ -80,126 +89,6 @@ $Selenium->RunTest(
             # Return back to overview screen.
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminITSMConfigItem' )]")->VerifiedClick();
         }
-
-        # Add integer field to new ITSMConfigItem class to verify existence of 0.
-        # For more information, see bug#6005 - https://bugs.otobo.org/show_bug.cgi?id=6005.
-        my $Class   = "Class$RandomID";
-        my $ClassID = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemAdd(
-            Class   => 'ITSM::ConfigItem::Class',
-            Name    => $Class,
-            ValidID => 1,
-            Comment => 'Comment',
-            UserID  => 1,
-        );
-
-        # Get 'itsm-configitem' group ID.
-        my $ITSMConfigItemGroupID = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
-            Group => 'itsm-configitem',
-        );
-
-        # Set permission for test class.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGeneralCatalog;Subaction=ItemEdit;ItemID=$ClassID");
-        $Selenium->execute_script(
-            "\$('#Permission').val('$ITSMConfigItemGroupID').trigger('redraw.InputField').trigger('change');"
-        );
-        $Selenium->find_element("//button[\@value='Submit'][\@type='submit']")->VerifiedClick();
-
-        # Navigate to AdminITSMConfigItem.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminITSMConfigItem");
-
-        # Click on test class.
-        $Selenium->find_element( $Class, 'link_text' )->VerifiedClick();
-
-        # Click on 'Change class definition'.
-        $Selenium->find_element("//button[\@value='Add'][\@type='submit']")->VerifiedClick();
-
-        my $IntegerKey        = "TestInteger$RandomID";
-        my $IntegerDefinition = <<"EOF";
----
-- Key: $IntegerKey
-  Name: Test Integer
-  Searchable: 1
-  Input:
-    Type:  Integer
-    ValueMin: 0
-    ValueMax: 10
-    ValueDefault: 0
-EOF
-
-        $Selenium->find_element( "#Definition", 'css' )->send_keys($IntegerDefinition);
-        $Selenium->find_element("//button[\@value='Submit'][\@type='submit']")->VerifiedClick();
-
-        # Verify option with 0 in add config item screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemEdit;ClassID=$ClassID");
-        $Self->True(
-            $Selenium->find_element("//select[contains(\@id, \'$IntegerKey')]/option[\@value='0']"),
-            "Add screen - Option with '0' value is found",
-        );
-
-        # Verify option with 0 in search config item screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemSearch");
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#SearchClassID').length;" );
-        sleep 1;
-
-        # Select test class.
-        $Selenium->execute_script(
-            "\$('#SearchClassID').val('$ClassID').trigger('redraw.InputField').trigger('change');"
-        );
-        $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $("#Attribute").length;',
-        );
-        sleep 1;
-
-        # Choose test integer field.
-        $Selenium->execute_script(
-            "\$('#Attribute').val('$IntegerKey').trigger('redraw.InputField').trigger('change');"
-        );
-        $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('#SearchInsert #$IntegerKey').length;"
-        );
-
-        # Verify option with 0 exists.
-        $Self->True(
-            $Selenium->find_element("//select[\@id='$IntegerKey']/option[\@value='0']"),
-            "Search screen - Option with '0' value is found",
-        );
-
-        # Cleanup.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
-        my $Success = $DBObject->Do(
-            SQL  => "DELETE FROM configitem_definition WHERE class_id = ?",
-            Bind => [ \$ClassID ],
-        );
-        $Self->True(
-            $Success,
-            "ConfigItem definitions from ClassID $ClassID is deleted",
-        );
-
-        $Success = $DBObject->Do(
-            SQL  => "DELETE FROM general_catalog_preferences WHERE general_catalog_id = ?",
-            Bind => [ \$ClassID ],
-        );
-        $Self->True(
-            $Success,
-            "CatalogItemID $ClassID preference is deleted",
-        );
-
-        $Success = $DBObject->Do(
-            SQL  => "DELETE FROM general_catalog WHERE id = ?",
-            Bind => [ \$ClassID ],
-        );
-        $Self->True(
-            $Success,
-            "CatalogItemID $ClassID is deleted",
-        );
-
-        # Make sure the cache is correct.
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-        for my $Cache (qw(ConfigItem GeneralCatalog)) {
-            $CacheObject->CleanUp( Type => $Cache );
-        }
-
     }
 );
 

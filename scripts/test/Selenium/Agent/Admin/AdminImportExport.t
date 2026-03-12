@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -29,7 +29,6 @@ use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
 use Kernel::System::UnitTest::Selenium;
 
 # some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 # needed objects
 my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
@@ -63,6 +62,7 @@ Pages:
       - Section: CI_1_Section1
         ColumnStart: 1
         RowStart: 1
+
   - Name: CI_1_Page2
     Layout:
       Columns: 3
@@ -75,10 +75,11 @@ Pages:
 Sections:
   CI_1_Section1:
     Content:
-       - Header: "This is section 1"
+      - Header: "This is section 1"
+
   CI_1_Section2:
     Content:
-       - Header: "This is section 2"
+      - Header: "This is section 2"
 END_YAML
 
 my $TestClassID = $GeneralCatalogObject->ItemAdd(
@@ -138,12 +139,13 @@ $Selenium->RunTest(
         # Add 'Location' test ConfigItem.
         my $ConfigItemName = "Selenium" . $Helper->GetRandomID;
         my $ConfigItemID   = $ConfigItemObject->ConfigItemAdd(
-            Name        => $ConfigItemName,
-            Number      => $ConfigItemNumber,
-            DeplStateID => $ProductionDeplStateID,
-            InciStateID => 1,
-            ClassID     => $TestClassID,
-            UserID      => $TestUserID,
+            Name          => $ConfigItemName,
+            Number        => $ConfigItemNumber,
+            VersionString => 'Some version',
+            DeplStateID   => $ProductionDeplStateID,
+            InciStateID   => 1,
+            ClassID       => $TestClassID,
+            UserID        => $TestUserID,
         );
         ok( $ConfigItemID, "ConfigItem 'Location' is created - ID $ConfigItemID" );
 
@@ -168,7 +170,7 @@ $Selenium->RunTest(
         # Check and input step 1 of 5 screen.
         diag('Step 1');
         for my $StepOneID (
-            qw(Name Object Format ValidID Comment)
+            qw(Name Object_Search Format_Search ValidID_Search Comment)
             )
         {
             my $Element = $Selenium->find_element( "#$StepOneID", 'css' );
@@ -177,6 +179,7 @@ $Selenium->RunTest(
             $Element->is_displayed_ok;
         }
         my $ImportExportName = "ImportExport" . $Helper->GetRandomID();
+
         $Selenium->find_element( "#Name", 'css' )->send_keys($ImportExportName);
         $Selenium->execute_script(
             "\$('#Object').val('ITSMConfigItem').trigger('redraw.InputField').trigger('change');"
@@ -188,7 +191,7 @@ $Selenium->RunTest(
         # Check and input step 2 of 5 screen.
         diag('Step 2');
         for my $StepTwoID (
-            qw(ClassID CountMax EmptyFieldsLeaveTheOldValues)
+            qw(ClassID_Search CountMax EmptyFieldsLeaveTheOldValues)
             )
         {
             my $Element = $Selenium->find_element( "#$StepTwoID", 'css' );
@@ -196,6 +199,7 @@ $Selenium->RunTest(
             $Element->is_enabled_ok;
             $Element->is_displayed_ok;
         }
+
         $Selenium->execute_script(
             "\$('#ClassID').val('$TestClassID').trigger('redraw.InputField').trigger('change');"
         );
@@ -204,7 +208,7 @@ $Selenium->RunTest(
         # Check and input step 3 of 5 screen.
         diag('Step 3: format definition');
         for my $StepThreeID (
-            qw(ColumnSeparator Charset IncludeColumnHeaders)
+            qw(ColumnSeparator_Search Charset IncludeColumnHeaders_Search)
             )
         {
             my $Element = $Selenium->find_element( "#$StepThreeID", 'css' );
@@ -219,6 +223,7 @@ $Selenium->RunTest(
         # Check and input step 4 of 5 screen.
         $Selenium->find_element("//button[\@class='Primary CallForAction'][\@type='submit']")->VerifiedClick();
         $Selenium->find_element( "#MappingAddButton", 'css' )->VerifiedClick();
+
         diag('Step 4');
         for my $StepFourID (
             qw(Key Identifier)
@@ -230,15 +235,6 @@ $Selenium->RunTest(
             $Element->is_displayed_ok;
         }
 
-        for my $StepFourClass (
-            qw(ArrowUp ArrowDown DeleteColumn)
-            )
-        {
-            my $Element = $Selenium->find_element( ".$StepFourClass", 'css' );
-            ok( $Element, "$StepFourClass class found in step 4" );
-            $Element->is_enabled_ok;
-            $Element->is_displayed_ok;
-        }
         $Selenium->find_element_by_css_ok("table");
         $Selenium->find_element_by_css_ok("table thead tr th");
         $Selenium->find_element_by_css_ok("table tbody tr td");
@@ -257,12 +253,55 @@ $Selenium->RunTest(
         # Add and select 'Incident State' mapping element.
         $Selenium->find_element( "#MappingAddButton", 'css' )->VerifiedClick();
         $Selenium->find_element(".//*[\@id='Object::3::Key']/option[5]")->click();
+
+        # Add and select 'Version String' mapping element.
+        $Selenium->find_element( "#MappingAddButton", 'css' )->VerifiedClick();
+        $Selenium->find_element(".//*[\@id='Object::4::Key']/option[6]")->click();
+
+        # for every line check if action elements are visible and if their enabled state us correct
+        # the first ArrowUp and the last Arrowdown must be disabled, all the others must be enabled
+        for my $StepFourClass (
+            qw(ArrowUp ArrowDown DeleteColumn)
+            )
+        {
+            my $Elements = $Selenium->find_elements( ".$StepFourClass", 'css' );
+            ok( $Elements, "$StepFourClass class found in step 4" );
+
+            if ( $StepFourClass eq 'ArrowUp' ) {
+                my $Index = 0;
+                for my $Element ( $Elements->@* ) {
+                    my $StateOk = $Index == 0 ? !$Element->is_enabled : $Element->is_enabled;
+                    ok( $StateOk, "$StepFourClass element $Index enabled state is correct" );
+                    $Element->is_displayed_ok;
+                    $Index++;
+                }
+            }
+            elsif ( $StepFourClass eq 'ArrowDown' ) {
+                my $Index = 0;
+                for my $Element ( $Elements->@* ) {
+                    my $StateOk = $Index == 4 ? !$Element->is_enabled : $Element->is_enabled;
+                    ok( $StateOk, "$StepFourClass element $Index enabled state is correct" );
+                    $Element->is_displayed_ok;
+                    $Index++;
+                }
+            }
+            else {
+                my $Index = 0;
+                for my $Element ( $Elements->@* ) {
+                    my $StateOk = $Element->is_enabled;
+                    ok( $StateOk, "$StepFourClass element $Index enabled state is correct" );
+                    $Element->is_displayed_ok;
+                    $Index++;
+                }
+            }
+        }
+
         $Selenium->find_element( "#SubmitNextButton", 'css' )->VerifiedClick();
 
         # Check step 5 of 5 screen.
         diag('Step 5, restrict what is exported');
         for my $StepFiveID (
-            qw(RestrictExport Number Name DeplStateIDs InciStateIDs)
+            qw(RestrictExport Number Name DeplStateIDs_Search InciStateIDs_Search)
             )
         {
             my $Element = $Selenium->find_element( "#$StepFiveID", 'css' );
@@ -287,7 +326,7 @@ $Selenium->RunTest(
             SQL  => 'SELECT id FROM imexport_template WHERE name = ?',
             Bind => [ \$ImportExportName ],
         );
-        ok( $TemplateID, 'got the template ID' );
+        ok( $TemplateID, "got the template ID - $TemplateID" );
 
         # Navigate to test created ConfigItem and verify it.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemID");
@@ -308,7 +347,7 @@ $Selenium->RunTest(
             $ExportResultRef,
             {
                 DestinationContent => [
-                    qq{"$ConfigItemNumber","$ConfigItemName","Production","Operational"},
+                    qq{"$ConfigItemNumber","$ConfigItemName","Production","Operational","Some version"},
                 ],
                 Failed  => 0,
                 Success => 1,
@@ -323,13 +362,11 @@ $Selenium->RunTest(
                 UserID       => $TestUserID,
             );
 
-            my $ConfigItem = $ConfigItemObject->ConfigItemGet(
-                ConfigItemID => $ConfigItemID,
-                Cache        => 0,
+            my $ConfigItemFound = $ConfigItemObject->ConfigItemSearch(
+                Result       => 'COUNT',
+                ConfigItemID => [$ConfigItemID]
             );
-
-            # Check if ConfigItem is deleted.
-            ok( !$ConfigItem, "ConfigItem is deleted - ID $ConfigItemID" );
+            ok( !$ConfigItemFound, "ConfigItem is deleted - ID $ConfigItemID" );
 
             # Refresh screen and verify that test ConfigItem does not exist anymore.
             $Selenium->VerifiedRefresh();
@@ -362,6 +399,7 @@ $Selenium->RunTest(
         #   "10495000102","Seleniumtest_AdminImportExport_2","Production","Operational"
         my $ImportLocation = '/opt/otobo/scripts/test/sample/ImportExport/TemplateImport.csv';
         $Selenium->find_element("//input[contains(\@name, \'SourceFile' )]")->send_keys($ImportLocation);
+
         $Selenium->find_element("//button[\@value='Start Import'][\@type='submit']")->VerifiedClick();
 
         # Check for expected outcome.
@@ -398,6 +436,8 @@ $Selenium->RunTest(
                 ok( $DeleteSuccess, "ConfigItem $ImportedConfigItemName is deleted - ID $FoundImportedConfigItemID" );
             }
         }
+
+        $DB::single = 1;
 
         # Navigate to AdminImportExport screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminImportExport");
