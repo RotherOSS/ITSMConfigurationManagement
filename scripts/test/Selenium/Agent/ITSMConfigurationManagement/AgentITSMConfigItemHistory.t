@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -17,17 +17,9 @@
 use strict;
 use warnings;
 use utf8;
-# core modules
 
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -37,29 +29,46 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
+        # get helper objects
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
 
-        # get 'Hardware' catalog class IDs
+        my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+        # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
+
+        # Get 'Hardware' catalog class IDs.
         my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
             Class => 'ITSM::ConfigItem::Class',
             Name  => 'Hardware',
         );
         my $HardwareConfigItemID = $ConfigItemDataRef->{ItemID};
 
-        # get 'Production' deployment state IDs
+        # Get 'Production' deployment state IDs.
         my $ProductionDeplStateDataRef = $GeneralCatalogObject->ItemGet(
             Class => 'ITSM::ConfigItem::DeploymentState',
             Name  => 'Production',
         );
         my $ProductionDeplStateID = $ProductionDeplStateDataRef->{ItemID};
 
-        # get needed objects
-        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+        # set Name update as a version triggering event
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $HardwareConfigItemID,
+            Key    => 'VersionTrigger',
+            Value  => ['Name']
+        );
 
-        # create ConfigItem number
+        # Create ConfigItem number.
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
             Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
             ClassID => $HardwareConfigItemID,
@@ -69,29 +78,42 @@ $Selenium->RunTest(
             "ConfigItem number is created - $ConfigItemNumber"
         );
 
-        # add the new ConfigItem
+        # Add the new ConfigItem.
         my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-            Number  => $ConfigItemNumber,
-            ClassID => $HardwareConfigItemID,
-            UserID  => 1,
+            Number      => $ConfigItemNumber,
+            ClassID     => $HardwareConfigItemID,
+            DeplStateID => $ProductionDeplStateID,
+            InciStateID => 1,
+            Name        => 'Selenium Test',
+            UserID      => 1,
         );
         $Self->True(
             $ConfigItemID,
             "ConfigItem is created - ID $ConfigItemID"
         );
-
-        # add a new version
-        my $VersionID = $ConfigItemObject->VersionAdd(
-            Name         => 'SeleniumTest',
-            DefinitionID => 1,
-            DeplStateID  => $ProductionDeplStateID,
-            InciStateID  => 1,
-            UserID       => 1,
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
         );
+        my $FirstVersionID = $ConfigItem->{LastVersionID};
+
+        # Add a new version.
+        my $ConfigItemName = 'Hardware' . $Helper->GetRandomID();
+        my $ConfigItemNote = 'Some Selenium test note';
+        $ConfigItemObject->ConfigItemUpdate(
+            Name                         => $ConfigItemName,
+            UserID                       => 1,
+            ConfigItemID                 => $ConfigItemID,
+            Number                       => $ConfigItemNumber,
+            'DynamicField_Hardware-Note' => $ConfigItemNote,
+        );
+        $ConfigItem = $ConfigItemObject->ConfigItemGet(
+            ConfigItemID => $ConfigItemID,
+        );
+        my $SecondVersionID = $ConfigItem->{LastVersionID};
+
         $Self->True(
-            $VersionID,
-            "Version is created - ID $VersionID"
+            $SecondVersionID,
+            "Version is created - ID $SecondVersionID"
         );
 
         # create test user and login
@@ -124,18 +146,19 @@ $Selenium->RunTest(
 
         # create history messages list
         my @HistoryMessages = (
-            'New ConfigItem (ID=' . $ConfigItemID . ')',
-            'New version (ID=' . $VersionID . ')',
-            'ConfigItem definition updated (ID=1)',
-            'Name updated (new=SeleniumTest, old=)',
-            'Incident state updated (new=Operational, old=)',
-            'Deployment state updated (new=Production, old=)',
+            "New ConfigItem (ID=$ConfigItemID)",
+            "New version (ID=$FirstVersionID",
+            "New version (ID=$SecondVersionID",
+            "Attribute Hardware-Note updated from \"\" to \"Some Selenium test note\"",
+            "Name updated (new=$ConfigItemName, old=Selenium Test)",
         );
 
         # check for history messages in history screen of created test ConfigItem
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemHistory;ConfigItemID=$ConfigItemID;VersionID=$VersionID"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemHistory;ConfigItemID=$ConfigItemID"
         );
+
+        $DB::single = 1;
 
         for my $HistoryMessage (@HistoryMessages) {
             $Self->True(
@@ -143,6 +166,8 @@ $Selenium->RunTest(
                 "History message $HistoryMessage - found",
             );
         }
+
+        $DB::single = 1;
 
         # remove itsm-configitem 'ro' access right for test user
         # get group object
@@ -165,7 +190,7 @@ $Selenium->RunTest(
 
         # check for error message when user have no access rights in history screen
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemHistory;ConfigItemID=$ConfigItemID;VersionID=$VersionID"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemHistory;ConfigItemID=$ConfigItemID"
         );
 
         my $ErrorMessageNoPermission = 'No Permission to use this frontend module!';
