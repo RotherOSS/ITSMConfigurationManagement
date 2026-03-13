@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,17 +18,9 @@ use strict;
 use warnings;
 use utf8;
 
-# core modules
-
-# CPAN modules
 use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -37,10 +29,23 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
+        # get helper objects
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
         my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+        # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
 
         # Get 'Hardware' catalog class IDs.
         my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
@@ -56,6 +61,13 @@ $Selenium->RunTest(
         );
         my $ProductionDeplStateID = $ProductionDeplStateDataRef->{ItemID};
 
+        # set Name update as a version triggering event
+        $GeneralCatalogObject->GeneralCatalogPreferencesSet(
+            ItemID => $HardwareConfigItemID,
+            Key    => 'VersionTrigger',
+            Value  => ['Name']
+        );
+
         # Create ConfigItem number.
         my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
             Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
@@ -68,9 +80,12 @@ $Selenium->RunTest(
 
         # Add the new ConfigItem.
         my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-            Number  => $ConfigItemNumber,
-            ClassID => $HardwareConfigItemID,
-            UserID  => 1,
+            Number      => $ConfigItemNumber,
+            ClassID     => $HardwareConfigItemID,
+            DeplStateID => $ProductionDeplStateID,
+            InciStateID => 1,
+            Name        => 'Selenium Test',
+            UserID      => 1,
         );
         $Self->True(
             $ConfigItemID,
@@ -79,17 +94,20 @@ $Selenium->RunTest(
 
         # Add a new version.
         my $ConfigItemName = 'Hardware' . $Helper->GetRandomID();
-        my $VersionID      = $ConfigItemObject->VersionAdd(
-            Name         => $ConfigItemName,
-            DefinitionID => 1,
-            DeplStateID  => $ProductionDeplStateID,
-            InciStateID  => 1,
-            UserID       => 1,
+        my $ConfigItemNote = 'Some Selenium test note';
+        $ConfigItemObject->ConfigItemUpdate(
+            Name                         => $ConfigItemName,
+            UserID                       => 1,
+            ConfigItemID                 => $ConfigItemID,
+            Number                       => $ConfigItemNumber,
+            'DynamicField_Hardware-Note' => $ConfigItemNote,
+        );
+        my $ConfigItem = $ConfigItemObject->ConfigItemGet(
             ConfigItemID => $ConfigItemID,
         );
         $Self->True(
-            $VersionID,
-            "Version is created - ID $VersionID"
+            $ConfigItem->{LastVersionID},
+            "Version is created - ID $ConfigItem->{LastVersionID}"
         );
 
         # Create test user and login.
@@ -107,7 +125,7 @@ $Selenium->RunTest(
 
         # Navigate to AgentITSMConfigItemZoom screen.
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemID;Version=$VersionID"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemID"
         );
 
         # Get ConfigItem value params.
@@ -119,6 +137,10 @@ $Selenium->RunTest(
             {
                 Value => $ConfigItemName,
                 Check => "h1:contains($ConfigItemName)",
+            },
+            {
+                Value => $ConfigItemNote,
+                Check => "p:contains($ConfigItemNote)",
             },
         );
 
@@ -134,7 +156,7 @@ $Selenium->RunTest(
 
         # Click on 'Duplicate' menu item and switch window
         $Selenium->find_element(
-            "//a[contains(\@href, \'Action=AgentITSMConfigItemEdit;DuplicateID=$ConfigItemID;VersionID=$VersionID\' )]"
+            "//a[contains(\@href, \'Action=AgentITSMConfigItemEdit;DuplicateID=$ConfigItemID;VersionID=$ConfigItem->{LastVersionID}\' )]"
         )->click();
 
         # switch window
@@ -145,27 +167,43 @@ $Selenium->RunTest(
         # wait until page has loaded, if necessary
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#DeplStateID").length;' );
 
-        # Check for created ConfigItem values
-        $Self->Is(
-            $Selenium->find_element( '#Name', 'css' )->get_value(),
-            $ConfigItemName,
-            "#Name stored value",
+        # Get duplicated ConfigItem value params.
+        my @DuplicatedConfigItemValues = (
+            {
+                ObjectID      => 'Name',
+                ExpectedValue => $ConfigItemName,
+            },
+            {
+                ObjectID      => 'DeplStateID',
+                ExpectedValue => $ProductionDeplStateID,
+            },
+            {
+                ObjectID      => 'InciStateID',
+                ExpectedValue => 1,
+            },
+            {
+                ObjectID      => 'DynamicField_Hardware-Note',
+                ExpectedValue => $ConfigItemNote,
+            },
         );
-        $Self->Is(
-            $Selenium->find_element( '#DeplStateID', 'css' )->get_value(),
-            $ProductionDeplStateID,
-            "#DeplStateID stored value",
-        );
-        $Self->Is(
-            $Selenium->find_element( '#InciStateID', 'css' )->get_value(),
-            1,
-            "#InciStateID stored value",
-        );
+
+        # Check duplicated ConfigItem values on screen
+        for my $CheckConfigItemValue (@DuplicatedConfigItemValues) {
+            $Self->Is(
+                $Selenium->find_element( "#$CheckConfigItemValue->{ObjectID}", 'css' )->get_value(),
+                $CheckConfigItemValue->{ExpectedValue},
+                "#$CheckConfigItemValue->{ObjectID} stored value",
+            );
+        }
 
         # Edit name for duplicate test ConfigItem.
         my $DuplicateConfigItemName = "Duplicate" . $ConfigItemName;
         $Selenium->find_element( "#Name", 'css' )->clear();
         $Selenium->find_element( "#Name", 'css' )->send_keys($DuplicateConfigItemName);
+
+        # Select current date as the installation date.
+        $Selenium->find_element("//*[contains(\@name, \'DynamicField_Hardware-InstallDateUsed\' )]")->click();
+
         sleep 2;
         $Selenium->find_element("//button[\@value='Submit'][\@type='submit']")->click();
 
