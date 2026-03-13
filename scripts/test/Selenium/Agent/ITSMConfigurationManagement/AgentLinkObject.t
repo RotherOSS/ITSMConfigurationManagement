@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -27,9 +27,6 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
-
 our $Self;
 
 my $Selenium = Kernel::System::UnitTest::Selenium->new;
@@ -37,11 +34,24 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
+        # get helper objects
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
+        my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+        # get catalog legacy classes IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
 
         # Get Computer and Hardware catalog class IDs.
         my @ConfigItemClassIDs;
@@ -63,7 +73,6 @@ $Selenium->RunTest(
         # Create two test ConfigItems for Computer and Hardware ConfigItem class.
         my @ConfigItemNumbers;
         my @ConfigItemIDs;
-        my @VersionIDs;
         for my $ITSMConfigItem (@ConfigItemClassIDs) {
 
             # Create ConfigItem number.
@@ -79,31 +88,18 @@ $Selenium->RunTest(
 
             # Add the new ConfigItem.
             my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-                Number  => $ConfigItemNumber,
-                ClassID => $ITSMConfigItem,
-                UserID  => 1,
+                Number      => $ConfigItemNumber,
+                ClassID     => $ITSMConfigItem,
+                DeplStateID => $DeplStateID,
+                InciStateID => 1,
+                Name        => 'Selenium Test',
+                UserID      => 1,
             );
             $Self->True(
                 $ConfigItemID,
                 "ConfigItem is created - ID $ConfigItemID"
             );
             push @ConfigItemIDs, $ConfigItemID;
-
-            # Add a new version.
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => 'SeleniumTest',
-                DefinitionID => 1,
-                DeplStateID  => $DeplStateID,
-                InciStateID  => 1,
-                UserID       => 1,
-                ConfigItemID => $ConfigItemID,
-            );
-            $Self->True(
-                $VersionID,
-                "Version is created - ID $VersionID"
-            );
-            push @VersionIDs, $VersionID;
-
         }
 
         # Create test service.
@@ -155,7 +151,7 @@ $Selenium->RunTest(
 
         # Navigate to AgentITSMConfigItemZoom screen.
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemIDs[0];Version=$VersionIDs[0]"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItemIDs[0]"
         );
 
         # Click on 'Link' menu.
