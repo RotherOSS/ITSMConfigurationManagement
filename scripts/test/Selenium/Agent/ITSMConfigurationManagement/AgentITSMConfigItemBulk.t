@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -17,17 +17,9 @@
 use strict;
 use warnings;
 use utf8;
-# core modules
 
-# CPAN modules
-use Test2::V0;
-
-# OTOBO modules
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
-
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
 
 our $Self;
 
@@ -36,10 +28,23 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
+        # get helper objects
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
         my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
+        my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+        # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
 
         # Get 'Computer' catalog class IDs.
         my $ConfigItemDataRef = $GeneralCatalogObject->ItemGet(
@@ -73,28 +78,18 @@ $Selenium->RunTest(
             );
 
             # Add the new ConfigItem.
-            my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-                Number  => $ConfigItemNumber,
-                ClassID => $ComputerConfigItemID,
-                UserID  => 1,
+            my $ConfigItemName = 'Hardware' . $Helper->GetRandomID();
+            my $ConfigItemID   = $ConfigItemObject->ConfigItemAdd(
+                Number      => $ConfigItemNumber,
+                Name        => $ConfigItemName,
+                ClassID     => $ComputerConfigItemID,
+                DeplStateID => $DeplStateIDs[0],
+                InciStateID => 1,
+                UserID      => 1,
             );
             $Self->True(
                 $ConfigItemID,
                 "ConfigItem is created - ID $ConfigItemID"
-            );
-
-            # Add a new version.
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => 'SeleniumTest',
-                DefinitionID => 1,
-                DeplStateID  => $DeplStateIDs[0],
-                InciStateID  => 1,
-                UserID       => 1,
-                ConfigItemID => $ConfigItemID,
-            );
-            $Self->True(
-                $VersionID,
-                "Version is created - ID $VersionID"
             );
 
             push @ConfigItems,
@@ -119,7 +114,7 @@ $Selenium->RunTest(
 
         # Navigate to AgentITSMConfigItem, sorted by created time.
         $Selenium->VerifiedGet(
-            "${ScriptAlias}index.pl?Action=AgentITSMConfigItem;Filter=All;View=;;SortBy=ChangeTime;OrderBy=Down"
+            "${ScriptAlias}index.pl?Action=AgentITSMConfigItem;Filter=All;View=;;SortBy=LastChanged;OrderBy=Down"
         );
 
         # Select two created test ConfigItems.
@@ -153,15 +148,25 @@ $Selenium->RunTest(
         }
 
         # Change deployment state to 'Repair' for test ConfigItems
-        $Selenium->execute_script("\$('#DeplStateID').val('$DeplStateIDs[1]');");
+        $Selenium->execute_script(
+            "\$('#DeplStateID').val('$DeplStateIDs[1]').trigger('redraw.InputField').trigger('change')"
+        );
 
         # link 'Alternative to' test ConfigItems together
-        $Selenium->find_element( "#LinkTogether option[value='1']",                           'css' )->click();
-        $Selenium->find_element( "#LinkTogetherLinkType option[value='ConnectedTo::Source']", 'css' )->click();
+        $Selenium->execute_script(
+            "\$('#LinkTogether').val('1').trigger('redraw.InputField').trigger('change')"
+        );
+        $Selenium->execute_script(
+            "\$('#LinkTogetherLinkType').val('ConnectedTo::Source').trigger('redraw.InputField').trigger('change')"
+        );
 
         # link third test ConfigItem as part of first two
-        $Selenium->find_element( "#LinkTogetherAnother",                       'css' )->send_keys( $ConfigItems[2]->{ConfigItemNumber} );
-        $Selenium->find_element( "#LinkType option[value='Includes::Target']", 'css' )->click();
+        $Selenium->find_element( "#LinkTogetherAnother", 'css' )->send_keys( $ConfigItems[2]->{ConfigItemNumber} );
+        $Selenium->execute_script(
+            "\$('#LinkType').val('Includes::Target').trigger('redraw.InputField').trigger('change')"
+        );
+
+        #$Selenium->find_element( "#LinkType option[value='Includes::Target']", 'css' )->click();
 
         # Submit bulk changes
         $Selenium->find_element( "#submitRichText", 'css' )->click();
@@ -191,9 +196,10 @@ $Selenium->RunTest(
             $Count++;
         }
 
-        $Self->Is(
-            $Selenium->execute_script("return \$('.MasterAction td:eq(1) span').text();"),
-            'Repair',
+        $DB::single = 1;
+
+        $Self->True(
+            $Selenium->find_element("//div[\@class='Value' and \@title='Repair']"),
             "Deployment state is Repair.",
         );
 
