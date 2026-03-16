@@ -5,29 +5,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Japanese <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/ja/>\n"
-"Language: ja\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 23:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Japanese <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/ja/>\nLanguage: ja\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "アバウト"
 
 #: ../../content/about.rst:16
+#, fuzzy
 msgid "Contact"
-msgstr ""
+msgstr "連絡先"
 
 #: ../../content/about.rst:17
 msgid "Rother OSS GmbH"
@@ -42,8 +30,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "バージョン"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -71,16 +60,19 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "設定"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
+#, fuzzy
 msgid "Table of Contents"
-msgstr ""
+msgstr "目次"
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "メール設定"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -128,8 +120,9 @@ msgid ".. figure:: images/ready2import_class_bundles.png"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst
+#, fuzzy
 msgid ":alt: Ready2Import Class Bundles panel"
-msgstr ""
+msgstr "Ready2Import クラスバンドル"
 
 #: ../../content/configuration/basic_configuration.rst:29
 msgid "Click the button to import the Ready2Adopt class bundles."
@@ -137,24 +130,28 @@ msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
+#, fuzzy
 msgid "Configuration Reference"
-msgstr ""
+msgstr "構成オプションリファレンス"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "コマンド"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "Configuration Management Database"
-msgstr ""
+msgstr "構成管理データベース"
 
 #: ../../content/configuration/configuration_reference.rst:17
 msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -397,8 +394,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "担当者"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -413,8 +411,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -431,8 +430,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:214
+#, fuzzy
 msgid "ConfigItemVersion"
-msgstr ""
+msgstr "設定項目バージョン"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:216
 msgid ""
@@ -441,8 +441,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "顧客"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +462,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "顧客ユーザー"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +483,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "ダイナミック・フィールド"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -526,8 +529,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:240
+#, fuzzy
 msgid "General Catalog"
-msgstr ""
+msgstr "ジェネラル・カタログ"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:242
 msgid "The idea is to have a Dropdown field."
@@ -560,20 +564,23 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:249
+#, fuzzy
 msgid "Config Item Links"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:250
 msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "インポート/エクスポート"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -613,32 +620,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACL"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "条件設定"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "フロントエンド"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "ユーザー"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "変更設定"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "のために"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -675,28 +688,32 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "オペレーション"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:52
+#, fuzzy
 msgid "ConfigItemSearch"
-msgstr ""
+msgstr "設定項目検索"
 
 #: ../../content/configuration/generic_interface/index.rst:53
 msgid "Search for one or more config items."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:85
+#, fuzzy
 msgid "ConfigItemUpsert"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/generic_interface/index.rst:86
 msgid "Add or update one or more config items based on the sent data."
@@ -711,12 +728,14 @@ msgid "Delete a config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:151
+#, fuzzy
 msgid "Invoker"
-msgstr ""
+msgstr "呼び出し元"
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "構成アイテム"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -733,18 +752,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "担当者フロントエンドが一度に複数の設定項目で機能するように設定項目一括操作機能を有効にします。"
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "リストされたグループの構成アイテム一括処理機能のみを有効にします。"
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -756,8 +777,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "ダイナミック・フィールドのバックエンド登録"
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -772,8 +794,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "ダイナミックフィールドのオブジェクト登録"
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -784,55 +807,60 @@ msgid "Elasticsearch::ExcludedCIClasses"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:48
+#, fuzzy
 msgid ""
 "ConfigItems of the following classes will not be stored on the "
 "Elasticsearch server. To apply this to existing CIs, the CI migration has"
 " to be run via console, after changing this option."
-msgstr ""
+msgstr "以下のクラスのConfigItemsはElasticsearchサーバに保存されません。既存のCIに適用するには、このオプションを変更した後に、コンソール経由でCIマイグレーションを実行する必要があります。"
 
 #: ../../content/configuration/system_configuration_settings.rst:51
 msgid "Elasticsearch::ExcludedCIDeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:52
+#, fuzzy
 msgid ""
 "ConfigItems with the following deployment states will not be stored on "
 "the Elasticsearch server. To apply this to existing CIs, the CI migration"
 " has to be run via console, after changing this option."
-msgstr ""
+msgstr "以下のデプロイ状態のConfigItemsは、Elasticsearchサーバに保存されません。既存のCIに適用するには、このオプションを変更した後に、コンソール経由でCIマイグレーションを実行する必要があります。"
 
 #: ../../content/configuration/system_configuration_settings.rst:55
 msgid "Elasticsearch::ConfigItemStoreFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:56
+#, fuzzy
 msgid ""
 "Fields stored in the configuration item index which are used for other "
 "things besides fulltext searches. For the complete functionality all "
 "fields are mandatory."
-msgstr ""
+msgstr "設定項目インデックスに格納されるフィールドで、全文検索以外に使用される。完全な機能のために、すべてのフィールドは必須です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:59
 msgid "Elasticsearch::ConfigItemSearchFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:60
+#, fuzzy
 msgid ""
 "Fields of the configuration item index, used for the fulltext search. "
 "Fields are also stored, but are not mandatory for the overall "
 "functionality. Inclusion of attachments can be disabled by setting the "
 "entry to 0 or deleting it."
-msgstr ""
+msgstr "全文検索に使用される設定項目インデックスのフィールド。フィールドも保存されますが、全体的な機能には必須ではありません。エントリを 0 に設定するか、削除することで、添付ファイルのインクルードを無効にすることができます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:63
 msgid "Elasticsearch::QuickSearchShow###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:64
+#, fuzzy
 msgid ""
 "Objects to search for, how many entries and which attributs to show. "
 "ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
+msgstr "検索するオブジェクト、エントリ数、表示する属性。ConfigItem の属性は、明示的に Elasticsearch 経由で保存する必要があります。"
 
 #: ../../content/configuration/system_configuration_settings.rst:67
 msgid "Core::Event::ITSMConfigItem"
@@ -843,20 +871,22 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "担当者Webインタフェースの履歴を記録する構成アイテムのイベントモジュール"
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:75
+#, fuzzy
 msgid ""
 "Config item event module that updates config items to their current "
 "definition."
-msgstr ""
+msgstr "コンフィグ項目を現在の定義に更新するコンフィグ項目イベントモジュール。"
 
 #: ../../content/configuration/system_configuration_settings.rst:78
 msgid "ITSMConfigItem::EventModulePost###400-LinkSync"
@@ -887,20 +917,22 @@ msgid "DynamicField::EventModulePost###200-DynamicFieldSync"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:91
+#, fuzzy
 msgid ""
 "Dynamic field event module that marks config item definitions as out of "
 "sync, if containing dynamic fields change."
-msgstr ""
+msgstr "ダイナミック・フィールド・イベント・モジュールは、ダイナミック・フィールドが変更された場合、コンフィグ・アイテムの定義が同期されていないとマークします。"
 
 #: ../../content/configuration/system_configuration_settings.rst:94
 msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:95
+#, fuzzy
 msgid ""
 "Performs the configured action for each event (as an Invoker) for each "
 "configured Webservice."
-msgstr ""
+msgstr "設定された各Webサービスの各イベントに対して（Invokerとして）設定されたアクションを実行します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:98
 msgid "Core::Event::Ticket"
@@ -912,169 +944,188 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:102
 #: ../../content/configuration/system_configuration_settings.rst:106
+#, fuzzy
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
+msgstr "チケット構成アイテムのリンクに構成アイテムのステータスを設定するイベントモジュール"
 
 #: ../../content/configuration/system_configuration_settings.rst:105
 msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:109
+#, fuzzy
 msgid "Core::GeneralCatalog"
-msgstr ""
+msgstr "ジェネラル・カタログ"
 
 #: ../../content/configuration/system_configuration_settings.rst:112
 msgid "GeneralCatalogPreferences###DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:113
+#, fuzzy
 msgid ""
 "Parameters for the deployment states in the preferences view of the agent"
 " interface."
-msgstr ""
+msgstr "担当者Webインタフェースの環境設定ビューでデプロイ状態のパラメータ"
 
 #: ../../content/configuration/system_configuration_settings.rst:116
 msgid "GeneralCatalogPreferences###DeploymentStatesColors"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:117
+#, fuzzy
 msgid ""
 "Parameters for the deployment states color in the preferences view of the"
 " agent interface."
-msgstr ""
+msgstr "デプロイメントのパラメータは、担当者Webインタフェースの環境設定ビューで色を示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:120
 msgid "GeneralCatalogPreferences###NameModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:121
+#, fuzzy
 msgid ""
 "Parameters for the name module for config item classes in the preferences"
 " view of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの名前モジュールのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:124
 msgid "GeneralCatalogPreferences###NumberModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:125
+#, fuzzy
 msgid ""
 "Parameters for the number module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスの番号モジュールのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:128
 msgid "GeneralCatalogPreferences###VersionStringModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:129
+#, fuzzy
 msgid ""
 "Parameters for the version string module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョン文字列モジュールのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:132
 msgid "GeneralCatalogPreferences###VersionStringExpression"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:133
+#, fuzzy
 msgid ""
 "Parameters for the version string template toolkit module for config item"
 " classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "エージェントインターフェイスの環境設定ビューの設定項目クラス用のバージョン文字列テンプレートツールキットモジュールのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:136
 msgid "GeneralCatalogPreferences###VersionTrigger"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:137
+#, fuzzy
 msgid ""
 "Parameters for the version trigger for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのバージョントリガーのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:140
 msgid "GeneralCatalogPreferences###Categories"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:141
+#, fuzzy
 msgid ""
 "Parameters for the categories for config item classes in the preferences "
 "view of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの環境設定ビューの設定項目クラスのカテゴリのパラメータ。"
 
 #: ../../content/configuration/system_configuration_settings.rst:144
 msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "ジェネラル・カタログの属性の権限グループの設定値例です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:148
+#, fuzzy
 msgid "Core::ITSMConfigItem"
-msgstr ""
+msgstr "ITSM 設定項目"
 
 #: ../../content/configuration/system_configuration_settings.rst:151
 msgid "ITSMConfigItem::CINameRegex"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:152
+#, fuzzy
 msgid ""
 "Defines regular expressions individually for each ConfigItem class to "
 "check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "各ConfigItemクラスの正規表現を個別に定義して、ConfigItem名を確認し、対応するエラーメッセージを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:155
 msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:156
+#, fuzzy
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "クラスを担当するグループをチェックするモジュール"
 
 #: ../../content/configuration/system_configuration_settings.rst:159
 msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:160
+#, fuzzy
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "構成アイテムを担当するグループをチェックするモジュール"
 
 #: ../../content/configuration/system_configuration_settings.rst:163
+#, fuzzy
 msgid "ITSMConfigItem::Hook"
-msgstr ""
+msgstr "ITSM 設定項目"
 
 #: ../../content/configuration/system_configuration_settings.rst:164
+#, fuzzy
 msgid ""
 "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#."
 " The default is ConfigItem#."
-msgstr ""
+msgstr "構成アイテムの識別子。 ConfigItem＃、MyConfigItem＃、 デフォルトはConfigItem＃です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:167
 msgid "UniqueCIName::EnableUniquenessCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:168
+#, fuzzy
 msgid ""
 "Enables/disables the functionality to check ITSM onfiguration items for "
 "unique names. Before enabling this option you should check your system "
 "for already existing config items with duplicate names. You can do this "
 "with the console command Admin::ITSM::ConfigItem::ListDuplicates."
-msgstr ""
+msgstr "ITSMの設定項目が一意な名前であるかどうかをチェックする機能の有効/無効を設定します。このオプションを有効にする前に、重複した名前を持つ既存の設定項目がないかシステムをチェックする必要があります。これは、コンソールコマンド Admin::ITSM::ConfigItem::ListDuplicates で実行できます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:171
 msgid "UniqueCIName::UniquenessCheckScope"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:172
+#, fuzzy
 msgid ""
 "Check for a unique name only within the same ConfigItem class ('class') "
 "or globally ('global'), which means every existing ConfigItem is taken "
 "into account when looking for duplicates."
-msgstr ""
+msgstr "同じConfigItemクラス（ 'class'）内またはグローバル（ 'global'）内でのみ一意の名前を確認します。これは、重複を検索するときに既存のConfigItemがすべて考慮されることを意味します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:175
 msgid "Customer::ConfigItem::PermissionConditions###01"
@@ -1085,12 +1136,13 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:184
 #: ../../content/configuration/system_configuration_settings.rst:188
 #: ../../content/configuration/system_configuration_settings.rst:192
+#, fuzzy
 msgid ""
 "Define a set of conditions under which a customer is allowed to see a "
 "config item. Conditions can optionally be restricted to certain customer "
 "groups. Name is the only mandatory attribute. If no other options are "
 "given, all config items will be visible under that category."
-msgstr ""
+msgstr "顧客が設定項目を見ることを許可される一連の条件を定義します。条件は、オプションで特定の顧客グループに制限することができます。名前は唯一の必須属性です。他のオプションが指定されていない場合、すべての設定項目がそのカテゴリの下に表示されます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:179
 msgid "Customer::ConfigItem::PermissionConditions###02"
@@ -1137,16 +1189,18 @@ msgid "CMDBTreeView::DefaultDepth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:220
+#, fuzzy
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "表示されるデフォルトの関係の深さを定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:223
 msgid "CMDBTreeView::ShowLinkLabels"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:224
+#, fuzzy
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "ノードの接続にリンクタイプのラベルを表示するかどうかを定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:227
 msgid "Core::ITSMConfigItem::ACL"
@@ -1158,10 +1212,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "ITSM 構成項目 ACL 構造の第 1 レベルで利用可能な項目を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1176,10 +1231,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "ITSM 構成項目 ACL 構造の第 2 レベルで利用可能な項目を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1202,22 +1258,24 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "ITSM 構成項目 ACL 構造の第 3 レベルで、「アクション」に使用できる項目を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:263
+#, fuzzy
 msgid ""
 "Whether the execution of ConfigItemACL can be avoided by checking cached "
 "field dependencies. This can improve loading times of formulars, but has "
 "to be disabled, if ACLModules are to be used for ITSMConfigItem- and "
 "Form-ReturnTypes."
-msgstr ""
+msgstr "キャッシュされたフィールドの依存関係をチェックすることで、ConfigItemACLの実行を回避できるかどうか。これはフォームのロード時間を改善することができるが、ACLModule を ITSMConfigItem- と Form-ReturnType で使用する場合は無効にしなければならない。"
 
 #: ../../content/configuration/system_configuration_settings.rst:266
 msgid "ConfigItemACL::Autoselect"
@@ -1238,8 +1296,9 @@ msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:274
+#, fuzzy
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "import/exportモジュールのバックエンドモジュールを登録。"
 
 #: ../../content/configuration/system_configuration_settings.rst:277
 msgid "Core::LinkObject"
@@ -1250,24 +1309,27 @@ msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:281
+#, fuzzy
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "構成アイテムのクラスのデフォルトのサブオブジェクトを定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:284
 msgid "LinkObject::ITSMConfigItem::ShowColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:285
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view for all "
 "CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
+msgstr "全ての CI クラスのリンク テーブル複合ビューに表示される CI の列を定義します。 エントリがない場合は、デフォルトの列が表示されます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:288
 msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:289
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view, "
 "depending on the CI class. Each entry must be prefixed with the class "
@@ -1279,7 +1341,7 @@ msgid ""
 "Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
 "Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, "
 "then the default columns are shown."
-msgstr ""
+msgstr "CI クラスに応じて、リンク テーブル複合ビューに表示される CI の列を定義します。 各エントリには、クラス名と二重コロンを接頭辞として付ける必要があります (例: Computer::)。全ての CI に共通する CI 属性がいくつかあります。 (クラス Computer の例: Computer::Name、Computer::CurDeplState、Computer::CreateTime)　 CI 定義で定義されている個々の CI 属性を表示するには、次のスキームを使用する必要があります (クラス Computer の例): Computer::HardDisk::1、Computer::HardDisk::1::Capacity::1　 CI クラスのエントリがない場合は、デフォルトの列が表示されます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:292
 msgid "Core::LinkStatus"
@@ -1290,48 +1352,53 @@ msgid "ITSMConfigItem::SetIncidentStateOnLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:296
+#, fuzzy
 msgid ""
 "Set the incident state of a CI automatically when a Ticket is Linked to a"
 " CI."
-msgstr ""
+msgstr "チケットがCIにリンクされている場合、CIのインシデントのステータスを自動的に設定します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:299
 msgid "ITSMConfigItem::LinkStatus::TicketTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:300
+#, fuzzy
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "リンクされたCIのステータスに影響するチケットのタイプを定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:303
 msgid "ITSMConfigItem::LinkStatus::DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:304
+#, fuzzy
 msgid ""
 "Defines the relevant deployment states where linked tickets can affect "
 "the status of a CI."
-msgstr ""
+msgstr "リンクされたチケットがCIのステータスに影響を与える可能性がある、関連するデプロイ・ステータスを定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:307
 msgid "ITSMConfigItem::LinkStatus::IncidentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:308
+#, fuzzy
 msgid ""
 "Defines the order of incident states from high (e.g. cricital) to low "
 "(e.g. functional)."
-msgstr ""
+msgstr "インシデント状態の高（例: 危険）から低（例: 情報）へのインシデント状態の順序を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:311
 msgid "ITSMConfigItem::LinkStatus::LinkTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:312
+#, fuzzy
 msgid ""
 "Defines which type of link (named from the ticket perspective) can affect"
 " the status of a linked CI."
-msgstr ""
+msgstr "リンクされたCIのステータスに影響するリンクのタイプ（チケットの観点から名前が付けられます）を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:315
 msgid "Core::Stats"
@@ -1342,8 +1409,9 @@ msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:319
+#, fuzzy
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "構成タイテムのレポートを生成するためのモジュール"
 
 #: ../../content/configuration/system_configuration_settings.rst:322
 msgid "Daemon::SchedulerCronTaskManager::Task"
@@ -1356,8 +1424,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:326
 #: ../../content/configuration/system_configuration_settings.rst:330
 #: ../../content/configuration/system_configuration_settings.rst:334
+#, fuzzy
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "ConfigItemFetch invokerを自動的に起動する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:329
 msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-02"
@@ -1400,8 +1469,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "担当者インタフェースに関するフロントエンド・モジュールの登録です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1416,8 +1486,9 @@ msgid "Frontend::NavigationModule###AdminITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:359
+#, fuzzy
 msgid "Admin area navigation for the agent interface."
-msgstr ""
+msgstr "担当者Webインタフェースの管理ナビゲーション"
 
 #: ../../content/configuration/system_configuration_settings.rst:362
 msgid "Frontend::Admin::ModuleRegistration::Loader"
@@ -1436,8 +1507,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "担当者Webインタフェースのローダーモジュール登録"
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1469,10 +1541,11 @@ msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:384
+#, fuzzy
 msgid ""
 "Defines the number of rows for the CI definition editor in the admin "
 "interface."
-msgstr ""
+msgstr "管理インターフェイス Cl 定義エディタの行数を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:387
 msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
@@ -1483,80 +1556,88 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムのズーム ビューに戻るためのリンクをメニューに表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスのズーム ビューで構成アイテムの履歴にアクセスするためのリンクをメニューに表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスのズーム ビューで構成アイテムを編集するためのメニューのリンクを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスのズーム ビューで構成アイテムを印刷するためのメニューのリンクを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:407
+#, fuzzy
 msgid ""
 "Shows a link in the menu that allows linking a configuration item with "
 "another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムのズーム ビューで、構成アイテムを別のオブジェクトにリンクできるようにするメニュー内のリンクを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:410
 msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:411
+#, fuzzy
 msgid ""
 "Shows a link in the menu to display the configuration item links as a "
 "Tree View."
-msgstr ""
+msgstr "設定項目のリンクをツリー表示するためのリンクをメニューに表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:414
 msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:415
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the its "
 "zoom view of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスのズーム ビューで構成アイテムを複製するためのリンクをメニューに表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:418
 msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:419
+#, fuzzy
 msgid ""
 "Shows a link in the menu to delete a configuration item in its zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "メニューにリンクを表示して、担当者Webインターフェイスのズーム表示で設定項目を削除します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:422
 msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
@@ -1567,30 +1648,33 @@ msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:426
+#, fuzzy
 msgid ""
 "Shows a link in the menu to zoom into a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムの概要で構成アイテムを拡大するためのメニューのリンクを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:429
 msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:430
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the configuration item overview of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムの概要にある構成アイテムの履歴にアクセスするためのリンクをメニューに表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:433
 msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:434
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムの概要で構成アイテムを複製するためのメニューのリンクを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:437
 msgid "Frontend::Agent::ITSMConfigItem::Permission"
@@ -1601,90 +1685,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスで構成アイテム画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスで構成アイテムの編集画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスで構成アイテムの追加画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスで構成アイテムの履歴画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "担当者Webインタフェースで構成アイテムの印刷画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイス構成アイテムのズーム画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスの構成アイテムの検索画面を使用するために必要な権限"
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "エージェントインターフェイスでITSM構成項目ツリービュー画面を使用するために必要な権限。"
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "エージェントインターフェイスの一括ITSM設定項目画面を使用するために必要な権限。"
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1695,10 +1788,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:480
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item attachment action"
 " in the agent interface."
-msgstr ""
+msgstr "エージェントインターフェイスでITSM構成項目添付アクションを使用するために必要な権限。"
 
 #: ../../content/configuration/system_configuration_settings.rst:483
 msgid "Frontend::Agent::ITSMConfigItemOverview"
@@ -1710,10 +1804,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "構成アイテムを定義して、構成アイテムのリストの小さなビューを表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1724,6 +1819,7 @@ msgid "LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:494
+#, fuzzy
 msgid ""
 "Define Actions where a settings button is available in the linked objects"
 " widget (LinkObject::ViewMode = \"complex\"). Please note that these "
@@ -1731,7 +1827,7 @@ msgid ""
 "Core.AllocationList.css, Core.UI.AllocationList.js, "
 "Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and "
 "Core.Agent.LinkObject.js."
-msgstr ""
+msgstr "リンクオブジェクトウィジェット（LinkObject :: ViewMode = \"complex\"）で設定ボタンを使用できるアクションを定義します。 これらのアクションは、次のJSおよびCSSファイルを登録している必要があります。Core.AllocationList.css、Core.UI.AllocationList.js、Core.UI.Table.Sort.js、Core.Agent.TableFilters.js、及びCore.Agent .LinkObject.js"
 
 #: ../../content/configuration/system_configuration_settings.rst:497
 msgid "Frontend::Agent::ModuleRegistration"
@@ -1842,8 +1938,9 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "担当者インターフェースの構成アイテムの検索バックエンドルーター"
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
@@ -1865,10 +1962,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:616
 #: ../../content/configuration/system_configuration_settings.rst:623
 #: ../../content/configuration/system_configuration_settings.rst:630
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the additional ITSM field screen of the agent "
 "interface."
-msgstr ""
+msgstr "担当者インターフェイスの ITSMフィールド画面に表示するダイナミック・フィールド"
 
 #: ../../content/configuration/system_configuration_settings.rst:612
 msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
@@ -1903,42 +2001,46 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ExtendedSearchCondi
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:637
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the agent "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "エージェントインタフェースの設定項目検索において、拡張検索条件を許可します。この機能により、\"(*key1*&*key2*) \"や\"(*key1*|*key2*) \"のような条件で設定項目名を検索することができます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:640
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "エージェントインターフェースの検索結果の各ページに表示される設定項目の数。"
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "エージェントインタフェースの設定項目検索結果の設定項目ソートのデフォルトの設定項目属性を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "エージェントインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義します。上: 最も古いものが上。Down: 最新が上。"
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1957,10 +2059,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "設定項目検索画面のデフォルトの表示設定項目検索属性を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1987,20 +2090,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "設定項目検索画面の属性で使用するデフォルトデータ。例：\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"。"
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "コンフィグ項目検索画面の属性で使用するデフォルトデータ。例：\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"。"
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2016,6 +2121,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2036,7 +2142,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "コンフィグ項目検索画面にデフォルトで表示されるコンフィグ項目検索属性を定義します。例: \"Key \"にはダイナミック・フィールドの名前 (この場合は 'X')、\"Content\" にはダイナミック・フィールドのタイプに応じてダイナミック・フィールドの値、Text: 'a text'、Dropdown: '1'、Date/Time：'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00；Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01；Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59；'、または 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2050,6 +2156,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2057,7 +2164,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "担当者インターフェイスのスレーブ チケット概要のダッシュボード バックエンドのパラメーター。 「制限」は、デフォルトで表示されるエントリの数です。 「グループ」はプラグインへのアクセスを制限するために使用されます (例: グループ: admin;group1;group2;)。 「デフォルト」は、プラグインがデフォルトで有効になっているか、ユーザーが手動で有効にする必要があるかを決定します。 「CacheTTLLocal」は、プラグインのキャッシュ時間 (分単位) です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2078,27 +2185,30 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:714
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the agent "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "エージェントインタフェースの設定項目概要でフィルタリングできる列。注意: コンフィグ項目属性と動的フィールド (DynamicField_NameX) のみ許可されます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:717
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:718
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "構成アイテムの画面の検索制限を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:721
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:722
+#, fuzzy
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "何も選択されていない場合に表示されるデフォルトのカテゴリー。"
 
 #: ../../content/configuration/system_configuration_settings.rst:725
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable"
@@ -2106,12 +2216,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:726
 #: ../../content/configuration/system_configuration_settings.rst:939
+#, fuzzy
 msgid ""
 "Defines the available columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "CIクラスに応じて、設定項目の概要で利用可能なCIの列を定義します。各項目は、クラス名と、対応するクラスで利用可能なフィールドの配列から構成されなければなりません。動的フィールドのエントリは、DynamicField_FieldName スキームに従わなければなりません。"
 
 #: ../../content/configuration/system_configuration_settings.rst:729
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault"
@@ -2119,12 +2230,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:730
 #: ../../content/configuration/system_configuration_settings.rst:943
+#, fuzzy
 msgid ""
 "Defines the default displayed columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "CIクラスに応じて、設定項目の概要に表示されるCIのデフォルトの列を定義します。各項目は、クラス名と、対応するクラスで利用可能なフィールドの配列から構成されなければなりません。動的フィールドのエントリは、DynamicField_FieldNameスキームに従わなければなりません。"
 
 #: ../../content/configuration/system_configuration_settings.rst:733
 msgid "Frontend::Agent::View::ITSMConfigItemBulk"
@@ -2135,20 +2247,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:737
+#, fuzzy
 msgid ""
 "Sets the deployment state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムの一括画面でデプロイ状態を設定します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:740
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "担当者インターフェイスの構成アイテムの一括画面でインシデントのステータスを設定します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2159,8 +2273,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:748
+#, fuzzy
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "構成アイテムを削除するために必要な特権"
 
 #: ../../content/configuration/system_configuration_settings.rst:751
 msgid "Frontend::Agent::View::ITSMConfigItemEdit"
@@ -2171,20 +2286,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "この画面のリッチ テキスト エディター コンポーネントの高さを定義します。数値 (ピクセル) またはパーセント値 (相対) を入力します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "この画面のリッチ テキスト エディター コンポーネントの高さを定義します。数値 (ピクセル) またはパーセント値 (相対) を入力します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2195,8 +2312,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "担当者Webインターフェイスで構成アイテムの履歴（逆順）を表示します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2207,16 +2325,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "検索結果をCSVフォーマットでエクスポートするために使用されるデータです。"
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "検索結果をCSVフォーマットでエクスポートする際に利用するダイナミック・フィールドです。"
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2227,18 +2347,20 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:785
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "構成アイテムの検索画面の検索制限を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:788
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:789
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item search screen of the agent "
 "interface."
-msgstr ""
+msgstr "エージェントインターフェースの設定項目検索画面に表示される動的フィールド。"
 
 #: ../../content/configuration/system_configuration_settings.rst:792
 msgid "Frontend::Agent::View::Preferences"
@@ -2249,14 +2371,16 @@ msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:796
+#, fuzzy
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "ページのパラメータ（構成アイテムが表示されます）。"
 
 #: ../../content/configuration/system_configuration_settings.rst:799
 msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:800
+#, fuzzy
 msgid ""
 "Parameters for the column filters of the small config item overview. "
 "Please note: setting 'Active' to 0 will only prevent agents from editing "
@@ -2264,7 +2388,7 @@ msgid ""
 "allow administrators to edit the settings of another user's behalf. Use "
 "'PreferenceGroup' to control in which area these settings should be shown"
 " in the user interface."
-msgstr ""
+msgstr "小設定項目概要の列フィルタ用のパラメータです。注意: 'Active' を 0 に設定すると、エージェントは個人設定でこのグループの設定を編集できなくなりますが、管理者は他のユーザの設定を編集することができます。PreferenceGroup' を使用して、これらの設定をユーザインターフェイスのどのエリアに表示するかを制御します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:803
 msgid "Frontend::Base::DynamicFieldScreens"
@@ -2275,20 +2399,22 @@ msgid "DynamicFieldScreens###ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:807
+#, fuzzy
 msgid ""
 "This configuration defines all possible screens to enable or disable "
 "dynamic fields."
-msgstr ""
+msgstr "ダイナミック・フィールド管理画面でダイナミック・フィールドを表示・非表示にする画面を指定します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:810
 msgid "DefaultColumnsScreens###ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:811
+#, fuzzy
 msgid ""
 "This configuration defines all possible screens to enable or disable "
 "default columns."
-msgstr ""
+msgstr "この構成では、デフォルトの列を有効または無効にするためのすべての可能な画面を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:814
 msgid "Frontend::Base::Loader"
@@ -2299,8 +2425,9 @@ msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:818
+#, fuzzy
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "担当者インタフェースに対して、常にロードされるJSファイルのリストです。"
 
 #: ../../content/configuration/system_configuration_settings.rst:821
 msgid "Frontend::Base::NavBarModule"
@@ -2334,8 +2461,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "担当者インタフェースに関するフロントエンド・モジュールの登録です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2360,8 +2488,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "担当者インタフェースに関するフロントエンド・モジュールの登録です。"
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2388,72 +2517,79 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:880
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the customer interface."
-msgstr ""
+msgstr "カスタマーインターフェースのITSM構成項目検索画面を使用するために必要な権限。"
 
 #: ../../content/configuration/system_configuration_settings.rst:883
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:884
+#, fuzzy
 msgid ""
 "Includes deployment states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "カスタマーインターフェースの設定項目検索にデプロイメントステートが含まれるようになりました。"
 
 #: ../../content/configuration/system_configuration_settings.rst:887
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###IncidentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:888
+#, fuzzy
 msgid ""
 "Includes incident states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "カスタマーインターフェースの設定項目検索にインシデント状態を含める。"
 
 #: ../../content/configuration/system_configuration_settings.rst:891
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCondition"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:892
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the customer "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "カスタマーインターフェイスの設定項目検索において、検索条件を拡張することができます。この機能を使用すると、\"(*key1*&*key2*) \"または\"(*key1*|*key2*) \"のような条件で設定項目名を検索できます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:895
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "カスタマーインターフェースの検索結果の各ページに表示される設定項目の数。"
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:900
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the customer interface."
-msgstr ""
+msgstr "顧客インタフェースの設定項目検索結果の設定項目ソートのデフォルトの設定項目属性を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:903
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "カスタマインタフェースの設定項目検索結果のデフォルトの設定項目順序を定義します。上: 古い順に表示されます。下：最新が上。"
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2484,19 +2620,21 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:931
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the customer "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "エージェントインタフェースの設定項目概要でフィルタリングできる列。注意: コンフィグ項目属性と動的フィールド (DynamicField_NameX) のみ許可されます。"
 
 #: ../../content/configuration/system_configuration_settings.rst:934
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:935
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "CustomerITSMConfigItem 画面の検索制限を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:938
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
@@ -2516,10 +2654,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:950
 #: ../../content/configuration/system_configuration_settings.rst:954
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item overview screen of the customer "
 "interface."
-msgstr ""
+msgstr "顧客インターフェースの設定項目概要画面に表示される動的フィールド。"
 
 #: ../../content/configuration/system_configuration_settings.rst:953
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField"
@@ -2534,8 +2673,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:961
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "CustomerITSMConfigItemSearch 画面の検索制限を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:964
 msgid "Frontend::Customer::View::ITSMConfigItemZoom"
@@ -2546,42 +2686,47 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsEnabled"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:968
+#, fuzzy
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "顧客は過去のCIバージョンを見ることができる。"
 
 #: ../../content/configuration/system_configuration_settings.rst:971
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsSelectable"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:972
+#, fuzzy
 msgid ""
 "Customers have the possibility to manually switch between historic CI "
 "versions."
-msgstr ""
+msgstr "顧客は、過去のCIバージョンを手動で切り替えることができる。"
 
 #: ../../content/configuration/system_configuration_settings.rst:975
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:976
+#, fuzzy
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "どの一般的な情報がヘッダーに表示されているか。"
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "ジェネリックインターフェース・API実行元のGUI"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:983
+#, fuzzy
 msgid ""
 "For every webservice (key) an array of classes (value) can be defined on "
 "which the import is restricted. For all chosen classes, or all existing "
 "classes the identifying attributes will have to be chosen in the invoker "
 "config."
-msgstr ""
+msgstr "各Webサービス(キー)に対して、インポートを制限するクラスの配列(値)を定義することができます。選択されたすべてのクラス、あるいは既存のすべてのクラスについて、インボーカの設定で識別属性を選択する必要があります。"
 
 #: ../../content/configuration/system_configuration_settings.rst:986
 msgid "GenericInterface::Invoker::ModuleRegistration"
@@ -2592,18 +2737,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "ConfigItemFetch invokerレイヤーのGenericInterfaceモジュール登録。"
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "ConfigItemFetch invokerレイヤーのGenericInterfaceモジュール登録。"
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2614,10 +2761,11 @@ msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1001
+#, fuzzy
 msgid ""
 "Defines Required permissions to create ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "ジェネリックインターフェイスを活用して構成アイテムを取得する権限を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1004
 msgid "GenericInterface::Operation::ConfigItemDelete"
@@ -2628,10 +2776,11 @@ msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1008
+#, fuzzy
 msgid ""
 "Defines Required permissions to delete ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "ジェネリック・インターフェースを活用して構成アイテムを削除するために必要な権限を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1011
 msgid "GenericInterface::Operation::ConfigItemGet"
@@ -2642,10 +2791,11 @@ msgid "GenericInterface::Operation::ConfigItemGet###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1015
+#, fuzzy
 msgid ""
 "Defines Required permissions to get ITSM configuration items using the "
 "Generic Interface."
-msgstr ""
+msgstr "ジェネリックインターフェイスを活用して構成アイテムを取得する権限を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1018
 msgid "GenericInterface::Operation::ConfigItemSearch"
@@ -2656,40 +2806,44 @@ msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1022
+#, fuzzy
 msgid ""
 "Defines Required permissions to search ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "ジェネリックインターフェイスを活用して構成アイテムを検索する権限を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1025
 msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1026
+#, fuzzy
 msgid ""
 "Maximum number of config items to be displayed in the result of this "
 "operation."
-msgstr ""
+msgstr "この操作の結果に表示されるコンフィグ項目の最大数。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1029
 msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "この操作のコンフィグ項目検索結果のコンフィグ項目ソートのデフォルトのコンフィグ項目属性を定義します。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "この操作のコンフィグ項目検索結果のデフォルトのコンフィグ項目順序を定義します。Up:古い順。Down：最新が上。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2700,10 +2854,11 @@ msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1041
+#, fuzzy
 msgid ""
 "Defines Required permissions to update ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "ジェネリックインターフェイスを活用して構成アイテムを取得する権限を定義する。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1044
 msgid "GenericInterface::Operation::ModuleRegistration"
@@ -2718,8 +2873,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "ConfigItemFetch invokerレイヤーのGenericInterfaceモジュール登録。"
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2754,8 +2910,9 @@ msgstr ""
 
 #: ../../content/configuration/system_requirements.rst:22
 #: ../../content/system_requirements.rst:22
+#, fuzzy
 msgid "Packages"
-msgstr ""
+msgstr "パッケージ"
 
 #: ../../content/configuration/system_requirements.rst:25
 #: ../../content/system_requirements.rst:25
@@ -2777,12 +2934,14 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "一覧"
 
 #: ../../content/overview.rst:16
+#, fuzzy
 msgid "Summary"
-msgstr ""
+msgstr "概要"
 
 #: ../../content/overview.rst:18
 msgid ""
@@ -2794,8 +2953,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "紹介文"
 
 #: ../../content/overview.rst:25
 msgid ""
