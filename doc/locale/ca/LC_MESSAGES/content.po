@@ -5,21 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Catalan <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/ca/>\n"
-"Language: ca\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 23:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Catalan <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/ca/>\nLanguage: ca\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -42,8 +28,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -71,16 +58,18 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "Configuració de correu."
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
 msgid "Table of Contents"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "Configuració de correu."
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -141,8 +130,9 @@ msgid "Configuration Reference"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "CMD"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "Configuration Management Database"
@@ -397,8 +387,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "Agent"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -441,8 +432,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "Client"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +453,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "Client"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +474,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "Camps dinàmics"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -629,16 +623,18 @@ msgid "Frontend"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Usuari"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
 msgid "Change settings"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "Format"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -2777,8 +2773,9 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "Resum"
 
 #: ../../content/overview.rst:16
 msgid "Summary"
