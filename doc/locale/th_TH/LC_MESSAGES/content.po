@@ -5,21 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Thai <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/th/>\n"
-"Language: th_TH\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 23:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Thai <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/th/>\nLanguage: th_TH\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -42,8 +28,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "เวอร์ชั่น"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -56,31 +43,35 @@ msgid "Terms and Conditions"
 msgstr ""
 
 #: ../../content/about.rst:29
+#, fuzzy
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document "
 "under the terms of the GNU Free Documentation License, Version 1.3 or any"
 " later version published by the Free Software Foundation; with no "
 "Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy"
 " of the license is included in the section entitled \"COPYING\"."
-msgstr ""
+msgstr "ข้อกำหนดและเงื่อนไข Rother OSS: อนุญาตให้คัดลอก แจกจ่าย และ/หรือแก้ไขเอกสารนี้ภายใต้เงื่อนไขของ GNU Free Documentation License, เวอร์ชัน 1.3 หรือเวอร์ชันที่ใหม่กว่าที่เผยแพร่โดย Free Software Foundation; โดยไม่มีส่วนที่ไม่เปลี่ยนแปลง ไม่มีข้อความหน้าปก และไม่มีข้อความหลังปก สำเนาของใบอนุญาตนี้รวมอยู่ในส่วนที่มีชื่อว่า \"COPYING\""
 
 #: ../../content/about.rst:35
+#, fuzzy
 msgid ""
 "Published by: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 "
 "Leiblfing, Germany."
-msgstr ""
+msgstr "เผยแพร่โดย: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 Leiblfing, เยอรมนี."
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "การกำหนดค่าการ"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
 msgid "Table of Contents"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "การกำหนดค่าเมล์"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -137,12 +128,14 @@ msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
+#, fuzzy
 msgid "Configuration Reference"
-msgstr ""
+msgstr "ตัวเลือกการกำหนดค่าอ้างอิง"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "CMD"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "Configuration Management Database"
@@ -153,8 +146,9 @@ msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "รายการการกำหนดค่า"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -397,8 +391,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "เอเย่นต์"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -413,8 +408,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "ConfigItem"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -441,8 +437,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "ลูกค้า"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +458,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "ลูกค้าผู้ใช้"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +479,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "ไดมานิคฟิลด์"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -526,8 +525,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:240
+#, fuzzy
 msgid "General Catalog"
-msgstr ""
+msgstr "แค็ตตาล็อกทั่วไป"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:242
 msgid "The idea is to have a Dropdown field."
@@ -560,20 +560,23 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:249
+#, fuzzy
 msgid "Config Item Links"
-msgstr ""
+msgstr "Config Items"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:250
 msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "การนำเข้า/ส่งออก"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -613,32 +616,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACLs"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "การตั้งค่าการจับคู่"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "Frontend"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "ผู้ใช้"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "เปลี่ยนการตั้งค่า"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "รูปแบบ"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -675,12 +684,14 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "การดำเนินงาน"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "ConfigItem"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
@@ -715,8 +726,9 @@ msgid "Invoker"
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "ConfigItem"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -733,18 +745,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "เปิดใช้งานการตั้งค่ารายการคุณลักษณะของการทำงานเป็นกลุ่ม สำหรับฟรอนต์เอนของเอเย่นต์เพื่อทำงานกับรายการการกำหนดค่าที่มีมากกว่าหนึ่งในหนึ่งครั้ง"
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "เปิดใช้งานการตั้งค่ารายการคุณลักษณะของการทำงานเป็นกลุ่มเฉพาะสำหรับกลุ่มที่ระบุไว้"
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -756,8 +770,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "การลงทะเบียนส่วนหลังของ DynamicField"
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -772,8 +787,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "ารลงทะเบียนออบเจคของDynamicField"
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -843,10 +859,11 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "โมดูลกิจกรรมของConfig item ที่ช่วยให้เข้าสู่ระบบประวัติในอินเตอร์เฟสของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
@@ -920,48 +937,53 @@ msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:109
+#, fuzzy
 msgid "Core::GeneralCatalog"
-msgstr ""
+msgstr "แค็ตตาล็อกทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:112
 msgid "GeneralCatalogPreferences###DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:113
+#, fuzzy
 msgid ""
 "Parameters for the deployment states in the preferences view of the agent"
 " interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:116
 msgid "GeneralCatalogPreferences###DeploymentStatesColors"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:117
+#, fuzzy
 msgid ""
 "Parameters for the deployment states color in the preferences view of the"
 " agent interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพของสีในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:120
 msgid "GeneralCatalogPreferences###NameModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:121
+#, fuzzy
 msgid ""
 "Parameters for the name module for config item classes in the preferences"
 " view of the agent interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:124
 msgid "GeneralCatalogPreferences###NumberModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:125
+#, fuzzy
 msgid ""
 "Parameters for the number module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:128
 msgid "GeneralCatalogPreferences###VersionStringModule"
@@ -988,30 +1010,33 @@ msgid "GeneralCatalogPreferences###VersionTrigger"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:137
+#, fuzzy
 msgid ""
 "Parameters for the version trigger for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:140
 msgid "GeneralCatalogPreferences###Categories"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:141
+#, fuzzy
 msgid ""
 "Parameters for the categories for config item classes in the preferences "
 "view of the agent interface."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับการพัฒนาสถานภาพในมุมมองการตั้งค่าของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:144
 msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับตัวอย่างกลุ่มที่ได้รับอนุญาตของแอตทริบิวต์แค็ตตาล็อกทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:148
 msgid "Core::ITSMConfigItem"
@@ -1022,36 +1047,40 @@ msgid "ITSMConfigItem::CINameRegex"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:152
+#, fuzzy
 msgid ""
 "Defines regular expressions individually for each ConfigItem class to "
 "check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "กำหนดนิพจน์ทั่วไปเป็นรายบุคคลในConfigItem แต่ละชั้น เพื่อตรวจสอบชื่อ ConfigItem และเพื่อแสดงข้อความผิดพลาดที่สอดคล้องกัน"
 
 #: ../../content/configuration/system_configuration_settings.rst:155
 msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:156
+#, fuzzy
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "โมดูลในการตรวจสอบผู้รับผิดชอบกลุ่มสำหรับคลาส"
 
 #: ../../content/configuration/system_configuration_settings.rst:159
 msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:160
+#, fuzzy
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "โมดูลในการตรวจสอบผู้รับผิดชอบกลุ่มสำหรับ configuration item"
 
 #: ../../content/configuration/system_configuration_settings.rst:163
 msgid "ITSMConfigItem::Hook"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:164
+#, fuzzy
 msgid ""
 "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#."
 " The default is ConfigItem#."
-msgstr ""
+msgstr "ตัวบ่งชี้สำหรับ  Configuration Item เช่น ConfigItem#, MyConfigItem# ค่าเริ่มต้นคือ ConfigItem#"
 
 #: ../../content/configuration/system_configuration_settings.rst:167
 msgid "UniqueCIName::EnableUniquenessCheck"
@@ -1070,11 +1099,12 @@ msgid "UniqueCIName::UniquenessCheckScope"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:172
+#, fuzzy
 msgid ""
 "Check for a unique name only within the same ConfigItem class ('class') "
 "or globally ('global'), which means every existing ConfigItem is taken "
 "into account when looking for duplicates."
-msgstr ""
+msgstr "ตรวจสอบชื่อเฉพาะเท่านั้นที่อยู่ใน ConfigItem ชั้นเดียวกัน (ชั้น) หรือทั้งหมด (ทั้งหมด) ซึ่งหมายความว่าConfigItem ที่มีอยู่ทั้งหมดจะถูกนำเข้าบัญชีเพื่อค้นหารายการที่ซ้ำกัน"
 
 #: ../../content/configuration/system_configuration_settings.rst:175
 msgid "Customer::ConfigItem::PermissionConditions###01"
@@ -1158,10 +1188,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "กำหนดรายการที่ที่ใช้ได้ในระดับแรกของโครงสร้าง ACL"
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1176,10 +1207,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "กำหนดรายการที่ที่ใช้ได้ในระดับที่สองของโครงสร้าง ACL"
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1202,10 +1234,11 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "กำหนดรายการที่ที่ใช้ได้สำหรับ 'การกระทำ' ในระดับที่สามของโครงสร้าง ACL"
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
@@ -1238,8 +1271,9 @@ msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:274
+#, fuzzy
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "รูปแบบการลงทะเบียนโมดูล backend สำหรับโมดูลการนำเข้า / ส่งออก"
 
 #: ../../content/configuration/system_configuration_settings.rst:277
 msgid "Core::LinkObject"
@@ -1250,8 +1284,9 @@ msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:281
+#, fuzzy
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "กำหนดอบเจกต์ย่อยเริ่มต้นของคลาส 'ITSMConfigItem'"
 
 #: ../../content/configuration/system_configuration_settings.rst:284
 msgid "LinkObject::ITSMConfigItem::ShowColumns"
@@ -1268,6 +1303,7 @@ msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:289
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view, "
 "depending on the CI class. Each entry must be prefixed with the class "
@@ -1279,7 +1315,7 @@ msgid ""
 "Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
 "Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, "
 "then the default columns are shown."
-msgstr ""
+msgstr "กำหนดคอลัมน์ที่แสดง CIs ในตารางการเชื่อมโยงมุมมองที่ซับซ้อนซึ่งขึ้นอยู่กับคลาส CI รายการการป้อนแต่ละรายการจะต้องนำหน้าด้วยชื่อคลาสและเครื่องหมายทวิภาคคู่ (เช่นคอมพิวเตอร์: :) มีแอตทริบิวต์ CI เพียงไม่กี่แอตทริบิวต์ ที่ใช้กันทั่วไปใน CIs ทั้งหมด (ตัวอย่างสำหรับคลาสคอมพิวเตอร์: คอมพิวเตอร์::ชื่อ, คอมพิวเตอร์::CurDeplState, คอมพิวเตอร์::CreateTime) ในการแสดงแอตทริบิวต์ CI ตามที่กำหนดไว้ในคำนิยาม CI จะต้องใช้รูปแบบต่อไปนี้(ตัวอย่างสำหรับคลาสคอมพิวเตอร์): คอมพิวเตอร์::ฮาร์ดดิสก์::1, คอมพิวเตอร์::ฮาร์ดดิสก์::1::ความจุ::1, คอมพิวเตอร์::ฮาร์ดดิสก์::2, คอมพิวเตอร์::ฮาร์ดดิสก์::2::ความจุ::1 หากไม่มีการป้อนคลาสที่ CI แล้วคอลัมน์เริ่มต้นจะแสดงตามที่กำหนดไว้ในการตั้งค่า ITSMConfigItem ::Frontend :: AgentITSMConfigItem ### ShowColumns"
 
 #: ../../content/configuration/system_configuration_settings.rst:292
 msgid "Core::LinkStatus"
@@ -1342,8 +1378,9 @@ msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:319
+#, fuzzy
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "โมดูลสร้างสถิติ ITSM config item"
 
 #: ../../content/configuration/system_configuration_settings.rst:322
 msgid "Daemon::SchedulerCronTaskManager::Task"
@@ -1400,8 +1437,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล Frontend สำหรับอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1436,8 +1474,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล Frontend สำหรับอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1457,8 +1496,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:587
 #: ../../content/configuration/system_configuration_settings.rst:591
 #: ../../content/configuration/system_configuration_settings.rst:873
+#, fuzzy
 msgid "Main menu item registration."
-msgstr ""
+msgstr "การลงทะเบียนเมนูหลัก"
 
 #: ../../content/configuration/system_configuration_settings.rst:380
 msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
@@ -1469,10 +1509,11 @@ msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:384
+#, fuzzy
 msgid ""
 "Defines the number of rows for the CI definition editor in the admin "
 "interface."
-msgstr ""
+msgstr "กำหนดจำนวนแถวสำหรับตัวแก้ไขการนิยาม CI ในอินเตอร์เฟสของผู้ดูแลระบบ"
 
 #: ../../content/configuration/system_configuration_settings.rst:387
 msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
@@ -1483,50 +1524,55 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูเพื่อกลับไปยังมุมมองการซูมของการเปลี่ยนแปลงของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะเข้าชมประวัติของ configuration item ในมุมมองการซูมของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะแก้ไข configuration item ในมุมมองการซูมของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะพิมพ์ configuration item ในมุมมองการซูมของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:407
+#, fuzzy
 msgid ""
 "Shows a link in the menu that allows linking a configuration item with "
 "another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูเพื่อลิงค์รายการการตั้งค่ากับออบเจกค์อื่นในการซูมในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:410
 msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
@@ -1543,20 +1589,22 @@ msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:415
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the its "
 "zoom view of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะจำลองconfiguration item ในมุมมองการซูมของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:418
 msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:419
+#, fuzzy
 msgid ""
 "Shows a link in the menu to delete a configuration item in its zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะแก้ไข configuration item ในมุมมองการซูมของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:422
 msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
@@ -1567,30 +1615,33 @@ msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:426
+#, fuzzy
 msgid ""
 "Shows a link in the menu to zoom into a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูเพื่อซูมรายการการตั้งค่าในมุมมองภาพรวมของรายการการตั้งค่าในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:429
 msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:430
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the configuration item overview of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะเข้าชมประวัติของ configuration item ในมุมมองทั่วไปของconfiguration itemในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:433
 msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:434
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "แสดงลิงค์ในเมนูในการที่จะจำลอง configuration item ในมุมมองทั่วไปของconfiguration item ในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:437
 msgid "Frontend::Agent::ITSMConfigItem::Permission"
@@ -1601,90 +1652,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานการแก้ไขในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานการเพิ่มในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานประวัติในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานการพิมพ์ในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอการซูมรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอการค้นหารายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอรายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1695,10 +1755,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:480
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item attachment action"
 " in the agent interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอการค้นหารายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:483
 msgid "Frontend::Agent::ITSMConfigItemOverview"
@@ -1710,10 +1771,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "กำหนดโมดูลภาพรวมในการแสดงมุมมองขนาดเล็กของรายการ  Configuration Items"
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1842,8 +1904,9 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Configuration Item ค้นหา backend router ของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
@@ -1865,10 +1928,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:616
 #: ../../content/configuration/system_configuration_settings.rst:623
 #: ../../content/configuration/system_configuration_settings.rst:630
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the additional ITSM field screen of the agent "
 "interface."
-msgstr ""
+msgstr "แสดงหัวข้อฟิลด์ในหน้าจอฟิลด์เพิ่มเติมของ ITSMในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:612
 msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
@@ -1915,30 +1979,33 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "จำนวนบทความ FAQ ที่จะแสดงบนแต่ละหน้าของผลการค้นหาในอินเตอร์เฟซสาธารณะ"
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "กำหนดคแอตทริบิวต์เริ่มต้นของตั๋วสำหรับการเรียงลำดับตั๋วของผลลัพธ์ของการค้นหาตั๋วในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "กำหนดการจัดเรียงเริ่มต้นของตั๋วในผลลัพธ์ของการค้นหาตั๋วของอินเตอร์เฟซเอเย่นต์ ขึ้น: เก่าที่สุดด้านบน ลง: ล่าสุดด้านบน"
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1957,10 +2024,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "กำหนดค่าเริ่มต้นแอตทริบิวต์การค้นหาตั๋วที่แสดงสำหรับหน้าจอการค้นหาตั๋ว"
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1987,20 +2055,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "ข้อมูลเริ่มต้นที่จะใช้ในแอตทริบิวต์สำหรับหน้าจอการค้นหาตั๋ว ตัวอย่าง: \"TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;\""
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "ข้อมูลเริ่มต้นที่จะใช้ในแอตทริบิวต์สำหรับหน้าจอการค้นหาตั๋ว ตัวอย่าง: \"TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;\""
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2016,6 +2086,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2036,7 +2107,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "กำหนดค่าเริ่มต้นของแอตทริบิวต์การค้นหาตั๋วที่ถูกแสดงสำหรับหน้าจอการค้นหาตั๋ว ตัวอย่าง: \"คีย์\" ต้องมีชื่อของฟิลด์แบบไดนามิกในกรณีนี้คือ 'X'  \"เนื้อหา\" ต้องมีค่าของฟิลด์ไดนามิกซึ่งขึ้นอยู่กับประเภทของฟิลด์ไดนามิก ข้อความ: คือ 'ข้อความ'  เมนูแบบเลื่อนลง: '1',  วันที่ / เวลา: Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2050,6 +2121,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2057,7 +2129,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับแดชบอร์ดเบื้องหลังของภาพรวมตั๋วslave tของอินเตอร์เฟสเอเย่นต์ \"จำกัด\" คือกำหนดจำนวนของรายการที่แสดงโดยค่าเริ่มต้น \"กลุ่ม\" จะถูกนำมาใช้เพื่อจำกัดการเข้าถึงปลั๊กอิน (เช่นกลุ่ม: ผู้ดูแลระบบ; กลุ่ม 1; กลุ่ม2;) \"เริ่มต้น\" ระบุว่าถ้าปลั๊กอินถูกเปิดใช้งานโดยค่าเริ่มต้นหรือหากผู้ใช้ต้องการเพื่อเปิดใช้งานได้ด้วยตนเอง"
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2089,8 +2161,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:718
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "กำหนดขีดจำกัดของการค้นหาสำหรับหน้าจอ AgentITSMConfigItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:721
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
@@ -2135,20 +2208,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:737
+#, fuzzy
 msgid ""
 "Sets the deployment state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "ตั้งค่าสถานะการใช้งานในหน้าจอการตั้งค่ารายการเป็นกลุ่มของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:740
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "ตั้งค่าสถานะของเหตุการณ์ในหน้าจอการตั้งค่ารายการเป็นกลุ่มของอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2159,8 +2234,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:748
+#, fuzzy
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "สิทธิพิเศษที่จำเป็นในการลบการเปลี่ยนแปลง"
 
 #: ../../content/configuration/system_configuration_settings.rst:751
 msgid "Frontend::Agent::View::ITSMConfigItemEdit"
@@ -2171,20 +2247,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "กำหนดความกว้างสำหรับส่วนประกอบของการแก้ไขข้อความสำหรับหน้าจอนี้ ป้อนจำนวน (พิกเซล) หรือค่าร้อยละ (เทียบ)"
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "กำหนดความสูงสำหรับคอมโพเนนต์แก้ไขข้อความสำหรับหน้าจอนี้ ใส่หมายเลข (พิกเซล) หรือค่าร้อยละ (เทียบ)"
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2195,8 +2273,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "แสดงประวัติ config item (ลำดับย้อนกลับ) ในอินเตอร์เฟซเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2207,16 +2286,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "ข้อมูลถูกนำมาใช้เพื่อส่งออกผลการค้นหาในรูปแบบ CSV"
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "ฟิลด์แบบไดนามิก ถูกนำมาใช้เพื่อส่งออกผลการค้นหาในรูปแบบ CSV"
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2227,8 +2308,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:785
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "กำหนดขีดจำกัดของการค้นหาสำหรับหน้าจอ AgentITSMConfigItemSearch"
 
 #: ../../content/configuration/system_configuration_settings.rst:788
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
@@ -2249,8 +2331,9 @@ msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:796
+#, fuzzy
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "พารามิเตอร์สำหรับแต่ละหน้า(ซึ่ง configuration items แสดง)"
 
 #: ../../content/configuration/system_configuration_settings.rst:799
 msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
@@ -2334,8 +2417,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล Frontend สำหรับอินเตอร์เฟซลูกค้า"
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2360,8 +2444,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล Frontend สำหรับอินเตอร์เฟซลูกค้า"
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2388,10 +2473,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:880
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the customer interface."
-msgstr ""
+msgstr "จำเป็นต้องมีการอนุญาติในการใช้งานในหน้าจอการค้นหารายการการตั้งค่า ITSM ในอินเตอร์เฟซของเอเย่นต์"
 
 #: ../../content/configuration/system_configuration_settings.rst:883
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
@@ -2430,10 +2516,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "จำนวนบทความ FAQ ที่จะแสดงบนแต่ละหน้าของผลการค้นหาในอินเตอร์เฟซของลูกค้า"
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
@@ -2450,10 +2537,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "กำหนดการจัดเรียงเริ่มต้นของตั๋วของผลลัพธ์ของการค้นหาในอินเตอร์เฟซลูกค้า ขึ้น: เก่าที่สุดด้านบน ลง: ล่าสุดด้านบน"
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2495,8 +2583,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:935
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "กำหนดขีดจำกัดของการค้นหาสำหรับหน้าจอ AgentITSMConfigItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:938
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
@@ -2534,8 +2623,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:961
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "กำหนดขีดจำกัดของการค้นหาสำหรับหน้าจอ AgentITSMConfigItemSearch"
 
 #: ../../content/configuration/system_configuration_settings.rst:964
 msgid "Frontend::Customer::View::ITSMConfigItemZoom"
@@ -2568,8 +2658,9 @@ msgid "Which general information is shown in the header."
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "GUI อินเตอร์เฟซทั่วไปของ Invoker"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
@@ -2592,18 +2683,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล GenericInterface สำหรับชั้นของผู้ร้องขอ"
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล GenericInterface สำหรับชั้นของผู้ร้องขอ"
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2614,10 +2707,11 @@ msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1001
+#, fuzzy
 msgid ""
 "Defines Required permissions to create ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "กำหนดสิทธิ์ที่จำเป็นในการเอารายการการตั้งค่า ITSMโดยใช้อินเตอร์เฟซทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:1004
 msgid "GenericInterface::Operation::ConfigItemDelete"
@@ -2628,10 +2722,11 @@ msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1008
+#, fuzzy
 msgid ""
 "Defines Required permissions to delete ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "กำหนดสิทธิ์ที่จำเป็นในการเอารายการการตั้งค่า ITSMโดยใช้อินเตอร์เฟซทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:1011
 msgid "GenericInterface::Operation::ConfigItemGet"
@@ -2642,10 +2737,11 @@ msgid "GenericInterface::Operation::ConfigItemGet###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1015
+#, fuzzy
 msgid ""
 "Defines Required permissions to get ITSM configuration items using the "
 "Generic Interface."
-msgstr ""
+msgstr "กำหนดสิทธิ์ที่จำเป็นในการเอารายการการตั้งค่า ITSMโดยใช้อินเตอร์เฟซทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:1018
 msgid "GenericInterface::Operation::ConfigItemSearch"
@@ -2656,10 +2752,11 @@ msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1022
+#, fuzzy
 msgid ""
 "Defines Required permissions to search ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "กำหนดสิทธิ์ที่จำเป็นในการค้นหารายการการตั้งค่า ITSMโดยใช้อินเตอร์เฟซทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:1025
 msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
@@ -2676,20 +2773,22 @@ msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "กำหนดคแอตทริบิวต์เริ่มต้นของตั๋วสำหรับการเรียงลำดับตั๋วของผลลัพธ์ของการค้นหาตั๋วของการดำเนินการนี้"
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "กำหนดการจัดเรียงเริ่มต้นของตั๋วในผลลัพธ์ของการค้นหาตั๋วของการดำเนินการนี้ ขึ้น: เก่าที่สุดด้านบน ลง: ล่าสุดด้านบน"
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2700,10 +2799,11 @@ msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1041
+#, fuzzy
 msgid ""
 "Defines Required permissions to update ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "กำหนดสิทธิ์ที่จำเป็นในการเอารายการการตั้งค่า ITSMโดยใช้อินเตอร์เฟซทั่วไป"
 
 #: ../../content/configuration/system_configuration_settings.rst:1044
 msgid "GenericInterface::Operation::ModuleRegistration"
@@ -2718,8 +2818,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "การลงทะเบียนโมดูล GenericInterface สำหรับชั้นของการดำเนินงาน"
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2739,8 +2840,9 @@ msgstr ""
 
 #: ../../content/configuration/system_requirements.rst:13
 #: ../../content/system_requirements.rst:13
+#, fuzzy
 msgid "System requirements"
-msgstr ""
+msgstr "ข้อกำหนดของซอฟต์แวร์"
 
 #: ../../content/configuration/system_requirements.rst:16
 #: ../../content/system_requirements.rst:16
@@ -2777,8 +2879,9 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "ภาพรวม"
 
 #: ../../content/overview.rst:16
 msgid "Summary"
@@ -2794,8 +2897,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "บทนำ"
 
 #: ../../content/overview.rst:25
 msgid ""
