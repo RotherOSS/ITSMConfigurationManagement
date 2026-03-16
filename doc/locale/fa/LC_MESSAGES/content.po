@@ -5,21 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Persian <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/fa/>\n"
-"Language: fa\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 21:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Persian <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/fa/>\nLanguage: fa\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n > 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -42,8 +28,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "نسخه"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -71,16 +58,18 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "پیکر بندی"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
 msgid "Table of Contents"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "پیکربندی پست الکترونیک"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -137,12 +126,14 @@ msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
+#, fuzzy
 msgid "Configuration Reference"
-msgstr ""
+msgstr "گزینه های پیکربندی مرجع"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "CMD"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "Configuration Management Database"
@@ -153,8 +144,9 @@ msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "آیتم پیکربندی"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -397,8 +389,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "کارشناس"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -413,8 +406,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "آیتم پیکربندی"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -441,8 +435,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "مشترک"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +456,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "مشترک"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +477,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "رشته های پویا"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -526,8 +523,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:240
+#, fuzzy
 msgid "General Catalog"
-msgstr ""
+msgstr "فهرست عمومی"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:242
 msgid "The idea is to have a Dropdown field."
@@ -568,12 +566,14 @@ msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "ورود/صدور"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -613,32 +613,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACL ها"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "تطابق تنظیمات"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "ظاهر"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "کاربر"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "تغییر تنظیمات"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "فرمت"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -675,12 +681,14 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "عملیاتی"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "آیتم پیکربندی"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
@@ -715,8 +723,9 @@ msgid "Invoker"
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "آیتم پیکربندی"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -733,18 +742,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "حجم درخواست از ویژگی های عمل برای ظاهر عامل به کار بر روی بیش از درخواست در یک زمان قادر می سازد."
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "ویژگی های عمل حجم درخواست تنها برای گروه های ذکر شده را قادر می سازد ."
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -756,8 +767,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "DynamicField ثبت نام باطن."
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -772,8 +784,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "DynamicField ثبت نام شی."
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -843,10 +856,11 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "ماژول رویداد آیتم پیکربندی که ثبت وقایع در تاریخچه را در واسط کاربری کارشناس فعال می‌سازد."
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
@@ -897,10 +911,11 @@ msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:95
+#, fuzzy
 msgid ""
 "Performs the configured action for each event (as an Invoker) for each "
 "configured Webservice."
-msgstr ""
+msgstr "انجام عمل پیکربندی برای هر رویداد (به عنوان یک Invoker) برای هر از webservice پیکربندی شده است."
 
 #: ../../content/configuration/system_configuration_settings.rst:98
 msgid "Core::Event::Ticket"
@@ -920,8 +935,9 @@ msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:109
+#, fuzzy
 msgid "Core::GeneralCatalog"
-msgstr ""
+msgstr "فهرست عمومی"
 
 #: ../../content/configuration/system_configuration_settings.rst:112
 msgid "GeneralCatalogPreferences###DeploymentStates"
@@ -1008,10 +1024,11 @@ msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "پارامترهایی برای گروه‌های دسترسی نمونه مربوط به ویژگی‌های فهرست عمومی"
 
 #: ../../content/configuration/system_configuration_settings.rst:148
 msgid "Core::ITSMConfigItem"
@@ -1158,10 +1175,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "تعریف می کند که اقلام در سطح اول از ساختار ACL در دسترس هستند."
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1176,10 +1194,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "تعریف می کند که اقلام در سطح دوم از ساختار ACL در دسترس هستند."
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1202,10 +1221,11 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "تعریف می کند که اقلام برای 'عمل' در سطح سوم ساختار ACL در دسترس هستند."
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
@@ -1238,8 +1258,9 @@ msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:274
+#, fuzzy
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "قالب‌بندی ثبت ماژول برای ماژول ورود/صدور"
 
 #: ../../content/configuration/system_configuration_settings.rst:277
 msgid "Core::LinkObject"
@@ -1376,8 +1397,9 @@ msgid "Events###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:341
+#, fuzzy
 msgid "List of all Package events to be displayed in the GUI."
-msgstr ""
+msgstr "فهرست از تمام وقایع بسته بندی در رابط کاربری گرافیکی نمایش داده می شود."
 
 #: ../../content/configuration/system_configuration_settings.rst:344
 msgid "Frontend::Admin::ModuleRegistration"
@@ -1400,8 +1422,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "ظاهر ثبت نام ماژول برای رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1436,8 +1459,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "ظاهر ثبت نام ماژول برای رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1457,8 +1481,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:587
 #: ../../content/configuration/system_configuration_settings.rst:591
 #: ../../content/configuration/system_configuration_settings.rst:873
+#, fuzzy
 msgid "Main menu item registration."
-msgstr ""
+msgstr "ثبت نام منوی اصلی."
 
 #: ../../content/configuration/system_configuration_settings.rst:380
 msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
@@ -1483,40 +1508,44 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "یک لینک در منوی نشان می دهد به زوم یک بلیط در مروری بلیط رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "یک لینک در منوی نشان می دهد برای دیدن تاریخ یک بلیط در هر مروری بلیط رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "نشان می دهد یک لینک در منوی ثبت نام یک بلیط به یک فرایند در نظر زوم بلیط رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "نشان می دهد یک لینک در منوی ثبت نام یک بلیط به یک فرایند در نظر زوم بلیط رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
@@ -1601,90 +1630,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش توجه داشته باشید بلیط در رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش خروجی ایمیل در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش خروجی ایمیل در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش توجه داشته باشید بلیط در رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش توجه داشته باشید بلیط در رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش خروجی ایمیل در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش خروجی ایمیل در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده ازدرخواست صفحه نمایش های متنی رایگان در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "دسترسی مورد نیاز برای استفاده از صفحه نمایش خروجی ایمیل در صفحه ی کارشناس."
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1710,10 +1748,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "تعریف ماژول نمای کلی برای نمایش نمای کوچک از فهرست تغییرات"
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1724,6 +1763,7 @@ msgid "LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:494
+#, fuzzy
 msgid ""
 "Define Actions where a settings button is available in the linked objects"
 " widget (LinkObject::ViewMode = \"complex\"). Please note that these "
@@ -1731,7 +1771,7 @@ msgid ""
 "Core.AllocationList.css, Core.UI.AllocationList.js, "
 "Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and "
 "Core.Agent.LinkObject.js."
-msgstr ""
+msgstr "تعریف عملیات که در آن یک دکمه تنظیمات در دسترس است در اشیاء مرتبط ویجت (LinkObject :: ViewMode = \\\\ \"پیچیده \"). لطفا توجه داشته باشید که این اقدامات باید در بر داشت زیر JS و CSS فایل های ثبت نام کرده اند: Core.AllocationList.css، Core.UI.AllocationList.js، Core.UI.Table.Sort.js، Core.Agent.TableFilters.js."
 
 #: ../../content/configuration/system_configuration_settings.rst:497
 msgid "Frontend::Agent::ModuleRegistration"
@@ -1842,16 +1882,18 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "تغییر مسیریاب جستجو در رابط کاربری کارشناس"
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:602
+#, fuzzy
 msgid "JavaScript function for the search frontend."
-msgstr ""
+msgstr "جاوا اسکریپت تابع برای ظاهر جستجو."
 
 #: ../../content/configuration/system_configuration_settings.rst:605
 msgid "Frontend::Agent::View::AgentITSMConfigItemBulk"
@@ -1903,42 +1945,46 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ExtendedSearchCondi
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:637
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the agent "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "اجازه می دهد تا شرایط جستجو شده در جستجوی بلیط از رابط عامل عمومی است. با این ویژگی شما می توانید به عنوان مثال عنوان بلیط با این نوع از شرایط مانند \\\\ جستجو \"(* key1 * && * key2 *) \" یا \\\\ \"(* key1 * || * key2 *) \"."
 
 #: ../../content/configuration/system_configuration_settings.rst:640
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط عامل نمایش داده شود."
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض ویژگی بلیط برای مرتب سازی بلیط از نتیجه جستجو بلیط رابط عامل."
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض سفارش بلیط در نتیجه جستجو بلیط رابط عامل. تا: قدیمی ترین در بالای صفحه. پایین: شدن در بالای صفحه."
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1957,10 +2003,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض نشان داده بلیط ویژگی جستجو برای صفحه نمایش جستجو بلیط."
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1987,20 +2034,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "داده های پیش فرض برای استفاده بر روی ویژگی برای صفحه نمایش جستجو بلیط. به عنوان مثال: \\\\ \"TicketCreateTimePointFormat = سال؛ TicketCreateTimePointStart = آخرین. TicketCreateTimePoint = 2؛ \"."
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "داده های پیش فرض برای استفاده بر روی ویژگی برای صفحه نمایش جستجو بلیط. به عنوان مثال: \\\\ \"TicketCreateTimeStartYear = 2010؛ TicketCreateTimeStartMonth = 10؛ TicketCreateTimeStartDay = 4؛ TicketCreateTimeStopYear = 2010؛ TicketCreateTimeStopMonth = 11؛ TicketCreateTimeStopDay = 3؛ \"."
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2016,6 +2065,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2036,7 +2086,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض نشان داده بلیط ویژگی جستجو برای صفحه نمایش جستجو بلیط. به عنوان مثال: \\\\ \"کلید \" باید نام زمینه پویا در این مورد 'X'، \\\\ \"محتوا \"، باید ارزش درست پویا بسته به نوع پویا درست، متن را داشته باشد: یک متن، کرکره : '1'، تاریخ / زمان: Search_DynamicField_XTimeSlotStartYear = 1974؛ Search_DynamicField_XTimeSlotStartMonth = 01؛ Search_DynamicField_XTimeSlotStartDay = 26؛ Search_DynamicField_XTimeSlotStartHour = 00؛ Search_DynamicField_XTimeSlotStartMinute = 00؛ Search_DynamicField_XTimeSlotStartSecond = 00؛ Search_DynamicField_XTimeSlotStopYear = 2013؛ Search_DynamicField_XTimeSlotStopMonth = 01؛ Search_DynamicField_XTimeSlotStopDay = 26؛ Search_DynamicField_XTimeSlotStopHour = 23؛ Search_DynamicField_XTimeSlotStopMinute = 59؛ Search_DynamicField_XTimeSlotStopSecond = 59؛ ' و یا \"Search_DynamicField_XTimePointFormat = هفته؛ Search_DynamicField_XTimePointStart = قبل از. Search_DynamicField_XTimePointValue = 7 '؛."
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2050,6 +2100,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2057,7 +2108,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "پارامترهای باطن داشبورد لیست کاربران مشتری مروری بر رابط عامل. \\\\ \"محدود \" تعداد ورودی نشان داده شده است به طور پیش فرض است. \\\\ \"گروه \" استفاده شده است برای محدود کردن دسترسی به پلاگین (به عنوان مثال گروه: مدیریت. GROUP1؛ GROUP2؛). \\\\ \"پیش فرض \" تعیین اگر این افزونه به طور پیش فرض و یا اگر کاربر نیاز به آن را فعال کنید به صورت دستی فعال کنید. \\\\ \"CacheTTLLocal \" زمان کش در دقیقه برای پلاگین است."
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2145,10 +2196,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "نوع بلیط در صفحه نمایش فله بلیط رابط عامل تنظیم می کند."
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2171,20 +2223,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "پهنای برای غنی جزء ویرایشگر متن برای این صفحه نمایش. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید."
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن برای این صفحه نمایش. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید."
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2195,8 +2249,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "تاریخ بلیط (معکوس دستور داد) در رابط عامل نشان می دهد."
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2207,16 +2262,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "داده استفاده شده برای ارسال نتایج جستجو به قالب CSV"
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "زمینه های پویا مورد استفاده به صادرات نتیجه جستجو در فرمت CSV."
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2299,8 +2356,9 @@ msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:818
+#, fuzzy
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "لیستی از فایل های JS برای همیشه برای رابط عامل بارگذاری می شود."
 
 #: ../../content/configuration/system_configuration_settings.rst:821
 msgid "Frontend::Base::NavBarModule"
@@ -2334,8 +2392,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "ظاهر ثبت نام ماژول برای رابط مشتری."
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2360,8 +2419,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "ظاهر ثبت نام ماژول برای رابط مشتری."
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2418,22 +2478,24 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCo
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:892
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the customer "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "اجازه می دهد تا شرایط جستجو شده در جستجوی بلیط از رابط عامل عمومی است. با این ویژگی شما می توانید به عنوان مثال عنوان بلیط با این نوع از شرایط مانند \\\\ جستجو \"(* key1 * && * key2 *) \" یا \\\\ \"(* key1 * || * key2 *) \"."
 
 #: ../../content/configuration/system_configuration_settings.rst:895
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط مشتری نمایش داده می شود."
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
@@ -2450,10 +2512,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض سفارش بلیط از یک نتیجه جستجو در رابط مشتری. تا: قدیمی ترین در بالای صفحه. پایین: شدن در بالای صفحه."
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2568,8 +2631,9 @@ msgid "Which general information is shown in the header."
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "رابط کاربری گرافیکی GenericInterface Invoker"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
@@ -2592,18 +2656,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "GenericInterface ثبت نام ماژول برای لایه invoker است."
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "GenericInterface ثبت نام ماژول برای لایه invoker است."
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2666,30 +2732,33 @@ msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1026
+#, fuzzy
 msgid ""
 "Maximum number of config items to be displayed in the result of this "
 "operation."
-msgstr ""
+msgstr "حداکثر تعداد درخواست در نتیجه این کار نمایش داده می شود."
 
 #: ../../content/configuration/system_configuration_settings.rst:1029
 msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض ویژگی بلیط برای مرتب سازی بلیط از نتیجه جستجو بلیط این عملیات."
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "تعریف می کند که به طور پیش فرض سفارش بلیط در نتیجه جستجو بلیط از این عملیات. تا: قدیمی ترین در بالای صفحه. پایین: شدن در بالای صفحه."
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2718,8 +2787,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "GenericInterface ثبت نام ماژول برای لایه عملیات."
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2777,8 +2847,9 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "پیش نمایش"
 
 #: ../../content/overview.rst:16
 msgid "Summary"
@@ -2794,8 +2865,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "معرفی"
 
 #: ../../content/overview.rst:25
 msgid ""
