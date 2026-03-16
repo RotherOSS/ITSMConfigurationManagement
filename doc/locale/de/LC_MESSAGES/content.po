@@ -5,7 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-08 12:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: German <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/de/>\nLanguage: de\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 21:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: German <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/de/>\nLanguage: de\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -1413,12 +1413,14 @@ msgid ""
 msgstr "Legt fest, welche Art von Link (aus der Ticketperspektive benannt) den Status eines verlinkten CI beeinflussen kann."
 
 #: ../../content/configuration/system_configuration_settings.rst:315
+#, fuzzy
 msgid "Core::Stats"
-msgstr ""
+msgstr "Core::Stats"
 
 #: ../../content/configuration/system_configuration_settings.rst:318
+#, fuzzy
 msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
-msgstr ""
+msgstr "Stats::DynamicObjectRegistration###SurveyList"
 
 #: ../../content/configuration/system_configuration_settings.rst:319
 #, fuzzy
