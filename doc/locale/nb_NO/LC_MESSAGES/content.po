@@ -5,29 +5,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Norwegian Bokmål <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/nb_NO/>\n"
-"Language: nb_NO\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 23:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Norwegian Bokmål <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/nb_NO/>\nLanguage: nb_NO\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: ../../content/about.rst:16
+#, fuzzy
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: ../../content/about.rst:17
 msgid "Rother OSS GmbH"
@@ -42,8 +30,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "is"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -71,16 +60,19 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurasjon"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
+#, fuzzy
 msgid "Table of Contents"
-msgstr ""
+msgstr "Innholdsfortegnelse"
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "E-postoppsett"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -128,8 +120,9 @@ msgid ".. figure:: images/ready2import_class_bundles.png"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst
+#, fuzzy
 msgid ":alt: Ready2Import Class Bundles panel"
-msgstr ""
+msgstr "Ready2Import-klassepakker"
 
 #: ../../content/configuration/basic_configuration.rst:29
 msgid "Click the button to import the Ready2Adopt class bundles."
@@ -137,24 +130,28 @@ msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
+#, fuzzy
 msgid "Configuration Reference"
-msgstr ""
+msgstr "Referanse for konfigurasjonsalternativer"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "Kommando"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "Configuration Management Database"
-msgstr ""
+msgstr "Database for konfigurasjonsstyring."
 
 #: ../../content/configuration/configuration_reference.rst:17
 msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "Konfigurasjonsenhet"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -397,8 +394,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "Saksbehandler"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -413,8 +411,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "Konfigurasjonsenhet"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -431,8 +430,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:214
+#, fuzzy
 msgid "ConfigItemVersion"
-msgstr ""
+msgstr "ConfigItem Versjon"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:216
 msgid ""
@@ -441,8 +441,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "Kunde"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +462,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "Kunde-bruker"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +483,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "Dynamiske felte"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -526,8 +529,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:240
+#, fuzzy
 msgid "General Catalog"
-msgstr ""
+msgstr "Generell Katalog"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:242
 msgid "The idea is to have a Dropdown field."
@@ -560,20 +564,23 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:249
+#, fuzzy
 msgid "Config Item Links"
-msgstr ""
+msgstr "Konfigurasjonsenheter"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:250
 msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "Import/Eksport"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -613,32 +620,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACLer"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "Match innstillinger"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "Frontend"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Bruker"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "Endre innstillinger"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "Til"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -675,28 +688,32 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "Handlinger"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "Konfigurasjonsenhet"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:52
+#, fuzzy
 msgid "ConfigItemSearch"
-msgstr ""
+msgstr "ConfigItem-søk"
 
 #: ../../content/configuration/generic_interface/index.rst:53
 msgid "Search for one or more config items."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:85
+#, fuzzy
 msgid "ConfigItemUpsert"
-msgstr ""
+msgstr "ConfigItems"
 
 #: ../../content/configuration/generic_interface/index.rst:86
 msgid "Add or update one or more config items based on the sent data."
@@ -711,12 +728,14 @@ msgid "Delete a config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:151
+#, fuzzy
 msgid "Invoker"
-msgstr ""
+msgstr "Utløser"
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "Konfigurasjonsenhet"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -733,18 +752,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "Aktiverer funksjonen for massehandlinger for konfigurasjonselementer, slik at agentens frontend kan arbeide med mer enn ett konfigurasjonselement om gangen."
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "Aktiverer funksjonen for massehandling av konfigurasjonselementer bare for de oppførte gruppene."
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -756,8 +777,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "Dynamisk felt-backend-registrering."
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -772,8 +794,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "Dynamisk felt-objektregistrering."
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -784,55 +807,60 @@ msgid "Elasticsearch::ExcludedCIClasses"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:48
+#, fuzzy
 msgid ""
 "ConfigItems of the following classes will not be stored on the "
 "Elasticsearch server. To apply this to existing CIs, the CI migration has"
 " to be run via console, after changing this option."
-msgstr ""
+msgstr "ConfigItems av følgende klasser vil ikke bli lagret på Elasticsearch-serveren. Hvis du vil bruke dette på eksisterende CI-er, må CI-migreringen kjøres via konsollen etter at du har endret dette alternativet."
 
 #: ../../content/configuration/system_configuration_settings.rst:51
 msgid "Elasticsearch::ExcludedCIDeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:52
+#, fuzzy
 msgid ""
 "ConfigItems with the following deployment states will not be stored on "
 "the Elasticsearch server. To apply this to existing CIs, the CI migration"
 " has to be run via console, after changing this option."
-msgstr ""
+msgstr "ConfigItems med følgende distribusjonsstatus vil ikke bli lagret på Elasticsearch-serveren. For å bruke dette på eksisterende CI-er må CI-migreringen kjøres via konsollen etter at du har endret dette alternativet."
 
 #: ../../content/configuration/system_configuration_settings.rst:55
 msgid "Elasticsearch::ConfigItemStoreFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:56
+#, fuzzy
 msgid ""
 "Fields stored in the configuration item index which are used for other "
 "things besides fulltext searches. For the complete functionality all "
 "fields are mandatory."
-msgstr ""
+msgstr "Felt som er lagret i konfigurasjonselementindeksen, og som brukes til andre ting enn fulltekstsøk. Alle feltene er obligatoriske for å få full funksjonalitet."
 
 #: ../../content/configuration/system_configuration_settings.rst:59
 msgid "Elasticsearch::ConfigItemSearchFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:60
+#, fuzzy
 msgid ""
 "Fields of the configuration item index, used for the fulltext search. "
 "Fields are also stored, but are not mandatory for the overall "
 "functionality. Inclusion of attachments can be disabled by setting the "
 "entry to 0 or deleting it."
-msgstr ""
+msgstr "Felt i konfigurasjonselementindeksen, som brukes til fulltekstsøk. Feltene lagres også, men er ikke obligatoriske for den generelle funksjonaliteten. Inkludering av vedlegg kan deaktiveres ved å sette oppføringen til 0 eller slette den."
 
 #: ../../content/configuration/system_configuration_settings.rst:63
 msgid "Elasticsearch::QuickSearchShow###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:64
+#, fuzzy
 msgid ""
 "Objects to search for, how many entries and which attributs to show. "
 "ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
+msgstr "Objekter det skal søkes etter, hvor mange oppføringer og hvilke attributter som skal vises. ConfigItem-attributter må lagres eksplisitt via Elasticsearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:67
 msgid "Core::Event::ITSMConfigItem"
@@ -843,20 +871,22 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "Konfigurer hendelsesmodul for konfigureringselementet som muliggjør logging til historikk i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:75
+#, fuzzy
 msgid ""
 "Config item event module that updates config items to their current "
 "definition."
-msgstr ""
+msgstr "Hendelsesmodul for konfigurasjonselementer som oppdaterer konfigurasjonselementene til deres gjeldende definisjon."
 
 #: ../../content/configuration/system_configuration_settings.rst:78
 msgid "ITSMConfigItem::EventModulePost###400-LinkSync"
@@ -887,20 +917,22 @@ msgid "DynamicField::EventModulePost###200-DynamicFieldSync"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:91
+#, fuzzy
 msgid ""
 "Dynamic field event module that marks config item definitions as out of "
 "sync, if containing dynamic fields change."
-msgstr ""
+msgstr "Modul for dynamiske felthendelser som markerer konfigurasjonselementdefinisjoner som usynkroniserte hvis de dynamiske feltene endres."
 
 #: ../../content/configuration/system_configuration_settings.rst:94
 msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:95
+#, fuzzy
 msgid ""
 "Performs the configured action for each event (as an Invoker) for each "
 "configured Webservice."
-msgstr ""
+msgstr "Utfører den konfigurerte handlingen for hver hendelse (som en Invoker) for hver konfigurerte webtjeneste."
 
 #: ../../content/configuration/system_configuration_settings.rst:98
 msgid "Core::Event::Ticket"
@@ -912,169 +944,188 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:102
 #: ../../content/configuration/system_configuration_settings.rst:106
+#, fuzzy
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
+msgstr "Hendelsesmodul for å angi configitem-status på ticket-configitem-link."
 
 #: ../../content/configuration/system_configuration_settings.rst:105
 msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:109
+#, fuzzy
 msgid "Core::GeneralCatalog"
-msgstr ""
+msgstr "Generell Katalog"
 
 #: ../../content/configuration/system_configuration_settings.rst:112
 msgid "GeneralCatalogPreferences###DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:113
+#, fuzzy
 msgid ""
 "Parameters for the deployment states in the preferences view of the agent"
 " interface."
-msgstr ""
+msgstr "Parametere for distribusjonsstatusene i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:116
 msgid "GeneralCatalogPreferences###DeploymentStatesColors"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:117
+#, fuzzy
 msgid ""
 "Parameters for the deployment states color in the preferences view of the"
 " agent interface."
-msgstr ""
+msgstr "Parametere for fargene for distribusjonsstatusene i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:120
 msgid "GeneralCatalogPreferences###NameModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:121
+#, fuzzy
 msgid ""
 "Parameters for the name module for config item classes in the preferences"
 " view of the agent interface."
-msgstr ""
+msgstr "Parametere for navnemodulen for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:124
 msgid "GeneralCatalogPreferences###NumberModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:125
+#, fuzzy
 msgid ""
 "Parameters for the number module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "Parametere for nummermodulen for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:128
 msgid "GeneralCatalogPreferences###VersionStringModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:129
+#, fuzzy
 msgid ""
 "Parameters for the version string module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "Parametere for versjonsstrengmodulen for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:132
 msgid "GeneralCatalogPreferences###VersionStringExpression"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:133
+#, fuzzy
 msgid ""
 "Parameters for the version string template toolkit module for config item"
 " classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "Parametere for versjonsstrengmalverktøymodulen for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:136
 msgid "GeneralCatalogPreferences###VersionTrigger"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:137
+#, fuzzy
 msgid ""
 "Parameters for the version trigger for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "Parametere for versjonsutløseren for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:140
 msgid "GeneralCatalogPreferences###Categories"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:141
+#, fuzzy
 msgid ""
 "Parameters for the categories for config item classes in the preferences "
 "view of the agent interface."
-msgstr ""
+msgstr "Parametere for kategoriene for konfigurasjonselementklasser i preferansevisningen i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:144
 msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "Parametere for tilgangsgruppe-eksempel i attributtene for generell katalog."
 
 #: ../../content/configuration/system_configuration_settings.rst:148
+#, fuzzy
 msgid "Core::ITSMConfigItem"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:151
 msgid "ITSMConfigItem::CINameRegex"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:152
+#, fuzzy
 msgid ""
 "Defines regular expressions individually for each ConfigItem class to "
 "check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "Definerer regulære uttrykk individuelt for hver ConfigItem-klasse for å kontrollere ConfigItem-navnet og vise tilsvarende feilmeldinger."
 
 #: ../../content/configuration/system_configuration_settings.rst:155
 msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:156
+#, fuzzy
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "Modul for å sjekke hvilken gruppe som er ansvarlig for en klasse."
 
 #: ../../content/configuration/system_configuration_settings.rst:159
 msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:160
+#, fuzzy
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "Modul for å sjekke hvilken gruppe som er ansvarlig for et konfigurasjonselement."
 
 #: ../../content/configuration/system_configuration_settings.rst:163
+#, fuzzy
 msgid "ITSMConfigItem::Hook"
-msgstr ""
+msgstr "ITSM ConfigItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:164
+#, fuzzy
 msgid ""
 "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#."
 " The default is ConfigItem#."
-msgstr ""
+msgstr "Identifikatoren for et konfigurasjonselement, f.eks. ConfigItem#, MyConfigItem#. Standardinnstillingen er ConfigItem#."
 
 #: ../../content/configuration/system_configuration_settings.rst:167
 msgid "UniqueCIName::EnableUniquenessCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:168
+#, fuzzy
 msgid ""
 "Enables/disables the functionality to check ITSM onfiguration items for "
 "unique names. Before enabling this option you should check your system "
 "for already existing config items with duplicate names. You can do this "
 "with the console command Admin::ITSM::ConfigItem::ListDuplicates."
-msgstr ""
+msgstr "Aktiverer/deaktiverer funksjonaliteten for å sjekke om ITSM-konfigurasjonselementer har unike navn. Før du aktiverer dette alternativet, bør du sjekke systemet for allerede eksisterende konfigurasjonselementer med dupliserte navn. Du kan gjøre dette med konsollkommandoen Admin::ITSM::ConfigItem::ListDuplicates."
 
 #: ../../content/configuration/system_configuration_settings.rst:171
 msgid "UniqueCIName::UniquenessCheckScope"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:172
+#, fuzzy
 msgid ""
 "Check for a unique name only within the same ConfigItem class ('class') "
 "or globally ('global'), which means every existing ConfigItem is taken "
 "into account when looking for duplicates."
-msgstr ""
+msgstr "Se etter et unikt navn bare innenfor samme ConfigItem-klasse ('class') eller globalt ('global'), noe som betyr at alle eksisterende ConfigItems tas med i betraktningen når man leter etter duplikater."
 
 #: ../../content/configuration/system_configuration_settings.rst:175
 msgid "Customer::ConfigItem::PermissionConditions###01"
@@ -1085,12 +1136,13 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:184
 #: ../../content/configuration/system_configuration_settings.rst:188
 #: ../../content/configuration/system_configuration_settings.rst:192
+#, fuzzy
 msgid ""
 "Define a set of conditions under which a customer is allowed to see a "
 "config item. Conditions can optionally be restricted to certain customer "
 "groups. Name is the only mandatory attribute. If no other options are "
 "given, all config items will be visible under that category."
-msgstr ""
+msgstr "Definer et sett med betingelser for at en kunde skal kunne se et konfigurasjonselement. Betingelsene kan eventuelt begrenses til bestemte kundegrupper. Navn er det eneste obligatoriske attributtet. Hvis ingen andre alternativer er angitt, vil alle konfigurasjonselementer være synlige under den aktuelle kategorien."
 
 #: ../../content/configuration/system_configuration_settings.rst:179
 msgid "Customer::ConfigItem::PermissionConditions###02"
@@ -1137,16 +1189,18 @@ msgid "CMDBTreeView::DefaultDepth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:220
+#, fuzzy
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "Definerer standard relasjonsdybde som skal vises."
 
 #: ../../content/configuration/system_configuration_settings.rst:223
 msgid "CMDBTreeView::ShowLinkLabels"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:224
+#, fuzzy
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "Angir om lenketypeetikettene skal vises i nodeforbindelsene."
 
 #: ../../content/configuration/system_configuration_settings.rst:227
 msgid "Core::ITSMConfigItem::ACL"
@@ -1158,10 +1212,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "Definerer hvilke elementer som er tilgjengelige på første nivå i ITSM Config Item ACL-strukturen."
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1176,10 +1231,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "Definerer hvilke elementer som er tilgjengelige på andre nivå i ITSM Config Item ACL-strukturen."
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1202,32 +1258,35 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "Definerer hvilke elementer som er tilgjengelige for \"Handling\" på tredje nivå i ITSM Config Item ACL-strukturen."
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:263
+#, fuzzy
 msgid ""
 "Whether the execution of ConfigItemACL can be avoided by checking cached "
 "field dependencies. This can improve loading times of formulars, but has "
 "to be disabled, if ACLModules are to be used for ITSMConfigItem- and "
 "Form-ReturnTypes."
-msgstr ""
+msgstr "Om kjøringen av ConfigItemACL kan unngås ved å sjekke bufrede feltavhengigheter. Dette kan forbedre innlastingstiden for formularer, men må deaktiveres hvis ACLModules skal brukes for ITSMConfigItem- og Form-ReturnTypes."
 
 #: ../../content/configuration/system_configuration_settings.rst:266
 msgid "ConfigItemACL::Autoselect"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:267
+#, fuzzy
 msgid ""
 "Whether fields should be automatically filled (1), and in that case also "
 "be hidden from ticket formulars (2)."
-msgstr ""
+msgstr "Om felt skal fylles ut automatisk (1), og i så fall også skjules for saksformlene (2)."
 
 #: ../../content/configuration/system_configuration_settings.rst:270
 msgid "Core::ImportExport::ObjectBackend::ModuleRegistration"
@@ -1238,8 +1297,9 @@ msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:274
+#, fuzzy
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "Baksidemodul-registrering for formatet til import/eksport-modulen"
 
 #: ../../content/configuration/system_configuration_settings.rst:277
 msgid "Core::LinkObject"
@@ -1250,24 +1310,27 @@ msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:281
+#, fuzzy
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "Definerer standardunderobjektet for klassen 'ITSMConfigItem'."
 
 #: ../../content/configuration/system_configuration_settings.rst:284
 msgid "LinkObject::ITSMConfigItem::ShowColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:285
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view for all "
 "CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
+msgstr "Definerer hvilke kolonner som skal vises for CI-er i den komplekse visningen av koblingstabellen for alle CI-klasser. Hvis det ikke finnes noen oppføring, vises standardkolonnene."
 
 #: ../../content/configuration/system_configuration_settings.rst:288
 msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:289
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view, "
 "depending on the CI class. Each entry must be prefixed with the class "
@@ -1279,7 +1342,7 @@ msgid ""
 "Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
 "Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, "
 "then the default columns are shown."
-msgstr ""
+msgstr "Definerer de viste kolonnene med CI-er i den komplekse visningen av koblingstabellen, avhengig av CI-klassen. Hver oppføring må innledes med klassenavnet og to kolon (f.eks. Computer::). Det finnes noen få CI-attributter som er felles for alle CI-er (eksempel for klassen Computer: Computer::Name, Computer::CurDeplState, Computer::CreateTime). For å vise individuelle CI-attributter som definert i CI-definisjonen, må følgende skjema brukes (eksempel for klassen Computer): Computer::HardDisk::1, Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, Computer::HardDisk::2::Capacity::1. Hvis det ikke finnes noen oppføring for en CI-klasse, vises standardkolonnene."
 
 #: ../../content/configuration/system_configuration_settings.rst:292
 msgid "Core::LinkStatus"
@@ -1290,48 +1353,53 @@ msgid "ITSMConfigItem::SetIncidentStateOnLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:296
+#, fuzzy
 msgid ""
 "Set the incident state of a CI automatically when a Ticket is Linked to a"
 " CI."
-msgstr ""
+msgstr "Angi hendelsesstatus for en CI automatisk når en Ticket kobles til en CI."
 
 #: ../../content/configuration/system_configuration_settings.rst:299
 msgid "ITSMConfigItem::LinkStatus::TicketTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:300
+#, fuzzy
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "Definerer hvilken type billett som kan påvirke statusen til en koblet CI."
 
 #: ../../content/configuration/system_configuration_settings.rst:303
 msgid "ITSMConfigItem::LinkStatus::DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:304
+#, fuzzy
 msgid ""
 "Defines the relevant deployment states where linked tickets can affect "
 "the status of a CI."
-msgstr ""
+msgstr "Definerer de relevante distribusjonsstatusene der tilknyttede tickets kan påvirke statusen til en CI."
 
 #: ../../content/configuration/system_configuration_settings.rst:307
 msgid "ITSMConfigItem::LinkStatus::IncidentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:308
+#, fuzzy
 msgid ""
 "Defines the order of incident states from high (e.g. cricital) to low "
 "(e.g. functional)."
-msgstr ""
+msgstr "Definerer rekkefølgen av hendelsestilstander fra høy (f.eks. kritisk) til lav (f.eks. funksjonell)."
 
 #: ../../content/configuration/system_configuration_settings.rst:311
 msgid "ITSMConfigItem::LinkStatus::LinkTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:312
+#, fuzzy
 msgid ""
 "Defines which type of link (named from the ticket perspective) can affect"
 " the status of a linked CI."
-msgstr ""
+msgstr "Definerer hvilken type kobling (navngitt fra ticket-perspektivet) som kan påvirke statusen til et koblet CI."
 
 #: ../../content/configuration/system_configuration_settings.rst:315
 msgid "Core::Stats"
@@ -1342,8 +1410,9 @@ msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:319
+#, fuzzy
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "Modul for å generere statistikk over ITSM-konfigurasjonselementer."
 
 #: ../../content/configuration/system_configuration_settings.rst:322
 msgid "Daemon::SchedulerCronTaskManager::Task"
@@ -1356,8 +1425,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:326
 #: ../../content/configuration/system_configuration_settings.rst:330
 #: ../../content/configuration/system_configuration_settings.rst:334
+#, fuzzy
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "Utløser ConfigItemFetch-invokatoren automatisk."
 
 #: ../../content/configuration/system_configuration_settings.rst:329
 msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-02"
@@ -1376,8 +1446,9 @@ msgid "Events###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:341
+#, fuzzy
 msgid "List of all Package events to be displayed in the GUI."
-msgstr ""
+msgstr "Liste over alle pakkehendelser som skal vises i GUI."
 
 #: ../../content/configuration/system_configuration_settings.rst:344
 msgid "Frontend::Admin::ModuleRegistration"
@@ -1400,8 +1471,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "Registrering av websidemodul i agentdelen."
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1416,8 +1488,9 @@ msgid "Frontend::NavigationModule###AdminITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:359
+#, fuzzy
 msgid "Admin area navigation for the agent interface."
-msgstr ""
+msgstr "Administratorområdenavigasjon for agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:362
 msgid "Frontend::Admin::ModuleRegistration::Loader"
@@ -1436,8 +1509,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "Lastemodulregistrering for agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1457,8 +1531,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:587
 #: ../../content/configuration/system_configuration_settings.rst:591
 #: ../../content/configuration/system_configuration_settings.rst:873
+#, fuzzy
 msgid "Main menu item registration."
-msgstr ""
+msgstr "Hovedmenyelement-registrering."
 
 #: ../../content/configuration/system_configuration_settings.rst:380
 msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
@@ -1469,10 +1544,11 @@ msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:384
+#, fuzzy
 msgid ""
 "Defines the number of rows for the CI definition editor in the admin "
 "interface."
-msgstr ""
+msgstr "Definerer antall rader for CI-definisjonsredigeringsprogrammet i administratorgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:387
 msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
@@ -1483,80 +1559,88 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å gå tilbake i zoomvisningen av konfigurasjonselementet i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å få tilgang til historikken til et konfigurasjonselement i zoomvisningen av agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å redigere et konfigurasjonselement i zoomvisningen av agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å skrive ut et konfigurasjonselement i zoomvisningen av agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:407
+#, fuzzy
 msgid ""
 "Shows a link in the menu that allows linking a configuration item with "
 "another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen som gjør det mulig å koble et konfigurasjonselement til et annet objekt i zoomvisningen for konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:410
 msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:411
+#, fuzzy
 msgid ""
 "Shows a link in the menu to display the configuration item links as a "
 "Tree View."
-msgstr ""
+msgstr "Viser en lenke i menyen for å vise konfigurasjonselementlenkene som en trevisning."
 
 #: ../../content/configuration/system_configuration_settings.rst:414
 msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:415
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the its "
 "zoom view of the agent interface."
-msgstr ""
+msgstr "Viser en kobling i menyen for å duplisere et konfigurasjonselement i zoomvisningen av agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:418
 msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:419
+#, fuzzy
 msgid ""
 "Shows a link in the menu to delete a configuration item in its zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å slette et konfigurasjonselement i zoomvisningen av agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:422
 msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
@@ -1567,30 +1651,33 @@ msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:426
+#, fuzzy
 msgid ""
 "Shows a link in the menu to zoom into a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å zoome inn på et konfigurasjonselement i oversikten over konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:429
 msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:430
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the configuration item overview of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å få tilgang til historikken for et konfigurasjonselement i oversikten over konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:433
 msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:434
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "Viser en lenke i menyen for å duplisere et konfigurasjonselement i oversikten over konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:437
 msgid "Frontend::Agent::ITSMConfigItem::Permission"
@@ -1601,90 +1688,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet Rediger ITSM-konfigurasjonselement i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet Legg til ITSM-konfigurasjonselement i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for historikk for ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for utskrift av ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke zoomskjermbildet for ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for søk etter ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for trevisning av ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke skjermbildet for ITSM-konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1695,10 +1791,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:480
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item attachment action"
 " in the agent interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke ITSM-konfigurasjonselementets vedleggshandling i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:483
 msgid "Frontend::Agent::ITSMConfigItemOverview"
@@ -1710,10 +1807,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "Definerer en oversiktsmodul som viser den lille visningen av en liste med konfigurasjonselementer."
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1724,6 +1822,7 @@ msgid "LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:494
+#, fuzzy
 msgid ""
 "Define Actions where a settings button is available in the linked objects"
 " widget (LinkObject::ViewMode = \"complex\"). Please note that these "
@@ -1731,7 +1830,7 @@ msgid ""
 "Core.AllocationList.css, Core.UI.AllocationList.js, "
 "Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and "
 "Core.Agent.LinkObject.js."
-msgstr ""
+msgstr "Definer handlinger der en innstillingsknapp er tilgjengelig i widgeten for koblede objekter (LinkObject::ViewMode = \"complex\"). Vær oppmerksom på at disse handlingene må ha registrert følgende JS- og CSS-filer: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js."
 
 #: ../../content/configuration/system_configuration_settings.rst:497
 msgid "Frontend::Agent::ModuleRegistration"
@@ -1842,16 +1941,18 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Konfigurasjonselement for søk i backend-ruteren til agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:602
+#, fuzzy
 msgid "JavaScript function for the search frontend."
-msgstr ""
+msgstr "JavaScript-funksjon for søkegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:605
 msgid "Frontend::Agent::View::AgentITSMConfigItemBulk"
@@ -1865,10 +1966,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:616
 #: ../../content/configuration/system_configuration_settings.rst:623
 #: ../../content/configuration/system_configuration_settings.rst:630
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the additional ITSM field screen of the agent "
 "interface."
-msgstr ""
+msgstr "Dynamiske felt som vises i skjermbildet for ITSM-tilleggsfelt i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:612
 msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
@@ -1903,42 +2005,46 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ExtendedSearchCondi
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:637
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the agent "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Tillater utvidede søkebetingelser i konfigurasjonsobjektsøk i agentgrensesnittet. Med denne funksjonen kan du f.eks. søke etter navn på konfigurasjonselementer med denne typen betingelser som \"(*nøkkel1*&&*nøkkel2*)\" eller \"(*nøkkel1*||*nøkkel2*)\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:640
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "Antall konfigurasjonselementer som skal vises på hver side av et søkeresultat i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "Definerer standard konfig-elementattributt for sortering av konfig-elementer i søkeresultatet for konfig-elementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Definerer standardrekkefølgen for konfigurasjonselementer i søkeresultatet for konfigurasjonselementer i agentgrensesnittet. Opp: eldst på toppen. Ned: nyeste øverst."
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1957,10 +2063,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "Definerer standardattributtet for søkeattributtet som vises for skjermbildet for konfigurasjonsobjektsøk."
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1987,20 +2094,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "Standarddata som skal brukes på attributtet for søkeskjermen for konfigurasjonselementer. Eksempel: \"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "Standarddata som skal brukes på attributtet for søkeskjermen for konfigurasjonselementer. Eksempel: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2016,6 +2125,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2036,7 +2146,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "Definerer standardattributtet som vises for søkeattributtet for konfigurasjonselementet på søkeskjermen. Eksempel: \"Key\" må ha navnet på det dynamiske feltet, i dette tilfellet \"X\", \"Content\" må ha verdien til det dynamiske feltet, avhengig av den dynamiske felttypen, Text: \"en tekst\", Dropdown: \"1\", Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' og eller 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';."
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2050,6 +2160,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2057,7 +2168,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "Parametere for dashbord-backend av kundebrukerlisteoversikten over agentgrensesnittet. \"Limit\" er antallet oppføringer som vises som standard. \"Gruppe\" brukes til å begrense tilgangen til plugin-modulen (f.eks. Group: admin;group1;group2;). \"Standard\" avgjør om plugin-en er aktivert som standard eller om brukeren må aktivere den manuelt. \"CacheTTLLocal\" er hurtigbuffertiden i minutter for plugin."
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2078,27 +2189,30 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:714
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the agent "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "Kolonner som kan filtreres i oversikten over konfigurasjonselementer i agentgrensesnittet. Merk: Bare attributter for konfigurasjonselementer og dynamiske felt (DynamicField_NameX) er tillatt."
 
 #: ../../content/configuration/system_configuration_settings.rst:717
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:718
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "Definerer søkegrensen for skjermbildet AgentITSMConfigItem."
 
 #: ../../content/configuration/system_configuration_settings.rst:721
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:722
+#, fuzzy
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "Standardkategorien som vises hvis ingen er valgt."
 
 #: ../../content/configuration/system_configuration_settings.rst:725
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable"
@@ -2106,12 +2220,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:726
 #: ../../content/configuration/system_configuration_settings.rst:939
+#, fuzzy
 msgid ""
 "Defines the available columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "Definerer tilgjengelige kolonner med CI-er i oversikten over konfigurasjonselementer avhengig av CI-klassen. Hver oppføring må bestå av et klassenavn og en matrise med tilgjengelige felt for den tilsvarende klassen. Dynamiske feltoppføringer må følge skjemaet DynamicField_FieldName."
 
 #: ../../content/configuration/system_configuration_settings.rst:729
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault"
@@ -2119,12 +2234,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:730
 #: ../../content/configuration/system_configuration_settings.rst:943
+#, fuzzy
 msgid ""
 "Defines the default displayed columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "Definerer standardkolonnene som vises for CI-er i oversikten over konfigurasjonselementer, avhengig av CI-klassen. Hver oppføring må bestå av et klassenavn og en matrise med tilgjengelige felt for den tilsvarende klassen. Dynamiske feltoppføringer må følge skjemaet DynamicField_FieldName."
 
 #: ../../content/configuration/system_configuration_settings.rst:733
 msgid "Frontend::Agent::View::ITSMConfigItemBulk"
@@ -2135,20 +2251,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:737
+#, fuzzy
 msgid ""
 "Sets the deployment state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "Angir distribusjonsstatus i skjermbildet for konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:740
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "Angir hendelsesstatus i skjermbildet for konfigurasjonselementet i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2159,8 +2277,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:748
+#, fuzzy
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "Nødvendige rettigheter for å slette konfigurasjonselementer."
 
 #: ../../content/configuration/system_configuration_settings.rst:751
 msgid "Frontend::Agent::View::ITSMConfigItemEdit"
@@ -2171,20 +2290,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "Definerer bredden for redigeringskomponenten for rik tekst for denne skjermen. Skriv inn tall (piksler) eller prosentverdi (relativ)."
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "Definerer høyden for redigeringskomponenten for rik tekst for denne skjermen. Skriv inn tall (piksler) eller prosentverdi (relativ)."
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2195,8 +2316,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "Viser konfigureringselementets historikk (i omvendt rekkefølge) i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2207,16 +2329,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "Data brukt for å eksportere søkeresultatet i CSV-format."
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "Dynamiske felt som brukes til å eksportere søkeresultatet i CSV-format."
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2227,18 +2351,20 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:785
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Definerer søkegrensen for skjermbildet AgentITSMConfigItemSearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:788
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:789
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item search screen of the agent "
 "interface."
-msgstr ""
+msgstr "Dynamiske felt som vises i skjermbildet for søk etter konfigurasjonselementer i agentgrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:792
 msgid "Frontend::Agent::View::Preferences"
@@ -2249,14 +2375,16 @@ msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:796
+#, fuzzy
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "Parametere for sidene (der konfigurasjonselementene vises)."
 
 #: ../../content/configuration/system_configuration_settings.rst:799
 msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:800
+#, fuzzy
 msgid ""
 "Parameters for the column filters of the small config item overview. "
 "Please note: setting 'Active' to 0 will only prevent agents from editing "
@@ -2264,7 +2392,7 @@ msgid ""
 "allow administrators to edit the settings of another user's behalf. Use "
 "'PreferenceGroup' to control in which area these settings should be shown"
 " in the user interface."
-msgstr ""
+msgstr "Parametere for kolonnefiltrene i oversikten over små konfigurasjonselementer. Merk: Hvis du setter \"Active\" til 0, vil det bare hindre agenter i å redigere innstillingene for denne gruppen i sine personlige preferanser, men det vil fortsatt være mulig for administratorer å redigere innstillingene på vegne av en annen bruker. Bruk \"PreferenceGroup\" til å kontrollere i hvilket område disse innstillingene skal vises i brukergrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:803
 msgid "Frontend::Base::DynamicFieldScreens"
@@ -2275,20 +2403,22 @@ msgid "DynamicFieldScreens###ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:807
+#, fuzzy
 msgid ""
 "This configuration defines all possible screens to enable or disable "
 "dynamic fields."
-msgstr ""
+msgstr "Denne konfigurasjonen definerer alle mulige skjermbilder for å aktivere eller deaktivere dynamiske felt."
 
 #: ../../content/configuration/system_configuration_settings.rst:810
 msgid "DefaultColumnsScreens###ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:811
+#, fuzzy
 msgid ""
 "This configuration defines all possible screens to enable or disable "
 "default columns."
-msgstr ""
+msgstr "Denne konfigurasjonen definerer alle mulige skjermbilder for å aktivere eller deaktivere standardkolonner."
 
 #: ../../content/configuration/system_configuration_settings.rst:814
 msgid "Frontend::Base::Loader"
@@ -2299,8 +2429,9 @@ msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:818
+#, fuzzy
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "Liste over JS-filer som alltid skal lastes for agentdelen."
 
 #: ../../content/configuration/system_configuration_settings.rst:821
 msgid "Frontend::Base::NavBarModule"
@@ -2311,8 +2442,9 @@ msgid "Frontend::AdminModuleGroups###200-ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:825
+#, fuzzy
 msgid "Defines available groups for the admin overview screen."
-msgstr ""
+msgstr "Definerer tilgjengelige grupper for administrasjonsoversiktsskjermen."
 
 #: ../../content/configuration/system_configuration_settings.rst:828
 msgid "Frontend::Customer::ITSMConfigItemOverview"
@@ -2334,8 +2466,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "Frontend-modulregistrering for kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2360,8 +2493,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "Lastemodulregistrering for kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2388,72 +2522,79 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:880
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the customer interface."
-msgstr ""
+msgstr "Nødvendige tillatelser for å bruke søkeskjermen for ITSM-konfigurasjonselementer i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:883
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:884
+#, fuzzy
 msgid ""
 "Includes deployment states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "Inkluderer distribusjonsstatus i søket etter konfigurasjonselementer i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:887
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###IncidentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:888
+#, fuzzy
 msgid ""
 "Includes incident states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "Inkluderer hendelsestilstander i konfigurasjonssøket i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:891
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCondition"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:892
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the customer "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Tillater utvidede søkebetingelser i konfigureringselement-søk i kundegrensesnittet. Med denne funksjonen kan du f.eks. søke etter konfigurasjonselementnavn med denne typen betingelser som \"(*nøkkel1*&&*nøkkel2*)\" eller \"(*nøkkel1*||*nøkkel2*)\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:895
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "Antall konfigurasjonselementer som skal vises på hver side av et søkeresultat i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:900
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the customer interface."
-msgstr ""
+msgstr "Definerer standard konfigurasjonselementattributt for sortering av konfigurasjonselementer i søkeresultatet for konfigurasjonselementer i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:903
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Definerer standardrekkefølgen for konfigurasjonselementer i søkeresultatet for konfigurasjonselementer i kundegrensesnittet. Opp: eldst på toppen. Ned: nyeste øverst."
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2484,19 +2625,21 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:931
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the customer "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "Kolonner som kan filtreres i oversikten over konfigurasjonselementer i agentgrensesnittet. Merk: Bare attributter for konfigurasjonselementer og dynamiske felt (DynamicField_NameX) er tillatt."
 
 #: ../../content/configuration/system_configuration_settings.rst:934
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:935
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Definerer søkegrensen for skjermbildet CustomerITSMConfigItem."
 
 #: ../../content/configuration/system_configuration_settings.rst:938
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
@@ -2516,10 +2659,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:950
 #: ../../content/configuration/system_configuration_settings.rst:954
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item overview screen of the customer "
 "interface."
-msgstr ""
+msgstr "Dynamiske felt som vises i skjermbildet for oversikt over konfigurasjonselementer i kundegrensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:953
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField"
@@ -2534,8 +2678,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:961
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Definerer søkegrensen for skjermbildet CustomerITSMConfigItemSearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:964
 msgid "Frontend::Customer::View::ITSMConfigItemZoom"
@@ -2546,42 +2691,47 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsEnabled"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:968
+#, fuzzy
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "Kunder kan se historiske CI-versjoner."
 
 #: ../../content/configuration/system_configuration_settings.rst:971
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsSelectable"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:972
+#, fuzzy
 msgid ""
 "Customers have the possibility to manually switch between historic CI "
 "versions."
-msgstr ""
+msgstr "Kundene har mulighet til å bytte manuelt mellom historiske CI-versjoner."
 
 #: ../../content/configuration/system_configuration_settings.rst:975
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:976
+#, fuzzy
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "Hvilken generell informasjon som vises i toppteksten."
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "GenericInterface Invoker GUI"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:983
+#, fuzzy
 msgid ""
 "For every webservice (key) an array of classes (value) can be defined on "
 "which the import is restricted. For all chosen classes, or all existing "
 "classes the identifying attributes will have to be chosen in the invoker "
 "config."
-msgstr ""
+msgstr "For hver webtjeneste (nøkkel) kan det defineres en rekke klasser (verdi) som importen er begrenset til. For alle valgte klasser, eller alle eksisterende klasser, må de identifiserende attributtene velges i konfigurasjonen av påkalleren."
 
 #: ../../content/configuration/system_configuration_settings.rst:986
 msgid "GenericInterface::Invoker::ModuleRegistration"
@@ -2592,18 +2742,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "GenericInterface-modulregistrering for invoker-laget."
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "Registrering av GenericInterface-modulen for ConfigItemFetch-invokeringslaget."
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2614,10 +2766,11 @@ msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1001
+#, fuzzy
 msgid ""
 "Defines Required permissions to create ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Definerer nødvendige tillatelser for å hente ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:1004
 msgid "GenericInterface::Operation::ConfigItemDelete"
@@ -2628,10 +2781,11 @@ msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1008
+#, fuzzy
 msgid ""
 "Defines Required permissions to delete ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Definerer nødvendige tillatelser for å slette ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:1011
 msgid "GenericInterface::Operation::ConfigItemGet"
@@ -2642,10 +2796,11 @@ msgid "GenericInterface::Operation::ConfigItemGet###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1015
+#, fuzzy
 msgid ""
 "Defines Required permissions to get ITSM configuration items using the "
 "Generic Interface."
-msgstr ""
+msgstr "Definerer nødvendige tillatelser for å hente ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:1018
 msgid "GenericInterface::Operation::ConfigItemSearch"
@@ -2656,40 +2811,44 @@ msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1022
+#, fuzzy
 msgid ""
 "Defines Required permissions to search ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Definerer nødvendige tillatelser for å søke i ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:1025
 msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1026
+#, fuzzy
 msgid ""
 "Maximum number of config items to be displayed in the result of this "
 "operation."
-msgstr ""
+msgstr "Maksimalt antall konfigurasjonselementer som skal vises i resultatet av denne operasjonen."
 
 #: ../../content/configuration/system_configuration_settings.rst:1029
 msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "Definerer standard konfig-elementattributt for sortering av konfig-elementet i søkeresultatet for denne operasjonen."
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Definerer standardrekkefølgen på konfigurasjonselementene i søkeresultatet for denne operasjonen. Opp: eldste øverst. Ned: nyeste øverst."
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2700,10 +2859,11 @@ msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1041
+#, fuzzy
 msgid ""
 "Defines Required permissions to update ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Definerer nødvendige tillatelser for å slette ITSM-konfigurasjonselementer ved hjelp av det generiske grensesnittet."
 
 #: ../../content/configuration/system_configuration_settings.rst:1044
 msgid "GenericInterface::Operation::ModuleRegistration"
@@ -2718,8 +2878,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "GenericInterface-modulregistrering for operasjonslaget."
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2754,8 +2915,9 @@ msgstr ""
 
 #: ../../content/configuration/system_requirements.rst:22
 #: ../../content/system_requirements.rst:22
+#, fuzzy
 msgid "Packages"
-msgstr ""
+msgstr "Pakke"
 
 #: ../../content/configuration/system_requirements.rst:25
 #: ../../content/system_requirements.rst:25
@@ -2777,12 +2939,14 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "Oversikt"
 
 #: ../../content/overview.rst:16
+#, fuzzy
 msgid "Summary"
-msgstr ""
+msgstr "Sammendrag"
 
 #: ../../content/overview.rst:18
 msgid ""
@@ -2794,8 +2958,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "Introduksjon"
 
 #: ../../content/overview.rst:25
 msgid ""
