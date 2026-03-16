@@ -5,21 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Swahili <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/sw/>\n"
-"Language: sw\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-16 23:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Swahili <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/sw/>\nLanguage: sw\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=n != 1;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
 msgid "About"
@@ -42,8 +28,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "toleo"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -71,16 +58,18 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "Usanidi"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
 msgid "Table of Contents"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "Usanidi wa barua pepe"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -141,8 +130,9 @@ msgid "Configuration Reference"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "CMD"
 
 #: ../../content/configuration/configuration_reference.rst:15
 msgid "Configuration Management Database"
@@ -153,8 +143,9 @@ msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "Kipengele cha Usanidi"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -397,8 +388,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "Wakala"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -413,8 +405,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "Kipengele cha usanidi"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -441,8 +434,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "Mteja"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -461,8 +455,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "Mtumiaji wa mteja"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -481,8 +476,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "Sehemu zinazobadilika"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -526,8 +522,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:240
+#, fuzzy
 msgid "General Catalog"
-msgstr ""
+msgstr "Katalogi ya ujumla"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:242
 msgid "The idea is to have a Dropdown field."
@@ -560,20 +557,23 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:249
+#, fuzzy
 msgid "Config Item Links"
-msgstr ""
+msgstr "Vipengele vya usanidi"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:250
 msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "Leta/Hamisha"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -613,32 +613,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACL"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "Mipangilio ya kufanana"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "Mazingira ya mbele"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "Mtumiaji"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "Badili Mipangilio"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "Mpangilio"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -675,12 +681,14 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "Operesheni"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "Kipengele cha usanidi"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
@@ -715,8 +723,9 @@ msgid "Invoker"
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "Kipengele cha usanidi"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -733,18 +742,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "Inawezesha kipengele cha kitendo ch wingi cha kipengele cha usanidi kwa maingira ya mbele ya wakala kufanya kazi katika kipengele cha usanidi zaidi ya kimoja kwa muda."
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "Inawezesha kipengele cha kitendo cha wingi cha kipengele cha usanidi kwa makundi yaliyoorodheshwa tu."
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -756,8 +767,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "Usajili wa mazingira ya nyuma ya uga wenye nguvu."
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -772,8 +784,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "Usajili wa kipengele cha uga wenye nguvu."
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -843,10 +856,11 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "Sanidi moduli ya tukio ya kipengele ambacho kinawezesha kuingia katika historia katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
@@ -897,10 +911,11 @@ msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:95
+#, fuzzy
 msgid ""
 "Performs the configured action for each event (as an Invoker) for each "
 "configured Webservice."
-msgstr ""
+msgstr "Fanya kitecndo cha usanidishwaji kwa kila tukio (kama Kichochezi) kwa kila huduma ya wavuti iliyosanidiwa."
 
 #: ../../content/configuration/system_configuration_settings.rst:98
 msgid "Core::Event::Ticket"
@@ -920,48 +935,53 @@ msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:109
+#, fuzzy
 msgid "Core::GeneralCatalog"
-msgstr ""
+msgstr "Katalogi ya ujumla"
 
 #: ../../content/configuration/system_configuration_settings.rst:112
 msgid "GeneralCatalogPreferences###DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:113
+#, fuzzy
 msgid ""
 "Parameters for the deployment states in the preferences view of the agent"
 " interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:116
 msgid "GeneralCatalogPreferences###DeploymentStatesColors"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:117
+#, fuzzy
 msgid ""
 "Parameters for the deployment states color in the preferences view of the"
 " agent interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya rangi ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:120
 msgid "GeneralCatalogPreferences###NameModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:121
+#, fuzzy
 msgid ""
 "Parameters for the name module for config item classes in the preferences"
 " view of the agent interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:124
 msgid "GeneralCatalogPreferences###NumberModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:125
+#, fuzzy
 msgid ""
 "Parameters for the number module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:128
 msgid "GeneralCatalogPreferences###VersionStringModule"
@@ -988,30 +1008,33 @@ msgid "GeneralCatalogPreferences###VersionTrigger"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:137
+#, fuzzy
 msgid ""
 "Parameters for the version trigger for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:140
 msgid "GeneralCatalogPreferences###Categories"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:141
+#, fuzzy
 msgid ""
 "Parameters for the categories for config item classes in the preferences "
 "view of the agent interface."
-msgstr ""
+msgstr "Vigezo kwa ajili ya hali za matumizi kama mandhari ya mapendeleo ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:144
 msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "Vigezo kwa mfano ruhusa za vikundi kwa sifa za katalogi za ujumla."
 
 #: ../../content/configuration/system_configuration_settings.rst:148
 msgid "Core::ITSMConfigItem"
@@ -1022,36 +1045,40 @@ msgid "ITSMConfigItem::CINameRegex"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:152
+#, fuzzy
 msgid ""
 "Defines regular expressions individually for each ConfigItem class to "
 "check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "Inafafanua semi za mara kwa mara mojamoja kwa kila tabaka la kipengele ch usanidi kuangalia jina la kipengele cha usanidi na kuonyesha ujumbe wa makosa yanayohusiana."
 
 #: ../../content/configuration/system_configuration_settings.rst:155
 msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:156
+#, fuzzy
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "Moduli ya kuangalia makundi yanayohusika na tabaka."
 
 #: ../../content/configuration/system_configuration_settings.rst:159
 msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:160
+#, fuzzy
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "Module ya kuangalia makundi yanayohusika na kipengele cha usanidi."
 
 #: ../../content/configuration/system_configuration_settings.rst:163
 msgid "ITSMConfigItem::Hook"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:164
+#, fuzzy
 msgid ""
 "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#."
 " The default is ConfigItem#."
-msgstr ""
+msgstr "Kitambulishi cha kipengele cha usanidi, mfano.ConfigItem#, MyConfigItem#. Chagu-msingi ni ConfigItem#."
 
 #: ../../content/configuration/system_configuration_settings.rst:167
 msgid "UniqueCIName::EnableUniquenessCheck"
@@ -1070,11 +1097,12 @@ msgid "UniqueCIName::UniquenessCheckScope"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:172
+#, fuzzy
 msgid ""
 "Check for a unique name only within the same ConfigItem class ('class') "
 "or globally ('global'), which means every existing ConfigItem is taken "
 "into account when looking for duplicates."
-msgstr ""
+msgstr "Angalia majina ya kipekee tu katika tabaka sawa la kipengele cha usanidi ('Tabaka') au zote ('Zote'), ambayo inamaanisha kila kipengele cha usanidi kilichopo kimejumuishwa wakati nakala pacha zinaangaliwa."
 
 #: ../../content/configuration/system_configuration_settings.rst:175
 msgid "Customer::ConfigItem::PermissionConditions###01"
@@ -1158,10 +1186,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "Inafafanua vipengele ambavyo vinapatikana katika ngazi ya kwanza ya muundo wa ACL."
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1176,10 +1205,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "Inafafanua vipengele ambavyo vinapatikana katika ngazi ya pili ya muundo wa ACL."
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1202,10 +1232,11 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "Inafafa vipengelee ambavyo vinapatikana kwa ajili ya 'Kitendo' katika ngazi ya tatu ya muundo wa ACL."
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
@@ -1238,8 +1269,9 @@ msgid "ImportExport::ObjectBackendRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:274
+#, fuzzy
 msgid "Object backend module registration for the import/export module."
-msgstr ""
+msgstr "Umbiza usajili wa moduli wa mazingira ya nyuma kwa ajili ya moduli ya kuleta/kuhamisha"
 
 #: ../../content/configuration/system_configuration_settings.rst:277
 msgid "Core::LinkObject"
@@ -1250,8 +1282,9 @@ msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:281
+#, fuzzy
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "Inafafanua kipengele cha chaguo msingi cha tabaka la 'Kipengelecha Usanidi cha ITSM'."
 
 #: ../../content/configuration/system_configuration_settings.rst:284
 msgid "LinkObject::ITSMConfigItem::ShowColumns"
@@ -1268,6 +1301,7 @@ msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:289
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view, "
 "depending on the CI class. Each entry must be prefixed with the class "
@@ -1279,7 +1313,7 @@ msgid ""
 "Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
 "Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, "
 "then the default columns are shown."
-msgstr ""
+msgstr "Inafafanua safu wima za CI zilizoonyeshwa katika mandhari ya jedwali tata la kiungo,kutegemeana na tabaka la CI. Kila ingizo lazima liwe na kiambishi awali jina la tabaka na :: ( mfano Tarakilishi::).Kuna viumbi vichache vya CI ambavyo vipo kwa CI zote (mfano kwenye tabaka la tarakilishi: tarakilishi::jina, Tarakilishi::Hali yaCurDep, Tarakilishi::Muda wa kutengeneza). Kuonyesha kiumbi cha CI kimoja kimoja kama vilivyo fafanuliwa kwenye ufafanuzi wa CI, mpangilio ufuatao lazima utumike (mfano kwenye tabaka tarakilishi): Tarakilishi::diski kuu::1, Tarakilishi::Diski kuu ngumu::1Uwezo::1, Tarakilishi::Diski kuu ngumu::2, Tarakilishi::Diski kuu ngumu::2::Uwezo::1. Kama hakuna ingizo kwa tabaka la CI, safuwima chaguo msingi zinaonyeshwa."
 
 #: ../../content/configuration/system_configuration_settings.rst:292
 msgid "Core::LinkStatus"
@@ -1342,8 +1376,9 @@ msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:319
+#, fuzzy
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "Moduli ya kutengeneza takwimu za kipengele cha usanidi cha ITSM>"
 
 #: ../../content/configuration/system_configuration_settings.rst:322
 msgid "Daemon::SchedulerCronTaskManager::Task"
@@ -1376,8 +1411,9 @@ msgid "Events###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:341
+#, fuzzy
 msgid "List of all Package events to be displayed in the GUI."
-msgstr ""
+msgstr "Orodha ya matukio ya vifurushi vyote yataonyeshwa katika GUI."
 
 #: ../../content/configuration/system_configuration_settings.rst:344
 msgid "Frontend::Admin::ModuleRegistration"
@@ -1400,8 +1436,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1436,8 +1473,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1457,8 +1495,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:587
 #: ../../content/configuration/system_configuration_settings.rst:591
 #: ../../content/configuration/system_configuration_settings.rst:873
+#, fuzzy
 msgid "Main menu item registration."
-msgstr ""
+msgstr "Usajili wa menyu kuu."
 
 #: ../../content/configuration/system_configuration_settings.rst:380
 msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
@@ -1469,10 +1508,11 @@ msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:384
+#, fuzzy
 msgid ""
 "Defines the number of rows for the CI definition editor in the admin "
 "interface."
-msgstr ""
+msgstr "Inafafanua namba ya safu mlalo kwa mhariri wa ufafanuzi wa CI katika kiolesura cha kiongozi"
 
 #: ../../content/configuration/system_configuration_settings.rst:387
 msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
@@ -1483,50 +1523,55 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "Inaonyesha kiungo kwenye menyu ili kurudi nyuma kwenye muonekano wa mabadiliko uliokuzwa wa kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "Inaonyesha kiungo kwenye  menyu kuweza kufikia historia ya kipengele cha usanidi katika mandhari yake iliyokuzwa ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kuhariri  kipengele cha usanidi katika mandhari yake iliyokuzwa ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kuchapisha kipengele cha usanidi katika mandhari yake iliyokuzwa ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:407
+#, fuzzy
 msgid ""
 "Shows a link in the menu that allows linking a configuration item with "
 "another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "Inaonyesha kiongo katika menyu ambacho kinaunganisha kipengele cha usanidi na kipengee kingine katika mandhari iliyokuzwa ya kipengele cha usanidi ya kioleusura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:410
 msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
@@ -1543,20 +1588,22 @@ msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:415
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the its "
 "zoom view of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kutoa nakala pacha ya kipengele cha usanidi katika mandhari yake ya kipengele cha usanidi cha kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:418
 msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:419
+#, fuzzy
 msgid ""
 "Shows a link in the menu to delete a configuration item in its zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kuhariri  kipengele cha usanidi katika mandhari yake iliyokuzwa ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:422
 msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
@@ -1567,30 +1614,33 @@ msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:426
+#, fuzzy
 msgid ""
 "Shows a link in the menu to zoom into a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kukuza katika kipengele cha usanidi katika mapitio ya kipengele cha usanidi ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:429
 msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:430
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the configuration item overview of the agent interface."
-msgstr ""
+msgstr "Inaonyesha kiungo kwenye  menyu kuweza kufikia historia ya kipengele cha usanidi katika mapitio ya kipengele ya usanidi ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:433
 msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:434
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "Onyesha kiungo katika menyu kutoa nakala pacha ya kipengele cha usanidi katika mapitio ya kipengele cha usanidi ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:437
 msgid "Frontend::Agent::ITSMConfigItem::Permission"
@@ -1601,90 +1651,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM kilichohaririwa katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM kilichoongeza katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM cha historia katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM cha kuchapisha katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini iliyokuzwa ya kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kutafuta kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1695,10 +1754,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:480
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item attachment action"
 " in the agent interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kutafuta kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:483
 msgid "Frontend::Agent::ITSMConfigItemOverview"
@@ -1710,10 +1770,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "Inafafanua moduli ya mapitio kuonyesha mandhari ndogo ya orodha ya vipengele vya usanidi."
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1842,8 +1903,9 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "Kipanga njia cha mazingira ya nyuma cha utafutaji wa kipengele cha usanidi cha kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
@@ -1865,10 +1927,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:616
 #: ../../content/configuration/system_configuration_settings.rst:623
 #: ../../content/configuration/system_configuration_settings.rst:630
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the additional ITSM field screen of the agent "
 "interface."
-msgstr ""
+msgstr "Inyesha uga za kichwa cha habari katika skrini ya uga wa ITSM ulioongezwa wa kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:612
 msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
@@ -1915,30 +1978,33 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "Namba ta tiketi zitakazoonyeshwa katika kila ukurasa wa matokeo ya utafutaji katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "Inafafanua sifa ya tiketi chaguo-msingi kwa ajili ya kupanga matokeo ya utafutaji wa tiketi ya kiolesura cha mteja."
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya tiketi ya kiolesura cha wakala. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1957,10 +2023,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "Inafafanua sifa ya tiketi iliyotafutwa iliyoonyeshwa chaguo msingi kwa skrini ya kutafuta tiketi."
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1987,20 +2054,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "Data chaguo misngi kutumika katika sifa kwa ajili ya skrini ya kutafuta ya tiketi.\nMfano:\n\"Umbizo la Muda la Kutengeneza Tiketi= mwaka; Mwanzo wa Muda wa kutengeneza tiketi= Mwisho; Pointi ya muda wa kutengeneza tiketi=2;\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "Data chaguo-msingi kutumia katika sifa kwa ajili ya skrini ya kutafuta ya tiketi:\n\"Mwaka wa kuanza wa muda wa kutengeneza tiketi=2010; Mwezi wa kuanza wa muda wa kutengeneza tiketi=10; Siku ya kuanza ya muda wa kutengeneza tiketi=4; Mwaka wa kuacha wa muda wa kutengeneza tiketi =2010; Mwezi wa kuacha wa muda wa kutengeneza tiketi = 11; Siku ya kuacha ya muda wa kutengeneza tiketi=3; \"."
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2016,6 +2085,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2036,7 +2106,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "Inafafanua sifa ya tiketi iliyotafutwa iliyoonyeshwa chaguo msingi kwa skrini ya kutafuta tiketi. Mfano: \"Kibonye\" lazima iwe na jina la uga wenye nguvu kwa hapa ni 'X', \"Maudhui\" lazima iwe na thamani ua uga wenye nguvu kutegemeana na aina ya uga wenye nguvu, Matini:'Matini', Kunjuzi: '1', Tarehe/Muda:  Mwaka wa kuanza wa majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa=1974; Mwezi wa kuanza wa majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa=01; Siku ya kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa=26; Saa ya kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =00; Dakika ya kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa = 00; Sekunde ya kuanza ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa = 00; Mwaka wa kuisha wa majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =2013; Mwezi wa kuisha wa majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =01; Siku ya kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =26; Saa ya kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =23; Dakika ya kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =59; Sekunde ya kuisha ya majira ya muda uliopangwa X ya uga wenye nguvu uliotafutafutwa =59; na au Umbizo la pointi ya muda X ya uga wenye nguvu uliotafutafutwa = Week; Mwanzo wa pointi ya muda X ya uga wenye nguvu uliotafutafutwa = Kabla; Thamani ya pointi ya muda X ya uga wenye nguvu uliotafutafutwa = 7;"
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2050,6 +2120,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2057,7 +2128,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "Parameta kwa mazingira ya nyuma ya dashibodi mapitio ya orodha ya mteja mtumiaji ya kiolesura cha wakala. ''Kikundi'' kinatumika kuzuia kufikia kuchomeka (mfano Kikundi:Utawala;kikundi cha 1;kikundi cha 2;). ''Chaguo-msingi'' inahakiki kama mchomeko umewezeshwa kwa mchaguo-msingi au kama mtumizi anahitaji kuwezesha kwa mkono. ''HifadhimudaTTLKiambo'' ni muda wa hifadhi muda katika dakika kwa mchomeko."
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2089,8 +2160,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:718
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "Inawezesha upeo wa kutafuta kwa skerini ya Kipengele cha usanidi cha ITSM cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:721
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
@@ -2135,20 +2207,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:737
+#, fuzzy
 msgid ""
 "Sets the deployment state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "Inaweka hali ya kutumia katika skrini ya wingi wa kipengele cha usanidi ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:740
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "Inaweka hali ya tukio katika skrini ya kipengele cha usanidi ya kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2159,8 +2233,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:748
+#, fuzzy
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "Upendeleo unaotakiwa ili kufuta mabadiliko."
 
 #: ../../content/configuration/system_configuration_settings.rst:751
 msgid "Frontend::Agent::View::ITSMConfigItemEdit"
@@ -2171,20 +2246,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "Inafafanua upana kwa ajili ya kijenzi wa kihariri cha matini tajiri kwa skrini hii. Ingiza namba (pikseli) au thamani ya asilimia (inayohusiana)."
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "Inafafanua urefu kwa kijenzi cha mhariri wa matini tajini kwa skrini hii. Ingiza namba (Pikseli) au thamani ya asilimia (Inayohusika)."
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2195,8 +2272,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "Inaonyesha historia ya kipengele cha usanidi (kwa mpangilio wa kurudi nyuma) katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2207,16 +2285,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "Data zinazotumika kuhamisha matokeo ya kutafuta katika umbizo la CSV."
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "Uga zenye nguvu zimetumika kuhamisha majibu ya utafutaji katika umbizo la CSV"
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2227,8 +2307,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:785
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Inafafanua kikomo cha kutafuta kwa skrini ya Kutafuta Kipengele cha usanidi cha ITSM  cha Wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:788
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
@@ -2249,8 +2330,9 @@ msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:796
+#, fuzzy
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "Vigezo kwa ajili ya ukurasa (ambavyo vipengele vya usanidi vimeonyeshwa)."
 
 #: ../../content/configuration/system_configuration_settings.rst:799
 msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
@@ -2299,8 +2381,9 @@ msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:818
+#, fuzzy
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "Orodha ya mafaili ya JS yapelekwe mara zote katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:821
 msgid "Frontend::Base::NavBarModule"
@@ -2334,8 +2417,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja."
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2360,8 +2444,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja."
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2388,10 +2473,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:880
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the customer interface."
-msgstr ""
+msgstr "Inahitaji ruhusa kutumia skrini ya kutafuta kipengele cha usanidi cha ITSM katika kiolesura cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:883
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
@@ -2430,10 +2516,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "Namba ta tiketi zitakazoonyeshwa katika kila ukurasa wa matokeo ya utafutaji katika kiolesura cha mteja."
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
@@ -2450,10 +2537,11 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya tiketi ya kiolesura cha mteja. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2495,8 +2583,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:935
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "Inawezesha upeo wa kutafuta kwa skerini ya Kipengele cha usanidi cha ITSM cha wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:938
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
@@ -2534,8 +2623,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:961
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "Inafafanua kikomo cha kutafuta kwa skrini ya Kutafuta Kipengele cha usanidi cha ITSM  cha Wakala."
 
 #: ../../content/configuration/system_configuration_settings.rst:964
 msgid "Frontend::Customer::View::ITSMConfigItemZoom"
@@ -2568,8 +2658,9 @@ msgid "Which general information is shown in the header."
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "GUI ya muito wa kiolesura cha ujumla"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
@@ -2592,18 +2683,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "Usajili wa moduli ya kiolesura cha jumla kwaajili la tabaka la kihamshaji."
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "Usajili wa moduli ya kiolesura cha jumla kwaajili la tabaka la kihamshaji."
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2614,10 +2707,11 @@ msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1001
+#, fuzzy
 msgid ""
 "Defines Required permissions to create ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki."
 
 #: ../../content/configuration/system_configuration_settings.rst:1004
 msgid "GenericInterface::Operation::ConfigItemDelete"
@@ -2628,10 +2722,11 @@ msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1008
+#, fuzzy
 msgid ""
 "Defines Required permissions to delete ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki."
 
 #: ../../content/configuration/system_configuration_settings.rst:1011
 msgid "GenericInterface::Operation::ConfigItemGet"
@@ -2642,10 +2737,11 @@ msgid "GenericInterface::Operation::ConfigItemGet###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1015
+#, fuzzy
 msgid ""
 "Defines Required permissions to get ITSM configuration items using the "
 "Generic Interface."
-msgstr ""
+msgstr "Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki."
 
 #: ../../content/configuration/system_configuration_settings.rst:1018
 msgid "GenericInterface::Operation::ConfigItemSearch"
@@ -2656,40 +2752,44 @@ msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1022
+#, fuzzy
 msgid ""
 "Defines Required permissions to search ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Inafafanua ruhusa zinazohitajika kutafuta vipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki."
 
 #: ../../content/configuration/system_configuration_settings.rst:1025
 msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1026
+#, fuzzy
 msgid ""
 "Maximum number of config items to be displayed in the result of this "
 "operation."
-msgstr ""
+msgstr "Namba ya upeo wa juu wa tiketi zitakazo onyeshwa katika matokeo ya mchakato huu."
 
 #: ../../content/configuration/system_configuration_settings.rst:1029
 msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "Inafafanua sifa ya tiketi chaguo-msingi kwa ajili ya kupanga matokeo ya utafutaji wa tiketi ya uendeshaji huu."
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya tiketi ya mchakato huu. Juu: Kongwe juu. Chini: Za sasa juu."
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2700,10 +2800,11 @@ msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1041
+#, fuzzy
 msgid ""
 "Defines Required permissions to update ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "Inafafanua ruhusa zinazohitajika kupatavipengele vya usanidi vya ITSM kwa kutumia kiolesura cha jeneriki."
 
 #: ../../content/configuration/system_configuration_settings.rst:1044
 msgid "GenericInterface::Operation::ModuleRegistration"
@@ -2718,8 +2819,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "Usajili wa moduli ya kiolesura cha jumla kwaajili la tabaka la utendaji."
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2777,8 +2879,9 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "Mapitio"
 
 #: ../../content/overview.rst:16
 msgid "Summary"
@@ -2794,8 +2897,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "Utangulizi"
 
 #: ../../content/overview.rst:25
 msgid ""
