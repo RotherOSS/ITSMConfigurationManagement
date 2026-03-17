@@ -199,7 +199,7 @@ sub Run {
 
     for my $OptionalAttribute ( qw/Name Number VersionString/ ) {
         if ( $Param{Config}{ $OptionalAttribute } ) {
-            $ConfigItemParam{Name} = $Param{Config}{ $OptionalAttribute };
+            $ConfigItemParam{$OptionalAttribute} = $Param{Config}{ $OptionalAttribute };
         }
     }
 
