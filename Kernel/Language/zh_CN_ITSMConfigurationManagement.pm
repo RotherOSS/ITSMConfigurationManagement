@@ -539,7 +539,7 @@ sub Data {
     $Self->{Translation}->{'Version String Module'} = '版本字符串模块';
     $Self->{Translation}->{'Version Trigger'} = '版本触发器';
     $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
-        '';
+        '字段是否自动填充(1)， 那种情况下将会在工单表中隐藏起来(2)。';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         '是否可以通过检查缓存的字段依赖关系来避免执行 ConfigItemACL。这可以缩短表格的加载时间，但如果要在 ITSMConfigItem 和 Form-ReturnType 中使用 ACL 模块，则必须禁用。';
     $Self->{Translation}->{'Which general information is shown in the header.'} = '标题中显示了哪些一般信息。';

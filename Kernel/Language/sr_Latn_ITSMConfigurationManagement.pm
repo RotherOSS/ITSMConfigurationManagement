@@ -170,7 +170,7 @@ sub Data {
     $Self->{Translation}->{'Invalid ClassID!'} = '';
     $Self->{Translation}->{'No ClassID is given!'} = '';
     $Self->{Translation}->{'No access rights for this class given!'} = '';
-    $Self->{Translation}->{'No Result!'} = '';
+    $Self->{Translation}->{'No Result!'} = 'Nema rezultata!';
     $Self->{Translation}->{'Config Item Search Results'} = '';
 
     # Perl Module: Kernel/Modules/AgentITSMConfigItemZoom.pm

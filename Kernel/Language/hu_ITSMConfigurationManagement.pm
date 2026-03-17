@@ -539,7 +539,7 @@ sub Data {
     $Self->{Translation}->{'Version String Module'} = 'Version String modul';
     $Self->{Translation}->{'Version Trigger'} = 'Verzió kiváltó';
     $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
-        '';
+        'A mezők automatikusan ki legyenek-e töltve (1), és ebben az esetben el legyenek-e rejtve a jegyűrlapokról (2).';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Elkerülhető-e a ConfigItemACL végrehajtása a gyorsítótárban tárolt mezőfüggőségek ellenőrzésével. Ez javíthatja az űrlapok betöltési idejét, de ki kell kapcsolni, ha az ACLModulokat az ITSMConfigItem- és Form-ReturnType típusok esetében kell használni.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Milyen általános információk jelennek meg a fejlécben.';

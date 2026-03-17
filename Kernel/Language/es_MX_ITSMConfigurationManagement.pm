@@ -539,7 +539,7 @@ sub Data {
     $Self->{Translation}->{'Version String Module'} = 'Módulo de cadenas de versión';
     $Self->{Translation}->{'Version Trigger'} = 'Activador de versión';
     $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
-        '';
+        'Si los campos deben rellenarse automáticamente (1), y en ese caso también deben ocultarse de los formularios de las entradas (2).';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Si se puede evitar la ejecución de ConfigItemACL comprobando las dependencias de campos en caché. Esto puede mejorar los tiempos de carga de los formularios, pero debe desactivarse si se van a utilizar ACLModules para ITSMConfigItem- y Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Qué información general se muestra en la cabecera.';

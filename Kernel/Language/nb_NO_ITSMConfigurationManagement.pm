@@ -539,7 +539,7 @@ sub Data {
     $Self->{Translation}->{'Version String Module'} = 'Versjonsstrengmodul';
     $Self->{Translation}->{'Version Trigger'} = 'Versjonsutløser';
     $Self->{Translation}->{'Whether fields should be automatically filled (1), and in that case also be hidden from ticket formulars (2).'} =
-        '';
+        'Om felt skal fylles ut automatisk (1), og i så fall også skjules for saksformlene (2).';
     $Self->{Translation}->{'Whether the execution of ConfigItemACL can be avoided by checking cached field dependencies. This can improve loading times of formulars, but has to be disabled, if ACLModules are to be used for ITSMConfigItem- and Form-ReturnTypes.'} =
         'Om kjøringen av ConfigItemACL kan unngås ved å sjekke bufrede feltavhengigheter. Dette kan forbedre innlastingstiden for formularer, men må deaktiveres hvis ACLModules skal brukes for ITSMConfigItem- og Form-ReturnTypes.';
     $Self->{Translation}->{'Which general information is shown in the header.'} = 'Hvilken generell informasjon som vises i toppteksten.';
