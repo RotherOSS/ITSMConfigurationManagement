@@ -5,30 +5,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: OTOBO Installation Guide rel-11.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-13 18:17+0100\n"
-"PO-Revision-Date: 2025-01-13 11:21+0000\n"
-"Last-Translator: Markus Hlinka <mah@rother-oss.com>\n"
-"Language-Team: Arabic (Saudi Arabia) <http://translate.otobo.org/projects/"
-"manual-itsmconfigurationmanagement/master/ar_SA/>\n"
-"Language: ar_SA\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.8.4\n"
-"Generated-By: Babel 2.4.0\n"
+msgstr "Project-Id-Version: OTOBO Installation Guide rel-11.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-11-13 18:17+0100\nPO-Revision-Date: 2026-03-17 01:00+0000\nLast-Translator: Weblate <noreply-mt-weblate@weblate.org>\nLanguage-Team: Arabic (Saudi Arabia) <http://translate.otobo.org/projects/manual-itsmconfigurationmanagement/master/ar_SA/>\nLanguage: ar_SA\nMIME-Version: 1.0\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\nX-Generator: Weblate 5.16\nGenerated-By: Babel 2.4.0\n"
 
 #: ../../content/about.rst:13
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "بِشَأْن"
 
 #: ../../content/about.rst:16
+#, fuzzy
 msgid "Contact"
-msgstr ""
+msgstr "اتصل بنا"
 
 #: ../../content/about.rst:17
 msgid "Rother OSS GmbH"
@@ -43,8 +30,9 @@ msgid "Web: https://otobo.io"
 msgstr ""
 
 #: ../../content/about.rst:22
+#, fuzzy
 msgid "Version"
-msgstr ""
+msgstr "النسخة"
 
 #: ../../content/about.rst:23
 msgid ""
@@ -57,31 +45,36 @@ msgid "Terms and Conditions"
 msgstr ""
 
 #: ../../content/about.rst:29
+#, fuzzy
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document "
 "under the terms of the GNU Free Documentation License, Version 1.3 or any"
 " later version published by the Free Software Foundation; with no "
 "Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy"
 " of the license is included in the section entitled \"COPYING\"."
-msgstr ""
+msgstr "الشروط والأحكام Rother OSS: يُمنح الإذن بنسخ و/أو توزيع و/أو تعديل هذا المستند بموجب شروط رخصة جنو للتوثيق الحر، الإصدار 1.3 أو أي إصدار لاحق تنشره مؤسسة البرمجيات الحرة؛ مع عدم وجود أقسام غير ثابتة، ولا نصوص في الغلاف الأمامي، ولا نصوص في الغلاف الخلفي. توجد نسخة من الرخصة في القسم المعنون \"النسخ\"."
 
 #: ../../content/about.rst:35
+#, fuzzy
 msgid ""
 "Published by: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 "
 "Leiblfing, Germany."
-msgstr ""
+msgstr "تم النشر بواسطة: Rother OSS GmbH, (https://otobo.io), Oberwalting 31, 94339 Leiblfing, Germany."
 
 #: ../../content/configuration.rst:13
+#, fuzzy
 msgid "Configuration"
-msgstr ""
+msgstr "تَكْوينٌ"
 
 #: ../../content/configuration.rst:15 ../../content/index.rst:15
+#, fuzzy
 msgid "Table of Contents"
-msgstr ""
+msgstr "جدول المحتويات"
 
 #: ../../content/configuration/basic_configuration.rst:12
+#, fuzzy
 msgid "Basic Configuration"
-msgstr ""
+msgstr "اعدادات البريد الإلكتروني"
 
 #: ../../content/configuration/basic_configuration.rst:13
 msgid ""
@@ -129,8 +122,9 @@ msgid ".. figure:: images/ready2import_class_bundles.png"
 msgstr ""
 
 #: ../../content/configuration/basic_configuration.rst
+#, fuzzy
 msgid ":alt: Ready2Import Class Bundles panel"
-msgstr ""
+msgstr "حزم فئات Ready2Import Class Bundles"
 
 #: ../../content/configuration/basic_configuration.rst:29
 msgid "Click the button to import the Ready2Adopt class bundles."
@@ -138,24 +132,28 @@ msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:12
 #: ../../content/configuration/system_configuration_settings.rst:12
+#, fuzzy
 msgid "Configuration Reference"
-msgstr ""
+msgstr "مرجع خيارات التكوين"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "CMDB"
-msgstr ""
+msgstr "CMD"
 
 #: ../../content/configuration/configuration_reference.rst:15
+#, fuzzy
 msgid "Configuration Management Database"
-msgstr ""
+msgstr "قاعدة بيانات إدارة التهيئة."
 
 #: ../../content/configuration/configuration_reference.rst:17
 msgid "CI"
 msgstr ""
 
 #: ../../content/configuration/configuration_reference.rst:18
+#, fuzzy
 msgid "Configuration Item"
-msgstr ""
+msgstr "عنصر التكوين"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:12
 msgid "Custom Configuration and Advanced Features"
@@ -398,8 +396,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:203
+#, fuzzy
 msgid "Agent"
-msgstr ""
+msgstr "عَامِلٌ"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:205
 msgid "With this field you can refer to an Agent in OTOBO."
@@ -414,8 +413,9 @@ msgstr ""
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:208
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:277
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:283
+#, fuzzy
 msgid "ConfigItem"
-msgstr ""
+msgstr "عنصر التكوين"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:210
 msgid "With this field you can refer to another ConfigItem in OTOBO."
@@ -432,8 +432,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:214
+#, fuzzy
 msgid "ConfigItemVersion"
-msgstr ""
+msgstr "إصدار عنصر التكوين"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:216
 msgid ""
@@ -442,8 +443,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:218
+#, fuzzy
 msgid "Customer"
-msgstr ""
+msgstr "عميل"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:220
 msgid "With this field you can refer to another Customer in OTOBO."
@@ -462,8 +464,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:224
+#, fuzzy
 msgid "Customer User"
-msgstr ""
+msgstr "العميل"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:226
 msgid "With this field you can refer to another Customer User in OTOBO."
@@ -482,8 +485,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:230
+#, fuzzy
 msgid "Dynamic Field Lens"
-msgstr ""
+msgstr "الحقول الديناميكية"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:232
 msgid ""
@@ -561,20 +565,23 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:249
+#, fuzzy
 msgid "Config Item Links"
-msgstr ""
+msgstr "عناصر التكوين"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:250
 msgid "Backlinks Tree View"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:254
+#, fuzzy
 msgid "Import/Export"
-msgstr ""
+msgstr "الاستيراد والتصدير"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:255
+#, fuzzy
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:256
 msgid ""
@@ -614,32 +621,38 @@ msgid "Permissions and Access Restrictions"
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:272
+#, fuzzy
 msgid "ACLs"
-msgstr ""
+msgstr "ACLs"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:274
 msgid "New Object Type \"ITSM ConfigItem\""
 msgstr ""
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:275
+#, fuzzy
 msgid "Match settings"
-msgstr ""
+msgstr "شروط التصفية"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:278
+#, fuzzy
 msgid "Frontend"
-msgstr ""
+msgstr "واجهة أمامية"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:279
+#, fuzzy
 msgid "User"
-msgstr ""
+msgstr "مستخدم"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:281
+#, fuzzy
 msgid "Change settings"
-msgstr ""
+msgstr "تغيير الاعدادات"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:284
+#, fuzzy
 msgid "Form"
-msgstr ""
+msgstr "من أجل"
 
 #: ../../content/configuration/custom_configuration_and_advanced_features.rst:287
 msgid "Migration from OTOBO 10 / OTRS"
@@ -676,28 +689,32 @@ msgid ""
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:16
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "العمليات"
 
 #: ../../content/configuration/generic_interface/index.rst:19
+#, fuzzy
 msgid "ConfigItemGet"
-msgstr ""
+msgstr "عنصر التكوين"
 
 #: ../../content/configuration/generic_interface/index.rst:20
 msgid "Provide the config item data for the requested config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:52
+#, fuzzy
 msgid "ConfigItemSearch"
-msgstr ""
+msgstr "بحث عن عنصر التكوين"
 
 #: ../../content/configuration/generic_interface/index.rst:53
 msgid "Search for one or more config items."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:85
+#, fuzzy
 msgid "ConfigItemUpsert"
-msgstr ""
+msgstr "عناصر التكوين"
 
 #: ../../content/configuration/generic_interface/index.rst:86
 msgid "Add or update one or more config items based on the sent data."
@@ -712,12 +729,14 @@ msgid "Delete a config item."
 msgstr ""
 
 #: ../../content/configuration/generic_interface/index.rst:151
+#, fuzzy
 msgid "Invoker"
-msgstr ""
+msgstr "المنادي على"
 
 #: ../../content/configuration/generic_interface/index.rst:154
+#, fuzzy
 msgid "ConfigItemFetch"
-msgstr ""
+msgstr "عنصر التكوين"
 
 #: ../../content/configuration/generic_interface/index.rst:155
 msgid ""
@@ -734,18 +753,20 @@ msgid "ITSMConfigItem::Frontend::BulkFeature"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:19
+#, fuzzy
 msgid ""
 "Enables configuration item bulk action feature for the agent frontend to "
 "work on more than one configuration item at a time."
-msgstr ""
+msgstr "تمكين ميزة الإجراءات المجمعة لعنصر التكوين للواجهة الأمامية للوكيل للعمل على أكثر من عنصر تكوين واحد في كل مرة."
 
 #: ../../content/configuration/system_configuration_settings.rst:22
 msgid "ITSMConfigItem::Frontend::BulkFeatureGroup"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:23
+#, fuzzy
 msgid "Enables configuration item bulk action feature only for the listed groups."
-msgstr ""
+msgstr "تمكين ميزة الإجراء المجمع لعنصر التكوين فقط للمجموعات المدرجة."
 
 #: ../../content/configuration/system_configuration_settings.rst:26
 msgid "Core::DynamicFields::DriverRegistration"
@@ -757,8 +778,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:30
 #: ../../content/configuration/system_configuration_settings.rst:34
+#, fuzzy
 msgid "DynamicField backend registration."
-msgstr ""
+msgstr "تسجيل الواجهة الخلفية للحقول الديناميكية."
 
 #: ../../content/configuration/system_configuration_settings.rst:33
 msgid "DynamicFields::Driver###ConfigItemVersion"
@@ -773,8 +795,9 @@ msgid "DynamicFields::ObjectType###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:41
+#, fuzzy
 msgid "DynamicField object registration."
-msgstr ""
+msgstr "حقل تسجيل الكائن الديناميكي."
 
 #: ../../content/configuration/system_configuration_settings.rst:44
 msgid "Core::Elasticsearch::Settings"
@@ -785,55 +808,60 @@ msgid "Elasticsearch::ExcludedCIClasses"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:48
+#, fuzzy
 msgid ""
 "ConfigItems of the following classes will not be stored on the "
 "Elasticsearch server. To apply this to existing CIs, the CI migration has"
 " to be run via console, after changing this option."
-msgstr ""
+msgstr "لن يتم تخزين عناصر التكوين من الفئات التالية على خادم Elasticsearch. لتطبيق ذلك على CIs الحالية، يجب تشغيل ترحيل CI عبر وحدة التحكم، بعد تغيير هذا الخيار."
 
 #: ../../content/configuration/system_configuration_settings.rst:51
 msgid "Elasticsearch::ExcludedCIDeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:52
+#, fuzzy
 msgid ""
 "ConfigItems with the following deployment states will not be stored on "
 "the Elasticsearch server. To apply this to existing CIs, the CI migration"
 " has to be run via console, after changing this option."
-msgstr ""
+msgstr "لن يتم تخزين عناصر التكوين ذات حالات النشر التالية على خادم Elasticsearch. لتطبيق ذلك على CIs الحالية، يجب تشغيل ترحيل CI عبر وحدة التحكم، بعد تغيير هذا الخيار."
 
 #: ../../content/configuration/system_configuration_settings.rst:55
 msgid "Elasticsearch::ConfigItemStoreFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:56
+#, fuzzy
 msgid ""
 "Fields stored in the configuration item index which are used for other "
 "things besides fulltext searches. For the complete functionality all "
 "fields are mandatory."
-msgstr ""
+msgstr "الحقول المخزنة في فهرس عناصر التكوين التي تُستخدم لأشياء أخرى إلى جانب عمليات البحث عن النص الكامل. للوظائف الكاملة جميع الحقول إلزامية."
 
 #: ../../content/configuration/system_configuration_settings.rst:59
 msgid "Elasticsearch::ConfigItemSearchFields"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:60
+#, fuzzy
 msgid ""
 "Fields of the configuration item index, used for the fulltext search. "
 "Fields are also stored, but are not mandatory for the overall "
 "functionality. Inclusion of attachments can be disabled by setting the "
 "entry to 0 or deleting it."
-msgstr ""
+msgstr "حقول فهرس عناصر التكوين، المستخدمة للبحث عن النص الكامل. يتم تخزين الحقول أيضًا، ولكنها ليست إلزامية للوظيفة العامة. يمكن تعطيل إدراج المرفقات عن طريق تعيين الإدخال إلى 0 أو حذفه."
 
 #: ../../content/configuration/system_configuration_settings.rst:63
 msgid "Elasticsearch::QuickSearchShow###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:64
+#, fuzzy
 msgid ""
 "Objects to search for, how many entries and which attributs to show. "
 "ConfigItem attributes have to explicitly be stored via Elasticsearch."
-msgstr ""
+msgstr "الكائنات التي يجب البحث عنها، وعدد الإدخالات والسمات التي يجب إظهارها. يجب تخزين سمات ConfigItem بشكل صريح عبر Elasticsearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:67
 msgid "Core::Event::ITSMConfigItem"
@@ -844,20 +872,22 @@ msgid "ITSMConfigItem::EventModulePost###100-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:71
+#, fuzzy
 msgid ""
 "Config item event module that enables logging to history in the agent "
 "interface."
-msgstr ""
+msgstr "وحدة حدث عنصر التكوين النمطية التي تتيح التسجيل في السجل في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:74
 msgid "ITSMConfigItem::EventModulePost###300-DefinitionConfigItemUpdate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:75
+#, fuzzy
 msgid ""
 "Config item event module that updates config items to their current "
 "definition."
-msgstr ""
+msgstr "وحدة حدث عنصر التكوين النمطية التي تقوم بتحديث عناصر التكوين إلى تعريفها الحالي."
 
 #: ../../content/configuration/system_configuration_settings.rst:78
 msgid "ITSMConfigItem::EventModulePost###400-LinkSync"
@@ -888,20 +918,22 @@ msgid "DynamicField::EventModulePost###200-DynamicFieldSync"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:91
+#, fuzzy
 msgid ""
 "Dynamic field event module that marks config item definitions as out of "
 "sync, if containing dynamic fields change."
-msgstr ""
+msgstr "الوحدة النمطية لحدث الحقل الديناميكي التي تحدد تعريفات عناصر التكوين على أنها غير متزامنة، إذا كانت تحتوي على حقول ديناميكية متغيرة."
 
 #: ../../content/configuration/system_configuration_settings.rst:94
 msgid "ITSMConfigItem::EventModulePost###1000-GenericInterface"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:95
+#, fuzzy
 msgid ""
 "Performs the configured action for each event (as an Invoker) for each "
 "configured Webservice."
-msgstr ""
+msgstr "يقوم بتنفيذ الإجراء المكوّن لكل حدث (كمستدعي) لكل خدمة ويب مكوّنة."
 
 #: ../../content/configuration/system_configuration_settings.rst:98
 msgid "Core::Event::Ticket"
@@ -913,8 +945,9 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:102
 #: ../../content/configuration/system_configuration_settings.rst:106
+#, fuzzy
 msgid "Event module to set configitem-status on ticket-configitem-link."
-msgstr ""
+msgstr "وحدة الحدث النمطية لتعيين حالة العنصر التكويني على رابط تذكرة-تكوين-عنصر-تكوين-رابط."
 
 #: ../../content/configuration/system_configuration_settings.rst:105
 msgid "Ticket::EventModulePost###042-ITSMConfigItemTicketStatusLink"
@@ -929,153 +962,170 @@ msgid "GeneralCatalogPreferences###DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:113
+#, fuzzy
 msgid ""
 "Parameters for the deployment states in the preferences view of the agent"
 " interface."
-msgstr ""
+msgstr "معلمات لحالات النشر في عرض التفضيلات في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:116
 msgid "GeneralCatalogPreferences###DeploymentStatesColors"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:117
+#, fuzzy
 msgid ""
 "Parameters for the deployment states color in the preferences view of the"
 " agent interface."
-msgstr ""
+msgstr "معلمات لون حالات النشر في عرض التفضيلات في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:120
 msgid "GeneralCatalogPreferences###NameModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:121
+#, fuzzy
 msgid ""
 "Parameters for the name module for config item classes in the preferences"
 " view of the agent interface."
-msgstr ""
+msgstr "معلمات وحدة الاسم النمطية لفئات عناصر التكوين في عرض التفضيلات لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:124
 msgid "GeneralCatalogPreferences###NumberModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:125
+#, fuzzy
 msgid ""
 "Parameters for the number module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "معلمات الوحدة النمطية للرقم لفئات عناصر التكوين في عرض التفضيلات لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:128
 msgid "GeneralCatalogPreferences###VersionStringModule"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:129
+#, fuzzy
 msgid ""
 "Parameters for the version string module for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "معلمات الوحدة النمطية لسلسلة الإصدار لفئات عناصر التكوين في طريقة عرض التفضيلات لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:132
 msgid "GeneralCatalogPreferences###VersionStringExpression"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:133
+#, fuzzy
 msgid ""
 "Parameters for the version string template toolkit module for config item"
 " classes in the preferences view of the agent interface."
-msgstr ""
+msgstr "معلمات للوحدة النمطية لمجموعة أدوات قالب سلسلة الإصدار لفئات عناصر التكوين في عرض التفضيلات لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:136
 msgid "GeneralCatalogPreferences###VersionTrigger"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:137
+#, fuzzy
 msgid ""
 "Parameters for the version trigger for config item classes in the "
 "preferences view of the agent interface."
-msgstr ""
+msgstr "معلمات مشغل الإصدار لفئات عناصر التكوين في عرض التفضيلات لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:140
 msgid "GeneralCatalogPreferences###Categories"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:141
+#, fuzzy
 msgid ""
 "Parameters for the categories for config item classes in the preferences "
 "view of the agent interface."
-msgstr ""
+msgstr "المعلمات الخاصة بفئات فئات عناصر التكوين في عرض التفضيلات في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:144
 msgid "GeneralCatalogPreferences###Permissions"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:145
+#, fuzzy
 msgid ""
 "Parameters for the example permission groups of the general catalog "
 "attributes."
-msgstr ""
+msgstr "المعلمات الخاصة بأمثلة مجموعات الأذونات الخاصة بسمات الكتالوج العام."
 
 #: ../../content/configuration/system_configuration_settings.rst:148
+#, fuzzy
 msgid "Core::ITSMConfigItem"
-msgstr ""
+msgstr "عنصر التكوين ITSMItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:151
 msgid "ITSMConfigItem::CINameRegex"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:152
+#, fuzzy
 msgid ""
 "Defines regular expressions individually for each ConfigItem class to "
 "check the ConfigItem name and to show corresponding error messages."
-msgstr ""
+msgstr "يحدد التعبيرات العادية بشكل فردي لكل فئة من فئات ConfigItem للتحقق من اسم عنصر التكوين وإظهار رسائل الخطأ المقابلة."
 
 #: ../../content/configuration/system_configuration_settings.rst:155
 msgid "ITSMConfigItem::Permission::Class###010-ClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:156
+#, fuzzy
 msgid "Module to check the group responsible for a class."
-msgstr ""
+msgstr "الوحدة النمطية للتحقق من المجموعة المسؤولة عن فئة ما."
 
 #: ../../content/configuration/system_configuration_settings.rst:159
 msgid "ITSMConfigItem::Permission::Item###010-ItemClassGroupCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:160
+#, fuzzy
 msgid "Module to check the group responsible for a configuration item."
-msgstr ""
+msgstr "الوحدة النمطية للتحقق من المجموعة المسؤولة عن عنصر التكوين."
 
 #: ../../content/configuration/system_configuration_settings.rst:163
+#, fuzzy
 msgid "ITSMConfigItem::Hook"
-msgstr ""
+msgstr "عنصر التكوين ITSMItem"
 
 #: ../../content/configuration/system_configuration_settings.rst:164
+#, fuzzy
 msgid ""
 "The identifier for a configuration item, e.g. ConfigItem#, MyConfigItem#."
 " The default is ConfigItem#."
-msgstr ""
+msgstr "معرّف عنصر التكوين، على سبيل المثال ConfigItem#، MyConfigItem#. الافتراضي هو ConfigItem#."
 
 #: ../../content/configuration/system_configuration_settings.rst:167
 msgid "UniqueCIName::EnableUniquenessCheck"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:168
+#, fuzzy
 msgid ""
 "Enables/disables the functionality to check ITSM onfiguration items for "
 "unique names. Before enabling this option you should check your system "
 "for already existing config items with duplicate names. You can do this "
 "with the console command Admin::ITSM::ConfigItem::ListDuplicates."
-msgstr ""
+msgstr "تمكين/تعطيل وظيفة التحقق من عناصر تكوين ITSM بحثاً عن أسماء فريدة. قبل تمكين هذا الخيار، يجب عليك التحقق من النظام الخاص بك بحثًا عن عناصر التكوين الموجودة بالفعل ذات الأسماء المكررة. يمكنك القيام بذلك باستخدام أمر وحدة التحكم Admin::ITSM::ConfigItem::ListDuplicates."
 
 #: ../../content/configuration/system_configuration_settings.rst:171
 msgid "UniqueCIName::UniquenessCheckScope"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:172
+#, fuzzy
 msgid ""
 "Check for a unique name only within the same ConfigItem class ('class') "
 "or globally ('global'), which means every existing ConfigItem is taken "
 "into account when looking for duplicates."
-msgstr ""
+msgstr "تحقق من وجود اسم فريد فقط داخل نفس فئة ConfigItem ('class') أو عالميًا ('عام')، مما يعني أن كل عنصر تكوين موجود يؤخذ في الاعتبار عند البحث عن التكرارات."
 
 #: ../../content/configuration/system_configuration_settings.rst:175
 msgid "Customer::ConfigItem::PermissionConditions###01"
@@ -1086,12 +1136,13 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:184
 #: ../../content/configuration/system_configuration_settings.rst:188
 #: ../../content/configuration/system_configuration_settings.rst:192
+#, fuzzy
 msgid ""
 "Define a set of conditions under which a customer is allowed to see a "
 "config item. Conditions can optionally be restricted to certain customer "
 "groups. Name is the only mandatory attribute. If no other options are "
 "given, all config items will be visible under that category."
-msgstr ""
+msgstr "تحديد مجموعة من الشروط التي يُسمح بموجبها للعميل برؤية عنصر تكوين. يمكن تقييد الشروط اختياريًا على مجموعات معينة من العملاء. الاسم هو السمة الإلزامية الوحيدة. إذا لم يتم إعطاء أي خيارات أخرى، ستكون جميع عناصر التكوين مرئية تحت تلك الفئة."
 
 #: ../../content/configuration/system_configuration_settings.rst:179
 msgid "Customer::ConfigItem::PermissionConditions###02"
@@ -1138,16 +1189,18 @@ msgid "CMDBTreeView::DefaultDepth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:220
+#, fuzzy
 msgid "Defines the default relations depth to be shown."
-msgstr ""
+msgstr "يحدد عمق العلاقات الافتراضي الذي سيتم عرضه."
 
 #: ../../content/configuration/system_configuration_settings.rst:223
 msgid "CMDBTreeView::ShowLinkLabels"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:224
+#, fuzzy
 msgid "Defines if the link type labels must be shown in the node connections."
-msgstr ""
+msgstr "يحدد ما إذا كان يجب إظهار تسميات نوع الارتباط في اتصالات العقدة."
 
 #: ../../content/configuration/system_configuration_settings.rst:227
 msgid "Core::ITSMConfigItem::ACL"
@@ -1159,10 +1212,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:231
 #: ../../content/configuration/system_configuration_settings.rst:235
+#, fuzzy
 msgid ""
 "Defines which items are available in first level of the ITSM Config Item "
 "ACL structure."
-msgstr ""
+msgstr "يحدد العناصر المتوفرة في المستوى الأول من بنية ACL لعنصر تكوين ITSM."
 
 #: ../../content/configuration/system_configuration_settings.rst:234
 msgid "ITSMConfigItemACLKeysLevel1Change"
@@ -1177,10 +1231,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:247
 #: ../../content/configuration/system_configuration_settings.rst:251
 #: ../../content/configuration/system_configuration_settings.rst:255
+#, fuzzy
 msgid ""
 "Defines which items are available in second level of the ITSM Config Item"
 " ACL structure."
-msgstr ""
+msgstr "يحدد العناصر المتوفرة في المستوى الثاني من بنية ACL لعنصر تكوين ITSM."
 
 #: ../../content/configuration/system_configuration_settings.rst:242
 msgid "ITSMConfigItemACLKeysLevel2::PossibleAdd"
@@ -1203,22 +1258,24 @@ msgid "ITSMConfigItemACLKeysLevel3::Actions###100-Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:259
+#, fuzzy
 msgid ""
 "Defines which items are available for 'Action' in third level of the ITSM"
 " Config Item ACL structure."
-msgstr ""
+msgstr "يحدد العناصر المتاحة \"للإجراء\" في المستوى الثالث من بنية ACL لعنصر تكوين ITSM."
 
 #: ../../content/configuration/system_configuration_settings.rst:262
 msgid "ConfigItemACL::ACLPreselection"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:263
+#, fuzzy
 msgid ""
 "Whether the execution of ConfigItemACL can be avoided by checking cached "
 "field dependencies. This can improve loading times of formulars, but has "
 "to be disabled, if ACLModules are to be used for ITSMConfigItem- and "
 "Form-ReturnTypes."
-msgstr ""
+msgstr "ما إذا كان يمكن تجنب تنفيذ ConfigItemACL عن طريق التحقق من تبعيات الحقول المخزنة مؤقتًا. يمكن أن يؤدي ذلك إلى تحسين أوقات تحميل النماذج، ولكن يجب تعطيله، إذا كان سيتم استخدام وحدات ACLModules لـ ITSMConfigonfigItem- و Form-ReturnTypes."
 
 #: ../../content/configuration/system_configuration_settings.rst:266
 msgid "ConfigItemACL::Autoselect"
@@ -1251,24 +1308,27 @@ msgid "LinkObject::DefaultSubObject###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:281
+#, fuzzy
 msgid "Defines the default subobject of the class 'ITSMConfigItem'."
-msgstr ""
+msgstr "يحدد الكائن الفرعي الافتراضي للفئة 'ITSMConfigItem'."
 
 #: ../../content/configuration/system_configuration_settings.rst:284
 msgid "LinkObject::ITSMConfigItem::ShowColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:285
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view for all "
 "CI classes. If there is no entry, then the default columns are shown."
-msgstr ""
+msgstr "يحدد الأعمدة الظاهرة من CIs في طريقة العرض المعقدة لجدول الارتباط لجميع فئات CI. إذا لم يكن هناك إدخال، يتم عرض الأعمدة الافتراضية."
 
 #: ../../content/configuration/system_configuration_settings.rst:288
 msgid "LinkObject::ITSMConfigItem::ShowColumnsByClass"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:289
+#, fuzzy
 msgid ""
 "Defines the shown columns of CIs in the link table complex view, "
 "depending on the CI class. Each entry must be prefixed with the class "
@@ -1280,7 +1340,7 @@ msgid ""
 "Computer::HardDisk::1::Capacity::1, Computer::HardDisk::2, "
 "Computer::HardDisk::2::Capacity::1. If there is no entry for a CI class, "
 "then the default columns are shown."
-msgstr ""
+msgstr "يحدد الأعمدة المعروضة من CI في طريقة العرض المعقدة لجدول الارتباط، اعتماداً على فئة CI. يجب أن يكون كل إدخال مسبوقًا باسم الفئة ونقطتين (أي الكمبيوتر:::::). هناك عدد قليل من سمات CI-Attributes المشتركة بين جميع CI (مثال لفئة الكمبيوتر: الحاسوب::الاسم، الحاسوب::CurDeplState، الحاسوب::CreateTime). لإظهار سمات CI-Attributes الفردية كما هي معرفة في تعريف CI-Definition، يجب استخدام المخطط التالي (مثال لفئة الكمبيوتر): الكمبيوتر::القرص الصلب::1، الكمبيوتر::القرص الصلب::1::السعة::1، الكمبيوتر: القرص الصلب::2، الكمبيوتر: القرص الصلب::2: السعة::1. في حالة عدم وجود إدخال لفئة CI، يتم عرض الأعمدة الافتراضية."
 
 #: ../../content/configuration/system_configuration_settings.rst:292
 msgid "Core::LinkStatus"
@@ -1291,48 +1351,53 @@ msgid "ITSMConfigItem::SetIncidentStateOnLink"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:296
+#, fuzzy
 msgid ""
 "Set the incident state of a CI automatically when a Ticket is Linked to a"
 " CI."
-msgstr ""
+msgstr "قم بتعيين حالة الحادث لمخبر جنائي تلقائياً عند ربط تذكرة بمخبر جنائي."
 
 #: ../../content/configuration/system_configuration_settings.rst:299
 msgid "ITSMConfigItem::LinkStatus::TicketTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:300
+#, fuzzy
 msgid "Defines which type of ticket can affect the status of a linked CI."
-msgstr ""
+msgstr "يحدد نوع التذكرة التي يمكن أن تؤثر على حالة المخبر المستقل المرتبط."
 
 #: ../../content/configuration/system_configuration_settings.rst:303
 msgid "ITSMConfigItem::LinkStatus::DeploymentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:304
+#, fuzzy
 msgid ""
 "Defines the relevant deployment states where linked tickets can affect "
 "the status of a CI."
-msgstr ""
+msgstr "يحدد حالات النشر ذات الصلة التي يمكن أن تؤثر فيها التذاكر المرتبطة على حالة المخبر السري."
 
 #: ../../content/configuration/system_configuration_settings.rst:307
 msgid "ITSMConfigItem::LinkStatus::IncidentStates"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:308
+#, fuzzy
 msgid ""
 "Defines the order of incident states from high (e.g. cricital) to low "
 "(e.g. functional)."
-msgstr ""
+msgstr "يُحدد ترتيب الحالات العارضة من الأعلى (مثل الحلقية) إلى الأدنى (مثل الوظيفية)."
 
 #: ../../content/configuration/system_configuration_settings.rst:311
 msgid "ITSMConfigItem::LinkStatus::LinkTypes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:312
+#, fuzzy
 msgid ""
 "Defines which type of link (named from the ticket perspective) can affect"
 " the status of a linked CI."
-msgstr ""
+msgstr "يحدد نوع الارتباط (المسمى من منظور التذكرة) الذي يمكن أن يؤثر على حالة CI المرتبط."
 
 #: ../../content/configuration/system_configuration_settings.rst:315
 msgid "Core::Stats"
@@ -1343,8 +1408,9 @@ msgid "Stats::DynamicObjectRegistration###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:319
+#, fuzzy
 msgid "Module to generate ITSM config item statistics."
-msgstr ""
+msgstr "الوحدة النمطية لإنشاء إحصائيات عناصر تكوين ITSM."
 
 #: ../../content/configuration/system_configuration_settings.rst:322
 msgid "Daemon::SchedulerCronTaskManager::Task"
@@ -1357,8 +1423,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:326
 #: ../../content/configuration/system_configuration_settings.rst:330
 #: ../../content/configuration/system_configuration_settings.rst:334
+#, fuzzy
 msgid "Triggers ConfigItemFetch invoker automatically."
-msgstr ""
+msgstr "يقوم بتشغيل مستدعي ConfigItemFetch تلقائيًا."
 
 #: ../../content/configuration/system_configuration_settings.rst:329
 msgid "Daemon::SchedulerCronTaskManager::Task###TriggerConfigItemFetch-02"
@@ -1377,8 +1444,9 @@ msgid "Events###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:341
+#, fuzzy
 msgid "List of all Package events to be displayed in the GUI."
-msgstr ""
+msgstr "قائمة بجميع أحداث الحزم التي سيتم عرضها في واجهة المستخدم الرسومية."
 
 #: ../../content/configuration/system_configuration_settings.rst:344
 msgid "Frontend::Admin::ModuleRegistration"
@@ -1401,8 +1469,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:533
 #: ../../content/configuration/system_configuration_settings.rst:537
 #: ../../content/configuration/system_configuration_settings.rst:541
+#, fuzzy
 msgid "Frontend module registration for the agent interface."
-msgstr ""
+msgstr "تسجيل الوحدة النمطية الأمامية في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:351
 msgid "Frontend::Module###AdminGenericInterfaceInvokerConfigItem"
@@ -1417,8 +1486,9 @@ msgid "Frontend::NavigationModule###AdminITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:359
+#, fuzzy
 msgid "Admin area navigation for the agent interface."
-msgstr ""
+msgstr "التنقل في واجهة المسؤول لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:362
 msgid "Frontend::Admin::ModuleRegistration::Loader"
@@ -1437,8 +1507,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:564
 #: ../../content/configuration/system_configuration_settings.rst:568
 #: ../../content/configuration/system_configuration_settings.rst:572
+#, fuzzy
 msgid "Loader module registration for the agent interface."
-msgstr ""
+msgstr "تسجيل وحدة اللودر (Loader) لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:369
 msgid "Loader::Module::AdminGenericInterfaceInvokerConfigItem###007-ITSMConfigurationManagement"
@@ -1458,8 +1529,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:587
 #: ../../content/configuration/system_configuration_settings.rst:591
 #: ../../content/configuration/system_configuration_settings.rst:873
+#, fuzzy
 msgid "Main menu item registration."
-msgstr ""
+msgstr "تسجيل عنصر القائمة الرئيسية."
 
 #: ../../content/configuration/system_configuration_settings.rst:380
 msgid "Frontend::Admin::View::ITSMConfigItemDefinition"
@@ -1470,10 +1542,11 @@ msgid "ITSMConfigItem::Frontend::AdminITSMConfigItem###EditorRows"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:384
+#, fuzzy
 msgid ""
 "Defines the number of rows for the CI definition editor in the admin "
 "interface."
-msgstr ""
+msgstr "يحدد عدد الصفوف لمحرر تعريف CI في واجهة المسؤول."
 
 #: ../../content/configuration/system_configuration_settings.rst:387
 msgid "Frontend::Agent::ITSMConfigItem::MenuModule"
@@ -1484,80 +1557,88 @@ msgid "ITSMConfigItem::Frontend::MenuModule###000-Back"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:391
+#, fuzzy
 msgid ""
 "Shows a link in the menu to go back in the configuration item zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "إظهار رابط في القائمة للرجوع في عرض تكبير عنصر التكوين لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:394
 msgid "ITSMConfigItem::Frontend::MenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:395
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the its zoom view of the agent interface."
-msgstr ""
+msgstr "يعرض رابطًا في القائمة للوصول إلى محفوظات عنصر التكوين في عرض التكبير الخاص به في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:398
 msgid "ITSMConfigItem::Frontend::MenuModule###300-Edit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:399
+#, fuzzy
 msgid ""
 "Shows a link in the menu to edit a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "يعرض رابطاً في القائمة لتحرير عنصر تكوين في عرض التكبير/التصغير الخاص به في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:402
 msgid "ITSMConfigItem::Frontend::MenuModule###400-Print"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:403
+#, fuzzy
 msgid ""
 "Shows a link in the menu to print a configuration item in the its zoom "
 "view of the agent interface."
-msgstr ""
+msgstr "يعرض رابطًا في القائمة لطباعة عنصر تكوين في عرض التكبير/التصغير الخاص به لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:406
 msgid "ITSMConfigItem::Frontend::MenuModule###500-Link"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:407
+#, fuzzy
 msgid ""
 "Shows a link in the menu that allows linking a configuration item with "
 "another object in the config item zoom view of the agent interface."
-msgstr ""
+msgstr "يعرض رابطًا في القائمة يسمح بربط عنصر تكوين مع كائن آخر في عرض تكبير عنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:410
 msgid "ITSMConfigItem::Frontend::MenuModule###550-TreeView"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:411
+#, fuzzy
 msgid ""
 "Shows a link in the menu to display the configuration item links as a "
 "Tree View."
-msgstr ""
+msgstr "إظهار رابط في القائمة لعرض روابط عناصر التكوين كطريقة عرض الشجرة."
 
 #: ../../content/configuration/system_configuration_settings.rst:414
 msgid "ITSMConfigItem::Frontend::MenuModule###600-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:415
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the its "
 "zoom view of the agent interface."
-msgstr ""
+msgstr "يعرض رابط في القائمة لتكرار عنصر تكوين في عرض التكبير الخاص به في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:418
 msgid "ITSMConfigItem::Frontend::MenuModule###700-ConfigItemDelete"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:419
+#, fuzzy
 msgid ""
 "Shows a link in the menu to delete a configuration item in its zoom view "
 "of the agent interface."
-msgstr ""
+msgstr "يعرض رابطاً في القائمة لحذف عنصر تكوين في عرض التكبير/التصغير الخاص به في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:422
 msgid "Frontend::Agent::ITSMConfigItem::MenuModulePre"
@@ -1568,30 +1649,33 @@ msgid "ITSMConfigItem::Frontend::PreMenuModule###100-Zoom"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:426
+#, fuzzy
 msgid ""
 "Shows a link in the menu to zoom into a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "يعرض رابطاً في القائمة لتكبير عنصر تكوين في نظرة عامة على عنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:429
 msgid "ITSMConfigItem::Frontend::PreMenuModule###200-History"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:430
+#, fuzzy
 msgid ""
 "Shows a link in the menu to access the history of a configuration item in"
 " the configuration item overview of the agent interface."
-msgstr ""
+msgstr "إظهار رابط في القائمة للوصول إلى محفوظات عنصر التكوين في نظرة عامة على عنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:433
 msgid "ITSMConfigItem::Frontend::PreMenuModule###300-Duplicate"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:434
+#, fuzzy
 msgid ""
 "Shows a link in the menu to duplicate a configuration item in the "
 "configuration item overview of the agent interface."
-msgstr ""
+msgstr "إظهار ارتباط في القائمة لتكرار عنصر تكوين في نظرة عامة على عنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:437
 msgid "Frontend::Agent::ITSMConfigItem::Permission"
@@ -1602,90 +1686,99 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:441
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item screen in the "
 "agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:444
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:445
+#, fuzzy
 msgid ""
 "Required permissions to use the edit ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة تحرير عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:448
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAdd###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:449
+#, fuzzy
 msgid ""
 "Required permissions to use the add ITSM configuration item screen in the"
 " agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة إضافة عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:452
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemHistory###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:453
+#, fuzzy
 msgid ""
 "Required permissions to use the history ITSM configuration item screen in"
 " the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة عنصر تكوين محفوظات ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:456
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemPrint###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:457
+#, fuzzy
 msgid ""
 "Required permissions to use the print ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة عنصر تكوين ITSM للطباعة في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:460
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemZoom###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:461
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item zoom screen in "
 "the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة تكبير عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:464
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:465
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة البحث عن عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:468
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemTreeView###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:469
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item tree view screen "
 "in the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة عرض شجرة عناصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:472
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:473
+#, fuzzy
 msgid ""
 "Required permissions to use the bulk ITSM configuration item screen in "
 "the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة عناصر تكوين ITSM المجمعة في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:476
 msgid "Frontend::Agent::ITSMConfigItemAttachment::Permission"
@@ -1696,10 +1789,11 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemAttachment###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:480
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item attachment action"
 " in the agent interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام إجراء إرفاق عنصر تكوين ITSM في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:483
 msgid "Frontend::Agent::ITSMConfigItemOverview"
@@ -1711,10 +1805,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:487
 #: ../../content/configuration/system_configuration_settings.rst:832
+#, fuzzy
 msgid ""
 "Defines an overview module to show the small view of a configuration item"
 " list."
-msgstr ""
+msgstr "يحدد وحدة نظرة عامة لإظهار العرض الصغير لقائمة عناصر التكوين."
 
 #: ../../content/configuration/system_configuration_settings.rst:490
 msgid "Frontend::Agent::LinkObject"
@@ -1725,6 +1820,7 @@ msgid "LinkObject::ComplexTable::SettingsVisibility###ITSMConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:494
+#, fuzzy
 msgid ""
 "Define Actions where a settings button is available in the linked objects"
 " widget (LinkObject::ViewMode = \"complex\"). Please note that these "
@@ -1732,7 +1828,7 @@ msgid ""
 "Core.AllocationList.css, Core.UI.AllocationList.js, "
 "Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and "
 "Core.Agent.LinkObject.js."
-msgstr ""
+msgstr "تعريف العمليات التي يجب أن يتوفر بها زر الإعدادات في ودجة كائن الرابط (LinkObject::ViewMode = \"complex\"). الرجاء ملاحظة أنه يجب تسجيل ملفات JS و CSS التالية لهذه الإجراءات: Core.CustomList.css، Core.UI.AllocationList.js، Core.UI.Table.Sort.js، Core.Agent.TableFilter.js."
 
 #: ../../content/configuration/system_configuration_settings.rst:497
 msgid "Frontend::Agent::ModuleRegistration"
@@ -1843,16 +1939,18 @@ msgid "Frontend::Search###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:598
+#, fuzzy
 msgid "Configuration item search backend router of the agent interface."
-msgstr ""
+msgstr "عنصر التكوين البحث عن عنصر التكوين الموجه الخلفي لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:601
 msgid "Frontend::Search::JavaScript###ConfigItem"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:602
+#, fuzzy
 msgid "JavaScript function for the search frontend."
-msgstr ""
+msgstr "وظيفة JavaScript لواجهة البحث."
 
 #: ../../content/configuration/system_configuration_settings.rst:605
 msgid "Frontend::Agent::View::AgentITSMConfigItemBulk"
@@ -1866,10 +1964,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:616
 #: ../../content/configuration/system_configuration_settings.rst:623
 #: ../../content/configuration/system_configuration_settings.rst:630
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the additional ITSM field screen of the agent "
 "interface."
-msgstr ""
+msgstr "الحقول الديناميكية المعروضة في شاشة حقل إدارة خدمات تكنولوجيا المعلومات والاتصالات الإضافي في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:612
 msgid "Frontend::Agent::View::AgentITSMConfigItemEdit"
@@ -1904,42 +2003,46 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ExtendedSearchCondi
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:637
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the agent "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "يسمح بشروط بحث موسعة في البحث عن عنصر التكوين في واجهة الوكيل. باستخدام هذه الميزة يمكنك البحث مثلاً عن اسم عنصر التكوين مع هذا النوع من الشروط مثل \"(*مفتاح 1*&*مفتاح 2*)\" أو \"(*مفتاح 1*||مفتاح 2*)\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:640
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:641
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the agent interface."
-msgstr ""
+msgstr "عدد عناصر التكوين التي سيتم عرضها في كل صفحة من نتائج البحث في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:644
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:645
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the agent interface."
-msgstr ""
+msgstr "يحدد سمة عنصر التكوين الافتراضية لفرز عنصر التكوين لنتيجة البحث عن عنصر التكوين لواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:648
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:649
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "يحدد الترتيب الافتراضي لعنصر التكوين في نتيجة البحث عن عنصر التكوين في واجهة الوكيل. لأعلى: الأقدم في الأعلى. لأسفل: الأحدث في الأعلى."
 
 #: ../../content/configuration/system_configuration_settings.rst:652
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Number"
@@ -1958,10 +2061,11 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:912
 #: ../../content/configuration/system_configuration_settings.rst:916
 #: ../../content/configuration/system_configuration_settings.rst:920
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen."
-msgstr ""
+msgstr "يحدد سمة البحث عن عنصر التكوين المعروضة الافتراضية لشاشة البحث عن عنصر التكوين."
 
 #: ../../content/configuration/system_configuration_settings.rst:656
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###Name"
@@ -1988,20 +2092,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConf
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:677
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimePointFormat=year;ITSMConfigItemCreateTimePointStart=Last;ITSMConfigItemCreateTimePoint=2;\"."
-msgstr ""
+msgstr "البيانات الافتراضية لاستخدامها في السمة لشاشة البحث عن عنصر التكوين. مثال: \"ITSMConfigItemCreateTimePointFormat=سنة؛ ITSMConfigItemCreateTimePointStart=آخر؛ ITSMConfigItemCreateTimePoint=2؛\""
 
 #: ../../content/configuration/system_configuration_settings.rst:680
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemCreateTimeSlot"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:681
+#, fuzzy
 msgid ""
 "Default data to use on attribute for config item search screen. Example: "
 "\"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
-msgstr ""
+msgstr "البيانات الافتراضية لاستخدامها في السمة لشاشة البحث عن عنصر التكوين. Example: \"ITSMConfigItemCreateTimeStartYear=2010;ITSMConfigItemCreateTimeStartMonth=10;ITSMConfigItemCreateTimeStartDay=4;ITSMConfigItemCreateTimeStopYear=2010;ITSMConfigItemCreateTimeStopMonth=11;ITSMConfigItemCreateTimeStopDay=3;\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:684
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###ITSMConfigItemChangeTimePoint"
@@ -2017,6 +2123,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:693
 #: ../../content/configuration/system_configuration_settings.rst:924
+#, fuzzy
 msgid ""
 "Defines the default shown config item search attribute for config item "
 "search screen. Example: \"Key\" must have the name of the Dynamic Field "
@@ -2037,7 +2144,7 @@ msgid ""
 "'Search_DynamicField_XTimePointFormat=week; "
 "Search_DynamicField_XTimePointStart=Before; "
 "Search_DynamicField_XTimePointValue=7';."
-msgstr ""
+msgstr "يحدد سمة بحث عنصر التكوين الافتراضية المعروضة لشاشة بحث عنصر التكوين. مثال: \"المفتاح\" يجب أن يحتوي على اسم الحقل الديناميكي في هذه الحالة 'X'، \"المحتوى\" يجب أن يحتوي على قيمة الحقل الديناميكي حسب نوع الحقل الديناميكي، النص: 'نص'، القائمة المنسدلة: '1'، التاريخ/الوقت: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XDynamicField_XT TimeSlotStlotStartMinute=00؛ Search_DynamicField_X TimeSlotStartSecond=00؛ Search_DynamicField_X TimeSlotStopYear=2013؛ Search_DynamicField_X TimeSlotStopMonth=01 Search_DynamicField_XDynamicField_XT TimeSlotStopDay=26؛ Search_DynamicField_XTimeSlotStopHour=23؛ Search_DynamicField_XTimeSlotStopMinute=59؛ Search_DynamicField_XTimeSlotStopSecond=59;\" و 'أو 'Search_DynamicField_XT_TimePointFormat=week؛ Search_DynamicField_XT_TimePointStart=قبل؛ Search_DynamicField_XT TimePointValue=7'؛"
 
 #: ../../content/configuration/system_configuration_settings.rst:696
 msgid "Frontend::Agent::View::CustomerInformationCenter"
@@ -2051,6 +2158,7 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:700
 #: ../../content/configuration/system_configuration_settings.rst:707
+#, fuzzy
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
 "overview of the agent interface . \"Limit\" is the number of entries "
@@ -2058,7 +2166,7 @@ msgid ""
 "(e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin"
 " is enabled by default or if the user needs to enable it manually. "
 "\"CacheTTLLocal\" is the cache time in minutes for the plugin."
-msgstr ""
+msgstr "معاملات واجهة الخلفية لوحة المعلومات لعنصر عرض قائمة العملاء في منطقة الوكلاء. \"Limit\" يحدد عدد العناصر المعروضة افتراضيًا. يمكن استخدام \"Group\" لتقييد الوصول إلى المكون الإضافي (على سبيل المثال: Group: admin;group1;group2;). \"Default\" يحدد ما إذا كان المكون الإضافي يجب تمكينه تلقائيًا أم يجب على المستخدم تمكينه يدويًا. \"CacheTTLLocal\" يحدد مدة تشغيل ذاكرة التخزين المؤقت للمكون الإضافي بالدقائق."
 
 #: ../../content/configuration/system_configuration_settings.rst:703
 msgid "Frontend::Agent::View::CustomerUserInformationCenter"
@@ -2079,27 +2187,30 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:714
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the agent "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "الأعمدة التي يمكن تصفيتها في النظرة العامة لعنصر التكوين في واجهة الوكيل. ملاحظة: يُسمح فقط بسمات عنصر التكوين والحقول الديناميكية (DynamicField_NameX)."
 
 #: ../../content/configuration/system_configuration_settings.rst:717
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:718
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItem screen."
-msgstr ""
+msgstr "يحدد حد البحث لشاشة AgentITSMConfigigItem."
 
 #: ../../content/configuration/system_configuration_settings.rst:721
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###DefaultCategory"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:722
+#, fuzzy
 msgid "The default category which is shown, if none is selected."
-msgstr ""
+msgstr "الفئة الافتراضية التي تظهر، إذا لم يتم تحديد أي فئة."
 
 #: ../../content/configuration/system_configuration_settings.rst:725
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsAvailable"
@@ -2107,12 +2218,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:726
 #: ../../content/configuration/system_configuration_settings.rst:939
+#, fuzzy
 msgid ""
 "Defines the available columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "يحدد الأعمدة المتاحة من CI في النظرة العامة لعنصر التكوين اعتمادًا على فئة CI. يجب أن يتكون كل إدخال من اسم الفئة ومصفوفة من الحقول المتاحة للفئة المقابلة. يجب أن تحترم إدخالات الحقول الديناميكية المخطط DynamicField_FieldName."
 
 #: ../../content/configuration/system_configuration_settings.rst:729
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItem###ClassColumnsDefault"
@@ -2120,12 +2232,13 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:730
 #: ../../content/configuration/system_configuration_settings.rst:943
+#, fuzzy
 msgid ""
 "Defines the default displayed columns of CIs in the config item overview "
 "depending on the CI class. Each entry must consist of a class name and an"
 " array of available fields for the corresponding class. Dynamic field "
 "entries have to honor the scheme DynamicField_FieldName."
-msgstr ""
+msgstr "يحدد الأعمدة الافتراضية المعروضة من CIs في النظرة العامة لعنصر التكوين اعتمادًا على فئة CI. يجب أن يتكون كل إدخال من اسم الفئة ومصفوفة من الحقول المتاحة للفئة المقابلة. يجب أن تحترم إدخالات الحقول الديناميكية المخطط DynamicField_FieldName."
 
 #: ../../content/configuration/system_configuration_settings.rst:733
 msgid "Frontend::Agent::View::ITSMConfigItemBulk"
@@ -2136,20 +2249,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###DeplState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:737
+#, fuzzy
 msgid ""
 "Sets the deployment state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "يقوم بتعيين حالة النشر في الشاشة المجمعة لعنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:740
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemBulk###InciState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:741
+#, fuzzy
 msgid ""
 "Sets the incident state in the configuration item bulk screen of the "
 "agent interface."
-msgstr ""
+msgstr "يقوم بتعيين حالة الحادث في الشاشة المجمعة لعنصر التكوين الخاص بواجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:744
 msgid "Frontend::Agent::View::ITSMConfigItemDelete"
@@ -2160,8 +2275,9 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:748
+#, fuzzy
 msgid "Required privileges to delete config items."
-msgstr ""
+msgstr "الامتيازات المطلوبة لحذف عناصر التكوين."
 
 #: ../../content/configuration/system_configuration_settings.rst:751
 msgid "Frontend::Agent::View::ITSMConfigItemEdit"
@@ -2172,20 +2288,22 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextWidth"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:755
+#, fuzzy
 msgid ""
 "Defines the width for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "يحدد عرض مكون محرر النص المنسق. أدخل رقمًا (بكسل) أو نسبة مئوية (نسبي)."
 
 #: ../../content/configuration/system_configuration_settings.rst:758
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemEdit###RichTextHeight"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:759
+#, fuzzy
 msgid ""
 "Defines the height for the rich text editor component for this screen. "
 "Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "يحدد ارتفاع مكون محرر النص المنسق. حدد قيمة رقمية (بكسل) أو نسبة مئوية (نسبية)."
 
 #: ../../content/configuration/system_configuration_settings.rst:762
 msgid "Frontend::Agent::View::ITSMConfigItemHistory"
@@ -2196,8 +2314,9 @@ msgid "ITSMConfigItem::Frontend::HistoryOrder"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:766
+#, fuzzy
 msgid "Shows the config item history (reverse ordered) in the agent interface."
-msgstr ""
+msgstr "يعرض محفوظات عناصر التكوين (ترتيب عكسي) في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:769
 msgid "Frontend::Agent::View::ITSMConfigItemSearch"
@@ -2208,16 +2327,18 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVData"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:773
+#, fuzzy
 msgid "Data used to export the search result in CSV format."
-msgstr ""
+msgstr "البيانات المستخدمة لتصدير نتيجة البحث بتنسيق CSV."
 
 #: ../../content/configuration/system_configuration_settings.rst:776
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchCSVDynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:777
+#, fuzzy
 msgid "Dynamic Fields used to export the search result in CSV format."
-msgstr ""
+msgstr "الحقول الديناميكية التي سيتم إخراجها بتنسيق CSV عند تصدير نتيجة البحث."
 
 #: ../../content/configuration/system_configuration_settings.rst:780
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###Defaults###SearchPreviousVersions"
@@ -2228,18 +2349,20 @@ msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:785
+#, fuzzy
 msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
-msgstr ""
+msgstr "يحدد حد البحث لشاشة AgentITSMConfigItemSearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:788
 msgid "ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:789
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item search screen of the agent "
 "interface."
-msgstr ""
+msgstr "الحقول الديناميكية التي تظهر في شاشة البحث عن عنصر التكوين في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:792
 msgid "Frontend::Agent::View::Preferences"
@@ -2250,14 +2373,16 @@ msgid "PreferencesGroups###ConfigItemOverviewSmallPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:796
+#, fuzzy
 msgid "Parameters for the pages (in which the configuration items are shown)."
-msgstr ""
+msgstr "معلمات الصفحات (التي تظهر فيها عناصر التكوين)."
 
 #: ../../content/configuration/system_configuration_settings.rst:799
 msgid "PreferencesGroups###ConfigItemOverviewFilterSettings"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:800
+#, fuzzy
 msgid ""
 "Parameters for the column filters of the small config item overview. "
 "Please note: setting 'Active' to 0 will only prevent agents from editing "
@@ -2265,7 +2390,7 @@ msgid ""
 "allow administrators to edit the settings of another user's behalf. Use "
 "'PreferenceGroup' to control in which area these settings should be shown"
 " in the user interface."
-msgstr ""
+msgstr "معلمات مرشحات الأعمدة في النظرة العامة لعنصر التكوين الصغير. يرجى ملاحظة: تعيين 'نشط' إلى 0 سيمنع الوكلاء فقط من تحرير إعدادات هذه المجموعة في تفضيلاتهم الشخصية، ولكنه سيسمح للمسؤولين بتحرير إعدادات مستخدم آخر نيابةً عن مستخدم آخر. استخدم 'PreferenceGroup' للتحكم في المنطقة التي يجب أن تظهر فيها هذه الإعدادات في واجهة المستخدم."
 
 #: ../../content/configuration/system_configuration_settings.rst:803
 msgid "Frontend::Base::DynamicFieldScreens"
@@ -2300,8 +2425,9 @@ msgid "Loader::Agent::CommonJS###100-ConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:818
+#, fuzzy
 msgid "List of JS files to always be loaded for the agent interface."
-msgstr ""
+msgstr "قائمة ملفات JavaScript التي يجب تحميلها دائما في واجهة الوكيل."
 
 #: ../../content/configuration/system_configuration_settings.rst:821
 msgid "Frontend::Base::NavBarModule"
@@ -2312,8 +2438,9 @@ msgid "Frontend::AdminModuleGroups###200-ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:825
+#, fuzzy
 msgid "Defines available groups for the admin overview screen."
-msgstr ""
+msgstr "تعيين المجموعات المتوفرة لنظرة عامة على المسؤول."
 
 #: ../../content/configuration/system_configuration_settings.rst:828
 msgid "Frontend::Customer::ITSMConfigItemOverview"
@@ -2335,8 +2462,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:843
 #: ../../content/configuration/system_configuration_settings.rst:847
 #: ../../content/configuration/system_configuration_settings.rst:851
+#, fuzzy
 msgid "Frontend module registration for the customer interface."
-msgstr ""
+msgstr "تسجيل وحدة الواجهة الأمامية لمنطقة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:842
 msgid "CustomerFrontend::Module###CustomerITSMConfigItemSearch"
@@ -2361,8 +2489,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:858
 #: ../../content/configuration/system_configuration_settings.rst:862
 #: ../../content/configuration/system_configuration_settings.rst:866
+#, fuzzy
 msgid "Loader module registration for the customer interface."
-msgstr ""
+msgstr "تسجيل وحدة اللودر (Loader) لواجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:861
 msgid "Loader::Module::CustomerITSMConfigItemSearch###003-ITSMConfigItem"
@@ -2389,72 +2518,79 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:880
+#, fuzzy
 msgid ""
 "Required permissions to use the ITSM configuration item search screen in "
 "the customer interface."
-msgstr ""
+msgstr "الأذونات المطلوبة لاستخدام شاشة البحث عن عنصر تكوين ITSM في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:883
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DeploymentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:884
+#, fuzzy
 msgid ""
 "Includes deployment states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "يتضمن حالات النشر في البحث عن عنصر التكوين في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:887
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###IncidentState"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:888
+#, fuzzy
 msgid ""
 "Includes incident states in the config item search of the customer "
 "interface."
-msgstr ""
+msgstr "يتضمن حالات الحوادث في البحث عن عنصر التكوين في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:891
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###ExtendedSearchCondition"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:892
+#, fuzzy
 msgid ""
 "Allows extended search conditions in config item search of the customer "
 "interface. With this feature you can search e. g. config item name with "
 "this kind of conditions like \"(*key1*&&*key2*)\" or "
 "\"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "يسمح بشروط بحث موسعة في البحث عن عنصر التكوين في واجهة العميل. باستخدام هذه الميزة يمكنك البحث على سبيل المثال عن اسم عنصر التكوين مع هذا النوع من الشروط مثل \"(*مفتاح 1*&*مفتاح 2*)\" أو \"(*مفتاح 1*||مفتاح 2*)\"."
 
 #: ../../content/configuration/system_configuration_settings.rst:895
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchPageShown"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:896
+#, fuzzy
 msgid ""
 "Number of config items to be displayed in each page of a search result in"
 " the customer interface."
-msgstr ""
+msgstr "عدد عناصر التكوين التي سيتم عرضها في كل صفحة من نتائج البحث في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:899
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:900
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of the customer interface."
-msgstr ""
+msgstr "يحدد سمة عنصر التكوين الافتراضية لفرز عنصر التكوين لنتيجة البحث عن عنصر التكوين في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:903
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:904
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the customer interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "يحدد ترتيب عنصر التكوين الافتراضي في نتيجة البحث عن عنصر التكوين في واجهة العميل. لأعلى: الأقدم في الأعلى. لأسفل: الأحدث في الأعلى."
 
 #: ../../content/configuration/system_configuration_settings.rst:907
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number"
@@ -2485,19 +2621,21 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###DefaultColumns"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:931
+#, fuzzy
 msgid ""
 "Columns that can be filtered in the config item overview of the customer "
 "interface. Note: Only Config Item attributes and Dynamic Fields "
 "(DynamicField_NameX) are allowed."
-msgstr ""
+msgstr "الأعمدة التي يمكن تصفيتها في النظرة العامة لعنصر التكوين في واجهة الوكيل. ملاحظة: يُسمح فقط بسمات عنصر التكوين والحقول الديناميكية (DynamicField_NameX)."
 
 #: ../../content/configuration/system_configuration_settings.rst:934
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:935
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItem screen."
-msgstr ""
+msgstr "يحدد حد البحث لشاشة CustomerITSMConfigigItem."
 
 #: ../../content/configuration/system_configuration_settings.rst:938
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItem###ClassColumnsAvailable"
@@ -2517,10 +2655,11 @@ msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:950
 #: ../../content/configuration/system_configuration_settings.rst:954
+#, fuzzy
 msgid ""
 "Dynamic fields shown in the config item overview screen of the customer "
 "interface."
-msgstr ""
+msgstr "تظهر الحقول الديناميكية في شاشة النظرة العامة على عنصر التكوين في واجهة العميل."
 
 #: ../../content/configuration/system_configuration_settings.rst:953
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###DynamicField"
@@ -2535,8 +2674,9 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:961
+#, fuzzy
 msgid "Defines the search limit for the CustomerITSMConfigItemSearch screen."
-msgstr ""
+msgstr "يحدد حد البحث لشاشة CustomerITSMConfigItemSearch."
 
 #: ../../content/configuration/system_configuration_settings.rst:964
 msgid "Frontend::Customer::View::ITSMConfigItemZoom"
@@ -2547,42 +2687,47 @@ msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsEnabled"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:968
+#, fuzzy
 msgid "Customers can see historic CI versions."
-msgstr ""
+msgstr "يمكن للعملاء الاطلاع على إصدارات CI التاريخية."
 
 #: ../../content/configuration/system_configuration_settings.rst:971
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###VersionsSelectable"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:972
+#, fuzzy
 msgid ""
 "Customers have the possibility to manually switch between historic CI "
 "versions."
-msgstr ""
+msgstr "يمكن للعملاء التبديل يدوياً بين إصدارات CI التاريخية."
 
 #: ../../content/configuration/system_configuration_settings.rst:975
 msgid "ITSMConfigItem::Frontend::CustomerITSMConfigItemZoom###GeneralInfo"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:976
+#, fuzzy
 msgid "Which general information is shown in the header."
-msgstr ""
+msgstr "ما هي المعلومات العامة التي تظهر في العنوان."
 
 #: ../../content/configuration/system_configuration_settings.rst:979
+#, fuzzy
 msgid "GenericInterface::Invoker"
-msgstr ""
+msgstr "واجهة مستخدم GenericInterface Invoker"
 
 #: ../../content/configuration/system_configuration_settings.rst:982
 msgid "GenericInterface::Invoker::ConfigItemFetch::Classes"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:983
+#, fuzzy
 msgid ""
 "For every webservice (key) an array of classes (value) can be defined on "
 "which the import is restricted. For all chosen classes, or all existing "
 "classes the identifying attributes will have to be chosen in the invoker "
 "config."
-msgstr ""
+msgstr "لكل خدمة ويب (مفتاح) يمكن تحديد مصفوفة من الفئات (القيمة) التي يتم تقييد الاستيراد عليها. بالنسبة لجميع الفئات المختارة، أو جميع الفئات الموجودة يجب اختيار سمات التعريف في تكوين المستدعي."
 
 #: ../../content/configuration/system_configuration_settings.rst:986
 msgid "GenericInterface::Invoker::ModuleRegistration"
@@ -2593,18 +2738,20 @@ msgid "GenericInterface::Invoker::Module###Elasticsearch::ConfigItemManagement"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:990
+#, fuzzy
 msgid "GenericInterface module registration for the invoker layer."
-msgstr ""
+msgstr "تسجيل الوحدة النمطية لطبقة المدعو من GenericInterface."
 
 #: ../../content/configuration/system_configuration_settings.rst:993
 msgid "GenericInterface::Invoker::Module###ConfigItem::ConfigItemFetch"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:994
+#, fuzzy
 msgid ""
 "GenericInterface module registration for the ConfigItemFetch invoker "
 "layer."
-msgstr ""
+msgstr "تسجيل الوحدة النمطية GenericInterface لطبقة مستدعي ConfigItemFetch."
 
 #: ../../content/configuration/system_configuration_settings.rst:997
 msgid "GenericInterface::Operation::ConfigItemCreate"
@@ -2615,10 +2762,11 @@ msgid "GenericInterface::Operation::ConfigItemCreate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1001
+#, fuzzy
 msgid ""
 "Defines Required permissions to create ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "يحدد الأذونات المطلوبة لتعيين عناصر تكوين ITSM باستخدام الواجهة العامة."
 
 #: ../../content/configuration/system_configuration_settings.rst:1004
 msgid "GenericInterface::Operation::ConfigItemDelete"
@@ -2629,10 +2777,11 @@ msgid "GenericInterface::Operation::ConfigItemDelete###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1008
+#, fuzzy
 msgid ""
 "Defines Required permissions to delete ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "يحدد الأذونات المطلوبة لحذف عناصر تكوين ITSM باستخدام الواجهة العامة."
 
 #: ../../content/configuration/system_configuration_settings.rst:1011
 msgid "GenericInterface::Operation::ConfigItemGet"
@@ -2643,10 +2792,11 @@ msgid "GenericInterface::Operation::ConfigItemGet###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1015
+#, fuzzy
 msgid ""
 "Defines Required permissions to get ITSM configuration items using the "
 "Generic Interface."
-msgstr ""
+msgstr "يحدد الأذونات المطلوبة للحصول على عناصر تكوين ITSM باستخدام الواجهة العامة."
 
 #: ../../content/configuration/system_configuration_settings.rst:1018
 msgid "GenericInterface::Operation::ConfigItemSearch"
@@ -2657,40 +2807,44 @@ msgid "GenericInterface::Operation::ConfigItemSearch###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1022
+#, fuzzy
 msgid ""
 "Defines Required permissions to search ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "يحدد الأذونات المطلوبة للبحث في عناصر تكوين ITSM باستخدام الواجهة العامة."
 
 #: ../../content/configuration/system_configuration_settings.rst:1025
 msgid "GenericInterface::Operation::ConfigItemSearch###SearchLimit"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1026
+#, fuzzy
 msgid ""
 "Maximum number of config items to be displayed in the result of this "
 "operation."
-msgstr ""
+msgstr "الحد الأقصى لعدد عناصر التكوين التي سيتم عرضها في نتيجة هذه العملية."
 
 #: ../../content/configuration/system_configuration_settings.rst:1029
 msgid "GenericInterface::Operation::ConfigItemSearch###SortBy::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1030
+#, fuzzy
 msgid ""
 "Defines the default config item attribute for config item sorting of the "
 "config item search result of this operation."
-msgstr ""
+msgstr "يحدد سمة عنصر التكوين الافتراضية لفرز عنصر التكوين لنتيجة بحث عنصر التكوين لهذه العملية."
 
 #: ../../content/configuration/system_configuration_settings.rst:1033
 msgid "GenericInterface::Operation::ConfigItemSearch###Order::Default"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1034
+#, fuzzy
 msgid ""
 "Defines the default config item order in the config item search result of"
 " the this operation. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "يحدد ترتيب عنصر التكوين الافتراضي في نتيجة البحث عن عنصر التكوين لهذه العملية. لأعلى: الأقدم في الأعلى. لأسفل: الأحدث في الأعلى."
 
 #: ../../content/configuration/system_configuration_settings.rst:1037
 msgid "GenericInterface::Operation::ConfigItemUpdate"
@@ -2701,10 +2855,11 @@ msgid "GenericInterface::Operation::ConfigItemUpdate###Permission"
 msgstr ""
 
 #: ../../content/configuration/system_configuration_settings.rst:1041
+#, fuzzy
 msgid ""
 "Defines Required permissions to update ITSM configuration items using the"
 " Generic Interface."
-msgstr ""
+msgstr "يحدد الأذونات المطلوبة لتعيين عناصر تكوين ITSM باستخدام الواجهة العامة."
 
 #: ../../content/configuration/system_configuration_settings.rst:1044
 msgid "GenericInterface::Operation::ModuleRegistration"
@@ -2719,8 +2874,9 @@ msgstr ""
 #: ../../content/configuration/system_configuration_settings.rst:1056
 #: ../../content/configuration/system_configuration_settings.rst:1060
 #: ../../content/configuration/system_configuration_settings.rst:1064
+#, fuzzy
 msgid "GenericInterface module registration for the operation layer."
-msgstr ""
+msgstr "تسجيل الوحدة النمطية لطبقة التشغيل ل GenericInterface."
 
 #: ../../content/configuration/system_configuration_settings.rst:1051
 msgid "GenericInterface::Operation::Module###ConfigItem::ConfigItemGet"
@@ -2740,8 +2896,9 @@ msgstr ""
 
 #: ../../content/configuration/system_requirements.rst:13
 #: ../../content/system_requirements.rst:13
+#, fuzzy
 msgid "System requirements"
-msgstr ""
+msgstr "متطلبات البرمجيات"
 
 #: ../../content/configuration/system_requirements.rst:16
 #: ../../content/system_requirements.rst:16
@@ -2755,8 +2912,9 @@ msgstr ""
 
 #: ../../content/configuration/system_requirements.rst:22
 #: ../../content/system_requirements.rst:22
+#, fuzzy
 msgid "Packages"
-msgstr ""
+msgstr "حُزْمَةٌ"
 
 #: ../../content/configuration/system_requirements.rst:25
 #: ../../content/system_requirements.rst:25
@@ -2778,12 +2936,14 @@ msgid "Package Documentation: ITSMConfigurationManagement"
 msgstr ""
 
 #: ../../content/overview.rst:13
+#, fuzzy
 msgid "Overview"
-msgstr ""
+msgstr "نظرة عامة"
 
 #: ../../content/overview.rst:16
+#, fuzzy
 msgid "Summary"
-msgstr ""
+msgstr "الملخص"
 
 #: ../../content/overview.rst:18
 msgid ""
@@ -2795,8 +2955,9 @@ msgid ""
 msgstr ""
 
 #: ../../content/overview.rst:23
+#, fuzzy
 msgid "Introduction"
-msgstr ""
+msgstr "مقدمة"
 
 #: ../../content/overview.rst:25
 msgid ""
