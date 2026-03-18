@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -27,9 +27,6 @@ use Test2::V0;
 use Kernel::System::UnitTest::RegisterDriver;    # Set up $Kernel::OM and the test driver $Self
 use Kernel::System::UnitTest::Selenium;
 
-# some setup before starting the Selenium test
-skip_all('Skipping CMDB Selenium tests temporarily.');
-
 our $Self;
 
 my $Selenium = Kernel::System::UnitTest::Selenium->new;
@@ -37,8 +34,23 @@ my $Selenium = Kernel::System::UnitTest::Selenium->new;
 $Selenium->RunTest(
     sub {
 
+        # get helper objects
         my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ITSMConfigItemHelper = $Kernel::OM->Get('Kernel::System::UnitTest::ITSMConfigItemHelper');
+        $Kernel::OM->ObjectParamAdd(
+            $Helper => {
+                RestoreDatabase => 1,
+            },
+        );
+
+        my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
         my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+        my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+
+        # get catalog class IDs
+        $ITSMConfigItemHelper->TestConfigItemCreateLegacyClasses(
+            HelperObject => $Helper
+        );
 
         # Get 'Computer' ConfigItem ID.
         my @ConfigItemClassIDs;
@@ -57,9 +69,6 @@ $Selenium->RunTest(
         );
         my $ProductionDeplStateID = $ProductionDeplStateDataRef->{ItemID};
 
-        my $ConfigItemObject = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
-        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
-
         # Create ConfigItem numbers.
         my @ConfigItemNumbers;
         for ( 1 .. 2 ) {
@@ -75,44 +84,29 @@ $Selenium->RunTest(
         }
 
         # Add the new ConfigItems.
+        my $InciStateID = $GeneralCatalogObject->ItemGet(
+            Class => 'ITSM::Core::IncidentState',
+            Name  => 'Incident',
+        );
+
         my @ConfigItemIDs;
+        my $Count    = 1;
+        my $RandomID = $Helper->GetRandomID();
         for my $ConfigItemCreateNumber (@ConfigItemNumbers) {
             my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-                Number  => $ConfigItemCreateNumber,
-                ClassID => $ConfigItemClassIDs[0],
-                UserID  => 1,
+                Number      => $ConfigItemCreateNumber,
+                ClassID     => $ConfigItemClassIDs[0],
+                UserID      => 1,
+                Name        => $Count . $RandomID,
+                DeplStateID => $ProductionDeplStateID,
+                InciStateID => $InciStateID->{ItemID},
+                UserID      => 1,
             );
             $Self->True(
                 $ConfigItemID,
                 "ConfigItemID $ConfigItemID is created"
             );
             push @ConfigItemIDs, $ConfigItemID;
-        }
-
-        my $InciStateID = $GeneralCatalogObject->ItemGet(
-            Class => 'ITSM::Core::IncidentState',
-            Name  => 'Incident',
-        );
-
-        # Add a new version for each ConfigItem.
-        my @VersionIDs;
-        my $Count    = 1;
-        my $RandomID = $Helper->GetRandomID();
-        for my $ConfigItemVersion (@ConfigItemIDs) {
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => $Count . $RandomID,
-                DefinitionID => 1,
-                DeplStateID  => $ProductionDeplStateID,
-                InciStateID  => $InciStateID->{ItemID},
-                UserID       => 1,
-                ConfigItemID => $ConfigItemVersion,
-            );
-            $Self->True(
-                $VersionID,
-                "VersionID $VersionID is created"
-            );
-            push @VersionIDs, $VersionID;
-
             $Count++;
         }
 
@@ -182,6 +176,13 @@ $Selenium->RunTest(
             'ITSMConfigItem Search contain Excel output',
         );
 
+        # set the default sort by number desc
+        $Helper->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###SortBy::Default',
+            Value => 'Number',
+        );
+
         # Search ConfigItems by test ConfigItem number and names.
         $Selenium->execute_script("\$('#Attribute').val('Name').trigger('redraw.InputField').trigger('change');");
         $Selenium->WaitFor(
@@ -190,6 +191,7 @@ $Selenium->RunTest(
 
         $Selenium->find_element("//input[\@name='Number']")->send_keys('*');
         $Selenium->find_element("//input[\@name='Name']")->send_keys( '*' . $RandomID );
+
         $Selenium->find_element( "#SearchFormSubmit", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
@@ -206,13 +208,14 @@ $Selenium->RunTest(
             );
         }
 
-        # Verify sorting in table, by default sorting is done by ConfigItemNumber - sort ascending.
-        # Lower ID will on the top of table.
+        # Verify sorting in table, by default sorting is done by ConfigItemNumber - sort descending.
+        # Lower ID will on the botton of table.
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(0)').attr('id')"),
             'ConfigItemID_' . $ConfigItemIDs[1],
             "ConfigItemID $ConfigItemIDs[1] is on top of table sort by Number ascending"
         );
+
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(1)').attr('id')"),
             'ConfigItemID_' . $ConfigItemIDs[0],
@@ -235,12 +238,13 @@ $Selenium->RunTest(
         # Sort is by Name descending.
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(0)').attr('id')"),
-            'ConfigItemID_' . $ConfigItemIDs[0],
+            'ConfigItemID_' . $ConfigItemIDs[1],
             "ConfigItemID $ConfigItemIDs[1] is on top of table sort by Name descending"
         );
+
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(1)').attr('id')"),
-            'ConfigItemID_' . $ConfigItemIDs[1],
+            'ConfigItemID_' . $ConfigItemIDs[0],
             "ConfigItemID $ConfigItemIDs[0] is on bottom of table sort by Name descending"
         );
 
@@ -250,17 +254,36 @@ $Selenium->RunTest(
         # Verify order is changed, sort by Name ascending.
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(0)').attr('id')"),
-            'ConfigItemID_' . $ConfigItemIDs[1],
+            'ConfigItemID_' . $ConfigItemIDs[0],
             "ConfigItemID $ConfigItemIDs[0] is on top of table sort by Name ascending"
         );
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(1)').attr('id')"),
-            'ConfigItemID_' . $ConfigItemIDs[0],
+            'ConfigItemID_' . $ConfigItemIDs[1],
             "ConfigItemID $ConfigItemIDs[1] is on bottom of table sort by Name ascending"
         );
 
         # Create ConfigItem numbers and add the new ConfigItems.
+        my %DynamicField1 = (
+            'DynamicField_Computer-NIC' => [
+                {
+                    'Computer-NICSubPrimaryAttribute' => 'Test network adapter',
+                    'Computer-NICIPAddress'           => [
+                        '172.0.0.0'
+                    ],
+                    'Computer-NICIPoverDHCP' => [
+                        32
+                    ]
+                }
+            ],
+            'DynamicField_Computer-WarrantyExpirationDate' => '2017-10-10 00:00:00'
+        );
+        my %DynamicField2 = (
+            'DynamicField_Computer-WarrantyExpirationDate' => '2017-11-11 00:00:00'
+        );
+
         @ConfigItemNumbers = ();
+        $Count             = 1;
         for ( 1 .. 35 ) {
             my $ConfigItemNumber = $ConfigItemObject->ConfigItemNumberCreate(
                 Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
@@ -271,91 +294,36 @@ $Selenium->RunTest(
                 "ConfigItem $ConfigItemNumber number is created"
             );
             push @ConfigItemNumbers, $ConfigItemNumber;
-
+            my %DynamicField = ( $Count <= 30 ) ? %DynamicField1 : %DynamicField2;
             my $ConfigItemID = $ConfigItemObject->ConfigItemAdd(
-                Number  => $ConfigItemNumber,
-                ClassID => $ConfigItemClassIDs[0],
-                UserID  => 1,
+                Number      => $ConfigItemNumber,
+                ClassID     => $ConfigItemClassIDs[0],
+                Name        => $Count . $RandomID,
+                DeplStateID => $ProductionDeplStateID,
+                InciStateID => $InciStateID->{ItemID},
+                UserID      => 1,
+                %DynamicField,
             );
             $Self->True(
                 $ConfigItemID,
                 "ConfigItemID $ConfigItemID is created"
             );
             push @ConfigItemIDs, $ConfigItemID;
-        }
-
-        my @XMLDataArray = [
-            undef,
-            {
-                'Version' => [
-                    undef,
-                    {
-
-                        'WarrantyExpirationDate' => [
-                            undef,
-                            {
-                                'Content' => '2017-10-10'
-                            },
-                        ],
-                        'NIC' => [
-                            undef,
-                            {
-                                'IPoverDHCP' => [
-                                    undef,
-                                    {
-                                        'Content' => '38'
-                                    }
-                                ],
-                                'IPAddress' => [
-                                    undef,
-                                    {
-                                        'Content' => '172.0.0.0'
-                                    }
-                                ],
-                                'Content' => 'test 172.0.0.0'
-                            }
-                        ],
-                    },
-                ],
-            },
-            {
-                'Version' => [
-                    undef,
-                    {
-
-                        'WarrantyExpirationDate' => [
-                            undef,
-                            {
-                                'Content' => '2017-11-11'
-                            },
-                        ],
-                    },
-                ],
-            },
-        ];
-
-        # Add a new version for each ConfigItem.
-        $Count = 1;
-        for my $ConfigItemVersion (@ConfigItemIDs) {
-
-            my $XMLData   = ( $Count <= 30 ) ? $XMLDataArray[0] : $XMLDataArray[1];
-            my $VersionID = $ConfigItemObject->VersionAdd(
-                Name         => $Count . $RandomID,
-                DefinitionID => 1,
-                DeplStateID  => $ProductionDeplStateID,
-                InciStateID  => $InciStateID->{ItemID},
-                UserID       => 1,
-                XMLData      => $XMLData,
-                ConfigItemID => $ConfigItemVersion,
-            );
-            $Self->True(
-                $VersionID,
-                "VersionID $VersionID is created"
-            );
-            push @VersionIDs, $VersionID;
-
             $Count++;
         }
+
+        # set the dynamic fields as searchable
+        my %SearchableFieldsSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            Name => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField',
+        );
+        $Helper->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField',
+            Value => {
+                'Computer-WarrantyExpirationDate' => '1',
+                'Computer-NICIPAddress'           => '1',
+            }
+        );
 
         # Change search option.
         $Selenium->find_element( "#ITSMConfigItemSearch", 'css' )->click();
@@ -365,28 +333,30 @@ $Selenium->RunTest(
 
         # Add search filter by WarrantyExpirationDate and set date range (8-10-2017 - 15-10-2017).
         $Selenium->execute_script(
-            "\$('#Attribute').val('WarrantyExpirationDate').trigger('redraw.InputField').trigger('change');",
+            "\$('#Attribute').val('Search_DynamicField_Computer-WarrantyExpirationDateTimeSlot').trigger('redraw.InputField').trigger('change');",
         );
+
         $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('input[name=\"WarrantyExpirationDate\"]').length"
+            JavaScript => "return typeof(\$) === 'function' && \$('input[name=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlot\"]').length"
+        );
+
+        $Selenium->execute_script(
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStartDay\"]').val('8');"
         );
         $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStart::Day\"]').val('8');"
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStartMonth\"]').val('10');"
         );
         $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStart::Month\"]').val('10');"
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStartYear\"]').val('2017');"
         );
         $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStart::Year\"]').val('2017');"
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStopDay\"]').val('15');"
         );
         $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStop::Day\"]').val('15');"
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStopMonth\"]').val('10');"
         );
         $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStop::Month\"]').val('10');"
-        );
-        $Selenium->execute_script(
-            "\$('#SearchInsert select[id=\"WarrantyExpirationDate::TimeStop::Year\"]').val('2017');"
+            "\$('#SearchInsert select[id=\"Search_DynamicField_Computer-WarrantyExpirationDateTimeSlotStopYear\"]').val('2017');"
         );
         $Selenium->find_element("//input[\@name='Number']")->clear();
         $Selenium->find_element("//input[\@name='Number']")->send_keys('*');
@@ -394,6 +364,7 @@ $Selenium->RunTest(
         $Selenium->find_element("//input[\@name='Name']")->send_keys( '*' . $RandomID );
 
         $Selenium->find_element( "#SearchFormSubmit", 'css' )->click();
+
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && !\$('Dialog.Modal').length && \$('#OverviewBody .TableSmall').length"
@@ -411,7 +382,7 @@ $Selenium->RunTest(
         );
 
         # Go to the second page.
-        $Selenium->find_element( "#GenericPage2", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#AgentITSMConfigItemSearchPage2", 'css' )->VerifiedClick();
 
         $Self->True(
             $Selenium->execute_script("return \$('.Pagination').text().trim().indexOf('26-30 of 30') > -1;"),
@@ -438,13 +409,13 @@ $Selenium->RunTest(
         $Selenium->find_element( "#SearchFormSubmit", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && !\$('Dialog.Modal').length && \$('#OverviewBody .TableSmall').length"
+                "return typeof(\$) === 'function' && !\$('Dialog.Modal').length && \$('#OverviewBody #EmptyMessageSmall').length"
         );
 
         # Check for expected result.
         $Self->True(
-            index( $Selenium->get_page_source(), 'No data found' ) > -1,
-            "'No data found' - found",
+            index( $Selenium->get_page_source(), 'No config item data found.' ) > -1,
+            "'No config item data found.' - found",
         );
 
         # Click on "Change search option"
@@ -510,153 +481,10 @@ $Selenium->RunTest(
             "Check if profile is loaded well"
         );
 
-        # Check if correct config items are shown after sub attributes are searched. See bug#12998.
-        my $ConfigItemNumber2 = $ConfigItemObject->ConfigItemNumberCreate(
-            Type    => 'Kernel::System::ITSMConfigItem::Number::AutoIncrement',
-            ClassID => $ConfigItemClassIDs[0],
-        );
-        $Self->True(
-            $ConfigItemNumber2,
-            "ConfigItem $ConfigItemNumber2 number is created"
-        );
-        my $ConfigItemID2 = $ConfigItemObject->ConfigItemAdd(
-            Number  => $ConfigItemNumber2,
-            ClassID => $ConfigItemClassIDs[0],
-            UserID  => 1,
-        );
-        $Self->True(
-            $ConfigItemID2,
-            "ConfigItemID $ConfigItemID2 is created"
-        );
-
-        push @ConfigItemIDs, $ConfigItemID2;
-
-        # Create config that should not appear in search.
-        my $VersionID2 = $ConfigItemObject->VersionAdd(
-            Name         => $Count . $RandomID,
-            DefinitionID => 1,
-            DeplStateID  => $ProductionDeplStateID,
-            InciStateID  => $InciStateID->{ItemID},
-            UserID       => 1,
-            ConfigItemID => $ConfigItemID2,
-            XMLData      => [
-                undef,
-                {
-                    Version => [
-                        undef,
-                        {
-                            NIC => [
-                                undef,
-                                {
-                                    IPoverDHCP => [
-                                        undef,
-                                        {
-                                            Content => '38'
-                                        }
-                                    ],
-                                    IPAddress => [
-                                        undef,
-                                        {
-                                            Content => '222.0.0.0'
-                                        }
-                                    ],
-                                    Content => 'test 222.0.0.0'
-                                }
-                            ],
-                        }
-                    ]
-                }
-            ],
-        );
-        $Self->True(
-            $VersionID2,
-            "VersionID $VersionID2 is created"
-        );
-
-        # Configure IPAddres to show in search result.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###ShowColumns',
-            Value => {
-                Class                  => 0,
-                CurDeplSignal          => 1,
-                CurDeplState           => 1,
-                CurDeplStateType       => 0,
-                CurInciSignal          => 1,
-                CurInciState           => 1,
-                CurInciStateType       => 0,
-                LastChanged            => 1,
-                'NIC::1::IPAddress::1' => 1,
-                Name                   => 1,
-                Number                 => 1,
-            },
-        );
-
-        $Selenium->find_element( ".Dialog .Close", 'css' )->click();
-
-        # Navigate to AgentITSMConfigItemSearch.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentITSMConfigItemSearch");
-
-        # Wait until form and overlay has loaded, if necessary.
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#SearchClassID').length" );
-        sleep 1;
-
-        # Select 'Computer' class.
-        $Selenium->execute_script(
-            "\$('#SearchClassID').val('$ConfigItemClassIDs[0]').trigger('redraw.InputField').trigger('change');"
-        );
-
-        # Wait until form has loaded, if necessary.
-        $Selenium->WaitFor( JavaScript => "return \$('#Attribute').length" );
-
-        # Add search filter by NIC::IPAddress and set 172*.
-        $Selenium->execute_script(
-            "\$('#Attribute').val('NIC::IPAddress').trigger('redraw.InputField').trigger('change');",
-        );
-
-        # Wait for Network Adapter::IP Address to appear.
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return typeof(\$) === 'function' && \$('#SearchInsert input[name=\"NIC::IPAddress\"]').length"
-        );
-
-        $Selenium->find_element("//input[\@name='NIC::IPAddress']")->send_keys('172*');
-
-        $Selenium->find_element( "#SearchFormSubmit", 'css' )->click();
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return typeof(\$) === 'function' && !\$('Dialog.Modal').length && \$('#OverviewBody .TableSmall').length"
-        );
-
-        # Check if correct number of items are shown on pagination.
-        $Self->True(
-            $Selenium->execute_script("return \$('.Pagination').text().trim().indexOf('1-25 of 30') > -1;"),
-            "Check pagination on the first page",
-        );
-
-        $Self->Is(
-            $Selenium->execute_script("return \$('#OverviewBody .TableSmall tbody tr').length;"),
-            '25',
-            "Number of config items on the first page is correct - 25",
-        );
-
-        # Go to the second page.
-        $Selenium->find_element( "#GenericPage2", 'css' )->VerifiedClick();
-
-        # Check if correct number of items are shown on pagination.
-        $Self->True(
-            $Selenium->execute_script("return \$('.Pagination').text().trim().indexOf('26-30 of 30') > -1;"),
-            "Check pagination on the second page",
-        );
-
-        $Self->Is(
-            $Selenium->execute_script("return \$('#OverviewBody .TableSmall tbody tr').length;"),
-            '5',
-            "Number of config items on the second page is correct - 5",
-        );
-
         # Verify search result remained intact after changing items per page, see bug#14717 for more details.
         # Set 10 config items per page.
+
+        $Selenium->find_element( ".Dialog .Close",              'css' )->click();
         $Selenium->find_element( "a#ShowContextSettingsDialog", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => 'return $(".Dialog.Modal #UserConfigItemOverviewSmallPageShown").length'
