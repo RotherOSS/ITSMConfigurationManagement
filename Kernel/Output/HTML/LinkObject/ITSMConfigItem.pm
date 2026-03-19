@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -773,6 +773,8 @@ sub SelectableObjectList {
     # get the config with the default subobjects
     my $DefaultSubobject = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::DefaultSubObject') || {};
 
+    my $HasSelectedItem;
+
     CLASSID:
     for my $ClassID ( sort { lc $ClassList->{$a} cmp lc $ClassList->{$b} } keys %{$ClassList} ) {
 
@@ -812,6 +814,10 @@ sub SelectableObjectList {
             }
         }
 
+        if ($Selected) {
+            $HasSelectedItem = 1;
+        }
+
         # create row
         my %Row = (
             Key      => $Identifier,
@@ -820,6 +826,14 @@ sub SelectableObjectList {
         );
 
         push @ObjectSelectList, \%Row;
+    }
+
+    if ( $Param{Selected} && !$HasSelectedItem ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Not a valid default link class!',
+        );
+        return;
     }
 
     # only add headline if there are configitem classes

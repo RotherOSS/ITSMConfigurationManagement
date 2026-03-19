@@ -876,7 +876,7 @@
         <Description Translatable="1">Defines the default subobject of the class 'ITSMConfigItem'.</Description>
         <Navigation>Core::LinkObject</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">Computer</Item>
+            <Item ValueType="String" ValueRegex="">Client</Item>
         </Value>
     </Setting>
     <Setting Name="LinkObject::ITSMConfigItem::ShowColumns" Required="0" Valid="1">
