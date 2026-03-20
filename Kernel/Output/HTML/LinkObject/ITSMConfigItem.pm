@@ -831,7 +831,8 @@ sub SelectableObjectList {
     if ( $Param{Selected} && !$HasSelectedItem ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Not a valid default link class!',
+            Message  =>
+                "No valid selection for link object: '$Param{Selected}'! The configured default class (LinkObject::DefaultSubObject###ITSMConfigItem) may not exist.",
         );
         return;
     }
