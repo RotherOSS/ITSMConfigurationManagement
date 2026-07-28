@@ -510,6 +510,9 @@ sub ObjectDescriptionGet {
             # TODO: only show the link if the user $Param{UserID} has permissions
             $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$ConfigItem->{ConfigItemID};VersionID=$Param{ObjectID}";
         }
+        elsif ( $Param{LayoutObject}{SessionSource} eq 'CustomerInterface' ) {
+            $Link = $Param{LayoutObject}{Baselink} . "Action=CustomerITSMConfigItemZoom;ConfigItemID=$ConfigItem->{ConfigItemID};VersionID=$Param{ObjectID}";
+        }
     }
 
     # create description

@@ -27,8 +27,7 @@ use utf8;
 use parent qw(Kernel::System::DynamicField::Driver::BaseReference);
 
 # core modules
-use List::Util   qw(any first);
-use Scalar::Util qw(reftype);
+use List::Util qw(any first);
 
 # CPAN modules
 
@@ -478,6 +477,9 @@ sub ObjectDescriptionGet {
 
             # TODO: only show the link if the user $Param{UserID} has permissions
             $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
+        }
+        elsif ( $Param{LayoutObject}{SessionSource} eq 'CustomerInterface' ) {
+            $Link = $Param{LayoutObject}{Baselink} . "Action=CustomerITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
         }
     }
 
