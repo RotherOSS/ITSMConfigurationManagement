@@ -248,6 +248,7 @@
         <File Permission="660" Location="scripts/test/sample/ImportExport/TemplateExport.csv" />
         <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/LegacyClasses.yml" />
         <File Permission="660" Location="scripts/test/sample/ITSMConfigurationManagement/Links/unittest.yml" />
+        <File Permission="660" Location="scripts/test/ImportExport/ObjectBackend/ITSMConfigItemExternalSourceTranform.t" />
         <File Permission="660" Location="scripts/webservices/GenericConfigItemConnectorSOAP.yml" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.ACL.js" />
         <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Admin.Znuny4OTOBODynamicFieldScreen.js" />
