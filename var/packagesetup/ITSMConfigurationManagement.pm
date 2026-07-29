@@ -832,6 +832,8 @@ sub _UpdateDashboardWidgetSysConfig {
             Key  => $SettingName,
         );
 
+        next SETTING unless IsHashRefWithData($SettingOld);
+
         # fetch dynamic field from old structure
         my $IdentifierDF = first {$_} values $SettingOld->{EffectiveValue}{ConfigItemKey}->%*;
 
