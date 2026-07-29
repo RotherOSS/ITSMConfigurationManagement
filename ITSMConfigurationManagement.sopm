@@ -782,8 +782,6 @@
     <!-- It is IMPORTANT that all CodeUpgrade parts with version numbers come BEFORE the regular CodeUpgrade block without any version number! -->
     <CodeUpgrade Type="pre" Version="11.0.15"><![CDATA[
 
-        use List::Util qw(first);
-
         my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
         my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
@@ -803,15 +801,10 @@
             # do nothing if setting is not modified
             next SETTING unless $Setting{IsModified};
 
-            # fetch dynamic field from old structure
-            my $IdentifierDF = first { $_ } values $Setting{EffectiveValue}{ConfigItemKey}->%*;
-
-            next SETTING unless $IdentifierDF;
-
             $CacheObject->Set(
                 Type  => 'PackageUpgrade',
                 Key   => $SettingName,
-                Value => $IdentifierDF,
+                Value => \%Setting,
                 TTL   => 60 * 60 * 24 * 1,  # optional, default 20 days
             );
 
@@ -823,9 +816,9 @@
             );
 
             my $ResetSuccess = $SysConfigObject->SettingReset(
-                Name => $SettingName,
+                Name              => $SettingName,
                 ExclusiveLockGUID => $ExclusiveLockGUID,
-                UserID => 1,
+                UserID            => 1,
             );
             if ( !$ResetSuccess ) {
                 $LogObject->Log(
@@ -851,7 +844,7 @@
             }
 
             my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
-                Comments      => "ITSMConfigurationManagement Upgrade - Stored previous value and reset '$SettingName' to allow clean deploy.",
+                Comments      => "ITSMConfigurationManagement Upgrade - Stored previous value and reset '$SettingName'.",
                 UserID        => 1,
                 Force         => 1,
                 DirtySettings => [$SettingName],

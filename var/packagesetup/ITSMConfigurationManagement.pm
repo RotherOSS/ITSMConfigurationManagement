@@ -23,7 +23,7 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(pairs);
+use List::Util qw(first pairs);
 
 # CPAN modules
 
@@ -826,10 +826,19 @@ sub _UpdateDashboardWidgetSysConfig {
             Name => $SettingName,
         );
 
-        # fetch dynamic field from old structure
-        my $IdentifierDF = $CacheObject->Get(
+        # fetch old setting from cache
+        my $SettingOld = $CacheObject->Get(
             Type => 'PackageUpgrade',
             Key  => $SettingName,
+        );
+
+        # fetch dynamic field from old structure
+        my $IdentifierDF = first {$_} values $SettingOld->{EffectiveValue}{ConfigItemKey}->%*;
+
+        my %SettingValue = (
+            $Setting{EffectiveValue}->%*,
+            $SettingOld->{EffectiveValue}->%*,
+            ConfigItemKey => $IdentifierDF // '',
         );
 
         my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
@@ -840,12 +849,9 @@ sub _UpdateDashboardWidgetSysConfig {
 
         # Update setting with modified data
         my %Result = $SysConfigObject->SettingUpdate(
-            Name           => $SettingName,
-            IsValid        => 1,
-            EffectiveValue => {
-                $Setting{EffectiveValue}->%*,
-                ConfigItemKey => $IdentifierDF,
-            },
+            Name              => $SettingName,
+            IsValid           => 1,
+            EffectiveValue    => \%SettingValue,
             ExclusiveLockGUID => $ExclusiveLockGUID,
             UserID            => 1,
         );
