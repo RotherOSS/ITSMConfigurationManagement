@@ -780,6 +780,96 @@
 
     ]]></CodeReinstall>
     <!-- It is IMPORTANT that all CodeUpgrade parts with version numbers come BEFORE the regular CodeUpgrade block without any version number! -->
+    <CodeUpgrade Type="pre" Version="11.0.15"><![CDATA[
+
+        use List::Util qw(first);
+
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        my @Settings = (
+            "AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany",
+            "AgentCustomerUserInformationCenter::Backend###0060-CUIC-ITSMConfigItemCustomerUser"
+        );
+
+        SETTING:
+        for my $SettingName (@Settings) {
+
+            my %Setting = $SysConfigObject->SettingGet(
+                Name => $SettingName,
+            );
+
+            # do nothing if setting is not modified
+            next SETTING unless $Setting{IsModified};
+
+            # fetch dynamic field from old structure
+            my $IdentifierDF = first { $_ } values $Setting{EffectiveValue}{ConfigItemKey}->%*;
+
+            next SETTING unless $IdentifierDF;
+
+            $CacheObject->Set(
+                Type  => 'PackageUpgrade',
+                Key   => $SettingName,
+                Value => $IdentifierDF,
+                TTL   => 60 * 60 * 24 * 1,  # optional, default 20 days
+            );
+
+            # reset setting to default
+            my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
+                UserID    => 1,
+                Force     => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+
+            my $ResetSuccess = $SysConfigObject->SettingReset(
+                Name => $SettingName,
+                ExclusiveLockGUID => $ExclusiveLockGUID,
+                UserID => 1,
+            );
+            if ( !$ResetSuccess ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => "Could not reset setting $SettingName.",
+                );
+
+                return;
+            }
+
+            my $Success = $SysConfigObject->SettingUnlock(
+                UserID    => 1,
+                DefaultID => $Setting{DefaultID},
+            );
+
+            if ( !$Success ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => "Could not unlock setting $SettingName.",
+                );
+
+                return;
+            }
+
+            my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
+                Comments      => "ITSMConfigurationManagement Upgrade - Stored previous value and reset '$SettingName' to allow clean deploy.",
+                UserID        => 1,
+                Force         => 1,
+                DirtySettings => [$SettingName],
+            );
+
+            if ( !$DeploymentResult{Success} ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => "Deployment failed.",
+                );
+
+                return;
+            }
+        }
+
+        return 1;
+
+    ]]></CodeUpgrade>
     <CodeUpgrade Type="post" Version="11.0.15"><![CDATA[
 
         # create the package name

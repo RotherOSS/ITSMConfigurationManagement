@@ -23,15 +23,15 @@ use namespace::autoclean;
 use utf8;
 
 # core modules
-use List::Util qw(first pairs);
+use List::Util qw(pairs);
 
 # CPAN modules
 
 # OTOBO modules
-use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
 
 our @ObjectDependencies = (
+    'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
@@ -180,7 +180,7 @@ sub CodeReinstall {
 
 =head2 CodeUpgradeFromLowerThan_11_0_15()
 
-This function is only executed if the installed module version is smaller than 11.0.14.
+This function is only executed if the installed module version is smaller than 11.0.15.
 
     my $Result = $CodeObject->CodeUpgradeFromLowerThan_11_0_15();
 
@@ -810,6 +810,7 @@ Updates the sysconfig settings of the customer company and customer user informa
 
 sub _UpdateDashboardWidgetSysConfig {
 
+    my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
     my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
     my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
@@ -825,11 +826,11 @@ sub _UpdateDashboardWidgetSysConfig {
             Name => $SettingName,
         );
 
-        # do nothing if setting is not modified
-        next SETTING unless $Setting{IsModified};
-
         # fetch dynamic field from old structure
-        my $IdentifierDF = first { $Setting{EffectiveValue}{ConfigItemKey}{$_} } keys $Setting{EffectiveValue}{ConfigItemKey}->%*;
+        my $IdentifierDF = $CacheObject->Get(
+            Type => 'PackageUpgrade',
+            Key  => $SettingName,
+        );
 
         my $ExclusiveLockGUID = $SysConfigObject->SettingLock(
             UserID    => 1,
