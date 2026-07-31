@@ -27,6 +27,7 @@ use List::AllUtils qw(max min true);
 
 # OTOBO modules
 use Kernel::System::UnitTest::RegisterOM;    # Set up $Kernel::OM
+use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 # Sanity check whether ImportExport is available.
 # This should succeed since ImportExport has been integrated into OTOBO core
@@ -42,6 +43,8 @@ my $ImportExportObject   = $Kernel::OM->Get('Kernel::System::ImportExport');
 my $ObjectBackendObject  = $Kernel::OM->Get('Kernel::System::ImportExport::ObjectBackend::ITSMConfigItem');
 my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
+
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -72,6 +75,12 @@ my $CIClassListRef = $GeneralCatalogObject->ItemList(
     Class => 'ITSM::ConfigItem::Class',
 );
 my %CIClassName2ID = reverse $CIClassListRef->%*;
+
+# fetch subsidiary class from general catalog
+my $SubsidiaryClassID = _GeneralCatalogID(
+    Class => 'ITSM::ConfigItem::Class',
+    Name  => 'Subsidiary',
+);
 
 # add ImportExport template
 my $TemplateID = $ImportExportObject->TemplateAdd(
@@ -312,6 +321,38 @@ my @ImportDataTests = (
             }
         },
     },
+    {
+        Name => 'Importing data without triggering a new version, emptying the old value, doing an externalSourceTransform',
+        SourceImportData => {
+            ObjectData => {
+                ClassID                      => $CIClassName2ID{Subsidiary},
+                EmptyFieldsLeaveTheOldValues => 'off',
+            },
+            ImportDataSave => {
+                TemplateID    => $TemplateID,
+                ImportDataRow => [
+                    'TestSubsidiary',
+                    'Production',
+                    'Operational',
+                    'München',
+                    ["TestCountry"],
+                ],
+                UserID => $TestUserID,
+            },
+        },
+        ReferenceImportData => {
+            VersionCount => 3,
+            LastVersion  => {
+                Name                                       => 'TestSubsidiary',
+                DeplState                                  => 'Production',
+                InciState                                  => 'Operational',
+                'DynamicField_Location-City'               => 'München',
+                'DynamicField_Location-ReferenceToCountry' => [$CICountryID],
+            }
+        },
+        TestExternalSourceTransform => 1,
+    },
+
 );
 
 # run general ImportDataTests tests
@@ -326,6 +367,10 @@ for my $Test (@ImportDataTests) {
             fail("SourceImportData not found for this test.");
 
             return;
+        }
+
+        if( $Test->{TestExternalSourceTransform}) {
+            _SetDF2ExternalSourceTransform();
         }
 
         # set the object data
@@ -479,6 +524,66 @@ sub _LoadReadyToImportClasses {
     ok( $Result->{Success}, "Classes have been imported" );
 
     return;
+}
+
+sub _SetDF2ExternalSourceTransform {
+
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet( Name => 'Location-ReferenceToCountry' );
+    ok( IsHashRefWithData($DynamicFieldConfig), "got DF config" );
+
+    $DynamicFieldConfig->{Config}->{ImportSearchAttribute} = 'Name';
+
+    my $Success = $DynamicFieldObject->DynamicFieldUpdate(
+        $DynamicFieldConfig->%*,
+
+        ValidID    => 1,
+        Reorder    => 1,                        # or 0, to trigger reorder function, default 1
+                                                # 0 is only used internally to prevent redundant execution on order change
+                                                # no update event will be triggered for 0
+        UserID     => 1,
+    );
+    ok( $Success, "updated DF config" );
+    _SyncConfigItemDFs();
+
+    return;
+}
+
+sub _SyncConfigItemDFs {
+
+    my %Param = @_;
+
+    my $LinkType = $Param{LinkType};
+
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+        Name => 'Location-ReferenceToCountry',
+    );
+
+    $ConfigItemObject->DefinitionSetOutOfSync(
+        Classes => {
+            $SubsidiaryClassID => [ $DynamicFieldConfig->{ID} ],
+        },
+    );
+    $ConfigItemObject->EventHandlerTransaction();
+
+    $ConfigItemObject->DefinitionSync();
+
+    $ConfigItemObject->EventHandlerTransaction();
+
+    return;
+}
+
+sub _GeneralCatalogID {
+
+    my %Param = @_;
+
+    my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+    my $CatalogItem = $GeneralCatalogObject->ItemGet(
+        Class => $Param{Class},
+        Name  => $Param{Name},
+    );
+
+    return $CatalogItem->{ItemID};
 }
 
 done_testing;
