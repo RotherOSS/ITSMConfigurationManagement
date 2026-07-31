@@ -4,7 +4,7 @@
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
 # Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - d263b841b02540f4eceaf3b625128e04fa1a0606 - Kernel/Modules/AdminDynamicField.pm
+# $origin: otobo - 2d81c4430aa879ba859c6e34e2c113a17a2d7734 - Kernel/Modules/AdminDynamicField.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -158,6 +158,7 @@ sub _ShowOverview {
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $FieldTypeConfig    = $ConfigObject->Get('DynamicFields::Driver');
     my $ObjectTypeFilter   = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'ObjectTypeFilter' ) || '';
+    my $FieldTypeFilter    = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'FieldTypeFilter' )  || '';
     my $NamespaceFilter    = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'NamespaceFilter' )  || '';
 
     $Param{IncludeInvalid} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'IncludeInvalid' );
@@ -358,6 +359,27 @@ sub _ShowOverview {
         },
     );
 
+    my %FieldTypeSelection = map {
+        $_ => $LayoutObject->{LanguageObject}->Translate( $FieldTypeConfig->{$_}->{DisplayName} )
+    } keys $FieldTypeConfig->%*;
+
+    my $DynamicFieldTypeStrg = $LayoutObject->BuildSelection(
+        Data         => \%FieldTypeSelection,
+        Name         => 'DynamicFieldFieldType',
+        PossibleNone => 1,
+        Sort         => 'AlphanumericValue',
+        SelectedID   => $FieldTypeFilter,
+        Class        => 'Modernize',
+    );
+
+    $LayoutObject->Block(
+        Name => 'DynamicFieldFieldType',
+        Data => {
+            %Param,
+            DynamicFieldTypeStrg => $DynamicFieldTypeStrg,
+        },
+    );
+
     if (@DFNamespaces) {
         my %NamespaceSelection = (
             '<none>' => '<' . $LayoutObject->{LanguageObject}->Translate('none') . '>',
@@ -418,6 +440,7 @@ sub _ShowOverview {
     # get filtered dynamic fields list
     my $DynamicFieldsListFiltered = $DynamicFieldObject->DynamicFieldList(
         ObjectType => $ObjectTypeFilterArrayRef,
+        FieldType  => IsStringWithData($FieldTypeFilter) ? [$FieldTypeFilter] : undef,
         Namespace  => $NamespaceFilter,
         Valid      => $Self->{IncludeInvalid} ? 0 : 1,
     );
@@ -428,6 +451,15 @@ sub _ShowOverview {
             Template => '[% Data.Filter | uri %]',
             Data     => {
                 Filter => $ObjectTypeFilter,
+            },
+        );
+    }
+
+    if ( IsStringWithData($FieldTypeFilter) ) {
+        $FilterStrg .= ";FieldTypeFilter=" . $LayoutObject->Output(
+            Template => '[% Data.Filter | uri %]',
+            Data     => {
+                Filter => $FieldTypeFilter,
             },
         );
     }
