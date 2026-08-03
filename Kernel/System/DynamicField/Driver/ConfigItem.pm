@@ -500,14 +500,20 @@ sub ObjectDescriptionGet {
     }
 
     my $Link;
-    if ( $Param{Link} && $Param{LayoutObject}{SessionSource} ) {
-        if ( $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
+    if ( $Param{Link} ) {
+        if ( $Param{LayoutObject}{SessionSource} && $Param{LayoutObject}{SessionSource} eq 'AgentInterface' ) {
 
             # TODO: only show the link if the user $Param{UserID} has permissions
             $Link = $Param{LayoutObject}{Baselink} . "Action=AgentITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
         }
-        elsif ( $Param{LayoutObject}{SessionSource} eq 'CustomerInterface' ) {
+        elsif ( $Param{LayoutObject}{SessionSource} && $Param{LayoutObject}{SessionSource} eq 'CustomerInterface' ) {
             $Link = $Param{LayoutObject}{Baselink} . "Action=CustomerITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
+        }
+
+        # check for public interface
+        #   LayoutObject is present, but we do not have a session source
+        elsif ( ref $Param{LayoutObject} eq 'Kernel::Output::HTML::Layout' ) {
+            $Link = $Param{LayoutObject}{Baselink} . "Action=PublicITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
         }
     }
 
