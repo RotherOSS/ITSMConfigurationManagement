@@ -509,12 +509,6 @@ sub ObjectDescriptionGet {
         elsif ( $Param{LayoutObject}{SessionSource} && $Param{LayoutObject}{SessionSource} eq 'CustomerInterface' ) {
             $Link = $Param{LayoutObject}{Baselink} . "Action=CustomerITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
         }
-
-        # check for public interface
-        #   LayoutObject is present, but we do not have a session source
-        elsif ( ref $Param{LayoutObject} eq 'Kernel::Output::HTML::Layout' ) {
-            $Link = $Param{LayoutObject}{Baselink} . "Action=PublicITSMConfigItemZoom;ConfigItemID=$Param{ObjectID}";
-        }
     }
 
     # create description
