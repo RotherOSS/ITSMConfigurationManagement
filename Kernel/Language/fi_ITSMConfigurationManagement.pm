@@ -378,6 +378,8 @@ sub Data {
         'Määrittää hallintakäyttöliittymän CI-määrittelyeditorin rivien määrän.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Määrittää tapahtumatilojen järjestyksen korkeasta (esim. sydänkohtaus) matalaan (esim. toiminnallinen).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Määrittää asiaankuuluvat käyttöönottotilat, joissa linkitetyt liput voivat vaikuttaa CI:n tilaan.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

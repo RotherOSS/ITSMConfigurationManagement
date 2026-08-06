@@ -378,6 +378,8 @@ sub Data {
         'Визначає кількість рядків для редактора визначень CI в інтерфейсі адміністратора.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Визначає порядок станів інциденту від високого (наприклад, критичного) до низького (наприклад, функціонального).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Визначає відповідні стани розгортання, в яких пов\'язані тікети можуть впливати на статус CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

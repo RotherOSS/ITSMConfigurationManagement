@@ -378,6 +378,8 @@ sub Data {
         'Определя броя на редовете за редактора на КЕ дефиниции в администраторския интерфейс.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Определя реда на инцидентните състояния от високо (напр. критично) до ниско (напр. функционално).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Дефинира съответните състояния на внедряване, при които свързаните билети могат да повлияят на състоянието на КЕ.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

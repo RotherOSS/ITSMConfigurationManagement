@@ -378,6 +378,8 @@ sub Data {
         '管理インターフェイス Cl 定義エディタの行数を定義する。';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'インシデント状態の高（例: 危険）から低（例: 情報）へのインシデント状態の順序を定義する。';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'リンクされたチケットがCIのステータスに影響を与える可能性がある、関連するデプロイ・ステータスを定義します。';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

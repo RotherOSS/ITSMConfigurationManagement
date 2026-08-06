@@ -378,6 +378,8 @@ sub Data {
         'Yönetici arayüzündeki CI tanımı düzenleyicisi için satır sayısını tanımlar.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Olay durumlarının yüksek (örn. krikital) ile düşük (örn. fonksiyonel) arasındaki sırasını tanımlar.';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Bağlantılı destek taleplerinin bir CI\'nın durumunu etkileyebileceği ilgili dağıtım durumlarını tanımlar.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

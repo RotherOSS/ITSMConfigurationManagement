@@ -378,6 +378,8 @@ sub Data {
         'Definiert die Anzahl der Zeilen für den Editor der Configuration Item-Definition im Administrator-Interface.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Definiert die Reihenfolge der Vorfallstatus von hoch (bspw. kritisch) nach niedrig (bspw. funktional).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Definiert relevante Verwendungsstatus, in denen verknüpfte Tickets den Status eines Configuration Items beeinflussen.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

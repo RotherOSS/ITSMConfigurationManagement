@@ -378,6 +378,8 @@ sub Data {
         '관리자 인터페이스에서 CI 정의 편집기의 행 수를 정의합니다.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         '인시던트 상태의 순서를 높음(예: 크리시탈)에서 낮음(예: 기능)으로 정의합니다.';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         '연결된 티켓이 CI의 상태에 영향을 줄 수 있는 관련 배포 상태를 정의합니다.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

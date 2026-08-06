@@ -378,6 +378,8 @@ sub Data {
         '定义管理界面中 CI 定义编辑器的行数。';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         '定义事件状态从高到低（如环状）的顺序。';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         '定义相关部署状态，其中链接的票单可影响 CI 的状态。';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

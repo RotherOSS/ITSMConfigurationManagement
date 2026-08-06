@@ -378,6 +378,8 @@ sub Data {
         'Define o número de linhas para o editor de definição de IC na interface de administração.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Define a ordem dos estados incidentes de alto (por exemplo, cricital) para baixo (por exemplo, funcional).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Define os estados de implantação relevantes onde os tickets vinculados podem afetar o status de um IC.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

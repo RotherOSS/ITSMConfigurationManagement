@@ -378,6 +378,8 @@ sub Data {
         'Definuje počet řádků editoru definice CI v rozhraní správce.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Definuje pořadí incidentních stavů od vysokého (např. cricital) po nízký (např. functional).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Definuje příslušné stavy nasazení, ve kterých mohou propojené tipy ovlivnit stav CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

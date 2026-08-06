@@ -378,6 +378,8 @@ sub Data {
         '定义在系统管理面板中修改配置项定义的编辑器的行数。';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         '定义故障状态从高（如紧急）到低（如正常）的顺序。';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         '定义关联的部署状态，即链接的工单可以影响配置项状态的情况。';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

@@ -378,6 +378,8 @@ sub Data {
         'Καθορίζει τον αριθμό των γραμμών για τον επεξεργαστή ορισμού CI στο περιβάλλον εργασίας διαχείρισης.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Καθορίζει τη σειρά των καταστάσεων συμβάντων από υψηλή (π.χ. κρίσιμη) έως χαμηλή (π.χ. λειτουργική).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Καθορίζει τις σχετικές καταστάσεις ανάπτυξης όπου τα συνδεδεμένα εισιτήρια μπορούν να επηρεάσουν την κατάσταση ενός CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

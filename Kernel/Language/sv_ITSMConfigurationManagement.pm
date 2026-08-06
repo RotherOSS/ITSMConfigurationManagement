@@ -378,6 +378,8 @@ sub Data {
         'Anger antal rader för KE-editorn i admingränssnittet.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Definierar ordningsföljden för incidenttillstånd från hög (t.ex. cricital) till låg (t.ex. functional).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Definierar de relevanta driftsättningsstatusar där länkade ärenden kan påverka statusen för ett CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

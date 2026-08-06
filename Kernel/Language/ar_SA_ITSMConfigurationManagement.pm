@@ -378,6 +378,8 @@ sub Data {
         'يحدد عدد الصفوف لمحرر تعريف CI في واجهة المسؤول.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'يُحدد ترتيب الحالات العارضة من الأعلى (مثل الحلقية) إلى الأدنى (مثل الوظيفية).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'يحدد حالات النشر ذات الصلة التي يمكن أن تؤثر فيها التذاكر المرتبطة على حالة المخبر السري.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

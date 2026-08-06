@@ -378,6 +378,8 @@ sub Data {
         'Definisikan jumlah baris untuk pengubah definisiCI pada antarmuka Admin';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Menentukan urutan status insiden dari tinggi (mis. krusial) ke rendah (mis. fungsional).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Mendefinisikan status penyebaran yang relevan di mana tiket yang ditautkan dapat memengaruhi status CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

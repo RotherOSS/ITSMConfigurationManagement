@@ -378,6 +378,8 @@ sub Data {
         'Definerer antall rader for CI-definisjonsredigeringsprogrammet i administratorgrensesnittet.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Definerer rekkefølgen av hendelsestilstander fra høy (f.eks. kritisk) til lav (f.eks. funksjonell).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Definerer de relevante distribusjonsstatusene der tilknyttede tickets kan påvirke statusen til en CI.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

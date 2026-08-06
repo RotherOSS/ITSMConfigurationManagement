@@ -378,6 +378,8 @@ sub Data {
         'Nosaka rindu skaitu CI definīciju redaktoram administratora saskarnē.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Nosaka incidentu stāvokļu secību no augsta (piemēram, cricital) līdz zemam (piemēram, funkcionāls).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Definē attiecīgos izvietošanas stāvokļus, kuros saistītās biļetes var ietekmēt KI statusu.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =

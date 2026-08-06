@@ -378,6 +378,8 @@ sub Data {
         'Nustato CI apibrėžimo redaktoriaus eilučių skaičių administratoriaus sąsajoje.';
     $Self->{Translation}->{'Defines the order of incident states from high (e.g. cricital) to low (e.g. functional).'} =
         'Nustato įvykio būsenų eiliškumą nuo aukštų (pvz., kritiškų) iki žemų (pvz., funkcinių).';
+    $Self->{Translation}->{'Defines the parameters for the elasticsearch widget backend.'} =
+        '';
     $Self->{Translation}->{'Defines the relevant deployment states where linked tickets can affect the status of a CI.'} =
         'Apibrėžiamos atitinkamos diegimo būsenos, kuriose susieti bilietai gali turėti įtakos CI būsenai.';
     $Self->{Translation}->{'Defines the search limit for the AgentITSMConfigItem screen.'} =
