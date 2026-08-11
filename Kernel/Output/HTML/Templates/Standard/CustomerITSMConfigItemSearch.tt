@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -40,58 +40,79 @@
                     <input type="hidden" name="Subaction" value="SearchAction"/>
                     <input type="hidden" name="SearchDialog" value='1'>
                     <input type="hidden" name="EmptySearch" value="[% Data.EmptySearch | html %]" id="EmptySearch"/>
-                    <fieldset>
+                    <fieldset class="ModularForm">
 [% RenderBlockStart("PermissionCondition") %]
-                        <div class="Clear"></div>
                         <div class="Row">
-                            [% Data.PermissionConditionStrg %]
-                            <label for="PermissionCondition">[% Translate("Category") | html %]:</label>
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    [% Data.PermissionConditionStrg %]
+                                </div>
+                                <label for="PermissionCondition">[% Translate("Category") | html %]:</label>
+                            </div>
                         </div>
 [% RenderBlockEnd("PermissionCondition") %]
 [% RenderBlockStart("Class") %]
-                        <div class="Clear"></div>
                         <div class="Row">
-                            [% Data.ClassStrg %]
-                            <label for="ClassIDs">[% Translate("Class") | html %]:</label>
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    [% Data.ClassStrg %]
+                                </div>
+                                <label for="ClassIDs">[% Translate("Class") | html %]:</label>
+                            </div>
                         </div>
 [% RenderBlockEnd("Class") %]
 [% RenderBlockStart("Number") %]
-                    <div class="Clear"></div>
-                    <div class="Row">
-                        <input type="text" name="Number" value="[% Data.Number | html %]" class="W50pc" />
-                        <label for="Number">[% Translate("Number") | html %]:</label>
-                    </div>
+                        <div class="Row">
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    <input type="text" name="Number" value="[% Data.Number | html %]" class="W50pc" />
+                                </div>
+                                <label for="Number">[% Translate("Number") | html %]:</label>
+                            </div>
+                        </div>
 [% RenderBlockEnd("Number") %]
 [% RenderBlockStart("Name") %]
-                    <div class="Clear"></div>
-                    <div class="Row">
-                        <input type="text" name="Name" value="[% Data.Name | html %]" class="W50pc" />
-                        <label for="Name">[% Translate("Name") | html %]:</label>
-                    </div>
+                        <div class="Row">
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    <input type="text" name="Name" value="[% Data.Name | html %]" class="W50pc" />
+                                </div>
+                                <label for="Name">[% Translate("Name") | html %]:</label>
+                            </div>
+                        </div>
 [% RenderBlockEnd("Name") %]
 [% RenderBlockStart("DeplState") %]
-                        <div class="Clear"></div>
                         <div class="Row">
-                            [% Data.CurDeplStateOptionStrg %]
-                            <label for="DeplStateIDs">[% Translate("Deployment State") | html %]:</label>
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    [% Data.CurDeplStateOptionStrg %]
+                                </div>
+                                <label for="DeplStateIDs">[% Translate("Deployment State") | html %]:</label>
+                            </div>
                         </div>
 [% RenderBlockEnd("DeplState") %]
 [% RenderBlockStart("InciState") %]
-                    <div class="Clear"></div>
-                    <div class="Row">
-                        [% Data.CurInciStateOptionStrg %]
-                        <label for="InciStateIDs">[% Translate("Incident State") | html %]:</label>
-                    </div>
+                        <div class="Row">
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    [% Data.CurInciStateOptionStrg %]
+                                </div>
+                                <label for="InciStateIDs">[% Translate("Incident State") | html %]:</label>
+                            </div>
+                        </div>
 [% RenderBlockEnd("InciState") %]
 [% RenderBlockStart("DynamicField") %]
-                    <div class="Clear"></div>
-                    <div class="Row">
-                        [% Data.Field %]
-                        [% Data.Label %]
-                    </div>
+                        <div class="Row">
+                            <div class="FieldCell">
+                                <div class="Field">
+                                    [% Data.Field %]
+                                </div>
+                                [% Data.Label %]
+                            </div>
+                        </div>
 [% RenderBlockEnd("DynamicField") %]
                     </fieldset>
-                    <div class="Row">
+                    <div id="BottomActionRow" class="ActionRow Row">
                         <button id="SearchAction" type="submit" class="CallForAction" value="[% Translate("Search") | html %]"><span>[% Translate("Search") | html %]</span></button>
                     </div>
                 </form>
