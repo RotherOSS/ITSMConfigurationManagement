@@ -279,7 +279,7 @@ sub Run {
 
             # fetch multi value params
             my @Array = $ParamObject->GetArray( Param => $SearchParamArray );
-            if ( grep {$_} @Array ) {
+            if ( any {$_} @Array ) {
                 $GetParam{$SearchParamArray} = \@Array;
                 $LinkPage .= join( '', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array );
                 $LinkSort .= join( '', map { ";$SearchParamArray=" . $LayoutObject->Ascii2Html( Text => $_ ) } @Array );
