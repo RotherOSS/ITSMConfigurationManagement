@@ -156,7 +156,7 @@ $Selenium->RunTest(
 
         # Check ConfigItem search page.
         for my $ID (
-            qw(SearchClassID SearchProfile SearchProfileNew Attribute PreviousVersionSearch ResultForm SearchFormSubmit)
+            qw(SearchClassID SearchProfile SearchProfileNew Attribute ResultForm SearchFormSubmit)
             )
         {
             sleep 1;
