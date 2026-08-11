@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -210,7 +210,7 @@ sub Run {
         else {
 
             # get search string params (get submitted params)
-            for my $Key (qw(Number Name PreviousVersionSearch ResultForm ShownAttributes)) {
+            for my $Key (qw(Number Name ResultForm ShownAttributes)) {
 
                 # get search string params (get submitted params)
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
@@ -707,17 +707,6 @@ sub Run {
             Class      => 'Modernize',
         );
 
-        # generate PreviousVersionOptionStrg
-        my $PreviousVersionOptionStrg = $LayoutObject->BuildSelection(
-            Name => 'PreviousVersionSearch',
-            Data => {
-                0 => Translatable('No'),
-                1 => Translatable('Yes'),
-            },
-            SelectedID => $GetParam{PreviousVersionSearch} || '0',
-            Class      => 'Modernize',
-        );
-
         # build output format string
         $Param{ResultFormStrg} = $LayoutObject->BuildSelection(
             Data => {
@@ -734,16 +723,15 @@ sub Run {
         $LayoutObject->Block(
             Name => 'AJAXContent',
             Data => {
-                ClassID                   => $ClassID,
-                CurDeplStateOptionStrg    => $CurDeplStateOptionStrg,
-                CurInciStateOptionStrg    => $CurInciStateOptionStrg,
-                PreviousVersionOptionStrg => $PreviousVersionOptionStrg,
-                AttributesStrg            => $Param{AttributesStrg},
-                AttributesOrigStrg        => $Param{AttributesOrigStrg},
-                ResultFormStrg            => $Param{ResultFormStrg},
-                ProfilesStrg              => $Param{ProfilesStrg},
-                Number                    => $GetParam{Number} || '',
-                Name                      => $GetParam{Name}   || '',
+                ClassID                => $ClassID,
+                CurDeplStateOptionStrg => $CurDeplStateOptionStrg,
+                CurInciStateOptionStrg => $CurInciStateOptionStrg,
+                AttributesStrg         => $Param{AttributesStrg},
+                AttributesOrigStrg     => $Param{AttributesOrigStrg},
+                ResultFormStrg         => $Param{ResultFormStrg},
+                ProfilesStrg           => $Param{ProfilesStrg},
+                Number                 => $GetParam{Number} || '',
+                Name                   => $GetParam{Name}   || '',
             },
         );
 
