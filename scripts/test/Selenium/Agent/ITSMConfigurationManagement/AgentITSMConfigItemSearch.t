@@ -209,7 +209,7 @@ $Selenium->RunTest(
         }
 
         # Verify sorting in table, by default sorting is done by ConfigItemNumber - sort descending.
-        # Lower ID will on the botton of table.
+        # Lower ID will on the bottom of table.
         $Self->Is(
             $Selenium->execute_script("return \$('tbody tr:eq(0)').attr('id')"),
             'ConfigItemID_' . $ConfigItemIDs[1],
@@ -313,9 +313,6 @@ $Selenium->RunTest(
         }
 
         # set the dynamic fields as searchable
-        my %SearchableFieldsSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
-            Name => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField',
-        );
         $Helper->ConfigSettingChange(
             Valid => 1,
             Key   => 'ITSMConfigItem::Frontend::AgentITSMConfigItemSearch###DynamicField',
