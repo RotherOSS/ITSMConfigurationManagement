@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2025 Rother OSS GmbH, https://otobo.io/
+# Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -44,7 +44,6 @@ my $ObjectBackendObject  = $Kernel::OM->Get('Kernel::System::ImportExport::Objec
 my $ConfigItemObject     = $Kernel::OM->Get('Kernel::System::ITSMConfigItem');
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
-
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -322,7 +321,7 @@ my @ImportDataTests = (
         },
     },
     {
-        Name => 'Importing data without triggering a new version, emptying the old value, doing an externalSourceTransform',
+        Name             => 'Importing data without triggering a new version, emptying the old value, doing an externalSourceTransform',
         SourceImportData => {
             ObjectData => {
                 ClassID                      => $CIClassName2ID{Subsidiary},
@@ -369,7 +368,7 @@ for my $Test (@ImportDataTests) {
             return;
         }
 
-        if( $Test->{TestExternalSourceTransform}) {
+        if ( $Test->{TestExternalSourceTransform} ) {
             _SetDF2ExternalSourceTransform();
         }
 
@@ -536,11 +535,11 @@ sub _SetDF2ExternalSourceTransform {
     my $Success = $DynamicFieldObject->DynamicFieldUpdate(
         $DynamicFieldConfig->%*,
 
-        ValidID    => 1,
-        Reorder    => 1,                        # or 0, to trigger reorder function, default 1
-                                                # 0 is only used internally to prevent redundant execution on order change
-                                                # no update event will be triggered for 0
-        UserID     => 1,
+        ValidID => 1,
+        Reorder => 1,    # or 0, to trigger reorder function, default 1
+                         # 0 is only used internally to prevent redundant execution on order change
+                         # no update event will be triggered for 0
+        UserID  => 1,
     );
     ok( $Success, "updated DF config" );
     _SyncConfigItemDFs();
