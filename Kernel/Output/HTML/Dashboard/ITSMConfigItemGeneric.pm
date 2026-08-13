@@ -28,7 +28,7 @@ use List::Util qw(any none);
 
 # OTOBO modules
 use Kernel::Language              qw(Translatable);
-use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData IsStringWithData);
 
 our $ObjectManagerDisabled = 1;
 
@@ -671,12 +671,18 @@ sub Run {
                     $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->{ClassIDs} = \@FilteredClassIDs;
                 }
 
-                @ConfigItemIDsArray = $ConfigItemObject->ConfigItemSearch(
+                my %CombinedSearchParams = (
                     Result => 'ARRAY',
                     %ConfigItemSearch,
                     $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->%*,
                     %ColumnFilter,
                     Limit => $Self->{PageShown} + $Self->{StartHit} - 1,
+                );
+                if ( $CombinedSearchParams{SortBy} eq 'LastChanged' ) {
+                    $CombinedSearchParams{SortBy} = 'Changed';
+                }
+                @ConfigItemIDsArray = $ConfigItemObject->ConfigItemSearch(
+                    %CombinedSearchParams,
                 );
             }
         }
@@ -715,11 +721,17 @@ sub Run {
             if ( !$Self->{Config}->{IsProcessWidget} || IsArrayRefWithData( $Self->{ProcessList} ) ) {
 
                 # Execute search.
-                $Summary->{$Type} = $ConfigItemObject->ConfigItemSearch(
+                my %CombinedSearchParams = (
                     Result => 'COUNT',
                     %ConfigItemSearch,
                     $ConfigItemSearchSummary{ $Self->{AdditionalFilter} }->%*,
                     %ColumnFilter,
+                );
+                if ( $CombinedSearchParams{SortBy} eq 'LastChanged' ) {
+                    $CombinedSearchParams{SortBy} = 'Changed';
+                }
+                $Summary->{$Type} = $ConfigItemObject->ConfigItemSearch(
+                    %CombinedSearchParams,
                 ) || 0;
             }
         }
@@ -1343,9 +1355,13 @@ sub Run {
                 {
                     $BlockType = 'CurInci';
                 }
-                elsif ( $ConfigItemColumn eq 'Created' || $ConfigItemColumn eq 'Changed' ) {
+                elsif ( $ConfigItemColumn eq 'Created' ) {
                     $BlockType = 'Time';
-                    $DataValue = $ConfigItem{$ConfigItemColumn};
+                    $DataValue = $ConfigItem{CreateTime};
+                }
+                elsif ( $ConfigItemColumn eq 'LastChanged' ) {
+                    $BlockType = 'Time';
+                    $DataValue = $ConfigItem{ChangeTime};
                 }
                 else {
                     $DataValue = $ConfigItem{$ConfigItemColumn};
