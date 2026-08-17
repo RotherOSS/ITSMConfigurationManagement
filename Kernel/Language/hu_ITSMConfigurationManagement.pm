@@ -83,7 +83,6 @@ sub Data {
 
     # Template: AgentITSMConfigItemSearch
     $Self->{Translation}->{'Run Search'} = 'Keresés futtatása';
-    $Self->{Translation}->{'Also search in previous versions?'} = 'Keressen az előző verziókban is?';
 
     # Template: AgentITSMConfigItemTreeView
     $Self->{Translation}->{'TreeView for ConfigItem'} = 'TreeView a ConfigItem számára';

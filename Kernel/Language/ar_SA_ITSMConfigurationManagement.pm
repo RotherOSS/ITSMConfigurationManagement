@@ -83,7 +83,6 @@ sub Data {
 
     # Template: AgentITSMConfigItemSearch
     $Self->{Translation}->{'Run Search'} = 'بدء البحث';
-    $Self->{Translation}->{'Also search in previous versions?'} = 'البحث أيضاً في الإصدارات السابقة؟';
 
     # Template: AgentITSMConfigItemTreeView
     $Self->{Translation}->{'TreeView for ConfigItem'} = 'طريقة عرض الشجرة لعنصر التكوين';
