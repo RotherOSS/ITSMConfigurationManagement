@@ -83,7 +83,6 @@ sub Data {
 
     # Template: AgentITSMConfigItemSearch
     $Self->{Translation}->{'Run Search'} = 'Spustit vyhledávání';
-    $Self->{Translation}->{'Also search in previous versions?'} = 'Hledat také v předchozích verzích?';
 
     # Template: AgentITSMConfigItemTreeView
     $Self->{Translation}->{'TreeView for ConfigItem'} = 'Zobrazení stromu pro položku ConfigItem';

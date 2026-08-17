@@ -83,7 +83,6 @@ sub Data {
 
     # Template: AgentITSMConfigItemSearch
     $Self->{Translation}->{'Run Search'} = 'Vykdyti paiešką';
-    $Self->{Translation}->{'Also search in previous versions?'} = 'Taip pat ieškoti ankstesnėse versijose?';
 
     # Template: AgentITSMConfigItemTreeView
     $Self->{Translation}->{'TreeView for ConfigItem'} = '"ConfigItem" medžio rodinys';
