@@ -69,7 +69,7 @@ Fields of the configuration item index, used for the fulltext search. Fields are
 
 Elasticsearch::QuickSearchShow###ConfigItem
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.
+Objects to search for, how many entries and which attributes to show. Configuration item attributes have to explicitly be stored via Elasticsearch.
 
 Core::Event::ITSMConfigItem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,7 +80,7 @@ Config item event module that enables logging to history in the agent interface.
 
 ITSMConfigItem::EventModulePost###1000-GenericInterface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Performs the configured action for each event (as an Invoker) for each configured Webservice.
+Performs the configured action for each event (as an invoker) for each configured web service.
 
 Core::Event::Ticket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
