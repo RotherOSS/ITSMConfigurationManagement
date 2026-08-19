@@ -1368,7 +1368,7 @@
         </Value>
     </Setting>
     <Setting Name="Elasticsearch::QuickSearchShow###ConfigItem" Required="0" Valid="0">
-        <Description Translatable="1">Objects to search for, how many entries and which attributs to show. ConfigItem attributes have to explicitly be stored via Elasticsearch.</Description>
+        <Description Translatable="1">Objects to search for, how many entries and which attributes to show. Configuration item attributes have to explicitly be stored via Elasticsearch.</Description>
         <Navigation>Core::Elasticsearch::Settings</Navigation>
         <Value>
             <Hash>
