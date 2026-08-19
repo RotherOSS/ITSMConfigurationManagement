@@ -91,7 +91,7 @@
         </Value>
     </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemSearch###Order::Default" Required="1" Valid="1">
-        <Description Translatable="1">Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.</Description>
+        <Description Translatable="1">Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.</Description>
         <Navigation>GenericInterface::Operation::ConfigItemSearch</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Down">
@@ -119,7 +119,7 @@
         </Value>
     </Setting>
     <Setting Name="ITSMConfigItem::EventModulePost###9700-GenericInterface" Required="0" Valid="1">
-        <Description Translatable="1">Performs the configured action for each event (as an Invoker) for each configured Webservice.</Description>
+        <Description Translatable="1">Performs the configured action for each event (as an invoker) for each configured web service.</Description>
         <Navigation>Core::Event::ITSMConfigItem</Navigation>
         <Value>
             <Hash>
@@ -130,7 +130,7 @@
         </Value>
     </Setting>
     <Setting Name="GenericInterface::Invoker::ConfigItemFetch::Classes" Required="0" Valid="0">
-        <Description Translatable="1">For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.</Description>
+        <Description Translatable="1">For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.</Description>
         <Navigation>GenericInterface::Invoker</Navigation>
         <Value>
             <Hash>
@@ -212,7 +212,7 @@
         </Value>
     </Setting>
     <Setting Name="GenericInterface::Operation::ConfigItemUpsert::Classes" Required="0" Valid="0">
-        <Description Translatable="1">For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.</Description>
+        <Description Translatable="1">For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.</Description>
         <Navigation>GenericInterface::Operation</Navigation>
         <Value>
             <Hash>
