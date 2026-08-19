@@ -139,7 +139,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -1255,7 +1255,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -2944,7 +2944,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -4382,7 +4382,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -4635,7 +4635,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -5165,7 +5165,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -5826,7 +5826,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -6137,7 +6137,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -6516,7 +6516,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -6737,7 +6737,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -7018,7 +7018,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -7635,7 +7635,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -8216,7 +8216,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -9001,7 +9001,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -9966,7 +9966,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -11729,7 +11729,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -13406,7 +13406,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -14243,7 +14243,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -15723,7 +15723,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -16303,7 +16303,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
@@ -16932,7 +16932,7 @@
         RegExList: ~
         Tooltip: ''
       FieldType: Text
-      Label: Inverstment costs
+      Label: Investment costs
       Name: ITSMAccounting-InvestmentCosts
       ObjectType: ITSMConfigItem
     ITSMAccounting-InvoiceNumber:
