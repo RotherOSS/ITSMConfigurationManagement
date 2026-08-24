@@ -2095,7 +2095,7 @@
                 <Item Key="Title" Translatable="1">Assigned CIs</Item>
                 <Item Key="Description" Translatable="1">CIs assigned to customer company</Item>
                 <Item Key="Attributes">CustomerCompany</Item>
-                <Item Key="Filter" Translatable="1">AssignedToEntity</Item>
+                <Item Key="Filter">AssignedToEntity</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
                 <Item Key="Block">ContentLarge</Item>
@@ -2136,7 +2136,7 @@
                 <Item Key="Title" Translatable="1">Assigned CIs</Item>
                 <Item Key="Description" Translatable="1">CIs assigned to customer user</Item>
                 <Item Key="Attributes">Customer</Item>
-                <Item Key="Filter" Translatable="1">AssignedToEntity</Item>
+                <Item Key="Filter">AssignedToEntity</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
                 <Item Key="Block">ContentLarge</Item>
