@@ -1844,7 +1844,7 @@
         </Value>
     </Setting>
     <Setting Name="UniqueCIName::EnableUniquenessCheck" Required="0" Valid="1">
-        <Description Translatable="1">Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.</Description>
+        <Description Translatable="1">Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.</Description>
         <Navigation>Core::ITSMConfigItem</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="0">
@@ -2087,7 +2087,7 @@
     </Setting>
 
     <Setting Name="AgentCustomerInformationCenter::Backend###0060-CIC-ITSMConfigItemCustomerCompany" Required="0" Valid="1">
-        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".</Description>
+        <Description Translatable="1">Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".</Description>
         <Navigation>Frontend::Agent::View::CustomerInformationCenter</Navigation>
         <Value>
             <Hash>
