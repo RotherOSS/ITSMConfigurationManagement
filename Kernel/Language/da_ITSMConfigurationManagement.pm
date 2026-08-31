@@ -258,7 +258,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Tillader udvidede søgebetingelser i søgning efter konfigurationselementer i kundegrænsefladen. Med denne funktion kan du f.eks. søge i navnet på et konfigurationselement med betingelser som "(*key1*&&*key2*)" eller "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Tildelte CI\'er';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for licenses counting, where "TotalLicensesDF", "AvailableLicensesDF" and "LicenseReferenceDF" are the names of the dynamic fields used to track the remaining licenses. If used, only deployment states in "ValidDeplStates" are considered. If a threshold is defined in "MinimumLicenses", a ticket will automatically be created if less licenses are available. For this, the checkbox dynamic field "Ticket->DynamicField" must exist. The tags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER, LICENSES_AVAIL and LICENSES_MIN, will be substituted with the respective values in "Ticket->Text" by the config item name, number, available licenses, and minimum required available licenses, respectively.'} =
@@ -358,8 +357,8 @@ sub Data {
         'Definerer standardrækkefølgen for konfigurationselementer i søgeresultatet for konfigurationselementer i kundegrænsefladen. Op: ældste øverst. Ned: nyeste øverst.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the public interface. Up: oldest on top. Down: latest on top.'} =
         '';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Definerer standardrækkefølgen for konfigurationselementer i søgeresultatet for denne handling. Op: ældste øverst. Ned: nyeste øverst.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Definerer de kolonner, der som standard vises for CI\'er i oversigten over konfigurationselementer, afhængigt af CI-klassen. Hver post skal bestå af et klassenavn og et array af tilgængelige felter for den tilsvarende klasse. Dynamiske feltindgange skal overholde skemaet DynamicField_FieldName.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Definerer den standardrelationsdybde, der skal vises.';
@@ -425,16 +424,16 @@ sub Data {
         'Aktiverer funktionen til massehandling af konfigurationselementer, så agentens frontend kan arbejde på mere end ét konfigurationselement ad gangen.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Definerer de relevante implementeringstilstande, hvor tilknyttede tickets kan påvirke status for et CI.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Aktiverer/deaktiverer funktionen til at kontrollere ITSM-konfigurationselementer for unikke navne. Før du aktiverer denne mulighed, bør du tjekke dit system for allerede eksisterende konfigurationselementer med duplikatnavne. Det kan du gøre med konsolkommandoen Admin::ITSM::ConfigItem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Hændelsesmodul til at sætte configitem-status på ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'Felter i konfigurationselementets indeks, der bruges til fuldtekstsøgning. Felter gemmes også, men er ikke obligatoriske for den overordnede funktionalitet. Inkludering af vedhæftede filer kan deaktiveres ved at sætte posten til 0 eller slette den.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'Felter gemt i konfigurationselementets indeks, som bruges til andre ting end fuldtekstsøgning. For at få fuld funktionalitet er alle felter obligatoriske.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'For hver webtjeneste (nøgle) kan der defineres et array af klasser (værdi), som importen er begrænset til. For alle valgte klasser eller alle eksisterende klasser skal de identificerende attributter vælges i invoker-konfigurationen.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'Registrering af GenericInterface-modul til ConfigItemFetch-invokatorlaget.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -482,9 +481,9 @@ sub Data {
         'Parametre for kategorierne for konfigurationselementklasser i præferencevisningen i agentgrænsefladen.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametre for kolonnefiltrene i oversigten over små konfigurationselementer. Bemærk: Hvis \'Aktiv\' sættes til 0, forhindrer det kun agenter i at redigere indstillingerne for denne gruppe i deres personlige præferencer, men det giver stadig administratorer mulighed for at redigere indstillingerne på en anden brugers vegne. Brug \'PreferenceGroup\' til at styre, i hvilket område disse indstillinger skal vises i brugergrænsefladen.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametre for udrulningstilstandenes farve i præferencevisningen i agentgrænsefladen.';
@@ -504,8 +503,8 @@ sub Data {
         'Parametre for version string template toolkit module for config item classes i præferencevisningen i agentgrænsefladen.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'Parametre for versionsudløseren for konfigurationselementklasser i agentgrænsefladens præferencevisning.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Udfører den konfigurerede handling for hver begivenhed (som en Invoker) for hver konfigureret webtjeneste.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Tilladelsesgruppe';
     $Self->{Translation}->{'Public users can see historic CI versions.'} = '';
     $Self->{Translation}->{'Public users have the possibility to manually switch between historic CI versions.'} =
@@ -699,7 +698,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = 'IP-protokol';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identitets- og adgangsstyring (IAM)';
     $Self->{Translation}->{'Inventory Number'} = 'Inventarnummer';
-    $Self->{Translation}->{'Inverstment costs'} = 'Inversteringsomkostninger';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = 'Fakturanummer';
     $Self->{Translation}->{'Keyboard'} = 'Tastatur';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD-skærm (flydende krystalskærm)';
