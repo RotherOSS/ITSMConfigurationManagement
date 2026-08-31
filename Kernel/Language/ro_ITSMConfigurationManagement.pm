@@ -261,7 +261,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Permite condiții de căutare extinse în căutarea elementelor de configurare din interfața cu clienții. Cu această funcție puteți căuta, de exemplu, numele elementului de configurare cu acest tip de condiții, cum ar fi "(*key1*&&&*key2*)" sau "(*key1*|||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'IC atribuite';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for license accounting.'} = '';
@@ -351,8 +350,8 @@ sub Data {
         'Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din interfața agentului. Sus: cel mai vechi în partea de sus. Jos: cel mai recent în partea de sus.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
         'Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din interfața cu clienții. Sus: cel mai vechi în partea de sus. Jos: cel mai recent în partea de sus.';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Definește ordinea implicită a elementelor de configurare în rezultatul căutării elementelor de configurare din această operațiune. În sus: cel mai vechi în sus. Jos: cel mai recent în partea de sus.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Definește coloanele afișate în mod implicit ale IC în prezentarea generală a elementelor de configurare în funcție de clasa IC. Fiecare intrare trebuie să fie compusă dintr-un nume de clasă și o matrice de câmpuri disponibile pentru clasa corespunzătoare. Intrările de câmpuri dinamice trebuie să respecte schema DynamicField_FieldName.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Definește adâncimea implicită a relațiilor care urmează să fie afișate.';
@@ -412,16 +411,16 @@ sub Data {
         'Activează caracteristica de acțiune în masă a elementelor de configurare pentru ca frontend-ul agentului să lucreze la mai mult de un element de configurare odată.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Activează funcția de acțiune în bloc a elementelor de configurare numai pentru grupurile enumerate.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Activează/dezactivează funcționalitatea de verificare a elementelor de onfigurare ITSM pentru nume unice. Înainte de a activa această opțiune, ar trebui să verificați dacă există deja elemente de configurare cu nume duplicate în sistem. Puteți face acest lucru cu ajutorul comenzii de consolă Admin::ITSM::ConfigItem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modulul de eveniment pentru a seta starea articolului de configurare pe biletul-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'Câmpuri ale indexului elementului de configurare, utilizate pentru căutarea fulltext. Câmpurile sunt, de asemenea, stocate, dar nu sunt obligatorii pentru funcționalitatea generală. Includerea atașamentelor poate fi dezactivată prin setarea intrării la 0 sau prin ștergerea acesteia.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'Câmpuri stocate în indexul elementului de configurare care sunt utilizate pentru alte scopuri în afară de căutările fulltext. Pentru o funcționalitate completă, toate câmpurile sunt obligatorii.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'Pentru fiecare serviciu web (cheie) se poate defini o serie de clase (valoare) pentru care se limitează importul. Pentru toate clasele alese sau pentru toate clasele existente, atributele de identificare vor trebui să fie alese în configurația invocatorului.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'Înregistrarea modulului GenericInterface pentru stratul de invocare ConfigItemFetch.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -456,9 +455,9 @@ sub Data {
         'Parametrii pentru categoriile pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametrii pentru filtrele de coloană din prezentarea generală a elementelor de configurare mici. Vă rugăm să rețineți: setarea "Active" la 0 va împiedica doar agenții să editeze setările acestui grup în preferințele lor personale, dar va permite în continuare administratorilor să editeze setările în numele unui alt utilizator. Utilizați "PreferenceGroup" pentru a controla în ce zonă trebuie afișate aceste setări în interfața cu utilizatorul.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametrii pentru culoarea stărilor de desfășurare în vizualizarea preferințelor din interfața agentului.';
@@ -478,8 +477,8 @@ sub Data {
         'Parametrii pentru modulul setului de instrumente de șabloane de șiruri de versiuni pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'Parametrii pentru declanșarea versiunii pentru clasele de elemente de configurare în vizualizarea preferințelor din interfața agentului.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Efectuează acțiunea configurată pentru fiecare eveniment (ca Invoker) pentru fiecare serviciu web configurat.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Drepturi Grup';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
         'Permisiuni necesare pentru a utiliza acțiunea de atașare a elementului de configurare ITSM în interfața agentului.';
@@ -668,7 +667,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = '';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = '';
     $Self->{Translation}->{'Inventory Number'} = '';
-    $Self->{Translation}->{'Inverstment costs'} = '';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = '';
     $Self->{Translation}->{'Keyboard'} = 'Tastatura';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = '';

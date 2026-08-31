@@ -261,7 +261,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Umožňuje rozšířené podmínky vyhledávání v konfiguračním vyhledávání položek v zákaznickém rozhraní. Pomocí této funkce můžete vyhledávat např. název konfigurační položky s podmínkami typu "(*key1*&&*key2*)" nebo "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Přiřazené CI';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for license accounting.'} = '';
@@ -351,8 +350,8 @@ sub Data {
         'Definuje výchozí pořadí položek konfigurace ve výsledku vyhledávání položek konfigurace v rozhraní agenta. Nahoru: nejstarší nahoře. Dolů: nejnovější nahoře.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
         'Definuje výchozí pořadí položek konfigurace ve výsledku vyhledávání položek konfigurace v zákaznickém rozhraní. Nahoru: nejstarší nahoře. Dolů: nejnovější nahoře.';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Definuje výchozí pořadí položek konfigurace ve výsledku vyhledávání položek konfigurace této operace. Nahoru: nejstarší nahoře. Dolů: nejnovější nahoře.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Definuje výchozí zobrazené sloupce CI v přehledu položek konfigurace v závislosti na třídě CI. Každá položka se musí skládat z názvu třídy a pole dostupných polí pro příslušnou třídu. Položky dynamických polí musí respektovat schéma DynamicField_FieldName.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Definuje výchozí hloubku vztahů, které se mají zobrazit.';
@@ -412,16 +411,16 @@ sub Data {
         'Povoluje funkci hromadné akce konfigurační položky pro frontend agenta, aby bylo možné pracovat s více než jednou konfigurační položkou najednou.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Povolí funkci hromadné akce konfigurační položky pouze pro uvedené skupiny.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Povoluje/zakazuje funkci kontroly jedinečných názvů položek konfigurace ITSM. Před povolením této možnosti byste měli zkontrolovat systém, zda již neexistují konfigurační položky s duplicitními názvy. To můžete provést pomocí konzolového příkazu Admin::ITSM::ConfigItem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Modul událostí pro nastavení configitem-status na ticket-configitem-link.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'Pole indexu položky konfigurace, která se používají pro fulltextové vyhledávání. Pole jsou rovněž uložena, ale pro celkovou funkčnost nejsou povinná. Zahrnutí příloh lze zakázat nastavením položky na hodnotu 0 nebo jejím odstraněním.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'Pole uložená v indexu položek konfigurace, která se kromě fulltextového vyhledávání používají i k jiným účelům. Pro úplnou funkčnost jsou všechna pole povinná.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'Pro každou webovou službu (klíč) lze definovat pole tříd (hodnota), na které je import omezen. Pro všechny zvolené třídy nebo všechny existující třídy bude třeba v konfiguraci invokeru zvolit identifikační atributy.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'Registrace modulu GenericInterface pro vrstvu vyvolávače ConfigItemFetch.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -456,9 +455,9 @@ sub Data {
         'Parametry pro kategorie tříd konfiguračních položek v zobrazení předvoleb rozhraní agenta.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parametry pro filtry sloupců přehledu malých konfiguračních položek. Upozornění: Nastavení hodnoty "Aktivní" na 0 pouze zabrání agentům upravovat nastavení této skupiny v jejich osobních preferencích, ale správcům stále umožní upravovat nastavení jménem jiného uživatele. Pomocí \'PreferenceGroup\' můžete řídit, ve které oblasti se mají tato nastavení v uživatelském rozhraní zobrazovat.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Parametry pro stavy nasazení se vybarví v zobrazení předvoleb rozhraní agenta.';
@@ -478,8 +477,8 @@ sub Data {
         'Parametry modulu šablony řetězce verze sady nástrojů pro třídy konfiguračních položek v zobrazení předvoleb rozhraní agenta.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'Parametry pro spouštěč verze pro třídy položek konfigurace v zobrazení předvoleb rozhraní agenta.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Provede nakonfigurovanou akci pro každou událost (jako Invoker) pro každou nakonfigurovanou webovou službu.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Skupina oprávnění';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
         'Požadovaná oprávnění pro použití akce připojení položky konfigurace ITSM v rozhraní agenta.';
@@ -668,7 +667,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = 'Protokol IP';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Správa identit a přístupu (IAM)';
     $Self->{Translation}->{'Inventory Number'} = 'Inventární číslo';
-    $Self->{Translation}->{'Inverstment costs'} = 'Náklady na inverzi';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = 'Číslo faktury';
     $Self->{Translation}->{'Keyboard'} = 'Klávesnice';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'Monitor LCD (displej z tekutých krystalů)';

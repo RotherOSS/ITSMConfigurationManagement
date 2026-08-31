@@ -261,7 +261,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Позволяет расширить условия поиска при поиске элементов конфигурации в клиентском интерфейсе. С помощью этой функции вы можете искать, например, имя элемента конфигурации с такими условиями, как "(*key1*&&*key2*)" или "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Назначаемые КИ';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for license accounting.'} = '';
@@ -351,8 +350,8 @@ sub Data {
         'Определяет порядок элементов конфигурации по умолчанию в результатах поиска элементов конфигурации в интерфейсе агента. Вверх: самый старый сверху. Вниз: самый последний сверху.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
         'Определяет порядок элементов конфигурации по умолчанию в результатах поиска элементов конфигурации в интерфейсе клиента. Вверх: самый старый сверху. Вниз: самый последний сверху.';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Определяет порядок элементов конфигурации по умолчанию в результатах поиска элементов конфигурации при выполнении этой операции. Вверх: самый старый сверху. Вниз: самый последний сверху.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Определяет отображаемые по умолчанию столбцы CI в обзоре элементов конфигурации в зависимости от класса CI. Каждая запись должна состоять из имени класса и массива доступных полей для соответствующего класса. Записи динамических полей должны соответствовать схеме DynamicField_FieldName.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Определяет глубину отображения отношений по умолчанию.';
@@ -412,16 +411,16 @@ sub Data {
         'Включает возможность массовых действий с КЕ для интерфейса агента для работы с несколькими КЕ одновременно.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Включает возможность массовых действий с КЕ только для перечисленных групп.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Включает/выключает функцию проверки элементов конфигурации ITSM на наличие уникальных имен. Перед включением этой опции необходимо проверить систему на наличие уже существующих элементов конфигурации с дублирующимися именами. Это можно сделать с помощью консольной команды Admin::ITSM::ConfigItem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Модуль установки статуса КЕ для связанной с ней заявки.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'Поля индекса элемента конфигурации, используемые для полнотекстового поиска. Поля также сохраняются, но не являются обязательными для общей функциональности. Включение вложений можно отключить, установив для записи значение 0 или удалив ее.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'Поля, хранящиеся в индексе элемента конфигурации, которые используются не только для полнотекстового поиска. Для полной функциональности все поля являются обязательными.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'Для каждого веб-сервиса (ключ) может быть определен массив классов (значение), для которых импорт ограничен. Для всех выбранных классов или для всех существующих классов в конфигурации инвокера необходимо будет выбрать идентифицирующие атрибуты.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'Регистрация модуля GenericInterface для уровня инвокера ConfigItemFetch.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -456,9 +455,9 @@ sub Data {
         'Параметры для категорий классов элементов конфигурации в представлении предпочтений интерфейса агента.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Параметры для фильтров столбцов обзора элементов малой конфигурации. Обратите внимание: при установке значения \'Active\' в 0 агенты не смогут редактировать настройки этой группы в своих личных предпочтениях, но администраторы смогут редактировать настройки от имени другого пользователя. Используйте \'PreferenceGroup\' для управления тем, в какой области пользовательского интерфейса должны отображаться эти настройки.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Параметры для цветов обозначающих состояния использования КЕ в настройках обзоров в интерфейсе агента.';
@@ -478,8 +477,8 @@ sub Data {
         'Параметры модуля инструментария шаблона строки версии для классов элементов конфигурации в представлении предпочтений интерфейса агента.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'Параметры для триггера версии для классов элементов конфигурации в представлении предпочтений интерфейса агента.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Выполняет заданное действие для каждого события (как Invoker) для каждого настроенного Webservice.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Группа разрешений';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
         'Необходимые разрешения для использования действия прикрепления элемента конфигурации ITSM в интерфейсе агента.';
@@ -668,7 +667,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = 'Протокол IP';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Управление идентификацией и доступом (IAM)';
     $Self->{Translation}->{'Inventory Number'} = 'Инвентарный номер';
-    $Self->{Translation}->{'Inverstment costs'} = 'Инверсионные расходы';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = 'Номер счета-фактуры';
     $Self->{Translation}->{'Keyboard'} = 'Клавиатура';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'ЖК-монитор (жидкокристаллический дисплей)';

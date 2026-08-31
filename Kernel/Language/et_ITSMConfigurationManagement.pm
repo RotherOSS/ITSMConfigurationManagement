@@ -261,7 +261,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Võimaldab laiendatud otsingutingimusi kliendi kasutajaliidese konfiguratsioonielemendi otsingus. Selle funktsiooniga saate otsida nt konfiguratsioonielemendi nime selliste tingimustega nagu "(*key1*&&*key2*)" või "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Määratud elutähtsad infrastruktuurid';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for license accounting.'} = '';
@@ -351,8 +350,8 @@ sub Data {
         'Määrab vaikimisi konfiguratsioonielemendi järjekorra agentide kasutajaliidese konfiguratsioonielemendi otsingutulemuses. Üles: vanim on üleval. Alla: uusim üleval.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
         'Määrab vaikimisi konfiguratsioonielemendi järjekorra kliendi kasutajaliidese konfiguratsioonielemendi otsingutulemuses. Üles: vanim on üleval. Alla: uusim üleval.';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Määrab vaikimisi konfiguratsioonielemendi järjekorra selle operatsiooni konfiguratsioonielemendi otsingutulemuses. Üles: vanim peal. Alla: uusim üleval.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Määratleb CIde vaikimisi kuvatavad veerud konfiguratsioonielemendi ülevaates sõltuvalt CI-klassist. Iga kirje peab koosnema klassi nimest ja vastava klassi jaoks kättesaadavate väljade massiivi. Dünaamiliste väljade kirjed peavad järgima skeemi DynamicField_FieldName.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Määrab vaikimisi kuvatavate suhete sügavuse.';
@@ -412,16 +411,16 @@ sub Data {
         'Võimaldab konfiguratsioonielemendi massitegevuse funktsiooni, et agentide frontend saaks töötada korraga rohkem kui ühe konfiguratsioonielemendiga.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Selle konfiguratsioonielemendi kasutuselevõtu olek';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Võimaldab/välja lülitab ITSMi konfiguratsioonielementide kontrollimise funktsiooni unikaalsete nimede osas. Enne selle suvandi lubamist peaksite kontrollima oma süsteemi juba olemasolevate dubleerivate nimedega konfiguratsioonielementide suhtes. Seda saate teha konsooli käsuga Admin::ITSM::ConfigItem::ListDuplicates.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Sündmuse moodul, et määrata configitem-status ticket-configitem-linkile.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'Konfiguratsioonielemendi indeksi väljad, mida kasutatakse täistekstiotsinguks. Väljad on samuti salvestatud, kuid ei ole üldise funktsionaalsuse jaoks kohustuslikud. Manuste lisamise saab keelata, kui määrata kirje väärtuseks 0 või kustutada see.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'Konfiguratsioonielemendi indeksisse salvestatud väljad, mida kasutatakse lisaks täistekstotsingutele ka muudeks asjadeks. Täieliku funktsionaalsuse tagamiseks on kõik väljad kohustuslikud.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'Iga veebiteenuse (võti) jaoks saab määratleda klasside massiivi (väärtus), mille puhul on import piiratud. Kõigi valitud klasside või kõigi olemasolevate klasside jaoks tuleb invoker\'i konfiguratsioonis valida identifitseerivad atribuudid.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'GenericInterface\'i mooduli registreerimine ConfigItemFetch kutsuva kihi jaoks.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -456,9 +455,9 @@ sub Data {
         'Parameetrid konfiguratsioonielemendi klasside kategooriate jaoks agentide kasutajaliidese eelistuste vaates.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'Parameetrid väikese konfiguratsioonielemendi ülevaate veergude filtrite jaoks. Pange tähele: kui määrata \'Active\' väärtuseks 0, takistab see ainult agentidel selle grupi seadete muutmist oma isiklikes eelistustes, kuid lubab administraatoritel siiski teise kasutaja nimel seadete muutmist. Kasutage \'PreferenceGroup\', et kontrollida, millises piirkonnas neid seadeid kasutajaliideses näidatakse.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Kasutuselevõtu olekute parameetrite värv agentide kasutajaliidese eelistuste vaates.';
@@ -478,8 +477,8 @@ sub Data {
         'Parameetrid versiooni stringi malli tööriistakomplekti mooduli jaoks konfigureeritud elemendiklasside jaoks agentide liidese eelistuste vaates.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'Parameetrid versiooni käivitamiseks konfiguratsioonielemendi klasside jaoks agentide liidese eelistuste vaates.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Teostab seadistatud toimingu iga sündmuse jaoks (kui kutsuja) iga konfigureeritud veebiteenuse jaoks.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Loa grupp';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
         'Nõutavad õigused ITSMi konfiguratsioonielemendi kinnitamise toimingu kasutamiseks agendi kasutajaliideses.';
@@ -668,7 +667,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = 'IP-protokoll';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identiteedi ja juurdepääsu haldamine (IAM)';
     $Self->{Translation}->{'Inventory Number'} = 'Inventarinumber';
-    $Self->{Translation}->{'Inverstment costs'} = 'Inverstmenti kulud';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = 'Arve number';
     $Self->{Translation}->{'Keyboard'} = 'Klaviatuur';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitor (vedelkristallkuvar)';

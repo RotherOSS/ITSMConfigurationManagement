@@ -261,7 +261,6 @@ sub Data {
     $Self->{Translation}->{'Allows extended search conditions in config item search of the customer interface. With this feature you can search e. g. config item name with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".'} =
         'Lehetővé teszi a kiterjesztett keresési feltételeket az ügyfélfelület konfigurációs elemkeresésében. Ezzel a funkcióval kereshet például a konfigurációs elem nevére olyan feltételekkel, mint "(*key1*&&*key2*)" vagy "(*key1*||*key2*)".';
     $Self->{Translation}->{'Assigned CIs'} = 'Hozzárendelt konfigurációelemek';
-    $Self->{Translation}->{'AssignedToEntity'} = '';
     $Self->{Translation}->{'At a specific time point create a ticket for config items, if the configured requirements are met. The time point is determined by the value of the dynamic field of type date configured under "TimeCIKey" of the ConfigItem, and modified by "TimeModifier". If the latter can be either just a number, or a sign (+/-), a number, and an unit (d/h/m): "7" is equivalent to "+7d". The DynamicField "Ticket->DynamicField" will be used to mark created tickets - it has to exist. The flags \<OTOBO_CONFIGITEM_X\> where X can be NAME, NUMBER and DATE, will be substituted with the respective values in "Ticket->Text".'} =
         '';
     $Self->{Translation}->{'Attributes for license accounting.'} = '';
@@ -351,8 +350,8 @@ sub Data {
         'Meghatározza a konfigurációs elemek alapértelmezett sorrendjét az ügynöki felület konfigurációs elemkeresési eredményében. Felfelé: a legrégebbi a tetején. Lefelé: a legfrissebb van felül.';
     $Self->{Translation}->{'Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.'} =
         'Meghatározza a konfigurációs elemek alapértelmezett sorrendjét az ügyfélfelület konfigurációs elem keresési eredményében. Felfelé: a legrégebbi felül. Lefelé: a legfrissebb van felül.';
-    $Self->{Translation}->{'Defines the default config item order in the config item search result of the this operation. Up: oldest on top. Down: latest on top.'} =
-        'Meghatározza a konfigurációs elemek alapértelmezett sorrendjét a konfigurációs elemek keresési eredményében. Felfelé: a legrégebbi felül. Lefelé: a legfrissebb a tetején.';
+    $Self->{Translation}->{'Defines the default config item order in the config item search result of this operation. Up: oldest on top. Down: latest on top.'} =
+        '';
     $Self->{Translation}->{'Defines the default displayed columns of CIs in the config item overview depending on the CI class. Each entry must consist of a class name and an array of available fields for the corresponding class. Dynamic field entries have to honor the scheme DynamicField_FieldName.'} =
         'Meghatározza a CI-k alapértelmezett megjelenített oszlopait a konfigurációs elem áttekintésében a CI-osztálytól függően. Minden bejegyzésnek egy osztálynévből és a megfelelő osztályhoz rendelkezésre álló mezők tömbjéből kell állnia. A dinamikus mezőbejegyzéseknek a DynamicField_FieldName sémát kell követniük.';
     $Self->{Translation}->{'Defines the default relations depth to be shown.'} = 'Meghatározza a megjelenítendő kapcsolatok alapértelmezett mélységét.';
@@ -412,16 +411,16 @@ sub Data {
         'Engedélyezi a konfigurációelem tömeges művelet funkciót az ügyintézői előtétprogramnál, hogy egyszerre egynél több konfigurációelemmel dolgozhasson.';
     $Self->{Translation}->{'Enables configuration item bulk action feature only for the listed groups.'} =
         'Csak a felsorolt csoportoknak engedélyezi a konfigurációelem tömeges művelet funkciót.';
-    $Self->{Translation}->{'Enables/disables the functionality to check ITSM onfiguration items for unique names. Before enabling this option you should check your system for already existing config items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
-        'Az ITSM onfiguration elemek egyedi nevének ellenőrzésére szolgáló funkció engedélyezése/letiltása. Mielőtt engedélyezné ezt a beállítást, ellenőrizze a rendszerét a már meglévő, duplikált nevű konfigurációs elemek tekintetében. Ezt az Admin::ITSM::ConfigItem::ListDuplicates konzolparanccsal teheti meg.';
+    $Self->{Translation}->{'Enables/disables the functionality to check ITSM configuration items for unique names. Before enabling this option you should check your system for already existing configuration items with duplicate names. You can do this with the console command Admin::ITSM::ConfigItem::ListDuplicates.'} =
+        '';
     $Self->{Translation}->{'Event module to set configitem-status on ticket-configitem-link.'} =
         'Eseménymodul a konfigurációelem állapotának beállításához egy jegy konfigurációelem hivatkozásán.';
     $Self->{Translation}->{'Fields of the configuration item index, used for the fulltext search. Fields are also stored, but are not mandatory for the overall functionality. Inclusion of attachments can be disabled by setting the entry to 0 or deleting it.'} =
         'A konfigurációs elemindex mezői, amelyeket a teljes szöveges kereséshez használnak. A mezők szintén tárolásra kerülnek, de az általános funkcionalitás szempontjából nem kötelezőek. A mellékletek bevonása letiltható a bejegyzés 0-ra állításával vagy törlésével.';
     $Self->{Translation}->{'Fields stored in the configuration item index which are used for other things besides fulltext searches. For the complete functionality all fields are mandatory.'} =
         'A konfigurációs elemindexben tárolt mezők, amelyeket a teljes szöveges keresésen kívül másra is használnak. A teljes funkcionalitás érdekében minden mező kötelező.';
-    $Self->{Translation}->{'For every webservice (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker config.'} =
-        'Minden egyes webszolgáltatáshoz (kulcs) megadható egy sor osztály (érték), amelyekre az importálás korlátozva van. Az összes kiválasztott osztályhoz vagy az összes létező osztályhoz az azonosító attribútumokat kell kiválasztani az invoker konfigurációban.';
+    $Self->{Translation}->{'For every web service (key) an array of classes (value) can be defined on which the import is restricted. For all chosen classes, or all existing classes the identifying attributes will have to be chosen in the invoker configuration.'} =
+        '';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemCreate invoker layer.'} =
         'GenericInterface modul regisztráció a ConfigItemFetch invoker réteghez.';
     $Self->{Translation}->{'GenericInterface module registration for the ConfigItemFetch invoker layer.'} =
@@ -456,9 +455,9 @@ sub Data {
         'A konfigurációs elemosztályok kategóriáinak paraméterei az ügynöki felület beállítások nézetében.';
     $Self->{Translation}->{'Parameters for the column filters of the small config item overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.'} =
         'A kis konfigurációs elemek áttekintésének oszlopszűrőinek paraméterei. Megjegyzés: az "Aktív" 0-ra állítása csak azt akadályozza meg, hogy az ügynökök szerkesszék a csoport beállításait a személyes beállításaikban, de a rendszergazdáknak továbbra is lehetővé teszi, hogy egy másik felhasználó nevében szerkesszék a beállításokat. A \'PreferenceGroup\' segítségével szabályozhatja, hogy ezek a beállítások melyik területen jelenjenek meg a felhasználói felületen.';
-    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview show in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
-        '';
     $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries per config item class shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer user reference dynamic field is used to filter for the selected customer user. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer user in the dynamic field configured in "ConfigItemKey".'} =
+        '';
+    $Self->{Translation}->{'Parameters for the dashboard backend of the customer company config item overview shown in the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "ConfigItemKey" is to specify which customer company reference dynamic field is used to filter for the selected customer company. "ShownClasses" is a list to optionally restrict classes of the shown config items. Leaving this list empty defaults to all classes which match the customer company in the dynamic field configured in "ConfigItemKey".'} =
         '';
     $Self->{Translation}->{'Parameters for the deployment states color in the preferences view of the agent interface.'} =
         'Paraméterek az üzembe állítási állapotok színeihez az ügyintézői felület beállítások nézetében.';
@@ -478,8 +477,8 @@ sub Data {
         'Az ügynöki felület beállítások nézetében a konfigurációs elemosztályok konfigurációs elemosztályaihoz tartozó verziósztring sablon eszközkészlet moduljának paraméterei.';
     $Self->{Translation}->{'Parameters for the version trigger for config item classes in the preferences view of the agent interface.'} =
         'A konfigurációs elemosztályok verzióindítójának paraméterei az ügynöki felület beállítások nézetében.';
-    $Self->{Translation}->{'Performs the configured action for each event (as an Invoker) for each configured Webservice.'} =
-        'Végrehajtja a beállított műveletet minden eseménynél (mint egy meghívó) minden egyes beállított webszolgáltatáshoz.';
+    $Self->{Translation}->{'Performs the configured action for each event (as an invoker) for each configured web service.'} =
+        '';
     $Self->{Translation}->{'Permission Group'} = 'Jogosultsági csoport';
     $Self->{Translation}->{'Required permissions to use the ITSM configuration item attachment action in the agent interface.'} =
         'Az ITSM konfigurációs elem csatolási művelet használatához szükséges engedélyek az ügynöki felületen.';
@@ -668,7 +667,7 @@ sub Data {
     $Self->{Translation}->{'IP Protocol'} = 'IP protokoll';
     $Self->{Translation}->{'Identity and Access Management (IAM)'} = 'Identitás- és hozzáférés-kezelés (IAM)';
     $Self->{Translation}->{'Inventory Number'} = 'Leltári szám';
-    $Self->{Translation}->{'Inverstment costs'} = 'Inverterköltségek';
+    $Self->{Translation}->{'Investment costs'} = '';
     $Self->{Translation}->{'Invoice Number'} = 'Számla száma';
     $Self->{Translation}->{'Keyboard'} = 'Billentyűzet';
     $Self->{Translation}->{'LCD Monitor (Liquid Crystal Display)'} = 'LCD monitor (folyadékkristályos kijelző)';
