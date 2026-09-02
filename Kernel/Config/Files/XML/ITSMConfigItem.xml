@@ -1521,7 +1521,7 @@
             <Item ValueType="String" ValueRegex="^\d+$">40</Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="1" Valid="1">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###SortBy::Default" Required="1" Valid="1">
         <Description Translatable="1">Defines the default config item attribute for config item sorting of the config item search result of the customer interface.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
@@ -1534,7 +1534,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="1" Valid="1">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Order::Default" Required="1" Valid="1">
         <Description Translatable="1">Defines the default config item order in the config item search result of the customer interface. Up: oldest on top. Down: latest on top.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
@@ -1544,35 +1544,35 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Number" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Name" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###Name" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DeploymentStateIDs" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DeploymentStateIDs" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
             <Array></Array>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###IncidentStateIDs" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###IncidentStateIDs" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
             <Array></Array>
         </Value>
     </Setting>
-    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DynamicField" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+    <Setting Name="ITSMConfigItem::Frontend::CustomerITSMConfigItemSearch###Defaults###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Defines the default shown config item search attribute for config item search screen. Example: "Key" must have the name of the Dynamic Field in this case 'X', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: 'a text', Dropdown: '1', Date/Time: 'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;' and or 'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7';.</Description>
         <Navigation>Frontend::Customer::View::ConfigItemSearch</Navigation>
         <Value>
