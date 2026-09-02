@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2026-07-14 13:45+0000\n"
+"POT-Creation-Date: 2026-08-31 13:03+0000\n"
 "PO-Revision-Date: 2026-04-06 18:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Slovak <http://translate.otobo.org/projects/opm-packages/itsm-"
@@ -176,10 +176,6 @@ msgstr "Vyberte túto položku konfigurácie"
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
 msgstr "Spustiť vyhľadávanie"
-
-#. Template: AgentITSMConfigItemSearch
-msgid "Also search in previous versions?"
-msgstr "Vyhľadávanie aj v predchádzajúcich verziách?"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
@@ -667,10 +663,6 @@ msgid "Assigned CIs"
 msgstr "Priradené CI"
 
 #. SysConfig
-msgid "AssignedToEntity"
-msgstr ""
-
-#. SysConfig
 msgid ""
 "At a specific time point create a ticket for config items, if the configured "
 "requirements are met. The time point is determined by the value of the "
@@ -1113,9 +1105,13 @@ msgstr ""
 "Nadol: najnovšie na vrchu."
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Defines the default config item order in the config item search result of "
+#| "the this operation. Up: oldest on top. Down: latest on top."
 msgid ""
 "Defines the default config item order in the config item search result of "
-"the this operation. Up: oldest on top. Down: latest on top."
+"this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
 "Definuje predvolené poradie konfiguračných položiek vo výsledku vyhľadávania "
 "konfiguračných položiek tejto operácie. Nahor: najstaršie na vrchu. Nadol: "
@@ -1225,6 +1221,12 @@ msgid ""
 msgstr ""
 "Definuje poradie incidentných stavov od vysokého (napr. cricital) po nízky "
 "(napr. functional)."
+
+#. SysConfig
+#, fuzzy
+#| msgid "Defines the search limit for the AgentITSMConfigItemSearch screen."
+msgid "Defines the parameters for the elasticsearch widget backend."
+msgstr "Definuje limit vyhľadávania pre obrazovku AgentITSMConfigItemSearch."
 
 #. SysConfig
 msgid ""
@@ -1405,11 +1407,17 @@ msgid ""
 msgstr "Stav nasadenia tejto položky konfigurácie"
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Enables/disables the functionality to check ITSM onfiguration items for "
+#| "unique names. Before enabling this option you should check your system "
+#| "for already existing config items with duplicate names. You can do this "
+#| "with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgid ""
-"Enables/disables the functionality to check ITSM onfiguration items for "
+"Enables/disables the functionality to check ITSM configuration items for "
 "unique names. Before enabling this option you should check your system for "
-"already existing config items with duplicate names. You can do this with the "
-"console command Admin::ITSM::ConfigItem::ListDuplicates."
+"already existing configuration items with duplicate names. You can do this "
+"with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr ""
 "Povolí/vypne funkciu kontroly jedinečných názvov položiek konfigurácie ITSM. "
 "Pred zapnutím tejto možnosti by ste mali skontrolovať systém, či už "
@@ -1444,11 +1452,17 @@ msgstr ""
 "povinné."
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "For every webservice (key) an array of classes (value) can be defined on "
+#| "which the import is restricted. For all chosen classes, or all existing "
+#| "classes the identifying attributes will have to be chosen in the invoker "
+#| "config."
 msgid ""
-"For every webservice (key) an array of classes (value) can be defined on "
+"For every web service (key) an array of classes (value) can be defined on "
 "which the import is restricted. For all chosen classes, or all existing "
 "classes the identifying attributes will have to be chosen in the invoker "
-"config."
+"configuration."
 msgstr ""
 "Pre každú webovú službu (kľúč) možno definovať pole tried (hodnota), na "
 "ktoré je import obmedzený. Pre všetky vybrané triedy alebo všetky existujúce "
@@ -1663,21 +1677,6 @@ msgstr ""
 #. SysConfig
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
-"overview show in the agent interface. \"Limit\" is the number of entries "
-"shown by default. \"Group\" is used to restrict the access to the plugin (e. "
-"g. Group: admin;group1;group2;). \"Default\" determines if the plugin is "
-"enabled by default or if the user needs to enable it manually. "
-"\"CacheTTLLocal\" is the cache time in minutes for the plugin. "
-"\"ConfigItemKey\" is to specify which customer company reference dynamic "
-"field is used to filter for the selected customer company. \"ShownClasses\" "
-"is a list to optionally restrict classes of the shown config items. Leaving "
-"this list empty defaults to all classes which match the customer company in "
-"the dynamic field configured in \"ConfigItemKey\"."
-msgstr ""
-
-#. SysConfig
-msgid ""
-"Parameters for the dashboard backend of the customer company config item "
 "overview shown in the agent interface. \"Limit\" is the number of entries "
 "per config item class shown by default. \"Group\" is used to restrict the "
 "access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" "
@@ -1688,6 +1687,21 @@ msgid ""
 "\"ShownClasses\" is a list to optionally restrict classes of the shown "
 "config items. Leaving this list empty defaults to all classes which match "
 "the customer user in the dynamic field configured in \"ConfigItemKey\"."
+msgstr ""
+
+#. SysConfig
+msgid ""
+"Parameters for the dashboard backend of the customer company config item "
+"overview shown in the agent interface. \"Limit\" is the number of entries "
+"shown by default. \"Group\" is used to restrict the access to the plugin (e. "
+"g. Group: admin;group1;group2;). \"Default\" determines if the plugin is "
+"enabled by default or if the user needs to enable it manually. "
+"\"CacheTTLLocal\" is the cache time in minutes for the plugin. "
+"\"ConfigItemKey\" is to specify which customer company reference dynamic "
+"field is used to filter for the selected customer company. \"ShownClasses\" "
+"is a list to optionally restrict classes of the shown config items. Leaving "
+"this list empty defaults to all classes which match the customer company in "
+"the dynamic field configured in \"ConfigItemKey\"."
 msgstr ""
 
 #. SysConfig
@@ -1757,9 +1771,13 @@ msgstr ""
 "preferencií rozhrania agenta."
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Performs the configured action for each event (as an Invoker) for each "
+#| "configured Webservice."
 msgid ""
-"Performs the configured action for each event (as an Invoker) for each "
-"configured Webservice."
+"Performs the configured action for each event (as an invoker) for each "
+"configured web service."
 msgstr ""
 "Vykoná nakonfigurovanú akciu pre každú udalosť (ako Invoker) pre každú "
 "nakonfigurovanú webovú službu."
@@ -2532,7 +2550,9 @@ msgid "Inventory Number"
 msgstr "Inventárne číslo"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
-msgid "Inverstment costs"
+#, fuzzy
+#| msgid "Inverstment costs"
+msgid "Investment costs"
 msgstr "Náklady na inverstráciu"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
@@ -2992,6 +3012,9 @@ msgstr ""
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Webcam"
 msgstr "Webová kamera"
+
+#~ msgid "Also search in previous versions?"
+#~ msgstr "Vyhľadávanie aj v predchádzajúcich verziách?"
 
 #~ msgid "Object Type"
 #~ msgstr "Typ objektu"
