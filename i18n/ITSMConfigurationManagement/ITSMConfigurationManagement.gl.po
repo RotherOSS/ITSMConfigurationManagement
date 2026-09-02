@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2026-08-31 12:58+0000\n"
-"PO-Revision-Date: 2026-07-06 22:00+0000\n"
+"PO-Revision-Date: 2026-09-02 11:53+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Galician <http://translate.otobo.org/projects/otobo-11-0/"
 "addons/itsm-configurationmanagement/gl/>\n"
@@ -979,10 +979,6 @@ msgstr ""
 "axente. Arriba: os mais antigos no alto. Abaixo: os últimos no alto."
 
 #. SysConfig
-#, fuzzy
-#| msgid ""
-#| "Defines the default config item order in the config item search result of "
-#| "the this operation. Up: oldest on top. Down: latest on top."
 msgid ""
 "Defines the default config item order in the config item search result of "
 "this operation. Up: oldest on top. Down: latest on top."
@@ -1492,10 +1488,6 @@ msgid ""
 msgstr ""
 
 #. SysConfig
-#, fuzzy
-#| msgid ""
-#| "Performs the configured action for each event (as an Invoker) for each "
-#| "configured Webservice."
 msgid ""
 "Performs the configured action for each event (as an invoker) for each "
 "configured web service."
