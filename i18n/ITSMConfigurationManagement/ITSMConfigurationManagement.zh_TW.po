@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
-"POT-Creation-Date: 2026-07-14 13:35+0000\n"
+"POT-Creation-Date: 2026-08-31 12:58+0000\n"
 "PO-Revision-Date: 2026-07-06 22:00+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <http://translate.otobo.org/"
@@ -171,10 +171,6 @@ msgstr "选择该配置项"
 #. Template: AgentITSMConfigItemSearch
 msgid "Run Search"
 msgstr "搜索"
-
-#. Template: AgentITSMConfigItemSearch
-msgid "Also search in previous versions?"
-msgstr "同時搜索以前的版本?"
 
 #. Template: AgentITSMConfigItemTreeView
 msgid "TreeView for ConfigItem"
@@ -652,10 +648,6 @@ msgid "Assigned CIs"
 msgstr "分配的 CI"
 
 #. SysConfig
-msgid "AssignedToEntity"
-msgstr ""
-
-#. SysConfig
 msgid ""
 "At a specific time point create a ticket for config items, if the configured "
 "requirements are met. The time point is determined by the value of the "
@@ -1001,9 +993,13 @@ msgstr ""
 "在上。"
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Defines the default config item order in the config item search result of "
+#| "the this operation. Up: oldest on top. Down: latest on top."
 msgid ""
 "Defines the default config item order in the config item search result of "
-"the this operation. Up: oldest on top. Down: latest on top."
+"this operation. Up: oldest on top. Down: latest on top."
 msgstr ""
 "定义此操作的配置项搜索结果中的默认配置项顺序。上：最旧的在最前面。下：最新的"
 "在上。"
@@ -1239,11 +1235,17 @@ msgid ""
 msgstr "仅对列出的组启用配置项批量操作功能。"
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Enables/disables the functionality to check ITSM onfiguration items for "
+#| "unique names. Before enabling this option you should check your system "
+#| "for already existing config items with duplicate names. You can do this "
+#| "with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgid ""
-"Enables/disables the functionality to check ITSM onfiguration items for "
+"Enables/disables the functionality to check ITSM configuration items for "
 "unique names. Before enabling this option you should check your system for "
-"already existing config items with duplicate names. You can do this with the "
-"console command Admin::ITSM::ConfigItem::ListDuplicates."
+"already existing configuration items with duplicate names. You can do this "
+"with the console command Admin::ITSM::ConfigItem::ListDuplicates."
 msgstr ""
 "启用/禁用检查 ITSM 配置项是否具有唯一名称的功能。启用此选项前，应检查系统中是"
 "否存在名称重复的配置项。您可以使用控制台命令 "
@@ -1273,11 +1275,17 @@ msgstr ""
 "功能，所有字段都是必填字段。"
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "For every webservice (key) an array of classes (value) can be defined on "
+#| "which the import is restricted. For all chosen classes, or all existing "
+#| "classes the identifying attributes will have to be chosen in the invoker "
+#| "config."
 msgid ""
-"For every webservice (key) an array of classes (value) can be defined on "
+"For every web service (key) an array of classes (value) can be defined on "
 "which the import is restricted. For all chosen classes, or all existing "
 "classes the identifying attributes will have to be chosen in the invoker "
-"config."
+"configuration."
 msgstr ""
 "可以为每个 webservice（键）定义一个类（值）数组，在此基础上限制导入。对于所有"
 "选定的类或所有现有的类，必须在调用者配置中选择识别属性。"
@@ -1400,21 +1408,6 @@ msgstr ""
 #. SysConfig
 msgid ""
 "Parameters for the dashboard backend of the customer company config item "
-"overview show in the agent interface. \"Limit\" is the number of entries "
-"shown by default. \"Group\" is used to restrict the access to the plugin (e. "
-"g. Group: admin;group1;group2;). \"Default\" determines if the plugin is "
-"enabled by default or if the user needs to enable it manually. "
-"\"CacheTTLLocal\" is the cache time in minutes for the plugin. "
-"\"ConfigItemKey\" is to specify which customer company reference dynamic "
-"field is used to filter for the selected customer company. \"ShownClasses\" "
-"is a list to optionally restrict classes of the shown config items. Leaving "
-"this list empty defaults to all classes which match the customer company in "
-"the dynamic field configured in \"ConfigItemKey\"."
-msgstr ""
-
-#. SysConfig
-msgid ""
-"Parameters for the dashboard backend of the customer company config item "
 "overview shown in the agent interface. \"Limit\" is the number of entries "
 "per config item class shown by default. \"Group\" is used to restrict the "
 "access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" "
@@ -1425,6 +1418,21 @@ msgid ""
 "\"ShownClasses\" is a list to optionally restrict classes of the shown "
 "config items. Leaving this list empty defaults to all classes which match "
 "the customer user in the dynamic field configured in \"ConfigItemKey\"."
+msgstr ""
+
+#. SysConfig
+msgid ""
+"Parameters for the dashboard backend of the customer company config item "
+"overview shown in the agent interface. \"Limit\" is the number of entries "
+"shown by default. \"Group\" is used to restrict the access to the plugin (e. "
+"g. Group: admin;group1;group2;). \"Default\" determines if the plugin is "
+"enabled by default or if the user needs to enable it manually. "
+"\"CacheTTLLocal\" is the cache time in minutes for the plugin. "
+"\"ConfigItemKey\" is to specify which customer company reference dynamic "
+"field is used to filter for the selected customer company. \"ShownClasses\" "
+"is a list to optionally restrict classes of the shown config items. Leaving "
+"this list empty defaults to all classes which match the customer company in "
+"the dynamic field configured in \"ConfigItemKey\"."
 msgstr ""
 
 #. SysConfig
@@ -1480,9 +1488,13 @@ msgid ""
 msgstr "代理界面首选项视图中配置项类的版本触发器参数。"
 
 #. SysConfig
+#, fuzzy
+#| msgid ""
+#| "Performs the configured action for each event (as an Invoker) for each "
+#| "configured Webservice."
 msgid ""
-"Performs the configured action for each event (as an Invoker) for each "
-"configured Webservice."
+"Performs the configured action for each event (as an invoker) for each "
+"configured web service."
 msgstr "为每个配置的 Webservice 的每个事件（作为调用者）执行配置的操作。"
 
 #. SysConfig
@@ -2177,7 +2189,9 @@ msgid "Inventory Number"
 msgstr "库存编号"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
-msgid "Inverstment costs"
+#, fuzzy
+#| msgid "Inverstment costs"
+msgid "Investment costs"
 msgstr "转换成本"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
@@ -2637,6 +2651,9 @@ msgstr ""
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Webcam"
 msgstr "网络摄像头"
+
+#~ msgid "Also search in previous versions?"
+#~ msgstr "同時搜索以前的版本?"
 
 #~ msgid ""
 #~ "Set up what you want to change if the criteria match. Keep in mind that "
