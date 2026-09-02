@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ITSMConfigurationManagement\n"
 "POT-Creation-Date: 2026-07-14 13:45+0000\n"
-"PO-Revision-Date: 2026-07-21 10:00+0000\n"
-"Last-Translator: Stefan Abel <sta@rother-oss.com>\n"
+"PO-Revision-Date: 2026-09-02 11:14+0000\n"
+"Last-Translator: Sven Oesterling <svo@rother-oss.com>\n"
 "Language-Team: German <http://translate.otobo.org/projects/otobo-11-1/addons/"
 "itsmconfigurationmanagement/de/>\n"
 "Language: de\n"
@@ -3044,7 +3044,7 @@ msgstr "Abonnement-basierte Lizenzen"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Subsidiary"
-msgstr "Tochtergesellschaft"
+msgstr "Niederlassung"
 
 #. Ready to adopt classes: IT-Servicemanagement-11_0_3
 msgid "Summary"
