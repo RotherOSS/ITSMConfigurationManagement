@@ -3,7 +3,7 @@
 # --
 # Copyright (C) 2019-2026 Rother OSS GmbH, https://otobo.io/
 # --
-# $origin: otobo - 724220993f638e7affe92ee6c5c9217d43e60911 - Kernel/System/DynamicField/Driver/Lens.pm
+# $origin: otobo - 6e72833f979230189fd04a7f5bf045b381032ee8 - Kernel/System/DynamicField/Driver/Lens.pm
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -34,7 +34,6 @@ use List::Util qw(any);
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -107,7 +106,7 @@ sub ValueGet {
     my $LensDFConfig = $Param{DynamicFieldConfig};
 
     # in set case, an arrayref of object ids is returned
-    my $ReferencedObjectID = $Self->_GetReferencedObjectID(
+    my $ReferencedObjectID = $Param{ReferencedObjectID} || $Self->_GetReferencedObjectID(
         ObjectID               => $Param{ObjectID},
         LensDynamicFieldConfig => $LensDFConfig,
         EditFieldValue         => $Param{UseReferenceEditField},
@@ -703,13 +702,14 @@ sub GetFieldState {
             # if the value would change, we need to verify that the user is really allowed
             # to access the provided referenced object via this form
             # this is the case if either the referenced object was shown via a search (1)
-            # or is currently stored for the edited ticket/ci/... (2)
+            # or has been rendered (2)
+            # or is currently stored for the edited ticket/ci/... (3)
             my $LastSearchResults = $Kernel::OM->Get('Kernel::System::Web::FormCache')->GetFormData(
                 LayoutObject => $Kernel::OM->Get('Kernel::Output::HTML::Layout'),
                 Key          => 'PossibleValues_' . $ReferenceDFName,
             );
 
-            # in set case, we fetch the template values and either concat them to the search results
+            # in set case, we fetch the template values and either concatenate them to the search results
             #   or, if no search results are present, use the template values entirely
             if ( defined $Param{SetIndex} ) {
                 my $TemplateName          = $DynamicFieldConfig->{Config}{ReferenceDFName} . '_Template';
@@ -744,8 +744,9 @@ sub GetFieldState {
                 # TODO: Instead we could just send $DFParam->{ $DynamicFieldConfig->{Config}{ReferenceDFName} } as ObjectID
                 # but we would need to interpret it later (from ConfigItemID to LastVersionID, e.g.)
                 # TODO: Validate the Reference ObjectID here, or earlier, to prevent data leaks!
-                ObjectID              => 1,    # will not be used;
+                ObjectID              => 1,                                                                                     # will not be used;
                 UseReferenceEditField => 1,
+                ReferencedObjectID    => $Param{GetParam}{DynamicField}{ $DynamicFieldConfig->{Config}{ReferenceDFName} }[0],
             ) // '';
         }
         else {
