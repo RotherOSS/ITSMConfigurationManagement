@@ -1049,6 +1049,26 @@ sub Run {
     }
     else {
 
+        # pre-filling cache for reference field - necessary for ACL calculation of lens fields
+        DYNAMICFIELDCONFIG:
+        for my $DynamicFieldConfig ( $DynamicFieldList->@* ) {
+            next DYNAMICFIELDCONFIG unless IsHashRefWithData($DynamicFieldConfig);
+
+            my $IsReferenceField = $DynamicFieldBackendObject->HasBehavior(
+                Behavior           => 'IsReferenceField',
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+
+            next DYNAMICFIELDCONFIG unless $IsReferenceField;
+
+            $Kernel::OM->Get('Kernel::System::Web::FormCache')->SetFormData(
+                LayoutObject => $LayoutObject,
+                FormID       => $Self->{FormID},
+                Key          => 'PossibleValues_DynamicField_' . $DynamicFieldConfig->{Name},
+                Value        => $GetParam{DynamicField}{"DynamicField_$DynamicFieldConfig->{Name}"},
+            );
+        }
+
         my $LoopProtection = 100;
 
         # get values and visibility of dynamic fields
