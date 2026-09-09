@@ -20,13 +20,12 @@ use strict;
 use warnings;
 
 # core modules
-use List::Util qw(any none);
+use List::Util qw(any);
 
 # CPAN modules
 
 # OTOBO modules
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
