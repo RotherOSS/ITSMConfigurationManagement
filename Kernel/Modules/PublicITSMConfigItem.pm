@@ -188,13 +188,12 @@ sub Run {
 
     if ( IsHashRefWithData($PermissionConditionsConfig) ) {
         PERMCONF:
-        for my $ConfigCounter ( 1 .. 5 ) {
-            my $ConfigIdentifier          = sprintf( "%02d", $ConfigCounter );
+        for my $ConfigIdentifier ( sort keys $PermissionConditionsConfig->%* ) {
             my $PermissionConditionConfig = $PermissionConditionsConfig->{$ConfigIdentifier};
             next PERMCONF unless IsHashRefWithData($PermissionConditionConfig);
 
             # set as selected filter if not present
-            $Filter ||= $PermissionConditionConfig->{Name};
+            $Filter ||= $ConfigIdentifier;
 
             # collect dynamic field search params
             my %DFSearchParams;
@@ -265,7 +264,7 @@ sub Run {
                 );
             }
 
-            $Filters{$ConfigCounter} = {
+            $Filters{$ConfigIdentifier} = {
                 Name   => $PermissionConditionConfig->{Name},
                 Prio   => $PrioCounter,
                 Count  => $Count,
